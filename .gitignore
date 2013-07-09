@@ -20,6 +20,7 @@ build/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+*.eml
 *_i.c
 *_p.c
 *.ilk
