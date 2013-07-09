@@ -4228,7 +4228,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TermsOfDelivery", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TermsOfDelivery", DbType="NVarChar(MAX)")]
 		public string TermsOfDelivery
 		{
 			get
@@ -4508,7 +4508,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactoryPhone", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactoryPhone", DbType="NVarChar(MAX)")]
 		public string FactoryPhone
 		{
 			get
@@ -4548,7 +4548,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactoryEmail", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactoryEmail", DbType="NVarChar(320)")]
 		public string FactoryEmail
 		{
 			get

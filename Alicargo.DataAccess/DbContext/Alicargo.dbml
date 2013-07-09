@@ -184,7 +184,7 @@
       <Column Name="Gross" Type="System.Single" DbType="Real" CanBeNull="true" />
       <Column Name="Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Volume" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
-      <Column Name="TermsOfDelivery" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TermsOfDelivery" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="MethodOfDeliveryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DateOfCargoReceipt" Type="System.DateTimeOffset" DbType="DateTimeOffset" CanBeNull="true" />
       <Column Name="DateInStock" Type="System.DateTimeOffset" DbType="DateTimeOffset" CanBeNull="true" />
@@ -197,9 +197,9 @@
       <Column Name="CountryId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="ReferenceId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FactoryName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="FactoryPhone" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="FactoryPhone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="FactoryContact" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="FactoryEmail" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="FactoryEmail" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="MarkName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
       <Association Name="Reference_Application" Member="Reference" ThisKey="ReferenceId" OtherKey="Id" Type="Reference" IsForeignKey="true" />
