@@ -108,9 +108,6 @@ namespace Alicargo.Controllers
 				var tid = _transitRepository.Add(transitData);
 				_unitOfWork.SaveChanges();
 				applicationData.TransitId = tid();
-				applicationData.TermsOfDelivery = "";
-				applicationData.FactoryPhone = "";
-				applicationData.FactoryEmail = "";
 				applicationData.StateId = _stateConfig.DefaultStateId;
 				applicationData.StateChangeTimestamp = DateTimeOffset.UtcNow;
 				applicationData.CreationTimestamp = DateTimeOffset.UtcNow;

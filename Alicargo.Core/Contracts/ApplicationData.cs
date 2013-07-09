@@ -93,7 +93,6 @@ namespace Alicargo.Core.Contracts
 		[Required]
 		public float Volume { get; set; }
 
-		[Required]
 		[DisplayNameLocalized(typeof(Entities), "TermsOfDelivery")]
 		public string TermsOfDelivery { get; set; }
 
@@ -120,11 +119,9 @@ namespace Alicargo.Core.Contracts
 		[DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
-		[Required]
 		[DisplayNameLocalized(typeof(Entities), "FactoryPhone")]
 		public string FactoryPhone { get; set; }
 
-		[Required]
 		[DataType(DataType.EmailAddress)]
 		[MaxLength(320)]
 		[DisplayNameLocalized(typeof(Entities), "FactoryEmail")]

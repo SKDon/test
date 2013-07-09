@@ -28,7 +28,7 @@
 	[Gross]					REAL				NULL,
 	[Count]					INT					NULL,
 	[Volume]				REAL				NOT NULL,
-	[TermsOfDelivery]		NVARCHAR (MAX)		NOT NULL,
+	[TermsOfDelivery]		NVARCHAR (MAX)		NULL,
 	[MethodOfDeliveryId]	INT					NOT NULL,
 	[DateOfCargoReceipt]	DATETIMEOFFSET (7)	NULL,
 	[DateInStock]			DATETIMEOFFSET (7)	NULL,
@@ -45,9 +45,9 @@
 	[ReferenceId]			BIGINT				NULL,
 
 	[FactoryName]			NVARCHAR(320)		NOT NULL, 
-	[FactoryPhone]			NVARCHAR(MAX)		NOT NULL, 
+	[FactoryPhone]			NVARCHAR(MAX)		NULL, 
 	[FactoryContact]		NVARCHAR(MAX)		NULL,
-	[FactoryEmail]			NVARCHAR(320)		NOT NULL, 
+	[FactoryEmail]			NVARCHAR(320)		NULL, 
 
 	[MarkName]				NVARCHAR(320)		NOT NULL, 
 	
