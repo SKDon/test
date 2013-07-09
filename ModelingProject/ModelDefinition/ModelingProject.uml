@@ -1,0 +1,2048 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="b924eee1-bb61-4955-9fea-16c79778031d"
+  name="ModelingProject" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="2f106936-721c-4bf1-ac3f-5cc5596824de">
+      <body>Не кретично для базовой логики</body>
+      <annotatedElements>
+        <useCaseMoniker
+          Id="19a8aa87-a5fd-4a7c-b8ae-67e1e623d4ee"
+          LastKnownName="Доступность для типов пользователей:&#xD;&#xA;какие заявки доступны, какие статусы можно ставить"
+          LastKnownLocation="ModelingProject.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="7f43299f-b98b-4009-a04d-2e1326653237"
+        name="Admin"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="909d775e-a985-43ac-aa57-25b4a715e2b3"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Добавить пользователя любого типа"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="91cbae8c-010e-41c3-b653-9caa52048b47"
+              LastKnownName="Добавить пользователя любого типа"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bd5ac9c6-11f1-4b4d-84f1-b3ccfed971bf"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c78bdb60-8044-432e-b154-8082c2b4c32d"
+                  name="Добавить пользователя любого типа"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="279cdd44-6519-4716-8799-48487b80d90f"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Просмотр всех заявок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ae872986-38a9-4cd0-9162-0af02e9306b2"
+              LastKnownName="Просмотр всех заявок"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b27c71c2-b3d8-4733-bd07-461bf6123f5d"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bbfad92d-1fd0-47c9-8bfd-77ee035637e1"
+                  name="Просмотр всех заявок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="14882701-c868-4774-9829-378e7868fb9c"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Редактирование персональной информации любого типа пользователя"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="b014b347-7248-4c49-92a8-99ba4bd2acc8"
+              LastKnownName="Редактирование персональной информации и сброс пароля любого типа пользователя"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="00725a8e-62d7-41e2-9b60-3f399ba29cc6"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="362c0f14-240b-46cd-b23c-2b2c5e0db4a9"
+                  name="Редактирование персональной информации любого типа пользователя"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="cd767034-0bc4-4ebb-af04-c20a62c7016f"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Просмотр списков пользователей всех типов"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c6cf9fa5-9e26-44fd-afca-c02f42f96c40"
+              LastKnownName="Просмотр списков пользователей всех типов"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="666980d7-d9a4-483a-8cfd-327c55b60d39"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ceb604aa-c0f8-4de2-a508-55c939c67765"
+                  name="Просмотр списков пользователей всех типов"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="43ed320e-c5f5-4a0e-ac59-cdb4f3f2b104"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Редактирование справочника статусов"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="1ad7ff60-085d-4ab4-af84-08ef446bf484"
+              LastKnownName="Редактирование справочника статусов"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cc70abf6-f141-4153-9df6-1e6fee6a49f8"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="31d368ef-d849-44e2-801f-9de120524ff0"
+                  name="Редактирование справочника статусов"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="eff98460-4b21-4bf2-b94b-ff68257889b5"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Просмотр и редактирование справочников:&#xD;&#xA;- фабрик&#xD;&#xA;- марок&#xD;&#xA;- статусов&#xD;&#xA;- перевозчиков"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="54ba91ea-2bbb-4eac-9960-632c8a3830cf"
+              LastKnownName="Просмотр и редактирование справочников:&#xD;&#xA;- фабрик&#xD;&#xA;- марок&#xD;&#xA;- перевозчиков"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bd580f44-38aa-4c20-b3bd-bafcc059c47b"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="02d91be6-b88c-4c75-8c88-c701e16e3d7e"
+                  name="Просмотр и редактирование справочников:&#xD;&#xA;- фабрик&#xD;&#xA;- марок&#xD;&#xA;- статусов&#xD;&#xA;- перевозчиков"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="ed0e2018-e6bd-442f-9371-162270b2db10"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Создание/Редактирование любой заявки"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="dc71912d-12a6-4e15-9406-575097a51e98"
+              LastKnownName="Создание и редактирование любой заявки"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="93a8df0b-3e03-4e08-8c69-953e29ed7eb7"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3dc891ed-ba59-4e4f-9202-ca1cf689e50a"
+                  name="Создание/Редактирование любой заявки"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="17d91133-4bae-4aef-8706-f1931346e335"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Посмотреть детали конкретной заявки"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="6a775350-255d-44a6-b855-09796d5e0bf9"
+              LastKnownName="Посмотреть детали конкретной заявки"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="93a75388-9471-4321-ac09-3ffab1cde874"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c67e603c-c283-4760-a462-2a19d0cf4a64"
+                  name="Посмотреть детали конкретной заявки"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="67e1a0fa-9da6-4b6f-9713-49c360126746"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Аутентификация"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="54fdfa9d-a74b-4d76-a7bc-b28aae38f76d"
+              LastKnownName="Аутентификация"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d407c5f8-d66f-447a-ac1b-ff78330f1205"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ee0232aa-41dc-47fe-9305-dc7de141853d"
+                  name="Аутентификация"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="41b87ceb-2e4e-458d-a1a6-36f3e4a49ee2"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Удаление пользователей"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="f1e564e4-f858-4492-a410-f1ce1581bcbe"
+              LastKnownName="Удаление пользователей"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d290f529-ba74-4a7c-9d22-c28930806d33"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9bb47020-cc3e-46d2-b775-bcd593302cdd"
+                  name="Удаление пользователей"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="5ea53697-1b17-4b87-bd48-d908bcdde1e5"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Группировка по референсу"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0832a532-f7ff-4174-ae20-686270ed1a26"
+              LastKnownName="Группировка по референсу"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="95d580c5-29f5-4ae9-b2af-c3701cda5c07"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2edfed9d-29df-425f-99b2-39669e092ef4"
+                  name="Группировка по референсу"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="86db881e-ecbe-4a88-aeda-0439036d96d0"
+            isDerived="false"
+            sourceEndRoleName="Admin"
+            targetEndRoleName="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="44b8a1eb-ec9e-4df4-a549-032ad672672c"
+              LastKnownName="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fb5190c6-eea9-4bbc-8c3b-d7b9942b14e8"
+                  name="Admin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3a734284-1380-45b8-8d73-a1c0bfc15a7f"
+                  name="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="aab2da35-daa8-4cc7-917f-833fea4d3892"
+        name="Sender"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="4965d406-b96f-4f49-987b-56196ddd29f3"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Аутентификация"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="54fdfa9d-a74b-4d76-a7bc-b28aae38f76d"
+              LastKnownName="Аутентификация"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="52371b82-151e-4741-a6ad-c25739b9c69f"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cb88ae35-2b03-44e9-a083-43bcde251c94"
+                  name="Аутентификация"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0d48b12e-aa27-4684-bd7a-5989ba4c6ec9"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Просмотр всех заявок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ae872986-38a9-4cd0-9162-0af02e9306b2"
+              LastKnownName="Просмотр всех заявок"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="86c38cbc-3962-47f5-8714-7459f61dc087"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="68dffb20-962e-4c30-8217-c3bebd01950b"
+                  name="Просмотр всех заявок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d36eccc2-3989-4804-a58f-00dd5e447087"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Посмотреть детали конкретной заявки"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="6a775350-255d-44a6-b855-09796d5e0bf9"
+              LastKnownName="Посмотреть детали конкретной заявки"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="51abf749-22a6-4141-8c4e-0e8e93552eae"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d32a61a7-7933-4e8b-8dc3-b3c6a5299c29"
+                  name="Посмотреть детали конкретной заявки"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="22dee907-0421-4034-aec6-7897d51afb6a"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0ca49e04-bc5e-467e-8361-a715f9fe20ac"
+              LastKnownName="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="efec3f50-31ca-4689-bb17-52f026c6b23d"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9e14c03f-8831-4fcf-b432-2a7695a705d4"
+                  name="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="49c81c13-d778-4ede-87bc-dd8ba7f13b51"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Установить референс"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="3997d2b7-bdbe-47ad-9295-373225d95c87"
+              LastKnownName="Установить референс"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d6542eba-ca86-4af9-ae0e-e16aa5b1d9e9"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0f858139-69e7-4323-ba91-3b837b179b72"
+                  name="Установить референс"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="88289e11-c7ed-4ab1-bbd5-72e9d329c69f"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Установка данных авиа перелета"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0341fc9c-a1c6-4b84-bce0-89ba34850681"
+              LastKnownName="Установка данных авиа перелета"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c2c64e2f-7b17-4958-a5ea-8f97e23f4bd1"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0bdda538-c0e0-42be-89c9-f144da2d32db"
+                  name="Установка данных авиа перелета"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c1987e4a-afa3-496d-b393-8cc5d6a57215"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="44b8a1eb-ec9e-4df4-a549-032ad672672c"
+              LastKnownName="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="33e00c70-d161-410d-a9a4-fb69115777d8"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="44021b6f-fbca-4cbc-978f-486f3ca568b5"
+                  name="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0fc62fde-ab50-4116-8521-3414d15d55e7"
+            isDerived="false"
+            sourceEndRoleName="Sender"
+            targetEndRoleName="Группировка по референсу"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0832a532-f7ff-4174-ae20-686270ed1a26"
+              LastKnownName="Группировка по референсу"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="32f28c25-a163-4b08-b0bf-7741190350fe"
+                  name="Sender"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="eb6e57f0-e565-4dbf-84fd-32d19c3b2838"
+                  name="Группировка по референсу"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="80c1b1ab-4302-4741-80a7-0fd1f3a5a699"
+        name="Forwarder"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="5cecfe5b-e86b-494c-b555-4dc9e2fea207"
+            isDerived="false"
+            sourceEndRoleName="Forwarder"
+            targetEndRoleName="Аутентификация"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="54fdfa9d-a74b-4d76-a7bc-b28aae38f76d"
+              LastKnownName="Аутентификация"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d9c48b4b-07f8-4b94-a4ca-96d87ad72f53"
+                  name="Forwarder"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="31d62f36-7c95-4cb4-9e17-2e3f0a865940"
+                  name="Аутентификация"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2e8d4fbb-7b05-4b37-a252-edebcdddc491"
+            isDerived="false"
+            sourceEndRoleName="Forwarder"
+            targetEndRoleName="Просмотр заявок в статусах:&#xD;&#xA;- растаможен&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите&#xD;&#xA;"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="79c25e05-98c7-4b58-b105-d4b33ec53cdf"
+              LastKnownName="Просмотр заявок в статусах:&#xD;&#xA;- растаможен&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9e398603-d9e4-4b2c-9393-95d656dace38"
+                  name="Forwarder"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5751d38b-f5c0-4e36-aa86-d9c3cf710a87"
+                  name="Просмотр заявок в статусах:&#xD;&#xA;- растаможен&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите&#xD;&#xA;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="e6437f00-0249-4527-97be-09c5647208d3"
+            isDerived="false"
+            sourceEndRoleName="Forwarder"
+            targetEndRoleName="Установка статусов:&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="8fe72a24-151b-4024-a38a-0845b997426b"
+              LastKnownName="Установка статусов:&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6972eb85-db62-4f25-8e27-c1c866d325dd"
+                  name="Forwarder"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b3c1e09c-fd28-44a9-ad22-4eb526aa76cf"
+                  name="Установка статусов:&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="ffe19d48-2fa6-4394-9a89-bf13b34a98c1"
+        name="Brocker"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="e9bb9f3a-ffa3-459f-92c6-1296f8d26673"
+            isDerived="false"
+            sourceEndRoleName="Brocker"
+            targetEndRoleName="Установить статусы:&#xD;&#xA;- в полете&#xD;&#xA;- на таможне&#xD;&#xA;- растаможен"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c8909e55-b7b5-4c34-a090-b7cb5fe643a2"
+              LastKnownName="Установить статусы для авиагруза:&#xD;&#xA;- в полете&#xD;&#xA;- на таможне&#xD;&#xA;- растаможен"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8735c5f6-e848-4dd8-825b-67db7a507244"
+                  name="Brocker"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b409b7e3-77e7-4765-8bb2-d3ffcfaafd66"
+                  name="Установить статусы:&#xD;&#xA;- в полете&#xD;&#xA;- на таможне&#xD;&#xA;- растаможен"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="8c8420e4-7533-4a9d-8605-2c0d97d759f2"
+            isDerived="false"
+            sourceEndRoleName="Brocker"
+            targetEndRoleName="Прикрепть ГТД"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="13a58859-1606-4159-86a2-1ae9ab516cc0"
+              LastKnownName="Прикрепть ГТД для авиагруза"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e20e007f-c501-4578-8a07-083f2f4ca335"
+                  name="Brocker"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9f9cc2cd-703f-44c9-8e33-c42e639a529b"
+                  name="Прикрепть ГТД"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2044dfa6-f75a-4237-a7a0-8203e8df898d"
+            isDerived="false"
+            sourceEndRoleName="Brocker"
+            targetEndRoleName="Задать ГТД"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="1a7a6ac7-f7c6-4dd5-817d-a00af51a538d"
+              LastKnownName="Задать ГТД для авиагруза"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="804f21c0-7959-437d-aa17-259e3b4fac6e"
+                  name="Brocker"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0b7b4185-e109-49c3-acff-75ac21452979"
+                  name="Задать ГТД"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="951bd2f3-376a-4b96-abfe-ae9405b77d6c"
+            isDerived="false"
+            sourceEndRoleName="Brocker"
+            targetEndRoleName="Просмотр списка перелетов"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c0781bc3-b017-40e4-be6b-cbe0dd3537ce"
+              LastKnownName="Просмотр списка авиагрузов"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="73afd027-8338-47c9-adb5-8b27dc60fd0d"
+                  name="Brocker"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="52ebe2c0-f6b1-4e3f-b022-1d8de1d29b4f"
+                  name="Просмотр списка перелетов"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="5c428894-cf2f-4fe5-bcb9-d3d9c9e9fce9"
+        name="Client"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="daec7fff-ff5f-4b26-a91c-872dc4bb8c97"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Регистрация"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="87fb7954-1ec3-48e0-b8ee-95605d51ee5f"
+              LastKnownName="Регистрация"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="10c0085d-c970-43f4-af1a-d76035145c63"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e4a830d8-84c4-4d4b-a301-fd6cf6161fde"
+                  name="Регистрация"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="24399dd9-c102-4a67-a1a4-f6273974dd2d"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Аутентификация"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="54fdfa9d-a74b-4d76-a7bc-b28aae38f76d"
+              LastKnownName="Аутентификация"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cf3e588d-4da0-42f9-bd7c-401fa08aa479"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4db21e7c-b523-4265-b2d0-dc87192aab87"
+                  name="Аутентификация"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="a9f06417-943a-4432-bf79-d7b4192bdc32"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Просматривать и редактировать персональную информацию"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="492cd7b3-a43e-43e1-a665-467cbf62dcd3"
+              LastKnownName="Просматривать и редактировать персональную информацию"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="eb01889c-39b7-4cbb-aefc-f687f912330f"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3697b3ce-c6ba-4a8e-b6fe-9610499225d5"
+                  name="Просматривать и редактировать персональную информацию"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="cd758112-b0ff-4d1f-846a-51b9835fc9f6"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Статусы своих заявок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="35c77f63-179a-4640-8d53-520dcf4fc99a"
+              LastKnownName="Статусы своих заявок"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bc0e5072-5ffe-46d3-99d0-5498cdba7b79"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c7d25dd3-8a0b-4eb1-8019-599e71f8f9e4"
+                  name="Статусы своих заявок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="f9c259e7-d6c0-4ac3-b6f9-ddf5b848f8f5"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Посмотреть детали конкретной заявки"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="6a775350-255d-44a6-b855-09796d5e0bf9"
+              LastKnownName="Посмотреть детали конкретной заявки"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="be8e9e74-6370-46cc-a4f3-21a299612c82"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="735b9cde-651d-443b-bb1f-d130ee234f82"
+                  name="Посмотреть детали конкретной заявки"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="3e950e40-d623-486f-a09b-a7a0ab26fa36"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Обновить некоторую информацию по своей заявке"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="6e9533d9-0a2d-4716-bcff-91167d9cbdd6"
+              LastKnownName="Обновить информацию  пункте назначения по своей заявке"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="18095fd3-b991-46a5-b9ff-fc13685946bd"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="995f8ad4-2ec9-4a20-9595-86cea45fde15"
+                  name="Обновить некоторую информацию по своей заявке"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="71597144-1d5b-4905-ad29-21816f6de456"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Создать заявку"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ebc22858-2791-4a08-8f1d-23d2dbdb5078"
+              LastKnownName="Создать заявку на свое имя"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="db063186-ceb6-4752-8b6c-1d16a199e1ae"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="05195a52-3bc4-4520-9360-093a6a8b9ea1"
+                  name="Создать заявку"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="e35600ba-355e-4317-af0b-eb5bf8fbf569"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Отметить, что заявка исполнена"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="66dfbe5f-f4bd-4b11-8350-2ec3211a9ddd"
+              LastKnownName="Отметить, что заявка исполнена"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="37903c27-9f32-4cc3-861a-89ad19af6fec"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="224ad424-cf79-4712-b3bc-e15012315473"
+                  name="Отметить, что заявка исполнена"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="12a1e7e6-12d9-4d2f-8d23-b5940b6a1889"
+            isDerived="false"
+            sourceEndRoleName="Client"
+            targetEndRoleName="Получить уведомление о изменении статуса заявки"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="4f9ae21d-d14f-49e3-b019-1e56add8cbb1"
+              LastKnownName="Получить уведомление о изменении статуса заявки"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7b3abce9-709e-4473-a6c7-fa0ec4ca34d6"
+                  name="Client"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0f8524f3-1119-494c-8803-221ce779fbbb"
+                  name="Получить уведомление о изменении статуса заявки"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="35c77f63-179a-4640-8d53-520dcf4fc99a"
+        name="Статусы своих заявок"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ebc22858-2791-4a08-8f1d-23d2dbdb5078"
+        name="Создать заявку на свое имя"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6a775350-255d-44a6-b855-09796d5e0bf9"
+        name="Посмотреть детали конкретной заявки"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6e9533d9-0a2d-4716-bcff-91167d9cbdd6"
+        name="Обновить информацию  пункте назначения по своей заявке"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="c609fcc7-7e0b-45b6-8fe0-e88296b70bc3">
+            <useCaseMoniker
+              Id="c98ce7d1-c39d-4ac7-8146-5ed2b32a1f06"
+              LastKnownName="Пользователь не может редактировать некторые поля после определенного статуса"
+              LastKnownLocation="ModelingProject.uml" />
+          </include>
+        </additions>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="492cd7b3-a43e-43e1-a665-467cbf62dcd3"
+        name="Просматривать и редактировать персональную информацию"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="87fb7954-1ec3-48e0-b8ee-95605d51ee5f"
+        name="Регистрация"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="54fdfa9d-a74b-4d76-a7bc-b28aae38f76d"
+        name="Аутентификация"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="91cbae8c-010e-41c3-b653-9caa52048b47"
+        name="Добавить пользователя любого типа"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="66dfbe5f-f4bd-4b11-8350-2ec3211a9ddd"
+        name="Отметить, что заявка исполнена"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ae872986-38a9-4cd0-9162-0af02e9306b2"
+        name="Просмотр всех заявок"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="44b8a1eb-ec9e-4df4-a549-032ad672672c"
+        name="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0832a532-f7ff-4174-ae20-686270ed1a26"
+        name="Группировка по референсу"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b014b347-7248-4c49-92a8-99ba4bd2acc8"
+        name="Редактирование персональной информации и сброс пароля любого типа пользователя"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c6cf9fa5-9e26-44fd-afca-c02f42f96c40"
+        name="Просмотр списков пользователей всех типов"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="54ba91ea-2bbb-4eac-9960-632c8a3830cf"
+        name="Просмотр и редактирование справочников:&#xD;&#xA;- фабрик&#xD;&#xA;- марок&#xD;&#xA;- перевозчиков"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1ad7ff60-085d-4ab4-af84-08ef446bf484"
+        name="Редактирование справочника статусов"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="ae3fe80e-54a8-4ed0-a0f4-c3e544d2470d">
+            <useCaseMoniker
+              Id="14481f4d-1e09-41f6-b597-9be3d8a2acf8"
+              LastKnownName="Локализация"
+              LastKnownLocation="ModelingProject.uml" />
+          </include>
+          <include
+            Id="2ed7f80a-1b0a-4da4-bb47-0b2d89174899">
+            <useCaseMoniker
+              Id="19a8aa87-a5fd-4a7c-b8ae-67e1e623d4ee"
+              LastKnownName="Доступность для типов пользователей:&#xD;&#xA;какие заявки доступны, какие статусы можно ставить"
+              LastKnownLocation="ModelingProject.uml" />
+          </include>
+        </additions>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="14481f4d-1e09-41f6-b597-9be3d8a2acf8"
+        name="Локализация"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="19a8aa87-a5fd-4a7c-b8ae-67e1e623d4ee"
+        name="Доступность для типов пользователей:&#xD;&#xA;какие заявки доступны, какие статусы можно ставить"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="dc71912d-12a6-4e15-9406-575097a51e98"
+        name="Создание и редактирование любой заявки"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4f9ae21d-d14f-49e3-b019-1e56add8cbb1"
+        name="Получить уведомление о изменении статуса заявки"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0ca49e04-bc5e-467e-8361-a715f9fe20ac"
+        name="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3997d2b7-bdbe-47ad-9295-373225d95c87"
+        name="Установить референс"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c8909e55-b7b5-4c34-a090-b7cb5fe643a2"
+        name="Установить статусы для авиагруза:&#xD;&#xA;- в полете&#xD;&#xA;- на таможне&#xD;&#xA;- растаможен"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1a7a6ac7-f7c6-4dd5-817d-a00af51a538d"
+        name="Задать ГТД для авиагруза"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="13a58859-1606-4159-86a2-1ae9ab516cc0"
+        name="Прикрепть ГТД для авиагруза"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c0781bc3-b017-40e4-be6b-cbe0dd3537ce"
+        name="Просмотр списка авиагрузов"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0341fc9c-a1c6-4b84-bce0-89ba34850681"
+        name="Установка данных авиа перелета"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="5b63854a-3f4f-48e3-a4d9-df9391d70565">
+            <useCaseMoniker
+              Id="3997d2b7-bdbe-47ad-9295-373225d95c87"
+              LastKnownName="Установить референс"
+              LastKnownLocation="ModelingProject.uml" />
+          </include>
+        </additions>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="79c25e05-98c7-4b58-b105-d4b33ec53cdf"
+        name="Просмотр заявок в статусах:&#xD;&#xA;- растаможен&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8fe72a24-151b-4024-a38a-0845b997426b"
+        name="Установка статусов:&#xD;&#xA;- На складе в Москве&#xD;&#xA;- На транзите"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f1e564e4-f858-4492-a410-f1ce1581bcbe"
+        name="Удаление пользователей"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="32357143-b2fd-4537-8e37-aa03bf7864e6"
+        name="System"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="238f4c39-b8a7-44a5-bb8c-2974fc4942bf"
+            isDerived="false"
+            sourceEndRoleName="System"
+            targetEndRoleName="Фильтрация меню по ролям"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="478f2240-9f5b-4116-a980-535eb78c3d72"
+              LastKnownName="Фильтрация меню по ролям"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2fd513d1-eb4e-486f-a325-aeb8b78528a2"
+                  name="System"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="93850874-5ac3-455c-a050-a11a24f1fc65"
+                  name="Фильтрация меню по ролям"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c4c00072-a281-4c27-a157-12032b6c1bb6"
+            isDerived="false"
+            sourceEndRoleName="System"
+            targetEndRoleName="Доступ к страницам"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="e296da15-a22c-4b64-932f-6a0a05e5fd6a"
+              LastKnownName="Доступ к страницам"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="516e6344-7925-42af-ac43-21aefa479dbe"
+                  name="System"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="01b1ad93-bfe1-4acb-b126-bb848c524a40"
+                  name="Доступ к страницам"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="5d2adf4a-c125-4766-911f-b65da70fbf72"
+            isDerived="false"
+            sourceEndRoleName="System"
+            targetEndRoleName="Доступ к заявкам"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="526b7c0a-ea2c-4fd8-8750-c4367626a520"
+              LastKnownName="Доступ к заявкам"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5506962b-ca29-406f-9c2e-1a43a5f6c33e"
+                  name="System"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3cbeebc3-a418-493e-a186-4e1928e8eaa9"
+                  name="Доступ к заявкам"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="6f9e68c8-41e7-4e0b-94ae-8fb35c985160"
+            isDerived="false"
+            sourceEndRoleName="System"
+            targetEndRoleName="Логирование ошибок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="88af7677-d0fa-4110-a79e-0b46f31ee837"
+              LastKnownName="Логирование ошибок"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="67849760-8fcc-4839-a29b-6ab2f003e20e"
+                  name="System"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6193f6fa-7fa2-42dd-b58e-3e2aa013c550"
+                  name="Логирование ошибок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d7f24e49-da5b-4e62-a317-82ab332fc9e1"
+            isDerived="false"
+            sourceEndRoleName="System"
+            targetEndRoleName="История операций над заявками"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="651118a8-d045-4036-a7df-7e8b337be473"
+              LastKnownName="История операций над заявками"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d045b752-62a5-4a6c-9446-1b6cc7aa90f3"
+                  name="System"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="134b75bf-9df2-4f9d-bd09-976848d45008"
+                  name="История операций над заявками"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="65905569-9e52-467f-a742-aec36b00e0be"
+            isDerived="false"
+            sourceEndRoleName="System"
+            targetEndRoleName="Рассылка уведомлений"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="40245212-c261-4a07-b40a-cb317eb48694"
+              LastKnownName="Рассылка уведомлений"
+              LastKnownLocation="ModelingProject.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e311f66e-0500-4f70-a529-4b9570aa4500"
+                  name="System"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fd2ee9ed-a38c-47f3-8f5e-bdf851e3d68e"
+                  name="Рассылка уведомлений"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="478f2240-9f5b-4116-a980-535eb78c3d72"
+        name="Фильтрация меню по ролям"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="526b7c0a-ea2c-4fd8-8750-c4367626a520"
+        name="Доступ к заявкам"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="e296da15-a22c-4b64-932f-6a0a05e5fd6a"
+        name="Доступ к страницам"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c98ce7d1-c39d-4ac7-8146-5ed2b32a1f06"
+        name="Пользователь не может редактировать некторые поля после определенного статуса"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="88af7677-d0fa-4110-a79e-0b46f31ee837"
+        name="Логирование ошибок"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="651118a8-d045-4036-a7df-7e8b337be473"
+        name="История операций над заявками"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="40245212-c261-4a07-b40a-cb317eb48694"
+        name="Рассылка уведомлений"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

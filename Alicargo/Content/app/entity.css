@@ -1,0 +1,119 @@
+﻿.entity-edit {
+	margin-top: 20px;
+}
+
+	/*.entity-edit label {
+		display: inline-block;
+	}*/
+
+	.entity-edit .span8 input {
+		width: 756px;
+	}
+
+	.entity-edit .span8 textarea {
+		width: 756px;
+		height: 85px;
+	}
+
+	.entity-edit .span4 .currency-holder input {
+		width: 310px;
+	}
+
+	.entity-edit .currency-holder .dropdown-menu {
+		min-width: initial;
+	}
+
+	.entity-edit .span4 input {
+		width: 356px;
+	}
+
+	.entity-edit .span4 select {
+		width: 370px;
+	}
+
+	.entity-edit .span4 textarea {
+		width: 356px;
+		height: 85px;
+	}
+
+	.entity-edit .span4 .ui-tabs {
+		margin-bottom: 25px;
+	}
+
+		.entity-edit .span4 .ui-tabs select {
+			margin-bottom: 0;
+			width: 322px;
+		}
+
+		.entity-edit .span4 .ui-tabs input {
+			margin-bottom: 0;
+			width: 308px;
+		}
+
+.entity-details {
+	margin-bottom: 20px;
+}
+
+	.entity-details label {
+		font-weight: bold;
+	}
+
+.grid {
+	margin-bottom: 20px;
+	font-size: 8pt;
+}
+
+	.grid .btn {
+		font-size: 1.2em;
+	}
+
+	.grid label, button, select {
+		font-size: 1.2em;
+		font-weight: normal;
+		line-height: 1.4em;
+	}
+
+.grid-details {
+	background-color: rgb(248, 252, 248);
+	padding: 10px;
+}
+
+	.grid-details p:last-child {
+		margin-bottom: 0;
+	}
+
+	.grid-details .properties {
+		-moz-column-count: 5;
+		-webkit-column-count: 5;
+		column-count: 5;
+	}
+
+.application-grid-select-client select {
+	margin-bottom: 0;
+	width: auto;
+}
+
+.grid-details-toolbar {
+	margin-bottom: 0;
+}
+
+	.grid-details-toolbar select {
+		margin-bottom: 0;
+	}
+
+	.grid-details-toolbar label {
+		display: inline-block;
+	}
+
+.date-holder {
+	margin-bottom: 10px;
+}
+
+.row .span12 label {
+	display: block;
+}
+
+.row .span12 input {
+	display: block;
+	width: 1156px;
+}

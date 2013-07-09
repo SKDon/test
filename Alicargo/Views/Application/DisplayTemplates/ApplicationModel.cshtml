@@ -1,0 +1,117 @@
+﻿@using Microsoft.Ajax.Utilities
+@using Resources
+@model ApplicationModel
+
+<div class="row">
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.FactoryName)
+		@Html.DisplayWithLabelFor(model => model.FactoryPhone)
+
+	</div>
+	<div class="span4">
+		@Html.LabelFor(model => model.FactoryContact)
+		<div>
+			@Html.TextAreaFor(model => model.FactoryContact, new { @readonly = "readonly" })
+		</div>
+	</div>
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.FactoryEmail)
+		@Html.DisplayWithLabelFor(model => model.MarkName)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.Invoice)
+	</div>
+	<div class="span8">
+		@Html.DisplayWithLabelFor(model => model.Characteristic)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.Gross)
+	</div>
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.AddressLoad)
+	</div>
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.DateOfCargoReceiptLocalString)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.Count)
+		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span> )</label>
+		@Html.DisplayFor(model => model.Volume)
+	</div>
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.TermsOfDelivery)
+		@Html.DisplayWithLabelFor(model => model.MethodOfDeliveryLocalString)
+	</div>
+	<div class="span4">
+		@Html.DisplayWithLabelFor(model => model.WarehouseWorkingTime)
+		@Html.DisplayWithLabelFor(model => model.ValueString)
+	</div>
+</div>
+<hr />
+<h4>
+	@Pages.Files
+</h4>
+<div class="row">
+
+	<div class="span2">
+		@Html.LabelFor(model => model.InvoiceFile)
+		@if (!Model.InvoiceFileName.IsNullOrWhiteSpace())
+  {
+			<a href="@Url.Action(MVC.Application.InvoiceFile(Model.Id))">@Model.InvoiceFileName</a>
+  }
+  else
+  {
+			@Pages.NoFile
+  }
+	</div>
+	<div class="span2">
+		@Html.LabelFor(model => model.SwiftFile)
+		@if (!Model.SwiftFileName.IsNullOrWhiteSpace())
+  {
+			<a href="@Url.Action(MVC.Application.SwiftFile(Model.Id))">@Model.SwiftFileName</a>
+  }
+  else
+  {
+			@Pages.NoFile
+  }
+	</div>
+	<div class="span2">
+		@Html.LabelFor(model => model.DeliveryBillFile)
+		@if (!Model.DeliveryBillFileName.IsNullOrWhiteSpace())
+  {
+			<a href="@Url.Action(MVC.Application.DeliveryBillFile(Model.Id))">@Model.DeliveryBillFileName</a>
+  }
+  else
+  {
+			@Pages.NoFile
+  }
+	</div>
+	<div class="span2">
+		@Html.LabelFor(model => model.Torg12File)
+		@if (!Model.Torg12FileName.IsNullOrWhiteSpace())
+  {
+			<a href="@Url.Action(MVC.Application.Torg12File(Model.Id))">@Model.Torg12FileName</a>
+  }
+  else
+  {
+			@Pages.NoFile
+  }
+	</div>
+	<div class="span2">
+		@Html.LabelFor(model => model.CPFile)
+		@if (!Model.CPFileName.IsNullOrWhiteSpace())
+  {
+			<a href="@Url.Action(MVC.Application.CPFile(Model.Id))">@Model.CPFileName</a>
+  }
+  else
+  {
+			@Pages.NoFile
+  }
+	</div>
+</div>

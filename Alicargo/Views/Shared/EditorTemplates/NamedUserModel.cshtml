@@ -1,0 +1,13 @@
+﻿@model Alicargo.ViewModels.NamedUserModel
+
+<div class="row">
+	<div class="span4">
+		@Html.LabelFor(model => model.Name)
+		@Html.EditorFor(model => model.Name)
+	</div>
+</div>
+<hr />
+<h4>
+	@Resources.Pages.Authentication
+</h4>
+@Html.EditorFor(x => x.User)

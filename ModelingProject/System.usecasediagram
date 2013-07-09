@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="0145ac1c-56a6-4426-9d96-cddcfa632d3a" name="System" linkedPackageId="760257c4-aef5-41ae-a588-70d3342503e3" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="6bc6c9cb-8a21-4bcf-b735-c8c211bc096b" name="System" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="32357143-b2fd-4537-8e37-aa03bf7864e6" />
+        <targetEnds>
+          <association Id="04a17448-1fca-4fcf-bf9f-df87596b30af" isDerived="false" sourceEndRoleName="System" targetEndRoleName="Фильтрация меню по ролям" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="f838d52e-5b99-4b0e-bbef-d04f57f2bfb7" LastKnownName="Фильтрация меню по ролям" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3e928e62-4917-403d-b78b-a533ea1d24ab" name="System" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2fd513d1-eb4e-486f-a325-aeb8b78528a2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a76b5f78-841f-4634-9259-36db13c3c4be" name="Фильтрация меню по ролям" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="93850874-5ac3-455c-a050-a11a24f1fc65" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="238f4c39-b8a7-44a5-bb8c-2974fc4942bf" />
+          </association>
+          <association Id="0040f361-942b-403d-b5db-65909c8d4ed6" isDerived="false" sourceEndRoleName="System" targetEndRoleName="Доступ к страницам" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="67393bb5-d0d6-4084-98f1-3579cae97b65" LastKnownName="Доступ к страницам" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c79fc480-75ab-4fdb-ab4a-3b949e637906" name="System" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="516e6344-7925-42af-ac43-21aefa479dbe" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5d3ea0b0-bdff-4ba2-b9d9-97c5e43088d8" name="Доступ к страницам" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="01b1ad93-bfe1-4acb-b126-bb848c524a40" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c4c00072-a281-4c27-a157-12032b6c1bb6" />
+          </association>
+          <association Id="55252ee5-320d-4162-98da-5d4cb37f785e" isDerived="false" sourceEndRoleName="System" targetEndRoleName="Доступ к заявкам" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="a535ea3f-58c6-4dd0-b9cf-50d59c1e16a7" LastKnownName="Доступ к заявкам" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7656979f-84d3-464b-a4e3-7b4b1d008a66" name="System" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5506962b-ca29-406f-9c2e-1a43a5f6c33e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="911ba88f-43f4-49c5-afcc-ee2090a98413" name="Доступ к заявкам" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3cbeebc3-a418-493e-a186-4e1928e8eaa9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5d2adf4a-c125-4766-911f-b65da70fbf72" />
+          </association>
+          <association Id="7c498a59-6cd2-46cf-999a-5e50ad8afe2d" isDerived="false" sourceEndRoleName="System" targetEndRoleName="Логирование ошибок" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="fb8e802d-c18f-448a-af11-3d256092da6a" LastKnownName="Логирование ошибок" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ea03d696-1bdf-4692-92eb-511f0222c331" name="System" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="67849760-8fcc-4839-a29b-6ab2f003e20e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6d1e0575-a420-42eb-8908-bab156c09213" name="Логирование ошибок" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6193f6fa-7fa2-42dd-b58e-3e2aa013c550" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="6f9e68c8-41e7-4e0b-94ae-8fb35c985160" />
+          </association>
+          <association Id="69dfbcfa-7764-48e6-b5dd-c77c2554eea4" isDerived="false" sourceEndRoleName="System" targetEndRoleName="История операций над заявками" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="8d3938a2-5d1f-45f4-abad-e8f2c89e6bc7" LastKnownName="История операций над заявками" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="00d02607-0d62-4288-a0cc-1fff6a9cff10" name="System" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d045b752-62a5-4a6c-9446-1b6cc7aa90f3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0d2ff809-27cd-45df-8c77-4cf5db8e3c90" name="История операций над заявками" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="134b75bf-9df2-4f9d-bd09-976848d45008" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d7f24e49-da5b-4e62-a317-82ab332fc9e1" />
+          </association>
+          <association Id="2a18c621-be4c-4355-8785-8cb4c9d7601c" isDerived="false" sourceEndRoleName="System" targetEndRoleName="Рассылка уведомлений" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="54c60bb2-22ba-48f4-912e-dc6b9294bd12" LastKnownName="Рассылка уведомлений" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5e90e2eb-1f48-4259-9e0b-40487c37b530" name="System" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e311f66e-0500-4f70-a529-4b9570aa4500" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d046df9c-2a54-4a47-a152-1d989cf0497e" name="Рассылка уведомлений" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="fd2ee9ed-a38c-47f3-8f5e-bdf851e3d68e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="65905569-9e52-467f-a742-aec36b00e0be" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f838d52e-5b99-4b0e-bbef-d04f57f2bfb7" name="Фильтрация меню по ролям" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="478f2240-9f5b-4116-a980-535eb78c3d72" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="a535ea3f-58c6-4dd0-b9cf-50d59c1e16a7" name="Доступ к заявкам" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="526b7c0a-ea2c-4fd8-8750-c4367626a520" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="67393bb5-d0d6-4084-98f1-3579cae97b65" name="Доступ к страницам" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e296da15-a22c-4b64-932f-6a0a05e5fd6a" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="fb8e802d-c18f-448a-af11-3d256092da6a" name="Логирование ошибок" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="88af7677-d0fa-4110-a79e-0b46f31ee837" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="8d3938a2-5d1f-45f4-abad-e8f2c89e6bc7" name="История операций над заявками" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="651118a8-d045-4036-a7df-7e8b337be473" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="54c60bb2-22ba-48f4-912e-dc6b9294bd12" name="Рассылка уведомлений" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="40245212-c261-4a07-b40a-cb317eb48694" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="760257c4-aef5-41ae-a588-70d3342503e3" name="ModelingProject">
+    <elementDefinition Id="b924eee1-bb61-4955-9fea-16c79778031d" />
+    <profileInstances>
+      <packageHasProfileInstances Id="3946d6de-c2dc-406c-b767-99ae6e673aa8">
+        <profileInstance Id="f22290f6-601d-43ad-a1f6-c6be56872fa8" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="f69b3c5f-05fa-4ed7-9303-6bbaacfacfdf">
+        <profileInstance Id="f2aa2bd9-bc29-4d71-be20-111f947bd8ec" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>

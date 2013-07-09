@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="039f6307-7e56-4822-a78e-1c050fea3947" name="Sender-cases" linkedPackageId="f6263672-5404-4fb6-859a-770db1ba6bb3" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="c3480c1e-c121-425e-ba18-475a8937723c" name="Sender" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="aab2da35-daa8-4cc7-917f-833fea4d3892" />
+        <targetEnds>
+          <association Id="eb3ee034-1348-46e7-9386-084037fbc3a4" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Аутентификация" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="8f760054-04cd-4f85-8766-adb5c0ccf63a" LastKnownName="Аутентификация" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8c728d9d-608f-44d4-9049-4e34f6a892cb" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="52371b82-151e-4741-a6ad-c25739b9c69f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="de166858-f224-4994-bcd8-98ae9db3979d" name="Аутентификация" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="cb88ae35-2b03-44e9-a083-43bcde251c94" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="4965d406-b96f-4f49-987b-56196ddd29f3" />
+          </association>
+          <association Id="bb43cdf7-882a-4d1f-ab01-155a2923af12" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Просмотр всех заявок" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="04c6810d-9870-4646-9699-4446ff2b1630" LastKnownName="Просмотр всех заявок" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="388cd639-2e2f-4fab-b449-16346d52edf0" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="86c38cbc-3962-47f5-8714-7459f61dc087" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="78029f5b-ee56-4acf-b4d9-37c9948a3cd3" name="Просмотр всех заявок" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="68dffb20-962e-4c30-8217-c3bebd01950b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0d48b12e-aa27-4684-bd7a-5989ba4c6ec9" />
+          </association>
+          <association Id="06875006-6b60-4d6b-bdaa-ad22af2c3aae" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Посмотреть детали конкретной заявки" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="7c93f114-4f5b-4408-a2aa-ec7e7d75bd56" LastKnownName="Посмотреть детали конкретной заявки" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="38600c8a-c682-4d6d-921a-085e26861966" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="51abf749-22a6-4141-8c4e-0e8e93552eae" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="78d50d39-86a9-4564-b103-283bae853a4a" name="Посмотреть детали конкретной заявки" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="d32a61a7-7933-4e8b-8dc3-b3c6a5299c29" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d36eccc2-3989-4804-a58f-00dd5e447087" />
+          </association>
+          <association Id="3a2e63b4-1b3e-45ee-8ab3-eae6becfadbb" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c3721182-ea8a-4d11-b760-30f6687dd797" LastKnownName="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="02d88ab1-1264-4346-adba-288c7a8675ec" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="efec3f50-31ca-4689-bb17-52f026c6b23d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9121e7ac-c698-4278-a871-6f84c0d2545b" name="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="9e14c03f-8831-4fcf-b432-2a7695a705d4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="22dee907-0421-4034-aec6-7897d51afb6a" />
+          </association>
+          <association Id="038798dd-eeea-4486-bc54-f846304045e5" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Установить референс" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="53b002a3-7d7f-4d71-9161-3475d90db2cb" LastKnownName="Установить референс" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4fea3bbc-cce0-4639-9db5-df15f69f8410" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d6542eba-ca86-4af9-ae0e-e16aa5b1d9e9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cd9127a2-f652-40a6-9f67-b5a4aa9dbf36" name="Установить референс" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0f858139-69e7-4323-ba91-3b837b179b72" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="49c81c13-d778-4ede-87bc-dd8ba7f13b51" />
+          </association>
+          <association Id="c4115b56-874b-46c8-b221-64f77c6184eb" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Установка данных авиа перелета" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="628ad0e8-ef64-4df4-84cd-54d723ce8b49" LastKnownName="Установка данных авиа перелета" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="424eb08b-3481-4a31-a251-02a4cb9d56d5" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c2c64e2f-7b17-4958-a5ea-8f97e23f4bd1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="704687da-48ee-4074-9030-d8010884d2bf" name="Установка данных авиа перелета" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0bdda538-c0e0-42be-89c9-f144da2d32db" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="88289e11-c7ed-4ab1-bbd5-72e9d329c69f" />
+          </association>
+          <association Id="6c19b024-7a96-4e3a-8fd8-98ce42cdedd2" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="2b82449e-b5ff-4906-8527-549d8b5e810a" LastKnownName="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bd025152-aec8-47a9-b4c8-2cda27763671" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="33e00c70-d161-410d-a9a4-fb69115777d8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="19140ffa-f7bc-4135-bfe8-ddef2a7bf44c" name="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="44021b6f-fbca-4cbc-978f-486f3ca568b5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c1987e4a-afa3-496d-b393-8cc5d6a57215" />
+          </association>
+          <association Id="9d8d315a-c75a-4ed8-8555-d5f725a36976" isDerived="false" sourceEndRoleName="Sender" targetEndRoleName="Группировка по референсу" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="158d8c42-43f3-4982-9c9b-82ff7c473d55" LastKnownName="Группировка по референсу" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6903b96e-4a21-4c19-b08a-c80c08cdf1fa" name="Sender" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="32f28c25-a163-4b08-b0bf-7741190350fe" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9e1439a6-590c-4dd8-9e53-a533f69b7f40" name="Группировка по референсу" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="eb6e57f0-e565-4dbf-84fd-32d19c3b2838" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0fc62fde-ab50-4116-8521-3414d15d55e7" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="8f760054-04cd-4f85-8766-adb5c0ccf63a" name="Аутентификация" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="54fdfa9d-a74b-4d76-a7bc-b28aae38f76d" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="158d8c42-43f3-4982-9c9b-82ff7c473d55" name="Группировка по референсу" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0832a532-f7ff-4174-ae20-686270ed1a26" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="04c6810d-9870-4646-9699-4446ff2b1630" name="Просмотр всех заявок" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ae872986-38a9-4cd0-9162-0af02e9306b2" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="7c93f114-4f5b-4408-a2aa-ec7e7d75bd56" name="Посмотреть детали конкретной заявки" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6a775350-255d-44a6-b855-09796d5e0bf9" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="2b82449e-b5ff-4906-8527-549d8b5e810a" name="Фильтрация заявок по:&#xD;&#xA;- клиенту&#xD;&#xA;- статусу" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="44b8a1eb-ec9e-4df4-a549-032ad672672c" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c3721182-ea8a-4d11-b760-30f6687dd797" name="Установить статусы:&#xD;&#xA;- фабрика ждет оплату&#xD;&#xA;- груз не готов&#xD;&#xA;- фабрика отправила груз&#xD;&#xA;- Груз забран&#xD;&#xA;- груз забран перевозчиком&#xD;&#xA;- груз на складе&#xD;&#xA;- груз отправлен&#xD;&#xA;- груз на таможне&#xD;&#xA;- груз растаможен&#xD;&#xA;- груз на транзите&#xD;&#xA;- груз получен&#xD;&#xA;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0ca49e04-bc5e-467e-8361-a715f9fe20ac" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="53b002a3-7d7f-4d71-9161-3475d90db2cb" name="Установить референс" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3997d2b7-bdbe-47ad-9295-373225d95c87" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="628ad0e8-ef64-4df4-84cd-54d723ce8b49" name="Установка данных авиа перелета" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0341fc9c-a1c6-4b84-bce0-89ba34850681" />
+        <additions>
+          <include Id="28980229-bf37-410c-868f-23f4e8f38a87">
+            <useCaseMoniker Id="53b002a3-7d7f-4d71-9161-3475d90db2cb" LastKnownName="Установить референс" />
+            <elementDefinition Id="5b63854a-3f4f-48e3-a4d9-df9391d70565" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="f6263672-5404-4fb6-859a-770db1ba6bb3" name="ModelingProject">
+    <elementDefinition Id="b924eee1-bb61-4955-9fea-16c79778031d" />
+    <profileInstances>
+      <packageHasProfileInstances Id="1980e930-8444-4ddc-b8bc-c31940425a9a">
+        <profileInstance Id="caad1900-8b63-4b56-aafe-bf07b8e16792" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="5206bd78-6dad-4033-a013-f5e4a6693513">
+        <profileInstance Id="6d9a8622-1ba3-458c-a2f4-110675ed72fb" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>

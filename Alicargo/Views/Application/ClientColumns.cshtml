@@ -1,0 +1,18 @@
+﻿@using Resources
+@inherits BaseWebViewPage<ApplicationIndexModel>
+
+var columns = [
+{ field: "CreationTimestampLocalString", title: '@Entities.CreationTimestamp', groupable: false, width: "70px" },
+{ field: "State", title: '@Entities.StateName', groupable: true, template: "#= State.StateName #" },
+{ field: "DateOfCargoReceiptLocalString", title: '@Entities.DateOfCargoReceipt', groupable: false, width: "70px" },
+{ field: "DisplayNumber", title: '@Entities.DisplayNumber', width: "70px", groupable: false },
+{ field: "FactoryName", title: '@Entities.FactoryName', groupable: false },
+{ field: "MarkName", title: '@Entities.Mark', groupable: false },
+{ field: "Count", title: '@Entities.Count', groupable: false, width: "35px" },
+{ field: "Gross", title: '@Entities.Gross', groupable: false, width: "35px" },
+{ field: "Invoice", title: '@Entities.Invoice', groupable: false },
+{ field: "Value", title: '@Entities.Value', groupable: false, template: function(dataItem){return dataItem.Value + CurrencyType[dataItem.CurrencyId];} },
+{ field: "Transit.MethodOfTransitString", title: '@Entities.MethodOfTransit', groupable: false },
+{ field: "Transit.CarrierName", title: '@Entities.CarrierName', groupable: false },
+{ field: "TransitReference", title: '@Entities.TransitReference', groupable: false, width: "150px" },
+{ field: "ReferenceBill", title: '@Entities.AirWayBill', groupable: true, width: "150px", groupHeaderTemplate: "@Entities.AWB: #= !!value ? value : '@Pages.NoReference' #" }];

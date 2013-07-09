@@ -1,0 +1,86 @@
+﻿@using Resources
+
+# if(DaysInWork != null){ #
+<p>
+	<span>@Entities.DaysInWork:</span>
+	#= DaysInWork #
+</p>
+# } #
+# if(CreationTimestampLocalString != null){ #
+<p>
+	<span>@Entities.CreationTimestamp:</span>
+	#= CreationTimestampLocalString #
+</p>
+# } #
+# if(StateChangeTimestampLocalString != null){ #
+<p>
+	<span>@Entities.StateChangeTimestamp:</span>
+	#= StateChangeTimestampLocalString #
+</p>
+# } #
+# if(MarkName != null){ #
+<p>
+	<span>@Entities.Mark:</span>
+	#= MarkName #
+</p>
+# } #
+# if(Count != null){ #
+<p>
+	<span>@Entities.Count:</span>
+	#= Count #
+</p>
+# } #
+# if(Volume != null){ #
+<p>
+	<span style="position: relative;">@Entities.Volume (m<span class="super">3</span> ):</span>
+	#= Volume #
+</p>
+# } #
+# if(Gross != null){ #
+<p>
+	<span>@Entities.Gross:</span>
+	#= Gross #
+</p>
+# } #
+# if(Characteristic != null){ #
+<p>
+	<span>@Entities.Characteristic:</span>
+	#= Characteristic #
+</p>
+# } #
+# if(FactoryName != null){ #
+<p>
+	<span>@Entities.FactoryName:</span>
+	#= FactoryName #
+</p>
+# } #
+# if(FactoryEmail != null){ #
+<p>
+	<span>@Entities.FactoryEmail:</span>
+	#= FactoryEmail #
+</p>
+# } #
+# if(FactoryPhone != null){ #
+<p>
+	<span>@Entities.FactoryPhone:</span>
+	#= FactoryPhone #
+</p>
+# } #
+# if(InvoiceFileName != null){ #
+<p>
+	<span>@Entities.Invoice:</span>
+	<a href="@Url.Action(MVC.Application.InvoiceFile())/#= Id #">#= InvoiceFileName #</a>
+</p>
+# } #
+# if(SwiftFileName != null){ #
+<p>
+	<span>@Entities.Swift:</span>
+	<a href="@Url.Action(MVC.Application.SwiftFile())/#= Id #">#= SwiftFileName #</a>
+</p>
+# } #
+# if(PackingFileName != null){ #
+<p>
+	<span>@Entities.Packing:</span>
+	<a href="@Url.Action(MVC.Application.PackingFile())/#= Id #">#= PackingFileName #</a>
+</p>
+# } #

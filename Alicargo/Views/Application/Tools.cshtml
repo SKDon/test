@@ -1,0 +1,37 @@
+﻿@inherits BaseWebViewPage<ApplicationIndexModel>
+
+@using Alicargo.Core.Enums
+@using Resources
+
+@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
+{
+	<p class="application-grid-select-client">
+		@Entities.Nic:
+		@Html.DropDownList("selected-client-id", Model.Clients.Select(x => new SelectListItem
+		{
+			Text = x.Value,
+			Value = IdentityService.IsInRole(RoleType.Admin)
+				? Url.Action(MVC.Application.Create(x.Key))
+				: Url.Action(MVC.Sender.ApplicationCreate(x.Key))
+		}))
+		<a href="#" class="btn btn-primary" id="apply-link">@Pages.ApplicationAdd</a>
+	</p>
+	<script>
+		$(function () {
+			var link = $("#apply-link");
+			var select = $("#selected-client-id");
+
+			var updateLink = function () {
+				link.attr("href", select.val());
+			};
+			select.change(updateLink);
+			updateLink();
+		})
+	</script>
+}
+else if (IdentityService.IsInRole(RoleType.Client))
+{
+	<p>
+		@Html.ActionLink(Pages.ApplicationAdd, MVC.Application.Create(), new { @class = "btn btn-primary" })
+	</p>
+}

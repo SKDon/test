@@ -1,0 +1,116 @@
+﻿@using System.Activities.Statements
+@using Alicargo.Core.Enums
+@using Resources
+@inherits BaseWebViewPage<ReferenceModel>
+
+@helper SelectBrocker()
+{
+	var name = Html.IdFor(x => x.BrockerId).ToHtmlString();
+	var action = MVC.Brocker.Select(name, Model == null ? (long?)null : Model.BrockerId);
+	@Html.Action(action)
+}
+
+@helper Files()
+{
+	<div class="row">
+
+		@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
+  {
+			<div class="span4">
+
+				@Html.LabelFor(x => x.PackingFile)
+				@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(),
+					Model != null ? Model.PackingFileName : null)
+			</div>
+  }
+
+		@if (IdentityService.IsInRole(RoleType.Admin))
+  {
+			<div class="span4">
+				@Html.LabelFor(x => x.InvoiceFile)
+				@Helpers.FileUploader(@Html.IdFor(x => x.InvoiceFile).ToHtmlString(),
+					Model != null ? Model.InvoiceFileName : null)
+			</div>
+  }
+
+		@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
+  {
+			<div class="span4">
+				@Html.LabelFor(x => x.AWBFile)
+				@Helpers.FileUploader(@Html.IdFor(x => x.AWBFile).ToHtmlString(), Model != null ? Model.AWBFileName : null)
+			</div>
+  }
+
+	</div>
+}
+
+@helper Gtd()
+{
+	<hr />
+	<h4>
+		@Entities.GTD
+	</h4>
+	<div class="row">
+		<div class="span4">
+			@Html.LabelFor(model => model.GTD)
+			@Html.EditorFor(model => model.GTD)
+		</div>
+		<div class="span4">
+			@Html.LabelFor(model => model.GTDFile)
+			@Helpers.FileUploader(@Html.IdFor(x => x.GTDFile).ToHtmlString(), Model != null ? Model.GTDFileName : null)
+		</div>
+		<div class="span4">
+			@Html.LabelFor(model => model.GTDAdditionalFile)
+			@Helpers.FileUploader(@Html.IdFor(x => x.GTDAdditionalFile).ToHtmlString(), Model != null ? Model.GTDAdditionalFileName : null)
+		</div>
+	</div>
+}
+
+@helper Parameters()
+{
+	<div class="row">
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.Bill)
+			@Html.LabelFor(x => x.BrockerId)
+			@SelectBrocker()
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.DepartureAirport)
+			@Html.LabelFor(model => model.DateOfDepartureLocalString)
+			<div class="date-holder">
+				@Html.EditorFor(model => model.DateOfDepartureLocalString)
+			</div>
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.ArrivalAirport)
+			@Html.LabelFor(model => model.DateOfArrivalLocalString)
+			<div class="date-holder">
+				@Html.EditorFor(model => model.DateOfArrivalLocalString)
+			</div>
+		</div>
+		<script>
+			$(function () {
+				$(".date-holder input").kendoDatePicker();
+			})
+		</script>
+	</div>
+}
+
+@Parameters()
+@if (IdentityService.IsInRole(RoleType.Admin))
+{	
+	@Gtd()
+}
+<hr />
+<h4>
+	@Pages.Files
+</h4>
+@Files()
+@if (IdentityService.IsInRole(RoleType.Sender))
+{
+	// todo: separate view for sender
+	@Html.HiddenFor(x => x.InvoiceFileName)
+	@Html.HiddenFor(x => x.GTD)
+	@Html.HiddenFor(x => x.GTDAdditionalFileName)
+	@Html.HiddenFor(x => x.GTDFileName)
+}

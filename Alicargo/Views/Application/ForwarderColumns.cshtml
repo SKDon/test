@@ -1,0 +1,18 @@
+﻿@using Resources
+@inherits BaseWebViewPage<ApplicationIndexModel>
+
+var columns = [
+{ field: "State", title: '@Entities.StateName', groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },
+{ field: "LegalEntity", title: '@Entities.LegalEntity', groupable: true, width: "150px" },
+{ field: "DisplayNumber", title: '@Entities.DisplayNumber', width: "70px", groupable: false },
+{ field: "Count", title: '@Entities.Count', groupable: false, width: "35px", groupFooterTemplate: "#= Count.sum #" },
+{ field: "Gross", title: '@Entities.Gross', groupable: false, width: "35px", groupFooterTemplate: "#= Gross.sum #" },
+{ field: "Transit.CarrierName", title: '@Entities.CarrierName', groupable: false, width: "100px" },
+{ field: "Transit.MethodOfTransitString", title: '@Entities.MethodOfTransit', groupable: false, width: "75px" },
+{ field: "Transit.City", title: '@Entities.City', groupable: false, width: "100px" },
+{ field: "Transit.RecipientName", title: '@Entities.RecipientName', groupable: false, width: "100px" },
+{ field: "Transit.Address", title: '@Entities.Address', groupable: false, width: "100px" },
+{ field: "Transit.Phone", title: '@Entities.Phone', groupable: false, width: "100px" },
+{ field: "Transit.WarehouseWorkingTime", title: '@Entities.WarehouseWorkingTime', groupable: false, width: "90px" },
+{ field: "TransitReference", title: '@Entities.TransitReference', groupable: false, width: "150px" },
+{ field: "ReferenceBill", title: '@Entities.AirWayBill', groupable: true, width: "150px", groupHeaderTemplate: "@Entities.AWB: #= !!value ? value : '@Pages.NoReference' #" }];

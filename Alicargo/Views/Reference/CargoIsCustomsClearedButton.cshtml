@@ -1,0 +1,23 @@
+﻿@using Resources
+@model CargoIsCustomsClearedButtonModel
+
+@{ var disabled = !Model.CanSetCargoIsCustomsCleared; }
+<button class="btn btn-success" id="@Html.Id("CargoIsCustomsCleared")" @(disabled ? "disabled" : "") type="button">@Pages.CargoIsCustomsCleared</button>
+@if (!disabled)
+{
+	<script>
+		$(function () {
+			$('#@Html.Id("CargoIsCustomsCleared")').click(function () {
+				var that = $(this).attr("disabled", "disabled");
+				$.post('@Url.Action(MVC.Reference.CargoIsCustomsCleared(Model.Id))')
+					.done(function () {
+						alert("@Pages.SuccessOperation.JavaScriptStringEncode()");
+					})
+					.error(function () {
+						alert("@Pages.AnError.JavaScriptStringEncode()");
+						that.removeAttr("disabled");
+					});
+			});
+		});
+	</script>
+}

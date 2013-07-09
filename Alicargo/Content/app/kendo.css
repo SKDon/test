@@ -1,0 +1,46 @@
+﻿.k-widget.k-window {
+	width: 827px;
+}
+
+.k-edit-form-container {
+	width: auto;
+}
+
+	.k-edit-form-container .row {
+		margin-bottom: 15px;
+	}
+
+	.k-edit-form-container input {
+		width: 355px;
+		margin-bottom: 0;
+	}
+
+.k-grid td {
+	white-space: nowrap;
+}
+
+.k-grid-custom-delete, .k-grid-custom-edit {
+	min-width: 0 !important;
+	height: 25px;
+	line-height: 20px;
+}
+
+	.k-grid-custom-delete span, .k-grid-custom-edit span {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		overflow: hidden;
+		background-repeat: no-repeat;
+		font-size: 0;
+		line-height: 0;
+		background-image: url('../kendo/2013.1.319/Default/sprite.png');
+		border-color: transparent;
+	}
+
+	.k-grid-custom-delete span {
+		background-position: -48px -16px;
+	}
+
+	.k-grid-custom-edit span {
+		background-position: -48px 0;
+	}

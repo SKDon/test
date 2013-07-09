@@ -1,0 +1,207 @@
+﻿@using Alicargo.Core.Enums
+@using Resources
+@inherits BaseWebViewPage<ApplicationIndexModel>
+
+@helper RenderColumns()
+{
+	if (IdentityService.IsInRole(RoleType.Client))
+	{
+	@Html.Partial("ClientColumns")
+	}
+	else if (IdentityService.IsInRole(RoleType.Sender))
+	{
+	@Html.Partial("SenderColumns")
+	}
+	else if (IdentityService.IsInRole(RoleType.Forwarder))
+	{
+	@Html.Partial("ForwarderColumns")
+	}
+	else
+	{
+	@Html.Partial("AdminColumns")
+	}
+}
+
+<style>
+	.container {
+		width: auto;
+		padding: 0 20px;
+	}
+</style>
+
+@Html.Partial("Tools")
+<div id="application-grid" class="grid"></div>
+<script type="text/x-kendo-template" id="application-grid-details">@Html.Partial("DetailsTemplate")</script>
+
+@section scripts
+{
+	<script>
+		$(function () {
+			var schema = {
+				model: { id: "Id" },
+				data: "Data",
+				total: "Total",
+				groups: "Groups"
+			};
+
+			var error = function () { alert("@Pages.AnError"); };
+
+			var dataSource = {
+				transport: {
+					read: {
+						dataType: "json",
+						url: '@Url.Action(MVC.Application.List())',
+						type: "POST"
+					}
+				},
+				schema: schema,
+				pageSize: 20,
+				serverPaging: true,
+				editable: true,
+				serverGrouping: true,
+				@if (!IdentityService.IsInRole(RoleType.Client))
+	{
+					@:group: { field: "ReferenceBill", dir: "asc" },
+				}
+				error: error
+			};
+
+			var getGrid = function () {
+				var grid = $("#application-grid").data("kendoGrid");
+				getGrid = function () { return grid; };
+				return getGrid();
+			};
+
+			var updateGrid = function () {
+				var grid = getGrid();
+				grid.dataSource.read();
+				grid.refresh();
+			};
+
+			var detailExpand = function (e) {
+				var data = getGrid().dataItem(e.masterRow);
+
+				$(".close-application", e.detailRow).click(function () {
+					if (window.confirm("@Pages.StateSetConfirm.JavaScriptStringEncode()")) {
+						var url = "@Url.Action(MVC.Application.Close())";
+						$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+					}
+				});
+
+				$(".delete-application", e.detailRow).click(function () {
+					if (window.confirm("@Pages.DeleteConfirm.JavaScriptStringEncode()")) {
+						var url = "@Url.Action(MVC.Application.Delete())";
+						$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+					}
+				});
+
+				$(".reference-select", e.detailRow)
+					.val(data.ReferenceId)
+					.change(function () {
+						if (window.confirm("@Pages.ReferenceSetConfirm")) {
+							var url = "@Url.Action(MVC.Reference.SetReference())";
+							$.post(url, { referenceId: $(this).val(), applicationId: data.Id }).done(updateGrid).fail(error);
+						}
+					});
+				
+				var cargoIsFlew = @StateConfig.CargoIsFlewStateId;
+				if (data.ReferenceId && data.StateId != cargoIsFlew) {
+					$(".reference-holder", e.detailRow).hide();
+				} else {
+					$(".reference-holder", e.detailRow).show();
+				}
+			};
+			var detailCollapse = function (e) {
+				$(".close-application", e.detailRow).unbind("click");
+				$(".delete-application", e.detailRow).unbind("click");
+				$(".reference-select", e.detailRow).unbind("change");
+			};
+
+			@* ReSharper disable UnusedLocals *@
+			function dateEditor(container, options) @* ReSharper restore UnusedLocals *@ {
+				$('<input name="' + options.field + '" data-text-field="' + options.field
+					+ '" data-value-field="' + options.field + '" data-bind="value:'
+					+ options.field + '" />')
+					.appendTo(container)
+					.kendoDatePicker();
+			}
+
+			@* ReSharper disable UnusedLocals *@
+			function stateDropDownEditor(container, options) @* ReSharper restore UnusedLocals *@ {
+				var applicationId = options.model.Id;
+				$('<input required data-text-field="StateName" data-value-field="StateId" data-bind="value:' + options.field + '"/>')
+					.appendTo(container)
+					.kendoDropDownList({
+						autoBind: false,
+						select: function (e) {
+							if (window.confirm("@Pages.StateSetConfirm")) {
+								var dataItem = this.dataItem(e.item.index());
+								var url = "@Url.Action(MVC.Application.SetState())";
+								$.post(url, { stateId: dataItem.StateId, id: applicationId }).done(updateGrid).fail(error);
+							} else {
+								getGrid().closeCell();
+							}
+						},
+						dataTextField: "StateName",
+						dataValueField: "StateId",
+						dataSource: {
+							type: "json",
+							transport: {
+								read: {
+									cache: true,
+									dataType: "json",
+									url: "@Url.Action(MVC.Application.States())/" + applicationId,
+									type: "POST"
+								}
+							}
+						}
+					});
+				}
+
+			@RenderColumns()
+
+			var settings = {
+				dataSource: dataSource,
+				filterable: false,
+				sortable: false,
+				groupable: true,
+				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
+				resizable: true,
+				detailTemplate: kendo.template($("#application-grid-details").html()),
+				detailExpand: detailExpand,
+				detailCollapse: detailCollapse,
+				columns: columns
+			};
+
+
+			$.extend(settings, {
+				@if (!IdentityService.IsInRole(RoleType.Client) && !IdentityService.IsInRole(RoleType.Brocker))
+	{
+				@:editable: true,
+				}
+				edit: function (e) {
+					if (e.container.find("input[name='TransitReference']").length) return;
+					if (e.container.find("input[name='DateOfCargoReceiptLocalString']").length) return;
+					var stateName = e.container.find("input[data-text-field='StateName']");
+					if (!stateName.length || !e.model.CanSetState) getGrid().closeCell();
+				},
+				save: function (e) {
+					if (e.values.TransitReference !== undefined) {
+						$.post("@Url.Action(MVC.Application.SetTransitReference())", {
+							id: e.model.Id,
+							transitReference: e.values.TransitReference
+						}).fail(error);
+					}
+					if (e.values.DateOfCargoReceiptLocalString !== undefined) {
+						$.post("@Url.Action(MVC.Application.SetDateOfCargoReceipt())", {
+							id: e.model.Id,
+							dateOfCargoReceipt: kendo.toString(e.values.DateOfCargoReceiptLocalString, "d")
+						}).fail(error);
+					}
+				}
+			});
+
+			$("#application-grid").kendoGrid(settings);
+		});
+	</script>
+}

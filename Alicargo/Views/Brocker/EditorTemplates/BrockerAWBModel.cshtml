@@ -1,0 +1,24 @@
+﻿@model BrockerAWBModel
+
+<div class="row">
+	<div class="span4">
+		@Html.LabelFor(model => model.GTD)
+		@Html.EditorFor(model => model.GTD)
+	</div>
+	<div class="span2">
+		@Html.LabelFor(model => model.GTDFile)
+		@Helpers.FileUploader(@Html.IdFor(x => x.GTDFile).ToHtmlString(), Model != null ? Model.GTDFileName : null)
+	</div>
+	<div class="span2">
+		@Html.LabelFor(model => model.GTDAdditionalFile)
+		@Helpers.FileUploader(@Html.IdFor(x => x.GTDAdditionalFile).ToHtmlString(), Model != null ? Model.GTDAdditionalFileName : null)
+	</div>
+	<div class="span2">
+		@Html.LabelFor(x => x.InvoiceFile)
+		@Helpers.FileUploader(@Html.IdFor(x => x.InvoiceFile).ToHtmlString(), Model != null ? Model.InvoiceFileName : null)
+	</div>
+	<div class="span2">
+		@Html.LabelFor(x => x.PackingFile)
+		@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(), Model != null ? Model.PackingFileName : null)
+	</div>
+</div>

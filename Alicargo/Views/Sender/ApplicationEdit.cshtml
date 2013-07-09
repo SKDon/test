@@ -1,0 +1,5 @@
+﻿@using Resources
+@model ApplicationSenderEdit
+
+<h4 style="margin-top: 33px;" class="pull-right">@Entities.Nic: @ViewBag.Nic</h4>
+@Html.EditPage(Pages.ApplicationEdit + " " + (string)ViewBag.ApplicationNumber, Url.Action(MVC.Sender.ApplicationEdit()), Pages.Save)

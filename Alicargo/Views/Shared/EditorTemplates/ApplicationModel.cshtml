@@ -1,0 +1,180 @@
+﻿@using System.Globalization
+@using Alicargo.Core.Enums
+@using Alicargo.Core.Localization
+@inherits BaseWebViewPage<ApplicationModel>
+
+@if (Model.Id != 0)
+{
+	@Html.HiddenFor(x => x.ClientId)
+	@Html.HiddenFor(x => x.StateId)
+	@Html.HiddenFor(x => x.ReferenceId)
+	@Html.HiddenFor(x => x.TransitId)
+	@Html.HiddenFor(x => x.DateInStock)
+	@Html.HiddenFor(x => x.DateOfCargoReceipt)
+	@Html.HiddenFor(x => x.TransitReference)
+	@Html.HiddenFor(x => x.Transit.Id)
+}
+
+@helper CurrencyEditor()
+{
+	<div class="currency-holder">
+		<div class="input-append">
+			@Html.EditorFor(model => model.Value)
+			<div class="btn-group">
+				<button class="btn dropdown-toggle" data-toggle="dropdown">
+					<span id="@(Html.IdFor(x => x.CurrencyId))_selected">&curren;</span>
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li data-id="@Html.Raw((int)CurrencyType.Euro)" class="currency"><a href="#">&euro;</a></li>
+					<li data-id="@Html.Raw((int)CurrencyType.Dollar)" class="currency"><a href="#">$</a></li>
+					<li data-id="@Html.Raw((int)CurrencyType.Pound)" class="currency"><a href="#">&pound;</a></li>
+				</ul>
+			</div>
+		</div>
+		@Html.HiddenFor(model => model.CurrencyId)
+		<script>
+			$(function () {
+				var select = function (element) {
+					var text = element.children().html();
+					var id = element.data("id");
+					$("#@(Html.IdFor(x => x.CurrencyId))_selected").html(text);
+
+					return id;
+				};
+
+				$(".currency").click(function (e) {
+					e.preventDefault();
+					var id = select($(this));
+					$("#@Html.IdFor(x => x.CurrencyId)").val(id);
+				});
+
+				select($('[data-id="@Model.CurrencyId"]'));
+			});
+		</script>
+	</div>
+}
+@helper SelectCountry()
+{
+	@Html.LabelFor(x => x.CountryId)
+	var countries = (IDictionary<long, string>)ViewBag.Countries;
+	var list = countries.Select(x => new SelectListItem
+	{
+		Text = x.Value,
+		Value = x.Key.ToString(CultureInfo.InvariantCulture)
+	}).ToList();
+	@Html.DropDownListFor(x => x.CountryId, list)
+}
+
+
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.FactoryName)
+		@Html.EditorWithLabelFor(model => model.FactoryPhone)
+	</div>
+	<div class="span4">
+		@Html.LabelFor(model => model.FactoryContact)
+		<div>
+			@Html.TextAreaFor(model => model.FactoryContact)
+		</div>
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.FactoryEmail)
+		@Html.EditorWithLabelFor(model => model.MarkName)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Invoice)
+	</div>
+	<div class="span8">
+		@Html.EditorWithLabelFor(model => model.Characteristic)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Gross)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.AddressLoad)
+	</div>
+	<div class="span4">
+		@SelectCountry()
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Count)
+		<label for="@Html.IdFor(x => x.Volume)">@Resources.Entities.Volume (m<span class="super">3</span> )</label>
+		@Html.EditorFor(model => model.Volume)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.TermsOfDelivery)
+		@Html.LabelFor(model => model.MethodOfDelivery)
+		@Html.DropDownListFor(model => model.MethodOfDelivery, LocalizeEnumExtension.Select<MethodOfDelivery, SelectListItem>((item, name) => new SelectListItem
+{
+	Text = name,
+	Value = item.ToString()
+}))
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
+		@Html.LabelFor(model => model.Value)
+		@CurrencyEditor()
+	</div>
+</div>
+<hr />
+<h4>
+	@Resources.Pages.Files
+</h4>
+@if (!IdentityService.IsInRole(RoleType.Sender))
+{
+	<div class="row">
+		<div class="span4">
+			@Html.LabelFor(model => model.Torg12File)
+			@Helpers.FileUploader(Html.IdFor(x => x.Torg12File).ToHtmlString(), Model.Torg12FileName)
+		</div>
+		<div class="span4">
+			@Html.LabelFor(model => model.CPFile)
+			@Helpers.FileUploader(Html.IdFor(x => x.CPFile).ToHtmlString(), Model.CPFileName)
+		</div>
+		<div class="span4">
+			@Html.LabelFor(model => model.DeliveryBillFile)
+			@Helpers.FileUploader(Html.IdFor(x => x.DeliveryBillFile).ToHtmlString(), Model.DeliveryBillFileName)
+		</div>
+	</div>
+}
+else
+{
+	@Html.HiddenFor(model => model.Torg12FileName)
+	@Html.HiddenFor(model => model.CPFileName)
+	@Html.HiddenFor(model => model.DeliveryBillFileName)
+}
+<div class="row">
+	<div class="span4">
+		@Html.LabelFor(model => model.InvoiceFile)
+		@Helpers.FileUploader(Html.IdFor(x => x.InvoiceFile).ToHtmlString(), Model.InvoiceFileName)
+	</div>
+	<div class="span4">
+		@Html.LabelFor(model => model.SwiftFile)
+		@Helpers.FileUploader(Html.IdFor(x => x.SwiftFile).ToHtmlString(), Model.SwiftFileName)
+	</div>
+	<div class="span4">
+		@Html.LabelFor(model => model.PackingFile)
+		@Helpers.FileUploader(Html.IdFor(x => x.PackingFile).ToHtmlString(), Model.PackingFileName)
+	</div>
+</div>
+<script>
+	$(function () {
+		$(".date-holder input").kendoDatePicker();
+	})
+</script>
+<div @Html.Raw(IdentityService.IsInRole(RoleType.Sender) ? "style='display: none'" : "")>
+	@*todo: hack - create model for sender*@
+	<hr />
+	<h4>
+		@Resources.Pages.Transit
+	</h4>
+	@Html.EditorFor(x => x.Transit)
+</div>
+

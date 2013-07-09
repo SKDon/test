@@ -1,0 +1,22 @@
+﻿@using Resources
+@inherits BaseWebViewPage<ApplicationIndexModel>
+
+var columns = [
+{ field: "CreationTimestampLocalString", title: '@Entities.CreationTimestamp', groupable: false, width: "90px" },
+{ field: "State", title: '@Entities.StateName', groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
+{ field: "DateOfCargoReceiptLocalString", title: '@Entities.DateOfCargoReceipt', groupable: false, editor: dateEditor, width: "90px", template: "#= DateOfCargoReceiptLocalString == null ? '' : kendo.toString(DateOfCargoReceiptLocalString, 'd') #" },
+{ field: "DateInStockLocalString", title: '@Entities.DateInStock', groupable: false, width: "90px" },
+{ field: "ClientNic", title: '@Entities.Nic', groupable: false, width: "100px" },
+{ field: "LegalEntity", title: '@Entities.LegalEntity', groupable: true, width: "150px" },
+{ field: "DisplayNumber", title: '@Entities.DisplayNumber', groupable: false, width: "60px" },
+{ field: "FactoryName", title: '@Entities.FactoryName', groupable: false, width: "100px" },
+{ field: "MarkName", title: '@Entities.Mark', groupable: false, width: "100px" },
+{ field: "Count", title: '@Entities.Count', groupable: false, width: "35px", groupFooterTemplate: "#= Count.sum #" },
+{ field: "Gross", title: '@Entities.Gross', groupable: false, width: "35px", groupFooterTemplate: "#= Gross.sum #" },
+{ field: "Invoice", title: '@Entities.Invoice', groupable: false, width: "150px" },
+{ field: "Value", title: '@Entities.Value', groupable: false, width: "70px" },
+{ field: "Transit.MethodOfTransitString", title: '@Entities.MethodOfTransit', groupable: false, width: "75px" },
+{ field: "Transit.City", title: '@Entities.City', groupable: false, width: "100px" },
+{ field: "Transit.CarrierName", title: '@Entities.CarrierName', groupable: false, width: "100px" },
+{ field: "TransitReference", title: '@Entities.TransitReference', groupable: false, width: "150px" },
+{ field: "ReferenceBill", title: '@Entities.AirWayBill', groupable: true, width: "150px", groupHeaderTemplate: "@Entities.AWB: #= !!value ? value : '@Pages.NoReference' #" }];

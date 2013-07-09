@@ -1,0 +1,79 @@
+﻿@model Client
+
+@if (Model != null)
+{
+	@Html.HiddenFor(m => m.Id)
+	@Html.HiddenFor(m => m.TransitId)
+	@Html.HiddenFor(m => m.Transit.Id)
+	@Html.HiddenFor(m => m.UserId)
+}
+
+<div class="row">
+	<div class="span8">
+		@Html.EditorWithLabelFor(model => model.LegalEntity)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Nic)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.INN)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.LegalAddress)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.MailingAddress)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.OGRN)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Bank)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.BIC)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.KPP)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.RS)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.KS)
+	</div>
+</div>
+<div class="row">
+	<div class="span8">
+		@Html.LabelFor(model => model.Contacts)
+		@Html.TextAreaFor(model => model.Contacts)
+		<div class="row">
+			<div class="span4">
+			</div>
+			<div class="span4">
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Email)
+
+
+		@Html.EditorWithLabelFor(model => model.Phone)
+	</div>
+</div>
+<hr />
+<h4>
+	@Resources.Pages.Transit
+</h4>
+@Html.EditorFor(x => x.Transit)
+<hr />
+<h4>
+	@Resources.Pages.Authentication
+</h4>
+@Html.EditorFor(x => x.AuthenticationModel)

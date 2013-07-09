@@ -1,0 +1,73 @@
+﻿@using Alicargo.Core.Enums
+@using Resources
+@model RoleType
+
+<h3>
+	@switch (Model)
+ {
+	 case RoleType.Admin:
+		@Pages.Admins
+		 break;
+
+	 case RoleType.Sender:
+		@Pages.Senders
+		 break;
+	 case RoleType.Brocker:
+		@Pages.Brockers
+		 break;
+
+	 case RoleType.Forwarder:
+		@Pages.Forwarders
+		 break;
+
+	 case RoleType.Client:
+		@Pages.Clients
+		 break;
+
+	 default:
+		 throw new ArgumentOutOfRangeException();
+ }
+</h3>
+<p>
+	@Html.ActionLink(Pages.Add, MVC.User.Create(Model), new { @class = "btn btn-primary" })
+</p>
+<div id="user-grid" class="grid"></div>
+
+@section scripts
+{
+	<script>
+		$(function () {
+			var error = function () { alert("@Pages.AnError"); };
+			
+			var dataSource = {
+				transport: {
+					read: {
+						dataType: "json",
+						url: '@Url.Action(MVC.User.List(Model))',
+						type: "POST"
+					}
+				},
+				schema: { model: { id: "Id" } },
+				error: error
+			};
+
+			$("#user-grid").kendoGrid({
+				dataSource: dataSource,
+				columns: [
+					{ field: "Name", title: '@Pages.Name' },
+					{
+						command: [{
+							name: "custom-edit",
+							text: "",
+							click: function (e) {
+								var tr = $(e.target).closest("tr");
+								var data = this.dataItem(tr);
+								var url = '@Url.Action(MVC.User.Edit())/@((int)Model)/' + data.Id;
+								window.location = url;
+							}
+						}], title: "&nbsp;", width: "53px"
+					}]
+			});
+		});
+	</script>
+}

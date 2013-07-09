@@ -1,0 +1,6 @@
+﻿@using Alicargo.Helpers
+@using Resources
+@model ApplicationModel
+
+<h4 style="margin-top: 33px;" class="pull-right">@Entities.Nic: @Html.DisplayFor(x => x.ClientNic)</h4>
+@Html.EditPage(Pages.ApplicationAdd, Url.Action(MVC.Application.Create()), Pages.ApplicationAdd)

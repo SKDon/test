@@ -1,0 +1,34 @@
+﻿@using System.Web.Mvc.Html
+@using Alicargo.Core.Enums
+@using Alicargo.Core.Localization
+@model Transit
+
+@if (Model != null)
+{
+	@Html.HiddenFor(x => x.CarrierId)
+}
+
+<div class="row">
+	<div class="span8">
+		@Html.EditorWithLabelFor(model => model.City)
+		@Html.EditorWithLabelFor(model => model.Address)
+		@Html.EditorWithLabelFor(model => model.RecipientName)
+		@Html.EditorWithLabelFor(model => model.Phone)
+		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
+	</div>
+	<div class="span4">
+		@Html.Action(MVC.Carrier.Select(Model != null ? Model.CarrierId : (long?)null))
+		@Html.LabelFor(model => model.MethodOfTransit)
+		@Html.DropDownListFor(model => model.MethodOfTransit, LocalizeEnumExtension.Select<MethodOfTransit, SelectListItem>((item, name) => new SelectListItem
+		{
+			Text = name,
+			Value = item.ToString()
+		}))
+		@Html.LabelFor(model => model.DeliveryType)
+		@Html.DropDownListFor(model => model.DeliveryType, LocalizeEnumExtension.Select<DeliveryType, SelectListItem>((item, name) => new SelectListItem
+		{
+			Text = name,
+			Value = item.ToString()
+		}))
+	</div>
+</div>

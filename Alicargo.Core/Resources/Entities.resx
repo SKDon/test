@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Bank" xml:space="preserve">
+    <value>Банк</value>
+  </data>
+  <data name="BIC" xml:space="preserve">
+    <value>БИК</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Контактное лицо</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="INN" xml:space="preserve">
+    <value>ИНН</value>
+  </data>
+  <data name="KPP" xml:space="preserve">
+    <value>КПП</value>
+  </data>
+  <data name="KS" xml:space="preserve">
+    <value>к/с</value>
+  </data>
+  <data name="LegalAddress" xml:space="preserve">
+    <value>Юридический адрес</value>
+  </data>
+  <data name="LegalEntity" xml:space="preserve">
+    <value>Юридическое лицо</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="MailingAddress" xml:space="preserve">
+    <value>Почтовый адрес</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Задать новый пароль</value>
+  </data>
+  <data name="Nic" xml:space="preserve">
+    <value>NIC по инвойсу</value>
+  </data>
+  <data name="OfficePhone" xml:space="preserve">
+    <value>Телефон офиса</value>
+  </data>
+  <data name="OGRN" xml:space="preserve">
+    <value>ОГРН</value>
+  </data>
+  <data name="RS" xml:space="preserve">
+    <value>р/с</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Подтвердить новый пароль</value>
+  </data>
+  <data name="CreationTimestamp" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="DaysInWork" xml:space="preserve">
+    <value>Дней в работе</value>
+  </data>
+  <data name="DisplayNumber" xml:space="preserve">
+    <value>Номер заявки</value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Инвойс</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Референс</value>
+  </data>
+  <data name="StateName" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="StateNextName" xml:space="preserve">
+    <value>Ожидаемый статус</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="CarrierName" xml:space="preserve">
+    <value>Перевозчик</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="DeliveryType" xml:space="preserve">
+    <value>Тип доставки</value>
+  </data>
+  <data name="MethodOfTransit" xml:space="preserve">
+    <value>Способ транзита</value>
+  </data>
+  <data name="NewCarrierName" xml:space="preserve">
+    <value>Указать другого перевозчика</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="RecipientName" xml:space="preserve">
+    <value>Получатель</value>
+  </data>
+  <data name="AddressLoad" xml:space="preserve">
+    <value>Адрес забора груза</value>
+  </data>
+  <data name="Characteristic" xml:space="preserve">
+    <value>Характеристика товара</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Количество мест (коробки)</value>
+  </data>
+  <data name="FactoryEmail" xml:space="preserve">
+    <value>Email фабрики</value>
+  </data>
+  <data name="FactoryName" xml:space="preserve">
+    <value>Фабрика</value>
+  </data>
+  <data name="FactoryPhone" xml:space="preserve">
+    <value>Телефон фабрики</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>Прикрепленный файл</value>
+  </data>
+  <data name="Gross" xml:space="preserve">
+    <value>Вес (кг)</value>
+  </data>
+  <data name="Mark" xml:space="preserve">
+    <value>Марка</value>
+  </data>
+  <data name="MethodOfDelivery" xml:space="preserve">
+    <value>Способ доставки</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>Объем</value>
+  </data>
+  <data name="WarehouseWorkingTime" xml:space="preserve">
+    <value>Время работы склада</value>
+  </data>
+  <data name="TermsOfDelivery" xml:space="preserve">
+    <value>Условия поставки</value>
+  </data>
+  <data name="StateItalianName" xml:space="preserve">
+    <value>Итальянское имя</value>
+  </data>
+  <data name="StateRussianName" xml:space="preserve">
+    <value>Русское имя</value>
+  </data>
+  <data name="StateChangeTimestamp" xml:space="preserve">
+    <value>Дата сметы статуса</value>
+  </data>
+  <data name="Brocker" xml:space="preserve">
+    <value>Брокер</value>
+  </data>
+  <data name="TotalCount" xml:space="preserve">
+    <value>Общее количество</value>
+  </data>
+  <data name="TotalWeight" xml:space="preserve">
+    <value>Общий вес</value>
+  </data>
+  <data name="ArrivalAirport" xml:space="preserve">
+    <value>Аэропорт прилета</value>
+  </data>
+  <data name="DateOfArrival" xml:space="preserve">
+    <value>Дата прилета</value>
+  </data>
+  <data name="DateOfDeparture" xml:space="preserve">
+    <value>Дата вылета</value>
+  </data>
+  <data name="DepartureAirport" xml:space="preserve">
+    <value>Аэропорт вылета</value>
+  </data>
+  <data name="GTD" xml:space="preserve">
+    <value>ГТД</value>
+  </data>
+  <data name="FactoryContact" xml:space="preserve">
+    <value>Контактное лицо фабрики</value>
+  </data>
+  <data name="CP" xml:space="preserve">
+    <value>CP</value>
+  </data>
+  <data name="DeliveryBill" xml:space="preserve">
+    <value>Счет за доставку</value>
+  </data>
+  <data name="Swift" xml:space="preserve">
+    <value>SWIFT</value>
+  </data>
+  <data name="Torg12" xml:space="preserve">
+    <value>Торг 12</value>
+  </data>
+  <data name="AWB" xml:space="preserve">
+    <value>AWB</value>
+  </data>
+  <data name="Packing" xml:space="preserve">
+    <value>Пакинг</value>
+  </data>
+  <data name="PriceForDelivery" xml:space="preserve">
+    <value>Стоимость доставки</value>
+  </data>
+  <data name="DateInStock" xml:space="preserve">
+    <value>Дата поступления  на склад</value>
+  </data>
+  <data name="AirWayBill" xml:space="preserve">
+    <value>Air Way Bill</value>
+  </data>
+  <data name="DateOfCargoReceipt" xml:space="preserve">
+    <value>Получения груза</value>
+  </data>
+  <data name="GTDAdditional" xml:space="preserve">
+    <value>ГТД дополнение</value>
+  </data>
+  <data name="TransitReference" xml:space="preserve">
+    <value>Транзитный референс</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Страна</value>
+  </data>
+</root>

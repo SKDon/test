@@ -1,0 +1,85 @@
+﻿@using Alicargo.Core.Enums
+@using Alicargo.Core.Localization
+@inherits BaseWebViewPage
+
+@helper ClientMenu()
+{
+	if (IdentityService.IsInRole(RoleType.Client))
+	{
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	<li>@Html.ActionLink(Resources.Pages.Profile, MVC.Client.Edit())</li>		
+	}
+}
+
+@helper ForwarderMenu()
+{
+	if (IdentityService.IsInRole(RoleType.Forwarder))
+	{
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	}
+}
+
+@helper AdminMenu()
+{
+	if (IdentityService.IsInRole(RoleType.Admin))
+	{
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	<li>@Html.ActionLink(@Resources.Pages.References, MVC.Reference.Index())</li>
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Pages.Users<b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li>@Html.ActionLink(@Resources.Pages.Clients, MVC.Client.Index())</li>
+			<li>@Html.ActionLink(@Resources.Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
+			<li>@Html.ActionLink(@Resources.Pages.Brockers, MVC.User.Index(RoleType.Brocker))</li>
+			<li>@Html.ActionLink(@Resources.Pages.Forwarders, MVC.User.Index(RoleType.Forwarder))</li>
+			<li>@Html.ActionLink(@Resources.Pages.Senders, MVC.User.Index(RoleType.Sender))</li>
+		</ul>
+	</li>
+	}
+}
+
+@helper SenderMenu()
+{
+	if (IdentityService.IsInRole(RoleType.Sender))
+	{
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	<li>@Html.ActionLink(Resources.Entities.AirWayBill, MVC.Reference.Index())</li>
+	}
+}
+
+@helper BrockerMenu()
+{
+	if (IdentityService.IsInRole(RoleType.Brocker))
+	{	
+	<li>@Html.ActionLink(Resources.Entities.AirWayBill, MVC.Reference.Index())</li>
+	}
+}
+
+@if (IdentityService.IsAuthenticated)
+{
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				@Html.ActionLink("Alicargo", MVC.Home.Index(), new { @class = "brand" })
+				<ul class="nav">
+					@BrockerMenu()
+					@ClientMenu()
+					@SenderMenu()
+					@ForwarderMenu()
+					@AdminMenu()
+				</ul>
+				<ul class="nav pull-right">
+					<li>
+						@Html.ActionLink("Русский", MVC.Home.Culture(TwoLetterISOLanguageName.Russian, Request.RawUrl))
+					</li>
+					<li>
+						@Html.ActionLink("Italiano", MVC.Home.Culture(TwoLetterISOLanguageName.Italian, Request.RawUrl))
+					</li>
+					<li>
+						@Html.ActionLink("English", MVC.Home.Culture(TwoLetterISOLanguageName.English, Request.RawUrl))
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+}

@@ -1,0 +1,126 @@
+﻿@using Alicargo.Core.Enums
+@using Resources
+@inherits BaseWebViewPage
+
+<style>
+	.container {
+		width: auto;
+		padding: 0 20px;
+	}
+</style>
+<div id="reference-grid" class="grid"></div>
+<script type="text/x-kendo-template" id="reference-grid-details">@Html.Partial("DetailsTemplate")</script>
+
+@section scripts
+{
+	<script>
+		$(function () {
+			var schema = {
+				model: {
+					id: "Id"
+				},
+				data: "Data",
+				total: "Total"
+			};
+
+			var error = function () { alert("@Pages.AnError"); };
+
+			var dataSource = {
+				transport: {
+					read: {
+						dataType: "json",
+						url: '@Url.Action(MVC.Reference.List())',
+						type: "POST"
+					}
+				},
+				schema: schema,
+				pageSize: 20,
+				serverPaging: true,
+				editable: true,
+				error: error
+			};
+			
+			var getGrid = function () {
+				var grid = $("#reference-grid").data("kendoGrid");
+				getGrid = function () { return grid; };
+				return getGrid();
+			};
+
+			var columns = [
+				{ field: "CreationTimestampLocalString", title: '@Entities.CreationTimestamp' },
+				{ field: "State", title: '@Entities.StateName', template: "#= !!State && !!State.StateName ? State.StateName : '' #" },
+				{ field: "Bill", title: '@Entities.AWB' },
+				{ field: "DepartureAirport", title: '@Entities.DepartureAirport' },
+				{ field: "ArrivalAirport", title: '@Entities.ArrivalAirport' },
+				{ field: "DateOfDepartureLocalString", title: '@Entities.DateOfDeparture' },
+				{ field: "DateOfArrivalLocalString", title: '@Entities.DateOfArrival' },
+				{ field: "TotalCount", title: '@Entities.TotalCount' },
+				{ field: "TotalWeight", title: '@Entities.TotalWeight' },
+				{ field: "StateChangeTimestampLocalString", title: '@Entities.StateChangeTimestamp' },
+				{ field: "GTD", title: '@Entities.GTD' }
+			];
+
+			@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
+   {
+				<text>
+			columns.push({
+				command: [{
+					name: "custom-edit",
+					text: "",
+					click: function (e) {
+						var tr = $(e.target).closest("tr");
+						var data = this.dataItem(tr);
+						var url = '@Url.Action(MVC.Reference.Edit())/' + data.Id;
+						window.location = url;
+					}
+				}], title: "&nbsp;", width: "53px"
+			});
+			columns.push({
+				command: [{
+					name: "custom-delete",
+					text: "",
+					click: function (e) {
+						var updateGrid = function () {
+							var grid = getGrid();
+							grid.dataSource.read();
+							grid.refresh();
+						};
+						if (window.confirm("@Pages.DeleteConfirm")) {
+							var tr = $(e.target).closest("tr");
+							var data = this.dataItem(tr);
+							var url = '@Url.Action(MVC.Reference.Delete())';
+							$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+						}
+					}
+				}], title: "&nbsp;", width: "53px"
+			});
+		</text>
+   }
+   else if (IdentityService.IsInRole(RoleType.Brocker))
+   {
+				<text>
+			columns.push({
+				command: [{
+					name: "custom-edit",
+					text: "",
+					click: function (e) {
+						var tr = $(e.target).closest("tr");
+						var data = this.dataItem(tr);
+						var url = '@Url.Action(MVC.Brocker.AWB())/' + data.Id;
+						window.location = url;
+					}
+				}], title: "&nbsp;", width: "53px"
+			});
+
+		</text>
+   }			
+
+			$("#reference-grid").kendoGrid({
+				dataSource: dataSource,
+				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
+				detailTemplate: kendo.template($("#reference-grid-details").html()),
+				columns: columns
+			});
+		});
+	</script>
+}

@@ -1,0 +1,65 @@
+using System.Web.Optimization;
+using Alicargo.Helpers;
+
+[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Alicargo.App_Start.BootstrapBundleConfig), "RegisterBundles")]
+
+namespace Alicargo.App_Start
+{
+	public class BootstrapBundleConfig
+	{
+		public const string ScriptsPath = "~/js";
+		public const string ScriptsPathRu = "~/js/ru";
+		public const string ScriptsPathIt = "~/js/it";
+		public const string StylesPath = "~/css";
+
+		public static void RegisterBundles()
+		{
+			BundleTable.Bundles.IgnoreList.Clear();
+			BundleTable.Bundles.IgnoreList.Ignore(".intellisense.js", OptimizationMode.Always);
+			BundleTable.Bundles.IgnoreList.Ignore("-vsdoc.js", OptimizationMode.Always);
+			BundleTable.Bundles.IgnoreList.Ignore(".debug.js", OptimizationMode.Always);
+
+			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPath)
+				.Include(
+					"~/Scripts/jquery-{version}.js",
+					"~/Scripts/jquery-ui-{version}.js",
+					"~/Scripts/jquery.validate.js",
+					"~/Scripts/jquery.validate.unobtrusive.js",
+					"~/Scripts/bootstrap.js",
+					"~/Scripts/bootstrap-fileupload.js",
+					"~/Scripts/jquery.globalize/globalize.js",
+					"~/Scripts/kendo/2013.1.319/kendo.web.min.js",
+					"~/Scripts/app/CurrencyType.js",
+					"~/Scripts/app/Common.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPathRu)
+				.Include(
+					"~/Scripts/jquery.globalize/cultures/globalize.culture.ru.js",
+					"~/Scripts/kendo/2013.1.319/cultures/kendo.culture.ru.min.js",
+					"~/Scripts/app/ru.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPathIt)
+				.Include(
+					"~/Scripts/jquery.globalize/cultures/globalize.culture.it.js",
+					"~/Scripts/kendo/2013.1.319/cultures/kendo.culture.it.min.js",
+					"~/Scripts/app/it.js"
+				));
+
+			BundleTable.Bundles.Add(new StyleRelativePathTransformBundle(StylesPath)
+				.Include(
+					"~/Content/themes/jMetro/jquery-ui.css",
+					"~/Content/bootstrap.css",
+					"~/Content/bootstrap-responsive.css",
+					"~/Content/bootstrap-fileupload.css",
+					"~/Content/kendo/2013.1.319/kendo.common.min.css",
+					"~/Content/kendo/2013.1.319/kendo.default.min.css",
+					"~/Content/app/kendo.css",
+					"~/Content/app/layout.css",
+					"~/Content/app/common.css",
+					"~/Content/app/entity.css"
+				));
+		}
+	}
+}

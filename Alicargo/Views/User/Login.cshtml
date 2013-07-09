@@ -1,0 +1,15 @@
+﻿@model SignIdModel
+
+@using (Html.BeginForm(MVC.User.Login(), FormMethod.Post, new { @class = "form-signin" }))
+{
+	<h2 class="form-signin-heading">@Resources.Pages.Authentication</h2>
+	@Html.TextBoxFor(x => x.Login, new { @class = "input-block-level", placeholder = Resources.Pages.Login })
+	@Html.PasswordFor(x => x.Password, new { @class = "input-block-level", placeholder = Resources.Pages.Password })
+	<label class="checkbox">
+		@Html.CheckBoxFor(x => x.RememberMe)@Resources.Pages.RememberMe
+	</label>
+	@Html.ValidationSummary(true)
+	<div class="text-center">
+		<button class="btn btn-large btn-primary" type="submit">@Resources.Pages.SignIn</button>
+	</div>
+}

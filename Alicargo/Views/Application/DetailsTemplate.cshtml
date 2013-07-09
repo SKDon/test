@@ -1,0 +1,79 @@
+﻿@using System.Globalization
+@using Alicargo.Core.Enums
+@using Resources
+@inherits BaseWebViewPage<ApplicationIndexModel>
+
+@helper EditButton()
+{
+	if (IdentityService.IsInRole(RoleType.Client))
+	{
+	@:# if(StateId != @StateConfig.CargoReceivedStateId){ #
+	<a href="@Url.Action(MVC.Transit.Edit())/#= Transit.Id #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
+	@:# } #
+		return;
+	}
+
+	if (IdentityService.IsInRole(RoleType.Admin))
+	{
+	<a href="@Url.Action(MVC.Application.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
+	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
+	}
+
+	if (IdentityService.IsInRole(RoleType.Sender))
+	{
+	<a href="@Url.Action(MVC.Sender.ApplicationEdit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
+	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
+	}
+}
+
+@helper CloseButton()
+{
+	if (!IdentityService.IsInRole(RoleType.Client) && !IdentityService.IsInRole(RoleType.Admin)) { return; }
+	
+	@:# if(CanClose){ #
+	<input class="btn btn-success close-application" type="button" value="@Pages.CargoIsReceived.EncodeForKendo()" />
+	@:# } #
+}
+
+@helper SelectReference()
+{
+	if (!IdentityService.IsInRole(RoleType.Sender) && !IdentityService.IsInRole(RoleType.Admin)) { return; }
+	if (Model.References == null || !Model.References.Any()) { return; }
+	@:&nbsp;
+	@Html.LabelFor(x => x.References)
+	@:&nbsp;
+	var list = Model.References.Select(x => new SelectListItem
+	{
+		Text = x.Value,
+		Value = x.Key.ToString(CultureInfo.InvariantCulture)
+	}).ToList();
+	list.Insert(0, new SelectListItem { Text = "", Value = "" });
+	@Html.DropDownListFor(x => x.References, list, new { @class = "reference-select" })
+}
+
+@helper ReferenceButton()
+{
+	if (!IdentityService.IsInRole(RoleType.Sender) && !IdentityService.IsInRole(RoleType.Admin)) { return; }
+	
+	<a class="btn btn-inverse" href="@Url.Action(MVC.Reference.Create())/#= Id #">@Pages.ReferenceAdd</a>
+}
+
+<div class='grid-details'>
+	<div class="properties">
+		@(IdentityService.IsInRole(RoleType.Sender) ? Html.Partial("SenderDetails") : Html.Partial("AdminDetails"))
+	</div>
+	@if (!IdentityService.IsInRole(RoleType.Forwarder))
+ {
+		<hr />
+		<div class="grid-details-toolbar">
+			<div>
+				@CloseButton()
+				@EditButton()
+				<span class="reference-holder">
+					@SelectReference()
+					@ReferenceButton()
+				</span>
+			</div>
+		</div>
+ }
+</div>
