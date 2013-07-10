@@ -48,7 +48,14 @@ namespace Alicargo.Services.Email
 			var model = _awbPresenter.Get(id);
 			var brocker = _brockerRepository.Get(model.BrockerId);
 
-			var to = new[] { new Recipient { Culture = brocker.TwoLetterISOLanguageName, Email = brocker.Email } }
+			var to = new[]
+			{
+				new Recipient
+				{
+					Culture = brocker.TwoLetterISOLanguageName,
+					Email = brocker.Email
+				}
+			}
 				.Concat(_messageBuilder.GetForwarderEmails())
 				.ToArray();
 

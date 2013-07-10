@@ -27,9 +27,9 @@ namespace Alicargo.Services.Email
 							foreach (var to in message.CC)
 							{
 								email.CC.Add(to);
-							}	
+							}
 						}
-						
+
 						email.Subject = message.Subject;
 						email.Body = message.Body;
 
