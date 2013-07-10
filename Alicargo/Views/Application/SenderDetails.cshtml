@@ -48,6 +48,36 @@
 	#= Characteristic #
 </p>
 # } #
+# if(AddressLoad != null){ #
+<p>
+	<span>@Entities.AddressLoad:</span>
+	#= AddressLoad #
+</p>
+# } #
+# if(CountryName != null){ #
+<p>
+	<span>@Entities.Country:</span>
+	#= CountryName #
+</p>
+# } #
+# if(WarehouseWorkingTime != null){ #
+<p>
+	<span>@Entities.WarehouseWorkingTime:</span>
+	#= WarehouseWorkingTime #				
+</p>
+# } #			
+# if(TermsOfDelivery != null){ #
+<p>
+	<span>@Entities.TermsOfDelivery:</span>
+	#= TermsOfDelivery #
+</p>
+# } #	
+# if(MethodOfDeliveryLocalString != null){ #
+<p>
+	<span>@Entities.MethodOfDelivery:</span>
+	#= MethodOfDeliveryLocalString #				
+</p>
+# } #
 # if(FactoryName != null){ #
 <p>
 	<span>@Entities.FactoryName:</span>
@@ -64,6 +94,12 @@
 <p>
 	<span>@Entities.FactoryPhone:</span>
 	#= FactoryPhone #
+</p>
+# } #
+# if(FactoryContact != null){ #
+<p>
+	<span>@Entities.FactoryContact:</span>
+	#= FactoryContact #
 </p>
 # } #
 # if(InvoiceFileName != null){ #

@@ -13,7 +13,7 @@ namespace Alicargo.Helpers
 
 			var bytes = new byte[file.ContentLength];
 			file.InputStream.Read(bytes, 0, file.ContentLength);
-			
+
 			return bytes;
 		}
 
@@ -21,7 +21,8 @@ namespace Alicargo.Helpers
 		{
 			const string contentType = "application/octet-stream";
 			var ms = new MemoryStream();
-			ms.Read(data, 0, data.Length);
+
+			ms.Write(data, 0, data.Length);
 			ms.Position = 0;
 
 			return new FileStreamResult(ms, contentType) { FileDownloadName = fileName };
