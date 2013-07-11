@@ -65,16 +65,12 @@ namespace Alicargo.DataAccess.Helpers
 		{
 			var ordered = Order(applications, desc, isFirst, x => x.ReferenceId.HasValue);
 
-			if (desc)
+			if (desc) // todo: make explicit direction
 			{
-				return ordered.ThenByDescending(x => x.Reference.DateOfArrival)
-				.ThenByDescending(x => x.Reference.DateOfDeparture)
-				.ThenByDescending(x => x.Reference.Bill);
+				return ordered.ThenBy(x => x.Reference.CreationTimestamp);
 			}
 
-			return ordered.ThenBy(x => x.Reference.DateOfArrival)
-				.ThenBy(x => x.Reference.DateOfDeparture)
-				.ThenBy(x => x.Reference.Bill);
+			return ordered.ThenByDescending(x => x.Reference.CreationTimestamp);
 		}
 
 		//private static IQueryable<Application> ByStateNextName(IQueryable<Application> applications, bool desc, bool isFirst)
