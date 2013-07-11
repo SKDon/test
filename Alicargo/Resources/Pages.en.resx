@@ -157,7 +157,7 @@
     <value>Can not edit the AWB {0} at the current state</value>
   </data>
   <data name="CargoIsCustomsCleared" xml:space="preserve">
-    <value>Cargo is released</value>
+    <value>Cargo Cleared</value>
   </data>
   <data name="CargoIsReceived" xml:space="preserve">
     <value>Cargo is received</value>
