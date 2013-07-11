@@ -180,7 +180,7 @@ namespace Alicargo.Services
 			SetCountryData(applications);
 		}
 
-		private void SetCountryData(ApplicationModel[] applications)
+		private void SetCountryData(IEnumerable<ApplicationModel> applications)
 		{
 			var applicationWithCountry = applications.Where(x => x.CountryId.HasValue).ToArray();
 
@@ -265,7 +265,7 @@ namespace Alicargo.Services
 				application.CanClose = state.Id == _stateConfig.CargoOnTransitStateId; // todo: test
 
 				// todo: test										  
-				application.CanSetState = availableStates.Contains(application.StateId);
+				application.CanSetState = availableStates.Contains(application.StateId);					
 
 				application.StateName = localizedStates[application.StateId];
 			}
