@@ -501,6 +501,7 @@
     <Content Include="Content\themes\jMetro\images\ui-icons_d4d4d4_0.png" />
     <Content Include="Content\themes\jMetro\images\ui-icons_ffffff_0.png" />
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
+    <Content Include="Install\backup-db.sql" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\it.js" />
     <Content Include="Scripts\app\CurrencyType.js" />
@@ -514,6 +515,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\Helpers.cshtml" />
+    <Content Include="Install\backup-db.ps1" />
+    <Content Include="Install\init-db.ps1" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
     <Content Include="Scripts\jquery-2.0.2.min.js" />

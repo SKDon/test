@@ -1,5 +1,5 @@
 param (
-    [string]$server,
+    [string]$server = (Read-Host -Prompt "Input server name")
 	[string]$backupLocation,
 	[string]$databaseName
 )
