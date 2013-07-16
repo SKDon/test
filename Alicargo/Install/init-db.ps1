@@ -3,3 +3,5 @@ param (
 )
 
 Sqlcmd -S $server -i "backup-db.sql"
+
+Sqlcmd -S $server -i "init-db.sql"
