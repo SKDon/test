@@ -29,7 +29,7 @@ namespace Alicargo.Tests.Controllers
 			_client = _context.HttpClient;			
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_Edit()
 		{
 			var reference = _db.References.First();
@@ -73,7 +73,7 @@ namespace Alicargo.Tests.Controllers
 				.Wait();
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_Create()
 		{
 			var brocker = _db.Brockers.First();
@@ -130,7 +130,7 @@ namespace Alicargo.Tests.Controllers
 				.Wait();
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_SetReference()
 		{
 			var application = _db.Applications.First(x => !x.ReferenceId.HasValue);
@@ -152,7 +152,7 @@ namespace Alicargo.Tests.Controllers
 			}).Wait();
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_SetState()
 		{
 			var reference = _db.References.FirstOrDefault(x => x.Applications.Count() > 1 && x.Applications.All(y => y.State.Id != DefaultStateId));

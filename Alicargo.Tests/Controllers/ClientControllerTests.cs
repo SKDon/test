@@ -25,7 +25,7 @@ namespace Alicargo.Tests.Controllers
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_Create()
 		{
 			var password = _context.Create<string>();
