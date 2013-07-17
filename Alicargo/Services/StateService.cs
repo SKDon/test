@@ -44,7 +44,7 @@ namespace Alicargo.Services
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Sender);
+				return _stateRepository.GetAvailableStates(RoleType.Sender);//.Concat(_stateConfig.AwbStates).ToArray();
 			}
 
 			throw new InvalidLogicException();
@@ -97,10 +97,9 @@ namespace Alicargo.Services
 			// todo: move cache to an interception
 			return _permissions.GetOrAdd(stateId, x =>
 			{
-				if (_stateConfig.AwbStates.Contains(stateId))
+				if (_stateConfig.AwbStates.Contains(x))
 				{
-					// todo: test
-					if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Sender) || _identity.IsInRole(RoleType.Brocker))
+					if (_identity.IsInRole(RoleType.Sender))
 					{
 						return true;
 					}

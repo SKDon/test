@@ -91,7 +91,8 @@ namespace Alicargo.Services
 
 		public void SetState(long applicationId, long stateId)
 		{
-			if (!_stateService.HasPermissionToSetState(stateId)) throw new AccessForbiddenException("User don't have access to the state " + stateId);
+			if (!_stateService.HasPermissionToSetState(stateId))
+				throw new AccessForbiddenException("User don't have access to the state " + stateId);
 
 			using (var ts = _unitOfWork.StartTransaction())
 			{
