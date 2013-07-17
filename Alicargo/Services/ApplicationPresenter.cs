@@ -109,6 +109,7 @@ namespace Alicargo.Services
 			return application;
 		}
 
+		// todo: test
 		public ApplicationStateModel[] GetAvailableStates(long id)
 		{
 			var applicationData = _applicationRepository.Get(id);

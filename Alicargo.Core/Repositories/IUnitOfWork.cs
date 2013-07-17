@@ -6,6 +6,6 @@ namespace Alicargo.Core.Repositories
 	{
 		void SaveChanges();
 		DataContext Context { get; }
-		ITransaction GetTransactionScope();
+		ITransaction StartTransaction();
 	}
 }

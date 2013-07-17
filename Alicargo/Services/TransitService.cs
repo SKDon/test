@@ -31,7 +31,7 @@ namespace Alicargo.Services
 
 		public void Update(Transit transit, CarrierSelectModel carrierSelectModel = null)
 		{
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				transit.CarrierId = AddOrGetCarrier(carrierSelectModel);
 
@@ -51,7 +51,7 @@ namespace Alicargo.Services
 
 		public long AddTransit(TransitData model, CarrierSelectModel carrierSelectModel)
 		{
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				model.CarrierId = AddOrGetCarrier(carrierSelectModel);
 

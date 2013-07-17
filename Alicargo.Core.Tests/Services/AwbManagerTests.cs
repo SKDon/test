@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alicargo.ViewModels;
-using Ploeh.AutoFixture;
 using System.Linq;
 using Alicargo.Core.Contracts;
 using Alicargo.Services;
+using Alicargo.ViewModels;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Ploeh.AutoFixture;
 
 // ReSharper disable ImplicitlyCapturedClosure
-namespace Alicargo.Tests.Services
+namespace Alicargo.Core.Tests.Services
 {
 	[TestClass]
 	public class AwbManagerTests
@@ -197,6 +198,7 @@ namespace Alicargo.Tests.Services
 		{
 			var cargoAtCustomsStateId = _context.Create<long>();
 			var cargoIsCustomsClearedStateId = _context.Create<long>();
+			cargoAtCustomsStateId.Should().NotBe(cargoIsCustomsClearedStateId);
 
 			var referenceId = _context.Create<long>();
 			var model = _context.Build<ReferenceModel>()
@@ -204,16 +206,16 @@ namespace Alicargo.Tests.Services
 				.Without(x => x.DateOfDepartureLocalString)
 				.Without(x => x.DateOfArrivalLocalString)
 				.Create();
-			var referenceData = _context.Build<ReferenceData>()
+			var old = _context.Build<ReferenceData>()
 				.With(x => x.Id, referenceId)
 				.With(x => x.GTD, null)
 				.Create();
 			var applicationDatas = _context.Build<ApplicationData>()
-				.With(x => x.StateId, referenceData.StateId).CreateMany().ToArray();
+				.With(x => x.StateId, old.StateId).CreateMany().ToArray();
 			var ids = applicationDatas.Select(x => x.Id).ToArray();
 
 			SetupUnitOfWork();
-			SetStateSetup(referenceId, referenceData, applicationDatas, cargoAtCustomsStateId, ids);
+			SetStateSetup(referenceId, old, applicationDatas, cargoAtCustomsStateId, ids);
 			_context.StateConfig.Setup(x => x.CargoIsCustomsClearedStateId).Returns(cargoIsCustomsClearedStateId);
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(cargoAtCustomsStateId);
 			_context.ReferenceRepository.Setup(x => x.Update(model, model.GTDFile,
@@ -222,6 +224,7 @@ namespace Alicargo.Tests.Services
 			_manager.Update(model);
 
 			_context.StateConfig.Verify(x => x.CargoAtCustomsStateId, Times.Once());
+			_context.StateConfig.Verify(x => x.CargoIsCustomsClearedStateId, Times.Once());
 			_context.ReferenceRepository.Verify(x => x.Update(model, model.GTDFile,
 				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile), Times.Once());
 			VerifySetState(referenceId, ids, cargoAtCustomsStateId, applicationDatas);
@@ -238,8 +241,13 @@ namespace Alicargo.Tests.Services
 				.Without(x => x.DateOfArrivalLocalString)
 				.Without(x => x.GTD)
 				.Create();
+			var old = _context.Build<ReferenceData>()
+				.With(x => x.Id, referenceId)
+				.With(x => x.GTD, null)
+				.Create();
 
 			SetupUnitOfWork();
+			_context.ReferenceRepository.Setup(x => x.Get(referenceId)).Returns(new[] { old });
 			_context.ReferenceRepository.Setup(x => x.Update(model, model.GTDFile,
 				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile));
 
@@ -247,6 +255,38 @@ namespace Alicargo.Tests.Services
 
 			_context.ReferenceRepository.Verify(x => x.Update(model, model.GTDFile,
 				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile), Times.Once());
+			_context.ReferenceRepository.Verify(x => x.SetState(referenceId, It.IsAny<long>()), Times.Never());
+			VerifyUnitOfWork();
+		}
+
+		[TestMethod]
+		public void Test_UpdateWithAlreadryCargoIsCustomsClearedStateIdSet()
+		{
+			var referenceId = _context.Create<long>();
+			var model = _context.Build<ReferenceModel>()
+				.With(x => x.Id, referenceId)
+				.Without(x => x.DateOfDepartureLocalString)
+				.Without(x => x.DateOfArrivalLocalString)
+				.Create();
+			var cargoIsCustomsClearedStateId = _context.Create<long>();
+			var old = _context.Build<ReferenceData>()
+				.With(x => x.Id, referenceId)
+				.With(x => x.GTD, null)
+				.With(x => x.StateId, cargoIsCustomsClearedStateId)
+				.Create();
+
+			SetupUnitOfWork();
+			_context.ReferenceRepository.Setup(x => x.Get(referenceId)).Returns(new[] { old });
+			_context.ReferenceRepository.Setup(x => x.Update(model, model.GTDFile,
+				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile));
+			_context.StateConfig.Setup(x => x.CargoIsCustomsClearedStateId).Returns(cargoIsCustomsClearedStateId);
+
+			_manager.Update(model);
+
+			_context.StateConfig.Verify(x => x.CargoIsCustomsClearedStateId, Times.Once());
+			_context.ReferenceRepository.Verify(x => x.Update(model, model.GTDFile,
+				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile), Times.Once());
+			_context.ReferenceRepository.Verify(x => x.SetState(referenceId, It.IsAny<long>()), Times.Never());
 			VerifyUnitOfWork();
 		}
 

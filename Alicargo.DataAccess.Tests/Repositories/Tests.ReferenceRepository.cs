@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
@@ -20,7 +21,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			var reference = _referenceRepository.Get(data.Id).First();
 
-			AreEquals(data, reference);
+			data.ShouldBeEquivalentTo( reference);
 		}
 
 		[TestMethod]
@@ -33,7 +34,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			var range = _referenceRepository.GetRange(0, (int)count);
 
-			AreEquals(referenceDatas, range);
+			referenceDatas.ShouldBeEquivalentTo(range);
 		}
 
 		private ReferenceData CreateTestReference()

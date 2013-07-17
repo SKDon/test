@@ -15,6 +15,8 @@ SET NOCOUNT ON;
 DECLARE @dateTime NVARCHAR(20) = REPLACE(CONVERT(VARCHAR, GETDATE(),101),'/','') + '_' +  REPLACE(CONVERT(VARCHAR, GETDATE(),108),':','')  
 DECLARE @BackupName VARCHAR(100) =  REPLACE(REPLACE(@databaseName,'[',''),']','') +' full backup for '+ @dateTime
 DECLARE @BackupFile VARCHAR(100) = @backupLocation + REPLACE(REPLACE(@databaseName, '[',''),']','') + '_' + @dateTime + '.bak'
+
+-- todo: test restoring
 DECLARE @sqlCommand NVARCHAR(1000) = 'BACKUP DATABASE ' + @databaseName 
 										+ ' TO DISK = ''' + @BackupFile + ''' WITH INIT, NAME= ''' 
 										+ @BackupName + ''', SKIP, NOFORMAT'

@@ -94,7 +94,7 @@ namespace Alicargo.Services
 
 		public bool HasPermissionToSetState(long stateId)
 		{
-			// todo: refactor
+			// todo: move cache to an interception
 			return _permissions.GetOrAdd(stateId, x =>
 			{
 				if (_stateConfig.AwbStates.Contains(stateId))

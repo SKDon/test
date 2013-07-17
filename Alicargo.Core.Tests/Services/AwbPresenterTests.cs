@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Alicargo.Tests.Services
+namespace Alicargo.Core.Tests.Services
 {
 	[TestClass]
 	public class AwbPresenterTests

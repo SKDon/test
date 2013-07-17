@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
@@ -16,7 +17,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			Assert.IsNotNull(actual);
 
-			AreEquals(expected, actual);
+			expected.ShouldBeEquivalentTo(actual);
 		}
 
 		[TestMethod]
@@ -73,13 +74,13 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			var data = _applicationRepository.Get(old.Id);
 
-			AreEquals(_applicationRepository.GetInvoiceFile(data.Id).FileData, invoiceFile);
-			AreEquals(_applicationRepository.GetSwiftFile(data.Id).FileData, swiftFile);
-			AreEquals(_applicationRepository.GetCPFile(data.Id).FileData, cpFile);
-			AreEquals(_applicationRepository.GetDeliveryBillFile(data.Id).FileData, deliveryBillFile);
-			AreEquals(_applicationRepository.GetTorg12File(data.Id).FileData, torg12File);
-			AreEquals(_applicationRepository.GetPackingFile(data.Id).FileData, packingFile);
-			AreEquals(data, newData);
+			_applicationRepository.GetInvoiceFile(data.Id).FileData.ShouldBeEquivalentTo(invoiceFile);
+			_applicationRepository.GetSwiftFile(data.Id).FileData.ShouldBeEquivalentTo(swiftFile);
+			_applicationRepository.GetCPFile(data.Id).FileData.ShouldBeEquivalentTo(cpFile);
+			_applicationRepository.GetDeliveryBillFile(data.Id).FileData.ShouldBeEquivalentTo(deliveryBillFile);
+			_applicationRepository.GetTorg12File(data.Id).FileData.ShouldBeEquivalentTo(torg12File);
+			_applicationRepository.GetPackingFile(data.Id).FileData.ShouldBeEquivalentTo(packingFile);
+			data.ShouldBeEquivalentTo(newData);
 		}
 
 		private ApplicationData CreateTestApplication(StateData state = null)

@@ -30,7 +30,7 @@ namespace Alicargo.Services
 
 		public void Update(ApplicationModel model, CarrierSelectModel carrierSelectModel)
 		{
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				_transitService.Update(model.Transit, carrierSelectModel);
 
@@ -44,7 +44,7 @@ namespace Alicargo.Services
 
 		public void Add(ApplicationModel model, CarrierSelectModel carrierSelectModel)
 		{
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				model.TransitId = _transitService.AddTransit(model.Transit, carrierSelectModel);
 				model.StateId = _stateConfig.DefaultStateId;
@@ -63,7 +63,7 @@ namespace Alicargo.Services
 
 		public void Delete(long id)
 		{
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var applicationData = _applicationRepository.Get(id);
 
@@ -93,7 +93,7 @@ namespace Alicargo.Services
 		{
 			if (!_stateService.HasPermissionToSetState(stateId)) throw new AccessForbiddenException("User don't have access to the state " + stateId);
 
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				if (stateId == _stateConfig.CargoInStockStateId)
 				{

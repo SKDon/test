@@ -7,7 +7,6 @@ using Alicargo.Core.Security;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 using Alicargo.DataAccess.Repositories;
-using KellermanSoftware.CompareNetObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
@@ -20,7 +19,6 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		private SqlConnection _connection;
 
 		private Fixture _fixture;
-		private CompareObjects _comparer;
 
 		private IUnitOfWork _unitOfWork;
 		private IApplicationRepository _applicationRepository;
@@ -37,12 +35,6 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		public void TestInitialize()
 		{
 			_fixture = new Fixture();
-			_comparer = new CompareObjects
-			{
-				MaxDifferences = 10,
-				Caching = true,
-				AutoClearCache = false
-			};
 
 			var connectionString = ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
 			_connection = new SqlConnection(connectionString);
@@ -73,18 +65,6 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		private static string RandomString()
 		{
 			return Guid.NewGuid().ToString();
-		}
-
-		private void AreEquals<T>(T one, T other)
-		{
-			if (!_comparer.Compare(one, other))
-				Assert.Fail(_comparer.DifferencesString);
-		}
-
-		private void AreNotEquals<T>(T one, T other)
-		{
-			if (_comparer.Compare(one, other))
-				Assert.Fail("Objects should be not equal");
 		}
 
 		private static byte[] RandomBytes()

@@ -60,8 +60,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		{
 			var states = _stateRepository.GetAvailableStates(RoleType.Admin);
 
-			var awbStates = new long[] { 8, 9, 7 };
-			var all = _stateRepository.GetAll().Where(x => !awbStates.Contains(x.Id)).ToArray();
+			var all = _stateRepository.GetAll().ToArray();
 
 			Assert.AreEqual(all.Length, states.Length);
 

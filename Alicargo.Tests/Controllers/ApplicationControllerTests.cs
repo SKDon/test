@@ -1,37 +1,41 @@
 ﻿using System.Data.SqlClient;
 using System.Transactions;
+using Alicargo.App_Start;
+using Alicargo.Controllers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.Tests.Properties;
-using KellermanSoftware.CompareNetObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ninject;
 using Ploeh.AutoFixture;
 
 namespace Alicargo.Tests.Controllers
 {
-	[TestClass, Ignore]
-	public class DummyTests
+	[TestClass]
+	public class ApplicationControllerTests
 	{
-		private Fixture _fixture;
-		private CompareObjects _comparer;
+		private IFixture _fixture;
 		private TransactionScope _transactionScope;
 		private SqlConnection _connection;
 		private AlicargoDataContext _db;
+		private StandardKernel _kernel;
+		private ApplicationController _controller;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_fixture = new Fixture();
-			_comparer = new CompareObjects
-			{
-				MaxDifferences = 10,
-				Caching = true,
-				AutoClearCache = false
-			};
+			_kernel = new StandardKernel();
+			_fixture = new Fixture();			
 
 			_connection = new SqlConnection(Settings.Default.MainConnectionString);
 			_connection.Open();
 			_db = new AlicargoDataContext(_connection);
 			_transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
+
+			
+			CompositionRoot.BindServices(_kernel);
+			_kernel.Bind<ApplicationController>().ToSelf();
+
+			_controller = _kernel.Get<ApplicationController>();
 		}
 
 		[TestCleanup]
@@ -39,11 +43,13 @@ namespace Alicargo.Tests.Controllers
 		{
 			_transactionScope.Dispose();
 			_connection.Close();
+			_kernel.Dispose();
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_Name()
+		public void Test_List()
 		{
+			var result = _controller.List(10, 0, 1, 10, null);
 		}
 	}
 }

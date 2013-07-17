@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Models;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
@@ -15,7 +16,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			var actual = _transitRepository.Get(transit.Id).First();
 
-			AreEquals(transit, actual);
+			transit.ShouldBeEquivalentTo(actual);
 		}
 
 		[TestMethod]
@@ -30,8 +31,8 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			_unitOfWork.SaveChanges();
 			var actual = _transitRepository.Get(newData.Id).First();
 
-			AreNotEquals(oldData, actual);
-			AreEquals(newData, actual);
+			oldData.Should().NotBeSameAs(actual); // todo: test
+			newData.ShouldBeEquivalentTo(actual);
 		}
 
 		Transit CreateTestTransit()

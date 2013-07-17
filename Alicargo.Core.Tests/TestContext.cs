@@ -2,19 +2,16 @@
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using KellermanSoftware.CompareNetObjects;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using Ploeh.AutoFixture.Dsl;
 
-namespace Alicargo.Tests
+namespace Alicargo.Core.Tests
 {
-	class TestContext
+	sealed class TestContext
 	{
 		public Fixture Fixture { get; private set; }
-		private readonly CompareObjects _comparer;
 
 		public Mock<IIdentityService> IdentityService { get; private set; }
 		public Mock<IStateRepository> StateRepository { get; private set; }
@@ -30,12 +27,7 @@ namespace Alicargo.Tests
 		{
 			Fixture = new Fixture();
 			Fixture.Customize(new AutoMoqCustomization());
-			_comparer = new CompareObjects
-			{
-				MaxDifferences = 3,
-				Caching = true,
-				AutoClearCache = false
-			};
+			
 
 			Fixture.Register(() =>
 				Fixture.Build<ReferenceModel>()
@@ -75,18 +67,6 @@ namespace Alicargo.Tests
 		public IEnumerable<T> CreateMany<T>(int count = 3)
 		{
 			return Fixture.CreateMany<T>(count);
-		}
-
-		public void AreEquals<T>(T one, T other)
-		{
-			if (!_comparer.Compare(one, other))
-				Assert.Fail(_comparer.DifferencesString);
-		}
-
-		public void AreNotEquals<T>(T one, T other)
-		{
-			if (_comparer.Compare(one, other))
-				Assert.Fail("Objects should be not equal");
 		}
 	}
 }

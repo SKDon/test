@@ -10,11 +10,11 @@ namespace Alicargo.Services
 {
 	public sealed class AwbManager : IAwbManager
 	{
-		private readonly IReferenceRepository _referenceRepository;		
+		private readonly IReferenceRepository _referenceRepository;
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationManager _applicationManager;
 		private readonly IStateConfig _stateConfig;
-		
+
 		private readonly IUnitOfWork _unitOfWork;
 
 		public AwbManager(
@@ -36,7 +36,7 @@ namespace Alicargo.Services
 			model.CreationTimestamp = DateTimeOffset.UtcNow;
 			model.StateChangeTimestamp = DateTimeOffset.UtcNow;
 
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				model.StateId = _stateConfig.CargoIsFlewStateId;
 				var id = _referenceRepository.Add(model, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile);
@@ -56,7 +56,7 @@ namespace Alicargo.Services
 			{
 				var aggregate = _referenceRepository.GetAggregate(awbId.Value).First();
 
-				using (var ts = _unitOfWork.GetTransactionScope())
+				using (var ts = _unitOfWork.StartTransaction())
 				{
 					// SetReference must be first
 					_applicationRepository.SetReference(applicationId, awbId.Value);
@@ -78,16 +78,16 @@ namespace Alicargo.Services
 
 		public void Update(ReferenceModel model)
 		{
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var old = _referenceRepository.Get(model.Id).First();
 
 				// Update must be before SetState
 				_referenceRepository.Update(model, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile);
-				
+
 				if (IsReadyForCargoAtCustomsStateId(model))
 				{
-					if (!IsReadyForCargoAtCustomsStateId(old)) // todo: test
+					if (!IsReadyForCargoAtCustomsStateId(old) && old.StateId != _stateConfig.CargoIsCustomsClearedStateId)
 						SetState(model.Id, _stateConfig.CargoAtCustomsStateId);
 				}
 
@@ -105,7 +105,7 @@ namespace Alicargo.Services
 		// todo: test
 		public void Delete(long id)
 		{
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var applicationDatas = _applicationRepository.GetByReference(id);
 
@@ -128,14 +128,14 @@ namespace Alicargo.Services
 
 			var applications = _applicationRepository.GetByReference(referenceId);
 
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				_referenceRepository.SetState(referenceId, stateId);
 
 				foreach (var application in applications)
 				{
 					if (reference.StateId == application.StateId)
-					{						
+					{
 						_applicationManager.SetState(application.Id, stateId);
 					}
 				}

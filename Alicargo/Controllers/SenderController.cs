@@ -103,7 +103,7 @@ namespace Alicargo.Controllers
 			var clientData = _clientRepository.Get(id).First();
 			var transitData = _transitRepository.Get(clientData.TransitId).First();
 
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var tid = _transitRepository.Add(transitData);
 				_unitOfWork.SaveChanges();

@@ -12,7 +12,7 @@ namespace Alicargo.DataAccess.DbContext
 	{
 		public DataContext Context { get; private set; }
 
-		public ITransaction GetTransactionScope()
+		public ITransaction StartTransaction()
 		{
 			// todo: refactor using of transactions
 			// TransactionScopeOption.RequiresNew

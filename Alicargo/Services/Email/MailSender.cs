@@ -49,6 +49,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
+		// todo: dont like it
 		public string DefaultFrom
 		{
 			get

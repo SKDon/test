@@ -73,7 +73,7 @@ namespace Alicargo.Services
 			if (!HaveAccessToClient(model))
 				throw new AccessForbiddenException();
 
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				_transitService.Update(model.Transit, carrierSelectModel);
 
@@ -92,7 +92,7 @@ namespace Alicargo.Services
 			if (!HaveAccessToClient(model))
 				throw new AccessForbiddenException();
 
-			using (var ts = _unitOfWork.GetTransactionScope())
+			using (var ts = _unitOfWork.StartTransaction())
 			{
 				model.TransitId = _transitService.AddTransit(model.Transit, carrierSelectModel);
 

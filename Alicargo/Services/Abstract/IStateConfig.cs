@@ -34,20 +34,20 @@
 		}
 
 		/// <summary>
-		/// Груз выпущен - 9
-		/// Можно редактировать статус заявки
+		/// Груз на таможне - 8
 		/// Можно назначать, если указано ГТД
 		/// </summary>
-		long CargoIsCustomsClearedStateId
+		long CargoAtCustomsStateId
 		{
 			get;
 		}
 
 		/// <summary>
-		/// Груз на таможне - 8
+		/// Груз выпущен - 9
+		/// Можно редактировать статус заявки
 		/// Можно назначать, если указано ГТД
 		/// </summary>
-		long CargoAtCustomsStateId
+		long CargoIsCustomsClearedStateId
 		{
 			get;
 		}

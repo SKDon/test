@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Core.Models;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
@@ -26,7 +27,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			var actual = _carrierRepository.Get(carrier.Name);
 
-			AreEquals(actual, carrier);
+			actual.ShouldBeEquivalentTo(carrier);
 
 			var carriers = _carrierRepository.GetAll();
 

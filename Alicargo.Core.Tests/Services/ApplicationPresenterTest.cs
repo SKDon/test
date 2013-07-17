@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.Tests.Services
+namespace Alicargo.Core.Tests.Services
 {
 	[TestClass]
 	public class ApplicationPresenterTest
@@ -21,7 +21,7 @@ namespace Alicargo.Tests.Services
 			_service = _context.Create<ApplicationPresenter>();
 		}
 
-		[TestMethod, Ignore]
+		[TestMethod, Ignore] // todo: fix
 		public void Test_GetAvailableStates_CargoIsCustomsClearedStateId()
 		{
 			var cargoIsCustomsClearedStateId = _context.Create<long>();

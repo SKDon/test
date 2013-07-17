@@ -3,20 +3,23 @@ using System.Linq;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Services;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Alicargo.Tests.Services
+namespace Alicargo.Core.Tests.Services
 {
 	[TestClass]
 	public class StateServiceTests
 	{
 		private TestContext _context;
+		private StateService _stateService;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new TestContext();
+			_stateService = _context.Create<StateService>();
 		}
 
 		[TestMethod]
@@ -28,9 +31,7 @@ namespace Alicargo.Tests.Services
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(true);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
 
-			var stateService = _context.Create<StateService>();
-
-			Assert.IsTrue(stateService.HasPermissionToSetState(stateId));
+			Assert.IsTrue(_stateService.HasPermissionToSetState(stateId));
 
 			_context.IdentityService.Verify(x => x.IsInRole(RoleType.Brocker), Times.Once());
 			_context.StateRepository.Verify(x => x.GetAvailableRoles(stateId), Times.Once());
@@ -45,9 +46,7 @@ namespace Alicargo.Tests.Services
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
 
-			var stateService = _context.Create<StateService>();
-
-			Assert.IsFalse(stateService.HasPermissionToSetState(stateId));
+			Assert.IsFalse(_stateService.HasPermissionToSetState(stateId));
 
 			_context.IdentityService.Verify(x => x.IsInRole(RoleType.Brocker), Times.Once());
 			_context.IdentityService.Verify(x => x.IsInRole(RoleType.Client), Times.Once());
@@ -72,10 +71,9 @@ namespace Alicargo.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
 				_context.StateRepository.Setup(x => x.GetAvailableStates(type)).Returns(states);
 
-				var stateService = _context.Create<StateService>();
-				var availableStates = stateService.GetAvailableStates();
+				var availableStates = _stateService.GetAvailableStates();
+				states.ShouldBeEquivalentTo(availableStates);
 
-				_context.AreEquals(states, availableStates);
 				_context.IdentityService.Verify(x => x.IsInRole(type));
 				_context.StateRepository.Verify(x => x.GetAvailableStates(type));
 
@@ -93,9 +91,8 @@ namespace Alicargo.Tests.Services
 				var type = roleType;
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
 			}
-
-			var stateService = _context.Create<StateService>();
-			stateService.GetAvailableStates();
+			
+			_stateService.GetAvailableStates();
 		}
 
 		[TestMethod]
@@ -116,10 +113,9 @@ namespace Alicargo.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
 				_context.StateRepository.Setup(x => x.GetVisibleStates(type)).Returns(states);
 
-				var stateService = _context.Create<StateService>();
-				var availableStates = stateService.GetVisibleStates();
+				var availableStates = _stateService.GetVisibleStates();
+				states.ShouldBeEquivalentTo(availableStates);
 
-				_context.AreEquals(states, availableStates);
 				_context.IdentityService.Verify(x => x.IsInRole(type));
 				_context.StateRepository.Verify(x => x.GetVisibleStates(type));
 
@@ -138,8 +134,7 @@ namespace Alicargo.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
 			}
 
-			var stateService = _context.Create<StateService>();
-			stateService.GetVisibleStates();
+			_stateService.GetVisibleStates();
 		}
 	}
 }

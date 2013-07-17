@@ -1,6 +1,7 @@
 ﻿using Alicargo.Core.Contracts;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Models;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
@@ -55,13 +56,13 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			Assert.IsNotNull(byId);
 
-			AreEquals(client, byId);
+			client.ShouldBeEquivalentTo(byId);
 
 			var byUserId = _clientRepository.GetByUserId(client.UserId);
 
 			Assert.IsNotNull(byUserId);
 
-			AreEquals(client, byUserId);
+			client.ShouldBeEquivalentTo(byUserId);
 		}
 
 		[TestMethod]
@@ -92,7 +93,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			var byId = _clientRepository.GetById(client.Id);
 
-			AreEquals(client, byId);
+			client.ShouldBeEquivalentTo(byId);
 		}
 	}
 }
