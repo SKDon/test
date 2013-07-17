@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.Core.BlackBox.Tests", "Alicargo.Core.BlackBox.Tests\Alicargo.Core.BlackBox.Tests.csproj", "{1211A26B-2E40-4047-96D3-97D489915412}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.TestHelpers", "Alicargo.TestHelpers\Alicargo.TestHelpers.csproj", "{BB7C7B4A-D181-4812-89BC-29EB406E9656}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{1211A26B-2E40-4047-96D3-97D489915412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1211A26B-2E40-4047-96D3-97D489915412}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1211A26B-2E40-4047-96D3-97D489915412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB7C7B4A-D181-4812-89BC-29EB406E9656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB7C7B4A-D181-4812-89BC-29EB406E9656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB7C7B4A-D181-4812-89BC-29EB406E9656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB7C7B4A-D181-4812-89BC-29EB406E9656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +85,6 @@ Global
 		{80AA7A64-E347-4A12-89F0-E81E4B581954} = {E2E8A1A5-5B18-4BE8-8ED8-4E4876768D7F}
 		{8FD4B54B-0621-4C22-A6DE-C357C9948E30} = {E2E8A1A5-5B18-4BE8-8ED8-4E4876768D7F}
 		{1211A26B-2E40-4047-96D3-97D489915412} = {E2E8A1A5-5B18-4BE8-8ED8-4E4876768D7F}
+		{BB7C7B4A-D181-4812-89BC-29EB406E9656} = {E2E8A1A5-5B18-4BE8-8ED8-4E4876768D7F}
 	EndGlobalSection
 EndGlobal

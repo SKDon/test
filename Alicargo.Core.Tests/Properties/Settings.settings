@@ -2,15 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Alicargo.Core.Tests.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="BaseAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:1893/</Value>
-    </Setting>
-    <Setting Name="Login" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Admin</Value>
-    </Setting>
-    <Setting Name="Password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Admin</Value>
-    </Setting>
     <Setting Name="MailsFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\S\Projects\Alicargo\Alicargo\Mails</Value>
     </Setting>

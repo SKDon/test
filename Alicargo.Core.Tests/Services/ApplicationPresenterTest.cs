@@ -10,13 +10,13 @@ namespace Alicargo.Core.Tests.Services
 	[TestClass]
 	public class ApplicationPresenterTest
 	{
-		private TestContext _context;
+		private TestHelpers.TestContext _context;
 		private ApplicationPresenter _service;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new TestContext();
+			_context = new TestHelpers.TestContext();
 
 			_service = _context.Create<ApplicationPresenter>();
 		}

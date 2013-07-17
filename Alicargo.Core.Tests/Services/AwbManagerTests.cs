@@ -15,7 +15,7 @@ namespace Alicargo.Core.Tests.Services
 	[TestClass]
 	public class AwbManagerTests
 	{
-		private TestContext _context;
+		private TestHelpers.TestContext _context;
 		private AwbManager _manager;
 
 		private void VerifyUnitOfWork()
@@ -53,7 +53,7 @@ namespace Alicargo.Core.Tests.Services
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new TestContext();
+			_context = new TestHelpers.TestContext();
 
 			_manager = _context.Create<AwbManager>();
 		}

@@ -7,9 +7,9 @@ using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using Ploeh.AutoFixture.Dsl;
 
-namespace Alicargo.Core.Tests
+namespace Alicargo.TestHelpers
 {
-	sealed class TestContext
+	public sealed class TestContext
 	{
 		public Fixture Fixture { get; private set; }
 
@@ -27,7 +27,7 @@ namespace Alicargo.Core.Tests
 		{
 			Fixture = new Fixture();
 			Fixture.Customize(new AutoMoqCustomization());
-			
+
 
 			Fixture.Register(() =>
 				Fixture.Build<ReferenceModel>()

@@ -12,13 +12,13 @@ namespace Alicargo.Core.Tests.Services
 	[TestClass]
 	public class MailSenderTests
 	{
-		private TestContext _context;
+		private TestHelpers.TestContext _context;
 		private MailSender _sender;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new TestContext();
+			_context = new TestHelpers.TestContext();
 			_sender = new MailSender();
 
 			if (!Directory.Exists(Settings.Default.MailsFolder))

@@ -75,12 +75,15 @@
     <Compile Include="Services\AwbPresenterTests.cs" />
     <Compile Include="Services\MailSenderTests.cs" />
     <Compile Include="Services\StateServiceTests.cs" />
-    <Compile Include="TestContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
       <Project>{577b60f9-32f7-4117-97da-40743bff4ca0}</Project>
       <Name>Alicargo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.TestHelpers\Alicargo.TestHelpers.csproj">
+      <Project>{bb7c7b4a-d181-4812-89bc-29eb406e9656}</Project>
+      <Name>Alicargo.TestHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alicargo\Alicargo.csproj">
       <Project>{8666b402-84b6-49d4-abd7-b2966955c9cb}</Project>

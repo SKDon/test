@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Alicargo.Core.Tests.Properties {
+namespace Alicargo.DataAccess.Tests.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -23,15 +23,13 @@ namespace Alicargo.Core.Tests.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\S\\Projects\\Alicargo\\Alicargo\\Mails")]
-        public string MailsFolder {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\;Initial Catalog=Alicargo;Integrated Security=True")]
+        public string MainConnectionString {
             get {
-                return ((string)(this["MailsFolder"]));
-            }
-            set {
-                this["MailsFolder"] = value;
+                return ((string)(this["MainConnectionString"]));
             }
         }
     }

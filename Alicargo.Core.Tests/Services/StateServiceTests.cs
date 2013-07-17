@@ -12,13 +12,13 @@ namespace Alicargo.Core.Tests.Services
 	[TestClass]
 	public class StateServiceTests
 	{
-		private TestContext _context;
+		private TestHelpers.TestContext _context;
 		private StateService _stateService;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new TestContext();
+			_context = new TestHelpers.TestContext();
 			_stateService = _context.Create<StateService>();
 		}
 
