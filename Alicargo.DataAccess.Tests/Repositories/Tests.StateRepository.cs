@@ -25,7 +25,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			var state = _stateRepository.Get(DefaultStateId);
 
 			Assert.AreEqual("Nuovo", state.Localization[TwoLetterISOLanguageName.Italian]);
-			Assert.AreEqual("New", state.Localization[TwoLetterISOLanguageName.English]);
+			Assert.AreEqual("New order", state.Localization[TwoLetterISOLanguageName.English]);
 			Assert.AreEqual("Новая заявка", state.Localization[TwoLetterISOLanguageName.Russian]);
 			Assert.AreEqual(10, state.Position);
 		}

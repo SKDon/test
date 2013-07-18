@@ -36,7 +36,8 @@ namespace Alicargo.Core.BlackBox.Tests
 			_stateService = new StateService(
 				new StateRepository(unitOfWork),
 				_identityService.Object,
-				_stateConfig);
+				_stateConfig,
+				new ReferenceRepository(unitOfWork));
 		}
 
 		[TestCleanup]

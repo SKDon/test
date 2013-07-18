@@ -7,6 +7,7 @@ using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
+using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services
 {
@@ -17,15 +18,16 @@ namespace Alicargo.Services
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateRepository _stateRepository;
 		private readonly ConcurrentDictionary<long, bool> _permissions = new ConcurrentDictionary<long, bool>();
+		private readonly IReferenceRepository _referenceRepository;
 
-		public StateService(IStateRepository stateRepository, IIdentityService identity, IStateConfig stateConfig)
+		public StateService(IStateRepository stateRepository, IIdentityService identity, IStateConfig stateConfig, IReferenceRepository referenceRepository)
 		{
 			_stateRepository = stateRepository;
 			_identity = identity;
 			_stateConfig = stateConfig;
+			_referenceRepository = referenceRepository;
 		}
 
-		// todo: test
 		public long[] GetAvailableStatesToSet()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
@@ -54,7 +56,7 @@ namespace Alicargo.Services
 				return _stateRepository.GetAvailableStates(RoleType.Brocker);
 			}
 
-			throw new InvalidLogicException();
+			throw new InvalidLogicException("Unsupported role");
 		}
 
 		public long[] GetVisibleStates()
@@ -96,6 +98,49 @@ namespace Alicargo.Services
 				var roles = _stateRepository.GetAvailableRoles(x);
 				return roles.Any(role => _identity.IsInRole(role));
 			});
+		}
+
+		// todo: move to repository and test
+		public long[] FilterByPosition(long[] states, int position)
+		{
+			return _stateRepository.GetAll() // todo: pass states to Get
+				.Where(x => states.Contains(x.Id) && x.Position >= position)
+				.Select(x => x.Id)
+				.ToArray();
+		}
+
+		public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates)
+		{
+			var states = availableStates.ToList();
+
+			if (!applicationData.Gross.HasValue || !applicationData.Count.HasValue)
+			{
+				states.Remove(_stateConfig.CargoInStockStateId);
+			}
+
+			#region AWB
+
+			if (!applicationData.ReferenceId.HasValue)
+			{
+				states.Remove(_stateConfig.CargoIsFlewStateId);
+			}
+
+			if (applicationData.ReferenceId.HasValue)
+			{
+				var referenceData = _referenceRepository.Get(applicationData.ReferenceId.Value).First();
+				if (referenceData.GTD.IsNullOrWhiteSpace())
+				{
+					states.Remove(_stateConfig.CargoAtCustomsStateId);
+				}
+			}
+			else
+			{
+				states.Remove(_stateConfig.CargoAtCustomsStateId);
+			}
+
+			#endregion
+
+			return states.ToArray();
 		}
 
 		public Dictionary<long, string> GetLocalizedDictionary(IEnumerable<long> stateIds = null)

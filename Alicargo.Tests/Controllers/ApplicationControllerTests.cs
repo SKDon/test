@@ -46,7 +46,7 @@ namespace Alicargo.Tests.Controllers
 			_kernel.Dispose();
 		}
 
-		[TestMethod, TestCategory("black-box"), Ignore] // todo: fix
+		[TestMethod, TestCategory("black-box")]
 		public void Test_List()
 		{
 			var result = _controller.List(10, 0, 1, 10, null);

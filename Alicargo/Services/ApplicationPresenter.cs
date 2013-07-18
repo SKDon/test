@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Helpers;
@@ -110,54 +109,21 @@ namespace Alicargo.Services
 			return application;
 		}
 
-		// todo: test 1.
 		public ApplicationStateModel[] GetAvailableStates(long id)
 		{
 			var applicationData = _applicationRepository.Get(id);
 
-			var availableStates = _stateService.GetAvailableStatesToSet().ToList();
+			var states = _stateService.GetAvailableStatesToSet();
 
-			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(availableStates);
+			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
 
-			availableStates = ApplyBusinessLogicToStates(applicationData, availableStates);
-
-			return ToApplicationStateModel(availableStates);
-		}
-
-		private List<long> ApplyBusinessLogicToStates(ApplicationData applicationData, ICollection<long> availableStates)
-		{
-			if (!applicationData.Gross.HasValue || !applicationData.Count.HasValue)
-			{
-				availableStates.Remove(_stateConfig.CargoInStockStateId);
-			}
-
-			#region AWB
-
-			if (!applicationData.ReferenceId.HasValue)
-			{
-				availableStates.Remove(_stateConfig.CargoIsFlewStateId);
-			}
-
-			if (applicationData.ReferenceId.HasValue)
-			{
-				var referenceData = _referenceRepository.Get(applicationData.ReferenceId.Value).First();
-				if (referenceData.GTD.IsNullOrWhiteSpace())
-				{
-					availableStates.Remove(_stateConfig.CargoAtCustomsStateId);
-				}
-			}
-			else
-			{
-				availableStates.Remove(_stateConfig.CargoAtCustomsStateId);
-			}
-
-			#endregion
+			states = _stateService.ApplyBusinessLogicToStates(applicationData, states);
 
 			var currentState = _stateRepository.Get(applicationData.StateId);
-			return _stateRepository.GetAll() // todo: pass availableStates to Get
-				.Where(x => availableStates.Contains(x.Id) && x.Position >= currentState.Position)
-				.Select(x => x.Id)
-				.ToList();
+
+			states = _stateService.FilterByPosition(states, currentState.Position);
+
+			return ToApplicationStateModel(states);
 		}
 
 		private ApplicationStateModel[] ToApplicationStateModel(IEnumerable<long> ids)

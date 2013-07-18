@@ -10,5 +10,7 @@ namespace Alicargo.Services.Abstract
 		Dictionary<long, string> GetLocalizedDictionary(IEnumerable<long> stateIds = null);
 		Dictionary<long, StateData> GetDictionary();
 		bool HasPermissionToSetState(long stateId);
+		long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates);
+		long[] FilterByPosition(long[] states, int position);
 	}
 }
