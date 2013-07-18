@@ -47,7 +47,7 @@ namespace Alicargo.Core.BlackBox.Tests
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_HasPermissionToSetState_Admin()
+		public void Test_HasPermissionToSetState_Awb_Admin()
 		{
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
@@ -62,22 +62,37 @@ namespace Alicargo.Core.BlackBox.Tests
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_HasPermissionToSetState_Sender()
+		public void Test_HasPermissionToSetState_Awb_Sender()
 		{
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(true);
 			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Forwarder)).Returns(false);
 
-			foreach (var state in _stateConfig.AwbStates)
-			{
-				_stateService.HasPermissionToSetState(state).Should().BeTrue();
-			}
+			_stateService.HasPermissionToSetState(_stateConfig.CargoIsFlewStateId).Should().BeTrue();
+			_stateService.HasPermissionToSetState(_stateConfig.CargoAtCustomsStateId).Should().BeFalse();
+			_stateService.HasPermissionToSetState(_stateConfig.CargoIsCustomsClearedStateId).Should().BeFalse();
 
 			_identityService.Verify(x => x.IsInRole(RoleType.Sender));
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_HasPermissionToSetState_Brocker()
+		public void Test_HasPermissionToSetState_Awb_Forwarder()
+		{
+			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Forwarder)).Returns(true);
+
+			_stateService.HasPermissionToSetState(_stateConfig.CargoIsFlewStateId).Should().BeFalse();
+			_stateService.HasPermissionToSetState(_stateConfig.CargoAtCustomsStateId).Should().BeFalse();
+			_stateService.HasPermissionToSetState(_stateConfig.CargoIsCustomsClearedStateId).Should().BeTrue();
+
+			_identityService.Verify(x => x.IsInRole(RoleType.Forwarder));
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_HasPermissionToSetState_Awb_Brocker()
 		{
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
@@ -89,6 +104,23 @@ namespace Alicargo.Core.BlackBox.Tests
 			}
 
 			_identityService.Verify(x => x.IsInRole(RoleType.Brocker));
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_HasPermissionToSetState_Awb_Client()
+		{
+			_identityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(true);
+			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Forwarder)).Returns(false);
+
+			foreach (var state in _stateConfig.AwbStates)
+			{
+				_stateService.HasPermissionToSetState(state).Should().BeFalse();
+			}
+
+			_identityService.Verify(x => x.IsInRole(RoleType.Client), Times.Never());
 		}
 	}
 }
