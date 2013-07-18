@@ -5,7 +5,7 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IStateService
 	{
-		long[] GetAvailableStates();
+		long[] GetAvailableStatesToSet();
 		long[] GetVisibleStates();
 		Dictionary<long, string> GetLocalizedDictionary(IEnumerable<long> stateIds = null);
 		Dictionary<long, StateData> GetDictionary();

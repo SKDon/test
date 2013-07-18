@@ -71,7 +71,7 @@ namespace Alicargo.Core.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
 				_context.StateRepository.Setup(x => x.GetAvailableStates(type)).Returns(states);
 
-				var availableStates = _stateService.GetAvailableStates();
+				var availableStates = _stateService.GetAvailableStatesToSet();
 				states.ShouldBeEquivalentTo(availableStates);
 
 				_context.IdentityService.Verify(x => x.IsInRole(type));
@@ -92,7 +92,7 @@ namespace Alicargo.Core.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
 			}
 			
-			_stateService.GetAvailableStates();
+			_stateService.GetAvailableStatesToSet();
 		}
 
 		[TestMethod]

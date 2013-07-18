@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using Alicargo.Core.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Helpers;
@@ -13,6 +13,7 @@ using Resources;
 namespace Alicargo.Services
 {
 	// todo: test
+	// todo: adhere SRP
 	public sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IIdentityService _identity;
@@ -109,21 +110,32 @@ namespace Alicargo.Services
 			return application;
 		}
 
-		// todo: test
+		// todo: test 1.
 		public ApplicationStateModel[] GetAvailableStates(long id)
 		{
 			var applicationData = _applicationRepository.Get(id);
 
-			var ids = _stateService.GetAvailableStates().ToList();
+			var availableStates = _stateService.GetAvailableStatesToSet().ToList();
 
+			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(availableStates);
+
+			availableStates = ApplyBusinessLogicToStates(applicationData, availableStates);
+
+			return ToApplicationStateModel(availableStates);
+		}
+
+		private List<long> ApplyBusinessLogicToStates(ApplicationData applicationData, ICollection<long> availableStates)
+		{
 			if (!applicationData.Gross.HasValue || !applicationData.Count.HasValue)
 			{
-				ids.Remove(_stateConfig.CargoInStockStateId);
+				availableStates.Remove(_stateConfig.CargoInStockStateId);
 			}
+
+			#region AWB
 
 			if (!applicationData.ReferenceId.HasValue)
 			{
-				ids.Remove(_stateConfig.CargoIsFlewStateId);
+				availableStates.Remove(_stateConfig.CargoIsFlewStateId);
 			}
 
 			if (applicationData.ReferenceId.HasValue)
@@ -131,21 +143,21 @@ namespace Alicargo.Services
 				var referenceData = _referenceRepository.Get(applicationData.ReferenceId.Value).First();
 				if (referenceData.GTD.IsNullOrWhiteSpace())
 				{
-					ids.Remove(_stateConfig.CargoAtCustomsStateId);
+					availableStates.Remove(_stateConfig.CargoAtCustomsStateId);
 				}
 			}
 			else
 			{
-				ids.Remove(_stateConfig.CargoAtCustomsStateId);
+				availableStates.Remove(_stateConfig.CargoAtCustomsStateId);
 			}
 
-			if (!_identity.IsInRole(RoleType.Admin))
-			{
-				var state = _stateRepository.Get(applicationData.StateId);
-				ids = _stateRepository.GetAll().Where(x => ids.Contains(x.Id) && x.Position >= state.Position).Select(x => x.Id).ToList();
-			}
+			#endregion
 
-			return ToApplicationStateModel(ids);
+			var currentState = _stateRepository.Get(applicationData.StateId);
+			return _stateRepository.GetAll() // todo: pass availableStates to Get
+				.Where(x => availableStates.Contains(x.Id) && x.Position >= currentState.Position)
+				.Select(x => x.Id)
+				.ToList();
 		}
 
 		private ApplicationStateModel[] ToApplicationStateModel(IEnumerable<long> ids)
@@ -186,13 +198,18 @@ namespace Alicargo.Services
 			var applicationWithCountry = applications.Where(x => x.CountryId.HasValue).ToArray();
 
 			var countries = _countryRepository
+				// ReSharper disable PossibleInvalidOperationException
 				.Get(applicationWithCountry.Select(x => x.CountryId.Value).ToArray())
+				// ReSharper restore PossibleInvalidOperationException
 				.ToDictionary(x => x.Id, x => x.Name);
 
 			foreach (var application in applicationWithCountry)
 			{
-				Debug.Assert(application.CountryId.HasValue);
+				// ReSharper disable PossibleInvalidOperationException
+				// ReSharper disable AssignNullToNotNullAttribute
 				application.CountryName = countries[application.CountryId.Value][_identity.TwoLetterISOLanguageName];
+				// ReSharper restore AssignNullToNotNullAttribute
+				// ReSharper restore PossibleInvalidOperationException
 			}
 		}
 
@@ -255,7 +272,7 @@ namespace Alicargo.Services
 		{
 			var localizedStates = _stateService.GetLocalizedDictionary();
 
-			var availableStates = _stateService.GetAvailableStates();
+			var availableStates = _stateService.GetAvailableStatesToSet();
 
 			var states = _stateService.GetDictionary();
 
@@ -263,10 +280,10 @@ namespace Alicargo.Services
 			{
 				var state = states[application.StateId];
 
-				application.CanClose = state.Id == _stateConfig.CargoOnTransitStateId; // todo: test
+				application.CanClose = state.Id == _stateConfig.CargoOnTransitStateId; // todo: test 1.
 
-				// todo: test										  
-				application.CanSetState = availableStates.Contains(application.StateId);					
+				// todo: test 1.
+				application.CanSetState = availableStates.Contains(application.StateId);
 
 				application.StateName = localizedStates[application.StateId];
 			}

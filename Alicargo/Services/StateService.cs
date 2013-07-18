@@ -25,7 +25,8 @@ namespace Alicargo.Services
 			_stateConfig = stateConfig;
 		}
 
-		public long[] GetAvailableStates()
+		// todo: test
+		public long[] GetAvailableStatesToSet()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
 			{
@@ -34,7 +35,7 @@ namespace Alicargo.Services
 
 			if (_identity.IsInRole(RoleType.Client))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Client);
+				return _stateRepository.GetAvailableStates(RoleType.Client).Except(_stateConfig.AwbStates).ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Forwarder))
@@ -44,7 +45,13 @@ namespace Alicargo.Services
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Sender);//.Concat(_stateConfig.AwbStates).ToArray();
+				return _stateRepository.GetAvailableStates(RoleType.Sender).Except(_stateConfig.AwbStates).ToArray();
+			}
+
+			// todo: brocker should not get here
+			if (_identity.IsInRole(RoleType.Brocker))
+			{
+				return _stateRepository.GetAvailableStates(RoleType.Brocker);
 			}
 
 			throw new InvalidLogicException();
@@ -72,7 +79,23 @@ namespace Alicargo.Services
 				return _stateRepository.GetVisibleStates(RoleType.Sender);
 			}
 
+			// todo: brocker should not get here
+			if (_identity.IsInRole(RoleType.Brocker))
+			{
+				return _stateRepository.GetVisibleStates(RoleType.Brocker);
+			}
+
 			throw new InvalidLogicException();
+		}
+
+		public bool HasPermissionToSetState(long stateId)
+		{
+			// todo: move cache to an interception
+			return _permissions.GetOrAdd(stateId, x =>
+			{
+				var roles = _stateRepository.GetAvailableRoles(x);
+				return roles.Any(role => _identity.IsInRole(role));
+			});
 		}
 
 		public Dictionary<long, string> GetLocalizedDictionary(IEnumerable<long> stateIds = null)
@@ -90,24 +113,6 @@ namespace Alicargo.Services
 		public Dictionary<long, StateData> GetDictionary()
 		{
 			return _stateRepository.GetAll().ToDictionary(x => x.Id, x => x);
-		}
-
-		public bool HasPermissionToSetState(long stateId)
-		{
-			// todo: move cache to an interception
-			return _permissions.GetOrAdd(stateId, x =>
-			{
-				if (_stateConfig.AwbStates.Contains(x))
-				{
-					if (_identity.IsInRole(RoleType.Sender))
-					{
-						return true;
-					}
-				}
-
-				var roles = _stateRepository.GetAvailableRoles(x);
-				return roles.Any(role => _identity.IsInRole(role));
-			});
 		}
 	}
 }
