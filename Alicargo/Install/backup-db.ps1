@@ -1,7 +1,7 @@
 param (
-    [string]$server = (Read-Host -Prompt "Input server name")
-	[string]$backupLocation,
-	[string]$databaseName
+    [string]$server = (Read-Host -Prompt "Input server name"),
+	[string]$backupLocation = (Read-Host -Prompt "Input backup location"),
+	[string]$databaseName = (Read-Host -Prompt "Input database name")
 )
 
 if (!(Test-Path $backupLocation))
