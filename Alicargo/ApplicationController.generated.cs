@@ -354,6 +354,7 @@ namespace Alicargo.Controllers
                 public readonly string ForwarderColumns = "ForwarderColumns";
                 public readonly string Index = "Index";
                 public readonly string SenderColumns = "SenderColumns";
+                public readonly string SenderDetails = "SenderDetails";
                 public readonly string Tools = "Tools";
             }
             public readonly string AdminColumns = "~/Views/Application/AdminColumns.cshtml";
@@ -366,6 +367,7 @@ namespace Alicargo.Controllers
             public readonly string ForwarderColumns = "~/Views/Application/ForwarderColumns.cshtml";
             public readonly string Index = "~/Views/Application/Index.cshtml";
             public readonly string SenderColumns = "~/Views/Application/SenderColumns.cshtml";
+            public readonly string SenderDetails = "~/Views/Application/SenderDetails.cshtml";
             public readonly string Tools = "~/Views/Application/Tools.cshtml";
             static readonly _DisplayTemplatesClass s_DisplayTemplates = new _DisplayTemplatesClass();
             public _DisplayTemplatesClass DisplayTemplates { get { return s_DisplayTemplates; } }

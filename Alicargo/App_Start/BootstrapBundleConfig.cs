@@ -28,7 +28,7 @@ namespace Alicargo.App_Start
 					"~/Scripts/bootstrap.js",
 					"~/Scripts/bootstrap-fileupload.js",
 					"~/Scripts/jquery.globalize/globalize.js",
-					"~/Scripts/kendo/2013.1.319/kendo.web.min.js",
+					"~/Scripts/kendo/2013.2.716/kendo.web.min.js",
 					"~/Scripts/app/CurrencyType.js",
 					"~/Scripts/app/Common.js"
 				));
@@ -36,14 +36,14 @@ namespace Alicargo.App_Start
 			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPathRu)
 				.Include(
 					"~/Scripts/jquery.globalize/cultures/globalize.culture.ru.js",
-					"~/Scripts/kendo/2013.1.319/cultures/kendo.culture.ru.min.js",
+					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.ru.min.js",
 					"~/Scripts/app/ru.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPathIt)
 				.Include(
 					"~/Scripts/jquery.globalize/cultures/globalize.culture.it.js",
-					"~/Scripts/kendo/2013.1.319/cultures/kendo.culture.it.min.js",
+					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.it.min.js",
 					"~/Scripts/app/it.js"
 				));
 
@@ -53,8 +53,8 @@ namespace Alicargo.App_Start
 					"~/Content/bootstrap.css",
 					"~/Content/bootstrap-responsive.css",
 					"~/Content/bootstrap-fileupload.css",
-					"~/Content/kendo/2013.1.319/kendo.common.min.css",
-					"~/Content/kendo/2013.1.319/kendo.default.min.css",
+					"~/Content/kendo/2013.2.716/kendo.common.min.css",
+					"~/Content/kendo/2013.2.716/kendo.default.min.css",
 					"~/Content/app/kendo.css",
 					"~/Content/app/layout.css",
 					"~/Content/app/common.css",

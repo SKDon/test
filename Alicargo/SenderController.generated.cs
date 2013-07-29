@@ -88,6 +88,7 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_ApplicationCreate
         {
             public readonly string id = "id";
+            public readonly string model = "model";
         }
         static readonly ActionParamsClass_ApplicationEdit s_params_ApplicationEdit = new ActionParamsClass_ApplicationEdit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -108,8 +109,10 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string ApplicationCreate = "ApplicationCreate";
                 public readonly string ApplicationEdit = "ApplicationEdit";
             }
+            public readonly string ApplicationCreate = "~/Views/Sender/ApplicationCreate.cshtml";
             public readonly string ApplicationEdit = "~/Views/Sender/ApplicationEdit.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
@@ -154,6 +157,17 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ApplicationEditOverride(callInfo, id, model);
+            return callInfo;
+        }
+
+        partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.ApplicationSenderEdit model);
+
+        public override System.Web.Mvc.ActionResult ApplicationCreate(long id, Alicargo.ViewModels.ApplicationSenderEdit model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApplicationCreate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ApplicationCreateOverride(callInfo, id, model);
             return callInfo;
         }
 
