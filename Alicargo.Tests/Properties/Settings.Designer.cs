@@ -62,7 +62,8 @@ namespace Alicargo.Tests.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\;Initial Catalog=Alicargo;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\;Initial Catalog=Alicargo;Integrated Security=True;Application Name" +
+            "=Alicargo.Tests")]
         public string MainConnectionString {
             get {
                 return ((string)(this["MainConnectionString"]));

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,7 +15,7 @@ using log4net;
 
 namespace Alicargo.App_Start
 {
-	public static class CompositionRoot
+	internal static class CompositionRoot
 	{
 		public static void BindServices(IKernel kernel)
 		{

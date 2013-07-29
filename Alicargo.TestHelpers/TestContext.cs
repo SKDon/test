@@ -9,7 +9,7 @@ using Ploeh.AutoFixture.Dsl;
 
 namespace Alicargo.TestHelpers
 {
-	public sealed class TestContext
+	public /*sealed*/ class TestContext
 	{
 		public Fixture Fixture { get; private set; }
 

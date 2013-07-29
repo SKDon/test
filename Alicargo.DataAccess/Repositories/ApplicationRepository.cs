@@ -92,11 +92,10 @@ namespace Alicargo.DataAccess.Repositories
 
 			applications = _orderer.Order(applications, orders);
 
-			return applications
-				.Skip(skip)
-				.Take(take)
-				.Select(_selector)
-				.ToArray();
+			return applications.Skip(skip)
+							   .Take(take)
+							   .Select(_selector)
+							   .ToArray();
 		}
 
 		public ApplicationData[] GetByReference(long id)
