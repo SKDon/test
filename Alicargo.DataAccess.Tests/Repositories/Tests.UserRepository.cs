@@ -66,7 +66,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			CheckUser(actual, newPassword, newLogin);
 		}
 
-		[TestMethod, Ignore]
+		[TestMethod, Ignore] // this is not test
 		public void UpdatePasswords()
 		{
 			_transactionScope.Dispose();

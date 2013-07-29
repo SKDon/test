@@ -49,7 +49,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		// todo: dont like it
+		// todo: don't like that the property is defined by an app setting
 		public string DefaultFrom
 		{
 			get

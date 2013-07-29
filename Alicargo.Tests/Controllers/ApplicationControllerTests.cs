@@ -1,8 +1,10 @@
-﻿using System.Data.SqlClient;
+﻿using System.Configuration;
+using System.Data.SqlClient;
 using System.Transactions;
 using Alicargo.App_Start;
 using Alicargo.Controllers;
 using Alicargo.DataAccess.DbContext;
+using Alicargo.Services.Abstract;
 using Alicargo.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
@@ -31,8 +33,11 @@ namespace Alicargo.Tests.Controllers
 			_db = new AlicargoDataContext(_connection);
 			_transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
 
-			
 			CompositionRoot.BindServices(_kernel);
+			CompositionRoot.BindDataAccess(_kernel, Settings.Default.MainConnectionString);
+
+			//new Mock
+			//_kernel.Bind<IIdentityService>().To()
 			_kernel.Bind<ApplicationController>().ToSelf();
 
 			_controller = _kernel.Get<ApplicationController>();

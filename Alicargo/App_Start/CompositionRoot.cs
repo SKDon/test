@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Core.Security;
-using Alicargo.DataAccess;
 using Alicargo.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Email;
@@ -21,7 +22,7 @@ namespace Alicargo.App_Start
 		{
 			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger(string.Empty)).InSingletonScope();
 
-			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InTransientScope();
+			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
 			// todo: auto binding for intersections
 			kernel.Bind<IMailSender>().To<SilentMailSender>().InRequestScope();
@@ -34,12 +35,12 @@ namespace Alicargo.App_Start
 			kernel.Bind<IAwbManager>().To<AwbManager>().WhenInjectedInto<AwbManagerWithMailing>().InRequestScope();
 
 			kernel.Bind(scanner => scanner.FromThisAssembly()
-				.Select(IsServiceType)
-				.Excluding<MailSender>()
-				.Excluding<ApplicationManager>()
-				.Excluding<AwbManager>()
-				.BindDefaultInterface()
-				.Configure(binding => binding.InRequestScope()));
+										  .Select(IsServiceType)
+										  .Excluding<MailSender>()
+										  .Excluding<ApplicationManager>()
+										  .Excluding<AwbManager>()
+										  .BindDefaultInterface()
+										  .Configure(binding => binding.InRequestScope()));
 		}
 
 		private static bool IsServiceType(Type type)
@@ -60,11 +61,18 @@ namespace Alicargo.App_Start
 			BinderConfig.RegisterBinders(System.Web.Mvc.ModelBinders.Binders);
 		}
 
-		public static void BindDataAccess(IKernel kernel)
+		public static void BindDataAccess(IKernel kernel, string connectionString)
 		{
-			var connectionString = ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
+			kernel.Bind<IDbConnection>()
+				  .ToMethod(x => new SqlConnection(connectionString))
+				  .InRequestScope()
+				  .OnDeactivation(x => x.Close());
 
-			kernel.ConfigureDataAccess(connectionString);
+			kernel.Bind(x => x.FromAssembliesMatching("Alicargo.DataAccess.dll")
+							  .IncludingNonePublicTypes()
+							  .Select(IsServiceType)
+							  .BindDefaultInterface()
+							  .Configure(y=>y.InRequestScope()));
 		}
 	}
 }

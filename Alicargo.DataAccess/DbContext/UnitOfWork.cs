@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Linq;
+using System.Diagnostics;
 using System.Transactions;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Exceptions;
@@ -22,9 +23,13 @@ namespace Alicargo.DataAccess.DbContext
 		public UnitOfWork(IDbConnection connection)
 		{
 			Context = new AlicargoDataContext(connection);
-#if DEBUG
+			Debug();
+		}
+
+		[Conditional("DEBUG")]
+		private void Debug()
+		{
 			Context.Log = new DebugTextWriter();
-#endif
 		}
 
 		public void SaveChanges()

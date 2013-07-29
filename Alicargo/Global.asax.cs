@@ -1,4 +1,5 @@
-﻿using Alicargo.App_Start;
+﻿using System.Configuration;
+using Alicargo.App_Start;
 using Ninject;
 using Ninject.Web.Common;
 
@@ -10,7 +11,7 @@ namespace Alicargo
 		{
 			var kernel = new StandardKernel();
 
-			CompositionRoot.BindDataAccess(kernel);
+			CompositionRoot.BindDataAccess(kernel, ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString);
 
 			CompositionRoot.BindServices(kernel);
 
