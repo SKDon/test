@@ -10,6 +10,7 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
+	// todo: refactor contracts
 	// todo: create a model binder for the ClientModel
 	public partial class ClientController : Controller
 	{

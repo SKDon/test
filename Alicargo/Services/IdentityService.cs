@@ -57,7 +57,7 @@ namespace Alicargo.Services
 
 				return _twoLetterISOLanguageName;
 			}
-			set
+			set // todo: make a function instead the setter
 			{
 				if (value != Core.Localization.TwoLetterISOLanguageName.Russian 
 					&& value != Core.Localization.TwoLetterISOLanguageName.Italian

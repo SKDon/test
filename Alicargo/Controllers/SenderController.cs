@@ -10,6 +10,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Controllers
 {
+	// todo: refactor contracts
 	[Access(RoleType.Sender)]
 	public partial class SenderController : Controller
 	{

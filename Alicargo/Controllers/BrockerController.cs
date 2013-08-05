@@ -9,6 +9,7 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
+	// todo: refactor contracts
 	public partial class BrockerController : Controller
 	{
 		private readonly IBrockerRepository _brockerRepository;

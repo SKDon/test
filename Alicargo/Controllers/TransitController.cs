@@ -9,6 +9,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Controllers
 {
+	// todo: refactor contracts
 	public partial class TransitController : Controller
 	{
 		private readonly ITransitService _transitService;

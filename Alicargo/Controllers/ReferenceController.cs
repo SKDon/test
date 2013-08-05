@@ -12,6 +12,7 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
+	// todo: refactor contracts
 	// todo: rename to AwbContorller
 	public partial class ReferenceController : Controller
 	{

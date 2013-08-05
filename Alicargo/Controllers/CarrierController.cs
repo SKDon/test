@@ -3,6 +3,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers
 {
+	// todo: refactor contracts
 	public partial class CarrierController : Controller
 	{
 		private readonly ICarrierService _carriers;

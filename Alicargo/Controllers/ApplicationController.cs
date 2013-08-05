@@ -13,6 +13,7 @@ using System.Net;
 
 namespace Alicargo.Controllers
 {
+	// todo: refactor contracts
 	public partial class ApplicationController : Controller
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
