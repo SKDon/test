@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
@@ -9,6 +10,7 @@ using Resources;
 
 namespace Alicargo.Services.Application
 {
+	[Obsolete]
 	public sealed class ApplicationHelper : IApplicationHelper
 	{
 		private readonly ICountryRepository _countryRepository;

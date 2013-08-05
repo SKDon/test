@@ -9,7 +9,7 @@ namespace Alicargo.Services.Application
 {
 	public sealed class ApplicationGrouper : IApplicationGrouper
 	{
-		public ApplicationGroup[] Group(ApplicationModel[] applications, IReadOnlyCollection<Order> groups)
+		public ApplicationGroup[] Group(ApplicationListItem[] applications, IReadOnlyCollection<Order> groups)
 		{
 			var @group = groups.First();
 			var orders = groups.Except(new[] { @group }).ToArray();
@@ -39,10 +39,10 @@ namespace Alicargo.Services.Application
 		#region private
 
 		private ApplicationGroup GetApplicationGroup<T>(
-			IGrouping<T, ApplicationModel> grouping,
+			IGrouping<T, ApplicationListItem> grouping,
 			IReadOnlyCollection<Order> orders,
 			string field,
-			Func<IGrouping<T, ApplicationModel>, string> getValue)
+			Func<IGrouping<T, ApplicationListItem>, string> getValue)
 		{
 			return new ApplicationGroup
 			{

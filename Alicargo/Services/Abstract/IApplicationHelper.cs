@@ -2,7 +2,7 @@
 
 namespace Alicargo.Services.Abstract
 {
-	public 	interface IApplicationHelper
+	public interface IApplicationHelper
 	{
 		void SetAdditionalData(params ApplicationModel[] applications);
 	}

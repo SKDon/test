@@ -6,6 +6,6 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IApplicationGrouper
 	{
-		ApplicationGroup[] Group(ApplicationModel[] models, IReadOnlyCollection<Order> groups);
+		ApplicationGroup[] Group(ApplicationListItem[] models, IReadOnlyCollection<Order> groups);
 	}
 }
