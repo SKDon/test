@@ -34,7 +34,7 @@
 //		private void BindIdentityService()
 //		{
 //			var identityService = new Mock<IIdentityService>(MockBehavior.Strict);
-			
+
 //			identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
 //			identityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
 //			identityService.Setup(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
