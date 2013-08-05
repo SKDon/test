@@ -38,24 +38,24 @@ namespace Alicargo.Tests.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Admin")]
-        public string Login {
+        public string AdminLogin {
             get {
-                return ((string)(this["Login"]));
+                return ((string)(this["AdminLogin"]));
             }
             set {
-                this["Login"] = value;
+                this["AdminLogin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Admin")]
-        public string Password {
+        public string AdminPassword {
             get {
-                return ((string)(this["Password"]));
+                return ((string)(this["AdminPassword"]));
             }
             set {
-                this["Password"] = value;
+                this["AdminPassword"] = value;
             }
         }
         
@@ -79,6 +79,30 @@ namespace Alicargo.Tests.Properties {
             }
             set {
                 this["MailsFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c1")]
+        public string ClientLogin {
+            get {
+                return ((string)(this["ClientLogin"]));
+            }
+            set {
+                this["ClientLogin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c1")]
+        public string ClientPassword {
+            get {
+                return ((string)(this["ClientPassword"]));
+            }
+            set {
+                this["ClientPassword"] = value;
             }
         }
     }

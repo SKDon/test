@@ -23,7 +23,7 @@ namespace Alicargo.Tests.Controllers
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.Login, Settings.Default.Password);
+			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.AdminLogin, Settings.Default.AdminPassword);
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
 		}
 

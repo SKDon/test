@@ -5,10 +5,10 @@
     <Setting Name="BaseAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:1893/</Value>
     </Setting>
-    <Setting Name="Login" Type="System.String" Scope="User">
+    <Setting Name="AdminLogin" Type="System.String" Scope="User">
       <Value Profile="(Default)">Admin</Value>
     </Setting>
-    <Setting Name="Password" Type="System.String" Scope="User">
+    <Setting Name="AdminPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">Admin</Value>
     </Setting>
     <Setting Name="MainConnectionString" Type="(Connection string)" Scope="Application">
@@ -21,6 +21,12 @@
     </Setting>
     <Setting Name="MailsFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\S\Projects\Alicargo\Alicargo\Mails</Value>
+    </Setting>
+    <Setting Name="ClientLogin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c1</Value>
+    </Setting>
+    <Setting Name="ClientPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -17,17 +17,18 @@ namespace Alicargo.Tests.Controllers
 	[TestClass]
 	public class ReferenceControllerTests
 	{
-		private HttpClient _client;
-		private AlicargoDataContext _db;
 		private const long FirstStateId = 7;
 		private const long DefaultStateId = 1;
+
+		private HttpClient _client;
+		private AlicargoDataContext _db;		
 		private WebTestContext _context;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
-			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.Login, Settings.Default.Password);
+			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.AdminLogin, Settings.Default.AdminPassword);
 			_client = _context.HttpClient;
 		}
 

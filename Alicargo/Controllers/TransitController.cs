@@ -22,7 +22,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Sender)]
+		[Access(RoleType.Client)]
 		public virtual ActionResult Edit(long id)
 		{
 			var transit = _transitService.Get(id).First();
@@ -35,7 +35,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Sender)]
+		[Access(RoleType.Client)]
 		public virtual ActionResult Edit(Transit model, CarrierSelectModel carrierSelectModel)
 		{
 			if (!ModelState.IsValid) return View(model);

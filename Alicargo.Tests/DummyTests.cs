@@ -1,40 +1,37 @@
-﻿using System.Data.SqlClient;
-using System.Transactions;
+﻿using System.Data.Linq;
+using System.Net.Http;
 using Alicargo.DataAccess.DbContext;
+using Alicargo.TestHelpers;
 using Alicargo.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ploeh.AutoFixture;
 
 namespace Alicargo.Tests
 {
 	[TestClass, Ignore]
 	public class DummyTests
 	{
-		private Fixture _fixture;
-		private TransactionScope _transactionScope;
-		private SqlConnection _connection;
+		private HttpClient _client;
 		private AlicargoDataContext _db;
+		private WebTestContext _context;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_fixture = new Fixture();
-			_connection = new SqlConnection(Settings.Default.MainConnectionString);
-			_connection.Open();
-			_db = new AlicargoDataContext(_connection);
-			_transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
-		}
-
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_transactionScope.Dispose();
-			_connection.Close();
+			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
+			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.AdminLogin, Settings.Default.AdminPassword);
+			_client = _context.HttpClient;
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_Dummy()
+		public void Test_Name()
 		{
+			_client.PostAsJsonAsync("Url", 1)
+				.ContinueWith(task =>
+				{
+					_db.Refresh(RefreshMode.OverwriteCurrentValues, 1);
+					_db.Refresh(RefreshMode.OverwriteCurrentValues, 2);
+				})
+				.Wait();
 		}
 	}
 }
