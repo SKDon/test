@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Helpers;
 

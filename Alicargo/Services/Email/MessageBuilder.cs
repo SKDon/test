@@ -109,7 +109,7 @@ namespace Alicargo.Services.Email
 				model.FactoryEmail,
 				model.FactoryPhone,
 				model.FactoryContact,
-				model.DaysInWork,
+				ApplicationModel.GetDaysInWork(model.CreationTimestamp),
 				model.Invoice,
 				_localizationService.GetDate(model.CreationTimestamp, culture),
 				_localizationService.GetDate(model.StateChangeTimestamp, culture),

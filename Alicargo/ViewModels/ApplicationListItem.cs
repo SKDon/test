@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;

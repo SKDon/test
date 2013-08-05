@@ -34,7 +34,8 @@ namespace Alicargo.Services.Application
 			{
 				_transitService.Update(model.Transit, carrierSelectModel);
 
-				_applicationRepository.Update(model, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
+				_applicationRepository.Update(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
+					model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
 
@@ -51,7 +52,7 @@ namespace Alicargo.Services.Application
 				model.StateChangeTimestamp = DateTimeOffset.UtcNow;
 				model.CreationTimestamp = DateTimeOffset.UtcNow;
 
-				var id = _applicationRepository.Add(model, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
+				var id = _applicationRepository.Add(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
 

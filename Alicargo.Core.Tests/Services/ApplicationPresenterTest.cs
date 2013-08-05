@@ -1,4 +1,5 @@
-﻿using Alicargo.Services.Application;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Services.Application;
 // ReSharper disable ImplicitlyCapturedClosure
 using System.Collections.Generic;
 using System.Linq;

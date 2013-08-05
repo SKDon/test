@@ -9,7 +9,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Email
 {
-	// todo: test
+	// todo: test!!!
 	public sealed class ApplicationManagerWithMailing : IApplicationManager
 	{
 		private readonly IMailSender _mailSender;
@@ -50,7 +50,7 @@ namespace Alicargo.Services.Email
 			SendOnFileAdd(model.Id, oldData);
 		}
 
-		private void SendOnFileAdd(long id, ApplicationData oldData)
+		private void SendOnFileAdd(long id, ApplicationModel oldData)
 		{
 			var model = _applicationPresenter.Get(id);
 
@@ -168,7 +168,7 @@ namespace Alicargo.Services.Email
 			}
 			else
 			{
-				var files = GeAllFiles(model);
+				var files = GeAllFiles(model.ReferenceId, model.Id);
 				var clientData = _authenticationRepository.GetById(model.ClientUserId);
 				var body = _messageBuilder.ApplicationSetState(model, clientData.TwoLetterISOLanguageName);
 				_mailSender.Send(new Message(subject, body, model.ClientEmail) { Files = files });
@@ -185,21 +185,21 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		private FileHolder[] GeAllFiles(ApplicationData model)
+		private FileHolder[] GeAllFiles(long? referenceId, long id)
 		{
 			var files = new List<FileHolder>(6);
 
-			var invoiceFile = _applicationRepository.GetInvoiceFile(model.Id);
-			var deliveryBillFile = _applicationRepository.GetDeliveryBillFile(model.Id);
-			var cpFile = _applicationRepository.GetCPFile(model.Id);
-			var packingFile = _applicationRepository.GetPackingFile(model.Id);
-			var swiftFile = _applicationRepository.GetSwiftFile(model.Id);
-			var torg12File = _applicationRepository.GetTorg12File(model.Id);
+			var invoiceFile = _applicationRepository.GetInvoiceFile(id);
+			var deliveryBillFile = _applicationRepository.GetDeliveryBillFile(id);
+			var cpFile = _applicationRepository.GetCPFile(id);
+			var packingFile = _applicationRepository.GetPackingFile(id);
+			var swiftFile = _applicationRepository.GetSwiftFile(id);
+			var torg12File = _applicationRepository.GetTorg12File(id);
 
-			if (model.ReferenceId.HasValue)
+			if (referenceId.HasValue)
 			{
-				var gtdFile = _referenceRepository.GetGTDFile(model.ReferenceId.Value);
-				var gtdAdditionalFile = _referenceRepository.GTDAdditionalFile(model.ReferenceId.Value);
+				var gtdFile = _referenceRepository.GetGTDFile(referenceId.Value);
+				var gtdAdditionalFile = _referenceRepository.GTDAdditionalFile(referenceId.Value);
 
 				if (gtdFile != null) files.Add(gtdFile);
 				if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);
