@@ -43,9 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ApplicationData.cs" />
+    <Compile Include="Contracts\AuthenticationData.cs" />
+    <Compile Include="Contracts\ClientData.cs" />
     <Compile Include="Contracts\CountryData.cs" />
+    <Compile Include="Contracts\FileHolder.cs" />
+    <Compile Include="Contracts\IAuthenticationData.cs" />
+    <Compile Include="Contracts\IClientData.cs" />
+    <Compile Include="Contracts\IReferenceData.cs" />
     <Compile Include="Contracts\ReferenceAggregate.cs" />
+    <Compile Include="Contracts\ReferenceData.cs" />
     <Compile Include="Contracts\StateData.cs" />
+    <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\UserData.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
@@ -55,7 +64,6 @@
     <Compile Include="Exceptions\InvalidLogicException.cs" />
     <Compile Include="Exceptions\DublicateException.cs" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Contracts\FileHolder.cs" />
     <Compile Include="Helpers\ClientDataHelper.cs" />
     <Compile Include="Helpers\OrderType.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
@@ -87,15 +95,10 @@
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Localization\Cultures.cs" />
     <Compile Include="Localization\LocalizeEnumExtension.cs" />
-    <Compile Include="Contracts\ApplicationData.cs" />
     <Compile Include="Models\Brocker.cs" />
     <Compile Include="Models\Carrier.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Contracts\ClientData.cs" />
     <Compile Include="Models\Factory.cs" />
-    <Compile Include="Contracts\IClientData.cs" />
-    <Compile Include="Contracts\IReferenceData.cs" />
-    <Compile Include="Contracts\IAuthenticationData.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Repositories\IApplicationRepository.cs" />
     <Compile Include="Repositories\IBrockerRepository.cs" />
@@ -109,9 +112,6 @@
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\IAuthenticationRepository.cs" />
     <Compile Include="Models\Mark.cs" />
-    <Compile Include="Contracts\ReferenceData.cs" />
-    <Compile Include="Contracts\TransitData.cs" />
-    <Compile Include="Contracts\AuthenticationData.cs" />
     <Compile Include="Resources\Entities.Designer.cs">
       <DependentUpon>Entities.resx</DependentUpon>
       <AutoGen>True</AutoGen>
