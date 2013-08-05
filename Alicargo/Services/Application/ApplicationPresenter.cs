@@ -9,7 +9,7 @@ using Alicargo.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Resources;
 
-namespace Alicargo.Services
+namespace Alicargo.Services.Application
 {
 	// todo: test
 	// todo: adhere SRP

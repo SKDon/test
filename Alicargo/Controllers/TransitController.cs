@@ -42,7 +42,7 @@ namespace Alicargo.Controllers
 
 			_transitService.Update(model, carrierSelectModel);
 
-			return RedirectToAction(MVC.Application.Index());
+			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 	}
 }

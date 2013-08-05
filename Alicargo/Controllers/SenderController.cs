@@ -88,7 +88,7 @@ namespace Alicargo.Controllers
 			_applicationRepository.Update(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
 			_unitOfWork.SaveChanges();
 
-			return RedirectToAction(MVC.Application.Index());
+			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
 		[HttpPost]
@@ -119,7 +119,7 @@ namespace Alicargo.Controllers
 				ts.Complete();
 			}
 
-			return RedirectToAction(MVC.Application.Index());
+			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
 		private static void Set(ApplicationSenderEdit model, ApplicationData applicationData)

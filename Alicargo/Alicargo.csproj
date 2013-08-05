@@ -148,6 +148,9 @@
     <Compile Include="ApplicationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationListController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="BrockerController.generated.cs">
@@ -159,6 +162,7 @@
     <Compile Include="ClientController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ApplicationListController.cs" />
     <Compile Include="Controllers\BrockerController.cs" />
     <Compile Include="Controllers\ScriptController.cs" />
     <Compile Include="Controllers\SenderController.cs" />
@@ -247,9 +251,9 @@
     <Compile Include="Services\Abstract\IMessageBuilder.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
     <Compile Include="Services\Email\MailSender.cs" />
-    <Compile Include="Services\ApplicationManager.cs" />
-    <Compile Include="Services\ApplicationPresenter.cs" />
-    <Compile Include="Services\ApplicationGrouper.cs" />
+    <Compile Include="Services\Application\ApplicationManager.cs" />
+    <Compile Include="Services\Application\ApplicationPresenter.cs" />
+    <Compile Include="Services\Application\ApplicationGrouper.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CarrierService.cs" />
     <Compile Include="Services\ClientService.cs" />
@@ -287,6 +291,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ApplicationGroup.cs" />
+    <Compile Include="ViewModels\ApplicationListItem.cs" />
     <Compile Include="ViewModels\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\BrockerAWBModel.cs" />
@@ -1326,7 +1331,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="Views\ApplicationList\Index.cshtml" />
     <Content Include="Views\Application\Create.cshtml" />
     <Content Include="T4MVC.tt.hooks.t4" />
     <Content Include="T4MVC.tt">
@@ -1350,8 +1355,8 @@
     <Content Include="Views\Shared\Memu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ApplicationModel.cshtml" />
-    <Content Include="Views\Application\DetailsTemplate.cshtml" />
-    <Content Include="Views\Application\Tools.cshtml" />
+    <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
+    <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\Reference\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReferenceModel.cshtml" />
     <Content Include="Views\Carrier\Select.cshtml" />
@@ -1361,11 +1366,11 @@
     <Content Include="Views\Brocker\Select.cshtml" />
     <Content Include="Views\Reference\DetailsTemplate.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Application\ClientColumns.cshtml" />
-    <Content Include="Views\Application\AdminColumns.cshtml" />
-    <Content Include="Views\Application\AdminDetails.cshtml" />
-    <Content Include="Views\Application\ForwarderColumns.cshtml" />
-    <Content Include="Views\Application\SenderColumns.cshtml" />
+    <Content Include="Views\ApplicationList\ClientColumns.cshtml" />
+    <Content Include="Views\ApplicationList\AdminColumns.cshtml" />
+    <Content Include="Views\ApplicationList\AdminDetails.cshtml" />
+    <Content Include="Views\ApplicationList\ForwarderColumns.cshtml" />
+    <Content Include="Views\ApplicationList\SenderColumns.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
@@ -1381,7 +1386,7 @@
     <Content Include="Views\Sender\ApplicationEdit.cshtml" />
     <Content Include="Views\Sender\EditorTemplates\ApplicationSenderEdit.cshtml" />
     <Content Include="Views\Sender\ApplicationCreate.cshtml" />
-    <Content Include="Views\Application\SenderDetails.cshtml" />
+    <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

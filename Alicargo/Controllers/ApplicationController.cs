@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
-using Alicargo.Core.Helpers;
 using Alicargo.Core.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
@@ -42,35 +40,15 @@ namespace Alicargo.Controllers
 			_applicationRepository = applicationRepository;
 		}
 
-		#region List
-
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
-		public virtual ViewResult Index()
-		{
-			var model = _applicationPresenter.GetApplicationIndexModel();
-
-			return View(model);
-		}
+		#region Details
 
 		[HttpGet, ChildActionOnly]
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Sender)]
+		[Access(RoleType.Client)]
 		public virtual PartialViewResult Details(long id)
 		{
 			var application = _applicationPresenter.Get(id);
 
 			return PartialView(application);
-		}
-
-		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
-		public virtual JsonResult List(int take, int skip, int page, int pageSize, Dictionary<string, string>[] group)
-		{
-			// todo: use model binder for Order
-			var orders = Order.Get(group);
-
-			var data = _applicationPresenter.List(take, skip, orders);
-
-			return Json(data);
 		}
 
 		public virtual FileResult InvoiceFile(long id)
@@ -205,7 +183,7 @@ namespace Alicargo.Controllers
 
 			_applicationManager.Update(model, carrierSelectModel);
 
-			return RedirectToAction(MVC.Application.Index());
+			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
 		#endregion
@@ -258,7 +236,7 @@ namespace Alicargo.Controllers
 				return View(model);
 			}
 
-			return RedirectToAction(MVC.Application.Index());
+			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
 		#endregion

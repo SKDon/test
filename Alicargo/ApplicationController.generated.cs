@@ -49,12 +49,6 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult List()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.FileResult InvoiceFile()
         {
             return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.InvoiceFile);
@@ -153,9 +147,7 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
             public readonly string Details = "Details";
-            public readonly string List = "List";
             public readonly string InvoiceFile = "InvoiceFile";
             public readonly string DeliveryBillFile = "DeliveryBillFile";
             public readonly string CPFile = "CPFile";
@@ -175,9 +167,7 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
             public const string Details = "Details";
-            public const string List = "List";
             public const string InvoiceFile = "InvoiceFile";
             public const string DeliveryBillFile = "DeliveryBillFile";
             public const string CPFile = "CPFile";
@@ -202,18 +192,6 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Details
         {
             public readonly string id = "id";
-        }
-        static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_List ListParams { get { return s_params_List; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_List
-        {
-            public readonly string take = "take";
-            public readonly string skip = "skip";
-            public readonly string page = "page";
-            public readonly string pageSize = "pageSize";
-            public readonly string group = "group";
         }
         static readonly ActionParamsClass_InvoiceFile s_params_InvoiceFile = new ActionParamsClass_InvoiceFile();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -344,31 +322,13 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string AdminColumns = "AdminColumns";
-                public readonly string AdminDetails = "AdminDetails";
-                public readonly string ClientColumns = "ClientColumns";
                 public readonly string Create = "Create";
                 public readonly string Details = "Details";
-                public readonly string DetailsTemplate = "DetailsTemplate";
                 public readonly string Edit = "Edit";
-                public readonly string ForwarderColumns = "ForwarderColumns";
-                public readonly string Index = "Index";
-                public readonly string SenderColumns = "SenderColumns";
-                public readonly string SenderDetails = "SenderDetails";
-                public readonly string Tools = "Tools";
             }
-            public readonly string AdminColumns = "~/Views/Application/AdminColumns.cshtml";
-            public readonly string AdminDetails = "~/Views/Application/AdminDetails.cshtml";
-            public readonly string ClientColumns = "~/Views/Application/ClientColumns.cshtml";
             public readonly string Create = "~/Views/Application/Create.cshtml";
             public readonly string Details = "~/Views/Application/Details.cshtml";
-            public readonly string DetailsTemplate = "~/Views/Application/DetailsTemplate.cshtml";
             public readonly string Edit = "~/Views/Application/Edit.cshtml";
-            public readonly string ForwarderColumns = "~/Views/Application/ForwarderColumns.cshtml";
-            public readonly string Index = "~/Views/Application/Index.cshtml";
-            public readonly string SenderColumns = "~/Views/Application/SenderColumns.cshtml";
-            public readonly string SenderDetails = "~/Views/Application/SenderDetails.cshtml";
-            public readonly string Tools = "~/Views/Application/Tools.cshtml";
             static readonly _DisplayTemplatesClass s_DisplayTemplates = new _DisplayTemplatesClass();
             public _DisplayTemplatesClass DisplayTemplates { get { return s_DisplayTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -384,15 +344,6 @@ namespace Alicargo.Controllers
     {
         public T4MVC_ApplicationController() : base(Dummy.Instance) { }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
-
-        public override System.Web.Mvc.ViewResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
-            return callInfo;
-        }
-
         partial void DetailsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long id);
 
         public override System.Web.Mvc.PartialViewResult Details(long id)
@@ -400,20 +351,6 @@ namespace Alicargo.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Details);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             DetailsOverride(callInfo, id);
-            return callInfo;
-        }
-
-        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip, int page, int pageSize, System.Collections.Generic.Dictionary<string,string>[] group);
-
-        public override System.Web.Mvc.JsonResult List(int take, int skip, int page, int pageSize, System.Collections.Generic.Dictionary<string,string>[] group)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "take", take);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skip", skip);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pageSize", pageSize);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "group", group);
-            ListOverride(callInfo, take, skip, page, pageSize, group);
             return callInfo;
         }
 

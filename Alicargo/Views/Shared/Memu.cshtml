@@ -6,7 +6,7 @@
 {
 	if (IdentityService.IsInRole(RoleType.Client))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
 	<li>@Html.ActionLink(Resources.Pages.Profile, MVC.Client.Edit())</li>		
 	}
 }
@@ -15,7 +15,7 @@
 {
 	if (IdentityService.IsInRole(RoleType.Forwarder))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
 	}
 }
 
@@ -23,7 +23,7 @@
 {
 	if (IdentityService.IsInRole(RoleType.Admin))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
 	<li>@Html.ActionLink(@Resources.Pages.References, MVC.Reference.Index())</li>
 	<li class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Pages.Users<b class="caret"></b></a>
@@ -42,7 +42,7 @@
 {
 	if (IdentityService.IsInRole(RoleType.Sender))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.Application.Index())</li>
+	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
 	<li>@Html.ActionLink(Resources.Entities.AirWayBill, MVC.Reference.Index())</li>
 	}
 }

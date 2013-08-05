@@ -58,7 +58,7 @@ namespace Alicargo.Controllers
 				return View(model);
 			}
 
-			return RedirectToAction(MVC.Application.Index());
+			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
 		#endregion

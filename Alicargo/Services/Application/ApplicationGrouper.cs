@@ -5,7 +5,7 @@ using Alicargo.Core.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
-namespace Alicargo.Services
+namespace Alicargo.Services.Application
 {
 	public sealed class ApplicationGrouper : IApplicationGrouper
 	{

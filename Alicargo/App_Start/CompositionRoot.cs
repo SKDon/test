@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Alicargo.Core.Security;
 using Alicargo.Services;
 using Alicargo.Services.Abstract;
+using Alicargo.Services.Application;
 using Alicargo.Services.Email;
 using Ninject;
 using Ninject.Extensions.Conventions;

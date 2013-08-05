@@ -4,7 +4,7 @@ using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
-namespace Alicargo.Services
+namespace Alicargo.Services.Application
 {
 	// todo: test
 	public sealed class ApplicationManager : IApplicationManager
