@@ -240,8 +240,10 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\Abstract\IApplicationHelper.cs" />
+    <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\ILocalizationService.cs" />
     <Compile Include="Services\Application\ApplicationHelper.cs" />
+    <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Contract\Recipient.cs" />
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\AwbManager.cs" />
