@@ -18,15 +18,6 @@ namespace Alicargo.ViewModels
 
 		#region Computed
 
-		[DisplayNameLocalized(typeof(Entities), "DisplayNumber")]
-		public string DisplayNumber
-		{
-			get
-			{
-				return ApplicationListItem.GetDisplayNumber(Id, Count);
-			}
-		}
-
 		[DisplayNameLocalized(typeof(Entities), "DaysInWork")]
 		public int DaysInWork
 		{
