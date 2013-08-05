@@ -10,7 +10,6 @@ using Resources;
 
 namespace Alicargo.ViewModels
 {
-	// todo: extract ApplicationListItem for grids
 	public sealed class ApplicationModel : ApplicationData
 	{
 		public ApplicationModel() { }
@@ -24,15 +23,8 @@ namespace Alicargo.ViewModels
 		{
 			get
 			{
-				return GetDisplayNumber(Id, Count);
+				return ApplicationListItem.GetDisplayNumber(Id, Count);
 			}
-		}
-
-		public static string GetDisplayNumber(long id, long? count)
-		{
-			id = id % 1000;
-
-			return string.Format("{0:000}{1}", id, count.HasValue && count > 0 ? "/" + count.Value : "");
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "DaysInWork")]
@@ -44,26 +36,6 @@ namespace Alicargo.ViewModels
 				{
 					return (DateTimeOffset.UtcNow - CreationTimestamp.ToUniversalTime()).Days;
 				}
-			}
-		}
-
-		[DisplayNameLocalized(typeof(Entities), "CreationTimestamp")]
-		public string CreationTimestampLocalString
-		{
-			get
-			{
-				// todo: test time zones
-				return CreationTimestamp.LocalDateTime.ToShortDateString();
-			}
-		}
-
-		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
-		public string StateChangeTimestampLocalString
-		{
-			get
-			{
-				// todo: test time zones
-				return StateChangeTimestamp.LocalDateTime.ToShortDateString();
 			}
 		}
 
@@ -83,16 +55,6 @@ namespace Alicargo.ViewModels
 					DateOfCargoReceipt = DateTimeOffset.Parse(value);
 				}
 			}
-		}
-
-		public string DateInStockLocalString
-		{
-			get
-			{
-				// todo: test time zones
-				return DateInStock.HasValue ? DateInStock.Value.LocalDateTime.ToShortDateString() : null;
-			}
-
 		}
 
 		[Required]
@@ -131,67 +93,15 @@ namespace Alicargo.ViewModels
 
 		#endregion
 
-		public bool CanSetState
-		{
-			get { return _canSetState; }
-			set { _canSetState = value; }
-		}
-		private bool _canSetState = true;
-
 		// todo: 3. rename to Air Way Bill
 		public string ReferenceBill { get; set; }
 		public string ReferenceGTD { get; set; }
 
-		public string AirWayBillDisplay { get; set; }
-
 		public string CountryName { get; set; }
-
-		public string AirWayBillSorter
-		{
-			get
-			{
-				var dateOfArrivalUtcTicks = ReferenceDateOfArrival.HasValue ? ReferenceDateOfArrival.Value.UtcTicks : 0;
-				var dateOfDepartureUtcTicks = ReferenceDateOfDeparture.HasValue ? ReferenceDateOfDeparture.Value.UtcTicks : 0;
-
-				return GetSorter(ReferenceBill, dateOfArrivalUtcTicks, dateOfDepartureUtcTicks);
-			}
-		}
-
-		// todo: test
-		public static string GetSorter(string referenceBill, long dateOfArrivalUtcTicks, long dateOfDepartureUtcTicks)
-		{
-			var noBill = referenceBill.IsNullOrWhiteSpace();
-
-			if (noBill && dateOfArrivalUtcTicks == 0 && dateOfDepartureUtcTicks == 0)
-				return "";
-
-			return string.Format("{0}_{1}_{2}_{3}", noBill ? "0" : "1", dateOfArrivalUtcTicks / 10000000000,
-				dateOfDepartureUtcTicks / 10000000000, referenceBill);
-		}
 
 		public DateTimeOffset? ReferenceDateOfDeparture { get; set; }
 
 		public DateTimeOffset? ReferenceDateOfArrival { get; set; }
-
-		#region State
-
-		public ApplicationStateModel State
-		{
-			get
-			{
-				return new ApplicationStateModel
-				{
-					StateId = StateId,
-					StateName = StateName
-				};
-			}
-		}
-
-		public string StateName { get; set; }
-
-		public bool CanClose { get; set; }
-
-		#endregion
 
 		public Transit Transit { get; set; }
 

@@ -51,7 +51,7 @@ namespace Alicargo.Controllers
 			var clientData = _clientRepository.Get(application.ClientId).First();
 
 			ViewBag.Nic = clientData.Nic;
-			ViewBag.ApplicationNumber = ApplicationModel.GetDisplayNumber(application.Id, application.Count);
+			ViewBag.ApplicationNumber = ApplicationListItem.GetDisplayNumber(application.Id, application.Count);
 
 			return View(new ApplicationSenderEdit
 			{
@@ -77,7 +77,7 @@ namespace Alicargo.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				ViewBag.ApplicationNumber = ApplicationModel.GetDisplayNumber(id, model.Count);
+				ViewBag.ApplicationNumber = ApplicationListItem.GetDisplayNumber(id, model.Count);
 				return View(model);
 			}
 

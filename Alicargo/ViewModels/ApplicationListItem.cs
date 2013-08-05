@@ -62,7 +62,7 @@ namespace Alicargo.ViewModels
 			}
 		}
 
-		private static string GetDisplayNumber(long id, long? count)
+		public static string GetDisplayNumber(long id, long? count)
 		{
 			id = id % 1000;
 

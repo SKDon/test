@@ -5,8 +5,6 @@ using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using Microsoft.Ajax.Utilities;
-using Resources;
 
 namespace Alicargo.Services.Application
 {
@@ -18,27 +16,20 @@ namespace Alicargo.Services.Application
 		private readonly IIdentityService _identity;
 		private readonly IReferenceRepository _referenceRepository;
 		private readonly IClientRepository _clientRepository;
-		private readonly IStateService _stateService;
-		private readonly IStateConfig _stateConfig;
 
 		public ApplicationHelper(ICountryRepository countryRepository, ITransitService transitService,
-			IIdentityService identity, IReferenceRepository referenceRepository, IClientRepository clientRepository, 
-			IStateService stateService, IStateConfig stateConfig)
+			IIdentityService identity, IReferenceRepository referenceRepository, IClientRepository clientRepository)
 		{
 			_countryRepository = countryRepository;
 			_transitService = transitService;
 			_identity = identity;
 			_referenceRepository = referenceRepository;
 			_clientRepository = clientRepository;
-			_stateService = stateService;
-			_stateConfig = stateConfig;
 		}
 
 		public void SetAdditionalData(params ApplicationModel[] applications)
 		{
 			SetClientData(applications);
-
-			SetStateData(applications);
 
 			SetTransitData(applications);
 
@@ -87,11 +78,7 @@ namespace Alicargo.Services.Application
 				application.ReferenceBill = referenceData.Bill;
 				application.ReferenceGTD = referenceData.GTD;
 				application.ReferenceDateOfArrival = referenceData.DateOfArrival;
-				application.ReferenceDateOfDeparture = referenceData.DateOfDeparture;
-				application.AirWayBillDisplay = string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", referenceData.Bill,
-					referenceData.DepartureAirport, referenceData.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
-					referenceData.ArrivalAirport, referenceData.DateOfArrival.ToString("ddMMMyyyy").ToUpperInvariant(),
-					referenceData.GTD.IsNullOrWhiteSpace() ? "" : string.Format(" &plusmn; {0}_{1}", Entities.GTD, referenceData.GTD));
+				application.ReferenceDateOfDeparture = referenceData.DateOfDeparture;				
 			}
 		}
 
@@ -119,27 +106,6 @@ namespace Alicargo.Services.Application
 				application.LegalEntity = clientData.LegalEntity;
 				application.ClientNic = clientData.Nic;
 				application.ClientEmail = clientData.Email;
-			}
-		}
-
-		private void SetStateData(params ApplicationModel[] applications)
-		{
-			var localizedStates = _stateService.GetLocalizedDictionary();
-
-			var availableStates = _stateService.GetAvailableStatesToSet();
-
-			var states = _stateService.GetDictionary();
-
-			foreach (var application in applications)
-			{
-				var state = states[application.StateId];
-
-				application.CanClose = state.Id == _stateConfig.CargoOnTransitStateId; // todo: test 1.
-
-				// todo: test 1.
-				application.CanSetState = availableStates.Contains(application.StateId);
-
-				application.StateName = localizedStates[application.StateId];
 			}
 		}
 	}
