@@ -5,7 +5,7 @@ using Alicargo.Core.Exceptions;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 using Resources;
 
 namespace Alicargo.Services.Application

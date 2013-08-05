@@ -2,7 +2,7 @@
 using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationSenderEdit
 	{

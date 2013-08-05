@@ -6,7 +6,7 @@ using Alicargo.Core.Helpers;
 using Alicargo.Core.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers
 {

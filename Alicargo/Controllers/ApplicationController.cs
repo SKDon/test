@@ -8,6 +8,7 @@ using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using System.Net;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers
 {

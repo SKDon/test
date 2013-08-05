@@ -4,6 +4,8 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments
+
+using Alicargo.ViewModels.Application;
 #pragma warning disable 1591
 #region T4MVC
 
@@ -487,9 +489,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
 
-        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Edit(long id, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -509,9 +511,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? clientId, Alicargo.ViewModels.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? clientId, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
 
-        public override System.Web.Mvc.ActionResult Create(long? clientId, Alicargo.ViewModels.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Create(long? clientId, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);

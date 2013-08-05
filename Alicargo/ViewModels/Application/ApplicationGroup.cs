@@ -1,4 +1,4 @@
-﻿namespace Alicargo.ViewModels
+﻿namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationGroup
 	{

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Localization;
+using Alicargo.ViewModels.Application;
 using Resources;
 
 namespace Alicargo.ViewModels

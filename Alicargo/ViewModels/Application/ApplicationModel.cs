@@ -2,20 +2,19 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Models;
 using Microsoft.Ajax.Utilities;
 using Resources;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationModel
 	{
 		public ApplicationModel() { }
 
-		// todo: tests			
+		// todo: tests
 		public ApplicationModel(ApplicationData data)
 		{
 			AddressLoad = data.AddressLoad;
@@ -51,6 +50,47 @@ namespace Alicargo.ViewModels
 			DateInStock = data.DateInStock;
 			DateOfCargoReceipt = data.DateOfCargoReceipt;
 			TransitReference = data.TransitReference;
+		}
+
+		// todo: tests
+		public ApplicationData GetData()
+		{
+			return new ApplicationData
+			{
+				AddressLoad = AddressLoad,
+				Characteristic = Characteristic,
+				ClientId = ClientId,
+				Count = Count,
+				CPFileName = CPFileName,
+				CreationTimestamp = CreationTimestamp,
+				CurrencyId = CurrencyId,
+				DeliveryBillFileName = DeliveryBillFileName,
+				FactoryContact = FactoryContact,
+				FactoryEmail = FactoryEmail,
+				FactoryName = FactoryName,
+				FactoryPhone = FactoryPhone,
+				Weigth = Weigth,
+				Id = Id,
+				Invoice = Invoice,
+				InvoiceFileName = InvoiceFileName,
+				PackingFileName = PackingFileName,
+				MarkName = MarkName,
+				MethodOfDeliveryId = MethodOfDeliveryId,
+				ReferenceId = ReferenceId,
+				StateChangeTimestamp = StateChangeTimestamp,
+				StateId = StateId,
+				SwiftFileName = SwiftFileName,
+				TermsOfDelivery = TermsOfDelivery,
+				Torg12FileName = Torg12FileName,
+				TransitId = TransitId,
+				CountryId = CountryId,
+				Value = Value,
+				Volume = Volume,
+				WarehouseWorkingTime = WarehouseWorkingTime,
+				DateInStock = DateInStock,
+				DateOfCargoReceipt = DateOfCargoReceipt,
+				TransitReference = TransitReference,
+			};
 		}
 
 		#region Computed
@@ -99,47 +139,7 @@ namespace Alicargo.ViewModels
 		public string ValueString
 		{
 			get { return Value.ToString(CultureInfo.CurrentUICulture) + ((CurrencyType)CurrencyId).ToLocalString(); }
-		}
-
-		public ApplicationData GetData()
-		{
-			return new ApplicationData
-			{
-				AddressLoad = AddressLoad,
-				Characteristic = Characteristic,
-				ClientId = ClientId,
-				Count = Count,
-				CPFileName = CPFileName,
-				CreationTimestamp = CreationTimestamp,
-				CurrencyId = CurrencyId,
-				DeliveryBillFileName = DeliveryBillFileName,
-				FactoryContact = FactoryContact,
-				FactoryEmail = FactoryEmail,
-				FactoryName = FactoryName,
-				FactoryPhone = FactoryPhone,
-				Weigth = Weigth,
-				Id = Id,
-				Invoice = Invoice,
-				InvoiceFileName = InvoiceFileName,
-				PackingFileName = PackingFileName,
-				MarkName = MarkName,
-				MethodOfDeliveryId = MethodOfDeliveryId,
-				ReferenceId = ReferenceId,
-				StateChangeTimestamp = StateChangeTimestamp,
-				StateId = StateId,
-				SwiftFileName = SwiftFileName,
-				TermsOfDelivery = TermsOfDelivery,
-				Torg12FileName = Torg12FileName,
-				TransitId = TransitId,
-				CountryId = CountryId,
-				Value = Value,
-				Volume = Volume,
-				WarehouseWorkingTime = WarehouseWorkingTime,
-				DateInStock = DateInStock,
-				DateOfCargoReceipt = DateOfCargoReceipt,
-				TransitReference = TransitReference,
-			};
-		}
+		}		
 
 		#endregion
 

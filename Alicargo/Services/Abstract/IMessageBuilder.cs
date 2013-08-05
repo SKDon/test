@@ -1,6 +1,7 @@
 ﻿using Alicargo.Core.Models;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract
 {

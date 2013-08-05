@@ -3,7 +3,7 @@ using System.Linq;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {

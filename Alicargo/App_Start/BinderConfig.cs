@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Alicargo.ModelBinders;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.App_Start
 {

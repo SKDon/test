@@ -294,16 +294,16 @@
     <Compile Include="UserController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ApplicationGroup.cs" />
-    <Compile Include="ViewModels\ApplicationListItem.cs" />
-    <Compile Include="ViewModels\ApplicationSenderEdit.cs" />
-    <Compile Include="ViewModels\ApplicationStateModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
+    <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
+    <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
+    <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\BrockerAWBModel.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\UserList.cs" />
-    <Compile Include="ViewModels\ApplicationIndexModel.cs" />
-    <Compile Include="ViewModels\ApplicationListCollection.cs" />
-    <Compile Include="ViewModels\ApplicationModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
+    <Compile Include="ViewModels\Application\ApplicationModel.cs" />
     <Compile Include="ViewModels\CarrierSelectModel.cs" />
     <Compile Include="ViewModels\ReferenceModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />

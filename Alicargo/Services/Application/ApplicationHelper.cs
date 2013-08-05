@@ -4,7 +4,7 @@ using System.Linq;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {

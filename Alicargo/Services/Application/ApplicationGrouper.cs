@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Core.Helpers;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {

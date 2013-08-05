@@ -5,6 +5,7 @@ using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.Application;
 using Resources;
 
 namespace Alicargo.Services.Email
