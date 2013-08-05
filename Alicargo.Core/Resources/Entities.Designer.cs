@@ -349,15 +349,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вес (кг).
-        /// </summary>
-        public static string Gross {
-            get {
-                return ResourceManager.GetString("Gross", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ГТД.
         /// </summary>
         public static string GTD {
@@ -696,6 +687,15 @@ namespace Resources {
         public static string WarehouseWorkingTime {
             get {
                 return ResourceManager.GetString("WarehouseWorkingTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вес (кг).
+        /// </summary>
+        public static string Weigth {
+            get {
+                return ResourceManager.GetString("Weigth", resourceCulture);
             }
         }
     }

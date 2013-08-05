@@ -234,7 +234,7 @@
   <data name="FileName" xml:space="preserve">
     <value>Прикрепленный файл</value>
   </data>
-  <data name="Gross" xml:space="preserve">
+  <data name="Weigth" xml:space="preserve">
     <value>Вес (кг)</value>
   </data>
   <data name="Mark" xml:space="preserve">

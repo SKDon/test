@@ -151,10 +151,10 @@ namespace Alicargo.Core.Tests.Services
 
 
 		[TestMethod]
-		public void Test_ApplyBusinessLogicToStates_Gross()
+		public void Test_ApplyBusinessLogicToStates_Weigth()
 		{
 			var applicationData = _context.Create<ApplicationData>();
-			applicationData.Gross = null;
+			applicationData.Weigth = null;
 			applicationData.ReferenceId = null;
 			var availableStates = new[] { _context.Create<long>() };
 

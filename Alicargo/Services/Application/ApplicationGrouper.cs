@@ -49,7 +49,7 @@ namespace Alicargo.Services.Application
 				aggregates = new
 				{
 					Count = new { sum = grouping.Sum(y => y.Count ?? 0) },
-					Gross = new { sum = grouping.Sum(y => y.Gross ?? 0) }
+					Weigth = new { sum = grouping.Sum(y => y.Weigth ?? 0) }
 				},
 				field = field,
 				value = getValue(grouping),

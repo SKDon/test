@@ -38,7 +38,7 @@ namespace Alicargo.DataAccess.Repositories
 				Torg12FileName = x.Torg12FileName,
 				PackingFileName = x.PackingFileName,
 
-				Gross = x.Gross,
+				Weigth = x.Gross,
 				AddressLoad = x.AddressLoad,
 				Characteristic = x.Characteristic,
 				Count = x.Count,

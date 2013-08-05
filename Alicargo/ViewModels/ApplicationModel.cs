@@ -30,7 +30,7 @@ namespace Alicargo.ViewModels
 			FactoryEmail = data.FactoryEmail;
 			FactoryName = data.FactoryName;
 			FactoryPhone = data.FactoryPhone;
-			Gross = data.Gross;
+			Weigth = data.Weigth;
 			Id = data.Id;
 			Invoice = data.Invoice;
 			InvoiceFileName = data.InvoiceFileName;
@@ -117,7 +117,7 @@ namespace Alicargo.ViewModels
 				FactoryEmail = FactoryEmail,
 				FactoryName = FactoryName,
 				FactoryPhone = FactoryPhone,
-				Gross = Gross,
+				Weigth = Weigth,
 				Id = Id,
 				Invoice = Invoice,
 				InvoiceFileName = InvoiceFileName,
@@ -228,8 +228,8 @@ namespace Alicargo.ViewModels
 		[DisplayNameLocalized(typeof (Entities), "WarehouseWorkingTime")]
 		public string WarehouseWorkingTime { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Gross")]
-		public float? Gross { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "Weigth")]
+		public float? Weigth { get; set; }
 
 		[DisplayNameLocalized(typeof (Entities), "Count")]
 		public int? Count { get; set; }

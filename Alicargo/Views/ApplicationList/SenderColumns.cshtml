@@ -7,7 +7,7 @@ var columns = [
 { field: "FactoryName", title: '@Entities.FactoryName', groupable: false },
 { field: "MarkName", title: '@Entities.Mark', groupable: false },
 { field: "Count", title: '@Entities.Count', groupable: false, width: "35px", groupFooterTemplate: "#= Count.sum #" },
-{ field: "Gross", title: '@Entities.Gross', groupable: false, width: "35px", groupFooterTemplate: "#= Gross.sum #" },
+{ field: "Weigth", title: '@Entities.Weigth', groupable: false, width: "35px", groupFooterTemplate: "#= Weigth.sum #" },
 { field: "Invoice", title: '@Entities.Invoice', groupable: false },
 { field: "Value", title: '@Entities.Value', groupable: false, template: function(dataItem){
 	return dataItem.Value + CurrencyType[dataItem.CurrencyId];

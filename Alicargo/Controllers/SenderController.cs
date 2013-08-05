@@ -60,7 +60,7 @@ namespace Alicargo.Controllers
 				PackingFile = null,
 				PackingFileName = application.PackingFileName,
 				FactoryName = application.FactoryName,
-				Gross = application.Gross,
+				Weigth = application.Weigth,
 				Invoice = application.Invoice,
 				InvoiceFile = null,
 				InvoiceFileName = application.InvoiceFileName,
@@ -128,7 +128,7 @@ namespace Alicargo.Controllers
 			applicationData.Count = model.Count;
 			applicationData.PackingFileName = model.PackingFileName;
 			applicationData.FactoryName = model.FactoryName;
-			applicationData.Gross = model.Gross;
+			applicationData.Weigth = model.Weigth;
 			applicationData.Invoice = model.Invoice;
 			applicationData.InvoiceFileName = model.InvoiceFileName;
 			applicationData.MarkName = model.MarkName;

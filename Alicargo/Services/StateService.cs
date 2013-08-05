@@ -114,7 +114,7 @@ namespace Alicargo.Services
 		{
 			var states = availableStates.ToList();
 
-			if (!applicationData.Gross.HasValue || !applicationData.Count.HasValue)
+			if (!applicationData.Weigth.HasValue || !applicationData.Count.HasValue)
 			{
 				states.Remove(_stateConfig.CargoInStockStateId);
 			}

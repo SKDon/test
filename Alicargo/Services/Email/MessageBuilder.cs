@@ -116,7 +116,7 @@ namespace Alicargo.Services.Email
 				model.MarkName,
 				model.Count,
 				model.Volume,
-				model.Gross,
+				model.Weigth,
 				model.Characteristic,
 				_localizationService.GetCurrency(model.Value, (CurrencyType)model.CurrencyId, culture),
 				model.AddressLoad,

@@ -36,8 +36,8 @@ namespace Alicargo.ViewModels
 		[DisplayNameLocalized(typeof(Entities), "Invoice")]
 		public string Invoice { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "Gross")]
-		public float? Gross { get; set; } // todo: rename to weigth
+		[DisplayNameLocalized(typeof(Entities), "Weigth")]
+		public float? Weigth { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Count")]
 		public int? Count { get; set; }
