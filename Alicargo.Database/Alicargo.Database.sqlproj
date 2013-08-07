@@ -61,8 +61,6 @@
     <Build Include="Tables\User.sql" />
     <Build Include="Tables\Transit.sql" />
     <Build Include="Tables\Carrier.sql" />
-    <Build Include="Tables\Factory.sql" />
-    <Build Include="Tables\Mark.sql" />
     <Build Include="Tables\State.sql" />
     <Build Include="Tables\StateLocalization.sql" />
     <Build Include="Tables\Reference.sql" />
