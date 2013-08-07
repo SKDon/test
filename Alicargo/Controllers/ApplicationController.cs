@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
@@ -17,7 +16,6 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IApplicationManager _applicationManager;
-		private readonly IStateConfig _stateConfig;
 		private readonly IIdentityService _identityService;
 		private readonly IClientService _clientService;
 		private readonly ICountryRepository _countryRepository;
@@ -26,7 +24,6 @@ namespace Alicargo.Controllers
 		public ApplicationController(
 			IApplicationPresenter applicationPresenter,
 			IApplicationManager applicationManager,
-			IStateConfig stateConfig,
 			IIdentityService identityService,
 			IClientService clientService,
 			ICountryRepository countryRepository,
@@ -34,7 +31,6 @@ namespace Alicargo.Controllers
 		{
 			_applicationPresenter = applicationPresenter;
 			_applicationManager = applicationManager;
-			_stateConfig = stateConfig;
 			_identityService = identityService;
 			_clientService = clientService;
 			_countryRepository = countryRepository;
@@ -56,72 +52,42 @@ namespace Alicargo.Controllers
 		{
 			var file = _applicationRepository.GetInvoiceFile(id);
 
-			return file.FileData.FileResult(file.FileName);
+			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult DeliveryBillFile(long id)
 		{
 			var file = _applicationRepository.GetDeliveryBillFile(id);
 
-			return file.FileData.FileResult(file.FileName);
+			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult CPFile(long id)
 		{
 			var file = _applicationRepository.GetCPFile(id);
 
-			return file.FileData.FileResult(file.FileName);
+			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult SwiftFile(long id)
 		{
 			var file = _applicationRepository.GetSwiftFile(id);
 
-			return file.FileData.FileResult(file.FileName);
+			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult Torg12File(long id)
 		{
 			var file = _applicationRepository.GetTorg12File(id);
 
-			return file.FileData.FileResult(file.FileName);
+			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult PackingFile(long id)
 		{
 			var file = _applicationRepository.GetPackingFile(id);
 
-			return file.FileData.FileResult(file.FileName);
-		}
-
-		#endregion
-
-		#region Set state
-
-		// todo: test
-		[HttpPost]
-		[Access(RoleType.Client, RoleType.Admin)]
-		public virtual ActionResult Close(long id)
-		{
-			_applicationManager.SetState(id, _stateConfig.CargoReceivedStateId);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		// todo: test
-		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Brocker, RoleType.Forwarder, RoleType.Sender)]
-		public virtual HttpStatusCodeResult SetState(long id, long stateId)
-		{
-			_applicationManager.SetState(id, stateId);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		[HttpPost]
-		public virtual JsonResult States(long id)
-		{
-			return Json(_applicationPresenter.GetAvailableStates(id));
+			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		#endregion
@@ -150,22 +116,6 @@ namespace Alicargo.Controllers
 		public virtual HttpStatusCodeResult Delete(long id)
 		{
 			_applicationManager.Delete(id);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost]
-		public virtual HttpStatusCodeResult SetTransitReference(long id, string transitReference)
-		{
-			_applicationManager.SetTransitReference(id, transitReference);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost]
-		public virtual HttpStatusCodeResult SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
-		{
-			_applicationManager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}

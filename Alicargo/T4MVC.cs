@@ -26,6 +26,7 @@ public static class MVC
 {
     public static Alicargo.Controllers.ApplicationController Application = new Alicargo.Controllers.T4MVC_ApplicationController();
     public static Alicargo.Controllers.ApplicationListController ApplicationList = new Alicargo.Controllers.T4MVC_ApplicationListController();
+    public static Alicargo.Controllers.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.T4MVC_ApplicationUpdateController();
     public static Alicargo.Controllers.BrockerController Brocker = new Alicargo.Controllers.T4MVC_BrockerController();
     public static Alicargo.Controllers.CarrierController Carrier = new Alicargo.Controllers.T4MVC_CarrierController();
     public static Alicargo.Controllers.ClientController Client = new Alicargo.Controllers.T4MVC_ClientController();
@@ -81,14 +82,12 @@ internal partial class T4MVC_System_Web_Mvc_FileResult : System.Web.Mvc.FileResu
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
+internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult
 {
-    public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
+    public T4MVC_System_Web_Mvc_ViewResult(string area, string controller, string action, string protocol = null): base()
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
-     
-    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
     
     public string Controller { get; set; }
     public string Action { get; set; }
@@ -109,12 +108,14 @@ internal partial class T4MVC_System_Web_Mvc_HttpStatusCodeResult : System.Web.Mv
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult
+internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
 {
-    public T4MVC_System_Web_Mvc_JsonResult(string area, string controller, string action, string protocol = null): base()
+    public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
+     
+    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
     
     public string Controller { get; set; }
     public string Action { get; set; }
@@ -122,9 +123,9 @@ internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResu
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult
+internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult
 {
-    public T4MVC_System_Web_Mvc_ViewResult(string area, string controller, string action, string protocol = null): base()
+    public T4MVC_System_Web_Mvc_JsonResult(string area, string controller, string action, string protocol = null): base()
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }

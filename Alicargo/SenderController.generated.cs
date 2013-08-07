@@ -4,8 +4,6 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments
-
-using Alicargo.ViewModels.Application;
 #pragma warning disable 1591
 #region T4MVC
 
@@ -151,9 +149,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void ApplicationEditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, ApplicationSenderEdit model);
+        partial void ApplicationEditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderEdit model);
 
-        public override System.Web.Mvc.ActionResult ApplicationEdit(long id, ApplicationSenderEdit model)
+        public override System.Web.Mvc.ActionResult ApplicationEdit(long id, Alicargo.ViewModels.Application.ApplicationSenderEdit model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApplicationEdit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -162,9 +160,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, ApplicationSenderEdit model);
+        partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderEdit model);
 
-        public override System.Web.Mvc.ActionResult ApplicationCreate(long id, ApplicationSenderEdit model)
+        public override System.Web.Mvc.ActionResult ApplicationCreate(long id, Alicargo.ViewModels.Application.ApplicationSenderEdit model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApplicationCreate);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

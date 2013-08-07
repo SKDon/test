@@ -4,8 +4,6 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments
-
-using Alicargo.ViewModels.Application;
 #pragma warning disable 1591
 #region T4MVC
 
@@ -87,24 +85,6 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Close()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Close);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.HttpStatusCodeResult SetState()
-        {
-            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetState);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult States()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.States);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ViewResult Edit()
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -114,18 +94,6 @@ namespace Alicargo.Controllers
         public virtual System.Web.Mvc.HttpStatusCodeResult Delete()
         {
             return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.HttpStatusCodeResult SetTransitReference()
-        {
-            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetTransitReference);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.HttpStatusCodeResult SetDateOfCargoReceipt()
-        {
-            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetDateOfCargoReceipt);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -156,13 +124,8 @@ namespace Alicargo.Controllers
             public readonly string SwiftFile = "SwiftFile";
             public readonly string Torg12File = "Torg12File";
             public readonly string PackingFile = "PackingFile";
-            public readonly string Close = "Close";
-            public readonly string SetState = "SetState";
-            public readonly string States = "States";
             public readonly string Edit = "Edit";
             public readonly string Delete = "Delete";
-            public readonly string SetTransitReference = "SetTransitReference";
-            public readonly string SetDateOfCargoReceipt = "SetDateOfCargoReceipt";
             public readonly string Create = "Create";
         }
 
@@ -176,13 +139,8 @@ namespace Alicargo.Controllers
             public const string SwiftFile = "SwiftFile";
             public const string Torg12File = "Torg12File";
             public const string PackingFile = "PackingFile";
-            public const string Close = "Close";
-            public const string SetState = "SetState";
-            public const string States = "States";
             public const string Edit = "Edit";
             public const string Delete = "Delete";
-            public const string SetTransitReference = "SetTransitReference";
-            public const string SetDateOfCargoReceipt = "SetDateOfCargoReceipt";
             public const string Create = "Create";
         }
 
@@ -243,31 +201,6 @@ namespace Alicargo.Controllers
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Close s_params_Close = new ActionParamsClass_Close();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Close CloseParams { get { return s_params_Close; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Close
-        {
-            public readonly string id = "id";
-        }
-        static readonly ActionParamsClass_SetState s_params_SetState = new ActionParamsClass_SetState();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetState SetStateParams { get { return s_params_SetState; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetState
-        {
-            public readonly string id = "id";
-            public readonly string stateId = "stateId";
-        }
-        static readonly ActionParamsClass_States s_params_States = new ActionParamsClass_States();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_States StatesParams { get { return s_params_States; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_States
-        {
-            public readonly string id = "id";
-        }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
@@ -285,24 +218,6 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Delete
         {
             public readonly string id = "id";
-        }
-        static readonly ActionParamsClass_SetTransitReference s_params_SetTransitReference = new ActionParamsClass_SetTransitReference();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetTransitReference SetTransitReferenceParams { get { return s_params_SetTransitReference; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetTransitReference
-        {
-            public readonly string id = "id";
-            public readonly string transitReference = "transitReference";
-        }
-        static readonly ActionParamsClass_SetDateOfCargoReceipt s_params_SetDateOfCargoReceipt = new ActionParamsClass_SetDateOfCargoReceipt();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetDateOfCargoReceipt SetDateOfCargoReceiptParams { get { return s_params_SetDateOfCargoReceipt; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetDateOfCargoReceipt
-        {
-            public readonly string id = "id";
-            public readonly string dateOfCargoReceipt = "dateOfCargoReceipt";
         }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -416,37 +331,6 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CloseOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
-
-        public override System.Web.Mvc.ActionResult Close(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Close);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            CloseOverride(callInfo, id);
-            return callInfo;
-        }
-
-        partial void SetStateOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, long stateId);
-
-        public override System.Web.Mvc.HttpStatusCodeResult SetState(long id, long stateId)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetState);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "stateId", stateId);
-            SetStateOverride(callInfo, id, stateId);
-            return callInfo;
-        }
-
-        partial void StatesOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id);
-
-        public override System.Web.Mvc.JsonResult States(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.States);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            StatesOverride(callInfo, id);
-            return callInfo;
-        }
-
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
         public override System.Web.Mvc.ViewResult Edit(long id)
@@ -467,31 +351,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void SetTransitReferenceOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, string transitReference);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
 
-        public override System.Web.Mvc.HttpStatusCodeResult SetTransitReference(long id, string transitReference)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetTransitReference);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitReference", transitReference);
-            SetTransitReferenceOverride(callInfo, id, transitReference);
-            return callInfo;
-        }
-
-        partial void SetDateOfCargoReceiptOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, System.DateTimeOffset? dateOfCargoReceipt);
-
-        public override System.Web.Mvc.HttpStatusCodeResult SetDateOfCargoReceipt(long id, System.DateTimeOffset? dateOfCargoReceipt)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetDateOfCargoReceipt);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "dateOfCargoReceipt", dateOfCargoReceipt);
-            SetDateOfCargoReceiptOverride(callInfo, id, dateOfCargoReceipt);
-            return callInfo;
-        }
-
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
-
-        public override System.Web.Mvc.ActionResult Edit(long id, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -511,9 +373,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? clientId, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? clientId, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
 
-        public override System.Web.Mvc.ActionResult Create(long? clientId, ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Create(long? clientId, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);

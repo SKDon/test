@@ -17,7 +17,7 @@ namespace Alicargo.Helpers
 			return bytes;
 		}
 
-		public static FileResult FileResult(this byte[] data, string fileName)
+		public static FileResult GetFileResult(this byte[] data, string fileName)
 		{
 			const string contentType = "application/octet-stream";
 			var ms = new MemoryStream();

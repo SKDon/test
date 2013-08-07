@@ -1,5 +1,4 @@
-﻿@using Alicargo.Core.Enums
-@using Resources
+﻿@using Resources
 @inherits BaseWebViewPage<ApplicationIndexModel>
 
 @helper RenderColumns()
@@ -83,7 +82,7 @@
 
 				$(".close-application", e.detailRow).click(function () {
 					if (window.confirm("@Pages.StateSetConfirm.JavaScriptStringEncode()")) {
-						var url = "@Url.Action(MVC.Application.Close())";
+						var url = "@Url.Action(MVC.ApplicationUpdate.Close())";
 						$.post(url, { id: data.Id }).done(updateGrid).fail(error);
 					}
 				});
@@ -136,7 +135,7 @@
 						select: function (e) {
 							if (window.confirm("@Pages.StateSetConfirm")) {
 								var dataItem = this.dataItem(e.item.index());
-								var url = "@Url.Action(MVC.Application.SetState())";
+								var url = "@Url.Action(MVC.ApplicationUpdate.SetState())";
 								$.post(url, { stateId: dataItem.StateId, id: applicationId }).done(updateGrid).fail(error);
 							} else {
 								getGrid().closeCell();
@@ -150,7 +149,7 @@
 								read: {
 									cache: false,
 									dataType: "json",
-									url: "@Url.Action(MVC.Application.States())/" + applicationId,
+									url: "@Url.Action(MVC.ApplicationUpdate.States())/" + applicationId,
 									type: "POST"
 								}
 							}
@@ -187,13 +186,13 @@
 				},
 				save: function (e) {
 					if (e.values.TransitReference !== undefined) {
-						$.post("@Url.Action(MVC.Application.SetTransitReference())", {
+						$.post("@Url.Action(MVC.ApplicationUpdate.SetTransitReference())", {
 							id: e.model.Id,
 							transitReference: e.values.TransitReference
 						}).fail(error);
 					}
 					if (e.values.DateOfCargoReceiptLocalString !== undefined) {
-						$.post("@Url.Action(MVC.Application.SetDateOfCargoReceipt())", {
+						$.post("@Url.Action(MVC.ApplicationUpdate.SetDateOfCargoReceipt())", {
 							id: e.model.Id,
 							dateOfCargoReceipt: kendo.toString(e.values.DateOfCargoReceiptLocalString, "d")
 						}).fail(error);
