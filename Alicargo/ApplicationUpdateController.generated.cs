@@ -43,9 +43,9 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Close()
+        public virtual System.Web.Mvc.HttpStatusCodeResult Close()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Close);
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Close);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -167,11 +167,11 @@ namespace Alicargo.Controllers
     {
         public T4MVC_ApplicationUpdateController() : base(Dummy.Instance) { }
 
-        partial void CloseOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+        partial void CloseOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 
-        public override System.Web.Mvc.ActionResult Close(long id)
+        public override System.Web.Mvc.HttpStatusCodeResult Close(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Close);
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Close);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             CloseOverride(callInfo, id);
             return callInfo;

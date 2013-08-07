@@ -55,7 +55,7 @@ namespace Alicargo.Services.Email
 		{
 			var model = _applicationPresenter.Get(id);
 
-			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationListItem.GetDisplayNumber(model.Id, model.Count));
+			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 
 			if (oldData.InvoiceFileName == null && model.InvoiceFileName != null)
 			{
@@ -117,7 +117,7 @@ namespace Alicargo.Services.Email
 		private void SendOnAdd(long id)
 		{
 			var model = _applicationPresenter.Get(id);
-			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationListItem.GetDisplayNumber(model.Id, model.Count));
+			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 			var clientData = _authenticationRepository.GetById(model.ClientUserId);
 
 			var to = _messageBuilder.GetAdminEmails()
@@ -156,7 +156,7 @@ namespace Alicargo.Services.Email
 			var model = _applicationPresenter.Get(id);
 			var stateId = model.StateId;
 
-			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationListItem.GetDisplayNumber(model.Id, model.Count));
+			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 
 			if (stateId == _stateConfig.CargoReceivedStateId)
 			{
@@ -233,7 +233,7 @@ namespace Alicargo.Services.Email
 		private void SendOnSetDateOfCargoReceipt(long id)
 		{
 			var model = _applicationPresenter.Get(id);
-			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationListItem.GetDisplayNumber(model.Id, model.Count));
+			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 			var clientData = _authenticationRepository.GetById(model.ClientUserId);
 			var body = _messageBuilder.ApplicationSetDateOfCargoReceipt(model, clientData.TwoLetterISOLanguageName);
 			var message = new Message(subject, body, model.ClientEmail);

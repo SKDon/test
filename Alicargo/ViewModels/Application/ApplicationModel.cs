@@ -95,14 +95,6 @@ namespace Alicargo.ViewModels.Application
 
 		#region Computed
 
-		public static int GetDaysInWork(DateTimeOffset dateTimeOffset)
-		{
-			unchecked // todo: fix and test
-			{
-				return (DateTimeOffset.UtcNow - dateTimeOffset.ToUniversalTime()).Days;
-			}
-		}
-
 		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
 		public string DateOfCargoReceiptLocalString
 		{

@@ -26,7 +26,7 @@ namespace Alicargo.Controllers
 		// todo: test
 		[HttpPost]
 		[Access(RoleType.Client, RoleType.Admin)]
-		public virtual ActionResult Close(long id)
+		public virtual HttpStatusCodeResult Close(long id)
 		{
 			_applicationManager.SetState(id, _stateConfig.CargoReceivedStateId);
 

@@ -79,7 +79,7 @@ namespace Alicargo.Services.Email
 				var to = _messageBuilder.GetForwarderEmails();
 				foreach (var recipient in to)
 				{
-					var body = _messageBuilder.AwbSet(model, ApplicationListItem.GetDisplayNumber(applicationModel.Id, applicationModel.Count), recipient.Culture);
+					var body = _messageBuilder.AwbSet(model, ApplicationModelHelper.GetDisplayNumber(applicationModel.Id, applicationModel.Count), recipient.Culture);
 					_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, recipient.Email));
 				}
 			}

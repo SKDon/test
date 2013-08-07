@@ -58,15 +58,8 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				return GetDisplayNumber(Id, Count);
+				return ApplicationModelHelper.GetDisplayNumber(Id, Count);
 			}
-		}
-
-		public static string GetDisplayNumber(long id, long? count)
-		{
-			id = id % 1000;
-
-			return string.Format("{0:000}{1}", id, count.HasValue && count > 0 ? "/" + count.Value : "");
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "DaysInWork")]
@@ -187,21 +180,11 @@ namespace Alicargo.ViewModels.Application
 				var dateOfArrivalUtcTicks = ReferenceDateOfArrival.HasValue ? ReferenceDateOfArrival.Value.UtcTicks : 0;
 				var dateOfDepartureUtcTicks = ReferenceDateOfDeparture.HasValue ? ReferenceDateOfDeparture.Value.UtcTicks : 0;
 
-				return GetSorter(ReferenceBill, dateOfArrivalUtcTicks, dateOfDepartureUtcTicks);
+				return ApplicationModelHelper.GetSorter(ReferenceBill, dateOfArrivalUtcTicks, dateOfDepartureUtcTicks);
 			}
 		}
 
 		// todo: test
-		public static string GetSorter(string referenceBill, long dateOfArrivalUtcTicks, long dateOfDepartureUtcTicks)
-		{
-			var noBill = referenceBill.IsNullOrWhiteSpace();
-
-			if (noBill && dateOfArrivalUtcTicks == 0 && dateOfDepartureUtcTicks == 0)
-				return "";
-
-			return string.Format("{0}_{1}_{2}_{3}", noBill ? "0" : "1", dateOfArrivalUtcTicks / 10000000000,
-				dateOfDepartureUtcTicks / 10000000000, referenceBill);
-		}
 
 		public DateTimeOffset? ReferenceDateOfDeparture { get; set; }
 
