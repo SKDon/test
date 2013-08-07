@@ -303,7 +303,6 @@
     <Compile Include="ViewModels\Application\ApplicationModelHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
-    <Compile Include="ViewModels\Application\ApplicationDetails.cs" />
     <Compile Include="ViewModels\BrockerAWBModel.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\UserList.cs" />
