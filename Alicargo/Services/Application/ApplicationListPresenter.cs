@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
-using Resources;
 
 namespace Alicargo.Services.Application
 {
@@ -63,10 +63,19 @@ namespace Alicargo.Services.Application
 				};
 			}
 
+			return GetGroupedApplicationListCollection(groups, data, stateIds, isClient, applications);
+		}
+
+		private ApplicationListCollection GetGroupedApplicationListCollection(Order[] groups, IEnumerable<ApplicationData> data,
+			IEnumerable<long> stateIds, bool isClient, ApplicationListItem[] applications)
+		{
+			var ids = data.Select(x => x.ReferenceId ?? 0).ToArray();
+			var references = _referenceRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+
 			return new ApplicationListCollection
 			{
 				Total = _applicationRepository.Count(stateIds, isClient ? _identity.Id : null),
-				Groups = _applicationGrouper.Group(applications, groups),
+				Groups = _applicationGrouper.Group(applications, groups, references),
 			};
 		}
 
@@ -128,15 +137,10 @@ namespace Alicargo.Services.Application
 				var referenceData = references[application.ReferenceId.Value];
 
 				application.ReferenceBill = referenceData.Bill;
-				application.ReferenceGTD = referenceData.GTD;
-				application.ReferenceDateOfArrival = referenceData.DateOfArrival;
-				application.ReferenceDateOfDeparture = referenceData.DateOfDeparture;
-				application.AirWayBillDisplay = string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", referenceData.Bill,
-					referenceData.DepartureAirport, referenceData.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
-					referenceData.ArrivalAirport, referenceData.DateOfArrival.ToString("ddMMMyyyy").ToUpperInvariant(),
-					string.IsNullOrWhiteSpace(referenceData.GTD) ? "" : string.Format(" &plusmn; {0}_{1}", Entities.GTD, referenceData.GTD));
 			}
 		}
+
+
 
 		private void SetTransitData(params ApplicationListItem[] applications)
 		{
@@ -158,10 +162,8 @@ namespace Alicargo.Services.Application
 			{
 				var clientData = clients[application.ClientId];
 
-				application.ClientUserId = clientData.UserId;
 				application.LegalEntity = clientData.LegalEntity;
 				application.ClientNic = clientData.Nic;
-				application.ClientEmail = clientData.Email;
 			}
 		}
 

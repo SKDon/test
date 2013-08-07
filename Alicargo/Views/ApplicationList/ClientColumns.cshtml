@@ -11,7 +11,7 @@ var columns = [
 { field: "Count", title: '@Entities.Count', groupable: false, width: "35px" },
 { field: "Weigth", title: '@Entities.Weigth', groupable: false, width: "35px" },
 { field: "Invoice", title: '@Entities.Invoice', groupable: false },
-{ field: "Value", title: '@Entities.Value', groupable: false, template: function(dataItem){return dataItem.Value + CurrencyType[dataItem.CurrencyId];} },
+{ field: "ValueString", title: '@Entities.Value', groupable: false, width: "70px" },
 { field: "Transit.MethodOfTransitString", title: '@Entities.MethodOfTransit', groupable: false },
 { field: "Transit.CarrierName", title: '@Entities.CarrierName', groupable: false },
 { field: "TransitReference", title: '@Entities.TransitReference', groupable: false, width: "150px" },

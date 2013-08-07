@@ -53,7 +53,6 @@ namespace Alicargo.ViewModels.Application
 
 		#region Computed
 
-		[DisplayNameLocalized(typeof(Entities), "DisplayNumber")]
 		public string DisplayNumber
 		{
 			get
@@ -62,7 +61,6 @@ namespace Alicargo.ViewModels.Application
 			}
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "DaysInWork")]
 		public int DaysInWork
 		{
 			get
@@ -74,7 +72,6 @@ namespace Alicargo.ViewModels.Application
 			}
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "CreationTimestamp")]
 		public string CreationTimestampLocalString
 		{
 			get
@@ -84,7 +81,6 @@ namespace Alicargo.ViewModels.Application
 			}
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
 		public string StateChangeTimestampLocalString
 		{
 			get
@@ -94,21 +90,12 @@ namespace Alicargo.ViewModels.Application
 			}
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
 		public string DateOfCargoReceiptLocalString
 		{
 			get
 			{
 				// todo: test time zones
 				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.LocalDateTime.ToShortDateString() : null;
-			}
-			set
-			{
-				// todo: test
-				if (!value.IsNullOrWhiteSpace())
-				{
-					DateOfCargoReceipt = DateTimeOffset.Parse(value);
-				}
 			}
 		}
 
@@ -119,76 +106,32 @@ namespace Alicargo.ViewModels.Application
 				// todo: test time zones
 				return DateInStock.HasValue ? DateInStock.Value.LocalDateTime.ToShortDateString() : null;
 			}
-
 		}
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
-		public MethodOfDelivery MethodOfDelivery
-		{
-			get { return (MethodOfDelivery)MethodOfDeliveryId; }
-			set { MethodOfDeliveryId = (int)value; }
-		}
-
-		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public string MethodOfDeliveryLocalString
 		{
-			get { return MethodOfDelivery.ToLocalString(); }
+			get { return ((MethodOfDelivery)MethodOfDeliveryId).ToLocalString(); }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "Value")]
 		public string ValueString
 		{
-			get { return Value.ToString(CultureInfo.CurrentUICulture) + ((CurrencyType)CurrencyId).ToLocalString(); }
+			get { return Value.ToString(".00", CultureInfo.CurrentUICulture) + ((CurrencyType)CurrencyId).ToLocalString(); }
 		}
 
 		#endregion
 
 		#region ClientData
 
-		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
 		public string LegalEntity { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "Nic")]
 		public string ClientNic { get; set; }
-
-		public long ClientUserId { get; set; }
-
-		public string ClientEmail { get; set; }
 
 		#endregion
 
-		public bool CanSetState
-		{
-			get { return _canSetState; }
-			set { _canSetState = value; }
-		}
-		private bool _canSetState = true;
+		public string CountryName { get; set; }
 
 		// todo: 3. rename to Air Way Bill
 		public string ReferenceBill { get; set; }
-		public string ReferenceGTD { get; set; }
-
-		public string AirWayBillDisplay { get; set; }
-
-		public string CountryName { get; set; }
-
-		public string AirWayBillSorter
-		{
-			get
-			{
-				var dateOfArrivalUtcTicks = ReferenceDateOfArrival.HasValue ? ReferenceDateOfArrival.Value.UtcTicks : 0;
-				var dateOfDepartureUtcTicks = ReferenceDateOfDeparture.HasValue ? ReferenceDateOfDeparture.Value.UtcTicks : 0;
-
-				return ApplicationModelHelper.GetSorter(ReferenceBill, dateOfArrivalUtcTicks, dateOfDepartureUtcTicks);
-			}
-		}
-
-		// todo: test
-
-		public DateTimeOffset? ReferenceDateOfDeparture { get; set; }
-
-		public DateTimeOffset? ReferenceDateOfArrival { get; set; }
 
 		#region State
 
@@ -204,6 +147,13 @@ namespace Alicargo.ViewModels.Application
 			}
 		}
 
+		public bool CanSetState
+		{
+			get { return _canSetState; }
+			set { _canSetState = value; }
+		}
+		private bool _canSetState = true;
+
 		public string StateName { get; set; }
 
 		public bool CanClose { get; set; }
@@ -211,96 +161,70 @@ namespace Alicargo.ViewModels.Application
 		#endregion
 
 		public Transit Transit { get; set; }
-		public long Id { get; set; }
 
 		#region Data
 
-		[DisplayNameLocalized(typeof (Entities), "CreationTimestamp")]
-		public DateTimeOffset CreationTimestamp { get; set; }
+		public long Id { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Invoice")]
+		DateTimeOffset CreationTimestamp { get; set; }
+
 		public string Invoice { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Invoice")]
 		public string InvoiceFileName { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Swift")]
 		public string SwiftFileName { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Packing")]
 		public string PackingFileName { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "DeliveryBill")]
 		public string DeliveryBillFileName { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Torg12")]
 		public string Torg12FileName { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "CP")]
 		public string CPFileName { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Characteristic")]
 		public string Characteristic { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "AddressLoad")]
 		public string AddressLoad { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "WarehouseWorkingTime")]
 		public string WarehouseWorkingTime { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Weigth")]
 		public float? Weigth { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Count")]
 		public int? Count { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Volume"), Required]
 		public float Volume { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "TermsOfDelivery")]
 		public string TermsOfDelivery { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Value")]
-		public decimal Value { get; set; }
+		decimal Value { get; set; }
 
-		[Required]
-		public int CurrencyId { get; set; }
+		int CurrencyId { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Country")]
-		public long? CountryId { get; set; }
+		internal long? CountryId { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "StateChangeTimestamp")]
-		public DateTimeOffset StateChangeTimestamp { get; set; }
+		DateTimeOffset StateChangeTimestamp { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "DateInStock")]
-		public DateTimeOffset? DateInStock { get; set; }
+		DateTimeOffset? DateInStock { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "DateOfCargoReceipt")]
-		public DateTimeOffset? DateOfCargoReceipt { get; set; }
+		DateTimeOffset? DateOfCargoReceipt { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "FactoryPhone")]
 		public string FactoryPhone { get; set; }
 
-		[DataType(DataType.EmailAddress), MaxLength(320), DisplayNameLocalized(typeof (Entities), "FactoryEmail")]
 		public string FactoryEmail { get; set; }
 
-		[DataType(DataType.MultilineText), DisplayNameLocalized(typeof (Entities), "FactoryContact")]
 		public string FactoryContact { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Mark")]
 		public string MarkName { get; set; }
 
 		public string TransitReference { get; set; }
 		public long StateId { get; set; }
-		public int MethodOfDeliveryId { get; set; }
-		public long ClientId { get; set; }
+		int MethodOfDeliveryId { get; set; }
+		internal long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? ReferenceId { get; set; }
 
 		#endregion
-
 	}
 }

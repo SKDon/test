@@ -2,6 +2,7 @@
 
 namespace Alicargo.Core.Contracts
 {
+	[Obsolete]
 	public interface IReferenceData
 	{
 		long Id { get; set; }

@@ -73,11 +73,6 @@ namespace Alicargo.DataAccess.Helpers
 			return ordered.ThenByDescending(x => x.Reference.CreationTimestamp);
 		}
 
-		//private static IQueryable<Application> ByStateNextName(IQueryable<Application> applications, bool desc, bool isFirst)
-		//{
-		//	return Order(applications, desc, isFirst, a => a.State.NextId);
-		//}
-
 		private static IQueryable<Application> ByLegalEntity(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
 			return Order(applications, desc, isFirst, a => a.Client.LegalEntity);
