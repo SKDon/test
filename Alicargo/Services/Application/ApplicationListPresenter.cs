@@ -15,22 +15,23 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationGrouper _applicationGrouper;
 		private readonly ICountryRepository _countryRepository;
-		private readonly IIdentityService _identity;
-		private readonly IAirWaybillRepository _airWaybillRepository;
+		private readonly IIdentityService _identity;	
 		private readonly IStateService _stateService;
 		private readonly IStateConfig _stateConfig;
 
-		public ApplicationListPresenter(IApplicationRepository applicationRepository,
-			IStateService stateService, IAirWaybillRepository airWaybillRepository, 
-			IIdentityService identity, IApplicationGrouper applicationGrouper, 
-			ICountryRepository countryRepository, IStateConfig stateConfig)
+		public ApplicationListPresenter(
+			IApplicationRepository applicationRepository,
+			IStateService stateService, 
+			IIdentityService identity,
+			IApplicationGrouper applicationGrouper, 
+			ICountryRepository countryRepository, 
+			IStateConfig stateConfig)
 		{
 			_applicationRepository = applicationRepository;
 			_stateService = stateService;
 			_identity = identity;
 			_applicationGrouper = applicationGrouper;
 			_countryRepository = countryRepository;
-			_airWaybillRepository = airWaybillRepository;
 			_stateConfig = stateConfig;
 		}
 
@@ -46,16 +47,17 @@ namespace Alicargo.Services.Application
 
 			var applications = GetListItems(data);
 
-			if (groups == null || groups.Length == 0)
-			{
-				return new ApplicationListCollection
+			return groups == null || groups.Length == 0
+				? new ApplicationListCollection
 				{
 					Data = applications,
 					Total = _applicationRepository.Count(stateIds, isClient ? _identity.Id : null),
+				}
+				: new ApplicationListCollection
+				{
+					Total = _applicationRepository.Count(stateIds, isClient ? _identity.Id : null),
+					Groups = _applicationGrouper.Group(applications, groups),
 				};
-			}
-
-			return GetGroupedApplicationListCollection(groups, stateIds, isClient, applications);
 		}
 
 		private ApplicationListItem[] GetListItems(IEnumerable<ApplicationListItemData> data)
@@ -118,19 +120,6 @@ namespace Alicargo.Services.Application
 				AirWaybillId = x.AirWaybillId				
 			}).ToArray();
 			return applications;
-		}
-
-		private ApplicationListCollection GetGroupedApplicationListCollection(Order[] groups, 
-			IEnumerable<long> stateIds, bool isClient, ApplicationListItem[] applications)
-		{
-			var ids = applications.Select(x => x.AirWaybillId ?? 0).ToArray();
-			var airWaybills = _airWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
-
-			return new ApplicationListCollection
-			{
-				Total = _applicationRepository.Count(stateIds, isClient ? _identity.Id : null),
-				Groups = _applicationGrouper.Group(applications, groups, airWaybills),
-			};
 		}
 
 		private static Order[] PrepareOrders(IEnumerable<Order> orders)

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Models;
+using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
 using Resources;
@@ -12,7 +12,23 @@ namespace Alicargo.Services.Application
 {
 	public sealed class ApplicationGrouper : IApplicationGrouper
 	{
+		private readonly IAirWaybillRepository _airWaybillRepository;
+
+		public ApplicationGrouper(IAirWaybillRepository airWaybillRepository)
+		{
+			_airWaybillRepository = airWaybillRepository;
+		}
+
 		public ApplicationGroup[] Group(ApplicationListItem[] applications,
+										IReadOnlyCollection<Order> groups)
+		{
+			var ids = applications.Select(x => x.AirWaybillId ?? 0).ToArray();
+			var airWaybills = _airWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+
+			return Group(applications, groups, airWaybills);
+		}
+
+		private ApplicationGroup[] Group(IEnumerable<ApplicationListItem> applications,
 			IReadOnlyCollection<Order> groups, IDictionary<long, AirWaybillData> airWaybills)
 		{
 			var @group = groups.First();
@@ -45,8 +61,6 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		#region private
-
 		private static string GetAirWayBillDisplay(AirWaybillData airWaybillData)
 		{
 			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", airWaybillData.Bill,
@@ -78,7 +92,5 @@ namespace Alicargo.Services.Application
 					: grouping.Cast<object>().ToArray()
 			};
 		}
-
-		#endregion
 	}
 }
