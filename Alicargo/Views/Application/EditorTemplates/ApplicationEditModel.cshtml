@@ -2,16 +2,6 @@
 @using Alicargo.Core.Localization
 @inherits BaseWebViewPage<ApplicationEditModel>
 
-@if (Model != null)
-{
-	@Html.HiddenFor(x => x.StateId)
-	@Html.HiddenFor(x => x.TransitId)
-	@Html.HiddenFor(x => x.DateInStock)
-	@Html.HiddenFor(x => x.DateOfCargoReceipt)
-	@Html.HiddenFor(x => x.TransitReference)
-	@Html.HiddenFor(x => x.Transit.Id)
-}
-
 @helper SelectCountry()
 {
 	@Html.LabelFor(x => x.CountryId)

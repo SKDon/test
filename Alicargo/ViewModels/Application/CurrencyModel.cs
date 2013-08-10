@@ -12,8 +12,7 @@ namespace Alicargo.ViewModels.Application
 			CurrencyId = (int)CurrencyType.Euro;
 		}
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "Value")]
+		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
 		public decimal Value { get; set; }
 
 		[Required]

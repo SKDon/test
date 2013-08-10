@@ -61,8 +61,6 @@ namespace Alicargo.Services.Application
 				PackingFileName = data.PackingFileName,
 				MarkName = data.MarkName,
 				MethodOfDeliveryId = data.MethodOfDeliveryId,
-				StateChangeTimestamp = data.StateChangeTimestamp,
-				StateId = data.StateId,
 				SwiftFileName = data.SwiftFileName,
 				TermsOfDelivery = data.TermsOfDelivery,
 				Torg12FileName = data.Torg12FileName,
@@ -70,9 +68,6 @@ namespace Alicargo.Services.Application
 				CountryId = data.CountryId,
 				Volume = data.Volume,
 				WarehouseWorkingTime = data.WarehouseWorkingTime,
-				DateInStock = data.DateInStock,
-				DateOfCargoReceipt = data.DateOfCargoReceipt,
-				TransitReference = data.TransitReference,
 			};
 
 			SetAdditionalData(application);
@@ -122,12 +117,12 @@ namespace Alicargo.Services.Application
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				model.TransitId = _transitService.AddTransit(model.Transit, carrierSelectModel);
-				model.StateId = _stateConfig.DefaultStateId;
-				model.StateChangeTimestamp = DateTimeOffset.UtcNow;
 
 				var data = new ApplicationData
 				{
-					CreationTimestamp = DateTimeOffset.UtcNow
+					CreationTimestamp = DateTimeOffset.UtcNow,
+					StateChangeTimestamp = DateTimeOffset.UtcNow,
+					StateId = _stateConfig.DefaultStateId
 					// todo: finish
 				};
 

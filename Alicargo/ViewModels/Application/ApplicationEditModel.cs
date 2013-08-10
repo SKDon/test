@@ -16,6 +16,8 @@ namespace Alicargo.ViewModels.Application
 		// todo: refactor
 		public Transit Transit { get; set; }
 
+		public long TransitId { get; set; }
+
 		#region Files
 
 		[DisplayNameLocalized(typeof(Entities), "Invoice")]
@@ -88,15 +90,6 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "Country")]
 		public long? CountryId { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
-		public DateTimeOffset StateChangeTimestamp { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "DateInStock")]
-		public DateTimeOffset? DateInStock { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
-		public DateTimeOffset? DateOfCargoReceipt { get; set; }
-
 		[Required, DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
@@ -112,14 +105,9 @@ namespace Alicargo.ViewModels.Application
 		[Required, DisplayNameLocalized(typeof(Entities), "Mark")]
 		public string MarkName { get; set; }
 
-		public string TransitReference { get; set; }
-		public long StateId { get; set; }
-
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
-		public int MethodOfDeliveryId { get; set; }
-
-		public long TransitId { get; set; }
+		public int MethodOfDeliveryId { get; set; }		
 
 		#endregion
 	}
