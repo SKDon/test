@@ -98,42 +98,6 @@ namespace Alicargo.ViewModels.Application
 			};
 		}
 
-		#region Computed
-
-		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
-		public string DateOfCargoReceiptLocalString
-		{
-			get
-			{
-				// todo: test time zones
-				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.LocalDateTime.ToShortDateString() : null;
-			}
-			set
-			{
-				// todo: test
-				if (!value.IsNullOrWhiteSpace())
-				{
-					DateOfCargoReceipt = DateTimeOffset.Parse(value);
-				}
-			}
-		}
-
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
-		public MethodOfDelivery MethodOfDelivery
-		{
-			get { return (MethodOfDelivery)MethodOfDeliveryId; }
-			set { MethodOfDeliveryId = (int)value; }
-		}
-
-		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
-		public string MethodOfDeliveryLocalString
-		{
-			get { return MethodOfDelivery.ToLocalString(); }
-		}
-
-		#endregion
-
 		#region ClientData
 
 		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
@@ -262,7 +226,11 @@ namespace Alicargo.ViewModels.Application
 
 		public string TransitReference { get; set; }
 		public long StateId { get; set; }
+
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public int MethodOfDeliveryId { get; set; }
+
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }

@@ -69,12 +69,13 @@
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.TermsOfDelivery)
-		@Html.LabelFor(model => model.MethodOfDelivery)
-		@Html.DropDownListFor(model => model.MethodOfDelivery, LocalizeEnumExtension.Select<MethodOfDelivery, SelectListItem>((item, name) => new SelectListItem
-{
-	Text = name,
-	Value = item.ToString()
-}))
+		@Html.LabelFor(model => model.MethodOfDeliveryId)
+		@Html.DropDownListFor(model => model.MethodOfDeliveryId,
+							  LocalizeEnumExtension.Select((MethodOfDelivery item, string name) => new SelectListItem
+							  {
+								  Text = name,
+								  Value = ((int)item).ToString(CultureInfo.InvariantCulture)
+							  }))
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)

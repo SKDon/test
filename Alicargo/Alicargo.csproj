@@ -244,7 +244,6 @@
     <Compile Include="SenderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Services\Abstract\IApplicationHelper.cs" />
     <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationManager.cs" />
     <Compile Include="Services\Abstract\IApplicationPresenter.cs" />
@@ -261,7 +260,6 @@
     <Compile Include="Services\Abstract\IStateService.cs" />
     <Compile Include="Services\Abstract\ITransitService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
-    <Compile Include="Services\Application\ApplicationHelper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Contract\Recipient.cs" />
     <Compile Include="Services\LocalizationService.cs" />
