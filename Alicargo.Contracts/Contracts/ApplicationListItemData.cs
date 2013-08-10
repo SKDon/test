@@ -93,6 +93,8 @@ namespace Alicargo.Contracts.Contracts
 		public int CurrencyId { get; set; }
 
 		public decimal Value { get; set; }
+		
+		public long TransitId { get; set; }
 
 		#endregion
 	}

@@ -122,6 +122,7 @@ namespace Alicargo.DataAccess.Repositories
 									   StateId = x.StateId,
 									   TermsOfDelivery = x.TermsOfDelivery,
 									   Torg12FileName = x.Torg12FileName,
+									   TransitId = x.TransitId,
 									   TransitAddress = x.Transit.Address,
 									   TransitCarrierName = x.Transit.Carrier.Name,
 									   TransitCity = x.Transit.City,

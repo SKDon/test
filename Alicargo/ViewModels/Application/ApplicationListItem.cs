@@ -164,6 +164,8 @@ namespace Alicargo.ViewModels.Application
 
 		public decimal Value { get; set; }
 
+		public long TransitId { get; set; }
+
 		#endregion
 
 		public ApplicationStateModel State { get; set; }

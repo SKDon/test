@@ -102,6 +102,7 @@ namespace Alicargo.Services.Application
 				Torg12FileName = x.Torg12FileName,
 				TransitAddress = x.TransitAddress,
 				TransitCarrierName = x.TransitCarrierName,
+				TransitId = x.TransitId,
 				TransitCity = x.TransitCity,
 				TransitDeliveryTypeString = ((DeliveryType)x.TransitDeliveryTypeId).ToLocalString(),
 				TransitMethodOfTransitString = ((MethodOfTransit)x.TransitMethodOfTransitId).ToLocalString(),
