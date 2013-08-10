@@ -1,5 +1,8 @@
-﻿namespace Alicargo.Core.Contracts
+﻿using System;
+
+namespace Alicargo.Core.Contracts
 {
+	[Obsolete]
 	public interface IClientData
 	{
 		long Id { get; set; }

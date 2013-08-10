@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Repositories;
@@ -56,7 +57,7 @@ namespace Alicargo.DataAccess.Repositories
 			return MapUser(enitity);
 		}
 
-		private static AuthenticationData MapUser(IAuthenticationData enitity)
+		private static AuthenticationData MapUser(User enitity)
 		{
 			return enitity == null
 				? null
@@ -91,7 +92,7 @@ namespace Alicargo.DataAccess.Repositories
 			return () => user.Id;
 		}
 
-		private void SetNewPassword(string password, IAuthenticationData user)
+		private void SetNewPassword(string password, User user)
 		{
 			if (string.IsNullOrWhiteSpace(password)) return;
 

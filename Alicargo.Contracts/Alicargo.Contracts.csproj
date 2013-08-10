@@ -38,6 +38,7 @@
     <Compile Include="Contracts\AirWaybillAggregate.cs" />
     <Compile Include="Contracts\ApplicationData.cs" />
     <Compile Include="Contracts\ApplicationListItemData.cs" />
+    <Compile Include="Contracts\AuthenticationData.cs" />
     <Compile Include="Helpers\ApplicationFilter.cs" />
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Helpers\OrderType.cs" />

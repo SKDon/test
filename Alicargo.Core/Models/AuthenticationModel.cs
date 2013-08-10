@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Localization;
 using Resources;
 
@@ -9,9 +8,9 @@ namespace Alicargo.Core.Models
 	{
 		public AuthenticationModel() { }
 
-		public AuthenticationModel(IAuthenticationData authentication)
+		public AuthenticationModel(string login)
 		{
-			Login = authentication.Login;
+			Login = login;
 		}
 
 		[Required]

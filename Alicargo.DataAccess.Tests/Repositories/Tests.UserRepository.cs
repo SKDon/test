@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Localization;
 using Alicargo.DataAccess.DbContext;
@@ -30,7 +31,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			CheckUser(actual, password, login);
 		}
 
-		private void CheckUser(IAuthenticationData actual, string password, string login)
+		private void CheckUser(AuthenticationData actual, string password, string login)
 		{
 			Assert.IsNotNull(actual.PasswordSalt);
 			var passwordHash = _passwordConverter.GetPasswordHash(password, actual.PasswordSalt.ToArray());

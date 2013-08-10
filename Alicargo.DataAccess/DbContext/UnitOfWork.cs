@@ -57,7 +57,5 @@ namespace Alicargo.DataAccess.DbContext
 
 	partial class Client : IClientData { }
 
-	partial class User : IAuthenticationData { }
-
 	partial class AirWaybill : IAirWaybillData { }
 }
