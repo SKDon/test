@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Globalization;
+using Alicargo.Core.Enums;
+using Alicargo.Core.Localization;
 
 namespace Alicargo.ViewModels.Application
 {
@@ -17,6 +20,11 @@ namespace Alicargo.ViewModels.Application
 			{
 				return (DateTimeOffset.UtcNow - dateTimeOffset.ToUniversalTime()).Days;
 			}
+		}
+
+		public static string GetValueString(decimal value, int currencyId)
+		{
+			return value.ToString(".00", CultureInfo.CurrentUICulture) + ((CurrencyType)currencyId).ToLocalString();
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			Currency = new CurrencyModel();
 		}
-
+		
 		// todo: tests
 		public ApplicationDetailsModel(ApplicationData data)
 		{
@@ -57,47 +57,6 @@ namespace Alicargo.ViewModels.Application
 			TransitReference = data.TransitReference;
 		}
 
-		// todo: tests
-		public ApplicationData GetData()
-		{
-			return new ApplicationData
-			{
-				AddressLoad = AddressLoad,
-				Characteristic = Characteristic,
-				ClientId = ClientId,
-				Count = Count,
-				CPFileName = CPFileName,
-				CreationTimestamp = CreationTimestamp,
-				CurrencyId = Currency.CurrencyId,
-				DeliveryBillFileName = DeliveryBillFileName,
-				FactoryContact = FactoryContact,
-				FactoryEmail = FactoryEmail,
-				FactoryName = FactoryName,
-				FactoryPhone = FactoryPhone,
-				Weigth = Weigth,
-				Id = Id,
-				Invoice = Invoice,
-				InvoiceFileName = InvoiceFileName,
-				PackingFileName = PackingFileName,
-				MarkName = MarkName,
-				MethodOfDeliveryId = MethodOfDeliveryId,
-				AirWaybillId = AirWaybillId,
-				StateChangeTimestamp = StateChangeTimestamp,
-				StateId = StateId,
-				SwiftFileName = SwiftFileName,
-				TermsOfDelivery = TermsOfDelivery,
-				Torg12FileName = Torg12FileName,
-				TransitId = TransitId,
-				CountryId = CountryId,
-				Value = Currency.Value,
-				Volume = Volume,
-				WarehouseWorkingTime = WarehouseWorkingTime,
-				DateInStock = DateInStock,
-				DateOfCargoReceipt = DateOfCargoReceipt,
-				TransitReference = TransitReference,
-			};
-		}
-
 		#region Computed
 
 		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
@@ -132,6 +91,8 @@ namespace Alicargo.ViewModels.Application
 			get { return MethodOfDelivery.ToLocalString(); }
 		}
 
+		public string ValueString { get { return ApplicationModelHelper.GetValueString(Currency.Value, Currency.CurrencyId); } }
+
 		#endregion
 
 		#region ClientData
@@ -148,7 +109,6 @@ namespace Alicargo.ViewModels.Application
 
 		#endregion
 
-		// todo: 3. rename to Air Way Bill
 		public string AirWaybillBill { get; set; }
 		public string AirWaybillGTD { get; set; }
 
@@ -159,28 +119,6 @@ namespace Alicargo.ViewModels.Application
 		public DateTimeOffset? AirWaybillDateOfArrival { get; set; }
 
 		public Transit Transit { get; set; }
-
-		#region Files
-
-		[DisplayNameLocalized(typeof(Entities), "Invoice")]
-		public byte[] InvoiceFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Packing")]
-		public byte[] PackingFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Swift")]
-		public byte[] SwiftFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "DeliveryBill")]
-		public byte[] DeliveryBillFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Torg12")]
-		public byte[] Torg12File { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "CP")]
-		public byte[] CPFile { get; set; }
-
-		#endregion
 
 		#region Data
 

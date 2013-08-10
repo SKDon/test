@@ -1386,7 +1386,7 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UserModel.cshtml" />
-    <Content Include="Views\Application\DisplayTemplates\ApplicationEditModel.cshtml" />
+    <Content Include="Views\Application\DisplayTemplates\ApplicationDetailsModel.cshtml" />
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Transit\Edit.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />

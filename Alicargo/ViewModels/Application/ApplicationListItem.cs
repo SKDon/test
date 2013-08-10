@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 
@@ -71,7 +70,7 @@ namespace Alicargo.ViewModels.Application
 
 		public string ValueString
 		{
-			get { return Value.ToString(".00", CultureInfo.CurrentUICulture) + ((CurrencyType)CurrencyId).ToLocalString(); }
+			get { return ApplicationModelHelper.GetValueString(Value, CurrencyId); }
 		}
 
 		#endregion

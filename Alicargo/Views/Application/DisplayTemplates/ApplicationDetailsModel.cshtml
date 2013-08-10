@@ -1,6 +1,6 @@
 ﻿@using Microsoft.Ajax.Utilities
 @using Resources
-@model ApplicationEditModel
+@model ApplicationDetailsModel
 
 <div class="row">
 	<div class="span4">
@@ -60,7 +60,7 @@
 <div class="row">
 
 	<div class="span2">
-		@Html.LabelFor(model => model.InvoiceFile)
+		@Html.LabelFor(model => model.InvoiceFileName)
 		@if (!Model.InvoiceFileName.IsNullOrWhiteSpace())
   {
 			<a href="@Url.Action(MVC.Application.InvoiceFile(Model.Id))">@Model.InvoiceFileName</a>
@@ -71,7 +71,7 @@
   }
 	</div>
 	<div class="span2">
-		@Html.LabelFor(model => model.SwiftFile)
+		@Html.LabelFor(model => model.SwiftFileName)
 		@if (!Model.SwiftFileName.IsNullOrWhiteSpace())
   {
 			<a href="@Url.Action(MVC.Application.SwiftFile(Model.Id))">@Model.SwiftFileName</a>
@@ -82,7 +82,7 @@
   }
 	</div>
 	<div class="span2">
-		@Html.LabelFor(model => model.DeliveryBillFile)
+		@Html.LabelFor(model => model.DeliveryBillFileName)
 		@if (!Model.DeliveryBillFileName.IsNullOrWhiteSpace())
   {
 			<a href="@Url.Action(MVC.Application.DeliveryBillFile(Model.Id))">@Model.DeliveryBillFileName</a>
@@ -93,7 +93,7 @@
   }
 	</div>
 	<div class="span2">
-		@Html.LabelFor(model => model.Torg12File)
+		@Html.LabelFor(model => model.Torg12FileName)
 		@if (!Model.Torg12FileName.IsNullOrWhiteSpace())
   {
 			<a href="@Url.Action(MVC.Application.Torg12File(Model.Id))">@Model.Torg12FileName</a>
@@ -104,7 +104,7 @@
   }
 	</div>
 	<div class="span2">
-		@Html.LabelFor(model => model.CPFile)
+		@Html.LabelFor(model => model.CPFileName)
 		@if (!Model.CPFileName.IsNullOrWhiteSpace())
   {
 			<a href="@Url.Action(MVC.Application.CPFile(Model.Id))">@Model.CPFileName</a>
