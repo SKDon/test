@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Helpers
+﻿namespace Alicargo.Contracts.Helpers
 {
 	public enum OrderType
 	{
