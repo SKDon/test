@@ -200,12 +200,12 @@ namespace Alicargo.Controllers
 
         partial void SetTransitReferenceOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, string TransitReference);
 
-        public override System.Web.Mvc.HttpStatusCodeResult SetTransitReference(long id, string TransitReference)
+        public override System.Web.Mvc.HttpStatusCodeResult SetTransitReference(long id, string transitReference)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetTransitReference);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "TransitReference", TransitReference);
-            SetTransitReferenceOverride(callInfo, id, TransitReference);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "TransitReference", transitReference);
+            SetTransitReferenceOverride(callInfo, id, transitReference);
             return callInfo;
         }
 

@@ -18,7 +18,7 @@ namespace Alicargo.Services.Email
 		private readonly IStateConfig _stateConfig;
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IAuthenticationRepository _authenticationRepository;
-		private readonly IAirWaybillRepository _AirWaybillRepository;
+		private readonly IAirWaybillRepository _airWaybillRepository;
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationManager _manager;
 
@@ -28,7 +28,7 @@ namespace Alicargo.Services.Email
 			IStateConfig stateConfig,
 			IApplicationPresenter applicationPresenter,
 			IAuthenticationRepository authenticationRepository,
-			IAirWaybillRepository AirWaybillRepository,
+			IAirWaybillRepository airWaybillRepository,
 			IApplicationRepository applicationRepository,
 			IApplicationManager manager)
 		{
@@ -37,9 +37,14 @@ namespace Alicargo.Services.Email
 			_stateConfig = stateConfig;
 			_applicationPresenter = applicationPresenter;
 			_authenticationRepository = authenticationRepository;
-			_AirWaybillRepository = AirWaybillRepository;
+			_airWaybillRepository = airWaybillRepository;
 			_applicationRepository = applicationRepository;
 			_manager = manager;
+		}
+
+		public ApplicationEditModel Get(long id)
+		{
+			return _manager.Get(id);
 		}
 
 		public void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
@@ -51,7 +56,7 @@ namespace Alicargo.Services.Email
 			SendOnFileAdd(model.Id, oldData);
 		}
 
-		private void SendOnFileAdd(long id, ApplicationEditModel oldData)
+		private void SendOnFileAdd(long id, ApplicationDetailsModel oldData)
 		{
 			var model = _applicationPresenter.Get(id);
 
@@ -186,7 +191,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		private FileHolder[] GeAllFiles(long? AirWaybillId, long id)
+		private FileHolder[] GeAllFiles(long? airWaybillId, long id)
 		{
 			var files = new List<FileHolder>(6);
 
@@ -197,10 +202,10 @@ namespace Alicargo.Services.Email
 			var swiftFile = _applicationRepository.GetSwiftFile(id);
 			var torg12File = _applicationRepository.GetTorg12File(id);
 
-			if (AirWaybillId.HasValue)
+			if (airWaybillId.HasValue)
 			{
-				var gtdFile = _AirWaybillRepository.GetGTDFile(AirWaybillId.Value);
-				var gtdAdditionalFile = _AirWaybillRepository.GTDAdditionalFile(AirWaybillId.Value);
+				var gtdFile = _airWaybillRepository.GetGTDFile(airWaybillId.Value);
+				var gtdAdditionalFile = _airWaybillRepository.GTDAdditionalFile(airWaybillId.Value);
 
 				if (gtdFile != null) files.Add(gtdFile);
 				if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);

@@ -52,9 +52,9 @@ namespace Alicargo.Controllers
 		#endregion
 
 		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost]
-		public virtual HttpStatusCodeResult SetTransitReference(long id, string TransitReference)
+		public virtual HttpStatusCodeResult SetTransitReference(long id, string transitReference)
 		{
-			_applicationManager.SetTransitReference(id, TransitReference);
+			_applicationManager.SetTransitReference(id, transitReference);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}

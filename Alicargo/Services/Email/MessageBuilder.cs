@@ -74,7 +74,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		public string ApplicationAdd(ApplicationEditModel model, string culture)
+		public string ApplicationAdd(ApplicationDetailsModel model, string culture)
 		{
 			return string.Format(Mail.Application_Add,
 				ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count),
@@ -100,7 +100,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		public string ApplicationSetState(ApplicationEditModel model, string culture)
+		public string ApplicationSetState(ApplicationDetailsModel model, string culture)
 		{
 			return string.Format(Mail.Application_SetState,
 				ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count),
@@ -140,43 +140,43 @@ namespace Alicargo.Services.Email
 				_localizationService.GetStateName(model.StateId, culture));
 		}
 
-		public string ApplicationSetDateOfCargoReceipt(ApplicationEditModel model, string culture)
+		public string ApplicationSetDateOfCargoReceipt(ApplicationDetailsModel model, string culture)
 		{
 			return string.Format(Mail.Application_SetDateOfCargoReceipt,
 				_localizationService.GetDate(model.DateOfCargoReceipt, culture));
 		}
 
-		public string ApplicationInvoiceFileAdded(ApplicationEditModel model)
+		public string ApplicationInvoiceFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_InvoiceFileAdded, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 				model.Invoice, model.InvoiceFileName);
 		}
 
-		public string ApplicationSwiftFileAdded(ApplicationEditModel model)
+		public string ApplicationSwiftFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_SwiftFileAdded, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 				model.Invoice);
 		}
 
-		public string ApplicationPackingFileAdded(ApplicationEditModel model)
+		public string ApplicationPackingFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_PackingFileAdded, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 				model.Invoice);
 		}
 
-		public string ApplicationDeliveryBillFileAdded(ApplicationEditModel model)
+		public string ApplicationDeliveryBillFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_DeliveryBillFileAdded, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 				model.Invoice);
 		}
 
-		public string ApplicationTorg12FileAdded(ApplicationEditModel model)
+		public string ApplicationTorg12FileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_Torg12FileAdded, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 				model.Invoice);
 		}
 
-		public string ApplicationCPFileAdded(ApplicationEditModel model)
+		public string ApplicationCPFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_CPFileAdded, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 				model.Invoice);

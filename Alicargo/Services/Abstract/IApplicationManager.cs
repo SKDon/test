@@ -6,6 +6,7 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IApplicationManager
 	{
+		ApplicationEditModel Get(long id);
 		void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel);
 		void Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel);
 		void Delete(long id);

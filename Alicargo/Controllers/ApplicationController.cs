@@ -14,7 +14,6 @@ namespace Alicargo.Controllers
 	// todo: refactor contracts
 	public partial class ApplicationController : Controller
 	{
-		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IApplicationManager _applicationManager;
 		private readonly IIdentityService _identityService;
 		private readonly IClientService _clientService;
@@ -22,14 +21,12 @@ namespace Alicargo.Controllers
 		private readonly IApplicationRepository _applicationRepository;
 
 		public ApplicationController(
-			IApplicationPresenter applicationPresenter,
 			IApplicationManager applicationManager,
 			IIdentityService identityService,
 			IClientService clientService,
 			ICountryRepository countryRepository,
 			IApplicationRepository applicationRepository)
 		{
-			_applicationPresenter = applicationPresenter;
 			_applicationManager = applicationManager;
 			_identityService = identityService;
 			_clientService = clientService;
@@ -43,7 +40,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Client)]
 		public virtual PartialViewResult Details(long id)
 		{
-			var application = _applicationPresenter.Get(id);
+			var application = _applicationManager.Get(id);
 
 			return PartialView(application);
 		}
@@ -98,7 +95,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id)
 		{
-			var application = _applicationPresenter.Get(id);
+			var application = _applicationManager.Get(id);
 
 			BindCountries();
 

@@ -14,6 +14,7 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateService _stateService;
+		private readonly IApplicationHelper _applicationHelper;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
 
@@ -22,7 +23,9 @@ namespace Alicargo.Services.Application
 			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig stateConfig,
 			ITransitService transitService,
-			IUnitOfWork unitOfWork, IStateService stateService)
+			IUnitOfWork unitOfWork, 
+			IStateService stateService,
+			IApplicationHelper applicationHelper)
 		{
 			_applicationRepository = applicationRepository;
 			_applicationUpdater = applicationUpdater;
@@ -30,6 +33,18 @@ namespace Alicargo.Services.Application
 			_transitService = transitService;
 			_unitOfWork = unitOfWork;
 			_stateService = stateService;
+			_applicationHelper = applicationHelper;
+		}
+
+		public ApplicationEditModel Get(long id)
+		{
+			var data = _applicationRepository.Get(id);
+
+			var application = new ApplicationEditModel(data);
+
+			_applicationHelper.SetAdditionalData(application);
+
+			return application;
 		}
 
 		public void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)

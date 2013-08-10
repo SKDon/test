@@ -23,17 +23,17 @@ namespace Alicargo.Services.Abstract
 		string AwbInvoiceFileAdded(AirWaybillModel model);
 
 		string ApplicationUpdate { get; }
-		string ApplicationAdd(ApplicationEditModel modell, string culture);
+		string ApplicationAdd(ApplicationDetailsModel modell, string culture);
 		string ApplicationDelete { get; }
 		string ApplicationSubject { get; }
-		string ApplicationSetState(ApplicationEditModel modell, string culture);
-		string ApplicationSetDateOfCargoReceipt(ApplicationEditModel model, string culture);
+		string ApplicationSetState(ApplicationDetailsModel modell, string culture);
+		string ApplicationSetDateOfCargoReceipt(ApplicationDetailsModel model, string culture);
 
-		string ApplicationInvoiceFileAdded(ApplicationEditModel model);
-		string ApplicationSwiftFileAdded(ApplicationEditModel model);
-		string ApplicationPackingFileAdded(ApplicationEditModel model);
-		string ApplicationDeliveryBillFileAdded(ApplicationEditModel model);
-		string ApplicationTorg12FileAdded(ApplicationEditModel model);
-		string ApplicationCPFileAdded(ApplicationEditModel model);
+		string ApplicationInvoiceFileAdded(ApplicationDetailsModel model);
+		string ApplicationSwiftFileAdded(ApplicationDetailsModel model);
+		string ApplicationPackingFileAdded(ApplicationDetailsModel model);
+		string ApplicationDeliveryBillFileAdded(ApplicationDetailsModel model);
+		string ApplicationTorg12FileAdded(ApplicationDetailsModel model);
+		string ApplicationCPFileAdded(ApplicationDetailsModel model);
 	}
 }

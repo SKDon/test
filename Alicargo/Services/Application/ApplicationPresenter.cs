@@ -12,32 +12,28 @@ namespace Alicargo.Services.Application
 	public sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;
-		private readonly IApplicationHelper _applicationHelper;
+		
 		private readonly IStateService _stateService;
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _stateRepository;
 
 		public ApplicationPresenter(
 			IApplicationRepository applicationRepository,
-			IApplicationHelper applicationHelper,
 			IIdentityService identity,
 			IStateService stateService,
 			IStateRepository stateRepository)
 		{
 			_applicationRepository = applicationRepository;
-			_applicationHelper = applicationHelper;
 			_identity = identity;
 			_stateService = stateService;
 			_stateRepository = stateRepository;
 		}
 
-		public ApplicationEditModel Get(long id)
+		public ApplicationDetailsModel Get(long id)
 		{
 			var data = _applicationRepository.Get(id);
 
-			var application = new ApplicationEditModel(data);
-
-			_applicationHelper.SetAdditionalData(application);
+			var application = new ApplicationDetailsModel(data);
 
 			return application;
 		}
