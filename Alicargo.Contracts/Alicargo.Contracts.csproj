@@ -39,6 +39,10 @@
     <Compile Include="Contracts\ApplicationData.cs" />
     <Compile Include="Contracts\ApplicationListItemData.cs" />
     <Compile Include="Contracts\AuthenticationData.cs" />
+    <Compile Include="Contracts\CountryData.cs" />
+    <Compile Include="Contracts\FileHolder.cs" />
+    <Compile Include="Contracts\StateData.cs" />
+    <Compile Include="Contracts\UserData.cs" />
     <Compile Include="Helpers\ApplicationFilter.cs" />
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Helpers\OrderType.cs" />
