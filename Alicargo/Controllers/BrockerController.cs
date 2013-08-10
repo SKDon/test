@@ -14,20 +14,20 @@ namespace Alicargo.Controllers
 	{
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateConfig _stateConfig;
-		private readonly IReferenceRepository _referenceRepository;
+		private readonly IAirWaybillRepository _AirWaybillRepository;
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbManager _awbManager;
 
 		public BrockerController(
 			IBrockerRepository brockerRepository,
 			IStateConfig stateConfig,
-			IReferenceRepository referenceRepository,
+			IAirWaybillRepository AirWaybillRepository,
 			IAwbPresenter awbPresenter,
 			IAwbManager awbManager)
 		{
 			_brockerRepository = brockerRepository;
 			_stateConfig = stateConfig;
-			_referenceRepository = referenceRepository;
+			_AirWaybillRepository = AirWaybillRepository;
 			_awbPresenter = awbPresenter;
 			_awbManager = awbManager;
 		}
@@ -50,11 +50,11 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Brocker), HttpGet]
 		public virtual ViewResult AWB(long id)
 		{
-			var data = _referenceRepository.Get(id).First();
+			var data = _AirWaybillRepository.Get(id).First();
 
 			if (data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
 			{
-				return View("Message", (object)string.Format(Pages.CantEditReference, data.Bill));
+				return View("Message", (object)string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
 			var model = new BrockerAWBModel
@@ -86,7 +86,7 @@ namespace Alicargo.Controllers
 
 			if (data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
 			{
-				return View("Message", (object)string.Format(Pages.CantEditReference, data.Bill));
+				return View("Message", (object)string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
 			data.GTD = model.GTD;

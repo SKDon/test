@@ -137,7 +137,7 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_SetTransitReference
         {
             public readonly string id = "id";
-            public readonly string transitReference = "transitReference";
+            public readonly string TransitReference = "TransitReference";
         }
         static readonly ActionParamsClass_SetDateOfCargoReceipt s_params_SetDateOfCargoReceipt = new ActionParamsClass_SetDateOfCargoReceipt();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -198,14 +198,14 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void SetTransitReferenceOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, string transitReference);
+        partial void SetTransitReferenceOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, string TransitReference);
 
-        public override System.Web.Mvc.HttpStatusCodeResult SetTransitReference(long id, string transitReference)
+        public override System.Web.Mvc.HttpStatusCodeResult SetTransitReference(long id, string TransitReference)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetTransitReference);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitReference", transitReference);
-            SetTransitReferenceOverride(callInfo, id, transitReference);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "TransitReference", TransitReference);
+            SetTransitReferenceOverride(callInfo, id, TransitReference);
             return callInfo;
         }
 

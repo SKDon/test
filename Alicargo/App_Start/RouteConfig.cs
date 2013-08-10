@@ -10,9 +10,9 @@ namespace Alicargo.App_Start
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
-				"Reference_Create",
-				"Reference/Create/{applicationId}",
-				new { controller = "Reference", action = "Create" },
+				"AirWaybill_Create",
+				"AirWaybill/Create/{applicationId}",
+				new { controller = "AirWaybill", action = "Create" },
 				new[] { "Alicargo.Controllers" }
 			);
 

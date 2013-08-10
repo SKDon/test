@@ -18,7 +18,7 @@ namespace Alicargo.Services.Email
 		private readonly IStateConfig _stateConfig;
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IAuthenticationRepository _authenticationRepository;
-		private readonly IReferenceRepository _referenceRepository;
+		private readonly IAirWaybillRepository _AirWaybillRepository;
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationManager _manager;
 
@@ -28,7 +28,7 @@ namespace Alicargo.Services.Email
 			IStateConfig stateConfig,
 			IApplicationPresenter applicationPresenter,
 			IAuthenticationRepository authenticationRepository,
-			IReferenceRepository referenceRepository,
+			IAirWaybillRepository AirWaybillRepository,
 			IApplicationRepository applicationRepository,
 			IApplicationManager manager)
 		{
@@ -37,7 +37,7 @@ namespace Alicargo.Services.Email
 			_stateConfig = stateConfig;
 			_applicationPresenter = applicationPresenter;
 			_authenticationRepository = authenticationRepository;
-			_referenceRepository = referenceRepository;
+			_AirWaybillRepository = AirWaybillRepository;
 			_applicationRepository = applicationRepository;
 			_manager = manager;
 		}
@@ -169,7 +169,7 @@ namespace Alicargo.Services.Email
 			}
 			else
 			{
-				var files = GeAllFiles(model.ReferenceId, model.Id);
+				var files = GeAllFiles(model.AirWaybillId, model.Id);
 				var clientData = _authenticationRepository.GetById(model.ClientUserId);
 				var body = _messageBuilder.ApplicationSetState(model, clientData.TwoLetterISOLanguageName);
 				_mailSender.Send(new Message(subject, body, model.ClientEmail) { Files = files });
@@ -186,7 +186,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		private FileHolder[] GeAllFiles(long? referenceId, long id)
+		private FileHolder[] GeAllFiles(long? AirWaybillId, long id)
 		{
 			var files = new List<FileHolder>(6);
 
@@ -197,10 +197,10 @@ namespace Alicargo.Services.Email
 			var swiftFile = _applicationRepository.GetSwiftFile(id);
 			var torg12File = _applicationRepository.GetTorg12File(id);
 
-			if (referenceId.HasValue)
+			if (AirWaybillId.HasValue)
 			{
-				var gtdFile = _referenceRepository.GetGTDFile(referenceId.Value);
-				var gtdAdditionalFile = _referenceRepository.GTDAdditionalFile(referenceId.Value);
+				var gtdFile = _AirWaybillRepository.GetGTDFile(AirWaybillId.Value);
+				var gtdAdditionalFile = _AirWaybillRepository.GTDAdditionalFile(AirWaybillId.Value);
 
 				if (gtdFile != null) files.Add(gtdFile);
 				if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);
@@ -223,9 +223,9 @@ namespace Alicargo.Services.Email
 			SendOnSetDateOfCargoReceipt(id);
 		}
 
-		public void SetTransitReference(long id, string transitReference)
+		public void SetTransitReference(long id, string TransitReference)
 		{
-			_manager.SetTransitReference(id, transitReference);
+			_manager.SetTransitReference(id, TransitReference);
 
 			SendOnSetState(id);
 		}

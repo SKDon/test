@@ -14,13 +14,13 @@ namespace Alicargo.Services.Abstract
 		string DefaultSubject { get; }
 		string ClientAdd(Client model);
 
-		string AwbCreate(ReferenceModel model, string culture);
-		string AwbSet(ReferenceModel model, string applicationNumber, string culture);
-		string AwbPackingFileAdded(ReferenceModel model);
-		string AwbAWBFileAdded(ReferenceModel model);
-		string AwbGTDAdditionalFileAdded(ReferenceModel model);
-		string AwbGTDFileAdded(ReferenceModel model);
-		string AwbInvoiceFileAdded(ReferenceModel model);
+		string AwbCreate(AirWaybillModel model, string culture);
+		string AwbSet(AirWaybillModel model, string applicationNumber, string culture);
+		string AwbPackingFileAdded(AirWaybillModel model);
+		string AwbAWBFileAdded(AirWaybillModel model);
+		string AwbGTDAdditionalFileAdded(AirWaybillModel model);
+		string AwbGTDFileAdded(AirWaybillModel model);
+		string AwbInvoiceFileAdded(AirWaybillModel model);
 
 		string ApplicationUpdate { get; }
 		string ApplicationAdd(ApplicationModel modell, string culture);

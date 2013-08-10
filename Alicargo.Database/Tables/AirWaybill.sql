@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[Reference] (
+﻿CREATE TABLE [dbo].[AirWaybill] (
 	[Id]				BIGINT				IDENTITY (1, 1) NOT NULL,
-	[CreationTimestamp]	DATETIMEOFFSET (7)	CONSTRAINT [DF_ReferenceCreationTimestamp] DEFAULT (GETDATE()) NOT NULL,
+	[CreationTimestamp]	DATETIMEOFFSET (7)	CONSTRAINT [DF_AirWaybillCreationTimestamp] DEFAULT (GETDATE()) NOT NULL,
 	[Bill]				NVARCHAR (320)		NOT NULL,
 	[ArrivalAirport]	NVARCHAR (MAX)		NOT NULL,
 	[DepartureAirport]	NVARCHAR (MAX)		NOT NULL,
@@ -21,16 +21,16 @@
 	[StateId]			BIGINT				NOT NULL,
 	[StateChangeTimestamp] DATETIMEOFFSET(7) DEFAULT (GETDATE()) NOT NULL,
 
-	CONSTRAINT [PK_dbo.Reference] PRIMARY KEY CLUSTERED ([Id] ASC),
-	CONSTRAINT [FK_dbo.Reference_dbo.Brocker_BrockerId] FOREIGN KEY ([BrockerId]) REFERENCES [dbo].[Brocker] ([Id]),
-	CONSTRAINT [FK_dbo.Reference_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id])
+	CONSTRAINT [PK_dbo.AirWaybill] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_dbo.AirWaybill_dbo.Brocker_BrockerId] FOREIGN KEY ([BrockerId]) REFERENCES [dbo].[Brocker] ([Id]),
+	CONSTRAINT [FK_dbo.AirWaybill_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id])
 );
 
 
 GO
 CREATE NONCLUSTERED INDEX [IX_BrockerId]
-	ON [dbo].[Reference]([BrockerId] ASC);
+	ON [dbo].[AirWaybill]([BrockerId] ASC);
 
 GO
 
-CREATE UNIQUE INDEX [IX_Reference_Bill] ON [dbo].[Reference] ([Bill])
+CREATE UNIQUE INDEX [IX_AirWaybill_Bill] ON [dbo].[AirWaybill] ([Bill])

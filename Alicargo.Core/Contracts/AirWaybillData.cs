@@ -5,12 +5,12 @@ using Resources;
 
 namespace Alicargo.Core.Contracts
 {
-	public class ReferenceData : IReferenceData
+	public class AirWaybillData : IAirWaybillData
 	{
-		public ReferenceData() { }
+		public AirWaybillData() { }
 
 		// todo: test
-		public ReferenceData(IReferenceData data)
+		public AirWaybillData(IAirWaybillData data)
 		{
 			ArrivalAirport = data.ArrivalAirport;
 			Bill = data.Bill;

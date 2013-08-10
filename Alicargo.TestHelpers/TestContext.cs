@@ -19,7 +19,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
 		public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
 		public Mock<IApplicationManager> ApplicationManager { get; private set; }
-		public Mock<IReferenceRepository> ReferenceRepository { get; private set; }
+		public Mock<IAirWaybillRepository> AirWaybillRepository { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }
@@ -31,7 +31,7 @@ namespace Alicargo.TestHelpers
 
 
 			Fixture.Register(() =>
-				Fixture.Build<ReferenceModel>()
+				Fixture.Build<AirWaybillModel>()
 					.Without(x => x.DateOfDepartureLocalString)
 					.Without(x => x.DateOfArrivalLocalString)
 					.Create());
@@ -42,7 +42,7 @@ namespace Alicargo.TestHelpers
 			ApplicationRepository = Inject<IApplicationRepository>();
 			ApplicationUpdater = Inject<IApplicationUpdateRepository>();
 			ApplicationManager = Inject<IApplicationManager>();
-			ReferenceRepository = Inject<IReferenceRepository>();
+			AirWaybillRepository = Inject<IAirWaybillRepository>();
 			StateConfig = Inject<IStateConfig>();
 			UnitOfWork = Inject<IUnitOfWork>();
 			Transaction = Inject<ITransaction>();

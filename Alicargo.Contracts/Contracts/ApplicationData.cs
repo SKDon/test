@@ -36,6 +36,6 @@ namespace Alicargo.Contracts.Contracts
 		public int MethodOfDeliveryId { get; set; }
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
-		public long? ReferenceId { get; set; }
+		public long? AirWaybillId { get; set; }
 	}
 }

@@ -32,7 +32,7 @@ namespace Alicargo.DataAccess.Helpers
 
 			to.ClientId = from.ClientId;
 			to.TransitId = from.TransitId;
-			to.ReferenceId = from.ReferenceId;
+			to.AirWaybillId = from.AirWaybillId;
 			to.CountryId = from.CountryId;
 
 			to.FactoryName = from.FactoryName;

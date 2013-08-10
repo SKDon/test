@@ -171,9 +171,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Нельзя редактировать AWB {0} в текущем статусе.
         /// </summary>
-        public static string CantEditReference {
+        public static string CantEditAirWaybill {
             get {
-                return ResourceManager.GetString("CantEditReference", resourceCulture);
+                return ResourceManager.GetString("CantEditAirWaybill", resourceCulture);
             }
         }
         
@@ -315,9 +315,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Не задано.
         /// </summary>
-        public static string NoReference {
+        public static string NoAirWaybill {
             get {
-                return ResourceManager.GetString("NoReference", resourceCulture);
+                return ResourceManager.GetString("NoAirWaybill", resourceCulture);
             }
         }
         
@@ -342,45 +342,45 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Добавить референс.
         /// </summary>
-        public static string ReferenceAdd {
+        public static string AirWaybillAdd {
             get {
-                return ResourceManager.GetString("ReferenceAdd", resourceCulture);
+                return ResourceManager.GetString("AirWaybillAdd", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Редактировать Air Way Bill.
         /// </summary>
-        public static string ReferenceEdit {
+        public static string AirWaybillEdit {
             get {
-                return ResourceManager.GetString("ReferenceEdit", resourceCulture);
+                return ResourceManager.GetString("AirWaybillEdit", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Air Way Bills.
         /// </summary>
-        public static string References {
+        public static string AirWaybills {
             get {
-                return ResourceManager.GetString("References", resourceCulture);
+                return ResourceManager.GetString("AirWaybills", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Задать референс.
         /// </summary>
-        public static string ReferenceSelect {
+        public static string AirWaybillSelect {
             get {
-                return ResourceManager.GetString("ReferenceSelect", resourceCulture);
+                return ResourceManager.GetString("AirWaybillSelect", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Вы уверены, что хотите задать референс?.
         /// </summary>
-        public static string ReferenceSetConfirm {
+        public static string AirWaybillSetConfirm {
             get {
-                return ResourceManager.GetString("ReferenceSetConfirm", resourceCulture);
+                return ResourceManager.GetString("AirWaybillSetConfirm", resourceCulture);
             }
         }
         

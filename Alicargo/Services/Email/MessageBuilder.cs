@@ -132,10 +132,10 @@ namespace Alicargo.Services.Email
 				model.Transit.WarehouseWorkingTime,
 				_localizationService.GetMethodOfTransit(model.Transit.MethodOfTransit, culture),
 				_localizationService.GetDeliveryType(model.Transit.DeliveryType, culture),
-				model.ReferenceBill,
-				_localizationService.GetDate(model.ReferenceDateOfDeparture, culture),
-				_localizationService.GetDate(model.ReferenceDateOfArrival, culture),
-				model.ReferenceGTD,
+				model.AirWaybillBill,
+				_localizationService.GetDate(model.AirWaybillDateOfDeparture, culture),
+				_localizationService.GetDate(model.AirWaybillDateOfArrival, culture),
+				model.AirWaybillGTD,
 				model.TransitReference,
 				_localizationService.GetStateName(model.StateId, culture));
 		}
@@ -192,7 +192,7 @@ namespace Alicargo.Services.Email
 
 		#region AWB
 
-		public string AwbCreate(ReferenceModel model, string culture)
+		public string AwbCreate(AirWaybillModel model, string culture)
 		{
 			return string.Format(Mail.Awb_Create, model.DepartureAirport,
 				_localizationService.GetDate(model.DateOfDeparture, culture),
@@ -201,7 +201,7 @@ namespace Alicargo.Services.Email
 				model.TotalWeight, model.TotalCount, model.Bill);
 		}
 
-		public string AwbSet(ReferenceModel model, string applicationNumber, string culture)
+		public string AwbSet(AirWaybillModel model, string applicationNumber, string culture)
 		{
 			return string.Format(Mail.Awb_Set, model.DepartureAirport,
 				_localizationService.GetDate(model.DateOfDeparture, culture),
@@ -210,27 +210,27 @@ namespace Alicargo.Services.Email
 				model.TotalWeight, model.TotalCount, model.Bill, applicationNumber);
 		}
 
-		public string AwbPackingFileAdded(ReferenceModel model)
+		public string AwbPackingFileAdded(AirWaybillModel model)
 		{
 			return string.Format(Mail.Awb_PackingFileAdd, model.Bill);
 		}
 
-		public string AwbAWBFileAdded(ReferenceModel model)
+		public string AwbAWBFileAdded(AirWaybillModel model)
 		{
 			return string.Format(Mail.Awb_AWBFileAdd, model.Bill);
 		}
 
-		public string AwbGTDAdditionalFileAdded(ReferenceModel model)
+		public string AwbGTDAdditionalFileAdded(AirWaybillModel model)
 		{
 			return string.Format(Mail.Awb_GTDAdditionalFileAdd, model.Bill);
 		}
 
-		public string AwbGTDFileAdded(ReferenceModel model)
+		public string AwbGTDFileAdded(AirWaybillModel model)
 		{
 			return string.Format(Mail.Awb_GTDFileAdd, model.Bill);
 		}
 
-		public string AwbInvoiceFileAdded(ReferenceModel model)
+		public string AwbInvoiceFileAdded(AirWaybillModel model)
 		{
 			return string.Format(Mail.Awb_InvoiceFileAdd, model.Bill);
 		}

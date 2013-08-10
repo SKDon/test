@@ -6,31 +6,31 @@
 		# if(InvoiceFileName != null){ #
 		<p>
 			<span>@Entities.Invoice:</span>
-			<a href="@Url.Action(MVC.Reference.InvoiceFile())/#= Id #">#= InvoiceFileName #</a>
+			<a href="@Url.Action(MVC.AirWaybill.InvoiceFile())/#= Id #">#= InvoiceFileName #</a>
 		</p>
 		# } #
 		# if(GTDFileName != null){ #
 		<p>
 			<span>@Entities.GTD:</span>
-			<a href="@Url.Action(MVC.Reference.GTDFile())/#= Id #">#= GTDFileName #</a>
+			<a href="@Url.Action(MVC.AirWaybill.GTDFile())/#= Id #">#= GTDFileName #</a>
 		</p>
 		# } #
 		# if(GTDAdditionalFileName != null){ #
 		<p>
 			<span>@Entities.GTDAdditional:</span>
-			<a href="@Url.Action(MVC.Reference.GTDAdditionalFile())/#= Id #">#= GTDAdditionalFileName #</a>
+			<a href="@Url.Action(MVC.AirWaybill.GTDAdditionalFile())/#= Id #">#= GTDAdditionalFileName #</a>
 		</p>
 		# } #
 		# if(PackingFileName != null){ #
 		<p>
 			<span>@Entities.Packing:</span>
-			<a href="@Url.Action(MVC.Reference.PackingFile())/#= Id #">#= PackingFileName #</a>
+			<a href="@Url.Action(MVC.AirWaybill.PackingFile())/#= Id #">#= PackingFileName #</a>
 		</p>
 		# } #
 		# if(AWBFileName != null){ #
 		<p>
 			<span>@Entities.AWB:</span>
-			<a href="@Url.Action(MVC.Reference.AWBFile())/#= Id #">#= AWBFileName #</a>
+			<a href="@Url.Action(MVC.AirWaybill.AWBFile())/#= Id #">#= AWBFileName #</a>
 		</p>
 		# } #
 	</div>

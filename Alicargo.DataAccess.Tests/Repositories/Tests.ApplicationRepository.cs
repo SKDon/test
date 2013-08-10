@@ -59,7 +59,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			newData.StateId = old.StateId;
 			newData.ClientId = old.ClientId;
 			newData.TransitId = old.TransitId;
-			newData.ReferenceId = old.ReferenceId;
+			newData.AirWaybillId = old.AirWaybillId;
 			newData.CreationTimestamp = old.CreationTimestamp;
 			newData.StateChangeTimestamp = old.StateChangeTimestamp;
 
@@ -99,7 +99,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 				.With(x => x.ClientId, client.Id)
 				.With(x => x.TransitId, transit.Id)
 				.With(x => x.StateId, state.Id)
-				.With(x => x.ReferenceId, null)
+				.With(x => x.AirWaybillId, null)
 				//.With(x => x.InvoiceFileName, null)
 				//.With(x => x.SwiftFileName, null)
 				//.With(x => x.Torg12FileName, null)

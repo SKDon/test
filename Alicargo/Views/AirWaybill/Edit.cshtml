@@ -1,0 +1,4 @@
+﻿@using Resources
+@model AirWaybillModel
+
+@Html.EditPage(Pages.AirWaybillEdit, Url.Action(MVC.AirWaybill.Edit()), Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton(Model.Id)))

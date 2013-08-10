@@ -12,7 +12,7 @@ namespace Alicargo.Services.Application
 	public sealed class ApplicationGrouper : IApplicationGrouper
 	{
 		public ApplicationGroup[] Group(ApplicationListItem[] applications,
-			IReadOnlyCollection<Order> groups, IDictionary<long, ReferenceData> references)
+			IReadOnlyCollection<Order> groups, IDictionary<long, AirWaybillData> AirWaybills)
 		{
 			var @group = groups.First();
 			var orders = groups.Except(new[] { @group }).ToArray();
@@ -24,19 +24,19 @@ namespace Alicargo.Services.Application
 						applications.GroupBy(x => x.Data.AirWaybillId ?? 0)
 									.Select(x =>
 										GetApplicationGroup(x, orders, "AirWaybill",
-											g => references.ContainsKey(g.Key)
-												? GetAirWayBillDisplay(references[g.Key])
-												: "", references))
+											g => AirWaybills.ContainsKey(g.Key)
+												? GetAirWayBillDisplay(AirWaybills[g.Key])
+												: "", AirWaybills))
 									.ToArray();
 
 				case OrderType.State:
 					return applications.GroupBy(x => x.State.StateName)
-						.Select(x => GetApplicationGroup(x, orders, "State", g => g.Key, references))
+						.Select(x => GetApplicationGroup(x, orders, "State", g => g.Key, AirWaybills))
 						.ToArray();
 
 				case OrderType.LegalEntity:
 					return applications.GroupBy(x => x.Data.ClientLegalEntity)
-						.Select(x => GetApplicationGroup(x, orders, "LegalEntity", g => g.Key, references))
+						.Select(x => GetApplicationGroup(x, orders, "LegalEntity", g => g.Key, AirWaybills))
 						.ToArray();
 
 				default:
@@ -46,12 +46,12 @@ namespace Alicargo.Services.Application
 
 		#region private
 
-		private static string GetAirWayBillDisplay(ReferenceData referenceData)
+		private static string GetAirWayBillDisplay(AirWaybillData AirWaybillData)
 		{
-			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", referenceData.Bill,
-				referenceData.DepartureAirport, referenceData.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
-				referenceData.ArrivalAirport, referenceData.DateOfArrival.ToString("ddMMMyyyy").ToUpperInvariant(),
-				string.IsNullOrWhiteSpace(referenceData.GTD) ? "" : string.Format(" &plusmn; {0}_{1}", Entities.GTD, referenceData.GTD));
+			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", AirWaybillData.Bill,
+				AirWaybillData.DepartureAirport, AirWaybillData.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
+				AirWaybillData.ArrivalAirport, AirWaybillData.DateOfArrival.ToString("ddMMMyyyy").ToUpperInvariant(),
+				string.IsNullOrWhiteSpace(AirWaybillData.GTD) ? "" : string.Format(" &plusmn; {0}_{1}", Entities.GTD, AirWaybillData.GTD));
 		}
 
 		private ApplicationGroup GetApplicationGroup<T>(
@@ -59,7 +59,7 @@ namespace Alicargo.Services.Application
 			IReadOnlyCollection<Order> orders,
 			string field,
 			Func<IGrouping<T, ApplicationListItem>, string> getValue,
-			IDictionary<long, ReferenceData> references)
+			IDictionary<long, AirWaybillData> AirWaybills)
 		{
 			return new ApplicationGroup
 			{
@@ -73,7 +73,7 @@ namespace Alicargo.Services.Application
 				value = getValue(grouping),
 				hasSubgroups = orders.Count > 0,
 				items = orders.Count > 0
-					? Group(grouping.ToArray(), orders, references).Cast<object>().ToArray()
+					? Group(grouping.ToArray(), orders, AirWaybills).Cast<object>().ToArray()
 					: grouping.Cast<object>().ToArray()
 			};
 		}

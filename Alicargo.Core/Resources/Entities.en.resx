@@ -279,9 +279,6 @@
   <data name="RecipientName" xml:space="preserve">
     <value>Recipient</value>
   </data>
-  <data name="Reference" xml:space="preserve">
-    <value>Reference</value>
-  </data>
   <data name="RS" xml:space="preserve">
     <value>current account</value>
   </data>
@@ -316,7 +313,7 @@
     <value>Total weight</value>
   </data>
   <data name="TransitReference" xml:space="preserve">
-    <value>Transit reference</value>
+    <value>Transit AirWaybill</value>
   </data>
   <data name="Value" xml:space="preserve">
     <value>Cost</value>

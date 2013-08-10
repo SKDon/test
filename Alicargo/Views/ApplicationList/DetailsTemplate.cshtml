@@ -34,27 +34,27 @@
 	@:# } #
 }
 
-@helper SelectReference()
+@helper SelectAirWaybill()
 {
 	if (!IdentityService.IsInRole(RoleType.Sender) && !IdentityService.IsInRole(RoleType.Admin)) { return; }
-	if (Model.References == null || !Model.References.Any()) { return; }
+	if (Model.AirWaybills == null || !Model.AirWaybills.Any()) { return; }
 	@:&nbsp;
-	@Html.LabelFor(x => x.References)
+	@Html.LabelFor(x => x.AirWaybills)
 	@:&nbsp;
-	var list = Model.References.Select(x => new SelectListItem
+	var list = Model.AirWaybills.Select(x => new SelectListItem
 	{
 		Text = x.Value,
 		Value = x.Key.ToString(CultureInfo.InvariantCulture)
 	}).ToList();
 	list.Insert(0, new SelectListItem { Text = "", Value = "" });
-	@Html.DropDownListFor(x => x.References, list, new { @class = "reference-select" })
+	@Html.DropDownListFor(x => x.AirWaybills, list, new { @class = "AirWaybill-select" })
 }
 
-@helper ReferenceButton()
+@helper AirWaybillButton()
 {
 	if (!IdentityService.IsInRole(RoleType.Sender) && !IdentityService.IsInRole(RoleType.Admin)) { return; }
 	
-	<a class="btn btn-inverse" href="@Url.Action(MVC.Reference.Create())/#= Id #">@Pages.ReferenceAdd</a>
+	<a class="btn btn-inverse" href="@Url.Action(MVC.AirWaybill.Create())/#= Id #">@Pages.AirWaybillAdd</a>
 }
 
 <div class='grid-details'>
@@ -68,9 +68,9 @@
 			<div>
 				@CloseButton()
 				@EditButton()
-				<span class="reference-holder">
-					@SelectReference()
-					@ReferenceButton()
+				<span class="AirWaybill-holder">
+					@SelectAirWaybill()
+					@AirWaybillButton()
 				</span>
 			</div>
 		</div>

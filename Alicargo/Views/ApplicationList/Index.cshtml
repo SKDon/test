@@ -94,26 +94,26 @@
 					}
 				});
 
-				$(".reference-select", e.detailRow)
+				$(".AirWaybill-select", e.detailRow)
 					.val(data.Data.AirWaybillId)
 					.change(function () {
-						if (window.confirm("@Pages.ReferenceSetConfirm")) {
-							var url = "@Url.Action(MVC.Reference.SetReference())";
-							$.post(url, { referenceId: $(this).val(), applicationId: data.Id }).done(updateGrid).fail(error);
+						if (window.confirm("@Pages.AirWaybillSetConfirm")) {
+							var url = "@Url.Action(MVC.AirWaybill.SetAirWaybill())";
+							$.post(url, { AirWaybillId: $(this).val(), applicationId: data.Id }).done(updateGrid).fail(error);
 						}
 					});
 				
 				var cargoIsFlew = @StateConfig.CargoIsFlewStateId;
-				if (data.ReferenceId && data.StateId != cargoIsFlew) {
-					$(".reference-holder", e.detailRow).hide();
+				if (data.AirWaybillId && data.StateId != cargoIsFlew) {
+					$(".AirWaybill-holder", e.detailRow).hide();
 				} else {
-					$(".reference-holder", e.detailRow).show();
+					$(".AirWaybill-holder", e.detailRow).show();
 				}
 			};
 			var detailCollapse = function (e) {
 				$(".close-application", e.detailRow).unbind("click");
 				$(".delete-application", e.detailRow).unbind("click");
-				$(".reference-select", e.detailRow).unbind("change");
+				$(".AirWaybill-select", e.detailRow).unbind("change");
 			};
 
 			@* ReSharper disable UnusedLocals *@
@@ -188,7 +188,7 @@
 					if (e.values.TransitReference !== undefined) {
 						$.post("@Url.Action(MVC.ApplicationUpdate.SetTransitReference())", {
 							id: e.model.Id,
-							transitReference: e.values.TransitReference
+							TransitReference: e.values.TransitReference
 						}).fail(error);
 					}
 					if (e.values.DateOfCargoReceiptLocalString !== undefined) {

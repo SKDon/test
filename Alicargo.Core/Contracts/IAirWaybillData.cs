@@ -3,7 +3,7 @@
 namespace Alicargo.Core.Contracts
 {
 	[Obsolete]
-	public interface IReferenceData
+	public interface IAirWaybillData
 	{
 		long Id { get; set; }
 		DateTimeOffset CreationTimestamp { get; set; }

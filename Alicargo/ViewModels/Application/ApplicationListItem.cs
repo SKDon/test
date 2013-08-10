@@ -80,7 +80,7 @@ namespace Alicargo.ViewModels.Application
 		//public string CountryName { get; set; }
 
 		//// todo: 3. rename to Air Way Bill
-		//public string ReferenceBill { get; set; }
+		//public string AirWaybillBill { get; set; }
 
 		//#region State
 
@@ -172,7 +172,7 @@ namespace Alicargo.ViewModels.Application
 		//int MethodOfDeliveryId { get; set; }
 		//internal long ClientId { get; set; }
 		//public long TransitId { get; set; }
-		//public long? ReferenceId { get; set; }
+		//public long? AirWaybillId { get; set; }
 
 		//#endregion
 

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="References" xml:space="preserve">
+  <data name="AirWaybills" xml:space="preserve">
     <value>Aggiungi</value>
   </data>
   <data name="Admins" xml:space="preserve">
@@ -132,7 +132,7 @@
   <data name="SignIn" xml:space="preserve">
     <value>Log in</value>
   </data>
-  <data name="ReferenceSetConfirm" xml:space="preserve">
+  <data name="AirWaybillSetConfirm" xml:space="preserve">
     <value>Sei sicuro di voler chiedere un riferimento?</value>
   </data>
   <data name="StateSetConfirm" xml:space="preserve">
@@ -156,7 +156,7 @@
   <data name="ClientAdd" xml:space="preserve">
     <value>Aggiungi client</value>
   </data>
-  <data name="ReferenceAdd" xml:space="preserve">
+  <data name="AirWaybillAdd" xml:space="preserve">
     <value>Aggiungi riferimento</value>
   </data>
   <data name="StateAdd" xml:space="preserve">
@@ -165,7 +165,7 @@
   <data name="UploadFiles" xml:space="preserve">
     <value>Scaricare file</value>
   </data>
-  <data name="ReferenceSelect" xml:space="preserve">
+  <data name="AirWaybillSelect" xml:space="preserve">
     <value>Chiedi riferimento</value>
   </data>
   <data name="StateSet" xml:space="preserve">
@@ -192,7 +192,7 @@
   <data name="Back" xml:space="preserve">
     <value>Indietro</value>
   </data>
-  <data name="NoReference" xml:space="preserve">
+  <data name="NoAirWaybill" xml:space="preserve">
     <value>Non definito</value>
   </data>
   <data name="NoFile" xml:space="preserve">
@@ -231,7 +231,7 @@
   <data name="Edit" xml:space="preserve">
     <value>Modifica</value>
   </data>
-  <data name="ReferenceEdit" xml:space="preserve">
+  <data name="AirWaybillEdit" xml:space="preserve">
     <value>Modifica Air Way Bill</value>
   </data>
   <data name="ApplicationEdit" xml:space="preserve">
@@ -270,7 +270,7 @@
   <data name="Application" xml:space="preserve">
     <value>Applicazione</value>
   </data>
-  <data name="CantEditReference" xml:space="preserve">
+  <data name="CantEditAirWaybill" xml:space="preserve">
     <value>Non è possibile modificare AWB {0}  lo stato attuale della</value>
   </data>
 </root>

@@ -63,7 +63,7 @@
     <Build Include="Tables\Carrier.sql" />
     <Build Include="Tables\State.sql" />
     <Build Include="Tables\StateLocalization.sql" />
-    <Build Include="Tables\Reference.sql" />
+    <Build Include="Tables\AirWaybill.sql" />
     <Build Include="Tables\Brocker.sql" />
     <Build Include="Tables\AvailableState.sql" />
     <Build Include="Tables\Forwarder.sql" />

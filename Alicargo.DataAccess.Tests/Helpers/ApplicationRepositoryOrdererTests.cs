@@ -47,7 +47,7 @@ namespace Alicargo.DataAccess.Tests.Helpers
 				.OrderByDescending(x => x.State.Name)
 				.ThenBy(x => x.Client.LegalEntity)
 				.ThenByDescending(x => x.Id)
-				.ThenBy(x => x.Reference.Bill).ToArray();
+				.ThenBy(x => x.AirWaybill.Bill).ToArray();
 
 			var orders = new[]
 			{
@@ -86,7 +86,7 @@ namespace Alicargo.DataAccess.Tests.Helpers
 			return new Application
 			{
 				Id = id,
-				Reference = new Reference
+				AirWaybill = new AirWaybill
 				{
 					Bill = bill
 				},

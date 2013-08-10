@@ -15,12 +15,12 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationGrouper _applicationGrouper;
 		private readonly ICountryRepository _countryRepository;
 		private readonly IIdentityService _identity;
-		private readonly IReferenceRepository _referenceRepository;
+		private readonly IAirWaybillRepository _AirWaybillRepository;
 		private readonly IStateService _stateService;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListPresenter(IApplicationRepository applicationRepository,
-			IStateService stateService, IReferenceRepository referenceRepository, 
+			IStateService stateService, IAirWaybillRepository AirWaybillRepository, 
 			IIdentityService identity, IApplicationGrouper applicationGrouper, 
 			ICountryRepository countryRepository, IStateConfig stateConfig)
 		{
@@ -29,7 +29,7 @@ namespace Alicargo.Services.Application
 			_identity = identity;
 			_applicationGrouper = applicationGrouper;
 			_countryRepository = countryRepository;
-			_referenceRepository = referenceRepository;
+			_AirWaybillRepository = AirWaybillRepository;
 			_stateConfig = stateConfig;
 		}
 
@@ -82,12 +82,12 @@ namespace Alicargo.Services.Application
 			IEnumerable<long> stateIds, bool isClient, ApplicationListItem[] applications)
 		{
 			var ids = applications.Select(x => x.Data.AirWaybillId ?? 0).ToArray();
-			var references = _referenceRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+			var AirWaybills = _AirWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
 
 			return new ApplicationListCollection
 			{
 				Total = _applicationRepository.Count(stateIds, isClient ? _identity.Id : null),
-				Groups = _applicationGrouper.Group(applications, groups, references),
+				Groups = _applicationGrouper.Group(applications, groups, AirWaybills),
 			};
 		}
 

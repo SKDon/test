@@ -14,23 +14,23 @@ namespace Alicargo.Controllers
 {
 	// todo: refactor contracts
 	// todo: rename to AwbContorller
-	public partial class ReferenceController : Controller
+	public partial class AirWaybillController : Controller
 	{
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbManager _awbManager;
 		private readonly IStateConfig _stateConfig;
-		private readonly IReferenceRepository _referenceRepository;
+		private readonly IAirWaybillRepository _airWaybillRepository;
 
-		public ReferenceController(
+		public AirWaybillController(
 			IAwbPresenter awbPresenter,
 			IAwbManager awbManager,
 			IStateConfig stateConfig,
-			IReferenceRepository referenceRepository)
+			IAirWaybillRepository airWaybillRepository)
 		{
 			_awbPresenter = awbPresenter;
 			_awbManager = awbManager;
 			_stateConfig = stateConfig;
-			_referenceRepository = referenceRepository;
+			_airWaybillRepository = airWaybillRepository;
 		}
 
 		#region Create
@@ -44,7 +44,7 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		//[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Sender)]
-		public virtual ActionResult Create(long applicationId, ReferenceModel model)
+		public virtual ActionResult Create(long applicationId, AirWaybillModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
 
@@ -54,7 +54,7 @@ namespace Alicargo.Controllers
 			}
 			catch (DublicateException)
 			{
-				ModelState.AddModelError("Bill", Validation.ReferenceAlreadyExists);
+				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
 				return View(model);
 			}
 
@@ -107,9 +107,9 @@ namespace Alicargo.Controllers
 		//}
 
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
-		public virtual ActionResult SetReference(long applicationId, long? referenceId)
+		public virtual ActionResult SetAirWaybill(long applicationId, long? AirWaybillId)
 		{
-			_awbManager.SetAwb(applicationId, referenceId);
+			_awbManager.SetAwb(applicationId, AirWaybillId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -117,7 +117,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Brocker), HttpPost]
 		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
 		{
-			var data = _referenceRepository.Get(id).First();
+			var data = _airWaybillRepository.Get(id).First();
 			if (data.GTD.IsNullOrWhiteSpace())
 			{
 				throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
@@ -131,7 +131,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Brocker), ChildActionOnly]
 		public virtual PartialViewResult CargoIsCustomsClearedButton(long id)
 		{
-			var data = _referenceRepository.Get(id).First();
+			var data = _airWaybillRepository.Get(id).First();
 
 			var model = new CargoIsCustomsClearedButtonModel
 			{
@@ -151,7 +151,7 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
-		public virtual ActionResult Edit(ReferenceModel model)
+		public virtual ActionResult Edit(AirWaybillModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
 
@@ -161,11 +161,11 @@ namespace Alicargo.Controllers
 			}
 			catch (DublicateException)
 			{
-				ModelState.AddModelError("Bill", Validation.ReferenceAlreadyExists);
+				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
 				return View(model);
 			}
 
-			return RedirectToAction(MVC.Reference.Edit(model.Id));
+			return RedirectToAction(MVC.AirWaybill.Edit(model.Id));
 		}
 
 		#endregion
@@ -174,35 +174,35 @@ namespace Alicargo.Controllers
 
 		public virtual FileResult InvoiceFile(long id)
 		{
-			var file = _referenceRepository.GetInvoiceFile(id);
+			var file = _airWaybillRepository.GetInvoiceFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult GTDFile(long id)
 		{
-			var file = _referenceRepository.GetGTDFile(id);
+			var file = _airWaybillRepository.GetGTDFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult GTDAdditionalFile(long id)
 		{
-			var file = _referenceRepository.GTDAdditionalFile(id);
+			var file = _airWaybillRepository.GTDAdditionalFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult PackingFile(long id)
 		{
-			var file = _referenceRepository.GetPackingFile(id);
+			var file = _airWaybillRepository.GetPackingFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult AWBFile(long id)
 		{
-			var file = _referenceRepository.GetAWBFile(id);
+			var file = _airWaybillRepository.GetAWBFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}

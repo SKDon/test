@@ -123,7 +123,7 @@
   <data name="LoginExists" xml:space="preserve">
     <value>Accedi occupato</value>
   </data>
-  <data name="ReferenceAlreadyExists" xml:space="preserve">
+  <data name="AirWaybillAlreadyExists" xml:space="preserve">
     <value>This Way Bill Air è già stato aggiunto</value>
   </data>
   <data name="WrongLoginOrPassword" xml:space="preserve">

@@ -42,7 +42,7 @@
 	[ClientId]				BIGINT				NOT NULL,
 	[TransitId]				BIGINT				NOT NULL,
 	[CountryId]				BIGINT				NULL,
-	[ReferenceId]			BIGINT				NULL,
+	[AirWaybillId]			BIGINT				NULL,
 
 	[FactoryName]			NVARCHAR(320)		NOT NULL, 
 	[FactoryPhone]			NVARCHAR(MAX)		NULL, 
@@ -53,7 +53,7 @@
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),
-	CONSTRAINT [FK_dbo.Application_dbo.Reference_ReferenceId] FOREIGN KEY ([ReferenceId]) REFERENCES [dbo].[Reference] ([Id]),
+	CONSTRAINT [FK_dbo.Application_dbo.AirWaybill_AirWaybillId] FOREIGN KEY ([AirWaybillId]) REFERENCES [dbo].[AirWaybill] ([Id]),
 	CONSTRAINT [FK_dbo.Application_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]),
 	CONSTRAINT [FK_dbo.Application_dbo.Transit_TransitId] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),
 	CONSTRAINT [FK_dbo.Application_dbo.Country_CountryId] FOREIGN KEY ([CountryId]) REFERENCES [dbo].[Country] ([Id])
@@ -76,6 +76,6 @@ CREATE NONCLUSTERED INDEX [IX_Application_TransitId]
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_ReferenceId]
-    ON [dbo].[Application]([ReferenceId] ASC);
+CREATE NONCLUSTERED INDEX [IX_AirWaybillId]
+    ON [dbo].[Application]([AirWaybillId] ASC);
 

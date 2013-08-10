@@ -219,25 +219,25 @@
   <data name="Users" xml:space="preserve">
     <value>Пользователи</value>
   </data>
-  <data name="ReferenceAdd" xml:space="preserve">
+  <data name="AirWaybillAdd" xml:space="preserve">
     <value>Добавить референс</value>
   </data>
-  <data name="ReferenceSelect" xml:space="preserve">
+  <data name="AirWaybillSelect" xml:space="preserve">
     <value>Задать референс</value>
   </data>
   <data name="Files" xml:space="preserve">
     <value>Файлы</value>
   </data>
-  <data name="NoReference" xml:space="preserve">
+  <data name="NoAirWaybill" xml:space="preserve">
     <value>Не задано</value>
   </data>
-  <data name="ReferenceSetConfirm" xml:space="preserve">
+  <data name="AirWaybillSetConfirm" xml:space="preserve">
     <value>Вы уверены, что хотите задать референс?</value>
   </data>
-  <data name="References" xml:space="preserve">
+  <data name="AirWaybills" xml:space="preserve">
     <value>Air Way Bills</value>
   </data>
-  <data name="ReferenceEdit" xml:space="preserve">
+  <data name="AirWaybillEdit" xml:space="preserve">
     <value>Редактировать Air Way Bill</value>
   </data>
   <data name="UploadFiles" xml:space="preserve">
@@ -270,7 +270,7 @@
   <data name="Application" xml:space="preserve">
     <value>Заявка</value>
   </data>
-  <data name="CantEditReference" xml:space="preserve">
+  <data name="CantEditAirWaybill" xml:space="preserve">
     <value>Нельзя редактировать AWB {0} в текущем статусе</value>
   </data>
 </root>

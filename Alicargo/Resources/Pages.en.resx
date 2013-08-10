@@ -153,7 +153,7 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="CantEditReference" xml:space="preserve">
+  <data name="CantEditAirWaybill" xml:space="preserve">
     <value>Can not edit the AWB {0} at the current state</value>
   </data>
   <data name="CargoIsCustomsCleared" xml:space="preserve">
@@ -201,7 +201,7 @@
   <data name="NoFile" xml:space="preserve">
     <value>No file</value>
   </data>
-  <data name="NoReference" xml:space="preserve">
+  <data name="NoAirWaybill" xml:space="preserve">
     <value>Not defined</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -210,19 +210,19 @@
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
-  <data name="ReferenceAdd" xml:space="preserve">
+  <data name="AirWaybillAdd" xml:space="preserve">
     <value>Add AWB</value>
   </data>
-  <data name="ReferenceEdit" xml:space="preserve">
+  <data name="AirWaybillEdit" xml:space="preserve">
     <value>Edit Air Way Bill</value>
   </data>
-  <data name="References" xml:space="preserve">
+  <data name="AirWaybills" xml:space="preserve">
     <value>Air Way Bills</value>
   </data>
-  <data name="ReferenceSelect" xml:space="preserve">
+  <data name="AirWaybillSelect" xml:space="preserve">
     <value>Define air waybill</value>
   </data>
-  <data name="ReferenceSetConfirm" xml:space="preserve">
+  <data name="AirWaybillSetConfirm" xml:space="preserve">
     <value>Are you sure that you want to define air waybill?</value>
   </data>
   <data name="RememberMe" xml:space="preserve">

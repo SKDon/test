@@ -49,9 +49,9 @@
     <Compile Include="Contracts\FileHolder.cs" />
     <Compile Include="Contracts\IAuthenticationData.cs" />
     <Compile Include="Contracts\IClientData.cs" />
-    <Compile Include="Contracts\IReferenceData.cs" />
-    <Compile Include="Contracts\ReferenceAggregate.cs" />
-    <Compile Include="Contracts\ReferenceData.cs" />
+    <Compile Include="Contracts\IAirWaybillData.cs" />
+    <Compile Include="Contracts\AirWaybillAggregate.cs" />
+    <Compile Include="Contracts\AirWaybillData.cs" />
     <Compile Include="Contracts\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\UserData.cs" />
@@ -68,6 +68,11 @@
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\ITransaction.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Resources\Entities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entities.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Enums.en.Designer.cs">
       <DependentUpon>Enums.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -104,17 +109,12 @@
     <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\IFactoryRepository.cs" />
     <Compile Include="Repositories\IMarkRepository.cs" />
-    <Compile Include="Repositories\IReferenceRepository.cs" />
+    <Compile Include="Repositories\IAirWaybillRepository.cs" />
     <Compile Include="Repositories\IStateRepository.cs" />
     <Compile Include="Repositories\ITransitRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\IAuthenticationRepository.cs" />
     <Compile Include="Models\Mark.cs" />
-    <Compile Include="Resources\Entities.Designer.cs">
-      <DependentUpon>Entities.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\Enums.it.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -136,11 +136,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Entities.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities.it.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums.it.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>
@@ -154,8 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

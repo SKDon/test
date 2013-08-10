@@ -8,14 +8,14 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class ReferenceRepository : BaseRepository, IReferenceRepository
+	internal sealed class AirWaybillRepository : BaseRepository, IAirWaybillRepository
 	{
-		private readonly Expression<Func<Reference, ReferenceData>> _selector;
+		private readonly Expression<Func<AirWaybill, AirWaybillData>> _selector;
 
-		public ReferenceRepository(IUnitOfWork unitOfWork)
+		public AirWaybillRepository(IUnitOfWork unitOfWork)
 			: base(unitOfWork)
 		{
-			_selector = x => new ReferenceData
+			_selector = x => new AirWaybillData
 			{
 				ArrivalAirport = x.ArrivalAirport,
 				Bill = x.Bill,
@@ -36,25 +36,25 @@ namespace Alicargo.DataAccess.Repositories
 			};
 		}
 
-		public ReferenceData[] GetAll()
+		public AirWaybillData[] GetAll()
 		{
-			return Context.References.Select(_selector).ToArray();
+			return Context.AirWaybills.Select(_selector).ToArray();
 		}
 
-		public Func<long> Add(ReferenceData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
+		public Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
 		{
-			var entity = new Reference();
+			var entity = new AirWaybill();
 
 			data.CopyTo(entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
 
-			Context.References.InsertOnSubmit(entity);
+			Context.AirWaybills.InsertOnSubmit(entity);
 
 			return () => entity.Id;
 		}
 
-		public ReferenceData[] Get(params long[] ids)
+		public AirWaybillData[] Get(params long[] ids)
 		{
-			return Context.References
+			return Context.AirWaybills
 				.Where(x => ids.Contains(x.Id))
 				.Select(_selector)
 				.ToArray();
@@ -64,28 +64,28 @@ namespace Alicargo.DataAccess.Repositories
 		public long Count(long? brockerId = null)
 		{
 			return brockerId.HasValue
-				? Context.References.Where(x => x.BrockerId == brockerId.Value).LongCount()
-				: Context.References.LongCount();
+				? Context.AirWaybills.Where(x => x.BrockerId == brockerId.Value).LongCount()
+				: Context.AirWaybills.LongCount();
 		}
 
 		// todo: test
-		public ReferenceData[] GetRange(long skip, int take, long? brockerId = null)
+		public AirWaybillData[] GetRange(long skip, int take, long? brockerId = null)
 		{
-			var references = Context.References.AsQueryable();
+			var AirWaybills = Context.AirWaybills.AsQueryable();
 			if (brockerId.HasValue)
 			{
-				references = references.Where(x => x.BrockerId == brockerId.Value);
+				AirWaybills = AirWaybills.Where(x => x.BrockerId == brockerId.Value);
 			}
-			return references.Skip((int)skip)
+			return AirWaybills.Skip((int)skip)
 				.Take(take)
 				.Select(_selector)
 				.ToArray();
 		}
 
 		// todo: test
-		public ReferenceAggregate[] GetAggregate(params long[] ids)
+		public AirWaybillAggregate[] GetAggregate(params long[] ids)
 		{
-			var data = Context.References
+			var data = Context.AirWaybills
 				.Where(x => ids.Contains(x.Id))
 				.Select(x => new
 				{
@@ -101,9 +101,9 @@ namespace Alicargo.DataAccess.Repositories
 				.ToDictionary(x => new { x.Id, x.StateId }, x => x.Data.ToArray());
 
 			return data
-				.Select(x => new ReferenceAggregate
+				.Select(x => new AirWaybillAggregate
 				{
-					ReferenceId = x.Key.Id,
+					AirWaybillId = x.Key.Id,
 					TotalCount = x.Value.Sum(y => y.Count ?? 0),
 					TotalWeight = x.Value.Sum(y => y.Gross ?? 0),
 					StateId = x.Key.StateId
@@ -113,7 +113,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public string[] GetClientEmails(long id)
 		{
-			return Context.References
+			return Context.AirWaybills
 				.Where(x => x.Id == id)
 				.SelectMany(x => x.Applications)
 				.Select(x => x.Client.Email)
@@ -121,18 +121,18 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		// todo: test
-		public void Update(ReferenceData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
+		public void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
 		{
-			var entity = Context.References.First(x => x.Id == data.Id);
+			var entity = Context.AirWaybills.First(x => x.Id == data.Id);
 
 			data.CopyTo(entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
 		}
 
 		#region Files // todo: test
 
-		private FileHolder GetFile(Expression<Func<Reference, bool>> where, Expression<Func<Reference, FileHolder>> selector)
+		private FileHolder GetFile(Expression<Func<AirWaybill, bool>> where, Expression<Func<AirWaybill, FileHolder>> selector)
 		{
-			return Context.References.Where(where).Select(selector).FirstOrDefault();
+			return Context.AirWaybills.Where(where).Select(selector).FirstOrDefault();
 		}
 
 		public FileHolder GetAWBFile(long id)
@@ -195,15 +195,15 @@ namespace Alicargo.DataAccess.Repositories
 		// todo: test
 		public void Delete(long id)
 		{
-			var reference = Context.References.First(x => x.Id == id);
-			Context.References.DeleteOnSubmit(reference);
+			var AirWaybill = Context.AirWaybills.First(x => x.Id == id);
+			Context.AirWaybills.DeleteOnSubmit(AirWaybill);
 		}
 
-		public void SetState(long referenceId, long stateId)
+		public void SetState(long AirWaybillId, long stateId)
 		{
-			var reference = Context.References.First(x => x.Id == referenceId);
-			reference.StateId = stateId;
-			reference.StateChangeTimestamp = DateTimeOffset.UtcNow;
+			var AirWaybill = Context.AirWaybills.First(x => x.Id == AirWaybillId);
+			AirWaybill.StateId = stateId;
+			AirWaybill.StateChangeTimestamp = DateTimeOffset.UtcNow;
 		}
 	}
 }

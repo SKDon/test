@@ -59,5 +59,5 @@ namespace Alicargo.DataAccess.DbContext
 
 	partial class User : IAuthenticationData { }
 
-	partial class Reference : IReferenceData { }
+	partial class AirWaybill : IAirWaybillData { }
 }

@@ -10,24 +10,24 @@ namespace Alicargo.Services
 {
 	public sealed class AwbPresenter : IAwbPresenter
 	{
-		private readonly IReferenceRepository _referenceRepository;
+		private readonly IAirWaybillRepository _AirWaybillRepository;
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateService _stateService;
 		private readonly IIdentityService _identityService;
 
 		public AwbPresenter(
-			IReferenceRepository referenceRepository,
+			IAirWaybillRepository AirWaybillRepository,
 			IBrockerRepository brockerRepository,
 			IStateService stateService,
 			IIdentityService identityService)
 		{
-			_referenceRepository = referenceRepository;
+			_AirWaybillRepository = AirWaybillRepository;
 			_brockerRepository = brockerRepository;
 			_stateService = stateService;
 			_identityService = identityService;
 		}		
 
-		public ListCollection<ReferenceModel> List(int take, int skip)
+		public ListCollection<AirWaybillModel> List(int take, int skip)
 		{
 			long? brockerId = null;
 			if (_identityService.IsInRole(RoleType.Brocker) && _identityService.Id.HasValue)
@@ -35,21 +35,21 @@ namespace Alicargo.Services
 				var brocker = _brockerRepository.GetByUserId(_identityService.Id.Value);
 				brockerId = brocker.Id;
 			}
-			var total = _referenceRepository.Count(brockerId);
+			var total = _AirWaybillRepository.Count(brockerId);
 
-			var data = _referenceRepository.GetRange(skip, take, brockerId)
-					.Select(x => new ReferenceModel(x))
+			var data = _AirWaybillRepository.GetRange(skip, take, brockerId)
+					.Select(x => new AirWaybillModel(x))
 					.ToArray();
 
 			SetAdditionalData(data);
 
-			return new ListCollection<ReferenceModel> { Data = data, Total = total };
+			return new ListCollection<AirWaybillModel> { Data = data, Total = total };
 		}
 
-		private void SetAdditionalData(params ReferenceModel[] data)
+		private void SetAdditionalData(params AirWaybillModel[] data)
 		{
-			var aggregates = _referenceRepository.GetAggregate(data.Select(x => x.Id).ToArray())
-				.ToDictionary(x => x.ReferenceId, x => x);
+			var aggregates = _AirWaybillRepository.GetAggregate(data.Select(x => x.Id).ToArray())
+				.ToDictionary(x => x.AirWaybillId, x => x);
 			var localizedStates = _stateService.GetLocalizedDictionary();
 
 			foreach (var model in data)
@@ -68,13 +68,13 @@ namespace Alicargo.Services
 		}
 
 		// todo: test SetAdditionalData
-		public ReferenceModel Get(long id)
+		public AirWaybillModel Get(long id)
 		{
-			var data = _referenceRepository.Get(id).FirstOrDefault();
+			var data = _AirWaybillRepository.Get(id).FirstOrDefault();
 
 			if (data == null) throw new EntityNotFoundException("Refarence: " + id);
 
-			var model = new ReferenceModel(data);
+			var model = new AirWaybillModel(data);
 
 			SetAdditionalData(model);
 

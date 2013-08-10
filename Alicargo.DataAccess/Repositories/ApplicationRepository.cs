@@ -54,7 +54,7 @@ namespace Alicargo.DataAccess.Repositories
 				TransitReference = x.TransitReference,
 				MarkName = x.MarkName,
 
-				ReferenceId = x.ReferenceId,
+				AirWaybillId = x.AirWaybillId,
 				CountryId = x.CountryId,
 				StateChangeTimestamp = x.StateChangeTimestamp,
 				StateId = x.StateId,
@@ -105,7 +105,7 @@ namespace Alicargo.DataAccess.Repositories
 									   SwiftFileName = x.SwiftFileName,
 									   Volume = x.Volume,
 									   Count = x.Count,
-									   AirWaybill = x.Reference.Bill,
+									   AirWaybill = x.AirWaybill.Bill,
 									   CPFileName = x.CPFileName,
 									   Characteristic = x.Characteristic,
 									   ClientLegalEntity = x.Client.LegalEntity,
@@ -136,13 +136,13 @@ namespace Alicargo.DataAccess.Repositories
 									   MethodOfDeliveryId = x.MethodOfDeliveryId,
 									   Value = x.Value,
 									   CurrencyId = x.CurrencyId,
-									   AirWaybillId = x.ReferenceId
+									   AirWaybillId = x.AirWaybillId
 								   }).ToArray();
 		}
 
-		public ApplicationData[] GetByReference(long id)
+		public ApplicationData[] GetByAirWaybill(long id)
 		{
-			return Context.Applications.Where(x => x.ReferenceId == id).Select(_selector).ToArray();
+			return Context.Applications.Where(x => x.AirWaybillId == id).Select(_selector).ToArray();
 		}
 
 		public ApplicationData GetByTransit(long id)

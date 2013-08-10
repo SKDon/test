@@ -180,9 +180,6 @@
   <data name="Invoice" xml:space="preserve">
     <value>Fattura</value>
   </data>
-  <data name="Reference" xml:space="preserve">
-    <value>Riferimento</value>
-  </data>
   <data name="StateName" xml:space="preserve">
     <value>Stato</value>
   </data>

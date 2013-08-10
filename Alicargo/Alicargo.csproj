@@ -145,6 +145,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirWaybillController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -181,16 +184,13 @@
     <Compile Include="ModelBinders\ApplicationModelBinder.cs" />
     <Compile Include="ModelBinders\BrockerAWBModelBinder.cs" />
     <Compile Include="ModelBinders\ApplicationSenderEditBinder.cs" />
-    <Compile Include="ModelBinders\ReferenceModelBinder.cs" />
+    <Compile Include="ModelBinders\AirWaybillModelBinder.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
-    <Compile Include="Controllers\ReferenceController.cs" />
+    <Compile Include="Controllers\AirWaybillController.cs" />
     <Compile Include="Helpers\BaseWebViewPage.cs" />
     <Compile Include="Helpers\HandleErrorAttribute.cs" />
     <Compile Include="Helpers\FileExtensions.cs" />
     <Compile Include="Helpers\PageHelpers.cs" />
-    <Compile Include="ReferenceController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Resources\Validation.en.Designer.cs">
       <DependentUpon>Validation.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -310,7 +310,7 @@
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
     <Compile Include="ViewModels\Application\ApplicationModel.cs" />
     <Compile Include="ViewModels\CarrierSelectModel.cs" />
-    <Compile Include="ViewModels\ReferenceModel.cs" />
+    <Compile Include="ViewModels\AirWaybillModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\ListCollection.cs" />
     <Compile Include="ViewModels\SignIdModel.cs" />
@@ -1366,14 +1366,14 @@
     <Content Include="Views\Shared\EditorTemplates\ApplicationModel.cshtml" />
     <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
-    <Content Include="Views\Reference\Create.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ReferenceModel.cshtml" />
+    <Content Include="Views\AirWaybill\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AirWaybillModel.cshtml" />
     <Content Include="Views\Carrier\Select.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SelectModel.cshtml" />
-    <Content Include="Views\Reference\Index.cshtml" />
-    <Content Include="Views\Reference\Edit.cshtml" />
+    <Content Include="Views\AirWaybill\Index.cshtml" />
+    <Content Include="Views\AirWaybill\Edit.cshtml" />
     <Content Include="Views\Brocker\Select.cshtml" />
-    <Content Include="Views\Reference\DetailsTemplate.cshtml" />
+    <Content Include="Views\AirWaybill\DetailsTemplate.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\ApplicationList\ClientColumns.cshtml" />
     <Content Include="Views\ApplicationList\AdminColumns.cshtml" />
@@ -1387,7 +1387,7 @@
     <Content Include="Views\Application\DisplayTemplates\ApplicationModel.cshtml" />
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Transit\Edit.cshtml" />
-    <Content Include="Views\Reference\CargoIsCustomsClearedButton.cshtml" />
+    <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
     <Content Include="Views\Script\Index.cshtml" />
     <Content Include="Views\Brocker\AWB.cshtml" />
     <Content Include="Views\Brocker\EditorTemplates\BrockerAWBModel.cshtml" />

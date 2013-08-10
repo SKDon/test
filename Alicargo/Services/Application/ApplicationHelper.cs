@@ -14,16 +14,16 @@ namespace Alicargo.Services.Application
 		private readonly ICountryRepository _countryRepository;
 		private readonly ITransitService _transitService;
 		private readonly IIdentityService _identity;
-		private readonly IReferenceRepository _referenceRepository;
+		private readonly IAirWaybillRepository _AirWaybillRepository;
 		private readonly IClientRepository _clientRepository;
 
 		public ApplicationHelper(ICountryRepository countryRepository, ITransitService transitService,
-			IIdentityService identity, IReferenceRepository referenceRepository, IClientRepository clientRepository)
+			IIdentityService identity, IAirWaybillRepository AirWaybillRepository, IClientRepository clientRepository)
 		{
 			_countryRepository = countryRepository;
 			_transitService = transitService;
 			_identity = identity;
-			_referenceRepository = referenceRepository;
+			_AirWaybillRepository = AirWaybillRepository;
 			_clientRepository = clientRepository;
 		}
 
@@ -33,7 +33,7 @@ namespace Alicargo.Services.Application
 
 			SetTransitData(applications);
 
-			SetReferenceData(applications);
+			SetAirWaybillData(applications);
 
 			SetCountryData(applications);
 		}
@@ -58,27 +58,27 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		private void SetReferenceData(params ApplicationModel[] applications)
+		private void SetAirWaybillData(params ApplicationModel[] applications)
 		{
-			var applicationsWithReference = applications.Where(x => x.ReferenceId.HasValue).ToArray();
+			var applicationsWithAirWaybill = applications.Where(x => x.AirWaybillId.HasValue).ToArray();
 
-			if (applicationsWithReference.Length == 0) return;
+			if (applicationsWithAirWaybill.Length == 0) return;
 
-			var ids = applicationsWithReference.Select(x => x.ReferenceId ?? 0).ToArray();
+			var ids = applicationsWithAirWaybill.Select(x => x.AirWaybillId ?? 0).ToArray();
 
-			var references = _referenceRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+			var AirWaybills = _AirWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
 
-			foreach (var application in applicationsWithReference)
+			foreach (var application in applicationsWithAirWaybill)
 			{
-				if (!application.ReferenceId.HasValue || !references.ContainsKey(application.ReferenceId.Value))
+				if (!application.AirWaybillId.HasValue || !AirWaybills.ContainsKey(application.AirWaybillId.Value))
 					throw new InvalidLogicException();
 
-				var referenceData = references[application.ReferenceId.Value];
+				var AirWaybillData = AirWaybills[application.AirWaybillId.Value];
 
-				application.ReferenceBill = referenceData.Bill;
-				application.ReferenceGTD = referenceData.GTD;
-				application.ReferenceDateOfArrival = referenceData.DateOfArrival;
-				application.ReferenceDateOfDeparture = referenceData.DateOfDeparture;				
+				application.AirWaybillBill = AirWaybillData.Bill;
+				application.AirWaybillGTD = AirWaybillData.GTD;
+				application.AirWaybillDateOfArrival = AirWaybillData.DateOfArrival;
+				application.AirWaybillDateOfDeparture = AirWaybillData.DateOfDeparture;				
 			}
 		}
 

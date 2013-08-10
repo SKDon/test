@@ -155,7 +155,7 @@ namespace Alicargo.Core.Tests.Services
 		{
 			var applicationData = _context.Create<ApplicationData>();
 			applicationData.Weigth = null;
-			applicationData.ReferenceId = null;
+			applicationData.AirWaybillId = null;
 			var availableStates = new[] { _context.Create<long>() };
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(It.IsAny<long>());
@@ -172,7 +172,7 @@ namespace Alicargo.Core.Tests.Services
 		{
 			var applicationData = _context.Create<ApplicationData>();
 			applicationData.Count = null;
-			applicationData.ReferenceId = null;
+			applicationData.AirWaybillId = null;
 			var availableStates = _context.CreateMany<long>(1).ToArray();
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(It.IsAny<long>());
@@ -185,10 +185,10 @@ namespace Alicargo.Core.Tests.Services
 		}
 
 		[TestMethod]
-		public void Test_ApplyBusinessLogicToStates_ReferenceIdNull()
+		public void Test_ApplyBusinessLogicToStates_AirWaybillIdNull()
 		{
 			var applicationData = _context.Create<ApplicationData>();
-			applicationData.ReferenceId = null;
+			applicationData.AirWaybillId = null;
 			var availableStates = _context.CreateMany<long>(2).ToArray();
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(availableStates[0]);
@@ -200,14 +200,14 @@ namespace Alicargo.Core.Tests.Services
 		}
 
 		[TestMethod]
-		public void Test_ApplyBusinessLogicToStates_ReferenceIdNotNull()
+		public void Test_ApplyBusinessLogicToStates_AirWaybillIdNotNull()
 		{
 			var applicationData = _context.Create<ApplicationData>();
-			var referenceData = _context.CreateMany<ReferenceData>().ToArray();
-			referenceData[0].GTD = null;
+			var AirWaybillData = _context.CreateMany<AirWaybillData>().ToArray();
+			AirWaybillData[0].GTD = null;
 			var availableStates = _context.CreateMany<long>(1).ToArray();
 
-			_context.ReferenceRepository.Setup(x => x.Get(applicationData.ReferenceId.Value)).Returns(referenceData);
+			_context.AirWaybillRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(AirWaybillData);
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(availableStates[0]);
 
 			var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, availableStates);

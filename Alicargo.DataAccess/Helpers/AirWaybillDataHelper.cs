@@ -3,9 +3,9 @@
 namespace Alicargo.DataAccess.Helpers
 {
 	// todo: test
-	internal static class ReferenceDataHelper
+	internal static class AirWaybillDataHelper
 	{
-		public static void CopyTo(this ReferenceData @from, DbContext.Reference to,
+		public static void CopyTo(this AirWaybillData @from, DbContext.AirWaybill to,
 			byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
 		{
 			if (to.Id == 0)

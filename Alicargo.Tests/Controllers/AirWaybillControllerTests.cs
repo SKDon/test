@@ -15,7 +15,7 @@ using Ploeh.AutoFixture;
 namespace Alicargo.Tests.Controllers
 {
 	[TestClass]
-	public class ReferenceControllerTests
+	public class AirWaybillControllerTests
 	{
 		private const long FirstStateId = 7;
 		private const long DefaultStateId = 1;
@@ -35,14 +35,14 @@ namespace Alicargo.Tests.Controllers
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Edit()
 		{
-			var reference = _db.References.First();
+			var AirWaybill = _db.AirWaybills.First();
 
 			var model = _context
-				.Build<ReferenceModel>()
-				.With(x => x.Id, reference.Id)
-				.With(x => x.BrockerId, reference.BrockerId)
-				.With(x => x.StateId, reference.StateId)
-				.With(x => x.StateChangeTimestamp, reference.StateChangeTimestamp)
+				.Build<AirWaybillModel>()
+				.With(x => x.Id, AirWaybill.Id)
+				.With(x => x.BrockerId, AirWaybill.BrockerId)
+				.With(x => x.StateId, AirWaybill.StateId)
+				.With(x => x.StateChangeTimestamp, AirWaybill.StateChangeTimestamp)
 				.Without(x => x.DateOfArrivalLocalString)
 				.Without(x => x.DateOfDepartureLocalString)
 				.Without(x => x.TotalCount)
@@ -51,24 +51,24 @@ namespace Alicargo.Tests.Controllers
 				.Without(x => x.CreationTimestamp)
 				.Create();
 
-			_client.PostAsJsonAsync("Reference/Edit/", model)
+			_client.PostAsJsonAsync("AirWaybill/Edit/", model)
 				.ContinueWith(task =>
 				{
 					Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
-					_db.Refresh(RefreshMode.OverwriteCurrentValues, reference);
+					_db.Refresh(RefreshMode.OverwriteCurrentValues, AirWaybill);
 
-					model.CreationTimestamp = reference.CreationTimestamp;
-					model.StateChangeTimestamp = reference.StateChangeTimestamp;
-					model.StateId = reference.StateId;
+					model.CreationTimestamp = AirWaybill.CreationTimestamp;
+					model.StateChangeTimestamp = AirWaybill.StateChangeTimestamp;
+					model.StateId = AirWaybill.StateId;
 
-					var actual = new ReferenceModel(reference)
+					var actual = new AirWaybillModel(AirWaybill)
 					{
-						AWBFile = reference.AWBFileData.ToArray(),
-						GTDFile = reference.GTDFileData.ToArray(),
-						GTDAdditionalFile = reference.GTDAdditionalFileData.ToArray(),
-						PackingFile = reference.PackingFileData.ToArray(),
-						InvoiceFile = reference.InvoiceFileData.ToArray(),
+						AWBFile = AirWaybill.AWBFileData.ToArray(),
+						GTDFile = AirWaybill.GTDFileData.ToArray(),
+						GTDAdditionalFile = AirWaybill.GTDAdditionalFileData.ToArray(),
+						PackingFile = AirWaybill.PackingFileData.ToArray(),
+						InvoiceFile = AirWaybill.InvoiceFileData.ToArray(),
 					};
 
 					model.ShouldBeEquivalentTo(actual);
@@ -80,13 +80,13 @@ namespace Alicargo.Tests.Controllers
 		public void Test_Create()
 		{
 			var brocker = _db.Brockers.First();
-			var applicationData = _db.Applications.First(x => !x.ReferenceId.HasValue);
+			var applicationData = _db.Applications.First(x => !x.AirWaybillId.HasValue);
 
-			var count = _db.References.Count();
+			var count = _db.AirWaybills.Count();
 			var state = _db.States.First(x => x.Id == DefaultStateId);
 
 			var model = _context
-				.Build<ReferenceModel>()
+				.Build<AirWaybillModel>()
 				.With(x => x.Id, 0)
 				.With(x => x.BrockerId, brocker.Id)
 				.With(x => x.StateId, state.Id)
@@ -98,59 +98,59 @@ namespace Alicargo.Tests.Controllers
 				.Without(x => x.CreationTimestamp)
 				.Create();
 
-			_client.PostAsJsonAsync("Reference/Create/" + applicationData.Id, model)
+			_client.PostAsJsonAsync("AirWaybill/Create/" + applicationData.Id, model)
 				.ContinueWith(task =>
 				{
 					//Console.WriteLine(task.Result.Content.ReadAsStringAsync().Result);
 					Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
-					var reference = _db.References.Skip(count).Take(1).First();
+					var AirWaybill = _db.AirWaybills.Skip(count).Take(1).First();
 
-					model.CreationTimestamp = reference.CreationTimestamp;
-					model.StateChangeTimestamp = reference.StateChangeTimestamp;
-					model.Id = reference.Id;
+					model.CreationTimestamp = AirWaybill.CreationTimestamp;
+					model.StateChangeTimestamp = AirWaybill.StateChangeTimestamp;
+					model.Id = AirWaybill.Id;
 					model.StateId = FirstStateId;
 
-					var actual = new ReferenceModel(reference)
+					var actual = new AirWaybillModel(AirWaybill)
 					{
-						AWBFile = reference.AWBFileData.ToArray(),
-						GTDFile = reference.GTDFileData.ToArray(),
-						PackingFile = reference.PackingFileData.ToArray(),
-						InvoiceFile = reference.InvoiceFileData.ToArray(),
-						GTDAdditionalFile = reference.GTDAdditionalFileData.ToArray(),
+						AWBFile = AirWaybill.AWBFileData.ToArray(),
+						GTDFile = AirWaybill.GTDFileData.ToArray(),
+						PackingFile = AirWaybill.PackingFileData.ToArray(),
+						InvoiceFile = AirWaybill.InvoiceFileData.ToArray(),
+						GTDAdditionalFile = AirWaybill.GTDAdditionalFileData.ToArray(),
 					};
 
 					model.ShouldBeEquivalentTo(actual);
 
 					_db.Refresh(RefreshMode.OverwriteCurrentValues, applicationData);
-					Assert.AreEqual(model.Id, applicationData.ReferenceId);
+					Assert.AreEqual(model.Id, applicationData.AirWaybillId);
 					Assert.AreEqual(FirstStateId, applicationData.StateId);
 
-					applicationData.ReferenceId = null;
-					_db.References.DeleteOnSubmit(reference);
+					applicationData.AirWaybillId = null;
+					_db.AirWaybills.DeleteOnSubmit(AirWaybill);
 					_db.SubmitChanges();
 				})
 				.Wait();
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_SetReference()
+		public void Test_SetAirWaybill()
 		{
-			var application = _db.Applications.First(x => !x.ReferenceId.HasValue);
-			var reference = _db.References.First();
+			var application = _db.Applications.First(x => !x.AirWaybillId.HasValue);
+			var AirWaybill = _db.AirWaybills.First();
 
-			_client.PostAsync("Reference/SetReference/", new FormUrlEncodedContent(new Dictionary<string, string>
+			_client.PostAsync("AirWaybill/SetAirWaybill/", new FormUrlEncodedContent(new Dictionary<string, string>
 			{
 				{"applicationId", application.Id.ToString(CultureInfo.InvariantCulture)},
-				{"referenceId", reference.Id.ToString(CultureInfo.InvariantCulture)}
+				{"AirWaybillId", AirWaybill.Id.ToString(CultureInfo.InvariantCulture)}
 			})).ContinueWith(task =>
 			{
 				Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
 				_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
 
-				Assert.AreEqual(reference.Id, application.ReferenceId);
-				application.ReferenceId = null;
+				Assert.AreEqual(AirWaybill.Id, application.AirWaybillId);
+				application.AirWaybillId = null;
 				_db.SubmitChanges();
 			}).Wait();
 		}
@@ -158,34 +158,34 @@ namespace Alicargo.Tests.Controllers
 		[TestMethod, TestCategory("black-box")]
 		public void Test_SetState()
 		{
-			var reference = _db.References.FirstOrDefault(
+			var AirWaybill = _db.AirWaybills.FirstOrDefault(
 				x => x.Applications.Count() > 1 && x.Applications.All(y => y.State.Id != DefaultStateId));
-			if (reference == null)
-				Assert.Inconclusive("Cant find reference for test");
+			if (AirWaybill == null)
+				Assert.Inconclusive("Cant find AirWaybill for test");
 
-			var oldStateId = reference.Applications.First().StateId;
+			var oldStateId = AirWaybill.Applications.First().StateId;
 
-			_client.PostAsync("Reference/SetState/", new FormUrlEncodedContent(new Dictionary<string, string>
+			_client.PostAsync("AirWaybill/SetState/", new FormUrlEncodedContent(new Dictionary<string, string>
 			{
 				{"stateId", DefaultStateId.ToString(CultureInfo.InvariantCulture)},
-				{"id", reference.Id.ToString(CultureInfo.InvariantCulture)}
+				{"id", AirWaybill.Id.ToString(CultureInfo.InvariantCulture)}
 			})).ContinueWith(task =>
 			{
 				Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
-				_db.Refresh(RefreshMode.OverwriteCurrentValues, reference);
-				foreach (var application in reference.Applications)
+				_db.Refresh(RefreshMode.OverwriteCurrentValues, AirWaybill);
+				foreach (var application in AirWaybill.Applications)
 				{
 					_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
 				}
 
-				Assert.IsTrue(reference.Applications.All(x => x.StateId == DefaultStateId));
+				Assert.IsTrue(AirWaybill.Applications.All(x => x.StateId == DefaultStateId));
 
-				foreach (var application in reference.Applications)
+				foreach (var application in AirWaybill.Applications)
 				{
 					application.StateId = oldStateId;
 				}
-				reference.StateId = oldStateId;
+				AirWaybill.StateId = oldStateId;
 
 				_db.SubmitChanges();
 			}).Wait();

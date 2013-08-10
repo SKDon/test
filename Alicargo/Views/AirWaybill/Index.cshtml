@@ -8,8 +8,8 @@
 		padding: 0 20px;
 	}
 </style>
-<div id="reference-grid" class="grid"></div>
-<script type="text/x-kendo-template" id="reference-grid-details">@Html.Partial("DetailsTemplate")</script>
+<div id="AirWaybill-grid" class="grid"></div>
+<script type="text/x-kendo-template" id="AirWaybill-grid-details">@Html.Partial("DetailsTemplate")</script>
 
 @section scripts
 {
@@ -29,7 +29,7 @@
 				transport: {
 					read: {
 						dataType: "json",
-						url: '@Url.Action(MVC.Reference.List())',
+						url: '@Url.Action(MVC.AirWaybill.List())',
 						type: "POST"
 					}
 				},
@@ -41,7 +41,7 @@
 			};
 			
 			var getGrid = function () {
-				var grid = $("#reference-grid").data("kendoGrid");
+				var grid = $("#AirWaybill-grid").data("kendoGrid");
 				getGrid = function () { return grid; };
 				return getGrid();
 			};
@@ -70,7 +70,7 @@
 					click: function (e) {
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
-						var url = '@Url.Action(MVC.Reference.Edit())/' + data.Id;
+						var url = '@Url.Action(MVC.AirWaybill.Edit())/' + data.Id;
 						window.location = url;
 					}
 				}], title: "&nbsp;", width: "53px"
@@ -88,7 +88,7 @@
 						if (window.confirm("@Pages.DeleteConfirm")) {
 							var tr = $(e.target).closest("tr");
 							var data = this.dataItem(tr);
-							var url = '@Url.Action(MVC.Reference.Delete())';
+							var url = '@Url.Action(MVC.AirWaybill.Delete())';
 							$.post(url, { id: data.Id }).done(updateGrid).fail(error);
 						}
 					}
@@ -115,10 +115,10 @@
 		</text>
    }			
 
-			$("#reference-grid").kendoGrid({
+			$("#AirWaybill-grid").kendoGrid({
 				dataSource: dataSource,
 				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
-				detailTemplate: kendo.template($("#reference-grid-details").html()),
+				detailTemplate: kendo.template($("#AirWaybill-grid-details").html()),
 				columns: columns
 			});
 		});

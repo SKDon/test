@@ -81,9 +81,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Такой Air Way Bill уже добавлен.
         /// </summary>
-        public static string ReferenceAlreadyExists {
+        public static string AirWaybillAlreadyExists {
             get {
-                return ResourceManager.GetString("ReferenceAlreadyExists", resourceCulture);
+                return ResourceManager.GetString("AirWaybillAlreadyExists", resourceCulture);
             }
         }
         

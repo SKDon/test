@@ -14,16 +14,16 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationListPresenter _applicationPresenter;
 		private readonly IClientRepository _clientRepository;
-		private readonly IReferenceRepository _referenceRepository;
+		private readonly IAirWaybillRepository _AirWaybillRepository;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListController(IApplicationListPresenter applicationPresenter,
-			IClientRepository clientRepository, IReferenceRepository referenceRepository,
+			IClientRepository clientRepository, IAirWaybillRepository AirWaybillRepository,
 			IStateConfig stateConfig)
 		{
 			_applicationPresenter = applicationPresenter;
 			_clientRepository = clientRepository;
-			_referenceRepository = referenceRepository;
+			_AirWaybillRepository = AirWaybillRepository;
 			_stateConfig = stateConfig;
 		}
 
@@ -49,7 +49,7 @@ namespace Alicargo.Controllers
 			var model = new ApplicationIndexModel
 			{
 				Clients = clients,
-				References = _referenceRepository.GetAll()
+				AirWaybills = _AirWaybillRepository.GetAll()
 												 .Where(x => x.StateId == _stateConfig.CargoIsFlewStateId)
 												 .OrderBy(x => x.Bill)
 												 .ToDictionary(x => x.Id, x => x.Bill)

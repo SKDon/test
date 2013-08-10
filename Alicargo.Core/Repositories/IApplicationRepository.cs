@@ -8,7 +8,7 @@ namespace Alicargo.Core.Repositories
 	public interface IApplicationRepository
 	{
 		ApplicationData Get(long id);
-		ApplicationData[] GetByReference(long id);
+		ApplicationData[] GetByAirWaybill(long id);
 		ApplicationListItemData[] List(int take, int skip, IEnumerable<long> stateIds, Order[] orders = null, long? clientUserId = null);
 		ApplicationData GetByTransit(long id);
 		long Count(IEnumerable<long> stateIds, long? clientUserId = null);		

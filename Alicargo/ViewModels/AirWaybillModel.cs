@@ -7,11 +7,11 @@ using Resources;
 
 namespace Alicargo.ViewModels
 {
-	public sealed class ReferenceModel : ReferenceData
+	public sealed class AirWaybillModel : AirWaybillData
 	{
-		public ReferenceModel() { }
+		public AirWaybillModel() { }
 
-		public ReferenceModel(IReferenceData data) : base(data) { }
+		public AirWaybillModel(IAirWaybillData data) : base(data) { }
 
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "DateOfDeparture")]

@@ -29,7 +29,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		private ITransitRepository _transitRepository;
 		private ICarrierRepository _carrierRepository;
 		private IBrockerRepository _brockerRepository;
-		private IReferenceRepository _referenceRepository;
+		private IAirWaybillRepository _AirWaybillRepository;
 		private IStateRepository _stateRepository;
 
 		[TestInitialize]
@@ -53,7 +53,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			_transitRepository = new TransitRepository(_unitOfWork);
 			_carrierRepository = new CarrierRepository(_unitOfWork);
 			_brockerRepository = new BrockerRepository(_unitOfWork);
-			_referenceRepository = new ReferenceRepository(_unitOfWork);
+			_AirWaybillRepository = new AirWaybillRepository(_unitOfWork);
 			_stateRepository = new StateRepository(_unitOfWork);
 		}
 

@@ -36,7 +36,7 @@ namespace Alicargo.ViewModels.Application
 			PackingFileName = data.PackingFileName;
 			MarkName = data.MarkName;
 			MethodOfDeliveryId = data.MethodOfDeliveryId;
-			ReferenceId = data.ReferenceId;
+			AirWaybillId = data.AirWaybillId;
 			StateChangeTimestamp = data.StateChangeTimestamp;
 			StateId = data.StateId;
 			SwiftFileName = data.SwiftFileName;
@@ -76,7 +76,7 @@ namespace Alicargo.ViewModels.Application
 				PackingFileName = PackingFileName,
 				MarkName = MarkName,
 				MethodOfDeliveryId = MethodOfDeliveryId,
-				ReferenceId = ReferenceId,
+				AirWaybillId = AirWaybillId,
 				StateChangeTimestamp = StateChangeTimestamp,
 				StateId = StateId,
 				SwiftFileName = SwiftFileName,
@@ -150,14 +150,14 @@ namespace Alicargo.ViewModels.Application
 		#endregion
 
 		// todo: 3. rename to Air Way Bill
-		public string ReferenceBill { get; set; }
-		public string ReferenceGTD { get; set; }
+		public string AirWaybillBill { get; set; }
+		public string AirWaybillGTD { get; set; }
 
 		public string CountryName { get; set; }
 
-		public DateTimeOffset? ReferenceDateOfDeparture { get; set; }
+		public DateTimeOffset? AirWaybillDateOfDeparture { get; set; }
 
-		public DateTimeOffset? ReferenceDateOfArrival { get; set; }
+		public DateTimeOffset? AirWaybillDateOfArrival { get; set; }
 
 		public Transit Transit { get; set; }
 
@@ -270,7 +270,7 @@ namespace Alicargo.ViewModels.Application
 		public int MethodOfDeliveryId { get; set; }
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
-		public long? ReferenceId { get; set; }
+		public long? AirWaybillId { get; set; }
 
 		#endregion
 	}
