@@ -100,13 +100,19 @@ namespace Alicargo.Controllers
 		{
 			var application = _applicationManager.Get(id);
 
-			BindCountries();
+			var clientId = _applicationRepository.GetClientId(id);
+
+			BindBag(clientId);
 
 			return View(application);
 		}
 
-		private void BindCountries()
+		private void BindBag(long? clientId)
 		{
+			var client = _clientService.GetClient(clientId);
+
+			ViewBag.ClientNic = client.Nic;
+
 			ViewBag.Countries = _countryRepository.Get()
 				.ToDictionary(x => x.Id, x => x.Name[_identityService.TwoLetterISOLanguageName]);
 		}
@@ -128,7 +134,8 @@ namespace Alicargo.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				BindCountries();
+				var clientId = _applicationRepository.GetClientId(id);
+				BindBag(clientId);
 				return View(model);
 			}
 
@@ -144,19 +151,9 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ViewResult Create(long? clientId)
 		{
-			var client = _clientService.GetClient(clientId);
+			BindBag(clientId);
 
-			var model = new ApplicationEditModel
-			{
-				Transit = client.Transit,
-				ClientLegalEntity = client.LegalEntity,
-				ClientNic = client.Nic,
-				ClientEmail = client.Email
-			};
-
-			BindCountries();
-
-			return View(model);
+			return View();
 		}
 
 		// todo: test
@@ -167,14 +164,10 @@ namespace Alicargo.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				BindCountries();
+				BindBag(clientId);
 				return View(model);
 
 			}
-
-			var client = _clientService.GetClient(clientId);
-
-			model.ClientId = client.Id;
 
 			try
 			{

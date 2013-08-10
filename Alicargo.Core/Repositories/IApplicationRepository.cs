@@ -11,13 +11,14 @@ namespace Alicargo.Core.Repositories
 		ApplicationDetailsData GetDetails(long id);
 		ApplicationData[] GetByAirWaybill(long id);
 		ApplicationListItemData[] List(int take, int skip, IEnumerable<long> stateIds, Order[] orders = null, long? clientUserId = null);
-		long Count(IEnumerable<long> stateIds, long? clientUserId = null);		
+		long Count(IEnumerable<long> stateIds, long? clientUserId = null);
+		long GetClientId(long id);
 
 		FileHolder GetInvoiceFile(long id);
 		FileHolder GetSwiftFile(long id);
 		FileHolder GetCPFile(long id);
 		FileHolder GetDeliveryBillFile(long id);
 		FileHolder GetTorg12File(long id);
-		FileHolder GetPackingFile(long id);		
+		FileHolder GetPackingFile(long id);
 	}
 }

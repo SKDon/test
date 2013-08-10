@@ -20,7 +20,6 @@ namespace Alicargo.Services.Application
 		private readonly IIdentityService _identity;
 		private readonly IAirWaybillRepository _airWaybillRepository;
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IClientRepository _clientRepository;
 		private readonly ICountryRepository _countryRepository;
 
 		public ApplicationManager(
@@ -32,8 +31,7 @@ namespace Alicargo.Services.Application
 			IStateService stateService,
 			ICountryRepository countryRepository, 
 			IIdentityService identity,
-			IAirWaybillRepository airWaybillRepository, 
-			IClientRepository clientRepository)
+			IAirWaybillRepository airWaybillRepository)
 		{
 			_applicationRepository = applicationRepository;
 			_applicationUpdater = applicationUpdater;
@@ -44,14 +42,16 @@ namespace Alicargo.Services.Application
 			_countryRepository = countryRepository;
 			_identity = identity;
 			_airWaybillRepository = airWaybillRepository;
-			_clientRepository = clientRepository;
 		}
 
 		public ApplicationEditModel Get(long id)
 		{
 			var data = _applicationRepository.Get(id);
 
-			var application = new ApplicationEditModel(data);
+			var application = new ApplicationEditModel
+			{
+				Id = data.Id
+			};
 
 			SetAdditionalData(application);
 
@@ -60,8 +60,6 @@ namespace Alicargo.Services.Application
 
 		public void SetAdditionalData(params ApplicationEditModel[] applications)
 		{
-			SetClientData(applications);
-
 			SetTransitData(applications);
 
 			SetAirWaybillData(applications);
@@ -124,30 +122,14 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		private void SetClientData(params ApplicationEditModel[] applications)
-		{
-			var clientIds = applications.Select(x => x.ClientId).ToArray();
-			var clients = _clientRepository.Get(clientIds).ToDictionary(x => x.Id, x => x);
-
-			foreach (var application in applications)
-			{
-				var clientData = clients[application.ClientId];
-
-				application.ClientUserId = clientData.UserId;
-				application.ClientLegalEntity = clientData.LegalEntity;
-				application.ClientNic = clientData.Nic;
-				application.ClientEmail = clientData.Email;
-			}
-		}
-
 		public void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				_transitService.Update(model.Transit, carrierSelectModel);
 
-				_applicationUpdater.Update(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
-					model.Torg12File, model.PackingFile);
+				//_applicationUpdater.Update(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
+				//	model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
 
@@ -164,11 +146,11 @@ namespace Alicargo.Services.Application
 				model.StateChangeTimestamp = DateTimeOffset.UtcNow;
 				model.CreationTimestamp = DateTimeOffset.UtcNow;
 
-				var id = _applicationUpdater.Add(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
+				//var id = _applicationUpdater.Add(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
 
-				model.Id = id();
+				//model.Id = id();
 
 				ts.Complete();
 			}

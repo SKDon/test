@@ -1,118 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Models;
-using Microsoft.Ajax.Utilities;
 using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationEditModel
 	{
-		public ApplicationEditModel()
-		{
-			Currency = new CurrencyModel();
-		}
-
-		// todo: tests
-		public ApplicationEditModel(ApplicationData data)
-		{
-			AddressLoad = data.AddressLoad;
-			Characteristic = data.Characteristic;
-			ClientId = data.ClientId;
-			Count = data.Count;
-			CPFileName = data.CPFileName;
-			CreationTimestamp = data.CreationTimestamp;
-			Currency = new CurrencyModel
-			{
-				CurrencyId = data.CurrencyId,
-				Value = data.Value
-			};
-			DeliveryBillFileName = data.DeliveryBillFileName;
-			FactoryContact = data.FactoryContact;
-			FactoryEmail = data.FactoryEmail;
-			FactoryName = data.FactoryName;
-			FactoryPhone = data.FactoryPhone;
-			Weigth = data.Weigth;
-			Id = data.Id;
-			Invoice = data.Invoice;
-			InvoiceFileName = data.InvoiceFileName;
-			PackingFileName = data.PackingFileName;
-			MarkName = data.MarkName;
-			MethodOfDeliveryId = data.MethodOfDeliveryId;
-			AirWaybillId = data.AirWaybillId;
-			StateChangeTimestamp = data.StateChangeTimestamp;
-			StateId = data.StateId;
-			SwiftFileName = data.SwiftFileName;
-			TermsOfDelivery = data.TermsOfDelivery;
-			Torg12FileName = data.Torg12FileName;
-			TransitId = data.TransitId;
-			CountryId = data.CountryId;
-			Volume = data.Volume;
-			WarehouseWorkingTime = data.WarehouseWorkingTime;
-			DateInStock = data.DateInStock;
-			DateOfCargoReceipt = data.DateOfCargoReceipt;
-			TransitReference = data.TransitReference;
-		}
-
-		// todo: tests
-		public ApplicationData GetData()
-		{
-			return new ApplicationData
-			{
-				AddressLoad = AddressLoad,
-				Characteristic = Characteristic,
-				ClientId = ClientId,
-				Count = Count,
-				CPFileName = CPFileName,
-				CreationTimestamp = CreationTimestamp,
-				CurrencyId = Currency.CurrencyId,
-				DeliveryBillFileName = DeliveryBillFileName,
-				FactoryContact = FactoryContact,
-				FactoryEmail = FactoryEmail,
-				FactoryName = FactoryName,
-				FactoryPhone = FactoryPhone,
-				Weigth = Weigth,
-				Id = Id,
-				Invoice = Invoice,
-				InvoiceFileName = InvoiceFileName,
-				PackingFileName = PackingFileName,
-				MarkName = MarkName,
-				MethodOfDeliveryId = MethodOfDeliveryId,
-				AirWaybillId = AirWaybillId,
-				StateChangeTimestamp = StateChangeTimestamp,
-				StateId = StateId,
-				SwiftFileName = SwiftFileName,
-				TermsOfDelivery = TermsOfDelivery,
-				Torg12FileName = Torg12FileName,
-				TransitId = TransitId,
-				CountryId = CountryId,
-				Value = Currency.Value,
-				Volume = Volume,
-				WarehouseWorkingTime = WarehouseWorkingTime,
-				DateInStock = DateInStock,
-				DateOfCargoReceipt = DateOfCargoReceipt,
-				TransitReference = TransitReference,
-			};
-		}
-
-		#region ClientData
-
-		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
-		public string ClientLegalEntity { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Nic")]
-		public string ClientNic { get; set; }
-
-		public long ClientUserId { get; set; }
-
-		public string ClientEmail { get; set; }
-
-		#endregion
-
 		public string AirWaybill { get; set; }
+
 		public string AirWaybillGTD { get; set; }
 
 		public string CountryName { get; set; }
@@ -231,7 +128,6 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public int MethodOfDeliveryId { get; set; }
 
-		public long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
 

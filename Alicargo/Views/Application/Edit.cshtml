@@ -2,5 +2,5 @@
 @using Alicargo.Helpers
 @model ApplicationEditModel
 
-<h4 style="margin-top: 33px;" class="pull-right">@Entities.Nic: @Html.DisplayFor(x => x.ClientNic)</h4>
+<h4 style="margin-top: 33px;" class="pull-right">@Entities.Nic: @Html.ViewBag.ClientNic</h4>
 @Html.EditPage(Pages.ApplicationEdit, Url.Action(MVC.Application.Edit()), Pages.Update)

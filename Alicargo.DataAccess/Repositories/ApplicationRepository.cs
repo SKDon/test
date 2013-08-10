@@ -142,6 +142,11 @@ namespace Alicargo.DataAccess.Repositories
 			return applications.LongCount();
 		}
 
+		public long GetClientId(long id)
+		{
+			return Context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();
+		}
+
 		public ApplicationListItemData[] List(int take, int skip, IEnumerable<long> stateIds,
 			Order[] orders = null, long? clientUserId = null)
 		{
