@@ -50,9 +50,9 @@ namespace T4MVC
             public partial class _EditorTemplatesClass
             {
                 public readonly string AirWaybillModel = "AirWaybillModel";
-                public readonly string ApplicationModel = "ApplicationModel";
                 public readonly string AuthenticationModel = "AuthenticationModel";
                 public readonly string Client = "Client";
+                public readonly string CurrencyModel = "CurrencyModel";
                 public readonly string SelectModel = "SelectModel";
                 public readonly string Transit = "Transit";
                 public readonly string UserModel = "UserModel";

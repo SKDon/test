@@ -215,7 +215,7 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_SetAirWaybill
         {
             public readonly string applicationId = "applicationId";
-            public readonly string AirWaybillId = "AirWaybillId";
+            public readonly string airWaybillId = "airWaybillId";
         }
         static readonly ActionParamsClass_CargoIsCustomsCleared s_params_CargoIsCustomsCleared = new ActionParamsClass_CargoIsCustomsCleared();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -375,13 +375,13 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void SetAirWaybillOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, long? AirWaybillId);
+        partial void SetAirWaybillOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, long? airWaybillId);
 
         public override System.Web.Mvc.ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAirWaybill);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "AirWaybillId", airWaybillId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "airWaybillId", airWaybillId);
             SetAirWaybillOverride(callInfo, applicationId, airWaybillId);
             return callInfo;
         }
