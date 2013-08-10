@@ -8,15 +8,7 @@ namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationEditModel
 	{
-		public string AirWaybill { get; set; }
-
-		public string AirWaybillGTD { get; set; }
-
 		public string CountryName { get; set; }
-
-		public DateTimeOffset? AirWaybillDateOfDeparture { get; set; }
-
-		public DateTimeOffset? AirWaybillDateOfArrival { get; set; }
 
 		public Transit Transit { get; set; }
 
@@ -129,7 +121,6 @@ namespace Alicargo.ViewModels.Application
 		public int MethodOfDeliveryId { get; set; }
 
 		public long TransitId { get; set; }
-		public long? AirWaybillId { get; set; }
 
 		#endregion
 	}

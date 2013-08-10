@@ -18,7 +18,6 @@ namespace Alicargo.Services.Application
 		private readonly IStateService _stateService;
 		private readonly ITransitService _transitService;
 		private readonly IIdentityService _identity;
-		private readonly IAirWaybillRepository _airWaybillRepository;
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly ICountryRepository _countryRepository;
 
@@ -30,8 +29,7 @@ namespace Alicargo.Services.Application
 			IUnitOfWork unitOfWork, 
 			IStateService stateService,
 			ICountryRepository countryRepository, 
-			IIdentityService identity,
-			IAirWaybillRepository airWaybillRepository)
+			IIdentityService identity)
 		{
 			_applicationRepository = applicationRepository;
 			_applicationUpdater = applicationUpdater;
@@ -41,7 +39,6 @@ namespace Alicargo.Services.Application
 			_stateService = stateService;
 			_countryRepository = countryRepository;
 			_identity = identity;
-			_airWaybillRepository = airWaybillRepository;
 		}
 
 		public ApplicationEditModel Get(long id)
@@ -61,8 +58,6 @@ namespace Alicargo.Services.Application
 		public void SetAdditionalData(params ApplicationEditModel[] applications)
 		{
 			SetTransitData(applications);
-
-			SetAirWaybillData(applications);
 
 			SetCountryData(applications);
 		}
@@ -84,30 +79,6 @@ namespace Alicargo.Services.Application
 				application.CountryName = countries[application.CountryId.Value][_identity.TwoLetterISOLanguageName];
 				// ReSharper restore AssignNullToNotNullAttribute
 				// ReSharper restore PossibleInvalidOperationException
-			}
-		}
-
-		private void SetAirWaybillData(params ApplicationEditModel[] applications)
-		{
-			var applicationsWithAirWaybill = applications.Where(x => x.AirWaybillId.HasValue).ToArray();
-
-			if (applicationsWithAirWaybill.Length == 0) return;
-
-			var ids = applicationsWithAirWaybill.Select(x => x.AirWaybillId ?? 0).ToArray();
-
-			var airWaybills = _airWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
-
-			foreach (var application in applicationsWithAirWaybill)
-			{
-				if (!application.AirWaybillId.HasValue || !airWaybills.ContainsKey(application.AirWaybillId.Value))
-					throw new InvalidLogicException();
-
-				var airWaybillData = airWaybills[application.AirWaybillId.Value];
-
-				application.AirWaybill = airWaybillData.Bill;
-				application.AirWaybillGTD = airWaybillData.GTD;
-				application.AirWaybillDateOfArrival = airWaybillData.DateOfArrival;
-				application.AirWaybillDateOfDeparture = airWaybillData.DateOfDeparture;
 			}
 		}
 

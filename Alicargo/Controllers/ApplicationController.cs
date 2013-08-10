@@ -92,21 +92,6 @@ namespace Alicargo.Controllers
 
 		#endregion
 
-		#region Edit
-
-		[HttpGet]
-		[Access(RoleType.Admin)]
-		public virtual ViewResult Edit(long id)
-		{
-			var application = _applicationManager.Get(id);
-
-			var clientId = _applicationRepository.GetClientId(id);
-
-			BindBag(clientId);
-
-			return View(application);
-		}
-
 		private void BindBag(long? clientId)
 		{
 			var client = _clientService.GetClient(clientId);
@@ -124,6 +109,21 @@ namespace Alicargo.Controllers
 			_applicationManager.Delete(id);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		#region Edit
+
+		[HttpGet]
+		[Access(RoleType.Admin)]
+		public virtual ViewResult Edit(long id)
+		{
+			var application = _applicationManager.Get(id);
+
+			var clientId = _applicationRepository.GetClientId(id);
+
+			BindBag(clientId);
+
+			return View(application);
 		}
 
 		// todo: test
@@ -166,7 +166,6 @@ namespace Alicargo.Controllers
 			{
 				BindBag(clientId);
 				return View(model);
-
 			}
 
 			try
