@@ -1,5 +1,6 @@
 ﻿using System;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Models;
 
 namespace Alicargo.Core.Repositories
 {

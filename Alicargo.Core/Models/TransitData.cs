@@ -2,7 +2,7 @@
 using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.Core.Contracts
+namespace Alicargo.Core.Models
 {
 	public class TransitData
 	{

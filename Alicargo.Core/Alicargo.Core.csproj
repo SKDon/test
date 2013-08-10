@@ -43,15 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\ClientData.cs" />
-    <Compile Include="Contracts\CountryData.cs" />
-    <Compile Include="Contracts\FileHolder.cs" />
-    <Compile Include="Contracts\IClientData.cs" />
-    <Compile Include="Contracts\IAirWaybillData.cs" />
-    <Compile Include="Contracts\AirWaybillData.cs" />
-    <Compile Include="Contracts\StateData.cs" />
-    <Compile Include="Contracts\TransitData.cs" />
-    <Compile Include="Contracts\UserData.cs" />
+    <Compile Include="Models\ClientData.cs" />
+    <Compile Include="Models\IClientData.cs" />
+    <Compile Include="Models\IAirWaybillData.cs" />
+    <Compile Include="Models\AirWaybillData.cs" />
+    <Compile Include="Models\TransitData.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
     <Compile Include="Enums\DeliveryType.cs" />

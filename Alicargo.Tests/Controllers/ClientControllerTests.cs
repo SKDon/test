@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Models;
 using Alicargo.DataAccess.DbContext;

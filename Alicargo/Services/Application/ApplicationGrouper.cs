@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Models;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
 using Resources;

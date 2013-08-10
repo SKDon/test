@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Core.Contracts
+namespace Alicargo.Core.Models
 {
 	[Obsolete]
 	public interface IClientData
