@@ -7,7 +7,7 @@
 	if (IdentityService.IsInRole(RoleType.Client))
 	{
 	@:# if(StateId != @StateConfig.CargoReceivedStateId){ #
-	<a href="@Url.Action(MVC.Transit.Edit())/#= Transit.Id #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
+	<a href="@Url.Action(MVC.Transit.Edit())/#= TransitId #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
 	@:# } #
 		return;
 	}

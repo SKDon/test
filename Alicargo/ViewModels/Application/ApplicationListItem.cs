@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 
@@ -14,7 +13,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				return ApplicationModelHelper.GetDisplayNumber(Data.Id, Data.Count);
+				return ApplicationModelHelper.GetDisplayNumber(Id, Count);
 			}
 		}
 
@@ -24,7 +23,7 @@ namespace Alicargo.ViewModels.Application
 			{
 				unchecked // todo: fix and test
 				{
-					return (DateTimeOffset.UtcNow - Data.CreationTimestamp.ToUniversalTime()).Days;
+					return (DateTimeOffset.UtcNow - CreationTimestamp.ToUniversalTime()).Days;
 				}
 			}
 		}
@@ -34,7 +33,7 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
 				// todo: test time zones
-				return Data.CreationTimestamp.LocalDateTime.ToShortDateString();
+				return CreationTimestamp.LocalDateTime.ToShortDateString();
 			}
 		}
 
@@ -43,7 +42,7 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
 				// todo: test time zones
-				return Data.StateChangeTimestamp.LocalDateTime.ToShortDateString();
+				return StateChangeTimestamp.LocalDateTime.ToShortDateString();
 			}
 		}
 
@@ -52,7 +51,7 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
 				// todo: test time zones
-				return Data.DateOfCargoReceipt.HasValue ? Data.DateOfCargoReceipt.Value.LocalDateTime.ToShortDateString() : null;
+				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.LocalDateTime.ToShortDateString() : null;
 			}
 		}
 
@@ -61,129 +60,118 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
 				// todo: test time zones
-				return Data.DateInStock.HasValue ? Data.DateInStock.Value.LocalDateTime.ToShortDateString() : null;
+				return DateInStock.HasValue ? DateInStock.Value.LocalDateTime.ToShortDateString() : null;
 			}
 		}
 
 		public string MethodOfDeliveryLocalString
 		{
-			get { return ((MethodOfDelivery)Data.MethodOfDeliveryId).ToLocalString(); }
+			get { return ((MethodOfDelivery)MethodOfDeliveryId).ToLocalString(); }
 		}
 
 		public string ValueString
 		{
-			get { return Data.Value.ToString(".00", CultureInfo.CurrentUICulture) + ((CurrencyType)Data.CurrencyId).ToLocalString(); }
+			get { return Value.ToString(".00", CultureInfo.CurrentUICulture) + ((CurrencyType)CurrencyId).ToLocalString(); }
 		}
 
 		#endregion
 
-		//public string CountryName { get; set; }
+		#region Additional
 
-		//// todo: 3. rename to Air Way Bill
-		//public string AirWaybillBill { get; set; }
+		public string ClientLegalEntity { get; set; }
 
-		//#region State
+		public string ClientNic { get; set; }
 
-		//public ApplicationStateModel State
-		//{
-		//	get
-		//	{
-		//		return new ApplicationStateModel
-		//		{
-		//			StateId = StateId,
-		//			StateName = StateName
-		//		};
-		//	}
-		//}
+		public string AirWaybill { get; set; }
 
-		//public bool CanSetState
-		//{
-		//	get { return _canSetState; }
-		//	set { _canSetState = value; }
-		//}
-		//private bool _canSetState = true;
+		public string TransitCity { get; set; }
 
-		//public string StateName { get; set; }
+		public string TransitAddress { get; set; }
 
-		//public bool CanClose { get; set; }
+		public string TransitRecipientName { get; set; }
 
-		//#endregion
+		public string TransitPhone { get; set; }
 
-		//public Transit Transit { get; set; }
+		public string TransitWarehouseWorkingTime { get; set; }
 
-		//#region Data
+		public string TransitMethodOfTransitString { get; set; }
 
-		//public long Id { get; set; }
+		public string TransitDeliveryTypeString { get; set; }
 
-		//DateTimeOffset CreationTimestamp { get; set; }
+		public string TransitCarrierName { get; set; }
 
-		//public string Invoice { get; set; }
+		#endregion
 
-		//public string InvoiceFileName { get; set; }
+		#region Application Data
 
-		//public string SwiftFileName { get; set; }
+		public long Id { get; set; }
 
-		//public string PackingFileName { get; set; }
+		public DateTimeOffset CreationTimestamp { get; set; }
 
-		//public string DeliveryBillFileName { get; set; }
+		public string Invoice { get; set; }
 
-		//public string Torg12FileName { get; set; }
+		public string InvoiceFileName { get; set; }
 
-		//public string CPFileName { get; set; }
+		public string SwiftFileName { get; set; }
 
-		//public string Characteristic { get; set; }
+		public string PackingFileName { get; set; }
 
-		//public string AddressLoad { get; set; }
+		public string DeliveryBillFileName { get; set; }
 
-		//public string WarehouseWorkingTime { get; set; }
+		public string Torg12FileName { get; set; }
 
-		//public float? Weigth { get; set; }
+		public string CPFileName { get; set; }
 
-		//public int? Count { get; set; }
+		public string Characteristic { get; set; }
 
-		//public float Volume { get; set; }
+		public string AddressLoad { get; set; }
 
-		//public string TermsOfDelivery { get; set; }
+		public string WarehouseWorkingTime { get; set; }
 
-		//decimal Value { get; set; }
+		public float? Weigth { get; set; }
 
-		//int CurrencyId { get; set; }
+		public int? Count { get; set; }
 
-		//internal long? CountryId { get; set; }
+		public float Volume { get; set; }
 
-		//DateTimeOffset StateChangeTimestamp { get; set; }
+		public string TermsOfDelivery { get; set; }
 
-		//DateTimeOffset? DateInStock { get; set; }
+		public DateTimeOffset StateChangeTimestamp { get; set; }
 
-		//DateTimeOffset? DateOfCargoReceipt { get; set; }
+		public DateTimeOffset? DateInStock { get; set; }
 
-		//public string FactoryName { get; set; }
+		public DateTimeOffset? DateOfCargoReceipt { get; set; }
 
-		//public string FactoryPhone { get; set; }
+		public string FactoryName { get; set; }
 
-		//public string FactoryEmail { get; set; }
+		public string FactoryPhone { get; set; }
 
-		//public string FactoryContact { get; set; }
+		public string FactoryEmail { get; set; }
 
-		//public string MarkName { get; set; }
+		public string FactoryContact { get; set; }
 
-		//public string TransitReference { get; set; }
-		//public long StateId { get; set; }
-		//int MethodOfDeliveryId { get; set; }
-		//internal long ClientId { get; set; }
-		//public long TransitId { get; set; }
-		//public long? AirWaybillId { get; set; }
+		public string MarkName { get; set; }
 
-		//#endregion
+		public string TransitReference { get; set; }
 
-		public ApplicationListItemData Data { get; set; }
+		public long StateId { get; set; }
+
+		public long? AirWaybillId { get; set; }
+
+		public int MethodOfDeliveryId { get; set; }
+
+		public int CurrencyId { get; set; }
+
+		public decimal Value { get; set; }
+
+		#endregion
 
 		public ApplicationStateModel State { get; set; }
 
 		public string CountryName { get; set; }
 
 		public bool CanClose { get; set; }
-		
+
 		public bool CanSetState { get; set; }
 	}
 }

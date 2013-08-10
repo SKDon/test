@@ -377,12 +377,12 @@ namespace Alicargo.Controllers
 
         partial void SetAirWaybillOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, long? AirWaybillId);
 
-        public override System.Web.Mvc.ActionResult SetAirWaybill(long applicationId, long? AirWaybillId)
+        public override System.Web.Mvc.ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAirWaybill);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "AirWaybillId", AirWaybillId);
-            SetAirWaybillOverride(callInfo, applicationId, AirWaybillId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "AirWaybillId", airWaybillId);
+            SetAirWaybillOverride(callInfo, applicationId, airWaybillId);
             return callInfo;
         }
 

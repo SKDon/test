@@ -107,9 +107,9 @@ namespace Alicargo.Controllers
 		//}
 
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
-		public virtual ActionResult SetAirWaybill(long applicationId, long? AirWaybillId)
+		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
 		{
-			_awbManager.SetAwb(applicationId, AirWaybillId);
+			_awbManager.SetAwb(applicationId, airWaybillId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
