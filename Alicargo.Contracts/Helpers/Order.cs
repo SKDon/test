@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Core.Helpers;
 
-namespace Alicargo.Core.Helpers
+namespace Alicargo.Contracts.Helpers
 {
 	public sealed class Order
 	{

@@ -103,7 +103,7 @@ namespace Alicargo.Core.Tests.Services
 			_context.ApplicationManager.Verify(x => x.SetState(It.IsAny<long>(), stateId), Times.Never());
 			_context.ReferenceRepository.Verify(x => x.SetState(referenceId, stateId), Times.Once());
 			_context.StateConfig.Verify(x => x.CargoIsCustomsClearedStateId, Times.Never());
-			_context.ApplicationRepository.Verify(x => x.SetDateInStock(It.IsAny<long>(), It.IsAny<DateTimeOffset>()), Times.Never());
+			_context.ApplicationUpdater.Verify(x => x.SetDateInStock(It.IsAny<long>(), It.IsAny<DateTimeOffset>()), Times.Never());
 			_context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
 			_context.Transaction.Verify(x => x.Complete());
 			_context.UnitOfWork.Verify(x => x.StartTransaction());
@@ -115,12 +115,12 @@ namespace Alicargo.Core.Tests.Services
 		{
 			var applicationId = _context.Create<long>();
 
-			_context.ApplicationRepository.Setup(x => x.SetReference(applicationId, null));
+			_context.ApplicationUpdater.Setup(x => x.SetReference(applicationId, null));
 			_context.UnitOfWork.Setup(x => x.SaveChanges());
 
 			_manager.SetAwb(applicationId, null);
 
-			_context.ApplicationRepository.Verify(x => x.SetReference(applicationId, null), Times.Once());
+			_context.ApplicationUpdater.Verify(x => x.SetReference(applicationId, null), Times.Once());
 			_context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
 		}
 
@@ -145,14 +145,14 @@ namespace Alicargo.Core.Tests.Services
 			_context.Transaction.Setup(x => x.Complete());
 			_context.UnitOfWork.Setup(x => x.StartTransaction()).Returns(_context.Transaction.Object);
 			_context.ReferenceRepository.Setup(x => x.GetAggregate(referenceId)).Returns(new[] { aggregate });
-			_context.ApplicationRepository.Setup(x => x.SetReference(applicationId, referenceId));
+			_context.ApplicationUpdater.Setup(x => x.SetReference(applicationId, referenceId));
 			_context.ApplicationManager.Setup(x => x.SetState(applicationId, aggregate.StateId));
 			_context.UnitOfWork.Setup(x => x.SaveChanges());
 
 			_manager.SetAwb(applicationId, referenceId);
 
 			_context.ReferenceRepository.Verify(x => x.GetAggregate(referenceId), Times.Once());
-			_context.ApplicationRepository.Verify(x => x.SetReference(applicationId, referenceId), Times.Once());
+			_context.ApplicationUpdater.Verify(x => x.SetReference(applicationId, referenceId), Times.Once());
 			_context.ApplicationManager.Verify(x => x.SetState(applicationId, aggregate.StateId), Times.Once());
 			_context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
 			_context.Transaction.Verify(x => x.Complete());
@@ -172,7 +172,7 @@ namespace Alicargo.Core.Tests.Services
 			_context.UnitOfWork.Setup(x => x.StartTransaction()).Returns(_context.Transaction.Object);
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
 			_context.ReferenceRepository.Setup(x => x.GetAggregate(referenceId)).Returns(new[] { aggregate });
-			_context.ApplicationRepository.Setup(x => x.SetReference(applicationId, referenceId));
+			_context.ApplicationUpdater.Setup(x => x.SetReference(applicationId, referenceId));
 			_context.ApplicationManager.Setup(x => x.SetState(applicationId, cargoIsFlewStateId));
 			_context.UnitOfWork.Setup(x => x.SaveChanges());
 			_context.ReferenceRepository.Setup(
@@ -183,7 +183,7 @@ namespace Alicargo.Core.Tests.Services
 
 			Assert.AreEqual(cargoIsFlewStateId, model.StateId);
 			_context.ReferenceRepository.Verify(x => x.GetAggregate(referenceId), Times.Once());
-			_context.ApplicationRepository.Verify(x => x.SetReference(applicationId, referenceId), Times.Once());
+			_context.ApplicationUpdater.Verify(x => x.SetReference(applicationId, referenceId), Times.Once());
 			_context.ApplicationManager.Verify(x => x.SetState(applicationId, cargoIsFlewStateId), Times.Once());
 			_context.UnitOfWork.Verify(x => x.SaveChanges());
 			_context.ReferenceRepository.Verify(

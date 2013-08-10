@@ -12,8 +12,6 @@ namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationListItem
 	{
-		public ApplicationListItem() { }
-
 		public ApplicationListItem(ApplicationData data)
 		{
 			AddressLoad = data.AddressLoad;

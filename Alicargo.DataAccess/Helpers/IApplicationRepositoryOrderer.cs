@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Helpers;
+using Alicargo.Contracts.Helpers;
 using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Helpers

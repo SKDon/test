@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Helpers;
 using Alicargo.Services.Abstract;
@@ -22,10 +23,11 @@ namespace Alicargo.Services.Application
 				case OrderType.ReferenceBill:
 					return
 						applications.GroupBy(x => x.ReferenceId ?? 0)
-									.Select(x => GetApplicationGroup(x, orders, "ReferenceBill",
-										g => references.ContainsKey(g.Key)
-											? GetAirWayBillDisplay(references[g.Key])
-											: "", references))
+									.Select(x =>
+										GetApplicationGroup(x, orders, "ReferenceBill",
+											g => references.ContainsKey(g.Key)
+												? GetAirWayBillDisplay(references[g.Key])
+												: "", references))
 									.ToArray();
 
 				case OrderType.State:

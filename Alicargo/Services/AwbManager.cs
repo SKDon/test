@@ -12,6 +12,7 @@ namespace Alicargo.Services
 	{
 		private readonly IReferenceRepository _referenceRepository;
 		private readonly IApplicationRepository _applicationRepository;
+		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IApplicationManager _applicationManager;
 		private readonly IStateConfig _stateConfig;
 
@@ -22,13 +23,15 @@ namespace Alicargo.Services
 			IApplicationRepository applicationRepository,
 			IUnitOfWork unitOfWork,
 			IApplicationManager applicationManager,
-			IStateConfig stateConfig)
+			IStateConfig stateConfig, 
+			IApplicationUpdateRepository applicationUpdater)
 		{
 			_referenceRepository = referenceRepository;
 			_applicationRepository = applicationRepository;
 			_unitOfWork = unitOfWork;
 			_applicationManager = applicationManager;
 			_stateConfig = stateConfig;
+			_applicationUpdater = applicationUpdater;
 		}
 
 		public void Create(long applicationId, ReferenceModel model)
@@ -59,7 +62,7 @@ namespace Alicargo.Services
 				using (var ts = _unitOfWork.StartTransaction())
 				{
 					// SetReference must be first
-					_applicationRepository.SetReference(applicationId, awbId.Value);
+					_applicationUpdater.SetReference(applicationId, awbId.Value);
 
 					_applicationManager.SetState(applicationId, aggregate.StateId);
 
@@ -70,7 +73,7 @@ namespace Alicargo.Services
 			}
 			else
 			{
-				_applicationRepository.SetReference(applicationId, null);
+				_applicationUpdater.SetReference(applicationId, null);
 
 				_unitOfWork.SaveChanges();
 			}
@@ -111,7 +114,7 @@ namespace Alicargo.Services
 
 				foreach (var app in applicationDatas)
 				{
-					_applicationRepository.SetReference(app.Id, null);
+					_applicationUpdater.SetReference(app.Id, null);
 				}
 
 				_referenceRepository.Delete(id);

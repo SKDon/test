@@ -11,6 +11,7 @@ namespace Alicargo.Services.Application
 	public sealed class ApplicationManager : IApplicationManager
 	{
 		private readonly IApplicationRepository _applicationRepository;
+		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateService _stateService;
 		private readonly ITransitService _transitService;
@@ -18,11 +19,13 @@ namespace Alicargo.Services.Application
 
 		public ApplicationManager(
 			IApplicationRepository applicationRepository,
+			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig stateConfig,
 			ITransitService transitService,
 			IUnitOfWork unitOfWork, IStateService stateService)
 		{
 			_applicationRepository = applicationRepository;
+			_applicationUpdater = applicationUpdater;
 			_stateConfig = stateConfig;
 			_transitService = transitService;
 			_unitOfWork = unitOfWork;
@@ -35,7 +38,7 @@ namespace Alicargo.Services.Application
 			{
 				_transitService.Update(model.Transit, carrierSelectModel);
 
-				_applicationRepository.Update(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
+				_applicationUpdater.Update(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
 					model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
@@ -53,7 +56,7 @@ namespace Alicargo.Services.Application
 				model.StateChangeTimestamp = DateTimeOffset.UtcNow;
 				model.CreationTimestamp = DateTimeOffset.UtcNow;
 
-				var id = _applicationRepository.Add(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
+				var id = _applicationUpdater.Add(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
 
@@ -69,7 +72,7 @@ namespace Alicargo.Services.Application
 			{
 				var applicationData = _applicationRepository.Get(id);
 
-				_applicationRepository.Delete(id);
+				_applicationUpdater.Delete(id);
 
 				_unitOfWork.SaveChanges();
 
@@ -81,13 +84,13 @@ namespace Alicargo.Services.Application
 
 		public void SetTransitReference(long id, string transitReference)
 		{
-			_applicationRepository.SetTransitReference(id, transitReference);
+			_applicationUpdater.SetTransitReference(id, transitReference);
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
-			_applicationRepository.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+			_applicationUpdater.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 			_unitOfWork.SaveChanges();
 		}
 
@@ -100,10 +103,10 @@ namespace Alicargo.Services.Application
 			{
 				if (stateId == _stateConfig.CargoInStockStateId)
 				{
-					_applicationRepository.SetDateInStock(applicationId, DateTimeOffset.UtcNow);
+					_applicationUpdater.SetDateInStock(applicationId, DateTimeOffset.UtcNow);
 				}
 
-				_applicationRepository.SetState(applicationId, stateId);
+				_applicationUpdater.SetState(applicationId, stateId);
 				_unitOfWork.SaveChanges();
 
 				ts.Complete();

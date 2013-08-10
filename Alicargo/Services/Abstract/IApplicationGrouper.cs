@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Contracts;
-using Alicargo.Core.Helpers;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract

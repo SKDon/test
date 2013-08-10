@@ -41,7 +41,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			var application = CreateTestApplication(defaultState);
 			var state = _stateRepository.GetAll().First(x => x.Id != defaultState.Id);
 
-			_applicationRepository.SetState(application.Id, state.Id);
+			_applicationUpater.SetState(application.Id, state.Id);
 			_unitOfWork.SaveChanges();
 
 			var actual = _applicationRepository.Get(application.Id);
@@ -70,7 +70,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			var torg12File = RandomBytes();
 			var packingFile = RandomBytes();
 
-			_applicationRepository.Update(newData, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile);
+			_applicationUpater.Update(newData, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile);
 			_unitOfWork.SaveChanges();
 
 			var data = _applicationRepository.Get(old.Id);
@@ -107,7 +107,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 				//.With(x => x.CPFileName, null)
 				.Create();
 
-			var id = _applicationRepository.Add(application, _fixture.CreateMany<byte>().ToArray(),
+			var id = _applicationUpater.Add(application, _fixture.CreateMany<byte>().ToArray(),
 				_fixture.CreateMany<byte>().ToArray(), _fixture.CreateMany<byte>().ToArray(), _fixture.CreateMany<byte>().ToArray(),
 				_fixture.CreateMany<byte>().ToArray(), _fixture.CreateMany<byte>().ToArray());
 			_unitOfWork.SaveChanges();

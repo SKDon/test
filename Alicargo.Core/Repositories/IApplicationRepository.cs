@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Contracts;
-using Alicargo.Core.Helpers;
 
 namespace Alicargo.Core.Repositories
 {
@@ -10,25 +9,15 @@ namespace Alicargo.Core.Repositories
 	{
 		ApplicationData Get(long id);
 		ApplicationData[] GetByReference(long id);
-		ApplicationData[] Get(int take, int skip, IEnumerable<long> stateIds, Order[] orders = null, long? clientUserId = null);
+		ApplicationData[] List(int take, int skip, IEnumerable<long> stateIds, Order[] orders = null, long? clientUserId = null);
 		ApplicationData GetByTransit(long id);
-
-		long Count(IEnumerable<long> stateIds, long? clientUserId = null);
-		void Update(ApplicationData application, byte[] swiftFile = null, byte[] invoiceFile = null, byte[] cpFile = null, byte[] deliveryBillFile = null, byte[] torg12File = null, byte[] packingFile = null);
-		Func<long> Add(ApplicationData application, byte[] swiftFile, byte[] invoiceFile, byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile);
-		void Delete(long id);
+		long Count(IEnumerable<long> stateIds, long? clientUserId = null);		
 
 		FileHolder GetInvoiceFile(long id);
 		FileHolder GetSwiftFile(long id);
 		FileHolder GetCPFile(long id);
 		FileHolder GetDeliveryBillFile(long id);
 		FileHolder GetTorg12File(long id);
-		FileHolder GetPackingFile(long id);
-
-		void SetReference(long applicationId, long? referenceId);
-		void SetState(long id, long stateId);
-		void SetDateInStock(long applicationId, DateTimeOffset dateTimeOffset);
-		void SetTransitReference(long id, string transitReference);
-		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);
+		FileHolder GetPackingFile(long id);		
 	}
 }

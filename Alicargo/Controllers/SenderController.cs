@@ -15,6 +15,7 @@ namespace Alicargo.Controllers
 	public partial class SenderController : Controller
 	{
 		private readonly IApplicationRepository _applicationRepository;
+		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IClientRepository _clientRepository;
 		private readonly ITransitRepository _transitRepository;
 		private readonly IStateConfig _stateConfig;
@@ -25,13 +26,15 @@ namespace Alicargo.Controllers
 			IClientRepository clientRepository,
 			ITransitRepository transitRepository,
 			IStateConfig stateConfig,
-			IUnitOfWork unitOfWork)
+			IUnitOfWork unitOfWork, 
+			IApplicationUpdateRepository applicationUpdater)
 		{
 			_applicationRepository = applicationRepository;
 			_clientRepository = clientRepository;
 			_transitRepository = transitRepository;
 			_stateConfig = stateConfig;
 			_unitOfWork = unitOfWork;
+			_applicationUpdater = applicationUpdater;
 		}
 
 		[HttpGet]
@@ -85,7 +88,7 @@ namespace Alicargo.Controllers
 
 			Set(model, applicationData);
 
-			_applicationRepository.Update(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
+			_applicationUpdater.Update(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
 			_unitOfWork.SaveChanges();
 
 			return RedirectToAction(MVC.ApplicationList.Index());
@@ -113,7 +116,7 @@ namespace Alicargo.Controllers
 				applicationData.StateChangeTimestamp = DateTimeOffset.UtcNow;
 				applicationData.CreationTimestamp = DateTimeOffset.UtcNow;
 
-				_applicationRepository.Add(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
+				_applicationUpdater.Add(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
 				_unitOfWork.SaveChanges();
 				
 				ts.Complete();

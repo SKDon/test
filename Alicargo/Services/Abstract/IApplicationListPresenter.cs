@@ -1,4 +1,4 @@
-﻿using Alicargo.Core.Helpers;
+﻿using Alicargo.Contracts.Helpers;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract

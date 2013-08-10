@@ -17,6 +17,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IStateRepository> StateRepository { get; private set; }
 		public Mock<IStateService> StateService { get; private set; }
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
+		public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
 		public Mock<IApplicationManager> ApplicationManager { get; private set; }
 		public Mock<IReferenceRepository> ReferenceRepository { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
@@ -39,6 +40,7 @@ namespace Alicargo.TestHelpers
 			IdentityService = Inject<IIdentityService>();
 			StateService = Inject<IStateService>();
 			ApplicationRepository = Inject<IApplicationRepository>();
+			ApplicationUpdater = Inject<IApplicationUpdateRepository>();
 			ApplicationManager = Inject<IApplicationManager>();
 			ReferenceRepository = Inject<IReferenceRepository>();
 			StateConfig = Inject<IStateConfig>();

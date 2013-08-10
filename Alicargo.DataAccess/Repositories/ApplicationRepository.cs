@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Contracts;
-using Alicargo.Core.Helpers;
 using Alicargo.Core.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
@@ -81,8 +81,15 @@ namespace Alicargo.DataAccess.Repositories
 			return applications.LongCount();
 		}
 
-		public ApplicationData[] Get(int take, int skip, IEnumerable<long> stateIds,
+		public ApplicationData[] List(int take, int skip, IEnumerable<long> stateIds,
 			Order[] orders = null, long? clientUserId = null)
+		{
+			var applications = GetQueryable(take, skip, stateIds, orders, clientUserId);
+
+			return applications.Select(_selector).ToArray();
+		}
+
+		private IQueryable<Application> GetQueryable(int take, int skip, IEnumerable<long> stateIds, IEnumerable<Order> orders, long? clientUserId)
 		{
 			var applications = Context.Applications.Where(x => stateIds.Contains(x.StateId));
 
@@ -91,12 +98,10 @@ namespace Alicargo.DataAccess.Repositories
 				applications = applications.Where(x => x.Client.UserId == clientUserId.Value);
 			}
 
-			applications = _orderer.Order(applications, orders);
-
-			return applications.Skip(skip)
-							   .Take(take)
-							   .Select(_selector)
-							   .ToArray();
+			applications = _orderer.Order(applications, orders)
+								   .Skip(skip)
+								   .Take(take);
+			return applications;
 		}
 
 		public ApplicationData[] GetByReference(long id)
@@ -107,18 +112,6 @@ namespace Alicargo.DataAccess.Repositories
 		public ApplicationData GetByTransit(long id)
 		{
 			return Context.Applications.Where(x => x.TransitId == id).Select(_selector).FirstOrDefault();
-		}
-
-		public Func<long> Add(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
-			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
-		{
-			var entity = new Application();
-
-			application.CopyTo(swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile, entity);
-
-			Context.Applications.InsertOnSubmit(entity);
-
-			return () => entity.Id;
 		}
 
 		#region Files
@@ -187,63 +180,13 @@ namespace Alicargo.DataAccess.Repositories
 					FileName = application.PackingFileName,
 					FileData = application.PackingFileData.ToArray()
 				});
-		}
-
-		public void Delete(long id)
-		{
-			var application = Context.Applications.First(x => x.Id == id);
-			Context.Applications.DeleteOnSubmit(application);
-		}
+		}		
 
 		private FileHolder GetFile(Expression<Func<Application, bool>> where, Expression<Func<Application, FileHolder>> selector)
 		{
 			return Context.Applications.Where(where).Select(selector).FirstOrDefault();
 		}
 
-		#endregion
-
-		public void SetState(long id, long stateId)
-		{
-			Update(id, application =>
-			{
-				application.StateId = stateId;
-				application.StateChangeTimestamp = DateTimeOffset.UtcNow;
-			});
-		}
-
-		// todo: test
-		public void SetReference(long id, long? referenceId)
-		{
-			Update(id, application => application.ReferenceId = referenceId);
-		}
-
-		// todo: test
-		public void SetDateInStock(long id, DateTimeOffset dateTimeOffset)
-		{
-			Update(id, application => application.DateInStock = dateTimeOffset);
-		}
-
-		public void SetTransitReference(long id, string transitReference)
-		{
-			Update(id, application => application.TransitReference = transitReference);
-		}
-
-		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
-		{
-			Update(id, application => application.DateOfCargoReceipt = dateOfCargoReceipt);
-		}
-
-		public void Update(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
-			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
-		{
-			Update(application.Id, entity =>
-				application.CopyTo(swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile, entity));
-		}
-
-		void Update(long id, Action<Application> action)
-		{
-			var application = Context.Applications.First(x => x.Id == id);
-			action(application);
-		}
+		#endregion		
 	}
 }

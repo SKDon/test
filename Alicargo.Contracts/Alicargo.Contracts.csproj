@@ -36,6 +36,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\ApplicationData.cs" />
+    <Compile Include="Helpers\ApplicationFilter.cs" />
+    <Compile Include="Helpers\Order.cs" />
+    <Compile Include="Helpers\OrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

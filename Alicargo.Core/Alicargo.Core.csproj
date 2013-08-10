@@ -64,7 +64,7 @@
     <Compile Include="Exceptions\DublicateException.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\ClientDataHelper.cs" />
-    <Compile Include="Helpers\OrderType.cs" />
+    <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\ITransaction.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
@@ -91,7 +91,6 @@
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Exceptions\AccessForbidenException.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
-    <Compile Include="Helpers\Order.cs" />
     <Compile Include="Localization\Cultures.cs" />
     <Compile Include="Localization\LocalizeEnumExtension.cs" />
     <Compile Include="Models\Brocker.cs" />

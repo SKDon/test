@@ -22,6 +22,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 		private IUnitOfWork _unitOfWork;
 		private IApplicationRepository _applicationRepository;
+		private IApplicationUpdateRepository _applicationUpater;
 		private IClientRepository _clientRepository;
 		private IAuthenticationRepository _authenticationRepository;
 		private IPasswordConverter _passwordConverter;
@@ -44,6 +45,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			_unitOfWork = new UnitOfWork(_connection);
 
 			_applicationRepository = new ApplicationRepository(_unitOfWork, new ApplicationRepositoryOrderer());
+			_applicationUpater = new ApplicationUpdateRepository(_unitOfWork);
 			_clientRepository = new ClientRepository(_unitOfWork);
 			_passwordConverter = new PasswordConverter();
 

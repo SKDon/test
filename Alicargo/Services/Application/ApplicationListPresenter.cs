@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Helpers;
@@ -47,7 +48,7 @@ namespace Alicargo.Services.Application
 
 			var orders = PrepareOrders(groups);
 
-			var data = _applicationRepository.Get(take, skip, stateIds, orders,
+			var data = _applicationRepository.List(take, skip, stateIds, orders,
 				isClient ? _identity.Id : null);
 
 			var applications = data.Select(x => new ApplicationListItem(x)).ToArray();
@@ -99,25 +100,23 @@ namespace Alicargo.Services.Application
 			SetCountryData(applications);
 		}
 
+		// ReSharper disable PossibleInvalidOperationException
+		// ReSharper disable AssignNullToNotNullAttribute
 		private void SetCountryData(IEnumerable<ApplicationListItem> applications)
 		{
 			var applicationWithCountry = applications.Where(x => x.CountryId.HasValue).ToArray();
 
 			var countries = _countryRepository
-				// ReSharper disable PossibleInvalidOperationException
 				.Get(applicationWithCountry.Select(x => x.CountryId.Value).ToArray())
-				// ReSharper restore PossibleInvalidOperationException
 				.ToDictionary(x => x.Id, x => x.Name);
 
 			foreach (var application in applicationWithCountry)
 			{
-				// ReSharper disable PossibleInvalidOperationException
-				// ReSharper disable AssignNullToNotNullAttribute
 				application.CountryName = countries[application.CountryId.Value][_identity.TwoLetterISOLanguageName];
-				// ReSharper restore AssignNullToNotNullAttribute
-				// ReSharper restore PossibleInvalidOperationException
 			}
 		}
+		// ReSharper restore AssignNullToNotNullAttribute
+		// ReSharper restore PossibleInvalidOperationException
 
 		private void SetReferenceData(params ApplicationListItem[] applications)
 		{
@@ -139,8 +138,6 @@ namespace Alicargo.Services.Application
 				application.ReferenceBill = referenceData.Bill;
 			}
 		}
-
-
 
 		private void SetTransitData(params ApplicationListItem[] applications)
 		{
