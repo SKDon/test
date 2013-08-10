@@ -50,7 +50,6 @@
     <Compile Include="Contracts\IAuthenticationData.cs" />
     <Compile Include="Contracts\IClientData.cs" />
     <Compile Include="Contracts\IAirWaybillData.cs" />
-    <Compile Include="Contracts\AirWaybillAggregate.cs" />
     <Compile Include="Contracts\AirWaybillData.cs" />
     <Compile Include="Contracts\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />

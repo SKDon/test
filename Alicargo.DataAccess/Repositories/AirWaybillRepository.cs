@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Repositories;
 using Alicargo.DataAccess.DbContext;
@@ -71,12 +72,12 @@ namespace Alicargo.DataAccess.Repositories
 		// todo: test
 		public AirWaybillData[] GetRange(long skip, int take, long? brockerId = null)
 		{
-			var AirWaybills = Context.AirWaybills.AsQueryable();
+			var airWaybills = Context.AirWaybills.AsQueryable();
 			if (brockerId.HasValue)
 			{
-				AirWaybills = AirWaybills.Where(x => x.BrockerId == brockerId.Value);
+				airWaybills = airWaybills.Where(x => x.BrockerId == brockerId.Value);
 			}
-			return AirWaybills.Skip((int)skip)
+			return airWaybills.Skip((int)skip)
 				.Take(take)
 				.Select(_selector)
 				.ToArray();
@@ -93,7 +94,7 @@ namespace Alicargo.DataAccess.Repositories
 					x.StateId,
 					Data = x.Applications.Select(y => new
 					{
-						y.Gross,
+						y.Weight,
 						y.Value,
 						y.Count
 					})
@@ -105,7 +106,7 @@ namespace Alicargo.DataAccess.Repositories
 				{
 					AirWaybillId = x.Key.Id,
 					TotalCount = x.Value.Sum(y => y.Count ?? 0),
-					TotalWeight = x.Value.Sum(y => y.Gross ?? 0),
+					TotalWeight = x.Value.Sum(y => y.Weight ?? 0),
 					StateId = x.Key.StateId
 				})
 				.ToArray();
@@ -195,15 +196,15 @@ namespace Alicargo.DataAccess.Repositories
 		// todo: test
 		public void Delete(long id)
 		{
-			var AirWaybill = Context.AirWaybills.First(x => x.Id == id);
-			Context.AirWaybills.DeleteOnSubmit(AirWaybill);
+			var airWaybill = Context.AirWaybills.First(x => x.Id == id);
+			Context.AirWaybills.DeleteOnSubmit(airWaybill);
 		}
 
-		public void SetState(long AirWaybillId, long stateId)
+		public void SetState(long airWaybillId, long stateId)
 		{
-			var AirWaybill = Context.AirWaybills.First(x => x.Id == AirWaybillId);
-			AirWaybill.StateId = stateId;
-			AirWaybill.StateChangeTimestamp = DateTimeOffset.UtcNow;
+			var airWaybill = Context.AirWaybills.First(x => x.Id == airWaybillId);
+			airWaybill.StateId = stateId;
+			airWaybill.StateChangeTimestamp = DateTimeOffset.UtcNow;
 		}
 	}
 }

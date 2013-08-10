@@ -1745,7 +1745,7 @@ namespace Alicargo.DataAccess.DbContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gross", DbType="Real")]
-		public System.Nullable<float> Gross
+		public System.Nullable<float> Weight
 		{
 			get
 			{
@@ -1758,7 +1758,7 @@ namespace Alicargo.DataAccess.DbContext
 					this.OnGrossChanging(value);
 					this.SendPropertyChanging();
 					this._Gross = value;
-					this.SendPropertyChanged("Gross");
+					this.SendPropertyChanged("Weight");
 					this.OnGrossChanged();
 				}
 			}

@@ -25,7 +25,7 @@
 	[AddressLoad]			NVARCHAR (MAX)		NULL,
 	[WarehouseWorkingTime]	NVARCHAR (MAX)		NULL,
 	[TransitReference]		NVARCHAR (MAX)		NULL,
-	[Gross]					REAL				NULL,
+	[Weight]				REAL				NULL,
 	[Count]					INT					NULL,
 	[Volume]				REAL				NOT NULL,
 	[TermsOfDelivery]		NVARCHAR (MAX)		NULL,

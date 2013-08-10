@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.Helpers
 			to.Characteristic = from.Characteristic;
 			to.AddressLoad = from.AddressLoad;
 			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
-			to.Gross = from.Weigth;
+			to.Weight = from.Weigth;
 			to.Count = from.Count;
 			to.Volume = from.Volume;
 			to.TermsOfDelivery = from.TermsOfDelivery;

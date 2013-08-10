@@ -1,4 +1,5 @@
 ﻿using System;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contracts;
 
 namespace Alicargo.Core.Repositories
@@ -15,7 +16,7 @@ namespace Alicargo.Core.Repositories
 		string[] GetClientEmails(long id);
 
 		void Delete(long id);
-		void SetState(long AirWaybillId, long stateId);
+		void SetState(long airWaybillId, long stateId);
 		void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile);
 		
 		FileHolder GetAWBFile(long id);

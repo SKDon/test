@@ -1,4 +1,4 @@
-namespace Alicargo.Core.Contracts
+namespace Alicargo.Contracts.Contracts
 {
 	public sealed class AirWaybillAggregate
 	{

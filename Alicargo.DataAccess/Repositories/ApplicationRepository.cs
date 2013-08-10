@@ -38,7 +38,7 @@ namespace Alicargo.DataAccess.Repositories
 				Torg12FileName = x.Torg12FileName,
 				PackingFileName = x.PackingFileName,
 
-				Weigth = x.Gross,
+				Weigth = x.Weight,
 				AddressLoad = x.AddressLoad,
 				Characteristic = x.Characteristic,
 				Count = x.Count,
@@ -133,7 +133,7 @@ namespace Alicargo.DataAccess.Repositories
 									   TransitReference = x.Transit.RecipientName,
 									   TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
 									   WarehouseWorkingTime = x.WarehouseWorkingTime,
-									   Weigth = x.Gross,
+									   Weigth = x.Weight,
 									   MethodOfDeliveryId = x.MethodOfDeliveryId,
 									   Value = x.Value,
 									   CurrencyId = x.CurrencyId,

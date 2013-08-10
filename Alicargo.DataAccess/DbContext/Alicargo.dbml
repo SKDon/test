@@ -64,7 +64,7 @@
       <Column Name="AddressLoad" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="WarehouseWorkingTime" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="TransitReference" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Gross" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Single" DbType="Real" CanBeNull="true" />
       <Column Name="Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Volume" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
       <Column Name="TermsOfDelivery" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />

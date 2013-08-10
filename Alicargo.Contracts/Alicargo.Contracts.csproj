@@ -35,6 +35,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\AirWaybillAggregate.cs" />
     <Compile Include="Contracts\ApplicationData.cs" />
     <Compile Include="Contracts\ApplicationListItemData.cs" />
     <Compile Include="Helpers\ApplicationFilter.cs" />
