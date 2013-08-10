@@ -137,7 +137,7 @@ namespace Alicargo.ViewModels.Application
 		#region ClientData
 
 		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
-		public string LegalEntity { get; set; }
+		public string ClientLegalEntity { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Nic")]
 		public string ClientNic { get; set; }
@@ -148,8 +148,7 @@ namespace Alicargo.ViewModels.Application
 
 		#endregion
 
-		// todo: 3. rename to Air Way Bill
-		public string AirWaybillBill { get; set; }
+		public string AirWaybill { get; set; }
 		public string AirWaybillGTD { get; set; }
 
 		public string CountryName { get; set; }

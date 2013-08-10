@@ -14,16 +14,16 @@ namespace Alicargo.Services.Application
 		private readonly ICountryRepository _countryRepository;
 		private readonly ITransitService _transitService;
 		private readonly IIdentityService _identity;
-		private readonly IAirWaybillRepository _AirWaybillRepository;
+		private readonly IAirWaybillRepository _airWaybillRepository;
 		private readonly IClientRepository _clientRepository;
 
 		public ApplicationHelper(ICountryRepository countryRepository, ITransitService transitService,
-			IIdentityService identity, IAirWaybillRepository AirWaybillRepository, IClientRepository clientRepository)
+			IIdentityService identity, IAirWaybillRepository airWaybillRepository, IClientRepository clientRepository)
 		{
 			_countryRepository = countryRepository;
 			_transitService = transitService;
 			_identity = identity;
-			_AirWaybillRepository = AirWaybillRepository;
+			_airWaybillRepository = airWaybillRepository;
 			_clientRepository = clientRepository;
 		}
 
@@ -66,19 +66,19 @@ namespace Alicargo.Services.Application
 
 			var ids = applicationsWithAirWaybill.Select(x => x.AirWaybillId ?? 0).ToArray();
 
-			var AirWaybills = _AirWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+			var airWaybills = _airWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
 
 			foreach (var application in applicationsWithAirWaybill)
 			{
-				if (!application.AirWaybillId.HasValue || !AirWaybills.ContainsKey(application.AirWaybillId.Value))
+				if (!application.AirWaybillId.HasValue || !airWaybills.ContainsKey(application.AirWaybillId.Value))
 					throw new InvalidLogicException();
 
-				var AirWaybillData = AirWaybills[application.AirWaybillId.Value];
+				var airWaybillData = airWaybills[application.AirWaybillId.Value];
 
-				application.AirWaybillBill = AirWaybillData.Bill;
-				application.AirWaybillGTD = AirWaybillData.GTD;
-				application.AirWaybillDateOfArrival = AirWaybillData.DateOfArrival;
-				application.AirWaybillDateOfDeparture = AirWaybillData.DateOfDeparture;				
+				application.AirWaybill = airWaybillData.Bill;
+				application.AirWaybillGTD = airWaybillData.GTD;
+				application.AirWaybillDateOfArrival = airWaybillData.DateOfArrival;
+				application.AirWaybillDateOfDeparture = airWaybillData.DateOfDeparture;				
 			}
 		}
 
@@ -103,7 +103,7 @@ namespace Alicargo.Services.Application
 				var clientData = clients[application.ClientId];
 
 				application.ClientUserId = clientData.UserId;
-				application.LegalEntity = clientData.LegalEntity;
+				application.ClientLegalEntity = clientData.LegalEntity;
 				application.ClientNic = clientData.Nic;
 				application.ClientEmail = clientData.Email;
 			}

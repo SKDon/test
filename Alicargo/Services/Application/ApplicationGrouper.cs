@@ -53,7 +53,7 @@ namespace Alicargo.Services.Application
 
 				case OrderType.LegalEntity:
 					return applications.GroupBy(x => x.ClientLegalEntity)
-						.Select(x => GetApplicationGroup(x, orders, "LegalEntity", g => g.Key, airWaybills))
+						.Select(x => GetApplicationGroup(x, orders, "ClientLegalEntity", g => g.Key, airWaybills))
 						.ToArray();
 
 				default:

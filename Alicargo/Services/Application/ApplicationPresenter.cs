@@ -15,25 +15,78 @@ namespace Alicargo.Services.Application
 		
 		private readonly IStateService _stateService;
 		private readonly IIdentityService _identity;
+		private readonly ICountryRepository _countryRepository;
 		private readonly IStateRepository _stateRepository;
 
 		public ApplicationPresenter(
 			IApplicationRepository applicationRepository,
 			IIdentityService identity,
+			ICountryRepository countryRepository,
 			IStateService stateService,
 			IStateRepository stateRepository)
 		{
 			_applicationRepository = applicationRepository;
 			_identity = identity;
+			_countryRepository = countryRepository;
 			_stateService = stateService;
 			_stateRepository = stateRepository;
 		}
 
 		public ApplicationDetailsModel Get(long id)
 		{
-			var data = _applicationRepository.Get(id);
+			var data = _applicationRepository.GetDetails(id);
 
-			var application = new ApplicationDetailsModel(data);
+			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
+
+			var application = new ApplicationDetailsModel
+			{
+				AddressLoad = data.AddressLoad,
+				Id = data.Id,
+				PackingFileName = data.PackingFileName,
+				FactoryName = data.FactoryName,
+				Invoice = data.Invoice,
+				InvoiceFileName = data.InvoiceFileName,
+				MarkName = data.MarkName,
+				SwiftFileName = data.SwiftFileName,
+				Volume = data.Volume,
+				Count = data.Count,
+				AirWaybill = data.AirWaybill,
+				CPFileName = data.CPFileName,
+				Characteristic = data.Characteristic,
+				ClientNic = data.ClientNic,
+				ClientLegalEntity = data.ClientLegalEntity,
+				CreationTimestamp = data.CreationTimestamp,
+				DateOfCargoReceipt = data.DateOfCargoReceipt,
+				DeliveryBillFileName = data.DeliveryBillFileName,
+				FactoryContact = data.FactoryContact,
+				FactoryEmail = data.FactoryEmail,
+				FactoryPhone = data.FactoryPhone,
+				StateChangeTimestamp = data.StateChangeTimestamp,
+				StateId = data.StateId,
+				TermsOfDelivery = data.TermsOfDelivery,
+				Torg12FileName = data.Torg12FileName,
+				TransitAddress = data.TransitAddress,
+				TransitCarrierName = data.TransitCarrierName,
+				TransitCity = data.TransitCity,
+				TransitDeliveryTypeId = data.TransitDeliveryTypeId,
+				TransitMethodOfTransitId = data.TransitMethodOfTransitId,
+				TransitPhone = data.TransitPhone,
+				TransitRecipientName = data.TransitRecipientName,
+				TransitReference = data.TransitReference,
+				TransitWarehouseWorkingTime = data.TransitWarehouseWorkingTime,
+				WarehouseWorkingTime = data.WarehouseWorkingTime,
+				Weigth = data.Weight,
+				MethodOfDeliveryId = data.MethodOfDeliveryId,
+				Value = data.Value,
+				CurrencyId = data.CurrencyId,
+				AirWaybillDateOfArrival = data.AirWaybillDateOfArrival,
+				AirWaybillDateOfDeparture = data.AirWaybillDateOfDeparture,
+				AirWaybillGTD = data.AirWaybillGTD,
+				ClientEmail = data.ClientEmail,
+				ClientUserId = data.ClientUserId,
+				CountryName = data.CountryId.HasValue ? countries[data.CountryId.Value] : null,
+				AirWaybillId = data.AirWaybillId
+			};
 
 			return application;
 		}

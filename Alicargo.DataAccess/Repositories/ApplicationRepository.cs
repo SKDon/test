@@ -72,7 +72,63 @@ namespace Alicargo.DataAccess.Repositories
 		public ApplicationData[] GetByAirWaybill(long id)
 		{
 			return Context.Applications.Where(x => x.AirWaybillId == id).Select(_selector).ToArray();
-		}		
+		}
+
+		public ApplicationDetailsData GetDetails(long id)
+		{
+			return Context.Applications.Where(x => x.Id == id)
+						  .Select(x => new ApplicationDetailsData
+						  {
+							  AddressLoad = x.AddressLoad,
+							  Id = x.Id,
+							  PackingFileName = x.PackingFileName,
+							  FactoryName = x.FactoryName,
+							  Invoice = x.Invoice,
+							  InvoiceFileName = x.InvoiceFileName,
+							  MarkName = x.MarkName,
+							  SwiftFileName = x.SwiftFileName,
+							  Volume = x.Volume,
+							  Count = x.Count,
+							  AirWaybill = x.AirWaybill.Bill,
+							  CPFileName = x.CPFileName,
+							  Characteristic = x.Characteristic,
+							  CountryId = x.CountryId,
+							  CreationTimestamp = x.CreationTimestamp,
+							  DateInStock = x.DateInStock,
+							  DateOfCargoReceipt = x.DateOfCargoReceipt,
+							  DeliveryBillFileName = x.DeliveryBillFileName,
+							  FactoryContact = x.FactoryContact,
+							  FactoryEmail = x.FactoryEmail,
+							  FactoryPhone = x.FactoryPhone,
+							  StateChangeTimestamp = x.StateChangeTimestamp,
+							  StateId = x.StateId,
+							  TermsOfDelivery = x.TermsOfDelivery,
+							  Torg12FileName = x.Torg12FileName,
+							  TransitAddress = x.Transit.Address,
+							  TransitCarrierName = x.Transit.Carrier.Name,
+							  TransitCity = x.Transit.City,
+							  TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
+							  TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
+							  TransitPhone = x.Transit.Phone,
+							  TransitRecipientName = x.Transit.RecipientName,
+							  TransitReference = x.TransitReference,
+							  TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
+							  WarehouseWorkingTime = x.WarehouseWorkingTime,
+							  Weigth = x.Weight,
+							  MethodOfDeliveryId = x.MethodOfDeliveryId,
+							  Value = x.Value,
+							  CurrencyId = x.CurrencyId,
+							  AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
+							  AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
+							  AirWaybillGTD = x.AirWaybill.GTD,
+							  ClientEmail = x.Client.Email,
+							  ClientUserId = x.Client.UserId,
+							  Weight = x.Weight,
+							  AirWaybillId = x.AirWaybillId,
+							  ClientNic = x.Client.Nic,
+							  ClientLegalEntity = x.Client.LegalEntity
+						  }).FirstOrDefault();
+		}
 
 		public long Count(IEnumerable<long> stateIds, long? clientUserId = null)
 		{

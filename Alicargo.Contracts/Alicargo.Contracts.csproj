@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Contracts\AirWaybillAggregate.cs" />
     <Compile Include="Contracts\ApplicationData.cs" />
+    <Compile Include="Contracts\ApplicationDetailsData.cs" />
     <Compile Include="Contracts\ApplicationListItemData.cs" />
     <Compile Include="Contracts\AuthenticationData.cs" />
     <Compile Include="Contracts\CountryData.cs" />

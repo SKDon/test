@@ -15,6 +15,7 @@ namespace Alicargo.Controllers
 	public partial class ApplicationController : Controller
 	{
 		private readonly IApplicationManager _applicationManager;
+		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IIdentityService _identityService;
 		private readonly IClientService _clientService;
 		private readonly ICountryRepository _countryRepository;
@@ -22,12 +23,14 @@ namespace Alicargo.Controllers
 
 		public ApplicationController(
 			IApplicationManager applicationManager,
+			IApplicationPresenter applicationPresenter,
 			IIdentityService identityService,
 			IClientService clientService,
 			ICountryRepository countryRepository,
 			IApplicationRepository applicationRepository)
 		{
 			_applicationManager = applicationManager;
+			_applicationPresenter = applicationPresenter;
 			_identityService = identityService;
 			_clientService = clientService;
 			_countryRepository = countryRepository;
@@ -40,7 +43,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Client)]
 		public virtual PartialViewResult Details(long id)
 		{
-			var application = _applicationManager.Get(id);
+			var application = _applicationPresenter.Get(id);
 
 			return PartialView(application);
 		}
@@ -146,7 +149,7 @@ namespace Alicargo.Controllers
 			var model = new ApplicationEditModel
 			{
 				Transit = client.Transit,
-				LegalEntity = client.LegalEntity,
+				ClientLegalEntity = client.LegalEntity,
 				ClientNic = client.Nic,
 				ClientEmail = client.Email
 			};

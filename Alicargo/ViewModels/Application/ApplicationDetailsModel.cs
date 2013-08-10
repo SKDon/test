@@ -1,62 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Models;
-using Microsoft.Ajax.Utilities;
 using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationDetailsModel
 	{
-		public ApplicationDetailsModel()
-		{
-			Currency = new CurrencyModel();
-		}
-		
-		// todo: tests
-		public ApplicationDetailsModel(ApplicationData data)
-		{
-			AddressLoad = data.AddressLoad;
-			Characteristic = data.Characteristic;
-			ClientId = data.ClientId;
-			Count = data.Count;
-			CPFileName = data.CPFileName;
-			CreationTimestamp = data.CreationTimestamp;
-			Currency = new CurrencyModel
-			{
-				CurrencyId = data.CurrencyId,
-				Value = data.Value
-			};
-			DeliveryBillFileName = data.DeliveryBillFileName;
-			FactoryContact = data.FactoryContact;
-			FactoryEmail = data.FactoryEmail;
-			FactoryName = data.FactoryName;
-			FactoryPhone = data.FactoryPhone;
-			Weigth = data.Weigth;
-			Id = data.Id;
-			Invoice = data.Invoice;
-			InvoiceFileName = data.InvoiceFileName;
-			PackingFileName = data.PackingFileName;
-			MarkName = data.MarkName;
-			MethodOfDeliveryId = data.MethodOfDeliveryId;
-			AirWaybillId = data.AirWaybillId;
-			StateChangeTimestamp = data.StateChangeTimestamp;
-			StateId = data.StateId;
-			SwiftFileName = data.SwiftFileName;
-			TermsOfDelivery = data.TermsOfDelivery;
-			Torg12FileName = data.Torg12FileName;
-			TransitId = data.TransitId;
-			CountryId = data.CountryId;
-			Volume = data.Volume;
-			WarehouseWorkingTime = data.WarehouseWorkingTime;
-			DateInStock = data.DateInStock;
-			DateOfCargoReceipt = data.DateOfCargoReceipt;
-			TransitReference = data.TransitReference;
-		}
-
 		#region Computed
 
 		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
@@ -64,52 +15,36 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: test time zones
 				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.LocalDateTime.ToShortDateString() : null;
 			}
-			set
-			{
-				// todo: test
-				if (!value.IsNullOrWhiteSpace())
-				{
-					DateOfCargoReceipt = DateTimeOffset.Parse(value);
-				}
-			}
-		}
-
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
-		public MethodOfDelivery MethodOfDelivery
-		{
-			get { return (MethodOfDelivery)MethodOfDeliveryId; }
-			set { MethodOfDeliveryId = (int)value; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public string MethodOfDeliveryLocalString
 		{
-			get { return MethodOfDelivery.ToLocalString(); }
+			get { return ((MethodOfDelivery)MethodOfDeliveryId).ToLocalString(); }
 		}
 
-		public string ValueString { get { return ApplicationModelHelper.GetValueString(Currency.Value, Currency.CurrencyId); } }
+		[DisplayNameLocalized(typeof(Entities), "Value")]
+		public string ValueString
+		{
+			get { return ApplicationModelHelper.GetValueString(Value, CurrencyId); }
+		}
 
 		#endregion
 
-		#region ClientData
-
-		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
-		public string LegalEntity { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Nic")]
-		public string ClientNic { get; set; }
+		#region Additional
 
 		public long ClientUserId { get; set; }
 
+		public string ClientNic { get; set; }
+
+		public string ClientLegalEntity { get; set; }
+
 		public string ClientEmail { get; set; }
 
-		#endregion
+		public string AirWaybill { get; set; }
 
-		public string AirWaybillBill { get; set; }
 		public string AirWaybillGTD { get; set; }
 
 		public string CountryName { get; set; }
@@ -118,16 +53,31 @@ namespace Alicargo.ViewModels.Application
 
 		public DateTimeOffset? AirWaybillDateOfArrival { get; set; }
 
-		public Transit Transit { get; set; }
+		public string TransitCity { get; set; }
 
-		#region Data
+		public string TransitAddress { get; set; }
+
+		public string TransitRecipientName { get; set; }
+
+		public string TransitPhone { get; set; }
+
+		public int TransitMethodOfTransitId { get; set; }
+
+		public int TransitDeliveryTypeId { get; set; }
+
+		public string TransitWarehouseWorkingTime { get; set; }
+
+		public string TransitCarrierName { get; set; }
+
+		#endregion
+
+		#region Application Data
 
 		public long Id { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "CreationTimestamp")]
 		public DateTimeOffset CreationTimestamp { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Invoice")]
+		[DisplayNameLocalized(typeof(Entities), "Invoice")]
 		public string Invoice { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Invoice")]
@@ -169,22 +119,11 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "TermsOfDelivery")]
 		public string TermsOfDelivery { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
-		public CurrencyModel Currency { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Country")]
-		public long? CountryId { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
 		public DateTimeOffset StateChangeTimestamp { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "DateInStock")]
-		public DateTimeOffset? DateInStock { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
 		public DateTimeOffset? DateOfCargoReceipt { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "FactoryName")]
+		[DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FactoryPhone")]
@@ -196,14 +135,19 @@ namespace Alicargo.ViewModels.Application
 		[DataType(DataType.MultilineText), DisplayNameLocalized(typeof(Entities), "FactoryContact")]
 		public string FactoryContact { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Mark")]
+		[DisplayNameLocalized(typeof(Entities), "Mark")]
 		public string MarkName { get; set; }
 
 		public string TransitReference { get; set; }
+
 		public long StateId { get; set; }
+
 		public int MethodOfDeliveryId { get; set; }
-		public long ClientId { get; set; }
-		public long TransitId { get; set; }
+
+		public decimal Value { get; set; }
+
+		public int CurrencyId { get; set; }
+
 		public long? AirWaybillId { get; set; }
 
 		#endregion
