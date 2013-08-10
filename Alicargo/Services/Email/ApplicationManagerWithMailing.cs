@@ -223,9 +223,9 @@ namespace Alicargo.Services.Email
 			SendOnSetDateOfCargoReceipt(id);
 		}
 
-		public void SetTransitReference(long id, string TransitReference)
+		public void SetTransitReference(long id, string transitReference)
 		{
-			_manager.SetTransitReference(id, TransitReference);
+			_manager.SetTransitReference(id, transitReference);
 
 			SendOnSetState(id);
 		}

@@ -82,9 +82,9 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		public void SetTransitReference(long id, string TransitReference)
+		public void SetTransitReference(long id, string transitReference)
 		{
-			_applicationUpdater.SetTransitReference(id, TransitReference);
+			_applicationUpdater.SetTransitReference(id, transitReference);
 			_unitOfWork.SaveChanges();
 		}
 

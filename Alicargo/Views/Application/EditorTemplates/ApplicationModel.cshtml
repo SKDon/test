@@ -26,7 +26,6 @@
 	@Html.DropDownListFor(x => x.CountryId, list)
 }
 
-
 <div class="row">
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.FactoryName)
@@ -114,13 +113,7 @@
 		@Helpers.FileUploader(Html.IdFor(x => x.PackingFile).ToHtmlString(), Model.PackingFileName)
 	</div>
 </div>
-<script>
-	$(function () {
-		$(".date-holder input").kendoDatePicker();
-	})
-</script>
-<div @Html.Raw(IdentityService.IsInRole(RoleType.Sender) ? "style='display: none'" : "")>
-	@*todo: hack - create model for sender*@
+<div>
 	<hr />
 	<h4>
 		@Resources.Pages.Transit

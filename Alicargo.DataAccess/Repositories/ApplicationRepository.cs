@@ -67,6 +67,16 @@ namespace Alicargo.DataAccess.Repositories
 		public ApplicationData Get(long id)
 		{
 			return Context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
+		}		
+
+		public ApplicationData[] GetByAirWaybill(long id)
+		{
+			return Context.Applications.Where(x => x.AirWaybillId == id).Select(_selector).ToArray();
+		}
+
+		public ApplicationData GetByTransit(long id)
+		{
+			return Context.Applications.Where(x => x.TransitId == id).Select(_selector).FirstOrDefault();
 		}
 
 		public long Count(IEnumerable<long> stateIds, long? clientUserId = null)
@@ -94,61 +104,51 @@ namespace Alicargo.DataAccess.Repositories
 			applications = _orderer.Order(applications, orders).Skip(skip).Take(take);
 
 			return applications.Select(x => new ApplicationListItemData
-								   {
-									   AddressLoad = x.AddressLoad,
-									   Id = x.Id,
-									   PackingFileName = x.PackingFileName,
-									   FactoryName = x.FactoryName,
-									   Invoice = x.Invoice,
-									   InvoiceFileName = x.InvoiceFileName,
-									   MarkName = x.MarkName,
-									   SwiftFileName = x.SwiftFileName,
-									   Volume = x.Volume,
-									   Count = x.Count,
-									   AirWaybill = x.AirWaybill.Bill,
-									   CPFileName = x.CPFileName,
-									   Characteristic = x.Characteristic,
-									   ClientLegalEntity = x.Client.LegalEntity,
-									   ClientNic = x.Client.Nic,
-									   CountryId = x.CountryId,
-									   CreationTimestamp = x.CreationTimestamp,
-									   DateInStock = x.DateInStock,
-									   DateOfCargoReceipt = x.DateOfCargoReceipt,
-									   DeliveryBillFileName = x.DeliveryBillFileName,
-									   FactoryContact = x.FactoryContact,
-									   FactoryEmail = x.FactoryEmail,
-									   FactoryPhone = x.FactoryPhone,
-									   StateChangeTimestamp = x.StateChangeTimestamp,
-									   StateId = x.StateId,
-									   TermsOfDelivery = x.TermsOfDelivery,
-									   Torg12FileName = x.Torg12FileName,
-									   TransitId = x.TransitId,
-									   TransitAddress = x.Transit.Address,
-									   TransitCarrierName = x.Transit.Carrier.Name,
-									   TransitCity = x.Transit.City,
-									   TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
-									   TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
-									   TransitPhone = x.Transit.Phone,
-									   TransitRecipientName = x.Transit.RecipientName,
-									   TransitReference = x.Transit.RecipientName,
-									   TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
-									   WarehouseWorkingTime = x.WarehouseWorkingTime,
-									   Weigth = x.Weight,
-									   MethodOfDeliveryId = x.MethodOfDeliveryId,
-									   Value = x.Value,
-									   CurrencyId = x.CurrencyId,
-									   AirWaybillId = x.AirWaybillId
-								   }).ToArray();
-		}
-
-		public ApplicationData[] GetByAirWaybill(long id)
-		{
-			return Context.Applications.Where(x => x.AirWaybillId == id).Select(_selector).ToArray();
-		}
-
-		public ApplicationData GetByTransit(long id)
-		{
-			return Context.Applications.Where(x => x.TransitId == id).Select(_selector).FirstOrDefault();
+			{
+				AddressLoad = x.AddressLoad,
+				Id = x.Id,
+				PackingFileName = x.PackingFileName,
+				FactoryName = x.FactoryName,
+				Invoice = x.Invoice,
+				InvoiceFileName = x.InvoiceFileName,
+				MarkName = x.MarkName,
+				SwiftFileName = x.SwiftFileName,
+				Volume = x.Volume,
+				Count = x.Count,
+				AirWaybill = x.AirWaybill.Bill,
+				CPFileName = x.CPFileName,
+				Characteristic = x.Characteristic,
+				ClientLegalEntity = x.Client.LegalEntity,
+				ClientNic = x.Client.Nic,
+				CountryId = x.CountryId,
+				CreationTimestamp = x.CreationTimestamp,
+				DateInStock = x.DateInStock,
+				DateOfCargoReceipt = x.DateOfCargoReceipt,
+				DeliveryBillFileName = x.DeliveryBillFileName,
+				FactoryContact = x.FactoryContact,
+				FactoryEmail = x.FactoryEmail,
+				FactoryPhone = x.FactoryPhone,
+				StateChangeTimestamp = x.StateChangeTimestamp,
+				StateId = x.StateId,
+				TermsOfDelivery = x.TermsOfDelivery,
+				Torg12FileName = x.Torg12FileName,
+				TransitId = x.TransitId,
+				TransitAddress = x.Transit.Address,
+				TransitCarrierName = x.Transit.Carrier.Name,
+				TransitCity = x.Transit.City,
+				TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
+				TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
+				TransitPhone = x.Transit.Phone,
+				TransitRecipientName = x.Transit.RecipientName,
+				TransitReference = x.Transit.RecipientName,
+				TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
+				WarehouseWorkingTime = x.WarehouseWorkingTime,
+				Weigth = x.Weight,
+				MethodOfDeliveryId = x.MethodOfDeliveryId,
+				Value = x.Value,
+				CurrencyId = x.CurrencyId,
+				AirWaybillId = x.AirWaybillId
+			}).ToArray();
 		}
 
 		#region Files
