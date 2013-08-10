@@ -84,13 +84,6 @@ namespace Alicargo.DataAccess.Repositories
 		public ApplicationData[] List(int take, int skip, IEnumerable<long> stateIds,
 			Order[] orders = null, long? clientUserId = null)
 		{
-			var applications = GetQueryable(take, skip, stateIds, orders, clientUserId);
-
-			return applications.Select(_selector).ToArray();
-		}
-
-		private IQueryable<Application> GetQueryable(int take, int skip, IEnumerable<long> stateIds, IEnumerable<Order> orders, long? clientUserId)
-		{
 			var applications = Context.Applications.Where(x => stateIds.Contains(x.StateId));
 
 			if (clientUserId.HasValue)
@@ -101,7 +94,8 @@ namespace Alicargo.DataAccess.Repositories
 			applications = _orderer.Order(applications, orders)
 								   .Skip(skip)
 								   .Take(take);
-			return applications;
+
+			return applications.Select(_selector).ToArray();
 		}
 
 		public ApplicationData[] GetByReference(long id)
