@@ -23,16 +23,16 @@
 				var id = element.data("id");
 				$("#@(Html.IdFor(x => x.CurrencyId))_selected").html(text);
 
-					return id;
-				};
+				return id;
+			};
 
-				$(".currency").click(function (e) {
-					e.preventDefault();
-					var id = select($(this));
-					$("#@Html.IdFor(x => x.CurrencyId)").val(id);
+			$(".currency").click(function (e) {
+				e.preventDefault();
+				var id = select($(this));
+				$("#@Html.IdFor(x => x.CurrencyId)").val(id);
 				});
 
-				select($('[data-id="@Model.CurrencyId"]'));
-			});
+			select($('[data-id="@(Model != null ? Model.CurrencyId : (int)CurrencyType.Euro)"]'));
+		});
 	</script>
 </div>

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
@@ -17,19 +17,15 @@ namespace Alicargo.Services.Application
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateService _stateService;
 		private readonly ITransitService _transitService;
-		private readonly IIdentityService _identity;
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly ICountryRepository _countryRepository;
 
 		public ApplicationManager(
 			IApplicationRepository applicationRepository,
 			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig stateConfig,
 			ITransitService transitService,
-			IUnitOfWork unitOfWork, 
-			IStateService stateService,
-			ICountryRepository countryRepository, 
-			IIdentityService identity)
+			IUnitOfWork unitOfWork,
+			IStateService stateService)
 		{
 			_applicationRepository = applicationRepository;
 			_applicationUpdater = applicationUpdater;
@@ -37,8 +33,6 @@ namespace Alicargo.Services.Application
 			_transitService = transitService;
 			_unitOfWork = unitOfWork;
 			_stateService = stateService;
-			_countryRepository = countryRepository;
-			_identity = identity;
 		}
 
 		public ApplicationEditModel Get(long id)
@@ -47,7 +41,38 @@ namespace Alicargo.Services.Application
 
 			var application = new ApplicationEditModel
 			{
-				Id = data.Id
+				AddressLoad = data.AddressLoad,
+				Characteristic = data.Characteristic,
+				Count = data.Count,
+				CPFileName = data.CPFileName,
+				Currency = new CurrencyModel
+				{
+					CurrencyId = data.CurrencyId,
+					Value = data.Value
+				},
+				DeliveryBillFileName = data.DeliveryBillFileName,
+				FactoryContact = data.FactoryContact,
+				FactoryEmail = data.FactoryEmail,
+				FactoryName = data.FactoryName,
+				FactoryPhone = data.FactoryPhone,
+				Weigth = data.Weigth,
+				Invoice = data.Invoice,
+				InvoiceFileName = data.InvoiceFileName,
+				PackingFileName = data.PackingFileName,
+				MarkName = data.MarkName,
+				MethodOfDeliveryId = data.MethodOfDeliveryId,
+				StateChangeTimestamp = data.StateChangeTimestamp,
+				StateId = data.StateId,
+				SwiftFileName = data.SwiftFileName,
+				TermsOfDelivery = data.TermsOfDelivery,
+				Torg12FileName = data.Torg12FileName,
+				TransitId = data.TransitId,
+				CountryId = data.CountryId,
+				Volume = data.Volume,
+				WarehouseWorkingTime = data.WarehouseWorkingTime,
+				DateInStock = data.DateInStock,
+				DateOfCargoReceipt = data.DateOfCargoReceipt,
+				TransitReference = data.TransitReference,
 			};
 
 			SetAdditionalData(application);
@@ -58,28 +83,6 @@ namespace Alicargo.Services.Application
 		public void SetAdditionalData(params ApplicationEditModel[] applications)
 		{
 			SetTransitData(applications);
-
-			SetCountryData(applications);
-		}
-
-		private void SetCountryData(IEnumerable<ApplicationEditModel> applications)
-		{
-			var applicationWithCountry = applications.Where(x => x.CountryId.HasValue).ToArray();
-
-			var countries = _countryRepository
-				// ReSharper disable PossibleInvalidOperationException
-				.Get(applicationWithCountry.Select(x => x.CountryId.Value).ToArray())
-				// ReSharper restore PossibleInvalidOperationException
-				.ToDictionary(x => x.Id, x => x.Name);
-
-			foreach (var application in applicationWithCountry)
-			{
-				// ReSharper disable PossibleInvalidOperationException
-				// ReSharper disable AssignNullToNotNullAttribute
-				application.CountryName = countries[application.CountryId.Value][_identity.TwoLetterISOLanguageName];
-				// ReSharper restore AssignNullToNotNullAttribute
-				// ReSharper restore PossibleInvalidOperationException
-			}
 		}
 
 		private void SetTransitData(params ApplicationEditModel[] applications)
@@ -93,14 +96,20 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		public void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public void Update(long id, ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				_transitService.Update(model.Transit, carrierSelectModel);
 
-				//_applicationUpdater.Update(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
-				//	model.Torg12File, model.PackingFile);
+				var data = new ApplicationData
+				{
+					Id = id,
+					// todo: finish
+				};
+
+				_applicationUpdater.Update(data, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
+										   model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
 
@@ -108,22 +117,28 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		public void Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public long Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				model.TransitId = _transitService.AddTransit(model.Transit, carrierSelectModel);
 				model.StateId = _stateConfig.DefaultStateId;
 				model.StateChangeTimestamp = DateTimeOffset.UtcNow;
-				model.CreationTimestamp = DateTimeOffset.UtcNow;
 
-				//var id = _applicationUpdater.Add(model.GetData(), model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile, model.Torg12File, model.PackingFile);
+				var data = new ApplicationData
+				{
+					CreationTimestamp = DateTimeOffset.UtcNow
+					// todo: finish
+				};
+
+				var id = _applicationUpdater.Add(data, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
+												 model.Torg12File, model.PackingFile);
 
 				_unitOfWork.SaveChanges();
 
-				//model.Id = id();
-
 				ts.Complete();
+
+				return id();
 			}
 		}
 

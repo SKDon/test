@@ -7,8 +7,8 @@ namespace Alicargo.Services.Abstract
 	public interface IApplicationManager
 	{
 		ApplicationEditModel Get(long id);
-		void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel);
-		void Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel);
+		void Update(long id, ApplicationEditModel model, CarrierSelectModel carrierSelectModel);
+		long Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel);
 		void Delete(long id);
 		void SetState(long applicationId, long stateId);
 		void SetTransitReference(long id, string transitReference);

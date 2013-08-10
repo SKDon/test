@@ -139,7 +139,7 @@ namespace Alicargo.Controllers
 				return View(model);
 			}
 
-			_applicationManager.Update(model, carrierSelectModel);
+			_applicationManager.Update(id, model, carrierSelectModel);
 
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}

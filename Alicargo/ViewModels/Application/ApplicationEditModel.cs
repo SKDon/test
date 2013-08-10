@@ -8,8 +8,12 @@ namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationEditModel
 	{
-		public string CountryName { get; set; }
+		public ApplicationEditModel()
+		{
+			Currency = new CurrencyModel();
+		}
 
+		// todo: refactor
 		public Transit Transit { get; set; }
 
 		#region Files
@@ -35,11 +39,6 @@ namespace Alicargo.ViewModels.Application
 		#endregion
 
 		#region Data
-
-		public long Id { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "CreationTimestamp")]
-		public DateTimeOffset CreationTimestamp { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Invoice")]
 		public string Invoice { get; set; }
