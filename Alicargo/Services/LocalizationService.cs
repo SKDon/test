@@ -28,9 +28,7 @@ namespace Alicargo.Services
 
 		public string GetCurrency(decimal value, CurrencyType currency, string culture)
 		{
-			var cultureInfo = CultureInfo.GetCultureInfo(culture);
-
-			return value.ToString("0.00", cultureInfo) + CurrencyName.Names[currency];
+			return value.ToString("0.00", CultureInfo.GetCultureInfo(culture)) + CurrencyName.Names[currency];
 		}
 
 		public string GetMethodOfTransit(MethodOfTransit methodOfTransit, string culture)

@@ -303,6 +303,7 @@
     <Compile Include="ViewModels\Application\ApplicationModelHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
+    <Compile Include="ViewModels\Application\CurrencyModel.cs" />
     <Compile Include="ViewModels\BrockerAWBModel.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\UserList.cs" />
@@ -1363,7 +1364,7 @@
     <Content Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Shared\Memu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ApplicationModel.cshtml" />
+    <Content Include="Views\Application\EditorTemplates\ApplicationModel.cshtml" />
     <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
@@ -1396,6 +1397,7 @@
     <Content Include="Views\Sender\EditorTemplates\ApplicationSenderEdit.cshtml" />
     <Content Include="Views\Sender\ApplicationCreate.cshtml" />
     <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CurrencyModel.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -14,45 +14,6 @@
 	@Html.HiddenFor(x => x.Transit.Id)
 }
 
-@helper CurrencyEditor()
-{
-	<div class="currency-holder">
-		<div class="input-append">
-			@Html.EditorFor(model => model.Value)
-			<div class="btn-group">
-				<button class="btn dropdown-toggle" data-toggle="dropdown">
-					<span id="@(Html.IdFor(x => x.CurrencyId))_selected">&curren;</span>
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li data-id="@Html.Raw((int)CurrencyType.Euro)" class="currency"><a href="#">&euro;</a></li>
-					<li data-id="@Html.Raw((int)CurrencyType.Dollar)" class="currency"><a href="#">$</a></li>
-					<li data-id="@Html.Raw((int)CurrencyType.Pound)" class="currency"><a href="#">&pound;</a></li>
-				</ul>
-			</div>
-		</div>
-		@Html.HiddenFor(model => model.CurrencyId)
-		<script>
-			$(function () {
-				var select = function (element) {
-					var text = element.children().html();
-					var id = element.data("id");
-					$("#@(Html.IdFor(x => x.CurrencyId))_selected").html(text);
-
-					return id;
-				};
-
-				$(".currency").click(function (e) {
-					e.preventDefault();
-					var id = select($(this));
-					$("#@Html.IdFor(x => x.CurrencyId)").val(id);
-				});
-
-				select($('[data-id="@Model.CurrencyId"]'));
-			});
-		</script>
-	</div>
-}
 @helper SelectCountry()
 {
 	@Html.LabelFor(x => x.CountryId)
@@ -118,37 +79,27 @@
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
-		@Html.LabelFor(model => model.Value)
-		@CurrencyEditor()
+		@Html.EditorWithLabelFor(model => model.Currency)
 	</div>
 </div>
 <hr />
 <h4>
 	@Resources.Pages.Files
 </h4>
-@if (!IdentityService.IsInRole(RoleType.Sender))
-{
-	<div class="row">
-		<div class="span4">
-			@Html.LabelFor(model => model.Torg12File)
-			@Helpers.FileUploader(Html.IdFor(x => x.Torg12File).ToHtmlString(), Model.Torg12FileName)
-		</div>
-		<div class="span4">
-			@Html.LabelFor(model => model.CPFile)
-			@Helpers.FileUploader(Html.IdFor(x => x.CPFile).ToHtmlString(), Model.CPFileName)
-		</div>
-		<div class="span4">
-			@Html.LabelFor(model => model.DeliveryBillFile)
-			@Helpers.FileUploader(Html.IdFor(x => x.DeliveryBillFile).ToHtmlString(), Model.DeliveryBillFileName)
-		</div>
+<div class="row">
+	<div class="span4">
+		@Html.LabelFor(model => model.Torg12File)
+		@Helpers.FileUploader(Html.IdFor(x => x.Torg12File).ToHtmlString(), Model.Torg12FileName)
 	</div>
-}
-else
-{
-	@Html.HiddenFor(model => model.Torg12FileName)
-	@Html.HiddenFor(model => model.CPFileName)
-	@Html.HiddenFor(model => model.DeliveryBillFileName)
-}
+	<div class="span4">
+		@Html.LabelFor(model => model.CPFile)
+		@Helpers.FileUploader(Html.IdFor(x => x.CPFile).ToHtmlString(), Model.CPFileName)
+	</div>
+	<div class="span4">
+		@Html.LabelFor(model => model.DeliveryBillFile)
+		@Helpers.FileUploader(Html.IdFor(x => x.DeliveryBillFile).ToHtmlString(), Model.DeliveryBillFileName)
+	</div>
+</div>
 <div class="row">
 	<div class="span4">
 		@Html.LabelFor(model => model.InvoiceFile)

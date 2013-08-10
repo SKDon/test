@@ -1,45 +1,5 @@
 ﻿@model ApplicationSenderEdit
 
-@helper CurrencyEditor()
-{
-	<div class="currency-holder">
-		<div class="input-append">
-			@Html.EditorFor(model => model.Value)
-			<div class="btn-group">
-				<button class="btn dropdown-toggle" data-toggle="dropdown">
-					<span id="@(Html.IdFor(x => x.CurrencyId))_selected">&curren;</span>
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li data-id="@Html.Raw((int)CurrencyType.Euro)" class="currency"><a href="#">&euro;</a></li>
-					<li data-id="@Html.Raw((int)CurrencyType.Dollar)" class="currency"><a href="#">$</a></li>
-					<li data-id="@Html.Raw((int)CurrencyType.Pound)" class="currency"><a href="#">&pound;</a></li>
-				</ul>
-			</div>
-		</div>
-		@Html.HiddenFor(model => model.CurrencyId)
-		<script>
-			$(function () {
-				var select = function (element) {
-					var text = element.children().html();
-					var id = element.data("id");
-					$("#@(Html.IdFor(x => x.CurrencyId))_selected").html(text);
-
-					return id;
-				};
-
-				$(".currency").click(function (e) {
-					e.preventDefault();
-					var id = select($(this));
-					$("#@Html.IdFor(x => x.CurrencyId)").val(id);
-				});
-
-				select($('[data-id="@Model.CurrencyId"]'));
-			});
-		</script>
-	</div>
-}
-
 <div class="row">
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.FactoryName)
@@ -51,8 +11,7 @@
 		@Html.EditorWithLabelFor(model => model.Count)
 	</div>
 	<div class="span4">
-		@Html.LabelFor(model => model.Value)
-		@CurrencyEditor()
+		@Html.EditorWithLabelFor(model => model.Currency)
 		@Html.EditorWithLabelFor(model => model.Volume)
 	</div>
 </div>

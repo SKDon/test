@@ -22,11 +22,11 @@ namespace Alicargo.Controllers
 		private readonly IUnitOfWork _unitOfWork;
 
 		public SenderController(
-			IApplicationRepository applicationRepository, 
+			IApplicationRepository applicationRepository,
 			IClientRepository clientRepository,
 			ITransitRepository transitRepository,
 			IStateConfig stateConfig,
-			IUnitOfWork unitOfWork, 
+			IUnitOfWork unitOfWork,
 			IApplicationUpdateRepository applicationUpdater)
 		{
 			_applicationRepository = applicationRepository;
@@ -44,7 +44,7 @@ namespace Alicargo.Controllers
 
 			ViewBag.Nic = clientData.Nic;
 
-			return View(new ApplicationSenderEdit { CurrencyId = (int)CurrencyType.Euro });
+			return View(new ApplicationSenderEdit());
 		}
 
 		[HttpGet]
@@ -69,8 +69,11 @@ namespace Alicargo.Controllers
 				MarkName = application.MarkName,
 				SwiftFile = null,
 				SwiftFileName = application.SwiftFileName,
-				Value = application.Value,
-				CurrencyId = application.CurrencyId,
+				Currency = new CurrencyModel
+				{
+					Value = application.Value,
+					CurrencyId = application.CurrencyId
+				},
 				Volume = application.Volume
 			});
 		}
@@ -118,7 +121,7 @@ namespace Alicargo.Controllers
 
 				_applicationUpdater.Add(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
 				_unitOfWork.SaveChanges();
-				
+
 				ts.Complete();
 			}
 
@@ -135,8 +138,8 @@ namespace Alicargo.Controllers
 			applicationData.InvoiceFileName = model.InvoiceFileName;
 			applicationData.MarkName = model.MarkName;
 			applicationData.SwiftFileName = model.SwiftFileName;
-			applicationData.Value = model.Value;
-			applicationData.CurrencyId = model.CurrencyId;
+			applicationData.Value = model.Currency.Value;
+			applicationData.CurrencyId = model.Currency.CurrencyId;
 			applicationData.Volume = model.Volume;
 		}
 	}

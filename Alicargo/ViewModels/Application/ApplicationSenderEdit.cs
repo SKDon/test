@@ -6,6 +6,11 @@ namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationSenderEdit
 	{
+		public ApplicationSenderEdit()
+		{
+			Currency = new CurrencyModel();
+		}
+
 		[DisplayNameLocalized(typeof(Entities), "Invoice")]
 		public byte[] InvoiceFile { get; set; }
 
@@ -46,11 +51,7 @@ namespace Alicargo.ViewModels.Application
 		[Required]
 		public float Volume { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "Value")]
-		public decimal Value { get; set; }
-
-		[Required]
-		public int CurrencyId { get; set; }
+		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
+		public CurrencyModel Currency { get; set; }
 	}
 }

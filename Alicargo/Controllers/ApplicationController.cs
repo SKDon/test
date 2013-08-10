@@ -150,7 +150,6 @@ namespace Alicargo.Controllers
 			{
 				Transit = client.Transit,
 				LegalEntity = client.LegalEntity,
-				CurrencyId = (int)CurrencyType.Euro,
 				ClientNic = client.Nic,
 				ClientEmail = client.Email
 			};
