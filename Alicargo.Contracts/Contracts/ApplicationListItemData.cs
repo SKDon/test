@@ -8,13 +8,9 @@ namespace Alicargo.Contracts.Contracts
 
 		public string ClientLegalEntity { get; set; }
 
-		public string ClientNic { get; set; }
-
-		public string CountryName { get; set; }
+		public string ClientNic { get; set; }		
 
 		public string AirWaybill { get; set; }
-
-		public string StateName { get; set; }
 
 		public string TransitCity { get; set; }
 
@@ -87,6 +83,16 @@ namespace Alicargo.Contracts.Contracts
 		public string TransitReference { get; set; }
 
 		public long StateId { get; set; }
+
+		public long? AirWaybillId { get; set; }
+
+		public long? CountryId { get; set; }
+
+		public int MethodOfDeliveryId { get; set; }
+
+		public int CurrencyId { get; set; }
+
+		public decimal Value { get; set; }
 
 		#endregion
 	}

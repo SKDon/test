@@ -81,7 +81,7 @@ namespace Alicargo.DataAccess.Repositories
 			return applications.LongCount();
 		}
 
-		public ApplicationData[] List(int take, int skip, IEnumerable<long> stateIds,
+		public ApplicationListItemData[] List(int take, int skip, IEnumerable<long> stateIds,
 			Order[] orders = null, long? clientUserId = null)
 		{
 			var applications = Context.Applications.Where(x => stateIds.Contains(x.StateId));
@@ -91,11 +91,53 @@ namespace Alicargo.DataAccess.Repositories
 				applications = applications.Where(x => x.Client.UserId == clientUserId.Value);
 			}
 
-			applications = _orderer.Order(applications, orders)
-								   .Skip(skip)
-								   .Take(take);
+			applications = _orderer.Order(applications, orders).Skip(skip).Take(take);
 
-			return applications.Select(_selector).ToArray();
+			return applications.Select(x => new ApplicationListItemData
+								   {
+									   AddressLoad = x.AddressLoad,
+									   Id = x.Id,
+									   PackingFileName = x.PackingFileName,
+									   FactoryName = x.FactoryName,
+									   Invoice = x.Invoice,
+									   InvoiceFileName = x.InvoiceFileName,
+									   MarkName = x.MarkName,
+									   SwiftFileName = x.SwiftFileName,
+									   Volume = x.Volume,
+									   Count = x.Count,
+									   AirWaybill = x.Reference.Bill,
+									   CPFileName = x.CPFileName,
+									   Characteristic = x.Characteristic,
+									   ClientLegalEntity = x.Client.LegalEntity,
+									   ClientNic = x.Client.Nic,
+									   CountryId = x.CountryId,
+									   CreationTimestamp = x.CreationTimestamp,
+									   DateInStock = x.DateInStock,
+									   DateOfCargoReceipt = x.DateOfCargoReceipt,
+									   DeliveryBillFileName = x.DeliveryBillFileName,
+									   FactoryContact = x.FactoryContact,
+									   FactoryEmail = x.FactoryEmail,
+									   FactoryPhone = x.FactoryPhone,
+									   StateChangeTimestamp = x.StateChangeTimestamp,
+									   StateId = x.StateId,
+									   TermsOfDelivery = x.TermsOfDelivery,
+									   Torg12FileName = x.Torg12FileName,
+									   TransitAddress = x.Transit.Address,
+									   TransitCarrierName = x.Transit.Carrier.Name,
+									   TransitCity = x.Transit.City,
+									   TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
+									   TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
+									   TransitPhone = x.Transit.Phone,
+									   TransitRecipientName = x.Transit.RecipientName,
+									   TransitReference = x.Transit.RecipientName,
+									   TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
+									   WarehouseWorkingTime = x.WarehouseWorkingTime,
+									   Weigth = x.Gross,
+									   MethodOfDeliveryId = x.MethodOfDeliveryId,
+									   Value = x.Value,
+									   CurrencyId = x.CurrencyId,
+									   AirWaybillId = x.ReferenceId
+								   }).ToArray();
 		}
 
 		public ApplicationData[] GetByReference(long id)
@@ -174,13 +216,13 @@ namespace Alicargo.DataAccess.Repositories
 					FileName = application.PackingFileName,
 					FileData = application.PackingFileData.ToArray()
 				});
-		}		
+		}
 
 		private FileHolder GetFile(Expression<Func<Application, bool>> where, Expression<Func<Application, FileHolder>> selector)
 		{
 			return Context.Applications.Where(where).Select(selector).FirstOrDefault();
 		}
 
-		#endregion		
+		#endregion
 	}
 }

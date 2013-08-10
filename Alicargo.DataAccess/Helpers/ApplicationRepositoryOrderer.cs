@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Helpers
@@ -37,7 +36,7 @@ namespace Alicargo.DataAccess.Helpers
 					applications = ById(applications, desc, isFirst);
 					break;
 
-				case OrderType.ReferenceBill:
+				case OrderType.AirWaybill:
 					applications = ByReferenceBill(applications, desc, isFirst);
 					break;
 

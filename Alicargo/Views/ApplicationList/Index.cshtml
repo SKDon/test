@@ -60,7 +60,7 @@
 				serverGrouping: true,
 				@if (!IdentityService.IsInRole(RoleType.Client))
 	{
-					@:group: { field: "ReferenceBill", dir: "asc" },
+					@:group: { field: "AirWaybill", dir: "asc" },
 				}
 				error: error
 			};
@@ -83,19 +83,19 @@
 				$(".close-application", e.detailRow).click(function () {
 					if (window.confirm("@Pages.StateSetConfirm.JavaScriptStringEncode()")) {
 						var url = "@Url.Action(MVC.ApplicationUpdate.Close())";
-						$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+						$.post(url, { id: data.Data.Id }).done(updateGrid).fail(error);
 					}
 				});
 
 				$(".delete-application", e.detailRow).click(function () {
 					if (window.confirm("@Pages.DeleteConfirm.JavaScriptStringEncode()")) {
 						var url = "@Url.Action(MVC.Application.Delete())";
-						$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+						$.post(url, { id: data.Data.Id }).done(updateGrid).fail(error);
 					}
 				});
 
 				$(".reference-select", e.detailRow)
-					.val(data.ReferenceId)
+					.val(data.Data.AirWaybillId)
 					.change(function () {
 						if (window.confirm("@Pages.ReferenceSetConfirm")) {
 							var url = "@Url.Action(MVC.Reference.SetReference())";

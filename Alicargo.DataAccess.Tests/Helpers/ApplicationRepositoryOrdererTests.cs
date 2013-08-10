@@ -68,7 +68,7 @@ namespace Alicargo.DataAccess.Tests.Helpers
 				},
 				new Order
 				{
-					OrderType = OrderType.ReferenceBill,
+					OrderType = OrderType.AirWaybill,
 					Desc = false
 				}
 			};

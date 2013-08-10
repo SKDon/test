@@ -9,7 +9,7 @@ namespace Alicargo.Core.Repositories
 	{
 		ApplicationData Get(long id);
 		ApplicationData[] GetByReference(long id);
-		ApplicationData[] List(int take, int skip, IEnumerable<long> stateIds, Order[] orders = null, long? clientUserId = null);
+		ApplicationListItemData[] List(int take, int skip, IEnumerable<long> stateIds, Order[] orders = null, long? clientUserId = null);
 		ApplicationData GetByTransit(long id);
 		long Count(IEnumerable<long> stateIds, long? clientUserId = null);		
 

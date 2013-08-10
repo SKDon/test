@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Contracts;
-using Alicargo.Core.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
 using Resources;
@@ -20,23 +19,23 @@ namespace Alicargo.Services.Application
 
 			switch (@group.OrderType)
 			{
-				case OrderType.ReferenceBill:
+				case OrderType.AirWaybill:
 					return
-						applications.GroupBy(x => x.ReferenceId ?? 0)
+						applications.GroupBy(x => x.Data.AirWaybillId ?? 0)
 									.Select(x =>
-										GetApplicationGroup(x, orders, "ReferenceBill",
+										GetApplicationGroup(x, orders, "AirWaybill",
 											g => references.ContainsKey(g.Key)
 												? GetAirWayBillDisplay(references[g.Key])
 												: "", references))
 									.ToArray();
 
 				case OrderType.State:
-					return applications.GroupBy(x => x.StateName)
+					return applications.GroupBy(x => x.State.StateName)
 						.Select(x => GetApplicationGroup(x, orders, "State", g => g.Key, references))
 						.ToArray();
 
 				case OrderType.LegalEntity:
-					return applications.GroupBy(x => x.LegalEntity)
+					return applications.GroupBy(x => x.Data.ClientLegalEntity)
 						.Select(x => GetApplicationGroup(x, orders, "LegalEntity", g => g.Key, references))
 						.ToArray();
 
@@ -64,10 +63,11 @@ namespace Alicargo.Services.Application
 		{
 			return new ApplicationGroup
 			{
+				// todo: 1. fix - get aggregation to all data, not only current set
 				aggregates = new
 				{
-					Count = new { sum = grouping.Sum(y => y.Count ?? 0) },
-					Weigth = new { sum = grouping.Sum(y => y.Weigth ?? 0) }
+					Count = new { sum = grouping.Sum(y => y.Data.Count ?? 0) },
+					Weigth = new { sum = grouping.Sum(y => y.Data.Weigth ?? 0) }
 				},
 				field = field,
 				value = getValue(grouping),

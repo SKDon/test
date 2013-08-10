@@ -3,7 +3,7 @@
 	public enum OrderType
 	{
 		Id,
-		ReferenceBill, // todo: rename to AirWayBill
+		AirWaybill,
 		State,
 		LegalEntity,
 	}
