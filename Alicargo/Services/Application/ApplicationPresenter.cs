@@ -31,11 +31,11 @@ namespace Alicargo.Services.Application
 			_stateRepository = stateRepository;
 		}
 
-		public ApplicationModel Get(long id)
+		public ApplicationEditModel Get(long id)
 		{
 			var data = _applicationRepository.Get(id);
 
-			var application = new ApplicationModel(data);
+			var application = new ApplicationEditModel(data);
 
 			_applicationHelper.SetAdditionalData(application);
 

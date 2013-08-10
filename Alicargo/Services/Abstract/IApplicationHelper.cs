@@ -4,6 +4,6 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IApplicationHelper
 	{
-		void SetAdditionalData(params ApplicationModel[] applications);
+		void SetAdditionalData(params ApplicationEditModel[] applications);
 	}
 }

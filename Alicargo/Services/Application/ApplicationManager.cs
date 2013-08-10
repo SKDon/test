@@ -32,7 +32,7 @@ namespace Alicargo.Services.Application
 			_stateService = stateService;
 		}
 
-		public void Update(ApplicationModel model, CarrierSelectModel carrierSelectModel)
+		public void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
@@ -47,7 +47,7 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		public void Add(ApplicationModel model, CarrierSelectModel carrierSelectModel)
+		public void Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{

@@ -27,7 +27,7 @@ namespace Alicargo.Services.Application
 			_clientRepository = clientRepository;
 		}
 
-		public void SetAdditionalData(params ApplicationModel[] applications)
+		public void SetAdditionalData(params ApplicationEditModel[] applications)
 		{
 			SetClientData(applications);
 
@@ -38,7 +38,7 @@ namespace Alicargo.Services.Application
 			SetCountryData(applications);
 		}
 
-		private void SetCountryData(IEnumerable<ApplicationModel> applications)
+		private void SetCountryData(IEnumerable<ApplicationEditModel> applications)
 		{
 			var applicationWithCountry = applications.Where(x => x.CountryId.HasValue).ToArray();
 
@@ -58,7 +58,7 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		private void SetAirWaybillData(params ApplicationModel[] applications)
+		private void SetAirWaybillData(params ApplicationEditModel[] applications)
 		{
 			var applicationsWithAirWaybill = applications.Where(x => x.AirWaybillId.HasValue).ToArray();
 
@@ -82,7 +82,7 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		private void SetTransitData(params ApplicationModel[] applications)
+		private void SetTransitData(params ApplicationEditModel[] applications)
 		{
 			var ids = applications.Select(x => x.TransitId).ToArray();
 			var transits = _transitService.Get(ids).ToDictionary(x => x.Id, x => x);
@@ -93,7 +93,7 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		private void SetClientData(params ApplicationModel[] applications)
+		private void SetClientData(params ApplicationEditModel[] applications)
 		{
 			var clientIds = applications.Select(x => x.ClientId).ToArray();
 			var clients = _clientRepository.Get(clientIds).ToDictionary(x => x.Id, x => x);

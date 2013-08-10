@@ -309,7 +309,7 @@
     <Compile Include="ViewModels\UserList.cs" />
     <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
-    <Compile Include="ViewModels\Application\ApplicationModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationEditModel.cs" />
     <Compile Include="ViewModels\CarrierSelectModel.cs" />
     <Compile Include="ViewModels\AirWaybillModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />
@@ -1364,7 +1364,7 @@
     <Content Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Shared\Memu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
-    <Content Include="Views\Application\EditorTemplates\ApplicationModel.cshtml" />
+    <Content Include="Views\Application\EditorTemplates\ApplicationEditModel.cshtml" />
     <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
@@ -1385,7 +1385,7 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UserModel.cshtml" />
-    <Content Include="Views\Application\DisplayTemplates\ApplicationModel.cshtml" />
+    <Content Include="Views\Application\DisplayTemplates\ApplicationEditModel.cshtml" />
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Transit\Edit.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />

@@ -10,14 +10,14 @@ namespace Alicargo.ModelBinders
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (ApplicationModel)base.BindModel(controllerContext, bindingContext);
+			var model = (ApplicationEditModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(model, controllerContext.HttpContext.Request);
 
 			return model;
 		}
 
-		private static void ReadFiles(ApplicationModel model, HttpRequestBase request)
+		private static void ReadFiles(ApplicationEditModel model, HttpRequestBase request)
 		{
 			if (model.InvoiceFile == null && model.InvoiceFileName == null)
 				request.ReadFile("InvoiceFile", (name, bytes) =>

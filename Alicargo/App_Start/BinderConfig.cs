@@ -11,7 +11,7 @@ namespace Alicargo.App_Start
 		{
 			binders.Add(typeof(AirWaybillModel), new AirWaybillModelBinder());
 			binders.Add(typeof(BrockerAWBModel), new BrockerAWBModelBinder());
-			binders.Add(typeof(ApplicationModel), new ApplicationModelBinder());
+			binders.Add(typeof(ApplicationEditModel), new ApplicationModelBinder());
 			binders.Add(typeof(ApplicationSenderEdit), new ApplicationSenderEditModelBinder());
 		}
 	}

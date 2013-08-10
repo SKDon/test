@@ -351,9 +351,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationEditModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
 
-        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.Application.ApplicationEditModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -373,9 +373,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? clientId, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? clientId, Alicargo.ViewModels.Application.ApplicationEditModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
 
-        public override System.Web.Mvc.ActionResult Create(long? clientId, Alicargo.ViewModels.Application.ApplicationModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Create(long? clientId, Alicargo.ViewModels.Application.ApplicationEditModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);

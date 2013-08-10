@@ -124,7 +124,7 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		//[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Edit(long id, ApplicationModel model, CarrierSelectModel carrierSelectModel)
+		public virtual ActionResult Edit(long id, ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -146,7 +146,7 @@ namespace Alicargo.Controllers
 		{
 			var client = _clientService.GetClient(clientId);
 
-			var model = new ApplicationModel
+			var model = new ApplicationEditModel
 			{
 				Transit = client.Transit,
 				LegalEntity = client.LegalEntity,
@@ -163,7 +163,7 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		//[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(long? clientId, ApplicationModel model, CarrierSelectModel carrierSelectModel)
+		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			if (!ModelState.IsValid)
 			{

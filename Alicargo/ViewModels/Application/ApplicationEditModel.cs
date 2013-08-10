@@ -9,15 +9,15 @@ using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
-	public sealed class ApplicationModel
+	public sealed class ApplicationEditModel
 	{
-		public ApplicationModel()
+		public ApplicationEditModel()
 		{
 			Currency = new CurrencyModel();
 		}
 
 		// todo: tests
-		public ApplicationModel(ApplicationData data)
+		public ApplicationEditModel(ApplicationData data)
 		{
 			AddressLoad = data.AddressLoad;
 			Characteristic = data.Characteristic;

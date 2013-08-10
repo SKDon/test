@@ -42,7 +42,7 @@ namespace Alicargo.Services.Email
 			_manager = manager;
 		}
 
-		public void Update(ApplicationModel model, CarrierSelectModel carrierSelectModel)
+		public void Update(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			var oldData = _applicationPresenter.Get(model.Id);
 
@@ -51,7 +51,7 @@ namespace Alicargo.Services.Email
 			SendOnFileAdd(model.Id, oldData);
 		}
 
-		private void SendOnFileAdd(long id, ApplicationModel oldData)
+		private void SendOnFileAdd(long id, ApplicationEditModel oldData)
 		{
 			var model = _applicationPresenter.Get(id);
 
@@ -107,7 +107,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		public void Add(ApplicationModel model, CarrierSelectModel carrierSelectModel)
+		public void Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			_manager.Add(model, carrierSelectModel);
 
