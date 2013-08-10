@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.DataAccess.Helpers;
@@ -46,6 +45,11 @@ namespace Alicargo.DataAccess.Repositories
 					WarehouseWorkingTime = x.WarehouseWorkingTime
 				})
 				.ToArray();
+		}
+
+		public long? GetaApplicationId(long id)
+		{
+			return Context.Applications.Where(x => x.TransitId == id).Select(x => x.Id).FirstOrDefault();
 		}
 
 		public void Delete(long transitId)

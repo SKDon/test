@@ -13,12 +13,12 @@ namespace Alicargo.Controllers
 	public partial class TransitController : Controller
 	{
 		private readonly ITransitService _transitService;
-		private readonly IApplicationRepository _applicationRepository;
+		private readonly ITransitRepository _transitRepository;
 
-		public TransitController(ITransitService transitService, IApplicationRepository applicationRepository)
+		public TransitController(ITransitService transitService, ITransitRepository transitRepository)
 		{
 			_transitService = transitService;
-			_applicationRepository = applicationRepository;
+			_transitRepository = transitRepository;
 		}
 
 		[HttpGet]
@@ -27,9 +27,9 @@ namespace Alicargo.Controllers
 		{
 			var transit = _transitService.Get(id).First();
 
-			var applicationData = _applicationRepository.GetByTransit(id);
+			var applicationId = _transitRepository.GetaApplicationId(id);
 
-			ViewBag.ApplicationId = applicationData.Id;
+			ViewBag.ApplicationId = applicationId;
 
 			return View(transit);
 		}

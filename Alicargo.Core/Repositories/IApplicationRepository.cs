@@ -10,7 +10,6 @@ namespace Alicargo.Core.Repositories
 		ApplicationData Get(long id);
 		ApplicationData[] GetByAirWaybill(long id);
 		ApplicationListItemData[] List(int take, int skip, IEnumerable<long> stateIds, Order[] orders = null, long? clientUserId = null);
-		ApplicationData GetByTransit(long id);
 		long Count(IEnumerable<long> stateIds, long? clientUserId = null);		
 
 		FileHolder GetInvoiceFile(long id);

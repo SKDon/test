@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
@@ -15,7 +14,7 @@ namespace Alicargo.Services.Email
 		private readonly IAwbManager _manager;
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IAirWaybillRepository _AirWaybillRepository;
+		private readonly IAirWaybillRepository _airWaybillRepository;
 		private readonly IMailSender _mailSender;
 		private readonly IMessageBuilder _messageBuilder;
 		private readonly IBrockerRepository _brockerRepository;
@@ -24,7 +23,7 @@ namespace Alicargo.Services.Email
 			IAwbManager manager,
 			IAwbPresenter awbPresenter,
 			IApplicationPresenter applicationPresenter,
-			IAirWaybillRepository AirWaybillRepository,
+			IAirWaybillRepository airWaybillRepository,
 			IMailSender mailSender,
 			IMessageBuilder messageBuilder,
 			IBrockerRepository brockerRepository)
@@ -32,7 +31,7 @@ namespace Alicargo.Services.Email
 			_manager = manager;
 			_awbPresenter = awbPresenter;
 			_applicationPresenter = applicationPresenter;
-			_AirWaybillRepository = AirWaybillRepository;
+			_airWaybillRepository = airWaybillRepository;
 			_mailSender = mailSender;
 			_messageBuilder = messageBuilder;
 			_brockerRepository = brockerRepository;
@@ -109,7 +108,7 @@ namespace Alicargo.Services.Email
 					.Concat(_messageBuilder.GetAdminEmails())
 					.Select(x => x.Email)
 					.ToArray();
-				var file = _AirWaybillRepository.GetInvoiceFile(model.Id);
+				var file = _airWaybillRepository.GetInvoiceFile(model.Id);
 				_mailSender.Send(new Message(subject, body, to) { Files = new[] { file } });
 			}
 
@@ -121,7 +120,7 @@ namespace Alicargo.Services.Email
 					.Select(x => x.Email)
 					.Concat(new[] { brocker.Email })
 					.ToArray();
-				var file = _AirWaybillRepository.GetAWBFile(model.Id);
+				var file = _airWaybillRepository.GetAWBFile(model.Id);
 
 				_mailSender.Send(new Message(subject, body, to) { Files = new[] { file } });
 			}
@@ -130,7 +129,7 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.AwbPackingFileAdded(model);
 				var to = new[] { brocker.Email }.Concat(_messageBuilder.GetAdminEmails().Select(x => x.Email)).ToArray();
-				var file = _AirWaybillRepository.GetPackingFile(model.Id);
+				var file = _airWaybillRepository.GetPackingFile(model.Id);
 
 				_mailSender.Send(new Message(subject, body, to) { Files = new[] { file } });
 			}
@@ -138,8 +137,8 @@ namespace Alicargo.Services.Email
 			if (oldData.GTDFileName == null && model.GTDFileName != null)
 			{
 				var body = _messageBuilder.AwbGTDFileAdded(model);
-				var file = _AirWaybillRepository.GetGTDFile(model.Id);
-				foreach (var client in _AirWaybillRepository.GetClientEmails(model.Id))
+				var file = _airWaybillRepository.GetGTDFile(model.Id);
+				foreach (var client in _airWaybillRepository.GetClientEmails(model.Id))
 				{
 					_mailSender.Send(new Message(subject, body, client) { Files = new[] { file } });
 				}
@@ -152,8 +151,8 @@ namespace Alicargo.Services.Email
 			if (oldData.GTDAdditionalFileName == null && model.GTDAdditionalFileName != null)
 			{
 				var body = _messageBuilder.AwbGTDAdditionalFileAdded(model);
-				var file = _AirWaybillRepository.GTDAdditionalFile(model.Id);
-				foreach (var client in _AirWaybillRepository.GetClientEmails(model.Id))
+				var file = _airWaybillRepository.GTDAdditionalFile(model.Id);
+				foreach (var client in _airWaybillRepository.GetClientEmails(model.Id))
 				{
 					_mailSender.Send(new Message(subject, body, client) { Files = new[] { file } });
 				}
@@ -166,9 +165,9 @@ namespace Alicargo.Services.Email
 			_manager.Delete(id);
 		}
 
-		public void SetState(long AirWaybillId, long stateId)
+		public void SetState(long airWaybillId, long stateId)
 		{
-			_manager.SetState(AirWaybillId, stateId);
+			_manager.SetState(airWaybillId, stateId);
 		}
 	}
 }

@@ -8,6 +8,6 @@ namespace Alicargo.Services.Abstract
 		void SetAwb(long applicationId, long? awbId);
 		void Update(AirWaybillModel model);
 		void Delete(long id);
-		void SetState(long AirWaybillId, long stateId);
+		void SetState(long airWaybillId, long stateId);
 	}
 }

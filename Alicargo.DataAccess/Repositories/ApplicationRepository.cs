@@ -72,12 +72,7 @@ namespace Alicargo.DataAccess.Repositories
 		public ApplicationData[] GetByAirWaybill(long id)
 		{
 			return Context.Applications.Where(x => x.AirWaybillId == id).Select(_selector).ToArray();
-		}
-
-		public ApplicationData GetByTransit(long id)
-		{
-			return Context.Applications.Where(x => x.TransitId == id).Select(_selector).FirstOrDefault();
-		}
+		}		
 
 		public long Count(IEnumerable<long> stateIds, long? clientUserId = null)
 		{

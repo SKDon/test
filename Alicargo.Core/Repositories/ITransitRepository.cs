@@ -1,5 +1,4 @@
 ﻿using System;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Models;
 
 namespace Alicargo.Core.Repositories
@@ -9,6 +8,7 @@ namespace Alicargo.Core.Repositories
 		Func<long> Add(TransitData transit);
 		void Update(TransitData transit);
 		TransitData[] Get(params long[] ids);
+		long? GetaApplicationId(long id);
 		void Delete(long transitId);
 	}
 }

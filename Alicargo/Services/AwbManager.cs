@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
@@ -11,7 +10,7 @@ namespace Alicargo.Services
 {
 	public sealed class AwbManager : IAwbManager
 	{
-		private readonly IAirWaybillRepository _AirWaybillRepository;
+		private readonly IAirWaybillRepository _airWaybillRepository;
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IApplicationManager _applicationManager;
@@ -20,14 +19,14 @@ namespace Alicargo.Services
 		private readonly IUnitOfWork _unitOfWork;
 
 		public AwbManager(
-			IAirWaybillRepository AirWaybillRepository,
+			IAirWaybillRepository airWaybillRepository,
 			IApplicationRepository applicationRepository,
 			IUnitOfWork unitOfWork,
 			IApplicationManager applicationManager,
 			IStateConfig stateConfig, 
 			IApplicationUpdateRepository applicationUpdater)
 		{
-			_AirWaybillRepository = AirWaybillRepository;
+			_airWaybillRepository = airWaybillRepository;
 			_applicationRepository = applicationRepository;
 			_unitOfWork = unitOfWork;
 			_applicationManager = applicationManager;
@@ -43,7 +42,7 @@ namespace Alicargo.Services
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				model.StateId = _stateConfig.CargoIsFlewStateId;
-				var id = _AirWaybillRepository.Add(model, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile);
+				var id = _airWaybillRepository.Add(model, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile);
 				_unitOfWork.SaveChanges();
 				model.Id = id();
 
@@ -58,7 +57,7 @@ namespace Alicargo.Services
 		{
 			if (awbId.HasValue)
 			{
-				var aggregate = _AirWaybillRepository.GetAggregate(awbId.Value).First();
+				var aggregate = _airWaybillRepository.GetAggregate(awbId.Value).First();
 
 				using (var ts = _unitOfWork.StartTransaction())
 				{
@@ -84,10 +83,10 @@ namespace Alicargo.Services
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				var old = _AirWaybillRepository.Get(model.Id).First();
+				var old = _airWaybillRepository.Get(model.Id).First();
 
 				// Update must be before SetState
-				_AirWaybillRepository.Update(model, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile);
+				_airWaybillRepository.Update(model, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile);
 
 				if (IsReadyForCargoAtCustomsStateId(model))
 				{
@@ -118,7 +117,7 @@ namespace Alicargo.Services
 					_applicationUpdater.SetAirWaybill(app.Id, null);
 				}
 
-				_AirWaybillRepository.Delete(id);
+				_airWaybillRepository.Delete(id);
 
 				_unitOfWork.SaveChanges();
 
@@ -126,19 +125,19 @@ namespace Alicargo.Services
 			}
 		}
 
-		public void SetState(long AirWaybillId, long stateId)
+		public void SetState(long airWaybillId, long stateId)
 		{
-			var AirWaybill = _AirWaybillRepository.Get(AirWaybillId).First();
+			var airWaybill = _airWaybillRepository.Get(airWaybillId).First();
 
-			var applications = _applicationRepository.GetByAirWaybill(AirWaybillId);
+			var applications = _applicationRepository.GetByAirWaybill(airWaybillId);
 
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				_AirWaybillRepository.SetState(AirWaybillId, stateId);
+				_airWaybillRepository.SetState(airWaybillId, stateId);
 
 				foreach (var application in applications)
 				{
-					if (AirWaybill.StateId == application.StateId)
+					if (airWaybill.StateId == application.StateId)
 					{
 						_applicationManager.SetState(application.Id, stateId);
 					}
