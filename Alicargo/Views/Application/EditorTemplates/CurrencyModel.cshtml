@@ -32,7 +32,7 @@
 				$("#@Html.IdFor(x => x.CurrencyId)").val(id);
 				});
 
-			select($('[data-id="@(Model != null ? Model.CurrencyId : (int)CurrencyType.Euro)"]'));
+			select($('[data-id="@Model.CurrencyId"]'));
 		});
 	</script>
 </div>

@@ -37,12 +37,12 @@ namespace Alicargo.Controllers
 		[ChildActionOnly]
 		public virtual PartialViewResult EditByApplication(long? applicationId)
 		{
+			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
+
 			if (applicationId == null) return PartialView();
 
 			var data = _transitRepository.GetByApplication(applicationId.Value);
-			var transit = TransitEditModel.GetModel(data);
-
-			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
+			var transit = TransitEditModel.GetModel(data);			
 
 			ViewBag.TransitId = data.Id;
 

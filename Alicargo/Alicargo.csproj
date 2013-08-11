@@ -1396,7 +1396,7 @@
     <Content Include="Views\Sender\EditorTemplates\ApplicationSenderEdit.cshtml" />
     <Content Include="Views\Sender\ApplicationCreate.cshtml" />
     <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\CurrencyModel.cshtml" />
+    <Content Include="Views\Application\EditorTemplates\CurrencyModel.cshtml" />
     <Content Include="Views\Transit\EditByApplication.cshtml" />
   </ItemGroup>
   <ItemGroup />

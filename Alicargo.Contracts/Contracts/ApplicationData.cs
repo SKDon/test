@@ -16,7 +16,7 @@ namespace Alicargo.Contracts.Contracts
 		public string Characteristic { get; set; }
 		public string AddressLoad { get; set; }
 		public string WarehouseWorkingTime { get; set; }
-		public float? Weigth { get; set; } // todo: rename to weigth
+		public float? Weigth { get; set; }
 		public int? Count { get; set; }
 		public float Volume { get; set; }
 		public string TermsOfDelivery { get; set; }

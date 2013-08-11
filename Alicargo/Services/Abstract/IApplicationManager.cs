@@ -9,7 +9,7 @@ namespace Alicargo.Services.Abstract
 	{
 		ApplicationEditModel Get(long id);
 		void Update(long applicationId, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel);
-		long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel);
+		long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, long clientId);
 		void Delete(long id);
 		void SetState(long applicationId, long stateId);
 		void SetTransitReference(long id, string transitReference);

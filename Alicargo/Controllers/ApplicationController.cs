@@ -156,24 +156,27 @@ namespace Alicargo.Controllers
 		{
 			BindBag(clientId, null);
 
-			return View();
+			return View(new ApplicationEditModel());
 		}
 
 		// todo: test
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
+		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierModel,
+			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
+			var client = _clientService.GetClient(clientId);
+
 			if (!ModelState.IsValid)
 			{
-				BindBag(clientId, null);
+				BindBag(client.Id, null);
 				return View(model);
 			}
 
 			try
 			{
-				_applicationManager.Add(model, carrierModel, transitModel);
+				_applicationManager.Add(model, carrierModel, transitModel, client.Id);
 			}
 			catch (DublicateException ex)
 			{

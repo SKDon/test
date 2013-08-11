@@ -113,9 +113,9 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
+		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, long clientId)
 		{
-			var id = _manager.Add(model, carrierModel, transitModel);
+			var id = _manager.Add(model, carrierModel, transitModel, clientId);
 
 			SendOnAdd(id);
 

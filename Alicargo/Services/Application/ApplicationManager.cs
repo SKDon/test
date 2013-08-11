@@ -13,7 +13,6 @@ namespace Alicargo.Services.Application
 	public sealed class ApplicationManager : IApplicationManager
 	{
 		private readonly IApplicationRepository _applicationRepository;
-		private readonly ITransitRepository _transitRepository;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateService _stateService;
@@ -22,7 +21,6 @@ namespace Alicargo.Services.Application
 
 		public ApplicationManager(
 			IApplicationRepository applicationRepository,
-			ITransitRepository transitRepository,
 			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig stateConfig,
 			ITransitService transitService,
@@ -30,7 +28,6 @@ namespace Alicargo.Services.Application
 			IStateService stateService)
 		{
 			_applicationRepository = applicationRepository;
-			_transitRepository = transitRepository;
 			_applicationUpdater = applicationUpdater;
 			_stateConfig = stateConfig;
 			_transitService = transitService;
@@ -79,15 +76,33 @@ namespace Alicargo.Services.Application
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				var transitData = _transitRepository.GetByApplication(applicationId);
+				var data = _applicationRepository.Get(applicationId);
 
-				_transitService.Update(transitData.Id, transitModel, carrierModel);
+				_transitService.Update(data.TransitId, transitModel, carrierModel);
 
-				var data = new ApplicationData
-				{
-					Id = applicationId,
-					// todo: finish
-				};
+				data.Invoice = model.Invoice;
+				data.InvoiceFileName = model.InvoiceFileName;
+				data.SwiftFileName = model.SwiftFileName;
+				data.PackingFileName = model.PackingFileName;
+				data.DeliveryBillFileName = model.DeliveryBillFileName;
+				data.Torg12FileName = model.Torg12FileName;
+				data.CPFileName = model.CPFileName;
+				data.Characteristic = model.Characteristic;
+				data.AddressLoad = model.AddressLoad;
+				data.WarehouseWorkingTime = model.WarehouseWorkingTime;
+				data.Weigth = model.Weigth;
+				data.Count = model.Count;
+				data.Volume = model.Volume;
+				data.TermsOfDelivery = model.TermsOfDelivery;
+				data.Value = model.Currency.Value;
+				data.CurrencyId = model.Currency.CurrencyId;
+				data.CountryId = model.CountryId;
+				data.FactoryName = model.FactoryName;
+				data.FactoryPhone = model.FactoryPhone;
+				data.FactoryEmail = model.FactoryEmail;
+				data.FactoryContact = model.FactoryContact;
+				data.MarkName = model.MarkName;
+				data.MethodOfDeliveryId = model.MethodOfDeliveryId;
 
 				_applicationUpdater.Update(data, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
 										   model.Torg12File, model.PackingFile);
@@ -98,7 +113,7 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
+		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, long clientId)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
@@ -109,8 +124,36 @@ namespace Alicargo.Services.Application
 					CreationTimestamp = DateTimeOffset.UtcNow,
 					StateChangeTimestamp = DateTimeOffset.UtcNow,
 					StateId = _stateConfig.DefaultStateId,
-					TransitId = transitId
-					// todo: finish
+					TransitId = transitId,
+					Invoice = model.Invoice,
+					InvoiceFileName = model.InvoiceFileName,
+					SwiftFileName = model.SwiftFileName,
+					PackingFileName = model.PackingFileName,
+					DeliveryBillFileName = model.DeliveryBillFileName,
+					Torg12FileName = model.Torg12FileName,
+					CPFileName = model.CPFileName,
+					Characteristic = model.Characteristic,
+					AddressLoad = model.AddressLoad,
+					WarehouseWorkingTime = model.WarehouseWorkingTime,
+					Weigth = model.Weigth,
+					Count = model.Count,
+					Volume = model.Volume,
+					TermsOfDelivery = model.TermsOfDelivery,
+					Value = model.Currency.Value,
+					CurrencyId = model.Currency.CurrencyId,
+					CountryId = model.CountryId,
+					FactoryName = model.FactoryName,
+					FactoryPhone = model.FactoryPhone,
+					FactoryEmail = model.FactoryEmail,
+					FactoryContact = model.FactoryContact,
+					MarkName = model.MarkName,
+					MethodOfDeliveryId = model.MethodOfDeliveryId,
+					Id = 0,
+					AirWaybillId = null,
+					DateInStock = null,
+					DateOfCargoReceipt = null,
+					TransitReference = null,
+					ClientId = clientId
 				};
 
 				var id = _applicationUpdater.Add(data, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,

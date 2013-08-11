@@ -9,8 +9,6 @@ namespace Alicargo.ViewModels.Application
 		public ApplicationEditModel()
 		{
 			Currency = new CurrencyModel();
-
-			//Transit = new TransitEditModel();
 		}
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
@@ -100,8 +98,7 @@ namespace Alicargo.ViewModels.Application
 		[Required, DisplayNameLocalized(typeof(Entities), "Mark")]
 		public string MarkName { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
+		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public int MethodOfDeliveryId { get; set; }		
 
 		#endregion
