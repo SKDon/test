@@ -82,25 +82,25 @@
 	</div>
 	<div class="span4">
 		@Html.LabelFor(model => model.CPFile)
-		@Helpers.FileUploader(Html.IdFor(x => x.CPFile).ToHtmlString(),  Model == null ? null : Model.CPFileName)
+		@Helpers.FileUploader(Html.IdFor(x => x.CPFile).ToHtmlString(), Model == null ? null : Model.CPFileName)
 	</div>
 	<div class="span4">
 		@Html.LabelFor(model => model.DeliveryBillFile)
-		@Helpers.FileUploader(Html.IdFor(x => x.DeliveryBillFile).ToHtmlString(), Model == null ? null :  Model.DeliveryBillFileName)
+		@Helpers.FileUploader(Html.IdFor(x => x.DeliveryBillFile).ToHtmlString(), Model == null ? null : Model.DeliveryBillFileName)
 	</div>
 </div>
 <div class="row">
 	<div class="span4">
 		@Html.LabelFor(model => model.InvoiceFile)
-		@Helpers.FileUploader(Html.IdFor(x => x.InvoiceFile).ToHtmlString(), Model == null ? null :  Model.InvoiceFileName)
+		@Helpers.FileUploader(Html.IdFor(x => x.InvoiceFile).ToHtmlString(), Model == null ? null : Model.InvoiceFileName)
 	</div>
 	<div class="span4">
 		@Html.LabelFor(model => model.SwiftFile)
-		@Helpers.FileUploader(Html.IdFor(x => x.SwiftFile).ToHtmlString(),  Model == null ? null : Model.SwiftFileName)
+		@Helpers.FileUploader(Html.IdFor(x => x.SwiftFile).ToHtmlString(), Model == null ? null : Model.SwiftFileName)
 	</div>
 	<div class="span4">
 		@Html.LabelFor(model => model.PackingFile)
-		@Helpers.FileUploader(Html.IdFor(x => x.PackingFile).ToHtmlString(),  Model == null ? null : Model.PackingFileName)
+		@Helpers.FileUploader(Html.IdFor(x => x.PackingFile).ToHtmlString(), Model == null ? null : Model.PackingFileName)
 	</div>
 </div>
 <div>

@@ -42,6 +42,8 @@ namespace Alicargo.Controllers
 			var data = _transitRepository.GetByApplication(applicationId.Value);
 			var transit = TransitEditModel.GetModel(data);
 
+			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
+
 			ViewBag.TransitId = data.Id;
 
 			return PartialView(transit);

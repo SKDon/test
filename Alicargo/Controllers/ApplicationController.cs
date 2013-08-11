@@ -132,7 +132,8 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Edit(long id, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
+		public virtual ActionResult Edit(long id, ApplicationEditModel model, CarrierSelectModel carrierModel,
+			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if (!ModelState.IsValid)
 			{
