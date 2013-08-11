@@ -1,13 +1,4 @@
-﻿@model Client
-
-@if (Model != null)
-{
-	// todo: remove this shit
-	@Html.HiddenFor(m => m.Id)
-	@Html.HiddenFor(m => m.TransitId)
-	@Html.HiddenFor(m => m.Transit.Id)
-	@Html.HiddenFor(m => m.UserId)
-}
+﻿@model ClientModel
 
 <div class="row">
 	<div class="span8">
@@ -53,18 +44,10 @@
 <div class="row">
 	<div class="span8">
 		@Html.LabelFor(model => model.Contacts)
-		@Html.TextAreaFor(model => model.Contacts)
-		<div class="row">
-			<div class="span4">
-			</div>
-			<div class="span4">
-			</div>
-		</div>
+		@Html.TextAreaFor(model => model.Contacts)		
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Email)
-
-
 		@Html.EditorWithLabelFor(model => model.Phone)
 	</div>
 </div>
@@ -72,9 +55,9 @@
 <h4>
 	@Resources.Pages.Transit
 </h4>
-@Html.EditorFor(x => x.Transit)
+@*@Html.Action(MVC.Transit.EditByClient((long?)ViewBag.ClientId))*@
 <hr />
 <h4>
 	@Resources.Pages.Authentication
 </h4>
-@Html.EditorFor(x => x.AuthenticationModel)
+@*@Html.EditorFor(x => x.AuthenticationModel)*@

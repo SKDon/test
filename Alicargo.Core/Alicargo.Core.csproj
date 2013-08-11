@@ -43,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ClientData.cs" />
-    <Compile Include="Models\IClientData.cs" />
     <Compile Include="Models\IAirWaybillData.cs" />
     <Compile Include="Models\AirWaybillData.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
@@ -54,8 +52,7 @@
     <Compile Include="Enums\MethodOfTransit.cs" />
     <Compile Include="Exceptions\InvalidLogicException.cs" />
     <Compile Include="Exceptions\DublicateException.cs" />
-    <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Helpers\ClientDataHelper.cs" />
+    <Compile Include="Services\ExtensionHelper.cs" />
     <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\ITransaction.cs" />
@@ -90,8 +87,6 @@
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Localization\Cultures.cs" />
     <Compile Include="Localization\LocalizeEnumExtension.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Repositories\IApplicationRepository.cs" />
     <Compile Include="Repositories\IBrockerRepository.cs" />
     <Compile Include="Repositories\ICarrierRepository.cs" />
@@ -112,7 +107,6 @@
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
     <Compile Include="Security\PasswordConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\TransitEditModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Enums.en.resx">
@@ -149,9 +143,7 @@
       <LastGenOutput>Entities.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
       <Project>{e2f1a146-9076-4833-995e-084ac1b3eac7}</Project>

@@ -4,7 +4,7 @@ using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.Core.Models
+namespace Alicargo.ViewModels
 {
 	public sealed class TransitEditModel
 	{

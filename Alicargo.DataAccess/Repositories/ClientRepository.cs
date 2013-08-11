@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.Core.Enums;
-using Alicargo.Core.Helpers;
-using Alicargo.Core.Models;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Repositories;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	// todo: use contracts for the repository
 	internal sealed class ClientRepository : BaseRepository, IClientRepository
 	{
-		private readonly Expression<Func<DbContext.Client, Client>> _selector;
+		private readonly Expression<Func<DbContext.Client, ClientData>> _selector;
 
 		public ClientRepository(IUnitOfWork unitOfWork)
 			: base(unitOfWork)
 		{
-			// todo: fix selector to use contract
-			_selector = x => new Client
+			_selector = x => new ClientData
 			{
 				Id = x.Id,
 				UserId = x.UserId,
@@ -35,23 +31,7 @@ namespace Alicargo.DataAccess.Repositories
 				Nic = x.Nic,
 				OGRN = x.OGRN,
 				RS = x.RS,
-				TransitId = x.TransitId,
-
-				Transit = new TransitEditModel
-				{
-					Address = x.Transit.Address,
-					City = x.Transit.City,
-					Phone = x.Transit.Phone,
-					RecipientName = x.Transit.RecipientName,
-					DeliveryType = (DeliveryType) x.Transit.DeliveryTypeId,
-					MethodOfTransit = (MethodOfTransit) x.Transit.MethodOfTransitId,
-					WarehouseWorkingTime = x.Transit.WarehouseWorkingTime
-				},
-
-				AuthenticationModel = new AuthenticationModel
-				{
-					Login = x.User.Login
-				}
+				TransitId = x.TransitId				
 			};
 		}
 
@@ -60,7 +40,7 @@ namespace Alicargo.DataAccess.Repositories
 			return Context.Clients.LongCount();
 		}
 
-		public Client[] GetRange(long skip, int take)
+		public ClientData[] GetRange(long skip, int take)
 		{
 			return Context.Clients
 				.OrderBy(x => x.LegalEntity)
@@ -70,23 +50,23 @@ namespace Alicargo.DataAccess.Repositories
 				.ToArray();
 		}
 
-		public Func<long> Add(IClientData client)
+		public Func<long> Add(ClientData client)
 		{
 			var entity = new DbContext.Client();
 
-			client.CopyTo(entity);
+			CopyTo(client, entity);
 
 			Context.Clients.InsertOnSubmit(entity);
 
 			return () => entity.Id;
 		}
 
-		public Client GetByUserId(long userId)
+		public ClientData GetByUserId(long userId)
 		{
 			return Context.Clients.Select(_selector).FirstOrDefault(x => x.UserId == userId);
 		}
 
-		public Client GetById(long clientId)
+		public ClientData GetById(long clientId)
 		{
 			return Context.Clients
 				.Where(x => x.Id == clientId)
@@ -101,16 +81,16 @@ namespace Alicargo.DataAccess.Repositories
 			Context.Clients.DeleteOnSubmit(entity);
 		}
 
-		public Client[] GetAll()
+		public ClientData[] GetAll()
 		{
 			return Context.Clients.Select(_selector).ToArray();
 		}
 
-		public void Update(long id, IClientData client)
+		public void Update(ClientData client)
 		{
-			var entity = Context.Clients.First(x => x.Id == id);
+			var entity = Context.Clients.First(x => x.Id == client.Id);
 
-			client.CopyTo(entity);
+			CopyTo(client, entity);
 		}
 
 		public ClientData[] Get(params long[] clinentIds)
@@ -120,6 +100,26 @@ namespace Alicargo.DataAccess.Repositories
 				.Select(_selector)
 				.Cast<ClientData>()
 				.ToArray();
+		}
+
+		public static void CopyTo(ClientData @from, DbContext.Client to)
+		{
+			to.Email = @from.Email;
+			to.LegalEntity = @from.LegalEntity;
+			to.BIC = @from.BIC;
+			to.Nic = @from.Nic;
+			to.Contacts = @from.Contacts;
+			to.Phone = @from.Phone;
+			to.INN = @from.INN;
+			to.KPP = @from.KPP;
+			to.OGRN = @from.OGRN;
+			to.Bank = @from.Bank;
+			to.LegalAddress = @from.LegalAddress;
+			to.MailingAddress = @from.MailingAddress;
+			to.RS = @from.RS;
+			to.KS = @from.KS;
+			to.TransitId = @from.TransitId;
+			to.UserId = @from.UserId;
 		}
 	}
 }

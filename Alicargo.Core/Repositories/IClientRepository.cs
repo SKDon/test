@@ -1,19 +1,18 @@
 ﻿using System;
-using Alicargo.Core.Models;
+using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.Core.Repositories
 {
 	public interface IClientRepository
 	{
 		long Count();
-		Client[] GetRange(long skip, int take);
-		Func<long> Add(IClientData client);
-		Client GetByUserId(long userId);
-		Client GetById(long clientId);
+		ClientData[] GetRange(long skip, int take);
+		Func<long> Add(ClientData client);
+		ClientData GetByUserId(long userId);
+		ClientData GetById(long clientId);
 		void Delete(long id);
-		Client[] GetAll();
-		void Update(long id, IClientData client);
-
+		ClientData[] GetAll();
+		void Update(ClientData client);
 		ClientData[] Get(params long[] clinentIds);
 	}
 }

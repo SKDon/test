@@ -1,15 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.Core.Models
+namespace Alicargo.ViewModels
 {
-	public class ClientData : IClientData
+	public sealed class ClientModel
 	{
-		public long Id { get; set; }
-		public long UserId { get; set; }
-		public long TransitId { get; set; }
-
 		#region Contatct info
 
 		[Required]
@@ -67,5 +64,26 @@ namespace Alicargo.Core.Models
 		public string KS { get; set; }
 
 		#endregion
+
+		public static ClientModel GetModel(ClientData client)
+		{
+			return new ClientModel
+			{
+				BIC = client.BIC,
+				Phone = client.Phone,
+				Email = client.Email,
+				LegalEntity = client.LegalEntity,
+				Bank = client.Bank,
+				Contacts = client.Contacts,
+				INN = client.INN,
+				KPP = client.KPP,
+				KS = client.KS,
+				LegalAddress = client.LegalAddress,
+				MailingAddress = client.MailingAddress,
+				Nic = client.Nic,
+				OGRN = client.OGRN,
+				RS = client.RS
+			};
+		}
 	}
 }

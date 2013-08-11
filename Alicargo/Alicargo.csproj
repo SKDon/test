@@ -303,8 +303,11 @@
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
     <Compile Include="ViewModels\Application\CurrencyModel.cs" />
+    <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\BrockerAWBModel.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
+    <Compile Include="ViewModels\ClientModel.cs" />
+    <Compile Include="ViewModels\TransitEditModel.cs" />
     <Compile Include="ViewModels\UserList.cs" />
     <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
@@ -1333,7 +1336,7 @@
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Client.cshtml" />
+    <Content Include="Views\Client\EditorTemplates\ClientModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TransitEditModel.cshtml" />
     <None Include="Properties\PublishProfiles\Alicargo.Release.pubxml" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />

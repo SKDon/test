@@ -7,7 +7,7 @@ namespace Alicargo.Services.Abstract
 	{
 		long AddTransit(TransitEditModel model, CarrierSelectModel carrierModel);
 		TransitEditModel[] Get(params long[] ids);
-		void Update(long id, TransitEditModel transit, CarrierSelectModel carrierModel);
+		void Update(long transitId, TransitEditModel transit, CarrierSelectModel carrierModel);
 		void Delete(long transitId);
 	}
 }

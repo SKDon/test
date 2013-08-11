@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace Alicargo.Core.Helpers
+namespace Alicargo.Core.Services
 {
-	public static class Extensions
+	public static class ExtensionHelper
 	{
 		public static long ToLong(this string @string)
 		{

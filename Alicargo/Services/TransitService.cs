@@ -28,7 +28,7 @@ namespace Alicargo.Services
 			return data.Select(TransitEditModel.GetModel).ToArray();
 		}
 
-		public void Update(long id, TransitEditModel transit, CarrierSelectModel carrierModel)
+		public void Update(long transitId, TransitEditModel transit, CarrierSelectModel carrierModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
@@ -36,7 +36,7 @@ namespace Alicargo.Services
 
 				var data = TransitEditModel.GetData(transit, carrierId);
 
-				data.Id = id;
+				data.Id = transitId;
 
 				_transitRepository.Update(data);
 

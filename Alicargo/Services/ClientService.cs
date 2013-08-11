@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
-using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
@@ -20,9 +20,14 @@ namespace Alicargo.Services
 		private readonly IAuthenticationRepository _authentications;
 		private readonly IUnitOfWork _unitOfWork;
 
-		public ClientService(IIdentityService identity, IClientRepository clientRepository,
-			 ITransitService transitService, IMailSender mailSender, IMessageBuilder messageBuilder,
-			IAuthenticationRepository authentications, IUnitOfWork unitOfWork)
+		public ClientService(
+			IIdentityService identity,
+			IClientRepository clientRepository,
+			ITransitService transitService,
+			IMailSender mailSender,
+			IMessageBuilder messageBuilder,
+			IAuthenticationRepository authentications,
+			IUnitOfWork unitOfWork)
 		{
 			_identity = identity;
 			_clientRepository = clientRepository;
@@ -33,53 +38,74 @@ namespace Alicargo.Services
 			_unitOfWork = unitOfWork;
 		}
 
-		private bool HaveAccessToClient(IClientData client)
+		private bool HaveAccessToClient(long clientUserId)
 		{
-			if (client == null)
-				throw new EntityNotFoundException();
-
 			if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Sender)) return true;
 
-			return client.UserId == _identity.Id;
+			return clientUserId == _identity.Id;
 		}
 
-		public Client GetClient(long? id)
+		public ClientData GetClientData(long? id = null)
 		{
-			var client = id.HasValue
-				? _clientRepository.GetById(id.Value)
-				: _identity.Id.HasValue
-					? _clientRepository.GetByUserId(_identity.Id.Value)
-					: null;
+			ClientData data;
 
-			if (!HaveAccessToClient(client))
+			if (id.HasValue)
+			{
+				data = _clientRepository.GetById(id.Value);
+			}
+			else if (_identity.Id.HasValue)
+			{
+				data = _clientRepository.GetByUserId(_identity.Id.Value);
+			}
+			else
+			{
+				return null;
+			}
+
+			if (!HaveAccessToClient(data.UserId))
 				throw new AccessForbiddenException();
 
-			return client;
+			return data;
 		}
 
-		public ListCollection<Client> GetList(int take, int skip)
+		public ListCollection<ClientData> GetList(int take, int skip)
 		{
 			var total = _clientRepository.Count();
 
-			var data = _clientRepository.GetRange(skip, take)
-				.ToArray();
+			var data = _clientRepository.GetRange(skip, take).ToArray();
 
-			return new ListCollection<Client> { Data = data, Total = total };
+			return new ListCollection<ClientData> { Data = data, Total = total };
 		}
 
-		public void Update(Client model, CarrierSelectModel carrierSelectModel)
+		public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel)
 		{
-			if (!HaveAccessToClient(model))
+			var data = _clientRepository.Get(clientId).First();
+
+			if (!HaveAccessToClient(data.UserId))
 				throw new AccessForbiddenException();
 
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				
-				//_transitService.Update(model.Transit, carrierSelectModel); // todo: fix
+				_transitService.Update(data.TransitId, transitModel, carrierModel);
 
-				_authentications.Update(model.UserId, model.AuthenticationModel.Login, model.AuthenticationModel.NewPassword);
+				_authentications.Update(data.UserId, authenticationModel.Login, authenticationModel.NewPassword);
 
-				_clientRepository.Update(model.Id, model);
+				data.BIC = model.BIC;
+				data.Phone = model.Phone;
+				data.Email = model.Email;
+				data.LegalEntity = model.LegalEntity;
+				data.Bank = model.Bank;
+				data.Contacts = model.Contacts;
+				data.INN = model.INN;
+				data.KPP = model.KPP;
+				data.KS = model.KS;
+				data.LegalAddress = model.LegalAddress;
+				data.MailingAddress = model.MailingAddress;
+				data.Nic = model.Nic;
+				data.OGRN = model.OGRN;
+				data.RS = model.RS;
+
+				_clientRepository.Update(data);
 
 				_unitOfWork.SaveChanges();
 
@@ -87,36 +113,49 @@ namespace Alicargo.Services
 			}
 		}
 
-		public void Add(Client model, CarrierSelectModel carrierSelectModel)
+		public void Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel)
 		{
-			if (!HaveAccessToClient(model))
-				throw new AccessForbiddenException();
-
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				model.TransitId = _transitService.AddTransit(model.Transit, carrierSelectModel);
+				var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
-				var userId = _authentications.Add(model.AuthenticationModel.Login, model.AuthenticationModel.NewPassword, _identity.TwoLetterISOLanguageName);
-
-				_unitOfWork.SaveChanges();
-
-				model.UserId = userId();
-
-				var id = _clientRepository.Add(model);
+				var userId = _authentications.Add(authenticationModel.Login, authenticationModel.NewPassword, _identity.TwoLetterISOLanguageName);
 
 				_unitOfWork.SaveChanges();
 
-				model.Id = id();
+				var data = new ClientData
+				{
+					UserId = userId(),
+					BIC = model.BIC,
+					Phone = model.Phone,
+					Email = model.Email,
+					LegalEntity = model.LegalEntity,
+					Bank = model.Bank,
+					Contacts = model.Contacts,
+					INN = model.INN,
+					KPP = model.KPP,
+					KS = model.KS,
+					LegalAddress = model.LegalAddress,
+					MailingAddress = model.MailingAddress,
+					Nic = model.Nic,
+					OGRN = model.OGRN,
+					RS = model.RS,
+					TransitId = transitId
+				};
+
+				_clientRepository.Add(data);
+
+				_unitOfWork.SaveChanges();
 
 				ts.Complete();
 			}
 
-			EmailOnAdd(model);
+			EmailOnAdd(model, authenticationModel);
 		}
 
-		private void EmailOnAdd(Client model)
+		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)
 		{
-			var body = _messageBuilder.ClientAdd(model);
+			var body = _messageBuilder.ClientAdd(model, authenticationModel);
 			var admins = _messageBuilder.GetAdminEmails().Select(x => x.Email).ToArray();
 			_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, model.Email) { CC = admins });
 		}

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
-using Alicargo.Core.Models;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -50,18 +48,18 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		//[ValidateAntiForgeryToken]
+		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(Client model, CarrierSelectModel carrierSelectModel)
+		public virtual ActionResult Create(ClientModel model, TransitEditModel transitModel, CarrierSelectModel carrierModel, AuthenticationModel authenticationModel)
 		{
-			if (string.IsNullOrWhiteSpace(model.AuthenticationModel.NewPassword))
+			if (string.IsNullOrWhiteSpace(authenticationModel.NewPassword))
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
 
 			if (!ModelState.IsValid) return View();
 
 			try
 			{
-				_clientService.Add(model, carrierSelectModel);
+				_clientService.Add(model, carrierModel, transitModel, authenticationModel);
 			}
 			catch (DublicateException ex)
 			{
@@ -89,22 +87,26 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id)
 		{
-			var client = _clientService.GetClient(id);
+			var data = _clientService.GetClientData(id);
 
-			return View(client);
+			var model = ClientModel.GetModel(data);
+
+			return View(model);
 		}
 
 		// todo: test
 		[HttpPost]
-		//[ValidateAntiForgeryToken]
+		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Edit(Client model, CarrierSelectModel carrierSelectModel)
+		public virtual ActionResult Edit(long? id, ClientModel model, TransitEditModel transitModel, CarrierSelectModel carrierModel, AuthenticationModel authenticationModel)
 		{
+			var data = _clientService.GetClientData(id);
+
 			if (!ModelState.IsValid) return View(model);
 
-			_clientService.Update(model, carrierSelectModel);
+			_clientService.Update(data.Id, model, carrierModel, transitModel, authenticationModel);
 
-			return RedirectToAction(MVC.Client.Edit(model.Id));
+			return RedirectToAction(MVC.Client.Index());
 		}
 
 		#endregion

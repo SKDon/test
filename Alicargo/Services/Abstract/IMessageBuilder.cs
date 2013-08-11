@@ -12,7 +12,7 @@ namespace Alicargo.Services.Abstract
 		Recipient[] GetForwarderEmails();
 
 		string DefaultSubject { get; }
-		string ClientAdd(Client model);
+		string ClientAdd(ClientModel model, AuthenticationModel authenticationModel);
 
 		string AwbCreate(AirWaybillModel model, string culture);
 		string AwbSet(AirWaybillModel model, string applicationNumber, string culture);

@@ -51,8 +51,6 @@ namespace T4MVC
             {
                 public readonly string AirWaybillModel = "AirWaybillModel";
                 public readonly string AuthenticationModel = "AuthenticationModel";
-                public readonly string Client = "Client";
-                public readonly string CurrencyModel = "CurrencyModel";
                 public readonly string SelectModel = "SelectModel";
                 public readonly string TransitEditModel = "TransitEditModel";
                 public readonly string UserModel = "UserModel";

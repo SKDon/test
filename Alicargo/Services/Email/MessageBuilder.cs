@@ -184,10 +184,10 @@ namespace Alicargo.Services.Email
 
 		#endregion
 
-		public string ClientAdd(Client model)
+		public string ClientAdd(ClientModel model, AuthenticationModel authenticationModel)
 		{
-			return string.Format(Mail.Client_Add, model.Contacts, model.AuthenticationModel.Login,
-				model.AuthenticationModel.NewPassword);
+			return string.Format(Mail.Client_Add, model.Contacts, authenticationModel.Login,
+				authenticationModel.NewPassword);
 		}
 
 		#region AWB

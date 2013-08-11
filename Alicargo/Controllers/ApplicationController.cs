@@ -94,7 +94,7 @@ namespace Alicargo.Controllers
 
 		private void BindBag(long? clientId, long? applicationId)
 		{
-			var client = _clientService.GetClient(clientId);
+			var client = _clientService.GetClientData(clientId);
 
 			ViewBag.ClientNic = client.Nic;
 
@@ -166,7 +166,7 @@ namespace Alicargo.Controllers
 		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			var client = _clientService.GetClient(clientId);
+			var client = _clientService.GetClientData(clientId);
 
 			if (!ModelState.IsValid)
 			{

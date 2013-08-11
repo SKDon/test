@@ -103,7 +103,9 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Create
         {
             public readonly string model = "model";
-            public readonly string carrierSelectModel = "carrierSelectModel";
+            public readonly string transitModel = "transitModel";
+            public readonly string carrierModel = "carrierModel";
+            public readonly string authenticationModel = "authenticationModel";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -113,7 +115,9 @@ namespace Alicargo.Controllers
         {
             public readonly string id = "id";
             public readonly string model = "model";
-            public readonly string carrierSelectModel = "carrierSelectModel";
+            public readonly string transitModel = "transitModel";
+            public readonly string carrierModel = "carrierModel";
+            public readonly string authenticationModel = "authenticationModel";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -132,6 +136,13 @@ namespace Alicargo.Controllers
             public readonly string Create = "~/Views/Client/Create.cshtml";
             public readonly string Edit = "~/Views/Client/Edit.cshtml";
             public readonly string Index = "~/Views/Client/Index.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string ClientModel = "ClientModel";
+            }
         }
     }
 
@@ -171,14 +182,16 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.Core.Models.Client model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel, Alicargo.ViewModels.CarrierSelectModel carrierModel, Alicargo.ViewModels.AuthenticationModel authenticationModel);
 
-        public override System.Web.Mvc.ActionResult Create(Alicargo.Core.Models.Client model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel, Alicargo.ViewModels.CarrierSelectModel carrierModel, Alicargo.ViewModels.AuthenticationModel authenticationModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierSelectModel", carrierSelectModel);
-            CreateOverride(callInfo, model, carrierSelectModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "authenticationModel", authenticationModel);
+            CreateOverride(callInfo, model, transitModel, carrierModel, authenticationModel);
             return callInfo;
         }
 
@@ -192,14 +205,17 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.Core.Models.Client model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? id, Alicargo.ViewModels.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel, Alicargo.ViewModels.CarrierSelectModel carrierModel, Alicargo.ViewModels.AuthenticationModel authenticationModel);
 
-        public override System.Web.Mvc.ActionResult Edit(Alicargo.Core.Models.Client model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
+        public override System.Web.Mvc.ActionResult Edit(long? id, Alicargo.ViewModels.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel, Alicargo.ViewModels.CarrierSelectModel carrierModel, Alicargo.ViewModels.AuthenticationModel authenticationModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierSelectModel", carrierSelectModel);
-            EditOverride(callInfo, model, carrierSelectModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "authenticationModel", authenticationModel);
+            EditOverride(callInfo, id, model, transitModel, carrierModel, authenticationModel);
             return callInfo;
         }
 
