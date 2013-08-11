@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
+using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
@@ -11,7 +12,6 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers
 {
-	// todo: refactor contracts
 	public partial class ApplicationController : Controller
 	{
 		private readonly IApplicationManager _applicationManager;
@@ -92,11 +92,13 @@ namespace Alicargo.Controllers
 
 		#endregion
 
-		private void BindBag(long? clientId)
+		private void BindBag(long? clientId, long? applicationId)
 		{
 			var client = _clientService.GetClient(clientId);
 
 			ViewBag.ClientNic = client.Nic;
+
+			ViewBag.ApplicationId = applicationId;
 
 			ViewBag.Countries = _countryRepository.Get()
 				.ToDictionary(x => x.Id, x => x.Name[_identityService.TwoLetterISOLanguageName]);
@@ -121,25 +123,25 @@ namespace Alicargo.Controllers
 
 			var clientId = _applicationRepository.GetClientId(id);
 
-			BindBag(clientId);
+			BindBag(clientId, id);
 
 			return View(application);
 		}
 
 		// todo: test
 		[HttpPost]
-		//[ValidateAntiForgeryToken]
+		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Edit(long id, ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public virtual ActionResult Edit(long id, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
 		{
 			if (!ModelState.IsValid)
 			{
 				var clientId = _applicationRepository.GetClientId(id);
-				BindBag(clientId);
+				BindBag(clientId, id);
 				return View(model);
 			}
 
-			_applicationManager.Update(id, model, carrierSelectModel);
+			_applicationManager.Update(id, model, carrierModel, transitModel);
 
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
@@ -151,26 +153,26 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ViewResult Create(long? clientId)
 		{
-			BindBag(clientId);
+			BindBag(clientId, null);
 
 			return View();
 		}
 
 		// todo: test
 		[HttpPost]
-		//[ValidateAntiForgeryToken]
+		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
 		{
 			if (!ModelState.IsValid)
 			{
-				BindBag(clientId);
+				BindBag(clientId, null);
 				return View(model);
 			}
 
 			try
 			{
-				_applicationManager.Add(model, carrierSelectModel);
+				_applicationManager.Add(model, carrierModel, transitModel);
 			}
 			catch (DublicateException ex)
 			{

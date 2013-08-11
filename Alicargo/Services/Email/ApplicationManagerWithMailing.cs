@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
@@ -47,13 +48,13 @@ namespace Alicargo.Services.Email
 			return _manager.Get(id);
 		}
 
-		public void Update(long id, ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public void Update(long applicationId, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
 		{
-			var oldData = _applicationPresenter.Get(id);
+			var oldData = _applicationPresenter.Get(applicationId);
 
-			_manager.Update(id, model, carrierSelectModel);
+			_manager.Update(applicationId, model, carrierModel, transitModel);
 
-			SendOnFileAdd(id, oldData);
+			SendOnFileAdd(applicationId, oldData);
 		}
 
 		private void SendOnFileAdd(long id, ApplicationDetailsModel oldData)
@@ -112,9 +113,9 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		public long Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
 		{
-			var id = _manager.Add(model, carrierSelectModel);
+			var id = _manager.Add(model, carrierModel, transitModel);
 
 			SendOnAdd(id);
 

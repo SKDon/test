@@ -54,7 +54,7 @@ namespace T4MVC
                 public readonly string Client = "Client";
                 public readonly string CurrencyModel = "CurrencyModel";
                 public readonly string SelectModel = "SelectModel";
-                public readonly string Transit = "Transit";
+                public readonly string TransitEditModel = "TransitEditModel";
                 public readonly string UserModel = "UserModel";
             }
         }

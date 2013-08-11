@@ -1334,7 +1334,7 @@
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Client.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Transit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TransitEditModel.cshtml" />
     <None Include="Properties\PublishProfiles\Alicargo.Release.pubxml" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1397,6 +1397,7 @@
     <Content Include="Views\Sender\ApplicationCreate.cshtml" />
     <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CurrencyModel.cshtml" />
+    <Content Include="Views\Transit\EditByApplication.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

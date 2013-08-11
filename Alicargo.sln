@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.TestHelpers", "Ali
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.Contracts", "Alicargo.Contracts\Alicargo.Contracts.csproj", "{E2F1A146-9076-4833-995E-084AC1B3EAC7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{7D28F0C9-70DB-4165-9855-EBB2153BC03B}"
+	ProjectSection(SolutionItems) = preProject
+		testing.txt = testing.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

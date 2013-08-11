@@ -5,9 +5,9 @@ namespace Alicargo.Services.Abstract
 {
 	public interface ITransitService
 	{
-		long AddTransit(TransitData model, CarrierSelectModel carrierModel);
-		Transit[] Get(params long[] ids);
-		void Update(Transit transit, CarrierSelectModel carrierModel);
+		long AddTransit(TransitEditModel model, CarrierSelectModel carrierModel);
+		TransitEditModel[] Get(params long[] ids);
+		void Update(long id, TransitEditModel transit, CarrierSelectModel carrierModel);
 		void Delete(long transitId);
 	}
 }

@@ -13,11 +13,11 @@ namespace Alicargo.Controllers
 		}
 
 		[ChildActionOnly]
-		public virtual PartialViewResult Select(long? selectedId)
+		public virtual PartialViewResult Select(long? transitId)
 		{
 			ViewBag.Carriers = _carriers.ToDictionary();
 
-			var model = _carriers.Get(selectedId);
+			var model = _carriers.Get(transitId);
 
 			return PartialView(model);
 		}

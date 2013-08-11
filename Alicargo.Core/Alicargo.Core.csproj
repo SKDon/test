@@ -47,7 +47,6 @@
     <Compile Include="Models\IClientData.cs" />
     <Compile Include="Models\IAirWaybillData.cs" />
     <Compile Include="Models\AirWaybillData.cs" />
-    <Compile Include="Models\TransitData.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
     <Compile Include="Enums\DeliveryType.cs" />
@@ -113,7 +112,7 @@
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
     <Compile Include="Security\PasswordConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Transit.cs" />
+    <Compile Include="Models\TransitEditModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Enums.en.resx">

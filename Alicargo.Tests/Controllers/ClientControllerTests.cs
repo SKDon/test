@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
+using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Models;
 using Alicargo.DataAccess.DbContext;
@@ -59,23 +60,16 @@ namespace Alicargo.Tests.Controllers
 					model.CopyTo(expectedClient);
 					clientData.CopyTo(actualClient);
 
-					var actualTransit = new Core.Models.Transit
+					var actualTransit = new TransitEditModel
 					{
 						Address = transitData.Address,
-						Id = transitData.Id,
-						CarrierName = transitData.Carrier.Name,
-						CarrierId = transitData.CarrierId,
 						City = transitData.City,
-						DeliveryTypeId = transitData.DeliveryTypeId,
-						MethodOfTransitId = transitData.MethodOfTransitId,
+						DeliveryType = (DeliveryType) transitData.DeliveryTypeId,
+						MethodOfTransit = (MethodOfTransit) transitData.MethodOfTransitId,
 						Phone = transitData.Phone,
 						RecipientName = transitData.RecipientName,
 						WarehouseWorkingTime = transitData.WarehouseWorkingTime
 					};
-
-					model.Transit.Id = actualTransit.Id;
-					model.Transit.CarrierName = actualTransit.CarrierName;
-					model.Transit.CarrierId = actualTransit.CarrierId;
 
 					_db.Clients.DeleteOnSubmit(clientData);
 					_db.Users.DeleteOnSubmit(userData);

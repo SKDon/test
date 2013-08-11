@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Alicargo.Core.Models;
+using Alicargo.Contracts.Contracts;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -11,7 +11,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		[TestMethod]
 		public void Test_TransitRepository_Add_Get()
 		{
-			var transit = new TransitData(CreateTestTransit());
+			var transit = CreateTestTransit();
 
 			var actual = _transitRepository.Get(transit.Id).First();
 
@@ -21,7 +21,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		[TestMethod]
 		public void Test_TransitRepository_Update()
 		{
-			var oldData =  new TransitData(CreateTestTransit());
+			var oldData = CreateTestTransit();
 
 			var newData = _fixture.Create<TransitData>();
 			newData.CarrierId = oldData.CarrierId;
@@ -34,7 +34,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			newData.ShouldBeEquivalentTo(actual);
 		}
 
-		Transit CreateTestTransit()
+		TransitData CreateTestTransit()
 		{
 			var transit = _fixture.Create<TransitData>();
 			var carrier = CreateTestCarrier();
@@ -44,7 +44,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			_unitOfWork.SaveChanges();
 			transit.Id = id();
 
-			return new Transit(transit, carrier.Name);
+			return transit;
 		}
 	}
 }

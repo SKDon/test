@@ -72,7 +72,6 @@
     <Compile Include="Helpers\FileDataHelper.cs" />
     <Compile Include="Helpers\IApplicationRepositoryOrderer.cs" />
     <Compile Include="Helpers\AirWaybillDataHelper.cs" />
-    <Compile Include="Helpers\TransitDataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ApplicationDataHelper.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />

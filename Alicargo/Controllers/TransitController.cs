@@ -9,20 +9,20 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Controllers
 {
-	// todo: refactor contracts
 	public partial class TransitController : Controller
 	{
 		private readonly ITransitService _transitService;
 		private readonly ITransitRepository _transitRepository;
 
-		public TransitController(ITransitService transitService, ITransitRepository transitRepository)
+		public TransitController(
+			ITransitService transitService,
+			ITransitRepository transitRepository)
 		{
 			_transitService = transitService;
 			_transitRepository = transitRepository;
 		}
 
-		[HttpGet]
-		[Access(RoleType.Client)]
+		[HttpGet, Access(RoleType.Client)]
 		public virtual ActionResult Edit(long id)
 		{
 			var transit = _transitService.Get(id).First();
@@ -34,13 +34,25 @@ namespace Alicargo.Controllers
 			return View(transit);
 		}
 
-		[HttpPost]
-		[Access(RoleType.Client)]
-		public virtual ActionResult Edit(Transit model, CarrierSelectModel carrierSelectModel)
+		[ChildActionOnly]
+		public virtual PartialViewResult EditByApplication(long? applicationId)
+		{
+			if (applicationId == null) return PartialView();
+
+			var data = _transitRepository.GetByApplication(applicationId.Value);
+			var transit = TransitEditModel.GetModel(data);
+
+			ViewBag.TransitId = data.Id;
+
+			return PartialView(transit);
+		}
+
+		[HttpPost, Access(RoleType.Client)]
+		public virtual ActionResult Edit(long id, TransitEditModel model, CarrierSelectModel carrierSelectModel)
 		{
 			if (!ModelState.IsValid) return View(model);
 
-			_transitService.Update(model, carrierSelectModel);
+			_transitService.Update(id, model, carrierSelectModel);
 
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}

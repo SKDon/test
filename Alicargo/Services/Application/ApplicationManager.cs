@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Exceptions;
+using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -13,6 +13,7 @@ namespace Alicargo.Services.Application
 	public sealed class ApplicationManager : IApplicationManager
 	{
 		private readonly IApplicationRepository _applicationRepository;
+		private readonly ITransitRepository _transitRepository;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateService _stateService;
@@ -21,6 +22,7 @@ namespace Alicargo.Services.Application
 
 		public ApplicationManager(
 			IApplicationRepository applicationRepository,
+			ITransitRepository transitRepository,
 			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig stateConfig,
 			ITransitService transitService,
@@ -28,6 +30,7 @@ namespace Alicargo.Services.Application
 			IStateService stateService)
 		{
 			_applicationRepository = applicationRepository;
+			_transitRepository = transitRepository;
 			_applicationUpdater = applicationUpdater;
 			_stateConfig = stateConfig;
 			_transitService = transitService;
@@ -64,37 +67,25 @@ namespace Alicargo.Services.Application
 				SwiftFileName = data.SwiftFileName,
 				TermsOfDelivery = data.TermsOfDelivery,
 				Torg12FileName = data.Torg12FileName,
-				TransitId = data.TransitId,
 				CountryId = data.CountryId,
 				Volume = data.Volume,
-				WarehouseWorkingTime = data.WarehouseWorkingTime,
+				WarehouseWorkingTime = data.WarehouseWorkingTime
 			};
-
-			SetAdditionalData(application);
 
 			return application;
 		}
 
-		public void SetAdditionalData(params ApplicationEditModel[] applications)
-		{
-			var ids = applications.Select(x => x.TransitId).ToArray();
-			var transits = _transitService.Get(ids).ToDictionary(x => x.Id, x => x);
-
-			foreach (var application in applications)
-			{
-				application.Transit = transits[application.TransitId];
-			}
-		}
-
-		public void Update(long id, ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public void Update(long applicationId, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				_transitService.Update(model.Transit, carrierSelectModel);
+				var transitData = _transitRepository.GetByApplication(applicationId);
+
+				_transitService.Update(transitData.Id, transitModel, carrierModel);
 
 				var data = new ApplicationData
 				{
-					Id = id,
+					Id = applicationId,
 					// todo: finish
 				};
 
@@ -107,17 +98,18 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		public long Add(ApplicationEditModel model, CarrierSelectModel carrierSelectModel)
+		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				model.TransitId = _transitService.AddTransit(model.Transit, carrierSelectModel);
+				var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
 				var data = new ApplicationData
 				{
 					CreationTimestamp = DateTimeOffset.UtcNow,
 					StateChangeTimestamp = DateTimeOffset.UtcNow,
-					StateId = _stateConfig.DefaultStateId
+					StateId = _stateConfig.DefaultStateId,
+					TransitId = transitId
 					// todo: finish
 				};
 

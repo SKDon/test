@@ -15,7 +15,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			var data = _fixture.Create<Client>();
 			data.UserId = user.Id;
-			data.Transit = new Transit(transit, transit.CarrierName);
+			data.Transit = TransitEditModel.GetModel(transit);
 			data.AuthenticationModel = new AuthenticationModel(user.Login);
 			data.TransitId = transit.Id;
 

@@ -1,20 +1,38 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Core.Models;
+using System.Linq.Expressions;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Repositories;
-using Alicargo.DataAccess.Helpers;
+using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
 	internal sealed class TransitRepository : BaseRepository, ITransitRepository
 	{
-		public TransitRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+		private readonly Expression<Func<Transit, TransitData>> _selector;
+
+		public TransitRepository(IUnitOfWork unitOfWork)
+			: base(unitOfWork)
+		{
+			_selector = x => new TransitData
+			{
+				Address = x.Address,
+				CarrierId = x.CarrierId,
+				Id = x.Id,
+				City = x.City,
+				DeliveryTypeId = x.DeliveryTypeId,
+				MethodOfTransitId = x.MethodOfTransitId,
+				Phone = x.Phone,
+				RecipientName = x.RecipientName,
+				WarehouseWorkingTime = x.WarehouseWorkingTime
+			};
+		}
 
 		public Func<long> Add(TransitData transit)
 		{
-			var entity = new DbContext.Transit();
+			var entity = new Transit();
 
-			transit.CopyTo(entity);
+			CopyTo(transit, entity);
 
 			Context.Transits.InsertOnSubmit(entity);
 
@@ -25,25 +43,15 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			var entity = Context.Transits.First(x => x.Id == transit.Id);
 
-			transit.CopyTo(entity);
+			CopyTo(transit, entity);
 		}
 
 		public TransitData[] Get(params long[] ids)
 		{
+
 			return Context.Transits
 				.Where(x => ids.Contains(x.Id))
-				.Select(x => new TransitData
-				{
-					Address = x.Address,
-					CarrierId = x.CarrierId,
-					Id = x.Id,
-					City = x.City,
-					DeliveryTypeId = x.DeliveryTypeId,
-					MethodOfTransitId = x.MethodOfTransitId,
-					Phone = x.Phone,
-					RecipientName = x.RecipientName,
-					WarehouseWorkingTime = x.WarehouseWorkingTime
-				})
+				.Select(_selector)
 				.ToArray();
 		}
 
@@ -52,10 +60,31 @@ namespace Alicargo.DataAccess.Repositories
 			return Context.Applications.Where(x => x.TransitId == id).Select(x => x.Id).FirstOrDefault();
 		}
 
+		public TransitData GetByApplication(long id)
+		{
+			return Context.Applications
+						  .Where(x => x.Id == id)
+						  .Select(x => x.Transit)
+						  .Select(_selector)
+						  .FirstOrDefault();
+		}
+
 		public void Delete(long transitId)
 		{
 			var transit = Context.Transits.First(x => x.Id == transitId);
 			Context.Transits.DeleteOnSubmit(transit);
+		}
+
+		public static void CopyTo(TransitData from, Transit to)
+		{
+			to.City = from.City;
+			to.Address = from.Address;
+			to.RecipientName = from.RecipientName;
+			to.Phone = from.Phone;
+			to.MethodOfTransitId = from.MethodOfTransitId;
+			to.DeliveryTypeId = from.DeliveryTypeId;
+			to.CarrierId = from.CarrierId;
+			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
 		}
 	}
 }

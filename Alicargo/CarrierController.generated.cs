@@ -79,7 +79,7 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Select
         {
-            public readonly string selectedId = "selectedId";
+            public readonly string transitId = "transitId";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -102,13 +102,13 @@ namespace Alicargo.Controllers
     {
         public T4MVC_CarrierController() : base(Dummy.Instance) { }
 
-        partial void SelectOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? selectedId);
+        partial void SelectOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? transitId);
 
-        public override System.Web.Mvc.PartialViewResult Select(long? selectedId)
+        public override System.Web.Mvc.PartialViewResult Select(long? transitId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Select);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "selectedId", selectedId);
-            SelectOverride(callInfo, selectedId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitId", transitId);
+            SelectOverride(callInfo, transitId);
             return callInfo;
         }
 

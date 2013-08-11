@@ -2,7 +2,7 @@
 {
 	public sealed class Client : ClientData
 	{
-		public Transit Transit { get; set; }
+		public TransitEditModel Transit { get; set; }
 
 		public AuthenticationModel AuthenticationModel { get; set; }
 	}

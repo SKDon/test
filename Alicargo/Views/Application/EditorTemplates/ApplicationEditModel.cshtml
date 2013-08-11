@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using System.Web.Mvc.Html
 @using Alicargo.Core.Localization
 @inherits BaseWebViewPage<ApplicationEditModel>
 
@@ -107,6 +108,6 @@
 	<h4>
 		@Resources.Pages.Transit
 	</h4>
-	@Html.EditorFor(x => x.Transit)
+	@Html.Action(MVC.Transit.EditByApplication((long?)ViewBag.ApplicationId))
 </div>
 

@@ -74,7 +74,8 @@ namespace Alicargo.Services
 
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				_transitService.Update(model.Transit, carrierSelectModel);
+				
+				//_transitService.Update(model.Transit, carrierSelectModel); // todo: fix
 
 				_authentications.Update(model.UserId, model.AuthenticationModel.Login, model.AuthenticationModel.NewPassword);
 

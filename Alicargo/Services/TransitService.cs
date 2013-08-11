@@ -21,24 +21,27 @@ namespace Alicargo.Services
 			_transitRepository = transitRepository;
 		}
 
-		public Transit[] Get(params long[] ids)
+		public TransitEditModel[] Get(params long[] ids)
 		{
 			var data = _transitRepository.Get(ids);
-			var carriers = _carrierService.ToDictionary();
 
-			return data.Select(x => new Transit(x, carriers[x.CarrierId])).ToArray();
+			return data.Select(TransitEditModel.GetModel).ToArray();
 		}
 
-		public void Update(Transit transit, CarrierSelectModel carrierModel)
+		public void Update(long id, TransitEditModel transit, CarrierSelectModel carrierModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				transit.CarrierId = GetCarrierId(carrierModel);
+				var carrierId = GetCarrierId(carrierModel);
 
-				_transitRepository.Update(transit);
+				var data = TransitEditModel.GetData(transit, carrierId);
+
+				data.Id = id;
+
+				_transitRepository.Update(data);
 
 				_unitOfWork.SaveChanges();
-				
+
 				ts.Complete();
 			}
 		}
@@ -49,13 +52,13 @@ namespace Alicargo.Services
 			_unitOfWork.SaveChanges();
 		}
 
-		public long AddTransit(TransitData model, CarrierSelectModel carrierModel)
+		public long AddTransit(TransitEditModel model, CarrierSelectModel carrierModel)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
-				model.CarrierId = GetCarrierId(carrierModel);
+				var carrierId = GetCarrierId(carrierModel);
 
-				var transitId = _transitRepository.Add(model);
+				var transitId = _transitRepository.Add(TransitEditModel.GetData(model, carrierId));
 
 				_unitOfWork.SaveChanges();
 

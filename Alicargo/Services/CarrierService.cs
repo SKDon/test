@@ -12,18 +12,22 @@ namespace Alicargo.Services
 	public sealed class CarrierService : ICarrierService
 	{
 		private readonly ICarrierRepository _carriers;
+		private readonly ITransitRepository _transitRepository;
 
-		public CarrierService(ICarrierRepository carriers)
+		public CarrierService(
+			ICarrierRepository carriers, 
+			ITransitRepository transitRepository)
 		{
 			_carriers = carriers;
+			_transitRepository = transitRepository;
 		}
 
-		public CarrierSelectModel Get(long? selectedId)
+		public CarrierSelectModel Get(long? transitId)
 		{
-			return selectedId.HasValue
+			return transitId.HasValue
 				? new CarrierSelectModel
 				{
-					CarrierId = selectedId.Value
+					CarrierId = _transitRepository.Get(transitId.Value).First().CarrierId
 				}
 				: new CarrierSelectModel
 				{

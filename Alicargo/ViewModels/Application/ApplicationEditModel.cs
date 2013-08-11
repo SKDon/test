@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Models;
 using Resources;
 
 namespace Alicargo.ViewModels.Application
@@ -11,12 +9,12 @@ namespace Alicargo.ViewModels.Application
 		public ApplicationEditModel()
 		{
 			Currency = new CurrencyModel();
+
+			//Transit = new TransitEditModel();
 		}
 
-		// todo: refactor
-		public Transit Transit { get; set; }
-
-		public long TransitId { get; set; }
+		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
+		public CurrencyModel Currency { get; set; }
 
 		#region Files
 
@@ -83,9 +81,6 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof(Entities), "TermsOfDelivery")]
 		public string TermsOfDelivery { get; set; }
-
-		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
-		public CurrencyModel Currency { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Country")]
 		public long? CountryId { get; set; }

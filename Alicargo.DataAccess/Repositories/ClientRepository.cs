@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
@@ -36,18 +37,15 @@ namespace Alicargo.DataAccess.Repositories
 				RS = x.RS,
 				TransitId = x.TransitId,
 
-				Transit = new Transit
+				Transit = new TransitEditModel
 				{
-					Id = x.TransitId,
 					Address = x.Transit.Address,
 					City = x.Transit.City,
 					Phone = x.Transit.Phone,
 					RecipientName = x.Transit.RecipientName,
-					CarrierId = x.Transit.CarrierId,
-					DeliveryTypeId = x.Transit.DeliveryTypeId,
-					MethodOfTransitId = x.Transit.MethodOfTransitId,
-					WarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
-					CarrierName = x.Transit.Carrier.Name
+					DeliveryType = (DeliveryType) x.Transit.DeliveryTypeId,
+					MethodOfTransit = (MethodOfTransit) x.Transit.MethodOfTransitId,
+					WarehouseWorkingTime = x.Transit.WarehouseWorkingTime
 				},
 
 				AuthenticationModel = new AuthenticationModel
