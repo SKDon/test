@@ -4,11 +4,11 @@ using Alicargo.Core.Exceptions;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Antlr.Runtime.Misc;
 using Resources;
 
 namespace Alicargo.Controllers
 {
-	// todo: refactor contracts
 	// todo: create a model binder for the ClientModel
 	public partial class ClientController : Controller
 	{
@@ -50,36 +50,47 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(ClientModel model, TransitEditModel transitModel, CarrierSelectModel carrierModel, AuthenticationModel authenticationModel)
+		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
+			CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
 			if (string.IsNullOrWhiteSpace(authenticationModel.NewPassword))
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
 
 			if (!ModelState.IsValid) return View();
 
-			try
+			long id = 0;
+			if (!HandleDublicateLogin(() => id = _clientService.Add(model, carrierModel, transitModel, authenticationModel)))
 			{
-				_clientService.Add(model, carrierModel, transitModel, authenticationModel);
-			}
-			catch (DublicateException ex)
-			{
-				// todo: refactor
-				if (ex.ToString().Contains("IX_User_Login"))
-				{
-					ModelState.AddModelError("AuthenticationModel.Login", Validation.LoginExists);
-				}
-				else
-				{
-					ModelState.AddModelError("", ex.ToString());
-				}
-
 				return View(model);
 			}
 
-			return RedirectToAction(MVC.Client.Index());
+			return RedirectToAction(MVC.Client.Edit(id));
 		}
 
 		#endregion
+
+		bool HandleDublicateLogin(Action action)
+		{
+			try
+			{
+				action();
+			}
+			catch (DublicateException ex)
+			{
+				if (ex.ToString().Contains("IX_User_Login"))
+				{
+					ModelState.AddModelError("Login", Validation.LoginExists);
+				}
+				else
+				{
+					throw;
+				}
+
+				return false;
+			}
+
+			return true;
+		}
 
 		#region Edit
 
@@ -91,6 +102,8 @@ namespace Alicargo.Controllers
 
 			var model = ClientModel.GetModel(data);
 
+			ViewBag.ClientId = data.Id;
+
 			return View(model);
 		}
 
@@ -98,15 +111,19 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Edit(long? id, ClientModel model, TransitEditModel transitModel, CarrierSelectModel carrierModel, AuthenticationModel authenticationModel)
+		public virtual ActionResult Edit(long? id, ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
+			CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
 			var data = _clientService.GetClientData(id);
 
 			if (!ModelState.IsValid) return View(model);
 
-			_clientService.Update(data.Id, model, carrierModel, transitModel, authenticationModel);
+			if (!HandleDublicateLogin(() => _clientService.Update(data.Id, model, carrierModel, transitModel, authenticationModel)))
+			{
+				return View(model);
+			}
 
-			return RedirectToAction(MVC.Client.Index());
+			return RedirectToAction(MVC.Client.Edit(data.Id));
 		}
 
 		#endregion

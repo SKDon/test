@@ -159,6 +159,9 @@
     </Compile>
     <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\CompositionRoot.cs" />
+    <Compile Include="AuthenticationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="BrockerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -170,6 +173,7 @@
     </Compile>
     <Compile Include="Controllers\ApplicationListController.cs" />
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrockerController.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\ScriptController.cs" />
@@ -1362,7 +1366,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Shared\Memu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
@@ -1401,6 +1405,8 @@
     <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
     <Content Include="Views\Application\EditorTemplates\CurrencyModel.cshtml" />
     <Content Include="Views\Transit\EditByApplication.cshtml" />
+    <Content Include="Views\Transit\EditByClient.cshtml" />
+    <Content Include="Views\Authentication\Client.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

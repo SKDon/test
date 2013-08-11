@@ -81,7 +81,6 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Login = "Login";
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string Edit = "Edit";
@@ -91,7 +90,6 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Login = "Login";
             public const string Index = "Index";
             public const string List = "List";
             public const string Edit = "Edit";
@@ -99,14 +97,6 @@ namespace Alicargo.Controllers
         }
 
 
-        static readonly ActionParamsClass_Login s_params_Login = new ActionParamsClass_Login();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Login LoginParams { get { return s_params_Login; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Login
-        {
-            public readonly string user = "user";
-        }
         static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
@@ -155,12 +145,10 @@ namespace Alicargo.Controllers
                 public readonly string Create = "Create";
                 public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
-                public readonly string Login = "Login";
             }
             public readonly string Create = "~/Views/User/Create.cshtml";
             public readonly string Edit = "~/Views/User/Edit.cshtml";
             public readonly string Index = "~/Views/User/Index.cshtml";
-            public readonly string Login = "~/Views/User/Login.cshtml";
         }
     }
 
@@ -168,25 +156,6 @@ namespace Alicargo.Controllers
     public partial class T4MVC_UserController : Alicargo.Controllers.UserController
     {
         public T4MVC_UserController() : base(Dummy.Instance) { }
-
-        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        public override System.Web.Mvc.ActionResult Login()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
-            LoginOverride(callInfo);
-            return callInfo;
-        }
-
-        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.SignIdModel user);
-
-        public override System.Web.Mvc.ActionResult Login(Alicargo.ViewModels.SignIdModel user)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "user", user);
-            LoginOverride(callInfo, user);
-            return callInfo;
-        }
 
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Core.Enums.RoleType roleType);
 

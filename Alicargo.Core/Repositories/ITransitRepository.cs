@@ -10,6 +10,7 @@ namespace Alicargo.Core.Repositories
 		TransitData[] Get(params long[] ids);
 		long? GetaApplicationId(long id);
 		TransitData GetByApplication(long id);
+		TransitData GetByClient(long clientId);
 		void Delete(long transitId);
 	}
 }

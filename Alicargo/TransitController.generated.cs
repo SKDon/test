@@ -53,6 +53,12 @@ namespace Alicargo.Controllers
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByApplication);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult EditByClient()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByClient);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public TransitController Actions { get { return MVC.Transit; } }
@@ -71,6 +77,7 @@ namespace Alicargo.Controllers
         {
             public readonly string Edit = "Edit";
             public readonly string EditByApplication = "EditByApplication";
+            public readonly string EditByClient = "EditByClient";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -78,6 +85,7 @@ namespace Alicargo.Controllers
         {
             public const string Edit = "Edit";
             public const string EditByApplication = "EditByApplication";
+            public const string EditByClient = "EditByClient";
         }
 
 
@@ -99,6 +107,14 @@ namespace Alicargo.Controllers
         {
             public readonly string applicationId = "applicationId";
         }
+        static readonly ActionParamsClass_EditByClient s_params_EditByClient = new ActionParamsClass_EditByClient();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditByClient EditByClientParams { get { return s_params_EditByClient; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditByClient
+        {
+            public readonly string clientId = "clientId";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -111,9 +127,11 @@ namespace Alicargo.Controllers
             {
                 public readonly string Edit = "Edit";
                 public readonly string EditByApplication = "EditByApplication";
+                public readonly string EditByClient = "EditByClient";
             }
             public readonly string Edit = "~/Views/Transit/Edit.cshtml";
             public readonly string EditByApplication = "~/Views/Transit/EditByApplication.cshtml";
+            public readonly string EditByClient = "~/Views/Transit/EditByClient.cshtml";
         }
     }
 
@@ -139,6 +157,16 @@ namespace Alicargo.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByApplication);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
             EditByApplicationOverride(callInfo, applicationId);
+            return callInfo;
+        }
+
+        partial void EditByClientOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? clientId);
+
+        public override System.Web.Mvc.PartialViewResult EditByClient(long? clientId)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByClient);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
+            EditByClientOverride(callInfo, clientId);
             return callInfo;
         }
 

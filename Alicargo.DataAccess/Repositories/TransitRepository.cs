@@ -48,16 +48,18 @@ namespace Alicargo.DataAccess.Repositories
 
 		public TransitData[] Get(params long[] ids)
 		{
-
 			return Context.Transits
-				.Where(x => ids.Contains(x.Id))
-				.Select(_selector)
-				.ToArray();
+						  .Where(x => ids.Contains(x.Id))
+						  .Select(_selector)
+						  .ToArray();
 		}
 
 		public long? GetaApplicationId(long id)
 		{
-			return Context.Applications.Where(x => x.TransitId == id).Select(x => x.Id).FirstOrDefault();
+			return Context.Applications
+						  .Where(x => x.TransitId == id)
+						  .Select(x => x.Id)
+						  .FirstOrDefault();
 		}
 
 		public TransitData GetByApplication(long id)
@@ -69,9 +71,19 @@ namespace Alicargo.DataAccess.Repositories
 						  .FirstOrDefault();
 		}
 
+		public TransitData GetByClient(long clientId)
+		{
+			return Context.Clients
+						  .Where(x => x.Id == clientId)
+						  .Select(x => x.Transit)
+						  .Select(_selector)
+						  .FirstOrDefault();
+		}
+
 		public void Delete(long transitId)
 		{
 			var transit = Context.Transits.First(x => x.Id == transitId);
+
 			Context.Transits.DeleteOnSubmit(transit);
 		}
 

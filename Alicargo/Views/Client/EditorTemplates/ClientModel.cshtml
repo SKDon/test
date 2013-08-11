@@ -44,7 +44,7 @@
 <div class="row">
 	<div class="span8">
 		@Html.LabelFor(model => model.Contacts)
-		@Html.TextAreaFor(model => model.Contacts)		
+		@Html.TextAreaFor(model => model.Contacts)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Email)
@@ -55,9 +55,9 @@
 <h4>
 	@Resources.Pages.Transit
 </h4>
-@*@Html.Action(MVC.Transit.EditByClient((long?)ViewBag.ClientId))*@
+@Html.Action(MVC.Transit.EditByClient((long?)ViewBag.ClientId))
 <hr />
 <h4>
 	@Resources.Pages.Authentication
 </h4>
-@*@Html.EditorFor(x => x.AuthenticationModel)*@
+@Html.Action(MVC.Authentication.Client((long?)ViewBag.ClientId))

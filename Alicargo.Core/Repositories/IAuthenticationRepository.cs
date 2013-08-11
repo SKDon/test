@@ -8,11 +8,12 @@ namespace Alicargo.Core.Repositories
 	{
 		bool IsInRole(RoleType role, long userId); // todo: tests
 		
-		AuthenticationData GetById(long value);
+		AuthenticationData GetById(long id);
 		AuthenticationData GetByLogin(string login);
 
 		Func<long> Add(string login, string password, string twoLetterISOLanguageName);
 		void Update(long userId, string newLogin, string newPassword);
 		void SetTwoLetterISOLanguageName(long id, string twoLetterISOLanguageName);
+		AuthenticationData GetByClientId(long clientId);
 	}
 }

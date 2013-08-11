@@ -49,9 +49,21 @@ namespace Alicargo.DataAccess.Repositories
 			user.TwoLetterISOLanguageName = twoLetterISOLanguageName;
 		}
 
+		public AuthenticationData GetByClientId(long clientId)
+		{
+			var enitity = Context.Clients
+								 .Where(x => x.Id == clientId)
+								 .Select(x => x.User)
+								 .First();
+
+			return MapUser(enitity);
+		}
+
 		public AuthenticationData GetByLogin(string login)
 		{
+			// ReSharper disable SpecifyStringComparison
 			var enitity = Context.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
+			// ReSharper restore SpecifyStringComparison
 
 			return MapUser(enitity);
 		}
@@ -108,6 +120,6 @@ namespace Alicargo.DataAccess.Repositories
 			SetNewPassword(newPassword, entity);
 
 			entity.Login = newLogin;
-		}		
+		}
 	}
 }

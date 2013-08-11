@@ -1,6 +1,6 @@
 ﻿@model SignIdModel
 
-@using (Html.BeginForm(MVC.User.Login(), FormMethod.Post, new { @class = "form-signin" }))
+@using (Html.BeginForm(MVC.Authentication.Login(), FormMethod.Post, new { @class = "form-signin" }))
 {
 	<h2 class="form-signin-heading">@Resources.Pages.Authentication</h2>
 	@Html.TextBoxFor(x => x.Login, new { @class = "input-block-level", placeholder = Resources.Pages.Login })

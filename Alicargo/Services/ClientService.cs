@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
@@ -113,8 +114,9 @@ namespace Alicargo.Services
 			}
 		}
 
-		public void Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel)
+		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel)
 		{
+			Func<long> id;
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var transitId = _transitService.AddTransit(transitModel, carrierModel);
@@ -142,8 +144,8 @@ namespace Alicargo.Services
 					RS = model.RS,
 					TransitId = transitId
 				};
-
-				_clientRepository.Add(data);
+				
+				id = _clientRepository.Add(data);
 
 				_unitOfWork.SaveChanges();
 
@@ -151,6 +153,8 @@ namespace Alicargo.Services
 			}
 
 			EmailOnAdd(model, authenticationModel);
+
+			return id();
 		}
 
 		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)

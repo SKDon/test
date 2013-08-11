@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Antlr.Runtime.Misc;
 
 namespace Alicargo.Controllers
 {
@@ -37,16 +38,28 @@ namespace Alicargo.Controllers
 		[ChildActionOnly]
 		public virtual PartialViewResult EditByApplication(long? applicationId)
 		{
+			return GetEditPartialView(applicationId, id => _transitRepository.GetByApplication(id));
+		}
+
+		private PartialViewResult GetEditPartialView(long? id, Func<long, TransitData> getData)
+		{
 			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
 
-			if (applicationId == null) return PartialView();
+			if (!id.HasValue) return PartialView();
 
-			var data = _transitRepository.GetByApplication(applicationId.Value);
-			var transit = TransitEditModel.GetModel(data);			
+			var data = getData(id.Value);
+
+			var transit = TransitEditModel.GetModel(data);
 
 			ViewBag.TransitId = data.Id;
 
 			return PartialView(transit);
+		}
+
+		[ChildActionOnly]
+		public virtual PartialViewResult EditByClient(long? clientId)
+		{
+			return GetEditPartialView(clientId, id => _transitRepository.GetByClient(id));
 		}
 
 		[HttpPost, Access(RoleType.Client)]
