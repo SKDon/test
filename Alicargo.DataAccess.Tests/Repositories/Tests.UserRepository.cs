@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Localization;
 using Alicargo.DataAccess.DbContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -77,11 +77,6 @@ namespace Alicargo.Services.Application
 
 		public void SetAdditionalData(params ApplicationEditModel[] applications)
 		{
-			SetTransitData(applications);
-		}
-
-		private void SetTransitData(params ApplicationEditModel[] applications)
-		{
 			var ids = applications.Select(x => x.TransitId).ToArray();
 			var transits = _transitService.Get(ids).ToDictionary(x => x.Id, x => x);
 

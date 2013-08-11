@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Contracts;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Repositories;
 

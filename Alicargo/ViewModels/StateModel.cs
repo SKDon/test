@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alicargo.Core.Contracts;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Models;
 using Resources;
 
 namespace Alicargo.ViewModels

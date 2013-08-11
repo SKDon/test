@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Alicargo.Core.Contracts;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Tests.Properties;
 using Alicargo.Services.Contract;
 using Alicargo.Services.Email;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 
@@ -8,24 +9,24 @@ namespace Alicargo.DataAccess.Repositories
 {
 	internal sealed class CarrierRepository : BaseRepository, ICarrierRepository
 	{
-		private readonly Expression<Func<DbContext.Carrier, Carrier>> _selector;
+		private readonly Expression<Func<DbContext.Carrier, CarrierData>> _selector;
 
 		public CarrierRepository(IUnitOfWork unitOfWork)
 			: base(unitOfWork)
 		{
-			_selector = x => new Carrier
+			_selector = x => new CarrierData
 			{
 				Name = x.Name,
 				Id = x.Id
 			};
 		}
 
-		public Carrier[] GetAll()
+		public CarrierData[] GetAll()
 		{
 			return Context.Carriers.Select(_selector).ToArray();
 		}
 
-		public Func<long> Add(Carrier carrier)
+		public Func<long> Add(CarrierData carrier)
 		{
 			var entity = new DbContext.Carrier
 			{
@@ -38,7 +39,7 @@ namespace Alicargo.DataAccess.Repositories
 			return () => entity.Id;
 		}
 
-		public Carrier Get(string name)
+		public CarrierData Get(string name)
 		{
 			return Context.Carriers.Select(_selector).FirstOrDefault(x => x.Name.Equals(name));
 		}

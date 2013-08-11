@@ -3,7 +3,6 @@ using Alicargo.Services.Application;
 // ReSharper disable ImplicitlyCapturedClosure
 using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Services;
 using FluentAssertions;

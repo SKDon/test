@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Repositories;
 using Alicargo.Core.Security;

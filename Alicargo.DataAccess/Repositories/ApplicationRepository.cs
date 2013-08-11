@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;

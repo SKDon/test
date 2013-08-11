@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Core.Contracts;
 
 namespace Alicargo.Core.Repositories
 {

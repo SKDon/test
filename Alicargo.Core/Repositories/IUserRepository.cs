@@ -1,4 +1,4 @@
-﻿using Alicargo.Core.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 
 namespace Alicargo.Core.Repositories

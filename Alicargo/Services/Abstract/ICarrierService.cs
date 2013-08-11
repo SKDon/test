@@ -7,7 +7,7 @@ namespace Alicargo.Services.Abstract
 	public interface ICarrierService
 	{
 		CarrierSelectModel Get(long? selectedId);
-		Func<long> AddOrGetCarrier(CarrierSelectModel carrierSelectModel);
+		Func<long> AddOrGetCarrier(string name);
 		Dictionary<long, string> ToDictionary();
 	}
 }

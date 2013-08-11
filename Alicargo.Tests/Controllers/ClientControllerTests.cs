@@ -39,7 +39,6 @@ namespace Alicargo.Tests.Controllers
 				.Create();
 
 			var carrierSelectModel = _context.Build<CarrierSelectModel>()
-				.With(x => x.Carriers, null)
 				.Create();
 
 			_context.HttpClient.PostAsJsonAsync("Client/Create", new { model, carrierSelectModel })

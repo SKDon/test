@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contracts;
 
 namespace Alicargo.Services.Abstract
 {

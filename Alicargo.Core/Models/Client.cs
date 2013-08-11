@@ -1,6 +1,4 @@
-﻿using Alicargo.Core.Contracts;
-
-namespace Alicargo.Core.Models
+﻿namespace Alicargo.Core.Models
 {
 	public sealed class Client : ClientData
 	{

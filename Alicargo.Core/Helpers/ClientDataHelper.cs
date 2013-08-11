@@ -1,5 +1,4 @@
-﻿using Alicargo.Core.Contracts;
-using Alicargo.Core.Models;
+﻿using Alicargo.Core.Models;
 
 namespace Alicargo.Core.Helpers
 {

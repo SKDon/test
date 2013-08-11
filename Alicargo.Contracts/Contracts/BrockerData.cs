@@ -1,6 +1,6 @@
-﻿namespace Alicargo.Core.Models
+﻿namespace Alicargo.Contracts.Contracts
 {
-	public sealed class Brocker
+	public sealed class BrockerData
 	{
 		public string Name { get; set; }
 		public long Id { get; set; }

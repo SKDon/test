@@ -40,6 +40,8 @@
     <Compile Include="Contracts\ApplicationDetailsData.cs" />
     <Compile Include="Contracts\ApplicationListItemData.cs" />
     <Compile Include="Contracts\AuthenticationData.cs" />
+    <Compile Include="Contracts\BrockerData.cs" />
+    <Compile Include="Contracts\CarrierData.cs" />
     <Compile Include="Contracts\CountryData.cs" />
     <Compile Include="Contracts\FileHolder.cs" />
     <Compile Include="Contracts\StateData.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,9 +9,9 @@ namespace Alicargo.DataAccess.Tests.Repositories
 {
 	public partial class Tests
 	{
-		private Carrier CreateTestCarrier()
+		private CarrierData CreateTestCarrier()
 		{
-			var data = _fixture.Create<Carrier>();
+			var data = _fixture.Create<CarrierData>();
 
 			var id = _carrierRepository.Add(data);
 			_unitOfWork.SaveChanges();

@@ -1,15 +1,13 @@
-﻿using Alicargo.Core.Contracts;
-using Alicargo.Core.Models;
+﻿using Alicargo.Core.Models;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Abstract
 {
 	public interface ITransitService
 	{
-		long AddTransit(TransitData model, CarrierSelectModel carrierSelectModel);
-		long AddOrGetCarrier(CarrierSelectModel carrierSelectModel);
+		long AddTransit(TransitData model, CarrierSelectModel carrierModel);
 		Transit[] Get(params long[] ids);
-		void Update(Transit transit, CarrierSelectModel carrierSelectModel);
+		void Update(Transit transit, CarrierSelectModel carrierModel);
 		void Delete(long transitId);
 	}
 }

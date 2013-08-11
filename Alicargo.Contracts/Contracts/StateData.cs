@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alicargo.Core.Contracts
+namespace Alicargo.Contracts.Contracts
 {
 	public class StateData
 	{

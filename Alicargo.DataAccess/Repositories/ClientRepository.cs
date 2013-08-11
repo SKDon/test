@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;

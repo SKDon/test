@@ -1,11 +1,12 @@
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Models;
 
 namespace Alicargo.Core.Repositories
 {
 	public interface IBrockerRepository
 	{
-		Brocker Get(long brockerId);
-		Brocker GetByUserId(long userId);
-		Brocker[] GetAll();
+		BrockerData Get(long brockerId);
+		BrockerData GetByUserId(long userId);
+		BrockerData[] GetAll();
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Models;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -20,14 +20,15 @@ namespace Alicargo.Services
 
 		public CarrierSelectModel Get(long? selectedId)
 		{
-			var all = _carriers.GetAll();
-
-			var model = new CarrierSelectModel
-			{
-				Carriers = all.ToDictionary(x => x.Name, x => x.Name),
-				CarrierName = all.First(x => !selectedId.HasValue || x.Id == selectedId).Name
-			};
-			return model;
+			return selectedId.HasValue
+				? new CarrierSelectModel
+				{
+					CarrierId = selectedId.Value
+				}
+				: new CarrierSelectModel
+				{
+					CarrierId = _carriers.GetAll().First().Id
+				};
 		}
 
 		public Dictionary<long, string> ToDictionary()
@@ -35,13 +36,14 @@ namespace Alicargo.Services
 			return _carriers.GetAll().ToDictionary(x => x.Id, x => x.Name);
 		}
 
-		public Func<long> AddOrGetCarrier(CarrierSelectModel carrierSelectModel)
+		public Func<long> AddOrGetCarrier(string name)
 		{
-			var carrierName = carrierSelectModel.NewCarrierName ?? carrierSelectModel.CarrierName;
-			var carrier = _carriers.Get(carrierName);
-			if (carrier != null) return () =>  carrier.Id;
+			if (name == null) throw new ArgumentNullException("name");
 
-			return _carriers.Add(new Carrier { Name = carrierName });
+			var carrier = _carriers.Get(name);
+			if (carrier != null) return () => carrier.Id;
+
+			return _carriers.Add(new CarrierData { Name = name });
 		}
 	}
 }

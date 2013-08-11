@@ -3,7 +3,6 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers
 {
-	// todo: refactor contracts
 	public partial class CarrierController : Controller
 	{
 		private readonly ICarrierService _carriers;
@@ -14,9 +13,10 @@ namespace Alicargo.Controllers
 		}
 
 		[ChildActionOnly]
-		// todo: use the SelecetModel
 		public virtual PartialViewResult Select(long? selectedId)
 		{
+			ViewBag.Carriers = _carriers.ToDictionary();
+
 			var model = _carriers.Get(selectedId);
 
 			return PartialView(model);

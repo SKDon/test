@@ -91,10 +91,7 @@
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Localization\Cultures.cs" />
     <Compile Include="Localization\LocalizeEnumExtension.cs" />
-    <Compile Include="Models\Brocker.cs" />
-    <Compile Include="Models\Carrier.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Factory.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Repositories\IApplicationRepository.cs" />
     <Compile Include="Repositories\IBrockerRepository.cs" />
@@ -107,7 +104,6 @@
     <Compile Include="Repositories\ITransitRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\IAuthenticationRepository.cs" />
-    <Compile Include="Models\Mark.cs" />
     <Compile Include="Resources\Enums.it.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
