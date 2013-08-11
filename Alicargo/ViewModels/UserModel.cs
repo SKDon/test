@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Models;
 using Resources;
 
 namespace Alicargo.ViewModels

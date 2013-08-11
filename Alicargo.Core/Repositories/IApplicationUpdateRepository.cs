@@ -9,10 +9,10 @@ namespace Alicargo.Core.Repositories
 		Func<long> Add(ApplicationData application, byte[] swiftFile, byte[] invoiceFile, byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile);
 		void Delete(long id);
 
-		void SetAirWaybill(long applicationId, long? AirWaybillId);
+		void SetAirWaybill(long applicationId, long? airWaybillId);
 		void SetState(long id, long stateId);
 		void SetDateInStock(long applicationId, DateTimeOffset dateTimeOffset);
-		void SetTransitReference(long id, string TransitReference);
+		void SetTransitReference(long id, string transitReference);
 		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);
 	}
 }

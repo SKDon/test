@@ -39,9 +39,9 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		// todo: test
-		public void SetAirWaybill(long id, long? AirWaybillId)
+		public void SetAirWaybill(long id, long? airWaybillId)
 		{
-			Update(id, application => application.AirWaybillId = AirWaybillId);
+			Update(id, application => application.AirWaybillId = airWaybillId);
 		}
 
 		// todo: test
@@ -50,9 +50,9 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.DateInStock = dateTimeOffset);
 		}
 
-		public void SetTransitReference(long id, string TransitReference)
+		public void SetTransitReference(long id, string transitReference)
 		{
-			Update(id, application => application.TransitReference = TransitReference);
+			Update(id, application => application.TransitReference = transitReference);
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
