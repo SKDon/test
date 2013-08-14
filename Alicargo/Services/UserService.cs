@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;

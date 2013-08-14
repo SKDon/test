@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Alicargo.Core.Models;
+using Alicargo.Contracts.Contracts;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -19,22 +19,22 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
 			Assert.AreEqual(oldData.Length + 1, newData.Length);
 
-			var AirWaybill = _AirWaybillRepository.Get(data.Id).First();
+			var airWaybill = _AirWaybillRepository.Get(data.Id).First();
 
-			data.ShouldBeEquivalentTo( AirWaybill);
+			data.ShouldBeEquivalentTo( airWaybill);
 		}
 
 		[TestMethod]
 		public void Test_AirWaybillRepository_Count_GetRange()
 		{
-			var AirWaybillDatas = _AirWaybillRepository.GetAll();
+			var airWaybillDatas = _AirWaybillRepository.GetAll();
 			var count = _AirWaybillRepository.Count();
 
-			Assert.AreEqual(AirWaybillDatas.Length, count);
+			Assert.AreEqual(airWaybillDatas.Length, count);
 
 			var range = _AirWaybillRepository.GetRange(0, (int)count);
 
-			AirWaybillDatas.ShouldBeEquivalentTo(range);
+			airWaybillDatas.ShouldBeEquivalentTo(range);
 		}
 
 		private AirWaybillData CreateTestAirWaybill()

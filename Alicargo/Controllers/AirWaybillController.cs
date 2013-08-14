@@ -7,13 +7,12 @@ using Alicargo.Core.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.AirWaybill;
 using Microsoft.Ajax.Utilities;
 using Resources;
 
 namespace Alicargo.Controllers
 {
-	// todo: refactor contracts
-	// todo: rename to AwbContorller
 	public partial class AirWaybillController : Controller
 	{
 		private readonly IAwbPresenter _awbPresenter;
@@ -44,7 +43,7 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		//[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Sender)]
-		public virtual ActionResult Create(long applicationId, AirWaybillModel model)
+		public virtual ActionResult Create(long applicationId, AirWaybillEditModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
 
@@ -100,12 +99,6 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		//[HttpPost]
-		//public virtual JsonResult States(long id)
-		//{
-		//	return Json(_awbPresenter.GetAvailableStates(id));
-		//}
-
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
 		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
 		{
@@ -147,17 +140,19 @@ namespace Alicargo.Controllers
 		{
 			var model = _awbPresenter.Get(id);
 
+			ViewBag.AwbId = id;
+
 			return View(model);
 		}
 
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
-		public virtual ActionResult Edit(AirWaybillModel model)
+		public virtual ActionResult Edit(long id, AirWaybillEditModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
 
 			try
 			{
-				_awbManager.Update(model);
+				_awbManager.Update(id, model);
 			}
 			catch (DublicateException)
 			{
@@ -165,7 +160,7 @@ namespace Alicargo.Controllers
 				return View(model);
 			}
 
-			return RedirectToAction(MVC.AirWaybill.Edit(model.Id));
+			return RedirectToAction(MVC.AirWaybill.Edit(id));
 		}
 
 		#endregion

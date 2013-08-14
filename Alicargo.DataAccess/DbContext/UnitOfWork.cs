@@ -4,7 +4,6 @@ using System.Data.Linq;
 using System.Diagnostics;
 using System.Transactions;
 using Alicargo.Core.Exceptions;
-using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 
 namespace Alicargo.DataAccess.DbContext
@@ -54,6 +53,4 @@ namespace Alicargo.DataAccess.DbContext
 			Context.Dispose();
 		}
 	}
-
-	partial class AirWaybill : IAirWaybillData { }
 }

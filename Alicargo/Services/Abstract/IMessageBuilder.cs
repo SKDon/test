@@ -1,4 +1,4 @@
-﻿using Alicargo.Core.Models;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
@@ -14,13 +14,13 @@ namespace Alicargo.Services.Abstract
 		string DefaultSubject { get; }
 		string ClientAdd(ClientModel model, AuthenticationModel authenticationModel);
 
-		string AwbCreate(AirWaybillModel model, string culture);
-		string AwbSet(AirWaybillModel model, string applicationNumber, string culture);
-		string AwbPackingFileAdded(AirWaybillModel model);
-		string AwbAWBFileAdded(AirWaybillModel model);
-		string AwbGTDAdditionalFileAdded(AirWaybillModel model);
-		string AwbGTDFileAdded(AirWaybillModel model);
-		string AwbInvoiceFileAdded(AirWaybillModel model);
+		string AwbCreate(AirWaybillData model, string culture, float totalWeight, int totalCount);
+		string AwbSet(AirWaybillData model, string applicationNumber, string culture, float totalWeight, int totalCount);
+		string AwbPackingFileAdded(AirWaybillData model);
+		string AwbAWBFileAdded(AirWaybillData model);
+		string AwbGTDAdditionalFileAdded(AirWaybillData model);
+		string AwbGTDFileAdded(AirWaybillData model);
+		string AwbInvoiceFileAdded(AirWaybillData model);
 
 		string ApplicationUpdate { get; }
 		string ApplicationAdd(ApplicationDetailsModel modell, string culture);

@@ -303,6 +303,13 @@ namespace Alicargo.Controllers
             public readonly string DetailsTemplate = "~/Views/AirWaybill/DetailsTemplate.cshtml";
             public readonly string Edit = "~/Views/AirWaybill/Edit.cshtml";
             public readonly string Index = "~/Views/AirWaybill/Index.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string AirWaybillModel = "AirWaybillModel";
+            }
         }
     }
 
@@ -321,9 +328,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, Alicargo.ViewModels.AirWaybillModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model);
 
-        public override System.Web.Mvc.ActionResult Create(long applicationId, Alicargo.ViewModels.AirWaybillModel model)
+        public override System.Web.Mvc.ActionResult Create(long applicationId, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
@@ -416,13 +423,14 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.AirWaybillModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.AirWaybillModel model)
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            EditOverride(callInfo, model);
+            EditOverride(callInfo, id, model);
             return callInfo;
         }
 

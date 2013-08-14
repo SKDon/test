@@ -105,7 +105,7 @@ namespace Alicargo.Controllers
             public readonly string model = "model";
             public readonly string transitModel = "Transit";
             public readonly string carrierModel = "carrierModel";
-            public readonly string authenticationModel = "authenticationModel";
+            public readonly string authenticationModel = "Authentication";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -117,7 +117,7 @@ namespace Alicargo.Controllers
             public readonly string model = "model";
             public readonly string transitModel = "Transit";
             public readonly string carrierModel = "carrierModel";
-            public readonly string authenticationModel = "authenticationModel";
+            public readonly string authenticationModel = "Authentication";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -190,7 +190,7 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "authenticationModel", authenticationModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Authentication", authenticationModel);
             CreateOverride(callInfo, model, transitModel, carrierModel, authenticationModel);
             return callInfo;
         }
@@ -214,7 +214,7 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "authenticationModel", authenticationModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Authentication", authenticationModel);
             EditOverride(callInfo, id, model, transitModel, carrierModel, authenticationModel);
             return callInfo;
         }

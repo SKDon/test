@@ -45,6 +45,7 @@
     <Compile Include="Contracts\ClientData.cs" />
     <Compile Include="Contracts\CountryData.cs" />
     <Compile Include="Contracts\FileHolder.cs" />
+    <Compile Include="Contracts\AirWaybillData.cs" />
     <Compile Include="Contracts\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\UserData.cs" />

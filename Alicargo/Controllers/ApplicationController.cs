@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
-using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;

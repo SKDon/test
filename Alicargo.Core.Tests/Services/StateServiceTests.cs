@@ -3,7 +3,6 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
-using Alicargo.Core.Models;
 using Alicargo.Services;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -203,11 +202,11 @@ namespace Alicargo.Core.Tests.Services
 		public void Test_ApplyBusinessLogicToStates_AirWaybillIdNotNull()
 		{
 			var applicationData = _context.Create<ApplicationData>();
-			var AirWaybillData = _context.CreateMany<AirWaybillData>().ToArray();
-			AirWaybillData[0].GTD = null;
+			var airWaybillData = _context.CreateMany<AirWaybillData>().ToArray();
+			airWaybillData[0].GTD = null;
 			var availableStates = _context.CreateMany<long>(1).ToArray();
 
-			_context.AirWaybillRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(AirWaybillData);
+			_context.AirWaybillRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(airWaybillData);
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(availableStates[0]);
 
 			var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, availableStates);

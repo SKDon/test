@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.AirWaybill;
 using Moq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
@@ -31,7 +31,7 @@ namespace Alicargo.TestHelpers
 
 
 			Fixture.Register(() =>
-				Fixture.Build<AirWaybillModel>()
+				Fixture.Build<AirWaybillEditModel>()
 					.Without(x => x.DateOfDepartureLocalString)
 					.Without(x => x.DateOfArrivalLocalString)
 					.Create());

@@ -14,8 +14,8 @@
     <RootNamespace>Alicargo</RootNamespace>
     <AssemblyName>Alicargo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <MvcBuildViews>true</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -129,7 +129,7 @@
     </Reference>
     <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\T4MVCExtensions.3.7.1\lib\net40\T4MVCExtensions.dll</HintPath>
+      <HintPath>..\packages\T4MVCExtensions.3.7.3\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
     <Reference Include="WebActivator, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -137,7 +137,7 @@
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebActivatorEx.2.0.2\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -175,6 +175,15 @@
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrockerController.cs" />
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SenderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\ScriptController.cs" />
     <Compile Include="Controllers\SenderController.cs" />
@@ -182,9 +191,6 @@
     <Compile Include="Helpers\StyleRelativePathTransform.cs" />
     <Compile Include="Helpers\StyleRelativePathTransformBundle.cs" />
     <Compile Include="Helpers\CustomHandleErrorInfo.cs" />
-    <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="ModelBinders\ApplicationModelBinder.cs" />
     <Compile Include="ModelBinders\BrockerAWBModelBinder.cs" />
     <Compile Include="ModelBinders\ApplicationSenderEditBinder.cs" />
@@ -242,12 +248,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Validation.it.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScriptController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SenderController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationManager.cs" />
     <Compile Include="Services\Abstract\IApplicationPresenter.cs" />
@@ -267,7 +267,7 @@
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Contract\Recipient.cs" />
     <Compile Include="Services\LocalizationService.cs" />
-    <Compile Include="Services\AwbManager.cs" />
+    <Compile Include="Services\AirWaybill\AwbManager.cs" />
     <Compile Include="Services\Contract\Message.cs" />
     <Compile Include="Services\Email\ApplicationManagerWithMailing.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
@@ -281,7 +281,7 @@
     <Compile Include="Services\Email\MessageBuilder.cs" />
     <Compile Include="Services\Email\SilentMailSender.cs" />
     <Compile Include="Services\IdentityService.cs" />
-    <Compile Include="Services\AwbPresenter.cs" />
+    <Compile Include="Services\AirWaybill\AwbPresenter.cs" />
     <Compile Include="Services\StateConfig.cs" />
     <Compile Include="Services\StateService.cs" />
     <Compile Include="Services\TransitService.cs" />
@@ -300,6 +300,7 @@
     <Compile Include="UserController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
     <Compile Include="ViewModels\Application\ApplicationModelHelper.cs" />
@@ -317,7 +318,7 @@
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
     <Compile Include="ViewModels\Application\ApplicationEditModel.cs" />
     <Compile Include="ViewModels\CarrierSelectModel.cs" />
-    <Compile Include="ViewModels\AirWaybillModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\AirWaybillEditModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\ListCollection.cs" />
     <Compile Include="ViewModels\SignIdModel.cs" />
@@ -1374,7 +1375,7 @@
     <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\AirWaybillModel.cshtml" />
+    <Content Include="Views\AirWaybill\EditorTemplates\AirWaybillModel.cshtml" />
     <Content Include="Views\Carrier\Select.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SelectModel.cshtml" />
     <Content Include="Views\AirWaybill\Index.cshtml" />
@@ -1390,7 +1391,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\UserModel.cshtml" />
+    <Content Include="Views\User\EditorTemplates\UserModel.cshtml" />
     <Content Include="Views\Application\DisplayTemplates\ApplicationDetailsModel.cshtml" />
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Transit\Edit.cshtml" />

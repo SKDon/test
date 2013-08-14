@@ -150,13 +150,14 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void AWBOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.BrockerAWBModel model);
+        partial void AWBOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.BrockerAWBModel model);
 
-        public override System.Web.Mvc.ActionResult AWB(Alicargo.ViewModels.BrockerAWBModel model)
+        public override System.Web.Mvc.ActionResult AWB(long id, Alicargo.ViewModels.BrockerAWBModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AWB);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            AWBOverride(callInfo, model);
+            AWBOverride(callInfo, id, model);
             return callInfo;
         }
 

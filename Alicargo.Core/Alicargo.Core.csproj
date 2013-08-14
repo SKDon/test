@@ -43,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\IAirWaybillData.cs" />
-    <Compile Include="Models\AirWaybillData.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
     <Compile Include="Enums\DeliveryType.cs" />
@@ -52,6 +50,7 @@
     <Compile Include="Enums\MethodOfTransit.cs" />
     <Compile Include="Exceptions\InvalidLogicException.cs" />
     <Compile Include="Exceptions\DublicateException.cs" />
+    <Compile Include="Exceptions\UnexpectedStateException.cs" />
     <Compile Include="Services\ExtensionHelper.cs" />
     <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />

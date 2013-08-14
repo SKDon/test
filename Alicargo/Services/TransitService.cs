@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;

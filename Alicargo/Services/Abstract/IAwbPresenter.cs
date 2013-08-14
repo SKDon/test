@@ -1,10 +1,11 @@
 ﻿using Alicargo.ViewModels;
+using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.Abstract
 {
 	public interface IAwbPresenter
-	{		
-		ListCollection<AirWaybillModel> List(int take, int skip);
-		AirWaybillModel Get(long id);		
+	{
+		ListCollection<AirWaybillListItem> List(int take, int skip);
+		AirWaybillEditModel Get(long id);
 	}
 }

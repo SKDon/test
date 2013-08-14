@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
@@ -9,37 +11,35 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
-	// todo: refactor contracts
 	public partial class BrockerController : Controller
 	{
+		private readonly IAirWaybillRepository _airWaybillRepository;
+		private readonly IAwbManager _awbManager;
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateConfig _stateConfig;
-		private readonly IAirWaybillRepository _AirWaybillRepository;
-		private readonly IAwbPresenter _awbPresenter;
-		private readonly IAwbManager _awbManager;
 
 		public BrockerController(
 			IBrockerRepository brockerRepository,
 			IStateConfig stateConfig,
-			IAirWaybillRepository AirWaybillRepository,
-			IAwbPresenter awbPresenter,
+			IAirWaybillRepository airWaybillRepository,
 			IAwbManager awbManager)
 		{
 			_brockerRepository = brockerRepository;
 			_stateConfig = stateConfig;
-			_AirWaybillRepository = AirWaybillRepository;
-			_awbPresenter = awbPresenter;
+			_airWaybillRepository = airWaybillRepository;
 			_awbManager = awbManager;
 		}
 
-		[ChildActionOnly, Access(RoleType.Admin, RoleType.Sender)]
+		[ChildActionOnly]
 		public virtual PartialViewResult Select(string name, long? selectedId)
 		{
 			var all = _brockerRepository.GetAll();
 
 			var model = new SelectModel
 			{
-				Id = selectedId.HasValue ? selectedId.Value : all.First().Id, // todo: test
+				Id = selectedId.HasValue
+					? selectedId.Value
+					: all.First().Id, // todo: test
 				List = all.ToDictionary(x => x.Id, x => x.Name),
 				Name = name
 			};
@@ -50,58 +50,66 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Brocker), HttpGet]
 		public virtual ViewResult AWB(long id)
 		{
-			var data = _AirWaybillRepository.Get(id).First();
+			var data = _airWaybillRepository.Get(id).First();
 
 			if (data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
 			{
-				return View("Message", (object)string.Format(Pages.CantEditAirWaybill, data.Bill));
+				return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
 			var model = new BrockerAWBModel
 			{
 				GTD = data.GTD,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				GTDAdditionalFile = null,
 				InvoiceFileName = data.InvoiceFileName,
-				InvoiceFile = null,
-				GTDFile = null,
 				GTDFileName = data.GTDFileName,
 				PackingFileName = data.PackingFileName,
-				Id = id,
+				GTDAdditionalFile = null,
+				InvoiceFile = null,
+				GTDFile = null,
 				PackingFile = null
 			};
 
-			ViewBag.AWB = data.Bill;
+			BindBag(data);
 
 			return View(model);
 		}
 
+		private void BindBag(AirWaybillData data)
+		{
+			ViewBag.AWB = data.Bill;
+			ViewBag.AwbId = data.Id;
+		}
+
 		// todo: test
 		[Access(RoleType.Brocker), HttpPost]
-		public virtual ActionResult AWB(BrockerAWBModel model)
+		public virtual ActionResult AWB(long id, BrockerAWBModel model)
 		{
-			if (!ModelState.IsValid) return View(model);
-
-			var data = _awbPresenter.Get(model.Id);
-
-			if (data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
+			if (!ModelState.IsValid)
 			{
-				return View("Message", (object)string.Format(Pages.CantEditAirWaybill, data.Bill));
+				var data = _airWaybillRepository.Get(id).First();
+				BindBag(data);
+
+				return View(model);
 			}
 
-			data.GTD = model.GTD;
-			data.GTDFile = model.GTDFile;
-			data.GTDFileName = model.GTDFileName;
-			data.InvoiceFile = model.InvoiceFile;
-			data.InvoiceFileName = model.InvoiceFileName;
-			data.GTDAdditionalFile = model.GTDAdditionalFile;
-			data.GTDAdditionalFileName = model.GTDAdditionalFileName;
-			data.PackingFile = model.PackingFile;
-			data.PackingFileName = model.PackingFileName;
+			try
+			{
+				_awbManager.Update(id, model);
+			}
+			catch (UnexpectedStateException ex)
+			{
+				if (ex.StateId == _stateConfig.CargoIsCustomsClearedStateId)
+				{
+					var data = _airWaybillRepository.Get(id).First();
 
-			_awbManager.Update(data);
+					return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
+				}
 
-			return RedirectToAction(MVC.Brocker.AWB(model.Id));
+				throw;
+			}
+
+			return RedirectToAction(MVC.Brocker.AWB(id));
 		}
 	}
 }

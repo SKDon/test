@@ -49,11 +49,9 @@ namespace T4MVC
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string AirWaybillModel = "AirWaybillModel";
                 public readonly string AuthenticationModel = "AuthenticationModel";
                 public readonly string SelectModel = "SelectModel";
                 public readonly string TransitEditModel = "TransitEditModel";
-                public readonly string UserModel = "UserModel";
             }
         }
     }

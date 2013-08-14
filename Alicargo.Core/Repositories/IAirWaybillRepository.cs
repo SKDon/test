@@ -1,12 +1,11 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Models;
 
 namespace Alicargo.Core.Repositories
 {
 	public interface IAirWaybillRepository
 	{
-		Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile,  byte[] packingFile, byte[] invoiceFile, byte[] awbFile);
+		Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile);
 		long Count(long? brockerId = null);
 
 		AirWaybillData[] Get(params long[] ids);

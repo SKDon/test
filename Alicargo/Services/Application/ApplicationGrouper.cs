@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Core.Models;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
@@ -61,12 +61,12 @@ namespace Alicargo.Services.Application
 			}
 		}
 
-		private static string GetAirWayBillDisplay(AirWaybillData airWaybillData)
+		private static string GetAirWayBillDisplay(AirWaybillData airWaybillModel)
 		{
-			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", airWaybillData.Bill,
-				airWaybillData.DepartureAirport, airWaybillData.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
-				airWaybillData.ArrivalAirport, airWaybillData.DateOfArrival.ToString("ddMMMyyyy").ToUpperInvariant(),
-				string.IsNullOrWhiteSpace(airWaybillData.GTD) ? "" : string.Format(" &plusmn; {0}_{1}", Entities.GTD, airWaybillData.GTD));
+			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", airWaybillModel.Bill,
+				airWaybillModel.DepartureAirport, airWaybillModel.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
+				airWaybillModel.ArrivalAirport, airWaybillModel.DateOfArrival.ToString("ddMMMyyyy").ToUpperInvariant(),
+				string.IsNullOrWhiteSpace(airWaybillModel.GTD) ? "" : string.Format(" &plusmn; {0}_{1}", Entities.GTD, airWaybillModel.GTD));
 		}
 
 		private ApplicationGroup GetApplicationGroup<T>(
