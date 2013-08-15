@@ -18,7 +18,7 @@ namespace Alicargo.Services.Email
 		private readonly IStateConfig _stateConfig;
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IAuthenticationRepository _authenticationRepository;
-		private readonly IAirWaybillRepository _airWaybillRepository;
+		private readonly IAWBRepository _awbRepository;
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationManager _manager;
 
@@ -28,7 +28,7 @@ namespace Alicargo.Services.Email
 			IStateConfig stateConfig,
 			IApplicationPresenter applicationPresenter,
 			IAuthenticationRepository authenticationRepository,
-			IAirWaybillRepository airWaybillRepository,
+			IAWBRepository awbRepository,
 			IApplicationRepository applicationRepository,
 			IApplicationManager manager)
 		{
@@ -37,7 +37,7 @@ namespace Alicargo.Services.Email
 			_stateConfig = stateConfig;
 			_applicationPresenter = applicationPresenter;
 			_authenticationRepository = authenticationRepository;
-			_airWaybillRepository = airWaybillRepository;
+			_awbRepository = awbRepository;
 			_applicationRepository = applicationRepository;
 			_manager = manager;
 		}
@@ -206,8 +206,8 @@ namespace Alicargo.Services.Email
 
 			if (airWaybillId.HasValue)
 			{
-				var gtdFile = _airWaybillRepository.GetGTDFile(airWaybillId.Value);
-				var gtdAdditionalFile = _airWaybillRepository.GTDAdditionalFile(airWaybillId.Value);
+				var gtdFile = _awbRepository.GetGTDFile(airWaybillId.Value);
+				var gtdAdditionalFile = _awbRepository.GTDAdditionalFile(airWaybillId.Value);
 
 				if (gtdFile != null) files.Add(gtdFile);
 				if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);

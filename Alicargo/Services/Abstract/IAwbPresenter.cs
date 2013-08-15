@@ -1,4 +1,5 @@
-﻿using Alicargo.ViewModels;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.Abstract
@@ -7,5 +8,8 @@ namespace Alicargo.Services.Abstract
 	{
 		ListCollection<AirWaybillListItem> List(int take, int skip);
 		AirWaybillEditModel Get(long id);
+		AirWaybillData GetData(long id);
+		AirWaybillAggregate GetAggregate(long id);
+		BrockerData GetBrocker(long brockerId);
 	}
 }

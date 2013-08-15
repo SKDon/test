@@ -12,27 +12,27 @@ namespace Alicargo.Services.Email
 	// todo: test
 	public sealed class AwbManagerWithMailing : IAwbManager
 	{
-		private readonly IAirWaybillRepository _awbRepository;
+		private readonly IAwbPresenter _awbPresenter;
+		private readonly IAWBRepository _awbRepository;
 		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IBrockerRepository _brockerRepository;
-		private readonly IMailSender _mailSender;
 		private readonly IAwbManager _manager;
+		private readonly IMailSender _mailSender;
 		private readonly IMessageBuilder _messageBuilder;
 
 		public AwbManagerWithMailing(
 			IAwbManager manager,
 			IApplicationPresenter applicationPresenter,
-			IAirWaybillRepository awbRepository,
+			IAwbPresenter awbPresenter,
+			IAWBRepository awbRepository,
 			IMailSender mailSender,
-			IMessageBuilder messageBuilder,
-			IBrockerRepository brockerRepository)
+			IMessageBuilder messageBuilder)
 		{
 			_manager = manager;
 			_applicationPresenter = applicationPresenter;
+			_awbPresenter = awbPresenter;
 			_awbRepository = awbRepository;
 			_mailSender = mailSender;
 			_messageBuilder = messageBuilder;
-			_brockerRepository = brockerRepository;
 		}
 
 		public long Create(long applicationId, AirWaybillEditModel model)
@@ -50,10 +50,10 @@ namespace Alicargo.Services.Email
 
 			if (awbId.HasValue)
 			{
-				var model = _awbRepository.Get(awbId.Value).First();
+				var model = _awbPresenter.GetData(awbId.Value);
 				var applicationModel = _applicationPresenter.GetDetails(applicationId);
 
-				var aggregate = _awbRepository.GetAggregate(awbId.Value).First();
+				var aggregate = _awbPresenter.GetAggregate(awbId.Value);
 
 				var to = _messageBuilder.GetForwarderEmails();
 				foreach (var recipient in to)
@@ -67,7 +67,7 @@ namespace Alicargo.Services.Email
 
 		public void Update(long id, AirWaybillEditModel model)
 		{
-			var old = _awbRepository.Get(id).First();
+			var old = _awbPresenter.GetData(id);
 
 			_manager.Update(id, model);
 
@@ -76,7 +76,7 @@ namespace Alicargo.Services.Email
 
 		public void Update(long id, BrockerAWBModel model)
 		{
-			var old = _awbRepository.Get(id).First();
+			var old = _awbPresenter.GetData(id);
 
 			_manager.Update(id, model);
 
@@ -95,8 +95,8 @@ namespace Alicargo.Services.Email
 
 		private void SendOnCreate(long id)
 		{
-			var model = _awbRepository.Get(id).First();
-			var brocker = _brockerRepository.Get(model.BrockerId);
+			var model = _awbPresenter.GetData(id);
+			var brocker = _awbPresenter.GetBrocker(model.BrockerId);
 
 			var to = new[]
 			{
@@ -109,7 +109,7 @@ namespace Alicargo.Services.Email
 				.Concat(_messageBuilder.GetForwarderEmails())
 				.ToArray();
 
-			var aggregate = _awbRepository.GetAggregate(id).First();
+			var aggregate = _awbPresenter.GetAggregate(id);
 
 			foreach (var recipient in to)
 			{
@@ -120,10 +120,10 @@ namespace Alicargo.Services.Email
 
 		private void SendOnFileAdd(long id, AirWaybillData oldData)
 		{
-			var model = _awbRepository.Get(id).First();
+			var model = _awbPresenter.GetData(id);
 
 			var subject = _messageBuilder.DefaultSubject;
-			var brocker = _brockerRepository.Get(model.BrockerId);
+			var brocker = _awbPresenter.GetBrocker(model.BrockerId);
 
 			if (oldData.InvoiceFileName == null && model.InvoiceFileName != null)
 			{

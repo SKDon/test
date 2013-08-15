@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
@@ -11,18 +12,18 @@ namespace Alicargo.Services.AirWaybill
 {
 	public sealed class AwbPresenter : IAwbPresenter
 	{
-		private readonly IAirWaybillRepository _airWaybillRepository;
+		private readonly IAWBRepository _awbRepository;
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateService _stateService;
 		private readonly IIdentityService _identityService;
 
 		public AwbPresenter(
-			IAirWaybillRepository airWaybillRepository,
+			IAWBRepository awbRepository,
 			IBrockerRepository brockerRepository,
 			IStateService stateService,
 			IIdentityService identityService)
 		{
-			_airWaybillRepository = airWaybillRepository;
+			_awbRepository = awbRepository;
 			_brockerRepository = brockerRepository;
 			_stateService = stateService;
 			_identityService = identityService;
@@ -37,10 +38,10 @@ namespace Alicargo.Services.AirWaybill
 				brockerId = brocker.Id;
 			}
 
-			var data = _airWaybillRepository.GetRange(skip, take, brockerId);
+			var data = _awbRepository.GetRange(skip, take, brockerId);
 			var ids = data.Select(x => x.Id).ToArray();
 
-			var aggregates = _airWaybillRepository.GetAggregate(ids)
+			var aggregates = _awbRepository.GetAggregate(ids)
 												  .ToDictionary(x => x.AirWaybillId, x => x);
 
 			var localizedStates = _stateService.GetLocalizedDictionary();
@@ -70,14 +71,14 @@ namespace Alicargo.Services.AirWaybill
 				TotalWeight = aggregates[x.Id].TotalWeight
 			}).ToArray();
 
-			var total = _airWaybillRepository.Count(brockerId);
+			var total = _awbRepository.Count(brockerId);
 
 			return new ListCollection<AirWaybillListItem> { Data = items, Total = total };
 		}
 
 		public AirWaybillEditModel Get(long id)
 		{
-			var data = _airWaybillRepository.Get(id).FirstOrDefault();
+			var data = _awbRepository.Get(id).FirstOrDefault();
 
 			if (data == null) throw new EntityNotFoundException("Refarence: " + id);
 
@@ -103,6 +104,21 @@ namespace Alicargo.Services.AirWaybill
 			};
 
 			return model;
+		}
+
+		public AirWaybillData GetData(long id)
+		{
+			return _awbRepository.Get(id).First();
+		}
+
+		public AirWaybillAggregate GetAggregate(long id)
+		{
+			return _awbRepository.GetAggregate(id).First();
+		}
+
+		public BrockerData GetBrocker(long brockerId)
+		{
+			return _brockerRepository.Get(brockerId);
 		}
 	}
 }

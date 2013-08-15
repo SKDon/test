@@ -92,7 +92,7 @@
     <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\IFactoryRepository.cs" />
     <Compile Include="Repositories\IMarkRepository.cs" />
-    <Compile Include="Repositories\IAirWaybillRepository.cs" />
+    <Compile Include="Repositories\IAWBRepository.cs" />
     <Compile Include="Repositories\IStateRepository.cs" />
     <Compile Include="Repositories\ITransitRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />

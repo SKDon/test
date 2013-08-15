@@ -37,7 +37,7 @@ namespace Alicargo.Core.BlackBox.Tests
 				new StateRepository(unitOfWork),
 				_identityService.Object,
 				_stateConfig,
-				new AirWaybillRepository(unitOfWork));
+				new AwbRepository(unitOfWork));
 		}
 
 		[TestCleanup]

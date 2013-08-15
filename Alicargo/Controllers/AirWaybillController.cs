@@ -18,18 +18,18 @@ namespace Alicargo.Controllers
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbManager _awbManager;
 		private readonly IStateConfig _stateConfig;
-		private readonly IAirWaybillRepository _airWaybillRepository;
+		private readonly IAWBRepository _awbRepository;
 
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
 			IAwbManager awbManager,
 			IStateConfig stateConfig,
-			IAirWaybillRepository airWaybillRepository)
+			IAWBRepository awbRepository)
 		{
 			_awbPresenter = awbPresenter;
 			_awbManager = awbManager;
 			_stateConfig = stateConfig;
-			_airWaybillRepository = airWaybillRepository;
+			_awbRepository = awbRepository;
 		}
 
 		#region Create
@@ -110,7 +110,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Brocker), HttpPost]
 		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
 		{
-			var data = _airWaybillRepository.Get(id).First();
+			var data = _awbRepository.Get(id).First();
 			if (data.GTD.IsNullOrWhiteSpace())
 			{
 				throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
@@ -124,7 +124,7 @@ namespace Alicargo.Controllers
 		[ChildActionOnly]
 		public virtual PartialViewResult CargoIsCustomsClearedButton(long id)
 		{
-			var data = _airWaybillRepository.Get(id).First();
+			var data = _awbRepository.Get(id).First();
 
 			var model = new CargoIsCustomsClearedButtonModel
 			{
@@ -169,35 +169,35 @@ namespace Alicargo.Controllers
 
 		public virtual FileResult InvoiceFile(long id)
 		{
-			var file = _airWaybillRepository.GetInvoiceFile(id);
+			var file = _awbRepository.GetInvoiceFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult GTDFile(long id)
 		{
-			var file = _airWaybillRepository.GetGTDFile(id);
+			var file = _awbRepository.GetGTDFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult GTDAdditionalFile(long id)
 		{
-			var file = _airWaybillRepository.GTDAdditionalFile(id);
+			var file = _awbRepository.GTDAdditionalFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult PackingFile(long id)
 		{
-			var file = _airWaybillRepository.GetPackingFile(id);
+			var file = _awbRepository.GetPackingFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}
 
 		public virtual FileResult AWBFile(long id)
 		{
-			var file = _airWaybillRepository.GetAWBFile(id);
+			var file = _awbRepository.GetAWBFile(id);
 
 			return file.FileData.GetFileResult(file.FileName);
 		}

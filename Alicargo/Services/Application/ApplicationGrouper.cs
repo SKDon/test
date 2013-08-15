@@ -12,18 +12,18 @@ namespace Alicargo.Services.Application
 {
 	public sealed class ApplicationGrouper : IApplicationGrouper
 	{
-		private readonly IAirWaybillRepository _airWaybillRepository;
+		private readonly IAWBRepository _awbRepository;
 
-		public ApplicationGrouper(IAirWaybillRepository airWaybillRepository)
+		public ApplicationGrouper(IAWBRepository awbRepository)
 		{
-			_airWaybillRepository = airWaybillRepository;
+			_awbRepository = awbRepository;
 		}
 
 		public ApplicationGroup[] Group(ApplicationListItem[] applications,
 										IReadOnlyCollection<Order> groups)
 		{
 			var ids = applications.Select(x => x.AirWaybillId ?? 0).ToArray();
-			var airWaybills = _airWaybillRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+			var airWaybills = _awbRepository.Get(ids).ToDictionary(x => x.Id, x => x);
 
 			return Group(applications, groups, airWaybills);
 		}
