@@ -48,14 +48,7 @@
     <Compile Include="Enums\DeliveryType.cs" />
     <Compile Include="Enums\MethodOfDelivery.cs" />
     <Compile Include="Enums\MethodOfTransit.cs" />
-    <Compile Include="Exceptions\InvalidLogicException.cs" />
-    <Compile Include="Exceptions\DublicateException.cs" />
-    <Compile Include="Exceptions\UnexpectedStateException.cs" />
     <Compile Include="Services\ExtensionHelper.cs" />
-    <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
-    <Compile Include="Repositories\ICountryRepository.cs" />
-    <Compile Include="Repositories\ITransaction.cs" />
-    <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Resources\Entities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,30 +74,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Enums\RoleType.cs" />
-    <Compile Include="Exceptions\AccessForbidenException.cs" />
-    <Compile Include="Exceptions\EntityNotFoundException.cs" />
-    <Compile Include="Localization\Cultures.cs" />
     <Compile Include="Localization\LocalizeEnumExtension.cs" />
-    <Compile Include="Repositories\IApplicationRepository.cs" />
-    <Compile Include="Repositories\IBrockerRepository.cs" />
-    <Compile Include="Repositories\ICarrierRepository.cs" />
-    <Compile Include="Repositories\IClientRepository.cs" />
-    <Compile Include="Repositories\IFactoryRepository.cs" />
-    <Compile Include="Repositories\IMarkRepository.cs" />
-    <Compile Include="Repositories\IAWBRepository.cs" />
-    <Compile Include="Repositories\IStateRepository.cs" />
-    <Compile Include="Repositories\ITransitRepository.cs" />
-    <Compile Include="Repositories\IUnitOfWork.cs" />
-    <Compile Include="Repositories\IAuthenticationRepository.cs" />
     <Compile Include="Resources\Enums.it.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Enums.it.resx</DependentUpon>
     </Compile>
-    <Compile Include="Security\IPasswordConverter.cs" />
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
-    <Compile Include="Security\PasswordConverter.cs" />
+    <Compile Include="Services\PasswordConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

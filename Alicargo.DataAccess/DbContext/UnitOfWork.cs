@@ -10,7 +10,12 @@ namespace Alicargo.DataAccess.DbContext
 {
 	internal sealed class UnitOfWork : IUnitOfWork, IDisposable
 	{
-		public DataContext Context { get; private set; }
+		private readonly DataContext _context;
+
+		public object Context
+		{
+			get { return _context; }
+		}
 
 		public ITransaction StartTransaction()
 		{
@@ -21,21 +26,22 @@ namespace Alicargo.DataAccess.DbContext
 
 		public UnitOfWork(IDbConnection connection)
 		{
-			Context = new AlicargoDataContext(connection);
+			_context = new AlicargoDataContext(connection);
+
 			Debug();
 		}
 
 		[Conditional("DEBUG")]
 		private void Debug()
 		{
-			Context.Log = new DebugTextWriter();
+			_context.Log = new DebugTextWriter();
 		}
 
 		public void SaveChanges()
 		{
 			try
 			{
-				Context.SubmitChanges(ConflictMode.FailOnFirstConflict);
+				_context.SubmitChanges(ConflictMode.FailOnFirstConflict);
 			}
 			catch (System.Data.SqlClient.SqlException exception)
 			{
@@ -50,7 +56,7 @@ namespace Alicargo.DataAccess.DbContext
 
 		public void Dispose()
 		{
-			Context.Dispose();
+			_context.Dispose();
 		}
 	}
 }

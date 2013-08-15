@@ -49,13 +49,32 @@
     <Compile Include="Contracts\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\UserData.cs" />
+    <Compile Include="Enums\RoleType.cs" />
+    <Compile Include="Enums\TwoLetterISOLanguageName.cs" />
+    <Compile Include="Exceptions\AccessForbidenException.cs" />
+    <Compile Include="Exceptions\DublicateException.cs" />
+    <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Exceptions\InvalidLogicException.cs" />
+    <Compile Include="Exceptions\UnexpectedStateException.cs" />
+    <Compile Include="Helpers\IPasswordConverter.cs" />
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Helpers\OrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IApplicationRepository.cs" />
+    <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
+    <Compile Include="Repositories\IAuthenticationRepository.cs" />
+    <Compile Include="Repositories\IAWBRepository.cs" />
+    <Compile Include="Repositories\IBrockerRepository.cs" />
+    <Compile Include="Repositories\ICarrierRepository.cs" />
+    <Compile Include="Repositories\IClientRepository.cs" />
+    <Compile Include="Repositories\ICountryRepository.cs" />
+    <Compile Include="Repositories\IStateRepository.cs" />
+    <Compile Include="Repositories\ITransaction.cs" />
+    <Compile Include="Repositories\ITransitRepository.cs" />
+    <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

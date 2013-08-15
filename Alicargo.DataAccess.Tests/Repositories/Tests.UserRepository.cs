@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Localization;
-using Alicargo.DataAccess.DbContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Alicargo.DataAccess.Tests.Repositories
@@ -66,22 +65,22 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			CheckUser(actual, newPassword, newLogin);
 		}
 
-		[TestMethod, Ignore] // this is not test
-		public void UpdatePasswords()
-		{
-			_transactionScope.Dispose();
+		//[TestMethod, Ignore] // this is not test
+		//public void UpdatePasswords()
+		//{
+		//	_transactionScope.Dispose();
 
-			var users = _unitOfWork.Context.GetTable<User>().ToArray();
-			foreach (var user in users)
-			{
-				var salt = _passwordConverter.GenerateSalt();
-				var hash = _passwordConverter.GetPasswordHash(user.Login, salt);
+		//	var users = _unitOfWork.Context.GetTable<User>().ToArray();
+		//	foreach (var user in users)
+		//	{
+		//		var salt = _passwordConverter.GenerateSalt();
+		//		var hash = _passwordConverter.GetPasswordHash(user.Login, salt);
 
-				user.PasswordHash = hash;
-				user.PasswordSalt = salt;
+		//		user.PasswordHash = hash;
+		//		user.PasswordSalt = salt;
 
-				_unitOfWork.SaveChanges();
-			}
-		}
+		//		_unitOfWork.SaveChanges();
+		//	}
+		//}
 	}
 }

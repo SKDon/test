@@ -1,11 +1,11 @@
-﻿using System.Data.Linq;
+﻿//using System.Data.Linq;
 
 namespace Alicargo.Core.Repositories
 {
 	public interface IUnitOfWork
 	{
 		void SaveChanges();
-		DataContext Context { get; }
+		object Context { get; }
 		ITransaction StartTransaction();
 	}
 }

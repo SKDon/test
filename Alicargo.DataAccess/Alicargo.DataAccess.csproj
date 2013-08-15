@@ -100,10 +100,6 @@
       <Project>{e2f1a146-9076-4833-995e-084ac1b3eac7}</Project>
       <Name>Alicargo.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
-      <Project>{577b60f9-32f7-4117-97da-40743bff4ca0}</Project>
-      <Name>Alicargo.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

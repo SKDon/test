@@ -61,6 +61,10 @@
     <Compile Include="WebTestContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
+      <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
+      <Name>Alicargo.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
       <Project>{577b60f9-32f7-4117-97da-40743bff4ca0}</Project>
       <Name>Alicargo.Core</Name>
