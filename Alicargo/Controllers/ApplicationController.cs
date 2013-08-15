@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
@@ -15,24 +14,18 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationManager _applicationManager;
 		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IIdentityService _identityService;
 		private readonly IClientService _clientService;
-		private readonly ICountryRepository _countryRepository;
 		private readonly IApplicationRepository _applicationRepository;
 
 		public ApplicationController(
 			IApplicationManager applicationManager,
 			IApplicationPresenter applicationPresenter,
-			IIdentityService identityService,
 			IClientService clientService,
-			ICountryRepository countryRepository,
 			IApplicationRepository applicationRepository)
 		{
 			_applicationManager = applicationManager;
 			_applicationPresenter = applicationPresenter;
-			_identityService = identityService;
 			_clientService = clientService;
-			_countryRepository = countryRepository;
 			_applicationRepository = applicationRepository;
 		}
 
@@ -42,7 +35,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Client)]
 		public virtual PartialViewResult Details(long id)
 		{
-			var application = _applicationPresenter.Get(id);
+			var application = _applicationPresenter.GetDetails(id);
 
 			return PartialView(application);
 		}
@@ -99,8 +92,7 @@ namespace Alicargo.Controllers
 
 			ViewBag.ApplicationId = applicationId;
 
-			ViewBag.Countries = _countryRepository.Get()
-				.ToDictionary(x => x.Id, x => x.Name[_identityService.TwoLetterISOLanguageName]);
+			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
 		}
 
 		[HttpPost]
@@ -170,6 +162,7 @@ namespace Alicargo.Controllers
 			if (!ModelState.IsValid)
 			{
 				BindBag(client.Id, null);
+
 				return View(model);
 			}
 
@@ -180,6 +173,7 @@ namespace Alicargo.Controllers
 			catch (DublicateException ex)
 			{
 				ModelState.AddModelError("DublicateException", ex.ToString());
+
 				return View(model);
 			}
 

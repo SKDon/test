@@ -12,11 +12,10 @@ namespace Alicargo.Services.Application
 	public sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;
-		
-		private readonly IStateService _stateService;
-		private readonly IIdentityService _identity;
 		private readonly ICountryRepository _countryRepository;
+		private readonly IIdentityService _identity;
 		private readonly IStateRepository _stateRepository;
+		private readonly IStateService _stateService;
 
 		public ApplicationPresenter(
 			IApplicationRepository applicationRepository,
@@ -32,7 +31,7 @@ namespace Alicargo.Services.Application
 			_stateRepository = stateRepository;
 		}
 
-		public ApplicationDetailsModel Get(long id)
+		public ApplicationDetailsModel GetDetails(long id)
 		{
 			var data = _applicationRepository.GetDetails(id);
 
@@ -84,7 +83,9 @@ namespace Alicargo.Services.Application
 				AirWaybillGTD = data.AirWaybillGTD,
 				ClientEmail = data.ClientEmail,
 				ClientUserId = data.ClientUserId,
-				CountryName = data.CountryId.HasValue ? countries[data.CountryId.Value] : null,
+				CountryName = data.CountryId.HasValue
+					? countries[data.CountryId.Value]
+					: null,
 				AirWaybillId = data.AirWaybillId
 			};
 
@@ -108,15 +109,21 @@ namespace Alicargo.Services.Application
 			return ToApplicationStateModel(states);
 		}
 
+		public IDictionary<long, string> GetLocalizedCountries()
+		{
+			return _countryRepository.Get()
+				.ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
+		}
+
 		private ApplicationStateModel[] ToApplicationStateModel(IEnumerable<long> ids)
 		{
 			return _stateService.GetLocalizedDictionary(ids)
-				.Select(x => new ApplicationStateModel
-				{
-					StateId = x.Key,
-					StateName = x.Value
-				})
-				.ToArray();
+								.Select(x => new ApplicationStateModel
+								{
+									StateId = x.Key,
+									StateName = x.Value
+								})
+								.ToArray();
 		}
 	}
 }

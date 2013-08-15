@@ -49,7 +49,7 @@ namespace Alicargo.Services.Email
 
 		public void Update(long applicationId, ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel)
 		{
-			var oldData = _applicationPresenter.Get(applicationId);
+			var oldData = _applicationPresenter.GetDetails(applicationId);
 
 			_manager.Update(applicationId, model, carrierModel, transitModel);
 
@@ -58,7 +58,7 @@ namespace Alicargo.Services.Email
 
 		private void SendOnFileAdd(long id, ApplicationDetailsModel oldData)
 		{
-			var model = _applicationPresenter.Get(id);
+			var model = _applicationPresenter.GetDetails(id);
 
 			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 
@@ -123,7 +123,7 @@ namespace Alicargo.Services.Email
 
 		private void SendOnAdd(long id)
 		{
-			var model = _applicationPresenter.Get(id);
+			var model = _applicationPresenter.GetDetails(id);
 			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 			var clientData = _authenticationRepository.GetById(model.ClientUserId);
 
@@ -160,7 +160,7 @@ namespace Alicargo.Services.Email
 
 		private void SendOnSetState(long id)
 		{
-			var model = _applicationPresenter.Get(id);
+			var model = _applicationPresenter.GetDetails(id);
 			var stateId = model.StateId;
 
 			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
@@ -239,7 +239,7 @@ namespace Alicargo.Services.Email
 
 		private void SendOnSetDateOfCargoReceipt(long id)
 		{
-			var model = _applicationPresenter.Get(id);
+			var model = _applicationPresenter.GetDetails(id);
 			var subject = string.Format(_messageBuilder.ApplicationSubject, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 			var clientData = _authenticationRepository.GetById(model.ClientUserId);
 			var body = _messageBuilder.ApplicationSetDateOfCargoReceipt(model, clientData.TwoLetterISOLanguageName);

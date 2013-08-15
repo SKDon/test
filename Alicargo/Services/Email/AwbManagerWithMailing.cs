@@ -51,7 +51,7 @@ namespace Alicargo.Services.Email
 			if (awbId.HasValue)
 			{
 				var model = _awbRepository.Get(awbId.Value).First();
-				var applicationModel = _applicationPresenter.Get(applicationId);
+				var applicationModel = _applicationPresenter.GetDetails(applicationId);
 
 				var aggregate = _awbRepository.GetAggregate(awbId.Value).First();
 
