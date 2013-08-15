@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Alicargo.Core.Repositories;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 using Moq;

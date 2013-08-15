@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Core.Exceptions
+namespace Alicargo.Contracts.Exceptions
 {
 	public sealed class UnexpectedStateException : Exception
 	{

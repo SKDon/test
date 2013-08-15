@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Localization;
-using Alicargo.Core.Repositories;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.Repositories
 {

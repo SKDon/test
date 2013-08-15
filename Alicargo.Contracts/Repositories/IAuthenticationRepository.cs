@@ -1,8 +1,8 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Enums;
+using Alicargo.Contracts.Enums;
 
-namespace Alicargo.Core.Repositories
+namespace Alicargo.Contracts.Repositories
 {
 	public interface IAuthenticationRepository
 	{

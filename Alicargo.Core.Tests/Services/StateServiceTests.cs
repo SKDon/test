@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Exceptions;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Exceptions;
 using Alicargo.Services;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

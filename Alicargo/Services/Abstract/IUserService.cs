@@ -1,4 +1,5 @@
-﻿using Alicargo.Core.Enums;
+﻿using Alicargo.Contracts.Enums;
+using Alicargo.Core.Enums;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Abstract

@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Security
+﻿namespace Alicargo.Contracts.Helpers
 {
     public interface IPasswordConverter
     {

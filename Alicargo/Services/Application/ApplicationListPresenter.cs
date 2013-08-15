@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
 

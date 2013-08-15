@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Localization;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;

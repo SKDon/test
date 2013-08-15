@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Localization;
 using Resources;
 

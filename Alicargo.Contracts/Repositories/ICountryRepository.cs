@@ -1,6 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 
-namespace Alicargo.Core.Repositories
+namespace Alicargo.Contracts.Repositories
 {
 	public interface ICountryRepository
 	{

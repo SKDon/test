@@ -3,8 +3,8 @@ using System.Data;
 using System.Data.Linq;
 using System.Diagnostics;
 using System.Transactions;
-using Alicargo.Core.Exceptions;
-using Alicargo.Core.Repositories;
+using Alicargo.Contracts.Exceptions;
+using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.DbContext
 {

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Alicargo.Core.Repositories;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Microsoft.Ajax.Utilities;

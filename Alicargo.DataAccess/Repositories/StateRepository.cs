@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Enums;
-using Alicargo.Core.Localization;
-using Alicargo.Core.Repositories;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories

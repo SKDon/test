@@ -1,5 +1,5 @@
 ﻿using System.Transactions;
-using Alicargo.Core.Repositories;
+using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.DbContext
 {

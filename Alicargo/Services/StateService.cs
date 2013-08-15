@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Exceptions;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Exceptions;
-using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Microsoft.Ajax.Utilities;
 

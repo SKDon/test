@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Web.Security;
-using Alicargo.Core.Repositories;
-using Alicargo.Core.Security;
+using Alicargo.Contracts.Helpers;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 

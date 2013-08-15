@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Repositories;
+using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Mvc;
-using Alicargo.Core.Exceptions;
+using Alicargo.Contracts.Exceptions;
 using WebGrease.Css.Extensions;
 using log4net;
 

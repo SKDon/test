@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 

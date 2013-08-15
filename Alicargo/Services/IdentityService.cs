@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
@@ -52,16 +53,16 @@ namespace Alicargo.Services
 				}
 				else
 				{
-					_twoLetterISOLanguageName = Core.Localization.TwoLetterISOLanguageName.Russian;
+					_twoLetterISOLanguageName = Contracts.Enums.TwoLetterISOLanguageName.Russian;
 				}
 
 				return _twoLetterISOLanguageName;
 			}
 			set // todo: make a function instead the setter
 			{
-				if (value != Core.Localization.TwoLetterISOLanguageName.Russian 
-					&& value != Core.Localization.TwoLetterISOLanguageName.Italian
-					&& value != Core.Localization.TwoLetterISOLanguageName.English)
+				if (value != Contracts.Enums.TwoLetterISOLanguageName.Russian 
+					&& value != Contracts.Enums.TwoLetterISOLanguageName.Italian
+					&& value != Contracts.Enums.TwoLetterISOLanguageName.English)
 				{
 					throw new ArgumentOutOfRangeException("value");
 				}

@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Transactions;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.BlackBox.Tests.Properties;
 using Alicargo.Core.Enums;
 using Alicargo.DataAccess.DbContext;

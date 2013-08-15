@@ -2,7 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 
-namespace Alicargo.Core.Repositories
+namespace Alicargo.Contracts.Repositories
 {
 	public interface IApplicationRepository
 	{

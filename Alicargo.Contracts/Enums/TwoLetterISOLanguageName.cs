@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Localization
+﻿namespace Alicargo.Contracts.Enums
 {
 	public static class TwoLetterISOLanguageName
 	{

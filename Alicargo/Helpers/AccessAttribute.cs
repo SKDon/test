@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Ninject;

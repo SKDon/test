@@ -2,8 +2,9 @@
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Transactions;
-using Alicargo.Core.Repositories;
-using Alicargo.Core.Security;
+using Alicargo.Contracts.Helpers;
+using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 using Alicargo.DataAccess.Repositories;

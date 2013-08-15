@@ -1,4 +1,4 @@
-﻿using Alicargo.Core.Repositories;
+﻿using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories

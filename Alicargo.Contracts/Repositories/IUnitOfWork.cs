@@ -1,6 +1,6 @@
 ﻿//using System.Data.Linq;
 
-namespace Alicargo.Core.Repositories
+namespace Alicargo.Contracts.Repositories
 {
 	public interface IUnitOfWork
 	{

@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Services.Application;
 // ReSharper disable ImplicitlyCapturedClosure
 using System.Collections.Generic;

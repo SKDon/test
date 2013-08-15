@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
