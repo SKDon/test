@@ -6,7 +6,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Microsoft.Ajax.Utilities;
 
@@ -51,7 +50,7 @@ namespace Alicargo.Services
 				return _stateRepository.GetAvailableStates(RoleType.Sender).Except(_stateConfig.AwbStates).ToArray();
 			}
 
-			// todo: brocker should not get here
+			// todo: a brocker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Brocker))
 			{
 				return _stateRepository.GetAvailableStates(RoleType.Brocker);
@@ -82,7 +81,7 @@ namespace Alicargo.Services
 				return _stateRepository.GetVisibleStates(RoleType.Sender);
 			}
 
-			// todo: brocker should not get here
+			// todo: a brocker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Brocker))
 			{
 				return _stateRepository.GetVisibleStates(RoleType.Brocker);

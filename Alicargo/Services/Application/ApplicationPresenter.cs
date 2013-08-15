@@ -2,14 +2,12 @@
 using System.Linq;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
 	// todo: test
-	// todo: adhere SRP
 	public sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;

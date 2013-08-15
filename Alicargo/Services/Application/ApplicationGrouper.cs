@@ -78,7 +78,7 @@ namespace Alicargo.Services.Application
 		{
 			return new ApplicationGroup
 			{
-				// todo: 1. fix - get aggregation to all data, not only current set
+				// todo: 1. fix bug - get aggregation to all data, not only current set
 				aggregates = new
 				{
 					Count = new { sum = grouping.Sum(y => y.Count ?? 0) },
