@@ -10,7 +10,6 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers
 {
-	// todo: refactor contracts
 	[Access(RoleType.Sender)]
 	public partial class SenderController : Controller
 	{
@@ -83,13 +82,17 @@ namespace Alicargo.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
+				var clientId = _applicationRepository.GetClientId(id);
+				var clientData = _clientRepository.Get(clientId).First();
+				ViewBag.Nic = clientData.Nic;
 				ViewBag.ApplicationNumber = ApplicationModelHelper.GetDisplayNumber(id, model.Count);
+
 				return View(model);
 			}
 
 			var applicationData = _applicationRepository.Get(id);
 
-			Set(model, applicationData);
+			Map(model, applicationData);
 
 			_applicationUpdater.Update(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
 			_unitOfWork.SaveChanges();
@@ -100,20 +103,26 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		public virtual ActionResult ApplicationCreate(long id, ApplicationSenderEdit model)
 		{
+			var clientData = _clientRepository.Get(id).First();
+
 			if (!ModelState.IsValid)
 			{
+				ViewBag.Nic = clientData.Nic;
+
 				return View(model);
 			}
 
 			var applicationData = new ApplicationData { ClientId = id };
-			Set(model, applicationData);
-			var clientData = _clientRepository.Get(id).First();
+
+			Map(model, applicationData);
+			
 			var transitData = _transitRepository.Get(clientData.TransitId).First();
 
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var tid = _transitRepository.Add(transitData);
 				_unitOfWork.SaveChanges();
+
 				applicationData.TransitId = tid();
 				applicationData.StateId = _stateConfig.DefaultStateId;
 				applicationData.StateChangeTimestamp = DateTimeOffset.UtcNow;
@@ -128,19 +137,19 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
-		private static void Set(ApplicationSenderEdit model, ApplicationData applicationData)
+		private static void Map(ApplicationSenderEdit @from, ApplicationData to)
 		{
-			applicationData.Count = model.Count;
-			applicationData.PackingFileName = model.PackingFileName;
-			applicationData.FactoryName = model.FactoryName;
-			applicationData.Weigth = model.Weigth;
-			applicationData.Invoice = model.Invoice;
-			applicationData.InvoiceFileName = model.InvoiceFileName;
-			applicationData.MarkName = model.MarkName;
-			applicationData.SwiftFileName = model.SwiftFileName;
-			applicationData.Value = model.Currency.Value;
-			applicationData.CurrencyId = model.Currency.CurrencyId;
-			applicationData.Volume = model.Volume;
+			to.Count = @from.Count;
+			to.PackingFileName = @from.PackingFileName;
+			to.FactoryName = @from.FactoryName;
+			to.Weigth = @from.Weigth;
+			to.Invoice = @from.Invoice;
+			to.InvoiceFileName = @from.InvoiceFileName;
+			to.MarkName = @from.MarkName;
+			to.SwiftFileName = @from.SwiftFileName;
+			to.Value = @from.Currency.Value;
+			to.CurrencyId = @from.Currency.CurrencyId;
+			to.Volume = @from.Volume;
 		}
 	}
 }

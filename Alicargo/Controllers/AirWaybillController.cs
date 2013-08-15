@@ -121,7 +121,7 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		[Access(RoleType.Admin, RoleType.Brocker), ChildActionOnly]
+		[ChildActionOnly]
 		public virtual PartialViewResult CargoIsCustomsClearedButton(long id)
 		{
 			var data = _airWaybillRepository.Get(id).First();

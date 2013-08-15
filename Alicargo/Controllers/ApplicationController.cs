@@ -31,8 +31,7 @@ namespace Alicargo.Controllers
 
 		#region Details
 
-		[HttpGet, ChildActionOnly]
-		[Access(RoleType.Client)]
+		[ChildActionOnly]
 		public virtual PartialViewResult Details(long id)
 		{
 			var application = _applicationPresenter.GetDetails(id);
