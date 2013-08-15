@@ -23,7 +23,8 @@ namespace Alicargo.DataAccess.Helpers
 			to.DateOfDeparture = @from.DateOfDeparture;
 			to.DepartureAirport = @from.DepartureAirport;
 			to.GTD = @from.GTD;
-			
+
+			// todo: separate repository for files
 			FileDataHelper.SetFile(gtdFile, from.GTDFileName,
 				bytes => to.GTDFileData = bytes, s => to.GTDFileName = s);
 

@@ -43,6 +43,7 @@ namespace Alicargo.DataAccess.Helpers
 
 			to.Invoice = from.Invoice;
 
+			// todo: separate repository for files
 			FileDataHelper.SetFile(invoiceFile, from.InvoiceFileName,
 				bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
 
