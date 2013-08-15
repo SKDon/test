@@ -20,7 +20,7 @@ namespace Alicargo.TestHelpers
 
 			HttpClient = new HttpClient(handler) { BaseAddress = new Uri(baseAddress) };
 
-			HttpClient.PostAsJsonAsync("User/Login", new SignIdModel
+			HttpClient.PostAsJsonAsync("Authentication/Login", new SignIdModel
 			{
 				Login = login,
 				Password = password

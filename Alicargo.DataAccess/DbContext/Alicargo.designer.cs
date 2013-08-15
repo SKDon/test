@@ -223,7 +223,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
-	internal sealed partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -398,7 +398,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VisibleState")]
-	internal sealed partial class VisibleState : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class VisibleState : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -525,7 +525,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AirWaybill")]
-	internal sealed partial class AirWaybill : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class AirWaybill : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1177,7 +1177,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Application")]
-	internal sealed partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1220,7 +1220,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private string _TransitReference;
 		
-		private System.Nullable<float> _Gross;
+		private System.Nullable<float> _Weight;
 		
 		private System.Nullable<int> _Count;
 		
@@ -1312,8 +1312,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnWarehouseWorkingTimeChanged();
     partial void OnTransitReferenceChanging(string value);
     partial void OnTransitReferenceChanged();
-    partial void OnGrossChanging(System.Nullable<float> value);
-    partial void OnGrossChanged();
+    partial void OnWeightChanging(System.Nullable<float> value);
+    partial void OnWeightChanged();
     partial void OnCountChanging(System.Nullable<int> value);
     partial void OnCountChanged();
     partial void OnVolumeChanging(float value);
@@ -1744,22 +1744,22 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gross", DbType="Real")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Real")]
 		public System.Nullable<float> Weight
 		{
 			get
 			{
-				return this._Gross;
+				return this._Weight;
 			}
 			set
 			{
-				if ((this._Gross != value))
+				if ((this._Weight != value))
 				{
-					this.OnGrossChanging(value);
+					this.OnWeightChanging(value);
 					this.SendPropertyChanging();
-					this._Gross = value;
+					this._Weight = value;
 					this.SendPropertyChanged("Weight");
-					this.OnGrossChanged();
+					this.OnWeightChanged();
 				}
 			}
 		}
@@ -2356,7 +2356,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AvailableState")]
-	internal sealed partial class AvailableState : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class AvailableState : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2483,7 +2483,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Brocker")]
-	internal sealed partial class Brocker : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Brocker : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2686,7 +2686,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Carrier")]
-	internal sealed partial class Carrier : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Carrier : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2800,7 +2800,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
-	internal sealed partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3356,7 +3356,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Country")]
-	internal sealed partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3518,7 +3518,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Forwarder")]
-	internal sealed partial class Forwarder : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Forwarder : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3693,7 +3693,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sender")]
-	internal sealed partial class Sender : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Sender : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3868,7 +3868,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.State")]
-	internal sealed partial class State : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class State : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -4118,7 +4118,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StateLocalization")]
-	internal sealed partial class StateLocalization : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class StateLocalization : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -4293,7 +4293,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Transit")]
-	internal sealed partial class Transit : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class Transit : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -4644,7 +4644,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	internal sealed partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	public sealed partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);

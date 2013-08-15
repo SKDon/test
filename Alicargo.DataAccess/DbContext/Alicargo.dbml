@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Alicargo" Class="AlicargoDataContext" AccessModifier="Internal" Modifier="Sealed" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Table Name="dbo.Admin" Member="Admins" AccessModifier="Internal">
-    <Type Name="Admin" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Admin" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -9,14 +9,14 @@
     </Type>
   </Table>
   <Table Name="dbo.VisibleState" Member="VisibleStates" AccessModifier="Internal">
-    <Type Name="VisibleState" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="VisibleState" Modifier="Sealed">
       <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="State_VisibleState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.AirWaybill" Member="AirWaybills" AccessModifier="Internal">
-    <Type Name="AirWaybill" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="AirWaybill" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CreationTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="Bill" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
@@ -44,7 +44,7 @@
     </Type>
   </Table>
   <Table Name="dbo.Application" Member="Applications" AccessModifier="Internal">
-    <Type Name="Application" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Application" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CreationTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="Invoice" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -92,14 +92,14 @@
     </Type>
   </Table>
   <Table Name="dbo.AvailableState" Member="AvailableStates" AccessModifier="Internal">
-    <Type Name="AvailableState" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="AvailableState" Modifier="Sealed">
       <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="State_AvailableState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Brocker" Member="Brockers" AccessModifier="Internal">
-    <Type Name="Brocker" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Brocker" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -109,14 +109,14 @@
     </Type>
   </Table>
   <Table Name="dbo.Carrier" Member="Carriers" AccessModifier="Internal">
-    <Type Name="Carrier" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Carrier" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Association Name="Carrier_Transit" Member="Transits" ThisKey="Id" OtherKey="CarrierId" Type="Transit" />
     </Type>
   </Table>
   <Table Name="dbo.Client" Member="Clients" AccessModifier="Internal">
-    <Type Name="Client" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Client" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
@@ -140,7 +140,7 @@
     </Type>
   </Table>
   <Table Name="dbo.Country" Member="Countries" AccessModifier="Internal">
-    <Type Name="Country" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Country" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name_En" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Name_Ru" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
@@ -149,7 +149,7 @@
     </Type>
   </Table>
   <Table Name="dbo.Forwarder" Member="Forwarders" AccessModifier="Internal">
-    <Type Name="Forwarder" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Forwarder" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -158,7 +158,7 @@
     </Type>
   </Table>
   <Table Name="dbo.Sender" Member="Senders" AccessModifier="Internal">
-    <Type Name="Sender" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Sender" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -167,7 +167,7 @@
     </Type>
   </Table>
   <Table Name="dbo.State" Member="States" AccessModifier="Internal">
-    <Type Name="State" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="State" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -179,7 +179,7 @@
     </Type>
   </Table>
   <Table Name="dbo.StateLocalization" Member="StateLocalizations" AccessModifier="Internal">
-    <Type Name="StateLocalization" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="StateLocalization" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="TwoLetterISOLanguageName" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
@@ -188,7 +188,7 @@
     </Type>
   </Table>
   <Table Name="dbo.Transit" Member="Transits" AccessModifier="Internal">
-    <Type Name="Transit" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="Transit" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="City" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
@@ -204,7 +204,7 @@
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users" AccessModifier="Internal">
-    <Type Name="User" AccessModifier="Internal" Modifier="Sealed">
+    <Type Name="User" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Login" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Column Name="PasswordHash" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />

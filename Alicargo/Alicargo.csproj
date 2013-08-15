@@ -1378,7 +1378,7 @@
     <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
-    <Content Include="Views\AirWaybill\EditorTemplates\AirWaybillModel.cshtml" />
+    <Content Include="Views\AirWaybill\EditorTemplates\AirWaybillEditModel.cshtml" />
     <Content Include="Views\Carrier\Select.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SelectModel.cshtml" />
     <Content Include="Views\AirWaybill\Index.cshtml" />

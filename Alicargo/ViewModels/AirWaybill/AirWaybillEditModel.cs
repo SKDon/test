@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Localization;
 using Resources;
 
@@ -6,32 +7,30 @@ namespace Alicargo.ViewModels.AirWaybill
 {
 	public sealed class AirWaybillEditModel
 	{
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "AirWayBill")]
+		#region Data
+
+		[Required, DisplayNameLocalized(typeof(Entities), "AirWayBill")]
 		public string Bill { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "ArrivalAirport")]
+		[Required, DisplayNameLocalized(typeof(Entities), "ArrivalAirport")]
 		public string ArrivalAirport { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "DepartureAirport")]
+		[Required, DisplayNameLocalized(typeof(Entities), "DepartureAirport")]
 		public string DepartureAirport { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "DateOfDeparture")]
+		[Required, DisplayNameLocalized(typeof(Entities), "DateOfDeparture")]
 		public string DateOfDepartureLocalString { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "DateOfArrival")]
-		public string DateOfArrivalLocalString { get; set; }	
+		[Required, DisplayNameLocalized(typeof(Entities), "DateOfArrival")]
+		public string DateOfArrivalLocalString { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "GTD")]
 		public string GTD { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "Brocker")]
+		[Required, DisplayNameLocalized(typeof(Entities), "Brocker")]
 		public long BrockerId { get; set; }
+
+		#endregion
 
 		#region Files
 
@@ -59,6 +58,34 @@ namespace Alicargo.ViewModels.AirWaybill
 		public byte[] InvoiceFile { get; set; }
 
 		public byte[] AWBFile { get; set; }
+
+		#endregion
+
+		#region Mapping
+
+		public static AirWaybillEditModel GetModel(AirWaybillData data)
+		{
+			return new AirWaybillEditModel
+			{
+				PackingFileName = data.PackingFileName,
+				InvoiceFileName = data.InvoiceFileName,
+				PackingFile = null,
+				AWBFileName = data.AWBFileName,
+				ArrivalAirport = data.ArrivalAirport,
+				Bill = data.Bill,
+				GTDAdditionalFileName = data.GTDAdditionalFileName,
+				DateOfArrivalLocalString = data.DateOfArrival.LocalDateTime.ToShortDateString(),
+				DateOfDepartureLocalString = data.DateOfDeparture.LocalDateTime.ToShortDateString(),
+				DepartureAirport = data.DepartureAirport,
+				GTD = data.GTD,
+				GTDFileName = data.GTDFileName,
+				InvoiceFile = null,
+				AWBFile = null,
+				BrockerId = data.BrockerId,
+				GTDAdditionalFile = null,
+				GTDFile = null
+			};
+		}
 
 		#endregion
 	}

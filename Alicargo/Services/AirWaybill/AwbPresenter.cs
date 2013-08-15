@@ -3,7 +3,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
@@ -83,28 +82,7 @@ namespace Alicargo.Services.AirWaybill
 
 			if (data == null) throw new EntityNotFoundException("Refarence: " + id);
 
-			var model = new AirWaybillEditModel
-			{
-				PackingFileName = data.PackingFileName,
-				InvoiceFileName = data.InvoiceFileName,
-				PackingFile = null,
-				AWBFileName = data.AWBFileName,
-				ArrivalAirport = data.ArrivalAirport,
-				Bill = data.Bill,
-				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				DateOfArrivalLocalString = data.DateOfArrival.LocalDateTime.ToShortDateString(),
-				DateOfDepartureLocalString = data.DateOfDeparture.LocalDateTime.ToShortDateString(),
-				DepartureAirport = data.DepartureAirport,
-				GTD = data.GTD,
-				GTDFileName = data.GTDFileName,
-				InvoiceFile = null,
-				AWBFile = null,
-				BrockerId = data.BrockerId,
-				GTDAdditionalFile = null,
-				GTDFile = null
-			};
-
-			return model;
+			return AirWaybillEditModel.GetModel(data);
 		}
 
 		public AirWaybillData GetData(long id)
