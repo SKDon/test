@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Linq;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -44,141 +46,127 @@ namespace Alicargo.Tests.Controllers
 				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.LocalDateTime.ToShortDateString())
 				.Create();
 
-			_client.PostAsJsonAsync("AirWaybill/Edit/", new { id = entity.Id, model })
+			_client.PostAsJsonAsync("AirWaybill/Edit/", new { entity.Id, model })
 				.ContinueWith(task =>
 				{
 					Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
 					_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
 
-					var actual = ObjectMapperManager.DefaultInstance.GetMapper<AirWaybill, AirWaybillEditModel>().Map(entity);
-
-					actual.DateOfDepartureLocalString = entity.DateOfDeparture.LocalDateTime.ToShortDateString();
-					actual.DateOfArrivalLocalString = entity.DateOfArrival.LocalDateTime.ToShortDateString();
-					actual.GTDFile = entity.GTDFileData.ToArray();
-					actual.GTDAdditionalFile = entity.GTDAdditionalFileData.ToArray();
-					actual.PackingFile = entity.PackingFileData.ToArray();
-					actual.InvoiceFile = entity.InvoiceFileData.ToArray();
-					actual.AWBFile = entity.AWBFileData.ToArray();
+					var actual = Map(entity);
 
 					model.ShouldBeEquivalentTo(actual);
 				})
 				.Wait();
 		}
 
-		//[TestMethod, TestCategory("black-box")]
-		//public void Test_Create()
-		//{
-		//	var brocker = _db.Brockers.First();
-		//	var applicationData = _db.Applications.First(x => !x.AirWaybillId.HasValue);
+		private static AirWaybillEditModel Map(AirWaybill entity)
+		{
+			var actual = ObjectMapperManager.DefaultInstance.GetMapper<AirWaybill, AirWaybillEditModel>().Map(entity);
 
-		//	var count = _db.AirWaybills.Count();
-		//	var state = _db.States.First(x => x.Id == DefaultStateId);
+			actual.DateOfDepartureLocalString = entity.DateOfDeparture.LocalDateTime.ToShortDateString();
+			actual.DateOfArrivalLocalString = entity.DateOfArrival.LocalDateTime.ToShortDateString();
+			actual.GTDFile = entity.GTDFileData.ToArray();
+			actual.GTDAdditionalFile = entity.GTDAdditionalFileData.ToArray();
+			actual.PackingFile = entity.PackingFileData.ToArray();
+			actual.InvoiceFile = entity.InvoiceFileData.ToArray();
+			actual.AWBFile = entity.AWBFileData.ToArray();
 
-		//	var model = _context
-		//		.Build<AirWaybillEditModel>()
-		//		.With(x => x.Id, 0)
-		//		.With(x => x.BrockerId, brocker.Id)
-		//		.With(x => x.StateId, state.Id)
-		//		.Without(x => x.DateOfArrivalLocalString)
-		//		.Without(x => x.DateOfDepartureLocalString)
-		//		.Without(x => x.TotalCount)
-		//		.Without(x => x.TotalWeight)
-		//		.Without(x => x.State)
-		//		.Without(x => x.CreationTimestamp)
-		//		.Create();
+			return actual;
+		}
 
-		//	_client.PostAsJsonAsync("AirWaybill/Create/" + applicationData.Id, model)
-		//		.ContinueWith(task =>
-		//		{
-		//			//Console.WriteLine(task.Result.Content.ReadAsStringAsync().Result);
-		//			Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
+		[TestMethod, TestCategory("black-box")]
+		public void Test_Create()
+		{
+			var brocker = _db.Brockers.First();
+			var applicationData = _db.Applications.First(x => !x.AirWaybillId.HasValue);
 
-		//			var AirWaybill = _db.AirWaybills.Skip(count).Take(1).First();
+			var count = _db.AirWaybills.Count();
 
-		//			model.CreationTimestamp = AirWaybill.CreationTimestamp;
-		//			model.StateChangeTimestamp = AirWaybill.StateChangeTimestamp;
-		//			model.Id = AirWaybill.Id;
-		//			model.StateId = FirstStateId;
+			var model = _context
+				.Build<AirWaybillEditModel>()
+				.With(x => x.BrockerId, brocker.Id)
+				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.LocalDateTime.ToShortDateString())
+				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.LocalDateTime.ToShortDateString())
+				.Create();
 
-		//			var actual = new AirWaybillEditModel(AirWaybill)
-		//			{
-		//				AWBFile = AirWaybill.AWBFileData.ToArray(),
-		//				GTDFile = AirWaybill.GTDFileData.ToArray(),
-		//				PackingFile = AirWaybill.PackingFileData.ToArray(),
-		//				InvoiceFile = AirWaybill.InvoiceFileData.ToArray(),
-		//				GTDAdditionalFile = AirWaybill.GTDAdditionalFileData.ToArray(),
-		//			};
+			_client.PostAsJsonAsync("AirWaybill/Create/" + applicationData.Id, model)
+				.ContinueWith(task =>
+				{
+					Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
-		//			model.ShouldBeEquivalentTo(actual);
+					var entity = _db.AirWaybills.Skip(count).Take(1).First();
 
-		//			_db.Refresh(RefreshMode.OverwriteCurrentValues, applicationData);
-		//			Assert.AreEqual(model.Id, applicationData.AirWaybillId);
-		//			Assert.AreEqual(FirstStateId, applicationData.StateId);
+					var actual = Map(entity);
 
-		//			applicationData.AirWaybillId = null;
-		//			_db.AirWaybills.DeleteOnSubmit(AirWaybill);
-		//			_db.SubmitChanges();
-		//		})
-		//		.Wait();
-		//}
+					model.ShouldBeEquivalentTo(actual);
 
-		//[TestMethod, TestCategory("black-box")]
-		//public void Test_SetAirWaybill()
-		//{
-		//	var application = _db.Applications.First(x => !x.AirWaybillId.HasValue);
-		//	var AirWaybill = _db.AirWaybills.First();
+					_db.Refresh(RefreshMode.OverwriteCurrentValues, applicationData);
+					Assert.AreEqual(FirstStateId, applicationData.StateId);
 
-		//	_client.PostAsync("AirWaybill/SetAirWaybill/", new FormUrlEncodedContent(new Dictionary<string, string>
-		//	{
-		//		{"applicationId", application.Id.ToString(CultureInfo.InvariantCulture)},
-		//		{"AirWaybillId", AirWaybill.Id.ToString(CultureInfo.InvariantCulture)}
-		//	})).ContinueWith(task =>
-		//	{
-		//		Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
+					applicationData.AirWaybillId = null;
+					_db.AirWaybills.DeleteOnSubmit(entity);
+					_db.SubmitChanges();
+				})
+				.Wait();
+		}
 
-		//		_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
+		[TestMethod, TestCategory("black-box")]
+		public void Test_SetAirWaybill()
+		{
+			var application = _db.Applications.First(x => !x.AirWaybillId.HasValue);
+			var airWaybill = _db.AirWaybills.First();
 
-		//		Assert.AreEqual(AirWaybill.Id, application.AirWaybillId);
-		//		application.AirWaybillId = null;
-		//		_db.SubmitChanges();
-		//	}).Wait();
-		//}
+			_client.PostAsync("AirWaybill/SetAirWaybill/", new FormUrlEncodedContent(new Dictionary<string, string>
+			{
+				{"applicationId", application.Id.ToString(CultureInfo.InvariantCulture)},
+				{"AirWaybillId", airWaybill.Id.ToString(CultureInfo.InvariantCulture)}
+			})).ContinueWith(task =>
+			{
+				Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
-		//[TestMethod, TestCategory("black-box")]
-		//public void Test_SetState()
-		//{
-		//	var AirWaybill = _db.AirWaybills.FirstOrDefault(
-		//		x => x.Applications.Count() > 1 && x.Applications.All(y => y.State.Id != DefaultStateId));
-		//	if (AirWaybill == null)
-		//		Assert.Inconclusive("Cant find AirWaybill for test");
+				_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
 
-		//	var oldStateId = AirWaybill.Applications.First().StateId;
+				Assert.AreEqual(airWaybill.Id, application.AirWaybillId);
+				application.AirWaybillId = null;
+				_db.SubmitChanges();
+			}).Wait();
+		}
 
-		//	_client.PostAsync("AirWaybill/SetState/", new FormUrlEncodedContent(new Dictionary<string, string>
-		//	{
-		//		{"stateId", DefaultStateId.ToString(CultureInfo.InvariantCulture)},
-		//		{"id", AirWaybill.Id.ToString(CultureInfo.InvariantCulture)}
-		//	})).ContinueWith(task =>
-		//	{
-		//		Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
+		[TestMethod, TestCategory("black-box")]
+		public void Test_SetState()
+		{
+			var entity = _db.AirWaybills.FirstOrDefault(
+				x => x.Applications.Count() > 1 && x.Applications.All(y => y.State.Id != DefaultStateId));
+			if (entity == null)
+				Assert.Inconclusive("Cant find AirWaybill for test");
 
-		//		_db.Refresh(RefreshMode.OverwriteCurrentValues, AirWaybill);
-		//		foreach (var application in AirWaybill.Applications)
-		//		{
-		//			_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
-		//		}
+			var oldStateId = entity.Applications.First().StateId;
 
-		//		Assert.IsTrue(AirWaybill.Applications.All(x => x.StateId == DefaultStateId));
+			_client.PostAsync("AirWaybill/SetState/", new FormUrlEncodedContent(new Dictionary<string, string>
+			{
+				{"stateId", DefaultStateId.ToString(CultureInfo.InvariantCulture)},
+				{"id", entity.Id.ToString(CultureInfo.InvariantCulture)}
+			})).ContinueWith(task =>
+			{
+				Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
-		//		foreach (var application in AirWaybill.Applications)
-		//		{
-		//			application.StateId = oldStateId;
-		//		}
-		//		AirWaybill.StateId = oldStateId;
+				_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
+				foreach (var application in entity.Applications)
+				{
+					_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
+				}
 
-		//		_db.SubmitChanges();
-		//	}).Wait();
-		//}
+				Assert.IsTrue(entity.Applications.All(x => x.StateId == DefaultStateId));
+
+				foreach (var application in entity.Applications)
+				{
+					application.StateId = oldStateId;
+				}
+				entity.StateId = oldStateId;
+
+				_db.SubmitChanges();
+			}).Wait();
+		}
 	}
 }
