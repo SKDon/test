@@ -14,18 +14,18 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationManager _applicationManager;
 		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IClientService _clientService;
+		private readonly IClientPresenter _clientPresenter;
 		private readonly IApplicationRepository _applicationRepository;
 
 		public ApplicationController(
 			IApplicationManager applicationManager,
 			IApplicationPresenter applicationPresenter,
-			IClientService clientService,
+			IClientPresenter clientPresenter,
 			IApplicationRepository applicationRepository)
 		{
 			_applicationManager = applicationManager;
 			_applicationPresenter = applicationPresenter;
-			_clientService = clientService;
+			_clientPresenter = clientPresenter;
 			_applicationRepository = applicationRepository;
 		}
 
@@ -85,7 +85,7 @@ namespace Alicargo.Controllers
 
 		private void BindBag(long? clientId, long? applicationId)
 		{
-			var client = _clientService.GetClientData(clientId);
+			var client = _clientPresenter.GetClientData(clientId);
 
 			ViewBag.ClientNic = client.Nic;
 
@@ -156,7 +156,7 @@ namespace Alicargo.Controllers
 		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			var client = _clientService.GetClientData(clientId);
+			var client = _clientPresenter.GetClientData(clientId);
 
 			if (!ModelState.IsValid)
 			{

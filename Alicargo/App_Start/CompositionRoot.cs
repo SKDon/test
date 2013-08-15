@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Core.Security;
+using Alicargo.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
 using Alicargo.Services.Application;
@@ -33,6 +34,9 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<IAwbManager>().To<AwbManagerWithMailing>().InRequestScope();
 			kernel.Bind<IAwbManager>().To<AwbManager>().WhenInjectedInto<AwbManagerWithMailing>().InRequestScope();
+
+			kernel.Bind<IClientManager>().To<ClientManagerWithMailing>().InRequestScope();
+			kernel.Bind<IClientManager>().To<ClientManager>().WhenInjectedInto<ClientManagerWithMailing>().InRequestScope();
 
 			kernel.Bind(scanner => scanner.FromThisAssembly()
 										  .Select(IsServiceType)
@@ -72,7 +76,7 @@ namespace Alicargo.App_Start
 							  .IncludingNonePublicTypes()
 							  .Select(IsServiceType)
 							  .BindDefaultInterface()
-							  .Configure(y=>y.InRequestScope()));
+							  .Configure(y => y.InRequestScope()));
 		}
 	}
 }

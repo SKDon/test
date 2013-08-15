@@ -4,6 +4,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract
 {
+	// todo: split
 	public interface IApplicationManager
 	{
 		ApplicationEditModel Get(long id);

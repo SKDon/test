@@ -1,13 +1,11 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.ViewModels;
+﻿using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Abstract
 {
-	public interface IClientService
-	{
-		ClientData GetClientData(long? id = null);
+	public interface IClientManager
+	{		
 		void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel);
 		long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel);
-		ListCollection<ClientData> GetList(int take, int skip);
+		bool HaveAccessToClient(long clientUserId);
 	}
 }

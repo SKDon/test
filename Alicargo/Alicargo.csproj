@@ -255,7 +255,7 @@
     <Compile Include="Services\Abstract\IAwbManager.cs" />
     <Compile Include="Services\Abstract\IAwbPresenter.cs" />
     <Compile Include="Services\Abstract\ICarrierService.cs" />
-    <Compile Include="Services\Abstract\IClientService.cs" />
+    <Compile Include="Services\Abstract\IClientManager.cs" />
     <Compile Include="Services\Abstract\IIdentityService.cs" />
     <Compile Include="Services\Abstract\ILocalizationService.cs" />
     <Compile Include="Services\Abstract\IMailSender.cs" />
@@ -265,7 +265,10 @@
     <Compile Include="Services\Abstract\ITransitService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
+    <Compile Include="Services\ClientPresenter.cs" />
     <Compile Include="Services\Contract\Recipient.cs" />
+    <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
+    <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\AirWaybill\AwbManager.cs" />
     <Compile Include="Services\Contract\Message.cs" />
@@ -277,7 +280,7 @@
     <Compile Include="Services\Application\ApplicationGrouper.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CarrierService.cs" />
-    <Compile Include="Services\ClientService.cs" />
+    <Compile Include="Services\ClientManager.cs" />
     <Compile Include="Services\Email\MessageBuilder.cs" />
     <Compile Include="Services\Email\SilentMailSender.cs" />
     <Compile Include="Services\IdentityService.cs" />

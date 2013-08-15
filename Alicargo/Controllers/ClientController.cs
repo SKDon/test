@@ -12,11 +12,13 @@ namespace Alicargo.Controllers
 	// todo: create a model binder for the ClientModel
 	public partial class ClientController : Controller
 	{
-		private readonly IClientService _clientService;
+		private readonly IClientManager _clientManager;
+		private readonly IClientPresenter _clientPresenter;
 
-		public ClientController(IClientService clientService)
+		public ClientController(IClientManager clientManager, IClientPresenter clientPresenter)
 		{
-			_clientService = clientService;
+			_clientManager = clientManager;
+			_clientPresenter = clientPresenter;
 		}
 
 		#region List
@@ -27,11 +29,10 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender)]
+		[HttpPost, Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender)]
 		public virtual JsonResult List(int take, int skip, int page, int pageSize)
 		{
-			var collection = _clientService.GetList(take, skip);
+			var collection = _clientPresenter.GetList(take, skip);
 
 			return Json(collection);
 		}
@@ -40,18 +41,15 @@ namespace Alicargo.Controllers
 
 		#region Create
 
-		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ViewResult Create()
 		{
 			return View();
 		}
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
-			CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
+										   CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
 			if (string.IsNullOrWhiteSpace(authenticationModel.NewPassword))
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
@@ -59,7 +57,7 @@ namespace Alicargo.Controllers
 			if (!ModelState.IsValid) return View();
 
 			long id = 0;
-			if (!HandleDublicateLogin(() => id = _clientService.Add(model, carrierModel, transitModel, authenticationModel)))
+			if (!HandleDublicateLogin(() => id = _clientManager.Add(model, carrierModel, transitModel, authenticationModel)))
 			{
 				return View(model);
 			}
@@ -69,7 +67,7 @@ namespace Alicargo.Controllers
 
 		#endregion
 
-		bool HandleDublicateLogin(Action action)
+		private bool HandleDublicateLogin(Action action)
 		{
 			try
 			{
@@ -94,11 +92,10 @@ namespace Alicargo.Controllers
 
 		#region Edit
 
-		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id)
 		{
-			var data = _clientService.GetClientData(id);
+			var data = _clientPresenter.GetClientData(id);
 
 			var model = ClientModel.GetModel(data);
 
@@ -108,17 +105,16 @@ namespace Alicargo.Controllers
 		}
 
 		// todo: test
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id, ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
-			CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
+										 CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
-			var data = _clientService.GetClientData(id);
+			var data = _clientPresenter.GetClientData(id);
 
 			if (!ModelState.IsValid) return View(model);
 
-			if (!HandleDublicateLogin(() => _clientService.Update(data.Id, model, carrierModel, transitModel, authenticationModel)))
+			if (
+				!HandleDublicateLogin(() => _clientManager.Update(data.Id, model, carrierModel, transitModel, authenticationModel)))
 			{
 				return View(model);
 			}

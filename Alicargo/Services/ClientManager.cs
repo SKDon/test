@@ -5,80 +5,35 @@ using Alicargo.Core.Enums;
 using Alicargo.Core.Exceptions;
 using Alicargo.Core.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
 	// todo: test
-	public sealed class ClientService : IClientService
+	public sealed class ClientManager : IClientManager
 	{
-		private readonly IIdentityService _identity;
-		private readonly IClientRepository _clientRepository;
-		private readonly ITransitService _transitService;
-		private readonly IMailSender _mailSender;
-		private readonly IMessageBuilder _messageBuilder;
 		private readonly IAuthenticationRepository _authentications;
+		private readonly IClientRepository _clientRepository;
+		private readonly IIdentityService _identity;
+		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
 
-		public ClientService(
+		public ClientManager(
 			IIdentityService identity,
 			IClientRepository clientRepository,
 			ITransitService transitService,
-			IMailSender mailSender,
-			IMessageBuilder messageBuilder,
 			IAuthenticationRepository authentications,
 			IUnitOfWork unitOfWork)
 		{
 			_identity = identity;
 			_clientRepository = clientRepository;
 			_transitService = transitService;
-			_mailSender = mailSender;
-			_messageBuilder = messageBuilder;
 			_authentications = authentications;
 			_unitOfWork = unitOfWork;
 		}
 
-		private bool HaveAccessToClient(long clientUserId)
-		{
-			if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Sender)) return true;
-
-			return clientUserId == _identity.Id;
-		}
-
-		public ClientData GetClientData(long? id = null)
-		{
-			ClientData data;
-
-			if (id.HasValue)
-			{
-				data = _clientRepository.GetById(id.Value);
-			}
-			else if (_identity.Id.HasValue)
-			{
-				data = _clientRepository.GetByUserId(_identity.Id.Value);
-			}
-			else
-			{
-				return null;
-			}
-
-			if (!HaveAccessToClient(data.UserId))
-				throw new AccessForbiddenException();
-
-			return data;
-		}
-
-		public ListCollection<ClientData> GetList(int take, int skip)
-		{
-			var total = _clientRepository.Count();
-
-			var data = _clientRepository.GetRange(skip, take).ToArray();
-
-			return new ListCollection<ClientData> { Data = data, Total = total };
-		}
-
-		public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel)
+		public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
+						   AuthenticationModel authenticationModel)
 		{
 			var data = _clientRepository.Get(clientId).First();
 
@@ -114,14 +69,16 @@ namespace Alicargo.Services
 			}
 		}
 
-		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel)
+		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
+						AuthenticationModel authenticationModel)
 		{
 			Func<long> id;
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
-				var userId = _authentications.Add(authenticationModel.Login, authenticationModel.NewPassword, _identity.TwoLetterISOLanguageName);
+				var userId = _authentications.Add(authenticationModel.Login, authenticationModel.NewPassword,
+												  _identity.TwoLetterISOLanguageName);
 
 				_unitOfWork.SaveChanges();
 
@@ -144,7 +101,7 @@ namespace Alicargo.Services
 					RS = model.RS,
 					TransitId = transitId
 				};
-				
+
 				id = _clientRepository.Add(data);
 
 				_unitOfWork.SaveChanges();
@@ -152,16 +109,14 @@ namespace Alicargo.Services
 				ts.Complete();
 			}
 
-			EmailOnAdd(model, authenticationModel);
-
 			return id();
 		}
 
-		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)
+		public bool HaveAccessToClient(long clientUserId)
 		{
-			var body = _messageBuilder.ClientAdd(model, authenticationModel);
-			var admins = _messageBuilder.GetAdminEmails().Select(x => x.Email).ToArray();
-			_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, model.Email) { CC = admins });
+			if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Sender)) return true;
+
+			return clientUserId == _identity.Id;
 		}
 	}
 }
