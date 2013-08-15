@@ -29,6 +29,8 @@ namespace Alicargo.ViewModels
 		[DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
 		public string WarehouseWorkingTime { get; set; }
 
+		#region Mapping
+
 		public static TransitData GetData(TransitEditModel model, long carrierId)
 		{
 			return new TransitData
@@ -54,8 +56,10 @@ namespace Alicargo.ViewModels
 				DeliveryType = (DeliveryType)data.DeliveryTypeId,
 				MethodOfTransit = (MethodOfTransit)data.MethodOfTransitId,
 				Phone = data.Phone,
-				RecipientName = data.RecipientName				
+				RecipientName = data.RecipientName
 			};
 		}
+
+		#endregion
 	}
 }

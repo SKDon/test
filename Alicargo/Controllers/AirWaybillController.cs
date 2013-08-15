@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -16,10 +15,10 @@ namespace Alicargo.Controllers
 {
 	public partial class AirWaybillController : Controller
 	{
-		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbManager _awbManager;
-		private readonly IStateConfig _stateConfig;
+		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbRepository _awbRepository;
+		private readonly IStateConfig _stateConfig;
 
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
@@ -41,9 +40,7 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		//[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Sender)]
+		[HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Sender)]
 		public virtual ActionResult Create(long applicationId, AirWaybillEditModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
@@ -83,8 +80,7 @@ namespace Alicargo.Controllers
 
 		#region Edit
 
-		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Sender)]
+		[HttpPost, Access(RoleType.Admin, RoleType.Sender)]
 		public virtual HttpStatusCodeResult Delete(long id)
 		{
 			_awbManager.Delete(id);

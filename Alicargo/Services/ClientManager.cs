@@ -4,7 +4,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 

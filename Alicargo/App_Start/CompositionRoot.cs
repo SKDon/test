@@ -42,6 +42,7 @@ namespace Alicargo.App_Start
 			kernel.Bind(scanner => scanner.FromThisAssembly()
 										  .Select(IsServiceType)
 										  .Excluding<MailSender>()
+										  .Excluding<ClientManager>()
 										  .Excluding<ApplicationManager>()
 										  .Excluding<AwbManager>()
 										  .BindDefaultInterface()

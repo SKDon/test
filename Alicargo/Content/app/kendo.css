@@ -11,8 +11,8 @@
 	}
 
 	.k-edit-form-container input {
-		width: 355px;
 		margin-bottom: 0;
+		width: 355px;
 	}
 
 .k-grid td {
@@ -20,21 +20,21 @@
 }
 
 .k-grid-custom-delete, .k-grid-custom-edit {
-	min-width: 0 !important;
 	height: 25px;
 	line-height: 20px;
+	min-width: 0 !important;
 }
 
 	.k-grid-custom-delete span, .k-grid-custom-edit span {
-		display: inline-block;
-		width: 16px;
-		height: 16px;
-		overflow: hidden;
+		background-image: url('../kendo/2013.2.716/Default/sprite.png');
 		background-repeat: no-repeat;
-		font-size: 0;
-		line-height: 0;
-		background-image: url('../kendo/2013.1.319/Default/sprite.png');
 		border-color: transparent;
+		display: inline-block;
+		font-size: 0;
+		height: 16px;
+		line-height: 0;
+		overflow: hidden;
+		width: 16px;
 	}
 
 	.k-grid-custom-delete span {

@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
-using Alicargo.Core.Enums;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -48,7 +47,7 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
-		[HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Client)]
+		[ValidateAntiForgeryToken, HttpPost, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
 										   CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
@@ -106,7 +105,7 @@ namespace Alicargo.Controllers
 		}
 
 		// todo: test
-		[HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Client)]
+		[ValidateAntiForgeryToken, HttpPost, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id, ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
 										 CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
@@ -114,8 +113,7 @@ namespace Alicargo.Controllers
 
 			if (!ModelState.IsValid) return View(model);
 
-			if (
-				!HandleDublicateLogin(() => _clientManager.Update(data.Id, model, carrierModel, transitModel, authenticationModel)))
+			if (!HandleDublicateLogin(() => _clientManager.Update(data.Id, model, carrierModel, transitModel, authenticationModel)))
 			{
 				return View(model);
 			}

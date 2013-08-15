@@ -27,6 +27,7 @@ namespace Alicargo.TestHelpers
 			}).ContinueWith(task =>
 			{
 				var responseMessage = task.Result;
+
 				responseMessage.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
 			}).Wait();
 		}
