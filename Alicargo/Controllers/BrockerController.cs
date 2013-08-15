@@ -13,7 +13,7 @@ namespace Alicargo.Controllers
 {
 	public partial class BrockerController : Controller
 	{
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 		private readonly IAwbManager _awbManager;
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateConfig _stateConfig;
@@ -21,7 +21,7 @@ namespace Alicargo.Controllers
 		public BrockerController(
 			IBrockerRepository brockerRepository,
 			IStateConfig stateConfig,
-			IAWBRepository awbRepository,
+			IAwbRepository awbRepository,
 			IAwbManager awbManager)
 		{
 			_brockerRepository = brockerRepository;

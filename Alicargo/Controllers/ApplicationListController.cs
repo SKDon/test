@@ -14,11 +14,11 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationListPresenter _applicationPresenter;
 		private readonly IClientRepository _clientRepository;
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListController(IApplicationListPresenter applicationPresenter,
-			IClientRepository clientRepository, IAWBRepository awbRepository,
+			IClientRepository clientRepository, IAwbRepository awbRepository,
 			IStateConfig stateConfig)
 		{
 			_applicationPresenter = applicationPresenter;

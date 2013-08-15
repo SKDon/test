@@ -16,7 +16,7 @@ namespace Alicargo.Services.Email
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAuthenticationRepository _authenticationRepository;
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 		private readonly IMailSender _mailSender;
 		private readonly IApplicationManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
@@ -28,7 +28,7 @@ namespace Alicargo.Services.Email
 			IStateConfig stateConfig,
 			IApplicationPresenter applicationPresenter,
 			IAuthenticationRepository authenticationRepository,
-			IAWBRepository awbRepository,
+			IAwbRepository awbRepository,
 			IApplicationRepository applicationRepository,
 			IApplicationManager manager)
 		{

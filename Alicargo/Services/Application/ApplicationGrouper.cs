@@ -12,9 +12,9 @@ namespace Alicargo.Services.Application
 {
 	public sealed class ApplicationGrouper : IApplicationGrouper
 	{
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 
-		public ApplicationGrouper(IAWBRepository awbRepository)
+		public ApplicationGrouper(IAwbRepository awbRepository)
 		{
 			_awbRepository = awbRepository;
 		}

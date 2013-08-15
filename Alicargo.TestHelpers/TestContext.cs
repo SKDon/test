@@ -19,7 +19,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
 		public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
 		public Mock<IApplicationManager> ApplicationManager { get; private set; }
-		public Mock<IAWBRepository> AirWaybillRepository { get; private set; }
+		public Mock<IAwbRepository> AirWaybillRepository { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }
@@ -42,7 +42,7 @@ namespace Alicargo.TestHelpers
 			ApplicationRepository = Inject<IApplicationRepository>();
 			ApplicationUpdater = Inject<IApplicationUpdateRepository>();
 			ApplicationManager = Inject<IApplicationManager>();
-			AirWaybillRepository = Inject<IAWBRepository>();
+			AirWaybillRepository = Inject<IAwbRepository>();
 			StateConfig = Inject<IStateConfig>();
 			UnitOfWork = Inject<IUnitOfWork>();
 			Transaction = Inject<ITransaction>();

@@ -8,7 +8,7 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class AwbRepository : BaseRepository, IAWBRepository
+	internal sealed class AwbRepository : BaseRepository, IAwbRepository
 	{
 		private readonly Expression<Func<AirWaybill, AirWaybillData>> _selector;
 

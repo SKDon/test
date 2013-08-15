@@ -18,13 +18,13 @@ namespace Alicargo.Controllers
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbManager _awbManager;
 		private readonly IStateConfig _stateConfig;
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
 			IAwbManager awbManager,
 			IStateConfig stateConfig,
-			IAWBRepository awbRepository)
+			IAwbRepository awbRepository)
 		{
 			_awbPresenter = awbPresenter;
 			_awbManager = awbManager;

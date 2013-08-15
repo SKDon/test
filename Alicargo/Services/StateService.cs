@@ -18,14 +18,14 @@ namespace Alicargo.Services
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateRepository _stateRepository;
 		private readonly ConcurrentDictionary<long, bool> _permissions = new ConcurrentDictionary<long, bool>();
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 
-		public StateService(IStateRepository stateRepository, IIdentityService identity, IStateConfig stateConfig, IAWBRepository AwbRepository)
+		public StateService(IStateRepository stateRepository, IIdentityService identity, IStateConfig stateConfig, IAwbRepository awbRepository)
 		{
 			_stateRepository = stateRepository;
 			_identity = identity;
 			_stateConfig = stateConfig;
-			_awbRepository = AwbRepository;
+			_awbRepository = awbRepository;
 		}
 
 		public long[] GetAvailableStatesToSet()
@@ -127,8 +127,8 @@ namespace Alicargo.Services
 
 			if (applicationData.AirWaybillId.HasValue)
 			{
-				var AirWaybillData = _awbRepository.Get(applicationData.AirWaybillId.Value).First();
-				if (AirWaybillData.GTD.IsNullOrWhiteSpace())
+				var airWaybillData = _awbRepository.Get(applicationData.AirWaybillId.Value).First();
+				if (airWaybillData.GTD.IsNullOrWhiteSpace())
 				{
 					states.Remove(_stateConfig.CargoAtCustomsStateId);
 				}

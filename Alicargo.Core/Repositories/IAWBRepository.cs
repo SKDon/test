@@ -3,7 +3,7 @@ using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.Core.Repositories
 {
-	public interface IAWBRepository
+	public interface IAwbRepository
 	{
 		Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile);
 		long Count(long? brockerId = null);

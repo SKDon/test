@@ -29,7 +29,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		private ITransitRepository _transitRepository;
 		private ICarrierRepository _carrierRepository;
 		private IBrockerRepository _brockerRepository;
-		private IAWBRepository _airWaybillRepository;
+		private IAwbRepository _airWaybillRepository;
 		private IStateRepository _stateRepository;
 
 		[TestInitialize]

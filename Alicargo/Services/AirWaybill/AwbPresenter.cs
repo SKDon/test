@@ -12,13 +12,13 @@ namespace Alicargo.Services.AirWaybill
 {
 	public sealed class AwbPresenter : IAwbPresenter
 	{
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateService _stateService;
 		private readonly IIdentityService _identityService;
 
 		public AwbPresenter(
-			IAWBRepository awbRepository,
+			IAwbRepository awbRepository,
 			IBrockerRepository brockerRepository,
 			IStateService stateService,
 			IIdentityService identityService)

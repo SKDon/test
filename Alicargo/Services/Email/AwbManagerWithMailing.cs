@@ -13,7 +13,7 @@ namespace Alicargo.Services.Email
 	public sealed class AwbManagerWithMailing : IAwbManager
 	{
 		private readonly IAwbPresenter _awbPresenter;
-		private readonly IAWBRepository _awbRepository;
+		private readonly IAwbRepository _awbRepository;
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IAwbManager _manager;
 		private readonly IMailSender _mailSender;
@@ -23,7 +23,7 @@ namespace Alicargo.Services.Email
 			IAwbManager manager,
 			IApplicationPresenter applicationPresenter,
 			IAwbPresenter awbPresenter,
-			IAWBRepository awbRepository,
+			IAwbRepository awbRepository,
 			IMailSender mailSender,
 			IMessageBuilder messageBuilder)
 		{
