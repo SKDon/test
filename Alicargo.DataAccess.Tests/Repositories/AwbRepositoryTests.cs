@@ -54,7 +54,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
             Assert.AreEqual(airWaybillDatas.Length, count);
 
-            var range = _awbRepository.GetRange(0, (int)count);
+            var range = _awbRepository.GetRange(0, (int) count);
 
             airWaybillDatas.ShouldBeEquivalentTo(range);
         }
@@ -79,29 +79,55 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
             var emails = _awbRepository.GetClientEmails(id());
 
-            var clients = new ClientRepository(_context.UnitOfWork).Get(DbTestContext.TestClientId1, DbTestContext.TestClientId2);
+            var clients = new ClientRepository(_context.UnitOfWork).Get(DbTestContext.TestClientId1,
+                                                                        DbTestContext.TestClientId2);
 
             emails.ShouldBeEquivalentTo(clients.Select(x => x.Email).ToArray());
         }
 
+        [TestMethod]
+        public void Test_AwbRepository_Update()
+        {
+            var data = CreateTestAirWaybill();
+
+            var newData = CreateAirWaybillData();
+            newData.StateId = data.StateId;
+            newData.Id = data.Id;
+            newData.BrockerId = data.BrockerId;
+            newData.CreationTimestamp = data.CreationTimestamp;
+            newData.StateChangeTimestamp = data.StateChangeTimestamp;
+
+            var gtdFile = _context.RandomBytes();
+            var additionalFile = _context.RandomBytes();
+            var packingFile = _context.RandomBytes();
+            var invoiceFile = _context.RandomBytes();
+            var awbFile = _context.RandomBytes();
+            _awbRepository.Update(newData, gtdFile, additionalFile, packingFile, invoiceFile, awbFile);
+            _context.UnitOfWork.SaveChanges();
+
+            var actual = _awbRepository.Get(newData.Id).First();
+            actual.ShouldBeEquivalentTo(newData);
+
+            _awbRepository.GetGTDFile(newData.Id).FileData.ShouldBeEquivalentTo(gtdFile);
+            _awbRepository.GTDAdditionalFile(newData.Id).FileData.ShouldBeEquivalentTo(additionalFile);
+            _awbRepository.GetPackingFile(newData.Id).FileData.ShouldBeEquivalentTo(packingFile);
+            _awbRepository.GetInvoiceFile(newData.Id).FileData.ShouldBeEquivalentTo(invoiceFile);
+            _awbRepository.GetAWBFile(newData.Id).FileData.ShouldBeEquivalentTo(awbFile);
+        }
+
         private AirWaybillData CreateTestAirWaybill()
         {
-            var brockerRepository = new BrockerRepository(_context.UnitOfWork);
-            var brocker = brockerRepository.GetAll().First();
+            var data = CreateAirWaybillData();
 
-            var model = _context.Fixture
-                                .Build<AirWaybillData>()
-                                .With(x => x.StateId, DbTestContext.DefaultStateId)
-                                .With(x => x.BrockerId, brocker.Id)
-                                .Create();
-
-            var id = _awbRepository.Add(model, _context.RandomBytes(), _context.RandomBytes(),
+            var id = _awbRepository.Add(data, _context.RandomBytes(), _context.RandomBytes(),
                                         _context.RandomBytes(), _context.RandomBytes(),
                                         _context.RandomBytes());
-            _context.UnitOfWork.SaveChanges();
-            model.Id = id();
 
-            return model;
+            _context.UnitOfWork.SaveChanges();
+
+            data.Id = id();
+
+            return data;
         }
 
         [TestMethod]
@@ -152,7 +178,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
                            .With(x => x.CountryId, null)
                            .With(x => x.StateId, DbTestContext.DefaultStateId)
                            .With(x => x.TransitId, 1)
-                           .With(x => x.CurrencyId, (int)CurrencyType.Dollar)
+                           .With(x => x.CurrencyId, (int) CurrencyType.Dollar)
                            .Create();
         }
 

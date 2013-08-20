@@ -28,7 +28,7 @@ namespace Alicargo.DataAccess.DbContext
 		{
 			_context = new AlicargoDataContext(connection);
 
-			Debug();
+			//Debug();
 		}
 
 		[Conditional("DEBUG")]
