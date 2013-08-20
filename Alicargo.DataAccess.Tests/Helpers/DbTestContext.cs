@@ -17,6 +17,11 @@ namespace Alicargo.DataAccess.Tests.Helpers
 
         public IUnitOfWork UnitOfWork { get; private set; }
 
+        public const long TestBrockerId = 1;
+        public const long TestClientId = 2;
+        public const long DefaultStateId = 1;
+
+
         public DbTestContext()
         {
             Fixture = new Fixture();

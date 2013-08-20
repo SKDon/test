@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Enums;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Tests.Helpers;
 using FluentAssertions;
@@ -12,7 +13,6 @@ namespace Alicargo.DataAccess.Tests.Repositories
     [TestClass]
     public class AwbRepositoryTests
     {
-        public const long DefaultStateId = 1;
         private IAwbRepository _awbRepository;
         private DbTestContext _context;
 
@@ -66,13 +66,13 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
             var model = _context.Fixture
                                 .Build<AirWaybillData>()
-                                .With(x => x.StateId, DefaultStateId)
+                                .With(x => x.StateId, DbTestContext.DefaultStateId)
                                 .With(x => x.BrockerId, brocker.Id)
                                 .Create();
 
             var id = _awbRepository.Add(model, _context.RandomBytes(), _context.RandomBytes(),
-                                               _context.RandomBytes(), _context.RandomBytes(),
-                                               _context.RandomBytes());
+                                        _context.RandomBytes(), _context.RandomBytes(),
+                                        _context.RandomBytes());
             _context.UnitOfWork.SaveChanges();
             model.Id = id();
 
@@ -80,17 +80,17 @@ namespace Alicargo.DataAccess.Tests.Repositories
         }
 
         [TestMethod]
-        public void Test_GetAggregate()
+        public void Test_AwbRepository_GetAggregate()
         {
-            var id1 = _awbRepository.Add(_context.Fixture.Create<AirWaybillData>(), null, null, null, null, null);
-            var id2 = _awbRepository.Add(_context.Fixture.Create<AirWaybillData>(), null, null, null, null, null);
+            var id1 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
+            var id2 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
             _context.UnitOfWork.SaveChanges();
 
             var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
-            var data1 = _context.Fixture.Create<ApplicationData>();
-            var data2 = _context.Fixture.Create<ApplicationData>();
-            var data3 = _context.Fixture.Create<ApplicationData>();
-            var data4 = _context.Fixture.Create<ApplicationData>();
+            var data1 = CreateApplicationData();
+            var data2 = CreateApplicationData();
+            var data3 = CreateApplicationData();
+            var data4 = CreateApplicationData();
             var a1 = applications.Add(data1, null, null, null, null, null, null);
             var a2 = applications.Add(data2, null, null, null, null, null, null);
             var a3 = applications.Add(data3, null, null, null, null, null, null);
@@ -115,6 +115,28 @@ namespace Alicargo.DataAccess.Tests.Repositories
 
             aggregate1.TotalWeight.ShouldBeEquivalentTo(data1.Weigth + data2.Weigth);
             aggregate2.TotalWeight.ShouldBeEquivalentTo(data3.Weigth + data4.Weigth);
+        }
+
+        private ApplicationData CreateApplicationData()
+        {
+            return _context.Fixture
+                           .Build<ApplicationData>()
+                           .With(x => x.ClientId, DbTestContext.TestClientId)
+                           .With(x => x.AirWaybillId, null)
+                           .With(x => x.CountryId, null)
+                           .With(x => x.StateId, DbTestContext.DefaultStateId)
+                           .With(x => x.TransitId, 1)
+                           .With(x => x.CurrencyId, (int)CurrencyType.Dollar)
+                           .Create();
+        }
+
+        private AirWaybillData CreateAirWaybillData()
+        {
+            return _context.Fixture
+                           .Build<AirWaybillData>()
+                           .With(x => x.StateId, DbTestContext.DefaultStateId)
+                           .With(x => x.BrockerId, DbTestContext.TestBrockerId)
+                           .Create();
         }
     }
 }
