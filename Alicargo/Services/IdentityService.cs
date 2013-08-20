@@ -9,7 +9,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
 {
-	// todo: tests
+	// todo: 2. chached interception
 	public sealed class IdentityService : IIdentityService
 	{
 		private readonly IAuthenticationRepository _authentications;
@@ -58,7 +58,7 @@ namespace Alicargo.Services
 
 				return _twoLetterISOLanguageName;
 			}
-			set // todo: make a function instead the setter
+			set // todo: 1.1. make a function instead the setter
 			{
 				if (value != Contracts.Enums.TwoLetterISOLanguageName.Russian 
 					&& value != Contracts.Enums.TwoLetterISOLanguageName.Italian

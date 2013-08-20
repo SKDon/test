@@ -40,6 +40,7 @@ namespace Alicargo.Services.AirWaybill
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
+                // todo: 2. mapper
 				var data = new AirWaybillData
 				{
 					StateId = _stateConfig.CargoIsFlewStateId,
@@ -73,9 +74,9 @@ namespace Alicargo.Services.AirWaybill
 			}
 		}
 
-		// todo: refactor with decorator
 		public void SetAwb(long applicationId, long? awbId)
 		{
+            // todo: 2. test
 			if (awbId.HasValue)
 			{
 				var aggregate = _awbRepository.GetAggregate(awbId.Value).First();
@@ -106,6 +107,7 @@ namespace Alicargo.Services.AirWaybill
 			{
 				var data = _awbRepository.Get(id).First();
 
+                // // todo: 2. mapper
 				data.PackingFileName = model.PackingFileName;
 				data.InvoiceFileName = model.InvoiceFileName;
 				data.AWBFileName = model.AWBFileName;
@@ -119,11 +121,13 @@ namespace Alicargo.Services.AirWaybill
 				data.DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString);
 				data.DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString);
 
+                // todo: 1. test
 				// Update must be before SetState
+                // todo: 2. use update file methods
 				_awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile,
 											 model.AWBFile);
-				// todo: use update file methods
 
+                // todo: 1. test
 				if (IsReadyForCargoAtCustomsStateId(data))
 				{
 					if (!IsReadyForCargoAtCustomsStateId(data) && data.StateId != _stateConfig.CargoIsCustomsClearedStateId)
@@ -136,13 +140,13 @@ namespace Alicargo.Services.AirWaybill
 			}
 		}
 
-		// todo: test
 		public void Update(long id, BrockerAWBModel model)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var data = _awbRepository.Get(id).First();
 
+                // todo: 1. test
 				if (data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
 				{
 					throw new UnexpectedStateException(data.StateId,
@@ -150,17 +154,20 @@ namespace Alicargo.Services.AirWaybill
 													   + _stateConfig.CargoIsCustomsClearedStateId.ToString(CultureInfo.InvariantCulture));
 				}
 
+                // todo: 2. mapper
 				data.PackingFileName = model.PackingFileName;
 				data.InvoiceFileName = model.InvoiceFileName;
 				data.GTD = model.GTD;
 				data.GTDFileName = model.GTDFileName;
 				data.GTDAdditionalFileName = model.GTDAdditionalFileName;
 
+                // todo: 1. test
+                // todo: 2. use update file methods
 				// Update must be before SetState
 				_awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile,
 											 null);
-				// todo: refator update methods
 
+                // todo: 1. test
 				if (IsReadyForCargoAtCustomsStateId(data))
 				{
 					if (!IsReadyForCargoAtCustomsStateId(data) && data.StateId != _stateConfig.CargoIsCustomsClearedStateId)
@@ -173,13 +180,13 @@ namespace Alicargo.Services.AirWaybill
 			}
 		}
 
-		// todo: test
 		public void Delete(long id)
 		{
 			using (var ts = _unitOfWork.StartTransaction())
 			{
 				var applicationDatas = _applicationRepository.GetByAirWaybill(id);
 
+                // todo: 1. test sets
 				foreach (var app in applicationDatas)
 				{
 					_applicationUpdater.SetAirWaybill(app.Id, null);
@@ -213,6 +220,7 @@ namespace Alicargo.Services.AirWaybill
 			{
 				_awbRepository.SetState(airWaybillId, newStateId);
 
+                // todo: 1. test sets
 				foreach (var application in applications)
 				{
 					if (currentStateId == application.StateId)

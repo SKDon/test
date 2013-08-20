@@ -32,7 +32,6 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
-		// todo: test
 		[HttpPost]
 		public virtual ActionResult Login(SignIdModel user)
 		{

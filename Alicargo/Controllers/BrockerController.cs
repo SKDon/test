@@ -40,7 +40,7 @@ namespace Alicargo.Controllers
 			{
 				Id = selectedId.HasValue
 					? selectedId.Value
-					: all.First().Id, // todo: test
+					: all.First().Id, // todo: 3. test
 				List = all.ToDictionary(x => x.Id, x => x.Name),
 				Name = name
 			};
@@ -58,6 +58,7 @@ namespace Alicargo.Controllers
 				return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
+            // todo: 2. mapper
 			var model = new BrockerAWBModel
 			{
 				GTD = data.GTD,
@@ -82,7 +83,7 @@ namespace Alicargo.Controllers
 			ViewBag.AwbId = data.Id;
 		}
 
-		// todo: test
+		// todo: 1. test
 		[Access(RoleType.Brocker), HttpPost]
 		public virtual ActionResult AWB(long id, BrockerAWBModel model)
 		{

@@ -11,7 +11,6 @@ using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services
 {
-	// todo: test
 	public sealed class StateService : IStateService
 	{
 		private readonly IIdentityService _identity;
@@ -28,6 +27,7 @@ namespace Alicargo.Services
 			_awbRepository = awbRepository;
 		}
 
+        // todo: 1. test
 		public long[] GetAvailableStatesToSet()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
@@ -50,7 +50,7 @@ namespace Alicargo.Services
 				return _stateRepository.GetAvailableStates(RoleType.Sender).Except(_stateConfig.AwbStates).ToArray();
 			}
 
-			// todo: a brocker should not be here because he don't use states
+			// todo: 3. a brocker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Brocker))
 			{
 				return _stateRepository.GetAvailableStates(RoleType.Brocker);
@@ -59,6 +59,7 @@ namespace Alicargo.Services
 			throw new InvalidLogicException("Unsupported role");
 		}
 
+        // todo: 1. test
 		public long[] GetVisibleStates()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
@@ -81,7 +82,7 @@ namespace Alicargo.Services
 				return _stateRepository.GetVisibleStates(RoleType.Sender);
 			}
 
-			// todo: a brocker should not be here because he don't use states
+			// todo: 3. brocker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Brocker))
 			{
 				return _stateRepository.GetVisibleStates(RoleType.Brocker);
@@ -90,9 +91,10 @@ namespace Alicargo.Services
 			throw new InvalidLogicException();
 		}
 
+        // todo: 1. test
 		public bool HasPermissionToSetState(long stateId)
 		{
-			// todo: move cache to an interception
+			// todo: 2. move cache to an interception
 			return _permissions.GetOrAdd(stateId, x =>
 			{
 				var roles = _stateRepository.GetAvailableRoles(x);
@@ -100,16 +102,18 @@ namespace Alicargo.Services
 			});
 		}
 
-		// todo: move to repository and test
+        // todo: 1. test
+        // todo: 1.5. move to repository and test
 		public long[] FilterByPosition(long[] states, int position)
 		{
-			return _stateRepository.GetAll() // todo: pass states to Get
+			return _stateRepository.GetAll() // todo: 3. pass state ids to Get
 				.Where(x => states.Contains(x.Id) && x.Position >= position)
 				.Select(x => x.Id)
 				.ToArray();
 		}
 
-		public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates)
+        // todo: 1. test
+        public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates)
 		{
 			var states = availableStates.ToList();
 

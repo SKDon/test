@@ -20,7 +20,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				unchecked // todo: fix and test
+				unchecked // todo: 3. fix and test
 				{
 					return (DateTimeOffset.UtcNow - CreationTimestamp.ToUniversalTime()).Days;
 				}
@@ -31,7 +31,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: test time zones
+				// todo: 3. test time zones
 				return CreationTimestamp.LocalDateTime.ToShortDateString();
 			}
 		}
@@ -40,7 +40,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: test time zones
+				// todo: 3. test time zones
 				return StateChangeTimestamp.LocalDateTime.ToShortDateString();
 			}
 		}
@@ -49,7 +49,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: test time zones
+                // todo: 3. test time zones
 				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.LocalDateTime.ToShortDateString() : null;
 			}
 		}
@@ -58,7 +58,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: test time zones
+				// todo: 3. test time zones
 				return DateInStock.HasValue ? DateInStock.Value.LocalDateTime.ToShortDateString() : null;
 			}
 		}

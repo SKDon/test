@@ -75,8 +75,8 @@ namespace Alicargo.Services.Application
 					StateId = x.StateId,
 					StateName = localizedStates[x.StateId]
 				},
-				CanClose = x.StateId == _stateConfig.CargoOnTransitStateId, // todo: test 1.
-				CanSetState = availableStates.Contains(x.StateId), // todo: test 1.
+				CanClose = x.StateId == _stateConfig.CargoOnTransitStateId, // todo: 1. test
+                CanSetState = availableStates.Contains(x.StateId), // todo: 1. test
 				AddressLoad = x.AddressLoad,
 				Id = x.Id,
 				PackingFileName = x.PackingFileName,

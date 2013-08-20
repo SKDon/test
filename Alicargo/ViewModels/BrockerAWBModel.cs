@@ -20,7 +20,7 @@ namespace Alicargo.ViewModels
 		[DisplayNameLocalized(typeof(Entities), "Packing")]
 		public string PackingFileName { get; set; }
 
-		#region // todo: remove file fields
+		#region // todo: 2. remove file fields
 
 		[DisplayNameLocalized(typeof (Entities), "GTD")]
 		public byte[] GTDFile { get; set; }

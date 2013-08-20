@@ -11,7 +11,7 @@ using Resources;
 
 namespace Alicargo.Services.Email
 {
-	// todo: use recipient culture
+	// todo: 1.5. use recipient culture
 	public sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly IUserRepository _userRepository;

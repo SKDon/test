@@ -29,7 +29,7 @@ namespace Alicargo.DataAccess.Repositories
 			return user;
 		}
 
-		// todo: test
+		// todo: 2. test
 		public UserData[] GetByRole(RoleType role)
 		{
 			switch (role)

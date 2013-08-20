@@ -8,7 +8,6 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	// todo: test
 	public sealed class ApplicationManager : IApplicationManager
 	{
 		private readonly IApplicationRepository _applicationRepository;
@@ -38,6 +37,7 @@ namespace Alicargo.Services.Application
 		{
 			var data = _applicationRepository.Get(id);
 
+            // todo: 2. create mapper and test it
 			var application = new ApplicationEditModel
 			{
 				AddressLoad = data.AddressLoad,
@@ -79,6 +79,7 @@ namespace Alicargo.Services.Application
 
 				_transitService.Update(data.TransitId, transitModel, carrierModel);
 
+                // todo: 2. create mapper and test it
 				data.Invoice = model.Invoice;
 				data.InvoiceFileName = model.InvoiceFileName;
 				data.SwiftFileName = model.SwiftFileName;
@@ -118,6 +119,7 @@ namespace Alicargo.Services.Application
 			{
 				var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
+                // todo: 2. create mapper and test it
 				var data = new ApplicationData
 				{
 					CreationTimestamp = DateTimeOffset.UtcNow,
@@ -185,28 +187,33 @@ namespace Alicargo.Services.Application
 		public void SetTransitReference(long id, string transitReference)
 		{
 			_applicationUpdater.SetTransitReference(id, transitReference);
+
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_applicationUpdater.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetState(long applicationId, long stateId)
 		{
+            // todo: 2. permission interception
 			if (!_stateService.HasPermissionToSetState(stateId))
 				throw new AccessForbiddenException("User don't have access to the state " + stateId);
 
 			using (var ts = _unitOfWork.StartTransaction())
 			{
+                // todo: 2. test logic with states
 				if (stateId == _stateConfig.CargoInStockStateId)
 				{
 					_applicationUpdater.SetDateInStock(applicationId, DateTimeOffset.UtcNow);
 				}
 
 				_applicationUpdater.SetState(applicationId, stateId);
+
 				_unitOfWork.SaveChanges();
 
 				ts.Complete();

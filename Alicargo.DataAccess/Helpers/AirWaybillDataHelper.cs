@@ -2,7 +2,7 @@
 
 namespace Alicargo.DataAccess.Helpers
 {
-	// todo: test
+	// todo: 3. test
 	internal static class AirWaybillDataHelper
 	{
 		public static void CopyTo(this AirWaybillData @from, DbContext.AirWaybill to,
@@ -24,7 +24,7 @@ namespace Alicargo.DataAccess.Helpers
 			to.DepartureAirport = @from.DepartureAirport;
 			to.GTD = @from.GTD;
 
-			// todo: separate repository for files
+			// todo: 2. separate repository for files
 			FileDataHelper.SetFile(gtdFile, from.GTDFileName,
 				bytes => to.GTDFileData = bytes, s => to.GTDFileName = s);
 

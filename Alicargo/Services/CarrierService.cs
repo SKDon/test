@@ -8,7 +8,6 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	// todo: test
 	public sealed class CarrierService : ICarrierService
 	{
 		private readonly ICarrierRepository _carriers;
@@ -24,7 +23,7 @@ namespace Alicargo.Services
 
 		public CarrierSelectModel Get(long? transitId)
 		{
-			return transitId.HasValue
+            return transitId.HasValue // todo: 3. test
 				? new CarrierSelectModel
 				{
 					CarrierId = _transitRepository.Get(transitId.Value).First().CarrierId
@@ -40,6 +39,7 @@ namespace Alicargo.Services
 			return _carriers.GetAll().ToDictionary(x => x.Id, x => x.Name);
 		}
 
+        // todo: 3. test
 		public Func<long> AddOrGetCarrier(string name)
 		{
 			if (name == null) throw new ArgumentNullException("name");

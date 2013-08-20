@@ -6,7 +6,7 @@ namespace Alicargo.Contracts.Repositories
 {
 	public interface IAuthenticationRepository
 	{
-		bool IsInRole(RoleType role, long userId); // todo: tests
+		bool IsInRole(RoleType role, long userId); // todo: 1. bb tests
 		
 		AuthenticationData GetById(long id);
 		AuthenticationData GetByLogin(string login);

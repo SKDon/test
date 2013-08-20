@@ -16,7 +16,7 @@ namespace Alicargo.ViewModels.Application
 
 		public static int GetDaysInWork(DateTimeOffset dateTimeOffset)
 		{
-			unchecked // todo: fix and test
+			unchecked // 3. todo: fix and test
 			{
 				return (DateTimeOffset.UtcNow - dateTimeOffset.ToUniversalTime()).Days;
 			}

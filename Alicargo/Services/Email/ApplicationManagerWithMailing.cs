@@ -10,7 +10,8 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Email
 {
-	// todo: test!!!
+    // todo: 1.5. create the mailing engine
+    // todo: 2. send a message constraction
 	public sealed class ApplicationManagerWithMailing : IApplicationManager
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
@@ -105,6 +106,7 @@ namespace Alicargo.Services.Email
 				var body = _messageBuilder.ApplicationInvoiceFileAdded(details);
 				var to = _messageBuilder.GetSenderEmails();
 				var file = _applicationRepository.GetInvoiceFile(details.Id);
+
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
 				_mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) {Files = new[] {file}});
 			}
@@ -114,6 +116,7 @@ namespace Alicargo.Services.Email
 				var body = _messageBuilder.ApplicationSwiftFileAdded(details);
 				var to = _messageBuilder.GetSenderEmails();
 				var file = _applicationRepository.GetSwiftFile(details.Id);
+
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
 				_mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) {Files = new[] {file}});
 			}
@@ -132,6 +135,7 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.ApplicationDeliveryBillFileAdded(details);
 				var file = _applicationRepository.GetDeliveryBillFile(details.Id);
+
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
 			}
 
@@ -139,6 +143,7 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.ApplicationTorg12FileAdded(details);
 				var file = _applicationRepository.GetTorg12File(details.Id);
+
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
 			}
 
@@ -146,6 +151,7 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.ApplicationCPFileAdded(details);
 				var file = _applicationRepository.GetCPFile(details.Id);
+
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
 			}
 		}
@@ -172,6 +178,7 @@ namespace Alicargo.Services.Email
 			foreach (var recipient in to)
 			{
 				var body = _messageBuilder.ApplicationAdd(model, recipient.Culture);
+
 				_mailSender.Send(new Message(subject, body, recipient.Email));
 			}
 		}
@@ -184,6 +191,7 @@ namespace Alicargo.Services.Email
 			var subject = string.Format(_messageBuilder.ApplicationSubject,
 										ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 
+            // todo: 1. test state dependency
 			if (stateId == _stateConfig.CargoReceivedStateId)
 			{
 				var to = _messageBuilder.GetAdminEmails().Concat(_messageBuilder.GetForwarderEmails()).ToArray();
@@ -223,6 +231,7 @@ namespace Alicargo.Services.Email
 			var swiftFile = _applicationRepository.GetSwiftFile(id);
 			var torg12File = _applicationRepository.GetTorg12File(id);
 
+            // todo: 1. test
 			if (airWaybillId.HasValue)
 			{
 				var gtdFile = _awbRepository.GetGTDFile(airWaybillId.Value);

@@ -8,6 +8,7 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
+    // todo: 1. bb test
 	internal sealed class AwbRepository : BaseRepository, IAwbRepository
 	{
 		private readonly Expression<Func<AirWaybill, AirWaybillData>> _selector;
@@ -60,7 +61,6 @@ namespace Alicargo.DataAccess.Repositories
 				.ToArray();
 		}
 
-		// todo: test
 		public long Count(long? brockerId = null)
 		{
 			return brockerId.HasValue
@@ -68,7 +68,6 @@ namespace Alicargo.DataAccess.Repositories
 				: Context.AirWaybills.LongCount();
 		}
 
-		// todo: test
 		public AirWaybillData[] GetRange(long skip, int take, long? brockerId = null)
 		{
 			var airWaybills = Context.AirWaybills.AsQueryable();
@@ -82,7 +81,6 @@ namespace Alicargo.DataAccess.Repositories
 				.ToArray();
 		}
 
-		// todo: test
 		public AirWaybillAggregate[] GetAggregate(params long[] ids)
 		{
 			var data = Context.AirWaybills
@@ -120,7 +118,6 @@ namespace Alicargo.DataAccess.Repositories
 				.ToArray();
 		}
 
-		// todo: test
 		public void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
 		{
 			var entity = Context.AirWaybills.First(x => x.Id == data.Id);
@@ -128,7 +125,7 @@ namespace Alicargo.DataAccess.Repositories
 			data.CopyTo(entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
 		}
 
-		#region Files // todo: test
+		#region Files // todo: 2. test
 
 		private FileHolder GetFile(Expression<Func<AirWaybill, bool>> where, Expression<Func<AirWaybill, FileHolder>> selector)
 		{
@@ -192,10 +189,10 @@ namespace Alicargo.DataAccess.Repositories
 
 		#endregion
 
-		// todo: test
 		public void Delete(long id)
 		{
 			var airWaybill = Context.AirWaybills.First(x => x.Id == id);
+
 			Context.AirWaybills.DeleteOnSubmit(airWaybill);
 		}
 

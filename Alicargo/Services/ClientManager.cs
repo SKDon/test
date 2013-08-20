@@ -9,7 +9,6 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	// todo: test
 	public sealed class ClientManager : IClientManager
 	{
 		private readonly IAuthenticationRepository _authentications;
@@ -37,6 +36,7 @@ namespace Alicargo.Services
 		{
 			var data = _clientRepository.Get(clientId).First();
 
+            // todo: 1. test permissions
 			if (!HaveAccessToClient(data.UserId))
 				throw new AccessForbiddenException();
 
@@ -46,6 +46,7 @@ namespace Alicargo.Services
 
 				_authentications.Update(data.UserId, authenticationModel.Login, authenticationModel.NewPassword);
 
+                // todo: 2. mapper
 				data.BIC = model.BIC;
 				data.Phone = model.Phone;
 				data.Email = model.Email;
@@ -82,6 +83,7 @@ namespace Alicargo.Services
 
 				_unitOfWork.SaveChanges();
 
+                // todo: 2. mapper
 				var data = new ClientData
 				{
 					UserId = userId(),
@@ -112,6 +114,7 @@ namespace Alicargo.Services
 			return id();
 		}
 
+        // todo: 1. test
 		public bool HaveAccessToClient(long clientUserId)
 		{
 			if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Sender)) return true;

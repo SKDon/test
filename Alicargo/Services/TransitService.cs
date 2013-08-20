@@ -6,7 +6,6 @@ using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services
 {
-	// todo: test
 	public sealed class TransitService : ITransitService
 	{
 		private readonly ICarrierService _carrierService;
@@ -48,6 +47,7 @@ namespace Alicargo.Services
 		public void Delete(long transitId)
 		{
 			_transitRepository.Delete(transitId);
+
 			_unitOfWork.SaveChanges();
 		}
 
@@ -69,10 +69,13 @@ namespace Alicargo.Services
 
 		private long GetCarrierId(CarrierSelectModel model)
 		{
+            // todo: 1. test
 			if (model.NewCarrierName.IsNullOrWhiteSpace()) return model.CarrierId;
 
 			var id = _carrierService.AddOrGetCarrier(model.NewCarrierName);
+
 			_unitOfWork.SaveChanges();
+
 			return id();
 		}
 	}

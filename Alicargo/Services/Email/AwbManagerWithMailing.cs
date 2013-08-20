@@ -9,7 +9,6 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Email
 {
-	// todo: test
 	public sealed class AwbManagerWithMailing : IAwbManager
 	{
 		private readonly IAwbPresenter _awbPresenter;
@@ -48,6 +47,7 @@ namespace Alicargo.Services.Email
 		{
 			_manager.SetAwb(applicationId, awbId);
 
+            // todo: 2. test
 			if (awbId.HasValue)
 			{
 				var model = _awbPresenter.GetData(awbId.Value);

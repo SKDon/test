@@ -4,7 +4,7 @@ namespace Alicargo.DataAccess.Helpers
 {
 	internal static class ApplicationDataHelper
 	{
-		// todo: test
+		// todo: 3. test
 		public static void CopyTo(this ApplicationData from, byte[] swiftFile, byte[] invoiceFile, 
 			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile, DbContext.Application to)
 		{
@@ -43,7 +43,7 @@ namespace Alicargo.DataAccess.Helpers
 
 			to.Invoice = from.Invoice;
 
-			// todo: separate repository for files
+			// todo: 1. separate repository for files
 			FileDataHelper.SetFile(invoiceFile, from.InvoiceFileName,
 				bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
 

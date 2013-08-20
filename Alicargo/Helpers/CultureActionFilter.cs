@@ -23,7 +23,7 @@ namespace Alicargo.Helpers
 				x.TwoLetterISOLanguageName.Equals(languageName,
 					StringComparison.InvariantCultureIgnoreCase));
 
-			// todo: create ambient context
+			// todo: 3.5 create ambient context
 			Thread.CurrentThread.CurrentCulture = culture;
 			Thread.CurrentThread.CurrentUICulture = culture;
 		}

@@ -7,7 +7,6 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	// todo: test
 	public sealed class ClientPresenter : IClientPresenter
 	{
 		private readonly IClientRepository _clientRepository;
@@ -21,6 +20,7 @@ namespace Alicargo.Services
 			_clientManager = clientManager;
 		}
 
+        // todo: 1. test
 		public ClientData GetClientData(long? id = null)
 		{
 			ClientData data;

@@ -30,7 +30,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			_unitOfWork.SaveChanges();
 			var actual = _transitRepository.Get(newData.Id).First();
 
-			oldData.Should().NotBeSameAs(actual); // todo: test
+			oldData.Should().NotBeSameAs(actual); // todo: 1. test that it works
 			newData.ShouldBeEquivalentTo(actual);
 		}
 

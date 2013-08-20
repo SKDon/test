@@ -17,7 +17,7 @@ namespace Alicargo.Contracts.Helpers
 				return null;
 			}
 
-			// todo: move to an utility
+			// todo: 3. move to an utility
 			return group.Select(x => new Order
 			{
 				OrderType = (OrderType)Enum.Parse(typeof(OrderType), x["field"], true),
