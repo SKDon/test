@@ -73,12 +73,12 @@
   <ItemGroup>
     <Compile Include="Helpers\ApplicationHelperTests.cs" />
     <Compile Include="Helpers\ApplicationRepositoryOrdererTests.cs" />
+    <Compile Include="Helpers\DbTestContext.cs" />
     <Compile Include="Repositories\Tests.StateRepository.cs" />
-    <Compile Include="Repositories\Tests.AirWaybillRepository.cs" />
+    <Compile Include="Repositories\AwbRepositoryTests.cs" />
     <Compile Include="Repositories\Tests.BrockerRepository.cs" />
     <Compile Include="Repositories\Tests.CarrierRepository.cs" />
     <Compile Include="Repositories\Tests.ClientRepository.cs" />
-    <Compile Include="Repositories\Tests.Base.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Tests.ApplicationRepository.cs" />
     <Compile Include="Repositories\Tests.TransitRepository.cs" />

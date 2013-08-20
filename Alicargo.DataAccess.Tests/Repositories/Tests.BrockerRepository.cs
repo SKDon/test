@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿/*
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Alicargo.DataAccess.Tests.Repositories
@@ -16,3 +17,4 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		}
 	}
 }
+*/
