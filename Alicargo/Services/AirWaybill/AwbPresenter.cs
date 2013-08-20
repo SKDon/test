@@ -29,6 +29,7 @@ namespace Alicargo.Services.AirWaybill
 			_identityService = identityService;
 		}
 
+        // todo: 1. test
 		public ListCollection<AirWaybillListItem> List(int take, int skip)
 		{
 			long? brockerId = null;
@@ -46,6 +47,7 @@ namespace Alicargo.Services.AirWaybill
 
 			var localizedStates = _stateService.GetLocalizedDictionary();
 
+            // todo: 2. mapper
 			var items = data.Select(x => new AirWaybillListItem
 			{
 				Id = x.Id,

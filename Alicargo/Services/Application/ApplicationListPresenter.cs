@@ -36,6 +36,7 @@ namespace Alicargo.Services.Application
 			_stateConfig = stateConfig;
 		}
 
+        // todo: 1. test
 		public ApplicationListCollection List(int take, int skip, Order[] groups)
 		{
 			var stateIds = _stateService.GetVisibleStates();
@@ -67,6 +68,7 @@ namespace Alicargo.Services.Application
 			var localizedStates = _stateService.GetLocalizedDictionary();
 			var availableStates = _stateService.GetAvailableStatesToSet();
 
+            // todo: 2. mapper
 			var applications = data.Select(x => new ApplicationListItem
 			{
 				CountryName = x.CountryId.HasValue ? countries[x.CountryId.Value] : null,

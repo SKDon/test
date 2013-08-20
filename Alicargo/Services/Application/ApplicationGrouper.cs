@@ -10,6 +10,7 @@ using Resources;
 
 namespace Alicargo.Services.Application
 {
+    // todo: 1. tests
 	public sealed class ApplicationGrouper : IApplicationGrouper
 	{
 		private readonly IAwbRepository _awbRepository;
