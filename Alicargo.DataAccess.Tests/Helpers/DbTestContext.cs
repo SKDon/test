@@ -18,7 +18,8 @@ namespace Alicargo.DataAccess.Tests.Helpers
         public IUnitOfWork UnitOfWork { get; private set; }
 
         public const long TestBrockerId = 1;
-        public const long TestClientId = 2;
+        public const long TestClientId1 = 2;
+        public const long TestClientId2 = 3;
         public const long DefaultStateId = 1;
 
 

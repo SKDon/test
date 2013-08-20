@@ -59,6 +59,31 @@ namespace Alicargo.DataAccess.Tests.Repositories
             airWaybillDatas.ShouldBeEquivalentTo(range);
         }
 
+        [TestMethod]
+        public void Test_AirWaybillRepository_GetClientEmails()
+        {
+            var data1 = CreateApplicationData(DbTestContext.TestClientId1);
+            var data2 = CreateApplicationData(DbTestContext.TestClientId2);
+
+            var id = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
+            _context.UnitOfWork.SaveChanges();
+
+            var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
+            var a1 = applications.Add(data1, null, null, null, null, null, null);
+            var a2 = applications.Add(data2, null, null, null, null, null, null);
+            _context.UnitOfWork.SaveChanges();
+
+            applications.SetAirWaybill(a1(), id());
+            applications.SetAirWaybill(a2(), id());
+            _context.UnitOfWork.SaveChanges();
+
+            var emails = _awbRepository.GetClientEmails(id());
+
+            var clients = new ClientRepository(_context.UnitOfWork).Get(DbTestContext.TestClientId1, DbTestContext.TestClientId2);
+
+            emails.ShouldBeEquivalentTo(clients.Select(x => x.Email).ToArray());
+        }
+
         private AirWaybillData CreateTestAirWaybill()
         {
             var brockerRepository = new BrockerRepository(_context.UnitOfWork);
@@ -82,15 +107,16 @@ namespace Alicargo.DataAccess.Tests.Repositories
         [TestMethod]
         public void Test_AwbRepository_GetAggregate()
         {
+            var data1 = CreateApplicationData(DbTestContext.TestClientId1);
+            var data2 = CreateApplicationData(DbTestContext.TestClientId1);
+            var data3 = CreateApplicationData(DbTestContext.TestClientId1);
+            var data4 = CreateApplicationData(DbTestContext.TestClientId1);
+
             var id1 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
             var id2 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
             _context.UnitOfWork.SaveChanges();
 
             var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
-            var data1 = CreateApplicationData();
-            var data2 = CreateApplicationData();
-            var data3 = CreateApplicationData();
-            var data4 = CreateApplicationData();
             var a1 = applications.Add(data1, null, null, null, null, null, null);
             var a2 = applications.Add(data2, null, null, null, null, null, null);
             var a3 = applications.Add(data3, null, null, null, null, null, null);
@@ -117,11 +143,11 @@ namespace Alicargo.DataAccess.Tests.Repositories
             aggregate2.TotalWeight.ShouldBeEquivalentTo(data3.Weigth + data4.Weigth);
         }
 
-        private ApplicationData CreateApplicationData()
+        private ApplicationData CreateApplicationData(long clientId)
         {
             return _context.Fixture
                            .Build<ApplicationData>()
-                           .With(x => x.ClientId, DbTestContext.TestClientId)
+                           .With(x => x.ClientId, clientId)
                            .With(x => x.AirWaybillId, null)
                            .With(x => x.CountryId, null)
                            .With(x => x.StateId, DbTestContext.DefaultStateId)
