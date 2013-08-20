@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
         }
 
         [TestMethod]
-        public void Test_AirWaybillRepository_GetAll_Add_Get()
+        public void Test_AwbRepository_GetAll_Add_Get()
         {
             var oldData = _awbRepository.GetAll();
 
@@ -47,7 +47,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
         }
 
         [TestMethod]
-        public void Test_AirWaybillRepository_Count_GetRange()
+        public void Test_AwbRepository_Count_GetRange()
         {
             var airWaybillDatas = _awbRepository.GetAll();
             var count = _awbRepository.Count();
@@ -60,7 +60,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
         }
 
         [TestMethod]
-        public void Test_AirWaybillRepository_GetClientEmails()
+        public void Test_AwbRepository_GetClientEmails()
         {
             var data1 = CreateApplicationData(DbTestContext.TestClientId1);
             var data2 = CreateApplicationData(DbTestContext.TestClientId2);
@@ -113,6 +113,31 @@ namespace Alicargo.DataAccess.Tests.Repositories
             _awbRepository.GetPackingFile(newData.Id).FileData.ShouldBeEquivalentTo(packingFile);
             _awbRepository.GetInvoiceFile(newData.Id).FileData.ShouldBeEquivalentTo(invoiceFile);
             _awbRepository.GetAWBFile(newData.Id).FileData.ShouldBeEquivalentTo(awbFile);
+        }
+
+        [TestMethod]
+        public void Test_AwbRepository_SetState()
+        {
+            var data = CreateTestAirWaybill();
+
+            _awbRepository.SetState(data.Id, DbTestContext.CargoIsFlewStateId);
+            _context.UnitOfWork.SaveChanges();
+
+            var actual = _awbRepository.Get(data.Id).First();
+
+            actual.StateId.ShouldBeEquivalentTo(DbTestContext.CargoIsFlewStateId);
+            actual.StateChangeTimestamp.Should().NotBe(data.StateChangeTimestamp);
+        }
+
+        [TestMethod]
+        public void Test_AwbRepository_Delete()
+        {
+            var data = CreateTestAirWaybill();
+
+            _awbRepository.Delete(data.Id);
+            _context.UnitOfWork.SaveChanges();
+
+            _awbRepository.Get(data.Id).Count().ShouldBeEquivalentTo(0);
         }
 
         private AirWaybillData CreateTestAirWaybill()
