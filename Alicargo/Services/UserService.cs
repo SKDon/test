@@ -30,7 +30,7 @@ namespace Alicargo.Services
 				Name = x.Name,
 				Email = x.Email,
 				RoleType = role,
-				Authentication = new AuthenticationModel
+                Authentication = new AuthenticationModel // todo: 2. mapper
 				{
 					Login = x.Login
 				}
@@ -47,13 +47,14 @@ namespace Alicargo.Services
 				Name = data.Name,
 				RoleType = role,
 				Email = data.Email,
-				Authentication = new AuthenticationModel
+                Authentication = new AuthenticationModel // todo: 2. mapper
 				{
 					Login = data.Login
 				}
 			};
 		}
 
+        // todo: 2. tests
 		public void Update(UserModel model)
 		{
 			switch (model.RoleType)
@@ -82,6 +83,7 @@ namespace Alicargo.Services
 			_unitOfWork.SaveChanges();
 		}
 
+        // todo: 2. tests
 		public void Add(UserModel model)
 		{
 			var twoLetterISOLanguageName = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;

@@ -1,4 +1,5 @@
-﻿//using Alicargo.Contracts.Contracts;
+﻿// todo: 2. fix
+//using Alicargo.Contracts.Contracts;
 //using Alicargo.Core.Models;
 //using FluentAssertions;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
