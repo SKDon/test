@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Localization;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Ninject;
@@ -8,7 +7,7 @@ using log4net;
 
 namespace Alicargo.App_Start
 {
-	public static class FilterConfig
+    internal static class FilterConfig
 	{
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters, IKernel kernel)
 		{

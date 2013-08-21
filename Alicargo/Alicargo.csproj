@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrockerController.cs" />
+    <Compile Include="Helpers\PathConstants.cs" />
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -248,6 +249,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Validation.it.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Abstract\IApplicationListItemMapper.cs" />
     <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationManager.cs" />
     <Compile Include="Services\Abstract\IApplicationPresenter.cs" />
@@ -264,6 +266,7 @@
     <Compile Include="Services\Abstract\IStateService.cs" />
     <Compile Include="Services\Abstract\ITransitService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
+    <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\ClientPresenter.cs" />
     <Compile Include="Services\Contract\Recipient.cs" />

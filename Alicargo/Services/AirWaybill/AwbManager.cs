@@ -11,7 +11,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services.AirWaybill
 {
-	public sealed class AwbManager : IAwbManager
+    internal sealed class AwbManager : IAwbManager
 	{
 		private readonly IAwbRepository _awbRepository;
 		private readonly IApplicationManager _applicationManager;

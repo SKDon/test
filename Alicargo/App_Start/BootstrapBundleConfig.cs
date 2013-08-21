@@ -5,21 +5,16 @@ using Alicargo.Helpers;
 
 namespace Alicargo.App_Start
 {
-	public class BootstrapBundleConfig
+    internal class BootstrapBundleConfig
 	{
-		public const string ScriptsPath = "~/js";
-		public const string ScriptsPathRu = "~/js/ru";
-		public const string ScriptsPathIt = "~/js/it";
-		public const string StylesPath = "~/css";
-
-		public static void RegisterBundles()
+        public static void RegisterBundles()
 		{
 			BundleTable.Bundles.IgnoreList.Clear();
 			BundleTable.Bundles.IgnoreList.Ignore(".intellisense.js", OptimizationMode.Always);
 			BundleTable.Bundles.IgnoreList.Ignore("-vsdoc.js", OptimizationMode.Always);
 			BundleTable.Bundles.IgnoreList.Ignore(".debug.js", OptimizationMode.Always);
 
-			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPath)
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPath)
 				.Include(
 					"~/Scripts/jquery-{version}.js",
 					"~/Scripts/jquery-ui-{version}.js",
@@ -33,21 +28,21 @@ namespace Alicargo.App_Start
 					"~/Scripts/app/Common.js"
 				));
 
-			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPathRu)
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPathRu)
 				.Include(
 					"~/Scripts/jquery.globalize/cultures/globalize.culture.ru.js",
 					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.ru.min.js",
 					"~/Scripts/app/ru.js"
 				));
 
-			BundleTable.Bundles.Add(new ScriptBundle(ScriptsPathIt)
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPathIt)
 				.Include(
 					"~/Scripts/jquery.globalize/cultures/globalize.culture.it.js",
 					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.it.min.js",
 					"~/Scripts/app/it.js"
 				));
 
-			BundleTable.Bundles.Add(new StyleRelativePathTransformBundle(StylesPath)
+			BundleTable.Bundles.Add(new StyleRelativePathTransformBundle(PathConstants.StylesPath)
 				.Include(
 					"~/Content/themes/jMetro/jquery-ui.css",
 					"~/Content/bootstrap.css",

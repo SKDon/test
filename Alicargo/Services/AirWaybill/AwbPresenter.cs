@@ -10,7 +10,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.AirWaybill
 {
-	public sealed class AwbPresenter : IAwbPresenter
+    internal sealed class AwbPresenter : IAwbPresenter
 	{
 		private readonly IAwbRepository _awbRepository;
 		private readonly IBrockerRepository _brockerRepository;

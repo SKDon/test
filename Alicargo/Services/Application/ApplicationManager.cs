@@ -8,7 +8,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	public sealed class ApplicationManager : IApplicationManager
+    internal sealed class ApplicationManager : IApplicationManager
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
