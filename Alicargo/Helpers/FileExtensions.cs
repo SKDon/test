@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace Alicargo.Helpers
 {
-	public static class FileExtensions
+    internal static class FileExtensions
 	{
 		public static byte[] GetBytes(this HttpPostedFileBase file)
 		{

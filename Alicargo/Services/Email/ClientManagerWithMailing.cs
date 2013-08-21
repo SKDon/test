@@ -5,7 +5,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Email
 {
-	public sealed class ClientManagerWithMailing : IClientManager
+    internal sealed class ClientManagerWithMailing : IClientManager
 	{
 		private readonly IMailSender _mailSender;
 		private readonly IClientManager _manager;

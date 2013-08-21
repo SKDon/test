@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
@@ -12,7 +13,7 @@ namespace Alicargo.Services.Email
 {
     // todo: 1.5. create the mailing engine
     // todo: 2. send a message constraction
-	public sealed class ApplicationManagerWithMailing : IApplicationManager
+    internal sealed class ApplicationManagerWithMailing : IApplicationManager
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IApplicationRepository _applicationRepository;

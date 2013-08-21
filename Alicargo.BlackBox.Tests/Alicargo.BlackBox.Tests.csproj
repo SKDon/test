@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1211A26B-2E40-4047-96D3-97D489915412}</ProjectGuid>
+    <ProjectGuid>{6338CF8C-E339-44CC-A185-14D7CF0301BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alicargo.Core.BlackBox.Tests</RootNamespace>
-    <AssemblyName>Alicargo.Core.BlackBox.Tests</AssemblyName>
+    <RootNamespace>Alicargo.BlackBox.Tests</RootNamespace>
+    <AssemblyName>Alicargo.BlackBox.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -44,13 +44,11 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture, Version=3.6.6.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.6.6\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -68,22 +66,26 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="StateServiceTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
       <Project>{e2f1a146-9076-4833-995e-084ac1b3eac7}</Project>
       <Name>Alicargo.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
-      <Project>{577b60f9-32f7-4117-97da-40743bff4ca0}</Project>
-      <Name>Alicargo.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alicargo.DataAccess\Alicargo.DataAccess.csproj">
       <Project>{37068536-3066-4877-91e0-05031d2c5ca3}</Project>
@@ -93,14 +95,6 @@
       <Project>{8666b402-84b6-49d4-abd7-b2966955c9cb}</Project>
       <Name>Alicargo</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

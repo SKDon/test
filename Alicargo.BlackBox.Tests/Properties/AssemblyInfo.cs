@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Alicargo.Core.BlackBox.Tests")]
+[assembly: AssemblyTitle("Alicargo.BlackBox.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alicargo.Core.BlackBox.Tests")]
+[assembly: AssemblyProduct("Alicargo.BlackBox.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("77ef5901-ecb0-4d0d-b3c3-7497673bff6e")]
+[assembly: Guid("0eca81ac-4959-45a4-a8bc-0e638c62977c")]
 
 // Version information for an assembly consists of the following four values:
 //

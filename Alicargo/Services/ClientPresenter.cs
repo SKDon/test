@@ -7,7 +7,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	public sealed class ClientPresenter : IClientPresenter
+    internal sealed class ClientPresenter : IClientPresenter
 	{
 		private readonly IClientRepository _clientRepository;
 		private readonly IIdentityService _identity;

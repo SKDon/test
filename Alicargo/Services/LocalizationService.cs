@@ -6,7 +6,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
 {
-	public sealed class LocalizationService : ILocalizationService
+    internal sealed class LocalizationService : ILocalizationService
 	{
 		private readonly IStateRepository _stateRepository;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Alicargo.Core.Tests.Services
+namespace Alicargo.Tests.Services.AirWaybill
 {
 	[TestClass]
 	public class AwbPresenterTests

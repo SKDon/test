@@ -3,6 +3,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
+using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
@@ -12,7 +13,7 @@ using Resources;
 namespace Alicargo.Services.Email
 {
 	// todo: 1.5. use recipient culture
-	public sealed class MessageBuilder : IMessageBuilder
+    internal sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly ILocalizationService _localizationService;

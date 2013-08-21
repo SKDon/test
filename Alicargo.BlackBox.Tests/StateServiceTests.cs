@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Transactions;
+using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.Services;
@@ -10,7 +10,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Alicargo.Core.BlackBox.Tests
+namespace Alicargo.BlackBox.Tests
 {
 	[TestClass]
 	public class StateServiceTests

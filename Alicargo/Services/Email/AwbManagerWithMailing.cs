@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
@@ -9,7 +10,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Email
 {
-	public sealed class AwbManagerWithMailing : IAwbManager
+    internal sealed class AwbManagerWithMailing : IAwbManager
 	{
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbRepository _awbRepository;

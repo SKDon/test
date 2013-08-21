@@ -6,7 +6,7 @@ using Alicargo.Services.Contract;
 
 namespace Alicargo.Services.Email
 {
-	public sealed class MailSender : IMailSender
+    internal sealed class MailSender : IMailSender
 	{
 		public void Send(params Message[] messages)
 		{

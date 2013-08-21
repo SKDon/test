@@ -4,7 +4,7 @@ using Ninject;
 
 namespace Alicargo.Helpers
 {
-	public abstract class BaseWebViewPage : WebViewPage
+    public abstract class BaseWebViewPage : WebViewPage
 	{
 		[Inject]
 		public IIdentityService IdentityService { get; set; }

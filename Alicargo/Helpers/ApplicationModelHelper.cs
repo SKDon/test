@@ -3,7 +3,7 @@ using System.Globalization;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 
-namespace Alicargo.ViewModels.Application
+namespace Alicargo.Helpers
 {
 	internal sealed class ApplicationModelHelper
 	{

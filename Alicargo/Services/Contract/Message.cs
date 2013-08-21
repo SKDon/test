@@ -3,7 +3,7 @@ using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.Services.Contract
 {
-	public sealed class Message
+    public sealed class Message
 	{
 		public Message(string subject, string body, params string[] to)
 		{

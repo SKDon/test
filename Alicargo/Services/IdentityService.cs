@@ -10,7 +10,7 @@ using Alicargo.Services.Abstract;
 namespace Alicargo.Services
 {
 	// todo: 2. chached interception
-	public sealed class IdentityService : IIdentityService
+    internal sealed class IdentityService : IIdentityService
 	{
 		private readonly IAuthenticationRepository _authentications;
 		private readonly IUnitOfWork _unitOfWork;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
+using Alicargo.Helpers;
 
 namespace Alicargo.ViewModels.Application
 {

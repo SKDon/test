@@ -1,6 +1,6 @@
 ﻿namespace Alicargo.ViewModels.Application
 {
-	public sealed class ApplicationGroup
+    public sealed class ApplicationGroup
 	{
 		// ReSharper disable InconsistentNaming
 		public object aggregates { get; set; }

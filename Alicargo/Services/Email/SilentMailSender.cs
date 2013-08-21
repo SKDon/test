@@ -6,7 +6,7 @@ using log4net;
 
 namespace Alicargo.Services.Email
 {
-	public sealed class SilentMailSender : IMailSender
+    internal sealed class SilentMailSender : IMailSender
 	{
 		private readonly IMailSender _sender;
 		private readonly ILog _log;

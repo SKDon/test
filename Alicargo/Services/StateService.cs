@@ -11,7 +11,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services
 {
-	public sealed class StateService : IStateService
+    internal sealed class StateService : IStateService
 	{
 		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;

@@ -309,7 +309,7 @@
     <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
-    <Compile Include="ViewModels\Application\ApplicationModelHelper.cs" />
+    <Compile Include="Helpers\ApplicationModelHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />

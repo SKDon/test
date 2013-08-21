@@ -37,4 +37,4 @@ using System.Runtime.InteropServices;
 
 [assembly: InternalsVisibleTo("Alicargo.DataAccess.Tests")]
 [assembly: InternalsVisibleTo("Alicargo.Tests")]
-[assembly: InternalsVisibleTo("Alicargo.Core.BlackBox.Tests")]
+[assembly: InternalsVisibleTo("Alicargo.BlackBox.Tests")]

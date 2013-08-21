@@ -3,13 +3,12 @@ using System.Linq;
 using System.Threading;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	public sealed class UserService : IUserService
+    internal sealed class UserService : IUserService
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly IUnitOfWork _unitOfWork;

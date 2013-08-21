@@ -7,7 +7,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	public sealed class ApplicationPresenter : IApplicationPresenter
+    internal sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly ICountryRepository _countryRepository;

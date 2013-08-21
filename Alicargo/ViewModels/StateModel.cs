@@ -8,7 +8,7 @@ using Resources;
 
 namespace Alicargo.ViewModels
 {
-	[Obsolete]
+	[Obsolete] // todo: 3. obsolete?
 	public sealed class StateModel
 	{
 		public StateModel() { }

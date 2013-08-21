@@ -4,7 +4,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
 {
-	public sealed class StateConfig : IStateConfig
+    internal sealed class StateConfig : IStateConfig
 	{
 		public long CargoIsCustomsClearedStateId
 		{

@@ -8,7 +8,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	public sealed class CarrierService : ICarrierService
+    internal sealed class CarrierService : ICarrierService
 	{
 		private readonly ICarrierRepository _carriers;
 		private readonly ITransitRepository _transitRepository;

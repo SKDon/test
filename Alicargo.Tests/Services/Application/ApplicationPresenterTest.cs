@@ -1,16 +1,14 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Services.Application;
-// ReSharper disable ImplicitlyCapturedClosure
 using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Enums;
-using Alicargo.Services;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+// ReSharper disable ImplicitlyCapturedClosure
 
-namespace Alicargo.Core.Tests.Services
+namespace Alicargo.Tests.Services.Application
 {
 	[TestClass]
 	public class ApplicationPresenterTest

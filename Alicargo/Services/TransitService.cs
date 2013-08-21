@@ -6,7 +6,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services
 {
-	public sealed class TransitService : ITransitService
+    internal sealed class TransitService : ITransitService
 	{
 		private readonly ICarrierService _carrierService;
 		private readonly ITransitRepository _transitRepository;

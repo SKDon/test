@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Alicargo.Helpers
 {
-	public sealed class CultureActionFilter : ActionFilterAttribute
+    internal sealed class CultureActionFilter : ActionFilterAttribute
 	{
 		private readonly Func<string> _getTwoLetterISOLanguageName;
 

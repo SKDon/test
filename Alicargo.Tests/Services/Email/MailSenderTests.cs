@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Tests.Properties;
 using Alicargo.Services.Contract;
 using Alicargo.Services.Email;
+using Alicargo.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Alicargo.Core.Tests.Services
+namespace Alicargo.Tests.Services.Email
 {
 	[TestClass]
 	public class MailSenderTests

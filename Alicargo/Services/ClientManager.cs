@@ -9,7 +9,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	public sealed class ClientManager : IClientManager
+    internal sealed class ClientManager : IClientManager
 	{
 		private readonly IAuthenticationRepository _authentications;
 		private readonly IClientRepository _clientRepository;

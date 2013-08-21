@@ -3,13 +3,12 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
-using Alicargo.Core.Enums;
 using Alicargo.Services;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Alicargo.Core.Tests.Services
+namespace Alicargo.Tests.Services
 {
 	[TestClass]
 	public class StateServiceTests

@@ -3,7 +3,7 @@ using System.Web.Mvc.Html;
 
 namespace Alicargo.Helpers
 {
-    public static class HtmlHelpers
+    internal static class HtmlHelpers
     {
         public static MvcHtmlString MenuLink(this HtmlHelper htmlHelper, string linkText, string actionName, string controllerName, string area = null)
         {

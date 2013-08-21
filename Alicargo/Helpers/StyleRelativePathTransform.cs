@@ -9,7 +9,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Helpers
 {
-	sealed class StyleRelativePathTransform : IBundleTransform
+	internal sealed class StyleRelativePathTransform : IBundleTransform
 	{
 		private readonly Regex _pattern;
 

@@ -2,11 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
+using Alicargo.Helpers;
 using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
-	public sealed class ApplicationDetailsModel
+    public sealed class ApplicationDetailsModel
 	{
 		#region Computed
 
