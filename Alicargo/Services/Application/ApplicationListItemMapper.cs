@@ -25,7 +25,7 @@ namespace Alicargo.Services.Application
             _identity = identity;
         }
 
-        // todo: 1. Test
+        // todo: 0. Test
         public ApplicationListItem[] GetListItems(IEnumerable<ApplicationListItemData> data)
         {
             var countries = _countryRepository.Get()
