@@ -68,20 +68,6 @@ namespace Alicargo.DataAccess.Repositories
             return MapUser(enitity);
         }
 
-        private static AuthenticationData MapUser(User enitity)
-        {
-            return enitity == null
-                ? null
-                : new AuthenticationData
-                {
-                    Id = enitity.Id,
-                    Login = enitity.Login,
-                    PasswordHash = enitity.PasswordHash.ToArray(),
-                    PasswordSalt = enitity.PasswordSalt.ToArray(),
-                    TwoLetterISOLanguageName = enitity.TwoLetterISOLanguageName
-                };
-        }
-
         public AuthenticationData GetById(long id)
         {
             var enitity = Context.Users.FirstOrDefault(x => x.Id == id);
@@ -92,23 +78,15 @@ namespace Alicargo.DataAccess.Repositories
         public Func<long> Add(string login, string password, string twoLetterISOLanguageName)
         {
             var user = new User
-            {
-                Login = login,
-                TwoLetterISOLanguageName = twoLetterISOLanguageName
-            };
+                {
+                    Login = login,
+                    TwoLetterISOLanguageName = twoLetterISOLanguageName
+                };
             SetNewPassword(password, user);
 
             Context.Users.InsertOnSubmit(user);
 
             return () => user.Id;
-        }
-
-        private void SetNewPassword(string password, User user)
-        {
-            if (string.IsNullOrWhiteSpace(password)) return;
-
-            user.PasswordSalt = _converter.GenerateSalt();
-            user.PasswordHash = _converter.GetPasswordHash(password, user.PasswordSalt.ToArray());
         }
 
         public void Update(long userId, string newLogin, string newPassword = null)
@@ -120,6 +98,28 @@ namespace Alicargo.DataAccess.Repositories
             SetNewPassword(newPassword, entity);
 
             entity.Login = newLogin;
+        }
+
+        private static AuthenticationData MapUser(User enitity)
+        {
+            return enitity == null
+                       ? null
+                       : new AuthenticationData
+                           {
+                               Id = enitity.Id,
+                               Login = enitity.Login,
+                               PasswordHash = enitity.PasswordHash.ToArray(),
+                               PasswordSalt = enitity.PasswordSalt.ToArray(),
+                               TwoLetterISOLanguageName = enitity.TwoLetterISOLanguageName
+                           };
+        }
+
+        private void SetNewPassword(string password, User user)
+        {
+            if (string.IsNullOrWhiteSpace(password)) return;
+
+            user.PasswordSalt = _converter.GenerateSalt();
+            user.PasswordHash = _converter.GetPasswordHash(password, user.PasswordSalt.ToArray());
         }
     }
 }
