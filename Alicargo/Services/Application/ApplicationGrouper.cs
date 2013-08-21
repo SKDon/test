@@ -10,54 +10,45 @@ using Resources;
 
 namespace Alicargo.Services.Application
 {
-    // todo: 1. tests
     internal sealed class ApplicationGrouper : IApplicationGrouper
     {
+        private const string AwbFieldName = "AirWaybill";
         private readonly IAwbRepository _awbRepository;
+        private Dictionary<long, AirWaybillData> _airWaybills;
+        private Dictionary<long, AirWaybillAggregate> _aggregates;
 
         public ApplicationGrouper(IAwbRepository awbRepository)
         {
             _awbRepository = awbRepository;
         }
 
-        public ApplicationGroup[] Group(ApplicationListItem[] applications, IReadOnlyCollection<Order> groups)
+        public ApplicationGroup[] Group(ApplicationListItem[] applications, IReadOnlyCollection<OrderType> groups)
         {
-            var ids = applications.Select(x => x.AirWaybillId ?? 0).ToArray();
-            var airWaybills = _awbRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+            var ids = applications.Select(x => x.AirWaybillId ?? 0)
+                                  .Distinct()
+                                  .ToArray();
+            _airWaybills = _awbRepository.Get(ids).ToDictionary(x => x.Id, x => x);
+            _aggregates = _awbRepository.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
 
-            return Group(applications, groups, airWaybills);
+            return GroupImpl(applications, groups);
         }
 
-        private ApplicationGroup[] Group(IEnumerable<ApplicationListItem> applications,
-                                         IReadOnlyCollection<Order> groups,
-                                         IDictionary<long, AirWaybillData> airWaybills)
+        private ApplicationGroup[] GroupImpl(IEnumerable<ApplicationListItem> applications,
+                                         IReadOnlyCollection<OrderType> groups)
         {
-            var @group = groups.First();
-            var orders = groups.Except(new[] { @group }).ToArray();
+            var current = groups.First();
+            var rest = groups.Except(new[] { current }).ToArray();
 
-            switch (@group.OrderType)
+            switch (current)
             {
                 case OrderType.AirWaybill:
-                    return
-                        applications.GroupBy(x => x.AirWaybillId ?? 0)
-                                    .Select(x =>
-                                            GetApplicationGroup(x, orders, "AirWaybill",
-                                                                g => airWaybills.ContainsKey(g.Key)
-                                                                         ? GetAirWayBillDisplay(airWaybills[g.Key])
-                                                                         : "", airWaybills))
-                                    .ToArray();
+                    return ByAirWaybill(applications, rest);
 
                 case OrderType.State:
-                    return applications.GroupBy(x => x.State.StateName)
-                                       .Select(x => GetApplicationGroup(x, orders, "State", g => g.Key, airWaybills))
-                                       .ToArray();
+                    return ByState(applications, rest);
 
                 case OrderType.LegalEntity:
-                    return applications.GroupBy(x => x.ClientLegalEntity)
-                                       .Select(
-                                           x =>
-                                           GetApplicationGroup(x, orders, "ClientLegalEntity", g => g.Key, airWaybills))
-                                       .ToArray();
+                    return ByLegalEntity(applications, rest);
 
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -76,26 +67,69 @@ namespace Alicargo.Services.Application
                                      : string.Format(" &plusmn; {0}_{1}", Entities.GTD, airWaybillModel.GTD));
         }
 
+        private ApplicationGroup[] ByLegalEntity(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
+        {
+            return applications.GroupBy(x => x.ClientLegalEntity)
+                               .Select(
+                                   grouping =>
+                                   GetApplicationGroup(grouping, groups, "ClientLegalEntity",
+                                                       g => g.Key))
+                               .ToArray();
+        }
+
+        private ApplicationGroup[] ByState(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
+        {
+            return applications.GroupBy(x => x.State.StateName)
+                               .Select(
+                                   grouping =>
+                                   GetApplicationGroup(grouping, groups, "State",
+                                                       g => g.Key))
+                               .ToArray();
+        }
+
+        private ApplicationGroup[] ByAirWaybill(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
+        {
+            return applications
+                .GroupBy(x => x.AirWaybillId ?? 0)
+                .Select(grouping =>
+                        GetApplicationGroup(grouping, groups, AwbFieldName,
+                                            awb => _airWaybills.ContainsKey(awb.Key)
+                                                     ? GetAirWayBillDisplay(_airWaybills[awb.Key])
+                                                     : ""))
+                .ToArray();
+        }
+
         private ApplicationGroup GetApplicationGroup<T>(
             IGrouping<T, ApplicationListItem> grouping,
-            IReadOnlyCollection<Order> orders,
+            IReadOnlyCollection<OrderType> orders,
             string field,
-            Func<IGrouping<T, ApplicationListItem>, string> getValue,
-            IDictionary<long, AirWaybillData> airWaybills)
+            Func<IGrouping<T, ApplicationListItem>, string> getValue)
         {
+            int count;
+            float weigth;
+
+            if (field == AwbFieldName)
+            {
+                // todo: 3. test in UI
+                var id = (long)(object)grouping.Key;
+                count = _aggregates[id].TotalCount;
+                weigth = _aggregates[id].TotalWeight;
+            }
+            else
+            {
+                count = grouping.Sum(y => y.Count ?? 0);
+                weigth = grouping.Sum(y => y.Weigth ?? 0);
+            }
+
             return new ApplicationGroup
                 {
-                    // todo: 1. fix bug - get aggregation to all data, not only current set
-                    aggregates = new
-                        {
-                            Count = new { sum = grouping.Sum(y => y.Count ?? 0) },
-                            Weigth = new { sum = grouping.Sum(y => y.Weigth ?? 0) }
-                        },
+                    // todo: 1.1. fix bug - get aggregation to all data, not only current set
+                    aggregates = new ApplicationGroup.Aggregates(count, weigth),
                     field = field,
                     value = getValue(grouping),
                     hasSubgroups = orders.Count > 0,
                     items = orders.Count > 0
-                                ? Group(grouping.ToArray(), orders, airWaybills).Cast<object>().ToArray()
+                                ? GroupImpl(grouping.ToArray(), orders).Cast<object>().ToArray()
                                 : grouping.Cast<object>().ToArray()
                 };
         }
