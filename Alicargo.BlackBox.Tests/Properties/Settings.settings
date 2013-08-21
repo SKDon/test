@@ -9,5 +9,20 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=.\;Initial Catalog=Alicargo;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="BaseAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:1893/</Value>
+    </Setting>
+    <Setting Name="AdminLogin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Admin</Value>
+    </Setting>
+    <Setting Name="AdminPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Admin</Value>
+    </Setting>
+    <Setting Name="ClientLogin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c1</Value>
+    </Setting>
+    <Setting Name="ClientPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

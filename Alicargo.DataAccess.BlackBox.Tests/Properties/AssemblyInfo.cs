@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Alicargo.DataAccess")]
+[assembly: AssemblyTitle("Alicargo.DataAccess.BlackBox.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alicargo.DataAccess")]
+[assembly: AssemblyProduct("Alicargo.DataAccess.BlackBox.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5edba1cd-a901-4a01-a16f-00fd59203a1b")]
+[assembly: Guid("9a29d525-1202-4906-b73a-8498d96a6d49")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,7 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
-[assembly: InternalsVisibleTo("Alicargo.DataAccess.BlackBox.Tests")]
-[assembly: InternalsVisibleTo("Alicargo.Tests")]
-[assembly: InternalsVisibleTo("Alicargo.BlackBox.Tests")]
