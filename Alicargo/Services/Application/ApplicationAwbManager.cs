@@ -30,17 +30,12 @@ namespace Alicargo.Services.Application
             {
                 var aggregate = _awbRepository.GetAggregate(awbId.Value).First();
 
-                using (var ts = _unitOfWork.StartTransaction())
-                {
-                    // SetAirWaybill must be first
-                    _applicationUpdater.SetAirWaybill(applicationId, awbId.Value);
+                // SetAirWaybill must be first
+                _applicationUpdater.SetAirWaybill(applicationId, awbId.Value);
 
-                    _applicationManager.SetState(applicationId, aggregate.StateId);
+                _applicationManager.SetState(applicationId, aggregate.StateId);
 
-                    _unitOfWork.SaveChanges();
-
-                    ts.Complete();
-                }
+                _unitOfWork.SaveChanges();
             }
             else
             {
