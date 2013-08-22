@@ -115,7 +115,7 @@ namespace Alicargo.Services.Application
 				.ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 		}
 
-		private ApplicationStateModel[] ToApplicationStateModel(IEnumerable<long> ids)
+		private ApplicationStateModel[] ToApplicationStateModel(long[] ids)
 		{
 			return _stateService.GetLocalizedDictionary(ids)
 								.Select(x => new ApplicationStateModel

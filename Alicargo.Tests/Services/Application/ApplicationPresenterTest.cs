@@ -13,13 +13,13 @@ namespace Alicargo.Tests.Services.Application
 	[TestClass]
 	public class ApplicationPresenterTest
 	{
-		private TestHelpers.TestContext _context;
+		private TestHelpers.MockContainer _context;
 		private ApplicationPresenter _service;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new TestHelpers.TestContext();
+			_context = new TestHelpers.MockContainer();
 
 			_service = _context.Create<ApplicationPresenter>();
 		}
@@ -63,7 +63,7 @@ namespace Alicargo.Tests.Services.Application
 			_context.StateRepository.Setup(x => x.Get(applicationData.StateId)).Returns(currentState);
 			_context.StateService.Setup(x => x.ApplyBusinessLogicToStates(applicationData, availableStates))
 				.Returns(withLogic);
-			_context.StateService.Setup(x => x.GetLocalizedDictionary(It.IsAny<IEnumerable<long>>())).Returns(dictionary);
+			_context.StateService.Setup(x => x.GetLocalizedDictionary(It.IsAny<long[]>())).Returns(dictionary);
 			_context.StateService.Setup(x => x.FilterByPosition(withLogic, currentState.Position)).Returns(filtered);
 
 			var stateModels = _service.GetAvailableStates(applicationData.Id);

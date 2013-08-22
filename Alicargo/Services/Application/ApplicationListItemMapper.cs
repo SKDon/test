@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
@@ -25,24 +24,26 @@ namespace Alicargo.Services.Application
             _identity = identity;
         }
 
-        // todo: 0. Test
-        public ApplicationListItem[] GetListItems(IEnumerable<ApplicationListItemData> data)
+        public ApplicationListItem[] Map(ApplicationListItemData[] data)
         {
-            var countries = _countryRepository.Get()
-                                              .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
-            var localizedStates = _stateService.GetLocalizedDictionary();
+            var countries = _countryRepository
+                .Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
+            var localizedStates = _stateService.GetLocalizedDictionary(
+                data.Select(x => x.StateId).ToArray());
             var availableStates = _stateService.GetAvailableStatesToSet();
 
-            var applications = data.Select(x => new ApplicationListItem
+            return data.Select(x => new ApplicationListItem
                 {
-                    CountryName = x.CountryId.HasValue ? countries[x.CountryId.Value] : null,
+                    CountryName = x.CountryId.HasValue && countries.ContainsKey(x.CountryId.Value)
+                                      ? countries[x.CountryId.Value]
+                                      : null,
                     State = new ApplicationStateModel
                         {
                             StateId = x.StateId,
                             StateName = localizedStates[x.StateId]
                         },
-                    CanClose = x.StateId == _stateConfig.CargoOnTransitStateId, // todo: 1. test
-                    CanSetState = availableStates.Contains(x.StateId), // todo: 1. test
+                    CanClose = x.StateId == _stateConfig.CargoOnTransitStateId,
+                    CanSetState = availableStates.Contains(x.StateId),
                     AddressLoad = x.AddressLoad,
                     Id = x.Id,
                     PackingFileName = x.PackingFileName,
@@ -73,11 +74,11 @@ namespace Alicargo.Services.Application
                     TransitCarrierName = x.TransitCarrierName,
                     TransitId = x.TransitId,
                     TransitCity = x.TransitCity,
-                    TransitDeliveryTypeString = ((DeliveryType) x.TransitDeliveryTypeId).ToLocalString(),
-                    TransitMethodOfTransitString = ((MethodOfTransit) x.TransitMethodOfTransitId).ToLocalString(),
+                    TransitDeliveryTypeString = ((DeliveryType)x.TransitDeliveryTypeId).ToLocalString(),
+                    TransitMethodOfTransitString = ((MethodOfTransit)x.TransitMethodOfTransitId).ToLocalString(),
                     TransitPhone = x.TransitPhone,
                     TransitRecipientName = x.TransitRecipientName,
-                    TransitReference = x.TransitRecipientName,
+                    TransitReference = x.TransitReference,
                     TransitWarehouseWorkingTime = x.TransitWarehouseWorkingTime,
                     WarehouseWorkingTime = x.WarehouseWorkingTime,
                     Weigth = x.Weigth,
@@ -86,7 +87,6 @@ namespace Alicargo.Services.Application
                     CurrencyId = x.CurrencyId,
                     AirWaybillId = x.AirWaybillId
                 }).ToArray();
-            return applications;
         }
     }
 }

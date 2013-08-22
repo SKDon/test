@@ -41,7 +41,7 @@ namespace Alicargo.Services.Application
 
             var data = _applicationRepository.List(take, skip, stateIds, orders, isClient ? _identity.Id : null);
 
-            var applications = _itemMapper.GetListItems(data);
+            var applications = _itemMapper.Map(data);
 
             return groups == null || groups.Length == 0
                 ? new ApplicationListCollection

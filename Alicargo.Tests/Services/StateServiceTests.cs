@@ -4,23 +4,23 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Services;
+using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using TestContext = Alicargo.TestHelpers.TestContext;
 
 namespace Alicargo.Tests.Services
 {
     [TestClass]
     public class StateServiceTests
     {
-        private TestContext _context;
+        private MockContainer _context;
         private StateService _stateService;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _context = new TestContext();
+            _context = new MockContainer();
             _stateService = _context.Create<StateService>();
         }
 

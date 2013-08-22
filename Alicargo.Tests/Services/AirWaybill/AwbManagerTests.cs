@@ -17,7 +17,7 @@
 //	[TestClass]
 //	public class AwbManagerTests
 //	{
-//		private TestHelpers.TestContext _context;
+//		private TestHelpers.MockContainer _context;
 //		private AwbManager _manager;
 
 //		private void VerifyUnitOfWork()
@@ -55,7 +55,7 @@
 //		[TestInitialize]
 //		public void TestInitialize()
 //		{
-//			_context = new TestHelpers.TestContext();
+//			_context = new TestHelpers.MockContainer();
 
 //			_manager = _context.Create<AwbManager>();
 //		}

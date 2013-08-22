@@ -6,7 +6,7 @@ using FluentAssertions;
 
 namespace Alicargo.TestHelpers
 {
-	public sealed class WebTestContext : TestContext
+	public sealed class WebTestContext : MockContainer
 	{
 		public WebTestContext(string baseAddress, string login, string password)
 		{
