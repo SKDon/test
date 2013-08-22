@@ -34,9 +34,8 @@ namespace Alicargo.Services.AirWaybill
 
         public long Create(long applicationId, AirWaybillEditModel model)
         {
-            if (model.GTD != null || model.GTDFileName != null || model.GTDAdditionalFileName != null)
+            if (model.GTD != null)
             {
-                // todo: 1. Test
                 throw new InvalidLogicException("GTD data should be defined by update");
             }
 
@@ -70,8 +69,8 @@ namespace Alicargo.Services.AirWaybill
                     DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString),
                     DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString),
                     GTD = null,
-                    GTDAdditionalFileName = null,
-                    GTDFileName = null
+                    GTDAdditionalFileName = model.GTDAdditionalFileName,
+                    GTDFileName = model.GTDFileName
                 };
         }
 

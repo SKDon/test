@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Exceptions;
 using Alicargo.Services.AirWaybill;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;
@@ -32,8 +33,6 @@ namespace Alicargo.Tests.Services.AirWaybill
             var cargoIsFlewStateId = _context.Create<long>();
             var model = _context.Create<AirWaybillEditModel>();
             model.GTD = null;
-            model.GTDAdditionalFileName = null;
-            model.GTDFileName = null;
 
             _context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
             _context.ApplicationAwbManager.Setup(x => x.SetAwb(applicationId, airWaybillId));
@@ -67,8 +66,8 @@ namespace Alicargo.Tests.Services.AirWaybill
                                                          data.DateOfDeparture ==
                                                          DateTimeOffset.Parse(model.DateOfDepartureLocalString)
                                                          && data.GTD == null
-                                                         && data.GTDAdditionalFileName == null
-                                                         && data.GTDFileName == null),
+                                                         && data.GTDAdditionalFileName == model.GTDAdditionalFileName
+                                                         && data.GTDFileName == model.GTDFileName),
                            model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
                            model.InvoiceFile, model.AWBFile),
                 Times.Once());
@@ -84,15 +83,11 @@ namespace Alicargo.Tests.Services.AirWaybill
             var data = AwbManager.Map(model, cargoIsFlewStateId);
 
             model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties()
-                                                               .Excluding(x => x.GTD)
-                                                               .Excluding(x => x.GTDAdditionalFileName)
-                                                               .Excluding(x => x.GTDFileName));
+                                                               .Excluding(x => x.GTD));
 
             data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
             data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));
             data.GTD.Should().BeNull();
-            data.GTDAdditionalFileName.Should().BeNull();
-            data.GTDFileName.Should().BeNull();
         }
 
         [TestMethod]
@@ -113,6 +108,13 @@ namespace Alicargo.Tests.Services.AirWaybill
                 Times.Exactly(applications.Length));
             _context.AirWaybillRepository.Verify(x => x.Delete(id), Times.Once());
             _context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
+        }
+
+        [TestMethod, ExpectedException(typeof(InvalidLogicException))]
+        public void Test_AwbManager_Create_WithGtd()
+        {
+            var model = _context.Create<AirWaybillEditModel>();
+            _manager.Create(It.IsAny<long>(), model);
         }
     }
 }
