@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
+using Alicargo.ViewModels.AirWaybill;
 using Moq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
@@ -20,6 +22,7 @@ namespace Alicargo.TestHelpers
         public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
         public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
         public Mock<IApplicationManager> ApplicationManager { get; private set; }
+        public Mock<IApplicationAwbManager> ApplicationAwbManager { get; private set; }
         public Mock<IApplicationGrouper> ApplicationGrouper { get; private set; }
         public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }
         public Mock<IAwbRepository> AirWaybillRepository { get; private set; }
@@ -31,12 +34,11 @@ namespace Alicargo.TestHelpers
             Fixture = new Fixture();
             Fixture.Customize(new AutoMoqCustomization());
 
-
-/*            Fixture.Register(() =>
+            Fixture.Register(() =>
                 Fixture.Build<AirWaybillEditModel>()
-                    .Without(x => x.DateOfDepartureLocalString)
-                    .Without(x => x.DateOfArrivalLocalString)
-                    .Create());*/
+                    .With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToString())
+                    .With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToString())
+                    .Create());
 
             StateRepository = Inject<IStateRepository>();
             IdentityService = Inject<IIdentityService>();
@@ -51,6 +53,7 @@ namespace Alicargo.TestHelpers
             ApplicationListItemMapper = Inject<IApplicationListItemMapper>();
             CountryRepository = Inject<ICountryRepository>();
             ApplicationGrouper = Inject<IApplicationGrouper>();
+            ApplicationAwbManager = Inject<IApplicationAwbManager>();
 
             Transaction.Setup(x => x.Dispose());
         }

@@ -40,10 +40,23 @@ namespace Alicargo.Services.AirWaybill
                 throw new InvalidLogicException("GTD data should be defined by update");
             }
 
-            // todo: 2. Test
-            var data = new AirWaybillData
+            var data = Map(model, _stateConfig.CargoIsFlewStateId);
+
+            var id = _awbRepository.Add(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
+                                        model.InvoiceFile, model.AWBFile);
+
+            _unitOfWork.SaveChanges();
+
+            _applicationAwbManager.SetAwb(applicationId, id());
+
+            return id();
+        }
+
+        public static AirWaybillData Map(AirWaybillEditModel model, long cargoIsFlewStateId)
+        {
+            return new AirWaybillData
                 {
-                    StateId = _stateConfig.CargoIsFlewStateId,
+                    StateId = cargoIsFlewStateId,
                     CreationTimestamp = DateTimeOffset.UtcNow,
                     StateChangeTimestamp = DateTimeOffset.UtcNow,
                     Id = 0,
@@ -60,15 +73,6 @@ namespace Alicargo.Services.AirWaybill
                     GTDAdditionalFileName = null,
                     GTDFileName = null
                 };
-
-            var id = _awbRepository.Add(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
-                                        model.InvoiceFile, model.AWBFile);
-
-            _unitOfWork.SaveChanges();
-
-            _applicationAwbManager.SetAwb(applicationId, id());
-
-            return id();
         }
 
         public void Delete(long id)
