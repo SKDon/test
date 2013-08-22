@@ -232,7 +232,6 @@ namespace Alicargo.Services.Email
 			var swiftFile = _applicationRepository.GetSwiftFile(id);
 			var torg12File = _applicationRepository.GetTorg12File(id);
 
-            // todo: 1. test
 			if (airWaybillId.HasValue)
 			{
 				var gtdFile = _awbRepository.GetGTDFile(airWaybillId.Value);

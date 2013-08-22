@@ -1,0 +1,50 @@
+﻿using Alicargo.Helpers;
+using Alicargo.Services.Abstract;
+using Alicargo.Services.Contract;
+
+namespace Alicargo.Services.Email
+{
+
+    internal sealed class ApplicationAwbManagerWithMailing : IApplicationAwbManager
+    {
+        private readonly IApplicationPresenter _applicationPresenter;
+        private readonly IAwbPresenter _awbPresenter;
+        private readonly IMailSender _mailSender;
+        private readonly IApplicationAwbManager _manager;
+        private readonly IMessageBuilder _messageBuilder;
+
+        public ApplicationAwbManagerWithMailing(IApplicationAwbManager manager, IAwbPresenter awbPresenter,
+                                                IApplicationPresenter applicationPresenter, IMailSender mailSender,
+                                                IMessageBuilder messageBuilder)
+        {
+            _manager = manager;
+            _awbPresenter = awbPresenter;
+            _applicationPresenter = applicationPresenter;
+            _mailSender = mailSender;
+            _messageBuilder = messageBuilder;
+        }
+
+        public void SetAwb(long applicationId, long? awbId)
+        {
+            _manager.SetAwb(applicationId, awbId);
+
+            // todo: 2. test
+            if (!awbId.HasValue) return;
+
+            var model = _awbPresenter.GetData(awbId.Value);
+            var applicationModel = _applicationPresenter.GetDetails(applicationId);
+
+            var aggregate = _awbPresenter.GetAggregate(awbId.Value);
+
+            var to = _messageBuilder.GetForwarderEmails();
+            foreach (var recipient in to)
+            {
+                var body = _messageBuilder.AwbSet(model,
+                                                  ApplicationModelHelper.GetDisplayNumber(applicationModel.Id,
+                                                                                          applicationModel.Count),
+                                                  recipient.Culture, aggregate.TotalWeight, aggregate.TotalCount);
+                _mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, recipient.Email));
+            }
+        }
+    }
+}

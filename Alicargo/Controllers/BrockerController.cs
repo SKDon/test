@@ -15,7 +15,7 @@ namespace Alicargo.Controllers
 	public partial class BrockerController : Controller
 	{
 		private readonly IAwbRepository _awbRepository;
-		private readonly IAwbManager _awbManager;
+		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateConfig _stateConfig;
 
@@ -23,12 +23,12 @@ namespace Alicargo.Controllers
 			IBrockerRepository brockerRepository,
 			IStateConfig stateConfig,
 			IAwbRepository awbRepository,
-			IAwbManager awbManager)
+			IAwbUpdateManager awbUpdateManager)
 		{
 			_brockerRepository = brockerRepository;
 			_stateConfig = stateConfig;
 			_awbRepository = awbRepository;
-			_awbManager = awbManager;
+			_awbUpdateManager = awbUpdateManager;
 		}
 
 		[ChildActionOnly]
@@ -97,7 +97,7 @@ namespace Alicargo.Controllers
 
 			try
 			{
-				_awbManager.Update(id, model);
+				_awbUpdateManager.Update(id, model);
 			}
 			catch (UnexpectedStateException ex)
 			{

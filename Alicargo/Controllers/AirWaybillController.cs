@@ -15,20 +15,26 @@ namespace Alicargo.Controllers
 {
 	public partial class AirWaybillController : Controller
 	{
-		private readonly IAwbManager _awbManager;
-		private readonly IAwbPresenter _awbPresenter;
-		private readonly IAwbRepository _awbRepository;
+		private readonly IAwbUpdateManager _awbUpdateManager;
+	    private readonly IAwbManager _awbManager;
+	    private readonly IAwbPresenter _awbPresenter;
+	    private readonly IApplicationAwbManager _applicationAwbManager;
+	    private readonly IAwbRepository _awbRepository;
 		private readonly IStateConfig _stateConfig;
 
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
+            IApplicationAwbManager applicationAwbManager,
+			IAwbUpdateManager awbUpdateManager,
 			IAwbManager awbManager,
 			IStateConfig stateConfig,
 			IAwbRepository awbRepository)
 		{
 			_awbPresenter = awbPresenter;
-			_awbManager = awbManager;
-			_stateConfig = stateConfig;
+		    _applicationAwbManager = applicationAwbManager;
+		    _awbUpdateManager = awbUpdateManager;
+		    _awbManager = awbManager;
+		    _stateConfig = stateConfig;
 			_awbRepository = awbRepository;
 		}
 
@@ -91,7 +97,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Brocker), HttpPost]
 		public virtual ActionResult SetState(long id, long stateId)
 		{
-			_awbManager.SetState(id, stateId);
+			_awbUpdateManager.SetState(id, stateId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -99,7 +105,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
 		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
 		{
-			_awbManager.SetAwb(applicationId, airWaybillId);
+			_applicationAwbManager.SetAwb(applicationId, airWaybillId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -113,7 +119,7 @@ namespace Alicargo.Controllers
 				throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
 			}
 
-			_awbManager.SetState(id, _stateConfig.CargoIsCustomsClearedStateId);
+			_awbUpdateManager.SetState(id, _stateConfig.CargoIsCustomsClearedStateId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -149,7 +155,7 @@ namespace Alicargo.Controllers
 
 			try
 			{
-				_awbManager.Update(id, model);
+				_awbUpdateManager.Update(id, model);
 			}
 			catch (DublicateException)
 			{

@@ -96,7 +96,7 @@
 }
 
 @Parameters()
-@if (IdentityService.IsInRole(RoleType.Admin))
+@if (Model != null && IdentityService.IsInRole(RoleType.Admin))
 {	
 	@Gtd()
 }
@@ -107,7 +107,7 @@
 @Files()
 @if (IdentityService.IsInRole(RoleType.Sender))
 {
-	// todo: separate view for sender
+	// todo: 2. separate view for sender
 	@Html.HiddenFor(x => x.InvoiceFileName)
 	@Html.HiddenFor(x => x.GTD)
 	@Html.HiddenFor(x => x.GTDAdditionalFileName)

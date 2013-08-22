@@ -18,7 +18,7 @@
 //	public class AwbManagerTests
 //	{
 //		private TestHelpers.MockContainer _context;
-//		private AwbManager _manager;
+//		private AwbUpdateManager _updateManager;
 
 //		private void VerifyUnitOfWork()
 //		{
@@ -57,7 +57,7 @@
 //		{
 //			_context = new TestHelpers.MockContainer();
 
-//			_manager = _context.Create<AwbManager>();
+//			_updateManager = _context.Create<AwbUpdateManager>();
 //		}
 
 //		[TestMethod]
@@ -74,7 +74,7 @@
 
 //			SetupUnitOfWork();
 
-//			_manager.SetState(AirWaybillId, stateId);
+//			_updateManager.SetState(AirWaybillId, stateId);
 
 //			VerifySetState(AirWaybillId, ids, stateId, applicationDatas);
 
@@ -98,7 +98,7 @@
 //			_context.Transaction.Setup(x => x.Complete());
 //			_context.UnitOfWork.Setup(x => x.StartTransaction()).Returns(_context.Transaction.Object);
 
-//			_manager.SetState(AirWaybillId, stateId);
+//			_updateManager.SetState(AirWaybillId, stateId);
 
 //			_context.ApplicationRepository.Verify(x => x.GetByAirWaybill(AirWaybillId), Times.Once());
 //			_context.ApplicationManager.Verify(x => x.SetState(It.IsAny<long>(), stateId), Times.Never());
@@ -119,7 +119,7 @@
 //			_context.ApplicationUpdater.Setup(x => x.SetAirWaybill(applicationId, null));
 //			_context.UnitOfWork.Setup(x => x.SaveChanges());
 
-//			_manager.SetAwb(applicationId, null);
+//			_updateManager.SetAwb(applicationId, null);
 
 //			_context.ApplicationUpdater.Verify(x => x.SetAirWaybill(applicationId, null), Times.Once());
 //			_context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
@@ -133,7 +133,7 @@
 
 //			_context.AirWaybillRepository.Setup(x => x.GetAggregate(id)).Returns(new AirWaybillAggregate[0]);
 
-//			_manager.SetAwb(It.IsAny<long>(), id);
+//			_updateManager.SetAwb(It.IsAny<long>(), id);
 //		}
 
 //		[TestMethod]
@@ -150,7 +150,7 @@
 //			_context.ApplicationManager.Setup(x => x.SetState(applicationId, aggregate.StateId));
 //			_context.UnitOfWork.Setup(x => x.SaveChanges());
 
-//			_manager.SetAwb(applicationId, AirWaybillId);
+//			_updateManager.SetAwb(applicationId, AirWaybillId);
 
 //			_context.AirWaybillRepository.Verify(x => x.GetAggregate(AirWaybillId), Times.Once());
 //			_context.ApplicationUpdater.Verify(x => x.SetAirWaybill(applicationId, AirWaybillId), Times.Once());
@@ -180,7 +180,7 @@
 //				x => x.Add(model, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile))
 //				.Returns(() => AirWaybillId);
 
-//			_manager.Create(applicationId, model);
+//			_updateManager.Create(applicationId, model);
 
 //			Assert.AreEqual(cargoIsFlewStateId, model.StateId);
 //			_context.AirWaybillRepository.Verify(x => x.GetAggregate(AirWaybillId), Times.Once());
@@ -223,7 +223,7 @@
 //			_context.AirWaybillRepository.Setup(x => x.Update(model, model.GTDFile,
 //				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile));
 
-//			_manager.Update(model);
+//			_updateManager.Update(model);
 
 //			_context.StateConfig.Verify(x => x.CargoAtCustomsStateId, Times.Once());
 //			_context.StateConfig.Verify(x => x.CargoIsCustomsClearedStateId, Times.Once());
@@ -253,7 +253,7 @@
 //			_context.AirWaybillRepository.Setup(x => x.Update(model, model.GTDFile,
 //				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile));
 
-//			_manager.Update(model);
+//			_updateManager.Update(model);
 
 //			_context.AirWaybillRepository.Verify(x => x.Update(model, model.GTDFile,
 //				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile), Times.Once());
@@ -283,7 +283,7 @@
 //				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile));
 //			_context.StateConfig.Setup(x => x.CargoIsCustomsClearedStateId).Returns(cargoIsCustomsClearedStateId);
 
-//			_manager.Update(model);
+//			_updateManager.Update(model);
 
 //			_context.StateConfig.Verify(x => x.CargoIsCustomsClearedStateId, Times.Once());
 //			_context.AirWaybillRepository.Verify(x => x.Update(model, model.GTDFile,
@@ -307,7 +307,7 @@
 //			_context.AirWaybillRepository.Setup(x => x.Update(model, model.GTDFile,
 //				model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile, model.AWBFile));
 
-//			_manager.Update(model);
+//			_updateManager.Update(model);
 
 //			_context.AirWaybillRepository.Verify(x => x.Get(AirWaybillId), Times.Once());
 //			_context.AirWaybillRepository.Verify(x => x.Update(model, model.GTDFile,
