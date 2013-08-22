@@ -267,10 +267,12 @@
     <Compile Include="Services\Abstract\IStateService.cs" />
     <Compile Include="Services\Abstract\ITransitService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
+    <Compile Include="Services\AirWaybill\AwbGtdHelper.cs" />
     <Compile Include="Services\AirWaybill\AwbManager.cs" />
     <Compile Include="Services\Abstract\IAwbManager.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateGtdManager.cs" />
     <Compile Include="Services\AirWaybill\AwbStateManager.cs" />
+    <Compile Include="Services\Abstract\IAwbGtdHelper.cs" />
     <Compile Include="Services\Application\ApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
