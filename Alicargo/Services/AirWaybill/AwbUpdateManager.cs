@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
@@ -29,7 +30,18 @@ namespace Alicargo.Services.AirWaybill
         {
             var data = _awbRepository.Get(id).First();
 
-            // todo: 2. Test
+            Map(model, data);
+
+            // todo: 2. use update file methods
+            _awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile,
+                                  model.AWBFile);
+
+            _unitOfWork.SaveChanges();
+        }
+
+        // todo: 2. Test
+        public static void Map(AirWaybillEditModel model, AirWaybillData data)
+        {
             data.PackingFileName = model.PackingFileName;
             data.InvoiceFileName = model.InvoiceFileName;
             data.AWBFileName = model.AWBFileName;
@@ -42,20 +54,12 @@ namespace Alicargo.Services.AirWaybill
             data.GTDAdditionalFileName = model.GTDAdditionalFileName;
             data.DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString);
             data.DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString);
-
-            // todo: 1. test
-            // todo: 2. use update file methods
-            _awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile,
-                                  model.AWBFile);
-
-            _unitOfWork.SaveChanges();
         }
 
         public void Update(long id, BrockerAWBModel model)
         {
             var data = _awbRepository.Get(id).First();
 
-            // todo: 1. test
             if (data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
             {
                 throw new UnexpectedStateException(
@@ -64,19 +68,23 @@ namespace Alicargo.Services.AirWaybill
                     + _stateConfig.CargoIsCustomsClearedStateId.ToString(CultureInfo.InvariantCulture));
             }
 
+            Map(model, data);
+
+            // todo: 2. use update file methods
+            _awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile,
+                                  model.PackingFile, model.InvoiceFile, null);
+
+            _unitOfWork.SaveChanges();
+        }
+
+        private static void Map(BrockerAWBModel model, AirWaybillData data)
+        {
             // todo: 2. Test
             data.PackingFileName = model.PackingFileName;
             data.InvoiceFileName = model.InvoiceFileName;
             data.GTD = model.GTD;
             data.GTDFileName = model.GTDFileName;
             data.GTDAdditionalFileName = model.GTDAdditionalFileName;
-
-            // todo: 1. test
-            // todo: 2. use update file methods
-            _awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile,
-                                  model.PackingFile, model.InvoiceFile, null);
-
-            _unitOfWork.SaveChanges();
         }
     }
 }

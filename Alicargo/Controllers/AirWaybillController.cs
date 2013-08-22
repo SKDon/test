@@ -21,6 +21,8 @@ namespace Alicargo.Controllers
         private readonly IAwbRepository _awbRepository;
         private readonly IAwbStateManager _awbStateManager;
         private readonly IAwbUpdateManager _awbUpdateManager;
+        private readonly IBrockerRepository _brockerRepository;
+        private readonly IIdentityService _identityService;
         private readonly IStateConfig _stateConfig;
 
         public AirWaybillController(
@@ -29,7 +31,10 @@ namespace Alicargo.Controllers
             IAwbUpdateManager awbUpdateManager,
             IAwbManager awbManager,
             IStateConfig stateConfig,
-            IAwbRepository awbRepository, IAwbStateManager awbStateManager)
+            IAwbRepository awbRepository,
+            IAwbStateManager awbStateManager,
+            IBrockerRepository brockerRepository,
+            IIdentityService identityService)
         {
             _awbPresenter = awbPresenter;
             _applicationAwbManager = applicationAwbManager;
@@ -38,6 +43,8 @@ namespace Alicargo.Controllers
             _stateConfig = stateConfig;
             _awbRepository = awbRepository;
             _awbStateManager = awbStateManager;
+            _brockerRepository = brockerRepository;
+            _identityService = identityService;
         }
 
         #region Create
@@ -79,7 +86,15 @@ namespace Alicargo.Controllers
         [Access(RoleType.Admin, RoleType.Brocker, RoleType.Sender), HttpPost]
         public virtual JsonResult List(int take, int skip, int page, int pageSize)
         {
-            var list = _awbPresenter.List(take, skip);
+            // todo: 3. utility to get current broker
+            long? brockerId = null;
+            if (_identityService.IsInRole(RoleType.Brocker) && _identityService.Id.HasValue)
+            {
+                var brocker = _brockerRepository.GetByUserId(_identityService.Id.Value);
+                brockerId = brocker.Id;
+            }
+
+            var list = _awbPresenter.List(take, skip, brockerId);
 
             return Json(list);
         }
