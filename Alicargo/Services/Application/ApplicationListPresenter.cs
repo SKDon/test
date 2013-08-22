@@ -30,7 +30,6 @@ namespace Alicargo.Services.Application
             _applicationGrouper = applicationGrouper;
         }
 
-        // todo: 1. test
         public ApplicationListCollection List(int take, int skip, Order[] groups)
         {
             var stateIds = _stateService.GetVisibleStates();

@@ -150,7 +150,7 @@ namespace Alicargo.Controllers
 			return View(new ApplicationEditModel());
 		}
 
-		// todo: 1. test
+		// todo: 1.1. test
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]

@@ -20,6 +20,8 @@ namespace Alicargo.TestHelpers
         public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
         public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
         public Mock<IApplicationManager> ApplicationManager { get; private set; }
+        public Mock<IApplicationGrouper> ApplicationGrouper { get; private set; }
+        public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }
         public Mock<IAwbRepository> AirWaybillRepository { get; private set; }
         public Mock<IUnitOfWork> UnitOfWork { get; private set; }
         public Mock<ITransaction> Transaction { get; private set; }
@@ -46,7 +48,9 @@ namespace Alicargo.TestHelpers
             StateConfig = Inject<IStateConfig>();
             UnitOfWork = Inject<IUnitOfWork>();
             Transaction = Inject<ITransaction>();
+            ApplicationListItemMapper = Inject<IApplicationListItemMapper>();
             CountryRepository = Inject<ICountryRepository>();
+            ApplicationGrouper = Inject<IApplicationGrouper>();
 
             Transaction.Setup(x => x.Dispose());
         }

@@ -7,10 +7,9 @@ namespace Alicargo.Contracts.Helpers
 	public sealed class Order
 	{
 		public OrderType OrderType { get; set; }
-		public string Field { get { return OrderType.ToString(); } }
-		public bool Desc { get; set; }
+	    public bool Desc { get; set; }
 
-		public static Order[] Get(Dictionary<string, string>[] group)
+	    public static Order[] Get(Dictionary<string, string>[] group)
 		{
 			if (group == null)
 			{

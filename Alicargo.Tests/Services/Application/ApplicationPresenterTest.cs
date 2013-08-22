@@ -3,6 +3,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Services.Application;
 using System.Collections.Generic;
 using System.Linq;
+using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -13,13 +14,13 @@ namespace Alicargo.Tests.Services.Application
 	[TestClass]
 	public class ApplicationPresenterTest
 	{
-		private TestHelpers.MockContainer _context;
+		private MockContainer _context;
 		private ApplicationPresenter _service;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new TestHelpers.MockContainer();
+			_context = new MockContainer();
 
 			_service = _context.Create<ApplicationPresenter>();
 		}

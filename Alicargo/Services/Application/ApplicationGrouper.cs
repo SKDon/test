@@ -22,7 +22,7 @@ namespace Alicargo.Services.Application
             _awbRepository = awbRepository;
         }
 
-        public ApplicationGroup[] Group(ApplicationListItem[] applications, IReadOnlyCollection<OrderType> groups)
+        public ApplicationGroup[] Group(ApplicationListItem[] applications, OrderType[] groups)
         {
             var ids = applications.Select(x => x.AirWaybillId ?? 0)
                                   .Distinct()

@@ -3,7 +3,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract
 {
-    internal interface IApplicationListItemMapper
+    public interface IApplicationListItemMapper
     {
         ApplicationListItem[] Map(ApplicationListItemData[] data);
     }
