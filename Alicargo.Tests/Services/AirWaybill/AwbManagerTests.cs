@@ -63,8 +63,7 @@ namespace Alicargo.Tests.Services.AirWaybill
                                                          && data.DateOfDeparture == DateTimeOffset.Parse(model.DateOfDepartureLocalString)
                                                          && data.GTD == null
                                                          && data.GTDAdditionalFileName == null
-                                                         && data.GTDFileName == null
-                                                         ),
+                                                         && data.GTDFileName == null),
                            model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
                            model.InvoiceFile, model.AWBFile),
                 Times.Once());
@@ -80,7 +79,15 @@ namespace Alicargo.Tests.Services.AirWaybill
             var data = AwbManager.Map(model, cargoIsFlewStateId);
 
             model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties()
-                .Excluding(x => x.GTD));
+                .Excluding(x => x.GTD)
+                .Excluding(x => x.GTDAdditionalFileName)
+                .Excluding(x => x.GTDFileName));
+
+            data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
+            data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));
+            data.GTD.Should().BeNull();
+            data.GTDAdditionalFileName.Should().BeNull();
+            data.GTDFileName.Should().BeNull();
         }
     }
 }
