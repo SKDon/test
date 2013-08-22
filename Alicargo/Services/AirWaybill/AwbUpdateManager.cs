@@ -39,7 +39,6 @@ namespace Alicargo.Services.AirWaybill
             _unitOfWork.SaveChanges();
         }
 
-        // todo: 2. Test
         public static void Map(AirWaybillEditModel model, AirWaybillData data)
         {
             data.PackingFileName = model.PackingFileName;
@@ -77,9 +76,8 @@ namespace Alicargo.Services.AirWaybill
             _unitOfWork.SaveChanges();
         }
 
-        private static void Map(BrockerAWBModel model, AirWaybillData data)
+        public static void Map(BrockerAWBModel model, AirWaybillData data)
         {
-            // todo: 2. Test
             data.PackingFileName = model.PackingFileName;
             data.InvoiceFileName = model.InvoiceFileName;
             data.GTD = model.GTD;

@@ -32,13 +32,37 @@ namespace Alicargo.Tests.Services.AirWaybill
         {
             var id = _context.Create<long>();
             var cargoIsCustomsClearedStateId = _context.Create<long>();
-            var model = _context.Create<AirWaybillData>();
-            model.StateId = cargoIsCustomsClearedStateId;
+            var data = _context.Create<AirWaybillData>();
+            data.StateId = cargoIsCustomsClearedStateId;
 
             _context.StateConfig.SetupGet(x => x.CargoIsCustomsClearedStateId).Returns(cargoIsCustomsClearedStateId);
-            _context.AirWaybillRepository.Setup(x => x.Get(id)).Returns(new[] { model });
+            _context.AirWaybillRepository.Setup(x => x.Get(id)).Returns(new[] { data });
 
             _manager.Update(id, It.IsAny<BrockerAWBModel>());
+        }
+
+        [TestMethod]
+        public void Test_AwbUpdateManager_Map_BrockerAWBModel()
+        {
+            var model = _context.Create<AirWaybillEditModel>();
+            var data = new AirWaybillData();
+
+            AwbUpdateManager.Map(model, data);
+
+            model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
+            data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
+            data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));
+        }
+
+        [TestMethod]
+        public void Test_AwbUpdateManager_Map_AirWaybillEditModel()
+        {
+            var model = _context.Create<BrockerAWBModel>();
+            var data = new AirWaybillData();
+
+            AwbUpdateManager.Map(model, data);
+
+            model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
         }
     }
 }
