@@ -7,6 +7,5 @@ namespace Alicargo.Services.Abstract
 	{
 		void Update(long id, AirWaybillEditModel model);
 		void Update(long id, BrockerAWBModel model);
-		void SetState(long airWaybillId, long stateId);
 	}
 }

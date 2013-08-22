@@ -48,11 +48,6 @@ namespace Alicargo.Services.Email
             SendOnFileAdd(id, old);
         }
 
-        public void SetState(long airWaybillId, long stateId)
-        {
-            _updateManager.SetState(airWaybillId, stateId);
-        }
-
         private void SendOnFileAdd(long id, AirWaybillData oldData)
         {
             var model = _awbPresenter.GetData(id);

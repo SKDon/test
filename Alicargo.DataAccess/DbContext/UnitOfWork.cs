@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.DbContext
 
 		public ITransaction StartTransaction()
 		{
-			// todo: 3.5. refactor using of transactions
+			// todo: 3.5. refactor using of transactions, create interception
 			// TransactionScopeOption.RequiresNew
 			return new Transaction(new TransactionScope());
 		}

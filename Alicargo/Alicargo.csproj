@@ -185,6 +185,7 @@
     <Compile Include="SenderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\ScriptController.cs" />
     <Compile Include="Controllers\SenderController.cs" />
@@ -268,6 +269,8 @@
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\AirWaybill\AwbManager.cs" />
     <Compile Include="Services\Abstract\IAwbManager.cs" />
+    <Compile Include="Services\AirWaybill\AwbUpdateGtdManager.cs" />
+    <Compile Include="Services\AirWaybill\AwbStateManager.cs" />
     <Compile Include="Services\Application\ApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
