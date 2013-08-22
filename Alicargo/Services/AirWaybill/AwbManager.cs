@@ -79,7 +79,6 @@ namespace Alicargo.Services.AirWaybill
         {
             var applicationDatas = _applicationRepository.GetByAirWaybill(id);
 
-            // todo: 1. test sets
             foreach (var app in applicationDatas)
             {
                 _applicationUpdater.SetAirWaybill(app.Id, null);
