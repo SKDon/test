@@ -26,27 +26,31 @@ namespace Alicargo.Services.AirWaybill
 
         public void SetState(long airWaybillId, long stateId)
         {
-            var data = _awbRepository.Get(airWaybillId).First();
+            var oldData = _awbRepository.Get(airWaybillId).First();
+            var oldStateId = oldData.StateId;
 
-            SetStateImpl(airWaybillId, stateId, data.StateId);
-        }
+            _awbRepository.SetState(airWaybillId, stateId);
 
-        private void SetStateImpl(long airWaybillId, long newStateId, long currentStateId)
-        {
-            var applications = _applicationRepository.GetByAirWaybill(airWaybillId);
-
-            _awbRepository.SetState(airWaybillId, newStateId);
-
-            // todo: 1. test sets
-            foreach (var application in applications)
-            {
-                if (currentStateId == application.StateId)
-                {
-                    _applicationManager.SetState(application.Id, newStateId);
-                }
-            }
+            UpdateApplicationsState(airWaybillId, stateId, oldStateId);
 
             _unitOfWork.SaveChanges();
+        }
+
+        private void UpdateApplicationsState(long airWaybillId, long stateId, long oldStateId)
+        {
+            if (stateId == oldStateId)
+            {
+                return;
+            }
+
+            var applications = _applicationRepository.GetByAirWaybill(airWaybillId);
+            foreach (var application in applications)
+            {
+                if (oldStateId == application.StateId)
+                {
+                    _applicationManager.SetState(application.Id, stateId);
+                }
+            }
         }
     }
 }
