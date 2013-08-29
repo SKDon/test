@@ -4,7 +4,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -83,7 +82,7 @@ namespace Alicargo.Controllers
 			ViewBag.AwbId = data.Id;
 		}
 
-		// todo: 1. test
+		// todo: 1.5. bb test
 		[Access(RoleType.Brocker), HttpPost]
 		public virtual ActionResult AWB(long id, BrockerAWBModel model)
 		{

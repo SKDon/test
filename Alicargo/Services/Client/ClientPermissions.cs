@@ -13,7 +13,6 @@ namespace Alicargo.Services.Client
             _identity = identity;
         }
 
-        // todo: 1. Test
         public bool HaveAccessToClient(ClientData data)
         {
             if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Sender)) return true;

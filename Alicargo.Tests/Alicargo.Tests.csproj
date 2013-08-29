@@ -81,9 +81,9 @@
     <Compile Include="Services\Application\ApplicationPresenterTest.cs" />
     <Compile Include="Services\Application\ApplicationGrouperTests.cs" />
     <Compile Include="Services\AirWaybill\AwbManagerTests.cs" />
-    <Compile Include="Services\AirWaybill\AwbPresenterTests.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapperTests.cs" />
     <Compile Include="Services\Application\ApplicationListPresenterTests.cs" />
+    <Compile Include="Services\Application\ApplicationAwbManagerTests.cs" />
     <Compile Include="Services\Client\ClientPermissionsTests.cs" />
     <Compile Include="Services\Email\MailSenderTests.cs" />
     <Compile Include="Services\StateServiceTests.cs" />
