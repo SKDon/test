@@ -277,7 +277,9 @@
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
-    <Compile Include="Services\ClientPresenter.cs" />
+    <Compile Include="Services\Client\ClientPermissions.cs" />
+    <Compile Include="Services\Client\ClientPresenter.cs" />
+    <Compile Include="Services\Abstract\IClientPermissions.cs" />
     <Compile Include="Services\Contract\Recipient.cs" />
     <Compile Include="Services\Email\ApplicationAwbManagerWithMailing.cs" />
     <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
@@ -294,7 +296,7 @@
     <Compile Include="Services\Application\ApplicationGrouper.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CarrierService.cs" />
-    <Compile Include="Services\ClientManager.cs" />
+    <Compile Include="Services\Client\ClientManager.cs" />
     <Compile Include="Services\Email\MessageBuilder.cs" />
     <Compile Include="Services\Email\SilentMailSender.cs" />
     <Compile Include="Services\IdentityService.cs" />
@@ -1426,9 +1428,7 @@
     <Content Include="Views\Transit\EditByClient.cshtml" />
     <Content Include="Views\Authentication\Client.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Client\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

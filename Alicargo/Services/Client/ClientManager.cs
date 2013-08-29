@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
-namespace Alicargo.Services
+namespace Alicargo.Services.Client
 {
     internal sealed class ClientManager : IClientManager
     {
         private readonly IAuthenticationRepository _authentications;
         private readonly IClientRepository _clientRepository;
+        private readonly IClientPermissions _clientPermissions;
         private readonly IIdentityService _identity;
         private readonly ITransitService _transitService;
         private readonly IUnitOfWork _unitOfWork;
@@ -19,12 +19,14 @@ namespace Alicargo.Services
         public ClientManager(
             IIdentityService identity,
             IClientRepository clientRepository,
+            IClientPermissions clientPermissions,
             ITransitService transitService,
             IAuthenticationRepository authentications,
             IUnitOfWork unitOfWork)
         {
             _identity = identity;
             _clientRepository = clientRepository;
+            _clientPermissions = clientPermissions;
             _transitService = transitService;
             _authentications = authentications;
             _unitOfWork = unitOfWork;
@@ -36,8 +38,7 @@ namespace Alicargo.Services
         {
             var data = _clientRepository.Get(clientId).First();
 
-            // todo: 2. bb test permissions
-            if (!HaveAccessToClient(data.UserId))
+            if (!_clientPermissions.HaveAccessToClient(data))
                 throw new AccessForbiddenException();
 
             _transitService.Update(data.TransitId, transitModel, carrierModel);
@@ -101,14 +102,6 @@ namespace Alicargo.Services
             _unitOfWork.SaveChanges();
 
             return id();
-        }
-
-        // todo: 1. test
-        public bool HaveAccessToClient(long clientUserId)
-        {
-            if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Sender)) return true;
-
-            return clientUserId == _identity.Id;
         }
     }
 }

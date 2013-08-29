@@ -27,6 +27,8 @@ namespace Alicargo.TestHelpers
         public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }
         public Mock<IAwbRepository> AirWaybillRepository { get; private set; }
         public Mock<IUnitOfWork> UnitOfWork { get; private set; }
+        public Mock<IClientPermissions> ClientPermissions { get; private set; }
+        public Mock<IClientRepository> ClientRepository { get; private set; }
         public Mock<ITransaction> Transaction { get; private set; }
 
         public MockContainer()
@@ -54,6 +56,8 @@ namespace Alicargo.TestHelpers
             CountryRepository = Inject<ICountryRepository>();
             ApplicationGrouper = Inject<IApplicationGrouper>();
             ApplicationAwbManager = Inject<IApplicationAwbManager>();
+            ClientPermissions = Inject<IClientPermissions>();
+            ClientRepository = Inject<IClientRepository>();
 
             Transaction.Setup(x => x.Dispose());
         }

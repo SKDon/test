@@ -5,7 +5,7 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IClientPresenter
 	{
-		ClientData GetClientData(long? id = null);
+		ClientData GetClientData(long? clientId = null);
 		ListCollection<ClientData> GetList(int take, int skip);
 	}
 }

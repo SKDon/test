@@ -5,28 +5,31 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
-namespace Alicargo.Services
+namespace Alicargo.Services.Client
 {
     internal sealed class ClientPresenter : IClientPresenter
 	{
 		private readonly IClientRepository _clientRepository;
 		private readonly IIdentityService _identity;
-		private readonly IClientManager _clientManager;
+        private readonly IClientPermissions _clientPermissions;
 
-		public ClientPresenter(IClientRepository clientRepository, IIdentityService identity, IClientManager clientManager)
+        public ClientPresenter(
+            IClientRepository clientRepository,
+            IIdentityService identity, 
+            IClientPermissions clientPermissions)
 		{
 			_clientRepository = clientRepository;
 			_identity = identity;
-			_clientManager = clientManager;
+		    _clientPermissions = clientPermissions;
 		}
 
-		public ClientData GetClientData(long? id = null)
+		public ClientData GetClientData(long? clientId = null)
 		{
 			ClientData data;
 
-			if (id.HasValue)
+			if (clientId.HasValue)
 			{
-				data = _clientRepository.GetById(id.Value);
+				data = _clientRepository.GetById(clientId.Value);
 			}
 			else if (_identity.Id.HasValue)
 			{
@@ -37,7 +40,7 @@ namespace Alicargo.Services
 				return null;
 			}
 
-			if (!_clientManager.HaveAccessToClient(data.UserId))
+            if (!_clientPermissions.HaveAccessToClient(data))
 				throw new AccessForbiddenException();
 
 			return data;

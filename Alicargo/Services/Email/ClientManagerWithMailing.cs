@@ -34,11 +34,6 @@ namespace Alicargo.Services.Email
 			return id;
 		}
 
-		public bool HaveAccessToClient(long clientUserId)
-		{
-			return _manager.HaveAccessToClient(clientUserId);
-		}
-
 		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)
 		{
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
