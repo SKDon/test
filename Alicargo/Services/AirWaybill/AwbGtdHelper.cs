@@ -17,7 +17,6 @@ namespace Alicargo.Services.AirWaybill
 
         public void ProcessGtd(AirWaybillData data, string newGtd)
         {
-            // todo: 1. test
             if (!IsReadyForCargoAtCustomsStateId(data.GTD, newGtd)) return;
 
             // todo: 2. check order of states and return if current state is supper than CargoAtCustomsStateId
