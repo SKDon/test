@@ -94,15 +94,12 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		public string ApplicationSubject
-		{
-			get
-			{
-				return Mail.Application_Subject;
-			}
-		}
+        public string GetApplicationSubject(string displayNumber)
+        {
+            return string.Format(Mail.Application_Subject, displayNumber);
+        }
 
-		public string ApplicationSetState(ApplicationDetailsModel model, string culture)
+        public string ApplicationSetState(ApplicationDetailsModel model, string culture)
 		{
 			return string.Format(Mail.Application_SetState,
 				ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count),

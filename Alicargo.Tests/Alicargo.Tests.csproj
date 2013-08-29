@@ -86,6 +86,7 @@
     <Compile Include="Services\Application\ApplicationAwbManagerTests.cs" />
     <Compile Include="Services\Client\ClientPermissionsTests.cs" />
     <Compile Include="Services\Email\MailSenderTests.cs" />
+    <Compile Include="Services\Email\ApplicationManagerWithMailingTests.cs" />
     <Compile Include="Services\StateServiceTests.cs" />
     <Compile Include="Services\Client\ClientManagerTests.cs" />
   </ItemGroup>
