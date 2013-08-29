@@ -1,14 +1,12 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Services.Abstract;
 using Alicargo.Services.Client;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Alicargo.Tests.Services
+namespace Alicargo.Tests.Services.Client
 {
     [TestClass]
     public class ClientManagerTests
@@ -23,9 +21,7 @@ namespace Alicargo.Tests.Services
             container.ClientRepository.Setup(x => x.Get(clientId)).Returns(new[] { data });
             container.ClientPermissions.Setup(x => x.HaveAccessToClient(data)).Returns(false);
 
-            var manager = new ClientManager(It.IsAny<IIdentityService>(), container.ClientRepository.Object,
-                                            container.ClientPermissions.Object, It.IsAny<ITransitService>(),
-                                            It.IsAny<IAuthenticationRepository>(), It.IsAny<IUnitOfWork>());
+            var manager = container.Create<ClientManager>();
 
             manager.Update(clientId, It.IsAny<ClientModel>(), It.IsAny<CarrierSelectModel>(),
                            It.IsAny<TransitEditModel>(), It.IsAny<AuthenticationModel>());

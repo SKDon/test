@@ -84,9 +84,10 @@
     <Compile Include="Services\AirWaybill\AwbPresenterTests.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapperTests.cs" />
     <Compile Include="Services\Application\ApplicationListPresenterTests.cs" />
+    <Compile Include="Services\Client\ClientPermissionsTests.cs" />
     <Compile Include="Services\Email\MailSenderTests.cs" />
     <Compile Include="Services\StateServiceTests.cs" />
-    <Compile Include="Services\ClientManagerTests.cs" />
+    <Compile Include="Services\Client\ClientManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
