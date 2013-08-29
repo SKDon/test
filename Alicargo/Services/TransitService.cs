@@ -2,7 +2,6 @@
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services
 {
@@ -28,7 +27,7 @@ namespace Alicargo.Services
 
         public void Update(long transitId, TransitEditModel transit, CarrierSelectModel carrierModel)
         {
-            var carrierId = GetCarrierId(carrierModel);
+            var carrierId = _carrierService.AddOrGetCarrier(carrierModel);
 
             var data = TransitEditModel.GetData(transit, carrierId);
 
@@ -48,25 +47,13 @@ namespace Alicargo.Services
 
         public long AddTransit(TransitEditModel model, CarrierSelectModel carrierModel)
         {
-            var carrierId = GetCarrierId(carrierModel);
+            var carrierId = _carrierService.AddOrGetCarrier(carrierModel);
 
             var transitId = _transitRepository.Add(TransitEditModel.GetData(model, carrierId));
 
             _unitOfWork.SaveChanges();
 
             return transitId();
-        }
-
-        private long GetCarrierId(CarrierSelectModel model)
-        {
-            // todo: 1. test
-            if (model.NewCarrierName.IsNullOrWhiteSpace()) return model.CarrierId;
-
-            var id = _carrierService.AddOrGetCarrier(model.NewCarrierName);
-
-            _unitOfWork.SaveChanges();
-
-            return id();
         }
     }
 }

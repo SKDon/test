@@ -1426,7 +1426,9 @@
     <Content Include="Views\Transit\EditByClient.cshtml" />
     <Content Include="Views\Authentication\Client.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\Client\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

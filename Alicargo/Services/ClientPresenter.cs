@@ -20,7 +20,6 @@ namespace Alicargo.Services
 			_clientManager = clientManager;
 		}
 
-        // todo: 1. test
 		public ClientData GetClientData(long? id = null)
 		{
 			ClientData data;

@@ -28,7 +28,6 @@ namespace Alicargo.Services
             _awbRepository = awbRepository;
         }
 
-        // todo: 1. test
         public long[] GetAvailableStatesToSet()
         {
             if (_identity.IsInRole(RoleType.Admin))
@@ -60,7 +59,6 @@ namespace Alicargo.Services
             throw new InvalidLogicException("Unsupported role");
         }
 
-        // todo: 1. test
         public long[] GetVisibleStates()
         {
             if (_identity.IsInRole(RoleType.Admin))
@@ -92,7 +90,6 @@ namespace Alicargo.Services
             throw new InvalidLogicException();
         }
 
-        // todo: 1. test
         public bool HasPermissionToSetState(long stateId)
         {
             // todo: 2. move cache to an interception
@@ -103,7 +100,6 @@ namespace Alicargo.Services
             });
         }
 
-        // todo: 1. test
         // todo: 1.5. move to repository and test
         public long[] FilterByPosition(long[] states, int position)
         {
@@ -113,7 +109,6 @@ namespace Alicargo.Services
                 .ToArray();
         }
 
-        // todo: 1. test
         public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates)
         {
             var states = availableStates.ToList();

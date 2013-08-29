@@ -86,6 +86,7 @@
     <Compile Include="Services\Application\ApplicationListPresenterTests.cs" />
     <Compile Include="Services\Email\MailSenderTests.cs" />
     <Compile Include="Services\StateServiceTests.cs" />
+    <Compile Include="Services\ClientManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

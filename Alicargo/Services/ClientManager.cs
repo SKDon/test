@@ -36,7 +36,7 @@ namespace Alicargo.Services
         {
             var data = _clientRepository.Get(clientId).First();
 
-            // todo: 1. test permissions
+            // todo: 2. bb test permissions
             if (!HaveAccessToClient(data.UserId))
                 throw new AccessForbiddenException();
 
