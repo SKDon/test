@@ -45,7 +45,7 @@ namespace Alicargo.Services.Client
 
             _authentications.Update(data.UserId, authenticationModel.Login, authenticationModel.NewPassword);
 
-            // todo: 2. mapper
+            
             data.BIC = model.BIC;
             data.Phone = model.Phone;
             data.Email = model.Email;
@@ -76,7 +76,7 @@ namespace Alicargo.Services.Client
 
             _unitOfWork.SaveChanges();
 
-            // todo: 2. mapper
+            
             var data = new ClientData
                 {
                     UserId = userId(),

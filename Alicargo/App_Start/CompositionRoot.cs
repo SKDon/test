@@ -44,7 +44,7 @@ namespace Alicargo.App_Start
                                           .Configure(binding => binding.InRequestScope()));
         }
 
-        // todo: 2. Test in UI
+        // todo: 1.5. Test in UI
         private static IEnumerable<Type> BindMailingIntersection(IKernel kernel)
         {
             var assembly = Assembly.GetCallingAssembly();

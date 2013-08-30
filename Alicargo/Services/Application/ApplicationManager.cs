@@ -37,7 +37,6 @@ namespace Alicargo.Services.Application
         {
             var data = _applicationRepository.Get(id);
 
-            // todo: 2. create mapper and test it
             var application = new ApplicationEditModel
             {
                 AddressLoad = data.AddressLoad,
@@ -77,7 +76,6 @@ namespace Alicargo.Services.Application
 
             _transitService.Update(data.TransitId, transitModel, carrierModel);
 
-            // todo: 2. create mapper and test it
             data.Invoice = model.Invoice;
             data.InvoiceFileName = model.InvoiceFileName;
             data.SwiftFileName = model.SwiftFileName;
@@ -112,7 +110,6 @@ namespace Alicargo.Services.Application
         {
             var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
-            // todo: 2. create mapper and test it
             var data = new ApplicationData
             {
                 CreationTimestamp = DateTimeOffset.UtcNow,
@@ -185,7 +182,6 @@ namespace Alicargo.Services.Application
 
         public void SetState(long applicationId, long stateId)
         {
-            // todo: 2. permission interception
             if (!_stateService.HasPermissionToSetState(stateId))
                 throw new AccessForbiddenException("User don't have access to the state " + stateId);
 

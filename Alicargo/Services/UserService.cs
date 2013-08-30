@@ -29,7 +29,7 @@ namespace Alicargo.Services
 				Name = x.Name,
 				Email = x.Email,
 				RoleType = role,
-                Authentication = new AuthenticationModel // todo: 2. mapper
+                Authentication = new AuthenticationModel
 				{
 					Login = x.Login
 				}
@@ -46,7 +46,7 @@ namespace Alicargo.Services
 				Name = data.Name,
 				RoleType = role,
 				Email = data.Email,
-                Authentication = new AuthenticationModel // todo: 2. mapper
+                Authentication = new AuthenticationModel 
 				{
 					Login = data.Login
 				}

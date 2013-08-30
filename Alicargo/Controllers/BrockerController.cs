@@ -57,7 +57,7 @@ namespace Alicargo.Controllers
 				return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
-            // todo: 2. mapper
+            
 			var model = new BrockerAWBModel
 			{
 				GTD = data.GTD,

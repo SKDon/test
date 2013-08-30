@@ -35,7 +35,6 @@ namespace Alicargo.Services.Application
 
 			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 
-            // todo: 2. create mapper and test it
 			var application = new ApplicationDetailsModel
 			{
 				AddressLoad = data.AddressLoad,
@@ -97,7 +96,6 @@ namespace Alicargo.Services.Application
 
 			var states = _stateService.GetAvailableStatesToSet();
 
-            // todo: 2. test admin role
 			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
 
 			states = _stateService.ApplyBusinessLogicToStates(applicationData, states);

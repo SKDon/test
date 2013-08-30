@@ -38,13 +38,13 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		// todo: 3. test
+		// todo: 3. bb test
 		public void SetAirWaybill(long id, long? airWaybillId)
 		{
 			Update(id, application => application.AirWaybillId = airWaybillId);
 		}
 
-		// todo: 3. test
+		// todo: 3. bb test
 		public void SetDateInStock(long id, DateTimeOffset dateTimeOffset)
 		{
 			Update(id, application => application.DateInStock = dateTimeOffset);
