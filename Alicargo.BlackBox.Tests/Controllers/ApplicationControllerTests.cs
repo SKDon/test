@@ -61,7 +61,6 @@ namespace Alicargo.BlackBox.Tests.Controllers
             _kernel.Dispose();
         }
 
-        // todo: 1.5. fix
         [TestMethod, TestCategory("black-box")]
         public void Test_Create_Get()
         {

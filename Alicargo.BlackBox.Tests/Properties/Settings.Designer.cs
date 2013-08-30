@@ -23,16 +23,6 @@ namespace Alicargo.BlackBox.Tests.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\;Initial Catalog=Alicargo;Integrated Security=True")]
-        public string MainConnectionString {
-            get {
-                return ((string)(this["MainConnectionString"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:1893/")]
@@ -90,6 +80,16 @@ namespace Alicargo.BlackBox.Tests.Properties {
             }
             set {
                 this["ClientPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=Alicargo;Integrated Security=True")]
+        public string MainConnectionString {
+            get {
+                return ((string)(this["MainConnectionString"]));
             }
         }
     }
