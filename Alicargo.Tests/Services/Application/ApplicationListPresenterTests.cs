@@ -39,7 +39,7 @@ namespace Alicargo.Tests.Services.Application
                             Desc = false
                         }
                 };
-            const int identity = 1;
+            const long identity = 1;
             var data = _context.CreateMany<ApplicationListItemData>().ToArray();
             var map = _context.CreateMany<ApplicationListItem>().ToArray();
             _context.IdentityService.SetupGet(x => x.Id).Returns(identity);

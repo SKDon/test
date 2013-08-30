@@ -21,8 +21,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
         {
             Fixture = new Fixture();
 
-            var connectionString = Settings.Default.MainConnectionString;
-            _connection = new SqlConnection(connectionString);
+            _connection = new SqlConnection(Settings.Default.MainConnectionString);
             _connection.Open();
 
             _transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
