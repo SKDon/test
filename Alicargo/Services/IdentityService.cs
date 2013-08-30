@@ -58,26 +58,27 @@ namespace Alicargo.Services
 
 				return _twoLetterISOLanguageName;
 			}
-			set // todo: 1.1. make a function instead the setter
-			{
-				if (value != Contracts.Enums.TwoLetterISOLanguageName.Russian 
-					&& value != Contracts.Enums.TwoLetterISOLanguageName.Italian
-					&& value != Contracts.Enums.TwoLetterISOLanguageName.English)
-				{
-					throw new ArgumentOutOfRangeException("value");
-				}
-
-				if (Id.HasValue)
-				{
-					_authentications.SetTwoLetterISOLanguageName(Id.Value, value);
-					_unitOfWork.SaveChanges();
-				}
-
-				_twoLetterISOLanguageName = value;
-			}
 		}
 
-		public bool IsAuthenticated
+        public void SetTwoLetterISOLanguageName(string value)
+        {
+            if (value != Contracts.Enums.TwoLetterISOLanguageName.Russian
+                && value != Contracts.Enums.TwoLetterISOLanguageName.Italian
+                && value != Contracts.Enums.TwoLetterISOLanguageName.English)
+            {
+                throw new ArgumentOutOfRangeException("value");
+            }
+
+            if (Id.HasValue)
+            {
+                _authentications.SetTwoLetterISOLanguageName(Id.Value, value);
+                _unitOfWork.SaveChanges();
+            }
+
+            _twoLetterISOLanguageName = value;
+        }
+
+        public bool IsAuthenticated
 		{
 			get { return Id.HasValue; }
 		}

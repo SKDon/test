@@ -8,6 +8,7 @@ namespace Alicargo.Services.Abstract
 		bool IsAuthenticated { get; }
 		long? Id { get; set; }
 		bool IsInRole(RoleType role);
-		string TwoLetterISOLanguageName { get; set; }
+		string TwoLetterISOLanguageName { get; }
+	    void SetTwoLetterISOLanguageName(string value);
 	}
 }

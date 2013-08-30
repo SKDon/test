@@ -21,7 +21,7 @@ namespace Alicargo.Controllers
 
 		public virtual ActionResult Culture(string id, string returnUrl)
 		{
-			_identityService.TwoLetterISOLanguageName = id;
+			_identityService.SetTwoLetterISOLanguageName(id);
 
 			return Redirect(returnUrl);
 		}
