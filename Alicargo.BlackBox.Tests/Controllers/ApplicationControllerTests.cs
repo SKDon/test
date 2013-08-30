@@ -4,6 +4,7 @@ using System.Transactions;
 using System.Web.Mvc;
 using Alicargo.App_Start;
 using Alicargo.BlackBox.Tests.Properties;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
@@ -97,6 +98,26 @@ namespace Alicargo.BlackBox.Tests.Controllers
         }
 
         [TestMethod, TestCategory("black-box")]
+        public void Test_Edit_Post()
+        {
+            var model = _fixture.Create<ApplicationEditModel>();
+            var transitModel = _fixture.Create<TransitEditModel>();
+            var newCarrierName = _fixture.Create<string>();
+
+            var old = _applicationRepository.List(1).First();
+            var clientId = _applicationRepository.GetClientId(old.Id);
+            var clientData = _clientRepository.Get(clientId).First();
+
+
+            var result = _controller.Edit(old.Id, model, new CarrierSelectModel
+                {
+                    NewCarrierName = newCarrierName
+                }, transitModel);
+
+            Validate(result, clientData, model, transitModel, newCarrierName);
+        }
+
+        [TestMethod, TestCategory("black-box")]
         public void Test_Create_Post()
         {
             var clientData = _clientRepository.Get(TestConstants.TestClientId1).First();
@@ -109,19 +130,27 @@ namespace Alicargo.BlackBox.Tests.Controllers
                     NewCarrierName = newCarrierName
                 }, transitModel);
 
+            Validate(result, clientData, model, transitModel, newCarrierName);
+        }
+
+        private void Validate(ActionResult result, ClientData clientData, ApplicationEditModel model,
+                              TransitEditModel transitModel, string newCarrierName)
+        {
             result.Should().BeOfType<RedirectToRouteResult>();
 
-            var data = _applicationRepository.List(1, 0, new[]
-                {
-                    TestConstants.DefaultStateId
-                }, new[]
+            var data = _applicationRepository.List(1,
+                stateIds: new[]
+                    {
+                        TestConstants.DefaultStateId
+                    },
+                orders: new[]
                     {
                         new Order
                             {
                                 Desc = true,
                                 OrderType = OrderType.Id
                             }
-                    }, clientData.UserId).First();
+                    }, clientUserId: clientData.UserId).First();
 
             data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
             data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);

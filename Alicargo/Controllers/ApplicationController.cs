@@ -2,7 +2,6 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -119,7 +118,6 @@ namespace Alicargo.Controllers
 			return View(application);
 		}
 
-		// todo: 1.1. test
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
