@@ -32,7 +32,7 @@ namespace Alicargo.Services.AirWaybill
 
             Map(model, data);
 
-            // todo: 2. use update file methods
+            // todo: 3. use update file methods
             _awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile,
                                   model.AWBFile);
 
@@ -69,7 +69,7 @@ namespace Alicargo.Services.AirWaybill
 
             Map(model, data);
 
-            // todo: 2. use update file methods
+            // todo: 3. use update file methods
             _awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile,
                                   model.PackingFile, model.InvoiceFile, null);
 

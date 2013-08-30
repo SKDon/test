@@ -100,7 +100,6 @@ namespace Alicargo.Services
             });
         }
 
-        // todo: 1.5. move to repository and test
         public long[] FilterByPosition(long[] states, int position)
         {
             return _stateRepository.GetAll() // todo: 3. pass state ids to Get

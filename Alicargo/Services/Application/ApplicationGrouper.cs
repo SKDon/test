@@ -30,7 +30,7 @@ namespace Alicargo.Services.Application
 
             _airWaybills = _awbRepository.Get(awbIds).ToDictionary(x => x.Id, x => x);
 
-            // todo: 1.5. fix bug - get aggregation to all data, not only current set
+            // todo: 1.1. fix bug - get aggregation to all data, not only current set
             _awbAggregates = _awbRepository.GetAggregate(/*awbIds*/).ToDictionary(x => x.AirWaybillId, x => x);
 
             return GroupImpl(applications, groups);

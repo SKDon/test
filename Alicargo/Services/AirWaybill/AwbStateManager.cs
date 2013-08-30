@@ -4,7 +4,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.AirWaybill
 {
-    // todo: 2. registration
+    // todo: 1.1. registration
     internal sealed class AwbStateManager : IAwbStateManager
     {
         private readonly IApplicationManager _applicationManager;

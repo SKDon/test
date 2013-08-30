@@ -11,7 +11,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Email
 {
-    // todo: 1.5. create the mailing engine
+    // todo: 1.2. create the mailing engine
     internal sealed class ApplicationManagerWithMailing : IApplicationManager
     {
         private readonly IApplicationPresenter _applicationPresenter;

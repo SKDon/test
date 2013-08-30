@@ -28,7 +28,7 @@ namespace Alicargo.App_Start
 
             kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
-            // todo: 1.5. auto binding for intersections
+            // todo: 1. auto binding for intersections
             kernel.Bind<IMailSender>().To<SilentMailSender>().InRequestScope();
             kernel.Bind<IMailSender>().To<MailSender>().WhenInjectedInto<SilentMailSender>().InRequestScope();
 

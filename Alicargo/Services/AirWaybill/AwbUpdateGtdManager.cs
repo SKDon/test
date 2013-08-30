@@ -6,7 +6,7 @@ using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.AirWaybill
 {
-    // todo: 1.5. registration
+    // todo: 1.1. registration
     internal sealed class AwbUpdateGtdManager : IAwbUpdateManager
     {
         private readonly IAwbGtdHelper _gtdHelper;
