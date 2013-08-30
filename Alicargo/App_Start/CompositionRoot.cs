@@ -20,6 +20,7 @@ namespace Alicargo.App_Start
     internal static class CompositionRoot
     {
         private const string WithMailingSufix = "WithMailing";
+        private const string AlicargoDataaccessDll = "Alicargo.DataAccess.dll";
 
         public static void BindServices(IKernel kernel)
         {
@@ -27,7 +28,7 @@ namespace Alicargo.App_Start
 
             kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
-            // todo: 1.1. auto binding for intersections
+            // todo: 1.5. auto binding for intersections
             kernel.Bind<IMailSender>().To<SilentMailSender>().InRequestScope();
             kernel.Bind<IMailSender>().To<MailSender>().WhenInjectedInto<SilentMailSender>().InRequestScope();
 
@@ -90,7 +91,7 @@ namespace Alicargo.App_Start
                   .InRequestScope()
                   .OnDeactivation(x => x.Close());
 
-            kernel.Bind(x => x.FromAssembliesMatching("Alicargo.DataAccess.dll")
+            kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataaccessDll)
                               .IncludingNonePublicTypes()
                               .Select(IsServiceType)
                               .BindDefaultInterface()

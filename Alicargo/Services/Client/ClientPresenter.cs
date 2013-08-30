@@ -23,7 +23,7 @@ namespace Alicargo.Services.Client
 		    _clientPermissions = clientPermissions;
 		}
 
-		public ClientData GetClientData(long? clientId = null)
+		public ClientData GetCurrentClientData(long? clientId = null)
 		{
 			ClientData data;
 

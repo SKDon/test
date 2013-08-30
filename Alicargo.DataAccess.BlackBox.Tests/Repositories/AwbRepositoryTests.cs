@@ -4,6 +4,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.Repositories;
+using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -62,8 +63,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
         [TestMethod]
         public void Test_AwbRepository_GetClientEmails()
         {
-            var data1 = CreateApplicationData(DbTestContext.TestClientId1);
-            var data2 = CreateApplicationData(DbTestContext.TestClientId2);
+            var data1 = CreateApplicationData(TestConstants.TestClientId1);
+            var data2 = CreateApplicationData(TestConstants.TestClientId2);
 
             var id = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
             _context.UnitOfWork.SaveChanges();
@@ -79,8 +80,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
             var emails = _awbRepository.GetClientEmails(id());
 
-            var clients = new ClientRepository(_context.UnitOfWork).Get(DbTestContext.TestClientId1,
-                                                                        DbTestContext.TestClientId2);
+            var clients = new ClientRepository(_context.UnitOfWork).Get(TestConstants.TestClientId1,
+                                                                        TestConstants.TestClientId2);
 
             emails.ShouldBeEquivalentTo(clients.Select(x => x.Email).ToArray());
         }
@@ -120,12 +121,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
         {
             var data = CreateTestAirWaybill();
 
-            _awbRepository.SetState(data.Id, DbTestContext.CargoIsFlewStateId);
+            _awbRepository.SetState(data.Id, TestConstants.CargoIsFlewStateId);
             _context.UnitOfWork.SaveChanges();
 
             var actual = _awbRepository.Get(data.Id).First();
 
-            actual.StateId.ShouldBeEquivalentTo(DbTestContext.CargoIsFlewStateId);
+            actual.StateId.ShouldBeEquivalentTo(TestConstants.CargoIsFlewStateId);
             actual.StateChangeTimestamp.Should().NotBe(data.StateChangeTimestamp);
         }
 
@@ -158,10 +159,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
         [TestMethod]
         public void Test_AwbRepository_GetAggregate()
         {
-            var data1 = CreateApplicationData(DbTestContext.TestClientId1);
-            var data2 = CreateApplicationData(DbTestContext.TestClientId1);
-            var data3 = CreateApplicationData(DbTestContext.TestClientId1);
-            var data4 = CreateApplicationData(DbTestContext.TestClientId1);
+            var data1 = CreateApplicationData(TestConstants.TestClientId1);
+            var data2 = CreateApplicationData(TestConstants.TestClientId1);
+            var data3 = CreateApplicationData(TestConstants.TestClientId1);
+            var data4 = CreateApplicationData(TestConstants.TestClientId1);
 
             var id1 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
             var id2 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
@@ -201,7 +202,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
                            .With(x => x.ClientId, clientId)
                            .With(x => x.AirWaybillId, null)
                            .With(x => x.CountryId, null)
-                           .With(x => x.StateId, DbTestContext.DefaultStateId)
+                           .With(x => x.StateId, TestConstants.DefaultStateId)
                            .With(x => x.TransitId, 1)
                            .With(x => x.CurrencyId, (int) CurrencyType.Dollar)
                            .Create();
@@ -211,8 +212,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
         {
             return _context.Fixture
                            .Build<AirWaybillData>()
-                           .With(x => x.StateId, DbTestContext.DefaultStateId)
-                           .With(x => x.BrockerId, DbTestContext.TestBrockerId)
+                           .With(x => x.StateId, TestConstants.DefaultStateId)
+                           .With(x => x.BrockerId, TestConstants.TestBrockerId)
                            .Create();
         }
     }
