@@ -20,7 +20,7 @@ namespace Alicargo.App_Start
     internal static class CompositionRoot
     {
         private const string WithMailingSufix = "WithMailing";
-        private const string AlicargoDataaccessDll = "Alicargo.DataAccess.dll";
+        private const string AlicargoDataAccessDll = "Alicargo.DataAccess.dll";
 
         public static void BindServices(IKernel kernel)
         {
@@ -35,8 +35,10 @@ namespace Alicargo.App_Start
             var binded = BindMailingIntersection(kernel);
 
             kernel.Bind(scanner => scanner.FromThisAssembly()
+                                          .IncludingNonePublicTypes()
                                           .Select(IsServiceType)
                                           .Excluding<MailSender>()
+                                          .Excluding<SilentMailSender>()
                                           .Excluding(binded)
                                           .BindDefaultInterface()
                                           .Configure(binding => binding.InRequestScope()));
@@ -69,8 +71,8 @@ namespace Alicargo.App_Start
         private static bool IsServiceType(Type type)
         {
             return type.IsClass
-                && !type.Name.EndsWith(WithMailingSufix)
-                && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
+                   && !type.Name.EndsWith(WithMailingSufix)
+                   && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
         }
 
         public static void RegisterConfigs(IKernel kernel)
@@ -91,7 +93,7 @@ namespace Alicargo.App_Start
                   .InRequestScope()
                   .OnDeactivation(x => x.Close());
 
-            kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataaccessDll)
+            kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
                               .IncludingNonePublicTypes()
                               .Select(IsServiceType)
                               .BindDefaultInterface()

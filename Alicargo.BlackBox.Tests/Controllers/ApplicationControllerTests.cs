@@ -47,8 +47,9 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
         private void BindServices()
         {
-            CompositionRoot.BindServices(_kernel);
             CompositionRoot.BindDataAccess(_kernel, Settings.Default.MainConnectionString);
+
+            CompositionRoot.BindServices(_kernel);
 
             _kernel.Bind<ApplicationController>().ToSelf();
         }
