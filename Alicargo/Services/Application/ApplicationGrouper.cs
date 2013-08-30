@@ -15,7 +15,7 @@ namespace Alicargo.Services.Application
         private const string AwbFieldName = "AirWaybill";
         private readonly IAwbRepository _awbRepository;
         private Dictionary<long, AirWaybillData> _airWaybills;
-        private Dictionary<long, AirWaybillAggregate> _aggregates;
+        private Dictionary<long, AirWaybillAggregate> _awbAggregates;
 
         public ApplicationGrouper(IAwbRepository awbRepository)
         {
@@ -24,11 +24,14 @@ namespace Alicargo.Services.Application
 
         public ApplicationGroup[] Group(ApplicationListItem[] applications, OrderType[] groups)
         {
-            var ids = applications.Select(x => x.AirWaybillId ?? 0)
+            var awbIds = applications.Select(x => x.AirWaybillId ?? 0)
                                   .Distinct()
                                   .ToArray();
-            _airWaybills = _awbRepository.Get(ids).ToDictionary(x => x.Id, x => x);
-            _aggregates = _awbRepository.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
+
+            _airWaybills = _awbRepository.Get(awbIds).ToDictionary(x => x.Id, x => x);
+
+            // todo: 1.5. fix bug - get aggregation to all data, not only current set
+            _awbAggregates = _awbRepository.GetAggregate(/*awbIds*/).ToDictionary(x => x.AirWaybillId, x => x);
 
             return GroupImpl(applications, groups);
         }
@@ -112,8 +115,8 @@ namespace Alicargo.Services.Application
             {
                 // todo: 3. test in UI
                 var id = (long)(object)grouping.Key;
-                count = _aggregates[id].TotalCount;
-                weigth = _aggregates[id].TotalWeight;
+                count = _awbAggregates[id].TotalCount;
+                weigth = _awbAggregates[id].TotalWeight;
             }
             else
             {
@@ -123,7 +126,6 @@ namespace Alicargo.Services.Application
 
             return new ApplicationGroup
                 {
-                    // todo: 1.1. fix bug - get aggregation to all data, not only current set
                     aggregates = new ApplicationGroup.Aggregates(count, weigth),
                     field = field,
                     value = getValue(grouping),
