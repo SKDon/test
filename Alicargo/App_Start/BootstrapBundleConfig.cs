@@ -20,8 +20,8 @@ namespace Alicargo.App_Start
 					"~/Scripts/jquery-ui-{version}.js",
 					"~/Scripts/jquery.validate.js",
 					"~/Scripts/jquery.validate.unobtrusive.js",
-					"~/Scripts/bootstrap.js",
-					"~/Scripts/bootstrap-fileupload.js",
+					"~/Content/bootstrap/js/bootstrap.js",
+					"~/Content/bootstrap/fileupload/bootstrap-fileupload.js",
 					"~/Scripts/jquery.globalize/globalize.js",
 					"~/Scripts/kendo/2013.2.716/kendo.web.min.js",
 					"~/Scripts/app/CurrencyType.js",
@@ -45,9 +45,9 @@ namespace Alicargo.App_Start
 			BundleTable.Bundles.Add(new StyleRelativePathTransformBundle(PathConstants.StylesPath)
 				.Include(
 					"~/Content/themes/jMetro/jquery-ui.css",
-					"~/Content/bootstrap/bootstrap.css",
-					"~/Content/bootstrap/bootstrap-responsive.css",
-					"~/Content/bootstrap/bootstrap-fileupload.css",
+					"~/Content/bootstrap/css/bootstrap.css",
+					"~/Content/bootstrap/css/bootstrap-responsive.css",
+					"~/Content/bootstrap/fileupload/bootstrap-fileupload.css",
 					"~/Content/kendo/2013.2.716/kendo.common.min.css",
 					"~/Content/kendo/2013.2.716/kendo.default.min.css",
 					"~/Content/app/kendo.css",
