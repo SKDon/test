@@ -8,7 +8,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	public sealed class AuthenticationService : IAuthenticationService
+    internal sealed class AuthenticationService : IAuthenticationService
 	{
 		private readonly IAuthenticationRepository _authentications;
 		private readonly IPasswordConverter _passwordConverter;

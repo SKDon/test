@@ -9,8 +9,8 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
 {
-	// todo: tests
-	public sealed class IdentityService : IIdentityService
+	// todo: 2. chached interception
+    internal sealed class IdentityService : IIdentityService
 	{
 		private readonly IAuthenticationRepository _authentications;
 		private readonly IUnitOfWork _unitOfWork;
@@ -58,26 +58,27 @@ namespace Alicargo.Services
 
 				return _twoLetterISOLanguageName;
 			}
-			set // todo: make a function instead the setter
-			{
-				if (value != Contracts.Enums.TwoLetterISOLanguageName.Russian 
-					&& value != Contracts.Enums.TwoLetterISOLanguageName.Italian
-					&& value != Contracts.Enums.TwoLetterISOLanguageName.English)
-				{
-					throw new ArgumentOutOfRangeException("value");
-				}
-
-				if (Id.HasValue)
-				{
-					_authentications.SetTwoLetterISOLanguageName(Id.Value, value);
-					_unitOfWork.SaveChanges();
-				}
-
-				_twoLetterISOLanguageName = value;
-			}
 		}
 
-		public bool IsAuthenticated
+        public void SetTwoLetterISOLanguageName(string value)
+        {
+            if (value != Contracts.Enums.TwoLetterISOLanguageName.Russian
+                && value != Contracts.Enums.TwoLetterISOLanguageName.Italian
+                && value != Contracts.Enums.TwoLetterISOLanguageName.English)
+            {
+                throw new ArgumentOutOfRangeException("value");
+            }
+
+            if (Id.HasValue)
+            {
+                _authentications.SetTwoLetterISOLanguageName(Id.Value, value);
+                _unitOfWork.SaveChanges();
+            }
+
+            _twoLetterISOLanguageName = value;
+        }
+
+        public bool IsAuthenticated
 		{
 			get { return Id.HasValue; }
 		}

@@ -5,26 +5,29 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Services
 {
-	// todo: test
-	public sealed class CarrierService : ICarrierService
+    internal sealed class CarrierService : ICarrierService
 	{
 		private readonly ICarrierRepository _carriers;
 		private readonly ITransitRepository _transitRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-		public CarrierService(
+        public CarrierService(
 			ICarrierRepository carriers, 
-			ITransitRepository transitRepository)
+			ITransitRepository transitRepository,
+            IUnitOfWork unitOfWork)
 		{
 			_carriers = carriers;
 			_transitRepository = transitRepository;
+		    _unitOfWork = unitOfWork;
 		}
 
 		public CarrierSelectModel Get(long? transitId)
 		{
-			return transitId.HasValue
+            return transitId.HasValue // todo: 3. test
 				? new CarrierSelectModel
 				{
 					CarrierId = _transitRepository.Get(transitId.Value).First().CarrierId
@@ -40,7 +43,7 @@ namespace Alicargo.Services
 			return _carriers.GetAll().ToDictionary(x => x.Id, x => x.Name);
 		}
 
-		public Func<long> AddOrGetCarrier(string name)
+		private Func<long> AddOrGetCarrier(string name)
 		{
 			if (name == null) throw new ArgumentNullException("name");
 
@@ -49,5 +52,16 @@ namespace Alicargo.Services
 
 			return _carriers.Add(new CarrierData { Name = name });
 		}
+
+        public long AddOrGetCarrier(CarrierSelectModel model)
+        {
+            if (model.NewCarrierName.IsNullOrWhiteSpace()) return model.CarrierId;
+
+            var id = AddOrGetCarrier(model.NewCarrierName);
+
+            _unitOfWork.SaveChanges();
+
+            return id();
+        }
 	}
 }

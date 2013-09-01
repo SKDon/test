@@ -2,7 +2,7 @@
 
 namespace Alicargo.ViewModels.AirWaybill
 {
-	public sealed class AirWaybillListItem
+    public sealed class AirWaybillListItem
 	{
 		public long Id { get; set; }
 

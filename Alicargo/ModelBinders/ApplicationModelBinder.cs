@@ -5,7 +5,6 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.ModelBinders
 {
-	// todo: finish the binder to fill CarrierSelectModel and ClientId
 	internal sealed class ApplicationModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
@@ -17,6 +16,7 @@ namespace Alicargo.ModelBinders
 			return model;
 		}
 
+        // todo: 3. files refatoring
 		private static void ReadFiles(ApplicationEditModel model, HttpRequestBase request)
 		{
 			if (model.InvoiceFile == null && model.InvoiceFileName == null)

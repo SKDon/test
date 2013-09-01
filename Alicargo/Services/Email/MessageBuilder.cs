@@ -3,6 +3,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
+using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
@@ -11,8 +12,8 @@ using Resources;
 
 namespace Alicargo.Services.Email
 {
-	// todo: use recipient culture
-	public sealed class MessageBuilder : IMessageBuilder
+	// todo: 1.5. use recipient culture for dates format
+    internal sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly ILocalizationService _localizationService;
@@ -93,15 +94,12 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		public string ApplicationSubject
-		{
-			get
-			{
-				return Mail.Application_Subject;
-			}
-		}
+        public string GetApplicationSubject(string displayNumber)
+        {
+            return string.Format(Mail.Application_Subject, displayNumber);
+        }
 
-		public string ApplicationSetState(ApplicationDetailsModel model, string culture)
+        public string ApplicationSetState(ApplicationDetailsModel model, string culture)
 		{
 			return string.Format(Mail.Application_SetState,
 				ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count),

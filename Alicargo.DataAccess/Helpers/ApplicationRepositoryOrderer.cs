@@ -54,18 +54,18 @@ namespace Alicargo.DataAccess.Helpers
 			return applications;
 		}
 
-		// todo: test
+		// todo: 3. test
 		private static IQueryable<Application> ById(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
 			return Order(applications, desc, isFirst, x => x.Id);
 		}
 
-		// todo: test
+		// todo: 3. test
 		private static IQueryable<Application> ByAirWaybillBill(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
 			var ordered = Order(applications, desc, isFirst, x => x.AirWaybillId.HasValue);
 
-			if (desc) // todo: make explicit direction
+			if (desc) // todo: 3. test for implicit direction
 			{
 				return ordered.ThenBy(x => x.AirWaybill.CreationTimestamp);
 			}

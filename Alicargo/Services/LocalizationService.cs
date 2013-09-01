@@ -6,7 +6,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
 {
-	public sealed class LocalizationService : ILocalizationService
+    internal sealed class LocalizationService : ILocalizationService
 	{
 		private readonly IStateRepository _stateRepository;
 
@@ -17,7 +17,7 @@ namespace Alicargo.Services
 
 		public string GetDate(DateTimeOffset? date, string culture, TimeSpan? timeZone)
 		{
-			// todo: apply timezone
+			// todo: 1.5. apply timezone
 			return date.HasValue ? date.Value.Date.ToString("d", CultureInfo.GetCultureInfo(culture)) : null;
 		}
 

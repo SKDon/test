@@ -7,7 +7,7 @@ namespace Alicargo.Services.Abstract
 	{
 		long[] GetAvailableStatesToSet();
 		long[] GetVisibleStates();
-		Dictionary<long, string> GetLocalizedDictionary(IEnumerable<long> stateIds = null);
+		Dictionary<long, string> GetLocalizedDictionary(long[] stateIds = null);
 		Dictionary<long, StateData> GetDictionary();
 		bool HasPermissionToSetState(long stateId);
 		long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates);

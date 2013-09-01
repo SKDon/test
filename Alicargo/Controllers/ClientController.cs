@@ -9,7 +9,7 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
-	// todo: create a model binder for the ClientModel
+    // todo: 2. bb tests
 	public partial class ClientController : Controller
 	{
 		private readonly IClientManager _clientManager;
@@ -95,7 +95,7 @@ namespace Alicargo.Controllers
 		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id)
 		{
-			var data = _clientPresenter.GetClientData(id);
+			var data = _clientPresenter.GetCurrentClientData(id);
 
 			var model = ClientModel.GetModel(data);
 
@@ -104,12 +104,11 @@ namespace Alicargo.Controllers
 			return View(model);
 		}
 
-		// todo: test
 		[ValidateAntiForgeryToken, HttpPost, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id, ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
 										 CarrierSelectModel carrierModel, [Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
-			var data = _clientPresenter.GetClientData(id);
+			var data = _clientPresenter.GetCurrentClientData(id);
 
 			if (!ModelState.IsValid) return View(model);
 

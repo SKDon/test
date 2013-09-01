@@ -3,13 +3,12 @@ using System.Linq;
 using System.Threading;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-	public sealed class UserService : IUserService
+    internal sealed class UserService : IUserService
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly IUnitOfWork _unitOfWork;
@@ -30,7 +29,7 @@ namespace Alicargo.Services
 				Name = x.Name,
 				Email = x.Email,
 				RoleType = role,
-				Authentication = new AuthenticationModel
+                Authentication = new AuthenticationModel
 				{
 					Login = x.Login
 				}
@@ -47,13 +46,14 @@ namespace Alicargo.Services
 				Name = data.Name,
 				RoleType = role,
 				Email = data.Email,
-				Authentication = new AuthenticationModel
+                Authentication = new AuthenticationModel 
 				{
 					Login = data.Login
 				}
 			};
 		}
 
+        // todo: 2. tests
 		public void Update(UserModel model)
 		{
 			switch (model.RoleType)
@@ -82,6 +82,7 @@ namespace Alicargo.Services
 			_unitOfWork.SaveChanges();
 		}
 
+        // todo: 2. tests
 		public void Add(UserModel model)
 		{
 			var twoLetterISOLanguageName = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;

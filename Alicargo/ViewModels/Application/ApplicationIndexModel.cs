@@ -4,7 +4,7 @@ using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
-	public sealed class ApplicationIndexModel
+    public sealed class ApplicationIndexModel
 	{
 		public Dictionary<long, string> Clients { get; set; }
 

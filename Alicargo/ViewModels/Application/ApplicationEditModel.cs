@@ -4,7 +4,7 @@ using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
-	public sealed class ApplicationEditModel
+    public sealed class ApplicationEditModel
 	{
 		public ApplicationEditModel()
 		{

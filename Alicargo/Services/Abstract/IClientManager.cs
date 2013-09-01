@@ -6,6 +6,5 @@ namespace Alicargo.Services.Abstract
 	{		
 		void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel);
 		long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, AuthenticationModel authenticationModel);
-		bool HaveAccessToClient(long clientUserId);
 	}
 }

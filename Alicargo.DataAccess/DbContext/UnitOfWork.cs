@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.DbContext
 
 		public ITransaction StartTransaction()
 		{
-			// todo: refactor using of transactions
+			// todo: 3.5. refactor using of transactions, create interception
 			// TransactionScopeOption.RequiresNew
 			return new Transaction(new TransactionScope());
 		}
@@ -28,7 +28,7 @@ namespace Alicargo.DataAccess.DbContext
 		{
 			_context = new AlicargoDataContext(connection);
 
-			Debug();
+			//Debug();
 		}
 
 		[Conditional("DEBUG")]

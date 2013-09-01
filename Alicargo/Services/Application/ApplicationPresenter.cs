@@ -7,8 +7,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	// todo: test
-	public sealed class ApplicationPresenter : IApplicationPresenter
+    internal sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly ICountryRepository _countryRepository;
@@ -114,7 +113,7 @@ namespace Alicargo.Services.Application
 				.ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 		}
 
-		private ApplicationStateModel[] ToApplicationStateModel(IEnumerable<long> ids)
+		private ApplicationStateModel[] ToApplicationStateModel(long[] ids)
 		{
 			return _stateService.GetLocalizedDictionary(ids)
 								.Select(x => new ApplicationStateModel

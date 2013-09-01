@@ -5,7 +5,7 @@ using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.ModelBinders
 {
-	sealed class AirWaybillModelBinder : DefaultModelBinder
+	internal sealed class AirWaybillModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{

@@ -9,7 +9,7 @@ using log4net;
 
 namespace Alicargo.Helpers
 {
-	public sealed class CustomHandleErrorAttribute : HandleErrorAttribute
+    internal sealed class CustomHandleErrorAttribute : HandleErrorAttribute
 	{
 		private readonly ILog _log;
 

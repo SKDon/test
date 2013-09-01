@@ -5,7 +5,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.ModelBinders
 {
-	sealed class BrockerAWBModelBinder : DefaultModelBinder
+    internal sealed class BrockerAWBModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{

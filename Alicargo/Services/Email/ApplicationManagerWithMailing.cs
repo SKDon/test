@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
@@ -10,156 +11,158 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Email
 {
-	// todo: test!!!
-	public sealed class ApplicationManagerWithMailing : IApplicationManager
-	{
-		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IApplicationRepository _applicationRepository;
-		private readonly IAuthenticationRepository _authenticationRepository;
-		private readonly IAwbRepository _awbRepository;
-		private readonly IMailSender _mailSender;
-		private readonly IApplicationManager _manager;
-		private readonly IMessageBuilder _messageBuilder;
-		private readonly IStateConfig _stateConfig;
+    // todo: 1.2. create the mailing engine
+    internal sealed class ApplicationManagerWithMailing : IApplicationManager
+    {
+        private readonly IApplicationPresenter _applicationPresenter;
+        private readonly IApplicationRepository _applicationRepository;
+        private readonly IAuthenticationRepository _authenticationRepository;
+        private readonly IAwbRepository _awbRepository;
+        private readonly IMailSender _mailSender;
+        private readonly IApplicationManager _manager;
+        private readonly IMessageBuilder _messageBuilder;
+        private readonly IStateConfig _stateConfig;
 
-		public ApplicationManagerWithMailing(
-			IMailSender mailSender,
-			IMessageBuilder messageBuilder,
-			IStateConfig stateConfig,
-			IApplicationPresenter applicationPresenter,
-			IAuthenticationRepository authenticationRepository,
-			IAwbRepository awbRepository,
-			IApplicationRepository applicationRepository,
-			IApplicationManager manager)
-		{
-			_mailSender = mailSender;
-			_messageBuilder = messageBuilder;
-			_stateConfig = stateConfig;
-			_applicationPresenter = applicationPresenter;
-			_authenticationRepository = authenticationRepository;
-			_awbRepository = awbRepository;
-			_applicationRepository = applicationRepository;
-			_manager = manager;
-		}
+        public ApplicationManagerWithMailing(
+            IMailSender mailSender,
+            IMessageBuilder messageBuilder,
+            IStateConfig stateConfig,
+            IApplicationPresenter applicationPresenter,
+            IAuthenticationRepository authenticationRepository,
+            IAwbRepository awbRepository,
+            IApplicationRepository applicationRepository,
+            IApplicationManager manager)
+        {
+            _mailSender = mailSender;
+            _messageBuilder = messageBuilder;
+            _stateConfig = stateConfig;
+            _applicationPresenter = applicationPresenter;
+            _authenticationRepository = authenticationRepository;
+            _awbRepository = awbRepository;
+            _applicationRepository = applicationRepository;
+            _manager = manager;
+        }
 
-		public ApplicationEditModel Get(long id)
-		{
-			return _manager.Get(id);
-		}
+        public ApplicationEditModel Get(long id)
+        {
+            return _manager.Get(id);
+        }
 
-		public void Update(long applicationId, ApplicationEditModel model, CarrierSelectModel carrierModel,
-						   TransitEditModel transitModel)
-		{
-			var oldData = _applicationPresenter.GetDetails(applicationId);
+        public void Update(long applicationId, ApplicationEditModel model, CarrierSelectModel carrierModel,
+                           TransitEditModel transitModel)
+        {
+            var oldData = _applicationPresenter.GetDetails(applicationId);
 
-			_manager.Update(applicationId, model, carrierModel, transitModel);
+            _manager.Update(applicationId, model, carrierModel, transitModel);
 
-			SendOnFileAdd(applicationId, oldData);
-		}
+            SendOnFileAdd(applicationId, oldData);
+        }
 
-		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-						long clientId)
-		{
-			var id = _manager.Add(model, carrierModel, transitModel, clientId);
+        public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
+                        long clientId)
+        {
+            var id = _manager.Add(model, carrierModel, transitModel, clientId);
 
-			SendOnAdd(id);
+            SendOnAdd(id);
 
-			return id;
-		}
+            return id;
+        }
 
-		public void Delete(long id)
-		{
-			_manager.Delete(id);
-		}
+        public void Delete(long id)
+        {
+            _manager.Delete(id);
+        }
 
-		public void SetState(long id, long stateId)
-		{
-			_manager.SetState(id, stateId);
+        public void SetState(long id, long stateId)
+        {
+            _manager.SetState(id, stateId);
 
-			SendOnSetState(id);
-		}
+            SendOnSetState(id);
+        }
 
-		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
-		{
-			_manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+        public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
+        {
+            _manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 
-			SendOnSetDateOfCargoReceipt(id);
-		}
+            SendOnSetDateOfCargoReceipt(id);
+        }
 
-		public void SetTransitReference(long id, string transitReference)
-		{
-			_manager.SetTransitReference(id, transitReference);
+        public void SetTransitReference(long id, string transitReference)
+        {
+            _manager.SetTransitReference(id, transitReference);
 
-			SendOnSetState(id);
-		}
+            SendOnSetState(id);
+        }
 
-		private void SendOnFileAdd(long id, ApplicationDetailsModel old)
-		{
-			var details = _applicationPresenter.GetDetails(id);
+        private void SendOnFileAdd(long id, ApplicationDetailsModel old)
+        {
+            var details = _applicationPresenter.GetDetails(id);
+            var subject = _messageBuilder.GetApplicationSubject(ApplicationModelHelper.GetDisplayNumber(details.Id, details.Count));
 
-			var subject = string.Format(_messageBuilder.ApplicationSubject,
-										ApplicationModelHelper.GetDisplayNumber(details.Id, details.Count));
+            if (old.InvoiceFileName == null && details.InvoiceFileName != null)
+            {
+                var body = _messageBuilder.ApplicationInvoiceFileAdded(details);
+                var to = _messageBuilder.GetSenderEmails();
+                var file = _applicationRepository.GetInvoiceFile(details.Id);
 
-			if (old.InvoiceFileName == null && details.InvoiceFileName != null)
-			{
-				var body = _messageBuilder.ApplicationInvoiceFileAdded(details);
-				var to = _messageBuilder.GetSenderEmails();
-				var file = _applicationRepository.GetInvoiceFile(details.Id);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
-				_mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) {Files = new[] {file}});
-			}
+                _mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+                _mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) { Files = new[] { file } });
+            }
 
-			if (old.SwiftFileName == null && details.SwiftFileName != null)
-			{
-				var body = _messageBuilder.ApplicationSwiftFileAdded(details);
-				var to = _messageBuilder.GetSenderEmails();
-				var file = _applicationRepository.GetSwiftFile(details.Id);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
-				_mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) {Files = new[] {file}});
-			}
+            if (old.SwiftFileName == null && details.SwiftFileName != null)
+            {
+                var body = _messageBuilder.ApplicationSwiftFileAdded(details);
+                var to = _messageBuilder.GetSenderEmails();
+                var file = _applicationRepository.GetSwiftFile(details.Id);
 
-			if (old.PackingFileName == null && details.PackingFileName != null)
-			{
-				var body = _messageBuilder.ApplicationPackingFileAdded(details);
-				var file = _applicationRepository.GetPackingFile(details.Id);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
+                _mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+                _mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) { Files = new[] { file } });
+            }
 
-				var to = _messageBuilder.GetSenderEmails().Select(x => x.Email).ToArray();
-				_mailSender.Send(new Message(subject, body, to) {Files = new[] {file}});
-			}
+            if (old.PackingFileName == null && details.PackingFileName != null)
+            {
+                var body = _messageBuilder.ApplicationPackingFileAdded(details);
+                var file = _applicationRepository.GetPackingFile(details.Id);
+                _mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
 
-			if (old.DeliveryBillFileName == null && details.DeliveryBillFileName != null)
-			{
-				var body = _messageBuilder.ApplicationDeliveryBillFileAdded(details);
-				var file = _applicationRepository.GetDeliveryBillFile(details.Id);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
-			}
+                var to = _messageBuilder.GetSenderEmails().Select(x => x.Email).ToArray();
+                _mailSender.Send(new Message(subject, body, to) { Files = new[] { file } });
+            }
 
-			if (old.Torg12FileName == null && details.Torg12FileName != null)
-			{
-				var body = _messageBuilder.ApplicationTorg12FileAdded(details);
-				var file = _applicationRepository.GetTorg12File(details.Id);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
-			}
+            if (old.DeliveryBillFileName == null && details.DeliveryBillFileName != null)
+            {
+                var body = _messageBuilder.ApplicationDeliveryBillFileAdded(details);
+                var file = _applicationRepository.GetDeliveryBillFile(details.Id);
 
-			if (old.CPFileName == null && details.CPFileName != null)
-			{
-				var body = _messageBuilder.ApplicationCPFileAdded(details);
-				var file = _applicationRepository.GetCPFile(details.Id);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) {Files = new[] {file}});
-			}
-		}
+                _mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+            }
 
-		private void SendOnAdd(long id)
-		{
-			var model = _applicationPresenter.GetDetails(id);
-			var subject = string.Format(_messageBuilder.ApplicationSubject,
-										ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
-			var clientData = _authenticationRepository.GetById(model.ClientUserId);
+            if (old.Torg12FileName == null && details.Torg12FileName != null)
+            {
+                var body = _messageBuilder.ApplicationTorg12FileAdded(details);
+                var file = _applicationRepository.GetTorg12File(details.Id);
 
-			var to = _messageBuilder.GetAdminEmails()
-									.Concat(_messageBuilder.GetSenderEmails())
-									.Concat(new[]
+                _mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+            }
+
+            if (old.CPFileName == null && details.CPFileName != null)
+            {
+                var body = _messageBuilder.ApplicationCPFileAdded(details);
+                var file = _applicationRepository.GetCPFile(details.Id);
+
+                _mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+            }
+        }
+
+        private void SendOnAdd(long id)
+        {
+            var model = _applicationPresenter.GetDetails(id);
+            var subject = _messageBuilder.GetApplicationSubject(ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
+            var clientData = _authenticationRepository.GetById(model.ClientUserId);
+
+            var to = _messageBuilder.GetAdminEmails()
+                                    .Concat(_messageBuilder.GetSenderEmails())
+                                    .Concat(new[]
 									{
 										new Recipient
 										{
@@ -167,91 +170,90 @@ namespace Alicargo.Services.Email
 											Email = model.ClientEmail
 										}
 									})
-									.ToArray();
+                                    .ToArray();
 
-			foreach (var recipient in to)
-			{
-				var body = _messageBuilder.ApplicationAdd(model, recipient.Culture);
-				_mailSender.Send(new Message(subject, body, recipient.Email));
-			}
-		}
+            foreach (var recipient in to)
+            {
+                var body = _messageBuilder.ApplicationAdd(model, recipient.Culture);
 
-		private void SendOnSetState(long id)
-		{
-			var model = _applicationPresenter.GetDetails(id);
-			var stateId = model.StateId;
+                _mailSender.Send(new Message(subject, body, recipient.Email));
+            }
+        }
 
-			var subject = string.Format(_messageBuilder.ApplicationSubject,
-										ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
+        private void SendOnSetState(long appId)
+        {
+            var details = _applicationPresenter.GetDetails(appId);
+            var stateId = details.StateId;
 
-			if (stateId == _stateConfig.CargoReceivedStateId)
-			{
-				var to = _messageBuilder.GetAdminEmails().Concat(_messageBuilder.GetForwarderEmails()).ToArray();
-				foreach (var recipient in to)
-				{
-					var body = _messageBuilder.ApplicationSetState(model, recipient.Culture);
-					_mailSender.Send(new Message(subject, body, recipient.Email));
-				}
-			}
-			else
-			{
-				var files = GeAllFiles(model.AirWaybillId, model.Id);
-				var clientData = _authenticationRepository.GetById(model.ClientUserId);
-				var body = _messageBuilder.ApplicationSetState(model, clientData.TwoLetterISOLanguageName);
-				_mailSender.Send(new Message(subject, body, model.ClientEmail) {Files = files});
+            var subject = _messageBuilder.GetApplicationSubject(ApplicationModelHelper.GetDisplayNumber(details.Id, details.Count));
 
-				if (stateId == _stateConfig.CargoAtCustomsStateId || stateId == _stateConfig.CargoIsCustomsClearedStateId)
-				{
-					var to = _messageBuilder.GetAdminEmails().Concat(_messageBuilder.GetForwarderEmails()).ToArray();
-					foreach (var recipient in to)
-					{
-						body = _messageBuilder.ApplicationSetState(model, recipient.Culture);
-						_mailSender.Send(new Message(subject, body, recipient.Email));
-					}
-				}
-			}
-		}
+            if (stateId == _stateConfig.CargoReceivedStateId)
+            {
+                var to = _messageBuilder.GetAdminEmails().Concat(_messageBuilder.GetForwarderEmails()).ToArray();
+                foreach (var recipient in to)
+                {
+                    var body = _messageBuilder.ApplicationSetState(details, recipient.Culture);
+                    _mailSender.Send(new Message(subject, body, recipient.Email));
+                }
+            }
+            else
+            {
+                var files = GeAllFiles(details.AirWaybillId, details.Id);
+                var clientData = _authenticationRepository.GetById(details.ClientUserId);
+                var body = _messageBuilder.ApplicationSetState(details, clientData.TwoLetterISOLanguageName);
+                _mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = files });
 
-		private FileHolder[] GeAllFiles(long? airWaybillId, long id)
-		{
-			var files = new List<FileHolder>(6);
+                if (stateId == _stateConfig.CargoAtCustomsStateId || stateId == _stateConfig.CargoIsCustomsClearedStateId)
+                {
+                    var to = _messageBuilder.GetAdminEmails().Concat(_messageBuilder.GetForwarderEmails()).ToArray();
+                    foreach (var recipient in to)
+                    {
+                        body = _messageBuilder.ApplicationSetState(details, recipient.Culture);
+                        _mailSender.Send(new Message(subject, body, recipient.Email));
+                    }
+                }
+            }
+        }
 
-			var invoiceFile = _applicationRepository.GetInvoiceFile(id);
-			var deliveryBillFile = _applicationRepository.GetDeliveryBillFile(id);
-			var cpFile = _applicationRepository.GetCPFile(id);
-			var packingFile = _applicationRepository.GetPackingFile(id);
-			var swiftFile = _applicationRepository.GetSwiftFile(id);
-			var torg12File = _applicationRepository.GetTorg12File(id);
+        private FileHolder[] GeAllFiles(long? airWaybillId, long id)
+        {
+            var files = new List<FileHolder>(6);
 
-			if (airWaybillId.HasValue)
-			{
-				var gtdFile = _awbRepository.GetGTDFile(airWaybillId.Value);
-				var gtdAdditionalFile = _awbRepository.GTDAdditionalFile(airWaybillId.Value);
+            var invoiceFile = _applicationRepository.GetInvoiceFile(id);
+            var deliveryBillFile = _applicationRepository.GetDeliveryBillFile(id);
+            var cpFile = _applicationRepository.GetCPFile(id);
+            var packingFile = _applicationRepository.GetPackingFile(id);
+            var swiftFile = _applicationRepository.GetSwiftFile(id);
+            var torg12File = _applicationRepository.GetTorg12File(id);
 
-				if (gtdFile != null) files.Add(gtdFile);
-				if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);
-			}
+            if (airWaybillId.HasValue)
+            {
+                var gtdFile = _awbRepository.GetGTDFile(airWaybillId.Value);
+                var gtdAdditionalFile = _awbRepository.GTDAdditionalFile(airWaybillId.Value);
 
-			if (invoiceFile != null) files.Add(invoiceFile);
-			if (deliveryBillFile != null) files.Add(deliveryBillFile);
-			if (cpFile != null) files.Add(cpFile);
-			if (packingFile != null) files.Add(packingFile);
-			if (swiftFile != null) files.Add(swiftFile);
-			if (torg12File != null) files.Add(torg12File);
+                if (gtdFile != null) files.Add(gtdFile);
+                if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);
+            }
 
-			return files.ToArray();
-		}
+            if (invoiceFile != null) files.Add(invoiceFile);
+            if (deliveryBillFile != null) files.Add(deliveryBillFile);
+            if (cpFile != null) files.Add(cpFile);
+            if (packingFile != null) files.Add(packingFile);
+            if (swiftFile != null) files.Add(swiftFile);
+            if (torg12File != null) files.Add(torg12File);
 
-		private void SendOnSetDateOfCargoReceipt(long id)
-		{
-			var model = _applicationPresenter.GetDetails(id);
-			var subject = string.Format(_messageBuilder.ApplicationSubject,
-										ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
-			var clientData = _authenticationRepository.GetById(model.ClientUserId);
-			var body = _messageBuilder.ApplicationSetDateOfCargoReceipt(model, clientData.TwoLetterISOLanguageName);
-			var message = new Message(subject, body, model.ClientEmail);
+            return files.ToArray();
+        }
 
-			_mailSender.Send(message);
-		}
-	}
+        private void SendOnSetDateOfCargoReceipt(long id)
+        {
+            var model = _applicationPresenter.GetDetails(id);
+            var subject = _messageBuilder.GetApplicationSubject(ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
+            var clientData = _authenticationRepository.GetById(model.ClientUserId);
+            var body = _messageBuilder.ApplicationSetDateOfCargoReceipt(model, clientData.TwoLetterISOLanguageName);
+            var message = new Message(subject, body, model.ClientEmail);
+
+            _mailSender.Send(message);
+        }
+    }
 }

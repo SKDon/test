@@ -5,8 +5,7 @@ using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Email
 {
-	// todo: test
-	public sealed class ClientManagerWithMailing : IClientManager
+    internal sealed class ClientManagerWithMailing : IClientManager
 	{
 		private readonly IMailSender _mailSender;
 		private readonly IClientManager _manager;
@@ -33,11 +32,6 @@ namespace Alicargo.Services.Email
 			EmailOnAdd(model, authenticationModel);
 
 			return id;
-		}
-
-		public bool HaveAccessToClient(long clientUserId)
-		{
-			return _manager.HaveAccessToClient(clientUserId);
 		}
 
 		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)

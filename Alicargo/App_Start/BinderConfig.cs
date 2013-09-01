@@ -6,7 +6,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.App_Start
 {
-	public static class BinderConfig
+    internal static class BinderConfig
 	{
 		public static void RegisterBinders(ModelBinderDictionary binders)
 		{

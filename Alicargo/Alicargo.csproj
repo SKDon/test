@@ -60,7 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject.Extensions.Conventions">
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.Extensions.Conventions.3.0.0.11\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Common, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -175,6 +176,7 @@
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrockerController.cs" />
+    <Compile Include="Helpers\PathConstants.cs" />
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -184,6 +186,7 @@
     <Compile Include="SenderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\ScriptController.cs" />
     <Compile Include="Controllers\SenderController.cs" />
@@ -248,11 +251,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Validation.it.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Abstract\IApplicationListItemMapper.cs" />
     <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationManager.cs" />
     <Compile Include="Services\Abstract\IApplicationPresenter.cs" />
     <Compile Include="Services\Abstract\IAuthenticationService.cs" />
-    <Compile Include="Services\Abstract\IAwbManager.cs" />
+    <Compile Include="Services\Abstract\IAwbUpdateManager.cs" />
     <Compile Include="Services\Abstract\IAwbPresenter.cs" />
     <Compile Include="Services\Abstract\ICarrierService.cs" />
     <Compile Include="Services\Abstract\IClientManager.cs" />
@@ -264,23 +268,36 @@
     <Compile Include="Services\Abstract\IStateService.cs" />
     <Compile Include="Services\Abstract\ITransitService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
+    <Compile Include="Services\AirWaybill\AwbGtdHelper.cs" />
+    <Compile Include="Services\AirWaybill\AwbManager.cs" />
+    <Compile Include="Services\Abstract\IAwbManager.cs" />
+    <Compile Include="Services\AirWaybill\AwbUpdateGtdManager.cs" />
+    <Compile Include="Services\AirWaybill\AwbStateManager.cs" />
+    <Compile Include="Services\Abstract\IAwbGtdHelper.cs" />
+    <Compile Include="Services\Application\ApplicationAwbManager.cs" />
+    <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
-    <Compile Include="Services\ClientPresenter.cs" />
+    <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
+    <Compile Include="Services\Client\ClientPermissions.cs" />
+    <Compile Include="Services\Client\ClientPresenter.cs" />
+    <Compile Include="Services\Abstract\IClientPermissions.cs" />
     <Compile Include="Services\Contract\Recipient.cs" />
+    <Compile Include="Services\Email\ApplicationAwbManagerWithMailing.cs" />
     <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
+    <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
     <Compile Include="Services\LocalizationService.cs" />
-    <Compile Include="Services\AirWaybill\AwbManager.cs" />
+    <Compile Include="Services\AirWaybill\AwbUpdateManager.cs" />
     <Compile Include="Services\Contract\Message.cs" />
     <Compile Include="Services\Email\ApplicationManagerWithMailing.cs" />
-    <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
+    <Compile Include="Services\Email\AwbUpdateManagerWithMailing.cs" />
     <Compile Include="Services\Email\MailSender.cs" />
     <Compile Include="Services\Application\ApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationPresenter.cs" />
     <Compile Include="Services\Application\ApplicationGrouper.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CarrierService.cs" />
-    <Compile Include="Services\ClientManager.cs" />
+    <Compile Include="Services\Client\ClientManager.cs" />
     <Compile Include="Services\Email\MessageBuilder.cs" />
     <Compile Include="Services\Email\SilentMailSender.cs" />
     <Compile Include="Services\IdentityService.cs" />
@@ -306,7 +323,7 @@
     <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
-    <Compile Include="ViewModels\Application\ApplicationModelHelper.cs" />
+    <Compile Include="Helpers\ApplicationModelHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />

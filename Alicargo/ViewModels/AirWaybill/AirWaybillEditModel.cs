@@ -5,7 +5,7 @@ using Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
 {
-	public sealed class AirWaybillEditModel
+    public sealed class AirWaybillEditModel
 	{
 		#region Data
 

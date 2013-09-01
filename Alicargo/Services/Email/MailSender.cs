@@ -6,7 +6,7 @@ using Alicargo.Services.Contract;
 
 namespace Alicargo.Services.Email
 {
-	public sealed class MailSender : IMailSender
+    internal sealed class MailSender : IMailSender
 	{
 		public void Send(params Message[] messages)
 		{
@@ -49,7 +49,7 @@ namespace Alicargo.Services.Email
 			}
 		}
 
-		// todo: don't like that the property is defined by an app setting
+		// todo: 3. don't like that the property is defined by an app setting
 		public string DefaultFrom
 		{
 			get

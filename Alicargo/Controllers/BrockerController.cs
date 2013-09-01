@@ -4,7 +4,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -15,7 +14,7 @@ namespace Alicargo.Controllers
 	public partial class BrockerController : Controller
 	{
 		private readonly IAwbRepository _awbRepository;
-		private readonly IAwbManager _awbManager;
+		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrockerRepository _brockerRepository;
 		private readonly IStateConfig _stateConfig;
 
@@ -23,12 +22,12 @@ namespace Alicargo.Controllers
 			IBrockerRepository brockerRepository,
 			IStateConfig stateConfig,
 			IAwbRepository awbRepository,
-			IAwbManager awbManager)
+			IAwbUpdateManager awbUpdateManager)
 		{
 			_brockerRepository = brockerRepository;
 			_stateConfig = stateConfig;
 			_awbRepository = awbRepository;
-			_awbManager = awbManager;
+			_awbUpdateManager = awbUpdateManager;
 		}
 
 		[ChildActionOnly]
@@ -40,7 +39,7 @@ namespace Alicargo.Controllers
 			{
 				Id = selectedId.HasValue
 					? selectedId.Value
-					: all.First().Id, // todo: test
+					: all.First().Id, // todo: 3. test
 				List = all.ToDictionary(x => x.Id, x => x.Name),
 				Name = name
 			};
@@ -58,6 +57,7 @@ namespace Alicargo.Controllers
 				return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
+            
 			var model = new BrockerAWBModel
 			{
 				GTD = data.GTD,
@@ -82,7 +82,7 @@ namespace Alicargo.Controllers
 			ViewBag.AwbId = data.Id;
 		}
 
-		// todo: test
+		// todo: 1.5. bb test
 		[Access(RoleType.Brocker), HttpPost]
 		public virtual ActionResult AWB(long id, BrockerAWBModel model)
 		{
@@ -96,7 +96,7 @@ namespace Alicargo.Controllers
 
 			try
 			{
-				_awbManager.Update(id, model);
+				_awbUpdateManager.Update(id, model);
 			}
 			catch (UnexpectedStateException ex)
 			{

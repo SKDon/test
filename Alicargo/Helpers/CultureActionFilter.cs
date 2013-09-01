@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Alicargo.Helpers
 {
-	public sealed class CultureActionFilter : ActionFilterAttribute
+    internal sealed class CultureActionFilter : ActionFilterAttribute
 	{
 		private readonly Func<string> _getTwoLetterISOLanguageName;
 
@@ -23,7 +23,7 @@ namespace Alicargo.Helpers
 				x.TwoLetterISOLanguageName.Equals(languageName,
 					StringComparison.InvariantCultureIgnoreCase));
 
-			// todo: create ambient context
+			// todo: 3.5 create ambient context
 			Thread.CurrentThread.CurrentCulture = culture;
 			Thread.CurrentThread.CurrentUICulture = culture;
 		}

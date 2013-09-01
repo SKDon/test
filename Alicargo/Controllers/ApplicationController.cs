@@ -2,7 +2,6 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -86,7 +85,7 @@ namespace Alicargo.Controllers
 
 		private void BindBag(long? clientId, long? applicationId)
 		{
-			var client = _clientPresenter.GetClientData(clientId);
+			var client = _clientPresenter.GetCurrentClientData(clientId);
 
 			ViewBag.ClientNic = client.Nic;
 
@@ -119,7 +118,6 @@ namespace Alicargo.Controllers
 			return View(application);
 		}
 
-		// todo: test
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
@@ -150,14 +148,13 @@ namespace Alicargo.Controllers
 			return View(new ApplicationEditModel());
 		}
 
-		// todo: test
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			var client = _clientPresenter.GetClientData(clientId);
+			var client = _clientPresenter.GetCurrentClientData(clientId);
 
 			if (!ModelState.IsValid)
 			{

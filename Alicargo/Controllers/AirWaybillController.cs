@@ -13,192 +13,216 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
-	public partial class AirWaybillController : Controller
-	{
-		private readonly IAwbManager _awbManager;
-		private readonly IAwbPresenter _awbPresenter;
-		private readonly IAwbRepository _awbRepository;
-		private readonly IStateConfig _stateConfig;
+    public partial class AirWaybillController : Controller
+    {
+        private readonly IApplicationAwbManager _applicationAwbManager;
+        private readonly IAwbManager _awbManager;
+        private readonly IAwbPresenter _awbPresenter;
+        private readonly IAwbRepository _awbRepository;
+        private readonly IAwbStateManager _awbStateManager;
+        private readonly IAwbUpdateManager _awbUpdateManager;
+        private readonly IBrockerRepository _brockerRepository;
+        private readonly IIdentityService _identityService;
+        private readonly IStateConfig _stateConfig;
 
-		public AirWaybillController(
-			IAwbPresenter awbPresenter,
-			IAwbManager awbManager,
-			IStateConfig stateConfig,
-			IAwbRepository awbRepository)
-		{
-			_awbPresenter = awbPresenter;
-			_awbManager = awbManager;
-			_stateConfig = stateConfig;
-			_awbRepository = awbRepository;
-		}
+        public AirWaybillController(
+            IAwbPresenter awbPresenter,
+            IApplicationAwbManager applicationAwbManager,
+            IAwbUpdateManager awbUpdateManager,
+            IAwbManager awbManager,
+            IStateConfig stateConfig,
+            IAwbRepository awbRepository,
+            IAwbStateManager awbStateManager,
+            IBrockerRepository brockerRepository,
+            IIdentityService identityService)
+        {
+            _awbPresenter = awbPresenter;
+            _applicationAwbManager = applicationAwbManager;
+            _awbUpdateManager = awbUpdateManager;
+            _awbManager = awbManager;
+            _stateConfig = stateConfig;
+            _awbRepository = awbRepository;
+            _awbStateManager = awbStateManager;
+            _brockerRepository = brockerRepository;
+            _identityService = identityService;
+        }
 
-		#region Create
+        #region Create
 
-		[Access(RoleType.Admin, RoleType.Sender)]
-		public virtual ActionResult Create(long applicationId)
-		{
-			return View();
-		}
+        [Access(RoleType.Admin, RoleType.Sender)]
+        public virtual ActionResult Create(long applicationId)
+        {
+            return View();
+        }
 
-		[HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Sender)]
-		public virtual ActionResult Create(long applicationId, AirWaybillEditModel model)
-		{
-			if (!ModelState.IsValid) return View(model);
+        [HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Sender)]
+        public virtual ActionResult Create(long applicationId, AirWaybillEditModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
 
-			try
-			{
-				_awbManager.Create(applicationId, model);
-			}
-			catch (DublicateException)
-			{
-				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
-				return View(model);
-			}
+            try
+            {
+                _awbManager.Create(applicationId, model);
+            }
+            catch (DublicateException)
+            {
+                ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
+                return View(model);
+            }
 
-			return RedirectToAction(MVC.ApplicationList.Index());
-		}
+            return RedirectToAction(MVC.ApplicationList.Index());
+        }
 
-		#endregion
+        #endregion
 
-		#region List
+        #region List
 
-		[Access(RoleType.Admin, RoleType.Brocker, RoleType.Sender), HttpGet]
-		public virtual ViewResult Index()
-		{
-			return View();
-		}
+        [Access(RoleType.Admin, RoleType.Brocker, RoleType.Sender), HttpGet]
+        public virtual ViewResult Index()
+        {
+            return View();
+        }
 
-		[Access(RoleType.Admin, RoleType.Brocker, RoleType.Sender), HttpPost]
-		public virtual JsonResult List(int take, int skip, int page, int pageSize)
-		{
-			var list = _awbPresenter.List(take, skip);
+        [Access(RoleType.Admin, RoleType.Brocker, RoleType.Sender), HttpPost]
+        public virtual JsonResult List(int take, int skip, int page, int pageSize)
+        {
+            // todo: 3. utility to get current broker
+            long? brockerId = null;
+            if (_identityService.IsInRole(RoleType.Brocker) && _identityService.Id.HasValue)
+            {
+                var brocker = _brockerRepository.GetByUserId(_identityService.Id.Value);
+                brockerId = brocker.Id;
+            }
 
-			return Json(list);
-		}
+            var list = _awbPresenter.List(take, skip, brockerId);
 
-		#endregion
+            return Json(list);
+        }
 
-		#region Edit
+        #endregion
 
-		[HttpPost, Access(RoleType.Admin, RoleType.Sender)]
-		public virtual HttpStatusCodeResult Delete(long id)
-		{
-			_awbManager.Delete(id);
+        #region Edit
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
+        [HttpPost, Access(RoleType.Admin, RoleType.Sender)]
+        public virtual HttpStatusCodeResult Delete(long id)
+        {
+            _awbManager.Delete(id);
 
-		[Access(RoleType.Admin, RoleType.Brocker), HttpPost]
-		public virtual ActionResult SetState(long id, long stateId)
-		{
-			_awbManager.SetState(id, stateId);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
+        [Access(RoleType.Admin, RoleType.Brocker), HttpPost]
+        public virtual ActionResult SetState(long id, long stateId)
+        {
+            _awbStateManager.SetState(id, stateId);
 
-		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
-		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
-		{
-			_awbManager.SetAwb(applicationId, airWaybillId);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
+        [Access(RoleType.Admin, RoleType.Sender), HttpPost]
+        public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
+        {
+            _applicationAwbManager.SetAwb(applicationId, airWaybillId);
 
-		[Access(RoleType.Admin, RoleType.Brocker), HttpPost]
-		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
-		{
-			var data = _awbRepository.Get(id).First();
-			if (data.GTD.IsNullOrWhiteSpace())
-			{
-				throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
-			}
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
 
-			_awbManager.SetState(id, _stateConfig.CargoIsCustomsClearedStateId);
+        [Access(RoleType.Admin, RoleType.Brocker), HttpPost]
+        public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
+        {
+            var data = _awbRepository.Get(id).First();
+            if (data.GTD.IsNullOrWhiteSpace())
+            {
+                throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
+            }
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
+            _awbStateManager.SetState(id, _stateConfig.CargoIsCustomsClearedStateId);
 
-		[ChildActionOnly]
-		public virtual PartialViewResult CargoIsCustomsClearedButton(long id)
-		{
-			var data = _awbRepository.Get(id).First();
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
 
-			var model = new CargoIsCustomsClearedButtonModel
-			{
-				Id = id,
-				CanSetCargoIsCustomsCleared = data.StateId == _stateConfig.CargoAtCustomsStateId && !data.GTD.IsNullOrWhiteSpace()
-			};
+        [ChildActionOnly]
+        public virtual PartialViewResult CargoIsCustomsClearedButton(long id)
+        {
+            var data = _awbRepository.Get(id).First();
 
-			return PartialView("CargoIsCustomsClearedButton", model);
-		}
+            var model = new CargoIsCustomsClearedButtonModel
+                {
+                    Id = id,
+                    CanSetCargoIsCustomsCleared =
+                        data.StateId == _stateConfig.CargoAtCustomsStateId && !data.GTD.IsNullOrWhiteSpace()
+                };
 
-		[Access(RoleType.Admin, RoleType.Sender), HttpGet]
-		public virtual ViewResult Edit(long id)
-		{
-			var model = _awbPresenter.Get(id);
+            return PartialView("CargoIsCustomsClearedButton", model);
+        }
 
-			ViewBag.AwbId = id;
+        [Access(RoleType.Admin, RoleType.Sender), HttpGet]
+        public virtual ViewResult Edit(long id)
+        {
+            var model = _awbPresenter.Get(id);
 
-			return View(model);
-		}
+            ViewBag.AwbId = id;
 
-		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
-		public virtual ActionResult Edit(long id, AirWaybillEditModel model)
-		{
-			if (!ModelState.IsValid) return View(model);
+            return View(model);
+        }
 
-			try
-			{
-				_awbManager.Update(id, model);
-			}
-			catch (DublicateException)
-			{
-				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
-				return View(model);
-			}
+        [Access(RoleType.Admin, RoleType.Sender), HttpPost]
+        public virtual ActionResult Edit(long id, AirWaybillEditModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
 
-			return RedirectToAction(MVC.AirWaybill.Edit(id));
-		}
+            try
+            {
+                _awbUpdateManager.Update(id, model);
+            }
+            catch (DublicateException)
+            {
+                ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
+                return View(model);
+            }
 
-		#endregion
+            return RedirectToAction(MVC.AirWaybill.Edit(id));
+        }
 
-		#region Files
+        #endregion
 
-		public virtual FileResult InvoiceFile(long id)
-		{
-			var file = _awbRepository.GetInvoiceFile(id);
+        #region Files
 
-			return file.FileData.GetFileResult(file.FileName);
-		}
+        public virtual FileResult InvoiceFile(long id)
+        {
+            var file = _awbRepository.GetInvoiceFile(id);
 
-		public virtual FileResult GTDFile(long id)
-		{
-			var file = _awbRepository.GetGTDFile(id);
+            return file.FileData.GetFileResult(file.FileName);
+        }
 
-			return file.FileData.GetFileResult(file.FileName);
-		}
+        public virtual FileResult GTDFile(long id)
+        {
+            var file = _awbRepository.GetGTDFile(id);
 
-		public virtual FileResult GTDAdditionalFile(long id)
-		{
-			var file = _awbRepository.GTDAdditionalFile(id);
+            return file.FileData.GetFileResult(file.FileName);
+        }
 
-			return file.FileData.GetFileResult(file.FileName);
-		}
+        public virtual FileResult GTDAdditionalFile(long id)
+        {
+            var file = _awbRepository.GTDAdditionalFile(id);
 
-		public virtual FileResult PackingFile(long id)
-		{
-			var file = _awbRepository.GetPackingFile(id);
+            return file.FileData.GetFileResult(file.FileName);
+        }
 
-			return file.FileData.GetFileResult(file.FileName);
-		}
+        public virtual FileResult PackingFile(long id)
+        {
+            var file = _awbRepository.GetPackingFile(id);
 
-		public virtual FileResult AWBFile(long id)
-		{
-			var file = _awbRepository.GetAWBFile(id);
+            return file.FileData.GetFileResult(file.FileName);
+        }
 
-			return file.FileData.GetFileResult(file.FileName);
-		}
+        public virtual FileResult AWBFile(long id)
+        {
+            var file = _awbRepository.GetAWBFile(id);
 
-		#endregion
-	}
+            return file.FileData.GetFileResult(file.FileName);
+        }
+
+        #endregion
+    }
 }

@@ -2,13 +2,12 @@
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Ninject;
 
 namespace Alicargo.Helpers
 {
-	public sealed class AccessAttribute : FilterAttribute, IAuthorizationFilter
+    internal sealed class AccessAttribute : FilterAttribute, IAuthorizationFilter
 	{
 		private readonly RoleType[] _roles;
 

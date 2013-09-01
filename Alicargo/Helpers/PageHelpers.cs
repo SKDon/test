@@ -8,7 +8,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace Alicargo.Helpers
 {
-	public static class PageHelpers
+    public static class PageHelpers
 	{
 		public static string JavaScriptStringEncode(this string html)
 		{

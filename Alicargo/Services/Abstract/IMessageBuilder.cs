@@ -25,8 +25,8 @@ namespace Alicargo.Services.Abstract
 		string ApplicationUpdate { get; }
 		string ApplicationAdd(ApplicationDetailsModel modell, string culture);
 		string ApplicationDelete { get; }
-		string ApplicationSubject { get; }
-		string ApplicationSetState(ApplicationDetailsModel modell, string culture);
+        string GetApplicationSubject(string displayNumber);
+	    string ApplicationSetState(ApplicationDetailsModel modell, string culture);
 		string ApplicationSetDateOfCargoReceipt(ApplicationDetailsModel model, string culture);
 
 		string ApplicationInvoiceFileAdded(ApplicationDetailsModel model);

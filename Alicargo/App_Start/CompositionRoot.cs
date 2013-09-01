@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Services;
-using Alicargo.Services;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.AirWaybill;
-using Alicargo.Services.Application;
 using Alicargo.Services.Email;
 using Ninject;
 using Ninject.Extensions.Conventions;
@@ -18,67 +17,87 @@ using log4net;
 
 namespace Alicargo.App_Start
 {
-	internal static class CompositionRoot
-	{
-		public static void BindServices(IKernel kernel)
-		{
-			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger(string.Empty)).InSingletonScope();
+    internal static class CompositionRoot
+    {
+        private const string WithMailingSufix = "WithMailing";
+        private const string AlicargoDataAccessDll = "Alicargo.DataAccess.dll";
 
-			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
+        public static void BindServices(IKernel kernel)
+        {
+            kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger(string.Empty)).InSingletonScope();
 
-			// todo: auto binding for intersections
-			kernel.Bind<IMailSender>().To<SilentMailSender>().InRequestScope();
-			kernel.Bind<IMailSender>().To<MailSender>().WhenInjectedInto<SilentMailSender>().InRequestScope();
+            kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
-			kernel.Bind<IApplicationManager>().To<ApplicationManagerWithMailing>().InRequestScope();
-			kernel.Bind<IApplicationManager>().To<ApplicationManager>().WhenInjectedInto<ApplicationManagerWithMailing>().InRequestScope();
+            // todo: 1. auto binding for intersections
+            kernel.Bind<IMailSender>().To<SilentMailSender>().InRequestScope();
+            kernel.Bind<IMailSender>().To<MailSender>().WhenInjectedInto<SilentMailSender>().InRequestScope();
 
-			kernel.Bind<IAwbManager>().To<AwbManagerWithMailing>().InRequestScope();
-			kernel.Bind<IAwbManager>().To<AwbManager>().WhenInjectedInto<AwbManagerWithMailing>().InRequestScope();
+            var binded = BindMailingIntersection(kernel);
 
-			kernel.Bind<IClientManager>().To<ClientManagerWithMailing>().InRequestScope();
-			kernel.Bind<IClientManager>().To<ClientManager>().WhenInjectedInto<ClientManagerWithMailing>().InRequestScope();
+            kernel.Bind(scanner => scanner.FromThisAssembly()
+                                          .IncludingNonePublicTypes()
+                                          .Select(IsServiceType)
+                                          .Excluding<MailSender>()
+                                          .Excluding<SilentMailSender>()
+                                          .Excluding(binded)
+                                          .BindDefaultInterface()
+                                          .Configure(binding => binding.InRequestScope()));
+        }
 
-			kernel.Bind(scanner => scanner.FromThisAssembly()
-										  .Select(IsServiceType)
-										  .Excluding<MailSender>()
-										  .Excluding<ClientManager>()
-										  .Excluding<ApplicationManager>()
-										  .Excluding<AwbManager>()
-										  .BindDefaultInterface()
-										  .Configure(binding => binding.InRequestScope()));
-		}
+        // todo: 1.5. Test in UI
+        private static IEnumerable<Type> BindMailingIntersection(IKernel kernel)
+        {
+            var assembly = Assembly.GetCallingAssembly();
+            var services = assembly.GetTypes().Where(IsServiceType).ToArray();
+            var mailingTypes = assembly.GetTypes().Where(x => x.Name.EndsWith(WithMailingSufix)).ToArray();
+            var interfaces = assembly.GetTypes().Where(x => x.IsInterface && x.IsPublic).ToArray();
+            var binded = new List<Type>();
+            foreach (var mailingType in mailingTypes)
+            {
+                var name = mailingType.Name.Replace(WithMailingSufix, "");
+                var @interface = interfaces.First(x => x.Name.Equals("I" + name));
+                var service = services.FirstOrDefault(x => x.Name.Equals(name));
+                if (service != null)
+                {
+                    kernel.Bind(@interface).To(mailingType).InRequestScope();
+                    kernel.Bind(@interface).To(service).WhenInjectedInto(mailingType).InRequestScope();
+                    binded.Add(service);
+                    binded.Add(mailingType);
+                }
+            }
+            return binded;
+        }
 
-		private static bool IsServiceType(Type type)
-		{
-			return type.IsClass
-				&& !type.Name.EndsWith("WithMailing")
-				&& type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
-		}
+        private static bool IsServiceType(Type type)
+        {
+            return type.IsClass
+                   && !type.Name.EndsWith(WithMailingSufix)
+                   && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
+        }
 
-		public static void RegisterConfigs(IKernel kernel)
-		{
-			AreaRegistration.RegisterAllAreas();
+        public static void RegisterConfigs(IKernel kernel)
+        {
+            AreaRegistration.RegisterAllAreas();
 
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, kernel);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, kernel);
 
-			RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-			BinderConfig.RegisterBinders(System.Web.Mvc.ModelBinders.Binders);
-		}
+            BinderConfig.RegisterBinders(System.Web.Mvc.ModelBinders.Binders);
+        }
 
-		public static void BindDataAccess(IKernel kernel, string connectionString)
-		{
-			kernel.Bind<IDbConnection>()
-				  .ToMethod(x => new SqlConnection(connectionString))
-				  .InRequestScope()
-				  .OnDeactivation(x => x.Close());
+        public static void BindDataAccess(IKernel kernel, string connectionString)
+        {
+            kernel.Bind<IDbConnection>()
+                  .ToMethod(x => new SqlConnection(connectionString))
+                  .InRequestScope()
+                  .OnDeactivation(x => x.Close());
 
-			kernel.Bind(x => x.FromAssembliesMatching("Alicargo.DataAccess.dll")
-							  .IncludingNonePublicTypes()
-							  .Select(IsServiceType)
-							  .BindDefaultInterface()
-							  .Configure(y => y.InRequestScope()));
-		}
-	}
+            kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
+                              .IncludingNonePublicTypes()
+                              .Select(IsServiceType)
+                              .BindDefaultInterface()
+                              .Configure(y => y.InRequestScope()));
+        }
+    }
 }

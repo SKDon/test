@@ -8,6 +8,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers
 {
+    // todo: 2. bb tests
 	public partial class ApplicationUpdateController : Controller
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
@@ -24,7 +25,6 @@ namespace Alicargo.Controllers
 
 		#region Set state
 
-		// todo: test
 		[HttpPost]
 		[Access(RoleType.Client, RoleType.Admin)]
 		public virtual HttpStatusCodeResult Close(long id)
@@ -34,7 +34,6 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		// todo: test
 		[HttpPost]
 		[Access(RoleType.Admin, RoleType.Brocker, RoleType.Forwarder, RoleType.Sender)]
 		public virtual HttpStatusCodeResult SetState(long id, long stateId)

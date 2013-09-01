@@ -3,7 +3,7 @@ using System.Web.Routing;
 
 namespace Alicargo.App_Start
 {
-	public class RouteConfig
+    internal sealed class RouteConfig
 	{
 		public static void RegisterRoutes(RouteCollection routes)
 		{

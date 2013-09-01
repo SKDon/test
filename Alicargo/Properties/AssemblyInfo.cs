@@ -36,3 +36,4 @@ using System.Runtime.InteropServices;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 [assembly: InternalsVisibleTo("Alicargo.Tests")]
+[assembly: InternalsVisibleTo("Alicargo.BlackBox.Tests")]
