@@ -55,7 +55,7 @@ namespace Alicargo.Controllers
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken, Access(RoleType.Admin, RoleType.Sender)]
+        [HttpPost, Access(RoleType.Admin, RoleType.Sender)]
         public virtual ActionResult Create(long applicationId, AirWaybillEditModel model)
         {
             if (!ModelState.IsValid) return View(model);

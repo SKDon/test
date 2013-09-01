@@ -14,7 +14,10 @@ namespace Alicargo.Services
 		private readonly IPasswordConverter _passwordConverter;
 		private readonly IIdentityService _identity;
 
-		public AuthenticationService(IAuthenticationRepository authentications, IPasswordConverter passwordConverter, IIdentityService identity)
+		public AuthenticationService(
+			IAuthenticationRepository authentications, 
+			IPasswordConverter passwordConverter, 
+			IIdentityService identity)
 		{
 			_authentications = authentications;
 			_passwordConverter = passwordConverter;

@@ -86,6 +86,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			var model = _context
 				.Build<AirWaybillEditModel>()
+				.Without(x => x.GTD)
 				.With(x => x.BrockerId, brocker.Id)
 				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
@@ -94,6 +95,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			_client.PostAsJsonAsync("AirWaybill/Create/" + applicationData.Id, model)
 				.ContinueWith(task =>
 				{
+					if (task.Result.StatusCode != HttpStatusCode.OK) { Console.WriteLine(task.Result.Content.ReadAsStringAsync().Result); }
 					Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
 
 					var entity = _db.AirWaybills.Skip(count).Take(1).First();

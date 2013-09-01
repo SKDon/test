@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
+using System.Web.Security;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
@@ -15,7 +17,9 @@ namespace Alicargo.Services
 		private readonly IAuthenticationRepository _authentications;
 		private readonly IUnitOfWork _unitOfWork;
 
-		public IdentityService(IAuthenticationRepository authentications, IUnitOfWork unitOfWork)
+		public IdentityService(
+			IAuthenticationRepository authentications, 
+			IUnitOfWork unitOfWork)
 		{
 			if (HttpContext.Current == null)
 				throw new NotSupportedException("UserHolder works only when the HttpContext.Current is presented");
@@ -48,7 +52,13 @@ namespace Alicargo.Services
 
 				if (Id.HasValue)
 				{
-					var user = _authentications.GetById(Id.Value);
+					var userId = Id.Value;
+					var user = _authentications.GetById(userId);
+					if (user == null)
+					{
+						FormsAuthentication.SignOut();
+						throw new EntityNotFoundException("User " + userId + " not found");
+					}
 					_twoLetterISOLanguageName = user.TwoLetterISOLanguageName;
 				}
 				else
