@@ -45,9 +45,9 @@ namespace Alicargo.App_Start
 			BundleTable.Bundles.Add(new StyleRelativePathTransformBundle(PathConstants.StylesPath)
 				.Include(
 					"~/Content/themes/jMetro/jquery-ui.css",
-					"~/Content/bootstrap.css",
-					"~/Content/bootstrap-responsive.css",
-					"~/Content/bootstrap-fileupload.css",
+					"~/Content/bootstrap/bootstrap.css",
+					"~/Content/bootstrap/bootstrap-responsive.css",
+					"~/Content/bootstrap/bootstrap-fileupload.css",
 					"~/Content/kendo/2013.2.716/kendo.common.min.css",
 					"~/Content/kendo/2013.2.716/kendo.default.min.css",
 					"~/Content/app/kendo.css",
