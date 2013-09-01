@@ -70,8 +70,20 @@ namespace Alicargo.Helpers
 			Debug.Assert(cssFileInfo.VirtualFile.Name != null);
 			var cssFileDirectory = cssFilePath.Substring(0, cssFilePath.Length - cssFileInfo.VirtualFile.Name.Length);
 
-			var path = Path.GetFullPath(Path.Combine(cssFileDirectory, cssRelativeUrl));
+			var path = GetPathWithIllegalCharacters(cssFileDirectory, cssRelativeUrl);
+
 			return RelativeFromAbsolutePath(context.HttpContext, path);
+		}
+
+		private static string GetPathWithIllegalCharacters(string cssFileDirectory, string cssRelativeUrl)
+		{
+			var strings = cssRelativeUrl.Split('/');
+			var path = Path.GetFullPath(Path.Combine(cssFileDirectory, strings[0]));
+			for (var i = 1; i < strings.Length; i++)
+			{
+				path += "\\" + strings[i];
+			}
+			return path;
 		}
 
 		private static string RelativeFromAbsolutePath(HttpContextBase context, string path)
