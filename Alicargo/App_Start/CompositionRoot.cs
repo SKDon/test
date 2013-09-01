@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Services;
-using Alicargo.Services.Email;
 using log4net;
 using Ninject;
 using Ninject.Extensions.Conventions;
@@ -16,12 +15,11 @@ namespace Alicargo.App_Start
 {
 	internal static class CompositionRoot
 	{
-		private const string WithMailingSufix = "WithMailing";
 		private const string AlicargoDataAccessDll = "Alicargo.DataAccess.dll";
 
 		public static void BindServices(IKernel kernel)
 		{
-			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger(string.Empty)).InSingletonScope();
+			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger("")).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
@@ -30,8 +28,6 @@ namespace Alicargo.App_Start
 			kernel.Bind(scanner => scanner.FromThisAssembly()
 										  .IncludingNonePublicTypes()
 										  .Select(IsServiceType)
-										  .Excluding<MailSender>()
-										  .Excluding<SilentMailSender>()
 										  .Excluding(binded)
 										  .BindDefaultInterface()
 										  .Configure(binding => binding.InRequestScope()));
@@ -39,9 +35,7 @@ namespace Alicargo.App_Start
 
 		private static bool IsServiceType(Type type)
 		{
-			return type.IsClass
-				   && !type.Name.EndsWith(WithMailingSufix)
-				   && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
+			return type.IsClass && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
 		}
 
 		public static void RegisterConfigs(IKernel kernel)
