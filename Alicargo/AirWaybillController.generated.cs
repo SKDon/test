@@ -308,7 +308,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string AirWaybillModel = "AirWaybillModel";
+                public readonly string AirWaybillEditModel = "AirWaybillEditModel";
             }
         }
     }

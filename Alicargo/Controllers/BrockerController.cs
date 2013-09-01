@@ -7,6 +7,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.AirWaybill;
 using Resources;
 
 namespace Alicargo.Controllers
@@ -58,7 +59,7 @@ namespace Alicargo.Controllers
 			}
 
             
-			var model = new BrockerAWBModel
+			var model = new BrockerAwbModel
 			{
 				GTD = data.GTD,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
@@ -84,7 +85,7 @@ namespace Alicargo.Controllers
 
 		// todo: 1.5. bb test
 		[Access(RoleType.Brocker), HttpPost]
-		public virtual ActionResult AWB(long id, BrockerAWBModel model)
+		public virtual ActionResult AWB(long id, BrockerAwbModel model)
 		{
 			if (!ModelState.IsValid)
 			{

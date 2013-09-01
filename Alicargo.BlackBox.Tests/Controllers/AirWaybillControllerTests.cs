@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using Alicargo.BlackBox.Tests.Properties;
+using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;
@@ -42,8 +43,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _context
 				.Build<AirWaybillEditModel>()
 				.With(x => x.BrockerId, entity.BrockerId)
-				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.LocalDateTime.ToShortDateString())
-				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.LocalDateTime.ToShortDateString())
+				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
+				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.Create();
 
 			_client.PostAsJsonAsync("AirWaybill/Edit/", new { entity.Id, model })
@@ -64,8 +65,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		{
 			var actual = ObjectMapperManager.DefaultInstance.GetMapper<AirWaybill, AirWaybillEditModel>().Map(entity);
 
-			actual.DateOfDepartureLocalString = entity.DateOfDeparture.LocalDateTime.ToShortDateString();
-			actual.DateOfArrivalLocalString = entity.DateOfArrival.LocalDateTime.ToShortDateString();
+			actual.DateOfDepartureLocalString = entity.DateOfDeparture.ToLocalShortDateString();
+			actual.DateOfArrivalLocalString = entity.DateOfArrival.ToLocalShortDateString();
 			actual.GTDFile = entity.GTDFileData.ToArray();
 			actual.GTDAdditionalFile = entity.GTDAdditionalFileData.ToArray();
 			actual.PackingFile = entity.PackingFileData.ToArray();
@@ -86,8 +87,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _context
 				.Build<AirWaybillEditModel>()
 				.With(x => x.BrockerId, brocker.Id)
-				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.LocalDateTime.ToShortDateString())
-				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.LocalDateTime.ToShortDateString())
+				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
+				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.Create();
 
 			_client.PostAsJsonAsync("AirWaybill/Create/" + applicationData.Id, model)

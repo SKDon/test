@@ -4,8 +4,8 @@
 
 <style>
 	.container {
-		width: auto;
 		padding: 0 20px;
+		width: auto;
 	}
 </style>
 <div id="AirWaybill-grid" class="grid"></div>
@@ -14,7 +14,7 @@
 @section scripts
 {
 	<script>
-		$(function () {
+		$(function() {
 			var schema = {
 				model: {
 					id: "Id"
@@ -23,7 +23,7 @@
 				total: "Total"
 			};
 
-			var error = function () { alert("@Pages.AnError"); };
+			var error = function() { alert("@Pages.AnError"); };
 
 			var dataSource = {
 				transport: {
@@ -39,10 +39,10 @@
 				editable: true,
 				error: error
 			};
-			
-			var getGrid = function () {
+
+			var getGrid = function() {
 				var grid = $("#AirWaybill-grid").data("kendoGrid");
-				getGrid = function () { return grid; };
+				getGrid = function() { return grid; };
 				return getGrid();
 			};
 
@@ -60,21 +60,30 @@
 				{ field: "GTD", title: '@Entities.GTD' }
 			];
 
-			@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
-   {
-				<text>
+			var editUrl = '@(IdentityService.IsInRole(RoleType.Admin)
+				                 ? Url.Action(MVC.AirWaybill.Edit())
+				                 : IdentityService.IsInRole(RoleType.Sender)
+					                 ? Url.Action(MVC.SenderAwb.Edit())
+					                 : Url.Action(MVC.Brocker.AWB()))/';
+
 			columns.push({
 				command: [{
 					name: "custom-edit",
 					text: "",
-					click: function (e) {
+					click: function(e) {
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
-						var url = '@Url.Action(MVC.AirWaybill.Edit())/' + data.Id;
+						var url = editUrl + data.Id;
 						window.location = url;
 					}
-				}], title: "&nbsp;", width: "53px"
+				}],
+				title: "&nbsp;",
+				width: "53px"
 			});
+
+			@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
+			{
+				<text>
 			columns.push({
 				command: [{
 					name: "custom-delete",
@@ -94,26 +103,8 @@
 					}
 				}], title: "&nbsp;", width: "53px"
 			});
-		</text>
-   }
-   else if (IdentityService.IsInRole(RoleType.Brocker))
-   {
-				<text>
-			columns.push({
-				command: [{
-					name: "custom-edit",
-					text: "",
-					click: function (e) {
-						var tr = $(e.target).closest("tr");
-						var data = this.dataItem(tr);
-						var url = '@Url.Action(MVC.Brocker.AWB())/' + data.Id;
-						window.location = url;
-					}
-				}], title: "&nbsp;", width: "53px"
-			});
-
-		</text>
-   }			
+			</text>
+			}
 
 			$("#AirWaybill-grid").kendoGrid({
 				dataSource: dataSource,

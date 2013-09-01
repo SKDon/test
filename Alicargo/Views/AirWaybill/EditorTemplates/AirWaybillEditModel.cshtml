@@ -1,45 +1,43 @@
-﻿@using Alicargo.Contracts.Enums
-@using Resources
+﻿@using Resources
 @inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AirWaybillEditModel>
 
 @helper SelectBrocker()
 {
 	var name = Html.IdFor(x => x.BrockerId).ToHtmlString();
-	var action = MVC.Brocker.Select(name, Model == null ? (long?)null : Model.BrockerId);
+	var action = MVC.Brocker.Select(name, Model == null
+		? (long?) null
+		: Model.BrockerId);
 	@Html.Action(action)
 }
 
 @helper Files()
 {
+	<hr />
+	<h4>
+		@Pages.Files
+	</h4>
 	<div class="row">
+		<div class="span4">
 
-		@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
-  {
-			<div class="span4">
-
-				@Html.LabelFor(x => x.PackingFile)
-				@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(),
-					Model != null ? Model.PackingFileName : null)
-			</div>
-  }
-
-		@if (IdentityService.IsInRole(RoleType.Admin))
-  {
-			<div class="span4">
-				@Html.LabelFor(x => x.InvoiceFile)
-				@Helpers.FileUploader(@Html.IdFor(x => x.InvoiceFile).ToHtmlString(),
-					Model != null ? Model.InvoiceFileName : null)
-			</div>
-  }
-
-		@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
-  {
-			<div class="span4">
-				@Html.LabelFor(x => x.AWBFile)
-				@Helpers.FileUploader(@Html.IdFor(x => x.AWBFile).ToHtmlString(), Model != null ? Model.AWBFileName : null)
-			</div>
-  }
-
+			@Html.LabelFor(x => x.PackingFile)
+			@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(),
+								  Model != null
+									  ? Model.PackingFileName
+									  : null)
+		</div>
+		<div class="span4">
+			@Html.LabelFor(x => x.InvoiceFile)
+			@Helpers.FileUploader(@Html.IdFor(x => x.InvoiceFile).ToHtmlString(),
+								  Model != null
+									  ? Model.InvoiceFileName
+									  : null)
+		</div>
+		<div class="span4">
+			@Html.LabelFor(x => x.AWBFile)
+			@Helpers.FileUploader(@Html.IdFor(x => x.AWBFile).ToHtmlString(), Model != null
+				? Model.AWBFileName
+				: null)
+		</div>
 	</div>
 }
 
@@ -56,11 +54,15 @@
 		</div>
 		<div class="span4">
 			@Html.LabelFor(model => model.GTDFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.GTDFile).ToHtmlString(), Model != null ? Model.GTDFileName : null)
+			@Helpers.FileUploader(@Html.IdFor(x => x.GTDFile).ToHtmlString(), Model != null
+				? Model.GTDFileName
+				: null)
 		</div>
 		<div class="span4">
 			@Html.LabelFor(model => model.GTDAdditionalFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.GTDAdditionalFile).ToHtmlString(), Model != null ? Model.GTDAdditionalFileName : null)
+			@Helpers.FileUploader(@Html.IdFor(x => x.GTDAdditionalFile).ToHtmlString(), Model != null
+				? Model.GTDAdditionalFileName
+				: null)
 		</div>
 	</div>
 }
@@ -88,7 +90,7 @@
 			</div>
 		</div>
 		<script>
-			$(function () {
+			$(function() {
 				$(".date-holder input").kendoDatePicker();
 			})
 		</script>
@@ -96,20 +98,5 @@
 }
 
 @Parameters()
-@if (Model != null && IdentityService.IsInRole(RoleType.Admin))
-{	
-	@Gtd()
-}
-<hr />
-<h4>
-	@Pages.Files
-</h4>
+@Gtd()
 @Files()
-@if (IdentityService.IsInRole(RoleType.Sender))
-{
-	// todo: 2. separate view for sender
-	@Html.HiddenFor(x => x.InvoiceFileName)
-	@Html.HiddenFor(x => x.GTD)
-	@Html.HiddenFor(x => x.GTDAdditionalFileName)
-	@Html.HiddenFor(x => x.GTDFileName)
-}

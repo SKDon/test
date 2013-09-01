@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.AirWaybill
@@ -32,7 +31,7 @@ namespace Alicargo.Services.AirWaybill
             _manager.Update(id, model);
         }
 
-        public void Update(long id, BrockerAWBModel model)
+        public void Update(long id, BrockerAwbModel model)
         {
             var data = _awbRepository.Get(id).First();
 
@@ -40,5 +39,10 @@ namespace Alicargo.Services.AirWaybill
 
             _manager.Update(id, model);
         }
+
+	    public void Update(long id, SenderAwbModel model)
+	    {
+			_manager.Update(id, model);
+	    }
     }
 }

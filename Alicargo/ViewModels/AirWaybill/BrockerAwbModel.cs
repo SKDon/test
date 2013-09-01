@@ -1,9 +1,9 @@
 ﻿using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.AirWaybill
 {
-	public sealed class BrockerAWBModel
+	public sealed class BrockerAwbModel
 	{
 		[DisplayNameLocalized(typeof(Entities), "GTD")]
 		public string GTD { get; set; }
@@ -35,6 +35,5 @@ namespace Alicargo.ViewModels
 		public byte[] PackingFile { get; set; }
 
 		#endregion
-
 	}
 }

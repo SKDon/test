@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
+using Alicargo.Core.Services;
 using Alicargo.Helpers;
 
 namespace Alicargo.ViewModels.Application
@@ -33,7 +34,7 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
 				// todo: 3. test time zones
-				return CreationTimestamp.LocalDateTime.ToShortDateString();
+				return CreationTimestamp.ToLocalShortDateString();
 			}
 		}
 
@@ -42,7 +43,7 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
 				// todo: 3. test time zones
-				return StateChangeTimestamp.LocalDateTime.ToShortDateString();
+				return StateChangeTimestamp.ToLocalShortDateString();
 			}
 		}
 
@@ -51,7 +52,7 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
                 // todo: 3. test time zones
-				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.LocalDateTime.ToShortDateString() : null;
+				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.ToLocalShortDateString() : null;
 			}
 		}
 
@@ -60,7 +61,7 @@ namespace Alicargo.ViewModels.Application
 			get
 			{
 				// todo: 3. test time zones
-				return DateInStock.HasValue ? DateInStock.Value.LocalDateTime.ToShortDateString() : null;
+				return DateInStock.HasValue ? DateInStock.Value.ToLocalShortDateString() : null;
 			}
 		}
 

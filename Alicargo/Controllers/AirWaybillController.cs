@@ -156,7 +156,7 @@ namespace Alicargo.Controllers
             return PartialView("CargoIsCustomsClearedButton", model);
         }
 
-        [Access(RoleType.Admin, RoleType.Sender), HttpGet]
+        [Access(RoleType.Admin), HttpGet]
         public virtual ViewResult Edit(long id)
         {
             var model = _awbPresenter.Get(id);
@@ -166,7 +166,7 @@ namespace Alicargo.Controllers
             return View(model);
         }
 
-        [Access(RoleType.Admin, RoleType.Sender), HttpPost]
+        [Access(RoleType.Admin), HttpPost]
         public virtual ActionResult Edit(long id, AirWaybillEditModel model)
         {
             if (!ModelState.IsValid) return View(model);

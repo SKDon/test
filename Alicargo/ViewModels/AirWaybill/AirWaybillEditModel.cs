@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Localization;
+using Alicargo.Core.Services;
 using Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
@@ -74,8 +75,8 @@ namespace Alicargo.ViewModels.AirWaybill
 				ArrivalAirport = data.ArrivalAirport,
 				Bill = data.Bill,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				DateOfArrivalLocalString = data.DateOfArrival.LocalDateTime.ToShortDateString(),
-				DateOfDepartureLocalString = data.DateOfDeparture.LocalDateTime.ToShortDateString(),
+				DateOfArrivalLocalString = data.DateOfArrival.ToLocalShortDateString(),
+				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
 				DepartureAirport = data.DepartureAirport,
 				GTD = data.GTD,
 				GTDFileName = data.GTDFileName,

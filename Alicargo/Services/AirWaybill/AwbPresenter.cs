@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
@@ -48,10 +49,10 @@ namespace Alicargo.Services.AirWaybill
                     AWBFileName = x.AWBFileName,
                     ArrivalAirport = x.ArrivalAirport,
                     Bill = x.Bill,
-                    CreationTimestampLocalString = x.CreationTimestamp.LocalDateTime.ToShortDateString(),
-                    DateOfArrivalLocalString = x.DateOfArrival.LocalDateTime.ToShortDateString(),
-                    DateOfDepartureLocalString = x.DateOfDeparture.LocalDateTime.ToShortDateString(),
-                    StateChangeTimestampLocalString = x.StateChangeTimestamp.LocalDateTime.ToShortDateString(),
+                    CreationTimestampLocalString = x.CreationTimestamp.ToLocalShortDateString(),
+                    DateOfArrivalLocalString = x.DateOfArrival.ToLocalShortDateString(),
+                    DateOfDepartureLocalString = x.DateOfDeparture.ToLocalShortDateString(),
+                    StateChangeTimestampLocalString = x.StateChangeTimestamp.ToLocalShortDateString(),
                     DepartureAirport = x.DepartureAirport,
                     GTD = x.GTD,
                     GTDAdditionalFileName = x.GTDAdditionalFileName,

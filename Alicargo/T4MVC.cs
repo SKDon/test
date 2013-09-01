@@ -34,6 +34,7 @@ public static class MVC
     public static Alicargo.Controllers.ClientController Client = new Alicargo.Controllers.T4MVC_ClientController();
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
     public static Alicargo.Controllers.ScriptController Script = new Alicargo.Controllers.T4MVC_ScriptController();
+    public static Alicargo.Controllers.SenderAwbController SenderAwb = new Alicargo.Controllers.T4MVC_SenderAwbController();
     public static Alicargo.Controllers.SenderController Sender = new Alicargo.Controllers.T4MVC_SenderController();
     public static Alicargo.Controllers.TransitController Transit = new Alicargo.Controllers.T4MVC_TransitController();
     public static Alicargo.Controllers.UserController User = new Alicargo.Controllers.T4MVC_UserController();
@@ -157,10 +158,6 @@ namespace Links
             public static readonly string ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ru.min.js") ? Url("ru.min.js") : Url("ru.js");
         }
     
-        public static readonly string bootstrap_fileupload_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-fileupload.min.js") ? Url("bootstrap-fileupload.min.js") : Url("bootstrap-fileupload.js");
-        public static readonly string bootstrap_fileupload_min_js = Url("bootstrap-fileupload.min.js");
-        public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
-        public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
         public static readonly string jquery_2_0_3_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.0.3.intellisense.min.js") ? Url("jquery-2.0.3.intellisense.min.js") : Url("jquery-2.0.3.intellisense.js");
         public static readonly string jquery_2_0_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.0.3.min.js") ? Url("jquery-2.0.3.min.js") : Url("jquery-2.0.3.js");
         public static readonly string jquery_2_0_3_min_js = Url("jquery-2.0.3.min.js");
@@ -994,22 +991,54 @@ namespace Links
                  
         }
     
-        public static readonly string bootstrap_fileupload_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-fileupload.min.css") ? Url("bootstrap-fileupload.min.css") : Url("bootstrap-fileupload.css");
-             
-        public static readonly string bootstrap_fileupload_min_css = Url("bootstrap-fileupload.min.css");
-        public static readonly string bootstrap_responsive_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-responsive.min.css") ? Url("bootstrap-responsive.min.css") : Url("bootstrap-responsive.css");
-             
-        public static readonly string bootstrap_responsive_min_css = Url("bootstrap-responsive.min.css");
-        public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
-             
-        public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class images {
-            private const string URLPATH = "~/Content/images";
+        public static class bootstrap {
+            private const string URLPATH = "~/Content/bootstrap";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string glyphicons_halflings_white_png = Url("glyphicons-halflings-white.png");
-            public static readonly string glyphicons_halflings_png = Url("glyphicons-halflings.png");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class css {
+                private const string URLPATH = "~/Content/bootstrap/css";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string bootstrap_responsive_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-responsive.min.css") ? Url("bootstrap-responsive.min.css") : Url("bootstrap-responsive.css");
+                     
+                public static readonly string bootstrap_responsive_min_css = Url("bootstrap-responsive.min.css");
+                public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
+                     
+                public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class fileupload {
+                private const string URLPATH = "~/Content/bootstrap/fileupload";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string bootstrap_fileupload_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-fileupload.min.css") ? Url("bootstrap-fileupload.min.css") : Url("bootstrap-fileupload.css");
+                     
+                public static readonly string bootstrap_fileupload_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-fileupload.min.js") ? Url("bootstrap-fileupload.min.js") : Url("bootstrap-fileupload.js");
+                public static readonly string bootstrap_fileupload_min_css = Url("bootstrap-fileupload.min.css");
+                public static readonly string bootstrap_fileupload_min_js = Url("bootstrap-fileupload.min.js");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class img {
+                private const string URLPATH = "~/Content/bootstrap/img";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string glyphicons_halflings_white_png = Url("glyphicons-halflings-white.png");
+                public static readonly string glyphicons_halflings_png = Url("glyphicons-halflings.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class js {
+                private const string URLPATH = "~/Content/bootstrap/js";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
+                public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
+            }
+        
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using Alicargo.Helpers;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.ModelBinders
 {
@@ -9,14 +9,14 @@ namespace Alicargo.ModelBinders
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (BrockerAWBModel)base.BindModel(controllerContext, bindingContext);
+			var model = (BrockerAwbModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(controllerContext.HttpContext.Request, model);
 
 			return model;
 		}
 
-		private static void ReadFiles(HttpRequestBase request, BrockerAWBModel model)
+		private static void ReadFiles(HttpRequestBase request, BrockerAwbModel model)
 		{
 			if (model.GTDFile == null && model.GTDFileName == null)
 				request.ReadFile("GTDFile", (name, bytes) =>

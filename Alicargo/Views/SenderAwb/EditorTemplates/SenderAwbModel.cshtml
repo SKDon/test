@@ -1,0 +1,61 @@
+﻿@using Resources
+@inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.SenderAwbModel>
+
+@helper SelectBrocker()
+{
+	var name = Html.IdFor(x => x.BrockerId).ToHtmlString();
+	var action = MVC.Brocker.Select(name, Model == null ? (long?)null : Model.BrockerId);
+	@Html.Action(action)
+}
+
+@helper Files()
+{
+	<div class="row">
+		<div class="span4">
+			@Html.LabelFor(x => x.PackingFile)
+			@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(),
+					Model != null ? Model.PackingFileName : null)
+		</div>
+		<div class="span4">
+			@Html.LabelFor(x => x.AWBFile)
+			@Helpers.FileUploader(@Html.IdFor(x => x.AWBFile).ToHtmlString(), Model != null ? Model.AWBFileName : null)
+		</div>
+	</div>
+}
+
+@helper Parameters()
+{
+	<div class="row">
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.Bill)
+			@Html.LabelFor(x => x.BrockerId)
+			@SelectBrocker()
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.DepartureAirport)
+			@Html.LabelFor(model => model.DateOfDepartureLocalString)
+			<div class="date-holder">
+				@Html.EditorFor(model => model.DateOfDepartureLocalString)
+			</div>
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.ArrivalAirport)
+			@Html.LabelFor(model => model.DateOfArrivalLocalString)
+			<div class="date-holder">
+				@Html.EditorFor(model => model.DateOfArrivalLocalString)
+			</div>
+		</div>
+		<script>
+			$(function () {
+				$(".date-holder input").kendoDatePicker();
+			})
+		</script>
+	</div>
+}
+
+@Parameters()
+<hr />
+<h4>
+	@Pages.Files
+</h4>
+@Files()

@@ -177,11 +177,16 @@
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrockerController.cs" />
+    <Compile Include="Controllers\SenderAwbController.cs" />
     <Compile Include="Helpers\PathConstants.cs" />
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelBinders\SenderAwbModelBinder.cs" />
     <Compile Include="ScriptController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SenderAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="SenderController.generated.cs">
@@ -322,6 +327,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
+    <Compile Include="ViewModels\AirWaybill\SenderAwbModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
     <Compile Include="Helpers\ApplicationModelHelper.cs" />
@@ -330,7 +336,7 @@
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
     <Compile Include="ViewModels\Application\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
-    <Compile Include="ViewModels\BrockerAWBModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\BrockerAwbModel.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
@@ -1419,7 +1425,7 @@
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
     <Content Include="Views\Script\Index.cshtml" />
     <Content Include="Views\Brocker\AWB.cshtml" />
-    <Content Include="Views\Brocker\EditorTemplates\BrockerAWBModel.cshtml" />
+    <Content Include="Views\Brocker\EditorTemplates\BrockerAwbModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\Sender\ApplicationEdit.cshtml" />
     <Content Include="Views\Sender\EditorTemplates\ApplicationSenderEdit.cshtml" />
@@ -1429,6 +1435,8 @@
     <Content Include="Views\Transit\EditByApplication.cshtml" />
     <Content Include="Views\Transit\EditByClient.cshtml" />
     <Content Include="Views\Authentication\Client.cshtml" />
+    <Content Include="Views\SenderAwb\Edit.cshtml" />
+    <Content Include="Views\SenderAwb\EditorTemplates\SenderAwbModel.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

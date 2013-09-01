@@ -3,7 +3,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
-using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.Email
@@ -39,7 +38,7 @@ namespace Alicargo.Services.Email
             SendOnFileAdd(id, old);
         }
 
-        public void Update(long id, BrockerAWBModel model)
+        public void Update(long id, BrockerAwbModel model)
         {
             var old = _awbPresenter.GetData(id);
 
@@ -48,7 +47,16 @@ namespace Alicargo.Services.Email
             SendOnFileAdd(id, old);
         }
 
-        private void SendOnFileAdd(long id, AirWaybillData oldData)
+	    public void Update(long id, SenderAwbModel model)
+	    {
+			var old = _awbPresenter.GetData(id);
+
+			_updateManager.Update(id, model);
+
+			SendOnFileAdd(id, old);
+	    }
+
+	    private void SendOnFileAdd(long id, AirWaybillData oldData)
         {
             var model = _awbPresenter.GetData(id);
 

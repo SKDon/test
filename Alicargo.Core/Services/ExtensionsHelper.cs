@@ -6,11 +6,16 @@ using System.Threading;
 
 namespace Alicargo.Core.Services
 {
-	public static class ExtensionHelper
+	public static class ExtensionsHelper
 	{
 		public static long ToLong(this string @string)
 		{
 			return long.Parse(@string, NumberStyles.AllowLeadingSign);
+		}
+
+		public static string ToLocalShortDateString(this DateTimeOffset dateTimeOffset)
+		{
+			return dateTimeOffset.LocalDateTime.ToShortDateString();
 		}
 
 		public static bool IsCritical(this Exception ex)
