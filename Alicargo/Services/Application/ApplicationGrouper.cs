@@ -12,7 +12,6 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationGrouper : IApplicationGrouper
 	{
-		private const string AwbFieldName = "AirWaybill";
 		private readonly IAwbRepository _awbRepository;
 		private Dictionary<long, AirWaybillData> _airWaybills;
 		private Dictionary<long, AirWaybillAggregate> _awbAggregates;
@@ -74,7 +73,7 @@ namespace Alicargo.Services.Application
 			return applications.GroupBy(x => x.ClientLegalEntity)
 							   .Select(
 									   grouping =>
-										   GetApplicationGroup(grouping, groups, "ClientLegalEntity",
+										   GetApplicationGroup(grouping, groups, OrderHelper.LegalEntityFieldName,
 															   g => g.Key))
 							   .ToArray();
 		}
@@ -84,7 +83,7 @@ namespace Alicargo.Services.Application
 			return applications.GroupBy(x => x.State.StateName)
 							   .Select(
 									   grouping =>
-										   GetApplicationGroup(grouping, groups, "State",
+										   GetApplicationGroup(grouping, groups, OrderHelper.StateFieldName,
 															   g => g.Key))
 							   .ToArray();
 		}
@@ -94,7 +93,7 @@ namespace Alicargo.Services.Application
 			return applications
 				.GroupBy(x => x.AirWaybillId ?? 0)
 				.Select(grouping =>
-							GetApplicationGroup(grouping, groups, AwbFieldName,
+							GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
 												awb => _airWaybills.ContainsKey(awb.Key)
 													? GetAirWayBillDisplay(_airWaybills[awb.Key])
 													: ""))
@@ -110,7 +109,7 @@ namespace Alicargo.Services.Application
 			var count = 0;
 			float weigth = 0;
 
-			if (field == AwbFieldName)
+			if (field == OrderHelper.AwbFieldName)
 			{
 				var id = (long)(object)grouping.Key;
 				if (_awbAggregates.ContainsKey(id))

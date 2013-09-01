@@ -32,7 +32,7 @@ namespace Alicargo.Controllers
         public virtual JsonResult List(int take, int skip, int page, int pageSize, Dictionary<string, string>[] group)
         {
             // todo: 3. use model binder for Order
-            var orders = Order.Get(group);
+            var orders = OrderHelper.Get(group);
 
             var data = _applicationPresenter.List(take, skip, orders);
 
