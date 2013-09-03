@@ -20,5 +20,11 @@ namespace Alicargo.Contracts.Contracts
 		public string AWBFileName { get; set; }
 		public long StateId { get; set; }
 		public DateTimeOffset StateChangeTimestamp { get; set; }
+
+		public decimal? FlightСost { get; set; }
+		public decimal? CustomСost { get; set; }
+		public decimal? BrokerСost { get; set; }
+		public decimal? ForwarderСost { get; set; }
+		public decimal? AdditionalСost { get; set; }
 	}
 }
