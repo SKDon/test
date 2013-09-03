@@ -22,13 +22,13 @@ using System.Web.Routing;
 using T4MVC;
 namespace Alicargo.Controllers
 {
-    public partial class ScriptController
+    public partial class DynamicScriptController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ScriptController() { }
+        public DynamicScriptController() { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected ScriptController(Dummy d) { }
+        protected DynamicScriptController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -46,13 +46,13 @@ namespace Alicargo.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ScriptController Actions { get { return MVC.Script; } }
+        public DynamicScriptController Actions { get { return MVC.DynamicScript; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Script";
+        public readonly string Name = "DynamicScript";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Script";
+        public const string NameConst = "DynamicScript";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -60,13 +60,13 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
+            public readonly string Constants = "Constants";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
+            public const string Constants = "Constants";
         }
 
 
@@ -80,23 +80,23 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Index = "Index";
+                public readonly string Constants = "Constants";
             }
-            public readonly string Index = "~/Views/Script/Index.cshtml";
+            public readonly string Constants = "~/Views/DynamicScript/Constants.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ScriptController : Alicargo.Controllers.ScriptController
+    public partial class T4MVC_DynamicScriptController : Alicargo.Controllers.DynamicScriptController
     {
-        public T4MVC_ScriptController() : base(Dummy.Instance) { }
+        public T4MVC_DynamicScriptController() : base(Dummy.Instance) { }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void ConstantsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ViewResult Constants()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Constants);
+            ConstantsOverride(callInfo);
             return callInfo;
         }
 

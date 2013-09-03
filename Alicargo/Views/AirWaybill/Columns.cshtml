@@ -1,0 +1,62 @@
+﻿@using Alicargo.Contracts.Enums
+@using Resources
+@inherits BaseWebViewPage
+var columns = [
+{ field: "CreationTimestampLocalString", title: '@Entities.CreationTimestamp' },
+{ field: "State", title: '@Entities.StateName', template: "#= !!State && !!State.StateName ? State.StateName : '' #" },
+{ field: "Bill", title: '@Entities.AWB' },
+{ field: "DepartureAirport", title: '@Entities.DepartureAirport' },
+{ field: "ArrivalAirport", title: '@Entities.ArrivalAirport' },
+{ field: "DateOfDepartureLocalString", title: '@Entities.DateOfDeparture' },
+{ field: "DateOfArrivalLocalString", title: '@Entities.DateOfArrival' },
+{ field: "TotalCount", title: '@Entities.TotalCount' },
+{ field: "TotalWeight", title: '@Entities.TotalWeight' },
+{ field: "StateChangeTimestampLocalString", title: '@Entities.StateChangeTimestamp' },
+{ field: "GTD", title: '@Entities.GTD' }
+];
+
+var editUrl = '@(IdentityService.IsInRole(RoleType.Admin)
+	                 ? Url.Action(MVC.AirWaybill.Edit())
+	                 : IdentityService.IsInRole(RoleType.Sender)
+		                 ? Url.Action(MVC.SenderAwb.Edit())
+		                 : Url.Action(MVC.Brocker.AWB()))/';
+
+columns.push({
+command: [{
+name: "custom-edit",
+text: "",
+click: function(e) {
+var tr = $(e.target).closest("tr");
+var data = this.dataItem(tr);
+var url = editUrl + data.Id;
+window.location = url;
+}
+}],
+title: "&nbsp;",
+width: "53px"
+});
+
+@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
+{
+	<text>
+		columns.push({
+		command: [{
+		name: "custom-delete",
+		text: "",
+		click: function (e) {
+		var updateGrid = function () {
+		var grid = getGrid();
+		grid.dataSource.read();
+		grid.refresh();
+		};
+		if (window.confirm("@Pages.DeleteConfirm")) {
+		var tr = $(e.target).closest("tr");
+		var data = this.dataItem(tr);
+		var url = '@Url.Action(MVC.AirWaybill.Delete())';
+		$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+		}
+		}
+		}], title: "&nbsp;", width: "53px"
+		});
+	</text>
+}

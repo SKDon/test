@@ -1,11 +1,11 @@
 using System.Web.Optimization;
 using Alicargo.Helpers;
 
-[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Alicargo.App_Start.BootstrapBundleConfig), "RegisterBundles")]
+[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Alicargo.App_Start.BundleConfig), "RegisterBundles")]
 
 namespace Alicargo.App_Start
 {
-    internal class BootstrapBundleConfig
+    internal class BundleConfig
 	{
         public static void RegisterBundles()
 		{
