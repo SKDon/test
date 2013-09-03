@@ -40,7 +40,8 @@ namespace Alicargo.Controllers
 				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
 				DepartureAirport = data.DepartureAirport,
 				PackingFile = null,
-				PackingFileName = data.PackingFileName
+				PackingFileName = data.PackingFileName,
+				FlightСost = data.FlightСost
 			});
 		}
 

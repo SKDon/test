@@ -38,27 +38,6 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
-		public static void Map(AirWaybillEditModel @from, AirWaybillData to)
-		{
-			to.PackingFileName = @from.PackingFileName;
-			to.InvoiceFileName = @from.InvoiceFileName;
-			to.AWBFileName = @from.AWBFileName;
-			to.ArrivalAirport = @from.ArrivalAirport;
-			to.Bill = @from.Bill;
-			to.DepartureAirport = @from.DepartureAirport;
-			to.GTD = @from.GTD;
-			to.GTDFileName = @from.GTDFileName;
-			to.BrockerId = @from.BrockerId;
-			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
-			to.DateOfArrival = DateTimeOffset.Parse(@from.DateOfArrivalLocalString);
-			to.DateOfDeparture = DateTimeOffset.Parse(@from.DateOfDepartureLocalString);
-			to.AdditionalСost = @from.AdditionalСost;
-			to.BrokerСost = @from.BrokerСost;
-			to.CustomСost = @from.CustomСost;
-			to.FlightСost = @from.FlightСost;
-			to.ForwarderСost = @from.ForwarderСost;
-		}
-
 		public void Update(long id, BrockerAwbModel model)
 		{
 			var data = _awbRepository.Get(id).First();
@@ -92,6 +71,27 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
+		public static void Map(AirWaybillEditModel @from, AirWaybillData to)
+		{
+			to.PackingFileName = @from.PackingFileName;
+			to.InvoiceFileName = @from.InvoiceFileName;
+			to.AWBFileName = @from.AWBFileName;
+			to.ArrivalAirport = @from.ArrivalAirport;
+			to.Bill = @from.Bill;
+			to.DepartureAirport = @from.DepartureAirport;
+			to.GTD = @from.GTD;
+			to.GTDFileName = @from.GTDFileName;
+			to.BrockerId = @from.BrockerId;
+			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
+			to.DateOfArrival = DateTimeOffset.Parse(@from.DateOfArrivalLocalString);
+			to.DateOfDeparture = DateTimeOffset.Parse(@from.DateOfDepartureLocalString);
+			to.AdditionalСost = @from.AdditionalСost;
+			to.BrokerСost = @from.BrokerСost;
+			to.CustomСost = @from.CustomСost;
+			to.FlightСost = @from.FlightСost;
+			to.ForwarderСost = @from.ForwarderСost;
+		}
+
 		private static void Map(SenderAwbModel @from, AirWaybillData to)
 		{
 			to.Bill = @from.Bill;
@@ -102,6 +102,7 @@ namespace Alicargo.Services.AirWaybill
 			to.BrockerId = @from.BrockerId;
 			to.PackingFileName = @from.PackingFileName;
 			to.AWBFileName = @from.AWBFileName;
+			to.FlightСost = @from.FlightСost;
 		}
 
 		public static void Map(BrockerAwbModel @from, AirWaybillData to)
