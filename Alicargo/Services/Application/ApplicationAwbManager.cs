@@ -9,16 +9,19 @@ namespace Alicargo.Services.Application
         private readonly IApplicationManager _applicationManager;
         private readonly IApplicationUpdateRepository _applicationUpdater;
         private readonly IAwbRepository _awbRepository;
-        private readonly IUnitOfWork _unitOfWork;
+	    private readonly IStateConfig _stateConfig;
+	    private readonly IUnitOfWork _unitOfWork;
 
         public ApplicationAwbManager(
             IAwbRepository awbRepository,
+			IStateConfig stateConfig,
             IUnitOfWork unitOfWork,
             IApplicationManager applicationManager,
             IApplicationUpdateRepository applicationUpdater)
         {
             _awbRepository = awbRepository;
-            _unitOfWork = unitOfWork;
+	        _stateConfig = stateConfig;
+	        _unitOfWork = unitOfWork;
             _applicationManager = applicationManager;
             _applicationUpdater = applicationUpdater;
         }
@@ -30,16 +33,17 @@ namespace Alicargo.Services.Application
             {
                 var aggregate = _awbRepository.GetAggregate(awbId.Value).First();
 
-                // SetAirWaybill must be first
-                _applicationUpdater.SetAirWaybill(applicationId, awbId.Value);
+	            _applicationUpdater.SetAirWaybill(applicationId, awbId.Value);
 
-                _applicationManager.SetState(applicationId, aggregate.StateId);
+	            _applicationManager.SetState(applicationId, aggregate.StateId);
 
-                _unitOfWork.SaveChanges();
+	            _unitOfWork.SaveChanges();
             }
             else
             {
                 _applicationUpdater.SetAirWaybill(applicationId, null);
+
+				_applicationManager.SetState(applicationId, _stateConfig.CargoInStockStateId);
 
                 _unitOfWork.SaveChanges();
             }

@@ -33,7 +33,7 @@ namespace Alicargo.DataAccess.Repositories
 					StateId = x.StateId,
 					StateChangeTimestamp = x.StateChangeTimestamp,
 					GTDAdditionalFileName = x.GTDAdditionalFileName,
-					AdditionalСost =  x.AdditionalСost,
+					AdditionalСost = x.AdditionalСost,
 					BrokerСost = x.BrokerСost,
 					CustomСost = x.CustomСost,
 					FlightСost = x.FlightСost,
@@ -82,6 +82,7 @@ namespace Alicargo.DataAccess.Repositories
 			}
 			return airWaybills.Skip((int)skip)
 							  .Take(take)
+							  .OrderByDescending(x => x.CreationTimestamp)
 							  .Select(_selector)
 							  .ToArray();
 		}
