@@ -20,6 +20,12 @@ namespace Alicargo.ViewModels.AirWaybill
 		[DisplayNameLocalized(typeof(Entities), "Packing")]
 		public string PackingFileName { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "CustomСost")]
+		public decimal? CustomСost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "BrokerСost")]
+		public decimal? BrokerСost { get; set; }
+
 		#region // todo: 2. remove file fields
 
 		[DisplayNameLocalized(typeof (Entities), "GTD")]

@@ -112,6 +112,8 @@ namespace Alicargo.Services.AirWaybill
 			to.GTD = @from.GTD;
 			to.GTDFileName = @from.GTDFileName;
 			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
+			to.BrokerСost = @from.BrokerСost;
+			to.CustomСost = @from.CustomСost;
 		}
 	}
 }

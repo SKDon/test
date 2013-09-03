@@ -58,8 +58,16 @@ namespace Alicargo.Controllers
 				return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
-            
-			var model = new BrockerAwbModel
+			var model = Map(data);
+
+			BindBag(data);
+
+			return View(model);
+		}
+
+		private static BrockerAwbModel Map(AirWaybillData data)
+		{
+			return new BrockerAwbModel
 			{
 				GTD = data.GTD,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
@@ -69,12 +77,10 @@ namespace Alicargo.Controllers
 				GTDAdditionalFile = null,
 				InvoiceFile = null,
 				GTDFile = null,
-				PackingFile = null
+				PackingFile = null,
+				BrokerСost = data.BrokerСost,
+				CustomСost = data.CustomСost
 			};
-
-			BindBag(data);
-
-			return View(model);
 		}
 
 		private void BindBag(AirWaybillData data)
