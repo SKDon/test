@@ -16,7 +16,7 @@ namespace Alicargo.ModelBinders
 			return model;
 		}
 
-        // todo: 3. files refatoring
+		// todo: 3. files refatoring
 		private static void ReadFiles(ApplicationEditModel model, HttpRequestBase request)
 		{
 			if (model.InvoiceFile == null && model.InvoiceFileName == null)

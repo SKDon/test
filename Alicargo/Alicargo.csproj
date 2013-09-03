@@ -250,7 +250,7 @@
       <DependentUpon>Pages.resx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AccessAttribute.cs" />
-    <Compile Include="Helpers\CultureActionFilter.cs" />
+    <Compile Include="Helpers\CultureFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Validation.it.Designer.cs">
       <AutoGen>True</AutoGen>

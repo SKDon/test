@@ -37,7 +37,7 @@ namespace Alicargo.ModelBinders
 				{
 					model.SwiftFileName = name;
 					model.SwiftFile = bytes;
-				});			
+				});
 		}
 	}
 }

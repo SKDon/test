@@ -169,7 +169,12 @@ namespace Alicargo.Controllers
         [Access(RoleType.Admin), HttpPost]
         public virtual ActionResult Edit(long id, AirWaybillEditModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+			{
+				ViewBag.AwbId = id;
+
+				return View(model);
+            }
 
             try
             {

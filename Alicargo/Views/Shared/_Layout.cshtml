@@ -1,46 +1,44 @@
 ﻿@using Alicargo.Contracts.Enums
-@using Scripts = System.Web.Optimization.Scripts
+@using Resources
 @{
 	Layout = null;
 }
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8" />
-	<title>Alicargo</title>
-	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	@Styles.Render(PathConstants.StylesPath)
-	@Scripts.Render(PathConstants.ScriptsPath)
-	@switch (UICulture)
- {
-	 case TwoLetterISOLanguageName.Russian:
-		@Scripts.Render(PathConstants.ScriptsPathRu)
-		 break;
-	 case TwoLetterISOLanguageName.Italian:
-		@Scripts.Render(PathConstants.ScriptsPathIt)
-		 break;
- }
-</head>
-<body>
-	<div id="wrap">
-		@Html.Partial("Memu")
-		<div class="container">
+	<head>
+		<meta charset="utf-8" />
+		<title>Alicargo</title>
+		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		@Styles.Render(PathConstants.StylesPath)
+		@Scripts.Render(PathConstants.ScriptsPath)
+		@switch (UICulture)
+		{
+			case TwoLetterISOLanguageName.Russian:
+				@Scripts.Render(PathConstants.ScriptsPathRu)
+				break;
+			case TwoLetterISOLanguageName.Italian:
+				@Scripts.Render(PathConstants.ScriptsPathIt)
+				break;
+		}
+	</head>
+	<body>
+		<div id="wrap">
+			@Html.Partial("Memu")
+			<div class="container">
+				<div class="wrap-padding">&nbsp;</div>
+				@RenderBody()
+			</div>
 			<div class="wrap-padding">&nbsp;</div>
-			@RenderBody()
 		</div>
-		<div class="wrap-padding">&nbsp;</div>
-	</div>
-	<footer>
-		<div class="container">
-			<p class="muted credit">
-				&copy; Alicargo
-                @Html.ActionLink(@Resources.Pages.SignIn, MVC.Authentication.Login())
-			</p>
-		</div>
-	</footer>
-	@RenderSection("scripts", false)
-</body>
+		<footer>
+			<div class="container">
+				<p class="muted credit">
+					&copy; Alicargo
+					@Html.ActionLink(Pages.SignIn, MVC.Authentication.Login())
+				</p>
+			</div>
+		</footer>
+		@RenderSection("scripts", false)
+	</body>
 </html>
-
-

@@ -11,7 +11,7 @@ namespace Alicargo.App_Start
 		{
 			filters.Add(new CustomHandleErrorAttribute(kernel.Get<ILog>()));
 
-			filters.Add(new CultureActionFilter(CompositionRootHelper.GetTwoLetterISOLanguageName(kernel)));
+			filters.Add(new CultureFilter(CompositionRootHelper.GetTwoLetterISOLanguageName(kernel)));
 		}
 	}
 }
