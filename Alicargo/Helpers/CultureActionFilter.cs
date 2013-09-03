@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
 using System.Web.Mvc;
+using Alicargo.Core.Localization;
 
 namespace Alicargo.Helpers
 {
@@ -15,22 +13,9 @@ namespace Alicargo.Helpers
 			_getTwoLetterISOLanguageName = getTwoLetterISOLanguageName;
 		}
 
-		private void SetCulture()
-		{
-			var languageName = _getTwoLetterISOLanguageName();
-
-			var culture = CultureInfo.GetCultures(CultureTypes.NeutralCultures).First(x =>
-				x.TwoLetterISOLanguageName.Equals(languageName,
-					StringComparison.InvariantCultureIgnoreCase));
-
-			// todo: 3.5 create ambient context
-			Thread.CurrentThread.CurrentCulture = culture;
-			Thread.CurrentThread.CurrentUICulture = culture;
-		}
-
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
-			SetCulture();
+			CultureContext.Current.Set(_getTwoLetterISOLanguageName);
 		}
 	}
 }

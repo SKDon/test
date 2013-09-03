@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alicargo.Contracts.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
 using Alicargo.Services.Application;
 using Alicargo.Services.Client;
 using Alicargo.Services.Email;
 using Ninject;
+using Ninject.Syntax;
 using Ninject.Web.Common;
 
 namespace Alicargo.App_Start
@@ -96,6 +98,12 @@ namespace Alicargo.App_Start
 			}
 
 			return binded;
+		}
+
+		public static Func<string> GetTwoLetterISOLanguageName(IResolutionRoot kernel)
+		{
+			return () => kernel.Get<IIdentityService>().TwoLetterISOLanguageName
+						 ?? TwoLetterISOLanguageName.Russian;
 		}
 	}
 }

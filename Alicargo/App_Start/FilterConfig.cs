@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Contracts.Enums;
 using Alicargo.Helpers;
-using Alicargo.Services.Abstract;
 using Ninject;
 using log4net;
 
@@ -13,8 +11,7 @@ namespace Alicargo.App_Start
 		{
 			filters.Add(new CustomHandleErrorAttribute(kernel.Get<ILog>()));
 
-			filters.Add(new CultureActionFilter(() => kernel.Get<IIdentityService>().TwoLetterISOLanguageName
-			                                               ?? TwoLetterISOLanguageName.Russian));
+			filters.Add(new CultureActionFilter(CompositionRootHelper.GetTwoLetterISOLanguageName(kernel)));
 		}
 	}
 }
