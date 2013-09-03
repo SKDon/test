@@ -9,7 +9,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 {
 	public partial class Tests
 	{
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_TransitRepository_Add_Get()
 		{
 			var transit = CreateTestTransit();
@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			transit.ShouldBeEquivalentTo(actual);
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_TransitRepository_Update()
 		{
 			var oldData = CreateTestTransit();

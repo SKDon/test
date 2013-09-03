@@ -21,7 +21,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			return data;
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_CarrierRepository_Add_Get()
 		{
 			var carrier = CreateTestCarrier();

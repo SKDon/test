@@ -27,7 +27,7 @@
 //			return data;
 //		}
 
-//		[TestMethod]
+//		[TestMethod, TestCategory("black-box")]
 //		public void Test_ClientRepository_Count()
 //		{
 //			var all = _clientRepository.GetAll();
@@ -37,7 +37,7 @@
 //			Assert.AreEqual(all.Length, count);
 //		}
 
-//		[TestMethod]
+//		[TestMethod, TestCategory("black-box")]
 //		public void Test_ClientRepository_GetRange()
 //		{
 //			var count = _clientRepository.Count();
@@ -47,7 +47,7 @@
 //			Assert.AreEqual(range.Length, count / 2);
 //		}
 
-//		[TestMethod]
+//		[TestMethod, TestCategory("black-box")]
 //		public void Test_ClientRepository_Add_GetByUserId_GetById_Delete()
 //		{
 //			var client = CreateTestClient();
@@ -65,7 +65,7 @@
 //			client.ShouldBeEquivalentTo(byUserId);
 //		}
 
-//		[TestMethod]
+//		[TestMethod, TestCategory("black-box")]
 //		public void Test_ClientRepository_Delete()
 //		{
 //			var client = CreateTestClient();
@@ -78,7 +78,7 @@
 //			Assert.IsNull(byId);
 //		}
 
-//		[TestMethod]
+//		[TestMethod, TestCategory("black-box")]
 //		public void Test_ClientRepository_Update()
 //		{
 //			var client = CreateTestClient();

@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             _context.Cleanup();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_GetAll_Add_Get()
         {
             var oldData = _awbRepository.GetAll();
@@ -47,7 +47,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             data.ShouldBeEquivalentTo(airWaybill);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_Count_GetRange()
         {
             var airWaybillDatas = _awbRepository.GetAll();
@@ -60,7 +60,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             airWaybillDatas.ShouldBeEquivalentTo(range);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_GetClientEmails()
         {
             var data1 = CreateApplicationData(TestConstants.TestClientId1);
@@ -86,7 +86,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             emails.ShouldBeEquivalentTo(clients.Select(x => x.Email).ToArray());
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_Update()
         {
             var data = CreateTestAirWaybill();
@@ -116,7 +116,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             _awbRepository.GetAWBFile(newData.Id).FileData.ShouldBeEquivalentTo(awbFile);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_SetState()
         {
             var data = CreateTestAirWaybill();
@@ -130,7 +130,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             actual.StateChangeTimestamp.Should().NotBe(data.StateChangeTimestamp);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_Delete()
         {
             var data = CreateTestAirWaybill();
@@ -156,7 +156,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             return data;
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_GetAggregate()
         {
             var data1 = CreateApplicationData(TestConstants.TestClientId1);

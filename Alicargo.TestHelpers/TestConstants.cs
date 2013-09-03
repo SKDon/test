@@ -7,5 +7,6 @@
         public const long TestClientId2 = 3;
         public const long DefaultStateId = 1;
         public const long CargoIsFlewStateId = 7;
+	    public const long TestTransitId = 1;
     }
 }

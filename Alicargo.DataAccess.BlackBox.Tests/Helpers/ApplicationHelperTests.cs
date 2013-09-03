@@ -10,7 +10,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 		{
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_CopyTo()
 		{
 		}

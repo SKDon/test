@@ -11,7 +11,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 	{
 		private const long DefaultStateId = 1;
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetAll_Count()
 		{
 			var all = _stateRepository.GetAll();
@@ -21,7 +21,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			Assert.AreEqual(count, all.Length);
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_Get_GetDefaultState()
 		{
 			var state = _stateRepository.Get(DefaultStateId);
@@ -57,7 +57,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		//	return true;
 		//}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetAvailableStates()
 		{
 			var states = _stateRepository.GetAvailableStates(RoleType.Admin);
@@ -72,7 +72,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			}
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetVisibleStates()
 		{
 			var states = _stateRepository.GetVisibleStates(RoleType.Admin);
@@ -87,7 +87,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 			}
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetAvailableRoles()
 		{
 			var roles = _stateRepository.GetAvailableRoles(DefaultStateId);

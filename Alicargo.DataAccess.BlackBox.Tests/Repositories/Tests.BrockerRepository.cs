@@ -6,7 +6,7 @@ namespace Alicargo.DataAccess.Tests.Repositories
 {
 	public partial class Tests
 	{
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_BrockerRepository_Get()
 		{
 			var all = _brockerRepository.GetAll();

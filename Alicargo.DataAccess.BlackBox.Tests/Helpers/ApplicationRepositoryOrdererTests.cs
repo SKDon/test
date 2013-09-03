@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 			_orderer = new ApplicationRepositoryOrderer();
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void Test_ArgumentOutOfRangeException()
 		{
@@ -30,7 +30,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 			_orderer.Order(list, orders);
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_Order()
 		{
 			var list = new[]

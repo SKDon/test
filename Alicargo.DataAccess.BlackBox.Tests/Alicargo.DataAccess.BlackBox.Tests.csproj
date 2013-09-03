@@ -84,7 +84,7 @@
     <Compile Include="Repositories\Tests.CarrierRepository.cs" />
     <Compile Include="Repositories\Tests.ClientRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Tests.ApplicationRepository.cs" />
+    <Compile Include="Repositories\ApplicationRepositoryTests.cs" />
     <Compile Include="Repositories\Tests.TransitRepository.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

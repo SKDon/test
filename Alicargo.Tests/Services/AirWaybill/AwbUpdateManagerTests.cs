@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Services.AirWaybill;
-using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Ploeh.AutoFixture;
 
 namespace Alicargo.Tests.Services.AirWaybill
 {

@@ -34,7 +34,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             _context.Cleanup();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AuthenticationRepository_IsInRole()
         {
             var userRepository = new UserRepository(_context.UnitOfWork, _passwordConverter);
@@ -53,7 +53,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AuthenticationRepository_Add_GetById()
         {
             var login = RandomString();
@@ -67,7 +67,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             CheckUser(actual, password, login);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AuthenticationRepository_GetByLogin()
         {
             var exprected = CreateTestUser();
@@ -77,7 +77,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             Assert.AreEqual(exprected.Id, actual.Id);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("black-box")]
         public void Test_AuthenticationRepository_Update()
         {
             var user = CreateTestUser();
