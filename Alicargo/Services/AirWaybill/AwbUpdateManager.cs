@@ -38,20 +38,25 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
-		public static void Map(AirWaybillEditModel model, AirWaybillData data)
+		public static void Map(AirWaybillEditModel @from, AirWaybillData to)
 		{
-			data.PackingFileName = model.PackingFileName;
-			data.InvoiceFileName = model.InvoiceFileName;
-			data.AWBFileName = model.AWBFileName;
-			data.ArrivalAirport = model.ArrivalAirport;
-			data.Bill = model.Bill;
-			data.DepartureAirport = model.DepartureAirport;
-			data.GTD = model.GTD;
-			data.GTDFileName = model.GTDFileName;
-			data.BrockerId = model.BrockerId;
-			data.GTDAdditionalFileName = model.GTDAdditionalFileName;
-			data.DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString);
-			data.DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString);
+			to.PackingFileName = @from.PackingFileName;
+			to.InvoiceFileName = @from.InvoiceFileName;
+			to.AWBFileName = @from.AWBFileName;
+			to.ArrivalAirport = @from.ArrivalAirport;
+			to.Bill = @from.Bill;
+			to.DepartureAirport = @from.DepartureAirport;
+			to.GTD = @from.GTD;
+			to.GTDFileName = @from.GTDFileName;
+			to.BrockerId = @from.BrockerId;
+			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
+			to.DateOfArrival = DateTimeOffset.Parse(@from.DateOfArrivalLocalString);
+			to.DateOfDeparture = DateTimeOffset.Parse(@from.DateOfDepartureLocalString);
+			to.AdditionalСost = @from.AdditionalСost;
+			to.BrokerСost = @from.BrokerСost;
+			to.CustomСost = @from.CustomСost;
+			to.FlightСost = @from.FlightСost;
+			to.ForwarderСost = @from.ForwarderСost;
 		}
 
 		public void Update(long id, BrockerAwbModel model)
@@ -87,25 +92,25 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
-		private static void Map(SenderAwbModel model, AirWaybillData data)
+		private static void Map(SenderAwbModel @from, AirWaybillData to)
 		{
-			data.Bill = model.Bill;
-			data.ArrivalAirport = model.ArrivalAirport;
-			data.DepartureAirport = model.DepartureAirport;
-			data.DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString);
-			data.DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString);
-			data.BrockerId = model.BrockerId;
-			data.PackingFileName = model.PackingFileName;
-			data.AWBFileName = model.AWBFileName;
+			to.Bill = @from.Bill;
+			to.ArrivalAirport = @from.ArrivalAirport;
+			to.DepartureAirport = @from.DepartureAirport;
+			to.DateOfArrival = DateTimeOffset.Parse(@from.DateOfArrivalLocalString);
+			to.DateOfDeparture = DateTimeOffset.Parse(@from.DateOfDepartureLocalString);
+			to.BrockerId = @from.BrockerId;
+			to.PackingFileName = @from.PackingFileName;
+			to.AWBFileName = @from.AWBFileName;
 		}
 
-		public static void Map(BrockerAwbModel model, AirWaybillData data)
+		public static void Map(BrockerAwbModel @from, AirWaybillData to)
 		{
-			data.PackingFileName = model.PackingFileName;
-			data.InvoiceFileName = model.InvoiceFileName;
-			data.GTD = model.GTD;
-			data.GTDFileName = model.GTDFileName;
-			data.GTDAdditionalFileName = model.GTDAdditionalFileName;
+			to.PackingFileName = @from.PackingFileName;
+			to.InvoiceFileName = @from.InvoiceFileName;
+			to.GTD = @from.GTD;
+			to.GTDFileName = @from.GTDFileName;
+			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
 		}
 	}
 }

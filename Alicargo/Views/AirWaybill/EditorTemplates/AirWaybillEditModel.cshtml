@@ -97,6 +97,19 @@
 			})
 		</script>
 	</div>
+	<div class="row">
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.FlightСost)
+			@Html.EditorWithLabelFor(model => model.CustomСost)
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.BrokerСost)
+			@Html.EditorWithLabelFor(model => model.ForwarderСost)
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.AdditionalСost)
+		</div>
+	</div>
 }
 
 @Parameters()

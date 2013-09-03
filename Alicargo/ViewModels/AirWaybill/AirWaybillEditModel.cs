@@ -6,7 +6,7 @@ using Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
 {
-    public sealed class AirWaybillEditModel
+	public sealed class AirWaybillEditModel
 	{
 		#region Data
 
@@ -30,6 +30,22 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Brocker")]
 		public long BrockerId { get; set; }
+
+		// todo: 3. localization of cost fields
+		[DisplayNameLocalized(typeof(Entities), "FlightСost")]
+		public decimal? FlightСost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "CustomСost")]
+		public decimal? CustomСost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "BrokerСost")]
+		public decimal? BrokerСost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "ForwarderСost")]
+		public decimal? ForwarderСost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "AdditionalСost")]
+		public decimal? AdditionalСost { get; set; }
 
 		#endregion
 
@@ -59,34 +75,6 @@ namespace Alicargo.ViewModels.AirWaybill
 		public byte[] InvoiceFile { get; set; }
 
 		public byte[] AWBFile { get; set; }
-
-		#endregion
-
-		#region Mapping
-
-		public static AirWaybillEditModel GetModel(AirWaybillData data)
-		{
-			return new AirWaybillEditModel
-			{
-				PackingFileName = data.PackingFileName,
-				InvoiceFileName = data.InvoiceFileName,
-				PackingFile = null,
-				AWBFileName = data.AWBFileName,
-				ArrivalAirport = data.ArrivalAirport,
-				Bill = data.Bill,
-				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				DateOfArrivalLocalString = data.DateOfArrival.ToLocalShortDateString(),
-				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
-				DepartureAirport = data.DepartureAirport,
-				GTD = data.GTD,
-				GTDFileName = data.GTDFileName,
-				InvoiceFile = null,
-				AWBFile = null,
-				BrockerId = data.BrockerId,
-				GTDAdditionalFile = null,
-				GTDFile = null
-			};
-		}
 
 		#endregion
 	}

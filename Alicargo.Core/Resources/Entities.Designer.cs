@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional cost.
+        /// </summary>
+        public static string AdditionalСost {
+            get {
+                return ResourceManager.GetString("AdditionalСost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Адрес.
         /// </summary>
         public static string Address {
@@ -129,6 +138,15 @@ namespace Resources {
         public static string Brocker {
             get {
                 return ResourceManager.GetString("Brocker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Broker cost.
+        /// </summary>
+        public static string BrokerСost {
+            get {
+                return ResourceManager.GetString("BrokerСost", resourceCulture);
             }
         }
         
@@ -210,6 +228,15 @@ namespace Resources {
         public static string CreationTimestamp {
             get {
                 return ResourceManager.GetString("CreationTimestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom cost.
+        /// </summary>
+        public static string CustomСost {
+            get {
+                return ResourceManager.GetString("CustomСost", resourceCulture);
             }
         }
         
@@ -345,6 +372,24 @@ namespace Resources {
         public static string FileName {
             get {
                 return ResourceManager.GetString("FileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flight cost.
+        /// </summary>
+        public static string FlightСost {
+            get {
+                return ResourceManager.GetString("FlightСost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forwarder cost.
+        /// </summary>
+        public static string ForwarderСost {
+            get {
+                return ResourceManager.GetString("ForwarderСost", resourceCulture);
             }
         }
         

@@ -72,8 +72,37 @@ namespace Alicargo.Services.AirWaybill
 
             if (data == null) throw new EntityNotFoundException("Refarence: " + id);
 
-            return AirWaybillEditModel.GetModel(data);
+            return Map(data);
         }
+
+		public static AirWaybillEditModel Map(AirWaybillData data)
+		{
+			return new AirWaybillEditModel
+			{
+				PackingFileName = data.PackingFileName,
+				InvoiceFileName = data.InvoiceFileName,
+				PackingFile = null,
+				AWBFileName = data.AWBFileName,
+				ArrivalAirport = data.ArrivalAirport,
+				Bill = data.Bill,
+				GTDAdditionalFileName = data.GTDAdditionalFileName,
+				DateOfArrivalLocalString = data.DateOfArrival.ToLocalShortDateString(),
+				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
+				DepartureAirport = data.DepartureAirport,
+				GTD = data.GTD,
+				GTDFileName = data.GTDFileName,
+				InvoiceFile = null,
+				AWBFile = null,
+				BrockerId = data.BrockerId,
+				GTDAdditionalFile = null,
+				GTDFile = null,
+				AdditionalСost = data.AdditionalСost,
+				BrokerСost = data.BrokerСost,
+				CustomСost = data.CustomСost,
+				FlightСost = data.FlightСost,
+				ForwarderСost = data.ForwarderСost
+			};
+		}
 
         public AirWaybillData GetData(long id)
         {

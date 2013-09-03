@@ -327,4 +327,19 @@
   <data name="Country" xml:space="preserve">
     <value>Страна</value>
   </data>
+  <data name="AdditionalСost" xml:space="preserve">
+    <value>Additional cost</value>
+  </data>
+  <data name="BrokerСost" xml:space="preserve">
+    <value>Broker cost</value>
+  </data>
+  <data name="CustomСost" xml:space="preserve">
+    <value>Custom cost</value>
+  </data>
+  <data name="FlightСost" xml:space="preserve">
+    <value>Flight cost</value>
+  </data>
+  <data name="ForwarderСost" xml:space="preserve">
+    <value>Forwarder cost</value>
+  </data>
 </root>
