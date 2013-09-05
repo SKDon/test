@@ -85,11 +85,11 @@ namespace Alicargo.Services.AirWaybill
 				GTD = null,
 				GTDAdditionalFileName = model.GTDAdditionalFileName,
 				GTDFileName = model.GTDFileName,
-				AdditionalСost = model.AdditionalСost,
-				BrokerСost = model.BrokerСost,
-				CustomСost = model.CustomСost,
-				FlightСost = model.FlightСost,
-				ForwarderСost = model.ForwarderСost
+				AdditionalCost = model.AdditionalCost,
+				BrokerCost = model.BrokerCost,
+				CustomCost = model.CustomCost,
+				FlightCost = model.FlightCost,
+				ForwarderCost = model.ForwarderCost
 			};
 		}
 	}

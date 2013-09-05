@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Services;
 using Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
@@ -32,20 +30,20 @@ namespace Alicargo.ViewModels.AirWaybill
 		public long BrockerId { get; set; }
 
 		// todo: 3. localization of cost fields
-		[DisplayNameLocalized(typeof(Entities), "FlightСost")]
-		public decimal? FlightСost { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "FlightCost")]
+		public decimal? FlightCost { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "CustomСost")]
-		public decimal? CustomСost { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "CustomCost")]
+		public decimal? CustomCost { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "BrokerСost")]
-		public decimal? BrokerСost { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "BrokerCost")]
+		public decimal? BrokerCost { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "ForwarderСost")]
-		public decimal? ForwarderСost { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "ForwarderCost")]
+		public decimal? ForwarderCost { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "AdditionalСost")]
-		public decimal? AdditionalСost { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "AdditionalCost")]
+		public decimal? AdditionalCost { get; set; }
 
 		#endregion
 

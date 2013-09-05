@@ -63,9 +63,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Additional cost.
         /// </summary>
-        public static string AdditionalСost {
+        public static string AdditionalCost {
             get {
-                return ResourceManager.GetString("AdditionalСost", resourceCulture);
+                return ResourceManager.GetString("AdditionalCost", resourceCulture);
             }
         }
         
@@ -144,9 +144,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Broker cost.
         /// </summary>
-        public static string BrokerСost {
+        public static string BrokerCost {
             get {
-                return ResourceManager.GetString("BrokerСost", resourceCulture);
+                return ResourceManager.GetString("BrokerCost", resourceCulture);
             }
         }
         
@@ -234,9 +234,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Custom cost.
         /// </summary>
-        public static string CustomСost {
+        public static string CustomCost {
             get {
-                return ResourceManager.GetString("CustomСost", resourceCulture);
+                return ResourceManager.GetString("CustomCost", resourceCulture);
             }
         }
         
@@ -378,18 +378,18 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Flight cost.
         /// </summary>
-        public static string FlightСost {
+        public static string FlightCost {
             get {
-                return ResourceManager.GetString("FlightСost", resourceCulture);
+                return ResourceManager.GetString("FlightCost", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Forwarder cost.
         /// </summary>
-        public static string ForwarderСost {
+        public static string ForwarderCost {
             get {
-                return ResourceManager.GetString("ForwarderСost", resourceCulture);
+                return ResourceManager.GetString("ForwarderCost", resourceCulture);
             }
         }
         

@@ -78,8 +78,8 @@ namespace Alicargo.Controllers
 				InvoiceFile = null,
 				GTDFile = null,
 				PackingFile = null,
-				BrokerСost = data.BrokerСost,
-				CustomСost = data.CustomСost
+				BrokerCost = data.BrokerCost,
+				CustomCost = data.CustomCost
 			};
 		}
 

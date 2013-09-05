@@ -85,11 +85,11 @@ namespace Alicargo.Services.AirWaybill
 			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
 			to.DateOfArrival = DateTimeOffset.Parse(@from.DateOfArrivalLocalString);
 			to.DateOfDeparture = DateTimeOffset.Parse(@from.DateOfDepartureLocalString);
-			to.AdditionalСost = @from.AdditionalСost;
-			to.BrokerСost = @from.BrokerСost;
-			to.CustomСost = @from.CustomСost;
-			to.FlightСost = @from.FlightСost;
-			to.ForwarderСost = @from.ForwarderСost;
+			to.AdditionalCost = @from.AdditionalCost;
+			to.BrokerCost = @from.BrokerCost;
+			to.CustomCost = @from.CustomCost;
+			to.FlightCost = @from.FlightCost;
+			to.ForwarderCost = @from.ForwarderCost;
 		}
 
 		private static void Map(SenderAwbModel @from, AirWaybillData to)
@@ -102,7 +102,7 @@ namespace Alicargo.Services.AirWaybill
 			to.BrockerId = @from.BrockerId;
 			to.PackingFileName = @from.PackingFileName;
 			to.AWBFileName = @from.AWBFileName;
-			to.FlightСost = @from.FlightСost;
+			to.FlightCost = @from.FlightCost;
 		}
 
 		public static void Map(BrockerAwbModel @from, AirWaybillData to)
@@ -112,8 +112,8 @@ namespace Alicargo.Services.AirWaybill
 			to.GTD = @from.GTD;
 			to.GTDFileName = @from.GTDFileName;
 			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
-			to.BrokerСost = @from.BrokerСost;
-			to.CustomСost = @from.CustomСost;
+			to.BrokerCost = @from.BrokerCost;
+			to.CustomCost = @from.CustomCost;
 		}
 	}
 }

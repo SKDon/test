@@ -37,5 +37,15 @@ namespace Alicargo.ViewModels.AirWaybill
 		public string InvoiceFileName { get; set; }
 
 		public string AWBFileName { get; set; }
+
+		public decimal? FlightCost { get; set; }
+
+		public decimal? CustomCost { get; set; }
+
+		public decimal? BrokerCost { get; set; }
+
+		public decimal? ForwarderCost { get; set; }
+
+		public decimal? AdditionalCost { get; set; }
 	}
 }

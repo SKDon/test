@@ -41,7 +41,7 @@ namespace Alicargo.Controllers
 				DepartureAirport = data.DepartureAirport,
 				PackingFile = null,
 				PackingFileName = data.PackingFileName,
-				FlightСost = data.FlightСost
+				FlightCost = data.FlightCost
 			});
 		}
 

@@ -33,11 +33,11 @@ namespace Alicargo.DataAccess.Repositories
 					StateId = x.StateId,
 					StateChangeTimestamp = x.StateChangeTimestamp,
 					GTDAdditionalFileName = x.GTDAdditionalFileName,
-					AdditionalСost = x.AdditionalСost,
-					BrokerСost = x.BrokerСost,
-					CustomСost = x.CustomСost,
-					FlightСost = x.FlightСost,
-					ForwarderСost = x.ForwarderСost
+					AdditionalCost = x.AdditionalCost,
+					BrokerCost = x.BrokerCost,
+					CustomCost = x.CustomCost,
+					FlightCost = x.FlightCost,
+					ForwarderCost = x.ForwarderCost
 				};
 		}
 
@@ -231,11 +231,11 @@ namespace Alicargo.DataAccess.Repositories
 			to.DateOfDeparture = @from.DateOfDeparture;
 			to.DepartureAirport = @from.DepartureAirport;
 			to.GTD = @from.GTD;
-			to.AdditionalСost = @from.AdditionalСost;
-			to.BrokerСost = @from.BrokerСost;
-			to.CustomСost = @from.CustomСost;
-			to.FlightСost = @from.FlightСost;
-			to.ForwarderСost = @from.ForwarderСost;
+			to.AdditionalCost = @from.AdditionalCost;
+			to.BrokerCost = @from.BrokerCost;
+			to.CustomCost = @from.CustomCost;
+			to.FlightCost = @from.FlightCost;
+			to.ForwarderCost = @from.ForwarderCost;
 
 			// todo: 2. separate repository for files
 			FileDataHelper.SetFile(gtdFile, from.GTDFileName,

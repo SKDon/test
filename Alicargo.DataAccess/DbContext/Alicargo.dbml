@@ -212,11 +212,11 @@
       <Column Name="AWBFileName" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="StateChangeTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
-      <Column Name="FlightСost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Column Name="CustomСost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Column Name="BrokerСost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Column Name="ForwarderСost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Column Name="AdditionalСost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="FlightCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CustomCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BrokerCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ForwarderCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="AdditionalCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="AirWaybill_Application" Member="Applications" ThisKey="Id" OtherKey="AirWaybillId" Type="Application" />
       <Association Name="Brocker_AirWaybill" Member="Brocker" ThisKey="BrockerId" OtherKey="Id" Type="Brocker" IsForeignKey="true" />
       <Association Name="State_AirWaybill" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />

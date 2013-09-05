@@ -58,7 +58,12 @@ namespace Alicargo.Services.AirWaybill
                     GTDAdditionalFileName = x.GTDAdditionalFileName,
                     GTDFileName = x.GTDFileName,
                     TotalCount = aggregates[x.Id].TotalCount,
-                    TotalWeight = aggregates[x.Id].TotalWeight
+                    TotalWeight = aggregates[x.Id].TotalWeight,
+					AdditionalCost = x.AdditionalCost,
+					BrokerCost = x.BrokerCost,
+					CustomCost = x.CustomCost,
+					FlightCost = x.FlightCost,
+					ForwarderCost = x.ForwarderCost
                 }).ToArray();
 
             var total = _awbRepository.Count(brockerId);
@@ -96,11 +101,11 @@ namespace Alicargo.Services.AirWaybill
 				BrockerId = data.BrockerId,
 				GTDAdditionalFile = null,
 				GTDFile = null,
-				AdditionalСost = data.AdditionalСost,
-				BrokerСost = data.BrokerСost,
-				CustomСost = data.CustomСost,
-				FlightСost = data.FlightСost,
-				ForwarderСost = data.ForwarderСost
+				AdditionalCost = data.AdditionalCost,
+				BrokerCost = data.BrokerCost,
+				CustomCost = data.CustomCost,
+				FlightCost = data.FlightCost,
+				ForwarderCost = data.ForwarderCost
 			};
 		}
 

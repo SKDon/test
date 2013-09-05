@@ -21,10 +21,10 @@ namespace Alicargo.Contracts.Contracts
 		public long StateId { get; set; }
 		public DateTimeOffset StateChangeTimestamp { get; set; }
 
-		public decimal? FlightСost { get; set; }
-		public decimal? CustomСost { get; set; }
-		public decimal? BrokerСost { get; set; }
-		public decimal? ForwarderСost { get; set; }
-		public decimal? AdditionalСost { get; set; }
+		public decimal? FlightCost { get; set; }
+		public decimal? CustomCost { get; set; }
+		public decimal? BrokerCost { get; set; }
+		public decimal? ForwarderCost { get; set; }
+		public decimal? AdditionalCost { get; set; }
 	}
 }

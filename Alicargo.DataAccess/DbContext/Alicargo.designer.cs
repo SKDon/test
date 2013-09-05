@@ -4337,15 +4337,15 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.DateTimeOffset _StateChangeTimestamp;
 		
-		private System.Nullable<decimal> _FlightСost;
+		private System.Nullable<decimal> _FlightCost;
 		
-		private System.Nullable<decimal> _CustomСost;
+		private System.Nullable<decimal> _CustomCost;
 		
-		private System.Nullable<decimal> _BrokerСost;
+		private System.Nullable<decimal> _BrokerCost;
 		
-		private System.Nullable<decimal> _ForwarderСost;
+		private System.Nullable<decimal> _ForwarderCost;
 		
-		private System.Nullable<decimal> _AdditionalСost;
+		private System.Nullable<decimal> _AdditionalCost;
 		
 		private EntitySet<Application> _Applications;
 		
@@ -4399,16 +4399,16 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnStateIdChanged();
     partial void OnStateChangeTimestampChanging(System.DateTimeOffset value);
     partial void OnStateChangeTimestampChanged();
-    partial void OnFlightСostChanging(System.Nullable<decimal> value);
-    partial void OnFlightСostChanged();
-    partial void OnCustomСostChanging(System.Nullable<decimal> value);
-    partial void OnCustomСostChanged();
-    partial void OnBrokerСostChanging(System.Nullable<decimal> value);
-    partial void OnBrokerСostChanged();
-    partial void OnForwarderСostChanging(System.Nullable<decimal> value);
-    partial void OnForwarderСostChanged();
-    partial void OnAdditionalСostChanging(System.Nullable<decimal> value);
-    partial void OnAdditionalСostChanged();
+    partial void OnFlightCostChanging(System.Nullable<decimal> value);
+    partial void OnFlightCostChanged();
+    partial void OnCustomCostChanging(System.Nullable<decimal> value);
+    partial void OnCustomCostChanged();
+    partial void OnBrokerCostChanging(System.Nullable<decimal> value);
+    partial void OnBrokerCostChanged();
+    partial void OnForwarderCostChanging(System.Nullable<decimal> value);
+    partial void OnForwarderCostChanged();
+    partial void OnAdditionalCostChanging(System.Nullable<decimal> value);
+    partial void OnAdditionalCostChanged();
     #endregion
 		
 		public AirWaybill()
@@ -4847,102 +4847,102 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlightСost", DbType="Money")]
-		public System.Nullable<decimal> FlightСost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlightCost", DbType="Money")]
+		public System.Nullable<decimal> FlightCost
 		{
 			get
 			{
-				return this._FlightСost;
+				return this._FlightCost;
 			}
 			set
 			{
-				if ((this._FlightСost != value))
+				if ((this._FlightCost != value))
 				{
-					this.OnFlightСostChanging(value);
+					this.OnFlightCostChanging(value);
 					this.SendPropertyChanging();
-					this._FlightСost = value;
-					this.SendPropertyChanged("FlightСost");
-					this.OnFlightСostChanged();
+					this._FlightCost = value;
+					this.SendPropertyChanged("FlightCost");
+					this.OnFlightCostChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomСost", DbType="Money")]
-		public System.Nullable<decimal> CustomСost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomCost", DbType="Money")]
+		public System.Nullable<decimal> CustomCost
 		{
 			get
 			{
-				return this._CustomСost;
+				return this._CustomCost;
 			}
 			set
 			{
-				if ((this._CustomСost != value))
+				if ((this._CustomCost != value))
 				{
-					this.OnCustomСostChanging(value);
+					this.OnCustomCostChanging(value);
 					this.SendPropertyChanging();
-					this._CustomСost = value;
-					this.SendPropertyChanged("CustomСost");
-					this.OnCustomСostChanged();
+					this._CustomCost = value;
+					this.SendPropertyChanged("CustomCost");
+					this.OnCustomCostChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BrokerСost", DbType="Money")]
-		public System.Nullable<decimal> BrokerСost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BrokerCost", DbType="Money")]
+		public System.Nullable<decimal> BrokerCost
 		{
 			get
 			{
-				return this._BrokerСost;
+				return this._BrokerCost;
 			}
 			set
 			{
-				if ((this._BrokerСost != value))
+				if ((this._BrokerCost != value))
 				{
-					this.OnBrokerСostChanging(value);
+					this.OnBrokerCostChanging(value);
 					this.SendPropertyChanging();
-					this._BrokerСost = value;
-					this.SendPropertyChanged("BrokerСost");
-					this.OnBrokerСostChanged();
+					this._BrokerCost = value;
+					this.SendPropertyChanged("BrokerCost");
+					this.OnBrokerCostChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForwarderСost", DbType="Money")]
-		public System.Nullable<decimal> ForwarderСost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForwarderCost", DbType="Money")]
+		public System.Nullable<decimal> ForwarderCost
 		{
 			get
 			{
-				return this._ForwarderСost;
+				return this._ForwarderCost;
 			}
 			set
 			{
-				if ((this._ForwarderСost != value))
+				if ((this._ForwarderCost != value))
 				{
-					this.OnForwarderСostChanging(value);
+					this.OnForwarderCostChanging(value);
 					this.SendPropertyChanging();
-					this._ForwarderСost = value;
-					this.SendPropertyChanged("ForwarderСost");
-					this.OnForwarderСostChanged();
+					this._ForwarderCost = value;
+					this.SendPropertyChanged("ForwarderCost");
+					this.OnForwarderCostChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalСost", DbType="Money")]
-		public System.Nullable<decimal> AdditionalСost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalCost", DbType="Money")]
+		public System.Nullable<decimal> AdditionalCost
 		{
 			get
 			{
-				return this._AdditionalСost;
+				return this._AdditionalCost;
 			}
 			set
 			{
-				if ((this._AdditionalСost != value))
+				if ((this._AdditionalCost != value))
 				{
-					this.OnAdditionalСostChanging(value);
+					this.OnAdditionalCostChanging(value);
 					this.SendPropertyChanging();
-					this._AdditionalСost = value;
-					this.SendPropertyChanged("AdditionalСost");
-					this.OnAdditionalСostChanged();
+					this._AdditionalCost = value;
+					this.SendPropertyChanged("AdditionalCost");
+					this.OnAdditionalCostChanged();
 				}
 			}
 		}
