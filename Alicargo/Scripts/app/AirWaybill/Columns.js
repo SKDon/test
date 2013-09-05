@@ -74,11 +74,12 @@
 	}
 
 	function addBrokerColumns(columns) {
-
-
 		columns.push({
-			field: "FlightCost",
-			title: Alicargo.Localization.Entities_FlightCost
+			field: "BrokerCost",
+			title: Alicargo.Localization.Entities_BrokerCost
+		}, {
+			field: "CustomCost",
+			title: Alicargo.Localization.Entities_CustomCost
 		});
 
 		addEditButton(columns, Alicargo.Urls.Brocker_AWB);
