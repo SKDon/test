@@ -1,29 +1,29 @@
-﻿@using Resources
+﻿@using System.Reflection
+@using System.Resources
+@using Resources
 @inherits BaseWebViewPage
+
+@helper Generate(string prefix, ResourceManager manager, Type type)
+{
+	var properties = type.GetProperties(BindingFlags.GetProperty | BindingFlags.Static | BindingFlags.Public)
+						 .Where(x => x.PropertyType == typeof(string))
+						 .ToArray();
+
+	foreach (var property in properties)
+	{
+		var name = property.Name;
+		var value = manager.GetString(name);
+		var row = prefix + name + "='" + value.JavaScriptStringEncode() + "';";
+		@Html.Raw(row)
+	}
+}
 
 var Alicargo = (function($a){
 
 $a.Localization = (function($l){
 
-$l.Pages_AnError = "@Pages.AnError";
-$l.Pages_DeleteConfirm = "@Pages.DeleteConfirm";
-
-$l.Entities_CreationTimestamp = '@Entities.CreationTimestamp';
-$l.Entities_StateName = '@Entities.StateName';
-$l.Entities_AWB = '@Entities.AWB';
-$l.Entities_DepartureAirport = '@Entities.DepartureAirport';
-$l.Entities_ArrivalAirport = '@Entities.ArrivalAirport';
-$l.Entities_DateOfDeparture = '@Entities.DateOfDeparture';
-$l.Entities_DateOfArrival = '@Entities.DateOfArrival';
-$l.Entities_TotalCount = '@Entities.TotalCount';
-$l.Entities_TotalWeight = '@Entities.TotalWeight';
-$l.Entities_StateChangeTimestamp = '@Entities.StateChangeTimestamp';
-$l.Entities_GTD = '@Entities.GTD';
-$l.Entities_FlightCost = '@Entities.FlightCost';
-$l.Entities_CustomCost = '@Entities.CustomCost';
-$l.Entities_BrokerCost = '@Entities.BrokerCost';
-$l.Entities_ForwarderCost = '@Entities.ForwarderCost';
-$l.Entities_AdditionalCost = '@Entities.AdditionalCost';
+@Generate("$l.Entities_", Entities.ResourceManager, typeof(Entities))
+@Generate("$l.Pages_", Pages.ResourceManager, typeof(Pages))
 
 return $l;
 }($a.Localization || {}));

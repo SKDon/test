@@ -1,8 +1,8 @@
 ﻿@using Resources
 <style>
 	.container {
-		width: auto;
 		padding: 0 20px;
+		width: auto;
 	}
 </style>
 <p>
@@ -11,56 +11,7 @@
 <div id="client-grid" class="grid"></div>
 @section scripts
 {
-	<script>
-		$(function () {
-			var schema = {
-				model: {
-					id: "Id"
-				},
-				data: "Data",
-				total: "Total"
-			};
-
-			var error = function () { alert("@Pages.AnError"); };
-			
-			var dataSource = {
-				transport: {
-					read: {
-						dataType: "json",
-						url: '@Url.Action(MVC.Client.List())',
-						type: "POST"
-					}
-				},
-				schema: schema,
-				pageSize: 20,
-				serverPaging: true,
-				editable: true,
-				error: error
-			};
-
-			$("#client-grid").kendoGrid({
-				dataSource: dataSource,
-				filterable: false,
-				sortable: false,
-				pageable: true,
-				editable: false,
-				columns: [
-					{ field: "LegalEntity", title: '@Entities.LegalEntity' },
-					{ field: "Phone", title: '@Entities.OfficePhone' },
-					{ field: "Email", title: '@Entities.Email' },
-					{
-						command: [{
-							name: "custom-edit",
-							text: "",
-							click: function (e) {
-								var tr = $(e.target).closest("tr");
-								var data = this.dataItem(tr);
-								var url = '@Url.Action(MVC.Client.Edit())/' + data.Id;
-								window.location = url;
-							}
-						}], title: "&nbsp;", width: "53px"
-					}]
-			});
-		});
-	</script>
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
+	@Scripts.Render("~/Scripts/app/Client/Grid.js")
 }

@@ -581,6 +581,7 @@
     <Content Include="Install\init-db.sql" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
+    <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\it.js" />
     <Content Include="Scripts\app\CurrencyType.js" />
