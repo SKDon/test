@@ -5,18 +5,18 @@ using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.ModelBinders
 {
-	internal sealed class BrockerAWBModelBinder : DefaultModelBinder
+	internal sealed class BrokerAWBModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (BrockerAwbModel)base.BindModel(controllerContext, bindingContext);
+			var model = (BrokerAwbModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(controllerContext.HttpContext.Request, model);
 
 			return model;
 		}
 
-		private static void ReadFiles(HttpRequestBase request, BrockerAwbModel model)
+		private static void ReadFiles(HttpRequestBase request, BrokerAwbModel model)
 		{
 			if (model.GTDFile == null && model.GTDFileName == null)
 				request.ReadFile("GTDFile", (name, bytes) =>

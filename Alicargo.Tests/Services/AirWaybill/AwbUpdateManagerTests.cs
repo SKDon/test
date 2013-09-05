@@ -24,7 +24,7 @@ namespace Alicargo.Tests.Services.AirWaybill
         }
 
         [TestMethod, ExpectedException(typeof(UnexpectedStateException))]
-        public void Test_Update_BrockerAWBModel_CargoIsCustomsClearedStateId()
+        public void Test_Update_BrokerAWBModel_CargoIsCustomsClearedStateId()
         {
             var id = _context.Create<long>();
             var cargoIsCustomsClearedStateId = _context.Create<long>();
@@ -34,11 +34,11 @@ namespace Alicargo.Tests.Services.AirWaybill
             _context.StateConfig.SetupGet(x => x.CargoIsCustomsClearedStateId).Returns(cargoIsCustomsClearedStateId);
             _context.AirWaybillRepository.Setup(x => x.Get(id)).Returns(new[] { data });
 
-            _manager.Update(id, It.IsAny<BrockerAwbModel>());
+            _manager.Update(id, It.IsAny<BrokerAwbModel>());
         }
 
         [TestMethod]
-        public void Test_AwbUpdateManager_Map_BrockerAWBModel()
+        public void Test_AwbUpdateManager_Map_BrokerAWBModel()
         {
             var model = _context.Create<AirWaybillEditModel>();
             var data = new AirWaybillData();
@@ -53,7 +53,7 @@ namespace Alicargo.Tests.Services.AirWaybill
         [TestMethod]
         public void Test_AwbUpdateManager_Map_AirWaybillEditModel()
         {
-            var model = _context.Create<BrockerAwbModel>();
+            var model = _context.Create<BrokerAwbModel>();
             var data = new AirWaybillData();
 
             AwbUpdateManager.Map(model, data);

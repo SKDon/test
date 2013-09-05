@@ -40,7 +40,7 @@
     <Compile Include="Contracts\ApplicationDetailsData.cs" />
     <Compile Include="Contracts\ApplicationListItemData.cs" />
     <Compile Include="Contracts\AuthenticationData.cs" />
-    <Compile Include="Contracts\BrockerData.cs" />
+    <Compile Include="Contracts\BrokerData.cs" />
     <Compile Include="Contracts\CarrierData.cs" />
     <Compile Include="Contracts\ClientData.cs" />
     <Compile Include="Contracts\CountryData.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
     <Compile Include="Repositories\IAuthenticationRepository.cs" />
     <Compile Include="Repositories\IAWBRepository.cs" />
-    <Compile Include="Repositories\IBrockerRepository.cs" />
+    <Compile Include="Repositories\IBrokerRepository.cs" />
     <Compile Include="Repositories\ICarrierRepository.cs" />
     <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />

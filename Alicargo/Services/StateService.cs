@@ -50,10 +50,10 @@ namespace Alicargo.Services
 				return _stateRepository.GetAvailableStates(RoleType.Sender).Except(_stateConfig.AwbStates).ToArray();
 			}
 
-			// todo: 3. a brocker should not be here because he don't use states
-			if (_identity.IsInRole(RoleType.Brocker))
+			// todo: 3. a Broker should not be here because he don't use states
+			if (_identity.IsInRole(RoleType.Broker))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Brocker);
+				return _stateRepository.GetAvailableStates(RoleType.Broker);
 			}
 
 			throw new InvalidLogicException("Unsupported role");
@@ -81,10 +81,10 @@ namespace Alicargo.Services
 				return _stateRepository.GetVisibleStates(RoleType.Sender);
 			}
 
-			// todo: 3. brocker should not be here because he don't use states
-			if (_identity.IsInRole(RoleType.Brocker))
+			// todo: 3. Broker should not be here because he don't use states
+			if (_identity.IsInRole(RoleType.Broker))
 			{
-				return _stateRepository.GetVisibleStates(RoleType.Brocker);
+				return _stateRepository.GetVisibleStates(RoleType.Broker);
 			}
 
 			throw new InvalidLogicException();

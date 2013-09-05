@@ -82,7 +82,7 @@
 			title: Alicargo.Localization.Entities_CustomCost
 		});
 
-		addEditButton(columns, Alicargo.Urls.Brocker_AWB);
+		addEditButton(columns, Alicargo.Urls.Broker_AWB);
 	}
 
 	$a.AddColumns = function () {

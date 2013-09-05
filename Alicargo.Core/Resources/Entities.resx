@@ -261,7 +261,7 @@
   <data name="StateChangeTimestamp" xml:space="preserve">
     <value>Дата сметы статуса</value>
   </data>
-  <data name="Brocker" xml:space="preserve">
+  <data name="Broker" xml:space="preserve">
     <value>Брокер</value>
   </data>
   <data name="TotalCount" xml:space="preserve">

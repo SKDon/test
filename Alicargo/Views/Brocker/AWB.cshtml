@@ -1,7 +1,0 @@
-﻿@using Alicargo.Helpers
-@model Alicargo.ViewModels.AirWaybill.BrockerAwbModel
-<h3>
-	@Resources.Entities.AWB:
-	@ViewBag.AWB
-</h3>
-@Html.EditPage("", Url.Action(MVC.Brocker.AWB()), Resources.Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))

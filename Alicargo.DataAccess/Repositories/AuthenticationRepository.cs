@@ -25,8 +25,8 @@ namespace Alicargo.DataAccess.Repositories
                 case RoleType.Admin:
                     return Context.Admins.Any(x => x.UserId == userId);
 
-                case RoleType.Brocker:
-                    return Context.Brockers.Any(x => x.UserId == userId);
+                case RoleType.Broker:
+                    return Context.Brokers.Any(x => x.UserId == userId);
 
                 case RoleType.Client:
                     return Context.Clients.Any(x => x.UserId == userId);

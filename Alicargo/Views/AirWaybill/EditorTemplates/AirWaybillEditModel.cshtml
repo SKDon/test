@@ -1,12 +1,12 @@
 ﻿@using Resources
 @inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AirWaybillEditModel>
 
-@helper SelectBrocker()
+@helper SelectBroker()
 {
-	var name = Html.IdFor(x => x.BrockerId).ToHtmlString();
-	var action = MVC.Brocker.Select(name, Model == null
+	var name = Html.IdFor(x => x.BrokerId).ToHtmlString();
+	var action = MVC.Broker.Select(name, Model == null
 		? (long?) null
-		: Model.BrockerId);
+		: Model.BrokerId);
 	@Html.Action(action)
 }
 
@@ -73,8 +73,8 @@
 	<div class="row">
 		<div class="span4">
 			@Html.EditorWithLabelFor(model => model.Bill)
-			@Html.LabelFor(x => x.BrockerId)
-			@SelectBrocker()
+			@Html.LabelFor(x => x.BrokerId)
+			@SelectBroker()
 		</div>
 		<div class="span4">
 			@Html.EditorWithLabelFor(model => model.DepartureAirport)

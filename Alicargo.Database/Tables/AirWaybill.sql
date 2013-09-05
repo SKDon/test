@@ -7,7 +7,7 @@
 	[DateOfDeparture]	DATETIMEOFFSET (7)	NOT NULL,
 	[DateOfArrival]		DATETIMEOFFSET (7)	NOT NULL,
 
-	[BrockerId]			BIGINT				NOT NULL,
+	[BrokerId]			BIGINT				NOT NULL,
 	[GTD]				NVARCHAR (320)		NULL,
 	[Bill]				NVARCHAR (320)		NOT NULL,
 
@@ -32,14 +32,14 @@
 	[AdditionalCost]	MONEY				NULL,
 
 	CONSTRAINT [PK_dbo.AirWaybill] PRIMARY KEY CLUSTERED ([Id] ASC),
-	CONSTRAINT [FK_dbo.AirWaybill_dbo.Brocker_BrockerId] FOREIGN KEY ([BrockerId]) REFERENCES [dbo].[Brocker] ([Id]),
+	CONSTRAINT [FK_dbo.AirWaybill_dbo.Broker_BrokerId] FOREIGN KEY ([BrokerId]) REFERENCES [dbo].[Broker] ([Id]),
 	CONSTRAINT [FK_dbo.AirWaybill_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id])
 );
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_BrockerId]
-	ON [dbo].[AirWaybill]([BrockerId] ASC);
+CREATE NONCLUSTERED INDEX [IX_BrokerId]
+	ON [dbo].[AirWaybill]([BrokerId] ASC);
 
 GO
 

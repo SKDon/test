@@ -41,14 +41,14 @@ namespace Alicargo.Services.Email
         private void SendOnCreate(long id)
         {
             var model = _awbPresenter.GetData(id);
-            var brocker = _awbPresenter.GetBrocker(model.BrockerId);
+            var broker = _awbPresenter.GetBroker(model.BrokerId);
 
             var to = new[]
                 {
                     new Recipient
                         {
-                            Culture = brocker.TwoLetterISOLanguageName,
-                            Email = brocker.Email
+                            Culture = broker.TwoLetterISOLanguageName,
+                            Email = broker.Email
                         }
                 }
                 .Concat(_messageBuilder.GetForwarderEmails())

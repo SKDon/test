@@ -10,7 +10,7 @@ namespace Alicargo.App_Start
 		public static void RegisterBinders(ModelBinderDictionary binders)
 		{
 			binders.Add(typeof(AirWaybillEditModel), new AirWaybillModelBinder());
-			binders.Add(typeof(BrockerAwbModel), new BrockerAWBModelBinder());
+			binders.Add(typeof(BrokerAwbModel), new BrokerAWBModelBinder());
 			binders.Add(typeof(SenderAwbModel), new SenderAwbModelBinder());
 			binders.Add(typeof(ApplicationEditModel), new ApplicationModelBinder());
 			binders.Add(typeof(ApplicationSenderEdit), new ApplicationSenderEditModelBinder());

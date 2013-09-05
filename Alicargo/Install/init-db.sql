@@ -20,7 +20,7 @@ SET IDENTITY_INSERT [dbo].[User] ON;
 BEGIN TRANSACTION;
 INSERT INTO [dbo].[User]([Id], [Login], [PasswordHash], [PasswordSalt], [TwoLetterISOLanguageName])
 SELECT 1, N'Admin', 0xD620502F233C7DE84C19612F3BFB3C9AF4F18485B8E4D7F3A0C82CBE8E75B0A3, 0x811BE7CE29ABCC4CABF9628D1FEBF5FB, N'ru' UNION ALL
-SELECT 2, N'Brocker', 0x98920C44039CADB7F0D7A9A784AF89E715AE3B956B559D758C0B6A4F41D27A0E, 0xCD44B21CC1C2D94FAE61E35D83B38BC1, N'ru' UNION ALL
+SELECT 2, N'Broker', 0x98920C44039CADB7F0D7A9A784AF89E715AE3B956B559D758C0B6A4F41D27A0E, 0xCD44B21CC1C2D94FAE61E35D83B38BC1, N'ru' UNION ALL
 SELECT 3, N'Forwarder', 0xB9CBD42D8C848D09917995045022ECADF7789301E24DD84F6AD05D574368A056, 0x911C9CB1AE955341A11C4E6EB4A4013B, N'ru' UNION ALL
 SELECT 4, N'Sender', 0x72CCEE115CA2264BAF818D81ACC90AFE1343CEC1C21B98B6A31A6DF0EBDFF0F5, 0x929F9FA36D67C242A4113CBE6A49952A, N'ru'
 COMMIT;
@@ -68,10 +68,10 @@ INSERT [dbo].[StateLocalization] ([Name], [TwoLetterISOLanguageName], [StateId])
 INSERT [dbo].[StateLocalization] ([Name], [TwoLetterISOLanguageName], [StateId]) VALUES (N'Груз готов для забора', N'ru', 15)
 INSERT [dbo].[StateLocalization] ([Name], [TwoLetterISOLanguageName], [StateId]) VALUES (N'Car ready to pick-up', N'it', 15)
 INSERT [dbo].[StateLocalization] ([Name], [TwoLetterISOLanguageName], [StateId]) VALUES (N'Car ready to pick-up', N'en', 15)
-/****** Object:  Table [dbo].[Brocker]    Script Date: 05/18/2013 14:17:27 ******/
-SET IDENTITY_INSERT [dbo].[Brocker] ON
-INSERT [dbo].[Brocker] ([Id], [UserId], [Name], [Email]) VALUES (1, 2, N'Brocker', N'Brocker@timez.org')
-SET IDENTITY_INSERT [dbo].[Brocker] OFF
+/****** Object:  Table [dbo].[Broker]    Script Date: 05/18/2013 14:17:27 ******/
+SET IDENTITY_INSERT [dbo].[Broker] ON
+INSERT [dbo].[Broker] ([Id], [UserId], [Name], [Email]) VALUES (1, 2, N'Broker', N'Broker@timez.org')
+SET IDENTITY_INSERT [dbo].[Broker] OFF
 /****** Object:  Table [dbo].[AvailableState]    Script Date: 05/18/2013 14:17:27 ******/
 INSERT [dbo].[AvailableState] ([RoleId], [StateId]) VALUES (1, 1)
 INSERT [dbo].[AvailableState] ([RoleId], [StateId]) VALUES (2, 1)

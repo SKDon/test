@@ -79,7 +79,7 @@ namespace Alicargo.Services.AirWaybill
 				ArrivalAirport = model.ArrivalAirport,
 				Bill = model.Bill,
 				DepartureAirport = model.DepartureAirport,
-				BrockerId = model.BrockerId,
+				BrokerId = model.BrokerId,
 				DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString),
 				DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString),
 				GTD = null,

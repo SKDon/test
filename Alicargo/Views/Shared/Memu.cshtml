@@ -1,5 +1,4 @@
 ﻿@using Alicargo.Contracts.Enums
-@using Alicargo.Core.Localization
 @inherits BaseWebViewPage
 
 @helper ClientMenu()
@@ -30,7 +29,7 @@
 		<ul class="dropdown-menu">
 			<li>@Html.ActionLink(@Resources.Pages.Clients, MVC.Client.Index())</li>
 			<li>@Html.ActionLink(@Resources.Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
-			<li>@Html.ActionLink(@Resources.Pages.Brockers, MVC.User.Index(RoleType.Brocker))</li>
+			<li>@Html.ActionLink(@Resources.Pages.Brokers, MVC.User.Index(RoleType.Broker))</li>
 			<li>@Html.ActionLink(@Resources.Pages.Forwarders, MVC.User.Index(RoleType.Forwarder))</li>
 			<li>@Html.ActionLink(@Resources.Pages.Senders, MVC.User.Index(RoleType.Sender))</li>
 		</ul>
@@ -47,9 +46,9 @@
 	}
 }
 
-@helper BrockerMenu()
+@helper BrokerMenu()
 {
-	if (IdentityService.IsInRole(RoleType.Brocker))
+	if (IdentityService.IsInRole(RoleType.Broker))
 	{	
 	<li>@Html.ActionLink(Resources.Entities.AirWayBill, MVC.AirWaybill.Index())</li>
 	}
@@ -62,7 +61,7 @@
 			<div class="container">
 				@Html.ActionLink("Alicargo", MVC.Home.Index(), new { @class = "brand" })
 				<ul class="nav">
-					@BrockerMenu()
+					@BrokerMenu()
 					@ClientMenu()
 					@SenderMenu()
 					@ForwarderMenu()

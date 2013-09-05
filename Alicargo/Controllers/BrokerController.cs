@@ -12,20 +12,20 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
-	public partial class BrockerController : Controller
+	public partial class BrokerController : Controller
 	{
 		private readonly IAwbRepository _awbRepository;
 		private readonly IAwbUpdateManager _awbUpdateManager;
-		private readonly IBrockerRepository _brockerRepository;
+		private readonly IBrokerRepository _brokerRepository;
 		private readonly IStateConfig _stateConfig;
 
-		public BrockerController(
-			IBrockerRepository brockerRepository,
+		public BrokerController(
+			IBrokerRepository brokerRepository,
 			IStateConfig stateConfig,
 			IAwbRepository awbRepository,
 			IAwbUpdateManager awbUpdateManager)
 		{
-			_brockerRepository = brockerRepository;
+			_brokerRepository = brokerRepository;
 			_stateConfig = stateConfig;
 			_awbRepository = awbRepository;
 			_awbUpdateManager = awbUpdateManager;
@@ -34,7 +34,7 @@ namespace Alicargo.Controllers
 		[ChildActionOnly]
 		public virtual PartialViewResult Select(string name, long? selectedId)
 		{
-			var all = _brockerRepository.GetAll();
+			var all = _brokerRepository.GetAll();
 
 			var model = new SelectModel
 			{
@@ -48,7 +48,7 @@ namespace Alicargo.Controllers
 			return PartialView(model);
 		}
 
-		[Access(RoleType.Brocker), HttpGet]
+		[Access(RoleType.Broker), HttpGet]
 		public virtual ViewResult AWB(long id)
 		{
 			var data = _awbRepository.Get(id).First();
@@ -65,9 +65,9 @@ namespace Alicargo.Controllers
 			return View(model);
 		}
 
-		private static BrockerAwbModel Map(AirWaybillData data)
+		private static BrokerAwbModel Map(AirWaybillData data)
 		{
-			return new BrockerAwbModel
+			return new BrokerAwbModel
 			{
 				GTD = data.GTD,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
@@ -90,8 +90,8 @@ namespace Alicargo.Controllers
 		}
 
 		// todo: 1.5. bb test
-		[Access(RoleType.Brocker), HttpPost]
-		public virtual ActionResult AWB(long id, BrockerAwbModel model)
+		[Access(RoleType.Broker), HttpPost]
+		public virtual ActionResult AWB(long id, BrokerAwbModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -117,7 +117,7 @@ namespace Alicargo.Controllers
 				throw;
 			}
 
-			return RedirectToAction(MVC.Brocker.AWB(id));
+			return RedirectToAction(MVC.Broker.AWB(id));
 		}
 	}
 }

@@ -126,7 +126,7 @@
   <data name="Authentication" xml:space="preserve">
     <value>Autenticazione</value>
   </data>
-  <data name="Brockers" xml:space="preserve">
+  <data name="Brokers" xml:space="preserve">
     <value>Brokers</value>
   </data>
   <data name="SignIn" xml:space="preserve">
@@ -150,7 +150,7 @@
   <data name="Add" xml:space="preserve">
     <value>Aggiungi</value>
   </data>
-  <data name="BrockerAdd" xml:space="preserve">
+  <data name="BrokerAdd" xml:space="preserve">
     <value>Aggiungi mediatore</value>
   </data>
   <data name="ClientAdd" xml:space="preserve">

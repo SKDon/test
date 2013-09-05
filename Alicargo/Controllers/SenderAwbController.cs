@@ -35,7 +35,7 @@ namespace Alicargo.Controllers
 				AWBFileName = data.AWBFileName,
 				ArrivalAirport = data.ArrivalAirport,
 				Bill = data.Bill,
-				BrockerId = data.BrockerId,
+				BrokerId = data.BrokerId,
 				DateOfArrivalLocalString = data.DateOfArrival.ToLocalShortDateString(),
 				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
 				DepartureAirport = data.DepartureAirport,

@@ -26,8 +26,8 @@ namespace Alicargo.ViewModels.AirWaybill
 		[DisplayNameLocalized(typeof(Entities), "GTD")]
 		public string GTD { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Brocker")]
-		public long BrockerId { get; set; }
+		[Required, DisplayNameLocalized(typeof(Entities), "Broker")]
+		public long BrokerId { get; set; }
 
 		// todo: 3. localization of cost fields
 		[DisplayNameLocalized(typeof(Entities), "FlightCost")]

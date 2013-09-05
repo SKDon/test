@@ -52,7 +52,7 @@ namespace Alicargo.BlackBox.Tests
 		{
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
-			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Broker)).Returns(false);
 
 			foreach (var state in _stateConfig.AwbStates)
 			{
@@ -67,7 +67,7 @@ namespace Alicargo.BlackBox.Tests
 		{
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(true);
-			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Broker)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Forwarder)).Returns(false);
 
 			_stateService.HasPermissionToSetState(_stateConfig.CargoIsFlewStateId).Should().BeTrue();
@@ -82,7 +82,7 @@ namespace Alicargo.BlackBox.Tests
 		{
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
-			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Broker)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Forwarder)).Returns(true);
 
 			_stateService.HasPermissionToSetState(_stateConfig.CargoIsFlewStateId).Should().BeFalse();
@@ -93,18 +93,18 @@ namespace Alicargo.BlackBox.Tests
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_HasPermissionToSetState_Awb_Brocker()
+		public void Test_HasPermissionToSetState_Awb_Broker()
 		{
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
-			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(true);
+			_identityService.Setup(x => x.IsInRole(RoleType.Broker)).Returns(true);
 
 			foreach (var state in _stateConfig.AwbStates)
 			{
 				_stateService.HasPermissionToSetState(state).Should().BeTrue();
 			}
 
-			_identityService.Verify(x => x.IsInRole(RoleType.Brocker));
+			_identityService.Verify(x => x.IsInRole(RoleType.Broker));
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -113,7 +113,7 @@ namespace Alicargo.BlackBox.Tests
 			_identityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(true);
 			_identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
-			_identityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+			_identityService.Setup(x => x.IsInRole(RoleType.Broker)).Returns(false);
 			_identityService.Setup(x => x.IsInRole(RoleType.Forwarder)).Returns(false);
 
 			foreach (var state in _stateConfig.AwbStates)

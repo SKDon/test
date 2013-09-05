@@ -1,6 +1,6 @@
 ﻿namespace Alicargo.Contracts.Contracts
 {
-	public sealed class BrockerData
+	public sealed class BrokerData
 	{
 		public string Name { get; set; }
 		public long Id { get; set; }

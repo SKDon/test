@@ -42,9 +42,9 @@ namespace Alicargo.DataAccess.DbContext
     partial void InsertAvailableState(AvailableState instance);
     partial void UpdateAvailableState(AvailableState instance);
     partial void DeleteAvailableState(AvailableState instance);
-    partial void InsertBrocker(Brocker instance);
-    partial void UpdateBrocker(Brocker instance);
-    partial void DeleteBrocker(Brocker instance);
+    partial void InsertBroker(Broker instance);
+    partial void UpdateBroker(Broker instance);
+    partial void DeleteBroker(Broker instance);
     partial void InsertCarrier(Carrier instance);
     partial void UpdateCarrier(Carrier instance);
     partial void DeleteCarrier(Carrier instance);
@@ -133,11 +133,11 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		internal System.Data.Linq.Table<Brocker> Brockers
+		internal System.Data.Linq.Table<Broker> Brokers
 		{
 			get
 			{
-				return this.GetTable<Brocker>();
+				return this.GetTable<Broker>();
 			}
 		}
 		
@@ -1830,8 +1830,8 @@ namespace Alicargo.DataAccess.DbContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Brocker")]
-	public sealed partial class Brocker : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Broker")]
+	public sealed partial class Broker : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1862,7 +1862,7 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnEmailChanged();
     #endregion
 		
-		public Brocker()
+		public Broker()
 		{
 			this._AirWaybills = new EntitySet<AirWaybill>(new Action<AirWaybill>(this.attach_AirWaybills), new Action<AirWaybill>(this.detach_AirWaybills));
 			this._User = default(EntityRef<User>);
@@ -1953,7 +1953,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Brocker_AirWaybill", Storage="_AirWaybills", ThisKey="Id", OtherKey="BrockerId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Broker_AirWaybill", Storage="_AirWaybills", ThisKey="Id", OtherKey="BrokerId")]
 		public EntitySet<AirWaybill> AirWaybills
 		{
 			get
@@ -1966,7 +1966,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Brocker", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Broker", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public User User
 		{
 			get
@@ -1983,12 +1983,12 @@ namespace Alicargo.DataAccess.DbContext
 					if ((previousValue != null))
 					{
 						this._User.Entity = null;
-						previousValue.Brockers.Remove(this);
+						previousValue.Brokers.Remove(this);
 					}
 					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.Brockers.Add(this);
+						value.Brokers.Add(this);
 						this._UserId = value.Id;
 					}
 					else
@@ -2023,13 +2023,13 @@ namespace Alicargo.DataAccess.DbContext
 		private void attach_AirWaybills(AirWaybill entity)
 		{
 			this.SendPropertyChanging();
-			entity.Brocker = this;
+			entity.Broker = this;
 		}
 		
 		private void detach_AirWaybills(AirWaybill entity)
 		{
 			this.SendPropertyChanging();
-			entity.Brocker = null;
+			entity.Broker = null;
 		}
 	}
 	
@@ -4009,7 +4009,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntitySet<Admin> _Admins;
 		
-		private EntitySet<Brocker> _Brockers;
+		private EntitySet<Broker> _Brokers;
 		
 		private EntitySet<Client> _Clients;
 		
@@ -4036,7 +4036,7 @@ namespace Alicargo.DataAccess.DbContext
 		public User()
 		{
 			this._Admins = new EntitySet<Admin>(new Action<Admin>(this.attach_Admins), new Action<Admin>(this.detach_Admins));
-			this._Brockers = new EntitySet<Brocker>(new Action<Brocker>(this.attach_Brockers), new Action<Brocker>(this.detach_Brockers));
+			this._Brokers = new EntitySet<Broker>(new Action<Broker>(this.attach_Brokers), new Action<Broker>(this.detach_Brokers));
 			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._Forwarders = new EntitySet<Forwarder>(new Action<Forwarder>(this.attach_Forwarders), new Action<Forwarder>(this.detach_Forwarders));
 			this._Senders = new EntitySet<Sender>(new Action<Sender>(this.attach_Senders), new Action<Sender>(this.detach_Senders));
@@ -4156,16 +4156,16 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Brocker", Storage="_Brockers", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<Brocker> Brockers
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Broker", Storage="_Brokers", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<Broker> Brokers
 		{
 			get
 			{
-				return this._Brockers;
+				return this._Brokers;
 			}
 			set
 			{
-				this._Brockers.Assign(value);
+				this._Brokers.Assign(value);
 			}
 		}
 		
@@ -4240,13 +4240,13 @@ namespace Alicargo.DataAccess.DbContext
 			entity.User = null;
 		}
 		
-		private void attach_Brockers(Brocker entity)
+		private void attach_Brokers(Broker entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = this;
 		}
 		
-		private void detach_Brockers(Brocker entity)
+		private void detach_Brokers(Broker entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -4307,7 +4307,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.DateTimeOffset _DateOfArrival;
 		
-		private long _BrockerId;
+		private long _BrokerId;
 		
 		private string _GTD;
 		
@@ -4349,7 +4349,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntitySet<Application> _Applications;
 		
-		private EntityRef<Brocker> _Brocker;
+		private EntityRef<Broker> _Broker;
 		
 		private EntityRef<State> _State;
 		
@@ -4369,8 +4369,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnDateOfDepartureChanged();
     partial void OnDateOfArrivalChanging(System.DateTimeOffset value);
     partial void OnDateOfArrivalChanged();
-    partial void OnBrockerIdChanging(long value);
-    partial void OnBrockerIdChanged();
+    partial void OnBrokerIdChanging(long value);
+    partial void OnBrokerIdChanged();
     partial void OnGTDChanging(string value);
     partial void OnGTDChanged();
     partial void OnBillChanging(string value);
@@ -4414,7 +4414,7 @@ namespace Alicargo.DataAccess.DbContext
 		public AirWaybill()
 		{
 			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
-			this._Brocker = default(EntityRef<Brocker>);
+			this._Broker = default(EntityRef<Broker>);
 			this._State = default(EntityRef<State>);
 			OnCreated();
 		}
@@ -4539,26 +4539,26 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BrockerId", DbType="BigInt NOT NULL")]
-		public long BrockerId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BrokerId", DbType="BigInt NOT NULL")]
+		public long BrokerId
 		{
 			get
 			{
-				return this._BrockerId;
+				return this._BrokerId;
 			}
 			set
 			{
-				if ((this._BrockerId != value))
+				if ((this._BrokerId != value))
 				{
-					if (this._Brocker.HasLoadedOrAssignedValue)
+					if (this._Broker.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnBrockerIdChanging(value);
+					this.OnBrokerIdChanging(value);
 					this.SendPropertyChanging();
-					this._BrockerId = value;
-					this.SendPropertyChanged("BrockerId");
-					this.OnBrockerIdChanged();
+					this._BrokerId = value;
+					this.SendPropertyChanged("BrokerId");
+					this.OnBrokerIdChanged();
 				}
 			}
 		}
@@ -4960,36 +4960,36 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Brocker_AirWaybill", Storage="_Brocker", ThisKey="BrockerId", OtherKey="Id", IsForeignKey=true)]
-		public Brocker Brocker
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Broker_AirWaybill", Storage="_Broker", ThisKey="BrokerId", OtherKey="Id", IsForeignKey=true)]
+		public Broker Broker
 		{
 			get
 			{
-				return this._Brocker.Entity;
+				return this._Broker.Entity;
 			}
 			set
 			{
-				Brocker previousValue = this._Brocker.Entity;
+				Broker previousValue = this._Broker.Entity;
 				if (((previousValue != value) 
-							|| (this._Brocker.HasLoadedOrAssignedValue == false)))
+							|| (this._Broker.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Brocker.Entity = null;
+						this._Broker.Entity = null;
 						previousValue.AirWaybills.Remove(this);
 					}
-					this._Brocker.Entity = value;
+					this._Broker.Entity = value;
 					if ((value != null))
 					{
 						value.AirWaybills.Add(this);
-						this._BrockerId = value.Id;
+						this._BrokerId = value.Id;
 					}
 					else
 					{
-						this._BrockerId = default(long);
+						this._BrokerId = default(long);
 					}
-					this.SendPropertyChanged("Brocker");
+					this.SendPropertyChanged("Broker");
 				}
 			}
 		}

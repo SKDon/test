@@ -13,22 +13,22 @@ namespace Alicargo.Services.AirWaybill
     internal sealed class AwbPresenter : IAwbPresenter
     {
         private readonly IAwbRepository _awbRepository;
-        private readonly IBrockerRepository _brockerRepository;
+        private readonly IBrokerRepository _brokerRepository;
         private readonly IStateService _stateService;
 
         public AwbPresenter(
             IAwbRepository awbRepository,
-            IBrockerRepository brockerRepository,
+            IBrokerRepository brokerRepository,
             IStateService stateService)
         {
             _awbRepository = awbRepository;
-            _brockerRepository = brockerRepository;
+            _brokerRepository = brokerRepository;
             _stateService = stateService;
         }
 
-        public ListCollection<AirWaybillListItem> List(int take, int skip, long? brockerId)
+        public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId)
         {
-            var data = _awbRepository.GetRange(skip, take, brockerId);
+            var data = _awbRepository.GetRange(skip, take, brokerId);
             var ids = data.Select(x => x.Id).ToArray();
 
             var aggregates = _awbRepository.GetAggregate(ids)
@@ -66,7 +66,7 @@ namespace Alicargo.Services.AirWaybill
 					ForwarderCost = x.ForwarderCost
                 }).ToArray();
 
-            var total = _awbRepository.Count(brockerId);
+            var total = _awbRepository.Count(brokerId);
 
             return new ListCollection<AirWaybillListItem> { Data = items, Total = total };
         }
@@ -98,7 +98,7 @@ namespace Alicargo.Services.AirWaybill
 				GTDFileName = data.GTDFileName,
 				InvoiceFile = null,
 				AWBFile = null,
-				BrockerId = data.BrockerId,
+				BrokerId = data.BrokerId,
 				GTDAdditionalFile = null,
 				GTDFile = null,
 				AdditionalCost = data.AdditionalCost,
@@ -119,9 +119,9 @@ namespace Alicargo.Services.AirWaybill
             return _awbRepository.GetAggregate(id).First();
         }
 
-        public BrockerData GetBrocker(long brockerId)
+        public BrokerData GetBroker(long brokerId)
         {
-            return _brockerRepository.Get(brockerId);
+            return _brokerRepository.Get(brokerId);
         }
     }
 }

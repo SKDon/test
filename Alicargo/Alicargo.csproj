@@ -164,7 +164,7 @@
     <Compile Include="AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="BrockerController.generated.cs">
+    <Compile Include="BrokerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="CarrierController.generated.cs">
@@ -176,7 +176,7 @@
     <Compile Include="Controllers\ApplicationListController.cs" />
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\BrockerController.cs" />
+    <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\SenderAwbController.cs" />
     <Compile Include="DynamicScriptController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -201,7 +201,7 @@
     <Compile Include="Helpers\StyleRelativePathTransformBundle.cs" />
     <Compile Include="Helpers\CustomHandleErrorInfo.cs" />
     <Compile Include="ModelBinders\ApplicationModelBinder.cs" />
-    <Compile Include="ModelBinders\BrockerAWBModelBinder.cs" />
+    <Compile Include="ModelBinders\BrokerAWBModelBinder.cs" />
     <Compile Include="ModelBinders\ApplicationSenderEditBinder.cs" />
     <Compile Include="ModelBinders\AirWaybillModelBinder.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
@@ -336,7 +336,7 @@
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
     <Compile Include="ViewModels\Application\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
-    <Compile Include="ViewModels\AirWaybill\BrockerAwbModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\BrokerAwbModel.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
@@ -1409,7 +1409,7 @@
     <Content Include="Views\Shared\EditorTemplates\SelectModel.cshtml" />
     <Content Include="Views\AirWaybill\Index.cshtml" />
     <Content Include="Views\AirWaybill\Edit.cshtml" />
-    <Content Include="Views\Brocker\Select.cshtml" />
+    <Content Include="Views\Broker\Select.cshtml" />
     <Content Include="Views\AirWaybill\DetailsTemplate.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\ApplicationList\ClientColumns.cshtml" />
@@ -1425,8 +1425,8 @@
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Transit\Edit.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
-    <Content Include="Views\Brocker\AWB.cshtml" />
-    <Content Include="Views\Brocker\EditorTemplates\BrockerAwbModel.cshtml" />
+    <Content Include="Views\Broker\AWB.cshtml" />
+    <Content Include="Views\Broker\EditorTemplates\BrokerAwbModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\Sender\ApplicationEdit.cshtml" />
     <Content Include="Views\Sender\EditorTemplates\ApplicationSenderEdit.cshtml" />

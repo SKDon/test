@@ -6,10 +6,10 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IAwbPresenter
 	{
-		ListCollection<AirWaybillListItem> List(int take, int skip, long? brockerId);
+		ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId);
 		AirWaybillEditModel Get(long id);
 		AirWaybillData GetData(long id);
 		AirWaybillAggregate GetAggregate(long id);
-		BrockerData GetBrocker(long brockerId);
+		BrokerData GetBroker(long brokerId);
 	}
 }

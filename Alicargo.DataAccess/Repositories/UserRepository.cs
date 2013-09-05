@@ -44,8 +44,8 @@ namespace Alicargo.DataAccess.Repositories
 						TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
 					}).ToArray();
 
-				case RoleType.Brocker:
-					return Context.Brockers.Select(x => new UserData
+				case RoleType.Broker:
+					return Context.Brokers.Select(x => new UserData
 					{
 						Id = x.Id,
 						UserId = x.UserId,
@@ -111,9 +111,9 @@ namespace Alicargo.DataAccess.Repositories
 			SetNewPassword(newPassword, entity.User);
 		}
 
-		public void UpdateBrocker(long id, string name, string login, string email, string newPassword)
+		public void UpdateBroker(long id, string name, string login, string email, string newPassword)
 		{
-			var entity = Context.Brockers.First(x => x.Id == id);
+			var entity = Context.Brokers.First(x => x.Id == id);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
@@ -139,9 +139,9 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		public void AddBrocker(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
+		public void AddBroker(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
 		{
-			Context.Brockers.InsertOnSubmit(new Brocker
+			Context.Brokers.InsertOnSubmit(new Broker
 			{
 				Name = name,
 				User = SetNewPassword(newPassword, new User { Login = login, TwoLetterISOLanguageName = twoLetterISOLanguageName }),

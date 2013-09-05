@@ -2,7 +2,6 @@
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Enums;
 using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 
@@ -35,7 +34,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Brocker, RoleType.Forwarder, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Broker, RoleType.Forwarder, RoleType.Sender)]
 		public virtual HttpStatusCodeResult SetState(long id, long stateId)
 		{
 			_applicationManager.SetState(id, stateId);

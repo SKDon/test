@@ -29,7 +29,7 @@ public static class MVC
     public static Alicargo.Controllers.ApplicationListController ApplicationList = new Alicargo.Controllers.T4MVC_ApplicationListController();
     public static Alicargo.Controllers.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.T4MVC_ApplicationUpdateController();
     public static Alicargo.Controllers.AuthenticationController Authentication = new Alicargo.Controllers.T4MVC_AuthenticationController();
-    public static Alicargo.Controllers.BrockerController Brocker = new Alicargo.Controllers.T4MVC_BrockerController();
+    public static Alicargo.Controllers.BrokerController Broker = new Alicargo.Controllers.T4MVC_BrokerController();
     public static Alicargo.Controllers.CarrierController Carrier = new Alicargo.Controllers.T4MVC_CarrierController();
     public static Alicargo.Controllers.ClientController Client = new Alicargo.Controllers.T4MVC_ClientController();
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();

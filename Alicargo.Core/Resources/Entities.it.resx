@@ -261,7 +261,7 @@
   <data name="StateChangeTimestamp" xml:space="preserve">
     <value>Controllare lo stato di stime</value>
   </data>
-  <data name="Brocker" xml:space="preserve">
+  <data name="Broker" xml:space="preserve">
     <value>Broker</value>
   </data>
   <data name="TotalCount" xml:space="preserve">

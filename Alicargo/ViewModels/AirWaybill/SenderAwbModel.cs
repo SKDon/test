@@ -23,8 +23,8 @@ namespace Alicargo.ViewModels.AirWaybill
 		[Required, DisplayNameLocalized(typeof(Entities), "DateOfArrival")]
 		public string DateOfArrivalLocalString { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Brocker")]
-		public long BrockerId { get; set; }
+		[Required, DisplayNameLocalized(typeof(Entities), "Broker")]
+		public long BrokerId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FlightCost")]
 		public decimal? FlightCost { get; set; }

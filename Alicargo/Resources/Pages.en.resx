@@ -144,11 +144,11 @@
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="BrockerAdd" xml:space="preserve">
-    <value>Add a brocker</value>
+  <data name="BrokerAdd" xml:space="preserve">
+    <value>Add a Broker</value>
   </data>
-  <data name="Brockers" xml:space="preserve">
-    <value>Brockers</value>
+  <data name="Brokers" xml:space="preserve">
+    <value>Brokers</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>

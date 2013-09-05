@@ -138,8 +138,8 @@
   <data name="BIC" xml:space="preserve">
     <value>BIC</value>
   </data>
-  <data name="Brocker" xml:space="preserve">
-    <value>Brocker</value>
+  <data name="Broker" xml:space="preserve">
+    <value>Broker</value>
   </data>
   <data name="CarrierName" xml:space="preserve">
     <value>Carrier</value>

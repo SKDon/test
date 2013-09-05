@@ -94,7 +94,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             var newData = CreateAirWaybillData();
             newData.StateId = data.StateId;
             newData.Id = data.Id;
-            newData.BrockerId = data.BrockerId;
+            newData.BrokerId = data.BrokerId;
             newData.CreationTimestamp = data.CreationTimestamp;
             newData.StateChangeTimestamp = data.StateChangeTimestamp;
 
@@ -213,7 +213,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             return _context.Fixture
                            .Build<AirWaybillData>()
                            .With(x => x.StateId, TestConstants.DefaultStateId)
-                           .With(x => x.BrockerId, TestConstants.TestBrockerId)
+                           .With(x => x.BrokerId, TestConstants.TestBrokerId)
                            .Create();
         }
     }

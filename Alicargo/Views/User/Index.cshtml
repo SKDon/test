@@ -1,7 +1,6 @@
 ﻿@using Alicargo.Contracts.Enums
-@using Alicargo.Core.Enums
 @using Resources
-@model Alicargo.Contracts.Enums.RoleType
+@model RoleType
 
 <h3>
 	@switch (Model)
@@ -13,8 +12,8 @@
 	 case RoleType.Sender:
 		@Pages.Senders
 		 break;
-	 case RoleType.Brocker:
-		@Pages.Brockers
+	 case RoleType.Broker:
+		@Pages.Brokers
 		 break;
 
 	 case RoleType.Forwarder:

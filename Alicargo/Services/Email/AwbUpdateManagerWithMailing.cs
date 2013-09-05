@@ -38,7 +38,7 @@ namespace Alicargo.Services.Email
             SendOnFileAdd(id, old);
         }
 
-        public void Update(long id, BrockerAwbModel model)
+        public void Update(long id, BrokerAwbModel model)
         {
             var old = _awbPresenter.GetData(id);
 
@@ -61,7 +61,7 @@ namespace Alicargo.Services.Email
             var model = _awbPresenter.GetData(id);
 
             var subject = _messageBuilder.DefaultSubject;
-            var brocker = _awbPresenter.GetBrocker(model.BrockerId);
+            var broker = _awbPresenter.GetBroker(model.BrokerId);
 
             if (oldData.InvoiceFileName == null && model.InvoiceFileName != null)
             {
@@ -80,7 +80,7 @@ namespace Alicargo.Services.Email
                 var to = _messageBuilder.GetSenderEmails()
                                         .Concat(_messageBuilder.GetAdminEmails())
                                         .Select(x => x.Email)
-                                        .Concat(new[] {brocker.Email})
+                                        .Concat(new[] {broker.Email})
                                         .ToArray();
                 var file = _awbRepository.GetAWBFile(model.Id);
 
@@ -90,7 +90,7 @@ namespace Alicargo.Services.Email
             if (oldData.PackingFileName == null && model.PackingFileName != null)
             {
                 var body = _messageBuilder.AwbPackingFileAdded(model);
-                var to = new[] {brocker.Email}.Concat(_messageBuilder.GetAdminEmails().Select(x => x.Email)).ToArray();
+                var to = new[] {broker.Email}.Concat(_messageBuilder.GetAdminEmails().Select(x => x.Email)).ToArray();
                 var file = _awbRepository.GetPackingFile(model.Id);
 
                 _mailSender.Send(new Message(subject, body, to) {Files = new[] {file}});

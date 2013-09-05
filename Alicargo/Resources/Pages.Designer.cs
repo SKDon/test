@@ -79,6 +79,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить референс.
+        /// </summary>
+        public static string AirWaybillAdd {
+            get {
+                return ResourceManager.GetString("AirWaybillAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Редактировать Air Way Bill.
+        /// </summary>
+        public static string AirWaybillEdit {
+            get {
+                return ResourceManager.GetString("AirWaybillEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Air Way Bills.
+        /// </summary>
+        public static string AirWaybills {
+            get {
+                return ResourceManager.GetString("AirWaybills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Задать референс.
+        /// </summary>
+        public static string AirWaybillSelect {
+            get {
+                return ResourceManager.GetString("AirWaybillSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уверены, что хотите задать референс?.
+        /// </summary>
+        public static string AirWaybillSetConfirm {
+            get {
+                return ResourceManager.GetString("AirWaybillSetConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Произошла ошибка.
         /// </summary>
         public static string AnError {
@@ -144,18 +189,18 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Добавить брокера.
         /// </summary>
-        public static string BrockerAdd {
+        public static string BrokerAdd {
             get {
-                return ResourceManager.GetString("BrockerAdd", resourceCulture);
+                return ResourceManager.GetString("BrokerAdd", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Брокеры.
         /// </summary>
-        public static string Brockers {
+        public static string Brokers {
             get {
-                return ResourceManager.GetString("Brockers", resourceCulture);
+                return ResourceManager.GetString("Brokers", resourceCulture);
             }
         }
         
@@ -304,20 +349,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нет файла.
-        /// </summary>
-        public static string NoFile {
-            get {
-                return ResourceManager.GetString("NoFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Не задано.
         /// </summary>
         public static string NoAirWaybill {
             get {
                 return ResourceManager.GetString("NoAirWaybill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нет файла.
+        /// </summary>
+        public static string NoFile {
+            get {
+                return ResourceManager.GetString("NoFile", resourceCulture);
             }
         }
         
@@ -336,51 +381,6 @@ namespace Resources {
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Добавить референс.
-        /// </summary>
-        public static string AirWaybillAdd {
-            get {
-                return ResourceManager.GetString("AirWaybillAdd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Редактировать Air Way Bill.
-        /// </summary>
-        public static string AirWaybillEdit {
-            get {
-                return ResourceManager.GetString("AirWaybillEdit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Air Way Bills.
-        /// </summary>
-        public static string AirWaybills {
-            get {
-                return ResourceManager.GetString("AirWaybills", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Задать референс.
-        /// </summary>
-        public static string AirWaybillSelect {
-            get {
-                return ResourceManager.GetString("AirWaybillSelect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Вы уверены, что хотите задать референс?.
-        /// </summary>
-        public static string AirWaybillSetConfirm {
-            get {
-                return ResourceManager.GetString("AirWaybillSetConfirm", resourceCulture);
             }
         }
         

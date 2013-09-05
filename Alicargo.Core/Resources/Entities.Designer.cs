@@ -135,9 +135,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Брокер.
         /// </summary>
-        public static string Brocker {
+        public static string Broker {
             get {
-                return ResourceManager.GetString("Brocker", resourceCulture);
+                return ResourceManager.GetString("Broker", resourceCulture);
             }
         }
         

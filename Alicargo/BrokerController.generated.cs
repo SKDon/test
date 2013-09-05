@@ -22,10 +22,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace Alicargo.Controllers
 {
-    public partial class BrockerController
+    public partial class BrokerController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected BrockerController(Dummy d) { }
+        protected BrokerController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -55,13 +55,13 @@ namespace Alicargo.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public BrockerController Actions { get { return MVC.Brocker; } }
+        public BrokerController Actions { get { return MVC.Broker; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Brocker";
+        public readonly string Name = "Broker";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Brocker";
+        public const string NameConst = "Broker";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -112,22 +112,22 @@ namespace Alicargo.Controllers
                 public readonly string AWB = "AWB";
                 public readonly string Select = "Select";
             }
-            public readonly string AWB = "~/Views/Brocker/AWB.cshtml";
-            public readonly string Select = "~/Views/Brocker/Select.cshtml";
+            public readonly string AWB = "~/Views/Broker/AWB.cshtml";
+            public readonly string Select = "~/Views/Broker/Select.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string BrockerAwbModel = "BrockerAwbModel";
+                public readonly string BrokerAwbModel = "BrokerAwbModel";
             }
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_BrockerController : Alicargo.Controllers.BrockerController
+    public partial class T4MVC_BrokerController : Alicargo.Controllers.BrokerController
     {
-        public T4MVC_BrockerController() : base(Dummy.Instance) { }
+        public T4MVC_BrokerController() : base(Dummy.Instance) { }
 
         partial void SelectOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string name, long? selectedId);
 
@@ -150,9 +150,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void AWBOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.BrockerAwbModel model);
+        partial void AWBOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.BrokerAwbModel model);
 
-        public override System.Web.Mvc.ActionResult AWB(long id, Alicargo.ViewModels.AirWaybill.BrockerAwbModel model)
+        public override System.Web.Mvc.ActionResult AWB(long id, Alicargo.ViewModels.AirWaybill.BrokerAwbModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AWB);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

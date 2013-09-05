@@ -30,13 +30,13 @@ namespace Alicargo.Tests.Services
             const int stateId = 1;
 
             _context.StateRepository.Setup(x => x.GetAvailableRoles(stateId))
-                    .Returns(new[] {RoleType.Brocker, RoleType.Client});
-            _context.IdentityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(true);
+                    .Returns(new[] {RoleType.Broker, RoleType.Client});
+            _context.IdentityService.Setup(x => x.IsInRole(RoleType.Broker)).Returns(true);
             _context.IdentityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
 
             Assert.IsTrue(_stateService.HasPermissionToSetState(stateId));
 
-            _context.IdentityService.Verify(x => x.IsInRole(RoleType.Brocker), Times.Once());
+            _context.IdentityService.Verify(x => x.IsInRole(RoleType.Broker), Times.Once());
             _context.StateRepository.Verify(x => x.GetAvailableRoles(stateId), Times.Once());
         }
 
@@ -46,13 +46,13 @@ namespace Alicargo.Tests.Services
             const int stateId = 1;
 
             _context.StateRepository.Setup(x => x.GetAvailableRoles(stateId))
-                    .Returns(new[] {RoleType.Brocker, RoleType.Client});
-            _context.IdentityService.Setup(x => x.IsInRole(RoleType.Brocker)).Returns(false);
+                    .Returns(new[] {RoleType.Broker, RoleType.Client});
+            _context.IdentityService.Setup(x => x.IsInRole(RoleType.Broker)).Returns(false);
             _context.IdentityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
 
             Assert.IsFalse(_stateService.HasPermissionToSetState(stateId));
 
-            _context.IdentityService.Verify(x => x.IsInRole(RoleType.Brocker), Times.Once());
+            _context.IdentityService.Verify(x => x.IsInRole(RoleType.Broker), Times.Once());
             _context.IdentityService.Verify(x => x.IsInRole(RoleType.Client), Times.Once());
             _context.StateRepository.Verify(x => x.GetAvailableRoles(stateId), Times.Once());
         }
@@ -96,9 +96,9 @@ namespace Alicargo.Tests.Services
 
         [Ignore] // todo: 3. this test should work because a broker can't set a state
         [TestMethod, ExpectedException(typeof (InvalidLogicException))]
-        public void Test_GetAvailableStatesToSet_Brocker()
+        public void Test_GetAvailableStatesToSet_Broker()
         {
-            var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().Except(new[] {RoleType.Brocker}).ToArray();
+            var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().Except(new[] {RoleType.Broker}).ToArray();
             foreach (var roleType in roles)
             {
                 var type = roleType;
@@ -139,9 +139,9 @@ namespace Alicargo.Tests.Services
 
         [Ignore] // 3. todo: this test should work because a broker can't view applications
         [TestMethod, ExpectedException(typeof (InvalidLogicException))]
-        public void Test_GetVisibleStates_Brocker()
+        public void Test_GetVisibleStates_Broker()
         {
-            var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().Except(new[] {RoleType.Brocker}).ToArray();
+            var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().Except(new[] {RoleType.Broker}).ToArray();
             foreach (var roleType in roles)
             {
                 var type = roleType;

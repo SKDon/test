@@ -42,7 +42,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			var model = _context
 				.Build<AirWaybillEditModel>()
-				.With(x => x.BrockerId, entity.BrockerId)
+				.With(x => x.BrokerId, entity.BrokerId)
 				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.Create();
@@ -79,7 +79,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Create()
 		{
-			var brocker = _db.Brockers.First();
+			var broker = _db.Brokers.First();
 			var applicationData = _db.Applications.First(x => !x.AirWaybillId.HasValue);
 
 			var count = _db.AirWaybills.Count();
@@ -87,7 +87,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _context
 				.Build<AirWaybillEditModel>()
 				.Without(x => x.GTD)
-				.With(x => x.BrockerId, brocker.Id)
+				.With(x => x.BrokerId, broker.Id)
 				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.Create();

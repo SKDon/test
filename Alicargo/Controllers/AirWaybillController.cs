@@ -21,7 +21,7 @@ namespace Alicargo.Controllers
         private readonly IAwbRepository _awbRepository;
         private readonly IAwbStateManager _awbStateManager;
         private readonly IAwbUpdateManager _awbUpdateManager;
-        private readonly IBrockerRepository _brockerRepository;
+        private readonly IBrokerRepository _brokerRepository;
         private readonly IIdentityService _identityService;
         private readonly IStateConfig _stateConfig;
 
@@ -33,7 +33,7 @@ namespace Alicargo.Controllers
             IStateConfig stateConfig,
             IAwbRepository awbRepository,
             IAwbStateManager awbStateManager,
-            IBrockerRepository brockerRepository,
+            IBrokerRepository brokerRepository,
             IIdentityService identityService)
         {
             _awbPresenter = awbPresenter;
@@ -43,7 +43,7 @@ namespace Alicargo.Controllers
             _stateConfig = stateConfig;
             _awbRepository = awbRepository;
             _awbStateManager = awbStateManager;
-            _brockerRepository = brockerRepository;
+            _brokerRepository = brokerRepository;
             _identityService = identityService;
         }
 
@@ -77,24 +77,24 @@ namespace Alicargo.Controllers
 
         #region List
 
-        [Access(RoleType.Admin, RoleType.Brocker, RoleType.Sender), HttpGet]
+        [Access(RoleType.Admin, RoleType.Broker, RoleType.Sender), HttpGet]
         public virtual ViewResult Index()
         {
             return View();
         }
 
-        [Access(RoleType.Admin, RoleType.Brocker, RoleType.Sender), HttpPost]
+        [Access(RoleType.Admin, RoleType.Broker, RoleType.Sender), HttpPost]
         public virtual JsonResult List(int take, int skip, int page, int pageSize)
         {
             // todo: 3. utility to get current broker
-            long? brockerId = null;
-            if (_identityService.IsInRole(RoleType.Brocker) && _identityService.Id.HasValue)
+            long? brokerId = null;
+            if (_identityService.IsInRole(RoleType.Broker) && _identityService.Id.HasValue)
             {
-                var brocker = _brockerRepository.GetByUserId(_identityService.Id.Value);
-                brockerId = brocker.Id;
+                var broker = _brokerRepository.GetByUserId(_identityService.Id.Value);
+                brokerId = broker.Id;
             }
 
-            var list = _awbPresenter.List(take, skip, brockerId);
+            var list = _awbPresenter.List(take, skip, brokerId);
 
             return Json(list);
         }
@@ -111,7 +111,7 @@ namespace Alicargo.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        [Access(RoleType.Admin, RoleType.Brocker), HttpPost]
+        [Access(RoleType.Admin, RoleType.Broker), HttpPost]
         public virtual ActionResult SetState(long id, long stateId)
         {
             _awbStateManager.SetState(id, stateId);
@@ -127,7 +127,7 @@ namespace Alicargo.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        [Access(RoleType.Admin, RoleType.Brocker), HttpPost]
+        [Access(RoleType.Admin, RoleType.Broker), HttpPost]
         public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
         {
             var data = _awbRepository.Get(id).First();

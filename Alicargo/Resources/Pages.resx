@@ -141,10 +141,10 @@
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
   </data>
-  <data name="BrockerAdd" xml:space="preserve">
+  <data name="BrokerAdd" xml:space="preserve">
     <value>Добавить брокера</value>
   </data>
-  <data name="Brockers" xml:space="preserve">
+  <data name="Brokers" xml:space="preserve">
     <value>Брокеры</value>
   </data>
   <data name="Cancel" xml:space="preserve">

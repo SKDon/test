@@ -58,7 +58,7 @@ namespace Alicargo.Tests.Services.AirWaybill
                                                          && data.ArrivalAirport == model.ArrivalAirport
                                                          && data.Bill == model.Bill
                                                          && data.DepartureAirport == model.DepartureAirport
-                                                         && data.BrockerId == model.BrockerId
+                                                         && data.BrokerId == model.BrokerId
                                                          &&
                                                          data.DateOfArrival ==
                                                          DateTimeOffset.Parse(model.DateOfArrivalLocalString)

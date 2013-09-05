@@ -38,7 +38,7 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
-		public void Update(long id, BrockerAwbModel model)
+		public void Update(long id, BrokerAwbModel model)
 		{
 			var data = _awbRepository.Get(id).First();
 
@@ -81,7 +81,7 @@ namespace Alicargo.Services.AirWaybill
 			to.DepartureAirport = @from.DepartureAirport;
 			to.GTD = @from.GTD;
 			to.GTDFileName = @from.GTDFileName;
-			to.BrockerId = @from.BrockerId;
+			to.BrokerId = @from.BrokerId;
 			to.GTDAdditionalFileName = @from.GTDAdditionalFileName;
 			to.DateOfArrival = DateTimeOffset.Parse(@from.DateOfArrivalLocalString);
 			to.DateOfDeparture = DateTimeOffset.Parse(@from.DateOfDepartureLocalString);
@@ -99,13 +99,13 @@ namespace Alicargo.Services.AirWaybill
 			to.DepartureAirport = @from.DepartureAirport;
 			to.DateOfArrival = DateTimeOffset.Parse(@from.DateOfArrivalLocalString);
 			to.DateOfDeparture = DateTimeOffset.Parse(@from.DateOfDepartureLocalString);
-			to.BrockerId = @from.BrockerId;
+			to.BrokerId = @from.BrokerId;
 			to.PackingFileName = @from.PackingFileName;
 			to.AWBFileName = @from.AWBFileName;
 			to.FlightCost = @from.FlightCost;
 		}
 
-		public static void Map(BrockerAwbModel @from, AirWaybillData to)
+		public static void Map(BrokerAwbModel @from, AirWaybillData to)
 		{
 			to.PackingFileName = @from.PackingFileName;
 			to.InvoiceFileName = @from.InvoiceFileName;

@@ -6,11 +6,11 @@ namespace Alicargo.Contracts.Repositories
 	public interface IAwbRepository
 	{
 		Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile);
-		long Count(long? brockerId = null);
+		long Count(long? brokerId = null);
 
 		AirWaybillData[] Get(params long[] ids);
 		AirWaybillData[] GetAll();
-		AirWaybillData[] GetRange(long skip, int take, long? brockerId = null);
+		AirWaybillData[] GetRange(long skip, int take, long? brokerId = null);
 		AirWaybillAggregate[] GetAggregate(params long[] ids);
 		string[] GetClientEmails(long id);
 

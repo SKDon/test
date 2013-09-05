@@ -7,7 +7,7 @@ $a.Roles = (function($r){
 
 $r.IsAdmin = @IdentityService.IsInRole(RoleType.Admin).ToString().ToLowerInvariant();
 $r.IsSender = @IdentityService.IsInRole(RoleType.Sender).ToString().ToLowerInvariant();
-$r.IsBroker = @IdentityService.IsInRole(RoleType.Brocker).ToString().ToLowerInvariant();
+$r.IsBroker = @IdentityService.IsInRole(RoleType.Broker).ToString().ToLowerInvariant();
 $r.IsClient = @IdentityService.IsInRole(RoleType.Client).ToString().ToLowerInvariant();
 $r.IsForwarder = @IdentityService.IsInRole(RoleType.Forwarder).ToString().ToLowerInvariant();
 

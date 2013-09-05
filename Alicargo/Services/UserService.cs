@@ -67,8 +67,8 @@ namespace Alicargo.Services
 					_userRepository.UpdateSender(model.Id, model.Name, model.Authentication.Login, model.Email, model.Authentication.NewPassword);
 					break;
 
-				case RoleType.Brocker:
-					_userRepository.UpdateBrocker(model.Id, model.Name, model.Authentication.Login, model.Email, model.Authentication.NewPassword);
+				case RoleType.Broker:
+					_userRepository.UpdateBroker(model.Id, model.Name, model.Authentication.Login, model.Email, model.Authentication.NewPassword);
 					break;
 
 				case RoleType.Forwarder:
@@ -99,8 +99,8 @@ namespace Alicargo.Services
 						model.Authentication.NewPassword, twoLetterISOLanguageName);
 					break;
 
-				case RoleType.Brocker:
-					_userRepository.AddBrocker(model.Id, model.Name, model.Authentication.Login, model.Email,
+				case RoleType.Broker:
+					_userRepository.AddBroker(model.Id, model.Name, model.Authentication.Login, model.Email,
 						model.Authentication.NewPassword, twoLetterISOLanguageName);
 					break;
 

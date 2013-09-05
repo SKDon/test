@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.Repositories
 				{
 					ArrivalAirport = x.ArrivalAirport,
 					Bill = x.Bill,
-					BrockerId = x.BrockerId,
+					BrokerId = x.BrokerId,
 					CreationTimestamp = x.CreationTimestamp,
 					DateOfArrival = x.DateOfArrival,
 					DateOfDeparture = x.DateOfDeparture,
@@ -66,19 +66,19 @@ namespace Alicargo.DataAccess.Repositories
 						  .ToArray();
 		}
 
-		public long Count(long? brockerId = null)
+		public long Count(long? brokerId = null)
 		{
-			return brockerId.HasValue
-					   ? Context.AirWaybills.Where(x => x.BrockerId == brockerId.Value).LongCount()
+			return brokerId.HasValue
+					   ? Context.AirWaybills.Where(x => x.BrokerId == brokerId.Value).LongCount()
 					   : Context.AirWaybills.LongCount();
 		}
 
-		public AirWaybillData[] GetRange(long skip, int take, long? brockerId = null)
+		public AirWaybillData[] GetRange(long skip, int take, long? brokerId = null)
 		{
 			var airWaybills = Context.AirWaybills.AsQueryable();
-			if (brockerId.HasValue)
+			if (brokerId.HasValue)
 			{
-				airWaybills = airWaybills.Where(x => x.BrockerId == brockerId.Value);
+				airWaybills = airWaybills.Where(x => x.BrokerId == brokerId.Value);
 			}
 			return airWaybills.Skip((int)skip)
 							  .Take(take)
@@ -226,7 +226,7 @@ namespace Alicargo.DataAccess.Repositories
 
 			to.ArrivalAirport = @from.ArrivalAirport;
 			to.Bill = @from.Bill;
-			to.BrockerId = @from.BrockerId;
+			to.BrokerId = @from.BrokerId;
 			to.DateOfArrival = @from.DateOfArrival;
 			to.DateOfDeparture = @from.DateOfDeparture;
 			to.DepartureAirport = @from.DepartureAirport;
