@@ -60,13 +60,17 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Constants = "Constants";
+            public readonly string Roles = "Roles";
+            public readonly string Urls = "Urls";
+            public readonly string Localization = "Localization";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Constants = "Constants";
+            public const string Roles = "Roles";
+            public const string Urls = "Urls";
+            public const string Localization = "Localization";
         }
 
 
@@ -80,9 +84,13 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Constants = "Constants";
+                public readonly string Localization = "Localization";
+                public readonly string Roles = "Roles";
+                public readonly string Urls = "Urls";
             }
-            public readonly string Constants = "~/Views/DynamicScript/Constants.cshtml";
+            public readonly string Localization = "~/Views/DynamicScript/Localization.cshtml";
+            public readonly string Roles = "~/Views/DynamicScript/Roles.cshtml";
+            public readonly string Urls = "~/Views/DynamicScript/Urls.cshtml";
         }
     }
 
@@ -91,12 +99,30 @@ namespace Alicargo.Controllers
     {
         public T4MVC_DynamicScriptController() : base(Dummy.Instance) { }
 
-        partial void ConstantsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+        partial void RolesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
 
-        public override System.Web.Mvc.ViewResult Constants()
+        public override System.Web.Mvc.PartialViewResult Roles()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Constants);
-            ConstantsOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Roles);
+            RolesOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void UrlsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        public override System.Web.Mvc.PartialViewResult Urls()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Urls);
+            UrlsOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void LocalizationOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        public override System.Web.Mvc.PartialViewResult Localization()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Localization);
+            LocalizationOverride(callInfo);
             return callInfo;
         }
 

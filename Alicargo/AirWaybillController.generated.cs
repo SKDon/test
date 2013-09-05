@@ -293,14 +293,12 @@ namespace Alicargo.Controllers
             public class _ViewNamesClass
             {
                 public readonly string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
-                public readonly string Columns = "Columns";
                 public readonly string Create = "Create";
                 public readonly string DetailsTemplate = "DetailsTemplate";
                 public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
             }
             public readonly string CargoIsCustomsClearedButton = "~/Views/AirWaybill/CargoIsCustomsClearedButton.cshtml";
-            public readonly string Columns = "~/Views/AirWaybill/Columns.cshtml";
             public readonly string Create = "~/Views/AirWaybill/Create.cshtml";
             public readonly string DetailsTemplate = "~/Views/AirWaybill/DetailsTemplate.cshtml";
             public readonly string Edit = "~/Views/AirWaybill/Edit.cshtml";

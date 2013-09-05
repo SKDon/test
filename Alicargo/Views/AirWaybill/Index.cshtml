@@ -1,58 +1,17 @@
-﻿@using Resources
-@inherits BaseWebViewPage
-
-<style>
+﻿<style>
 	.container {
 		padding: 0 20px;
 		width: auto;
 	}
 </style>
 <div id="AirWaybill-grid" class="grid"></div>
-<script type="text/x-kendo-template" id="AirWaybill-grid-details">@Html.Partial("DetailsTemplate")</script>
 
 @section scripts
 {
-	<script>
-		$(function() {
-			var schema = {
-				model: {
-					id: "Id"
-				},
-				data: "Data",
-				total: "Total"
-			};
-
-			var error = function() { alert("@Pages.AnError"); };
-
-			var dataSource = {
-				transport: {
-					read: {
-						dataType: "json",
-						url: '@Url.Action(MVC.AirWaybill.List())',
-						type: "POST"
-					}
-				},
-				schema: schema,
-				pageSize: 20,
-				serverPaging: true,
-				editable: true,
-				error: error
-			};
-
-			var getGrid = function() {
-				var grid = $("#AirWaybill-grid").data("kendoGrid");
-				getGrid = function() { return grid; };
-				return getGrid();
-			};
-
-			@Html.Partial("Columns")
-
-			$("#AirWaybill-grid").kendoGrid({
-				dataSource: dataSource,
-				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
-				detailTemplate: kendo.template($("#AirWaybill-grid-details").html()),
-				columns: columns
-			});
-		});
-	</script>
+	<script type="text/x-kendo-template" id="AirWaybill-grid-details">@Html.Partial("DetailsTemplate")</script>
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
+	@Scripts.Render("~/Scripts/app/AirWaybill/Columns.js")
+	@Scripts.Render("~/Scripts/app/AirWaybill/Grid.js")
 }

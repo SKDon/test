@@ -579,6 +579,8 @@
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
     <Content Include="Install\backup-db.sql" />
     <Content Include="Install\init-db.sql" />
+    <Content Include="Scripts\app\AirWaybill\Columns.js" />
+    <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\it.js" />
     <Content Include="Scripts\app\CurrencyType.js" />
@@ -1423,7 +1425,6 @@
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Transit\Edit.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
-    <None Include="Views\DynamicScript\Constants.cshtml" />
     <Content Include="Views\Brocker\AWB.cshtml" />
     <Content Include="Views\Brocker\EditorTemplates\BrockerAwbModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
@@ -1437,7 +1438,9 @@
     <Content Include="Views\Authentication\Client.cshtml" />
     <Content Include="Views\SenderAwb\Edit.cshtml" />
     <Content Include="Views\SenderAwb\EditorTemplates\SenderAwbModel.cshtml" />
-    <Content Include="Views\AirWaybill\Columns.cshtml" />
+    <Content Include="Views\DynamicScript\Roles.cshtml" />
+    <Content Include="Views\DynamicScript\Urls.cshtml" />
+    <Content Include="Views\DynamicScript\Localization.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

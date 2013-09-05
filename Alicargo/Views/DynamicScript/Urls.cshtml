@@ -1,0 +1,17 @@
+﻿@inherits BaseWebViewPage
+
+var Alicargo = (function($a){
+
+$a.Urls = (function($u){
+
+$u.AirWaybill_List = "@Url.Action(MVC.AirWaybill.List())";
+$u.AirWaybill_Edit = "@Url.Action(MVC.AirWaybill.Edit())";
+$u.AirWaybill_Delete = "@Url.Action(MVC.AirWaybill.Delete())";
+$u.SenderAwb_Edit = "@Url.Action(MVC.SenderAwb.Edit())";
+$u.Brocker_AWB = "@Url.Action(MVC.Brocker.AWB())";
+
+return $u;
+}($a.Urls || {}));
+
+return $a;
+}(Alicargo || {}))

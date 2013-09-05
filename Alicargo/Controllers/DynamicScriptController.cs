@@ -4,9 +4,26 @@ namespace Alicargo.Controllers
 {
 	public partial class DynamicScriptController : Controller
 	{
-		public virtual ViewResult Constants()
+		private const string ApplicationJavascriptContentType = "application/javascript";
+
+		protected override void OnResultExecuting(ResultExecutingContext filterContext)
 		{
-			return View();
+			Response.ContentType = ApplicationJavascriptContentType;
+		}
+
+		public virtual PartialViewResult Roles()
+		{
+			return PartialView();
+		}
+
+		public virtual PartialViewResult Urls()
+		{
+			return PartialView();
+		}
+
+		public virtual PartialViewResult Localization()
+		{
+			return PartialView();
 		}
 	}
 }
