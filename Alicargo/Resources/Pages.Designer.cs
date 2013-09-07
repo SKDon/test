@@ -79,7 +79,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добавить референс.
+        ///   Looks up a localized string similar to Добавить авианакладную.
         /// </summary>
         public static string AirWaybillAdd {
             get {

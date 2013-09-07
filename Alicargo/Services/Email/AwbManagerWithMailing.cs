@@ -33,9 +33,18 @@ namespace Alicargo.Services.Email
             return id;
         }
 
-        public void Delete(long id)
+	    public long Create(long applicationId, SenderAwbModel model)
+	    {
+			var id = _manager.Create(applicationId, model);
+
+			SendOnCreate(id);
+
+			return id;
+	    }
+
+	    public void Delete(long awbId)
         {
-            _manager.Delete(id);
+            _manager.Delete(awbId);
         }
 
         private void SendOnCreate(long id)

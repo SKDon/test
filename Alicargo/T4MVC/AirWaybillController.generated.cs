@@ -292,17 +292,21 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string AdminDetails = "AdminDetails";
+                public readonly string BrokerDetails = "BrokerDetails";
                 public readonly string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
                 public readonly string Create = "Create";
-                public readonly string DetailsTemplate = "DetailsTemplate";
                 public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
+                public readonly string SenderDetails = "SenderDetails";
             }
+            public readonly string AdminDetails = "~/Views/AirWaybill/AdminDetails.cshtml";
+            public readonly string BrokerDetails = "~/Views/AirWaybill/BrokerDetails.cshtml";
             public readonly string CargoIsCustomsClearedButton = "~/Views/AirWaybill/CargoIsCustomsClearedButton.cshtml";
             public readonly string Create = "~/Views/AirWaybill/Create.cshtml";
-            public readonly string DetailsTemplate = "~/Views/AirWaybill/DetailsTemplate.cshtml";
             public readonly string Edit = "~/Views/AirWaybill/Edit.cshtml";
             public readonly string Index = "~/Views/AirWaybill/Index.cshtml";
+            public readonly string SenderDetails = "~/Views/AirWaybill/SenderDetails.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

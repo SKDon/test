@@ -47,6 +47,12 @@ namespace Alicargo.Controllers
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Create()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SenderAwbController Actions { get { return MVC.SenderAwb; } }
@@ -64,12 +70,14 @@ namespace Alicargo.Controllers
         public class ActionNamesClass
         {
             public readonly string Edit = "Edit";
+            public readonly string Create = "Create";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Edit = "Edit";
+            public const string Create = "Create";
         }
 
 
@@ -78,6 +86,15 @@ namespace Alicargo.Controllers
         public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Edit
+        {
+            public readonly string id = "id";
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Create
         {
             public readonly string id = "id";
             public readonly string model = "model";
@@ -92,8 +109,10 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Create = "Create";
                 public readonly string Edit = "Edit";
             }
+            public readonly string Create = "~/Views/SenderAwb/Create.cshtml";
             public readonly string Edit = "~/Views/SenderAwb/Edit.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
@@ -128,6 +147,27 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             EditOverride(callInfo, id, model);
+            return callInfo;
+        }
+
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+
+        public override System.Web.Mvc.ActionResult Create(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            CreateOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.SenderAwbModel model);
+
+        public override System.Web.Mvc.ActionResult Create(long id, Alicargo.ViewModels.AirWaybill.SenderAwbModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            CreateOverride(callInfo, id, model);
             return callInfo;
         }
 

@@ -49,13 +49,13 @@ namespace Alicargo.Controllers
 
         #region Create
 
-        [Access(RoleType.Admin, RoleType.Sender)]
+        [Access(RoleType.Admin)]
         public virtual ActionResult Create(long applicationId)
         {
             return View();
         }
 
-        [HttpPost, Access(RoleType.Admin, RoleType.Sender)]
+        [HttpPost, Access(RoleType.Admin)]
         public virtual ActionResult Create(long applicationId, AirWaybillEditModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -67,6 +67,7 @@ namespace Alicargo.Controllers
             catch (DublicateException)
             {
                 ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
+
                 return View(model);
             }
 

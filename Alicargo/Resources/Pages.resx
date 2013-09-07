@@ -220,7 +220,7 @@
     <value>Пользователи</value>
   </data>
   <data name="AirWaybillAdd" xml:space="preserve">
-    <value>Добавить референс</value>
+    <value>Добавить авианакладную</value>
   </data>
   <data name="AirWaybillSelect" xml:space="preserve">
     <value>Задать референс</value>

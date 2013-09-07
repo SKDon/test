@@ -1449,6 +1449,7 @@
     <Content Include="Views\DynamicScript\Localization.cshtml" />
     <Content Include="Views\AirWaybill\SenderDetails.cshtml" />
     <Content Include="Views\AirWaybill\BrokerDetails.cshtml" />
+    <Content Include="Views\SenderAwb\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1495,6 +1496,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Pages.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Validation.it.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

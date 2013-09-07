@@ -76,7 +76,7 @@ namespace Alicargo.Tests.Services.AirWaybill
         }
 
         [TestMethod]
-        public void Test_AwbManager_Map()
+		public void Test_AwbManager_Map_AirWaybillEditModel()
         {
             var cargoIsFlewStateId = _context.Create<long>();
             var model = _context.Create<AirWaybillEditModel>();
@@ -89,6 +89,20 @@ namespace Alicargo.Tests.Services.AirWaybill
             data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));
             data.GTD.Should().BeNull();
         }
+
+		[TestMethod]
+		public void Test_AwbManager_Map_SenderAwbModel()
+		{
+			var cargoIsFlewStateId = _context.Create<long>();
+			var model = _context.Create<SenderAwbModel>();
+			var data = AwbManager.Map(model, cargoIsFlewStateId);
+
+			model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
+
+			data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
+			data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));
+			data.GTD.Should().BeNull();
+		}
 
         [TestMethod]
         public void Test_AwbManager_Delete()

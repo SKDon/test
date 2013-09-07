@@ -51,18 +51,59 @@ namespace Alicargo.Services.AirWaybill
 			return id();
 		}
 
-		public void Delete(long id)
+		public long Create(long applicationId, SenderAwbModel model)
 		{
-			var applicationDatas = _applicationRepository.GetByAirWaybill(id);
+			var data = Map(model, _stateConfig.CargoIsFlewStateId);
+
+			var id = _awbRepository.Add(data, null, null, model.PackingFile, null, model.AWBFile);
+
+			_unitOfWork.SaveChanges();
+
+			_applicationAwbManager.SetAwb(applicationId, id());
+
+			return id();
+		}
+
+		public void Delete(long awbId)
+		{
+			var applicationDatas = _applicationRepository.GetByAirWaybill(awbId);
 
 			foreach (var app in applicationDatas)
 			{
 				_applicationUpdater.SetAirWaybill(app.Id, null);
 			}
 
-			_awbRepository.Delete(id);
+			_awbRepository.Delete(awbId);
 
 			_unitOfWork.SaveChanges();
+		}
+
+		public static AirWaybillData Map(SenderAwbModel model, long cargoIsFlewStateId)
+		{
+			return new AirWaybillData
+			{
+				StateId = cargoIsFlewStateId,
+				CreationTimestamp = DateTimeOffset.UtcNow,
+				StateChangeTimestamp = DateTimeOffset.UtcNow,
+				Id = 0,
+				PackingFileName = model.PackingFileName,
+				InvoiceFileName = null,
+				AWBFileName = model.AWBFileName,
+				ArrivalAirport = model.ArrivalAirport,
+				Bill = model.Bill,
+				DepartureAirport = model.DepartureAirport,
+				BrokerId = model.BrokerId,
+				DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString),
+				DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString),
+				GTD = null,
+				GTDAdditionalFileName = null,
+				GTDFileName = null,
+				AdditionalCost = null,
+				BrokerCost = null,
+				CustomCost = null,
+				FlightCost = model.FlightCost,
+				ForwarderCost = null			
+			};
 		}
 
 		public static AirWaybillData Map(AirWaybillEditModel model, long cargoIsFlewStateId)
