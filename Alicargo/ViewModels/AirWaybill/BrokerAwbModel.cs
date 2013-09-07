@@ -9,15 +9,19 @@ namespace Alicargo.ViewModels.AirWaybill
 		public string GTD { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "GTD")]
+		public byte[] GTDFile { get; set; }
 		public string GTDFileName { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "GTDAdditional")]
+		public byte[] GTDAdditionalFile { get; set; }
 		public string GTDAdditionalFileName { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Invoice")]
+		public byte[] InvoiceFile { get; set; }
 		public string InvoiceFileName { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Packing")]
+		public byte[] PackingFile { get; set; }
 		public string PackingFileName { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "CustomCost")]
@@ -25,21 +29,5 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		[DisplayNameLocalized(typeof(Entities), "BrokerCost")]
 		public decimal? BrokerCost { get; set; }
-
-		#region // todo: 2. remove file fields
-
-		[DisplayNameLocalized(typeof (Entities), "GTD")]
-		public byte[] GTDFile { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "GTDAdditional")]
-		public byte[] GTDAdditionalFile { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Invoice")]
-		public byte[] InvoiceFile { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Packing")]
-		public byte[] PackingFile { get; set; }
-
-		#endregion
 	}
 }
