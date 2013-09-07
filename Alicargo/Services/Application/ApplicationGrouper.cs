@@ -15,6 +15,8 @@ namespace Alicargo.Services.Application
 		private readonly IAwbRepository _awbRepository;
 		private Dictionary<long, AirWaybillData> _airWaybills;
 		private Dictionary<long, AirWaybillAggregate> _awbAggregates;
+		private float? _weightWithouAwb;
+		private int? _countWithouAwb;
 
 		public ApplicationGrouper(IAwbRepository awbRepository)
 		{
@@ -30,6 +32,8 @@ namespace Alicargo.Services.Application
 			_airWaybills = _awbRepository.Get(awbIds).ToDictionary(x => x.Id, x => x);
 
 			_awbAggregates = _awbRepository.GetAggregate(awbIds).ToDictionary(x => x.AirWaybillId, x => x);
+			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb();
+			_weightWithouAwb = _awbRepository.GetTotalWeightWithouAwb();
 
 			return GroupImpl(applications, groups);
 		}
@@ -106,8 +110,8 @@ namespace Alicargo.Services.Application
 			string field,
 			Func<IGrouping<T, ApplicationListItem>, string> getValue)
 		{
-			var count = 0;
-			float weigth = 0;
+			int count;
+			float weigth;
 
 			if (field == OrderHelper.AwbFieldName)
 			{
@@ -116,6 +120,11 @@ namespace Alicargo.Services.Application
 				{
 					count = _awbAggregates[id].TotalCount;
 					weigth = _awbAggregates[id].TotalWeight;
+				}
+				else
+				{
+					count = _countWithouAwb ?? 0;
+					weigth = _weightWithouAwb ?? 0;
 				}
 			}
 			else

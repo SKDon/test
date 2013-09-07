@@ -11,7 +11,10 @@ namespace Alicargo.Contracts.Repositories
 		AirWaybillData[] Get(params long[] ids);
 		AirWaybillData[] GetAll();
 		AirWaybillData[] GetRange(long skip, int take, long? brokerId = null);
+
 		AirWaybillAggregate[] GetAggregate(params long[] ids);
+		int? GetTotalCountWithouAwb();
+		float? GetTotalWeightWithouAwb();
 		string[] GetClientEmails(long id);
 
 		void Delete(long id);
