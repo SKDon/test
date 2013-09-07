@@ -1416,7 +1416,7 @@
     <Content Include="Views\AirWaybill\Index.cshtml" />
     <Content Include="Views\AirWaybill\Edit.cshtml" />
     <Content Include="Views\Broker\Select.cshtml" />
-    <Content Include="Views\AirWaybill\DetailsTemplate.cshtml" />
+    <Content Include="Views\AirWaybill\AdminDetails.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\ApplicationList\ClientColumns.cshtml" />
     <Content Include="Views\ApplicationList\AdminColumns.cshtml" />
@@ -1447,6 +1447,8 @@
     <Content Include="Views\DynamicScript\Roles.cshtml" />
     <Content Include="Views\DynamicScript\Urls.cshtml" />
     <Content Include="Views\DynamicScript\Localization.cshtml" />
+    <Content Include="Views\AirWaybill\SenderDetails.cshtml" />
+    <Content Include="Views\AirWaybill\BrokerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

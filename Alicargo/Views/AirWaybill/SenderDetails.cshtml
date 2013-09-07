@@ -1,0 +1,19 @@
+﻿@using Resources
+@inherits BaseWebViewPage<Dictionary<long, string>>
+
+<div class='grid-details'>
+	<div class="properties">
+		# if(PackingFileName != null){ #
+		<p>
+			<span>@Entities.Packing:</span>
+			<a href="@Url.Action(MVC.AirWaybill.PackingFile())/#= Id #">#= PackingFileName #</a>
+		</p>
+		# } #
+		# if(AWBFileName != null){ #
+		<p>
+			<span>@Entities.AWB:</span>
+			<a href="@Url.Action(MVC.AirWaybill.AWBFile())/#= Id #">#= AWBFileName #</a>
+		</p>
+		# } #
+	</div>
+</div>
