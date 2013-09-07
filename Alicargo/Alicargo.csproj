@@ -146,52 +146,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AirWaybillController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationListController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationUpdateController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\CompositionRootHelper.cs" />
-    <Compile Include="AuthenticationController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BrokerController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarrierController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ClientController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\ApplicationListController.cs" />
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\SenderAwbController.cs" />
-    <Compile Include="DynamicScriptController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\PathConstants.cs" />
-    <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="ModelBinders\SenderAwbModelBinder.cs" />
-    <Compile Include="SenderAwbController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SenderController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
@@ -312,18 +276,54 @@
     <Compile Include="Services\StateService.cs" />
     <Compile Include="Services\TransitService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="SharedController.generated.cs">
+    <Compile Include="T4MVC\AirWaybillController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="T4MVC.cs">
+    <Compile Include="T4MVC\ApplicationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ApplicationListController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ApplicationUpdateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\AuthenticationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\BrokerController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\CarrierController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ClientController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\DynamicScriptController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SenderAwbController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SenderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="TransitController.generated.cs">
+    <Compile Include="T4MVC\TransitController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserController.generated.cs">
+    <Compile Include="T4MVC\UserController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
@@ -577,8 +577,11 @@
     <Content Include="Content\themes\jMetro\images\ui-icons_d4d4d4_0.png" />
     <Content Include="Content\themes\jMetro\images\ui-icons_ffffff_0.png" />
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
-    <Content Include="Install\backup-db.sql" />
-    <Content Include="Install\init-db.sql" />
+    <Content Include="Deploy\Install\Sql\create-sp-for-backup-db.sql" />
+    <Content Include="Deploy\Install\Sql\set-initial-data.sql" />
+    <Content Include="Deploy\Install\Sql\create-sp-restore-db.sql" />
+    <None Include="Deploy\Install\restore-db.ps1" />
+    <Content Include="Deploy\Update\Plan.txt" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
@@ -593,9 +596,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Code\Helpers.cshtml" />
-    <Content Include="Install\backup-db.ps1" />
-    <Content Include="Install\init-db.ps1" />
-    <Content Include="Install\backup-db-alicargo.ps1" />
+    <Content Include="Deploy\Install\backup-db.ps1" />
+    <Content Include="Deploy\Install\Sql\init-db.ps1" />
+    <Content Include="Deploy\Install\backup-db-alicargo.ps1" />
+    <Content Include="Deploy\Update\prepare.ps1" />
+    <Content Include="Deploy\Update\tools.ps1" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -1380,12 +1385,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Views\ApplicationList\Index.cshtml" />
     <Content Include="Views\Application\Create.cshtml" />
-    <Content Include="T4MVC.tt.hooks.t4" />
-    <Content Include="T4MVC.tt">
+    <Content Include="T4MVC\T4MVC.tt.hooks.t4" />
+    <Content Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </Content>
-    <None Include="T4MVC.tt.settings.xml" />
+    <None Include="T4MVC\T4MVC.tt.settings.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1443,7 +1448,6 @@
     <Content Include="Views\DynamicScript\Urls.cshtml" />
     <Content Include="Views\DynamicScript\Localization.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -1520,10 +1524,4 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target> -->
 </Project>
