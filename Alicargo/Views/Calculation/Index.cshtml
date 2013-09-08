@@ -1,0 +1,19 @@
+﻿@inherits BaseWebViewPage
+<style>
+	.container {
+		padding: 0 20px;
+		width: auto;
+	}
+</style>
+<div id="calculation-grid" class="grid"></div>
+
+@section scripts
+{
+	<script type="text/x-kendo-template" id="calculation-grid-row-template">
+		
+	</script>
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
+	@Scripts.Render("~/scripts/app/calculation/Grid.js")
+}

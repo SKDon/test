@@ -99,7 +99,20 @@ namespace Alicargo.ViewModels.Application
 		public string MarkName { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
-		public int MethodOfDeliveryId { get; set; }		
+		public int MethodOfDeliveryId { get; set; }
+
+	    // todo: 1. implement edit
+		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
+		public decimal? ScotchCost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
+		public decimal? FactureCost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "WithdrawCost")]
+		public decimal? WithdrawCost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
+		public decimal? TransitCost { get; set; }
 
 		#endregion
 	}
