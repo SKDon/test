@@ -101,7 +101,6 @@ namespace Alicargo.ViewModels.Application
 		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public int MethodOfDeliveryId { get; set; }
 
-	    // todo: 1. implement edit
 		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
 		public decimal? ScotchCost { get; set; }
 
@@ -114,6 +113,12 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost { get; set; }
 
-		#endregion
+		[DisplayNameLocalized(typeof(Entities), "ForwarderCost")]
+	    public decimal? ForwarderCost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
+	    public decimal? TariffPerKg { get; set; }
+
+	    #endregion
 	}
 }

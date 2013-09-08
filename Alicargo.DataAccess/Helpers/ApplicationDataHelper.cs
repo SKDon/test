@@ -40,8 +40,14 @@ namespace Alicargo.DataAccess.Helpers
 			to.FactoryEmail = from.FactoryEmail;
 			to.FactoryContact = from.FactoryContact;
 			to.MarkName = from.MarkName;
-
 			to.Invoice = from.Invoice;
+
+			to.FactureCost = from.FactureCost;
+			to.ScotchCost = from.ScotchCost;
+			to.TariffPerKg = from.TariffPerKg;
+			to.TransitCost = from.TransitCost;
+			to.WithdrawCost = from.WithdrawCost;
+			to.ForwarderCost = from.ForwarderCost;
 
 			// todo: 3.0. separate repository for files
 			FileDataHelper.SetFile(invoiceFile, from.InvoiceFileName,

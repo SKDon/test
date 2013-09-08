@@ -55,6 +55,8 @@
 		@Html.EditorWithLabelFor(model => model.Count)
 		<label for="@Html.IdFor(x => x.Volume)">@Resources.Entities.Volume (m<span class="super">3</span> )</label>
 		@Html.EditorFor(model => model.Volume)
+		@Html.EditorWithLabelFor(model => model.ForwarderCost)
+		@Html.EditorWithLabelFor(model => model.FactureCost)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.TermsOfDelivery)
@@ -65,10 +67,14 @@
 								  Text = name,
 								  Value = ((int)item).ToString(CultureInfo.InvariantCulture)
 							  }))
+		@Html.EditorWithLabelFor(model => model.ScotchCost)
+		@Html.EditorWithLabelFor(model => model.TransitCost)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
 		@Html.EditorWithLabelFor(model => model.Currency)
+		@Html.EditorWithLabelFor(model => model.WithdrawCost)
+		@Html.EditorWithLabelFor(model => model.TariffPerKg)
 	</div>
 </div>
 <hr />
