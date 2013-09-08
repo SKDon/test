@@ -44,8 +44,6 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		public decimal? BrokerCost { get; set; }
 
-		public decimal? ForwarderCost { get; set; }
-
 		public decimal? AdditionalCost { get; set; }
 	}
 }

@@ -46,9 +46,6 @@
 			field: "FlightCost",
 			title: Alicargo.Localization.Entities_FlightCost
 		}, {
-			field: "ForwarderCost",
-			title: Alicargo.Localization.Entities_ForwarderCost
-		}, {
 			field: "BrokerCost",
 			title: Alicargo.Localization.Entities_BrokerCost
 		}, {

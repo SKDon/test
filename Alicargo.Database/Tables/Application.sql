@@ -48,8 +48,14 @@
 	[FactoryPhone]			NVARCHAR(MAX)		NULL, 
 	[FactoryContact]		NVARCHAR(MAX)		NULL,
 	[FactoryEmail]			NVARCHAR(320)		NULL, 
-
 	[MarkName]				NVARCHAR(320)		NOT NULL, 
+
+	[ForwarderCost]			MONEY				NULL,
+	[FactureCost]			MONEY				NULL,
+	[ScotchCost]			MONEY				NULL,
+	[TariffPerKg]			MONEY				NULL,
+	[TransitCost]			MONEY				NULL,
+	[WithdrawCost]			MONEY				NULL,
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),

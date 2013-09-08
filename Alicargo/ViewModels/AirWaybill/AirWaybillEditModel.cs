@@ -39,9 +39,6 @@ namespace Alicargo.ViewModels.AirWaybill
 		[DisplayNameLocalized(typeof(Entities), "BrokerCost")]
 		public decimal? BrokerCost { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "ForwarderCost")]
-		public decimal? ForwarderCost { get; set; }
-
 		[DisplayNameLocalized(typeof(Entities), "AdditionalCost")]
 		public decimal? AdditionalCost { get; set; }
 

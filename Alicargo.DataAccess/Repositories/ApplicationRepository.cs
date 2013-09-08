@@ -54,7 +54,13 @@ namespace Alicargo.DataAccess.Repositories
 				StateChangeTimestamp = x.StateChangeTimestamp,
 				StateId = x.StateId,
 				ClientId = x.ClientId,
-				TransitId = x.TransitId
+				TransitId = x.TransitId,
+				FactureCost = x.FactureCost,
+				ScotchCost = x.ScotchCost,
+				TariffPerKg = x.TariffPerKg,
+				TransitCost = x.TransitCost,
+				WithdrawCost = x.WithdrawCost,
+				ForwarderCost = x.ForwarderCost
 			};
 		}
 

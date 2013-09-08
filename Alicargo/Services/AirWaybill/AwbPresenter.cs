@@ -63,7 +63,6 @@ namespace Alicargo.Services.AirWaybill
 					BrokerCost = x.BrokerCost,
 					CustomCost = x.CustomCost,
 					FlightCost = x.FlightCost,
-					ForwarderCost = x.ForwarderCost
                 }).ToArray();
 
             var total = _awbRepository.Count(brokerId);
@@ -104,8 +103,7 @@ namespace Alicargo.Services.AirWaybill
 				AdditionalCost = data.AdditionalCost,
 				BrokerCost = data.BrokerCost,
 				CustomCost = data.CustomCost,
-				FlightCost = data.FlightCost,
-				ForwarderCost = data.ForwarderCost
+				FlightCost = data.FlightCost
 			};
 		}
 

@@ -5,7 +5,7 @@
 {
 	var name = Html.IdFor(x => x.BrokerId).ToHtmlString();
 	var action = MVC.Broker.Select(name, Model == null
-		? (long?) null
+		? (long?)null
 		: Model.BrokerId);
 	@Html.Action(action)
 }
@@ -91,21 +91,22 @@
 			</div>
 		</div>
 		<script>
-			$(function() {
+			$(function () {
 				$(".date-holder input").kendoDatePicker();
 			})
 		</script>
 	</div>
 	<div class="row">
-		<div class="span4">
+		<div class="span3">
 			@Html.EditorWithLabelFor(model => model.FlightCost)
-			@Html.EditorWithLabelFor(model => model.ForwarderCost)
 		</div>
-		<div class="span4">
+		<div class="span3">
 			@Html.EditorWithLabelFor(model => model.BrokerCost)
+		</div>
+		<div class="span3">
 			@Html.EditorWithLabelFor(model => model.CustomCost)
 		</div>
-		<div class="span4">
+		<div class="span3">
 			@Html.EditorWithLabelFor(model => model.AdditionalCost)
 		</div>
 	</div>

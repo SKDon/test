@@ -89,7 +89,6 @@ namespace Alicargo.Services.AirWaybill
 			to.BrokerCost = @from.BrokerCost;
 			to.CustomCost = @from.CustomCost;
 			to.FlightCost = @from.FlightCost;
-			to.ForwarderCost = @from.ForwarderCost;
 		}
 
 		private static void Map(SenderAwbModel @from, AirWaybillData to)

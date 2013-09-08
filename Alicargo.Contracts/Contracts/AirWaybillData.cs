@@ -24,10 +24,7 @@ namespace Alicargo.Contracts.Contracts
 		public decimal? FlightCost { get; set; }
 		public decimal? CustomCost { get; set; }
 		public decimal? BrokerCost { get; set; }
-		public decimal? ForwarderCost { get; set; }
 		public decimal? AdditionalCost { get; set; }
-
-		// todo: 1. add to DB
 		public decimal? TotalCostOfSenderForWeight { get; set; }
 	}
 }
