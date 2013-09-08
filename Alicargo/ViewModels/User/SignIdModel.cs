@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.User
 {
     public sealed class SignIdModel
     {

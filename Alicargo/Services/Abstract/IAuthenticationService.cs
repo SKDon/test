@@ -1,7 +1,9 @@
-﻿namespace Alicargo.Services.Abstract
+﻿using Alicargo.ViewModels.User;
+
+namespace Alicargo.Services.Abstract
 {
     public interface IAuthenticationService
     {
-        bool Authenticate(ViewModels.SignIdModel user);
+        bool Authenticate(SignIdModel user);
     }
 }

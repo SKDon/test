@@ -1,4 +1,4 @@
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.User
 {
 	public class UserList
 	{

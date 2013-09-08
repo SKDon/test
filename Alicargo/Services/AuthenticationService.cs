@@ -4,7 +4,7 @@ using System.Web.Security;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services
 {

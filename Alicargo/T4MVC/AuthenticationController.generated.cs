@@ -4,6 +4,8 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments
+
+using Alicargo.ViewModels.User;
 #pragma warning disable 1591
 #region T4MVC
 
@@ -123,9 +125,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.SignIdModel user);
+        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SignIdModel user);
 
-        public override System.Web.Mvc.ActionResult Login(Alicargo.ViewModels.SignIdModel user)
+        public override System.Web.Mvc.ActionResult Login(SignIdModel user)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "user", user);

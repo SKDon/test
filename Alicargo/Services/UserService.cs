@@ -5,6 +5,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services
 {

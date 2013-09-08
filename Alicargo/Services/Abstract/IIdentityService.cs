@@ -1,5 +1,4 @@
 ﻿using Alicargo.Contracts.Enums;
-using Alicargo.Core.Enums;
 
 namespace Alicargo.Services.Abstract
 {

@@ -1,5 +1,5 @@
 ﻿using Alicargo.Contracts.Enums;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Abstract
 {

@@ -3,7 +3,7 @@ using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.ViewModels.Application
+namespace Alicargo.ViewModels
 {
 	public sealed class CurrencyModel
 	{

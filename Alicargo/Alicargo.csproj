@@ -71,6 +71,9 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.3.0.0.6\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\packages\AutoFixture.3.6.8\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -153,6 +156,7 @@
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrokerController.cs" />
+    <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\SenderAwbController.cs" />
     <Compile Include="Helpers\PathConstants.cs" />
     <Compile Include="ModelBinders\SenderAwbModelBinder.cs" />
@@ -294,6 +298,9 @@
     <Compile Include="T4MVC\BrokerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\CalculationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\CarrierController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -334,13 +341,15 @@
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
-    <Compile Include="ViewModels\Application\CurrencyModel.cs" />
+    <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\AirWaybill\BrokerAwbModel.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationAwb.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationListItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
-    <Compile Include="ViewModels\UserList.cs" />
+    <Compile Include="ViewModels\User\UserList.cs" />
     <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
     <Compile Include="ViewModels\Application\ApplicationEditModel.cs" />
@@ -348,9 +357,9 @@
     <Compile Include="ViewModels\AirWaybill\AirWaybillEditModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\ListCollection.cs" />
-    <Compile Include="ViewModels\SignIdModel.cs" />
+    <Compile Include="ViewModels\User\SignIdModel.cs" />
     <Compile Include="ViewModels\StateModel.cs" />
-    <Compile Include="ViewModels\UserModel.cs" />
+    <Compile Include="ViewModels\User\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -585,6 +594,7 @@
     <Content Include="Deploy\Update\Plan.txt" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\it.js" />
@@ -1450,6 +1460,7 @@
     <Content Include="Views\AirWaybill\SenderDetails.cshtml" />
     <Content Include="Views\AirWaybill\BrokerDetails.cshtml" />
     <Content Include="Views\SenderAwb\Create.cshtml" />
+    <Content Include="Views\Calculation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

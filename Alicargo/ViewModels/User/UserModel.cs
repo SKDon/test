@@ -3,7 +3,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.User
 {
 	public sealed class UserModel
 	{

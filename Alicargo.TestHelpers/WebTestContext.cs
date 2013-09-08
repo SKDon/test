@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.User;
 using FluentAssertions;
 
 namespace Alicargo.TestHelpers
