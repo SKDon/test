@@ -5,8 +5,8 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
+using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
-using Resources;
 
 namespace Alicargo.Services.Application
 {
@@ -58,19 +58,7 @@ namespace Alicargo.Services.Application
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
-		}
-
-		private static string GetAirWayBillDisplay(AirWaybillData airWaybillModel)
-		{
-			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", airWaybillModel.Bill,
-								 airWaybillModel.DepartureAirport,
-								 airWaybillModel.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
-								 airWaybillModel.ArrivalAirport,
-								 airWaybillModel.DateOfArrival.ToString("ddMMMyyyy").ToUpperInvariant(),
-								 string.IsNullOrWhiteSpace(airWaybillModel.GTD)
-									 ? ""
-									 : string.Format(" &plusmn; {0}_{1}", Entities.GTD, airWaybillModel.GTD));
-		}
+		}		
 
 		private ApplicationGroup[] ByLegalEntity(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
@@ -99,7 +87,7 @@ namespace Alicargo.Services.Application
 				.Select(grouping =>
 							GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
 												awb => _airWaybills.ContainsKey(awb.Key)
-													? GetAirWayBillDisplay(_airWaybills[awb.Key])
+													? AwbHelper.GetAirWayBillDisplay(_airWaybills[awb.Key])
 													: ""))
 				.ToArray();
 		}

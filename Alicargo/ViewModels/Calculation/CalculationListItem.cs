@@ -1,6 +1,4 @@
-﻿using Alicargo.ViewModels.Application;
-
-namespace Alicargo.ViewModels.Calculation
+﻿namespace Alicargo.ViewModels.Calculation
 {
 	public sealed class CalculationListItem
 	{

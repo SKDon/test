@@ -4,8 +4,6 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments
-
-using Alicargo.ViewModels.User;
 #pragma warning disable 1591
 #region T4MVC
 
@@ -207,9 +205,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UserModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.UserModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(UserModel model)
+        public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.User.UserModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -217,9 +215,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UserModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.UserModel model);
 
-        public override System.Web.Mvc.ActionResult Create(UserModel model)
+        public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.User.UserModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

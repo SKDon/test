@@ -341,6 +341,7 @@
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
+    <Compile Include="ViewModels\AwbHelper.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\AirWaybill\BrokerAwbModel.cs" />
