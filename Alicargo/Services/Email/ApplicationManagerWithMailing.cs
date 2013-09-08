@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
+using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Email
 {

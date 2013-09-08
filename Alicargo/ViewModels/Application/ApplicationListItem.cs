@@ -2,7 +2,7 @@
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Services;
-using Alicargo.Helpers;
+using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.ViewModels.Application
 {

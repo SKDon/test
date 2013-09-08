@@ -1,4 +1,6 @@
-﻿namespace Alicargo.ViewModels.Calculation
+﻿using Alicargo.ViewModels.Helpers;
+
+namespace Alicargo.ViewModels.Calculation
 {
 	public sealed class CalculationListItem
 	{
@@ -9,7 +11,6 @@
 		#region Application data
 
 		public long ApplicationId { get; set; }
-		public string DisplayNumber { get; set; }
 		public string Factory { get; set; }
 		public string Mark { get; set; }
 		public int? Count { get; set; }
@@ -24,6 +25,14 @@
 		public decimal? TariffPerKg { get; set; }
 
 		#endregion
+
+		public string DisplayNumber
+		{
+			get
+			{
+				return ApplicationModelHelper.GetDisplayNumber(ApplicationId, Count);
+			}
+		}
 
 		public decimal? TotalTariffCost
 		{

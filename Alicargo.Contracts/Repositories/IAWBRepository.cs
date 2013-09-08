@@ -9,8 +9,7 @@ namespace Alicargo.Contracts.Repositories
 		long Count(long? brokerId = null);
 
 		AirWaybillData[] Get(params long[] ids);
-		AirWaybillData[] GetAll();
-		AirWaybillData[] GetRange(long skip, int take, long? brokerId = null);
+		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null);
 
 		AirWaybillAggregate[] GetAggregate(params long[] ids);
 		int? GetTotalCountWithouAwb();

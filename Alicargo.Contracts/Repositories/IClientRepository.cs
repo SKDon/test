@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.Contracts.Repositories
@@ -6,13 +7,15 @@ namespace Alicargo.Contracts.Repositories
 	public interface IClientRepository
 	{
 		long Count();
-		ClientData[] GetRange(long skip, int take);
 		Func<long> Add(ClientData client);
+		void Delete(long id);
+		void Update(ClientData client);
+
 		ClientData GetByUserId(long userId);
 		ClientData GetById(long clientId);
-		void Delete(long id);
+		ClientData[] GetRange(int take, long skip);
 		ClientData[] GetAll();
-		void Update(ClientData client);
 		ClientData[] Get(params long[] clinentIds);
+		IDictionary<long, string> GetNicByApplications(params long[] appIds);
 	}
 }

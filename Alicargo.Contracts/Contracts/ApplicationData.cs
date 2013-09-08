@@ -37,5 +37,12 @@ namespace Alicargo.Contracts.Contracts
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
+
+		// todo: 1. add to DB
+		public decimal? FactureCost { get; set; }
+		public decimal? ScotchCost { get; set; }
+		public decimal? TariffPerKg { get; set; }
+		public decimal? TransitCost { get; set; }
+		public decimal? WithdrawCost { get; set; }
 	}
 }

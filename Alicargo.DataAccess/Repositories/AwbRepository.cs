@@ -41,11 +41,6 @@ namespace Alicargo.DataAccess.Repositories
 			};
 		}
 
-		public AirWaybillData[] GetAll()
-		{
-			return Context.AirWaybills.Select(_selector).ToArray();
-		}
-
 		public Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
 							  byte[] invoiceFile, byte[] awbFile)
 		{
@@ -60,10 +55,11 @@ namespace Alicargo.DataAccess.Repositories
 
 		public AirWaybillData[] Get(params long[] ids)
 		{
-			return Context.AirWaybills
-						  .Where(x => ids.Contains(x.Id))
-						  .Select(_selector)
-						  .ToArray();
+			var airWaybills = ids.Length == 0
+				? Context.AirWaybills.AsQueryable()
+				: Context.AirWaybills.Where(x => ids.Contains(x.Id));
+
+			return airWaybills.Select(_selector).ToArray();
 		}
 
 		public long Count(long? brokerId = null)
@@ -73,7 +69,7 @@ namespace Alicargo.DataAccess.Repositories
 				: Context.AirWaybills.LongCount();
 		}
 
-		public AirWaybillData[] GetRange(long skip, int take, long? brokerId = null)
+		public AirWaybillData[] GetRange(int take, long skip, long? brokerId = null)
 		{
 			var airWaybills = Context.AirWaybills.OrderByDescending(x => x.CreationTimestamp).AsQueryable();
 			if (brokerId.HasValue)

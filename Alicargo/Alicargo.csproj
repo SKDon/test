@@ -71,9 +71,6 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.3.0.0.6\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture">
-      <HintPath>..\packages\AutoFixture.3.6.8\lib\net40\Ploeh.AutoFixture.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -232,6 +229,7 @@
     <Compile Include="Services\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Abstract\IAwbUpdateManager.cs" />
     <Compile Include="Services\Abstract\IAwbPresenter.cs" />
+    <Compile Include="Services\Abstract\ICalculationService.cs" />
     <Compile Include="Services\Abstract\ICarrierService.cs" />
     <Compile Include="Services\Abstract\IClientManager.cs" />
     <Compile Include="Services\Abstract\IIdentityService.cs" />
@@ -252,6 +250,7 @@
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
+    <Compile Include="Services\Calculation\CalculationService.cs" />
     <Compile Include="Services\Client\ClientPermissions.cs" />
     <Compile Include="Services\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />
@@ -337,11 +336,11 @@
     <Compile Include="ViewModels\AirWaybill\SenderAwbModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
-    <Compile Include="Helpers\ApplicationModelHelper.cs" />
+    <Compile Include="ViewModels\Helpers\ApplicationModelHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
-    <Compile Include="ViewModels\AwbHelper.cs" />
+    <Compile Include="ViewModels\Helpers\AwbHelper.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\AirWaybill\BrokerAwbModel.cs" />

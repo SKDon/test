@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
 	internal sealed class ClientRepository : BaseRepository, IClientRepository
 	{
-		private readonly Expression<Func<DbContext.Client, ClientData>> _selector;
+		private readonly Expression<Func<Client, ClientData>> _selector;
 
 		public ClientRepository(IUnitOfWork unitOfWork)
 			: base(unitOfWork)
@@ -31,7 +33,7 @@ namespace Alicargo.DataAccess.Repositories
 				Nic = x.Nic,
 				OGRN = x.OGRN,
 				RS = x.RS,
-				TransitId = x.TransitId				
+				TransitId = x.TransitId
 			};
 		}
 
@@ -40,19 +42,19 @@ namespace Alicargo.DataAccess.Repositories
 			return Context.Clients.LongCount();
 		}
 
-		public ClientData[] GetRange(long skip, int take)
+		public ClientData[] GetRange(int take, long skip)
 		{
 			return Context.Clients
-				.OrderBy(x => x.LegalEntity)
-				.Skip((int)skip)
-				.Take(take)
-				.Select(_selector)
-				.ToArray();
+						  .OrderBy(x => x.LegalEntity)
+						  .Skip((int)skip)
+						  .Take(take)
+						  .Select(_selector)
+						  .ToArray();
 		}
 
 		public Func<long> Add(ClientData client)
 		{
-			var entity = new DbContext.Client();
+			var entity = new Client();
 
 			CopyTo(client, entity);
 
@@ -69,9 +71,9 @@ namespace Alicargo.DataAccess.Repositories
 		public ClientData GetById(long clientId)
 		{
 			return Context.Clients
-				.Where(x => x.Id == clientId)
-				.Select(_selector)
-				.FirstOrDefault();
+						  .Where(x => x.Id == clientId)
+						  .Select(_selector)
+						  .FirstOrDefault();
 		}
 
 		public void Delete(long id)
@@ -94,15 +96,23 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		public ClientData[] Get(params long[] clinentIds)
-		{			
+		{
 			return Context.Clients
-				.Where(x => clinentIds.Contains(x.Id))
-				.Select(_selector)
-				.Cast<ClientData>()
-				.ToArray();
+						  .Where(x => clinentIds.Contains(x.Id))
+						  .Select(_selector)
+						  .ToArray();
 		}
 
-		public static void CopyTo(ClientData @from, DbContext.Client to)
+		// todo: 2. test
+		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
+		{
+			return Context.Applications
+						  .Where(x => appIds.Contains(x.Id))
+						  .Select(x => new { x.Id, ClientNic = x.Client.Nic })
+						  .ToDictionary(x => x.Id, x => x.ClientNic);
+		}
+
+		public static void CopyTo(ClientData @from, Client to)
 		{
 			to.Email = @from.Email;
 			to.LegalEntity = @from.LegalEntity;

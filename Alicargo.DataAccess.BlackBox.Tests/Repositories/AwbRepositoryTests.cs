@@ -34,11 +34,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
         [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_GetAll_Add_Get()
         {
-            var oldData = _awbRepository.GetAll();
+            var oldData = _awbRepository.Get();
 
             var data = CreateTestAirWaybill();
 
-            var newData = _awbRepository.GetAll();
+            var newData = _awbRepository.Get();
 
             Assert.AreEqual(oldData.Length + 1, newData.Length);
 
@@ -50,12 +50,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
         [TestMethod, TestCategory("black-box")]
         public void Test_AwbRepository_Count_GetRange()
         {
-            var airWaybillDatas = _awbRepository.GetAll();
+            var airWaybillDatas = _awbRepository.Get();
             var count = _awbRepository.Count();
 
             Assert.AreEqual(airWaybillDatas.Length, count);
 
-            var range = _awbRepository.GetRange(0, (int) count);
+            var range = _awbRepository.GetRange((int) count, 0);
 
             airWaybillDatas.ShouldBeEquivalentTo(range);
         }

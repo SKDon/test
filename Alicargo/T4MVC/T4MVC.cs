@@ -162,6 +162,7 @@ namespace Links
                 public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
             }
         
+            public static readonly string Alicargo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Alicargo.min.js") ? Url("Alicargo.min.js") : Url("Alicargo.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class Calculation {
                 private const string URLPATH = "~/Scripts/app/Calculation";

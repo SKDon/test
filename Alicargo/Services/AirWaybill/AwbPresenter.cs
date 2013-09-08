@@ -28,7 +28,7 @@ namespace Alicargo.Services.AirWaybill
 
         public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId)
         {
-            var data = _awbRepository.GetRange(skip, take, brokerId);
+            var data = _awbRepository.GetRange(take, skip, brokerId);
             var ids = data.Select(x => x.Id).ToArray();
 
             var aggregates = _awbRepository.GetAggregate(ids)

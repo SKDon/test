@@ -25,9 +25,6 @@ namespace Alicargo.Controllers
     public partial class CalculationController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CalculationController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected CalculationController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -44,6 +41,12 @@ namespace Alicargo.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult List()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CalculationController Actions { get { return MVC.Calculation; } }
@@ -72,6 +75,15 @@ namespace Alicargo.Controllers
         }
 
 
+        static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_List ListParams { get { return s_params_List; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_List
+        {
+            public readonly string take = "take";
+            public readonly string skip = "skip";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -102,12 +114,14 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
+        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, long skip);
 
-        public override System.Web.Mvc.JsonResult List()
+        public override System.Web.Mvc.JsonResult List(int take, long skip)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
-            ListOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "take", take);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skip", skip);
+            ListOverride(callInfo, take, skip);
             return callInfo;
         }
 

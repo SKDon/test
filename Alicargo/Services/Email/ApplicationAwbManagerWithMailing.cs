@@ -1,6 +1,6 @@
-﻿using Alicargo.Helpers;
-using Alicargo.Services.Abstract;
+﻿using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
+using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Email
 {

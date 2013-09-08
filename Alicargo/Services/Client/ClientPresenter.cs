@@ -50,7 +50,7 @@ namespace Alicargo.Services.Client
 		{
 			var total = _clientRepository.Count();
 
-			var data = _clientRepository.GetRange(skip, take).ToArray();
+			var data = _clientRepository.GetRange(take, skip).ToArray();
 
 			return new ListCollection<ClientData> { Data = data, Total = total };
 		}

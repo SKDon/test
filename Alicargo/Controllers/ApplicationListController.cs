@@ -48,7 +48,7 @@ namespace Alicargo.Controllers
 			var model = new ApplicationIndexModel
 			{
 				Clients = clients,
-				AirWaybills = _awbRepository.GetAll()
+				AirWaybills = _awbRepository.Get()
 											.Where(x => x.StateId == _stateConfig.CargoIsFlewStateId)
 											.OrderBy(x => x.Bill)
 											.ToDictionary(x => x.Id, x => x.Bill)

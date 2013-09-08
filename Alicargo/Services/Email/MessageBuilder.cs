@@ -3,11 +3,11 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
-using Alicargo.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
+using Alicargo.ViewModels.Helpers;
 using Resources;
 
 namespace Alicargo.Services.Email

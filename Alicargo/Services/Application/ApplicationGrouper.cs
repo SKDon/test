@@ -5,8 +5,8 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
+using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Application
 {
