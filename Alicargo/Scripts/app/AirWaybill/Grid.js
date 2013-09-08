@@ -16,8 +16,6 @@
 			total: "Total"
 		};
 
-		var error = function () { alert(window.Alicargo.Localization.Pages_AnError); };
-
 		var dataSource = {
 			transport: {
 				read: {
@@ -30,7 +28,7 @@
 			pageSize: 20,
 			serverPaging: true,
 			editable: true,
-			error: error
+			error: $a.ShowError
 		};
 
 		var columns = $a.AddColumns();
@@ -42,7 +40,6 @@
 			columns: columns
 		});
 	});
-
 
 	return $a;
 }(Alicargo || {}));

@@ -367,6 +367,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Фактура.
+        /// </summary>
+        public static string FactureCost {
+            get {
+                return ResourceManager.GetString("FactureCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Прикрепленный файл.
         /// </summary>
         public static string FileName {
@@ -417,6 +426,15 @@ namespace Resources {
         public static string INN {
             get {
                 return ResourceManager.GetString("INN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Страховка.
+        /// </summary>
+        public static string Insurance {
+            get {
+                return ResourceManager.GetString("Insurance", resourceCulture);
             }
         }
         
@@ -601,6 +619,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Скотч.
+        /// </summary>
+        public static string ScotchCost {
+            get {
+                return ResourceManager.GetString("ScotchCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата сметы статуса.
         /// </summary>
         public static string StateChangeTimestamp {
@@ -655,6 +682,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Тариф за кг.
+        /// </summary>
+        public static string TariffPerKg {
+            get {
+                return ResourceManager.GetString("TariffPerKg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Условия поставки.
         /// </summary>
         public static string TermsOfDelivery {
@@ -673,6 +709,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Всего.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Общее количество.
         /// </summary>
         public static string TotalCount {
@@ -682,11 +727,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сумма.
+        /// </summary>
+        public static string TotalTariffCost {
+            get {
+                return ResourceManager.GetString("TotalTariffCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Общий вес.
         /// </summary>
         public static string TotalWeight {
             get {
                 return ResourceManager.GetString("TotalWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Транзит.
+        /// </summary>
+        public static string TransitCost {
+            get {
+                return ResourceManager.GetString("TransitCost", resourceCulture);
             }
         }
         
@@ -732,6 +795,15 @@ namespace Resources {
         public static string Weigth {
             get {
                 return ResourceManager.GetString("Weigth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Забор.
+        /// </summary>
+        public static string WithdrawCost {
+            get {
+                return ResourceManager.GetString("WithdrawCost", resourceCulture);
             }
         }
     }

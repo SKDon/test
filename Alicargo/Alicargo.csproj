@@ -595,6 +595,7 @@
     <Content Include="Deploy\Update\Plan.txt" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
+    <Content Include="Scripts\app\Alicargo.js" />
     <Content Include="Scripts\app\Calculation\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />

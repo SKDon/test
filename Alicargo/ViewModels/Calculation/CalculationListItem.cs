@@ -4,22 +4,19 @@
 	{
 		public const decimal InsuranceRate = 100;
 
-		public CalculationListItem()
-		{
-			Value = new CurrencyModel();
-		}
-
 		public string ClientNic { get; set; }
 
 		#region Application data
 
+		public long ApplicationId { get; set; }
 		public string DisplayNumber { get; set; }
 		public string Factory { get; set; }
 		public string Mark { get; set; }
 		public int? Count { get; set; }
 		public float? Weigth { get; set; }
-		public string Invoce { get; set; }
-		public CurrencyModel Value { get; set; }
+		public string Invoice { get; set; }
+		public decimal Value { get; set; }
+		public int ValueCurrencyId { get; set; }
 		public decimal? ScotchCost { get; set; }
 		public decimal? FactureCost { get; set; }
 		public decimal? WithdrawCost { get; set; }
@@ -36,23 +33,25 @@
 			}
 		}
 
-		public CurrencyModel InsuranceCost
+		public decimal InsuranceCost
 		{
 			get
 			{
-				return new CurrencyModel
+				if (Value == 0)
 				{
-					CurrencyId = Value.CurrencyId,
-					Value = Value.Value / InsuranceRate
-				};
+					return 0;
+				}
+
+				return Value / InsuranceRate;
 			}
 		}
 
-		public decimal TotalCost {
+		public decimal TotalCost
+		{
 			get
 			{
-				// todo: 3. supposed that all costs in euro but Insurance Cost can be in any other currency
-				return TotalTariffCost ?? 0 + ScotchCost ?? 0 + InsuranceCost.Value + FactureCost ?? 0 + WithdrawCost ?? 0 + TransitCost ?? 0;
+				// todo: 3. supposed that all costs in euro but ValueCurrencyId can be in any other currency
+				return TotalTariffCost ?? 0 + ScotchCost ?? 0 + InsuranceCost + FactureCost ?? 0 + WithdrawCost ?? 0 + TransitCost ?? 0;
 			}
 		}
 	}

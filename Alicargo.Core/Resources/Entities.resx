@@ -342,4 +342,28 @@
   <data name="ForwarderCost" xml:space="preserve">
     <value>Forwarder cost</value>
   </data>
+  <data name="FactureCost" xml:space="preserve">
+    <value>Фактура</value>
+  </data>
+  <data name="Insurance" xml:space="preserve">
+    <value>Страховка</value>
+  </data>
+  <data name="ScotchCost" xml:space="preserve">
+    <value>Скотч</value>
+  </data>
+  <data name="TariffPerKg" xml:space="preserve">
+    <value>Тариф за кг</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Всего</value>
+  </data>
+  <data name="TotalTariffCost" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="TransitCost" xml:space="preserve">
+    <value>Транзит</value>
+  </data>
+  <data name="WithdrawCost" xml:space="preserve">
+    <value>Забор</value>
+  </data>
 </root>

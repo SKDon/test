@@ -1,12 +1,13 @@
 ﻿@using Alicargo.Contracts.Enums
+@using Resources
 @inherits BaseWebViewPage
 
 @helper ClientMenu()
 {
 	if (IdentityService.IsInRole(RoleType.Client))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
-	<li>@Html.ActionLink(Resources.Pages.Profile, MVC.Client.Edit())</li>		
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Pages.Profile, MVC.Client.Edit())</li>
 	}
 }
 
@@ -14,7 +15,7 @@
 {
 	if (IdentityService.IsInRole(RoleType.Forwarder))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 	}
 }
 
@@ -22,18 +23,19 @@
 {
 	if (IdentityService.IsInRole(RoleType.Admin))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
-	<li>@Html.ActionLink(@Resources.Pages.AirWaybills, MVC.AirWaybill.Index())</li>
-	<li class="dropdown">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Pages.Users<b class="caret"></b></a>
-		<ul class="dropdown-menu">
-			<li>@Html.ActionLink(@Resources.Pages.Clients, MVC.Client.Index())</li>
-			<li>@Html.ActionLink(@Resources.Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
-			<li>@Html.ActionLink(@Resources.Pages.Brokers, MVC.User.Index(RoleType.Broker))</li>
-			<li>@Html.ActionLink(@Resources.Pages.Forwarders, MVC.User.Index(RoleType.Forwarder))</li>
-			<li>@Html.ActionLink(@Resources.Pages.Senders, MVC.User.Index(RoleType.Sender))</li>
-		</ul>
-	</li>
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Pages.AirWaybills, MVC.AirWaybill.Index())</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Users<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>@Html.ActionLink(Pages.Clients, MVC.Client.Index())</li>
+				<li>@Html.ActionLink(Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
+				<li>@Html.ActionLink(Pages.Brokers, MVC.User.Index(RoleType.Broker))</li>
+				<li>@Html.ActionLink(Pages.Forwarders, MVC.User.Index(RoleType.Forwarder))</li>
+				<li>@Html.ActionLink(Pages.Senders, MVC.User.Index(RoleType.Sender))</li>
+			</ul>
+		</li>
+		<li>@Html.ActionLink(Pages.Calculation, MVC.Calculation.Index())</li>
 	}
 }
 
@@ -41,16 +43,16 @@
 {
 	if (IdentityService.IsInRole(RoleType.Sender))
 	{
-	<li>@Html.ActionLink(@Resources.Pages.Applications, MVC.ApplicationList.Index())</li>
-	<li>@Html.ActionLink(Resources.Entities.AirWayBill, MVC.AirWaybill.Index())</li>
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Entities.AirWayBill, MVC.AirWaybill.Index())</li>
 	}
 }
 
 @helper BrokerMenu()
 {
 	if (IdentityService.IsInRole(RoleType.Broker))
-	{	
-	<li>@Html.ActionLink(Resources.Entities.AirWayBill, MVC.AirWaybill.Index())</li>
+	{
+		<li>@Html.ActionLink(Entities.AirWayBill, MVC.AirWaybill.Index())</li>
 	}
 }
 
@@ -59,7 +61,7 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				@Html.ActionLink("Alicargo", MVC.Home.Index(), new { @class = "brand" })
+				@Html.ActionLink("Alicargo", MVC.Home.Index(), new {@class = "brand"})
 				<ul class="nav">
 					@BrokerMenu()
 					@ClientMenu()

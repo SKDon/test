@@ -9,11 +9,16 @@
 
 @section scripts
 {
-	<script type="text/x-kendo-template" id="calculation-grid-row-template">
-		
+	<script type="text/x-kendo-template" id="calculation-grid-details-template">
+        <div class="calculation-rows"></div>
+        <div class='calculation-details'>
+            calculation-details
+        </div>
 	</script>
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
+
+	@Scripts.Render("~/Scripts/app/Alicargo.js")
 	@Scripts.Render("~/scripts/app/calculation/Grid.js")
 }
