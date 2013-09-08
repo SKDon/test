@@ -196,6 +196,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Стоимость за килограмм для сендера.
+        /// </summary>
+        public static string CostPerKgOfSender {
+            get {
+                return ResourceManager.GetString("CostPerKgOfSender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Количество мест (коробки).
         /// </summary>
         public static string Count {
@@ -718,11 +727,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Суммартные затраты по сендеру по весу.
+        /// </summary>
+        public static string TotalCostOfSenderForWeight {
+            get {
+                return ResourceManager.GetString("TotalCostOfSenderForWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Общее количество.
         /// </summary>
         public static string TotalCount {
             get {
                 return ResourceManager.GetString("TotalCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Всего по сендеру.
+        /// </summary>
+        public static string TotalOfSender {
+            get {
+                return ResourceManager.GetString("TotalOfSender", resourceCulture);
             }
         }
         

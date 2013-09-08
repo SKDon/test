@@ -30,7 +30,7 @@ namespace Alicargo.ViewModels.AirWaybill
 		public decimal? FlightCost { get; set; }
 
 		// todo: 1. implement
-		public decimal? TotalWeightCostOfSender { get; set; }
+		public decimal? TotalCostOfSenderForWeight { get; set; }
 
 		#endregion
 

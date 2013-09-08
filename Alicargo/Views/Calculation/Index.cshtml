@@ -1,4 +1,5 @@
-﻿@inherits BaseWebViewPage
+﻿@using Resources
+@inherits BaseWebViewPage
 <style>
 	.container {
 		padding: 0 20px;
@@ -12,7 +13,24 @@
 	<script type="text/x-kendo-template" id="calculation-grid-details-template">
         <div class="calculation-rows"></div>
         <div class='calculation-details'>
-            calculation-details
+            # if(CostPerKgOfSender != null){ #
+			<p>
+				<span>@Entities.CostPerKgOfSender:</span>
+				#= CostPerKgOfSender #
+			</p>
+			# } #
+			# if(TotalCostOfSenderForWeight != null){ #
+			<p>
+				<span>@Entities.TotalCostOfSenderForWeight:</span>
+				#= TotalCostOfSenderForWeight #
+			</p>
+			# } #
+			# if(TotalOfSender != null){ #
+			<p>
+				<span>@Entities.TotalOfSender:</span>
+				#= TotalOfSender #
+			</p>
+			# } #
         </div>
 	</script>
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))

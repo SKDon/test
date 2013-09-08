@@ -24,11 +24,11 @@ namespace Alicargo.ViewModels.Calculation
 					return null;
 				}
 
-				return TotalWeightCostOfSender / (decimal)totalWeight;
+				return TotalCostOfSenderForWeight / (decimal)totalWeight;
 			}
 		}
 
-		public decimal? TotalWeightCostOfSender { get; set; }
+		public decimal? TotalCostOfSenderForWeight { get; set; }
 
 		public decimal? TotalScotchCost
 		{
@@ -59,6 +59,14 @@ namespace Alicargo.ViewModels.Calculation
 			get
 			{
 				return Rows.Sum(x => x.TransitCost);
+			}
+		}
+
+		public decimal? TotalOfSender
+		{
+			get
+			{
+				return TotalCostOfSenderForWeight + TotalScotchCost + TotalFactureCost + TotalWithdrawCost;
 			}
 		}
 	}

@@ -366,4 +366,13 @@
   <data name="WithdrawCost" xml:space="preserve">
     <value>Забор</value>
   </data>
+  <data name="CostPerKgOfSender" xml:space="preserve">
+    <value>Стоимость за килограмм для сендера</value>
+  </data>
+  <data name="TotalCostOfSenderForWeight" xml:space="preserve">
+    <value>Суммартные затраты по сендеру по весу</value>
+  </data>
+  <data name="TotalOfSender" xml:space="preserve">
+    <value>Всего по сендеру</value>
+  </data>
 </root>
