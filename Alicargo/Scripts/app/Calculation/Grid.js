@@ -5,25 +5,24 @@
 	var $l = $a.Localization;
 
 	var gridHolder = $("#calculation-grid");
-	var dataSource = {
-		transport: {
-			read: {
-				dataType: "json",
-				url: $urls.Calculation_List,
-				type: "POST"
-			}
-		},
-		schema: { model: { id: "Id" } },
-		pageSize: 20,
-		serverPaging: true,
-		error: $a.ShowError
-	};
 
 	var grid = gridHolder.kendoGrid({
 		columns: [{ field: "AwbDisplay" }],
 		pageable: true,
 		editable: false,
-		dataSource: dataSource,
+		dataSource: {
+			transport: {
+				read: {
+					dataType: "json",
+					url: $urls.Calculation_List,
+					type: "POST"
+				}
+			},
+			schema: { model: { id: "Id" } },
+			pageSize: 20,
+			serverPaging: true,
+			error: $a.ShowError
+		},
 		detailInit: detailInit,
 		detailTemplate: kendo.template($("#calculation-grid-details-template").html()),
 	}).data("kendoGrid");
@@ -36,6 +35,29 @@
 
 		detailRow.find(".calculation-rows").kendoGrid({
 			dataSource: {
+				schema: {
+					model: {
+						id: "ApplicationId",
+						fields: {
+							"ClientNic": { type: "string", editable: false },
+							"DisplayNumber": { type: "string", editable: false },
+							"Factory": { type: "string", editable: false },
+							"Mark": { type: "string", editable: false },
+							"Count": { type: "string", editable: false },
+							"Weigth": { type: "string", editable: false },
+							"Invoice": { type: "string", editable: false },
+							"Value": { type: "string", editable: false },
+							"TariffPerKg": { type: "number", editable: true },
+							"TotalTariffCost": { type: "number", editable: false },
+							"ScotchCost": { type: "number", editable: false },
+							"FactureCost": { type: "number", editable: false },
+							"WithdrawCost": { type: "number", editable: false },
+							"TransitCost": { type: "number", editable: false },
+							"InsuranceCost": { type: "number", editable: false },
+							"TotalCost": { type: "number", editable: false }
+						}
+					}
+				},
 				data: dataItem.Rows,
 				aggregate: [
 					{ field: "Count", aggregate: "sum" },
@@ -51,6 +73,10 @@
 			},
 			scrollable: false,
 			resizable: true,
+			editable: true,
+			save: function(e) {
+				debugger;
+			},
 			columns: [
 				{ field: "ClientNic", title: $l.Entities_Nic },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
@@ -82,5 +108,5 @@
 				}
 			]
 		});
-	}
+}
 });

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
@@ -30,9 +31,8 @@ namespace Alicargo.Services.Calculation
 
 			return awbs.Select(x => new CalculationAwb
 			{
-				AwbDisplay = AwbHelper.GetAirWayBillDisplay(x),
-				Rows = applications
-								   .Where(a => a.AirWaybillId == x.Id)
+				AwbDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWayBillDisplay(x)),
+				Rows = applications.Where(a => a.AirWaybillId == x.Id)
 								   .Select(a => new CalculationListItem
 								   {
 									   ApplicationId = a.Id,
