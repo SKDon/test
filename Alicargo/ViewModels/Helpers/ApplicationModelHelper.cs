@@ -24,7 +24,7 @@ namespace Alicargo.ViewModels.Helpers
 
 		public static string GetValueString(decimal value, int currencyId)
 		{
-			return value.ToString(".00", CultureInfo.CurrentUICulture) + ((CurrencyType)currencyId).ToLocalString();
+			return value.ToString("0.00", CultureInfo.CurrentUICulture) + ((CurrencyType)currencyId).ToLocalString();
 		}
 	}
 }

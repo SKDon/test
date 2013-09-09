@@ -34,6 +34,7 @@
 		var columns = $a.AddColumns();
 
 		$("#AirWaybill-grid").kendoGrid({
+			resizable: true,
 			dataSource: dataSource,
 			pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
 			detailTemplate: kendo.template($("#AirWaybill-grid-details").html()),

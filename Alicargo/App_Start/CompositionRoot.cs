@@ -19,7 +19,7 @@ namespace Alicargo.App_Start
 
 		public static void BindServices(IKernel kernel)
 		{
-			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger("")).InSingletonScope();
+			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger("Logger")).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
@@ -31,6 +31,8 @@ namespace Alicargo.App_Start
 										  .Excluding(binded)
 										  .BindDefaultInterface()
 										  .Configure(binding => binding.InRequestScope()));
+
+			LogManager.GetLogger("Logger").Info("Application started");
 		}
 
 		private static bool IsServiceType(Type type)
