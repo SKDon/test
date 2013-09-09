@@ -192,7 +192,7 @@ namespace Alicargo.DataAccess.Repositories
                     TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
                     TransitPhone = x.Transit.Phone,
                     TransitRecipientName = x.Transit.RecipientName,
-                    TransitReference = x.Transit.RecipientName,
+                    TransitReference = x.TransitReference,
                     TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
                     WarehouseWorkingTime = x.WarehouseWorkingTime,
                     Weigth = x.Weight,
