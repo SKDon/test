@@ -8,6 +8,8 @@ var columns = [
 { field: "MarkName", title: '@Entities.Mark', groupable: false },
 { field: "Count", title: '@Entities.Count', groupable: false, width: "35px", groupFooterTemplate: "#= Count.sum #", format: "{0:n0}" },
 { field: "Weigth", title: '@Entities.Weigth', groupable: false, width: "46px", groupFooterTemplate: "#= kendo.toString(Weigth.sum, 'n2') #", format: "{0:n2}" },
+{ field: "Volume", title: '@Entities.Volume', groupable: false, width: "46px", format: "{0:n2}" },
+{ field: "CountryName", title: '@Entities.Country', groupable: false, width: "70px" },
 { field: "Invoice", title: '@Entities.Invoice', groupable: false },
 { field: "ValueString", title: '@Entities.Value', groupable: false, width: "70px" },
 { field: "State", title: '@Entities.StateName', groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #" },
