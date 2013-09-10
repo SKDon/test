@@ -6,7 +6,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
 {
-    internal sealed class LocalizationService : ILocalizationService
+	internal sealed class LocalizationService : ILocalizationService
 	{
 		private readonly IStateRepository _stateRepository;
 
@@ -24,11 +24,6 @@ namespace Alicargo.Services
 		public string GetMethodOfDelivery(MethodOfDelivery methodOfDelivery, string culture)
 		{
 			return Resources.Entities.ResourceManager.GetString("MethodOfDelivery", CultureInfo.GetCultureInfo(culture));
-		}
-
-		public string GetCurrency(decimal value, CurrencyType currency, string culture)
-		{
-			return value.ToString("0.00", CultureInfo.GetCultureInfo(culture)) + CurrencyName.Names[currency];
 		}
 
 		public string GetMethodOfTransit(MethodOfTransit methodOfTransit, string culture)
