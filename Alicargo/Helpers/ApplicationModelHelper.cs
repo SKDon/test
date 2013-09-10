@@ -24,7 +24,14 @@ namespace Alicargo.Helpers
 
 		public static string GetValueString(decimal value, int currencyId)
 		{
-			return value.ToString("0.00", CultureInfo.CurrentUICulture) + ((CurrencyType)currencyId).ToLocalString();
+			var currency = ((CurrencyType)currencyId);
+
+			return GetValueString(value, currency, CultureContext.Current.GetTwoLetterISOLanguageName());
+		}
+
+		public static string GetValueString(decimal value, CurrencyType currency, string culture)
+		{
+			return value.ToString("### ### ### ##0.00", CultureInfo.GetCultureInfo(culture)) + CurrencyName.Names[currency];
 		}
 	}
 }

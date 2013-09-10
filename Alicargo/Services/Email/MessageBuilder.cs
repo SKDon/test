@@ -118,7 +118,7 @@ namespace Alicargo.Services.Email
 				model.Volume,
 				model.Weigth,
 				model.Characteristic,
-				_localizationService.GetCurrency(model.Value, (CurrencyType)model.CurrencyId, culture),
+				ApplicationModelHelper.GetValueString(model.Value, (CurrencyType)model.CurrencyId, culture),
 				model.AddressLoad,
 				model.CountryName,
 				model.WarehouseWorkingTime,
