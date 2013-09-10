@@ -89,6 +89,8 @@ namespace Alicargo.Controllers
 
 			ViewBag.ClientNic = client.Nic;
 
+			ViewBag.ClientId = client.Id;
+
 			ViewBag.ApplicationId = applicationId;
 
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
