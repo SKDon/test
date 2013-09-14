@@ -6,5 +6,6 @@
 		AirWaybill,
 		State,
 		LegalEntity,
+		ClientNic
 	}
 }

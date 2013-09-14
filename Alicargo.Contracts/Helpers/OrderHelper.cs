@@ -9,12 +9,14 @@ namespace Alicargo.Contracts.Helpers
 		public const string StateFieldName = "State";
 		public const string AwbFieldName = "AirWaybill";
 		public const string IdFieldName = "Id";
+		public const string ClientNicFieldName = "ClientNic";
 
 		private static readonly IDictionary<string, OrderType> Map = new Dictionary<string, OrderType>
 		{
 			{LegalEntityFieldName, OrderType.LegalEntity},
+			{ClientNicFieldName, OrderType.ClientNic},
 			{StateFieldName, OrderType.State},
-			{AwbFieldName, OrderType.AirWaybill},
+			{AwbFieldName, OrderType.AirWaybill}
 		};
 
 		public static Order[] Get(Dictionary<string, string>[] group)
