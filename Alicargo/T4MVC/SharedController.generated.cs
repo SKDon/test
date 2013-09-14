@@ -50,6 +50,7 @@ namespace T4MVC
             public partial class _EditorTemplatesClass
             {
                 public readonly string AuthenticationModel = "AuthenticationModel";
+                public readonly string CurrencyModel = "CurrencyModel";
                 public readonly string SelectModel = "SelectModel";
                 public readonly string TransitEditModel = "TransitEditModel";
             }

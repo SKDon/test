@@ -597,6 +597,7 @@
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />
+    <Content Include="Scripts\app\Application\Columns.js" />
     <Content Include="Scripts\app\Application\Grid.js" />
     <Content Include="Scripts\app\Calculation\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
@@ -1432,11 +1433,7 @@
     <Content Include="Views\Broker\Select.cshtml" />
     <Content Include="Views\AirWaybill\AdminDetails.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\ApplicationList\ClientColumns.cshtml" />
-    <Content Include="Views\ApplicationList\AdminColumns.cshtml" />
     <Content Include="Views\ApplicationList\AdminDetails.cshtml" />
-    <Content Include="Views\ApplicationList\ForwarderColumns.cshtml" />
-    <Content Include="Views\ApplicationList\SenderColumns.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
@@ -1465,6 +1462,7 @@
     <Content Include="Views\AirWaybill\BrokerDetails.cshtml" />
     <Content Include="Views\SenderAwb\Create.cshtml" />
     <Content Include="Views\Calculation\Index.cshtml" />
+    <Content Include="Views\DynamicScript\States.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

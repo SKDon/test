@@ -30,10 +30,10 @@ namespace Alicargo.Services
 		{
 			get { return ConfigurationManager.AppSettings["StateId-CargoOnTransit"].ToLong(); }
 		}
-		public long CreatedAWBStateId
-		{
-			get { return ConfigurationManager.AppSettings["StateId-CreatedAWB"].ToLong(); }
-		}
+		//public long CreatedAWBStateId
+		//{
+		//	get { return ConfigurationManager.AppSettings["StateId-CreatedAWB"].ToLong(); }
+		//}
 		public long DefaultStateId
 		{
 			get { return ConfigurationManager.AppSettings["StateId-Default"].ToLong(); }

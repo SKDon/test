@@ -261,7 +261,6 @@ namespace Alicargo.Controllers
             public partial class _EditorTemplatesClass
             {
                 public readonly string ApplicationEditModel = "ApplicationEditModel";
-                public readonly string CurrencyModel = "CurrencyModel";
             }
         }
     }

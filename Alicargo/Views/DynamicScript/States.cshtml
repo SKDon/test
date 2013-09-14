@@ -1,0 +1,9 @@
+﻿@model Dictionary<string, long>
+
+var Alicargo = (function($a){$a.States = (function($s){
+@foreach (var item in Model)
+{
+	var line = string.Format("$s.{0}={1};", item.Key, item.Value);
+	@Html.Raw(line)	
+}
+return $s;}($a.States || {}));return $a;}(Alicargo || {}))

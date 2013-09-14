@@ -25,9 +25,6 @@ namespace Alicargo.Controllers
     public partial class DynamicScriptController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public DynamicScriptController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected DynamicScriptController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -63,6 +60,7 @@ namespace Alicargo.Controllers
             public readonly string Roles = "Roles";
             public readonly string Urls = "Urls";
             public readonly string Localization = "Localization";
+            public readonly string States = "States";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -71,6 +69,7 @@ namespace Alicargo.Controllers
             public const string Roles = "Roles";
             public const string Urls = "Urls";
             public const string Localization = "Localization";
+            public const string States = "States";
         }
 
 
@@ -86,10 +85,12 @@ namespace Alicargo.Controllers
             {
                 public readonly string Localization = "Localization";
                 public readonly string Roles = "Roles";
+                public readonly string States = "States";
                 public readonly string Urls = "Urls";
             }
             public readonly string Localization = "~/Views/DynamicScript/Localization.cshtml";
             public readonly string Roles = "~/Views/DynamicScript/Roles.cshtml";
+            public readonly string States = "~/Views/DynamicScript/States.cshtml";
             public readonly string Urls = "~/Views/DynamicScript/Urls.cshtml";
         }
     }
@@ -123,6 +124,15 @@ namespace Alicargo.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Localization);
             LocalizationOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void StatesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        public override System.Web.Mvc.PartialViewResult States()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.States);
+            StatesOverride(callInfo);
             return callInfo;
         }
 

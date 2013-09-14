@@ -97,23 +97,15 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string AdminColumns = "AdminColumns";
                 public readonly string AdminDetails = "AdminDetails";
-                public readonly string ClientColumns = "ClientColumns";
                 public readonly string DetailsTemplate = "DetailsTemplate";
-                public readonly string ForwarderColumns = "ForwarderColumns";
                 public readonly string Index = "Index";
-                public readonly string SenderColumns = "SenderColumns";
                 public readonly string SenderDetails = "SenderDetails";
                 public readonly string Tools = "Tools";
             }
-            public readonly string AdminColumns = "~/Views/ApplicationList/AdminColumns.cshtml";
             public readonly string AdminDetails = "~/Views/ApplicationList/AdminDetails.cshtml";
-            public readonly string ClientColumns = "~/Views/ApplicationList/ClientColumns.cshtml";
             public readonly string DetailsTemplate = "~/Views/ApplicationList/DetailsTemplate.cshtml";
-            public readonly string ForwarderColumns = "~/Views/ApplicationList/ForwarderColumns.cshtml";
             public readonly string Index = "~/Views/ApplicationList/Index.cshtml";
-            public readonly string SenderColumns = "~/Views/ApplicationList/SenderColumns.cshtml";
             public readonly string SenderDetails = "~/Views/ApplicationList/SenderDetails.cshtml";
             public readonly string Tools = "~/Views/ApplicationList/Tools.cshtml";
         }
