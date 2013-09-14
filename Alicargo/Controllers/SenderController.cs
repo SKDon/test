@@ -75,7 +75,10 @@ namespace Alicargo.Controllers
 					Value = application.Value,
 					CurrencyId = application.CurrencyId
 				},
-				Volume = application.Volume
+				Volume = application.Volume,
+				FactureCost = application.FactureCost,
+				ScotchCost = application.ScotchCost,
+				WithdrawCost = application.WithdrawCost
 			});
 		}
 
@@ -152,6 +155,9 @@ namespace Alicargo.Controllers
 			to.Value = @from.Currency.Value;
 			to.CurrencyId = @from.Currency.CurrencyId;
 			to.Volume = @from.Volume;
+			to.FactureCost = @from.FactureCost;
+			to.WithdrawCost = from.WithdrawCost;
+			to.ScotchCost = from.ScotchCost;
 		}
 	}
 }

@@ -53,5 +53,14 @@ namespace Alicargo.ViewModels.Application
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
 		public CurrencyModel Currency { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
+		public decimal? ScotchCost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
+		public decimal? FactureCost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "WithdrawCost")]
+		public decimal? WithdrawCost { get; set; }
 	}
 }
