@@ -370,7 +370,7 @@
     <value>Стоимость за килограмм для сендера (€)</value>
   </data>
   <data name="TotalCostOfSenderForWeight" xml:space="preserve">
-    <value>Суммартные затраты по сендеру по весу (€)</value>
+    <value>Затраты по весу (€)</value>
   </data>
   <data name="TotalOfSender" xml:space="preserve">
     <value>Всего по сендеру (€)</value>

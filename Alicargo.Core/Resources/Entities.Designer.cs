@@ -772,7 +772,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Суммартные затраты по сендеру по весу (€).
+        ///   Looks up a localized string similar to Затраты по весу (€).
         /// </summary>
         public static string TotalCostOfSenderForWeight {
             get {

@@ -7,7 +7,7 @@
 	var gridHolder = $("#calculation-grid");
 	
 	var grid = gridHolder.kendoGrid({
-		columns: [{ field: "AwbDisplay" }],
+		columns: [{ field: "AwbDisplay", template: "<b>#: AwbDisplay # </b>" }],
 		pageable: true,
 		editable: false,
 		dataSource: {
