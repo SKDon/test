@@ -6,7 +6,7 @@ var columns = [
 { field: "State", title: '@Entities.StateName', groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
 { field: "DateOfCargoReceiptLocalString", title: '@Entities.DateOfCargoReceipt', groupable: false, editor: dateEditor, width: "90px", template: "#= DateOfCargoReceiptLocalString == null ? '' : kendo.toString(DateOfCargoReceiptLocalString, 'd') #" },
 { field: "DateInStockLocalString", title: '@Entities.DateInStock', groupable: false, width: "90px" },
-{ field: "ClientNic", title: '@Entities.Nic', groupable: false, width: "100px" },
+{ field: "ClientNic", title: '@Entities.Nic', groupable: true, width: "100px" },
 { field: "DisplayNumber", title: '@Entities.DisplayNumber', groupable: false, width: "60px" },
 { field: "CountryName", title: '@Entities.Country', groupable: false, width: "70px" },
 { field: "FactoryName", title: '@Entities.FactoryName', groupable: false, width: "100px" },

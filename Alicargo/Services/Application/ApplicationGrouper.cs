@@ -10,17 +10,28 @@ using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Application
 {
+	using OrderFunction = Func<IEnumerable<ApplicationListItem>, OrderType[], ApplicationGroup[]>;
+
 	internal sealed class ApplicationGrouper : IApplicationGrouper
 	{
 		private readonly IAwbRepository _awbRepository;
+		private readonly IDictionary<OrderType, OrderFunction> _map;
 		private Dictionary<long, AirWaybillData> _airWaybills;
 		private Dictionary<long, AirWaybillAggregate> _awbAggregates;
-		private float? _weightWithouAwb;
 		private int? _countWithouAwb;
+		private float? _weightWithouAwb;
 
 		public ApplicationGrouper(IAwbRepository awbRepository)
 		{
 			_awbRepository = awbRepository;
+
+			_map = new Dictionary<OrderType, OrderFunction>
+			{
+				{OrderType.AirWaybill, ByAirWaybill},
+				{OrderType.State, ByState},
+				{OrderType.ClientNic, ByClientNic},
+				{OrderType.LegalEntity, ByLegalEntity}
+			};
 		}
 
 		public ApplicationGroup[] Group(ApplicationListItem[] applications, OrderType[] groups)
@@ -42,29 +53,24 @@ namespace Alicargo.Services.Application
 											 IReadOnlyCollection<OrderType> groups)
 		{
 			var current = groups.First();
-			var rest = groups.Except(new[] { current }).ToArray();
+			var rest = groups.Except(new[] {current}).ToArray();
 
-			switch (current)
-			{
-				case OrderType.AirWaybill:
-					return ByAirWaybill(applications, rest);
+			return _map[current](applications, rest);
+		}
 
-				case OrderType.State:
-					return ByState(applications, rest);
-
-				case OrderType.LegalEntity:
-					return ByLegalEntity(applications, rest);
-
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
+		private ApplicationGroup[] ByClientNic(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
+		{
+			return applications.GroupBy(x => x.ClientNic)
+							   .Select(grouping =>
+										   GetApplicationGroup(grouping, groups, OrderHelper.ClientNicFieldName,
+															   g => g.Key))
+							   .ToArray();
 		}		
 
 		private ApplicationGroup[] ByLegalEntity(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
 			return applications.GroupBy(x => x.ClientLegalEntity)
-							   .Select(
-									   grouping =>
+							   .Select(grouping =>
 										   GetApplicationGroup(grouping, groups, OrderHelper.LegalEntityFieldName,
 															   g => g.Key))
 							   .ToArray();
@@ -73,8 +79,7 @@ namespace Alicargo.Services.Application
 		private ApplicationGroup[] ByState(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
 			return applications.GroupBy(x => x.State.StateName)
-							   .Select(
-									   grouping =>
+							   .Select(grouping =>
 										   GetApplicationGroup(grouping, groups, OrderHelper.StateFieldName,
 															   g => g.Key))
 							   .ToArray();
@@ -103,7 +108,7 @@ namespace Alicargo.Services.Application
 
 			if (field == OrderHelper.AwbFieldName)
 			{
-				var id = (long)(object)grouping.Key;
+				var id = (long) (object) grouping.Key;
 				if (_awbAggregates.ContainsKey(id))
 				{
 					count = _awbAggregates[id].TotalCount;

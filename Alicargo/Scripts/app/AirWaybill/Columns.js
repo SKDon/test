@@ -44,16 +44,16 @@
 	function addAdminColumns(columns) {
 		columns.push({
 			field: "FlightCost",
-			title: Alicargo.Localization.Entities_FlightCost
+			title: Alicargo.Localization.Entities_FlightCost, format: "{0:n0}"
 		}, {
 			field: "BrokerCost",
-			title: Alicargo.Localization.Entities_BrokerCost
+			title: Alicargo.Localization.Entities_BrokerCost, format: "{0:n0}"
 		}, {
 			field: "CustomCost",
-			title: Alicargo.Localization.Entities_CustomCost
+			title: Alicargo.Localization.Entities_CustomCost, format: "{0:n0}"
 		}, {
 			field: "AdditionalCost",
-			title: Alicargo.Localization.Entities_AdditionalCost
+			title: Alicargo.Localization.Entities_AdditionalCost, format: "{0:n0}"
 		});
 
 		addEditButton(columns, Alicargo.Urls.AirWaybill_Edit);
@@ -63,7 +63,7 @@
 	function addSenderColumns(columns) {
 		columns.push({
 			field: "FlightCost",
-			title: Alicargo.Localization.Entities_FlightCost
+			title: Alicargo.Localization.Entities_FlightCost, format: "{0:n0}"
 		});
 
 		addEditButton(columns, Alicargo.Urls.SenderAwb_Edit);
@@ -73,10 +73,10 @@
 	function addBrokerColumns(columns) {
 		columns.push({
 			field: "BrokerCost",
-			title: Alicargo.Localization.Entities_BrokerCost
+			title: Alicargo.Localization.Entities_BrokerCost, format: "{0:n0}"
 		}, {
 			field: "CustomCost",
-			title: Alicargo.Localization.Entities_CustomCost
+			title: Alicargo.Localization.Entities_CustomCost, format: "{0:n0}"
 		});
 
 		addEditButton(columns, Alicargo.Urls.Broker_AWB);

@@ -7,8 +7,19 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Helpers
 {
+	using OrderFunction = Func<IQueryable<Application>, bool, bool, IQueryable<Application>>;
+
 	internal sealed class ApplicationRepositoryOrderer : IApplicationRepositoryOrderer
 	{
+		private static readonly IDictionary<OrderType, OrderFunction> Map = new Dictionary<OrderType, OrderFunction>
+		{
+			{OrderType.Id, ById},
+			{OrderType.AirWaybill, ByAirWaybillBill},
+			{OrderType.State, ByState},
+			{OrderType.ClientNic, ByClientNic},
+			{OrderType.LegalEntity, ByLegalEntity}
+		};
+
 		public IQueryable<Application> Order(IQueryable<Application> applications, IEnumerable<Order> orders)
 		{
 			if (orders == null)
@@ -20,38 +31,16 @@ namespace Alicargo.DataAccess.Helpers
 
 			foreach (var order in orders)
 			{
-				applications = Order(applications, order.OrderType, order.Desc, isFirst);
+				applications = Map[order.OrderType](applications, order.Desc, isFirst);
 
 				isFirst = false;
 			}
 			return applications;
 		}
 
-		private static IQueryable<Application> Order(IQueryable<Application> applications,
-			OrderType field, bool desc, bool isFirst)
+		private static IQueryable<Application> ByClientNic(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
-			switch (field)
-			{
-				case OrderType.Id:
-					applications = ById(applications, desc, isFirst);
-					break;
-
-				case OrderType.AirWaybill:
-					applications = ByAirWaybillBill(applications, desc, isFirst);
-					break;
-
-				case OrderType.State:
-					applications = ByState(applications, desc, isFirst);
-					break;
-
-				case OrderType.LegalEntity:
-					applications = ByLegalEntity(applications, desc, isFirst);
-					break;
-
-				default:
-					throw new ArgumentOutOfRangeException("field");
-			}
-			return applications;
+			return Order(applications, desc, isFirst, a => a.Client.Nic);
 		}
 
 		// todo: 3. test

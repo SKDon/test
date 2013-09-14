@@ -31,7 +31,12 @@ namespace Alicargo.ViewModels.Helpers
 
 		public static string GetValueString(decimal value, CurrencyType currency, string culture)
 		{
-			return value.ToString("### ### ### ##0.00", CultureInfo.GetCultureInfo(culture)) + CurrencyName.Names[currency];
+			if (value == 0)
+			{
+				return string.Empty;
+			}
+
+			return value.ToString("### ### ### ###", CultureInfo.GetCultureInfo(culture)) + CurrencyName.Names[currency];
 		}
 	}
 }
