@@ -56,7 +56,7 @@ namespace Alicargo.ViewModels.Calculation
 			}
 		}
 
-		public decimal TotalCost
+		public decimal Profit
 		{
 			get
 			{

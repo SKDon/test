@@ -817,6 +817,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Прибыль (всего, €).
+        /// </summary>
+        public static string TotalProfit {
+            get {
+                return ResourceManager.GetString("TotalProfit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Суммарные затраты на скотч (€).
         /// </summary>
         public static string TotalScotchCost {

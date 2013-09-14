@@ -74,12 +74,12 @@ namespace Alicargo.ViewModels.Calculation
 
 		public decimal? AdditionalCost { get; set; }
 
-		public decimal? TotalExpenses
+		public decimal TotalExpenses
 		{
 			get
 			{
 				var insuranceCost = Rows.Sum(x => x.InsuranceCost);
-				return TotalOfSender + FlightCost + CustomCost + BrokerCost + insuranceCost + TotalForwarderCost + AdditionalCost;
+				return (TotalOfSender + FlightCost + CustomCost + BrokerCost + insuranceCost + TotalForwarderCost + AdditionalCost) ?? 0;
 			}
 		}
 
@@ -87,7 +87,7 @@ namespace Alicargo.ViewModels.Calculation
 		{
 			get
 			{
-				return Rows.Sum(x => x.Value) - (TotalExpenses ?? 0);
+				return Rows.Sum(x => x.Profit) - TotalExpenses;
 			}
 		}
 

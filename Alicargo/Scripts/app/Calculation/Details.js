@@ -32,7 +32,7 @@
 							"WithdrawCost": { type: "number", editable: editWithdrawCost },
 							"TransitCost": { type: "number", editable: editTransitCost },
 							"InsuranceCost": { type: "number", editable: false },
-							"TotalCost": { type: "number", editable: false }
+							"Profit": { type: "number", editable: false }
 						}
 					}
 				},
@@ -47,7 +47,7 @@
 					{ field: "WithdrawCost", aggregate: "sum" },
 					{ field: "TransitCost", aggregate: "sum" },
 					{ field: "InsuranceCost", aggregate: "sum" },
-					{ field: "TotalCost", aggregate: "sum" }]
+					{ field: "Profit", aggregate: "sum" }]
 			};
 			var columns = [
 				{ field: "ClientNic", title: $l.Entities_Nic },
@@ -65,7 +65,7 @@
 				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, footerTemplate: "#= kendo.toString(sum, 'n0') #" },
 				{ field: "TransitCost", title: $l.Entities_TransitCost, footerTemplate: "#= kendo.toString(sum, 'n0') #" },
 				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", footerTemplate: "#= kendo.toString(sum, 'n2') #" },
-				{ field: "TotalCost", title: $l.Entities_Total, footerTemplate: "#= kendo.toString(sum, 'n2') #" }
+				{ field: "Profit", title: $l.Entities_Profit, footerTemplate: "#= kendo.toString(sum, 'n2') #" }
 			];
 			if ($r.IsAdmin) {
 				$.extend(columns, {

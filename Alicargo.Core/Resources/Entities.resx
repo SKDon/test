@@ -399,4 +399,7 @@
   <data name="TotalExpenses" xml:space="preserve">
     <value>Суммарные расходы (€)</value>
   </data>
+  <data name="TotalProfit" xml:space="preserve">
+    <value>Прибыль (всего, €)</value>
+  </data>
 </root>
