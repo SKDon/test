@@ -46,6 +46,7 @@
 				});
 		}
 
+		var groupHeaderTemplateAwb = "#= Alicargo.Localization.Entities_AWB + ':' + !!value ? value : Alicargo.Localization.Pages_NoAirWaybill #";
 		var adminColumns = [
 			{ field: "CreationTimestampLocalString", title: $l.Entities_CreationTimestamp, groupable: false, width: "90px" },
 			{ field: "State", title: $l.Entities_StateName, groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
@@ -65,7 +66,7 @@
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
 			{ field: "TransitCarrierName", title: $l.Entities_CarrierName, groupable: false, width: "100px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
-			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: "@Entities.AWB: #= !!value ? value : '@Pages.NoAirWaybill' #" }];
+			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
 		var clientColumns = [
 			{ field: "CreationTimestampLocalString", title: $l.Entities_CreationTimestamp, groupable: false, width: "70px" },
@@ -81,7 +82,7 @@
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false },
 			{ field: "TransitCarrierName", title: $l.Entities_CarrierName, groupable: false },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
-			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: "@Entities.AWB: #= !!value ? value : '@Pages.NoAirWaybill' #" }];
+			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
 		var forwarderColumns = [
 			{ field: "State", title: $l.Entities_StateName, groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },
@@ -97,7 +98,7 @@
 			{ field: "TransitPhone", title: $l.Entities_Phone, groupable: false, width: "100px" },
 			{ field: "TransitWarehouseWorkingTime", title: $l.Entities_WarehouseWorkingTime, groupable: false, width: "90px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
-			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: "@Entities.AWB: #= !!value ? value : '@Pages.NoAirWaybill' #" }];
+			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
 		var senderColumns = [
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true },
@@ -112,7 +113,7 @@
 			{ field: "ValueString", title: $l.Entities_Value, groupable: false, width: "70px" },
 			{ field: "State", title: $l.Entities_StateName, groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #" },
 			{ field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false },
-			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: "@Entities.AWB: #= !!value ? value : '@Pages.NoAirWaybill' #" }];
+			{ field: "AirWaybill", title: $l.Entities_AirWayBill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
 		$apl.GetColumns = function () {
 			if ($r.IsClient) {
