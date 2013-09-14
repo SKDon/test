@@ -5,7 +5,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Services.Abstract;
 using Ninject;
 
-namespace Alicargo.Helpers
+namespace Alicargo.MvcHelpers
 {
     internal sealed class AccessAttribute : FilterAttribute, IAuthorizationFilter
 	{

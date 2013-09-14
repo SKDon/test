@@ -1,6 +1,6 @@
 using System.Web.Optimization;
 
-namespace Alicargo.Helpers
+namespace Alicargo.MvcHelpers
 {
 	internal sealed class StyleRelativePathTransformBundle : Bundle
 	{

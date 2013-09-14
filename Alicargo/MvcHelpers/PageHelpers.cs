@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Microsoft.Ajax.Utilities;
 
-namespace Alicargo.Helpers
+namespace Alicargo.MvcHelpers
 {
     public static class PageHelpers
 	{

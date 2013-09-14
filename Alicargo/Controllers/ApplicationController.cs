@@ -2,7 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Helpers;
+using Alicargo.MvcHelpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using System.Net;

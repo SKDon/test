@@ -3,7 +3,7 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Alicargo.Helpers
+namespace Alicargo.MvcHelpers
 {
     internal static class FileExtensions
 	{

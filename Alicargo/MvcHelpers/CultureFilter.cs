@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Alicargo.Core.Localization;
 
-namespace Alicargo.Helpers
+namespace Alicargo.MvcHelpers
 {
     internal sealed class CultureFilter : IAuthorizationFilter
 	{

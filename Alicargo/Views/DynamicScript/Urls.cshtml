@@ -1,24 +1,8 @@
-﻿@inherits BaseWebViewPage
-
-var Alicargo = (function($a){
-
-$a.Urls = (function($u){
-
-$u.AirWaybill_List = "@Url.Action(MVC.AirWaybill.List())";
-$u.AirWaybill_Edit = "@Url.Action(MVC.AirWaybill.Edit())";
-$u.AirWaybill_Delete = "@Url.Action(MVC.AirWaybill.Delete())";
-
-$u.SenderAwb_Edit = "@Url.Action(MVC.SenderAwb.Edit())";
-
-$u.Broker_AWB = "@Url.Action(MVC.Broker.AWB())";
-
-$u.Client_List = "@Url.Action(MVC.Client.List())";
-$u.Client_Edit = "@Url.Action(MVC.Client.Edit())";
-
-$u.Calculation_List = "@Url.Action(MVC.Calculation.List())";
-
-return $u;
-}($a.Urls || {}));
-
-return $a;
-}(Alicargo || {}))
+﻿@inherits Alicargo.MvcHelpers.BaseWebViewPage<DynamicScriptMethodDescription[]>
+var Alicargo = (function($a){$a.Urls = (function($u){
+@foreach (var item in Model)
+{
+	var line = string.Format("$u.{0}_{1}='{2}';", item.Controller, item.Action, Url.Action(item.Action, item.Controller));
+	@Html.Raw(line)
+}
+return $u;}($a.Urls || {}));return $a;}(Alicargo || {}))

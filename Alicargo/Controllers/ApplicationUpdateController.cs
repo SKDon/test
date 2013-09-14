@@ -2,7 +2,7 @@
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
-using Alicargo.Helpers;
+using Alicargo.MvcHelpers;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers

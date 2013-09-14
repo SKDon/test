@@ -1,6 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using Alicargo.Helpers;
+using Alicargo.MvcHelpers;
 using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.ModelBinders

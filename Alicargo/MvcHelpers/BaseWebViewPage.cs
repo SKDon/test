@@ -2,7 +2,7 @@
 using Alicargo.Services.Abstract;
 using Ninject;
 
-namespace Alicargo.Helpers
+namespace Alicargo.MvcHelpers
 {
     public abstract class BaseWebViewPage : WebViewPage
 	{

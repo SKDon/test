@@ -155,26 +155,27 @@
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\SenderAwbController.cs" />
-    <Compile Include="Helpers\PathConstants.cs" />
+    <Compile Include="MvcHelpers\CustomContentTypeAttribute.cs" />
+    <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="ModelBinders\SenderAwbModelBinder.cs" />
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
     <Compile Include="Controllers\SenderController.cs" />
     <Compile Include="Controllers\TransitController.cs" />
-    <Compile Include="Helpers\StyleRelativePathTransform.cs" />
-    <Compile Include="Helpers\StyleRelativePathTransformBundle.cs" />
-    <Compile Include="Helpers\CustomHandleErrorInfo.cs" />
+    <Compile Include="MvcHelpers\StyleRelativePathTransform.cs" />
+    <Compile Include="MvcHelpers\StyleRelativePathTransformBundle.cs" />
+    <Compile Include="MvcHelpers\CustomHandleErrorInfo.cs" />
     <Compile Include="ModelBinders\ApplicationModelBinder.cs" />
     <Compile Include="ModelBinders\BrokerAWBModelBinder.cs" />
     <Compile Include="ModelBinders\ApplicationSenderEditBinder.cs" />
     <Compile Include="ModelBinders\AirWaybillModelBinder.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\AirWaybillController.cs" />
-    <Compile Include="Helpers\BaseWebViewPage.cs" />
-    <Compile Include="Helpers\HandleErrorAttribute.cs" />
-    <Compile Include="Helpers\FileExtensions.cs" />
-    <Compile Include="Helpers\PageHelpers.cs" />
+    <Compile Include="MvcHelpers\BaseWebViewPage.cs" />
+    <Compile Include="MvcHelpers\HandleErrorAttribute.cs" />
+    <Compile Include="MvcHelpers\FileExtensions.cs" />
+    <Compile Include="MvcHelpers\PageHelpers.cs" />
     <Compile Include="Resources\Validation.en.Designer.cs">
       <DependentUpon>Validation.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -208,14 +209,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\MenuLink.cs" />
+    <Compile Include="MvcHelpers\MenuLink.cs" />
     <Compile Include="Resources\Pages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Pages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AccessAttribute.cs" />
-    <Compile Include="Helpers\CultureFilter.cs" />
+    <Compile Include="MvcHelpers\AccessAttribute.cs" />
+    <Compile Include="MvcHelpers\CultureFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Validation.it.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -336,6 +337,7 @@
     <Compile Include="ViewModels\AirWaybill\SenderAwbModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
+    <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Helpers\ApplicationModelHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
@@ -595,6 +597,7 @@
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />
+    <Content Include="Scripts\app\Application\Grid.js" />
     <Content Include="Scripts\app\Calculation\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />

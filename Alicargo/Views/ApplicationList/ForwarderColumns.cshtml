@@ -1,5 +1,5 @@
 ﻿@using Resources
-@inherits BaseWebViewPage<ApplicationIndexModel>
+@inherits Alicargo.MvcHelpers.BaseWebViewPage<ApplicationIndexModel>
 
 var columns = [
 { field: "State", title: '@Entities.StateName', groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },

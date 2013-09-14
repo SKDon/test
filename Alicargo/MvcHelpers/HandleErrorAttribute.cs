@@ -4,10 +4,10 @@ using System.Net;
 using System.Text;
 using System.Web.Mvc;
 using Alicargo.Contracts.Exceptions;
-using WebGrease.Css.Extensions;
 using log4net;
+using WebGrease.Css.Extensions;
 
-namespace Alicargo.Helpers
+namespace Alicargo.MvcHelpers
 {
     internal sealed class CustomHandleErrorAttribute : HandleErrorAttribute
 	{

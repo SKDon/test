@@ -1,5 +1,5 @@
 using System.Web.Optimization;
-using Alicargo.Helpers;
+using Alicargo.MvcHelpers;
 
 [assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Alicargo.App_Start.BundleConfig), "RegisterBundles")]
 

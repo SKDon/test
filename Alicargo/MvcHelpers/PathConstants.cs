@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Helpers
+﻿namespace Alicargo.MvcHelpers
 {
     public static class PathConstants
     {

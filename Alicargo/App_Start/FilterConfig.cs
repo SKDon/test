@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Helpers;
+using Alicargo.MvcHelpers;
 using Ninject;
 using log4net;
 
