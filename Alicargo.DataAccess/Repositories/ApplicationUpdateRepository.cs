@@ -60,6 +60,11 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.DateOfCargoReceipt = dateOfCargoReceipt);
 		}
 
+		public void SetTransitCost(long id, decimal? transitCost)
+		{
+			Update(id, application => application.TransitCost = transitCost);
+		}
+
 		public void Update(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
 			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
 		{

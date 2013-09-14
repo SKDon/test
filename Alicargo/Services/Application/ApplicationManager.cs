@@ -97,6 +97,13 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
+		public void SetTransitCost(long id, decimal? transitCost)
+		{
+			_applicationUpdater.SetTransitCost(id, transitCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
 		public void SetState(long applicationId, long stateId)
 		{
 			if (!_stateService.HasPermissionToSetState(stateId))

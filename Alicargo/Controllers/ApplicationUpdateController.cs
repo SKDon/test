@@ -59,6 +59,14 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost]
+		public virtual HttpStatusCodeResult SetTransitCost(long id, decimal? transitCost)
+		{
+			_applicationManager.SetTransitCost(id, transitCost);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost]
 		public virtual HttpStatusCodeResult SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_applicationManager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);

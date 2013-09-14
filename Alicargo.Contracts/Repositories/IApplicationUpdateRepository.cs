@@ -14,5 +14,6 @@ namespace Alicargo.Contracts.Repositories
 		void SetDateInStock(long applicationId, DateTimeOffset dateTimeOffset);
 		void SetTransitReference(long id, string transitReference);
 		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);
+		void SetTransitCost(long id, decimal? transitCost);
 	}
 }

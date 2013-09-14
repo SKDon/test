@@ -87,7 +87,14 @@ namespace Alicargo.Services.Email
             SendOnSetDateOfCargoReceipt(id);
         }
 
-        public void SetTransitReference(long id, string transitReference)
+	    public void SetTransitCost(long id, decimal? transitCost)
+	    {
+		    _manager.SetTransitCost(id, transitCost);
+
+		    // todo: 2. think what email should be sent
+	    }
+
+	    public void SetTransitReference(long id, string transitReference)
         {
             _manager.SetTransitReference(id, transitReference);
 

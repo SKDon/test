@@ -15,5 +15,6 @@ namespace Alicargo.Services.Abstract
 		void SetState(long applicationId, long stateId);
 		void SetTransitReference(long id, string transitReference);
 		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);
+		void SetTransitCost(long id, decimal? transitCost);
 	}
 }

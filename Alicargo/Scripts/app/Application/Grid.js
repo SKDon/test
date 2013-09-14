@@ -108,10 +108,18 @@
 			edit: function (e) {
 				if (e.container.find("input[name='TransitReference']").length) return;
 				if (e.container.find("input[name='DateOfCargoReceiptLocalString']").length) return;
+				if (($r.IsForwarder || $r.IsAdmin) && e.container.find("input[name='TransitCost']").length) return;
+
 				var stateName = e.container.find("input[data-text-field='StateName']");
 				if (!stateName.length || !e.model.CanSetState) $a.Application.GetGrid().closeCell();
 			},
 			save: function (e) {
+				if (e.values.TransitCost !== undefined) {
+					$.post($u.ApplicationUpdate_SetTransitCost, {
+						id: e.model.Id,
+						transitCost: e.values.TransitCost
+					}).fail($a.ShowError);
+				}
 				if (e.values.TransitReference !== undefined) {
 					$.post($u.ApplicationUpdate_SetTransitReference, {
 						id: e.model.Id,
