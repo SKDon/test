@@ -91,7 +91,35 @@ namespace Alicargo.Services.Email
 	    {
 		    _manager.SetTransitCost(id, transitCost);
 
-		    // todo: 2. think what email should be sent
+		    // todo: 2. think what an email should be sent
+	    }
+
+	    public void SetTariffPerKg(long id, decimal? tariffPerKg)
+	    {
+		    _manager.SetTariffPerKg(id, tariffPerKg);
+
+			// todo: 2. think what an email should be sent
+	    }
+
+	    public void SetWithdrawCost(long id, decimal? withdrawCost)
+	    {
+		    _manager.SetWithdrawCost(id, withdrawCost);
+
+			// todo: 2. think what an email should be sent
+	    }
+
+	    public void SetFactureCost(long id, decimal? factureCost)
+	    {
+		    _manager.SetFactureCost(id, factureCost);
+
+			// todo: 2. think what an email should be sent
+	    }
+
+	    public void SetScotchCost(long id, decimal? scotchCost)
+	    {
+		    _manager.SetScotchCost(id, scotchCost);
+
+			// todo: 2. think what an email should be sent
 	    }
 
 	    public void SetTransitReference(long id, string transitReference)

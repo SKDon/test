@@ -1,5 +1,5 @@
 ﻿@using Resources
-@inherits Alicargo.MvcHelpers.BaseWebViewPage
+@inherits BaseWebViewPage
 <style>
 	.container {
 		padding: 0 20px;
@@ -38,5 +38,6 @@
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
 
 	@Scripts.Render("~/Scripts/app/Alicargo.js")
+	@Scripts.Render("~/scripts/app/calculation/Details.js")
 	@Scripts.Render("~/scripts/app/calculation/Grid.js")
 }

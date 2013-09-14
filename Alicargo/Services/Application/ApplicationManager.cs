@@ -104,6 +104,34 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
+		public void SetTariffPerKg(long id, decimal? tariffPerKg)
+		{
+			_applicationUpdater.SetTariffPerKg(id, tariffPerKg);
+
+			_unitOfWork.SaveChanges();
+		}
+
+		public void SetWithdrawCost(long id, decimal? withdrawCost)
+		{
+			_applicationUpdater.SetWithdrawCost(id, withdrawCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
+		public void SetFactureCost(long id, decimal? factureCost)
+		{
+			_applicationUpdater.SetFactureCost(id, factureCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
+		public void SetScotchCost(long id, decimal? scotchCost)
+		{
+			_applicationUpdater.SetScotchCost(id, scotchCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
 		public void SetState(long applicationId, long stateId)
 		{
 			if (!_stateService.HasPermissionToSetState(stateId))
@@ -241,7 +269,7 @@ namespace Alicargo.Services.Application
 				TransitCost = model.TransitCost,
 				FactureCost = model.FactureCost,
 				ForwarderCost = model.ForwarderCost,
-				TariffPerKg = model.TariffPerKg				
+				TariffPerKg = model.TariffPerKg
 			};
 			return data;
 		}

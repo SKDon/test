@@ -273,4 +273,7 @@
   <data name="Users" xml:space="preserve">
     <value>Users</value>
   </data>
+  <data name="Calculation" xml:space="preserve">
+    <value>Calculation</value>
+  </data>
 </root>

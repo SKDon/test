@@ -7,7 +7,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers
 {
-    // todo: 2. bb tests
+	// todo: 2. bb tests
 	public partial class ApplicationUpdateController : Controller
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
@@ -62,6 +62,38 @@ namespace Alicargo.Controllers
 		public virtual HttpStatusCodeResult SetTransitCost(long id, decimal? transitCost)
 		{
 			_applicationManager.SetTransitCost(id, transitCost);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost]
+		public virtual HttpStatusCodeResult SetTariffPerKg(long id, decimal? tariffPerKg)
+		{
+			_applicationManager.SetTariffPerKg(id, tariffPerKg);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		public virtual HttpStatusCodeResult SetScotchCost(long id, decimal? scotchCost)
+		{
+			_applicationManager.SetScotchCost(id, scotchCost);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		public virtual HttpStatusCodeResult SetFactureCost(long id, decimal? factureCost)
+		{
+			_applicationManager.SetFactureCost(id, factureCost);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		public virtual HttpStatusCodeResult SetWithdrawCost(long id, decimal? withdrawCost)
+		{
+			_applicationManager.SetWithdrawCost(id, withdrawCost);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}

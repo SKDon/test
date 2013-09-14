@@ -273,4 +273,7 @@
   <data name="CantEditAirWaybill" xml:space="preserve">
     <value>Non è possibile modificare AWB {0}  lo stato attuale della</value>
   </data>
+  <data name="Calculation" xml:space="preserve">
+    <value>Cálculo</value>
+  </data>
 </root>
