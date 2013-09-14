@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Services;
 using Alicargo.MvcHelpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -13,38 +10,25 @@ namespace Alicargo.Controllers
 {
 	public partial class SenderAwbController : Controller
 	{
-		private readonly IAwbRepository _awbRepository;
 		private readonly IAwbManager _awbManager;
+		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 
-		public SenderAwbController(IAwbRepository awbRepository, IAwbUpdateManager awbUpdateManager, IAwbManager awbManager)
+		public SenderAwbController(IAwbUpdateManager awbUpdateManager, IAwbManager awbManager, IAwbPresenter awbPresenter)
 		{
-			_awbRepository = awbRepository;
 			_awbUpdateManager = awbUpdateManager;
 			_awbManager = awbManager;
+			_awbPresenter = awbPresenter;
 		}
 
 		[Access(RoleType.Sender), HttpGet]
 		public virtual ViewResult Edit(long id)
 		{
-			var data = _awbRepository.Get(id).First();
+			var model = _awbPresenter.GetSenderAwbModel(id);
 
 			ViewBag.AwbId = id;
 
-			return View(new SenderAwbModel
-			{
-				AWBFile = null,
-				AWBFileName = data.AWBFileName,
-				ArrivalAirport = data.ArrivalAirport,
-				Bill = data.Bill,
-				BrokerId = data.BrokerId,
-				DateOfArrivalLocalString = data.DateOfArrival.ToLocalShortDateString(),
-				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
-				DepartureAirport = data.DepartureAirport,
-				PackingFile = null,
-				PackingFileName = data.PackingFileName,
-				FlightCost = data.FlightCost
-			});
+			return View(model);
 		}
 
 		[Access(RoleType.Sender), HttpPost]

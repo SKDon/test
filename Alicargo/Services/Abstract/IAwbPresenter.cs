@@ -10,6 +10,7 @@ namespace Alicargo.Services.Abstract
 		AirWaybillEditModel Get(long id);
 		AirWaybillData GetData(long id);
 		AirWaybillAggregate GetAggregate(long id);
+		SenderAwbModel GetSenderAwbModel(long id);
 		BrokerData GetBroker(long brokerId);
 	}
 }

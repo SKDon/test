@@ -89,6 +89,7 @@ namespace Alicargo.Services.AirWaybill
 			to.BrokerCost = @from.BrokerCost;
 			to.CustomCost = @from.CustomCost;
 			to.FlightCost = @from.FlightCost;
+			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}
 
 		private static void Map(SenderAwbModel @from, AirWaybillData to)
@@ -102,6 +103,7 @@ namespace Alicargo.Services.AirWaybill
 			to.PackingFileName = @from.PackingFileName;
 			to.AWBFileName = @from.AWBFileName;
 			to.FlightCost = @from.FlightCost;
+			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}
 
 		public static void Map(BrokerAwbModel @from, AirWaybillData to)

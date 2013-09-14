@@ -1,6 +1,6 @@
 ﻿@using Alicargo.MvcHelpers
 @using Resources
-@inherits Alicargo.MvcHelpers.BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AirWaybillEditModel>
+@inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AirWaybillEditModel>
 
 @helper SelectBroker()
 {
@@ -76,6 +76,8 @@
 			@Html.EditorWithLabelFor(model => model.Bill)
 			@Html.LabelFor(x => x.BrokerId)
 			@SelectBroker()
+			@Html.EditorWithLabelFor(model => model.BrokerCost)
+			@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
 		</div>
 		<div class="span4">
 			@Html.EditorWithLabelFor(model => model.DepartureAirport)
@@ -83,6 +85,8 @@
 			<div class="date-holder">
 				@Html.EditorFor(model => model.DateOfDepartureLocalString)
 			</div>
+			@Html.EditorWithLabelFor(model => model.FlightCost)
+			@Html.EditorWithLabelFor(model => model.AdditionalCost)
 		</div>
 		<div class="span4">
 			@Html.EditorWithLabelFor(model => model.ArrivalAirport)
@@ -90,26 +94,13 @@
 			<div class="date-holder">
 				@Html.EditorFor(model => model.DateOfArrivalLocalString)
 			</div>
+			@Html.EditorWithLabelFor(model => model.CustomCost)
 		</div>
 		<script>
 			$(function () {
 				$(".date-holder input").kendoDatePicker();
 			})
 		</script>
-	</div>
-	<div class="row">
-		<div class="span3">
-			@Html.EditorWithLabelFor(model => model.FlightCost)
-		</div>
-		<div class="span3">
-			@Html.EditorWithLabelFor(model => model.BrokerCost)
-		</div>
-		<div class="span3">
-			@Html.EditorWithLabelFor(model => model.CustomCost)
-		</div>
-		<div class="span3">
-			@Html.EditorWithLabelFor(model => model.AdditionalCost)
-		</div>
 	</div>
 }
 

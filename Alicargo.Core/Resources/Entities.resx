@@ -328,31 +328,31 @@
     <value>Страна</value>
   </data>
   <data name="AdditionalCost" xml:space="preserve">
-    <value>Additional cost</value>
+    <value>Additional cost (€)</value>
   </data>
   <data name="BrokerCost" xml:space="preserve">
-    <value>Broker cost</value>
+    <value>Broker cost (€)</value>
   </data>
   <data name="CustomCost" xml:space="preserve">
-    <value>Custom cost</value>
+    <value>Custom cost (€)</value>
   </data>
   <data name="FlightCost" xml:space="preserve">
-    <value>Flight cost</value>
+    <value>Flight cost (€)</value>
   </data>
   <data name="ForwarderCost" xml:space="preserve">
-    <value>Forwarder cost</value>
+    <value>Forwarder cost (€)</value>
   </data>
   <data name="FactureCost" xml:space="preserve">
-    <value>Фактура</value>
+    <value>Фактура (€)</value>
   </data>
   <data name="Insurance" xml:space="preserve">
     <value>Страховка</value>
   </data>
   <data name="ScotchCost" xml:space="preserve">
-    <value>Скотч</value>
+    <value>Скотч (€)</value>
   </data>
   <data name="TariffPerKg" xml:space="preserve">
-    <value>Тариф за кг</value>
+    <value>Тариф за кг (€)</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Всего</value>
@@ -361,16 +361,16 @@
     <value>Сумма</value>
   </data>
   <data name="TransitCost" xml:space="preserve">
-    <value>Транзит</value>
+    <value>Транзит (€)</value>
   </data>
   <data name="WithdrawCost" xml:space="preserve">
-    <value>Забор</value>
+    <value>Забор (€)</value>
   </data>
   <data name="CostPerKgOfSender" xml:space="preserve">
-    <value>Стоимость за килограмм для сендера</value>
+    <value>Стоимость за килограмм для сендера (€)</value>
   </data>
   <data name="TotalCostOfSenderForWeight" xml:space="preserve">
-    <value>Суммартные затраты по сендеру по весу</value>
+    <value>Суммартные затраты по сендеру по весу (€)</value>
   </data>
   <data name="TotalOfSender" xml:space="preserve">
     <value>Всего по сендеру</value>

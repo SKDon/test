@@ -42,7 +42,7 @@ namespace Alicargo.ViewModels.AirWaybill
 		[DisplayNameLocalized(typeof(Entities), "AdditionalCost")]
 		public decimal? AdditionalCost { get; set; }
 
-		// todo: 1. implement
+		[DisplayNameLocalized(typeof(Entities), "TotalCostOfSenderForWeight")]
 		public decimal? TotalCostOfSenderForWeight { get; set; }
 
 		#endregion

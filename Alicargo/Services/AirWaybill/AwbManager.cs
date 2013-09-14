@@ -101,7 +101,8 @@ namespace Alicargo.Services.AirWaybill
 				AdditionalCost = null,
 				BrokerCost = null,
 				CustomCost = null,
-				FlightCost = model.FlightCost
+				FlightCost = model.FlightCost,
+				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight
 			};
 		}
 
@@ -128,7 +129,8 @@ namespace Alicargo.Services.AirWaybill
 				AdditionalCost = model.AdditionalCost,
 				BrokerCost = model.BrokerCost,
 				CustomCost = model.CustomCost,
-				FlightCost = model.FlightCost
+				FlightCost = model.FlightCost,
+				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight
 			};
 		}
 	}

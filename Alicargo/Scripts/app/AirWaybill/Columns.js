@@ -61,6 +61,9 @@
 		}, {
 			field: "AdditionalCost",
 			title: $a.Localization.Entities_AdditionalCost, format: "{0:n0}"
+		}, {
+			field: "TotalCostOfSenderForWeight",
+			title: $a.Localization.Entities_TotalCostOfSenderForWeight, format: "{0:n0}"
 		});
 
 		addEditButton(columns, $a.Urls.AirWaybill_Edit);
@@ -71,6 +74,9 @@
 		columns.push({
 			field: "FlightCost",
 			title: $a.Localization.Entities_FlightCost, format: "{0:n0}"
+		}, {
+			field: "TotalCostOfSenderForWeight",
+			title: $a.Localization.Entities_TotalCostOfSenderForWeight, format: "{0:n0}"
 		});
 
 		addEditButton(columns, $a.Urls.SenderAwb_Edit);

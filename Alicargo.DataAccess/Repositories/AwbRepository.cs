@@ -239,6 +239,7 @@ namespace Alicargo.DataAccess.Repositories
 			to.BrokerCost = @from.BrokerCost;
 			to.CustomCost = @from.CustomCost;
 			to.FlightCost = @from.FlightCost;
+			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 
 			// todo: 2. separate repository for files
 			FileDataHelper.SetFile(gtdFile, from.GTDFileName,
