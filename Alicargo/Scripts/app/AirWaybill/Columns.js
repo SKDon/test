@@ -89,7 +89,7 @@
 		addEditButton(columns, $a.Urls.Broker_AWB);
 	}
 
-	$a.Awb = (function($awb) {
+	$a.Awb = (function ($awb) {
 		$awb.AddColumns = function () {
 			var columns = [
 				{ field: "CreationTimestampLocalString", title: $a.Localization.Entities_CreationTimestamp },
@@ -115,7 +115,9 @@
 
 			return columns;
 		};
-	})($a.Awb || {});	
+
+		return $awb;
+	})($a.Awb || {});
 
 	return $a;
 }(Alicargo || {}));
