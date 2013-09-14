@@ -1,9 +1,9 @@
-﻿var Alicargo = (function($a) {
+﻿var Alicargo = (function ($a) {
 	var $l = $a.Localization;
 	var $u = $a.Urls;
 	var $r = $a.Roles;
 
-	$a.Calculation = (function($c) {
+	$a.Calculation = (function ($c) {
 		$c.InitDetails = function (row, data) {
 
 			var editTariffPerKg = $r.IsAdmin;
@@ -21,10 +21,10 @@
 							"DisplayNumber": { type: "string", editable: false },
 							"Factory": { type: "string", editable: false },
 							"Mark": { type: "string", editable: false },
-							"Count": { type: "string", editable: false },
-							"Weigth": { type: "string", editable: false },
+							"Count": { type: "number", editable: false },
+							"Weigth": { type: "number", editable: false },
 							"Invoice": { type: "string", editable: false },
-							"Value": { type: "string", editable: false },
+							"Value": { type: "number", editable: false },
 							"TariffPerKg": { type: "number", editable: editTariffPerKg },
 							"TotalTariffCost": { type: "number", editable: false },
 							"ScotchCost": { type: "number", editable: editScotchCost },
@@ -57,15 +57,15 @@
 				{ field: "Count", title: $l.Entities_Count, footerTemplate: "#= sum #" },
 				{ field: "Weigth", title: $l.Entities_Weigth, footerTemplate: "#= sum #" },
 				{ field: "Invoice", title: $l.Entities_Invoice },
-				{ field: "Value", title: $l.Entities_Value, template: "#= Value.toString() + CurrencyType[ValueCurrencyId] #", footerTemplate: "#= sum #" },
-				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg },
-				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, footerTemplate: "#= sum #" },
-				{ field: "ScotchCost", title: $l.Entities_ScotchCost, footerTemplate: "#= sum #" },
-				{ field: "FactureCost", title: $l.Entities_FactureCost, footerTemplate: "#= sum #" },
-				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, footerTemplate: "#= sum #" },
-				{ field: "TransitCost", title: $l.Entities_TransitCost, footerTemplate: "#= sum #" },
-				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= InsuranceCost.toString() + CurrencyType[ValueCurrencyId] #", footerTemplate: "#= sum #" },
-				{ field: "TotalCost", title: $l.Entities_Total, footerTemplate: "#= sum #" }
+				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", footerTemplate: "#= kendo.toString(sum, 'n2') #" },
+				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: "{0:n2}" },
+				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, footerTemplate: "#= kendo.toString(sum, 'n2') #" },
+				{ field: "ScotchCost", title: $l.Entities_ScotchCost, footerTemplate: "#= kendo.toString(sum, 'n0') #" },
+				{ field: "FactureCost", title: $l.Entities_FactureCost, footerTemplate: "#= kendo.toString(sum, 'n0') #" },
+				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, footerTemplate: "#= kendo.toString(sum, 'n0') #" },
+				{ field: "TransitCost", title: $l.Entities_TransitCost, footerTemplate: "#= kendo.toString(sum, 'n0') #" },
+				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", footerTemplate: "#= kendo.toString(sum, 'n2') #" },
+				{ field: "TotalCost", title: $l.Entities_Total, footerTemplate: "#= kendo.toString(sum, 'n2') #" }
 			];
 			if ($r.IsAdmin) {
 				$.extend(columns, {
@@ -86,7 +86,7 @@
 				scrollable: false,
 				resizable: true,
 				editable: true,
-				save: function(e) {
+				save: function (e) {
 					if (e.values.TariffPerKg !== undefined) {
 						$.post($u.ApplicationUpdate_SetTariffPerKg, {
 							id: e.model.ApplicationId,

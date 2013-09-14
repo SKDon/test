@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Затраты на брокера за кг (€).
+        /// </summary>
+        public static string BrokerCostPerKg {
+            get {
+                return ResourceManager.GetString("BrokerCostPerKg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Перевозчик.
         /// </summary>
         public static string CarrierName {
@@ -246,6 +255,15 @@ namespace Resources {
         public static string CustomCost {
             get {
                 return ResourceManager.GetString("CustomCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Растаможка за кг (€).
+        /// </summary>
+        public static string CustomCostPerKg {
+            get {
+                return ResourceManager.GetString("CustomCostPerKg", resourceCulture);
             }
         }
         
@@ -399,6 +417,15 @@ namespace Resources {
         public static string FlightCost {
             get {
                 return ResourceManager.GetString("FlightCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Стоимость перелета за кг (€).
+        /// </summary>
+        public static string FlightCostPerKg {
+            get {
+                return ResourceManager.GetString("FlightCostPerKg", resourceCulture);
             }
         }
         
@@ -610,6 +637,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Прибыль (€).
+        /// </summary>
+        public static string Profit {
+            get {
+                return ResourceManager.GetString("Profit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прибыль с кг (€).
+        /// </summary>
+        public static string ProfitPerKg {
+            get {
+                return ResourceManager.GetString("ProfitPerKg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Получатель.
         /// </summary>
         public static string RecipientName {
@@ -745,11 +790,38 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Всего по сендеру.
+        ///   Looks up a localized string similar to Суммарные расходы (€).
+        /// </summary>
+        public static string TotalExpenses {
+            get {
+                return ResourceManager.GetString("TotalExpenses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Затраты на форвардера (всего, €).
+        /// </summary>
+        public static string TotalForwarderCost {
+            get {
+                return ResourceManager.GetString("TotalForwarderCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Всего по сендеру (€).
         /// </summary>
         public static string TotalOfSender {
             get {
                 return ResourceManager.GetString("TotalOfSender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Суммарные затраты на скотч (€).
+        /// </summary>
+        public static string TotalScotchCost {
+            get {
+                return ResourceManager.GetString("TotalScotchCost", resourceCulture);
             }
         }
         

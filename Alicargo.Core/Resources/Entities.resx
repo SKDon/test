@@ -373,6 +373,30 @@
     <value>Суммартные затраты по сендеру по весу (€)</value>
   </data>
   <data name="TotalOfSender" xml:space="preserve">
-    <value>Всего по сендеру</value>
+    <value>Всего по сендеру (€)</value>
+  </data>
+  <data name="BrokerCostPerKg" xml:space="preserve">
+    <value>Затраты на брокера за кг (€)</value>
+  </data>
+  <data name="CustomCostPerKg" xml:space="preserve">
+    <value>Растаможка за кг (€)</value>
+  </data>
+  <data name="FlightCostPerKg" xml:space="preserve">
+    <value>Стоимость перелета за кг (€)</value>
+  </data>
+  <data name="TotalForwarderCost" xml:space="preserve">
+    <value>Затраты на форвардера (всего, €)</value>
+  </data>
+  <data name="TotalScotchCost" xml:space="preserve">
+    <value>Суммарные затраты на скотч (€)</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Прибыль (€)</value>
+  </data>
+  <data name="ProfitPerKg" xml:space="preserve">
+    <value>Прибыль с кг (€)</value>
+  </data>
+  <data name="TotalExpenses" xml:space="preserve">
+    <value>Суммарные расходы (€)</value>
   </data>
 </root>

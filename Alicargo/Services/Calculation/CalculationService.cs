@@ -46,11 +46,16 @@ namespace Alicargo.Services.Calculation
 									   ScotchCost = a.ScotchCost,
 									   TariffPerKg = a.TariffPerKg,
 									   TransitCost = a.TransitCost,
+									   ForwarderCost = a.ForwarderCost,
 									   ValueCurrencyId = a.CurrencyId,
 									   Weigth = a.Weigth,
 									   WithdrawCost = a.WithdrawCost
 								   }).ToArray(),
-				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight
+				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
+				FlightCost = x.FlightCost,
+				CustomCost = x.CustomCost,
+				BrokerCost = x.BrokerCost,
+				AdditionalCost = x.AdditionalCost
 			}).ToArray();
 		}
 	}

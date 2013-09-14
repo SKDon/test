@@ -5,7 +5,8 @@
 	var $c = $a.Calculation;
 
 	var gridHolder = $("#calculation-grid");
-	gridHolder.kendoGrid({
+	
+	var grid = gridHolder.kendoGrid({
 		columns: [{ field: "AwbDisplay" }],
 		pageable: true,
 		editable: false,
@@ -27,8 +28,7 @@
 			this.expandRow(this.tbody.find("tr.k-master-row"));
 		},
 		detailTemplate: kendo.template($("#calculation-grid-details-template").html()),
-	});
-	var grid = gridHolder.data("kendoGrid");
+	}).data("kendoGrid");	
 
 	gridHolder.children(".k-grid-header").hide();
 

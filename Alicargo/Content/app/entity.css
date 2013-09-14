@@ -117,3 +117,17 @@
 	display: block;
 	width: 1156px;
 }
+
+.calculation-details {
+	margin-top: 10px;
+}
+
+	.calculation-details .data {
+		-moz-column-count: 5;
+		-webkit-column-count: 5;
+		column-count: 5;
+	}
+
+	.calculation-details p {
+		margin-bottom: 5px;
+	}

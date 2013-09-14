@@ -22,6 +22,7 @@ namespace Alicargo.ViewModels.Calculation
 		public decimal? FactureCost { get; set; }
 		public decimal? WithdrawCost { get; set; }
 		public decimal? TransitCost { get; set; }
+		public decimal? ForwarderCost { get; set; }
 		public decimal? TariffPerKg { get; set; }
 
 		#endregion
@@ -42,13 +43,13 @@ namespace Alicargo.ViewModels.Calculation
 			}
 		}
 
-		public decimal InsuranceCost
+		public decimal? InsuranceCost
 		{
 			get
 			{
 				if (Value == 0)
 				{
-					return 0;
+					return null;
 				}
 
 				return Value / InsuranceRate;

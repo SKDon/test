@@ -11,27 +11,8 @@
 @section scripts
 {
 	<script type="text/x-kendo-template" id="calculation-grid-details-template">
-        <div class="calculation-rows"></div>
-        <div class='calculation-details'>
-            # if(CostPerKgOfSender != null){ #
-			<p>
-				<span>@Entities.CostPerKgOfSender:</span>
-				#= CostPerKgOfSender #
-			</p>
-			# } #
-			# if(TotalCostOfSenderForWeight != null){ #
-			<p>
-				<span>@Entities.TotalCostOfSenderForWeight:</span>
-				#= TotalCostOfSenderForWeight #
-			</p>
-			# } #
-			# if(TotalOfSender != null){ #
-			<p>
-				<span>@Entities.TotalOfSender:</span>
-				#= TotalOfSender #
-			</p>
-			# } #
-        </div>
+        <div class="calculation-rows"></div>		
+        @Html.Partial("Details")
 	</script>
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))

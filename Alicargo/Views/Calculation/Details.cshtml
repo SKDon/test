@@ -1,0 +1,96 @@
+﻿@using Resources
+<div class='calculation-details'>
+	<p><b>@Pages.Calculation</b></p>
+	<div class='data'>
+		# if(CostPerKgOfSender != null){ #
+		<p>
+			<span>@Entities.CostPerKgOfSender:</span>
+			#= kendo.toString(CostPerKgOfSender, 'n2') #
+		</p>
+		# } #
+		# if(TotalCostOfSenderForWeight != null){ #
+		<p>
+			<span>@Entities.TotalCostOfSenderForWeight:</span>
+			#= kendo.toString(TotalCostOfSenderForWeight, 'n2') #
+		</p>
+		# } #
+		# if(TotalScotchCost != null){ #
+		<p>
+			<span>@Entities.TotalScotchCost:</span>
+			#= TotalScotchCost #
+		</p>
+		# } #
+		# if(TotalOfSender != null){ #
+		<p>
+			<span>@Entities.TotalOfSender:</span>
+			#= kendo.toString(TotalOfSender, 'n2') #
+		</p>
+		# } #
+		# if(FlightCost != null){ #
+		<p>
+			<span>@Entities.FlightCost:</span>
+			#= kendo.toString(FlightCost, 'n2') #
+		</p>
+		# } #
+		# if(FlightCostPerKg != null){ #
+		<p>
+			<span>@Entities.FlightCostPerKg:</span>
+			#= kendo.toString(FlightCostPerKg, 'n2') #
+		</p>
+		# } #
+		# if(CustomCost != null){ #
+		<p>
+			<span>@Entities.CustomCost:</span>
+			#= kendo.toString(CustomCost, 'n2') #
+		</p>
+		# } #
+		# if(CustomCostPerKg != null){ #
+		<p>
+			<span>@Entities.CustomCostPerKg:</span>
+			#= kendo.toString(CustomCostPerKg, 'n2') #
+		</p>
+		# } #
+		# if(BrokerCost != null){ #
+		<p>
+			<span>@Entities.BrokerCost:</span>
+			#= BrokerCost #
+		</p>
+		# } #
+		# if(BrokerCostPerKg != null){ #
+		<p>
+			<span>@Entities.BrokerCostPerKg:</span>
+			#= kendo.toString(BrokerCostPerKg, 'n2') #
+		</p>
+		# } #
+		# if(TotalForwarderCost != null){ #
+		<p>
+			<span>@Entities.TotalForwarderCost:</span>
+			#= kendo.toString(TotalForwarderCost, 'n2') #
+		</p>
+		# } #
+		# if(AdditionalCost != null){ #
+		<p>
+			<span>@Entities.AdditionalCost:</span>
+			#= kendo.toString(AdditionalCost, 'n2') #
+		</p>
+		# } #
+		<p>
+			<b>
+				<span>@Entities.TotalExpenses:</span>
+				#= kendo.toString(TotalExpenses, 'n2') #
+			</b>
+		</p>
+		<p>
+			<b>
+				<span>@Entities.Profit:</span>
+				#= kendo.toString(Profit, 'n2') #
+			</b>
+		</p>
+		<p>
+			<b>
+				<span>@Entities.ProfitPerKg:</span>
+				#= kendo.toString(ProfitPerKg, 'n2') #
+			</b>
+		</p>
+	</div>
+</div>
