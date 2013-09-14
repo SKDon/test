@@ -209,7 +209,13 @@ namespace Alicargo.DataAccess.Repositories
 				MethodOfDeliveryId = x.MethodOfDeliveryId,
 				Value = x.Value,
 				CurrencyId = x.CurrencyId,
-				AirWaybillId = x.AirWaybillId
+				AirWaybillId = x.AirWaybillId,
+				FactureCost = x.FactureCost,
+				ForwarderCost = x.ForwarderCost,
+				ScotchCost = x.ScotchCost,
+				TariffPerKg = x.TariffPerKg,
+				TransitCost = x.TransitCost,
+				WithdrawCost = x.WithdrawCost
 			}).ToArray();
 		}
 
