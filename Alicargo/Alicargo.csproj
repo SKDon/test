@@ -594,6 +594,7 @@
     <None Include="Deploy\Install\restore-db.ps1" />
     <Content Include="Deploy\testing.txt" />
     <Content Include="Deploy\Update\Plan.txt" />
+    <Content Include="Deploy\Update\Update-from-1_1.15.09.2013.sql" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />

@@ -79,5 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alicargo.Database.publish.xml" />
+    <None Include="Alicargo.Dev.Database.publish.xml" />
+    <None Include="SqlSchemaCompare.Dev.scmp" />
   </ItemGroup>
 </Project>
