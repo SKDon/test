@@ -167,6 +167,15 @@
       <Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Admin" Member="Admins">
+    <Type Name="Admin" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Admin" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Application" Member="Applications">
     <Type Name="Application" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -208,26 +217,20 @@
       <Column Name="FactoryContact" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="FactoryEmail" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="MarkName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="ForwarderCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="FactureCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="ScotchCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="WithdrawCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="FactureCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ScotchCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="WithdrawCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ForwarderCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Column Name="WithdrawCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />
       <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
       <Association Name="Country_Application" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
       <Association Name="State_Application" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
       <Association Name="Transit_Application" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Admin" Member="Admins">
-    <Type Name="Admin" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Association Name="User_Admin" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

@@ -189,7 +189,10 @@ namespace Alicargo.Services.Application
 				Torg12File = null,
 				TransitCost = data.TransitCost,
 				WithdrawCost = data.WithdrawCost,
-				TariffPerKg = data.TariffPerKg
+				TariffPerKg = data.TariffPerKg,
+				ScotchCostEdited = data.ScotchCostEdited,
+				FactureCostEdited = data.FactureCostEdited,
+				WithdrawCostEdited = data.WithdrawCostEdited
 			};
 			return application;
 		}
@@ -225,11 +228,14 @@ namespace Alicargo.Services.Application
 			to.TransitCost = @from.TransitCost;
 			to.WithdrawCost = @from.WithdrawCost;
 			to.TariffPerKg = @from.TariffPerKg;
+			to.FactureCostEdited = from.FactureCostEdited;
+			to.WithdrawCostEdited = from.WithdrawCostEdited;
+			to.ScotchCostEdited = from.ScotchCostEdited;
 		}
 
 		private ApplicationData GetNewApplicationData(ApplicationEditModel model, long clientId, long transitId)
 		{
-			var data = new ApplicationData
+			return new ApplicationData
 			{
 				CreationTimestamp = DateTimeOffset.UtcNow,
 				StateChangeTimestamp = DateTimeOffset.UtcNow,
@@ -269,9 +275,11 @@ namespace Alicargo.Services.Application
 				TransitCost = model.TransitCost,
 				FactureCost = model.FactureCost,
 				ForwarderCost = model.ForwarderCost,
-				TariffPerKg = model.TariffPerKg
+				TariffPerKg = model.TariffPerKg,
+				ScotchCostEdited = model.ScotchCostEdited,
+				FactureCostEdited = model.FactureCostEdited,
+				WithdrawCostEdited = model.WithdrawCostEdited
 			};
-			return data;
 		}
 	}
 }

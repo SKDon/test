@@ -110,6 +110,15 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "WithdrawCost")]
 		public decimal? WithdrawCost { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "FactureCostEdited")]
+		public decimal? FactureCostEdited { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "ScotchCostEdited")]
+		public decimal? ScotchCostEdited { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "WithdrawCostEdited")]
+		public decimal? WithdrawCostEdited { get; set; }
+
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost { get; set; }
 

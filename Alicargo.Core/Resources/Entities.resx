@@ -402,4 +402,13 @@
   <data name="TotalProfit" xml:space="preserve">
     <value>Прибыль (всего, €)</value>
   </data>
+  <data name="FactureCostEdited" xml:space="preserve">
+    <value>Фактура* (€)</value>
+  </data>
+  <data name="ScotchCostEdited" xml:space="preserve">
+    <value>Скотч* (€)</value>
+  </data>
+  <data name="WithdrawCostEdited" xml:space="preserve">
+    <value>Забор* (€)</value>
+  </data>
 </root>

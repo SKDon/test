@@ -2,9 +2,9 @@
 	margin-top: 20px;
 }
 
-	/*.entity-edit label {
-		display: inline-block;
-	}*/
+	.entity-edit .span2 input {
+		width: 156px;
+	}
 
 	.entity-edit .span8 input {
 		width: 756px;

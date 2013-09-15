@@ -13,6 +13,11 @@ namespace Alicargo.DataAccess.DbContext
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
+	using System.Data;
+	using System.Collections.Generic;
+	using System.Reflection;
+	using System.Linq;
+	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
 	
@@ -64,12 +69,12 @@ namespace Alicargo.DataAccess.DbContext
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
-    partial void InsertApplication(Application instance);
-    partial void UpdateApplication(Application instance);
-    partial void DeleteApplication(Application instance);
     partial void InsertAdmin(Admin instance);
     partial void UpdateAdmin(Admin instance);
     partial void DeleteAdmin(Admin instance);
+    partial void InsertApplication(Application instance);
+    partial void UpdateApplication(Application instance);
+    partial void DeleteApplication(Application instance);
     #endregion
 		
 		public AlicargoDataContext(string connection) : 
@@ -200,19 +205,19 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		public System.Data.Linq.Table<Application> Applications
-		{
-			get
-			{
-				return this.GetTable<Application>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Admin> Admins
 		{
 			get
 			{
 				return this.GetTable<Admin>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Application> Applications
+		{
+			get
+			{
+				return this.GetTable<Application>();
 			}
 		}
 	}
@@ -3750,6 +3755,181 @@ namespace Alicargo.DataAccess.DbContext
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
+	public sealed partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _Id;
+		
+		private long _UserId;
+		
+		private string _Name;
+		
+		private string _Email;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(long value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(long value);
+    partial void OnUserIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    #endregion
+		
+		public Admin()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="BigInt NOT NULL")]
+		public long UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Admins.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Admins.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(long);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		private void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		private void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Application")]
 	public sealed partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3834,17 +4014,23 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private string _MarkName;
 		
-		private System.Nullable<decimal> _ForwarderCost;
-		
 		private System.Nullable<decimal> _FactureCost;
 		
 		private System.Nullable<decimal> _ScotchCost;
 		
+		private System.Nullable<decimal> _WithdrawCost;
+		
+		private System.Nullable<decimal> _FactureCostEdited;
+		
+		private System.Nullable<decimal> _ScotchCostEdited;
+		
+		private System.Nullable<decimal> _WithdrawCostEdited;
+		
+		private System.Nullable<decimal> _ForwarderCost;
+		
 		private System.Nullable<decimal> _TariffPerKg;
 		
 		private System.Nullable<decimal> _TransitCost;
-		
-		private System.Nullable<decimal> _WithdrawCost;
 		
 		private EntityRef<AirWaybill> _AirWaybill;
 		
@@ -3938,18 +4124,24 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnFactoryEmailChanged();
     partial void OnMarkNameChanging(string value);
     partial void OnMarkNameChanged();
-    partial void OnForwarderCostChanging(System.Nullable<decimal> value);
-    partial void OnForwarderCostChanged();
     partial void OnFactureCostChanging(System.Nullable<decimal> value);
     partial void OnFactureCostChanged();
     partial void OnScotchCostChanging(System.Nullable<decimal> value);
     partial void OnScotchCostChanged();
+    partial void OnWithdrawCostChanging(System.Nullable<decimal> value);
+    partial void OnWithdrawCostChanged();
+    partial void OnFactureCostEditedChanging(System.Nullable<decimal> value);
+    partial void OnFactureCostEditedChanged();
+    partial void OnScotchCostEditedChanging(System.Nullable<decimal> value);
+    partial void OnScotchCostEditedChanged();
+    partial void OnWithdrawCostEditedChanging(System.Nullable<decimal> value);
+    partial void OnWithdrawCostEditedChanged();
+    partial void OnForwarderCostChanging(System.Nullable<decimal> value);
+    partial void OnForwarderCostChanged();
     partial void OnTariffPerKgChanging(System.Nullable<decimal> value);
     partial void OnTariffPerKgChanged();
     partial void OnTransitCostChanging(System.Nullable<decimal> value);
     partial void OnTransitCostChanged();
-    partial void OnWithdrawCostChanging(System.Nullable<decimal> value);
-    partial void OnWithdrawCostChanged();
     #endregion
 		
 		public Application()
@@ -4762,26 +4954,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForwarderCost", DbType="Money")]
-		public System.Nullable<decimal> ForwarderCost
-		{
-			get
-			{
-				return this._ForwarderCost;
-			}
-			set
-			{
-				if ((this._ForwarderCost != value))
-				{
-					this.OnForwarderCostChanging(value);
-					this.SendPropertyChanging();
-					this._ForwarderCost = value;
-					this.SendPropertyChanged("ForwarderCost");
-					this.OnForwarderCostChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactureCost", DbType="Money")]
 		public System.Nullable<decimal> FactureCost
 		{
@@ -4822,6 +4994,106 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithdrawCost", DbType="Money")]
+		public System.Nullable<decimal> WithdrawCost
+		{
+			get
+			{
+				return this._WithdrawCost;
+			}
+			set
+			{
+				if ((this._WithdrawCost != value))
+				{
+					this.OnWithdrawCostChanging(value);
+					this.SendPropertyChanging();
+					this._WithdrawCost = value;
+					this.SendPropertyChanged("WithdrawCost");
+					this.OnWithdrawCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactureCostEdited", DbType="Money")]
+		public System.Nullable<decimal> FactureCostEdited
+		{
+			get
+			{
+				return this._FactureCostEdited;
+			}
+			set
+			{
+				if ((this._FactureCostEdited != value))
+				{
+					this.OnFactureCostEditedChanging(value);
+					this.SendPropertyChanging();
+					this._FactureCostEdited = value;
+					this.SendPropertyChanged("FactureCostEdited");
+					this.OnFactureCostEditedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScotchCostEdited", DbType="Money")]
+		public System.Nullable<decimal> ScotchCostEdited
+		{
+			get
+			{
+				return this._ScotchCostEdited;
+			}
+			set
+			{
+				if ((this._ScotchCostEdited != value))
+				{
+					this.OnScotchCostEditedChanging(value);
+					this.SendPropertyChanging();
+					this._ScotchCostEdited = value;
+					this.SendPropertyChanged("ScotchCostEdited");
+					this.OnScotchCostEditedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithdrawCostEdited", DbType="Money")]
+		public System.Nullable<decimal> WithdrawCostEdited
+		{
+			get
+			{
+				return this._WithdrawCostEdited;
+			}
+			set
+			{
+				if ((this._WithdrawCostEdited != value))
+				{
+					this.OnWithdrawCostEditedChanging(value);
+					this.SendPropertyChanging();
+					this._WithdrawCostEdited = value;
+					this.SendPropertyChanged("WithdrawCostEdited");
+					this.OnWithdrawCostEditedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForwarderCost", DbType="Money")]
+		public System.Nullable<decimal> ForwarderCost
+		{
+			get
+			{
+				return this._ForwarderCost;
+			}
+			set
+			{
+				if ((this._ForwarderCost != value))
+				{
+					this.OnForwarderCostChanging(value);
+					this.SendPropertyChanging();
+					this._ForwarderCost = value;
+					this.SendPropertyChanged("ForwarderCost");
+					this.OnForwarderCostChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TariffPerKg", DbType="Money")]
 		public System.Nullable<decimal> TariffPerKg
 		{
@@ -4858,26 +5130,6 @@ namespace Alicargo.DataAccess.DbContext
 					this._TransitCost = value;
 					this.SendPropertyChanged("TransitCost");
 					this.OnTransitCostChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithdrawCost", DbType="Money")]
-		public System.Nullable<decimal> WithdrawCost
-		{
-			get
-			{
-				return this._WithdrawCost;
-			}
-			set
-			{
-				if ((this._WithdrawCost != value))
-				{
-					this.OnWithdrawCostChanging(value);
-					this.SendPropertyChanging();
-					this._WithdrawCost = value;
-					this.SendPropertyChanged("WithdrawCost");
-					this.OnWithdrawCostChanged();
 				}
 			}
 		}
@@ -5048,181 +5300,6 @@ namespace Alicargo.DataAccess.DbContext
 						this._TransitId = default(long);
 					}
 					this.SendPropertyChanged("Transit");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		private void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		private void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
-	public sealed partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _Id;
-		
-		private long _UserId;
-		
-		private string _Name;
-		
-		private string _Email;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(long value);
-    partial void OnIdChanged();
-    partial void OnUserIdChanging(long value);
-    partial void OnUserIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    #endregion
-		
-		public Admin()
-		{
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="BigInt NOT NULL")]
-		public long UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Admins.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Admins.Add(this);
-						this._UserId = value.Id;
-					}
-					else
-					{
-						this._UserId = default(long);
-					}
-					this.SendPropertyChanged("User");
 				}
 			}
 		}

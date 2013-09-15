@@ -403,6 +403,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Фактура* (€).
+        /// </summary>
+        public static string FactureCostEdited {
+            get {
+                return ResourceManager.GetString("FactureCostEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Прикрепленный файл.
         /// </summary>
         public static string FileName {
@@ -682,6 +691,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Скотч* (€).
+        /// </summary>
+        public static string ScotchCostEdited {
+            get {
+                return ResourceManager.GetString("ScotchCostEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата сметы статуса.
         /// </summary>
         public static string StateChangeTimestamp {
@@ -912,6 +930,15 @@ namespace Resources {
         public static string WithdrawCost {
             get {
                 return ResourceManager.GetString("WithdrawCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Забор* (€).
+        /// </summary>
+        public static string WithdrawCostEdited {
+            get {
+                return ResourceManager.GetString("WithdrawCostEdited", resourceCulture);
             }
         }
     }

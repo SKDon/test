@@ -48,6 +48,9 @@ namespace Alicargo.DataAccess.Helpers
 			to.TransitCost = from.TransitCost;
 			to.WithdrawCost = from.WithdrawCost;
 			to.ForwarderCost = from.ForwarderCost;
+			to.FactureCostEdited = from.FactureCostEdited;
+			to.WithdrawCostEdited = from.WithdrawCostEdited;
+			to.ScotchCostEdited = from.ScotchCostEdited;
 
 			// todo: 3.0. separate repository for files
 			FileDataHelper.SetFile(invoiceFile, from.InvoiceFileName,

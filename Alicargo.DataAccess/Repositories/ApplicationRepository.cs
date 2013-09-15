@@ -60,7 +60,10 @@ namespace Alicargo.DataAccess.Repositories
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,
 				WithdrawCost = x.WithdrawCost,
-				ForwarderCost = x.ForwarderCost
+				ForwarderCost = x.ForwarderCost,
+				FactureCostEdited = x.FactureCostEdited,
+				ScotchCostEdited = x.ScotchCostEdited,
+				WithdrawCostEdited = x.WithdrawCostEdited
 			};
 		}
 
