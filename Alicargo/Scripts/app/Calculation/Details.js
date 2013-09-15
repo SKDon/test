@@ -88,25 +88,25 @@
 				editable: true,
 				save: function (e) {
 					if (e.values.TariffPerKg !== undefined) {
-						$.post($u.ApplicationUpdate_SetTariffPerKg, {
+						$.post($u.Calculation_SetTariffPerKg, {
 							id: e.model.ApplicationId,
 							tariffPerKg: e.values.TariffPerKg
 						}).fail($a.ShowError);
 					}
 					if (e.values.ScotchCost !== undefined) {
-						$.post($u.ApplicationUpdate_SetScotchCost, {
+						$.post($u.Calculation_SetScotchCostEdited, {
 							id: e.model.ApplicationId,
 							scotchCost: e.values.ScotchCost
 						}).fail($a.ShowError);
 					}
 					if (e.values.FactureCost !== undefined) {
-						$.post($u.ApplicationUpdate_SetFactureCost, {
+						$.post($u.Calculation_SetFactureCostEdited, {
 							id: e.model.ApplicationId,
 							factureCost: e.values.FactureCost
 						}).fail($a.ShowError);
 					}
 					if (e.values.WithdrawCost !== undefined) {
-						$.post($u.ApplicationUpdate_SetWithdrawCost, {
+						$.post($u.Calculation_SetWithdrawCostEdited, {
 							id: e.model.ApplicationId,
 							withdrawCost: e.values.WithdrawCost
 						}).fail($a.ShowError);

@@ -101,23 +101,23 @@ namespace Alicargo.Services.Email
 			// todo: 2. think what an email should be sent
 	    }
 
-	    public void SetWithdrawCost(long id, decimal? withdrawCost)
+	    public void SetWithdrawCostEdited(long id, decimal? withdrawCost)
 	    {
-		    _manager.SetWithdrawCost(id, withdrawCost);
+		    _manager.SetWithdrawCostEdited(id, withdrawCost);
 
 			// todo: 2. think what an email should be sent
 	    }
 
-	    public void SetFactureCost(long id, decimal? factureCost)
+	    public void SetFactureCostEdited(long id, decimal? factureCost)
 	    {
-		    _manager.SetFactureCost(id, factureCost);
+		    _manager.SetFactureCostEdited(id, factureCost);
 
 			// todo: 2. think what an email should be sent
 	    }
 
-	    public void SetScotchCost(long id, decimal? scotchCost)
+	    public void SetScotchCostEdited(long id, decimal? scotchCost)
 	    {
-		    _manager.SetScotchCost(id, scotchCost);
+		    _manager.SetScotchCostEdited(id, scotchCost);
 
 			// todo: 2. think what an email should be sent
 	    }

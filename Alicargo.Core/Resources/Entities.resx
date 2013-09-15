@@ -316,7 +316,7 @@
     <value>Air Way Bill</value>
   </data>
   <data name="DateOfCargoReceipt" xml:space="preserve">
-    <value>Получения груза</value>
+    <value>Получение груза</value>
   </data>
   <data name="GTDAdditional" xml:space="preserve">
     <value>ГТД дополнение</value>

@@ -111,23 +111,23 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
-		public void SetWithdrawCost(long id, decimal? withdrawCost)
+		public void SetWithdrawCostEdited(long id, decimal? withdrawCost)
 		{
-			_applicationUpdater.SetWithdrawCost(id, withdrawCost);
+			_applicationUpdater.SetWithdrawCostEdited(id, withdrawCost);
 
 			_unitOfWork.SaveChanges();
 		}
 
-		public void SetFactureCost(long id, decimal? factureCost)
+		public void SetFactureCostEdited(long id, decimal? factureCost)
 		{
-			_applicationUpdater.SetFactureCost(id, factureCost);
+			_applicationUpdater.SetFactureCostEdited(id, factureCost);
 
 			_unitOfWork.SaveChanges();
 		}
 
-		public void SetScotchCost(long id, decimal? scotchCost)
+		public void SetScotchCostEdited(long id, decimal? scotchCost)
 		{
-			_applicationUpdater.SetScotchCost(id, scotchCost);
+			_applicationUpdater.SetScotchCostEdited(id, scotchCost);
 
 			_unitOfWork.SaveChanges();
 		}

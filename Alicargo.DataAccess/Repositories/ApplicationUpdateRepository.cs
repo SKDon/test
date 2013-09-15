@@ -70,19 +70,19 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.TariffPerKg = tariffPerKg);
 		}
 
-		public void SetWithdrawCost(long id, decimal? withdrawCost)
+		public void SetWithdrawCostEdited(long id, decimal? withdrawCost)
 		{
-			Update(id, application => application.WithdrawCost = withdrawCost);
+			Update(id, application => application.WithdrawCostEdited = withdrawCost);
 		}
 
-		public void SetFactureCost(long id, decimal? factureCost)
+		public void SetFactureCostEdited(long id, decimal? factureCost)
 		{
-			Update(id, application => application.FactureCost = factureCost);
+			Update(id, application => application.FactureCostEdited = factureCost);
 		}
 
-		public void SetScotchCost(long id, decimal? scotchCost)
+		public void SetScotchCostEdited(long id, decimal? scotchCost)
 		{
-			Update(id, application => application.ScotchCost = scotchCost);
+			Update(id, application => application.ScotchCostEdited = scotchCost);
 		}
 
 		public void Update(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,

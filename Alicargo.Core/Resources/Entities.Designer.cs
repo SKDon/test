@@ -286,7 +286,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получения груза.
+        ///   Looks up a localized string similar to Получение груза.
         /// </summary>
         public static string DateOfCargoReceipt {
             get {
