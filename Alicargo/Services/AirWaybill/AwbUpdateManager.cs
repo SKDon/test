@@ -71,6 +71,13 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
+		public void SetAdditionalCost(long awbId, decimal? additionalCost)
+		{
+			_awbRepository.SetAdditionalCost(awbId, additionalCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
 		public static void Map(AirWaybillEditModel @from, AirWaybillData to)
 		{
 			to.PackingFileName = @from.PackingFileName;

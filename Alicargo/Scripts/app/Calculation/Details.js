@@ -4,6 +4,19 @@
 	var $r = $a.Roles;
 
 	$a.Calculation = (function ($c) {
+			
+		function initAdditionalCost(row, data) {
+			row.find(".additional-cost input").kendoNumericTextBox({
+				decimals: 2, spinners: false,
+				change: function () {
+					$.post($u.Calculation_SetAdditionalCost, {
+						awbId: data.AwbId,
+						additionalCost: this.value()
+					}).fail($a.ShowError);
+				}
+			});
+		}
+
 		$c.InitDetails = function (row, data) {
 
 			var editTariffPerKg = $r.IsAdmin;
@@ -11,6 +24,8 @@
 			var editFactureCost = $r.IsAdmin || $r.IsSender;
 			var editWithdrawCost = $r.IsAdmin || $r.IsSender;
 			var editTransitCost = $r.IsAdmin || $r.IsForwarder;
+
+			initAdditionalCost(row, data);
 
 			var dataSource = {
 				schema: {

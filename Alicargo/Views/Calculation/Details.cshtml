@@ -2,6 +2,10 @@
 <div class='calculation-details'>
 	<p><b>@Pages.Calculation</b></p>
 	<div class='data'>
+		<p class="additional-cost">
+			<span>@Entities.AdditionalCost:</span>
+			<input type="number" min="0" max="1000000" value="#= kendo.toString(AdditionalCost, 'n2') #" />
+		</p>
 		# if(CostPerKgOfSender != null){ #
 		<p>
 			<span>@Entities.CostPerKgOfSender:</span>
@@ -67,13 +71,7 @@
 			<span>@Entities.TotalForwarderCost:</span>
 			#= kendo.toString(TotalForwarderCost, 'n2') #
 		</p>
-		# } #
-		# if(AdditionalCost != null){ #
-		<p>
-			<span>@Entities.AdditionalCost:</span>
-			#= kendo.toString(AdditionalCost, 'n2') #
-		</p>
-		# } #
+		# } #		
 		<p>
 			<b>
 				<span>@Entities.TotalExpenses:</span>

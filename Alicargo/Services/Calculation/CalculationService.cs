@@ -31,6 +31,7 @@ namespace Alicargo.Services.Calculation
 
 			return awbs.Select(x => new CalculationAwb
 			{
+				AwbId = x.Id,
 				AwbDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWayBillDisplay(x)),
 				Rows = applications.Where(a => a.AirWaybillId == x.Id)
 								   .Select(a => new CalculationDetailsItem

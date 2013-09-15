@@ -130,6 +130,12 @@ namespace Alicargo.DataAccess.Repositories
 						  .ToArray();
 		}
 
+		public void SetAdditionalCost(long awbId, decimal? additionalCost)
+		{
+			var data = Context.AirWaybills.First(x => x.Id == awbId);
+			data.AdditionalCost = additionalCost;
+		}
+
 		public void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
 						   byte[] invoiceFile, byte[] awbFile)
 		{

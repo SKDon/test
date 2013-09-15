@@ -13,16 +13,16 @@ namespace Alicargo.Services.Email
         private readonly IAwbRepository _awbRepository;
         private readonly IMailSender _mailSender;
         private readonly IMessageBuilder _messageBuilder;
-        private readonly IAwbUpdateManager _updateManager;
+        private readonly IAwbUpdateManager _manager;
 
         public AwbUpdateManagerWithMailing(
-            IAwbUpdateManager updateManager,
+            IAwbUpdateManager manager,
             IAwbPresenter awbPresenter,
             IAwbRepository awbRepository,
             IMailSender mailSender,
             IMessageBuilder messageBuilder)
         {
-            _updateManager = updateManager;
+            _manager = manager;
             _awbPresenter = awbPresenter;
             _awbRepository = awbRepository;
             _mailSender = mailSender;
@@ -33,7 +33,7 @@ namespace Alicargo.Services.Email
         {
             var old = _awbPresenter.GetData(id);
 
-            _updateManager.Update(id, model);
+            _manager.Update(id, model);
 
             SendOnFileAdd(id, old);
         }
@@ -42,7 +42,7 @@ namespace Alicargo.Services.Email
         {
             var old = _awbPresenter.GetData(id);
 
-            _updateManager.Update(id, model);
+            _manager.Update(id, model);
 
             SendOnFileAdd(id, old);
         }
@@ -51,9 +51,16 @@ namespace Alicargo.Services.Email
 	    {
 			var old = _awbPresenter.GetData(id);
 
-			_updateManager.Update(id, model);
+			_manager.Update(id, model);
 
 			SendOnFileAdd(id, old);
+	    }
+
+	    public void SetAdditionalCost(long awbId, decimal? additionalCost)
+	    {
+		    _manager.SetAdditionalCost(awbId, additionalCost);
+
+		    // todo: 2. email
 	    }
 
 	    private void SendOnFileAdd(long id, AirWaybillData oldData)

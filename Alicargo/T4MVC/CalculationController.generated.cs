@@ -71,6 +71,12 @@ namespace Alicargo.Controllers
         {
             return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetWithdrawCostEdited);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.HttpStatusCodeResult SetAdditionalCost()
+        {
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetAdditionalCost);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CalculationController Actions { get { return MVC.Calculation; } }
@@ -93,6 +99,7 @@ namespace Alicargo.Controllers
             public readonly string SetScotchCostEdited = "SetScotchCostEdited";
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
             public readonly string SetWithdrawCostEdited = "SetWithdrawCostEdited";
+            public readonly string SetAdditionalCost = "SetAdditionalCost";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -104,6 +111,7 @@ namespace Alicargo.Controllers
             public const string SetScotchCostEdited = "SetScotchCostEdited";
             public const string SetFactureCostEdited = "SetFactureCostEdited";
             public const string SetWithdrawCostEdited = "SetWithdrawCostEdited";
+            public const string SetAdditionalCost = "SetAdditionalCost";
         }
 
 
@@ -151,6 +159,15 @@ namespace Alicargo.Controllers
         {
             public readonly string id = "id";
             public readonly string withdrawCost = "withdrawCost";
+        }
+        static readonly ActionParamsClass_SetAdditionalCost s_params_SetAdditionalCost = new ActionParamsClass_SetAdditionalCost();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetAdditionalCost SetAdditionalCostParams { get { return s_params_SetAdditionalCost; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetAdditionalCost
+        {
+            public readonly string awbId = "awbId";
+            public readonly string additionalCost = "additionalCost";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -236,6 +253,17 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "withdrawCost", withdrawCost);
             SetWithdrawCostEditedOverride(callInfo, id, withdrawCost);
+            return callInfo;
+        }
+
+        partial void SetAdditionalCostOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long awbId, decimal? additionalCost);
+
+        public override System.Web.Mvc.HttpStatusCodeResult SetAdditionalCost(long awbId, decimal? additionalCost)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetAdditionalCost);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "additionalCost", additionalCost);
+            SetAdditionalCostOverride(callInfo, awbId, additionalCost);
             return callInfo;
         }
 

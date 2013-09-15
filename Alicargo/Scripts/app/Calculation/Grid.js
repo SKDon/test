@@ -34,8 +34,7 @@
 
 	function detailInit(r) {
 		var data = grid.dataItem(r.masterRow);
-		var row = r.detailRow;
 
-		$c.InitDetails(row, data);
+		$c.InitDetails(r.detailRow, data);
 	}
 });

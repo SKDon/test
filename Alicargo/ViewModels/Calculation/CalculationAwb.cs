@@ -22,6 +22,8 @@ namespace Alicargo.ViewModels.Calculation
 			}
 		}
 
+		public long AwbId { get; set; }
+
 		public string AwbDisplay { get; set; }
 
 		public decimal? CostPerKgOfSender

@@ -9,12 +9,15 @@ namespace Alicargo.Controllers
 	public partial class CalculationController : Controller
 	{
 		private readonly IApplicationManager _applicationManager;
+		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly ICalculationService _calculationService;
 
 		public CalculationController(
+			IAwbUpdateManager awbUpdateManager,
 			ICalculationService calculationService, 
 			IApplicationManager applicationManager)
 		{
+			_awbUpdateManager = awbUpdateManager;
 			_calculationService = calculationService;
 			_applicationManager = applicationManager;
 		}
@@ -41,8 +44,7 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-
-		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		[Access(RoleType.Admin), HttpPost]
 		public virtual HttpStatusCodeResult SetScotchCostEdited(long id, decimal? scotchCost)
 		{
 			_applicationManager.SetScotchCostEdited(id, scotchCost);
@@ -50,7 +52,7 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		[Access(RoleType.Admin), HttpPost]
 		public virtual HttpStatusCodeResult SetFactureCostEdited(long id, decimal? factureCost)
 		{
 			_applicationManager.SetFactureCostEdited(id, factureCost);
@@ -58,10 +60,18 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		[Access(RoleType.Admin), HttpPost]
 		public virtual HttpStatusCodeResult SetWithdrawCostEdited(long id, decimal? withdrawCost)
 		{
 			_applicationManager.SetWithdrawCostEdited(id, withdrawCost);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin), HttpPost]
+		public virtual HttpStatusCodeResult SetAdditionalCost(long awbId, decimal? additionalCost)
+		{
+			_awbUpdateManager.SetAdditionalCost(awbId, additionalCost);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}		

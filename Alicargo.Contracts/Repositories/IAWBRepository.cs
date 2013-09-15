@@ -18,6 +18,7 @@ namespace Alicargo.Contracts.Repositories
 
 		void Delete(long id);
 		void SetState(long airWaybillId, long stateId);
+		void SetAdditionalCost(long awbId, decimal? additionalCost);
 		void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile);
 		
 		FileHolder GetAWBFile(long id);

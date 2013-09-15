@@ -7,5 +7,6 @@ namespace Alicargo.Services.Abstract
 		void Update(long id, AirWaybillEditModel model);
 		void Update(long id, BrokerAwbModel model);
 		void Update(long id, SenderAwbModel model);
+		void SetAdditionalCost(long awbId, decimal? additionalCost);
 	}
 }
