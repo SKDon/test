@@ -347,7 +347,7 @@
     <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\AirWaybill\BrokerAwbModel.cs" />
     <Compile Include="ViewModels\Calculation\CalculationAwb.cs" />
-    <Compile Include="ViewModels\Calculation\CalculationListItem.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationDetailsItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />

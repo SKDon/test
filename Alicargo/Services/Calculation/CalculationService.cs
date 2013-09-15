@@ -33,7 +33,7 @@ namespace Alicargo.Services.Calculation
 			{
 				AwbDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWayBillDisplay(x)),
 				Rows = applications.Where(a => a.AirWaybillId == x.Id)
-								   .Select(a => new CalculationListItem
+								   .Select(a => new CalculationDetailsItem
 								   {
 									   ApplicationId = a.Id,
 									   Value = a.Value,

@@ -2,7 +2,7 @@
 
 namespace Alicargo.ViewModels.Calculation
 {
-	public sealed class CalculationListItem
+	public sealed class CalculationDetailsItem
 	{
 		public const decimal InsuranceRate = 100;
 
@@ -61,7 +61,7 @@ namespace Alicargo.ViewModels.Calculation
 			get
 			{
 				// todo: 3. supposed that all costs in euro but ValueCurrencyId can be in any other currency
-				return TotalTariffCost ?? 0 + ScotchCost ?? 0 + InsuranceCost + FactureCost ?? 0 + WithdrawCost ?? 0 + TransitCost ?? 0;
+				return (TotalTariffCost ?? 0) + (ScotchCost ?? 0) + (InsuranceCost ?? 0) + (FactureCost ?? 0) + (WithdrawCost ?? 0) + (TransitCost ?? 0);
 			}
 		}
 	}

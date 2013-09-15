@@ -4,15 +4,15 @@ namespace Alicargo.ViewModels.Calculation
 {
 	public sealed class CalculationAwb
 	{
-		private CalculationListItem[] _rows;
+		private CalculationDetailsItem[] _rows;
 		private float _totalWeight;
 
 		public CalculationAwb()
 		{
-			Rows = new CalculationListItem[0];
+			Rows = new CalculationDetailsItem[0];
 		}
 
-		public CalculationListItem[] Rows
+		public CalculationDetailsItem[] Rows
 		{
 			get { return _rows; }
 			set
@@ -66,10 +66,7 @@ namespace Alicargo.ViewModels.Calculation
 
 		public decimal? TotalForwarderCost
 		{
-			get
-			{
-				return Rows.Sum(x => x.ForwarderCost);
-			}
+			get { return Rows.Sum(x => x.ForwarderCost); }
 		}
 
 		public decimal? AdditionalCost { get; set; }
@@ -78,17 +75,15 @@ namespace Alicargo.ViewModels.Calculation
 		{
 			get
 			{
-				var insuranceCost = Rows.Sum(x => x.InsuranceCost);
-				return (TotalOfSender + FlightCost + CustomCost + BrokerCost + insuranceCost + TotalForwarderCost + AdditionalCost) ?? 0;
+				var insuranceCost = Rows.Sum(x => x.InsuranceCost ?? 0);
+				return (TotalOfSender ?? 0) + (FlightCost ?? 0) + (CustomCost ?? 0) + (BrokerCost ?? 0) + insuranceCost
+					   + (TotalForwarderCost ?? 0) + (AdditionalCost ?? 0);
 			}
 		}
 
 		public decimal Profit
 		{
-			get
-			{
-				return Rows.Sum(x => x.Profit) - TotalExpenses;
-			}
+			get { return Rows.Sum(x => x.Profit) - TotalExpenses; }
 		}
 
 		public decimal ProfitPerKg
@@ -99,7 +94,7 @@ namespace Alicargo.ViewModels.Calculation
 				{
 					return 0;
 				}
-				return Profit / (decimal) _totalWeight;
+				return Profit / (decimal)_totalWeight;
 			}
 		}
 

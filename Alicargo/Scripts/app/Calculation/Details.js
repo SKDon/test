@@ -68,7 +68,7 @@
 				{ field: "Profit", title: $l.Entities_Profit, footerTemplate: "#= kendo.toString(sum, 'n2') #" }
 			];
 			if ($r.IsAdmin) {
-				$.extend(columns, {
+				columns.push({
 					command: [{
 						name: "calculate",
 						text: $l.Pages_Calculate,
@@ -81,6 +81,7 @@
 					title: "&nbsp;"
 				});
 			}
+			
 			row.find(".calculation-rows").kendoGrid({
 				dataSource: dataSource,
 				scrollable: false,
