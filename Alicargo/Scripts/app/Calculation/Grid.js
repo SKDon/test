@@ -1,40 +1,56 @@
-﻿$(function () {
-
-	var $a = Alicargo;
+﻿
+var Alicargo = (function ($a) {
 	var $u = $a.Urls;
-	var $c = $a.Calculation;
 
-	var gridHolder = $("#calculation-grid");
-	
-	var grid = gridHolder.kendoGrid({
-		columns: [{ field: "AwbDisplay", template: "<b>#: AwbDisplay # </b>" }],
-		pageable: true,
-		editable: false,
-		dataSource: {
-			transport: {
-				read: {
-					dataType: "json",
-					url: $u.Calculation_List,
-					type: "POST"
-				}
-			},
-			schema: { model: { id: "Id" } },
-			pageSize: 20,
-			serverPaging: true,
-			error: $a.ShowError
-		},
-		detailInit: detailInit,
-		dataBound: function () {
-			this.expandRow(this.tbody.find("tr.k-master-row"));
-		},
-		detailTemplate: kendo.template($("#calculation-grid-details-template").html()),
-	}).data("kendoGrid");	
+	$a.Calculation = (function ($c) {
 
-	gridHolder.children(".k-grid-header").hide();
+		$c.GetMainGrid = function () {
+			var grid = $("#calculation-grid").data("kendoGrid");
+			$c.GetMainGrid = function () { return grid; };
+			return grid;
+		};
 
-	function detailInit(r) {
-		var data = grid.dataItem(r.masterRow);
+		$c.UpdateMailGrid = function() {
+			var grid = $c.GetMainGrid();
+			grid.dataSource.read();
+			grid.refresh();
+		};
 
-		$c.InitDetails(r.detailRow, data);
-	}
-});
+		$(function () {
+			var gridHolder = $("#calculation-grid");
+
+			gridHolder.kendoGrid({
+				columns: [{ field: "AwbDisplay", template: "<b>#: AwbDisplay # </b>" }],
+				pageable: true,
+				editable: false,
+				dataSource: {
+					transport: {
+						read: {
+							dataType: "json",
+							url: $u.Calculation_List,
+							type: "POST"
+						}
+					},
+					schema: { model: { id: "Id" } },
+					pageSize: 20,
+					serverPaging: true,
+					error: $a.ShowError
+				},
+				detailInit: function (r) {
+					var data = $c.GetMainGrid().dataItem(r.masterRow);
+					$c.InitDetails(r.detailRow, data);
+				},
+				dataBound: function () {
+					this.expandRow(this.tbody.find("tr.k-master-row"));
+				},
+				detailTemplate: kendo.template($("#calculation-grid-details-template").html()),
+			});
+
+			gridHolder.children(".k-grid-header").hide();
+		});
+
+		return $c;
+	})($a.Calculation || {});
+
+	return $a;
+})(Alicargo || {});

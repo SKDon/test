@@ -1,33 +1,17 @@
-﻿var Alicargo = (function ($a) {
+﻿var Alicargo = (function($a) {
 	var $l = $a.Localization;
 	var $u = $a.Urls;
 	var $r = $a.Roles;
 
-	$a.Calculation = (function ($c) {
-			
-		function initAdditionalCost(row, data) {
-			row.find(".additional-cost input").kendoNumericTextBox({
-				decimals: 2, spinners: false,
-				change: function () {
-					$.post($u.Calculation_SetAdditionalCost, {
-						awbId: data.AwbId,
-						additionalCost: this.value()
-					}).fail($a.ShowError);
-				}
-			});
-		}
-
-		$c.InitDetails = function (row, data) {
-
+	$a.Calculation = (function($c) {
+		function dataSource(data) {
 			var editTariffPerKg = $r.IsAdmin;
 			var editScotchCost = $r.IsAdmin || $r.IsSender;
 			var editFactureCost = $r.IsAdmin || $r.IsSender;
 			var editWithdrawCost = $r.IsAdmin || $r.IsSender;
 			var editTransitCost = $r.IsAdmin || $r.IsForwarder;
 
-			initAdditionalCost(row, data);
-
-			var dataSource = {
+			return {
 				schema: {
 					model: {
 						id: "ApplicationId",
@@ -64,7 +48,10 @@
 					{ field: "InsuranceCost", aggregate: "sum" },
 					{ field: "Profit", aggregate: "sum" }]
 			};
-			var columns = [
+		}
+
+		function columns() {
+			var c = [
 				{ field: "ClientNic", title: $l.Entities_Nic },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
 				{ field: "Factory", title: $l.Entities_FactoryName },
@@ -83,11 +70,11 @@
 				{ field: "Profit", title: $l.Entities_Profit, footerTemplate: "#= kendo.toString(sum, 'n2') #" }
 			];
 			if ($r.IsAdmin) {
-				columns.push({
+				c.push({
 					command: [{
 						name: "calculate",
 						text: $l.Pages_Calculate,
-						click: function (e) {
+						click: function(e) {
 							var tr = $(e.target).closest("tr");
 							var trData = this.dataItem(tr);
 							alert("implement " + trData.ApplicationId);
@@ -96,45 +83,71 @@
 					title: "&nbsp;"
 				});
 			}
+
+			return c;
+		}
+
+		function initAdditionalCost(row, data) {
+			row.find(".additional-cost input").kendoNumericTextBox({
+				decimals: 2,
+				spinners: false,
+				change: function() {
+					post($u.Calculation_SetAdditionalCost, {
+						awbId: data.AwbId,
+						additionalCost: this.value()
+					});
+				}
+			});
+		}
+
+		function post(url, data) {
+			$.post(url, data).success($c.UpdateMailGrid).fail($a.ShowError);
+		}
+
+		$c.InitDetails = function(row, data) {
+
+			initAdditionalCost(row, data);
+			
+			function save(e) {
+				if (e.values.TariffPerKg !== undefined) {
+					post($u.Calculation_SetTariffPerKg, {
+						id: e.model.ApplicationId,
+						tariffPerKg: e.values.TariffPerKg
+					});
+				}
+				if (e.values.ScotchCost !== undefined) {
+					post($u.Calculation_SetScotchCostEdited, {
+						id: e.model.ApplicationId,
+						scotchCost: e.values.ScotchCost
+					});
+				}
+				if (e.values.FactureCost !== undefined) {
+					post($u.Calculation_SetFactureCostEdited, {
+						id: e.model.ApplicationId,
+						factureCost: e.values.FactureCost
+					});
+				}
+				if (e.values.WithdrawCost !== undefined) {
+					post($u.Calculation_SetWithdrawCostEdited, {
+						id: e.model.ApplicationId,
+						withdrawCost: e.values.WithdrawCost
+					});
+				}
+				if (e.values.TransitCost !== undefined) {
+					post($u.ApplicationUpdate_SetTransitCost, {
+						id: e.model.ApplicationId,
+						transitCost: e.values.TransitCost
+					});
+				}
+			}
 			
 			row.find(".calculation-rows").kendoGrid({
-				dataSource: dataSource,
+				dataSource: dataSource(data),
 				scrollable: false,
 				resizable: true,
 				editable: true,
-				save: function (e) {
-					if (e.values.TariffPerKg !== undefined) {
-						$.post($u.Calculation_SetTariffPerKg, {
-							id: e.model.ApplicationId,
-							tariffPerKg: e.values.TariffPerKg
-						}).fail($a.ShowError);
-					}
-					if (e.values.ScotchCost !== undefined) {
-						$.post($u.Calculation_SetScotchCostEdited, {
-							id: e.model.ApplicationId,
-							scotchCost: e.values.ScotchCost
-						}).fail($a.ShowError);
-					}
-					if (e.values.FactureCost !== undefined) {
-						$.post($u.Calculation_SetFactureCostEdited, {
-							id: e.model.ApplicationId,
-							factureCost: e.values.FactureCost
-						}).fail($a.ShowError);
-					}
-					if (e.values.WithdrawCost !== undefined) {
-						$.post($u.Calculation_SetWithdrawCostEdited, {
-							id: e.model.ApplicationId,
-							withdrawCost: e.values.WithdrawCost
-						}).fail($a.ShowError);
-					}
-					if (e.values.TransitCost !== undefined) {
-						$.post($u.ApplicationUpdate_SetTransitCost, {
-							id: e.model.ApplicationId,
-							transitCost: e.values.TransitCost
-						}).fail($a.ShowError);
-					}
-				},
-				columns: columns
+				save: save,
+				columns: columns()
 			});
 		};
 
