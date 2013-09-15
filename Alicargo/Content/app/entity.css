@@ -134,6 +134,7 @@
 
 	.calculation-details .additional-cost {
 		margin-bottom: 1px;
+		height: 23px;
 	}
 
 		.calculation-details .additional-cost .k-numerictextbox {

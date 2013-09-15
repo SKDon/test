@@ -10,10 +10,11 @@ var Alicargo = (function ($a) {
 			return grid;
 		};
 
-		$c.UpdateMailGrid = function() {
-			var grid = $c.GetMainGrid();
-			grid.dataSource.read();
-			grid.refresh();
+		$c.ExpandedRow = function (row) {
+			if (row !== undefined) {
+				$c._ExpandedRow = row;
+			}
+			return $c._ExpandedRow;
 		};
 
 		$(function () {
@@ -31,7 +32,7 @@ var Alicargo = (function ($a) {
 							type: "POST"
 						}
 					},
-					schema: { model: { id: "Id" } },
+					schema: { model: { id: "AwbId" } },
 					pageSize: 20,
 					serverPaging: true,
 					error: $a.ShowError
@@ -41,7 +42,18 @@ var Alicargo = (function ($a) {
 					$c.InitDetails(r.detailRow, data);
 				},
 				dataBound: function () {
-					this.expandRow(this.tbody.find("tr.k-master-row"));
+					var row = $c.ExpandedRow();
+					if (row !== undefined && row != null) {
+						var uid = row.data("uid");
+						this.expandRow("tr.k-master-row[data-uid=" + uid + "]");
+					}
+				},
+				detailExpand: function (e) {
+					var row = $c.ExpandedRow();
+					if (row !== undefined) {
+						this.collapseRow(row);
+					}
+					$c.ExpandedRow(e.masterRow);
 				},
 				detailTemplate: kendo.template($("#calculation-grid-details-template").html()),
 			});

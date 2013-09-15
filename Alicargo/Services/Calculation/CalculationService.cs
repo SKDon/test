@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
@@ -26,6 +27,11 @@ namespace Alicargo.Services.Calculation
 		public CalculationAwb[] List(int take, long skip)
 		{
 			var awbs = _awbRepository.GetRange(take, skip);
+			return List(awbs);
+		}
+
+		private CalculationAwb[] List(AirWaybillData[] awbs)
+		{
 			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Id).ToArray());
 			var nics = _clientRepository.GetNicByApplications(applications.Select(x => x.Id).ToArray());
 
@@ -58,6 +64,12 @@ namespace Alicargo.Services.Calculation
 				BrokerCost = x.BrokerCost,
 				AdditionalCost = x.AdditionalCost
 			}).ToArray();
+		}
+
+		public CalculationAwb Row(long awbId)
+		{
+			var awbs = _awbRepository.Get(awbId);
+			return List(awbs).First();
 		}
 	}
 }

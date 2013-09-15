@@ -95,14 +95,25 @@
 					post($u.Calculation_SetAdditionalCost, {
 						awbId: data.AwbId,
 						additionalCost: this.value()
-					});
+					}, data.AwbId);
 				}
 			});
 		}
 
-		function post(url, data) {
-			$.post(url, data).success($c.UpdateMailGrid).fail($a.ShowError);
+		function post(url, data, awbId) {
+			$.post(url, data).success(function() {
+				updateMailGrid(awbId);
+			}).fail($a.ShowError);
 		}
+		
+		function updateMailGrid(awbId) {
+			$.post($u.Calculation_Row, { id: awbId }).success(function (data) {
+				var grid = $c.GetMainGrid();
+				var oldData = grid.dataSource.get(awbId);
+				$.extend(oldData, data);
+				grid.refresh();								
+			}).fail($a.ShowError);
+		};
 
 		$c.InitDetails = function(row, data) {
 
@@ -113,31 +124,31 @@
 					post($u.Calculation_SetTariffPerKg, {
 						id: e.model.ApplicationId,
 						tariffPerKg: e.values.TariffPerKg
-					});
+					}, data.AwbId);
 				}
 				if (e.values.ScotchCost !== undefined) {
 					post($u.Calculation_SetScotchCostEdited, {
 						id: e.model.ApplicationId,
 						scotchCost: e.values.ScotchCost
-					});
+					}, data.AwbId);
 				}
 				if (e.values.FactureCost !== undefined) {
 					post($u.Calculation_SetFactureCostEdited, {
 						id: e.model.ApplicationId,
 						factureCost: e.values.FactureCost
-					});
+					}, data.AwbId);
 				}
 				if (e.values.WithdrawCost !== undefined) {
 					post($u.Calculation_SetWithdrawCostEdited, {
 						id: e.model.ApplicationId,
 						withdrawCost: e.values.WithdrawCost
-					});
+					}, data.AwbId);
 				}
 				if (e.values.TransitCost !== undefined) {
 					post($u.ApplicationUpdate_SetTransitCost, {
 						id: e.model.ApplicationId,
 						transitCost: e.values.TransitCost
-					});
+					}, data.AwbId);
 				}
 			}
 			
