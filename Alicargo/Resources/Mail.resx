@@ -134,9 +134,20 @@ Brands: {3}
 Created:{4}</value>
   </data>
   <data name="Application_CPFileAdded" xml:space="preserve">
-    <value>Изменение статуса заявки: {0}, {1}, {2}, {3}, добавлена Счет-фактура
+    <value>Добрый день, {0}
+Изменение статуса заявки {1} - прикреплен документ Счет-фактура.
+Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
 
-Changing the status of the application: {0}, {1}, {2}, {3}, added CP</value>
+С уважением,
+Alicargo srl
+
+
+Hello, {0}
+Changing the status of the application {1}. Commercial invoice is attached.
+Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+
+Sincerely,
+Alicargo srl</value>
   </data>
   <data name="Application_Delete" xml:space="preserve">
     <value>Заявка удалена.</value>
@@ -208,9 +219,20 @@ AWB: {29}
 Changing the status of the application: {0}, {1}, {2}, {3}, added a swift</value>
   </data>
   <data name="Application_Torg12FileAdded" xml:space="preserve">
-    <value>Изменение статуса заявки: {0}, {1}, {2}, {3}, добавлена ТОРГ-12
+    <value>Добрый день, {0}
+Изменение статуса заявки {1} - прикреплен документ ТОРГ-12.
+Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
 
-Changing the status of the application: {0}, {1}, {2}, {3}, added TORG-12</value>
+С уважением,
+Alicargo srl
+
+
+Hello, {0}
+Changing the status of the application {1}. TORG-12 is attached.
+Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+
+Sincerely,
+Alicargo srl</value>
   </data>
   <data name="Application_Update" xml:space="preserve">
     <value>Заявка обновлена.</value>

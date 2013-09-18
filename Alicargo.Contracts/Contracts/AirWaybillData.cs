@@ -13,11 +13,6 @@ namespace Alicargo.Contracts.Contracts
 		public DateTimeOffset DateOfArrival { get; set; }
 		public long BrokerId { get; set; }
 		public string GTD { get; set; }
-		public string GTDFileName { get; set; }
-		public string GTDAdditionalFileName { get; set; }
-		public string PackingFileName { get; set; }
-		public string InvoiceFileName { get; set; }
-		public string AWBFileName { get; set; }
 		public long StateId { get; set; }
 		public DateTimeOffset StateChangeTimestamp { get; set; }
 
@@ -26,5 +21,11 @@ namespace Alicargo.Contracts.Contracts
 		public decimal? BrokerCost { get; set; }
 		public decimal? ForwarderCost { get; set; }
 		public decimal? AdditionalCost { get; set; }
+
+		public string GTDFileName { get; set; }
+		public string GTDAdditionalFileName { get; set; }
+		public string PackingFileName { get; set; }
+		public string InvoiceFileName { get; set; }
+		public string AWBFileName { get; set; }
 	}
 }

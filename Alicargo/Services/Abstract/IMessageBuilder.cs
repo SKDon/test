@@ -33,7 +33,7 @@ namespace Alicargo.Services.Abstract
 		string ApplicationSwiftFileAdded(ApplicationDetailsModel model);
 		string ApplicationPackingFileAdded(ApplicationDetailsModel model);
 		string ApplicationDeliveryBillFileAdded(ApplicationDetailsModel model);
-		string ApplicationTorg12FileAdded(ApplicationDetailsModel model);
-		string ApplicationCPFileAdded(ApplicationDetailsModel model);
+		string ApplicationTorg12FileAdded(ApplicationDetailsModel model, string recipientName);
+		string ApplicationCPFileAdded(ApplicationDetailsModel model, string recipientName);
 	}
 }
