@@ -56,6 +56,7 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables\" />
+    <Folder Include="Stored procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -73,6 +74,7 @@
     <Build Include="Tables\Client.sql" />
     <Build Include="Tables\VisibleState.sql" />
     <Build Include="Tables\Country.sql" />
+    <Build Include="Stored procedures\Client_DeleteForce.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="InitialData.sql" />
