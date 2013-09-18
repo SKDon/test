@@ -31,6 +31,7 @@ namespace Alicargo.Contracts.Contracts
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
+		public long? SenderId { get; set; }
 
 		public string InvoiceFileName { get; set; }
 		public string SwiftFileName { get; set; }
@@ -42,11 +43,9 @@ namespace Alicargo.Contracts.Contracts
 		public decimal? FactureCost { get; set; }
 		public decimal? ScotchCost { get; set; }
 		public decimal? WithdrawCost { get; set; }
-
 		public decimal? FactureCostEdited { get; set; }
 		public decimal? ScotchCostEdited { get; set; }
 		public decimal? WithdrawCostEdited { get; set; }
-
 		public decimal? TariffPerKg { get; set; }
 		public decimal? TransitCost { get; set; }
 		public decimal? ForwarderCost { get; set; }

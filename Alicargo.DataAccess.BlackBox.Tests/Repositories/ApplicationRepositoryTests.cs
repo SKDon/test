@@ -116,6 +116,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.With(x => x.ClientId, TestConstants.TestClientId1)
 				.With(x => x.TransitId, TestConstants.TestTransitId)
 				.With(x => x.StateId, TestConstants.DefaultStateId)
+				.With(x => x.CountryId, TestConstants.TestCountryId)
 				.With(x => x.AirWaybillId, null)
 				.With(x => x.InvoiceFileName, null)
 				.With(x => x.SwiftFileName, null)

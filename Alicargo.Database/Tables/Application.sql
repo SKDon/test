@@ -43,6 +43,7 @@
 	[TransitId]				BIGINT				NOT NULL,
 	[CountryId]				BIGINT				NULL,
 	[AirWaybillId]			BIGINT				NULL,
+	[SenderId]				BIGINT				NULL,
 
 	[FactoryName]			NVARCHAR(320)		NOT NULL, 
 	[FactoryPhone]			NVARCHAR(MAX)		NULL, 
@@ -56,7 +57,6 @@
 	[FactureCostEdited]		MONEY				NULL,
 	[ScotchCostEdited]		MONEY				NULL,
 	[WithdrawCostEdited]	MONEY				NULL,
-
 	[ForwarderCost]			MONEY				NULL,
 	[TariffPerKg]			MONEY				NULL,
 	[TransitCost]			MONEY				NULL,

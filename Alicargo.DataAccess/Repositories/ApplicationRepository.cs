@@ -63,7 +63,8 @@ namespace Alicargo.DataAccess.Repositories
 				ForwarderCost = x.ForwarderCost,
 				FactureCostEdited = x.FactureCostEdited,
 				ScotchCostEdited = x.ScotchCostEdited,
-				WithdrawCostEdited = x.WithdrawCostEdited
+				WithdrawCostEdited = x.WithdrawCostEdited,
+				SenderId = x.SenderId
 			};
 		}
 

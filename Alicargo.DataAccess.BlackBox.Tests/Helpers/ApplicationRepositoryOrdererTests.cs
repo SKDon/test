@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Alicargo.Contracts.Helpers;
@@ -20,8 +21,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
-		public void Test_ArgumentOutOfRangeException()
+		[ExpectedException(typeof(KeyNotFoundException))]
+		public void Test_KeyNotFoundException()
 		{
 			var list = new[] { GetApplication(1, "1", 1, "1", 10) }.AsQueryable();
 
