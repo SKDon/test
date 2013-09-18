@@ -354,7 +354,7 @@
     <Compile Include="ViewModels\User\UserList.cs" />
     <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
-    <Compile Include="ViewModels\Application\ApplicationEditModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationAdminModel.cs" />
     <Compile Include="ViewModels\CarrierSelectModel.cs" />
     <Compile Include="ViewModels\AirWaybill\AirWaybillEditModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />
@@ -1423,7 +1423,7 @@
     <Content Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Shared\Memu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
-    <Content Include="Views\Application\EditorTemplates\ApplicationEditModel.cshtml" />
+    <Content Include="Views\Application\EditorTemplates\ApplicationAdminModel.cshtml" />
     <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />

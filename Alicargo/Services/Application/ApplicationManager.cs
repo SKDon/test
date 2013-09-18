@@ -33,16 +33,16 @@ namespace Alicargo.Services.Application
 			_stateService = stateService;
 		}
 
-		public ApplicationEditModel Get(long id)
+		public ApplicationAdminModel Get(long id)
 		{
 			var data = _applicationRepository.Get(id);
 
-			var application = GetApplicationEditModel(data);
+			var application = GetModel(data);
 
 			return application;
 		}
 
-		public void Update(long applicationId, ApplicationEditModel model, CarrierSelectModel carrierModel,
+		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 						   TransitEditModel transitModel)
 		{
 			var data = _applicationRepository.Get(applicationId);
@@ -57,7 +57,7 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
-		public long Add(ApplicationEditModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
+		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
 						long clientId)
 		{
 			var transitId = _transitService.AddTransit(transitModel, carrierModel);
@@ -148,9 +148,9 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
-		private static ApplicationEditModel GetApplicationEditModel(ApplicationData data)
+		private static ApplicationAdminModel GetModel(ApplicationData data)
 		{
-			var application = new ApplicationEditModel
+			var application = new ApplicationAdminModel
 			{
 				AddressLoad = data.AddressLoad,
 				Characteristic = data.Characteristic,
@@ -197,7 +197,7 @@ namespace Alicargo.Services.Application
 			return application;
 		}
 
-		private static void Map(ApplicationEditModel @from, ApplicationData to)
+		private static void Map(ApplicationAdminModel @from, ApplicationData to)
 		{
 			to.Invoice = @from.Invoice;
 			to.InvoiceFileName = @from.InvoiceFileName;
@@ -233,7 +233,7 @@ namespace Alicargo.Services.Application
 			to.ScotchCostEdited = from.ScotchCostEdited;
 		}
 
-		private ApplicationData GetNewApplicationData(ApplicationEditModel model, long clientId, long transitId)
+		private ApplicationData GetNewApplicationData(ApplicationAdminModel model, long clientId, long transitId)
 		{
 			return new ApplicationData
 			{

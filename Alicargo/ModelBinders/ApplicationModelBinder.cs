@@ -9,7 +9,7 @@ namespace Alicargo.ModelBinders
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (ApplicationEditModel)base.BindModel(controllerContext, bindingContext);
+			var model = (ApplicationAdminModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(model, controllerContext.HttpContext.Request);
 
@@ -17,7 +17,7 @@ namespace Alicargo.ModelBinders
 		}
 
 		// todo: 3. files refatoring
-		private static void ReadFiles(ApplicationEditModel model, HttpRequestBase request)
+		private static void ReadFiles(ApplicationAdminModel model, HttpRequestBase request)
 		{
 			if (model.InvoiceFile == null && model.InvoiceFileName == null)
 				request.ReadFile("InvoiceFile", (name, bytes) =>

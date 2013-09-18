@@ -100,7 +100,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Edit_Post()
 		{
-			var model = _fixture.Create<ApplicationEditModel>();
+			var model = _fixture.Create<ApplicationAdminModel>();
 			var transitModel = _fixture.Create<TransitEditModel>();
 			var newCarrierName = _fixture.Create<string>();
 			var old = _applicationRepository.List(1).First();
@@ -120,7 +120,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		public void Test_Create_Post()
 		{
 			var clientData = _clientRepository.Get(TestConstants.TestClientId1).First();
-			var model = _fixture.Create<ApplicationEditModel>();
+			var model = _fixture.Create<ApplicationAdminModel>();
 			var transitModel = _fixture.Create<TransitEditModel>();
 			var newCarrierName = _fixture.Create<string>();
 
@@ -132,7 +132,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			Validate(result, clientData, model, transitModel, newCarrierName);
 		}
 
-		private void Validate(ActionResult result, ClientData clientData, ApplicationEditModel model,
+		private void Validate(ActionResult result, ClientData clientData, ApplicationAdminModel model,
 							  TransitEditModel transitModel, string newCarrierName)
 		{
 			result.Should().BeOfType<RedirectToRouteResult>();
@@ -154,7 +154,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			Validate(clientData, model, transitModel, newCarrierName, data);
 		}
 
-		private static void Validate(ClientData clientData, ApplicationEditModel model, TransitEditModel transitModel,
+		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
 									 string newCarrierName, ApplicationListItemData data)
 		{
 			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());

@@ -123,7 +123,7 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Edit(long id, ApplicationEditModel model, CarrierSelectModel carrierModel,
+		public virtual ActionResult Edit(long id, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if (!ModelState.IsValid)
@@ -147,13 +147,13 @@ namespace Alicargo.Controllers
 		{
 			BindBag(clientId, null);
 
-			return View(new ApplicationEditModel());
+			return View(new ApplicationAdminModel());
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(long? clientId, ApplicationEditModel model, CarrierSelectModel carrierModel,
+		public virtual ActionResult Create(long? clientId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			var client = _clientPresenter.GetCurrentClientData(clientId);
