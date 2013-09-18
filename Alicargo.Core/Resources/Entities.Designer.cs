@@ -853,7 +853,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сумма.
+        ///   Looks up a localized string similar to Сумма (€).
         /// </summary>
         public static string TotalTariffCost {
             get {

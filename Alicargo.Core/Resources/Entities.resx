@@ -358,7 +358,7 @@
     <value>Всего</value>
   </data>
   <data name="TotalTariffCost" xml:space="preserve">
-    <value>Сумма</value>
+    <value>Сумма (€)</value>
   </data>
   <data name="TransitCost" xml:space="preserve">
     <value>Транзит (€)</value>

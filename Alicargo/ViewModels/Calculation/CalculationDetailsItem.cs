@@ -39,7 +39,7 @@ namespace Alicargo.ViewModels.Calculation
 		{
 			get
 			{
-				return TariffPerKg * Count;
+				return TariffPerKg * (decimal?)Weigth;
 			}
 		}
 

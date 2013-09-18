@@ -60,26 +60,6 @@
 	</div>
 </div>
 <div class="row">
-	<div class="span2">
-		@Html.EditorWithLabelFor(model => model.FactureCost)
-	</div>
-	<div class="span2">
-		@Html.EditorWithLabelFor(model => model.FactureCostEdited)
-	</div>
-	<div class="span2">
-		@Html.EditorWithLabelFor(model => model.ScotchCost)
-	</div>
-	<div class="span2">
-		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)
-	</div>
-	<div class="span2">
-		@Html.EditorWithLabelFor(model => model.WithdrawCost)
-	</div>
-	<div class="span2">
-		@Html.EditorWithLabelFor(model => model.WithdrawCostEdited)
-	</div>
-</div>
-<div class="row">
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Count)
 		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span> )</label>
@@ -101,6 +81,26 @@
 		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
 		@Html.EditorWithLabelFor(model => model.Currency)
 		@Html.EditorWithLabelFor(model => model.TariffPerKg)
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.FactureCost)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.FactureCostEdited)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.ScotchCost)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.WithdrawCost)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.WithdrawCostEdited)
 	</div>
 </div>
 <hr />
