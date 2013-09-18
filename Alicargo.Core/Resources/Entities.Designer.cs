@@ -232,7 +232,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CP.
+        ///   Looks up a localized string similar to Счет-фактура.
         /// </summary>
         public static string CP {
             get {

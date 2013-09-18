@@ -6,13 +6,7 @@ namespace Alicargo.Contracts.Contracts
 	{
 		public long Id { get; set; }
 		public DateTimeOffset CreationTimestamp { get; set; }
-		public string Invoice { get; set; }
-		public string InvoiceFileName { get; set; }
-		public string SwiftFileName { get; set; }
-		public string PackingFileName { get; set; }
-		public string DeliveryBillFileName { get; set; }
-		public string Torg12FileName { get; set; }
-		public string CPFileName { get; set; }
+		public string Invoice { get; set; }		
 		public string Characteristic { get; set; }
 		public string AddressLoad { get; set; }
 		public string WarehouseWorkingTime { get; set; }
@@ -38,6 +32,13 @@ namespace Alicargo.Contracts.Contracts
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
 
+		public string InvoiceFileName { get; set; }
+		public string SwiftFileName { get; set; }
+		public string PackingFileName { get; set; }
+		public string DeliveryBillFileName { get; set; }
+		public string Torg12FileName { get; set; }
+		public string CPFileName { get; set; }
+		
 		public decimal? FactureCost { get; set; }
 		public decimal? ScotchCost { get; set; }
 		public decimal? WithdrawCost { get; set; }

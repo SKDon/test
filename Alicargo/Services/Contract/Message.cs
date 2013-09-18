@@ -17,7 +17,7 @@ namespace Alicargo.Services.Contract
 
 		public string From { get; set; }
 		public string[] To { get; set; }
-		public string[] CC { get; set; }
+		public string[] CopyTo { get; set; }
 		public string Subject { get; set; }
 		public string Body { get; set; }
 		public FileHolder[] Files { get; set; }

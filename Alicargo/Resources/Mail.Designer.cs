@@ -80,9 +80,19 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Изменение статуса заявки: {0}, {1}, {2}, {3}, добавлена Счет-фактура
+        ///   Looks up a localized string similar to Добрый день, {0}
+        ///Изменение статуса заявки {1} - прикреплен документ Счет-фактура.
+        ///Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
         ///
-        ///Changing the status of the application: {0}, {1}, {2}, {3}, added CP.
+        ///С уважением,
+        ///Alicargo srl
+        ///
+        ///
+        ///Hello, {0}
+        ///Changing the status of the application {1}. Commercial invoice is attached.
+        ///Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+        ///
+        ///Sincer [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Application_CPFileAdded {
             get {
@@ -193,9 +203,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Изменение статуса заявки: {0}, {1}, {2}, {3}, добавлена ТОРГ-12
+        ///   Looks up a localized string similar to Добрый день, {0}
+        ///Изменение статуса заявки {1} - прикреплен документ ТОРГ-12.
+        ///Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
         ///
-        ///Changing the status of the application: {0}, {1}, {2}, {3}, added TORG-12.
+        ///С уважением,
+        ///Alicargo srl
+        ///
+        ///
+        ///Hello, {0}
+        ///Changing the status of the application {1}. TORG-12 is attached.
+        ///Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+        ///
+        ///Sincerely,
+        ///Alicargo s [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Application_Torg12FileAdded {
             get {

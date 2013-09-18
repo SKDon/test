@@ -289,7 +289,7 @@
     <value>Контактное лицо фабрики</value>
   </data>
   <data name="CP" xml:space="preserve">
-    <value>CP</value>
+    <value>Счет-фактура</value>
   </data>
   <data name="DeliveryBill" xml:space="preserve">
     <value>Счет за доставку</value>

@@ -22,9 +22,9 @@ namespace Alicargo.Services.Email
 							email.To.Add(to);
 						}
 
-						if (message.CC != null)
+						if (message.CopyTo != null)
 						{
-							foreach (var to in message.CC)
+							foreach (var to in message.CopyTo)
 							{
 								email.CC.Add(to);
 							}
