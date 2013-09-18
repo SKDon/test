@@ -141,16 +141,18 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.ApplicationTorg12FileAdded(details, details.ClientLegalEntity);
 				var file = _applicationRepository.GetTorg12File(details.Id);
+				var admins = _messageBuilder.GetAdminEmails().Select(x => x.Email).ToArray();
 
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
 			}
 
 			if (old.CPFileName == null && details.CPFileName != null)
 			{
 				var body = _messageBuilder.ApplicationCPFileAdded(details, details.ClientLegalEntity);
 				var file = _applicationRepository.GetCPFile(details.Id);
+				var admins = _messageBuilder.GetAdminEmails().Select(x => x.Email).ToArray();
 
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
 			}
 		}
 
