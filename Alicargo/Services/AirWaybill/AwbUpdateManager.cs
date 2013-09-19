@@ -25,7 +25,7 @@ namespace Alicargo.Services.AirWaybill
 			_stateConfig = stateConfig;
 		}
 
-		public void Update(long id, AirWaybillEditModel model)
+		public void Update(long id, AwbAdminModel model)
 		{
 			var data = _awbRepository.Get(id).First();
 
@@ -38,7 +38,7 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
-		public void Update(long id, BrokerAwbModel model)
+		public void Update(long id, AwbBrokerModel model)
 		{
 			var data = _awbRepository.Get(id).First();
 
@@ -59,7 +59,7 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
-		public void Update(long id, SenderAwbModel model)
+		public void Update(long id, AwbSenderModel model)
 		{
 			var data = _awbRepository.Get(id).First();
 
@@ -78,7 +78,7 @@ namespace Alicargo.Services.AirWaybill
 			_unitOfWork.SaveChanges();
 		}
 
-		public static void Map(AirWaybillEditModel @from, AirWaybillData to)
+		public static void Map(AwbAdminModel @from, AirWaybillData to)
 		{
 			to.PackingFileName = @from.PackingFileName;
 			to.InvoiceFileName = @from.InvoiceFileName;
@@ -99,7 +99,7 @@ namespace Alicargo.Services.AirWaybill
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}
 
-		private static void Map(SenderAwbModel @from, AirWaybillData to)
+		private static void Map(AwbSenderModel @from, AirWaybillData to)
 		{
 			to.Bill = @from.Bill;
 			to.ArrivalAirport = @from.ArrivalAirport;
@@ -113,7 +113,7 @@ namespace Alicargo.Services.AirWaybill
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}
 
-		public static void Map(BrokerAwbModel @from, AirWaybillData to)
+		public static void Map(AwbBrokerModel @from, AirWaybillData to)
 		{
 			to.PackingFileName = @from.PackingFileName;
 			to.InvoiceFileName = @from.InvoiceFileName;

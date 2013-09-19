@@ -4,8 +4,8 @@ namespace Alicargo.Services.Abstract
 {
     public interface IAwbManager
     {
-        long Create(long applicationId, AirWaybillEditModel model);
-	    long Create(long applicationId, SenderAwbModel model);
+        long Create(long applicationId, AwbAdminModel model);
+	    long Create(long applicationId, AwbSenderModel model);
 	    void Delete(long awbId);
     }
 }

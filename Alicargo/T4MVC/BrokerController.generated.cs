@@ -119,7 +119,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string BrokerAwbModel = "BrokerAwbModel";
+                public readonly string AwbBrokerModel = "AwbBrokerModel";
             }
         }
     }
@@ -150,9 +150,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void AWBOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.BrokerAwbModel model);
+        partial void AWBOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model);
 
-        public override System.Web.Mvc.ActionResult AWB(long id, Alicargo.ViewModels.AirWaybill.BrokerAwbModel model)
+        public override System.Web.Mvc.ActionResult AWB(long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AWB);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

@@ -4,9 +4,9 @@ using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
-	public sealed class ApplicationSenderEdit
+	public sealed class ApplicationSenderModel
 	{
-		public ApplicationSenderEdit()
+		public ApplicationSenderModel()
 		{
 			Currency = new CurrencyModel();
 		}

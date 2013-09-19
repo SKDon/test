@@ -71,7 +71,7 @@ namespace Alicargo.Services.AirWaybill
 			return new ListCollection<AirWaybillListItem> { Data = items, Total = total };
 		}
 
-		public AirWaybillEditModel Get(long id)
+		public AwbAdminModel Get(long id)
 		{
 			var data = _awbRepository.Get(id).FirstOrDefault();
 
@@ -80,11 +80,11 @@ namespace Alicargo.Services.AirWaybill
 			return Map(data);
 		}
 
-		public SenderAwbModel GetSenderAwbModel(long id)
+		public AwbSenderModel GetSenderAwbModel(long id)
 		{
 			var data = _awbRepository.Get(id).First();
 
-			return new SenderAwbModel
+			return new AwbSenderModel
 			{
 				AWBFile = null,
 				AWBFileName = data.AWBFileName,
@@ -101,9 +101,9 @@ namespace Alicargo.Services.AirWaybill
 			};
 		}
 
-		public static AirWaybillEditModel Map(AirWaybillData data)
+		public static AwbAdminModel Map(AirWaybillData data)
 		{
-			return new AirWaybillEditModel
+			return new AwbAdminModel
 			{
 				PackingFileName = data.PackingFileName,
 				InvoiceFileName = data.InvoiceFileName,

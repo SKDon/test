@@ -45,7 +45,7 @@ namespace Alicargo.Controllers
 
 			ViewBag.Nic = clientData.Nic;
 
-			return View(new ApplicationSenderEdit());
+			return View(new ApplicationSenderModel());
 		}
 
 		[HttpGet]
@@ -57,7 +57,7 @@ namespace Alicargo.Controllers
 			ViewBag.Nic = clientData.Nic;
 			ViewBag.ApplicationNumber = ApplicationModelHelper.GetDisplayNumber(application.Id, application.Count);
 
-			return View(new ApplicationSenderEdit
+			return View(new ApplicationSenderModel
 			{
 				Count = application.Count,
 				PackingFile = null,
@@ -83,7 +83,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		public virtual ActionResult ApplicationEdit(long id, ApplicationSenderEdit model)
+		public virtual ActionResult ApplicationEdit(long id, ApplicationSenderModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -106,7 +106,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		public virtual ActionResult ApplicationCreate(long id, ApplicationSenderEdit model)
+		public virtual ActionResult ApplicationCreate(long id, ApplicationSenderModel model)
 		{
 			var clientData = _clientRepository.Get(id).First();
 
@@ -142,7 +142,7 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
-		private static void Map(ApplicationSenderEdit @from, ApplicationData to)
+		private static void Map(ApplicationSenderModel @from, ApplicationData to)
 		{
 			to.Count = @from.Count;
 			to.PackingFileName = @from.PackingFileName;

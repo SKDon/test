@@ -157,7 +157,7 @@
     <Compile Include="Controllers\SenderAwbController.cs" />
     <Compile Include="MvcHelpers\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
-    <Compile Include="ModelBinders\SenderAwbModelBinder.cs" />
+    <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
@@ -166,10 +166,10 @@
     <Compile Include="MvcHelpers\StyleRelativePathTransform.cs" />
     <Compile Include="MvcHelpers\StyleRelativePathTransformBundle.cs" />
     <Compile Include="MvcHelpers\CustomHandleErrorInfo.cs" />
-    <Compile Include="ModelBinders\ApplicationModelBinder.cs" />
-    <Compile Include="ModelBinders\BrokerAWBModelBinder.cs" />
+    <Compile Include="ModelBinders\ApplicationAdminModelBinder.cs" />
+    <Compile Include="ModelBinders\AwbBrokerModelBinder.cs" />
     <Compile Include="ModelBinders\ApplicationSenderEditBinder.cs" />
-    <Compile Include="ModelBinders\AirWaybillModelBinder.cs" />
+    <Compile Include="ModelBinders\AwbAdminModelBinder.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\AirWaybillController.cs" />
     <Compile Include="MvcHelpers\BaseWebViewPage.cs" />
@@ -334,18 +334,18 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
-    <Compile Include="ViewModels\AirWaybill\SenderAwbModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\AwbSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Helpers\ApplicationModelHelper.cs" />
-    <Compile Include="ViewModels\Application\ApplicationSenderEdit.cs" />
+    <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
     <Compile Include="ViewModels\Helpers\AwbHelper.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
-    <Compile Include="ViewModels\AirWaybill\BrokerAwbModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\AwbBrokerModel.cs" />
     <Compile Include="ViewModels\Calculation\CalculationAwb.cs" />
     <Compile Include="ViewModels\Calculation\CalculationDetailsItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
@@ -356,7 +356,7 @@
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
     <Compile Include="ViewModels\Application\ApplicationAdminModel.cs" />
     <Compile Include="ViewModels\CarrierSelectModel.cs" />
-    <Compile Include="ViewModels\AirWaybill\AirWaybillEditModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\AwbAdminModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\ListCollection.cs" />
     <Compile Include="ViewModels\User\SignIdModel.cs" />
@@ -1427,7 +1427,7 @@
     <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
-    <Content Include="Views\AirWaybill\EditorTemplates\AirWaybillEditModel.cshtml" />
+    <Content Include="Views\AirWaybill\EditorTemplates\AwbAdminModel.cshtml" />
     <Content Include="Views\Carrier\Select.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SelectModel.cshtml" />
     <Content Include="Views\AirWaybill\Index.cshtml" />
@@ -1445,7 +1445,7 @@
     <Content Include="Views\Transit\Edit.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
     <Content Include="Views\Broker\AWB.cshtml" />
-    <Content Include="Views\Broker\EditorTemplates\BrokerAwbModel.cshtml" />
+    <Content Include="Views\Broker\EditorTemplates\AwbBrokerModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\Sender\ApplicationEdit.cshtml" />
     <Content Include="Views\Sender\EditorTemplates\ApplicationSenderEdit.cshtml" />
@@ -1456,7 +1456,7 @@
     <Content Include="Views\Transit\EditByClient.cshtml" />
     <Content Include="Views\Authentication\Client.cshtml" />
     <Content Include="Views\SenderAwb\Edit.cshtml" />
-    <Content Include="Views\SenderAwb\EditorTemplates\SenderAwbModel.cshtml" />
+    <Content Include="Views\SenderAwb\EditorTemplates\AwbSenderModel.cshtml" />
     <Content Include="Views\DynamicScript\Roles.cshtml" />
     <Content Include="Views\DynamicScript\Urls.cshtml" />
     <Content Include="Views\DynamicScript\Localization.cshtml" />

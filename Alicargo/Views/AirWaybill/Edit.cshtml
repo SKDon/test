@@ -1,5 +1,5 @@
 ﻿@using Alicargo.MvcHelpers
 @using Resources
-@model Alicargo.ViewModels.AirWaybill.AirWaybillEditModel
+@model Alicargo.ViewModels.AirWaybill.AwbAdminModel
 
 @Html.EditPage(Pages.AirWaybillEdit, Url.Action(MVC.AirWaybill.Edit()), Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))

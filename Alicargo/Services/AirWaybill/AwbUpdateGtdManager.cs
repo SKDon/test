@@ -21,7 +21,7 @@ namespace Alicargo.Services.AirWaybill
             _awbRepository = awbRepository;
         }
 
-        public void Update(long id, AirWaybillEditModel model)
+        public void Update(long id, AwbAdminModel model)
         {
             var data = _awbRepository.Get(id).First();
 
@@ -30,7 +30,7 @@ namespace Alicargo.Services.AirWaybill
             _manager.Update(id, model);
         }
 
-        public void Update(long id, BrokerAwbModel model)
+        public void Update(long id, AwbBrokerModel model)
         {
             var data = _awbRepository.Get(id).First();
 
@@ -39,7 +39,7 @@ namespace Alicargo.Services.AirWaybill
             _manager.Update(id, model);
         }
 
-	    public void Update(long id, SenderAwbModel model)
+	    public void Update(long id, AwbSenderModel model)
 	    {
 			_manager.Update(id, model);
 	    }

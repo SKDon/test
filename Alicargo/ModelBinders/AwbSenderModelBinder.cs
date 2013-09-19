@@ -5,18 +5,18 @@ using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.ModelBinders
 {
-	internal sealed class SenderAwbModelBinder : DefaultModelBinder
+	internal sealed class AwbSenderModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (SenderAwbModel)base.BindModel(controllerContext, bindingContext);
+			var model = (AwbSenderModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(controllerContext.HttpContext.Request, model);
 
 			return model;
 		}
 
-		private static void ReadFiles(HttpRequestBase request, SenderAwbModel model)
+		private static void ReadFiles(HttpRequestBase request, AwbSenderModel model)
 		{
 			if (model.PackingFile == null && model.PackingFileName == null)
 				request.ReadFile("PackingFile", (name, bytes) =>

@@ -41,7 +41,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var entity = _db.AirWaybills.First();
 
 			var model = _context
-				.Build<AirWaybillEditModel>()
+				.Build<AwbAdminModel>()
 				.With(x => x.BrokerId, entity.BrokerId)
 				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
@@ -61,9 +61,9 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				.Wait();
 		}
 
-		private static AirWaybillEditModel Map(AirWaybill entity)
+		private static AwbAdminModel Map(AirWaybill entity)
 		{
-			var actual = ObjectMapperManager.DefaultInstance.GetMapper<AirWaybill, AirWaybillEditModel>().Map(entity);
+			var actual = ObjectMapperManager.DefaultInstance.GetMapper<AirWaybill, AwbAdminModel>().Map(entity);
 
 			actual.DateOfDepartureLocalString = entity.DateOfDeparture.ToLocalShortDateString();
 			actual.DateOfArrivalLocalString = entity.DateOfArrival.ToLocalShortDateString();
@@ -85,7 +85,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var count = _db.AirWaybills.Count();
 
 			var model = _context
-				.Build<AirWaybillEditModel>()
+				.Build<AwbAdminModel>()
 				.Without(x => x.GTD)
 				.With(x => x.BrokerId, broker.Id)
 				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())

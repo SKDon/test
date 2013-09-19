@@ -56,7 +56,7 @@ namespace Alicargo.Controllers
         }
 
         [HttpPost, Access(RoleType.Admin)]
-        public virtual ActionResult Create(long applicationId, AirWaybillEditModel model)
+        public virtual ActionResult Create(long applicationId, AwbAdminModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -168,7 +168,7 @@ namespace Alicargo.Controllers
         }
 
         [Access(RoleType.Admin), HttpPost]
-        public virtual ActionResult Edit(long id, AirWaybillEditModel model)
+        public virtual ActionResult Edit(long id, AwbAdminModel model)
         {
             if (!ModelState.IsValid)
 			{

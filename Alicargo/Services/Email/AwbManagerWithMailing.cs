@@ -24,7 +24,7 @@ namespace Alicargo.Services.Email
             _messageBuilder = messageBuilder;
         }
 
-        public long Create(long applicationId, AirWaybillEditModel model)
+        public long Create(long applicationId, AwbAdminModel model)
         {
             var id = _manager.Create(applicationId, model);
 
@@ -33,7 +33,7 @@ namespace Alicargo.Services.Email
             return id;
         }
 
-	    public long Create(long applicationId, SenderAwbModel model)
+	    public long Create(long applicationId, AwbSenderModel model)
 	    {
 			var id = _manager.Create(applicationId, model);
 

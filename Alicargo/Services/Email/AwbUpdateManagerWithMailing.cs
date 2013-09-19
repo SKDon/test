@@ -29,7 +29,7 @@ namespace Alicargo.Services.Email
             _messageBuilder = messageBuilder;
         }
 
-        public void Update(long id, AirWaybillEditModel model)
+        public void Update(long id, AwbAdminModel model)
         {
             var old = _awbPresenter.GetData(id);
 
@@ -38,7 +38,7 @@ namespace Alicargo.Services.Email
             SendOnFileAdd(id, old);
         }
 
-        public void Update(long id, BrokerAwbModel model)
+        public void Update(long id, AwbBrokerModel model)
         {
             var old = _awbPresenter.GetData(id);
 
@@ -47,7 +47,7 @@ namespace Alicargo.Services.Email
             SendOnFileAdd(id, old);
         }
 
-	    public void Update(long id, SenderAwbModel model)
+	    public void Update(long id, AwbSenderModel model)
 	    {
 			var old = _awbPresenter.GetData(id);
 

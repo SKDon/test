@@ -34,13 +34,13 @@ namespace Alicargo.Tests.Services.AirWaybill
             _context.StateConfig.SetupGet(x => x.CargoIsCustomsClearedStateId).Returns(cargoIsCustomsClearedStateId);
             _context.AirWaybillRepository.Setup(x => x.Get(id)).Returns(new[] { data });
 
-            _manager.Update(id, It.IsAny<BrokerAwbModel>());
+            _manager.Update(id, It.IsAny<AwbBrokerModel>());
         }
 
         [TestMethod]
         public void Test_AwbUpdateManager_Map_BrokerAWBModel()
         {
-            var model = _context.Create<AirWaybillEditModel>();
+            var model = _context.Create<AwbAdminModel>();
             var data = new AirWaybillData();
 
             AwbUpdateManager.Map(model, data);
@@ -53,7 +53,7 @@ namespace Alicargo.Tests.Services.AirWaybill
         [TestMethod]
         public void Test_AwbUpdateManager_Map_AirWaybillEditModel()
         {
-            var model = _context.Create<BrokerAwbModel>();
+            var model = _context.Create<AwbBrokerModel>();
             var data = new AirWaybillData();
 
             AwbUpdateManager.Map(model, data);

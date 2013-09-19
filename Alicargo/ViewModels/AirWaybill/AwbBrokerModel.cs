@@ -3,7 +3,7 @@ using Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
 {
-	public sealed class BrokerAwbModel
+	public sealed class AwbBrokerModel
 	{
 		[DisplayNameLocalized(typeof(Entities), "GTD")]
 		public string GTD { get; set; }

@@ -65,9 +65,9 @@ namespace Alicargo.Controllers
 			return View(model);
 		}
 
-		private static BrokerAwbModel Map(AirWaybillData data)
+		private static AwbBrokerModel Map(AirWaybillData data)
 		{
-			return new BrokerAwbModel
+			return new AwbBrokerModel
 			{
 				GTD = data.GTD,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
@@ -91,7 +91,7 @@ namespace Alicargo.Controllers
 
 		// todo: 1.5. bb test
 		[Access(RoleType.Broker), HttpPost]
-		public virtual ActionResult AWB(long id, BrokerAwbModel model)
+		public virtual ActionResult AWB(long id, AwbBrokerModel model)
 		{
 			if (!ModelState.IsValid)
 			{

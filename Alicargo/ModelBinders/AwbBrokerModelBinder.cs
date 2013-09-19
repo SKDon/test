@@ -1,22 +1,22 @@
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using Alicargo.MvcHelpers;
 using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.ModelBinders
 {
-	internal sealed class AirWaybillModelBinder : DefaultModelBinder
+	internal sealed class AwbBrokerModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (AirWaybillEditModel)base.BindModel(controllerContext, bindingContext);
+			var model = (AwbBrokerModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(controllerContext.HttpContext.Request, model);
 
 			return model;
 		}
 
-		private static void ReadFiles(HttpRequestBase request, AirWaybillEditModel model)
+		private static void ReadFiles(HttpRequestBase request, AwbBrokerModel model)
 		{
 			if (model.GTDFile == null && model.GTDFileName == null)
 				request.ReadFile("GTDFile", (name, bytes) =>
@@ -44,13 +44,6 @@ namespace Alicargo.ModelBinders
 				{
 					model.InvoiceFileName = name;
 					model.InvoiceFile = bytes;
-				});
-
-			if (model.AWBFile == null && model.AWBFileName == null)
-				request.ReadFile("AWBFile", (name, bytes) =>
-				{
-					model.AWBFileName = name;
-					model.AWBFile = bytes;
 				});
 		}
 	}

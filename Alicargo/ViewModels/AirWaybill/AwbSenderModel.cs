@@ -4,7 +4,7 @@ using Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
 {
-	public sealed class SenderAwbModel
+	public sealed class AwbSenderModel
 	{
 		#region Data
 

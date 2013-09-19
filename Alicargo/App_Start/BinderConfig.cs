@@ -9,11 +9,11 @@ namespace Alicargo.App_Start
 	{
 		public static void RegisterBinders(ModelBinderDictionary binders)
 		{
-			binders.Add(typeof(AirWaybillEditModel), new AirWaybillModelBinder());
-			binders.Add(typeof(BrokerAwbModel), new BrokerAWBModelBinder());
-			binders.Add(typeof(SenderAwbModel), new SenderAwbModelBinder());
-			binders.Add(typeof(ApplicationAdminModel), new ApplicationModelBinder());
-			binders.Add(typeof(ApplicationSenderEdit), new ApplicationSenderEditModelBinder());
+			binders.Add(typeof(AwbAdminModel), new AwbAdminModelBinder());
+			binders.Add(typeof(AwbBrokerModel), new AwbBrokerModelBinder());
+			binders.Add(typeof(AwbSenderModel), new AwbSenderModelBinder());
+			binders.Add(typeof(ApplicationAdminModel), new ApplicationAdminModelBinder());
+			binders.Add(typeof(ApplicationSenderModel), new ApplicationSenderModelBinder());
 		}
 	}
 }

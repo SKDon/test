@@ -21,12 +21,12 @@ namespace Alicargo.TestHelpers
 			Fixture = new Fixture();
 			Fixture.Customize(new AutoMoqCustomization());
 
-			Fixture.Register(() => Fixture.Build<AirWaybillEditModel>()
+			Fixture.Register(() => Fixture.Build<AwbAdminModel>()
 										  .With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
 										  .With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
 										  .Create());
 
-			Fixture.Register(() => Fixture.Build<SenderAwbModel>()
+			Fixture.Register(() => Fixture.Build<AwbSenderModel>()
 										  .With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
 										  .With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
 										  .Create());

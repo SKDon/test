@@ -312,7 +312,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string AirWaybillEditModel = "AirWaybillEditModel";
+                public readonly string AwbAdminModel = "AwbAdminModel";
             }
         }
     }
@@ -332,9 +332,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, Alicargo.ViewModels.AirWaybill.AwbAdminModel model);
 
-        public override System.Web.Mvc.ActionResult Create(long applicationId, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model)
+        public override System.Web.Mvc.ActionResult Create(long applicationId, Alicargo.ViewModels.AirWaybill.AwbAdminModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
@@ -427,9 +427,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbAdminModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AirWaybillEditModel model)
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AwbAdminModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

@@ -31,7 +31,7 @@ namespace Alicargo.Tests.Services.AirWaybill
             var airWaybillId = _context.Create<long>();
             var applicationId = _context.Create<long>();
             var cargoIsFlewStateId = _context.Create<long>();
-            var model = _context.Create<AirWaybillEditModel>();
+            var model = _context.Create<AwbAdminModel>();
             model.GTD = null;
 
             _context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
@@ -79,7 +79,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 		public void Test_AwbManager_Map_AirWaybillEditModel()
         {
             var cargoIsFlewStateId = _context.Create<long>();
-            var model = _context.Create<AirWaybillEditModel>();
+            var model = _context.Create<AwbAdminModel>();
             var data = AwbManager.Map(model, cargoIsFlewStateId);
 
             model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties()
@@ -94,7 +94,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 		public void Test_AwbManager_Map_SenderAwbModel()
 		{
 			var cargoIsFlewStateId = _context.Create<long>();
-			var model = _context.Create<SenderAwbModel>();
+			var model = _context.Create<AwbSenderModel>();
 			var data = AwbManager.Map(model, cargoIsFlewStateId);
 
 			model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
@@ -127,7 +127,7 @@ namespace Alicargo.Tests.Services.AirWaybill
         [TestMethod, ExpectedException(typeof(InvalidLogicException))]
         public void Test_AwbManager_Create_WithGtd()
         {
-            var model = _context.Create<AirWaybillEditModel>();
+            var model = _context.Create<AwbAdminModel>();
             _manager.Create(It.IsAny<long>(), model);
         }
     }

@@ -32,7 +32,7 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Sender), HttpPost]
-		public virtual ActionResult Edit(long id, SenderAwbModel model)
+		public virtual ActionResult Edit(long id, AwbSenderModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
 
@@ -56,7 +56,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost, Access(RoleType.Sender)]
-		public virtual ActionResult Create(long id, SenderAwbModel model)
+		public virtual ActionResult Create(long id, AwbSenderModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
 

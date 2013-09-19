@@ -5,7 +5,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.ModelBinders
 {
-	internal sealed class ApplicationModelBinder : DefaultModelBinder
+	internal sealed class ApplicationAdminModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{

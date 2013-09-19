@@ -119,7 +119,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string SenderAwbModel = "SenderAwbModel";
+                public readonly string AwbSenderModel = "AwbSenderModel";
             }
         }
     }
@@ -139,9 +139,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.SenderAwbModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.SenderAwbModel model)
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -160,9 +160,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.SenderAwbModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model);
 
-        public override System.Web.Mvc.ActionResult Create(long id, Alicargo.ViewModels.AirWaybill.SenderAwbModel model)
+        public override System.Web.Mvc.ActionResult Create(long id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

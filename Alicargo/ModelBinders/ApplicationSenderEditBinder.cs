@@ -5,18 +5,18 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.ModelBinders
 {
-	internal sealed class ApplicationSenderEditModelBinder : DefaultModelBinder
+	internal sealed class ApplicationSenderModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (ApplicationSenderEdit)base.BindModel(controllerContext, bindingContext);
+			var model = (ApplicationSenderModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(model, controllerContext.HttpContext.Request);
 
 			return model;
 		}
 
-		private static void ReadFiles(ApplicationSenderEdit model, HttpRequestBase request)
+		private static void ReadFiles(ApplicationSenderModel model, HttpRequestBase request)
 		{
 			if (model.InvoiceFile == null && model.InvoiceFileName == null)
 				request.ReadFile("InvoiceFile", (name, bytes) =>
