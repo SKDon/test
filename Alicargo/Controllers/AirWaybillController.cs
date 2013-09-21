@@ -63,9 +63,9 @@ namespace Alicargo.Controllers
 
 			try
 			{
-				var awbId = _awbManager.Create(applicationId, model);
+				_awbManager.Create(applicationId, model);
 
-				return RedirectToAction(MVC.AirWaybill.Edit(awbId));
+				return RedirectToAction(MVC.AirWaybill.Index());
 			}
 			catch (DublicateException)
 			{

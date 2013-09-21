@@ -150,9 +150,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? id);
 
-        public override System.Web.Mvc.ActionResult Create(long id)
+        public override System.Web.Mvc.ActionResult Create(long? id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -160,9 +160,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model);
 
-        public override System.Web.Mvc.ActionResult Create(long id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model)
+        public override System.Web.Mvc.ActionResult Create(long? id, Alicargo.ViewModels.AirWaybill.AwbSenderModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

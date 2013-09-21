@@ -10,13 +10,13 @@
 @if (IdentityService.IsInRole(RoleType.Admin))
 {
 	<p>
-		@Html.ActionLink(Pages.Add, MVC.AirWaybill.Create())
+		@Html.ActionLink(Pages.AirWaybillAdd, MVC.AirWaybill.Create())
 	</p>
 }
 else if (IdentityService.IsInRole(RoleType.Sender))
 {
 	<p>
-		@Html.ActionLink(Pages.Add, MVC.SenderAwb.Create())
+		@Html.ActionLink(Pages.AirWaybillAdd, MVC.SenderAwb.Create())
 	</p>
 }
 

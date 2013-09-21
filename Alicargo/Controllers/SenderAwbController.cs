@@ -50,28 +50,28 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Sender)]
-		public virtual ActionResult Create(long id)
+		public virtual ActionResult Create(long? id)
 		{
 			return View();
 		}
 
 		[HttpPost, Access(RoleType.Sender)]
-		public virtual ActionResult Create(long id, AwbSenderModel model)
+		public virtual ActionResult Create(long? id, AwbSenderModel model)
 		{
 			if (!ModelState.IsValid) return View(model);
 
 			try
 			{
 				_awbManager.Create(id, model);
+
+				return RedirectToAction(MVC.AirWaybill.Index());
 			}
 			catch (DublicateException)
 			{
 				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
 
 				return View(model);
-			}
-
-			return RedirectToAction(MVC.ApplicationList.Index());
+			}			
 		}
 	}
 }
