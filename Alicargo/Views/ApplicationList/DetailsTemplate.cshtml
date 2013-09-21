@@ -1,6 +1,4 @@
-﻿@using System.Globalization
-@using Alicargo.Contracts.Enums
-@using Alicargo.MvcHelpers
+﻿@using Alicargo.Contracts.Enums
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @inherits BaseWebViewPage<ApplicationIndexModel>
@@ -9,22 +7,22 @@
 {
 	if (IdentityService.IsInRole(RoleType.Client))
 	{
-		@:# if(StateId != @StateConfig.CargoReceivedStateId){ #
-		<a href="@Url.Action(MVC.Transit.Edit())/#= TransitId #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
-		@:# } #
+	@:# if(StateId != @StateConfig.CargoReceivedStateId){ #
+	<a href="@Url.Action(MVC.Transit.Edit())/#= TransitId #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
+	@:# } #
 		return;
 	}
 
 	if (IdentityService.IsInRole(RoleType.Admin))
 	{
-		<a href="@Url.Action(MVC.Application.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
-		<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
+	<a href="@Url.Action(MVC.Application.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
+	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
 	}
 
 	if (IdentityService.IsInRole(RoleType.Sender))
 	{
-		<a href="@Url.Action(MVC.Sender.ApplicationEdit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
-		<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
+	<a href="@Url.Action(MVC.Sender.ApplicationEdit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
+	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
 	}
 }
 
@@ -44,24 +42,18 @@
 	@:&nbsp;
 	@Html.LabelFor(x => x.AirWaybills)
 	@:&nbsp;
-	var list = Model.AirWaybills.Select(x => new SelectListItem
-	{
-		Text = x.Value,
-		Value = x.Key.ToString(CultureInfo.InvariantCulture)
-	}).ToList();
-	list.Insert(0, new SelectListItem {Text = "", Value = ""});
-	@Html.DropDownListFor(x => x.AirWaybills, list, new {@class = "AirWaybill-select"})
+	@Html.DropDownListFor(x => x.AirWaybills, Model.AirWaybills, "", new { @class = "AirWaybill-select" })
 }
 
 @helper AirWaybillButton()
 {
 	if (IdentityService.IsInRole(RoleType.Sender))
 	{
-		<a class="btn btn-inverse" href="@Url.Action(MVC.SenderAwb.Create())/#= Id #">@Pages.AirWaybillAdd</a>
+	<a class="btn btn-inverse" href="@Url.Action(MVC.SenderAwb.Create())/#= Id #">@Pages.AirWaybillAdd</a>
 	}
 	else if (IdentityService.IsInRole(RoleType.Admin))
 	{
-		<a class="btn btn-inverse" href="@Url.Action(MVC.AirWaybill.Create())/#= Id #">@Pages.AirWaybillAdd</a>
+	<a class="btn btn-inverse" href="@Url.Action(MVC.AirWaybill.Create())/#= Id #">@Pages.AirWaybillAdd</a>
 	}
 }
 
@@ -72,7 +64,7 @@
 			  : Html.Partial("AdminDetails"))
 	</div>
 	@if (!IdentityService.IsInRole(RoleType.Forwarder))
-	{
+ {
 		<hr />
 		<div class="grid-details-toolbar">
 			<div>
@@ -84,5 +76,5 @@
 				</span>
 			</div>
 		</div>
-	}
+ }
 </div>

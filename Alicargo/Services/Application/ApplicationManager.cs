@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
@@ -171,7 +172,7 @@ namespace Alicargo.Services.Application
 				InvoiceFileName = data.InvoiceFileName,
 				PackingFileName = data.PackingFileName,
 				MarkName = data.MarkName,
-				MethodOfDeliveryId = data.MethodOfDeliveryId,
+				MethodOfDelivery = (MethodOfDelivery) data.MethodOfDeliveryId,
 				SwiftFileName = data.SwiftFileName,
 				TermsOfDelivery = data.TermsOfDelivery,
 				Torg12FileName = data.Torg12FileName,
@@ -221,7 +222,7 @@ namespace Alicargo.Services.Application
 			to.FactoryEmail = @from.FactoryEmail;
 			to.FactoryContact = @from.FactoryContact;
 			to.MarkName = @from.MarkName;
-			to.MethodOfDeliveryId = @from.MethodOfDeliveryId;
+			to.MethodOfDeliveryId = (int) @from.MethodOfDelivery;
 			to.ForwarderCost = @from.ForwarderCost;
 			to.FactureCost = @from.FactureCost;
 			to.ScotchCost = @from.ScotchCost;
@@ -263,7 +264,7 @@ namespace Alicargo.Services.Application
 				FactoryEmail = model.FactoryEmail,
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
-				MethodOfDeliveryId = model.MethodOfDeliveryId,
+				MethodOfDeliveryId = (int) model.MethodOfDelivery,
 				Id = 0,
 				AirWaybillId = null,
 				DateInStock = null,

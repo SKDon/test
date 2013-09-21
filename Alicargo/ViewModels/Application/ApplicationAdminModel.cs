@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 using Resources;
 
@@ -102,7 +103,7 @@ namespace Alicargo.ViewModels.Application
 		public string MarkName { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
-		public int MethodOfDeliveryId { get; set; }
+		public MethodOfDelivery MethodOfDelivery { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
 		public decimal? ScotchCost { get; set; }

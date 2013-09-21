@@ -1,16 +1,5 @@
-﻿@using System.Globalization
+﻿@using Alicargo.MvcHelpers.Extensions
 @model CarrierSelectModel
-
-@helper Select()
-{
-	var all = (IDictionary<long, string>)ViewBag.Carriers;
-	var list = all.Select(x => new SelectListItem
-	{
-		Text = x.Value,
-		Value = x.Key.ToString(CultureInfo.InvariantCulture)
-	}).ToList();
-	@Html.DropDownListFor(x => x.CarrierId, list)
-}
 
 <div id="carrier-tabs">
 	<ul>
@@ -26,7 +15,7 @@
 		</li>
 	</ul>
 	<div id="select-carrier">
-		@Select()
+		@Html.DropDownListFor(x => x.CarrierId, (IDictionary<long, string>)ViewBag.Carriers)
 	</div>
 	<div id="new-carrier">
 		@Html.EditorFor(x => x.NewCarrierName)

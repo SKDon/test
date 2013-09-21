@@ -1,6 +1,4 @@
 ﻿@using System.Web.Mvc.Html
-@using Alicargo.Core.Localization
-@using Alicargo.MvcHelpers
 @using Alicargo.MvcHelpers.Extensions
 @model TransitEditModel
 
@@ -15,16 +13,8 @@
 	<div class="span4">
 		@Html.Action(MVC.Carrier.Select((long?)ViewBag.TransitId))
 		@Html.LabelFor(model => model.MethodOfTransit)
-		@Html.DropDownListFor(model => model.MethodOfTransit, LocalizeEnumExtension.Select<MethodOfTransit, SelectListItem>((item, name) => new SelectListItem
-		{
-			Text = name,
-			Value = item.ToString()
-		}))
+		@Html.DropDownListForEnum(model => model.MethodOfTransit)
 		@Html.LabelFor(model => model.DeliveryType)
-		@Html.DropDownListFor(model => model.DeliveryType, LocalizeEnumExtension.Select<DeliveryType, SelectListItem>((item, name) => new SelectListItem
-		{
-			Text = name,
-			Value = item.ToString()
-		}))
+		@Html.DropDownListForEnum(model => model.DeliveryType)
 	</div>
 </div>
