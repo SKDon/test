@@ -40,7 +40,6 @@
 		schema: schema,
 		pageSize: 20,
 		serverPaging: true,
-		editable: true,
 		serverGrouping: true,
 		error: $a.ShowError
 	};

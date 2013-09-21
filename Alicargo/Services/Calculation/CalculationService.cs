@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Web;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
@@ -24,52 +22,38 @@ namespace Alicargo.Services.Calculation
 			_clientRepository = clientRepository;
 		}
 
-		public CalculationAwb[] List(int take, long skip)
+		public CalculationListCollection List(int take, long skip)
 		{
 			var awbs = _awbRepository.GetRange(take, skip);
-			return List(awbs);
-		}
-
-		private CalculationAwb[] List(AirWaybillData[] awbs)
-		{
 			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Id).ToArray());
 			var nics = _clientRepository.GetNicByApplications(applications.Select(x => x.Id).ToArray());
 
-			return awbs.Select(x => new CalculationAwb
+			var items = applications.Select(a => new CalculationDetailsItem
 			{
-				AwbId = x.Id,
-				AwbDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWayBillDisplay(x)),
-				Rows = applications.Where(a => a.AirWaybillId == x.Id)
-								   .Select(a => new CalculationDetailsItem
-								   {
-									   ApplicationId = a.Id,
-									   Value = a.Value,
-									   Count = a.Count,
-									   ClientNic = nics[a.Id],
-									   Factory = a.FactoryName,
-									   FactureCost = a.FactureCostEdited ?? a.FactureCost,
-									   Invoice = a.Invoice,
-									   Mark = a.MarkName,
-									   ScotchCost = a.ScotchCostEdited ?? a.ScotchCost,
-									   TariffPerKg = a.TariffPerKg,
-									   TransitCost = a.TransitCost,
-									   ForwarderCost = a.ForwarderCost,
-									   ValueCurrencyId = a.CurrencyId,
-									   Weigth = a.Weigth,
-									   WithdrawCost = a.WithdrawCostEdited ?? a.WithdrawCost
-								   }).ToArray(),
-				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
-				FlightCost = x.FlightCost,
-				CustomCost = x.CustomCost,
-				BrokerCost = x.BrokerCost,
-				AdditionalCost = x.AdditionalCost
+				ApplicationId = a.Id,
+				Value = a.Value,
+				Count = a.Count,
+				ClientNic = nics[a.Id],
+				Factory = a.FactoryName,
+				FactureCost = a.FactureCostEdited ?? a.FactureCost,
+				Invoice = a.Invoice,
+				Mark = a.MarkName,
+				ScotchCost = a.ScotchCostEdited ?? a.ScotchCost,
+				TariffPerKg = a.TariffPerKg,
+				TransitCost = a.TransitCost,
+				ForwarderCost = a.ForwarderCost,
+				ValueCurrencyId = a.CurrencyId,
+				Weigth = a.Weigth,
+				WithdrawCost = a.WithdrawCostEdited ?? a.WithdrawCost,
+				AwbDisplay = AwbHelper.GetAirWayBillDisplay(awbs.First(x=>x.Id == a.AirWaybillId)),
+				AirWaybillId = a.AirWaybillId
 			}).ToArray();
-		}
 
-		public CalculationAwb Row(long awbId)
-		{
-			var awbs = _awbRepository.Get(awbId);
-			return List(awbs).First();
+			return new CalculationListCollection
+			{
+				Data = items,
+				Total = _awbRepository.Count()
+			};
 		}
 	}
 }

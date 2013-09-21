@@ -24,6 +24,7 @@ namespace Alicargo.ViewModels.Calculation
 		public decimal? TransitCost { get; set; }
 		public decimal? ForwarderCost { get; set; }
 		public decimal? TariffPerKg { get; set; }
+		public long? AirWaybillId { get; set; }
 
 		#endregion
 
@@ -64,5 +65,7 @@ namespace Alicargo.ViewModels.Calculation
 				return (TotalTariffCost ?? 0) + (ScotchCost ?? 0) + (InsuranceCost ?? 0) + (FactureCost ?? 0) + (WithdrawCost ?? 0) + (TransitCost ?? 0);
 			}
 		}
+
+		public string AwbDisplay { get; set; }
 	}
 }

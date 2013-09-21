@@ -37,14 +37,6 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin), HttpPost]
-		public virtual JsonResult Row(long id)
-		{
-			var data = _calculationService.Row(id);
-
-			return Json(data);
-		}
-
-		[Access(RoleType.Admin), HttpPost]
 		public virtual HttpStatusCodeResult SetTariffPerKg(long id, decimal? tariffPerKg)
 		{
 			_applicationManager.SetTariffPerKg(id, tariffPerKg);

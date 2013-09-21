@@ -44,7 +44,6 @@ namespace Alicargo.Services.Client
             _transitService.Update(data.TransitId, transitModel, carrierModel);
 
             _authentications.Update(data.UserId, authenticationModel.Login, authenticationModel.NewPassword);
-
             
             data.BIC = model.BIC;
             data.Phone = model.Phone;
