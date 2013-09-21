@@ -99,7 +99,7 @@ namespace Alicargo.Controllers
 
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
 
-			ViewBag.Senders = _users.GetByRole(RoleType.Sender).OrderBy(x => x.Name).ToDictionary(x => x.Id, x => x.Name);
+			ViewBag.Senders = _users.GetByRole(RoleType.Sender).OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
 		}
 
 		[HttpPost]

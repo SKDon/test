@@ -1,7 +1,6 @@
-﻿@using Alicargo.MvcHelpers
-@using Alicargo.MvcHelpers.Extensions
+﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model ApplicationSenderModel
 
-<h4 style="margin-top: 33px;" class="pull-right">@Entities.Nic: @ViewBag.Nic</h4>
+<h4 style="margin-top: 26px;" class="pull-right">@Entities.Nic: @ViewBag.Nic</h4>
 @Html.EditPage(Pages.ApplicationEdit + " " + (string)ViewBag.ApplicationNumber, Url.Action(MVC.Sender.ApplicationEdit()), Pages.Save)

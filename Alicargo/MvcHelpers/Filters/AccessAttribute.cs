@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
@@ -7,7 +8,8 @@ using Ninject;
 
 namespace Alicargo.MvcHelpers.Filters
 {
-    internal sealed class AccessAttribute : FilterAttribute, IAuthorizationFilter
+	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+	internal sealed class AccessAttribute : FilterAttribute, IAuthorizationFilter
 	{
 		private readonly RoleType[] _roles;
 

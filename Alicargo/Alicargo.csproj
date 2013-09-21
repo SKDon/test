@@ -159,6 +159,7 @@
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
+    <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
+    <Compile Include="Services\Application\ApplicationSenderManager.cs" />
     <Compile Include="Services\Calculation\CalculationService.cs" />
     <Compile Include="Services\Client\ClientPermissions.cs" />
     <Compile Include="Services\Client\ClientPresenter.cs" />
@@ -1449,7 +1451,7 @@
     <Content Include="Views\Broker\EditorTemplates\AwbBrokerModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\Sender\ApplicationEdit.cshtml" />
-    <Content Include="Views\Sender\EditorTemplates\ApplicationSenderEdit.cshtml" />
+    <Content Include="Views\Sender\EditorTemplates\ApplicationSenderModel.cshtml" />
     <Content Include="Views\Sender\ApplicationCreate.cshtml" />
     <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CurrencyModel.cshtml" />

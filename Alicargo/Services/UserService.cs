@@ -26,7 +26,7 @@ namespace Alicargo.Services
 
 			return dictionary.Select(x => new UserModel
 			{
-				Id = x.Id,
+				Id = x.EntityId,
 				Name = x.Name,
 				Email = x.Email,
 				RoleType = role,
@@ -39,11 +39,11 @@ namespace Alicargo.Services
 
 		public UserModel Get(RoleType role, long id)
 		{
-			var data = _userRepository.GetByRole(role).First(x => x.Id == id);
+			var data = _userRepository.GetByRole(role).First(x => x.EntityId == id);
 
 			return new UserModel
 			{
-				Id = data.Id,
+				Id = data.EntityId,
 				Name = data.Name,
 				RoleType = role,
 				Email = data.Email,
