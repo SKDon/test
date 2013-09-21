@@ -1,4 +1,5 @@
 ﻿@using Alicargo.Contracts.Enums
+@using Resources
 @inherits BaseWebViewPage
 <style>
 	.container {
@@ -6,23 +7,36 @@
 		width: auto;
 	}
 </style>
+@if (IdentityService.IsInRole(RoleType.Admin))
+{
+	<p>
+		@Html.ActionLink(Pages.Add, MVC.AirWaybill.Create())
+	</p>
+}
+else if (IdentityService.IsInRole(RoleType.Sender))
+{
+	<p>
+		@Html.ActionLink(Pages.Add, MVC.SenderAwb.Create())
+	</p>
+}
+
 <div id="AirWaybill-grid" class="grid"></div>
 
 @section scripts
 {
 	<script type="text/x-kendo-template" id="AirWaybill-grid-details">
 		@if (IdentityService.IsInRole(RoleType.Broker))
-		{
+  {
 			@Html.Partial("BrokerDetails")
-		}
-		else if (IdentityService.IsInRole(RoleType.Sender))
-		{
+  }
+  else if (IdentityService.IsInRole(RoleType.Sender))
+  {
 			@Html.Partial("SenderDetails")
-		}
-		else
-		{
+  }
+  else
+  {
 			@Html.Partial("AdminDetails")
-		}
+  }
 	</script>
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))

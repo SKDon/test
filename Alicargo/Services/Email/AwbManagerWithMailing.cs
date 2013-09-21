@@ -24,16 +24,16 @@ namespace Alicargo.Services.Email
             _messageBuilder = messageBuilder;
         }
 
-        public long Create(long applicationId, AwbAdminModel model)
+        public long Create(long? applicationId, AwbAdminModel model)
         {
-            var id = _manager.Create(applicationId, model);
+            var awbId = _manager.Create(applicationId, model);
 
-            SendOnCreate(id);
+            SendOnCreate(awbId);
 
-            return id;
+            return awbId;
         }
 
-	    public long Create(long applicationId, AwbSenderModel model)
+	    public long Create(long? applicationId, AwbSenderModel model)
 	    {
 			var id = _manager.Create(applicationId, model);
 
@@ -47,9 +47,9 @@ namespace Alicargo.Services.Email
             _manager.Delete(awbId);
         }
 
-        private void SendOnCreate(long id)
+        private void SendOnCreate(long awbId)
         {
-            var model = _awbPresenter.GetData(id);
+            var model = _awbPresenter.GetData(awbId);
             var broker = _awbPresenter.GetBroker(model.BrokerId);
 
             var to = new[]
@@ -63,7 +63,7 @@ namespace Alicargo.Services.Email
                 .Concat(_messageBuilder.GetForwarderEmails())
                 .ToArray();
 
-            var aggregate = _awbPresenter.GetAggregate(id);
+            var aggregate = _awbPresenter.GetAggregate(awbId);
 
             foreach (var recipient in to)
             {

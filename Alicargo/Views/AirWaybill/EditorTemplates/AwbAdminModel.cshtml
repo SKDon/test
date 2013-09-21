@@ -5,9 +5,7 @@
 @helper SelectBroker()
 {
 	var name = Html.IdFor(x => x.BrokerId).ToHtmlString();
-	var action = MVC.Broker.Select(name, Model == null
-		? (long?)null
-		: Model.BrokerId);
+	var action = MVC.Broker.Select(name, Model == null ? (long?)null : Model.BrokerId);
 	@Html.Action(action)
 }
 

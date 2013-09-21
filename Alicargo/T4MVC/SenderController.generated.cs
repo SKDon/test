@@ -119,7 +119,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string ApplicationSenderEdit = "ApplicationSenderEdit";
+                public readonly string ApplicationSenderModel = "ApplicationSenderModel";
             }
         }
     }
@@ -136,6 +136,17 @@ namespace Alicargo.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ApplicationCreate);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ApplicationCreateOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderModel model);
+
+        public override System.Web.Mvc.ActionResult ApplicationCreate(long id, Alicargo.ViewModels.Application.ApplicationSenderModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApplicationCreate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ApplicationCreateOverride(callInfo, id, model);
             return callInfo;
         }
 
@@ -157,17 +168,6 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ApplicationEditOverride(callInfo, id, model);
-            return callInfo;
-        }
-
-        partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderModel model);
-
-        public override System.Web.Mvc.ActionResult ApplicationCreate(long id, Alicargo.ViewModels.Application.ApplicationSenderModel model)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApplicationCreate);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ApplicationCreateOverride(callInfo, id, model);
             return callInfo;
         }
 

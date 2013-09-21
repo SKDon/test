@@ -32,7 +32,7 @@ namespace Alicargo.Services.AirWaybill
 			_applicationUpdater = applicationUpdater;
 		}
 
-		public long Create(long applicationId, AwbAdminModel model)
+		public long Create(long? applicationId, AwbAdminModel model)
 		{
 			if (model.GTD != null)
 			{
@@ -46,12 +46,15 @@ namespace Alicargo.Services.AirWaybill
 
 			_unitOfWork.SaveChanges();
 
-			_applicationAwbManager.SetAwb(applicationId, id());
+			if (applicationId.HasValue)
+			{
+				_applicationAwbManager.SetAwb(applicationId.Value, id());
+			}
 
 			return id();
 		}
 
-		public long Create(long applicationId, AwbSenderModel model)
+		public long Create(long? applicationId, AwbSenderModel model)
 		{
 			var data = Map(model, _stateConfig.CargoIsFlewStateId);
 
@@ -59,7 +62,8 @@ namespace Alicargo.Services.AirWaybill
 
 			_unitOfWork.SaveChanges();
 
-			_applicationAwbManager.SetAwb(applicationId, id());
+			if (applicationId != null) 
+				_applicationAwbManager.SetAwb(applicationId.Value, id());
 
 			return id();
 		}
