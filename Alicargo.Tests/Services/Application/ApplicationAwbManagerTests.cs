@@ -57,7 +57,6 @@ namespace Alicargo.Tests.Services.Application
 			var applicationId = _context.Create<long>();
 			var aggregate = _context.Create<AirWaybillAggregate>();
 
-			_context.UnitOfWork.Setup(x => x.StartTransaction()).Returns(_context.Transaction.Object);
 			// ReSharper disable ImplicitlyCapturedClosure
 			_context.AirWaybillRepository.Setup(x => x.GetAggregate(airWaybillId)).Returns(new[] { aggregate });
 			_context.ApplicationUpdater.Setup(x => x.SetAirWaybill(applicationId, airWaybillId));

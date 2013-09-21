@@ -36,7 +36,7 @@ namespace Alicargo.DataAccess.Repositories
 				case RoleType.Admin:
 					return Context.Admins.Select(x => new UserData
 					{
-						Id = x.Id,
+						EntityId = x.Id,
 						UserId = x.UserId,
 						Name = x.Name,
 						Login = x.User.Login,
@@ -47,7 +47,7 @@ namespace Alicargo.DataAccess.Repositories
 				case RoleType.Broker:
 					return Context.Brokers.Select(x => new UserData
 					{
-						Id = x.Id,
+						EntityId = x.Id,
 						UserId = x.UserId,
 						Name = x.Name,
 						Login = x.User.Login,
@@ -58,7 +58,7 @@ namespace Alicargo.DataAccess.Repositories
 				case RoleType.Client:
 					return Context.Clients.Select(x => new UserData
 					{
-						Id = x.Id,
+						EntityId = x.Id,
 						UserId = x.UserId,
 						Name = x.LegalEntity,
 						Login = x.User.Login,
@@ -69,7 +69,7 @@ namespace Alicargo.DataAccess.Repositories
 				case RoleType.Forwarder:
 					return Context.Forwarders.Select(x => new UserData
 					{
-						Id = x.Id,
+						EntityId = x.Id,
 						UserId = x.UserId,
 						Name = x.Name,
 						Login = x.User.Login,
@@ -80,7 +80,7 @@ namespace Alicargo.DataAccess.Repositories
 				case RoleType.Sender:
 					return Context.Senders.Select(x => new UserData
 					{
-						Id = x.Id,
+						EntityId = x.Id,
 						UserId = x.UserId,
 						Name = x.Name,
 						Login = x.User.Login,

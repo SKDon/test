@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.Linq;
 using System.Diagnostics;
-using System.Transactions;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 
@@ -17,21 +16,14 @@ namespace Alicargo.DataAccess.DbContext
 			get { return _context; }
 		}
 
-		public ITransaction StartTransaction()
-		{
-			// todo: 3.5. refactor using of transactions, create interception
-			// TransactionScopeOption.RequiresNew
-			return new Transaction(new TransactionScope());
-		}
-
 		public UnitOfWork(IDbConnection connection)
 		{
 			_context = new AlicargoDataContext(connection);
 
-			//Debug();
+			Debug();
 		}
 
-		[Conditional("DEBUG")]
+		[Conditional("TRACE_SQL")]
 		private void Debug()
 		{
 			_context.Log = new DebugTextWriter();

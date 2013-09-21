@@ -64,6 +64,7 @@
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\AwbRepository.cs" />
+    <Compile Include="Repositories\SenderRepository.cs" />
     <Compile Include="Repositories\StateRepository.cs" />
     <Compile Include="Repositories\TransitRepository.cs" />
     <Compile Include="Repositories\AuthenticationRepository.cs" />

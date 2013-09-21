@@ -2,7 +2,7 @@
 {
 	public sealed class UserData
 	{
-		public long Id { get; set; }
+		public long EntityId { get; set; }
 		public long UserId { get; set; }
 		public string Name { get; set; }
 		public string Login { get; set; }
