@@ -276,4 +276,7 @@
   <data name="Calculation" xml:space="preserve">
     <value>Cálculo</value>
   </data>
+  <data name="Client" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
 </root>

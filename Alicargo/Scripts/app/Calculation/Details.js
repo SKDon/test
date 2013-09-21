@@ -52,7 +52,7 @@
 
 		function columns() {
 			var c = [
-				{ field: "ClientNic", title: $l.Entities_Nic },
+				{ field: "ClientNic", title: $l.Pages_Client },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
 				{ field: "Factory", title: $l.Entities_FactoryName },
 				{ field: "Mark", title: $l.Entities_Mark },

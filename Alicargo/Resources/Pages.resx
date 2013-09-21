@@ -279,4 +279,7 @@
   <data name="Calculation" xml:space="preserve">
     <value>Расчет</value>
   </data>
+  <data name="Client" xml:space="preserve">
+    <value>Клиент</value>
+  </data>
 </root>
