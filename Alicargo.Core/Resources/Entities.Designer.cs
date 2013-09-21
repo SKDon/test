@@ -700,6 +700,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отправитель.
+        /// </summary>
+        public static string Sender {
+            get {
+                return ResourceManager.GetString("Sender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата сметы статуса.
         /// </summary>
         public static string StateChangeTimestamp {

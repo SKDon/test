@@ -193,7 +193,8 @@ namespace Alicargo.Services.Application
 				TariffPerKg = data.TariffPerKg,
 				ScotchCostEdited = data.ScotchCostEdited,
 				FactureCostEdited = data.FactureCostEdited,
-				WithdrawCostEdited = data.WithdrawCostEdited
+				WithdrawCostEdited = data.WithdrawCostEdited,
+				SenderId = data.SenderId
 			};
 			return application;
 		}
@@ -232,6 +233,7 @@ namespace Alicargo.Services.Application
 			to.FactureCostEdited = from.FactureCostEdited;
 			to.WithdrawCostEdited = from.WithdrawCostEdited;
 			to.ScotchCostEdited = from.ScotchCostEdited;
+			to.SenderId = from.SenderId;
 		}
 
 		private ApplicationData GetNewApplicationData(ApplicationAdminModel model, long clientId, long transitId)
@@ -279,7 +281,8 @@ namespace Alicargo.Services.Application
 				TariffPerKg = model.TariffPerKg,
 				ScotchCostEdited = model.ScotchCostEdited,
 				FactureCostEdited = model.FactureCostEdited,
-				WithdrawCostEdited = model.WithdrawCostEdited
+				WithdrawCostEdited = model.WithdrawCostEdited,
+				SenderId = model.SenderId
 			};
 		}
 	}

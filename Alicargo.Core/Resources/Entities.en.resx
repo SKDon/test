@@ -327,4 +327,7 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Sender</value>
+  </data>
 </root>
