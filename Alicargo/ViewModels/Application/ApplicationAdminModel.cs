@@ -4,7 +4,7 @@ using Resources;
 
 namespace Alicargo.ViewModels.Application
 {
-    public sealed class ApplicationAdminModel
+	public sealed class ApplicationAdminModel
 	{
 		public ApplicationAdminModel()
 		{
@@ -83,6 +83,9 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "Country")]
 		public long? CountryId { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "Sender")]
+		public long? SenderId { get; set; }
+
 		[Required, DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
@@ -123,11 +126,11 @@ namespace Alicargo.ViewModels.Application
 		public decimal? TransitCost { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "ForwarderCost")]
-	    public decimal? ForwarderCost { get; set; }
+		public decimal? ForwarderCost { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
-	    public decimal? TariffPerKg { get; set; }
+		public decimal? TariffPerKg { get; set; }
 
-	    #endregion
+		#endregion
 	}
 }

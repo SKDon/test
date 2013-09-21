@@ -155,7 +155,8 @@
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\SenderAwbController.cs" />
-    <Compile Include="MvcHelpers\CustomContentTypeAttribute.cs" />
+    <Compile Include="MvcHelpers\Extensions\DropDownListHeplers.cs" />
+    <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
@@ -165,7 +166,7 @@
     <Compile Include="Controllers\TransitController.cs" />
     <Compile Include="MvcHelpers\StyleRelativePathTransform.cs" />
     <Compile Include="MvcHelpers\StyleRelativePathTransformBundle.cs" />
-    <Compile Include="MvcHelpers\CustomHandleErrorInfo.cs" />
+    <Compile Include="MvcHelpers\Filters\CustomHandleErrorInfo.cs" />
     <Compile Include="ModelBinders\ApplicationAdminModelBinder.cs" />
     <Compile Include="ModelBinders\AwbBrokerModelBinder.cs" />
     <Compile Include="ModelBinders\ApplicationSenderEditBinder.cs" />
@@ -173,9 +174,9 @@
     <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\AirWaybillController.cs" />
     <Compile Include="MvcHelpers\BaseWebViewPage.cs" />
-    <Compile Include="MvcHelpers\HandleErrorAttribute.cs" />
-    <Compile Include="MvcHelpers\FileExtensions.cs" />
-    <Compile Include="MvcHelpers\PageHelpers.cs" />
+    <Compile Include="MvcHelpers\Filters\HandleErrorAttribute.cs" />
+    <Compile Include="MvcHelpers\Extensions\FileExtensions.cs" />
+    <Compile Include="MvcHelpers\Extensions\PageHelpers.cs" />
     <Compile Include="Resources\Validation.en.Designer.cs">
       <DependentUpon>Validation.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -209,14 +210,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MvcHelpers\MenuLink.cs" />
+    <Compile Include="MvcHelpers\Extensions\LinkHelper.cs" />
     <Compile Include="Resources\Pages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Pages.resx</DependentUpon>
     </Compile>
-    <Compile Include="MvcHelpers\AccessAttribute.cs" />
-    <Compile Include="MvcHelpers\CultureFilter.cs" />
+    <Compile Include="MvcHelpers\Filters\AccessAttribute.cs" />
+    <Compile Include="MvcHelpers\Filters\CultureFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Validation.it.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1497,6 +1498,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Pages.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Mail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

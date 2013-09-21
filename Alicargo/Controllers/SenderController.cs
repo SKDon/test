@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.MvcHelpers;
+using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
@@ -20,7 +20,7 @@ namespace Alicargo.Controllers
 		private readonly IClientRepository _clientRepository;
 		private readonly ITransitRepository _transitRepository;
 		private readonly IStateConfig _stateConfig;
-		private readonly IUnitOfWork _unitOfWork;
+		private readonly IUnitOfWork _unitOfWork;		
 
 		public SenderController(
 			IApplicationRepository applicationRepository,
@@ -120,7 +120,7 @@ namespace Alicargo.Controllers
 			var applicationData = new ApplicationData { ClientId = id };
 
 			Map(model, applicationData);
-			
+
 			var transitData = _transitRepository.Get(clientData.TransitId).First();
 
 			using (var ts = _unitOfWork.StartTransaction())
@@ -141,6 +141,26 @@ namespace Alicargo.Controllers
 
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
+
+		//[ChildActionOnly]
+		//public SelectModel<long> Select(long? applicationId)
+		//{
+		//	var model = new SelectModel<long>
+		//	{
+		//		List = _users.GetByRole(RoleType.Sender).OrderBy(x => x.Name).ToDictionary(x => x.Id, x => x.Name)
+		//	};
+
+		//	if (applicationId.HasValue)
+		//	{
+		//		var application = _applicationRepository.Get(applicationId.Value);
+		//		if (application.SenderId.HasValue)
+		//		{
+		//			model.Selected = application.SenderId.Value;
+		//		}
+		//	}
+
+		//	return model;
+		//}
 
 		private static void Map(ApplicationSenderModel @from, ApplicationData to)
 		{

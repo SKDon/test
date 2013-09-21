@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.Extensions
 {
-    internal static class HtmlHelpers
+    internal static class LinkHelper
     {
         public static MvcHtmlString MenuLink(this HtmlHelper htmlHelper, string linkText, string actionName, string controllerName, string area = null)
         {

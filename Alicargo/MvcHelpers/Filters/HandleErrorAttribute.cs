@@ -7,7 +7,7 @@ using Alicargo.Contracts.Exceptions;
 using log4net;
 using WebGrease.Css.Extensions;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.Filters
 {
     internal sealed class CustomHandleErrorAttribute : HandleErrorAttribute
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.Filters
 {
 	internal sealed class CustomContentTypeAttribute : ActionFilterAttribute
 	{

@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
-using Alicargo.MvcHelpers;
+using Alicargo.MvcHelpers.Extensions;
+using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using System.Net;
@@ -16,17 +18,19 @@ namespace Alicargo.Controllers
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IClientPresenter _clientPresenter;
 		private readonly IApplicationRepository _applicationRepository;
+		private readonly IUserRepository _users;
 
 		public ApplicationController(
 			IApplicationManager applicationManager,
 			IApplicationPresenter applicationPresenter,
 			IClientPresenter clientPresenter,
-			IApplicationRepository applicationRepository)
+			IApplicationRepository applicationRepository, IUserRepository users)
 		{
 			_applicationManager = applicationManager;
 			_applicationPresenter = applicationPresenter;
 			_clientPresenter = clientPresenter;
 			_applicationRepository = applicationRepository;
+			_users = users;
 		}
 
 		#region Details
@@ -94,6 +98,8 @@ namespace Alicargo.Controllers
 			ViewBag.ApplicationId = applicationId;
 
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
+
+			ViewBag.Senders = _users.GetByRole(RoleType.Sender).OrderBy(x => x.Name).ToDictionary(x => x.Id, x => x.Name);
 		}
 
 		[HttpPost]

@@ -1,6 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using Alicargo.MvcHelpers;
+using Alicargo.MvcHelpers.Extensions;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.ModelBinders

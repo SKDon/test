@@ -3,7 +3,7 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.Extensions
 {
     internal static class FileExtensions
 	{
@@ -28,6 +28,7 @@ namespace Alicargo.MvcHelpers
 			return new FileStreamResult(ms, contentType) { FileDownloadName = fileName };
 		}
 
+	    // todo: 1. test for download files of an application
 		public static void ReadFile(this HttpRequestBase request, string id, Action<string, byte[]> action)
 		{
 			var file = request.Files[id + "Data"];

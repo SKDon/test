@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
-using Alicargo.MvcHelpers;
+using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
 

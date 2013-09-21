@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Alicargo.ViewModels
 {
@@ -8,8 +9,29 @@ namespace Alicargo.ViewModels
 		[Required]
 		public long Id { get; set; }
 
-		public Dictionary<long, string> List { get; set; }
+		public IDictionary<long, string> List { get; set; }
 
 		public string Name { get; set; }
+	}
+
+	public sealed class SelectModel<T>
+	{
+		private T _selected;
+
+		[Required]
+		public T Selected
+		{
+			get
+			{
+				if (Equals(_selected, null))
+				{
+					_selected = List.First().Key;
+				}
+				return _selected;
+			}
+			set { _selected = value; }
+		}
+
+		public IDictionary<T, string> List { get; set; }
 	}
 }

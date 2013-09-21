@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.MvcHelpers;
+using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Antlr.Runtime.Misc;
@@ -12,8 +12,8 @@ namespace Alicargo.Controllers
 {
 	public partial class TransitController : Controller
 	{
-		private readonly ITransitService _transitService;
 		private readonly ITransitRepository _transitRepository;
+		private readonly ITransitService _transitService;
 
 		public TransitController(
 			ITransitService transitService,

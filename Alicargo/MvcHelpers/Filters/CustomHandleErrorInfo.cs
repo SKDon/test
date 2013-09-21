@@ -1,7 +1,7 @@
 using System;
 using System.Web.Mvc;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.Filters
 {
     public sealed class CustomHandleErrorInfo : HandleErrorInfo
 	{
