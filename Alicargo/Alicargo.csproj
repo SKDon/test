@@ -340,7 +340,6 @@
     <Compile Include="ViewModels\AirWaybill\AwbSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
-    <Compile Include="ViewModels\Calculation\CalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\CalculationListCollection.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Helpers\ApplicationModelHelper.cs" />
@@ -351,8 +350,8 @@
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\AirWaybill\AwbBrokerModel.cs" />
-    <Compile Include="ViewModels\Calculation\CalculationAwb.cs" />
-    <Compile Include="ViewModels\Calculation\CalculationDetailsItem.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationInfo.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />

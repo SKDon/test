@@ -28,7 +28,7 @@ namespace Alicargo.Services.Calculation
 			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Id).ToArray());
 			var nics = _clientRepository.GetNicByApplications(applications.Select(x => x.Id).ToArray());
 
-			var items = applications.Select(a => new CalculationDetailsItem
+			var items = applications.Select(a => new CalculationItem
 			{
 				ApplicationId = a.Id,
 				Value = a.Value,
@@ -45,14 +45,23 @@ namespace Alicargo.Services.Calculation
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
 				WithdrawCost = a.WithdrawCostEdited ?? a.WithdrawCost,
-				AwbDisplay = AwbHelper.GetAirWayBillDisplay(awbs.First(x=>x.Id == a.AirWaybillId)),
+				AwbDisplay = AwbHelper.GetAirWayBillDisplay(awbs.First(x => x.Id == a.AirWaybillId)),
 				AirWaybillId = a.AirWaybillId
 			}).ToArray();
 
 			return new CalculationListCollection
 			{
 				Data = items,
-				Total = _awbRepository.Count()
+				Total = _awbRepository.Count(),
+				Info = awbs.Select(x => new CalculationInfo(items.Where(a => a.AirWaybillId == x.Id).ToArray())
+				{
+					AirWaybillId = x.Id,
+					TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
+					FlightCost = x.FlightCost,
+					CustomCost = x.CustomCost,
+					BrokerCost = x.BrokerCost,
+					AdditionalCost = x.AdditionalCost
+				}).ToArray()
 			};
 		}
 	}

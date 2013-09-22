@@ -44,3 +44,11 @@
 	.k-grid-custom-edit span {
 		background-position: -48px 0;
 	}
+
+.k-group-sub-footer td {
+	border-top: none;
+}
+
+.k-group-footer td {
+	border-bottom: none;
+}

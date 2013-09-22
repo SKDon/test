@@ -9,10 +9,9 @@
 
 @section scripts
 {
-@*	<script type="text/x-kendo-template" id="calculation-grid-details-template">
-        <div class="calculation-rows"></div>		
+	<script type="text/x-kendo-template" id="calculation-grid-details-template">
         @Html.Partial("Details")
-	</script>*@
+	</script>
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))

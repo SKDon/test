@@ -2,8 +2,8 @@
 {
 	public sealed class CalculationListCollection
 	{
-		public CalculationGroup[] Groups { get; set; }
 		public long Total { get; set; }
-		public CalculationDetailsItem[] Data { get; set; }
+		public CalculationItem[] Data { get; set; }
+		public CalculationInfo[] Info { get; set; }
 	}
 }

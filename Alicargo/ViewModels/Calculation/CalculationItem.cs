@@ -2,7 +2,7 @@
 
 namespace Alicargo.ViewModels.Calculation
 {
-	public sealed class CalculationDetailsItem
+	public sealed class CalculationItem
 	{
 		public const decimal InsuranceRate = 100;
 
