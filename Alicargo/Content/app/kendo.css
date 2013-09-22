@@ -46,8 +46,13 @@
 	}
 
 .k-group-sub-footer td {
-	border-top: none;
+	border: none;
+	background-color: #ebebeb;
 }
+
+	.k-group-sub-footer td.k-group-cell {
+		background-color: #e3e3e3;
+	}
 
 .k-group-footer td {
 	border-bottom: none;

@@ -86,8 +86,6 @@
 		$(".AirWaybill-select", e.detailRow).unbind("change");
 	};
 
-	var columns = $a.Application.GetColumns();
-
 	var settings = {
 		dataSource: dataSource,
 		filterable: false,
@@ -98,7 +96,7 @@
 		detailTemplate: kendo.template($("#application-grid-details").html()),
 		detailExpand: detailExpand,
 		detailCollapse: detailCollapse,
-		columns: columns
+		columns: $a.Application.GetColumns()
 	};
 
 	if (!$r.IsClient && !$r.IsBroker)

@@ -24,8 +24,8 @@ namespace Alicargo.Services.Calculation
 
 		public CalculationListCollection List(int take, long skip)
 		{
-			var awbs = _awbRepository.GetRange(take, skip);
-			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Id).ToArray());
+			var awbs = _awbRepository.GetRange(take, skip).ToDictionary(x => x.Id, x => x);
+			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Key).ToArray());
 			var nics = _clientRepository.GetNicByApplications(applications.Select(x => x.Id).ToArray());
 
 			var items = applications.Select(a => new CalculationItem
@@ -44,24 +44,57 @@ namespace Alicargo.Services.Calculation
 				ForwarderCost = a.ForwarderCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
-				WithdrawCost = a.WithdrawCostEdited ?? a.WithdrawCost,
-				AwbDisplay = AwbHelper.GetAirWayBillDisplay(awbs.First(x => x.Id == a.AirWaybillId)),
-				AirWaybillId = a.AirWaybillId
-			}).ToArray();
+				WithdrawCost = a.WithdrawCostEdited ?? a.WithdrawCost, // ReSharper disable PossibleInvalidOperationException
+				AirWaybillId = a.AirWaybillId.Value // ReSharper restore PossibleInvalidOperationException
+			}).OrderByDescending(x => awbs[x.AirWaybillId].CreationTimestamp).ToArray();
+
+			var groups = items.GroupBy(x => x.AirWaybillId).Select(g =>
+			{
+				var itemsGroup = g.ToArray();
+				return new CalculationGroup
+				{
+					AirWaybillId = g.Key,
+					items = itemsGroup,
+					value = AwbHelper.GetAirWayBillDisplay(awbs[g.Key]),
+					field = "AirWaybillId",
+					hasSubgroups = false,
+					aggregates = new CalculationGroup.Aggregates(itemsGroup)
+				};
+			}).ToList();
+
+			for (var i = 0; i < awbs.Count; i++)
+			{
+				var awb = awbs.ElementAt(i).Value;
+				if (awb.Id != groups[i].AirWaybillId)
+				{
+					groups.Insert(i, new CalculationGroup
+					{
+						AirWaybillId = awb.Id,
+						items = new CalculationItem[0],
+						value = AwbHelper.GetAirWayBillDisplay(awb),
+						field = "AirWaybillId",
+						hasSubgroups = false,
+						aggregates = new CalculationGroup.Aggregates(new CalculationItem[0])
+					});
+				}
+			}
+
+			var info = awbs.Select(x => x.Value)
+						   .Select(x => new CalculationInfo(items.Where(a => a.AirWaybillId == x.Id).ToArray())
+						   {
+							   AirWaybillId = x.Id,
+							   TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
+							   FlightCost = x.FlightCost,
+							   CustomCost = x.CustomCost,
+							   BrokerCost = x.BrokerCost,
+							   AdditionalCost = x.AdditionalCost
+						   }).ToArray();
 
 			return new CalculationListCollection
 			{
-				Data = items,
+				Groups = groups.ToArray(),
 				Total = _awbRepository.Count(),
-				Info = awbs.Select(x => new CalculationInfo(items.Where(a => a.AirWaybillId == x.Id).ToArray())
-				{
-					AirWaybillId = x.Id,
-					TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
-					FlightCost = x.FlightCost,
-					CustomCost = x.CustomCost,
-					BrokerCost = x.BrokerCost,
-					AdditionalCost = x.AdditionalCost
-				}).ToArray()
+				Info = info
 			};
 		}
 	}

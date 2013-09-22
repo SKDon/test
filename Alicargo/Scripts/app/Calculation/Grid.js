@@ -27,36 +27,11 @@ var Alicargo = (function ($a) {
 			//}).fail($a.ShowError);
 		};
 
-		function overrideFooter(gridHolder) {
-			var grid = gridHolder.data("kendoGrid");
-
-			var collapseGroupBase = grid.collapseGroup;
-
-			grid.collapseGroup = function (group) {
-				collapseGroupBase.call(grid, group);
-
-				group.nextAll("tr").each(function () {
-					var tr = $(this);
-					if (tr.hasClass("k-group-sub-footer")) {
-						tr.hide();
-						return false;
-					}
-
-					return true;
-				});
-
-			};
-		}
-
 		$(function () {
 			function dataBound() {
-				var grid = this;
-
 				var detailsTemplate = kendo.template($("#calculation-grid-details-template").html());
 
-				$(".k-group-footer").each(function (i, e) {
-					var awbId = grid.dataItem($(e).prevAll(".k-grouping-row:first")).AirWaybillId;
-
+				function getDetails(awbId) {
 					var awbDetails = null;
 					for (var infoIndex in $c.CalculationInfo) {
 						var info = $c.CalculationInfo[infoIndex];
@@ -65,13 +40,17 @@ var Alicargo = (function ($a) {
 							break;
 						}
 					}
+					return awbDetails;
+				}
+
+				$("tr.k-group-footer").each(function (i) {
+					var awbId = $c.CalculationInfo[i].AirWaybillId;
+					
+					var awbDetails = getDetails(awbId);
 
 					var detailsHtml = detailsTemplate(awbDetails);
 
-					$(this).after("<tr class='k-group-footer k-group-sub-footer'><td class='k-group-cell'>&nbsp;</td>"
-						+ "<td colspan='" + $c.Columns().length + "'>"
-						+ detailsHtml
-						+ "</td></tr>");
+					$(this).after(detailsHtml);
 				});
 			}
 
@@ -120,9 +99,7 @@ var Alicargo = (function ($a) {
 				save: save,
 				dataBound: dataBound
 			});
-
-			overrideFooter(gridHolder);
-		}).fail($a.ShowError);
+		});
 
 		return $c;
 	})($a.Calculation || {});

@@ -340,6 +340,7 @@
     <Compile Include="ViewModels\AirWaybill\AwbSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\CalculationListCollection.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Helpers\ApplicationModelHelper.cs" />
@@ -606,8 +607,6 @@
     <Content Include="Scripts\app\Application\Grid.js" />
     <Content Include="Scripts\app\Calculation\Columns.js" />
     <Content Include="Scripts\app\Calculation\Grid.js" />
-    <Content Include="Scripts\app\Calculation\Details-old.js" />
-    <Content Include="Scripts\app\Calculation\Grid-old.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\it.js" />
