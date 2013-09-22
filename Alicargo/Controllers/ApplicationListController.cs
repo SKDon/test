@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
@@ -14,17 +15,19 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationListPresenter _applicationPresenter;
 		private readonly IAwbRepository _awbRepository;
-		private readonly IClientRepository _clientRepository;
+		private readonly IClientRepository _clients;
 		private readonly IStateConfig _stateConfig;
+		private readonly IIdentityService _identity;
 
 		public ApplicationListController(IApplicationListPresenter applicationPresenter,
-										 IClientRepository clientRepository, IAwbRepository awbRepository,
-										 IStateConfig stateConfig)
+										 IClientRepository clients, IAwbRepository awbRepository,
+										 IStateConfig stateConfig, IIdentityService identity)
 		{
 			_applicationPresenter = applicationPresenter;
-			_clientRepository = clientRepository;
+			_clients = clients;
 			_awbRepository = awbRepository;
 			_stateConfig = stateConfig;
+			_identity = identity;
 		}
 
 		[HttpPost, Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
@@ -33,7 +36,11 @@ namespace Alicargo.Controllers
 			// todo: 3. use model binder for Order
 			var orders = OrderHelper.Get(group);
 
-			var data = _applicationPresenter.List(take, skip, orders);
+			Debug.Assert(_identity.Id != null);
+
+			var client = _clients.GetByUserId(_identity.Id.Value);
+
+			var data = _applicationPresenter.List(take, skip, orders, client != null ? client.Id : (long?)null);
 
 			return Json(data);
 		}
@@ -41,7 +48,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
 		public virtual ViewResult Index()
 		{
-			var clients = _clientRepository.GetAll()
+			var clients = _clients.GetAll()
 										   .OrderBy(x => x.Nic)
 										   .ToDictionary(x => x.Id, x => x.Nic);
 

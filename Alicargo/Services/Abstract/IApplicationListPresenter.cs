@@ -5,6 +5,6 @@ namespace Alicargo.Services.Abstract
 {
     public interface IApplicationListPresenter
 	{
-		ApplicationListCollection List(int take, int skip, Order[] groups);
+		ApplicationListCollection List(int? take = null, int skip = 0, Order[] groups = null, long? clientId = null);
 	}
 }

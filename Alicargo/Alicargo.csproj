@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.3.1.3.3\lib\net35\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -154,6 +157,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
+    <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\SenderAwbController.cs" />
     <Compile Include="MvcHelpers\Extensions\DropDownListHeplers.cs" />
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
@@ -235,6 +239,7 @@
     <Compile Include="Services\Abstract\ICalculationService.cs" />
     <Compile Include="Services\Abstract\ICarrierService.cs" />
     <Compile Include="Services\Abstract\IClientManager.cs" />
+    <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Abstract\IIdentityService.cs" />
     <Compile Include="Services\Abstract\ILocalizationService.cs" />
     <Compile Include="Services\Abstract\IMailSender.cs" />
@@ -263,6 +268,7 @@
     <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
+    <Compile Include="Services\ExcelGenerator.cs" />
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateManager.cs" />
     <Compile Include="Services\Contract\Message.cs" />
@@ -311,6 +317,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\DynamicScriptController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\ExcelController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\HomeController.generated.cs">

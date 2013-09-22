@@ -9,7 +9,7 @@ namespace Alicargo.Contracts.Repositories
 		ApplicationData Get(long id);
 		ApplicationDetailsData GetDetails(long id);
 		ApplicationData[] GetByAirWaybill(params long[] ids);
-        ApplicationListItemData[] List(int take, int skip = 0, long[] stateIds = null, Order[] orders = null, long? clientUserId = null);
+        ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null, Order[] orders = null, long? clientId = null);
 		long Count(IEnumerable<long> stateIds, long? clientUserId = null);
 		long GetClientId(long id);
 

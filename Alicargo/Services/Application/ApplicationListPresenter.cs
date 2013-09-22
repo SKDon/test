@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
@@ -13,32 +12,27 @@ namespace Alicargo.Services.Application
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationListItemMapper _itemMapper;
         private readonly IApplicationGrouper _applicationGrouper;
-        private readonly IIdentityService _identity;
         private readonly IStateService _stateService;
 
         public ApplicationListPresenter(
             IApplicationRepository applicationRepository,
             IApplicationListItemMapper itemMapper,
             IStateService stateService,
-            IIdentityService identity,
             IApplicationGrouper applicationGrouper)
         {
             _applicationRepository = applicationRepository;
             _itemMapper = itemMapper;
             _stateService = stateService;
-            _identity = identity;
             _applicationGrouper = applicationGrouper;
         }
 
-        public ApplicationListCollection List(int take, int skip, Order[] groups)
+		public ApplicationListCollection List(int? take = null, int skip = 0, Order[] groups = null, long? clientId = null)
         {
             var stateIds = _stateService.GetVisibleStates();
 
-            var isClient = _identity.IsInRole(RoleType.Client);
-
             var orders = PrepareOrders(groups);
 
-            var data = _applicationRepository.List(take, skip, stateIds, orders, isClient ? _identity.Id : null);
+			var data = _applicationRepository.List(take, skip, stateIds, orders, clientId);
 
             var applications = _itemMapper.Map(data);
 
@@ -46,11 +40,11 @@ namespace Alicargo.Services.Application
                 ? new ApplicationListCollection
                 {
                     Data = applications,
-                    Total = _applicationRepository.Count(stateIds, isClient ? _identity.Id : null),
+					Total = _applicationRepository.Count(stateIds, clientId),
                 }
                 : new ApplicationListCollection
                 {
-                    Total = _applicationRepository.Count(stateIds, isClient ? _identity.Id : null),
+					Total = _applicationRepository.Count(stateIds, clientId),
                     Groups = _applicationGrouper.Group(applications, groups.Select(x => x.OrderType).ToArray()),
                 };
         }

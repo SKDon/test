@@ -155,19 +155,21 @@ namespace Alicargo.DataAccess.Repositories
 			return Context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();
 		}
 
-		public ApplicationListItemData[] List(int take, int skip, long[] stateIds = null,
-											  Order[] orders = null, long? clientUserId = null)
+		public ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null,
+											  Order[] orders = null, long? clientId = null)
 		{
 			var applications = stateIds != null && stateIds.Length > 0
 				? Context.Applications.Where(x => stateIds.Contains(x.StateId))
 				: Context.Applications.AsQueryable();
 
-			if (clientUserId.HasValue)
+			if (clientId.HasValue)
 			{
-				applications = applications.Where(x => x.Client.UserId == clientUserId.Value);
+				applications = applications.Where(x => x.ClientId == clientId.Value);
 			}
 
-			applications = _orderer.Order(applications, orders).Skip(skip).Take(take);
+			applications = _orderer.Order(applications, orders).Skip(skip);
+			if (take.HasValue)
+				applications = applications.Take(take.Value);
 
 			return applications.Select(x => new ApplicationListItemData
 			{
