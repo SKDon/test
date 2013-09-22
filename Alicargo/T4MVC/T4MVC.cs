@@ -34,6 +34,7 @@ public static class MVC
     public static Alicargo.Controllers.CarrierController Carrier = new Alicargo.Controllers.T4MVC_CarrierController();
     public static Alicargo.Controllers.ClientController Client = new Alicargo.Controllers.T4MVC_ClientController();
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();
+    public static Alicargo.Controllers.ExcelController Excel = new Alicargo.Controllers.T4MVC_ExcelController();
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
     public static Alicargo.Controllers.SenderAwbController SenderAwb = new Alicargo.Controllers.T4MVC_SenderAwbController();
     public static Alicargo.Controllers.SenderController Sender = new Alicargo.Controllers.T4MVC_SenderController();

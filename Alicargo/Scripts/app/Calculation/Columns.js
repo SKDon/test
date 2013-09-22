@@ -47,7 +47,7 @@
 						type: "POST"
 					}
 				},
-				pageSize: 10,
+				pageSize: 5,
 				serverPaging: true,
 				serverGrouping: true,
 				serverAggregates: false,

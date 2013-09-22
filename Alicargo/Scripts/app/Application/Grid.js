@@ -43,10 +43,7 @@
 		serverGrouping: true,
 		error: $a.ShowError
 	};
-
-	if (!$r.IsClient) {
-		$.extend(dataSource, { group: { field: "AirWaybill", dir: "asc" } });
-	}	
+	
 
 	var detailExpand = function (e) {
 		var data = $a.Application.GetGrid().dataItem(e.masterRow);
@@ -85,12 +82,12 @@
 		$(".delete-application", e.detailRow).unbind("click");
 		$(".AirWaybill-select", e.detailRow).unbind("change");
 	};
-
+	
 	var settings = {
 		dataSource: dataSource,
 		filterable: false,
 		sortable: false,
-		groupable: true,
+		groupable: false,
 		pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
 		resizable: true,
 		detailTemplate: kendo.template($("#application-grid-details").html()),
@@ -98,6 +95,13 @@
 		detailCollapse: detailCollapse,
 		columns: $a.Application.GetColumns()
 	};
+
+	if (!$r.IsClient) {
+		$.extend(dataSource, {
+			group: { field: "AirWaybill", dir: "asc" },
+			groupable: true
+		});
+	}	
 
 	if (!$r.IsClient && !$r.IsBroker)
 		$.extend(settings, {

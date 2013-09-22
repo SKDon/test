@@ -138,7 +138,7 @@
 			var gridHolder = $("#calculation-grid");
 			gridHolder.kendoGrid({
 				columns: $c.Columns(),
-				pageable: { refresh: true, pageSizes: [2, 5, 50, 100] },
+				pageable: { refresh: true, pageSizes: [5, 20, 50, 100] },
 				dataSource: $c.DataSource(),
 				editable: true,
 				resizable: true,

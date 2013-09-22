@@ -149,7 +149,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
                                 Desc = true,
                                 OrderType = OrderType.Id
                             }
-                    }, clientUserId: clientData.UserId).First();
+                    }, clientId: clientData.Id).First();
 
 			Validate(clientData, model, transitModel, newCarrierName, data);
 		}
