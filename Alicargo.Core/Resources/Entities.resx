@@ -217,7 +217,7 @@
     <value>Характеристика товара</value>
   </data>
   <data name="Count" xml:space="preserve">
-    <value>Количество мест (коробки)</value>
+    <value>Места (коробки)</value>
   </data>
   <data name="FactoryEmail" xml:space="preserve">
     <value>Email фабрики</value>

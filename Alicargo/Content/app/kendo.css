@@ -44,24 +44,3 @@
 	.k-grid-custom-edit span {
 		background-position: -48px 0;
 	}
-
-#calculation-grid .k-grouping-row td {
-	background-color: #ffff00;
-}
-
-#calculation-grid .k-group-sub-footer td {
-	background-color: #ebebeb;
-	border: none;
-}
-
-	#calculation-grid .k-group-sub-footer td.k-group-cell {
-		background-color: #e3e3e3;
-	}
-
-	#calculation-grid .k-group-sub-footer td.total {
-		font-weight: bold;
-	}
-
-#calculation-grid .k-group-sub-footer.cost-total td {
-	background-color: #ff99cc;
-}

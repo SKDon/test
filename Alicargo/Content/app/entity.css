@@ -118,25 +118,32 @@
 	width: 1156px;
 }
 
-.calculation-details {
-	margin-top: 10px;
+#calculation-grid .k-grouping-row td {
+	background-color: #ffff00;
 }
 
-	.calculation-details .data {
-		-moz-column-count: 5;
-		-webkit-column-count: 5;
-		column-count: 5;
+#calculation-grid .k-group-sub-footer td {
+	background-color: #ebebeb;
+	border: none;
+}
+
+	#calculation-grid .k-group-sub-footer td.k-group-cell {
+		background-color: #e3e3e3;
 	}
 
-	.calculation-details p {
-		margin-bottom: 5px;
+	#calculation-grid .k-group-sub-footer td.total {
+		font-weight: bold;
 	}
 
-	.calculation-details .additional-cost {
-		margin-bottom: 1px;
-		height: 23px;
-	}
+#calculation-grid .k-group-sub-footer.cost-total td {
+	background-color: #ff99cc;
+}
 
-		.calculation-details .additional-cost .k-numerictextbox {
-			width: 50px;
-		}
+#calculation-grid .additional-cost {
+	margin-bottom: 0;
+	padding: 0 0 1px 0;
+}
+
+	#calculation-grid .additional-cost .k-numerictextbox {
+		width: 50px;
+	}

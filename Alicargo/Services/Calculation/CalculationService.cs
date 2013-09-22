@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
@@ -24,7 +26,14 @@ namespace Alicargo.Services.Calculation
 
 		public CalculationListCollection List(int take, long skip)
 		{
-			var awbs = _awbRepository.GetRange(take, skip).ToDictionary(x => x.Id, x => x);
+			var awbs = _awbRepository.GetRange(take, skip);
+
+			return List(awbs);
+		}
+
+		private CalculationListCollection List(IList<AirWaybillData> data)
+		{
+			var awbs = data.ToDictionary(x => x.Id, x => x);
 			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Key).ToArray());
 			var nics = _clientRepository.GetNicByApplications(applications.Select(x => x.Id).ToArray());
 
@@ -62,22 +71,7 @@ namespace Alicargo.Services.Calculation
 				};
 			}).ToList();
 
-			for (var i = 0; i < awbs.Count; i++)
-			{
-				var awb = awbs.ElementAt(i).Value;
-				if (awb.Id != groups[i].AirWaybillId)
-				{
-					groups.Insert(i, new CalculationGroup
-					{
-						AirWaybillId = awb.Id,
-						items = new CalculationItem[0],
-						value = AwbHelper.GetAirWayBillDisplay(awb),
-						field = "AirWaybillId",
-						hasSubgroups = false,
-						aggregates = new CalculationGroup.Aggregates(new CalculationItem[0])
-					});
-				}
-			}
+			AddMissedGroups(data, groups);
 
 			var info = awbs.Select(x => x.Value)
 						   .Select(x => new CalculationInfo(items.Where(a => a.AirWaybillId == x.Id).ToArray())
@@ -96,6 +90,33 @@ namespace Alicargo.Services.Calculation
 				Total = _awbRepository.Count(),
 				Info = info
 			};
+		}
+
+		private static void AddMissedGroups(IList<AirWaybillData> awbs, IList<CalculationGroup> groups)
+		{
+			for (var i = 0; i < awbs.Count; i++)
+			{
+				var awb = awbs[i];
+				if (groups.Count == i || awb.Id != groups[i].AirWaybillId)
+				{
+					groups.Insert(i, new CalculationGroup
+					{
+						AirWaybillId = awb.Id,
+						items = new CalculationItem[0],
+						value = AwbHelper.GetAirWayBillDisplay(awb),
+						field = "AirWaybillId",
+						hasSubgroups = false,
+						aggregates = new CalculationGroup.Aggregates(new CalculationItem[0])
+					});
+				}
+			}
+		}
+
+		public CalculationListCollection Row(long id)
+		{
+			var data = _awbRepository.Get(id);
+
+			return List(data);
 		}
 	}
 }

@@ -17,15 +17,54 @@ var Alicargo = (function ($a) {
 			}).fail($a.ShowError);
 		}
 
-		function updateMailGrid() {
-			// todo: 1. implement
-			//$.post($u.Calculation_Row, { id: awbId }).success(function (data) {
-			//	var grid = $c.GetMainGrid();
-			//	var oldData = grid.dataSource.get(awbId);
-			//	$.extend(oldData, data);
-			//	grid.refresh();
-			//}).fail($a.ShowError);
+		function findGroup(data, awbId) {
+			for (var i in data) {
+				if (data[i].AirWaybillId == awbId) {
+					return data[i];
+				}
+			}
+			return null;
+		}
+
+		function updateMailGrid(awbId) {
+			$.post($u.Calculation_Row, { id: awbId }).success(function (data) {
+				var grid = $c.GetMainGrid();
+				var oldData = findGroup(grid.dataSource.data(), awbId);
+
+				var aggregates = data.Groups[0].aggregates;
+				for (var i in aggregates) {
+					oldData.aggregates[i].sum = aggregates[i].sum;
+				}
+
+				var items = data.Groups[0].items;
+				for (var itemIndex in items) {
+					oldData.items[itemIndex].TotalTariffCost = items[itemIndex].TotalTariffCost;
+					oldData.items[itemIndex].Profit = items[itemIndex].Profit;
+				}
+
+				for (var infoIndex in $c.CalculationInfo) {
+					if ($c.CalculationInfo[infoIndex].AirWaybillId == data.Info[0].AirWaybillId) {
+						$.extend($c.CalculationInfo[infoIndex], data.Info[0]);
+						break;
+					}
+				}
+
+				grid.refresh();
+			}).fail($a.ShowError);
 		};
+
+		function initAdditionalCost(row, data) {
+			row.find(".additional-cost input").kendoNumericTextBox({
+				decimals: 2,
+				spinners: false,
+				change: function () {
+					post($u.Calculation_SetAdditionalCost, {
+						awbId: data.AirWaybillId,
+						additionalCost: this.value()
+					}, data.AirWaybillId);
+				}
+			});
+		}
 
 		$(function () {
 			function dataBound() {
@@ -45,10 +84,12 @@ var Alicargo = (function ($a) {
 
 				$("tr.k-group-footer").each(function (i) {
 					var awbId = $c.CalculationInfo[i].AirWaybillId;
-					
+
 					var awbDetails = getDetails(awbId);
 
-					var detailsHtml = detailsTemplate(awbDetails);
+					var detailsHtml = $(detailsTemplate(awbDetails));
+
+					initAdditionalCost(detailsHtml, awbDetails);
 
 					$(this).after(detailsHtml);
 				});
@@ -92,7 +133,7 @@ var Alicargo = (function ($a) {
 			var gridHolder = $("#calculation-grid");
 			gridHolder.kendoGrid({
 				columns: $c.Columns(),
-				pageable: { refresh: true, pageSizes: [1, 3, 5, 10] },
+				pageable: { refresh: true, pageSizes: [2, 5, 50, 100] },
 				dataSource: $c.DataSource(),
 				editable: true,
 				resizable: true,

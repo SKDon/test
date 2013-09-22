@@ -214,7 +214,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Количество мест (коробки).
+        ///   Looks up a localized string similar to Места (коробки).
         /// </summary>
         public static string Count {
             get {

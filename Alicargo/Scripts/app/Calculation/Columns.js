@@ -47,7 +47,7 @@
 						type: "POST"
 					}
 				},
-				pageSize: 3,
+				pageSize: 2,
 				serverPaging: true,
 				serverGrouping: true,
 				serverAggregates: false,
@@ -105,35 +105,7 @@
 			$c.Columns = function () { return c; };
 
 			return c;
-		};
-		
-		//function initAdditionalCost(row, data) {
-		//	row.find(".additional-cost input").kendoNumericTextBox({
-		//		decimals: 2,
-		//		spinners: false,
-		//		change: function () {
-		//			post($u.Calculation_SetAdditionalCost, {
-		//				awbId: data.AwbId,
-		//				additionalCost: this.value()
-		//			}, data.AwbId);
-		//		}
-		//	});
-		//}
-
-		//function post(url, data, awbId) {
-		//	$.post(url, data).success(function () {
-		//		updateMailGrid(awbId);
-		//	}).fail($a.ShowError);
-		//}
-
-		//function updateMailGrid(awbId) {
-		//	$.post($u.Calculation_Row, { id: awbId }).success(function (data) {
-		//		var grid = $c.GetMainGrid();
-		//		var oldData = grid.dataSource.get(awbId);
-		//		$.extend(oldData, data);
-		//		grid.refresh();
-		//	}).fail($a.ShowError);
-		//};
+		};		
 
 		return $c;
 	})($a.Calculation || {});
