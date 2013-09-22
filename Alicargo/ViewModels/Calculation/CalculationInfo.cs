@@ -28,7 +28,7 @@ namespace Alicargo.ViewModels.Calculation
 			}
 		}
 
-		public decimal? TotalCostOfSenderForWeight { get; set; }
+		public decimal TotalCostOfSenderForWeight { get; set; }
 
 		public decimal? TotalScotchCost
 		{
@@ -50,6 +50,11 @@ namespace Alicargo.ViewModels.Calculation
 			get { return _rows.Sum(x => x.TransitCost); }
 		}
 
+		public decimal TotalInsuranceCost
+		{
+			get { return _rows.Sum(x => x.InsuranceCost ?? 0); }
+		}
+
 		public decimal? TotalOfSender
 		{
 			get { return TotalCostOfSenderForWeight + TotalScotchCost + TotalFactureCost + TotalWithdrawCost; }
@@ -66,8 +71,7 @@ namespace Alicargo.ViewModels.Calculation
 		{
 			get
 			{
-				var insuranceCost = _rows.Sum(x => x.InsuranceCost ?? 0);
-				return (TotalOfSender ?? 0) + (FlightCost ?? 0) + (CustomCost ?? 0) + (BrokerCost ?? 0) + insuranceCost
+				return (TotalOfSender ?? 0) + FlightCost + CustomCost + BrokerCost + TotalInsuranceCost
 					   + (TotalForwarderCost ?? 0) + (AdditionalCost ?? 0);
 			}
 		}
@@ -89,7 +93,7 @@ namespace Alicargo.ViewModels.Calculation
 			}
 		}
 
-		public decimal? FlightCost { get; set; }
+		public decimal FlightCost { get; set; }
 
 		public decimal? FlightCostPerKg
 		{
@@ -104,7 +108,7 @@ namespace Alicargo.ViewModels.Calculation
 			}
 		}
 
-		public decimal? CustomCost { get; set; }
+		public decimal CustomCost { get; set; }
 
 		public decimal? CustomCostPerKg
 		{
@@ -119,7 +123,7 @@ namespace Alicargo.ViewModels.Calculation
 			}
 		}
 
-		public decimal? BrokerCost { get; set; }
+		public decimal BrokerCost { get; set; }
 
 		public decimal? BrokerCostPerKg
 		{

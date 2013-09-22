@@ -83,10 +83,10 @@ namespace Alicargo.Services.Calculation
 						   .Select(x => new CalculationInfo(items.Where(a => a.AirWaybillId == x.Id).ToArray())
 						   {
 							   AirWaybillId = x.Id,
-							   TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
-							   FlightCost = x.FlightCost,
-							   CustomCost = x.CustomCost,
-							   BrokerCost = x.BrokerCost,
+							   TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight ?? 0,
+							   FlightCost = x.FlightCost ?? 0,
+							   CustomCost = x.CustomCost ?? 0,
+							   BrokerCost = x.BrokerCost ?? 0,
 							   AdditionalCost = x.AdditionalCost
 						   }).ToArray();
 

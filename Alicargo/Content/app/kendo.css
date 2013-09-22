@@ -45,15 +45,23 @@
 		background-position: -48px 0;
 	}
 
-.k-group-sub-footer td {
-	border: none;
-	background-color: #ebebeb;
+#calculation-grid .k-grouping-row td {
+	background-color: #ffff00;
 }
 
-	.k-group-sub-footer td.k-group-cell {
+#calculation-grid .k-group-sub-footer td {
+	background-color: #ebebeb;
+	border: none;
+}
+
+	#calculation-grid .k-group-sub-footer td.k-group-cell {
 		background-color: #e3e3e3;
 	}
 
-.k-group-footer td {
-	border-bottom: none;
+	#calculation-grid .k-group-sub-footer td.total {
+		font-weight: bold;
+	}
+
+#calculation-grid .k-group-sub-footer.cost-total td {
+	background-color: #ff99cc;
 }

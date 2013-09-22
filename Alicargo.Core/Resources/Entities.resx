@@ -361,7 +361,7 @@
     <value>Сумма (€)</value>
   </data>
   <data name="TransitCost" xml:space="preserve">
-    <value>Транзит (€)</value>
+    <value>Доставка (€)</value>
   </data>
   <data name="WithdrawCost" xml:space="preserve">
     <value>Забор (€)</value>

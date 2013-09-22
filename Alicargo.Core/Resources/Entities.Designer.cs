@@ -880,7 +880,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Транзит (€).
+        ///   Looks up a localized string similar to Доставка (€).
         /// </summary>
         public static string TransitCost {
             get {
