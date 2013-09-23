@@ -24,7 +24,7 @@ namespace Alicargo.Core.Localization
 		{
 			get
 			{
-				return LookupResource(_resourceType, _resourceKey) ?? base.DisplayName;
+				return LookupResource(_resourceType, _resourceKey) ?? DisplayNameValue;
 			}
 		}
 

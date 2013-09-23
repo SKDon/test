@@ -1,4 +1,6 @@
-﻿using Alicargo.ViewModels.Application;
+﻿using Alicargo.Core.Localization;
+using Alicargo.ViewModels.Application;
+using Resources;
 
 namespace Alicargo.Services.Excel
 {
@@ -10,5 +12,14 @@ namespace Alicargo.Services.Excel
 		{
 			_application = application;
 		}
+
+		[DisplayNameLocalized(typeof(Entities), "DisplayNumber")]
+		public string DisplayNumber { get { return _application.DisplayNumber; } }
+
+		[DisplayNameLocalized(typeof(Entities), "FactoryName")]
+		public string FactoryName { get { return _application.FactoryName; } }
+
+		[DisplayNameLocalized(typeof(Entities), "Mark")]
+		public string MarkName { get { return _application.MarkName; } }
 	}
 }

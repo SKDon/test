@@ -269,7 +269,7 @@
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
     <Compile Include="Services\Excel\ApplicationExcelRow.cs" />
-    <Compile Include="Services\Excel\ClientApplicationExcelRowSource.cs" />
+    <Compile Include="Services\Excel\ApplicationExcelRowSource.cs" />
     <Compile Include="Services\Excel\ExcelGenerator.cs" />
     <Compile Include="Services\Abstract\IApplicationExcelRowSource.cs" />
     <Compile Include="Services\LocalizationService.cs" />

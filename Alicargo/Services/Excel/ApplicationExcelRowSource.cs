@@ -5,13 +5,13 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.Excel
 {
-	internal sealed class ClientApplicationExcelRowSource : IApplicationExcelRowSource
+	internal sealed class ApplicationExcelRowSource : IApplicationExcelRowSource
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationListItemMapper _itemMapper;
 		private readonly IStateService _stateService;
 
-		public ClientApplicationExcelRowSource(IApplicationRepository applications, IStateService stateService,
+		public ApplicationExcelRowSource(IApplicationRepository applications, IStateService stateService,
 										 IApplicationListItemMapper itemMapper)
 		{
 			_applications = applications;
