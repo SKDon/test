@@ -10,15 +10,18 @@ namespace Alicargo.Controllers
 	public partial class ExcelController : Controller
 	{
 		private readonly IExcelGenerator _generator;
+		private readonly IApplicationExcelRowSource _rowSource;
 		private readonly IIdentityService _identity;
 		private readonly IClientRepository _clients;
 
 		public ExcelController(
 			IExcelGenerator generator,
+			IApplicationExcelRowSource rowSource,
 			IIdentityService identity,
 			IClientRepository clients)
 		{
 			_generator = generator;
+			_rowSource = rowSource;
 			_identity = identity;
 			_clients = clients;
 		}
@@ -30,9 +33,11 @@ namespace Alicargo.Controllers
 
 			var client = _clients.GetByUserId(_identity.Id.Value);
 
-			var stream = _generator.Applications(client.Id);
+			var rows = _rowSource.GetByClient(client.Id);
 
-			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Applications.xlsx");
+			var stream = _generator.Get(rows);
+
+			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "applications.xlsx");
 		}
 	}
 }

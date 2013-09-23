@@ -1,9 +1,10 @@
 ﻿using System.IO;
+using Alicargo.Services.Excel;
 
 namespace Alicargo.Services.Abstract
 {
-	public  interface IExcelGenerator
+	public interface IExcelGenerator
 	{
-		MemoryStream Applications(long clientId);
+		MemoryStream Get(ApplicationExcelRow[] rows);
 	}
 }

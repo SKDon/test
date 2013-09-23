@@ -9,21 +9,21 @@ namespace Alicargo.Services.Application
 {
     internal sealed class ApplicationListPresenter : IApplicationListPresenter
     {
-        private readonly IApplicationRepository _applicationRepository;
-        private readonly IApplicationListItemMapper _itemMapper;
-        private readonly IApplicationGrouper _applicationGrouper;
-        private readonly IStateService _stateService;
+	    private readonly IApplicationListItemMapper _itemMapper;
+	    private readonly IApplicationGrouper _grouper;
+	    private readonly IApplicationRepository _applications;
+	    private readonly IStateService _stateService;
 
         public ApplicationListPresenter(
-            IApplicationRepository applicationRepository,
+            IApplicationRepository applications,
             IApplicationListItemMapper itemMapper,
             IStateService stateService,
-            IApplicationGrouper applicationGrouper)
+            IApplicationGrouper grouper)
         {
-            _applicationRepository = applicationRepository;
+            _applications = applications;
             _itemMapper = itemMapper;
             _stateService = stateService;
-            _applicationGrouper = applicationGrouper;
+            _grouper = grouper;
         }
 
 		public ApplicationListCollection List(int? take = null, int skip = 0, Order[] groups = null, long? clientId = null)
@@ -32,7 +32,7 @@ namespace Alicargo.Services.Application
 
             var orders = PrepareOrders(groups);
 
-			var data = _applicationRepository.List(take, skip, stateIds, orders, clientId);
+			var data = _applications.List(take, skip, stateIds, orders, clientId);
 
             var applications = _itemMapper.Map(data);
 
@@ -40,12 +40,12 @@ namespace Alicargo.Services.Application
                 ? new ApplicationListCollection
                 {
                     Data = applications,
-					Total = _applicationRepository.Count(stateIds, clientId),
+					Total = _applications.Count(stateIds, clientId),
                 }
                 : new ApplicationListCollection
                 {
-					Total = _applicationRepository.Count(stateIds, clientId),
-                    Groups = _applicationGrouper.Group(applications, groups.Select(x => x.OrderType).ToArray()),
+					Total = _applications.Count(stateIds, clientId),
+                    Groups = _grouper.Group(applications, groups.Select(x => x.OrderType).ToArray()),
                 };
         }
 

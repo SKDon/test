@@ -25,9 +25,6 @@ namespace Alicargo.Controllers
     public partial class ExcelController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ExcelController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected ExcelController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
