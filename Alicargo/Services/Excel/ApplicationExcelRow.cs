@@ -4,22 +4,31 @@ using Resources;
 
 namespace Alicargo.Services.Excel
 {
-	public sealed class ApplicationExcelRow
+	public abstract class ApplicationExcelRow
 	{
-		private readonly ApplicationListItem _application;
-
-		public ApplicationExcelRow(ApplicationListItem application)
+		protected ApplicationExcelRow(ApplicationListItem application)
 		{
-			_application = application;
+			Application = application;
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "DisplayNumber")]
-		public string DisplayNumber { get { return _application.DisplayNumber; } }
+		protected ApplicationListItem Application { get; private set; }
 
-		[DisplayNameLocalized(typeof(Entities), "FactoryName")]
-		public string FactoryName { get { return _application.FactoryName; } }
+		[DisplayNameLocalized(typeof (Entities), "DisplayNumber")]
+		public string DisplayNumber
+		{
+			get { return Application.DisplayNumber; }
+		}
 
-		[DisplayNameLocalized(typeof(Entities), "Mark")]
-		public string MarkName { get { return _application.MarkName; } }
+		[DisplayNameLocalized(typeof (Entities), "FactoryName")]
+		public string FactoryName
+		{
+			get { return Application.FactoryName; }
+		}
+
+		[DisplayNameLocalized(typeof (Entities), "Mark")]
+		public string MarkName
+		{
+			get { return Application.MarkName; }
+		}
 	}
 }

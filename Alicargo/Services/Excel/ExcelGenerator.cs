@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using Resources;
 
 namespace Alicargo.Services.Excel
 {
 	internal sealed class ExcelGenerator : IExcelGenerator
 	{
-		public MemoryStream Get<T>(T[] rows)
+		public MemoryStream Get<T>(T[] rows) where T : ApplicationExcelRow
 		{
 			var properties = typeof(T).GetProperties();
 
@@ -38,14 +39,25 @@ namespace Alicargo.Services.Excel
 			foreach (var row in rows)
 			{
 				var iColumn = 1;
+
 				foreach (var property in properties)
 				{
 					var value = property.GetValue(row);
 
-					ws.Cells[iRow, iColumn++].Value = value;
+					var cell = ws.Cells[iRow, iColumn++];
+
+					cell.Value = value;
+
+					RowStyles(cell);
 				}
+
 				iRow++;
 			}
+		}
+
+		private static void RowStyles(ExcelRange cell)
+		{
+			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Gray);
 		}
 
 		private static void DrawHeader(IEnumerable<PropertyInfo> properties, ExcelWorksheet ws)
@@ -55,8 +67,21 @@ namespace Alicargo.Services.Excel
 			{
 				var displayName = property.GetCustomAttribute<DisplayNameLocalizedAttribute>();
 
-				ws.Cells[1, iColumn++].Value = displayName.DisplayName;
+				var cell = ws.Cells[1, iColumn];
+
+				cell.Value = displayName.DisplayName;
+
+				HeaderStyles(cell);
+
+				iColumn++;
 			}
+		}
+
+		private static void HeaderStyles(ExcelRange cell)
+		{
+			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
+			cell.Style.Font.Bold = true;
+			cell.AutoFitColumns();
 		}
 	}
 }

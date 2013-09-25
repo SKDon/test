@@ -14,6 +14,7 @@
 				: Url.Action(MVC.Sender.ApplicationCreate(x.Key))
 		}))
 		<a href="#" class="btn btn-primary" id="apply-link">@Pages.ApplicationAdd</a>
+		@Html.ActionLink(Pages.Excel, MVC.Excel.Applications(), new { @class = "btn btn-info" })
 	</p>
 	<script>
 		$(function () {
@@ -32,6 +33,11 @@ else if (IdentityService.IsInRole(RoleType.Client))
 {
 	<p>
 		@Html.ActionLink(Pages.ApplicationAdd, MVC.Application.Create(), new { @class = "btn btn-primary" })
+	</p>
+}
+else if (IdentityService.IsInRole(RoleType.Forwarder))
+{
+	<p>
 		@Html.ActionLink(Pages.Excel, MVC.Excel.Applications(), new { @class = "btn btn-info" })
 	</p>
 }

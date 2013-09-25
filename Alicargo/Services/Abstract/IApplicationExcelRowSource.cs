@@ -4,6 +4,6 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IApplicationExcelRowSource
 	{
-		ApplicationExcelRow[] GetByClient(long clientId);
+		ApplicationExcelRow[] Get();
 	}
 }
