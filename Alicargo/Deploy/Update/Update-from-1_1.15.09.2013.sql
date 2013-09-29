@@ -36,9 +36,11 @@ GO
 ALTER TABLE [dbo].[Client]
     ADD [ContractFileData] VARBINARY (MAX) NULL,
         [ContractFileName] NVARCHAR (MAX)  NULL;
-
-
 GO
+
+DROP  PROCEDURE [dbo].[Client_DeleteForce];
+GO
+
 CREATE PROCEDURE [dbo].[Client_DeleteForce]
 	@ClientId BIGINT
 AS
