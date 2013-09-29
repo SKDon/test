@@ -8,11 +8,15 @@ namespace Alicargo.Services.Email
     internal sealed class ClientManagerWithMailing : IClientManager
 	{
 		private readonly IMailSender _mailSender;
-		private readonly IClientManager _manager;
+	    private readonly IRecipients _recipients;
+	    private readonly IClientManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
 
-		public ClientManagerWithMailing(IClientManager manager, IMailSender mailSender, IMessageBuilder messageBuilder)
+		public ClientManagerWithMailing(
+			IRecipients recipients,
+			IClientManager manager, IMailSender mailSender, IMessageBuilder messageBuilder)
 		{
+			_recipients = recipients;
 			_manager = manager;
 			_mailSender = mailSender;
 			_messageBuilder = messageBuilder;
@@ -37,7 +41,7 @@ namespace Alicargo.Services.Email
 		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)
 		{
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
-			var admins = _messageBuilder.GetAdminEmails().Select(x => x.Email).ToArray();
+			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
 			_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, model.Email) {CopyTo = admins});
 		}

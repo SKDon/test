@@ -51,6 +51,7 @@ namespace Alicargo.TestHelpers
 			ClientRepository = Inject<IClientRepository>();
 			MailSender = Inject<IMailSender>();
 			MessageBuilder = Inject<IMessageBuilder>();
+			Recipients = Inject<IRecipients>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -76,6 +77,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IStateService> StateService { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }
+		public Mock<IRecipients> Recipients { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
 
 		private Mock<T> Inject<T>() where T : class

@@ -163,7 +163,8 @@
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
-    <Compile Include="Services\Calculation\CalculationService.cs" />
+    <Compile Include="Services\Calculation\CalculationClientFile.cs" />
+    <Compile Include="Services\Calculation\CalculationServiceSender.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
@@ -262,6 +263,9 @@
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationSenderManager.cs" />
     <Compile Include="Services\Calculation\CalculationPresenter.cs" />
+    <Compile Include="Services\Abstract\ICalculationClientFile.cs" />
+    <Compile Include="Services\Calculation\CalculationServiceClientExcel.cs" />
+    <Compile Include="Services\Calculation\ClientCalculationExcelRow.cs" />
     <Compile Include="Services\Client\ClientPermissions.cs" />
     <Compile Include="Services\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />
@@ -270,6 +274,8 @@
     <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
+    <Compile Include="Services\Abstract\IRecipients.cs" />
+    <Compile Include="Services\Email\Recipients.cs" />
     <Compile Include="Services\Excel\AdminApplicationExcelRow.cs" />
     <Compile Include="Services\Excel\ApplicationExcelRowSource.cs" />
     <Compile Include="Services\Excel\ExcelGenerator.cs" />

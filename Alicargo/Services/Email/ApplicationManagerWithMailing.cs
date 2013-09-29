@@ -17,12 +17,14 @@ namespace Alicargo.Services.Email
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAuthenticationRepository _authenticationRepository;
 		private readonly IAwbRepository _awbRepository;
+		private readonly IRecipients _recipients;
 		private readonly IMailSender _mailSender;
 		private readonly IApplicationManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationManagerWithMailing(
+			IRecipients recipients,
 			IMailSender mailSender,
 			IMessageBuilder messageBuilder,
 			IStateConfig stateConfig,
@@ -33,6 +35,7 @@ namespace Alicargo.Services.Email
 
 			IApplicationManager manager)
 		{
+			_recipients = recipients;
 			_mailSender = mailSender;
 			_messageBuilder = messageBuilder;
 			_stateConfig = stateConfig;
@@ -142,7 +145,7 @@ namespace Alicargo.Services.Email
 			if (old.InvoiceFileName == null && details.InvoiceFileName != null)
 			{
 				var body = _messageBuilder.ApplicationInvoiceFileAdded(details);
-				var to = _messageBuilder.GetSenderEmails();
+				var to = _recipients.GetSenderEmails();
 				var file = _applicationRepository.GetInvoiceFile(details.Id);
 
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
@@ -152,7 +155,7 @@ namespace Alicargo.Services.Email
 			if (old.SwiftFileName == null && details.SwiftFileName != null)
 			{
 				var body = _messageBuilder.ApplicationSwiftFileAdded(details);
-				var to = _messageBuilder.GetSenderEmails();
+				var to = _recipients.GetSenderEmails();
 				var file = _applicationRepository.GetSwiftFile(details.Id);
 
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
@@ -165,7 +168,7 @@ namespace Alicargo.Services.Email
 				var file = _applicationRepository.GetPackingFile(details.Id);
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
 
-				var to = _messageBuilder.GetSenderEmails().Select(x => x.Email).ToArray();
+				var to = _recipients.GetSenderEmails().Select(x => x.Email).ToArray();
 				_mailSender.Send(new Message(subject, body, to) { Files = new[] { file } });
 			}
 
@@ -181,7 +184,7 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.ApplicationTorg12FileAdded(details, details.ClientLegalEntity);
 				var file = _applicationRepository.GetTorg12File(details.Id);
-				var admins = _messageBuilder.GetAdminEmails().Select(x => x.Email).ToArray();
+				var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
 			}
@@ -190,7 +193,7 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.ApplicationCPFileAdded(details, details.ClientLegalEntity);
 				var file = _applicationRepository.GetCPFile(details.Id);
-				var admins = _messageBuilder.GetAdminEmails().Select(x => x.Email).ToArray();
+				var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
 				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
 			}
@@ -202,8 +205,8 @@ namespace Alicargo.Services.Email
 			var subject = _messageBuilder.GetApplicationSubject(ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
 			var clientData = _authenticationRepository.GetById(model.ClientUserId);
 
-			var to = _messageBuilder.GetAdminEmails()
-									.Concat(_messageBuilder.GetSenderEmails())
+			var to = _recipients.GetAdminEmails()
+									.Concat(_recipients.GetSenderEmails())
 									.Concat(new[]
 									{
 										new Recipient
@@ -231,7 +234,7 @@ namespace Alicargo.Services.Email
 
 			if (stateId == _stateConfig.CargoReceivedStateId)
 			{
-				var to = _messageBuilder.GetAdminEmails().Concat(_messageBuilder.GetForwarderEmails()).ToArray();
+				var to = _recipients.GetAdminEmails().Concat(_recipients.GetForwarderEmails()).ToArray();
 				foreach (var recipient in to)
 				{
 					var body = _messageBuilder.ApplicationSetState(details, recipient.Culture);
@@ -247,7 +250,7 @@ namespace Alicargo.Services.Email
 
 				if (stateId == _stateConfig.CargoAtCustomsStateId || stateId == _stateConfig.CargoIsCustomsClearedStateId)
 				{
-					var to = _messageBuilder.GetAdminEmails().Concat(_messageBuilder.GetForwarderEmails()).ToArray();
+					var to = _recipients.GetAdminEmails().Concat(_recipients.GetForwarderEmails()).ToArray();
 					foreach (var recipient in to)
 					{
 						body = _messageBuilder.ApplicationSetState(details, recipient.Culture);

@@ -1,16 +1,11 @@
 ﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract
 {
 	public interface IMessageBuilder
-	{
-		Recipient[] GetAdminEmails();
-		Recipient[] GetSenderEmails();
-		Recipient[] GetForwarderEmails();
-
+	{	
 		string DefaultSubject { get; }
 		string ClientAdd(ClientModel model, AuthenticationModel authenticationModel);
 

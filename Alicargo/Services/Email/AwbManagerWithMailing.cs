@@ -10,15 +10,18 @@ namespace Alicargo.Services.Email
         private readonly IAwbPresenter _awbPresenter;
         private readonly IMailSender _mailSender;
         private readonly IMessageBuilder _messageBuilder;
-        private readonly IAwbManager _manager;
+	    private readonly IRecipients _recipients;
+	    private readonly IAwbManager _manager;
 
         public AwbManagerWithMailing(
+			IRecipients recipients,
             IAwbManager manager,
             IAwbPresenter awbPresenter,
             IMailSender mailSender,
             IMessageBuilder messageBuilder)
         {
-            _manager = manager;
+	        _recipients = recipients;
+	        _manager = manager;
             _awbPresenter = awbPresenter;
             _mailSender = mailSender;
             _messageBuilder = messageBuilder;
@@ -60,7 +63,7 @@ namespace Alicargo.Services.Email
                             Email = broker.Email
                         }
                 }
-                .Concat(_messageBuilder.GetForwarderEmails())
+				.Concat(_recipients.GetForwarderEmails())
                 .ToArray();
 
             var aggregate = _awbPresenter.GetAggregate(awbId);

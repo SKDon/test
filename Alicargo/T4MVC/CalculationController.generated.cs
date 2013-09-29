@@ -61,6 +61,12 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.HttpStatusCodeResult Calculate()
+        {
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Calculate);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.HttpStatusCodeResult SetSenderRate()
         {
             return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetSenderRate);
@@ -109,6 +115,7 @@ namespace Alicargo.Controllers
             public readonly string List = "List";
             public readonly string Row = "Row";
             public readonly string SetTariffPerKg = "SetTariffPerKg";
+            public readonly string Calculate = "Calculate";
             public readonly string SetSenderRate = "SetSenderRate";
             public readonly string SetScotchCostEdited = "SetScotchCostEdited";
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
@@ -123,6 +130,7 @@ namespace Alicargo.Controllers
             public const string List = "List";
             public const string Row = "Row";
             public const string SetTariffPerKg = "SetTariffPerKg";
+            public const string Calculate = "Calculate";
             public const string SetSenderRate = "SetSenderRate";
             public const string SetScotchCostEdited = "SetScotchCostEdited";
             public const string SetFactureCostEdited = "SetFactureCostEdited";
@@ -156,6 +164,14 @@ namespace Alicargo.Controllers
         {
             public readonly string id = "id";
             public readonly string tariffPerKg = "tariffPerKg";
+        }
+        static readonly ActionParamsClass_Calculate s_params_Calculate = new ActionParamsClass_Calculate();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Calculate CalculateParams { get { return s_params_Calculate; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Calculate
+        {
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_SetSenderRate s_params_SetSenderRate = new ActionParamsClass_SetSenderRate();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -263,6 +279,16 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tariffPerKg", tariffPerKg);
             SetTariffPerKgOverride(callInfo, id, tariffPerKg);
+            return callInfo;
+        }
+
+        partial void CalculateOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
+
+        public override System.Web.Mvc.HttpStatusCodeResult Calculate(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Calculate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            CalculateOverride(callInfo, id);
             return callInfo;
         }
 

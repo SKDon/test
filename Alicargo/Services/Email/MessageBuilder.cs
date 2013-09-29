@@ -1,10 +1,6 @@
-﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.Contract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 using Alicargo.ViewModels.Helpers;
@@ -16,55 +12,17 @@ namespace Alicargo.Services.Email
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly ILocalizationService _localizationService;
-		private readonly IUserRepository _userRepository;
 
-		public MessageBuilder(IUserRepository userRepository, ILocalizationService localizationService)
+
+		public MessageBuilder(ILocalizationService localizationService)
 		{
-			_userRepository = userRepository;
 			_localizationService = localizationService;
-		}
-
-		#region Helpers
-
-		public Recipient[] GetAdminEmails()
-		{
-			return _userRepository.GetByRole(RoleType.Admin)
-								  .Select(x => new Recipient
-								  {
-									  Culture = x.TwoLetterISOLanguageName,
-									  Email = x.Email
-								  })
-								  .ToArray();
-		}
-
-		public Recipient[] GetSenderEmails()
-		{
-			return _userRepository.GetByRole(RoleType.Sender)
-								  .Select(x => new Recipient
-								  {
-									  Culture = x.TwoLetterISOLanguageName,
-									  Email = x.Email
-								  })
-								  .ToArray();
-		}
-
-		public Recipient[] GetForwarderEmails()
-		{
-			return _userRepository.GetByRole(RoleType.Forwarder)
-								  .Select(x => new Recipient
-								  {
-									  Culture = x.TwoLetterISOLanguageName,
-									  Email = x.Email
-								  })
-								  .ToArray();
 		}
 
 		public string DefaultSubject
 		{
 			get { return Mail.Default_Subject; }
 		}
-
-		#endregion
 
 		#region Application
 
@@ -112,19 +70,19 @@ namespace Alicargo.Services.Email
 								 model.Volume,
 								 model.Weigth,
 								 model.Characteristic,
-								 ApplicationModelHelper.GetValueString(model.Value, (CurrencyType) model.CurrencyId, culture),
+								 ApplicationModelHelper.GetValueString(model.Value, (CurrencyType)model.CurrencyId, culture),
 								 model.AddressLoad,
 								 model.CountryName,
 								 model.WarehouseWorkingTime,
 								 model.TermsOfDelivery,
-								 _localizationService.GetMethodOfDelivery((MethodOfDelivery) model.MethodOfDeliveryId, culture),
+								 _localizationService.GetMethodOfDelivery((MethodOfDelivery)model.MethodOfDeliveryId, culture),
 								 model.TransitCity,
 								 model.TransitAddress,
 								 model.TransitRecipientName,
 								 model.TransitPhone,
 								 model.TransitWarehouseWorkingTime,
-								 _localizationService.GetMethodOfTransit((MethodOfTransit) model.TransitMethodOfTransitId, culture),
-								 _localizationService.GetDeliveryType((DeliveryType) model.TransitDeliveryTypeId, culture),
+								 _localizationService.GetMethodOfTransit((MethodOfTransit)model.TransitMethodOfTransitId, culture),
+								 _localizationService.GetDeliveryType((DeliveryType)model.TransitDeliveryTypeId, culture),
 								 model.AirWaybill,
 								 _localizationService.GetDate(model.AirWaybillDateOfDeparture, culture),
 								 _localizationService.GetDate(model.AirWaybillDateOfArrival, culture),
