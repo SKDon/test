@@ -10,15 +10,15 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationManager _applicationManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
-		private readonly ICalculationService _calculationService;
+		private readonly ICalculationPresenter _presenter;
 
 		public CalculationController(
 			IAwbUpdateManager awbUpdateManager,
-			ICalculationService calculationService, 
+			ICalculationPresenter presenter, 
 			IApplicationManager applicationManager)
 		{
 			_awbUpdateManager = awbUpdateManager;
-			_calculationService = calculationService;
+			_presenter = presenter;
 			_applicationManager = applicationManager;
 		}
 
@@ -31,7 +31,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin), HttpPost]
 		public virtual JsonResult List(int take, long skip)
 		{
-			var data = _calculationService.List(take, skip);
+			var data = _presenter.List(take, skip);
 
 			return Json(data);
 		}
@@ -39,7 +39,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin), HttpPost]
 		public virtual JsonResult Row(long id)
 		{
-			var data = _calculationService.Row(id);
+			var data = _presenter.Row(id);
 
 			return Json(data);
 		}

@@ -163,6 +163,7 @@
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
+    <Compile Include="Services\Calculation\CalculationService.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Services\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Abstract\IAwbUpdateManager.cs" />
     <Compile Include="Services\Abstract\IAwbPresenter.cs" />
+    <Compile Include="Services\Abstract\ICalculationPresenter.cs" />
     <Compile Include="Services\Abstract\ICalculationService.cs" />
     <Compile Include="Services\Abstract\ICarrierService.cs" />
     <Compile Include="Services\Abstract\IClientManager.cs" />
@@ -259,7 +261,7 @@
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationSenderManager.cs" />
-    <Compile Include="Services\Calculation\CalculationService.cs" />
+    <Compile Include="Services\Calculation\CalculationPresenter.cs" />
     <Compile Include="Services\Client\ClientPermissions.cs" />
     <Compile Include="Services\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />
