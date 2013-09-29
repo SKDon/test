@@ -19,13 +19,13 @@
 	white-space: nowrap;
 }
 
-.k-grid-custom-delete, .k-grid-custom-edit {
+.k-grid-custom-delete, .k-grid-custom-edit, .k-grid-custom-gear {
 	height: 25px;
 	line-height: 20px;
 	min-width: 0 !important;
 }
 
-	.k-grid-custom-delete span, .k-grid-custom-edit span {
+	.k-grid-custom-delete span, .k-grid-custom-edit span, .k-grid-custom-gear span {
 		background-image: url('../kendo/2013.2.716/Default/sprite.png');
 		background-repeat: no-repeat;
 		border-color: transparent;
@@ -43,4 +43,8 @@
 
 	.k-grid-custom-edit span {
 		background-position: -48px 0;
+	}
+
+	.k-grid-custom-gear span {
+		background-position: -141px -113px;
 	}

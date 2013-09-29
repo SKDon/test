@@ -99,15 +99,17 @@
 			if ($r.IsAdmin) {
 				c.push({
 					command: [{
-						name: "calculate",
-						text: $l.Pages_Calculate,
+						name: "custom-gear",
+						text: "&nbsp;",
+						title: $l.Pages_Calculate,
 						click: function (e) {
 							var tr = $(e.target).closest("tr");
 							var trData = this.dataItem(tr);
 							alert("implement " + trData.ApplicationId);
 						}
 					}],
-					title: "&nbsp;"
+					title: "&nbsp;",
+					width: "53px"
 				});
 			}
 
