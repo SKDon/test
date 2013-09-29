@@ -22,6 +22,9 @@ ALTER TABLE [dbo].[Application]
         [ForwarderCost]      MONEY NULL,
         [TariffPerKg]        MONEY NULL,
         [TransitCost]        MONEY NULL,
+		[ClassId]			 INT NULL,
+		[Certificate]		 NVARCHAR(MAX) NULL, 
+		[SenderRate]		 MONEY NULL,
 		[SenderId]           BIGINT NULL;
 
 
