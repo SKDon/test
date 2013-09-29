@@ -88,11 +88,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Air Way Bill.
+        ///   Looks up a localized string similar to Авианакладная.
         /// </summary>
-        public static string AirWayBill {
+        public static string AirWaybill {
             get {
-                return ResourceManager.GetString("AirWayBill", resourceCulture);
+                return ResourceManager.GetString("AirWaybill", resourceCulture);
             }
         }
         

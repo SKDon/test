@@ -312,7 +312,7 @@
   <data name="DateInStock" xml:space="preserve">
     <value>Data di ricevimento al magazzino</value>
   </data>
-  <data name="AirWayBill" xml:space="preserve">
+  <data name="AirWaybill" xml:space="preserve">
     <value>Air Way Bill</value>
   </data>
   <data name="DateOfCargoReceipt" xml:space="preserve">

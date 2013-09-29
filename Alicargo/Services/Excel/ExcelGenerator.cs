@@ -12,7 +12,7 @@ namespace Alicargo.Services.Excel
 {
 	internal sealed class ExcelGenerator : IExcelGenerator
 	{
-		public MemoryStream Get<T>(T[] rows) where T : ApplicationExcelRow
+		public MemoryStream Get<T>(T[] rows)
 		{
 			var properties = typeof(T).GetProperties();
 
@@ -25,6 +25,11 @@ namespace Alicargo.Services.Excel
 				DrawHeader(properties, ws);
 
 				DrawRows(rows, properties, ws);
+
+				for (var iCol = 1; iCol <= properties.Length; iCol++)
+				{
+					ws.Column(iCol).AutoFit();
+				}
 
 				pck.SaveAs(stream);
 			}
@@ -81,7 +86,6 @@ namespace Alicargo.Services.Excel
 		{
 			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
 			cell.Style.Font.Bold = true;
-			cell.AutoFitColumns();
 		}
 	}
 }

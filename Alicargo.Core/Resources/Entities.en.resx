@@ -123,7 +123,7 @@
   <data name="AddressLoad" xml:space="preserve">
     <value>Address of a cargo unload</value>
   </data>
-  <data name="AirWayBill" xml:space="preserve">
+  <data name="AirWaybill" xml:space="preserve">
     <value>Air waybill</value>
   </data>
   <data name="ArrivalAirport" xml:space="preserve">

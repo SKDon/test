@@ -312,8 +312,8 @@
   <data name="DateInStock" xml:space="preserve">
     <value>Дата поступления  на склад</value>
   </data>
-  <data name="AirWayBill" xml:space="preserve">
-    <value>Air Way Bill</value>
+  <data name="AirWaybill" xml:space="preserve">
+    <value>Авианакладная</value>
   </data>
   <data name="DateOfCargoReceipt" xml:space="preserve">
     <value>Получение груза</value>

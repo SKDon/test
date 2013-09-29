@@ -8,7 +8,7 @@ namespace Alicargo.ViewModels.AirWaybill
 	{
 		#region Data
 
-		[Required, DisplayNameLocalized(typeof(Entities), "AirWayBill")]
+		[Required, DisplayNameLocalized(typeof(Entities), "AirWaybill")]
 		public string Bill { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "ArrivalAirport")]

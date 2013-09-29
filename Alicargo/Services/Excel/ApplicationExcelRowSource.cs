@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Excel
 {
@@ -11,41 +11,46 @@ namespace Alicargo.Services.Excel
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationListItemMapper _itemMapper;
-		private readonly IIdentityService _identity;
 		private readonly IStateService _stateService;
 
-		public ApplicationExcelRowSource(IApplicationRepository applications, IStateService stateService,
-										 IApplicationListItemMapper itemMapper, IIdentityService identity)
+		public ApplicationExcelRowSource(
+			IApplicationRepository applications,
+			IStateService stateService,
+			IApplicationListItemMapper itemMapper)
 		{
 			_applications = applications;
 			_stateService = stateService;
 			_itemMapper = itemMapper;
-			_identity = identity;
 		}
 
-		public ApplicationExcelRow[] Get()
+		public AdminApplicationExcelRow[] GetAdminApplicationExcelRow()
+		{
+			var items = GetApplicationListItems();
+
+			return items.Select(x => new AdminApplicationExcelRow(x)).ToArray();
+		}
+
+		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow()
+		{
+			var items = GetApplicationListItems();
+
+			return items.Select(x => new ForwarderApplicationExcelRow(x)).ToArray();
+		}
+
+		public SenderApplicationExcelRow[] GetSenderApplicationExcelRow()
+		{
+			var items = GetApplicationListItems();
+
+			return items.Select(x => new SenderApplicationExcelRow(x)).ToArray();
+		}
+
+		private IEnumerable<ApplicationListItem> GetApplicationListItems()
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
 			var data = _applications.List(stateIds: stateIds, orders: new[] { new Order { Desc = true, OrderType = OrderType.Id } });
 
-			var items = _itemMapper.Map(data);
-
-			if (_identity.IsInRole(RoleType.Admin))
-			{
-				return items.Select(x => (ApplicationExcelRow)new AdminApplicationExcelRow(x)).ToArray();
-			}
-			if (_identity.IsInRole(RoleType.Sender))
-			{
-				return items.Select(x => (ApplicationExcelRow)new SenderApplicationExcelRow(x)).ToArray();
-
-			}
-			if (_identity.IsInRole(RoleType.Forwarder))
-			{
-				return items.Select(x => (ApplicationExcelRow)new ForwarderApplicationExcelRow(x)).ToArray();
-			}
-
-			throw new NotSupportedException("For other roles the method is not supported");
+			return _itemMapper.Map(data);
 		}
 	}
 }

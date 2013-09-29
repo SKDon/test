@@ -2,8 +2,13 @@
 
 namespace Alicargo.Services.Excel
 {
-	internal sealed class ForwarderApplicationExcelRow : ApplicationExcelRow
+	public sealed class ForwarderApplicationExcelRow
 	{
-		public ForwarderApplicationExcelRow(ApplicationListItem application) : base(application) { }
+		private readonly ApplicationListItem _application;
+
+		public ForwarderApplicationExcelRow(ApplicationListItem application)
+		{
+			_application = application;
+		}
 	}
 }

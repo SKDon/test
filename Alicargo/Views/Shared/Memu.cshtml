@@ -44,7 +44,7 @@
 	if (IdentityService.IsInRole(RoleType.Sender))
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
-		<li>@Html.ActionLink(Entities.AirWayBill, MVC.AirWaybill.Index())</li>
+		<li>@Html.ActionLink(Entities.AirWaybill, MVC.AirWaybill.Index())</li>
 	}
 }
 
@@ -52,7 +52,7 @@
 {
 	if (IdentityService.IsInRole(RoleType.Broker))
 	{
-		<li>@Html.ActionLink(Entities.AirWayBill, MVC.AirWaybill.Index())</li>
+		<li>@Html.ActionLink(Entities.AirWaybill, MVC.AirWaybill.Index())</li>
 	}
 }
 
