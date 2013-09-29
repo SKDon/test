@@ -112,6 +112,13 @@ namespace Alicargo.DataAccess.Repositories
 						  .ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 
+		public void SetCalculationExcel(long clientId, byte[] bytes)
+		{
+			var client = Context.Clients.First(x => x.Id == clientId);
+
+			client.CalculationFileData = bytes;
+		}
+
 		public static void CopyTo(ClientData @from, Client to)
 		{
 			to.Email = @from.Email;

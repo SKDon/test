@@ -66,15 +66,15 @@ namespace Alicargo.DataAccess.DbContext
     partial void InsertAirWaybill(AirWaybill instance);
     partial void UpdateAirWaybill(AirWaybill instance);
     partial void DeleteAirWaybill(AirWaybill instance);
-    partial void InsertClient(Client instance);
-    partial void UpdateClient(Client instance);
-    partial void DeleteClient(Client instance);
     partial void InsertAdmin(Admin instance);
     partial void UpdateAdmin(Admin instance);
     partial void DeleteAdmin(Admin instance);
     partial void InsertApplication(Application instance);
     partial void UpdateApplication(Application instance);
     partial void DeleteApplication(Application instance);
+    partial void InsertClient(Client instance);
+    partial void UpdateClient(Client instance);
+    partial void DeleteClient(Client instance);
     #endregion
 		
 		public AlicargoDataContext(string connection) : 
@@ -197,14 +197,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		public System.Data.Linq.Table<Client> Clients
-		{
-			get
-			{
-				return this.GetTable<Client>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Admin> Admins
 		{
 			get
@@ -218,6 +210,14 @@ namespace Alicargo.DataAccess.DbContext
 			get
 			{
 				return this.GetTable<Application>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Client> Clients
+		{
+			get
+			{
+				return this.GetTable<Client>();
 			}
 		}
 	}
@@ -1754,9 +1754,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _CarrierId;
 		
-		private EntitySet<Client> _Clients;
-		
 		private EntitySet<Application> _Applications;
+		
+		private EntitySet<Client> _Clients;
 		
 		private EntityRef<Carrier> _Carrier;
 		
@@ -1786,8 +1786,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public Transit()
 		{
-			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
+			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._Carrier = default(EntityRef<Carrier>);
 			OnCreated();
 		}
@@ -1976,19 +1976,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Clients", ThisKey="Id", OtherKey="TransitId")]
-		public EntitySet<Client> Clients
-		{
-			get
-			{
-				return this._Clients;
-			}
-			set
-			{
-				this._Clients.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Application", Storage="_Applications", ThisKey="Id", OtherKey="TransitId")]
 		public EntitySet<Application> Applications
 		{
@@ -1999,6 +1986,19 @@ namespace Alicargo.DataAccess.DbContext
 			set
 			{
 				this._Applications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Clients", ThisKey="Id", OtherKey="TransitId")]
+		public EntitySet<Client> Clients
+		{
+			get
+			{
+				return this._Clients;
+			}
+			set
+			{
+				this._Clients.Assign(value);
 			}
 		}
 		
@@ -2056,18 +2056,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void attach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transit = this;
-		}
-		
-		private void detach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transit = null;
-		}
-		
 		private void attach_Applications(Application entity)
 		{
 			this.SendPropertyChanging();
@@ -2075,6 +2063,18 @@ namespace Alicargo.DataAccess.DbContext
 		}
 		
 		private void detach_Applications(Application entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transit = null;
+		}
+		
+		private void attach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transit = this;
+		}
+		
+		private void detach_Clients(Client entity)
 		{
 			this.SendPropertyChanging();
 			entity.Transit = null;
@@ -2103,9 +2103,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntitySet<Sender> _Senders;
 		
-		private EntitySet<Client> _Clients;
-		
 		private EntitySet<Admin> _Admins;
+		
+		private EntitySet<Client> _Clients;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2128,8 +2128,8 @@ namespace Alicargo.DataAccess.DbContext
 			this._Brokers = new EntitySet<Broker>(new Action<Broker>(this.attach_Brokers), new Action<Broker>(this.detach_Brokers));
 			this._Forwarders = new EntitySet<Forwarder>(new Action<Forwarder>(this.attach_Forwarders), new Action<Forwarder>(this.detach_Forwarders));
 			this._Senders = new EntitySet<Sender>(new Action<Sender>(this.attach_Senders), new Action<Sender>(this.detach_Senders));
-			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._Admins = new EntitySet<Admin>(new Action<Admin>(this.attach_Admins), new Action<Admin>(this.detach_Admins));
+			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			OnCreated();
 		}
 		
@@ -2272,19 +2272,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Client", Storage="_Clients", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<Client> Clients
-		{
-			get
-			{
-				return this._Clients;
-			}
-			set
-			{
-				this._Clients.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Admin", Storage="_Admins", ThisKey="Id", OtherKey="UserId")]
 		public EntitySet<Admin> Admins
 		{
@@ -2295,6 +2282,19 @@ namespace Alicargo.DataAccess.DbContext
 			set
 			{
 				this._Admins.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Client", Storage="_Clients", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<Client> Clients
+		{
+			get
+			{
+				return this._Clients;
+			}
+			set
+			{
+				this._Clients.Assign(value);
 			}
 		}
 		
@@ -2354,18 +2354,6 @@ namespace Alicargo.DataAccess.DbContext
 			entity.User = null;
 		}
 		
-		private void attach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
 		private void attach_Admins(Admin entity)
 		{
 			this.SendPropertyChanging();
@@ -2373,6 +2361,18 @@ namespace Alicargo.DataAccess.DbContext
 		}
 		
 		private void detach_Admins(Admin entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Clients(Client entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -2693,7 +2693,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDFileData
 		{
 			get
@@ -2733,7 +2733,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDAdditionalFileData
 		{
 			get
@@ -2773,7 +2773,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary PackingFileData
 		{
 			get
@@ -2813,7 +2813,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary InvoiceFileData
 		{
 			get
@@ -2853,7 +2853,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary AWBFileData
 		{
 			get
@@ -3151,610 +3151,6 @@ namespace Alicargo.DataAccess.DbContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
-	public sealed partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _Id;
-		
-		private long _UserId;
-		
-		private string _Email;
-		
-		private string _Nic;
-		
-		private string _LegalEntity;
-		
-		private string _Contacts;
-		
-		private string _Phone;
-		
-		private string _INN;
-		
-		private string _KPP;
-		
-		private string _OGRN;
-		
-		private string _Bank;
-		
-		private string _BIC;
-		
-		private string _LegalAddress;
-		
-		private string _MailingAddress;
-		
-		private string _RS;
-		
-		private string _KS;
-		
-		private long _TransitId;
-		
-		private System.Data.Linq.Binary _ContractFileData;
-		
-		private string _ContractFileName;
-		
-		private EntitySet<Application> _Applications;
-		
-		private EntityRef<Transit> _Transit;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(long value);
-    partial void OnIdChanged();
-    partial void OnUserIdChanging(long value);
-    partial void OnUserIdChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnNicChanging(string value);
-    partial void OnNicChanged();
-    partial void OnLegalEntityChanging(string value);
-    partial void OnLegalEntityChanged();
-    partial void OnContactsChanging(string value);
-    partial void OnContactsChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnINNChanging(string value);
-    partial void OnINNChanged();
-    partial void OnKPPChanging(string value);
-    partial void OnKPPChanged();
-    partial void OnOGRNChanging(string value);
-    partial void OnOGRNChanged();
-    partial void OnBankChanging(string value);
-    partial void OnBankChanged();
-    partial void OnBICChanging(string value);
-    partial void OnBICChanged();
-    partial void OnLegalAddressChanging(string value);
-    partial void OnLegalAddressChanged();
-    partial void OnMailingAddressChanging(string value);
-    partial void OnMailingAddressChanged();
-    partial void OnRSChanging(string value);
-    partial void OnRSChanged();
-    partial void OnKSChanging(string value);
-    partial void OnKSChanged();
-    partial void OnTransitIdChanging(long value);
-    partial void OnTransitIdChanged();
-    partial void OnContractFileDataChanging(System.Data.Linq.Binary value);
-    partial void OnContractFileDataChanged();
-    partial void OnContractFileNameChanging(string value);
-    partial void OnContractFileNameChanged();
-    #endregion
-		
-		public Client()
-		{
-			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
-			this._Transit = default(EntityRef<Transit>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="BigInt NOT NULL")]
-		public long UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nic", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Nic
-		{
-			get
-			{
-				return this._Nic;
-			}
-			set
-			{
-				if ((this._Nic != value))
-				{
-					this.OnNicChanging(value);
-					this.SendPropertyChanging();
-					this._Nic = value;
-					this.SendPropertyChanged("Nic");
-					this.OnNicChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegalEntity", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string LegalEntity
-		{
-			get
-			{
-				return this._LegalEntity;
-			}
-			set
-			{
-				if ((this._LegalEntity != value))
-				{
-					this.OnLegalEntityChanging(value);
-					this.SendPropertyChanging();
-					this._LegalEntity = value;
-					this.SendPropertyChanged("LegalEntity");
-					this.OnLegalEntityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contacts", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Contacts
-		{
-			get
-			{
-				return this._Contacts;
-			}
-			set
-			{
-				if ((this._Contacts != value))
-				{
-					this.OnContactsChanging(value);
-					this.SendPropertyChanging();
-					this._Contacts = value;
-					this.SendPropertyChanged("Contacts");
-					this.OnContactsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(MAX)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_INN", DbType="NVarChar(MAX)")]
-		public string INN
-		{
-			get
-			{
-				return this._INN;
-			}
-			set
-			{
-				if ((this._INN != value))
-				{
-					this.OnINNChanging(value);
-					this.SendPropertyChanging();
-					this._INN = value;
-					this.SendPropertyChanged("INN");
-					this.OnINNChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KPP", DbType="NVarChar(MAX)")]
-		public string KPP
-		{
-			get
-			{
-				return this._KPP;
-			}
-			set
-			{
-				if ((this._KPP != value))
-				{
-					this.OnKPPChanging(value);
-					this.SendPropertyChanging();
-					this._KPP = value;
-					this.SendPropertyChanged("KPP");
-					this.OnKPPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OGRN", DbType="NVarChar(MAX)")]
-		public string OGRN
-		{
-			get
-			{
-				return this._OGRN;
-			}
-			set
-			{
-				if ((this._OGRN != value))
-				{
-					this.OnOGRNChanging(value);
-					this.SendPropertyChanging();
-					this._OGRN = value;
-					this.SendPropertyChanged("OGRN");
-					this.OnOGRNChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bank", DbType="NVarChar(MAX)")]
-		public string Bank
-		{
-			get
-			{
-				return this._Bank;
-			}
-			set
-			{
-				if ((this._Bank != value))
-				{
-					this.OnBankChanging(value);
-					this.SendPropertyChanging();
-					this._Bank = value;
-					this.SendPropertyChanged("Bank");
-					this.OnBankChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BIC", DbType="NVarChar(MAX)")]
-		public string BIC
-		{
-			get
-			{
-				return this._BIC;
-			}
-			set
-			{
-				if ((this._BIC != value))
-				{
-					this.OnBICChanging(value);
-					this.SendPropertyChanging();
-					this._BIC = value;
-					this.SendPropertyChanged("BIC");
-					this.OnBICChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegalAddress", DbType="NVarChar(MAX)")]
-		public string LegalAddress
-		{
-			get
-			{
-				return this._LegalAddress;
-			}
-			set
-			{
-				if ((this._LegalAddress != value))
-				{
-					this.OnLegalAddressChanging(value);
-					this.SendPropertyChanging();
-					this._LegalAddress = value;
-					this.SendPropertyChanged("LegalAddress");
-					this.OnLegalAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailingAddress", DbType="NVarChar(MAX)")]
-		public string MailingAddress
-		{
-			get
-			{
-				return this._MailingAddress;
-			}
-			set
-			{
-				if ((this._MailingAddress != value))
-				{
-					this.OnMailingAddressChanging(value);
-					this.SendPropertyChanging();
-					this._MailingAddress = value;
-					this.SendPropertyChanged("MailingAddress");
-					this.OnMailingAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RS", DbType="NVarChar(MAX)")]
-		public string RS
-		{
-			get
-			{
-				return this._RS;
-			}
-			set
-			{
-				if ((this._RS != value))
-				{
-					this.OnRSChanging(value);
-					this.SendPropertyChanging();
-					this._RS = value;
-					this.SendPropertyChanged("RS");
-					this.OnRSChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KS", DbType="NVarChar(MAX)")]
-		public string KS
-		{
-			get
-			{
-				return this._KS;
-			}
-			set
-			{
-				if ((this._KS != value))
-				{
-					this.OnKSChanging(value);
-					this.SendPropertyChanging();
-					this._KS = value;
-					this.SendPropertyChanged("KS");
-					this.OnKSChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransitId", DbType="BigInt NOT NULL")]
-		public long TransitId
-		{
-			get
-			{
-				return this._TransitId;
-			}
-			set
-			{
-				if ((this._TransitId != value))
-				{
-					if (this._Transit.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTransitIdChanging(value);
-					this.SendPropertyChanging();
-					this._TransitId = value;
-					this.SendPropertyChanged("TransitId");
-					this.OnTransitIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary ContractFileData
-		{
-			get
-			{
-				return this._ContractFileData;
-			}
-			set
-			{
-				if ((this._ContractFileData != value))
-				{
-					this.OnContractFileDataChanging(value);
-					this.SendPropertyChanging();
-					this._ContractFileData = value;
-					this.SendPropertyChanged("ContractFileData");
-					this.OnContractFileDataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractFileName", DbType="NVarChar(MAX)")]
-		public string ContractFileName
-		{
-			get
-			{
-				return this._ContractFileName;
-			}
-			set
-			{
-				if ((this._ContractFileName != value))
-				{
-					this.OnContractFileNameChanging(value);
-					this.SendPropertyChanging();
-					this._ContractFileName = value;
-					this.SendPropertyChanged("ContractFileName");
-					this.OnContractFileNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Application", Storage="_Applications", ThisKey="Id", OtherKey="ClientId")]
-		public EntitySet<Application> Applications
-		{
-			get
-			{
-				return this._Applications;
-			}
-			set
-			{
-				this._Applications.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Transit", ThisKey="TransitId", OtherKey="Id", IsForeignKey=true)]
-		public Transit Transit
-		{
-			get
-			{
-				return this._Transit.Entity;
-			}
-			set
-			{
-				Transit previousValue = this._Transit.Entity;
-				if (((previousValue != value) 
-							|| (this._Transit.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Transit.Entity = null;
-						previousValue.Clients.Remove(this);
-					}
-					this._Transit.Entity = value;
-					if ((value != null))
-					{
-						value.Clients.Add(this);
-						this._TransitId = value.Id;
-					}
-					else
-					{
-						this._TransitId = default(long);
-					}
-					this.SendPropertyChanged("Transit");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Client", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Clients.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Clients.Add(this);
-						this._UserId = value.Id;
-					}
-					else
-					{
-						this._UserId = default(long);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		private void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		private void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Applications(Application entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_Applications(Application entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
 	public sealed partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4042,13 +3438,13 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntityRef<AirWaybill> _AirWaybill;
 		
-		private EntityRef<Client> _Client;
-		
 		private EntityRef<Country> _Country;
 		
 		private EntityRef<State> _State;
 		
 		private EntityRef<Transit> _Transit;
+		
+		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4163,10 +3559,10 @@ namespace Alicargo.DataAccess.DbContext
 		public Application()
 		{
 			this._AirWaybill = default(EntityRef<AirWaybill>);
-			this._Client = default(EntityRef<Client>);
 			this._Country = default(EntityRef<Country>);
 			this._State = default(EntityRef<State>);
 			this._Transit = default(EntityRef<Transit>);
+			this._Client = default(EntityRef<Client>);
 			OnCreated();
 		}
 		
@@ -4230,7 +3626,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary InvoiceFileData
 		{
 			get
@@ -4270,7 +3666,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SwiftFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SwiftFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary SwiftFileData
 		{
 			get
@@ -4310,7 +3706,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryBillFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryBillFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary DeliveryBillFileData
 		{
 			get
@@ -4350,7 +3746,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Torg12FileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Torg12FileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary Torg12FileData
 		{
 			get
@@ -4390,7 +3786,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CPFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CPFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary CPFileData
 		{
 			get
@@ -4430,7 +3826,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary PackingFileData
 		{
 			get
@@ -5264,40 +4660,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Application", Storage="_Client", ThisKey="ClientId", OtherKey="Id", IsForeignKey=true)]
-		public Client Client
-		{
-			get
-			{
-				return this._Client.Entity;
-			}
-			set
-			{
-				Client previousValue = this._Client.Entity;
-				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Client.Entity = null;
-						previousValue.Applications.Remove(this);
-					}
-					this._Client.Entity = value;
-					if ((value != null))
-					{
-						value.Applications.Add(this);
-						this._ClientId = value.Id;
-					}
-					else
-					{
-						this._ClientId = default(long);
-					}
-					this.SendPropertyChanged("Client");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_Application", Storage="_Country", ThisKey="CountryId", OtherKey="Id", IsForeignKey=true)]
 		public Country Country
 		{
@@ -5400,6 +4762,40 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Application", Storage="_Client", ThisKey="ClientId", OtherKey="Id", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.Applications.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.Applications.Add(this);
+						this._ClientId = value.Id;
+					}
+					else
+					{
+						this._ClientId = default(long);
+					}
+					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -5418,6 +4814,634 @@ namespace Alicargo.DataAccess.DbContext
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
+	public sealed partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _Id;
+		
+		private long _UserId;
+		
+		private string _Email;
+		
+		private string _Nic;
+		
+		private string _LegalEntity;
+		
+		private string _Contacts;
+		
+		private string _Phone;
+		
+		private string _INN;
+		
+		private string _KPP;
+		
+		private string _OGRN;
+		
+		private string _Bank;
+		
+		private string _BIC;
+		
+		private string _LegalAddress;
+		
+		private string _MailingAddress;
+		
+		private string _RS;
+		
+		private string _KS;
+		
+		private long _TransitId;
+		
+		private System.Data.Linq.Binary _ContractFileData;
+		
+		private string _ContractFileName;
+		
+		private System.Data.Linq.Binary _CalculationFileData;
+		
+		private EntitySet<Application> _Applications;
+		
+		private EntityRef<Transit> _Transit;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(long value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(long value);
+    partial void OnUserIdChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnNicChanging(string value);
+    partial void OnNicChanged();
+    partial void OnLegalEntityChanging(string value);
+    partial void OnLegalEntityChanged();
+    partial void OnContactsChanging(string value);
+    partial void OnContactsChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnINNChanging(string value);
+    partial void OnINNChanged();
+    partial void OnKPPChanging(string value);
+    partial void OnKPPChanged();
+    partial void OnOGRNChanging(string value);
+    partial void OnOGRNChanged();
+    partial void OnBankChanging(string value);
+    partial void OnBankChanged();
+    partial void OnBICChanging(string value);
+    partial void OnBICChanged();
+    partial void OnLegalAddressChanging(string value);
+    partial void OnLegalAddressChanged();
+    partial void OnMailingAddressChanging(string value);
+    partial void OnMailingAddressChanged();
+    partial void OnRSChanging(string value);
+    partial void OnRSChanged();
+    partial void OnKSChanging(string value);
+    partial void OnKSChanged();
+    partial void OnTransitIdChanging(long value);
+    partial void OnTransitIdChanged();
+    partial void OnContractFileDataChanging(System.Data.Linq.Binary value);
+    partial void OnContractFileDataChanged();
+    partial void OnContractFileNameChanging(string value);
+    partial void OnContractFileNameChanged();
+    partial void OnCalculationFileDataChanging(System.Data.Linq.Binary value);
+    partial void OnCalculationFileDataChanged();
+    #endregion
+		
+		public Client()
+		{
+			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
+			this._Transit = default(EntityRef<Transit>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="BigInt NOT NULL")]
+		public long UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nic", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Nic
+		{
+			get
+			{
+				return this._Nic;
+			}
+			set
+			{
+				if ((this._Nic != value))
+				{
+					this.OnNicChanging(value);
+					this.SendPropertyChanging();
+					this._Nic = value;
+					this.SendPropertyChanged("Nic");
+					this.OnNicChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegalEntity", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string LegalEntity
+		{
+			get
+			{
+				return this._LegalEntity;
+			}
+			set
+			{
+				if ((this._LegalEntity != value))
+				{
+					this.OnLegalEntityChanging(value);
+					this.SendPropertyChanging();
+					this._LegalEntity = value;
+					this.SendPropertyChanged("LegalEntity");
+					this.OnLegalEntityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contacts", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Contacts
+		{
+			get
+			{
+				return this._Contacts;
+			}
+			set
+			{
+				if ((this._Contacts != value))
+				{
+					this.OnContactsChanging(value);
+					this.SendPropertyChanging();
+					this._Contacts = value;
+					this.SendPropertyChanged("Contacts");
+					this.OnContactsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(MAX)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_INN", DbType="NVarChar(MAX)")]
+		public string INN
+		{
+			get
+			{
+				return this._INN;
+			}
+			set
+			{
+				if ((this._INN != value))
+				{
+					this.OnINNChanging(value);
+					this.SendPropertyChanging();
+					this._INN = value;
+					this.SendPropertyChanged("INN");
+					this.OnINNChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KPP", DbType="NVarChar(MAX)")]
+		public string KPP
+		{
+			get
+			{
+				return this._KPP;
+			}
+			set
+			{
+				if ((this._KPP != value))
+				{
+					this.OnKPPChanging(value);
+					this.SendPropertyChanging();
+					this._KPP = value;
+					this.SendPropertyChanged("KPP");
+					this.OnKPPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OGRN", DbType="NVarChar(MAX)")]
+		public string OGRN
+		{
+			get
+			{
+				return this._OGRN;
+			}
+			set
+			{
+				if ((this._OGRN != value))
+				{
+					this.OnOGRNChanging(value);
+					this.SendPropertyChanging();
+					this._OGRN = value;
+					this.SendPropertyChanged("OGRN");
+					this.OnOGRNChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bank", DbType="NVarChar(MAX)")]
+		public string Bank
+		{
+			get
+			{
+				return this._Bank;
+			}
+			set
+			{
+				if ((this._Bank != value))
+				{
+					this.OnBankChanging(value);
+					this.SendPropertyChanging();
+					this._Bank = value;
+					this.SendPropertyChanged("Bank");
+					this.OnBankChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BIC", DbType="NVarChar(MAX)")]
+		public string BIC
+		{
+			get
+			{
+				return this._BIC;
+			}
+			set
+			{
+				if ((this._BIC != value))
+				{
+					this.OnBICChanging(value);
+					this.SendPropertyChanging();
+					this._BIC = value;
+					this.SendPropertyChanged("BIC");
+					this.OnBICChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegalAddress", DbType="NVarChar(MAX)")]
+		public string LegalAddress
+		{
+			get
+			{
+				return this._LegalAddress;
+			}
+			set
+			{
+				if ((this._LegalAddress != value))
+				{
+					this.OnLegalAddressChanging(value);
+					this.SendPropertyChanging();
+					this._LegalAddress = value;
+					this.SendPropertyChanged("LegalAddress");
+					this.OnLegalAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailingAddress", DbType="NVarChar(MAX)")]
+		public string MailingAddress
+		{
+			get
+			{
+				return this._MailingAddress;
+			}
+			set
+			{
+				if ((this._MailingAddress != value))
+				{
+					this.OnMailingAddressChanging(value);
+					this.SendPropertyChanging();
+					this._MailingAddress = value;
+					this.SendPropertyChanged("MailingAddress");
+					this.OnMailingAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RS", DbType="NVarChar(MAX)")]
+		public string RS
+		{
+			get
+			{
+				return this._RS;
+			}
+			set
+			{
+				if ((this._RS != value))
+				{
+					this.OnRSChanging(value);
+					this.SendPropertyChanging();
+					this._RS = value;
+					this.SendPropertyChanged("RS");
+					this.OnRSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KS", DbType="NVarChar(MAX)")]
+		public string KS
+		{
+			get
+			{
+				return this._KS;
+			}
+			set
+			{
+				if ((this._KS != value))
+				{
+					this.OnKSChanging(value);
+					this.SendPropertyChanging();
+					this._KS = value;
+					this.SendPropertyChanged("KS");
+					this.OnKSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransitId", DbType="BigInt NOT NULL")]
+		public long TransitId
+		{
+			get
+			{
+				return this._TransitId;
+			}
+			set
+			{
+				if ((this._TransitId != value))
+				{
+					if (this._Transit.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTransitIdChanging(value);
+					this.SendPropertyChanging();
+					this._TransitId = value;
+					this.SendPropertyChanged("TransitId");
+					this.OnTransitIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary ContractFileData
+		{
+			get
+			{
+				return this._ContractFileData;
+			}
+			set
+			{
+				if ((this._ContractFileData != value))
+				{
+					this.OnContractFileDataChanging(value);
+					this.SendPropertyChanging();
+					this._ContractFileData = value;
+					this.SendPropertyChanged("ContractFileData");
+					this.OnContractFileDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractFileName", DbType="NVarChar(MAX)")]
+		public string ContractFileName
+		{
+			get
+			{
+				return this._ContractFileName;
+			}
+			set
+			{
+				if ((this._ContractFileName != value))
+				{
+					this.OnContractFileNameChanging(value);
+					this.SendPropertyChanging();
+					this._ContractFileName = value;
+					this.SendPropertyChanged("ContractFileName");
+					this.OnContractFileNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CalculationFileData
+		{
+			get
+			{
+				return this._CalculationFileData;
+			}
+			set
+			{
+				if ((this._CalculationFileData != value))
+				{
+					this.OnCalculationFileDataChanging(value);
+					this.SendPropertyChanging();
+					this._CalculationFileData = value;
+					this.SendPropertyChanged("CalculationFileData");
+					this.OnCalculationFileDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Application", Storage="_Applications", ThisKey="Id", OtherKey="ClientId")]
+		public EntitySet<Application> Applications
+		{
+			get
+			{
+				return this._Applications;
+			}
+			set
+			{
+				this._Applications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Transit", ThisKey="TransitId", OtherKey="Id", IsForeignKey=true)]
+		public Transit Transit
+		{
+			get
+			{
+				return this._Transit.Entity;
+			}
+			set
+			{
+				Transit previousValue = this._Transit.Entity;
+				if (((previousValue != value) 
+							|| (this._Transit.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Transit.Entity = null;
+						previousValue.Clients.Remove(this);
+					}
+					this._Transit.Entity = value;
+					if ((value != null))
+					{
+						value.Clients.Add(this);
+						this._TransitId = value.Id;
+					}
+					else
+					{
+						this._TransitId = default(long);
+					}
+					this.SendPropertyChanged("Transit");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Client", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Clients.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Clients.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(long);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		private void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		private void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Applications(Application entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_Applications(Application entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
 		}
 	}
 }

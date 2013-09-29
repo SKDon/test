@@ -89,8 +89,8 @@
       <Column Name="MethodOfTransitId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DeliveryTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CarrierId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="Transit_Client" Member="Clients" ThisKey="Id" OtherKey="TransitId" Type="Client" />
       <Association Name="Transit_Application" Member="Applications" ThisKey="Id" OtherKey="TransitId" Type="Application" />
+      <Association Name="Transit_Client" Member="Clients" ThisKey="Id" OtherKey="TransitId" Type="Client" />
       <Association Name="Carrier_Transit" Member="Carrier" ThisKey="CarrierId" OtherKey="Id" Type="Carrier" IsForeignKey="true" />
     </Type>
   </Table>
@@ -104,8 +104,8 @@
       <Association Name="User_Broker" Member="Brokers" ThisKey="Id" OtherKey="UserId" Type="Broker" />
       <Association Name="User_Forwarder" Member="Forwarders" ThisKey="Id" OtherKey="UserId" Type="Forwarder" />
       <Association Name="User_Sender" Member="Senders" ThisKey="Id" OtherKey="UserId" Type="Sender" />
-      <Association Name="User_Client" Member="Clients" ThisKey="Id" OtherKey="UserId" Type="Client" />
       <Association Name="User_Admin" Member="Admins" ThisKey="Id" OtherKey="UserId" Type="Admin" />
+      <Association Name="User_Client" Member="Clients" ThisKey="Id" OtherKey="UserId" Type="Client" />
     </Type>
   </Table>
   <Table Name="dbo.AirWaybill" Member="AirWaybills">
@@ -139,32 +139,6 @@
       <Association Name="AirWaybill_Application" Member="Applications" ThisKey="Id" OtherKey="AirWaybillId" Type="Application" />
       <Association Name="Broker_AirWaybill" Member="Broker" ThisKey="BrokerId" OtherKey="Id" Type="Broker" IsForeignKey="true" />
       <Association Name="State_AirWaybill" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Client" Member="Clients">
-    <Type Name="Client" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="Nic" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="LegalEntity" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Contacts" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="INN" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="KPP" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="OGRN" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Bank" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="BIC" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="LegalAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="MailingAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="RS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="KS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="TransitId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="ContractFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="ContractFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
-      <Association Name="Transit_Client" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
-      <Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Admin" Member="Admins">
@@ -231,10 +205,37 @@
       <Column Name="SenderRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />
-      <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
       <Association Name="Country_Application" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
       <Association Name="State_Application" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
       <Association Name="Transit_Application" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
+      <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Client" Member="Clients">
+    <Type Name="Client" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="Nic" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="LegalEntity" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Contacts" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="INN" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="KPP" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OGRN" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Bank" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="BIC" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LegalAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MailingAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="KS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TransitId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ContractFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContractFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CalculationFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
+      <Association Name="Transit_Client" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
+      <Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>
