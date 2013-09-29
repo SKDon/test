@@ -636,7 +636,8 @@
     <Content Include="Deploy\Install\backup-db.ps1" />
     <Content Include="Deploy\Install\Sql\init-db.ps1" />
     <Content Include="Deploy\backup-db-alicargo_1_1.ps1" />
-    <Content Include="Deploy\Update\prepare.ps1" />
+    <Content Include="Deploy\deploy.ps1" />
+    <Content Include="Deploy\Update\update.ps1" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
