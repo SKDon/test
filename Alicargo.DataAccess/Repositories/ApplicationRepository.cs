@@ -216,12 +216,12 @@ namespace Alicargo.DataAccess.Repositories
 				Value = x.Value,
 				CurrencyId = x.CurrencyId,
 				AirWaybillId = x.AirWaybillId,
-				FactureCost = x.FactureCost,
+				FactureCost = x.FactureCostEdited ?? x.FactureCost,
 				ForwarderCost = x.ForwarderCost,
-				ScotchCost = x.ScotchCost,
+				ScotchCost = x.ScotchCostEdited ?? x.ScotchCost,
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,
-				WithdrawCost = x.WithdrawCost
+				WithdrawCost = x.WithdrawCostEdited ?? x.WithdrawCost
 			}).ToArray();
 		}
 
