@@ -150,6 +150,9 @@ namespace Alicargo.DataAccess.Repositories
 			to.FactureCostEdited = @from.FactureCostEdited;
 			to.WithdrawCostEdited = @from.WithdrawCostEdited;
 			to.ScotchCostEdited = @from.ScotchCostEdited;
+			to.SenderRate = @from.SenderRate;
+			//to.ClassId = from.
+			// to.Certificate = 
 
 			// todo: 3.0. separate repository for files
 			FileDataHelper.SetFile(invoiceFile, @from.InvoiceFileName,

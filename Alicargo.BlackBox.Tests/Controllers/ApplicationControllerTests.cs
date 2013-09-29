@@ -20,9 +20,9 @@ namespace Alicargo.BlackBox.Tests.Controllers
 	{
 		private IApplicationRepository _applicationRepository;
 		private IClientRepository _clientRepository;
-		private ApplicationController _controller;
-		private Fixture _fixture;		
 		private CompositionHelper _context;
+		private ApplicationController _controller;
+		private Fixture _fixture;
 
 
 		[TestInitialize]
@@ -66,9 +66,9 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var old = _applicationRepository.List(1).First();
 
 			var result = _controller.Edit(old.Id, model, new CarrierSelectModel
-				{
-					NewCarrierName = newCarrierName
-				}, transitModel);
+			{
+				NewCarrierName = newCarrierName
+			}, transitModel);
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 			var data = _applicationRepository.Get(old.Id);
@@ -85,9 +85,9 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var newCarrierName = _fixture.Create<string>();
 
 			var result = _controller.Create(clientData.Id, model, new CarrierSelectModel
-				{
-					NewCarrierName = newCarrierName
-				}, transitModel);
+			{
+				NewCarrierName = newCarrierName
+			}, transitModel);
 
 			Validate(result, clientData, model, transitModel, newCarrierName);
 		}
@@ -98,18 +98,18 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			result.Should().BeOfType<RedirectToRouteResult>();
 
 			var data = _applicationRepository.List(1,
-				stateIds: new[]
-                    {
-                        TestConstants.DefaultStateId
-                    },
-				orders: new[]
-                    {
-                        new Order
-                            {
-                                Desc = true,
-                                OrderType = OrderType.Id
-                            }
-                    }, clientId: clientData.Id).First();
+												   stateIds: new[]
+												   {
+													   TestConstants.DefaultStateId
+												   },
+												   orders: new[]
+												   {
+													   new Order
+													   {
+														   Desc = true,
+														   OrderType = OrderType.Id
+													   }
+												   }, clientId: clientData.Id).First();
 
 			Validate(clientData, model, transitModel, newCarrierName, data);
 		}
@@ -117,7 +117,13 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
 									 string newCarrierName, ApplicationListItemData data)
 		{
-			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
+			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
+															   .Excluding(x => x.FactureCost)
+															   .Excluding(x => x.WithdrawCost)
+															   .Excluding(x => x.ScotchCost));
+			data.FactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
+			data.WithdrawCost.ShouldBeEquivalentTo(model.WithdrawCostEdited);
+			data.ScotchCost.ShouldBeEquivalentTo(model.ScotchCostEdited);
 			data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);
 			data.ClientLegalEntity.ShouldBeEquivalentTo(clientData.LegalEntity);
 			data.ClientNic.ShouldBeEquivalentTo(clientData.Nic);
