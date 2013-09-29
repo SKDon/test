@@ -43,7 +43,7 @@
 		serverGrouping: true,
 		error: $a.ShowError
 	};
-	
+
 
 	var detailExpand = function (e) {
 		var data = $a.Application.GetGrid().dataItem(e.masterRow);
@@ -82,7 +82,7 @@
 		$(".delete-application", e.detailRow).unbind("click");
 		$(".AirWaybill-select", e.detailRow).unbind("change");
 	};
-	
+
 	var settings = {
 		dataSource: dataSource,
 		filterable: false,
@@ -90,18 +90,23 @@
 		groupable: false,
 		pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
 		resizable: true,
-		detailTemplate: kendo.template($("#application-grid-details").html()),
-		detailExpand: detailExpand,
-		detailCollapse: detailCollapse,
 		columns: $a.Application.GetColumns()
 	};
+
+	if (!$r.IsForwarder) {
+		$.extend(settings, {
+			detailTemplate: kendo.template($("#application-grid-details").html()),
+			detailExpand: detailExpand,
+			detailCollapse: detailCollapse
+		});
+	}
 
 	if (!$r.IsClient) {
 		$.extend(dataSource, {
 			group: { field: "AirWaybill", dir: "asc" },
 			groupable: true
 		});
-	}	
+	}
 
 	if (!$r.IsClient && !$r.IsBroker)
 		$.extend(settings, {

@@ -13,7 +13,6 @@ namespace Alicargo.Services.Excel
 			_application = application;
 		}
 
-
 		[DisplayNameLocalized(typeof(Entities), "CreationTimestamp")]
 		public string CreationTimestampLocalString
 		{
