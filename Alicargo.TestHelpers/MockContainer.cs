@@ -10,7 +10,7 @@ using Ploeh.AutoFixture.Dsl;
 
 namespace Alicargo.TestHelpers
 {
-	public /*sealed*/ class MockContainer
+	public sealed class MockContainer
 	{
 		private readonly MockBehavior _mockBehavior;
 

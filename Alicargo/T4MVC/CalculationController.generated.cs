@@ -61,6 +61,12 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.HttpStatusCodeResult SetSenderRate()
+        {
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetSenderRate);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.HttpStatusCodeResult SetScotchCostEdited()
         {
             return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetScotchCostEdited);
@@ -103,6 +109,7 @@ namespace Alicargo.Controllers
             public readonly string List = "List";
             public readonly string Row = "Row";
             public readonly string SetTariffPerKg = "SetTariffPerKg";
+            public readonly string SetSenderRate = "SetSenderRate";
             public readonly string SetScotchCostEdited = "SetScotchCostEdited";
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
             public readonly string SetWithdrawCostEdited = "SetWithdrawCostEdited";
@@ -116,6 +123,7 @@ namespace Alicargo.Controllers
             public const string List = "List";
             public const string Row = "Row";
             public const string SetTariffPerKg = "SetTariffPerKg";
+            public const string SetSenderRate = "SetSenderRate";
             public const string SetScotchCostEdited = "SetScotchCostEdited";
             public const string SetFactureCostEdited = "SetFactureCostEdited";
             public const string SetWithdrawCostEdited = "SetWithdrawCostEdited";
@@ -148,6 +156,15 @@ namespace Alicargo.Controllers
         {
             public readonly string id = "id";
             public readonly string tariffPerKg = "tariffPerKg";
+        }
+        static readonly ActionParamsClass_SetSenderRate s_params_SetSenderRate = new ActionParamsClass_SetSenderRate();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetSenderRate SetSenderRateParams { get { return s_params_SetSenderRate; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetSenderRate
+        {
+            public readonly string id = "id";
+            public readonly string senderRate = "senderRate";
         }
         static readonly ActionParamsClass_SetScotchCostEdited s_params_SetScotchCostEdited = new ActionParamsClass_SetScotchCostEdited();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -246,6 +263,17 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tariffPerKg", tariffPerKg);
             SetTariffPerKgOverride(callInfo, id, tariffPerKg);
+            return callInfo;
+        }
+
+        partial void SetSenderRateOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, decimal? senderRate);
+
+        public override System.Web.Mvc.HttpStatusCodeResult SetSenderRate(long id, decimal? senderRate)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetSenderRate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "senderRate", senderRate);
+            SetSenderRateOverride(callInfo, id, senderRate);
             return callInfo;
         }
 

@@ -43,9 +43,9 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Edit()
+        public virtual System.Web.Mvc.ViewResult Edit()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -140,11 +140,11 @@ namespace Alicargo.Controllers
     {
         public T4MVC_TransitController() : base(Dummy.Instance) { }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
-        public override System.Web.Mvc.ActionResult Edit(long id)
+        public override System.Web.Mvc.ViewResult Edit(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             EditOverride(callInfo, id);
             return callInfo;

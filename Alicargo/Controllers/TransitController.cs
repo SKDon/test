@@ -24,7 +24,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet, Access(RoleType.Client)]
-		public virtual ActionResult Edit(long id)
+		public virtual ViewResult Edit(long id)
 		{
 			var transit = _transitService.Get(id).First();
 

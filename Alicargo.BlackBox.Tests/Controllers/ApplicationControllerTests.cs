@@ -1,22 +1,15 @@
-﻿using System.Data.SqlClient;
-using System.Linq;
-using System.Transactions;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Alicargo.App_Start;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Controllers;
-using Alicargo.DataAccess.DbContext;
-using Alicargo.Services.Abstract;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Ninject;
 using Ploeh.AutoFixture;
 
@@ -27,60 +20,27 @@ namespace Alicargo.BlackBox.Tests.Controllers
 	{
 		private IApplicationRepository _applicationRepository;
 		private IClientRepository _clientRepository;
-		private SqlConnection _connection;
 		private ApplicationController _controller;
-		private Fixture _fixture;
-		private StandardKernel _kernel;
-		private TransactionScope _transactionScope;
-		private IUnitOfWork _unitOfWork;
+		private Fixture _fixture;		
+		private CompositionHelper _context;
+
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_kernel = new StandardKernel();
 			_fixture = new Fixture();
+			_context = new CompositionHelper(Settings.Default.MainConnectionString);
+			_context.Kernel.Bind<ApplicationController>().ToSelf();
 
-			_connection = new SqlConnection(Settings.Default.MainConnectionString);
-			_connection.Open();
-			_transactionScope = new TransactionScope();
-			_unitOfWork = new UnitOfWork(_connection);
-
-			BindServices();
-			BindIdentityService();
-
-			_controller = _kernel.Get<ApplicationController>();
-			_clientRepository = _kernel.Get<IClientRepository>();
-			_applicationRepository = _kernel.Get<IApplicationRepository>();
-		}
-
-		private void BindIdentityService()
-		{
-			var identityService = new Mock<IIdentityService>(MockBehavior.Strict);
-
-			identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
-			identityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
-			identityService.Setup(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
-
-			_kernel.Rebind<IIdentityService>().ToConstant(identityService.Object).InSingletonScope();
-		}
-
-		private void BindServices()
-		{
-			CompositionRoot.BindDataAccess(_kernel, null);
-
-			_kernel.Rebind<IUnitOfWork>().ToConstant(_unitOfWork).InSingletonScope();
-
-			CompositionRoot.BindServices(_kernel);
-
-			_kernel.Bind<ApplicationController>().ToSelf();
+			_controller = _context.Kernel.Get<ApplicationController>();
+			_clientRepository = _context.Kernel.Get<IClientRepository>();
+			_applicationRepository = _context.Kernel.Get<IApplicationRepository>();
 		}
 
 		[TestCleanup]
 		public void TestCleanup()
 		{
-			_transactionScope.Dispose();
-			_connection.Close();
-			_kernel.Dispose();
+			_context.Dispose();
 		}
 
 		[TestMethod, TestCategory("black-box")]

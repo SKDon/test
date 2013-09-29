@@ -1,13 +1,9 @@
-﻿using Alicargo.App_Start;
-using Alicargo.BlackBox.Tests.Properties;
-using Alicargo.Contracts.Enums;
+﻿using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers;
 using Alicargo.DataAccess.DbContext;
-using Alicargo.Services.Abstract;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Ninject;
 using Ploeh.AutoFixture;
 
@@ -16,58 +12,41 @@ namespace Alicargo.BlackBox.Tests.Controllers
 	[TestClass]
 	public class ClientControllerTests
 	{
-		private WebTestContext _context;
 		private AlicargoDataContext _db;
 
-		private StandardKernel _kernel;
 		private ClientController _controller;
+		private CompositionHelper _composition;
+		private MockContainer _mock;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.AdminLogin, Settings.Default.AdminPassword);
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
 
-			_kernel = new StandardKernel();
-
-			BindServices();
-
-			BindIdentityService();
-
-			_controller = _kernel.Get<ClientController>();
+			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
+			_mock = new MockContainer();
+			_controller = _composition.Kernel.Get<ClientController>();
 		}
 
-		private void BindIdentityService()
+		[TestCleanup]
+		public void TestCleanup()
 		{
-			var identityService = new Mock<IIdentityService>(MockBehavior.Strict);
-
-			identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
-			identityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
-			identityService.Setup(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
-
-			_kernel.Rebind<IIdentityService>().ToConstant(identityService.Object);
-		}
-
-		private void BindServices()
-		{
-			CompositionRoot.BindServices(_kernel);
-			CompositionRoot.BindDataAccess(_kernel, Settings.Default.MainConnectionString);
-			_kernel.Bind<ApplicationController>().ToSelf();
+			_composition.Dispose();
 		}
 
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Create()
 		{
-			var password = _context.Create<string>();
+			var password = _mock.Create<string>();
 
-			var authenticationModel = _context.Build<AuthenticationModel>()
+			var authenticationModel = _mock.Build<AuthenticationModel>()
 											  .With(x => x.ConfirmPassword, password)
 											  .With(x => x.NewPassword, password)
 											  .Create();
 
-			var model = _context.Build<ClientModel>().Create();
-			var transitModel = _context.Build<TransitEditModel>().Create();
-			var carrierModel = _context.Build<CarrierSelectModel>().Create();
+			var model = _mock.Build<ClientModel>().Create();
+			var transitModel = _mock.Build<TransitEditModel>().Create();
+			var carrierModel = _mock.Build<CarrierSelectModel>().Create();
 
 			var result = _controller.Create(model, transitModel, carrierModel, authenticationModel);
 

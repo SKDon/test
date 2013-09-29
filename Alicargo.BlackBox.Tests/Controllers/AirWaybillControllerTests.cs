@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Linq;
-using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using Alicargo.BlackBox.Tests.Properties;
+using Alicargo.Controllers;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
@@ -13,6 +10,7 @@ using Alicargo.ViewModels.AirWaybill;
 using EmitMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ninject;
 using Ploeh.AutoFixture;
 
 namespace Alicargo.BlackBox.Tests.Controllers
@@ -23,16 +21,25 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private const long FirstStateId = 7;
 		private const long DefaultStateId = 1;
 
-		private HttpClient _client;
 		private AlicargoDataContext _db;
-		private WebTestContext _context;
+		private CompositionHelper _composition;
+		private AirWaybillController _controller;
+		private MockContainer _mock;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
-			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.AdminLogin, Settings.Default.AdminPassword);
-			_client = _context.HttpClient;
+
+			_mock = new MockContainer();
+			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
+			_controller = _composition.Kernel.Get<AirWaybillController>();
+		}
+
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_composition.Dispose();
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -40,25 +47,20 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		{
 			var entity = _db.AirWaybills.First();
 
-			var model = _context
+			var model = _mock
 				.Build<AwbAdminModel>()
 				.With(x => x.BrokerId, entity.BrokerId)
 				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.Create();
 
-			_client.PostAsJsonAsync("AirWaybill/Edit/", new { entity.Id, model })
-				.ContinueWith(task =>
-				{
-					Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
+			_controller.Edit(entity.Id, model);
 
-					_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
+			_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
 
-					var actual = Map(entity);
+			var actual = Map(entity);
 
-					model.ShouldBeEquivalentTo(actual);
-				})
-				.Wait();
+			model.ShouldBeEquivalentTo(actual);
 		}
 
 		private static AwbAdminModel Map(AirWaybill entity)
@@ -84,7 +86,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			var count = _db.AirWaybills.Count();
 
-			var model = _context
+			var model = _mock
 				.Build<AwbAdminModel>()
 				.Without(x => x.GTD)
 				.With(x => x.BrokerId, broker.Id)
@@ -92,26 +94,20 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
 				.Create();
 
-			_client.PostAsJsonAsync("AirWaybill/Create/" + applicationData.Id, model)
-				.ContinueWith(task =>
-				{
-					if (task.Result.StatusCode != HttpStatusCode.OK) { Console.WriteLine(task.Result.Content.ReadAsStringAsync().Result); }
-					Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
+			_controller.Create(applicationData.Id, model);
 
-					var entity = _db.AirWaybills.Skip(count).Take(1).First();
+			var entity = _db.AirWaybills.Skip(count).Take(1).First();
 
-					var actual = Map(entity);
+			var actual = Map(entity);
 
-					model.ShouldBeEquivalentTo(actual);
+			model.ShouldBeEquivalentTo(actual);
 
-					_db.Refresh(RefreshMode.OverwriteCurrentValues, applicationData);
-					Assert.AreEqual(FirstStateId, applicationData.StateId);
+			_db.Refresh(RefreshMode.OverwriteCurrentValues, applicationData);
+			Assert.AreEqual(FirstStateId, applicationData.StateId);
 
-					applicationData.AirWaybillId = null;
-					_db.AirWaybills.DeleteOnSubmit(entity);
-					_db.SubmitChanges();
-				})
-				.Wait();
+			applicationData.AirWaybillId = null;
+			_db.AirWaybills.DeleteOnSubmit(entity);
+			_db.SubmitChanges();
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -120,20 +116,15 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var application = _db.Applications.First(x => !x.AirWaybillId.HasValue);
 			var airWaybill = _db.AirWaybills.First();
 
-			_client.PostAsync("AirWaybill/SetAirWaybill/", new FormUrlEncodedContent(new Dictionary<string, string>
-			{
-				{"applicationId", application.Id.ToString(CultureInfo.InvariantCulture)},
-				{"AirWaybillId", airWaybill.Id.ToString(CultureInfo.InvariantCulture)}
-			})).ContinueWith(task =>
-			{
-				Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
+			_controller.SetAirWaybill(application.Id, airWaybill.Id);
 
-				_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
+			_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
 
-				Assert.AreEqual(airWaybill.Id, application.AirWaybillId);
-				application.AirWaybillId = null;
-				_db.SubmitChanges();
-			}).Wait();
+			Assert.AreEqual(airWaybill.Id, application.AirWaybillId);
+
+			application.AirWaybillId = null;
+
+			_db.SubmitChanges();
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -146,30 +137,25 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			var oldStateId = entity.Applications.First().StateId;
 
-			_client.PostAsync("AirWaybill/SetState/", new FormUrlEncodedContent(new Dictionary<string, string>
+
+			_controller.SetState(entity.Id, DefaultStateId);
+
+
+			_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
+			foreach (var application in entity.Applications)
 			{
-				{"stateId", DefaultStateId.ToString(CultureInfo.InvariantCulture)},
-				{"id", entity.Id.ToString(CultureInfo.InvariantCulture)}
-			})).ContinueWith(task =>
+				_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
+			}
+
+			Assert.IsTrue(entity.Applications.All(x => x.StateId == DefaultStateId));
+
+			foreach (var application in entity.Applications)
 			{
-				Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode);
+				application.StateId = oldStateId;
+			}
+			entity.StateId = oldStateId;
 
-				_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
-				foreach (var application in entity.Applications)
-				{
-					_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
-				}
-
-				Assert.IsTrue(entity.Applications.All(x => x.StateId == DefaultStateId));
-
-				foreach (var application in entity.Applications)
-				{
-					application.StateId = oldStateId;
-				}
-				entity.StateId = oldStateId;
-
-				_db.SubmitChanges();
-			}).Wait();
+			_db.SubmitChanges();
 		}
 	}
 }

@@ -1415,7 +1415,6 @@
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\EditorTemplates\ClientModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TransitEditModel.cshtml" />
-    <None Include="Properties\PublishProfiles\Alicargo.Release.pubxml" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />

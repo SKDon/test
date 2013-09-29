@@ -1,36 +1,43 @@
 ﻿using System.Linq;
-using System.Net;
-using System.Net.Http;
 using Alicargo.BlackBox.Tests.Properties;
+using Alicargo.Controllers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ninject;
 
 namespace Alicargo.BlackBox.Tests.Controllers
 {
 	[TestClass]
 	public class TransitControllerTests
 	{
-		private HttpClient _client;
 		private AlicargoDataContext _db;
-		private WebTestContext _context;
+		private CompositionHelper _composition;
+		private TransitController _controller;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
-			_context = new WebTestContext(Settings.Default.BaseAddress, Settings.Default.ClientLogin, Settings.Default.ClientPassword);
-			_client = _context.HttpClient;
+			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
+			_controller = _composition.Kernel.Get<TransitController>();
+		}
+
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_composition.Dispose();
 		}
 
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Edit_Get()
 		{
-			var first = _db.Transits.First(x => x.Applications.Any());
+			var data = _db.Transits.First(x => x.Applications.Any());
 
-			_client.GetAsync("Transit/Edit/" + first.Id)
-				   .ContinueWith(task => Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode))
-				   .Wait();
+			var model = _controller.Edit(data.Id).Model;
+
+			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
 		}
 
 		//[TestMethod, TestCategory("black-box")]
