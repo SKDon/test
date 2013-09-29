@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
@@ -26,9 +27,21 @@ namespace Alicargo.Services.Calculation
 
 		public CalculationListCollection List(int take, long skip)
 		{
-			var awbs = _awbRepository.GetRange(take, skip);
+			var awbs = _awbRepository.GetRange(take, skip).OrderByDescending(SortingValue).ToArray();
 
 			return List(awbs);
+		}
+
+		public CalculationListCollection Row(long id)
+		{
+			var data = _awbRepository.Get(id);
+
+			return List(data);
+		}
+
+		private static DateTimeOffset SortingValue(AirWaybillData awb)
+		{
+			return awb.DateOfArrival;
 		}
 
 		private CalculationListCollection List(IList<AirWaybillData> data)
@@ -49,13 +62,14 @@ namespace Alicargo.Services.Calculation
 				Mark = a.MarkName,
 				ScotchCost = a.ScotchCostEdited ?? a.ScotchCost,
 				TariffPerKg = a.TariffPerKg,
+				SenderRate = a.SenderRate,
 				TransitCost = a.TransitCost,
 				ForwarderCost = a.ForwarderCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
 				WithdrawCost = a.WithdrawCostEdited ?? a.WithdrawCost, // ReSharper disable PossibleInvalidOperationException
 				AirWaybillId = a.AirWaybillId.Value // ReSharper restore PossibleInvalidOperationException
-			}).OrderByDescending(x => awbs[x.AirWaybillId].CreationTimestamp).ToArray();
+			}).OrderByDescending(x => SortingValue(awbs[x.AirWaybillId])).ToArray();
 
 			var groups = items.GroupBy(x => x.AirWaybillId).Select(g =>
 			{
@@ -110,13 +124,6 @@ namespace Alicargo.Services.Calculation
 					});
 				}
 			}
-		}
-
-		public CalculationListCollection Row(long id)
-		{
-			var data = _awbRepository.Get(id);
-
-			return List(data);
 		}
 	}
 }

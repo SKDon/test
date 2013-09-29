@@ -34,10 +34,12 @@ namespace Alicargo.ViewModels.Calculation
 				FactureCost = new Holder<decimal>(items.Sum(x => x.FactureCost ?? 0));
 				WithdrawCost = new Holder<decimal>(items.Sum(x => x.WithdrawCost ?? 0));
 				TransitCost = new Holder<decimal>(items.Sum(x => x.TransitCost ?? 0));
+				ForwarderCost = new Holder<decimal>(items.Sum(x => x.ForwarderCost ?? 0));
 				InsuranceCost = new Holder<decimal>(items.Sum(x => x.InsuranceCost ?? 0));
 				Profit = new Holder<decimal>(items.Sum(x => x.Profit));
 			}
 
+			public Holder<decimal> ForwarderCost { get; private set; }
 			public Holder<decimal> TotalSenderRate { get; private set; }
 			public Holder<int> Count { get; private set; }
 			public Holder<float> Weigth { get; private set; }

@@ -3,55 +3,56 @@
 	<td class='k-group-cell'>&nbsp;</td>
 	<td colspan="4"><b>sender</b></td>
 	<td title="@Entities.CostPerKgOfSender">#= kendo.toString(CostPerKgOfSender, 'n2') #</td>
-	<td title="@Entities.TotalCostOfSenderForWeight">#= kendo.toString(TotalCostOfSenderForWeight, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+	<td title="@Entities.TotalSenderRate">#= kendo.toString(TotalSenderRate, 'n2') #</td>
 	<td colspan="4">&nbsp;</td>
 	<td title="@Entities.TotalScotchCost">#= TotalScotchCost #</td>
 	<td>&nbsp;</td>
 	<td title="@Entities.FactureCost">#= TotalFactureCost #</td>
 	<td title="@Entities.WithdrawCost">#= TotalWithdrawCost #</td>
-	<td>&nbsp;</td>
+	<td colspan="2">&nbsp;</td>
 	<td class="total" title="@Entities.TotalOfSender">#= kendo.toString(TotalOfSender, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>
 <tr class="k-group-sub-footer">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="5"><b>flight</b></td>
+	<td colspan="7"><b>flight</b></td>
 	<td title="@Entities.FlightCostPerKg">#= kendo.toString(FlightCostPerKg, 'n2') #</td>
-	<td colspan="9">&nbsp;</td>
+	<td colspan="10">&nbsp;</td>
 	<td class="total" title="@Entities.FlightCost">#= kendo.toString(FlightCost, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>
 <tr class="k-group-sub-footer">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="5"><b>custom</b></td>
+	<td colspan="7"><b>custom</b></td>
 	<td title="@Entities.CustomCostPerKg">#= kendo.toString(CustomCostPerKg, 'n2') #</td>
-	<td colspan="9">&nbsp;</td>
+	<td colspan="10">&nbsp;</td>
 	<td class="total" title="@Entities.CustomCost">#= kendo.toString(CustomCost, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>
 <tr class="k-group-sub-footer">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="5"><b>broker</b></td>
+	<td colspan="7"><b>broker</b></td>
 	<td title="@Entities.BrokerCostPerKg">#= kendo.toString(BrokerCostPerKg, 'n2') #</td>
-	<td colspan="9">&nbsp;</td>
+	<td colspan="10">&nbsp;</td>
 	<td class="total" title="@Entities.BrokerCost">#= kendo.toString(BrokerCost, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>
 <tr class="k-group-sub-footer">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="15"><b>insurance</b></td>
+	<td colspan="18"><b>insurance</b></td>
 	<td class="total" title="@Entities.Insurance">#= kendo.toString(TotalInsuranceCost, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>
 <tr class="k-group-sub-footer">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="15"><b>forwarder</b></td>
+	<td colspan="18"><b>forwarder</b></td>
 	<td class="total" title="@Entities.TotalForwarderCost">#= kendo.toString(TotalForwarderCost, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>
 <tr class="k-group-sub-footer">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="15"><b>additional</b></td>
+	<td colspan="18"><b>additional</b></td>
 	<td title="@Entities.AdditionalCost" class="additional-cost">
 		<input type="number" min="0" max="1000000" value="#= kendo.toString(AdditionalCost, 'n2') #" />
 	</td>
@@ -59,13 +60,13 @@
 </tr>
 <tr class="k-group-sub-footer cost-total">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="15"><b>cost total</b></td>
+	<td colspan="18"><b>cost total</b></td>
 	<td class="total" title="@Entities.TotalExpenses">#= kendo.toString(TotalExpenses, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>
 <tr class="k-group-sub-footer">
 	<td class='k-group-cell'>&nbsp;</td>
-	<td colspan="13">&nbsp;</td>
+	<td colspan="16">&nbsp;</td>
 	<td><b>Total profit:</b></td>
 	<td title="@Entities.ProfitPerKg">#= kendo.toString(ProfitPerKg, 'n2') #</td>
 	<td class="total" title="@Entities.TotalProfit">#= kendo.toString(Profit, 'n2') #</td>

@@ -39,6 +39,7 @@
 							"WithdrawCost": { type: "number", editable: editWithdrawCost },
 							"TransitCost": { type: "number", editable: editTransitCost },
 							"InsuranceCost": { type: "number", editable: false },
+							"ForwarderCost": { type: "number", editable: false },
 							"Profit": { type: "number", editable: false }
 						}
 					}
@@ -62,10 +63,9 @@
 						{ field: "Value", aggregate: "sum" },
 						{ field: "TotalTariffCost", aggregate: "sum" },
 						{ field: "TotalSenderRate", aggregate: "sum" },
-						{ field: "ScotchCost", aggregate: "sum" },
-						{ field: "FactureCost", aggregate: "sum" },
-						{ field: "WithdrawCost", aggregate: "sum" },
 						{ field: "TransitCost", aggregate: "sum" },
+						{ field: "ScotchCost", aggregate: "sum" },
+						{ field: "ForwarderCost", aggregate: "sum" },
 						{ field: "InsuranceCost", aggregate: "sum" },
 						{ field: "Profit", aggregate: "sum" }]
 				}
@@ -73,25 +73,28 @@
 		};
 
 		$c.Columns = function () {
+			var groupFooterTemplate = "#= kendo.toString(sum, 'n2') #";
+			var n2Format = "{0:n2}";
 			var c = [
 				{ field: "ClientNic", title: $l.Pages_Client },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
 				{ field: "Factory", title: $l.Entities_FactoryName },
 				{ field: "Mark", title: $l.Entities_Mark },
 				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #" },
-				{ field: "Weigth", title: $l.Entities_Weigth, groupFooterTemplate: "#= kendo.toString(sum, 'n2') #", format: "{0:n2}" },
-				{ field: "SenderRate", title: $l.Entities_SenderRate, format: "{0:n2}" },
-				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: "#= kendo.toString(sum, 'n2') #", template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>" },
+				{ field: "Weigth", title: $l.Entities_Weigth, groupFooterTemplate: groupFooterTemplate, format: n2Format },
+				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format },
+				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>" },
 				{ field: "Invoice", title: $l.Entities_Invoice },
-				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: "#= kendo.toString(sum, 'n2') #" },
-				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: "{0:n2}" },
-				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, groupFooterTemplate: "#= kendo.toString(sum, 'n2') #", template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>" },
-				{ field: "ScotchCost", title: $l.Entities_ScotchCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },
-				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= InsuranceCost != null ? kendo.toString(InsuranceCost, 'n2') : 0 + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: "#= kendo.toString(sum, 'n2') #" },
-				{ field: "FactureCost", title: $l.Entities_FactureCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },
-				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },
+				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate },
+				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: n2Format },
+				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>" },
+				{ field: "ScotchCost", groupFooterTemplate: groupFooterTemplate, title: $l.Entities_ScotchCost },
+				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= InsuranceCost != null ? kendo.toString(InsuranceCost, 'n2') : 0 + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate },
+				{ field: "FactureCost", title: $l.Entities_FactureCost },
+				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost },
 				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },				
-				{ field: "Profit", title: $l.Entities_Profit, groupFooterTemplate: "#= kendo.toString(sum, 'n2') #", template: "<b>#= kendo.toString(Profit, 'n2') #</b>" }
+				{ field: "ForwarderCost", title: $l.Entities_ForwarderCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },
+				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>" }
 			];
 			if ($r.IsAdmin) {
 				c.push({
