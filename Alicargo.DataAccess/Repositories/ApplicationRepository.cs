@@ -58,6 +58,7 @@ namespace Alicargo.DataAccess.Repositories
 				FactureCost = x.FactureCost,
 				ScotchCost = x.ScotchCost,
 				TariffPerKg = x.TariffPerKg,
+				SenderRate = x.SenderRate,
 				TransitCost = x.TransitCost,
 				WithdrawCost = x.WithdrawCost,
 				ForwarderCost = x.ForwarderCost,

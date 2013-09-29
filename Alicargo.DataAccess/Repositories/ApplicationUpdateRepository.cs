@@ -85,6 +85,11 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.ScotchCostEdited = scotchCost);
 		}
 
+		public void SetSenderRate(long id, decimal? senderRate)
+		{
+			Update(id, application => application.SenderRate = senderRate);
+		}
+
 		public void Update(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
 						   byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
 		{

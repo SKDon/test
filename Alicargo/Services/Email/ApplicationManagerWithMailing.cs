@@ -122,6 +122,11 @@ namespace Alicargo.Services.Email
 			// todo: 2. think what an email should be sent
 	    }
 
+		public void SetSenderRate(long id, decimal? senderRate)
+		{
+			_manager.SetSenderRate(id, senderRate);
+		}
+
 		public void SetTransitReference(long id, string transitReference)
 		{
 			_manager.SetTransitReference(id, transitReference);

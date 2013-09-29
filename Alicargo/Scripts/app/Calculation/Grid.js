@@ -34,6 +34,7 @@
 			var items = data.Groups[0].items;
 			for (var itemIndex in items) {
 				oldData.items[itemIndex].TotalTariffCost = items[itemIndex].TotalTariffCost;
+				oldData.items[itemIndex].TotalSenderRate = items[itemIndex].TotalSenderRate;
 				oldData.items[itemIndex].Profit = items[itemIndex].Profit;
 			}
 
@@ -131,6 +132,12 @@
 					post($u.ApplicationUpdate_SetTransitCost, {
 						id: e.model.ApplicationId,
 						transitCost: e.values.TransitCost
+					}, awbId);
+				}
+				if (e.values.SenderRate !== undefined) {
+					post($u.Calculation_SetSenderRate, {
+						id: e.model.ApplicationId,
+						senderRate: e.values.SenderRate
 					}, awbId);
 				}
 			}

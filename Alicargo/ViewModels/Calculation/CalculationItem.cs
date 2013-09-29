@@ -24,6 +24,7 @@ namespace Alicargo.ViewModels.Calculation
 		public decimal? TransitCost { get; set; }
 		public decimal? ForwarderCost { get; set; }
 		public decimal? TariffPerKg { get; set; }
+		public decimal? SenderRate { get; set; }
 		public long AirWaybillId { get; set; }
 
 		#endregion
@@ -41,6 +42,14 @@ namespace Alicargo.ViewModels.Calculation
 			get
 			{
 				return TariffPerKg * (decimal?)Weigth;
+			}
+		}
+
+		public decimal? TotalSenderRate
+		{
+			get
+			{
+				return SenderRate * (decimal?)Weigth;
 			}
 		}
 

@@ -3996,6 +3996,10 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private int _CurrencyId;
 		
+		private System.Nullable<int> _ClassId;
+		
+		private string _Certificate;
+		
 		private long _ClientId;
 		
 		private long _TransitId;
@@ -4031,6 +4035,8 @@ namespace Alicargo.DataAccess.DbContext
 		private System.Nullable<decimal> _ForwarderCost;
 		
 		private System.Nullable<decimal> _TariffPerKg;
+		
+		private System.Nullable<decimal> _SenderRate;
 		
 		private System.Nullable<decimal> _TransitCost;
 		
@@ -4108,6 +4114,10 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnValueChanged();
     partial void OnCurrencyIdChanging(int value);
     partial void OnCurrencyIdChanged();
+    partial void OnClassIdChanging(System.Nullable<int> value);
+    partial void OnClassIdChanged();
+    partial void OnCertificateChanging(string value);
+    partial void OnCertificateChanged();
     partial void OnClientIdChanging(long value);
     partial void OnClientIdChanged();
     partial void OnTransitIdChanging(long value);
@@ -4144,6 +4154,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnForwarderCostChanged();
     partial void OnTariffPerKgChanging(System.Nullable<decimal> value);
     partial void OnTariffPerKgChanged();
+    partial void OnSenderRateChanging(System.Nullable<decimal> value);
+    partial void OnSenderRateChanged();
     partial void OnTransitCostChanging(System.Nullable<decimal> value);
     partial void OnTransitCostChanged();
     #endregion
@@ -4762,6 +4774,46 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClassId", DbType="Int")]
+		public System.Nullable<int> ClassId
+		{
+			get
+			{
+				return this._ClassId;
+			}
+			set
+			{
+				if ((this._ClassId != value))
+				{
+					this.OnClassIdChanging(value);
+					this.SendPropertyChanging();
+					this._ClassId = value;
+					this.SendPropertyChanged("ClassId");
+					this.OnClassIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Certificate", DbType="NVarChar(MAX)")]
+		public string Certificate
+		{
+			get
+			{
+				return this._Certificate;
+			}
+			set
+			{
+				if ((this._Certificate != value))
+				{
+					this.OnCertificateChanging(value);
+					this.SendPropertyChanging();
+					this._Certificate = value;
+					this.SendPropertyChanged("Certificate");
+					this.OnCertificateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientId", DbType="BigInt NOT NULL")]
 		public long ClientId
 		{
@@ -5134,6 +5186,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._TariffPerKg = value;
 					this.SendPropertyChanged("TariffPerKg");
 					this.OnTariffPerKgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderRate", DbType="Money")]
+		public System.Nullable<decimal> SenderRate
+		{
+			get
+			{
+				return this._SenderRate;
+			}
+			set
+			{
+				if ((this._SenderRate != value))
+				{
+					this.OnSenderRateChanging(value);
+					this.SendPropertyChanging();
+					this._SenderRate = value;
+					this.SendPropertyChanged("SenderRate");
+					this.OnSenderRateChanged();
 				}
 			}
 		}

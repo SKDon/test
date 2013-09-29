@@ -39,6 +39,9 @@
 	[Value]					MONEY				NOT NULL,
 	[CurrencyId]			INT					NOT NULL, 
 
+	[ClassId]				INT					NULL,
+	[Certificate]			NVARCHAR(MAX)		NULL, 
+
 	[ClientId]				BIGINT				NOT NULL,
 	[TransitId]				BIGINT				NOT NULL,
 	[CountryId]				BIGINT				NULL,
@@ -59,6 +62,7 @@
 	[WithdrawCostEdited]	MONEY				NULL,
 	[ForwarderCost]			MONEY				NULL,
 	[TariffPerKg]			MONEY				NULL,
+	[SenderRate]			MONEY				NULL,
 	[TransitCost]			MONEY				NULL,
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
@@ -88,4 +92,3 @@ CREATE NONCLUSTERED INDEX [IX_Application_TransitId]
 GO
 CREATE NONCLUSTERED INDEX [IX_AirWaybillId]
     ON [dbo].[Application]([AirWaybillId] ASC);
-

@@ -414,4 +414,10 @@
   <data name="Sender" xml:space="preserve">
     <value>Отправитель</value>
   </data>
+  <data name="SenderRate" xml:space="preserve">
+    <value>rate sender euro/kg</value>
+  </data>
+  <data name="TotalSenderRate" xml:space="preserve">
+    <value>total sender costs</value>
+  </data>
 </root>

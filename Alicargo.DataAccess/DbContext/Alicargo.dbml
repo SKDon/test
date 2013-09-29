@@ -208,6 +208,8 @@
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Value" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="CurrencyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ClassId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Certificate" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TransitId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="CountryId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -226,6 +228,7 @@
       <Column Name="WithdrawCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="ForwarderCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SenderRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />
       <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />

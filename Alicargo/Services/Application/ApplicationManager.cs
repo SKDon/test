@@ -133,6 +133,13 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
+		public void SetSenderRate(long id, decimal? senderRate)
+		{
+			_applicationUpdater.SetSenderRate(id, senderRate);
+
+			_unitOfWork.SaveChanges();
+		}
+
 		public void SetState(long applicationId, long stateId)
 		{
 			if (!_stateService.HasPermissionToSetState(stateId))

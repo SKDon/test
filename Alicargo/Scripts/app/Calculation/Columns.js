@@ -6,6 +6,7 @@
 	$a.Calculation = (function ($c) {
 		$c.DataSource = function () {
 			var editTariffPerKg = $r.IsAdmin;
+			var editSenderRate = $r.IsAdmin;
 			var editScotchCost = $r.IsAdmin || $r.IsSender;
 			var editFactureCost = $r.IsAdmin || $r.IsSender;
 			var editWithdrawCost = $r.IsAdmin || $r.IsSender;
@@ -30,7 +31,9 @@
 							"Invoice": { type: "string", editable: false },
 							"Value": { type: "number", editable: false },
 							"TariffPerKg": { type: "number", editable: editTariffPerKg },
+							"SenderRate": { type: "number", editable: editSenderRate },
 							"TotalTariffCost": { type: "number", editable: false },
+							"TotalSenderRate": { type: "number", editable: false },
 							"ScotchCost": { type: "number", editable: editScotchCost },
 							"FactureCost": { type: "number", editable: editFactureCost },
 							"WithdrawCost": { type: "number", editable: editWithdrawCost },
@@ -58,6 +61,7 @@
 						{ field: "Weigth", aggregate: "sum" },
 						{ field: "Value", aggregate: "sum" },
 						{ field: "TotalTariffCost", aggregate: "sum" },
+						{ field: "TotalSenderRate", aggregate: "sum" },
 						{ field: "ScotchCost", aggregate: "sum" },
 						{ field: "FactureCost", aggregate: "sum" },
 						{ field: "WithdrawCost", aggregate: "sum" },
@@ -76,6 +80,8 @@
 				{ field: "Mark", title: $l.Entities_Mark },
 				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #" },
 				{ field: "Weigth", title: $l.Entities_Weigth, groupFooterTemplate: "#= kendo.toString(sum, 'n2') #", format: "{0:n2}" },
+				{ field: "SenderRate", title: $l.Entities_SenderRate, format: "{0:n2}" },
+				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: "#= kendo.toString(sum, 'n2') #", template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>" },
 				{ field: "Invoice", title: $l.Entities_Invoice },
 				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: "#= kendo.toString(sum, 'n2') #" },
 				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: "{0:n2}" },

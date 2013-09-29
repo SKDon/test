@@ -53,6 +53,14 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin), HttpPost]
+		public virtual HttpStatusCodeResult SetSenderRate(long id, decimal? senderRate)
+		{
+			_applicationManager.SetSenderRate(id, senderRate);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin), HttpPost]
 		public virtual HttpStatusCodeResult SetScotchCostEdited(long id, decimal? scotchCost)
 		{
 			_applicationManager.SetScotchCostEdited(id, scotchCost);

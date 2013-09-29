@@ -709,6 +709,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to rate sender euro/kg.
+        /// </summary>
+        public static string SenderRate {
+            get {
+                return ResourceManager.GetString("SenderRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата сметы статуса.
         /// </summary>
         public static string StateChangeTimestamp {
@@ -858,6 +867,15 @@ namespace Resources {
         public static string TotalScotchCost {
             get {
                 return ResourceManager.GetString("TotalScotchCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to total sender costs.
+        /// </summary>
+        public static string TotalSenderRate {
+            get {
+                return ResourceManager.GetString("TotalSenderRate", resourceCulture);
             }
         }
         
