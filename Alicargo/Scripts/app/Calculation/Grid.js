@@ -16,6 +16,8 @@
 			}).fail($a.ShowError);
 		}
 
+		$c.Post = post;
+
 		function findGroup(data, awbId) {
 			for (var i in data) {
 				if (data[i].AirWaybillId == awbId) {

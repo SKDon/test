@@ -96,6 +96,8 @@
 				{ field: "ForwarderCost", title: $l.Entities_ForwarderCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },
 				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>" }
 			];
+
+
 			if ($r.IsAdmin) {
 				c.push({
 					command: [{
@@ -105,7 +107,8 @@
 						click: function (e) {
 							var tr = $(e.target).closest("tr");
 							var trData = this.dataItem(tr);
-							alert("implement " + trData.ApplicationId);
+							// todo: 1. disable calculation on row
+							$c.Post($u.Calculation_Calculate, { id: trData.ApplicationId }, trData.AirWaybillId);
 						}
 					}],
 					title: "&nbsp;",

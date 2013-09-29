@@ -11,14 +11,17 @@ namespace Alicargo.Controllers
 		private readonly IApplicationManager _applicationManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly ICalculationPresenter _presenter;
+		private readonly ICalculationService _calculation;
 
 		public CalculationController(
 			IAwbUpdateManager awbUpdateManager,
-			ICalculationPresenter presenter, 
+			ICalculationPresenter presenter,
+			ICalculationService calculation,
 			IApplicationManager applicationManager)
 		{
 			_awbUpdateManager = awbUpdateManager;
 			_presenter = presenter;
+			_calculation = calculation;
 			_applicationManager = applicationManager;
 		}
 
@@ -48,6 +51,14 @@ namespace Alicargo.Controllers
 		public virtual HttpStatusCodeResult SetTariffPerKg(long id, decimal? tariffPerKg)
 		{
 			_applicationManager.SetTariffPerKg(id, tariffPerKg);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[Access(RoleType.Admin), HttpPost]
+		public virtual HttpStatusCodeResult Calculate(long id)
+		{
+			_calculation.Calculate(id);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -90,6 +101,6 @@ namespace Alicargo.Controllers
 			_awbUpdateManager.SetAdditionalCost(awbId, additionalCost);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}		
+		}
 	}
 }
