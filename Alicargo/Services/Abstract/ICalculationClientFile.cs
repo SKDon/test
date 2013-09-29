@@ -4,6 +4,6 @@ namespace Alicargo.Services.Abstract
 {
 	internal interface ICalculationClientFile
 	{
-		string Build(ApplicationData applicationId);
+		string Build(ApplicationData application);
 	}
 }

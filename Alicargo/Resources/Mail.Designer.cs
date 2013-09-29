@@ -310,6 +310,20 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}
+        ///{1} - {2} {3} kg * {4} € = {5} €
+        ///скотч - {6}
+        ///страховка - {7}
+        ///фактура - {8}
+        ///Итого - {9} €.
+        /// </summary>
+        public static string Calculation_Body {
+            get {
+                return ResourceManager.GetString("Calculation_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Расчет стоимости заявки {0}.
         /// </summary>
         public static string Calculation_Subject {
