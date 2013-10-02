@@ -163,6 +163,7 @@
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
+    <Compile Include="Services\Calculation\CalculationService.cs" />
     <Compile Include="Services\Calculation\CalculationClientFile.cs" />
     <Compile Include="Services\Calculation\CalculationServiceSender.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
@@ -646,6 +647,7 @@
     <Content Include="Deploy\backup-db-alicargo_1_1.ps1" />
     <Content Include="Deploy\deploy.ps1" />
     <Content Include="Deploy\Update\update.ps1" />
+    <Content Include="Deploy\dev.bat" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
