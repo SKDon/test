@@ -34,7 +34,7 @@ namespace Alicargo.Services.Email
 		public string ApplicationAdd(ApplicationDetailsModel model, string culture)
 		{
 			return string.Format(Mail.Application_Add,
-								 ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count),
+								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count),
 								 model.ClientNic,
 								 model.FactoryName,
 								 model.MarkName,
@@ -54,14 +54,14 @@ namespace Alicargo.Services.Email
 		public string ApplicationSetState(ApplicationDetailsModel model, string culture)
 		{
 			return string.Format(Mail.Application_SetState,
-								 ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count),
+								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count),
 								 _localizationService.GetDate(model.DateOfCargoReceipt, culture),
 								 model.TransitCarrierName,
 								 model.FactoryName,
 								 model.FactoryEmail,
 								 model.FactoryPhone,
 								 model.FactoryContact,
-								 ApplicationModelHelper.GetDaysInWork(model.CreationTimestamp),
+								 ApplicationHelper.GetDaysInWork(model.CreationTimestamp),
 								 model.Invoice,
 								 _localizationService.GetDate(model.CreationTimestamp, culture),
 								 _localizationService.GetDate(model.StateChangeTimestamp, culture),
@@ -70,7 +70,7 @@ namespace Alicargo.Services.Email
 								 model.Volume,
 								 model.Weigth,
 								 model.Characteristic,
-								 ApplicationModelHelper.GetValueString(model.Value, (CurrencyType)model.CurrencyId, culture),
+								 ApplicationHelper.GetValueString(model.Value, (CurrencyType)model.CurrencyId, culture),
 								 model.AddressLoad,
 								 model.CountryName,
 								 model.WarehouseWorkingTime,
@@ -100,13 +100,13 @@ namespace Alicargo.Services.Email
 		public string ApplicationInvoiceFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_InvoiceFileAdded,
-								 ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
+								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 								 model.Invoice, model.InvoiceFileName);
 		}
 
 		public string ApplicationSwiftFileAdded(ApplicationDetailsModel model)
 		{
-			return string.Format(Mail.Application_SwiftFileAdded, ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count),
+			return string.Format(Mail.Application_SwiftFileAdded, ApplicationHelper.GetDisplayNumber(model.Id, model.Count),
 								 model.FactoryName, model.MarkName,
 								 model.Invoice);
 		}
@@ -114,27 +114,27 @@ namespace Alicargo.Services.Email
 		public string ApplicationPackingFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_PackingFileAdded,
-								 ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
+								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 								 model.Invoice);
 		}
 
 		public string ApplicationDeliveryBillFileAdded(ApplicationDetailsModel model)
 		{
 			return string.Format(Mail.Application_DeliveryBillFileAdded,
-								 ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
+								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
 								 model.Invoice);
 		}
 
 		public string ApplicationTorg12FileAdded(ApplicationDetailsModel model, string recipientName)
 		{
 			return string.Format(Mail.Application_Torg12FileAdded, recipientName,
-								 ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
+								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count));
 		}
 
 		public string ApplicationCPFileAdded(ApplicationDetailsModel model, string recipientName)
 		{
 			return string.Format(Mail.Application_CPFileAdded, recipientName,
-								 ApplicationModelHelper.GetDisplayNumber(model.Id, model.Count));
+								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count));
 		}
 
 		#endregion

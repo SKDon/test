@@ -5,7 +5,7 @@ using Alicargo.Core.Localization;
 
 namespace Alicargo.ViewModels.Helpers
 {
-	internal sealed class ApplicationModelHelper
+	internal sealed class ApplicationHelper
 	{
 		public static string GetDisplayNumber(long id, long? count)
 		{

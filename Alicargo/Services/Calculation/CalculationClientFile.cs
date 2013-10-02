@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
@@ -36,8 +37,8 @@ namespace Alicargo.Services.Calculation
 			var total = cost + scotch + facture + insurance;
 
 			return string.Format(Mail.Calculation_Body,
-								 AwbHelper.GetAirWayBillDisplay(awb),
-								 ApplicationModelHelper.GetDisplayNumber(application.Id, application.Count),
+								 HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(awb)),
+								 ApplicationHelper.GetDisplayNumber(application.Id, application.Count),
 								 application.MarkName,
 								 weigth.ToString("N2"),
 								 tariffPerKg.ToString("N2"),

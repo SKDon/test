@@ -14,7 +14,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				return ApplicationModelHelper.GetDisplayNumber(Id, Count);
+				return ApplicationHelper.GetDisplayNumber(Id, Count);
 			}
 		}
 
@@ -72,7 +72,7 @@ namespace Alicargo.ViewModels.Application
 
 		public string ValueString
 		{
-			get { return ApplicationModelHelper.GetValueString(Value, CurrencyId); }
+			get { return ApplicationHelper.GetValueString(Value, CurrencyId); }
 		}
 
 		#endregion

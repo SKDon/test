@@ -33,7 +33,7 @@ namespace Alicargo.ViewModels.Calculation
 		{
 			get
 			{
-				return ApplicationModelHelper.GetDisplayNumber(ApplicationId, Count);
+				return ApplicationHelper.GetDisplayNumber(ApplicationId, Count);
 			}
 		}
 

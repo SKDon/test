@@ -98,7 +98,7 @@ namespace Alicargo.Controllers
 		{
 			var nic = _clientRepository.GetNicByApplications(appId).First();
 			ViewBag.Nic = nic;
-			ViewBag.ApplicationNumber = ApplicationModelHelper.GetDisplayNumber(appId, count);
+			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(appId, count);
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
 		}
 

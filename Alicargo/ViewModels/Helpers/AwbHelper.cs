@@ -5,7 +5,7 @@ namespace Alicargo.ViewModels.Helpers
 {
 	public static class AwbHelper
 	{
-		public static string GetAirWayBillDisplay(AirWaybillData data)
+		public static string GetAirWaybillDisplay(AirWaybillData data)
 		{
 			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", data.Bill,
 								 data.DepartureAirport,

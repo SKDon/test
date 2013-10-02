@@ -30,7 +30,7 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "Value")]
 		public string ValueString
 		{
-			get { return ApplicationModelHelper.GetValueString(Value, CurrencyId); }
+			get { return ApplicationHelper.GetValueString(Value, CurrencyId); }
 		}
 
 		#endregion

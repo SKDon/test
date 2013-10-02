@@ -10,5 +10,7 @@ namespace Alicargo.Services.Calculation
 		{
 			_application = application;
 		}
+
+		public string AirWaybill {get { return _application.AirWaybill; }}
 	}
 }

@@ -92,7 +92,7 @@ namespace Alicargo.Services.Application
 				.Select(grouping =>
 							GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
 												awb => _airWaybills.ContainsKey(awb.Key)
-													? AwbHelper.GetAirWayBillDisplay(_airWaybills[awb.Key])
+													? AwbHelper.GetAirWaybillDisplay(_airWaybills[awb.Key])
 													: ""))
 				.ToArray();
 		}

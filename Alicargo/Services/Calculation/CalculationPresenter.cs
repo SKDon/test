@@ -78,7 +78,7 @@ namespace Alicargo.Services.Calculation
 				{
 					AirWaybillId = g.Key,
 					items = itemsGroup,
-					value = AwbHelper.GetAirWayBillDisplay(awbs[g.Key]),
+					value = AwbHelper.GetAirWaybillDisplay(awbs[g.Key]),
 					field = "AirWaybillId",
 					hasSubgroups = false,
 					aggregates = new CalculationGroup.Aggregates(itemsGroup)
@@ -117,7 +117,7 @@ namespace Alicargo.Services.Calculation
 					{
 						AirWaybillId = awb.Id,
 						items = new CalculationItem[0],
-						value = AwbHelper.GetAirWayBillDisplay(awb),
+						value = AwbHelper.GetAirWaybillDisplay(awb),
 						field = "AirWaybillId",
 						hasSubgroups = false,
 						aggregates = new CalculationGroup.Aggregates(new CalculationItem[0])

@@ -44,7 +44,7 @@ namespace Alicargo.Services.Calculation
 			var text = _clientFile.Build(application);
 
 			var messages = new Message(
-				string.Format(Mail.Calculation_Subject, ApplicationModelHelper.GetDisplayNumber(application.Id, application.Count)),
+				string.Format(Mail.Calculation_Subject, ApplicationHelper.GetDisplayNumber(application.Id, application.Count)),
 				text, client.Email)
 			{
 				CopyTo = _recipients.GetAdminEmails().Select(x => x.Email).ToArray()
