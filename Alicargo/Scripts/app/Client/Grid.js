@@ -44,7 +44,7 @@
 					}
 				}],
 				title: "&nbsp;",
-				width: "53px"
+				width: Alicargo.DefaultGridButtonWidth
 			}]
 	});
 });

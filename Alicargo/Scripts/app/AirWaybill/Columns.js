@@ -20,7 +20,7 @@
 				}
 			}],
 			title: "&nbsp;",
-			width: "53px"
+			width: $a.DefaultGridButtonWidth
 		});
 	}
 
@@ -44,7 +44,7 @@
 				}
 			}],
 			title: "&nbsp;",
-			width: "53px"
+			width: $a.DefaultGridButtonWidth
 		});
 	}
 

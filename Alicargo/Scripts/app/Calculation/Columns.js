@@ -112,7 +112,7 @@
 						}
 					}],
 					title: "&nbsp;",
-					width: "53px"
+					width: $a.DefaultGridButtonWidth
 				});
 			}
 
