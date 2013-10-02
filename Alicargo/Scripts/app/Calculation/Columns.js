@@ -89,7 +89,7 @@
 				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: n2Format },
 				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>" },
 				{ field: "ScotchCost", groupFooterTemplate: groupFooterTemplate, title: $l.Entities_ScotchCost },
-				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= InsuranceCost != null ? kendo.toString(InsuranceCost, 'n2') : 0 + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate },
+				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate },
 				{ field: "FactureCost", title: $l.Entities_FactureCost },
 				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost },
 				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },				

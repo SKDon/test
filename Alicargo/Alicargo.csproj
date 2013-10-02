@@ -363,6 +363,7 @@
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
     <Compile Include="ViewModels\Calculation\CalculationGroup.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationHelper.cs" />
     <Compile Include="ViewModels\Calculation\CalculationListCollection.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Helpers\ApplicationHelper.cs" />

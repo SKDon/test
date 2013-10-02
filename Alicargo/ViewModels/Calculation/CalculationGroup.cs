@@ -28,12 +28,12 @@ namespace Alicargo.ViewModels.Calculation
 				Count = new Holder<int>(items.Sum(x => x.Count ?? 0));
 				Weigth = new Holder<float>(items.Sum(x => x.Weigth ?? 0));
 				Value = new Holder<decimal>(items.Sum(x => x.Value));
-				TotalTariffCost = new Holder<decimal>(items.Sum(x => x.TotalTariffCost ?? 0));
-				TotalSenderRate = new Holder<decimal>(items.Sum(x => x.TotalSenderRate ?? 0));
+				TotalTariffCost = new Holder<decimal>(items.Sum(x => x.TotalTariffCost));
+				TotalSenderRate = new Holder<decimal>(items.Sum(x => x.TotalSenderRate));
 				ScotchCost = new Holder<decimal>(items.Sum(x => x.ScotchCost ?? 0));
 				TransitCost = new Holder<decimal>(items.Sum(x => x.TransitCost ?? 0));
 				ForwarderCost = new Holder<decimal>(items.Sum(x => x.ForwarderCost ?? 0));
-				InsuranceCost = new Holder<decimal>(items.Sum(x => x.InsuranceCost ?? 0));
+				InsuranceCost = new Holder<decimal>(items.Sum(x => x.InsuranceCost));
 				Profit = new Holder<decimal>(items.Sum(x => x.Profit));
 			}
 

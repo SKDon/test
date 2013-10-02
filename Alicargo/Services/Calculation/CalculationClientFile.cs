@@ -30,7 +30,7 @@ namespace Alicargo.Services.Calculation
 
 			var weigth = (decimal)(application.Weigth ?? 0);
 			var tariffPerKg = application.TariffPerKg ?? 0;
-			var insurance = application.Value / CalculationItem.InsuranceRate;
+			var insurance = application.Value / CalculationHelper.InsuranceRate;
 			var cost = tariffPerKg * weigth;
 			var scotch = application.ScotchCostEdited ?? application.ScotchCost ?? 0;
 			var facture = application.FactureCostEdited ?? application.FactureCost ?? 0;

@@ -1,12 +1,18 @@
-﻿using Alicargo.ViewModels.Helpers;
-
-namespace Alicargo.ViewModels.Calculation
+﻿namespace Alicargo.ViewModels.Calculation
 {
 	public sealed class CalculationItem
 	{
-		public const decimal InsuranceRate = 100;
-
 		public string ClientNic { get; set; }
+
+		public string DisplayNumber { get; set; }
+
+		public decimal TotalTariffCost { get; set; }
+
+		public decimal TotalSenderRate { get; set; }
+
+		public decimal InsuranceCost { get; set; }
+
+		public decimal Profit { get; set; }
 
 		#region Application data
 
@@ -28,51 +34,5 @@ namespace Alicargo.ViewModels.Calculation
 		public long AirWaybillId { get; set; }
 
 		#endregion
-
-		public string DisplayNumber
-		{
-			get
-			{
-				return ApplicationHelper.GetDisplayNumber(ApplicationId, Count);
-			}
-		}
-
-		public decimal? TotalTariffCost
-		{
-			get
-			{
-				return TariffPerKg * (decimal?)Weigth;
-			}
-		}
-
-		public decimal? TotalSenderRate
-		{
-			get
-			{
-				return SenderRate * (decimal?)Weigth;
-			}
-		}
-
-		public decimal? InsuranceCost
-		{
-			get
-			{
-				if (Value == 0)
-				{
-					return null;
-				}
-
-				return Value / InsuranceRate;
-			}
-		}
-
-		public decimal Profit
-		{
-			get
-			{
-				// todo: 3. supposed that all costs in euro but ValueCurrencyId can be in any other currency
-				return (TotalTariffCost ?? 0) + (ScotchCost ?? 0) + (InsuranceCost ?? 0) + (FactureCost ?? 0) + (WithdrawCost ?? 0) + (TransitCost ?? 0);
-			}
-		}
 	}
 }
