@@ -35,7 +35,8 @@ PRINT N'Altering [dbo].[Client]...';
 GO
 ALTER TABLE [dbo].[Client]
     ADD [ContractFileData] VARBINARY (MAX) NULL,
-        [ContractFileName] NVARCHAR (MAX)  NULL;
+        [ContractFileName] NVARCHAR (MAX)  NULL,
+		[CalculationFileData] VARBINARY (MAX) NULL;
 GO
 
 DROP  PROCEDURE [dbo].[Client_DeleteForce];

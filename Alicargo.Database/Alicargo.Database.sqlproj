@@ -85,6 +85,7 @@
     <Build Include="Tables\VisibleState.sql" />
     <Build Include="Tables\Country.sql" />
     <Build Include="Stored procedures\Client_DeleteForce.sql" />
+    <Build Include="Tables\Calculation.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="InitialData.sql" />
