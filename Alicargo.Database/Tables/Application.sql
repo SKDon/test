@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Application] (
 	[Id]					BIGINT				IDENTITY (1, 1) NOT NULL,
-	[CreationTimestamp]		DATETIMEOFFSET (7)	CONSTRAINT [DF_Application_CreationTimestamp] DEFAULT (getdate()) NOT NULL,
+	[CreationTimestamp]		DATETIMEOFFSET		CONSTRAINT [DF_Application_CreationTimestamp] DEFAULT (getdate()) NOT NULL,
 	
 	[Invoice]				NVARCHAR (MAX)		NOT NULL,
 	[InvoiceFileData]		VARBINARY (MAX)		NULL,
@@ -30,10 +30,10 @@
 	[Volume]				NUMERIC(18, 4)		NOT NULL,
 	[TermsOfDelivery]		NVARCHAR (MAX)		NULL,
 	[MethodOfDeliveryId]	INT					NOT NULL,
-	[DateOfCargoReceipt]	DATETIMEOFFSET (7)	NULL,
-	[DateInStock]			DATETIMEOFFSET (7)	NULL,
+	[DateOfCargoReceipt]	DATETIMEOFFSET(0)	NULL,
+	[DateInStock]			DATETIMEOFFSET(0)	NULL,
 
-	[StateChangeTimestamp]	DATETIMEOFFSET (7)	NOT NULL,
+	[StateChangeTimestamp]	DATETIMEOFFSET		NOT NULL,
 	[StateId]				BIGINT				NOT NULL,
 	
 	[Value]					SMALLMONEY			NOT NULL,
