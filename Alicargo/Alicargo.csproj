@@ -373,7 +373,7 @@
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\AirWaybill\AwbBrokerModel.cs" />
-    <Compile Include="ViewModels\Calculation\CalculationInfo.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\ClientModel.cs" />

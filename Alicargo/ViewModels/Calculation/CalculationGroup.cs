@@ -31,8 +31,6 @@ namespace Alicargo.ViewModels.Calculation
 				TotalTariffCost = new Holder<decimal>(items.Sum(x => x.TotalTariffCost ?? 0));
 				TotalSenderRate = new Holder<decimal>(items.Sum(x => x.TotalSenderRate ?? 0));
 				ScotchCost = new Holder<decimal>(items.Sum(x => x.ScotchCost ?? 0));
-				FactureCost = new Holder<decimal>(items.Sum(x => x.FactureCost ?? 0));
-				WithdrawCost = new Holder<decimal>(items.Sum(x => x.WithdrawCost ?? 0));
 				TransitCost = new Holder<decimal>(items.Sum(x => x.TransitCost ?? 0));
 				ForwarderCost = new Holder<decimal>(items.Sum(x => x.ForwarderCost ?? 0));
 				InsuranceCost = new Holder<decimal>(items.Sum(x => x.InsuranceCost ?? 0));
@@ -46,8 +44,6 @@ namespace Alicargo.ViewModels.Calculation
 			public Holder<decimal> Value { get; private set; }
 			public Holder<decimal> TotalTariffCost { get; private set; }
 			public Holder<decimal> ScotchCost { get; private set; }
-			public Holder<decimal> FactureCost { get; private set; }
-			public Holder<decimal> WithdrawCost { get; private set; }
 			public Holder<decimal> TransitCost { get; private set; }
 			public Holder<decimal> InsuranceCost { get; private set; }
 			public Holder<decimal> Profit { get; private set; }

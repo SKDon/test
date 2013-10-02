@@ -2,12 +2,12 @@
 
 namespace Alicargo.ViewModels.Calculation
 {
-	public sealed class CalculationInfo
+	public sealed class CalculationAwbInfo
 	{
 		private readonly CalculationItem[] _rows;
 		private float _totalWeight;
 
-		public CalculationInfo(CalculationItem[] rows)
+		public CalculationAwbInfo(CalculationItem[] rows)
 		{
 			_rows = rows;
 			CalculateTotalWeigth();

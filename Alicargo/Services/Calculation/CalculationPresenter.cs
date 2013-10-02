@@ -88,7 +88,7 @@ namespace Alicargo.Services.Calculation
 			AddMissedGroups(data, groups);
 
 			var info = awbs.Select(x => x.Value)
-						   .Select(x => new CalculationInfo(items.Where(a => a.AirWaybillId == x.Id).ToArray())
+						   .Select(x => new CalculationAwbInfo(items.Where(a => a.AirWaybillId == x.Id).ToArray())
 						   {
 							   AirWaybillId = x.Id,
 							   TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight ?? 0,

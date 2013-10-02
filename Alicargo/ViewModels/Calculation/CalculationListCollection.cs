@@ -4,6 +4,6 @@
 	{
 		public long Total { get; set; }
 		public CalculationGroup[] Groups { get; set; }
-		public CalculationInfo[] Info { get; set; }
+		public CalculationAwbInfo[] Info { get; set; }
 	}
 }
