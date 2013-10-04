@@ -36,7 +36,7 @@
 	[StateChangeTimestamp]	DATETIMEOFFSET		NOT NULL,
 	[StateId]				BIGINT				NOT NULL,
 	
-	[Value]					SMALLMONEY			NOT NULL,
+	[Value]					MONEY				NOT NULL,
 	[CurrencyId]			INT					NOT NULL, 
 
 	[ClassId]				INT					NULL,
@@ -47,6 +47,7 @@
 	[CountryId]				BIGINT				NULL,
 	[AirWaybillId]			BIGINT				NULL,
 	[SenderId]				BIGINT				NULL,
+	[CalculationId]			BIGINT				NULL,
 
 	[FactoryName]			NVARCHAR(320)		NOT NULL, 
 	[FactoryPhone]			NVARCHAR(MAX)		NULL, 
@@ -54,16 +55,16 @@
 	[FactoryEmail]			NVARCHAR(320)		NULL, 
 	[MarkName]				NVARCHAR(320)		NOT NULL, 
 
-	[FactureCost]			SMALLMONEY			NULL,
-	[ScotchCost]			SMALLMONEY			NULL,
-	[WithdrawCost]			SMALLMONEY			NULL,
-	[FactureCostEdited]		SMALLMONEY			NULL,
-	[ScotchCostEdited]		SMALLMONEY			NULL,
-	[WithdrawCostEdited]	SMALLMONEY			NULL,
-	[ForwarderCost]			SMALLMONEY			NULL,
-	[TariffPerKg]			SMALLMONEY			NULL,
-	[SenderRate]			SMALLMONEY			NULL,
-	[TransitCost]			SMALLMONEY			NULL,
+	[FactureCost]			MONEY				NULL,
+	[ScotchCost]			MONEY				NULL,
+	[WithdrawCost]			MONEY				NULL,
+	[FactureCostEdited]		MONEY				NULL,
+	[ScotchCostEdited]		MONEY				NULL,
+	[WithdrawCostEdited]	MONEY				NULL,
+	[ForwarderCost]			MONEY				NULL,
+	[TariffPerKg]			MONEY				NULL,
+	[SenderRate]			MONEY				NULL,
+	[TransitCost]			MONEY				NULL,
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),

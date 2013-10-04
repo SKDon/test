@@ -25,11 +25,11 @@
 	[StateId]						BIGINT				NOT NULL,
 	[StateChangeTimestamp]			DATETIMEOFFSET		DEFAULT (GETDATE()) NOT NULL,
 
-	[FlightCost]					SMALLMONEY			NULL,
-	[CustomCost]					SMALLMONEY			NULL,
-	[BrokerCost]					SMALLMONEY			NULL,	
-	[AdditionalCost]				SMALLMONEY			NULL,
-	[TotalCostOfSenderForWeight]	SMALLMONEY			NULL,
+	[FlightCost]					MONEY				NULL,
+	[CustomCost]					MONEY				NULL,
+	[BrokerCost]					MONEY				NULL,	
+	[AdditionalCost]				MONEY				NULL,
+	[TotalCostOfSenderForWeight]	MONEY				NULL,
 
 	CONSTRAINT [PK_dbo.AirWaybill] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.AirWaybill_dbo.Broker_BrokerId] FOREIGN KEY ([BrokerId]) REFERENCES [dbo].[Broker] ([Id]),

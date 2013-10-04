@@ -1,113 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Alicargo" Class="AlicargoDataContext" AccessModifier="Internal" Modifier="Sealed" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Table Name="dbo.VisibleState" Member="VisibleStates" AccessModifier="Internal">
-    <Type Name="VisibleState" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="State_VisibleState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.AvailableState" Member="AvailableStates" AccessModifier="Internal">
-    <Type Name="AvailableState" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="State_AvailableState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Broker" Member="Brokers" AccessModifier="Internal">
-    <Type Name="Broker" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Association Name="Broker_AirWaybill" Member="AirWaybills" ThisKey="Id" OtherKey="BrokerId" Type="AirWaybill" />
-      <Association Name="User_Broker" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Carrier" Member="Carriers" AccessModifier="Internal">
-    <Type Name="Carrier" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Association Name="Carrier_Transit" Member="Transits" ThisKey="Id" OtherKey="CarrierId" Type="Transit" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Country" Member="Countries" AccessModifier="Internal">
-    <Type Name="Country" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name_En" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="Name_Ru" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="Code" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Association Name="Country_Application" Member="Applications" ThisKey="Id" OtherKey="CountryId" Type="Application" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Forwarder" Member="Forwarders" AccessModifier="Internal">
-    <Type Name="Forwarder" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Association Name="User_Forwarder" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Sender" Member="Senders" AccessModifier="Internal">
-    <Type Name="Sender" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Association Name="User_Sender" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.State" Member="States" AccessModifier="Internal">
-    <Type Name="State" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="State_VisibleState" Member="VisibleStates" ThisKey="Id" OtherKey="StateId" Type="VisibleState" />
-      <Association Name="State_AvailableState" Member="AvailableStates" ThisKey="Id" OtherKey="StateId" Type="AvailableState" />
-      <Association Name="State_StateLocalization" Member="StateLocalizations" ThisKey="Id" OtherKey="StateId" Type="StateLocalization" />
-      <Association Name="State_AirWaybill" Member="AirWaybills" ThisKey="Id" OtherKey="StateId" Type="AirWaybill" />
-      <Association Name="State_Application" Member="Applications" ThisKey="Id" OtherKey="StateId" Type="Application" />
-    </Type>
-  </Table>
-  <Table Name="dbo.StateLocalization" Member="StateLocalizations" AccessModifier="Internal">
-    <Type Name="StateLocalization" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="TwoLetterISOLanguageName" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="State_StateLocalization" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Transit" Member="Transits" AccessModifier="Internal">
-    <Type Name="Transit" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="City" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="RecipientName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="WarehouseWorkingTime" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="MethodOfTransitId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="DeliveryTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CarrierId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="Transit_Application" Member="Applications" ThisKey="Id" OtherKey="TransitId" Type="Application" />
-      <Association Name="Transit_Client" Member="Clients" ThisKey="Id" OtherKey="TransitId" Type="Client" />
-      <Association Name="Carrier_Transit" Member="Carrier" ThisKey="CarrierId" OtherKey="Id" Type="Carrier" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[User]" Member="Users" AccessModifier="Internal">
-    <Type Name="User" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Login" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordHash" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="PasswordSalt" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="TwoLetterISOLanguageName" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Association Name="User_Broker" Member="Brokers" ThisKey="Id" OtherKey="UserId" Type="Broker" />
-      <Association Name="User_Forwarder" Member="Forwarders" ThisKey="Id" OtherKey="UserId" Type="Forwarder" />
-      <Association Name="User_Sender" Member="Senders" ThisKey="Id" OtherKey="UserId" Type="Sender" />
-      <Association Name="User_Admin" Member="Admins" ThisKey="Id" OtherKey="UserId" Type="Admin" />
-      <Association Name="User_Client" Member="Clients" ThisKey="Id" OtherKey="UserId" Type="Client" />
-    </Type>
-  </Table>
   <Table Name="dbo.Admin" Member="Admins" AccessModifier="Internal">
     <Type Name="Admin" AccessModifier="Internal" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -115,6 +6,13 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Association Name="User_Admin" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VisibleState" Member="VisibleStates" AccessModifier="Internal">
+    <Type Name="VisibleState" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="State_VisibleState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.AirWaybill" Member="AirWaybills" AccessModifier="Internal">
@@ -140,11 +38,11 @@
       <Column Name="AWBFileName" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="StateChangeTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
-      <Column Name="FlightCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="CustomCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="BrokerCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="AdditionalCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="TotalCostOfSenderForWeight" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="FlightCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CustomCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BrokerCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="AdditionalCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalCostOfSenderForWeight" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="AirWaybill_Application" Member="Applications" ThisKey="Id" OtherKey="AirWaybillId" Type="Application" />
       <Association Name="Broker_AirWaybill" Member="Broker" ThisKey="BrokerId" OtherKey="Id" Type="Broker" IsForeignKey="true" />
       <Association Name="State_AirWaybill" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
@@ -180,7 +78,7 @@
       <Column Name="DateInStock" Type="System.DateTimeOffset" DbType="DateTimeOffset" CanBeNull="true" />
       <Column Name="StateChangeTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Value" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="CurrencyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ClassId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Certificate" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
@@ -189,26 +87,69 @@
       <Column Name="CountryId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="AirWaybillId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="SenderId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CalculationId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="FactoryName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Column Name="FactoryPhone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="FactoryContact" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="FactoryEmail" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="MarkName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="FactureCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="ScotchCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="WithdrawCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="FactureCostEdited" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="ScotchCostEdited" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="WithdrawCostEdited" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="ForwarderCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="TariffPerKg" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="SenderRate" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="TransitCost" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="FactureCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ScotchCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="WithdrawCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="FactureCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ScotchCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="WithdrawCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ForwarderCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SenderRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />
+      <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
       <Association Name="Country_Application" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
       <Association Name="State_Application" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
       <Association Name="Transit_Application" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
-      <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AvailableState" Member="AvailableStates" AccessModifier="Internal">
+    <Type Name="AvailableState" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="State_AvailableState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Broker" Member="Brokers" AccessModifier="Internal">
+    <Type Name="Broker" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Association Name="Broker_AirWaybill" Member="AirWaybills" ThisKey="Id" OtherKey="BrokerId" Type="AirWaybill" />
+      <Association Name="User_Broker" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Calculation" Member="Calculations" AccessModifier="Internal">
+    <Type Name="Calculation" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StateIdTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AirWaybillDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="MarkName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.Single" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ScotchCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="InsuranceCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Client_Calculation" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Carrier" Member="Carriers" AccessModifier="Internal">
+    <Type Name="Carrier" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Association Name="Carrier_Transit" Member="Transits" ThisKey="Id" OtherKey="CarrierId" Type="Transit" />
     </Type>
   </Table>
   <Table Name="dbo.Client" Member="Clients" AccessModifier="Internal">
@@ -239,23 +180,82 @@
       <Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Calculation" Member="Calculations" AccessModifier="Internal">
-    <Type Name="Calculation" AccessModifier="Internal" Modifier="Sealed">
+  <Table Name="dbo.Country" Member="Countries" AccessModifier="Internal">
+    <Type Name="Country" AccessModifier="Internal" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="StateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="StateIdTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
-      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationHistoryId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="AirWaybillDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="MarkName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
-      <Column Name="TariffPerKg" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
-      <Column Name="ScotchCost" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
-      <Column Name="InsuranceCost" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
-      <Column Name="FactureCost" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
-      <Association Name="Client_Calculation" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Column Name="Name_En" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Name_Ru" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Association Name="Country_Application" Member="Applications" ThisKey="Id" OtherKey="CountryId" Type="Application" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Forwarder" Member="Forwarders" AccessModifier="Internal">
+    <Type Name="Forwarder" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Forwarder" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sender" Member="Senders" AccessModifier="Internal">
+    <Type Name="Sender" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Sender" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.State" Member="States" AccessModifier="Internal">
+    <Type Name="State" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="State_VisibleState" Member="VisibleStates" ThisKey="Id" OtherKey="StateId" Type="VisibleState" />
+      <Association Name="State_AirWaybill" Member="AirWaybills" ThisKey="Id" OtherKey="StateId" Type="AirWaybill" />
+      <Association Name="State_Application" Member="Applications" ThisKey="Id" OtherKey="StateId" Type="Application" />
+      <Association Name="State_AvailableState" Member="AvailableStates" ThisKey="Id" OtherKey="StateId" Type="AvailableState" />
+      <Association Name="State_StateLocalization" Member="StateLocalizations" ThisKey="Id" OtherKey="StateId" Type="StateLocalization" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StateLocalization" Member="StateLocalizations" AccessModifier="Internal">
+    <Type Name="StateLocalization" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TwoLetterISOLanguageName" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="State_StateLocalization" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transit" Member="Transits" AccessModifier="Internal">
+    <Type Name="Transit" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="RecipientName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="WarehouseWorkingTime" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MethodOfTransitId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DeliveryTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CarrierId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="Transit_Application" Member="Applications" ThisKey="Id" OtherKey="TransitId" Type="Application" />
+      <Association Name="Transit_Client" Member="Clients" ThisKey="Id" OtherKey="TransitId" Type="Client" />
+      <Association Name="Carrier_Transit" Member="Carrier" ThisKey="CarrierId" OtherKey="Id" Type="Carrier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users" AccessModifier="Internal">
+    <Type Name="User" AccessModifier="Internal" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Login" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PasswordSalt" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TwoLetterISOLanguageName" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Admin" Member="Admins" ThisKey="Id" OtherKey="UserId" Type="Admin" />
+      <Association Name="User_Broker" Member="Brokers" ThisKey="Id" OtherKey="UserId" Type="Broker" />
+      <Association Name="User_Client" Member="Clients" ThisKey="Id" OtherKey="UserId" Type="Client" />
+      <Association Name="User_Forwarder" Member="Forwarders" ThisKey="Id" OtherKey="UserId" Type="Forwarder" />
+      <Association Name="User_Sender" Member="Senders" ThisKey="Id" OtherKey="UserId" Type="Sender" />
     </Type>
   </Table>
 </Database>
