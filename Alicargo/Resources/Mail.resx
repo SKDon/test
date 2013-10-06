@@ -268,27 +268,6 @@ Changing the status of AWB: air waybill number {0}, "added paking-list"</value>
   <data name="Awb_Set" xml:space="preserve">
     <value>Заявке {7} задана авианакладная, Аэропорт вылета: {0}/{1}, Аэропорт прилета: {2}/{3}, Вес: {4}, Количество мест: {5}. Номер накладной: {6}</value>
   </data>
-  <data name="Calculation_Body" xml:space="preserve">
-    <value>{0}
-{1} - {2} {3} kg * {4} € = {5} €
-скотч - {6}
-страховка - {7}
-фактура - {8}
-Итого - {9} €</value>
-    <comment>0  - AWB display
-1 - app display
-2 - mark
-3 - weight
-4 - tarif per kg
-5 - 4 * 5
-6 - scoth
-7 - insurance
-8 - facture
-9 - total</comment>
-  </data>
-  <data name="Calculation_Subject" xml:space="preserve">
-    <value>Расчет стоимости заявки {0}</value>
-  </data>
   <data name="Client_Add" xml:space="preserve">
     <value>Добрый день, {0}! Вы зарегистрированны в системе отслеживания грузов компании  Alicargo. Имя доступа: {1}, Пароль: {2}.</value>
   </data>

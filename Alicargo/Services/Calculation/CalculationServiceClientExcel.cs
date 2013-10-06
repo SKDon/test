@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.Calculation
 {
+	[Obsolete]
 	internal sealed class CalculationServiceClientExcel : ICalculationService
 	{
 		private readonly ICalculationService _service;
