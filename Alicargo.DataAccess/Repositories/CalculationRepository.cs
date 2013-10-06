@@ -19,7 +19,6 @@ namespace Alicargo.DataAccess.Repositories
 			{
 				AirWaybillDisplay = data.AirWaybillDisplay,
 				ApplicationDisplay = data.ApplicationDisplay,
-				Client = null,
 				ClientId = data.ClientId,
 				FactureCost = data.FactureCost,
 				Id = 0,
@@ -40,10 +39,13 @@ namespace Alicargo.DataAccess.Repositories
 						  .OrderBy(x => x.StateIdTimestamp)
 						  .Select(x => new VersionedData<CalculationState, CalculationData>
 						  {
-							  State = (CalculationState)x.StateId,
-							  StateTimestamp = x.StateIdTimestamp,
-							  Id = x.Id,
-							  RowVersion = x.RowVersion.ToArray(),
+							  Version = new VersionData<CalculationState>
+							  {
+								  State = (CalculationState)x.StateId,
+								  StateTimestamp = x.StateIdTimestamp,
+								  Id = x.Id,
+								  RowVersion = x.RowVersion.ToArray(),
+							  },
 							  Data = new CalculationData
 							  {
 								  AirWaybillDisplay = x.AirWaybillDisplay,
@@ -60,19 +62,23 @@ namespace Alicargo.DataAccess.Repositories
 						  .ToArray();
 		}
 
-		// todo: 1. test
-		public void SetState(long id, byte[] rowVersion, CalculationState state)
+		public VersionData<CalculationState> SetState(long id, byte[] rowVersion, CalculationState state)
 		{
-			var calculation = Context.Calculations.First(x => x.Id == id);
+			var result = Context.Calculation_SetState(id, rowVersion, (int)state).FirstOrDefault();
 
-			if (calculation.RowVersion != rowVersion)
+			if (result == null)
 			{
 				throw new EntityUpdateConflict("The calculation " + id.ToString(CultureInfo.InvariantCulture)
 											   + " is updated already.");
 			}
 
-			calculation.StateId = (int)state;
-			calculation.StateIdTimestamp = DateTimeOffset.UtcNow;
+			return new VersionData<CalculationState>
+			{
+				Id = id,
+				RowVersion = result.RowVersion,
+				State = state,
+				StateTimestamp = result.StateTimestamp
+			};
 		}
 	}
 }

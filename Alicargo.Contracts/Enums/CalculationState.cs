@@ -2,7 +2,9 @@
 {
 	public enum CalculationState
 	{
+		Done,
 		New = 0,
-		Done
+		Sending = 1,
+		Sended = 2
 	}
 }

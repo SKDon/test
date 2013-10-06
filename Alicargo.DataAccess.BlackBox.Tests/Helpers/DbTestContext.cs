@@ -13,7 +13,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
         private readonly TransactionScope _transactionScope;
         private readonly SqlConnection _connection;
 
-        public Fixture Fixture { get; private set; }
+		public IFixture Fixture { get; private set; }
 
         public IUnitOfWork UnitOfWork { get; private set; }
 

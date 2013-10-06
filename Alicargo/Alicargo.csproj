@@ -261,8 +261,6 @@
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationSenderManager.cs" />
     <Compile Include="Services\Calculation\CalculationPresenter.cs" />
-    <Compile Include="Services\Calculation\CalculationServiceClientExcel.cs" />
-    <Compile Include="Services\Calculation\ClientCalculationExcelRow.cs" />
     <Compile Include="Services\Client\ClientPermissions.cs" />
     <Compile Include="Services\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />

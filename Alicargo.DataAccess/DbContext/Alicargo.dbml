@@ -258,4 +258,16 @@
       <Association Name="User_Sender" Member="Senders" ThisKey="Id" OtherKey="UserId" Type="Sender" />
     </Type>
   </Table>
+  <Table Name="" Member="VersionDatas">
+    <Type Name="VersionData" Id="ID1">
+      <Column Name="RowVersion" Type="System.Byte[]" DbType="rowversion NOT NULL" IsReadOnly="true" CanBeNull="false" />
+      <Column Name="StateTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" IsReadOnly="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Calculation_SetState" Method="Calculation_SetState">
+    <Parameter Name="Id" Parameter="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="RowVersion" Parameter="rowVersion" Type="System.Data.Linq.Binary" DbType="rowversion" />
+    <Parameter Name="State" Parameter="state" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID1" />
+  </Function>
 </Database>

@@ -7,6 +7,6 @@ namespace Alicargo.Contracts.Repositories
 	{
 		void Add(CalculationData data);
 		VersionedData<CalculationState, CalculationData>[] Get(CalculationState state);
-		void SetState(long id, byte[] rowVersion, CalculationState state);
+		VersionData<CalculationState> SetState(long id, byte[] rowVersion, CalculationState state);
 	}
 }

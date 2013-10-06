@@ -231,6 +231,21 @@ namespace Alicargo.DataAccess.DbContext
 				return this.GetTable<User>();
 			}
 		}
+		
+		public System.Data.Linq.Table<VersionData> VersionDatas
+		{
+			get
+			{
+				return this.GetTable<VersionData>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Calculation_SetState")]
+		public ISingleResult<VersionData> Calculation_SetState([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id", DbType="BigInt")] System.Nullable<long> id, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RowVersion", DbType="rowversion")] System.Data.Linq.Binary rowVersion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="State", DbType="Int")] System.Nullable<int> state)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, rowVersion, state);
+			return ((ISingleResult<VersionData>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
@@ -5896,6 +5911,37 @@ namespace Alicargo.DataAccess.DbContext
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class VersionData
+	{
+		
+		private byte[] _RowVersion = default(byte[]);
+		
+		private System.DateTimeOffset _StateTimestamp = default(System.DateTimeOffset);
+		
+		public VersionData()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RowVersion", DbType="rowversion NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public byte[] RowVersion
+		{
+			get
+			{
+				return this._RowVersion;
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateTimestamp", DbType="DateTimeOffset NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public System.DateTimeOffset StateTimestamp
+		{
+			get
+			{
+				return this._StateTimestamp;
+			}
 		}
 	}
 }
