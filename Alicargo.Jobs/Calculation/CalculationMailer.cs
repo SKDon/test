@@ -6,7 +6,7 @@ using Alicargo.Core.Services;
 
 namespace Alicargo.Jobs.Calculation
 {
-	internal sealed class CalculationMailer : ICalculationMailer
+	public sealed class CalculationMailer : ICalculationMailer
 	{
 		private readonly IClientRepository _clients;
 		private readonly IMailSender _mailSender;

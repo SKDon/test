@@ -152,6 +152,8 @@
     <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\CompositionRootHelper.cs" />
+    <Compile Include="App_Start\JobsHelper.cs" />
+    <Compile Include="App_Start\StatelessJobRunner.cs" />
     <Compile Include="Controllers\ApplicationListController.cs" />
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
@@ -1510,6 +1512,10 @@
     <ProjectReference Include="..\Alicargo.DataAccess\Alicargo.DataAccess.csproj">
       <Project>{37068536-3066-4877-91e0-05031d2c5ca3}</Project>
       <Name>Alicargo.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Jobs\Alicargo.Jobs.csproj">
+      <Project>{c2133743-7762-4bd9-a824-eb039e41af58}</Project>
+      <Name>Alicargo.Jobs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

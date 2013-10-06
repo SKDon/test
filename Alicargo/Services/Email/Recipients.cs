@@ -3,7 +3,6 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Contract;
 using Alicargo.Core.Services;
-using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.Email
 {

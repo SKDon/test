@@ -2,7 +2,7 @@
 
 namespace Alicargo.Jobs.Calculation
 {
-	internal interface ICalculationMailer
+	public interface ICalculationMailer
 	{
 		void Send(CalculationData calculation);
 	}
