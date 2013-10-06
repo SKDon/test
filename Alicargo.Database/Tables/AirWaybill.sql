@@ -4,8 +4,8 @@
 
 	[ArrivalAirport]				NVARCHAR (MAX)		NOT NULL,
 	[DepartureAirport]				NVARCHAR (MAX)		NOT NULL,
-	[DateOfDeparture]				DATETIMEOFFSET(0)	NOT NULL,
-	[DateOfArrival]					DATETIMEOFFSET(0)	NOT NULL,
+	[DateOfDeparture]				DATETIMEOFFSET		NOT NULL,
+	[DateOfArrival]					DATETIMEOFFSET		NOT NULL,
 
 	[BrokerId]						BIGINT				NOT NULL,
 	[GTD]							NVARCHAR (320)		NULL,

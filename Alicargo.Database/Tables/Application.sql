@@ -30,8 +30,8 @@
 	[Volume]				NUMERIC(18, 4)		NOT NULL,
 	[TermsOfDelivery]		NVARCHAR (MAX)		NULL,
 	[MethodOfDeliveryId]	INT					NOT NULL,
-	[DateOfCargoReceipt]	DATETIMEOFFSET(0)	NULL,
-	[DateInStock]			DATETIMEOFFSET(0)	NULL,
+	[DateOfCargoReceipt]	DATETIMEOFFSET		NULL,
+	[DateInStock]			DATETIMEOFFSET		NULL,
 
 	[StateChangeTimestamp]	DATETIMEOFFSET		NOT NULL,
 	[StateId]				BIGINT				NOT NULL,
