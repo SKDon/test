@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
+using Alicargo.Core.Services;
 using Alicargo.MvcHelpers.Filters;
 using Ninject;
-using log4net;
 
 namespace Alicargo.App_Start
 {

@@ -290,6 +290,7 @@
     <Compile Include="Services\Email\SilentMailSender.cs" />
     <Compile Include="Services\IdentityService.cs" />
     <Compile Include="Services\AirWaybill\AwbPresenter.cs" />
+    <Compile Include="Services\Log4NetWrapper.cs" />
     <Compile Include="Services\StateConfig.cs" />
     <Compile Include="Services\StateService.cs" />
     <Compile Include="Services\TransitService.cs" />

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Services;
-using log4net;
+using Alicargo.Services;
 using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
@@ -19,7 +19,7 @@ namespace Alicargo.App_Start
 
 		public static void BindServices(IKernel kernel)
 		{
-			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger("Logger")).InSingletonScope();
+			kernel.Bind<ILog>().ToMethod(context => new Log4NetWrapper(log4net.LogManager.GetLogger("Logger"))).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
@@ -31,8 +31,6 @@ namespace Alicargo.App_Start
 										  .Excluding(binded)
 										  .BindDefaultInterface()
 										  .Configure(binding => binding.InRequestScope()));
-
-			LogManager.GetLogger("Logger").Info("Application started");
 		}
 
 		private static bool IsServiceType(Type type)
