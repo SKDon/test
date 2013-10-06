@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculation\CalculationMailer.cs" />
+    <Compile Include="Calculation\ICalculationMailer.cs" />
     <Compile Include="IJob.cs" />
+    <Compile Include="Calculation\CalculationMailerJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

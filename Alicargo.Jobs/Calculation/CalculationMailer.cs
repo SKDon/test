@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Contract;
 using Alicargo.Core.Services;
 
 namespace Alicargo.Jobs.Calculation
 {
-	internal sealed class CalculationMailer : IJob<VersionedData<CalculationState, CalculationData>>
+	internal sealed class CalculationMailer : ICalculationMailer
 	{
 		private readonly IClientRepository _clients;
 		private readonly IMailSender _mailSender;
@@ -20,11 +19,10 @@ namespace Alicargo.Jobs.Calculation
 			_clients = clients;
 		}
 
-		public void Run(VersionedData<CalculationState, CalculationData> data)
+		public void Send(CalculationData calculation)
 		{
-			var calculation = data.Data;
 			var client = _clients.Get(calculation.ClientId).First();
-			var cost = calculation.TariffPerKg * (decimal)calculation.Weight;
+			var cost = calculation.TariffPerKg*(decimal) calculation.Weight;
 			var total = cost + calculation.ScotchCost + calculation.FactureCost + calculation.InsuranceCost;
 
 			var text = string.Format(Resources.Calculation_Body,

@@ -1,7 +1,7 @@
 ﻿namespace Alicargo.Jobs
 {
-	public interface IJob<in T>
+	public interface IJob
 	{
-		void Run(T data);
+		void Run();
 	}
 }
