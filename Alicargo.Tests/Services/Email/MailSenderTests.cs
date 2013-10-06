@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Services.Contract;
+using Alicargo.Core.Contract;
 using Alicargo.Services.Email;
 using Alicargo.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

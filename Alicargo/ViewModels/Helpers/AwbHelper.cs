@@ -5,6 +5,7 @@ namespace Alicargo.ViewModels.Helpers
 {
 	public static class AwbHelper
 	{
+		// todo: 3. return decoded text and encode then need
 		public static string GetAirWaybillDisplay(AirWaybillData data)
 		{
 			return string.Format("{0} &plusmn; {1}_{2} &plusmn; {3}_{4}{5}", data.Bill,

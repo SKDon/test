@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\Message.cs" />
+    <Compile Include="Contract\Recipient.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
     <Compile Include="Enums\DeliveryType.cs" />
@@ -92,6 +94,8 @@
       <DependentUpon>Enums.it.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
+    <Compile Include="Services\IMailSender.cs" />
+    <Compile Include="Services\IRecipients.cs" />
     <Compile Include="Services\PasswordConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

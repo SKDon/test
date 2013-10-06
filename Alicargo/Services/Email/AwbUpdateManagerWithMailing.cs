@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Contract;
+using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.Contract;
 using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.Email

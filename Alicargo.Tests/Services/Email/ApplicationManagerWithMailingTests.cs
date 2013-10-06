@@ -1,5 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Services.Contract;
+using Alicargo.Core.Contract;
 using Alicargo.Services.Email;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.Application;

@@ -164,8 +164,6 @@
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="Services\Calculation\CalculationService.cs" />
-    <Compile Include="Services\Calculation\CalculationClientFile.cs" />
-    <Compile Include="Services\Calculation\CalculationServiceSender.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
@@ -246,7 +244,6 @@
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Abstract\IIdentityService.cs" />
     <Compile Include="Services\Abstract\ILocalizationService.cs" />
-    <Compile Include="Services\Abstract\IMailSender.cs" />
     <Compile Include="Services\Abstract\IMessageBuilder.cs" />
     <Compile Include="Services\Abstract\IStateConfig.cs" />
     <Compile Include="Services\Abstract\IStateService.cs" />
@@ -264,18 +261,15 @@
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationSenderManager.cs" />
     <Compile Include="Services\Calculation\CalculationPresenter.cs" />
-    <Compile Include="Services\Abstract\ICalculationClientFile.cs" />
     <Compile Include="Services\Calculation\CalculationServiceClientExcel.cs" />
     <Compile Include="Services\Calculation\ClientCalculationExcelRow.cs" />
     <Compile Include="Services\Client\ClientPermissions.cs" />
     <Compile Include="Services\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />
-    <Compile Include="Services\Contract\Recipient.cs" />
     <Compile Include="Services\Email\ApplicationAwbManagerWithMailing.cs" />
     <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
-    <Compile Include="Services\Abstract\IRecipients.cs" />
     <Compile Include="Services\Email\Recipients.cs" />
     <Compile Include="Services\Excel\AdminApplicationExcelRow.cs" />
     <Compile Include="Services\Excel\ApplicationExcelRowSource.cs" />
@@ -285,7 +279,6 @@
     <Compile Include="Services\Excel\SenderApplicationExcelRow.cs" />
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateManager.cs" />
-    <Compile Include="Services\Contract\Message.cs" />
     <Compile Include="Services\Email\ApplicationManagerWithMailing.cs" />
     <Compile Include="Services\Email\AwbUpdateManagerWithMailing.cs" />
     <Compile Include="Services\Email\MailSender.cs" />

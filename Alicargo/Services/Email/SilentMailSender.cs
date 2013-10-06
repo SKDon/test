@@ -1,7 +1,7 @@
 ﻿using System;
+using Alicargo.Core.Contract;
 using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.Contract;
 using log4net;
 
 namespace Alicargo.Services.Email

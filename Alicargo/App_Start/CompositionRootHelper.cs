@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alicargo.Contracts.Enums;
+using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
 using Alicargo.Services.Application;
-using Alicargo.Services.Calculation;
 using Alicargo.Services.Client;
 using Alicargo.Services.Email;
 using Ninject;
@@ -23,14 +23,6 @@ namespace Alicargo.App_Start
 				{
 					typeof (AwbManager),
 					typeof (AwbManagerWithMailing)
-				}
-			},
-			{
-				typeof(ICalculationService),
-				new []
-				{
-					typeof(CalculationServiceSender),
-					typeof(CalculationServiceClientExcel)
 				}
 			},
 			{

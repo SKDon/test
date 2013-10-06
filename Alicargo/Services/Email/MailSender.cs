@@ -1,8 +1,9 @@
 ﻿using System.Configuration;
 using System.IO;
 using System.Net.Mail;
+using Alicargo.Core.Contract;
+using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.Contract;
 
 namespace Alicargo.Services.Email
 {
