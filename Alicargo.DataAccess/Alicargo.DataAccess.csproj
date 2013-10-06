@@ -69,6 +69,7 @@
     <Compile Include="Repositories\ApplicationUpdateRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\BrokerRepository.cs" />
+    <Compile Include="Repositories\CalculationRepository.cs" />
     <Compile Include="Repositories\CarrierRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
