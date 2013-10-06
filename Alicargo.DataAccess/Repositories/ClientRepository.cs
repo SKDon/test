@@ -8,13 +8,15 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class ClientRepository : BaseRepository, IClientRepository
+	internal sealed class ClientRepository : IClientRepository
 	{
 		private readonly Expression<Func<Client, ClientData>> _selector;
+		private readonly AlicargoDataContext _context;
 
 		public ClientRepository(IUnitOfWork unitOfWork)
-			: base(unitOfWork)
 		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+
 			_selector = x => new ClientData
 			{
 				Id = x.Id,
@@ -39,12 +41,12 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long Count()
 		{
-			return Context.Clients.LongCount();
+			return _context.Clients.LongCount();
 		}
 
 		public ClientData[] GetRange(int take, long skip)
 		{
-			return Context.Clients
+			return _context.Clients
 						  .OrderBy(x => x.LegalEntity)
 						  .Skip((int)skip)
 						  .Take(take)
@@ -58,19 +60,19 @@ namespace Alicargo.DataAccess.Repositories
 
 			CopyTo(client, entity);
 
-			Context.Clients.InsertOnSubmit(entity);
+			_context.Clients.InsertOnSubmit(entity);
 
 			return () => entity.Id;
 		}
 
 		public ClientData GetByUserId(long userId)
 		{
-			return Context.Clients.Select(_selector).FirstOrDefault(x => x.UserId == userId);
+			return _context.Clients.Select(_selector).FirstOrDefault(x => x.UserId == userId);
 		}
 
 		public ClientData GetById(long clientId)
 		{
-			return Context.Clients
+			return _context.Clients
 						  .Where(x => x.Id == clientId)
 						  .Select(_selector)
 						  .FirstOrDefault();
@@ -78,26 +80,26 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void Delete(long id)
 		{
-			var entity = Context.Clients.First(x => x.Id == id);
+			var entity = _context.Clients.First(x => x.Id == id);
 
-			Context.Clients.DeleteOnSubmit(entity);
+			_context.Clients.DeleteOnSubmit(entity);
 		}
 
 		public ClientData[] GetAll()
 		{
-			return Context.Clients.Select(_selector).ToArray();
+			return _context.Clients.Select(_selector).ToArray();
 		}
 
 		public void Update(ClientData client)
 		{
-			var entity = Context.Clients.First(x => x.Id == client.Id);
+			var entity = _context.Clients.First(x => x.Id == client.Id);
 
 			CopyTo(client, entity);
 		}
 
 		public ClientData[] Get(params long[] clinentIds)
 		{
-			return Context.Clients
+			return _context.Clients
 						  .Where(x => clinentIds.Contains(x.Id))
 						  .Select(_selector)
 						  .ToArray();
@@ -106,7 +108,7 @@ namespace Alicargo.DataAccess.Repositories
 		// todo: 2. test
 		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
 		{
-			return Context.Applications
+			return _context.Applications
 						  .Where(x => appIds.Contains(x.Id))
 						  .Select(x => new { x.Id, ClientNic = x.Client.Nic })
 						  .ToDictionary(x => x.Id, x => x.ClientNic);
@@ -114,7 +116,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void SetCalculationExcel(long clientId, byte[] bytes)
 		{
-			var client = Context.Clients.First(x => x.Id == clientId);
+			var client = _context.Clients.First(x => x.Id == clientId);
 
 			client.CalculationFileData = bytes;
 		}

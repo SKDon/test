@@ -7,9 +7,14 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class ApplicationUpdateRepository : BaseRepository, IApplicationUpdateRepository
+	internal sealed class ApplicationUpdateRepository : IApplicationUpdateRepository
 	{
-		public ApplicationUpdateRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+		private readonly AlicargoDataContext _context;
+
+		public ApplicationUpdateRepository(IUnitOfWork unitOfWork)
+		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+		}
 
 		public Func<long> Add(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
 							  byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
@@ -18,15 +23,15 @@ namespace Alicargo.DataAccess.Repositories
 
 			CopyTo(application, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile, entity);
 
-			Context.Applications.InsertOnSubmit(entity);
+			_context.Applications.InsertOnSubmit(entity);
 
 			return () => entity.Id;
 		}
 
 		public void Delete(long id)
 		{
-			var application = Context.Applications.First(x => x.Id == id);
-			Context.Applications.DeleteOnSubmit(application);
+			var application = _context.Applications.First(x => x.Id == id);
+			_context.Applications.DeleteOnSubmit(application);
 		}
 
 		public void SetState(long id, long stateId)
@@ -99,7 +104,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		private void Update(long id, Action<Application> action)
 		{
-			var application = Context.Applications.First(x => x.Id == id);
+			var application = _context.Applications.First(x => x.Id == id);
 			action(application);
 		}
 

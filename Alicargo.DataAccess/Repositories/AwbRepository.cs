@@ -8,13 +8,15 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class AwbRepository : BaseRepository, IAwbRepository
+	internal sealed class AwbRepository : IAwbRepository
 	{
 		private readonly Expression<Func<AirWaybill, AirWaybillData>> _selector;
+		private readonly AlicargoDataContext _context;
 
 		public AwbRepository(IUnitOfWork unitOfWork)
-			: base(unitOfWork)
 		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+
 			_selector = x => new AirWaybillData
 			{
 				ArrivalAirport = x.ArrivalAirport,
@@ -48,7 +50,7 @@ namespace Alicargo.DataAccess.Repositories
 
 			Map(data, entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
 
-			Context.AirWaybills.InsertOnSubmit(entity);
+			_context.AirWaybills.InsertOnSubmit(entity);
 
 			return () => entity.Id;
 		}
@@ -56,8 +58,8 @@ namespace Alicargo.DataAccess.Repositories
 		public AirWaybillData[] Get(params long[] ids)
 		{
 			var airWaybills = ids.Length == 0
-				? Context.AirWaybills.AsQueryable()
-				: Context.AirWaybills.Where(x => ids.Contains(x.Id));
+				? _context.AirWaybills.AsQueryable()
+				: _context.AirWaybills.Where(x => ids.Contains(x.Id));
 
 			return airWaybills.Select(_selector).ToArray();
 		}
@@ -65,13 +67,13 @@ namespace Alicargo.DataAccess.Repositories
 		public long Count(long? brokerId = null)
 		{
 			return brokerId.HasValue
-				? Context.AirWaybills.Where(x => x.BrokerId == brokerId.Value).LongCount()
-				: Context.AirWaybills.LongCount();
+				? _context.AirWaybills.Where(x => x.BrokerId == brokerId.Value).LongCount()
+				: _context.AirWaybills.LongCount();
 		}
 
 		public AirWaybillData[] GetRange(int take, long skip, long? brokerId = null)
 		{
-			var airWaybills = Context.AirWaybills.OrderByDescending(x => x.CreationTimestamp).AsQueryable();
+			var airWaybills = _context.AirWaybills.OrderByDescending(x => x.CreationTimestamp).AsQueryable();
 			if (brokerId.HasValue)
 			{
 				airWaybills = airWaybills.Where(x => x.BrokerId == brokerId.Value);
@@ -85,8 +87,8 @@ namespace Alicargo.DataAccess.Repositories
 		public AirWaybillAggregate[] GetAggregate(params long[] ids)
 		{
 			var waybills = ids.Length == 0
-				? Context.AirWaybills.AsQueryable()
-				: Context.AirWaybills.Where(x => ids.Contains(x.Id));
+				? _context.AirWaybills.AsQueryable()
+				: _context.AirWaybills.Where(x => ids.Contains(x.Id));
 
 			var data = waybills.Select(x => new
 			{
@@ -112,18 +114,18 @@ namespace Alicargo.DataAccess.Repositories
 		// todo: 2. bb-test
 		public float? GetTotalWeightWithouAwb()
 		{
-			return Context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Weight);
+			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Weight);
 		}
 
 		// todo: 2. bb-test
 		public int? GetTotalCountWithouAwb()
 		{
-			return Context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Count);
+			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Count);
 		}
 
 		public string[] GetClientEmails(long id)
 		{
-			return Context.AirWaybills
+			return _context.AirWaybills
 						  .Where(x => x.Id == id)
 						  .SelectMany(x => x.Applications)
 						  .Select(x => x.Client.Email)
@@ -132,28 +134,28 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void SetAdditionalCost(long awbId, decimal? additionalCost)
 		{
-			var data = Context.AirWaybills.First(x => x.Id == awbId);
+			var data = _context.AirWaybills.First(x => x.Id == awbId);
 			data.AdditionalCost = additionalCost;
 		}
 
 		public void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
 						   byte[] invoiceFile, byte[] awbFile)
 		{
-			var entity = Context.AirWaybills.First(x => x.Id == data.Id);
+			var entity = _context.AirWaybills.First(x => x.Id == data.Id);
 
 			Map(data, entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
 		}
 
 		public void Delete(long id)
 		{
-			var airWaybill = Context.AirWaybills.First(x => x.Id == id);
+			var airWaybill = _context.AirWaybills.First(x => x.Id == id);
 
-			Context.AirWaybills.DeleteOnSubmit(airWaybill);
+			_context.AirWaybills.DeleteOnSubmit(airWaybill);
 		}
 
 		public void SetState(long airWaybillId, long stateId)
 		{
-			var airWaybill = Context.AirWaybills.First(x => x.Id == airWaybillId);
+			var airWaybill = _context.AirWaybills.First(x => x.Id == airWaybillId);
 			airWaybill.StateId = stateId;
 			airWaybill.StateChangeTimestamp = DateTimeOffset.UtcNow;
 		}
@@ -218,7 +220,7 @@ namespace Alicargo.DataAccess.Repositories
 		private FileHolder GetFile(Expression<Func<AirWaybill, bool>> where,
 								   Expression<Func<AirWaybill, FileHolder>> selector)
 		{
-			return Context.AirWaybills.Where(where).Select(selector).FirstOrDefault();
+			return _context.AirWaybills.Where(where).Select(selector).FirstOrDefault();
 		}
 
 		#endregion

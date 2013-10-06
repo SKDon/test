@@ -8,13 +8,15 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class UserRepository : BaseRepository, IUserRepository
+	internal sealed class UserRepository : IUserRepository
 	{
 		private readonly IPasswordConverter _converter;
+		private readonly AlicargoDataContext _context;
 
 		public UserRepository(IUnitOfWork unitOfWork, IPasswordConverter converter)
-			: base(unitOfWork)
 		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+
 			_converter = converter;
 		}
 
@@ -34,7 +36,7 @@ namespace Alicargo.DataAccess.Repositories
 			switch (role)
 			{
 				case RoleType.Admin:
-					return Context.Admins.Select(x => new UserData
+					return _context.Admins.Select(x => new UserData
 					{
 						EntityId = x.Id,
 						UserId = x.UserId,
@@ -45,7 +47,7 @@ namespace Alicargo.DataAccess.Repositories
 					}).ToArray();
 
 				case RoleType.Broker:
-					return Context.Brokers.Select(x => new UserData
+					return _context.Brokers.Select(x => new UserData
 					{
 						EntityId = x.Id,
 						UserId = x.UserId,
@@ -56,7 +58,7 @@ namespace Alicargo.DataAccess.Repositories
 					}).ToArray();
 
 				case RoleType.Client:
-					return Context.Clients.Select(x => new UserData
+					return _context.Clients.Select(x => new UserData
 					{
 						EntityId = x.Id,
 						UserId = x.UserId,
@@ -67,7 +69,7 @@ namespace Alicargo.DataAccess.Repositories
 					}).ToArray();
 
 				case RoleType.Forwarder:
-					return Context.Forwarders.Select(x => new UserData
+					return _context.Forwarders.Select(x => new UserData
 					{
 						EntityId = x.Id,
 						UserId = x.UserId,
@@ -78,7 +80,7 @@ namespace Alicargo.DataAccess.Repositories
 					}).ToArray();
 
 				case RoleType.Sender:
-					return Context.Senders.Select(x => new UserData
+					return _context.Senders.Select(x => new UserData
 					{
 						EntityId = x.Id,
 						UserId = x.UserId,
@@ -95,7 +97,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void UpdateSender(long id, string name, string login, string email, string newPassword)
 		{
-			var entity = Context.Senders.First(x => x.Id == id);
+			var entity = _context.Senders.First(x => x.Id == id);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
@@ -104,7 +106,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void UpdateAdmin(long id, string name, string login, string email, string newPassword)
 		{
-			var entity = Context.Admins.First(x => x.Id == id);
+			var entity = _context.Admins.First(x => x.Id == id);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
@@ -113,7 +115,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void UpdateBroker(long id, string name, string login, string email, string newPassword)
 		{
-			var entity = Context.Brokers.First(x => x.Id == id);
+			var entity = _context.Brokers.First(x => x.Id == id);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
@@ -122,7 +124,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void UpdateForwarder(long id, string name, string login, string email, string newPassword)
 		{
-			var entity = Context.Forwarders.First(x => x.Id == id);
+			var entity = _context.Forwarders.First(x => x.Id == id);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
@@ -131,7 +133,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void AddForwarder(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
 		{
-			Context.Forwarders.InsertOnSubmit(new Forwarder
+			_context.Forwarders.InsertOnSubmit(new Forwarder
 			{
 				Name = name,
 				User = SetNewPassword(newPassword, new User { Login = login, TwoLetterISOLanguageName = twoLetterISOLanguageName }),
@@ -141,7 +143,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void AddBroker(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
 		{
-			Context.Brokers.InsertOnSubmit(new Broker
+			_context.Brokers.InsertOnSubmit(new Broker
 			{
 				Name = name,
 				User = SetNewPassword(newPassword, new User { Login = login, TwoLetterISOLanguageName = twoLetterISOLanguageName }),
@@ -151,7 +153,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void AddSender(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
 		{
-			Context.Senders.InsertOnSubmit(new Sender
+			_context.Senders.InsertOnSubmit(new Sender
 			{
 				Name = name,
 				User = SetNewPassword(newPassword, new User { Login = login, TwoLetterISOLanguageName = twoLetterISOLanguageName }),
@@ -161,7 +163,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void AddAdmin(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
 		{
-			Context.Admins.InsertOnSubmit(new Admin
+			_context.Admins.InsertOnSubmit(new Admin
 			{
 				Name = name,
 				User = SetNewPassword(newPassword, new User { Login = login, TwoLetterISOLanguageName = twoLetterISOLanguageName }),

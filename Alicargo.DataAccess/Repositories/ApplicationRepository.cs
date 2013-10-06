@@ -10,14 +10,16 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class ApplicationRepository : BaseRepository, IApplicationRepository
+	internal sealed class ApplicationRepository : IApplicationRepository
 	{
 		private readonly IApplicationRepositoryOrderer _orderer;
 		private readonly Expression<Func<Application, ApplicationData>> _selector;
+		private readonly AlicargoDataContext _context;
 
 		public ApplicationRepository(IUnitOfWork unitOfWork, IApplicationRepositoryOrderer orderer)
-			: base(unitOfWork)
 		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+
 			_orderer = orderer;
 
 			_selector = x => new ApplicationData
@@ -71,13 +73,13 @@ namespace Alicargo.DataAccess.Repositories
 
 		public ApplicationData Get(long id)
 		{
-			return Context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
+			return _context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
 		}
 
 		// todo: 2. test
 		public ApplicationData[] GetByAirWaybill(params long[] ids)
 		{
-			return Context.Applications
+			return _context.Applications
 						  .Where(x => x.AirWaybillId.HasValue && ids.Contains(x.AirWaybillId.Value))
 						  .Select(_selector)
 						  .ToArray();
@@ -85,7 +87,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public ApplicationDetailsData GetDetails(long id)
 		{
-			return Context.Applications.Where(x => x.Id == id)
+			return _context.Applications.Where(x => x.Id == id)
 						  .Select(x => new ApplicationDetailsData
 						  {
 							  AddressLoad = x.AddressLoad,
@@ -141,7 +143,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long Count(IEnumerable<long> stateIds, long? clientUserId = null)
 		{
-			var applications = Context.Applications.Where(x => stateIds.Contains(x.StateId));
+			var applications = _context.Applications.Where(x => stateIds.Contains(x.StateId));
 
 			if (clientUserId.HasValue)
 			{
@@ -153,15 +155,15 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long GetClientId(long id)
 		{
-			return Context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();
+			return _context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();
 		}
 
 		public ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null,
 											  Order[] orders = null, long? clientId = null)
 		{
 			var applications = stateIds != null && stateIds.Length > 0
-				? Context.Applications.Where(x => stateIds.Contains(x.StateId))
-				: Context.Applications.AsQueryable();
+				? _context.Applications.Where(x => stateIds.Contains(x.StateId))
+				: _context.Applications.AsQueryable();
 
 			if (clientId.HasValue)
 			{
@@ -291,7 +293,7 @@ namespace Alicargo.DataAccess.Repositories
 		private FileHolder GetFile(Expression<Func<Application, bool>> where,
 								   Expression<Func<Application, FileHolder>> selector)
 		{
-			return Context.Applications.Where(where).Select(selector).FirstOrDefault();
+			return _context.Applications.Where(where).Select(selector).FirstOrDefault();
 		}
 
 		#endregion

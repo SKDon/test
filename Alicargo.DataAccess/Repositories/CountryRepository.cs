@@ -3,18 +3,24 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	sealed class CountryRepository : BaseRepository, ICountryRepository
+	sealed class CountryRepository : ICountryRepository
 	{
-		public CountryRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+		private readonly AlicargoDataContext _context;
+
+		public CountryRepository(IUnitOfWork unitOfWork)
+		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+		}
 
 		public CountryData[] Get(params long[] ids)
 		{
 			var countries = ids.Length > 0
-				? Context.Countries.Where(x => ids.Contains(x.Id)).ToArray()
-				: Context.Countries.ToArray();
+				? _context.Countries.Where(x => ids.Contains(x.Id)).ToArray()
+				: _context.Countries.ToArray();
 
 			return countries.Select(x => new CountryData(x.Id, new Dictionary<string, string>
 				{

@@ -8,13 +8,15 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-    internal sealed class AuthenticationRepository : BaseRepository, IAuthenticationRepository
+    internal sealed class AuthenticationRepository : IAuthenticationRepository
     {
         private readonly IPasswordConverter _converter;
+	    private readonly AlicargoDataContext _context;
 
-        public AuthenticationRepository(IUnitOfWork unitOfWork, IPasswordConverter converter)
-            : base(unitOfWork)
+	    public AuthenticationRepository(IUnitOfWork unitOfWork, IPasswordConverter converter)
         {
+			_context = (AlicargoDataContext)unitOfWork.Context;
+
             _converter = converter;
         }
 
@@ -23,19 +25,19 @@ namespace Alicargo.DataAccess.Repositories
             switch (role)
             {
                 case RoleType.Admin:
-                    return Context.Admins.Any(x => x.UserId == userId);
+                    return _context.Admins.Any(x => x.UserId == userId);
 
                 case RoleType.Broker:
-                    return Context.Brokers.Any(x => x.UserId == userId);
+                    return _context.Brokers.Any(x => x.UserId == userId);
 
                 case RoleType.Client:
-                    return Context.Clients.Any(x => x.UserId == userId);
+                    return _context.Clients.Any(x => x.UserId == userId);
 
                 case RoleType.Forwarder:
-                    return Context.Forwarders.Any(x => x.UserId == userId);
+                    return _context.Forwarders.Any(x => x.UserId == userId);
 
                 case RoleType.Sender:
-                    return Context.Senders.Any(x => x.UserId == userId);
+                    return _context.Senders.Any(x => x.UserId == userId);
 
                 default:
                     throw new ArgumentOutOfRangeException("role");
@@ -44,13 +46,13 @@ namespace Alicargo.DataAccess.Repositories
 
         public void SetTwoLetterISOLanguageName(long id, string twoLetterISOLanguageName)
         {
-            var user = Context.Users.First(x => x.Id == id);
+            var user = _context.Users.First(x => x.Id == id);
             user.TwoLetterISOLanguageName = twoLetterISOLanguageName;
         }
 
         public AuthenticationData GetByClientId(long clientId)
         {
-            var enitity = Context.Clients
+            var enitity = _context.Clients
                                  .Where(x => x.Id == clientId)
                                  .Select(x => x.User)
                                  .First();
@@ -61,7 +63,7 @@ namespace Alicargo.DataAccess.Repositories
         public AuthenticationData GetByLogin(string login)
         {
             // ReSharper disable SpecifyStringComparison
-            var enitity = Context.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
+            var enitity = _context.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
             // ReSharper restore SpecifyStringComparison
 
             return MapUser(enitity);
@@ -69,7 +71,7 @@ namespace Alicargo.DataAccess.Repositories
 
         public AuthenticationData GetById(long id)
         {
-            var enitity = Context.Users.FirstOrDefault(x => x.Id == id);
+            var enitity = _context.Users.FirstOrDefault(x => x.Id == id);
 
             return MapUser(enitity);
         }
@@ -83,7 +85,7 @@ namespace Alicargo.DataAccess.Repositories
                 };
             SetNewPassword(password, user);
 
-            Context.Users.InsertOnSubmit(user);
+            _context.Users.InsertOnSubmit(user);
 
             return () => user.Id;
         }
@@ -92,7 +94,7 @@ namespace Alicargo.DataAccess.Repositories
         {
             if (string.IsNullOrWhiteSpace(newLogin)) throw new ArgumentNullException("newLogin");
 
-            var entity = Context.Users.First(x => x.Id == userId);
+            var entity = _context.Users.First(x => x.Id == userId);
 
             SetNewPassword(newPassword, entity);
 

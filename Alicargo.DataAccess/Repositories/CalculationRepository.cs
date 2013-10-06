@@ -9,13 +9,18 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class CalculationRepository : BaseRepository, ICalculationRepository
+	internal sealed class CalculationRepository :  ICalculationRepository
 	{
-		public CalculationRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+		private readonly AlicargoDataContext _context;
+
+		public CalculationRepository(IUnitOfWork unitOfWork)
+		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+		}
 
 		public void Add(CalculationData data)
-		{
-			Context.Calculations.InsertOnSubmit(new Calculation
+		{			
+			_context.Calculations.InsertOnSubmit(new Calculation
 			{
 				AirWaybillDisplay = data.AirWaybillDisplay,
 				ApplicationDisplay = data.ApplicationDisplay,
@@ -35,7 +40,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public VersionedData<CalculationState, CalculationData>[] Get(CalculationState state)
 		{
-			return Context.Calculations.Where(x => x.StateId == (int)state)
+			return _context.Calculations.Where(x => x.StateId == (int)state)
 						  .OrderBy(x => x.StateIdTimestamp)
 						  .Select(x => new VersionedData<CalculationState, CalculationData>
 						  {
@@ -64,7 +69,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public VersionData<CalculationState> SetState(long id, byte[] rowVersion, CalculationState state)
 		{
-			var result = Context.Calculation_SetState(id, rowVersion, (int)state).FirstOrDefault();
+			var result = _context.Calculation_SetState(id, rowVersion, (int)state).FirstOrDefault();
 
 			if (result == null)
 			{

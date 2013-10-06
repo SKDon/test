@@ -1,15 +1,21 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class SenderRepository : BaseRepository, ISenderRepository
+	internal sealed class SenderRepository : ISenderRepository
 	{
-		public SenderRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+		private readonly AlicargoDataContext _context;
+
+		public SenderRepository(IUnitOfWork unitOfWork)
+		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+		}
 
 		public long? GetByUserId(long userId)
 		{
-			return Context.Senders.Where(x => x.UserId == userId).Select(x => x.Id).FirstOrDefault();
+			return _context.Senders.Where(x => x.UserId == userId).Select(x => x.Id).FirstOrDefault();
 		}
 	}
 }

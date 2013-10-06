@@ -7,13 +7,15 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class TransitRepository : BaseRepository, ITransitRepository
+	internal sealed class TransitRepository : ITransitRepository
 	{
 		private readonly Expression<Func<Transit, TransitData>> _selector;
+		private readonly AlicargoDataContext _context;
 
 		public TransitRepository(IUnitOfWork unitOfWork)
-			: base(unitOfWork)
 		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+
 			_selector = x => new TransitData
 			{
 				Address = x.Address,
@@ -34,21 +36,21 @@ namespace Alicargo.DataAccess.Repositories
 
 			CopyTo(transit, entity);
 
-			Context.Transits.InsertOnSubmit(entity);
+			_context.Transits.InsertOnSubmit(entity);
 
 			return () => entity.Id;
 		}
 
 		public void Update(TransitData transit)
 		{
-			var entity = Context.Transits.First(x => x.Id == transit.Id);
+			var entity = _context.Transits.First(x => x.Id == transit.Id);
 
 			CopyTo(transit, entity);
 		}
 
 		public TransitData[] Get(params long[] ids)
 		{
-			return Context.Transits
+			return _context.Transits
 						  .Where(x => ids.Contains(x.Id))
 						  .Select(_selector)
 						  .ToArray();
@@ -56,7 +58,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long? GetaApplicationId(long id)
 		{
-			return Context.Applications
+			return _context.Applications
 						  .Where(x => x.TransitId == id)
 						  .Select(x => x.Id)
 						  .FirstOrDefault();
@@ -64,7 +66,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public TransitData GetByApplication(long id)
 		{
-			return Context.Applications
+			return _context.Applications
 						  .Where(x => x.Id == id)
 						  .Select(x => x.Transit)
 						  .Select(_selector)
@@ -73,7 +75,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public TransitData GetByClient(long clientId)
 		{
-			return Context.Clients
+			return _context.Clients
 						  .Where(x => x.Id == clientId)
 						  .Select(x => x.Transit)
 						  .Select(_selector)
@@ -82,9 +84,9 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void Delete(long transitId)
 		{
-			var transit = Context.Transits.First(x => x.Id == transitId);
+			var transit = _context.Transits.First(x => x.Id == transitId);
 
-			Context.Transits.DeleteOnSubmit(transit);
+			_context.Transits.DeleteOnSubmit(transit);
 		}
 
 		public static void CopyTo(TransitData from, Transit to)

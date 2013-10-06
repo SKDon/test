@@ -9,13 +9,15 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class StateRepository : BaseRepository, IStateRepository
+	internal sealed class StateRepository : IStateRepository
 	{
 		private readonly Expression<Func<State, StateData>> _selector;
+		private readonly AlicargoDataContext _context;
 
 		public StateRepository(IUnitOfWork unitOfWork)
-			: base(unitOfWork)
 		{
+			_context = (AlicargoDataContext)unitOfWork.Context;
+
 			_selector = x => new StateData
 			{
 				Id = x.Id,
@@ -26,14 +28,14 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long Count()
 		{
-			return Context.States.LongCount();
+			return _context.States.LongCount();
 		}
 
 		public StateData[] GetAll()
 		{
-			var localizations = Context.StateLocalizations.ToArray();
+			var localizations = _context.StateLocalizations.ToArray();
 
-			var states = Context.States
+			var states = _context.States
 				.Select(_selector)
 				.OrderBy(x => x.Position)
 				.ToArray();
@@ -53,7 +55,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long[] GetAvailableStates(RoleType role)
 		{
-			return Context.AvailableStates
+			return _context.AvailableStates
 				.Where(x => x.RoleId == (int)role)
 				.OrderBy(x => x.State.Position)
 				.Select(x => x.StateId)
@@ -62,7 +64,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public RoleType[] GetAvailableRoles(long stateId)
 		{
-			return Context.AvailableStates
+			return _context.AvailableStates
 				.Where(x => x.StateId == stateId)
 				.OrderBy(x => x.State.Position)
 				.Select(x => x.RoleId)
@@ -72,7 +74,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long[] GetVisibleStates(RoleType role)
 		{
-			return Context.VisibleStates
+			return _context.VisibleStates
 				.Where(x => x.RoleId == (int)role)
 				.OrderBy(x => x.State.Position)
 				.Select(x => x.StateId)
@@ -83,9 +85,9 @@ namespace Alicargo.DataAccess.Repositories
 
 		private StateData Get(Expression<Func<State, bool>> expression)
 		{
-			var state = Context.States.Where(expression).Select(_selector).First();
+			var state = _context.States.Where(expression).Select(_selector).First();
 
-			var localizations = Context.StateLocalizations.ToArray();
+			var localizations = _context.StateLocalizations.ToArray();
 
 			AdjustLocalization(state, localizations);
 

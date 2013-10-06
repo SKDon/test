@@ -67,7 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationUpdateRepository.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\BrokerRepository.cs" />
     <Compile Include="Repositories\CalculationRepository.cs" />
     <Compile Include="Repositories\CarrierRepository.cs" />
