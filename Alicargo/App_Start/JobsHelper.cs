@@ -19,42 +19,61 @@ namespace Alicargo.App_Start
 {
 	internal static class JobsHelper
 	{
-		private const string JobRunnerAggregator = "JobRunnerAggregator";
-		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
+		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 
-		public static void RunJobs(IKernel kernel, CancellationTokenSource tokenSource)
+		public static Task RunJobs(IKernel kernel, CancellationTokenSource tokenSource)
 		{
-			Task.Factory.StartNew(state =>
-			{
-				var k = (IKernel) state;
-				var runner = k.Get<IJobRunner>(JobRunnerAggregator);
+			return Task.Factory
+					   .StartNew(state =>
+					   {
+						   var k = (IKernel)state;
+						   var runner = k.Get<JobRunnerAggregator>();
 
-				runner.Run(tokenSource);
-			}, kernel, tokenSource.Token)
-				.ContinueWith(task =>
-				{
-					// todo: test
-					if (task.IsFaulted && task.Exception != null)
-					{
-						var log = kernel.Get<ILog>();
+						   runner.Run(tokenSource);
+					   }, kernel, tokenSource.Token)
+					   .ContinueWith((task, state) =>
+					   {
+						   var k = (IKernel)state;
+						   // todo: test
+						   if (task.IsFaulted && task.Exception != null)
+						   {
+							   var log = k.Get<ILog>();
 
-						log.Error("A job failed", task.Exception);
-					}
-				});
+							   log.Error("A job failed", task.Exception);
+						   }
+					   }, kernel);
+		}
+
+		private static void BindStatelessJobRunner(IBindingRoot kernel, Func<IDbConnection, IJob> getJob,
+												   string connectionString, string jobName)
+		{
+			kernel.Bind<IJobRunner>()
+				  .ToMethod(context => new StatelessJobRunner(getJob, context.Kernel.Get<ILog>(), connectionString, PausePeriod))
+				  .InSingletonScope()
+				  .Named(jobName);
 		}
 
 		public static void BindJobs(IKernel kernel, string connectionString)
 		{
 			const string calculationMailerJob = "CalculationMailerJob";
+			const string clientExcelUpdaterJob = "ClientExcelUpdaterJob";
 
 			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob);
 
-			kernel.Bind<IJobRunner>().ToMethod(context =>
+			BindStatelessJobRunner(kernel, GetClientExcelUpdaterJob, connectionString, clientExcelUpdaterJob);
+
+			kernel.Bind<JobRunnerAggregator>().ToMethod(context =>
 			{
 				var mailer = context.Kernel.Get<IJobRunner>(calculationMailerJob);
+				var excelUpdater = context.Kernel.Get<IJobRunner>(clientExcelUpdaterJob);
 
-				return new JobRunnerAggregator(mailer);
-			}).InSingletonScope().Named(JobRunnerAggregator);
+				return new JobRunnerAggregator(mailer, excelUpdater);
+			}).InSingletonScope();
+		}
+
+		private static IJob GetClientExcelUpdaterJob(IDbConnection connection)
+		{
+			return new ClientExcelUpdaterJob();
 		}
 
 		private static IJob GetCalculationMailerJob(IDbConnection connection)
@@ -69,15 +88,6 @@ namespace Alicargo.App_Start
 			var mailer = new CalculationMailer(mailSender, recipients, clients);
 
 			return new CalculationMailerJob(calculations, mailer, log);
-		}
-
-		private static void BindStatelessJobRunner(IBindingRoot kernel, Func<IDbConnection, IJob> getJob,
-												   string connectionString, string jobName)
-		{
-			kernel.Bind<IJobRunner>()
-				  .ToMethod(context => new StatelessJobRunner(getJob, context.Kernel.Get<ILog>(), connectionString, PausePeriod))
-				  .InSingletonScope()
-				  .Named(jobName);
 		}
 	}
 }

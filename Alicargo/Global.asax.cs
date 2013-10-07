@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -13,6 +14,7 @@ namespace Alicargo
 	{
 		private readonly CancellationTokenSource _jobTokenSource = new CancellationTokenSource();
 		readonly string _connectionString = ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
+		private Task _jobs;
 
 		protected override IKernel CreateKernel()
 		{
@@ -26,7 +28,7 @@ namespace Alicargo
 
 			JobsHelper.BindJobs(kernel, _connectionString);
 
-			JobsHelper.RunJobs(kernel, _jobTokenSource);
+			_jobs = JobsHelper.RunJobs(kernel, _jobTokenSource);
 
 			RegisterConfigs(kernel);
 
@@ -35,7 +37,13 @@ namespace Alicargo
 
 		protected override void OnApplicationStopped()
 		{
-			_jobTokenSource.Cancel(false);
+			if (!_jobTokenSource.Token.IsCancellationRequested)
+			{
+				// todo: log on exception
+				_jobTokenSource.Cancel(false);
+
+				_jobs.Wait(JobsHelper.PausePeriod.Add(JobsHelper.PausePeriod));
+			}
 		}
 
 		private static void RegisterConfigs(IKernel kernel)

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Alicargo.Jobs
 {
-	public sealed class JobRunnerAggregator : IJobRunner
+	public sealed class JobRunnerAggregator
 	{
 		private readonly IJobRunner[] _runners;
 
