@@ -39,10 +39,9 @@ namespace Alicargo
 		{
 			if (!_jobTokenSource.Token.IsCancellationRequested)
 			{
-				// todo: log on exception
 				_jobTokenSource.Cancel(false);
 
-				_jobs.Wait(JobsHelper.PausePeriod.Add(JobsHelper.PausePeriod));
+				_jobs.Wait(JobsHelper.CancellationTimeout);
 			}
 		}
 

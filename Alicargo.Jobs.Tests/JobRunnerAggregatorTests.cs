@@ -21,7 +21,6 @@ namespace Alicargo.Jobs.Tests
 			_runner2 = new Mock<IJobRunner>(MockBehavior.Strict);
 
 			_aggregator = new JobRunnerAggregator(TimeSpan.FromSeconds(2), _runner1.Object, _runner2.Object);
-
 		}
 
 		[TestMethod, Timeout(5000)]

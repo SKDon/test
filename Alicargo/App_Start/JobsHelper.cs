@@ -20,6 +20,7 @@ namespace Alicargo.App_Start
 	internal static class JobsHelper
 	{
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
+		public static readonly TimeSpan CancellationTimeout = PausePeriod.Add(PausePeriod);
 
 		public static Task RunJobs(IKernel kernel, CancellationTokenSource tokenSource)
 		{
@@ -34,7 +35,6 @@ namespace Alicargo.App_Start
 					   .ContinueWith((task, state) =>
 					   {
 						   var k = (IKernel)state;
-						   // todo: test
 						   if (task.IsFaulted && task.Exception != null)
 						   {
 							   var log = k.Get<ILog>();
@@ -66,9 +66,8 @@ namespace Alicargo.App_Start
 			{
 				var mailer = context.Kernel.Get<IJobRunner>(calculationMailerJob);
 				var excelUpdater = context.Kernel.Get<IJobRunner>(clientExcelUpdaterJob);
-				var cancellationTimeout = PausePeriod.Add(PausePeriod).Add(PausePeriod).Add(PausePeriod).Add(PausePeriod);
 
-				return new JobRunnerAggregator(cancellationTimeout, mailer, excelUpdater);
+				return new JobRunnerAggregator(CancellationTimeout, mailer, excelUpdater);
 			}).InSingletonScope();
 		}
 

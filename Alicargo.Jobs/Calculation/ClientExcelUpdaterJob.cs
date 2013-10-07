@@ -1,4 +1,7 @@
-﻿namespace Alicargo.Jobs.Calculation
+﻿using System;
+using System.Threading;
+
+namespace Alicargo.Jobs.Calculation
 {
 	public sealed class ClientExcelUpdaterJob : IJob
 	{
@@ -51,7 +54,7 @@
 		//}
 		public void Run()
 		{
-
+			throw new OutOfMemoryException();
 		}
 	}
 }

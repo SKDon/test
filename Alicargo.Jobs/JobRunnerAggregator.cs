@@ -23,10 +23,10 @@ namespace Alicargo.Jobs
 		{
 			tokenSource.Token.Register(() =>
 			{
-				_failedTokenSource.Token.WaitHandle.WaitOne(_cancellationTimeout);
-
 				if (!_failedTokenSource.IsCancellationRequested)
 				{
+					_failedTokenSource.Token.WaitHandle.WaitOne(_cancellationTimeout);
+
 					_failedTokenSource.Cancel(false);
 				}
 			});
@@ -78,7 +78,7 @@ namespace Alicargo.Jobs
 		{
 			if (!tokenSource.IsCancellationRequested)
 			{
-				tokenSource.Cancel(false);				
+				tokenSource.Cancel(false);
 			}
 		}
 
