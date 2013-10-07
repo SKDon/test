@@ -22,7 +22,7 @@ namespace Alicargo.App_Start
 					"~/Scripts/jquery.validate.unobtrusive.js",
 					"~/Content/bootstrap/js/bootstrap.js",
 					"~/Content/bootstrap/fileupload/bootstrap-fileupload.js",
-					"~/Scripts/jquery.globalize/globalize.js",
+					"~/Scripts/globalize/globalize.js",
 					"~/Scripts/kendo/2013.2.716/kendo.web.min.js",
 					"~/Scripts/app/CurrencyType.js",
 					"~/Scripts/app/Common.js"
@@ -30,14 +30,14 @@ namespace Alicargo.App_Start
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPathRu)
 				.Include(
-					"~/Scripts/jquery.globalize/cultures/globalize.culture.ru.js",
+					"~/Scripts/globalize/cultures/globalize.culture.ru.js",
 					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.ru.min.js",
 					"~/Scripts/app/ru.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPathIt)
 				.Include(
-					"~/Scripts/jquery.globalize/cultures/globalize.culture.it.js",
+					"~/Scripts/globalize/cultures/globalize.culture.it.js",
 					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.it.min.js",
 					"~/Scripts/app/it.js"
 				));

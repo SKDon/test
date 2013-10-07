@@ -7,7 +7,7 @@ using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.DbContext
 {
-	internal sealed class UnitOfWork : IUnitOfWork, IDisposable
+	public sealed class UnitOfWork : IUnitOfWork, IDisposable
 	{
 		private readonly DataContext _context;
 

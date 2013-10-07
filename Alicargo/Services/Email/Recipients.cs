@@ -8,44 +8,44 @@ namespace Alicargo.Services.Email
 {
 	internal sealed class Recipients : IRecipients
 	{
-		private readonly IUserRepository _userRepository;
+		private readonly IUserRepository _users;
 
-		public Recipients(IUserRepository userRepository)
+		public Recipients(IUserRepository users)
 		{
-			_userRepository = userRepository;
+			_users = users;
 		}
 
 		public Recipient[] GetAdminEmails()
 		{
-			return _userRepository.GetByRole(RoleType.Admin)
-								  .Select(x => new Recipient
-								  {
-									  Culture = x.TwoLetterISOLanguageName,
-									  Email = x.Email
-								  })
-								  .ToArray();
+			return _users.GetByRole(RoleType.Admin)
+						 .Select(x => new Recipient
+						 {
+							 Culture = x.TwoLetterISOLanguageName,
+							 Email = x.Email
+						 })
+						 .ToArray();
 		}
 
 		public Recipient[] GetSenderEmails()
 		{
-			return _userRepository.GetByRole(RoleType.Sender)
-								  .Select(x => new Recipient
-								  {
-									  Culture = x.TwoLetterISOLanguageName,
-									  Email = x.Email
-								  })
-								  .ToArray();
+			return _users.GetByRole(RoleType.Sender)
+						 .Select(x => new Recipient
+						 {
+							 Culture = x.TwoLetterISOLanguageName,
+							 Email = x.Email
+						 })
+						 .ToArray();
 		}
 
 		public Recipient[] GetForwarderEmails()
 		{
-			return _userRepository.GetByRole(RoleType.Forwarder)
-								  .Select(x => new Recipient
-								  {
-									  Culture = x.TwoLetterISOLanguageName,
-									  Email = x.Email
-								  })
-								  .ToArray();
+			return _users.GetByRole(RoleType.Forwarder)
+						 .Select(x => new Recipient
+						 {
+							 Culture = x.TwoLetterISOLanguageName,
+							 Email = x.Email
+						 })
+						 .ToArray();
 		}
 	}
 }

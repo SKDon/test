@@ -1,5 +1,8 @@
 ﻿using System.Configuration;
 using System.Threading;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 using Alicargo.App_Start;
 using Ninject;
 using Ninject.Web.Common;
@@ -8,35 +11,42 @@ namespace Alicargo
 {
 	public /*sealed*/ class MvcApplication : NinjectHttpApplication
 	{
-		private StandardKernel _kernel;
-		private CancellationTokenSource _tokenSource;
+		private readonly CancellationTokenSource _jobTokenSource = new CancellationTokenSource();
 		readonly string _connectionString = ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
 
 		protected override IKernel CreateKernel()
 		{
-			_kernel = new StandardKernel();
+			var kernel = new StandardKernel();
 
-			CompositionRoot.BindDataAccess(_kernel, _connectionString);
+			CompositionRoot.BindConnection(kernel, _connectionString);
 
-			CompositionRoot.BindServices(_kernel);
+			CompositionRoot.BindDataAccess(kernel, _connectionString, context => HttpContext.Current);
 
-			CompositionRoot.RegisterConfigs(_kernel);
+			CompositionRoot.BindServices(kernel);
 
-			return _kernel;
-		}
+			JobsHelper.BindJobs(kernel, _connectionString);
 
-		protected override void OnApplicationStarted()
-		{
-			_tokenSource = new CancellationTokenSource();
+			JobsHelper.RunJobs(kernel, _jobTokenSource);
 
-			JobsHelper.BindJobs(_kernel, _connectionString);
+			RegisterConfigs(kernel);
 
-			JobsHelper.RunJobs(_kernel, _tokenSource);
+			return kernel;
 		}
 
 		protected override void OnApplicationStopped()
 		{
-			_tokenSource.Cancel(false);
+			_jobTokenSource.Cancel(false);
+		}
+
+		private static void RegisterConfigs(IKernel kernel)
+		{
+			AreaRegistration.RegisterAllAreas();
+
+			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, kernel);
+
+			RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+			BinderConfig.RegisterBinders(System.Web.Mvc.ModelBinders.Binders);
 		}
 	}
 }

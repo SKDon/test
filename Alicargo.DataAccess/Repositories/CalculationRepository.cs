@@ -9,7 +9,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class CalculationRepository :  ICalculationRepository
+	public sealed class CalculationRepository : ICalculationRepository
 	{
 		private readonly AlicargoDataContext _context;
 
@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		public void Add(CalculationData data)
-		{			
+		{
 			_context.Calculations.InsertOnSubmit(new Calculation
 			{
 				AirWaybillDisplay = data.AirWaybillDisplay,

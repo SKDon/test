@@ -1,27 +1,28 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading;
 using Alicargo.Core.Services;
 using Alicargo.Jobs;
-using Ninject;
 
 namespace Alicargo.App_Start
 {
 	internal sealed class StatelessJobRunner : IJobRunner
 	{
+		private readonly string _connectionString;
+		private readonly Func<IDbConnection, IJob> _getJob;
 		private readonly ILog _log;
-		private readonly IKernel _kernel;
-		private readonly string _jobName;
 		private readonly TimeSpan _pausePeriod;
 
 		public StatelessJobRunner(
+			Func<IDbConnection, IJob> getJob,
 			ILog log,
-			IKernel kernel,
-			string jobName,
+			string connectionString,
 			TimeSpan pausePeriod)
 		{
+			_getJob = getJob;
 			_log = log;
-			_kernel = kernel;
-			_jobName = jobName;
+			_connectionString = connectionString;
 			_pausePeriod = pausePeriod;
 		}
 
@@ -31,18 +32,22 @@ namespace Alicargo.App_Start
 			{
 				try
 				{
-					var job = _kernel.Get<IJob>(_jobName);
+					using (var connection = new SqlConnection(_connectionString))
+					{
+						var job = _getJob(connection);
 
-					job.Run();
+						job.Run();
+					}
 				}
 				catch (Exception e)
 				{
 					if (e.IsCritical())
 					{
+						tokenSource.Cancel(false);
 						throw;
 					}
 
-					_log.Error("An error occurred during '" + _jobName + "' job running", e);
+					_log.Error("An error occurred during a job running", e);
 				}
 
 				tokenSource.Token.WaitHandle.WaitOne(_pausePeriod);

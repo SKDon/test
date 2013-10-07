@@ -2,12 +2,11 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web.Mvc;
-using System.Web.Routing;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Services;
 using Alicargo.Services;
 using Ninject;
+using Ninject.Activation;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
 
@@ -36,31 +35,23 @@ namespace Alicargo.App_Start
 		private static bool IsServiceType(Type type)
 		{
 			return type.IsClass && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
-		}
+		}		
 
-		public static void RegisterConfigs(IKernel kernel)
+		public static void BindDataAccess(IKernel kernel, string connectionString, Func<IContext, object> scope)
 		{
-			AreaRegistration.RegisterAllAreas();
-
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, kernel);
-
-			RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-			BinderConfig.RegisterBinders(System.Web.Mvc.ModelBinders.Binders);
+			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
+							  .IncludingNonePublicTypes()
+							  .Select(IsServiceType)
+							  .BindDefaultInterface()
+							  .Configure(y => y.InScope(scope)));
 		}
 
-		public static void BindDataAccess(IKernel kernel, string connectionString)
+		public static void BindConnection(IKernel kernel, string connectionString)
 		{
 			kernel.Bind<IDbConnection>()
 				  .ToMethod(x => new SqlConnection(connectionString))
 				  .InRequestScope()
 				  .OnDeactivation(x => x.Close());
-
-			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
-							  .IncludingNonePublicTypes()
-							  .Select(IsServiceType)
-							  .BindDefaultInterface()
-							  .Configure(y => y.InRequestScope()));
 		}
 	}
 }

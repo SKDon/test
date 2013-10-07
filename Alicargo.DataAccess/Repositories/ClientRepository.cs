@@ -8,7 +8,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class ClientRepository : IClientRepository
+	public sealed class ClientRepository : IClientRepository
 	{
 		private readonly Expression<Func<Client, ClientData>> _selector;
 		private readonly AlicargoDataContext _context;
