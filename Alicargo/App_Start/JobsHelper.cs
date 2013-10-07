@@ -66,8 +66,9 @@ namespace Alicargo.App_Start
 			{
 				var mailer = context.Kernel.Get<IJobRunner>(calculationMailerJob);
 				var excelUpdater = context.Kernel.Get<IJobRunner>(clientExcelUpdaterJob);
+				var cancellationTimeout = PausePeriod.Add(PausePeriod).Add(PausePeriod).Add(PausePeriod).Add(PausePeriod);
 
-				return new JobRunnerAggregator(mailer, excelUpdater);
+				return new JobRunnerAggregator(cancellationTimeout, mailer, excelUpdater);
 			}).InSingletonScope();
 		}
 
