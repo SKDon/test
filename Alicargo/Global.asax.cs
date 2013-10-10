@@ -14,7 +14,7 @@ namespace Alicargo
 	{
 		private readonly CancellationTokenSource _jobTokenSource = new CancellationTokenSource();
 		readonly string _connectionString = ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
-		private Task _jobs;
+		private Task[] _jobs;
 
 		protected override IKernel CreateKernel()
 		{
@@ -37,13 +37,10 @@ namespace Alicargo
 
 		protected override void OnApplicationStopped()
 		{
-			if (!_jobTokenSource.Token.IsCancellationRequested)
-			{
-				_jobTokenSource.Cancel(false);
-
-				_jobs.Wait(JobsHelper.CancellationTimeout);
-			}
+			JobsHelper.StopAndWait(_jobs, _jobTokenSource);
 		}
+
+
 
 		private static void RegisterConfigs(IKernel kernel)
 		{

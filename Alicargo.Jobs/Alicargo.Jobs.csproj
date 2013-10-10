@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculation\ClientExcelUpdaterJob.cs" />
-    <Compile Include="JobRunnerAggregator.cs" />
     <Compile Include="Calculation\CalculationMailer.cs" />
     <Compile Include="Calculation\ICalculationMailer.cs" />
     <Compile Include="IJob.cs" />

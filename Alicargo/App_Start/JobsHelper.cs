@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Alicargo.Core.Services;
@@ -21,27 +22,45 @@ namespace Alicargo.App_Start
 	{
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		public static readonly TimeSpan CancellationTimeout = PausePeriod.Add(PausePeriod);
+		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 
-		public static Task RunJobs(IKernel kernel, CancellationTokenSource tokenSource)
+		public static Task[] RunJobs(IKernel kernel, CancellationTokenSource tokenSource)
 		{
-			return Task.Factory
-					   .StartNew(state =>
-					   {
-						   var k = (IKernel)state;
-						   var runner = k.Get<JobRunnerAggregator>();
+			var jobs = kernel.GetAll<IJobRunner>().Select(x => StartTask(x, tokenSource)).ToArray();
 
-						   runner.Run(tokenSource);
-					   }, kernel, tokenSource.Token)
-					   .ContinueWith((task, state) =>
-					   {
-						   var k = (IKernel)state;
-						   if (task.IsFaulted && task.Exception != null)
-						   {
-							   var log = k.Get<ILog>();
+			JobsLogger.Info("Jobs are started");
 
-							   log.Error("A job failed", task.Exception);
-						   }
-					   }, kernel);
+			return jobs;
+		}
+
+		private static Task StartTask(IJobRunner runner, CancellationTokenSource tokenSource)
+		{
+			try
+			{
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
+											 CancellationToken.None);
+			}
+			catch (Exception e)
+			{
+				JobsLogger.Error("Failed to start a runner", e);
+				throw;
+			}
+		}
+
+		public static void StopAndWait(Task[] jobs, CancellationTokenSource tokenSource)
+		{
+			tokenSource.Cancel(false);
+
+			try
+			{
+				Task.WaitAll(jobs, CancellationTimeout);
+
+				JobsLogger.Info("Jobs were stopped");
+			}
+			catch (Exception e)
+			{
+				JobsLogger.Error("Failed to stop runners", e);
+			}
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Func<IDbConnection, IJob> getJob,
@@ -61,14 +80,6 @@ namespace Alicargo.App_Start
 			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob);
 
 			BindStatelessJobRunner(kernel, GetClientExcelUpdaterJob, connectionString, clientExcelUpdaterJob);
-
-			kernel.Bind<JobRunnerAggregator>().ToMethod(context =>
-			{
-				var mailer = context.Kernel.Get<IJobRunner>(calculationMailerJob);
-				var excelUpdater = context.Kernel.Get<IJobRunner>(clientExcelUpdaterJob);
-
-				return new JobRunnerAggregator(CancellationTimeout, mailer, excelUpdater);
-			}).InSingletonScope();
 		}
 
 		private static IJob GetClientExcelUpdaterJob(IDbConnection connection)
@@ -82,12 +93,11 @@ namespace Alicargo.App_Start
 			var users = new UserRepository(unitOfWork, new PasswordConverter());
 			var clients = new ClientRepository(unitOfWork);
 			var calculations = new CalculationRepository(unitOfWork);
-			var log = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 			var recipients = new Recipients(users);
-			var mailSender = new SilentMailSender(new MailSender(), log);
+			var mailSender = new SilentMailSender(new MailSender(), JobsLogger);
 			var mailer = new CalculationMailer(mailSender, recipients, clients);
 
-			return new CalculationMailerJob(calculations, mailer, log);
+			return new CalculationMailerJob(calculations, mailer, JobsLogger);
 		}
 	}
 }

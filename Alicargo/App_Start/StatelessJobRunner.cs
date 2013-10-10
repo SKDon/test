@@ -41,13 +41,12 @@ namespace Alicargo.App_Start
 				}
 				catch (Exception e)
 				{
+					_log.Error("An error occurred during a job running", e);
+
 					if (e.IsCritical())
 					{
 						tokenSource.Cancel(false);
-						throw;
 					}
-
-					_log.Error("An error occurred during a job running", e);
 				}
 
 				tokenSource.Token.WaitHandle.WaitOne(_pausePeriod);

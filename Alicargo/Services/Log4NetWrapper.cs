@@ -10,12 +10,18 @@ namespace Alicargo.Services
 		public Log4NetWrapper(log4net.ILog log)
 		{
 			_log = log;
-			_log.Info("Log is created");
+
+			Info("The logger is created");
 		}
 
 		public void Error(string message, Exception exception)
 		{
 			_log.Error(message, exception);
+		}
+
+		public void Info(string message)
+		{
+			_log.Info(message);
 		}
 	}
 }

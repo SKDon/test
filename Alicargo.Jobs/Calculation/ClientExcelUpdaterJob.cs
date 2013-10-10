@@ -54,7 +54,6 @@ namespace Alicargo.Jobs.Calculation
 		//}
 		public void Run()
 		{
-			throw new OutOfMemoryException();
 		}
 	}
 }

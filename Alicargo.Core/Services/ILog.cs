@@ -5,5 +5,6 @@ namespace Alicargo.Core.Services
 	public interface ILog
 	{
 		void Error(string message, Exception exception);
+		void Info(string message);
 	}
 }
