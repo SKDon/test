@@ -2,10 +2,11 @@
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.MvcHelpers.Extensions
 {
-    internal static class FileExtensions
+	internal static class FileExtensions
 	{
 		public static byte[] GetBytes(this HttpPostedFileBase file)
 		{
@@ -17,18 +18,18 @@ namespace Alicargo.MvcHelpers.Extensions
 			return bytes;
 		}
 
-		public static FileResult GetFileResult(this byte[] data, string fileName)
+		public static FileResult GetFileResult(this FileHolder file)
 		{
 			const string contentType = "application/octet-stream";
 			var ms = new MemoryStream();
 
-			ms.Write(data, 0, data.Length);
+			ms.Write(file.FileData, 0, file.FileData.Length);
 			ms.Position = 0;
 
-			return new FileStreamResult(ms, contentType) { FileDownloadName = fileName };
-		}
+			return new FileStreamResult(ms, contentType) { FileDownloadName = file.FileName };
+		}		
 
-	    // todo: 1. test for download files of an application
+		// todo: 1. test for download files of an application
 		public static void ReadFile(this HttpRequestBase request, string id, Action<string, byte[]> action)
 		{
 			var file = request.Files[id + "Data"];

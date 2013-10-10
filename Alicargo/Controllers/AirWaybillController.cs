@@ -203,35 +203,35 @@ namespace Alicargo.Controllers
 		{
 			var file = _awbRepository.GetInvoiceFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult GTDFile(long id)
 		{
 			var file = _awbRepository.GetGTDFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult GTDAdditionalFile(long id)
 		{
 			var file = _awbRepository.GTDAdditionalFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult PackingFile(long id)
 		{
 			var file = _awbRepository.GetPackingFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult AWBFile(long id)
 		{
 			var file = _awbRepository.GetAWBFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		#endregion

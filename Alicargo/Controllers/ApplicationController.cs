@@ -47,42 +47,42 @@ namespace Alicargo.Controllers
 		{
 			var file = _applicationRepository.GetInvoiceFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult DeliveryBillFile(long id)
 		{
 			var file = _applicationRepository.GetDeliveryBillFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult CPFile(long id)
 		{
 			var file = _applicationRepository.GetCPFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult SwiftFile(long id)
 		{
 			var file = _applicationRepository.GetSwiftFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult Torg12File(long id)
 		{
 			var file = _applicationRepository.GetTorg12File(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		public virtual FileResult PackingFile(long id)
 		{
 			var file = _applicationRepository.GetPackingFile(id);
 
-			return file.FileData.GetFileResult(file.FileName);
+			return file.GetFileResult();
 		}
 
 		#endregion

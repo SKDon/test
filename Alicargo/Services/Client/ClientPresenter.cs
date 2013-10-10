@@ -54,5 +54,10 @@ namespace Alicargo.Services.Client
 
 			return new ListCollection<ClientData> { Data = data, Total = total };
 		}
+
+	    public FileHolder GetCalculationFile()
+	    {
+		    throw new System.NotImplementedException();
+	    }
 	}
 }

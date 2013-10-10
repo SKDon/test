@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
+using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -9,7 +11,7 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
-    // todo: 2. bb tests
+	// todo: 2. bb tests
 	public partial class ClientController : Controller
 	{
 		private readonly IClientManager _clientManager;
@@ -88,6 +90,13 @@ namespace Alicargo.Controllers
 			}
 
 			return true;
+		}
+
+		public FileResult Calculations()
+		{
+			var file = _clientPresenter.GetCalculationFile();
+
+			return file.GetFileResult();
 		}
 
 		#region Edit
