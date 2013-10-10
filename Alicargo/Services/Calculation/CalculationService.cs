@@ -57,7 +57,7 @@ namespace Alicargo.Services.Calculation
 				Weight = weigth				
 			};
 
-			_calculations.Add(calculation);
+			_calculations.Add(calculation, applicationId);
 
 			_unitOfWork.SaveChanges();
 		}

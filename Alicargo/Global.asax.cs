@@ -12,8 +12,11 @@ namespace Alicargo
 {
 	public /*sealed*/ class MvcApplication : NinjectHttpApplication
 	{
+		private readonly string _connectionString =
+			ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
+
 		private readonly CancellationTokenSource _jobTokenSource = new CancellationTokenSource();
-		readonly string _connectionString = ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
+
 		private Task[] _jobs;
 
 		protected override IKernel CreateKernel()
@@ -39,8 +42,6 @@ namespace Alicargo
 		{
 			JobsHelper.StopAndWait(_jobs, _jobTokenSource);
 		}
-
-
 
 		private static void RegisterConfigs(IKernel kernel)
 		{

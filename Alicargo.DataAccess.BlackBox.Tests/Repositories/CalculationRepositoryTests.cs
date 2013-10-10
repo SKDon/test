@@ -39,7 +39,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 							   .With(x => x.ClientId, TestConstants.TestClientId1)
 							   .Create();
 
-			_calculationRepository.Add(data);
+			_calculationRepository.Add(data, TestConstants.TestApplicationId);
 			_context.UnitOfWork.SaveChanges();
 
 			var versionedData = _calculationRepository.Get(CalculationState.New)

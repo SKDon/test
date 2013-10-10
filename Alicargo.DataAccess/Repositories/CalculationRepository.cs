@@ -18,7 +18,7 @@ namespace Alicargo.DataAccess.Repositories
 			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
-		public void Add(CalculationData data)
+		public void Add(CalculationData data, long applicationId)
 		{
 			_context.Calculations.InsertOnSubmit(new Calculation
 			{
@@ -34,7 +34,8 @@ namespace Alicargo.DataAccess.Repositories
 				StateId = (int)CalculationState.New,
 				StateIdTimestamp = DateTimeOffset.UtcNow,
 				TariffPerKg = data.TariffPerKg,
-				Weight = data.Weight
+				Weight = data.Weight,
+				ApplicationHistoryId = applicationId
 			});
 		}
 
