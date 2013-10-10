@@ -2,5 +2,8 @@
 @using Resources
 @model ApplicationSenderModel
 
-<h4 style="margin-top: 26px;" class="pull-right">@Entities.Nic: @ViewBag.Nic</h4>
-@Html.EditPage(Pages.ApplicationAdd, Url.Action(MVC.Sender.ApplicationCreate()), Pages.Save)
+<h1>
+	@Pages.ApplicationAdd
+	<span class="pull-right">@Entities.Nic: @ViewBag.Nic</span>
+</h1>
+@Html.EditPage(Url.Action(MVC.Sender.ApplicationCreate()), Pages.Save)

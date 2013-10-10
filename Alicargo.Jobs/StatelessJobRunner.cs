@@ -3,11 +3,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
 using Alicargo.Core.Services;
-using Alicargo.Jobs;
 
-namespace Alicargo.App_Start
+namespace Alicargo.Jobs
 {
-	internal sealed class StatelessJobRunner : IJobRunner
+	public sealed class StatelessJobRunner : IJobRunner
 	{
 		private readonly string _connectionString;
 		private readonly Func<IDbConnection, IJob> _getJob;

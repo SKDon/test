@@ -25,14 +25,12 @@ namespace Alicargo.MvcHelpers.Extensions
 			return html.HtmlEncode().JavaScriptStringEncode().Replace("#", "\\#");
 		}
 
-		public static MvcHtmlString EditPage(this HtmlHelper html, string pageTitle, string actionUrl, string buttonTitle, MvcHtmlString additionalHtml = null)
+		public static MvcHtmlString EditPage(this HtmlHelper html, string actionUrl, string buttonTitle, MvcHtmlString additionalHtml = null)
 		{
 			var builder = new StringBuilder();
 
 			var div = new TagBuilder("div");
 			div.AddCssClass("entity-edit");
-
-			var h1 = new TagBuilder("h1");
 
 			var form = new TagBuilder("form");
 			form.Attributes.Add("action", actionUrl);
@@ -50,12 +48,6 @@ namespace Alicargo.MvcHelpers.Extensions
 			cancel.Attributes.Add("href", actionUrl);
 
 			builder.Append(div.ToString(TagRenderMode.StartTag));
-			if (!pageTitle.IsNullOrWhiteSpace())
-			{
-				builder.Append(h1.ToString(TagRenderMode.StartTag))
-					.Append(pageTitle)
-					.Append(h1.ToString(TagRenderMode.EndTag));
-			}
 
 			builder.Append(form.ToString(TagRenderMode.StartTag))
 			.Append(html.AntiForgeryToken().ToHtmlString())

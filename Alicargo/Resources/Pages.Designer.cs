@@ -286,7 +286,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Редактирование клиента.
+        ///   Looks up a localized string similar to Профиль клиента.
         /// </summary>
         public static string ClientEdit {
             get {

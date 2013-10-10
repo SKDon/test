@@ -1,5 +1,7 @@
-﻿@using Alicargo.MvcHelpers
-@using Alicargo.MvcHelpers.Extensions
+﻿@using Alicargo.MvcHelpers.Extensions
 @model ClientModel
 
-@Html.EditPage(Resources.Pages.ClientEdit, Url.Action(MVC.Client.Edit()), Resources.Pages.Save)
+<h1>
+	@Resources.Pages.ClientEdit
+</h1>
+@Html.EditPage(Url.Action(MVC.Client.Edit()), Resources.Pages.Save)

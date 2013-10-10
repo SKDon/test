@@ -166,7 +166,6 @@
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\CompositionRootHelper.cs" />
     <Compile Include="App_Start\JobsHelper.cs" />
-    <Compile Include="App_Start\StatelessJobRunner.cs" />
     <Compile Include="T4MVC\AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

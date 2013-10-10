@@ -1,4 +1,7 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @model Alicargo.ViewModels.AirWaybill.AwbAdminModel
 
-@Html.EditPage(Resources.Pages.AirWaybillAdd, Url.Action(MVC.AirWaybill.Create()), Resources.Pages.AirWaybillAdd)
+<h1>
+	@Resources.Pages.AirWaybillAdd
+</h1>
+@Html.EditPage(Url.Action(MVC.AirWaybill.Create()), Resources.Pages.AirWaybillAdd)

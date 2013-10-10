@@ -2,5 +2,8 @@
 @using Resources
 @model ApplicationAdminModel
 
-<h4 style="margin-top: 26px;" class="pull-right">@Entities.Nic: @Html.ViewBag.ClientNic</h4>
-@Html.EditPage(Pages.ApplicationAdd, Url.Action(MVC.Application.Create()), Pages.ApplicationAdd)
+<h1>
+	@Pages.ApplicationAdd
+	<span class="pull-right">@Entities.Nic: @Html.ViewBag.ClientNic</span>
+</h1>
+@Html.EditPage(Url.Action(MVC.Application.Create()), Pages.ApplicationAdd)

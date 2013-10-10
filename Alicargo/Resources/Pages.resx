@@ -157,7 +157,7 @@
     <value>Добавить клиента</value>
   </data>
   <data name="ClientEdit" xml:space="preserve">
-    <value>Редактирование клиента</value>
+    <value>Профиль клиента</value>
   </data>
   <data name="Clients" xml:space="preserve">
     <value>Клиенты</value>

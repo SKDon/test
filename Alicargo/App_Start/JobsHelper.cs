@@ -37,7 +37,7 @@ namespace Alicargo.App_Start
 		{
 			try
 			{
-				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource) state), tokenSource,
 											 CancellationToken.None);
 			}
 			catch (Exception e)
