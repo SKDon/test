@@ -92,8 +92,8 @@
     <PostDeploy Include="InitialData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alicargo.Master.Database.publish.xml" />
-    <None Include="Alicargo.Dev.Database.publish.xml" />
+    <None Include="Master.Database.publish.xml" />
+    <None Include="Dev.Database.publish.xml" />
     <None Include="SqlSchemaCompare.Dev.scmp" />
     <None Include="SqlSchemaCompare.scmp" />
   </ItemGroup>
