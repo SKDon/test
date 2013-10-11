@@ -20,6 +20,11 @@ namespace Alicargo.MvcHelpers.Extensions
 
 		public static FileResult GetFileResult(this FileHolder file)
 		{
+			if (file == null)
+			{
+				return null;
+			}
+
 			const string contentType = "application/octet-stream";
 			var ms = new MemoryStream();
 

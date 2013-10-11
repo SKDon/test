@@ -72,6 +72,7 @@ namespace Alicargo.Controllers
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string Create = "Create";
+            public readonly string Calculations = "Calculations";
             public readonly string Edit = "Edit";
         }
 
@@ -81,6 +82,7 @@ namespace Alicargo.Controllers
             public const string Index = "Index";
             public const string List = "List";
             public const string Create = "Create";
+            public const string Calculations = "Calculations";
             public const string Edit = "Edit";
         }
 
@@ -192,6 +194,15 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Authentication", authenticationModel);
             CreateOverride(callInfo, model, transitModel, carrierModel, authenticationModel);
+            return callInfo;
+        }
+
+        partial void CalculationsOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
+
+        public override System.Web.Mvc.FileResult Calculations()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Calculations);
+            CalculationsOverride(callInfo);
             return callInfo;
         }
 

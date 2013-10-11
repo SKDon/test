@@ -84,6 +84,7 @@
     <Compile Include="Repositories\ICarrierRepository.cs" />
     <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
+    <Compile Include="Repositories\IClientFileRepository.cs" />
     <Compile Include="Repositories\ISenderRepository.cs" />
     <Compile Include="Repositories\IStateRepository.cs" />
     <Compile Include="Repositories\ITransaction.cs" />

@@ -279,4 +279,7 @@
   <data name="Client" xml:space="preserve">
     <value>Client</value>
   </data>
+  <data name="DownloadCalculations" xml:space="preserve">
+    <value>Download сalculations file</value>
+  </data>
 </root>

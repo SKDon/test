@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.MvcHelpers.Extensions;
@@ -92,7 +91,7 @@ namespace Alicargo.Controllers
 			return true;
 		}
 
-		public FileResult Calculations()
+		public virtual FileResult Calculations()
 		{
 			var file = _clientPresenter.GetCalculationFile();
 

@@ -1,8 +1,11 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
 @model ClientModel
 
 <h1>
-	@Resources.Pages.ClientEdit
-
+	@Pages.ClientEdit
+	<span>
+		@Html.ActionLink(Pages.DownloadCalculations, MVC.Client.Calculations(), new { @class = "btn btn-info" })
+	</span>
 </h1>
-@Html.EditPage(Url.Action(MVC.Client.Edit()), Resources.Pages.Save)
+@Html.EditPage(Url.Action(MVC.Client.Edit()), Pages.Save)

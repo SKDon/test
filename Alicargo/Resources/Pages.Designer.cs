@@ -322,6 +322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Скачать файл с расчетами.
+        /// </summary>
+        public static string DownloadCalculations {
+            get {
+                return ResourceManager.GetString("DownloadCalculations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Редактировать.
         /// </summary>
         public static string Edit {

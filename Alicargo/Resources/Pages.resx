@@ -285,4 +285,7 @@
   <data name="Excel" xml:space="preserve">
     <value>Excel</value>
   </data>
+  <data name="DownloadCalculations" xml:space="preserve">
+    <value>Скачать файл с расчетами</value>
+  </data>
 </root>

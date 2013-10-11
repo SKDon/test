@@ -3,24 +3,28 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
+using Alicargo.Services.Excel;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Client
 {
-    internal sealed class ClientPresenter : IClientPresenter
+	internal sealed class ClientPresenter : IClientPresenter
 	{
-		private readonly IClientRepository _clientRepository;
+		private readonly IClientRepository _clients;
 		private readonly IIdentityService _identity;
-        private readonly IClientPermissions _clientPermissions;
+		private readonly IClientFileRepository _files;
+		private readonly IClientPermissions _permissions;
 
-        public ClientPresenter(
-            IClientRepository clientRepository,
-            IIdentityService identity, 
-            IClientPermissions clientPermissions)
+		public ClientPresenter(
+			IClientRepository clients,
+			IIdentityService identity,
+			IClientFileRepository files,
+			IClientPermissions permissions)
 		{
-			_clientRepository = clientRepository;
+			_clients = clients;
 			_identity = identity;
-		    _clientPermissions = clientPermissions;
+			_files = files;
+			_permissions = permissions;
 		}
 
 		public ClientData GetCurrentClientData(long? clientId = null)
@@ -29,18 +33,18 @@ namespace Alicargo.Services.Client
 
 			if (clientId.HasValue)
 			{
-				data = _clientRepository.GetById(clientId.Value);
+				data = _clients.GetById(clientId.Value);
 			}
 			else if (_identity.Id.HasValue)
 			{
-				data = _clientRepository.GetByUserId(_identity.Id.Value);
+				data = _clients.GetByUserId(_identity.Id.Value);
 			}
 			else
 			{
 				return null;
 			}
 
-            if (!_clientPermissions.HaveAccessToClient(data))
+			if (!_permissions.HaveAccessToClient(data))
 				throw new AccessForbiddenException();
 
 			return data;
@@ -48,16 +52,20 @@ namespace Alicargo.Services.Client
 
 		public ListCollection<ClientData> GetList(int take, int skip)
 		{
-			var total = _clientRepository.Count();
+			var total = _clients.Count();
 
-			var data = _clientRepository.GetRange(take, skip).ToArray();
+			var data = _clients.GetRange(take, skip).ToArray();
 
 			return new ListCollection<ClientData> { Data = data, Total = total };
 		}
 
-	    public FileHolder GetCalculationFile()
-	    {
-		    throw new System.NotImplementedException();
-	    }
+		public FileHolder GetCalculationFile()
+		{
+			var data = GetCurrentClientData();
+
+			отпарвлять заглушку, когда файла еще нет
+
+			return _files.GetCalculationFile(data.Id);
+		}
 	}
 }
