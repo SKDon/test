@@ -17,7 +17,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private CalculationRepository _calculationRepository;
 		private DbTestContext _context;
 
-
 		[TestInitialize]
 		public void TestInitialize()
 		{
@@ -33,21 +32,66 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		public void Test_SetState()
+		public void Test_UpdateConflict()
 		{
-			var data = _context.Fixture.Build<CalculationData>()
-							   .With(x => x.ClientId, TestConstants.TestClientId1)
-							   .Create();
+			var data = GenerateData();
 
-			_calculationRepository.Add(data, TestConstants.TestApplicationId);
-			_context.UnitOfWork.SaveChanges();
+			var versionedData = AddNew(data, TestConstants.TestApplicationId);
 
-			var versionedData = _calculationRepository.Get(CalculationState.New)
-													  .Single(x => x.Data.AirWaybillDisplay == data.AirWaybillDisplay);
+			var result = _calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
+														 CalculationState.New);
+
+			result.Should().NotBeNull();
+			result.RowVersion.SequenceEqual(versionedData.Version.RowVersion).Should().BeFalse();
+
+			try
+			{
+				_calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
+												CalculationState.New);
+			}
+			catch (EntityUpdateConflict)
+			{
+				_calculationRepository.Get(CalculationState.New)
+									  .SingleOrDefault(x => x.Data.AirWaybillDisplay == data.AirWaybillDisplay)
+									  .Should().NotBeNull();
+
+				return;
+			}
+
+			Assert.Fail("Should not get here");
+		}
+
+		[TestMethod, ExpectedException(typeof (DublicateException))]
+		public void Test_Uniqueness()
+		{
+			var data1 = GenerateData();
+			var data2 = GenerateData();
+			data2.ClientId = data1.ClientId;
+
+			var result = AddNew(data1, TestConstants.TestApplicationId);
+			result.Should().NotBeNull();
+
+			AddNew(data2, TestConstants.TestApplicationId);
+		}
+
+		[TestMethod]
+		public void Test_AddGet()
+		{
+			var data = GenerateData();
+
+			var versionedData = AddNew(data, TestConstants.TestApplicationId);
 
 			versionedData.Data.ShouldBeEquivalentTo(data);
 			versionedData.Version.RowVersion.Should().NotBeNull();
 			versionedData.Version.StateTimestamp.Should().NotBeNull();
+		}
+
+		[TestMethod]
+		public void Test_SetState()
+		{
+			var data = GenerateData();
+
+			var versionedData = AddNew(data, TestConstants.TestApplicationId);
 
 			var result = _calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
 														 CalculationState.Done);
@@ -56,22 +100,20 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			result.StateTimestamp.Should().BeGreaterThan(versionedData.Version.StateTimestamp);
 			result.Id.ShouldBeEquivalentTo(versionedData.Version.Id);
 			result.State.ShouldBeEquivalentTo(CalculationState.Done);
+		}
 
-			try
-			{
-				_calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
-												CalculationState.Sended);
-			}
-			catch (EntityUpdateConflict)
-			{
-				_calculationRepository.Get(CalculationState.Done)
-									  .SingleOrDefault(x => x.Data.AirWaybillDisplay == data.AirWaybillDisplay)
-									  .Should().NotBeNull();
+		private CalculationData GenerateData()
+		{
+			return _context.Fixture.Build<CalculationData>().With(x => x.ClientId, TestConstants.TestClientId1).Create();
+		}
 
-				return;
-			}
+		private VersionedData<CalculationState, CalculationData> AddNew(CalculationData data, long applicationId)
+		{
+			_calculationRepository.Add(data, applicationId);
+			_context.UnitOfWork.SaveChanges();
 
-			Assert.Fail("Should not get here");
+			return _calculationRepository.Get(CalculationState.New)
+										 .Single(x => x.Data.AirWaybillDisplay == data.AirWaybillDisplay);
 		}
 	}
 }

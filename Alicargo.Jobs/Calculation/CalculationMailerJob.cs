@@ -23,11 +23,9 @@ namespace Alicargo.Jobs.Calculation
 		public void Run()
 		{
 			var data = _calculations.Get(CalculationState.New);
-			возможна ситуация когда статус Sending но отправка не прошла.
-			попробовать сделать метот тач, использовать как барьер
 			foreach (var item in data)
 			{
-				if (SetState(item, CalculationState.Sending))
+				if (SetState(item, CalculationState.New))
 				{
 					try
 					{
@@ -37,12 +35,12 @@ namespace Alicargo.Jobs.Calculation
 					}
 					catch (Exception e)
 					{
+						_log.Error("Failed to send an email for the calculation " + item.Version.Id, e);
+
 						if (e.IsCritical())
 						{
 							throw;
 						}
-
-						_log.Error("Failed to send an email for the calculation " + item.Version.Id, e);
 
 						SetState(item, CalculationState.Error);
 					}
@@ -54,7 +52,11 @@ namespace Alicargo.Jobs.Calculation
 		{
 			try
 			{
-				_calculations.SetState(item.Version.Id, item.Version.RowVersion, state);
+				var data = _calculations.SetState(item.Version.Id, item.Version.RowVersion, state);
+
+				item.Version.RowVersion = data.RowVersion;
+				item.Version.State = data.State;
+				item.Version.StateTimestamp = data.StateTimestamp;
 			}
 			catch (EntityUpdateConflict)
 			{

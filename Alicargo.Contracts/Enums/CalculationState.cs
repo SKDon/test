@@ -5,7 +5,6 @@
 		Done,
 		Error,
 		New = 0,
-		Sending = 1,
-		Sended = 2
+		Sended
 	}
 }
