@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
@@ -63,9 +64,13 @@ namespace Alicargo.Services.Client
 		{
 			var data = GetCurrentClientData();
 
-			//отпарвлять заглушку, когда файла еще нет
+			var file = _files.GetCalculationFile(data.Id) ?? new FileHolder
+			{
+				FileName = "NoCalculation.txt",
+				FileData = Encoding.UTF8.GetBytes("На данный момент расчетов нет")
+			};
 
-			return _files.GetCalculationFile(data.Id);
+			return file;
 		}
 	}
 }
