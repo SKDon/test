@@ -37,12 +37,12 @@ namespace Alicargo.App_Start
 		{
 			try
 			{
-				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource) state), tokenSource,
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
 											 CancellationToken.None);
 			}
 			catch (Exception e)
 			{
-				JobsLogger.Error("Failed to start a runner", e);
+				JobsLogger.Error("Failed to start the runner " + runner.Name, e);
 				throw;
 			}
 		}
@@ -53,13 +53,15 @@ namespace Alicargo.App_Start
 
 			try
 			{
-				Task.WaitAll(jobs, CancellationTimeout);
+				var waitAll = Task.WaitAll(jobs, CancellationTimeout);
 
-				JobsLogger.Info("Jobs were stopped");
+				JobsLogger.Info(waitAll
+					? "Jobs were stopped"
+					: "One or more jobs were terminated with timeout");
 			}
 			catch (Exception e)
 			{
-				JobsLogger.Error("Failed to stop runners", e);
+				JobsLogger.Error("One or more jobs failed", e);
 			}
 		}
 
@@ -67,7 +69,7 @@ namespace Alicargo.App_Start
 												   string connectionString, string jobName)
 		{
 			kernel.Bind<IJobRunner>()
-				  .ToMethod(context => new StatelessJobRunner(getJob, context.Kernel.Get<ILog>(), connectionString, PausePeriod))
+				  .ToMethod(context => new StatelessJobRunner(getJob, jobName, JobsLogger, connectionString, PausePeriod))
 				  .InSingletonScope()
 				  .Named(jobName);
 		}

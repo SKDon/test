@@ -63,7 +63,7 @@ namespace Alicargo.Services.Client
 		{
 			var data = GetCurrentClientData();
 
-			отпарвлять заглушку, когда файла еще нет
+			//отпарвлять заглушку, когда файла еще нет
 
 			return _files.GetCalculationFile(data.Id);
 		}

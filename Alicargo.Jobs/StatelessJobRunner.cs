@@ -15,10 +15,12 @@ namespace Alicargo.Jobs
 
 		public StatelessJobRunner(
 			Func<IDbConnection, IJob> getJob,
+			string name,
 			ILog log,
 			string connectionString,
 			TimeSpan pausePeriod)
 		{
+			Name = name;
 			_getJob = getJob;
 			_log = log;
 			_connectionString = connectionString;
@@ -40,7 +42,7 @@ namespace Alicargo.Jobs
 				}
 				catch (Exception e)
 				{
-					_log.Error("An error occurred during a job running", e);
+					_log.Error("An error occurred during a job running in the runner " + Name, e);
 
 					if (e.IsCritical())
 					{
@@ -51,5 +53,7 @@ namespace Alicargo.Jobs
 				tokenSource.Token.WaitHandle.WaitOne(_pausePeriod);
 			}
 		}
+
+		public string Name { get; private set; }
 	}
 }
