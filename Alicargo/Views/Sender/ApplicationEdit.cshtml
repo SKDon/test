@@ -4,6 +4,6 @@
 
 <h1>
 	@Pages.ApplicationEdit @ViewBag.ApplicationNumber
-	<span class="pull-right">@Entities.Nic: @ViewBag.Nic</span>
+	<span>@Entities.Nic: @ViewBag.Nic</span>
 </h1>
 @Html.EditPage(Url.Action(MVC.Sender.ApplicationEdit()), Pages.Save)

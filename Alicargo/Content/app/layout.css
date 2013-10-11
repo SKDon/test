@@ -32,6 +32,10 @@ h1 {
 	font-size: 1.5em;
 }
 
+h1 span{
+	float: right;
+}
+
 h2 {
 	font-size: 1.4em;
 }

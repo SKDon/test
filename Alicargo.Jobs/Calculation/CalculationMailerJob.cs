@@ -23,7 +23,8 @@ namespace Alicargo.Jobs.Calculation
 		public void Run()
 		{
 			var data = _calculations.Get(CalculationState.New);
-
+			возможна ситуация когда статус Sending но отправка не прошла.
+			попробовать сделать метот тач, использовать как барьер
 			foreach (var item in data)
 			{
 				if (SetState(item, CalculationState.Sending))
