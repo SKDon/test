@@ -37,39 +37,13 @@
 <div id="user-grid" class="grid"></div>
 @section scripts
 {
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
+	@Scripts.Render("~/Scripts/app/Alicargo.js")
+	@Scripts.Render("~/Scripts/app/User/Grid.js")
 	<script>
 		$(function () {
-			var error = function () { alert("@Pages.AnError"); };
-
-			var dataSource = {
-				transport: {
-					read: {
-						dataType: "json",
-						url: '@Url.Action(MVC.User.List(Model))',
-						type: "POST"
-					}
-				},
-				schema: { model: { id: "Id" } },
-				error: error
-			};
-
-			$("#user-grid").kendoGrid({
-				dataSource: dataSource,
-				columns: [
-					{ field: "Name", title: '@Pages.Name' },
-					{
-						command: [{
-							name: "custom-edit",
-							text: "",
-							click: function (e) {
-								var tr = $(e.target).closest("tr");
-								var data = this.dataItem(tr);
-								var url = '@Url.Action(MVC.User.Edit())/@((int)Model)/' + data.Id;
-								window.location = url;
-							}
-						}], title: "&nbsp;", width: "53px"
-					}]
-			});
+			Alicargo.Users.Init('@Model');
 		});
 	</script>
 }

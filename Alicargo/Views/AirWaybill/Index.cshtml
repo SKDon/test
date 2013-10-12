@@ -24,17 +24,17 @@ else if (IdentityService.IsInRole(RoleType.Sender))
 {
 	<script type="text/x-kendo-template" id="AirWaybill-grid-details">
 		@if (IdentityService.IsInRole(RoleType.Broker))
-  {
+		{
 			@Html.Partial("BrokerDetails")
-  }
-  else if (IdentityService.IsInRole(RoleType.Sender))
-  {
+		}
+		else if (IdentityService.IsInRole(RoleType.Sender))
+		{
 			@Html.Partial("SenderDetails")
-  }
-  else
-  {
+		}
+		else
+		{
 			@Html.Partial("AdminDetails")
-  }
+		}
 	</script>
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
 	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))

@@ -68,10 +68,6 @@ namespace Alicargo.App_Start
 			}
 		};
 
-		#region Decorators
-
-		#endregion
-
 		public static IEnumerable<Type> BindDecorators(IKernel kernel, IDictionary<Type, Type[]> settings)
 		{
 			var binded = new HashSet<Type>();
