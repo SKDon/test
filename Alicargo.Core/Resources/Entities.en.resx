@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
@@ -329,5 +329,95 @@
   </data>
   <data name="Sender" xml:space="preserve">
     <value>Sender</value>
+  </data>
+  <data name="AdditionalCost" xml:space="preserve">
+    <value>Additional cost (€)</value>
+  </data>
+  <data name="BrokerCost" xml:space="preserve">
+    <value>Broker cost (€)</value>
+  </data>
+  <data name="CustomCost" xml:space="preserve">
+    <value>Custom cost (€)</value>
+  </data>
+  <data name="FlightCost" xml:space="preserve">
+    <value>Flight cost (€)</value>
+  </data>
+  <data name="ForwarderCost" xml:space="preserve">
+    <value>Forwarder cost (€)</value>
+  </data>
+  <data name="FactureCost" xml:space="preserve">
+    <value>Facture (€)</value>
+  </data>
+  <data name="Insurance" xml:space="preserve">
+    <value>Insurance</value>
+  </data>
+  <data name="ScotchCost" xml:space="preserve">
+    <value>Tape (€)</value>
+  </data>
+  <data name="TariffPerKg" xml:space="preserve">
+    <value>Tarif per kg (€)</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TotalTariffCost" xml:space="preserve">
+    <value>Sum (€)</value>
+  </data>
+  <data name="TransitCost" xml:space="preserve">
+    <value>Delivery (€)</value>
+  </data>
+  <data name="WithdrawCost" xml:space="preserve">
+    <value>Withdraw (€)</value>
+  </data>
+  <data name="CostPerKgOfSender" xml:space="preserve">
+    <value>The cost per kilogram for Sender (€)</value>
+  </data>
+  <data name="TotalCostOfSenderForWeight" xml:space="preserve">
+    <value>Costs by weight (€)</value>
+  </data>
+  <data name="TotalOfSender" xml:space="preserve">
+    <value>Total Sender (€)</value>
+  </data>
+  <data name="BrokerCostPerKg" xml:space="preserve">
+    <value>The cost of the broker per kg (€)</value>
+  </data>
+  <data name="CustomCostPerKg" xml:space="preserve">
+    <value>Customs clearance per kg (€)</value>
+  </data>
+  <data name="FlightCostPerKg" xml:space="preserve">
+    <value>The fare per kg (€)</value>
+  </data>
+  <data name="TotalForwarderCost" xml:space="preserve">
+    <value>The cost of the forwarder (total, €)</value>
+  </data>
+  <data name="TotalScotchCost" xml:space="preserve">
+    <value>The total cost of tape (€)</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Profit (€)</value>
+  </data>
+  <data name="ProfitPerKg" xml:space="preserve">
+    <value>The profit kg (€)</value>
+  </data>
+  <data name="TotalExpenses" xml:space="preserve">
+    <value>The total costs (€)</value>
+  </data>
+  <data name="TotalProfit" xml:space="preserve">
+    <value>Profit (total, €)</value>
+  </data>
+  <data name="FactureCostEdited" xml:space="preserve">
+    <value>Facture* (€)</value>
+  </data>
+  <data name="ScotchCostEdited" xml:space="preserve">
+    <value>Tape* (€)</value>
+  </data>
+  <data name="WithdrawCostEdited" xml:space="preserve">
+    <value>Withdraw* (€)</value>
+  </data>
+  <data name="SenderRate" xml:space="preserve">
+    <value>rate sender euro/kg</value>
+  </data>
+  <data name="TotalSenderRate" xml:space="preserve">
+    <value>total sender costs</value>
   </data>
 </root>

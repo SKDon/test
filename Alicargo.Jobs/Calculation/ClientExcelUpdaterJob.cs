@@ -33,7 +33,7 @@ namespace Alicargo.Jobs.Calculation
 				return;
 			}
 
-			var clients = data.Select(x => x.Data.ClientId).Distinct();
+			var clients = data.Select(x => x.Data.ClientId).Distinct().ToArray();
 
 			foreach (var clientId in clients)
 			{
