@@ -48,7 +48,8 @@
 					read: {
 						dataType: "json",
 						url: $u.Calculation_List,
-						type: "POST"
+						type: "POST",
+						cache: false
 					}
 				},
 				pageSize: 5,

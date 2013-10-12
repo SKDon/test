@@ -141,13 +141,13 @@ namespace Alicargo.DataAccess.Repositories
 						  }).FirstOrDefault();
 		}
 
-		public long Count(IEnumerable<long> stateIds, long? clientUserId = null)
+		public long Count(IEnumerable<long> stateIds, long? clientId = null)
 		{
 			var applications = _context.Applications.Where(x => stateIds.Contains(x.StateId));
 
-			if (clientUserId.HasValue)
+			if (clientId.HasValue)
 			{
-				applications = applications.Where(x => x.Client.UserId == clientUserId.Value);
+				applications = applications.Where(x => x.ClientId == clientId.Value);
 			}
 
 			return applications.LongCount();

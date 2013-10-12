@@ -25,6 +25,7 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin), HttpPost]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(RoleType roleType)
 		{
 			var list = _userService.List(roleType);

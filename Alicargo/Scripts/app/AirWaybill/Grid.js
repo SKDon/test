@@ -14,7 +14,8 @@
 			read: {
 				dataType: "json",
 				url: $a.Urls.AirWaybill_List,
-				type: "POST"
+				type: "POST",
+				cache: false
 			}
 		},
 		schema: schema,

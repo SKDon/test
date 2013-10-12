@@ -43,6 +43,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult States(long id)
 		{
 			return Json(_applicationPresenter.GetAvailableStates(id));

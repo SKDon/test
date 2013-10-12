@@ -32,6 +32,7 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin), HttpPost]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
 			var data = _presenter.List(take, skip);
@@ -40,6 +41,7 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin), HttpPost]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult Row(long id)
 		{
 			var data = _presenter.Row(id);

@@ -128,7 +128,7 @@
 			}
 			return null;
 		};
-		
+
 		return $apl;
 	})($a.Application || {});
 });

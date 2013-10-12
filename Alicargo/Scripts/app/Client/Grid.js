@@ -12,7 +12,8 @@
 			read: {
 				dataType: "json",
 				url: Alicargo.Urls.Client_List,
-				type: "POST"
+				type: "POST",
+				cache: false
 			}
 		},
 		schema: schema,

@@ -34,7 +34,8 @@
 			read: {
 				dataType: "json",
 				url: $u.ApplicationList_List,
-				type: "POST"
+				type: "POST",
+				cache: false
 			}
 		},
 		schema: schema,
