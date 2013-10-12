@@ -1,59 +1,56 @@
-﻿using System;
-using System.Threading;
+﻿using System.Linq;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Services;
 
 namespace Alicargo.Jobs.Calculation
 {
 	public sealed class ClientExcelUpdaterJob : IJob
 	{
-		//private readonly ICalculationService _service;
-		//private readonly IClientRepository _clients;
-		//private readonly IApplicationRepository _applications;
-		//private readonly IExcelGenerator _excel;
-		//private readonly IStateService _stateService;
-		//private readonly IUnitOfWork _unitOfWork;
+		private readonly ICalculationRepository _calculations;
+		private readonly IClientRepository _clients;
+		private readonly IExcelGenerator _excel;
+		private readonly IUnitOfWork _unitOfWork;
 
-		//public CalculationServiceClientExcel(
-		//	ICalculationService service,
-		//	IClientRepository clients,
-		//	IApplicationRepository applications,
-		//	IExcelGenerator excel,
-		//	IStateService stateService,
-		//	IUnitOfWork unitOfWork)
-		//{
-		//	_service = service;
-		//	_clients = clients;
-		//	_applications = applications;
-		//	_excel = excel;
-		//	_stateService = stateService;
-		//	_unitOfWork = unitOfWork;
-		//}
+		public ClientExcelUpdaterJob(
+			IExcelGenerator excel,
+			ICalculationRepository calculations,
+			IClientRepository clients,
+			IUnitOfWork unitOfWork)
+		{
+			_excel = excel;
+			_calculations = calculations;
+			_clients = clients;
+			_unitOfWork = unitOfWork;
+		}
 
-		//public void Calculate(long applicationId)
-		//{
-		//	_service.Calculate(applicationId);
-
-		//	var states = _stateService.GetVisibleStates();
-
-		//	var clientId = _applications.GetClientId(applicationId);
-
-		//	var applications = _applications.List(stateIds: states, orders: new[]
-		//	{
-		//		new Order
-		//		{
-		//			OrderType = OrderType.Id,
-		//			Desc = true
-		//		}
-		//	}, clientId: clientId).Select(x => new ClientCalculationExcelRow(x)).ToArray();
-
-		//	using (var stream = _excel.Get(applications))
-		//	{
-		//		_clients.SetCalculationExcel(clientId, stream.ToArray());
-
-		//		_unitOfWork.SaveChanges();
-		//	}
-		//}
 		public void Run()
 		{
+			var data = _calculations.Get(CalculationState.New);
+
+			if (data.Length == 0)
+			{
+				return;
+			}
+
+			var clients = data.Select(x => x.Data.ClientId).Distinct();
+
+			foreach (var clientId in clients)
+			{
+				var calculations = _calculations.GetByClientId(clientId).Select(x => new CalculationExcelRow(x)).ToArray();
+
+				using (var stream = _excel.Get(calculations))
+				{
+					_clients.SetCalculationExcel(clientId, stream.ToArray());
+
+					_unitOfWork.SaveChanges();
+				}
+			}
+
+			foreach (var item in data)
+			{
+				_calculations.SetState(item, CalculationState.ClientUpdated);
+			}
 		}
 	}
 }

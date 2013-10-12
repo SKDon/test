@@ -8,5 +8,6 @@ namespace Alicargo.Contracts.Repositories
 		void Add(CalculationData data, long applicationId);
 		VersionedData<CalculationState, CalculationData>[] Get(CalculationState state);
 		VersionData<CalculationState> SetState(long id, byte[] rowVersion, CalculationState state);
+		CalculationData[] GetByClientId(long clientId);
 	}
 }

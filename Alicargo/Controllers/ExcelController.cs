@@ -2,6 +2,7 @@
 using System.IO;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
+using Alicargo.Core.Services;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 

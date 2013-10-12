@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using Alicargo.Core.Localization;
+using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -10,7 +11,7 @@ using Resources;
 
 namespace Alicargo.Services.Excel
 {
-	internal sealed class ExcelGenerator : IExcelGenerator
+	public sealed class ExcelGenerator : IExcelGenerator
 	{
 		public MemoryStream Get<T>(T[] rows)
 		{

@@ -94,6 +94,7 @@
       <DependentUpon>Enums.it.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
+    <Compile Include="Services\IExcelGenerator.cs" />
     <Compile Include="Services\ILog.cs" />
     <Compile Include="Services\IMailSender.cs" />
     <Compile Include="Services\IRecipients.cs" />

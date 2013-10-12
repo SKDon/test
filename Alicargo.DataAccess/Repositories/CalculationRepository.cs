@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -15,7 +16,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public CalculationRepository(IUnitOfWork unitOfWork)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = (AlicargoDataContext) unitOfWork.Context;
 		}
 
 		public void Add(CalculationData data, long applicationId)
@@ -31,7 +32,7 @@ namespace Alicargo.DataAccess.Repositories
 				MarkName = data.MarkName,
 				RowVersion = null,
 				ScotchCost = data.ScotchCost,
-				StateId = (int)CalculationState.New,
+				StateId = (int) CalculationState.New,
 				StateIdTimestamp = DateTimeOffset.UtcNow,
 				TariffPerKg = data.TariffPerKg,
 				Weight = data.Weight,
@@ -41,36 +42,36 @@ namespace Alicargo.DataAccess.Repositories
 
 		public VersionedData<CalculationState, CalculationData>[] Get(CalculationState state)
 		{
-			return _context.Calculations.Where(x => x.StateId == (int)state)
-						  .OrderBy(x => x.StateIdTimestamp)
-						  .Select(x => new VersionedData<CalculationState, CalculationData>
-						  {
-							  Version = new VersionData<CalculationState>
-							  {
-								  State = (CalculationState)x.StateId,
-								  StateTimestamp = x.StateIdTimestamp,
-								  Id = x.Id,
-								  RowVersion = x.RowVersion.ToArray(),
-							  },
-							  Data = new CalculationData
-							  {
-								  AirWaybillDisplay = x.AirWaybillDisplay,
-								  ApplicationDisplay = x.ApplicationDisplay,
-								  ClientId = x.ClientId,
-								  FactureCost = x.FactureCost,
-								  InsuranceCost = x.InsuranceCost,
-								  MarkName = x.MarkName,
-								  ScotchCost = x.ScotchCost,
-								  TariffPerKg = x.TariffPerKg,
-								  Weight = x.Weight
-							  }
-						  })
-						  .ToArray();
+			return _context.Calculations.Where(x => x.StateId == (int) state)
+						   .OrderBy(x => x.StateIdTimestamp)
+						   .Select(x => new VersionedData<CalculationState, CalculationData>
+						   {
+							   Version = new VersionData<CalculationState>
+							   {
+								   State = (CalculationState) x.StateId,
+								   StateTimestamp = x.StateIdTimestamp,
+								   Id = x.Id,
+								   RowVersion = x.RowVersion.ToArray(),
+							   },
+							   Data = new CalculationData
+							   {
+								   AirWaybillDisplay = x.AirWaybillDisplay,
+								   ApplicationDisplay = x.ApplicationDisplay,
+								   ClientId = x.ClientId,
+								   FactureCost = x.FactureCost,
+								   InsuranceCost = x.InsuranceCost,
+								   MarkName = x.MarkName,
+								   ScotchCost = x.ScotchCost,
+								   TariffPerKg = x.TariffPerKg,
+								   Weight = x.Weight
+							   }
+						   })
+						   .ToArray();
 		}
 
 		public VersionData<CalculationState> SetState(long id, byte[] rowVersion, CalculationState state)
 		{
-			var result = _context.Calculation_SetState(id, rowVersion, (int)state).FirstOrDefault();
+			var result = _context.Calculation_SetState(id, rowVersion, (int) state).FirstOrDefault();
 
 			if (result == null)
 			{
@@ -85,6 +86,25 @@ namespace Alicargo.DataAccess.Repositories
 				State = state,
 				StateTimestamp = result.StateTimestamp
 			};
+		}
+
+		public CalculationData[] GetByClientId(long clientId)
+		{
+			return _context.Calculations.Where(x => x.ClientId == clientId)
+						   .OrderBy(x => x.ApplicationDisplay)
+						   .Select(x =>
+							   new CalculationData
+							   {
+								   AirWaybillDisplay = x.AirWaybillDisplay,
+								   ApplicationDisplay = x.ApplicationDisplay,
+								   ClientId = x.ClientId,
+								   FactureCost = x.FactureCost,
+								   InsuranceCost = x.InsuranceCost,
+								   MarkName = x.MarkName,
+								   ScotchCost = x.ScotchCost,
+								   TariffPerKg = x.TariffPerKg,
+								   Weight = x.Weight
+							   }).ToArray();
 		}
 	}
 }

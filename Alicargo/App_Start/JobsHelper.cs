@@ -11,6 +11,7 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.Calculation;
 using Alicargo.Services;
 using Alicargo.Services.Email;
+using Alicargo.Services.Excel;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
@@ -86,7 +87,12 @@ namespace Alicargo.App_Start
 
 		private static IJob GetClientExcelUpdaterJob(IDbConnection connection)
 		{
-			return new ClientExcelUpdaterJob();
+			var unitOfWork = new UnitOfWork(connection);
+			var excel = new ExcelGenerator();
+			var calculations = new CalculationRepository(unitOfWork);
+			var clients = new ClientRepository(unitOfWork);
+
+			return new ClientExcelUpdaterJob(excel, calculations, clients, unitOfWork);
 		}
 
 		private static IJob GetCalculationMailerJob(IDbConnection connection)

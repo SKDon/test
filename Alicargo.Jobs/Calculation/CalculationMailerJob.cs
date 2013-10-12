@@ -1,7 +1,6 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services;
 
@@ -22,48 +21,28 @@ namespace Alicargo.Jobs.Calculation
 
 		public void Run()
 		{
-			var data = _calculations.Get(CalculationState.New);
-			foreach (var item in data)
-			{
-				if (SetState(item, CalculationState.New))
-				{
-					try
-					{
-						_mailer.Send(item.Data);
-
-						SetState(item, CalculationState.Sended);
-					}
-					catch (Exception e)
-					{
-						_log.Error("Failed to send an email for the calculation " + item.Version.Id, e);
-
-						if (e.IsCritical())
-						{
-							throw;
-						}
-
-						SetState(item, CalculationState.Error);
-					}
-				}
-			}
+			_calculations.Process(CalculationState.ClientUpdated, RunImpl);
 		}
 
-		private bool SetState(VersionedData<CalculationState, CalculationData> item, CalculationState state)
+		private void RunImpl(VersionedData<CalculationState, CalculationData> item)
 		{
 			try
 			{
-				var data = _calculations.SetState(item.Version.Id, item.Version.RowVersion, state);
+				_mailer.Send(item.Data);
 
-				item.Version.RowVersion = data.RowVersion;
-				item.Version.State = data.State;
-				item.Version.StateTimestamp = data.StateTimestamp;
+				_calculations.SetState(item, CalculationState.Done);
 			}
-			catch (EntityUpdateConflict)
+			catch (Exception e)
 			{
-				return false;
-			}
+				_log.Error("Failed to send an email for the calculation " + item.Version.Id, e);
 
-			return true;
+				if (e.IsCritical())
+				{
+					throw;
+				}
+
+				_calculations.SetState(item, CalculationState.Error);
+			}
 		}
 	}
 }
