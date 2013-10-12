@@ -6,18 +6,18 @@
 		@Html.EditorWithLabelFor(model => model.FactoryName)
 		@Html.EditorWithLabelFor(model => model.MarkName)
 		@Html.EditorWithLabelFor(model => model.Invoice)
-		@Html.EditorWithLabelFor(model => model.FactureCost)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.Weigth)
-		@Html.EditorWithLabelFor(model => model.Count)
-		@Html.EditorWithLabelFor(model => model.ScotchCost)
+		@Html.EditorWithLabelFor(model => model.Currency)
 		@Html.LabelFor(x => x.CountryId)
 		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
 	</div>
 	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.Currency)
+		@Html.EditorWithLabelFor(model => model.Weigth)
+		@Html.EditorWithLabelFor(model => model.Count)
 		@Html.EditorWithLabelFor(model => model.Volume)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.ScotchCost)
+		@Html.EditorWithLabelFor(model => model.FactureCost)
 		@Html.EditorWithLabelFor(model => model.WithdrawCost)
 	</div>
 </div>
