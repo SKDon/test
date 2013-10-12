@@ -10,8 +10,8 @@ namespace Alicargo.DataAccess.Repositories
 {
 	public sealed class ClientRepository : IClientRepository
 	{
-		private readonly Expression<Func<Client, ClientData>> _selector;
 		private readonly AlicargoDataContext _context;
+		private readonly Expression<Func<Client, ClientData>> _selector;
 
 		public ClientRepository(IUnitOfWork unitOfWork)
 		{
@@ -47,11 +47,11 @@ namespace Alicargo.DataAccess.Repositories
 		public ClientData[] GetRange(int take, long skip)
 		{
 			return _context.Clients
-						  .OrderBy(x => x.LegalEntity)
-						  .Skip((int)skip)
-						  .Take(take)
-						  .Select(_selector)
-						  .ToArray();
+						   .OrderBy(x => x.LegalEntity)
+						   .Skip((int)skip)
+						   .Take(take)
+						   .Select(_selector)
+						   .ToArray();
 		}
 
 		public Func<long> Add(ClientData client)
@@ -65,6 +65,11 @@ namespace Alicargo.DataAccess.Repositories
 			return () => entity.Id;
 		}
 
+		public string GetLanguage(long clientId)
+		{
+			return _context.Clients.Where(x => x.Id == clientId).Select(x => x.User.TwoLetterISOLanguageName).First();
+		}
+
 		public ClientData GetByUserId(long userId)
 		{
 			return _context.Clients.Select(_selector).FirstOrDefault(x => x.UserId == userId);
@@ -73,9 +78,9 @@ namespace Alicargo.DataAccess.Repositories
 		public ClientData GetById(long clientId)
 		{
 			return _context.Clients
-						  .Where(x => x.Id == clientId)
-						  .Select(_selector)
-						  .FirstOrDefault();
+						   .Where(x => x.Id == clientId)
+						   .Select(_selector)
+						   .FirstOrDefault();
 		}
 
 		public void Delete(long id)
@@ -100,18 +105,18 @@ namespace Alicargo.DataAccess.Repositories
 		public ClientData[] Get(params long[] clinentIds)
 		{
 			return _context.Clients
-						  .Where(x => clinentIds.Contains(x.Id))
-						  .Select(_selector)
-						  .ToArray();
+						   .Where(x => clinentIds.Contains(x.Id))
+						   .Select(_selector)
+						   .ToArray();
 		}
 
 		// todo: 2. test
 		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
 		{
 			return _context.Applications
-						  .Where(x => appIds.Contains(x.Id))
-						  .Select(x => new { x.Id, ClientNic = x.Client.Nic })
-						  .ToDictionary(x => x.Id, x => x.ClientNic);
+						   .Where(x => appIds.Contains(x.Id))
+						   .Select(x => new { x.Id, ClientNic = x.Client.Nic })
+						   .ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 
 		public void SetCalculationExcel(long clientId, byte[] bytes)

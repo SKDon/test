@@ -11,6 +11,7 @@ namespace Alicargo.Contracts.Repositories
 		void Delete(long id);
 		void Update(ClientData client);
 
+		string GetLanguage(long clientId);
 		ClientData GetByUserId(long userId);
 		ClientData GetById(long clientId);
 		ClientData[] GetRange(int take, long skip);

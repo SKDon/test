@@ -74,10 +74,10 @@ namespace Alicargo.Services.Client
                                               _identity.TwoLetterISOLanguageName);
 
             _unitOfWork.SaveChanges();
-
             
             var data = new ClientData
                 {
+					Id = 0,
                     UserId = userId(),
                     BIC = model.BIC,
                     Phone = model.Phone,

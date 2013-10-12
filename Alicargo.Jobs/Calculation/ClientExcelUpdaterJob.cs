@@ -37,9 +37,11 @@ namespace Alicargo.Jobs.Calculation
 
 			foreach (var clientId in clients)
 			{
+				var language = _clients.GetLanguage(clientId);
+
 				var calculations = _calculations.GetByClientId(clientId).Select(x => new CalculationExcelRow(x)).ToArray();
 
-				using (var stream = _excel.Get(calculations))
+				using (var stream = _excel.Get(calculations, language))
 				{
 					_clients.SetCalculationExcel(clientId, stream.ToArray());
 

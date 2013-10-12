@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Services;
-using Alicargo.Services.Abstract;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Resources;
@@ -13,8 +12,10 @@ namespace Alicargo.Services.Excel
 {
 	public sealed class ExcelGenerator : IExcelGenerator
 	{
-		public MemoryStream Get<T>(T[] rows)
+		public MemoryStream Get<T>(T[] rows, string twoLetterISOLanguageName)
 		{
+			CultureContext.Current.Set(() => twoLetterISOLanguageName);
+
 			var properties = typeof(T).GetProperties();
 
 			var stream = new MemoryStream();
