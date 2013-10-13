@@ -65,7 +65,7 @@ namespace Alicargo.Controllers
 			_applicationManager.SetTransitCost(id, transitCost);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}		
+		}
 
 		[Access(RoleType.Admin), HttpPost]
 		public virtual HttpStatusCodeResult SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)

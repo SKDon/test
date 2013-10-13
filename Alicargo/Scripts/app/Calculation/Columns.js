@@ -107,11 +107,12 @@
 						name: "custom-gear",
 						text: "&nbsp;",
 						title: $l.Pages_Calculate,
-						click: function(e) {
+						click: function (e) {
+							e.preventDefault();
 							var button = $(e.target).closest("a")[0];
 							var appId = $.data(button, "ApplicationId");
 							var awbId = $.data(button, "AirWaybillId");
-							$c.Post($u.Calculation_Calculate, { id: appId }, awbId);
+							$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
 						}
 					}],
 					title: "&nbsp;",

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
@@ -10,8 +9,8 @@ namespace Alicargo.Controllers
 	{
 		private readonly IApplicationManager _applicationManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
-		private readonly ICalculationPresenter _presenter;
 		private readonly ICalculationService _calculation;
+		private readonly ICalculationPresenter _presenter;
 
 		public CalculationController(
 			IAwbUpdateManager awbUpdateManager,
@@ -31,8 +30,7 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
 			var data = _presenter.List(take, skip);
@@ -40,69 +38,92 @@ namespace Alicargo.Controllers
 			return Json(data);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult Row(long id)
+		//[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		//public virtual JsonResult Row(long id)
+		//{
+		//	var data = _presenter.Row(id);
+
+		//	return Json(data);
+		//}
+
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetTariffPerKg(long id, long awbId, decimal? tariffPerKg)
 		{
-			var data = _presenter.Row(id);
+			_applicationManager.SetTariffPerKg(id, tariffPerKg);
+
+			var data = _presenter.Row(awbId);
 
 			return Json(data);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		public virtual HttpStatusCodeResult SetTariffPerKg(long id, decimal? tariffPerKg)
-		{
-			_applicationManager.SetTariffPerKg(id, tariffPerKg);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		[Access(RoleType.Admin), HttpPost]
-		public virtual HttpStatusCodeResult Calculate(long id)
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult Calculate(long id, long awbId)
 		{
 			_calculation.Calculate(id);
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		public virtual HttpStatusCodeResult SetSenderRate(long id, decimal? senderRate)
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetSenderRate(long id, long awbId, decimal? senderRate)
 		{
 			_applicationManager.SetSenderRate(id, senderRate);
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		public virtual HttpStatusCodeResult SetScotchCostEdited(long id, decimal? scotchCost)
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetScotchCostEdited(long id, long awbId, decimal? scotchCost)
 		{
 			_applicationManager.SetScotchCostEdited(id, scotchCost);
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		public virtual HttpStatusCodeResult SetFactureCostEdited(long id, decimal? factureCost)
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetFactureCostEdited(long id, long awbId, decimal? factureCost)
 		{
 			_applicationManager.SetFactureCostEdited(id, factureCost);
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		public virtual HttpStatusCodeResult SetWithdrawCostEdited(long id, decimal? withdrawCost)
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetWithdrawCostEdited(long id, long awbId, decimal? withdrawCost)
 		{
 			_applicationManager.SetWithdrawCostEdited(id, withdrawCost);
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
-		public virtual HttpStatusCodeResult SetAdditionalCost(long awbId, decimal? additionalCost)
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetAdditionalCost(long awbId, decimal? additionalCost)
 		{
 			_awbUpdateManager.SetAdditionalCost(awbId, additionalCost);
 
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetTransitCost(long id, long awbId, decimal? transitCost)
+		{
+			_applicationManager.SetTransitCost(id, transitCost);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
 		}
 	}
 }

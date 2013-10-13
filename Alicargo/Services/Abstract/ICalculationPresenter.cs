@@ -5,6 +5,6 @@ namespace Alicargo.Services.Abstract
 	public interface ICalculationPresenter
 	{
 		CalculationListCollection List(int take, long skip);
-		CalculationListCollection Row(long id);
+		CalculationListCollection Row(long awbId);
 	}
 }

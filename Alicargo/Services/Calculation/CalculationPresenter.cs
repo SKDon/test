@@ -32,9 +32,9 @@ namespace Alicargo.Services.Calculation
 			return List(awbs);
 		}
 
-		public CalculationListCollection Row(long id)
+		public CalculationListCollection Row(long awbId)
 		{
-			var data = _awbRepository.Get(id);
+			var data = _awbRepository.Get(awbId);
 
 			return List(data);
 		}

@@ -12,8 +12,8 @@
 
 		function post(url, data, awbId) {
 			var scrollTop = $(window).scrollTop();
-			$.post(url, data).success(function () {
-				updateMailGrid(awbId);
+			$.post(url, data).success(function (awbData) {
+				updateMailGrid(awbId, awbData);
 				$(window).scrollTop(scrollTop);
 			}).fail($a.ShowError);
 		}
@@ -51,13 +51,11 @@
 			}
 		}
 
-		function updateMailGrid(awbId) {
-			$.post($u.Calculation_Row, { id: awbId }).success(function (data) {
-				var grid = $c.GetMainGrid();
-				var oldData = findGroup(grid.dataSource.data(), awbId);
-				rebindData(oldData, data);
-				grid.refresh();
-			}).fail($a.ShowError);
+		function updateMailGrid(awbId, awbData) {
+			var grid = $c.GetMainGrid();
+			var oldData = findGroup(grid.dataSource.data(), awbId);
+			rebindData(oldData, awbData);
+			grid.refresh();
 		};
 
 		function initAdditionalCost(row, data) {
@@ -114,40 +112,47 @@
 
 			function save(e) {
 				var awbId = e.model.AirWaybillId;
-
+				var applicationId = e.model.ApplicationId;
+				
 				if (e.values.TariffPerKg !== undefined) {
 					post($u.Calculation_SetTariffPerKg, {
-						id: e.model.ApplicationId,
+						id: applicationId,
+						awbId: awbId,
 						tariffPerKg: e.values.TariffPerKg
 					}, awbId);
 				}
 				if (e.values.ScotchCost !== undefined) {
 					post($u.Calculation_SetScotchCostEdited, {
-						id: e.model.ApplicationId,
+						id: applicationId,
+						awbId: awbId,
 						scotchCost: e.values.ScotchCost
 					}, awbId);
 				}
 				if (e.values.FactureCost !== undefined) {
 					post($u.Calculation_SetFactureCostEdited, {
-						id: e.model.ApplicationId,
+						id: applicationId,
+						awbId: awbId,
 						factureCost: e.values.FactureCost
 					}, awbId);
 				}
 				if (e.values.WithdrawCost !== undefined) {
 					post($u.Calculation_SetWithdrawCostEdited, {
-						id: e.model.ApplicationId,
+						id: applicationId,
+						awbId: awbId,
 						withdrawCost: e.values.WithdrawCost
 					}, awbId);
 				}
 				if (e.values.TransitCost !== undefined) {
-					post($u.ApplicationUpdate_SetTransitCost, {
-						id: e.model.ApplicationId,
+					post($u.Calculation_SetTransitCost, {
+						id: applicationId,
+						awbId: awbId,
 						transitCost: e.values.TransitCost
 					}, awbId);
 				}
 				if (e.values.SenderRate !== undefined) {
 					post($u.Calculation_SetSenderRate, {
-						id: e.model.ApplicationId,
+						id: applicationId,
+						awbId: awbId,
 						senderRate: e.values.SenderRate
 					}, awbId);
 				}
