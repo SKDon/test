@@ -92,9 +92,12 @@
 				}
 
 				$("tr a.k-grid-custom-gear").each(function () {
-					var dataItem = $c.GetMainGrid().dataItem($(this).closest("tr"));
+					var button = $(this);
+					var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
+					$.data(button[0], "ApplicationId", dataItem.ApplicationId);
+					$.data(button[0], "AirWaybillId", dataItem.AirWaybillId);
 					if (dataItem.IsCalculated) {
-						$(this).remove();
+						button.remove();
 					}
 				});
 

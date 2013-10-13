@@ -15,7 +15,7 @@
 			return {
 				schema: {
 					total: "Total",
-					groups:function (response) {
+					groups: function (response) {
 						$c.CalculationInfo = response.Info;
 						return response.Groups;
 					},
@@ -93,7 +93,7 @@
 				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate },
 				{ field: "FactureCost", title: $l.Entities_FactureCost },
 				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost },
-				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },				
+				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },
 				{ field: "ForwarderCost", title: $l.Entities_ForwarderCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #" },
 				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>" }
 			];
@@ -106,10 +106,10 @@
 						text: "&nbsp;",
 						title: $l.Pages_Calculate,
 						click: function (e) {
-							var tr = $(e.target).closest("tr");
-							var trData = this.dataItem(tr);
-							// todo: 1. disable calculation on row
-							$c.Post($u.Calculation_Calculate, { id: trData.ApplicationId }, trData.AirWaybillId);
+							var button = $(e.target).closest("a")[0];
+							var appId = $.data(button, "ApplicationId");
+							var awbId = $.data(button, "AirWaybillId");
+							$c.Post($u.Calculation_Calculate, { id: appId }, awbId);
 						}
 					}],
 					title: "&nbsp;",
@@ -120,7 +120,7 @@
 			$c.Columns = function () { return c; };
 
 			return c;
-		};		
+		};
 
 		return $c;
 	})($a.Calculation || {});

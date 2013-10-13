@@ -35,10 +35,10 @@
 						grid.dataSource.read();
 						grid.refresh();
 					};
-					if (window.confirm(window.$a.Localization.Pages_DeleteConfirm)) {
+					if (window.confirm($a.Localization.Pages_DeleteConfirm)) {
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
-						var url = window.$a.Urls.AirWaybill_Delete;
+						var url = $a.Urls.AirWaybill_Delete;
 						$.post(url, { id: data.Id }).done(updateGrid).fail(error);
 					}
 				}
