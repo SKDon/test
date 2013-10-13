@@ -615,6 +615,7 @@
     <Content Include="Deploy\Install\Sql\create-sp-restore-db.sql" />
     <None Include="Deploy\Install\restore-db.ps1" />
     <Content Include="Deploy\testing.txt" />
+    <Content Include="Deploy\Update\13.10.2013.sql" />
     <Content Include="Deploy\Update\Plan.txt" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
