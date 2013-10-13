@@ -76,15 +76,15 @@
 
 	.grid .k-button-icontext {
 		height: 16px;
-		min-width: 0 !important;
-		width: 16px;
-		padding: 0;		
 		margin: 0;
+		min-width: 0 !important;
+		padding: 0;
+		width: 16px;
 	}
 
-	.grid .k-button-icontext:hover {
-		text-decoration: none;
-	}
+		.grid .k-button-icontext:hover {
+			text-decoration: none;
+		}
 
 		.grid .k-button-icontext span {
 			background-image: url('../kendo/2013.2.716/Default/sprite.png');
@@ -94,9 +94,9 @@
 			font-size: 0;
 			height: 16px;
 			line-height: 0;
+			margin: 0;
 			overflow: hidden;
 			padding: 0;
-			margin: 0;
 			width: 16px;
 		}
 
@@ -145,35 +145,57 @@
 	width: 1156px;
 }
 
+#calculation-grid .k-alt {
+	background-color: inherit;
+}
+
+#calculation-grid td {
+	border-width: 1px 0 0 1px;
+	font-family: Arial;
+}
+
+#calculation-grid .text-bold {
+	font-weight: bold;
+}
+
 #calculation-grid .k-grouping-row td {
 	background-color: #ffff00;
 }
 
-#calculation-grid tr.k-group-sub-footer:hover {
-	background-color: #f5f5f5;
+#calculation-grid .k-group-sub-footer td.total {
+	font-weight: bold;
 }
-
-#calculation-grid .k-group-sub-footer td {
-	border: none;
-}
-
-	#calculation-grid .k-group-sub-footer td.k-group-cell {
-		background-color: #e3e3e3;
-	}
-
-	#calculation-grid .k-group-sub-footer td.total {
-		font-weight: bold;
-	}
 
 #calculation-grid .k-group-sub-footer.cost-total td {
 	background-color: #ff99cc;
 }
 
-#calculation-grid .additional-cost {
-	margin-bottom: 0;
-	padding: 0 0 1px 0;
+#calculation-grid .k-group-footer td {
+	background-color: inherit;
 }
 
-	#calculation-grid .additional-cost .k-numerictextbox {
-		width: 50px;
+#calculation-grid .k-group-sub-footer-gray td {
+	background-color: #e3e3e3;
+}
+
+#calculation-grid .additional-cost {
+	margin-bottom: 0;
+	padding: 0;
+}
+
+	#calculation-grid .additional-cost * {
+		border: 0 none;
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
+		border-radius: 0;
 	}
+
+	#calculation-grid .additional-cost .k-numerictextbox {
+		width: 100%;
+		text-align: right;
+	}
+
+#calculation-grid td.k-group-cell {
+	background-color: #e3e3e3;
+	border: 0 none;
+}
