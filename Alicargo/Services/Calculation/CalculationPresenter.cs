@@ -93,6 +93,8 @@ namespace Alicargo.Services.Calculation
 								   Profit = 0
 							   };
 
+							   info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x)) - info.TotalExpenses;
+
 							   var totalWeight = (decimal)rows.Sum(x => x.Weigth ?? 0);
 
 							   if (totalWeight != 0)
@@ -103,8 +105,6 @@ namespace Alicargo.Services.Calculation
 								   info.CustomCostPerKg = info.CustomCost / totalWeight;
 								   info.BrokerCostPerKg = info.BrokerCost / totalWeight;
 							   }
-
-							   info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x)) - info.TotalExpenses;
 
 							   return info;
 						   }).ToArray();
