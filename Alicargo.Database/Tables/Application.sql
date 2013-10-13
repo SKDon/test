@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Application] (
 	[Id]					BIGINT				IDENTITY (1, 1) NOT NULL,
-	[CreationTimestamp]		DATETIMEOFFSET		CONSTRAINT [DF_Application_CreationTimestamp] DEFAULT (getdate()) NOT NULL,
+	[CreationTimestamp]		DATETIMEOFFSET		CONSTRAINT [DF_Application_CreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 	
 	[Invoice]				NVARCHAR (MAX)		NOT NULL,
 	[InvoiceFileData]		VARBINARY (MAX)		NULL,

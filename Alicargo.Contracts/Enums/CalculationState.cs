@@ -3,8 +3,9 @@
 	public enum CalculationState
 	{
 		New = 0,
-		ClientUpdated = 1,
-		Done = 2,
-		Error = 3
+		ClientUpdated = 50,
+		Emailing = 100,
+		Done = 200,
+		Error = 500
 	}
 }

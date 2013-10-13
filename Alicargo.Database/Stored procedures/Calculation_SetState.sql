@@ -7,6 +7,6 @@ AS
 
 	UPDATE	[dbo].[Calculation]
 	SET		[StateId] = @State,
-			[StateIdTimestamp] = GETDATE()
+			[StateIdTimestamp] = GETUTCDATE()
 	OUTPUT	[INSERTED].[RowVersion], [INSERTED].[StateIdTimestamp] AS [StateTimestamp]
 	WHERE	[Id] = @Id AND [RowVersion] = @RowVersion

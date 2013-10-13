@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Calculation\CalculationExcelRow.cs" />
     <Compile Include="Calculation\CalculationJobHepler.cs" />
+    <Compile Include="Calculation\CalculationWatcherJob.cs" />
     <Compile Include="Calculation\ClientExcelUpdaterJob.cs" />
     <Compile Include="Calculation\CalculationMailer.cs" />
     <Compile Include="Calculation\ICalculationMailer.cs" />

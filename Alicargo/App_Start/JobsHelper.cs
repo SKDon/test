@@ -21,6 +21,7 @@ namespace Alicargo.App_Start
 {
 	internal static class JobsHelper
 	{
+		private static readonly TimeSpan DeadTimeout = TimeSpan.FromMinutes(30);
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		public static readonly TimeSpan CancellationTimeout = PausePeriod.Add(PausePeriod);
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
@@ -38,7 +39,7 @@ namespace Alicargo.App_Start
 		{
 			try
 			{
-				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource) state), tokenSource,
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
 					CancellationToken.None);
 			}
 			catch (Exception e)
@@ -79,12 +80,20 @@ namespace Alicargo.App_Start
 		{
 			const string calculationMailerJob = "CalculationMailerJob_";
 			const string clientExcelUpdaterJob = "ClientExcelUpdaterJob_";
+			const string calculationWatcherJob = "CalculationWatcherJob_";
 
 			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob + 0);
 			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob + 1);
+			BindStatelessJobRunner(kernel, GetCalculationWatcherJob, connectionString, calculationWatcherJob + 0);
+			BindStatelessJobRunner(kernel, GetCalculationWatcherJob, connectionString, calculationWatcherJob + 1);
 
 			// todo: need for states fields in the clients talbe to run second job runner
 			BindStatelessJobRunner(kernel, GetClientExcelUpdaterJob, connectionString, clientExcelUpdaterJob + 0);
+		}
+
+		private static IJob GetCalculationWatcherJob(IDbConnection connection)
+		{
+			return new CalculationWatcherJob(DeadTimeout, new CalculationRepository(new UnitOfWork(connection)));
 		}
 
 		private static IJob GetClientExcelUpdaterJob(IDbConnection connection)

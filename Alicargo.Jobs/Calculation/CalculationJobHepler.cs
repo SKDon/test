@@ -27,9 +27,10 @@ namespace Alicargo.Jobs.Calculation
 			return true;
 		}
 
-		public static void Process(this ICalculationRepository calculations, CalculationState processingState, Action<VersionedData<CalculationState, CalculationData>> run)
+		public static void Process(this ICalculationRepository calculations, CalculationState stateToProcess,
+			CalculationState processingState, Action<VersionedData<CalculationState, CalculationData>> run)
 		{
-			var data = calculations.Get(processingState);
+			var data = calculations.Get(stateToProcess);
 
 			foreach (var item in data)
 			{

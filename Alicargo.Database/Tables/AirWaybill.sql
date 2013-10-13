@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[AirWaybill] (
 	[Id]							BIGINT				IDENTITY (1, 1) NOT NULL,
-	[CreationTimestamp]				DATETIMEOFFSET		CONSTRAINT [DF_AirWaybillCreationTimestamp] DEFAULT (GETDATE()) NOT NULL,	
+	[CreationTimestamp]				DATETIMEOFFSET		CONSTRAINT [DF_AirWaybillCreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,	
 
 	[ArrivalAirport]				NVARCHAR (MAX)		NOT NULL,
 	[DepartureAirport]				NVARCHAR (MAX)		NOT NULL,
@@ -23,7 +23,7 @@
 	[AWBFileName]					NVARCHAR(320)		NULL,
 
 	[StateId]						BIGINT				NOT NULL,
-	[StateChangeTimestamp]			DATETIMEOFFSET		DEFAULT (GETDATE()) NOT NULL,
+	[StateChangeTimestamp]			DATETIMEOFFSET		DEFAULT (GETUTCDATE()) NOT NULL,
 
 	[FlightCost]					MONEY				NULL,
 	[CustomCost]					MONEY				NULL,
