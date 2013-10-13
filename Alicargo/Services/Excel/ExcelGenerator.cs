@@ -55,6 +55,16 @@ namespace Alicargo.Services.Excel
 
 					cell.Value = value;
 
+					if (property.PropertyType == typeof(float)
+						|| property.PropertyType == typeof(decimal)
+						|| property.PropertyType == typeof(double)
+						|| property.PropertyType == typeof(float?)
+						|| property.PropertyType == typeof(decimal?)
+						|| property.PropertyType == typeof(double?))
+					{
+						cell.Style.Numberformat.Format = "0.00";
+					}
+
 					RowStyles(cell);
 				}
 
