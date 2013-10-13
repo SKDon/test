@@ -49,6 +49,12 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.FileResult Calculations()
+        {
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Calculations);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Edit()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -108,6 +114,14 @@ namespace Alicargo.Controllers
             public readonly string transitModel = "Transit";
             public readonly string carrierModel = "carrierModel";
             public readonly string authenticationModel = "Authentication";
+        }
+        static readonly ActionParamsClass_Calculations s_params_Calculations = new ActionParamsClass_Calculations();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Calculations CalculationsParams { get { return s_params_Calculations; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Calculations
+        {
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -197,12 +211,13 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void CalculationsOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
+        partial void CalculationsOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
-        public override System.Web.Mvc.FileResult Calculations()
+        public override System.Web.Mvc.FileResult Calculations(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Calculations);
-            CalculationsOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            CalculationsOverride(callInfo, id);
             return callInfo;
         }
 

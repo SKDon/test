@@ -17,8 +17,8 @@ remove-item "$publishUrl\*" -exclude ".git" -recurse
 
 $date = Get-Date
 
-git pull
+#git pull --rebase
 
-git commit --all -m "Deploy at $date" --quiet
+#git commit --all -m "Deploy at $date" --quiet
 
-git push --all --quiet
+#git push --all --quiet

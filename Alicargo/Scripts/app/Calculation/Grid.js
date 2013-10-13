@@ -11,8 +11,10 @@
 		};
 
 		function post(url, data, awbId) {
+			var scrollTop = $(window).scrollTop();
 			$.post(url, data).success(function () {
 				updateMailGrid(awbId);
+				$(window).scrollTop(scrollTop);
 			}).fail($a.ShowError);
 		}
 
@@ -53,12 +55,8 @@
 			$.post($u.Calculation_Row, { id: awbId }).success(function (data) {
 				var grid = $c.GetMainGrid();
 				var oldData = findGroup(grid.dataSource.data(), awbId);
-
 				rebindData(oldData, data);
-				var scrollTop = $(window).scrollTop();
 				grid.refresh();
-				$(window).scrollTop(scrollTop);
-
 			}).fail($a.ShowError);
 		};
 

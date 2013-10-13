@@ -7,6 +7,6 @@ namespace Alicargo.Services.Abstract
 	{
 		ClientData GetCurrentClientData(long? clientId = null);
 		ListCollection<ClientData> GetList(int take, int skip);
-		FileHolder GetCalculationFile();
+		FileHolder GetCalculationFile(long clientId);
 	}
 }

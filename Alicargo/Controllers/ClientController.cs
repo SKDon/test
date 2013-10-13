@@ -92,9 +92,10 @@ namespace Alicargo.Controllers
 			return true;
 		}
 
-		public virtual FileResult Calculations()
+		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
+		public virtual FileResult Calculations(long id)
 		{
-			var file = _clientPresenter.GetCalculationFile();
+			var file = _clientPresenter.GetCalculationFile(id);
 
 			return file.GetFileResult();
 		}

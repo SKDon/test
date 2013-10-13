@@ -59,9 +59,9 @@ namespace Alicargo.Services.Client
 			return new ListCollection<ClientData> { Data = data, Total = total };
 		}
 
-		public FileHolder GetCalculationFile()
+		public FileHolder GetCalculationFile(long clientId)
 		{
-			var data = GetCurrentClientData();
+			var data = GetCurrentClientData(clientId);
 
 			var file = _files.GetCalculationFile(data.Id) ?? new FileHolder
 			{

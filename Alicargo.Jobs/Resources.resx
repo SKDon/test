@@ -119,11 +119,11 @@
   </resheader>
   <data name="Calculation_Body" xml:space="preserve">
     <value>{0}
-{1} - {2} {3} kg * {4} € = {5} €
-скотч - {6}
-страховка - {7}
-фактура - {8}
-Итого - {9} €</value>
+{1} - {2} {3} kg * {4}€ = {5}€
+скотч - {6}€
+страховка - {7}€
+фактура - {8}€
+Итого - {9}€</value>
     <comment>0  - AWB display
 1 - app display
 2 - mark

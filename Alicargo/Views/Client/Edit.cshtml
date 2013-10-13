@@ -5,7 +5,7 @@
 <h1>
 	@Pages.ClientEdit
 	<span>
-		@Html.ActionLink(Pages.DownloadCalculations, MVC.Client.Calculations(), new { @class = "btn btn-info" })
+		@Html.ActionLink(Pages.DownloadCalculations, MVC.Client.Calculations((long)ViewBag.ClientId), new { @class = "btn btn-info" })
 	</span>
 </h1>
 @Html.EditPage(Url.Action(MVC.Client.Edit()), Pages.Save)

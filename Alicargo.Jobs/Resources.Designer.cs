@@ -62,11 +62,11 @@ namespace Alicargo.Jobs {
         
         /// <summary>
         ///   Looks up a localized string similar to {0}
-        ///{1} - {2} {3} kg * {4} € = {5} €
-        ///скотч - {6}
-        ///страховка - {7}
-        ///фактура - {8}
-        ///Итого - {9} €.
+        ///{1} - {2} {3} kg * {4}€ = {5}€
+        ///скотч - {6}€
+        ///страховка - {7}€
+        ///фактура - {8}€
+        ///Итого - {9}€.
         /// </summary>
         internal static string Calculation_Body {
             get {
