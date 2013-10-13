@@ -3,16 +3,12 @@
 	public sealed class CalculationItem
 	{
 		public string ClientNic { get; set; }
-
 		public string DisplayNumber { get; set; }
-
 		public decimal TotalTariffCost { get; set; }
-
 		public decimal TotalSenderRate { get; set; }
-
 		public decimal InsuranceCost { get; set; }
-
 		public decimal Profit { get; set; }
+		public bool IsCalculated { get; set; }
 
 		#region Application data
 

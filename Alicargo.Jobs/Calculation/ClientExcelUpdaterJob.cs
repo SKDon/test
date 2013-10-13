@@ -28,6 +28,8 @@ namespace Alicargo.Jobs.Calculation
 		{
 			var data = _calculations.Get(CalculationState.New);
 
+			// todo: add state fields to to the clients table to implement optimistic lock while excel file updating
+
 			if (data.Length == 0)
 			{
 				return;

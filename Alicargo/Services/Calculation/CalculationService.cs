@@ -11,15 +11,15 @@ namespace Alicargo.Services.Calculation
 {
 	internal sealed class CalculationService : ICalculationService
 	{
+		private readonly IApplicationRepository _applications;
+		private readonly IAwbRepository _awbs;
 		private readonly ICalculationRepository _calculations;
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IAwbRepository _awbs;
-		private readonly IApplicationRepository _applications;
 
 		public CalculationService(
 			ICalculationRepository calculations,
 			IUnitOfWork unitOfWork,
-			IAwbRepository awbs, 
+			IAwbRepository awbs,
 			IApplicationRepository applications)
 		{
 			_calculations = calculations;
@@ -54,7 +54,7 @@ namespace Alicargo.Services.Calculation
 				MarkName = application.MarkName,
 				ScotchCost = scotch,
 				TariffPerKg = tariffPerKg,
-				Weight = weigth				
+				Weight = weigth
 			};
 
 			_calculations.Add(calculation, applicationId);

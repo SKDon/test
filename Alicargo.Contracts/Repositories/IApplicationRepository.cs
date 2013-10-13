@@ -9,7 +9,7 @@ namespace Alicargo.Contracts.Repositories
 		ApplicationData Get(long id);
 		ApplicationDetailsData GetDetails(long id);
 		ApplicationData[] GetByAirWaybill(params long[] ids);
-        ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null, Order[] orders = null, long? clientId = null);
+		ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null, Order[] orders = null, long? clientId = null);
 		long Count(IEnumerable<long> stateIds, long? clientId = null);
 		long GetClientId(long id);
 
@@ -19,5 +19,6 @@ namespace Alicargo.Contracts.Repositories
 		FileHolder GetDeliveryBillFile(long id);
 		FileHolder GetTorg12File(long id);
 		FileHolder GetPackingFile(long id);
+		IReadOnlyDictionary<long, long> GetCalculations(long[] appIds);
 	}
 }

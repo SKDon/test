@@ -32,6 +32,7 @@ namespace Alicargo.Core.Services
 				if (ex is BadImageFormatException) return true;
 				if (ex is CannotUnloadAppDomainException) return true;
 				if (ex is InvalidProgramException) return true;
+				if (ex is StackOverflowException) return true;
 				if (ex is ThreadAbortException) return true;
 
 				ex = ex.InnerException;

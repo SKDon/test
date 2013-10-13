@@ -47,7 +47,6 @@
 	[CountryId]				BIGINT				NULL,
 	[AirWaybillId]			BIGINT				NULL,
 	[SenderId]				BIGINT				NULL,
-	[CalculationId]			BIGINT				NULL,
 
 	[FactoryName]			NVARCHAR(320)		NOT NULL, 
 	[FactoryPhone]			NVARCHAR(MAX)		NULL, 

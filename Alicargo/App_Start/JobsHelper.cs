@@ -38,8 +38,8 @@ namespace Alicargo.App_Start
 		{
 			try
 			{
-				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
-											 CancellationToken.None);
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource) state), tokenSource,
+					CancellationToken.None);
 			}
 			catch (Exception e)
 			{
@@ -67,7 +67,7 @@ namespace Alicargo.App_Start
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Func<IDbConnection, IJob> getJob,
-												   string connectionString, string jobName)
+			string connectionString, string jobName)
 		{
 			kernel.Bind<IJobRunner>()
 				  .ToMethod(context => new StatelessJobRunner(getJob, jobName, JobsLogger, connectionString, PausePeriod))
@@ -77,12 +77,14 @@ namespace Alicargo.App_Start
 
 		public static void BindJobs(IKernel kernel, string connectionString)
 		{
-			const string calculationMailerJob = "CalculationMailerJob";
-			const string clientExcelUpdaterJob = "ClientExcelUpdaterJob";
+			const string calculationMailerJob = "CalculationMailerJob_";
+			const string clientExcelUpdaterJob = "ClientExcelUpdaterJob_";
 
-			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob);
+			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob + 0);
+			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob + 1);
 
-			BindStatelessJobRunner(kernel, GetClientExcelUpdaterJob, connectionString, clientExcelUpdaterJob);
+			// todo: need for states fields in the clients talbe to run second job runner
+			BindStatelessJobRunner(kernel, GetClientExcelUpdaterJob, connectionString, clientExcelUpdaterJob + 0);
 		}
 
 		private static IJob GetClientExcelUpdaterJob(IDbConnection connection)

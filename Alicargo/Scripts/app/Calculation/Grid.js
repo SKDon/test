@@ -38,6 +38,7 @@
 				oldData.items[itemIndex].TotalTariffCost = items[itemIndex].TotalTariffCost;
 				oldData.items[itemIndex].TotalSenderRate = items[itemIndex].TotalSenderRate;
 				oldData.items[itemIndex].Profit = items[itemIndex].Profit;
+				oldData.items[itemIndex].IsCalculated = items[itemIndex].IsCalculated;
 			}
 
 			for (var infoIndex in $c.CalculationInfo) {
@@ -89,6 +90,13 @@
 					}
 					return awbDetails;
 				}
+
+				$("tr a.k-grid-custom-gear").each(function () {
+					var dataItem = $c.GetMainGrid().dataItem($(this).closest("tr"));
+					if (dataItem.IsCalculated) {
+						$(this).remove();
+					}
+				});
 
 				$("tr.k-group-footer").each(function (i) {
 					var awbId = $c.CalculationInfo[i].AirWaybillId;
@@ -144,6 +152,12 @@
 				}
 			}
 
+			function edit(e) {
+				if (e.model.IsCalculated) {
+					$c.GetMainGrid().closeCell();
+				}
+			}
+
 			var gridHolder = $("#calculation-grid");
 			gridHolder.kendoGrid({
 				columns: $c.Columns(),
@@ -152,7 +166,8 @@
 				editable: true,
 				resizable: true,
 				save: save,
-				dataBound: dataBound
+				dataBound: dataBound,
+				edit: edit
 			});
 		});
 

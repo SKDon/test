@@ -4119,8 +4119,6 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<long> _SenderId;
 		
-		private System.Nullable<long> _CalculationId;
-		
 		private string _FactoryName;
 		
 		private string _FactoryPhone;
@@ -4239,8 +4237,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnAirWaybillIdChanged();
     partial void OnSenderIdChanging(System.Nullable<long> value);
     partial void OnSenderIdChanged();
-    partial void OnCalculationIdChanging(System.Nullable<long> value);
-    partial void OnCalculationIdChanged();
     partial void OnFactoryNameChanging(string value);
     partial void OnFactoryNameChanged();
     partial void OnFactoryPhoneChanging(string value);
@@ -5039,26 +5035,6 @@ namespace Alicargo.DataAccess.DbContext
 					this._SenderId = value;
 					this.SendPropertyChanged("SenderId");
 					this.OnSenderIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationId", DbType="BigInt")]
-		public System.Nullable<long> CalculationId
-		{
-			get
-			{
-				return this._CalculationId;
-			}
-			set
-			{
-				if ((this._CalculationId != value))
-				{
-					this.OnCalculationIdChanging(value);
-					this.SendPropertyChanging();
-					this._CalculationId = value;
-					this.SendPropertyChanged("CalculationId");
-					this.OnCalculationIdChanged();
 				}
 			}
 		}

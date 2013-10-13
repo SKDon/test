@@ -12,9 +12,9 @@ namespace Alicargo.DataAccess.Repositories
 {
 	internal sealed class ApplicationRepository : IApplicationRepository
 	{
+		private readonly AlicargoDataContext _context;
 		private readonly IApplicationRepositoryOrderer _orderer;
 		private readonly Expression<Func<Application, ApplicationData>> _selector;
-		private readonly AlicargoDataContext _context;
 
 		public ApplicationRepository(IUnitOfWork unitOfWork, IApplicationRepositoryOrderer orderer)
 		{
@@ -80,65 +80,65 @@ namespace Alicargo.DataAccess.Repositories
 		public ApplicationData[] GetByAirWaybill(params long[] ids)
 		{
 			return _context.Applications
-						  .Where(x => x.AirWaybillId.HasValue && ids.Contains(x.AirWaybillId.Value))
-						  .Select(_selector)
-						  .ToArray();
+						   .Where(x => x.AirWaybillId.HasValue && ids.Contains(x.AirWaybillId.Value))
+						   .Select(_selector)
+						   .ToArray();
 		}
 
 		public ApplicationDetailsData GetDetails(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id)
-						  .Select(x => new ApplicationDetailsData
-						  {
-							  AddressLoad = x.AddressLoad,
-							  Id = x.Id,
-							  PackingFileName = x.PackingFileName,
-							  FactoryName = x.FactoryName,
-							  Invoice = x.Invoice,
-							  InvoiceFileName = x.InvoiceFileName,
-							  MarkName = x.MarkName,
-							  SwiftFileName = x.SwiftFileName,
-							  Volume = x.Volume,
-							  Count = x.Count,
-							  AirWaybill = x.AirWaybill.Bill,
-							  CPFileName = x.CPFileName,
-							  Characteristic = x.Characteristic,
-							  CountryId = x.CountryId,
-							  CreationTimestamp = x.CreationTimestamp,
-							  DateInStock = x.DateInStock,
-							  DateOfCargoReceipt = x.DateOfCargoReceipt,
-							  DeliveryBillFileName = x.DeliveryBillFileName,
-							  FactoryContact = x.FactoryContact,
-							  FactoryEmail = x.FactoryEmail,
-							  FactoryPhone = x.FactoryPhone,
-							  StateChangeTimestamp = x.StateChangeTimestamp,
-							  StateId = x.StateId,
-							  TermsOfDelivery = x.TermsOfDelivery,
-							  Torg12FileName = x.Torg12FileName,
-							  TransitAddress = x.Transit.Address,
-							  TransitCarrierName = x.Transit.Carrier.Name,
-							  TransitCity = x.Transit.City,
-							  TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
-							  TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
-							  TransitPhone = x.Transit.Phone,
-							  TransitRecipientName = x.Transit.RecipientName,
-							  TransitReference = x.TransitReference,
-							  TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
-							  WarehouseWorkingTime = x.WarehouseWorkingTime,
-							  Weigth = x.Weight,
-							  MethodOfDeliveryId = x.MethodOfDeliveryId,
-							  Value = x.Value,
-							  CurrencyId = x.CurrencyId,
-							  AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
-							  AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
-							  AirWaybillGTD = x.AirWaybill.GTD,
-							  ClientEmail = x.Client.Email,
-							  ClientUserId = x.Client.UserId,
-							  Weight = x.Weight,
-							  AirWaybillId = x.AirWaybillId,
-							  ClientNic = x.Client.Nic,
-							  ClientLegalEntity = x.Client.LegalEntity
-						  }).FirstOrDefault();
+						   .Select(x => new ApplicationDetailsData
+						   {
+							   AddressLoad = x.AddressLoad,
+							   Id = x.Id,
+							   PackingFileName = x.PackingFileName,
+							   FactoryName = x.FactoryName,
+							   Invoice = x.Invoice,
+							   InvoiceFileName = x.InvoiceFileName,
+							   MarkName = x.MarkName,
+							   SwiftFileName = x.SwiftFileName,
+							   Volume = x.Volume,
+							   Count = x.Count,
+							   AirWaybill = x.AirWaybill.Bill,
+							   CPFileName = x.CPFileName,
+							   Characteristic = x.Characteristic,
+							   CountryId = x.CountryId,
+							   CreationTimestamp = x.CreationTimestamp,
+							   DateInStock = x.DateInStock,
+							   DateOfCargoReceipt = x.DateOfCargoReceipt,
+							   DeliveryBillFileName = x.DeliveryBillFileName,
+							   FactoryContact = x.FactoryContact,
+							   FactoryEmail = x.FactoryEmail,
+							   FactoryPhone = x.FactoryPhone,
+							   StateChangeTimestamp = x.StateChangeTimestamp,
+							   StateId = x.StateId,
+							   TermsOfDelivery = x.TermsOfDelivery,
+							   Torg12FileName = x.Torg12FileName,
+							   TransitAddress = x.Transit.Address,
+							   TransitCarrierName = x.Transit.Carrier.Name,
+							   TransitCity = x.Transit.City,
+							   TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
+							   TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
+							   TransitPhone = x.Transit.Phone,
+							   TransitRecipientName = x.Transit.RecipientName,
+							   TransitReference = x.TransitReference,
+							   TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
+							   WarehouseWorkingTime = x.WarehouseWorkingTime,
+							   Weigth = x.Weight,
+							   MethodOfDeliveryId = x.MethodOfDeliveryId,
+							   Value = x.Value,
+							   CurrencyId = x.CurrencyId,
+							   AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
+							   AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
+							   AirWaybillGTD = x.AirWaybill.GTD,
+							   ClientEmail = x.Client.Email,
+							   ClientUserId = x.Client.UserId,
+							   Weight = x.Weight,
+							   AirWaybillId = x.AirWaybillId,
+							   ClientNic = x.Client.Nic,
+							   ClientLegalEntity = x.Client.LegalEntity
+						   }).FirstOrDefault();
 		}
 
 		public long Count(IEnumerable<long> stateIds, long? clientId = null)
@@ -159,7 +159,7 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		public ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null,
-											  Order[] orders = null, long? clientId = null)
+			Order[] orders = null, long? clientId = null)
 		{
 			var applications = stateIds != null && stateIds.Length > 0
 				? _context.Applications.Where(x => stateIds.Contains(x.StateId))
@@ -233,65 +233,73 @@ namespace Alicargo.DataAccess.Repositories
 		public FileHolder GetInvoiceFile(long id)
 		{
 			return GetFile(x => x.Id == id && x.InvoiceFileName != null && x.InvoiceFileData != null,
-						   application => new FileHolder
-						   {
-							   FileName = application.InvoiceFileName,
-							   FileData = application.InvoiceFileData.ToArray()
-						   });
+				application => new FileHolder
+				{
+					FileName = application.InvoiceFileName,
+					FileData = application.InvoiceFileData.ToArray()
+				});
 		}
 
 		public FileHolder GetSwiftFile(long id)
 		{
 			return GetFile(x => x.Id == id && x.SwiftFileName != null && x.SwiftFileData != null,
-						   application => new FileHolder
-						   {
-							   FileName = application.SwiftFileName,
-							   FileData = application.SwiftFileData.ToArray()
-						   });
+				application => new FileHolder
+				{
+					FileName = application.SwiftFileName,
+					FileData = application.SwiftFileData.ToArray()
+				});
 		}
 
 		public FileHolder GetCPFile(long id)
 		{
 			return GetFile(x => x.Id == id && x.CPFileName != null && x.CPFileData != null,
-						   application => new FileHolder
-						   {
-							   FileName = application.CPFileName,
-							   FileData = application.CPFileData.ToArray()
-						   });
+				application => new FileHolder
+				{
+					FileName = application.CPFileName,
+					FileData = application.CPFileData.ToArray()
+				});
 		}
 
 		public FileHolder GetDeliveryBillFile(long id)
 		{
 			return GetFile(x => x.Id == id && x.DeliveryBillFileName != null && x.DeliveryBillFileData != null,
-						   application => new FileHolder
-						   {
-							   FileName = application.DeliveryBillFileName,
-							   FileData = application.DeliveryBillFileData.ToArray()
-						   });
+				application => new FileHolder
+				{
+					FileName = application.DeliveryBillFileName,
+					FileData = application.DeliveryBillFileData.ToArray()
+				});
 		}
 
 		public FileHolder GetTorg12File(long id)
 		{
 			return GetFile(x => x.Id == id && x.Torg12FileName != null && x.Torg12FileData != null,
-						   application => new FileHolder
-						   {
-							   FileName = application.Torg12FileName,
-							   FileData = application.Torg12FileData.ToArray()
-						   });
+				application => new FileHolder
+				{
+					FileName = application.Torg12FileName,
+					FileData = application.Torg12FileData.ToArray()
+				});
 		}
 
 		public FileHolder GetPackingFile(long id)
 		{
 			return GetFile(x => x.Id == id && x.PackingFileName != null && x.PackingFileData != null,
-						   application => new FileHolder
-						   {
-							   FileName = application.PackingFileName,
-							   FileData = application.PackingFileData.ToArray()
-						   });
+				application => new FileHolder
+				{
+					FileName = application.PackingFileName,
+					FileData = application.PackingFileData.ToArray()
+				});
+		}
+
+		// todo: 1. test
+		public IReadOnlyDictionary<long, long> GetCalculations(long[] appIds)
+		{
+			return _context.Calculations
+						   .Where(x => appIds.Contains(x.ApplicationHistoryId))
+						   .ToDictionary(x => x.ApplicationHistoryId, x => x.Id);
 		}
 
 		private FileHolder GetFile(Expression<Func<Application, bool>> where,
-								   Expression<Func<Application, FileHolder>> selector)
+			Expression<Func<Application, FileHolder>> selector)
 		{
 			return _context.Applications.Where(where).Select(selector).FirstOrDefault();
 		}

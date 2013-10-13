@@ -133,7 +133,9 @@ namespace Alicargo.Services.Calculation
 
 		private IEnumerable<CalculationItem> GetItems(IReadOnlyDictionary<long, AirWaybillData> awbs, ApplicationData[] applications)
 		{
-			var nics = _clientRepository.GetNicByApplications(applications.Select(x => x.Id).ToArray());
+			var appIds = applications.Select(x => x.Id).ToArray();
+			var calculations = _applicationRepository.GetCalculations(appIds);
+			var nics = _clientRepository.GetNicByApplications(appIds);
 
 			return applications.Select(a => new CalculationItem
 			{
@@ -158,7 +160,8 @@ namespace Alicargo.Services.Calculation
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weigth),
 				Profit = CalculationHelper.GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
-				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth)
+				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
+				IsCalculated = calculations.ContainsKey(a.Id)
 			}).OrderByDescending(x => SortingValue(awbs[x.AirWaybillId])).ToArray();
 		}
 
