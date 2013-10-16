@@ -88,7 +88,6 @@ namespace Alicargo.Services.Application
 					AirWaybillId = x.AirWaybillId,
 					WithdrawCost = x.WithdrawCost,
 					FactureCost = x.FactureCost,
-					ForwarderCost = x.ForwarderCost,
 					ScotchCost = x.ScotchCost,
 					TariffPerKg = x.TariffPerKg,
 					TransitCost = x.TransitCost

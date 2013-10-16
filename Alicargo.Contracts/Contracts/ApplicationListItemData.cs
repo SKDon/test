@@ -106,8 +106,6 @@ namespace Alicargo.Contracts.Contracts
 
 		public decimal? WithdrawCost { get; set; }
 
-		public decimal? ForwarderCost { get; set; }
-
 		#endregion
 	}
 }

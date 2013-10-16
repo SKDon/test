@@ -39,7 +39,6 @@
 							"WithdrawCost": { type: "number", editable: editWithdrawCost },
 							"TransitCost": { type: "number", editable: editTransitCost },
 							"InsuranceCost": { type: "number", editable: false },
-							"ForwarderCost": { type: "number", editable: false },
 							"Profit": { type: "number", editable: false }
 						}
 					}
@@ -68,7 +67,6 @@
 						{ field: "TotalSenderRate", aggregate: "sum" },
 						{ field: "TransitCost", aggregate: "sum" },
 						{ field: "ScotchCost", aggregate: "sum" },
-						{ field: "ForwarderCost", aggregate: "sum" },
 						{ field: "InsuranceCost", aggregate: "sum" },
 						{ field: "Profit", aggregate: "sum" }]
 				}
@@ -96,7 +94,6 @@
 				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: { "class": "text-right" } },
 				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, attributes: { "class": "text-right" } },
 				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #", attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "ForwarderCost", title: $l.Entities_ForwarderCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #", attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
 				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } }
 			];
 

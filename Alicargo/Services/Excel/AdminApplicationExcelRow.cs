@@ -251,12 +251,6 @@ namespace Alicargo.Services.Excel
 		public decimal? WithdrawCost
 		{
 			get { return _application.WithdrawCost; }
-		}
-
-		[DisplayNameLocalized(typeof(Entities), "ForwarderCost")]
-		public decimal? ForwarderCost
-		{
-			get { return _application.ForwarderCost; }
-		}
+		}		
 	}
 }

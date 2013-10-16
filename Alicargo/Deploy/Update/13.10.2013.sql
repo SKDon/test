@@ -137,7 +137,6 @@ CREATE TABLE [dbo].[tmp_ms_xx_Application] (
     [FactureCostEdited]    MONEY              NULL,
     [ScotchCostEdited]     MONEY              NULL,
     [WithdrawCostEdited]   MONEY              NULL,
-    [ForwarderCost]        MONEY              NULL,
     [TariffPerKg]          MONEY              NULL,
     [SenderRate]           MONEY              NULL,
     [TransitCost]          MONEY              NULL,

@@ -94,8 +94,8 @@
       <Column Name="ContractFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ContractFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="CalculationFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
       <Association Name="Client_Calculation" Member="Calculations" ThisKey="Id" OtherKey="ClientId" Type="Calculation" />
+      <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
       <Association Name="Transit_Client" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
       <Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
@@ -184,6 +184,25 @@
       <Column Name="StateTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" IsReadOnly="true" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.Calculation" Member="Calculations">
+    <Type Name="Calculation" Modifier="Sealed">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StateIdTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationHistoryId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AirWaybillDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="MarkName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ScotchCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="InsuranceCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Client_Calculation" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Application" Member="Applications">
     <Type Name="Application" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -234,7 +253,6 @@
       <Column Name="FactureCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="ScotchCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="WithdrawCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Column Name="ForwarderCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="SenderRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
@@ -243,25 +261,6 @@
       <Association Name="Country_Application" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
       <Association Name="State_Application" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
       <Association Name="Transit_Application" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Calculation" Member="Calculations">
-    <Type Name="Calculation" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="StateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="StateIdTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
-      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationHistoryId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="AirWaybillDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationDisplay" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="MarkName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
-      <Column Name="Weight" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
-      <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="ScotchCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="InsuranceCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Association Name="Client_Calculation" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.Calculation_SetState" Method="Calculation_SetState">

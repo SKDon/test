@@ -186,7 +186,6 @@ namespace Alicargo.Services.Application
 				CountryId = data.CountryId,
 				Volume = data.Volume,
 				WarehouseWorkingTime = data.WarehouseWorkingTime,
-				ForwarderCost = data.ForwarderCost,
 				FactureCost = data.FactureCost,
 				InvoiceFile = null,
 				PackingFile = null,
@@ -231,7 +230,6 @@ namespace Alicargo.Services.Application
 			to.FactoryContact = @from.FactoryContact;
 			to.MarkName = @from.MarkName;
 			to.MethodOfDeliveryId = (int) @from.MethodOfDelivery;
-			to.ForwarderCost = @from.ForwarderCost;
 			to.FactureCost = @from.FactureCost;
 			to.ScotchCost = @from.ScotchCost;
 			to.TransitCost = @from.TransitCost;
@@ -284,7 +282,6 @@ namespace Alicargo.Services.Application
 				ScotchCost = model.ScotchCost,
 				TransitCost = model.TransitCost,
 				FactureCost = model.FactureCost,
-				ForwarderCost = model.ForwarderCost,
 				TariffPerKg = model.TariffPerKg,
 				ScotchCostEdited = model.ScotchCostEdited,
 				FactureCostEdited = model.FactureCostEdited,

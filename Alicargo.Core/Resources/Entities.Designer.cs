@@ -439,15 +439,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Forwarder cost (€).
-        /// </summary>
-        public static string ForwarderCost {
-            get {
-                return ResourceManager.GetString("ForwarderCost", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ГТД.
         /// </summary>
         public static string GTD {
@@ -835,15 +826,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Затраты на форвардера (всего, €).
-        /// </summary>
-        public static string TotalForwarderCost {
-            get {
-                return ResourceManager.GetString("TotalForwarderCost", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Всего по сендеру (€).
         /// </summary>
         public static string TotalOfSender {
@@ -885,6 +867,15 @@ namespace Resources {
         public static string TotalTariffCost {
             get {
                 return ResourceManager.GetString("TotalTariffCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Затраты на форвардера (всего, €).
+        /// </summary>
+        public static string TotalTransitCost {
+            get {
+                return ResourceManager.GetString("TotalTransitCost", resourceCulture);
             }
         }
         

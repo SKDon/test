@@ -24,7 +24,6 @@
 		public decimal? FactureCost { get; set; }
 		public decimal? WithdrawCost { get; set; }
 		public decimal? TransitCost { get; set; }
-		public decimal? ForwarderCost { get; set; }
 		public decimal? TariffPerKg { get; set; }
 		public decimal? SenderRate { get; set; }
 		public long AirWaybillId { get; set; }

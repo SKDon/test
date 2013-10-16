@@ -126,9 +126,6 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "ForwarderCost")]
-		public decimal? ForwarderCost { get; set; }
-
 		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
 		public decimal? TariffPerKg { get; set; }
 

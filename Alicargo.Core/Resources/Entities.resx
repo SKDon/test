@@ -339,9 +339,6 @@
   <data name="FlightCost" xml:space="preserve">
     <value>Flight cost (€)</value>
   </data>
-  <data name="ForwarderCost" xml:space="preserve">
-    <value>Forwarder cost (€)</value>
-  </data>
   <data name="FactureCost" xml:space="preserve">
     <value>Фактура (€)</value>
   </data>
@@ -384,7 +381,7 @@
   <data name="FlightCostPerKg" xml:space="preserve">
     <value>Стоимость перелета за кг (€)</value>
   </data>
-  <data name="TotalForwarderCost" xml:space="preserve">
+  <data name="TotalTransitCost" xml:space="preserve">
     <value>Затраты на форвардера (всего, €)</value>
   </data>
   <data name="TotalScotchCost" xml:space="preserve">

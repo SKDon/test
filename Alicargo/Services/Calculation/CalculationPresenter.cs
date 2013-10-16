@@ -151,7 +151,6 @@ namespace Alicargo.Services.Calculation
 				TariffPerKg = a.TariffPerKg,
 				SenderRate = a.SenderRate,
 				TransitCost = a.TransitCost,
-				ForwarderCost = a.ForwarderCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
 				WithdrawCost = a.WithdrawCostEdited ?? a.WithdrawCost, // ReSharper disable PossibleInvalidOperationException

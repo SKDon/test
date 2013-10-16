@@ -48,7 +48,6 @@ namespace Alicargo.Contracts.Contracts
 		public decimal? WithdrawCostEdited { get; set; }
 		public decimal? TariffPerKg { get; set; }
 		public decimal? TransitCost { get; set; }
-		public decimal? ForwarderCost { get; set; }
 		public decimal? SenderRate { get; set; }
 	}
 }

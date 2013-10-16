@@ -177,8 +177,6 @@ namespace Alicargo.ViewModels.Application
 
 		public decimal? WithdrawCost { get; set; }
 
-		public decimal? ForwarderCost { get; set; }
-
 		#endregion
 
 		public ApplicationStateModel State { get; set; }
