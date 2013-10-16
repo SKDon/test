@@ -152,6 +152,18 @@
 #calculation-grid td {
 	border-width: 1px 0 0 1px;
 	font-family: Arial;
+	padding-bottom: 0;
+	padding-top: 6px;
+}
+
+#calculation-grid td.k-edit-cell{
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
+#calculation-grid .cell-button {
+	padding-bottom: 3px;
+	padding-top: 3px;
 }
 
 #calculation-grid .text-bold {

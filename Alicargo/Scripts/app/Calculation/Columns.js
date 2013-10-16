@@ -80,7 +80,7 @@
 			var n2Format = "{0:n2}";
 			var c = [
 				{ field: "ClientNic", title: $l.Pages_Client },
-				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
+				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='"+ $u.Application_Edit +"/#=ApplicationId#'>#= DisplayNumber #</a>" },
 				{ field: "Factory", title: $l.Entities_FactoryName },
 				{ field: "Mark", title: $l.Entities_Mark },
 				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #", attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
@@ -103,10 +103,12 @@
 
 			if ($r.IsAdmin) {
 				c.push({
+					attributes: { "class": "cell-button" },
 					command: [{
 						name: "custom-gear",
 						text: "&nbsp;",
 						title: $l.Pages_Calculate,
+						
 						click: function (e) {
 							e.preventDefault();
 							var button = $(e.target).closest("a")[0];
