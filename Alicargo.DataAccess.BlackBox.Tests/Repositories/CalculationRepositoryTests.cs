@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_UpdateConflict()
 		{
 			var data = GenerateData();
@@ -39,7 +39,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var versionedData = AddNew(data, TestConstants.TestApplicationId);
 
 			var result = _calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
-														 CalculationState.New);
+				CalculationState.New);
 
 			result.Should().NotBeNull();
 			result.RowVersion.SequenceEqual(versionedData.Version.RowVersion).Should().BeFalse();
@@ -47,7 +47,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			try
 			{
 				_calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
-												CalculationState.New);
+					CalculationState.New);
 			}
 			catch (EntityUpdateConflict)
 			{
@@ -61,7 +61,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Assert.Fail("Should not get here");
 		}
 
-		[TestMethod, ExpectedException(typeof (DublicateException))]
+		[TestCategory("black-box"), TestMethod, ExpectedException(typeof (DublicateException))]
 		public void Test_Uniqueness()
 		{
 			var data1 = GenerateData();
@@ -74,7 +74,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			AddNew(data2, TestConstants.TestApplicationId);
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_AddGet()
 		{
 			var data = GenerateData();
@@ -86,7 +86,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			versionedData.Version.StateTimestamp.Should().NotBeNull();
 		}
 
-		[TestMethod]
+		[TestMethod, TestCategory("black-box")]
 		public void Test_SetState()
 		{
 			var data = GenerateData();
@@ -94,7 +94,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var versionedData = AddNew(data, TestConstants.TestApplicationId);
 
 			var result = _calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
-														 CalculationState.Done);
+				CalculationState.Done);
 
 			result.RowVersion.SequenceEqual(versionedData.Version.RowVersion).Should().BeFalse();
 			result.StateTimestamp.Should().BeGreaterThan(versionedData.Version.StateTimestamp);
