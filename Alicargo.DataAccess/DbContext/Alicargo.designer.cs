@@ -1806,10 +1806,6 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _TransitId;
 		
-		private System.Data.Linq.Binary _ContractFileData;
-		
-		private string _ContractFileName;
-		
 		private System.Data.Linq.Binary _CalculationFileData;
 		
 		private EntitySet<Calculation> _Calculations;
@@ -1858,10 +1854,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnKSChanged();
     partial void OnTransitIdChanging(long value);
     partial void OnTransitIdChanged();
-    partial void OnContractFileDataChanging(System.Data.Linq.Binary value);
-    partial void OnContractFileDataChanged();
-    partial void OnContractFileNameChanging(string value);
-    partial void OnContractFileNameChanged();
     partial void OnCalculationFileDataChanging(System.Data.Linq.Binary value);
     partial void OnCalculationFileDataChanged();
     #endregion
@@ -2219,46 +2211,6 @@ namespace Alicargo.DataAccess.DbContext
 					this._TransitId = value;
 					this.SendPropertyChanged("TransitId");
 					this.OnTransitIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary ContractFileData
-		{
-			get
-			{
-				return this._ContractFileData;
-			}
-			set
-			{
-				if ((this._ContractFileData != value))
-				{
-					this.OnContractFileDataChanging(value);
-					this.SendPropertyChanging();
-					this._ContractFileData = value;
-					this.SendPropertyChanged("ContractFileData");
-					this.OnContractFileDataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractFileName", DbType="NVarChar(MAX)")]
-		public string ContractFileName
-		{
-			get
-			{
-				return this._ContractFileName;
-			}
-			set
-			{
-				if ((this._ContractFileName != value))
-				{
-					this.OnContractFileNameChanging(value);
-					this.SendPropertyChanging();
-					this._ContractFileName = value;
-					this.SendPropertyChanged("ContractFileName");
-					this.OnContractFileNameChanged();
 				}
 			}
 		}

@@ -17,9 +17,6 @@
 	[KS]				NVARCHAR (MAX)	NULL,
 	[TransitId]			BIGINT			NOT NULL,
 
-	[ContractFileData]	VARBINARY (MAX)	NULL,
-	[ContractFileName]	NVARCHAR (MAX)	NULL,
-
 	[CalculationFileData] VARBINARY (MAX) NULL,
 
 	CONSTRAINT [PK_dbo.Client] PRIMARY KEY CLUSTERED ([Id] ASC),

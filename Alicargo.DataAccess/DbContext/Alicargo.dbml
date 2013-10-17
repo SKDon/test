@@ -91,8 +91,6 @@
       <Column Name="RS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="KS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="TransitId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="ContractFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="ContractFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="CalculationFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Client_Calculation" Member="Calculations" ThisKey="Id" OtherKey="ClientId" Type="Calculation" />
       <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
