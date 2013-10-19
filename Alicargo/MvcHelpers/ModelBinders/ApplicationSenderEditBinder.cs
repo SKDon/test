@@ -3,21 +3,20 @@ using System.Web.Mvc;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.ViewModels.Application;
 
-namespace Alicargo.ModelBinders
+namespace Alicargo.MvcHelpers.ModelBinders
 {
-	internal sealed class ApplicationAdminModelBinder : DefaultModelBinder
+	internal sealed class ApplicationSenderModelBinder : DefaultModelBinder
 	{
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			var model = (ApplicationAdminModel)base.BindModel(controllerContext, bindingContext);
+			var model = (ApplicationSenderModel)base.BindModel(controllerContext, bindingContext);
 
 			ReadFiles(model, controllerContext.HttpContext.Request);
 
 			return model;
 		}
 
-		// todo: 3. files refatoring
-		private static void ReadFiles(ApplicationAdminModel model, HttpRequestBase request)
+		private static void ReadFiles(ApplicationSenderModel model, HttpRequestBase request)
 		{
 			if (model.InvoiceFile == null && model.InvoiceFileName == null)
 				request.ReadFile("InvoiceFile", (name, bytes) =>
@@ -38,27 +37,6 @@ namespace Alicargo.ModelBinders
 				{
 					model.SwiftFileName = name;
 					model.SwiftFile = bytes;
-				});
-
-			if (model.DeliveryBillFile == null && model.DeliveryBillFileName == null)
-				request.ReadFile("DeliveryBillFile", (name, bytes) =>
-				{
-					model.DeliveryBillFileName = name;
-					model.DeliveryBillFile = bytes;
-				});
-
-			if (model.Torg12File == null && model.Torg12FileName == null)
-				request.ReadFile("Torg12File", (name, bytes) =>
-				{
-					model.Torg12FileName = name;
-					model.Torg12File = bytes;
-				});
-
-			if (model.CPFile == null && model.CPFileName == null)
-				request.ReadFile("CPFile", (name, bytes) =>
-				{
-					model.CPFileName = name;
-					model.CPFile = bytes;
 				});
 		}
 	}

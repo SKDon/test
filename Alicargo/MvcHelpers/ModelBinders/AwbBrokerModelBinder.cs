@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.ViewModels.AirWaybill;
 
-namespace Alicargo.ModelBinders
+namespace Alicargo.MvcHelpers.ModelBinders
 {
 	internal sealed class AwbBrokerModelBinder : DefaultModelBinder
 	{
