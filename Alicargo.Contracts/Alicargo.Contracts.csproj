@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\AirWaybillAggregate.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\IClientFileRepository.cs" />
     <Compile Include="Repositories\ISenderRepository.cs" />
+    <Compile Include="Repositories\ISqlProcedureExecutor.cs" />
     <Compile Include="Repositories\IStateRepository.cs" />
     <Compile Include="Repositories\ITransaction.cs" />
     <Compile Include="Repositories\ITransitRepository.cs" />
