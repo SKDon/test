@@ -48,7 +48,7 @@ namespace Alicargo.TestHelpers
 
 		private void BindServices()
 		{
-			CompositionRoot.BindDataAccess(Kernel, null, context => this);
+			CompositionRoot.BindDataAccess(Kernel, context => this);
 
 			Kernel.Rebind<IUnitOfWork>().ToConstant(_unitOfWork).InSingletonScope();
 

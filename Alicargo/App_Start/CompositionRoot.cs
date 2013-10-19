@@ -3,12 +3,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Alicargo.Contracts.Helpers;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services;
+using Alicargo.DataAccess.DbContext;
 using Alicargo.Services;
+using log4net;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
+using ILog = Alicargo.Core.Services.ILog;
 
 namespace Alicargo.App_Start
 {
@@ -18,7 +22,7 @@ namespace Alicargo.App_Start
 
 		public static void BindServices(IKernel kernel)
 		{
-			kernel.Bind<ILog>().ToMethod(context => new Log4NetWrapper(log4net.LogManager.GetLogger("Logger"))).InSingletonScope();
+			kernel.Bind<ILog>().ToMethod(context => new Log4NetWrapper(LogManager.GetLogger("Logger"))).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
@@ -35,23 +39,29 @@ namespace Alicargo.App_Start
 		private static bool IsServiceType(Type type)
 		{
 			return type.IsClass && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
-		}		
+		}
 
-		public static void BindDataAccess(IKernel kernel, string connectionString, Func<IContext, object> scope)
+		public static void BindDataAccess(IKernel kernel, Func<IContext, object> scope)
 		{
 			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
 							  .IncludingNonePublicTypes()
 							  .Select(IsServiceType)
+							  .Excluding<SqlProcedureExecutor>()
 							  .BindDefaultInterface()
 							  .Configure(y => y.InScope(scope)));
 		}
 
-		public static void BindConnection(IKernel kernel, string connectionString)
+		public static void BindConnection(IKernel kernel, string connectionString, string filesConnectionString)
 		{
 			kernel.Bind<IDbConnection>()
 				  .ToMethod(x => new SqlConnection(connectionString))
 				  .InRequestScope()
 				  .OnDeactivation(x => x.Close());
+
+			kernel.Bind<ISqlProcedureExecutor>()
+				  .To<SqlProcedureExecutor>()
+				  .InSingletonScope()
+				  .WithConstructorArgument("connectionString", filesConnectionString);
 		}
 	}
 }

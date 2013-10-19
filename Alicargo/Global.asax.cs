@@ -26,9 +26,9 @@ namespace Alicargo
 		{
 			var kernel = new StandardKernel();
 
-			CompositionRoot.BindConnection(kernel, _connectionString);
+			CompositionRoot.BindConnection(kernel, _connectionString, _filesConnectionString);
 
-			CompositionRoot.BindDataAccess(kernel, _connectionString, context => HttpContext.Current);
+			CompositionRoot.BindDataAccess(kernel, context => HttpContext.Current);
 
 			CompositionRoot.BindServices(kernel);
 
