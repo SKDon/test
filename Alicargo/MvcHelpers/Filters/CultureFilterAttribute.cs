@@ -4,11 +4,11 @@ using Alicargo.Core.Localization;
 
 namespace Alicargo.MvcHelpers.Filters
 {
-    internal sealed class CultureFilter : IAuthorizationFilter
+    internal sealed class CultureFilterAttribute : IAuthorizationFilter
 	{
 		private readonly Func<string> _getTwoLetterISOLanguageName;
 
-		public CultureFilter(Func<string> getTwoLetterISOLanguageName)
+		public CultureFilterAttribute(Func<string> getTwoLetterISOLanguageName)
 		{
 			_getTwoLetterISOLanguageName = getTwoLetterISOLanguageName;
 		}

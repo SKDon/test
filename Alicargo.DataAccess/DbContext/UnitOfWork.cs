@@ -39,6 +39,11 @@ namespace Alicargo.DataAccess.DbContext
 			{
 				if (exception.Number == (int)SqlError.CannotInsertDuplicateKeyRow)
 				{
+					if (exception.Message.Contains("IX_User_Login"))
+					{
+						throw new DublicateLoginException("The login is occupied", exception);
+					}
+
 					throw new DublicateException("Failed to add dublicate entity", exception);
 				}
 

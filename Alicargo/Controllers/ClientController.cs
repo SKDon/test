@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -7,7 +8,6 @@ using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using Antlr.Runtime.Misc;
 using Resources;
 
 namespace Alicargo.Controllers
@@ -62,48 +62,43 @@ namespace Alicargo.Controllers
 			CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
-			if (string.IsNullOrWhiteSpace(authenticationModel.NewPassword))
+			long clientId = 0;
+			var passwordDefined = !string.IsNullOrWhiteSpace(authenticationModel.NewPassword);
+			if (passwordDefined)
+			{
+				try
+				{
+					clientId = _clientManager.Add(model, carrierModel, transitModel, authenticationModel);
+
+					if (model.ContractFile != null)
+					{
+						MergeContract(model, clientId);
+					}
+				}
+				catch (DublicateLoginException)
+				{
+					ModelState.AddModelError("Login", Validation.LoginExists);
+				}
+			}
+			else
+			{
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
+			}
 
 			if (!ModelState.IsValid) return View();
-
-			long clientId = 0;
-			if (!HandleDublicateLogin(() => clientId = _clientManager.Add(model, carrierModel, transitModel, authenticationModel)))
-			{
-				return View(model);
-			}
-
-			if (model.ContractFile != null)
-			{
-				MergeContract(model, clientId);
-			}
 
 			return RedirectToAction(MVC.Client.Edit(clientId));
 		}
 
 		#endregion
 
-		private bool HandleDublicateLogin(Action action)
+		private void MergeContract(ClientModel model, long clientId)
 		{
-			try
+			var oldFileName = _files.GetClientContractFileName(clientId);
+			if (oldFileName != model.ContractFileName)
 			{
-				action();
+				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
 			}
-			catch (DublicateException ex)
-			{
-				if (ex.ToString().Contains("IX_User_Login"))
-				{
-					ModelState.AddModelError("Login", Validation.LoginExists);
-				}
-				else
-				{
-					throw;
-				}
-
-				return false;
-			}
-
-			return true;
 		}
 
 		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
@@ -161,28 +156,22 @@ namespace Alicargo.Controllers
 			CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
-			var data = _clientPresenter.GetCurrentClientData(id);
+			var client = _clientPresenter.GetCurrentClientData(id);
 
-			if (!ModelState.IsValid) return View(model);
-
-			var updated = HandleDublicateLogin(() => _clientManager.Update(data.Id, model, carrierModel, transitModel, authenticationModel));
-			if (!updated)
+			try
 			{
-				return View(model);
+				_clientManager.Update(client.Id, model, carrierModel, transitModel, authenticationModel);
+
+				MergeContract(model, client.Id);
+			}
+			catch (DublicateLoginException)
+			{
+				ModelState.AddModelError("Login", Validation.LoginExists);
 			}
 
-			MergeContract(model, data.Id);
+			if (!ModelState.IsValid) return View();
 
-			return RedirectToAction(MVC.Client.Edit(data.Id));
-		}
-
-		private void MergeContract(ClientModel model, long clientId)
-		{
-			var oldFileName = _files.GetClientContractFileName(clientId);
-			if (oldFileName != model.ContractFileName)
-			{
-				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
-			}
+			return RedirectToAction(MVC.Client.Edit(client.Id));
 		}
 
 		#endregion

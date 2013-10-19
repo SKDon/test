@@ -268,7 +268,7 @@
       <DependentUpon>Pages.resx</DependentUpon>
     </Compile>
     <Compile Include="MvcHelpers\Filters\AccessAttribute.cs" />
-    <Compile Include="MvcHelpers\Filters\CultureFilter.cs" />
+    <Compile Include="MvcHelpers\Filters\CultureFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Validation.it.Designer.cs">
       <AutoGen>True</AutoGen>
