@@ -21,7 +21,15 @@ namespace Alicargo.Jobs.Calculation
 
 		public void Run()
 		{
-			_calculations.Process(CalculationState.ClientUpdated, CalculationState.Emailing, RunImpl);
+			var data = _calculations.Get(CalculationState.New);
+
+			foreach (var item in data)
+			{
+				if (_calculations.SetState(item, CalculationState.Emailing))
+				{
+					RunImpl(item);
+				}
+			}
 		}
 
 		private void RunImpl(VersionedData<CalculationState, CalculationData> item)

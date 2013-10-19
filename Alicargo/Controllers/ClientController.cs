@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
-using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -90,14 +89,6 @@ namespace Alicargo.Controllers
 			}
 
 			return true;
-		}
-
-		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
-		public virtual FileResult Calculations(long id)
-		{
-			var file = _clientPresenter.GetCalculationFile(id);
-
-			return file.GetFileResult();
 		}
 
 		#region Edit

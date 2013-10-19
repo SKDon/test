@@ -49,12 +49,6 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult Calculations()
-        {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Calculations);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Edit()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -78,7 +72,6 @@ namespace Alicargo.Controllers
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string Create = "Create";
-            public readonly string Calculations = "Calculations";
             public readonly string Edit = "Edit";
         }
 
@@ -88,7 +81,6 @@ namespace Alicargo.Controllers
             public const string Index = "Index";
             public const string List = "List";
             public const string Create = "Create";
-            public const string Calculations = "Calculations";
             public const string Edit = "Edit";
         }
 
@@ -114,14 +106,6 @@ namespace Alicargo.Controllers
             public readonly string transitModel = "Transit";
             public readonly string carrierModel = "carrierModel";
             public readonly string authenticationModel = "Authentication";
-        }
-        static readonly ActionParamsClass_Calculations s_params_Calculations = new ActionParamsClass_Calculations();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Calculations CalculationsParams { get { return s_params_Calculations; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Calculations
-        {
-            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -208,16 +192,6 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Authentication", authenticationModel);
             CreateOverride(callInfo, model, transitModel, carrierModel, authenticationModel);
-            return callInfo;
-        }
-
-        partial void CalculationsOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
-
-        public override System.Web.Mvc.FileResult Calculations(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Calculations);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            CalculationsOverride(callInfo, id);
             return callInfo;
         }
 

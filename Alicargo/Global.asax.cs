@@ -32,7 +32,7 @@ namespace Alicargo
 
 			CompositionRoot.BindServices(kernel);
 
-			JobsHelper.BindJobs(kernel, _connectionString, _filesConnectionString);
+			JobsHelper.BindJobs(kernel, _connectionString);
 
 			_jobs = JobsHelper.RunJobs(kernel, _jobTokenSource);
 

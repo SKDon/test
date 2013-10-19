@@ -11,7 +11,6 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.Calculation;
 using Alicargo.Services;
 using Alicargo.Services.Email;
-using Alicargo.Services.Excel;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
@@ -76,36 +75,20 @@ namespace Alicargo.App_Start
 				  .Named(jobName);
 		}
 
-		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
+		public static void BindJobs(IKernel kernel, string connectionString)
 		{
 			const string calculationMailerJob = "CalculationMailerJob_";
-			const string clientExcelUpdaterJob = "ClientExcelUpdaterJob_";
 			const string calculationWatcherJob = "CalculationWatcherJob_";
 
 			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob + 0);
 			BindStatelessJobRunner(kernel, GetCalculationMailerJob, connectionString, calculationMailerJob + 1);
 			BindStatelessJobRunner(kernel, GetCalculationWatcherJob, connectionString, calculationWatcherJob + 0);
 			BindStatelessJobRunner(kernel, GetCalculationWatcherJob, connectionString, calculationWatcherJob + 1);
-
-			// todo: need for states fields in the clients talbe to run second job runner
-			BindStatelessJobRunner(kernel, connection => GetClientExcelUpdaterJob(connection, filesConnectionString),
-				connectionString, clientExcelUpdaterJob + 0);
 		}
 
 		private static IJob GetCalculationWatcherJob(IDbConnection connection)
 		{
 			return new CalculationWatcherJob(DeadTimeout, new CalculationRepository(new UnitOfWork(connection)));
-		}
-
-		private static IJob GetClientExcelUpdaterJob(IDbConnection connection, string filesConnectionString)
-		{
-			var unitOfWork = new UnitOfWork(connection);
-			var excel = new ExcelGenerator();
-			var calculations = new CalculationRepository(unitOfWork);
-			var clients = new ClientRepository(unitOfWork);
-			var files = new ClientFileRepository(unitOfWork, new SqlProcedureExecutor(filesConnectionString));
-
-			return new ClientExcelUpdaterJob(excel, calculations, files, clients, unitOfWork);
 		}
 
 		private static IJob GetCalculationMailerJob(IDbConnection connection)

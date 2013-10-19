@@ -1,5 +1,4 @@
-﻿using System;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
@@ -25,20 +24,6 @@ namespace Alicargo.Jobs.Calculation
 			}
 
 			return true;
-		}
-
-		public static void Process(this ICalculationRepository calculations, CalculationState stateToProcess,
-			CalculationState processingState, Action<VersionedData<CalculationState, CalculationData>> run)
-		{
-			var data = calculations.Get(stateToProcess);
-
-			foreach (var item in data)
-			{
-				if (calculations.SetState(item, processingState))
-				{
-					run(item);
-				}
-			}
 		}
 	}
 }

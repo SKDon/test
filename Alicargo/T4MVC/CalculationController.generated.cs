@@ -89,6 +89,12 @@ namespace Alicargo.Controllers
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetAdditionalCost);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetTransitCost()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCost);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CalculationController Actions { get { return MVC.Calculation; } }
@@ -114,6 +120,7 @@ namespace Alicargo.Controllers
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
             public readonly string SetWithdrawCostEdited = "SetWithdrawCostEdited";
             public readonly string SetAdditionalCost = "SetAdditionalCost";
+            public readonly string SetTransitCost = "SetTransitCost";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -128,6 +135,7 @@ namespace Alicargo.Controllers
             public const string SetFactureCostEdited = "SetFactureCostEdited";
             public const string SetWithdrawCostEdited = "SetWithdrawCostEdited";
             public const string SetAdditionalCost = "SetAdditionalCost";
+            public const string SetTransitCost = "SetTransitCost";
         }
 
 
@@ -207,6 +215,16 @@ namespace Alicargo.Controllers
         {
             public readonly string awbId = "awbId";
             public readonly string additionalCost = "additionalCost";
+        }
+        static readonly ActionParamsClass_SetTransitCost s_params_SetTransitCost = new ActionParamsClass_SetTransitCost();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetTransitCost SetTransitCostParams { get { return s_params_SetTransitCost; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetTransitCost
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string transitCost = "transitCost";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -330,6 +348,18 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "additionalCost", additionalCost);
             SetAdditionalCostOverride(callInfo, awbId, additionalCost);
+            return callInfo;
+        }
+
+        partial void SetTransitCostOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? transitCost);
+
+        public override System.Web.Mvc.JsonResult SetTransitCost(long id, long awbId, decimal? transitCost)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCost);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitCost", transitCost);
+            SetTransitCostOverride(callInfo, id, awbId, transitCost);
             return callInfo;
         }
 
