@@ -49,6 +49,12 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.FileResult Contract()
+        {
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Contract);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Edit()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -72,6 +78,7 @@ namespace Alicargo.Controllers
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string Create = "Create";
+            public readonly string Contract = "Contract";
             public readonly string Edit = "Edit";
         }
 
@@ -81,6 +88,7 @@ namespace Alicargo.Controllers
             public const string Index = "Index";
             public const string List = "List";
             public const string Create = "Create";
+            public const string Contract = "Contract";
             public const string Edit = "Edit";
         }
 
@@ -106,6 +114,14 @@ namespace Alicargo.Controllers
             public readonly string transitModel = "Transit";
             public readonly string carrierModel = "carrierModel";
             public readonly string authenticationModel = "Authentication";
+        }
+        static readonly ActionParamsClass_Contract s_params_Contract = new ActionParamsClass_Contract();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Contract ContractParams { get { return s_params_Contract; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Contract
+        {
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -192,6 +208,16 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Authentication", authenticationModel);
             CreateOverride(callInfo, model, transitModel, carrierModel, authenticationModel);
+            return callInfo;
+        }
+
+        partial void ContractOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long? id);
+
+        public override System.Web.Mvc.FileResult Contract(long? id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Contract);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ContractOverride(callInfo, id);
             return callInfo;
         }
 

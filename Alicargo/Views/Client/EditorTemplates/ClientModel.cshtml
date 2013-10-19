@@ -46,6 +46,10 @@
 	<div class="span8">
 		@Html.LabelFor(model => model.Contacts)
 		@Html.TextAreaFor(model => model.Contacts)
+		@Html.LabelFor(model => model.ContractFile)
+		@Helpers.FileUploader(Html.IdFor(x => x.ContractFile).ToHtmlString(), Model == null
+			? null
+			: Model.ContractFileName)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Email)
