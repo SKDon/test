@@ -109,11 +109,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
             var actual = _awbRepository.Get(newData.Id).First();
             actual.ShouldBeEquivalentTo(newData);
 
-            _awbRepository.GetGTDFile(newData.Id).FileData.ShouldBeEquivalentTo(gtdFile);
-            _awbRepository.GTDAdditionalFile(newData.Id).FileData.ShouldBeEquivalentTo(additionalFile);
-            _awbRepository.GetPackingFile(newData.Id).FileData.ShouldBeEquivalentTo(packingFile);
-            _awbRepository.GetInvoiceFile(newData.Id).FileData.ShouldBeEquivalentTo(invoiceFile);
-            _awbRepository.GetAWBFile(newData.Id).FileData.ShouldBeEquivalentTo(awbFile);
+            _awbRepository.GetGTDFile(newData.Id).Data.ShouldBeEquivalentTo(gtdFile);
+            _awbRepository.GTDAdditionalFile(newData.Id).Data.ShouldBeEquivalentTo(additionalFile);
+            _awbRepository.GetPackingFile(newData.Id).Data.ShouldBeEquivalentTo(packingFile);
+            _awbRepository.GetInvoiceFile(newData.Id).Data.ShouldBeEquivalentTo(invoiceFile);
+            _awbRepository.GetAWBFile(newData.Id).Data.ShouldBeEquivalentTo(awbFile);
         }
 
         [TestMethod, TestCategory("black-box")]

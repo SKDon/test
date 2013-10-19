@@ -28,10 +28,10 @@ namespace Alicargo.MvcHelpers.Extensions
 			const string contentType = "application/octet-stream";
 			var ms = new MemoryStream();
 
-			ms.Write(file.FileData, 0, file.FileData.Length);
+			ms.Write(file.Data, 0, file.Data.Length);
 			ms.Position = 0;
 
-			return new FileStreamResult(ms, contentType) { FileDownloadName = file.FileName };
+			return new FileStreamResult(ms, contentType) { FileDownloadName = file.Name };
 		}		
 
 		// todo: 1. test for download files of an application

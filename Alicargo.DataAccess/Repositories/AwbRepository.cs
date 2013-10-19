@@ -168,8 +168,8 @@ namespace Alicargo.DataAccess.Repositories
 						   x => x.Id == id && x.AWBFileData != null && x.AWBFileName != null,
 						   x => new FileHolder
 						   {
-							   FileData = x.AWBFileData.ToArray(),
-							   FileName = x.AWBFileName
+							   Data = x.AWBFileData.ToArray(),
+							   Name = x.AWBFileName
 						   });
 		}
 
@@ -179,8 +179,8 @@ namespace Alicargo.DataAccess.Repositories
 						   x => x.Id == id && x.GTDFileName != null && x.GTDFileData != null,
 						   x => new FileHolder
 						   {
-							   FileName = x.GTDFileName,
-							   FileData = x.GTDFileData.ToArray()
+							   Name = x.GTDFileName,
+							   Data = x.GTDFileData.ToArray()
 						   });
 		}
 
@@ -190,8 +190,8 @@ namespace Alicargo.DataAccess.Repositories
 						   x => x.Id == id && x.PackingFileData != null && x.PackingFileName != null,
 						   x => new FileHolder
 						   {
-							   FileData = x.PackingFileData.ToArray(),
-							   FileName = x.PackingFileName
+							   Data = x.PackingFileData.ToArray(),
+							   Name = x.PackingFileName
 						   });
 		}
 
@@ -201,8 +201,8 @@ namespace Alicargo.DataAccess.Repositories
 						   x => x.Id == id && x.GTDAdditionalFileName != null && x.GTDAdditionalFileData != null,
 						   x => new FileHolder
 						   {
-							   FileName = x.GTDAdditionalFileName,
-							   FileData = x.GTDAdditionalFileData.ToArray()
+							   Name = x.GTDAdditionalFileName,
+							   Data = x.GTDAdditionalFileData.ToArray()
 						   });
 		}
 
@@ -212,8 +212,8 @@ namespace Alicargo.DataAccess.Repositories
 						   x => x.Id == id && x.InvoiceFileName != null && x.InvoiceFileData != null,
 						   x => new FileHolder
 						   {
-							   FileName = x.InvoiceFileName,
-							   FileData = x.InvoiceFileData.ToArray()
+							   Name = x.InvoiceFileName,
+							   Data = x.InvoiceFileData.ToArray()
 						   });
 		}
 

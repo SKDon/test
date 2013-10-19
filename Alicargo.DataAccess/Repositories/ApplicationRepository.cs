@@ -233,8 +233,8 @@ namespace Alicargo.DataAccess.Repositories
 			return GetFile(x => x.Id == id && x.InvoiceFileName != null && x.InvoiceFileData != null,
 				application => new FileHolder
 				{
-					FileName = application.InvoiceFileName,
-					FileData = application.InvoiceFileData.ToArray()
+					Name = application.InvoiceFileName,
+					Data = application.InvoiceFileData.ToArray()
 				});
 		}
 
@@ -243,8 +243,8 @@ namespace Alicargo.DataAccess.Repositories
 			return GetFile(x => x.Id == id && x.SwiftFileName != null && x.SwiftFileData != null,
 				application => new FileHolder
 				{
-					FileName = application.SwiftFileName,
-					FileData = application.SwiftFileData.ToArray()
+					Name = application.SwiftFileName,
+					Data = application.SwiftFileData.ToArray()
 				});
 		}
 
@@ -253,8 +253,8 @@ namespace Alicargo.DataAccess.Repositories
 			return GetFile(x => x.Id == id && x.CPFileName != null && x.CPFileData != null,
 				application => new FileHolder
 				{
-					FileName = application.CPFileName,
-					FileData = application.CPFileData.ToArray()
+					Name = application.CPFileName,
+					Data = application.CPFileData.ToArray()
 				});
 		}
 
@@ -263,8 +263,8 @@ namespace Alicargo.DataAccess.Repositories
 			return GetFile(x => x.Id == id && x.DeliveryBillFileName != null && x.DeliveryBillFileData != null,
 				application => new FileHolder
 				{
-					FileName = application.DeliveryBillFileName,
-					FileData = application.DeliveryBillFileData.ToArray()
+					Name = application.DeliveryBillFileName,
+					Data = application.DeliveryBillFileData.ToArray()
 				});
 		}
 
@@ -273,8 +273,8 @@ namespace Alicargo.DataAccess.Repositories
 			return GetFile(x => x.Id == id && x.Torg12FileName != null && x.Torg12FileData != null,
 				application => new FileHolder
 				{
-					FileName = application.Torg12FileName,
-					FileData = application.Torg12FileData.ToArray()
+					Name = application.Torg12FileName,
+					Data = application.Torg12FileData.ToArray()
 				});
 		}
 
@@ -283,8 +283,8 @@ namespace Alicargo.DataAccess.Repositories
 			return GetFile(x => x.Id == id && x.PackingFileName != null && x.PackingFileData != null,
 				application => new FileHolder
 				{
-					FileName = application.PackingFileName,
-					FileData = application.PackingFileData.ToArray()
+					Name = application.PackingFileName,
+					Data = application.PackingFileData.ToArray()
 				});
 		}
 

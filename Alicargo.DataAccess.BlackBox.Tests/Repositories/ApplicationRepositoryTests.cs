@@ -100,12 +100,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var data = _applicationRepository.Get(old.Id);
 
-			_applicationRepository.GetInvoiceFile(data.Id).FileData.ShouldBeEquivalentTo(invoiceFile);
-			_applicationRepository.GetSwiftFile(data.Id).FileData.ShouldBeEquivalentTo(swiftFile);
-			_applicationRepository.GetCPFile(data.Id).FileData.ShouldBeEquivalentTo(cpFile);
-			_applicationRepository.GetDeliveryBillFile(data.Id).FileData.ShouldBeEquivalentTo(deliveryBillFile);
-			_applicationRepository.GetTorg12File(data.Id).FileData.ShouldBeEquivalentTo(torg12File);
-			_applicationRepository.GetPackingFile(data.Id).FileData.ShouldBeEquivalentTo(packingFile);
+			_applicationRepository.GetInvoiceFile(data.Id).Data.ShouldBeEquivalentTo(invoiceFile);
+			_applicationRepository.GetSwiftFile(data.Id).Data.ShouldBeEquivalentTo(swiftFile);
+			_applicationRepository.GetCPFile(data.Id).Data.ShouldBeEquivalentTo(cpFile);
+			_applicationRepository.GetDeliveryBillFile(data.Id).Data.ShouldBeEquivalentTo(deliveryBillFile);
+			_applicationRepository.GetTorg12File(data.Id).Data.ShouldBeEquivalentTo(torg12File);
+			_applicationRepository.GetPackingFile(data.Id).Data.ShouldBeEquivalentTo(packingFile);
 			data.ShouldBeEquivalentTo(newData);
 		}
 

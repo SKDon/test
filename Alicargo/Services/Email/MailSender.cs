@@ -38,8 +38,8 @@ namespace Alicargo.Services.Email
 						{
 							foreach (var file in message.Files)
 							{
-								var stream = new MemoryStream(file.FileData);
-								email.Attachments.Add(new Attachment(stream, file.FileName));
+								var stream = new MemoryStream(file.Data);
+								email.Attachments.Add(new Attachment(stream, file.Name));
 							}
 						}
 

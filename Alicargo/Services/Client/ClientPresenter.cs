@@ -65,8 +65,8 @@ namespace Alicargo.Services.Client
 
 			var file = _files.GetCalculationFile(data.Id) ?? new FileHolder
 			{
-				FileName = "NoCalculation.txt",
-				FileData = Encoding.UTF8.GetBytes("На данный момент расчетов нет")
+				Name = "NoCalculation.txt",
+				Data = Encoding.UTF8.GetBytes("На данный момент расчетов нет")
 			};
 
 			return file;
