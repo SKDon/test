@@ -47,9 +47,14 @@
 		@Html.LabelFor(model => model.Contacts)
 		@Html.TextAreaFor(model => model.Contacts)
 		@Html.LabelFor(model => model.ContractFile)
-		@Helpers.FileUploader(Html.IdFor(x => x.ContractFile).ToHtmlString(), Model == null
-			? null
-			: Model.ContractFileName)
+		@Helpers.FileUploader(
+			Html.IdFor(x => x.ContractFile).ToHtmlString(),
+			Model == null
+				? null
+				: Model.ContractFileName,
+			Model != null && Model.ContractFileName != null
+				? @Url.Action(MVC.Client.Contract((long?)ViewBag.ClientId))
+				: null)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Email)
