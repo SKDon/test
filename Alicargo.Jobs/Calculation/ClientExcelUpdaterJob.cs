@@ -8,6 +8,7 @@ namespace Alicargo.Jobs.Calculation
 	public sealed class ClientExcelUpdaterJob : IJob
 	{
 		private readonly ICalculationRepository _calculations;
+		private readonly IClientFileRepository _files;
 		private readonly IClientRepository _clients;
 		private readonly IExcelGenerator _excel;
 		private readonly IUnitOfWork _unitOfWork;
@@ -15,11 +16,13 @@ namespace Alicargo.Jobs.Calculation
 		public ClientExcelUpdaterJob(
 			IExcelGenerator excel,
 			ICalculationRepository calculations,
+			IClientFileRepository files,
 			IClientRepository clients,
 			IUnitOfWork unitOfWork)
 		{
 			_excel = excel;
 			_calculations = calculations;
+			_files = files;
 			_clients = clients;
 			_unitOfWork = unitOfWork;
 		}
@@ -45,7 +48,7 @@ namespace Alicargo.Jobs.Calculation
 
 				using (var stream = _excel.Get(calculations, language))
 				{
-					_clients.SetCalculationExcel(clientId, stream.ToArray());
+					_files.SetCalculationExcel(clientId, stream.ToArray());
 
 					_unitOfWork.SaveChanges();
 				}

@@ -54,9 +54,11 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Stored procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ClientContract.sql" />
+    <Build Include="Stored procedures\GetClientContract.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.publish.xml" />

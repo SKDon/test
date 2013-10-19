@@ -15,6 +15,9 @@ namespace Alicargo
 		private readonly string _connectionString =
 			ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
 
+		private readonly string _filesConnectionString =
+			ConfigurationManager.ConnectionStrings["FilesDbConnectionString"].ConnectionString;
+
 		private readonly CancellationTokenSource _jobTokenSource = new CancellationTokenSource();
 
 		private Task[] _jobs;
@@ -29,7 +32,7 @@ namespace Alicargo
 
 			CompositionRoot.BindServices(kernel);
 
-			JobsHelper.BindJobs(kernel, _connectionString);
+			JobsHelper.BindJobs(kernel, _connectionString, _filesConnectionString);
 
 			_jobs = JobsHelper.RunJobs(kernel, _jobTokenSource);
 

@@ -39,7 +39,7 @@ namespace Alicargo.App_Start
 		{
 			try
 			{
-				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource) state), tokenSource,
 					CancellationToken.None);
 			}
 			catch (Exception e)
@@ -76,7 +76,7 @@ namespace Alicargo.App_Start
 				  .Named(jobName);
 		}
 
-		public static void BindJobs(IKernel kernel, string connectionString)
+		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
 			const string calculationMailerJob = "CalculationMailerJob_";
 			const string clientExcelUpdaterJob = "ClientExcelUpdaterJob_";
@@ -88,7 +88,8 @@ namespace Alicargo.App_Start
 			BindStatelessJobRunner(kernel, GetCalculationWatcherJob, connectionString, calculationWatcherJob + 1);
 
 			// todo: need for states fields in the clients talbe to run second job runner
-			BindStatelessJobRunner(kernel, GetClientExcelUpdaterJob, connectionString, clientExcelUpdaterJob + 0);
+			BindStatelessJobRunner(kernel, connection => GetClientExcelUpdaterJob(connection, filesConnectionString),
+				connectionString, clientExcelUpdaterJob + 0);
 		}
 
 		private static IJob GetCalculationWatcherJob(IDbConnection connection)
@@ -96,14 +97,15 @@ namespace Alicargo.App_Start
 			return new CalculationWatcherJob(DeadTimeout, new CalculationRepository(new UnitOfWork(connection)));
 		}
 
-		private static IJob GetClientExcelUpdaterJob(IDbConnection connection)
+		private static IJob GetClientExcelUpdaterJob(IDbConnection connection, string filesConnectionString)
 		{
 			var unitOfWork = new UnitOfWork(connection);
 			var excel = new ExcelGenerator();
 			var calculations = new CalculationRepository(unitOfWork);
 			var clients = new ClientRepository(unitOfWork);
+			var files = new ClientFileRepository(unitOfWork, new SqlProcedureExecutor(filesConnectionString));
 
-			return new ClientExcelUpdaterJob(excel, calculations, clients, unitOfWork);
+			return new ClientExcelUpdaterJob(excel, calculations, files, clients, unitOfWork);
 		}
 
 		private static IJob GetCalculationMailerJob(IDbConnection connection)

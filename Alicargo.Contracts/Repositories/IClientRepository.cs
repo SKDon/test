@@ -18,6 +18,5 @@ namespace Alicargo.Contracts.Repositories
 		ClientData[] GetAll();
 		ClientData[] Get(params long[] clinentIds);
 		IDictionary<long, string> GetNicByApplications(params long[] appIds);
-		void SetCalculationExcel(long clientId, byte[] bytes);
 	}
 }

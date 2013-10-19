@@ -5,13 +5,27 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class ClientFileRepository : IClientFileRepository
+	public sealed class ClientFileRepository : IClientFileRepository
 	{
 		private readonly AlicargoDataContext _context;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public ClientFileRepository(IUnitOfWork unitOfWork)
+		public ClientFileRepository(IUnitOfWork unitOfWork, ISqlProcedureExecutor executor)
 		{
+			_executor = executor;
 			_context = (AlicargoDataContext)unitOfWork.Context;
+		}
+
+		public void SetCalculationExcel(long clientId, byte[] bytes)
+		{
+			var client = _context.Clients.First(x => x.Id == clientId);
+
+			client.CalculationFileData = bytes;
+		}
+
+		public FileHolder GetClientDocument(long clientId)
+		{
+			return _executor.Get<FileHolder>("[dbo].[GetClientContract]", new { clientId });
 		}
 
 		public FileHolder GetCalculationFile(long clientId)
@@ -19,8 +33,8 @@ namespace Alicargo.DataAccess.Repositories
 			return _context.Clients.Where(x => x.Id == clientId && x.CalculationFileData != null)
 						   .Select(x => new FileHolder
 						   {
-							   FileData = x.CalculationFileData.ToArray(),
-							   FileName = "calculations.xlsx"
+							   Data = x.CalculationFileData.ToArray(),
+							   Name = "calculations.xlsx"
 						   }).FirstOrDefault();
 		}
 	}
