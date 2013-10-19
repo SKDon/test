@@ -4,6 +4,8 @@ namespace Alicargo.Contracts.Repositories
 {
 	public interface IClientFileRepository
 	{
-		FileHolder GetClientDocument(long clientId);
+		FileHolder GetClientContract(long clientId);
+		string GetClientContractFileName(long clientId);
+		void SetClientContract(long clientId, string name, byte[] data);
 	}
 }

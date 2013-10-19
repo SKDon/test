@@ -417,4 +417,7 @@
   <data name="TotalSenderRate" xml:space="preserve">
     <value>total sender costs</value>
   </data>
+  <data name="Contract" xml:space="preserve">
+    <value>Contratto</value>
+  </data>
 </root>

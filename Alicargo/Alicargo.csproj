@@ -150,6 +150,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvcHelpers\ModelBinders\ClientModelBinder.cs" />
     <Compile Include="T4MVC\AirWaybillController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -200,7 +201,7 @@
     <Compile Include="MvcHelpers\Extensions\DropDownListHeplers.cs" />
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
-    <Compile Include="ModelBinders\AwbSenderModelBinder.cs" />
+    <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="T4MVC\SenderAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -217,10 +218,10 @@
     <Compile Include="MvcHelpers\StyleRelativePathTransform.cs" />
     <Compile Include="MvcHelpers\StyleRelativePathTransformBundle.cs" />
     <Compile Include="MvcHelpers\Filters\CustomHandleErrorInfo.cs" />
-    <Compile Include="ModelBinders\ApplicationAdminModelBinder.cs" />
-    <Compile Include="ModelBinders\AwbBrokerModelBinder.cs" />
-    <Compile Include="ModelBinders\ApplicationSenderEditBinder.cs" />
-    <Compile Include="ModelBinders\AwbAdminModelBinder.cs" />
+    <Compile Include="MvcHelpers\ModelBinders\ApplicationAdminModelBinder.cs" />
+    <Compile Include="MvcHelpers\ModelBinders\AwbBrokerModelBinder.cs" />
+    <Compile Include="MvcHelpers\ModelBinders\ApplicationSenderEditBinder.cs" />
+    <Compile Include="MvcHelpers\ModelBinders\AwbAdminModelBinder.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\AirWaybillController.cs" />
     <Compile Include="MvcHelpers\BaseWebViewPage.cs" />

@@ -58,12 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ClientContract.sql" />
-    <Build Include="Stored procedures\GetClientContract.sql" />
+    <Build Include="Stored procedures\ClientContract_Get.sql" />
+    <Build Include="Stored procedures\ClientContract_GetFileName.sql" />
+    <Build Include="Stored procedures\ClientContract_Merge.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="Alicargo.Files.Database.refactorlog" />
   </ItemGroup>
 </Project>

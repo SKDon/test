@@ -12,9 +12,19 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public FileHolder GetClientDocument(long clientId)
+		public FileHolder GetClientContract(long clientId)
 		{
-			return _executor.Get<FileHolder>("[dbo].[GetClientContract]", new {clientId});
+			return _executor.Query<FileHolder>("[dbo].[ClientContract_Get]", new { clientId });
+		}
+
+		public string GetClientContractFileName(long clientId)
+		{
+			return _executor.Query<string>("[dbo].[ClientContract_GetFileName]", new { clientId });
+		}
+
+		public void SetClientContract(long clientId, string name, byte[] data)
+		{
+			_executor.Execute("[dbo].[ClientContract_Merge]", new { clientId, name, data });
 		}
 	}
 }

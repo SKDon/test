@@ -4,6 +4,7 @@ namespace Alicargo.Contracts.Repositories
 {
 	public interface ISqlProcedureExecutor
 	{
-		T Get<T>(string sql, object param = null, IDbTransaction transaction = null);
+		T Query<T>(string sql, object param = null, IDbTransaction transaction = null);
+		void Execute(string sql, object param = null, IDbTransaction transaction = null);
 	}
 }

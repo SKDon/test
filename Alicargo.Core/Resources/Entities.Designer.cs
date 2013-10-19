@@ -205,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Договор.
+        /// </summary>
+        public static string Contract {
+            get {
+                return ResourceManager.GetString("Contract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Стоимость за килограмм для сендера (€).
         /// </summary>
         public static string CostPerKgOfSender {
