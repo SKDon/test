@@ -364,6 +364,9 @@
     <Compile Include="ViewModels\Calculation\CalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\CalculationHelper.cs" />
     <Compile Include="ViewModels\Calculation\CalculationListCollection.cs" />
+    <Compile Include="ViewModels\Calculation\ClientCalculationListCollection.cs" />
+    <Compile Include="ViewModels\Calculation\ClientCalculationGroup.cs" />
+    <Compile Include="ViewModels\Calculation\ClientCalculationItem.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Helpers\ApplicationHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />

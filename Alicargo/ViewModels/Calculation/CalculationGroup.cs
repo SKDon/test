@@ -7,15 +7,14 @@ namespace Alicargo.ViewModels.Calculation
 		// ReSharper disable InconsistentNaming
 
 		public long AirWaybillId { get; set; }
-		public string field { get; set; }
+		public string field { get { return "AirWaybillId"; } }
 		public string value { get; set; }
-		public bool hasSubgroups { get; set; }
+		public bool hasSubgroups { get { return false; } }
 		public CalculationItem[] items { get; set; }
 		public Aggregates aggregates { get; set; }
 
 		public sealed class Aggregates
 		{
-
 			public Aggregates(int count, float weigth, decimal value)
 			{
 				Value = new Holder<decimal>(value);
