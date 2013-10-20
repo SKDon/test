@@ -420,4 +420,7 @@
   <data name="Contract" xml:space="preserve">
     <value>Contract</value>
   </data>
+  <data name="Class" xml:space="preserve">
+    <value>Class</value>
+  </data>
 </root>

@@ -28,6 +28,8 @@
 		public decimal? SenderRate { get; set; }
 		public long AirWaybillId { get; set; }
 
+		public string Class { get; set; } // todo: set value
+
 		#endregion
 	}
 }
