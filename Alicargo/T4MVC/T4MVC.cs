@@ -179,8 +179,24 @@ namespace Links
                 private const string URLPATH = "~/Scripts/app/Calculation";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
-                public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class Admin {
+                    private const string URLPATH = "~/Scripts/app/Calculation/Admin";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
+                    public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class Client {
+                    private const string URLPATH = "~/Scripts/app/Calculation/Client";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
+                    public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+                }
+            
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -1465,7 +1465,7 @@
     <Content Include="Views\Shared\Memu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
     <Content Include="Views\Application\EditorTemplates\ApplicationAdminModel.cshtml" />
-    <Content Include="Views\ApplicationList\DetailsTemplate.cshtml" />
+    <Content Include="Views\ApplicationList\AdminTemplate.cshtml" />
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
     <Content Include="Views\AirWaybill\EditorTemplates\AwbAdminModel.cshtml" />
@@ -1508,6 +1508,9 @@
     <Content Include="Views\DynamicScript\States.cshtml" />
     <Content Include="Views\Calculation\Details.cshtml" />
     <Content Include="Views\ClientCalculation\Index.cshtml" />
+    <Content Include="Views\ApplicationList\SenderTemplate.cshtml" />
+    <Content Include="Views\ApplicationList\ClientTemplate.cshtml" />
+    <Content Include="Views\ApplicationList\ClientDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

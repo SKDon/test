@@ -1,15 +1,29 @@
-﻿@model ApplicationIndexModel
+﻿@using Alicargo.Contracts.Enums
+@inherits BaseWebViewPage<ApplicationIndexModel>
 
 <style>
 	.container {
-		width: auto;
 		padding: 0 20px;
+		width: auto;
 	}
 </style>
 
 @Html.Partial("Tools")
 <div id="application-grid" class="grid"></div>
-<script type="text/x-kendo-template" id="application-grid-details">@Html.Partial("DetailsTemplate")</script>
+<script type="text/x-kendo-template" id="application-grid-details">
+	@if (IdentityService.IsInRole(RoleType.Admin))
+	{
+		@Html.Partial("AdminTemplate")
+	}
+	else if (IdentityService.IsInRole(RoleType.Sender))
+	{
+		@Html.Partial("SenderTemplate")
+	}
+	else if (IdentityService.IsInRole(RoleType.Client))
+	{
+		@Html.Partial("ClientTemplate")
+	}	
+</script>
 
 @section scripts
 {

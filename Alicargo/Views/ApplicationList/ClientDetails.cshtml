@@ -1,0 +1,219 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+
+# if(DaysInWork != null){ #
+<p>
+	<span>@Entities.DaysInWork:</span>
+	#= DaysInWork #
+</p>
+# } #
+# if(CreationTimestampLocalString != null){ #
+<p>
+	<span>@Entities.CreationTimestamp:</span>
+	#= CreationTimestampLocalString #
+</p>
+# } #
+# if(StateChangeTimestampLocalString != null){ #
+<p>
+	<span>@Entities.StateChangeTimestamp:</span>
+	#= StateChangeTimestampLocalString #
+</p>
+# } #
+# if(MarkName != null){ #
+<p>
+	<span>@Entities.Mark:</span>
+	#= MarkName #
+</p>
+# } #
+# if(Count != null){ #
+<p>
+	<span>@Entities.Count:</span>
+	#= Count #
+</p>
+# } #
+# if(Volume != null){ #
+<p>
+	<span style="position: relative;">@Entities.Volume (m<span class="super">3</span> ):</span>
+	#= Volume #
+</p>
+# } #
+# if(Weigth != null){ #
+<p>
+	<span>@Entities.Weigth:</span>
+	#= Weigth #
+</p>
+# } #
+# if(Characteristic != null){ #
+<p>
+	<span>@Entities.Characteristic:</span>
+	#= Characteristic #
+</p>
+# } #
+# if(AddressLoad != null){ #
+<p>
+	<span>@Entities.AddressLoad:</span>
+	#= AddressLoad #
+</p>
+# } #
+# if(CountryName != null){ #
+<p>
+	<span>@Entities.Country:</span>
+	#= CountryName #
+</p>
+# } #
+# if(WarehouseWorkingTime != null){ #
+<p>
+	<span>@Entities.WarehouseWorkingTime:</span>
+	#= WarehouseWorkingTime #				
+</p>
+# } #			
+# if(TermsOfDelivery != null){ #
+<p>
+	<span>@Entities.TermsOfDelivery:</span>
+	#= TermsOfDelivery #
+</p>
+# } #	
+# if(MethodOfDeliveryLocalString != null){ #
+<p>
+	<span>@Entities.MethodOfDelivery:</span>
+	#= MethodOfDeliveryLocalString #				
+</p>
+# } #
+# if(TransitCity != null){ #
+<p>
+	<span>@Entities.City.EncodeForKendo():</span>
+	#: TransitCity #
+</p>
+# } #
+# if(TransitAddress != null){ #
+<p>
+	<span>@Entities.Address:</span>
+	#= TransitAddress #
+</p>
+# } #
+# if(TransitRecipientName != null){ #
+<p>
+	<span>@Entities.RecipientName:</span>
+	#= TransitRecipientName #
+</p>
+# } #
+# if(TransitPhone != null){ #
+<p>
+	<span>@Entities.Phone:</span>
+	#= TransitPhone #
+</p>
+# } #
+# if(TransitWarehouseWorkingTime != null){ #
+<p>
+	<span>@Entities.WarehouseWorkingTime (@Pages.Transit):</span>
+	#= TransitWarehouseWorkingTime #				
+</p>
+# } #	
+# if(TransitMethodOfTransitString != null){ #
+<p>
+	<span>@Entities.MethodOfTransit:</span>
+	#= TransitMethodOfTransitString #
+</p>
+# } #
+# if(TransitDeliveryTypeString != null){ #
+<p>
+	<span>@Entities.DeliveryType:</span>
+	#= TransitDeliveryTypeString #				
+</p>
+# } #			
+# if(TransitCarrierName != null){ #
+<p>
+	<span>@Entities.CarrierName:</span>
+	#= TransitCarrierName #				
+</p>
+# } #
+# if(FactoryName != null){ #
+<p>
+	<span>@Entities.FactoryName:</span>
+	#= FactoryName #
+</p>
+# } #
+# if(FactoryEmail != null){ #
+<p>
+	<span>@Entities.FactoryEmail:</span>
+	#= FactoryEmail #
+</p>
+# } #
+# if(FactoryPhone != null){ #
+<p>
+	<span>@Entities.FactoryPhone:</span>
+	#= FactoryPhone #
+</p>
+# } #
+# if(FactoryContact != null){ #
+<p>
+	<span>@Entities.FactoryContact:</span>
+	#= FactoryContact #
+</p>
+# } #
+# if(FactureCost != null){ #
+<p>
+	<span>@Entities.FactureCost:</span>
+	#= FactureCost #
+</p>
+# } #
+# if(ScotchCost != null){ #
+<p>
+	<span>@Entities.ScotchCost:</span>
+	#= ScotchCost #
+</p>
+# } #
+# if(TariffPerKg != null){ #
+<p>
+	<span>@Entities.TariffPerKg:</span>
+	#= TariffPerKg #
+</p>
+# } #
+# if(TransitCost != null){ #
+<p>
+	<span>@Entities.TransitCost:</span>
+	#= TransitCost #
+</p>
+# } #
+# if(WithdrawCost != null){ #
+<p>
+	<span>@Entities.WithdrawCost:</span>
+	#= WithdrawCost #
+</p>
+# } #
+# if(InvoiceFileName != null){ #
+<p>
+	<span>@Entities.Invoice:</span>
+	<a href="@Url.Action(MVC.Application.InvoiceFile())/#= Id #">#= InvoiceFileName #</a>
+</p>
+# } #
+# if(SwiftFileName != null){ #
+<p>
+	<span>@Entities.Swift:</span>
+	<a href="@Url.Action(MVC.Application.SwiftFile())/#= Id #">#= SwiftFileName #</a>
+</p>
+# } #
+# if(DeliveryBillFileName != null){ #
+<p>
+	<span>@Entities.DeliveryBill:</span>
+	<a href="@Url.Action(MVC.Application.DeliveryBillFile())/#= Id #">#= DeliveryBillFileName #</a>
+</p>
+# } #
+# if(Torg12FileName != null){ #
+<p>
+	<span>@Entities.Torg12:</span>
+	<a href="@Url.Action(MVC.Application.Torg12File())/#= Id #">#= Torg12FileName #</a>
+</p>
+# } #
+# if(CPFileName != null){ #
+<p>
+	<span>@Entities.CP:</span>
+	<a href="@Url.Action(MVC.Application.CPFile())/#= Id #">#= CPFileName #</a>
+</p>
+# } #
+# if(PackingFileName != null){ #
+<p>
+	<span>@Entities.Packing:</span>
+	<a href="@Url.Action(MVC.Application.PackingFile())/#= Id #">#= PackingFileName #</a>
+</p>
+# } #

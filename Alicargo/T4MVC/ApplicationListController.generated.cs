@@ -98,15 +98,21 @@ namespace Alicargo.Controllers
             public class _ViewNamesClass
             {
                 public readonly string AdminDetails = "AdminDetails";
-                public readonly string DetailsTemplate = "DetailsTemplate";
+                public readonly string AdminTemplate = "AdminTemplate";
+                public readonly string ClientDetails = "ClientDetails";
+                public readonly string ClientTemplate = "ClientTemplate";
                 public readonly string Index = "Index";
                 public readonly string SenderDetails = "SenderDetails";
+                public readonly string SenderTemplate = "SenderTemplate";
                 public readonly string Tools = "Tools";
             }
             public readonly string AdminDetails = "~/Views/ApplicationList/AdminDetails.cshtml";
-            public readonly string DetailsTemplate = "~/Views/ApplicationList/DetailsTemplate.cshtml";
+            public readonly string AdminTemplate = "~/Views/ApplicationList/AdminTemplate.cshtml";
+            public readonly string ClientDetails = "~/Views/ApplicationList/ClientDetails.cshtml";
+            public readonly string ClientTemplate = "~/Views/ApplicationList/ClientTemplate.cshtml";
             public readonly string Index = "~/Views/ApplicationList/Index.cshtml";
             public readonly string SenderDetails = "~/Views/ApplicationList/SenderDetails.cshtml";
+            public readonly string SenderTemplate = "~/Views/ApplicationList/SenderTemplate.cshtml";
             public readonly string Tools = "~/Views/ApplicationList/Tools.cshtml";
         }
     }

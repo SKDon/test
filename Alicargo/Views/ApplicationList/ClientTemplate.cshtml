@@ -1,0 +1,30 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@inherits BaseWebViewPage<ApplicationIndexModel>
+
+@helper EditButton()
+{
+	@:# if(StateId != @StateConfig.CargoReceivedStateId){ #
+	<a href="@Url.Action(MVC.Transit.Edit())/#= TransitId #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
+	@:# } #
+}
+
+@helper CloseButton()
+{
+	@:# if(CanClose){ #
+	<input class="btn btn-success close-application" type="button" value="@Pages.CargoIsReceived.EncodeForKendo()" />
+	@:# } #
+}
+
+<div class='grid-details'>
+	<div class="properties">
+		@Html.Partial("ClientDetails")
+	</div>
+	<hr />
+	<div class="grid-details-toolbar">
+		<div>
+			@CloseButton()
+			@EditButton()
+		</div>
+	</div>
+</div>
