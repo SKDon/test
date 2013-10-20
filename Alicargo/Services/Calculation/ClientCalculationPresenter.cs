@@ -58,7 +58,8 @@ namespace Alicargo.Services.Calculation
 				{
 					AirWaybillId = g.Key,
 					items = itemsGroup,
-					value = AwbHelper.GetAirWaybillDisplay(awbs[g.Key])
+					value = AwbHelper.GetAirWaybillDisplay(awbs[g.Key]),
+					aggregates = new ClientCalculationGroup.Aggregates(g.Sum(x => x.Profit))
 				};
 			}).ToList();
 
@@ -108,7 +109,8 @@ namespace Alicargo.Services.Calculation
 					{
 						AirWaybillId = awb.Id,
 						items = new ClientCalculationItem[0],
-						value = AwbHelper.GetAirWaybillDisplay(awb)						
+						value = AwbHelper.GetAirWaybillDisplay(awb),
+						aggregates = new ClientCalculationGroup.Aggregates(0)
 					});
 				}
 			}

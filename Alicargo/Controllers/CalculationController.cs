@@ -108,7 +108,7 @@ namespace Alicargo.Controllers
 			return Json(data);
 		}
 
-		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTransitCost(long id, long awbId, decimal? transitCost)
 		{
 			_applicationManager.SetTransitCost(id, transitCost);

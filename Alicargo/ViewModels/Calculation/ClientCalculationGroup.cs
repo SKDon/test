@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Alicargo.ViewModels.Calculation
+﻿namespace Alicargo.ViewModels.Calculation
 {
 	public sealed class ClientCalculationGroup
 	{
@@ -12,7 +10,27 @@ namespace Alicargo.ViewModels.Calculation
 		public string value { get; set; }
 		public bool hasSubgroups { get { return false; } }
 		public ClientCalculationItem[] items { get; set; }
-		public object aggregates { get { return new Object(); } }		
+		public Aggregates aggregates { get; set; }
+
+		public sealed class Aggregates
+		{
+			public Aggregates(decimal sumProfit)
+			{
+				Profit = new Holder<decimal>(sumProfit);
+			}
+
+			public Holder<decimal> Profit { get; private set; }
+		}
+
+		public sealed class Holder<T>
+		{
+			public readonly T sum;
+
+			public Holder(T value)
+			{
+				sum = value;
+			}
+		}
 
 		// ReSharper restore InconsistentNaming		
 	}

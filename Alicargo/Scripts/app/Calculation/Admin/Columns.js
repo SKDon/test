@@ -55,7 +55,7 @@
 				pageSize: 5,
 				serverPaging: true,
 				serverGrouping: true,
-				serverAggregates: false,
+				serverAggregates: true,
 				error: $a.ShowError,
 				group: {
 					field: "AirWaybillId",
@@ -77,38 +77,36 @@
 		$c.Columns = function() {
 			var groupFooterTemplate = "#= kendo.toString(sum, 'n2') #";
 			var n2Format = "{0:n2}";
+			var textRight = { "class": "text-right" };
+			var textBold = { "class": "text-bold" };
 			var c = [
 				{ field: "ClientNic", title: $l.Pages_Client },
-				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='"+ $u.Application_Edit +"/#=ApplicationId#'>#= DisplayNumber #</a>" },
+				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='" + $u.Application_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>" },
 				{ field: "Factory", title: $l.Entities_FactoryName },
 				{ field: "Mark", title: $l.Entities_Mark },
 				{ field: "Class", title: $l.Entities_Class },
-				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #", attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "Weigth", title: $l.Entities_Weigth, groupFooterTemplate: groupFooterTemplate, format: n2Format, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format, attributes: { "class": "text-right" } },
-				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
+				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #", attributes: textRight, footerAttributes: textRight },
+				{ field: "Weigth", title: $l.Entities_Weigth, groupFooterTemplate: groupFooterTemplate, format: n2Format, attributes: textRight, footerAttributes: textRight },
+				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format, attributes: textRight },
+				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
 				{ field: "Invoice", title: $l.Entities_Invoice },
-				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: n2Format, attributes: { "class": "text-right" } },
-				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "ScotchCost", groupFooterTemplate: groupFooterTemplate, title: $l.Entities_ScotchCost, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: { "class": "text-right" } },
-				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, attributes: { "class": "text-right" } },
-				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #", attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } },
-				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: { "class": "text-right" }, footerAttributes: { "class": "text-right" } }
-			];
-
-
-			if ($r.IsAdmin) {
-				c.push({
+				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: textRight, footerAttributes: textRight },
+				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: n2Format, attributes: textRight },
+				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
+				{ field: "ScotchCost", groupFooterTemplate: groupFooterTemplate, title: $l.Entities_ScotchCost, attributes: textRight, footerAttributes: textRight },
+				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: textRight, footerAttributes: textRight },
+				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: textRight },
+				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, attributes: textRight },
+				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #", attributes: textRight, footerAttributes: textRight },
+				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
+				{
 					attributes: { "class": "cell-button" },
 					command: [{
 						name: "custom-gear",
 						text: "&nbsp;",
 						title: $l.Pages_Calculate,
-						
-						click: function (e) {
+
+						click: function(e) {
 							e.preventDefault();
 							var button = $(e.target).closest("a")[0];
 							var appId = $.data(button, "ApplicationId");
@@ -118,8 +116,8 @@
 					}],
 					title: "&nbsp;",
 					width: $a.DefaultGridButtonWidth
-				});
-			}
+				}
+			];
 
 			$c.Columns = function() { return c; };
 

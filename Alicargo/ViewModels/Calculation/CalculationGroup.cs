@@ -15,13 +15,6 @@ namespace Alicargo.ViewModels.Calculation
 
 		public sealed class Aggregates
 		{
-			public Aggregates(int count, float weigth, decimal value)
-			{
-				Value = new Holder<decimal>(value);
-				Count = new Holder<int>(count);
-				Weigth = new Holder<float>(weigth);
-			}
-
 			public Aggregates(CalculationItem[] items)
 			{
 				Count = new Holder<int>(items.Sum(x => x.Count ?? 0));

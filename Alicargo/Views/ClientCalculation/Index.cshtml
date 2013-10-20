@@ -1,1 +1,19 @@
-﻿
+﻿@inherits BaseWebViewPage
+<style>
+	.container {
+		padding: 0 20px;
+		width: auto;
+	}
+</style>
+<div id="calculation-grid" class="grid"></div>
+
+@section scripts
+{
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
+	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
+
+	@Scripts.Render("~/Scripts/app/Alicargo.js")
+	@Scripts.Render("~/scripts/app/calculation/client/Columns.js")
+	@Scripts.Render("~/scripts/app/calculation/client/Grid.js")	
+}

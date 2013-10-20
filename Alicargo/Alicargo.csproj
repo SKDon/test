@@ -632,8 +632,10 @@
     <Content Include="Scripts\app\Alicargo.js" />
     <Content Include="Scripts\app\Application\Columns.js" />
     <Content Include="Scripts\app\Application\Grid.js" />
-    <Content Include="Scripts\app\Calculation\Columns.js" />
-    <Content Include="Scripts\app\Calculation\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Admin\Columns.js" />
+    <Content Include="Scripts\app\Calculation\Admin\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Client\Columns.js" />
+    <Content Include="Scripts\app\Calculation\Client\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\it.js" />
@@ -1570,6 +1572,7 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

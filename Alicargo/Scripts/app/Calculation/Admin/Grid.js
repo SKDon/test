@@ -161,16 +161,18 @@
 			}
 
 			var gridHolder = $("#calculation-grid");
-			gridHolder.kendoGrid({
+			var settings = {
 				columns: $c.Columns(),
-				pageable: { refresh: true, pageSizes: [5, 20, 50, 100] },
+				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
+				pageSize: 10,
 				dataSource: $c.DataSource(),
 				editable: true,
 				resizable: true,
 				save: save,
 				dataBound: dataBound,
 				edit: edit
-			});
+			};
+			gridHolder.kendoGrid(settings);
 		});
 
 		return $c;
