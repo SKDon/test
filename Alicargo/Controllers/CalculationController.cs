@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
+using Alicargo.Core.Enums;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 
@@ -112,6 +113,16 @@ namespace Alicargo.Controllers
 		public virtual JsonResult SetTransitCost(long id, long awbId, decimal? transitCost)
 		{
 			_applicationManager.SetTransitCost(id, transitCost);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetClass(long id, long awbId, int? classId)
+		{
+			_applicationManager.SetClass(id, (ClassType?)classId);
 
 			var data = _presenter.Row(awbId);
 

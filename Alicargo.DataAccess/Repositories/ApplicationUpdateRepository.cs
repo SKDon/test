@@ -13,11 +13,11 @@ namespace Alicargo.DataAccess.Repositories
 
 		public ApplicationUpdateRepository(IUnitOfWork unitOfWork)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = (AlicargoDataContext) unitOfWork.Context;
 		}
 
 		public Func<long> Add(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
-							  byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
+			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
 		{
 			var entity = new Application();
 
@@ -95,11 +95,16 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.SenderRate = senderRate);
 		}
 
+		public void SetClass(long id, int? classId)
+		{
+			Update(id, application => application.ClassId = classId);
+		}
+
 		public void Update(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
-						   byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
+			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
 		{
 			Update(application.Id, entity =>
-									   CopyTo(application, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile, entity));
+				CopyTo(application, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile, entity));
 		}
 
 		private void Update(long id, Action<Application> action)
@@ -109,7 +114,7 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		private static void CopyTo(ApplicationData from, byte[] swiftFile, byte[] invoiceFile,
-								   byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile, Application to)
+			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile, Application to)
 		{
 			if (to.Id == 0)
 			{
@@ -135,6 +140,7 @@ namespace Alicargo.DataAccess.Repositories
 
 			to.ClientId = @from.ClientId;
 			to.TransitId = @from.TransitId;
+			to.ClassId = from.ClassId;
 			to.AirWaybillId = @from.AirWaybillId;
 			to.CountryId = @from.CountryId;
 			to.SenderId = from.SenderId;
@@ -160,22 +166,22 @@ namespace Alicargo.DataAccess.Repositories
 
 			// todo: 3.0. separate repository for files
 			FileDataHelper.SetFile(invoiceFile, @from.InvoiceFileName,
-								   bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
+				bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
 
 			FileDataHelper.SetFile(packingFile, @from.PackingFileName,
-								   bytes => to.PackingFileData = bytes, s => to.PackingFileName = s);
+				bytes => to.PackingFileData = bytes, s => to.PackingFileName = s);
 
 			FileDataHelper.SetFile(cpFile, @from.CPFileName,
-								   bytes => to.CPFileData = bytes, s => to.CPFileName = s);
+				bytes => to.CPFileData = bytes, s => to.CPFileName = s);
 
 			FileDataHelper.SetFile(deliveryBillFile, @from.DeliveryBillFileName,
-								   bytes => to.DeliveryBillFileData = bytes, s => to.DeliveryBillFileName = s);
+				bytes => to.DeliveryBillFileData = bytes, s => to.DeliveryBillFileName = s);
 
 			FileDataHelper.SetFile(torg12File, @from.Torg12FileName,
-								   bytes => to.Torg12FileData = bytes, s => to.Torg12FileName = s);
+				bytes => to.Torg12FileData = bytes, s => to.Torg12FileName = s);
 
 			FileDataHelper.SetFile(swiftFile, @from.SwiftFileName,
-								   bytes => to.SwiftFileData = bytes, s => to.SwiftFileName = s);
+				bytes => to.SwiftFileData = bytes, s => to.SwiftFileName = s);
 		}
 	}
 }

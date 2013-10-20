@@ -1,4 +1,6 @@
-﻿namespace Alicargo.ViewModels.Calculation
+﻿using Alicargo.Core.Enums;
+
+namespace Alicargo.ViewModels.Calculation
 {
 	public sealed class CalculationItem
 	{
@@ -28,7 +30,7 @@
 		public decimal? SenderRate { get; set; }
 		public long AirWaybillId { get; set; }
 
-		public string Class { get; set; } // todo: set value
+		public ClassType? ClassId { get; set; }
 
 		#endregion
 	}

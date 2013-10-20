@@ -32,6 +32,7 @@ namespace Alicargo.Contracts.Contracts
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
 		public long? SenderId { get; set; }
+		public int? ClassId { get; set; }
 
 		public string InvoiceFileName { get; set; }
 		public string SwiftFileName { get; set; }

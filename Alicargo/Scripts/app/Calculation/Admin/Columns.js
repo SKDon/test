@@ -1,17 +1,9 @@
 ﻿var Alicargo = (function($a) {
 	var $l = $a.Localization;
 	var $u = $a.Urls;
-	var $r = $a.Roles;
 
 	$a.Calculation = (function($c) {
 		$c.DataSource = function() {
-			var editTariffPerKg = $r.IsAdmin;
-			var editSenderRate = $r.IsAdmin;
-			var editScotchCost = $r.IsAdmin || $r.IsSender;
-			var editFactureCost = $r.IsAdmin || $r.IsSender;
-			var editWithdrawCost = $r.IsAdmin || $r.IsSender;
-			var editTransitCost = $r.IsAdmin || $r.IsForwarder;
-
 			return {
 				schema: {
 					total: "Total",
@@ -26,19 +18,19 @@
 							"DisplayNumber": { type: "string", editable: false },
 							"Factory": { type: "string", editable: false },
 							"Mark": { type: "string", editable: false },
-							"Class": { type: "string", editable: false },
+							"Class": { type: "string", editable: true },
 							"Count": { type: "number", editable: false },
 							"Weigth": { type: "number", editable: false },
 							"Invoice": { type: "string", editable: false },
 							"Value": { type: "number", editable: false },
-							"TariffPerKg": { type: "number", editable: editTariffPerKg },
-							"SenderRate": { type: "number", editable: editSenderRate },
+							"TariffPerKg": { type: "number", editable: true },
+							"SenderRate": { type: "number", editable: true },
 							"TotalTariffCost": { type: "number", editable: false },
 							"TotalSenderRate": { type: "number", editable: false },
-							"ScotchCost": { type: "number", editable: editScotchCost },
-							"FactureCost": { type: "number", editable: editFactureCost },
-							"WithdrawCost": { type: "number", editable: editWithdrawCost },
-							"TransitCost": { type: "number", editable: editTransitCost },
+							"ScotchCost": { type: "number", editable: true },
+							"FactureCost": { type: "number", editable: true },
+							"WithdrawCost": { type: "number", editable: true },
+							"TransitCost": { type: "number", editable: true },
 							"InsuranceCost": { type: "number", editable: false },
 							"Profit": { type: "number", editable: false }
 						}
@@ -79,12 +71,43 @@
 			var n2Format = "{0:n2}";
 			var textRight = { "class": "text-right" };
 			var textBold = { "class": "text-bold" };
+
+			var classType = {
+				"null": "",
+				"1": $l.Enums_Econom,
+				"2": $l.Enums_Comfort,
+				"3": $l.Enums_Lux
+			};
+
+			function classEditor(container, options) {
+				$('<input required data-text-field="ClassName" data-value-field="ClassId" data-bind="value: ClassType"/>')
+					.appendTo(container)
+					.kendoDropDownList({
+						autoBind: false,
+						value: options.model.ClassId,
+						dataSource: {
+							type: "json",
+							data: [
+								{ ClassName: classType["null"], ClassId: "" },
+								{ ClassName: classType["1"], ClassId: 1 },
+								{ ClassName: classType["2"], ClassId: 2 },
+								{ ClassName: classType["3"], ClassId: 3 }
+							]
+						}
+					});
+			}
+
 			var c = [
 				{ field: "ClientNic", title: $l.Pages_Client },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='" + $u.Application_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>" },
 				{ field: "Factory", title: $l.Entities_FactoryName },
 				{ field: "Mark", title: $l.Entities_Mark },
-				{ field: "Class", title: $l.Entities_Class },
+				{
+					field: "ClassId",
+					title: $l.Entities_Class,
+					editor: classEditor,
+					template: function(model) { return classType[model.ClassId]; }
+				},
 				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #", attributes: textRight, footerAttributes: textRight },
 				{ field: "Weigth", title: $l.Entities_Weigth, groupFooterTemplate: groupFooterTemplate, format: n2Format, attributes: textRight, footerAttributes: textRight },
 				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format, attributes: textRight },

@@ -55,6 +55,7 @@ namespace Alicargo.DataAccess.Repositories
 				CountryId = x.CountryId,
 				StateChangeTimestamp = x.StateChangeTimestamp,
 				StateId = x.StateId,
+				ClassId = x.ClassId,
 				ClientId = x.ClientId,
 				TransitId = x.TransitId,
 				FactureCost = x.FactureCost,

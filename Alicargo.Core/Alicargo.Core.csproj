@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Contract\Message.cs" />
     <Compile Include="Contract\Recipient.cs" />
+    <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
     <Compile Include="Enums\DeliveryType.cs" />

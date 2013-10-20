@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Enums;
+using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Helpers;
@@ -27,7 +28,7 @@ namespace Alicargo.Services.Calculation
 
 		public ClientCalculationListCollection List(int take, long skip)
 		{
-			var awbs = _awbRepository.GetRange(take, skip).OrderByDescending(SortingValue).ToArray();
+			var awbs = _awbRepository.GetRange(take, skip).OrderByDescending(awb => awb.DateOfArrival).ToArray();
 
 			return List(awbs);
 		}
@@ -38,7 +39,7 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Key).ToArray());
 
-			var items = GetItems(awbs, applications);
+			var items = GetItems(data, applications);
 
 			var groups = GetGroups(data, items, awbs);
 
@@ -68,10 +69,11 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
-		private IEnumerable<ClientCalculationItem> GetItems(IReadOnlyDictionary<long, AirWaybillData> awbs, ApplicationData[] applications)
+		private IEnumerable<ClientCalculationItem> GetItems(IEnumerable<AirWaybillData> data, ApplicationData[] applications)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var nics = _clientRepository.GetNicByApplications(appIds);
+			var ranks = data.Select((pair, i) => new { pair.Id, Rank = i }).ToDictionary(x => x.Id, x => x.Rank);
 
 			return applications.Select(a => new ClientCalculationItem
 			{
@@ -94,8 +96,8 @@ namespace Alicargo.Services.Calculation
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weigth),
 				Profit = CalculationHelper.GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
-				Class = "todo"
-			}).OrderByDescending(x => SortingValue(awbs[x.AirWaybillId])).ToArray();
+				ClassName = a.ClassId.HasValue ? ((ClassType)a.ClassId.Value).ToLocalString() : ""
+			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
 		}
 
 		private static void AddMissedGroups(IList<AirWaybillData> awbs, IList<ClientCalculationGroup> groups)
@@ -114,11 +116,6 @@ namespace Alicargo.Services.Calculation
 					});
 				}
 			}
-		}
-
-		private static DateTimeOffset SortingValue(AirWaybillData awb)
-		{
-			return awb.DateOfArrival;
 		}
 	}
 }

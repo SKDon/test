@@ -65,6 +65,7 @@ namespace Alicargo.Services.Application
 
 			applicationData.TransitId = transitId;
 			applicationData.StateId = _stateConfig.DefaultStateId;
+			applicationData.ClassId = null;
 			applicationData.StateChangeTimestamp = DateTimeOffset.UtcNow;
 			applicationData.CreationTimestamp = DateTimeOffset.UtcNow;
 			applicationData.SenderId = senderId;

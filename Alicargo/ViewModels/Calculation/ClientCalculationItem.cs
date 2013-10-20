@@ -8,7 +8,7 @@
 		public string DisplayNumber { get; set; }
 		public string Factory { get; set; }
 		public string Mark { get; set; }
-		public string Class { get; set; } // todo: set value
+		public string ClassName { get; set; }
 		public int? Count { get; set; }
 		public float? Weigth { get; set; }
 		public string Invoice { get; set; }

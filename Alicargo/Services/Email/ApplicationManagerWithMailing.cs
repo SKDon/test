@@ -4,6 +4,7 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Contract;
+using Alicargo.Core.Enums;
 using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -129,6 +130,11 @@ namespace Alicargo.Services.Email
 		public void SetSenderRate(long id, decimal? senderRate)
 		{
 			_manager.SetSenderRate(id, senderRate);
+		}
+
+		public void SetClass(long id, ClassType? classType)
+		{
+			_manager.SetClass(id, classType);
 		}
 
 		public void SetTransitReference(long id, string transitReference)

@@ -49,7 +49,7 @@
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
 				{ field: "Factory", title: $l.Entities_FactoryName },
 				{ field: "Mark", title: $l.Entities_Mark },
-				{ field: "Class", title: $l.Entities_Class },
+				{ field: "ClassName", title: $l.Entities_Class },
 				{ field: "Count", title: $l.Entities_Count, attributes: texRight },
 				{ field: "Weigth", title: $l.Entities_Weigth, format: n2Format, attributes: texRight },
 				{ field: "Invoice", title: $l.Entities_Invoice },

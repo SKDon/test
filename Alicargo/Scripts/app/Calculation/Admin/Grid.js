@@ -1,15 +1,15 @@
-﻿var Alicargo = (function ($a) {
+﻿var Alicargo = (function($a) {
 
 	var $u = $a.Urls;
 
-	$a.Calculation = (function ($c) {
+	$a.Calculation = (function($c) {
 
-		$c.GetMainGrid = function () {
+		$c.GetMainGrid = function() {
 			var grid = $("#calculation-grid").data("kendoGrid");
-			$c.GetMainGrid = function () { return grid; };
+			$c.GetMainGrid = function() { return grid; };
 			return grid;
 		};
-		
+
 		function rebindData(oldData, data) {
 			var aggregates = data.Groups[0].aggregates;
 			for (var i in aggregates) {
@@ -31,7 +31,7 @@
 
 		function post(url, data, awbId) {
 			var scrollTop = $(window).scrollTop();
-			$.post(url, data).success(function (awbData) {
+			$.post(url, data).success(function(awbData) {
 				updateMailGrid(awbId, awbData);
 				$(window).scrollTop(scrollTop);
 			}).fail($a.ShowError);
@@ -58,7 +58,7 @@
 			row.find(".additional-cost input").kendoNumericTextBox({
 				decimals: 2,
 				spinners: false,
-				change: function () {
+				change: function() {
 					post($u.Calculation_SetAdditionalCost, {
 						awbId: data.AirWaybillId,
 						additionalCost: this.value()
@@ -67,7 +67,7 @@
 			});
 		}
 
-		$(function () {
+		$(function() {
 			function dataBound() {
 				var detailsTemplate = kendo.template($("#calculation-grid-details-template").html());
 
@@ -83,7 +83,7 @@
 					return awbDetails;
 				}
 
-				$("tr a.k-grid-custom-gear").each(function () {
+				$("tr a.k-grid-custom-gear").each(function() {
 					var button = $(this);
 					var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
 					$.data(button[0], "ApplicationId", dataItem.ApplicationId);
@@ -93,7 +93,7 @@
 					}
 				});
 
-				$("tr.k-group-footer").each(function (i) {
+				$("tr.k-group-footer").each(function(i) {
 					var awbId = $c.CalculationInfo[i].AirWaybillId;
 
 					var awbDetails = getDetails(awbId);
@@ -109,7 +109,15 @@
 			function save(e) {
 				var awbId = e.model.AirWaybillId;
 				var applicationId = e.model.ApplicationId;
-				
+
+				if (e.values.ClassType !== undefined) {
+					var id = e.values.ClassType == null ? null : e.values.ClassType.ClassId;
+					post($u.Calculation_SetClass, {
+						id: applicationId,
+						awbId: awbId,
+						classId: id
+					}, awbId);
+				}
 				if (e.values.TariffPerKg !== undefined) {
 					post($u.Calculation_SetTariffPerKg, {
 						id: applicationId,

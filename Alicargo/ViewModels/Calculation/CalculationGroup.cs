@@ -4,9 +4,10 @@ namespace Alicargo.ViewModels.Calculation
 {
 	public sealed class CalculationGroup
 	{
-		// ReSharper disable InconsistentNaming
-
 		public long AirWaybillId { get; set; }
+
+		// ReSharper disable InconsistentNaming
+		
 		public string field { get { return "AirWaybillId"; } }
 		public string value { get; set; }
 		public bool hasSubgroups { get { return false; } }

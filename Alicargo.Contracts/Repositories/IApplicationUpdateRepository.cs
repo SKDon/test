@@ -20,5 +20,6 @@ namespace Alicargo.Contracts.Repositories
 		void SetFactureCostEdited(long id, decimal? factureCost);
 		void SetScotchCostEdited(long id, decimal? scotchCost);
 		void SetSenderRate(long id, decimal? senderRate);
+		void SetClass(long id, int? classId);
 	}
 }

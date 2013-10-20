@@ -1,4 +1,5 @@
 ﻿using System;
+using Alicargo.Core.Enums;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 
@@ -21,5 +22,6 @@ namespace Alicargo.Services.Abstract
 		void SetFactureCostEdited(long id, decimal? factureCost);
 		void SetScotchCostEdited(long id, decimal? scotchCost);
 		void SetSenderRate(long id, decimal? senderRate);
+		void SetClass(long id, ClassType? classType);
 	}
 }

@@ -123,6 +123,15 @@
   <data name="Avia" xml:space="preserve">
     <value>Авиа</value>
   </data>
+  <data name="Comfort" xml:space="preserve">
+    <value>Комфорт</value>
+  </data>
+  <data name="Econom" xml:space="preserve">
+    <value>Эконом</value>
+  </data>
+  <data name="Lux" xml:space="preserve">
+    <value>Люкс</value>
+  </data>
   <data name="Self" xml:space="preserve">
     <value>Самовывоз</value>
   </data>

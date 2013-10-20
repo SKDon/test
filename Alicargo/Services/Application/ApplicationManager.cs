@@ -140,6 +140,13 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
+		public void SetClass(long id, ClassType? classType)
+		{
+			_applicationUpdater.SetClass(id, (int?)classType);
+
+			_unitOfWork.SaveChanges();
+		}
+
 		public void SetState(long applicationId, long stateId)
 		{
 			if (!_stateService.HasPermissionToSetState(stateId))
@@ -179,7 +186,7 @@ namespace Alicargo.Services.Application
 				InvoiceFileName = data.InvoiceFileName,
 				PackingFileName = data.PackingFileName,
 				MarkName = data.MarkName,
-				MethodOfDelivery = (MethodOfDelivery) data.MethodOfDeliveryId,
+				MethodOfDelivery = (MethodOfDelivery)data.MethodOfDeliveryId,
 				SwiftFileName = data.SwiftFileName,
 				TermsOfDelivery = data.TermsOfDelivery,
 				Torg12FileName = data.Torg12FileName,
@@ -229,7 +236,7 @@ namespace Alicargo.Services.Application
 			to.FactoryEmail = @from.FactoryEmail;
 			to.FactoryContact = @from.FactoryContact;
 			to.MarkName = @from.MarkName;
-			to.MethodOfDeliveryId = (int) @from.MethodOfDelivery;
+			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
 			to.FactureCost = @from.FactureCost;
 			to.ScotchCost = @from.ScotchCost;
 			to.TransitCost = @from.TransitCost;
@@ -248,6 +255,7 @@ namespace Alicargo.Services.Application
 				CreationTimestamp = DateTimeOffset.UtcNow,
 				StateChangeTimestamp = DateTimeOffset.UtcNow,
 				StateId = _stateConfig.DefaultStateId,
+				ClassId = null,
 				TransitId = transitId,
 				Invoice = model.Invoice,
 				InvoiceFileName = model.InvoiceFileName,
@@ -271,7 +279,7 @@ namespace Alicargo.Services.Application
 				FactoryEmail = model.FactoryEmail,
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
-				MethodOfDeliveryId = (int) model.MethodOfDelivery,
+				MethodOfDeliveryId = (int)model.MethodOfDelivery,
 				Id = 0,
 				AirWaybillId = null,
 				DateInStock = null,
