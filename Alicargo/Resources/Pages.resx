@@ -288,4 +288,7 @@
   <data name="DownloadCalculations" xml:space="preserve">
     <value>Скачать файл с расчетами</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Отчет</value>
+  </data>
 </root>
