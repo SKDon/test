@@ -7,9 +7,9 @@ namespace Alicargo.Controllers
 {
 	public partial class ClientCalculationController : Controller
     {
-		private readonly ICalculationPresenter _presenter;
+		private readonly IClientCalculationPresenter _presenter;
 
-	    public ClientCalculationController(ICalculationPresenter presenter)
+		public ClientCalculationController(IClientCalculationPresenter presenter)
 	    {
 		    _presenter = presenter;
 	    }
@@ -23,7 +23,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Client), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
-			var data = _presenter.ClientCalculationList(take, skip);
+			var data = _presenter.List(take, skip);
 
 			return Json(data);
 		}

@@ -39,11 +39,6 @@ namespace Alicargo.Services.Calculation
 			return List(data);
 		}
 
-		public object ClientCalculationList(int take, long skip)
-		{
-			throw new NotImplementedException();
-		}		
-
 		private CalculationListCollection List(IList<AirWaybillData> data)
 		{
 			var awbs = data.ToDictionary(x => x.Id, x => x);
