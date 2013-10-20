@@ -9,6 +9,25 @@
 			$c.GetMainGrid = function () { return grid; };
 			return grid;
 		};
+		
+		function rebindData(oldData, data) {
+			var aggregates = data.Groups[0].aggregates;
+			for (var i in aggregates) {
+				oldData.aggregates[i].sum = aggregates[i].sum;
+			}
+
+			var items = data.Groups[0].items;
+			for (var itemIndex in items) {
+				$.extend(oldData.items[itemIndex], items[itemIndex]);
+			}
+
+			for (var infoIndex in $c.CalculationInfo) {
+				if ($c.CalculationInfo[infoIndex].AirWaybillId == data.Info[0].AirWaybillId) {
+					$.extend($c.CalculationInfo[infoIndex], data.Info[0]);
+					break;
+				}
+			}
+		}
 
 		function post(url, data, awbId) {
 			var scrollTop = $(window).scrollTop();
@@ -17,7 +36,6 @@
 				$(window).scrollTop(scrollTop);
 			}).fail($a.ShowError);
 		}
-
 		$c.Post = post;
 
 		function findGroup(data, awbId) {
@@ -27,28 +45,6 @@
 				}
 			}
 			return null;
-		}
-
-		function rebindData(oldData, data) {
-			var aggregates = data.Groups[0].aggregates;
-			for (var i in aggregates) {
-				oldData.aggregates[i].sum = aggregates[i].sum;
-			}
-
-			var items = data.Groups[0].items;
-			for (var itemIndex in items) {
-				oldData.items[itemIndex].TotalTariffCost = items[itemIndex].TotalTariffCost;
-				oldData.items[itemIndex].TotalSenderRate = items[itemIndex].TotalSenderRate;
-				oldData.items[itemIndex].Profit = items[itemIndex].Profit;
-				oldData.items[itemIndex].IsCalculated = items[itemIndex].IsCalculated;
-			}
-
-			for (var infoIndex in $c.CalculationInfo) {
-				if ($c.CalculationInfo[infoIndex].AirWaybillId == data.Info[0].AirWaybillId) {
-					$.extend($c.CalculationInfo[infoIndex], data.Info[0]);
-					break;
-				}
-			}
 		}
 
 		function updateMailGrid(awbId, awbData) {
