@@ -9,19 +9,19 @@ ALTER TABLE [dbo].[Application] DROP CONSTRAINT [DF_Application_CreationTimestam
 
 
 GO
-PRINT N'Dropping DF_ReferenceCreationTimestamp...';
+PRINT N'Dropping DF_AirWaybillCreationTimestamp...';
 
 
 GO
-ALTER TABLE [dbo].[AirWaybill] DROP CONSTRAINT [DF_ReferenceCreationTimestamp];
+ALTER TABLE [dbo].[AirWaybill] DROP CONSTRAINT [DF_AirWaybillCreationTimestamp];
 
 
 GO
-PRINT N'Dropping DF__Reference__State__6A30C649...';
+PRINT N'Dropping DF__AirWaybil__State__1B0907CE...';
 
 
 GO
-ALTER TABLE [dbo].[AirWaybill] DROP CONSTRAINT [DF__Reference__State__6A30C649];
+ALTER TABLE [dbo].[AirWaybill] DROP CONSTRAINT [DF__AirWaybil__State__1B0907CE];
 
 
 GO
@@ -33,11 +33,11 @@ ALTER TABLE [dbo].[Application] DROP CONSTRAINT [FK_dbo.Application_dbo.Client_C
 
 
 GO
-PRINT N'Dropping FK_dbo.Application_dbo.Reference_ReferenceId...';
+PRINT N'Dropping FK_dbo.Application_dbo.AirWaybill_AirWaybillId...';
 
 
 GO
-ALTER TABLE [dbo].[Application] DROP CONSTRAINT [FK_dbo.Application_dbo.Reference_ReferenceId];
+ALTER TABLE [dbo].[Application] DROP CONSTRAINT [FK_dbo.Application_dbo.AirWaybill_AirWaybillId];
 
 
 GO
@@ -240,17 +240,6 @@ CREATE NONCLUSTERED INDEX [IX_AirWaybillId]
 
 
 GO
-PRINT N'Altering [dbo].[Client]...';
-
-
-GO
-ALTER TABLE [dbo].[Client]
-    ADD [ContractFileData]    VARBINARY (MAX) NULL,
-        [ContractFileName]    NVARCHAR (MAX)  NULL,
-        [CalculationFileData] VARBINARY (MAX) NULL;
-
-
-GO
 PRINT N'Creating [dbo].[Calculation]...';
 
 
@@ -284,12 +273,21 @@ CREATE NONCLUSTERED INDEX [IX_Calculation_StateId]
 
 
 GO
-PRINT N'Creating [dbo].[Calculation].[IX_Calculation_Unique]...';
+PRINT N'Creating [dbo].[Calculation].[IX_Calculation_ClientId]...';
 
 
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_Calculation_Unique]
-    ON [dbo].[Calculation]([ClientId] ASC, [ApplicationHistoryId] ASC);
+CREATE NONCLUSTERED INDEX [IX_Calculation_ClientId]
+    ON [dbo].[Calculation]([ClientId] ASC);
+
+
+GO
+PRINT N'Creating [dbo].[Calculation].[IX_Calculation_ApplicationHistoryId]...';
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Calculation_ApplicationHistoryId]
+    ON [dbo].[Calculation]([ApplicationHistoryId] ASC);
 
 
 GO
@@ -402,7 +400,6 @@ GO
 PRINT N'Checking existing data against newly created constraints';
 
 
-
 GO
 ALTER TABLE [dbo].[Application] WITH CHECK CHECK CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId];
 
@@ -420,5 +417,3 @@ ALTER TABLE [dbo].[Calculation] WITH CHECK CHECK CONSTRAINT [FK_Calculation_Clie
 GO
 PRINT N'Update complete.'
 GO
-
-use master

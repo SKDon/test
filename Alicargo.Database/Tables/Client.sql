@@ -17,8 +17,6 @@
 	[KS]				NVARCHAR (MAX)	NULL,
 	[TransitId]			BIGINT			NOT NULL,
 
-	[CalculationFileData] VARBINARY (MAX) NULL,
-
 	CONSTRAINT [PK_dbo.Client] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Client_dbo.Transit_Transit_Id] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),
 	CONSTRAINT [FK_dbo.Client_dbo.User_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
