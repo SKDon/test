@@ -46,6 +46,7 @@
 			}
 			return null;
 		}
+		$c.FindGroup = findGroup;
 
 		function updateMailGrid(awbId, awbData) {
 			var grid = $c.GetMainGrid();
@@ -89,6 +90,16 @@
 					$.data(button[0], "ApplicationId", dataItem.ApplicationId);
 					$.data(button[0], "AirWaybillId", dataItem.AirWaybillId);
 					if (dataItem.IsCalculated) {
+						button.remove();
+					}
+				});
+				
+				$("tr a.k-grid-custom-edit").each(function() {
+					var button = $(this);
+					var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
+					$.data(button[0], "ApplicationId", dataItem.ApplicationId);
+					$.data(button[0], "AirWaybillId", dataItem.AirWaybillId);
+					if (!dataItem.IsCalculated) {
 						button.remove();
 					}
 				});
