@@ -46,7 +46,6 @@
 			}
 			return null;
 		}
-		$c.FindGroup = findGroup;
 
 		function updateMailGrid(awbId, awbData) {
 			var grid = $c.GetMainGrid();
@@ -94,7 +93,7 @@
 					}
 				});
 				
-				$("tr a.k-grid-custom-edit").each(function() {
+				$("tr a.k-grid-custom-cancel").each(function() {
 					var button = $(this);
 					var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
 					$.data(button[0], "ApplicationId", dataItem.ApplicationId);

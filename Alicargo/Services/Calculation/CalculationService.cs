@@ -61,5 +61,12 @@ namespace Alicargo.Services.Calculation
 
 			_unitOfWork.SaveChanges();
 		}
+
+		public void RemoveCalculatation(long applicationId)
+		{
+			_calculations.RemoveByApplication(applicationId);
+
+			_unitOfWork.SaveChanges();
+		}
 	}
 }

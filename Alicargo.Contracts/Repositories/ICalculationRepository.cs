@@ -9,5 +9,6 @@ namespace Alicargo.Contracts.Repositories
 		VersionedData<CalculationState, CalculationData>[] Get(CalculationState state);
 		VersionData<CalculationState> SetState(long id, byte[] rowVersion, CalculationState state);
 		CalculationData[] GetByClientId(long clientId);
+		void RemoveByApplication(long applicationId);
 	}
 }

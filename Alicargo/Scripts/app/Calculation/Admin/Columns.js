@@ -136,25 +136,14 @@
 							$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
 						}
 					}, {
-						name: "custom-edit",
+						name: "custom-cancel",
 						text: "&nbsp;",
 						click: function(e) {
 							e.preventDefault();
 							var button = $(e.target).closest("a")[0];
 							var appId = $.data(button, "ApplicationId");
 							var awbId = $.data(button, "AirWaybillId");
-							
-							var grid = $c.GetMainGrid();
-							var data = grid.dataSource.data();
-							debugger;
-							var items = $c.FindGroup(data, awbId).items;
-							for (var i in items) {
-								if (items[i].ApplicationId == appId) {
-									items[i].IsCalculated = false;
-									grid.refresh();
-									return;
-								}
-							}
+							$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
 						}
 					}],
 					title: "&nbsp;",

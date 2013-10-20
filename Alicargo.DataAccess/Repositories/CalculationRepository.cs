@@ -105,5 +105,12 @@ namespace Alicargo.DataAccess.Repositories
 								   Weight = x.Weight
 							   }).ToArray();
 		}
+
+		public void RemoveByApplication(long applicationId)
+		{
+			var calculation = _context.Calculations.First(x => x.ApplicationHistoryId == applicationId);
+
+			_context.Calculations.DeleteOnSubmit(calculation);
+		}
 	}
 }

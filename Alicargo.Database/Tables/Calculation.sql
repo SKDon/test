@@ -23,5 +23,8 @@ GO
 CREATE INDEX [IX_Calculation_StateId] ON [dbo].[Calculation] ([StateId])
 GO
 
-CREATE UNIQUE INDEX [IX_Calculation_Unique] ON [dbo].[Calculation] ([ClientId], [ApplicationHistoryId])
+CREATE INDEX [IX_Calculation_ClientId] ON [dbo].[Calculation] ([ClientId])
+GO
+
+CREATE UNIQUE INDEX [IX_Calculation_ApplicationHistoryId] ON [dbo].[Calculation] ([ApplicationHistoryId])
 GO

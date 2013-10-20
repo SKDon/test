@@ -61,6 +61,12 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult RemoveCalculatation()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.RemoveCalculatation);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult SetSenderRate()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetSenderRate);
@@ -121,6 +127,7 @@ namespace Alicargo.Controllers
             public readonly string List = "List";
             public readonly string SetTariffPerKg = "SetTariffPerKg";
             public readonly string Calculate = "Calculate";
+            public readonly string RemoveCalculatation = "RemoveCalculatation";
             public readonly string SetSenderRate = "SetSenderRate";
             public readonly string SetScotchCostEdited = "SetScotchCostEdited";
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
@@ -137,6 +144,7 @@ namespace Alicargo.Controllers
             public const string List = "List";
             public const string SetTariffPerKg = "SetTariffPerKg";
             public const string Calculate = "Calculate";
+            public const string RemoveCalculatation = "RemoveCalculatation";
             public const string SetSenderRate = "SetSenderRate";
             public const string SetScotchCostEdited = "SetScotchCostEdited";
             public const string SetFactureCostEdited = "SetFactureCostEdited";
@@ -171,6 +179,15 @@ namespace Alicargo.Controllers
         public ActionParamsClass_Calculate CalculateParams { get { return s_params_Calculate; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Calculate
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+        }
+        static readonly ActionParamsClass_RemoveCalculatation s_params_RemoveCalculatation = new ActionParamsClass_RemoveCalculatation();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_RemoveCalculatation RemoveCalculatationParams { get { return s_params_RemoveCalculatation; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_RemoveCalculatation
         {
             public readonly string id = "id";
             public readonly string awbId = "awbId";
@@ -307,6 +324,17 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
             CalculateOverride(callInfo, id, awbId);
+            return callInfo;
+        }
+
+        partial void RemoveCalculatationOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId);
+
+        public override System.Web.Mvc.JsonResult RemoveCalculatation(long id, long awbId)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.RemoveCalculatation);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            RemoveCalculatationOverride(callInfo, id, awbId);
             return callInfo;
         }
 
