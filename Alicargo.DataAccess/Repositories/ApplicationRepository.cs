@@ -192,6 +192,7 @@ namespace Alicargo.DataAccess.Repositories
 				ClientLegalEntity = x.Client.LegalEntity,
 				ClientNic = x.Client.Nic,
 				CountryId = x.CountryId,
+				ClassId = x.ClassId,
 				CreationTimestamp = x.CreationTimestamp,
 				DateInStock = x.DateInStock,
 				DateOfCargoReceipt = x.DateOfCargoReceipt,

@@ -44,7 +44,7 @@
 						cache: false
 					}
 				},
-				pageSize: 5,
+				pageSize: 10,
 				serverPaging: true,
 				serverGrouping: true,
 				serverAggregates: true,

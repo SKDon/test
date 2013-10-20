@@ -18,10 +18,9 @@
 						cache: false
 					}
 				},
-				pageSize: 5,
+				pageSize: 20,
 				serverPaging: true,
 				serverGrouping: true,
-				serverAggregates: true,
 				error: $a.ShowError,
 				group: {
 					field: "AirWaybillId",

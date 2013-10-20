@@ -182,7 +182,6 @@
 			var settings = {
 				columns: $c.Columns(),
 				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
-				pageSize: 10,
 				dataSource: $c.DataSource(),
 				editable: true,
 				resizable: true,

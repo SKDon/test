@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics;
+using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 
@@ -8,13 +10,17 @@ namespace Alicargo.Controllers
 	public partial class ClientCalculationController : Controller
     {
 		private readonly IClientCalculationPresenter _presenter;
+		private readonly IClientRepository _clients;
+		private readonly IIdentityService _identity;
 
-		public ClientCalculationController(IClientCalculationPresenter presenter)
-	    {
-		    _presenter = presenter;
-	    }
+		public ClientCalculationController(IClientCalculationPresenter presenter, IClientRepository clients, IIdentityService identity)
+		{
+			_presenter = presenter;
+			_clients = clients;
+			_identity = identity;
+		}
 
-	    [Access(RoleType.Client), HttpGet]
+		[Access(RoleType.Client), HttpGet]
 		public virtual ActionResult Index()
 		{
 			return View();
@@ -23,7 +29,11 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Client), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
-			var data = _presenter.List(take, skip);
+			Debug.Assert(_identity.Id != null);
+
+			var client = _clients.GetByUserId(_identity.Id.Value);
+
+			var data = _presenter.List(client.Id, take, skip);
 
 			return Json(data);
 		}

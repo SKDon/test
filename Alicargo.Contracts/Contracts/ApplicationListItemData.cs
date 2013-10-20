@@ -90,6 +90,8 @@ namespace Alicargo.Contracts.Contracts
 
 		public int MethodOfDeliveryId { get; set; }
 
+		public int? ClassId { get; set; }
+
 		public int CurrencyId { get; set; }
 
 		public decimal Value { get; set; }

@@ -4,6 +4,6 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IClientCalculationPresenter
 	{
-		ClientCalculationListCollection List(int take, long skip);
+		ClientCalculationListCollection List(long clientId, int take, long skip);
 	}
 }
