@@ -181,39 +181,3 @@
 	#= WithdrawCost #
 </p>
 # } #
-# if(InvoiceFileName != null){ #
-<p>
-	<span>@Entities.Invoice:</span>
-	<a href="@Url.Action(MVC.Application.InvoiceFile())/#= Id #">#= InvoiceFileName #</a>
-</p>
-# } #
-# if(SwiftFileName != null){ #
-<p>
-	<span>@Entities.Swift:</span>
-	<a href="@Url.Action(MVC.Application.SwiftFile())/#= Id #">#= SwiftFileName #</a>
-</p>
-# } #
-# if(DeliveryBillFileName != null){ #
-<p>
-	<span>@Entities.DeliveryBill:</span>
-	<a href="@Url.Action(MVC.Application.DeliveryBillFile())/#= Id #">#= DeliveryBillFileName #</a>
-</p>
-# } #
-# if(Torg12FileName != null){ #
-<p>
-	<span>@Entities.Torg12:</span>
-	<a href="@Url.Action(MVC.Application.Torg12File())/#= Id #">#= Torg12FileName #</a>
-</p>
-# } #
-# if(CPFileName != null){ #
-<p>
-	<span>@Entities.CP:</span>
-	<a href="@Url.Action(MVC.Application.CPFile())/#= Id #">#= CPFileName #</a>
-</p>
-# } #
-# if(PackingFileName != null){ #
-<p>
-	<span>@Entities.Packing:</span>
-	<a href="@Url.Action(MVC.Application.PackingFile())/#= Id #">#= PackingFileName #</a>
-</p>
-# } #

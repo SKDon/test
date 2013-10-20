@@ -25,6 +25,24 @@
 		<div>
 			@CloseButton()
 			@EditButton()
+			# if(InvoiceFileName != null){ #
+				<a class="btn btn-info" href="@Url.Action(MVC.Application.InvoiceFile())/#= Id #">@Entities.Invoice</a>
+			# } #
+			# if(SwiftFileName != null){ #
+				<a class="btn btn-info" href="@Url.Action(MVC.Application.SwiftFile())/#= Id #">@Entities.Swift</a>
+			# } #
+			# if(DeliveryBillFileName != null){ #
+				<a class="btn btn-info" href="@Url.Action(MVC.Application.DeliveryBillFile())/#= Id #">@Entities.DeliveryBill</a>
+			# } #
+			# if(Torg12FileName != null){ #
+				<a class="btn btn-info" href="@Url.Action(MVC.Application.Torg12File())/#= Id #">@Entities.Torg12</a>
+			# } #
+			# if(CPFileName != null){ #
+				<a class="btn btn-info" href="@Url.Action(MVC.Application.CPFile())/#= Id #">@Entities.CP</a>
+			# } #
+			# if(PackingFileName != null){ #
+				<a class="btn btn-info" href="@Url.Action(MVC.Application.PackingFile())/#= Id #">@Entities.Packing</a>
+			# } #
 		</div>
 	</div>
 </div>
