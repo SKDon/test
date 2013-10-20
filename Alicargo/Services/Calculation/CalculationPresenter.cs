@@ -39,10 +39,10 @@ namespace Alicargo.Services.Calculation
 			return List(data);
 		}
 
-		private static DateTimeOffset SortingValue(AirWaybillData awb)
+		public object ClientCalculationList(int take, long skip)
 		{
-			return awb.DateOfArrival;
-		}
+			throw new NotImplementedException();
+		}		
 
 		private CalculationListCollection List(IList<AirWaybillData> data)
 		{
@@ -182,6 +182,11 @@ namespace Alicargo.Services.Calculation
 					});
 				}
 			}
+		}
+
+		private static DateTimeOffset SortingValue(AirWaybillData awb)
+		{
+			return awb.DateOfArrival;
 		}
 	}
 }

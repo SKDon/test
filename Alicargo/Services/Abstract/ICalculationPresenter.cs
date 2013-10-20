@@ -6,5 +6,6 @@ namespace Alicargo.Services.Abstract
 	{
 		CalculationListCollection List(int take, long skip);
 		CalculationListCollection Row(long awbId);
+		object ClientCalculationList(int take, long skip);
 	}
 }

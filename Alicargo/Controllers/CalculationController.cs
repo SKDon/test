@@ -38,14 +38,6 @@ namespace Alicargo.Controllers
 			return Json(data);
 		}
 
-		//[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		//public virtual JsonResult Row(long id)
-		//{
-		//	var data = _presenter.Row(id);
-
-		//	return Json(data);
-		//}
-
 		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTariffPerKg(long id, long awbId, decimal? tariffPerKg)
 		{

@@ -1,6 +1,6 @@
 ﻿@using Alicargo.Contracts.Enums
 @using Resources
-@inherits Alicargo.MvcHelpers.BaseWebViewPage
+@inherits BaseWebViewPage
 
 @helper ClientMenu()
 {
@@ -8,6 +8,7 @@
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 		<li>@Html.ActionLink(Pages.Profile, MVC.Client.Edit())</li>
+		<li>@Html.ActionLink(Pages.Calculation, MVC.ClientCalculation.Index())</li>
 	}
 }
 
