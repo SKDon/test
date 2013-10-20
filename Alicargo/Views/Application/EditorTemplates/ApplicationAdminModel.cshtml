@@ -43,6 +43,8 @@
 		@Html.EditorWithLabelFor(model => model.Count)
 		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>)</label>
 		@Html.EditorFor(model => model.Volume)
+		@Html.LabelFor(x => x.SenderId)
+		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long, string>)ViewBag.Senders, "")
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.TermsOfDelivery)
@@ -74,12 +76,6 @@
 	</div>
 	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.WithdrawCostEdited)
-	</div>
-</div>
-<div class="row">
-	<div class="span4">
-		@Html.LabelFor(x => x.SenderId)
-		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long, string>)ViewBag.Senders, "")
 	</div>
 </div>
 <hr />
