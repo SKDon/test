@@ -21,4 +21,4 @@ $date = Get-Date
 
 #git commit --all -m "Deploy at $date" --quiet
 
-#git push --all --quiet
+git push push --recurse-submodules=check --progress "Alicargo.Deploy" Dev:Dev --quiet

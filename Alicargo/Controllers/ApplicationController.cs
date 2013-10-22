@@ -9,6 +9,7 @@ using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using System.Net;
 using Alicargo.ViewModels.Application;
+using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Controllers
 {
@@ -87,7 +88,7 @@ namespace Alicargo.Controllers
 
 		#endregion
 
-		private void BindBag(long? clientId, long? applicationId)
+		private void BindBag(long? clientId, long? applicationId, int? count = 0)
 		{
 			var client = _clientPresenter.GetCurrentClientData(clientId);
 
@@ -96,6 +97,11 @@ namespace Alicargo.Controllers
 			ViewBag.ClientId = client.Id;
 
 			ViewBag.ApplicationId = applicationId;
+
+			if (applicationId.HasValue && count.HasValue)
+			{
+				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count.Value);
+			}
 
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
 
@@ -121,7 +127,7 @@ namespace Alicargo.Controllers
 
 			var clientId = _applicationRepository.GetClientId(id);
 
-			BindBag(clientId, id);
+			BindBag(clientId, id, application.Count);
 
 			return View(application);
 		}
@@ -135,7 +141,8 @@ namespace Alicargo.Controllers
 			if (!ModelState.IsValid)
 			{
 				var clientId = _applicationRepository.GetClientId(id);
-				BindBag(clientId, id);
+				BindBag(clientId, id, model.Count);
+
 				return View(model);
 			}
 

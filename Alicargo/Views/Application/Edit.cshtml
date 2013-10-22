@@ -3,7 +3,7 @@
 @model ApplicationAdminModel
 
 <h1>
-	@Pages.ApplicationEdit
+	@Pages.ApplicationEdit @ViewBag.ApplicationNumber
 	<span>@Entities.Nic: @Html.ViewBag.ClientNic</span>
 </h1>
 @Html.EditPage(Url.Action(MVC.Application.Edit()), Pages.Update)
