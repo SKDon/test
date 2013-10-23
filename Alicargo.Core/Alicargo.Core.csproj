@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
+      <Link>Properties\ProjectInfo.cs</Link>
+    </Compile>
     <Compile Include="Contract\Message.cs" />
     <Compile Include="Contract\Recipient.cs" />
     <Compile Include="Enums\ClassType.cs" />

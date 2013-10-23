@@ -152,6 +152,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ClientCalculationController.cs" />
     <Compile Include="MvcHelpers\ModelBinders\ClientModelBinder.cs" />
+    <Compile Include="Properties\ProjectInfo.cs" />
     <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
     <Compile Include="Services\Calculation\ClientCalculationPresenter.cs" />
     <Compile Include="T4MVC\AirWaybillController.generated.cs">
@@ -1512,6 +1513,7 @@
     <Content Include="Views\ApplicationList\SenderTemplate.cshtml" />
     <Content Include="Views\ApplicationList\ClientTemplate.cshtml" />
     <Content Include="Views\ApplicationList\ClientDetails.cshtml" />
+    <Content Include="Views\DynamicScript\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
