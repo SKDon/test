@@ -4,6 +4,7 @@ using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 using Alicargo.ViewModels.Helpers;
+using Alicargo.ViewModels.User;
 using Resources;
 
 namespace Alicargo.Services.Email

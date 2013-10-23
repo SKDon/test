@@ -4,8 +4,7 @@ using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using Antlr.Runtime.Misc;
-using Resources;
+using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Client
 {

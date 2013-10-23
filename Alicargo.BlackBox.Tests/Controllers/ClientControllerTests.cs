@@ -3,6 +3,7 @@ using Alicargo.Controllers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 using Ploeh.AutoFixture;

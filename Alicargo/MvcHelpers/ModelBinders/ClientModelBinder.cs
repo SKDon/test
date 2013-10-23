@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using Alicargo.MvcHelpers.Extensions;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.User;
 
 namespace Alicargo.MvcHelpers.ModelBinders
 {

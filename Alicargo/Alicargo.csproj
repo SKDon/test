@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ClientCalculationController.cs" />
+    <Compile Include="Controllers\SenderController.cs" />
     <Compile Include="MvcHelpers\ModelBinders\ClientModelBinder.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
     <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
@@ -346,6 +347,9 @@
     <Compile Include="Services\StateService.cs" />
     <Compile Include="Services\TransitService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="T4MVC\SenderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -382,8 +386,9 @@
     <Compile Include="ViewModels\Calculation\CalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
-    <Compile Include="ViewModels\ClientModel.cs" />
+    <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
+    <Compile Include="ViewModels\User\SenderModel.cs" />
     <Compile Include="ViewModels\User\UserList.cs" />
     <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
@@ -1514,6 +1519,8 @@
     <Content Include="Views\ApplicationList\ClientTemplate.cshtml" />
     <Content Include="Views\ApplicationList\ClientDetails.cshtml" />
     <Content Include="Views\Shared\DynamicScripts.cshtml" />
+    <Content Include="Views\Sender\Create.cshtml" />
+    <Content Include="Views\Sender\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

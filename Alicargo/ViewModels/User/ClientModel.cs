@@ -2,37 +2,29 @@
 using Alicargo.Core.Localization;
 using Resources;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.User
 {
 	public sealed class ClientModel
 	{
 		#region Contatct info
 
-		[Required]
-		[DataType(DataType.MultilineText)]
-		[DisplayNameLocalized(typeof(Entities), "Contacts")]
+		[Required, DataType(DataType.MultilineText), DisplayNameLocalized(typeof(Entities), "Contacts")]
 		public string Contacts { get; set; }
 
-		[DataType(DataType.PhoneNumber)]
-		[DisplayNameLocalized(typeof(Entities), "OfficePhone")]
+		[DataType(DataType.PhoneNumber), DisplayNameLocalized(typeof(Entities), "OfficePhone")]
 		public string Phone { get; set; }
 
-		[DataType(DataType.EmailAddress)]
-		[Required]
-		[MaxLength(320)]
-		[DisplayNameLocalized(typeof(Entities), "Email")]
+		[DataType(DataType.EmailAddress), Required, MaxLength(320), DisplayNameLocalized(typeof(Entities), "Email")]
 		public string Email { get; set; }
 
 		#endregion
 
 		#region Legal entry attributes
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "Nic")]
+		[Required, DisplayNameLocalized(typeof(Entities), "Nic")]
 		public string Nic { get; set; }
 
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
+		[Required, DisplayNameLocalized(typeof(Entities), "LegalEntity")]
 		public string LegalEntity { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "INN")]

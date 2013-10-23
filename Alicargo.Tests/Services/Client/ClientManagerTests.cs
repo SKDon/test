@@ -3,6 +3,7 @@ using Alicargo.Contracts.Exceptions;
 using Alicargo.Services.Client;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

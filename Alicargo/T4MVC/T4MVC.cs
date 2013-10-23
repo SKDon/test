@@ -39,6 +39,7 @@ public static class MVC
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
     public static Alicargo.Controllers.SenderApplicationController SenderApplication = new Alicargo.Controllers.T4MVC_SenderApplicationController();
     public static Alicargo.Controllers.SenderAwbController SenderAwb = new Alicargo.Controllers.T4MVC_SenderAwbController();
+    public static Alicargo.Controllers.SenderController Sender = new Alicargo.Controllers.T4MVC_SenderController();
     public static Alicargo.Controllers.TransitController Transit = new Alicargo.Controllers.T4MVC_TransitController();
     public static Alicargo.Controllers.UserController User = new Alicargo.Controllers.T4MVC_UserController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
