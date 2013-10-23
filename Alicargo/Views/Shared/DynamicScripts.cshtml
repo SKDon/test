@@ -1,0 +1,4 @@
+﻿@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
+@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
+@Scripts.RenderFormat("<script src=\"{0}?v=" + PathConstants.Version + "\"></script>", Url.Action(MVC.DynamicScript.States()))
+@Scripts.RenderFormat("<script src=\"{0}?v=" + PathConstants.Version + "\"></script>", Url.Action(MVC.DynamicScript.Urls()))

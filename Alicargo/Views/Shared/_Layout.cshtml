@@ -10,15 +10,15 @@
 		<title>Alicargo</title>
 		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		@Styles.Render(PathConstants.StylesPath)		
-		@Scripts.Render(PathConstants.ScriptsPath)
+		@Styles.Render(PathConstants.StylesPath)
+		@Scripts.Render(PathConstants.CommonJs)
 		@switch (UICulture)
 		{
 			case TwoLetterISOLanguageName.Russian:
-				@Scripts.Render(PathConstants.ScriptsPathRu)
+				@Scripts.Render(PathConstants.RuJs)
 				break;
 			case TwoLetterISOLanguageName.Italian:
-				@Scripts.Render(PathConstants.ScriptsPathIt)
+				@Scripts.Render(PathConstants.ItJs)
 				break;
 		}
 	</head>
@@ -39,6 +39,7 @@
 				</p>
 			</div>
 		</footer>
+		@Html.Partial("DynamicScripts")
 		@RenderSection("scripts", false)
 	</body>
 </html>

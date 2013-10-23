@@ -12,10 +12,6 @@
 	<script type="text/x-kendo-template" id="calculation-grid-details-template">
         @Html.Partial("Details")
 	</script>
-	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
-	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
-	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
-
 	@Scripts.Render("~/Scripts/app/Alicargo.js")
 	@Scripts.Render("~/scripts/app/calculation/admin/Columns.js")
 	@Scripts.Render("~/scripts/app/calculation/admin/Grid.js")	

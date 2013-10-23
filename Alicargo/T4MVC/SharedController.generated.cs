@@ -36,11 +36,13 @@ namespace T4MVC
             public class _ViewNamesClass
             {
                 public readonly string _Layout = "_Layout";
+                public readonly string DynamicScripts = "DynamicScripts";
                 public readonly string Error = "Error";
                 public readonly string Memu = "Memu";
                 public readonly string Message = "Message";
             }
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
+            public readonly string DynamicScripts = "~/Views/Shared/DynamicScripts.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
             public readonly string Memu = "~/Views/Shared/Memu.cshtml";
             public readonly string Message = "~/Views/Shared/Message.cshtml";

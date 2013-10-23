@@ -18,6 +18,7 @@ namespace Alicargo.Controllers
 			_stateConfig = stateConfig;
 		}
 
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual PartialViewResult Roles()
 		{
 			return PartialView();
@@ -41,6 +42,7 @@ namespace Alicargo.Controllers
 			return PartialView(urs);
 		}
 
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual PartialViewResult Localization()
 		{
 			return PartialView();
