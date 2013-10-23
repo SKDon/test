@@ -41,5 +41,4 @@
 
 		return $usr;
 	})($a.Users || {});
-
 });

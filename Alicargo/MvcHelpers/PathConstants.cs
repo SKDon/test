@@ -7,8 +7,12 @@ namespace Alicargo.MvcHelpers
 		public const string CommonJs = "~/js";
 		public const string RuJs = "~/js/ru";
 		public const string ItJs = "~/js/it";
-		public const string AwbGridJs = "~/js/awb-grid-js";
+		public const string AwbListJs = "~/js/awb-list-js";
 		public const string ApplicationListJs = "~/js/app-list-js";
+		public const string ClientListJs = "~/js/client-list-js";
+		public const string CalculationJs = "~/js/calc-js";
+		public const string ClientCalculationJs = "~/js/client-calc-js";
+		public const string UserListJs = "~/js/user-list-js";
 		public const string StylesPath = "~/css";
 
 		public static readonly string Version =

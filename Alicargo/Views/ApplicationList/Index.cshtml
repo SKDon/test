@@ -27,11 +27,5 @@
 
 @section scripts
 {
-	@Scripts.Render(Url.Action(MVC.DynamicScript.Roles()))
-	@Scripts.Render(Url.Action(MVC.DynamicScript.Localization()))
-	@Scripts.Render(Url.Action(MVC.DynamicScript.States()))
-	@Scripts.Render(Url.Action(MVC.DynamicScript.Urls()))
-	@Scripts.Render("~/Scripts/app/Alicargo.js")
-	@Scripts.Render("~/Scripts/app/Application/Columns.js")
-	@Scripts.Render("~/Scripts/app/Application/Grid.js")
+	@Scripts.Render(PathConstants.ApplicationListJs)
 }

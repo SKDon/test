@@ -1,20 +1,69 @@
 using System.Web.Optimization;
+using Alicargo.App_Start;
 using Alicargo.MvcHelpers;
+using WebActivatorEx;
 
-[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Alicargo.App_Start.BundleConfig), "RegisterBundles")]
+[assembly: PostApplicationStartMethod(typeof (BundleConfig), "RegisterBundles")]
 
 namespace Alicargo.App_Start
 {
-    internal class BundleConfig
+	internal class BundleConfig
 	{
-        public static void RegisterBundles()
+		public static void RegisterBundles()
+		{
+			RegisterCommon();
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ApplicationListJs)
+				.Include(
+					"~/Scripts/app/Alicargo.js",
+					"~/Scripts/app/Application/Columns.js",
+					"~/Scripts/app/Application/Grid.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.AwbListJs)
+				.Include(
+					"~/Scripts/app/Alicargo.js",
+					"~/Scripts/app/AirWaybill/Columns.js",
+					"~/Scripts/app/AirWaybill/Grid.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ClientListJs)
+				.Include(
+					"~/Scripts/app/Alicargo.js",
+					"~/Scripts/app/Client/Grid.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.UserListJs)
+				.Include(
+					"~/Scripts/app/Alicargo.js",
+					"~/Scripts/app/User/Grid.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.CalculationJs)
+				.Include(
+					"~/Scripts/app/Alicargo.js",
+					"~/scripts/app/calculation/admin/Columns.js",
+					"~/scripts/app/calculation/admin/Grid.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ClientCalculationJs)
+				.Include(
+					"~/Scripts/app/Alicargo.js",
+					"~/scripts/app/calculation/client/Columns.js",
+					"~/scripts/app/calculation/client/Grid.js"
+				));
+
+			BundleTable.EnableOptimizations = true;
+		}
+
+		private static void RegisterCommon()
 		{
 			BundleTable.Bundles.IgnoreList.Clear();
 			BundleTable.Bundles.IgnoreList.Ignore(".intellisense.js", OptimizationMode.Always);
 			BundleTable.Bundles.IgnoreList.Ignore("-vsdoc.js", OptimizationMode.Always);
 			BundleTable.Bundles.IgnoreList.Ignore(".debug.js", OptimizationMode.Always);
 
-			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPath)
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.CommonJs)
 				.Include(
 					"~/Scripts/jquery-{version}.js",
 					"~/Scripts/jquery-ui-{version}.js",
@@ -28,14 +77,14 @@ namespace Alicargo.App_Start
 					"~/Scripts/app/Common.js"
 				));
 
-			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPathRu)
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.RuJs)
 				.Include(
 					"~/Scripts/globalize/cultures/globalize.culture.ru.js",
 					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.ru.min.js",
 					"~/Scripts/app/ru.js"
 				));
 
-			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ScriptsPathIt)
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ItJs)
 				.Include(
 					"~/Scripts/globalize/cultures/globalize.culture.it.js",
 					"~/Scripts/kendo/2013.2.716/cultures/kendo.culture.it.min.js",
