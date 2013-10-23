@@ -1,6 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
-using Alicargo.Services.Client;
+using Alicargo.Services.Users.Client;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;

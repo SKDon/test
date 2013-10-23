@@ -30,6 +30,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -313,8 +315,8 @@
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationSenderManager.cs" />
     <Compile Include="Services\Calculation\CalculationPresenter.cs" />
-    <Compile Include="Services\Client\ClientPermissions.cs" />
-    <Compile Include="Services\Client\ClientPresenter.cs" />
+    <Compile Include="Services\Users\Client\ClientPermissions.cs" />
+    <Compile Include="Services\Users\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />
     <Compile Include="Services\Email\ApplicationAwbManagerWithMailing.cs" />
     <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
@@ -337,7 +339,7 @@
     <Compile Include="Services\Application\ApplicationGrouper.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CarrierService.cs" />
-    <Compile Include="Services\Client\ClientManager.cs" />
+    <Compile Include="Services\Users\Client\ClientManager.cs" />
     <Compile Include="Services\Email\MessageBuilder.cs" />
     <Compile Include="Services\Email\SilentMailSender.cs" />
     <Compile Include="Services\IdentityService.cs" />
@@ -346,7 +348,7 @@
     <Compile Include="Services\StateConfig.cs" />
     <Compile Include="Services\StateService.cs" />
     <Compile Include="Services\TransitService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\Users\UserService.cs" />
     <Compile Include="T4MVC\SenderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

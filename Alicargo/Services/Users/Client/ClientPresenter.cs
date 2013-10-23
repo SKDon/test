@@ -5,7 +5,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
-namespace Alicargo.Services.Client
+namespace Alicargo.Services.Users.Client
 {
 	internal sealed class ClientPresenter : IClientPresenter
 	{

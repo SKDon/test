@@ -2,7 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Services.Abstract;
 
-namespace Alicargo.Services.Client
+namespace Alicargo.Services.Users.Client
 {
     internal sealed class ClientPermissions : IClientPermissions
     {

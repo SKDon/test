@@ -57,6 +57,7 @@
     <Compile Include="Contracts\CalculationData.cs" />
     <Compile Include="Contracts\CarrierData.cs" />
     <Compile Include="Contracts\ClientData.cs" />
+    <Compile Include="Contracts\SenderData.cs" />
     <Compile Include="Contracts\VersionData.cs" />
     <Compile Include="Contracts\VersionedData.cs" />
     <Compile Include="Contracts\CountryData.cs" />

@@ -6,7 +6,7 @@ using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 
-namespace Alicargo.Services.Client
+namespace Alicargo.Services.Users.Client
 {
     internal sealed class ClientManager : IClientManager
     {

@@ -7,7 +7,7 @@ using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 
-namespace Alicargo.Services
+namespace Alicargo.Services.Users
 {
 	internal sealed class UserService : IUserService
 	{
