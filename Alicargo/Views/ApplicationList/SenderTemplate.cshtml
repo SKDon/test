@@ -1,11 +1,10 @@
-﻿@using Alicargo.Contracts.Enums
-@using Alicargo.MvcHelpers.Extensions
+﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @inherits BaseWebViewPage<ApplicationIndexModel>
 
 @helper EditButton()
 {
-	<a href="@Url.Action(MVC.Sender.ApplicationEdit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
+	<a href="@Url.Action(MVC.SenderApplication.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
 	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
 }
 

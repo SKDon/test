@@ -1490,9 +1490,9 @@
     <Content Include="Views\Broker\AWB.cshtml" />
     <Content Include="Views\Broker\EditorTemplates\AwbBrokerModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
-    <Content Include="Views\SenderApplication\ApplicationEdit.cshtml" />
+    <Content Include="Views\SenderApplication\Edit.cshtml" />
     <Content Include="Views\SenderApplication\EditorTemplates\ApplicationSenderModel.cshtml" />
-    <Content Include="Views\SenderApplication\ApplicationCreate.cshtml" />
+    <Content Include="Views\SenderApplication\Create.cshtml" />
     <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CurrencyModel.cshtml" />
     <Content Include="Views\Transit\EditByApplication.cshtml" />

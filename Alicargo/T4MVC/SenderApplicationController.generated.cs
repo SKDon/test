@@ -43,15 +43,15 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult ApplicationCreate()
+        public virtual System.Web.Mvc.ViewResult Create()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ApplicationCreate);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult ApplicationEdit()
+        public virtual System.Web.Mvc.ViewResult Edit()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ApplicationEdit);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -69,32 +69,32 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string ApplicationCreate = "ApplicationCreate";
-            public readonly string ApplicationEdit = "ApplicationEdit";
+            public readonly string Create = "Create";
+            public readonly string Edit = "Edit";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string ApplicationCreate = "ApplicationCreate";
-            public const string ApplicationEdit = "ApplicationEdit";
+            public const string Create = "Create";
+            public const string Edit = "Edit";
         }
 
 
-        static readonly ActionParamsClass_ApplicationCreate s_params_ApplicationCreate = new ActionParamsClass_ApplicationCreate();
+        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_ApplicationCreate ApplicationCreateParams { get { return s_params_ApplicationCreate; } }
+        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_ApplicationCreate
+        public class ActionParamsClass_Create
         {
             public readonly string id = "id";
             public readonly string model = "model";
         }
-        static readonly ActionParamsClass_ApplicationEdit s_params_ApplicationEdit = new ActionParamsClass_ApplicationEdit();
+        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_ApplicationEdit ApplicationEditParams { get { return s_params_ApplicationEdit; } }
+        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_ApplicationEdit
+        public class ActionParamsClass_Edit
         {
             public readonly string id = "id";
             public readonly string model = "model";
@@ -109,11 +109,11 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string ApplicationCreate = "ApplicationCreate";
-                public readonly string ApplicationEdit = "ApplicationEdit";
+                public readonly string Create = "Create";
+                public readonly string Edit = "Edit";
             }
-            public readonly string ApplicationCreate = "~/Views/SenderApplication/ApplicationCreate.cshtml";
-            public readonly string ApplicationEdit = "~/Views/SenderApplication/ApplicationEdit.cshtml";
+            public readonly string Create = "~/Views/SenderApplication/Create.cshtml";
+            public readonly string Edit = "~/Views/SenderApplication/Edit.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -129,45 +129,45 @@ namespace Alicargo.Controllers
     {
         public T4MVC_SenderApplicationController() : base(Dummy.Instance) { }
 
-        partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
-        public override System.Web.Mvc.ViewResult ApplicationCreate(long id)
+        public override System.Web.Mvc.ViewResult Create(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ApplicationCreate);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ApplicationCreateOverride(callInfo, id);
+            CreateOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderModel model);
 
-        public override System.Web.Mvc.ActionResult ApplicationCreate(long id, Alicargo.ViewModels.Application.ApplicationSenderModel model)
+        public override System.Web.Mvc.ActionResult Create(long id, Alicargo.ViewModels.Application.ApplicationSenderModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApplicationCreate);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ApplicationCreateOverride(callInfo, id, model);
+            CreateOverride(callInfo, id, model);
             return callInfo;
         }
 
-        partial void ApplicationEditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
-        public override System.Web.Mvc.ViewResult ApplicationEdit(long id)
+        public override System.Web.Mvc.ViewResult Edit(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ApplicationEdit);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ApplicationEditOverride(callInfo, id);
+            EditOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void ApplicationEditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.Application.ApplicationSenderModel model);
 
-        public override System.Web.Mvc.ActionResult ApplicationEdit(long id, Alicargo.ViewModels.Application.ApplicationSenderModel model)
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.Application.ApplicationSenderModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApplicationEdit);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ApplicationEditOverride(callInfo, id, model);
+            EditOverride(callInfo, id, model);
             return callInfo;
         }
 

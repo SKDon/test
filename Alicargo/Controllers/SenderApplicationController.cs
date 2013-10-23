@@ -34,7 +34,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet, Access(RoleType.Sender)]
-		public virtual ViewResult ApplicationCreate(long id)
+		public virtual ViewResult Create(long id)
 		{
 			var clientId = id;
 
@@ -44,7 +44,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost, Access(RoleType.Sender)]
-		public virtual ActionResult ApplicationCreate(long id, ApplicationSenderModel model)
+		public virtual ActionResult Create(long id, ApplicationSenderModel model)
 		{
 			var clientId = id;
 
@@ -70,7 +70,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet, Access(RoleType.Sender)]
-		public virtual ViewResult ApplicationEdit(long id)
+		public virtual ViewResult Edit(long id)
 		{
 			var model = _applicationSenderManager.Get(id);
 
@@ -80,7 +80,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost, Access(RoleType.Sender)]
-		public virtual ActionResult ApplicationEdit(long id, ApplicationSenderModel model)
+		public virtual ActionResult Edit(long id, ApplicationSenderModel model)
 		{
 			if (!ModelState.IsValid)
 			{
