@@ -209,10 +209,10 @@
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
-    <Compile Include="T4MVC\SenderAwbController.generated.cs">
+    <Compile Include="T4MVC\SenderApplicationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="T4MVC\SenderController.generated.cs">
+    <Compile Include="T4MVC\SenderAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\Calculation\CalculationService.cs" />
@@ -220,7 +220,7 @@
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
-    <Compile Include="Controllers\SenderController.cs" />
+    <Compile Include="Controllers\SenderApplicationController.cs" />
     <Compile Include="Controllers\TransitController.cs" />
     <Compile Include="MvcHelpers\StyleRelativePathTransform.cs" />
     <Compile Include="MvcHelpers\StyleRelativePathTransformBundle.cs" />
@@ -1490,9 +1490,9 @@
     <Content Include="Views\Broker\AWB.cshtml" />
     <Content Include="Views\Broker\EditorTemplates\AwbBrokerModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
-    <Content Include="Views\Sender\ApplicationEdit.cshtml" />
-    <Content Include="Views\Sender\EditorTemplates\ApplicationSenderModel.cshtml" />
-    <Content Include="Views\Sender\ApplicationCreate.cshtml" />
+    <Content Include="Views\SenderApplication\ApplicationEdit.cshtml" />
+    <Content Include="Views\SenderApplication\EditorTemplates\ApplicationSenderModel.cshtml" />
+    <Content Include="Views\SenderApplication\ApplicationCreate.cshtml" />
     <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CurrencyModel.cshtml" />
     <Content Include="Views\Transit\EditByApplication.cshtml" />

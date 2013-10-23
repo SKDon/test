@@ -22,10 +22,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace Alicargo.Controllers
 {
-    public partial class SenderController
+    public partial class SenderApplicationController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected SenderController(Dummy d) { }
+        protected SenderApplicationController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -55,13 +55,13 @@ namespace Alicargo.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SenderController Actions { get { return MVC.Sender; } }
+        public SenderApplicationController Actions { get { return MVC.SenderApplication; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Sender";
+        public readonly string Name = "SenderApplication";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Sender";
+        public const string NameConst = "SenderApplication";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -112,8 +112,8 @@ namespace Alicargo.Controllers
                 public readonly string ApplicationCreate = "ApplicationCreate";
                 public readonly string ApplicationEdit = "ApplicationEdit";
             }
-            public readonly string ApplicationCreate = "~/Views/Sender/ApplicationCreate.cshtml";
-            public readonly string ApplicationEdit = "~/Views/Sender/ApplicationEdit.cshtml";
+            public readonly string ApplicationCreate = "~/Views/SenderApplication/ApplicationCreate.cshtml";
+            public readonly string ApplicationEdit = "~/Views/SenderApplication/ApplicationEdit.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -125,9 +125,9 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_SenderController : Alicargo.Controllers.SenderController
+    public partial class T4MVC_SenderApplicationController : Alicargo.Controllers.SenderApplicationController
     {
-        public T4MVC_SenderController() : base(Dummy.Instance) { }
+        public T4MVC_SenderApplicationController() : base(Dummy.Instance) { }
 
         partial void ApplicationCreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 

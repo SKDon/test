@@ -11,7 +11,7 @@ using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Controllers
 {
-	public partial class SenderController : Controller
+	public partial class SenderApplicationController : Controller
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IApplicationSenderManager _applicationSenderManager;
@@ -19,7 +19,7 @@ namespace Alicargo.Controllers
 		private readonly IIdentityService _identity;
 		private readonly ISenderRepository _senders;
 
-		public SenderController(
+		public SenderApplicationController(
 			IApplicationSenderManager applicationSenderManager,
 			IClientRepository clientRepository, 
 			IIdentityService identity, 
