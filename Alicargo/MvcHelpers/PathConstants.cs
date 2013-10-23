@@ -14,6 +14,6 @@ namespace Alicargo.MvcHelpers
 		public static readonly string Version =
 			Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-		static PathConstants() { }
+		static PathConstants() {}
 	}
 }
