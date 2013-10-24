@@ -10,5 +10,6 @@
 		public const long TestTransitId = 1;
 		public const long TestCountryId = 1;
 		public const long TestApplicationId = 1;
+		public const long TestSenderId = 1;
 	}
 }

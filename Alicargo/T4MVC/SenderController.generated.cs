@@ -46,9 +46,9 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Edit()
+        public virtual System.Web.Mvc.ViewResult Edit()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -110,6 +110,13 @@ namespace Alicargo.Controllers
             }
             public readonly string Create = "~/Views/Sender/Create.cshtml";
             public readonly string Edit = "~/Views/Sender/Edit.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string SenderModel = "SenderModel";
+            }
         }
     }
 
@@ -118,40 +125,40 @@ namespace Alicargo.Controllers
     {
         public T4MVC_SenderController() : base(Dummy.Instance) { }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
-        public override System.Web.Mvc.ActionResult Create()
+        public override System.Web.Mvc.ViewResult Create()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
             CreateOverride(callInfo);
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
-        public override System.Web.Mvc.ActionResult Edit(long id)
+        public override System.Web.Mvc.ViewResult Edit(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             EditOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.SenderModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.ViewModels.User.SenderModel model);
 
-        public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.User.SenderModel model)
+        public override System.Web.Mvc.ViewResult Create(Alicargo.ViewModels.User.SenderModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             CreateOverride(callInfo, model);
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.User.SenderModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id, Alicargo.ViewModels.User.SenderModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.User.SenderModel model)
+        public override System.Web.Mvc.ViewResult Edit(long id, Alicargo.ViewModels.User.SenderModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             EditOverride(callInfo, id, model);
