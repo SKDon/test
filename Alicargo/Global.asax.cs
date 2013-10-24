@@ -54,7 +54,7 @@ namespace Alicargo
 
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-			BinderConfig.RegisterBinders(System.Web.Mvc.ModelBinders.Binders);
+			BinderConfig.RegisterBinders(ModelBinders.Binders);
 		}
 	}
 }
