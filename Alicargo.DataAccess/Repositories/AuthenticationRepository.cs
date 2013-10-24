@@ -12,12 +12,14 @@ namespace Alicargo.DataAccess.Repositories
 	{
 		private readonly AlicargoDataContext _context;
 		private readonly IPasswordConverter _converter;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public AuthenticationRepository(IUnitOfWork unitOfWork, IPasswordConverter converter)
+		public AuthenticationRepository(IUnitOfWork unitOfWork, IPasswordConverter converter, ISqlProcedureExecutor executor)
 		{
-			_context = (AlicargoDataContext) unitOfWork.Context;
+			_context = (AlicargoDataContext)unitOfWork.Context;
 
 			_converter = converter;
+			_executor = executor;
 		}
 
 		public bool IsInRole(RoleType role, long userId)
@@ -58,6 +60,19 @@ namespace Alicargo.DataAccess.Repositories
 								  .First();
 
 			return MapUser(enitity);
+		}
+
+		public void SetPassword(long userId, string password)
+		{
+			if (password == null)
+			{
+				throw new ArgumentNullException("password");
+			}
+
+			var salt = _converter.GenerateSalt();
+			var hash = _converter.GetPasswordHash(password, salt);
+
+			_executor.Execute("[dbo].[User_SetPassword]", new { userId, salt, hash });
 		}
 
 		public AuthenticationData GetByLogin(string login)

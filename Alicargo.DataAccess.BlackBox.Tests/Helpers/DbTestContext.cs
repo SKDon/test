@@ -17,22 +17,27 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 
         public IUnitOfWork UnitOfWork { get; private set; }
 
-        public DbTestContext()
+	    public SqlConnection Connection
+	    {
+		    get { return _connection; }
+	    }
+
+	    public DbTestContext()
         {
             Fixture = new Fixture();
 
             _connection = new SqlConnection(Settings.Default.MainConnectionString);
-            _connection.Open();
+            Connection.Open();
 
             _transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
 
-            UnitOfWork = new UnitOfWork(_connection);
+            UnitOfWork = new UnitOfWork(Connection);
         }
 
         public void Cleanup()
         {
             _transactionScope.Dispose();
-            _connection.Close();
+            Connection.Close();
         }
 
         public byte[] RandomBytes()

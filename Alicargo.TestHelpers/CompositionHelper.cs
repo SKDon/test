@@ -26,7 +26,7 @@ namespace Alicargo.TestHelpers
 			_transactionScope = new TransactionScope();
 			_unitOfWork = new UnitOfWork(_connection);
 
-			BindServices();
+			BindServices(connectionString);
 			BindIdentityService();			
 		}
 
@@ -46,11 +46,16 @@ namespace Alicargo.TestHelpers
 			Kernel.Rebind<IIdentityService>().ToConstant(identityService.Object).InSingletonScope();
 		}
 
-		private void BindServices()
+		private void BindServices(string connectionString)
 		{
 			CompositionRoot.BindDataAccess(Kernel, context => this);
 
 			Kernel.Rebind<IUnitOfWork>().ToConstant(_unitOfWork).InSingletonScope();
+
+			Kernel.Bind<ISqlProcedureExecutor>()
+				  .To<SqlProcedureExecutor>()
+				  .InSingletonScope()
+				  .WithConstructorArgument("connectionString", connectionString);
 
 			CompositionRoot.BindServices(Kernel);
 		}

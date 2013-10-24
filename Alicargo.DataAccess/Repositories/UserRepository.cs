@@ -95,15 +95,6 @@ namespace Alicargo.DataAccess.Repositories
 			}
 		}
 
-		public void UpdateSender(long id, string name, string login, string email, string newPassword)
-		{
-			var entity = _context.Senders.First(x => x.Id == id);
-			entity.Name = name;
-			entity.User.Login = login;
-			entity.Email = email;
-			SetNewPassword(newPassword, entity.User);
-		}
-
 		public void UpdateAdmin(long id, string name, string login, string email, string newPassword)
 		{
 			var entity = _context.Admins.First(x => x.Id == id);
@@ -144,16 +135,6 @@ namespace Alicargo.DataAccess.Repositories
 		public void AddBroker(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
 		{
 			_context.Brokers.InsertOnSubmit(new Broker
-			{
-				Name = name,
-				User = SetNewPassword(newPassword, new User { Login = login, TwoLetterISOLanguageName = twoLetterISOLanguageName }),
-				Email = email
-			});
-		}
-
-		public void AddSender(long id, string name, string login, string email, string newPassword, string twoLetterISOLanguageName)
-		{
-			_context.Senders.InsertOnSubmit(new Sender
 			{
 				Name = name,
 				User = SetNewPassword(newPassword, new User { Login = login, TwoLetterISOLanguageName = twoLetterISOLanguageName }),

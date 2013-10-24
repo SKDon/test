@@ -92,6 +92,7 @@
     <Compile Include="Helpers\ApplicationHelperTests.cs" />
     <Compile Include="Helpers\ApplicationRepositoryOrdererTests.cs" />
     <Compile Include="Helpers\DbTestContext.cs" />
+    <Compile Include="Repositories\SenderRepositoryTests.cs" />
     <Compile Include="Repositories\Tests.StateRepository.cs" />
     <Compile Include="Repositories\AwbRepositoryTests.cs" />
     <Compile Include="Repositories\BrockerRepositoryTests.cs" />

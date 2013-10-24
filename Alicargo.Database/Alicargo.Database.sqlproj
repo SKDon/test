@@ -87,6 +87,12 @@
     <Build Include="Stored procedures\Client_DeleteForce.sql" />
     <Build Include="Tables\Calculation.sql" />
     <Build Include="Stored procedures\Calculation_SetState.sql" />
+    <Build Include="Stored procedures\Sender_Add.sql" />
+    <Build Include="Stored procedures\User_SetPassword.sql" />
+    <Build Include="Stored procedures\Sender_Update.sql" />
+    <Build Include="Stored procedures\Sender_GetUserId.sql" />
+    <Build Include="Stored procedures\Sender_Get.sql" />
+    <Build Include="Stored procedures\User_Add.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="InitialData.sql" />

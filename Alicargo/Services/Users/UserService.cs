@@ -64,10 +64,6 @@ namespace Alicargo.Services.Users
 						model.Authentication.NewPassword);
 					break;
 
-				case RoleType.Sender:
-					_userRepository.UpdateSender(model.Id, model.Name, model.Authentication.Login, model.Email, model.Authentication.NewPassword);
-					break;
-
 				case RoleType.Broker:
 					_userRepository.UpdateBroker(model.Id, model.Name, model.Authentication.Login, model.Email, model.Authentication.NewPassword);
 					break;
@@ -92,11 +88,6 @@ namespace Alicargo.Services.Users
 			{
 				case RoleType.Admin:
 					_userRepository.AddAdmin(model.Id, model.Name, model.Authentication.Login, model.Email,
-						model.Authentication.NewPassword, twoLetterISOLanguageName);
-					break;
-
-				case RoleType.Sender:
-					_userRepository.AddSender(model.Id, model.Name, model.Authentication.Login, model.Email,
 						model.Authentication.NewPassword, twoLetterISOLanguageName);
 					break;
 

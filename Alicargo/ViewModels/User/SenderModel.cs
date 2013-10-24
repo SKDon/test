@@ -8,13 +8,13 @@ namespace Alicargo.ViewModels.User
 	{
 		public AuthenticationModel Authentication { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Pages), "Name")]
+		[Required, DisplayNameLocalized(typeof(Pages), "Name")]
 		public string Name { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Email"), DataType(DataType.EmailAddress), MaxLength(320)]
+		[Required, DisplayNameLocalized(typeof(Entities), "Email"), DataType(DataType.EmailAddress), MaxLength(320)]
 		public string Email { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "TariffOfTapePerBox")]
+		[Required, DisplayNameLocalized(typeof(Entities), "TariffOfTapePerBox"), Range(0, 1000)]
 		public decimal TariffOfTapePerBox { get; set; }
 	}
 }

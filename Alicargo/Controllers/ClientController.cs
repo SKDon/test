@@ -62,6 +62,8 @@ namespace Alicargo.Controllers
 			CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
+			if (!ModelState.IsValid) return View();
+
 			long clientId = 0;
 			var passwordDefined = !string.IsNullOrWhiteSpace(authenticationModel.NewPassword);
 			if (passwordDefined)
@@ -156,6 +158,8 @@ namespace Alicargo.Controllers
 			CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
+			if (!ModelState.IsValid) return View();
+
 			var client = _clientPresenter.GetCurrentClientData(id);
 
 			try
