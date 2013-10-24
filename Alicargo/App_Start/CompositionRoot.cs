@@ -6,6 +6,7 @@ using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
+using Alicargo.DataAccess.Repositories;
 using Alicargo.Services;
 using log4net;
 using Ninject;
@@ -60,7 +61,17 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				  .To<SqlProcedureExecutor>()
+				  .When(request => request.ParentRequest.Service == typeof (IAuthenticationRepository)
+								   || request.ParentRequest.Service == typeof (ISenderRepository))
 				  .InSingletonScope()
+				  .Named("MainDb")
+				  .WithConstructorArgument("connectionString", connectionString);
+
+			kernel.Bind<ISqlProcedureExecutor>()
+				  .To<SqlProcedureExecutor>()
+				  .WhenInjectedInto<ClientFileRepository>()
+				  .InSingletonScope()
+				  .Named("FilesDb")
 				  .WithConstructorArgument("connectionString", filesConnectionString);
 		}
 	}

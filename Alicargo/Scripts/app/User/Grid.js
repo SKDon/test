@@ -1,12 +1,12 @@
-﻿$(function () {
+﻿$(function() {
 	var $a = Alicargo;
 
-	$a.Users = (function ($usr) {
+	$a.Users = (function($usr) {
 
 		var $u = $a.Urls;
 		var $l = $a.Localization;
 
-		$usr.Init = function (role) {
+		$usr.Init = function(role) {
 			var dataSource = {
 				transport: {
 					read: {
@@ -28,10 +28,12 @@
 						command: [{
 							name: "custom-edit",
 							text: "",
-							click: function (e) {
+							click: function(e) {
 								var tr = $(e.target).closest("tr");
 								var data = this.dataItem(tr);
-								var url = $u.User_Edit + "/" + role + "/" + data.Id;
+								var url = role == "Sender"
+									? $u.Sender_Edit + "/" + data.Id
+									: $u.User_Edit + "/" + role + "/" + data.Id;
 								window.location = url;
 							}
 						}], title: "&nbsp;", width: $a.DefaultGridButtonWidth

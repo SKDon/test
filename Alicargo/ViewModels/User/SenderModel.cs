@@ -14,7 +14,7 @@ namespace Alicargo.ViewModels.User
 		[Required, DisplayNameLocalized(typeof(Entities), "Email"), DataType(DataType.EmailAddress), MaxLength(320)]
 		public string Email { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "TariffOfTapePerBox"), Range(0, 1000)]
+		[Required, DisplayNameLocalized(typeof(Entities), "TariffOfTapePerBox")]
 		public decimal TariffOfTapePerBox { get; set; }
 	}
 }

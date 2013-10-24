@@ -781,6 +781,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Тариф за скотч (€/коробка).
+        /// </summary>
+        public static string TariffOfTapePerBox {
+            get {
+                return ResourceManager.GetString("TariffOfTapePerBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тариф за кг (€).
         /// </summary>
         public static string TariffPerKg {

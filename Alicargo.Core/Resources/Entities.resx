@@ -423,4 +423,7 @@
   <data name="Class" xml:space="preserve">
     <value>Класс</value>
   </data>
+  <data name="TariffOfTapePerBox" xml:space="preserve">
+    <value>Тариф за скотч (€/коробка)</value>
+  </data>
 </root>

@@ -423,4 +423,7 @@
   <data name="Class" xml:space="preserve">
     <value>Classe</value>
   </data>
+  <data name="TariffOfTapePerBox" xml:space="preserve">
+    <value>Vota nastro (€/scatola)</value>
+  </data>
 </root>

@@ -8,7 +8,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class AuthenticationRepository : IAuthenticationRepository
+	public sealed class AuthenticationRepository : IAuthenticationRepository
 	{
 		private readonly AlicargoDataContext _context;
 		private readonly IPasswordConverter _converter;

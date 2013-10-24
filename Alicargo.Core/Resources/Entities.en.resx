@@ -423,4 +423,7 @@
   <data name="Class" xml:space="preserve">
     <value>Class</value>
   </data>
+  <data name="TariffOfTapePerBox" xml:space="preserve">
+    <value>Tariff for tape (€/box)</value>
+  </data>
 </root>

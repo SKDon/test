@@ -7,32 +7,33 @@
 		width: auto;
 	}
 </style>
-<h3>
-	@switch (Model)
-	{
-		case RoleType.Admin:
-			@Pages.Admins
-			break;
+<h3>@switch (Model)
+    {
+	    case RoleType.Admin:
+		    @Pages.Admins
+		    break;
 
-		case RoleType.Sender:
-			@Pages.Senders
-			break;
-		case RoleType.Broker:
-			@Pages.Brokers
-			break;
+	    case RoleType.Sender:
+		    @Pages.Senders
+		    break;
+	    case RoleType.Broker:
+		    @Pages.Brokers
+		    break;
 
-		case RoleType.Forwarder:
-			@Pages.Forwarders
-			break;
+	    case RoleType.Forwarder:
+		    @Pages.Forwarders
+		    break;
 
-		case RoleType.Client:
-			@Pages.Clients
-			break;
+	    case RoleType.Client:
+		    @Pages.Clients
+		    break;
 
-		default:
-			throw new ArgumentOutOfRangeException();
-	}
-	@Html.ActionLink(Pages.Add, MVC.User.Create(Model), new {@class = "btn btn-link"})
+	    default:
+		    throw new ArgumentOutOfRangeException();
+    }
+	@Html.ActionLink(Pages.Add, Model == RoleType.Sender
+		? MVC.Sender.Create()
+		: MVC.User.Create(Model), new {@class = "btn btn-link"})
 </h3>
 <div id="user-grid" class="grid"></div>
 @section scripts

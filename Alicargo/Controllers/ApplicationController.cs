@@ -98,9 +98,9 @@ namespace Alicargo.Controllers
 
 			ViewBag.ApplicationId = applicationId;
 
-			if (applicationId.HasValue && count.HasValue)
+			if (applicationId.HasValue)
 			{
-				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count.Value);
+				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count);
 			}
 
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();

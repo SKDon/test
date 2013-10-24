@@ -3,6 +3,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.User;
+using Resources;
 
 namespace Alicargo.Controllers
 {
@@ -32,6 +33,9 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin), HttpPost]
 		public virtual ActionResult Create(SenderModel model)
 		{
+			if (string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
+				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
+
 			if (!ModelState.IsValid) return View();
 
 			var id = _senders.Add(model);
