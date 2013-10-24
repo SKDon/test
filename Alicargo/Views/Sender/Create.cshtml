@@ -1,1 +1,8 @@
-﻿
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model ApplicationSenderModel
+
+<h1>
+	@Pages.SenderAdd
+</h1>
+@Html.EditPage(Url.Action(MVC.Sender.Create()), Pages.Save)

@@ -1,5 +1,5 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
-@model Alicargo.ViewModels.User.UserModel
+@model Alicargo.ViewModels.User.SenderModel
 
 <div class="row">
 	<div class="span4">
@@ -7,6 +7,9 @@
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Email)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.TariffOfTapePerBox)
 	</div>
 </div>
 @Html.EditorFor(x => x.Authentication)

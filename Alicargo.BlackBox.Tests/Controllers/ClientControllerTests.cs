@@ -1,6 +1,5 @@
 ﻿using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers;
-using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
@@ -13,8 +12,6 @@ namespace Alicargo.BlackBox.Tests.Controllers
 	[TestClass]
 	public class ClientControllerTests
 	{
-		private AlicargoDataContext _db;
-
 		private ClientController _controller;
 		private CompositionHelper _composition;
 		private MockContainer _mock;
@@ -22,8 +19,6 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
-
 			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
 			_mock = new MockContainer();
 			_controller = _composition.Kernel.Get<ClientController>();

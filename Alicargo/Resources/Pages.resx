@@ -291,4 +291,7 @@
   <data name="Report" xml:space="preserve">
     <value>Отчет</value>
   </data>
+  <data name="SenderAdd" xml:space="preserve">
+    <value>Добавить отправителя</value>
+  </data>
 </root>

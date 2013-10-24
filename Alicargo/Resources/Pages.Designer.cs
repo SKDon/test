@@ -475,6 +475,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить отправителя.
+        /// </summary>
+        public static string SenderAdd {
+            get {
+                return ResourceManager.GetString("SenderAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отправители.
         /// </summary>
         public static string Senders {

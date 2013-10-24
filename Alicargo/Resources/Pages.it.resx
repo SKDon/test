@@ -291,4 +291,7 @@
   <data name="Report" xml:space="preserve">
     <value>Segnalare</value>
   </data>
+  <data name="SenderAdd" xml:space="preserve">
+    <value>Aggiungi mittente</value>
+  </data>
 </root>
