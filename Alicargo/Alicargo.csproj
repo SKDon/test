@@ -317,7 +317,7 @@
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationSenderManager.cs" />
-    <Compile Include="Services\Calculation\AdminAdminCalculationPresenter.cs" />
+    <Compile Include="Services\Calculation\AdminCalculationPresenter.cs" />
     <Compile Include="Services\Users\Client\ClientPermissions.cs" />
     <Compile Include="Services\Users\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />

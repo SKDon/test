@@ -10,14 +10,14 @@ using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Calculation
 {
-	public sealed class AdminAdminCalculationPresenter : IAdminCalculationPresenter
+	public sealed class AdminCalculationPresenter : IAdminCalculationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
 		private readonly ISenderRepository _senders;
 		private readonly IClientRepository _clientRepository;
 
-		public AdminAdminCalculationPresenter(
+		public AdminCalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IAwbRepository awbRepository,
 			ISenderRepository senders,
@@ -167,8 +167,6 @@ namespace Alicargo.Services.Calculation
 				ClassId = (ClassType?)a.ClassId
 			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
 		}
-
-
 
 		private static void AddMissedGroups(IList<AirWaybillData> awbs, IList<CalculationGroup> groups)
 		{
