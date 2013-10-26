@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Alicargo.ViewModels.Calculation
+namespace Alicargo.ViewModels.Calculation.Admin
 {
 	public sealed class CalculationGroup
 	{

@@ -6,6 +6,7 @@ using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
+using Alicargo.ViewModels.Calculation.Client;
 using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Calculation

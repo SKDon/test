@@ -1,4 +1,4 @@
-﻿namespace Alicargo.ViewModels.Calculation
+﻿namespace Alicargo.ViewModels.Calculation.Admin
 {
 	public sealed class CalculationAwbInfo
 	{

@@ -11,11 +11,11 @@ namespace Alicargo.Controllers
 		private readonly IApplicationManager _applicationManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly ICalculationService _calculation;
-		private readonly ICalculationPresenter _presenter;
+		private readonly IAdminCalculationPresenter _presenter;
 
 		public CalculationController(
 			IAwbUpdateManager awbUpdateManager,
-			ICalculationPresenter presenter,
+			IAdminCalculationPresenter presenter,
 			ICalculationService calculation,
 			IApplicationManager applicationManager)
 		{

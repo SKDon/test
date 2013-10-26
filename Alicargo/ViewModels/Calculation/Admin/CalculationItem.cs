@@ -1,6 +1,6 @@
 ﻿using Alicargo.Core.Enums;
 
-namespace Alicargo.ViewModels.Calculation
+namespace Alicargo.ViewModels.Calculation.Admin
 {
 	public sealed class CalculationItem
 	{

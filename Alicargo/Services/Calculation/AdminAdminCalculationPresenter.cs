@@ -5,18 +5,19 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
+using Alicargo.ViewModels.Calculation.Admin;
 using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Calculation
 {
-	public sealed class CalculationPresenter : ICalculationPresenter
+	public sealed class AdminAdminCalculationPresenter : IAdminCalculationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
 		private readonly ISenderRepository _senders;
 		private readonly IClientRepository _clientRepository;
 
-		public CalculationPresenter(
+		public AdminAdminCalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IAwbRepository awbRepository,
 			ISenderRepository senders,
