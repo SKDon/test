@@ -31,6 +31,8 @@ namespace Alicargo.Services.Application
 
 		public ApplicationSenderModel Get(long id)
 		{
+			// todo: 2. check permissions to the application for a sender
+
 			var application = _applications.Get(id);
 
 			var model = GetModel(application);
@@ -40,6 +42,8 @@ namespace Alicargo.Services.Application
 
 		public void Update(long id, ApplicationSenderModel model)
 		{
+			// todo: 2. check permissions to the application for a sender
+
 			var applicationData = _applications.Get(id);
 
 			Map(model, applicationData);
