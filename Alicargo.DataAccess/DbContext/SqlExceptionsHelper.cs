@@ -8,7 +8,11 @@ namespace Alicargo.DataAccess.DbContext
 	{
 		public static void Action(Action action)
 		{
-			Action(() => action);
+			Action(() =>
+			{
+				action();
+				return (object)null;
+			});
 		}
 
 		public static T Action<T>(Func<T> action)

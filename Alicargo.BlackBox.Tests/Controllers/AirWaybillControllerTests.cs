@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Data.Linq;
+using System.Data.SqlClient;
 using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Controllers;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;
-using EmitMapper;
+using Dapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
@@ -21,9 +23,9 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private const long FirstStateId = 7;
 		private const long DefaultStateId = 1;
 
-		private AlicargoDataContext _db;
 		private CompositionHelper _composition;
 		private AirWaybillController _controller;
+		private AlicargoDataContext _db;
 		private MockContainer _mock;
 
 		[TestInitialize]
@@ -56,26 +58,22 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			_controller.Edit(entity.Id, model);
 
-			_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
+			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			{
+				var actual = connection.Query<AwbAdminModel>(
+					"select *, GTDFileData as GTDFile, GTDAdditionalFileData as GTDAdditionalFile, PackingFileData as PackingFile," +
+					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile " +
+					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
-			var actual = Map(entity);
+				var actualData = connection.Query<AirWaybillData>(
+					"select * " +
+					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
-			model.ShouldBeEquivalentTo(actual);
-		}
+				actual.DateOfDepartureLocalString = actualData.DateOfDeparture.ToLocalShortDateString();
+				actual.DateOfArrivalLocalString = actualData.DateOfArrival.ToLocalShortDateString();
 
-		private static AwbAdminModel Map(AirWaybill entity)
-		{
-			var actual = ObjectMapperManager.DefaultInstance.GetMapper<AirWaybill, AwbAdminModel>().Map(entity);
-
-			actual.DateOfDepartureLocalString = entity.DateOfDeparture.ToLocalShortDateString();
-			actual.DateOfArrivalLocalString = entity.DateOfArrival.ToLocalShortDateString();
-			actual.GTDFile = entity.GTDFileData.ToArray();
-			actual.GTDAdditionalFile = entity.GTDAdditionalFileData.ToArray();
-			actual.PackingFile = entity.PackingFileData.ToArray();
-			actual.InvoiceFile = entity.InvoiceFileData.ToArray();
-			actual.AWBFile = entity.AWBFileData.ToArray();
-
-			return actual;
+				model.ShouldBeEquivalentTo(actual);
+			}
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -98,9 +96,22 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			var entity = _db.AirWaybills.Skip(count).Take(1).First();
 
-			var actual = Map(entity);
+			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			{
+				var actual = connection.Query<AwbAdminModel>(
+					"select *, GTDFileData as GTDFile, GTDAdditionalFileData as GTDAdditionalFile, PackingFileData as PackingFile," +
+					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile " +
+					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
-			model.ShouldBeEquivalentTo(actual);
+				var actualData = connection.Query<AirWaybillData>(
+					"select * " +
+					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
+
+				actual.DateOfDepartureLocalString = actualData.DateOfDeparture.ToLocalShortDateString();
+				actual.DateOfArrivalLocalString = actualData.DateOfArrival.ToLocalShortDateString();
+
+				model.ShouldBeEquivalentTo(actual);
+			}
 
 			_db.Refresh(RefreshMode.OverwriteCurrentValues, applicationData);
 			Assert.AreEqual(FirstStateId, applicationData.StateId);
