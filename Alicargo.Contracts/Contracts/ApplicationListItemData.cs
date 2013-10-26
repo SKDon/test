@@ -102,11 +102,13 @@ namespace Alicargo.Contracts.Contracts
 
 		public decimal? ScotchCost { get; set; }
 
+		public decimal? SenderScotchCost { get; set; }
+
 		public decimal? TariffPerKg { get; set; }
 
 		public decimal? TransitCost { get; set; }
 
-		public decimal? WithdrawCost { get; set; }
+		public decimal? WithdrawCost { get; set; }		
 
 		#endregion
 	}

@@ -221,6 +221,7 @@ namespace Alicargo.DataAccess.Repositories
 				AirWaybillId = x.AirWaybillId,
 				FactureCost = x.FactureCostEdited ?? x.FactureCost,
 				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
+				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,
 				WithdrawCost = x.WithdrawCostEdited ?? x.WithdrawCost

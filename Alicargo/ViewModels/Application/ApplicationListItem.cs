@@ -171,6 +171,8 @@ namespace Alicargo.ViewModels.Application
 
 		public decimal? ScotchCost { get; set; }
 
+		public decimal? SenderScotchCost { get; set; }
+
 		public decimal? TariffPerKg { get; set; }
 
 		public decimal? TransitCost { get; set; }
@@ -185,6 +187,6 @@ namespace Alicargo.ViewModels.Application
 
 		public bool CanClose { get; set; }
 
-		public bool CanSetState { get; set; }
+		public bool CanSetState { get; set; }		
 	}
 }

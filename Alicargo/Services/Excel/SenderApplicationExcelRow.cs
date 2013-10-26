@@ -161,7 +161,7 @@ namespace Alicargo.Services.Excel
 		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
 		public decimal? ScotchCost
 		{
-			get { return _application.ScotchCost; } // todo: !!! write only sender tape cost
+			get { return _application.SenderScotchCost; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "WithdrawCost")]

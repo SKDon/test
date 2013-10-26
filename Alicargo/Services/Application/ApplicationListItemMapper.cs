@@ -89,6 +89,7 @@ namespace Alicargo.Services.Application
 					WithdrawCost = x.WithdrawCost,
 					FactureCost = x.FactureCost,
 					ScotchCost = x.ScotchCost,
+					SenderScotchCost = x.SenderScotchCost,
 					TariffPerKg = x.TariffPerKg,
 					TransitCost = x.TransitCost
 				}).ToArray();
