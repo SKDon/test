@@ -119,7 +119,7 @@ namespace Alicargo.DataAccess.Repositories
 						   .ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 
-		public static void CopyTo(ClientData @from, Client to)
+		private static void CopyTo(ClientData @from, Client to)
 		{
 			to.Email = @from.Email;
 			to.LegalEntity = @from.LegalEntity;

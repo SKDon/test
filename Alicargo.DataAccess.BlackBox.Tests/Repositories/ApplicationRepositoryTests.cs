@@ -113,6 +113,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var application = _context.Fixture
 				.Build<ApplicationData>()
+				.Without(x => x.Id)
 				.With(x => x.ClientId, TestConstants.TestClientId1)
 				.With(x => x.TransitId, TestConstants.TestTransitId)
 				.With(x => x.StateId, TestConstants.DefaultStateId)
