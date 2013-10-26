@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Exceptions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.User;
@@ -38,9 +39,17 @@ namespace Alicargo.Controllers
 
 			if (!ModelState.IsValid) return View();
 
-			var id = _senders.Add(model);
+			try
+			{
+				var id = _senders.Add(model);
 
-			return RedirectToAction(MVC.Sender.Edit(id));
+				return RedirectToAction(MVC.Sender.Edit(id));
+			}
+			catch (DublicateException)
+			{
+				ModelState.AddModelError("Login", Validation.LoginExists);
+				return View();
+			}
 		}
 
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
@@ -48,9 +57,17 @@ namespace Alicargo.Controllers
 		{
 			if (!ModelState.IsValid) return View();
 
-			_senders.Update(id, model);
+			try
+			{
+				_senders.Update(id, model);
 
-			return RedirectToAction(MVC.Sender.Edit(id));
+				return RedirectToAction(MVC.Sender.Edit(id));
+			}
+			catch (DublicateException)
+			{
+				ModelState.AddModelError("Login", Validation.LoginExists);
+				return View();
+			}
 		}
 	}
 }
