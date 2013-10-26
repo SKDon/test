@@ -3,7 +3,7 @@ using Alicargo.App_Start;
 using Alicargo.MvcHelpers;
 using WebActivatorEx;
 
-[assembly: PostApplicationStartMethod(typeof (BundleConfig), "RegisterBundles")]
+[assembly: PostApplicationStartMethod(typeof(BundleConfig), "RegisterBundles")]
 
 namespace Alicargo.App_Start
 {
@@ -51,6 +51,13 @@ namespace Alicargo.App_Start
 					"~/Scripts/app/Alicargo.js",
 					"~/scripts/app/calculation/client/Columns.js",
 					"~/scripts/app/calculation/client/Grid.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.SenderCalculationJs)
+				.Include(
+					"~/Scripts/app/Alicargo.js",
+					"~/scripts/app/calculation/sender/Columns.js",
+					"~/scripts/app/calculation/sender/Grid.js"
 				));
 
 			BundleTable.EnableOptimizations = true;

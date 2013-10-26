@@ -12,6 +12,7 @@ namespace Alicargo.MvcHelpers
 		public const string ClientListJs = "~/js/client-list-js";
 		public const string CalculationJs = "~/js/calc-js";
 		public const string ClientCalculationJs = "~/js/client-calc-js";
+		public const string SenderCalculationJs = "~/js/sender-calc-js";
 		public const string UserListJs = "~/js/user-list-js";
 		public const string StylesPath = "~/css";
 
@@ -19,5 +20,6 @@ namespace Alicargo.MvcHelpers
 			Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 		static PathConstants() {}
+		
 	}
 }
