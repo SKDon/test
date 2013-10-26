@@ -25,7 +25,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long? GetByUserId(long userId)
 		{
-			return _context.Senders.Where(x => x.UserId == userId).Select(x => x.Id).FirstOrDefault();
+			return _context.Senders.Where(x => x.UserId == userId).Select(x => (long?)x.Id).FirstOrDefault();
 		}
 
 		public SenderData Get(long id)

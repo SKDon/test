@@ -71,5 +71,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			actual.ShouldBeEquivalentTo(data);
 		}
+
+		[TestMethod]
+		public void Test_GetByUserId()
+		{
+			var id = _repository.GetByUserId(-1);
+
+			Assert.IsNull(id);
+		}
 	}
 }
