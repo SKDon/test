@@ -1,10 +1,9 @@
-﻿using Alicargo.ViewModels.Calculation;
-using Alicargo.ViewModels.Calculation.Client;
+﻿using Alicargo.ViewModels.Calculation.Sender;
 
 namespace Alicargo.Services.Abstract
 {
 	public interface ISenderCalculationPresenter
 	{
-		ClientCalculationListCollection List(long clientId, int take, long skip);
+		SenderCalculationListCollection List(long senderId, int take, long skip);
 	}
 }

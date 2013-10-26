@@ -15,15 +15,18 @@ namespace Alicargo.Services.Calculation
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
+		private readonly IStateService _stateService;
 		private readonly IClientRepository _clientRepository;
 
 		public ClientCalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IAwbRepository awbRepository,
+			IStateService stateService,
 			IClientRepository clientRepository)
 		{
 			_applicationRepository = applicationRepository;
 			_awbRepository = awbRepository;
+			_stateService = stateService;
 			_clientRepository = clientRepository;
 		}
 
@@ -52,7 +55,9 @@ namespace Alicargo.Services.Calculation
 
 		private ApplicationListItemData[] GetCalculatedApplicationsWithAwb(long clientId, int take, long skip, out long total)
 		{
-			var applications = _applicationRepository.List(clientId: clientId)
+			var stateIds = _stateService.GetVisibleStates();
+
+			var applications = _applicationRepository.List(clientId: clientId, stateIds: stateIds)
 													 .OrderBy(x => x.AirWaybillId)
 													 .ThenByDescending(x => x.Id)
 													 .ToArray();
@@ -87,7 +92,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var nics = _clientRepository.GetNicByApplications(appIds);
-			var ranks = awbsData.Select((pair, i) => new {pair.Id, Rank = i}).ToDictionary(x => x.Id, x => x.Rank);
+			var ranks = awbsData.Select((pair, i) => new { pair.Id, Rank = i }).ToDictionary(x => x.Id, x => x.Rank);
 
 			return applications.Select(a => new ClientCalculationItem
 			{
@@ -111,7 +116,7 @@ namespace Alicargo.Services.Calculation
 				Profit = CalculationHelper.GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
 				ClassName = a.ClassId.HasValue
-					? ((ClassType) a.ClassId.Value).ToLocalString()
+					? ((ClassType)a.ClassId.Value).ToLocalString()
 					: ""
 			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
 		}

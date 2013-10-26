@@ -158,7 +158,7 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		public ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null,
-			Order[] orders = null, long? clientId = null)
+			Order[] orders = null, long? clientId = null, long? senderId = null)
 		{
 			var applications = stateIds != null && stateIds.Length > 0
 				? _context.Applications.Where(x => stateIds.Contains(x.StateId))
@@ -167,6 +167,11 @@ namespace Alicargo.DataAccess.Repositories
 			if (clientId.HasValue)
 			{
 				applications = applications.Where(x => x.ClientId == clientId.Value);
+			}
+
+			if (senderId.HasValue)
+			{
+				applications = applications.Where(x => x.SenderId == senderId.Value);
 			}
 
 			applications = _orderer.Order(applications, orders).Skip(skip);

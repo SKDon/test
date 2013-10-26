@@ -382,6 +382,9 @@
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationListCollection.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationItem.cs" />
+    <Compile Include="ViewModels\Calculation\Sender\ClientCalculationGroup.cs" />
+    <Compile Include="ViewModels\Calculation\Sender\ClientCalculationItem.cs" />
+    <Compile Include="ViewModels\Calculation\Sender\ClientCalculationListCollection.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Helpers\ApplicationHelper.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
