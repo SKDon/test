@@ -294,4 +294,7 @@
   <data name="SenderAdd" xml:space="preserve">
     <value>Добавить отправителя</value>
   </data>
+  <data name="SenderEdit" xml:space="preserve">
+    <value>Редактировать отправителя</value>
+  </data>
 </root>

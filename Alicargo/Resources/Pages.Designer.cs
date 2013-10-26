@@ -484,6 +484,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Редактировать отправителя.
+        /// </summary>
+        public static string SenderEdit {
+            get {
+                return ResourceManager.GetString("SenderEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отправители.
         /// </summary>
         public static string Senders {

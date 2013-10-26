@@ -45,9 +45,10 @@ namespace Alicargo.Controllers
 
 				return RedirectToAction(MVC.Sender.Edit(id));
 			}
-			catch (DublicateException)
+			catch (DublicateLoginException)
 			{
-				ModelState.AddModelError("Login", Validation.LoginExists);
+				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
+
 				return View();
 			}
 		}
@@ -63,9 +64,10 @@ namespace Alicargo.Controllers
 
 				return RedirectToAction(MVC.Sender.Edit(id));
 			}
-			catch (DublicateException)
+			catch (DublicateLoginException)
 			{
-				ModelState.AddModelError("Login", Validation.LoginExists);
+				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
+
 				return View();
 			}
 		}

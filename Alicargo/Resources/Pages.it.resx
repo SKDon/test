@@ -294,4 +294,7 @@
   <data name="SenderAdd" xml:space="preserve">
     <value>Aggiungi mittente</value>
   </data>
+  <data name="SenderEdit" xml:space="preserve">
+    <value>Modificare il mittente</value>
+  </data>
 </root>
