@@ -16,22 +16,24 @@ namespace Alicargo.Controllers
 		private readonly IApplicationListPresenter _applicationPresenter;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IClientRepository _clients;
-		private readonly IStateConfig _stateConfig;
 		private readonly IIdentityService _identity;
+		private readonly ISenderRepository _senders;
+		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListController(IApplicationListPresenter applicationPresenter,
-										 IClientRepository clients, IAwbRepository awbRepository,
-										 IStateConfig stateConfig, IIdentityService identity)
+			IClientRepository clients, ISenderRepository senders, IAwbRepository awbRepository,
+			IStateConfig stateConfig, IIdentityService identity)
 		{
 			_applicationPresenter = applicationPresenter;
 			_clients = clients;
+			_senders = senders;
 			_awbRepository = awbRepository;
 			_stateConfig = stateConfig;
 			_identity = identity;
 		}
 
-		[HttpPost, Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[HttpPost, Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender),
+		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip, int page, int pageSize, Dictionary<string, string>[] group)
 		{
 			// todo: 3. use model binder for Order
@@ -41,7 +43,11 @@ namespace Alicargo.Controllers
 
 			var client = _clients.GetByUserId(_identity.Id.Value);
 
-			var data = _applicationPresenter.List(take, skip, orders, client != null ? client.Id : (long?)null);
+			var senderId = _senders.GetByUserId(_identity.Id.Value);
+
+			var data = _applicationPresenter.List(take, skip, orders, client != null
+				? client.Id
+				: (long?)null, senderId);
 
 			return Json(data);
 		}
@@ -50,8 +56,8 @@ namespace Alicargo.Controllers
 		public virtual ViewResult Index()
 		{
 			var clients = _clients.GetAll()
-										   .OrderBy(x => x.Nic)
-										   .ToDictionary(x => x.Id, x => x.Nic);
+								  .OrderBy(x => x.Nic)
+								  .ToDictionary(x => x.Id, x => x.Nic);
 
 			var model = new ApplicationIndexModel
 			{

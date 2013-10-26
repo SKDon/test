@@ -10,11 +10,11 @@ namespace Alicargo.Controllers
 {
 	public partial class SenderCalculationController : Controller
 	{
-		private readonly IClientCalculationPresenter _presenter;
+		private readonly ISenderCalculationPresenter _presenter;
 		private readonly ISenderRepository _senders;
 		private readonly IIdentityService _identity;
 
-		public SenderCalculationController(IClientCalculationPresenter presenter, ISenderRepository senders, IIdentityService identity)
+		public SenderCalculationController(ISenderCalculationPresenter presenter, ISenderRepository senders, IIdentityService identity)
 		{
 			_presenter = presenter;
 			_senders = senders;

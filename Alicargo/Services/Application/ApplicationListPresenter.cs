@@ -26,13 +26,13 @@ namespace Alicargo.Services.Application
             _grouper = grouper;
         }
 
-		public ApplicationListCollection List(int? take = null, int skip = 0, Order[] groups = null, long? clientId = null)
+		public ApplicationListCollection List(int? take = null, int skip = 0, Order[] groups = null, long? clientId = null, long? senderId = null)
         {
             var stateIds = _stateService.GetVisibleStates();
 
             var orders = PrepareOrders(groups);
 
-			var data = _applications.List(take, skip, stateIds, orders, clientId);
+			var data = _applications.List(take, skip, stateIds, orders, clientId, senderId);
 
             var applications = _itemMapper.Map(data);
 
