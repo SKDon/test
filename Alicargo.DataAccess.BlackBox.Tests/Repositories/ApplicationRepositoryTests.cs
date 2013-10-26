@@ -82,6 +82,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var newData = _context.Fixture.Create<ApplicationData>();
 			newData.Id = old.Id;
 			newData.StateId = old.StateId;
+			newData.SenderId = TestConstants.TestSenderId;
 			newData.ClientId = old.ClientId;
 			newData.TransitId = old.TransitId;
 			newData.AirWaybillId = old.AirWaybillId;
@@ -114,6 +115,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var application = _context.Fixture
 				.Build<ApplicationData>()
 				.Without(x => x.Id)
+				.Without(x => x.SenderId)
 				.With(x => x.ClientId, TestConstants.TestClientId1)
 				.With(x => x.TransitId, TestConstants.TestTransitId)
 				.With(x => x.StateId, TestConstants.DefaultStateId)

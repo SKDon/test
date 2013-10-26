@@ -61,6 +61,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		public void Test_Edit_Post()
 		{
 			var model = _fixture.Create<ApplicationAdminModel>();
+			model.SenderId = null;
 			var transitModel = _fixture.Create<TransitEditModel>();
 			var newCarrierName = _fixture.Create<string>();
 			var old = _applicationRepository.List(1).First();
@@ -81,6 +82,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		{
 			var clientData = _clientRepository.Get(TestConstants.TestClientId1).First();
 			var model = _fixture.Create<ApplicationAdminModel>();
+			model.SenderId = null;
 			var transitModel = _fixture.Create<TransitEditModel>();
 			var newCarrierName = _fixture.Create<string>();
 
