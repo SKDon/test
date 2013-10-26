@@ -35,6 +35,13 @@ namespace Alicargo.DataAccess.DbContext
 						  .FirstOrDefault());
 		}
 
+		public T[] Array<T>(string sql, object param = null, IDbTransaction transaction = null)
+		{
+			return Action(_connectionString, connection =>
+				connection.Query<T>(sql, param, transaction, commandType: CommandType.StoredProcedure)
+						  .ToArray());
+		}
+
 		public void Execute(string sql, object param = null, IDbTransaction transaction = null)
 		{
 			Action(_connectionString, connection =>

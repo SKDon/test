@@ -75,6 +75,7 @@
     <Compile Include="Helpers\FileDataHelper.cs" />
     <Compile Include="Helpers\IApplicationRepositoryOrderer.cs" />
     <Compile Include="DbContext\SqlProcedureExecutor.cs" />
+    <Compile Include="Helpers\TableParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationUpdateRepository.cs" />
