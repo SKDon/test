@@ -31,24 +31,7 @@ namespace Alicargo.DataAccess.DbContext
 
 		public void SaveChanges()
 		{
-			try
-			{
-				_context.SubmitChanges(ConflictMode.FailOnFirstConflict);
-			}
-			catch (System.Data.SqlClient.SqlException exception)
-			{
-				if (exception.Number == (int)SqlError.CannotInsertDuplicateKeyRow)
-				{
-					if (exception.Message.Contains("IX_User_Login"))
-					{
-						throw new DublicateLoginException("The login is occupied", exception);
-					}
-
-					throw new DublicateException("Failed to add dublicate entity", exception);
-				}
-
-				throw;
-			}
+			SqlExceptionsHelper.Action(() => _context.SubmitChanges(ConflictMode.FailOnFirstConflict));			
 		}
 
 		public void Dispose()
