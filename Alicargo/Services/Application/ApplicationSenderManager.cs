@@ -99,7 +99,6 @@ namespace Alicargo.Services.Application
 			to.Volume = @from.Volume;
 			to.FactureCost = @from.FactureCost;
 			to.WithdrawCost = from.WithdrawCost;
-			to.ScotchCost = from.ScotchCost;
 			to.CountryId = from.CountryId;
 		}
 
@@ -125,7 +124,6 @@ namespace Alicargo.Services.Application
 				},
 				Volume = application.Volume,
 				FactureCost = application.FactureCost,
-				ScotchCost = application.ScotchCost,
 				WithdrawCost = application.WithdrawCost,
 				CountryId = application.CountryId
 			};

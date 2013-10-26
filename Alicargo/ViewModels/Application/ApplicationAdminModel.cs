@@ -105,9 +105,6 @@ namespace Alicargo.ViewModels.Application
 		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public MethodOfDelivery MethodOfDelivery { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
-		public decimal? ScotchCost { get; set; }
-
 		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
 		public decimal? FactureCost { get; set; }
 

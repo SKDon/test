@@ -153,7 +153,6 @@ namespace Alicargo.DataAccess.Repositories
 			to.Invoice = @from.Invoice;
 
 			to.FactureCost = @from.FactureCost;
-			to.ScotchCost = @from.ScotchCost;
 			to.TariffPerKg = @from.TariffPerKg;
 			to.TransitCost = @from.TransitCost;
 			to.WithdrawCost = @from.WithdrawCost;

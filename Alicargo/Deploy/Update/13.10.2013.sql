@@ -132,7 +132,6 @@ CREATE TABLE [dbo].[tmp_ms_xx_Application] (
     [FactoryEmail]         NVARCHAR (320)     NULL,
     [MarkName]             NVARCHAR (320)     NOT NULL,
     [FactureCost]          MONEY              NULL,
-    [ScotchCost]           MONEY              NULL,
     [WithdrawCost]         MONEY              NULL,
     [FactureCostEdited]    MONEY              NULL,
     [ScotchCostEdited]     MONEY              NULL,

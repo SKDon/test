@@ -13,15 +13,18 @@ namespace Alicargo.Services.Calculation
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
+		private readonly ISenderRepository _senders;
 		private readonly IClientRepository _clientRepository;
 
 		public CalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IAwbRepository awbRepository,
+			ISenderRepository senders,
 			IClientRepository clientRepository)
 		{
 			_applicationRepository = applicationRepository;
 			_awbRepository = awbRepository;
+			_senders = senders;
 			_clientRepository = clientRepository;
 		}
 
@@ -45,9 +48,11 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Key).ToArray());
 
-			var items = GetItems(data, applications);
+			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
 
-			var info = GetInfo(awbs, applications);
+			var items = GetItems(data, applications, tariffs);
+
+			var info = GetInfo(awbs, applications, tariffs);
 
 			var groups = GetGroups(data, items, awbs);
 
@@ -59,7 +64,8 @@ namespace Alicargo.Services.Calculation
 			};
 		}
 
-		private static CalculationAwbInfo[] GetInfo(Dictionary<long, AirWaybillData> awbs, IEnumerable<ApplicationData> items)
+		private static CalculationAwbInfo[] GetInfo(Dictionary<long, AirWaybillData> awbs, IEnumerable<ApplicationData> items,
+			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			return awbs.Select(x => x.Value)
 					   .Select(awb =>
@@ -75,7 +81,7 @@ namespace Alicargo.Services.Calculation
 							   BrokerCost = awb.BrokerCost ?? 0,
 							   AdditionalCost = awb.AdditionalCost,
 							   TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weigth)),
-							   TotalScotchCost = rows.Sum(x => x.ScotchCost ?? 0),
+							   TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
 							   TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
 							   TotalWithdrawCost = rows.Sum(x => x.WithdrawCost ?? 0),
 							   TotalTransitCost = rows.Sum(x => x.TransitCost ?? 0),
@@ -85,10 +91,10 @@ namespace Alicargo.Services.Calculation
 							   CustomCostPerKg = null,
 							   FlightCostPerKg = null,
 							   ProfitPerKg = null,
-							   Profit = 0
+							   Profit = 0xBAD
 						   };
 
-						   info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x)) - info.TotalExpenses;
+						   info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x, tariffs)) - info.TotalExpenses;
 
 						   var totalWeight = (decimal)rows.Sum(x => x.Weigth ?? 0);
 
@@ -125,8 +131,8 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
-		private IEnumerable<CalculationItem> GetItems(IEnumerable<AirWaybillData> data,
-			ApplicationData[] applications)
+		private IEnumerable<CalculationItem> GetItems(IEnumerable<AirWaybillData> data, ApplicationData[] applications,
+			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var calculations = _applicationRepository.GetCalculations(appIds);
@@ -143,7 +149,7 @@ namespace Alicargo.Services.Calculation
 				FactureCost = a.FactureCostEdited ?? a.FactureCost,
 				Invoice = a.Invoice,
 				Mark = a.MarkName,
-				ScotchCost = a.ScotchCostEdited ?? a.ScotchCost,
+				ScotchCost = a.ScotchCostEdited ?? CalculationHelper.GetSenderScotchCost(tariffs, a.SenderId, a.Count),
 				TariffPerKg = a.TariffPerKg,
 				SenderRate = a.SenderRate,
 				TransitCost = a.TransitCost,
@@ -153,13 +159,15 @@ namespace Alicargo.Services.Calculation
 				AirWaybillId = a.AirWaybillId.Value, // ReSharper restore PossibleInvalidOperationException
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weigth),
-				Profit = CalculationHelper.GetProfit(a),
+				Profit = CalculationHelper.GetProfit(a, tariffs),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
 				IsCalculated = calculations.ContainsKey(a.Id),
 				ClassId = (ClassType?)a.ClassId
 			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
 		}
+
+
 
 		private static void AddMissedGroups(IList<AirWaybillData> awbs, IList<CalculationGroup> groups)
 		{

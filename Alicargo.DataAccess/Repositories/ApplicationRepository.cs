@@ -59,7 +59,6 @@ namespace Alicargo.DataAccess.Repositories
 				ClientId = x.ClientId,
 				TransitId = x.TransitId,
 				FactureCost = x.FactureCost,
-				ScotchCost = x.ScotchCost,
 				TariffPerKg = x.TariffPerKg,
 				SenderRate = x.SenderRate,
 				TransitCost = x.TransitCost,
@@ -221,7 +220,7 @@ namespace Alicargo.DataAccess.Repositories
 				CurrencyId = x.CurrencyId,
 				AirWaybillId = x.AirWaybillId,
 				FactureCost = x.FactureCostEdited ?? x.FactureCost,
-				ScotchCost = x.ScotchCostEdited ?? x.ScotchCost,
+				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,
 				WithdrawCost = x.WithdrawCostEdited ?? x.WithdrawCost

@@ -198,7 +198,6 @@ namespace Alicargo.Services.Application
 				PackingFile = null,
 				CPFile = null,
 				DeliveryBillFile = null,
-				ScotchCost = data.ScotchCost,
 				SwiftFile = null,
 				Torg12File = null,
 				TransitCost = data.TransitCost,
@@ -238,7 +237,6 @@ namespace Alicargo.Services.Application
 			to.MarkName = @from.MarkName;
 			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
 			to.FactureCost = @from.FactureCost;
-			to.ScotchCost = @from.ScotchCost;
 			to.TransitCost = @from.TransitCost;
 			to.WithdrawCost = @from.WithdrawCost;
 			to.TariffPerKg = @from.TariffPerKg;
@@ -287,7 +285,6 @@ namespace Alicargo.Services.Application
 				TransitReference = null,
 				ClientId = clientId,
 				WithdrawCost = model.WithdrawCost,
-				ScotchCost = model.ScotchCost,
 				TransitCost = model.TransitCost,
 				FactureCost = model.FactureCost,
 				TariffPerKg = model.TariffPerKg,

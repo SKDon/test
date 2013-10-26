@@ -42,7 +42,6 @@ namespace Alicargo.Contracts.Contracts
 		public string CPFileName { get; set; }
 		
 		public decimal? FactureCost { get; set; }
-		public decimal? ScotchCost { get; set; }
 		public decimal? WithdrawCost { get; set; }
 		public decimal? FactureCostEdited { get; set; }
 		public decimal? ScotchCostEdited { get; set; }

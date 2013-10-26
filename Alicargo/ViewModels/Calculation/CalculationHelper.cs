@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System.Collections.Generic;
+using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.ViewModels.Calculation
 {
@@ -21,11 +22,15 @@ namespace Alicargo.ViewModels.Calculation
 			return value / InsuranceRate;
 		}
 
-		public static decimal GetProfit(ApplicationData application)
+		public static decimal? GetSenderScotchCost(IReadOnlyDictionary<long, decimal> tariffs, long? senderId, int? count)
 		{
-			// todo: 3. supposed that all costs in euro but ValueCurrencyId can be in any other currency
+			return senderId.HasValue ? tariffs[senderId.Value] * (count ?? 0) : (decimal?)null;
+		}
+
+		public static decimal GetProfit(ApplicationData application, IReadOnlyDictionary<long, decimal> tariffs)
+		{
 			return GetTotalTariffCost(application.TariffPerKg, application.Weigth)
-				   + (application.ScotchCostEdited ?? application.ScotchCost ?? 0)
+				   + (application.ScotchCostEdited ?? GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
 				   + GetInsuranceCost(application.Value)
 				   + (application.FactureCostEdited ?? application.FactureCost ?? 0)
 				   + (application.WithdrawCostEdited ?? application.WithdrawCost ?? 0)
@@ -34,7 +39,6 @@ namespace Alicargo.ViewModels.Calculation
 
 		public static decimal GetProfit(ApplicationListItemData application)
 		{
-			// todo: 3. supposed that all costs in euro but ValueCurrencyId can be in any other currency
 			return GetTotalTariffCost(application.TariffPerKg, application.Weigth)
 				   + (application.ScotchCost ?? 0)
 				   + GetInsuranceCost(application.Value)
