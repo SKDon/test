@@ -2,8 +2,6 @@
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Enums;
-using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Calculation.Sender;
@@ -14,9 +12,9 @@ namespace Alicargo.Services.Calculation
 	public sealed class SenderCalculationPresenter : ISenderCalculationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;
-		private readonly IStateService _stateService;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IClientRepository _clients;
+		private readonly IStateService _stateService;
 
 		public SenderCalculationPresenter(
 			IApplicationRepository applicationRepository,
@@ -80,7 +78,7 @@ namespace Alicargo.Services.Calculation
 					AirWaybillId = g.Key,
 					items = itemsGroup,
 					value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
-					aggregates = new SenderCalculationGroup.Aggregates(g.Sum(x => x.Profit))
+					aggregates = new SenderCalculationGroup.Aggregates(itemsGroup)
 				};
 			}).ToList();
 
@@ -101,23 +99,19 @@ namespace Alicargo.Services.Calculation
 				Count = a.Count,
 				ClientNic = nics[a.Id],
 				Factory = a.FactoryName,
-				FactureCost = a.FactureCost,
+				FactureCost = a.SenderFactureCost,
 				Invoice = a.Invoice,
 				Mark = a.MarkName,
-				ScotchCost = a.ScotchCost,
-				TariffPerKg = a.TariffPerKg,
-				TransitCost = a.TransitCost,
+				SenderScotchCost = a.SenderScotchCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
-				WithdrawCost = a.WithdrawCost, // ReSharper disable PossibleInvalidOperationException
+				WithdrawCost = a.SenderWithdrawCost, // ReSharper disable PossibleInvalidOperationException
 				AirWaybillId = a.AirWaybillId.Value, // ReSharper restore PossibleInvalidOperationException
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weigth),
-				Profit = CalculationHelper.GetProfit(a),
-				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
-				ClassName = a.ClassId.HasValue
-					? ((ClassType)a.ClassId.Value).ToLocalString()
-					: ""
+				Profit = (a.SenderScotchCost ?? 0) + (a.SenderFactureCost ?? 0) + (a.SenderWithdrawCost ?? 0)
+						 + CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
+				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
+				SenderRate = a.SenderRate
 			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
 		}
 	}

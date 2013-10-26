@@ -29,10 +29,10 @@
 						{ field: "Count", aggregate: "sum" },
 						{ field: "Weigth", aggregate: "sum" },
 						{ field: "Value", aggregate: "sum" },
-						{ field: "TotalTariffCost", aggregate: "sum" },
-						{ field: "TransitCost", aggregate: "sum" },
-						{ field: "ScotchCost", aggregate: "sum" },
-						{ field: "InsuranceCost", aggregate: "sum" },
+						{ field: "SenderScotchCost", aggregate: "sum" },
+						{ field: "TotalSenderRate", aggregate: "sum" },
+						{ field: "FactureCost", aggregate: "sum" },
+						{ field: "WithdrawCost", aggregate: "sum" },
 						{ field: "Profit", aggregate: "sum" }
 					]
 				}
@@ -41,26 +41,25 @@
 
 		$c.Columns = function() {
 			var groupFooterTemplate = "#= kendo.toString(sum, 'n2') #";
+			var groupFooterTemplate0 = "#= kendo.toString(sum, 'n0') #";
 			var n2Format = "{0:n2}";
-			var texRight = { "class": "text-right" };
+			var textRight = { "class": "text-right" };
+			var textBold = { "class": "text-bold" };
 			var c = [
 				{ field: "ClientNic", title: $l.Pages_Client },
-				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
+				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='" + $u.SenderApplication_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>" },
 				{ field: "Factory", title: $l.Entities_FactoryName },
 				{ field: "Mark", title: $l.Entities_Mark },
-				{ field: "ClassName", title: $l.Entities_Class },
-				{ field: "Count", title: $l.Entities_Count, attributes: texRight },
-				{ field: "Weigth", title: $l.Entities_Weigth, format: n2Format, attributes: texRight },
 				{ field: "Invoice", title: $l.Entities_Invoice },
-				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: texRight },
-				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: n2Format, attributes: texRight },
-				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: texRight },
-				{ field: "ScotchCost", title: $l.Entities_ScotchCost, attributes: texRight },
-				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: texRight },
-				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: texRight },
-				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, attributes: texRight },
-				{ field: "TransitCost", title: $l.Entities_TransitCost, attributes: texRight },
-				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: texRight, footerAttributes: texRight }
+				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: textRight, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
+				{ field: "Count", title: $l.Entities_Count, attributes: textRight, groupFooterTemplate: groupFooterTemplate0, footerAttributes: textRight },
+				{ field: "Weigth", title: $l.Entities_Weigth, format: n2Format, groupFooterTemplate: groupFooterTemplate0, footerAttributes: textRight },
+				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format, attributes: textRight },
+				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
+				{ field: "SenderScotchCost", title: $l.Entities_ScotchCost, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
+				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
+				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
+				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: textRight, footerAttributes: textRight }
 			];
 
 			$c.Columns = function() { return c; };

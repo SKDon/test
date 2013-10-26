@@ -8,7 +8,7 @@ namespace Alicargo.Contracts.Contracts
 
 		public string ClientLegalEntity { get; set; }
 
-		public string ClientNic { get; set; }		
+		public string ClientNic { get; set; }
 
 		public string AirWaybill { get; set; }
 
@@ -95,10 +95,12 @@ namespace Alicargo.Contracts.Contracts
 		public int CurrencyId { get; set; }
 
 		public decimal Value { get; set; }
-		
+
 		public long TransitId { get; set; }
 
 		public decimal? FactureCost { get; set; }
+
+		public decimal? SenderFactureCost { get; set; }
 
 		public decimal? ScotchCost { get; set; }
 
@@ -108,7 +110,11 @@ namespace Alicargo.Contracts.Contracts
 
 		public decimal? TransitCost { get; set; }
 
-		public decimal? WithdrawCost { get; set; }		
+		public decimal? WithdrawCost { get; set; }
+
+		public decimal? SenderWithdrawCost { get; set; }
+
+		public decimal? SenderRate { get; set; }
 
 		#endregion
 	}

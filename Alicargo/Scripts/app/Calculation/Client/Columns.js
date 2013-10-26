@@ -26,13 +26,6 @@
 					field: "AirWaybillId",
 					dir: "asc",
 					aggregates: [
-						{ field: "Count", aggregate: "sum" },
-						{ field: "Weigth", aggregate: "sum" },
-						{ field: "Value", aggregate: "sum" },
-						{ field: "TotalTariffCost", aggregate: "sum" },
-						{ field: "TransitCost", aggregate: "sum" },
-						{ field: "ScotchCost", aggregate: "sum" },
-						{ field: "InsuranceCost", aggregate: "sum" },
 						{ field: "Profit", aggregate: "sum" }
 					]
 				}
