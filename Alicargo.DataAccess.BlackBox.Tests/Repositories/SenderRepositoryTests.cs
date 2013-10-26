@@ -46,6 +46,21 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod, TestCategory("black-box")]
+		public void Test_GetTraiffs()
+		{
+			var data1 = _context.Fixture.Create<SenderData>();
+			var id1 = _repository.Add(data1, _context.Fixture.Create<string>());
+
+			var data2 = _context.Fixture.Create<SenderData>();
+			var id2 = _repository.Add(data2, _context.Fixture.Create<string>());
+
+			var actual = _repository.GetTariffs(new[] { id1, id2 });
+
+			actual[id1].ShouldBeEquivalentTo(data1.TariffOfTapePerBox);
+			actual[id2].ShouldBeEquivalentTo(data2.TariffOfTapePerBox);
+		}
+
+		[TestMethod, TestCategory("black-box")]
 		public void Test_Update()
 		{
 			var data = _context.Fixture.Create<SenderData>();

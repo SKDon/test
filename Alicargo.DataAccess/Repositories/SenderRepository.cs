@@ -1,17 +1,20 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
+using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
 	internal sealed class SenderRepository : ISenderRepository
 	{
+		private readonly AlicargoDataContext _context;
 		private readonly IPasswordConverter _converter;
 		private readonly ISqlProcedureExecutor _executor;
-		private readonly AlicargoDataContext _context;
 
 		public SenderRepository(IUnitOfWork unitOfWork, IPasswordConverter converter, ISqlProcedureExecutor executor)
 		{
@@ -30,6 +33,17 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Query<SenderData>("[dbo].[Sender_Get]", new { id });
 		}
 
+		public Dictionary<long, decimal> GetTariffs(long[] ids)
+		{
+			var table = new DataTable("Ids");
+			table.Columns.Add("Id", typeof(long));
+			foreach (var id in ids) { table.Rows.Add(id); }
+
+			var tariffs = _executor.Array<SenderTariff>("[dbo].[Sender_GetTariffs]", new TableParameters(table));
+
+			return tariffs.ToDictionary(x => x.Id, x => x.TariffOfTapePerBox);
+		}
+
 		public long Add(SenderData data, string password)
 		{
 			var salt = _converter.GenerateSalt();
@@ -41,7 +55,6 @@ namespace Alicargo.DataAccess.Repositories
 				PasswordHash = passwordHash,
 				PasswordSalt = salt,
 				TwoLetterISOLanguageName = TwoLetterISOLanguageName.English,
-
 				data.Name,
 				data.Email,
 				data.TariffOfTapePerBox
@@ -63,6 +76,14 @@ namespace Alicargo.DataAccess.Repositories
 		public long GetUserId(long id)
 		{
 			return _executor.Query<long>("[dbo].[Sender_GetUserId]", new { id });
+		}
+
+		// ReSharper disable ClassNeverInstantiated.Local
+		private sealed class SenderTariff// ReSharper restore ClassNeverInstantiated.Local
+		{
+			// ReSharper disable UnusedAutoPropertyAccessor.Local
+			public decimal TariffOfTapePerBox { get; set; }
+			public long Id { get; set; }// ReSharper restore UnusedAutoPropertyAccessor.Local
 		}
 	}
 }
