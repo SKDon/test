@@ -14,18 +14,21 @@ namespace Alicargo.Services.Calculation
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IClientRepository _clients;
+		private readonly ISenderRepository _senders;
 		private readonly IStateService _stateService;
 
 		public SenderCalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IStateService stateService,
 			IAwbRepository awbRepository,
-			IClientRepository clients)
+			IClientRepository clients, 
+			ISenderRepository senders)
 		{
 			_applicationRepository = applicationRepository;
 			_stateService = stateService;
 			_awbRepository = awbRepository;
 			_clients = clients;
+			_senders = senders;
 		}
 
 		public SenderCalculationListCollection List(long senderId, int take, long skip)
@@ -44,10 +47,15 @@ namespace Alicargo.Services.Calculation
 
 			var groups = GetGroups(awbsData, items);
 
+			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
+
+			var info = GetInfo(awbsData, applications, tariffs);
+
 			return new SenderCalculationListCollection
 			{
 				Groups = groups.ToArray(),
-				Total = total
+				Total = total,
+				Info = info
 			};
 		}
 
@@ -113,6 +121,38 @@ namespace Alicargo.Services.Calculation
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
 				SenderRate = a.SenderRate
 			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
+		}
+
+		private static SenderCalculationAwbInfo[] GetInfo(IEnumerable<AirWaybillData> awbs, IEnumerable<ApplicationListItemData> items,
+			IReadOnlyDictionary<long, decimal> tariffs)
+		{
+			return awbs.Select(awb =>
+					   {
+						   var rows = items.Where(a => a.AirWaybillId == awb.Id).ToArray();
+
+						   var info = new SenderCalculationAwbInfo
+						   {
+							   AirWaybillId = awb.Id,
+							   TotalCostOfSenderForWeight = awb.TotalCostOfSenderForWeight ?? 0,
+							   FlightCost = awb.FlightCost ?? 0,
+							   TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weigth)),
+							   TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
+							   TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
+							   TotalWithdrawCost = rows.Sum(x => x.WithdrawCost ?? 0),
+							   CostPerKgOfSender = null,
+							   FlightCostPerKg = null							   
+						   };
+
+						   var totalWeight = (decimal)rows.Sum(x => x.Weigth ?? 0);
+
+						   if (totalWeight != 0)
+						   {
+							   info.CostPerKgOfSender = info.TotalSenderRate / totalWeight;
+							   info.FlightCostPerKg = info.FlightCost / totalWeight;
+						   }
+
+						   return info;
+					   }).ToArray();
 		}
 	}
 }

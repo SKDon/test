@@ -232,7 +232,8 @@ namespace Alicargo.DataAccess.Repositories
 				TransitCost = x.TransitCost,
 				WithdrawCost = x.WithdrawCostEdited ?? x.WithdrawCost,
 				SenderWithdrawCost = x.WithdrawCost,
-				SenderRate = x.SenderRate
+				SenderRate = x.SenderRate,
+				SenderId = x.SenderId
 			}).ToArray();
 		}
 

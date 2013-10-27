@@ -86,6 +86,8 @@ namespace Alicargo.Contracts.Contracts
 
 		public long? AirWaybillId { get; set; }
 
+		public long? SenderId { get; set; }
+
 		public long? CountryId { get; set; }
 
 		public int MethodOfDeliveryId { get; set; }

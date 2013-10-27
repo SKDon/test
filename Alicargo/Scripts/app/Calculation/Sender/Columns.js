@@ -7,7 +7,10 @@
 			return {
 				schema: {
 					total: "Total",
-					groups: "Groups",
+					groups: function(response) {
+						$c.CalculationInfo = response.Info;
+						return response.Groups;
+					},
 					model: { id: "ApplicationId" }
 				},
 				transport: {

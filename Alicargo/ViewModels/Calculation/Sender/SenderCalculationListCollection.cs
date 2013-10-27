@@ -4,5 +4,6 @@
 	{
 		public long Total { get; set; }
 		public SenderCalculationGroup[] Groups { get; set; }
+		public SenderCalculationAwbInfo[] Info { get; set; }
 	}
 }

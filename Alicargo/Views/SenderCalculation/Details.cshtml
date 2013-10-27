@@ -1,0 +1,44 @@
+﻿@using Resources
+<tr class="k-group-sub-footer-gray">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td colspan="14">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>sender</b></td>
+	<td class="text-right" title="@Entities.CostPerKgOfSender">#= kendo.toString(CostPerKgOfSender, 'n2') #</td>	
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right text-bold" title="@Entities.TotalSenderRate">#= kendo.toString(TotalSenderRate, 'n2') #</td>
+	<td class="text-right text-bold" title="@Entities.TotalScotchCost">#= TotalScotchCost #</td>
+	<td class="text-right text-bold" title="@Entities.FactureCost">#= TotalFactureCost #</td>
+	<td class="text-right text-bold" title="@Entities.WithdrawCost">#= TotalWithdrawCost #</td>
+	<td class="text-right total" title="@Entities.TotalOfSender">#= kendo.toString(TotalOfSender, 'n2') #</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>flight</b></td>
+	<td class="text-right text-bold" title="@Entities.FlightCostPerKg">#= kendo.toString(FlightCostPerKg, 'n2') #</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right total" title="@Entities.FlightCost">#= kendo.toString(FlightCost, 'n2') #</td>
+</tr>
+<tr class="k-group-sub-footer cost-total">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td colspan="13"><b>cost total</b></td>
+	<td class="text-right total" title="@Entities.Total">#= kendo.toString(Total, 'n2') #</td>
+</tr>
