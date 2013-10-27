@@ -98,6 +98,7 @@
 			}
 
 			var c = [
+				{ field: "AirWaybillId", title: $l.Entities_AWB, hidden: true },
 				{ field: "ClientNic", title: $l.Pages_Client },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='" + $u.Application_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>" },
 				{ field: "Factory", title: $l.Entities_FactoryName },

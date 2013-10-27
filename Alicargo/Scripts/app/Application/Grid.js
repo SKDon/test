@@ -56,7 +56,7 @@
 				dataSource: getDataSource(),
 				filterable: false,
 				sortable: false,
-				groupable: false,
+				groupable: true,
 				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
 				resizable: true,
 				columns: $a.Application.GetColumns()

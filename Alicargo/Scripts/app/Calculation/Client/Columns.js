@@ -37,6 +37,7 @@
 			var n2Format = "{0:n2}";
 			var texRight = { "class": "text-right" };
 			var c = [
+				{ field: "AirWaybillId", title: $l.Entities_AWB, hidden: true },
 				{ field: "ClientNic", title: $l.Pages_Client },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber },
 				{ field: "Factory", title: $l.Entities_FactoryName },
