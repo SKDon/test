@@ -53,7 +53,7 @@ PRINT N'Dropping DF__User__TwoLetterI__1DE57479...';
 
 
 GO
-ALTER TABLE [dbo].[User] DROP CONSTRAINT [DF__User__TwoLetterI__1DE57479];
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [DF__User__TwoLetterI__6C190EBB];
 
 
 GO
@@ -788,9 +788,6 @@ GO
 PRINT N'Checking existing data against newly created constraints';
 
 
-GO
-USE [$(DatabaseName)];
-
 
 GO
 ALTER TABLE [dbo].[Application] WITH CHECK CHECK CONSTRAINT [FK_dbo.Application_dbo.AirWaybill_AirWaybillId];
@@ -817,3 +814,11 @@ ALTER TABLE [dbo].[Calculation] WITH CHECK CHECK CONSTRAINT [FK_Calculation_Clie
 GO
 PRINT N'Update complete.'
 GO
+
+update [dbo].[Application]
+set [SenderId] = 1
+where [SenderId] is null
+
+GO
+
+use master
