@@ -137,8 +137,8 @@ namespace Alicargo.Services.Calculation
 							   FlightCost = awb.FlightCost ?? 0,
 							   TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weigth)),
 							   TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
-							   TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
-							   TotalWithdrawCost = rows.Sum(x => x.WithdrawCost ?? 0),
+							   TotalFactureCost = rows.Sum(x => x.SenderFactureCost ?? 0),
+							   TotalWithdrawCost = rows.Sum(x => x.SenderWithdrawCost ?? 0),
 							   CostPerKgOfSender = null,
 							   FlightCostPerKg = null							   
 						   };
