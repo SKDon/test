@@ -66,14 +66,14 @@
 				var data = $a.Application.GetGrid().dataItem(e.masterRow);
 
 				$(".close-application", e.detailRow).click(function() {
-					if (window.confirm($l.Pages_StateSetConfirm)) {
+					if ($a.Confirm($l.Pages_StateSetConfirm)) {
 						var url = $u.ApplicationUpdate_Close;
 						$.post(url, { id: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
 					}
 				});
 
 				$(".delete-application", e.detailRow).click(function() {
-					if (window.confirm($l.Pages_DeleteConfirm)) {
+					if ($a.Confirm($l.Pages_DeleteConfirm)) {
 						var url = $u.Application_Delete;
 						$.post(url, { id: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
 					}
@@ -82,7 +82,7 @@
 				$(".AirWaybill-select", e.detailRow)
 					.val(data.AirWaybillId)
 					.change(function() {
-						if (window.confirm($l.Pages_AirWaybillSetConfirm)) {
+						if ($a.Confirm($l.Pages_AirWaybillSetConfirm)) {
 							var url = $u.AirWaybill_SetAirWaybill;
 							$.post(url, { AirWaybillId: $(this).val(), applicationId: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
 						}

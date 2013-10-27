@@ -130,20 +130,24 @@
 						title: $l.Pages_Calculate,
 						click: function(e) {
 							e.preventDefault();
-							var button = $(e.target).closest("a")[0];
-							var appId = $.data(button, "ApplicationId");
-							var awbId = $.data(button, "AirWaybillId");
-							$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
+							if ($a.Confirm($l.Pages_ConfrimCalculation)) {
+								var button = $(e.target).closest("a")[0];
+								var appId = $.data(button, "ApplicationId");
+								var awbId = $.data(button, "AirWaybillId");
+								$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
+							}
 						}
 					}, {
 						name: "custom-cancel",
 						text: "&nbsp;",
 						click: function(e) {
 							e.preventDefault();
-							var button = $(e.target).closest("a")[0];
-							var appId = $.data(button, "ApplicationId");
-							var awbId = $.data(button, "AirWaybillId");
-							$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
+							if ($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
+								var button = $(e.target).closest("a")[0];
+								var appId = $.data(button, "ApplicationId");
+								var awbId = $.data(button, "AirWaybillId");
+								$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
+							}
 						}
 					}],
 					title: "&nbsp;",

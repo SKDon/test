@@ -22,7 +22,7 @@
 				.kendoDropDownList({
 					autoBind: false,
 					select: function (e) {
-						if (window.confirm($l.Pages_StateSetConfirm)) {
+						if ($a.Confirm($l.Pages_StateSetConfirm)) {
 							var dataItem = this.dataItem(e.item.index());
 							var url = $u.ApplicationUpdate_SetState;
 							$.post(url, { stateId: dataItem.StateId, id: applicationId }).done($apl.UpdateGrid).fail($a.ShowError);

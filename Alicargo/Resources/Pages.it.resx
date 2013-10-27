@@ -297,4 +297,10 @@
   <data name="SenderEdit" xml:space="preserve">
     <value>Modificare il mittente</value>
   </data>
+  <data name="ConfirmCancelCalculation" xml:space="preserve">
+    <value>Sei sicuro di voler annullerà il suo conto?</value>
+  </data>
+  <data name="ConfrimCalculation" xml:space="preserve">
+    <value>Sei sicuro di voler terminare il calcolo?</value>
+  </data>
 </root>

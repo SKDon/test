@@ -304,6 +304,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы уверены, что хотите отменить расчет?.
+        /// </summary>
+        public static string ConfirmCancelCalculation {
+            get {
+                return ResourceManager.GetString("ConfirmCancelCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уверены, что хотите завершить расчет?.
+        /// </summary>
+        public static string ConfrimCalculation {
+            get {
+                return ResourceManager.GetString("ConfrimCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удалить.
         /// </summary>
         public static string Delete {

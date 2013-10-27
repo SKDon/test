@@ -35,7 +35,7 @@
 						grid.dataSource.read();
 						grid.refresh();
 					};
-					if (window.confirm($a.Localization.Pages_DeleteConfirm)) {
+					if ($a.Confirm($a.Localization.Pages_DeleteConfirm)) {
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
 						var url = $a.Urls.AirWaybill_Delete;
