@@ -68,7 +68,7 @@
     <Folder Include="Tables\" />
     <Folder Include="Stored procedures" />
     <Folder Include="Types" />
-    <Folder Include="Dev" />
+    <Folder Include="Release" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -103,8 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
-    <None Include="Dev\Dev.Database.publish.xml" />
-    <None Include="Dev\Dev.SqlSchemaCompare.scmp" />
-    <None Include="Dev\Master.SqlSchemaCompare.scmp" />
+    <None Include="Release\Release.Database.publish.xml" />
+    <None Include="Release\Release.SqlSchemaCompare.scmp" />
+    <None Include="Release\Master.SqlSchemaCompare.scmp" />
   </ItemGroup>
 </Project>
