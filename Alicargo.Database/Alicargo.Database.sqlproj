@@ -104,7 +104,7 @@
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
     <None Include="Release\Release.Database.publish.xml" />
-    <None Include="Release\Release.SqlSchemaCompare.scmp" />
-    <None Include="Release\Master.SqlSchemaCompare.scmp" />
+    <None Include="Release\MasterToRelease.SqlSchemaCompare.scmp" />
+    <None Include="Release\MasterToDev.SqlSchemaCompare.scmp" />
   </ItemGroup>
 </Project>
