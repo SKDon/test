@@ -53,16 +53,16 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
-		public void Add(ApplicationSenderModel model, long clientId, long senderId)
+		public void Add(ApplicationSenderModel model, long clientId, long creatorSenderId)
 		{
-			var applicationData = new ApplicationData { ClientId = clientId };
+			var applicationData = new ApplicationData();
 
 			Map(model, applicationData);
 
-			Add(applicationData, clientId, senderId, model.SwiftFile, model.InvoiceFile, model.PackingFile);
+			Add(applicationData, clientId, creatorSenderId, model.SwiftFile, model.InvoiceFile, model.PackingFile);
 		}
 
-		private void Add(ApplicationData applicationData, long clientId, long? senderId, byte[] swiftFile, byte[] invoiceFile,
+		private void Add(ApplicationData applicationData, long clientId, long senderId, byte[] swiftFile, byte[] invoiceFile,
 						 byte[] packingFile)
 		{
 			var transitId = CopyTransitDataFromClient(clientId);
@@ -73,9 +73,10 @@ namespace Alicargo.Services.Application
 			applicationData.StateChangeTimestamp = DateTimeOffset.UtcNow;
 			applicationData.CreationTimestamp = DateTimeOffset.UtcNow;
 			applicationData.SenderId = senderId;
+			applicationData.ClientId = clientId;
 
 			_applicationUpdater.Add(applicationData, swiftFile, invoiceFile, null, null, null, packingFile);
-			
+
 			_unitOfWork.SaveChanges();
 		}
 
