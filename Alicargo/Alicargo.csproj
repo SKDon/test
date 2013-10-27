@@ -640,6 +640,7 @@
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
     <Content Include="Deploy\Install\Sql\create-files-db.sql" />
     <Content Include="Deploy\Install\Sql\create-sp-for-backup-db.sql" />
+    <Content Include="Deploy\Install\Sql\db_1_1.sql" />
     <Content Include="Deploy\Install\Sql\set-initial-data.sql" />
     <Content Include="Deploy\Install\Sql\create-sp-restore-db.sql" />
     <None Include="Deploy\Install\restore-db.ps1" />
