@@ -21,7 +21,7 @@ namespace Alicargo.Services.Calculation
 			IApplicationRepository applicationRepository,
 			IStateService stateService,
 			IAwbRepository awbRepository,
-			IClientRepository clients, 
+			IClientRepository clients,
 			ISenderRepository senders)
 		{
 			_applicationRepository = applicationRepository;
@@ -85,7 +85,7 @@ namespace Alicargo.Services.Calculation
 				{
 					AirWaybillId = g.Key,
 					items = itemsGroup,
-					value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
+					value = new { id = g.Key, text = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)) },
 					aggregates = new SenderCalculationGroup.Aggregates(itemsGroup)
 				};
 			}).ToList();
@@ -140,7 +140,7 @@ namespace Alicargo.Services.Calculation
 							   TotalFactureCost = rows.Sum(x => x.SenderFactureCost ?? 0),
 							   TotalWithdrawCost = rows.Sum(x => x.SenderWithdrawCost ?? 0),
 							   CostPerKgOfSender = null,
-							   FlightCostPerKg = null							   
+							   FlightCostPerKg = null
 						   };
 
 						   var totalWeight = (decimal)rows.Sum(x => x.Weigth ?? 0);

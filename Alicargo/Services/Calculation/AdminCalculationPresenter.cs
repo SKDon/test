@@ -122,7 +122,7 @@ namespace Alicargo.Services.Calculation
 				{
 					AirWaybillId = g.Key,
 					items = itemsGroup,
-					value = AwbHelper.GetAirWaybillDisplay(awbs[g.Key]),
+					value = new { id = g.Key, text = AwbHelper.GetAirWaybillDisplay(awbs[g.Key]) },
 					aggregates = new CalculationGroup.Aggregates(itemsGroup)
 				};
 			}).ToList();
@@ -179,7 +179,7 @@ namespace Alicargo.Services.Calculation
 					{
 						AirWaybillId = awb.Id,
 						items = new CalculationItem[0],
-						value = AwbHelper.GetAirWaybillDisplay(awb),
+						value = new { id = awb.Id, text = AwbHelper.GetAirWaybillDisplay(awb) },
 						aggregates = new CalculationGroup.Aggregates(new CalculationItem[0])
 					});
 				}

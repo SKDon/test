@@ -49,7 +49,14 @@
 			var textRight = { "class": "text-right" };
 			var textBold = { "class": "text-bold" };
 			var c = [
-				{ field: "AirWaybillId", title: $l.Entities_AWB, hidden: true },
+				{
+					field: "AirWaybillId",
+					hidden: true,
+					groupHeaderTemplate: function(data) {
+						return "<a href='" + $u.SenderAwb_Edit + "/" + data.value.id + "'>" + $l.Entities_AWB
+							+ ": " + data.value.text + "</a>";
+					}
+				},
 				{ field: "ClientNic", title: $l.Pages_Client },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='" + $u.SenderApplication_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>" },
 				{ field: "Factory", title: $l.Entities_FactoryName },

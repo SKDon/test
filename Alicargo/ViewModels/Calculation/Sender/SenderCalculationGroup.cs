@@ -9,7 +9,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 		// ReSharper disable InconsistentNaming
 
 		public string field { get { return "AirWaybillId"; } }
-		public string value { get; set; }
+		public object value { get; set; }
 		public bool hasSubgroups { get { return false; } }
 		public SenderCalculationItem[] items { get; set; }
 		public Aggregates aggregates { get; set; }

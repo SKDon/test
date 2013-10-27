@@ -14,7 +14,6 @@
 					model: {
 						id: "ApplicationId",
 						fields: {
-							"ClientNic": { type: "string", editable: false },
 							"DisplayNumber": { type: "string", editable: false },
 							"Factory": { type: "string", editable: false },
 							"Mark": { type: "string", editable: false },
@@ -98,7 +97,14 @@
 			}
 
 			var c = [
-				{ field: "AirWaybillId", title: $l.Entities_AWB, hidden: true },
+				{
+					field: "AirWaybillId",
+					hidden: true,
+					groupHeaderTemplate: function(data) {
+						return "<a href='" + $u.AirWaybill_Edit + "/" + data.value.id + "'>" + $l.Entities_AWB
+							+ ": " + data.value.text + "</a>";
+					}
+				},
 				{ field: "ClientNic", title: $l.Pages_Client },
 				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='" + $u.Application_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>" },
 				{ field: "Factory", title: $l.Entities_FactoryName },
@@ -126,31 +132,31 @@
 				{
 					attributes: { "class": "cell-button" },
 					command: [{
-						name: "custom-gear",
-						text: "&nbsp;",
-						title: $l.Pages_Calculate,
-						click: function(e) {
-							e.preventDefault();
-							if ($a.Confirm($l.Pages_ConfrimCalculation)) {
-								var button = $(e.target).closest("a")[0];
-								var appId = $.data(button, "ApplicationId");
-								var awbId = $.data(button, "AirWaybillId");
-								$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
+							name: "custom-gear",
+							text: "&nbsp;",
+							title: $l.Pages_Calculate,
+							click: function(e) {
+								e.preventDefault();
+								if($a.Confirm($l.Pages_ConfrimCalculation)) {
+									var button = $(e.target).closest("a")[0];
+									var appId = $.data(button, "ApplicationId");
+									var awbId = $.data(button, "AirWaybillId");
+									$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
+								}
 							}
-						}
-					}, {
-						name: "custom-cancel",
-						text: "&nbsp;",
-						click: function(e) {
-							e.preventDefault();
-							if ($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
-								var button = $(e.target).closest("a")[0];
-								var appId = $.data(button, "ApplicationId");
-								var awbId = $.data(button, "AirWaybillId");
-								$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
+						}, {
+							name: "custom-cancel",
+							text: "&nbsp;",
+							click: function(e) {
+								e.preventDefault();
+								if($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
+									var button = $(e.target).closest("a")[0];
+									var appId = $.data(button, "ApplicationId");
+									var awbId = $.data(button, "AirWaybillId");
+									$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
+								}
 							}
-						}
-					}],
+						}],
 					title: "&nbsp;",
 					width: $a.DefaultGridButtonWidth
 				}

@@ -60,7 +60,7 @@ namespace Alicargo.App_Start
 					"~/scripts/app/calculation/sender/Grid.js"
 				));
 
-			BundleTable.EnableOptimizations = true;
+			//BundleTable.EnableOptimizations = true;
 		}
 
 		private static void RegisterCommon()
