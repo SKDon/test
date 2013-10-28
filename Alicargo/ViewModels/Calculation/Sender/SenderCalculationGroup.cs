@@ -4,7 +4,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 {
 	public sealed class SenderCalculationGroup
 	{
-		public long AirWaybillId { get; set; }
+		public long? AirWaybillId { get; set; }
 
 		// ReSharper disable InconsistentNaming
 

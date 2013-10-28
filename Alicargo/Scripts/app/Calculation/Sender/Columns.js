@@ -53,8 +53,12 @@
 					field: "AirWaybillId",
 					hidden: true,
 					groupHeaderTemplate: function(data) {
-						return "<a href='" + $u.SenderAwb_Edit + "/" + data.value.id + "'>" + $l.Entities_AWB
-							+ ": " + data.value.text + "</a>";
+						if (data.value.id != 0) {
+							return "<a href='" + $u.SenderAwb_Edit + "/" + data.value.id + "'>" + $l.Entities_AWB
+								+ ": " + data.value.text + "</a>";
+						}
+
+						return $l.Entities_AWB + ": " + data.value.text;
 					}
 				},
 				{ field: "ClientNic", title: $l.Pages_Client },

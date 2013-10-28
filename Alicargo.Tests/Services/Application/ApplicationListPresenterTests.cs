@@ -45,7 +45,7 @@ namespace Alicargo.Tests.Services.Application
 			_context.ApplicationListItemMapper.Setup(x => x.Map(data)).Returns(map);
 			_context.ApplicationGrouper.Setup(x => x.Group(map, new[] { OrderType.LegalEntity }))
 					.Returns(new ApplicationGroup[0]);
-			_context.ApplicationRepository.Setup(x => x.Count(states, clientId)).Returns(It.IsAny<long>());
+			_context.ApplicationRepository.Setup(x => x.Count(states, clientId, null)).Returns(It.IsAny<long>());
 			_context.ApplicationRepository.Setup(
 				x =>
 				x.List(0, 0, states,
@@ -60,7 +60,7 @@ namespace Alicargo.Tests.Services.Application
 			_context.StateService.Verify(x => x.GetVisibleStates(), Times.Once());
 			_context.ApplicationListItemMapper.Verify(x => x.Map(data));
 			_context.ApplicationGrouper.Verify(x => x.Group(map, new[] { OrderType.LegalEntity }), Times.Once());
-			_context.ApplicationRepository.Verify(x => x.Count(states, clientId), Times.Once());
+			_context.ApplicationRepository.Verify(x => x.Count(states, clientId, null), Times.Once());
 			_context.ApplicationRepository.Verify(x =>
 				x.List(0, 0, states,
 					   It.Is<Order[]>(y => y.Last().OrderType == OrderType.Id && y.Last().Desc),
