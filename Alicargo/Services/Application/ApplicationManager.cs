@@ -11,7 +11,7 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationManager : IApplicationManager
 	{
-		private readonly IApplicationRepository _applicationRepository;
+		private readonly IApplicationRepository _applications;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateService _stateService;
@@ -19,14 +19,14 @@ namespace Alicargo.Services.Application
 		private readonly IUnitOfWork _unitOfWork;
 
 		public ApplicationManager(
-			IApplicationRepository applicationRepository,
+			IApplicationRepository applications,
 			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig stateConfig,
 			ITransitService transitService,
 			IUnitOfWork unitOfWork,
 			IStateService stateService)
 		{
-			_applicationRepository = applicationRepository;
+			_applications = applications;
 			_applicationUpdater = applicationUpdater;
 			_stateConfig = stateConfig;
 			_transitService = transitService;
@@ -36,7 +36,7 @@ namespace Alicargo.Services.Application
 
 		public ApplicationAdminModel Get(long id)
 		{
-			var data = _applicationRepository.Get(id);
+			var data = _applications.Get(id);
 
 			var application = GetModel(data);
 
@@ -46,7 +46,7 @@ namespace Alicargo.Services.Application
 		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 						   TransitEditModel transitModel)
 		{
-			var data = _applicationRepository.Get(applicationId);
+			var data = _applications.Get(applicationId);
 
 			_transitService.Update(data.TransitId, transitModel, carrierModel);
 
@@ -75,7 +75,7 @@ namespace Alicargo.Services.Application
 
 		public void Delete(long id)
 		{
-			var applicationData = _applicationRepository.Get(id);
+			var applicationData = _applications.Get(id);
 
 			_applicationUpdater.Delete(id);
 
@@ -100,6 +100,13 @@ namespace Alicargo.Services.Application
 
 		public void SetTransitCost(long id, decimal? transitCost)
 		{
+			var calculations = _applications.GetCalculations(new[] { id });
+
+			if (calculations.ContainsKey(id))
+			{
+				throw new InvalidLogicException("Can't set transit cost after a calculation was submitted.");
+			}
+
 			_applicationUpdater.SetTransitCost(id, transitCost);
 
 			_unitOfWork.SaveChanges();

@@ -56,52 +56,56 @@
 				dataSource: getDataSource(),
 				filterable: false,
 				sortable: false,
-				groupable: true,
+				groupable: false,
 				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
 				resizable: true,
 				columns: $a.Application.GetColumns()
 			};
 
-			var detailExpand = function(e) {
-				var data = $a.Application.GetGrid().dataItem(e.masterRow);
+			if ($r.IsAdmin) {
+				$.extend(settings, { groupable: true });
+			}
 
-				$(".close-application", e.detailRow).click(function() {
-					if ($a.Confirm($l.Pages_StateSetConfirm)) {
-						var url = $u.ApplicationUpdate_Close;
-						$.post(url, { id: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
-					}
-				});
+			if (!$r.IsForwarder) {
+				var detailExpand = function(e) {
+					var data = $a.Application.GetGrid().dataItem(e.masterRow);
 
-				$(".delete-application", e.detailRow).click(function() {
-					if ($a.Confirm($l.Pages_DeleteConfirm)) {
-						var url = $u.Application_Delete;
-						$.post(url, { id: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
-					}
-				});
-
-				$(".AirWaybill-select", e.detailRow)
-					.val(data.AirWaybillId)
-					.change(function() {
-						if ($a.Confirm($l.Pages_AirWaybillSetConfirm)) {
-							var url = $u.AirWaybill_SetAirWaybill;
-							$.post(url, { AirWaybillId: $(this).val(), applicationId: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
+					$(".close-application", e.detailRow).click(function() {
+						if ($a.Confirm($l.Pages_StateSetConfirm)) {
+							var url = $u.ApplicationUpdate_Close;
+							$.post(url, { id: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
 						}
 					});
 
-				if (data.AirWaybillId && data.StateId != $s.CargoIsFlewStateId) {
-					$(".AirWaybill-holder", e.detailRow).hide();
-				} else {
-					$(".AirWaybill-holder", e.detailRow).show();
-				}
-			};
+					$(".delete-application", e.detailRow).click(function() {
+						if ($a.Confirm($l.Pages_DeleteConfirm)) {
+							var url = $u.Application_Delete;
+							$.post(url, { id: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
+						}
+					});
 
-			var detailCollapse = function(e) {
-				$(".close-application", e.detailRow).unbind("click");
-				$(".delete-application", e.detailRow).unbind("click");
-				$(".AirWaybill-select", e.detailRow).unbind("change");
-			};
+					$(".AirWaybill-select", e.detailRow)
+						.val(data.AirWaybillId)
+						.change(function() {
+							if ($a.Confirm($l.Pages_AirWaybillSetConfirm)) {
+								var url = $u.AirWaybill_SetAirWaybill;
+								$.post(url, { AirWaybillId: $(this).val(), applicationId: data.Id }).done($a.Application.UpdateGrid).fail($a.ShowError);
+							}
+						});
 
-			if (!$r.IsForwarder) {
+					if (data.AirWaybillId && data.StateId != $s.CargoIsFlewStateId) {
+						$(".AirWaybill-holder", e.detailRow).hide();
+					} else {
+						$(".AirWaybill-holder", e.detailRow).show();
+					}
+				};
+
+				var detailCollapse = function(e) {
+					$(".close-application", e.detailRow).unbind("click");
+					$(".delete-application", e.detailRow).unbind("click");
+					$(".AirWaybill-select", e.detailRow).unbind("change");
+				};
+
 				$.extend(settings, {
 					detailTemplate: kendo.template($("#application-grid-details").html()),
 					detailExpand: detailExpand,
@@ -121,12 +125,26 @@
 				$.extend(settings, {
 					editable: true,
 					edit: function(e) {
-						if (e.container.find("input[name='TransitReference']").length) return;
-						if (e.container.find("input[name='DateOfCargoReceiptLocalString']").length) return;
-						if (($r.IsForwarder || $r.IsAdmin) && e.container.find("input[name='TransitCost']").length) return;
+						var canEdit = e.container.find("input[name='TransitReference']").length != 0;
 
-						var stateName = e.container.find("input[data-text-field='StateName']");
-						if (!stateName.length || !e.model.CanSetState) $a.Application.GetGrid().closeCell();
+						if (!canEdit) {
+							canEdit = e.container.find("input[name='DateOfCargoReceiptLocalString']").length != 0;
+						}
+
+						if (!canEdit) {
+							if (e.model.CanSetTransitCost && ($r.IsForwarder || $r.IsAdmin)) {
+								canEdit = e.container.find("input[name='TransitCost']").length != 0;
+							}
+						}
+
+						if (!canEdit && e.model.CanSetState) {
+							canEdit = e.container.find("input[data-text-field='StateName']").length != 0;
+						}
+
+						if (!canEdit) {
+							$a.Application.GetGrid().closeCell();
+						}
+
 					},
 					save: function(e) {
 						if (e.values.TransitCost !== undefined) {

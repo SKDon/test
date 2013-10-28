@@ -51,7 +51,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-                // todo: 3. test time zones
+				// todo: 3. test time zones
 				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.ToLocalShortDateString() : null;
 			}
 		}
@@ -187,6 +187,8 @@ namespace Alicargo.ViewModels.Application
 
 		public bool CanClose { get; set; }
 
-		public bool CanSetState { get; set; }		
+		public bool CanSetState { get; set; }
+
+		public bool CanSetTransitCost { get; set; }
 	}
 }
