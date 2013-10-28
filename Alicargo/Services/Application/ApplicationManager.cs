@@ -112,9 +112,9 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
-		public void SetWithdrawCostEdited(long id, decimal? withdrawCost)
+		public void SetPickupCostEdited(long id, decimal? pickupCost)
 		{
-			_applicationUpdater.SetWithdrawCostEdited(id, withdrawCost);
+			_applicationUpdater.SetPickupCostEdited(id, pickupCost);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -203,11 +203,11 @@ namespace Alicargo.Services.Application
 				SwiftFile = null,
 				Torg12File = null,
 				TransitCost = data.TransitCost,
-				WithdrawCost = data.WithdrawCost,
+				PickupCost = data.PickupCost,
 				TariffPerKg = data.TariffPerKg,
 				ScotchCostEdited = data.ScotchCostEdited,
 				FactureCostEdited = data.FactureCostEdited,
-				WithdrawCostEdited = data.WithdrawCostEdited,
+				PickupCostEdited = data.PickupCostEdited,
 				SenderId = data.SenderId
 			};
 			return application;
@@ -240,10 +240,10 @@ namespace Alicargo.Services.Application
 			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
 			to.FactureCost = @from.FactureCost;
 			to.TransitCost = @from.TransitCost;
-			to.WithdrawCost = @from.WithdrawCost;
+			to.PickupCost = @from.PickupCost;
 			to.TariffPerKg = @from.TariffPerKg;
 			to.FactureCostEdited = from.FactureCostEdited;
-			to.WithdrawCostEdited = from.WithdrawCostEdited;
+			to.PickupCostEdited = from.PickupCostEdited;
 			to.ScotchCostEdited = from.ScotchCostEdited;
 			to.SenderId = from.SenderId;
 		}
@@ -286,13 +286,13 @@ namespace Alicargo.Services.Application
 				DateOfCargoReceipt = null,
 				TransitReference = null,
 				ClientId = clientId,
-				WithdrawCost = model.WithdrawCost,
+				PickupCost = model.PickupCost,
 				TransitCost = model.TransitCost,
 				FactureCost = model.FactureCost,
 				TariffPerKg = model.TariffPerKg,
 				ScotchCostEdited = model.ScotchCostEdited,
 				FactureCostEdited = model.FactureCostEdited,
-				WithdrawCostEdited = model.WithdrawCostEdited,
+				PickupCostEdited = model.PickupCostEdited,
 				SenderId = model.SenderId
 			};
 		}

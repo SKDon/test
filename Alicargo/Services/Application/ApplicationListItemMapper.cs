@@ -86,7 +86,7 @@ namespace Alicargo.Services.Application
 					Value = x.Value,
 					CurrencyId = x.CurrencyId,
 					AirWaybillId = x.AirWaybillId,
-					WithdrawCost = x.WithdrawCost,
+					PickupCost = x.PickupCost,
 					FactureCost = x.FactureCost,
 					ScotchCost = x.ScotchCost,
 					SenderScotchCost = x.SenderScotchCost,

@@ -14,7 +14,7 @@
 
 		public decimal TotalFactureCost { get; set; }
 
-		public decimal TotalWithdrawCost { get; set; }
+		public decimal TotalPickupCost { get; set; }
 
 		public decimal TotalTransitCost { get; set; }
 
@@ -22,7 +22,7 @@
 
 		public decimal TotalOfSender
 		{
-			get { return TotalSenderRate + TotalScotchCost + TotalFactureCost + TotalWithdrawCost; }
+			get { return TotalSenderRate + TotalScotchCost + TotalFactureCost + TotalPickupCost; }
 		}
 
 		public decimal? AdditionalCost { get; set; }

@@ -100,9 +100,9 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetWithdrawCostEdited(long id, long awbId, decimal? withdrawCost)
+		public virtual JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
 		{
-			_applicationManager.SetWithdrawCostEdited(id, withdrawCost);
+			_applicationManager.SetPickupCostEdited(id, pickupCost);
 
 			var data = _presenter.Row(awbId);
 

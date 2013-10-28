@@ -108,8 +108,8 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
 		public decimal? FactureCost { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "WithdrawCost")]
-		public decimal? WithdrawCost { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "PickupCost")]
+		public decimal? PickupCost { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FactureCostEdited")]
 		public decimal? FactureCostEdited { get; set; }
@@ -117,8 +117,8 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "ScotchCostEdited")]
 		public decimal? ScotchCostEdited { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "WithdrawCostEdited")]
-		public decimal? WithdrawCostEdited { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "PickupCostEdited")]
+		public decimal? PickupCostEdited { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost { get; set; }

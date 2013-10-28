@@ -75,9 +75,9 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.TariffPerKg = tariffPerKg);
 		}
 
-		public void SetWithdrawCostEdited(long id, decimal? withdrawCost)
+		public void SetPickupCostEdited(long id, decimal? pickupCost)
 		{
-			Update(id, application => application.WithdrawCostEdited = withdrawCost);
+			Update(id, application => application.PickupCostEdited = pickupCost);
 		}
 
 		public void SetFactureCostEdited(long id, decimal? factureCost)
@@ -155,9 +155,9 @@ namespace Alicargo.DataAccess.Repositories
 			to.FactureCost = @from.FactureCost;
 			to.TariffPerKg = @from.TariffPerKg;
 			to.TransitCost = @from.TransitCost;
-			to.WithdrawCost = @from.WithdrawCost;
+			to.PickupCost = @from.PickupCost;
 			to.FactureCostEdited = @from.FactureCostEdited;
-			to.WithdrawCostEdited = @from.WithdrawCostEdited;
+			to.PickupCostEdited = @from.PickupCostEdited;
 			to.ScotchCostEdited = @from.ScotchCostEdited;
 			to.SenderRate = @from.SenderRate;
 			//to.ClassId = from.

@@ -24,7 +24,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		public int ValueCurrencyId { get; set; }
 		public decimal? ScotchCost { get; set; }
 		public decimal? FactureCost { get; set; }
-		public decimal? WithdrawCost { get; set; }
+		public decimal? PickupCost { get; set; }
 		public decimal? TransitCost { get; set; }
 		public decimal? TariffPerKg { get; set; }
 		public decimal? SenderRate { get; set; }

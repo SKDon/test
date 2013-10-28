@@ -85,9 +85,9 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetWithdrawCostEdited()
+        public virtual System.Web.Mvc.JsonResult SetPickupCostEdited()
         {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetWithdrawCostEdited);
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetPickupCostEdited);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -131,7 +131,7 @@ namespace Alicargo.Controllers
             public readonly string SetSenderRate = "SetSenderRate";
             public readonly string SetScotchCostEdited = "SetScotchCostEdited";
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
-            public readonly string SetWithdrawCostEdited = "SetWithdrawCostEdited";
+            public readonly string SetPickupCostEdited = "SetPickupCostEdited";
             public readonly string SetAdditionalCost = "SetAdditionalCost";
             public readonly string SetTransitCost = "SetTransitCost";
             public readonly string SetClass = "SetClass";
@@ -148,7 +148,7 @@ namespace Alicargo.Controllers
             public const string SetSenderRate = "SetSenderRate";
             public const string SetScotchCostEdited = "SetScotchCostEdited";
             public const string SetFactureCostEdited = "SetFactureCostEdited";
-            public const string SetWithdrawCostEdited = "SetWithdrawCostEdited";
+            public const string SetPickupCostEdited = "SetPickupCostEdited";
             public const string SetAdditionalCost = "SetAdditionalCost";
             public const string SetTransitCost = "SetTransitCost";
             public const string SetClass = "SetClass";
@@ -222,15 +222,15 @@ namespace Alicargo.Controllers
             public readonly string awbId = "awbId";
             public readonly string factureCost = "factureCost";
         }
-        static readonly ActionParamsClass_SetWithdrawCostEdited s_params_SetWithdrawCostEdited = new ActionParamsClass_SetWithdrawCostEdited();
+        static readonly ActionParamsClass_SetPickupCostEdited s_params_SetPickupCostEdited = new ActionParamsClass_SetPickupCostEdited();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetWithdrawCostEdited SetWithdrawCostEditedParams { get { return s_params_SetWithdrawCostEdited; } }
+        public ActionParamsClass_SetPickupCostEdited SetPickupCostEditedParams { get { return s_params_SetPickupCostEdited; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetWithdrawCostEdited
+        public class ActionParamsClass_SetPickupCostEdited
         {
             public readonly string id = "id";
             public readonly string awbId = "awbId";
-            public readonly string withdrawCost = "withdrawCost";
+            public readonly string pickupCost = "pickupCost";
         }
         static readonly ActionParamsClass_SetAdditionalCost s_params_SetAdditionalCost = new ActionParamsClass_SetAdditionalCost();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -374,15 +374,15 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void SetWithdrawCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? withdrawCost);
+        partial void SetPickupCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? pickupCost);
 
-        public override System.Web.Mvc.JsonResult SetWithdrawCostEdited(long id, long awbId, decimal? withdrawCost)
+        public override System.Web.Mvc.JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetWithdrawCostEdited);
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetPickupCostEdited);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "withdrawCost", withdrawCost);
-            SetWithdrawCostEditedOverride(callInfo, id, awbId, withdrawCost);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pickupCost", pickupCost);
+            SetPickupCostEditedOverride(callInfo, id, awbId, pickupCost);
             return callInfo;
         }
 

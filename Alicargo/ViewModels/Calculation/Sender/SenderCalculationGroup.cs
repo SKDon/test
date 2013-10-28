@@ -25,7 +25,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 				Weigth = new Holder<float>(items.Sum(x => x.Weigth ?? 0));
 				Value = new Holder<decimal>(items.Sum(x => x.Value));
 				SenderScotchCost = new Holder<decimal>(items.Sum(x => x.SenderScotchCost ?? 0));
-				WithdrawCost = new Holder<decimal>(items.Sum(x => x.WithdrawCost ?? 0));
+				PickupCost = new Holder<decimal>(items.Sum(x => x.PickupCost ?? 0));
 				FactureCost = new Holder<decimal>(items.Sum(x => x.FactureCost ?? 0));
 			}
 
@@ -36,7 +36,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 			public Holder<float> Weigth { get; private set; }
 			public Holder<decimal> Value { get; private set; }
 			public Holder<decimal> SenderScotchCost { get; private set; }
-			public Holder<decimal> WithdrawCost { get; private set; }
+			public Holder<decimal> PickupCost { get; private set; }
 			public Holder<decimal> FactureCost { get; private set; }
 		}
 

@@ -4526,13 +4526,13 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<decimal> _FactureCost;
 		
-		private System.Nullable<decimal> _WithdrawCost;
+		private System.Nullable<decimal> _PickupCost;
 		
 		private System.Nullable<decimal> _FactureCostEdited;
 		
 		private System.Nullable<decimal> _ScotchCostEdited;
 		
-		private System.Nullable<decimal> _WithdrawCostEdited;
+		private System.Nullable<decimal> _PickupCostEdited;
 		
 		private System.Nullable<decimal> _TariffPerKg;
 		
@@ -4642,14 +4642,14 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnMarkNameChanged();
     partial void OnFactureCostChanging(System.Nullable<decimal> value);
     partial void OnFactureCostChanged();
-    partial void OnWithdrawCostChanging(System.Nullable<decimal> value);
-    partial void OnWithdrawCostChanged();
+    partial void OnPickupCostChanging(System.Nullable<decimal> value);
+    partial void OnPickupCostChanged();
     partial void OnFactureCostEditedChanging(System.Nullable<decimal> value);
     partial void OnFactureCostEditedChanged();
     partial void OnScotchCostEditedChanging(System.Nullable<decimal> value);
     partial void OnScotchCostEditedChanged();
-    partial void OnWithdrawCostEditedChanging(System.Nullable<decimal> value);
-    partial void OnWithdrawCostEditedChanged();
+    partial void OnPickupCostEditedChanging(System.Nullable<decimal> value);
+    partial void OnPickupCostEditedChanged();
     partial void OnTariffPerKgChanging(System.Nullable<decimal> value);
     partial void OnTariffPerKgChanged();
     partial void OnSenderRateChanging(System.Nullable<decimal> value);
@@ -5553,22 +5553,22 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithdrawCost", DbType="Money")]
-		public System.Nullable<decimal> WithdrawCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PickupCost", DbType="Money")]
+		public System.Nullable<decimal> PickupCost
 		{
 			get
 			{
-				return this._WithdrawCost;
+				return this._PickupCost;
 			}
 			set
 			{
-				if ((this._WithdrawCost != value))
+				if ((this._PickupCost != value))
 				{
-					this.OnWithdrawCostChanging(value);
+					this.OnPickupCostChanging(value);
 					this.SendPropertyChanging();
-					this._WithdrawCost = value;
-					this.SendPropertyChanged("WithdrawCost");
-					this.OnWithdrawCostChanged();
+					this._PickupCost = value;
+					this.SendPropertyChanged("PickupCost");
+					this.OnPickupCostChanged();
 				}
 			}
 		}
@@ -5613,22 +5613,22 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithdrawCostEdited", DbType="Money")]
-		public System.Nullable<decimal> WithdrawCostEdited
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PickupCostEdited", DbType="Money")]
+		public System.Nullable<decimal> PickupCostEdited
 		{
 			get
 			{
-				return this._WithdrawCostEdited;
+				return this._PickupCostEdited;
 			}
 			set
 			{
-				if ((this._WithdrawCostEdited != value))
+				if ((this._PickupCostEdited != value))
 				{
-					this.OnWithdrawCostEditedChanging(value);
+					this.OnPickupCostEditedChanging(value);
 					this.SendPropertyChanging();
-					this._WithdrawCostEdited = value;
-					this.SendPropertyChanged("WithdrawCostEdited");
-					this.OnWithdrawCostEditedChanged();
+					this._PickupCostEdited = value;
+					this.SendPropertyChanged("PickupCostEdited");
+					this.OnPickupCostEditedChanged();
 				}
 			}
 		}

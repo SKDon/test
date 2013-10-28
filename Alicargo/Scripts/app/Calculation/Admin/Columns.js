@@ -28,7 +28,7 @@
 							"TotalSenderRate": { type: "number", editable: false },
 							"ScotchCost": { type: "number", editable: true },
 							"FactureCost": { type: "number", editable: true },
-							"WithdrawCost": { type: "number", editable: true },
+							"PickupCost": { type: "number", editable: true },
 							"TransitCost": { type: "number", editable: true },
 							"InsuranceCost": { type: "number", editable: false },
 							"Profit": { type: "number", editable: false }
@@ -126,7 +126,7 @@
 				{ field: "ScotchCost", groupFooterTemplate: groupFooterTemplate, title: $l.Entities_ScotchCost, attributes: textRight, footerAttributes: textRight },
 				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: textRight, footerAttributes: textRight },
 				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: textRight },
-				{ field: "WithdrawCost", title: $l.Entities_WithdrawCost, attributes: textRight },
+				{ field: "PickupCost", title: $l.Entities_PickupCost, attributes: textRight },
 				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #", attributes: textRight, footerAttributes: textRight },
 				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
 				{

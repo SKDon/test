@@ -33,7 +33,7 @@ namespace Alicargo.ViewModels.Calculation
 				   + (application.ScotchCostEdited ?? GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
 				   + GetInsuranceCost(application.Value)
 				   + (application.FactureCostEdited ?? application.FactureCost ?? 0)
-				   + (application.WithdrawCostEdited ?? application.WithdrawCost ?? 0)
+				   + (application.PickupCostEdited ?? application.PickupCost ?? 0)
 				   + (application.TransitCost ?? 0);
 		}
 
@@ -43,7 +43,7 @@ namespace Alicargo.ViewModels.Calculation
 				   + (application.ScotchCost ?? 0)
 				   + GetInsuranceCost(application.Value)
 				   + (application.FactureCost ?? 0)
-				   + (application.WithdrawCost ?? 0)
+				   + (application.PickupCost ?? 0)
 				   + (application.TransitCost ?? 0);
 		}
 	}

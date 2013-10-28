@@ -106,9 +106,9 @@ namespace Alicargo.Services.Email
 			// todo: 2. think what an email should be sent
 	    }
 
-	    public void SetWithdrawCostEdited(long id, decimal? withdrawCost)
+	    public void SetPickupCostEdited(long id, decimal? pickupCost)
 	    {
-		    _manager.SetWithdrawCostEdited(id, withdrawCost);
+		    _manager.SetPickupCostEdited(id, pickupCost);
 
 			// todo: 2. think what an email should be sent
 	    }

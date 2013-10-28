@@ -646,6 +646,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pick up (€).
+        /// </summary>
+        public static string PickupCost {
+            get {
+                return ResourceManager.GetString("PickupCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pick up* (€).
+        /// </summary>
+        public static string PickupCostEdited {
+            get {
+                return ResourceManager.GetString("PickupCostEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Стоимость доставки.
         /// </summary>
         public static string PriceForDelivery {
@@ -966,24 +984,6 @@ namespace Resources {
         public static string Weigth {
             get {
                 return ResourceManager.GetString("Weigth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pick up (€).
-        /// </summary>
-        public static string WithdrawCost {
-            get {
-                return ResourceManager.GetString("WithdrawCost", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pick up* (€).
-        /// </summary>
-        public static string WithdrawCostEdited {
-            get {
-                return ResourceManager.GetString("WithdrawCostEdited", resourceCulture);
             }
         }
     }

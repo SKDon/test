@@ -55,10 +55,10 @@
 	[MarkName]				NVARCHAR(320)		NOT NULL, 
 
 	[FactureCost]			MONEY				NULL,
-	[WithdrawCost]			MONEY				NULL,
+	[PickupCost]			MONEY				NULL,
 	[FactureCostEdited]		MONEY				NULL,
 	[ScotchCostEdited]		MONEY				NULL,
-	[WithdrawCostEdited]	MONEY				NULL,
+	[PickupCostEdited]	MONEY				NULL,
 	[TariffPerKg]			MONEY				NULL,
 	[SenderRate]			MONEY				NULL,
 	[TransitCost]			MONEY				NULL,

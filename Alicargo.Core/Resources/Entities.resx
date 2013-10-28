@@ -360,7 +360,7 @@
   <data name="TransitCost" xml:space="preserve">
     <value>Доставка (€)</value>
   </data>
-  <data name="WithdrawCost" xml:space="preserve">
+  <data name="PickupCost" xml:space="preserve">
     <value>Pick up (€)</value>
   </data>
   <data name="CostPerKgOfSender" xml:space="preserve">
@@ -405,7 +405,7 @@
   <data name="ScotchCostEdited" xml:space="preserve">
     <value>Скотч* (€)</value>
   </data>
-  <data name="WithdrawCostEdited" xml:space="preserve">
+  <data name="PickupCostEdited" xml:space="preserve">
     <value>Pick up* (€)</value>
   </data>
   <data name="Sender" xml:space="preserve">

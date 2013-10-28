@@ -109,7 +109,7 @@ namespace Alicargo.Services.Calculation
 				TransitCost = a.TransitCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
-				WithdrawCost = a.WithdrawCost, // ReSharper disable PossibleInvalidOperationException
+				PickupCost = a.PickupCost, // ReSharper disable PossibleInvalidOperationException
 				AirWaybillId = a.AirWaybillId.Value, // ReSharper restore PossibleInvalidOperationException
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weigth),

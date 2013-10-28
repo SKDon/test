@@ -177,7 +177,7 @@ namespace Alicargo.ViewModels.Application
 
 		public decimal? TransitCost { get; set; }
 
-		public decimal? WithdrawCost { get; set; }
+		public decimal? PickupCost { get; set; }
 
 		#endregion
 

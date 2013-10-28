@@ -16,7 +16,7 @@ namespace Alicargo.Contracts.Repositories
 		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);
 		void SetTransitCost(long id, decimal? transitCost);
 		void SetTariffPerKg(long id, decimal? tariffPerKg);
-		void SetWithdrawCostEdited(long id, decimal? withdrawCost);
+		void SetPickupCostEdited(long id, decimal? pickupCost);
 		void SetFactureCostEdited(long id, decimal? factureCost);
 		void SetScotchCostEdited(long id, decimal? scotchCost);
 		void SetSenderRate(long id, decimal? senderRate);

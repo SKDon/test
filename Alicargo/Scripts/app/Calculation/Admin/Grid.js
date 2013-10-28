@@ -149,11 +149,11 @@
 						factureCost: e.values.FactureCost
 					}, awbId);
 				}
-				if (e.values.WithdrawCost !== undefined) {
-					post($u.Calculation_SetWithdrawCostEdited, {
+				if (e.values.PickupCost !== undefined) {
+					post($u.Calculation_SetPickupCostEdited, {
 						id: applicationId,
 						awbId: awbId,
-						withdrawCost: e.values.WithdrawCost
+						pickupCost: e.values.PickupCost
 					}, awbId);
 				}
 				if (e.values.TransitCost !== undefined) {

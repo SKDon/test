@@ -103,7 +103,7 @@ namespace Alicargo.Services.Application
 			to.CurrencyId = @from.Currency.CurrencyId;
 			to.Volume = @from.Volume;
 			to.FactureCost = @from.FactureCost;
-			to.WithdrawCost = from.WithdrawCost;
+			to.PickupCost = from.PickupCost;
 			to.CountryId = from.CountryId;
 		}
 
@@ -129,7 +129,7 @@ namespace Alicargo.Services.Application
 				},
 				Volume = application.Volume,
 				FactureCost = application.FactureCost,
-				WithdrawCost = application.WithdrawCost,
+				PickupCost = application.PickupCost,
 				CountryId = application.CountryId
 			};
 		}

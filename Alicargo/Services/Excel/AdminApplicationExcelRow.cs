@@ -247,10 +247,10 @@ namespace Alicargo.Services.Excel
 			get { return _application.TransitCost; }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "WithdrawCost")]
-		public decimal? WithdrawCost
+		[DisplayNameLocalized(typeof(Entities), "PickupCost")]
+		public decimal? PickupCost
 		{
-			get { return _application.WithdrawCost; }
+			get { return _application.PickupCost; }
 		}		
 	}
 }

@@ -62,10 +62,10 @@ namespace Alicargo.DataAccess.Repositories
 				TariffPerKg = x.TariffPerKg,
 				SenderRate = x.SenderRate,
 				TransitCost = x.TransitCost,
-				WithdrawCost = x.WithdrawCost,
+				PickupCost = x.PickupCost,
 				FactureCostEdited = x.FactureCostEdited,
 				ScotchCostEdited = x.ScotchCostEdited,
-				WithdrawCostEdited = x.WithdrawCostEdited,
+				PickupCostEdited = x.PickupCostEdited,
 				SenderId = x.SenderId
 			};
 		}
@@ -230,8 +230,8 @@ namespace Alicargo.DataAccess.Repositories
 				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,
-				WithdrawCost = x.WithdrawCostEdited ?? x.WithdrawCost,
-				SenderWithdrawCost = x.WithdrawCost,
+				PickupCost = x.PickupCostEdited ?? x.PickupCost,
+				SenderPickupCost = x.PickupCost,
 				SenderRate = x.SenderRate,
 				SenderId = x.SenderId
 			}).ToArray();

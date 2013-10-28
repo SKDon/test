@@ -113,10 +113,10 @@ namespace Alicargo.Services.Calculation
 				SenderScotchCost = a.SenderScotchCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
-				WithdrawCost = a.SenderWithdrawCost, // ReSharper disable PossibleInvalidOperationException
+				PickupCost = a.SenderPickupCost, // ReSharper disable PossibleInvalidOperationException
 				AirWaybillId = a.AirWaybillId.Value, // ReSharper restore PossibleInvalidOperationException
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				Profit = (a.SenderScotchCost ?? 0) + (a.SenderFactureCost ?? 0) + (a.SenderWithdrawCost ?? 0)
+				Profit = (a.SenderScotchCost ?? 0) + (a.SenderFactureCost ?? 0) + (a.SenderPickupCost ?? 0)
 						 + CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
 				SenderRate = a.SenderRate
@@ -138,7 +138,7 @@ namespace Alicargo.Services.Calculation
 							   TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weigth)),
 							   TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
 							   TotalFactureCost = rows.Sum(x => x.SenderFactureCost ?? 0),
-							   TotalWithdrawCost = rows.Sum(x => x.SenderWithdrawCost ?? 0),
+							   TotalPickupCost = rows.Sum(x => x.SenderPickupCost ?? 0),
 							   CostPerKgOfSender = null,
 							   FlightCostPerKg = null
 						   };
