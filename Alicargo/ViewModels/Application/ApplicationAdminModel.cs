@@ -96,7 +96,7 @@ namespace Alicargo.ViewModels.Application
 		[DataType(DataType.EmailAddress), MaxLength(320), DisplayNameLocalized(typeof(Entities), "FactoryEmail")]
 		public string FactoryEmail { get; set; }
 
-		[DataType(DataType.MultilineText), DisplayNameLocalized(typeof(Entities), "FactoryContact")]
+		[DataType(DataType.Text), DisplayNameLocalized(typeof(Entities), "FactoryContact")]
 		public string FactoryContact { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Mark")]

@@ -55,6 +55,12 @@ namespace Alicargo.Services.Excel
 			get { return _application.TransitMethodOfTransitString; }
 		}
 
+		[DisplayNameLocalized(typeof(Entities), "DeliveryType")]
+		public string TransitDeliveryTypeString
+		{
+			get { return _application.TransitDeliveryTypeString; }
+		}
+
 		[DisplayNameLocalized(typeof(Entities), "City")]
 		public string TransitCity
 		{
