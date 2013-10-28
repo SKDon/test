@@ -970,7 +970,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Забор (€).
+        ///   Looks up a localized string similar to Pick up (€).
         /// </summary>
         public static string WithdrawCost {
             get {
@@ -979,7 +979,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Забор* (€).
+        ///   Looks up a localized string similar to Pick up* (€).
         /// </summary>
         public static string WithdrawCostEdited {
             get {

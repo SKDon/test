@@ -5,8 +5,8 @@ INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (3, N'Cargo is not ready'
 INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (13, N'Factory does not respond', 30) -- Фабрика не отвечает
 INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (2, N'Factory awaits payment', 40) -- Фабрика ждет оплату
 INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (10, N'Factory cargo sent', 50) -- Фабрика отправила груз
-INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (15, N'Cargo ready to pick-up', 55) -- Груз готов для забора
-INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (4, N'Cargo withdraw', 60) -- Груз забран на фабрике
+INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (15, N'Cargo ready to pick up', 55) -- Груз готов для забора
+INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (4, N'Cargo pick up', 60) -- Груз забран на фабрике
 INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (6, N'Cargo in stock', 70) -- Груз на складе
 INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (7, N'Cargo flew', 90) -- Груз вылетел
 INSERT [dbo].[State] ([Id], [Name], [Position]) VALUES (8, N'Cargo at customs', 100) -- Груз на таможне

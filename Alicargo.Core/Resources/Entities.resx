@@ -361,7 +361,7 @@
     <value>Доставка (€)</value>
   </data>
   <data name="WithdrawCost" xml:space="preserve">
-    <value>Забор (€)</value>
+    <value>Pick up (€)</value>
   </data>
   <data name="CostPerKgOfSender" xml:space="preserve">
     <value>Стоимость за килограмм для сендера (€)</value>
@@ -406,7 +406,7 @@
     <value>Скотч* (€)</value>
   </data>
   <data name="WithdrawCostEdited" xml:space="preserve">
-    <value>Забор* (€)</value>
+    <value>Pick up* (€)</value>
   </data>
   <data name="Sender" xml:space="preserve">
     <value>Отправитель</value>

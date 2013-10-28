@@ -364,7 +364,7 @@
     <value>Delivery (€)</value>
   </data>
   <data name="WithdrawCost" xml:space="preserve">
-    <value>Withdraw (€)</value>
+    <value>Pick up (€)</value>
   </data>
   <data name="CostPerKgOfSender" xml:space="preserve">
     <value>The cost per kilogram for Sender (€)</value>
@@ -409,7 +409,7 @@
     <value>Tape* (€)</value>
   </data>
   <data name="WithdrawCostEdited" xml:space="preserve">
-    <value>Withdraw* (€)</value>
+    <value>Pick up* (€)</value>
   </data>
   <data name="SenderRate" xml:space="preserve">
     <value>rate sender euro/kg</value>

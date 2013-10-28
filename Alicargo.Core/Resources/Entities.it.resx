@@ -364,7 +364,7 @@
     <value>Consegna (€)</value>
   </data>
   <data name="WithdrawCost" xml:space="preserve">
-    <value>Prelevare (€)</value>
+    <value>Raccogliere (€)</value>
   </data>
   <data name="CostPerKgOfSender" xml:space="preserve">
     <value>Il costo al chilogrammo per il mittente (€)</value>
@@ -409,7 +409,7 @@
     <value>Nastro* (€)</value>
   </data>
   <data name="WithdrawCostEdited" xml:space="preserve">
-    <value>Prelevare* (€)</value>
+    <value>Raccogliere* (€)</value>
   </data>
   <data name="SenderRate" xml:space="preserve">
     <value>rate sender euro/kg</value>
