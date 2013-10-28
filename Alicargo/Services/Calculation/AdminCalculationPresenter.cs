@@ -13,32 +13,32 @@ namespace Alicargo.Services.Calculation
 	public sealed class AdminCalculationPresenter : IAdminCalculationPresenter
 	{
 		private readonly IApplicationRepository _applications;
-		private readonly IAwbRepository _awbRepository;
+		private readonly IAwbRepository _awbs;
 		private readonly ISenderRepository _senders;
-		private readonly IClientRepository _clientRepository;
+		private readonly IClientRepository _clients;
 
 		public AdminCalculationPresenter(
 			IApplicationRepository applications,
-			IAwbRepository awbRepository,
+			IAwbRepository awbs,
 			ISenderRepository senders,
-			IClientRepository clientRepository)
+			IClientRepository clients)
 		{
 			_applications = applications;
-			_awbRepository = awbRepository;
+			_awbs = awbs;
 			_senders = senders;
-			_clientRepository = clientRepository;
+			_clients = clients;
 		}
 
 		public CalculationListCollection List(int take, long skip)
 		{
-			var awbs = _awbRepository.GetRange(take, skip).OrderByDescending(awb => awb.DateOfArrival).ToArray();
+			var awbs = _awbs.GetRange(take, skip).OrderByDescending(awb => awb.DateOfArrival).ToArray();
 
 			return List(awbs);
 		}
 
 		public CalculationListCollection Row(long awbId)
 		{
-			var data = _awbRepository.Get(awbId);
+			var data = _awbs.Get(awbId);
 
 			return List(data);
 		}
@@ -47,7 +47,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var awbs = data.ToDictionary(x => x.Id, x => x);
 
-			var applications = _applications.GetByAirWaybill(awbs.Select(x => x.Key).ToArray());
+			var applications = _applications.GetByAirWaybill(awbs.Select(x => x.Key).ToArray()).OrderBy(x => x.ClientId).ThenBy(x => x.Id).ToArray();
 
 			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
 
@@ -60,7 +60,7 @@ namespace Alicargo.Services.Calculation
 			return new CalculationListCollection
 			{
 				Groups = groups.ToArray(),
-				Total = _awbRepository.Count(),
+				Total = _awbs.Count(),
 				Info = info
 			};
 		}
@@ -137,7 +137,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var calculations = _applications.GetCalculations(appIds);
-			var nics = _clientRepository.GetNicByApplications(appIds);
+			var nics = _clients.GetNicByApplications(appIds);
 			var ranks = data.Select((pair, i) => new { pair.Id, Rank = i }).ToDictionary(x => x.Id, x => x.Rank);
 
 			return applications.Select(a => new CalculationItem

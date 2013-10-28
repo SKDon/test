@@ -118,6 +118,8 @@ namespace Alicargo.Contracts.Contracts
 
 		public decimal? SenderRate { get; set; }
 
+		public long ClientId { get; set; }
+
 		#endregion
 	}
 }

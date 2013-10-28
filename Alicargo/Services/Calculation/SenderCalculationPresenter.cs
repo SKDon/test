@@ -65,7 +65,8 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applicationRepository.List(senderId: senderId, stateIds: stateIds)
 													 .OrderBy(x => x.AirWaybillId)
-													 .ThenByDescending(x => x.Id)
+													 .ThenBy(x => x.ClientId)
+													 .ThenBy(x => x.Id)
 													 .ToArray();
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var calculations = _applicationRepository.GetCalculations(appIds);

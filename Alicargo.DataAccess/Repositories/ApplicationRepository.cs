@@ -194,6 +194,7 @@ namespace Alicargo.DataAccess.Repositories
 				CPFileName = x.CPFileName,
 				Characteristic = x.Characteristic,
 				ClientLegalEntity = x.Client.LegalEntity,
+				ClientId = x.ClientId,
 				ClientNic = x.Client.Nic,
 				CountryId = x.CountryId,
 				ClassId = x.ClassId,
