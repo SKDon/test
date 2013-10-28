@@ -12,18 +12,18 @@ namespace Alicargo.Services.Calculation
 {
 	public sealed class AdminCalculationPresenter : IAdminCalculationPresenter
 	{
-		private readonly IApplicationRepository _applicationRepository;
+		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbRepository;
 		private readonly ISenderRepository _senders;
 		private readonly IClientRepository _clientRepository;
 
 		public AdminCalculationPresenter(
-			IApplicationRepository applicationRepository,
+			IApplicationRepository applications,
 			IAwbRepository awbRepository,
 			ISenderRepository senders,
 			IClientRepository clientRepository)
 		{
-			_applicationRepository = applicationRepository;
+			_applications = applications;
 			_awbRepository = awbRepository;
 			_senders = senders;
 			_clientRepository = clientRepository;
@@ -47,7 +47,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var awbs = data.ToDictionary(x => x.Id, x => x);
 
-			var applications = _applicationRepository.GetByAirWaybill(awbs.Select(x => x.Key).ToArray());
+			var applications = _applications.GetByAirWaybill(awbs.Select(x => x.Key).ToArray());
 
 			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
 
@@ -136,7 +136,7 @@ namespace Alicargo.Services.Calculation
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
-			var calculations = _applicationRepository.GetCalculations(appIds);
+			var calculations = _applications.GetCalculations(appIds);
 			var nics = _clientRepository.GetNicByApplications(appIds);
 			var ranks = data.Select((pair, i) => new { pair.Id, Rank = i }).ToDictionary(x => x.Id, x => x.Rank);
 

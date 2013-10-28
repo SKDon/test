@@ -58,10 +58,11 @@
 	[PickupCost]			MONEY				NULL,
 	[FactureCostEdited]		MONEY				NULL,
 	[ScotchCostEdited]		MONEY				NULL,
-	[PickupCostEdited]	MONEY				NULL,
+	[PickupCostEdited]		MONEY				NULL,
 	[TariffPerKg]			MONEY				NULL,
 	[SenderRate]			MONEY				NULL,
 	[TransitCost]			MONEY				NULL,
+	[TransitCostEdited]		MONEY				NULL,
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),
