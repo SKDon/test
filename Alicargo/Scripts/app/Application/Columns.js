@@ -1,11 +1,11 @@
-﻿$(function () {
+﻿$(function() {
 
 	var $a = Alicargo;
 	var $u = $a.Urls;
 	var $r = $a.Roles;
 	var $l = $a.Localization;
 
-	$a.Application = (function ($apl) {
+	$a.Application = (function($apl) {
 
 		function dateEditor(container, options) {
 			$('<input name="' + options.field + '" data-text-field="' + options.field
@@ -21,7 +21,7 @@
 				.appendTo(container)
 				.kendoDropDownList({
 					autoBind: false,
-					select: function (e) {
+					select: function(e) {
 						if ($a.Confirm($l.Pages_StateSetConfirm)) {
 							var dataItem = this.dataItem(e.item.index());
 							var url = $u.ApplicationUpdate_SetState;
@@ -46,7 +46,10 @@
 				});
 		}
 
-		var groupHeaderTemplateAwb = "#= Alicargo.Localization.Entities_AWB + ':' + !!value ? value : Alicargo.Localization.Pages_NoAirWaybill #";
+		var groupHeaderTemplateAwb = function(data) {
+			return $l.Entities_AWB + ': ' + (!!data.value ? data.value : $l.Pages_NoAirWaybill);
+		};
+
 		var adminColumns = [
 			{ field: "CreationTimestampLocalString", title: $l.Entities_CreationTimestamp, groupable: false, width: "90px" },
 			{ field: "State", title: $l.Entities_StateName, groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
@@ -100,7 +103,13 @@
 			{ field: "TransitWarehouseWorkingTime", title: $l.Entities_WarehouseWorkingTime, groupable: false, width: "90px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{ field: "TransitCost", title: $l.Entities_TransitCost, groupable: false, width: "150px" },
-			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
+			{
+				field: "AirWaybill",
+				title: $l.Entities_AirWaybill,
+				groupable: true,
+				width: "150px",
+				groupHeaderTemplate: groupHeaderTemplateAwb
+			}];
 
 		var senderColumns = [
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true },
@@ -117,7 +126,7 @@
 			{ field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false },
 			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
-		$apl.GetColumns = function () {
+		$apl.GetColumns = function() {
 			if ($r.IsClient) {
 				return clientColumns;
 			} else if ($r.IsForwarder) {
