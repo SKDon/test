@@ -27,7 +27,7 @@
 						// должны быть перечислены все группируемые поля
 						"TransitCost": { type: "number", editable: true }, // поле не группируемое, но задается тип
 						"AirWaybill": { type: "string", editable: false },
-						"State": { editable: false },
+						"State": { editable: true },
 						"ClientNic": { type: "string", editable: false },
 						"ClientLegalEntity": { type: "string", editable: false }
 						
