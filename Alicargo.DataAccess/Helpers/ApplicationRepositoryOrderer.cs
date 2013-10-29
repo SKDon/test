@@ -52,14 +52,11 @@ namespace Alicargo.DataAccess.Helpers
 		// todo: 3. test
 		private static IQueryable<Application> ByAirWaybillBill(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
-			var ordered = Order(applications, desc, isFirst, x => x.AirWaybillId.HasValue);
+			var ordered = Order(applications, desc, isFirst, x => !x.AirWaybillId.HasValue);
 
-			if (desc) // todo: 3. test for implicit direction
-			{
-				return ordered.ThenBy(x => x.AirWaybill.CreationTimestamp);
-			}
-
-			return ordered.ThenByDescending(x => x.AirWaybill.CreationTimestamp);
+			return desc
+				? ordered.ThenByDescending(x => x.AirWaybill.CreationTimestamp)
+				: ordered.ThenBy(x => x.AirWaybill.CreationTimestamp);
 		}
 
 		private static IQueryable<Application> ByLegalEntity(IQueryable<Application> applications, bool desc, bool isFirst)

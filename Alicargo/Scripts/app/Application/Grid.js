@@ -52,7 +52,7 @@
 				serverPaging: true,
 				serverGrouping: true,
 				error: $a.ShowError,
-				group: { field: "AirWaybill", dir: "asc" }
+				group: { field: "AirWaybill", dir: "desc" }
 			};
 
 			if (!$r.IsClient) {
