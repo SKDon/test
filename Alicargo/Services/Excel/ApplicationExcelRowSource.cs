@@ -48,7 +48,7 @@ namespace Alicargo.Services.Excel
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var data = _applications.List(stateIds: stateIds, orders: new[] { new Order { Desc = true, OrderType = OrderType.Id } });
+			var data = _applications.List(stateIds: stateIds, orders: Order.Default);
 
 			return _itemMapper.Map(data);
 		}

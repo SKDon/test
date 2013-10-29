@@ -14,8 +14,8 @@ namespace Alicargo.Services.Calculation
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
-		private readonly ISenderRepository _senders;
 		private readonly IClientRepository _clients;
+		private readonly ISenderRepository _senders;
 
 		public AdminCalculationPresenter(
 			IApplicationRepository applications,
@@ -47,7 +47,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var awbs = data.ToDictionary(x => x.Id, x => x);
 
-			var applications = _applications.GetByAirWaybill(awbs.Select(x => x.Key).ToArray()).OrderBy(x => x.ClientId).ThenBy(x => x.Id).ToArray();
+			var applications = _applications.GetByAirWaybill(awbs.Select(x => x.Key).ToArray()).ToArray();
 
 			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
 
@@ -138,7 +138,9 @@ namespace Alicargo.Services.Calculation
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var calculations = _applications.GetCalculations(appIds);
 			var nics = _clients.GetNicByApplications(appIds);
-			var ranks = data.Select((pair, i) => new { pair.Id, Rank = i }).ToDictionary(x => x.Id, x => x.Rank);
+			var ranks = data.OrderByDescending(x => x.CreationTimestamp)
+							.Select((pair, i) => new { pair.Id, Rank = i })
+							.ToDictionary(x => x.Id, x => x.Rank);
 
 			return applications.Select(a => new CalculationItem
 			{
@@ -165,7 +167,7 @@ namespace Alicargo.Services.Calculation
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
 				IsCalculated = calculations.ContainsKey(a.Id),
 				ClassId = (ClassType?)a.ClassId
-			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
+			}).OrderBy(x => ranks[x.AirWaybillId]).ThenBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
 		}
 
 		private static void AddMissedGroups(IList<AirWaybillData> awbs, IList<CalculationGroup> groups)

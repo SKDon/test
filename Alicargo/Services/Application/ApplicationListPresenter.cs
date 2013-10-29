@@ -51,9 +51,9 @@ namespace Alicargo.Services.Application
 
         private static Order[] PrepareOrders(IEnumerable<Order> orders)
         {
-            var byId = new[] { new Order { Desc = true, OrderType = OrderType.Id } };
+            //var byId = new[] { new Order { Desc = true, OrderType = OrderType.Id } };
 
-            return orders == null ? byId : orders.Concat(byId).ToArray();
+			return orders == null ? Order.Default : orders.Concat(Order.Default).ToArray();
         }
     }
 }

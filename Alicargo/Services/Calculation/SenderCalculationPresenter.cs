@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
@@ -64,10 +65,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var applications = _applications.List(senderId: senderId, stateIds: stateIds, skip: skip, take: take)
-											.OrderBy(x => x.AirWaybillId)
-											.ThenBy(x => x.ClientId)
-											.ThenBy(x => x.Id)
+			var applications = _applications.List(senderId: senderId, stateIds: stateIds, skip: skip, take: take, orders: Order.Default)
 											.ToArray();
 
 			total = _applications.Count(stateIds, senderId: senderId);
