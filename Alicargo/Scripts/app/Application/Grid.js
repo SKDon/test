@@ -21,7 +21,18 @@
 
 		function getDataSource() {
 			var schema = {
-				model: { id: "Id" },
+				model: {
+					id: "Id",
+					fields: {
+						// должны быть перечислены все группируемые поля
+						"TransitCost": { type: "number", editable: true }, // поле не группируемое, но задается тип
+						"AirWaybill": { type: "string", editable: false },
+						"State": { editable: false },
+						"ClientNic": { type: "string", editable: false },
+						"ClientLegalEntity": { type: "string", editable: false }
+						
+					}
+				},
 				data: "Data",
 				total: "Total",
 				groups: "Groups"
@@ -121,6 +132,12 @@
 				});
 			}
 
+			function post(url, data) {
+				$.post(url, data).fail($a.ShowError).success(function() {
+					$apl.GetGrid().refresh();
+				});
+			}
+
 			if (!$r.IsClient && !$r.IsBroker)
 				$.extend(settings, {
 					editable: true,
@@ -148,22 +165,22 @@
 					},
 					save: function(e) {
 						if (e.values.TransitCost !== undefined) {
-							$.post($u.ApplicationUpdate_SetTransitCost, {
+							post($u.ApplicationUpdate_SetTransitCost, {
 								id: e.model.Id,
 								transitCost: e.values.TransitCost
-							}).fail($a.ShowError);
+							});
 						}
 						if (e.values.TransitReference !== undefined) {
-							$.post($u.ApplicationUpdate_SetTransitReference, {
+							post($u.ApplicationUpdate_SetTransitReference, {
 								id: e.model.Id,
 								TransitReference: e.values.TransitReference
-							}).fail($a.ShowError);
+							});
 						}
 						if (e.values.DateOfCargoReceiptLocalString !== undefined) {
-							$.post($u.ApplicationUpdate_SetDateOfCargoReceipt, {
+							post($u.ApplicationUpdate_SetDateOfCargoReceipt, {
 								id: e.model.Id,
 								dateOfCargoReceipt: kendo.toString(e.values.DateOfCargoReceiptLocalString, "d")
-							}).fail($a.ShowError);
+							});
 						}
 					}
 				});
