@@ -92,6 +92,7 @@
 			{ field: "Weigth", title: $l.Entities_Weigth, groupable: false, width: "46px", groupFooterTemplate: "#= kendo.toString(Weigth.sum, 'n2') #", format: "{0:n2}" },
 			{ field: "TransitCarrierName", title: $l.Entities_CarrierName, groupable: false, width: "100px" },
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
+			{ field: "TransitDeliveryTypeString", title: $l.Entities_DeliveryType, groupable: false, width: "75px" },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
 			{ field: "TransitRecipientName", title: $l.Entities_RecipientName, groupable: false, width: "100px" },
 			{ field: "TransitAddress", title: $l.Entities_Address, groupable: false, width: "100px" },
