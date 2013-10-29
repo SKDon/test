@@ -16,8 +16,8 @@ namespace Alicargo.Services.Calculation
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
-		private readonly IStateService _stateService;
 		private readonly IClientRepository _clientRepository;
+		private readonly IStateService _stateService;
 
 		public ClientCalculationPresenter(
 			IApplicationRepository applicationRepository,
@@ -36,14 +36,11 @@ namespace Alicargo.Services.Calculation
 			long total;
 			var applications = GetCalculatedApplicationsWithAwb(clientId, take, skip, out total);
 
-			// ReSharper disable PossibleInvalidOperationException
-			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId.Value).ToArray())
-				// ReSharper restore PossibleInvalidOperationException
-										 .OrderByDescending(x => x.DateOfArrival)
+			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId ?? 0).ToArray())
+										 .OrderByDescending(x => x.CreationTimestamp)
 										 .ToArray();
 
-
-			var items = GetItems(awbsData, applications);
+			var items = GetItems(applications);
 
 			var groups = GetGroups(awbsData, items);
 
@@ -62,40 +59,37 @@ namespace Alicargo.Services.Calculation
 													 .ToArray();
 
 			var appIds = applications.Select(x => x.Id).ToArray();
-			
+
 			var calculations = _applicationRepository.GetCalculations(appIds);
-			
+
 			applications = applications.Where(x => calculations.ContainsKey(x.Id) && x.AirWaybillId.HasValue).ToArray();
 
 			total = applications.LongLength;
 
-			return applications.Skip((int)skip).Take(take).ToArray();
+			return applications.Skip((int) skip).Take(take).ToArray();
 		}
 
 		private static List<ClientCalculationGroup> GetGroups(IEnumerable<AirWaybillData> awbsData,
 			IEnumerable<ClientCalculationItem> items)
 		{
-			var groups = items.GroupBy(x => x.AirWaybillId).Select(g =>
+			return items.GroupBy(x => x.AirWaybillId).Select(g =>
 			{
-				var itemsGroup = g.ToArray();
+				var itemsGroup1 = g.ToArray();
+
 				return new ClientCalculationGroup
 				{
 					AirWaybillId = g.Key,
-					items = itemsGroup,
+					items = itemsGroup1,
 					value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
 					aggregates = new ClientCalculationGroup.Aggregates(g.Sum(x => x.Profit))
 				};
 			}).ToList();
-
-			return groups;
 		}
 
-		private IEnumerable<ClientCalculationItem> GetItems(IEnumerable<AirWaybillData> awbsData,
-			ApplicationListItemData[] applications)
+		private IEnumerable<ClientCalculationItem> GetItems(ApplicationListItemData[] applications)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var nics = _clientRepository.GetNicByApplications(appIds);
-			var ranks = awbsData.Select((pair, i) => new { pair.Id, Rank = i }).ToDictionary(x => x.Id, x => x.Rank);
 
 			return applications.Select(a => new ClientCalculationItem
 			{
@@ -119,9 +113,9 @@ namespace Alicargo.Services.Calculation
 				Profit = CalculationHelper.GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
 				ClassName = a.ClassId.HasValue
-					? ((ClassType)a.ClassId.Value).ToLocalString()
+					? ((ClassType) a.ClassId.Value).ToLocalString()
 					: ""
-			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
+			}).ToArray();
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace Alicargo.Services.Calculation
 
 		public CalculationListCollection List(int take, long skip)
 		{
-			var awbs = _awbs.GetRange(take, skip).OrderByDescending(awb => awb.DateOfArrival).ToArray();
+			var awbs = _awbs.GetRange(take, skip).OrderByDescending(awb => awb.CreationTimestamp).ToArray();
 
 			return List(awbs);
 		}
@@ -51,11 +51,11 @@ namespace Alicargo.Services.Calculation
 
 			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
 
-			var items = GetItems(data, applications, tariffs);
+			var items = GetItems(applications, tariffs);
 
-			var info = GetInfo(awbs, applications, tariffs);
+			var info = GetInfo(data, applications, tariffs);
 
-			var groups = GetGroups(data, items, awbs);
+			var groups = GetGroups(data, items);
 
 			return new CalculationListCollection
 			{
@@ -65,82 +65,77 @@ namespace Alicargo.Services.Calculation
 			};
 		}
 
-		private static CalculationAwbInfo[] GetInfo(Dictionary<long, AirWaybillData> awbs, IEnumerable<ApplicationData> items,
+		private static CalculationAwbInfo[] GetInfo(
+			IEnumerable<AirWaybillData> awbs,
+			IEnumerable<ApplicationData> items,
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
-			return awbs.Select(x => x.Value)
-					   .Select(awb =>
-					   {
-						   var rows = items.Where(a => a.AirWaybillId == awb.Id).ToArray();
+			return awbs.Select(awb =>
+			{
+				var rows = items.Where(a => a.AirWaybillId == awb.Id).ToArray();
 
-						   var info = new CalculationAwbInfo
-						   {
-							   AirWaybillId = awb.Id,
-							   TotalCostOfSenderForWeight = awb.TotalCostOfSenderForWeight ?? 0,
-							   FlightCost = awb.FlightCost ?? 0,
-							   CustomCost = awb.CustomCost ?? 0,
-							   BrokerCost = awb.BrokerCost ?? 0,
-							   AdditionalCost = awb.AdditionalCost,
-							   TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
-							   TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
-							   TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
-							   TotalPickupCost = rows.Sum(x => x.PickupCost ?? 0),
-							   TotalTransitCost = rows.Sum(x => x.TransitCost ?? 0),
-							   TotalInsuranceCost = rows.Sum(x => CalculationHelper.GetInsuranceCost(x.Value)),
-							   BrokerCostPerKg = null,
-							   CostPerKgOfSender = null,
-							   CustomCostPerKg = null,
-							   FlightCostPerKg = null,
-							   ProfitPerKg = null,
-							   Profit = 0xBAD
-						   };
+				var info = new CalculationAwbInfo
+				{
+					AirWaybillId = awb.Id,
+					TotalCostOfSenderForWeight = awb.TotalCostOfSenderForWeight ?? 0,
+					FlightCost = awb.FlightCost ?? 0,
+					CustomCost = awb.CustomCost ?? 0,
+					BrokerCost = awb.BrokerCost ?? 0,
+					AdditionalCost = awb.AdditionalCost,
+					TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
+					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
+					TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
+					TotalPickupCost = rows.Sum(x => x.PickupCost ?? 0),
+					TotalTransitCost = rows.Sum(x => x.TransitCost ?? 0),
+					TotalInsuranceCost = rows.Sum(x => CalculationHelper.GetInsuranceCost(x.Value)),
+					BrokerCostPerKg = null,
+					CostPerKgOfSender = null,
+					CustomCostPerKg = null,
+					FlightCostPerKg = null,
+					ProfitPerKg = null,
+					Profit = 0xBAD
+				};
 
-						   info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x, tariffs)) - info.TotalExpenses;
+				info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x, tariffs)) - info.TotalExpenses;
 
-						   var totalWeight = (decimal)rows.Sum(x => x.Weight ?? 0);
+				var totalWeight = (decimal)rows.Sum(x => x.Weight ?? 0);
 
-						   if (totalWeight != 0)
-						   {
-							   info.ProfitPerKg = info.Profit / totalWeight;
-							   info.CostPerKgOfSender = info.TotalSenderRate / totalWeight;
-							   info.FlightCostPerKg = info.FlightCost / totalWeight;
-							   info.CustomCostPerKg = info.CustomCost / totalWeight;
-							   info.BrokerCostPerKg = info.BrokerCost / totalWeight;
-						   }
+				if (totalWeight != 0)
+				{
+					info.ProfitPerKg = info.Profit / totalWeight;
+					info.CostPerKgOfSender = info.TotalSenderRate / totalWeight;
+					info.FlightCostPerKg = info.FlightCost / totalWeight;
+					info.CustomCostPerKg = info.CustomCost / totalWeight;
+					info.BrokerCostPerKg = info.BrokerCost / totalWeight;
+				}
 
-						   return info;
-					   }).ToArray();
+				return info;
+			}).ToArray();
 		}
 
-		private static List<CalculationGroup> GetGroups(IList<AirWaybillData> data, IEnumerable<CalculationItem> items,
-			IReadOnlyDictionary<long, AirWaybillData> awbs)
+		private static List<CalculationGroup> GetGroups(IEnumerable<AirWaybillData> data, IEnumerable<CalculationItem> items)
 		{
-			var groups = items.GroupBy(x => x.AirWaybillId).Select(g =>
+			return data.Select(awb =>
 			{
-				var itemsGroup = g.ToArray();
+				var rows = items.Where(a => a.AirWaybillId == awb.Id).ToArray();
+
 				return new CalculationGroup
 				{
-					AirWaybillId = g.Key,
-					items = itemsGroup,
-					value = new { id = g.Key, text = AwbHelper.GetAirWaybillDisplay(awbs[g.Key]) },
-					aggregates = new CalculationGroup.Aggregates(itemsGroup)
+					AirWaybillId = awb.Id,
+					items = rows,
+					value = new { id = awb.Id, text = AwbHelper.GetAirWaybillDisplay(awb) },
+					aggregates = new CalculationGroup.Aggregates(rows)
 				};
 			}).ToList();
-
-			AddMissedGroups(data, groups);
-
-			return groups;
 		}
 
-		private IEnumerable<CalculationItem> GetItems(IEnumerable<AirWaybillData> data, ApplicationData[] applications,
+		private IEnumerable<CalculationItem> GetItems(
+			ApplicationData[] applications,
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var calculations = _applications.GetCalculations(appIds);
 			var nics = _clients.GetNicByApplications(appIds);
-			var ranks = data.OrderByDescending(x => x.CreationTimestamp)
-							.Select((pair, i) => new { pair.Id, Rank = i })
-							.ToDictionary(x => x.Id, x => x.Rank);
 
 			return applications.Select(a => new CalculationItem
 			{
@@ -167,25 +162,7 @@ namespace Alicargo.Services.Calculation
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),
 				ClassId = (ClassType?)a.ClassId
-			}).OrderBy(x => ranks[x.AirWaybillId]).ThenBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
-		}
-
-		private static void AddMissedGroups(IList<AirWaybillData> awbs, IList<CalculationGroup> groups)
-		{
-			for (var i = 0; i < awbs.Count; i++)
-			{
-				var awb = awbs[i];
-				if (groups.Count == i || awb.Id != groups[i].AirWaybillId)
-				{
-					groups.Insert(i, new CalculationGroup
-					{
-						AirWaybillId = awb.Id,
-						items = new CalculationItem[0],
-						value = new { id = awb.Id, text = AwbHelper.GetAirWaybillDisplay(awb) },
-						aggregates = new CalculationGroup.Aggregates(new CalculationItem[0])
-					});
-				}
-			}
+			}).OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
 		}
 	}
 }
