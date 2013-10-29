@@ -523,3 +523,8 @@ CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), 
 
 INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
 CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
+
+GO
+UPDATE [dbo].[Application]
+SET [SenderId] = 1
+WHERE [SenderId] IS NULL
