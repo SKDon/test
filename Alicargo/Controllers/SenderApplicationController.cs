@@ -91,7 +91,7 @@ namespace Alicargo.Controllers
 
 			_applicationSenderManager.Update(id, model);
 
-			return RedirectToAction(MVC.ApplicationList.Index());
+			return RedirectToAction(MVC.SenderApplication.Edit(id));
 		}
 
 		private void BindBag(long appId, int? count)

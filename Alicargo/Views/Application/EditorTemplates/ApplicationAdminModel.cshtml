@@ -9,9 +9,8 @@
 		@Html.EditorWithLabelFor(model => model.Invoice)
 		@Html.EditorWithLabelFor(model => model.Weigth)
 		@Html.EditorWithLabelFor(model => model.Count)
-		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>)</label>
-		@Html.EditorFor(model => model.Volume)
-		
+
+
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.FactoryContact)
@@ -20,8 +19,7 @@
 		@Html.EditorWithLabelFor(model => model.TermsOfDelivery)
 		@Html.LabelFor(model => model.MethodOfDelivery)
 		@Html.DropDownListForEnum(model => model.MethodOfDelivery)
-		@Html.LabelFor(x => x.SenderId)
-		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long, string>)ViewBag.Senders, "")
+
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.FactoryEmail)
@@ -30,6 +28,22 @@
 		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
 		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
 		@Html.EditorWithLabelFor(model => model.Currency)
+
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>)</label>
+		@Html.EditorFor(model => model.Volume)
+	</div>
+	<div class="span4">
+		@Html.LabelFor(x => x.SenderId)
+		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long, string>)ViewBag.Senders, "")
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)
+	</div>
+	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.TariffPerKg)
 	</div>
 </div>
@@ -42,10 +56,9 @@
 	</div>
 	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.TransitCost)
-		@Html.EditorWithLabelFor(model => model.TransitCostEdited)
 	</div>
 	<div class="span2">
-		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)
+		@Html.EditorWithLabelFor(model => model.TransitCostEdited)
 	</div>
 	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.PickupCost)

@@ -148,7 +148,7 @@ namespace Alicargo.Controllers
 
 			_applicationManager.Update(id, model, carrierModel, transitModel);
 
-			return RedirectToAction(MVC.ApplicationList.Index());
+			return RedirectToAction(MVC.Application.Edit(id));
 		}
 
 		#endregion
