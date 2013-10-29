@@ -60,9 +60,13 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applicationRepository.List(clientId: clientId, stateIds: stateIds, orders: Order.Default)
 													 .ToArray();
+
 			var appIds = applications.Select(x => x.Id).ToArray();
+			
 			var calculations = _applicationRepository.GetCalculations(appIds);
+			
 			applications = applications.Where(x => calculations.ContainsKey(x.Id) && x.AirWaybillId.HasValue).ToArray();
+
 			total = applications.LongLength;
 
 			return applications.Skip((int)skip).Take(take).ToArray();

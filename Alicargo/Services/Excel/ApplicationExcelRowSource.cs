@@ -50,6 +50,12 @@ namespace Alicargo.Services.Excel
 
 			var data = _applications.List(stateIds: stateIds, orders: Order.Default);
 
+			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
+
+			var withAwb = data.Where(x => x.AirWaybillId.HasValue);
+
+			data = withoutAwb.Concat(withAwb).ToArray();
+
 			return _itemMapper.Map(data);
 		}
 	}
