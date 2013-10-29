@@ -38,12 +38,7 @@ namespace Alicargo.Services.Calculation
 			long total;
 			var applications = GetApplications(senderId, take, (int)skip, out total);
 
-			// ReSharper disable PossibleInvalidOperationException
-			var awbsData = _awbs.Get(applications.Where(x => x.AirWaybillId.HasValue).Select(x => x.AirWaybillId.Value).ToArray())
-				// ReSharper restore PossibleInvalidOperationException
-								.OrderByDescending(x => x.DateOfArrival)
-								.ToArray();
-
+			var awbsData = _awbs.Get(applications.Select(x => x.AirWaybillId ?? 0).ToArray()).ToArray();
 
 			var items = GetItems(awbsData, applications);
 
