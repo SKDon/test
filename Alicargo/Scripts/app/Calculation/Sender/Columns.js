@@ -30,7 +30,7 @@
 					dir: "asc",
 					aggregates: [
 						{ field: "Count", aggregate: "sum" },
-						{ field: "Weigth", aggregate: "sum" },
+						{ field: "Weight", aggregate: "sum" },
 						{ field: "Value", aggregate: "sum" },
 						{ field: "SenderScotchCost", aggregate: "sum" },
 						{ field: "TotalSenderRate", aggregate: "sum" },
@@ -68,7 +68,7 @@
 				{ field: "Invoice", title: $l.Entities_Invoice },
 				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: textRight, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
 				{ field: "Count", title: $l.Entities_Count, attributes: textRight, groupFooterTemplate: groupFooterTemplate0, footerAttributes: textRight },
-				{ field: "Weigth", title: $l.Entities_Weigth, format: n2Format, attributes: textRight, groupFooterTemplate: groupFooterTemplate0, footerAttributes: textRight },
+				{ field: "Weight", title: $l.Entities_Weight, format: n2Format, attributes: textRight, groupFooterTemplate: groupFooterTemplate0, footerAttributes: textRight },
 				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format, attributes: textRight },
 				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
 				{ field: "SenderScotchCost", title: $l.Entities_ScotchCost, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },

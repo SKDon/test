@@ -94,7 +94,7 @@ namespace Alicargo.Services.Application
 			to.Count = @from.Count;
 			to.PackingFileName = @from.PackingFileName;
 			to.FactoryName = @from.FactoryName;
-			to.Weigth = @from.Weigth;
+			to.Weight = @from.Weight;
 			to.Invoice = @from.Invoice;
 			to.InvoiceFileName = @from.InvoiceFileName;
 			to.MarkName = @from.MarkName;
@@ -115,7 +115,7 @@ namespace Alicargo.Services.Application
 				PackingFile = null,
 				PackingFileName = application.PackingFileName,
 				FactoryName = application.FactoryName,
-				Weigth = application.Weigth,
+				Weight = application.Weight,
 				Invoice = application.Invoice,
 				InvoiceFile = null,
 				InvoiceFileName = application.InvoiceFileName,

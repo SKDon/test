@@ -84,7 +84,7 @@ namespace Alicargo.Services.Application
 				TransitReference = x.TransitReference,
 				TransitWarehouseWorkingTime = x.TransitWarehouseWorkingTime,
 				WarehouseWorkingTime = x.WarehouseWorkingTime,
-				Weigth = x.Weigth,
+				Weight = x.Weight,
 				MethodOfDeliveryId = x.MethodOfDeliveryId,
 				Value = x.Value,
 				CurrencyId = x.CurrencyId,

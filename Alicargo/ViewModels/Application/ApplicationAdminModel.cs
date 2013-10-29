@@ -69,8 +69,8 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
 		public string WarehouseWorkingTime { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "Weigth")]
-		public float? Weigth { get; set; }
+		[DisplayNameLocalized(typeof(Entities), "Weight")]
+		public float? Weight { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Count")]
 		public int? Count { get; set; }

@@ -69,7 +69,7 @@ namespace Alicargo.Services.Email
 								 model.MarkName,
 								 model.Count,
 								 model.Volume,
-								 model.Weigth,
+								 model.Weight,
 								 model.Characteristic,
 								 ApplicationHelper.GetValueString(model.Value, (CurrencyType)model.CurrencyId, culture),
 								 model.AddressLoad,

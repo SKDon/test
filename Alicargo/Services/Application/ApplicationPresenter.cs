@@ -72,7 +72,7 @@ namespace Alicargo.Services.Application
 				TransitReference = data.TransitReference,
 				TransitWarehouseWorkingTime = data.TransitWarehouseWorkingTime,
 				WarehouseWorkingTime = data.WarehouseWorkingTime,
-				Weigth = data.Weight,
+				Weight = data.Weight,
 				MethodOfDeliveryId = data.MethodOfDeliveryId,
 				Value = data.Value,
 				CurrencyId = data.CurrencyId,

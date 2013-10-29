@@ -38,8 +38,8 @@ namespace Alicargo.ViewModels.Application
 		[Required, DisplayNameLocalized(typeof (Entities), "Invoice")]
 		public string Invoice { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Weigth")]
-		public float? Weigth { get; set; }
+		[DisplayNameLocalized(typeof (Entities), "Weight")]
+		public float? Weight { get; set; }
 
 		[DisplayNameLocalized(typeof (Entities), "Count")]
 		public int? Count { get; set; }

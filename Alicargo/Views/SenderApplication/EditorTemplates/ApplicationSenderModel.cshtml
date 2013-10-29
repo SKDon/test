@@ -9,7 +9,7 @@
 		@Html.EditorWithLabelFor(model => model.Currency)
 	</div>
 	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.Weigth)
+		@Html.EditorWithLabelFor(model => model.Weight)
 		@Html.EditorWithLabelFor(model => model.Count)
 		@Html.LabelFor(x => x.CountryId)
 		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)

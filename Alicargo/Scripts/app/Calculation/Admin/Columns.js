@@ -19,7 +19,7 @@
 							"Mark": { type: "string", editable: false },
 							"Class": { type: "string", editable: true },
 							"Count": { type: "number", editable: false },
-							"Weigth": { type: "number", editable: false },
+							"Weight": { type: "number", editable: false },
 							"Invoice": { type: "string", editable: false },
 							"Value": { type: "number", editable: false },
 							"TariffPerKg": { type: "number", editable: true },
@@ -53,7 +53,7 @@
 					dir: "asc",
 					aggregates: [
 						{ field: "Count", aggregate: "sum" },
-						{ field: "Weigth", aggregate: "sum" },
+						{ field: "Weight", aggregate: "sum" },
 						{ field: "Value", aggregate: "sum" },
 						{ field: "TotalTariffCost", aggregate: "sum" },
 						{ field: "TotalSenderRate", aggregate: "sum" },
@@ -116,7 +116,7 @@
 					template: function(model) { return classType[model.ClassId]; }
 				},
 				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #", attributes: textRight, footerAttributes: textRight },
-				{ field: "Weigth", title: $l.Entities_Weigth, groupFooterTemplate: groupFooterTemplate, format: n2Format, attributes: textRight, footerAttributes: textRight },
+				{ field: "Weight", title: $l.Entities_Weight, groupFooterTemplate: groupFooterTemplate, format: n2Format, attributes: textRight, footerAttributes: textRight },
 				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format, attributes: textRight },
 				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
 				{ field: "Invoice", title: $l.Entities_Invoice },

@@ -990,9 +990,9 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Вес (кг).
         /// </summary>
-        public static string Weigth {
+        public static string Weight {
             get {
-                return ResourceManager.GetString("Weigth", resourceCulture);
+                return ResourceManager.GetString("Weight", resourceCulture);
             }
         }
     }

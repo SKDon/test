@@ -191,8 +191,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			aggregate1.TotalCount.ShouldBeEquivalentTo(data1.Count + data2.Count);
 			aggregate2.TotalCount.ShouldBeEquivalentTo(data3.Count + data4.Count);
 
-			aggregate1.TotalWeight.ShouldBeEquivalentTo(data1.Weigth + data2.Weigth);
-			aggregate2.TotalWeight.ShouldBeEquivalentTo(data3.Weigth + data4.Weigth);
+			aggregate1.TotalWeight.ShouldBeEquivalentTo(data1.Weight + data2.Weight);
+			aggregate2.TotalWeight.ShouldBeEquivalentTo(data3.Weight + data4.Weight);
 		}
 
 		private ApplicationData CreateApplicationData(long clientId)

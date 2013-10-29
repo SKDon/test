@@ -18,7 +18,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		public string Factory { get; set; }
 		public string Mark { get; set; }
 		public int? Count { get; set; }
-		public float? Weigth { get; set; }
+		public float? Weight { get; set; }
 		public string Invoice { get; set; }
 		public decimal Value { get; set; }
 		public int ValueCurrencyId { get; set; }

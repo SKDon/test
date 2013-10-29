@@ -103,7 +103,7 @@ namespace Alicargo.Services.Application
 			Func<IGrouping<T, ApplicationListItem>, string> getValue)
 		{
 			int count;
-			float weigth;
+			float weight;
 
 			if (field == OrderHelper.AwbFieldName)
 			{
@@ -111,24 +111,24 @@ namespace Alicargo.Services.Application
 				if (_awbAggregates.ContainsKey(id))
 				{
 					count = _awbAggregates[id].TotalCount;
-					weigth = _awbAggregates[id].TotalWeight;
+					weight = _awbAggregates[id].TotalWeight;
 				}
 				else
 				{
 					// todo: 2. test
 					count = _countWithouAwb ?? 0;
-					weigth = _weightWithouAwb ?? 0;
+					weight = _weightWithouAwb ?? 0;
 				}
 			}
 			else
 			{
 				count = grouping.Sum(y => y.Count ?? 0);
-				weigth = grouping.Sum(y => y.Weigth ?? 0);
+				weight = grouping.Sum(y => y.Weight ?? 0);
 			}
 
 			return new ApplicationGroup
 			{
-				aggregates = new ApplicationGroup.Aggregates(count, weigth),
+				aggregates = new ApplicationGroup.Aggregates(count, weight),
 				field = field,
 				value = getValue(grouping),
 				hasSubgroups = orders.Count > 0,

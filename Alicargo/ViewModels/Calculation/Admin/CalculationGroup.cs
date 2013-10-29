@@ -19,7 +19,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 			public Aggregates(CalculationItem[] items)
 			{
 				Count = new Holder<int>(items.Sum(x => x.Count ?? 0));
-				Weigth = new Holder<float>(items.Sum(x => x.Weigth ?? 0));
+				Weight = new Holder<float>(items.Sum(x => x.Weight ?? 0));
 				Value = new Holder<decimal>(items.Sum(x => x.Value));
 				TotalTariffCost = new Holder<decimal>(items.Sum(x => x.TotalTariffCost));
 				TotalSenderRate = new Holder<decimal>(items.Sum(x => x.TotalSenderRate));
@@ -31,7 +31,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 
 			public Holder<decimal> TotalSenderRate { get; private set; }
 			public Holder<int> Count { get; private set; }
-			public Holder<float> Weigth { get; private set; }
+			public Holder<float> Weight { get; private set; }
 			public Holder<decimal> Value { get; private set; }
 			public Holder<decimal> TotalTariffCost { get; private set; }
 			public Holder<decimal> ScotchCost { get; private set; }

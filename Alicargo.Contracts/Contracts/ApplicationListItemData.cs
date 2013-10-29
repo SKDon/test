@@ -56,7 +56,7 @@ namespace Alicargo.Contracts.Contracts
 
 		public string WarehouseWorkingTime { get; set; }
 
-		public float? Weigth { get; set; }
+		public float? Weight { get; set; }
 
 		public int? Count { get; set; }
 

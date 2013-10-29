@@ -132,7 +132,7 @@ namespace Alicargo.DataAccess.Repositories
 			to.Characteristic = @from.Characteristic;
 			to.AddressLoad = @from.AddressLoad;
 			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
-			to.Weight = @from.Weigth;
+			to.Weight = @from.Weight;
 			to.Count = @from.Count;
 			to.Volume = @from.Volume;
 			to.TermsOfDelivery = @from.TermsOfDelivery;

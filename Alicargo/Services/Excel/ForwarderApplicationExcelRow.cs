@@ -37,10 +37,10 @@ namespace Alicargo.Services.Excel
 			get { return _application.Count; }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "Weigth")]
-		public float? Weigth
+		[DisplayNameLocalized(typeof(Entities), "Weight")]
+		public float? Weight
 		{
-			get { return _application.Weigth; }
+			get { return _application.Weight; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "CarrierName")]

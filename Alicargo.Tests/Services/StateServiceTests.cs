@@ -153,10 +153,10 @@ namespace Alicargo.Tests.Services
 
 
         [TestMethod]
-        public void Test_ApplyBusinessLogicToStates_Weigth()
+        public void Test_ApplyBusinessLogicToStates_Weight()
         {
             var applicationData = _context.Create<ApplicationData>();
-            applicationData.Weigth = null;
+            applicationData.Weight = null;
             applicationData.AirWaybillId = null;
             var availableStates = new[] {_context.Create<long>()};
 

@@ -66,7 +66,7 @@ namespace Alicargo.Contracts.Contracts
 
 		public string WarehouseWorkingTime { get; set; }
 
-		public float? Weigth { get; set; }
+		public float? Weight { get; set; }
 
 		public int? Count { get; set; }
 
@@ -101,8 +101,6 @@ namespace Alicargo.Contracts.Contracts
 		public int CurrencyId { get; set; }
 
 		public decimal Value { get; set; }
-
-		public float? Weight { get; set; }
 
 		public long? AirWaybillId { get; set; }		
 

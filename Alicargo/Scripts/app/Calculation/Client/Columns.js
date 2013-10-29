@@ -44,7 +44,7 @@
 				{ field: "Mark", title: $l.Entities_Mark },
 				{ field: "ClassName", title: $l.Entities_Class },
 				{ field: "Count", title: $l.Entities_Count, attributes: texRight },
-				{ field: "Weigth", title: $l.Entities_Weigth, format: n2Format, attributes: texRight },
+				{ field: "Weight", title: $l.Entities_Weight, format: n2Format, attributes: texRight },
 				{ field: "Invoice", title: $l.Entities_Invoice },
 				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: texRight },
 				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: n2Format, attributes: texRight },

@@ -41,7 +41,7 @@ namespace Alicargo.Services.Calculation
 
 			var awb = _awbs.Get(application.AirWaybillId.Value).First();
 
-			var weigth = application.Weigth ?? 0;
+			var weight = application.Weight ?? 0;
 			var tariffPerKg = application.TariffPerKg ?? 0;
 			var insurance = application.Value / CalculationHelper.InsuranceRate;
 			var scotch = GetTapeCost(application);
@@ -58,7 +58,7 @@ namespace Alicargo.Services.Calculation
 				MarkName = application.MarkName,
 				ScotchCost = scotch,
 				TariffPerKg = tariffPerKg,
-				Weight = weigth
+				Weight = weight
 			};
 
 			_calculations.Add(calculation, applicationId);

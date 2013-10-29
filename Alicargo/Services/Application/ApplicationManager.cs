@@ -197,7 +197,7 @@ namespace Alicargo.Services.Application
 				FactoryEmail = data.FactoryEmail,
 				FactoryName = data.FactoryName,
 				FactoryPhone = data.FactoryPhone,
-				Weigth = data.Weigth,
+				Weight = data.Weight,
 				Invoice = data.Invoice,
 				InvoiceFileName = data.InvoiceFileName,
 				PackingFileName = data.PackingFileName,
@@ -240,7 +240,7 @@ namespace Alicargo.Services.Application
 			to.Characteristic = @from.Characteristic;
 			to.AddressLoad = @from.AddressLoad;
 			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
-			to.Weigth = @from.Weigth;
+			to.Weight = @from.Weight;
 			to.Count = @from.Count;
 			to.Volume = @from.Volume;
 			to.TermsOfDelivery = @from.TermsOfDelivery;
@@ -283,7 +283,7 @@ namespace Alicargo.Services.Application
 				Characteristic = model.Characteristic,
 				AddressLoad = model.AddressLoad,
 				WarehouseWorkingTime = model.WarehouseWorkingTime,
-				Weigth = model.Weigth,
+				Weight = model.Weight,
 				Count = model.Count,
 				Volume = model.Volume,
 				TermsOfDelivery = model.TermsOfDelivery,

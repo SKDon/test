@@ -50,7 +50,7 @@ namespace Alicargo.Tests.Services.Application
 				item.Id = i;
 				item.ClientLegalEntity = "Client " + i % clientCount;
 				item.Count = i;
-				item.Weigth = i;
+				item.Weight = i;
 			}
 
 			var groups = grouper.Group(applications, new[]
@@ -65,7 +65,7 @@ namespace Alicargo.Tests.Services.Application
 			{
 				var @group = groups[index];
 				@group.aggregates.Count.sum.ShouldBeEquivalentTo(index);
-				@group.aggregates.Weigth.sum.ShouldBeEquivalentTo(index);
+				@group.aggregates.Weight.sum.ShouldBeEquivalentTo(index);
 				@group.hasSubgroups.ShouldBeEquivalentTo(true);
 				foreach (ApplicationGroup item in @group.items)
 				{

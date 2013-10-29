@@ -81,7 +81,7 @@ namespace Alicargo.Services.Calculation
 							   CustomCost = awb.CustomCost ?? 0,
 							   BrokerCost = awb.BrokerCost ?? 0,
 							   AdditionalCost = awb.AdditionalCost,
-							   TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weigth)),
+							   TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
 							   TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
 							   TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
 							   TotalPickupCost = rows.Sum(x => x.PickupCost ?? 0),
@@ -97,7 +97,7 @@ namespace Alicargo.Services.Calculation
 
 						   info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x, tariffs)) - info.TotalExpenses;
 
-						   var totalWeight = (decimal)rows.Sum(x => x.Weigth ?? 0);
+						   var totalWeight = (decimal)rows.Sum(x => x.Weight ?? 0);
 
 						   if (totalWeight != 0)
 						   {
@@ -157,14 +157,14 @@ namespace Alicargo.Services.Calculation
 				SenderRate = a.SenderRate,
 				TransitCost = a.TransitCostEdited ?? a.TransitCost,
 				ValueCurrencyId = a.CurrencyId,
-				Weigth = a.Weigth,
+				Weight = a.Weight,
 				PickupCost = a.PickupCostEdited ?? a.PickupCost, // ReSharper disable PossibleInvalidOperationException
 				AirWaybillId = a.AirWaybillId.Value, // ReSharper restore PossibleInvalidOperationException
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weigth),
+				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
 				Profit = CalculationHelper.GetProfit(a, tariffs),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
-				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weigth),
+				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),
 				ClassId = (ClassType?)a.ClassId
 			}).OrderBy(x => ranks[x.AirWaybillId]).ThenBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();

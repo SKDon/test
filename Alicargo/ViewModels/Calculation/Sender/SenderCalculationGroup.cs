@@ -22,7 +22,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 				TotalSenderRate = new Holder<decimal>(items.Sum(x => x.TotalSenderRate));
 
 				Count = new Holder<int>(items.Sum(x => x.Count ?? 0));
-				Weigth = new Holder<float>(items.Sum(x => x.Weigth ?? 0));
+				Weight = new Holder<float>(items.Sum(x => x.Weight ?? 0));
 				Value = new Holder<decimal>(items.Sum(x => x.Value));
 				SenderScotchCost = new Holder<decimal>(items.Sum(x => x.SenderScotchCost ?? 0));
 				PickupCost = new Holder<decimal>(items.Sum(x => x.PickupCost ?? 0));
@@ -33,7 +33,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 			public Holder<decimal> TotalSenderRate { get; private set; }
 
 			public Holder<int> Count { get; private set; }
-			public Holder<float> Weigth { get; private set; }
+			public Holder<float> Weight { get; private set; }
 			public Holder<decimal> Value { get; private set; }
 			public Holder<decimal> SenderScotchCost { get; private set; }
 			public Holder<decimal> PickupCost { get; private set; }
