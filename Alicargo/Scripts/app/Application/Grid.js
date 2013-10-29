@@ -30,7 +30,7 @@
 						"State": { editable: true },
 						"ClientNic": { type: "string", editable: false },
 						"ClientLegalEntity": { type: "string", editable: false }
-						
+
 					}
 				},
 				data: "Data",
@@ -164,19 +164,19 @@
 
 					},
 					save: function(e) {
-						if (e.values.TransitCost !== undefined) {
+						if ($r.IsForwarder && e.values.TransitCost !== undefined) {
 							post($u.ApplicationUpdate_SetTransitCost, {
 								id: e.model.Id,
 								transitCost: e.values.TransitCost
 							});
 						}
-						if (e.values.TransitReference !== undefined) {
+						if (($r.IsForwarder || $r.IsAdmin) && e.values.TransitReference !== undefined) {
 							post($u.ApplicationUpdate_SetTransitReference, {
 								id: e.model.Id,
 								TransitReference: e.values.TransitReference
 							});
 						}
-						if (e.values.DateOfCargoReceiptLocalString !== undefined) {
+						if ($r.IsAdmin && e.values.DateOfCargoReceiptLocalString !== undefined) {
 							post($u.ApplicationUpdate_SetDateOfCargoReceipt, {
 								id: e.model.Id,
 								dateOfCargoReceipt: kendo.toString(e.values.DateOfCargoReceiptLocalString, "d")

@@ -59,7 +59,6 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		// todo: !!! определить кому должен быть доступен этот метов
 		[Access(RoleType.Forwarder), HttpPost]
 		public virtual HttpStatusCodeResult SetTransitCost(long id, decimal? transitCost)
 		{
