@@ -38,15 +38,13 @@ namespace Alicargo.Services.Calculation
 			long total;
 			var applications = GetApplications(senderId, take, (int)skip, out total);
 
-			var awbsData = _awbs.Get(applications.Select(x => x.AirWaybillId ?? 0).ToArray()).ToArray();
+			var items = GetItems(applications);
 
-			var items = GetItems(awbsData, applications);
+			var groups = GetGroups(items);
 
-			var groups = GetGroups(awbsData, items);
+			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).ToArray());
 
-			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
-
-			var info = GetInfo(awbsData, applications, tariffs);
+			var info = GetInfo(groups, applications, tariffs);
 
 			return new SenderCalculationListCollection
 			{
@@ -65,12 +63,17 @@ namespace Alicargo.Services.Calculation
 
 			total = _applications.Count(stateIds, senderId: senderId);
 
-			return applications;
+			var withoutAwb = applications.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
+
+			var withAwb = applications.Where(x => x.AirWaybillId.HasValue);
+
+			return withoutAwb.Concat(withAwb).ToArray();
 		}
 
-		private static List<SenderCalculationGroup> GetGroups(IEnumerable<AirWaybillData> awbsData,
-			IEnumerable<SenderCalculationItem> items)
+		private List<SenderCalculationGroup> GetGroups(SenderCalculationItem[] items)
 		{
+			var awbsData = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
+
 			var groups = items.GroupBy(x => x.AirWaybillId).Select(g =>
 			{
 				var itemsGroup = g.ToArray();
@@ -81,20 +84,19 @@ namespace Alicargo.Services.Calculation
 					AirWaybillId = g.Key,
 					items = itemsGroup,
 					value = new { id = g.Key, text },
-					aggregates = new SenderCalculationGroup.Aggregates(itemsGroup)
+					aggregates = new SenderCalculationGroup.Aggregates(itemsGroup),
+					FlightCost = awb != null ? awb.FlightCost ?? 0 : 0,
+					TotalCostOfSenderForWeight = awb != null ? awb.TotalCostOfSenderForWeight ?? 0 : 0
 				};
 			}).ToList();
 
 			return groups;
 		}
 
-		private IEnumerable<SenderCalculationItem> GetItems(IEnumerable<AirWaybillData> awbsData,
-			ApplicationListItemData[] applications)
+		private SenderCalculationItem[] GetItems(ApplicationListItemData[] applications)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var nics = _clients.GetNicByApplications(appIds);
-			var ranks = awbsData.Select((pair, i) => new { pair.Id, Rank = i }).ToDictionary(x => x.Id, x => x.Rank);
-			ranks.Add(0, -1);
 
 			return applications.Select(a => new SenderCalculationItem
 			{
@@ -110,28 +112,29 @@ namespace Alicargo.Services.Calculation
 				ValueCurrencyId = a.CurrencyId,
 				Weight = a.Weight,
 				PickupCost = a.SenderPickupCost,
-				AirWaybillId = a.AirWaybillId ?? 0,
+				AirWaybillId = a.AirWaybillId,
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
 				Profit = (a.SenderScotchCost ?? 0) + (a.SenderFactureCost ?? 0) + (a.SenderPickupCost ?? 0)
 						 + CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				SenderRate = a.SenderRate
-			}).OrderBy(x => ranks[x.AirWaybillId]).ToArray();
+			}).ToArray();
 		}
 
-		private static SenderCalculationAwbInfo[] GetInfo(IEnumerable<AirWaybillData> awbs,
+		private static SenderCalculationAwbInfo[] GetInfo(
+			IEnumerable<SenderCalculationGroup> groups,
 			IEnumerable<ApplicationListItemData> items,
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
-			return awbs.Select(awb =>
+			return groups.Select(g =>
 			{
-				var rows = items.Where(a => a.AirWaybillId == awb.Id).ToArray();
+				var rows = items.Where(a => a.AirWaybillId == g.AirWaybillId).ToArray();
 
 				var info = new SenderCalculationAwbInfo
 				{
-					AirWaybillId = awb.Id,
-					TotalCostOfSenderForWeight = awb.TotalCostOfSenderForWeight ?? 0,
-					FlightCost = awb.FlightCost ?? 0,
+					AirWaybillId = g.AirWaybillId,
+					TotalCostOfSenderForWeight = g.TotalCostOfSenderForWeight,
+					FlightCost = g.FlightCost,
 					TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
 					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
 					TotalFactureCost = rows.Sum(x => x.SenderFactureCost ?? 0),

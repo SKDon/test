@@ -22,11 +22,6 @@ namespace Alicargo.ViewModels.Calculation
 			return value / InsuranceRate;
 		}
 
-		public static decimal? GetWeighted(decimal value, decimal totalWeight)
-		{
-			return totalWeight == 0 ? (decimal?)null : value / totalWeight;
-		}
-
 		public static decimal? GetSenderScotchCost(IReadOnlyDictionary<long, decimal> tariffs, long? senderId, int? count)
 		{
 			return senderId.HasValue ? tariffs[senderId.Value] * (count ?? 0) : (decimal?)null;

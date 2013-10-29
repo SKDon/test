@@ -5,6 +5,8 @@ namespace Alicargo.ViewModels.Calculation.Sender
 	public sealed class SenderCalculationGroup
 	{
 		public long? AirWaybillId { get; set; }
+		public decimal TotalCostOfSenderForWeight { get; set; }
+		public decimal FlightCost { get; set; }
 
 		// ReSharper disable InconsistentNaming
 

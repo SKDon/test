@@ -2,7 +2,7 @@
 {
 	public sealed class SenderCalculationAwbInfo
 	{
-		public long AirWaybillId { get; set; }
+		public long? AirWaybillId { get; set; }
 
 		public decimal? CostPerKgOfSender { get; set; }
 

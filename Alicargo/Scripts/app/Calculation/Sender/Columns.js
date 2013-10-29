@@ -53,7 +53,7 @@
 					field: "AirWaybillId",
 					hidden: true,
 					groupHeaderTemplate: function(data) {
-						if (data.value.id != 0) {
+						if (!!data.value.id) {
 							return "<a href='" + $u.SenderAwb_Edit + "/" + data.value.id + "'>" + $l.Entities_AWB
 								+ ": " + data.value.text + "</a>";
 						}

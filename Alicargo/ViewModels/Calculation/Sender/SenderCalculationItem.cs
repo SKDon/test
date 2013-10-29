@@ -3,7 +3,7 @@
 	public sealed class SenderCalculationItem
 	{
 		public long ApplicationId { get; set; }
-		public long AirWaybillId { get; set; }
+		public long? AirWaybillId { get; set; }
 		public string ClientNic { get; set; }
 		public string DisplayNumber { get; set; }
 		public string Factory { get; set; }
