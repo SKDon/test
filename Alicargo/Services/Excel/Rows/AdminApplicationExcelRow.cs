@@ -2,15 +2,41 @@
 using Alicargo.ViewModels.Application;
 using Resources;
 
-namespace Alicargo.Services.Excel
+namespace Alicargo.Services.Excel.Rows
 {
-	public sealed class SenderApplicationExcelRow
+	public sealed class AdminApplicationExcelRow : BaseApplicationExcelRow
 	{
 		private readonly ApplicationListItem _application;
+		private readonly string _airWaybillDisplay;
 
-		public SenderApplicationExcelRow(ApplicationListItem application)
+		public AdminApplicationExcelRow(ApplicationListItem application, string airWaybillDisplay)
 		{
 			_application = application;
+			_airWaybillDisplay = airWaybillDisplay;
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "CreationTimestamp")]
+		public string CreationTimestampLocalString
+		{
+			get { return _application.CreationTimestampLocalString; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "StateName")]
+		public string StateName
+		{
+			get { return _application.State.StateName; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "DateOfCargoReceipt")]
+		public string DateOfCargoReceiptLocalString
+		{
+			get { return _application.DateOfCargoReceiptLocalString; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "DateInStock")]
+		public string DateInStockLocalString
+		{
+			get { return _application.DateInStockLocalString; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "Nic")]
@@ -73,16 +99,28 @@ namespace Alicargo.Services.Excel
 			get { return _application.ValueString; }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "StateName")]
-		public string StateName
+		[DisplayNameLocalized(typeof(Entities), "MethodOfTransit")]
+		public string TransitMethodOfTransitString
 		{
-			get { return _application.State.StateName; }
+			get { return _application.TransitMethodOfTransitString; }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
-		public string StateChangeTimestampLocalString
+		[DisplayNameLocalized(typeof(Entities), "City")]
+		public string TransitCity
 		{
-			get { return _application.StateChangeTimestampLocalString; }
+			get { return _application.TransitCity; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "CarrierName")]
+		public string TransitCarrierName
+		{
+			get { return _application.TransitCarrierName; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "TransitReference")]
+		public string TransitReference
+		{
+			get { return _application.TransitReference; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "AirWaybill")]
@@ -97,10 +135,10 @@ namespace Alicargo.Services.Excel
 			get { return _application.DaysInWork; }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "CreationTimestamp")]
-		public string CreationTimestampLocalString
+		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
+		public string StateChangeTimestampLocalString
 		{
-			get { return _application.CreationTimestampLocalString; }
+			get { return _application.StateChangeTimestampLocalString; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "Characteristic")]
@@ -108,7 +146,6 @@ namespace Alicargo.Services.Excel
 		{
 			get { return _application.Characteristic; }
 		}
-
 
 		[DisplayNameLocalized(typeof(Entities), "AddressLoad")]
 		public string AddressLoad
@@ -132,6 +169,42 @@ namespace Alicargo.Services.Excel
 		public string MethodOfDeliveryLocalString
 		{
 			get { return _application.MethodOfDeliveryLocalString; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
+		public string ClientLegalEntity
+		{
+			get { return _application.ClientLegalEntity; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "Address")]
+		public string TransitAddress
+		{
+			get { return _application.TransitAddress; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "RecipientName")]
+		public string TransitRecipientName
+		{
+			get { return _application.TransitRecipientName; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "Phone")]
+		public string TransitPhone
+		{
+			get { return _application.TransitPhone; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
+		public string TransitWarehouseWorkingTime
+		{
+			get { return _application.TransitWarehouseWorkingTime; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "DeliveryType")]
+		public string TransitDeliveryTypeString
+		{
+			get { return _application.TransitDeliveryTypeString; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "FactoryPhone")]
@@ -161,13 +234,30 @@ namespace Alicargo.Services.Excel
 		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
 		public decimal? ScotchCost
 		{
-			get { return _application.SenderScotchCost; }
+			get { return _application.ScotchCost; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
+		public decimal? TariffPerKg
+		{
+			get { return _application.TariffPerKg; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
+		public decimal? TransitCost
+		{
+			get { return _application.TransitCost; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "PickupCost")]
 		public decimal? PickupCost
 		{
 			get { return _application.PickupCost; }
+		}
+
+		public override string AirWaybillDisplay
+		{
+			get { return _airWaybillDisplay; }
 		}
 	}
 }

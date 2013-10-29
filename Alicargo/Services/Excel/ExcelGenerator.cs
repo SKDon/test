@@ -4,19 +4,21 @@ using System.IO;
 using System.Reflection;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Services;
+using Alicargo.Services.Excel.Rows;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Resources;
 
 namespace Alicargo.Services.Excel
 {
-	public sealed class ExcelGenerator : IExcelGenerator
+	public sealed class ExcelGenerator<T> : IExcelGenerator<T>
+		where T : BaseApplicationExcelRow
 	{
-		public MemoryStream Get<T>(T[] rows, string twoLetterISOLanguageName)
+		public MemoryStream Get(T[] rows, string twoLetterISOLanguageName)
 		{
 			CultureContext.Current.Set(() => twoLetterISOLanguageName);
 
-			var properties = typeof(T).GetProperties();
+			var properties = rows.GetType().GetElementType().GetProperties();
 
 			var stream = new MemoryStream();
 
@@ -40,14 +42,44 @@ namespace Alicargo.Services.Excel
 			return stream;
 		}
 
-		private static void DrawRows<T>(IEnumerable<T> rows, IList<PropertyInfo> properties, ExcelWorksheet ws)
+		private static void DrawRows(IEnumerable<T> rows, IList<PropertyInfo> properties, ExcelWorksheet ws)
 		{
 			var iRow = 2;
+			string currentAwb = null;
 			foreach (var row in rows)
 			{
-				var iColumn = 1;
+				if (currentAwb != row.AirWaybillDisplay)
+				{
+					currentAwb = row.AirWaybillDisplay;
+					if (!string.IsNullOrWhiteSpace(currentAwb))
+					{
+						DrawAwb(currentAwb, ws, iRow++);
+					}
+				}
 
-				foreach (var property in properties)
+				DrawColumns(properties, ws, row, iRow++);
+			}
+		}
+
+		private static void DrawAwb(string currentAwb, ExcelWorksheet ws, int iRow)
+		{
+			var row = ws.Row(iRow);
+			row.Style.Fill.PatternType = ExcelFillStyle.Solid;
+			row.Style.Fill.BackgroundColor.SetColor(Color.Yellow);
+			row.Height = 20;
+			row.Style.Font.Bold = true;
+
+			var cell = ws.Cells[iRow, 1];
+			cell.Value = currentAwb;
+		}
+
+		private static void DrawColumns(IEnumerable<PropertyInfo> properties, ExcelWorksheet ws, T row, int iRow)
+		{
+			var iColumn = 1;
+			foreach (var property in properties)
+			{
+				var displayName = property.GetCustomAttribute<DisplayNameLocalizedAttribute>();
+				if (displayName != null)
 				{
 					var value = property.GetValue(row);
 
@@ -67,14 +99,7 @@ namespace Alicargo.Services.Excel
 
 					RowStyles(cell);
 				}
-
-				iRow++;
 			}
-		}
-
-		private static void RowStyles(ExcelRange cell)
-		{
-			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Gray);
 		}
 
 		private static void DrawHeader(IEnumerable<PropertyInfo> properties, ExcelWorksheet ws)
@@ -84,20 +109,31 @@ namespace Alicargo.Services.Excel
 			{
 				var displayName = property.GetCustomAttribute<DisplayNameLocalizedAttribute>();
 
-				var cell = ws.Cells[1, iColumn];
+				if (displayName != null)
+				{
+					var cell = ws.Cells[1, iColumn++];
 
-				cell.Value = displayName.DisplayName;
+					cell.Value = displayName.DisplayName;
 
-				HeaderStyles(cell);
-
-				iColumn++;
+					HeaderStyles(cell);
+				}
 			}
+
+			ws.View.FreezePanes(2, 1);
 		}
 
-		private static void HeaderStyles(ExcelRange cell)
+		// ReSharper disable SuggestBaseTypeForParameter
+
+		private static void RowStyles(ExcelRange cell)
+		{
+			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Gray);
+		}
+
+		private static void HeaderStyles(ExcelRange cell) // ReSharper restore SuggestBaseTypeForParameter
 		{
 			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
 			cell.Style.Font.Bold = true;
+			cell.Style.Locked = true;
 		}
 	}
 }

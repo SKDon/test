@@ -2,15 +2,17 @@
 using Alicargo.ViewModels.Application;
 using Resources;
 
-namespace Alicargo.Services.Excel
+namespace Alicargo.Services.Excel.Rows
 {
-	public sealed class ForwarderApplicationExcelRow
+	public sealed class ForwarderApplicationExcelRow : BaseApplicationExcelRow
 	{
 		private readonly ApplicationListItem _application;
+		private readonly string _airWaybillDisplay;
 
-		public ForwarderApplicationExcelRow(ApplicationListItem application)
+		public ForwarderApplicationExcelRow(ApplicationListItem application, string airWaybillDisplay)
 		{
 			_application = application;
+			_airWaybillDisplay = airWaybillDisplay;
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "StateName")]
@@ -109,6 +111,11 @@ namespace Alicargo.Services.Excel
 		public string AirWaybill
 		{
 			get { return _application.AirWaybill; }
+		}
+
+		public override string AirWaybillDisplay
+		{
+			get { return _airWaybillDisplay; }
 		}
 	}
 }

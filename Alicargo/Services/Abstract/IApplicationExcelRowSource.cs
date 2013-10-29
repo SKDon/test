@@ -1,4 +1,4 @@
-﻿using Alicargo.Services.Excel;
+﻿using Alicargo.Services.Excel.Rows;
 
 namespace Alicargo.Services.Abstract
 {

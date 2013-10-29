@@ -30,8 +30,7 @@ namespace Alicargo.Services.Application
 		public ApplicationListItem[] Map(ApplicationListItemData[] data)
 		{
 			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
-			var localizedStates = _stateService.GetLocalizedDictionary(
-				data.Select(x => x.StateId).ToArray());
+			var localizedStates = _stateService.GetLocalizedDictionary(data.Select(x => x.StateId).ToArray());
 			var availableStates = _stateService.GetAvailableStatesToSet();
 			var calculations = _applications.GetCalculations(data.Select(x => x.Id).ToArray());
 

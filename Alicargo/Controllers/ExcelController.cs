@@ -5,18 +5,18 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Core.Services;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.Services.Excel.Rows;
 
 namespace Alicargo.Controllers
 {
 	public partial class ExcelController : Controller
 	{
-		private readonly IExcelGenerator _generator;
+		private readonly IExcelGenerator<BaseApplicationExcelRow> _generator;
 		private readonly IApplicationExcelRowSource _rowSource;
 		private readonly IIdentityService _identity;
 
-
 		public ExcelController(
-			IExcelGenerator generator,
+			IExcelGenerator<BaseApplicationExcelRow> generator,
 			IApplicationExcelRowSource rowSource,
 			IIdentityService identity)
 		{

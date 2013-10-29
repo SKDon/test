@@ -2,8 +2,8 @@
 
 namespace Alicargo.Core.Services
 {
-	public interface IExcelGenerator
+	public interface IExcelGenerator<in T>
 	{
-		MemoryStream Get<T>(T[] rows, string twoLetterISOLanguageName);
+		MemoryStream Get(T[] rows, string twoLetterISOLanguageName);
 	}
 }
