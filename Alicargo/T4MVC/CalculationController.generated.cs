@@ -85,6 +85,12 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetTransitCostEdited()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCostEdited);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult SetPickupCostEdited()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetPickupCostEdited);
@@ -94,12 +100,6 @@ namespace Alicargo.Controllers
         public virtual System.Web.Mvc.JsonResult SetAdditionalCost()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetAdditionalCost);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetTransitCost()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCost);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -131,9 +131,9 @@ namespace Alicargo.Controllers
             public readonly string SetSenderRate = "SetSenderRate";
             public readonly string SetScotchCostEdited = "SetScotchCostEdited";
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
+            public readonly string SetTransitCostEdited = "SetTransitCostEdited";
             public readonly string SetPickupCostEdited = "SetPickupCostEdited";
             public readonly string SetAdditionalCost = "SetAdditionalCost";
-            public readonly string SetTransitCost = "SetTransitCost";
             public readonly string SetClass = "SetClass";
         }
 
@@ -148,9 +148,9 @@ namespace Alicargo.Controllers
             public const string SetSenderRate = "SetSenderRate";
             public const string SetScotchCostEdited = "SetScotchCostEdited";
             public const string SetFactureCostEdited = "SetFactureCostEdited";
+            public const string SetTransitCostEdited = "SetTransitCostEdited";
             public const string SetPickupCostEdited = "SetPickupCostEdited";
             public const string SetAdditionalCost = "SetAdditionalCost";
-            public const string SetTransitCost = "SetTransitCost";
             public const string SetClass = "SetClass";
         }
 
@@ -222,6 +222,16 @@ namespace Alicargo.Controllers
             public readonly string awbId = "awbId";
             public readonly string factureCost = "factureCost";
         }
+        static readonly ActionParamsClass_SetTransitCostEdited s_params_SetTransitCostEdited = new ActionParamsClass_SetTransitCostEdited();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetTransitCostEdited SetTransitCostEditedParams { get { return s_params_SetTransitCostEdited; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetTransitCostEdited
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string transitCost = "transitCost";
+        }
         static readonly ActionParamsClass_SetPickupCostEdited s_params_SetPickupCostEdited = new ActionParamsClass_SetPickupCostEdited();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_SetPickupCostEdited SetPickupCostEditedParams { get { return s_params_SetPickupCostEdited; } }
@@ -240,16 +250,6 @@ namespace Alicargo.Controllers
         {
             public readonly string awbId = "awbId";
             public readonly string additionalCost = "additionalCost";
-        }
-        static readonly ActionParamsClass_SetTransitCost s_params_SetTransitCost = new ActionParamsClass_SetTransitCost();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetTransitCost SetTransitCostParams { get { return s_params_SetTransitCost; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetTransitCost
-        {
-            public readonly string id = "id";
-            public readonly string awbId = "awbId";
-            public readonly string transitCost = "transitCost";
         }
         static readonly ActionParamsClass_SetClass s_params_SetClass = new ActionParamsClass_SetClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -374,6 +374,18 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        partial void SetTransitCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? transitCost);
+
+        public override System.Web.Mvc.JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCostEdited);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitCost", transitCost);
+            SetTransitCostEditedOverride(callInfo, id, awbId, transitCost);
+            return callInfo;
+        }
+
         partial void SetPickupCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? pickupCost);
 
         public override System.Web.Mvc.JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
@@ -394,18 +406,6 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "additionalCost", additionalCost);
             SetAdditionalCostOverride(callInfo, awbId, additionalCost);
-            return callInfo;
-        }
-
-        partial void SetTransitCostOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? transitCost);
-
-        public override System.Web.Mvc.JsonResult SetTransitCost(long id, long awbId, decimal? transitCost)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCost);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitCost", transitCost);
-            SetTransitCostOverride(callInfo, id, awbId, transitCost);
             return callInfo;
         }
 

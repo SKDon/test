@@ -943,6 +943,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Доставка* (€).
+        /// </summary>
+        public static string TransitCostEdited {
+            get {
+                return ResourceManager.GetString("TransitCostEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Транзитный референс.
         /// </summary>
         public static string TransitReference {

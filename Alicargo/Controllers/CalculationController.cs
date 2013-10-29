@@ -100,6 +100,16 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
+		{
+			_applicationManager.SetTransitCostEdited(id, transitCost);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
 		{
 			_applicationManager.SetPickupCostEdited(id, pickupCost);
@@ -117,17 +127,7 @@ namespace Alicargo.Controllers
 			var data = _presenter.Row(awbId);
 
 			return Json(data);
-		}
-
-		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetTransitCost(long id, long awbId, decimal? transitCost)
-		{
-			_applicationManager.SetTransitCost(id, transitCost);
-
-			var data = _presenter.Row(awbId);
-
-			return Json(data);
-		}
+		}		
 
 		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetClass(long id, long awbId, int? classId)

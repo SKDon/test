@@ -64,6 +64,7 @@ namespace Alicargo.DataAccess.Repositories
 				TransitCost = x.TransitCost,
 				PickupCost = x.PickupCost,
 				FactureCostEdited = x.FactureCostEdited,
+				TransitCostEdited = x.TransitCostEdited,
 				ScotchCostEdited = x.ScotchCostEdited,
 				PickupCostEdited = x.PickupCostEdited,
 				SenderId = x.SenderId
@@ -235,7 +236,7 @@ namespace Alicargo.DataAccess.Repositories
 				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
 				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
 				TariffPerKg = x.TariffPerKg,
-				TransitCost = x.TransitCost,
+				TransitCost = x.TransitCostEdited ?? x.TransitCost,
 				PickupCost = x.PickupCostEdited ?? x.PickupCost,
 				SenderPickupCost = x.PickupCost,
 				SenderRate = x.SenderRate,

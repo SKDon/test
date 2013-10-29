@@ -41,13 +41,12 @@ namespace Alicargo.Services.Calculation
 
 			var awb = _awbs.Get(application.AirWaybillId.Value).First();
 
-
-
 			var weigth = application.Weigth ?? 0;
 			var tariffPerKg = application.TariffPerKg ?? 0;
 			var insurance = application.Value / CalculationHelper.InsuranceRate;
 			var scotch = GetTapeCost(application);
 			var facture = application.FactureCostEdited ?? application.FactureCost ?? 0;
+			// todo: !!! почему сдесь нет TransitCostEdited?
 
 			var calculation = new CalculationData
 			{

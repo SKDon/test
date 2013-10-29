@@ -426,4 +426,7 @@
   <data name="TariffOfTapePerBox" xml:space="preserve">
     <value>Tariff for tape (€/box)</value>
   </data>
+  <data name="TransitCostEdited" xml:space="preserve">
+    <value>Delivery* (€)</value>
+  </data>
 </root>

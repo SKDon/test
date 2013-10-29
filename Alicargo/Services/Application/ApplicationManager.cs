@@ -154,6 +154,13 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
+		public void SetTransitCostEdited(long id, decimal? transitCost)
+		{
+			_applicationUpdater.SetTransitCostEdited(id, transitCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
 		public void SetState(long applicationId, long stateId)
 		{
 			if (!_stateService.HasPermissionToSetState(stateId))
@@ -214,6 +221,7 @@ namespace Alicargo.Services.Application
 				TariffPerKg = data.TariffPerKg,
 				ScotchCostEdited = data.ScotchCostEdited,
 				FactureCostEdited = data.FactureCostEdited,
+				TransitCostEdited = data.TransitCostEdited,
 				PickupCostEdited = data.PickupCostEdited,
 				SenderId = data.SenderId
 			};
@@ -250,6 +258,7 @@ namespace Alicargo.Services.Application
 			to.PickupCost = @from.PickupCost;
 			to.TariffPerKg = @from.TariffPerKg;
 			to.FactureCostEdited = from.FactureCostEdited;
+			to.TransitCostEdited = from.TransitCostEdited;
 			to.PickupCostEdited = from.PickupCostEdited;
 			to.ScotchCostEdited = from.ScotchCostEdited;
 			to.SenderId = from.SenderId;
@@ -299,6 +308,7 @@ namespace Alicargo.Services.Application
 				TariffPerKg = model.TariffPerKg,
 				ScotchCostEdited = model.ScotchCostEdited,
 				FactureCostEdited = model.FactureCostEdited,
+				TransitCostEdited = model.TransitCostEdited,
 				PickupCostEdited = model.PickupCostEdited,
 				SenderId = model.SenderId
 			};

@@ -287,6 +287,7 @@ CREATE TABLE [dbo].[tmp_ms_xx_Application] (
     [TariffPerKg]          MONEY              NULL,
     [SenderRate]           MONEY              NULL,
     [TransitCost]          MONEY              NULL,
+    [TransitCostEdited]    MONEY              NULL,
     CONSTRAINT [tmp_ms_xx_constraint_PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

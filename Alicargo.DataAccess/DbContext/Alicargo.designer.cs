@@ -4540,6 +4540,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<decimal> _TransitCost;
 		
+		private System.Nullable<decimal> _TransitCostEdited;
+		
 		private EntityRef<AirWaybill> _AirWaybill;
 		
 		private EntityRef<Client> _Client;
@@ -4656,6 +4658,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnSenderRateChanged();
     partial void OnTransitCostChanging(System.Nullable<decimal> value);
     partial void OnTransitCostChanged();
+    partial void OnTransitCostEditedChanging(System.Nullable<decimal> value);
+    partial void OnTransitCostEditedChanged();
     #endregion
 		
 		public Application()
@@ -5591,7 +5595,7 @@ namespace Alicargo.DataAccess.DbContext
 					this.OnFactureCostEditedChanged();
 				}
 			}
-		}
+		}		
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScotchCostEdited", DbType="Money")]
 		public System.Nullable<decimal> ScotchCostEdited
@@ -5689,6 +5693,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._TransitCost = value;
 					this.SendPropertyChanged("TransitCost");
 					this.OnTransitCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransitCostEdited", DbType="Money")]
+		public System.Nullable<decimal> TransitCostEdited
+		{
+			get
+			{
+				return this._TransitCostEdited;
+			}
+			set
+			{
+				if ((this._TransitCostEdited != value))
+				{
+					this.OnTransitCostEditedChanging(value);
+					this.SendPropertyChanging();
+					this._TransitCostEdited = value;
+					this.SendPropertyChanged("TransitCostEdited");
+					this.OnTransitCostEditedChanged();
 				}
 			}
 		}

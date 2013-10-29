@@ -157,7 +157,7 @@
 					}, awbId);
 				}
 				if (e.values.TransitCost !== undefined) {
-					post($u.Calculation_SetTransitCost, {
+					post($u.Calculation_SetTransitCostEdited, {
 						id: applicationId,
 						awbId: awbId,
 						transitCost: e.values.TransitCost

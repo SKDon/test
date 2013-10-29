@@ -153,7 +153,7 @@ namespace Alicargo.Services.Calculation
 				ScotchCost = a.ScotchCostEdited ?? CalculationHelper.GetSenderScotchCost(tariffs, a.SenderId, a.Count),
 				TariffPerKg = a.TariffPerKg,
 				SenderRate = a.SenderRate,
-				TransitCost = a.TransitCost,
+				TransitCost = a.TransitCostEdited ?? a.TransitCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weigth = a.Weigth,
 				PickupCost = a.PickupCostEdited ?? a.PickupCost, // ReSharper disable PossibleInvalidOperationException

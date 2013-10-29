@@ -34,7 +34,7 @@ namespace Alicargo.ViewModels.Calculation
 				   + GetInsuranceCost(application.Value)
 				   + (application.FactureCostEdited ?? application.FactureCost ?? 0)
 				   + (application.PickupCostEdited ?? application.PickupCost ?? 0)
-				   + (application.TransitCost ?? 0);
+				   + (application.TransitCostEdited ?? application.TransitCost ?? 0);
 		}
 
 		public static decimal GetProfit(ApplicationListItemData application)

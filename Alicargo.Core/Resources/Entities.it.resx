@@ -426,4 +426,7 @@
   <data name="TariffOfTapePerBox" xml:space="preserve">
     <value>Vota nastro (€/scatola)</value>
   </data>
+  <data name="TransitCostEdited" xml:space="preserve">
+    <value>Consegna* (€)</value>
+  </data>
 </root>

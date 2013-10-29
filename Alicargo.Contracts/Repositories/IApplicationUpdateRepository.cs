@@ -15,6 +15,7 @@ namespace Alicargo.Contracts.Repositories
 		void SetTransitReference(long id, string transitReference);
 		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);
 		void SetTransitCost(long id, decimal? transitCost);
+		void SetTransitCostEdited(long id, decimal? transitCost);
 		void SetTariffPerKg(long id, decimal? tariffPerKg);
 		void SetPickupCostEdited(long id, decimal? pickupCost);
 		void SetFactureCostEdited(long id, decimal? factureCost);

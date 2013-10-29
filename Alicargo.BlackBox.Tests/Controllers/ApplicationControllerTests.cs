@@ -124,6 +124,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 															   .Excluding(x => x.PickupCost)
 															   .Excluding(x => x.ScotchCost));
 			data.FactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
+			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);
 			data.PickupCost.ShouldBeEquivalentTo(model.PickupCostEdited);
 			data.ScotchCost.ShouldBeEquivalentTo(model.ScotchCostEdited);
 			data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);

@@ -92,40 +92,40 @@ namespace Alicargo.Services.Email
 			SendOnSetDateOfCargoReceipt(id);
 		}
 
-	    public void SetTransitCost(long id, decimal? transitCost)
-	    {
-		    _manager.SetTransitCost(id, transitCost);
-
-		    // todo: 2. think what an email should be sent
-	    }
-
-	    public void SetTariffPerKg(long id, decimal? tariffPerKg)
-	    {
-		    _manager.SetTariffPerKg(id, tariffPerKg);
+		public void SetTransitCost(long id, decimal? transitCost)
+		{
+			_manager.SetTransitCost(id, transitCost);
 
 			// todo: 2. think what an email should be sent
-	    }
+		}
 
-	    public void SetPickupCostEdited(long id, decimal? pickupCost)
-	    {
-		    _manager.SetPickupCostEdited(id, pickupCost);
-
-			// todo: 2. think what an email should be sent
-	    }
-
-	    public void SetFactureCostEdited(long id, decimal? factureCost)
-	    {
-		    _manager.SetFactureCostEdited(id, factureCost);
+		public void SetTariffPerKg(long id, decimal? tariffPerKg)
+		{
+			_manager.SetTariffPerKg(id, tariffPerKg);
 
 			// todo: 2. think what an email should be sent
-	    }
+		}
 
-	    public void SetScotchCostEdited(long id, decimal? scotchCost)
-	    {
-		    _manager.SetScotchCostEdited(id, scotchCost);
+		public void SetPickupCostEdited(long id, decimal? pickupCost)
+		{
+			_manager.SetPickupCostEdited(id, pickupCost);
 
 			// todo: 2. think what an email should be sent
-	    }
+		}
+
+		public void SetFactureCostEdited(long id, decimal? factureCost)
+		{
+			_manager.SetFactureCostEdited(id, factureCost);
+
+			// todo: 2. think what an email should be sent
+		}
+
+		public void SetScotchCostEdited(long id, decimal? scotchCost)
+		{
+			_manager.SetScotchCostEdited(id, scotchCost);
+
+			// todo: 2. think what an email should be sent
+		}
 
 		public void SetSenderRate(long id, decimal? senderRate)
 		{
@@ -135,6 +135,11 @@ namespace Alicargo.Services.Email
 		public void SetClass(long id, ClassType? classType)
 		{
 			_manager.SetClass(id, classType);
+		}
+
+		public void SetTransitCostEdited(long id, decimal? transitCost)
+		{
+			_manager.SetTransitCostEdited(id, transitCost);
 		}
 
 		public void SetTransitReference(long id, string transitReference)

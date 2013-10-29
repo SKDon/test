@@ -85,6 +85,11 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.FactureCostEdited = factureCost);
 		}
 
+		public void SetTransitCostEdited(long id, decimal? transitCost)
+		{
+			Update(id, application => application.TransitCostEdited = transitCost);
+		}
+
 		public void SetScotchCostEdited(long id, decimal? scotchCost)
 		{
 			Update(id, application => application.ScotchCostEdited = scotchCost);
@@ -157,10 +162,10 @@ namespace Alicargo.DataAccess.Repositories
 			to.TransitCost = @from.TransitCost;
 			to.PickupCost = @from.PickupCost;
 			to.FactureCostEdited = @from.FactureCostEdited;
+			to.TransitCostEdited = @from.TransitCostEdited;
 			to.PickupCostEdited = @from.PickupCostEdited;
 			to.ScotchCostEdited = @from.ScotchCostEdited;
 			to.SenderRate = @from.SenderRate;
-			//to.ClassId = from.
 			// to.Certificate = 
 
 			// todo: 3.0. separate repository for files
