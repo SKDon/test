@@ -50,10 +50,10 @@ namespace Alicargo.Services.Application
 		}
 
 		private ApplicationGroup[] GroupImpl(IEnumerable<ApplicationListItem> applications,
-											 IReadOnlyCollection<OrderType> groups)
+			IReadOnlyCollection<OrderType> groups)
 		{
 			var current = groups.First();
-			var rest = groups.Except(new[] {current}).ToArray();
+			var rest = groups.Except(new[] { current }).ToArray();
 
 			return _map[current](applications, rest);
 		}
@@ -62,17 +62,17 @@ namespace Alicargo.Services.Application
 		{
 			return applications.GroupBy(x => x.ClientNic)
 							   .Select(grouping =>
-										   GetApplicationGroup(grouping, groups, OrderHelper.ClientNicFieldName,
-															   g => g.Key))
+								   GetApplicationGroup(grouping, groups, OrderHelper.ClientNicFieldName,
+									   g => g.Key))
 							   .ToArray();
-		}		
+		}
 
 		private ApplicationGroup[] ByLegalEntity(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
 			return applications.GroupBy(x => x.ClientLegalEntity)
 							   .Select(grouping =>
-										   GetApplicationGroup(grouping, groups, OrderHelper.LegalEntityFieldName,
-															   g => g.Key))
+								   GetApplicationGroup(grouping, groups, OrderHelper.LegalEntityFieldName,
+									   g => g.Key))
 							   .ToArray();
 		}
 
@@ -80,8 +80,8 @@ namespace Alicargo.Services.Application
 		{
 			return applications.GroupBy(x => x.State.StateName)
 							   .Select(grouping =>
-										   GetApplicationGroup(grouping, groups, OrderHelper.StateFieldName,
-															   g => g.Key))
+								   GetApplicationGroup(grouping, groups, OrderHelper.StateFieldName,
+									   g => g.Key))
 							   .ToArray();
 		}
 
@@ -89,11 +89,10 @@ namespace Alicargo.Services.Application
 		{
 			return applications
 				.GroupBy(x => x.AirWaybillId ?? 0)
-				.Select(grouping =>
-							GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
-												awb => _airWaybills.ContainsKey(awb.Key)
-													? AwbHelper.GetAirWaybillDisplay(_airWaybills[awb.Key])
-													: ""))
+				.Select(grouping => GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
+					awb => _airWaybills.ContainsKey(awb.Key)
+						? AwbHelper.GetAirWaybillDisplay(_airWaybills[awb.Key])
+						: ""))
 				.ToArray();
 		}
 
@@ -108,7 +107,7 @@ namespace Alicargo.Services.Application
 
 			if (field == OrderHelper.AwbFieldName)
 			{
-				var id = (long) (object) grouping.Key;
+				var id = (long)(object)grouping.Key;
 				if (_awbAggregates.ContainsKey(id))
 				{
 					count = _awbAggregates[id].TotalCount;

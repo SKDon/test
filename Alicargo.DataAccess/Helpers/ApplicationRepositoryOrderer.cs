@@ -35,6 +35,7 @@ namespace Alicargo.DataAccess.Helpers
 
 				isFirst = false;
 			}
+
 			return applications;
 		}
 
