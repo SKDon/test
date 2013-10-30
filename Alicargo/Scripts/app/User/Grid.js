@@ -32,8 +32,8 @@
 								var tr = $(e.target).closest("tr");
 								var data = this.dataItem(tr);
 								var url = role == "Sender"
-									? $u.Sender_Edit + "/" + data.Id
-									: $u.User_Edit + "/" + role + "/" + data.Id;
+									? $u.Sender_Edit + "/" + data.EntityId
+									: $u.User_Edit + "/" + role + "/" + data.EntityId;
 								window.location = url;
 							}
 						}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
