@@ -37,6 +37,21 @@
 								window.location = url;
 							}
 						}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
+					}, {
+						command: [{
+							name: "custom-authenticate",
+							text: "",
+							click: function(e) {
+								e.preventDefault();
+								var tr = $(e.target).closest("tr");
+								var data = this.dataItem(tr);
+								if ($a.Confirm("Авторизаваться под пользователем " + data.Name + "?")) {
+									window.location = $u.Authentication_LoginAsUser + "/" + data.UserId;
+								}
+							}
+						}],
+						title: "&nbsp;",
+						width: Alicargo.DefaultGridButtonWidth
 					}]
 			});
 		};

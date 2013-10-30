@@ -1,4 +1,8 @@
 ﻿$(function() {
+	var $a = Alicargo;
+	var $u = $a.Urls;
+	var $l = $a.Localization;
+
 	var schema = {
 		model: {
 			id: "Id"
@@ -11,7 +15,7 @@
 		transport: {
 			read: {
 				dataType: "json",
-				url: Alicargo.Urls.Client_List,
+				url: $u.Client_List,
 				type: "POST",
 				cache: false
 			}
@@ -30,18 +34,33 @@
 		pageable: true,
 		editable: false,
 		columns: [
-			{ field: "LegalEntity", title: Alicargo.Localization.Entities_LegalEntity },
-			{ field: "Nic", title: Alicargo.Localization.Entities_Nic },
-			{ field: "Email", title: Alicargo.Localization.Entities_Email },
+			{ field: "LegalEntity", title: $l.Entities_LegalEntity },
+			{ field: "Nic", title: $l.Entities_Nic },
+			{ field: "Email", title: $l.Entities_Email },
 			{
 				command: [{
 					name: "custom-edit",
 					text: "",
 					click: function(e) {
+						e.preventDefault();
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
-						var url = Alicargo.Urls.Client_Edit + "/" + data.Id;
-						window.location = url;
+						window.location = $u.Client_Edit + "/" + data.Id;
+					}
+				}],
+				title: "&nbsp;",
+				width: Alicargo.DefaultGridButtonWidth
+			}, {
+				command: [{
+					name: "custom-authenticate",
+					text: "",
+					click: function(e) {
+						e.preventDefault();
+						var tr = $(e.target).closest("tr");
+						var data = this.dataItem(tr);
+						if ($a.Confirm("Авторизаваться под клиентом " + data.Nic + "?")) {
+							window.location = $u.Authentication_LoginAsUser + "/" + data.UserId;
+						}
 					}
 				}],
 				title: "&nbsp;",

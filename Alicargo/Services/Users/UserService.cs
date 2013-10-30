@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Localization;
@@ -20,21 +21,9 @@ namespace Alicargo.Services.Users
 			_unitOfWork = unitOfWork;
 		}
 
-		public UserModel[] List(RoleType role)
+		public UserData[] List(RoleType role)
 		{
-			var dictionary = _userRepository.GetByRole(role);
-
-			return dictionary.Select(x => new UserModel
-			{
-				Id = x.EntityId,
-				Name = x.Name,
-				Email = x.Email,
-				RoleType = role,
-				Authentication = new AuthenticationModel
-				{
-					Login = x.Login
-				}
-			}).ToArray();
+			return _userRepository.GetByRole(role);			
 		}
 
 		public UserModel Get(RoleType role, long id)

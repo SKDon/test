@@ -8,15 +8,15 @@ using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services
 {
-    internal sealed class AuthenticationService : IAuthenticationService
+	internal sealed class AuthenticationService : IAuthenticationService
 	{
 		private readonly IAuthenticationRepository _authentications;
 		private readonly IPasswordConverter _passwordConverter;
 		private readonly IIdentityService _identity;
 
 		public AuthenticationService(
-			IAuthenticationRepository authentications, 
-			IPasswordConverter passwordConverter, 
+			IAuthenticationRepository authentications,
+			IPasswordConverter passwordConverter,
 			IIdentityService identity)
 		{
 			_authentications = authentications;
@@ -32,10 +32,15 @@ namespace Alicargo.Services
 			var hash = _passwordConverter.GetPasswordHash(user.Password, data.PasswordSalt.ToArray());
 			if (!hash.SequenceEqual(data.PasswordHash.ToArray())) return false;
 
-			FormsAuthentication.SetAuthCookie(data.Id.ToString(CultureInfo.InvariantCulture), user.RememberMe);
-			_identity.Id = data.Id;
+			AuthenticateForce(data.Id, user.RememberMe);
 
 			return true;
+		}
+
+		public void AuthenticateForce(long id, bool createPersistentCookie)
+		{
+			FormsAuthentication.SetAuthCookie(id.ToString(CultureInfo.InvariantCulture), createPersistentCookie);
+			_identity.Id = id;
 		}
 	}
 }
