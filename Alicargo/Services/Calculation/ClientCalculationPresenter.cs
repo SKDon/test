@@ -66,7 +66,7 @@ namespace Alicargo.Services.Calculation
 
 			total = applications.LongLength;
 
-			return applications.Skip((int) skip).Take(take).ToArray();
+			return applications.Skip((int)skip).Take(take).ToArray();
 		}
 
 		private static List<ClientCalculationGroup> GetGroups(IEnumerable<AirWaybillData> awbsData,
@@ -74,12 +74,12 @@ namespace Alicargo.Services.Calculation
 		{
 			return items.GroupBy(x => x.AirWaybillId).Select(g =>
 			{
-				var itemsGroup1 = g.ToArray();
+				var itemsInGroup = g.OrderByDescending(x => x.ApplicationId).ToArray();
 
 				return new ClientCalculationGroup
 				{
 					AirWaybillId = g.Key,
-					items = itemsGroup1,
+					items = itemsInGroup,
 					value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
 					aggregates = new ClientCalculationGroup.Aggregates(g.Sum(x => x.Profit))
 				};
@@ -113,7 +113,7 @@ namespace Alicargo.Services.Calculation
 				Profit = CalculationHelper.GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
 				ClassName = a.ClassId.HasValue
-					? ((ClassType) a.ClassId.Value).ToLocalString()
+					? ((ClassType)a.ClassId.Value).ToLocalString()
 					: ""
 			}).ToArray();
 		}

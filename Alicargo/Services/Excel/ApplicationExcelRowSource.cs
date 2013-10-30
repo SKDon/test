@@ -39,13 +39,6 @@ namespace Alicargo.Services.Excel
 			return items.Select(x => new AdminApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		private static string GetAirWaybillDisplay(IEnumerable<AirWaybillData> awbs, ApplicationListItem application)
-		{
-			return awbs.Where(a => a.Id == application.AirWaybillId)
-					   .Select(data => HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(data)))
-					   .FirstOrDefault();
-		}
-
 		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow()
 		{
 			var items = GetApplicationListItems();
@@ -64,11 +57,23 @@ namespace Alicargo.Services.Excel
 			return items.Select(x => new SenderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
+		private static string GetAirWaybillDisplay(IEnumerable<AirWaybillData> awbs, ApplicationListItem application)
+		{
+			return awbs.Where(a => a.Id == application.AirWaybillId)
+					   .Select(data => HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(data)))
+					   .FirstOrDefault();
+		}
+
 		private ApplicationListItem[] GetApplicationListItems()
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var data = _applications.List(stateIds: stateIds, orders: Order.Default);
+			var data = _applications.List(stateIds: stateIds, orders: new[]
+			{
+				new Order {Desc = true, OrderType = OrderType.AirWaybill},
+				new Order {Desc = false, OrderType = OrderType.ClientNic},
+				new Order {Desc = true, OrderType = OrderType.Id}
+			});
 
 			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
 
