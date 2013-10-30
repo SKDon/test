@@ -88,6 +88,7 @@
       <Column Name="InsuranceCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PickupCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Association Name="Client_Calculation" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>

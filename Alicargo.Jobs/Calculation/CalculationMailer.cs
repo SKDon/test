@@ -23,7 +23,7 @@ namespace Alicargo.Jobs.Calculation
 		{
 			var client = _clients.Get(calculation.ClientId).First();
 			var cost = calculation.TariffPerKg * (decimal)calculation.Weight;
-			var total = cost + calculation.ScotchCost + calculation.FactureCost + calculation.InsuranceCost + calculation.TransitCost;
+			var total = cost + calculation.ScotchCost + calculation.FactureCost + calculation.InsuranceCost + calculation.TransitCost + calculation.PickupCost;
 
 			var text = string.Format(Resources.Calculation_Body, // format
 									 calculation.AirWaybillDisplay, // 0
@@ -36,7 +36,8 @@ namespace Alicargo.Jobs.Calculation
 									 calculation.InsuranceCost.ToString("N2"), // 7
 									 calculation.FactureCost.ToString("N2"), // 8
 									 calculation.TransitCost.ToString("N2"), // 9
-									 total.ToString("N2")); // 10
+									 calculation.PickupCost.ToString("N2"), // 10
+									 total.ToString("N2")); // 11
 
 			var messages = new Message(string.Format(Resources.Calculation_Subject, calculation.ApplicationDisplay),
 									   text, client.Email)

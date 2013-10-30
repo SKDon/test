@@ -469,6 +469,8 @@ CREATE TABLE [dbo].[Calculation] (
     [ScotchCost]           MONEY              NOT NULL,
     [InsuranceCost]        MONEY              NOT NULL,
     [FactureCost]          MONEY              NOT NULL,
+	[TransitCost]			MONEY			NOT NULL,
+	[PickupCost]			MONEY			NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

@@ -36,7 +36,8 @@ namespace Alicargo.DataAccess.Repositories
 				TariffPerKg = data.TariffPerKg,
 				Weight = data.Weight,
 				ApplicationHistoryId = applicationId,
-				TransitCost = data.TransitCost
+				TransitCost = data.TransitCost,
+				PickupCost = data.PickupCost
 			});
 		}
 
@@ -64,7 +65,8 @@ namespace Alicargo.DataAccess.Repositories
 								   ScotchCost = x.ScotchCost,
 								   TariffPerKg = x.TariffPerKg,
 								   Weight = x.Weight,
-								   TransitCost = x.TransitCost
+								   TransitCost = x.TransitCost,
+								   PickupCost = x.PickupCost
 							   }
 						   })
 						   .ToArray();
@@ -105,7 +107,8 @@ namespace Alicargo.DataAccess.Repositories
 								   MarkName = x.MarkName,
 								   ScotchCost = x.ScotchCost,
 								   TariffPerKg = x.TariffPerKg,
-								   Weight = x.Weight
+								   Weight = x.Weight,
+								   PickupCost = x.PickupCost
 							   }).ToArray();
 		}
 

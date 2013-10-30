@@ -1719,6 +1719,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _TransitCost;
 		
+		private decimal _PickupCost;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -1755,6 +1757,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnFactureCostChanged();
     partial void OnTransitCostChanging(decimal value);
     partial void OnTransitCostChanged();
+    partial void OnPickupCostChanging(decimal value);
+    partial void OnPickupCostChanged();
     #endregion
 		
 		public Calculation()
@@ -2063,6 +2067,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._TransitCost = value;
 					this.SendPropertyChanged("TransitCost");
 					this.OnTransitCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PickupCost", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public decimal PickupCost
+		{
+			get
+			{
+				return this._PickupCost;
+			}
+			set
+			{
+				if ((this._PickupCost != value))
+				{
+					this.OnPickupCostChanging(value);
+					this.SendPropertyChanging();
+					this._PickupCost = value;
+					this.SendPropertyChanged("PickupCost");
+					this.OnPickupCostChanged();
 				}
 			}
 		}

@@ -67,7 +67,8 @@ namespace Alicargo.Jobs {
         ///страховка - {7}€
         ///фактура - {8}€
         ///доставка - {9}€
-        ///Итого - {10}€.
+        ///pickup - {10}€
+        ///Итого - {11}€.
         /// </summary>
         internal static string Calculation_Body {
             get {

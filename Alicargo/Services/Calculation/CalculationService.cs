@@ -47,6 +47,7 @@ namespace Alicargo.Services.Calculation
 			var scotch = GetTapeCost(application);
 			var facture = application.FactureCostEdited ?? application.FactureCost ?? 0;
 			var transitCost = application.TransitCostEdited ?? application.TransitCost ?? 0;
+			var pickupCost = application.PickupCostEdited ?? application.PickupCost ?? 0;
 
 			var calculation = new CalculationData
 			{
@@ -59,7 +60,8 @@ namespace Alicargo.Services.Calculation
 				ScotchCost = scotch,
 				TariffPerKg = tariffPerKg,
 				Weight = weight,
-				TransitCost = transitCost
+				TransitCost = transitCost,
+				PickupCost = pickupCost
 			};
 
 			_calculations.Add(calculation, applicationId);
