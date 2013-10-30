@@ -35,7 +35,8 @@ namespace Alicargo.DataAccess.Repositories
 				StateIdTimestamp = DateTimeOffset.UtcNow,
 				TariffPerKg = data.TariffPerKg,
 				Weight = data.Weight,
-				ApplicationHistoryId = applicationId
+				ApplicationHistoryId = applicationId,
+				TransitCost = data.TransitCost
 			});
 		}
 
@@ -62,7 +63,8 @@ namespace Alicargo.DataAccess.Repositories
 								   MarkName = x.MarkName,
 								   ScotchCost = x.ScotchCost,
 								   TariffPerKg = x.TariffPerKg,
-								   Weight = x.Weight
+								   Weight = x.Weight,
+								   TransitCost = x.TransitCost
 							   }
 						   })
 						   .ToArray();
@@ -98,6 +100,7 @@ namespace Alicargo.DataAccess.Repositories
 								   ApplicationDisplay = x.ApplicationDisplay,
 								   ClientId = x.ClientId,
 								   FactureCost = x.FactureCost,
+								   TransitCost = x.TransitCost,
 								   InsuranceCost = x.InsuranceCost,
 								   MarkName = x.MarkName,
 								   ScotchCost = x.ScotchCost,

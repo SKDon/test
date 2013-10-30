@@ -15,6 +15,7 @@
 	[ScotchCost]			MONEY			NOT NULL,
 	[InsuranceCost]			MONEY			NOT NULL,
 	[FactureCost]			MONEY			NOT NULL,
+	[TransitCost]			MONEY			NOT NULL,
 
 	CONSTRAINT [FK_Calculation_Client] FOREIGN KEY ([ClientId]) REFERENCES [Client]([Id])
 )

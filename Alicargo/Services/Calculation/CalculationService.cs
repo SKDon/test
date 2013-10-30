@@ -46,7 +46,7 @@ namespace Alicargo.Services.Calculation
 			var insurance = application.Value / CalculationHelper.InsuranceRate;
 			var scotch = GetTapeCost(application);
 			var facture = application.FactureCostEdited ?? application.FactureCost ?? 0;
-			// todo: !!! почему сдесь нет TransitCostEdited?
+			var transitCost = application.TransitCostEdited ?? application.TransitCost ?? 0;
 
 			var calculation = new CalculationData
 			{
@@ -58,7 +58,8 @@ namespace Alicargo.Services.Calculation
 				MarkName = application.MarkName,
 				ScotchCost = scotch,
 				TariffPerKg = tariffPerKg,
-				Weight = weight
+				Weight = weight,
+				TransitCost = transitCost
 			};
 
 			_calculations.Add(calculation, applicationId);

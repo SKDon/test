@@ -123,7 +123,8 @@
 скотч - {6}€
 страховка - {7}€
 фактура - {8}€
-Итого - {9}€</value>
+доставка - {9}€
+Итого - {10}€</value>
     <comment>0  - AWB display
 1 - app display
 2 - mark
@@ -133,7 +134,8 @@
 6 - scoth
 7 - insurance
 8 - facture
-9 - total</comment>
+9 - transit cost
+10 - total</comment>
   </data>
   <data name="Calculation_Subject" xml:space="preserve">
     <value>Расчет стоимости заявки {0}</value>

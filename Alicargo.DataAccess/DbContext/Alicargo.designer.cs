@@ -1717,6 +1717,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _FactureCost;
 		
+		private decimal _TransitCost;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -1751,6 +1753,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnInsuranceCostChanged();
     partial void OnFactureCostChanging(decimal value);
     partial void OnFactureCostChanged();
+    partial void OnTransitCostChanging(decimal value);
+    partial void OnTransitCostChanged();
     #endregion
 		
 		public Calculation()
@@ -2039,6 +2043,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._FactureCost = value;
 					this.SendPropertyChanged("FactureCost");
 					this.OnFactureCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransitCost", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public decimal TransitCost
+		{
+			get
+			{
+				return this._TransitCost;
+			}
+			set
+			{
+				if ((this._TransitCost != value))
+				{
+					this.OnTransitCostChanging(value);
+					this.SendPropertyChanging();
+					this._TransitCost = value;
+					this.SendPropertyChanged("TransitCost");
+					this.OnTransitCostChanged();
 				}
 			}
 		}
@@ -5595,7 +5619,7 @@ namespace Alicargo.DataAccess.DbContext
 					this.OnFactureCostEditedChanged();
 				}
 			}
-		}		
+		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScotchCostEdited", DbType="Money")]
 		public System.Nullable<decimal> ScotchCostEdited

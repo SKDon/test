@@ -22,20 +22,21 @@ namespace Alicargo.Jobs.Calculation
 		public void Send(CalculationData calculation)
 		{
 			var client = _clients.Get(calculation.ClientId).First();
-			var cost = calculation.TariffPerKg*(decimal) calculation.Weight;
-			var total = cost + calculation.ScotchCost + calculation.FactureCost + calculation.InsuranceCost;
+			var cost = calculation.TariffPerKg * (decimal)calculation.Weight;
+			var total = cost + calculation.ScotchCost + calculation.FactureCost + calculation.InsuranceCost + calculation.TransitCost;
 
-			var text = string.Format(Resources.Calculation_Body,
-									 calculation.AirWaybillDisplay,
-									 calculation.ApplicationDisplay,
-									 calculation.MarkName,
-									 calculation.Weight.ToString("N2"),
-									 calculation.TariffPerKg.ToString("N2"),
-									 cost.ToString("N2"),
-									 calculation.ScotchCost.ToString("N2"),
-									 calculation.InsuranceCost.ToString("N2"),
-									 calculation.FactureCost.ToString("N2"),
-									 total.ToString("N2"));
+			var text = string.Format(Resources.Calculation_Body, // format
+									 calculation.AirWaybillDisplay, // 0
+									 calculation.ApplicationDisplay, // 1
+									 calculation.MarkName, // 2
+									 calculation.Weight.ToString("N2"), // 3
+									 calculation.TariffPerKg.ToString("N2"), // 4
+									 cost.ToString("N2"), // 5
+									 calculation.ScotchCost.ToString("N2"), // 6
+									 calculation.InsuranceCost.ToString("N2"), // 7
+									 calculation.FactureCost.ToString("N2"), // 8
+									 calculation.TransitCost.ToString("N2"), // 9
+									 total.ToString("N2")); // 10
 
 			var messages = new Message(string.Format(Resources.Calculation_Subject, calculation.ApplicationDisplay),
 									   text, client.Email)
