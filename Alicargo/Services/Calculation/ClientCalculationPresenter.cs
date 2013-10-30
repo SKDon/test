@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
@@ -36,7 +37,6 @@ namespace Alicargo.Services.Calculation
 			var applications = GetCalculatedApplicationsWithAwb(clientId, take, skip, out total);
 
 			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId ?? 0).ToArray())
-										 .OrderByDescending(x => x.CreationTimestamp)
 										 .ToArray();
 
 			var items = GetItems(applications);
@@ -54,7 +54,14 @@ namespace Alicargo.Services.Calculation
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var applications = _applicationRepository.List(clientId: clientId, stateIds: stateIds).ToArray();
+			var applications = _applicationRepository.List(clientId: clientId, stateIds: stateIds, orders: new[]
+			{
+				new Order
+				{
+					Desc = true,
+					OrderType = OrderType.AirWaybill
+				}
+			}).ToArray();
 
 			var appIds = applications.Select(x => x.Id).ToArray();
 
