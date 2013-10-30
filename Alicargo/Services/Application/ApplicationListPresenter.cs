@@ -85,13 +85,7 @@ namespace Alicargo.Services.Application
 		{
 			var orders = PrepareOrders(groups);
 
-			var data = _applications.List(take, skip, stateIds, orders, clientId, senderId);
-
-			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
-
-			var withAwb = data.Where(x => x.AirWaybillId.HasValue);
-
-			return withoutAwb.Concat(withAwb).ToArray();
+			return _applications.List(take, skip, stateIds, orders, clientId, senderId);
 		}
 
 		private static Order[] PrepareOrders(Order[] orders)

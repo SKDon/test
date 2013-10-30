@@ -58,16 +58,24 @@ namespace Alicargo.Services.Calculation
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var applications = _applications.List(senderId: senderId, stateIds: stateIds, skip: skip, take: take, orders: Order.Default)
-											.ToArray();
+			var applications = _applications.List(senderId: senderId, stateIds: stateIds, skip: skip, take: take, orders: new[]
+			{
+				new Order
+				{
+					Desc = true,
+					OrderType = OrderType.AirWaybill
+				}
+			}).ToArray();
 
 			total = _applications.Count(stateIds, senderId: senderId);
 
-			var withoutAwb = applications.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
+			//var withoutAwb = applications.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
 
-			var withAwb = applications.Where(x => x.AirWaybillId.HasValue);
+			//var withAwb = applications.Where(x => x.AirWaybillId.HasValue);
 
-			return withoutAwb.Concat(withAwb).ToArray();
+			//return withoutAwb.Concat(withAwb).ToArray();
+
+			return applications;
 		}
 
 		private List<SenderCalculationGroup> GetGroups(SenderCalculationItem[] items)
@@ -77,18 +85,24 @@ namespace Alicargo.Services.Calculation
 			var groups = items.GroupBy(x => x.AirWaybillId).Select(g =>
 			{
 				var itemsGroup = g.Key.HasValue
-						? g.OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray()
-						: g.OrderByDescending(x => x.ApplicationId).ToArray();
+					? g.OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray()
+					: g.OrderByDescending(x => x.ApplicationId).ToArray();
 				var awb = awbsData.FirstOrDefault(x => x.Id == g.Key);
-				var text = awb != null ? AwbHelper.GetAirWaybillDisplay(awb) : Pages.NoAirWaybill;
+				var text = awb != null
+					? AwbHelper.GetAirWaybillDisplay(awb)
+					: Pages.NoAirWaybill;
 				return new SenderCalculationGroup
 				{
 					AirWaybillId = g.Key,
 					items = itemsGroup,
 					value = new { id = g.Key, text },
 					aggregates = new SenderCalculationGroup.Aggregates(itemsGroup),
-					FlightCost = awb != null ? awb.FlightCost ?? 0 : 0,
-					TotalCostOfSenderForWeight = awb != null ? awb.TotalCostOfSenderForWeight ?? 0 : 0
+					FlightCost = awb != null
+						? awb.FlightCost ?? 0
+						: 0,
+					TotalCostOfSenderForWeight = awb != null
+						? awb.TotalCostOfSenderForWeight ?? 0
+						: 0
 				};
 			}).ToList();
 

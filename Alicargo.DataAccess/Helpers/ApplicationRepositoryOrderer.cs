@@ -36,17 +36,14 @@ namespace Alicargo.DataAccess.Helpers
 				isFirst = false;
 			}
 
+			//return applications;
+
 			return AdditionalOrdering((IOrderedQueryable<Application>)applications, orders);
 		}
 
 		private static IOrderedQueryable<Application> AdditionalOrdering(IOrderedQueryable<Application> applications,
-			IList<Order> orders)
+			IEnumerable<Order> orders)
 		{
-			//if (orders.All(x => x.OrderType != OrderType.ClientNic))
-			//{
-			//	applications = applications.ThenBy(x => x.Client.Nic);
-			//}
-
 			if (orders.All(x => x.OrderType != OrderType.Id))
 			{
 				applications = applications.ThenByDescending(x => x.Id);

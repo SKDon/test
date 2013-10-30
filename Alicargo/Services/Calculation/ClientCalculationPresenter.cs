@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
@@ -55,8 +54,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var applications = _applicationRepository.List(clientId: clientId, stateIds: stateIds, orders: Order.Default)
-													 .ToArray();
+			var applications = _applicationRepository.List(clientId: clientId, stateIds: stateIds).ToArray();
 
 			var appIds = applications.Select(x => x.Id).ToArray();
 
