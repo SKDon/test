@@ -179,7 +179,10 @@ namespace Alicargo.DataAccess.Repositories
 				applications = applications.Where(x => x.SenderId == senderId.Value);
 			}
 
-			applications = _orderer.Order(applications, orders).Skip(skip);
+			applications = _orderer.Order(applications, orders);
+
+			applications = applications.Skip(skip);
+
 			if (take.HasValue)
 				applications = applications.Take(take.Value);
 

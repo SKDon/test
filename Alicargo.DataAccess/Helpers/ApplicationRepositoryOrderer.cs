@@ -7,7 +7,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Helpers
 {
-	using OrderFunction = Func<IQueryable<Application>, bool, bool, IQueryable<Application>>;
+	using OrderFunction = Func<IQueryable<Application>, bool, bool, IOrderedQueryable<Application>>;
 
 	internal sealed class ApplicationRepositoryOrderer : IApplicationRepositoryOrderer
 	{
@@ -20,9 +20,9 @@ namespace Alicargo.DataAccess.Helpers
 			{OrderType.LegalEntity, ByLegalEntity}
 		};
 
-		public IQueryable<Application> Order(IQueryable<Application> applications, IEnumerable<Order> orders)
+		public IQueryable<Application> Order(IQueryable<Application> applications, IList<Order> orders)
 		{
-			if (orders == null)
+			if (orders == null || orders.Count == 0)
 			{
 				return applications;
 			}
@@ -36,22 +36,40 @@ namespace Alicargo.DataAccess.Helpers
 				isFirst = false;
 			}
 
+			return AdditionalOrdering((IOrderedQueryable<Application>)applications, orders);
+		}
+
+		private static IOrderedQueryable<Application> AdditionalOrdering(IOrderedQueryable<Application> applications,
+			IList<Order> orders)
+		{
+			//if (orders.All(x => x.OrderType != OrderType.ClientNic))
+			//{
+			//	applications = applications.ThenBy(x => x.Client.Nic);
+			//}
+
+			if (orders.All(x => x.OrderType != OrderType.Id))
+			{
+				applications = applications.ThenByDescending(x => x.Id);
+			}
+
 			return applications;
 		}
 
-		private static IQueryable<Application> ByClientNic(IQueryable<Application> applications, bool desc, bool isFirst)
+		private static IOrderedQueryable<Application> ByClientNic(IQueryable<Application> applications, bool desc,
+			bool isFirst)
 		{
 			return Order(applications, desc, isFirst, a => a.Client.Nic);
 		}
 
 		// todo: 3. test
-		private static IQueryable<Application> ById(IQueryable<Application> applications, bool desc, bool isFirst)
+		private static IOrderedQueryable<Application> ById(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
 			return Order(applications, desc, isFirst, x => x.Id);
 		}
 
 		// todo: 3. test
-		private static IQueryable<Application> ByAirWaybillBill(IQueryable<Application> applications, bool desc, bool isFirst)
+		private static IOrderedQueryable<Application> ByAirWaybillBill(IQueryable<Application> applications, bool desc,
+			bool isFirst)
 		{
 			var ordered = Order(applications, desc, isFirst, x => !x.AirWaybillId.HasValue);
 
@@ -60,12 +78,13 @@ namespace Alicargo.DataAccess.Helpers
 				: ordered.ThenBy(x => x.AirWaybill.CreationTimestamp);
 		}
 
-		private static IQueryable<Application> ByLegalEntity(IQueryable<Application> applications, bool desc, bool isFirst)
+		private static IOrderedQueryable<Application> ByLegalEntity(IQueryable<Application> applications, bool desc,
+			bool isFirst)
 		{
 			return Order(applications, desc, isFirst, a => a.Client.LegalEntity);
 		}
 
-		private static IQueryable<Application> ByState(IQueryable<Application> applications, bool desc, bool isFirst)
+		private static IOrderedQueryable<Application> ByState(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
 			return Order(applications, desc, isFirst, a => a.State.Name);
 		}

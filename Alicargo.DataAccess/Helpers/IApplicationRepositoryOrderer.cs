@@ -7,6 +7,6 @@ namespace Alicargo.DataAccess.Helpers
 {
 	internal interface IApplicationRepositoryOrderer
 	{
-		IQueryable<Application> Order(IQueryable<Application> applications, IEnumerable<Order> orders);
+		IQueryable<Application> Order(IQueryable<Application> applications, IList<Order> orders);
 	}
 }

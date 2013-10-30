@@ -36,20 +36,51 @@ namespace Alicargo.Services.Application
 
 			var applications = _itemMapper.Map(data);
 
-			return groups == null || groups.Length == 0
-				? new ApplicationListCollection
+			if (groups == null || groups.Length == 0)
+				return new ApplicationListCollection
 				{
 					Data = applications,
 					Total = _applications.Count(stateIds, clientId),
-				}
-				: new ApplicationListCollection
-				{
-					Total = _applications.Count(stateIds, clientId),
-					Groups = _grouper.Group(applications, groups.Select(x => x.OrderType).ToArray()),
 				};
+
+			return GetGroupedResult(groups, clientId, applications, stateIds);
 		}
 
-		private ApplicationListItemData[] GetList(int? take, int skip, IEnumerable<Order> groups, long? clientId,
+		private ApplicationListCollection GetGroupedResult(IEnumerable<Order> groups, long? clientId, ApplicationListItem[] applications,
+			IEnumerable<long> stateIds)
+		{
+			var applicationGroups = _grouper.Group(applications, groups.Select(x => x.OrderType).ToArray());
+
+			OrderGroupByClient(applicationGroups);
+
+			return new ApplicationListCollection
+			{
+				Total = _applications.Count(stateIds, clientId),
+				Groups = applicationGroups,
+			};
+		}
+
+		private static void OrderGroupByClient(IEnumerable<ApplicationGroup> applicationGroups)
+		{
+			foreach (var group in applicationGroups)
+			{
+				if (@group.hasSubgroups)
+				{
+					OrderGroupByClient(@group.items.Cast<ApplicationGroup>());
+				}
+				else
+				{
+					var items = @group.items.Cast<ApplicationListItem>();
+
+					@group.items = @group.value == ""
+						// ReSharper disable CoVariantArrayConversion
+						? items.OrderByDescending(x => x.Id).ToArray()
+						: items.OrderBy(x => x.ClientNic).ThenByDescending(x => x.Id).ToArray(); // ReSharper restore CoVariantArrayConversion
+				}
+			}
+		}
+
+		private ApplicationListItemData[] GetList(int? take, int skip, Order[] groups, long? clientId,
 			long? senderId, long[] stateIds)
 		{
 			var orders = PrepareOrders(groups);
@@ -63,11 +94,23 @@ namespace Alicargo.Services.Application
 			return withoutAwb.Concat(withAwb).ToArray();
 		}
 
-		private static Order[] PrepareOrders(IEnumerable<Order> orders)
+		private static Order[] PrepareOrders(Order[] orders)
 		{
-			return orders == null
-				? Order.Default
-				: orders.Concat(Order.Default).ToArray();
+			if (orders != null) return orders;
+
+			return new[]
+			{
+				new Order
+				{
+					Desc = true,
+					OrderType = OrderType.AirWaybill
+				},
+				new Order
+				{
+					Desc = false,
+					OrderType = OrderType.Id
+				}
+			};
 		}
 	}
 }
