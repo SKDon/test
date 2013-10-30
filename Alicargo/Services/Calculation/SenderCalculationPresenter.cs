@@ -76,7 +76,9 @@ namespace Alicargo.Services.Calculation
 
 			var groups = items.GroupBy(x => x.AirWaybillId).Select(g =>
 			{
-				var itemsGroup = g.ToArray();
+				var itemsGroup = g.Key.HasValue
+						? g.OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray()
+						: g.OrderByDescending(x => x.ApplicationId).ToArray();
 				var awb = awbsData.FirstOrDefault(x => x.Id == g.Key);
 				var text = awb != null ? AwbHelper.GetAirWaybillDisplay(awb) : Pages.NoAirWaybill;
 				return new SenderCalculationGroup
