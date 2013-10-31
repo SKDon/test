@@ -646,7 +646,7 @@
     <Content Include="Deploy\Install\Sql\create-sp-restore-db.sql" />
     <None Include="Deploy\Install\restore-db.ps1" />
     <Content Include="Deploy\testing.txt" />
-    <Content Include="Deploy\Update\1_1_To_Dev.sql" />
+    <Content Include="Deploy\Update\1_1_To_2_0.sql" />
     <Content Include="Deploy\Update\Plan.txt" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
@@ -678,6 +678,7 @@
     <Content Include="Deploy\Update\update.ps1" />
     <Content Include="Deploy\dev.bat" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\app\User\Grid.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />

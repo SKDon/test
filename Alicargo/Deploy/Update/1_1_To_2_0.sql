@@ -1,7 +1,4 @@
-﻿use Alicargo_Dev
-
-
-GO
+﻿GO
 DROP INDEX [IX_BrockerId]
     ON [dbo].[AirWaybill];
 
