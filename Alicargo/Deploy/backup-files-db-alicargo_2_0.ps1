@@ -1,0 +1,1 @@
+C:\inetpub\wwwroot\Alicargo_2.0\Deploy\Install\backup-db.ps1 -server .\SQLEXPRESS -backupLocation C:\AlicargoDbBackups\ -databaseName Alicargo_Files_2_0
