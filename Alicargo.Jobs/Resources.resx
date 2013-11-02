@@ -119,28 +119,30 @@
   </resheader>
   <data name="Calculation_Body" xml:space="preserve">
     <value>{0}
-{1} - {2} {3} kg * {4}€ = {5}€
-скотч - {6}€
-страховка - {7}€
-фактура - {8}€
-доставка - {9}€
-pickup - {10}€
-Итого - {11}€</value>
+
+{1} kg * {2}€ = {3}€
+скотч - {4}€
+страховка - {4}€
+фактура - {5}€
+доставка - {6}€
+забор с фабрики - {7}€
+
+Итого - {9}€</value>
     <comment>0  - AWB display
-1 - app display
-2 - mark
-3 - weight
-4 - tarif per kg
-5 - 4 * 5
-6 - scoth
-7 - insurance
-8 - facture
-9 - transit cost
-10 - pickup
-11 - total</comment>
+1 - weight
+2 - tarif per kg
+3 - 1 * 2
+4 - scoth
+5 - insurance
+6 - facture
+7 - transit cost
+8 - pickup
+9 - total</comment>
   </data>
   <data name="Calculation_Subject" xml:space="preserve">
-    <value>Расчет стоимости заявки {0}</value>
-    <comment>0 - Application Id</comment>
+    <value>Расчет стоимости заявки #{0} {1}/{2}</value>
+    <comment>0 - Application display
+1 - factory
+2 - mark</comment>
   </data>
 </root>

@@ -43,8 +43,10 @@
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
     <Compile Include="Calculation\CalculationJobHepler.cs" />
+    <Compile Include="Calculation\CalculationMailBuilder.cs" />
     <Compile Include="Calculation\CalculationWatcherJob.cs" />
     <Compile Include="Calculation\CalculationMailer.cs" />
+    <Compile Include="Calculation\ICalculationMailBuilder.cs" />
     <Compile Include="Calculation\ICalculationMailer.cs" />
     <Compile Include="IJob.cs" />
     <Compile Include="Calculation\CalculationMailerJob.cs" />
