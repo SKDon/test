@@ -48,7 +48,7 @@
 					}
 				},
 				schema: schema,
-				pageSize: 20,
+				pageSize: $a.DefaultPageSize,
 				serverPaging: true,
 				serverGrouping: true,
 				error: $a.ShowError,
@@ -68,7 +68,7 @@
 				filterable: false,
 				sortable: false,
 				groupable: false,
-				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
+				pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
 				resizable: true,
 				columns: $a.Application.GetColumns()
 			};

@@ -19,7 +19,7 @@
 			}
 		},
 		schema: schema,
-		pageSize: 20,
+		pageSize: $a.DefaultPageSize,
 		serverPaging: true,
 		editable: true,
 		error: $a.ShowError
@@ -30,7 +30,7 @@
 	$("#AirWaybill-grid").kendoGrid({
 		resizable: true,
 		dataSource: dataSource,
-		pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
+		pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
 		detailTemplate: kendo.template($("#AirWaybill-grid-details").html()),
 		columns: columns
 	});

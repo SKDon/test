@@ -18,7 +18,7 @@
 						cache: false
 					}
 				},
-				pageSize: 20,
+				pageSize: $a.DefaultPageSize,
 				serverPaging: true,
 				serverGrouping: true,
 				error: $a.ShowError,

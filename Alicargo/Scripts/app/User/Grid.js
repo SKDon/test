@@ -22,6 +22,7 @@
 
 			$("#user-grid").kendoGrid({
 				dataSource: dataSource,
+				pageable: false,
 				columns: [
 					{ field: "Name", title: $l.Pages_Name },
 					{

@@ -21,7 +21,7 @@
 			}
 		},
 		schema: schema,
-		pageSize: 20,
+		pageSize: $a.DefaultPageSize,
 		serverPaging: true,
 		editable: true,
 		error: Alicargo.ShowError
@@ -31,7 +31,7 @@
 		dataSource: dataSource,
 		filterable: false,
 		sortable: false,
-		pageable: true,
+		pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
 		editable: false,
 		columns: [
 			{ field: "LegalEntity", title: $l.Entities_LegalEntity },

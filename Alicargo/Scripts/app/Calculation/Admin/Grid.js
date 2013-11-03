@@ -180,7 +180,7 @@
 
 			$("#calculation-grid").kendoGrid({
 				columns: $c.Columns(),
-				pageable: { refresh: true, pageSizes: [10, 20, 50, 100] },
+				pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
 				dataSource: $c.DataSource(),
 				editable: true,
 				resizable: true,
