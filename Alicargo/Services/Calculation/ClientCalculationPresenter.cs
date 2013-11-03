@@ -34,10 +34,10 @@ namespace Alicargo.Services.Calculation
 		public ClientCalculationListCollection List(long clientId, int take, long skip)
 		{
 			long total;
-			var applications = GetCalculatedApplicationsWithAwb(clientId, take, skip, out total);
+			var applications = GetCalculatedApplications(clientId, take, skip, out total);
 
-			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId ?? 0).ToArray())
-										 .ToArray();
+			// ReSharper disable PossibleInvalidOperationException
+			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId.Value).ToArray()).ToArray(); // ReSharper restore PossibleInvalidOperationException
 
 			var items = GetItems(applications);
 
@@ -50,44 +50,33 @@ namespace Alicargo.Services.Calculation
 			};
 		}
 
-		private ApplicationListItemData[] GetCalculatedApplicationsWithAwb(long clientId, int take, long skip, out long total)
+		private ApplicationListItemData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var applications = _applicationRepository.List(clientId: clientId, stateIds: stateIds, orders: new[]
+			var applications = _applicationRepository.List(stateIds, new[]
 			{
-				new Order
-				{
-					Desc = true,
-					OrderType = OrderType.AirWaybill
-				}
-			}).ToArray();
+			    new Order
+			    {
+			        Desc = true,
+			        OrderType = OrderType.AirWaybill
+			    }
+			}, take, (int)skip, clientId, hasCalculation: true).ToArray();
 
-			var appIds = applications.Select(x => x.Id).ToArray();
+			total = _applicationRepository.Count(stateIds, clientId, hasCalculation: true);
 
-			var calculations = _applicationRepository.GetCalculations(appIds);
-
-			applications = applications.Where(x => calculations.ContainsKey(x.Id) && x.AirWaybillId.HasValue).ToArray();
-
-			total = applications.LongLength;
-
-			return applications.Skip((int)skip).Take(take).ToArray();
+			return applications;
 		}
 
 		private static List<ClientCalculationGroup> GetGroups(IEnumerable<AirWaybillData> awbsData,
 			IEnumerable<ClientCalculationItem> items)
 		{
-			return items.GroupBy(x => x.AirWaybillId).Select(g =>
+			return items.GroupBy(x => x.AirWaybillId).Select(g => new ClientCalculationGroup
 			{
-				var itemsInGroup = g.OrderByDescending(x => x.ApplicationId).ToArray();
-
-				return new ClientCalculationGroup
-				{
-					AirWaybillId = g.Key,
-					items = itemsInGroup,
-					value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
-					aggregates = new ClientCalculationGroup.Aggregates(g.Sum(x => x.Profit))
-				};
+				AirWaybillId = g.Key,
+				items = g.ToArray(),
+				value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
+				aggregates = new ClientCalculationGroup.Aggregates(g.Sum(x => x.Profit))
 			}).ToList();
 		}
 
