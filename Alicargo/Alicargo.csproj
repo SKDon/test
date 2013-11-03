@@ -417,6 +417,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\app\calculation-grid.css" />
     <Content Include="Content\app\common.css" />
     <Content Include="Content\app\entity.css" />
     <Content Include="Content\app\kendo.css" />

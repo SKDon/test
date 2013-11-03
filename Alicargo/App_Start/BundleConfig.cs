@@ -104,7 +104,8 @@ namespace Alicargo.App_Start
 					"~/Content/app/kendo.css",
 					"~/Content/app/layout.css",
 					"~/Content/app/common.css",
-					"~/Content/app/entity.css"
+					"~/Content/app/entity.css",
+					"~/Content/app/calculation-grid.css"
 				));
 		}
 	}

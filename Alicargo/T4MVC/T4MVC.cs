@@ -1056,6 +1056,8 @@ namespace Links
             private const string URLPATH = "~/Content/app";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string calculation_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/calculation-grid.min.css") ? Url("calculation-grid.min.css") : Url("calculation-grid.css");
+                 
             public static readonly string common_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/common.min.css") ? Url("common.min.css") : Url("common.css");
                  
             public static readonly string entity_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/entity.min.css") ? Url("entity.min.css") : Url("entity.css");
