@@ -8,6 +8,6 @@
     <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
     <CreateNewDatabase>True</CreateNewDatabase>
     <ProfileVersionNumber>1</ProfileVersionNumber>
-    <TargetConnectionString>Data Source=.;Integrated Security=True;Pooling=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=.\SQLEXPRESS;Integrated Security=True;Pooling=False</TargetConnectionString>
   </PropertyGroup>
 </Project>

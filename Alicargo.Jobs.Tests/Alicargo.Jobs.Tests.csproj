@@ -37,11 +37,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EmitMapper">
+      <HintPath>..\packages\EmitMapper.1.0.0\lib\EmitMapper.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.2.1.0.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\packages\AutoFixture.3.12.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -60,15 +66,29 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Calculation\CalculationMailBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
+      <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
+      <Name>Alicargo.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
+      <Project>{577B60F9-32F7-4117-97DA-40743BFF4CA0}</Project>
+      <Name>Alicargo.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alicargo.Jobs\Alicargo.Jobs.csproj">
       <Project>{c2133743-7762-4bd9-a824-eb039e41af58}</Project>
       <Name>Alicargo.Jobs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alicargo.TestHelpers\Alicargo.TestHelpers.csproj">
+      <Project>{BB7C7B4A-D181-4812-89BC-29EB406E9656}</Project>
+      <Name>Alicargo.TestHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>
