@@ -92,7 +92,7 @@
 						button.remove();
 					}
 				});
-				
+
 				$("tr a.k-grid-custom-cancel").each(function() {
 					var button = $(this);
 					var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
@@ -178,9 +178,9 @@
 				}
 			}
 
-			$("#calculation-grid").kendoGrid({
+			$a.CreateGrid("#calculation-grid", {
 				columns: $c.Columns(),
-				pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
+				pageable: $a.DefaultPageSizes,
 				dataSource: $c.DataSource(),
 				editable: true,
 				resizable: true,

@@ -68,7 +68,7 @@
 				filterable: false,
 				sortable: false,
 				groupable: false,
-				pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
+				pageable: $a.DefaultPageSizes,
 				resizable: true,
 				columns: $a.Application.GetColumns()
 			};
@@ -126,9 +126,7 @@
 
 			if ($r.IsClient) {
 				$.extend(settings, {
-					dataBound: function() {
-						this.expandRow(this.tbody.find("tr.k-master-row"));
-					}
+					dataBound: function() { this.expandRow(this.tbody.find("tr.k-master-row")); }
 				});
 			}
 
@@ -188,7 +186,7 @@
 			return settings;
 		}
 
-		$("#application-grid").kendoGrid(getSettings());
+		$a.CreateGrid("#application-grid", getSettings());
 
 		return $apl;
 	})($a.Application || {});

@@ -1,6 +1,6 @@
 ﻿$(function () {
 	var $a = Alicargo;
-	
+
 	var schema = {
 		model: {
 			id: "Id"
@@ -27,10 +27,10 @@
 
 	var columns = $a.Awb.AddColumns();
 
-	$("#AirWaybill-grid").kendoGrid({
+	$a.CreateGrid("#AirWaybill-grid", {
 		resizable: true,
 		dataSource: dataSource,
-		pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
+		pageable: $a.DefaultPageSizes,
 		detailTemplate: kendo.template($("#AirWaybill-grid-details").html()),
 		columns: columns
 	});

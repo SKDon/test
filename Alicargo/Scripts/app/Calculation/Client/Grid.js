@@ -1,10 +1,10 @@
-﻿var Alicargo = (function ($a) {
-	$a.Calculation = (function ($c) {
+﻿var Alicargo = (function($a) {
+	$a.Calculation = (function($c) {
 
-		$(function () {
-			$("#calculation-grid").kendoGrid({
+		$(function() {
+			$a.CreateGrid("#calculation-grid", {
 				columns: $c.Columns(),
-				pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
+				pageable: $a.DefaultPageSizes,
 				dataSource: $c.DataSource(),
 				editable: false,
 				groupable: false,

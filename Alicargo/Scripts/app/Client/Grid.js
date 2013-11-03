@@ -27,11 +27,11 @@
 		error: Alicargo.ShowError
 	};
 
-	$("#client-grid").kendoGrid({
+	$a.CreateGrid("#client-grid", {
 		dataSource: dataSource,
 		filterable: false,
 		sortable: false,
-		pageable: { refresh: true, pageSizes: $a.DefaultPageSizes },
+		pageable: $a.DefaultPageSizes,
 		editable: false,
 		columns: [
 			{ field: "LegalEntity", title: $l.Entities_LegalEntity },
