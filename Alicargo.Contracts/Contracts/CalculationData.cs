@@ -6,6 +6,7 @@
 		public string AirWaybillDisplay { get; set; }
 		public string ApplicationDisplay { get; set; }
 		public string MarkName { get; set; }
+        public string FactoryName { get; set; }
 		public float Weight { get; set; }
 		public decimal TariffPerKg { get; set; }
 		public decimal ScotchCost { get; set; }

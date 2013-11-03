@@ -9,6 +9,7 @@
 	[ApplicationHistoryId]	BIGINT			NOT NULL,
 	[AirWaybillDisplay]		NVARCHAR(320)	NOT NULL,
 	[ApplicationDisplay]	NVARCHAR(320)	NOT NULL,
+	[FactoryName]			NVARCHAR(320)	NOT NULL, 
 	[MarkName]				NVARCHAR(320)	NOT NULL,
 	[Weight]				REAL			NOT NULL,
 	[TariffPerKg]			MONEY			NOT NULL,

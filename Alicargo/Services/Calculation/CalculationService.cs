@@ -57,6 +57,7 @@ namespace Alicargo.Services.Calculation
 				FactureCost = facture,
 				InsuranceCost = insurance,
 				MarkName = application.MarkName,
+                FactoryName = application.FactoryName,
 				ScotchCost = scotch,
 				TariffPerKg = tariffPerKg,
 				Weight = weight,

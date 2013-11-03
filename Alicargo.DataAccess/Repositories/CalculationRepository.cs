@@ -29,6 +29,7 @@ namespace Alicargo.DataAccess.Repositories
 				Id = 0,
 				InsuranceCost = data.InsuranceCost,
 				MarkName = data.MarkName,
+                FactoryName = data.FactoryName,
 				RowVersion = null,
 				ScotchCost = data.ScotchCost,
 				StateId = (int) CalculationState.New,
@@ -66,7 +67,8 @@ namespace Alicargo.DataAccess.Repositories
 								   TariffPerKg = x.TariffPerKg,
 								   Weight = x.Weight,
 								   TransitCost = x.TransitCost,
-								   PickupCost = x.PickupCost
+								   PickupCost = x.PickupCost,
+                                   FactoryName = x.FactoryName
 							   }
 						   })
 						   .ToArray();
@@ -105,6 +107,7 @@ namespace Alicargo.DataAccess.Repositories
 								   TransitCost = x.TransitCost,
 								   InsuranceCost = x.InsuranceCost,
 								   MarkName = x.MarkName,
+                                   FactoryName = x.FactoryName,
 								   ScotchCost = x.ScotchCost,
 								   TariffPerKg = x.TariffPerKg,
 								   Weight = x.Weight,
