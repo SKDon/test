@@ -19,7 +19,7 @@
 			}
 		},
 		schema: schema,
-		pageSize: $a.DefaultPageSize,
+		pageSize: $a.SelectedPageSize("#AirWaybill-grid"),
 		serverPaging: true,
 		editable: true,
 		error: $a.ShowError

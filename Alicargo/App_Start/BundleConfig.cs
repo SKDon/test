@@ -15,47 +15,40 @@ namespace Alicargo.App_Start
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ApplicationListJs)
 				.Include(
-					"~/Scripts/app/Alicargo.js",
 					"~/Scripts/app/Application/Columns.js",
 					"~/Scripts/app/Application/Grid.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.AwbListJs)
 				.Include(
-					"~/Scripts/app/Alicargo.js",
 					"~/Scripts/app/AirWaybill/Columns.js",
 					"~/Scripts/app/AirWaybill/Grid.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ClientListJs)
 				.Include(
-					"~/Scripts/app/Alicargo.js",
 					"~/Scripts/app/Client/Grid.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.UserListJs)
 				.Include(
-					"~/Scripts/app/Alicargo.js",
 					"~/Scripts/app/User/Grid.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.CalculationJs)
 				.Include(
-					"~/Scripts/app/Alicargo.js",
 					"~/scripts/app/calculation/admin/Columns.js",
 					"~/scripts/app/calculation/admin/Grid.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ClientCalculationJs)
-				.Include(
-					"~/Scripts/app/Alicargo.js",
+				.Include(					
 					"~/scripts/app/calculation/client/Columns.js",
 					"~/scripts/app/calculation/client/Grid.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.SenderCalculationJs)
 				.Include(
-					"~/Scripts/app/Alicargo.js",
 					"~/scripts/app/calculation/sender/Columns.js",
 					"~/scripts/app/calculation/sender/Grid.js"
 				));
@@ -80,8 +73,10 @@ namespace Alicargo.App_Start
 					"~/Content/bootstrap/fileupload/bootstrap-fileupload.js",
 					"~/Scripts/globalize/globalize.js",
 					"~/Scripts/kendo/2013.2.716/kendo.web.min.js",
+					"~/Scripts/jquery.cookie.js",
 					"~/Scripts/app/CurrencyType.js",
-					"~/Scripts/app/Common.js"
+					"~/Scripts/app/Common.js",
+					"~/Scripts/app/Alicargo.js"					
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.RuJs)

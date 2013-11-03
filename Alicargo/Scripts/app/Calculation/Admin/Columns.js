@@ -43,7 +43,7 @@
 						cache: false
 					}
 				},
-				pageSize: $a.DefaultPageSize,
+				pageSize: $a.SelectedPageSize("#calculation-grid"),
 				serverPaging: true,
 				serverGrouping: true,
 				serverAggregates: true,

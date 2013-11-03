@@ -3,7 +3,25 @@
 	$a.DefaultPageSize = $a.MaxPageSize;
 	$a.DefaultPageSizes = { refresh: true, pageSizes: [10, 20, 50, 100, $a.MaxPageSize] };
 
+	$a.SelectedPageSize = function(selector, value) {
+		var key = selector + '-page-size';
+		
+		if (!!value) {
+			$.cookie(key, value);
+			return value;
+		}
+
+		value = $.cookie(key);
+
+		if (!!!value) {
+			value = $a.DefaultPageSize;
+		}
+		
+		return value;
+	};
+
 	$a.CreateGrid = function(selector, settings) {
+
 		$(selector).kendoGrid(settings);
 
 		var pageSizes = [
@@ -13,10 +31,14 @@
 			{ text: "100", value: 100 },
 			{ text: "All", value: $a.MaxPageSize }
 		];
-		
-		var dataSource = new kendo.data.DataSource({ data: pageSizes });		
+
+		var dataSource = new kendo.data.DataSource({ data: pageSizes });
 
 		$('.k-pager-sizes select[data-role="dropdownlist"]', selector)
+			.change(function(e) {
+				var val = $(e.target).val();
+				$a.SelectedPageSize(selector, val);
+			})
 			.data('kendoDropDownList')
 			.setDataSource(dataSource);
 	};

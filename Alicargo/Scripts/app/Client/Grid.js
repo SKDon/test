@@ -21,7 +21,7 @@
 			}
 		},
 		schema: schema,
-		pageSize: $a.DefaultPageSize,
+		pageSize: $a.SelectedPageSize("#client-grid"),
 		serverPaging: true,
 		editable: true,
 		error: Alicargo.ShowError

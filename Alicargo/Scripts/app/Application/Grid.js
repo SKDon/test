@@ -48,7 +48,7 @@
 					}
 				},
 				schema: schema,
-				pageSize: $a.DefaultPageSize,
+				pageSize: $a.SelectedPageSize("#application-grid"),
 				serverPaging: true,
 				serverGrouping: true,
 				error: $a.ShowError,
