@@ -39,7 +39,7 @@ namespace Alicargo.Controllers
 
 		[HttpPost, Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender),
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult List(int take, int skip, int page, int pageSize)
+		public virtual JsonResult List(int take, int skip)
 		{
 			var collection = _clientPresenter.GetList(take, skip);
 

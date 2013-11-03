@@ -34,7 +34,7 @@ namespace Alicargo.Controllers
 
 		[HttpPost, Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender),
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult List(int take, int skip, int page, int pageSize, Dictionary<string, string>[] group)
+		public virtual JsonResult List(int take, int skip, Dictionary<string, string>[] group)
 		{
 			// todo: 3. use model binder for Order
 			var orders = OrderHelper.Get(group);

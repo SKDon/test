@@ -84,8 +84,6 @@ namespace Alicargo.Controllers
             public readonly string take = "take";
             public readonly string skip = "skip";
             public readonly string page = "page";
-            public readonly string pageSize = "pageSize";
-            public readonly string group = "group";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -122,17 +120,15 @@ namespace Alicargo.Controllers
     {
         public T4MVC_ApplicationListController() : base(Dummy.Instance) { }
 
-        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip, int page, int pageSize, System.Collections.Generic.Dictionary<string,string>[] group);
+        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip, System.Collections.Generic.Dictionary<string,string>[] group);
 
-        public override System.Web.Mvc.JsonResult List(int take, int skip, int page, int pageSize, System.Collections.Generic.Dictionary<string,string>[] group)
+        public override System.Web.Mvc.JsonResult List(int take, int skip, System.Collections.Generic.Dictionary<string,string>[] group)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "take", take);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skip", skip);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pageSize", pageSize);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "group", group);
-            ListOverride(callInfo, take, skip, page, pageSize, group);
+            ListOverride(callInfo, take, skip, group);
             return callInfo;
         }
 

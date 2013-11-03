@@ -87,7 +87,7 @@ namespace Alicargo.Controllers
 
 		[Access(RoleType.Admin, RoleType.Broker, RoleType.Sender), HttpPost]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult List(int take, int skip, int page, int pageSize)
+		public virtual JsonResult List(int take, int skip)
 		{
 			// todo: 3. utility to get current broker
 			long? brokerId = null;
