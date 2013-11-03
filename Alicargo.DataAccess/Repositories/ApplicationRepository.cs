@@ -338,9 +338,9 @@ namespace Alicargo.DataAccess.Repositories
 
 			if (cargoReceivedStateId.HasValue && cargoReceivedDaysToShow.HasValue)
 			{
-				applications = applications.Where(x =>
-					x.StateId != cargoReceivedStateId.Value ||
-					x.StateChangeTimestamp > DateTimeOffset.UtcNow.AddDays(cargoReceivedDaysToShow.Value));
+				var offset = DateTimeOffset.UtcNow.AddDays(-cargoReceivedDaysToShow.Value);
+
+				applications = applications.Where(x => x.StateId != cargoReceivedStateId.Value || x.StateChangeTimestamp > offset);
 			}
 
 			return applications;

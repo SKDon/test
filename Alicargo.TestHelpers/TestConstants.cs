@@ -8,6 +8,7 @@
 		public const long DefaultStateId = 1;
 		public const long TestAwbId = 1;
 		public const long CargoIsFlewStateId = 7;
+		public const long CargoReceivedStateId = 11;
 		public const long TestTransitId = 1;
 		public const long TestCountryId = 1;
 		public const long TestApplicationId = 1;

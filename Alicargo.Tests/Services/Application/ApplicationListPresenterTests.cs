@@ -44,11 +44,13 @@ namespace Alicargo.Tests.Services.Application
 			var map = _context.CreateMany<ApplicationListItem>().ToArray();
 			_context.StateService.Setup(x => x.GetVisibleStates()).Returns(_stateIds);
 			_context.ApplicationListItemMapper.Setup(x => x.Map(data)).Returns(map);
+			const int cargoReceivedDaysToShow = 10;
+			_context.StateConfig.Setup(x => x.CargoReceivedDaysToShow).Returns(cargoReceivedDaysToShow);
 			_context.ApplicationGrouper.Setup(x => x.Group(map, new[] { OrderType.LegalEntity }))
 				.Returns(new ApplicationGroup[0]);
-			_context.ApplicationRepository.Setup(x => x.Count(_stateIds, clientId, null, null, null, null)).Returns(It.IsAny<long>());
+			_context.ApplicationRepository.Setup(x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedDaysToShow)).Returns(It.IsAny<long>());
 			_context.ApplicationRepository.Setup(x =>
-					x.List(_stateIds, _orders, 0, 0, clientId, null, null, null, null))
+					x.List(_stateIds, _orders, 0, 0, clientId, null, null, null, cargoReceivedDaysToShow))
 				.Returns(data);
 
 			var collection = _service.List(0, 0, _orders, clientId);
@@ -59,9 +61,9 @@ namespace Alicargo.Tests.Services.Application
 			_context.StateService.Verify(x => x.GetVisibleStates(), Times.Once());
 			_context.ApplicationListItemMapper.Verify(x => x.Map(data));
 			_context.ApplicationGrouper.Verify(x => x.Group(map, new[] { OrderType.LegalEntity }), Times.Once());
-			_context.ApplicationRepository.Verify(x => x.Count(_stateIds, clientId, null, null, null, null), Times.Once());
+			_context.ApplicationRepository.Verify(x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedDaysToShow), Times.Once());
 			_context.ApplicationRepository.Verify(x =>
-				x.List(_stateIds, _orders, 0, 0, clientId, null, null, null, null),
+				x.List(_stateIds, _orders, 0, 0, clientId, null, null, null, cargoReceivedDaysToShow),
 				Times.Once());
 		}
 	}

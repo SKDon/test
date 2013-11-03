@@ -24,7 +24,6 @@ namespace Alicargo.BlackBox.Tests.Controllers
         private ApplicationController _controller;
         private Fixture _fixture;
 
-
         [TestInitialize]
         public void TestInitialize()
         {

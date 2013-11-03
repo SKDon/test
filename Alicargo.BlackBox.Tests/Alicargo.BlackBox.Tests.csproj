@@ -139,6 +139,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\Application\ApplicationListPresenterTests.cs" />
     <Compile Include="StateServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>

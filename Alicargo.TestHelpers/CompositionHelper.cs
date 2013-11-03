@@ -18,7 +18,7 @@ namespace Alicargo.TestHelpers
 		private readonly SqlConnection _connection;
 		private readonly TransactionScope _transactionScope;
 
-		public CompositionHelper(string connectionString)
+		public CompositionHelper(string connectionString, RoleType type = RoleType.Admin)
 		{
 			_kernel = new StandardKernel();
 			_connection = new SqlConnection(connectionString);
@@ -27,7 +27,7 @@ namespace Alicargo.TestHelpers
 			_unitOfWork = new UnitOfWork(_connection);
 
 			BindServices(connectionString);
-			BindIdentityService();			
+			BindIdentityService(type);
 		}
 
 		public IKernel Kernel
@@ -35,12 +35,18 @@ namespace Alicargo.TestHelpers
 			get { return _kernel; }
 		}
 
-		private void BindIdentityService()
+		private void BindIdentityService(RoleType type)
 		{
 			var identityService = new Mock<IIdentityService>(MockBehavior.Strict);
 
-			identityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
-			identityService.Setup(x => x.IsInRole(RoleType.Client)).Returns(false);
+			foreach (RoleType item in Enum.GetValues(typeof(RoleType)))
+			{
+				var item1 = item;
+				identityService.Setup(x => x.IsInRole(item1)).Returns(false);
+			}
+
+			identityService.Setup(x => x.IsInRole(type)).Returns(true);
+
 			identityService.Setup(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
 
 			Kernel.Rebind<IIdentityService>().ToConstant(identityService.Object).InSingletonScope();
