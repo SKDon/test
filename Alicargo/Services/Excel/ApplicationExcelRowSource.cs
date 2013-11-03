@@ -68,11 +68,11 @@ namespace Alicargo.Services.Excel
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var data = _applications.List(stateIds: stateIds, orders: new[]
+			var data = _applications.List(stateIds, new[]
 			{
-				new Order {Desc = true, OrderType = OrderType.AirWaybill},
-				new Order {Desc = false, OrderType = OrderType.ClientNic},
-				new Order {Desc = true, OrderType = OrderType.Id}
+			    new Order {Desc = true, OrderType = OrderType.AirWaybill},
+			    new Order {Desc = false, OrderType = OrderType.ClientNic},
+			    new Order {Desc = true, OrderType = OrderType.Id}
 			});
 
 			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);

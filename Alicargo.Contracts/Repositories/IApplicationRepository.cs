@@ -4,23 +4,21 @@ using Alicargo.Contracts.Helpers;
 
 namespace Alicargo.Contracts.Repositories
 {
-	public interface IApplicationRepository
-	{
-		ApplicationData Get(long id);
-		ApplicationDetailsData GetDetails(long id);
-
-		ApplicationData[] GetByAirWaybill(params long[] ids);
-		ApplicationListItemData[] List(int? take = null, int skip = 0, long[] stateIds = null, Order[] orders = null, long? clientId = null, long? senderId = null);
-
-		long Count(IEnumerable<long> stateIds, long? clientId = null, long? senderId = null);
-		long GetClientId(long id);
-
-		FileHolder GetInvoiceFile(long id);
-		FileHolder GetSwiftFile(long id);
-		FileHolder GetCPFile(long id);
-		FileHolder GetDeliveryBillFile(long id);
-		FileHolder GetTorg12File(long id);
-		FileHolder GetPackingFile(long id);
-		IReadOnlyDictionary<long, long> GetCalculations(long[] appIds);
-	}
+    public interface IApplicationRepository
+    {
+        ApplicationData Get(long id);
+        ApplicationDetailsData GetDetails(long id);
+        ApplicationData[] GetByAirWaybill(params long[] ids);
+        ApplicationListItemData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
+            long? clientId = null, long? senderId = null, bool? hasCalculation = null);
+        long Count(long[] stateIds, long? clientId = null, long? senderId = null, bool? hasCalculation = null);
+        long GetClientId(long id);
+        FileHolder GetInvoiceFile(long id);
+        FileHolder GetSwiftFile(long id);
+        FileHolder GetCPFile(long id);
+        FileHolder GetDeliveryBillFile(long id);
+        FileHolder GetTorg12File(long id);
+        FileHolder GetPackingFile(long id);
+        IReadOnlyDictionary<long, long> GetCalculations(long[] appIds);
+    }
 }

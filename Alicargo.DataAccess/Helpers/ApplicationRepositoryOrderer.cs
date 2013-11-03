@@ -36,8 +36,6 @@ namespace Alicargo.DataAccess.Helpers
 				isFirst = false;
 			}
 
-			//return applications;
-
 			return AdditionalOrdering((IOrderedQueryable<Application>)applications, orders);
 		}
 

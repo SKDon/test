@@ -58,22 +58,16 @@ namespace Alicargo.Services.Calculation
 		{
 			var stateIds = _stateService.GetVisibleStates();
 
-			var applications = _applications.List(senderId: senderId, stateIds: stateIds, skip: skip, take: take, orders: new[]
+			var applications = _applications.List(stateIds, new[]
 			{
-				new Order
-				{
-					Desc = true,
-					OrderType = OrderType.AirWaybill
-				}
-			}).ToArray();
+			    new Order
+			    {
+			        Desc = true,
+			        OrderType = OrderType.AirWaybill
+			    }
+			}, take, skip, senderId: senderId).ToArray();
 
 			total = _applications.Count(stateIds, senderId: senderId);
-
-			//var withoutAwb = applications.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
-
-			//var withAwb = applications.Where(x => x.AirWaybillId.HasValue);
-
-			//return withoutAwb.Concat(withAwb).ToArray();
 
 			return applications;
 		}

@@ -45,8 +45,8 @@ namespace Alicargo.Tests.Services.Application
             _context.ApplicationListItemMapper.Setup(x => x.Map(data)).Returns(map);
             _context.ApplicationGrouper.Setup(x => x.Group(map, new[] { OrderType.LegalEntity }))
                     .Returns(new ApplicationGroup[0]);
-            _context.ApplicationRepository.Setup(x => x.Count(states, clientId, null)).Returns(It.IsAny<long>());
-            _context.ApplicationRepository.Setup(x => x.List(0, 0, states, orders, clientId, null)).Returns(data);
+            _context.ApplicationRepository.Setup(x => x.Count(states, clientId, null, null)).Returns(It.IsAny<long>());
+            _context.ApplicationRepository.Setup(x => x.List(states, orders, 0, 0, clientId, null, null)).Returns(data);
 
             var collection = _service.List(0, 0, orders, clientId);
 
@@ -56,9 +56,9 @@ namespace Alicargo.Tests.Services.Application
             _context.StateService.Verify(x => x.GetVisibleStates(), Times.Once());
             _context.ApplicationListItemMapper.Verify(x => x.Map(data));
             _context.ApplicationGrouper.Verify(x => x.Group(map, new[] { OrderType.LegalEntity }), Times.Once());
-            _context.ApplicationRepository.Verify(x => x.Count(states, clientId, null), Times.Once());
+            _context.ApplicationRepository.Verify(x => x.Count(states, clientId, null, null), Times.Once());
             _context.ApplicationRepository.Verify(x =>
-                x.List(0, 0, states, orders, clientId, null), Times.Once());
+                x.List(states, orders, 0, 0, clientId, null, null), Times.Once());
         }
     }
 }
