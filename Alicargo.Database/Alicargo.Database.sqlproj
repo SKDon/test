@@ -72,7 +72,7 @@
     <Folder Include="Tables\" />
     <Folder Include="Stored procedures" />
     <Folder Include="Types" />
-    <Folder Include="Release" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -101,14 +101,10 @@
     <Build Include="Stored procedures\User_Add.sql" />
     <Build Include="Types\IdsTable.sql" />
     <Build Include="Stored procedures\Sender_GetTariffs.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="InitialData.sql" />
+    <PostDeploy Include="Scripts\InitialData.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
-    <None Include="Release\Release.Database.publish.xml" />
-    <None Include="Release\MasterToRelease.SqlSchemaCompare.scmp" />
-    <None Include="Release\MasterToDev.SqlSchemaCompare.scmp" />
+    <None Include="Scripts\Update backup to master.sql" />
   </ItemGroup>
 </Project>

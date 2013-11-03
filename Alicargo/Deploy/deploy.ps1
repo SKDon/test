@@ -4,8 +4,8 @@
 )
 
 $msbuild = $env:systemroot + "\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe"
-$proj = "D:\S\Projects\Alicargo\Alicargo\Alicargo.csproj"
-$publishUrl = "D:\S\Projects\Alicargo.Release"
+$proj = "A:\Projects\Alicargo\Alicargo\Alicargo.csproj"
+$publishUrl = "A:\Projects\Alicargo.Release"
 
 cd $publishUrl
 
