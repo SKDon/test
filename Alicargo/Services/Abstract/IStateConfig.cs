@@ -8,12 +8,14 @@
 		/// Груз на складе - 6
 		/// Можно назначать, если указаны количество и вес
 		/// </summary>
-		long CargoInStockStateId { get; }		
+		long CargoInStockStateId { get; }
 
 		/// <summary>
 		/// Груз получен - 11
 		/// </summary>
 		long CargoReceivedStateId { get; }
+
+		int CargoReceivedDaysToShow { get; }
 
 		/// <summary>
 		/// На транзите - 12

@@ -31,6 +31,11 @@ namespace Alicargo.Services
 			get { return ConfigurationManager.AppSettings["StateId-CargoReceived"].ToLong(); }
 		}
 
+		public int CargoReceivedDaysToShow
+		{
+			get { return ConfigurationManager.AppSettings["CargoReceivedDaysToShow"].ToInt(); }
+		}
+
 		public long CargoOnTransitStateId
 		{
 			get { return ConfigurationManager.AppSettings["StateId-CargoOnTransit"].ToLong(); }

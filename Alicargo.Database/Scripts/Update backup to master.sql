@@ -64,5 +64,9 @@ END
 PRINT N'Refreshing [dbo].[Calculation_SetState]...';
 GO
 
+INSERT [dbo].[VisibleState] ([RoleId], [StateId])
+VALUES (4, 11)
+PRINT N'Set visible the cargo received state for a forwarder...';
+
 USE [master]
 GO

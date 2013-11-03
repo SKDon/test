@@ -45,9 +45,12 @@ namespace Alicargo.Controllers
 
 			var senderId = _senders.GetByUserId(_identity.Id.Value);
 
+			var isForwarder = _identity.IsInRole(RoleType.Forwarder);
+
 			var data = _applicationPresenter.List(take, skip, orders, client != null
 				? client.Id
-				: (long?)null, senderId);
+				: (long?)null, senderId,
+				isForwarder);
 
 			return Json(data);
 		}

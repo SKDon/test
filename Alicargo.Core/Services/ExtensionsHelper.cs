@@ -13,6 +13,11 @@ namespace Alicargo.Core.Services
 			return long.Parse(@string, NumberStyles.AllowLeadingSign);
 		}
 
+		public static int ToInt(this string @string)
+		{
+			return int.Parse(@string, NumberStyles.AllowLeadingSign);
+		}
+
 		public static string ToLocalShortDateString(this DateTimeOffset dateTimeOffset)
 		{
 			return dateTimeOffset.LocalDateTime.ToShortDateString();
