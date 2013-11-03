@@ -51,7 +51,7 @@ namespace Alicargo.Services.Application
         {
             var applicationGroups = _grouper.Group(applications, groups.Select(x => x.OrderType).ToArray());
 
-            OrderGroupByClient(applicationGroups);
+            OrderBottomGroupByClient(applicationGroups);
 
             return new ApplicationListCollection
             {
@@ -60,13 +60,13 @@ namespace Alicargo.Services.Application
             };
         }
 
-        private static void OrderGroupByClient(IEnumerable<ApplicationGroup> applicationGroups)
+        private static void OrderBottomGroupByClient(IEnumerable<ApplicationGroup> applicationGroups)
         {
             foreach (var group in applicationGroups)
             {
                 if (@group.hasSubgroups)
                 {
-                    OrderGroupByClient(@group.items.Cast<ApplicationGroup>());
+                    OrderBottomGroupByClient(@group.items.Cast<ApplicationGroup>());
                 }
                 else
                 {

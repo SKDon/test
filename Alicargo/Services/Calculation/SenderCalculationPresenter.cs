@@ -81,10 +81,13 @@ namespace Alicargo.Services.Calculation
 				var itemsGroup = g.Key.HasValue
 					? g.OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray()
 					: g.OrderByDescending(x => x.ApplicationId).ToArray();
+				
 				var awb = awbsData.FirstOrDefault(x => x.Id == g.Key);
+
 				var text = awb != null
 					? AwbHelper.GetAirWaybillDisplay(awb)
 					: Pages.NoAirWaybill;
+
 				return new SenderCalculationGroup
 				{
 					AirWaybillId = g.Key,
