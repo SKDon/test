@@ -83,7 +83,7 @@ namespace Alicargo.Controllers
         {
             public readonly string take = "take";
             public readonly string skip = "skip";
-            public readonly string page = "page";
+            public readonly string group = "group";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
