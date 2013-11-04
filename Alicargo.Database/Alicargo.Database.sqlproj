@@ -104,6 +104,7 @@
     <PostDeploy Include="Scripts\InitialData.sql" />
     <Build Include="Tables\EmailMessage.sql" />
     <Build Include="Tables\ApplicationEvent.sql" />
+    <Build Include="Stored procedures\ApplicationEvent_GetNext.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

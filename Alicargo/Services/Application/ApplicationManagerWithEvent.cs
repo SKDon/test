@@ -1,6 +1,7 @@
 ﻿using System;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
@@ -9,10 +10,10 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationManagerWithEvent : IApplicationManager
 	{
-		private readonly IApplicationEvent _events;
+		private readonly IApplicationEventRepository _events;
 		private readonly IApplicationManager _manager;
 
-		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEvent events)
+		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEventRepository events)
 		{
 			_manager = manager;
 			_events = events;

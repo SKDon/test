@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Enums
+﻿namespace Alicargo.Contracts.Enums
 {
 	public enum ApplicationEventType
 	{

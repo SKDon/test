@@ -42,6 +42,7 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="ApplicationEvents\ApplicationMailCreatorJob.cs" />
     <Compile Include="Calculation\CalculationJobHepler.cs" />
     <Compile Include="Calculation\CalculationMailBuilder.cs" />
     <Compile Include="Calculation\CalculationWatcherJob.cs" />
