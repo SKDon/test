@@ -191,7 +191,7 @@
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
-	<td class="text-right text-bold" style="color: red" title="@Entities.ProfitPerKg">#= kendo.toString(ProfitPerKg, 'n2') #</td>
+	<td class="text-right text-bold" #=ProfitPerKg> 0 ? "" : 'style="color: red"'# title="@Entities.ProfitPerKg">#= kendo.toString(ProfitPerKg, 'n2') #</td>
 	<td class="text-right total" title="@Entities.TotalProfit">#= kendo.toString(Profit, 'n2') #</td>
 	<td>&nbsp;</td>
 </tr>

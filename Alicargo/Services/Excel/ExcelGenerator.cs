@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Services;
 using Alicargo.Services.Excel.Rows;
+using Ninject.Infrastructure.Language;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Resources;
@@ -14,6 +16,11 @@ namespace Alicargo.Services.Excel
 	public sealed class ExcelGenerator<T> : IExcelGenerator<T>
 		where T : BaseApplicationExcelRow
 	{
+		private const int DefaultRowHeight = 13;
+		private const int DefaultFontSize = 6;
+		private const int AwbRowHeight = 20;
+		private const string DefaultFontName = "Arial";
+
 		public MemoryStream Get(T[] rows, string twoLetterISOLanguageName)
 		{
 			CultureContext.Current.Set(() => twoLetterISOLanguageName);
@@ -25,7 +32,9 @@ namespace Alicargo.Services.Excel
 			using (var pck = new ExcelPackage())
 			{
 				var ws = pck.Workbook.Worksheets.Add(Pages.Applications);
-
+				ws.Cells.Style.Font.Name = DefaultFontName;
+				ws.Cells.Style.Font.Size = DefaultFontSize;
+				
 				DrawHeader(properties, ws);
 
 				DrawRows(rows, properties, ws);
@@ -53,7 +62,8 @@ namespace Alicargo.Services.Excel
 					currentAwb = row.AirWaybillDisplay;
 					if (!string.IsNullOrWhiteSpace(currentAwb))
 					{
-						DrawAwb(currentAwb, ws, iRow++);
+						var count = properties.Count(x => x.HasAttribute<DisplayNameLocalizedAttribute>());
+						DrawAwb(currentAwb, ws, iRow++, count);
 					}
 				}
 
@@ -61,20 +71,24 @@ namespace Alicargo.Services.Excel
 			}
 		}
 
-		private static void DrawAwb(string currentAwb, ExcelWorksheet ws, int iRow)
+		private static void DrawAwb(string currentAwb, ExcelWorksheet ws, int iRow, int count)
 		{
 			var row = ws.Row(iRow);
-			row.Style.Fill.PatternType = ExcelFillStyle.Solid;
-			row.Style.Fill.BackgroundColor.SetColor(Color.Yellow);
-			row.Height = 20;
+			row.Height = AwbRowHeight;
 			row.Style.Font.Bold = true;
 
-			var cell = ws.Cells[iRow, 1];
-			cell.Value = currentAwb;
+			ws.Cells[iRow, 1].Value = currentAwb;
+
+			var range = ws.Cells[iRow, 1, iRow, count];
+			range.Merge = true;
+			range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+			range.Style.Fill.BackgroundColor.SetColor(Color.Yellow);
 		}
 
 		private static void DrawColumns(IEnumerable<PropertyInfo> properties, ExcelWorksheet ws, T row, int iRow)
 		{
+			ws.Row(iRow).Height = DefaultRowHeight;
+
 			var iColumn = 1;
 			foreach (var property in properties)
 			{
@@ -104,6 +118,8 @@ namespace Alicargo.Services.Excel
 
 		private static void DrawHeader(IEnumerable<PropertyInfo> properties, ExcelWorksheet ws)
 		{
+			ws.Row(1).Height = DefaultRowHeight;
+
 			var iColumn = 1;
 			foreach (var property in properties)
 			{
@@ -122,14 +138,12 @@ namespace Alicargo.Services.Excel
 			ws.View.FreezePanes(2, 1);
 		}
 
-		// ReSharper disable SuggestBaseTypeForParameter
-
 		private static void RowStyles(ExcelRange cell)
 		{
 			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Gray);
 		}
 
-		private static void HeaderStyles(ExcelRange cell) // ReSharper restore SuggestBaseTypeForParameter
+		private static void HeaderStyles(ExcelRange cell)
 		{
 			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
 			cell.Style.Font.Bold = true;

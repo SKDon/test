@@ -68,11 +68,3 @@
 	background-color: #e3e3e3;
 	border: 0 none;
 }
-
-#calculation-grid .k-grid-header {
-	position: fixed;
-}
-
-#calculation-grid .k-grid-content {
-	top: 23px;
-}
