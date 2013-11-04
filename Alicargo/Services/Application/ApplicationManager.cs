@@ -34,15 +34,6 @@ namespace Alicargo.Services.Application
 			_stateService = stateService;
 		}
 
-		public ApplicationAdminModel Get(long id)
-		{
-			var data = _applications.Get(id);
-
-			var application = GetModel(data);
-
-			return application;
-		}
-
 		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 						   TransitEditModel transitModel)
 		{
@@ -177,55 +168,6 @@ namespace Alicargo.Services.Application
 			_applicationUpdater.SetState(applicationId, stateId);
 
 			_unitOfWork.SaveChanges();
-		}
-
-		private static ApplicationAdminModel GetModel(ApplicationData data)
-		{
-			var application = new ApplicationAdminModel
-			{
-				AddressLoad = data.AddressLoad,
-				Characteristic = data.Characteristic,
-				Count = data.Count,
-				CPFileName = data.CPFileName,
-				Currency = new CurrencyModel
-				{
-					CurrencyId = data.CurrencyId,
-					Value = data.Value
-				},
-				DeliveryBillFileName = data.DeliveryBillFileName,
-				FactoryContact = data.FactoryContact,
-				FactoryEmail = data.FactoryEmail,
-				FactoryName = data.FactoryName,
-				FactoryPhone = data.FactoryPhone,
-				Weight = data.Weight,
-				Invoice = data.Invoice,
-				InvoiceFileName = data.InvoiceFileName,
-				PackingFileName = data.PackingFileName,
-				MarkName = data.MarkName,
-				MethodOfDelivery = (MethodOfDelivery)data.MethodOfDeliveryId,
-				SwiftFileName = data.SwiftFileName,
-				TermsOfDelivery = data.TermsOfDelivery,
-				Torg12FileName = data.Torg12FileName,
-				CountryId = data.CountryId,
-				Volume = data.Volume,
-				WarehouseWorkingTime = data.WarehouseWorkingTime,
-				FactureCost = data.FactureCost,
-				InvoiceFile = null,
-				PackingFile = null,
-				CPFile = null,
-				DeliveryBillFile = null,
-				SwiftFile = null,
-				Torg12File = null,
-				TransitCost = data.TransitCost,
-				PickupCost = data.PickupCost,
-				TariffPerKg = data.TariffPerKg,
-				ScotchCostEdited = data.ScotchCostEdited,
-				FactureCostEdited = data.FactureCostEdited,
-				TransitCostEdited = data.TransitCostEdited,
-				PickupCostEdited = data.PickupCostEdited,
-				SenderId = data.SenderId
-			};
-			return application;
 		}
 
 		private static void Map(ApplicationAdminModel @from, ApplicationData to)

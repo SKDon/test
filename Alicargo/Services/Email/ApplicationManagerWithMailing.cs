@@ -48,11 +48,6 @@ namespace Alicargo.Services.Email
 			_manager = manager;
 		}
 
-		public ApplicationAdminModel Get(long id)
-		{
-			return _manager.Get(id);
-		}
-
 		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 						   TransitEditModel transitModel)
 		{

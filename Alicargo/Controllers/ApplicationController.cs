@@ -123,7 +123,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id)
 		{
-			var application = _applicationManager.Get(id);
+			var application = _applicationPresenter.Get(id);
 
 			var clientId = _applicationRepository.GetClientId(id);
 

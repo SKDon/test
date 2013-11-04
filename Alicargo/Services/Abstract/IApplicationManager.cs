@@ -7,12 +7,9 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IApplicationManager
 	{
-		ApplicationAdminModel Get(long id);
 		void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel);
 		long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, long clientId);
 		void Delete(long id);
-
-        // todo: 2. ISP
 		void SetState(long applicationId, long stateId);
 		void SetTransitReference(long id, string transitReference);
 		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);

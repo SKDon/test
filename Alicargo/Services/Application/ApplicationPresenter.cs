@@ -1,37 +1,49 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Enums;
 using Alicargo.Services.Abstract;
+using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
     internal sealed class ApplicationPresenter : IApplicationPresenter
 	{
-		private readonly IApplicationRepository _applicationRepository;
+		private readonly IApplicationRepository _applications;
 		private readonly ICountryRepository _countryRepository;
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _stateRepository;
 		private readonly IStateService _stateService;
 
 		public ApplicationPresenter(
-			IApplicationRepository applicationRepository,
+			IApplicationRepository applications,
 			IIdentityService identity,
 			ICountryRepository countryRepository,
 			IStateService stateService,
 			IStateRepository stateRepository)
 		{
-			_applicationRepository = applicationRepository;
+			_applications = applications;
 			_identity = identity;
 			_countryRepository = countryRepository;
 			_stateService = stateService;
 			_stateRepository = stateRepository;
 		}
 
+		public ApplicationAdminModel Get(long id)
+		{
+			var data = _applications.Get(id);
+
+			var application = GetModel(data);
+
+			return application;
+		}
+
 		public ApplicationDetailsModel GetDetails(long id)
 		{
-			var data = _applicationRepository.GetDetails(id);
+			var data = _applications.GetDetails(id);
 
 			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 
@@ -92,7 +104,7 @@ namespace Alicargo.Services.Application
 
 		public ApplicationStateModel[] GetAvailableStates(long id)
 		{
-			var applicationData = _applicationRepository.Get(id);
+			var applicationData = _applications.Get(id);
 
 			var states = _stateService.GetAvailableStatesToSet();
 
@@ -122,6 +134,54 @@ namespace Alicargo.Services.Application
 									StateName = x.Value
 								})
 								.ToArray();
+		}
+
+		private static ApplicationAdminModel GetModel(ApplicationData data)
+		{
+			return new ApplicationAdminModel
+			{
+				AddressLoad = data.AddressLoad,
+				Characteristic = data.Characteristic,
+				Count = data.Count,
+				CPFileName = data.CPFileName,
+				Currency = new CurrencyModel
+				{
+					CurrencyId = data.CurrencyId,
+					Value = data.Value
+				},
+				DeliveryBillFileName = data.DeliveryBillFileName,
+				FactoryContact = data.FactoryContact,
+				FactoryEmail = data.FactoryEmail,
+				FactoryName = data.FactoryName,
+				FactoryPhone = data.FactoryPhone,
+				Weight = data.Weight,
+				Invoice = data.Invoice,
+				InvoiceFileName = data.InvoiceFileName,
+				PackingFileName = data.PackingFileName,
+				MarkName = data.MarkName,
+				MethodOfDelivery = (MethodOfDelivery)data.MethodOfDeliveryId,
+				SwiftFileName = data.SwiftFileName,
+				TermsOfDelivery = data.TermsOfDelivery,
+				Torg12FileName = data.Torg12FileName,
+				CountryId = data.CountryId,
+				Volume = data.Volume,
+				WarehouseWorkingTime = data.WarehouseWorkingTime,
+				FactureCost = data.FactureCost,
+				InvoiceFile = null,
+				PackingFile = null,
+				CPFile = null,
+				DeliveryBillFile = null,
+				SwiftFile = null,
+				Torg12File = null,
+				TransitCost = data.TransitCost,
+				PickupCost = data.PickupCost,
+				TariffPerKg = data.TariffPerKg,
+				ScotchCostEdited = data.ScotchCostEdited,
+				FactureCostEdited = data.FactureCostEdited,
+				TransitCostEdited = data.TransitCostEdited,
+				PickupCostEdited = data.PickupCostEdited,
+				SenderId = data.SenderId
+			};
 		}
 	}
 }
