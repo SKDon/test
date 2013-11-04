@@ -47,7 +47,7 @@ namespace Alicargo.App_Start
 				new[]
 				{
 					typeof (ApplicationManager),
-					typeof (ApplicationManagerWithMailing)
+					typeof (ApplicationManagerWithEvent)
 				}
 			},
 			{

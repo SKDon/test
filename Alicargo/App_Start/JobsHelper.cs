@@ -39,7 +39,7 @@ namespace Alicargo.App_Start
 		{
 			try
 			{
-				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource) state), tokenSource,
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
 					CancellationToken.None);
 			}
 			catch (Exception e)
@@ -118,7 +118,10 @@ namespace Alicargo.App_Start
 
 		private static void GetApplicationMailCreatorJob(string connectionString)
 		{
-			var job = new ApplicationMailCreatorJob(new ApplicationEventRepository(new SqlProcedureExecutor(connectionString)));
+			var executor = new SqlProcedureExecutor(connectionString);
+			var events = new ApplicationEventRepository(executor);
+
+			var job = new ApplicationMailCreatorJob(events, DeadTimeout);
 
 			job.Run();
 		}

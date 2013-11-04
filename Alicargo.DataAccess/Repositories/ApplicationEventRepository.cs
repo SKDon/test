@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
@@ -29,9 +30,9 @@ namespace Alicargo.DataAccess.Repositories
 			}
 		}
 
-		public ApplicationEventData GetNext()
+		public ApplicationEventData GetNext(DateTimeOffset olderThan)
 		{
-			return _executor.Query<ApplicationEventData>("[dbo].[ApplicationEvent_GetNext]");
+			return _executor.Query<ApplicationEventData>("[dbo].[ApplicationEvent_GetNext]", new { olderThan });
 		}
 
 		public byte[] Touch(long id, byte[] rowVersion)

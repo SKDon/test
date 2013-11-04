@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -62,7 +63,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
 
-			var data = _events.GetNext();
+			_events.GetNext(DateTimeOffset.UtcNow).Should().BeNull();
+
+			var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
 
 			data.ApplicationId.ShouldBeEquivalentTo(TestConstants.TestApplicationId);
 			data.EventType.ShouldBeEquivalentTo(ApplicationEventType.Created);
@@ -73,7 +76,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
 
-			var data = _events.GetNext();
+			var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
 
 			var bytes = _events.Touch(data.Id, data.RowVersion);
 
@@ -87,7 +90,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
 
-			var data = _events.GetNext();
+			var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
 
 			_events.Touch(data.Id, data.RowVersion);
 			_events.Touch(data.Id, data.RowVersion);
@@ -98,11 +101,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
 
-			var data = _events.GetNext();
+			var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
 
 			_events.Delete(data.Id, data.RowVersion);
 
-			data = _events.GetNext();
+			data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
 
 			data.Should().BeNull();
 		}
