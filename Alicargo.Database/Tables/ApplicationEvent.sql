@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[ApplicationEvent]
 (
 	[Id] BIGINT IDENTITY(1, 1) NOT NULL,
-	[RowVersion] ROWVERSION NOT NULL,
+	[UpdateTimestamp] DATETIMEOFFSET CONSTRAINT [DF_ApplicationEvent_UpdateTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 	[ApplicationId] BIGINT NOT NULL,
 	[EventType] INT NOT NULL,
 

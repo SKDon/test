@@ -150,6 +150,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="T4MVC\AirWaybillController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
