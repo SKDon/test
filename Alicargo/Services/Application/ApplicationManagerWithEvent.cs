@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -10,8 +9,8 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationManagerWithEvent : IApplicationManager
 	{
-		private readonly IApplicationManager _manager;
 		private readonly IApplicationEvent _events;
+		private readonly IApplicationManager _manager;
 
 		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEvent events)
 		{
@@ -24,40 +23,17 @@ namespace Alicargo.Services.Application
 		{
 			_manager.Update(applicationId, model, carrierModel, transitModel);
 
-			if (model.CPFile != null && model.CPFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.CPFileUploaded);
-			}
-
-			if (model.InvoiceFile != null && model.InvoiceFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.InvoiceFileUploaded);
-			}
-
-			if (model.PackingFile != null && model.PackingFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.PackingFileUploaded);
-			}
-
-			if (model.SwiftFile != null && model.SwiftFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.SwiftFileUploaded);
-			}
-
-			if (model.DeliveryBillFile != null && model.DeliveryBillFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.DeliveryBillFileUploaded);
-			}
-
-			if (model.Torg12File != null && model.Torg12File.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.Torg12FileUploaded);
-			}
+			HandleFilesUpload(applicationId, model);
 		}
 
-		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, long clientId)
+		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
+			long clientId)
 		{
-			return _manager.Add(model, carrierModel, transitModel, clientId);
+			var applicationId = _manager.Add(model, carrierModel, transitModel, clientId);
+
+			_events.Add(applicationId, ApplicationEventType.Created);
+
+			return applicationId;
 		}
 
 		public void Delete(long id)
@@ -68,16 +44,22 @@ namespace Alicargo.Services.Application
 		public void SetState(long applicationId, long stateId)
 		{
 			_manager.SetState(applicationId, stateId);
+
+			_events.Add(applicationId, ApplicationEventType.SetState);
 		}
 
 		public void SetTransitReference(long id, string transitReference)
 		{
 			_manager.SetTransitReference(id, transitReference);
+
+			_events.Add(id, ApplicationEventType.SetTransitReference);
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+
+			_events.Add(id, ApplicationEventType.SetDateOfCargoReceipt);
 		}
 
 		public void SetTransitCost(long id, decimal? transitCost)
@@ -118,6 +100,39 @@ namespace Alicargo.Services.Application
 		public void SetTransitCostEdited(long id, decimal? transitCost)
 		{
 			_manager.SetTransitCostEdited(id, transitCost);
+		}
+
+		private void HandleFilesUpload(long applicationId, ApplicationAdminModel model)
+		{
+			if (model.CPFile != null && model.CPFile.Length != 0)
+			{
+				_events.Add(applicationId, ApplicationEventType.CPFileUploaded);
+			}
+
+			if (model.InvoiceFile != null && model.InvoiceFile.Length != 0)
+			{
+				_events.Add(applicationId, ApplicationEventType.InvoiceFileUploaded);
+			}
+
+			if (model.PackingFile != null && model.PackingFile.Length != 0)
+			{
+				_events.Add(applicationId, ApplicationEventType.PackingFileUploaded);
+			}
+
+			if (model.SwiftFile != null && model.SwiftFile.Length != 0)
+			{
+				_events.Add(applicationId, ApplicationEventType.SwiftFileUploaded);
+			}
+
+			if (model.DeliveryBillFile != null && model.DeliveryBillFile.Length != 0)
+			{
+				_events.Add(applicationId, ApplicationEventType.DeliveryBillFileUploaded);
+			}
+
+			if (model.Torg12File != null && model.Torg12File.Length != 0)
+			{
+				_events.Add(applicationId, ApplicationEventType.Torg12FileUploaded);
+			}
 		}
 	}
 }

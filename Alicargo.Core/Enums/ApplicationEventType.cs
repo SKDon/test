@@ -9,6 +9,8 @@
 		PackingFileUploaded = 5,
 		SwiftFileUploaded = 6,
 		DeliveryBillFileUploaded = 7,
-		Torg12FileUploaded = 8
+		Torg12FileUploaded = 8,
+		SetDateOfCargoReceipt = 9,
+		SetTransitReference = 10
 	}
 }
