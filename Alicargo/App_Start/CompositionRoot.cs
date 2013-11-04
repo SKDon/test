@@ -30,11 +30,11 @@ namespace Alicargo.App_Start
 			var binded = CompositionRootHelper.BindDecorators(kernel, CompositionRootHelper.Decorators);
 
 			kernel.Bind(scanner => scanner.FromThisAssembly()
-										  .IncludingNonePublicTypes()
-										  .Select(IsServiceType)
-										  .Excluding(binded)
-										  .BindDefaultInterface()
-										  .Configure(binding => binding.InRequestScope()));
+				.IncludingNonePublicTypes()
+				.Select(IsServiceType)
+				.Excluding(binded)
+				.BindDefaultInterface()
+				.Configure(binding => binding.InRequestScope()));
 		}
 
 		private static bool IsServiceType(Type type)
@@ -45,34 +45,36 @@ namespace Alicargo.App_Start
 		public static void BindDataAccess(IKernel kernel, Func<IContext, object> scope)
 		{
 			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
-							  .IncludingNonePublicTypes()
-							  .Select(IsServiceType)
-							  .Excluding<SqlProcedureExecutor>()
-							  .BindDefaultInterface()
-							  .Configure(y => y.InScope(scope)));
+				.IncludingNonePublicTypes()
+				.Select(IsServiceType)
+				.Excluding<SqlProcedureExecutor>()
+				.BindDefaultInterface()
+				.Configure(y => y.InScope(scope)));
 		}
 
 		public static void BindConnection(IKernel kernel, string connectionString, string filesConnectionString)
 		{
 			kernel.Bind<IDbConnection>()
-				  .ToMethod(x => new SqlConnection(connectionString))
-				  .InRequestScope()
-				  .OnDeactivation(x => x.Close());
+				.ToMethod(x => new SqlConnection(connectionString))
+				.InRequestScope()
+				.OnDeactivation(x => x.Close());
 
 			kernel.Bind<ISqlProcedureExecutor>()
-				  .To<SqlProcedureExecutor>()
-				  .When(request => request.ParentRequest.Service == typeof (IAuthenticationRepository)
-								   || request.ParentRequest.Service == typeof (ISenderRepository))
-				  .InSingletonScope()
-				  .Named("MainDb")
-				  .WithConstructorArgument("connectionString", connectionString);
+				.To<SqlProcedureExecutor>()
+				.When(request => request.ParentRequest.Service == typeof (IAuthenticationRepository)
+				                 || request.ParentRequest.Service == typeof (ISenderRepository)
+								 || request.ParentRequest.Service == typeof(IApplicationEventRepository)
+				)
+				.InSingletonScope()
+				.Named("MainDb")
+				.WithConstructorArgument("connectionString", connectionString);
 
 			kernel.Bind<ISqlProcedureExecutor>()
-				  .To<SqlProcedureExecutor>()
-				  .WhenInjectedInto<ClientFileRepository>()
-				  .InSingletonScope()
-				  .Named("FilesDb")
-				  .WithConstructorArgument("connectionString", filesConnectionString);
+				.To<SqlProcedureExecutor>()
+				.WhenInjectedInto<ClientFileRepository>()
+				.InSingletonScope()
+				.Named("FilesDb")
+				.WithConstructorArgument("connectionString", filesConnectionString);
 		}
 	}
 }

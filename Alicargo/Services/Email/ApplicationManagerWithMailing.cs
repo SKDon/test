@@ -13,6 +13,7 @@ using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Email
 {
+	[Obsolete]
 	internal sealed class ApplicationManagerWithMailing : IApplicationManager
 	{
 		private readonly IApplicationPresenter _applicationPresenter;

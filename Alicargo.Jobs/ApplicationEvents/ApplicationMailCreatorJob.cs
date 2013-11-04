@@ -21,18 +21,9 @@ namespace Alicargo.Jobs.ApplicationEvents
 			{
 				ProcessEvent(data);
 
-				Delete(data);
+				_events.Delete(data.Id, data.RowVersion);
 				data = GetNext();
 			}
-		}
-
-		private void Delete(ApplicationEventData data)
-		{
-			try
-			{
-				_events.Delete(data.Id, data.RowVersion);
-			}
-			catch (EntityNotFoundException) { }
 		}
 
 		private void ProcessEvent(ApplicationEventData data)
@@ -45,7 +36,10 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			try
 			{
-				data.RowVersion = _events.Touch(data.Id, data.RowVersion);
+				if (data != null)
+				{
+					data.RowVersion = _events.Touch(data.Id, data.RowVersion);
+				}
 
 				return data;
 			}

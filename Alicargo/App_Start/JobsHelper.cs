@@ -39,7 +39,7 @@ namespace Alicargo.App_Start
 		{
 			try
 			{
-				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource)state), tokenSource,
+				return Task.Factory.StartNew(state => runner.Run((CancellationTokenSource) state), tokenSource,
 					CancellationToken.None);
 			}
 			catch (Exception e)
@@ -71,9 +71,9 @@ namespace Alicargo.App_Start
 			string jobName)
 		{
 			kernel.Bind<IJobRunner>()
-				  .ToMethod(context => new StatelessJobRunner(action, jobName, JobsLogger, PausePeriod))
-				  .InSingletonScope()
-				  .Named(jobName);
+				.ToMethod(context => new StatelessJobRunner(action, jobName, JobsLogger, PausePeriod))
+				.InSingletonScope()
+				.Named(jobName);
 		}
 
 		public static void BindJobs(IKernel kernel, string connectionString)
@@ -116,9 +116,11 @@ namespace Alicargo.App_Start
 			}
 		}
 
-		private static IJob GetApplicationMailCreatorJob(string connectionString)
+		private static void GetApplicationMailCreatorJob(string connectionString)
 		{
-			return new ApplicationMailCreatorJob(new ApplicationEventRepository(new SqlProcedureExecutor(connectionString)));
+			var job = new ApplicationMailCreatorJob(new ApplicationEventRepository(new SqlProcedureExecutor(connectionString)));
+
+			job.Run();
 		}
 	}
 }
