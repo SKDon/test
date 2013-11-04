@@ -102,6 +102,8 @@
     <Build Include="Types\IdsTable.sql" />
     <Build Include="Stored procedures\Sender_GetTariffs.sql" />
     <PostDeploy Include="Scripts\InitialData.sql" />
+    <Build Include="Tables\EmailMessage.sql" />
+    <Build Include="Tables\ApplicationEvent.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
