@@ -86,8 +86,8 @@ namespace Alicargo.App_Start
 			BindStatelessJobRunner(kernel, () => GetCalculationMailerJob(connectionString), calculationMailerJob + 1);
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 0);
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 1);
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString), applicationMailCreatorJob + 0);
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString), applicationMailCreatorJob + 1);
+			//BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString), applicationMailCreatorJob + 0);
+			//BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString), applicationMailCreatorJob + 1);
 		}
 
 		private static void GetCalculationWatcherJob(string connectionString)

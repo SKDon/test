@@ -33,23 +33,23 @@ namespace Alicargo.Jobs.ApplicationEvents
 		{
 		}
 
-		public ApplicationEventData GetNext()
-		{
-			var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(_periodToProcessEvent));
+		//public ApplicationEventData GetNext()
+		//{
+		//	var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(_periodToProcessEvent));
 
-			//try
-			//{
-			//	if (data != null)
-			//	{
-			//		data.RowVersion = _events.Touch(data.Id, data.RowVersion);
-			//	}
+		//	//try
+		//	//{
+		//	//	if (data != null)
+		//	//	{
+		//	//		data.RowVersion = _events.Touch(data.Id, data.RowVersion);
+		//	//	}
 
-			//	return data;
-			//}
-			//catch (EntityUpdateConflict)
-			//{
-			//	return null;
-			//}
-		}
+		//	//	return data;
+		//	//}
+		//	//catch (EntityUpdateConflict)
+		//	//{
+		//	//	return null;
+		//	//}
+		//}
 	}
 }

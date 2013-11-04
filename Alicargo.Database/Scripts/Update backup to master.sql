@@ -61,6 +61,8 @@ BEGIN
 
 	COMMIT
 END
+GO
+
 PRINT N'Refreshing [dbo].[Calculation_SetState]...';
 GO
 
