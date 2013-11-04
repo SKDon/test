@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Microsoft.Ajax.Utilities;
+using Resources;
 
 namespace Alicargo.MvcHelpers.Extensions
 {
@@ -44,7 +45,7 @@ namespace Alicargo.MvcHelpers.Extensions
 
 			var cancel = new TagBuilder("a");
 			cancel.AddCssClass("btn");
-			cancel.InnerHtml = Resources.Pages.Cancel;
+			cancel.InnerHtml = Pages.Cancel;
 			cancel.Attributes.Add("href", actionUrl);
 
 			builder.Append(div.ToString(TagRenderMode.StartTag));

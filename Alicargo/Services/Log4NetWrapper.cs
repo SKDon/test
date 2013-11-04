@@ -1,5 +1,5 @@
 ﻿using System;
-using Alicargo.Core.Services;
+using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Services
 {

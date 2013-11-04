@@ -1,5 +1,4 @@
-﻿using Alicargo.ViewModels.Calculation;
-using Alicargo.ViewModels.Calculation.Admin;
+﻿using Alicargo.ViewModels.Calculation.Admin;
 
 namespace Alicargo.Services.Abstract
 {

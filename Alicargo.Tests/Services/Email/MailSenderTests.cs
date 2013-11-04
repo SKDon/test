@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contract;
 using Alicargo.Services.Email;
+using Alicargo.TestHelpers;
 using Alicargo.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,13 +13,13 @@ namespace Alicargo.Tests.Services.Email
 	[TestClass]
 	public class MailSenderTests
 	{
-		private TestHelpers.MockContainer _context;
+		private MockContainer _context;
 		private MailSender _sender;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new TestHelpers.MockContainer();
+			_context = new MockContainer();
 			_sender = new MailSender();
 
 			if (!Directory.Exists(Settings.Default.MailsFolder))

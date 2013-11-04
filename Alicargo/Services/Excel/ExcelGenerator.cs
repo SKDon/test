@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Services;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Excel.Rows;
 using Ninject.Infrastructure.Language;
 using OfficeOpenXml;

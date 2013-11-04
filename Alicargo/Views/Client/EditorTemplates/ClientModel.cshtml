@@ -1,4 +1,5 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
 @model Alicargo.ViewModels.User.ClientModel
 
 <div class="row">
@@ -63,11 +64,11 @@
 </div>
 <hr />
 <h4>
-	@Resources.Pages.Transit
+	@Pages.Transit
 </h4>
 @Html.Action(MVC.Transit.EditByClient((long?)ViewBag.ClientId))
 <hr />
 <h4>
-	@Resources.Pages.Authentication
+	@Pages.Authentication
 </h4>
 @Html.Action(MVC.Authentication.Client((long?)ViewBag.ClientId))

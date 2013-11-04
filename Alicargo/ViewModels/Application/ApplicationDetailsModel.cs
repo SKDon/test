@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
+using Alicargo.Core.Resources;
 using Alicargo.Core.Services;
 using Alicargo.ViewModels.Helpers;
-using Resources;
 
 namespace Alicargo.ViewModels.Application
 {

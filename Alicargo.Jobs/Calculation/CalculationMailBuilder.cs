@@ -2,7 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Contract;
-using Alicargo.Core.Services;
+using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Jobs.Calculation
 {

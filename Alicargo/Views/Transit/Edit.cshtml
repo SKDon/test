@@ -1,14 +1,15 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
 @model TransitEditModel
 
 <ul class="nav nav-tabs" id="transit-tabs">
-	<li><a href="#transit-data">@Resources.Pages.Transit</a></li>
-	<li><a href="#application-data">@Resources.Pages.Application</a></li>
+	<li><a href="#transit-data">@Pages.Transit</a></li>
+	<li><a href="#application-data">@Pages.Application</a></li>
 </ul>
 
 <div class="tab-content">
 	<div class="tab-pane active" id="transit-data">
-		@Html.EditPage(Url.Action(MVC.Transit.Edit()), Resources.Pages.Save)
+		@Html.EditPage(Url.Action(MVC.Transit.Edit()), Pages.Save)
 	</div>
 	<div class="tab-pane" id="application-data">
 		@Html.Action(MVC.Application.Details((long)ViewBag.ApplicationId))

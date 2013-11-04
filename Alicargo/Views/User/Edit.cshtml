@@ -1,4 +1,5 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
 @model Alicargo.ViewModels.User.UserModel
-<h1>@Resources.Pages.Edit</h1>
-@Html.EditPage(Url.Action(MVC.User.Edit()), Resources.Pages.Edit)
+<h1>@Pages.Edit</h1>
+@Html.EditPage(Url.Action(MVC.User.Edit()), Pages.Edit)

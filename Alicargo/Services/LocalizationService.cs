@@ -2,6 +2,7 @@
 using System.Globalization;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Resources;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
@@ -23,17 +24,17 @@ namespace Alicargo.Services
 
 		public string GetMethodOfDelivery(MethodOfDelivery methodOfDelivery, string culture)
 		{
-			return Resources.Entities.ResourceManager.GetString("MethodOfDelivery", CultureInfo.GetCultureInfo(culture));
+			return Entities.ResourceManager.GetString("MethodOfDelivery", CultureInfo.GetCultureInfo(culture));
 		}
 
 		public string GetMethodOfTransit(MethodOfTransit methodOfTransit, string culture)
 		{
-			return Resources.Entities.ResourceManager.GetString("MethodOfTransit", CultureInfo.GetCultureInfo(culture));
+			return Entities.ResourceManager.GetString("MethodOfTransit", CultureInfo.GetCultureInfo(culture));
 		}
 
 		public string GetDeliveryType(DeliveryType deliveryType, string culture)
 		{
-			return Resources.Entities.ResourceManager.GetString("DeliveryType", CultureInfo.GetCultureInfo(culture));
+			return Entities.ResourceManager.GetString("DeliveryType", CultureInfo.GetCultureInfo(culture));
 		}
 
 		public string GetStateName(long stateId, string culture)

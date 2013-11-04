@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
-using Alicargo.DataAccess.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Application;
 using Alicargo.TestHelpers;

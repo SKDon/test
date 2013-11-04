@@ -1,7 +1,9 @@
-﻿@using Alicargo.MvcHelpers.Extensions
+﻿@using Alicargo.Core.Resources
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
 @model Alicargo.ViewModels.AirWaybill.AwbBrokerModel
 <h3>
-	@Resources.Entities.AWB:
+	@Entities.AWB:
 	@ViewBag.AWB
 </h3>
-@Html.EditPage(Url.Action(MVC.Broker.AWB()), Resources.Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))
+@Html.EditPage(Url.Action(MVC.Broker.AWB()), Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))

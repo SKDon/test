@@ -1,5 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
-using Resources;
+using Alicargo.Core.Resources;
 
 namespace Alicargo.ViewModels.Helpers
 {

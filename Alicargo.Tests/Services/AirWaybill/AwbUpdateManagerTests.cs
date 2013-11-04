@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Services.AirWaybill;
+using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,13 +13,13 @@ namespace Alicargo.Tests.Services.AirWaybill
     [TestClass]
     public class AwbUpdateManagerTests
     {
-        private TestHelpers.MockContainer _context;
+        private MockContainer _context;
         private AwbUpdateManager _manager;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _context = new TestHelpers.MockContainer();
+            _context = new MockContainer();
 
             _manager = _context.Create<AwbUpdateManager>();
         }

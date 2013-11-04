@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
+using log4net.Config;
+
 [assembly: AssemblyTitle("Alicargo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -22,7 +23,7 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("3c578bba-3704-41a1-bc8d-17233326c35e")]
 
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+[assembly: XmlConfigurator(Watch = true)]
 [assembly: InternalsVisibleTo("Alicargo.Tests")]
 [assembly: InternalsVisibleTo("Alicargo.BlackBox.Tests")]
 [assembly: InternalsVisibleTo("Alicargo.TestHelpers")]

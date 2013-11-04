@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
 using Alicargo.Core.Services;
+using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Jobs
 {

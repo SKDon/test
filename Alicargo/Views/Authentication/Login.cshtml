@@ -1,15 +1,16 @@
-﻿@model Alicargo.ViewModels.User.SignIdModel
+﻿@using Resources
+@model Alicargo.ViewModels.User.SignIdModel
 
 @using (Html.BeginForm(MVC.Authentication.Login(), FormMethod.Post, new { @class = "form-signin" }))
 {
-	<h2 class="form-signin-heading">@Resources.Pages.Authentication</h2>
-	@Html.TextBoxFor(x => x.Login, new { @class = "input-block-level", placeholder = Resources.Pages.Login })
-	@Html.PasswordFor(x => x.Password, new { @class = "input-block-level", placeholder = Resources.Pages.Password })
+	<h2 class="form-signin-heading">@Pages.Authentication</h2>
+	@Html.TextBoxFor(x => x.Login, new { @class = "input-block-level", placeholder = Pages.Login })
+	@Html.PasswordFor(x => x.Password, new { @class = "input-block-level", placeholder = Pages.Password })
 	<label class="checkbox">
-		@Html.CheckBoxFor(x => x.RememberMe)@Resources.Pages.RememberMe
+		@Html.CheckBoxFor(x => x.RememberMe)@Pages.RememberMe
 	</label>
 	@Html.ValidationSummary(true)
 	<div class="text-center">
-		<button class="btn btn-large btn-primary" type="submit">@Resources.Pages.SignIn</button>
+		<button class="btn btn-large btn-primary" type="submit">@Pages.SignIn</button>
 	</div>
 }

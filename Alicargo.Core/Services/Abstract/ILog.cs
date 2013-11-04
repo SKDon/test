@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Core.Services
+namespace Alicargo.Core.Services.Abstract
 {
 	public interface ILog
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Services;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 using Moq;

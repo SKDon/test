@@ -1,5 +1,5 @@
 ﻿using Alicargo.Core.Localization;
-using Resources;
+using Alicargo.Core.Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
 {

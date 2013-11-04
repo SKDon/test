@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace Alicargo.DataAccess.DbContext
 {	
-	internal sealed class DebugTextWriter : System.IO.TextWriter
+	internal sealed class DebugTextWriter : TextWriter
 	{
 		
 		public override void Write(char[] buffer, int index, int count)

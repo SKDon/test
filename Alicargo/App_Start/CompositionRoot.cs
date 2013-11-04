@@ -13,7 +13,7 @@ using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
-using ILog = Alicargo.Core.Services.ILog;
+using ILog = Alicargo.Core.Services.Abstract.ILog;
 
 namespace Alicargo.App_Start
 {

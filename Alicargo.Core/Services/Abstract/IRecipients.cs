@@ -1,6 +1,6 @@
 ﻿using Alicargo.Core.Contract;
 
-namespace Alicargo.Core.Services
+namespace Alicargo.Core.Services.Abstract
 {
 	public interface IRecipients
 	{

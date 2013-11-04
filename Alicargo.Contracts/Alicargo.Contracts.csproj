@@ -76,6 +76,7 @@
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidLogicException.cs" />
     <Compile Include="Exceptions\UnexpectedStateException.cs" />
+    <Compile Include="Helpers\ExtensionsHelper.cs" />
     <Compile Include="Helpers\IPasswordConverter.cs" />
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Helpers\OrderHelper.cs" />

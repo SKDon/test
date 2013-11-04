@@ -14,7 +14,7 @@ using Alicargo.Services.Email;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
-using ILog = Alicargo.Core.Services.ILog;
+using ILog = Alicargo.Core.Services.Abstract.ILog;
 
 namespace Alicargo.App_Start
 {

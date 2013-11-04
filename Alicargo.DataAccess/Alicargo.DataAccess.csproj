@@ -69,7 +69,6 @@
     <Compile Include="DbContext\DebugTextWriter.cs" />
     <Compile Include="DbContext\SqlError.cs" />
     <Compile Include="DbContext\SqlExceptionsHelper.cs" />
-    <Compile Include="DbContext\Transaction.cs" />
     <Compile Include="DbContext\UnitOfWork.cs" />
     <Compile Include="Helpers\ApplicationRepositoryOrderer.cs" />
     <Compile Include="Helpers\FileDataHelper.cs" />

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Services.AirWaybill;
+using Alicargo.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -9,7 +10,7 @@ namespace Alicargo.Tests.Services.AirWaybill
     [TestClass]
     public class AwbStateManagerTests
     {
-        private TestHelpers.MockContainer _context;
+        private MockContainer _context;
         private AwbStateManager _stateManager;
         private long _airWaybillId;
         private long _stateId;
@@ -17,7 +18,7 @@ namespace Alicargo.Tests.Services.AirWaybill
         [TestInitialize]
         public void TestInitialize()
         {
-            _context = new TestHelpers.MockContainer();
+            _context = new MockContainer();
 
             _stateManager = _context.Create<AwbStateManager>();
             _airWaybillId = _context.Create<long>();

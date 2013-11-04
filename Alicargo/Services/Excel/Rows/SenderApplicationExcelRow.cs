@@ -1,6 +1,6 @@
 ﻿using Alicargo.Core.Localization;
+using Alicargo.Core.Resources;
 using Alicargo.ViewModels.Application;
-using Resources;
 
 namespace Alicargo.Services.Excel.Rows
 {
