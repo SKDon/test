@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Threading;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
@@ -9,22 +7,19 @@ namespace Alicargo.Jobs
 {
 	public sealed class StatelessJobRunner : IJobRunner
 	{
-		private readonly string _connectionString;
-		private readonly Func<IDbConnection, IJob> _getJob;
+		private readonly Action _action;
 		private readonly ILog _log;
 		private readonly TimeSpan _pausePeriod;
 
 		public StatelessJobRunner(
-			Func<IDbConnection, IJob> getJob,
+			Action action,
 			string name,
 			ILog log,
-			string connectionString,
 			TimeSpan pausePeriod)
 		{
 			Name = name;
-			_getJob = getJob;
+			_action = action;
 			_log = log;
-			_connectionString = connectionString;
 			_pausePeriod = pausePeriod;
 		}
 
@@ -34,12 +29,7 @@ namespace Alicargo.Jobs
 			{
 				try
 				{
-					using (var connection = new SqlConnection(_connectionString))
-					{
-						var job = _getJob(connection);
-
-						job.Run();
-					}
+					_action();
 				}
 				catch (Exception e)
 				{
