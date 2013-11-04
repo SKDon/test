@@ -42,9 +42,9 @@ namespace Alicargo.DataAccess.DbContext
 						  .ToArray());
 		}
 
-		public void Execute(string sql, object param = null, IDbTransaction transaction = null)
+		public int Execute(string sql, object param = null, IDbTransaction transaction = null)
 		{
-			Action(_connectionString, connection =>
+			return Action(_connectionString, connection =>
 				connection.Execute(sql, param, transaction, commandType: CommandType.StoredProcedure));
 		}
 	}

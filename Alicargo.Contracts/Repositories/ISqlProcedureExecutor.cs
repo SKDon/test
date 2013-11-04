@@ -6,6 +6,6 @@ namespace Alicargo.Contracts.Repositories
 	{
 		T Query<T>(string sql, object param = null, IDbTransaction transaction = null);
 		T[] Array<T>(string sql, object param = null, IDbTransaction transaction = null);
-		void Execute(string sql, object param = null, IDbTransaction transaction = null);
+		int Execute(string sql, object param = null, IDbTransaction transaction = null);
 	}
 }

@@ -2,6 +2,6 @@
 AS
 	SET NOCOUNT ON;
 
-	SELECT TOP(1) e.[Id], e.[UpdateTimestamp], e.[ApplicationId], e.[EventType]
-	FROM [dbo].[SenderApplicationEvent] e
+	SELECT TOP(1) e.[Id], e.[ApplicationId], e.[EventType], e.[RowVersion]
+	FROM [dbo].[ApplicationEvent] e
 	ORDER BY e.[Id]

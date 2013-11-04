@@ -7,5 +7,7 @@ namespace Alicargo.Contracts.Repositories
 	{
 		void Add(long applicationId, ApplicationEventType eventType);
 		ApplicationEventData GetNext();
+		byte[] Touch(long id, byte[] rowVersion);
+		void Delete(long id, byte[] rowVersion);
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Alicargo.Contracts.Repositories;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Exceptions;
+using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.Jobs.ApplicationEvents
 {
@@ -13,11 +15,43 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public void Run()
 		{
-			var data = _events.GetNext();
+			var data = GetNext();
 
 			while (data != null)
 			{
-				data = _events.GetNext();
+				ProcessEvent(data);
+
+				Delete(data);
+				data = GetNext();
+			}
+		}
+
+		private void Delete(ApplicationEventData data)
+		{
+			try
+			{
+				_events.Delete(data.Id, data.RowVersion);
+			}
+			catch (EntityNotFoundException) { }
+		}
+
+		private void ProcessEvent(ApplicationEventData data)
+		{
+		}
+
+		public ApplicationEventData GetNext()
+		{
+			var data = _events.GetNext();
+
+			try
+			{
+				data.RowVersion = _events.Touch(data.Id, data.RowVersion);
+
+				return data;
+			}
+			catch (EntityUpdateConflict)
+			{
+				return null;
 			}
 		}
 	}
