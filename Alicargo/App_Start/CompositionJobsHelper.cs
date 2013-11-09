@@ -81,7 +81,7 @@ namespace Alicargo.App_Start
 			var serializer = new Serializer();
 			var events = new ApplicationEventRepository(executor);
 
-			var job = new ApplicationMailCreatorJob(new EmailMessageRepository(executor), null, events, shard);
+			var job = new ApplicationMailCreatorJob(new EmailMessageRepository(executor), new MessageFactory(), events, shard, serializer);
 
 			job.Run();
 		}

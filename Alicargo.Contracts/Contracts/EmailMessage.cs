@@ -20,5 +20,6 @@ namespace Alicargo.Contracts.Contracts
 		public string[] To { get; set; }
 		public FileHolder[] Files { get; set; }
 		public string[] CopyTo { get; set; }
+	    public bool IsBodyHtml { get; set; }
 	}
 }

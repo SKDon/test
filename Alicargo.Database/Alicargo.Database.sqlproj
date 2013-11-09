@@ -108,6 +108,9 @@
     <Build Include="Stored procedures\ApplicationEvent_Add.sql" />
     <Build Include="Stored procedures\ApplicationEvent_Delete.sql" />
     <Build Include="Stored procedures\ApplicationEvent_SetState.sql" />
+    <Build Include="Stored procedures\EmailMessage_GetNext.sql" />
+    <Build Include="Stored procedures\EmailMessage_SetState.sql" />
+    <Build Include="Stored procedures\EmailMessage_Add.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

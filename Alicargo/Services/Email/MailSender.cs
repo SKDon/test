@@ -33,7 +33,7 @@ namespace Alicargo.Services.Email
 						email.Subject = message.Subject;
 						email.Body = message.Body;
 
-						email.IsBodyHtml = false;
+						email.IsBodyHtml = message.IsBodyHtml;
 						if (message.Files != null)
 						{
 							foreach (var file in message.Files)

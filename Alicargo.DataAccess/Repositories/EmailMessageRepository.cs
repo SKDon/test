@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 
@@ -13,19 +14,31 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public void Add(EmailMessage message)
+		public void Add(int partitionId, string @from, string[] to, string[] copyTo, string subject, string body,
+			bool isBodyHtml, byte[] files)
 		{
-			throw new System.NotImplementedException();
+			_executor.Execute("[dbo].[EmailMessage_Add]", new
+			{
+				State = EmailMessageState.New,
+				partitionId,
+				@from,
+				To = string.Join(EmailMessageData.EmailSeparator, to.Select(x => x.Trim())),
+				CopyTo = string.Join(EmailMessageData.EmailSeparator, copyTo.Select(x => x.Trim())),
+				subject,
+				body,
+				isBodyHtml,
+				files
+			});
 		}
 
 		public EmailMessageData GetNext(EmailMessageState state, int partitionId)
 		{
-			throw new System.NotImplementedException();
+			return _executor.Query<EmailMessageData>("[dbo].[EmailMessage_GetNext]", new {state, partitionId});
 		}
 
 		public void SetState(long id, EmailMessageState state)
 		{
-			throw new System.NotImplementedException();
+			_executor.Execute("[dbo].[EmailMessage_SetState]", new {id, state});
 		}
 	}
 }

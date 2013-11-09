@@ -2,6 +2,8 @@
 {
     public sealed class EmailMessageData
 	{
+	    public const string EmailSeparator = ";";
+
 		public long Id { get; set; }
 
 		public string From { get; set; }
@@ -10,5 +12,6 @@
 		public string Subject { get; set; }
 		public string Body { get; set; }
 		public byte[] Files { get; set; }
+		public bool IsBodyHtml { get; set; }
 	}
 }
