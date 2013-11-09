@@ -43,23 +43,26 @@
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
     <Compile Include="ApplicationEvents\ApplicationMailCreatorJob.cs" />
-    <Compile Include="Calculation\CalculationJobHepler.cs" />
+    <Compile Include="ApplicationEvents\ApplicationStateHistoryJob.cs" />
+    <Compile Include="Calculation\CalculationJobHelper.cs" />
     <Compile Include="Calculation\CalculationMailBuilder.cs" />
     <Compile Include="Calculation\CalculationWatcherJob.cs" />
     <Compile Include="Calculation\CalculationMailer.cs" />
     <Compile Include="Calculation\ICalculationMailBuilder.cs" />
     <Compile Include="Calculation\ICalculationMailer.cs" />
-    <Compile Include="IJob.cs" />
+    <Compile Include="Core\IJob.cs" />
     <Compile Include="Calculation\CalculationMailerJob.cs" />
-    <Compile Include="IJobRunner.cs" />
-    <Compile Include="JobRunnerHelper.cs" />
+    <Compile Include="Core\IJobRunner.cs" />
+    <Compile Include="Core\JobRunnerHelper.cs" />
+    <Compile Include="Core\ShardSettings.cs" />
+    <Compile Include="Entities\ApplicationAddEventData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StatelessJobRunner.cs" />
+    <Compile Include="Core\StatelessJobRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
@@ -77,6 +80,7 @@
       <Name>Alicargo.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Jobs
+﻿namespace Alicargo.Jobs.Core
 {
 	public interface IJob
 	{

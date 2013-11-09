@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs.Calculation
 {

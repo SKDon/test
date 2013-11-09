@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Alicargo.Jobs
+namespace Alicargo.Jobs.Core
 {
 	public sealed class JobRunnerHelper
 	{

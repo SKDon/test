@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Alicargo.Jobs.Core;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

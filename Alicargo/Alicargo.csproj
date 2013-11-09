@@ -233,7 +233,7 @@
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\SenderAwbController.cs" />
-    <Compile Include="MvcHelpers\Extensions\DropDownListHeplers.cs" />
+    <Compile Include="MvcHelpers\Extensions\DropDownListHelpers.cs" />
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\PathConstants.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />

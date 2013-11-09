@@ -5,7 +5,7 @@ using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.Jobs.Calculation
 {
-	internal static class CalculationJobHepler
+	internal static class CalculationJobHelper
 	{
 		public static bool SetState(this ICalculationRepository calculations,
 			VersionedData<CalculationState, CalculationData> item, CalculationState state)

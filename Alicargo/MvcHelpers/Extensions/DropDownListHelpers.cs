@@ -9,7 +9,7 @@ using Alicargo.Core.Localization;
 
 namespace Alicargo.MvcHelpers.Extensions
 {
-	public static class DropDownListHeplers
+	public static class DropDownListHelpers
 	{
 		public static MvcHtmlString DropDownListFor<TModel, TProperty>(
 			this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,

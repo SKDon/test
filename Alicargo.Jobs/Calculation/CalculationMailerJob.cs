@@ -4,6 +4,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
+using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs.Calculation
 {

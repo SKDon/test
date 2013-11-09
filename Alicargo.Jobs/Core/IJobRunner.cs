@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Alicargo.Jobs
+namespace Alicargo.Jobs.Core
 {
 	public interface IJobRunner
 	{

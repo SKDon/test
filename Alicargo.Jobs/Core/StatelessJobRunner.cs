@@ -3,7 +3,7 @@ using System.Threading;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 
-namespace Alicargo.Jobs
+namespace Alicargo.Jobs.Core
 {
 	public sealed class StatelessJobRunner : IJobRunner
 	{

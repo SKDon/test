@@ -199,9 +199,9 @@ namespace Alicargo.Services.Email
 
 		private void SendOnAdd(long id)
 		{
-			var model = _applicationPresenter.GetDetails(id);
-			var subject = _messageBuilder.GetApplicationSubject(ApplicationHelper.GetDisplayNumber(model.Id, model.Count));
-			var clientData = _authenticationRepository.GetById(model.ClientUserId);
+			var details = _applicationPresenter.GetDetails(id);
+			var subject = _messageBuilder.GetApplicationSubject(ApplicationHelper.GetDisplayNumber(details.Id, details.Count));
+			var clientData = _authenticationRepository.GetById(details.ClientUserId);
 
 			var to = _recipients.GetAdminEmails()
 									.Concat(_recipients.GetSenderEmails())
@@ -210,14 +210,14 @@ namespace Alicargo.Services.Email
 										new Recipient
 										{
 											Culture = clientData.TwoLetterISOLanguageName,
-											Email = model.ClientEmail
+											Email = details.ClientEmail
 										}
 									})
 									.ToArray();
 
 			foreach (var recipient in to)
 			{
-				var body = _messageBuilder.ApplicationAdd(model, recipient.Culture);
+				var body = _messageBuilder.ApplicationAdd(details, recipient.Culture);
 
 				_mailSender.Send(new Message(subject, body, recipient.Email));
 			}
