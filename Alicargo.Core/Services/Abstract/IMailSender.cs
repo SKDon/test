@@ -1,4 +1,5 @@
-﻿using Alicargo.Core.Contract;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Core.Contract;
 
 namespace Alicargo.Core.Services.Abstract
 {

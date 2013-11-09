@@ -1,7 +1,6 @@
 ﻿using System;
-using Alicargo.Contracts.Contracts;
 
-namespace Alicargo.Core.Contract
+namespace Alicargo.Contracts.Contracts
 {
     public sealed class Message
 	{

@@ -14,7 +14,6 @@ namespace Alicargo.Services.Email
 	{
 		private readonly ILocalizationService _localizationService;
 
-
 		public MessageBuilder(ILocalizationService localizationService)
 		{
 			_localizationService = localizationService;

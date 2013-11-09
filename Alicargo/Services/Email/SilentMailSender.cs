@@ -1,4 +1,5 @@
 ﻿using System;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Contract;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;

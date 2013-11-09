@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Alicargo.Core.Contract;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -7,11 +7,11 @@ using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Email
 {
-    internal sealed class ClientManagerWithMailing : IClientManager
+	internal sealed class ClientManagerWithMailing : IClientManager
 	{
 		private readonly IMailSender _mailSender;
-	    private readonly IRecipients _recipients;
-	    private readonly IClientManager _manager;
+		private readonly IRecipients _recipients;
+		private readonly IClientManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
 
 		public ClientManagerWithMailing(
@@ -45,7 +45,7 @@ namespace Alicargo.Services.Email
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
 			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-			_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, model.Email) {CopyTo = admins});
+			_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, model.Email) { CopyTo = admins });
 		}
 	}
 }

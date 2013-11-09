@@ -58,6 +58,7 @@
     <Compile Include="Contracts\CalculationData.cs" />
     <Compile Include="Contracts\CarrierData.cs" />
     <Compile Include="Contracts\ClientData.cs" />
+    <Compile Include="Contracts\Message.cs" />
     <Compile Include="Contracts\SenderData.cs" />
     <Compile Include="Contracts\VersionData.cs" />
     <Compile Include="Contracts\VersionedData.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\IClientFileRepository.cs" />
+    <Compile Include="Repositories\IEmailMessageRepository.cs" />
     <Compile Include="Repositories\ISenderRepository.cs" />
     <Compile Include="Repositories\ISqlProcedureExecutor.cs" />
     <Compile Include="Repositories\IStateRepository.cs" />

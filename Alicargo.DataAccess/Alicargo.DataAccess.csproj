@@ -86,6 +86,7 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\AwbRepository.cs" />
     <Compile Include="Repositories\ClientFileRepository.cs" />
+    <Compile Include="Repositories\EmailMessageRepository.cs" />
     <Compile Include="Repositories\SenderRepository.cs" />
     <Compile Include="Repositories\StateRepository.cs" />
     <Compile Include="Repositories\TransitRepository.cs" />
