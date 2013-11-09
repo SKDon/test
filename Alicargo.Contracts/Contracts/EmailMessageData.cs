@@ -1,8 +1,21 @@
-﻿namespace Alicargo.Contracts.Contracts
+﻿using System;
+using System.Collections.Generic;
+
+namespace Alicargo.Contracts.Contracts
 {
-    public sealed class EmailMessageData
+	public sealed class EmailMessageData
 	{
-	    public const string EmailSeparator = ";";
+		private const string EmailSeparator = ";";
+
+		public static string[] Split(string to)
+		{
+			return to.Split(new[] { EmailSeparator }, StringSplitOptions.RemoveEmptyEntries);
+		}
+
+		public static string Join(IEnumerable<string> to)
+		{
+			return string.Join(EmailSeparator, to);
+		}
 
 		public long Id { get; set; }
 

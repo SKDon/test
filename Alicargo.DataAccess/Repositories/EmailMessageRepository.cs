@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 
@@ -22,8 +21,8 @@ namespace Alicargo.DataAccess.Repositories
 				State = EmailMessageState.New,
 				partitionId,
 				@from,
-				To = string.Join(EmailMessageData.EmailSeparator, to.Select(x => x.Trim())),
-				CopyTo = string.Join(EmailMessageData.EmailSeparator, copyTo.Select(x => x.Trim())),
+				To = EmailMessageData.Join(to),
+				CopyTo = EmailMessageData.Join(copyTo),
 				subject,
 				body,
 				isBodyHtml,

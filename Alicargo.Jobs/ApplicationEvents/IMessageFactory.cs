@@ -5,7 +5,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 {
 	public interface IMessageFactory
 	{
-		EmailMessage Get(ApplicationEventType eventType, byte[] data);
+		EmailMessage[] Get(ApplicationEventType eventType, byte[] data);
 		EmailMessage Get(EmailMessageData data);
 	}
 }

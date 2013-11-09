@@ -85,7 +85,7 @@ namespace Alicargo.App_Start
 			var executor = new SqlProcedureExecutor(connectionString);
 			var serializer = new Serializer();
 			var events = new ApplicationEventRepository(executor);
-			var factory = new MessageFactory();
+			var factory = new MessageFactory(serializer);
 			var emails = new EmailMessageRepository(executor);
 
 			var job = new ApplicationMailCreatorJob(emails, factory, events, shard, serializer);
@@ -108,7 +108,8 @@ namespace Alicargo.App_Start
 			var executor = new SqlProcedureExecutor(connectionString);
 			var messages = new EmailMessageRepository(executor);
 			var sender = new MailSender();
-			var factory = new MessageFactory();
+			var serializer = new Serializer();
+			var factory = new MessageFactory(serializer);
 
 			var job = new MailSenderJob(messages, shard, sender, factory);
 

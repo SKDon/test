@@ -267,11 +267,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Mail.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Mail.resx</DependentUpon>
-    </Compile>
     <Compile Include="Resources\Pages.it.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1582,11 +1577,6 @@
       <LastGenOutput>Pages.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Mail.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Pages.it.resx">
       <CustomToolNamespace>Resources</CustomToolNamespace>

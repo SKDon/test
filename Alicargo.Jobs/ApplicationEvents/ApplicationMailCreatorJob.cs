@@ -31,12 +31,15 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		private void ProcessEvent(ApplicationEventData data)
 		{
-			var message = _messageFactory.Get(data.EventType, data.Data);
+			var messages = _messageFactory.Get(data.EventType, data.Data);
 
-			var files = _serializer.Serialize(message.Files);
+			foreach (var message in messages)
+			{
+				var files = _serializer.Serialize(message.Files);
 
-			_emails.Add(_shard.ZeroBasedIndex, message.From, message.To, message.CopyTo, message.Subject, message.Body,
-				message.IsBodyHtml, files);
+				_emails.Add(_shard.ZeroBasedIndex, message.From, message.To, message.CopyTo, message.Subject, message.Body,
+					message.IsBodyHtml, files);
+			}
 
 			_events.SetState(data.Id, ApplicationEventState.EmailPrepared);
 		}

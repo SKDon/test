@@ -50,14 +50,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private EmailMessageData Add(int partitionId)
 		{
 			var data = _context.Fixture.Build<EmailMessageData>()
-				.With(x => x.To, string.Join(EmailMessageData.EmailSeparator, _context.Fixture.CreateMany<string>()))
-				.With(x => x.CopyTo, string.Join(EmailMessageData.EmailSeparator, _context.Fixture.CreateMany<string>()))
+				.With(x => x.To, EmailMessageData.Join(_context.Fixture.CreateMany<string>()))
+				.With(x => x.CopyTo, EmailMessageData.Join(_context.Fixture.CreateMany<string>()))
 				.Without(x => x.Id)
 				.Create();
 
 			_messages.Add(partitionId, data.From,
-				data.To.Split(new[] { EmailMessageData.EmailSeparator }, StringSplitOptions.RemoveEmptyEntries),
-				data.CopyTo.Split(new[] { EmailMessageData.EmailSeparator }, StringSplitOptions.RemoveEmptyEntries), data.Subject,
+				EmailMessageData.Split(data.To),
+				EmailMessageData.Split(data.CopyTo),
+				data.Subject,
 				data.Body, data.IsBodyHtml,
 				data.Files);
 

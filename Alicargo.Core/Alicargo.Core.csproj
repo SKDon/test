@@ -69,6 +69,11 @@
     <Compile Include="Enums\MethodOfTransit.cs" />
     <Compile Include="Localization\CultureContext.cs" />
     <Compile Include="Localization\ICultureContext.cs" />
+    <Compile Include="Resources\Mail.Designer.cs">
+      <DependentUpon>Mail.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Services\ExtensionsHelper.cs" />
     <Compile Include="Resources\Entities.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -143,6 +148,11 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Entities.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Mail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
