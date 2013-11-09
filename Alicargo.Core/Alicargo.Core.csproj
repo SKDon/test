@@ -60,7 +60,7 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="Contract\Recipient.cs" />
+    <Compile Include="Models\Recipient.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />

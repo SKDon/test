@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contract;
+using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -74,7 +74,7 @@ namespace Alicargo.Services.Email
             {
                 var body = _messageBuilder.AwbCreate(model, recipient.Culture, aggregate.TotalWeight,
                                                      aggregate.TotalCount);
-                _mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, recipient.Email));
+                _mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, recipient.Email));
             }
         }
     }

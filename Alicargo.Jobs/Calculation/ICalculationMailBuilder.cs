@@ -1,10 +1,10 @@
 ﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contract;
+using Alicargo.Core.Models;
 
 namespace Alicargo.Jobs.Calculation
 {
     public interface ICalculationMailBuilder
     {
-        Message Build(CalculationData calculation);
+        EmailMessage Build(CalculationData calculation);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Contract;
+using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Services.Email

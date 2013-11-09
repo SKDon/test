@@ -49,7 +49,7 @@ namespace Alicargo.Services.Email
 												  ApplicationHelper.GetDisplayNumber(applicationModel.Id,
 																						  applicationModel.Count),
 												  recipient.Culture, aggregate.TotalWeight, aggregate.TotalCount);
-				_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, recipient.Email));
+				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, recipient.Email));
 			}
 		}
 	}

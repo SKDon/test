@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Contract;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -146,8 +146,8 @@ namespace Alicargo.Services.Email
 				var to = _recipients.GetSenderEmails();
 				var file = _applicationRepository.GetInvoiceFile(details.Id);
 
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
-				_mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, details.ClientEmail) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, to.Select(x => x.Email).ToArray()) { Files = new[] { file } });
 			}
 
 			if (old.SwiftFileName == null && details.SwiftFileName != null)
@@ -156,18 +156,18 @@ namespace Alicargo.Services.Email
 				var to = _recipients.GetSenderEmails();
 				var file = _applicationRepository.GetSwiftFile(details.Id);
 
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
-				_mailSender.Send(new Message(subject, body, to.Select(x => x.Email).ToArray()) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, details.ClientEmail) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, to.Select(x => x.Email).ToArray()) { Files = new[] { file } });
 			}
 
 			if (old.PackingFileName == null && details.PackingFileName != null)
 			{
 				var body = _messageBuilder.ApplicationPackingFileAdded(details);
 				var file = _applicationRepository.GetPackingFile(details.Id);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, details.ClientEmail) { Files = new[] { file } });
 
 				var to = _recipients.GetSenderEmails().Select(x => x.Email).ToArray();
-				_mailSender.Send(new Message(subject, body, to) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, to) { Files = new[] { file } });
 			}
 
 			if (old.DeliveryBillFileName == null && details.DeliveryBillFileName != null)
@@ -175,7 +175,7 @@ namespace Alicargo.Services.Email
 				var body = _messageBuilder.ApplicationDeliveryBillFileAdded(details);
 				var file = _applicationRepository.GetDeliveryBillFile(details.Id);
 
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, details.ClientEmail) { Files = new[] { file } });
 			}
 
 			if (old.Torg12FileName == null && details.Torg12FileName != null)
@@ -184,7 +184,7 @@ namespace Alicargo.Services.Email
 				var file = _applicationRepository.GetTorg12File(details.Id);
 				var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
+				_mailSender.Send(new EmailMessage(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
 			}
 
 			if (old.CPFileName == null && details.CPFileName != null)
@@ -193,7 +193,7 @@ namespace Alicargo.Services.Email
 				var file = _applicationRepository.GetCPFile(details.Id);
 				var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
+				_mailSender.Send(new EmailMessage(subject, body, details.ClientEmail) { Files = new[] { file }, CopyTo = admins });
 			}
 		}
 
@@ -219,7 +219,7 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.ApplicationAdd(details, recipient.Culture);
 
-				_mailSender.Send(new Message(subject, body, recipient.Email));
+				_mailSender.Send(new EmailMessage(subject, body, recipient.Email));
 			}
 		}
 
@@ -236,7 +236,7 @@ namespace Alicargo.Services.Email
 				foreach (var recipient in to)
 				{
 					var body = _messageBuilder.ApplicationSetState(details, recipient.Culture);
-					_mailSender.Send(new Message(subject, body, recipient.Email));
+					_mailSender.Send(new EmailMessage(subject, body, recipient.Email));
 				}
 			}
 			else
@@ -244,7 +244,7 @@ namespace Alicargo.Services.Email
 				var files = GeAllFiles(details.AirWaybillId, details.Id);
 				var clientData = _authenticationRepository.GetById(details.ClientUserId);
 				var body = _messageBuilder.ApplicationSetState(details, clientData.TwoLetterISOLanguageName);
-				_mailSender.Send(new Message(subject, body, details.ClientEmail) { Files = files });
+				_mailSender.Send(new EmailMessage(subject, body, details.ClientEmail) { Files = files });
 
 				if (stateId == _stateConfig.CargoAtCustomsStateId || stateId == _stateConfig.CargoIsCustomsClearedStateId)
 				{
@@ -252,7 +252,7 @@ namespace Alicargo.Services.Email
 					foreach (var recipient in to)
 					{
 						body = _messageBuilder.ApplicationSetState(details, recipient.Culture);
-						_mailSender.Send(new Message(subject, body, recipient.Email));
+						_mailSender.Send(new EmailMessage(subject, body, recipient.Email));
 					}
 				}
 			}
@@ -294,7 +294,7 @@ namespace Alicargo.Services.Email
 			var subject = _messageBuilder.GetApplicationSubject(ApplicationHelper.GetDisplayNumber(model.Id, model.Count));
 			var clientData = _authenticationRepository.GetById(model.ClientUserId);
 			var body = _messageBuilder.ApplicationSetDateOfCargoReceipt(model, clientData.TwoLetterISOLanguageName);
-			var message = new Message(subject, body, model.ClientEmail);
+			var message = new EmailMessage(subject, body, model.ClientEmail);
 
 			_mailSender.Send(message);
 		}

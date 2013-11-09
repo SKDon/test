@@ -7,14 +7,14 @@ namespace Alicargo.Jobs.ApplicationEvents
 {
 	public sealed class ApplicationMailCreatorJob : IJob
 	{
-		private readonly IEmailMessageRepository _emailMessages;
+		private readonly IEmailMessageRepository _emails;
 		private readonly IMessageFactory _messageFactory;
 		private readonly IApplicationEventRepository _events;
 		private readonly ShardSettings _shard;
 
-		public ApplicationMailCreatorJob(IEmailMessageRepository emailMessages, IMessageFactory messageFactory, IApplicationEventRepository events, ShardSettings shard)
+		public ApplicationMailCreatorJob(IEmailMessageRepository emails, IMessageFactory messageFactory, IApplicationEventRepository events, ShardSettings shard)
 		{
-			_emailMessages = emailMessages;
+			_emails = emails;
 			_messageFactory = messageFactory;
 			_events = events;
 			_shard = shard;
@@ -29,7 +29,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 		{
 			var message = _messageFactory.Get(data.EventType, data.Data);
 
-			_emailMessages.Add(message);
+			_emails.Add(message);
 
 			_events.SetState(data.Id, ApplicationEventState.EmailPrepared);
 		}

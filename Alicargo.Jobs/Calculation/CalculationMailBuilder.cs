@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Contract;
+using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Jobs.Calculation
@@ -17,7 +17,7 @@ namespace Alicargo.Jobs.Calculation
             _recipients = recipients;
         }
 
-        public Message Build(CalculationData calculation)
+        public EmailMessage Build(CalculationData calculation)
         {
             var client = _clients.Get(calculation.ClientId).First();
             var cost = calculation.TariffPerKg * (decimal)calculation.Weight;
@@ -41,7 +41,7 @@ namespace Alicargo.Jobs.Calculation
                 calculation.FactoryName,
                 calculation.MarkName);
 
-            return new Message(subject, text, client.Email)
+            return new EmailMessage(subject, text, client.Email)
             {
                 CopyTo = _recipients.GetAdminEmails().Select(x => x.Email).ToArray()
             };

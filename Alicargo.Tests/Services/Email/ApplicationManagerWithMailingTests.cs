@@ -1,5 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contract;
+using Alicargo.Core.Models;
 using Alicargo.Services.Email;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.Application;
@@ -56,7 +56,7 @@ namespace Alicargo.Tests.Services.Email
             _manager.SetState(It.IsAny<long>(), It.IsAny<long>());
 
             _container.AuthenticationRepository.Verify(x => x.GetById(It.IsAny<long>()), Times.Once());
-            _container.MailSender.Verify(x => x.Send(It.IsAny<Message[]>()));
+            _container.MailSender.Verify(x => x.Send(It.IsAny<EmailMessage[]>()));
 			_container.Recipients.Verify(x => x.GetAdminEmails(), Times.Never());
 			_container.Recipients.Verify(x => x.GetForwarderEmails(), Times.Never());
             _container.ApplicationManager.Verify(x => x.SetState(It.IsAny<long>(), It.IsAny<long>()));
@@ -71,7 +71,7 @@ namespace Alicargo.Tests.Services.Email
 
             _container.AuthenticationRepository.Verify(x => x.GetById(It.IsAny<long>()), Times.Once());
             _container.ApplicationManager.Verify(x => x.SetState(It.IsAny<long>(), It.IsAny<long>()));
-            _container.MailSender.Verify(x => x.Send(It.IsAny<Message[]>()));
+            _container.MailSender.Verify(x => x.Send(It.IsAny<EmailMessage[]>()));
 			_container.Recipients.Verify(x => x.GetAdminEmails(), Times.Once());
 			_container.Recipients.Verify(x => x.GetForwarderEmails(), Times.Once());
         }
@@ -85,7 +85,7 @@ namespace Alicargo.Tests.Services.Email
 
             _container.AuthenticationRepository.Verify(x => x.GetById(It.IsAny<long>()), Times.Once());
             _container.ApplicationManager.Verify(x => x.SetState(It.IsAny<long>(), It.IsAny<long>()));
-            _container.MailSender.Verify(x => x.Send(It.IsAny<Message[]>()));
+            _container.MailSender.Verify(x => x.Send(It.IsAny<EmailMessage[]>()));
 			_container.Recipients.Verify(x => x.GetAdminEmails(), Times.Once());
 			_container.Recipients.Verify(x => x.GetForwarderEmails(), Times.Once());
         }

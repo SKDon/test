@@ -1,8 +1,8 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Services;
 using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs.ApplicationEvents

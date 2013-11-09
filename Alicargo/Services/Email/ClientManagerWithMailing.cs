@@ -45,7 +45,7 @@ namespace Alicargo.Services.Email
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
 			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-			_mailSender.Send(new Message(_messageBuilder.DefaultSubject, body, model.Email) { CopyTo = admins });
+			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, model.Email) { CopyTo = admins });
 		}
 	}
 }

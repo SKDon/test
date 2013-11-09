@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Contract
+﻿namespace Alicargo.Core.Models
 {
     public sealed class Recipient
 	{

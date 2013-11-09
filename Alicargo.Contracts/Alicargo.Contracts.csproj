@@ -58,7 +58,8 @@
     <Compile Include="Contracts\CalculationData.cs" />
     <Compile Include="Contracts\CarrierData.cs" />
     <Compile Include="Contracts\ClientData.cs" />
-    <Compile Include="Contracts\Message.cs" />
+    <Compile Include="Contracts\EmailMessage.cs" />
+    <Compile Include="Contracts\EmailMessageData.cs" />
     <Compile Include="Contracts\SenderData.cs" />
     <Compile Include="Contracts\VersionData.cs" />
     <Compile Include="Contracts\VersionedData.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Enums\ApplicationEventState.cs" />
     <Compile Include="Enums\ApplicationEventType.cs" />
     <Compile Include="Enums\CalculationState.cs" />
+    <Compile Include="Enums\EmailMessageState.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\TwoLetterISOLanguageName.cs" />
     <Compile Include="Exceptions\AccessForbidenException.cs" />
@@ -80,7 +82,6 @@
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidLogicException.cs" />
     <Compile Include="Exceptions\UnexpectedStateException.cs" />
-    <Compile Include="Helpers\ExtensionsHelper.cs" />
     <Compile Include="Helpers\IPasswordConverter.cs" />
     <Compile Include="Helpers\ISerializer.cs" />
     <Compile Include="Helpers\Order.cs" />

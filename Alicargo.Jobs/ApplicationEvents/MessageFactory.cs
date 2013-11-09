@@ -5,7 +5,12 @@ namespace Alicargo.Jobs.ApplicationEvents
 {
 	public sealed class MessageFactory: IMessageFactory
 	{
-		public Message Get(ApplicationEventType eventType, byte[] data)
+		public EmailMessage Get(ApplicationEventType eventType, byte[] data)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public EmailMessage Get(EmailMessageData data)
 		{
 			throw new System.NotImplementedException();
 		}

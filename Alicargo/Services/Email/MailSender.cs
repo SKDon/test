@@ -8,7 +8,7 @@ namespace Alicargo.Services.Email
 {
     internal sealed class MailSender : IMailSender
 	{
-		public void Send(params Message[] messages)
+		public void Send(params EmailMessage[] messages)
 		{
 			using (var smtpClient = new SmtpClient())
 			{

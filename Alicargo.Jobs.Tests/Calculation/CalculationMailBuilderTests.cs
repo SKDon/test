@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contract;
+using Alicargo.Core.Models;
 using Alicargo.Jobs.Calculation;
 using Alicargo.TestHelpers;
 using FluentAssertions;

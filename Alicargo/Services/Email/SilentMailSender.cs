@@ -1,6 +1,6 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Contract;
+using Alicargo.Core.Models;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 
@@ -17,7 +17,7 @@ namespace Alicargo.Services.Email
 			_log = log;
 		}
 
-		public void Send(params Message[] messages)
+		public void Send(params EmailMessage[] messages)
 		{
 			try
 			{
