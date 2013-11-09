@@ -3,6 +3,7 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Calculation.Sender;

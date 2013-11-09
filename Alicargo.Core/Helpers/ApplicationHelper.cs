@@ -3,9 +3,9 @@ using System.Globalization;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
 
-namespace Alicargo.ViewModels.Helpers
+namespace Alicargo.Core.Helpers
 {
-	internal sealed class ApplicationHelper
+	public sealed class ApplicationHelper
 	{
 		public static string GetDisplayNumber(long id, long? count)
 		{

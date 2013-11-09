@@ -4,12 +4,12 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
-using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Email
 {

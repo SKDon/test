@@ -1,7 +1,7 @@
 ﻿using System;
 using Alicargo.Core.Enums;
 
-namespace Alicargo.Services.Abstract
+namespace Alicargo.Core.Services.Abstract
 {
 	public interface ILocalizationService
 	{

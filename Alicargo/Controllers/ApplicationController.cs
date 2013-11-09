@@ -3,13 +3,13 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Helpers;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using System.Net;
 using Alicargo.ViewModels.Application;
-using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Controllers
 {

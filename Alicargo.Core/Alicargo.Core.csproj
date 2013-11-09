@@ -60,6 +60,7 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Models\Recipient.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
@@ -74,6 +75,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Services\Abstract\ILocalizationService.cs" />
     <Compile Include="Services\ExtensionsHelper.cs" />
     <Compile Include="Resources\Entities.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -111,6 +113,7 @@
     <Compile Include="Services\Abstract\ILog.cs" />
     <Compile Include="Services\Abstract\IMailSender.cs" />
     <Compile Include="Services\Abstract\IRecipients.cs" />
+    <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\PasswordConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Serializer.cs" />

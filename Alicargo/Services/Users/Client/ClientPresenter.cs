@@ -29,7 +29,7 @@ namespace Alicargo.Services.Users.Client
 
 			if (clientId.HasValue)
 			{
-				data = _clients.GetById(clientId.Value);
+				data = _clients.Get(clientId.Value);
 			}
 			else if (_identity.Id.HasValue)
 			{

@@ -3,17 +3,17 @@ using System.Globalization;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Resources;
-using Alicargo.Services.Abstract;
+using Alicargo.Core.Services.Abstract;
 
-namespace Alicargo.Services
+namespace Alicargo.Core.Services
 {
-	internal sealed class LocalizationService : ILocalizationService
+	public sealed class LocalizationService : ILocalizationService
 	{
-		private readonly IStateRepository _stateRepository;
+		private readonly IStateRepository _states;
 
-		public LocalizationService(IStateRepository stateRepository)
+		public LocalizationService(IStateRepository states)
 		{
-			_stateRepository = stateRepository;
+			_states = states;
 		}
 
 		public string GetDate(DateTimeOffset? date, string culture, TimeSpan? timeZone)
@@ -39,7 +39,7 @@ namespace Alicargo.Services
 
 		public string GetStateName(long stateId, string culture)
 		{
-			return _stateRepository.Get(stateId).Localization[culture];
+			return _states.Get(stateId).Localization[culture];
 		}
 	}
 }

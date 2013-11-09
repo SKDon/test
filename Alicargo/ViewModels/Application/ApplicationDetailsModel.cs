@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
 using Alicargo.Core.Services;
-using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.ViewModels.Application
 {
