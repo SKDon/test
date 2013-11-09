@@ -67,6 +67,7 @@
     <Compile Include="Contracts\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\UserData.cs" />
+    <Compile Include="Enums\ApplicationEventState.cs" />
     <Compile Include="Enums\ApplicationEventType.cs" />
     <Compile Include="Enums\CalculationState.cs" />
     <Compile Include="Enums\RoleType.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Exceptions\UnexpectedStateException.cs" />
     <Compile Include="Helpers\ExtensionsHelper.cs" />
     <Compile Include="Helpers\IPasswordConverter.cs" />
+    <Compile Include="Helpers\ISerializer.cs" />
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Helpers\OrderHelper.cs" />
     <Compile Include="Helpers\OrderType.cs" />
