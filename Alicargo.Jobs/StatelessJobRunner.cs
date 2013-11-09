@@ -32,13 +32,16 @@ namespace Alicargo.Jobs
 					_action();
 				}
 				catch (Exception e)
-				{
-					_log.Error("An error occurred during a job running in the runner " + Name, e);
-
+				{					
 					if (e.IsCritical())
 					{
 						tokenSource.Cancel(false);
+						_log.Error("CRITICAL ERROR occurred during a job running in the runner " + Name, e);
+						// todo: restart application, send email to support
+						throw;
 					}
+
+					_log.Error("An error occurred during a job running in the runner " + Name, e);
 				}
 
 				tokenSource.Token.WaitHandle.WaitOne(_pausePeriod);

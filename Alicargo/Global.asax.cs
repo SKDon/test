@@ -1,49 +1,79 @@
-﻿using System.Configuration;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
+using System.Configuration;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.App_Start;
+using Alicargo.Jobs;
+using Alicargo.Services;
+using log4net;
 using Ninject;
 using Ninject.Web.Common;
+using ILog = Alicargo.Core.Services.Abstract.ILog;
 
 namespace Alicargo
 {
 	public /*sealed*/ class MvcApplication : NinjectHttpApplication
 	{
+		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
+		private static readonly ILog MainLogger = new Log4NetWrapper(LogManager.GetLogger("Logger"));
+
 		private readonly string _connectionString =
 			ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
 
 		private readonly string _filesConnectionString =
 			ConfigurationManager.ConnectionStrings["FilesDbConnectionString"].ConnectionString;
 
-		private readonly CancellationTokenSource _jobTokenSource = new CancellationTokenSource();
+		private readonly JobRunnerHelper _jobs = new JobRunnerHelper();
 
-		private Task[] _jobs;
+		private readonly StandardKernel _kernel = new StandardKernel();
 
 		protected override IKernel CreateKernel()
 		{
-			var kernel = new StandardKernel();
+			CompositionRoot.BindConnection(_kernel, _connectionString, _filesConnectionString);
 
-			CompositionRoot.BindConnection(kernel, _connectionString, _filesConnectionString);
+			CompositionRoot.BindDataAccess(_kernel, context => HttpContext.Current);
 
-			CompositionRoot.BindDataAccess(kernel, context => HttpContext.Current);
+			CompositionRoot.BindServices(_kernel, MainLogger);
 
-			CompositionRoot.BindServices(kernel);
+			CompositionJobsHelper.BindJobs(_kernel, _connectionString);
 
-			JobsHelper.BindJobs(kernel, _connectionString);
+			RegisterConfigs(_kernel);
 
-			_jobs = JobsHelper.RunJobs(kernel, _jobTokenSource);
+			return _kernel;
+		}
 
-			RegisterConfigs(kernel);
+		protected override void OnApplicationStarted()
+		{
+			try
+			{
+				_jobs.RunJobs(_kernel.GetAll<IJobRunner>().ToArray());
+			}
+			catch (Exception e)
+			{
+				MainLogger.Error("Failed to start runners ", e);
+				throw;
+			}
 
-			return kernel;
+			MainLogger.Info("Jobs are started");
 		}
 
 		protected override void OnApplicationStopped()
 		{
-			JobsHelper.StopAndWait(_jobs, _jobTokenSource);
+			try
+			{
+				var waitAll = _jobs.StopAndWait(PausePeriod.Add(PausePeriod));
+
+				MainLogger.Info(waitAll
+					? "Jobs were stopped"
+					: "One or more jobs were terminated with timeout");
+			}
+			catch (Exception e)
+			{
+				MainLogger.Error("One or more jobs failed", e);
+				throw;
+			}
 		}
 
 		private static void RegisterConfigs(IKernel kernel)

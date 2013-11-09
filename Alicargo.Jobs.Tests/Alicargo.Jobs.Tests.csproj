@@ -67,6 +67,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Calculation\CalculationMailBuilderTests.cs" />
+    <Compile Include="JobRunnerHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

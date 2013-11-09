@@ -225,7 +225,7 @@
     <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\CompositionRootHelper.cs" />
-    <Compile Include="App_Start\JobsHelper.cs" />
+    <Compile Include="App_Start\CompositionJobsHelper.cs" />
     <Compile Include="Controllers\ApplicationListController.cs" />
     <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />

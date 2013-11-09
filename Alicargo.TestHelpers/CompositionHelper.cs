@@ -63,7 +63,7 @@ namespace Alicargo.TestHelpers
 				  .InSingletonScope()
 				  .WithConstructorArgument("connectionString", connectionString);
 
-			CompositionRoot.BindServices(Kernel);
+			CompositionRoot.BindServices(Kernel, new ConsoleLogger());
 		}
 
 		public void Dispose()

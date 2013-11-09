@@ -7,8 +7,6 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
-using Alicargo.Services;
-using log4net;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
@@ -21,9 +19,9 @@ namespace Alicargo.App_Start
 	{
 		private const string AlicargoDataAccessDll = "Alicargo.DataAccess.dll";
 
-		public static void BindServices(IKernel kernel)
+		public static void BindServices(IKernel kernel, ILog mainLog)
 		{
-			kernel.Bind<ILog>().ToMethod(context => new Log4NetWrapper(LogManager.GetLogger("Logger"))).InSingletonScope();
+			kernel.Bind<ILog>().ToMethod(context => mainLog).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
@@ -61,8 +59,8 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
-				.When(request => request.ParentRequest.Service == typeof (IAuthenticationRepository)
-				                 || request.ParentRequest.Service == typeof (ISenderRepository)
+				.When(request => request.ParentRequest.Service == typeof(IAuthenticationRepository)
+								 || request.ParentRequest.Service == typeof(ISenderRepository)
 								 || request.ParentRequest.Service == typeof(IApplicationEventRepository)
 				)
 				.InSingletonScope()
