@@ -75,7 +75,7 @@ namespace Alicargo.DataAccess.Repositories
 			return _context.Clients.Select(_selector).FirstOrDefault(x => x.UserId == userId);
 		}
 
-		public ClientData GetById(long clientId)
+		public ClientData Get(long clientId)
 		{
 			return _context.Clients
 						   .Where(x => x.Id == clientId)
@@ -100,14 +100,6 @@ namespace Alicargo.DataAccess.Repositories
 			var entity = _context.Clients.First(x => x.Id == client.Id);
 
 			CopyTo(client, entity);
-		}
-
-		public ClientData[] Get(params long[] clinentIds)
-		{
-			return _context.Clients
-						   .Where(x => clinentIds.Contains(x.Id))
-						   .Select(_selector)
-						   .ToArray();
 		}
 
 		// todo: 2. test

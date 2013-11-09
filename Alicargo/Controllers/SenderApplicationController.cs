@@ -104,7 +104,7 @@ namespace Alicargo.Controllers
 
 		private void BindBag(long clientId)
 		{
-			var clientData = _clientRepository.Get(clientId).First();
+			var clientData = _clientRepository.Get(clientId);
 			ViewBag.Nic = clientData.Nic;
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
 		}

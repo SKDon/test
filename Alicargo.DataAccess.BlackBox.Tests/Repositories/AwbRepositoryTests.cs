@@ -80,8 +80,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var emails = _awbRepository.GetClientEmails(id());
 
-			var clients = new ClientRepository(_context.UnitOfWork).Get(TestConstants.TestClientId1,
-																		TestConstants.TestClientId2);
+			var clientRepository = new ClientRepository(_context.UnitOfWork);
+
+			var client1 = clientRepository.Get(TestConstants.TestClientId1);
+			var client2 = clientRepository.Get(TestConstants.TestClientId2);
+			var clients = new[] { client1, client2 };
 
 			emails.ShouldBeEquivalentTo(clients.Select(x => x.Email).ToArray());
 		}

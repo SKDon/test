@@ -37,7 +37,7 @@ namespace Alicargo.Services.Users.Client
                            TransitEditModel transitModel,
                            AuthenticationModel authenticationModel)
         {
-            var data = _clientRepository.Get(clientId).First();
+            var data = _clientRepository.Get(clientId);
 
             if (!_clientPermissions.HaveAccessToClient(data))
                 throw new AccessForbiddenException();

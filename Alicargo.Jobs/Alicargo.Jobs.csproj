@@ -58,7 +58,7 @@
     <Compile Include="Core\IJobRunner.cs" />
     <Compile Include="Core\JobRunnerHelper.cs" />
     <Compile Include="Core\ShardSettings.cs" />
-    <Compile Include="Entities\ApplicationAddEventData.cs" />
+    <Compile Include="Entities\ApplicationCreatedEventData.cs" />
     <Compile Include="MailSenderJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">

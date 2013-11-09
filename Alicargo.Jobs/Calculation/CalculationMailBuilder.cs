@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Jobs.Calculation
@@ -19,7 +18,7 @@ namespace Alicargo.Jobs.Calculation
 
         public EmailMessage Build(CalculationData calculation)
         {
-            var client = _clients.Get(calculation.ClientId).First();
+            var client = _clients.Get(calculation.ClientId);
             var cost = calculation.TariffPerKg * (decimal)calculation.Weight;
             var total = cost + calculation.ScotchCost + calculation.FactureCost
                         + calculation.InsuranceCost + calculation.TransitCost + calculation.PickupCost;

@@ -9,42 +9,42 @@ using Ploeh.AutoFixture;
 
 namespace Alicargo.Jobs.Tests.Calculation
 {
-    [TestClass]
-    public class CalculationMailBuilderTests
-    {
-        private CalculationMailBuilder _builder;
-        private MockContainer _container;
+	[TestClass]
+	public class CalculationMailBuilderTests
+	{
+		private CalculationMailBuilder _builder;
+		private MockContainer _container;
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            _container = new MockContainer();
-            _builder = _container.Create<CalculationMailBuilder>();
-        }
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			_container = new MockContainer();
+			_builder = _container.Create<CalculationMailBuilder>();
+		}
 
-        [TestMethod]
-        public void Test_Build()
-        {
-            var data = new CalculationData
-            {
-                AirWaybillDisplay = "AirWaybillDisplay",
-                FactoryName = "FactoryName",
-                ApplicationDisplay = "ApplicationDisplay",
-                ClientId = TestConstants.TestClientId1,
-                FactureCost = 2,
-                InsuranceCost = 3,
-                MarkName = "MarkName",
-                PickupCost = 4,
-                ScotchCost = 5,
-                TariffPerKg = 6,
-                TransitCost = 7,
-                Weight = 8
-            };
+		[TestMethod]
+		public void Test_Build()
+		{
+			var data = new CalculationData
+			{
+				AirWaybillDisplay = "AirWaybillDisplay",
+				FactoryName = "FactoryName",
+				ApplicationDisplay = "ApplicationDisplay",
+				ClientId = TestConstants.TestClientId1,
+				FactureCost = 2,
+				InsuranceCost = 3,
+				MarkName = "MarkName",
+				PickupCost = 4,
+				ScotchCost = 5,
+				TariffPerKg = 6,
+				TransitCost = 7,
+				Weight = 8
+			};
 
-            var client = _container.Build<ClientData>().With(x => x.Id, TestConstants.TestClientId1).Create();
-            var admins = _container.CreateMany<Recipient>().ToArray();
+			var client = _container.Build<ClientData>().With(x => x.Id, TestConstants.TestClientId1).Create();
+			var admins = _container.CreateMany<Recipient>().ToArray();
 
-            const string text = @"AirWaybillDisplay
+			const string text = @"AirWaybillDisplay
 
 8.00 kg * 6.00€ = 48.00€
 скотч - 5.00€
@@ -55,18 +55,18 @@ namespace Alicargo.Jobs.Tests.Calculation
 
 Итого - 69.00€";
 
-            const string subject = @"Расчет стоимости заявки #ApplicationDisplay FactoryName/MarkName";
+			const string subject = @"Расчет стоимости заявки #ApplicationDisplay FactoryName/MarkName";
 
-            _container.ClientRepository.Setup(x => x.Get(TestConstants.TestClientId1)).Returns(new[] { client });
+			_container.ClientRepository.Setup(x => x.Get(TestConstants.TestClientId1)).Returns(client);
 
-            _container.Recipients.Setup(x => x.GetAdminEmails()).Returns(admins);
+			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(admins);
 
-            var message = _builder.Build(data);
+			var message = _builder.Build(data);
 
-            message.Body.ShouldBeEquivalentTo(text);
-            message.Subject.ShouldBeEquivalentTo(subject);
-            message.To.ShouldAllBeEquivalentTo(new[] { client.Email });
-            message.CopyTo.ShouldAllBeEquivalentTo(admins.Select(x => x.Email));
-        }
-    }
+			message.Body.ShouldBeEquivalentTo(text);
+			message.Subject.ShouldBeEquivalentTo(subject);
+			message.To.ShouldAllBeEquivalentTo(new[] { client.Email });
+			message.CopyTo.ShouldAllBeEquivalentTo(admins.Select(x => x.Email));
+		}
+	}
 }

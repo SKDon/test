@@ -9,7 +9,6 @@ using Resources;
 
 namespace Alicargo.Services.Email
 {
-	// todo: 1.5. use recipient culture for dates format
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly ILocalizationService _localizationService;

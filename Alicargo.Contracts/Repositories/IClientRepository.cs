@@ -13,10 +13,9 @@ namespace Alicargo.Contracts.Repositories
 
 		string GetLanguage(long clientId);
 		ClientData GetByUserId(long userId);
-		ClientData GetById(long clientId);
+		ClientData Get(long clientId);
 		ClientData[] GetRange(int take, long skip);
 		ClientData[] GetAll();
-		ClientData[] Get(params long[] clinentIds);
 		IDictionary<long, string> GetNicByApplications(params long[] appIds);
 	}
 }
