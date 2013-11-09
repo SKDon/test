@@ -24,6 +24,7 @@ namespace Alicargo.App_Start
 			kernel.Bind<ILog>().ToMethod(context => mainLog).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
+			kernel.Bind<ISerializer>().To<Serializer>().InThreadScope();
 
 			var binded = CompositionRootHelper.BindDecorators(kernel, CompositionRootHelper.Decorators);
 

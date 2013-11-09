@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Jobs.Entities;
@@ -13,12 +14,14 @@ namespace Alicargo.Services.Application
 	internal sealed class ApplicationManagerWithEvent : IApplicationManager
 	{
 		private readonly IApplicationEventRepository _events;
+		private readonly ISerializer _serializer;
 		private readonly IApplicationManager _manager;
 
-		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEventRepository events)
+		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEventRepository events, ISerializer serializer)
 		{
 			_manager = manager;
 			_events = events;
+			_serializer = serializer;
 		}
 
 		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
@@ -34,10 +37,12 @@ namespace Alicargo.Services.Application
 		{
 			var applicationId = _manager.Add(model, carrierModel, transitModel, clientId);
 
-			_events.Add(applicationId, ApplicationEventType.Created, new ApplicationCreatedEventData
+			var bytes = _serializer.Serialize(new ApplicationCreatedEventData
 			{
 				ClientId = clientId
 			});
+
+			_events.Add(applicationId, ApplicationEventType.Created, bytes);
 
 			return applicationId;
 		}
@@ -51,21 +56,21 @@ namespace Alicargo.Services.Application
 		{
 			_manager.SetState(applicationId, stateId);
 
-			_events.Add(applicationId, ApplicationEventType.SetState, stateId);
+			_events.Add(applicationId, ApplicationEventType.SetState, _serializer.Serialize(stateId));
 		}
 
 		public void SetTransitReference(long id, string transitReference)
 		{
 			_manager.SetTransitReference(id, transitReference);
 
-			_events.Add(id, ApplicationEventType.SetTransitReference, transitReference);
+			_events.Add(id, ApplicationEventType.SetTransitReference, _serializer.Serialize(transitReference));
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 
-			_events.Add(id, ApplicationEventType.SetDateOfCargoReceipt, dateOfCargoReceipt);
+			_events.Add(id, ApplicationEventType.SetDateOfCargoReceipt, _serializer.Serialize(dateOfCargoReceipt));
 		}
 
 		public void SetTransitCost(long id, decimal? transitCost)
@@ -112,56 +117,56 @@ namespace Alicargo.Services.Application
 		{
 			if (model.CPFile != null && model.CPFile.Length != 0)
 			{
-				_events.Add(applicationId, ApplicationEventType.CPFileUploaded, new FileHolder
+				_events.Add(applicationId, ApplicationEventType.CPFileUploaded, _serializer.Serialize(new FileHolder
 				{
 					Data = model.CPFile,
 					Name = model.CPFileName
-				});
+				}));
 			}
 
 			if (model.InvoiceFile != null && model.InvoiceFile.Length != 0)
 			{
-				_events.Add(applicationId, ApplicationEventType.InvoiceFileUploaded, new FileHolder
+				_events.Add(applicationId, ApplicationEventType.InvoiceFileUploaded, _serializer.Serialize(new FileHolder
 				{
 					Data = model.InvoiceFile,
 					Name = model.InvoiceFileName
-				});
+				}));
 			}
 
 			if (model.PackingFile != null && model.PackingFile.Length != 0)
 			{
-				_events.Add(applicationId, ApplicationEventType.PackingFileUploaded, new FileHolder
+				_events.Add(applicationId, ApplicationEventType.PackingFileUploaded, _serializer.Serialize(new FileHolder
 				{
 					Data = model.PackingFile,
 					Name = model.PackingFileName
-				});
+				}));
 			}
 
 			if (model.SwiftFile != null && model.SwiftFile.Length != 0)
 			{
-				_events.Add(applicationId, ApplicationEventType.SwiftFileUploaded, new FileHolder
+				_events.Add(applicationId, ApplicationEventType.SwiftFileUploaded, _serializer.Serialize(new FileHolder
 				{
 					Data = model.SwiftFile,
 					Name = model.SwiftFileName
-				});
+				}));
 			}
 
 			if (model.DeliveryBillFile != null && model.DeliveryBillFile.Length != 0)
 			{
-				_events.Add(applicationId, ApplicationEventType.DeliveryBillFileUploaded, new FileHolder
+				_events.Add(applicationId, ApplicationEventType.DeliveryBillFileUploaded, _serializer.Serialize(new FileHolder
 				{
 					Data = model.DeliveryBillFile,
 					Name = model.DeliveryBillFileName
-				});
+				}));
 			}
 
 			if (model.Torg12File != null && model.Torg12File.Length != 0)
 			{
-				_events.Add(applicationId, ApplicationEventType.Torg12FileUploaded, new FileHolder
+				_events.Add(applicationId, ApplicationEventType.Torg12FileUploaded, _serializer.Serialize(new FileHolder
 				{
 					Data = model.Torg12File,
 					Name = model.Torg12FileName
-				});
+				}));
 			}
 		}
 	}

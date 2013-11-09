@@ -1,6 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.Repositories
@@ -8,18 +7,14 @@ namespace Alicargo.DataAccess.Repositories
 	public sealed class ApplicationEventRepository : IApplicationEventRepository
 	{
 		private readonly ISqlProcedureExecutor _executor;
-		private readonly ISerializer _serializer;
 
-		public ApplicationEventRepository(ISqlProcedureExecutor executor, ISerializer serializer)
+		public ApplicationEventRepository(ISqlProcedureExecutor executor)
 		{
 			_executor = executor;
-			_serializer = serializer;
 		}
 
-		public void Add<T>(long applicationId, ApplicationEventType eventType, T obj)
+		public void Add(long applicationId, ApplicationEventType eventType, byte[] data)
 		{
-			var data = _serializer.Serialize(obj);
-
 			_executor.Execute("[dbo].[ApplicationEvent_Add]", new { applicationId, eventType, data, State = ApplicationEventState.New });
 		}
 
