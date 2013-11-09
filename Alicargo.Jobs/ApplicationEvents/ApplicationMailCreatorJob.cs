@@ -1,55 +1,37 @@
-﻿using System;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Exceptions;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs.ApplicationEvents
 {
 	public sealed class ApplicationMailCreatorJob : IJob
 	{
+		private readonly IEmailMessageRepository _emailMessages;
+		private readonly IMessageFactory _messageFactory;
 		private readonly IApplicationEventRepository _events;
-		private readonly TimeSpan _periodToProcessEvent;
+		private readonly ShardSettings _shard;
 
-		public ApplicationMailCreatorJob(IApplicationEventRepository events, TimeSpan periodToProcessEvent)
+		public ApplicationMailCreatorJob(IEmailMessageRepository emailMessages, IMessageFactory messageFactory, IApplicationEventRepository events, ShardSettings shard)
 		{
+			_emailMessages = emailMessages;
+			_messageFactory = messageFactory;
 			_events = events;
-			_periodToProcessEvent = periodToProcessEvent;
+			_shard = shard;
 		}
 
 		public void Run()
 		{
-			var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(_periodToProcessEvent));
-
-			while (data != null)
-			{
-				ProcessEvent(data);
-
-				_events.Delete(data.Id, data.RowVersion);
-				data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(_periodToProcessEvent));
-			}
+			ApplicationEventJobHelper.Run(_events, _shard, ProcessEvent, ApplicationEventState.New);
 		}
 
 		private void ProcessEvent(ApplicationEventData data)
 		{
+			var message = _messageFactory.Get(data.EventType, data.Data);
+
+			_emailMessages.Add(message);
+
+			_events.SetState(data.Id, ApplicationEventState.EmailPrepared);
 		}
-
-		//public ApplicationEventData GetNext()
-		//{
-		//	var data = _events.GetNext(DateTimeOffset.UtcNow.Subtract(_periodToProcessEvent));
-
-		//	//try
-		//	//{
-		//	//	if (data != null)
-		//	//	{
-		//	//		data.RowVersion = _events.Touch(data.Id, data.RowVersion);
-		//	//	}
-
-		//	//	return data;
-		//	//}
-		//	//catch (EntityUpdateConflict)
-		//	//{
-		//	//	return null;
-		//	//}
-		//}
 	}
 }

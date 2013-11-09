@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
-using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.Calculation;
+using Alicargo.Jobs.Core;
 using Alicargo.Services;
 using Alicargo.Services.Email;
 using log4net;
@@ -27,13 +27,17 @@ namespace Alicargo.App_Start
 			const string calculationMailerJob = "CalculationMailerJob_";
 			const string calculationWatcherJob = "CalculationWatcherJob_";
 			const string applicationMailCreatorJob = "ApplicationMailCreatorJob_";
+			const string applicationStateHistoryJob = "ApplicationStateHistoryJob_";
 
 			BindStatelessJobRunner(kernel, () => GetCalculationMailerJob(connectionString), calculationMailerJob + 0);
 			BindStatelessJobRunner(kernel, () => GetCalculationMailerJob(connectionString), calculationMailerJob + 1);
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 0);
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 1);
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString), applicationMailCreatorJob + 0);
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString), applicationMailCreatorJob + 1);
+
+			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(0, 2)), applicationMailCreatorJob + 0);
+			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(1, 2)), applicationMailCreatorJob + 1);
+			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(0, 2)), applicationStateHistoryJob + 0);
+			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(1, 2)), applicationStateHistoryJob + 1);
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
@@ -71,12 +75,23 @@ namespace Alicargo.App_Start
 			}
 		}
 
-		private static void GetApplicationMailCreatorJob(string connectionString)
+		private static void GetApplicationMailCreatorJob(string connectionString, ShardSettings shard)
+		{
+			var executor = new SqlProcedureExecutor(connectionString);
+			var serializer = new Serializer();
+			var events = new ApplicationEventRepository(executor);
+
+			var job = new ApplicationMailCreatorJob(new EmailMessageRepository(executor), null, events, shard);
+
+			job.Run();
+		}
+
+		private static void GetApplicationStateHistoryJob(string connectionString, ShardSettings shard)
 		{
 			var executor = new SqlProcedureExecutor(connectionString);
 			var events = new ApplicationEventRepository(executor);
 
-			var job = new ApplicationMailCreatorJob(events, DeadTimeout);
+			var job = new ApplicationStateHistoryJob(events, shard);
 
 			job.Run();
 		}
