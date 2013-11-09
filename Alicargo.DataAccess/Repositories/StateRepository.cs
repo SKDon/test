@@ -9,7 +9,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class StateRepository : IStateRepository
+	public sealed class StateRepository : IStateRepository
 	{
 		private readonly Expression<Func<State, StateData>> _selector;
 		private readonly AlicargoDataContext _context;

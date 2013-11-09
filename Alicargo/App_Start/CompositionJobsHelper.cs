@@ -82,15 +82,24 @@ namespace Alicargo.App_Start
 
 		private static void GetApplicationMailCreatorJob(string connectionString, ShardSettings shard)
 		{
-			var executor = new SqlProcedureExecutor(connectionString);
-			var serializer = new Serializer();
-			var events = new ApplicationEventRepository(executor);
-			var factory = new MessageFactory(serializer);
-			var emails = new EmailMessageRepository(executor);
+			using (var connection = new SqlConnection(connectionString))
+			{
+				var unitOfWork = new UnitOfWork(connection);
+				var users = new UserRepository(unitOfWork, new PasswordConverter());
+				var serializer = new Serializer();
+				var recipients = new Recipients(users);
+				var clientRepository = new ClientRepository(unitOfWork);
+				var states = new StateRepository(unitOfWork);
+				var localization = new LocalizationService(states);
+				var factory = new MessageFactory(serializer, recipients, clientRepository, localization);
+				var executor = new SqlProcedureExecutor(connectionString);
+				var events = new ApplicationEventRepository(executor);
+				var emails = new EmailMessageRepository(executor);
 
-			var job = new ApplicationMailCreatorJob(emails, factory, events, shard, serializer);
+				var job = new ApplicationMailCreatorJob(emails, factory, events, shard, serializer);
 
-			job.Run();
+				job.Run();
+			}
 		}
 
 		private static void GetApplicationStateHistoryJob(string connectionString, ShardSettings shard)
@@ -105,15 +114,24 @@ namespace Alicargo.App_Start
 
 		private static void GetMailSenderJob(string connectionString, ShardSettings shard)
 		{
-			var executor = new SqlProcedureExecutor(connectionString);
-			var messages = new EmailMessageRepository(executor);
-			var sender = new MailSender();
-			var serializer = new Serializer();
-			var factory = new MessageFactory(serializer);
+			using (var connection = new SqlConnection(connectionString))
+			{
+				var unitOfWork = new UnitOfWork(connection);
+				var users = new UserRepository(unitOfWork, new PasswordConverter());
+				var serializer = new Serializer();
+				var recipients = new Recipients(users);
+				var clientRepository = new ClientRepository(unitOfWork);
+				var states = new StateRepository(unitOfWork);
+				var localization = new LocalizationService(states);
+				var factory = new MessageFactory(serializer, recipients, clientRepository, localization);
+				var executor = new SqlProcedureExecutor(connectionString);
+				var messages = new EmailMessageRepository(executor);
+				var sender = new MailSender();
 
-			var job = new MailSenderJob(messages, shard, sender, factory);
+				var job = new MailSenderJob(messages, shard, sender, factory);
 
-			job.Run();
+				job.Run();
+			}
 		}
 	}
 }

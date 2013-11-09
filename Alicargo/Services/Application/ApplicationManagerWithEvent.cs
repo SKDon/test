@@ -39,7 +39,12 @@ namespace Alicargo.Services.Application
 
 			var bytes = _serializer.Serialize(new ApplicationCreatedEventData
 			{
-				ClientId = clientId
+				ClientId = clientId,
+				Id = applicationId,
+				FactoryName = model.FactoryName,
+				MarkName = model.MarkName,
+				Count = model.Count,
+				CreationTimestamp = DateTimeOffset.UtcNow
 			});
 
 			_events.Add(applicationId, ApplicationEventType.Created, bytes);
