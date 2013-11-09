@@ -1,119 +1,122 @@
-﻿//using System;
-//using System.Data.SqlClient;
-//using System.Linq;
-//using Alicargo.Contracts.Enums;
-//using Alicargo.Contracts.Exceptions;
-//using Alicargo.DataAccess.BlackBox.Tests.Helpers;
-//using Alicargo.DataAccess.BlackBox.Tests.Properties;
-//using Alicargo.DataAccess.DbContext;
-//using Alicargo.DataAccess.Repositories;
-//using Alicargo.TestHelpers;
-//using Dapper;
-//using FluentAssertions;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data.SqlClient;
+using System.Linq;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
+using Alicargo.Core.Services;
+using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
+using Alicargo.DataAccess.DbContext;
+using Alicargo.DataAccess.Repositories;
+using Alicargo.Jobs.Entities;
+using Alicargo.TestHelpers;
+using Dapper;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ploeh.AutoFixture;
 
-//namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
-//{
-//	[TestClass]
-//	public class ApplicationEventRepositoryTests
-//	{
-//		private DbTestContext _context;
-//		private ApplicationEventRepository _events;
+namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
+{
+	[TestClass]
+	public class ApplicationEventRepositoryTests
+	{
+		private DbTestContext _context;
+		private ApplicationEventRepository _events;
+		private Serializer _serializer;
 
-//		[TestInitialize]
-//		public void TestInitialize()
-//		{
-//			_context = new DbTestContext();
-//			_events = new ApplicationEventRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
-//		}
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			_context = new DbTestContext();
+			_serializer = new Serializer();
 
-//		[TestCleanup]
-//		public void TestCleanup()
-//		{
-//			_context.Cleanup();
-//		}
+			_events = new ApplicationEventRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString), _serializer);
+		}
 
-//		[TestMethod, TestCategory("black-box")]
-//		public void Test_AddDublicate()
-//		{
-//			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
-//			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
 
-//			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
-//			{
-//				var count = connection.Query<int>("select count(1) from [dbo].[ApplicationEvent] where [ApplicationId] = @AppId AND [EventType] = @Type",
-//					new { AppId = TestConstants.TestApplicationId, Type = ApplicationEventType.Created }).First();
+		[TestMethod, TestCategory("black-box")]
+		public void Test_AddDublicate()
+		{
+			var data = _context.Fixture.Create<ApplicationCreatedEventData>();
+			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, data);
+			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, data);
 
-//				count.ShouldBeEquivalentTo(1);
-//			}
+			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			{
+				var count = connection.Query<int>("select count(1) from [dbo].[ApplicationEvent] where [ApplicationId] = @AppId AND [EventTypeId] = @Type",
+					new { AppId = TestConstants.TestApplicationId, Type = ApplicationEventType.Created }).First();
 
-//			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.CPFileUploaded);
+				count.ShouldBeEquivalentTo(2);
+			}
 
-//			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
-//			{
-//				var count = connection.Query<int>("select count(1) from [dbo].[ApplicationEvent] where [ApplicationId] = @AppId",
-//					new { AppId = TestConstants.TestApplicationId, Type = ApplicationEventType.Created }).First();
+			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.CPFileUploaded, _context.Fixture.Create<FileHolder>());
 
-//				count.ShouldBeEquivalentTo(2);
-//			}
-//		}
+			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			{
+				var count = connection.Query<int>("select count(1) from [dbo].[ApplicationEvent] where [ApplicationId] = @AppId",
+					new { AppId = TestConstants.TestApplicationId, Type = ApplicationEventType.Created }).First();
 
-//		[TestMethod, TestCategory("black-box")]
-//		public void Test_GetNext()
-//		{
-//			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
+				count.ShouldBeEquivalentTo(3);
+			}
+		}
 
-//			_events.GetNext(TODO, DateTimeOffset.UtcNow).Should().BeNull();
+		[TestMethod, TestCategory("black-box")]
+		public void Test_GetNext()
+		{
+			var eventData = _context.Fixture.Create<ApplicationCreatedEventData>();
 
-//			var data = _events.GetNext(TODO, DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
+			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, eventData);
 
-//			data.ApplicationId.ShouldBeEquivalentTo(TestConstants.TestApplicationId);
-//			data.EventType.ShouldBeEquivalentTo(ApplicationEventType.Created);
-//		}
+			_events.GetNext(ApplicationEventState.EmailPrepared, 0, 1).Should().BeNull();
 
-//		[TestMethod, TestCategory("black-box")]
-//		public void Test_Touch()
-//		{
-//			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
+			var data = _events.GetNext(ApplicationEventState.New, 0, 1);
 
-//			var data = _events.GetNext(TODO, DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
+			data.ApplicationId.ShouldBeEquivalentTo(TestConstants.TestApplicationId);
+			data.EventType.ShouldBeEquivalentTo(ApplicationEventType.Created);
+			data.Data.ShouldBeEquivalentTo(_serializer.Serialize(eventData));
+			data.Id.Should().BeGreaterThan(0);
+		}
 
-//			var bytes = _events.Touch(data.Id, data.RowVersion);
+		[TestMethod, TestCategory("black-box")]
+		public void Test_SetState()
+		{
+			var eventData = _context.Fixture.Create<ApplicationCreatedEventData>();
 
-//			data.RowVersion.SequenceEqual(bytes).Should().BeFalse();
+			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, eventData);
 
-//			_events.Touch(data.Id, bytes);
-//		}
+			var data = _events.GetNext(ApplicationEventState.New, 0, 1);
 
-//		[TestMethod, TestCategory("black-box"), ExpectedException(typeof(EntityUpdateConflict))]
-//		public void Test_TouchDouble()
-//		{
-//			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
+			_events.SetState(data.Id, ApplicationEventState.EmailPrepared);
 
-//			var data = _events.GetNext(TODO, DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
+			var next = _events.GetNext(ApplicationEventState.EmailPrepared, 0, 1);
 
-//			_events.Touch(data.Id, data.RowVersion);
-//			_events.Touch(data.Id, data.RowVersion);
-//		}
+			next.ShouldBeEquivalentTo(data);
+		}
 
-//		[TestMethod, TestCategory("black-box")]
-//		public void Test_Delete()
-//		{
-//			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created);
+		[TestMethod, TestCategory("black-box")]
+		public void Test_Delete()
+		{
+			var eventData = _context.Fixture.Create<ApplicationCreatedEventData>();
 
-//			var data = _events.GetNext(TODO, DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
+			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, eventData);
 
-//			_events.Delete(data.Id, data.RowVersion);
+			var data = _events.GetNext(ApplicationEventState.New, 0, 1);
 
-//			data = _events.GetNext(TODO, DateTimeOffset.UtcNow.Subtract(TimeSpan.FromMinutes(1)));
+			_events.Delete(data.Id);
 
-//			data.Should().BeNull();
-//		}
+			data = _events.GetNext(ApplicationEventState.New, 0, 1);
 
-//		[TestMethod, TestCategory("black-box")]
-//		public void Test_DeleteEmpty()
-//		{
-//			_events.Delete(-1, new byte[0]);
-//		}
-//	}
-//}
+			data.Should().BeNull();
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_DeleteEmpty()
+		{
+			_events.Delete(-1);
+		}
+	}
+}

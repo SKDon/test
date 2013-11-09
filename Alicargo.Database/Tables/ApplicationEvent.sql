@@ -1,15 +1,19 @@
 ﻿CREATE TABLE [dbo].[ApplicationEvent]
 (
 	[Id] BIGINT IDENTITY(1, 1) NOT NULL,
-	[RowVersion] ROWVERSION NOT NULL,
-	[UpdateTimestamp] DATETIMEOFFSET CONSTRAINT [DF_ApplicationEvent_UpdateTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
+
+	[StateId] INT NOT NULL,
+	[StateIdTimestamp] DATETIMEOFFSET CONSTRAINT [DF_ApplicationEvent_StateIdTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
+	[CreationTimestamp] DATETIMEOFFSET CONSTRAINT [DF_ApplicationEvent_CreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
+
 	[ApplicationId] BIGINT NOT NULL,
-	[EventType] INT NOT NULL,
+	[EventTypeId] INT NOT NULL,
+	[Data] VARBINARY(MAX) NULL
 
 	CONSTRAINT [PK_dbo.ApplicationEvent] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_dbo.ApplicationEvent_dbo.Application] FOREIGN KEY ([ApplicationId]) REFERENCES [Application]([Id])
 )
 GO
 
-CREATE UNIQUE INDEX [IX_ApplicationEvent_ApplicationId_EventType] ON [dbo].[ApplicationEvent] ([ApplicationId], [EventType])
+CREATE INDEX [IX_ApplicationEvent_StateId] ON [dbo].[ApplicationEvent] ([StateId])
 GO

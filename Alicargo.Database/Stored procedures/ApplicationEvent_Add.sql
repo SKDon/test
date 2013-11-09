@@ -1,9 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[ApplicationEvent_Add]
+	@State INT,
 	@ApplicationId BIGINT,
-	@EventType INT
+	@EventType INT,
+	@Data VARBINARY(MAX)
 AS
 	SET NOCOUNT ON;
 
-	INSERT [dbo].[ApplicationEvent] ([ApplicationId], [EventType])
-	OUTPUT [INSERTED].[RowVersion]
-	VALUES (@ApplicationId, @EventType)
+	INSERT [dbo].[ApplicationEvent] ([ApplicationId], [EventTypeId], [StateId], [Data])
+	VALUES (@ApplicationId, @EventType, @State, @Data)
+
+GO

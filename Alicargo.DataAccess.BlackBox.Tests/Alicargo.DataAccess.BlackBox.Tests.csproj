@@ -126,6 +126,10 @@
       <Project>{37068536-3066-4877-91e0-05031d2c5ca3}</Project>
       <Name>Alicargo.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Jobs\Alicargo.Jobs.csproj">
+      <Project>{C2133743-7762-4BD9-A824-EB039E41AF58}</Project>
+      <Name>Alicargo.Jobs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alicargo.TestHelpers\Alicargo.TestHelpers.csproj">
       <Project>{BB7C7B4A-D181-4812-89BC-29EB406E9656}</Project>
       <Name>Alicargo.TestHelpers</Name>
