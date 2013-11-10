@@ -14,10 +14,11 @@ namespace Alicargo.Services.Application
 	internal sealed class ApplicationManagerWithEvent : IApplicationManager
 	{
 		private readonly IApplicationEventRepository _events;
-		private readonly ISerializer _serializer;
 		private readonly IApplicationManager _manager;
+		private readonly ISerializer _serializer;
 
-		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEventRepository events, ISerializer serializer)
+		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEventRepository events,
+			ISerializer serializer)
 		{
 			_manager = manager;
 			_events = events;
@@ -40,7 +41,6 @@ namespace Alicargo.Services.Application
 			var bytes = _serializer.Serialize(new ApplicationCreatedEventData
 			{
 				ClientId = clientId,
-				Id = applicationId,
 				FactoryName = model.FactoryName,
 				MarkName = model.MarkName,
 				Count = model.Count,
@@ -61,7 +61,11 @@ namespace Alicargo.Services.Application
 		{
 			_manager.SetState(applicationId, stateId);
 
-			_events.Add(applicationId, ApplicationEventType.SetState, _serializer.Serialize(stateId));
+			_events.Add(applicationId, ApplicationEventType.SetState, _serializer.Serialize(new ApplicationSetStateEventData
+			{
+				StateId = stateId,
+				Timestamp = DateTimeOffset.UtcNow
+			}));
 		}
 
 		public void SetTransitReference(long id, string transitReference)
@@ -120,59 +124,43 @@ namespace Alicargo.Services.Application
 
 		private void HandleFilesUpload(long applicationId, ApplicationAdminModel model)
 		{
-			if (model.CPFile != null && model.CPFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.CPFileUploaded, _serializer.Serialize(new FileHolder
-				{
-					Data = model.CPFile,
-					Name = model.CPFileName
-				}));
-			}
+			AddFileUploadEvent(applicationId, model, ApplicationEventType.CPFileUploaded,
+				model.CPFileName, model.CPFile);
 
-			if (model.InvoiceFile != null && model.InvoiceFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.InvoiceFileUploaded, _serializer.Serialize(new FileHolder
-				{
-					Data = model.InvoiceFile,
-					Name = model.InvoiceFileName
-				}));
-			}
+			AddFileUploadEvent(applicationId, model, ApplicationEventType.InvoiceFileUploaded,
+				model.InvoiceFileName, model.InvoiceFile);
 
-			if (model.PackingFile != null && model.PackingFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.PackingFileUploaded, _serializer.Serialize(new FileHolder
-				{
-					Data = model.PackingFile,
-					Name = model.PackingFileName
-				}));
-			}
+			AddFileUploadEvent(applicationId, model, ApplicationEventType.PackingFileUploaded,
+				model.PackingFileName, model.PackingFile);
 
-			if (model.SwiftFile != null && model.SwiftFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.SwiftFileUploaded, _serializer.Serialize(new FileHolder
-				{
-					Data = model.SwiftFile,
-					Name = model.SwiftFileName
-				}));
-			}
+			AddFileUploadEvent(applicationId, model, ApplicationEventType.SwiftFileUploaded,
+				model.SwiftFileName, model.SwiftFile);
 
-			if (model.DeliveryBillFile != null && model.DeliveryBillFile.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.DeliveryBillFileUploaded, _serializer.Serialize(new FileHolder
-				{
-					Data = model.DeliveryBillFile,
-					Name = model.DeliveryBillFileName
-				}));
-			}
+			AddFileUploadEvent(applicationId, model, ApplicationEventType.DeliveryBillFileUploaded,
+				model.DeliveryBillFileName, model.DeliveryBillFile);
 
-			if (model.Torg12File != null && model.Torg12File.Length != 0)
-			{
-				_events.Add(applicationId, ApplicationEventType.Torg12FileUploaded, _serializer.Serialize(new FileHolder
+			AddFileUploadEvent(applicationId, model, ApplicationEventType.Torg12FileUploaded,
+				model.Torg12FileName, model.Torg12File);
+		}
+
+		private void AddFileUploadEvent(long applicationId, ApplicationAdminModel model, ApplicationEventType type,
+			string fileName, byte[] fileData)
+		{
+			if (fileData == null || fileData.Length == 0) return;
+
+			_events.Add(applicationId, type, _serializer.Serialize(
+				new ApplicationFileUploadedEventData
 				{
-					Data = model.Torg12File,
-					Name = model.Torg12FileName
+					Count = model.Count,
+					FactoryName = model.FactoryName,
+					MarkName = model.MarkName,
+					Invoice = model.Invoice,
+					File = new FileHolder
+					{
+						Data = fileData,
+						Name = fileName
+					}
 				}));
-			}
 		}
 	}
 }

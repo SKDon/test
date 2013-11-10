@@ -2,7 +2,6 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
-using Alicargo.DataAccess.Helpers;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;
 using FluentAssertions;
@@ -24,7 +23,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			_context = new DbTestContext();
 
-			_applicationRepository = new ApplicationRepository(_context.UnitOfWork, new ApplicationRepositoryOrderer());
+			_applicationRepository = new ApplicationRepository(_context.UnitOfWork);
 			_stateRepository = new StateRepository(_context.UnitOfWork);
 			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
 		}
@@ -45,6 +44,18 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Assert.IsNotNull(actual);
 
 			expected.ShouldBeEquivalentTo(actual);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_ApplicationRepository_Add_GetDetails()
+		{
+			var expected = CreateTestApplication();
+
+			var actual = _applicationRepository.GetDetails(expected.Id);
+
+			Assert.IsNotNull(actual);
+
+			expected.ShouldBeEquivalentTo(actual, options => options.ExcludingMissingProperties());
 		}
 
 		[TestMethod, TestCategory("black-box")]

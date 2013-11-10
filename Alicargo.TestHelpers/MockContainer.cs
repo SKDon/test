@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -22,16 +26,31 @@ namespace Alicargo.TestHelpers
 			Fixture = new Fixture();
 			Fixture.Customize(new AutoMoqCustomization());
 
+			Fixture.Register(() => Fixture.Build<Recipient>()
+				.With(x => x.Culture, TwoLetterISOLanguageName.English)
+				.Create());
+
+			Fixture.Register(() => Fixture.Build<ApplicationDetailsData>()
+				.With(x => x.CurrencyId, 1)
+				.With(x => x.CountryName, new[]
+				{
+					new KeyValuePair<string, string>(TwoLetterISOLanguageName.English, Fixture.Create<string>()), 
+					new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, Fixture.Create<string>()), 
+					new KeyValuePair<string, string>(TwoLetterISOLanguageName.Italian, Fixture.Create<string>())
+				})
+				.Create());
+
 			Fixture.Register(() => Fixture.Build<AwbAdminModel>()
-										  .With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
-										  .With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
-										  .Create());
+				.With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
+				.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
+				.Create());
 
 			Fixture.Register(() => Fixture.Build<AwbSenderModel>()
-										  .With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
-										  .With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
-										  .Create());
+				.With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
+				.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
+				.Create());
 
+			Serializer = Inject<ISerializer>();
 			StateRepository = Inject<IStateRepository>();
 			IdentityService = Inject<IIdentityService>();
 			StateService = Inject<IStateService>();
@@ -60,6 +79,7 @@ namespace Alicargo.TestHelpers
 		public Fixture Fixture { get; private set; }
 
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
+		public Mock<ISerializer> Serializer { get; private set; }
 		public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
 		public Mock<IApplicationManager> ApplicationManager { get; private set; }
 		public Mock<IApplicationAwbManager> ApplicationAwbManager { get; private set; }

@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Services.Abstract
+﻿namespace Alicargo.Core.Services.Abstract
 {
 	public interface IStateConfig
 	{

@@ -31,7 +31,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		private void ProcessEvent(ApplicationEventData data)
 		{
-			var messages = _messageFactory.Get(data.EventType, data.Data);
+			var messages = _messageFactory.Get(data.ApplicationId, data.EventType, data.Data);
 
 			foreach (var message in messages)
 			{

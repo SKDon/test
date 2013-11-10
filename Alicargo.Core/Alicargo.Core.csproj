@@ -71,11 +71,12 @@
     <Compile Include="Localization\CultureContext.cs" />
     <Compile Include="Localization\ICultureContext.cs" />
     <Compile Include="Resources\Mail.Designer.cs">
-      <DependentUpon>Mail.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Mail.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Abstract\ILocalizationService.cs" />
+    <Compile Include="Services\Abstract\IStateConfig.cs" />
     <Compile Include="Services\ExtensionsHelper.cs" />
     <Compile Include="Resources\Entities.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -155,7 +156,6 @@
     <EmbeddedResource Include="Resources\Mail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Mail.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

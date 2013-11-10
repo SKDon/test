@@ -1,6 +1,7 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
+using Alicargo.Core.Resources;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -31,16 +32,6 @@ namespace Alicargo.Services.Email
 			get { return Mail.Application_Update; }
 		}
 
-		public string ApplicationAdd(ApplicationDetailsModel model, string culture)
-		{
-			return string.Format(Mail.Application_Add,
-								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count),
-								 model.ClientNic,
-								 model.FactoryName,
-								 model.MarkName,
-								 _localizationService.GetDate(model.CreationTimestamp, culture));
-		}
-
 		public string ApplicationDelete
 		{
 			get { return Mail.Application_Delete; }
@@ -49,93 +40,7 @@ namespace Alicargo.Services.Email
 		public string GetApplicationSubject(string displayNumber)
 		{
 			return string.Format(Mail.Application_Subject, displayNumber);
-		}
-
-		public string ApplicationSetState(ApplicationDetailsModel model, string culture)
-		{
-			return string.Format(Mail.Application_SetState,
-								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count),
-								 _localizationService.GetDate(model.DateOfCargoReceipt, culture),
-								 model.TransitCarrierName,
-								 model.FactoryName,
-								 model.FactoryEmail,
-								 model.FactoryPhone,
-								 model.FactoryContact,
-								 ApplicationHelper.GetDaysInWork(model.CreationTimestamp),
-								 model.Invoice,
-								 _localizationService.GetDate(model.CreationTimestamp, culture),
-								 _localizationService.GetDate(model.StateChangeTimestamp, culture),
-								 model.MarkName,
-								 model.Count,
-								 model.Volume,
-								 model.Weight,
-								 model.Characteristic,
-								 ApplicationHelper.GetValueString(model.Value, (CurrencyType)model.CurrencyId, culture),
-								 model.AddressLoad,
-								 model.CountryName,
-								 model.WarehouseWorkingTime,
-								 model.TermsOfDelivery,
-								 _localizationService.GetMethodOfDelivery((MethodOfDelivery)model.MethodOfDeliveryId, culture),
-								 model.TransitCity,
-								 model.TransitAddress,
-								 model.TransitRecipientName,
-								 model.TransitPhone,
-								 model.TransitWarehouseWorkingTime,
-								 _localizationService.GetMethodOfTransit((MethodOfTransit)model.TransitMethodOfTransitId, culture),
-								 _localizationService.GetDeliveryType((DeliveryType)model.TransitDeliveryTypeId, culture),
-								 model.AirWaybill,
-								 _localizationService.GetDate(model.AirWaybillDateOfDeparture, culture),
-								 _localizationService.GetDate(model.AirWaybillDateOfArrival, culture),
-								 model.AirWaybillGTD,
-								 model.TransitReference,
-								 _localizationService.GetStateName(model.StateId, culture));
-		}
-
-		public string ApplicationSetDateOfCargoReceipt(ApplicationDetailsModel model, string culture)
-		{
-			return string.Format(Mail.Application_SetDateOfCargoReceipt,
-								 _localizationService.GetDate(model.DateOfCargoReceipt, culture));
-		}
-
-		public string ApplicationInvoiceFileAdded(ApplicationDetailsModel model)
-		{
-			return string.Format(Mail.Application_InvoiceFileAdded,
-								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
-								 model.Invoice, model.InvoiceFileName);
-		}
-
-		public string ApplicationSwiftFileAdded(ApplicationDetailsModel model)
-		{
-			return string.Format(Mail.Application_SwiftFileAdded, ApplicationHelper.GetDisplayNumber(model.Id, model.Count),
-								 model.FactoryName, model.MarkName,
-								 model.Invoice);
-		}
-
-		public string ApplicationPackingFileAdded(ApplicationDetailsModel model)
-		{
-			return string.Format(Mail.Application_PackingFileAdded,
-								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
-								 model.Invoice);
-		}
-
-		public string ApplicationDeliveryBillFileAdded(ApplicationDetailsModel model)
-		{
-			return string.Format(Mail.Application_DeliveryBillFileAdded,
-								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count), model.FactoryName, model.MarkName,
-								 model.Invoice);
-		}
-
-		public string ApplicationTorg12FileAdded(ApplicationDetailsModel model, string recipientName)
-		{
-			return string.Format(Mail.Application_Torg12FileAdded, recipientName,
-								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count));
-		}
-
-		public string ApplicationCPFileAdded(ApplicationDetailsModel model, string recipientName)
-		{
-			return string.Format(Mail.Application_CPFileAdded, recipientName,
-								 ApplicationHelper.GetDisplayNumber(model.Id, model.Count));
-		}
+		}		
 
 		#endregion
 

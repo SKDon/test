@@ -10,7 +10,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-    internal sealed class ApplicationPresenter : IApplicationPresenter
+	internal sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly ICountryRepository _countryRepository;
@@ -44,8 +44,6 @@ namespace Alicargo.Services.Application
 		public ApplicationDetailsModel GetDetails(long id)
 		{
 			var data = _applications.GetDetails(id);
-
-			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 
 			var application = new ApplicationDetailsModel
 			{
@@ -93,9 +91,7 @@ namespace Alicargo.Services.Application
 				AirWaybillGTD = data.AirWaybillGTD,
 				ClientEmail = data.ClientEmail,
 				ClientUserId = data.ClientUserId,
-				CountryName = data.CountryId.HasValue
-					? countries[data.CountryId.Value]
-					: null,
+				CountryName = data.CountryName.First(x => x.Key == _identity.TwoLetterISOLanguageName).Value,
 				AirWaybillId = data.AirWaybillId
 			};
 

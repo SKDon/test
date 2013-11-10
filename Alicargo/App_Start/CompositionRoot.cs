@@ -12,6 +12,8 @@ using Ninject.Activation;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
 using ILog = Alicargo.Core.Services.Abstract.ILog;
+using Alicargo.Core.Services.Abstract;
+using Alicargo.Services;
 
 namespace Alicargo.App_Start
 {
@@ -25,6 +27,7 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 			kernel.Bind<ISerializer>().To<Serializer>().InThreadScope();
+			kernel.Bind<ILocalizationService>().To<LocalizationService>().InRequestScope();
 
 			var binded = CompositionRootHelper.BindDecorators(kernel, CompositionRootHelper.Decorators);
 

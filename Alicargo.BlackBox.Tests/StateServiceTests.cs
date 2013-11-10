@@ -2,6 +2,7 @@
 using System.Transactions;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Enums;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.Services;

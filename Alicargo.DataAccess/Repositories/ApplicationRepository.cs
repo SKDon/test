@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
@@ -10,17 +11,17 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class ApplicationRepository : IApplicationRepository
+	public sealed class ApplicationRepository : IApplicationRepository
 	{
 		private readonly AlicargoDataContext _context;
 		private readonly IApplicationRepositoryOrderer _orderer;
 		private readonly Expression<Func<Application, ApplicationData>> _selector;
 
-		public ApplicationRepository(IUnitOfWork unitOfWork, IApplicationRepositoryOrderer orderer)
+		public ApplicationRepository(IUnitOfWork unitOfWork)
 		{
 			_context = (AlicargoDataContext)unitOfWork.Context;
 
-			_orderer = orderer;
+			_orderer = new ApplicationRepositoryOrderer();
 
 			_selector = x => new ApplicationData
 			{
@@ -184,7 +185,6 @@ namespace Alicargo.DataAccess.Repositories
 					AirWaybill = x.AirWaybill.Bill,
 					CPFileName = x.CPFileName,
 					Characteristic = x.Characteristic,
-					CountryId = x.CountryId,
 					CreationTimestamp = x.CreationTimestamp,
 					DateInStock = x.DateInStock,
 					DateOfCargoReceipt = x.DateOfCargoReceipt,
@@ -217,7 +217,14 @@ namespace Alicargo.DataAccess.Repositories
 					ClientUserId = x.Client.UserId,
 					AirWaybillId = x.AirWaybillId,
 					ClientNic = x.Client.Nic,
-					ClientLegalEntity = x.Client.LegalEntity
+					ClientLegalEntity = x.Client.LegalEntity,
+					ClientId = x.ClientId,
+					CountryName = new[]
+					{
+						new KeyValuePair<string, string>(TwoLetterISOLanguageName.English, x.Country.Name_En),
+						new KeyValuePair<string, string>(TwoLetterISOLanguageName.Italian, x.Country.Name_En),
+						new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, x.Country.Name_Ru)
+					}
 				}).FirstOrDefault();
 		}
 

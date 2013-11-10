@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Ninject;
 

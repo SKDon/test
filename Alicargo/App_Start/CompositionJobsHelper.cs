@@ -36,13 +36,17 @@ namespace Alicargo.App_Start
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 0);
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 1);
 
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(0, 2)), applicationMailCreatorJob + 0);
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(1, 2)), applicationMailCreatorJob + 1);
-			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(0, 2)), applicationStateHistoryJob + 0);
-			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(1, 2)), applicationStateHistoryJob + 1);
+			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(0, 2)),
+				applicationMailCreatorJob + 0);
+			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(1, 2)),
+				applicationMailCreatorJob + 1);
+			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(0, 2)),
+				applicationStateHistoryJob + 0);
+			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(1, 2)),
+				applicationStateHistoryJob + 1);
 
-			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, new ShardSettings(0, 2)), mailSenderJobJob + 0);
-			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, new ShardSettings(1, 2)), mailSenderJobJob + 1);
+			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 0), mailSenderJobJob + 0);
+			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 1), mailSenderJobJob + 1);
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
@@ -91,7 +95,11 @@ namespace Alicargo.App_Start
 				var clientRepository = new ClientRepository(unitOfWork);
 				var states = new StateRepository(unitOfWork);
 				var localization = new LocalizationService(states);
-				var factory = new MessageFactory(serializer, recipients, clientRepository, localization);
+				var stateConfig = new StateConfig();
+				var applications = new ApplicationRepository(unitOfWork);
+				var awbs = new AwbRepository(unitOfWork);
+				var factory = new MessageFactory(serializer, recipients, stateConfig,
+					applications, awbs, clientRepository, localization);
 				var executor = new SqlProcedureExecutor(connectionString);
 				var events = new ApplicationEventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
@@ -112,7 +120,7 @@ namespace Alicargo.App_Start
 			job.Run();
 		}
 
-		private static void GetMailSenderJob(string connectionString, ShardSettings shard)
+		private static void GetMailSenderJob(string connectionString, int partitionId)
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
@@ -123,12 +131,16 @@ namespace Alicargo.App_Start
 				var clientRepository = new ClientRepository(unitOfWork);
 				var states = new StateRepository(unitOfWork);
 				var localization = new LocalizationService(states);
-				var factory = new MessageFactory(serializer, recipients, clientRepository, localization);
+				var stateConfig = new StateConfig();
+				var applications = new ApplicationRepository(unitOfWork);
+				var awbs = new AwbRepository(unitOfWork);
+				var factory = new MessageFactory(serializer, recipients, stateConfig,
+					applications, awbs, clientRepository, localization);
 				var executor = new SqlProcedureExecutor(connectionString);
 				var messages = new EmailMessageRepository(executor);
 				var sender = new MailSender();
 
-				var job = new MailSenderJob(messages, shard, sender, factory);
+				var job = new MailSenderJob(messages, partitionId, sender, factory);
 
 				job.Run();
 			}

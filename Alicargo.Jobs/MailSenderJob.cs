@@ -11,21 +11,21 @@ namespace Alicargo.Jobs
 	public sealed class MailSenderJob : IJob
 	{
 		private readonly IEmailMessageRepository _messages;
-		private readonly ShardSettings _shard;
+		private readonly int _partitionId;
 		private readonly IMailSender _sender;
 		private readonly IMessageFactory _factory;
 
-		public MailSenderJob(IEmailMessageRepository messages, ShardSettings shard, IMailSender sender, IMessageFactory factory)
+		public MailSenderJob(IEmailMessageRepository messages, int partitionId, IMailSender sender, IMessageFactory factory)
 		{
 			_messages = messages;
-			_shard = shard;
+			_partitionId = partitionId;
 			_sender = sender;
 			_factory = factory;
 		}
 
 		public void Run()
 		{
-			var data = _messages.GetNext(EmailMessageState.New, _shard.ZeroBasedIndex);
+			var data = _messages.GetNext(EmailMessageState.New, _partitionId);
 
 			while (data != null)
 			{
@@ -47,7 +47,7 @@ namespace Alicargo.Jobs
 					throw;
 				}
 
-				data = _messages.GetNext(EmailMessageState.New, _shard.ZeroBasedIndex);
+				data = _messages.GetNext(EmailMessageState.New, _partitionId);
 			}
 		}
 	}

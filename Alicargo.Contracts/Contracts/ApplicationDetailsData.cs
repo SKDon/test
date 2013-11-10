@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Alicargo.Contracts.Contracts
 {
@@ -74,8 +75,6 @@ namespace Alicargo.Contracts.Contracts
 
 		public string TermsOfDelivery { get; set; }
 
-		public long? CountryId { get; set; }
-
 		public DateTimeOffset StateChangeTimestamp { get; set; }
 
 		public DateTimeOffset? DateInStock { get; set; }
@@ -102,7 +101,11 @@ namespace Alicargo.Contracts.Contracts
 
 		public decimal Value { get; set; }
 
-		public long? AirWaybillId { get; set; }		
+		public long? AirWaybillId { get; set; }
+
+		public KeyValuePair<string, string>[] CountryName { get; set; }
+
+		public long ClientId { get; set; }
 
 		#endregion
 	}
