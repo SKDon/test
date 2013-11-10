@@ -16,11 +16,6 @@ namespace Alicargo.Services.Excel
 	public sealed class ExcelGenerator<T> : IExcelGenerator<T>
 		where T : BaseApplicationExcelRow
 	{
-		private const int DefaultRowHeight = 13;
-		private const int DefaultFontSize = 6;
-		private const int AwbRowHeight = 20;
-		private const string DefaultFontName = "Arial";
-
 		public MemoryStream Get(T[] rows, string twoLetterISOLanguageName)
 		{
 			CultureContext.Current.Set(() => twoLetterISOLanguageName);
@@ -32,8 +27,8 @@ namespace Alicargo.Services.Excel
 			using (var pck = new ExcelPackage())
 			{
 				var ws = pck.Workbook.Worksheets.Add(Pages.Applications);
-				ws.Cells.Style.Font.Name = DefaultFontName;
-				ws.Cells.Style.Font.Size = DefaultFontSize;
+				ws.Cells.Style.Font.Name = ExcelConstants.DefaultFontName;
+				ws.Cells.Style.Font.Size = ExcelConstants.DefaultFontSize;
 				
 				DrawHeader(properties, ws);
 
@@ -48,6 +43,7 @@ namespace Alicargo.Services.Excel
 			}
 
 			stream.Position = 0;
+
 			return stream;
 		}
 
@@ -74,7 +70,7 @@ namespace Alicargo.Services.Excel
 		private static void DrawAwb(string currentAwb, ExcelWorksheet ws, int iRow, int count)
 		{
 			var row = ws.Row(iRow);
-			row.Height = AwbRowHeight;
+			row.Height = ExcelConstants.AwbRowHeight;
 			row.Style.Font.Bold = true;
 
 			ws.Cells[iRow, 1].Value = currentAwb;
@@ -87,7 +83,7 @@ namespace Alicargo.Services.Excel
 
 		private static void DrawColumns(IEnumerable<PropertyInfo> properties, ExcelWorksheet ws, T row, int iRow)
 		{
-			ws.Row(iRow).Height = DefaultRowHeight;
+			ws.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
 
 			var iColumn = 1;
 			foreach (var property in properties)
@@ -118,7 +114,7 @@ namespace Alicargo.Services.Excel
 
 		private static void DrawHeader(IEnumerable<PropertyInfo> properties, ExcelWorksheet ws)
 		{
-			ws.Row(1).Height = DefaultRowHeight;
+			ws.Row(1).Height = ExcelConstants.DefaultRowHeight;
 
 			var iColumn = 1;
 			foreach (var property in properties)

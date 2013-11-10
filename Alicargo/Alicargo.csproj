@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
+    <Compile Include="Services\Excel\ExcelConstants.cs" />
     <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
     <Compile Include="Services\Excel\ExcelAdminCalculation.cs" />
     <Compile Include="T4MVC\AirWaybillController.generated.cs">
