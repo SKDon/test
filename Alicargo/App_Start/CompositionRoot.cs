@@ -5,15 +5,14 @@ using System.Linq;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services;
+using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
-using ILog = Alicargo.Core.Services.Abstract.ILog;
-using Alicargo.Core.Services.Abstract;
-using Alicargo.Services;
 
 namespace Alicargo.App_Start
 {
@@ -27,6 +26,10 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 			kernel.Bind<ISerializer>().To<Serializer>().InThreadScope();
+			kernel.Bind<IMailSender>()
+				.To<DbMailSender>()
+				.InSingletonScope()
+				.WithConstructorArgument("partitionId", CompositionJobsHelper.PartitionIdForOtherMails);
 			kernel.Bind<ILocalizationService>().To<LocalizationService>().InRequestScope();
 
 			var binded = CompositionRootHelper.BindDecorators(kernel, CompositionRootHelper.Decorators);
@@ -63,9 +66,10 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
-				.When(request => request.ParentRequest.Service == typeof(IAuthenticationRepository)
-								 || request.ParentRequest.Service == typeof(ISenderRepository)
-								 || request.ParentRequest.Service == typeof(IApplicationEventRepository)
+				.When(request => request.ParentRequest.Service == typeof (IAuthenticationRepository)
+				                 || request.ParentRequest.Service == typeof (ISenderRepository)
+				                 || request.ParentRequest.Service == typeof (IApplicationEventRepository)
+								 || request.ParentRequest.Service == typeof(IEmailMessageRepository)
 				)
 				.InSingletonScope()
 				.Named("MainDb")

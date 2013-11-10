@@ -1,11 +1,10 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 
-namespace Alicargo.Services.Email
+namespace Alicargo.Core.Services.Email
 {
-    internal sealed class SilentMailSender : IMailSender
+	public sealed class SilentMailSender : IMailSender
 	{
 		private readonly IMailSender _sender;
 		private readonly ILog _log;

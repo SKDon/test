@@ -3,9 +3,9 @@ using System.Net.Mail;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Services.Abstract;
 
-namespace Alicargo.Services.Email
+namespace Alicargo.Core.Services.Email
 {
-    internal sealed class MailSender : IMailSender
+	public sealed class MailSender : IMailSender
 	{
 		public void Send(params EmailMessage[] messages)
 		{

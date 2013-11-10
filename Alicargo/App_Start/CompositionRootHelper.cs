@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Services.Email;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
 using Alicargo.Services.Application;
@@ -56,14 +57,6 @@ namespace Alicargo.App_Start
 				{
 					typeof (ClientManager),
 					typeof (ClientManagerWithMailing)
-				}
-			},
-			{
-				typeof (IMailSender),
-				new[]
-				{
-					typeof (MailSender),
-					typeof (SilentMailSender)
 				}
 			}
 		};

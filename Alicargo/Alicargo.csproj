@@ -343,7 +343,6 @@
     <Compile Include="Services\Excel\Rows\SenderApplicationExcelRow.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateManager.cs" />
     <Compile Include="Services\Email\AwbUpdateManagerWithMailing.cs" />
-    <Compile Include="Services\Email\MailSender.cs" />
     <Compile Include="Services\Application\ApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationPresenter.cs" />
     <Compile Include="Services\Application\ApplicationGrouper.cs" />
@@ -351,7 +350,6 @@
     <Compile Include="Services\CarrierService.cs" />
     <Compile Include="Services\Users\Client\ClientManager.cs" />
     <Compile Include="Services\Email\MessageBuilder.cs" />
-    <Compile Include="Services\Email\SilentMailSender.cs" />
     <Compile Include="Services\IdentityService.cs" />
     <Compile Include="Services\AirWaybill\AwbPresenter.cs" />
     <Compile Include="Services\Log4NetWrapper.cs" />

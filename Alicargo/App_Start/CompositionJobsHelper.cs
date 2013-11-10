@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using Alicargo.Core.Services;
+using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.Jobs;
@@ -24,6 +25,7 @@ namespace Alicargo.App_Start
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
+		public const int PartitionIdForOtherMails = 2;
 
 		public static void BindJobs(IKernel kernel, string connectionString)
 		{
@@ -49,6 +51,7 @@ namespace Alicargo.App_Start
 
 			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 0), mailSenderJobJob + 0);
 			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 1), mailSenderJobJob + 1);
+			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, PartitionIdForOtherMails), mailSenderJobJob + 2);
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,

@@ -49,9 +49,9 @@ namespace Alicargo.Services.Email
 			foreach (var recipient in to)
 			{
 				var body = _messageBuilder.AwbSet(model,
-												  ApplicationHelper.GetDisplayNumber(applicationModel.Id,
-																						  applicationModel.Count),
-												  recipient.Culture, aggregate.TotalWeight, aggregate.TotalCount);
+					ApplicationHelper.GetDisplayNumber(applicationModel.Id,
+						applicationModel.Count),
+					recipient.Culture, aggregate.TotalWeight, aggregate.TotalCount);
 				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, from, recipient.Email));
 			}
 		}
