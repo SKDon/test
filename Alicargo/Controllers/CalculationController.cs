@@ -3,6 +3,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Core.Enums;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.Services.Excel;
 
 namespace Alicargo.Controllers
 {
@@ -11,17 +12,20 @@ namespace Alicargo.Controllers
 		private readonly IApplicationManager _applicationManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly ICalculationService _calculation;
+		private readonly IIdentityService _identity;
 		private readonly IAdminCalculationPresenter _presenter;
 
 		public CalculationController(
 			IAwbUpdateManager awbUpdateManager,
 			IAdminCalculationPresenter presenter,
 			ICalculationService calculation,
+			IIdentityService identity,
 			IApplicationManager applicationManager)
 		{
 			_awbUpdateManager = awbUpdateManager;
 			_presenter = presenter;
 			_calculation = calculation;
+			_identity = identity;
 			_applicationManager = applicationManager;
 		}
 
@@ -29,6 +33,18 @@ namespace Alicargo.Controllers
 		public virtual ActionResult Index()
 		{
 			return View();
+		}
+
+		[Access(RoleType.Admin)]
+		public virtual FileResult Excel()
+		{
+			var data = _presenter.List(int.MaxValue, 0);
+
+			var excel = new ExcelAdminCalculation();
+
+			var stream = excel.Get(data, _identity.TwoLetterISOLanguageName);
+
+			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "applications.xlsx");
 		}
 
 		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
@@ -127,7 +143,7 @@ namespace Alicargo.Controllers
 			var data = _presenter.Row(awbId);
 
 			return Json(data);
-		}		
+		}
 
 		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetClass(long id, long awbId, int? classId)

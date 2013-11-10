@@ -124,6 +124,7 @@ namespace Alicargo.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Excel = "Excel";
             public readonly string List = "List";
             public readonly string SetTariffPerKg = "SetTariffPerKg";
             public readonly string Calculate = "Calculate";
@@ -141,6 +142,7 @@ namespace Alicargo.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Excel = "Excel";
             public const string List = "List";
             public const string SetTariffPerKg = "SetTariffPerKg";
             public const string Calculate = "Calculate";
@@ -290,6 +292,15 @@ namespace Alicargo.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void ExcelOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
+
+        public override System.Web.Mvc.FileResult Excel()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Excel);
+            ExcelOverride(callInfo);
             return callInfo;
         }
 
