@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -10,6 +10,7 @@ namespace Alicargo.Services.Email
 {
 	internal sealed class AwbUpdateManagerWithMailing : IAwbUpdateManager
 	{
+		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"]; // todo: 2. hack
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IMailSender _mailSender;
@@ -78,33 +79,33 @@ namespace Alicargo.Services.Email
 			{
 				var body = _messageBuilder.AwbInvoiceFileAdded(model);
 				var to = _recipients.GetSenderEmails()
-									.Concat(_recipients.GetAdminEmails())
-									.Select(x => x.Email)
-									.ToArray();
+					.Concat(_recipients.GetAdminEmails())
+					.Select(x => x.Email)
+					.ToArray();
 				var file = _awbRepository.GetInvoiceFile(model.Id);
-				_mailSender.Send(new EmailMessage(subject, body, to) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, to) {Files = new[] {file}});
 			}
 
 			if (oldData.AWBFileName == null && model.AWBFileName != null)
 			{
 				var body = _messageBuilder.AwbAWBFileAdded(model);
 				var to = _recipients.GetSenderEmails()
-									.Concat(_recipients.GetAdminEmails())
-									.Select(x => x.Email)
-									.Concat(new[] { broker.Email })
-									.ToArray();
+					.Concat(_recipients.GetAdminEmails())
+					.Select(x => x.Email)
+					.Concat(new[] {broker.Email})
+					.ToArray();
 				var file = _awbRepository.GetAWBFile(model.Id);
 
-				_mailSender.Send(new EmailMessage(subject, body, to) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, to) {Files = new[] {file}});
 			}
 
 			if (oldData.PackingFileName == null && model.PackingFileName != null)
 			{
 				var body = _messageBuilder.AwbPackingFileAdded(model);
-				var to = new[] { broker.Email }.Concat(_recipients.GetAdminEmails().Select(x => x.Email)).ToArray();
+				var to = new[] {broker.Email}.Concat(_recipients.GetAdminEmails().Select(x => x.Email)).ToArray();
 				var file = _awbRepository.GetPackingFile(model.Id);
 
-				_mailSender.Send(new EmailMessage(subject, body, to) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, to) {Files = new[] {file}});
 			}
 
 			if (oldData.GTDFileName == null && model.GTDFileName != null)
@@ -113,12 +114,12 @@ namespace Alicargo.Services.Email
 				var file = _awbRepository.GetGTDFile(model.Id);
 				foreach (var client in _awbRepository.GetClientEmails(model.Id))
 				{
-					_mailSender.Send(new EmailMessage(subject, body, client) { Files = new[] { file } });
+					_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, client) {Files = new[] {file}});
 				}
-				_mailSender.Send(new EmailMessage(subject, body,
-											 _recipients.GetAdminEmails().Select(x => x.Email).ToArray())
+				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom,
+					_recipients.GetAdminEmails().Select(x => x.Email).ToArray())
 				{
-					Files = new[] { file }
+					Files = new[] {file}
 				});
 			}
 
@@ -128,12 +129,12 @@ namespace Alicargo.Services.Email
 				var file = _awbRepository.GTDAdditionalFile(model.Id);
 				foreach (var client in _awbRepository.GetClientEmails(model.Id))
 				{
-					_mailSender.Send(new EmailMessage(subject, body, client) { Files = new[] { file } });
+					_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, client) {Files = new[] {file}});
 				}
-				_mailSender.Send(new EmailMessage(subject, body,
-											 _recipients.GetAdminEmails().Select(x => x.Email).ToArray())
+				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom,
+					_recipients.GetAdminEmails().Select(x => x.Email).ToArray())
 				{
-					Files = new[] { file }
+					Files = new[] {file}
 				});
 			}
 		}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
@@ -22,6 +23,7 @@ namespace Alicargo.App_Start
 		private static readonly TimeSpan DeadTimeout = TimeSpan.FromMinutes(30);
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
+		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
 
 		public static void BindJobs(IKernel kernel, string connectionString)
 		{
@@ -76,7 +78,7 @@ namespace Alicargo.App_Start
 				var calculations = new CalculationRepository(unitOfWork);
 				var recipients = new Recipients(users);
 				var mailSender = new SilentMailSender(new MailSender(), JobsLogger);
-				var mailer = new CalculationMailer(mailSender, new CalculationMailBuilder(clients, recipients));
+				var mailer = new CalculationMailer(mailSender, new CalculationMailBuilder(clients, recipients, DefaultFrom));
 
 				var job = new CalculationMailerJob(calculations, mailer, JobsLogger);
 
@@ -88,18 +90,8 @@ namespace Alicargo.App_Start
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
-				var unitOfWork = new UnitOfWork(connection);
-				var users = new UserRepository(unitOfWork, new PasswordConverter());
 				var serializer = new Serializer();
-				var recipients = new Recipients(users);
-				var clientRepository = new ClientRepository(unitOfWork);
-				var states = new StateRepository(unitOfWork);
-				var localization = new LocalizationService(states);
-				var stateConfig = new StateConfig();
-				var applications = new ApplicationRepository(unitOfWork);
-				var awbs = new AwbRepository(unitOfWork);
-				var factory = new MessageFactory(serializer, recipients, stateConfig,
-					applications, awbs, clientRepository, localization);
+				var factory = GetMessageFactory(connection, serializer);
 				var executor = new SqlProcedureExecutor(connectionString);
 				var events = new ApplicationEventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
@@ -124,18 +116,7 @@ namespace Alicargo.App_Start
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
-				var unitOfWork = new UnitOfWork(connection);
-				var users = new UserRepository(unitOfWork, new PasswordConverter());
-				var serializer = new Serializer();
-				var recipients = new Recipients(users);
-				var clientRepository = new ClientRepository(unitOfWork);
-				var states = new StateRepository(unitOfWork);
-				var localization = new LocalizationService(states);
-				var stateConfig = new StateConfig();
-				var applications = new ApplicationRepository(unitOfWork);
-				var awbs = new AwbRepository(unitOfWork);
-				var factory = new MessageFactory(serializer, recipients, stateConfig,
-					applications, awbs, clientRepository, localization);
+				var factory = GetMessageFactory(connection, new Serializer());
 				var executor = new SqlProcedureExecutor(connectionString);
 				var messages = new EmailMessageRepository(executor);
 				var sender = new MailSender();
@@ -144,6 +125,22 @@ namespace Alicargo.App_Start
 
 				job.Run();
 			}
+		}
+
+		private static MessageFactory GetMessageFactory(IDbConnection connection, Serializer serializer)
+		{
+			var unitOfWork = new UnitOfWork(connection);
+			var users = new UserRepository(unitOfWork, new PasswordConverter());
+			var recipients = new Recipients(users);
+			var clientRepository = new ClientRepository(unitOfWork);
+			var states = new StateRepository(unitOfWork);
+			var localization = new LocalizationService(states);
+			var stateConfig = new StateConfig();
+			var applications = new ApplicationRepository(unitOfWork);
+			var awbs = new AwbRepository(unitOfWork);
+			var factory = new MessageFactory(serializer, recipients, stateConfig,
+				applications, awbs, clientRepository, localization, DefaultFrom);
+			return factory;
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System.Configuration;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -42,6 +43,8 @@ namespace Alicargo.Services.Email
 
 			var aggregate = _awbPresenter.GetAggregate(awbId.Value);
 
+			var from = ConfigurationManager.AppSettings["DefaultFrom"]; // todo: 2. hack
+
 			var to = _recipients.GetForwarderEmails();
 			foreach (var recipient in to)
 			{
@@ -49,7 +52,7 @@ namespace Alicargo.Services.Email
 												  ApplicationHelper.GetDisplayNumber(applicationModel.Id,
 																						  applicationModel.Count),
 												  recipient.Culture, aggregate.TotalWeight, aggregate.TotalCount);
-				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, recipient.Email));
+				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, from, recipient.Email));
 			}
 		}
 	}

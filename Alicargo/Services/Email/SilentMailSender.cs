@@ -1,6 +1,5 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Models;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 
@@ -30,7 +29,5 @@ namespace Alicargo.Services.Email
 				_log.Error("Failed to send a message", ex);
 			}
 		}
-
-		public string DefaultFrom { get { return _sender.DefaultFrom; } }
 	}
 }

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Models;
 using Alicargo.Services.Email;
 using Alicargo.TestHelpers;
 using Alicargo.Tests.Properties;
@@ -46,7 +45,7 @@ namespace Alicargo.Tests.Services.Email
 		public void Test_Send()
 		{
 			var files = _context.CreateMany<FileHolder>().ToArray();
-			_sender.Send(new EmailMessage("subject", "body", "to@gmail.com") { Files = files, From = "from@mail.com" });
+			_sender.Send(new EmailMessage("subject", "body", "from@mail.com", "to@gmail.com") { Files = files });
 
 			var count = Directory.EnumerateFiles(Settings.Default.MailsFolder).Count();
 			Assert.AreEqual(1, count);
@@ -61,7 +60,7 @@ namespace Alicargo.Tests.Services.Email
 			for (var index = 0; index < tasks.Length; index++)
 			{
 				tasks[index] = Task.Factory.StartNew(
-					() => _sender.Send(new EmailMessage("subject", "body", "to@gmail.com") { Files = files, From = "from@mail.com" }));
+					() => _sender.Send(new EmailMessage("subject", "body", "from@mail.com", "to@gmail.com") { Files = files }));
 			}
 
 			Task.WaitAll(tasks);

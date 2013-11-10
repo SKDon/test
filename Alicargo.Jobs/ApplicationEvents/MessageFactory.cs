@@ -20,6 +20,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 		private readonly IAwbRepository _awbs;
 		private readonly IClientRepository _clients;
 		private readonly ILocalizationService _localization;
+		private readonly string _defaultFrom;
 		private readonly IRecipients _recipients;
 		private readonly IStateConfig _stateConfig;
 		private readonly ISerializer _serializer;
@@ -31,7 +32,8 @@ namespace Alicargo.Jobs.ApplicationEvents
 			IApplicationRepository applications,
 			IAwbRepository awbs,
 			IClientRepository clients,
-			ILocalizationService localization)
+			ILocalizationService localization,
+			string defaultFrom)
 		{
 			_serializer = serializer;
 			_recipients = recipients;
@@ -40,6 +42,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 			_awbs = awbs;
 			_clients = clients;
 			_localization = localization;
+			_defaultFrom = defaultFrom;
 		}
 
 		public EmailMessage[] Get(long applicationId, ApplicationEventType type, byte[] bytes)
@@ -83,11 +86,10 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public EmailMessage Get(EmailMessageData data)
 		{
-			return new EmailMessage(data.Subject, data.Body, EmailMessageData.Split(data.To))
+			return new EmailMessage(data.Subject, data.Body, data.From, EmailMessageData.Split(data.To))
 			{
 				CopyTo = EmailMessageData.Split(data.CopyTo),
 				Files = _serializer.Deserialize<FileHolder[]>(data.Files),
-				From = data.From,
 				IsBodyHtml = data.IsBodyHtml
 			};
 		}
@@ -103,7 +105,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-			yield return new EmailMessage(subject, body, client.Email) { Files = new[] { data.File }, CopyTo = admins };
+			yield return new EmailMessage(subject, body, _defaultFrom, client.Email) { Files = new[] { data.File }, CopyTo = admins };
 		}
 
 		private IEnumerable<EmailMessage> GetOnInvoiceFileUploaded(long applicationId, byte[] bytes)
@@ -119,9 +121,9 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			var senders = _recipients.GetSenderEmails();
 
-			yield return new EmailMessage(subject, body, client.Email) { Files = new[] { data.File } };
+			yield return new EmailMessage(subject, body, _defaultFrom, client.Email) { Files = new[] { data.File } };
 
-			yield return new EmailMessage(subject, body, senders.Select(x => x.Email).ToArray()) { Files = new[] { data.File } };
+			yield return new EmailMessage(subject, body, _defaultFrom, senders.Select(x => x.Email).ToArray()) { Files = new[] { data.File } };
 		}
 
 		private IEnumerable<EmailMessage> GetOnPackingFileUploaded(long applicationId, byte[] bytes)
@@ -136,9 +138,9 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			var senders = _recipients.GetSenderEmails().Select(x => x.Email).ToArray();
 
-			yield return new EmailMessage(subject, body, client.Email) { Files = new[] { data.File } };
+			yield return new EmailMessage(subject, body, _defaultFrom, client.Email) { Files = new[] { data.File } };
 
-			yield return new EmailMessage(subject, body, senders) { Files = new[] { data.File } };
+			yield return new EmailMessage(subject, body, _defaultFrom, senders) { Files = new[] { data.File } };
 		}
 
 		private IEnumerable<EmailMessage> GetOnSwiftFileUploaded(long applicationId, byte[] bytes)
@@ -153,9 +155,9 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			var senders = _recipients.GetSenderEmails().Select(x => x.Email).ToArray();
 
-			yield return new EmailMessage(subject, body, client.Email) { Files = new[] { data.File } };
+			yield return new EmailMessage(subject, body, _defaultFrom, client.Email) { Files = new[] { data.File } };
 
-			yield return new EmailMessage(subject, body, senders) { Files = new[] { data.File } };
+			yield return new EmailMessage(subject, body, _defaultFrom, senders) { Files = new[] { data.File } };
 		}
 
 		private IEnumerable<EmailMessage> GetOnDeliveryBillFileUploaded(long applicationId, byte[] bytes)
@@ -167,7 +169,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			var body = string.Format(Mail.Application_DeliveryBillFileAdded, displayNumber, data.FactoryName, data.MarkName, data.Invoice);
 
-			yield return new EmailMessage(subject, body, client.Email) { Files = new[] { data.File } };
+			yield return new EmailMessage(subject, body, _defaultFrom, client.Email) { Files = new[] { data.File } };
 		}
 
 		private IEnumerable<EmailMessage> GetOnTorg12FileUploaded(long applicationId, byte[] bytes)
@@ -181,7 +183,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-			yield return new EmailMessage(subject, body, client.Email) { Files = new[] { data.File }, CopyTo = admins };
+			yield return new EmailMessage(subject, body, _defaultFrom, client.Email) { Files = new[] { data.File }, CopyTo = admins };
 		}
 
 		private ApplicationFileUploadedEventData GetData(
@@ -215,7 +217,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			var client = _clients.Get(application.ClientId);
 
-			yield return new EmailMessage(subject, body, client.Email);
+			yield return new EmailMessage(subject, body, _defaultFrom, client.Email);
 		}
 
 		private IEnumerable<EmailMessage> GetOnSetTransitReference(long applicationId)
@@ -288,7 +290,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 				{
 					var body = ApplicationSetState(details, recipient.Culture);
 
-					yield return new EmailMessage(subject, body, recipient.Email);
+					yield return new EmailMessage(subject, body, _defaultFrom, recipient.Email);
 				}
 			}
 			else
@@ -297,7 +299,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 				var culture = _clients.GetLanguage(details.ClientId);
 				var body = ApplicationSetState(details, culture);
 
-				yield return new EmailMessage(subject, body, details.ClientEmail) { Files = files };
+				yield return new EmailMessage(subject, body, _defaultFrom, details.ClientEmail) { Files = files };
 
 				if (details.StateId == _stateConfig.CargoAtCustomsStateId || details.StateId == _stateConfig.CargoIsCustomsClearedStateId)
 				{
@@ -306,7 +308,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 					{
 						body = ApplicationSetState(details, recipient.Culture);
 
-						yield return new EmailMessage(subject, body, recipient.Email);
+						yield return new EmailMessage(subject, body, _defaultFrom, recipient.Email);
 					}
 				}
 			}
@@ -314,7 +316,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		private FileHolder[] GeAllFiles(long? airWaybillId, long id)
 		{
-			var files = new List<FileHolder>(6);
+			var files = new List<FileHolder>(8);
 
 			var invoiceFile = _applications.GetInvoiceFile(id);
 			var deliveryBillFile = _applications.GetDeliveryBillFile(id);
@@ -365,7 +367,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 						displayNumber, client.Nic, data.FactoryName, data.MarkName,
 						_localization.GetDate(data.CreationTimestamp, recipient.Culture));
 
-					return new EmailMessage(subject, body, recipient.Email);
+					return new EmailMessage(subject, body, _defaultFrom, recipient.Email);
 				});
 		}
 		private static string GetApplicationSubject(string displayNumber)

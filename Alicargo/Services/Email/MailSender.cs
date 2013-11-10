@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.IO;
+﻿using System.IO;
 using System.Net.Mail;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Services.Abstract;
@@ -16,7 +15,7 @@ namespace Alicargo.Services.Email
 				{
 					using (var email = new MailMessage())
 					{
-						email.From = new MailAddress(message.From ?? DefaultFrom);
+						email.From = new MailAddress(message.From);
 						foreach (var to in message.To)
 						{
 							email.To.Add(to);
@@ -46,15 +45,6 @@ namespace Alicargo.Services.Email
 						smtpClient.Send(email);
 					}
 				}
-			}
-		}
-
-		// todo: 3. don't like that the property is defined by an app setting
-		public string DefaultFrom
-		{
-			get
-			{
-				return ConfigurationManager.AppSettings["DefaultFrom"];
 			}
 		}
 	}

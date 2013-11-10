@@ -9,12 +9,12 @@ namespace Alicargo.Contracts.Contracts
 
 		public static string[] Split(string to)
 		{
-			return to.Split(new[] { EmailSeparator }, StringSplitOptions.RemoveEmptyEntries);
+			return to == null ? null : to.Split(new[] { EmailSeparator }, StringSplitOptions.RemoveEmptyEntries);
 		}
 
 		public static string Join(IEnumerable<string> to)
 		{
-			return string.Join(EmailSeparator, to);
+			return to == null ? null : string.Join(EmailSeparator, to);
 		}
 
 		public long Id { get; set; }

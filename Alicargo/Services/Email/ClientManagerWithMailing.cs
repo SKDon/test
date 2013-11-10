@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -13,6 +14,8 @@ namespace Alicargo.Services.Email
 		private readonly IRecipients _recipients;
 		private readonly IClientManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
+
+		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"]; // todo: 2. hack
 
 		public ClientManagerWithMailing(
 			IRecipients recipients,
@@ -45,7 +48,7 @@ namespace Alicargo.Services.Email
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
 			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, model.Email) { CopyTo = admins });
+			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, DefaultFrom, model.Email) { CopyTo = admins });
 		}
 	}
 }
