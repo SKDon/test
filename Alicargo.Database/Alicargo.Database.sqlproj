@@ -114,6 +114,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
-    <None Include="Scripts\Update backup to master.sql" />
   </ItemGroup>
 </Project>

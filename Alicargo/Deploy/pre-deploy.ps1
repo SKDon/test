@@ -13,7 +13,7 @@ git checkout $branch
 
 remove-item "$publishUrl\*" -exclude ".git" -recurse
 
-& $msbuild $proj /t:WebPublish /p:Configuration=$Configuration /p:VisualStudioVersion=11.0 /p:WebPublishMethod=FileSystem /p:publishUrl=$publishUrl /verbosity:m
+& $msbuild $proj /t:WebPublish /p:Configuration=$Configuration /p:VisualStudioVersion=12.0 /p:WebPublishMethod=FileSystem /p:publishUrl=$publishUrl /verbosity:m
 
 $date = Get-Date
 
