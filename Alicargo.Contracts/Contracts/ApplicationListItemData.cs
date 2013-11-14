@@ -112,6 +112,8 @@ namespace Alicargo.Contracts.Contracts
 
 		public decimal? TransitCost { get; set; }
 
+		public decimal? ForwarderTransitCost { get; set; }
+
 		public decimal? PickupCost { get; set; }
 
 		public decimal? SenderPickupCost { get; set; }

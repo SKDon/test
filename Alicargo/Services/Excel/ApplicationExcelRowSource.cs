@@ -4,6 +4,7 @@ using System.Web;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel.Rows;
 using Alicargo.ViewModels.Application;
@@ -15,24 +16,27 @@ namespace Alicargo.Services.Excel
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
+		private readonly IStateConfig _stateConfig;
 		private readonly IApplicationListItemMapper _itemMapper;
 		private readonly IStateService _stateService;
 
 		public ApplicationExcelRowSource(
 			IApplicationRepository applications,
 			IAwbRepository awbs,
+			IStateConfig stateConfig,
 			IStateService stateService,
 			IApplicationListItemMapper itemMapper)
 		{
 			_applications = applications;
 			_awbs = awbs;
+			_stateConfig = stateConfig;
 			_stateService = stateService;
 			_itemMapper = itemMapper;
 		}
 
 		public AdminApplicationExcelRow[] GetAdminApplicationExcelRow()
 		{
-			var items = GetApplicationListItems();
+			var items = GetApplicationListItems(false);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
@@ -41,7 +45,7 @@ namespace Alicargo.Services.Excel
 
 		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow()
 		{
-			var items = GetApplicationListItems();
+			var items = GetApplicationListItems(true);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
@@ -50,7 +54,7 @@ namespace Alicargo.Services.Excel
 
 		public SenderApplicationExcelRow[] GetSenderApplicationExcelRow()
 		{
-			var items = GetApplicationListItems();
+			var items = GetApplicationListItems(false);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
@@ -64,16 +68,20 @@ namespace Alicargo.Services.Excel
 					   .FirstOrDefault();
 		}
 
-		private ApplicationListItem[] GetApplicationListItems()
+		private ApplicationListItem[] GetApplicationListItems(bool isForwarder)
 		{
 			var stateIds = _stateService.GetVisibleStates();
+
+			var cargoReceivedStateId = isForwarder
+				? _stateConfig.CargoReceivedStateId
+				: (long?)null;
 
 			var data = _applications.List(stateIds, new[]
 			{
 			    new Order {Desc = true, OrderType = OrderType.AirWaybill},
 			    new Order {Desc = false, OrderType = OrderType.ClientNic},
 			    new Order {Desc = true, OrderType = OrderType.Id}
-			});
+			}, cargoReceivedStateId: cargoReceivedStateId, cargoReceivedDaysToShow: _stateConfig.CargoReceivedDaysToShow);
 
 			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
 

@@ -147,8 +147,8 @@
 						}
 
 						if (!canEdit) {
-							if (e.model.CanSetTransitCost && ($r.IsForwarder || $r.IsAdmin)) {
-								canEdit = e.container.find("input[name='TransitCost']").length != 0;
+							if (e.model.CanSetTransitCost && $r.IsForwarder) {
+								canEdit = e.container.find("input[name='ForwarderTransitCost']").length != 0;
 							}
 						}
 
@@ -162,10 +162,10 @@
 
 					},
 					save: function(e) {
-						if ($r.IsForwarder && e.values.TransitCost !== undefined) {
+						if ($r.IsForwarder && e.values.ForwarderTransitCost !== undefined) {
 							post($u.ApplicationUpdate_SetTransitCost, {
 								id: e.model.Id,
-								transitCost: e.values.TransitCost
+								transitCost: e.values.ForwarderTransitCost
 							});
 						}
 						if (($r.IsForwarder || $r.IsAdmin) && e.values.TransitReference !== undefined) {

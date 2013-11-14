@@ -1,5 +1,6 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
@@ -15,6 +16,7 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IStateConfig _stateConfig;
+		private readonly IIdentityService _identity;
 		private readonly IStateService _stateService;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
@@ -23,6 +25,7 @@ namespace Alicargo.Services.Application
 			IApplicationRepository applications,
 			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig stateConfig,
+			IIdentityService identity,
 			ITransitService transitService,
 			IUnitOfWork unitOfWork,
 			IStateService stateService)
@@ -30,6 +33,7 @@ namespace Alicargo.Services.Application
 			_applications = applications;
 			_applicationUpdater = applicationUpdater;
 			_stateConfig = stateConfig;
+			_identity = identity;
 			_transitService = transitService;
 			_unitOfWork = unitOfWork;
 			_stateService = stateService;
@@ -104,6 +108,18 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
+		public void SetTransitCostEdited(long id, decimal? transitCost)
+		{
+			if (!_identity.IsInRole(RoleType.Admin))
+			{
+				throw new AccessForbiddenException("Edited value can be defined only be admin");
+			}
+
+			_applicationUpdater.SetTransitCostEdited(id, transitCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
 		public void SetTariffPerKg(long id, decimal? tariffPerKg)
 		{
 			_applicationUpdater.SetTariffPerKg(id, tariffPerKg);
@@ -113,6 +129,11 @@ namespace Alicargo.Services.Application
 
 		public void SetPickupCostEdited(long id, decimal? pickupCost)
 		{
+			if (!_identity.IsInRole(RoleType.Admin))
+			{
+				throw new AccessForbiddenException("Edited value can be defined only be admin");
+			}
+
 			_applicationUpdater.SetPickupCostEdited(id, pickupCost);
 
 			_unitOfWork.SaveChanges();
@@ -120,6 +141,11 @@ namespace Alicargo.Services.Application
 
 		public void SetFactureCostEdited(long id, decimal? factureCost)
 		{
+			if (!_identity.IsInRole(RoleType.Admin))
+			{
+				throw new AccessForbiddenException("Edited value can be defined only be admin");
+			}
+
 			_applicationUpdater.SetFactureCostEdited(id, factureCost);
 
 			_unitOfWork.SaveChanges();
@@ -127,6 +153,11 @@ namespace Alicargo.Services.Application
 
 		public void SetScotchCostEdited(long id, decimal? scotchCost)
 		{
+			if (!_identity.IsInRole(RoleType.Admin))
+			{
+				throw new AccessForbiddenException("Edited value can be defined only be admin");
+			}
+
 			_applicationUpdater.SetScotchCostEdited(id, scotchCost);
 
 			_unitOfWork.SaveChanges();
@@ -142,13 +173,6 @@ namespace Alicargo.Services.Application
 		public void SetClass(long id, ClassType? classType)
 		{
 			_applicationUpdater.SetClass(id, (int?)classType);
-
-			_unitOfWork.SaveChanges();
-		}
-
-		public void SetTransitCostEdited(long id, decimal? transitCost)
-		{
-			_applicationUpdater.SetTransitCostEdited(id, transitCost);
 
 			_unitOfWork.SaveChanges();
 		}

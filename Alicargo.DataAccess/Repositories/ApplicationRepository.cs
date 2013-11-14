@@ -146,6 +146,7 @@ namespace Alicargo.DataAccess.Repositories
 				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCostEdited ?? x.TransitCost,
+				ForwarderTransitCost = x.TransitCost,
 				PickupCost = x.PickupCostEdited ?? x.PickupCost,
 				SenderPickupCost = x.PickupCost,
 				SenderRate = x.SenderRate,

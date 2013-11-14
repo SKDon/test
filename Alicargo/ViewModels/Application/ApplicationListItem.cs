@@ -177,6 +177,8 @@ namespace Alicargo.ViewModels.Application
 
 		public decimal? TransitCost { get; set; }
 
+		public decimal? ForwarderTransitCost { get; set; }
+
 		public decimal? PickupCost { get; set; }
 
 		#endregion
@@ -189,6 +191,6 @@ namespace Alicargo.ViewModels.Application
 
 		public bool CanSetState { get; set; }
 
-		public bool CanSetTransitCost { get; set; }
+		public bool CanSetTransitCost { get; set; }		
 	}
 }

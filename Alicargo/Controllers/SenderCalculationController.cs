@@ -46,7 +46,7 @@ namespace Alicargo.Controllers
 
 			var stream = excel.Get(data, _identity.TwoLetterISOLanguageName);
 
-			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "applications.xlsx");
+			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "calculation.xlsx");
 		}
 
 		[Access(RoleType.Sender), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
