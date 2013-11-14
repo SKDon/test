@@ -95,6 +95,7 @@ namespace Alicargo.Services.Application
 				SenderScotchCost = x.SenderScotchCost,
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,
+				ForwarderTransitCost = x.ForwarderTransitCost,
 				CanSetTransitCost = !calculations.ContainsKey(x.Id)
 			}).ToArray();
 		}

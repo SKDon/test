@@ -104,7 +104,7 @@ namespace Alicargo.Services.Excel.Rows
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost
 		{
-			get { return _application.TransitCost; }
+			get { return _application.ForwarderTransitCost; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "AirWaybill")]
