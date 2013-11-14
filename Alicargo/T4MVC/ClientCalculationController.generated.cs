@@ -65,6 +65,7 @@ namespace Alicargo.Controllers
         {
             public readonly string Index = "Index";
             public readonly string List = "List";
+            public readonly string Excel = "Excel";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -72,6 +73,7 @@ namespace Alicargo.Controllers
         {
             public const string Index = "Index";
             public const string List = "List";
+            public const string Excel = "Excel";
         }
 
 
@@ -122,6 +124,15 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "take", take);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skip", skip);
             ListOverride(callInfo, take, skip);
+            return callInfo;
+        }
+
+        partial void ExcelOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
+
+        public override System.Web.Mvc.FileResult Excel()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Excel);
+            ExcelOverride(callInfo);
             return callInfo;
         }
 

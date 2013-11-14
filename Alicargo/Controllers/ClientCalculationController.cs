@@ -4,6 +4,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.Services.Excel;
 
 namespace Alicargo.Controllers
 {
@@ -38,5 +39,20 @@ namespace Alicargo.Controllers
 			return Json(data);
 		}
 
+		[Access(RoleType.Client)]
+		public virtual FileResult Excel()
+		{
+			Debug.Assert(_identity.Id != null);
+
+			var client = _clients.GetByUserId(_identity.Id.Value);
+
+			var data = _presenter.List(client.Id, int.MaxValue, 0);
+
+			var excel = new ExcelClientCalculation();
+
+			var stream = excel.Get(data, _identity.TwoLetterISOLanguageName);
+
+			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "calculation.xlsx");
+		}
     }
 }
