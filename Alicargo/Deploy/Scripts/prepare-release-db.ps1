@@ -9,6 +9,7 @@
 
 	[string] $oldVersion = (Read-Host -Prompt "Input old version"),
 	[string] $newVersion = (Read-Host -Prompt "Input new version"),
+
     [string] $poolName = (Read-Host -Prompt "Enter a pool name")
 )
 

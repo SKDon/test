@@ -17,10 +17,10 @@
 
 clear
 
-#git clone http://git.alicargo.ru/Deploy.git $newFolder -b $branch
+git clone http://git.alicargo.ru/Deploy.git $newFolder -b $branch
 Write-Host "Repository has been cloned..."
 
-cd "$newFolder\Deploy\"
+cd "$newFolder`Deploy\"
 
 .\Scripts\prepare-release-db.ps1 $server $backupLocation $mainDbPrefix $filesDbPrefix $dataFolder $oldVersion $newVersion $poolName
 
