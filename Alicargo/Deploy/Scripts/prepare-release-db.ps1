@@ -8,7 +8,8 @@
     [string] $dataFolder = (Read-Host -Prompt "Folder to store databases"),
 
 	[string] $oldVersion = (Read-Host -Prompt "Input old version"),
-	[string] $newVersion = (Read-Host -Prompt "Input new version")
+	[string] $newVersion = (Read-Host -Prompt "Input new version"),
+    [string] $poolName = (Read-Host -Prompt "Enter a pool name")
 )
 
 .\Scripts\backup-db.ps1 $server $backupLocation "$mainDbPrefix`_$oldVersion"
@@ -21,3 +22,7 @@ $filesDbBackup = Get-ChildItem "$filesDbPrefix`_$oldVersion*.bak" -Path $backupL
 Sqlcmd -S $server -Q "EXEC [dbo].[sp_RestoreDatabase] '$mainDbPrefix`_$newVersion', '$mainDbPrefix`_$oldVersion', '$backupLocation$mainDbBackup', '$dataFolder'"
 Sqlcmd -S $server -Q "EXEC [dbo].[sp_RestoreDatabase] '$filesDbPrefix`_$newVersion', '$filesDbPrefix`_$oldVersion', '$backupLocation$filesDbBackup', '$dataFolder'"
 Write-Host "DBs have been created..."
+
+Sqlcmd -S $server -i ".\Scripts\update.sql"
+Sqlcmd -S $server -i ".\Scripts\setup-rights.sql" -v PoolName = "$poolName" MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
+Write-Host "DBs have been updated..."

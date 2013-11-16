@@ -11,7 +11,8 @@
 	[string] $newVersion = (Read-Host -Prompt "Input new version"),
 
 	[string] $newFolder = (Read-Host -Prompt "Enter folder path for new site"),
-	[string] $branch = (Read-Host -Prompt "Enter a branch")
+	[string] $branch = (Read-Host -Prompt "Enter a branch"),
+    [string] $poolName = (Read-Host -Prompt "Enter a pool name")
 )
 
 clear
@@ -21,6 +22,6 @@ Write-Host "Repository has been cloned..."
 
 cd "$newFolder\Deploy\"
 
-.\Scripts\prepare-release-db.ps1 $server $backupLocation $mainDbPrefix $filesDbPrefix $dataFolder $oldVersion $newVersion
+.\Scripts\prepare-release-db.ps1 $server $backupLocation $mainDbPrefix $filesDbPrefix $dataFolder $oldVersion $newVersion $poolName
 
 .\server-update.ps1
