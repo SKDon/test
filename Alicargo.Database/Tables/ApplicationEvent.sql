@@ -14,6 +14,3 @@
     CONSTRAINT [FK_dbo.ApplicationEvent_dbo.Application] FOREIGN KEY ([ApplicationId]) REFERENCES [Application]([Id])
 )
 GO
-
-CREATE INDEX [IX_ApplicationEvent_StateId] ON [dbo].[ApplicationEvent] ([StateId])
-GO

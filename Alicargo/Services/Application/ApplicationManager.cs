@@ -82,6 +82,8 @@ namespace Alicargo.Services.Application
 
 		public void SetTransitReference(long id, string transitReference)
 		{
+			SetState(id, _stateConfig.CargoOnTransitStateId);
+
 			_applicationUpdater.SetTransitReference(id, transitReference);
 
 			_unitOfWork.SaveChanges();

@@ -150,6 +150,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="Services\Excel\ExcelClientCalculation.cs" />
     <Compile Include="Services\Excel\ExcelConstants.cs" />
@@ -219,6 +220,9 @@
     <Compile Include="Services\Excel\Rows\BaseApplicationExcelRow.cs" />
     <Compile Include="Services\Users\SenderService.cs" />
     <Compile Include="T4MVC\SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\StateController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\T4MVC.cs">

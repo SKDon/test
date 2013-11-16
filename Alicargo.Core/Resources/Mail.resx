@@ -210,6 +210,11 @@ AWB: {29}
 Дата прилета: {31}
 Номер ГТД: {32}</value>
   </data>
+  <data name="Application_SetTransitReference" xml:space="preserve">
+    <value>Изменение статуса заявки: {0}, {1}, {2}, {3}. Задан транзитный референс {4}
+
+Changing the status of the application: {0}, {1}, {2}, {3}. Specified transit reference {4}</value>
+  </data>
   <data name="Application_Subject" xml:space="preserve">
     <value>Alicargo: Заявка/Order #{0}</value>
   </data>

@@ -167,7 +167,8 @@ namespace Alicargo.Jobs.ApplicationEvents
 			string subject;
 			var data = GetData(applicationId, bytes, out client, out displayNumber, out subject);
 
-			var body = string.Format(Mail.Application_DeliveryBillFileAdded, displayNumber, data.FactoryName, data.MarkName, data.Invoice);
+			var body = string.Format(Mail.Application_DeliveryBillFileAdded,
+				displayNumber, data.FactoryName, data.MarkName, data.Invoice);
 
 			yield return new EmailMessage(subject, body, _defaultFrom, client.Email) { Files = new[] { data.File } };
 		}
@@ -222,7 +223,16 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		private IEnumerable<EmailMessage> GetOnSetTransitReference(long applicationId)
 		{
-			return SendOnSetState(_applications.GetDetails(applicationId));
+			var details = _applications.GetDetails(applicationId);
+
+			var displayNumber = ApplicationHelper.GetDisplayNumber(details.Id, details.Count);
+
+			var subject = GetApplicationSubject(displayNumber);
+
+			var body = string.Format(Mail.Application_SetTransitReference,
+				displayNumber, details.FactoryName, details.MarkName, details.Invoice, details.TransitReference);
+
+			yield return new EmailMessage(subject, body, _defaultFrom, details.ClientEmail);
 		}
 
 		private IEnumerable<EmailMessage> GetOnSetState(long applicationId, byte[] bytes)

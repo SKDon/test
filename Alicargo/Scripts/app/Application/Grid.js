@@ -30,7 +30,6 @@
 						"State": { editable: true },
 						"ClientNic": { type: "string", editable: false },
 						"ClientLegalEntity": { type: "string", editable: false }
-
 					}
 				},
 				data: "Data",
@@ -169,10 +168,10 @@
 							});
 						}
 						if (($r.IsForwarder || $r.IsAdmin) && e.values.TransitReference !== undefined) {
-							post($u.ApplicationUpdate_SetTransitReference, {
+							$.post($u.ApplicationUpdate_SetTransitReference, {
 								id: e.model.Id,
 								TransitReference: e.values.TransitReference
-							});
+							}).done($apl.UpdateGrid).fail($a.ShowError);
 						}
 						if ($r.IsAdmin && e.values.DateOfCargoReceiptLocalString !== undefined) {
 							post($u.ApplicationUpdate_SetDateOfCargoReceipt, {

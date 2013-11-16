@@ -188,6 +188,17 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Изменение статуса заявки: {0}, {1}, {2}, {3}. Задан транзитный референс {4}
+        ///
+        ///Changing the status of the application: {0}, {1}, {2}, {3}. Specified transit reference {4}.
+        /// </summary>
+        public static string Application_SetTransitReference {
+            get {
+                return ResourceManager.GetString("Application_SetTransitReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alicargo: Заявка/Order #{0}.
         /// </summary>
         public static string Application_Subject {

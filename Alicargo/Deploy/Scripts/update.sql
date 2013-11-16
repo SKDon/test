@@ -34,3 +34,6 @@ GO
 
 PRINT N'[sp_RestoreDatabase] updated...'
 GO
+
+DROP INDEX [IX_ApplicationEvent_StateId]
+GO
