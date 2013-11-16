@@ -667,10 +667,10 @@
     <Content Include="App_Code\Helpers.cshtml" />
     <Content Include="Deploy\Scripts\backup-db.ps1" />
     <Content Include="Deploy\pre-deploy.ps1" />
-    <Content Include="Deploy\server-update.ps1" />
     <Content Include="Deploy\server-release.ps1" />
     <Content Include="Deploy\Scripts\prepare-release-db.ps1" />
     <Content Include="Deploy\server-release-dev.ps1" />
+    <None Include="Deploy\Scripts\prepare-iis.ps1" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />

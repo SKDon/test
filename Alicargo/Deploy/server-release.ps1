@@ -24,4 +24,4 @@ cd "$newFolder`Deploy\"
 
 .\Scripts\prepare-release-db.ps1 $server $backupLocation $mainDbPrefix $filesDbPrefix $dataFolder $oldVersion $newVersion $poolName
 
-.\server-update.ps1
+#.\Scripts\prepare-iis.ps1
