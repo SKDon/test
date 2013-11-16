@@ -4,15 +4,17 @@
 )
 
 $msbuild = $env:systemroot + "\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe"
-$sourcePath = "A:\Projects\Alicargo\Alicargo\Alicargo.csproj"
-$proj = "($sourcePath)Alicargo.csproj"
-$publishUrl = "A:\Projects\Alicargo.Release\"
+$sourcePath = "A:\Projects\Alicargo\Alicargo"
+$proj = "$sourcePath\Alicargo.csproj"
+$publishUrl = "A:\Projects\Alicargo.Release"
+
+clear
 
 cd $publishUrl
 
 git checkout --force -B $branch
 
-git pull --rebase
+#git pull --rebase
 
 remove-item "$publishUrl\*" -exclude ".git" -recurse
 
@@ -20,8 +22,10 @@ remove-item "$publishUrl\*" -exclude ".git" -recurse
 
 $date = Get-Date
 
-#git commit --all -m "Deploy at $date" --quiet
+git add --all --quiet
 
-#git push push --recurse-submodules=check --progress "Alicargo.Deploy" Dev:Dev --quiet
+git commit --all -m "Deploy at $date" --quiet
 
-cd $publishUrl
+git push -f --all --quiet
+
+cd "$sourcePath\Deploy"

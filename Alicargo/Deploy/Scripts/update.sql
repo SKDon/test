@@ -29,8 +29,6 @@ BEGIN
 
 	EXEC(@sqlRestoreDb)
 
-	PRINT @newDb + N' have been restored.'
-
 END
 GO
 
