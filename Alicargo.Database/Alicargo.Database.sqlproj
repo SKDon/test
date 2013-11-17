@@ -114,6 +114,7 @@
     <Build Include="Tables\EmailTemplate.sql" />
     <Build Include="Tables\StateEmailTemplate.sql" />
     <Build Include="Tables\EmailTemplateLocalization.sql" />
+    <Build Include="Tables\StateEmailRecipient.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
