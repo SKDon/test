@@ -229,7 +229,6 @@ namespace Alicargo.DataAccess.Repositories
 				}).FirstOrDefault();
 		}
 
-
 		public long GetClientId(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();

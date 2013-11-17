@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Carrier] (
     [Id]   BIGINT         IDENTITY (1, 1) NOT NULL,
     [Name] NVARCHAR (320) NOT NULL,
+
     CONSTRAINT [PK_dbo.Carrier] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

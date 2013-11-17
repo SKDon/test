@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[StateLocalization] (
 	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
 	[Name] NVARCHAR (MAX) NOT NULL,
-	[TwoLetterISOLanguageName] CHAR(2) NOT NULL DEFAULT 'ru',
+	[TwoLetterISOLanguageName] CHAR(2) NOT NULL,
 	[StateId] BIGINT NOT NULL,
 
 	CONSTRAINT [PK_dbo.StateLocalization] PRIMARY KEY CLUSTERED ([Id] ASC),
