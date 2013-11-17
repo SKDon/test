@@ -52,12 +52,12 @@ namespace Alicargo.Jobs.Tests
 
 		private void SetupGetFiles()
 		{
-			_container.ApplicationRepository.Setup(x => x.GetInvoiceFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-			_container.ApplicationRepository.Setup(x => x.GetDeliveryBillFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-			_container.ApplicationRepository.Setup(x => x.GetCPFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-			_container.ApplicationRepository.Setup(x => x.GetPackingFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-			_container.ApplicationRepository.Setup(x => x.GetSwiftFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-			_container.ApplicationRepository.Setup(x => x.GetTorg12File(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
+			_container.ApplicationFileRepository.Setup(x => x.GetInvoiceFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
+			_container.ApplicationFileRepository.Setup(x => x.GetDeliveryBillFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
+			_container.ApplicationFileRepository.Setup(x => x.GetCPFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
+			_container.ApplicationFileRepository.Setup(x => x.GetPackingFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
+			_container.ApplicationFileRepository.Setup(x => x.GetSwiftFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
+			_container.ApplicationFileRepository.Setup(x => x.GetTorg12File(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 			_container.AirWaybillRepository.Setup(x => x.GTDAdditionalFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 			_container.AirWaybillRepository.Setup(x => x.GetGTDFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 

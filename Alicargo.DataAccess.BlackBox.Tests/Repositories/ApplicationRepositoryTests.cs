@@ -13,7 +13,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	[TestClass]
 	public class ApplicationRepositoryTests
 	{
-		private IApplicationRepository _applicationRepository;
+		private IApplicationRepository _applications;
+		private IApplicationFileRepository _files;
 		private IStateRepository _stateRepository;
 		private DbTestContext _context;
 		private ApplicationUpdateRepository _applicationUpater;
@@ -23,7 +24,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			_context = new DbTestContext();
 
-			_applicationRepository = new ApplicationRepository(_context.UnitOfWork);
+			_applications = new ApplicationRepository(_context.UnitOfWork);
+			_files = new ApplicationFileRepository(_context.UnitOfWork);
 			_stateRepository = new StateRepository(_context.UnitOfWork);
 			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
 		}
@@ -39,7 +41,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var expected = CreateTestApplication();
 
-			var actual = _applicationRepository.Get(expected.Id);
+			var actual = _applications.Get(expected.Id);
 
 			Assert.IsNotNull(actual);
 
@@ -51,7 +53,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var expected = CreateTestApplication();
 
-			var actual = _applicationRepository.GetDetails(expected.Id);
+			var actual = _applications.GetDetails(expected.Id);
 
 			Assert.IsNotNull(actual);
 
@@ -62,11 +64,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_ApplicationRepository_Count()
 		{
 			var defaultState = _stateRepository.Get(TestConstants.DefaultStateId);
-			var count = _applicationRepository.Count(new[] { defaultState.Id });
+			var count = _applications.Count(new[] { defaultState.Id });
 
 			CreateTestApplication();
 
-			var newCount = _applicationRepository.Count(new[] { defaultState.Id });
+			var newCount = _applications.Count(new[] { defaultState.Id });
 
 			Assert.AreEqual(newCount, count + 1);
 		}
@@ -80,7 +82,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_applicationUpater.SetState(application.Id, state.Id);
 			_context.UnitOfWork.SaveChanges();
 
-			var actual = _applicationRepository.Get(application.Id);
+			var actual = _applications.Get(application.Id);
 
 			Assert.AreEqual(state.Id, actual.StateId);
 		}
@@ -110,14 +112,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_applicationUpater.Update(newData, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile);
 			_context.UnitOfWork.SaveChanges();
 
-			var data = _applicationRepository.Get(old.Id);
+			var data = _applications.Get(old.Id);
 
-			_applicationRepository.GetInvoiceFile(data.Id).Data.ShouldBeEquivalentTo(invoiceFile);
-			_applicationRepository.GetSwiftFile(data.Id).Data.ShouldBeEquivalentTo(swiftFile);
-			_applicationRepository.GetCPFile(data.Id).Data.ShouldBeEquivalentTo(cpFile);
-			_applicationRepository.GetDeliveryBillFile(data.Id).Data.ShouldBeEquivalentTo(deliveryBillFile);
-			_applicationRepository.GetTorg12File(data.Id).Data.ShouldBeEquivalentTo(torg12File);
-			_applicationRepository.GetPackingFile(data.Id).Data.ShouldBeEquivalentTo(packingFile);
+			_files.GetInvoiceFile(data.Id).Data.ShouldBeEquivalentTo(invoiceFile);
+			_files.GetSwiftFile(data.Id).Data.ShouldBeEquivalentTo(swiftFile);
+			_files.GetCPFile(data.Id).Data.ShouldBeEquivalentTo(cpFile);
+			_files.GetDeliveryBillFile(data.Id).Data.ShouldBeEquivalentTo(deliveryBillFile);
+			_files.GetTorg12File(data.Id).Data.ShouldBeEquivalentTo(torg12File);
+			_files.GetPackingFile(data.Id).Data.ShouldBeEquivalentTo(packingFile);
 			data.ShouldBeEquivalentTo(newData);
 		}
 

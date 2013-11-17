@@ -72,6 +72,7 @@ namespace Alicargo.TestHelpers
 			MailSender = Inject<IMailSender>();
 			MessageBuilder = Inject<IMessageBuilder>();
 			Recipients = Inject<IRecipients>();
+			ApplicationFileRepository = Inject<IApplicationFileRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -79,6 +80,7 @@ namespace Alicargo.TestHelpers
 		public Fixture Fixture { get; private set; }
 
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
+		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }
 		public Mock<ISerializer> Serializer { get; private set; }
 		public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
 		public Mock<IApplicationManager> ApplicationManager { get; private set; }

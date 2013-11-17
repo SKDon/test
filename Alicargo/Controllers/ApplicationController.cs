@@ -16,6 +16,7 @@ namespace Alicargo.Controllers
 	public partial class ApplicationController : Controller
 	{
 		private readonly IApplicationManager _applicationManager;
+		private readonly IApplicationFileRepository _files;
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IClientPresenter _clientPresenter;
 		private readonly IApplicationRepository _applicationRepository;
@@ -23,11 +24,13 @@ namespace Alicargo.Controllers
 
 		public ApplicationController(
 			IApplicationManager applicationManager,
+			IApplicationFileRepository files,
 			IApplicationPresenter applicationPresenter,
 			IClientPresenter clientPresenter,
 			IApplicationRepository applicationRepository, IUserRepository users)
 		{
 			_applicationManager = applicationManager;
+			_files = files;
 			_applicationPresenter = applicationPresenter;
 			_clientPresenter = clientPresenter;
 			_applicationRepository = applicationRepository;
@@ -46,42 +49,42 @@ namespace Alicargo.Controllers
 
 		public virtual FileResult InvoiceFile(long id)
 		{
-			var file = _applicationRepository.GetInvoiceFile(id);
+			var file = _files.GetInvoiceFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult DeliveryBillFile(long id)
 		{
-			var file = _applicationRepository.GetDeliveryBillFile(id);
+			var file = _files.GetDeliveryBillFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult CPFile(long id)
 		{
-			var file = _applicationRepository.GetCPFile(id);
+			var file = _files.GetCPFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult SwiftFile(long id)
 		{
-			var file = _applicationRepository.GetSwiftFile(id);
+			var file = _files.GetSwiftFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult Torg12File(long id)
 		{
-			var file = _applicationRepository.GetTorg12File(id);
+			var file = _files.GetTorg12File(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult PackingFile(long id)
 		{
-			var file = _applicationRepository.GetPackingFile(id);
+			var file = _files.GetPackingFile(id);
 
 			return file.GetFileResult();
 		}

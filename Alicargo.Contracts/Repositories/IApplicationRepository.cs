@@ -15,12 +15,6 @@ namespace Alicargo.Contracts.Repositories
 		long Count(long[] stateIds, long? clientId = null, long? senderId = null, bool? hasCalculation = null,
 			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null);
         long GetClientId(long id);
-        FileHolder GetInvoiceFile(long id);
-        FileHolder GetSwiftFile(long id);
-        FileHolder GetCPFile(long id);
-        FileHolder GetDeliveryBillFile(long id);
-        FileHolder GetTorg12File(long id);
-        FileHolder GetPackingFile(long id);
         IReadOnlyDictionary<long, long> GetCalculations(long[] appIds);
     }
 }

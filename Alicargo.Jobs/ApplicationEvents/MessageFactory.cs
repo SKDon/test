@@ -24,9 +24,11 @@ namespace Alicargo.Jobs.ApplicationEvents
 		private readonly IRecipients _recipients;
 		private readonly IStateConfig _stateConfig;
 		private readonly ISerializer _serializer;
+		private readonly IApplicationFileRepository _files;
 
 		public MessageFactory(
 			ISerializer serializer,
+			IApplicationFileRepository files,
 			IRecipients recipients,
 			IStateConfig stateConfig,
 			IApplicationRepository applications,
@@ -36,6 +38,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 			string defaultFrom)
 		{
 			_serializer = serializer;
+			_files = files;
 			_recipients = recipients;
 			_stateConfig = stateConfig;
 			_applications = applications;
@@ -328,12 +331,12 @@ namespace Alicargo.Jobs.ApplicationEvents
 		{
 			var files = new List<FileHolder>(8);
 
-			var invoiceFile = _applications.GetInvoiceFile(id);
-			var deliveryBillFile = _applications.GetDeliveryBillFile(id);
-			var cpFile = _applications.GetCPFile(id);
-			var packingFile = _applications.GetPackingFile(id);
-			var swiftFile = _applications.GetSwiftFile(id);
-			var torg12File = _applications.GetTorg12File(id);
+			var invoiceFile = _files.GetInvoiceFile(id);
+			var deliveryBillFile = _files.GetDeliveryBillFile(id);
+			var cpFile = _files.GetCPFile(id);
+			var packingFile = _files.GetPackingFile(id);
+			var swiftFile = _files.GetSwiftFile(id);
+			var torg12File = _files.GetTorg12File(id);
 
 			if (airWaybillId.HasValue)
 			{

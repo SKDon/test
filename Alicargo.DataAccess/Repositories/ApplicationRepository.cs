@@ -233,69 +233,7 @@ namespace Alicargo.DataAccess.Repositories
 		public long GetClientId(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();
-		}
-
-		#region Files
-
-		public FileHolder GetInvoiceFile(long id)
-		{
-			return GetFile(x => x.Id == id && x.InvoiceFileName != null && x.InvoiceFileData != null,
-				application => new FileHolder
-				{
-					Name = application.InvoiceFileName,
-					Data = application.InvoiceFileData.ToArray()
-				});
-		}
-
-		public FileHolder GetSwiftFile(long id)
-		{
-			return GetFile(x => x.Id == id && x.SwiftFileName != null && x.SwiftFileData != null,
-				application => new FileHolder
-				{
-					Name = application.SwiftFileName,
-					Data = application.SwiftFileData.ToArray()
-				});
-		}
-
-		public FileHolder GetCPFile(long id)
-		{
-			return GetFile(x => x.Id == id && x.CPFileName != null && x.CPFileData != null,
-				application => new FileHolder
-				{
-					Name = application.CPFileName,
-					Data = application.CPFileData.ToArray()
-				});
-		}
-
-		public FileHolder GetDeliveryBillFile(long id)
-		{
-			return GetFile(x => x.Id == id && x.DeliveryBillFileName != null && x.DeliveryBillFileData != null,
-				application => new FileHolder
-				{
-					Name = application.DeliveryBillFileName,
-					Data = application.DeliveryBillFileData.ToArray()
-				});
-		}
-
-		public FileHolder GetTorg12File(long id)
-		{
-			return GetFile(x => x.Id == id && x.Torg12FileName != null && x.Torg12FileData != null,
-				application => new FileHolder
-				{
-					Name = application.Torg12FileName,
-					Data = application.Torg12FileData.ToArray()
-				});
-		}
-
-		public FileHolder GetPackingFile(long id)
-		{
-			return GetFile(x => x.Id == id && x.PackingFileName != null && x.PackingFileData != null,
-				application => new FileHolder
-				{
-					Name = application.PackingFileName,
-					Data = application.PackingFileData.ToArray()
-				});
-		}
+		}		
 
 		// todo: 1. test
 		public IReadOnlyDictionary<long, long> GetCalculations(long[] appIds)
@@ -304,14 +242,6 @@ namespace Alicargo.DataAccess.Repositories
 				.Where(x => appIds.Contains(x.ApplicationHistoryId))
 				.ToDictionary(x => x.ApplicationHistoryId, x => x.Id);
 		}
-
-		private FileHolder GetFile(Expression<Func<Application, bool>> where,
-			Expression<Func<Application, FileHolder>> selector)
-		{
-			return _context.Applications.Where(where).Select(selector).FirstOrDefault();
-		}
-
-		#endregion
 
 		private IQueryable<Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation,
 			long? cargoReceivedStateId, int? cargoReceivedDaysToShow)

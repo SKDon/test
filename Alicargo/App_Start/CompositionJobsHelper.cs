@@ -141,9 +141,10 @@ namespace Alicargo.App_Start
 			var stateConfig = new StateConfig();
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
-			var factory = new MessageFactory(serializer, recipients, stateConfig,
+			var files = new ApplicationFileRepository(unitOfWork);
+
+			return new MessageFactory(serializer, files,  recipients, stateConfig,
 				applications, awbs, clientRepository, localization, DefaultFrom);
-			return factory;
 		}
 	}
 }

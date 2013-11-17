@@ -89,6 +89,7 @@
     <Compile Include="Helpers\OrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IApplicationEventRepository.cs" />
+    <Compile Include="Repositories\IApplicationFileRepository.cs" />
     <Compile Include="Repositories\IApplicationRepository.cs" />
     <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
     <Compile Include="Repositories\IAuthenticationRepository.cs" />
