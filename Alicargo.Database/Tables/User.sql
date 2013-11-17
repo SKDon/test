@@ -3,7 +3,7 @@
 	[Login]						NVARCHAR (320)	NOT NULL,
 	[PasswordHash]				VARBINARY (MAX)	NOT NULL,
 	[PasswordSalt]				VARBINARY (MAX)	NOT NULL,
-	[TwoLetterISOLanguageName]	CHAR(2)			NOT NULL DEFAULT 'en', 
+	[TwoLetterISOLanguageName]	CHAR(2)			NOT NULL CONSTRAINT [DF_User_TwoLetterISOLanguageName] DEFAULT 'en', 
 
 	CONSTRAINT [PK_dbo.User]	PRIMARY KEY CLUSTERED ([Id] ASC)
 );

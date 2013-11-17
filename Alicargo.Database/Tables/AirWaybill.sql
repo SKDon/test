@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[AirWaybill] (
 	[Id]							BIGINT				IDENTITY (1, 1) NOT NULL,
-	[CreationTimestamp]				DATETIMEOFFSET		CONSTRAINT [DF_AirWaybillCreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,	
+	[CreationTimestamp]				DATETIMEOFFSET		CONSTRAINT [DF_AirWaybill_CreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,	
 
 	[ArrivalAirport]				NVARCHAR (MAX)		NOT NULL,
 	[DepartureAirport]				NVARCHAR (MAX)		NOT NULL,
@@ -23,7 +23,7 @@
 	[AWBFileName]					NVARCHAR(320)		NULL,
 
 	[StateId]						BIGINT				NOT NULL,
-	[StateChangeTimestamp]			DATETIMEOFFSET		DEFAULT (GETUTCDATE()) NOT NULL,
+	[StateChangeTimestamp]			DATETIMEOFFSET		CONSTRAINT [DF_AirWaybill_StateChangeTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 
 	[FlightCost]					MONEY				NULL,
 	[CustomCost]					MONEY				NULL,
@@ -35,11 +35,10 @@
 	CONSTRAINT [FK_dbo.AirWaybill_dbo.Broker_BrokerId] FOREIGN KEY ([BrokerId]) REFERENCES [dbo].[Broker] ([Id]),
 	CONSTRAINT [FK_dbo.AirWaybill_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id])
 );
-
-
 GO
-CREATE NONCLUSTERED INDEX [IX_BrokerId]
-	ON [dbo].[AirWaybill]([BrokerId] ASC);
 
+CREATE NONCLUSTERED INDEX [IX_BrokerId] ON [dbo].[AirWaybill]([BrokerId] ASC);
 GO
-CREATE UNIQUE INDEX [IX_AirWaybill_Bill] ON [dbo].[AirWaybill] ([Bill])
+
+CREATE UNIQUE INDEX [IX_AirWaybill_Bill] ON [dbo].[AirWaybill] ([Bill]);
+GO

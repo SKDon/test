@@ -3,7 +3,7 @@
 	[Id]					BIGINT			NOT NULL PRIMARY KEY IDENTITY(1, 1),
 	[RowVersion]			ROWVERSION		NOT NULL,
 	[StateId]				INT				NOT NULL,
-	[StateIdTimestamp]		DATETIMEOFFSET	DEFAULT (GETUTCDATE()) NOT NULL,
+	[StateIdTimestamp]		DATETIMEOFFSET	CONSTRAINT [DF_Calculation_StateIdTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 
 	[ClientId]				BIGINT			NOT NULL,
 	[ApplicationHistoryId]	BIGINT			NOT NULL,
