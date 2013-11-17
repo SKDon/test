@@ -1,20 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Alicargo.Contracts.Contracts
 {
-	public class StateData
+	public sealed class StateData
 	{
-		public StateData()
-		{
-			Localization = new Dictionary<string, string>();
-		}
-
-		public IDictionary<string, string> Localization { get; private set; }
-
-		public long Id { get; set; }
-
-		public string Name { get; set; }
-
-		public int Position { get; set; }
 	}
 }

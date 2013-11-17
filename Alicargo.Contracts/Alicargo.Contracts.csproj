@@ -61,12 +61,13 @@
     <Compile Include="Contracts\EmailMessage.cs" />
     <Compile Include="Contracts\EmailMessageData.cs" />
     <Compile Include="Contracts\SenderData.cs" />
+    <Compile Include="Contracts\StateData.cs" />
     <Compile Include="Contracts\VersionData.cs" />
     <Compile Include="Contracts\VersionedData.cs" />
     <Compile Include="Contracts\CountryData.cs" />
     <Compile Include="Contracts\FileHolder.cs" />
     <Compile Include="Contracts\AirWaybillData.cs" />
-    <Compile Include="Contracts\StateData.cs" />
+    <Compile Include="Contracts\ObsoleteStateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\UserData.cs" />
     <Compile Include="Enums\ApplicationEventState.cs" />
@@ -103,7 +104,7 @@
     <Compile Include="Repositories\IEmailMessageRepository.cs" />
     <Compile Include="Repositories\ISenderRepository.cs" />
     <Compile Include="Repositories\ISqlProcedureExecutor.cs" />
-    <Compile Include="Repositories\IStateRepository.cs" />
+    <Compile Include="Repositories\IObsoleteStateRepository.cs" />
     <Compile Include="Repositories\ITransaction.cs" />
     <Compile Include="Repositories\ITransitRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />

@@ -8,9 +8,9 @@ namespace Alicargo.Services.Abstract
 		long[] GetStateAvailabilityToSet();
 		long[] GetStateVisibility();
 		Dictionary<long, string> GetLocalizedDictionary(long[] stateIds = null);
-		Dictionary<long, StateData> GetDictionary();
+		Dictionary<long, ObsoleteStateData> GetDictionary();
 		bool HasPermissionToSetState(long stateId);
-		long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] StateAvailability);
+		long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] stateAvailability);
 		long[] FilterByPosition(long[] states, int position);
 	}
 }

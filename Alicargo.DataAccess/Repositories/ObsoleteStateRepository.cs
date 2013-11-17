@@ -9,16 +9,16 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	public sealed class StateRepository : IStateRepository
+	public sealed class ObsoleteStateRepository : IObsoleteStateRepository
 	{
-		private readonly Expression<Func<State, StateData>> _selector;
+		private readonly Expression<Func<State, ObsoleteStateData>> _selector;
 		private readonly AlicargoDataContext _context;
 
-		public StateRepository(IUnitOfWork unitOfWork)
+		public ObsoleteStateRepository(IUnitOfWork unitOfWork)
 		{
 			_context = (AlicargoDataContext)unitOfWork.Context;
 
-			_selector = x => new StateData
+			_selector = x => new ObsoleteStateData
 			{
 				Id = x.Id,
 				Name = x.Name,
@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.Repositories
 			return _context.States.LongCount();
 		}
 
-		public StateData[] GetAll()
+		public ObsoleteStateData[] GetAll()
 		{
 			var localizations = _context.StateLocalizations.ToArray();
 
@@ -48,7 +48,7 @@ namespace Alicargo.DataAccess.Repositories
 			return states;
 		}
 
-		public StateData Get(long id)
+		public ObsoleteStateData Get(long id)
 		{
 			return Get(x => x.Id == id);
 		}
@@ -83,7 +83,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		#region private
 
-		private StateData Get(Expression<Func<State, bool>> expression)
+		private ObsoleteStateData Get(Expression<Func<State, bool>> expression)
 		{
 			var state = _context.States.Where(expression).Select(_selector).First();
 
@@ -94,7 +94,7 @@ namespace Alicargo.DataAccess.Repositories
 			return state;
 		}
 
-		private static void AdjustLocalization(StateData state, StateLocalization[] localizations)
+		private static void AdjustLocalization(ObsoleteStateData state, StateLocalization[] localizations)
 		{
 			state.Localization.Add(TwoLetterISOLanguageName.Russian, GetName(localizations, TwoLetterISOLanguageName.Russian, state));
 			state.Localization.Add(TwoLetterISOLanguageName.Italian, GetName(localizations, TwoLetterISOLanguageName.Italian, state));
@@ -102,7 +102,7 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		private static string GetName(IEnumerable<StateLocalization> localizations, string twoLetterISOLanguageName,
-			StateData state)
+			ObsoleteStateData state)
 		{
 			return localizations
 				.Where(x => x.TwoLetterISOLanguageName.Equals(twoLetterISOLanguageName, StringComparison.InvariantCultureIgnoreCase)

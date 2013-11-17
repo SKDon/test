@@ -15,7 +15,7 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationRepository _applications;
 		private readonly ICountryRepository _countryRepository;
 		private readonly IIdentityService _identity;
-		private readonly IStateRepository _stateRepository;
+		private readonly IObsoleteStateRepository _stateRepository;
 		private readonly IStateService _stateService;
 
 		public ApplicationPresenter(
@@ -23,7 +23,7 @@ namespace Alicargo.Services.Application
 			IIdentityService identity,
 			ICountryRepository countryRepository,
 			IStateService stateService,
-			IStateRepository stateRepository)
+			IObsoleteStateRepository stateRepository)
 		{
 			_applications = applications;
 			_identity = identity;

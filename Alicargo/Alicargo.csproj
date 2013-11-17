@@ -408,7 +408,6 @@
     <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\ListCollection.cs" />
     <Compile Include="ViewModels\User\SignIdModel.cs" />
-    <Compile Include="ViewModels\StateModel.cs" />
     <Compile Include="ViewModels\User\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>

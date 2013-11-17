@@ -89,7 +89,7 @@
     <Compile Include="Repositories\ClientFileRepository.cs" />
     <Compile Include="Repositories\EmailMessageRepository.cs" />
     <Compile Include="Repositories\SenderRepository.cs" />
-    <Compile Include="Repositories\StateRepository.cs" />
+    <Compile Include="Repositories\ObsoleteStateRepository.cs" />
     <Compile Include="Repositories\TransitRepository.cs" />
     <Compile Include="Repositories\AuthenticationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

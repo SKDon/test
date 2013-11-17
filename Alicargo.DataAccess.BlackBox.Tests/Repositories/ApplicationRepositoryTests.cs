@@ -15,7 +15,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private IApplicationRepository _applications;
 		private IApplicationFileRepository _files;
-		private IStateRepository _stateRepository;
+		private IObsoleteStateRepository _stateRepository;
 		private DbTestContext _context;
 		private ApplicationUpdateRepository _applicationUpater;
 
@@ -26,7 +26,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
 			_files = new ApplicationFileRepository(_context.UnitOfWork);
-			_stateRepository = new StateRepository(_context.UnitOfWork);
+			_stateRepository = new ObsoleteStateRepository(_context.UnitOfWork);
 			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
 		}
 

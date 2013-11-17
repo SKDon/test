@@ -56,7 +56,7 @@ namespace Alicargo.Tests.Services.Application
 			var withLogic = stateAvailability.Take(3).ToArray();
 			var filtered = withLogic.Take(2).ToArray();
 			var dictionary = _context.Create<Dictionary<long, string>>();
-			var currentState = _context.Create<StateData>();
+			var currentState = _context.Create<ObsoleteStateData>();
 
 			_context.ApplicationRepository.Setup(x => x.Get(applicationData.Id)).Returns(applicationData);
 			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(stateAvailability);

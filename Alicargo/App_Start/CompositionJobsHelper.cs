@@ -136,7 +136,7 @@ namespace Alicargo.App_Start
 			var users = new UserRepository(unitOfWork, new PasswordConverter());
 			var recipients = new Recipients(users);
 			var clientRepository = new ClientRepository(unitOfWork);
-			var states = new StateRepository(unitOfWork);
+			var states = new ObsoleteStateRepository(unitOfWork);
 			var localization = new LocalizationService(states);
 			var stateConfig = new StateConfig();
 			var applications = new ApplicationRepository(unitOfWork);

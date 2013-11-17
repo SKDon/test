@@ -17,11 +17,11 @@ namespace Alicargo.Services
 	{
 		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;
-		private readonly IStateRepository _stateRepository;
+		private readonly IObsoleteStateRepository _stateRepository;
 		private readonly ConcurrentDictionary<long, bool> _permissions = new ConcurrentDictionary<long, bool>();
 		private readonly IAwbRepository _awbRepository;
 
-		public StateService(IStateRepository stateRepository, IIdentityService identity, IStateConfig stateConfig, IAwbRepository awbRepository)
+		public StateService(IObsoleteStateRepository stateRepository, IIdentityService identity, IStateConfig stateConfig, IAwbRepository awbRepository)
 		{
 			_stateRepository = stateRepository;
 			_identity = identity;
@@ -109,9 +109,9 @@ namespace Alicargo.Services
 				.ToArray();
 		}
 
-		public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] StateAvailability)
+		public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] stateAvailability)
 		{
-			var states = StateAvailability.ToList();
+			var states = stateAvailability.ToList();
 
 			if (!applicationData.Weight.HasValue || !applicationData.Count.HasValue)
 			{
@@ -163,7 +163,7 @@ namespace Alicargo.Services
 			return dictionary;
 		}
 
-		public Dictionary<long, StateData> GetDictionary()
+		public Dictionary<long, ObsoleteStateData> GetDictionary()
 		{
 			return _stateRepository.GetAll().ToDictionary(x => x.Id, x => x);
 		}
