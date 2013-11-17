@@ -58,7 +58,7 @@ namespace Alicargo.Tests.Services
         }
 
         [TestMethod]
-        public void Test_GetAvailableStatesToSet()
+        public void Test_GetStateAvailabilityToSet()
         {
             var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().ToArray();
             var states = _context.CreateMany<long>(6).ToArray();
@@ -74,29 +74,29 @@ namespace Alicargo.Tests.Services
             {
                 var type = roleType;
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
-                _context.StateRepository.Setup(x => x.GetAvailableStates(type)).Returns(states);
+                _context.StateRepository.Setup(x => x.GetStateAvailability(type)).Returns(states);
 
-                var availableStates = _stateService.GetAvailableStatesToSet();
+                var StateAvailability = _stateService.GetStateAvailabilityToSet();
                 if (roleType == RoleType.Client || roleType == RoleType.Sender)
                 {
-                    states.Skip(3).ShouldBeEquivalentTo(availableStates);
+                    states.Skip(3).ShouldBeEquivalentTo(StateAvailability);
                 }
                 else
                 {
-                    states.ShouldBeEquivalentTo(availableStates);
+                    states.ShouldBeEquivalentTo(StateAvailability);
                 }
 
                 _context.IdentityService.Verify(x => x.IsInRole(type));
-                _context.StateRepository.Verify(x => x.GetAvailableStates(type));
+                _context.StateRepository.Verify(x => x.GetStateAvailability(type));
 
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
-                _context.StateRepository.Setup(x => x.GetAvailableStates(type)).Throws<InvalidOperationException>();
+                _context.StateRepository.Setup(x => x.GetStateAvailability(type)).Throws<InvalidOperationException>();
             }
         }
 
         [Ignore] // todo: 3. this test should work because a broker can't set a state
         [TestMethod, ExpectedException(typeof (InvalidLogicException))]
-        public void Test_GetAvailableStatesToSet_Broker()
+        public void Test_GetStateAvailabilityToSet_Broker()
         {
             var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().Except(new[] {RoleType.Broker}).ToArray();
             foreach (var roleType in roles)
@@ -105,11 +105,11 @@ namespace Alicargo.Tests.Services
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
             }
 
-            _stateService.GetAvailableStatesToSet();
+            _stateService.GetStateAvailabilityToSet();
         }
 
         [TestMethod]
-        public void Test_GetVisibleStates()
+        public void Test_GetStateVisibility()
         {
             var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().ToArray();
             var states = _context.CreateMany<long>().ToArray();
@@ -124,22 +124,22 @@ namespace Alicargo.Tests.Services
             {
                 var type = roleType;
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
-                _context.StateRepository.Setup(x => x.GetVisibleStates(type)).Returns(states);
+                _context.StateRepository.Setup(x => x.GetStateVisibility(type)).Returns(states);
 
-                var availableStates = _stateService.GetVisibleStates();
-                states.ShouldBeEquivalentTo(availableStates);
+                var StateAvailability = _stateService.GetStateVisibility();
+                states.ShouldBeEquivalentTo(StateAvailability);
 
                 _context.IdentityService.Verify(x => x.IsInRole(type));
-                _context.StateRepository.Verify(x => x.GetVisibleStates(type));
+                _context.StateRepository.Verify(x => x.GetStateVisibility(type));
 
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
-                _context.StateRepository.Setup(x => x.GetVisibleStates(type)).Throws<InvalidOperationException>();
+                _context.StateRepository.Setup(x => x.GetStateVisibility(type)).Throws<InvalidOperationException>();
             }
         }
 
         [Ignore] // 3. todo: this test should work because a broker can't view applications
         [TestMethod, ExpectedException(typeof (InvalidLogicException))]
-        public void Test_GetVisibleStates_Broker()
+        public void Test_GetStateVisibility_Broker()
         {
             var roles = Enum.GetValues(typeof (RoleType)).Cast<RoleType>().Except(new[] {RoleType.Broker}).ToArray();
             foreach (var roleType in roles)
@@ -148,7 +148,7 @@ namespace Alicargo.Tests.Services
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
             }
 
-            _stateService.GetVisibleStates();
+            _stateService.GetStateVisibility();
         }
 
 
@@ -158,13 +158,13 @@ namespace Alicargo.Tests.Services
             var applicationData = _context.Create<ApplicationData>();
             applicationData.Weight = null;
             applicationData.AirWaybillId = null;
-            var availableStates = new[] {_context.Create<long>()};
+            var StateAvailability = new[] {_context.Create<long>()};
 
             _context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(It.IsAny<long>());
             _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(It.IsAny<long>());
-            _context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(availableStates[0]);
+            _context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(StateAvailability[0]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, availableStates);
+            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }
@@ -175,13 +175,13 @@ namespace Alicargo.Tests.Services
             var applicationData = _context.Create<ApplicationData>();
             applicationData.Count = null;
             applicationData.AirWaybillId = null;
-            var availableStates = _context.CreateMany<long>(1).ToArray();
+            var StateAvailability = _context.CreateMany<long>(1).ToArray();
 
             _context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(It.IsAny<long>());
             _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(It.IsAny<long>());
-            _context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(availableStates[0]);
+            _context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(StateAvailability[0]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, availableStates);
+            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }
@@ -191,12 +191,12 @@ namespace Alicargo.Tests.Services
         {
             var applicationData = _context.Create<ApplicationData>();
             applicationData.AirWaybillId = null;
-            var availableStates = _context.CreateMany<long>(2).ToArray();
+            var StateAvailability = _context.CreateMany<long>(2).ToArray();
 
-            _context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(availableStates[0]);
-            _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(availableStates[1]);
+            _context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(StateAvailability[0]);
+            _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(StateAvailability[1]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, availableStates);
+            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }
@@ -207,12 +207,12 @@ namespace Alicargo.Tests.Services
             var applicationData = _context.Create<ApplicationData>();
             var airWaybillData = _context.CreateMany<AirWaybillData>().ToArray();
             airWaybillData[0].GTD = null;
-            var availableStates = _context.CreateMany<long>(1).ToArray();
+            var StateAvailability = _context.CreateMany<long>(1).ToArray();
 
             _context.AirWaybillRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(airWaybillData);
-            _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(availableStates[0]);
+            _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(StateAvailability[0]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, availableStates);
+            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }

@@ -57,7 +57,7 @@ namespace Alicargo.Services.Calculation
 
 		private ApplicationListItemData[] GetApplications(long senderId, int take, int skip, out long total)
 		{
-			var stateIds = _stateService.GetVisibleStates();
+			var stateIds = _stateService.GetStateVisibility();
 
 			var applications = _applications.List(stateIds, new[]
 			{

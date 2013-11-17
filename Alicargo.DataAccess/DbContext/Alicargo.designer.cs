@@ -13,7 +13,11 @@ namespace Alicargo.DataAccess.DbContext
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
+	using System.Data;
+	using System.Collections.Generic;
 	using System.Reflection;
+	using System.Linq;
+	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
 	
@@ -29,15 +33,15 @@ namespace Alicargo.DataAccess.DbContext
     partial void InsertAdmin(Admin instance);
     partial void UpdateAdmin(Admin instance);
     partial void DeleteAdmin(Admin instance);
-    partial void InsertVisibleState(VisibleState instance);
-    partial void UpdateVisibleState(VisibleState instance);
-    partial void DeleteVisibleState(VisibleState instance);
+    partial void InsertStateVisibility(StateVisibility instance);
+    partial void UpdateStateVisibility(StateVisibility instance);
+    partial void DeleteStateVisibility(StateVisibility instance);
     partial void InsertAirWaybill(AirWaybill instance);
     partial void UpdateAirWaybill(AirWaybill instance);
     partial void DeleteAirWaybill(AirWaybill instance);
-    partial void InsertAvailableState(AvailableState instance);
-    partial void UpdateAvailableState(AvailableState instance);
-    partial void DeleteAvailableState(AvailableState instance);
+    partial void InsertStateAvailability(StateAvailability instance);
+    partial void UpdateStateAvailability(StateAvailability instance);
+    partial void DeleteStateAvailability(StateAvailability instance);
     partial void InsertBroker(Broker instance);
     partial void UpdateBroker(Broker instance);
     partial void DeleteBroker(Broker instance);
@@ -116,11 +120,11 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		internal System.Data.Linq.Table<VisibleState> VisibleStates
+		internal System.Data.Linq.Table<StateVisibility> StateVisibility
 		{
 			get
 			{
-				return this.GetTable<VisibleState>();
+				return this.GetTable<StateVisibility>();
 			}
 		}
 		
@@ -132,11 +136,11 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		internal System.Data.Linq.Table<AvailableState> AvailableStates
+		internal System.Data.Linq.Table<StateAvailability> StateAvailability
 		{
 			get
 			{
-				return this.GetTable<AvailableState>();
+				return this.GetTable<StateAvailability>();
 			}
 		}
 		
@@ -450,8 +454,8 @@ namespace Alicargo.DataAccess.DbContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VisibleState")]
-	internal sealed partial class VisibleState : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StateVisibility")]
+	internal sealed partial class StateVisibility : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -472,7 +476,7 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnStateIdChanged();
     #endregion
 		
-		public VisibleState()
+		public StateVisibility()
 		{
 			this._State = default(EntityRef<State>);
 			OnCreated();
@@ -522,7 +526,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_VisibleState", Storage="_State", ThisKey="StateId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_StateVisibility", Storage="_State", ThisKey="StateId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public State State
 		{
 			get
@@ -539,12 +543,12 @@ namespace Alicargo.DataAccess.DbContext
 					if ((previousValue != null))
 					{
 						this._State.Entity = null;
-						previousValue.VisibleStates.Remove(this);
+						previousValue.StateVisibility.Remove(this);
 					}
 					this._State.Entity = value;
 					if ((value != null))
 					{
-						value.VisibleStates.Add(this);
+						value.StateVisibility.Add(this);
 						this._StateId = value.Id;
 					}
 					else
@@ -1349,8 +1353,8 @@ namespace Alicargo.DataAccess.DbContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AvailableState")]
-	internal sealed partial class AvailableState : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StateAvailability")]
+	internal sealed partial class StateAvailability : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1371,7 +1375,7 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnStateIdChanged();
     #endregion
 		
-		public AvailableState()
+		public StateAvailability()
 		{
 			this._State = default(EntityRef<State>);
 			OnCreated();
@@ -1421,7 +1425,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_AvailableState", Storage="_State", ThisKey="StateId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_StateAvailability", Storage="_State", ThisKey="StateId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public State State
 		{
 			get
@@ -1438,12 +1442,12 @@ namespace Alicargo.DataAccess.DbContext
 					if ((previousValue != null))
 					{
 						this._State.Entity = null;
-						previousValue.AvailableStates.Remove(this);
+						previousValue.StateAvailability.Remove(this);
 					}
 					this._State.Entity = value;
 					if ((value != null))
 					{
-						value.AvailableStates.Add(this);
+						value.StateAvailability.Add(this);
 						this._StateId = value.Id;
 					}
 					else
@@ -3440,11 +3444,11 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private int _Position;
 		
-		private EntitySet<VisibleState> _VisibleStates;
+		private EntitySet<StateVisibility> _StateVisibility;
 		
 		private EntitySet<AirWaybill> _AirWaybills;
 		
-		private EntitySet<AvailableState> _AvailableStates;
+		private EntitySet<StateAvailability> _StateAvailability;
 		
 		private EntitySet<StateLocalization> _StateLocalizations;
 		
@@ -3464,9 +3468,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public State()
 		{
-			this._VisibleStates = new EntitySet<VisibleState>(new Action<VisibleState>(this.attach_VisibleStates), new Action<VisibleState>(this.detach_VisibleStates));
+			this._StateVisibility = new EntitySet<StateVisibility>(new Action<StateVisibility>(this.attach_StateVisibility), new Action<StateVisibility>(this.detach_StateVisibility));
 			this._AirWaybills = new EntitySet<AirWaybill>(new Action<AirWaybill>(this.attach_AirWaybills), new Action<AirWaybill>(this.detach_AirWaybills));
-			this._AvailableStates = new EntitySet<AvailableState>(new Action<AvailableState>(this.attach_AvailableStates), new Action<AvailableState>(this.detach_AvailableStates));
+			this._StateAvailability = new EntitySet<StateAvailability>(new Action<StateAvailability>(this.attach_StateAvailability), new Action<StateAvailability>(this.detach_StateAvailability));
 			this._StateLocalizations = new EntitySet<StateLocalization>(new Action<StateLocalization>(this.attach_StateLocalizations), new Action<StateLocalization>(this.detach_StateLocalizations));
 			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
 			OnCreated();
@@ -3532,16 +3536,16 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_VisibleState", Storage="_VisibleStates", ThisKey="Id", OtherKey="StateId")]
-		public EntitySet<VisibleState> VisibleStates
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_StateVisibility", Storage="_StateVisibility", ThisKey="Id", OtherKey="StateId")]
+		public EntitySet<StateVisibility> StateVisibility
 		{
 			get
 			{
-				return this._VisibleStates;
+				return this._StateVisibility;
 			}
 			set
 			{
-				this._VisibleStates.Assign(value);
+				this._StateVisibility.Assign(value);
 			}
 		}
 		
@@ -3558,16 +3562,16 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_AvailableState", Storage="_AvailableStates", ThisKey="Id", OtherKey="StateId")]
-		public EntitySet<AvailableState> AvailableStates
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_StateAvailability", Storage="_StateAvailability", ThisKey="Id", OtherKey="StateId")]
+		public EntitySet<StateAvailability> StateAvailability
 		{
 			get
 			{
-				return this._AvailableStates;
+				return this._StateAvailability;
 			}
 			set
 			{
-				this._AvailableStates.Assign(value);
+				this._StateAvailability.Assign(value);
 			}
 		}
 		
@@ -3617,13 +3621,13 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void attach_VisibleStates(VisibleState entity)
+		private void attach_StateVisibility(StateVisibility entity)
 		{
 			this.SendPropertyChanging();
 			entity.State = this;
 		}
 		
-		private void detach_VisibleStates(VisibleState entity)
+		private void detach_StateVisibility(StateVisibility entity)
 		{
 			this.SendPropertyChanging();
 			entity.State = null;
@@ -3641,13 +3645,13 @@ namespace Alicargo.DataAccess.DbContext
 			entity.State = null;
 		}
 		
-		private void attach_AvailableStates(AvailableState entity)
+		private void attach_StateAvailability(StateAvailability entity)
 		{
 			this.SendPropertyChanging();
 			entity.State = this;
 		}
 		
-		private void detach_AvailableStates(AvailableState entity)
+		private void detach_StateAvailability(StateAvailability entity)
 		{
 			this.SendPropertyChanging();
 			entity.State = null;

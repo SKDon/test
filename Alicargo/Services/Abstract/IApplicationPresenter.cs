@@ -7,7 +7,7 @@ namespace Alicargo.Services.Abstract
 	{
 		ApplicationAdminModel Get(long id);
 		ApplicationDetailsModel GetDetails(long id);
-		ApplicationStateModel[] GetAvailableStates(long id);
+		ApplicationStateModel[] GetStateAvailability(long id);
 		IDictionary<long, string> GetLocalizedCountries();
 	}
 }

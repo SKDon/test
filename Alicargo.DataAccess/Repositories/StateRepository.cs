@@ -53,9 +53,9 @@ namespace Alicargo.DataAccess.Repositories
 			return Get(x => x.Id == id);
 		}
 
-		public long[] GetAvailableStates(RoleType role)
+		public long[] GetStateAvailability(RoleType role)
 		{
-			return _context.AvailableStates
+			return _context.StateAvailability
 				.Where(x => x.RoleId == (int)role)
 				.OrderBy(x => x.State.Position)
 				.Select(x => x.StateId)
@@ -64,7 +64,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public RoleType[] GetAvailableRoles(long stateId)
 		{
-			return _context.AvailableStates
+			return _context.StateAvailability
 				.Where(x => x.StateId == stateId)
 				.OrderBy(x => x.State.Position)
 				.Select(x => x.RoleId)
@@ -72,9 +72,9 @@ namespace Alicargo.DataAccess.Repositories
 				.ToArray();
 		}
 
-		public long[] GetVisibleStates(RoleType role)
+		public long[] GetStateVisibility(RoleType role)
 		{
-			return _context.VisibleStates
+			return _context.StateVisibility
 				.Where(x => x.RoleId == (int)role)
 				.OrderBy(x => x.State.Position)
 				.Select(x => x.StateId)

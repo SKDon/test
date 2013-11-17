@@ -98,11 +98,11 @@ namespace Alicargo.Services.Application
 			return application;
 		}
 
-		public ApplicationStateModel[] GetAvailableStates(long id)
+		public ApplicationStateModel[] GetStateAvailability(long id)
 		{
 			var applicationData = _applications.Get(id);
 
-			var states = _stateService.GetAvailableStatesToSet();
+			var states = _stateService.GetStateAvailabilityToSet();
 
 			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
 

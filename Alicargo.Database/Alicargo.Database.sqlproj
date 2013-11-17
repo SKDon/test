@@ -82,13 +82,13 @@
     <Build Include="Tables\StateLocalization.sql" />
     <Build Include="Tables\AirWaybill.sql" />
     <Build Include="Tables\Brocker.sql" />
-    <Build Include="Tables\AvailableState.sql" />
+    <Build Include="Tables\StateAvailability.sql" />
     <Build Include="Tables\Forwarder.sql" />
     <Build Include="Tables\Sender.sql" />
     <Build Include="Tables\Admin.sql" />
     <Build Include="Tables\Application.sql" />
     <Build Include="Tables\Client.sql" />
-    <Build Include="Tables\VisibleState.sql" />
+    <Build Include="Tables\StateVisibility.sql" />
     <Build Include="Tables\Country.sql" />
     <Build Include="Stored procedures\Client_DeleteForce.sql" />
     <Build Include="Tables\Calculation.sql" />

@@ -29,63 +29,63 @@ namespace Alicargo.Services
 			_awbRepository = awbRepository;
 		}
 
-		public long[] GetAvailableStatesToSet()
+		public long[] GetStateAvailabilityToSet()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Admin);
+				return _stateRepository.GetStateAvailability(RoleType.Admin);
 			}
 
 			if (_identity.IsInRole(RoleType.Client))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Client).Except(_stateConfig.AwbStates).ToArray();
+				return _stateRepository.GetStateAvailability(RoleType.Client).Except(_stateConfig.AwbStates).ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Forwarder))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Forwarder);
+				return _stateRepository.GetStateAvailability(RoleType.Forwarder);
 			}
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Sender).Except(_stateConfig.AwbStates).ToArray();
+				return _stateRepository.GetStateAvailability(RoleType.Sender).Except(_stateConfig.AwbStates).ToArray();
 			}
 
 			// todo: 3. a Broker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Broker))
 			{
-				return _stateRepository.GetAvailableStates(RoleType.Broker);
+				return _stateRepository.GetStateAvailability(RoleType.Broker);
 			}
 
 			throw new InvalidLogicException("Unsupported role");
 		}
 
-		public long[] GetVisibleStates()
+		public long[] GetStateVisibility()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
 			{
-				return _stateRepository.GetVisibleStates(RoleType.Admin);
+				return _stateRepository.GetStateVisibility(RoleType.Admin);
 			}
 
 			if (_identity.IsInRole(RoleType.Client))
 			{
-				return _stateRepository.GetVisibleStates(RoleType.Client);
+				return _stateRepository.GetStateVisibility(RoleType.Client);
 			}
 
 			if (_identity.IsInRole(RoleType.Forwarder))
 			{
-				return _stateRepository.GetVisibleStates(RoleType.Forwarder);
+				return _stateRepository.GetStateVisibility(RoleType.Forwarder);
 			}
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				return _stateRepository.GetVisibleStates(RoleType.Sender);
+				return _stateRepository.GetStateVisibility(RoleType.Sender);
 			}
 
 			// todo: 3. Broker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Broker))
 			{
-				return _stateRepository.GetVisibleStates(RoleType.Broker);
+				return _stateRepository.GetStateVisibility(RoleType.Broker);
 			}
 
 			throw new InvalidLogicException();
@@ -109,9 +109,9 @@ namespace Alicargo.Services
 				.ToArray();
 		}
 
-		public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates)
+		public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] StateAvailability)
 		{
-			var states = availableStates.ToList();
+			var states = StateAvailability.ToList();
 
 			if (!applicationData.Weight.HasValue || !applicationData.Count.HasValue)
 			{

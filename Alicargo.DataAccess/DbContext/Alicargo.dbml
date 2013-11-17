@@ -14,11 +14,11 @@
       <Association Name="User_Admin" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.VisibleState" Member="VisibleStates" AccessModifier="Internal">
-    <Type Name="VisibleState" AccessModifier="Internal" Modifier="Sealed">
+  <Table Name="dbo.StateVisibility" Member="StateVisibility" AccessModifier="Internal">
+    <Type Name="StateVisibility" AccessModifier="Internal" Modifier="Sealed">
       <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="State_VisibleState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="State_StateVisibility" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.AirWaybill" Member="AirWaybills" AccessModifier="Internal">
@@ -54,11 +54,11 @@
       <Association Name="State_AirWaybill" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.AvailableState" Member="AvailableStates" AccessModifier="Internal">
-    <Type Name="AvailableState" AccessModifier="Internal" Modifier="Sealed">
+  <Table Name="dbo.StateAvailability" Member="StateAvailability" AccessModifier="Internal">
+    <Type Name="StateAvailability" AccessModifier="Internal" Modifier="Sealed">
       <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="State_AvailableState" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="State_StateAvailability" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Broker" Member="Brokers" AccessModifier="Internal">
@@ -159,9 +159,9 @@
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="State_VisibleState" Member="VisibleStates" ThisKey="Id" OtherKey="StateId" Type="VisibleState" />
+      <Association Name="State_StateVisibility" Member="StateVisibility" ThisKey="Id" OtherKey="StateId" Type="StateVisibility" />
       <Association Name="State_AirWaybill" Member="AirWaybills" ThisKey="Id" OtherKey="StateId" Type="AirWaybill" />
-      <Association Name="State_AvailableState" Member="AvailableStates" ThisKey="Id" OtherKey="StateId" Type="AvailableState" />
+      <Association Name="State_StateAvailability" Member="StateAvailability" ThisKey="Id" OtherKey="StateId" Type="StateAvailability" />
       <Association Name="State_StateLocalization" Member="StateLocalizations" ThisKey="Id" OtherKey="StateId" Type="StateLocalization" />
       <Association Name="State_Application" Member="Applications" ThisKey="Id" OtherKey="StateId" Type="Application" />
     </Type>

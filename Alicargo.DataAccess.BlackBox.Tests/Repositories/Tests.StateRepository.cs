@@ -58,9 +58,9 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		//}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_StateRepository_GetAvailableStates()
+		public void Test_StateRepository_GetStateAvailability()
 		{
-			var states = _stateRepository.GetAvailableStates(RoleType.Admin);
+			var states = _stateRepository.GetStateAvailability(RoleType.Admin);
 
 			var all = _stateRepository.GetAll().ToArray();
 
@@ -73,9 +73,9 @@ namespace Alicargo.DataAccess.Tests.Repositories
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_StateRepository_GetVisibleStates()
+		public void Test_StateRepository_GetStateVisibility()
 		{
-			var states = _stateRepository.GetVisibleStates(RoleType.Admin);
+			var states = _stateRepository.GetStateVisibility(RoleType.Admin);
 
 			var all = _stateRepository.GetAll();
 

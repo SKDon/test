@@ -70,7 +70,7 @@ namespace Alicargo.Services.Excel
 
 		private ApplicationListItem[] GetApplicationListItems(bool isForwarder)
 		{
-			var stateIds = _stateService.GetVisibleStates();
+			var stateIds = _stateService.GetStateVisibility();
 
 			var cargoReceivedStateId = isForwarder
 				? _stateConfig.CargoReceivedStateId

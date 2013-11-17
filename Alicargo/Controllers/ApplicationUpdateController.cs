@@ -47,7 +47,7 @@ namespace Alicargo.Controllers
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult States(long id)
 		{
-			return Json(_applicationPresenter.GetAvailableStates(id));
+			return Json(_applicationPresenter.GetStateAvailability(id));
 		}
 
 		#endregion

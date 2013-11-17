@@ -9,8 +9,8 @@ namespace Alicargo.Contracts.Repositories
 		StateData[] GetAll();
 		StateData Get(long id);
 
-		long[] GetAvailableStates(RoleType role);
+		long[] GetStateAvailability(RoleType role);
 		RoleType[] GetAvailableRoles(long stateId);
-		long[] GetVisibleStates(RoleType admin);
+		long[] GetStateVisibility(RoleType admin);
 	}
 }

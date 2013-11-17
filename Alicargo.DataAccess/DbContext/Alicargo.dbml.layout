@@ -15,7 +15,7 @@
       </nestedChildShapes>
     </classShape>
     <classShape Id="a0674dd9-e2eb-45e9-a165-28fe62533e69" absoluteBounds="6.25, 6.625, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/AlicargoDataContext/VisibleState" />
+      <DataClassMoniker Name="/AlicargoDataContext/StateVisibility" />
       <nestedChildShapes>
         <elementListCompartment Id="8399c366-f858-41ec-98b2-8a969a5df415" absoluteBounds="6.265, 7.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
@@ -27,7 +27,7 @@
       </nestedChildShapes>
     </classShape>
     <classShape Id="5090cda7-9358-4bb3-9e4e-78d644706773" absoluteBounds="6.25, 1.5, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/AlicargoDataContext/AvailableState" />
+      <DataClassMoniker Name="/AlicargoDataContext/StateAvailability" />
       <nestedChildShapes>
         <elementListCompartment Id="28f0d997-3cbf-4140-bc7d-ce118a857da9" absoluteBounds="6.265, 1.9600000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
@@ -113,7 +113,7 @@
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 7.19314697278663); (6.25 : 7.19314697278663)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/AlicargoDataContext/State/State_VisibleState" />
+      <AssociationMoniker Name="/AlicargoDataContext/State/State_StateVisibility" />
       <nodes>
         <classShapeMoniker Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" />
         <classShapeMoniker Id="a0674dd9-e2eb-45e9-a165-28fe62533e69" />
@@ -127,7 +127,7 @@
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(4.5 : 6.375); (4.5 : 2.09699625651042); (6.25 : 2.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/AlicargoDataContext/State/State_AvailableState" />
+      <AssociationMoniker Name="/AlicargoDataContext/State/State_StateAvailability" />
       <nodes>
         <classShapeMoniker Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" />
         <classShapeMoniker Id="5090cda7-9358-4bb3-9e4e-78d644706773" />

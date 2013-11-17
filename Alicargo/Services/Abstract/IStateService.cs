@@ -5,12 +5,12 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IStateService
 	{
-		long[] GetAvailableStatesToSet();
-		long[] GetVisibleStates();
+		long[] GetStateAvailabilityToSet();
+		long[] GetStateVisibility();
 		Dictionary<long, string> GetLocalizedDictionary(long[] stateIds = null);
 		Dictionary<long, StateData> GetDictionary();
 		bool HasPermissionToSetState(long stateId);
-		long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] availableStates);
+		long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] StateAvailability);
 		long[] FilterByPosition(long[] states, int position);
 	}
 }

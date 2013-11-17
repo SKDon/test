@@ -41,7 +41,7 @@ namespace Alicargo.Tests.Services.Application
 			const long clientId = 1;
 			var data = _context.CreateMany<ApplicationListItemData>().ToArray();
 			var map = _context.CreateMany<ApplicationListItem>().ToArray();
-			_context.StateService.Setup(x => x.GetVisibleStates()).Returns(_stateIds);
+			_context.StateService.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
 			_context.ApplicationListItemMapper.Setup(x => x.Map(data)).Returns(map);
 			const int cargoReceivedDaysToShow = 10;
 			_context.StateConfig.Setup(x => x.CargoReceivedDaysToShow).Returns(cargoReceivedDaysToShow);
@@ -57,7 +57,7 @@ namespace Alicargo.Tests.Services.Application
 			collection.Data.Should().BeNull();
 			collection.Groups.Should().NotBeNull();
 
-			_context.StateService.Verify(x => x.GetVisibleStates(), Times.Once());
+			_context.StateService.Verify(x => x.GetStateVisibility(), Times.Once());
 			_context.ApplicationListItemMapper.Verify(x => x.Map(data));
 			_context.ApplicationGrouper.Verify(x => x.Group(map, new[] { OrderType.LegalEntity }), Times.Once());
 			_context.ApplicationRepository.Verify(x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedDaysToShow), Times.Once());
