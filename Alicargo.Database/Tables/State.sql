@@ -1,6 +1,9 @@
 ﻿CREATE TABLE [dbo].[State] (
-	[Id]		BIGINT			IDENTITY (1, 1) NOT NULL,
-	[Name]		NVARCHAR (MAX)	NOT NULL,
-	[Position]	INT				NOT NULL,
+	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
+	[Name] NVARCHAR (MAX) NOT NULL,
+	[Position] INT NOT NULL,
+	[IsSystem] BIT NOT NULL,
+	[SendEmail] BIT NOT NULL DEFAULT 1,
+
 	CONSTRAINT [PK_dbo.State] PRIMARY KEY CLUSTERED ([Id] ASC)
 );

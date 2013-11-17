@@ -14,6 +14,7 @@ namespace Alicargo.MvcHelpers
 		public const string ClientCalculationJs = "~/js/client-calc-js";
 		public const string SenderCalculationJs = "~/js/sender-calc-js";
 		public const string UserListJs = "~/js/user-list-js";
+		public const string StateListJs = "~/js/state-list-js";
 		public const string StylesPath = "~/css";
 
 		public static readonly string Version =

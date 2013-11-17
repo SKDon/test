@@ -1,0 +1,15 @@
+﻿@using Resources
+<style>
+	.container {
+		padding: 0 20px;
+		width: auto;
+	}
+</style>
+<h3>
+	@Html.ActionLink(Pages.Add, MVC.Sender.Create(), new {@class = "btn btn-link"})
+</h3>
+<div id="user-grid" class="grid"></div>
+@section scripts
+{
+	@Scripts.Render(PathConstants.StateListJs)
+}

@@ -1540,6 +1540,7 @@
     <Content Include="Views\Sender\EditorTemplates\SenderModel.cshtml" />
     <Content Include="Views\SenderCalculation\Index.cshtml" />
     <Content Include="Views\SenderCalculation\Details.cshtml" />
+    <Content Include="Views\State\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
