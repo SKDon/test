@@ -111,6 +111,9 @@
     <Build Include="Stored procedures\EmailMessage_GetNext.sql" />
     <Build Include="Stored procedures\EmailMessage_SetState.sql" />
     <Build Include="Stored procedures\EmailMessage_Add.sql" />
+    <Build Include="Tables\EmailTemplate.sql" />
+    <Build Include="Tables\StateEmailTemplate.sql" />
+    <Build Include="Tables\EmailTemplateLocalization.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

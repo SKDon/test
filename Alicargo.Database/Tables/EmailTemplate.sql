@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[EmailTemplate]
+(
+	[Id] BIGINT IDENTITY(1, 1) NOT NULL CONSTRAINT [PK_dbo.EmailTemplate] PRIMARY KEY CLUSTERED ([Id] ASC),
+	[TemplateName] NVARCHAR (320) NOT NULL,	
+);
+GO

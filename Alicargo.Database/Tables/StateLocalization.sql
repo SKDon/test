@@ -5,7 +5,7 @@
 	[StateId] BIGINT NOT NULL,
 
 	CONSTRAINT [PK_dbo.StateLocalization] PRIMARY KEY CLUSTERED ([Id] ASC),
-	CONSTRAINT [FK_dbo.StateLocalization_dbo.State_State_Id] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]) ON DELETE CASCADE
+	CONSTRAINT [FK_dbo.StateLocalization_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]) ON DELETE CASCADE
 );
 
 
