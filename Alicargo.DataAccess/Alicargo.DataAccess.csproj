@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Dapper.1.13\lib\net45\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="DapperExtensions">
+      <HintPath>..\packages\DapperExtensions.1.4.3\lib\net40\DapperExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -69,6 +72,7 @@
     <Compile Include="DbContext\DebugTextWriter.cs" />
     <Compile Include="DbContext\SqlError.cs" />
     <Compile Include="DbContext\SqlExceptionsHelper.cs" />
+    <Compile Include="DbContext\SqlHelper.cs" />
     <Compile Include="DbContext\UnitOfWork.cs" />
     <Compile Include="Helpers\ApplicationRepositoryOrderer.cs" />
     <Compile Include="Helpers\FileDataHelper.cs" />
@@ -89,7 +93,8 @@
     <Compile Include="Repositories\ClientFileRepository.cs" />
     <Compile Include="Repositories\EmailMessageRepository.cs" />
     <Compile Include="Repositories\SenderRepository.cs" />
-    <Compile Include="Repositories\ObsoleteStateRepository.cs" />
+    <Compile Include="Repositories\StateRepository.cs" />
+    <Compile Include="Repositories\StateSettingsRepository.cs" />
     <Compile Include="Repositories\TransitRepository.cs" />
     <Compile Include="Repositories\AuthenticationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

@@ -24,5 +24,14 @@ namespace Alicargo.DataAccess.Helpers
 				command.Parameters.Add(parameter);
 			}
 		}
+
+		public static DataTable GeIdsTable(string name, long[] ids)
+		{
+			var table = new DataTable(name);
+			table.Columns.Add("Id", typeof(long));
+			foreach (var id in ids) { table.Rows.Add(id); }
+
+			return table;
+		}
 	}
 }

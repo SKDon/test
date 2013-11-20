@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -15,28 +16,28 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
-		private readonly IStateConfig _stateConfig;
+		private readonly IStateConfig _config;
 		private readonly IIdentityService _identity;
-		private readonly IStateService _stateService;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IStateSettingsRepository _settings;
 
 		public ApplicationManager(
 			IApplicationRepository applications,
 			IApplicationUpdateRepository applicationUpdater,
-			IStateConfig stateConfig,
+			IStateConfig config,
 			IIdentityService identity,
 			ITransitService transitService,
 			IUnitOfWork unitOfWork,
-			IStateService stateService)
+			IStateSettingsRepository settings)
 		{
 			_applications = applications;
 			_applicationUpdater = applicationUpdater;
-			_stateConfig = stateConfig;
+			_config = config;
 			_identity = identity;
 			_transitService = transitService;
 			_unitOfWork = unitOfWork;
-			_stateService = stateService;
+			_settings = settings;
 		}
 
 		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
@@ -82,7 +83,7 @@ namespace Alicargo.Services.Application
 
 		public void SetTransitReference(long id, string transitReference)
 		{
-			SetState(id, _stateConfig.CargoOnTransitStateId);
+			SetState(id, _config.CargoOnTransitStateId);
 
 			_applicationUpdater.SetTransitReference(id, transitReference);
 
@@ -181,13 +182,13 @@ namespace Alicargo.Services.Application
 
 		public void SetState(long applicationId, long stateId)
 		{
-			if (!_stateService.HasPermissionToSetState(stateId))
+			if (!HasPermissionToSetState(stateId))
 				throw new AccessForbiddenException("User don't have access to the state " + stateId);
 
 			// todo: 2. check permissions to the application for a sender
 
 			// todo: 2. test logic with states
-			if (stateId == _stateConfig.CargoInStockStateId)
+			if (stateId == _config.CargoInStockStateId)
 			{
 				_applicationUpdater.SetDateInStock(applicationId, DateTimeOffset.UtcNow);
 			}
@@ -195,6 +196,12 @@ namespace Alicargo.Services.Application
 			_applicationUpdater.SetState(applicationId, stateId);
 
 			_unitOfWork.SaveChanges();
+		}
+
+		private bool HasPermissionToSetState(long stateId)
+		{
+			return _settings.GetStateAvailabilities()
+				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
 		}
 
 		private static void Map(ApplicationAdminModel @from, ApplicationData to)
@@ -239,7 +246,7 @@ namespace Alicargo.Services.Application
 			{
 				CreationTimestamp = DateTimeOffset.UtcNow,
 				StateChangeTimestamp = DateTimeOffset.UtcNow,
-				StateId = _stateConfig.DefaultStateId,
+				StateId = _config.DefaultStateId,
 				ClassId = null,
 				TransitId = transitId,
 				Invoice = model.Invoice,

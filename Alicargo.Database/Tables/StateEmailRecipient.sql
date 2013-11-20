@@ -1,5 +1,4 @@
-﻿CREATE TABLE [dbo].[StateEmailRecipient]
-(
+﻿CREATE TABLE [dbo].[StateEmailRecipient] (
 	[RoleId] INT NOT NULL,
 	[StateId] BIGINT NOT NULL,
 

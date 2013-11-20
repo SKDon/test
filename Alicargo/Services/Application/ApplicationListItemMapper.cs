@@ -16,12 +16,18 @@ namespace Alicargo.Services.Application
 		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateService _stateService;
+		private readonly IStateRepository _states;
 
-		public ApplicationListItemMapper(IStateService stateService, IStateConfig stateConfig,
+		public ApplicationListItemMapper(
+			IStateService stateService,
+			IStateRepository states,
+			IStateConfig stateConfig,
 			IApplicationRepository applications,
-			ICountryRepository countryRepository, IIdentityService identity)
+			ICountryRepository countryRepository,
+			IIdentityService identity)
 		{
 			_stateService = stateService;
+			_states = states;
 			_stateConfig = stateConfig;
 			_applications = applications;
 			_countryRepository = countryRepository;
@@ -31,7 +37,7 @@ namespace Alicargo.Services.Application
 		public ApplicationListItem[] Map(ApplicationListItemData[] data)
 		{
 			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
-			var localizedStates = _stateService.GetLocalizedDictionary(data.Select(x => x.StateId).ToArray());
+			var states = _states.Get(data.Select(x => x.StateId).ToArray());
 			var stateAvailability = _stateService.GetStateAvailabilityToSet();
 			var calculations = _applications.GetCalculations(data.Select(x => x.Id).ToArray());
 
@@ -43,7 +49,7 @@ namespace Alicargo.Services.Application
 				State = new ApplicationStateModel
 				{
 					StateId = x.StateId,
-					StateName = localizedStates[x.StateId]
+					StateName = states[x.StateId].Localization[_identity.TwoLetterISOLanguageName]
 				},
 				CanClose = x.StateId == _stateConfig.CargoOnTransitStateId,
 				CanSetState = stateAvailability.Contains(x.StateId),

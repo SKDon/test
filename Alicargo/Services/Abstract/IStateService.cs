@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.Services.Abstract
 {
@@ -7,10 +6,8 @@ namespace Alicargo.Services.Abstract
 	{
 		long[] GetStateAvailabilityToSet();
 		long[] GetStateVisibility();
-		Dictionary<long, string> GetLocalizedDictionary(long[] stateIds = null);
-		Dictionary<long, ObsoleteStateData> GetDictionary();
-		bool HasPermissionToSetState(long stateId);
-		long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] stateAvailability);
+
+		long[] FilterByBusinessLogic(ApplicationData applicationData, long[] stateAvailability);
 		long[] FilterByPosition(long[] states, int position);
 	}
 }

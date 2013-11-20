@@ -9,9 +9,9 @@ namespace Alicargo.Core.Services
 {
 	public sealed class LocalizationService : ILocalizationService
 	{
-		private readonly IObsoleteStateRepository _states;
+		private readonly IStateRepository _states;
 
-		public LocalizationService(IObsoleteStateRepository states)
+		public LocalizationService(IStateRepository states)
 		{
 			_states = states;
 		}

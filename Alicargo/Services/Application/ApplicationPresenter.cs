@@ -15,21 +15,24 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationRepository _applications;
 		private readonly ICountryRepository _countryRepository;
 		private readonly IIdentityService _identity;
-		private readonly IObsoleteStateRepository _stateRepository;
+		private readonly IStateRepository _states;
 		private readonly IStateService _stateService;
+		private readonly IStateSettingsRepository _settings;
 
 		public ApplicationPresenter(
 			IApplicationRepository applications,
 			IIdentityService identity,
 			ICountryRepository countryRepository,
 			IStateService stateService,
-			IObsoleteStateRepository stateRepository)
+			IStateRepository states, 
+			IStateSettingsRepository settings)
 		{
 			_applications = applications;
 			_identity = identity;
 			_countryRepository = countryRepository;
 			_stateService = stateService;
-			_stateRepository = stateRepository;
+			_states = states;
+			_settings = settings;
 		}
 
 		public ApplicationAdminModel Get(long id)
@@ -106,14 +109,14 @@ namespace Alicargo.Services.Application
 
 			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
 
-			states = _stateService.ApplyBusinessLogicToStates(applicationData, states);
+			states = _stateService.FilterByBusinessLogic(applicationData, states);
 
-			var currentState = _stateRepository.Get(applicationData.StateId);
+			var currentState = _states.Get(applicationData.StateId);
 
 			states = _stateService.FilterByPosition(states, currentState.Position);
 
 			return ToApplicationStateModel(states);
-		}
+		}		
 
 		public IDictionary<long, string> GetLocalizedCountries()
 		{
@@ -123,13 +126,13 @@ namespace Alicargo.Services.Application
 
 		private ApplicationStateModel[] ToApplicationStateModel(long[] ids)
 		{
-			return _stateService.GetLocalizedDictionary(ids)
-								.Select(x => new ApplicationStateModel
-								{
-									StateId = x.Key,
-									StateName = x.Value
-								})
-								.ToArray();
+			return _states.Get(ids)
+				.Select(x => new ApplicationStateModel
+				{
+					StateId = x.Key,
+					StateName = x.Value.Localization[_identity.TwoLetterISOLanguageName]
+				})
+				.ToArray();
 		}
 
 		private static ApplicationAdminModel GetModel(ApplicationData data)

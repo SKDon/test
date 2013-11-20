@@ -74,7 +74,7 @@ namespace Alicargo.Tests.Services
             {
                 var type = roleType;
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
-                _context.StateRepository.Setup(x => x.GetStateAvailability(type)).Returns(states);
+                _context.StateRepository.Setup(x => x.GetAvailable(type)).Returns(states);
 
                 var StateAvailability = _stateService.GetStateAvailabilityToSet();
                 if (roleType == RoleType.Client || roleType == RoleType.Sender)
@@ -87,10 +87,10 @@ namespace Alicargo.Tests.Services
                 }
 
                 _context.IdentityService.Verify(x => x.IsInRole(type));
-                _context.StateRepository.Verify(x => x.GetStateAvailability(type));
+                _context.StateRepository.Verify(x => x.GetAvailable(type));
 
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
-                _context.StateRepository.Setup(x => x.GetStateAvailability(type)).Throws<InvalidOperationException>();
+                _context.StateRepository.Setup(x => x.GetAvailable(type)).Throws<InvalidOperationException>();
             }
         }
 
@@ -124,16 +124,16 @@ namespace Alicargo.Tests.Services
             {
                 var type = roleType;
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
-                _context.StateRepository.Setup(x => x.GetStateVisibility(type)).Returns(states);
+                _context.StateRepository.Setup(x => x.GetVisible(type)).Returns(states);
 
                 var StateAvailability = _stateService.GetStateVisibility();
                 states.ShouldBeEquivalentTo(StateAvailability);
 
                 _context.IdentityService.Verify(x => x.IsInRole(type));
-                _context.StateRepository.Verify(x => x.GetStateVisibility(type));
+                _context.StateRepository.Verify(x => x.GetVisible(type));
 
                 _context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
-                _context.StateRepository.Setup(x => x.GetStateVisibility(type)).Throws<InvalidOperationException>();
+                _context.StateRepository.Setup(x => x.GetVisible(type)).Throws<InvalidOperationException>();
             }
         }
 
@@ -164,7 +164,7 @@ namespace Alicargo.Tests.Services
             _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(It.IsAny<long>());
             _context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(StateAvailability[0]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
+            var stateModels = _stateService.FilterByBusinessLogic(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }
@@ -181,7 +181,7 @@ namespace Alicargo.Tests.Services
             _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(It.IsAny<long>());
             _context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(StateAvailability[0]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
+            var stateModels = _stateService.FilterByBusinessLogic(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }
@@ -196,7 +196,7 @@ namespace Alicargo.Tests.Services
             _context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(StateAvailability[0]);
             _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(StateAvailability[1]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
+            var stateModels = _stateService.FilterByBusinessLogic(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }
@@ -212,7 +212,7 @@ namespace Alicargo.Tests.Services
             _context.AirWaybillRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(airWaybillData);
             _context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(StateAvailability[0]);
 
-            var stateModels = _stateService.ApplyBusinessLogicToStates(applicationData, StateAvailability);
+            var stateModels = _stateService.FilterByBusinessLogic(applicationData, StateAvailability);
 
             stateModels.Should().BeEmpty();
         }

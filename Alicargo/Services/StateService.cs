@@ -1,8 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -16,45 +12,68 @@ namespace Alicargo.Services
 	internal sealed class StateService : IStateService
 	{
 		private readonly IIdentityService _identity;
-		private readonly IStateConfig _stateConfig;
-		private readonly IObsoleteStateRepository _stateRepository;
-		private readonly ConcurrentDictionary<long, bool> _permissions = new ConcurrentDictionary<long, bool>();
-		private readonly IAwbRepository _awbRepository;
+		private readonly IStateConfig _config;
+		private readonly IStateRepository _states;
+		private readonly IStateSettingsRepository _settings;
+		private readonly IAwbRepository _awbs;
 
-		public StateService(IObsoleteStateRepository stateRepository, IIdentityService identity, IStateConfig stateConfig, IAwbRepository awbRepository)
+		public StateService(
+			IStateRepository states,
+			IStateSettingsRepository settings,
+			IIdentityService identity,
+			IStateConfig config,
+			IAwbRepository awbs)
 		{
-			_stateRepository = stateRepository;
+			_states = states;
+			_settings = settings;
 			_identity = identity;
-			_stateConfig = stateConfig;
-			_awbRepository = awbRepository;
+			_config = config;
+			_awbs = awbs;
 		}
 
 		public long[] GetStateAvailabilityToSet()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
 			{
-				return _stateRepository.GetStateAvailability(RoleType.Admin);
+				return _settings.GetStateAvailabilities()
+					.Where(x => x.Role == RoleType.Admin)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Client))
 			{
-				return _stateRepository.GetStateAvailability(RoleType.Client).Except(_stateConfig.AwbStates).ToArray();
+				return _settings.GetStateAvailabilities()
+					.Where(x => x.Role == RoleType.Client)
+					.Select(x => x.StateId)
+					.Except(_config.AwbStates)
+					.ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Forwarder))
 			{
-				return _stateRepository.GetStateAvailability(RoleType.Forwarder);
+				return _settings.GetStateAvailabilities()
+					.Where(x => x.Role == RoleType.Forwarder)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				return _stateRepository.GetStateAvailability(RoleType.Sender).Except(_stateConfig.AwbStates).ToArray();
+				return _settings.GetStateAvailabilities()
+					.Where(x => x.Role == RoleType.Sender)
+					.Select(x => x.StateId)
+					.Except(_config.AwbStates)
+					.ToArray();
 			}
 
 			// todo: 3. a Broker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Broker))
 			{
-				return _stateRepository.GetStateAvailability(RoleType.Broker);
+				return _settings.GetStateAvailabilities()
+					.Where(x => x.Role == RoleType.Broker)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			throw new InvalidLogicException("Unsupported role");
@@ -64,108 +83,85 @@ namespace Alicargo.Services
 		{
 			if (_identity.IsInRole(RoleType.Admin))
 			{
-				return _stateRepository.GetStateVisibility(RoleType.Admin);
+				return _settings.GetStateVisibilities()
+					.Where(x => x.Role == RoleType.Admin)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Client))
 			{
-				return _stateRepository.GetStateVisibility(RoleType.Client);
+				return _settings.GetStateVisibilities()
+					.Where(x => x.Role == RoleType.Client)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Forwarder))
 			{
-				return _stateRepository.GetStateVisibility(RoleType.Forwarder);
+				return _settings.GetStateVisibilities()
+					.Where(x => x.Role == RoleType.Forwarder)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				return _stateRepository.GetStateVisibility(RoleType.Sender);
+				return _settings.GetStateVisibilities()
+					.Where(x => x.Role == RoleType.Sender)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			// todo: 3. Broker should not be here because he don't use states
 			if (_identity.IsInRole(RoleType.Broker))
 			{
-				return _stateRepository.GetStateVisibility(RoleType.Broker);
+				return _settings.GetStateVisibilities()
+					.Where(x => x.Role == RoleType.Broker)
+					.Select(x => x.StateId)
+					.ToArray();
 			}
 
 			throw new InvalidLogicException();
 		}
 
-		public bool HasPermissionToSetState(long stateId)
-		{
-			// todo: 2. move cache to an interception
-			return _permissions.GetOrAdd(stateId, x =>
-			{
-				var roles = _stateRepository.GetAvailableRoles(x);
-				return roles.Any(role => _identity.IsInRole(role));
-			});
-		}
-
 		public long[] FilterByPosition(long[] states, int position)
 		{
-			return _stateRepository.GetAll() // todo: 3. pass state ids to Get
-				.Where(x => states.Contains(x.Id) && x.Position >= position)
-				.Select(x => x.Id)
-				.ToArray();
+			return _states.Get(states).Where(x => x.Value.Position >= position).Select(x => x.Key).ToArray();
 		}
 
-		public long[] ApplyBusinessLogicToStates(ApplicationData applicationData, long[] stateAvailability)
+		public long[] FilterByBusinessLogic(ApplicationData applicationData, long[] stateAvailability)
 		{
 			var states = stateAvailability.ToList();
 
 			if (!applicationData.Weight.HasValue || !applicationData.Count.HasValue)
 			{
-				states.Remove(_stateConfig.CargoInStockStateId);
+				states.Remove(_config.CargoInStockStateId);
 			}
 
 			#region AWB
 
 			if (!applicationData.AirWaybillId.HasValue)
 			{
-				states.Remove(_stateConfig.CargoIsFlewStateId);
+				states.Remove(_config.CargoIsFlewStateId);
 			}
 
 			if (applicationData.AirWaybillId.HasValue)
 			{
-				var airWaybillData = _awbRepository.Get(applicationData.AirWaybillId.Value).First();
+				var airWaybillData = _awbs.Get(applicationData.AirWaybillId.Value).First();
 				if (airWaybillData.GTD.IsNullOrWhiteSpace())
 				{
-					states.Remove(_stateConfig.CargoAtCustomsStateId);
+					states.Remove(_config.CargoAtCustomsStateId);
 				}
 			}
 			else
 			{
-				states.Remove(_stateConfig.CargoAtCustomsStateId);
+				states.Remove(_config.CargoAtCustomsStateId);
 			}
 
 			#endregion
 
 			return states.ToArray();
-		}
-
-		public Dictionary<long, string> GetLocalizedDictionary(long[] stateIds = null)
-		{
-			var states = stateIds != null
-				? _stateRepository.GetAll().Where(x => stateIds.Contains(x.Id)).ToArray()
-				: _stateRepository.GetAll();
-
-			if (stateIds != null && stateIds.Distinct().Count() != states.Length)
-			{
-				// todo: 3. Test
-				throw new InvalidDataException("Can't find a state");
-			}
-
-			var dictionary = states
-				.Select(x => new { x.Id, Name = x.Localization[CultureInfo.CurrentUICulture.TwoLetterISOLanguageName], x.Position })
-				.OrderBy(x => x.Position)
-				.ToDictionary(x => x.Id, x => x.Name);
-
-			return dictionary;
-		}
-
-		public Dictionary<long, ObsoleteStateData> GetDictionary()
-		{
-			return _stateRepository.GetAll().ToDictionary(x => x.Id, x => x);
 		}
 	}
 }

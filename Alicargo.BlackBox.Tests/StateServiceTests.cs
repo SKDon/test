@@ -34,8 +34,9 @@ namespace Alicargo.BlackBox.Tests
 			_identityService = new Mock<IIdentityService>(MockBehavior.Strict);
 			_stateConfig = new StateConfig();
 
+			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 			_stateService = new StateService(
-				new ObsoleteStateRepository(unitOfWork),
+				new StateRepository(executor),
 				_identityService.Object,
 				_stateConfig,
 				new AwbRepository(unitOfWork));

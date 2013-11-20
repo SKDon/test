@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
@@ -35,9 +34,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public Dictionary<long, decimal> GetTariffs(long[] ids)
 		{
-			var table = new DataTable("Ids");
-			table.Columns.Add("Id", typeof(long));
-			foreach (var id in ids) { table.Rows.Add(id); }
+			var table = TableParameters.GeIdsTable("Ids", ids);
 
 			var tariffs = _executor.Array<SenderTariff>("[dbo].[Sender_GetTariffs]", new TableParameters(table));
 
