@@ -9,6 +9,5 @@ namespace Alicargo.Core.Services.Abstract
 		string GetMethodOfDelivery(MethodOfDelivery methodOfDelivery, string culture);
 		string GetMethodOfTransit(MethodOfTransit methodOfTransit, string culture);
 		string GetDeliveryType(DeliveryType deliveryType, string culture);
-		string GetStateName(long stateId, string culture);
 	}
 }

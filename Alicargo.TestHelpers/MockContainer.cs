@@ -73,6 +73,7 @@ namespace Alicargo.TestHelpers
 			MessageBuilder = Inject<IMessageBuilder>();
 			Recipients = Inject<IRecipients>();
 			ApplicationFileRepository = Inject<IApplicationFileRepository>();
+			StateSettingsRepository = Inject<IStateSettingsRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -97,6 +98,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IMailSender> MailSender { get; private set; }
 		public Mock<IMessageBuilder> MessageBuilder { get; private set; }
 		public Mock<IStateRepository> StateRepository { get; private set; }
+		public Mock<IStateSettingsRepository> StateSettingsRepository { get; private set; }
 		public Mock<IStateService> StateService { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }

@@ -144,7 +144,7 @@ namespace Alicargo.App_Start
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(unitOfWork);
 
-			return new MessageFactory(serializer, files, recipients, stateConfig,
+			return new MessageFactory(states, serializer, files, recipients, stateConfig,
 				applications, awbs, clientRepository, localization, DefaultFrom);
 		}
 	}

@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;
 using FluentAssertions;
@@ -26,7 +27,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
 			_files = new ApplicationFileRepository(_context.UnitOfWork);
-			_stateRepository = new StateRepository(_context.UnitOfWork);
+			_stateRepository = new StateRepository(new SqlProcedureExecutor(_context.Connection.ConnectionString));
 			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
 		}
 
@@ -63,12 +64,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_ApplicationRepository_Count()
 		{
-			var defaultState = _stateRepository.Get(TestConstants.DefaultStateId);
-			var count = _applications.Count(new[] { defaultState.Id });
+			var defaultState = _stateRepository.Get(TestConstants.DefaultStateId).First();
+			var count = _applications.Count(new[] { defaultState.Key });
 
 			CreateTestApplication();
 
-			var newCount = _applications.Count(new[] { defaultState.Id });
+			var newCount = _applications.Count(new[] { defaultState.Key });
 
 			Assert.AreEqual(newCount, count + 1);
 		}
@@ -77,14 +78,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_ApplicationRepository_UpdateState()
 		{
 			var application = CreateTestApplication();
-			var state = _stateRepository.GetAll().First(x => x.Id != application.StateId);
+			var state = _stateRepository.Get().First(x => x.Key != application.StateId);
 
-			_applicationUpater.SetState(application.Id, state.Id);
+			_applicationUpater.SetState(application.Id, state.Key);
 			_context.UnitOfWork.SaveChanges();
 
 			var actual = _applications.Get(application.Id);
 
-			Assert.AreEqual(state.Id, actual.StateId);
+			Assert.AreEqual(state.Key, actual.StateId);
 		}
 
 		[TestMethod, TestCategory("black-box")]

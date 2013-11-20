@@ -24,7 +24,7 @@ namespace Alicargo.Controllers
 		private readonly IAwbStateManager _awbStateManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrokerRepository _brokerRepository;
-		private readonly IIdentityService _identityService;
+		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;
 
 		public AirWaybillController(
@@ -36,7 +36,7 @@ namespace Alicargo.Controllers
 			IAwbRepository awbRepository,
 			IAwbStateManager awbStateManager,
 			IBrokerRepository brokerRepository,
-			IIdentityService identityService)
+			IIdentityService identity)
 		{
 			_awbPresenter = awbPresenter;
 			_applicationAwbManager = applicationAwbManager;
@@ -46,7 +46,7 @@ namespace Alicargo.Controllers
 			_awbRepository = awbRepository;
 			_awbStateManager = awbStateManager;
 			_brokerRepository = brokerRepository;
-			_identityService = identityService;
+			_identity = identity;
 		}
 
 		#region Create
@@ -92,13 +92,13 @@ namespace Alicargo.Controllers
 		{
 			// todo: 3. utility to get current broker
 			long? brokerId = null;
-			if (_identityService.IsInRole(RoleType.Broker) && _identityService.Id.HasValue)
+			if (_identity.IsInRole(RoleType.Broker) && _identity.Id.HasValue)
 			{
-				var broker = _brokerRepository.GetByUserId(_identityService.Id.Value);
+				var broker = _brokerRepository.GetByUserId(_identity.Id.Value);
 				brokerId = broker.Id;
 			}
 
-			var list = _awbPresenter.List(take, skip, brokerId);
+			var list = _awbPresenter.List(take, skip, brokerId, _identity.TwoLetterISOLanguageName);
 
 			return Json(list);
 		}

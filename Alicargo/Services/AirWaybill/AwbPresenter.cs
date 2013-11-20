@@ -14,27 +14,26 @@ namespace Alicargo.Services.AirWaybill
 	{
 		private readonly IAwbRepository _awbRepository;
 		private readonly IBrokerRepository _brokerRepository;
-		private readonly IStateService _stateService;
+		private readonly IStateRepository _states;
 
 		public AwbPresenter(
 			IAwbRepository awbRepository,
 			IBrokerRepository brokerRepository,
-			IStateService stateService)
+			IStateRepository states)
 		{
 			_awbRepository = awbRepository;
 			_brokerRepository = brokerRepository;
-			_stateService = stateService;
+			_states = states;
 		}
 
-		public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId)
+		public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, string twoLetterISOLanguageName)
 		{
 			var data = _awbRepository.GetRange(take, skip, brokerId);
 			var ids = data.Select(x => x.Id).ToArray();
 
-			var aggregates = _awbRepository.GetAggregate(ids)
-										   .ToDictionary(x => x.AirWaybillId, x => x);
+			var aggregates = _awbRepository.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
 
-			var localizedStates = _stateService.GetLocalizedDictionary();
+			var states = _states.Get();
 
 			var items = data.Select(x => new AirWaybillListItem
 				{
@@ -43,7 +42,7 @@ namespace Alicargo.Services.AirWaybill
 					InvoiceFileName = x.InvoiceFileName,
 					State = new ApplicationStateModel
 						{
-							StateName = localizedStates[x.StateId],
+							StateName = states[x.StateId].Localization[twoLetterISOLanguageName],
 							StateId = x.StateId
 						},
 					AWBFileName = x.AWBFileName,

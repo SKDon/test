@@ -140,7 +140,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\Application\ApplicationListPresenterTests.cs" />
-    <Compile Include="StateServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -23,10 +23,12 @@ namespace Alicargo.Jobs.ApplicationEvents
 		private readonly string _defaultFrom;
 		private readonly IRecipients _recipients;
 		private readonly IStateConfig _stateConfig;
+		private readonly IStateRepository _states;
 		private readonly ISerializer _serializer;
 		private readonly IApplicationFileRepository _files;
 
 		public MessageFactory(
+			IStateRepository states,
 			ISerializer serializer,
 			IApplicationFileRepository files,
 			IRecipients recipients,
@@ -37,6 +39,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 			ILocalizationService localization,
 			string defaultFrom)
 		{
+			_states = states;
 			_serializer = serializer;
 			_files = files;
 			_recipients = recipients;
@@ -253,6 +256,8 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public string ApplicationSetState(ApplicationDetailsData data, string culture)
 		{
+			var stateData = _states.Get(data.StateId).Values.First();
+
 			return string.Format(Mail.Application_SetState,
 								 ApplicationHelper.GetDisplayNumber(data.Id, data.Count),
 								 _localization.GetDate(data.DateOfCargoReceipt, culture),
@@ -288,7 +293,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 								 _localization.GetDate(data.AirWaybillDateOfArrival, culture),
 								 data.AirWaybillGTD,
 								 data.TransitReference,
-								 _localization.GetStateName(data.StateId, culture));
+								 stateData.Localization[culture]);
 		}
 
 		private IEnumerable<EmailMessage> SendOnSetState(ApplicationDetailsData details)

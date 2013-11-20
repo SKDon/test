@@ -20,7 +20,7 @@ namespace Alicargo.Tests.Services.Application
 		private ApplicationListItemData[] _data;
 		private ApplicationListItemMapper _mapper;
 		private Dictionary<long, string> _localazedStates;
-		private long[] _StateAvailability;
+		private long[] _stateAvailability;
 		private Dictionary<long, long> _calculations;
 
 		[TestInitialize]
@@ -30,7 +30,7 @@ namespace Alicargo.Tests.Services.Application
 			_context = new MockContainer();
 			_countries = new List<CountryData>();
 			_localazedStates = new Dictionary<long, string>();
-			_StateAvailability = Enumerable.Range(0, count / 2).Select(x => (long)x).ToArray();
+			_stateAvailability = Enumerable.Range(0, count / 2).Select(x => (long)x).ToArray();
 			_data = _context.CreateMany<ApplicationListItemData>(count).ToArray();
 			_calculations = _data.Take(count / 2).ToDictionary(x => x.Id, x => _context.Create<long>());
 
@@ -55,8 +55,7 @@ namespace Alicargo.Tests.Services.Application
 
 			_context.IdentityService.SetupGet(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
 			_context.CountryRepository.Setup(x => x.Get()).Returns(_countries.ToArray());
-			_context.StateService.Setup(x => x.GetLocalizedDictionary(It.IsAny<long[]>())).Returns(_localazedStates);
-			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(_StateAvailability);
+			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(_stateAvailability);
 			_context.StateConfig.SetupGet(x => x.CargoOnTransitStateId).Returns(CargoOnTransitStateId);
 			_context.ApplicationRepository.Setup(x => x.GetCalculations(It.IsAny<long[]>())).Returns(_calculations);
 
@@ -85,7 +84,7 @@ namespace Alicargo.Tests.Services.Application
 						StateName = _localazedStates[i]
 					});
 				item.CanClose.ShouldBeEquivalentTo(item.StateId == CargoOnTransitStateId);
-				item.CanSetState.ShouldBeEquivalentTo(_StateAvailability.Contains(item.StateId));
+				item.CanSetState.ShouldBeEquivalentTo(_stateAvailability.Contains(item.StateId));
 				item.TransitDeliveryTypeString.Should().NotBeNullOrEmpty();
 				item.TransitMethodOfTransitString.Should().NotBeNullOrEmpty();
 				item.CanSetTransitCost.ShouldBeEquivalentTo(!_calculations.ContainsKey(item.Id));

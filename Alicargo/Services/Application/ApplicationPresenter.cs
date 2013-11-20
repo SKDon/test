@@ -17,22 +17,19 @@ namespace Alicargo.Services.Application
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _states;
 		private readonly IStateService _stateService;
-		private readonly IStateSettingsRepository _settings;
 
 		public ApplicationPresenter(
 			IApplicationRepository applications,
 			IIdentityService identity,
 			ICountryRepository countryRepository,
 			IStateService stateService,
-			IStateRepository states, 
-			IStateSettingsRepository settings)
+			IStateRepository states)
 		{
 			_applications = applications;
 			_identity = identity;
 			_countryRepository = countryRepository;
 			_stateService = stateService;
 			_states = states;
-			_settings = settings;
 		}
 
 		public ApplicationAdminModel Get(long id)
@@ -111,7 +108,7 @@ namespace Alicargo.Services.Application
 
 			states = _stateService.FilterByBusinessLogic(applicationData, states);
 
-			var currentState = _states.Get(applicationData.StateId);
+			var currentState = _states.Get(applicationData.StateId).Values.First();
 
 			states = _stateService.FilterByPosition(states, currentState.Position);
 

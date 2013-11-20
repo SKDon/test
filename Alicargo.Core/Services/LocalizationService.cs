@@ -36,10 +36,5 @@ namespace Alicargo.Core.Services
 		{
 			return Entities.ResourceManager.GetString("DeliveryType", CultureInfo.GetCultureInfo(culture));
 		}
-
-		public string GetStateName(long stateId, string culture)
-		{
-			return _states.Get(stateId).Localization[culture];
-		}
 	}
 }
