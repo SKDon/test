@@ -224,6 +224,14 @@ namespace Links
             public static readonly string it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/it.min.js") ? Url("it.min.js") : Url("it.js");
             public static readonly string ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ru.min.js") ? Url("ru.min.js") : Url("ru.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class State {
+                private const string URLPATH = "~/Scripts/app/State";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class User {
                 private const string URLPATH = "~/Scripts/app/User";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }

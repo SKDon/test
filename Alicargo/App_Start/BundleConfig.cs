@@ -35,6 +35,11 @@ namespace Alicargo.App_Start
 					"~/Scripts/app/User/Grid.js"
 				));
 
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.StateListJs)
+				.Include(
+					"~/Scripts/app/State/Grid.js"
+				));
+
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.CalculationJs)
 				.Include(
 					"~/scripts/app/calculation/admin/Columns.js",

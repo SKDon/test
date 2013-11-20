@@ -678,6 +678,7 @@
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\app\State\Grid.js" />
     <Content Include="Scripts\app\User\Grid.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af.js" />
@@ -1541,6 +1542,8 @@
     <Content Include="Views\SenderCalculation\Index.cshtml" />
     <Content Include="Views\SenderCalculation\Details.cshtml" />
     <Content Include="Views\State\Index.cshtml" />
+    <Content Include="Views\State\Create.cshtml" />
+    <Content Include="Views\State\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

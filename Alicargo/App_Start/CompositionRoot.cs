@@ -54,9 +54,7 @@ namespace Alicargo.App_Start
 				.Select(IsServiceType)
 				.Excluding<SqlProcedureExecutor>()
 				.BindDefaultInterface()
-				.Configure(y => y.InScope(scope)
-				//.Named("MainDb")
-				));
+				.Configure(y => y.InScope(scope)));
 		}
 
 		public static void BindConnection(IKernel kernel, string connectionString, string filesConnectionString)
@@ -69,14 +67,12 @@ namespace Alicargo.App_Start
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
 				.InSingletonScope()
-				//.Named("MainDb")
 				.WithConstructorArgument("connectionString", connectionString);
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
 				.WhenInjectedInto<ClientFileRepository>()
 				.InSingletonScope()
-				//.Named("FilesDb")
 				.WithConstructorArgument("connectionString", filesConnectionString);
 		}
 	}

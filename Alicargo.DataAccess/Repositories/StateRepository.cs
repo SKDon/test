@@ -73,7 +73,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public StateListItem[] All()
 		{
-			return _executor.Array<StateListItem>("[dbo].[State_GetList]");
+			return _executor.Array<StateListItem>("[dbo].[State_GetList]"); // todo: test for order by position
 		}
 
 		public void Edit(long id, StateData data)

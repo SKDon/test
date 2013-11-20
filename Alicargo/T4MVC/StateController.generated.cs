@@ -25,9 +25,6 @@ namespace Alicargo.Controllers
     public partial class StateController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public StateController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected StateController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -46,9 +43,9 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult List()
+        public virtual System.Web.Mvc.ViewResult Edit()
         {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -68,6 +65,8 @@ namespace Alicargo.Controllers
         {
             public readonly string Index = "Index";
             public readonly string List = "List";
+            public readonly string Create = "Create";
+            public readonly string Edit = "Edit";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -75,17 +74,18 @@ namespace Alicargo.Controllers
         {
             public const string Index = "Index";
             public const string List = "List";
+            public const string Create = "Create";
+            public const string Edit = "Edit";
         }
 
 
-        static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
+        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_List ListParams { get { return s_params_List; } }
+        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_List
+        public class ActionParamsClass_Edit
         {
-            public readonly string take = "take";
-            public readonly string skip = "skip";
+            public readonly string id = "id";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -97,8 +97,12 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Create = "Create";
+                public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
             }
+            public readonly string Create = "~/Views/State/Create.cshtml";
+            public readonly string Edit = "~/Views/State/Edit.cshtml";
             public readonly string Index = "~/Views/State/Index.cshtml";
         }
     }
@@ -117,14 +121,31 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip);
+        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
 
-        public override System.Web.Mvc.JsonResult List(int take, int skip)
+        public override System.Web.Mvc.JsonResult List()
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "take", take);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skip", skip);
-            ListOverride(callInfo, take, skip);
+            ListOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        public override System.Web.Mvc.ViewResult Create()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
+            CreateOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+
+        public override System.Web.Mvc.ViewResult Edit(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            EditOverride(callInfo, id);
             return callInfo;
         }
 
