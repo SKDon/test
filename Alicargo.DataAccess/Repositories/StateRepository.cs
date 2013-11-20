@@ -43,7 +43,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public IReadOnlyDictionary<long, StateData> Get(params long[] ids)
 		{
-			var idsTable = TableParameters.GeIdsTable("Ids", ids);
+			var idsTable = TableParameters.GeIdsTable("Ids", ids.Distinct().ToArray());
 
 			var list = _executor.Array<StateListItem>("[dbo].[State_GetList]", new TableParameters(idsTable));
 

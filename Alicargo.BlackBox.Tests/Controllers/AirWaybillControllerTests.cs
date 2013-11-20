@@ -26,14 +26,14 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private CompositionHelper _composition;
 		private AirWaybillController _controller;
 		private AlicargoDataContext _db;
-		private MockContainer _mock;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
 
-			_mock = new MockContainer();
+			_fixture = new Fixture();
 			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
 			_controller = _composition.Kernel.Get<AirWaybillController>();
 		}
@@ -49,7 +49,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		{
 			var entity = _db.AirWaybills.First();
 
-			var model = _mock
+			var model = _fixture
 				.Build<AwbAdminModel>()
 				.With(x => x.BrokerId, entity.BrokerId)
 				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
@@ -84,7 +84,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			var count = _db.AirWaybills.Count();
 
-			var model = _mock
+			var model = _fixture
 				.Build<AwbAdminModel>()
 				.Without(x => x.GTD)
 				.With(x => x.BrokerId, broker.Id)
