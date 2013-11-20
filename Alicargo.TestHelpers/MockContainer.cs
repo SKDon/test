@@ -34,8 +34,8 @@ namespace Alicargo.TestHelpers
 				.With(x => x.CurrencyId, 1)
 				.With(x => x.CountryName, new[]
 				{
-					new KeyValuePair<string, string>(TwoLetterISOLanguageName.English, Fixture.Create<string>()), 
-					new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, Fixture.Create<string>()), 
+					new KeyValuePair<string, string>(TwoLetterISOLanguageName.English, Fixture.Create<string>()),
+					new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, Fixture.Create<string>()),
 					new KeyValuePair<string, string>(TwoLetterISOLanguageName.Italian, Fixture.Create<string>())
 				})
 				.Create());
@@ -49,6 +49,13 @@ namespace Alicargo.TestHelpers
 				.With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
 				.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
 				.Create());
+
+			Fixture.Register(() => new StateData(new Dictionary<string, string>
+			{
+				{TwoLetterISOLanguageName.English, Fixture.Create<string>()},
+				{TwoLetterISOLanguageName.Italian, Fixture.Create<string>()},
+				{TwoLetterISOLanguageName.Russian, Fixture.Create<string>()},
+			}) { Name = Fixture.Create<string>(), Position = Fixture.Create<int>() });
 
 			Serializer = Inject<ISerializer>();
 			StateRepository = Inject<IStateRepository>();

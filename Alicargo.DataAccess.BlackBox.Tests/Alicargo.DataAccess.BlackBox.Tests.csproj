@@ -96,7 +96,8 @@
     <Compile Include="Helpers\DbTestContext.cs" />
     <Compile Include="Repositories\EmailMessageRepositoryTests.cs" />
     <Compile Include="Repositories\SenderRepositoryTests.cs" />
-    <Compile Include="Repositories\Tests.StateRepository.cs" />
+    <Compile Include="Repositories\StateSettingsRepositoryTests.cs" />
+    <Compile Include="Repositories\StateRepositoryTests.cs" />
     <Compile Include="Repositories\AwbRepositoryTests.cs" />
     <Compile Include="Repositories\BrockerRepositoryTests.cs" />
     <Compile Include="Repositories\CarrierRepositoryTests.cs" />

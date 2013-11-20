@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
@@ -14,12 +15,12 @@ namespace Alicargo.Jobs.Tests
 	[TestClass]
 	public class MessageFactoryTests
 	{
-		private MockContainer _container;
-		private long _cargoReceivedStateId;
-		private MessageFactory _factory;
 		private long _cargoAtCustomsStateId;
-		private ApplicationDetailsData _details;
 		private long _cargoIsCustomsClearedStateId;
+		private long _cargoReceivedStateId;
+		private MockContainer _container;
+		private ApplicationDetailsData _details;
+		private MessageFactory _factory;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -53,14 +54,14 @@ namespace Alicargo.Jobs.Tests
 		private void SetupGetFiles()
 		{
 			_container.ApplicationFileRepository.Setup(x => x.GetInvoiceFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-			_container.ApplicationFileRepository.Setup(x => x.GetDeliveryBillFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
+			_container.ApplicationFileRepository.Setup(x => x.GetDeliveryBillFile(It.IsAny<long>()))
+				.Returns(It.IsAny<FileHolder>());
 			_container.ApplicationFileRepository.Setup(x => x.GetCPFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 			_container.ApplicationFileRepository.Setup(x => x.GetPackingFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 			_container.ApplicationFileRepository.Setup(x => x.GetSwiftFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 			_container.ApplicationFileRepository.Setup(x => x.GetTorg12File(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 			_container.AirWaybillRepository.Setup(x => x.GTDAdditionalFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
 			_container.AirWaybillRepository.Setup(x => x.GetGTDFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-
 		}
 
 		[TestMethod]
@@ -114,6 +115,19 @@ namespace Alicargo.Jobs.Tests
 					StateId = stateId
 				});
 			_container.ClientRepository.Setup(x => x.GetLanguage(_details.ClientId)).Returns(TwoLetterISOLanguageName.English);
+			var stateData = new StateData(new Dictionary<string, string>
+			{
+				{TwoLetterISOLanguageName.English, "English"},
+				{TwoLetterISOLanguageName.Italian, "Italian"},
+				{TwoLetterISOLanguageName.Russian, "Russian"},
+			}) { Name = "English" };
+
+			_container.StateRepository.Setup(x => x.Get(stateId)).Returns(new Dictionary<long, StateData>
+			{
+				{
+					stateId, stateData
+				}
+			});
 			SetupGetFiles();
 		}
 	}
