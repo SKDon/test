@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BaseAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:1893/</Value>
+      <Value Profile="(Default)">http://localhost:8080/</Value>
     </Setting>
     <Setting Name="AdminLogin" Type="System.String" Scope="User">
       <Value Profile="(Default)">Admin</Value>
