@@ -9,7 +9,6 @@ using Alicargo.Core.Services.Abstract;
 using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
-using Alicargo.Services.Email;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
@@ -55,7 +54,9 @@ namespace Alicargo.App_Start
 				.Select(IsServiceType)
 				.Excluding<SqlProcedureExecutor>()
 				.BindDefaultInterface()
-				.Configure(y => y.InScope(scope)));
+				.Configure(y => y.InScope(scope)
+				//.Named("MainDb")
+				));
 		}
 
 		public static void BindConnection(IKernel kernel, string connectionString, string filesConnectionString)
@@ -67,20 +68,15 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
-				.When(request => request.ParentRequest.Service == typeof (IAuthenticationRepository)
-				                 || request.ParentRequest.Service == typeof (ISenderRepository)
-				                 || request.ParentRequest.Service == typeof (IApplicationEventRepository)
-								 || request.ParentRequest.Service == typeof(IEmailMessageRepository)
-				)
 				.InSingletonScope()
-				.Named("MainDb")
+				//.Named("MainDb")
 				.WithConstructorArgument("connectionString", connectionString);
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
 				.WhenInjectedInto<ClientFileRepository>()
 				.InSingletonScope()
-				.Named("FilesDb")
+				//.Named("FilesDb")
 				.WithConstructorArgument("connectionString", filesConnectionString);
 		}
 	}
