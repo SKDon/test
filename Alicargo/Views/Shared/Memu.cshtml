@@ -1,5 +1,6 @@
 ﻿@using Alicargo.Contracts.Enums
 @using Alicargo.Core.Resources
+@using Alicargo.Services
 @using Resources
 @inherits BaseWebViewPage
 
@@ -74,13 +75,13 @@
 				</ul>
 				<ul class="nav pull-right">
 					<li>
-						@Html.ActionLink("Русский", MVC.Home.Culture(TwoLetterISOLanguageName.Russian, Request.RawUrl))
+						@Html.ActionLink(LanguageName.Russian, MVC.Home.Culture(TwoLetterISOLanguageName.Russian, Request.RawUrl))
 					</li>
 					<li>
-						@Html.ActionLink("Italiano", MVC.Home.Culture(TwoLetterISOLanguageName.Italian, Request.RawUrl))
+						@Html.ActionLink(LanguageName.Italian, MVC.Home.Culture(TwoLetterISOLanguageName.Italian, Request.RawUrl))
 					</li>
 					<li>
-						@Html.ActionLink("English", MVC.Home.Culture(TwoLetterISOLanguageName.English, Request.RawUrl))
+						@Html.ActionLink(LanguageName.English, MVC.Home.Culture(TwoLetterISOLanguageName.English, Request.RawUrl))
 					</li>
 				</ul>
 			</div>

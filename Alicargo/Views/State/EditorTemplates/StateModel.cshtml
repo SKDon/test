@@ -1,0 +1,25 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model StateModel
+
+<div class="row">
+	<div class="span12">
+		@Html.DropDownListFor(x => x.Language, (IDictionary<string, string>)ViewBag.Languages)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Name)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.LocalizedName)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Position)
+	</div>
+</div>
+<div class="row">
+	<div class="span12">
+		@Html.EditorWithLabelFor(model => model.Subject)
+		@Html.EditorWithLabelFor(model => model.Body)
+	</div>
+</div>

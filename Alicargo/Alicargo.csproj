@@ -157,6 +157,7 @@
     <Compile Include="Services\Excel\ExcelConstants.cs" />
     <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
     <Compile Include="Services\Excel\ExcelAdminCalculation.cs" />
+    <Compile Include="Services\LanguageName.cs" />
     <Compile Include="T4MVC\AirWaybillController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -1545,6 +1546,7 @@
     <Content Include="Views\State\Index.cshtml" />
     <Content Include="Views\State\Create.cshtml" />
     <Content Include="Views\State\Edit.cshtml" />
+    <Content Include="Views\State\EditorTemplates\StateModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -122,6 +122,8 @@
     <Build Include="Stored procedures\State_GetStateEmailRecipients.sql" />
     <Build Include="Stored procedures\State_GetStateVisibilities.sql" />
     <Build Include="Types\StringsTable.sql" />
+    <Build Include="Stored procedures\EmailTemplate_GetByStateId.sql" />
+    <Build Include="Stored procedures\EmailTemplateLocalization_Get.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

@@ -21,7 +21,10 @@ namespace Alicargo.ViewModels
 		[Required, DisplayNameLocalized(typeof(Entities), "LocalizedName")]
 		public string LocalizedName { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Culture")]
-		public string Culture { get; set; }
+		[Required, DisplayNameLocalized(typeof(Entities), "Language")]
+		public string Language { get; set; }
+
+		[Required, DisplayNameLocalized(typeof(Entities), "EnableEmailSend")]
+		public bool EnableEmailSend { get; set; }
 	}
 }

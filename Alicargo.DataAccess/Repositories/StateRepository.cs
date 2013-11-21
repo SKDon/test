@@ -4,7 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Transactions;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.Helpers;
 
@@ -59,11 +58,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		private Dictionary<long, Dictionary<string, string>> GetLocalization(DataTable idsTable)
 		{
-			var table = new DataTable("Localizations");
-			table.Columns.Add("Value");
-			table.Rows.Add(TwoLetterISOLanguageName.English);
-			table.Rows.Add(TwoLetterISOLanguageName.Russian);
-			table.Rows.Add(TwoLetterISOLanguageName.Italian);
+			var table = TableParameters.GetLocalizationTable();
 
 			var localizations = _executor.Array<StateLocalization>("[dbo].[StateLocalization_Get]", new TableParameters(idsTable, table));
 
@@ -101,11 +96,12 @@ namespace Alicargo.DataAccess.Repositories
 			throw new NotImplementedException();
 		}
 
-		internal class StateLocalization
+		private class StateLocalization
 		{
+			// ReSharper disable UnusedAutoPropertyAccessor.Local
 			public long StateId { get; set; }
 			public string Name { get; set; }
-			public string TwoLetterISOLanguageName { get; set; }
+			public string TwoLetterISOLanguageName { get; set; } // ReSharper restore UnusedAutoPropertyAccessor.Local
 		}
 	}
 }
