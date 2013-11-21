@@ -13,13 +13,13 @@ namespace Alicargo.MvcHelpers.Extensions
 	{
 		public static MvcHtmlString DropDownListFor<TModel, TProperty>(
 			this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,
-			IDictionary<long, string> data, string optionLabel = null,
+			IDictionary<TProperty, string> data, string optionLabel = null,
 			object htmlAttributes = null)
 		{
 			var list = data.Select(x => new SelectListItem
 			{
 				Text = x.Value,
-				Value = x.Key.ToString(CultureInfo.InvariantCulture)
+				Value = x.Key.ToString()
 			}).ToList();
 
 			return helper.DropDownListFor(expression, list, optionLabel, htmlAttributes);

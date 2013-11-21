@@ -1,1 +1,7 @@
-﻿
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model StateModel
+<h1>
+	@Pages.StateEdit
+</h1>
+@Html.EditPage(Url.Action(MVC.State.Edit()), Pages.Save)

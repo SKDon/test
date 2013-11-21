@@ -17,12 +17,16 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			var template = _executor.Query<dynamic>("[dbo].[EmailTemplate_GetByStateId]", new { StateId = stateId });
 
+			if (template == null)
+			{
+				return null;
+			}
+
 			var localizations = GetLocalization(template.Id);
 
 			return new StateEmailTemplateData
 			{
 				EnableEmailSend = template.EnableEmailSend,
-
 				Localizations = localizations
 			};
 		}
