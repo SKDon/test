@@ -60,7 +60,7 @@ namespace Alicargo.TestHelpers
 			Serializer = Inject<ISerializer>();
 			StateRepository = Inject<IStateRepository>();
 			IdentityService = Inject<IIdentityService>();
-			StateService = Inject<IStateService>();
+			StateService = Inject<IStateFilter>();
 			ApplicationRepository = Inject<IApplicationRepository>();
 			ApplicationUpdater = Inject<IApplicationUpdateRepository>();
 			ApplicationManager = Inject<IApplicationManager>();
@@ -106,7 +106,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IMessageBuilder> MessageBuilder { get; private set; }
 		public Mock<IStateRepository> StateRepository { get; private set; }
 		public Mock<IStateSettingsRepository> StateSettingsRepository { get; private set; }
-		public Mock<IStateService> StateService { get; private set; }
+		public Mock<IStateFilter> StateService { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }
 		public Mock<IRecipients> Recipients { get; private set; }

@@ -16,19 +16,19 @@ namespace Alicargo.Services.Application
 		private readonly ICountryRepository _countryRepository;
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _states;
-		private readonly IStateService _stateService;
+		private readonly IStateFilter _stateFilter;
 
 		public ApplicationPresenter(
 			IApplicationRepository applications,
 			IIdentityService identity,
 			ICountryRepository countryRepository,
-			IStateService stateService,
+			IStateFilter stateFilter,
 			IStateRepository states)
 		{
 			_applications = applications;
 			_identity = identity;
 			_countryRepository = countryRepository;
-			_stateService = stateService;
+			_stateFilter = stateFilter;
 			_states = states;
 		}
 
@@ -102,15 +102,15 @@ namespace Alicargo.Services.Application
 		{
 			var applicationData = _applications.Get(id);
 
-			var states = _stateService.GetStateAvailabilityToSet();
+			var states = _stateFilter.GetStateAvailabilityToSet();
 
 			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
 
-			states = _stateService.FilterByBusinessLogic(applicationData, states);
+			states = _stateFilter.FilterByBusinessLogic(applicationData, states);
 
 			var currentState = _states.Get(applicationData.StateId).Values.First();
 
-			states = _stateService.FilterByPosition(states, currentState.Position);
+			states = _stateFilter.FilterByPosition(states, currentState.Position);
 
 			return ToApplicationStateModel(states);
 		}		

@@ -18,17 +18,17 @@ namespace Alicargo.Services.Calculation
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IClientRepository _clientRepository;
-		private readonly IStateService _stateService;
+		private readonly IStateFilter _stateFilter;
 
 		public ClientCalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IAwbRepository awbRepository,
-			IStateService stateService,
+			IStateFilter stateFilter,
 			IClientRepository clientRepository)
 		{
 			_applicationRepository = applicationRepository;
 			_awbRepository = awbRepository;
-			_stateService = stateService;
+			_stateFilter = stateFilter;
 			_clientRepository = clientRepository;
 		}
 
@@ -53,7 +53,7 @@ namespace Alicargo.Services.Calculation
 
 		private ApplicationListItemData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
 		{
-			var stateIds = _stateService.GetStateVisibility();
+			var stateIds = _stateFilter.GetStateVisibility();
 
 			var applications = _applicationRepository.List(stateIds, new[]
 			{

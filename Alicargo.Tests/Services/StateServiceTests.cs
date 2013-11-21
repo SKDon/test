@@ -4,6 +4,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Services;
+using Alicargo.Services.State;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,13 +17,13 @@ namespace Alicargo.Tests.Services
 	public class StateServiceTests
 	{
 		private MockContainer _context;
-		private StateService _stateService;
+		private StateFilter _stateFilter;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new MockContainer();
-			_stateService = _context.Create<StateService>();
+			_stateFilter = _context.Create<StateFilter>();
 		}
 
 		[TestMethod]
@@ -45,7 +46,7 @@ namespace Alicargo.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
 				_context.StateSettingsRepository.Setup(x => x.GetStateAvailabilities()).Returns(states);
 
-				var stateAvailability = _stateService.GetStateAvailabilityToSet();
+				var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
 				if (roleType == RoleType.Client || roleType == RoleType.Sender)
 				{
 					states.Select(x => x.StateId).Skip(3).ShouldBeEquivalentTo(stateAvailability);
@@ -74,7 +75,7 @@ namespace Alicargo.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
 			}
 
-			_stateService.GetStateAvailabilityToSet();
+			_stateFilter.GetStateAvailabilityToSet();
 		}
 
 		[TestMethod]
@@ -96,7 +97,7 @@ namespace Alicargo.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(true);
 				_context.StateSettingsRepository.Setup(x => x.GetStateVisibilities()).Returns(states);
 
-				var stateAvailability = _stateService.GetStateVisibility();
+				var stateAvailability = _stateFilter.GetStateVisibility();
 				states.Select(x=>x.StateId).ShouldBeEquivalentTo(stateAvailability);
 
 				_context.IdentityService.Verify(x => x.IsInRole(type));
@@ -118,7 +119,7 @@ namespace Alicargo.Tests.Services
 				_context.IdentityService.Setup(x => x.IsInRole(type)).Returns(false);
 			}
 
-			_stateService.GetStateVisibility();
+			_stateFilter.GetStateVisibility();
 		}
 
 
@@ -134,7 +135,7 @@ namespace Alicargo.Tests.Services
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(It.IsAny<long>());
 			_context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(stateAvailability[0]);
 
-			var stateModels = _stateService.FilterByBusinessLogic(applicationData, stateAvailability);
+			var stateModels = _stateFilter.FilterByBusinessLogic(applicationData, stateAvailability);
 
 			stateModels.Should().BeEmpty();
 		}
@@ -151,7 +152,7 @@ namespace Alicargo.Tests.Services
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(It.IsAny<long>());
 			_context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(stateAvailability[0]);
 
-			var stateModels = _stateService.FilterByBusinessLogic(applicationData, stateAvailability);
+			var stateModels = _stateFilter.FilterByBusinessLogic(applicationData, stateAvailability);
 
 			stateModels.Should().BeEmpty();
 		}
@@ -166,7 +167,7 @@ namespace Alicargo.Tests.Services
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(stateAvailability[0]);
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(stateAvailability[1]);
 
-			var stateModels = _stateService.FilterByBusinessLogic(applicationData, stateAvailability);
+			var stateModels = _stateFilter.FilterByBusinessLogic(applicationData, stateAvailability);
 
 			stateModels.Should().BeEmpty();
 		}
@@ -182,7 +183,7 @@ namespace Alicargo.Tests.Services
 			_context.AirWaybillRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(airWaybillData);
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(stateAvailability[0]);
 
-			var stateModels = _stateService.FilterByBusinessLogic(applicationData, stateAvailability);
+			var stateModels = _stateFilter.FilterByBusinessLogic(applicationData, stateAvailability);
 
 			stateModels.Should().BeEmpty();
 		}

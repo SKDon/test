@@ -18,17 +18,17 @@ namespace Alicargo.Services.Calculation
 		private readonly IAwbRepository _awbs;
 		private readonly IClientRepository _clients;
 		private readonly ISenderRepository _senders;
-		private readonly IStateService _stateService;
+		private readonly IStateFilter _stateFilter;
 
 		public SenderCalculationPresenter(
 			IApplicationRepository applications,
-			IStateService stateService,
+			IStateFilter stateFilter,
 			IAwbRepository awbs,
 			IClientRepository clients,
 			ISenderRepository senders)
 		{
 			_applications = applications;
-			_stateService = stateService;
+			_stateFilter = stateFilter;
 			_awbs = awbs;
 			_clients = clients;
 			_senders = senders;
@@ -57,7 +57,7 @@ namespace Alicargo.Services.Calculation
 
 		private ApplicationListItemData[] GetApplications(long senderId, int take, int skip, out long total)
 		{
-			var stateIds = _stateService.GetStateVisibility();
+			var stateIds = _stateFilter.GetStateVisibility();
 
 			var applications = _applications.List(stateIds, new[]
 			{

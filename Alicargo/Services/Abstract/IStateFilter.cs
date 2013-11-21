@@ -2,7 +2,7 @@
 
 namespace Alicargo.Services.Abstract
 {
-	public interface IStateService
+	public interface IStateFilter
 	{
 		long[] GetStateAvailabilityToSet();
 		long[] GetStateVisibility();

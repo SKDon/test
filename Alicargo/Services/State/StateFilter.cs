@@ -7,9 +7,9 @@ using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Microsoft.Ajax.Utilities;
 
-namespace Alicargo.Services
+namespace Alicargo.Services.State
 {
-	internal sealed class StateService : IStateService
+	internal sealed class StateFilter : IStateFilter
 	{
 		private readonly IIdentityService _identity;
 		private readonly IStateConfig _config;
@@ -17,7 +17,7 @@ namespace Alicargo.Services
 		private readonly IStateSettingsRepository _settings;
 		private readonly IAwbRepository _awbs;
 
-		public StateService(
+		public StateFilter(
 			IStateRepository states,
 			IStateSettingsRepository settings,
 			IIdentityService identity,

@@ -18,19 +18,19 @@ namespace Alicargo.Services.Excel
 		private readonly IAwbRepository _awbs;
 		private readonly IStateConfig _stateConfig;
 		private readonly IApplicationListItemMapper _itemMapper;
-		private readonly IStateService _stateService;
+		private readonly IStateFilter _stateFilter;
 
 		public ApplicationExcelRowSource(
 			IApplicationRepository applications,
 			IAwbRepository awbs,
 			IStateConfig stateConfig,
-			IStateService stateService,
+			IStateFilter stateFilter,
 			IApplicationListItemMapper itemMapper)
 		{
 			_applications = applications;
 			_awbs = awbs;
 			_stateConfig = stateConfig;
-			_stateService = stateService;
+			_stateFilter = stateFilter;
 			_itemMapper = itemMapper;
 		}
 
@@ -70,7 +70,7 @@ namespace Alicargo.Services.Excel
 
 		private ApplicationListItem[] GetApplicationListItems(bool isForwarder)
 		{
-			var stateIds = _stateService.GetStateVisibility();
+			var stateIds = _stateFilter.GetStateVisibility();
 
 			var cargoReceivedStateId = isForwarder
 				? _stateConfig.CargoReceivedStateId

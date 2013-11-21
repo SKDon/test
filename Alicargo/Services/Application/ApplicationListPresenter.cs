@@ -14,19 +14,19 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationGrouper _grouper;
 		private readonly IApplicationListItemMapper _itemMapper;
-		private readonly IStateService _stateService;
+		private readonly IStateFilter _stateFilter;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListPresenter(
 			IApplicationRepository applications,
 			IApplicationListItemMapper itemMapper,
-			IStateService stateService,
+			IStateFilter stateFilter,
 			IStateConfig stateConfig,
 			IApplicationGrouper grouper)
 		{
 			_applications = applications;
 			_itemMapper = itemMapper;
-			_stateService = stateService;
+			_stateFilter = stateFilter;
 			_stateConfig = stateConfig;
 			_grouper = grouper;
 		}
@@ -83,7 +83,7 @@ namespace Alicargo.Services.Application
 
 		private ApplicationListItemData[] GetList(int? take, int skip, IEnumerable<Order> groups, long? clientId, long? senderId, bool? isForwarder, out long total)
 		{
-			var stateIds = _stateService.GetStateVisibility();
+			var stateIds = _stateFilter.GetStateVisibility();
 
 			var orders = GetOrders(groups);
 

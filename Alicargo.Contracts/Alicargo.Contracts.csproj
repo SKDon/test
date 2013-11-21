@@ -103,6 +103,7 @@
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\IClientFileRepository.cs" />
     <Compile Include="Repositories\IEmailMessageRepository.cs" />
+    <Compile Include="Repositories\IEmailTemplateRepository.cs" />
     <Compile Include="Repositories\ISenderRepository.cs" />
     <Compile Include="Repositories\ISqlProcedureExecutor.cs" />
     <Compile Include="Repositories\IStateSettingsRepository.cs" />

@@ -321,7 +321,7 @@
     <Compile Include="Services\Abstract\IClientManager.cs" />
     <Compile Include="Services\Abstract\IIdentityService.cs" />
     <Compile Include="Services\Abstract\IMessageBuilder.cs" />
-    <Compile Include="Services\Abstract\IStateService.cs" />
+    <Compile Include="Services\Abstract\IStateFilter.cs" />
     <Compile Include="Services\Abstract\ITransitService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\AirWaybill\AwbGtdHelper.cs" />
@@ -362,8 +362,8 @@
     <Compile Include="Services\IdentityService.cs" />
     <Compile Include="Services\AirWaybill\AwbPresenter.cs" />
     <Compile Include="Services\Log4NetWrapper.cs" />
-    <Compile Include="Services\StateConfig.cs" />
-    <Compile Include="Services\StateService.cs" />
+    <Compile Include="Services\State\StateConfig.cs" />
+    <Compile Include="Services\State\StateFilter.cs" />
     <Compile Include="Services\TransitService.cs" />
     <Compile Include="Services\Users\UserService.cs" />
     <Compile Include="T4MVC\TransitController.generated.cs">
@@ -397,6 +397,7 @@
     <Compile Include="ViewModels\Calculation\Admin\CalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
+    <Compile Include="ViewModels\StateModel.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
     <Compile Include="ViewModels\User\SenderModel.cs" />

@@ -15,18 +15,18 @@ namespace Alicargo.Services.Application
 		private readonly ICountryRepository _countryRepository;
 		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;
-		private readonly IStateService _stateService;
+		private readonly IStateFilter _stateFilter;
 		private readonly IStateRepository _states;
 
 		public ApplicationListItemMapper(
-			IStateService stateService,
+			IStateFilter stateFilter,
 			IStateRepository states,
 			IStateConfig stateConfig,
 			IApplicationRepository applications,
 			ICountryRepository countryRepository,
 			IIdentityService identity)
 		{
-			_stateService = stateService;
+			_stateFilter = stateFilter;
 			_states = states;
 			_stateConfig = stateConfig;
 			_applications = applications;
@@ -38,7 +38,7 @@ namespace Alicargo.Services.Application
 		{
 			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 			var states = _states.Get(data.Select(x => x.StateId).ToArray());
-			var stateAvailability = _stateService.GetStateAvailabilityToSet();
+			var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
 			var calculations = _applications.GetCalculations(data.Select(x => x.Id).ToArray());
 
 			return data.Select(x => new ApplicationListItem

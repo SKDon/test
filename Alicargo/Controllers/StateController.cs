@@ -1,7 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
+using Alicargo.ViewModels;
 
 namespace Alicargo.Controllers
 {
@@ -38,7 +40,15 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id)
 		{
-			return View();
+			var data = _states.Get(id).Single().Value;
+
+
+
+			return View(new StateModel
+			{
+				Name = data.Name,
+				Position = data.Position,
+			});
 		}
 	}
 }
