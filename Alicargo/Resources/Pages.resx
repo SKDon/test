@@ -306,4 +306,13 @@
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="StateSettings_Availabilities" xml:space="preserve">
+    <value>Могут устанавливать</value>
+  </data>
+  <data name="StateSettings_Recipients" xml:space="preserve">
+    <value>Получают уведомления</value>
+  </data>
+  <data name="StateSettings_Visibilities" xml:space="preserve">
+    <value>Доступно для отображения</value>
+  </data>
 </root>

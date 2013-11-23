@@ -4,6 +4,8 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
+using Alicargo.TestHelpers;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
@@ -11,7 +13,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	[TestClass]
 	public class StateSettingsRepositoryTests
 	{
-		private const long DefaultStateId = 1;
 		private DbTestContext _context;
 
 		private StateSettingsRepository _settings;
@@ -49,6 +50,73 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod, TestCategory("black-box")]
+		public void Test_StateRepository_SetStateAvailability()
+		{
+			const long stateId = 7;
+
+			_settings.GetStateAvailabilities().Count(x => x.StateId == stateId).ShouldBeEquivalentTo(3);
+
+			_settings.SetStateAvailabilities(stateId, new[] { RoleType.Broker, RoleType.Forwarder });
+
+			var array = _settings.GetStateAvailabilities().Where(x => x.StateId == stateId).ToArray();
+
+			array.Length.ShouldBeEquivalentTo(2);
+
+			array[0].StateId.ShouldBeEquivalentTo(stateId);
+			array.Should().Contain(x => x.Role == RoleType.Broker);
+			array.Should().Contain(x => x.Role == RoleType.Forwarder);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_StateRepository_SetStateAvailability_Add()
+		{
+			const long stateId = 7;
+
+			_settings.GetStateAvailabilities().Count(x => x.StateId == stateId).ShouldBeEquivalentTo(3);
+
+			_settings.SetStateAvailabilities(stateId, new[] { RoleType.Broker, RoleType.Forwarder, RoleType.Admin, RoleType.Sender });
+
+			var array = _settings.GetStateAvailabilities().Where(x => x.StateId == stateId).ToArray();
+
+			array.Length.ShouldBeEquivalentTo(4);
+
+			array[0].StateId.ShouldBeEquivalentTo(stateId);
+			array.Should().Contain(x => x.Role == RoleType.Broker);
+			array.Should().Contain(x => x.Role == RoleType.Forwarder);
+			array.Should().Contain(x => x.Role == RoleType.Admin);
+			array.Should().Contain(x => x.Role == RoleType.Sender);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_StateRepository_SetStateAvailability_None()
+		{
+			const long stateId = 7;
+
+			_settings.GetStateAvailabilities().Count(x => x.StateId == stateId).ShouldBeEquivalentTo(3);
+
+			_settings.SetStateAvailabilities(stateId, new RoleType[0]);
+
+			var array = _settings.GetStateAvailabilities().Where(x => x.StateId == stateId).ToArray();
+
+			array.Length.ShouldBeEquivalentTo(0);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_StateRepository_SetStateAvailability_One()
+		{
+			_settings.GetStateAvailabilities().Count(x => x.StateId == TestConstants.DefaultStateId).ShouldBeEquivalentTo(3);
+
+			_settings.SetStateAvailabilities(TestConstants.DefaultStateId, new[] { RoleType.Broker });
+
+			var array = _settings.GetStateAvailabilities().Where(x => x.StateId == TestConstants.DefaultStateId).ToArray();
+
+			array.Length.ShouldBeEquivalentTo(1);
+
+			array[0].StateId.ShouldBeEquivalentTo(TestConstants.DefaultStateId);
+			array.Should().Contain(x => x.Role == RoleType.Broker);
+		}
+
+		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetStateVisibility()
 		{
 			var visibilities = _settings.GetStateVisibilities().Where(x => x.Role == RoleType.Admin).ToArray();
@@ -67,7 +135,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_StateRepository_GetAvailableRoles()
 		{
 			var roles = _settings.GetStateAvailabilities()
-				.Where(x => x.StateId == DefaultStateId)
+				.Where(x => x.StateId == TestConstants.DefaultStateId)
 				.Select(x => x.Role)
 				.ToArray();
 

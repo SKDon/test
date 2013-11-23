@@ -306,4 +306,13 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="StateSettings_Availabilities" xml:space="preserve">
+    <value>Can set</value>
+  </data>
+  <data name="StateSettings_Recipients" xml:space="preserve">
+    <value>Receive a notification</value>
+  </data>
+  <data name="StateSettings_Visibilities" xml:space="preserve">
+    <value>Available for display</value>
+  </data>
 </root>

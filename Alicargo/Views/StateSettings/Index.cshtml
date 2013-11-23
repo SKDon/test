@@ -1,24 +1,50 @@
-﻿@using Resources
+﻿@using Alicargo.Core.Resources
+@using Resources
 @model Alicargo.ViewModels.State.StateSettingsModel
 
-
-@using (Html.BeginForm())
-{
-	@Html.LabelFor(x => x.Recipients.Admin)
-	@Html.CheckBoxFor(x => x.Recipients.Admin)
-	
-	@Html.LabelFor(x => x.Recipients.Sender)
-	@Html.CheckBoxFor(x => x.Recipients.Sender)
-	
-	@Html.LabelFor(x => x.Recipients.Broker)
-	@Html.CheckBoxFor(x => x.Recipients.Broker)
-	
-	@Html.LabelFor(x => x.Recipients.Forwarder)
-	@Html.CheckBoxFor(x => x.Recipients.Forwarder)
-	
-	@Html.LabelFor(x => x.Recipients.Client)
-	@Html.CheckBoxFor(x => x.Recipients.Client)
-
-	<input type="submit" class="btn btn-primary" value="@Pages.Save" />
-	@Html.ActionLink(Pages.Cancel, MVC.StateSettings.Index(), new { @class = "btn" })
-}
+<div class="state-edit-settings">
+	<b>
+		@ViewBag.StateName
+	</b>
+	@using (Html.BeginForm())
+	{
+		<table>
+			<tr>
+				<td class="title"></td>
+				<td class="title">@Enums.Admin</td>
+				<td class="title">@Enums.Sender</td>
+				<td class="title">@Enums.Broker</td>
+				<td class="title">@Enums.Forwarder</td>
+				<td class="title">@Enums.Client</td>
+			</tr>
+			<tr>
+				<td class="title">@Pages.StateSettings_Recipients</td>
+				<td>@Html.CheckBoxFor(x => x.Recipients.Admin)</td>
+				<td>@Html.CheckBoxFor(x => x.Recipients.Sender)</td>
+				<td>@Html.CheckBoxFor(x => x.Recipients.Broker)</td>
+				<td>@Html.CheckBoxFor(x => x.Recipients.Forwarder)</td>
+				<td>@Html.CheckBoxFor(x => x.Recipients.Client)</td>
+			</tr>
+			<tr>
+				<td class="title">@Pages.StateSettings_Availabilities</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Admin)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Sender)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Broker)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Forwarder)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Client)</td>
+			</tr>
+			<tr>
+				<td class="title">@Pages.StateSettings_Visibilities</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Admin)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Sender)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Broker)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Forwarder)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Client)</td>
+			</tr>
+		</table>
+		<p>
+			<input type="submit" class="btn btn-primary" value="@Pages.Save" />
+			@Html.ActionLink(Pages.Cancel, MVC.StateSettings.Index(), new {@class = "btn"})
+		</p>
+	}
+</div>

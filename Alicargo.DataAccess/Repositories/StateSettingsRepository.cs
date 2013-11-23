@@ -1,5 +1,9 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System;
+using System.Linq;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
@@ -25,6 +29,42 @@ namespace Alicargo.DataAccess.Repositories
 		public StateRole[] GetStateEmailRecipients()
 		{
 			return _executor.Array<StateRole>("[dbo].[State_GetStateEmailRecipients]");
+		}
+
+		public void SetStateAvailabilities(long stateId, RoleType[] roles)
+		{
+			if (roles ==null)
+			{
+				throw new ArgumentNullException("roles");
+			}
+
+			var table = TableParameters.GeIdsTable("Roles", roles.Select(x => (long)x).ToArray());
+
+			_executor.Execute("[dbo].[State_SetStateAvailabilities]", new TableParameters(new { stateId }, table));
+		}
+
+		public void SetStateVisibilities(long stateId, RoleType[] roles)
+		{
+			if (roles == null)
+			{
+				throw new ArgumentNullException("roles");
+			}
+
+			var table = TableParameters.GeIdsTable("Roles", roles.Select(x => (long)x).ToArray());
+
+			_executor.Execute("[dbo].[State_SetStateVisibilities]", new TableParameters(new { stateId }, table));
+		}
+
+		public void SetStateEmailRecipients(long stateId, RoleType[] roles)
+		{
+			if (roles == null)
+			{
+				throw new ArgumentNullException("roles");
+			}
+
+			var table = TableParameters.GeIdsTable("Roles", roles.Select(x => (long)x).ToArray());
+
+			_executor.Execute("[dbo].[State_SetStateEmailRecipients]", new TableParameters(new { stateId }, table));
 		}
 	}
 }
