@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
@@ -81,6 +82,15 @@ namespace Alicargo.Controllers
 			var model = GetStateModel(id, lang ?? _identity.TwoLetterISOLanguageName);
 
 			return View(model);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		public virtual HttpStatusCodeResult Delete(long id)
+		{
+			_states.Delete(id);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
 		[HttpPost]

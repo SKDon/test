@@ -7,6 +7,7 @@ BEGIN
 
 	DELETE TOP(1) [dbo].[State]
 	WHERE [Id] = @Id
+	AND [IsSystem] = 0
 
 END
 GO

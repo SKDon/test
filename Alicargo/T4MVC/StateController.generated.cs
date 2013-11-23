@@ -47,6 +47,12 @@ namespace Alicargo.Controllers
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.HttpStatusCodeResult Delete()
+        {
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public StateController Actions { get { return MVC.State; } }
@@ -67,6 +73,7 @@ namespace Alicargo.Controllers
             public readonly string List = "List";
             public readonly string Create = "Create";
             public readonly string Edit = "Edit";
+            public readonly string Delete = "Delete";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,6 +83,7 @@ namespace Alicargo.Controllers
             public const string List = "List";
             public const string Create = "Create";
             public const string Edit = "Edit";
+            public const string Delete = "Delete";
         }
 
 
@@ -96,6 +104,14 @@ namespace Alicargo.Controllers
             public readonly string id = "id";
             public readonly string lang = "lang";
             public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Delete
+        {
+            public readonly string id = "id";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -175,6 +191,16 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "lang", lang);
             EditOverride(callInfo, id, lang);
+            return callInfo;
+        }
+
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
+
+        public override System.Web.Mvc.HttpStatusCodeResult Delete(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DeleteOverride(callInfo, id);
             return callInfo;
         }
 
