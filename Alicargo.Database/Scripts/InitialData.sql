@@ -232,300 +232,286 @@ INSERT [dbo].[Client] ([Id], [UserId], [Email], [Nic], [LegalEntity], [Contacts]
 INSERT [dbo].[Client] ([Id], [UserId], [Email], [Nic], [LegalEntity], [Contacts], [Phone], [INN], [KPP], [OGRN], [Bank], [BIC], [LegalAddress], [MailingAddress], [RS], [KS], [TransitId]) VALUES (5, 9, N'u5@timez.org', N'Nic 4', N'LegalEntity 4', N'Contact be0004f2-df24-415e-a626-96d439f70ee1', NULL, N'INN c0ae51d5-5438-40ac-866e-13abc2a7bc23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5)
 SET IDENTITY_INSERT [dbo].[Client] OFF
 
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Abkhazia', N'Абхазия', N'  ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Afghanistan', N'Афганистан', N'AF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Aland Islands', N'Аландские острова', N'AX')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Albania', N'Албания', N'AL')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Algeria', N'Алжир', N'DZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'American Samoa', N'Американское Самоа', N'AS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Andorra', N'Андорра', N'AD')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Angola', N'Ангола', N'AO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Anguilla', N'Ангилья', N'AI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Antarctica', N'Антарктика', N'AQ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Antigua and Barbuda', N'Антигуа и Барбуда', N'AG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Argentina', N'Аргентина', N'AR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Armenia', N'Армения', N'AM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Aruba', N'Аруба', N'AW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Australia', N'Австралия', N'AU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Austria', N'Австрия', N'AT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Azerbaijan', N'Азербайджан', N'AZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Azores', N'Азорские острова', N'PT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bahamas', N'Багамские Острова', N'BS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bahrain', N'Бахрейн', N'BH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bangladesh', N'Бангладеш', N'BD')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Barbados', N'Барбадос', N'BB')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Belarus', N'Беларусь', N'BY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Belgium', N'Бельгия', N'BE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Belize', N'Белиз', N'BZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Benin', N'Бенин', N'BJ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bermuda', N'Бермудские Острова', N'BM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bolivia', N'Боливия', N'BO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bosnia-Herzegovina', N'Босния и Герцеговина', N'BA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Botswana', N'Ботсвана', N'BW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bouvet Island', N'Буве', N'BV')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Brazil', N'Бразилия', N'BR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'British Indian Ocean Territory', N'Британская территория в Индийском океане', N'IO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Brunei Darussalam', N'Бруней', N'BN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Bulgaria', N'Болгария', N'BG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Burkina Faso', N'Буркина-Фасо', N'BF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Burundi', N'Бурунди', N'BI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Buthan', N'Бутан', N'BT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cambodia', N'Камбоджа', N'KH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cameroon', N'Камерун', N'CM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Canada', N'Канада', N'CA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cape Verde', N'Кабо-Верде', N'CV')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cayman Islands', N'Каймановы Острова', N'KY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Central African Rep.', N'Центральноафриканская Республика', N'CF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Chad', N'Чад', N'TD')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Chile', N'Чили', N'CL')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'China', N'Китай', N'CN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Christmas Island', N'Остров Рождества', N'CX')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cocos (Keeling) Isl.', N'Кокосовые Острова', N'CC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Colombia', N'Колумбия', N'CO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Comoros', N'Коморские Острова', N'KM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cook Islands', N'Кука острова', N'CK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Costa Rica', N'Коста-Рика', N'CR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Croatia', N'Хорватия', N'HR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cuba', N'Куба', N'CU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Cyprus', N'Кипр', N'CY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Czech Republic', N'Чехия', N'CZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Democratic Republic of the Congo', N'Конго, Демократическая Республика', N'CD')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Denmark', N'Дания', N'DK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Djibouti', N'Джибути', N'DJ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Dominica', N'Доминика', N'DM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Dominican Republic', N'Доминиканская Республика', N'DO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'East Timor', N'Восточный Тимор', N'TP')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Ecuador', N'Эквадор', N'EC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Egypt', N'Египет', N'EG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'El Salvador', N'Сальвадор', N'SV')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Equatorial Guinea', N'Экваториальная Гвинея', N'GQ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Eritrea', N'Эритрея', N'ER')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Estonia', N'Эстония', N'EE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Ethiopia', N'Эфиопия', N'ET')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Falkland Islands', N'Фолклендские (Мальвинские) острова', N'FK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Faroe Islands', N'Фарерские Острова', N'FO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Fiji', N'Фиджи', N'FJ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Finland', N'Финляндия', N'FI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'France', N'Франция', N'FR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'French Polynesia', N'Французская Полинезия', N'PF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'French Southern and Antarctic Lands', N'Французские Южные и Антарктические Территории', N'TF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Gabon', N'Габон', N'GA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Gambia', N'Гамбия', N'GM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Georgia', N'Грузия', N'GE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Germany', N'Германия', N'DE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Ghana', N'Гана', N'GH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Gibraltar', N'Гибралтар', N'GI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Greece', N'Греция', N'GR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Greenland', N'Гренландия', N'GL')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Grenada', N'Гренада', N'GD')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guadeloupe (Fr.)', N'Гваделупа', N'GP')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guam (US)', N'Гуам', N'GU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guatemala', N'Гватемала', N'GT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guernsey', N'Гернси', N'GG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guinea', N'Гвинея', N'GN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guinea Bissau', N'Гвинея-Бисау', N'GW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guyana', N'Гвиана', N'GY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Guyana (Fr.)', N'Гайана', N'GF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Haiti', N'Гаити', N'HT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Heard Island and McDonald Islands', N'Острова Херд и Макдональд', N'HM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Honduras', N'Гондурас', N'HN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Hong Kong', N'Гонконг', N'HK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Hungary', N'Венгрия', N'HU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Iceland', N'Исландия', N'IS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'India', N'Индия', N'IN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Indonesia', N'Индонезия', N'ID')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Iran', N'Иран', N'IR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Iraq', N'Ирак', N'IQ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Ireland', N'Ирландия', N'IE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Isle of Man', N'Остров Мэн', N'IM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Israel', N'Израиль', N'IL')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Italy', N'Италия', N'IT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Ivory Coast', N'Кот-д''Ивуар', N'CI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Jamaica', N'Ямайка', N'JM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Japan', N'Япония', N'JP')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Jersey', N'Джерси', N'JE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Jordan', N'Иордания', N'JO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Kazachstan', N'Казахстан', N'KZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Kenya', N'Кения', N'KE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Kirgistan', N'Кыргызстан', N'KG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Kiribati', N'Кирибати', N'KI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Korea (North)', N'Корея (Северная)', N'KP')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Korea (South)', N'Корея (Южная)', N'KR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Kosovo', N'Косово', N'  ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Kuwait', N'Кувейт', N'KW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Laos', N'Лаос', N'LA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Latvia', N'Латвия', N'LV')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Lebanon', N'Ливан', N'LB')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Lesotho', N'Лесото', N'LS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Liberia', N'Либерия', N'LR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Libya', N'Ливия', N'LY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Liechtenstein', N'Лихтенштейн', N'LI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Lithuania', N'Литва', N'LT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Luxembourg', N'Люксембург', N'LU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Macau', N'Аомынь', N'MO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Madagascar', N'Мадагаскар', N'MG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Malawi', N'Малави', N'MW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Malaysia', N'Малайзия', N'MY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Maldives', N'Мальдивы', N'MV')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Mali', N'Мали', N'ML')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Malta', N'Мальта', N'MT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Marshall Islands', N'Маршалловы Острова', N'MH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Martinique (Fr.)', N'Мартиника', N'MQ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Mauritania', N'Мавритания', N'MR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Mauritius', N'Маврикий', N'MU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Mayotte', N'Майотта', N'YT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Mexico', N'Мексика', N'MX')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Micronesia', N'Микронезия', N'FM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Moldavia', N'Молдова', N'MD')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Monaco', N'Монако', N'MC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Mongolia', N'Монголия', N'MN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Montenegro', N'Черногория', N'ME')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Montserrat', N'Монтсеррат', N'MS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Morocco', N'Морокко', N'MA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Mozambique', N'Мозамбик', N'MZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Myanmar', N'Мьянма', N'MM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Nagorno-Karabakh Republic', N'Нагорно-Карабахская Республика', N'  ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Namibia', N'Намибия', N'NA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Nauru', N'Науру', N'NR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Nepal', N'Непал', N'NP')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Netherland Antilles', N'Антильские Острова', N'AN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Netherlands', N'Нидерланды', N'NL')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'New Caledonia (Fr.)', N'Новая Каледония', N'NC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'New Zealand', N'Новая Зеландия', N'NZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Nicaragua', N'Никарагуа', N'NI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Niger', N'Нигер', N'NE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Nigeria', N'Нигерия', N'NG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Niue', N'Ниуэ', N'NU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Norfolk Island', N'Норфолк', N'NF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Northern Cyprus', N'Турецкая Республика Северного Кипра', N'NC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Northern Mariana Isl.', N'Северные Марианские острова', N'MP')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Norway', N'Норвегия', N'NO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Oman', N'Оман', N'OM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Pakistan', N'Пакистан', N'PK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Palau', N'Палау', N'PW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Palestine', N'Палестина', N'PS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Panama', N'Панама', N'PA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Papua New', N'Папуа — Новая Гвинея', N'PG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Paraguay', N'Парагвай', N'PY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Peru', N'Перу', N'PE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Philippines', N'Филиппины', N'PH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Pitcairn', N'Питкэрн', N'PN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Poland', N'Польша', N'PL')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Portugal', N'Португалия', N'PT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Puerto Rico', N'Пуэрто-Рико', N'PR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Qatar', N'Катар', N'QA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Republic of Macedonia', N'Македония', N'MK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Republic of Somaliland', N'Сомалиленд', N'  ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Republic of the Congo', N'Республика Конго', N'CG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Reunion (Fr.)', N'Реюньон', N'RE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Romania', N'Румыния', N'RO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Russia', N'Россия', N'RU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Rwanda', N'Руанда', N'RW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Saint Lucia', N'Сент-Люсия', N'LC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Samoa', N'Самоа', N'WS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'San Marino', N'Сан-Марино', N'SM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Saudi Arabia', N'Саудовская Аравия', N'SA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Senegal', N'Сенегал', N'SN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Serbia', N'Сербия', N'RS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Seychelles', N'Сейшельские острова', N'SC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Sierra Leone', N'Сьерра-Леоне', N'SL')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Singapore', N'Сингапур', N'SG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Slovak Republic', N'Словакия', N'SK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Slovenia', N'Словения', N'SI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Solomon Islands', N'Соломоновы Острова', N'SB')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Somalia', N'Сомали', N'SO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'South Africa', N'Южно-Африканская Республика', N'ZA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'South Georgia and the South Sandwich Islands', N'Южная Георгия и Южные Сандвичевы острова', N'GS')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'South Ossetia', N'Южная Осетия', N'  ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Spain', N'Испания', N'ES')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Sri Lanka', N'Шри-Ланка', N'LK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'St. Helena', N'Остров Святой Елены', N'SH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'St. Pierre & Miquelon', N'Сен-Пьер и Микелон', N'PM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'St. Tome and Principe', N'Сан-Томе и Принсипи', N'ST')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'St.Kitts Nevis Anguilla', N'Сент-Киттс и Невис', N'KN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'St.Vincent & Grenadines', N'Сент-Винсент и Гренадины', N'VC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Sudan', N'Судан', N'SD')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Suriname', N'Суринам', N'SR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Svalbard & Jan Mayen Is', N'Свальбард', N'SJ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Swaziland', N'Свазиленд', N'SZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Sweden', N'Швеция', N'SE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Switzerland', N'Швейцария', N'CH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Syria', N'Сирия', N'SY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Tadjikistan', N'Таджикистан', N'TJ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Taiwan', N'Тайвань', N'TW')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Tamil Eelam', N'Тамил-Илам', N'  ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Tanzania', N'Танзания', N'TZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Thailand', N'Таиланд', N'TH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Togo', N'Того', N'TG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Tokelau', N'Токелау', N'TK')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Tonga', N'Тонга', N'TO')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Transnistria', N'Приднестровье', N'  ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Trinidad & Tobago', N'Тринидад и Тобаго', N'TT')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Tunisia', N'Тунис', N'TN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Turkey', N'Турция', N'TR')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Turkmenistan', N'Туркменистан', N'TM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Turks and Caicos Islands', N'Тёркс и Кайкос', N'TC')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Tuvalu', N'Тувалу', N'TV')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Uganda', N'Уганда', N'UG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Ukraine', N'Украина', N'UA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'United Arab Emirates', N'Объединенные Арабские Эмираты', N'AE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'United Kingdom (Great Britain)', N'Великобритания', N'GB')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'United States', N'Соединенные Штаты Америки', N'US')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'United States Minor Outlying Islands', N'Внешние малые острова (США)', N'UM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Uruguay', N'Уругвай', N'UY')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Uzbekistan', N'Узбекистан', N'UZ')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Vanuatu', N'Вануату', N'VU')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Vatican City State', N'Ватикан', N'VA')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Venezuela', N'Венесуэла', N'VE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Vietnam', N'Вьетнам', N'VN')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Virgin Islands (British)', N'Виргинские Острова (Британские)', N'VG')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Virgin Islands (US)', N'Виргинские Острова (США)', N'VI')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Wallis & Futuna Islands', N'Острова Уоллис и Футуна', N'WF')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Western Sahara', N'Западная Сахара', N'EH')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Yemen', N'Йемен', N'YE')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Zambia', N'Замбия', N'ZM')
-INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code]) VALUES (N'Zimbabwe', N'Зимбабве', N'ZW')
-
-SET IDENTITY_INSERT [dbo].[Application] ON
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (1, CAST(0x073F7B288C421D370B0000 AS DateTimeOffset), N'Invoice 4e85d577-2a7e-4d8d-a3a1-906429e7e844', NULL, NULL, NULL, NULL, NULL, 0, 0, N'0', N'75800114-930b-44ab-b541-06099c8b0f8f', CAST(0x07D4DA298C421D370B0000 AS DateTimeOffset), 1, 1.0000, 2, 0, 1, 6, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 1)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (2, CAST(0x07E877338C421C370B0000 AS DateTimeOffset), N'Invoice 940b08db-668a-4a9f-883a-fa709d822f40', NULL, NULL, NULL, NULL, NULL, 1, 1, N'1', N'484bc0d9-ded0-423d-af02-8e24264a3b72', CAST(0x0755D3368C421C370B0000 AS DateTimeOffset), 2, 2.0000, 2, 1, 2, 7, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 2)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (3, CAST(0x07C9E4378C421B370B0000 AS DateTimeOffset), N'Invoice f6a0701a-5f6d-408b-b69f-b2261c6ec663', NULL, NULL, NULL, NULL, NULL, 2, 2, N'2', N'6a66428c-f17f-4a5a-905a-8fcbbd204578', CAST(0x070B81388C421B370B0000 AS DateTimeOffset), 3, 3.0000, 2, 0, 3, 8, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 3)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (4, CAST(0x076F6B398C421A370B0000 AS DateTimeOffset), N'Invoice 453af235-9f56-41e6-ab90-e6aa60804d41', NULL, NULL, NULL, NULL, NULL, 3, 3, N'3', N'35e5816a-f226-4e87-999f-d651234ffa9a', CAST(0x07A0E0398C421A370B0000 AS DateTimeOffset), 4, 4.0000, 2, 1, 4, 9, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 4)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (5, CAST(0x0704CB3A8C4219370B0000 AS DateTimeOffset), N'Invoice 29e7dd0f-b7f0-4809-8ebe-07a2b2e8029d', NULL, NULL, NULL, NULL, NULL, 4, 4, N'4', N'729e73af-c94c-485f-a7c2-e94f9f3bb307', CAST(0x0746673B8C4219370B0000 AS DateTimeOffset), 13, 5.0000, 2, 0, 5, 10, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 5)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (6, CAST(0x07992A3C8C4218370B0000 AS DateTimeOffset), N'Invoice c8c1df12-088e-42be-969b-f9bdb8e7da89', NULL, NULL, NULL, NULL, NULL, 5, 0, N'5', N'10d70585-19bf-42e6-874a-34b6c5c34262', CAST(0x07AA513C8C421D370B0000 AS DateTimeOffset), 6, 6.0000, 2, 1, 1, 11, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 6)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (7, CAST(0x0770263E8C4217370B0000 AS DateTimeOffset), N'Invoice 0f91fe10-348c-46ac-b804-3a4a403e1056', NULL, NULL, NULL, NULL, NULL, 6, 1, N'6', N'92a6e721-e5fa-49e9-85f9-02bdc6e45107', CAST(0x0770263E8C421C370B0000 AS DateTimeOffset), 7, 7.0000, 2, 0, 2, 12, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 7)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (8, CAST(0x07C3E93E8C4216370B0000 AS DateTimeOffset), N'Invoice 66853302-4b64-42fc-811d-efa3fb73f004', NULL, NULL, NULL, NULL, NULL, 7, 2, N'7', N'50d44102-f61c-4441-861f-24ce51881259', CAST(0x07D4103F8C421B370B0000 AS DateTimeOffset), 8, 8.0000, 2, 1, 3, 13, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 8)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (9, CAST(0x0716AD3F8C4215370B0000 AS DateTimeOffset), N'Invoice 819db2c1-d37b-4632-9083-8f1f5b1795eb', NULL, NULL, NULL, NULL, NULL, 8, 3, N'8', N'29c7c794-1e9f-496e-83ae-165986570ea9', CAST(0x0727D43F8C421A370B0000 AS DateTimeOffset), 9, 9.0000, 2, 0, 4, 14, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 9)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (10, CAST(0x076970408C4214370B0000 AS DateTimeOffset), N'Invoice 2310ce59-20eb-45ce-b24c-d3660340716a', NULL, NULL, NULL, NULL, NULL, 9, 4, N'9', N'd4dbb14a-72e3-4533-8def-6f7b0bf8926f', CAST(0x077A97408C4219370B0000 AS DateTimeOffset), 10, 10.0000, 2, 1, 5, 15, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 10)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (11, CAST(0x07BC33418C421D370B0000 AS DateTimeOffset), N'Invoice a2a9cd90-bf8d-41c7-8726-3013df5f80ab', NULL, NULL, NULL, NULL, NULL, 0, 0, N'10', N'941d1442-8c43-4e68-ae20-1c1f0b7b4170', CAST(0x07CC5A418C421D370B0000 AS DateTimeOffset), 11, 11.0000, 2, 0, 1, 16, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 11)
-INSERT [dbo].[Application] ([Id], [CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (12, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), N'Invoice b8c79b06-bb81-4a53-a1ef-cf8dc732dfe0', NULL, NULL, NULL, NULL, NULL, 1, 1, N'11', N'0ad4f97b-e9d2-484a-a3bf-037176dd0b0e', CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 12, 12.0000, 2, 1, 2, 17, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-SET IDENTITY_INSERT [dbo].[Application] OFF
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 4, 17, 2, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 2, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
-INSERT [dbo].[Application] ([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES (
-CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
-
+INSERT [dbo].[Country] ([Name_En], [Name_Ru], [Code], [Position]) VALUES 
+(N'Abkhazia', N'Абхазия', N'AB', 108),
+(N'Afghanistan', N'Афганистан', N'AF', 111),
+(N'Aland Islands', N'Аландские острова', N'AX', 75),
+(N'Albania', N'Албания', N'AL', 47),
+(N'Algeria', N'Алжир', N'DZ', 238),
+(N'American Samoa', N'Американское Самоа', N'AS', 218),
+(N'Andorra', N'Андорра', N'AD', 239),
+(N'Angola', N'Ангола', N'AO', 81),
+(N'Anguilla', N'Ангилья', N'AI', 15),
+(N'Antarctica', N'Антарктика', N'AQ', 119),
+(N'Antigua and Barbuda', N'Антигуа и Барбуда', N'AG', 206),
+(N'Argentina', N'Аргентина', N'AR', 12),
+(N'Armenia', N'Армения', N'AM', 13),
+(N'Aruba', N'Аруба', N'AW', 14),
+(N'Australia', N'Австралия', N'AU', 8),
+(N'Austria', N'Австрия', N'AT', 16),
+(N'Azerbaijan', N'Азербайджан', N'AZ', 17),
+(N'Azores', N'Азорские острова', N'PT', 18),
+(N'Bahamas', N'Багамские Острова', N'BS', 19),
+(N'Bahrain', N'Бахрейн', N'BH', 20),
+(N'Bangladesh', N'Бангладеш', N'BD', 21),
+(N'Barbados', N'Барбадос', N'BB', 22),
+(N'Belarus', N'Беларусь', N'BY', 23),
+(N'Belgium', N'Бельгия', N'BE', 24),
+(N'Belize', N'Белиз', N'BZ', 25),
+(N'Benin', N'Бенин', N'BJ', 26),
+(N'Bermuda', N'Бермудские Острова', N'BM', 27),
+(N'Bolivia', N'Боливия', N'BO', 28),
+(N'Bosnia-Herzegovina', N'Босния и Герцеговина', N'BA', 29),
+(N'Botswana', N'Ботсвана', N'BW', 30),
+(N'Bouvet Island', N'Буве', N'BV', 31),
+(N'Brazil', N'Бразилия', N'BR', 32),
+(N'British Indian Ocean Territory', N'Британская территория в Индийском океане', N'IO', 33),
+(N'Brunei Darussalam', N'Бруней', N'BN', 34),
+(N'Bulgaria', N'Болгария', N'BG', 35),
+(N'Burkina Faso', N'Буркина-Фасо', N'BF', 36),
+(N'Burundi', N'Бурунди', N'BI', 37),
+(N'Buthan', N'Бутан', N'BT', 38),
+(N'Cambodia', N'Камбоджа', N'KH', 39),
+(N'Cameroon', N'Камерун', N'CM', 40),
+(N'Canada', N'Канада', N'CA', 41),
+(N'Cape Verde', N'Кабо-Верде', N'CV', 42),
+(N'Cayman Islands', N'Каймановы Острова', N'KY', 43),
+(N'Central African Rep.', N'Центральноафриканская Республика', N'CF', 44),
+(N'Chad', N'Чад', N'TD', 45),
+(N'Chile', N'Чили', N'CL', 46),
+(N'China', N'Китай', N'CN', 4),
+(N'Christmas Island', N'Остров Рождества', N'CX', 48),
+(N'Cocos (Keeling) Isl.', N'Кокосовые Острова', N'CC', 49),
+(N'Colombia', N'Колумбия', N'CO', 50),
+(N'Comoros', N'Коморские Острова', N'KM', 51),
+(N'Cook Islands', N'Кука острова', N'CK', 52),
+(N'Costa Rica', N'Коста-Рика', N'CR', 53),
+(N'Croatia', N'Хорватия', N'HR', 54),
+(N'Cuba', N'Куба', N'CU', 55),
+(N'Cyprus', N'Кипр', N'CY', 56),
+(N'Czech Republic', N'Чехия', N'CZ', 57),
+(N'Democratic Republic of the Congo', N'Конго, Демократическая Республика', N'CD', 58),
+(N'Denmark', N'Дания', N'DK', 59),
+(N'Djibouti', N'Джибути', N'DJ', 60),
+(N'Dominica', N'Доминика', N'DM', 61),
+(N'Dominican Republic', N'Доминиканская Республика', N'DO', 62),
+(N'East Timor', N'Восточный Тимор', N'TP', 63),
+(N'Ecuador', N'Эквадор', N'EC', 64),
+(N'Egypt', N'Египет', N'EG', 65),
+(N'El Salvador', N'Сальвадор', N'SV', 66),
+(N'Equatorial Guinea', N'Экваториальная Гвинея', N'GQ', 67),
+(N'Eritrea', N'Эритрея', N'ER', 68),
+(N'Estonia', N'Эстония', N'EE', 69),
+(N'Ethiopia', N'Эфиопия', N'ET', 70),
+(N'Falkland Islands', N'Фолклендские (Мальвинские) острова', N'FK', 71),
+(N'Faroe Islands', N'Фарерские Острова', N'FO', 72),
+(N'Fiji', N'Фиджи', N'FJ', 73),
+(N'Finland', N'Финляндия', N'FI', 74),
+(N'France', N'Франция', N'FR', 3),
+(N'French Polynesia', N'Французская Полинезия', N'PF', 76),
+(N'French Southern and Antarctic Lands', N'Французские Южные и Антарктические Территории', N'TF', 77),
+(N'Gabon', N'Габон', N'GA', 78),
+(N'Gambia', N'Гамбия', N'GM', 79),
+(N'Georgia', N'Грузия', N'GE', 80),
+(N'Germany', N'Германия', N'DE', 7),
+(N'Ghana', N'Гана', N'GH', 82),
+(N'Gibraltar', N'Гибралтар', N'GI', 83),
+(N'Greece', N'Греция', N'GR', 84),
+(N'Greenland', N'Гренландия', N'GL', 85),
+(N'Grenada', N'Гренада', N'GD', 86),
+(N'Guadeloupe (Fr.)', N'Гваделупа', N'GP', 87),
+(N'Guam (US)', N'Гуам', N'GU', 88),
+(N'Guatemala', N'Гватемала', N'GT', 89),
+(N'Guernsey', N'Гернси', N'GG', 90),
+(N'Guinea', N'Гвинея', N'GN', 91),
+(N'Guinea Bissau', N'Гвинея-Бисау', N'GW', 92),
+(N'Guyana', N'Гвиана', N'GY', 93),
+(N'Guyana (Fr.)', N'Гайана', N'GF', 94),
+(N'Haiti', N'Гаити', N'HT', 95),
+(N'Heard Island and McDonald Islands', N'Острова Херд и Макдональд', N'HM', 96),
+(N'Honduras', N'Гондурас', N'HN', 97),
+(N'Hong Kong', N'Гонконг', N'HK', 98),
+(N'Hungary', N'Венгрия', N'HU', 99),
+(N'Iceland', N'Исландия', N'IS', 100),
+(N'India', N'Индия', N'IN', 101),
+(N'Indonesia', N'Индонезия', N'ID', 102),
+(N'Iran', N'Иран', N'IR', 103),
+(N'Iraq', N'Ирак', N'IQ', 104),
+(N'Ireland', N'Ирландия', N'IE', 105),
+(N'Isle of Man', N'Остров Мэн', N'IM', 106),
+(N'Israel', N'Израиль', N'IL', 107),
+(N'Italy', N'Италия', N'IT', 1),
+(N'Ivory Coast', N'Кот-д''Ивуар', N'CI', 109),
+(N'Jamaica', N'Ямайка', N'JM', 110),
+(N'Japan', N'Япония', N'JP', 2),
+(N'Jersey', N'Джерси', N'JE', 112),
+(N'Jordan', N'Иордания', N'JO', 113),
+(N'Kazachstan', N'Казахстан', N'KZ', 114),
+(N'Kenya', N'Кения', N'KE', 115),
+(N'Kirgistan', N'Кыргызстан', N'KG', 116),
+(N'Kiribati', N'Кирибати', N'KI', 117),
+(N'Korea (North)', N'Корея (Северная)', N'KP', 118),
+(N'Korea (South)', N'Корея (Южная)', N'KR', 10),
+(N'Kosovo', N'Косово', N'KO', 120),
+(N'Kuwait', N'Кувейт', N'KW', 121),
+(N'Laos', N'Лаос', N'LA', 122),
+(N'Latvia', N'Латвия', N'LV', 123),
+(N'Lebanon', N'Ливан', N'LB', 124),
+(N'Lesotho', N'Лесото', N'LS', 125),
+(N'Liberia', N'Либерия', N'LR', 126),
+(N'Libya', N'Ливия', N'LY', 127),
+(N'Liechtenstein', N'Лихтенштейн', N'LI', 128),
+(N'Lithuania', N'Литва', N'LT', 129),
+(N'Luxembourg', N'Люксембург', N'LU', 130),
+(N'Macau', N'Аомынь', N'MO', 131),
+(N'Madagascar', N'Мадагаскар', N'MG', 132),
+(N'Malawi', N'Малави', N'MW', 133),
+(N'Malaysia', N'Малайзия', N'MY', 134),
+(N'Maldives', N'Мальдивы', N'MV', 135),
+(N'Mali', N'Мали', N'ML', 136),
+(N'Malta', N'Мальта', N'MT', 137),
+(N'Marshall Islands', N'Маршалловы Острова', N'MH', 138),
+(N'Martinique (Fr.)', N'Мартиника', N'MQ', 139),
+(N'Mauritania', N'Мавритания', N'MR', 140),
+(N'Mauritius', N'Маврикий', N'MU', 141),
+(N'Mayotte', N'Майотта', N'YT', 142),
+(N'Mexico', N'Мексика', N'MX', 143),
+(N'Micronesia', N'Микронезия', N'FM', 144),
+(N'Moldavia', N'Молдова', N'MD', 145),
+(N'Monaco', N'Монако', N'MC', 146),
+(N'Mongolia', N'Монголия', N'MN', 147),
+(N'Montenegro', N'Черногория', N'ME', 148),
+(N'Montserrat', N'Монтсеррат', N'MS', 149),
+(N'Morocco', N'Морокко', N'MA', 150),
+(N'Mozambique', N'Мозамбик', N'MZ', 151),
+(N'Myanmar', N'Мьянма', N'MM', 152),
+(N'Nagorno-Karabakh Republic', N'Нагорно-Карабахская Республика', N'NK', 153),
+(N'Namibia', N'Намибия', N'NA', 154),
+(N'Nauru', N'Науру', N'NR', 155),
+(N'Nepal', N'Непал', N'NP', 156),
+(N'Netherland Antilles', N'Антильские Острова', N'AN', 157),
+(N'Netherlands', N'Нидерланды', N'NL', 158),
+(N'New Caledonia (Fr.)', N'Новая Каледония', N'NC', 159),
+(N'New Zealand', N'Новая Зеландия', N'NZ', 160),
+(N'Nicaragua', N'Никарагуа', N'NI', 161),
+(N'Niger', N'Нигер', N'NE', 162),
+(N'Nigeria', N'Нигерия', N'NG', 163),
+(N'Niue', N'Ниуэ', N'NU', 164),
+(N'Norfolk Island', N'Норфолк', N'NF', 165),
+(N'Northern Cyprus', N'Турецкая Республика Северного Кипра', N'NC', 166),
+(N'Northern Mariana Isl.', N'Северные Марианские острова', N'MP', 167),
+(N'Norway', N'Норвегия', N'NO', 168),
+(N'Oman', N'Оман', N'OM', 169),
+(N'Pakistan', N'Пакистан', N'PK', 170),
+(N'Palau', N'Палау', N'PW', 171),
+(N'Palestine', N'Палестина', N'PS', 172),
+(N'Panama', N'Панама', N'PA', 173),
+(N'Papua New', N'Папуа — Новая Гвинея', N'PG', 174),
+(N'Paraguay', N'Парагвай', N'PY', 175),
+(N'Peru', N'Перу', N'PE', 176),
+(N'Philippines', N'Филиппины', N'PH', 177),
+(N'Pitcairn', N'Питкэрн', N'PN', 178),
+(N'Poland', N'Польша', N'PL', 179),
+(N'Portugal', N'Португалия', N'PT', 180),
+(N'Puerto Rico', N'Пуэрто-Рико', N'PR', 181),
+(N'Qatar', N'Катар', N'QA', 182),
+(N'Republic of Macedonia', N'Македония', N'MK', 183),
+(N'Republic of Somaliland', N'Сомалиленд', N'S', 184),
+(N'Republic of the Congo', N'Республика Конго', N'CG', 185),
+(N'Reunion (Fr.)', N'Реюньон', N'RE', 186),
+(N'Romania', N'Румыния', N'RO', 187),
+(N'Russia', N'Россия', N'RU', 188),
+(N'Rwanda', N'Руанда', N'RW', 189),
+(N'Saint Lucia', N'Сент-Люсия', N'LC', 190),
+(N'Samoa', N'Самоа', N'WS', 191),
+(N'San Marino', N'Сан-Марино', N'SM', 192),
+(N'Saudi Arabia', N'Саудовская Аравия', N'SA', 193),
+(N'Senegal', N'Сенегал', N'SN', 194),
+(N'Serbia', N'Сербия', N'RS', 195),
+(N'Seychelles', N'Сейшельские острова', N'SC', 196),
+(N'Sierra Leone', N'Сьерра-Леоне', N'SL', 197),
+(N'Singapore', N'Сингапур', N'SG', 198),
+(N'Slovak Republic', N'Словакия', N'SK', 199),
+(N'Slovenia', N'Словения', N'SI', 200),
+(N'Solomon Islands', N'Соломоновы Острова', N'SB', 201),
+(N'Somalia', N'Сомали', N'SO', 202),
+(N'South Africa', N'Южно-Африканская Республика', N'ZA', 203),
+(N'South Georgia and the South Sandwich Islands', N'Южная Георгия и Южные Сандвичевы острова', N'GS', 204),
+(N'South Ossetia', N'Южная Осетия', N'OS', 205),
+(N'Spain', N'Испания', N'ES', 11),
+(N'Sri Lanka', N'Шри-Ланка', N'LK', 207),
+(N'St. Helena', N'Остров Святой Елены', N'SH', 208),
+(N'St. Pierre & Miquelon', N'Сен-Пьер и Микелон', N'PM', 209),
+(N'St. Tome and Principe', N'Сан-Томе и Принсипи', N'ST', 210),
+(N'St.Kitts Nevis Anguilla', N'Сент-Киттс и Невис', N'KN', 211),
+(N'St.Vincent & Grenadines', N'Сент-Винсент и Гренадины', N'VC', 212),
+(N'Sudan', N'Судан', N'SD', 213),
+(N'Suriname', N'Суринам', N'SR', 214),
+(N'Svalbard & Jan Mayen Is', N'Свальбард', N'SJ', 215),
+(N'Swaziland', N'Свазиленд', N'SZ', 216),
+(N'Sweden', N'Швеция', N'SE', 217),
+(N'Switzerland', N'Швейцария', N'CH', 6),
+(N'Syria', N'Сирия', N'SY', 219),
+(N'Tadjikistan', N'Таджикистан', N'TJ', 220),
+(N'Taiwan', N'Тайвань', N'TW', 221),
+(N'Tamil Eelam', N'Тамил-Илам', N'TE', 222),
+(N'Tanzania', N'Танзания', N'TZ', 223),
+(N'Thailand', N'Таиланд', N'TH', 224),
+(N'Togo', N'Того', N'TG', 225),
+(N'Tokelau', N'Токелау', N'TK', 226),
+(N'Tonga', N'Тонга', N'TO', 227),
+(N'Transnistria', N'Приднестровье', N'TS', 228),
+(N'Trinidad & Tobago', N'Тринидад и Тобаго', N'TT', 229),
+(N'Tunisia', N'Тунис', N'TN', 230),
+(N'Turkey', N'Турция', N'TR', 231),
+(N'Turkmenistan', N'Туркменистан', N'TM', 232),
+(N'Turks and Caicos Islands', N'Тёркс и Кайкос', N'TC', 233),
+(N'Tuvalu', N'Тувалу', N'TV', 234),
+(N'Uganda', N'Уганда', N'UG', 235),
+(N'Ukraine', N'Украина', N'UA', 236),
+(N'United Arab Emirates', N'Объединенные Арабские Эмираты', N'AE', 237),
+(N'United Kingdom (Great Britain)', N'Великобритания', N'GB', 5),
+(N'United States', N'Соединенные Штаты Америки', N'US', 239),
+(N'United States Minor Outlying Islands', N'Внешние малые острова (США)', N'UM', 240),
+(N'Uruguay', N'Уругвай', N'UY', 241),
+(N'Uzbekistan', N'Узбекистан', N'UZ', 242),
+(N'Vanuatu', N'Вануату', N'VU', 243),
+(N'Vatican City State', N'Ватикан', N'VA', 244),
+(N'Venezuela', N'Венесуэла', N'VE', 245),
+(N'Vietnam', N'Вьетнам', N'VN', 246),
+(N'Virgin Islands (British)', N'Виргинские Острова (Британские)', N'VG', 247),
+(N'Virgin Islands (US)', N'Виргинские Острова (США)', N'VI', 248),
+(N'Wallis & Futuna Islands', N'Острова Уоллис и Футуна', N'WF', 249),
+(N'Western Sahara', N'Западная Сахара', N'EH', 250),
+(N'Yemen', N'Йемен', N'YE', 251),
+(N'Zambia', N'Замбия', N'ZM', 252),
+(N'Zimbabwe', N'Зимбабве', N'ZW', 253)
 GO
+
+INSERT [dbo].[Application] 
+([CreationTimestamp], [Invoice], [InvoiceFileData], [InvoiceFileName], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES 
+(CAST(0x073F7B288C421D370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 0, 0, 0, NEWID(), CAST(0x07D4DA298C421D370B0000 AS DateTimeOffset), 1, 1.0000, 2, 0, 1, 6, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 1),
+(CAST(0x07E877338C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 1, 1, 1, NEWID(), CAST(0x0755D3368C421C370B0000 AS DateTimeOffset), 2, 2.0000, 2, 1, 2, 7, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 2),
+(CAST(0x07C9E4378C421B370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 2, 2, 2, NEWID(), CAST(0x070B81388C421B370B0000 AS DateTimeOffset), 3, 3.0000, 2, 0, 3, 8, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 3),
+(CAST(0x076F6B398C421A370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 3, 3, 3, NEWID(), CAST(0x07A0E0398C421A370B0000 AS DateTimeOffset), 4, 4.0000, 2, 1, 4, 9, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 4),
+(CAST(0x0704CB3A8C4219370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 4, 4, 4, NEWID(), CAST(0x0746673B8C4219370B0000 AS DateTimeOffset), 13, 5.0000, 2, 0, 5, 10, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 5),
+(CAST(0x07992A3C8C4218370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 5, 0, 5, NEWID(), CAST(0x07AA513C8C421D370B0000 AS DateTimeOffset), 6, 6.0000, 2, 1, 1, 11, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 6),
+(CAST(0x0770263E8C4217370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 6, 1, 6, NEWID(), CAST(0x0770263E8C421C370B0000 AS DateTimeOffset), 7, 7.0000, 2, 0, 2, 12, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 7),
+(CAST(0x07C3E93E8C4216370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 7, 2, 7, NEWID(), CAST(0x07D4103F8C421B370B0000 AS DateTimeOffset), 8, 8.0000, 2, 1, 3, 13, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 8),
+(CAST(0x0716AD3F8C4215370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 8, 3, 8, NEWID(), CAST(0x0727D43F8C421A370B0000 AS DateTimeOffset), 9, 9.0000, 2, 0, 4, 14, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 9),
+(CAST(0x076970408C4214370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 9, 4, 9, NEWID(), CAST(0x077A97408C4219370B0000 AS DateTimeOffset), 10, 10.0000, 2, 1, 5, 15, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 10),
+(CAST(0x07BC33418C421D370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 0, 0, 10, NEWID(), CAST(0x07CC5A418C421D370B0000 AS DateTimeOffset), 11, 11.0000, 2, 0, 1, 16, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 11),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, NULL, NULL, 1, 1, 11, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 12, 12.0000, 2, 1, 2, 17, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 4, 17, 2, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 2, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
+(CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 12)
+GO
+
 UPDATE [dbo].[Application]
 SET [SenderId] = 1
 WHERE [SenderId] IS NULL

@@ -131,6 +131,7 @@
       <Column Name="Name_En" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Name_Ru" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Code" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Country_Application" Member="Applications" ThisKey="Id" OtherKey="CountryId" Type="Application" />
     </Type>
   </Table>

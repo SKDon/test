@@ -7,7 +7,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	sealed class CountryRepository : ICountryRepository
+	internal sealed class CountryRepository : ICountryRepository
 	{
 		private readonly AlicargoDataContext _context;
 
@@ -19,15 +19,20 @@ namespace Alicargo.DataAccess.Repositories
 		public CountryData[] Get(params long[] ids)
 		{
 			var countries = ids.Length > 0
-				? _context.Countries.Where(x => ids.Contains(x.Id)).ToArray()
-				: _context.Countries.ToArray();
+				? _context.Countries.Where(x => ids.Contains(x.Id))
+					.OrderBy(x => x.Position)
+					.ThenBy(x => x.Code)
+					.ToArray()
+				: _context.Countries.OrderBy(x => x.Position)
+					.ThenBy(x => x.Code)
+					.ToArray();
 
 			return countries.Select(x => new CountryData(x.Id, new Dictionary<string, string>
-				{
-					{ TwoLetterISOLanguageName.English, x.Name_En },
-					{ TwoLetterISOLanguageName.Italian, x.Name_En },
-					{ TwoLetterISOLanguageName.Russian, x.Name_Ru },
-				})).ToArray();
+			{
+				{TwoLetterISOLanguageName.English, x.Name_En},
+				{TwoLetterISOLanguageName.Italian, x.Name_En},
+				{TwoLetterISOLanguageName.Russian, x.Name_Ru},
+			})).ToArray();
 		}
 	}
 }
