@@ -47,5 +47,9 @@
 	$a.DefaultGridButtonWidth = "29px";
 	$a.Confirm = function(message) { return window.confirm(message); };
 
+	$a.LoadPage = function(url) {
+		window.location.href = url;
+	};
+
 	return $a;
 }(Alicargo || {}));

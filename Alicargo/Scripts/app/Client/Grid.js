@@ -45,7 +45,9 @@
 						e.preventDefault();
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
-						window.location = $u.Client_Edit + "/" + data.Id;
+						var url = $u.Client_Edit + "/" + data.Id;
+						
+						$a.LoadPage(url);
 					}
 				}],
 				title: "&nbsp;",
@@ -59,7 +61,9 @@
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
 						if ($a.Confirm("Авторизаваться под клиентом " + data.Nic + "?")) {
-							window.location = $u.Authentication_LoginAsUser + "/" + data.UserId;
+							var url = $u.Authentication_LoginAsUser + "/" + data.UserId;
+							
+							$a.LoadPage(url);
 						}
 					}
 				}],

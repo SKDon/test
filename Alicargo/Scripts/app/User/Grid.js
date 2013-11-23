@@ -35,7 +35,8 @@
 								var url = role == "Sender"
 									? $u.Sender_Edit + "/" + data.EntityId
 									: $u.User_Edit + "/" + role + "/" + data.EntityId;
-								window.location = url;
+								
+								$a.LoadPage(url);
 							}
 						}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
 					}, {
@@ -47,7 +48,9 @@
 								var tr = $(e.target).closest("tr");
 								var data = this.dataItem(tr);
 								if ($a.Confirm("Авторизаваться под пользователем " + data.Name + "?")) {
-									window.location = $u.Authentication_LoginAsUser + "/" + data.UserId;
+									var url = $u.Authentication_LoginAsUser + "/" + data.UserId;
+									
+									$a.LoadPage(url);
 								}
 							}
 						}],

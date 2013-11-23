@@ -29,9 +29,12 @@
 						name: "custom-edit",
 						text: "",
 						click: function(e) {
+							e.preventDefault();
 							var tr = $(e.target).closest("tr");
 							var data = this.dataItem(tr);
-							window.location = $u.State_Edit + "/" + data.Id;
+							var url = $u.State_Edit + "/" + data.Id;
+							
+							$a.LoadPage(url);
 						}
 					}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
 				}]

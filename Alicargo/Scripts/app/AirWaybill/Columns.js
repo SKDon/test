@@ -16,7 +16,8 @@
 					var tr = $(e.target).closest("tr");
 					var data = this.dataItem(tr);
 					var url = editUrl + "/" + data.Id;
-					window.location = url;
+
+					$a.LoadPage(url);
 				}
 			}],
 			title: "&nbsp;",
