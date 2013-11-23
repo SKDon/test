@@ -26,7 +26,7 @@
 		@Html.EditorWithLabelFor(model => model.FactoryEmail)
 		@Html.EditorWithLabelFor(model => model.FactoryPhone)
 		@Html.LabelFor(x => x.CountryId)
-		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long?, string>)ViewBag.Countries)
+		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
 		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
 		@Html.EditorWithLabelFor(model => model.Currency)
 
@@ -39,7 +39,7 @@
 	</div>
 	<div class="span4">
 		@Html.LabelFor(x => x.SenderId)
-		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long?, string>)ViewBag.Senders, "")
+		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long, string>)ViewBag.Senders, "")
 	</div>
 	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)

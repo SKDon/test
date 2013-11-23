@@ -82,10 +82,10 @@ namespace Alicargo.ViewModels.Application
 		public string TermsOfDelivery { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Country")]
-		public long? CountryId { get; set; }
+		public long CountryId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Sender")]
-		public long? SenderId { get; set; }
+		public long SenderId { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }

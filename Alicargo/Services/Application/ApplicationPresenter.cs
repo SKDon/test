@@ -113,7 +113,7 @@ namespace Alicargo.Services.Application
 			states = _stateFilter.FilterByPosition(states, currentState.Position);
 
 			return ToApplicationStateModel(states);
-		}		
+		}
 
 		public IDictionary<long, string> GetLocalizedCountries()
 		{
@@ -159,7 +159,7 @@ namespace Alicargo.Services.Application
 				SwiftFileName = data.SwiftFileName,
 				TermsOfDelivery = data.TermsOfDelivery,
 				Torg12FileName = data.Torg12FileName,
-				CountryId = data.CountryId,
+				CountryId = data.CountryId ?? 108, // Italy, todo: set default country id
 				Volume = data.Volume,
 				WarehouseWorkingTime = data.WarehouseWorkingTime,
 				FactureCost = data.FactureCost,
@@ -176,7 +176,7 @@ namespace Alicargo.Services.Application
 				FactureCostEdited = data.FactureCostEdited,
 				TransitCostEdited = data.TransitCostEdited,
 				PickupCostEdited = data.PickupCostEdited,
-				SenderId = data.SenderId
+				SenderId = data.SenderId ?? 1 // ALicargo, todo: set default sender id
 			};
 		}
 	}

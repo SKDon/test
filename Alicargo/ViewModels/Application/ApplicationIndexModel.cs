@@ -9,6 +9,6 @@ namespace Alicargo.ViewModels.Application
 		public Dictionary<long, string> Clients { get; set; }
 
 		[DisplayNameLocalized(typeof(Pages), "AirWaybillSelect")]
-		public Dictionary<long, string> AirWaybills { get; set; }
+		public IDictionary<long, string> AirWaybills { get; set; }
 	}
 }

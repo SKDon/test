@@ -1,34 +1,35 @@
-﻿@using Alicargo.MvcHelpers.Extensions
+﻿@using System.Globalization
+@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @inherits BaseWebViewPage<ApplicationIndexModel>
-
 @helper EditButton()
 {
 	<a href="@Url.Action(MVC.Application.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
 	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
 }
-
 @helper CloseButton()
 {
 	@:# if(CanClose){ #
 	<input class="btn btn-success close-application" type="button" value="@Pages.CargoIsReceived.EncodeForKendo()" />
 	@:# } #
 }
-
 @helper SelectAirWaybill()
 {
 	if (Model.AirWaybills == null || !Model.AirWaybills.Any()) { return; }
 	@:&nbsp;
 	@Html.LabelFor(x => x.AirWaybills)
 	@:&nbsp;
-	@Html.DropDownListFor(x => x.AirWaybills, Model.AirWaybills, "", new { @class = "AirWaybill-select" })
+	@Html.DropDownListFor(x => x.AirWaybills, Model.AirWaybills.Select(x => new SelectListItem
+	{
+		Selected = false,
+		Text = x.Value,
+		Value = x.Key.ToString(CultureInfo.InvariantCulture)
+	}), "", new { @class = "AirWaybill-select" })
 }
-
 @helper AirWaybillButton()
 {
 	<a class="btn btn-inverse" href="@Url.Action(MVC.AirWaybill.Create())/#= Id #">@Pages.AirWaybillAdd</a>
 }
-
 <div class='grid-details'>
 	<div class="properties">
 		@Html.Partial("AdminDetails")
