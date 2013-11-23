@@ -150,6 +150,10 @@
 	height: 300px;
 }
 
+.state-edit-checkbox {
+	margin-top: 30px;
+}
+
 .state-edit-checkbox label {
 	display: inline-block;
 	margin-right: 5px;

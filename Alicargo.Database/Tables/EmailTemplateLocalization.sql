@@ -3,8 +3,8 @@
 	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
 	[EmailTemplateId] BIGINT NOT NULL,
 
-	[Subject] NVARCHAR (MAX) NOT NULL,
-	[Body] NVARCHAR (MAX) NOT NULL,
+	[Subject] NVARCHAR (MAX) NULL,
+	[Body] NVARCHAR (MAX) NULL,
 	[IsBodyHtml] BIT CONSTRAINT [DF_EmailTemplateLocalization_IsBodyHtml] DEFAULT (0) NOT NULL,
 	[TwoLetterISOLanguageName] CHAR(2) NOT NULL,
 

@@ -77,7 +77,13 @@ namespace Alicargo.Controllers
 				Position = model.Position
 			});
 
-			//_templates.Update
+			_templates.Set(model.Id, new EmailTemplateLocalizationData
+			{
+				Body = model.Body,
+				IsBodyHtml = false,
+				Subject = model.Subject,
+				TwoLetterISOLanguageName = model.Language
+			}, model.EnableEmailSend);
 
 			return RedirectToAction(MVC.State.Edit(model.Id, model.Language));
 		}

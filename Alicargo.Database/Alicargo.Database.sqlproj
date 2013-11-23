@@ -125,6 +125,7 @@
     <Build Include="Stored procedures\EmailTemplate_GetByStateId.sql" />
     <Build Include="Stored procedures\EmailTemplateLocalization_Get.sql" />
     <Build Include="Stored procedures\State_Delete.sql" />
+    <Build Include="Stored procedures\EmailTemplate_Merge.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

@@ -5,10 +5,8 @@ BEGIN
 	
 	SET NOCOUNT ON;
 
-	SELECT t.[Id], st.[EnableEmailSend]
-	FROM [dbo].[EmailTemplate] t
-	JOIN [dbo].[StateEmailTemplate] st
-	ON t.[Id] = st.[EmailTemplateId]
-	AND st.[StateId] = @StateId
+	SELECT st.[EmailTemplateId], st.[EnableEmailSend]
+	FROM  [dbo].[StateEmailTemplate] st
+	WHERE st.[StateId] = @StateId
 
 END

@@ -22,13 +22,26 @@ namespace Alicargo.DataAccess.Repositories
 				return null;
 			}
 
-			var localizations = GetLocalization(template.Id);
+			var localizations = GetLocalization(template.EmailTemplateId);
 
 			return new StateEmailTemplateData
 			{
 				EnableEmailSend = template.EnableEmailSend,
 				Localizations = localizations
 			};
+		}
+
+		public void Set(long stateId, EmailTemplateLocalizationData data, bool enableEmailSend)
+		{
+			_executor.Execute("[dbo].[EmailTemplate_Merge]", new
+			{
+				StateId = stateId,
+				data.Body,
+				data.IsBodyHtml,
+				data.Subject,
+				data.TwoLetterISOLanguageName,
+				enableEmailSend
+			});
 		}
 
 		private EmailTemplateLocalizationData[] GetLocalization(long templId)
