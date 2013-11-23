@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\StateSettingsController.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="Services\Excel\ExcelClientCalculation.cs" />
     <Compile Include="Services\Excel\ExcelConstants.cs" />
@@ -361,11 +362,16 @@
     </Compile>
     <Compile Include="T4MVC\StateController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="T4MVC\StateSettingsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="T4MVC\TransitController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -1456,11 +1462,11 @@
     <Content Include="Scripts\kendo\2013.2.716\kendo.view.min.js" />
     <Content Include="Scripts\kendo\2013.2.716\kendo.web.min.js" />
     <Content Include="Scripts\kendo\2013.2.716\kendo.window.min.js" />
-    <None Include="T4MVC\T4MVC.tt.hooks.t4" />
-    <None Include="T4MVC\T4MVC.tt">
+    <Content Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
-    </None>
+    </Content>
+    <None Include="T4MVC\T4MVC.tt.hooks.t4" />
     <None Include="T4MVC\T4MVC.tt.settings.xml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Create.cshtml" />
@@ -1550,6 +1556,7 @@
     <Content Include="Views\State\Edit.cshtml" />
     <Content Include="Views\State\EditorTemplates\StateEditModel.cshtml" />
     <Content Include="Views\State\EditorTemplates\StateCreateModel.cshtml" />
+    <Content Include="Views\StateSettings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

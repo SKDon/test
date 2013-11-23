@@ -4,8 +4,8 @@
 	$a.States = (function($states) {
 
 		var $u = $a.Urls;
-		var $l = $a.Localization;		
-		
+		var $l = $a.Localization;
+
 		var dataSource = {
 			transport: {
 				read: {
@@ -18,14 +18,14 @@
 			schema: { model: { id: "Id" } },
 			error: $a.ShowError
 		};
-		
+
 		function getGrid() {
 			var grid = $("#state-grid").data("kendoGrid");
 			getGrid = function() { return grid; };
 
 			return getGrid();
 		};
-		
+
 		var updateGrid = function(message) {
 			if (message) {
 				$a.ShowMessage(message);
@@ -34,7 +34,7 @@
 			grid.dataSource.read();
 			grid.refresh();
 		};
-		
+
 		function dataBound() {
 			$("tr a.k-grid-custom-delete").each(function() {
 				var button = $(this);
@@ -50,8 +50,20 @@
 			pageable: false,
 			dataBound: dataBound,
 			columns: [
-				{ field: "Name", title: $l.Pages_Name },
-				{
+				{ field: "Name", title: $l.Pages_Name }, {
+					command: [{
+						name: "custom-gear",
+						text: "",
+						click: function(e) {
+							e.preventDefault();
+							var tr = $(e.target).closest("tr");
+							var data = this.dataItem(tr);
+							var url = $u.StateSettings_Index + "/Index/" + data.Id;
+
+							$a.LoadPage(url);
+						}
+					}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
+				}, {
 					command: [{
 						name: "custom-edit",
 						text: "",
@@ -60,7 +72,7 @@
 							var tr = $(e.target).closest("tr");
 							var data = this.dataItem(tr);
 							var url = $u.State_Edit + "/" + data.Id;
-							
+
 							$a.LoadPage(url);
 						}
 					}], title: "&nbsp;", width: $a.DefaultGridButtonWidth

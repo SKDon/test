@@ -303,4 +303,7 @@
   <data name="ConfrimCalculation" xml:space="preserve">
     <value>Are you sure you want to end the calculation?</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>
