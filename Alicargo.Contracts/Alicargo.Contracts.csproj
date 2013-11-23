@@ -81,6 +81,7 @@
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\TwoLetterISOLanguageName.cs" />
     <Compile Include="Exceptions\AccessForbidenException.cs" />
+    <Compile Include="Exceptions\DeleteConflictedWithConstraintException.cs" />
     <Compile Include="Exceptions\DublicateLoginException.cs" />
     <Compile Include="Exceptions\DublicateException.cs" />
     <Compile Include="Exceptions\EntityUpdateConflict.cs" />

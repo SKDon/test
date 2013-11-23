@@ -49,9 +49,9 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.HttpStatusCodeResult Delete()
+        public virtual System.Web.Mvc.ActionResult Delete()
         {
-            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -194,11 +194,11 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
 
-        public override System.Web.Mvc.HttpStatusCodeResult Delete(long id)
+        public override System.Web.Mvc.ActionResult Delete(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             DeleteOverride(callInfo, id);
             return callInfo;

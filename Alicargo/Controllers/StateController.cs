@@ -4,11 +4,13 @@ using System.Net;
 using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.State;
+using Resources;
 
 namespace Alicargo.Controllers
 {
@@ -86,9 +88,16 @@ namespace Alicargo.Controllers
 
 		[HttpPost]
 		[Access(RoleType.Admin)]
-		public virtual HttpStatusCodeResult Delete(long id)
+		public virtual ActionResult Delete(long id)
 		{
-			_states.Delete(id);
+			try
+			{
+				_states.Delete(id);
+			}
+			catch (DeleteConflictedWithConstraintException)
+			{
+				return Content(Validation.StateIsUsed);
+			}
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}

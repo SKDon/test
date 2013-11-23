@@ -23,14 +23,18 @@ namespace Alicargo.DataAccess.DbContext
 			}
 			catch (SqlException exception)
 			{
-				if (exception.Number == (int)SqlError.CannotInsertDuplicateKeyRow)
+				switch ((SqlError)exception.Number)
 				{
-					if (exception.Message.Contains("IX_User_Login"))
-					{
-						throw new DublicateLoginException("The login is occupied", exception);
-					}
+					case SqlError.CannotInsertDuplicateKeyRow:
+						if (exception.Message.Contains("IX_User_Login"))
+						{
+							throw new DublicateLoginException("The login is occupied", exception);
+						}
 
-					throw new DublicateException("Failed to add dublicate entity", exception);
+						throw new DublicateException("Failed to add dublicate entity", exception);
+
+					case SqlError.DeleteStatementConflictedWihtConstraint:
+						throw new DeleteConflictedWithConstraintException("Can't delete an entity", exception);
 				}
 
 				throw;

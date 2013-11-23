@@ -5,7 +5,7 @@
 
 	$a.SelectedPageSize = function(selector, value) {
 		var key = selector + '-page-size';
-		
+
 		if (!!value) {
 			$.cookie(key, value);
 			return value;
@@ -16,7 +16,7 @@
 		if (!!!value) {
 			value = $a.DefaultPageSize;
 		}
-		
+
 		return value;
 	};
 
@@ -43,7 +43,14 @@
 			.setDataSource(dataSource);
 	};
 
-	$a.ShowError = function() { alert($a.Localization.Pages_AnError); };
+	$a.ShowError = function() {
+		$a.ShowMessage($a.Localization.Pages_AnError);
+	};
+	
+	$a.ShowMessage = function(message) {
+		alert(message);
+	};
+	
 	$a.DefaultGridButtonWidth = "29px";
 	$a.Confirm = function(message) { return window.confirm(message); };
 

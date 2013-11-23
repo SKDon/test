@@ -26,7 +26,10 @@
 			return getGrid();
 		};
 		
-		var updateGrid = function() {
+		var updateGrid = function(message) {
+			if (message) {
+				$a.ShowMessage(message);
+			}
 			var grid = getGrid();
 			grid.dataSource.read();
 			grid.refresh();
@@ -69,8 +72,8 @@
 							if ($a.Confirm($a.Localization.Pages_DeleteConfirm)) {
 								var tr = $(e.target).closest("tr");
 								var data = this.dataItem(tr);
-								var url = $a.Urls.State_Delete;
-								$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+								var url = $u.State_Delete;
+								$.post(url, { id: data.Id }).done(updateGrid).fail($a.ShowError);
 							}
 						}
 					}],

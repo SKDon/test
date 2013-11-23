@@ -129,4 +129,7 @@
   <data name="WrongLoginOrPassword" xml:space="preserve">
     <value>Неверный логин или пароль</value>
   </data>
+  <data name="StateIsUsed" xml:space="preserve">
+    <value>Статус исполользуется</value>
+  </data>
 </root>

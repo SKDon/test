@@ -40,7 +40,7 @@
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
 						var url = $a.Urls.AirWaybill_Delete;
-						$.post(url, { id: data.Id }).done(updateGrid).fail(error);
+						$.post(url, { id: data.Id }).done(updateGrid).fail($a.ShowError);
 					}
 				}
 			}],
