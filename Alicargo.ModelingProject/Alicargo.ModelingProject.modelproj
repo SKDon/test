@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{82d6ae8b-43d6-4bdb-8bf3-173ba51bf83b}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>Alicargo.ModelingProject</Name>
+    <RootNamespace>Alicargo.ModelingProject</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ItemGroup>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="ModelDefinition\Alicargo.ModelingProject.uml">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Validate Include="Projects.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="Projects.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Projects.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Projects.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>Projects.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
+      <Name>Alicargo.Contracts</Name>
+      <Project>{e2f1a146-9076-4833-995e-084ac1b3eac7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
+      <Name>Alicargo.Core</Name>
+      <Project>{577b60f9-32f7-4117-97da-40743bff4ca0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.DataAccess\Alicargo.DataAccess.csproj">
+      <Name>Alicargo.DataAccess</Name>
+      <Project>{37068536-3066-4877-91e0-05031d2c5ca3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Jobs\Alicargo.Jobs.csproj">
+      <Name>Alicargo.Jobs</Name>
+      <Project>{c2133743-7762-4bd9-a824-eb039e41af58}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo\Alicargo.csproj">
+      <Name>Alicargo</Name>
+      <Project>{8666b402-84b6-49d4-abd7-b2966955c9cb}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="115eb70c-fcdc-4918-a354-53f11614e0eb" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="ea0a5fb9-a0d0-4221-ba73-89ea0a527f3b" name="Alicargo">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="86dd173b-36ec-427b-a860-95aa64403815" direction="Forward">
+          <layerMoniker Id="5ff1ba23-fc7e-46fa-b30a-df1672d0a661" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="003350c1-60d6-4de1-99a5-03148c100c75" direction="Forward">
+          <layerMoniker Id="fe2937bd-fe43-4e53-8edb-e87d2aa9febc" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="f63750d6-627f-4ded-bb5b-c67ff315e79a" direction="Forward">
+          <layerMoniker Id="d9e9c99d-1e81-43c8-abad-2dce7f3bb0fc" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="ba102181-d7c4-4191-9742-5e3072c81f43" direction="Forward">
+          <layerMoniker Id="cb1f07f1-be4a-47ae-bbf3-d1dd1d59a709" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="be7f60d1-7ea4-4c72-a1d0-ba6815b591f9" name="Alicargo">
+          <ArtifactNode Label="Alicargo" Category="CodeSchema_Project" Id="(Assembly=../Alicargo/Alicargo.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Alicargo)" Label="Alicargo.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="fe2937bd-fe43-4e53-8edb-e87d2aa9febc" name="Alicargo.Contracts">
+      <references>
+        <reference Id="6b36921b-20c7-4596-ad03-cf0a0fe095b4" name="Alicargo.Contracts">
+          <ArtifactNode Label="Alicargo.Contracts" Category="CodeSchema_Project" Id="(Assembly=../Alicargo.Contracts/Alicargo.Contracts.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Alicargo.Contracts)" Label="Alicargo.Contracts.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="5ff1ba23-fc7e-46fa-b30a-df1672d0a661" name="Alicargo.Core">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="32e8085a-a7f6-4955-aa4c-ca822c7fddbc" direction="Forward">
+          <layerMoniker Id="fe2937bd-fe43-4e53-8edb-e87d2aa9febc" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="20e37240-2662-480c-82a3-6005e551b182" name="Alicargo.Core">
+          <ArtifactNode Label="Alicargo.Core" Category="CodeSchema_Project" Id="(Assembly=../Alicargo.Core/Alicargo.Core.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Alicargo.Core)" Label="Alicargo.Core.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="cb1f07f1-be4a-47ae-bbf3-d1dd1d59a709" name="Alicargo.DataAccess">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="d2ca5f12-6607-49f3-acfb-60fcf2a7ef72" direction="Forward">
+          <layerMoniker Id="fe2937bd-fe43-4e53-8edb-e87d2aa9febc" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="390537f7-d725-46af-80f2-6fb0cd8a6015" name="Alicargo.DataAccess">
+          <ArtifactNode Label="Alicargo.DataAccess" Category="CodeSchema_Project" Id="(Assembly=../Alicargo.DataAccess/Alicargo.DataAccess.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Alicargo.DataAccess)" Label="Alicargo.DataAccess.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="d9e9c99d-1e81-43c8-abad-2dce7f3bb0fc" name="Alicargo.Jobs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="3b35c899-0ea9-4c5f-9d0c-1d75eea5d617" direction="Forward">
+          <layerMoniker Id="fe2937bd-fe43-4e53-8edb-e87d2aa9febc" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="fa0f84b2-e72f-46c9-9e15-a96ba6aedda2" direction="Forward">
+          <layerMoniker Id="5ff1ba23-fc7e-46fa-b30a-df1672d0a661" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="a88abf15-7bd3-4afc-a4e1-297777fd66a3" name="Alicargo.Jobs">
+          <ArtifactNode Label="Alicargo.Jobs" Category="CodeSchema_Project" Id="(Assembly=../Alicargo.Jobs/Alicargo.Jobs.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Alicargo.Jobs)" Label="Alicargo.Jobs.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>
