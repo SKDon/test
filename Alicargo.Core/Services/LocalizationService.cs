@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Resources;
 using Alicargo.Core.Services.Abstract;
@@ -9,13 +8,6 @@ namespace Alicargo.Core.Services
 {
 	public sealed class LocalizationService : ILocalizationService
 	{
-		private readonly IStateRepository _states;
-
-		public LocalizationService(IStateRepository states)
-		{
-			_states = states;
-		}
-
 		public string GetDate(DateTimeOffset? date, string culture, TimeSpan? timeZone)
 		{
 			// todo: 1.5. apply timezone

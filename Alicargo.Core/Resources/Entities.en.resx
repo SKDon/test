@@ -429,4 +429,22 @@
   <data name="TransitCostEdited" xml:space="preserve">
     <value>Delivery* (€)</value>
   </data>
+  <data name="Body" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="EnableEmailSend" xml:space="preserve">
+    <value>Enable email sending</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LocalizedName" xml:space="preserve">
+    <value>Localized name</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
 </root>

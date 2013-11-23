@@ -139,7 +139,7 @@ namespace Alicargo.App_Start
 			var clientRepository = new ClientRepository(unitOfWork);
 			var executor = new SqlProcedureExecutor(connection.ConnectionString);
 			var states = new StateRepository(executor);
-			var localization = new LocalizationService(states);
+			var localization = new LocalizationService();
 			var stateConfig = new StateConfig();
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);

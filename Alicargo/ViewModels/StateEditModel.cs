@@ -10,7 +10,7 @@ namespace Alicargo.ViewModels
 		[HiddenInput]
 		public long Id { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Name")]
+		[Required, DisplayNameLocalized(typeof(Entities), "StateName")]
 		public string Name { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Position")]

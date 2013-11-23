@@ -126,33 +126,33 @@
     <EmbeddedResource Include="Resources\Enums.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Enums.en.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Entities.en.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities.it.resx">
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums.it.resx">
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Enums.it.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Enums.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Entities.Designer.cs</LastGenOutput>
     </EmbeddedResource>
