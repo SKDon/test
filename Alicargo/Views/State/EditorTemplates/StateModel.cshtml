@@ -1,25 +1,31 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @model StateModel
 
-<div class="row">
-	<div class="span12">
-		@Html.DropDownListFor(x => x.Language, (IDictionary<string, string>)ViewBag.Languages)
+<div class="state-edit">
+	<div class="row">
+		<div class="span4">
+			@Html.LabelFor(x => x.Language)
+			@Html.DropDownListFor(x => x.Language, (IDictionary<string, string>)ViewBag.Languages)
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.Name)
+	<div class="row">
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.Name)
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.LocalizedName)
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.Position)
+		</div>
 	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.LocalizedName)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.Position)
-	</div>
-</div>
-<div class="row">
-	<div class="span12">
-		@Html.EditorWithLabelFor(model => model.Subject)
-		@Html.EditorWithLabelFor(model => model.Body)
+	<div class="row">
+		<div class="span12">
+			<div class="state-edit-checkbox">
+				@Html.EditorWithLabelFor(x => x.EnableEmailSend)
+			</div>
+			@Html.EditorWithLabelFor(model => model.Subject)
+			@Html.EditorWithLabelFor(model => model.Body)
+		</div>
 	</div>
 </div>

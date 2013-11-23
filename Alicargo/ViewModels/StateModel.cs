@@ -6,22 +6,23 @@ namespace Alicargo.ViewModels
 {
 	public sealed class StateModel
 	{
-		[Required, DisplayNameLocalized(typeof(Entities), "Name")]
+		[Required, DisplayNameLocalized(typeof (Entities), "Name")]
 		public string Name { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Position")]
+		[Required, DisplayNameLocalized(typeof (Entities), "Position")]
 		public int Position { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Subject")]
+		[DisplayNameLocalized(typeof (Entities), "Subject")]
 		public string Subject { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Body")]
+		[DisplayNameLocalized(typeof (Entities), "Body")]
+		[DataType(DataType.MultilineText)]
 		public string Body { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "LocalizedName")]
+		[Required, DisplayNameLocalized(typeof (Entities), "LocalizedName")]
 		public string LocalizedName { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Language")]
+		[Required, DisplayNameLocalized(typeof (Entities), "Language")]
 		public string Language { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "EnableEmailSend")]
