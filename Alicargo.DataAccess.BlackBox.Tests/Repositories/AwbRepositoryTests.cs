@@ -16,11 +16,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private IAwbRepository _awbRepository;
 		private DbTestContext _context;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
+			_fixture = new Fixture();
 
 			_awbRepository = new AwbRepository(_context.UnitOfWork);
 		}
@@ -200,7 +202,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private ApplicationData CreateApplicationData(long clientId)
 		{
-			return _context.Fixture
+			return _fixture
 						   .Build<ApplicationData>()
 						   .Without(x => x.SenderId)
 						   .With(x => x.ClientId, clientId)
@@ -214,7 +216,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private AirWaybillData CreateAirWaybillData()
 		{
-			return _context.Fixture
+			return _fixture
 						   .Build<AirWaybillData>()
 						   .With(x => x.StateId, TestConstants.DefaultStateId)
 						   .With(x => x.BrokerId, TestConstants.TestBrokerId)

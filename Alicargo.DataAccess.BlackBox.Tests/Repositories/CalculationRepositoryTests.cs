@@ -16,11 +16,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private CalculationRepository _calculationRepository;
 		private DbTestContext _context;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
+			_fixture = new Fixture();
 
 			_calculationRepository = new CalculationRepository(_context.UnitOfWork);
 		}
@@ -104,7 +106,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private CalculationData GenerateData()
 		{
-			return _context.Fixture.Build<CalculationData>().With(x => x.ClientId, TestConstants.TestClientId1).Create();
+			return _fixture.Build<CalculationData>().With(x => x.ClientId, TestConstants.TestClientId1).Create();
 		}
 
 		private VersionedData<CalculationState, CalculationData> AddNew(CalculationData data, long applicationId)

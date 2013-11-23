@@ -22,12 +22,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private DbTestContext _context;
 		private ApplicationEventRepository _events;
 		private Serializer _serializer;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
 			_serializer = new Serializer();
+			_fixture = new Fixture();
 
 			_events = new ApplicationEventRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
@@ -41,7 +43,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_AddDublicate()
 		{
-			var data = _serializer.Serialize(_context.Fixture.Create<ApplicationCreatedEventData>());
+			var data = _serializer.Serialize(_fixture.Create<ApplicationCreatedEventData>());
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, data);
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, data);
 
@@ -53,7 +55,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				count.ShouldBeEquivalentTo(2);
 			}
 
-			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.CPFileUploaded, _serializer.Serialize(_context.Fixture.Create<FileHolder>()));
+			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.CPFileUploaded, _serializer.Serialize(_fixture.Create<FileHolder>()));
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
@@ -67,7 +69,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_GetNext()
 		{
-			var eventData = _serializer.Serialize(_context.Fixture.Create<ApplicationCreatedEventData>());
+			var eventData = _serializer.Serialize(_fixture.Create<ApplicationCreatedEventData>());
 
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, eventData);
 
@@ -84,7 +86,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_SetState()
 		{
-			var eventData = _context.Fixture.Create<ApplicationCreatedEventData>();
+			var eventData = _fixture.Create<ApplicationCreatedEventData>();
 
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, _serializer.Serialize(eventData));
 
@@ -100,7 +102,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Delete()
 		{
-			var eventData = _context.Fixture.Create<ApplicationCreatedEventData>();
+			var eventData = _fixture.Create<ApplicationCreatedEventData>();
 
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, _serializer.Serialize(eventData));
 

@@ -52,7 +52,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			states.Count.ShouldBeEquivalentTo(3);
 		}
 
-
 		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetDefaultState()
 		{
@@ -68,6 +67,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Assert.AreEqual(10, ru.Position);
 			Assert.IsTrue(ru.Name == it.Name);
 			Assert.IsTrue(ru.Name == en.Name);
+		}
+
+		[TestMethod]
+		public void Test_StateRepository_Crud()
+		{
+			//_states.Add("")
 		}
 	}
 }

@@ -1,10 +1,9 @@
-﻿using System.Data.SqlClient;
-using System.Linq;
+﻿using System;
+using System.Data.SqlClient;
 using System.Transactions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
-using Ploeh.AutoFixture;
 
 namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 {
@@ -12,8 +11,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
     {
         private readonly TransactionScope _transactionScope;
         private readonly SqlConnection _connection;
-
-		public IFixture Fixture { get; private set; }
 
         public IUnitOfWork UnitOfWork { get; private set; }
 
@@ -24,8 +21,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 
 	    public DbTestContext()
         {
-            Fixture = new Fixture();
-
             _connection = new SqlConnection(Settings.Default.MainConnectionString);
             Connection.Open();
 
@@ -42,7 +37,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 
         public byte[] RandomBytes()
         {
-            return Fixture.CreateMany<byte>().ToArray();
+            return Guid.NewGuid().ToByteArray();
         }
     }
 }

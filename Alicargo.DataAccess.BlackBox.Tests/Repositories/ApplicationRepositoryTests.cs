@@ -20,11 +20,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private IStateRepository _stateRepository;
 		private DbTestContext _context;
 		private ApplicationUpdateRepository _applicationUpater;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
+			_fixture = new Fixture();
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
 			_files = new ApplicationFileRepository(_context.UnitOfWork);
@@ -94,7 +96,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var old = CreateTestApplication();
 
-			var newData = _context.Fixture.Create<ApplicationData>();
+			var newData = _fixture.Create<ApplicationData>();
 			newData.Id = old.Id;
 			newData.StateId = old.StateId;
 			newData.SenderId = TestConstants.TestSenderId;
@@ -127,7 +129,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private ApplicationData CreateTestApplication()
 		{
-			var application = _context.Fixture
+			var application = _fixture
 				.Build<ApplicationData>()
 				.Without(x => x.Id)
 				.Without(x => x.SenderId)

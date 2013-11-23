@@ -16,11 +16,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private DbTestContext _context;
 		private SenderRepository _repository;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
+			_fixture = new Fixture();
 
 			_repository = new SenderRepository(_context.UnitOfWork, new PasswordConverter(), new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
@@ -34,9 +36,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Add_Get()
 		{
-			var data = _context.Fixture.Create<SenderData>();
+			var data = _fixture.Create<SenderData>();
 
-			var password = _context.Fixture.Create<string>();
+			var password = _fixture.Create<string>();
 
 			var id = _repository.Add(data, password);
 
@@ -48,11 +50,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_GetTraiffs()
 		{
-			var data1 = _context.Fixture.Create<SenderData>();
-			var id1 = _repository.Add(data1, _context.Fixture.Create<string>());
+			var data1 = _fixture.Create<SenderData>();
+			var id1 = _repository.Add(data1, _fixture.Create<string>());
 
-			var data2 = _context.Fixture.Create<SenderData>();
-			var id2 = _repository.Add(data2, _context.Fixture.Create<string>());
+			var data2 = _fixture.Create<SenderData>();
+			var id2 = _repository.Add(data2, _fixture.Create<string>());
 
 			var actual = _repository.GetTariffs(new[] { id1, id2 });
 
@@ -63,7 +65,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_Update()
 		{
-			var data = _context.Fixture.Create<SenderData>();
+			var data = _fixture.Create<SenderData>();
 
 			_repository.Update(TestConstants.TestSenderId, data);
 

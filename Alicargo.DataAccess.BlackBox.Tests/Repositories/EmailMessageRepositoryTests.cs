@@ -1,5 +1,4 @@
-﻿using System;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
@@ -16,11 +15,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private DbTestContext _context;
 		private EmailMessageRepository _messages;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
+			_fixture = new Fixture();
 
 			_messages = new EmailMessageRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
@@ -34,7 +35,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_GetNext()
 		{
-			var partitionId = _context.Fixture.Create<int>();
+			var partitionId = _fixture.Create<int>();
 
 			var data = Add(partitionId);
 
@@ -49,9 +50,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private EmailMessageData Add(int partitionId)
 		{
-			var data = _context.Fixture.Build<EmailMessageData>()
-				.With(x => x.To, EmailMessageData.Join(_context.Fixture.CreateMany<string>()))
-				.With(x => x.CopyTo, EmailMessageData.Join(_context.Fixture.CreateMany<string>()))
+			var data = _fixture.Build<EmailMessageData>()
+				.With(x => x.To, EmailMessageData.Join(_fixture.CreateMany<string>()))
+				.With(x => x.CopyTo, EmailMessageData.Join(_fixture.CreateMany<string>()))
 				.Without(x => x.Id)
 				.Create();
 
@@ -68,7 +69,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_SetState()
 		{
-			var partitionId = _context.Fixture.Create<int>();
+			var partitionId = _fixture.Create<int>();
 
 			Add(partitionId);
 

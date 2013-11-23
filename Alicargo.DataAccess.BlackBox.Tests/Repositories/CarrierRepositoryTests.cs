@@ -13,11 +13,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private CarrierRepository _repository;
 		private DbTestContext _context;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
+			_fixture = new Fixture();
 			_repository = new CarrierRepository(_context.UnitOfWork);
 		}
 
@@ -29,7 +31,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private CarrierData CreateTestCarrier()
 		{
-			var data = _context.Fixture.Create<CarrierData>();
+			var data = _fixture.Create<CarrierData>();
 
 			var id = _repository.Add(data);
 			_context.UnitOfWork.SaveChanges();

@@ -10,7 +10,6 @@ using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ploeh.AutoFixture;
 
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 {
@@ -113,9 +112,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Assert.IsTrue(passwordHash.SequenceEqual(actual.PasswordHash.ToArray()));
 		}
 
-		private string RandomString()
+		private static string RandomString()
 		{
-			return _context.Fixture.Create<string>();
+			return Guid.NewGuid().ToString();
 		}
 
 		//[TestMethod, Ignore] // this is not test
