@@ -1,7 +1,8 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
-@model StateModel
+@model StateEditModel
 
 <div class="state-edit">
+	@Html.HiddenFor(x => x.Id)
 	<div class="row">
 		<div class="span4">
 			@Html.LabelFor(x => x.Language)

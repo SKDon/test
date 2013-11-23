@@ -398,7 +398,7 @@
     <Compile Include="ViewModels\Calculation\Admin\CalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
-    <Compile Include="ViewModels\StateModel.cs" />
+    <Compile Include="ViewModels\StateEditModel.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
     <Compile Include="ViewModels\User\SenderModel.cs" />
@@ -680,6 +680,7 @@
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\app\State\Edit.js" />
     <Content Include="Scripts\app\State\Grid.js" />
     <Content Include="Scripts\app\User\Grid.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />
@@ -1546,7 +1547,7 @@
     <Content Include="Views\State\Index.cshtml" />
     <Content Include="Views\State\Create.cshtml" />
     <Content Include="Views\State\Edit.cshtml" />
-    <Content Include="Views\State\EditorTemplates\StateModel.cshtml" />
+    <Content Include="Views\State\EditorTemplates\StateEditModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

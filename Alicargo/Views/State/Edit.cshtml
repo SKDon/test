@@ -1,7 +1,11 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
-@model StateModel
+@model StateEditModel
 <h1>
 	@Pages.StateEdit
 </h1>
 @Html.EditPage(Url.Action(MVC.State.Edit()), Pages.Save)
+@section scripts
+{
+	@Scripts.Render(PathConstants.StateEditJs)
+}

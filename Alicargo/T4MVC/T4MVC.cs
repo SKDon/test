@@ -228,6 +228,7 @@ namespace Links
                 private const string URLPATH = "~/Scripts/app/State";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Edit_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Edit.min.js") ? Url("Edit.min.js") : Url("Edit.js");
                 public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
             }
         

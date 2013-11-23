@@ -1,28 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
 
 namespace Alicargo.ViewModels
 {
-	public sealed class StateModel
+	public sealed class StateEditModel
 	{
-		[Required, DisplayNameLocalized(typeof (Entities), "Name")]
+		[HiddenInput]
+		public long Id { get; set; }
+
+		[Required, DisplayNameLocalized(typeof(Entities), "Name")]
 		public string Name { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Position")]
+		[Required, DisplayNameLocalized(typeof(Entities), "Position")]
 		public int Position { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Subject")]
+		[DisplayNameLocalized(typeof(Entities), "Subject")]
 		public string Subject { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Body")]
+		[DisplayNameLocalized(typeof(Entities), "Body")]
 		[DataType(DataType.MultilineText)]
 		public string Body { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "LocalizedName")]
+		[Required, DisplayNameLocalized(typeof(Entities), "LocalizedName")]
 		public string LocalizedName { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Language")]
+		[Required, DisplayNameLocalized(typeof(Entities), "Language")]
 		public string Language { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "EnableEmailSend")]

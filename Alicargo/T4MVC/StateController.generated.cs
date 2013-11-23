@@ -86,6 +86,7 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Edit
         {
             public readonly string id = "id";
+            public readonly string lang = "lang";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -109,7 +110,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string StateModel = "StateModel";
+                public readonly string StateEditModel = "StateEditModel";
             }
         }
     }
@@ -146,13 +147,14 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id, string lang);
 
-        public override System.Web.Mvc.ViewResult Edit(long id)
+        public override System.Web.Mvc.ViewResult Edit(long id, string lang)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            EditOverride(callInfo, id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "lang", lang);
+            EditOverride(callInfo, id, lang);
             return callInfo;
         }
 

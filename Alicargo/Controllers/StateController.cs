@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
@@ -48,26 +49,38 @@ namespace Alicargo.Controllers
 		}
 
 		[Access(RoleType.Admin)]
-		public virtual ViewResult Edit(long id)
+		public virtual ViewResult Edit(long id, string lang)
 		{
-			var data = _states.Get(id).Single().Value;
+			BindLanguageList();
+
+			var model = GetStateModel(id, lang ?? _identity.TwoLetterISOLanguageName);
+
+			return View(model);
+		}
+
+		private StateEditModel GetStateModel(long id, string language)
+		{
+			var state = _states.Get(id).Single().Value;
 
 			var template = _templates.GetByStateId(id);
 
-			var localization = template.Localizations.Single(x => x.TwoLetterISOLanguageName == _identity.TwoLetterISOLanguageName);
-
-			BindLanguageList();
-
-			return View(new StateModel
+			EmailTemplateLocalizationData localization = null;
+			if (template != null)
 			{
-				Name = data.Name,
-				Language = _identity.TwoLetterISOLanguageName,
-				LocalizedName = data.Localization[_identity.TwoLetterISOLanguageName],
-				Subject = localization.Subject,
-				Body = localization.Body,
-				Position = data.Position,
-				EnableEmailSend = template.EnableEmailSend
-			});
+				localization = template.Localizations.Single(x => x.TwoLetterISOLanguageName == language);
+			}
+
+			return new StateEditModel
+			{
+				Id = id,
+				Name = state.Name,
+				Language = language,
+				LocalizedName = state.Localization[language],
+				Subject = localization != null ? localization.Subject : null,
+				Body = localization != null ? localization.Body : null,
+				Position = state.Position,
+				EnableEmailSend = template != null && template.EnableEmailSend
+			};
 		}
 
 		private void BindLanguageList()
