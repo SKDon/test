@@ -7,6 +7,7 @@ using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ploeh.AutoFixture;
 
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 {
@@ -17,11 +18,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private IStateRepository _states;
 		private DbTestContext _context;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext();
+			_fixture = new Fixture();
 
 			_states = new StateRepository(new SqlProcedureExecutor(_context.Connection.ConnectionString));
 		}
@@ -70,9 +73,57 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		public void Test_StateRepository_Crud()
+		public void Test_StateRepository_UpdateOtheLang()
 		{
-			//_states.Add("")
+			var id = _states.Add(TwoLetterISOLanguageName.English, _fixture.Create<StateData>());
+
+			var itData = _fixture.Create<StateData>();
+
+			_states.Update(id, TwoLetterISOLanguageName.Italian, itData);
+
+			var itActual = _states.Get(TwoLetterISOLanguageName.Italian, id).Single().Value;
+
+			itActual.ShouldBeEquivalentTo(itData);
+
+			var enActual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
+
+			enActual.ShouldBeEquivalentTo(itActual, options => options.Excluding(x => x.LocalizedName));
+		}
+
+		[TestMethod]
+		public void Test_StateRepository_Upate()
+		{
+			var data = _fixture.Create<StateData>();
+
+			var id = _states.Add(TwoLetterISOLanguageName.English, data);
+
+			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
+
+			actual.ShouldBeEquivalentTo(data);
+
+			var newData = _fixture.Create<StateData>();
+
+			_states.Update(id, TwoLetterISOLanguageName.English, newData);
+
+			actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
+
+			actual.ShouldBeEquivalentTo(newData);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_StateRepository_Delete()
+		{
+			var data = _fixture.Create<StateData>();
+
+			var id = _states.Add(TwoLetterISOLanguageName.English, data);
+
+			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
+
+			actual.ShouldBeEquivalentTo(data);
+
+			_states.Delete(id);
+
+			_states.Get(TwoLetterISOLanguageName.English, id).Should().BeEmpty();
 		}
 	}
 }

@@ -61,7 +61,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void Delete(long id)
 		{
-			throw new NotImplementedException();
+			_executor.Execute("[dbo].[State_Delete]", new { Id = id });
 		}
 
 		public IReadOnlyDictionary<long, StateData> Get(string twoLetterISOLanguageName, params long[] ids)
