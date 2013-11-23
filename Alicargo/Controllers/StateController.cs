@@ -7,7 +7,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.State;
 
 namespace Alicargo.Controllers
 {
@@ -42,10 +42,34 @@ namespace Alicargo.Controllers
 			return Json(states);
 		}
 
+		[HttpGet]
 		[Access(RoleType.Admin)]
 		public virtual ViewResult Create()
 		{
 			return View();
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		public virtual ActionResult Create(StateCreateModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				BindLanguageList();
+
+				return View(model);
+			}
+
+			var language = _identity.TwoLetterISOLanguageName;
+
+			var id = _states.Add(language, new StateData
+			{
+				LocalizedName = model.Name,
+				Name = model.Name,
+				Position = model.Position
+			});
+
+			return RedirectToAction(MVC.State.Edit(id, language));
 		}
 
 		[HttpGet]

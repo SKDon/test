@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.State
 {
 	public sealed class StateEditModel
 	{

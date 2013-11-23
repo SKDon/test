@@ -1,0 +1,13 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.ViewModels.State.StateCreateModel
+
+<div class="state-edit">
+	<div class="row">
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.Name)
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.Position)
+		</div>
+	</div>	
+</div>

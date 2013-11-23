@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Transactions;
@@ -22,7 +21,12 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			using (var scope = new TransactionScope())
 			{
-				var id = _executor.Query<long>("[dbo].[State_Add]", new { data.Name, data.Position, IsSystem = false });
+				var id = _executor.Query<long>("[dbo].[State_Add]", new
+				{
+					data.Name,
+					data.Position,
+					IsSystem = false
+				});
 
 				_executor.Execute("[dbo].[StateLocalization_Merge]", new
 				{
@@ -46,7 +50,12 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			using (var scope = new TransactionScope())
 			{
-				_executor.Execute("[dbo].[State_Update]", new { data.Name, data.Position, Id = id });
+				_executor.Execute("[dbo].[State_Update]", new
+				{
+					data.Name,
+					data.Position,
+					Id = id
+				});
 
 				_executor.Execute("[dbo].[StateLocalization_Merge]", new
 				{

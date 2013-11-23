@@ -79,6 +79,14 @@ namespace Alicargo.Controllers
         }
 
 
+        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Create
+        {
+            public readonly string model = "model";
+        }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
@@ -111,6 +119,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
+                public readonly string StateCreateModel = "StateCreateModel";
                 public readonly string StateEditModel = "StateEditModel";
             }
         }
@@ -148,6 +157,16 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.State.StateCreateModel model);
+
+        public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.State.StateCreateModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            CreateOverride(callInfo, model);
+            return callInfo;
+        }
+
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id, string lang);
 
         public override System.Web.Mvc.ViewResult Edit(long id, string lang)
@@ -159,9 +178,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.StateEditModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.State.StateEditModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.StateEditModel model)
+        public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.State.StateEditModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

@@ -398,7 +398,8 @@
     <Compile Include="ViewModels\Calculation\Admin\CalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
-    <Compile Include="ViewModels\StateEditModel.cs" />
+    <Compile Include="ViewModels\State\StateCreateModel.cs" />
+    <Compile Include="ViewModels\State\StateEditModel.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
     <Compile Include="ViewModels\User\SenderModel.cs" />
@@ -1548,6 +1549,7 @@
     <Content Include="Views\State\Create.cshtml" />
     <Content Include="Views\State\Edit.cshtml" />
     <Content Include="Views\State\EditorTemplates\StateEditModel.cshtml" />
+    <Content Include="Views\State\EditorTemplates\StateCreateModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
