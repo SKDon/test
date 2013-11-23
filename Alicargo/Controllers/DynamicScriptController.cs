@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using System.Web.UI;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.MvcHelpers.Filters;
-using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Controllers

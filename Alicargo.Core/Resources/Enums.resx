@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Admin" xml:space="preserve">
+    <value>Админ</value>
+  </data>
   <data name="Auto" xml:space="preserve">
     <value>Авто</value>
   </data>
   <data name="Avia" xml:space="preserve">
     <value>Авиа</value>
+  </data>
+  <data name="Broker" xml:space="preserve">
+    <value>Брокер</value>
+  </data>
+  <data name="Client" xml:space="preserve">
+    <value>Клиент</value>
   </data>
   <data name="Comfort" xml:space="preserve">
     <value>Комфорт</value>
@@ -129,11 +138,17 @@
   <data name="Econom" xml:space="preserve">
     <value>Эконом</value>
   </data>
+  <data name="Forwarder" xml:space="preserve">
+    <value>Перевозчик</value>
+  </data>
   <data name="Lux" xml:space="preserve">
     <value>Люкс</value>
   </data>
   <data name="Self" xml:space="preserve">
     <value>Самовывоз</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Отправитель</value>
   </data>
   <data name="ToDoor" xml:space="preserve">
     <value>До двери</value>

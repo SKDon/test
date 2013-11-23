@@ -60,32 +60,19 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="Helpers\ApplicationHelper.cs" />
-    <Compile Include="Models\Recipient.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
     <Compile Include="Enums\DeliveryType.cs" />
     <Compile Include="Enums\MethodOfDelivery.cs" />
     <Compile Include="Enums\MethodOfTransit.cs" />
+    <Compile Include="Helpers\ApplicationHelper.cs" />
+    <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
+    <Compile Include="Models\Recipient.cs" />
     <Compile Include="Localization\CultureContext.cs" />
     <Compile Include="Localization\ICultureContext.cs" />
-    <Compile Include="Resources\Mail.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Mail.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Services\Abstract\ILocalizationService.cs" />
-    <Compile Include="Services\Abstract\IStateConfig.cs" />
-    <Compile Include="Services\Email\DbMailSender.cs" />
-    <Compile Include="Services\ExtensionsHelper.cs" />
     <Compile Include="Resources\Entities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Entities.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Enums.en.Designer.cs">
-      <DependentUpon>Enums.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -95,22 +82,35 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\Entities.it.Designer.cs">
+      <DependentUpon>Entities.it.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Entities.it.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Enums.Designer.cs">
       <DependentUpon>Enums.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Localization\LocalizeEnumExtension.cs" />
-    <Compile Include="Resources\Enums.it.Designer.cs">
+    <Compile Include="Resources\Enums.en.Designer.cs">
+      <DependentUpon>Enums.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Enums.it.resx</DependentUpon>
     </Compile>
-    <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
+    <Compile Include="Resources\Enums.it.Designer.cs">
+      <DependentUpon>Enums.it.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Mail.Designer.cs">
+      <DependentUpon>Mail.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Services\Abstract\ILocalizationService.cs" />
+    <Compile Include="Services\Abstract\IStateConfig.cs" />
+    <Compile Include="Services\Email\DbMailSender.cs" />
+    <Compile Include="Services\ExtensionsHelper.cs" />
+    <Compile Include="Localization\LocalizeEnumExtension.cs" />
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Abstract\ILog.cs" />
     <Compile Include="Services\Abstract\IMailSender.cs" />
@@ -123,45 +123,6 @@
     <Compile Include="Services\Email\SilentMailSender.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Enums.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.en.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.en.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.it.resx">
-      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.it.resx">
-      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.it.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>Alicargo.Core.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Mail.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
       <Project>{e2f1a146-9076-4833-995e-084ac1b3eac7}</Project>
       <Name>Alicargo.Contracts</Name>
@@ -169,6 +130,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Entities.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Entities.en.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Enums.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Enums.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Enums.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Mail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
