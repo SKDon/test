@@ -5,9 +5,10 @@
 		width: auto;
 	}
 </style>
-<h3>
-	@Html.ActionLink(Pages.Add, MVC.State.Create(), new {@class = "btn btn-link"})
-</h3>
+<p>
+	<b>@Pages.States</b>
+	@Html.ActionLink(Pages.Add, MVC.State.Create())
+</p>
 <div id="state-grid" class="grid"></div>
 @section scripts
 {

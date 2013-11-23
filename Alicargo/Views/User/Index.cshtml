@@ -1,40 +1,43 @@
 ﻿@using Alicargo.Contracts.Enums
 @using Resources
-@model RoleType
+@model Alicargo.Contracts.Enums.RoleType
 <style>
 	.container {
 		padding: 0 20px;
 		width: auto;
 	}
 </style>
-<h3>@switch (Model)
-    {
-	    case RoleType.Admin:
-		    @Pages.Admins
-		    break;
+<p>
+	<b>
+		@switch (Model)
+		{
+			case RoleType.Admin:
+				@Pages.Admins
+				break;
 
-	    case RoleType.Sender:
-		    @Pages.Senders
-		    break;
-	    case RoleType.Broker:
-		    @Pages.Brokers
-		    break;
+			case RoleType.Sender:
+			@Pages.Senders
+				break;
+			case RoleType.Broker:
+			@Pages.Brokers
+				break;
 
-	    case RoleType.Forwarder:
-		    @Pages.Forwarders
-		    break;
+			case RoleType.Forwarder:
+			@Pages.Forwarders
+				break;
 
-	    case RoleType.Client:
-		    @Pages.Clients
-		    break;
+			case RoleType.Client:
+			@Pages.Clients
+				break;
 
-	    default:
-		    throw new ArgumentOutOfRangeException();
-    }
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
+	</b>
 	@Html.ActionLink(Pages.Add, Model == RoleType.Sender
 		? MVC.Sender.Create()
-		: MVC.User.Create(Model), new {@class = "btn btn-link"})
-</h3>
+		: MVC.User.Create(Model))
+</p>
 <div id="user-grid" class="grid"></div>
 @section scripts
 {
