@@ -129,6 +129,7 @@
     <Build Include="Stored procedures\State_SetStateAvailabilities.sql" />
     <Build Include="Stored procedures\State_SetStateVisibilities.sql" />
     <Build Include="Stored procedures\State_SetStateEmailRecipients.sql" />
+    <Build Include="Tables\ApplicationEventEmailTemplate.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

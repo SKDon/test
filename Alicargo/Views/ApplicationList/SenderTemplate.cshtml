@@ -1,4 +1,5 @@
-﻿@using Resources
+﻿@using System.Globalization
+@using Resources
 @inherits BaseWebViewPage<ApplicationIndexModel>
 
 @helper EditButton()
@@ -13,7 +14,12 @@
 	@:&nbsp;
 	@Html.LabelFor(x => x.AirWaybills)
 	@:&nbsp;
-	@Html.DropDownListFor(x => x.AirWaybills, Model.AirWaybills, "", new { @class = "AirWaybill-select" })
+	@Html.DropDownListFor(x => x.AirWaybills, Model.AirWaybills.Select(x => new SelectListItem
+	{
+		Selected = false,
+		Text = x.Value,
+		Value = x.Key.ToString(CultureInfo.InvariantCulture)
+	}), "", new { @class = "AirWaybill-select" })
 }
 
 @helper AirWaybillButton()

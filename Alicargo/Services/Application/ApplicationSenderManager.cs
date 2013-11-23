@@ -131,7 +131,7 @@ namespace Alicargo.Services.Application
 				Volume = application.Volume,
 				FactureCost = application.FactureCost,
 				PickupCost = application.PickupCost,
-				CountryId = application.CountryId
+				CountryId = application.CountryId ?? 108 // Italy todo: fix hack
 			};
 		}
 	}
