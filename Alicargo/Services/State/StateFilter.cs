@@ -11,11 +11,11 @@ namespace Alicargo.Services.State
 {
 	internal sealed class StateFilter : IStateFilter
 	{
-		private readonly IIdentityService _identity;
-		private readonly IStateConfig _config;
-		private readonly IStateRepository _states;
-		private readonly IStateSettingsRepository _settings;
 		private readonly IAwbRepository _awbs;
+		private readonly IStateConfig _config;
+		private readonly IIdentityService _identity;
+		private readonly IStateSettingsRepository _settings;
+		private readonly IStateRepository _states;
 
 		public StateFilter(
 			IStateRepository states,
@@ -127,7 +127,10 @@ namespace Alicargo.Services.State
 
 		public long[] FilterByPosition(long[] states, int position)
 		{
-			return _states.Get(states).Where(x => x.Value.Position >= position).Select(x => x.Key).ToArray();
+			return _states.Get(_identity.TwoLetterISOLanguageName, states)
+				.Where(x => x.Value.Position >= position)
+				.Select(x => x.Key)
+				.ToArray();
 		}
 
 		public long[] FilterByBusinessLogic(ApplicationData applicationData, long[] stateAvailability)

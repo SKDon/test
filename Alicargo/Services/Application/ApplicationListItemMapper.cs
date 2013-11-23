@@ -37,7 +37,8 @@ namespace Alicargo.Services.Application
 		public ApplicationListItem[] Map(ApplicationListItemData[] data)
 		{
 			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
-			var states = _states.Get(data.Select(x => x.StateId).ToArray());
+			var ids = data.Select(x => x.StateId).ToArray();
+			var states = _states.Get(_identity.TwoLetterISOLanguageName, ids);
 			var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
 			var calculations = _applications.GetCalculations(data.Select(x => x.Id).ToArray());
 
@@ -49,7 +50,7 @@ namespace Alicargo.Services.Application
 				State = new ApplicationStateModel
 				{
 					StateId = x.StateId,
-					StateName = states[x.StateId].Localization[_identity.TwoLetterISOLanguageName]
+					StateName = states[x.StateId].LocalizedName
 				},
 				CanClose = x.StateId == _stateConfig.CargoOnTransitStateId,
 				CanSetState = stateAvailability.Contains(x.StateId),

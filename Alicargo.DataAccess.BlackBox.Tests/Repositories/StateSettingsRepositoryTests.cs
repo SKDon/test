@@ -38,7 +38,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var availabilities = _settings.GetStateAvailabilities().Where(x => x.Role == RoleType.Admin).ToArray();
 
-			var states = _states.Get().ToArray();
+			var states = _states.Get(TwoLetterISOLanguageName.Italian).ToArray();
 
 			Assert.AreEqual(states.Length, availabilities.Length);
 
@@ -53,7 +53,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var visibilities = _settings.GetStateVisibilities().Where(x => x.Role == RoleType.Admin).ToArray();
 
-			var states = _states.Get();
+			var states = _states.Get(TwoLetterISOLanguageName.Italian);
 
 			Assert.AreEqual(states.Count, visibilities.Length);
 

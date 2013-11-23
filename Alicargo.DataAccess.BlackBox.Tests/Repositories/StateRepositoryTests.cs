@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
@@ -34,7 +35,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetAll()
 		{
-			var states = _states.Get();
+			var states = _states.Get(TwoLetterISOLanguageName.Italian);
 
 			var all = _states.All();
 
@@ -46,29 +47,27 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_Get()
 		{
-			var states = _states.Get(1, 2, 3);
+			var states = _states.Get(TwoLetterISOLanguageName.Italian, 1, 2, 3);
 
 			states.Count.ShouldBeEquivalentTo(3);
-
-			foreach (var item in states)
-			{
-				item.Value.Localization.Should().Contain(x => x.Key == TwoLetterISOLanguageName.English);
-				item.Value.Localization.Should().Contain(x => x.Key == TwoLetterISOLanguageName.Italian);
-				item.Value.Localization.Should().Contain(x => x.Key == TwoLetterISOLanguageName.Russian);
-				item.Value.Localization.Count.ShouldBeEquivalentTo(3);
-			}
 		}
 
 
 		[TestMethod, TestCategory("black-box")]
 		public void Test_StateRepository_GetDefaultState()
 		{
-			var state = _states.Get(DefaultStateId).First().Value;
+			var it = _states.Get(TwoLetterISOLanguageName.Italian, DefaultStateId).First().Value;
+			var en = _states.Get(TwoLetterISOLanguageName.English, DefaultStateId).First().Value;
+			var ru = _states.Get(TwoLetterISOLanguageName.Russian, DefaultStateId).First().Value;
 
-			Assert.AreEqual("Nuovo", state.Localization[TwoLetterISOLanguageName.Italian]);
-			Assert.AreEqual("New order", state.Localization[TwoLetterISOLanguageName.English]);
-			Assert.AreEqual("Новая заявка", state.Localization[TwoLetterISOLanguageName.Russian]);
-			Assert.AreEqual(10, state.Position);
+			Assert.AreEqual("Nuovo", it.LocalizedName);
+			Assert.AreEqual("New order", en.LocalizedName);
+			Assert.AreEqual("Новая заявка", ru.LocalizedName);
+			Assert.AreEqual(10, it.Position);
+			Assert.AreEqual(10, en.Position);
+			Assert.AreEqual(10, ru.Position);
+			Assert.IsTrue(ru.Name == it.Name);
+			Assert.IsTrue(ru.Name == en.Name);
 		}
 	}
 }

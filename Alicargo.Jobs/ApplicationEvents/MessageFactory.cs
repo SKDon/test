@@ -256,7 +256,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public string ApplicationSetState(ApplicationDetailsData data, string culture)
 		{
-			var stateData = _states.Get(data.StateId).Values.First();
+			var stateData = _states.Get(culture, data.StateId).Values.First();
 
 			return string.Format(Mail.Application_SetState,
 								 ApplicationHelper.GetDisplayNumber(data.Id, data.Count),
@@ -293,7 +293,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 								 _localization.GetDate(data.AirWaybillDateOfArrival, culture),
 								 data.AirWaybillGTD,
 								 data.TransitReference,
-								 stateData.Localization[culture]);
+								 stateData.LocalizedName);
 		}
 
 		private IEnumerable<EmailMessage> SendOnSetState(ApplicationDetailsData details)

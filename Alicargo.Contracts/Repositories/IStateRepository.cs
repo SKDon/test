@@ -5,10 +5,10 @@ namespace Alicargo.Contracts.Repositories
 {
 	public interface IStateRepository
 	{
-		long Add(StateData data);
-		IReadOnlyDictionary<long, StateData> Get(params long[] ids);
+		//long Add(StateData data);
+		IReadOnlyDictionary<long, StateData> Get(string twoLetterISOLanguageName, params long[] ids);
 		StateListItem[] All();
-		void Edit(long id, StateData data);
+		void Update(long id, string twoLetterISOLanguageName, StateData data);
 		void Delete(long id);
 	}
 }

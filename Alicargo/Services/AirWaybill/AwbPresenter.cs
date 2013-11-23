@@ -33,7 +33,7 @@ namespace Alicargo.Services.AirWaybill
 
 			var aggregates = _awbRepository.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
 
-			var states = _states.Get();
+			var states = _states.Get(twoLetterISOLanguageName);
 
 			var items = data.Select(x => new AirWaybillListItem
 				{
@@ -42,7 +42,7 @@ namespace Alicargo.Services.AirWaybill
 					InvoiceFileName = x.InvoiceFileName,
 					State = new ApplicationStateModel
 						{
-							StateName = states[x.StateId].Localization[twoLetterISOLanguageName],
+							StateName = states[x.StateId].LocalizedName,
 							StateId = x.StateId
 						},
 					AWBFileName = x.AWBFileName,

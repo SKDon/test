@@ -115,14 +115,9 @@ namespace Alicargo.Jobs.Tests
 					StateId = stateId
 				});
 			_container.ClientRepository.Setup(x => x.GetLanguage(_details.ClientId)).Returns(TwoLetterISOLanguageName.English);
-			var stateData = new StateData(new Dictionary<string, string>
-			{
-				{TwoLetterISOLanguageName.English, "English"},
-				{TwoLetterISOLanguageName.Italian, "Italian"},
-				{TwoLetterISOLanguageName.Russian, "Russian"},
-			}) { Name = "English" };
+			var stateData = new StateData { Name = "English", LocalizedName = "English" };
 
-			_container.StateRepository.Setup(x => x.Get(stateId)).Returns(new Dictionary<long, StateData>
+			_container.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, stateId)).Returns(new Dictionary<long, StateData>
 			{
 				{
 					stateId, stateData

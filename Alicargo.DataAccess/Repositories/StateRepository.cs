@@ -18,74 +18,45 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public long Add(StateData data)
-		{
-			using (var scope = new TransactionScope())
-			{
-				var id = _executor.Query<long>("[dbo].[State_Add]", new { data.Name, data.Position, IsSystem = false });
+		//public long Add(StateData data)
+		//{
+		//	using (var scope = new TransactionScope())
+		//	{
+		//		var id = _executor.Query<long>("[dbo].[State_Add]", new { data.Name, data.Position, IsSystem = false });
 
-				foreach (var item in data.Localization)
-				{
-					_executor.Execute("[dbo].[StateLocalization_Merge]", new
-					{
-						Name = item.Value,
-						TwoLetterISOLanguageName = item.Key,
-						StateId = id
-					});
-				}
+		//		foreach (var item in data.Localization)
+		//		{
+		//			_executor.Execute("[dbo].[StateLocalization_Merge]", new
+		//			{
+		//				Name = item.Value,
+		//				TwoLetterISOLanguageName = item.Key,
+		//				StateId = id
+		//			});
+		//		}
 
-				scope.Complete();
+		//		scope.Complete();
 
-				return id;
-			}
-		}
-
-		public IReadOnlyDictionary<long, StateData> Get(params long[] ids)
-		{
-			var idsTable = TableParameters.GeIdsTable("Ids", ids.Distinct().ToArray());
-
-			var list = _executor.Array<StateListItem>("[dbo].[State_GetList]", new TableParameters(idsTable));
-
-			var localizations = GetLocalization(idsTable);
-
-			return list.ToDictionary(x => x.Id,
-				x => new StateData(localizations[x.Id])
-				{
-					Name = x.Name,
-					Position = x.Position
-				});
-		}
-
-		private Dictionary<long, Dictionary<string, string>> GetLocalization(DataTable idsTable)
-		{
-			var table = TableParameters.GetLocalizationTable();
-
-			var localizations = _executor.Array<StateLocalization>("[dbo].[StateLocalization_Get]", new TableParameters(idsTable, table));
-
-			return localizations.GroupBy(x => x.StateId)
-				.ToDictionary(x => x.Key, x => x.ToDictionary(y => y.TwoLetterISOLanguageName, y => y.Name));
-		}
+		//		return id;
+		//	}
+		//}
 
 		public StateListItem[] All()
 		{
 			return _executor.Array<StateListItem>("[dbo].[State_GetList]"); // todo: test for order by position
 		}
 
-		public void Edit(long id, StateData data)
+		public void Update(long id, string twoLetterISOLanguageName, StateData data)
 		{
 			using (var scope = new TransactionScope())
 			{
 				_executor.Execute("[dbo].[State_Update]", new { data.Name, data.Position, Id = id });
 
-				foreach (var item in data.Localization)
+				_executor.Execute("[dbo].[StateLocalization_Merge]", new
 				{
-					_executor.Execute("[dbo].[StateLocalization_Merge]", new
-					{
-						Name = item.Value,
-						TwoLetterISOLanguageName = item.Key,
-						StateId = id
-					});
-				}
+					Name = data.LocalizedName,
+					TwoLetterISOLanguageName = twoLetterISOLanguageName,
+					StateId = id
+				});
 
 				scope.Complete();
 			}
@@ -94,6 +65,30 @@ namespace Alicargo.DataAccess.Repositories
 		public void Delete(long id)
 		{
 			throw new NotImplementedException();
+		}
+
+		public IReadOnlyDictionary<long, StateData> Get(string twoLetterISOLanguageName, params long[] ids)
+		{
+			var idsTable = TableParameters.GeIdsTable("Ids", ids.Distinct().ToArray());
+
+			var list = _executor.Array<StateListItem>("[dbo].[State_GetList]", new TableParameters(idsTable));
+
+			var table = new DataTable("Localizations");
+			table.Columns.Add("Value");
+			table.Rows.Add(twoLetterISOLanguageName);
+
+			var localizations = _executor.Array<dynamic>(
+				"[dbo].[StateLocalization_Get]", new TableParameters(idsTable, table))
+				.GroupBy(x => x.StateId)
+				.ToDictionary(x => x.Key, x => x.ToDictionary(y => y.TwoLetterISOLanguageName, y => y.Name));
+
+			return list.ToDictionary(x => x.Id,
+				x => new StateData
+				{
+					Name = x.Name,
+					Position = x.Position,
+					LocalizedName = localizations[x.Id][twoLetterISOLanguageName]
+				});
 		}
 
 		private class StateLocalization

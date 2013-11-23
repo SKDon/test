@@ -50,12 +50,12 @@ namespace Alicargo.TestHelpers
 				.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
 				.Create());
 
-			Fixture.Register(() => new StateData(new Dictionary<string, string>
+			Fixture.Register(() => new StateData
 			{
-				{TwoLetterISOLanguageName.English, Fixture.Create<string>()},
-				{TwoLetterISOLanguageName.Italian, Fixture.Create<string>()},
-				{TwoLetterISOLanguageName.Russian, Fixture.Create<string>()},
-			}) { Name = Fixture.Create<string>(), Position = Fixture.Create<int>() });
+				Name = Fixture.Create<string>(), 
+				Position = Fixture.Create<int>(),
+				LocalizedName = Fixture.Create<string>()
+			});
 
 			Serializer = Inject<ISerializer>();
 			StateRepository = Inject<IStateRepository>();

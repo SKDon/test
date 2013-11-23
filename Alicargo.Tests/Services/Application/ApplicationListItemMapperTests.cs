@@ -58,16 +58,17 @@ namespace Alicargo.Tests.Services.Application
 			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(_stateAvailability);
 			_context.StateConfig.SetupGet(x => x.CargoOnTransitStateId).Returns(CargoOnTransitStateId);
 			_context.ApplicationRepository.Setup(x => x.GetCalculations(It.IsAny<long[]>())).Returns(_calculations);
-			_context.StateRepository.Setup(x => x.Get(It.IsAny<long[]>())).Returns((long[] ids) => ids.ToDictionary(
+			_context.StateRepository.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<long[]>())).Returns(
+				(string lang, long[] ids) => ids.ToDictionary(
 				x => x,
 				x =>
-				new StateData(new Dictionary<string, string>
-				{
-					{TwoLetterISOLanguageName.English, _localazedStates[x]},
-					{TwoLetterISOLanguageName.Italian, "Italian"},
-					{TwoLetterISOLanguageName.Russian, "Russian"},
-				}) { Name = "State " + x, Position = (int)x }
-			));
+					new StateData
+					{
+						Name = "State " + x,
+						Position = (int)x,
+						LocalizedName = _localazedStates[x]
+					}
+				));
 
 			_mapper = _context.Create<ApplicationListItemMapper>();
 		}

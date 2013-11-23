@@ -58,9 +58,31 @@ namespace Alicargo.Controllers
 			return View(model);
 		}
 
+		[Access(RoleType.Admin)]
+		public virtual ActionResult Edit(StateEditModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				BindLanguageList();
+
+				return View(model);
+			}
+
+			_states.Update(model.Id, model.Language, new StateData
+			{
+				LocalizedName = model.LocalizedName,
+				Name = model.Name,
+				Position = model.Position
+			});
+
+			//_templates.Update
+
+			return RedirectToAction(MVC.State.Edit(model.Id, model.Language));
+		}
+
 		private StateEditModel GetStateModel(long id, string language)
 		{
-			var state = _states.Get(id).Single().Value;
+			var state = _states.Get(language, id).Single().Value;
 
 			var template = _templates.GetByStateId(id);
 
@@ -75,7 +97,7 @@ namespace Alicargo.Controllers
 				Id = id,
 				Name = state.Name,
 				Language = language,
-				LocalizedName = state.Localization[language],
+				LocalizedName = state.LocalizedName,
 				Subject = localization != null ? localization.Subject : null,
 				Body = localization != null ? localization.Body : null,
 				Position = state.Position,
