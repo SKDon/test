@@ -116,7 +116,7 @@
     <Build Include="Tables\EmailTemplateLocalization.sql" />
     <Build Include="Tables\StateEmailRecipient.sql" />
     <Build Include="Stored procedures\State_GetList.sql" />
-    <None Include="Stored procedures\State_Update.sql" />
+    <Build Include="Stored procedures\State_Update.sql" />
     <Build Include="Stored procedures\StateLocalization_Get.sql" />
     <Build Include="Stored procedures\State_GetStateAvailabilities.sql" />
     <Build Include="Stored procedures\State_GetStateEmailRecipients.sql" />
@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
-    <None Include="Stored procedures\State_Add.sql" />
-    <None Include="Stored procedures\StateLocalization_Merge.sql" />
+    <Build Include="Stored procedures\State_Add.sql" />
+    <Build Include="Stored procedures\StateLocalization_Merge.sql" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[State_Add]
+﻿CREATE PROCEDURE [dbo].[State_Update]
 	@Id BIGINT,
 	@Name  NVARCHAR (320),
 	@Position INT
@@ -7,7 +7,7 @@ BEGIN
 	
 	SET NOCOUNT ON;
 
-	UPDATE [dbo].[State] ([Name], [Position])
+	UPDATE [dbo].[State]
 	SET [Name] = @Name, [Position] = @Position
 	WHERE [Id] = @Id
 

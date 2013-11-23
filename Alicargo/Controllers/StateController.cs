@@ -13,9 +13,9 @@ namespace Alicargo.Controllers
 {
 	public partial class StateController : Controller
 	{
+		private readonly IIdentityService _identity;
 		private readonly IStateRepository _states;
 		private readonly IEmailTemplateRepository _templates;
-		private readonly IIdentityService _identity;
 
 		public StateController(
 			IStateRepository states,
@@ -48,6 +48,7 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
+		[HttpGet]
 		[Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id, string lang)
 		{
@@ -58,6 +59,7 @@ namespace Alicargo.Controllers
 			return View(model);
 		}
 
+		[HttpPost]
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Edit(StateEditModel model)
 		{

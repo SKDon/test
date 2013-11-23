@@ -18,27 +18,24 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		//public long Add(StateData data)
-		//{
-		//	using (var scope = new TransactionScope())
-		//	{
-		//		var id = _executor.Query<long>("[dbo].[State_Add]", new { data.Name, data.Position, IsSystem = false });
+		public long Add(string twoLetterISOLanguageName, StateData data)
+		{
+			using (var scope = new TransactionScope())
+			{
+				var id = _executor.Query<long>("[dbo].[State_Add]", new { data.Name, data.Position, IsSystem = false });
 
-		//		foreach (var item in data.Localization)
-		//		{
-		//			_executor.Execute("[dbo].[StateLocalization_Merge]", new
-		//			{
-		//				Name = item.Value,
-		//				TwoLetterISOLanguageName = item.Key,
-		//				StateId = id
-		//			});
-		//		}
+				_executor.Execute("[dbo].[StateLocalization_Merge]", new
+				{
+					Name = data.LocalizedName,
+					TwoLetterISOLanguageName = twoLetterISOLanguageName,
+					StateId = id
+				});
 
-		//		scope.Complete();
+				scope.Complete();
 
-		//		return id;
-		//	}
-		//}
+				return id;
+			}
+		}
 
 		public StateListItem[] All()
 		{
@@ -89,14 +86,6 @@ namespace Alicargo.DataAccess.Repositories
 					Position = x.Position,
 					LocalizedName = localizations[x.Id][twoLetterISOLanguageName]
 				});
-		}
-
-		private class StateLocalization
-		{
-			// ReSharper disable UnusedAutoPropertyAccessor.Local
-			public long StateId { get; set; }
-			public string Name { get; set; }
-			public string TwoLetterISOLanguageName { get; set; } // ReSharper restore UnusedAutoPropertyAccessor.Local
 		}
 	}
 }
