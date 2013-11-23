@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 *.orig
 
 *.etl
+*.generated.cs

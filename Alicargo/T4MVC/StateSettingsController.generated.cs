@@ -80,6 +80,7 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Index
         {
             public readonly string id = "id";
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -109,6 +110,17 @@ namespace Alicargo.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             IndexOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.State.StateSettingsModel model);
+
+        public override System.Web.Mvc.ActionResult Index(long id, Alicargo.ViewModels.State.StateSettingsModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            IndexOverride(callInfo, id, model);
             return callInfo;
         }
 

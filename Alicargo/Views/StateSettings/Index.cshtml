@@ -1,1 +1,24 @@
-﻿
+﻿@using Resources
+@model Alicargo.ViewModels.State.StateSettingsModel
+
+
+@using (Html.BeginForm())
+{
+	@Html.LabelFor(x => x.Recipients.Admin)
+	@Html.CheckBoxFor(x => x.Recipients.Admin)
+	
+	@Html.LabelFor(x => x.Recipients.Sender)
+	@Html.CheckBoxFor(x => x.Recipients.Sender)
+	
+	@Html.LabelFor(x => x.Recipients.Broker)
+	@Html.CheckBoxFor(x => x.Recipients.Broker)
+	
+	@Html.LabelFor(x => x.Recipients.Forwarder)
+	@Html.CheckBoxFor(x => x.Recipients.Forwarder)
+	
+	@Html.LabelFor(x => x.Recipients.Client)
+	@Html.CheckBoxFor(x => x.Recipients.Client)
+
+	<input type="submit" class="btn btn-primary" value="@Pages.Save" />
+	@Html.ActionLink(Pages.Cancel, MVC.StateSettings.Index(), new { @class = "btn" })
+}
