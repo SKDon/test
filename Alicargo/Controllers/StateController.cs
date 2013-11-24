@@ -120,12 +120,12 @@ namespace Alicargo.Controllers
 				Position = model.Position
 			});
 
-			_templates.Set(model.Id, model.Language, new EmailTemplateLocalizationData
+			_templates.SetForState(model.Id, model.Language, model.EnableEmailSend, new EmailTemplateLocalizationData
 			{
 				Body = model.Body,
 				IsBodyHtml = false,
 				Subject = model.Subject
-			}, model.EnableEmailSend);
+			});
 
 			return RedirectToAction(MVC.State.Edit(model.Id, model.Language));
 		}

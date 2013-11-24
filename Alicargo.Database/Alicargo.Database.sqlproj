@@ -125,12 +125,13 @@
     <Build Include="Stored procedures\EmailTemplate_GetByStateId.sql" />
     <Build Include="Stored procedures\EmailTemplateLocalization_Get.sql" />
     <Build Include="Stored procedures\State_Delete.sql" />
-    <Build Include="Stored procedures\EmailTemplate_Merge.sql" />
+    <Build Include="Stored procedures\EmailTemplate_MergeState.sql" />
     <Build Include="Stored procedures\State_SetStateAvailabilities.sql" />
     <Build Include="Stored procedures\State_SetStateVisibilities.sql" />
     <Build Include="Stored procedures\State_SetStateEmailRecipients.sql" />
     <Build Include="Tables\ApplicationEventEmailTemplate.sql" />
     <Build Include="Stored procedures\EmailTemplate_GetByApplicationEvent.sql" />
+    <Build Include="Stored procedures\EmailTemplate_MergeApplicationEvent.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

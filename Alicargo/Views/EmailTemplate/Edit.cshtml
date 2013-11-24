@@ -1,1 +1,14 @@
-﻿
+﻿@using Alicargo.Core.Localization
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model EmailTemplateModel
+<p>
+	<b>
+		@Model.EventType.ToLocalString()
+	</b>
+</p>
+@Html.EditPage(Url.Action(MVC.EmailTemplate.Edit()), Pages.Save)
+@section scripts
+{
+	@Scripts.Render(PathConstants.TemplateEditJs)
+}

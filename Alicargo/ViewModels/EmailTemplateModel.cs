@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
 
@@ -6,6 +8,9 @@ namespace Alicargo.ViewModels
 {
 	public sealed class EmailTemplateModel
 	{
+		[HiddenInput]
+		public ApplicationEventType EventType { get; set; }
+
 		[DisplayNameLocalized(typeof(Entities), "Subject")]
 		public string Subject { get; set; }
 

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[EmailTemplate_Merge]
+﻿CREATE PROCEDURE [dbo].[EmailTemplate_MergeState]
 	@StateId BIGINT,
 	@Subject NVARCHAR (MAX),
 	@Body NVARCHAR (MAX),

@@ -6,7 +6,9 @@ namespace Alicargo.Contracts.Repositories
 	public interface IEmailTemplateRepository
 	{
 		EmailTemplateData GetByStateId(long stateId, string language);
-		void Set(long stateId, string language, EmailTemplateLocalizationData data, bool enableEmailSend);
+		void SetForState(long stateId, string language, bool enableEmailSend, EmailTemplateLocalizationData data);
+		void SetForApplicationEvent(ApplicationEventType eventType, string language, bool enableEmailSend,
+			EmailTemplateLocalizationData data);
 		EmailTemplateData GetByApplicationEvent(ApplicationEventType eventType, string language);
 	}
 }

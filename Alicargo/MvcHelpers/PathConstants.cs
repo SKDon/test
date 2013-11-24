@@ -17,6 +17,7 @@ namespace Alicargo.MvcHelpers
 		public const string StateListJs = "~/js/state-list-js";
 		public const string StateEditJs = "~/js/state-edit-js";
 		public const string TemplateListJs = "~/js/template-list-js";
+		public const string TemplateEditJs = "~/js/template-edit-js";
 		public const string StylesPath = "~/css";
 
 		public static readonly string Version =

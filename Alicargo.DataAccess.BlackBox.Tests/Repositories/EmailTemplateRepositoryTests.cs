@@ -41,7 +41,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.Set(id, TwoLetterISOLanguageName.English, localizationData, false);
+			_templates.SetForState(id, TwoLetterISOLanguageName.English, false, localizationData);
 
 			var stateEmailTemplateData = _templates.GetByStateId(id, TwoLetterISOLanguageName.English);
 
@@ -62,11 +62,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.Set(id, TwoLetterISOLanguageName.English, localizationData, false);
+			_templates.SetForState(id, TwoLetterISOLanguageName.English, false, localizationData);
 
 			var newLocalizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.Set(id, TwoLetterISOLanguageName.English, newLocalizationData, true);
+			_templates.SetForState(id, TwoLetterISOLanguageName.English, true, newLocalizationData);
 
 			var stateEmailTemplateData = _templates.GetByStateId(id, TwoLetterISOLanguageName.English);
 
@@ -84,11 +84,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.Set(id, TwoLetterISOLanguageName.English, localizationData, false);
+			_templates.SetForState(id, TwoLetterISOLanguageName.English, false, localizationData);
 
 			var newLocalizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.Set(id, TwoLetterISOLanguageName.Italian, newLocalizationData, true);
+			_templates.SetForState(id, TwoLetterISOLanguageName.Italian, true, newLocalizationData);
 
 			var stateEmailTemplateData = _templates.GetByStateId(id, TwoLetterISOLanguageName.English);
 

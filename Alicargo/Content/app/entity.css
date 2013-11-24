@@ -136,16 +136,12 @@
 	margin-bottom: 10px;
 }
 
-/*.row .span12 label {
-	display: block;
-}
-	*/
 .row .span12 input {
 	display: block;
 	width: 1156px;
 }
 
-.state-edit textarea {
+.row .span12 textarea {
 	width: 1156px;
 	height: 300px;
 }

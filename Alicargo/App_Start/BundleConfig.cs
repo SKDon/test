@@ -3,7 +3,7 @@ using Alicargo.App_Start;
 using Alicargo.MvcHelpers;
 using WebActivatorEx;
 
-[assembly: PostApplicationStartMethod(typeof(BundleConfig), "RegisterBundles")]
+[assembly: PostApplicationStartMethod(typeof (BundleConfig), "RegisterBundles")]
 
 namespace Alicargo.App_Start
 {
@@ -41,9 +41,14 @@ namespace Alicargo.App_Start
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.TemplateListJs)
-			.Include(
-				"~/Scripts/app/Template/Grid.js"
-			));
+				.Include(
+					"~/Scripts/app/Template/Grid.js"
+				));
+
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.TemplateEditJs)
+				.Include(
+					"~/Scripts/app/Template/Edit.js"
+				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.StateEditJs)
 				.Include(
@@ -57,7 +62,7 @@ namespace Alicargo.App_Start
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.ClientCalculationJs)
-				.Include(					
+				.Include(
 					"~/scripts/app/calculation/client/Columns.js",
 					"~/scripts/app/calculation/client/Grid.js"
 				));
@@ -91,7 +96,7 @@ namespace Alicargo.App_Start
 					"~/Scripts/jquery.cookie.js",
 					"~/Scripts/app/CurrencyType.js",
 					"~/Scripts/app/Common.js",
-					"~/Scripts/app/Alicargo.js"					
+					"~/Scripts/app/Alicargo.js"
 				));
 
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.RuJs)

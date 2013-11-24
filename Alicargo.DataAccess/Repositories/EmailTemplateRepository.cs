@@ -23,9 +23,17 @@ namespace Alicargo.DataAccess.Repositories
 			return GetEmailTemplateData(template, language);
 		}
 
-		public void Set(long stateId, string language, EmailTemplateLocalizationData data, bool enableEmailSend)
+		public EmailTemplateData GetByApplicationEvent(ApplicationEventType eventType, string language)
 		{
-			_executor.Execute("[dbo].[EmailTemplate_Merge]", new
+			var template = _executor.Query<Settings>("[dbo].[EmailTemplate_GetByApplicationEvent]",
+				new { EventTypeId = (int)eventType });
+
+			return GetEmailTemplateData(template, language);
+		}
+
+		public void SetForState(long stateId, string language, bool enableEmailSend, EmailTemplateLocalizationData data)
+		{
+			_executor.Execute("[dbo].[EmailTemplate_MergeState]", new
 			{
 				StateId = stateId,
 				data.Body,
@@ -36,13 +44,18 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		public EmailTemplateData GetByApplicationEvent(ApplicationEventType eventType, string language)
+		public void SetForApplicationEvent(ApplicationEventType eventType, string language, bool enableEmailSend, EmailTemplateLocalizationData data)
 		{
-			var template = _executor.Query<Settings>("[dbo].[EmailTemplate_GetByApplicationEvent]",
-				new { EventTypeId = (int)eventType });
-
-			return GetEmailTemplateData(template, language);
-		}
+			_executor.Execute("[dbo].[EmailTemplate_MergeApplicationEvent]", new
+			{
+				EventTypeId = eventType,
+				data.Body,
+				data.IsBodyHtml,
+				data.Subject,
+				TwoLetterISOLanguageName = language,
+				enableEmailSend
+			});
+		}		
 
 		private EmailTemplateData GetEmailTemplateData(Settings template, string language)
 		{
