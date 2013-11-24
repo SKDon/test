@@ -340,6 +340,9 @@
     <Compile Include="T4MVC\DynamicScriptController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\EmailTemplateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\ExcelController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -691,6 +694,7 @@
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\app\State\Edit.js" />
     <Content Include="Scripts\app\State\Grid.js" />
+    <Content Include="Scripts\app\Template\Grid.js" />
     <Content Include="Scripts\app\User\Grid.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af.js" />
@@ -1560,6 +1564,7 @@
     <Content Include="Views\State\EditorTemplates\StateCreateModel.cshtml" />
     <Content Include="Views\StateSettings\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Index.cshtml" />
+    <Content Include="Views\EmailTemplate\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

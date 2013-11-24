@@ -315,4 +315,7 @@
   <data name="StateSettings_Visibilities" xml:space="preserve">
     <value>Available for display</value>
   </data>
+  <data name="Templates" xml:space="preserve">
+    <value>Templates</value>
+  </data>
 </root>

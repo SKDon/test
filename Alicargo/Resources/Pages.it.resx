@@ -306,4 +306,7 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="Templates" xml:space="preserve">
+    <value>Templates</value>
+  </data>
 </root>

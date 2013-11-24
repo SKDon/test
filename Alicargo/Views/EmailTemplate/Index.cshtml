@@ -1,1 +1,15 @@
-﻿
+﻿@using Resources
+<style>
+	.container {
+		padding: 0 20px;
+		width: auto;
+	}
+</style>
+<p>
+	<b>@Pages.Templates</b>
+</p>
+<div id="templates-grid" class="grid"></div>
+@section scripts
+{
+	@Scripts.Render(PathConstants.TemplateListJs)
+}

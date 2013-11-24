@@ -35,6 +35,7 @@ public static class MVC
     public static Alicargo.Controllers.ClientCalculationController ClientCalculation = new Alicargo.Controllers.T4MVC_ClientCalculationController();
     public static Alicargo.Controllers.ClientController Client = new Alicargo.Controllers.T4MVC_ClientController();
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();
+    public static Alicargo.Controllers.EmailTemplateController EmailTemplate = new Alicargo.Controllers.T4MVC_EmailTemplateController();
     public static Alicargo.Controllers.ExcelController Excel = new Alicargo.Controllers.T4MVC_ExcelController();
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
     public static Alicargo.Controllers.SenderApplicationController SenderApplication = new Alicargo.Controllers.T4MVC_SenderApplicationController();
@@ -230,6 +231,14 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string Edit_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Edit.min.js") ? Url("Edit.min.js") : Url("Edit.js");
+                public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Template {
+                private const string URLPATH = "~/Scripts/app/Template";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
             }
         

@@ -3,7 +3,6 @@
 @using Alicargo.Services
 @using Resources
 @inherits BaseWebViewPage
-
 @helper ClientMenu()
 {
 	if (IdentityService.IsInRole(RoleType.Client))
@@ -13,7 +12,6 @@
 		<li>@Html.ActionLink(Pages.Report, MVC.ClientCalculation.Index())</li>
 	}
 }
-
 @helper ForwarderMenu()
 {
 	if (IdentityService.IsInRole(RoleType.Forwarder))
@@ -21,7 +19,6 @@
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 	}
 }
-
 @helper AdminMenu()
 {
 	if (IdentityService.IsInRole(RoleType.Admin))
@@ -37,12 +34,17 @@
 				<li>@Html.ActionLink(Pages.Forwarders, MVC.User.Index(RoleType.Forwarder))</li>
 				<li>@Html.ActionLink(Pages.Senders, MVC.User.Index(RoleType.Sender))</li>
 			</ul>
-		</li>	
+		</li>
 		<li>@Html.ActionLink(Pages.Calculation, MVC.Calculation.Index())</li>
-		<li>@Html.ActionLink(Pages.States, MVC.State.Index())</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Settings<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>@Html.ActionLink(Pages.States, MVC.State.Index())</li>
+				<li>@Html.ActionLink(Pages.Templates, MVC.EmailTemplate.Index())</li>
+			</ul>
+		</li>
 	}
 }
-
 @helper SenderMenu()
 {
 	if (IdentityService.IsInRole(RoleType.Sender))
@@ -52,7 +54,6 @@
 		<li>@Html.ActionLink(Pages.Report, MVC.SenderCalculation.Index())</li>
 	}
 }
-
 @helper BrokerMenu()
 {
 	if (IdentityService.IsInRole(RoleType.Broker))
@@ -60,13 +61,12 @@
 		<li>@Html.ActionLink(Entities.AirWaybill, MVC.AirWaybill.Index())</li>
 	}
 }
-
 @if (IdentityService.IsAuthenticated)
 {
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				@Html.ActionLink("Alicargo", MVC.Home.Index(), new {@class = "brand"})
+				@Html.ActionLink("Alicargo", MVC.Home.Index(), new { @class = "brand" })
 				<ul class="nav">
 					@BrokerMenu()
 					@ClientMenu()

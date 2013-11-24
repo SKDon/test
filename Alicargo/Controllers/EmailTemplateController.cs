@@ -7,18 +7,18 @@ using Alicargo.MvcHelpers.Filters;
 
 namespace Alicargo.Controllers
 {
-	public class EmailTemplateController : Controller
+	public partial class EmailTemplateController : Controller
 	{
 		[HttpGet]
 		[Access(RoleType.Admin)]
-		public ViewResult Index()
+		public virtual ViewResult Index()
 		{
 			return View();
 		}
 
 		[HttpPost, Access(RoleType.Admin),
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public JsonResult List()
+		public virtual JsonResult List()
 		{
 			var types = Enum.GetValues(typeof(ApplicationEventType))
 				.Cast<ApplicationEventType>()
@@ -30,6 +30,11 @@ namespace Alicargo.Controllers
 				.ToArray();
 
 			return Json(types);
+		}
+
+		public virtual ViewResult Edit(ApplicationEventType id)
+		{
+			return View();
 		}
 	}
 }

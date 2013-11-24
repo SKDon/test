@@ -16,12 +16,12 @@ namespace Alicargo.MvcHelpers
 		public const string UserListJs = "~/js/user-list-js";
 		public const string StateListJs = "~/js/state-list-js";
 		public const string StateEditJs = "~/js/state-edit-js";
+		public const string TemplateListJs = "~/js/template-list-js";
 		public const string StylesPath = "~/css";
 
 		public static readonly string Version =
 			Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-		static PathConstants() {}
-		
+		static PathConstants() { }
 	}
 }
