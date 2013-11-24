@@ -25,9 +25,6 @@ namespace Alicargo.Controllers
     public partial class EmailTemplateController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public EmailTemplateController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected EmailTemplateController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -87,6 +84,7 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Edit
         {
             public readonly string id = "id";
+            public readonly string lang = "lang";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -103,6 +101,13 @@ namespace Alicargo.Controllers
             }
             public readonly string Edit = "~/Views/EmailTemplate/Edit.cshtml";
             public readonly string Index = "~/Views/EmailTemplate/Index.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string EmailTemplateModel = "EmailTemplateModel";
+            }
         }
     }
 
@@ -129,13 +134,14 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Contracts.Enums.ApplicationEventType id);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Contracts.Enums.ApplicationEventType id, string lang);
 
-        public override System.Web.Mvc.ViewResult Edit(Alicargo.Contracts.Enums.ApplicationEventType id)
+        public override System.Web.Mvc.ViewResult Edit(Alicargo.Contracts.Enums.ApplicationEventType id, string lang)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            EditOverride(callInfo, id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "lang", lang);
+            EditOverride(callInfo, id, lang);
             return callInfo;
         }
 

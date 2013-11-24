@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.DbContext;
@@ -41,18 +40,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var id = AddTestState();
 
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
-			localizationData.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
 
-			_templates.Set(id, localizationData, false);
+			_templates.Set(id, TwoLetterISOLanguageName.English, localizationData, false);
 
-			var stateEmailTemplateData = _templates.GetByStateId(id);
+			var stateEmailTemplateData = _templates.GetByStateId(id, TwoLetterISOLanguageName.English);
 
 			stateEmailTemplateData.EnableEmailSend.Should().BeFalse();
 
-			stateEmailTemplateData.Localizations.Should().HaveCount(3);
-
-			stateEmailTemplateData.Localizations.Single(x => x.TwoLetterISOLanguageName == TwoLetterISOLanguageName.English)
-				.ShouldBeEquivalentTo(localizationData);
+			stateEmailTemplateData.Localization.ShouldBeEquivalentTo(localizationData);
 		}
 
 		private long AddTestState()
@@ -66,20 +61,18 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var id = AddTestState();
 
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
-			localizationData.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
 
-			_templates.Set(id, localizationData, false);
+			_templates.Set(id, TwoLetterISOLanguageName.English, localizationData, false);
 
 			var newLocalizationData = _fixture.Create<EmailTemplateLocalizationData>();
-			newLocalizationData.TwoLetterISOLanguageName = localizationData.TwoLetterISOLanguageName;
 
-			_templates.Set(id, newLocalizationData, true);
+			_templates.Set(id, TwoLetterISOLanguageName.English, newLocalizationData, true);
 
-			var stateEmailTemplateData = _templates.GetByStateId(id);
+			var stateEmailTemplateData = _templates.GetByStateId(id, TwoLetterISOLanguageName.English);
 
 			stateEmailTemplateData.EnableEmailSend.Should().BeTrue();
 
-			var actual = stateEmailTemplateData.Localizations.Single(x => x.TwoLetterISOLanguageName == TwoLetterISOLanguageName.English);
+			var actual = stateEmailTemplateData.Localization;
 
 			actual.ShouldBeEquivalentTo(newLocalizationData);
 		}
@@ -90,24 +83,20 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var id = AddTestState();
 
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
-			localizationData.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
 
-			_templates.Set(id, localizationData, false);
+			_templates.Set(id, TwoLetterISOLanguageName.English, localizationData, false);
 
 			var newLocalizationData = _fixture.Create<EmailTemplateLocalizationData>();
-			newLocalizationData.TwoLetterISOLanguageName = TwoLetterISOLanguageName.Italian;
 
-			_templates.Set(id, newLocalizationData, true);
+			_templates.Set(id, TwoLetterISOLanguageName.Italian, newLocalizationData, true);
 
-			var stateEmailTemplateData = _templates.GetByStateId(id);
+			var stateEmailTemplateData = _templates.GetByStateId(id, TwoLetterISOLanguageName.English);
 
 			stateEmailTemplateData.EnableEmailSend.Should().BeTrue();
 
-			stateEmailTemplateData.Localizations.Single(x => x.TwoLetterISOLanguageName == TwoLetterISOLanguageName.English)
-				.ShouldBeEquivalentTo(localizationData);
+			stateEmailTemplateData.Localization.ShouldBeEquivalentTo(localizationData);
 
-			stateEmailTemplateData.Localizations.Single(x => x.TwoLetterISOLanguageName == TwoLetterISOLanguageName.Italian)
-				.ShouldBeEquivalentTo(newLocalizationData);
+			_templates.GetByStateId(id, TwoLetterISOLanguageName.Italian).Localization.ShouldBeEquivalentTo(newLocalizationData);
 		}
 	}
 }

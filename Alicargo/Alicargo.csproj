@@ -401,6 +401,7 @@
     <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
+    <Compile Include="ViewModels\EmailTemplateModel.cs" />
     <Compile Include="ViewModels\Helpers\AwbHelper.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
@@ -1565,6 +1566,7 @@
     <Content Include="Views\StateSettings\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Edit.cshtml" />
+    <Content Include="Views\EmailTemplate\EditorTemplates\EmailTemplateModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

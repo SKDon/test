@@ -67,16 +67,5 @@ namespace Alicargo.DataAccess.Helpers
 
 			return table;
 		}
-
-		public static DataTable GetLocalizationTable()
-		{
-			var table = new DataTable("Localizations");
-			table.Columns.Add("Value");
-			table.Rows.Add(TwoLetterISOLanguageName.English);
-			table.Rows.Add(TwoLetterISOLanguageName.Russian);
-			table.Rows.Add(TwoLetterISOLanguageName.Italian);
-
-			return table;
-		}
 	}
 }

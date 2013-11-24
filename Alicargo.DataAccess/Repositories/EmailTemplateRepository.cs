@@ -1,4 +1,7 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System.Data;
+using System.Linq;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.Helpers;
 
@@ -13,25 +16,14 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public StateEmailTemplateData GetByStateId(long stateId)
+		public EmailTemplateData GetByStateId(long stateId, string language)
 		{
-			var template = _executor.Query<dynamic>("[dbo].[EmailTemplate_GetByStateId]", new { StateId = stateId });
+			var template = _executor.Query<Settings>("[dbo].[EmailTemplate_GetByStateId]", new { StateId = stateId });
 
-			if (template == null)
-			{
-				return null;
-			}
-
-			var localizations = GetLocalization(template.EmailTemplateId);
-
-			return new StateEmailTemplateData
-			{
-				EnableEmailSend = template.EnableEmailSend,
-				Localizations = localizations
-			};
+			return GetEmailTemplateData(template, language);
 		}
 
-		public void Set(long stateId, EmailTemplateLocalizationData data, bool enableEmailSend)
+		public void Set(long stateId, string language, EmailTemplateLocalizationData data, bool enableEmailSend)
 		{
 			_executor.Execute("[dbo].[EmailTemplate_Merge]", new
 			{
@@ -39,18 +31,49 @@ namespace Alicargo.DataAccess.Repositories
 				data.Body,
 				data.IsBodyHtml,
 				data.Subject,
-				data.TwoLetterISOLanguageName,
+				TwoLetterISOLanguageName = language,
 				enableEmailSend
 			});
 		}
 
-		private EmailTemplateLocalizationData[] GetLocalization(long templId)
+		public EmailTemplateData GetByApplicationEvent(ApplicationEventType eventType, string language)
 		{
-			var table = TableParameters.GetLocalizationTable();
+			var template = _executor.Query<Settings>("[dbo].[EmailTemplate_GetByApplicationEvent]",
+				new { EventTypeId = (int)eventType });
+
+			return GetEmailTemplateData(template, language);
+		}
+
+		private EmailTemplateData GetEmailTemplateData(Settings template, string language)
+		{
+			if (template == null)
+			{
+				return null;
+			}
+
+			return new EmailTemplateData
+			{
+				EnableEmailSend = template.EnableEmailSend,
+				Localization = GetLocalization(template.EmailTemplateId, language)
+			};
+		}
+
+		private EmailTemplateLocalizationData GetLocalization(long templId, string language)
+		{
+			var table = new DataTable("Localizations");
+			table.Columns.Add("Value");
+			table.Rows.Add(language);
 
 			return _executor.Array<EmailTemplateLocalizationData>(
 				"[dbo].[EmailTemplateLocalization_Get]",
-				new TableParameters(new { TemplateId = templId }, table));
+				new TableParameters(new { TemplateId = templId }, table))
+				.First();
+		}
+
+		private sealed class Settings
+		{
+			public long EmailTemplateId { get; set; }
+			public bool EnableEmailSend { get; set; }
 		}
 	}
 }
