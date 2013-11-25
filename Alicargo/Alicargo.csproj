@@ -401,7 +401,8 @@
     <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
-    <Compile Include="ViewModels\EmailTemplateModel.cs" />
+    <Compile Include="ViewModels\EmailTemplate\ApplicationEventTemplateModel.cs" />
+    <Compile Include="ViewModels\EmailTemplate\EmailTemplateSettingsModel.cs" />
     <Compile Include="ViewModels\Helpers\AwbHelper.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
@@ -409,6 +410,7 @@
     <Compile Include="ViewModels\Calculation\Admin\CalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
+    <Compile Include="ViewModels\Helpers\EmailTemplateSettingsModelHelper.cs" />
     <Compile Include="ViewModels\State\StateCreateModel.cs" />
     <Compile Include="ViewModels\State\StateEditModel.cs" />
     <Compile Include="ViewModels\State\StateSettingsModel.cs" />
@@ -1567,7 +1569,7 @@
     <Content Include="Views\StateSettings\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Edit.cshtml" />
-    <Content Include="Views\EmailTemplate\EditorTemplates\EmailTemplateModel.cshtml" />
+    <Content Include="Views\EmailTemplate\EditorTemplates\ApplicationEventTemplateModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

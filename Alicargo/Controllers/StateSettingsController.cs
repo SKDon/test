@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.ViewModels.Helpers;
 using Alicargo.ViewModels.State;
 
 namespace Alicargo.Controllers
@@ -39,9 +39,9 @@ namespace Alicargo.Controllers
 
 			var model = new StateSettingsModel
 			{
-				Availabilities = new StateSettingsModel.Settings(availabilities),
-				Recipients = new StateSettingsModel.Settings(emailRecipients),
-				Visibilities = new StateSettingsModel.Settings(visibilities)
+				Availabilities = EmailTemplateSettingsModelHelper.GetModel(availabilities),
+				Recipients = EmailTemplateSettingsModelHelper.GetModel(emailRecipients),
+				Visibilities = EmailTemplateSettingsModelHelper.GetModel(visibilities)
 			};
 
 			return View(model);
@@ -56,38 +56,11 @@ namespace Alicargo.Controllers
 				throw new InvalidOperationException("Failed to save state settings. State id: " + id);
 			}
 
-			_settings.SetStateAvailabilities(id, GetSettings(model.Availabilities));
-			_settings.SetStateEmailRecipients(id, GetSettings(model.Recipients));
-			_settings.SetStateVisibilities(id, GetSettings(model.Visibilities));
+			_settings.SetStateAvailabilities(id, model.Availabilities.GetSettings());
+			_settings.SetStateEmailRecipients(id, model.Recipients.GetSettings());
+			_settings.SetStateVisibilities(id, model.Visibilities.GetSettings());
 
 			return RedirectToAction(MVC.StateSettings.Index(id));
-		}
-
-		private static RoleType[] GetSettings(StateSettingsModel.Settings settings)
-		{
-			var list = new List<RoleType>(5);
-			if (settings.Admin)
-			{
-				list.Add(RoleType.Admin);
-			}
-			if (settings.Broker)
-			{
-				list.Add(RoleType.Broker);
-			}
-			if (settings.Client)
-			{
-				list.Add(RoleType.Client);
-			}
-			if (settings.Forwarder)
-			{
-				list.Add(RoleType.Forwarder);
-			}
-			if (settings.Sender)
-			{
-				list.Add(RoleType.Sender);
-			}
-
-			return list.ToArray();
 		}
 	}
 }

@@ -136,7 +136,7 @@
 	margin-bottom: 10px;
 }
 
-.row .span12 input {
+.row .span12 input[type="text"] {
 	display: block;
 	width: 1156px;
 }

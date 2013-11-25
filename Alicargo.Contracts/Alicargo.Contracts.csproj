@@ -52,6 +52,7 @@
     <Compile Include="Contracts\ApplicationData.cs" />
     <Compile Include="Contracts\ApplicationDetailsData.cs" />
     <Compile Include="Contracts\ApplicationEventData.cs" />
+    <Compile Include="Contracts\ApplicationEventTemplateData.cs" />
     <Compile Include="Contracts\ApplicationListItemData.cs" />
     <Compile Include="Contracts\AuthenticationData.cs" />
     <Compile Include="Contracts\BrokerData.cs" />
@@ -61,8 +62,8 @@
     <Compile Include="Contracts\EmailMessage.cs" />
     <Compile Include="Contracts\EmailMessageData.cs" />
     <Compile Include="Contracts\EmailTemplateLocalizationData.cs" />
+    <Compile Include="Contracts\StateEmailTemplateData.cs" />
     <Compile Include="Contracts\SenderData.cs" />
-    <Compile Include="Contracts\EmailTemplateData.cs" />
     <Compile Include="Contracts\StateListItem.cs" />
     <Compile Include="Contracts\StateRole.cs" />
     <Compile Include="Contracts\VersionData.cs" />

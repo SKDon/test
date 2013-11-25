@@ -7,12 +7,17 @@
 		<div class="span4">
 			@Html.EditorWithLabelFor(model => model.Name)
 		</div>
-		<div class="span4">
+		<div class="span2">
 			@Html.EditorWithLabelFor(model => model.Position)
 		</div>
-		<div class="span4">
+		<div class="span3">
 			<div class="state-edit-checkbox">
 				@Html.EditorWithLabelFor(x => x.EnableEmailSend)
+			</div>
+		</div>
+		<div class="span3">
+			<div class="state-edit-checkbox">
+				@Html.EditorWithLabelFor(x => x.UseApplicationEventTemplate)
 			</div>
 		</div>
 	</div>

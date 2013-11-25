@@ -120,12 +120,13 @@ namespace Alicargo.Controllers
 				Position = model.Position
 			});
 
-			_templates.SetForState(model.Id, model.Language, model.EnableEmailSend, new EmailTemplateLocalizationData
-			{
-				Body = model.Body,
-				IsBodyHtml = false,
-				Subject = model.Subject
-			});
+			_templates.SetForState(model.Id, model.Language, model.EnableEmailSend, model.UseApplicationEventTemplate,
+				new EmailTemplateLocalizationData
+				{
+					Body = model.Body,
+					IsBodyHtml = false,
+					Subject = model.Subject
+				});
 
 			return RedirectToAction(MVC.State.Edit(model.Id, model.Language));
 		}
@@ -134,9 +135,9 @@ namespace Alicargo.Controllers
 		{
 			var state = _states.Get(language, id).Single().Value;
 
-			var template = _templates.GetByStateId(id, language);
+			var commonData = _templates.GetByStateId(id);
 
-			var localization = template != null ? template.Localization : null;
+			var localization = commonData != null ? _templates.GetLocalization(commonData.EmailTemplateId, language) : null;
 
 			return new StateEditModel
 			{
@@ -147,7 +148,8 @@ namespace Alicargo.Controllers
 				Subject = localization != null ? localization.Subject : null,
 				Body = localization != null ? localization.Body : null,
 				Position = state.Position,
-				EnableEmailSend = template != null && template.EnableEmailSend
+				EnableEmailSend = commonData != null && commonData.EnableEmailSend,
+				UseApplicationEventTemplate = commonData != null && commonData.UseApplicationEventTemplate
 			};
 		}
 

@@ -31,5 +31,8 @@ namespace Alicargo.ViewModels.State
 
 		[Required, DisplayNameLocalized(typeof(Entities), "EnableEmailSend")]
 		public bool EnableEmailSend { get; set; }
+
+		[Required, DisplayNameLocalized(typeof(Entities), "UseApplicationEventTemplate")]
+		public bool UseApplicationEventTemplate { get; set; }
 	}
 }

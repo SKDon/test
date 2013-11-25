@@ -1,10 +1,10 @@
 ﻿@using Alicargo.Core.Localization
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
-@model EmailTemplateModel
+@model Alicargo.ViewModels.EmailTemplate.ApplicationEventTemplateModel
 <p>
 	<b>
-		@Model.EventType.ToLocalString()
+		@Pages.StateEdit - @Model.EventType.ToLocalString()
 	</b>
 </p>
 @Html.EditPage(Url.Action(MVC.EmailTemplate.Edit()), Pages.Save)

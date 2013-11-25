@@ -4,9 +4,9 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.ViewModels.EmailTemplate
 {
-	public sealed class EmailTemplateModel
+	public sealed class ApplicationEventTemplateModel
 	{
 		[HiddenInput]
 		public ApplicationEventType EventType { get; set; }
@@ -23,5 +23,7 @@ namespace Alicargo.ViewModels
 
 		[Required, DisplayNameLocalized(typeof(Entities), "EnableEmailSend")]
 		public bool EnableEmailSend { get; set; }
+
+		public EmailTemplateSettingsModel Settings { get; set; }
 	}
 }

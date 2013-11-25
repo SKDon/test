@@ -1,0 +1,43 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.ViewModels.EmailTemplate.ApplicationEventTemplateModel
+
+@Html.HiddenFor(x => x.EventType)
+<div class="row">
+	<div class="span12 state-edit-settings">
+		<p>
+			<b>
+				@Pages.StateSettings_Recipients:
+			</b>
+			@Html.LabelFor(x => x.Settings.Admin, Enums.Admin)
+			@Html.CheckBoxFor(x => x.Settings.Admin)
+			@Html.LabelFor(x => x.Settings.Sender, Enums.Sender)
+			@Html.CheckBoxFor(x => x.Settings.Sender)
+			@Html.LabelFor(x => x.Settings.Broker, Enums.Broker)
+			@Html.CheckBoxFor(x => x.Settings.Broker)
+			@Html.LabelFor(x => x.Settings.Forwarder, Enums.Forwarder)
+			@Html.CheckBoxFor(x => x.Settings.Forwarder)
+			@Html.LabelFor(x => x.Settings.Client, Enums.Client)
+			@Html.CheckBoxFor(x => x.Settings.Client)
+		</p>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="span4">
+		@Html.LabelFor(x => x.Language)
+		@Html.DropDownListFor(x => x.Language, (IDictionary<string, string>)ViewBag.Languages)
+	</div>
+	<div class="span4">
+		<div class="state-edit-checkbox">
+			@Html.EditorWithLabelFor(x => x.EnableEmailSend)
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="span12">
+		@Html.EditorWithLabelFor(model => model.Subject)
+		@Html.EditorWithLabelFor(model => model.Body)
+	</div>
+</div>

@@ -9,7 +9,8 @@ using Alicargo.Core.Localization;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
+using Alicargo.ViewModels.EmailTemplate;
+using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Controllers
 {
@@ -62,7 +63,7 @@ namespace Alicargo.Controllers
 
 		[HttpPost]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Edit(EmailTemplateModel model)
+		public virtual ActionResult Edit(ApplicationEventTemplateModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -71,29 +72,36 @@ namespace Alicargo.Controllers
 				return View(model);
 			}
 
-			_templates.SetForApplicationEvent(model.EventType, model.Language, model.EnableEmailSend, new EmailTemplateLocalizationData
-			{
-				Body = model.Body,
-				IsBodyHtml = false,
-				Subject = model.Subject
-			});
+			var roles = model.Settings.GetSettings();
+
+			_templates.SetForApplicationEvent(
+				model.EventType, model.Language, model.EnableEmailSend, roles,
+				new EmailTemplateLocalizationData
+				{
+					Body = model.Body,
+					IsBodyHtml = false,
+					Subject = model.Subject
+				});
 
 			return RedirectToAction(MVC.EmailTemplate.Edit(model.EventType, model.Language));
 		}
 
-		private EmailTemplateModel GetModel(ApplicationEventType id, string language)
+		private ApplicationEventTemplateModel GetModel(ApplicationEventType eventType, string language)
 		{
-			var template = _templates.GetByApplicationEvent(id, language);
+			var commonData = _templates.GetBeEventType(eventType);
 
-			var localization = template != null ? template.Localization : null;
+			var localization = commonData != null ? _templates.GetLocalization(commonData.EmailTemplateId, language) : null;
 
-			return new EmailTemplateModel
+			var recipients = _templates.GetRecipients(eventType);
+
+			return new ApplicationEventTemplateModel
 			{
 				Body = localization != null ? localization.Body : null,
 				Subject = localization != null ? localization.Subject : null,
-				EnableEmailSend = template != null && template.EnableEmailSend,
+				EnableEmailSend = commonData != null && commonData.EnableEmailSend,
 				Language = language,
-				EventType = id
+				EventType = eventType,
+				Settings = EmailTemplateSettingsModelHelper.GetModel(recipients)
 			};
 		}
 

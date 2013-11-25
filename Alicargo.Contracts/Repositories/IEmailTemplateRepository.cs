@@ -5,10 +5,15 @@ namespace Alicargo.Contracts.Repositories
 {
 	public interface IEmailTemplateRepository
 	{
-		EmailTemplateData GetByStateId(long stateId, string language);
-		void SetForState(long stateId, string language, bool enableEmailSend, EmailTemplateLocalizationData data);
+		void SetForState(long stateId, string language, bool enableEmailSend,
+			bool useApplicationEventTemplate, EmailTemplateLocalizationData localization);
+
 		void SetForApplicationEvent(ApplicationEventType eventType, string language, bool enableEmailSend,
-			EmailTemplateLocalizationData data);
-		EmailTemplateData GetByApplicationEvent(ApplicationEventType eventType, string language);
+			RoleType[] recipients, EmailTemplateLocalizationData localization);
+
+		ApplicationEventTemplateData GetBeEventType(ApplicationEventType eventType);
+		StateEmailTemplateData GetByStateId(long stateId);
+		RoleType[] GetRecipients(ApplicationEventType eventType);
+		EmailTemplateLocalizationData GetLocalization(long templateId, string language);
 	}
 }

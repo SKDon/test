@@ -132,6 +132,9 @@
     <Build Include="Tables\ApplicationEventEmailTemplate.sql" />
     <Build Include="Stored procedures\EmailTemplate_GetByApplicationEvent.sql" />
     <Build Include="Stored procedures\EmailTemplate_MergeApplicationEvent.sql" />
+    <Build Include="Tables\ApplicationEventEmailRecipient.sql" />
+    <Build Include="Stored procedures\ApplicationEventEmailRecipient_Set.sql" />
+    <Build Include="Stored procedures\ApplicationEventEmailRecipient_Get.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

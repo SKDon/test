@@ -25,11 +25,13 @@ namespace Alicargo.Jobs.ApplicationEvents
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateRepository _states;
 		private readonly ISerializer _serializer;
+		private readonly IEmailTemplateRepository _templates;
 		private readonly IApplicationFileRepository _files;
 
 		public MessageFactory(
 			IStateRepository states,
 			ISerializer serializer,
+			IEmailTemplateRepository templates,
 			IApplicationFileRepository files,
 			IRecipients recipients,
 			IStateConfig stateConfig,
@@ -41,6 +43,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 		{
 			_states = states;
 			_serializer = serializer;
+			_templates = templates;
 			_files = files;
 			_recipients = recipients;
 			_stateConfig = stateConfig;
@@ -53,10 +56,17 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public EmailMessage[] Get(long applicationId, ApplicationEventType type, byte[] bytes)
 		{
+			var setting = _templates.GetBeEventType(type);
+
+			//if (setting == null || !setting.EnableEmailSend)
+			//{
+			//	return null;
+			//}
+
 			switch (type)
 			{
 				case ApplicationEventType.Created:
-					return GetOnCreated(applicationId, bytes).ToArray();
+					return GetOnCreated(setting.EmailTemplateId, applicationId, bytes).ToArray();
 
 				case ApplicationEventType.SetState:
 					return GetOnSetState(applicationId, bytes).ToArray();
@@ -361,7 +371,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			return files.ToArray();
 		}
-		private IEnumerable<EmailMessage> GetOnCreated(long applicationId, byte[] bytes)
+		private IEnumerable<EmailMessage> GetOnCreated(long templateId, long applicationId, byte[] bytes)
 		{
 			var data = _serializer.Deserialize<ApplicationCreatedEventData>(bytes);
 			var client = _clients.Get(data.ClientId);

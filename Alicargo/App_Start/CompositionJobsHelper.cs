@@ -144,8 +144,10 @@ namespace Alicargo.App_Start
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(unitOfWork);
+			var templates = new EmailTemplateRepository(executor);
 
-			return new MessageFactory(states, serializer, files, recipients, stateConfig,
+			return new MessageFactory(
+				states, serializer, templates,  files, recipients, stateConfig,
 				applications, awbs, clientRepository, localization, DefaultFrom);
 		}
 	}

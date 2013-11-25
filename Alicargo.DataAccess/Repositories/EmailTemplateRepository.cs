@@ -16,62 +16,56 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public EmailTemplateData GetByStateId(long stateId, string language)
-		{
-			var template = _executor.Query<Settings>("[dbo].[EmailTemplate_GetByStateId]", new { StateId = stateId });
-
-			return GetEmailTemplateData(template, language);
-		}
-
-		public EmailTemplateData GetByApplicationEvent(ApplicationEventType eventType, string language)
-		{
-			var template = _executor.Query<Settings>("[dbo].[EmailTemplate_GetByApplicationEvent]",
-				new { EventTypeId = (int)eventType });
-
-			return GetEmailTemplateData(template, language);
-		}
-
-		public void SetForState(long stateId, string language, bool enableEmailSend, EmailTemplateLocalizationData data)
+		public void SetForState(long stateId, string language, bool enableEmailSend, bool useApplicationEventTemplate,
+			EmailTemplateLocalizationData localization)
 		{
 			_executor.Execute("[dbo].[EmailTemplate_MergeState]", new
 			{
 				StateId = stateId,
-				data.Body,
-				data.IsBodyHtml,
-				data.Subject,
+				localization.Body,
+				localization.IsBodyHtml,
+				localization.Subject,
 				TwoLetterISOLanguageName = language,
-				enableEmailSend
+				enableEmailSend,
+				useApplicationEventTemplate
 			});
 		}
 
-		public void SetForApplicationEvent(ApplicationEventType eventType, string language, bool enableEmailSend, EmailTemplateLocalizationData data)
+		public void SetForApplicationEvent(ApplicationEventType eventType, string language, bool enableEmailSend,
+			RoleType[] recipients, EmailTemplateLocalizationData localization)
 		{
+			var table = TableParameters.GeIdsTable("Recipients", recipients.Select(x => (long)x).ToArray());
+
 			_executor.Execute("[dbo].[EmailTemplate_MergeApplicationEvent]", new
 			{
 				EventTypeId = eventType,
-				data.Body,
-				data.IsBodyHtml,
-				data.Subject,
+				localization.Body,
+				localization.IsBodyHtml,
+				localization.Subject,
 				TwoLetterISOLanguageName = language,
 				enableEmailSend
 			});
-		}		
 
-		private EmailTemplateData GetEmailTemplateData(Settings template, string language)
-		{
-			if (template == null)
-			{
-				return null;
-			}
-
-			return new EmailTemplateData
-			{
-				EnableEmailSend = template.EnableEmailSend,
-				Localization = GetLocalization(template.EmailTemplateId, language)
-			};
+			_executor.Execute("[dbo].[ApplicationEventEmailRecipient_Set]", new TableParameters(new { EventTypeId = eventType }, table));
 		}
 
-		private EmailTemplateLocalizationData GetLocalization(long templId, string language)
+		public ApplicationEventTemplateData GetBeEventType(ApplicationEventType eventType)
+		{
+			return _executor.Query<ApplicationEventTemplateData>("[dbo].[EmailTemplate_GetByApplicationEvent]",
+				new { EventTypeId = (int)eventType });
+		}
+
+		public StateEmailTemplateData GetByStateId(long stateId)
+		{
+			return _executor.Query<StateEmailTemplateData>("[dbo].[EmailTemplate_GetByStateId]", new { stateId });
+		}
+
+		public RoleType[] GetRecipients(ApplicationEventType eventType)
+		{
+			return _executor.Array<RoleType>("[dbo].[ApplicationEventEmailRecipient_Get]", new { EventTypeId = (int)eventType });
+		}
+
+		public EmailTemplateLocalizationData GetLocalization(long templateId, string language)
 		{
 			var table = new DataTable("Localizations");
 			table.Columns.Add("Value");
@@ -79,14 +73,8 @@ namespace Alicargo.DataAccess.Repositories
 
 			return _executor.Array<EmailTemplateLocalizationData>(
 				"[dbo].[EmailTemplateLocalization_Get]",
-				new TableParameters(new { TemplateId = templId }, table))
+				new TableParameters(new { TemplateId = templateId }, table))
 				.First();
-		}
-
-		private sealed class Settings
-		{
-			public long EmailTemplateId { get; set; }
-			public bool EnableEmailSend { get; set; }
 		}
 	}
 }
