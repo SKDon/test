@@ -309,4 +309,10 @@
   <data name="Templates" xml:space="preserve">
     <value>Templates</value>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="EventTemplates" xml:space="preserve">
+    <value>Email templates for events</value>
+  </data>
 </root>
