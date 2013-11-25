@@ -68,7 +68,11 @@ namespace Alicargo.App_Start
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
-				new CalculationWatcherJob(DeadTimeout, new CalculationRepository(new UnitOfWork(connection))).Run();
+				var unitOfWork = new UnitOfWork(connection);
+
+				var job = new CalculationWatcherJob(DeadTimeout, new CalculationRepository(unitOfWork));
+
+				job.Run();
 			}
 		}
 
@@ -118,17 +122,14 @@ namespace Alicargo.App_Start
 
 		private static void GetMailSenderJob(string connectionString, int partitionId)
 		{
-			using (var connection = new SqlConnection(connectionString))
-			{
-				var factory = GetMessageFactory(connection, new Serializer());
-				var executor = new SqlProcedureExecutor(connectionString);
-				var messages = new EmailMessageRepository(executor);
-				var sender = new MailSender();
+			var serializer = new Serializer();
+			var executor = new SqlProcedureExecutor(connectionString);
+			var messages = new EmailMessageRepository(executor);
+			var sender = new MailSender();
+			
+			var job = new MailSenderJob(messages, partitionId, sender, serializer);
 
-				var job = new MailSenderJob(messages, partitionId, sender, factory);
-
-				job.Run();
-			}
+			job.Run();
 		}
 
 		private static MessageFactory GetMessageFactory(IDbConnection connection, Serializer serializer)

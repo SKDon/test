@@ -57,6 +57,7 @@
     <Compile Include="ApplicationEvents\ApplicationStateHistoryJob.cs" />
     <Compile Include="ApplicationEvents\IMessageFactory.cs" />
     <Compile Include="ApplicationEvents\MessageFactory.cs" />
+    <Compile Include="ApplicationEvents\MessageFactoryEx.cs" />
     <Compile Include="Calculation\CalculationJobHelper.cs" />
     <Compile Include="Calculation\CalculationMailBuilder.cs" />
     <Compile Include="Calculation\CalculationWatcherJob.cs" />

@@ -90,16 +90,6 @@ namespace Alicargo.Jobs.ApplicationEvents
 			}
 		}
 
-		public EmailMessage Get(EmailMessageData data)
-		{
-			return new EmailMessage(data.Subject, data.Body, data.From, EmailMessageData.Split(data.To))
-			{
-				CopyTo = EmailMessageData.Split(data.CopyTo),
-				Files = _serializer.Deserialize<FileHolder[]>(data.Files),
-				IsBodyHtml = data.IsBodyHtml
-			};
-		}
-
 		private IEnumerable<EmailMessage> GetOnCPFileUploaded(long applicationId, byte[] bytes)
 		{
 			ClientData client;
