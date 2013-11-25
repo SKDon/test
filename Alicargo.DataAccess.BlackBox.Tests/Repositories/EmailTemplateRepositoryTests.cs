@@ -66,7 +66,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			_templates.SetForApplicationEvent(eventType, TwoLetterISOLanguageName.English, false, recipients, localizationData);
 
-			var data = _templates.GetBeEventType(eventType);
+			var data = _templates.GetByEventType(eventType);
 
 			data.EnableEmailSend.Should().BeFalse();
 
@@ -74,7 +74,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			localization.ShouldBeEquivalentTo(localizationData);
 
-			_templates.GetRecipients(eventType).ShouldAllBeEquivalentTo(recipients);
+			_templates.GetRecipientRoles(eventType).ShouldAllBeEquivalentTo(recipients);
 		}
 
 		private long AddTestState()

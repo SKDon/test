@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -60,7 +59,7 @@ namespace Alicargo.Services.Email
 
 			var to = new[]
                 {
-                    new Recipient
+                    new RecipientData
                         {
                             Culture = broker.TwoLetterISOLanguageName,
                             Email = broker.Email

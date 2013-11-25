@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Models;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.Entities;
 using Alicargo.TestHelpers;
@@ -41,8 +40,8 @@ namespace Alicargo.Jobs.Tests
 		[TestMethod]
 		public void Test_SetState_CargoReceivedStateId()
 		{
-			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
-			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
+			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
+			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
 			Setup(_cargoReceivedStateId);
 
 			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());
@@ -67,8 +66,8 @@ namespace Alicargo.Jobs.Tests
 		[TestMethod]
 		public void Test_SetState_NotCargoReceivedStateId()
 		{
-			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
-			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
+			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
+			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
 			Setup(_cargoReceivedStateId + 1);
 
 			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());
@@ -81,8 +80,8 @@ namespace Alicargo.Jobs.Tests
 		[TestMethod]
 		public void Test_SetState_CargoAtCustomsStateId()
 		{
-			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
-			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
+			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
+			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
 			Setup(_cargoAtCustomsStateId);
 
 			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());
@@ -95,8 +94,8 @@ namespace Alicargo.Jobs.Tests
 		[TestMethod]
 		public void Test_SetState_CargoIsCustomsClearedStateId()
 		{
-			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
-			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<Recipient>().ToArray());
+			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
+			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
 			Setup(_cargoIsCustomsClearedStateId);
 
 			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());

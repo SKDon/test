@@ -88,11 +88,11 @@ namespace Alicargo.Controllers
 
 		private ApplicationEventTemplateModel GetModel(ApplicationEventType eventType, string language)
 		{
-			var commonData = _templates.GetBeEventType(eventType);
+			var commonData = _templates.GetByEventType(eventType);
 
 			var localization = commonData != null ? _templates.GetLocalization(commonData.EmailTemplateId, language) : null;
 
-			var recipients = _templates.GetRecipients(eventType);
+			var recipients = _templates.GetRecipientRoles(eventType);
 
 			return new ApplicationEventTemplateModel
 			{

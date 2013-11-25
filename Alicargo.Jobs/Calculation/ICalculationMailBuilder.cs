@@ -1,5 +1,4 @@
 ﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Models;
 
 namespace Alicargo.Jobs.Calculation
 {

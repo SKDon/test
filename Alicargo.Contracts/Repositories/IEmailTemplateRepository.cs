@@ -11,9 +11,9 @@ namespace Alicargo.Contracts.Repositories
 		void SetForApplicationEvent(ApplicationEventType eventType, string language, bool enableEmailSend,
 			RoleType[] recipients, EmailTemplateLocalizationData localization);
 
-		ApplicationEventTemplateData GetBeEventType(ApplicationEventType eventType);
+		ApplicationEventTemplateData GetByEventType(ApplicationEventType eventType);
 		StateEmailTemplateData GetByStateId(long stateId);
-		RoleType[] GetRecipients(ApplicationEventType eventType);
+		RoleType[] GetRecipientRoles(ApplicationEventType eventType);
 		EmailTemplateLocalizationData GetLocalization(long templateId, string language);
 	}
 }

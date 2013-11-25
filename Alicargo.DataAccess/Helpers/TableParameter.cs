@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Data;
-using Alicargo.Contracts.Enums;
 using Dapper;
 
 namespace Alicargo.DataAccess.Helpers
@@ -56,7 +55,7 @@ namespace Alicargo.DataAccess.Helpers
 			paramInfoGenerator(command, parameters);
 		}
 
-		public static DataTable GeIdsTable(string name, long[] ids)
+		internal static DataTable GeIdsTable(string name, long[] ids)
 		{
 			var table = new DataTable(name);
 			table.Columns.Add("Id", typeof(long));

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Models;
 using Alicargo.Jobs.Calculation;
 using Alicargo.TestHelpers;
 using FluentAssertions;
@@ -42,7 +41,7 @@ namespace Alicargo.Jobs.Tests.Calculation
 			};
 
 			var client = _container.Build<ClientData>().With(x => x.Id, TestConstants.TestClientId1).Create();
-			var admins = _container.CreateMany<Recipient>().ToArray();
+			var admins = _container.CreateMany<RecipientData>().ToArray();
 
 			const string text = @"AirWaybillDisplay
 

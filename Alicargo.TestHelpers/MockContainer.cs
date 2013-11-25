@@ -4,7 +4,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -26,7 +25,7 @@ namespace Alicargo.TestHelpers
 			Fixture = new Fixture();
 			Fixture.Customize(new AutoMoqCustomization());
 
-			Fixture.Register(() => Fixture.Build<Recipient>()
+			Fixture.Register(() => Fixture.Build<RecipientData>()
 				.With(x => x.Culture, TwoLetterISOLanguageName.English)
 				.Create());
 

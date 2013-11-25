@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Models;
 using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Services.Email
@@ -15,10 +15,10 @@ namespace Alicargo.Services.Email
 			_users = users;
 		}
 
-		public Recipient[] GetAdminEmails()
+		public RecipientData[] GetAdminEmails()
 		{
 			return _users.GetByRole(RoleType.Admin)
-						 .Select(x => new Recipient
+						 .Select(x => new RecipientData
 						 {
 							 Culture = x.TwoLetterISOLanguageName,
 							 Email = x.Email
@@ -26,10 +26,10 @@ namespace Alicargo.Services.Email
 						 .ToArray();
 		}
 
-		public Recipient[] GetSenderEmails()
+		public RecipientData[] GetSenderEmails()
 		{
 			return _users.GetByRole(RoleType.Sender)
-						 .Select(x => new Recipient
+						 .Select(x => new RecipientData
 						 {
 							 Culture = x.TwoLetterISOLanguageName,
 							 Email = x.Email
@@ -37,10 +37,10 @@ namespace Alicargo.Services.Email
 						 .ToArray();
 		}
 
-		public Recipient[] GetForwarderEmails()
+		public RecipientData[] GetForwarderEmails()
 		{
 			return _users.GetByRole(RoleType.Forwarder)
-						 .Select(x => new Recipient
+						 .Select(x => new RecipientData
 						 {
 							 Culture = x.TwoLetterISOLanguageName,
 							 Email = x.Email

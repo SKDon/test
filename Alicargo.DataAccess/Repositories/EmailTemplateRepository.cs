@@ -49,7 +49,7 @@ namespace Alicargo.DataAccess.Repositories
 			_executor.Execute("[dbo].[ApplicationEventEmailRecipient_Set]", new TableParameters(new { EventTypeId = eventType }, table));
 		}
 
-		public ApplicationEventTemplateData GetBeEventType(ApplicationEventType eventType)
+		public ApplicationEventTemplateData GetByEventType(ApplicationEventType eventType)
 		{
 			return _executor.Query<ApplicationEventTemplateData>("[dbo].[EmailTemplate_GetByApplicationEvent]",
 				new { EventTypeId = (int)eventType });
@@ -60,7 +60,7 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Query<StateEmailTemplateData>("[dbo].[EmailTemplate_GetByStateId]", new { stateId });
 		}
 
-		public RoleType[] GetRecipients(ApplicationEventType eventType)
+		public RoleType[] GetRecipientRoles(ApplicationEventType eventType)
 		{
 			return _executor.Array<RoleType>("[dbo].[ApplicationEventEmailRecipient_Get]", new { EventTypeId = (int)eventType });
 		}
