@@ -161,27 +161,27 @@
 		margin-bottom: 5px;
 	}
 
-.state-edit-settings table {
+.template-edit-settings table {
 	margin-bottom: 20px;
 }
 
-.state-edit-settings td {
+.template-edit-settings td {
 	border-bottom: 1px gray solid;
 	text-align: center;
 }
 
-	.state-edit-settings td.title {
+	.template-edit-settings td.title {
 		text-align: left;
 		font-weight: bold;
 		padding: 0 10px;
 	}
 
-.state-edit-settings label {
+.template-edit-settings label {
 	display: inline-block;
-	margin: 0;
+	margin: 0 10px 0 0;
 }
 
-.state-edit-settings input {
+.template-edit-settings input {
 	display: inline-block;
 	width: auto;
 	margin: 0;
