@@ -1,4 +1,7 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
@@ -40,11 +43,37 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return eventTemplate.EmailTemplateId;
 		}
 
-		public EmailTemplateLocalizationData GetLocalization(RecipientData recipient, long templateId)
+		public EmailTemplateLocalizationData GetLocalization(long templateId, string language)
 		{
-			return _templates.GetLocalization(templateId, recipient.Culture);
+			var priority = new List<string>
+			{
+				TwoLetterISOLanguageName.Russian,
+				TwoLetterISOLanguageName.English,
+				TwoLetterISOLanguageName.Italian
+			};
+
+			priority.Remove(language);
+
+			return GetLocalization(templateId, language, priority);
 		}
 
-		
+		private EmailTemplateLocalizationData GetLocalization(long templateId, string language, ICollection<string> priority)
+		{
+			while (true)
+			{
+				var localization = _templates.GetLocalization(templateId, language);
+
+				var haveBoby = !string.IsNullOrWhiteSpace(localization.Body);
+				var haveSubject = !string.IsNullOrWhiteSpace(localization.Subject);
+				if (haveBoby || haveSubject)
+					return localization;
+
+				priority.Remove(language);
+				if (priority.Count == 0) 
+					return null;
+
+				language = priority.First();
+			}
+		}
 	}
 }

@@ -10,8 +10,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 	public sealed class MessageFactoryEx : IMessageFactory
 	{
 		private readonly string _defaultFrom;
-		private readonly TemplatesHelper _templates;
 		private readonly RecipientsHelper _recipients;
+		private readonly TemplatesHelper _templates;
 
 		public MessageFactoryEx(
 			string defaultFrom,
@@ -45,16 +45,14 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return GetEmailMessages(applicationId, data, recipients, templateId.Value).ToArray();
 		}
 
-		
-
 		private IEnumerable<EmailMessage> GetEmailMessages(long applicationId, byte[] data,
 			IEnumerable<RecipientData> recipients, long templateId)
 		{
 			foreach (var recipient in recipients)
 			{
-				var localization = _templates.GetLocalization(recipient, templateId);
+				var localization = _templates.GetLocalization(templateId, recipient.Culture);
 
-				if (localization == null || (string.IsNullOrWhiteSpace(localization.Body) && string.IsNullOrWhiteSpace(localization.Subject)))
+				if (localization == null)
 				{
 					continue;
 				}
@@ -63,7 +61,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			}
 		}
 
-		private EmailMessage GetEmailMessage(EmailTemplateLocalizationData localization, long applicationId, byte[] data, string email)
+		private EmailMessage GetEmailMessage(EmailTemplateLocalizationData localization, long applicationId, byte[] data,
+			string email)
 		{
 			var subject = ProcessText(localization.Subject, null);
 			var body = ProcessText(localization.Body, null);
@@ -77,9 +76,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		private string ProcessText(string text, ApplicationData data)
 		{
+			// todo
 			return text;
 		}
-
-		
 	}
 }

@@ -74,7 +74,7 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Array<EmailTemplateLocalizationData>(
 				"[dbo].[EmailTemplateLocalization_Get]",
 				new TableParameters(new { TemplateId = templateId }, table))
-				.First();
+				.Single();
 		}
 	}
 }
