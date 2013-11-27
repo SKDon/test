@@ -25,6 +25,7 @@ namespace Alicargo.Jobs.Tests
 		public void TestInitialize()
 		{
 			_container = new MockContainer();
+
 			_cargoReceivedStateId = _container.Create<long>();
 			_cargoAtCustomsStateId = _container.Create<long>();
 			_cargoIsCustomsClearedStateId = _container.Create<long>();

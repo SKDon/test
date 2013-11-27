@@ -80,6 +80,7 @@ namespace Alicargo.TestHelpers
 			Recipients = Inject<IRecipients>();
 			ApplicationFileRepository = Inject<IApplicationFileRepository>();
 			StateSettingsRepository = Inject<IStateSettingsRepository>();
+			EmailTemplateRepository = Inject<IEmailTemplateRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -110,6 +111,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ITransaction> Transaction { get; private set; }
 		public Mock<IRecipients> Recipients { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
+		public Mock<IEmailTemplateRepository> EmailTemplateRepository { get; private set; }
 
 		private Mock<T> Inject<T>() where T : class
 		{

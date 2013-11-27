@@ -75,6 +75,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ApplicationEvents\Helpers\TemplateFacadeTests.cs" />
     <Compile Include="MessageFactoryTests.cs" />
     <Compile Include="Calculation\CalculationMailBuilderTests.cs" />
     <Compile Include="JobRunnerHelperTests.cs" />
@@ -102,6 +103,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

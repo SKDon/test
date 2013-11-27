@@ -2,49 +2,57 @@
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 
-namespace Alicargo.Jobs.ApplicationEvents
+namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	public sealed class MessageFactoryEx : IMessageFactory
 	{
-		private readonly string _defaultFrom;
-		private readonly IEmailTemplateRepository _templates;
-		private readonly IApplicationRepository _applications;
+		private readonly string _defaultFrom;		
+		private readonly TemplateFacade _templates;
 
 		public MessageFactoryEx(
 			string defaultFrom,
 			IEmailTemplateRepository templates,
+			ISerializer serializer,
 			IApplicationRepository applications)
 		{
 			_defaultFrom = defaultFrom;
-			_templates = templates;
-			_applications = applications;
+
+			_templates = new TemplateFacade(serializer, templates, applications);
 		}
 
 		public EmailMessage[] Get(long applicationId, ApplicationEventType type, byte[] data)
 		{
-			var template = _templates.GetByEventType(type);
-			if (template == null || !template.EnableEmailSend)
+			var templateId = _templates.GetTemplateId(type, data);
+			if (!templateId.HasValue)
 			{
 				return null;
 			}
 
-			var recipients = GetRecipients(type, applicationId);
+			var recipients = _templates.GetRecipients(type, applicationId);
 			if (recipients == null || recipients.Length == 0)
 			{
 				return null;
 			}
 
-			return GetEmailMessages(applicationId, data, recipients, template).ToArray();
+			return GetEmailMessages(applicationId, data, recipients, templateId.Value).ToArray();
 		}
 
+		
+
 		private IEnumerable<EmailMessage> GetEmailMessages(long applicationId, byte[] data,
-			IEnumerable<RecipientData> recipients, ApplicationEventTemplateData template)
+			IEnumerable<RecipientData> recipients, long templateId)
 		{
 			foreach (var recipient in recipients)
 			{
-				var localization = _templates.GetLocalization(template.EmailTemplateId, recipient.Culture);
+				var localization = _templates.GetLocalization(recipient, templateId);
+
+				if (localization == null || (string.IsNullOrWhiteSpace(localization.Body) && string.IsNullOrWhiteSpace(localization.Subject)))
+				{
+					continue;
+				}
 
 				yield return GetEmailMessage(localization, applicationId, data, recipient.Email);
 			}
@@ -67,13 +75,6 @@ namespace Alicargo.Jobs.ApplicationEvents
 			return text;
 		}
 
-		private RecipientData[] GetRecipients(ApplicationEventType type, long applicationId)
-		{
-			var recipientRoles = _templates.GetRecipientRoles(type);
-
-			var application = _applications.Get(applicationId);
-
-			return null; // todo
-		}
+		
 	}
 }
