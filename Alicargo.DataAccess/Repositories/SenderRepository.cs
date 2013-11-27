@@ -27,9 +27,9 @@ namespace Alicargo.DataAccess.Repositories
 			return _context.Senders.Where(x => x.UserId == userId).Select(x => (long?)x.Id).FirstOrDefault();
 		}
 
-		public SenderData Get(long id)
+		public SenderData Get(long senderId)
 		{
-			return _executor.Query<SenderData>("[dbo].[Sender_Get]", new { id });
+			return _executor.Query<SenderData>("[dbo].[Sender_Get]", new { id = senderId });
 		}
 
 		public Dictionary<long, decimal> GetTariffs(long[] ids)
@@ -58,11 +58,11 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		public void Update(long id, SenderData data)
+		public void Update(long senderId, SenderData data)
 		{
 			_executor.Execute("[dbo].[Sender_Update]", new
 			{
-				id,
+				id = senderId,
 				data.Login,
 				data.Name,
 				data.Email,
@@ -70,9 +70,9 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		public long GetUserId(long id)
+		public long GetUserId(long senderId)
 		{
-			return _executor.Query<long>("[dbo].[Sender_GetUserId]", new { id });
+			return _executor.Query<long>("[dbo].[Sender_GetUserId]", new { id = senderId });
 		}
 
 		// ReSharper disable ClassNeverInstantiated.Local

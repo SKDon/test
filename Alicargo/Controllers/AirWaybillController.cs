@@ -20,32 +20,32 @@ namespace Alicargo.Controllers
 		private readonly IApplicationAwbManager _applicationAwbManager;
 		private readonly IAwbManager _awbManager;
 		private readonly IAwbPresenter _awbPresenter;
-		private readonly IAwbRepository _awbRepository;
+		private readonly IAwbRepository _awbs;
 		private readonly IAwbStateManager _awbStateManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
-		private readonly IBrokerRepository _brokerRepository;
+		private readonly IBrokerRepository _brokers;
 		private readonly IIdentityService _identity;
-		private readonly IStateConfig _stateConfig;
+		private readonly IStateConfig _config;
 
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
 			IApplicationAwbManager applicationAwbManager,
 			IAwbUpdateManager awbUpdateManager,
 			IAwbManager awbManager,
-			IStateConfig stateConfig,
-			IAwbRepository awbRepository,
+			IStateConfig config,
+			IAwbRepository awbs,
 			IAwbStateManager awbStateManager,
-			IBrokerRepository brokerRepository,
+			IBrokerRepository brokers,
 			IIdentityService identity)
 		{
 			_awbPresenter = awbPresenter;
 			_applicationAwbManager = applicationAwbManager;
 			_awbUpdateManager = awbUpdateManager;
 			_awbManager = awbManager;
-			_stateConfig = stateConfig;
-			_awbRepository = awbRepository;
+			_config = config;
+			_awbs = awbs;
 			_awbStateManager = awbStateManager;
-			_brokerRepository = brokerRepository;
+			_brokers = brokers;
 			_identity = identity;
 		}
 
@@ -94,7 +94,7 @@ namespace Alicargo.Controllers
 			long? brokerId = null;
 			if (_identity.IsInRole(RoleType.Broker) && _identity.Id.HasValue)
 			{
-				var broker = _brokerRepository.GetByUserId(_identity.Id.Value);
+				var broker = _brokers.GetByUserId(_identity.Id.Value);
 				brokerId = broker.Id;
 			}
 
@@ -115,14 +115,6 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		[Access(RoleType.Admin, RoleType.Broker), HttpPost]
-		public virtual ActionResult SetState(long id, long stateId)
-		{
-			_awbStateManager.SetState(id, stateId);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
 		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
 		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
 		{
@@ -134,13 +126,13 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin, RoleType.Broker), HttpPost]
 		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
 		{
-			var data = _awbRepository.Get(id).First();
+			var data = _awbs.Get(id).First();
 			if (data.GTD.IsNullOrWhiteSpace())
 			{
 				throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
 			}
 
-			_awbStateManager.SetState(id, _stateConfig.CargoIsCustomsClearedStateId);
+			_awbStateManager.SetState(id, _config.CargoIsCustomsClearedStateId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -148,13 +140,13 @@ namespace Alicargo.Controllers
 		[ChildActionOnly]
 		public virtual PartialViewResult CargoIsCustomsClearedButton(long id)
 		{
-			var data = _awbRepository.Get(id).First();
+			var data = _awbs.Get(id).First();
 
 			var model = new CargoIsCustomsClearedButtonModel
 			{
 				Id = id,
 				CanSetCargoIsCustomsCleared =
-					data.StateId == _stateConfig.CargoAtCustomsStateId && !data.GTD.IsNullOrWhiteSpace()
+					data.StateId == _config.CargoAtCustomsStateId && !data.GTD.IsNullOrWhiteSpace()
 			};
 
 			return PartialView("CargoIsCustomsClearedButton", model);
@@ -203,35 +195,35 @@ namespace Alicargo.Controllers
 
 		public virtual FileResult InvoiceFile(long id)
 		{
-			var file = _awbRepository.GetInvoiceFile(id);
+			var file = _awbs.GetInvoiceFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult GTDFile(long id)
 		{
-			var file = _awbRepository.GetGTDFile(id);
+			var file = _awbs.GetGTDFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult GTDAdditionalFile(long id)
 		{
-			var file = _awbRepository.GTDAdditionalFile(id);
+			var file = _awbs.GTDAdditionalFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult PackingFile(long id)
 		{
-			var file = _awbRepository.GetPackingFile(id);
+			var file = _awbs.GetPackingFile(id);
 
 			return file.GetFileResult();
 		}
 
 		public virtual FileResult AWBFile(long id)
 		{
-			var file = _awbRepository.GetAWBFile(id);
+			var file = _awbs.GetAWBFile(id);
 
 			return file.GetFileResult();
 		}

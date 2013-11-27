@@ -3,7 +3,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.AirWaybill
-{
+{	
     internal sealed class AwbStateManager : IAwbStateManager
     {
         private readonly IApplicationManager _applicationManager;
