@@ -13,14 +13,14 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 	public class TemplateFacadeTests
 	{
 		private MockContainer _container;
-		private TemplateFacade _facade;
+		private TemplatesHelper _helper;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_container = new MockContainer();
 
-			_facade = _container.Create<TemplateFacade>();
+			_helper = _container.Create<TemplatesHelper>();
 		}
 
 		[TestMethod]
@@ -32,7 +32,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 
 			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
 
-			var templateId = _facade.GetTemplateId(eventType, _container.CreateMany<byte>().ToArray());
+			var templateId = _helper.GetTemplateId(eventType, _container.CreateMany<byte>().ToArray());
 
 			templateId.Should().NotHaveValue();
 		}
@@ -55,7 +55,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			_container.EmailTemplateRepository.Setup(x => x.GetByStateId(stateEventData.StateId)).Returns(stateTemplate);
 			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(ApplicationEventType.SetState)).Returns(eventTemplate);
 
-			var templateId = _facade.GetTemplateId(ApplicationEventType.SetState, bytes);
+			var templateId = _helper.GetTemplateId(ApplicationEventType.SetState, bytes);
 
 			templateId.ShouldBeEquivalentTo(eventTemplate.EmailTemplateId);
 		}
@@ -78,7 +78,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			_container.EmailTemplateRepository.Setup(x => x.GetByStateId(stateEventData.StateId)).Returns(stateTemplate);
 			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(ApplicationEventType.SetState)).Returns(eventTemplate);
 
-			var templateId = _facade.GetTemplateId(ApplicationEventType.SetState, bytes);
+			var templateId = _helper.GetTemplateId(ApplicationEventType.SetState, bytes);
 
 			templateId.ShouldBeEquivalentTo(stateTemplate.EmailTemplateId);
 		}

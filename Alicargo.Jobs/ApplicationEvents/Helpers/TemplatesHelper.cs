@@ -6,17 +6,17 @@ using Alicargo.Jobs.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	internal sealed class TemplateFacade
+	internal sealed class TemplatesHelper
 	{
-		private readonly IEmailTemplateRepository _templates;
 		private readonly ISerializer _serializer;
-		private readonly IApplicationRepository _applications;
+		private readonly IEmailTemplateRepository _templates;
 
-		public TemplateFacade(ISerializer serializer, IEmailTemplateRepository templates, IApplicationRepository applications)
+		public TemplatesHelper(
+			ISerializer serializer,
+			IEmailTemplateRepository templates)
 		{
 			_serializer = serializer;
 			_templates = templates;
-			_applications = applications;
 		}
 
 		public long? GetTemplateId(ApplicationEventType type, byte[] data)
@@ -45,13 +45,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return _templates.GetLocalization(templateId, recipient.Culture);
 		}
 
-		public RecipientData[] GetRecipients(ApplicationEventType type, long applicationId)
-		{
-			var recipientRoles = _templates.GetRecipientRoles(type);
-
-			var application = _applications.Get(applicationId);
-
-			return null; // todo
-		}
+		
 	}
 }

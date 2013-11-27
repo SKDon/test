@@ -9,18 +9,23 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	public sealed class MessageFactoryEx : IMessageFactory
 	{
-		private readonly string _defaultFrom;		
-		private readonly TemplateFacade _templates;
+		private readonly string _defaultFrom;
+		private readonly TemplatesHelper _templates;
+		private readonly RecipientsHelper _recipients;
 
 		public MessageFactoryEx(
 			string defaultFrom,
 			IEmailTemplateRepository templates,
 			ISerializer serializer,
+			IStateSettingsRepository stateSettings,
+			IAwbRepository awbs,
+			IUserRepository users,
 			IApplicationRepository applications)
 		{
 			_defaultFrom = defaultFrom;
 
-			_templates = new TemplateFacade(serializer, templates, applications);
+			_templates = new TemplatesHelper(serializer, templates);
+			_recipients = new RecipientsHelper(applications, awbs, serializer, stateSettings, templates, users);
 		}
 
 		public EmailMessage[] Get(long applicationId, ApplicationEventType type, byte[] data)
@@ -31,7 +36,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				return null;
 			}
 
-			var recipients = _templates.GetRecipients(type, applicationId);
+			var recipients = _recipients.GetRecipients(applicationId, type, data);
 			if (recipients == null || recipients.Length == 0)
 			{
 				return null;
