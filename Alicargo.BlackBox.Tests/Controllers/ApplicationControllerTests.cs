@@ -139,5 +139,36 @@ namespace Alicargo.BlackBox.Tests.Controllers
             data.TransitRecipientName.ShouldBeEquivalentTo(transitModel.RecipientName);
             data.TransitWarehouseWorkingTime.ShouldBeEquivalentTo(transitModel.WarehouseWorkingTime);
         }
+
+			//[TestMethod, TestCategory("black-box")]
+		//public void Test_SetState()
+		//{
+		//	var entity = _db.AirWaybills.FirstOrDefault(
+		//		x => x.Applications.Count() > 1 && x.Applications.All(y => y.State.Id != DefaultStateId));
+		//	if (entity == null)
+		//		Assert.Inconclusive("Cant find AirWaybill for test");
+
+		//	var oldStateId = entity.Applications.First().StateId;
+
+
+		//	_controller.SetState(entity.Id, DefaultStateId);
+
+
+		//	_db.Refresh(RefreshMode.OverwriteCurrentValues, entity);
+		//	foreach (var application in entity.Applications)
+		//	{
+		//		_db.Refresh(RefreshMode.OverwriteCurrentValues, application);
+		//	}
+
+		//	Assert.IsTrue(entity.Applications.All(x => x.StateId == DefaultStateId));
+
+		//	foreach (var application in entity.Applications)
+		//	{
+		//		application.StateId = oldStateId;
+		//	}
+		//	entity.StateId = oldStateId;
+
+		//	_db.SubmitChanges();
+		//}
     }
 }

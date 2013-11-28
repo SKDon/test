@@ -61,12 +61,6 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult SetState()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetState);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult SetAirWaybill()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAirWaybill);
@@ -139,7 +133,6 @@ namespace Alicargo.Controllers
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string Delete = "Delete";
-            public readonly string SetState = "SetState";
             public readonly string SetAirWaybill = "SetAirWaybill";
             public readonly string CargoIsCustomsCleared = "CargoIsCustomsCleared";
             public readonly string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
@@ -158,7 +151,6 @@ namespace Alicargo.Controllers
             public const string Index = "Index";
             public const string List = "List";
             public const string Delete = "Delete";
-            public const string SetState = "SetState";
             public const string SetAirWaybill = "SetAirWaybill";
             public const string CargoIsCustomsCleared = "CargoIsCustomsCleared";
             public const string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
@@ -196,15 +188,6 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Delete
         {
             public readonly string id = "id";
-        }
-        static readonly ActionParamsClass_SetState s_params_SetState = new ActionParamsClass_SetState();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetState SetStateParams { get { return s_params_SetState; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetState
-        {
-            public readonly string id = "id";
-            public readonly string stateId = "stateId";
         }
         static readonly ActionParamsClass_SetAirWaybill s_params_SetAirWaybill = new ActionParamsClass_SetAirWaybill();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -368,17 +351,6 @@ namespace Alicargo.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             DeleteOverride(callInfo, id);
-            return callInfo;
-        }
-
-        partial void SetStateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, long stateId);
-
-        public override System.Web.Mvc.ActionResult SetState(long id, long stateId)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetState);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "stateId", stateId);
-            SetStateOverride(callInfo, id, stateId);
             return callInfo;
         }
 
