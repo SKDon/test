@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
@@ -9,12 +8,12 @@ using Alicargo.Jobs.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	internal sealed class TemplatesHelper
+	internal sealed class TemplatesFacade : ITemplatesFacade
 	{
 		private readonly ISerializer _serializer;
 		private readonly IEmailTemplateRepository _templates;
 
-		public TemplatesHelper(
+		public TemplatesFacade(
 			ISerializer serializer,
 			IEmailTemplateRepository templates)
 		{

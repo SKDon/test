@@ -55,11 +55,15 @@
     <Compile Include="ApplicationEvents\ApplicationEventJobHelper.cs" />
     <Compile Include="ApplicationEvents\ApplicationMailCreatorJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryJob.cs" />
+    <Compile Include="ApplicationEvents\Helpers\FilesFasade.cs" />
+    <Compile Include="ApplicationEvents\Helpers\IFilesFasade.cs" />
     <Compile Include="ApplicationEvents\Helpers\IMessageFactory.cs" />
+    <Compile Include="ApplicationEvents\Helpers\IRecipientsFacade.cs" />
+    <Compile Include="ApplicationEvents\Helpers\ITemplatesFacade.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageFactory.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageFactoryEx.cs" />
-    <Compile Include="ApplicationEvents\Helpers\RecipientsHelper.cs" />
-    <Compile Include="ApplicationEvents\Helpers\TemplatesHelper.cs" />
+    <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TemplatesFacade.cs" />
     <Compile Include="Calculation\CalculationJobHelper.cs" />
     <Compile Include="Calculation\CalculationMailBuilder.cs" />
     <Compile Include="Calculation\CalculationWatcherJob.cs" />

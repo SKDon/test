@@ -9,9 +9,8 @@ using Alicargo.Jobs.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	internal sealed class RecipientsHelper
+	internal sealed class RecipientsFacade : IRecipientsFacade
 	{
-		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
 		private readonly ISerializer _serializer;
 		private readonly IStateSettingsRepository _stateSettings;
@@ -19,15 +18,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		private readonly IUserRepository _users;
 
-		public RecipientsHelper(
-			IApplicationRepository applications,
+		public RecipientsFacade(
 			IAwbRepository awbs,
 			ISerializer serializer,
 			IStateSettingsRepository stateSettings,
 			IEmailTemplateRepository templates,
 			IUserRepository users)
 		{
-			_applications = applications;
 			_awbs = awbs;
 			_serializer = serializer;
 			_stateSettings = stateSettings;
@@ -35,13 +32,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_users = users;
 		}
 
-		public RecipientData[] GetRecipients(long applicationId, ApplicationEventType type, byte[] data)
+		public RecipientData[] GetRecipients(ApplicationData application, ApplicationEventType type, byte[] data)
 		{
 			var roles = GetRoles(type, data);
 
 			return roles.Length == 0
 				? null
-				: GetRecipients(applicationId, roles);
+				: GetRecipients(application, roles).ToArray();
 		}
 
 		private RoleType[] GetRoles(ApplicationEventType type, byte[] data)
@@ -62,17 +59,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			}
 
 			return roles;
-		}
-
-		private RecipientData[] GetRecipients(long applicationId, IEnumerable<RoleType> roles)
-		{
-			var application = _applications.Get(applicationId);
-			if (application == null)
-			{
-				throw new InvalidOperationException("Can't find application by id " + applicationId);
-			}
-
-			return GetRecipients(application, roles).ToArray();
 		}
 
 		private IEnumerable<RecipientData> GetRecipients(ApplicationData application, IEnumerable<RoleType> roles)

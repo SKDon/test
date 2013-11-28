@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Jobs.ApplicationEvents;
+using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.Jobs.Entities;
 using Alicargo.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

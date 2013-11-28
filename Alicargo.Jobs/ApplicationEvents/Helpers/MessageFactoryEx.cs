@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
@@ -10,43 +10,52 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 	public sealed class MessageFactoryEx : IMessageFactory
 	{
 		private readonly string _defaultFrom;
-		private readonly RecipientsHelper _recipients;
-		private readonly TemplatesHelper _templates;
+		private readonly IFilesFasade _files;
+		private readonly IRecipientsFacade _recipients;
+		private readonly IApplicationRepository _applications;
+		private readonly ITemplatesFacade _templates;
 
 		public MessageFactoryEx(
 			string defaultFrom,
-			IEmailTemplateRepository templates,
-			ISerializer serializer,
-			IStateSettingsRepository stateSettings,
-			IAwbRepository awbs,
-			IUserRepository users,
+			IFilesFasade files,
+			IRecipientsFacade recipients,
+			ITemplatesFacade templates, 
 			IApplicationRepository applications)
 		{
 			_defaultFrom = defaultFrom;
-
-			_templates = new TemplatesHelper(serializer, templates);
-			_recipients = new RecipientsHelper(applications, awbs, serializer, stateSettings, templates, users);
+			_files = files;
+			_recipients = recipients;
+			_templates = templates;
+			_applications = applications;
 		}
 
 		public EmailMessage[] Get(long applicationId, ApplicationEventType type, byte[] data)
 		{
+			var application = _applications.Get(applicationId);
+			if (application == null)
+			{
+				throw new InvalidOperationException("Can't find application by id " + applicationId);
+			}
+
 			var templateId = _templates.GetTemplateId(type, data);
 			if (!templateId.HasValue)
 			{
 				return null;
 			}
 
-			var recipients = _recipients.GetRecipients(applicationId, type, data);
+			var recipients = _recipients.GetRecipients(application, type, data);
 			if (recipients == null || recipients.Length == 0)
 			{
 				return null;
 			}
 
-			return GetEmailMessages(applicationId, data, recipients, templateId.Value).ToArray();
+			var files = _files.GetFiles(applicationId, application.AirWaybillId, type, data);
+
+			return GetEmailMessages(applicationId, data, recipients, templateId.Value, files).ToArray();
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(long applicationId, byte[] data,
-			IEnumerable<RecipientData> recipients, long templateId)
+			IEnumerable<RecipientData> recipients, long templateId, FileHolder[] files)
 		{
 			foreach (var recipient in recipients)
 			{
@@ -57,12 +66,12 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 					continue;
 				}
 
-				yield return GetEmailMessage(localization, applicationId, data, recipient.Email);
+				yield return GetEmailMessage(localization, applicationId, data, recipient.Email, files);
 			}
 		}
 
 		private EmailMessage GetEmailMessage(EmailTemplateLocalizationData localization, long applicationId, byte[] data,
-			string email)
+			string email, FileHolder[] files)
 		{
 			var subject = ProcessText(localization.Subject, null);
 			var body = ProcessText(localization.Body, null);
@@ -70,7 +79,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return new EmailMessage(subject, body, _defaultFrom, email)
 			{
 				IsBodyHtml = localization.IsBodyHtml,
-				Files = null // todo
+				Files = files
 			};
 		}
 

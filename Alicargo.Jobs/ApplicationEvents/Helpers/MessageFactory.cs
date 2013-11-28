@@ -11,7 +11,7 @@ using Alicargo.Core.Resources;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.Entities;
 
-namespace Alicargo.Jobs.ApplicationEvents
+namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	[Obsolete]
 	public sealed class MessageFactory : IMessageFactory
