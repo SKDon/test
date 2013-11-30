@@ -45,17 +45,24 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		public static string GetText(CultureInfo culture, string format, string value)
 		{
-			if (format != null)
+			if (string.IsNullOrWhiteSpace(format))
 			{
-				if (string.IsNullOrEmpty(value))
-				{
-					return string.Empty;
-				}
-
-				return string.Format(culture, format, value);
+				return value;
 			}
 
-			return string.Format(culture, "{0}", value);
+			if (value == null)
+			{
+				return string.Empty;
+			}
+
+			try
+			{
+				return string.Format(culture, format, value);
+			}
+			catch (FormatException)
+			{
+				return format + value;
+			}
 		}
 	}
 }

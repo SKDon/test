@@ -6,14 +6,14 @@ using Ploeh.AutoFixture;
 namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 {
 	[TestClass]
-	public class TextBulderHelperTests
+	public class TextBulderHelperGetMatchTests
 	{
-		private Fixture _container;
+		private Fixture _fixture;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_container = new Fixture();
+			_fixture = new Fixture();
 		}
 
 		[TestMethod]
@@ -21,7 +21,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch(_container.Create<string>(), _container.Create<string>(), out text, out format);
+			var match = TextBulderHelper.GetMatch(_fixture.Create<string>(), _fixture.Create<string>(), out text, out format);
 
 			match.Should().BeFalse();
 			text.Should().BeNull();

@@ -76,7 +76,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApplicationEvents\Helpers\TemplatesFacadeTests.cs" />
-    <Compile Include="ApplicationEvents\Helpers\TextBulderHelperTests.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TextBulderHelperGetMatchTests.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TextBulderHelperGetTextTests.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TextBulderTests.cs" />
     <Compile Include="MessageFactoryTests.cs" />
     <Compile Include="Calculation\CalculationMailBuilderTests.cs" />
     <Compile Include="JobRunnerHelperTests.cs" />
