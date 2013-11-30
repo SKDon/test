@@ -34,12 +34,15 @@ namespace Alicargo.Jobs.ApplicationEvents
 		{
 			var messages = _messageFactory.Get(data.ApplicationId, data.EventType, data.Data);
 
-			foreach (var message in messages)
+			if (messages != null)
 			{
-				var files = _serializer.Serialize(message.Files);
+				foreach (var message in messages)
+				{
+					var files = _serializer.Serialize(message.Files);
 
-				_emails.Add(_shard.ZeroBasedIndex, message.From, message.To, message.CopyTo, message.Subject, message.Body,
-					message.IsBodyHtml, files);
+					_emails.Add(_shard.ZeroBasedIndex, message.From, message.To, message.CopyTo, message.Subject, message.Body,
+						message.IsBodyHtml, files);
+				}
 			}
 
 			_events.SetState(data.Id, ApplicationEventState.EmailPrepared);

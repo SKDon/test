@@ -46,7 +46,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				string match;
 				string format;
-				while (TextBulderHelper.GetMatch(builder.ToString(), name, _log, out match, out format)) // todo: test two matchs
+				while (TextBulderHelper.GetMatch(builder.ToString(), name, out match, out format)) // todo: test two matchs
 				{
 					var value = (string)property.GetValue(data);
 

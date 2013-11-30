@@ -37,7 +37,7 @@ namespace Alicargo.Jobs.Tests
 			_details = _container.Create<ApplicationDetailsData>();
 			_container.ApplicationRepository.Setup(x => x.GetDetails(It.IsAny<long>())).Returns(_details);
 
-			_factory = _container.Create<MessageFactoryEx>();
+			_factory = _container.Create<MessageFactory>();
 		}
 
 		[TestMethod]

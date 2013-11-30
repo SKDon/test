@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Jobs.ApplicationEvents.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	internal static class TextBulderHelper
 	{
-		public static bool GetMatch(string template, string name, ILog log, out string text, out string format)
-		{
-			//var tokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+		static readonly TimeSpan Timeout = TimeSpan.FromSeconds(30);
 
-			//var task = Task<String>.Factory.StartNew(() =>
-			//{
+		public static bool GetMatch(string template, string paremeterName, out string text, out string format)
+		{
 			text = null;
 			format = null;
+			if (string.IsNullOrWhiteSpace(template))
+			{
+				return false;
+			}
+
 			try
 			{
-				//\{(name)( *\[([:print:]+)\])\}
 				//\[([\w\s\{\}])+\]
-				var match = Regex.Match(template, @"\{(" + name + @")(\s*\[(\p{C}+)\])");
+				var match = Regex.Match(template, @"\{(" + paremeterName + @")(\s*\[(\p{C}+)\])\}", RegexOptions.IgnoreCase, Timeout);
 				text = match.Value;
 
 				if (match.Groups.Count > 2)
@@ -29,15 +31,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				return true;
 			}
-			catch (Exception exception)
+			catch (RegexMatchTimeoutException exception)
 			{
-				log.Error("Failed get a format from the template " + template + " for the parameter " + name, exception);
+				throw new TextBulderException("Failed get a replacement from the template " + template + " for the parameter " + paremeterName,
+					exception);
 			}
-
-			return false;
-			//}, tokenSource.Token);
-
-			//return task.Result;
 		}
 
 		public static string GetText(CultureInfo culture, string format, string value)
