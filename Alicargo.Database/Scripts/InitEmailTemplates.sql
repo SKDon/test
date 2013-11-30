@@ -38,91 +38,90 @@ INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], 
 
 
 SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] ON 
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (1, 1, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Создана новая заявка.
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (1, 1, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Создана новая заявка.
 Номер заявки: {DisplayNumber}
 Клиент: {ClientNic}
 Производитель: {FactoryName}
 Марка: {MarkName}
-Дата создания:{CreationTimestamp}', 0)
+Дата создания: {CreationTimestamp}', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (2, 1, N'en', N'Alicar : Order#{DisplayNumber}', N'Created new order.
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (2, 1, N'en', N'Alicargo : Order#{DisplayNumber}', N'Created new order.
 Number order: {DisplayNumber}
 Client: {ClientNic}
 Factory: {FactoryName}
 Brands: {MarkName}
-Created:{CreationTimestamp}', 0)
+Created: {CreationTimestamp}', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (3, 1, N'it', N'Alicar : Order#{DisplayNumber}', N'Created new order.
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (3, 1, N'it', N'Alicargo : Order#{DisplayNumber}', N'Created new order.
 Number order: {DisplayNumber}
 Client: {ClientNic}
 Factory: {FactoryName}
 Brands: {MarkName}
-Created:{CreationTimestamp}', 0)
+Created: {CreationTimestamp}', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (4, 2, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (4, 2, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
 Изменение статуса заявки {DisplayNumber} - прикреплен документ Счет-фактура.
 Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
 
 С уважением,
-Alicar  srl', 0)
+Alicargo  srl', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (5, 2, N'en', N'Alicar : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (5, 2, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. Commercial invoice is attached.
 Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
 
 Sincerely,
-Alicar  srl', 0)
+Alicargo  srl', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (6, 2, N'it', N'Alicar : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (6, 2, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. Commercial invoice is attached.
 Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
 
 Sincerely,
-Alicar  srl', 0)
+Alicargo  srl', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (7, 3, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен счет за доставку.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (8, 3, N'en', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (9, 3, N'it', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (10, 4, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен инвойс {InvoiceFileName}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (11, 4, N'en', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {InvoiceFileName}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (12, 4, N'it', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {InvoiceFileName}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (13, 5, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен пакинг.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (14, 5, N'en', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (15, 5, N'it', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (16, 6, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Предположительная дата получения — {DateOfCar Receipt}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (17, 6, N'en', N'Alicar : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCar Receipt}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (18, 6, N'it', N'Alicar : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCar Receipt}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (19, 7, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Задан транзитный референс {TransitReference}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (20, 7, N'en', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (21, 7, N'it', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (22, 8, N'ru', N'Alicar : Order#{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен swift.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (23, 8, N'en', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (24, 8, N'it', N'Alicar : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift.', 0)
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (25, 9, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (7, 3, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен счет за доставку.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (8, 3, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (9, 3, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (10, 4, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен инвойс {InvoiceFileName}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (11, 4, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {InvoiceFileName}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (12, 4, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {InvoiceFileName}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (13, 5, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен пакинг.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (14, 5, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (15, 5, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (16, 6, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (17, 6, N'en', N'Alicargo : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (18, 6, N'it', N'Alicargo : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (19, 7, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Задан транзитный референс {TransitReference}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (20, 7, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (21, 7, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (22, 8, N'ru', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен swift.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (23, 8, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (24, 8, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift.', 0)
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (25, 9, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
 Изменение статуса заявки {DisplayNumber} - прикреплен документ ТОРГ-12.
 Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
 
 С уважением,
-Alicar  srl', 0)
+Alicargo  srl', 0)
 
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (26, 9, N'en', N'Alicar : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (26, 9, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. TORG-12 is attached.
 Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
 
 Sincerely,
-Alicar  srl', 0)
+Alicargo  srl', 0)
 
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (27, 9, N'it', N'Alicar : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (27, 9, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. TORG-12 is attached.
 Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
 
 Sincerely,
-Alicar  srl', 0)
+Alicargo  srl', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (28, 10, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'
-Изменение статуса заявки: {StateName}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (28, 10, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
-{DateOfCar Receipt [Предположительная дата получения: {0}]}
+{DateOfCargoReceipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
 {FactoryName [Производитель: {0}]}
 {FactoryEmail [Email фабрики: {0}]}
@@ -159,10 +158,9 @@ INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISO
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (29, 10, N'en', N'Alicar : Order#{DisplayNumber}', N'
-Изменение статуса заявки: {StateName}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (29, 10, N'en', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
-{DateOfCar Receipt [Предположительная дата получения: {0}]}
+{DateOfCargoReceipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
 {FactoryName [Производитель: {0}]}
 {FactoryEmail [Email фабрики: {0}]}
@@ -199,10 +197,9 @@ INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISO
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (30, 10, N'it', N'Alicar : Order#{DisplayNumber}', N'
-Изменение статуса заявки: {StateName}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (30, 10, N'it', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
-{DateOfCar Receipt [Предположительная дата получения: {0}]}
+{DateOfCargoReceipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
 {FactoryName [Производитель: {0}]}
 {FactoryEmail [Email фабрики: {0}]}
