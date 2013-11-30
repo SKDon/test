@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Localization;
@@ -22,10 +23,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				unchecked // todo: 3. fix and test
-				{
-					return (DateTimeOffset.UtcNow - CreationTimestamp.ToUniversalTime()).Days;
-				}
+				return ApplicationHelper.GetDaysInWork(CreationTimestamp);				
 			}
 		}
 
@@ -33,8 +31,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: 3. test time zones
-				return CreationTimestamp.ToLocalShortDateString();
+				return LocalizationHelper.GetDate(CreationTimestamp, CultureInfo.CurrentCulture);
 			}
 		}
 
@@ -42,8 +39,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: 3. test time zones
-				return StateChangeTimestamp.ToLocalShortDateString();
+				return LocalizationHelper.GetDate(StateChangeTimestamp, CultureInfo.CurrentCulture);
 			}
 		}
 
@@ -51,8 +47,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: 3. test time zones
-				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.ToLocalShortDateString() : null;
+				return DateOfCargoReceipt.HasValue ? LocalizationHelper.GetDate(DateOfCargoReceipt.Value, CultureInfo.CurrentCulture) : null;
 			}
 		}
 
@@ -60,8 +55,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				// todo: 3. test time zones
-				return DateInStock.HasValue ? DateInStock.Value.ToLocalShortDateString() : null;
+				return DateInStock.HasValue ? LocalizationHelper.GetDate(DateInStock.Value, CultureInfo.CurrentCulture) : null;
 			}
 		}
 

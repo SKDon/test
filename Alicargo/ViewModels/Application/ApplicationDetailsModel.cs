@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
-using Alicargo.Core.Services;
 
 namespace Alicargo.ViewModels.Application
 {
@@ -17,7 +17,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				return DateOfCargoReceipt.HasValue ? DateOfCargoReceipt.Value.ToLocalShortDateString() : null;
+				return DateOfCargoReceipt.HasValue ? LocalizationHelper.GetDate(DateOfCargoReceipt.Value, CultureInfo.CurrentCulture) : null;
 			}
 		}
 

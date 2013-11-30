@@ -18,11 +18,6 @@ namespace Alicargo.Core.Services
 			return int.Parse(@string, NumberStyles.AllowLeadingSign);
 		}
 
-		public static string ToLocalShortDateString(this DateTimeOffset dateTimeOffset)
-		{
-			return dateTimeOffset.LocalDateTime.ToShortDateString();
-		}
-
 		public static bool IsCritical(this Exception ex)
 		{
 			while (true)

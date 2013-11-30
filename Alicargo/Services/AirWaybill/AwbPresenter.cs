@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -34,36 +36,37 @@ namespace Alicargo.Services.AirWaybill
 			var aggregates = _awbRepository.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
 
 			var states = _states.Get(twoLetterISOLanguageName);
+			var currentCulture = CultureInfo.CurrentCulture;
 
 			var items = data.Select(x => new AirWaybillListItem
+			{
+				Id = x.Id,
+				PackingFileName = x.PackingFileName,
+				InvoiceFileName = x.InvoiceFileName,
+				State = new ApplicationStateModel
 				{
-					Id = x.Id,
-					PackingFileName = x.PackingFileName,
-					InvoiceFileName = x.InvoiceFileName,
-					State = new ApplicationStateModel
-						{
-							StateName = states[x.StateId].LocalizedName,
-							StateId = x.StateId
-						},
-					AWBFileName = x.AWBFileName,
-					ArrivalAirport = x.ArrivalAirport,
-					Bill = x.Bill,
-					CreationTimestampLocalString = x.CreationTimestamp.ToLocalShortDateString(),
-					DateOfArrivalLocalString = x.DateOfArrival.ToLocalShortDateString(),
-					DateOfDepartureLocalString = x.DateOfDeparture.ToLocalShortDateString(),
-					StateChangeTimestampLocalString = x.StateChangeTimestamp.ToLocalShortDateString(),
-					DepartureAirport = x.DepartureAirport,
-					GTD = x.GTD,
-					GTDAdditionalFileName = x.GTDAdditionalFileName,
-					GTDFileName = x.GTDFileName,
-					TotalCount = aggregates[x.Id].TotalCount,
-					TotalWeight = aggregates[x.Id].TotalWeight,
-					AdditionalCost = x.AdditionalCost,
-					TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
-					BrokerCost = x.BrokerCost,
-					CustomCost = x.CustomCost,
-					FlightCost = x.FlightCost,
-				}).ToArray();
+					StateName = states[x.StateId].LocalizedName,
+					StateId = x.StateId
+				},
+				AWBFileName = x.AWBFileName,
+				ArrivalAirport = x.ArrivalAirport,
+				Bill = x.Bill,
+				CreationTimestampLocalString = LocalizationHelper.GetDate(x.CreationTimestamp, currentCulture),
+				DateOfArrivalLocalString = LocalizationHelper.GetDate(x.DateOfArrival, currentCulture),
+				DateOfDepartureLocalString = LocalizationHelper.GetDate(x.DateOfDeparture, currentCulture),
+				StateChangeTimestampLocalString = LocalizationHelper.GetDate(x.StateChangeTimestamp, currentCulture),
+				DepartureAirport = x.DepartureAirport,
+				GTD = x.GTD,
+				GTDAdditionalFileName = x.GTDAdditionalFileName,
+				GTDFileName = x.GTDFileName,
+				TotalCount = aggregates[x.Id].TotalCount,
+				TotalWeight = aggregates[x.Id].TotalWeight,
+				AdditionalCost = x.AdditionalCost,
+				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
+				BrokerCost = x.BrokerCost,
+				CustomCost = x.CustomCost,
+				FlightCost = x.FlightCost,
+			}).ToArray();
 
 			var total = _awbRepository.Count(brokerId);
 
@@ -90,8 +93,8 @@ namespace Alicargo.Services.AirWaybill
 				ArrivalAirport = data.ArrivalAirport,
 				Bill = data.Bill,
 				BrokerId = data.BrokerId,
-				DateOfArrivalLocalString = data.DateOfArrival.ToLocalShortDateString(),
-				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
+				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, CultureInfo.CurrentCulture),
+				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, CultureInfo.CurrentCulture),
 				DepartureAirport = data.DepartureAirport,
 				PackingFile = null,
 				PackingFileName = data.PackingFileName,
@@ -111,8 +114,8 @@ namespace Alicargo.Services.AirWaybill
 				ArrivalAirport = data.ArrivalAirport,
 				Bill = data.Bill,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				DateOfArrivalLocalString = data.DateOfArrival.ToLocalShortDateString(),
-				DateOfDepartureLocalString = data.DateOfDeparture.ToLocalShortDateString(),
+				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, CultureInfo.CurrentCulture),
+				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, CultureInfo.CurrentCulture),
 				DepartureAirport = data.DepartureAirport,
 				GTD = data.GTD,
 				GTDFileName = data.GTDFileName,

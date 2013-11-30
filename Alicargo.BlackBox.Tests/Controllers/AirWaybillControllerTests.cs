@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Data.Linq;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Controllers;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
@@ -51,8 +53,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _fixture
 				.Build<AwbAdminModel>()
 				.With(x => x.BrokerId, entity.BrokerId)
-				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
-				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
+				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
 				.Create();
 
 			_controller.Edit(entity.Id, model);
@@ -68,8 +70,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 					"select * " +
 					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
-				actual.DateOfDepartureLocalString = actualData.DateOfDeparture.ToLocalShortDateString();
-				actual.DateOfArrivalLocalString = actualData.DateOfArrival.ToLocalShortDateString();
+				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, CultureInfo.CurrentCulture);
+				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, CultureInfo.CurrentCulture);
 
 				model.ShouldBeEquivalentTo(actual);
 			}
@@ -87,8 +89,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				.Build<AwbAdminModel>()
 				.Without(x => x.GTD)
 				.With(x => x.BrokerId, broker.Id)
-				.With(x => x.DateOfArrivalLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
-				.With(x => x.DateOfDepartureLocalString, DateTimeOffset.UtcNow.ToLocalShortDateString())
+				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
 				.Create();
 
 			_controller.Create(applicationData.Id, model);
@@ -106,8 +108,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 					"select * " +
 					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
-				actual.DateOfDepartureLocalString = actualData.DateOfDeparture.ToLocalShortDateString();
-				actual.DateOfArrivalLocalString = actualData.DateOfArrival.ToLocalShortDateString();
+				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, CultureInfo.CurrentCulture);
+				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, CultureInfo.CurrentCulture);
 
 				model.ShouldBeEquivalentTo(actual);
 			}
