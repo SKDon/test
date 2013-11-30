@@ -14,7 +14,6 @@ using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Services;
 using Alicargo.Services.Email;
-using Alicargo.Services.State;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
@@ -136,21 +135,21 @@ namespace Alicargo.App_Start
 
 		private static IMessageFactory GetMessageFactory(IDbConnection connection, Serializer serializer)
 		{
-			throw new NotImplementedException();
 			var unitOfWork = new UnitOfWork(connection);
 			var users = new UserRepository(unitOfWork, new PasswordConverter());
-			var recipients = new Recipients(users);
-			var clientRepository = new ClientRepository(unitOfWork);
 			var executor = new SqlProcedureExecutor(connection.ConnectionString);
 			var states = new StateRepository(executor);
-			var stateConfig = new StateConfig();
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(unitOfWork);
+			var filesFasade = new FilesFasade(serializer, awbs, files);
+			var textBulder = new TextBulder(serializer, states);
+			var stateSettings = new StateSettingsRepository(executor);
+			var templates = new EmailTemplateRepository(executor);
+			var recipientsFacade = new RecipientsFacade(awbs, serializer, stateSettings, templates, users );
+			var templatesFacade = new TemplatesFacade(serializer, templates);
 
-			//return new MessageFactory(
-			//	states, serializer, files, recipients, stateConfig,
-			//	applications, awbs, clientRepository, localization, DefaultFrom);
+			return new MessageFactory(DefaultFrom,filesFasade,textBulder, recipientsFacade, templatesFacade, applications);
 		}
 	}
 }

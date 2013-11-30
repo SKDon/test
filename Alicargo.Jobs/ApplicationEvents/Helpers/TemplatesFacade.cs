@@ -9,7 +9,7 @@ using Alicargo.Jobs.ApplicationEvents.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	internal sealed class TemplatesFacade : ITemplatesFacade
+	public sealed class TemplatesFacade : ITemplatesFacade
 	{
 		private readonly ISerializer _serializer;
 		private readonly IEmailTemplateRepository _templates;

@@ -10,7 +10,7 @@ using Alicargo.Jobs.ApplicationEvents.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	internal sealed class RecipientsFacade : IRecipientsFacade
+	public sealed class RecipientsFacade : IRecipientsFacade
 	{
 		private readonly IAwbRepository _awbs;
 		private readonly ISerializer _serializer;
