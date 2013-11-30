@@ -146,20 +146,16 @@
 	height: 300px;
 }
 
-.state-edit-checkbox {
-	margin-top: 30px;
+.state-edit-checkbox label {
+	display: inline-block;
+	margin-right: 5px;
 }
 
-	.state-edit-checkbox label {
-		display: inline-block;
-		margin-right: 5px;
-	}
-
-	.state-edit-checkbox input.check-box {
-		display: inline-block;
-		width: auto;
-		margin-bottom: 5px;
-	}
+.state-edit-checkbox input.check-box {
+	display: inline-block;
+	width: auto;
+	margin-bottom: 5px;
+}
 
 .template-edit-settings table {
 	margin-bottom: 20px;
@@ -181,7 +177,7 @@
 	margin: 0 10px 0 0;
 }
 
-.template-edit-settings input {
+.template-edit-settings input[type="checkbox"] {
 	display: inline-block;
 	width: auto;
 	margin: 0;

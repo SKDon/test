@@ -1570,6 +1570,7 @@
     <Content Include="Views\EmailTemplate\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Edit.cshtml" />
     <Content Include="Views\EmailTemplate\EditorTemplates\ApplicationEventTemplateModel.cshtml" />
+    <Content Include="Views\EmailTemplate\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

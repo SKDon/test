@@ -64,6 +64,7 @@ namespace Alicargo.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Help = "Help";
             public readonly string List = "List";
             public readonly string Edit = "Edit";
         }
@@ -72,6 +73,7 @@ namespace Alicargo.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Help = "Help";
             public const string List = "List";
             public const string Edit = "Edit";
         }
@@ -98,9 +100,11 @@ namespace Alicargo.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Edit = "Edit";
+                public readonly string Help = "Help";
                 public readonly string Index = "Index";
             }
             public readonly string Edit = "~/Views/EmailTemplate/Edit.cshtml";
+            public readonly string Help = "~/Views/EmailTemplate/Help.cshtml";
             public readonly string Index = "~/Views/EmailTemplate/Index.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
@@ -123,6 +127,15 @@ namespace Alicargo.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void HelpOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        public override System.Web.Mvc.ViewResult Help()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Help);
+            HelpOverride(callInfo);
             return callInfo;
         }
 

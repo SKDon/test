@@ -5,12 +5,17 @@
 
 @Html.HiddenFor(x => x.EventType)
 <div class="row">
-	<div class="span12 template-edit-settings">
+	<div class="span3">
+		<div class="state-edit-checkbox">
+			@Html.EditorWithLabelFor(x => x.EnableEmailSend)
+		</div>
+	</div>
+	<div class="span8 template-edit-settings">
 		<p>
 			<b>
 				@Pages.StateSettings_Recipients:
 			</b>
-			
+
 			@Html.CheckBoxFor(x => x.Settings.Admin)
 			@Html.LabelFor(x => x.Settings.Admin, Enums.Admin)
 			@Html.CheckBoxFor(x => x.Settings.Sender)
@@ -29,11 +34,6 @@
 	<div class="span4">
 		@Html.LabelFor(x => x.Language)
 		@Html.DropDownListFor(x => x.Language, (IDictionary<string, string>)ViewBag.Languages)
-	</div>
-	<div class="span4">
-		<div class="state-edit-checkbox">
-			@Html.EditorWithLabelFor(x => x.EnableEmailSend)
-		</div>
 	</div>
 </div>
 <div class="row">

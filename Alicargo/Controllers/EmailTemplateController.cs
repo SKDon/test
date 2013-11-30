@@ -34,6 +34,13 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
+		[HttpGet]
+		[Access(RoleType.Admin)]
+		public virtual ViewResult Help()
+		{
+			return View();
+		}
+
 		[HttpPost, Access(RoleType.Admin),
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List()
