@@ -9,7 +9,6 @@ using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
@@ -20,18 +19,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private static readonly PropertyInfo[] Properties =
 			typeof(TextLocalizedData).GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
 
-		private readonly ILog _log;
 		private readonly ISerializer _serializer;
 		private readonly IStateRepository _states;
 
-		public TextBulder(
-			ISerializer serializer,
-			IStateRepository states,
-			ILog log)
+		public TextBulder(ISerializer serializer, IStateRepository states)
 		{
 			_serializer = serializer;
 			_states = states;
-			_log = log;
 		}
 
 		public string GetText(string template, string language, ApplicationEventType type, ApplicationDetailsData application, byte[] bytes)
@@ -86,7 +80,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				case ApplicationEventType.SetDateOfCargoReceipt:
 					OnSetDateOfCargoReceipt(bytes, culture, localizedData);
-					break;					
+					break;
 
 				default:
 					throw new ArgumentOutOfRangeException("type");

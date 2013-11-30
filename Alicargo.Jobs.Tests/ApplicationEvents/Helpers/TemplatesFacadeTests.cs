@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 {
 	[TestClass]
-	public class TemplateFacadeTests
+	public class TemplatesFacadeTests
 	{
 		private MockContainer _container;
 		private TemplatesFacade _facade;

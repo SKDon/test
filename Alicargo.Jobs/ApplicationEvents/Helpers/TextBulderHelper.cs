@@ -20,11 +20,16 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			try
 			{
-				//\[([\w\s\{\}])+\]
-				var match = Regex.Match(template, @"\{(" + paremeterName + @")(\s*\[(\p{C}+)\])\}", RegexOptions.IgnoreCase, Timeout);
+				var pattern = @"\{" + paremeterName + @"\s*(\[([^\]].+?)\])?\}";
+				var match = Regex.Match(template, pattern, RegexOptions.IgnoreCase | RegexOptions.Singleline, Timeout);
+				if (!match.Success)
+				{
+					return false;
+				}
+
 				text = match.Value;
 
-				if (match.Groups.Count > 2)
+				if (match.Groups.Count == 3 && match.Groups[2].Success)
 				{
 					format = match.Groups[2].Value;
 				}

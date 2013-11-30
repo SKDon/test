@@ -40,8 +40,8 @@ namespace Alicargo.Jobs.ApplicationEvents
 				{
 					var files = _serializer.Serialize(message.Files);
 
-					_emails.Add(_shard.ZeroBasedIndex, message.From, message.To, message.CopyTo, message.Subject, message.Body,
-						message.IsBodyHtml, files);
+					_emails.Add(_shard.ZeroBasedIndex, message.From, message.To, message.CopyTo,
+						message.Subject, message.Body, message.IsBodyHtml, files);
 				}
 			}
 

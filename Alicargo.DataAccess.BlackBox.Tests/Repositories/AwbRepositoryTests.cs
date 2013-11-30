@@ -204,10 +204,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			return _fixture
 						   .Build<ApplicationData>()
-						   .Without(x => x.SenderId)
+						   .With(x => x.SenderId, TestConstants.TestSenderId)
 						   .With(x => x.ClientId, clientId)
 						   .With(x => x.AirWaybillId, null)
-						   .With(x => x.CountryId, 0)
+						   .With(x => x.CountryId, TestConstants.TestCountryId)
 						   .With(x => x.StateId, TestConstants.DefaultStateId)
 						   .With(x => x.TransitId, 1)
 						   .With(x => x.CurrencyId, (int)CurrencyType.Dollar)
