@@ -115,7 +115,7 @@
     <Build Include="Tables\StateEmailTemplate.sql" />
     <Build Include="Tables\EmailTemplateLocalization.sql" />
     <Build Include="Tables\StateEmailRecipient.sql" />
-    <Build Include="Stored procedures\State_GetList.sql" />
+    <Build Include="Stored procedures\State_GetOrderedList.sql" />
     <Build Include="Stored procedures\State_Update.sql" />
     <Build Include="Stored procedures\StateLocalization_Get.sql" />
     <Build Include="Stored procedures\State_GetStateAvailabilities.sql" />

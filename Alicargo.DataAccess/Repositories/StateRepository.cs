@@ -43,7 +43,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public StateListItem[] All()
 		{
-			return _executor.Array<StateListItem>("[dbo].[State_GetList]"); // todo: test for order by position
+			return _executor.Array<StateListItem>("[dbo].[State_GetOrderedList]");
 		}
 
 		public void Update(long id, string twoLetterISOLanguageName, StateData data)
@@ -77,7 +77,7 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			var idsTable = TableParameters.GeIdsTable("Ids", ids.Distinct().ToArray());
 
-			var list = _executor.Array<StateListItem>("[dbo].[State_GetList]", new TableParameters(idsTable));
+			var list = _executor.Array<StateListItem>("[dbo].[State_GetOrderedList]", new TableParameters(idsTable));
 
 			var table = new DataTable("Localizations");
 			table.Columns.Add("Value");

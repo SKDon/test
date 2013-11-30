@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[State_GetList]
+﻿CREATE PROCEDURE [dbo].[State_GetOrderedList]
 	@Ids [dbo].[IdsTable] READONLY
 AS
 BEGIN
