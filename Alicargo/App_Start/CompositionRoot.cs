@@ -30,7 +30,6 @@ namespace Alicargo.App_Start
 				.To<DbMailSender>()
 				.InSingletonScope()
 				.WithConstructorArgument("partitionId", CompositionJobsHelper.PartitionIdForOtherMails);
-			kernel.Bind<ILocalizationService>().To<LocalizationService>().InRequestScope();
 
 			var binded = CompositionRootHelper.BindDecorators(kernel, CompositionRootHelper.Decorators);
 

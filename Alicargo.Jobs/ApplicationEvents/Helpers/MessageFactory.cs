@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
@@ -8,6 +9,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
+using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.Entities;
 
@@ -19,7 +21,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
 		private readonly IClientRepository _clients;
-		private readonly ILocalizationService _localization;
 		private readonly string _defaultFrom;
 		private readonly IRecipients _recipients;
 		private readonly IStateConfig _stateConfig;
@@ -36,7 +37,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			IApplicationRepository applications,
 			IAwbRepository awbs,
 			IClientRepository clients,
-			ILocalizationService localization,
 			string defaultFrom)
 		{
 			_states = states;
@@ -47,7 +47,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_applications = applications;
 			_awbs = awbs;
 			_clients = clients;
-			_localization = localization;
 			_defaultFrom = defaultFrom;
 		}
 
@@ -210,7 +209,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			var language = _clients.GetLanguage(application.ClientId);
 
-			var body = string.Format(Mail.Application_SetDateOfCargoReceipt, _localization.GetDate(dateOfCargoReceipt, language));
+			var body = string.Format(Mail.Application_SetDateOfCargoReceipt, LocalizationHelper.GetDate(dateOfCargoReceipt, CultureInfo.GetCultureInfo(language)));
 
 			var client = _clients.Get(application.ClientId);
 
@@ -247,10 +246,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		public string ApplicationSetState(ApplicationDetailsData data, string culture)
 		{
 			var stateData = _states.Get(culture, data.StateId).Values.First();
+			var cultureInfo = CultureInfo.GetCultureInfo(culture);
 
 			return string.Format(Mail.Application_SetState,
 								 ApplicationHelper.GetDisplayNumber(data.Id, data.Count),
-								 _localization.GetDate(data.DateOfCargoReceipt, culture),
+								 LocalizationHelper.GetDate(data.DateOfCargoReceipt, cultureInfo),
 								 data.TransitCarrierName,
 								 data.FactoryName,
 								 data.FactoryEmail,
@@ -258,29 +258,29 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 								 data.FactoryContact,
 								 ApplicationHelper.GetDaysInWork(data.CreationTimestamp),
 								 data.Invoice,
-								 _localization.GetDate(data.CreationTimestamp, culture),
-								 _localization.GetDate(data.StateChangeTimestamp, culture),
+								 LocalizationHelper.GetDate(data.CreationTimestamp, cultureInfo),
+								 LocalizationHelper.GetDate(data.StateChangeTimestamp, cultureInfo),
 								 data.MarkName,
 								 data.Count,
 								 data.Volume,
 								 data.Weight,
 								 data.Characteristic,
-								 ApplicationHelper.GetValueString(data.Value, (CurrencyType)data.CurrencyId, culture),
+								 LocalizationHelper.GetValueString(data.Value, (CurrencyType)data.CurrencyId, cultureInfo),
 								 data.AddressLoad,
 								 data.CountryName.Where(x => x.Key == culture).Select(x => x.Value).First(),
 								 data.WarehouseWorkingTime,
 								 data.TermsOfDelivery,
-								 _localization.GetMethodOfDelivery((MethodOfDelivery)data.MethodOfDeliveryId, culture),
+								 LocalizationHelper.GetMethodOfDelivery((MethodOfDelivery)data.MethodOfDeliveryId, cultureInfo),
 								 data.TransitCity,
 								 data.TransitAddress,
 								 data.TransitRecipientName,
 								 data.TransitPhone,
 								 data.TransitWarehouseWorkingTime,
-								 _localization.GetMethodOfTransit((MethodOfTransit)data.TransitMethodOfTransitId, culture),
-								 _localization.GetDeliveryType((DeliveryType)data.TransitDeliveryTypeId, culture),
+								 LocalizationHelper.GetMethodOfTransit((MethodOfTransit)data.TransitMethodOfTransitId, cultureInfo),
+								 LocalizationHelper.GetDeliveryType((DeliveryType)data.TransitDeliveryTypeId, cultureInfo),
 								 data.AirWaybill,
-								 _localization.GetDate(data.AirWaybillDateOfDeparture, culture),
-								 _localization.GetDate(data.AirWaybillDateOfArrival, culture),
+								 LocalizationHelper.GetDate(data.AirWaybillDateOfDeparture, cultureInfo),
+								 LocalizationHelper.GetDate(data.AirWaybillDateOfArrival, cultureInfo),
 								 data.AirWaybillGTD,
 								 data.TransitReference,
 								 stateData.LocalizedName);
@@ -372,9 +372,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				})
 				.Select(recipient =>
 				{
+					string culture = recipient.Culture;
 					var body = string.Format(Mail.Application_Add,
 						displayNumber, client.Nic, data.FactoryName, data.MarkName,
-						_localization.GetDate(data.CreationTimestamp, recipient.Culture));
+						LocalizationHelper.GetDate(data.CreationTimestamp, CultureInfo.GetCultureInfo(culture)));
 
 					return new EmailMessage(subject, body, _defaultFrom, recipient.Email);
 				});

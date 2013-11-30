@@ -2,6 +2,7 @@
 using System.Globalization;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
+using Alicargo.Core.Services;
 
 namespace Alicargo.Core.Helpers
 {
@@ -16,27 +17,15 @@ namespace Alicargo.Core.Helpers
 
 		public static int GetDaysInWork(DateTimeOffset dateTimeOffset)
 		{
-			unchecked // 3. todo: fix and test
-			{
-				return (DateTimeOffset.UtcNow - dateTimeOffset.ToUniversalTime()).Days;
-			}
+			return (DateTimeOffset.UtcNow - dateTimeOffset.ToUniversalTime()).Days;
 		}
 
 		public static string GetValueString(decimal value, int currencyId)
 		{
 			var currency = ((CurrencyType)currencyId);
 
-			return GetValueString(value, currency, CultureContext.Current.GetTwoLetterISOLanguageName());
-		}
-
-		public static string GetValueString(decimal value, CurrencyType currency, string culture)
-		{
-			if (value == 0)
-			{
-				return string.Empty;
-			}
-
-			return value.ToString("### ### ### ###", CultureInfo.GetCultureInfo(culture)) + CurrencyName.Names[currency];
+			string culture = CultureContext.Current.GetTwoLetterISOLanguageName();
+			return LocalizationHelper.GetValueString(value, currency, CultureInfo.GetCultureInfo(culture));
 		}
 	}
 }

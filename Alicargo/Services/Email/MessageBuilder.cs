@@ -1,6 +1,8 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System.Globalization;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
@@ -9,36 +11,10 @@ namespace Alicargo.Services.Email
 {
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
-		private readonly ILocalizationService _localizationService;
-
-		public MessageBuilder(ILocalizationService localizationService)
-		{
-			_localizationService = localizationService;
-		}
-
 		public string DefaultSubject
 		{
 			get { return Mail.Default_Subject; }
 		}
-
-		#region Application
-
-		public string ApplicationUpdate
-		{
-			get { return Mail.Application_Update; }
-		}
-
-		public string ApplicationDelete
-		{
-			get { return Mail.Application_Delete; }
-		}
-
-		public string GetApplicationSubject(string displayNumber)
-		{
-			return string.Format(Mail.Application_Subject, displayNumber);
-		}		
-
-		#endregion
 
 		public string ClientAdd(ClientModel model, AuthenticationModel authenticationModel)
 		{
@@ -51,18 +27,18 @@ namespace Alicargo.Services.Email
 		public string AwbCreate(AirWaybillData model, string culture, float totalWeight, int totalCount)
 		{
 			return string.Format(Mail.Awb_Create, model.DepartureAirport,
-								 _localizationService.GetDate(model.DateOfDeparture, culture),
+								 LocalizationHelper.GetDate(model.DateOfDeparture, CultureInfo.GetCultureInfo(culture)),
 								 model.ArrivalAirport,
-								 _localizationService.GetDate(model.DateOfArrival, culture),
+								 LocalizationHelper.GetDate(model.DateOfArrival, CultureInfo.GetCultureInfo(culture)),
 								 totalWeight, totalCount, model.Bill);
 		}
 
 		public string AwbSet(AirWaybillData model, string applicationNumber, string culture, float totalWeight, int totalCount)
 		{
 			return string.Format(Mail.Awb_Set, model.DepartureAirport,
-								 _localizationService.GetDate(model.DateOfDeparture, culture),
+								 LocalizationHelper.GetDate(model.DateOfDeparture, CultureInfo.GetCultureInfo(culture)),
 								 model.ArrivalAirport,
-								 _localizationService.GetDate(model.DateOfArrival, culture),
+								 LocalizationHelper.GetDate(model.DateOfArrival, CultureInfo.GetCultureInfo(culture)),
 								 totalWeight, totalCount, model.Bill, applicationNumber);
 		}
 

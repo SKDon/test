@@ -16,9 +16,5 @@ namespace Alicargo.Services.Abstract
 		string AwbGTDAdditionalFileAdded(AirWaybillData model);
 		string AwbGTDFileAdded(AirWaybillData model);
 		string AwbInvoiceFileAdded(AirWaybillData model);
-
-		string ApplicationUpdate { get; }
-		string ApplicationDelete { get; }
-        string GetApplicationSubject(string displayNumber);
 	}
 }

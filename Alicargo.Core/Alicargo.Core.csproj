@@ -105,7 +105,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Services\Abstract\ILocalizationService.cs" />
     <Compile Include="Services\Abstract\IStateConfig.cs" />
     <Compile Include="Services\Email\DbMailSender.cs" />
     <Compile Include="Services\ExtensionsHelper.cs" />
@@ -114,7 +113,7 @@
     <Compile Include="Services\Abstract\ILog.cs" />
     <Compile Include="Services\Abstract\IMailSender.cs" />
     <Compile Include="Services\Abstract\IRecipients.cs" />
-    <Compile Include="Services\LocalizationService.cs" />
+    <Compile Include="Helpers\LocalizationHelper.cs" />
     <Compile Include="Services\Email\MailSender.cs" />
     <Compile Include="Services\PasswordConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

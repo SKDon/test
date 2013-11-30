@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Core.Localization;
+using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Enums;
+using Alicargo.Core.Helpers;
+using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.Entities;
 
@@ -17,26 +15,25 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	public sealed class TextBulder : ITextBulder
 	{
-		private static readonly PropertyInfo[] Properties = typeof(TextTemplateData).GetProperties();
+		private static readonly PropertyInfo[] Properties = typeof(TextLocalizedData).GetProperties();
 
 		private readonly ISerializer _serializer;
+		private readonly ICountryRepository _countrys;
 		private readonly ILog _log;
-		private readonly ILocalizationService _localization;
 
 		public TextBulder(
 			ISerializer serializer,
-			ILog log,
-			ILocalizationService localization)
+			ICountryRepository countrys,
+			ILog log)
 		{
 			_serializer = serializer;
+			_countrys = countrys;
 			_log = log;
-			_localization = localization;
 		}
 
-		public string GetText(string template, string language, ApplicationEventType type, ApplicationData application,
-			byte[] bytes)
+		public string GetText(string template, string language, ApplicationEventType type, ApplicationData application, string countryName, byte[] bytes)
 		{
-			var data = GetTemplateData(type, application, language, bytes);
+			var data = GetTemplateData(type, application, countryName, language, bytes);
 
 			foreach (var property in Properties)
 			{
@@ -44,24 +41,39 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				string match;
 				string format;
-				if (FormatHelper.GetFormat(template, name, _log, out match, out format))
+				if (TextBulderHelper.GetMatch(template, name, _log, out match, out format))
 				{
 					var value = property.GetValue(data);
 
 					var culture = CultureInfo.GetCultureInfo(language);
 
-					var text = string.Format(culture, format, value);
+					var text = string.Format(culture, format ?? "{0}", value);
 
-					template = template.Replace(match, text);	
+					template = template.Replace(match, text);
 				}
 			}
 
 			return template;
 		}
 
-		private TextTemplateData GetTemplateData(ApplicationEventType type, ApplicationData application, string language, byte[] bytes)
+		private TextLocalizedData GetTemplateData(ApplicationEventType type, ApplicationData application, string countryName, string language, byte[] bytes)
 		{
-			var templateData = new TextTemplateData();
+			var culture = CultureInfo.GetCultureInfo(language);
+
+
+			var templateData = new TextLocalizedData
+			{
+				AddressLoad = application.AddressLoad,
+				FactoryName = application.FactoryName,
+				Id = application.Id.ToString(culture),
+				Count = application.Count.HasValue ? application.Count.Value.ToString(culture) : null,
+				MarkName = application.MarkName,
+				Invoice = application.Invoice,
+				CountryName = countryName,
+				CreationTimestamp = LocalizationHelper.GetDate(application.CreationTimestamp, CultureInfo.GetCultureInfo(language)),
+				Value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, CultureInfo.GetCultureInfo(language)),
+				Weight = application.Weight.HasValue ? application.Weight.Value.ToString(culture) : null
+			};
 
 			switch (type)
 			{
@@ -77,7 +89,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case ApplicationEventType.DeliveryBillFileUploaded:
 				case ApplicationEventType.Torg12FileUploaded:
 					var data = _serializer.Deserialize<ApplicationFileUploadedEventData>(bytes);
-					templateData.Count = data.Count;
+					templateData.Count = (data.Count ?? 0).ToString(culture);
 					templateData.FactoryName = data.FactoryName;
 					templateData.MarkName = data.MarkName;
 					templateData.Invoice = data.Invoice;

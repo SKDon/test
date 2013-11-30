@@ -135,21 +135,21 @@ namespace Alicargo.App_Start
 
 		private static MessageFactory GetMessageFactory(IDbConnection connection, Serializer serializer)
 		{
+			throw new NotImplementedException();
 			var unitOfWork = new UnitOfWork(connection);
 			var users = new UserRepository(unitOfWork, new PasswordConverter());
 			var recipients = new Recipients(users);
 			var clientRepository = new ClientRepository(unitOfWork);
 			var executor = new SqlProcedureExecutor(connection.ConnectionString);
 			var states = new StateRepository(executor);
-			var localization = new LocalizationService();
 			var stateConfig = new StateConfig();
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(unitOfWork);
 
-			return new MessageFactory(
-				states, serializer, files, recipients, stateConfig,
-				applications, awbs, clientRepository, localization, DefaultFrom);
+			//return new MessageFactory(
+			//	states, serializer, files, recipients, stateConfig,
+			//	applications, awbs, clientRepository, localization, DefaultFrom);
 		}
 	}
 }
