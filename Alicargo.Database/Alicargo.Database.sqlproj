@@ -101,7 +101,7 @@
     <Build Include="Stored procedures\User_Add.sql" />
     <Build Include="Types\IdsTable.sql" />
     <Build Include="Stored procedures\Sender_GetTariffs.sql" />
-    <PostDeploy Include="Scripts\InitialData.sql" />
+    <PostDeploy Include="Scripts\PostDeploy.sql" />
     <Build Include="Tables\EmailMessage.sql" />
     <Build Include="Tables\ApplicationEvent.sql" />
     <Build Include="Stored procedures\ApplicationEvent_GetNext.sql" />
@@ -135,6 +135,11 @@
     <Build Include="Tables\ApplicationEventEmailRecipient.sql" />
     <Build Include="Stored procedures\ApplicationEventEmailRecipient_Set.sql" />
     <Build Include="Stored procedures\ApplicationEventEmailRecipient_Get.sql" />
+    <None Include="Scripts\InitStates.sql" />
+    <None Include="Scripts\InitCountries.sql" />
+    <None Include="Scripts\InitUsers.sql" />
+    <None Include="Scripts\TestApplications.sql" />
+    <None Include="Scripts\InitEmailTemplates.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
