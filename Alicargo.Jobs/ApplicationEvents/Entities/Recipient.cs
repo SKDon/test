@@ -1,6 +1,6 @@
 ﻿using Alicargo.Contracts.Enums;
 
-namespace Alicargo.Jobs.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.ApplicationEvents.Entities
 {
 	public sealed class Recipient
 	{

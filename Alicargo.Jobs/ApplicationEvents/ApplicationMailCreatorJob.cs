@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs.ApplicationEvents

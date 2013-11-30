@@ -8,6 +8,7 @@ using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
+using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;

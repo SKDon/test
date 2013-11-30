@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Jobs.Entities
+namespace Alicargo.Jobs.ApplicationEvents.Entities
 {
 	public sealed class ApplicationSetStateEventData
 	{

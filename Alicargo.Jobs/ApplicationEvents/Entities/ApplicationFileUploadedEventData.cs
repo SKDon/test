@@ -1,6 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 
-namespace Alicargo.Jobs.Entities
+namespace Alicargo.Jobs.ApplicationEvents.Entities
 {
 	public sealed class ApplicationFileUploadedEventData
 	{

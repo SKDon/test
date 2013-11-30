@@ -1,7 +1,8 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.ApplicationEvents.Abstract
 {
 	public interface IRecipientsFacade
 	{

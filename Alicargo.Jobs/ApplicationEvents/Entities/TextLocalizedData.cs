@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Jobs.ApplicationEvents.Helpers
+﻿namespace Alicargo.Jobs.ApplicationEvents.Entities
 {
 	internal sealed class TextLocalizedData
 	{
