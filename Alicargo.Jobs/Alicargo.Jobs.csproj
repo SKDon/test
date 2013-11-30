@@ -60,10 +60,15 @@
     <Compile Include="ApplicationEvents\Helpers\IMessageFactory.cs" />
     <Compile Include="ApplicationEvents\Helpers\IRecipientsFacade.cs" />
     <Compile Include="ApplicationEvents\Helpers\ITemplatesFacade.cs" />
+    <Compile Include="ApplicationEvents\Helpers\ITextBulder.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageFactory.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageFactoryEx.cs" />
+    <Compile Include="ApplicationEvents\Helpers\Recipient.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
+    <Compile Include="ApplicationEvents\Helpers\FormatHelper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TemplatesFacade.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TextBulder.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TextTemplateData.cs" />
     <Compile Include="Calculation\CalculationJobHelper.cs" />
     <Compile Include="Calculation\CalculationMailBuilder.cs" />
     <Compile Include="Calculation\CalculationWatcherJob.cs" />

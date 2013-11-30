@@ -351,6 +351,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			return files.ToArray();
 		}
+
 		private IEnumerable<EmailMessage> GetOnCreated(long applicationId, byte[] bytes)
 		{
 			var data = _serializer.Deserialize<ApplicationCreatedEventData>(bytes);
@@ -378,6 +379,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 					return new EmailMessage(subject, body, _defaultFrom, recipient.Email);
 				});
 		}
+
 		private static string GetApplicationSubject(string displayNumber)
 		{
 			return string.Format(Mail.Application_Subject, displayNumber);

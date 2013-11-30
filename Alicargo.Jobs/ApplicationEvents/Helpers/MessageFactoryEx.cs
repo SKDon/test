@@ -9,21 +9,24 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	public sealed class MessageFactoryEx : IMessageFactory
 	{
+		private readonly IApplicationRepository _applications;
 		private readonly string _defaultFrom;
 		private readonly IFilesFasade _files;
 		private readonly IRecipientsFacade _recipients;
-		private readonly IApplicationRepository _applications;
 		private readonly ITemplatesFacade _templates;
+		private readonly ITextBulder _textBulder;
 
 		public MessageFactoryEx(
 			string defaultFrom,
 			IFilesFasade files,
+			ITextBulder textBulder,
 			IRecipientsFacade recipients,
-			ITemplatesFacade templates, 
+			ITemplatesFacade templates,
 			IApplicationRepository applications)
 		{
 			_defaultFrom = defaultFrom;
 			_files = files;
+			_textBulder = textBulder;
 			_recipients = recipients;
 			_templates = templates;
 			_applications = applications;
@@ -51,11 +54,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			var files = _files.GetFiles(applicationId, application.AirWaybillId, type, data);
 
-			return GetEmailMessages(applicationId, data, recipients, templateId.Value, files).ToArray();
+			return GetEmailMessages(templateId.Value, recipients, application, data, type, files).ToArray();
 		}
 
-		private IEnumerable<EmailMessage> GetEmailMessages(long applicationId, byte[] data,
-			IEnumerable<RecipientData> recipients, long templateId, FileHolder[] files)
+		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, IEnumerable<Recipient> recipients,
+			ApplicationData application, byte[] data, ApplicationEventType type, FileHolder[] files)
 		{
 			foreach (var recipient in recipients)
 			{
@@ -66,27 +69,26 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 					continue;
 				}
 
-				yield return GetEmailMessage(localization, applicationId, data, recipient.Email, files);
+				if (type == ApplicationEventType.SetState && recipient.Role != RoleType.Client)
+				{
+					files = null;
+				}
+
+				yield return GetEmailMessage(recipient.Email, localization, application, data, type, files);
 			}
 		}
 
-		private EmailMessage GetEmailMessage(EmailTemplateLocalizationData localization, long applicationId, byte[] data,
-			string email, FileHolder[] files)
+		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localization,
+			ApplicationData application, byte[] data, ApplicationEventType type, FileHolder[] files)
 		{
-			var subject = ProcessText(localization.Subject, null);
-			var body = ProcessText(localization.Body, null);
+			var subject = _textBulder.GetText(localization.Subject, type, application, data);
+			var body = _textBulder.GetText(localization.Body, type, application, data);
 
 			return new EmailMessage(subject, body, _defaultFrom, email)
 			{
 				IsBodyHtml = localization.IsBodyHtml,
 				Files = files
 			};
-		}
-
-		private string ProcessText(string text, ApplicationData data)
-		{
-			// todo
-			return text;
 		}
 	}
 }

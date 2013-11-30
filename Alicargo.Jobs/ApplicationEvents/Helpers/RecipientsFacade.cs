@@ -32,7 +32,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_users = users;
 		}
 
-		public RecipientData[] GetRecipients(ApplicationData application, ApplicationEventType type, byte[] data)
+		public Recipient[] GetRecipients(ApplicationData application, ApplicationEventType type, byte[] data)
 		{
 			var roles = GetRoles(type, data);
 
@@ -61,7 +61,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return roles;
 		}
 
-		private IEnumerable<RecipientData> GetRecipients(ApplicationData application, IEnumerable<RoleType> roles)
+		private IEnumerable<Recipient> GetRecipients(ApplicationData application, IEnumerable<RoleType> roles)
 		{
 			foreach (var role in roles)
 			{
@@ -76,7 +76,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 					case RoleType.Admin:
 						foreach (var user in users)
 						{
-							yield return GetRecipientData(user);
+							yield return GetRecipientData(user, role);
 						}
 						break;
 
@@ -85,7 +85,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						{
 							var sender = users.Single(x => x.EntityId == application.SenderId.Value);
 
-							yield return GetRecipientData(sender);
+							yield return GetRecipientData(sender, role);
 						}
 						break;
 
@@ -95,7 +95,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 							var awb = _awbs.Get(application.AirWaybillId.Value).Single();
 							var broker = users.Single(x => x.EntityId == awb.BrokerId);
 
-							yield return GetRecipientData(broker);
+							yield return GetRecipientData(broker, role);
 						}
 						break;
 
@@ -103,14 +103,14 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						// todo: get forwarder from application data
 						foreach (var user in users)
 						{
-							yield return GetRecipientData(user);
+							yield return GetRecipientData(user, role);
 						}
 						break;
 
 					case RoleType.Client:
 						var client = users.Single(x => x.EntityId == application.ClientId);
 
-						yield return GetRecipientData(client);
+						yield return GetRecipientData(client, role);
 						break;
 
 					default:
@@ -119,12 +119,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			}
 		}
 
-		private static RecipientData GetRecipientData(UserData data)
+		private static Recipient GetRecipientData(UserData data, RoleType role)
 		{
-			return new RecipientData
+			return new Recipient
 			{
 				Culture = data.TwoLetterISOLanguageName,
-				Email = data.Email
+				Email = data.Email,
+				Role = role
 			};
 		}
 	}
