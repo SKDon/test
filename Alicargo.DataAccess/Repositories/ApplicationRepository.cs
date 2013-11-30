@@ -225,7 +225,8 @@ namespace Alicargo.DataAccess.Repositories
 						new KeyValuePair<string, string>(TwoLetterISOLanguageName.English, x.Country.Name_En),
 						new KeyValuePair<string, string>(TwoLetterISOLanguageName.Italian, x.Country.Name_En),
 						new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, x.Country.Name_Ru)
-					}
+					},
+					SenderId = x.SenderId
 				}).FirstOrDefault();
 		}
 

@@ -37,7 +37,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		public EmailMessage[] Get(long applicationId, ApplicationEventType type, byte[] data)
 		{
-			var application = _applications.Get(applicationId);
+			var application = _applications.GetDetails(applicationId);
 			if (application == null)
 			{
 				throw new InvalidOperationException("Can't find application by id " + applicationId);
@@ -61,7 +61,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, IEnumerable<Recipient> recipients,
-			ApplicationData application, byte[] data, ApplicationEventType type, FileHolder[] files)
+			ApplicationDetailsData application, byte[] data, ApplicationEventType type, FileHolder[] files)
 		{
 			foreach (var recipient in recipients)
 			{
@@ -82,11 +82,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,
-			ApplicationData application, byte[] data, ApplicationEventType type, FileHolder[] files)
+			ApplicationDetailsData application, byte[] data, ApplicationEventType type, FileHolder[] files)
 		{
-			var countryName = _countries.Get(application.CountryId).Single().Name[culture];
-			var subject = _textBulder.GetText(localization.Subject, culture, type, application, countryName, data);
-			var body = _textBulder.GetText(localization.Body, culture, type, application, countryName, data);
+			var subject = _textBulder.GetText(localization.Subject, culture, type, application, data);
+			var body = _textBulder.GetText(localization.Body, culture, type, application, data);
 
 			return new EmailMessage(subject, body, _defaultFrom, email)
 			{

@@ -133,7 +133,7 @@ namespace Alicargo.App_Start
 			job.Run();
 		}
 
-		private static MessageFactory GetMessageFactory(IDbConnection connection, Serializer serializer)
+		private static IMessageFactory GetMessageFactory(IDbConnection connection, Serializer serializer)
 		{
 			throw new NotImplementedException();
 			var unitOfWork = new UnitOfWork(connection);

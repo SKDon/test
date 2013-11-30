@@ -38,16 +38,7 @@ namespace Alicargo.Services.Application
 		{
 			var applicationId = _manager.Add(model, carrierModel, transitModel, clientId);
 
-			var bytes = _serializer.Serialize(new ApplicationCreatedEventData
-			{
-				ClientId = clientId,
-				FactoryName = model.FactoryName,
-				MarkName = model.MarkName,
-				Count = model.Count,
-				CreationTimestamp = DateTimeOffset.UtcNow
-			});
-
-			_events.Add(applicationId, ApplicationEventType.Created, bytes);
+			_events.Add(applicationId, ApplicationEventType.Created, null);
 
 			return applicationId;
 		}

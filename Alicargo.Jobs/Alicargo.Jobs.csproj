@@ -65,10 +65,10 @@
     <Compile Include="ApplicationEvents\Helpers\MessageFactoryEx.cs" />
     <Compile Include="ApplicationEvents\Helpers\Recipient.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
-    <Compile Include="ApplicationEvents\Helpers\FormatHelper.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TextBulderHelper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TemplatesFacade.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulder.cs" />
-    <Compile Include="ApplicationEvents\Helpers\TextTemplateData.cs" />
+    <Compile Include="ApplicationEvents\Helpers\TextLocalizedData.cs" />
     <Compile Include="Calculation\CalculationJobHelper.cs" />
     <Compile Include="Calculation\CalculationMailBuilder.cs" />
     <Compile Include="Calculation\CalculationWatcherJob.cs" />
@@ -80,9 +80,8 @@
     <Compile Include="Core\IJobRunner.cs" />
     <Compile Include="Core\JobRunnerHelper.cs" />
     <Compile Include="Core\ShardSettings.cs" />
-    <Compile Include="Entities\ApplicationSetStateEventData.cs" />
-    <Compile Include="Entities\ApplicationCreatedEventData.cs" />
     <Compile Include="Entities\ApplicationFileUploadedEventData.cs" />
+    <Compile Include="Entities\ApplicationSetStateEventData.cs" />
     <Compile Include="MailSenderJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">

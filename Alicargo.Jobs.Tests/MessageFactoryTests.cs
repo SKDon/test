@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.Jobs.Entities;
 using Alicargo.TestHelpers;
@@ -19,7 +20,7 @@ namespace Alicargo.Jobs.Tests
 		private long _cargoReceivedStateId;
 		private MockContainer _container;
 		private ApplicationDetailsData _details;
-		private MessageFactory _factory;
+		private IMessageFactory _factory;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -35,7 +36,7 @@ namespace Alicargo.Jobs.Tests
 			_details = _container.Create<ApplicationDetailsData>();
 			_container.ApplicationRepository.Setup(x => x.GetDetails(It.IsAny<long>())).Returns(_details);
 
-			_factory = _container.Create<MessageFactory>();
+			_factory = _container.Create<MessageFactoryEx>();
 		}
 
 		[TestMethod]

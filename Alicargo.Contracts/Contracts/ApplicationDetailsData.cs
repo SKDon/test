@@ -107,6 +107,8 @@ namespace Alicargo.Contracts.Contracts
 
 		public long ClientId { get; set; }
 
+		public long SenderId { get; set; }
+
 		#endregion
 	}
 }
