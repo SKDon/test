@@ -75,11 +75,11 @@ namespace Alicargo.Services.Calculation
 		{
 			var scotch = application.ScotchCostEdited;
 
-			if (!scotch.HasValue && application.SenderId.HasValue)
+			if (!scotch.HasValue)
 			{
-				var tariffs = _senders.GetTariffs(application.SenderId.Value);
+				var tariffs = _senders.GetTariffs(application.SenderId);
 
-				scotch = CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId.Value, application.Count);
+				scotch = CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count);
 			}
 
 			return scotch ?? 0;

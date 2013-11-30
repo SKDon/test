@@ -44,9 +44,9 @@
 
 	[ClientId]				BIGINT				NOT NULL,
 	[TransitId]				BIGINT				NOT NULL,
-	[CountryId]				BIGINT				NULL,
+	[CountryId]				BIGINT				NOT NULL,
 	[AirWaybillId]			BIGINT				NULL,
-	[SenderId]				BIGINT				NULL,
+	[SenderId]				BIGINT				NOT NULL,
 
 	[FactoryName]			NVARCHAR(320)		NOT NULL, 
 	[FactoryPhone]			NVARCHAR(MAX)		NULL, 

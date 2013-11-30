@@ -81,12 +81,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						break;
 
 					case RoleType.Sender:
-						if (application.SenderId.HasValue)
-						{
-							var sender = users.Single(x => x.EntityId == application.SenderId.Value);
-
-							yield return GetRecipientData(sender, role);
-						}
+						var sender = users.Single(x => x.EntityId == application.SenderId);
+						yield return GetRecipientData(sender, role);
 						break;
 
 					case RoleType.Broker:
@@ -109,7 +105,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 					case RoleType.Client:
 						var client = users.Single(x => x.EntityId == application.ClientId);
-
 						yield return GetRecipientData(client, role);
 						break;
 

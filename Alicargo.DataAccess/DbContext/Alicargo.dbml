@@ -242,9 +242,9 @@
       <Column Name="Certificate" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TransitId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="CountryId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CountryId" Type="System.Int64" DbType="BigInt" CanBeNull="false" />
       <Column Name="AirWaybillId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="SenderId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="SenderId" Type="System.Int64" DbType="BigInt" CanBeNull="false" />
       <Column Name="FactoryName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Column Name="FactoryPhone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="FactoryContact" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />

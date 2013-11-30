@@ -16,7 +16,7 @@ namespace Alicargo.Contracts.Contracts
 		public string TermsOfDelivery { get; set; }
 		public decimal Value { get; set; }
 		public int CurrencyId { get; set; }
-		public long? CountryId { get; set; }
+		public long CountryId { get; set; }
 		public DateTimeOffset StateChangeTimestamp { get; set; }
 		public DateTimeOffset? DateInStock { get; set; }
 		public DateTimeOffset? DateOfCargoReceipt { get; set; }
@@ -31,7 +31,7 @@ namespace Alicargo.Contracts.Contracts
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
-		public long? SenderId { get; set; }
+		public long SenderId { get; set; }
 		public int? ClassId { get; set; }
 
 		public string InvoiceFileName { get; set; }

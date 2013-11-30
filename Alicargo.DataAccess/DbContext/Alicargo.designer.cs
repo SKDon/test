@@ -4604,11 +4604,11 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _TransitId;
 		
-		private System.Nullable<long> _CountryId;
+		private long _CountryId;
 		
 		private System.Nullable<long> _AirWaybillId;
 		
-		private System.Nullable<long> _SenderId;
+		private long _SenderId;
 		
 		private string _FactoryName;
 		
@@ -4722,11 +4722,11 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnClientIdChanged();
     partial void OnTransitIdChanging(long value);
     partial void OnTransitIdChanged();
-    partial void OnCountryIdChanging(System.Nullable<long> value);
+    partial void OnCountryIdChanging(long value);
     partial void OnCountryIdChanged();
     partial void OnAirWaybillIdChanging(System.Nullable<long> value);
     partial void OnAirWaybillIdChanged();
-    partial void OnSenderIdChanging(System.Nullable<long> value);
+    partial void OnSenderIdChanging(long value);
     partial void OnSenderIdChanged();
     partial void OnFactoryNameChanging(string value);
     partial void OnFactoryNameChanged();
@@ -5462,7 +5462,7 @@ namespace Alicargo.DataAccess.DbContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountryId", DbType="BigInt")]
-		public System.Nullable<long> CountryId
+		public long CountryId
 		{
 			get
 			{
@@ -5510,7 +5510,7 @@ namespace Alicargo.DataAccess.DbContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderId", DbType="BigInt")]
-		public System.Nullable<long> SenderId
+		public long SenderId
 		{
 			get
 			{
@@ -5908,7 +5908,7 @@ namespace Alicargo.DataAccess.DbContext
 					}
 					else
 					{
-						this._CountryId = default(Nullable<long>);
+						this._CountryId = default(long);
 					}
 					this.SendPropertyChanged("Country");
 				}
@@ -5942,7 +5942,7 @@ namespace Alicargo.DataAccess.DbContext
 					}
 					else
 					{
-						this._SenderId = default(Nullable<long>);
+						this._SenderId = default(long);
 					}
 					this.SendPropertyChanged("Sender");
 				}

@@ -50,7 +50,7 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applications.GetByAirWaybill(awbs.Select(x => x.Key).ToArray()).ToArray();
 
-			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).Where(x => x > 0).ToArray());
+			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId).ToArray());
 
 			var items = GetItems(applications, tariffs);
 

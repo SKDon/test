@@ -207,7 +207,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 						   .Without(x => x.SenderId)
 						   .With(x => x.ClientId, clientId)
 						   .With(x => x.AirWaybillId, null)
-						   .With(x => x.CountryId, null)
+						   .With(x => x.CountryId, 0)
 						   .With(x => x.StateId, TestConstants.DefaultStateId)
 						   .With(x => x.TransitId, 1)
 						   .With(x => x.CurrencyId, (int)CurrencyType.Dollar)
