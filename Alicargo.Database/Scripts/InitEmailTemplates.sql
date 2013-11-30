@@ -119,122 +119,125 @@ Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Mo
 Sincerely,
 Alicar  srl', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (28, 10, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {StateName}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (28, 10, N'ru', N'Alicar : Заявка #{DisplayNumber}', N'
+Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCar Receipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
-{FactoryName} [Производитель: {0}]}
-{FactoryEmail}[Email фабрики: {0}]}
-{FactoryPhone}[Телефон фабрики: {0}]}
-{FactoryContact}[Контактное лицо фабрики: {0}]}
-{DaysInWork}[Дней в работе: {0}]}
-{Invoice}[Инвойс: {0}]}
-{CreationTimestamp}[Дата создания: {0}]}
-{StateChangeTimestamp}[Дата сметы статуса: {0}]}
-{MarkName}[Марка: {0}]}
-{Count}[Количество мест (коробки): {0}]}
-{Volume}[Объем (m3 ): {0}]}
-{Weight}[Вес (кг): {0}]}
-{Characteristic}[Характеристика товара: {0}]}
-{Value}[Стоимость: {0}]}
-{AddressLoad}[Адрес забора груза: {0}]}
-{CountryName}[Страна: {0}]}
-{WarehouseWorkingTime}[Время работы склада: {0}]}
-{TermsOfDelivery}[Условия поставки: {0}]}
-{MethodOfDelivery}[Способ доставки: {0}]}
-{TransitReference}[Транзитный референс: {0}]}
+{FactoryName [Производитель: {0}]}
+{FactoryEmail [Email фабрики: {0}]}
+{FactoryPhone [Телефон фабрики: {0}]}
+{FactoryContact [Контактное лицо фабрики: {0}]}
+{DaysInWork [Дней в работе: {0}]}
+{Invoice [Инвойс: {0}]}
+{CreationTimestamp [Дата создания: {0}]}
+{StateChangeTimestamp [Дата сметы статуса: {0}]}
+{MarkName [Марка: {0}]}
+{Count [Количество мест (коробки): {0}]}
+{Volume [Объем (m3 ): {0}]}
+{Weight [Вес (кг): {0}]}
+{Characteristic [Характеристика товара: {0}]}
+{Value [Стоимость: {0}]}
+{AddressLoad [Адрес забора груза: {0}]}
+{CountryName [Страна: {0}]}
+{WarehouseWorkingTime [Время работы склада: {0}]}
+{TermsOfDelivery [Условия поставки: {0}]}
+{MethodOfDelivery [Способ доставки: {0}]}
+{TransitReference [Транзитный референс: {0}]}
 
 Транзит по России:
-{TransitCity}[Город: {0}]}
-{TransitAddress}[Адрес: {0}]}
-{TransitRecipientName}[Получатель: {0}]}
-{TransitPhone}[Телефон: {0}]}
-{TransitWarehouseWorkingTime}[Время работы склада: {0}]}
-{MethodOfTransit}[Способ транзита: {0}]}
-{DeliveryType}[Тип доставки: {0}]}
+{TransitCity [Город: {0}]}
+{TransitAddress [Адрес: {0}]}
+{TransitRecipientName [Получатель: {0}]}
+{TransitPhone [Телефон: {0}]}
+{TransitWarehouseWorkingTime [Время работы склада: {0}]}
+{MethodOfTransit [Способ транзита: {0}]}
+{DeliveryType [Тип доставки: {0}]}
 
-{AirWaybill}[AWB: {0}]}
-{AirWaybillDateOfDeparture}[Дата вылета: {0}]}
-{AirWaybillDateOfArrival}[Дата прилета: {0}]}
-{AirWaybillGTD}[Номер ГТД: {0}]}', 0)
+{AirWaybill [AWB: {0}]}
+{AirWaybillDateOfDeparture [Дата вылета: {0}]}
+{AirWaybillDateOfArrival [Дата прилета: {0}]}
+{AirWaybillGTD [Номер ГТД: {0}]}', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (29, 10, N'en', N'Alicar : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (29, 10, N'en', N'Alicar : Order#{DisplayNumber}', N'
+Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCar Receipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
-{FactoryName} [Производитель: {0}]}
-{FactoryEmail}[Email фабрики: {0}]}
-{FactoryPhone}[Телефон фабрики: {0}]}
-{FactoryContact}[Контактное лицо фабрики: {0}]}
-{DaysInWork}[Дней в работе: {0}]}
-{Invoice}[Инвойс: {0}]}
-{CreationTimestamp}[Дата создания: {0}]}
-{StateChangeTimestamp}[Дата сметы статуса: {0}]}
-{MarkName}[Марка: {0}]}
-{Count}[Количество мест (коробки): {0}]}
-{Volume}[Объем (m3 ): {0}]}
-{Weight}[Вес (кг): {0}]}
-{Characteristic}[Характеристика товара: {0}]}
-{Value}[Стоимость: {0}]}
-{AddressLoad}[Адрес забора груза: {0}]}
-{CountryName}[Страна: {0}]}
-{WarehouseWorkingTime}[Время работы склада: {0}]}
-{TermsOfDelivery}[Условия поставки: {0}]}
-{MethodOfDelivery}[Способ доставки: {0}]}
-{TransitReference}[Транзитный референс: {0}]}
+{FactoryName [Производитель: {0}]}
+{FactoryEmail [Email фабрики: {0}]}
+{FactoryPhone [Телефон фабрики: {0}]}
+{FactoryContact [Контактное лицо фабрики: {0}]}
+{DaysInWork [Дней в работе: {0}]}
+{Invoice [Инвойс: {0}]}
+{CreationTimestamp [Дата создания: {0}]}
+{StateChangeTimestamp [Дата сметы статуса: {0}]}
+{MarkName [Марка: {0}]}
+{Count [Количество мест (коробки): {0}]}
+{Volume [Объем (m3 ): {0}]}
+{Weight [Вес (кг): {0}]}
+{Characteristic [Характеристика товара: {0}]}
+{Value [Стоимость: {0}]}
+{AddressLoad [Адрес забора груза: {0}]}
+{CountryName [Страна: {0}]}
+{WarehouseWorkingTime [Время работы склада: {0}]}
+{TermsOfDelivery [Условия поставки: {0}]}
+{MethodOfDelivery [Способ доставки: {0}]}
+{TransitReference [Транзитный референс: {0}]}
 
 Транзит по России:
-{TransitCity}[Город: {0}]}
-{TransitAddress}[Адрес: {0}]}
-{TransitRecipientName}[Получатель: {0}]}
-{TransitPhone}[Телефон: {0}]}
-{TransitWarehouseWorkingTime}[Время работы склада: {0}]}
-{MethodOfTransit}[Способ транзита: {0}]}
-{DeliveryType}[Тип доставки: {0}]}
+{TransitCity [Город: {0}]}
+{TransitAddress [Адрес: {0}]}
+{TransitRecipientName [Получатель: {0}]}
+{TransitPhone [Телефон: {0}]}
+{TransitWarehouseWorkingTime [Время работы склада: {0}]}
+{MethodOfTransit [Способ транзита: {0}]}
+{DeliveryType [Тип доставки: {0}]}
 
-{AirWaybill}[AWB: {0}]}
-{AirWaybillDateOfDeparture}[Дата вылета: {0}]}
-{AirWaybillDateOfArrival}[Дата прилета: {0}]}
-{AirWaybillGTD}[Номер ГТД: {0}]}', 0)
+{AirWaybill [AWB: {0}]}
+{AirWaybillDateOfDeparture [Дата вылета: {0}]}
+{AirWaybillDateOfArrival [Дата прилета: {0}]}
+{AirWaybillGTD [Номер ГТД: {0}]}', 0)
  
-INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (30, 10, N'it', N'Alicar : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
+INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (30, 10, N'it', N'Alicar : Order#{DisplayNumber}', N'
+Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCar Receipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
-{FactoryName} [Производитель: {0}]}
-{FactoryEmail}[Email фабрики: {0}]}
-{FactoryPhone}[Телефон фабрики: {0}]}
-{FactoryContact}[Контактное лицо фабрики: {0}]}
-{DaysInWork}[Дней в работе: {0}]}
-{Invoice}[Инвойс: {0}]}
-{CreationTimestamp}[Дата создания: {0}]}
-{StateChangeTimestamp}[Дата сметы статуса: {0}]}
-{MarkName}[Марка: {0}]}
-{Count}[Количество мест (коробки): {0}]}
-{Volume}[Объем (m3 ): {0}]}
-{Weight}[Вес (кг): {0}]}
-{Characteristic}[Характеристика товара: {0}]}
-{Value}[Стоимость: {0}]}
-{AddressLoad}[Адрес забора груза: {0}]}
-{CountryName}[Страна: {0}]}
-{WarehouseWorkingTime}[Время работы склада: {0}]}
-{TermsOfDelivery}[Условия поставки: {0}]}
-{MethodOfDelivery}[Способ доставки: {0}]}
-{TransitReference}[Транзитный референс: {0}]}
+{FactoryName [Производитель: {0}]}
+{FactoryEmail [Email фабрики: {0}]}
+{FactoryPhone [Телефон фабрики: {0}]}
+{FactoryContact [Контактное лицо фабрики: {0}]}
+{DaysInWork [Дней в работе: {0}]}
+{Invoice [Инвойс: {0}]}
+{CreationTimestamp [Дата создания: {0}]}
+{StateChangeTimestamp [Дата сметы статуса: {0}]}
+{MarkName [Марка: {0}]}
+{Count [Количество мест (коробки): {0}]}
+{Volume [Объем (m3 ): {0}]}
+{Weight [Вес (кг): {0}]}
+{Characteristic [Характеристика товара: {0}]}
+{Value [Стоимость: {0}]}
+{AddressLoad [Адрес забора груза: {0}]}
+{CountryName [Страна: {0}]}
+{WarehouseWorkingTime [Время работы склада: {0}]}
+{TermsOfDelivery [Условия поставки: {0}]}
+{MethodOfDelivery [Способ доставки: {0}]}
+{TransitReference [Транзитный референс: {0}]}
 
 Транзит по России:
-{TransitCity}[Город: {0}]}
-{TransitAddress}[Адрес: {0}]}
-{TransitRecipientName}[Получатель: {0}]}
-{TransitPhone}[Телефон: {0}]}
-{TransitWarehouseWorkingTime}[Время работы склада: {0}]}
-{MethodOfTransit}[Способ транзита: {0}]}
-{DeliveryType}[Тип доставки: {0}]}
+{TransitCity [Город: {0}]}
+{TransitAddress [Адрес: {0}]}
+{TransitRecipientName [Получатель: {0}]}
+{TransitPhone [Телефон: {0}]}
+{TransitWarehouseWorkingTime [Время работы склада: {0}]}
+{MethodOfTransit [Способ транзита: {0}]}
+{DeliveryType [Тип доставки: {0}]}
 
-{AirWaybill}[AWB: {0}]}
-{AirWaybillDateOfDeparture}[Дата вылета: {0}]}
-{AirWaybillDateOfArrival}[Дата прилета: {0}]}
-{AirWaybillGTD}[Номер ГТД: {0}]}', 0)
+{AirWaybill [AWB: {0}]}
+{AirWaybillDateOfDeparture [Дата вылета: {0}]}
+{AirWaybillDateOfArrival [Дата прилета: {0}]}
+{AirWaybillGTD [Номер ГТД: {0}]}', 0)
  
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (31, 11, N'ru', NULL, NULL, 0)
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (32, 12, N'ru', NULL, NULL, 0)
