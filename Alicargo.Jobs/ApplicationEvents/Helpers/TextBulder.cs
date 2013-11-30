@@ -31,7 +31,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		public string GetText(string template, string language, ApplicationEventType type, ApplicationDetailsData application, byte[] bytes)
 		{
 			var data = GetTextLocalizedData(type, application, language, bytes);
-
+			var culture = CultureInfo.GetCultureInfo(language);
 			var builder = new StringBuilder(template);
 
 			foreach (var property in Properties)
@@ -42,9 +42,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				string format;
 				while (TextBulderHelper.GetMatch(builder.ToString(), name, out match, out format))
 				{
-					var value = (string)property.GetValue(data);
-
-					var culture = CultureInfo.GetCultureInfo(language);
+					var value = (string)property.GetValue(data);					
 
 					var text = TextBulderHelper.GetText(culture, format, value);
 
@@ -100,6 +98,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			CultureInfo culture)
 		{
 			var state = _states.Get(language, application.StateId).Select(x => x.Value).FirstOrDefault();
+			var countryName = application.CountryName.First(x => x.Key == language).Value;
+			var value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, culture);
 
 			return new TextLocalizedData
 			{
@@ -109,9 +109,9 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				Count = application.Count.HasValue ? application.Count.Value.ToString(culture) : null,
 				MarkName = application.MarkName,
 				Invoice = application.Invoice,
-				CountryName = application.CountryName.First(x => x.Key == language).Value,
+				CountryName = countryName,
 				CreationTimestamp = LocalizationHelper.GetDate(application.CreationTimestamp, culture),
-				Value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, culture),
+				Value = value,
 				Weight = application.Weight.HasValue ? application.Weight.Value.ToString(culture) : null,
 				AirWaybill = application.AirWaybill,
 				AirWaybillDateOfArrival = LocalizationHelper.GetDate(application.AirWaybillDateOfArrival, culture),
