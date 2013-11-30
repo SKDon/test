@@ -159,7 +159,6 @@ namespace Alicargo.DataAccess.Repositories
 			return _context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
 		}
 
-		// todo: 2. test
 		public ApplicationData[] GetByAirWaybill(params long[] ids)
 		{
 			return _context.Applications
@@ -235,7 +234,6 @@ namespace Alicargo.DataAccess.Repositories
 			return _context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();
 		}		
 
-		// todo: 1. test
 		public IReadOnlyDictionary<long, long> GetCalculations(long[] appIds)
 		{
 			return _context.Calculations

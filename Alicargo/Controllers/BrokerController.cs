@@ -41,7 +41,7 @@ namespace Alicargo.Controllers
 			{
 				Id = selectedId.HasValue
 					? selectedId.Value
-					: all.First().Id, // todo: 3. test
+					: all.First().Id,
 				List = all.ToDictionary(x => x.Id, x => x.Name),
 				Name = name
 			};
@@ -90,7 +90,6 @@ namespace Alicargo.Controllers
 			ViewBag.AwbId = data.Id;
 		}
 
-		// todo: 1.5. bb test
 		[Access(RoleType.Broker), HttpPost]
 		public virtual ActionResult AWB(long id, AwbBrokerModel model)
 		{

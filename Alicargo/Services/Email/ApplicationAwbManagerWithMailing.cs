@@ -35,7 +35,6 @@ namespace Alicargo.Services.Email
 		{
 			_manager.SetAwb(applicationId, awbId);
 
-			// todo: 2. test
 			if (!awbId.HasValue) return;
 
 			var model = _awbPresenter.GetData(awbId.Value);

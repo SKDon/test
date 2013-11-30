@@ -12,7 +12,6 @@ using Resources;
 
 namespace Alicargo.Controllers
 {
-	// todo: 2. bb tests
 	public partial class ClientController : Controller
 	{
 		private readonly IClientManager _clientManager;

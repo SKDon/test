@@ -29,7 +29,7 @@ namespace Alicargo.Services.Application
 
         public void SetAwb(long applicationId, long? awbId)
         {
-            // todo: 2. test
+            // todo: bb test
             if (awbId.HasValue)
             {
                 var aggregate = _awbRepository.GetAggregate(awbId.Value).First();

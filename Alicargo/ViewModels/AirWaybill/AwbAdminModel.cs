@@ -29,7 +29,6 @@ namespace Alicargo.ViewModels.AirWaybill
 		[Required, DisplayNameLocalized(typeof(Entities), "Broker")]
 		public long BrokerId { get; set; }
 
-		// todo: 3. localization of cost fields
 		[DisplayNameLocalized(typeof(Entities), "FlightCost")]
 		public decimal? FlightCost { get; set; }
 

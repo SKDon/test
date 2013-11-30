@@ -64,8 +64,6 @@ namespace Alicargo.Services.Email
 		public void SetAdditionalCost(long awbId, decimal? additionalCost)
 		{
 			_manager.SetAdditionalCost(awbId, additionalCost);
-
-			// todo: 2. email
 		}
 
 		private void SendOnFileAdd(long id, AirWaybillData oldData)

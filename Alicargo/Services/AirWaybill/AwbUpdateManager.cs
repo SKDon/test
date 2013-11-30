@@ -32,7 +32,6 @@ namespace Alicargo.Services.AirWaybill
 
 			Map(model, data);
 
-			// todo: 3. use update file methods
 			_awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile, model.InvoiceFile,
 								  model.AWBFile);
 
@@ -53,7 +52,6 @@ namespace Alicargo.Services.AirWaybill
 
 			Map(model, data);
 
-			// todo: 3. use update file methods
 			_awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile,
 								  model.PackingFile, model.InvoiceFile, null);
 
@@ -66,7 +64,6 @@ namespace Alicargo.Services.AirWaybill
 
 			Map(model, data);
 
-			// todo: 3. use update file methods
 			_awbRepository.Update(data, null, null, model.PackingFile, null, model.AWBFile);
 
 			_unitOfWork.SaveChanges();

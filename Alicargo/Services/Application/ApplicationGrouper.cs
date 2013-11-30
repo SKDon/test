@@ -115,7 +115,6 @@ namespace Alicargo.Services.Application
 				}
 				else
 				{
-					// todo: 2. test
 					count = _countWithouAwb ?? 0;
 					weight = _weightWithouAwb ?? 0;
 				}

@@ -102,7 +102,6 @@ namespace Alicargo.DataAccess.Repositories
 			CopyTo(client, entity);
 		}
 
-		// todo: 2. test
 		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
 		{
 			return _context.Applications

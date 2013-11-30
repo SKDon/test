@@ -34,7 +34,7 @@ namespace Alicargo.MvcHelpers.Extensions
 			return new FileStreamResult(ms, contentType) { FileDownloadName = file.Name };
 		}		
 
-		// todo: 1. test for download files of an application
+		// todo: test for download files of an application
 		public static void ReadFile(this HttpRequestBase request, string id, Action<string, byte[]> action)
 		{
 			var file = request.Files[id + "Data"];

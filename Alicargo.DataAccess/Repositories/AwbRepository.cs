@@ -111,13 +111,11 @@ namespace Alicargo.DataAccess.Repositories
 			}).ToArray();
 		}
 
-		// todo: 2. bb-test
 		public float? GetTotalWeightWithouAwb()
 		{
 			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Weight);
 		}
 
-		// todo: 2. bb-test
 		public int? GetTotalCountWithouAwb()
 		{
 			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Count);
@@ -249,7 +247,6 @@ namespace Alicargo.DataAccess.Repositories
 			to.FlightCost = @from.FlightCost;
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 
-			// todo: 2. separate repository for files
 			FileDataHelper.SetFile(gtdFile, from.GTDFileName,
 								   bytes => to.GTDFileData = bytes, s => to.GTDFileName = s);
 

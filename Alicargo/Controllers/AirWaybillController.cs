@@ -90,7 +90,6 @@ namespace Alicargo.Controllers
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
 		{
-			// todo: 3. utility to get current broker
 			long? brokerId = null;
 			if (_identity.IsInRole(RoleType.Broker) && _identity.Id.HasValue)
 			{

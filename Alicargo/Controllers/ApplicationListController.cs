@@ -37,7 +37,6 @@ namespace Alicargo.Controllers
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip, Dictionary<string, string>[] group)
 		{
-			// todo: 3. use model binder for Order
 			var orders = OrderHelper.Get(group);
 
 			Debug.Assert(_identity.Id != null);

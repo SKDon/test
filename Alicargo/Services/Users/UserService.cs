@@ -43,7 +43,6 @@ namespace Alicargo.Services.Users
 			};
 		}
 
-		// todo: 2. tests
 		public void Update(UserModel model)
 		{
 			switch (model.RoleType)
@@ -68,7 +67,6 @@ namespace Alicargo.Services.Users
 			_unitOfWork.SaveChanges();
 		}
 
-		// todo: 2. tests
 		public void Add(UserModel model)
 		{
 			var twoLetterISOLanguageName = CultureContext.Current.GetTwoLetterISOLanguageName();

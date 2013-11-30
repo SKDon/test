@@ -56,13 +56,11 @@ namespace Alicargo.DataAccess.Helpers
 			return Order(applications, desc, isFirst, a => a.Client.Nic);
 		}
 
-		// todo: 3. test
 		private static IOrderedQueryable<Application> ById(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
 			return Order(applications, desc, isFirst, x => x.Id);
 		}
 
-		// todo: 3. test
 		private static IOrderedQueryable<Application> ByAirWaybillBill(IQueryable<Application> applications, bool desc,
 			bool isFirst)
 		{

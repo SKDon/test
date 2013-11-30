@@ -43,13 +43,11 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		// todo: 3. bb test
 		public void SetAirWaybill(long id, long? airWaybillId)
 		{
 			Update(id, application => application.AirWaybillId = airWaybillId);
 		}
 
-		// todo: 3. bb test
 		public void SetDateInStock(long id, DateTimeOffset dateTimeOffset)
 		{
 			Update(id, application => application.DateInStock = dateTimeOffset);
@@ -166,9 +164,7 @@ namespace Alicargo.DataAccess.Repositories
 			to.PickupCostEdited = @from.PickupCostEdited;
 			to.ScotchCostEdited = @from.ScotchCostEdited;
 			to.SenderRate = @from.SenderRate;
-			// to.Certificate = 
 
-			// todo: 3.0. separate repository for files
 			FileDataHelper.SetFile(invoiceFile, @from.InvoiceFileName,
 				bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
 

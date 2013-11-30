@@ -27,7 +27,7 @@ namespace Alicargo.Services
 
 		public CarrierSelectModel Get(long? transitId)
 		{
-            return transitId.HasValue // todo: 3. test
+            return transitId.HasValue
 				? new CarrierSelectModel
 				{
 					CarrierId = _transitRepository.Get(transitId.Value).First().CarrierId

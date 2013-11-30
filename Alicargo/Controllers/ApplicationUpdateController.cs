@@ -8,7 +8,6 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers
 {
-	// todo: 2. bb tests
 	public partial class ApplicationUpdateController : Controller
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
