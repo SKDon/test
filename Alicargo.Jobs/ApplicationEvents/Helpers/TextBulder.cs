@@ -42,10 +42,15 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				string format;
 				while (TextBulderHelper.GetMatch(builder.ToString(), name, out match, out format))
 				{
-					var value = (string)property.GetValue(data);					
+					var value = (string)property.GetValue(data);
 
 					var text = TextBulderHelper.GetText(culture, format, value);
 
+					if (string.IsNullOrEmpty(text))
+					{
+						builder.Replace(match + Environment.NewLine, string.Empty);	
+					}
+					
 					builder.Replace(match, text);
 				}
 			}

@@ -46,7 +46,7 @@ namespace Alicargo.Jobs
 						_messages.SetState(data.Id, EmailMessageState.Failed);
 					}
 
-					throw;
+					throw new JobException("Failed to send the message " + data.Id, e);
 				}
 
 				data = _messages.GetNext(EmailMessageState.New, _partitionId);

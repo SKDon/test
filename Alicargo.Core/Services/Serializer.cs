@@ -26,6 +26,20 @@ namespace Alicargo.Core.Services
 			}
 		}
 
+		//public string GetJson<T>(T data)
+		//{
+		//	if (Equals(data, default(T)))
+		//	{
+		//		return null;
+		//	}
+		//	var builder = new StringBuilder();
+		//	var writer = new StringWriter(builder);
+		//	_serializer.Serialize(writer, data, typeof(T));
+		//	writer.Flush();
+
+		//	return builder.ToString();
+		//}
+
 		public T Deserialize<T>(byte[] data)
 		{
 			if (data == null)

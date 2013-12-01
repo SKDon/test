@@ -78,6 +78,7 @@
     <Compile Include="Core\IJob.cs" />
     <Compile Include="Calculation\CalculationMailerJob.cs" />
     <Compile Include="Core\IJobRunner.cs" />
+    <Compile Include="Core\JobException.cs" />
     <Compile Include="Core\JobRunnerHelper.cs" />
     <Compile Include="Core\ShardSettings.cs" />
     <Compile Include="ApplicationEvents\Entities\ApplicationFileUploadedEventData.cs" />
