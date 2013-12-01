@@ -8,3 +8,4 @@ BEGIN
 	FROM [dbo].[ApplicationEventEmailRecipient]
 	WHERE [EventTypeId] = @EventTypeId
 END
+GO

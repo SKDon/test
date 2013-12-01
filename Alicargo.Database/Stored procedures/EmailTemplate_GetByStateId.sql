@@ -10,3 +10,4 @@ BEGIN
 	WHERE st.[StateId] = @StateId
 
 END
+GO

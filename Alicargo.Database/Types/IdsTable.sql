@@ -2,3 +2,4 @@
 (
 	[Id] BIGINT NOT NULL
 );
+GO

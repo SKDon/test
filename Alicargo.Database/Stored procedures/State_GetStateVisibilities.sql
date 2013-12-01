@@ -9,3 +9,4 @@ BEGIN
 	ORDER BY s.[RoleId], s.[StateId]
 
 END
+GO

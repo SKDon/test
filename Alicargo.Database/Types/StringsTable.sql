@@ -2,3 +2,4 @@
 (
 	[Value] NVARCHAR(MAX)
 );
+GO

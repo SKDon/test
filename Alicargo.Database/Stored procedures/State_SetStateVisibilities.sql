@@ -20,3 +20,4 @@ BEGIN
 	COMMIT
 
 END
+GO

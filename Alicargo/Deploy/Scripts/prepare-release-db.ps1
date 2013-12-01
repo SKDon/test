@@ -24,6 +24,6 @@ Sqlcmd -S $server -Q "EXEC [dbo].[sp_RestoreDatabase] '$mainDbPrefix`_$newVersio
 Sqlcmd -S $server -Q "EXEC [dbo].[sp_RestoreDatabase] '$filesDbPrefix`_$newVersion', '$filesDbPrefix`_$oldVersion', '$backupLocation$filesDbBackup', '$dataFolder'"
 Write-Host "DBs have been created..."
 
-Sqlcmd -S $server -i ".\Scripts\update.sql"
+Sqlcmd -S $server -i ".\Scripts\update.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 Sqlcmd -S $server -i ".\Scripts\setup-rights.sql" -v PoolName = "$poolName" MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 Write-Host "DBs have been updated..."
