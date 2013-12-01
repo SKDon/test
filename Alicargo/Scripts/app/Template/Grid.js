@@ -23,7 +23,7 @@
 			dataSource: dataSource,
 			pageable: false,
 			columns: [
-				{ field: "Name", title: $l.Pages_Name }, {
+				{ field: "Name", title: $l.Pages_Event }, {
 					command: [{
 						name: "custom-edit",
 						text: "",

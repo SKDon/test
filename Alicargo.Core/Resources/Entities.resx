@@ -447,4 +447,7 @@
   <data name="Subject" xml:space="preserve">
     <value>Тема письма</value>
   </data>
+  <data name="UseApplicationEventTemplate" xml:space="preserve">
+    <value>Использовать шаблон события</value>
+  </data>
 </root>
