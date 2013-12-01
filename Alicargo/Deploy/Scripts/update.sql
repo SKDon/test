@@ -1,7 +1,133 @@
-﻿--USE [$(MainDbName)]
+﻿USE [$(MainDbName)]
 GO
 
-DROP INDEX [IX_ApplicationEvent_StateId]
+PRINT N'DROP OLD INDEXES AND CONSTRAINTS'
+GO
+
+DROP INDEX [IX_ApplicationEvent_StateId] ON [dbo].[ApplicationEvent];
+GO
+
+DROP INDEX [IX_AvailableState_RoleId] ON [dbo].[AvailableState];
+GO
+
+DROP INDEX [IX_AvailableState_StateId] ON [dbo].[AvailableState];
+GO
+
+DROP INDEX [IX_VisibleState_RoleId] ON [dbo].[VisibleState];
+GO
+
+DROP INDEX [IX_VisibleState_StateId] ON [dbo].[VisibleState];
+GO
+
+ALTER TABLE [dbo].[StateLocalization] DROP CONSTRAINT [DF__StateLoca__TwoLe__6B24EA82];
+GO
+
+ALTER TABLE [dbo].[AirWaybill] DROP CONSTRAINT [DF_AirWaybillCreationTimestamp];
+GO
+
+ALTER TABLE [dbo].[AirWaybill] DROP CONSTRAINT [DF__tmp_ms_xx__State__2A164134];
+GO
+
+ALTER TABLE [dbo].[Calculation] DROP CONSTRAINT [DF__Calculati__State__3493CFA7];
+GO
+
+ALTER TABLE [dbo].[Sender] DROP CONSTRAINT [DF__Sender__TariffOf__2DE6D218];
+GO
+
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [DF__User__TwoLetterI__339FAB6E];
+GO
+
+ALTER TABLE [dbo].[Application] DROP CONSTRAINT [FK_dbo.Application_dbo.Country_CountryId];
+GO
+
+ALTER TABLE [dbo].[Application] DROP CONSTRAINT [FK_dbo.Application_dbo.Sender_SenderId];
+GO
+
+ALTER TABLE [dbo].[AirWaybill] DROP CONSTRAINT [FK_dbo.AirWaybill_dbo.State_StateId];
+GO
+
+ALTER TABLE [dbo].[Application] DROP CONSTRAINT [FK_dbo.Application_dbo.State_StateId];
+GO
+
+ALTER TABLE [dbo].AvailableState DROP CONSTRAINT [FK_dbo.AvailableState_dbo.State_StateId];
+GO
+
+ALTER TABLE [dbo].AvailableState DROP CONSTRAINT [PK_dbo.AvailableState];
+GO
+
+ALTER TABLE [dbo].StateLocalization DROP CONSTRAINT [FK_dbo.StateLocalization_dbo.State_State_Id];
+GO
+
+ALTER TABLE [dbo].VisibleState DROP CONSTRAINT [FK_dbo.VisibleState_dbo.State_StateId];
+GO
+
+ALTER TABLE [dbo].VisibleState DROP CONSTRAINT [PK_dbo.VisibleState];
+GO
+
+
+PRINT N'ALTERING TABLES...'
+GO
+
+UPDATE [dbo].[Application] SET [CountryId] = 108 WHERE [CountryId] IS NULL
+GO
+
+ALTER TABLE [dbo].[Application] ALTER COLUMN [CountryId] BIGINT NOT NULL;
+GO
+
+UPDATE [dbo].[Application] SET [SenderId] = 1 WHERE [SenderId] IS NULL
+GO
+
+ALTER TABLE [dbo].[Application] ALTER COLUMN [SenderId] BIGINT NOT NULL;
+GO
+
+ALTER TABLE [dbo].[Country] ADD [Position] INT NULL;
+GO
+
+UPDATE [dbo].[Country] SET [Position] = [Id]
+UPDATE [dbo].[Country] SET [Position] = 108	WHERE [Id] = 1
+UPDATE [dbo].[Country] SET [Position] = 111	WHERE [Id] = 2
+UPDATE [dbo].[Country] SET [Position] = 75	WHERE [Id] = 3
+UPDATE [dbo].[Country] SET [Position] = 47	WHERE [Id] = 4
+UPDATE [dbo].[Country] SET [Position] = 238	WHERE [Id] = 5
+UPDATE [dbo].[Country] SET [Position] = 218	WHERE [Id] = 6
+UPDATE [dbo].[Country] SET [Position] = 81	WHERE [Id] = 7
+UPDATE [dbo].[Country] SET [Position] = 15	WHERE [Id] = 8
+UPDATE [dbo].[Country] SET [Position] = 119	WHERE [Id] = 10
+UPDATE [dbo].[Country] SET [Position] = 206	WHERE [Id] = 11
+UPDATE [dbo].[Country] SET [Position] = 9	WHERE [Id] = 15
+UPDATE [dbo].[Country] SET [Position] = 4	WHERE [Id] = 47
+UPDATE [dbo].[Country] SET [Position] = 3	WHERE [Id] = 75
+UPDATE [dbo].[Country] SET [Position] = 8	WHERE [Id] = 81
+UPDATE [dbo].[Country] SET [Position] = 1	WHERE [Id] = 108
+UPDATE [dbo].[Country] SET [Position] = 2	WHERE [Id] = 111
+UPDATE [dbo].[Country] SET [Position] = 10	WHERE [Id] = 119
+UPDATE [dbo].[Country] SET [Position] = 11	WHERE [Id] = 206
+UPDATE [dbo].[Country] SET [Position] = 6	WHERE [Id] = 218
+UPDATE [dbo].[Country] SET [Position] = 5	WHERE [Id] = 238
+UPDATE [dbo].[Country] SET [Position] = 7	WHERE [Id] = 239
+GO
+
+ALTER TABLE [dbo].[Country] ALTER COLUMN [Position] INT NOT NULL
+GO
+
+ALTER TABLE [dbo].[State] ADD [IsSystem] BIT NULL;
+GO
+
+UPDATE [dbo].[State] SET [IsSystem] = 1
+WHERE [Id] IN (1,6,7,8,9,10,11,12)
+GO
+
+UPDATE [dbo].[State] SET [IsSystem] = 0
+WHERE NOT [Id] IN (1,6,7,8,9,10,11,12)
+GO
+
+ALTER TABLE [dbo].[State] ALTER COLUMN [IsSystem] BIT NOT NULL
+GO
+
+ALTER TABLE [dbo].[State] ALTER COLUMN [Name] NVARCHAR (320) NOT NULL
+GO
+
+ALTER TABLE [dbo].[StateLocalization] ALTER COLUMN [Name] NVARCHAR (320) NOT NULL
 GO
 
 EXECUTE sp_rename N'dbo.AvailableState', N'StateAvailability', 'OBJECT' 
@@ -10,12 +136,21 @@ GO
 EXECUTE sp_rename N'dbo.VisibleState', N'StateVisibility', 'OBJECT' 
 GO
 
+
 PRINT N'CREATING TABLES...'
+GO
+
 CREATE TABLE [dbo].[ApplicationEventEmailRecipient] (
 	[RoleId] INT NOT NULL,
 	[EventTypeId] BIGINT NOT NULL,
 
 	CONSTRAINT [PK_dbo.ApplicationEventEmailRecipient] PRIMARY KEY CLUSTERED ([RoleId] ASC, [EventTypeId] ASC),
+);
+GO
+
+CREATE TABLE [dbo].[EmailTemplate]
+(
+	[Id] BIGINT IDENTITY(1, 1) NOT NULL CONSTRAINT [PK_dbo.EmailTemplate] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 GO
 
@@ -29,12 +164,6 @@ CREATE TABLE [dbo].[ApplicationEventEmailTemplate]
 	CONSTRAINT [PK_dbo.ApplicationEventEmailTemplate] PRIMARY KEY CLUSTERED ([EmailTemplateId] ASC, [EventTypeId] ASC),
 	CONSTRAINT [FK_dbo.ApplicationEventEmailTemplate_dbo.EmailTemplate_EmailTemplateId] FOREIGN KEY
 		([EmailTemplateId]) REFERENCES [dbo].[EmailTemplate] ([Id]) ON DELETE CASCADE
-);
-GO
-
-CREATE TABLE [dbo].[EmailTemplate]
-(
-	[Id] BIGINT IDENTITY(1, 1) NOT NULL CONSTRAINT [PK_dbo.EmailTemplate] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 GO
 
@@ -55,10 +184,6 @@ CREATE TABLE [dbo].[EmailTemplateLocalization]
 );
 GO
 
-CREATE UNIQUE INDEX [IX_EmailTemplateLocalization_EmailTemplateId_TwoLetterISOLanguageName] 
-	ON [dbo].[EmailTemplateLocalization] ([EmailTemplateId], [TwoLetterISOLanguageName])
-GO
-
 CREATE TABLE [dbo].[StateEmailRecipient] (
 	[RoleId] INT NOT NULL,
 	[StateId] BIGINT NOT NULL,
@@ -66,12 +191,6 @@ CREATE TABLE [dbo].[StateEmailRecipient] (
 	CONSTRAINT [PK_dbo.StateEmailRecipient] PRIMARY KEY CLUSTERED ([RoleId] ASC, [StateId] ASC),
 	CONSTRAINT [FK_dbo.StateEmailRecipient_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]) ON DELETE CASCADE
 );
-GO
-
-CREATE NONCLUSTERED INDEX [IX_StateEmailRecipient_StateId] ON [dbo].[StateEmailRecipient]([StateId] ASC);
-GO
-
-CREATE NONCLUSTERED INDEX [IX_StateEmailRecipient_RoleId] ON [dbo].[StateEmailRecipient]([RoleId] ASC);
 GO
 
 CREATE TABLE [dbo].[StateEmailTemplate]
@@ -529,4 +648,91 @@ BEGIN
 	    VALUES (source.[Name], source.[TwoLetterISOLanguageName], source.[StateId]);
 
 END
+GO
+
+
+PRINT N'CREATING INDEXES AND CONSTRAINTS'
+GO
+
+CREATE UNIQUE INDEX [IX_EmailTemplateLocalization_EmailTemplateId_TwoLetterISOLanguageName] 
+	ON [dbo].[EmailTemplateLocalization] ([EmailTemplateId], [TwoLetterISOLanguageName])
+GO
+
+CREATE NONCLUSTERED INDEX [IX_StateEmailRecipient_StateId] ON [dbo].[StateEmailRecipient]([StateId] ASC);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_StateEmailRecipient_RoleId] ON [dbo].[StateEmailRecipient]([RoleId] ASC);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_StateAvailability_StateId]
+    ON [dbo].[StateAvailability]([StateId] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_StateAvailability_RoleId]
+    ON [dbo].[StateAvailability]([RoleId] ASC);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_StateVisibility_StateId]
+    ON [dbo].[StateVisibility]([StateId] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_StateVisibility_RoleId]
+    ON [dbo].[StateVisibility]([RoleId] ASC);
+GO
+
+ALTER TABLE [dbo].[AirWaybill]
+    ADD CONSTRAINT [DF_AirWaybill_CreationTimestamp] DEFAULT (GETUTCDATE()) FOR [CreationTimestamp];
+GO
+
+ALTER TABLE [dbo].[AirWaybill]
+    ADD CONSTRAINT [DF_AirWaybill_StateChangeTimestamp] DEFAULT (GETUTCDATE()) FOR [StateChangeTimestamp];
+GO
+
+ALTER TABLE [dbo].[Calculation]
+    ADD CONSTRAINT [DF_Calculation_StateIdTimestamp] DEFAULT (GETUTCDATE()) FOR [StateIdTimestamp];
+GO
+
+ALTER TABLE [dbo].[Sender]
+    ADD CONSTRAINT [DF_Sender_TariffOfTapePerBox] DEFAULT (4) FOR [TariffOfTapePerBox];
+GO
+
+ALTER TABLE [dbo].[User]
+    ADD CONSTRAINT [DF_User_TwoLetterISOLanguageName] DEFAULT 'en' FOR [TwoLetterISOLanguageName];
+GO
+
+ALTER TABLE [dbo].[Application] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Application_dbo.Country_CountryId] FOREIGN KEY ([CountryId]) REFERENCES [dbo].[Country] ([Id]);
+GO
+
+ALTER TABLE [dbo].[Application] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Application_dbo.Sender_SenderId] FOREIGN KEY ([SenderId]) REFERENCES [dbo].[Sender] ([Id]);
+GO
+
+ALTER TABLE [dbo].[AirWaybill] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.AirWaybill_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]);
+GO
+
+ALTER TABLE [dbo].[Application] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Application_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]);
+GO
+
+ALTER TABLE [dbo].[StateLocalization] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.StateLocalization_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]) ON DELETE CASCADE;
+GO
+
+ALTER TABLE [dbo].[StateAvailability] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.StateAvailability_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]) ON DELETE CASCADE;
+GO
+
+ALTER TABLE [dbo].[StateAvailability] WITH NOCHECK
+	ADD CONSTRAINT [PK_dbo.StateAvailability] PRIMARY KEY CLUSTERED ([RoleId] ASC, [StateId] ASC)
+GO
+
+ALTER TABLE [dbo].[StateVisibility] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.StateVisibility_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]) ON DELETE CASCADE;
+GO
+
+ALTER TABLE [dbo].[StateVisibility] WITH NOCHECK
+	ADD CONSTRAINT [PK_dbo.StateVisibility] PRIMARY KEY CLUSTERED ([RoleId] ASC, [StateId] ASC)
+GO
+
+PRINT N'DONE'
 GO

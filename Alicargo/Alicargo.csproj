@@ -693,6 +693,7 @@
     <Content Include="Deploy\Scripts\prepare-release-db.ps1" />
     <Content Include="Deploy\server-release-dev.ps1" />
     <None Include="Deploy\Scripts\prepare-iis.ps1" />
+    <Content Include="Deploy\SqlSchemaCompare.scmp" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
