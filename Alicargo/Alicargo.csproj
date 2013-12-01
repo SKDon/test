@@ -656,6 +656,7 @@
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
     <Content Include="Deploy\app_offline.htm" />
     <Content Include="Deploy\check-list.txt" />
+    <Content Include="Deploy\deploy-plan.txt" />
     <Content Include="Deploy\restore-previous-release.sql" />
     <Content Include="Deploy\Scripts\setup-rights.sql" />
     <Content Include="Deploy\Scripts\Setup\create-sp-for-backup-db.sql" />

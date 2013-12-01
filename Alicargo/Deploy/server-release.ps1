@@ -1,5 +1,5 @@
 ﻿param (
-    [string] $server = (Read-Host -Prompt "Input server name"),
+    [string] $server = (Read-Host -Prompt "Input db server name"),
 	[string] $backupLocation = (Read-Host -Prompt "Input backup location"),
 
 	[string] $mainDbPrefix = (Read-Host -Prompt "Input prefix of main database"),

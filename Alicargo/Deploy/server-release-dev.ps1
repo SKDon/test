@@ -1,11 +1,11 @@
 ﻿.\server-release.ps1 `
     .\SQLEXPRESS `
-    A:\Temp\ `
+    C:\AlicargoDbBackups\ `
     Alicargo `
     Alicargo_Files `
-    "A:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\" `
+    "c:\Program Files\Microsoft SQL Server\MSSQL11.SQLEXPRESS\MSSQL\DATA\" `
     2_1 `
-    2_2 `
-    A:\Projects\Alicargo_2_2\ `
+    Dev `
+    C:\inetpub\wwwroot\Alicargo_Dev\ `
     Dev `
     "IIS APPPOOL\Alicargo"
