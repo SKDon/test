@@ -324,4 +324,7 @@
   <data name="EventTemplates" xml:space="preserve">
     <value>Email templates for events</value>
   </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
 </root>

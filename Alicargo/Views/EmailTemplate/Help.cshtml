@@ -1,43 +1,59 @@
-﻿{Id [Id: {0}]}
-{Count [Count: {0}]}
-{DisplayNumber [DisplayNumber: {0}]}
-{ClientNic [ClientNic: {0}]}
-{LegalEntity [LegalEntity: {0}]}
-{CreationTimestamp [CreationTimestamp: {0}]}
-{FactoryName [FactoryName: {0}]}
-{MarkName [MarkName: {0}]}
-{Invoice [Invoice: {0}]}
-{InvoiceFileName [InvoiceFileName: {0}]}
-{PackingFileName [PackingFileName: {0}]}
-{SwiftFileName [SwiftFileName: {0}]}
-{DeliveryBillFileName [DeliveryBillFileName: {0}]}
-{Torg12FileName [Torg12FileName: {0}]}
-{DateOfCargoReceipt [DateOfCargoReceipt: {0}]}
-{TransitReference [TransitReference: {0}]}
-{TransitCarrierName [TransitCarrierName: {0}]}
-{FactoryEmail [FactoryEmail: {0}]}
-{FactoryPhone [FactoryPhone: {0}]}
-{FactoryContact [FactoryContact: {0}]}
-{DaysInWork [DaysInWork: {0}]}
-{StateChangeTimestamp [StateChangeTimestamp: {0}]}
-{StateName [StateName: {0}]}
-{Volume [Volume: {0}]}
-{Weight [Weight: {0}]}
-{Characteristic [Characteristic: {0}]}
-{Value [Value: {0}]}
-{AddressLoad [AddressLoad: {0}]}
-{CountryName [CountryName: {0}]}
-{WarehouseWorkingTime [WarehouseWorkingTime: {0}]}
-{TermsOfDelivery [TermsOfDelivery: {0}]}
-{MethodOfDelivery [MethodOfDelivery: {0}]}
-{TransitCity [TransitCity: {0}]}
-{TransitAddress [TransitAddress: {0}]}
-{TransitRecipientName [TransitRecipientName: {0}]}
-{TransitPhone [TransitPhone: {0}]}
-{TransitWarehouseWorkingTime [TransitWarehouseWorkingTime: {0}]}
-{MethodOfTransit [MethodOfTransit: {0}]}
-{DeliveryType [DeliveryType: {0}]}
-{AirWaybill [AirWaybill: {0}]}
-{AirWaybillDateOfDeparture [AirWaybillDateOfDeparture: {0}]}
-{AirWaybillDateOfArrival [AirWaybillDateOfArrival: {0}]}
-{AirWaybillGTD [AirWaybillGTD: {0}]}
+﻿<p>
+	<b>Как настраивать шаблон.</b> Шаблон - это обычный текст со специальными вставками.
+	Например {FactoryName}, {MarkName}. При отправке письма по заявке вместо этих значений подставляются реальные данные.
+	Вставки можно использовать как в теле письма, так и в заголовке.
+	Иногда в заявке может не быть значения, и вместо вставки будет вставлено пустое значение.
+	Например, можно написать так: "Город: {TransitCity}".
+	Если город в заявке указан, то результат будет выглядить нормально -  "Город: Москва", а если город не указан, то это будет выглядеть так: "Город: ".
+	Это выглядит не очень хорошо. Чтобы решить эту проблему, можно указать во вставке уточнение формата в квадратных скобках.
+	Например, такая вставка {TransitCity [Город: {0}]} будет заменена на текст "Город: Москва", если город в заявке указан, а если город не указан, то ничего добавлено не будет, вставка в результат не добавляется.
+	В формате {0} указывает, куда будет поставлено реальное значение.	
+</p>
+<p>
+	<b>Полный список вставок, которые можно использовать:</b>
+	<ul>
+		<li>Id - ИД заявки</li>
+		<li>Count - Места (коробки)</li>
+		<li>DisplayNumber - Номер заявки</li>
+		<li>ClientNic - Ник клиента</li>
+		<li>LegalEntity - Юридическое лицо клиента</li>
+		<li>CreationTimestamp - Дата создания заявки</li>
+		<li>FactoryName - Фабрика</li>
+		<li>MarkName - Марка</li>
+		<li>Invoice - Инвойс</li>
+		<li>InvoiceFileName - Название файла инвойса</li>
+		<li>PackingFileName - Название файла пакинга</li>
+		<li>SwiftFileName - Название файла SWIFT</li>
+		<li>DeliveryBillFileName - Название файла Счет за доставку</li>
+		<li>Torg12FileName -  Название файла  ТОРГ12</li>
+		<li>DateOfCargoReceipt - Дата получения груза</li>
+		<li>TransitReference - Транзитный референс</li>
+		<li>TransitCarrierName - Перевозчик</li>
+		<li>FactoryEmail - Email фабрики</li>
+		<li>FactoryPhone - Телефон фабрики</li>
+		<li>FactoryContact - Контактное лицо фабрики</li>
+		<li>DaysInWork  - Дней в работе</li>
+		<li>StateChangeTimestamp - Дата изменения статуса заявки</li>
+		<li>StateName - Текущий статус заявки</li>
+		<li>Volume - Объем</li>
+		<li>Weight - Вес</li>
+		<li>Characteristic - Характеристика торвара</li>
+		<li>Value - Стоимость</li>
+		<li>AddressLoad - Адрес забора груза</li>
+		<li>CountryName - Страна</li>
+		<li>WarehouseWorkingTime - Время работы склада</li>
+		<li>TermsOfDelivery - Условия поставки</li>
+		<li>MethodOfDelivery - Способ доставки</li>
+		<li>TransitCity - Город доставки</li>
+		<li>TransitAddress - Адрес доставки</li>
+		<li>TransitRecipientName - Получатель</li>
+		<li>TransitPhone - Телефон достаки</li>
+		<li>TransitWarehouseWorkingTime - Время работы склада доставки</li>
+		<li>MethodOfTransit - Способ транзита</li>
+		<li>DeliveryType - Тип доставки</li>
+		<li>AirWaybill - Авианакладная</li>
+		<li>AirWaybillDateOfDeparture - Дата вылета</li>
+		<li>AirWaybillDateOfArrival - Дата прилета</li>
+		<li>AirWaybillGTD - ГТД</li>
+	</ul>
+</p>

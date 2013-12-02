@@ -324,4 +324,7 @@
   <data name="EventTemplates" xml:space="preserve">
     <value>Шаблоны писем на событиях</value>
   </data>
+  <data name="Help" xml:space="preserve">
+    <value>Хелп</value>
+  </data>
 </root>
