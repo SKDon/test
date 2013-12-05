@@ -2,5 +2,5 @@
 @using Resources
 @model CityEditModel
 
-<h1>@Pages.Add</h1>
+<h1>@Pages.Add @Pages.City</h1>
 @Html.EditPage(Url.Action(MVC.City.Create()), Pages.Save)
