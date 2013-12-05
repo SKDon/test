@@ -117,19 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmplyPassword" xml:space="preserve">
-    <value>Define a password</value>
+  <data name="Admin" xml:space="preserve">
+    <value>Админ</value>
   </data>
-  <data name="LoginExists" xml:space="preserve">
-    <value>Login is occupied</value>
+  <data name="Auto" xml:space="preserve">
+    <value>Авто</value>
   </data>
-  <data name="AirWaybillAlreadyExists" xml:space="preserve">
-    <value>This Air Waybill is already added</value>
+  <data name="Avia" xml:space="preserve">
+    <value>Авиа</value>
   </data>
-  <data name="WrongLoginOrPassword" xml:space="preserve">
-    <value>Invalid login or password</value>
+  <data name="Broker" xml:space="preserve">
+    <value>Брокер</value>
   </data>
-  <data name="StateIsUsed" xml:space="preserve">
-    <value>State is used</value>
+  <data name="Client" xml:space="preserve">
+    <value>Клиент</value>
+  </data>
+  <data name="Comfort" xml:space="preserve">
+    <value>Комфорт</value>
+  </data>
+  <data name="Econom" xml:space="preserve">
+    <value>Эконом</value>
+  </data>
+  <data name="Forwarder" xml:space="preserve">
+    <value>Перевозчик</value>
+  </data>
+  <data name="Lux" xml:space="preserve">
+    <value>Люкс</value>
+  </data>
+  <data name="Self" xml:space="preserve">
+    <value>Самовывоз</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Отправитель</value>
+  </data>
+  <data name="ToDoor" xml:space="preserve">
+    <value>До двери</value>
+  </data>
+  <data name="ToWarehouse" xml:space="preserve">
+    <value>До склада</value>
   </data>
 </root>

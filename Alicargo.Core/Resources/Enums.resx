@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Admin" xml:space="preserve">
-    <value>Админ</value>
+    <value>Admin</value>
   </data>
   <data name="Auto" xml:space="preserve">
-    <value>Авто</value>
+    <value>Auto</value>
   </data>
   <data name="Avia" xml:space="preserve">
-    <value>Авиа</value>
+    <value>Avia</value>
   </data>
   <data name="Broker" xml:space="preserve">
-    <value>Брокер</value>
+    <value>Broker</value>
   </data>
   <data name="Client" xml:space="preserve">
-    <value>Клиент</value>
+    <value>Client</value>
   </data>
   <data name="Comfort" xml:space="preserve">
-    <value>Комфорт</value>
+    <value>Comfort</value>
   </data>
   <data name="Econom" xml:space="preserve">
-    <value>Эконом</value>
+    <value>Econom</value>
   </data>
   <data name="Forwarder" xml:space="preserve">
-    <value>Перевозчик</value>
+    <value>Forwarder</value>
   </data>
   <data name="Lux" xml:space="preserve">
-    <value>Люкс</value>
+    <value>Lux</value>
   </data>
   <data name="Self" xml:space="preserve">
-    <value>Самовывоз</value>
+    <value>Pickup</value>
   </data>
   <data name="Sender" xml:space="preserve">
-    <value>Отправитель</value>
+    <value>Sender</value>
   </data>
   <data name="ToDoor" xml:space="preserve">
-    <value>До двери</value>
+    <value>to door</value>
   </data>
   <data name="ToWarehouse" xml:space="preserve">
-    <value>До склада</value>
+    <value>to warehouse</value>
   </data>
 </root>

@@ -118,219 +118,219 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>Добавить</value>
+    <value>Add</value>
   </data>
   <data name="Admins" xml:space="preserve">
-    <value>Администраторы</value>
+    <value>Administrators</value>
+  </data>
+  <data name="AnError" xml:space="preserve">
+    <value>An error has occurred</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
   </data>
   <data name="ApplicationAdd" xml:space="preserve">
-    <value>Создать заказ</value>
-  </data>
-  <data name="CargoIsReceived" xml:space="preserve">
-    <value>Груз получен</value>
+    <value>Create an application</value>
   </data>
   <data name="ApplicationEdit" xml:space="preserve">
-    <value>Редактировать заявку</value>
+    <value>Edit the application</value>
   </data>
   <data name="Applications" xml:space="preserve">
-    <value>Заявки</value>
+    <value>Applications</value>
   </data>
   <data name="Authentication" xml:space="preserve">
-    <value>Аутентификация</value>
+    <value>Authentication</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Назад</value>
+    <value>Back</value>
   </data>
   <data name="BrokerAdd" xml:space="preserve">
-    <value>Добавить брокера</value>
+    <value>Add a Broker</value>
   </data>
   <data name="Brokers" xml:space="preserve">
-    <value>Брокеры</value>
+    <value>Brokers</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Отмена</value>
+    <value>Cancel</value>
+  </data>
+  <data name="CantEditAirWaybill" xml:space="preserve">
+    <value>Can not edit the AWB {0} at the current state</value>
+  </data>
+  <data name="CargoIsCustomsCleared" xml:space="preserve">
+    <value>Cargo Cleared</value>
+  </data>
+  <data name="CargoIsReceived" xml:space="preserve">
+    <value>Cargo is received</value>
   </data>
   <data name="ChangeFile" xml:space="preserve">
-    <value>Поменять файл</value>
+    <value>Change the file</value>
   </data>
   <data name="ClientAdd" xml:space="preserve">
-    <value>Добавить клиента</value>
+    <value>Add a client</value>
   </data>
   <data name="ClientEdit" xml:space="preserve">
-    <value>Профиль клиента</value>
+    <value>Edit the client</value>
   </data>
   <data name="Clients" xml:space="preserve">
-    <value>Клиенты</value>
+    <value>Client</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Are you sure that you want to remove the record?</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Редактировать</value>
-  </data>
-  <data name="Forwarders" xml:space="preserve">
-    <value>Перевозчики</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Логин</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Имя</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Пароль</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Профиль</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>запомнить меня</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Сохранить</value>
-  </data>
-  <data name="SelectFile" xml:space="preserve">
-    <value>Выберете файл</value>
-  </data>
-  <data name="Senders" xml:space="preserve">
-    <value>Отправители</value>
-  </data>
-  <data name="SignIn" xml:space="preserve">
-    <value>Войти</value>
-  </data>
-  <data name="StateAdd" xml:space="preserve">
-    <value>Добавить статус</value>
-  </data>
-  <data name="StateEdit" xml:space="preserve">
-    <value>Редактировать статус</value>
-  </data>
-  <data name="States" xml:space="preserve">
-    <value>Статусы</value>
-  </data>
-  <data name="StateSet" xml:space="preserve">
-    <value>Задать статус</value>
-  </data>
-  <data name="StateSetConfirm" xml:space="preserve">
-    <value>Вы уверены, что хотите обновить статус?</value>
-  </data>
-  <data name="Transit" xml:space="preserve">
-    <value>Транзит по России</value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>Обновить</value>
-  </data>
-  <data name="Users" xml:space="preserve">
-    <value>Пользователи</value>
-  </data>
-  <data name="AirWaybillAdd" xml:space="preserve">
-    <value>Добавить авианакладную</value>
-  </data>
-  <data name="AirWaybillSelect" xml:space="preserve">
-    <value>Задать референс</value>
+    <value>Edit</value>
   </data>
   <data name="Files" xml:space="preserve">
-    <value>Файлы</value>
+    <value>Files</value>
+  </data>
+  <data name="Forwarders" xml:space="preserve">
+    <value>Forwarders</value>
+  </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NoFile" xml:space="preserve">
+    <value>No file</value>
   </data>
   <data name="NoAirWaybill" xml:space="preserve">
-    <value>Не задано</value>
+    <value>Not defined</value>
   </data>
-  <data name="AirWaybillSetConfirm" xml:space="preserve">
-    <value>Вы уверены, что хотите задать референс?</value>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="AirWaybillAdd" xml:space="preserve">
+    <value>Add AWB</value>
+  </data>
+  <data name="AirWaybillEdit" xml:space="preserve">
+    <value>Edit Air Way Bill</value>
   </data>
   <data name="AirWaybills" xml:space="preserve">
     <value>Air Way Bills</value>
   </data>
-  <data name="AirWaybillEdit" xml:space="preserve">
-    <value>Редактировать Air Way Bill</value>
+  <data name="AirWaybillSelect" xml:space="preserve">
+    <value>Define air waybill</value>
   </data>
-  <data name="UploadFiles" xml:space="preserve">
-    <value>Загрузить файлы</value>
+  <data name="AirWaybillSetConfirm" xml:space="preserve">
+    <value>Are you sure that you want to define air waybill?</value>
   </data>
-  <data name="CargoIsCustomsCleared" xml:space="preserve">
-    <value>Груз выпущен</value>
-  </data>
-  <data name="NoFile" xml:space="preserve">
-    <value>Нет файла</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Удалить</value>
-  </data>
-  <data name="DeleteConfirm" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить запись?</value>
-  </data>
-  <data name="Italian" xml:space="preserve">
-    <value>Итальянский</value>
+  <data name="RememberMe" xml:space="preserve">
+    <value>remember me</value>
   </data>
   <data name="Russian" xml:space="preserve">
-    <value>Русский</value>
+    <value>Russian</value>
   </data>
-  <data name="AnError" xml:space="preserve">
-    <value>Произошла ошибка</value>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Select a file</value>
+  </data>
+  <data name="Senders" xml:space="preserve">
+    <value>Senders</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="StateAdd" xml:space="preserve">
+    <value>Add a state</value>
+  </data>
+  <data name="StateEdit" xml:space="preserve">
+    <value>Edit state</value>
+  </data>
+  <data name="States" xml:space="preserve">
+    <value>States</value>
+  </data>
+  <data name="StateSet" xml:space="preserve">
+    <value>Set the state</value>
+  </data>
+  <data name="StateSetConfirm" xml:space="preserve">
+    <value>Are you sure that you want to set the state?</value>
   </data>
   <data name="SuccessOperation" xml:space="preserve">
-    <value>Операция прошла успешно</value>
+    <value>The operation was successful</value>
   </data>
-  <data name="Application" xml:space="preserve">
-    <value>Заявка</value>
+  <data name="Transit" xml:space="preserve">
+    <value>Transit through Russia</value>
   </data>
-  <data name="CantEditAirWaybill" xml:space="preserve">
-    <value>Нельзя редактировать AWB {0} в текущем статусе</value>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
   </data>
-  <data name="Calculate" xml:space="preserve">
-    <value>Расчитать</value>
+  <data name="UploadFiles" xml:space="preserve">
+    <value>Upload files</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="Calculation" xml:space="preserve">
-    <value>Расчет</value>
+    <value>Calculation</value>
   </data>
   <data name="Client" xml:space="preserve">
-    <value>Клиент</value>
+    <value>Client</value>
+  </data>
+  <data name="DownloadCalculations" xml:space="preserve">
+    <value>Download сalculations file</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculate</value>
   </data>
   <data name="Excel" xml:space="preserve">
     <value>Excel</value>
   </data>
-  <data name="DownloadCalculations" xml:space="preserve">
-    <value>Скачать файл с расчетами</value>
-  </data>
   <data name="Report" xml:space="preserve">
-    <value>Отчет</value>
+    <value>Report</value>
   </data>
   <data name="SenderAdd" xml:space="preserve">
-    <value>Добавить отправителя</value>
+    <value>Add sender</value>
   </data>
   <data name="SenderEdit" xml:space="preserve">
-    <value>Редактировать отправителя</value>
+    <value>Edit sender</value>
   </data>
   <data name="ConfirmCancelCalculation" xml:space="preserve">
-    <value>Вы уверены, что хотите отменить расчет?</value>
+    <value>Are you sure you want to cancel the calculation?</value>
   </data>
   <data name="ConfrimCalculation" xml:space="preserve">
-    <value>Вы уверены, что хотите завершить расчет?</value>
+    <value>Are you sure you want to end the calculation?</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Settings</value>
   </data>
   <data name="StateSettings_Availabilities" xml:space="preserve">
-    <value>Могут устанавливать</value>
+    <value>Can set</value>
   </data>
   <data name="StateSettings_Recipients" xml:space="preserve">
-    <value>Получают уведомления</value>
+    <value>Receive a notification</value>
   </data>
   <data name="StateSettings_Visibilities" xml:space="preserve">
-    <value>Доступно для отображения</value>
+    <value>Available for display</value>
   </data>
   <data name="Templates" xml:space="preserve">
-    <value>Шаблоны</value>
+    <value>Templates</value>
   </data>
   <data name="Event" xml:space="preserve">
-    <value>Событие</value>
+    <value>Event</value>
   </data>
   <data name="EventTemplates" xml:space="preserve">
-    <value>Шаблоны писем на событиях</value>
+    <value>Email templates for events</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Хелп</value>
+    <value>Help</value>
   </data>
   <data name="Cities" xml:space="preserve">
-    <value>Города</value>
+    <value>Cities</value>
   </data>
   <data name="City" xml:space="preserve">
-    <value>Город</value>
+    <value>City</value>
   </data>
 </root>

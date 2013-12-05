@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добавить.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
             get {
@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Администраторы.
+        ///   Looks up a localized string similar to Administrators.
         /// </summary>
         public static string Admins {
             get {
@@ -79,7 +79,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добавить авианакладную.
+        ///   Looks up a localized string similar to Add AWB.
         /// </summary>
         public static string AirWaybillAdd {
             get {
@@ -88,7 +88,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Редактировать Air Way Bill.
+        ///   Looks up a localized string similar to Edit Air Way Bill.
         /// </summary>
         public static string AirWaybillEdit {
             get {
@@ -106,7 +106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Задать референс.
+        ///   Looks up a localized string similar to Define air waybill.
         /// </summary>
         public static string AirWaybillSelect {
             get {
@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уверены, что хотите задать референс?.
+        ///   Looks up a localized string similar to Are you sure that you want to define air waybill?.
         /// </summary>
         public static string AirWaybillSetConfirm {
             get {
@@ -124,7 +124,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Произошла ошибка.
+        ///   Looks up a localized string similar to An error has occurred.
         /// </summary>
         public static string AnError {
             get {
@@ -133,7 +133,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Заявка.
+        ///   Looks up a localized string similar to Application.
         /// </summary>
         public static string Application {
             get {
@@ -142,7 +142,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Создать заказ.
+        ///   Looks up a localized string similar to Create an application.
         /// </summary>
         public static string ApplicationAdd {
             get {
@@ -151,7 +151,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Редактировать заявку.
+        ///   Looks up a localized string similar to Edit the application.
         /// </summary>
         public static string ApplicationEdit {
             get {
@@ -160,7 +160,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Заявки.
+        ///   Looks up a localized string similar to Applications.
         /// </summary>
         public static string Applications {
             get {
@@ -169,7 +169,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Аутентификация.
+        ///   Looks up a localized string similar to Authentication.
         /// </summary>
         public static string Authentication {
             get {
@@ -178,7 +178,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Назад.
+        ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Back {
             get {
@@ -187,7 +187,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добавить брокера.
+        ///   Looks up a localized string similar to Add a Broker.
         /// </summary>
         public static string BrokerAdd {
             get {
@@ -196,7 +196,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Брокеры.
+        ///   Looks up a localized string similar to Brokers.
         /// </summary>
         public static string Brokers {
             get {
@@ -205,7 +205,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Расчитать.
+        ///   Looks up a localized string similar to Calculate.
         /// </summary>
         public static string Calculate {
             get {
@@ -214,7 +214,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Расчет.
+        ///   Looks up a localized string similar to Calculation.
         /// </summary>
         public static string Calculation {
             get {
@@ -223,7 +223,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отмена.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
             get {
@@ -232,7 +232,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нельзя редактировать AWB {0} в текущем статусе.
+        ///   Looks up a localized string similar to Can not edit the AWB {0} at the current state.
         /// </summary>
         public static string CantEditAirWaybill {
             get {
@@ -241,7 +241,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Груз выпущен.
+        ///   Looks up a localized string similar to Cargo Cleared.
         /// </summary>
         public static string CargoIsCustomsCleared {
             get {
@@ -250,7 +250,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Груз получен.
+        ///   Looks up a localized string similar to Cargo is received.
         /// </summary>
         public static string CargoIsReceived {
             get {
@@ -259,7 +259,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Поменять файл.
+        ///   Looks up a localized string similar to Change the file.
         /// </summary>
         public static string ChangeFile {
             get {
@@ -268,7 +268,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Города.
+        ///   Looks up a localized string similar to Cities.
         /// </summary>
         public static string Cities {
             get {
@@ -277,7 +277,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Город.
+        ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
             get {
@@ -286,7 +286,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Клиент.
+        ///   Looks up a localized string similar to Client.
         /// </summary>
         public static string Client {
             get {
@@ -295,7 +295,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добавить клиента.
+        ///   Looks up a localized string similar to Add a client.
         /// </summary>
         public static string ClientAdd {
             get {
@@ -304,7 +304,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Профиль клиента.
+        ///   Looks up a localized string similar to Edit the client.
         /// </summary>
         public static string ClientEdit {
             get {
@@ -313,7 +313,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Клиенты.
+        ///   Looks up a localized string similar to Client.
         /// </summary>
         public static string Clients {
             get {
@@ -322,7 +322,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уверены, что хотите отменить расчет?.
+        ///   Looks up a localized string similar to Are you sure you want to cancel the calculation?.
         /// </summary>
         public static string ConfirmCancelCalculation {
             get {
@@ -331,7 +331,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уверены, что хотите завершить расчет?.
+        ///   Looks up a localized string similar to Are you sure you want to end the calculation?.
         /// </summary>
         public static string ConfrimCalculation {
             get {
@@ -340,7 +340,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Удалить.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
             get {
@@ -349,7 +349,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уверены, что хотите удалить запись?.
+        ///   Looks up a localized string similar to Are you sure that you want to remove the record?.
         /// </summary>
         public static string DeleteConfirm {
             get {
@@ -358,7 +358,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Скачать файл с расчетами.
+        ///   Looks up a localized string similar to Download сalculations file.
         /// </summary>
         public static string DownloadCalculations {
             get {
@@ -367,7 +367,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Редактировать.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
             get {
@@ -376,7 +376,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Событие.
+        ///   Looks up a localized string similar to Event.
         /// </summary>
         public static string Event {
             get {
@@ -385,7 +385,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Шаблоны писем на событиях.
+        ///   Looks up a localized string similar to Email templates for events.
         /// </summary>
         public static string EventTemplates {
             get {
@@ -403,7 +403,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Файлы.
+        ///   Looks up a localized string similar to Files.
         /// </summary>
         public static string Files {
             get {
@@ -412,7 +412,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Перевозчики.
+        ///   Looks up a localized string similar to Forwarders.
         /// </summary>
         public static string Forwarders {
             get {
@@ -421,7 +421,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Хелп.
+        ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Help {
             get {
@@ -430,7 +430,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Итальянский.
+        ///   Looks up a localized string similar to Italian.
         /// </summary>
         public static string Italian {
             get {
@@ -439,7 +439,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Логин.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
             get {
@@ -448,7 +448,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Имя.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
             get {
@@ -457,7 +457,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не задано.
+        ///   Looks up a localized string similar to Not defined.
         /// </summary>
         public static string NoAirWaybill {
             get {
@@ -466,7 +466,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нет файла.
+        ///   Looks up a localized string similar to No file.
         /// </summary>
         public static string NoFile {
             get {
@@ -475,7 +475,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пароль.
+        ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
             get {
@@ -484,7 +484,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Профиль.
+        ///   Looks up a localized string similar to Profile.
         /// </summary>
         public static string Profile {
             get {
@@ -493,7 +493,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to запомнить меня.
+        ///   Looks up a localized string similar to remember me.
         /// </summary>
         public static string RememberMe {
             get {
@@ -502,7 +502,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отчет.
+        ///   Looks up a localized string similar to Report.
         /// </summary>
         public static string Report {
             get {
@@ -511,7 +511,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Русский.
+        ///   Looks up a localized string similar to Russian.
         /// </summary>
         public static string Russian {
             get {
@@ -520,7 +520,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сохранить.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
             get {
@@ -529,7 +529,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберете файл.
+        ///   Looks up a localized string similar to Select a file.
         /// </summary>
         public static string SelectFile {
             get {
@@ -538,7 +538,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добавить отправителя.
+        ///   Looks up a localized string similar to Add sender.
         /// </summary>
         public static string SenderAdd {
             get {
@@ -547,7 +547,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Редактировать отправителя.
+        ///   Looks up a localized string similar to Edit sender.
         /// </summary>
         public static string SenderEdit {
             get {
@@ -556,7 +556,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отправители.
+        ///   Looks up a localized string similar to Senders.
         /// </summary>
         public static string Senders {
             get {
@@ -565,7 +565,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Настройки.
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {
             get {
@@ -574,7 +574,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Войти.
+        ///   Looks up a localized string similar to Sign in.
         /// </summary>
         public static string SignIn {
             get {
@@ -583,7 +583,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добавить статус.
+        ///   Looks up a localized string similar to Add a state.
         /// </summary>
         public static string StateAdd {
             get {
@@ -592,7 +592,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Редактировать статус.
+        ///   Looks up a localized string similar to Edit state.
         /// </summary>
         public static string StateEdit {
             get {
@@ -601,7 +601,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Статусы.
+        ///   Looks up a localized string similar to States.
         /// </summary>
         public static string States {
             get {
@@ -610,7 +610,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Задать статус.
+        ///   Looks up a localized string similar to Set the state.
         /// </summary>
         public static string StateSet {
             get {
@@ -619,7 +619,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уверены, что хотите обновить статус?.
+        ///   Looks up a localized string similar to Are you sure that you want to set the state?.
         /// </summary>
         public static string StateSetConfirm {
             get {
@@ -628,7 +628,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Могут устанавливать.
+        ///   Looks up a localized string similar to Can set.
         /// </summary>
         public static string StateSettings_Availabilities {
             get {
@@ -637,7 +637,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получают уведомления.
+        ///   Looks up a localized string similar to Receive a notification.
         /// </summary>
         public static string StateSettings_Recipients {
             get {
@@ -646,7 +646,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Доступно для отображения.
+        ///   Looks up a localized string similar to Available for display.
         /// </summary>
         public static string StateSettings_Visibilities {
             get {
@@ -655,7 +655,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Операция прошла успешно.
+        ///   Looks up a localized string similar to The operation was successful.
         /// </summary>
         public static string SuccessOperation {
             get {
@@ -664,7 +664,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Шаблоны.
+        ///   Looks up a localized string similar to Templates.
         /// </summary>
         public static string Templates {
             get {
@@ -673,7 +673,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Транзит по России.
+        ///   Looks up a localized string similar to Transit through Russia.
         /// </summary>
         public static string Transit {
             get {
@@ -682,7 +682,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Обновить.
+        ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string Update {
             get {
@@ -691,7 +691,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузить файлы.
+        ///   Looks up a localized string similar to Upload files.
         /// </summary>
         public static string UploadFiles {
             get {
@@ -700,7 +700,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пользователи.
+        ///   Looks up a localized string similar to Users.
         /// </summary>
         public static string Users {
             get {

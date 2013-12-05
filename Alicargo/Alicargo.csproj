@@ -210,13 +210,13 @@
     <Compile Include="MvcHelpers\Filters\HandleErrorAttribute.cs" />
     <Compile Include="MvcHelpers\Extensions\FileExtensions.cs" />
     <Compile Include="MvcHelpers\Extensions\PageHelpers.cs" />
-    <Compile Include="Resources\Validation.en.Designer.cs">
-      <DependentUpon>Validation.en.resx</DependentUpon>
+    <Compile Include="Resources\Validation.Designer.cs">
+      <DependentUpon>Validation.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Pages.en.Designer.cs">
-      <DependentUpon>Pages.en.resx</DependentUpon>
+    <Compile Include="Resources\Pages.Designer.cs">
+      <DependentUpon>Pages.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -225,10 +225,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pages.it.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Validation.Designer.cs">
+    <Compile Include="Resources\Validation.ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Validation.resx</DependentUpon>
+      <DependentUpon>Validation.ru.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
@@ -239,10 +239,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MvcHelpers\Extensions\LinkHelper.cs" />
-    <Compile Include="Resources\Pages.Designer.cs">
+    <Compile Include="Resources\Pages.ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Pages.resx</DependentUpon>
+      <DependentUpon>Pages.ru.resx</DependentUpon>
     </Compile>
     <Compile Include="MvcHelpers\Filters\AccessAttribute.cs" />
     <Compile Include="MvcHelpers\Filters\CultureFilterAttribute.cs" />
@@ -1613,14 +1613,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Validation.en.resx">
+    <EmbeddedResource Include="Resources\Validation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Validation.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Pages.en.resx">
+    <EmbeddedResource Include="Resources\Pages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Pages.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Pages.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1629,9 +1629,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Pages.it.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Pages.resx">
+    <EmbeddedResource Include="Resources\Pages.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Pages.Designer.cs</LastGenOutput>
+      <LastGenOutput>Pages.ru.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1640,9 +1640,9 @@
       <LastGenOutput>Validation.it.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Validation.resx">
+    <EmbeddedResource Include="Resources\Validation.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
+      <LastGenOutput>Validation.ru.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>

@@ -117,215 +117,218 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Bank" xml:space="preserve">
-    <value>Банк</value>
-  </data>
-  <data name="BIC" xml:space="preserve">
-    <value>БИК</value>
-  </data>
-  <data name="Contacts" xml:space="preserve">
-    <value>Контактное лицо</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="INN" xml:space="preserve">
-    <value>ИНН</value>
-  </data>
-  <data name="KPP" xml:space="preserve">
-    <value>КПП</value>
-  </data>
-  <data name="KS" xml:space="preserve">
-    <value>к/с</value>
-  </data>
-  <data name="LegalAddress" xml:space="preserve">
-    <value>Юридический адрес</value>
-  </data>
-  <data name="LegalEntity" xml:space="preserve">
-    <value>Юридическое лицо</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Логин</value>
-  </data>
-  <data name="MailingAddress" xml:space="preserve">
-    <value>Почтовый адрес</value>
-  </data>
-  <data name="NewPassword" xml:space="preserve">
-    <value>Задать новый пароль</value>
-  </data>
-  <data name="Nic" xml:space="preserve">
-    <value>NIC по инвойсу</value>
-  </data>
-  <data name="OfficePhone" xml:space="preserve">
-    <value>Телефон офиса</value>
-  </data>
-  <data name="OGRN" xml:space="preserve">
-    <value>ОГРН</value>
-  </data>
-  <data name="RS" xml:space="preserve">
-    <value>р/с</value>
-  </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Подтвердить новый пароль</value>
-  </data>
-  <data name="CreationTimestamp" xml:space="preserve">
-    <value>Дата создания</value>
-  </data>
-  <data name="DaysInWork" xml:space="preserve">
-    <value>Дней в работе</value>
-  </data>
-  <data name="DisplayNumber" xml:space="preserve">
-    <value>Номер заявки</value>
-  </data>
-  <data name="Invoice" xml:space="preserve">
-    <value>Инвойс</value>
-  </data>
-  <data name="StateName" xml:space="preserve">
-    <value>Статус</value>
-  </data>
-  <data name="StateNextName" xml:space="preserve">
-    <value>Ожидаемый статус</value>
-  </data>
   <data name="Address" xml:space="preserve">
-    <value>Адрес</value>
-  </data>
-  <data name="CarrierName" xml:space="preserve">
-    <value>Перевозчик</value>
-  </data>
-  <data name="City" xml:space="preserve">
-    <value>Город</value>
-  </data>
-  <data name="DeliveryType" xml:space="preserve">
-    <value>Тип доставки</value>
-  </data>
-  <data name="MethodOfTransit" xml:space="preserve">
-    <value>Способ транзита</value>
-  </data>
-  <data name="NewCarrierName" xml:space="preserve">
-    <value>Указать другого перевозчика</value>
-  </data>
-  <data name="Phone" xml:space="preserve">
-    <value>Телефон</value>
-  </data>
-  <data name="RecipientName" xml:space="preserve">
-    <value>Получатель</value>
+    <value>Address</value>
   </data>
   <data name="AddressLoad" xml:space="preserve">
-    <value>Адрес забора груза</value>
+    <value>Address of a cargo unload</value>
   </data>
-  <data name="Characteristic" xml:space="preserve">
-    <value>Характеристика товара</value>
-  </data>
-  <data name="Count" xml:space="preserve">
-    <value>Места (коробки)</value>
-  </data>
-  <data name="FactoryEmail" xml:space="preserve">
-    <value>Email фабрики</value>
-  </data>
-  <data name="FactoryName" xml:space="preserve">
-    <value>Фабрика</value>
-  </data>
-  <data name="FactoryPhone" xml:space="preserve">
-    <value>Телефон фабрики</value>
-  </data>
-  <data name="FileName" xml:space="preserve">
-    <value>Прикрепленный файл</value>
-  </data>
-  <data name="Weight" xml:space="preserve">
-    <value>Вес (кг)</value>
-  </data>
-  <data name="Mark" xml:space="preserve">
-    <value>Марка</value>
-  </data>
-  <data name="MethodOfDelivery" xml:space="preserve">
-    <value>Способ доставки</value>
-  </data>
-  <data name="Value" xml:space="preserve">
-    <value>Стоимость</value>
-  </data>
-  <data name="Volume" xml:space="preserve">
-    <value>Объем</value>
-  </data>
-  <data name="WarehouseWorkingTime" xml:space="preserve">
-    <value>Время работы склада</value>
-  </data>
-  <data name="TermsOfDelivery" xml:space="preserve">
-    <value>Условия поставки</value>
-  </data>
-  <data name="StateItalianName" xml:space="preserve">
-    <value>Итальянское имя</value>
-  </data>
-  <data name="StateRussianName" xml:space="preserve">
-    <value>Русское имя</value>
-  </data>
-  <data name="StateChangeTimestamp" xml:space="preserve">
-    <value>Дата сметы статуса</value>
-  </data>
-  <data name="Broker" xml:space="preserve">
-    <value>Брокер</value>
-  </data>
-  <data name="TotalCount" xml:space="preserve">
-    <value>Общее количество</value>
-  </data>
-  <data name="TotalWeight" xml:space="preserve">
-    <value>Общий вес</value>
+  <data name="AirWaybill" xml:space="preserve">
+    <value>Air waybill</value>
   </data>
   <data name="ArrivalAirport" xml:space="preserve">
-    <value>Аэропорт прилета</value>
-  </data>
-  <data name="DateOfArrival" xml:space="preserve">
-    <value>Дата прилета</value>
-  </data>
-  <data name="DateOfDeparture" xml:space="preserve">
-    <value>Дата вылета</value>
-  </data>
-  <data name="DepartureAirport" xml:space="preserve">
-    <value>Аэропорт вылета</value>
-  </data>
-  <data name="GTD" xml:space="preserve">
-    <value>ГТД</value>
-  </data>
-  <data name="FactoryContact" xml:space="preserve">
-    <value>Контактное лицо фабрики</value>
-  </data>
-  <data name="CP" xml:space="preserve">
-    <value>Счет-фактура</value>
-  </data>
-  <data name="DeliveryBill" xml:space="preserve">
-    <value>Счет за доставку</value>
-  </data>
-  <data name="Swift" xml:space="preserve">
-    <value>SWIFT</value>
-  </data>
-  <data name="Torg12" xml:space="preserve">
-    <value>Торг 12</value>
+    <value>Аrrival airport</value>
   </data>
   <data name="AWB" xml:space="preserve">
     <value>AWB</value>
   </data>
-  <data name="Packing" xml:space="preserve">
-    <value>Пакинг</value>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
   </data>
-  <data name="PriceForDelivery" xml:space="preserve">
-    <value>Стоимость доставки</value>
+  <data name="BIC" xml:space="preserve">
+    <value>BIC</value>
+  </data>
+  <data name="Broker" xml:space="preserve">
+    <value>Broker</value>
+  </data>
+  <data name="CarrierName" xml:space="preserve">
+    <value>Carrier</value>
+  </data>
+  <data name="Characteristic" xml:space="preserve">
+    <value>Characteristics of the goods</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm the new password</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="CP" xml:space="preserve">
+    <value>Commercial invoice</value>
+  </data>
+  <data name="CreationTimestamp" xml:space="preserve">
+    <value>Created</value>
   </data>
   <data name="DateInStock" xml:space="preserve">
-    <value>Дата поступления  на склад</value>
+    <value>Date of receipt to a warehouse</value>
   </data>
-  <data name="AirWaybill" xml:space="preserve">
-    <value>Авианакладная</value>
+  <data name="DateOfArrival" xml:space="preserve">
+    <value>Date of arrival</value>
   </data>
   <data name="DateOfCargoReceipt" xml:space="preserve">
-    <value>Получение груза</value>
+    <value>Date of cargo receipt</value>
+  </data>
+  <data name="DateOfDeparture" xml:space="preserve">
+    <value>Date of departure</value>
+  </data>
+  <data name="DaysInWork" xml:space="preserve">
+    <value>Days in work</value>
+  </data>
+  <data name="DeliveryBill" xml:space="preserve">
+    <value>Delivery bill</value>
+  </data>
+  <data name="DeliveryType" xml:space="preserve">
+    <value>Delivery type</value>
+  </data>
+  <data name="DepartureAirport" xml:space="preserve">
+    <value>Departure airport</value>
+  </data>
+  <data name="DisplayNumber" xml:space="preserve">
+    <value>Application number</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FactoryContact" xml:space="preserve">
+    <value>Factory contacts</value>
+  </data>
+  <data name="FactoryEmail" xml:space="preserve">
+    <value>Factory email</value>
+  </data>
+  <data name="FactoryName" xml:space="preserve">
+    <value>Factory</value>
+  </data>
+  <data name="FactoryPhone" xml:space="preserve">
+    <value>Factory phone</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="GTD" xml:space="preserve">
+    <value>GTD</value>
   </data>
   <data name="GTDAdditional" xml:space="preserve">
-    <value>ГТД дополнение</value>
+    <value>GTD-extended</value>
+  </data>
+  <data name="INN" xml:space="preserve">
+    <value>INN</value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="KPP" xml:space="preserve">
+    <value>KPP</value>
+  </data>
+  <data name="KS" xml:space="preserve">
+    <value>correspondent account</value>
+  </data>
+  <data name="LegalAddress" xml:space="preserve">
+    <value>Legal address</value>
+  </data>
+  <data name="LegalEntity" xml:space="preserve">
+    <value>Legal entity</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MailingAddress" xml:space="preserve">
+    <value>Mailing address</value>
+  </data>
+  <data name="Mark" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="MethodOfDelivery" xml:space="preserve">
+    <value>Method of delivery</value>
+  </data>
+  <data name="MethodOfTransit" xml:space="preserve">
+    <value>Method of transit</value>
+  </data>
+  <data name="NewCarrierName" xml:space="preserve">
+    <value>Specify another carrier</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Set new password</value>
+  </data>
+  <data name="Nic" xml:space="preserve">
+    <value>NIC</value>
+  </data>
+  <data name="OfficePhone" xml:space="preserve">
+    <value>Office phone</value>
+  </data>
+  <data name="OGRN" xml:space="preserve">
+    <value>OGRN</value>
+  </data>
+  <data name="Packing" xml:space="preserve">
+    <value>Packing</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Packing</value>
+  </data>
+  <data name="PriceForDelivery" xml:space="preserve">
+    <value>Cost of Delivery</value>
+  </data>
+  <data name="RecipientName" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="RS" xml:space="preserve">
+    <value>current account</value>
+  </data>
+  <data name="StateChangeTimestamp" xml:space="preserve">
+    <value>Date of the state </value>
+  </data>
+  <data name="StateItalianName" xml:space="preserve">
+    <value>Italian name</value>
+  </data>
+  <data name="StateName" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="StateNextName" xml:space="preserve">
+    <value>Next state</value>
+  </data>
+  <data name="StateRussianName" xml:space="preserve">
+    <value>Russian name</value>
+  </data>
+  <data name="Swift" xml:space="preserve">
+    <value>SWIFT</value>
+  </data>
+  <data name="TermsOfDelivery" xml:space="preserve">
+    <value>Terms of delivery</value>
+  </data>
+  <data name="Torg12" xml:space="preserve">
+    <value>TORG 12</value>
+  </data>
+  <data name="TotalCount" xml:space="preserve">
+    <value>Total count</value>
+  </data>
+  <data name="TotalWeight" xml:space="preserve">
+    <value>Total weight</value>
   </data>
   <data name="TransitReference" xml:space="preserve">
-    <value>Транзитный референс</value>
+    <value>Transit AirWaybill</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="WarehouseWorkingTime" xml:space="preserve">
+    <value>Time of the warehouse</value>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Страна</value>
+    <value>Country</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Sender</value>
   </data>
   <data name="AdditionalCost" xml:space="preserve">
     <value>Additional cost (€)</value>
@@ -340,76 +343,73 @@
     <value>Flight cost (€)</value>
   </data>
   <data name="FactureCost" xml:space="preserve">
-    <value>Фактура (€)</value>
+    <value>Facture (€)</value>
   </data>
   <data name="Insurance" xml:space="preserve">
-    <value>Страховка</value>
+    <value>Insurance</value>
   </data>
   <data name="ScotchCost" xml:space="preserve">
-    <value>Скотч (€)</value>
+    <value>Tape (€)</value>
   </data>
   <data name="TariffPerKg" xml:space="preserve">
-    <value>Тариф за кг (€)</value>
+    <value>Tarif per kg (€)</value>
   </data>
   <data name="Total" xml:space="preserve">
-    <value>Всего</value>
+    <value>Total</value>
   </data>
   <data name="TotalTariffCost" xml:space="preserve">
-    <value>Сумма (€)</value>
+    <value>Sum (€)</value>
   </data>
   <data name="TransitCost" xml:space="preserve">
-    <value>Доставка (€)</value>
+    <value>Delivery (€)</value>
   </data>
   <data name="PickupCost" xml:space="preserve">
     <value>Pick up (€)</value>
   </data>
   <data name="CostPerKgOfSender" xml:space="preserve">
-    <value>Стоимость за килограмм для сендера (€)</value>
+    <value>The cost per kilogram for Sender (€)</value>
   </data>
   <data name="TotalCostOfSenderForWeight" xml:space="preserve">
-    <value>Затраты по весу (€)</value>
+    <value>Costs by weight (€)</value>
   </data>
   <data name="TotalOfSender" xml:space="preserve">
-    <value>Всего по сендеру (€)</value>
+    <value>Total Sender (€)</value>
   </data>
   <data name="BrokerCostPerKg" xml:space="preserve">
-    <value>Затраты на брокера за кг (€)</value>
+    <value>The cost of the broker per kg (€)</value>
   </data>
   <data name="CustomCostPerKg" xml:space="preserve">
-    <value>Растаможка за кг (€)</value>
+    <value>Customs clearance per kg (€)</value>
   </data>
   <data name="FlightCostPerKg" xml:space="preserve">
-    <value>Стоимость перелета за кг (€)</value>
+    <value>The fare per kg (€)</value>
   </data>
   <data name="TotalTransitCost" xml:space="preserve">
-    <value>Затраты на форвардера (всего, €)</value>
+    <value>The cost of the forwarder (total, €)</value>
   </data>
   <data name="TotalScotchCost" xml:space="preserve">
-    <value>Суммарные затраты на скотч (€)</value>
+    <value>The total cost of tape (€)</value>
   </data>
   <data name="Profit" xml:space="preserve">
-    <value>Прибыль (€)</value>
+    <value>Profit (€)</value>
   </data>
   <data name="ProfitPerKg" xml:space="preserve">
-    <value>Прибыль с кг (€)</value>
+    <value>The profit kg (€)</value>
   </data>
   <data name="TotalExpenses" xml:space="preserve">
-    <value>Суммарные расходы (€)</value>
+    <value>The total costs (€)</value>
   </data>
   <data name="TotalProfit" xml:space="preserve">
-    <value>Прибыль (всего, €)</value>
+    <value>Profit (total, €)</value>
   </data>
   <data name="FactureCostEdited" xml:space="preserve">
-    <value>Фактура* (€)</value>
+    <value>Facture* (€)</value>
   </data>
   <data name="ScotchCostEdited" xml:space="preserve">
-    <value>Скотч* (€)</value>
+    <value>Tape* (€)</value>
   </data>
   <data name="PickupCostEdited" xml:space="preserve">
     <value>Pick up* (€)</value>
-  </data>
-  <data name="Sender" xml:space="preserve">
-    <value>Отправитель</value>
   </data>
   <data name="SenderRate" xml:space="preserve">
     <value>rate sender euro/kg</value>
@@ -418,36 +418,33 @@
     <value>total sender costs</value>
   </data>
   <data name="Contract" xml:space="preserve">
-    <value>Договор</value>
+    <value>Contract</value>
   </data>
   <data name="Class" xml:space="preserve">
-    <value>Класс</value>
+    <value>Class</value>
   </data>
   <data name="TariffOfTapePerBox" xml:space="preserve">
-    <value>Тариф за скотч (€/коробка)</value>
+    <value>Tariff for tape (€/box)</value>
   </data>
   <data name="TransitCostEdited" xml:space="preserve">
-    <value>Доставка* (€)</value>
-  </data>
-  <data name="Position" xml:space="preserve">
-    <value>Позиция</value>
+    <value>Delivery* (€)</value>
   </data>
   <data name="Body" xml:space="preserve">
-    <value>Текст письма</value>
+    <value>Body</value>
   </data>
   <data name="EnableEmailSend" xml:space="preserve">
-    <value>Включить рассылку почты</value>
+    <value>Enable email sending</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Язык</value>
+    <value>Language</value>
   </data>
   <data name="LocalizedName" xml:space="preserve">
-    <value>Переведенное имя</value>
+    <value>Localized name</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
   </data>
   <data name="Subject" xml:space="preserve">
-    <value>Тема письма</value>
-  </data>
-  <data name="UseApplicationEventTemplate" xml:space="preserve">
-    <value>Использовать шаблон события</value>
+    <value>Subject</value>
   </data>
 </root>

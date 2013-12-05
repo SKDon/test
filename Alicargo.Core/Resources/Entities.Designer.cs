@@ -70,7 +70,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Адрес.
+        ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
             get {
@@ -79,7 +79,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Адрес забора груза.
+        ///   Looks up a localized string similar to Address of a cargo unload.
         /// </summary>
         public static string AddressLoad {
             get {
@@ -88,7 +88,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Авианакладная.
+        ///   Looks up a localized string similar to Air waybill.
         /// </summary>
         public static string AirWaybill {
             get {
@@ -97,7 +97,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Аэропорт прилета.
+        ///   Looks up a localized string similar to Аrrival airport.
         /// </summary>
         public static string ArrivalAirport {
             get {
@@ -115,7 +115,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Банк.
+        ///   Looks up a localized string similar to Bank.
         /// </summary>
         public static string Bank {
             get {
@@ -124,7 +124,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to БИК.
+        ///   Looks up a localized string similar to BIC.
         /// </summary>
         public static string BIC {
             get {
@@ -133,7 +133,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Текст письма.
+        ///   Looks up a localized string similar to Body.
         /// </summary>
         public static string Body {
             get {
@@ -142,7 +142,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Брокер.
+        ///   Looks up a localized string similar to Broker.
         /// </summary>
         public static string Broker {
             get {
@@ -160,7 +160,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Затраты на брокера за кг (€).
+        ///   Looks up a localized string similar to The cost of the broker per kg (€).
         /// </summary>
         public static string BrokerCostPerKg {
             get {
@@ -169,7 +169,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Перевозчик.
+        ///   Looks up a localized string similar to Carrier.
         /// </summary>
         public static string CarrierName {
             get {
@@ -178,7 +178,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Характеристика товара.
+        ///   Looks up a localized string similar to Characteristics of the goods.
         /// </summary>
         public static string Characteristic {
             get {
@@ -187,7 +187,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Город.
+        ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
             get {
@@ -196,7 +196,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Класс.
+        ///   Looks up a localized string similar to Class.
         /// </summary>
         public static string Class {
             get {
@@ -205,7 +205,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Подтвердить новый пароль.
+        ///   Looks up a localized string similar to Confirm the new password.
         /// </summary>
         public static string ConfirmPassword {
             get {
@@ -214,7 +214,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Контактное лицо.
+        ///   Looks up a localized string similar to Contact.
         /// </summary>
         public static string Contacts {
             get {
@@ -223,7 +223,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Договор.
+        ///   Looks up a localized string similar to Contract.
         /// </summary>
         public static string Contract {
             get {
@@ -232,7 +232,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стоимость за килограмм для сендера (€).
+        ///   Looks up a localized string similar to The cost per kilogram for Sender (€).
         /// </summary>
         public static string CostPerKgOfSender {
             get {
@@ -241,7 +241,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Места (коробки).
+        ///   Looks up a localized string similar to Quantity.
         /// </summary>
         public static string Count {
             get {
@@ -250,7 +250,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Страна.
+        ///   Looks up a localized string similar to Country.
         /// </summary>
         public static string Country {
             get {
@@ -259,7 +259,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Счет-фактура.
+        ///   Looks up a localized string similar to Commercial invoice.
         /// </summary>
         public static string CP {
             get {
@@ -268,7 +268,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дата создания.
+        ///   Looks up a localized string similar to Created.
         /// </summary>
         public static string CreationTimestamp {
             get {
@@ -286,7 +286,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Растаможка за кг (€).
+        ///   Looks up a localized string similar to Customs clearance per kg (€).
         /// </summary>
         public static string CustomCostPerKg {
             get {
@@ -295,7 +295,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дата поступления  на склад.
+        ///   Looks up a localized string similar to Date of receipt to a warehouse.
         /// </summary>
         public static string DateInStock {
             get {
@@ -304,7 +304,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дата прилета.
+        ///   Looks up a localized string similar to Date of arrival.
         /// </summary>
         public static string DateOfArrival {
             get {
@@ -313,7 +313,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получение груза.
+        ///   Looks up a localized string similar to Date of cargo receipt.
         /// </summary>
         public static string DateOfCargoReceipt {
             get {
@@ -322,7 +322,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дата вылета.
+        ///   Looks up a localized string similar to Date of departure.
         /// </summary>
         public static string DateOfDeparture {
             get {
@@ -331,7 +331,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дней в работе.
+        ///   Looks up a localized string similar to Days in work.
         /// </summary>
         public static string DaysInWork {
             get {
@@ -340,7 +340,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Счет за доставку.
+        ///   Looks up a localized string similar to Delivery bill.
         /// </summary>
         public static string DeliveryBill {
             get {
@@ -349,7 +349,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тип доставки.
+        ///   Looks up a localized string similar to Delivery type.
         /// </summary>
         public static string DeliveryType {
             get {
@@ -358,7 +358,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Аэропорт вылета.
+        ///   Looks up a localized string similar to Departure airport.
         /// </summary>
         public static string DepartureAirport {
             get {
@@ -367,7 +367,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Номер заявки.
+        ///   Looks up a localized string similar to Application number.
         /// </summary>
         public static string DisplayNumber {
             get {
@@ -385,7 +385,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Включить рассылку почты.
+        ///   Looks up a localized string similar to Enable email sending.
         /// </summary>
         public static string EnableEmailSend {
             get {
@@ -394,7 +394,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Контактное лицо фабрики.
+        ///   Looks up a localized string similar to Factory contacts.
         /// </summary>
         public static string FactoryContact {
             get {
@@ -403,7 +403,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email фабрики.
+        ///   Looks up a localized string similar to Factory email.
         /// </summary>
         public static string FactoryEmail {
             get {
@@ -412,7 +412,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Фабрика.
+        ///   Looks up a localized string similar to Factory.
         /// </summary>
         public static string FactoryName {
             get {
@@ -421,7 +421,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Телефон фабрики.
+        ///   Looks up a localized string similar to Factory phone.
         /// </summary>
         public static string FactoryPhone {
             get {
@@ -430,7 +430,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Фактура (€).
+        ///   Looks up a localized string similar to Facture (€).
         /// </summary>
         public static string FactureCost {
             get {
@@ -439,7 +439,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Фактура* (€).
+        ///   Looks up a localized string similar to Facture* (€).
         /// </summary>
         public static string FactureCostEdited {
             get {
@@ -448,7 +448,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Прикрепленный файл.
+        ///   Looks up a localized string similar to File.
         /// </summary>
         public static string FileName {
             get {
@@ -466,7 +466,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стоимость перелета за кг (€).
+        ///   Looks up a localized string similar to The fare per kg (€).
         /// </summary>
         public static string FlightCostPerKg {
             get {
@@ -475,7 +475,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ГТД.
+        ///   Looks up a localized string similar to GTD.
         /// </summary>
         public static string GTD {
             get {
@@ -484,7 +484,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ГТД дополнение.
+        ///   Looks up a localized string similar to GTD-extended.
         /// </summary>
         public static string GTDAdditional {
             get {
@@ -493,7 +493,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ИНН.
+        ///   Looks up a localized string similar to INN.
         /// </summary>
         public static string INN {
             get {
@@ -502,7 +502,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Страховка.
+        ///   Looks up a localized string similar to Insurance.
         /// </summary>
         public static string Insurance {
             get {
@@ -511,7 +511,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Инвойс.
+        ///   Looks up a localized string similar to Invoice.
         /// </summary>
         public static string Invoice {
             get {
@@ -520,7 +520,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to КПП.
+        ///   Looks up a localized string similar to KPP.
         /// </summary>
         public static string KPP {
             get {
@@ -529,7 +529,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to к/с.
+        ///   Looks up a localized string similar to correspondent account.
         /// </summary>
         public static string KS {
             get {
@@ -538,7 +538,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Язык.
+        ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
             get {
@@ -547,7 +547,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Юридический адрес.
+        ///   Looks up a localized string similar to Legal address.
         /// </summary>
         public static string LegalAddress {
             get {
@@ -556,7 +556,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Юридическое лицо.
+        ///   Looks up a localized string similar to Legal entity.
         /// </summary>
         public static string LegalEntity {
             get {
@@ -565,7 +565,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Переведенное имя.
+        ///   Looks up a localized string similar to Localized name.
         /// </summary>
         public static string LocalizedName {
             get {
@@ -574,7 +574,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Логин.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
             get {
@@ -583,7 +583,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Почтовый адрес.
+        ///   Looks up a localized string similar to Mailing address.
         /// </summary>
         public static string MailingAddress {
             get {
@@ -592,7 +592,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Марка.
+        ///   Looks up a localized string similar to Brand.
         /// </summary>
         public static string Mark {
             get {
@@ -601,7 +601,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Способ доставки.
+        ///   Looks up a localized string similar to Method of delivery.
         /// </summary>
         public static string MethodOfDelivery {
             get {
@@ -610,7 +610,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Способ транзита.
+        ///   Looks up a localized string similar to Method of transit.
         /// </summary>
         public static string MethodOfTransit {
             get {
@@ -619,7 +619,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Указать другого перевозчика.
+        ///   Looks up a localized string similar to Specify another carrier.
         /// </summary>
         public static string NewCarrierName {
             get {
@@ -628,7 +628,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Задать новый пароль.
+        ///   Looks up a localized string similar to Set new password.
         /// </summary>
         public static string NewPassword {
             get {
@@ -637,7 +637,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NIC по инвойсу.
+        ///   Looks up a localized string similar to NIC.
         /// </summary>
         public static string Nic {
             get {
@@ -646,7 +646,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Телефон офиса.
+        ///   Looks up a localized string similar to Office phone.
         /// </summary>
         public static string OfficePhone {
             get {
@@ -655,7 +655,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ОГРН.
+        ///   Looks up a localized string similar to OGRN.
         /// </summary>
         public static string OGRN {
             get {
@@ -664,7 +664,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пакинг.
+        ///   Looks up a localized string similar to Packing.
         /// </summary>
         public static string Packing {
             get {
@@ -673,7 +673,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Телефон.
+        ///   Looks up a localized string similar to Packing.
         /// </summary>
         public static string Phone {
             get {
@@ -700,7 +700,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Позиция.
+        ///   Looks up a localized string similar to Position.
         /// </summary>
         public static string Position {
             get {
@@ -709,7 +709,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стоимость доставки.
+        ///   Looks up a localized string similar to Cost of Delivery.
         /// </summary>
         public static string PriceForDelivery {
             get {
@@ -718,7 +718,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Прибыль (€).
+        ///   Looks up a localized string similar to Profit (€).
         /// </summary>
         public static string Profit {
             get {
@@ -727,7 +727,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Прибыль с кг (€).
+        ///   Looks up a localized string similar to The profit kg (€).
         /// </summary>
         public static string ProfitPerKg {
             get {
@@ -736,7 +736,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получатель.
+        ///   Looks up a localized string similar to Recipient.
         /// </summary>
         public static string RecipientName {
             get {
@@ -745,7 +745,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to р/с.
+        ///   Looks up a localized string similar to current account.
         /// </summary>
         public static string RS {
             get {
@@ -754,7 +754,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Скотч (€).
+        ///   Looks up a localized string similar to Tape (€).
         /// </summary>
         public static string ScotchCost {
             get {
@@ -763,7 +763,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Скотч* (€).
+        ///   Looks up a localized string similar to Tape* (€).
         /// </summary>
         public static string ScotchCostEdited {
             get {
@@ -772,7 +772,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отправитель.
+        ///   Looks up a localized string similar to Sender.
         /// </summary>
         public static string Sender {
             get {
@@ -790,7 +790,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дата сметы статуса.
+        ///   Looks up a localized string similar to Date of the state .
         /// </summary>
         public static string StateChangeTimestamp {
             get {
@@ -799,7 +799,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Итальянское имя.
+        ///   Looks up a localized string similar to Italian name.
         /// </summary>
         public static string StateItalianName {
             get {
@@ -808,7 +808,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Статус.
+        ///   Looks up a localized string similar to State.
         /// </summary>
         public static string StateName {
             get {
@@ -817,7 +817,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ожидаемый статус.
+        ///   Looks up a localized string similar to Next state.
         /// </summary>
         public static string StateNextName {
             get {
@@ -826,7 +826,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Русское имя.
+        ///   Looks up a localized string similar to Russian name.
         /// </summary>
         public static string StateRussianName {
             get {
@@ -835,7 +835,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тема письма.
+        ///   Looks up a localized string similar to Subject.
         /// </summary>
         public static string Subject {
             get {
@@ -853,7 +853,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тариф за скотч (€/коробка).
+        ///   Looks up a localized string similar to Tariff for tape (€/box).
         /// </summary>
         public static string TariffOfTapePerBox {
             get {
@@ -862,7 +862,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тариф за кг (€).
+        ///   Looks up a localized string similar to Tarif per kg (€).
         /// </summary>
         public static string TariffPerKg {
             get {
@@ -871,7 +871,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Условия поставки.
+        ///   Looks up a localized string similar to Terms of delivery.
         /// </summary>
         public static string TermsOfDelivery {
             get {
@@ -880,7 +880,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Торг 12.
+        ///   Looks up a localized string similar to TORG 12.
         /// </summary>
         public static string Torg12 {
             get {
@@ -889,7 +889,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Всего.
+        ///   Looks up a localized string similar to Total.
         /// </summary>
         public static string Total {
             get {
@@ -898,7 +898,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Затраты по весу (€).
+        ///   Looks up a localized string similar to Costs by weight (€).
         /// </summary>
         public static string TotalCostOfSenderForWeight {
             get {
@@ -907,7 +907,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Общее количество.
+        ///   Looks up a localized string similar to Total count.
         /// </summary>
         public static string TotalCount {
             get {
@@ -916,7 +916,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Суммарные расходы (€).
+        ///   Looks up a localized string similar to The total costs (€).
         /// </summary>
         public static string TotalExpenses {
             get {
@@ -925,7 +925,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Всего по сендеру (€).
+        ///   Looks up a localized string similar to Total Sender (€).
         /// </summary>
         public static string TotalOfSender {
             get {
@@ -934,7 +934,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Прибыль (всего, €).
+        ///   Looks up a localized string similar to Profit (total, €).
         /// </summary>
         public static string TotalProfit {
             get {
@@ -943,7 +943,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Суммарные затраты на скотч (€).
+        ///   Looks up a localized string similar to The total cost of tape (€).
         /// </summary>
         public static string TotalScotchCost {
             get {
@@ -961,7 +961,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сумма (€).
+        ///   Looks up a localized string similar to Sum (€).
         /// </summary>
         public static string TotalTariffCost {
             get {
@@ -970,7 +970,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Затраты на форвардера (всего, €).
+        ///   Looks up a localized string similar to The cost of the forwarder (total, €).
         /// </summary>
         public static string TotalTransitCost {
             get {
@@ -979,7 +979,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Общий вес.
+        ///   Looks up a localized string similar to Total weight.
         /// </summary>
         public static string TotalWeight {
             get {
@@ -988,7 +988,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Доставка (€).
+        ///   Looks up a localized string similar to Delivery (€).
         /// </summary>
         public static string TransitCost {
             get {
@@ -997,7 +997,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Доставка* (€).
+        ///   Looks up a localized string similar to Delivery* (€).
         /// </summary>
         public static string TransitCostEdited {
             get {
@@ -1006,7 +1006,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Транзитный референс.
+        ///   Looks up a localized string similar to Transit AirWaybill.
         /// </summary>
         public static string TransitReference {
             get {
@@ -1015,16 +1015,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Использовать шаблон события.
-        /// </summary>
-        public static string UseApplicationEventTemplate {
-            get {
-                return ResourceManager.GetString("UseApplicationEventTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Стоимость.
+        ///   Looks up a localized string similar to Cost.
         /// </summary>
         public static string Value {
             get {
@@ -1033,7 +1024,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Объем.
+        ///   Looks up a localized string similar to Volume.
         /// </summary>
         public static string Volume {
             get {
@@ -1042,7 +1033,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Время работы склада.
+        ///   Looks up a localized string similar to Time of the warehouse.
         /// </summary>
         public static string WarehouseWorkingTime {
             get {
@@ -1051,7 +1042,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вес (кг).
+        ///   Looks up a localized string similar to Weight.
         /// </summary>
         public static string Weight {
             get {

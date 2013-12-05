@@ -70,13 +70,13 @@
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
     <Compile Include="Localization\CultureContext.cs" />
     <Compile Include="Localization\ICultureContext.cs" />
-    <Compile Include="Resources\Entities.Designer.cs">
-      <DependentUpon>Entities.resx</DependentUpon>
+    <Compile Include="Resources\Entities.ru.Designer.cs">
+      <DependentUpon>Entities.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Entities.en.Designer.cs">
-      <DependentUpon>Entities.en.resx</DependentUpon>
+    <Compile Include="Resources\Entities.Designer.cs">
+      <DependentUpon>Entities.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -85,13 +85,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Enums.Designer.cs">
-      <DependentUpon>Enums.resx</DependentUpon>
+    <Compile Include="Resources\Enums.ru.Designer.cs">
+      <DependentUpon>Enums.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Enums.en.Designer.cs">
-      <DependentUpon>Enums.en.resx</DependentUpon>
+    <Compile Include="Resources\Enums.Designer.cs">
+      <DependentUpon>Enums.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -130,9 +130,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Entities.en.resx">
+    <EmbeddedResource Include="Resources\Entities.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities.it.resx">
@@ -140,22 +140,22 @@
       <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.resx">
+    <EmbeddedResource Include="Resources\Entities.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
+      <LastGenOutput>Entities.ru.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.en.resx">
+    <EmbeddedResource Include="Resources\Enums.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Enums.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums.it.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Enums.it.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.resx">
+    <EmbeddedResource Include="Resources\Enums.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.Designer.cs</LastGenOutput>
+      <LastGenOutput>Enums.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Mail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
