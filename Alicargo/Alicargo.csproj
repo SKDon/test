@@ -151,10 +151,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
+    <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
+    <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelClientCalculation.cs" />
     <Compile Include="Services\Excel\ExcelConstants.cs" />
     <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
@@ -331,6 +334,9 @@
     <Compile Include="T4MVC\CarrierController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\CityController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\ClientCalculationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -397,6 +403,7 @@
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationItem.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationListCollection.cs" />
+    <Compile Include="ViewModels\CityEditModel.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
@@ -675,6 +682,7 @@
     <Content Include="Scripts\app\Calculation\Client\Grid.js" />
     <Content Include="Scripts\app\Calculation\Sender\Columns.js" />
     <Content Include="Scripts\app\Calculation\Sender\Grid.js" />
+    <Content Include="Scripts\app\City\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\it.js" />
@@ -1573,6 +1581,10 @@
     <Content Include="Views\EmailTemplate\Edit.cshtml" />
     <Content Include="Views\EmailTemplate\EditorTemplates\ApplicationEventTemplateModel.cshtml" />
     <Content Include="Views\EmailTemplate\Help.cshtml" />
+    <Content Include="Views\City\Index.cshtml" />
+    <Content Include="Views\City\Edit.cshtml" />
+    <Content Include="Views\City\Create.cshtml" />
+    <Content Include="Views\City\EditorTemplates\CityEditModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

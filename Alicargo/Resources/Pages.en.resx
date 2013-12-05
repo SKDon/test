@@ -327,4 +327,10 @@
   <data name="Help" xml:space="preserve">
     <value>Help</value>
   </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Cities</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
 </root>

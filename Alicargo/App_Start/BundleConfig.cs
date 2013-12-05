@@ -45,6 +45,11 @@ namespace Alicargo.App_Start
 					"~/Scripts/app/Template/Grid.js"
 				));
 
+			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.CityListJs)
+				.Include(
+					"~/Scripts/app/City/Grid.js"
+				));
+
 			BundleTable.Bundles.Add(new ScriptBundle(PathConstants.TemplateEditJs)
 				.Include(
 					"~/Scripts/app/Template/Edit.js"

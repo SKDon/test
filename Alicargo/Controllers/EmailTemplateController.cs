@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Localization;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
 using Alicargo.Services.Abstract;

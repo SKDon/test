@@ -58,6 +58,7 @@
     <Compile Include="Contracts\BrokerData.cs" />
     <Compile Include="Contracts\CalculationData.cs" />
     <Compile Include="Contracts\CarrierData.cs" />
+    <Compile Include="Contracts\CityData.cs" />
     <Compile Include="Contracts\ClientData.cs" />
     <Compile Include="Contracts\EmailMessage.cs" />
     <Compile Include="Contracts\EmailMessageData.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Repositories\IBrokerRepository.cs" />
     <Compile Include="Repositories\ICalculationRepository.cs" />
     <Compile Include="Repositories\ICarrierRepository.cs" />
+    <Compile Include="Repositories\ICityRepository.cs" />
     <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\IClientFileRepository.cs" />

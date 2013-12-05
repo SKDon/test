@@ -268,6 +268,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Города.
+        /// </summary>
+        public static string Cities {
+            get {
+                return ResourceManager.GetString("Cities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Город.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Клиент.
         /// </summary>
         public static string Client {

@@ -1,4 +1,6 @@
-﻿:r .\InitStates.sql
+﻿:r .\InitCities.sql
+
+:r .\InitStates.sql
 
 :r .\InitUsers.sql
 

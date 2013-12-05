@@ -32,6 +32,7 @@ public static class MVC
     public static Alicargo.Controllers.BrokerController Broker = new Alicargo.Controllers.T4MVC_BrokerController();
     public static Alicargo.Controllers.CalculationController Calculation = new Alicargo.Controllers.T4MVC_CalculationController();
     public static Alicargo.Controllers.CarrierController Carrier = new Alicargo.Controllers.T4MVC_CarrierController();
+    public static Alicargo.Controllers.CityController City = new Alicargo.Controllers.T4MVC_CityController();
     public static Alicargo.Controllers.ClientCalculationController ClientCalculation = new Alicargo.Controllers.T4MVC_ClientCalculationController();
     public static Alicargo.Controllers.ClientController Client = new Alicargo.Controllers.T4MVC_ClientController();
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();
@@ -211,6 +212,14 @@ namespace Links
                     public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
                 }
             
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class City {
+                private const string URLPATH = "~/Scripts/app/City";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

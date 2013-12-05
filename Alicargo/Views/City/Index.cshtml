@@ -1,0 +1,15 @@
+﻿@using Resources
+<style>
+	.container {
+		padding: 0 20px;
+		width: auto;
+	}
+</style>
+<p>
+	<b>@Pages.Cities</b>
+</p>
+<div id="city-grid" class="grid"></div>
+@section scripts
+{
+	@Scripts.Render(PathConstants.CityListJs)
+}

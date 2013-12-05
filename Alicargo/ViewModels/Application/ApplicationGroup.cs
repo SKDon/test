@@ -14,33 +14,23 @@
         {
             public Aggregates(int count, float weight)
             {
-                Count = new CountHolder(count);
-                Weight = new WeightHolder(weight);
+				Count = new Holder<int>(count);
+				Weight = new Holder<float>(weight);
             }
 
-            public CountHolder Count { get; private set; }
-            public WeightHolder Weight { get; private set; }
+			public Holder<int> Count { get; private set; }
+			public Holder<float> Weight { get; private set; }
         }
 
-        public sealed class CountHolder
-        {
-            public readonly int sum;
+		public sealed class Holder<T>
+		{
+			public readonly T sum;
 
-            public CountHolder(int value)
-            {
-                sum = value;
-            }
-        }
-
-        public sealed class WeightHolder
-        {
-            public readonly float sum;
-
-            public WeightHolder(float value)
-            {
-                sum = value;
-            }
-        }
+			public Holder(T value)
+			{
+				sum = value;
+			}
+		}
 
         // ReSharper restore InconsistentNaming
     }

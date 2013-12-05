@@ -140,10 +140,13 @@
     <None Include="Scripts\InitUsers.sql" />
     <None Include="Scripts\TestApplications.sql" />
     <None Include="Scripts\InitEmailTemplates.sql" />
+    <Build Include="Tables\City.sql" />
+    <Build Include="Stored procedures\City_GetList.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
     <Build Include="Stored procedures\State_Add.sql" />
     <Build Include="Stored procedures\StateLocalization_Merge.sql" />
+    <None Include="Scripts\InitCities.sql" />
   </ItemGroup>
 </Project>
