@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[City]
 (
-	[Id] INT NOT NULL IDENTITY (1, 1),
+	[Id] BIGINT NOT NULL IDENTITY (1, 1),
 	[Name_En] NVARCHAR(128) NOT NULL,
 	[Name_Ru] NVARCHAR(128) NOT NULL,
 	[Position] INT NOT NULL, 

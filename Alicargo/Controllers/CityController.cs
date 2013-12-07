@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.ViewModels;
 
 namespace Alicargo.Controllers
 {
@@ -10,7 +11,9 @@ namespace Alicargo.Controllers
 		private readonly ICityService _cities;
 		private readonly IIdentityService _identity;
 
-		public CityController(ICityService cities, IIdentityService identity)
+		public CityController(
+			ICityService cities,
+			IIdentityService identity)
 		{
 			_cities = cities;
 			_identity = identity;
@@ -33,13 +36,41 @@ namespace Alicargo.Controllers
 		[HttpGet, Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id)
 		{
-			return View();
+			var model = _cities.Get(id);
+
+			return View(model);
 		}
 
 		[HttpGet, Access(RoleType.Admin)]
 		public virtual ViewResult Create()
 		{
 			return View();
+		}
+
+		[HttpPost, Access(RoleType.Admin)]
+		public virtual ActionResult Edit(long id, CityEditModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			_cities.Edit(id, model);
+
+			return RedirectToAction(MVC.City.Edit(id));
+		}
+
+		[HttpPost, Access(RoleType.Admin)]
+		public virtual ActionResult Create(CityEditModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			var id = _cities.Add(model);
+
+			return RedirectToAction(MVC.City.Edit(id));
 		}
 	}
 }

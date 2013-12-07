@@ -115,6 +115,7 @@
     <Compile Include="Repositories\ClientContractRepository.cs" />
     <Compile Include="Repositories\ApplicationEventRepositoryTests.cs" />
     <Compile Include="Repositories\EmailTemplateRepositoryTests.cs" />
+    <Compile Include="Repositories\CityRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">

@@ -142,6 +142,8 @@
     <None Include="Scripts\InitEmailTemplates.sql" />
     <Build Include="Tables\City.sql" />
     <Build Include="Stored procedures\City_GetList.sql" />
+    <Build Include="Stored procedures\City_Add.sql" />
+    <Build Include="Stored procedures\City_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

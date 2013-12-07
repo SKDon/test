@@ -16,5 +16,15 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			return _executor.Array<CityData>("[dbo].[City_GetList]", new { language });
 		}
+
+		public long Add(string englishName, string russianName, int position)
+		{
+			return _executor.Query<long>("[dbo].[City_Add]", new { englishName, russianName, position });
+		}
+
+		public void Update(long id, string englishName, string russianName, int position)
+		{
+			_executor.Execute("[dbo].[City_Update]", new { englishName, russianName, position, id });
+		}
 	}
 }

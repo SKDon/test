@@ -101,6 +101,15 @@ namespace Alicargo.Controllers
         public class ActionParamsClass_Edit
         {
             public readonly string id = "id";
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Create
+        {
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -170,6 +179,27 @@ namespace Alicargo.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
             CreateOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.CityEditModel model);
+
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.CityEditModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            EditOverride(callInfo, id, model);
+            return callInfo;
+        }
+
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.CityEditModel model);
+
+        public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.CityEditModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            CreateOverride(callInfo, model);
             return callInfo;
         }
 
