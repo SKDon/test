@@ -77,6 +77,8 @@
     <Build Include="Stored procedures\ClientContract_Merge.sql" />
     <Build Include="Tables\ApplicationFile.sql" />
     <Build Include="Stored procedures\ApplicationFile_GetNames.sql" />
+    <Build Include="Stored procedures\ApplicationFile_Add.sql" />
+    <Build Include="Stored procedures\ApplicationFile_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.publish.xml" />

@@ -13,6 +13,8 @@ namespace Alicargo.Contracts.Repositories
 		FileHolder GetTorg12File(long id);
 		FileHolder GetPackingFile(long id);
 
-		Dictionary<long, string> GetFileNames(long id, ApplicationFileType type);
+		Dictionary<long, string> GetFileNames(long applicationId, ApplicationFileType type);
+		long Add(long applicationId, ApplicationFileType type, string fileName, byte[] bytes);
+		void Delete(long id);
 	}
 }

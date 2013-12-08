@@ -96,5 +96,15 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", new { applicationId, TypeId = type })
 				.ToDictionary(x => (long)x.Id, x => (string)x.Name);
 		}
+
+		public long Add(long applicationId, ApplicationFileType type, string name, byte[] data)
+		{
+			return _executor.Query<long>("[dbo].[ApplicationFile_Add]", new { applicationId, TypeId = type, name, data });
+		}
+
+		public void Delete(long id)
+		{
+			_executor.Execute("[dbo].[ApplicationFile_Delete]", new { id });
+		}
 	}
 }

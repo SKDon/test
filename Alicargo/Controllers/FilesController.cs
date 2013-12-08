@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.MvcHelpers.Extensions;
 
 namespace Alicargo.Controllers
 {
@@ -42,16 +43,16 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		public virtual JsonResult Upload(long id, ApplicationFileType type, HttpPostedFileBase file)
 		{
+			var fileId = _files.Add(id, type, file.FileName, file.GetBytes());
 
-			return Json(new
-			{
-				id = 123
-			});
+			return Json(new { id = fileId });
 		}
 
 		[HttpPost]
 		public virtual HttpStatusCodeResult Delete(long id)
 		{
+			_files.Delete(id);
+
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 	}
