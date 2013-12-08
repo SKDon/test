@@ -20,15 +20,15 @@
 
 		public string Invoice { get; set; }
 
-		public string InvoiceFileName { get; set; }
+		public string InvoiceFiles { get; set; }
 
-		public string PackingFileName { get; set; }
+		public string PackingFiles { get; set; }
 
-		public string SwiftFileName { get; set; }
+		public string SwiftFiles { get; set; }
 
-		public string DeliveryBillFileName { get; set; }
+		public string DeliveryBillFiles { get; set; }
 
-		public string Torg12FileName { get; set; }
+		public string Torg12Files { get; set; }
 
 		public string DateOfCargoReceipt { get; set; }
 
