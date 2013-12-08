@@ -5,7 +5,6 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
-using Alicargo.Jobs.ApplicationEvents.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
@@ -56,14 +55,19 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		private FileHolder[] GeAllFiles(long applicationId, long? awbId)
 		{
-			var files = new List<FileHolder>(8);
+			var files = new List<FileHolder>();
 
-			var invoiceFile = _files.GetInvoiceFile(applicationId);
-			var deliveryBillFile = _files.GetDeliveryBillFile(applicationId);
-			var cpFile = _files.GetCPFile(applicationId);
-			var packingFile = _files.GetPackingFile(applicationId);
-			var swiftFile = _files.GetSwiftFile(applicationId);
-			var torg12File = _files.GetTorg12File(applicationId);
+			var types = Enum.GetValues(typeof (ApplicationFileType));
+			foreach (ApplicationFileType type in types)
+			{
+				var names = _files.GetNames(applicationId, type);
+				foreach (var name in names)
+				{
+					var holder = _files.Get(name.Key);
+
+					files.Add(holder);
+				}
+			}
 
 			if (awbId.HasValue)
 			{
@@ -73,13 +77,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				if (gtdFile != null) files.Add(gtdFile);
 				if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);
 			}
-
-			if (invoiceFile != null) files.Add(invoiceFile);
-			if (deliveryBillFile != null) files.Add(deliveryBillFile);
-			if (cpFile != null) files.Add(cpFile);
-			if (packingFile != null) files.Add(packingFile);
-			if (swiftFile != null) files.Add(swiftFile);
-			if (torg12File != null) files.Add(torg12File);
 
 			return files.ToArray();
 		}

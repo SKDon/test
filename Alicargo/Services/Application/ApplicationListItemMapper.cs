@@ -47,12 +47,12 @@ namespace Alicargo.Services.Application
 			var states = _states.Get(_identity.TwoLetterISOLanguageName, stateIds);
 			var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
 			var calculations = _applications.GetCalculations(appIds);
-			var cps = _files.GetFileNames(appIds, ApplicationFileType.CP);
-			var deliveryBills = _files.GetFileNames(appIds, ApplicationFileType.DeliveryBill);
-			var invoices = _files.GetFileNames(appIds, ApplicationFileType.Invoice);
-			var packings = _files.GetFileNames(appIds, ApplicationFileType.Packing);
-			var swifts = _files.GetFileNames(appIds, ApplicationFileType.Swift);
-			var torg12 = _files.GetFileNames(appIds, ApplicationFileType.Torg12);
+			var cps = _files.GetInfo(appIds, ApplicationFileType.CP);
+			var deliveryBills = _files.GetInfo(appIds, ApplicationFileType.DeliveryBill);
+			var invoices = _files.GetInfo(appIds, ApplicationFileType.Invoice);
+			var packings = _files.GetInfo(appIds, ApplicationFileType.Packing);
+			var swifts = _files.GetInfo(appIds, ApplicationFileType.Swift);
+			var torg12 = _files.GetInfo(appIds, ApplicationFileType.Torg12);
 
 			return data.Select(x => new ApplicationListItem
 			{

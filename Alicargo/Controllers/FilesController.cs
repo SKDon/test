@@ -56,7 +56,7 @@ namespace Alicargo.Controllers
 		[HttpGet]
 		public virtual JsonResult Files(long id, ApplicationFileType type)
 		{
-			var names = _files.GetFileNames(id, type);
+			var names = _files.GetNames(id, type);
 
 			ViewBag.ApplicationId = id;
 

@@ -108,11 +108,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			var countryName = application.CountryName.First(x => x.Key == language).Value;
 			var value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, culture);
 
-			var deliveryBill = _files.GetFileNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Value).ToArray();
-			var invoice = _files.GetFileNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Value).ToArray();
-			var packing = _files.GetFileNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
-			var swift = _files.GetFileNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
-			var torg12 = _files.GetFileNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
+			var deliveryBill = _files.GetNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Value).ToArray();
+			var invoice = _files.GetNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Value).ToArray();
+			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
+			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
+			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
 
 			return new TextLocalizedData
 			{

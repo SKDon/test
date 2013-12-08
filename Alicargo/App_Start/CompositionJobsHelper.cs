@@ -142,7 +142,7 @@ namespace Alicargo.App_Start
 			var states = new StateRepository(executor);
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
-			var files = new ApplicationFileRepository(unitOfWork, executor);
+			var files = new ApplicationFileRepository(executor);
 			var filesFasade = new FilesFasade(serializer, awbs, files);
 			var textBulder = new TextBulder(serializer, states, files);
 			var stateSettings = new StateSettingsRepository(executor);
