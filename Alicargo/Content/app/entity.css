@@ -115,6 +115,10 @@
 		column-count: 5;
 	}
 
+		.grid-details .properties p {
+			white-space: normal;
+		}
+
 .application-grid-select-client select {
 	margin-bottom: 0;
 	width: auto;

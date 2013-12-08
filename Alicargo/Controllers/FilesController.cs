@@ -38,6 +38,13 @@ namespace Alicargo.Controllers
 			_serializer = serializer;
 		}
 
+		public virtual FileResult Download(long id)
+		{
+			var file = _files.Get(id);
+
+			return file.GetFileResult();
+		}
+
 		[HttpGet]
 		public virtual ViewResult Application(long id)
 		{

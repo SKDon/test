@@ -69,6 +69,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Stored procedures" />
+    <Folder Include="Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ClientContract.sql" />
@@ -80,6 +81,7 @@
     <Build Include="Stored procedures\ApplicationFile_Add.sql" />
     <Build Include="Stored procedures\ApplicationFile_Delete.sql" />
     <Build Include="Stored procedures\ApplicationFile_Get.sql" />
+    <Build Include="Types\IdsTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.publish.xml" />

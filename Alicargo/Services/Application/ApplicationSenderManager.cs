@@ -109,13 +109,10 @@ namespace Alicargo.Services.Application
 			return new ApplicationSenderModel
 			{
 				Count = application.Count,
-				PackingFile = null,
 				FactoryName = application.FactoryName,
 				Weight = application.Weight,
 				Invoice = application.Invoice,
-				InvoiceFile = null,
 				MarkName = application.MarkName,
-				SwiftFile = null,
 				Currency = new CurrencyModel
 				{
 					Value = application.Value,

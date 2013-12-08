@@ -1,7 +1,6 @@
 ﻿@using Alicargo.Core.Resources
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
-
 # if(DaysInWork != null){ #
 <p>
 	<span>@Entities.DaysInWork:</span>
@@ -65,19 +64,19 @@
 # if(WarehouseWorkingTime != null){ #
 <p>
 	<span>@Entities.WarehouseWorkingTime:</span>
-	#= WarehouseWorkingTime #				
+	#= WarehouseWorkingTime #
 </p>
-# } #			
+# } #
 # if(TermsOfDelivery != null){ #
 <p>
 	<span>@Entities.TermsOfDelivery:</span>
 	#= TermsOfDelivery #
 </p>
-# } #	
+# } #
 # if(MethodOfDeliveryLocalString != null){ #
 <p>
 	<span>@Entities.MethodOfDelivery:</span>
-	#= MethodOfDeliveryLocalString #				
+	#= MethodOfDeliveryLocalString #
 </p>
 # } #
 # if(TransitCity != null){ #
@@ -107,9 +106,9 @@
 # if(TransitWarehouseWorkingTime != null){ #
 <p>
 	<span>@Entities.WarehouseWorkingTime (@Pages.Transit):</span>
-	#= TransitWarehouseWorkingTime #				
+	#= TransitWarehouseWorkingTime #
 </p>
-# } #	
+# } #
 # if(TransitMethodOfTransitString != null){ #
 <p>
 	<span>@Entities.MethodOfTransit:</span>
@@ -119,13 +118,13 @@
 # if(TransitDeliveryTypeString != null){ #
 <p>
 	<span>@Entities.DeliveryType:</span>
-	#= TransitDeliveryTypeString #				
+	#= TransitDeliveryTypeString #
 </p>
-# } #			
+# } #
 # if(TransitCarrierName != null){ #
 <p>
 	<span>@Entities.CarrierName:</span>
-	#= TransitCarrierName #				
+	#= TransitCarrierName #
 </p>
 # } #
 # if(FactoryName != null){ #
@@ -182,39 +181,63 @@
 	#= PickupCost #
 </p>
 # } #
-# if(InvoiceFileName != null){ #
+# if(InvoiceFiles != null){ #
 <p>
 	<span>@Entities.Invoice:</span>
-	<a href="@Url.Action(MVC.Application.InvoiceFile())/#= Id #">#= InvoiceFileName #</a>
+	# for(var i in InvoiceFiles) { #
+	# var item = InvoiceFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #
-# if(SwiftFileName != null){ #
+# if(SwiftFiles != null){ #
 <p>
 	<span>@Entities.Swift:</span>
-	<a href="@Url.Action(MVC.Application.SwiftFile())/#= Id #">#= SwiftFileName #</a>
+	# for(var i in SwiftFiles) { #
+	# var item = SwiftFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #
-# if(DeliveryBillFileName != null){ #
+# if(DeliveryBillFiles != null){ #
 <p>
 	<span>@Entities.DeliveryBill:</span>
-	<a href="@Url.Action(MVC.Application.DeliveryBillFile())/#= Id #">#= DeliveryBillFileName #</a>
+	# for(i in DeliveryBillFiles) { #
+	# var item = DeliveryBillFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #
-# if(Torg12FileName != null){ #
+# if(Torg12Files != null){ #
 <p>
 	<span>@Entities.Torg12:</span>
-	<a href="@Url.Action(MVC.Application.Torg12File())/#= Id #">#= Torg12FileName #</a>
+	# for(i in Torg12Files) { #
+	# var item = Torg12Files[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #
-# if(CPFileName != null){ #
+# if(CPFiles != null){ #
 <p>
 	<span>@Entities.CP:</span>
-	<a href="@Url.Action(MVC.Application.CPFile())/#= Id #">#= CPFileName #</a>
+	# for(i in CPFiles) { #
+	# var item = CPFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #
-# if(PackingFileName != null){ #
+# if(PackingFiles != null){ #
 <p>
 	<span>@Entities.Packing:</span>
-	<a href="@Url.Action(MVC.Application.PackingFile())/#= Id #">#= PackingFileName #</a>
+	# for(i in PackingFiles) { #
+	# var item = PackingFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #

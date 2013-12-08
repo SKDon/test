@@ -43,6 +43,12 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.FileResult Download()
+        {
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ViewResult Application()
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Application);
@@ -81,6 +87,7 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Download = "Download";
             public readonly string Application = "Application";
             public readonly string Files = "Files";
             public readonly string Upload = "Upload";
@@ -90,6 +97,7 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Download = "Download";
             public const string Application = "Application";
             public const string Files = "Files";
             public const string Upload = "Upload";
@@ -97,6 +105,14 @@ namespace Alicargo.Controllers
         }
 
 
+        static readonly ActionParamsClass_Download s_params_Download = new ActionParamsClass_Download();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Download DownloadParams { get { return s_params_Download; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Download
+        {
+            public readonly string id = "id";
+        }
         static readonly ActionParamsClass_Application s_params_Application = new ActionParamsClass_Application();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Application ApplicationParams { get { return s_params_Application; } }
@@ -143,8 +159,10 @@ namespace Alicargo.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Application = "Application";
+                public readonly string FilesHolder = "FilesHolder";
             }
             public readonly string Application = "~/Views/Files/Application.cshtml";
+            public readonly string FilesHolder = "~/Views/Files/FilesHolder.cshtml";
         }
     }
 
@@ -152,6 +170,16 @@ namespace Alicargo.Controllers
     public partial class T4MVC_FilesController : Alicargo.Controllers.FilesController
     {
         public T4MVC_FilesController() : base(Dummy.Instance) { }
+
+        partial void DownloadOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+
+        public override System.Web.Mvc.FileResult Download(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DownloadOverride(callInfo, id);
+            return callInfo;
+        }
 
         partial void ApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 

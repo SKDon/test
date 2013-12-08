@@ -6,6 +6,8 @@ namespace Alicargo.Contracts.Repositories
 {
 	public interface IApplicationFileRepository
 	{
+		#region Obsolete
+
 		FileHolder GetInvoiceFile(long id);
 		FileHolder GetSwiftFile(long id);
 		FileHolder GetCPFile(long id);
@@ -13,7 +15,11 @@ namespace Alicargo.Contracts.Repositories
 		FileHolder GetTorg12File(long id);
 		FileHolder GetPackingFile(long id);
 
-		Dictionary<long, string> GetFileNames(long applicationId, ApplicationFileType type);
+		#endregion
+
+
+		IReadOnlyDictionary<long, string> GetFileNames(long applicationId, ApplicationFileType type);
+		IReadOnlyDictionary<long, FileInfo[]> GetFileNames(long[] applicationIds, ApplicationFileType type);
 		FileHolder Get(long id);
 		long Add(long applicationId, ApplicationFileType type, string fileName, byte[] bytes);
 		void Delete(long id);

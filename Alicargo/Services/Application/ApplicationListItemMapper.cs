@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Localization;
@@ -12,6 +13,7 @@ namespace Alicargo.Services.Application
 	internal sealed class ApplicationListItemMapper : IApplicationListItemMapper
 	{
 		private readonly IApplicationRepository _applications;
+		private readonly IApplicationFileRepository _files;
 		private readonly ICountryRepository _countryRepository;
 		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;
@@ -23,6 +25,7 @@ namespace Alicargo.Services.Application
 			IStateRepository states,
 			IStateConfig stateConfig,
 			IApplicationRepository applications,
+			IApplicationFileRepository files,
 			ICountryRepository countryRepository,
 			IIdentityService identity)
 		{
@@ -30,17 +33,26 @@ namespace Alicargo.Services.Application
 			_states = states;
 			_stateConfig = stateConfig;
 			_applications = applications;
+			_files = files;
 			_countryRepository = countryRepository;
 			_identity = identity;
 		}
 
 		public ApplicationListItem[] Map(ApplicationListItemData[] data)
 		{
+			var appIds = data.Select(x => x.Id).ToArray();
+			var stateIds = data.Select(x => x.StateId).ToArray();
+
 			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
-			var ids = data.Select(x => x.StateId).ToArray();
-			var states = _states.Get(_identity.TwoLetterISOLanguageName, ids);
+			var states = _states.Get(_identity.TwoLetterISOLanguageName, stateIds);
 			var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
-			var calculations = _applications.GetCalculations(data.Select(x => x.Id).ToArray());
+			var calculations = _applications.GetCalculations(appIds);
+			var cps = _files.GetFileNames(appIds, ApplicationFileType.CP);
+			var deliveryBills = _files.GetFileNames(appIds, ApplicationFileType.DeliveryBill);
+			var invoices = _files.GetFileNames(appIds, ApplicationFileType.Invoice);
+			var packings = _files.GetFileNames(appIds, ApplicationFileType.Packing);
+			var swifts = _files.GetFileNames(appIds, ApplicationFileType.Swift);
+			var torg12 = _files.GetFileNames(appIds, ApplicationFileType.Torg12);
 
 			return data.Select(x => new ApplicationListItem
 			{
@@ -56,30 +68,24 @@ namespace Alicargo.Services.Application
 				CanSetState = stateAvailability.Contains(x.StateId),
 				AddressLoad = x.AddressLoad,
 				Id = x.Id,
-				PackingFileName = x.PackingFileName,
 				FactoryName = x.FactoryName,
 				Invoice = x.Invoice,
-				InvoiceFileName = x.InvoiceFileName,
 				MarkName = x.MarkName,
-				SwiftFileName = x.SwiftFileName,
 				Volume = x.Volume,
 				Count = x.Count,
 				AirWaybill = x.AirWaybill,
-				CPFileName = x.CPFileName,
 				Characteristic = x.Characteristic,
 				ClientLegalEntity = x.ClientLegalEntity,
 				ClientNic = x.ClientNic,
 				CreationTimestamp = x.CreationTimestamp,
 				DateInStock = x.DateInStock,
 				DateOfCargoReceipt = x.DateOfCargoReceipt,
-				DeliveryBillFileName = x.DeliveryBillFileName,
 				FactoryContact = x.FactoryContact,
 				FactoryEmail = x.FactoryEmail,
 				FactoryPhone = x.FactoryPhone,
 				StateChangeTimestamp = x.StateChangeTimestamp,
 				StateId = x.StateId,
 				TermsOfDelivery = x.TermsOfDelivery,
-				Torg12FileName = x.Torg12FileName,
 				TransitAddress = x.TransitAddress,
 				TransitCarrierName = x.TransitCarrierName,
 				TransitId = x.TransitId,
@@ -103,7 +109,13 @@ namespace Alicargo.Services.Application
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,
 				ForwarderTransitCost = x.ForwarderTransitCost,
-				CanSetTransitCost = !calculations.ContainsKey(x.Id)
+				CanSetTransitCost = !calculations.ContainsKey(x.Id),
+				CPFiles = cps.ContainsKey(x.Id) ? cps[x.Id] : null,
+				DeliveryBillFiles = deliveryBills.ContainsKey(x.Id) ? deliveryBills[x.Id] : null,
+				InvoiceFiles = invoices.ContainsKey(x.Id) ? invoices[x.Id] : null,
+				PackingFiles = packings.ContainsKey(x.Id) ? packings[x.Id] : null,
+				SwiftFiles = swifts.ContainsKey(x.Id) ? swifts[x.Id] : null,
+				Torg12Files = torg12.ContainsKey(x.Id) ? torg12[x.Id] : null
 			}).ToArray();
 		}
 	}

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Localization;
-using Alicargo.Core.Services;
 
 namespace Alicargo.ViewModels.Application
 {
@@ -23,7 +23,7 @@ namespace Alicargo.ViewModels.Application
 		{
 			get
 			{
-				return ApplicationHelper.GetDaysInWork(CreationTimestamp);				
+				return ApplicationHelper.GetDaysInWork(CreationTimestamp);
 			}
 		}
 
@@ -105,17 +105,17 @@ namespace Alicargo.ViewModels.Application
 
 		public string Invoice { get; set; }
 
-		public string InvoiceFileName { get; set; }
+		public FileInfo[] InvoiceFiles { get; set; }
 
-		public string SwiftFileName { get; set; }
+		public FileInfo[] SwiftFiles { get; set; }
 
-		public string PackingFileName { get; set; }
+		public FileInfo[] PackingFiles { get; set; }
 
-		public string DeliveryBillFileName { get; set; }
+		public FileInfo[] DeliveryBillFiles { get; set; }
 
-		public string Torg12FileName { get; set; }
+		public FileInfo[] Torg12Files { get; set; }
 
-		public string CPFileName { get; set; }
+		public FileInfo[] CPFiles { get; set; }
 
 		public string Characteristic { get; set; }
 
@@ -185,6 +185,6 @@ namespace Alicargo.ViewModels.Application
 
 		public bool CanSetState { get; set; }
 
-		public bool CanSetTransitCost { get; set; }		
+		public bool CanSetTransitCost { get; set; }
 	}
 }

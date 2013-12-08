@@ -120,21 +120,33 @@
 	#= PickupCost #
 </p>
 # } #
-# if(InvoiceFileName != null){ #
+# if(InvoiceFiles != null){ #
 <p>
 	<span>@Entities.Invoice:</span>
-	<a href="@Url.Action(MVC.Application.InvoiceFile())/#= Id #">#= InvoiceFileName #</a>
+	# for(var i in InvoiceFiles) { #
+	# var item = InvoiceFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #
-# if(SwiftFileName != null){ #
+# if(SwiftFiles != null){ #
 <p>
 	<span>@Entities.Swift:</span>
-	<a href="@Url.Action(MVC.Application.SwiftFile())/#= Id #">#= SwiftFileName #</a>
+	# for(var i in SwiftFiles) { #
+	# var item = SwiftFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #
-# if(PackingFileName != null){ #
+# if(PackingFiles != null){ #
 <p>
 	<span>@Entities.Packing:</span>
-	<a href="@Url.Action(MVC.Application.PackingFile())/#= Id #">#= PackingFileName #</a>
+	# for(i in PackingFiles) { #
+	# var item = PackingFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
 </p>
 # } #

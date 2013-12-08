@@ -203,7 +203,6 @@
     <Compile Include="MvcHelpers\StyleRelativePathTransformBundle.cs" />
     <Compile Include="MvcHelpers\Filters\CustomHandleErrorInfo.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbBrokerModelBinder.cs" />
-    <Compile Include="MvcHelpers\ModelBinders\ApplicationSenderEditBinder.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbAdminModelBinder.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\AirWaybillController.cs" />

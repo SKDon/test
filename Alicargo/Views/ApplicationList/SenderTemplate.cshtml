@@ -5,6 +5,7 @@
 @helper EditButton()
 {
 	<a href="@Url.Action(MVC.SenderApplication.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
+	<a href="@Url.Action(MVC.Files.Application())/#= Id #" class="btn btn-info">@Pages.Files</a>
 	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
 }
 

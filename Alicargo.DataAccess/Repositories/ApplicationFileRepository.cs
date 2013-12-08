@@ -6,6 +6,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
+using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
@@ -91,10 +92,27 @@ namespace Alicargo.DataAccess.Repositories
 
 		#endregion
 
-		public Dictionary<long, string> GetFileNames(long applicationId, ApplicationFileType type)
+		public IReadOnlyDictionary<long, string> GetFileNames(long applicationId, ApplicationFileType type)
 		{
-			return _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", new { applicationId, TypeId = type })
+			var idsTable = TableParameters.GeIdsTable("AppIds", new[] { applicationId });
+			var parameters = new TableParameters(new { TypeId = type }, idsTable);
+
+			return _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", parameters)
 				.ToDictionary(x => (long)x.Id, x => (string)x.Name);
+		}
+
+		public IReadOnlyDictionary<long, FileInfo[]> GetFileNames(long[] applicationIds, ApplicationFileType type)
+		{
+			var idsTable = TableParameters.GeIdsTable("AppIds", applicationIds);
+			var parameters = new TableParameters(new { TypeId = type }, idsTable);
+
+			return _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", parameters)
+				.GroupBy(x => (long)x.ApplicationId)
+				.ToDictionary(a => a.Key, a => a.Select(x => new FileInfo
+				{
+					Id = x.Id,
+					Name = x.Name
+				}).ToArray());
 		}
 
 		public FileHolder Get(long id)

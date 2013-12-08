@@ -63,6 +63,7 @@
     <Compile Include="Contracts\EmailMessage.cs" />
     <Compile Include="Contracts\EmailMessageData.cs" />
     <Compile Include="Contracts\EmailTemplateLocalizationData.cs" />
+    <Compile Include="Contracts\FileInfo.cs" />
     <Compile Include="Contracts\RecipientData.cs" />
     <Compile Include="Contracts\StateEmailTemplateData.cs" />
     <Compile Include="Contracts\SenderData.cs" />

@@ -1,5 +1,4 @@
-﻿@using Alicargo.Core.Resources
-@using Alicargo.MvcHelpers.Extensions
+﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @inherits BaseWebViewPage<ApplicationIndexModel>
 
@@ -26,23 +25,48 @@
 		<div>
 			@CloseButton()
 			@EditButton()
-			# if(InvoiceFileName != null){ #
-				<a class="btn btn-info" href="@Url.Action(MVC.Application.InvoiceFile())/#= Id #">@Entities.Invoice</a>
+			
+			# if(InvoiceFiles != null){ #
+				# for(var i in InvoiceFiles) { #
+				# var item = InvoiceFiles[i]; #
+				# if(!item || !item.Id) continue; #
+				<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+				# } #
 			# } #
-			# if(SwiftFileName != null){ #
-				<a class="btn btn-info" href="@Url.Action(MVC.Application.SwiftFile())/#= Id #">@Entities.Swift</a>
+			# if(SwiftFiles != null){ #
+				# for(var i in SwiftFiles) { #
+				# var item = SwiftFiles[i]; #
+				# if(!item || !item.Id) continue; #
+				<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+				# } #
 			# } #
-			# if(DeliveryBillFileName != null){ #
-				<a class="btn btn-info" href="@Url.Action(MVC.Application.DeliveryBillFile())/#= Id #">@Entities.DeliveryBill</a>
+			# if(DeliveryBillFiles != null){ #
+				# for(i in DeliveryBillFiles) { #
+				# var item = DeliveryBillFiles[i]; #
+				# if(!item || !item.Id) continue; #
+				<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+				# } #
 			# } #
-			# if(Torg12FileName != null){ #
-				<a class="btn btn-info" href="@Url.Action(MVC.Application.Torg12File())/#= Id #">@Entities.Torg12</a>
+			# if(Torg12Files != null){ #
+				# for(i in Torg12Files) { #
+				# var item = Torg12Files[i]; #
+				# if(!item || !item.Id) continue; #
+				<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+				# } #
 			# } #
-			# if(CPFileName != null){ #
-				<a class="btn btn-info" href="@Url.Action(MVC.Application.CPFile())/#= Id #">@Entities.CP</a>
+			# if(CPFiles != null){ #
+				# for(i in CPFiles) { #
+				# var item = CPFiles[i]; #
+				# if(!item || !item.Id) continue; #
+				<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+				# } #
 			# } #
-			# if(PackingFileName != null){ #
-				<a class="btn btn-info" href="@Url.Action(MVC.Application.PackingFile())/#= Id #">@Entities.Packing</a>
+			# if(PackingFiles != null){ #
+				# for(i in PackingFiles) { #
+				# var item = PackingFiles[i]; #
+				# if(!item || !item.Id) continue; #
+				<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+				# } #
 			# } #
 		</div>
 	</div>

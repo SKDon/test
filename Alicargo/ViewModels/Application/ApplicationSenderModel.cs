@@ -11,24 +11,6 @@ namespace Alicargo.ViewModels.Application
 			Currency = new CurrencyModel();
 		}
 
-		[DisplayNameLocalized(typeof (Entities), "Invoice")]
-		public byte[] InvoiceFile { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Packing")]
-		public byte[] PackingFile { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Swift")]
-		public byte[] SwiftFile { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Invoice")]
-		public string InvoiceFileName { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Swift")]
-		public string SwiftFileName { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Packing")]
-		public string PackingFileName { get; set; }
-
 		[Required, DisplayNameLocalized(typeof (Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 

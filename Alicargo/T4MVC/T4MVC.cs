@@ -233,6 +233,7 @@ namespace Links
         
             public static readonly string Common_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Common.min.js") ? Url("Common.min.js") : Url("Common.js");
             public static readonly string CurrencyType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CurrencyType.min.js") ? Url("CurrencyType.min.js") : Url("CurrencyType.js");
+            public static readonly string Files_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Files.min.js") ? Url("Files.min.js") : Url("Files.js");
             public static readonly string it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/it.min.js") ? Url("it.min.js") : Url("it.js");
             public static readonly string ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ru.min.js") ? Url("ru.min.js") : Url("ru.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
