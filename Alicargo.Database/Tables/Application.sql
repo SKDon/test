@@ -72,23 +72,20 @@
 	CONSTRAINT [FK_dbo.Application_dbo.Transit_TransitId] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),
 	CONSTRAINT [FK_dbo.Application_dbo.Country_CountryId] FOREIGN KEY ([CountryId]) REFERENCES [dbo].[Country] ([Id])
 );
-
-
 GO
+
 CREATE NONCLUSTERED INDEX [IX_ClientId]
     ON [dbo].[Application]([ClientId] ASC);
-
-
 GO
+
 CREATE NONCLUSTERED INDEX [IX_StateId]
     ON [dbo].[Application]([StateId] ASC);
-
-
 GO
+
 CREATE NONCLUSTERED INDEX [IX_Application_TransitId]
     ON [dbo].[Application]([TransitId] ASC);
-
-
 GO
+
 CREATE NONCLUSTERED INDEX [IX_AirWaybillId]
     ON [dbo].[Application]([AirWaybillId] ASC);
+GO

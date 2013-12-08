@@ -3,6 +3,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;
@@ -29,7 +30,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_fixture = new Fixture();
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
-			_files = new ApplicationFileRepository(_context.UnitOfWork);
+			_files = new ApplicationFileRepository(_context.UnitOfWork, new SqlProcedureExecutor(Settings.Default.FilesConnectionString));
 			_stateRepository = new StateRepository(new SqlProcedureExecutor(_context.Connection.ConnectionString));
 			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
 		}

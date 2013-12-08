@@ -5,7 +5,7 @@ using Ninject;
 
 namespace Alicargo.App_Start
 {
-    internal static class FilterConfig
+	internal static class FilterConfig
 	{
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters, IKernel kernel)
 		{

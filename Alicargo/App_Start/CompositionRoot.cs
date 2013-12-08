@@ -73,6 +73,12 @@ namespace Alicargo.App_Start
 				.WhenInjectedInto<ClientFileRepository>()
 				.InSingletonScope()
 				.WithConstructorArgument("connectionString", filesConnectionString);
+
+			kernel.Bind<ISqlProcedureExecutor>()
+				.To<SqlProcedureExecutor>()
+				.WhenInjectedInto<ApplicationFileRepository>()
+				.InSingletonScope()
+				.WithConstructorArgument("connectionString", filesConnectionString);
 		}
 	}
 }
