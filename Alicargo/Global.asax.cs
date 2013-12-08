@@ -31,9 +31,9 @@ namespace Alicargo
 
 		protected override IKernel CreateKernel()
 		{
-			CompositionRoot.BindConnection(_kernel, _connectionString, _filesConnectionString);
+			CompositionRoot.BindConnection(_kernel, _connectionString);
 
-			CompositionRoot.BindDataAccess(_kernel, context => HttpContext.Current);
+			CompositionRoot.BindDataAccess(_kernel, _connectionString, _filesConnectionString, context => HttpContext.Current);
 
 			CompositionRoot.BindServices(_kernel, MainLogger);
 

@@ -28,7 +28,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
         public void TestInitialize()
         {
             _fixture = new Fixture();
-            _context = new CompositionHelper(Settings.Default.MainConnectionString);
+			_context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString);
             _context.Kernel.Bind<ApplicationController>().ToSelf();
 
             _controller = _context.Kernel.Get<ApplicationController>();

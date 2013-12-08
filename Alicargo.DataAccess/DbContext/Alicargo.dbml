@@ -211,18 +211,6 @@
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CreationTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="Invoice" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="InvoiceFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="InvoiceFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="SwiftFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="SwiftFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="DeliveryBillFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="DeliveryBillFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Torg12FileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Torg12FileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="CPFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="CPFileName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="PackingFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="PackingFileName" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="Characteristic" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="AddressLoad" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="WarehouseWorkingTime" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />

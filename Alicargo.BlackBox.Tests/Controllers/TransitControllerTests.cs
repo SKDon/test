@@ -20,7 +20,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		public void TestInitialize()
 		{
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
-			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
+			_composition = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString);
 			_controller = _composition.Kernel.Get<TransitController>();
 		}
 

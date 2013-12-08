@@ -20,13 +20,13 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 	[TestClass]
 	public class TextBulderTests
 	{
-		private Fixture _fixture;
 		private TextBulder _bulder;
-		private Mock<IStateRepository> _states;
-		private Serializer _serializer;
-		private ApplicationSetStateEventData _eventData;
 		private ApplicationDetailsData _detailsData;
+		private ApplicationSetStateEventData _eventData;
 		private Mock<IApplicationFileRepository> _files;
+		private Fixture _fixture;
+		private Serializer _serializer;
+		private Mock<IStateRepository> _states;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -44,14 +44,15 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			};
 			_detailsData = _fixture.Create<ApplicationDetailsData>();
 			_detailsData.StateId = TestConstants.DefaultStateId;
-			_detailsData.CurrencyId = (int)CurrencyName.Names.First().Key;
-			_detailsData.CountryName = new[] { new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, _fixture.Create<string>()) };
+			_detailsData.CurrencyId = (int) CurrencyName.Names.First().Key;
+			_detailsData.CountryName = new[]
+			{new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, _fixture.Create<string>())};
 		}
 
 		[TestMethod]
 		public void Test_GetText()
 		{
-			var properties = typeof(TextLocalizedData).GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
+			var properties = typeof (TextLocalizedData).GetProperties().Where(x => x.PropertyType == typeof (string)).ToArray();
 			var sb = new StringBuilder();
 			foreach (var property in properties)
 			{
@@ -64,8 +65,11 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 				.Returns(_fixture.Create<Dictionary<long, StateData>>());
 			_states.Setup(x => x.Get(TwoLetterISOLanguageName.Russian, _detailsData.StateId))
 				.Returns(_fixture.Create<Dictionary<long, StateData>>());
+			_files.Setup(x => x.GetNames(_detailsData.Id, It.IsAny<ApplicationFileType>()))
+				.Returns(_fixture.Create<Dictionary<long, string>>());
 
-			var text = _bulder.GetText(sb.ToString(), TwoLetterISOLanguageName.Russian, ApplicationEventType.SetState, _detailsData, _serializer.Serialize(_eventData));
+			var text = _bulder.GetText(sb.ToString(), TwoLetterISOLanguageName.Russian, ApplicationEventType.SetState,
+				_detailsData, _serializer.Serialize(_eventData));
 
 			text.Should().NotContain("{").And.NotContain("}");
 		}

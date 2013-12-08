@@ -52,6 +52,8 @@ namespace Alicargo.Tests.Services.Application
 				}
 			}
 
+			_context.ApplicationFileRepository.Setup(x => x.GetInfo(It.IsAny<long[]>(), It.IsAny<ApplicationFileType>()))
+				.Returns(new Dictionary<long, FileInfo[]>(0));
 
 			_context.IdentityService.SetupGet(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
 			_context.CountryRepository.Setup(x => x.Get()).Returns(_countries.ToArray());
@@ -99,6 +101,12 @@ namespace Alicargo.Tests.Services.Application
 				item.TransitDeliveryTypeString.Should().NotBeNullOrEmpty();
 				item.TransitMethodOfTransitString.Should().NotBeNullOrEmpty();
 				item.CanSetTransitCost.ShouldBeEquivalentTo(!_calculations.ContainsKey(item.Id));
+				item.CPFiles.Should().BeNull();
+				item.Torg12Files.Should().BeNull();
+				item.DeliveryBillFiles.Should().BeNull();
+				item.PackingFiles.Should().BeNull();
+				item.SwiftFiles.Should().BeNull();
+				item.InvoiceFiles.Should().BeNull();
 			}
 		}
 	}

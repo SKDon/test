@@ -3,24 +3,6 @@
 	[CreationTimestamp]		DATETIMEOFFSET		CONSTRAINT [DF_Application_CreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 	
 	[Invoice]				NVARCHAR (MAX)		NOT NULL,
-	[InvoiceFileData]		VARBINARY (MAX)		NULL,
-	[InvoiceFileName]		NVARCHAR (MAX)		NULL,
-
-	[SwiftFileData]			VARBINARY (MAX)		NULL,
-	[SwiftFileName]			NVARCHAR (MAX)		NULL,
-
-	[DeliveryBillFileData]	VARBINARY (MAX)		NULL,
-	[DeliveryBillFileName]	NVARCHAR (MAX)		NULL,
-
-	[Torg12FileData]		VARBINARY (MAX)		NULL,
-	[Torg12FileName]		NVARCHAR (MAX)		NULL,
-
-	[CPFileData]			VARBINARY (MAX)		NULL,
-	[CPFileName]			NVARCHAR (MAX)		NULL,
-
-	[PackingFileData]		VARBINARY (MAX)		NULL,
-	[PackingFileName]		NVARCHAR(320)		NULL,
-
 	[Characteristic]		NVARCHAR (MAX)		NULL,
 	[AddressLoad]			NVARCHAR (MAX)		NULL,
 	[WarehouseWorkingTime]	NVARCHAR (MAX)		NULL,

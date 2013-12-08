@@ -2,7 +2,6 @@
 using System.Data.SqlClient;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Enums;
 using Alicargo.Services.Application;
 using Alicargo.TestHelpers;
 using Dapper;
@@ -21,7 +20,7 @@ namespace Alicargo.BlackBox.Tests.Services.Application
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new CompositionHelper(Settings.Default.MainConnectionString, RoleType.Forwarder);
+			_context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString, RoleType.Forwarder);
 			_context.Kernel.Bind<ApplicationListPresenter>().ToSelf();
 
 			_presenter = _context.Kernel.Get<ApplicationListPresenter>();

@@ -92,5 +92,15 @@ namespace Alicargo.BlackBox.Tests.Properties {
                 return ((string)(this["MainConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=Alicargo_Files;Integrated Security=True")]
+        public string FilesConnectionString {
+            get {
+                return ((string)(this["FilesConnectionString"]));
+            }
+        }
     }
 }

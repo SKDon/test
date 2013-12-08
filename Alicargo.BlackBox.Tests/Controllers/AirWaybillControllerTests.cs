@@ -7,7 +7,6 @@ using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Controllers;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Services;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;
@@ -35,7 +34,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			_db = new AlicargoDataContext(Settings.Default.MainConnectionString);
 
 			_fixture = new Fixture();
-			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
+			_composition = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString);
 			_controller = _composition.Kernel.Get<AirWaybillController>();
 		}
 

@@ -19,7 +19,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_composition = new CompositionHelper(Settings.Default.MainConnectionString);
+			_composition = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString);
 			_mock = new MockContainer();
 			_controller = _composition.Kernel.Get<ClientController>();
 		}

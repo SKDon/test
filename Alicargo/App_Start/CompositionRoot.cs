@@ -46,7 +46,7 @@ namespace Alicargo.App_Start
 			return type.IsClass && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
 		}
 
-		public static void BindDataAccess(IKernel kernel, Func<IContext, object> scope)
+		public static void BindDataAccess(IKernel kernel, string connectionString, string filesConnectionString, Func<IContext, object> scope)
 		{
 			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
 				.IncludingNonePublicTypes()
@@ -54,19 +54,11 @@ namespace Alicargo.App_Start
 				.Excluding<SqlProcedureExecutor>()
 				.BindDefaultInterface()
 				.Configure(y => y.InScope(scope)));
-		}
-
-		public static void BindConnection(IKernel kernel, string connectionString, string filesConnectionString)
-		{
-			kernel.Bind<IDbConnection>()
-				.ToMethod(x => new SqlConnection(connectionString))
-				.InRequestScope()
-				.OnDeactivation(x => x.Close());
 
 			kernel.Bind<ISqlProcedureExecutor>()
-				.To<SqlProcedureExecutor>()
-				.InSingletonScope()
-				.WithConstructorArgument("connectionString", connectionString);
+			.To<SqlProcedureExecutor>()
+			.InSingletonScope()
+			.WithConstructorArgument("connectionString", connectionString);
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
@@ -79,6 +71,14 @@ namespace Alicargo.App_Start
 				.WhenInjectedInto<ApplicationFileRepository>()
 				.InSingletonScope()
 				.WithConstructorArgument("connectionString", filesConnectionString);
+		}
+
+		public static void BindConnection(IKernel kernel, string connectionString)
+		{
+			kernel.Bind<IDbConnection>()
+				.ToMethod(x => new SqlConnection(connectionString))
+				.InRequestScope()
+				.OnDeactivation(x => x.Close());		
 		}
 	}
 }
