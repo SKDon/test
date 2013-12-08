@@ -97,6 +97,11 @@ namespace Alicargo.DataAccess.Repositories
 				.ToDictionary(x => (long)x.Id, x => (string)x.Name);
 		}
 
+		public FileHolder Get(long id)
+		{
+			return _executor.Query<FileHolder>("[dbo].[ApplicationFile_Get]", new { id });
+		}
+
 		public long Add(long applicationId, ApplicationFileType type, string name, byte[] data)
 		{
 			return _executor.Query<long>("[dbo].[ApplicationFile_Add]", new { applicationId, TypeId = type, name, data });

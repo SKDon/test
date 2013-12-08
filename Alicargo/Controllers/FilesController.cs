@@ -2,7 +2,6 @@
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Extensions;

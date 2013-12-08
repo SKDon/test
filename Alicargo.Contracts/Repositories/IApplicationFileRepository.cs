@@ -14,6 +14,7 @@ namespace Alicargo.Contracts.Repositories
 		FileHolder GetPackingFile(long id);
 
 		Dictionary<long, string> GetFileNames(long applicationId, ApplicationFileType type);
+		FileHolder Get(long id);
 		long Add(long applicationId, ApplicationFileType type, string fileName, byte[] bytes);
 		void Delete(long id);
 	}

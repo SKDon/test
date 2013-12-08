@@ -79,6 +79,7 @@
     <Build Include="Stored procedures\ApplicationFile_GetNames.sql" />
     <Build Include="Stored procedures\ApplicationFile_Add.sql" />
     <Build Include="Stored procedures\ApplicationFile_Delete.sql" />
+    <Build Include="Stored procedures\ApplicationFile_Get.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.publish.xml" />
