@@ -135,27 +135,5 @@ namespace Alicargo.ViewModels.Application
 		public long? AirWaybillId { get; set; }
 
 		#endregion
-
-	    #region Files
-
-	    [DisplayNameLocalized(typeof (Entities), "Invoice")]
-	    public string InvoiceFileName { get; set; }
-
-	    [DisplayNameLocalized(typeof (Entities), "Swift")]
-	    public string SwiftFileName { get; set; }
-
-	    [DisplayNameLocalized(typeof (Entities), "Packing")]
-	    public string PackingFileName { get; set; }
-
-	    [DisplayNameLocalized(typeof (Entities), "DeliveryBill")]
-	    public string DeliveryBillFileName { get; set; }
-
-	    [DisplayNameLocalized(typeof (Entities), "Torg12")]
-	    public string Torg12FileName { get; set; }
-
-	    [DisplayNameLocalized(typeof (Entities), "CP")]
-	    public string CPFileName { get; set; }
-
-	    #endregion
 	}
 }
