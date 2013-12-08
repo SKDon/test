@@ -153,8 +153,10 @@
   <ItemGroup>
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
+    <Compile Include="MvcHelpers\PathAttribute.cs" />
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="Services\CityService.cs" />
@@ -352,6 +354,9 @@
     <Compile Include="T4MVC\ExcelController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\FilesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -410,6 +415,7 @@
     <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
     <Compile Include="ViewModels\EmailTemplate\ApplicationEventTemplateModel.cs" />
     <Compile Include="ViewModels\EmailTemplate\EmailTemplateSettingsModel.cs" />
+    <Compile Include="ViewModels\Files\ApplicationFilesEdit.cs" />
     <Compile Include="ViewModels\Helpers\AwbHelper.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
@@ -685,6 +691,7 @@
     <Content Include="Scripts\app\City\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
+    <Content Include="Scripts\app\Files.js" />
     <Content Include="Scripts\app\it.js" />
     <Content Include="Scripts\app\CurrencyType.js" />
     <Content Include="Scripts\app\ru.js" />
@@ -1585,6 +1592,8 @@
     <Content Include="Views\City\Edit.cshtml" />
     <Content Include="Views\City\Create.cshtml" />
     <Content Include="Views\City\EditorTemplates\CityEditModel.cshtml" />
+    <Content Include="Views\Files\Application.cshtml" />
+    <Content Include="Views\Files\FilesHolder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

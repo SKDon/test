@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
@@ -9,11 +11,16 @@ namespace Alicargo.DataAccess.Repositories
 {
 	public sealed class ApplicationFileRepository : IApplicationFileRepository
 	{
+		private readonly ISqlProcedureExecutor _executor;
+
+		#region Obsolete
+
 		private readonly AlicargoDataContext _context;
 
-		public ApplicationFileRepository(IUnitOfWork unitOfWork)
+		public ApplicationFileRepository(IUnitOfWork unitOfWork, ISqlProcedureExecutor executor)
 		{
-			_context = (AlicargoDataContext) unitOfWork.Context;
+			_executor = executor;
+			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
 		public FileHolder GetInvoiceFile(long id)
@@ -80,6 +87,14 @@ namespace Alicargo.DataAccess.Repositories
 			Expression<Func<Application, FileHolder>> selector)
 		{
 			return _context.Applications.Where(where).Select(selector).FirstOrDefault();
+		}
+
+		#endregion
+
+		public Dictionary<long, string> GetFileNames(long applicationId, ApplicationFileType type)
+		{
+			return _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", new { applicationId, TypeId = type })
+				.ToDictionary(x => (long)x.Id, x => (string)x.Name);
 		}
 	}
 }

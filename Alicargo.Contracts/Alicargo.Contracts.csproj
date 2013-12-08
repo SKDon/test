@@ -78,6 +78,7 @@
     <Compile Include="Contracts\UserData.cs" />
     <Compile Include="Enums\ApplicationEventState.cs" />
     <Compile Include="Enums\ApplicationEventType.cs" />
+    <Compile Include="Enums\ApplicationFileType.cs" />
     <Compile Include="Enums\CalculationState.cs" />
     <Compile Include="Enums\EmailMessageState.cs" />
     <Compile Include="Enums\RoleType.cs" />

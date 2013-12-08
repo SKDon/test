@@ -23,11 +23,11 @@ namespace Alicargo.App_Start
 {
 	internal static class CompositionJobsHelper
 	{
+		public const int PartitionIdForOtherMails = 2;
 		private static readonly TimeSpan DeadTimeout = TimeSpan.FromMinutes(30);
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
-		public const int PartitionIdForOtherMails = 2;
 
 		public static void BindJobs(IKernel kernel, string connectionString)
 		{
@@ -53,7 +53,8 @@ namespace Alicargo.App_Start
 
 			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 0), mailSenderJobJob + 0);
 			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 1), mailSenderJobJob + 1);
-			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, PartitionIdForOtherMails), mailSenderJobJob + 2);
+			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, PartitionIdForOtherMails),
+				mailSenderJobJob + 2);
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
@@ -127,7 +128,7 @@ namespace Alicargo.App_Start
 			var executor = new SqlProcedureExecutor(connectionString);
 			var messages = new EmailMessageRepository(executor);
 			var sender = new MailSender();
-			
+
 			var job = new MailSenderJob(messages, partitionId, sender, serializer);
 
 			job.Run();
@@ -141,15 +142,15 @@ namespace Alicargo.App_Start
 			var states = new StateRepository(executor);
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
-			var files = new ApplicationFileRepository(unitOfWork);
+			var files = new ApplicationFileRepository(unitOfWork, executor);
 			var filesFasade = new FilesFasade(serializer, awbs, files);
 			var textBulder = new TextBulder(serializer, states);
 			var stateSettings = new StateSettingsRepository(executor);
 			var templates = new EmailTemplateRepository(executor);
-			var recipientsFacade = new RecipientsFacade(awbs, serializer, stateSettings, templates, users );
+			var recipientsFacade = new RecipientsFacade(awbs, serializer, stateSettings, templates, users);
 			var templatesFacade = new TemplatesFacade(serializer, templates);
 
-			return new MessageFactory(DefaultFrom,filesFasade,textBulder, recipientsFacade, templatesFacade, applications);
+			return new MessageFactory(DefaultFrom, filesFasade, textBulder, recipientsFacade, templatesFacade, applications);
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System.Collections.Generic;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 
 namespace Alicargo.Contracts.Repositories
 {
@@ -10,5 +12,7 @@ namespace Alicargo.Contracts.Repositories
 		FileHolder GetDeliveryBillFile(long id);
 		FileHolder GetTorg12File(long id);
 		FileHolder GetPackingFile(long id);
+
+		Dictionary<long, string> GetFileNames(long id, ApplicationFileType type);
 	}
 }

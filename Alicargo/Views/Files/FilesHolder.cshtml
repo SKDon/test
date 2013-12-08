@@ -1,0 +1,8 @@
+﻿@using Alicargo.Contracts.Enums
+@using Alicargo.Core.Localization
+@model ApplicationFileType
+
+<div data-type="@Model" data-app-id="@ViewBag.ApplicationId" class="files-holder">
+	<b>@Model.ToLocalString()</b>
+	<input id="@Model" name="file" type="file" />
+</div>
