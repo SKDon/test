@@ -144,7 +144,7 @@ namespace Alicargo.App_Start
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(unitOfWork, executor);
 			var filesFasade = new FilesFasade(serializer, awbs, files);
-			var textBulder = new TextBulder(serializer, states);
+			var textBulder = new TextBulder(serializer, states, files);
 			var stateSettings = new StateSettingsRepository(executor);
 			var templates = new EmailTemplateRepository(executor);
 			var recipientsFacade = new RecipientsFacade(awbs, serializer, stateSettings, templates, users);

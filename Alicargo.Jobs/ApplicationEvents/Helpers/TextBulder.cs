@@ -21,11 +21,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		private readonly ISerializer _serializer;
 		private readonly IStateRepository _states;
+		private readonly IApplicationFileRepository _files;
 
-		public TextBulder(ISerializer serializer, IStateRepository states)
+		public TextBulder(ISerializer serializer, IStateRepository states, IApplicationFileRepository files)
 		{
 			_serializer = serializer;
 			_states = states;
+			_files = files;
 		}
 
 		public string GetText(string template, string language, ApplicationEventType type, ApplicationDetailsData application, byte[] bytes)
@@ -48,9 +50,9 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 					if (string.IsNullOrEmpty(text))
 					{
-						builder.Replace(match + Environment.NewLine, string.Empty);	
+						builder.Replace(match + Environment.NewLine, string.Empty);
 					}
-					
+
 					builder.Replace(match, text);
 				}
 			}
@@ -106,6 +108,12 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			var countryName = application.CountryName.First(x => x.Key == language).Value;
 			var value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, culture);
 
+			var deliveryBill = _files.GetFileNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Value).ToArray();
+			var invoice = _files.GetFileNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Value).ToArray();
+			var packing = _files.GetFileNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
+			var swift = _files.GetFileNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
+			var torg12 = _files.GetFileNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
+
 			return new TextLocalizedData
 			{
 				AddressLoad = application.AddressLoad,
@@ -126,22 +134,22 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				ClientNic = application.ClientNic,
 				DateOfCargoReceipt = LocalizationHelper.GetDate(application.DateOfCargoReceipt, culture),
 				DaysInWork = ApplicationHelper.GetDaysInWork(application.CreationTimestamp).ToString(culture),
-				DeliveryBillFileName = application.DeliveryBillFileName,
+				DeliveryBillFileName = string.Join(", ", deliveryBill),
 				DeliveryType = LocalizationHelper.GetDeliveryType((DeliveryType)application.TransitDeliveryTypeId, culture),
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(application.Id, application.Count),
 				FactoryContact = application.FactoryContact,
 				FactoryEmail = application.FactoryEmail,
 				FactoryPhone = application.FactoryPhone,
-				InvoiceFileName = application.InvoiceFileName,
+				InvoiceFileName = string.Join(", ", invoice),
 				LegalEntity = application.ClientLegalEntity,
 				MethodOfDelivery = LocalizationHelper.GetMethodOfDelivery((MethodOfDelivery)application.MethodOfDeliveryId, culture),
 				MethodOfTransit = LocalizationHelper.GetMethodOfTransit((MethodOfTransit)application.TransitMethodOfTransitId, culture),
-				PackingFileName = application.PackingFileName,
+				PackingFileName = string.Join(", ", packing),
 				StateChangeTimestamp = LocalizationHelper.GetDate(application.StateChangeTimestamp, culture),
 				StateName = state != null ? state.LocalizedName : null,
-				SwiftFileName = application.SwiftFileName,
+				SwiftFileName = string.Join(", ", swift),
 				TermsOfDelivery = application.TermsOfDelivery,
-				Torg12FileName = application.Torg12FileName,
+				Torg12FileName = string.Join(", ", torg12),
 				TransitAddress = application.TransitAddress,
 				TransitCarrierName = application.TransitCarrierName,
 				TransitCity = application.TransitCity,

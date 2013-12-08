@@ -26,14 +26,16 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		private Serializer _serializer;
 		private ApplicationSetStateEventData _eventData;
 		private ApplicationDetailsData _detailsData;
+		private Mock<IApplicationFileRepository> _files;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_fixture = new Fixture();
 			_states = new Mock<IStateRepository>(MockBehavior.Strict);
+			_files = new Mock<IApplicationFileRepository>(MockBehavior.Strict);
 			_serializer = new Serializer();
-			_bulder = new TextBulder(_serializer, _states.Object);
+			_bulder = new TextBulder(_serializer, _states.Object, _files.Object);
 
 			_eventData = new ApplicationSetStateEventData
 			{

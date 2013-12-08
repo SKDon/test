@@ -47,19 +47,7 @@ namespace Alicargo.Contracts.Contracts
 
 		public DateTimeOffset CreationTimestamp { get; set; }
 
-		public string Invoice { get; set; }
-
-		public string InvoiceFileName { get; set; }
-
-		public string SwiftFileName { get; set; }
-
-		public string PackingFileName { get; set; }
-
-		public string DeliveryBillFileName { get; set; }
-
-		public string Torg12FileName { get; set; }
-
-		public string CPFileName { get; set; }
+		public string Invoice { get; set; }		
 
 		public string Characteristic { get; set; }
 
