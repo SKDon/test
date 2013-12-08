@@ -13,7 +13,7 @@ namespace Alicargo.Core.Localization
 			return ToLocalString(value, type);
 		}
 
-		public static string ToLocalString(this ValueType value, Type type)
+		private static string ToLocalString(this ValueType value, Type type)
 		{
 			if (!type.IsEnum)
 				throw new NotSupportedException();

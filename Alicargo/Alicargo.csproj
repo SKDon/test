@@ -157,6 +157,16 @@
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
     <Compile Include="MvcHelpers\PathAttribute.cs" />
+    <Compile Include="Resources\ApplicationEventType.ru.Designer.cs">
+      <DependentUpon>ApplicationEventType.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ApplicationEventType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationEventType.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="Services\CityService.cs" />
@@ -1620,6 +1630,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\ApplicationEventType.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationEventType.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ApplicationEventType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationEventType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Validation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Validation.Designer.cs</LastGenOutput>

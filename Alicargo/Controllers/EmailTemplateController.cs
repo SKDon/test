@@ -44,26 +44,12 @@ namespace Alicargo.Controllers
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List()
 		{
-			var dictionary = new Dictionary<ApplicationEventType, string>
-			{
-				{ApplicationEventType.Created, "Созадние заявки"},
-				{ApplicationEventType.SetState, "Установка статуса"},
-				{ApplicationEventType.CPFileUploaded, "Загружена счет-фактура"},
-				{ApplicationEventType.InvoiceFileUploaded, "Загружен инвойс"},
-				{ApplicationEventType.PackingFileUploaded, "Загружен пакинг"},
-				{ApplicationEventType.SwiftFileUploaded, "Загружен SWIFT"},
-				{ApplicationEventType.DeliveryBillFileUploaded, "Загружен Счет за доставку"},
-				{ApplicationEventType.Torg12FileUploaded, "Загружен Торг 12"},
-				{ApplicationEventType.SetDateOfCargoReceipt, "Установлена дата получения груза"},
-				{ApplicationEventType.SetTransitReference, "Установлен транзитный референс"}
-			};
-
 			var types = Enum.GetValues(typeof(ApplicationEventType))
 				.Cast<ApplicationEventType>()
 				.Select(x => new
 				{
 					Id = (int)x,
-					Name = dictionary[x]
+					Name = Resources.ApplicationEventType.ResourceManager.GetString(x.ToString())
 				})
 				.ToArray();
 
