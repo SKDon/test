@@ -3,7 +3,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
-using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;
@@ -17,7 +16,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	public class ApplicationRepositoryTests
 	{
 		private IApplicationRepository _applications;
-		private IApplicationFileRepository _files;
 		private IStateRepository _stateRepository;
 		private DbTestContext _context;
 		private ApplicationUpdateRepository _applicationUpater;
@@ -30,7 +28,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_fixture = new Fixture();
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
-			_files = new ApplicationFileRepository(_context.UnitOfWork, new SqlProcedureExecutor(Settings.Default.FilesConnectionString));
 			_stateRepository = new StateRepository(new SqlProcedureExecutor(_context.Connection.ConnectionString));
 			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
 		}
@@ -107,24 +104,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			newData.CreationTimestamp = old.CreationTimestamp;
 			newData.StateChangeTimestamp = old.StateChangeTimestamp;
 
-			var swiftFile = _context.RandomBytes();
-			var invoiceFile = _context.RandomBytes();
-			var cpFile = _context.RandomBytes();
-			var deliveryBillFile = _context.RandomBytes();
-			var torg12File = _context.RandomBytes();
-			var packingFile = _context.RandomBytes();
-
-			_applicationUpater.Update(newData, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile);
+			_applicationUpater.Update(newData);
 			_context.UnitOfWork.SaveChanges();
 
 			var data = _applications.Get(old.Id);
 
-			_files.GetInvoiceFile(data.Id).Data.ShouldBeEquivalentTo(invoiceFile);
-			_files.GetSwiftFile(data.Id).Data.ShouldBeEquivalentTo(swiftFile);
-			_files.GetCPFile(data.Id).Data.ShouldBeEquivalentTo(cpFile);
-			_files.GetDeliveryBillFile(data.Id).Data.ShouldBeEquivalentTo(deliveryBillFile);
-			_files.GetTorg12File(data.Id).Data.ShouldBeEquivalentTo(torg12File);
-			_files.GetPackingFile(data.Id).Data.ShouldBeEquivalentTo(packingFile);
 			data.ShouldBeEquivalentTo(newData);
 		}
 
@@ -139,16 +123,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.With(x => x.StateId, TestConstants.DefaultStateId)
 				.With(x => x.CountryId, TestConstants.TestCountryId)
 				.With(x => x.AirWaybillId, null)
-				.With(x => x.InvoiceFileName, null)
-				.With(x => x.SwiftFileName, null)
-				.With(x => x.Torg12FileName, null)
-				.With(x => x.DeliveryBillFileName, null)
-				.With(x => x.CPFileName, null)
 				.Create();
 
-			var id = _applicationUpater.Add(application, _context.RandomBytes(),
-				_context.RandomBytes(), _context.RandomBytes(), _context.RandomBytes(),
-				_context.RandomBytes(), _context.RandomBytes());
+			var id = _applicationUpater.Add(application);
 			_context.UnitOfWork.SaveChanges();
 
 			application.Id = id();

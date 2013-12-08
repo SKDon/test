@@ -69,7 +69,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_GetNext()
 		{
-			var eventData = _serializer.Serialize(_fixture.Create<ApplicationFileUploadedEventData>());
+			var eventData = _serializer.Serialize(_fixture.Create<ApplicationSetStateEventData>());
 
 			_events.Add(TestConstants.TestApplicationId, ApplicationEventType.Created, eventData);
 

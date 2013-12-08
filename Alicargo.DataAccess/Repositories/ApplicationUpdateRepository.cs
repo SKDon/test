@@ -3,7 +3,6 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
-using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
@@ -16,12 +15,11 @@ namespace Alicargo.DataAccess.Repositories
 			_context = (AlicargoDataContext) unitOfWork.Context;
 		}
 
-		public Func<long> Add(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
-			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
+		public Func<long> Add(ApplicationData application)
 		{
 			var entity = new Application();
 
-			CopyTo(application, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile, entity);
+			CopyTo(application, entity);
 
 			_context.Applications.InsertOnSubmit(entity);
 
@@ -103,11 +101,10 @@ namespace Alicargo.DataAccess.Repositories
 			Update(id, application => application.ClassId = classId);
 		}
 
-		public void Update(ApplicationData application, byte[] swiftFile, byte[] invoiceFile,
-			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile)
+		public void Update(ApplicationData application)
 		{
 			Update(application.Id, entity =>
-				CopyTo(application, swiftFile, invoiceFile, cpFile, deliveryBillFile, torg12File, packingFile, entity));
+				CopyTo(application, entity));
 		}
 
 		private void Update(long id, Action<Application> action)
@@ -116,8 +113,7 @@ namespace Alicargo.DataAccess.Repositories
 			action(application);
 		}
 
-		private static void CopyTo(ApplicationData from, byte[] swiftFile, byte[] invoiceFile,
-			byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile, Application to)
+		private static void CopyTo(ApplicationData from, Application to)
 		{
 			if (to.Id == 0)
 			{
@@ -163,25 +159,7 @@ namespace Alicargo.DataAccess.Repositories
 			to.TransitCostEdited = @from.TransitCostEdited;
 			to.PickupCostEdited = @from.PickupCostEdited;
 			to.ScotchCostEdited = @from.ScotchCostEdited;
-			to.SenderRate = @from.SenderRate;
-
-			FileDataHelper.SetFile(invoiceFile, @from.InvoiceFileName,
-				bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
-
-			FileDataHelper.SetFile(packingFile, @from.PackingFileName,
-				bytes => to.PackingFileData = bytes, s => to.PackingFileName = s);
-
-			FileDataHelper.SetFile(cpFile, @from.CPFileName,
-				bytes => to.CPFileData = bytes, s => to.CPFileName = s);
-
-			FileDataHelper.SetFile(deliveryBillFile, @from.DeliveryBillFileName,
-				bytes => to.DeliveryBillFileData = bytes, s => to.DeliveryBillFileName = s);
-
-			FileDataHelper.SetFile(torg12File, @from.Torg12FileName,
-				bytes => to.Torg12FileData = bytes, s => to.Torg12FileName = s);
-
-			FileDataHelper.SetFile(swiftFile, @from.SwiftFileName,
-				bytes => to.SwiftFileData = bytes, s => to.SwiftFileName = s);
+			to.SenderRate = @from.SenderRate;			
 		}
 	}
 }

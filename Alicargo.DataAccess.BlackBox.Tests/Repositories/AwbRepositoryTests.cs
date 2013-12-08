@@ -72,8 +72,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.UnitOfWork.SaveChanges();
 
 			var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
-			var a1 = applications.Add(data1, null, null, null, null, null, null);
-			var a2 = applications.Add(data2, null, null, null, null, null, null);
+			var a1 = applications.Add(data1);
+			var a2 = applications.Add(data2);
 			_context.UnitOfWork.SaveChanges();
 
 			applications.SetAirWaybill(a1(), id());
@@ -174,10 +174,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.UnitOfWork.SaveChanges();
 
 			var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
-			var a1 = applications.Add(data1, null, null, null, null, null, null);
-			var a2 = applications.Add(data2, null, null, null, null, null, null);
-			var a3 = applications.Add(data3, null, null, null, null, null, null);
-			var a4 = applications.Add(data4, null, null, null, null, null, null);
+			var a1 = applications.Add(data1);
+			var a2 = applications.Add(data2);
+			var a3 = applications.Add(data3);
+			var a4 = applications.Add(data4);
 			_context.UnitOfWork.SaveChanges();
 
 			applications.SetAirWaybill(a1(), id1());

@@ -49,7 +49,7 @@ namespace Alicargo.Services.Application
 
 			Map(model, applicationData);
 
-			_applicationUpdater.Update(applicationData, model.SwiftFile, model.InvoiceFile, null, null, null, model.PackingFile);
+			_applicationUpdater.Update(applicationData);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -60,11 +60,10 @@ namespace Alicargo.Services.Application
 
 			Map(model, applicationData);
 
-			Add(applicationData, clientId, creatorSenderId, model.SwiftFile, model.InvoiceFile, model.PackingFile);
+			Add(applicationData, clientId, creatorSenderId);
 		}
 
-		private void Add(ApplicationData applicationData, long clientId, long senderId, byte[] swiftFile, byte[] invoiceFile,
-						 byte[] packingFile)
+		private void Add(ApplicationData applicationData, long clientId, long senderId)
 		{
 			var transitId = CopyTransitDataFromClient(clientId);
 
@@ -76,7 +75,7 @@ namespace Alicargo.Services.Application
 			applicationData.SenderId = senderId;
 			applicationData.ClientId = clientId;
 
-			_applicationUpdater.Add(applicationData, swiftFile, invoiceFile, null, null, null, packingFile);
+			_applicationUpdater.Add(applicationData);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -93,13 +92,10 @@ namespace Alicargo.Services.Application
 		private static void Map(ApplicationSenderModel @from, ApplicationData to)
 		{
 			to.Count = @from.Count;
-			to.PackingFileName = @from.PackingFileName;
 			to.FactoryName = @from.FactoryName;
 			to.Weight = @from.Weight;
 			to.Invoice = @from.Invoice;
-			to.InvoiceFileName = @from.InvoiceFileName;
 			to.MarkName = @from.MarkName;
-			to.SwiftFileName = @from.SwiftFileName;
 			to.Value = @from.Currency.Value;
 			to.CurrencyId = @from.Currency.CurrencyId;
 			to.Volume = @from.Volume;
@@ -114,15 +110,12 @@ namespace Alicargo.Services.Application
 			{
 				Count = application.Count,
 				PackingFile = null,
-				PackingFileName = application.PackingFileName,
 				FactoryName = application.FactoryName,
 				Weight = application.Weight,
 				Invoice = application.Invoice,
 				InvoiceFile = null,
-				InvoiceFileName = application.InvoiceFileName,
 				MarkName = application.MarkName,
 				SwiftFile = null,
-				SwiftFileName = application.SwiftFileName,
 				Currency = new CurrencyModel
 				{
 					Value = application.Value,

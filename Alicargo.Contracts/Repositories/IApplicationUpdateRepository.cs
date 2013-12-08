@@ -5,8 +5,8 @@ namespace Alicargo.Contracts.Repositories
 {
 	public interface IApplicationUpdateRepository
 	{
-		void Update(ApplicationData application, byte[] swiftFile = null, byte[] invoiceFile = null, byte[] cpFile = null, byte[] deliveryBillFile = null, byte[] torg12File = null, byte[] packingFile = null);
-		Func<long> Add(ApplicationData application, byte[] swiftFile, byte[] invoiceFile, byte[] cpFile, byte[] deliveryBillFile, byte[] torg12File, byte[] packingFile);
+		void Update(ApplicationData application);
+		Func<long> Add(ApplicationData application);
 		void Delete(long id);
 
 		void SetAirWaybill(long applicationId, long? airWaybillId);

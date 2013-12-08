@@ -15,50 +15,10 @@ namespace Alicargo.ViewModels.Application
 		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
 		public CurrencyModel Currency { get; set; }
 
-		#region Files
-
-		[DisplayNameLocalized(typeof(Entities), "Invoice")]
-		public byte[] InvoiceFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Packing")]
-		public byte[] PackingFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Swift")]
-		public byte[] SwiftFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "DeliveryBill")]
-		public byte[] DeliveryBillFile { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Torg12")]
-		public byte[] Torg12File { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "CP")]
-		public byte[] CPFile { get; set; }
-
-		#endregion
-
 		#region Data
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Invoice")]
-		public string Invoice { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Invoice")]
-		public string InvoiceFileName { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Swift")]
-		public string SwiftFileName { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Packing")]
-		public string PackingFileName { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "DeliveryBill")]
-		public string DeliveryBillFileName { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Torg12")]
-		public string Torg12FileName { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "CP")]
-		public string CPFileName { get; set; }
+		public string Invoice { get; set; }		
 
 		[DisplayNameLocalized(typeof(Entities), "Characteristic")]
 		public string Characteristic { get; set; }

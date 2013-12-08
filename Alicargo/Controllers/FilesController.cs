@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Extensions;
 
@@ -10,11 +13,29 @@ namespace Alicargo.Controllers
 {
 	public partial class FilesController : Controller
 	{
-		private readonly IApplicationFileRepository _files;
+		private static readonly IReadOnlyDictionary<ApplicationFileType, ApplicationEventType> TypesMapping
+			= new Dictionary<ApplicationFileType, ApplicationEventType>
+			{
+				{ApplicationFileType.CP, ApplicationEventType.CPFileUploaded},
+				{ApplicationFileType.Invoice, ApplicationEventType.InvoiceFileUploaded},
+				{ApplicationFileType.DeliveryBill, ApplicationEventType.DeliveryBillFileUploaded},
+				{ApplicationFileType.Torg12, ApplicationEventType.Torg12FileUploaded},
+				{ApplicationFileType.Swift, ApplicationEventType.SwiftFileUploaded},
+				{ApplicationFileType.Packing, ApplicationEventType.PackingFileUploaded},
+			};
 
-		public FilesController(IApplicationFileRepository files)
+		private readonly IApplicationEventRepository _events;
+		private readonly IApplicationFileRepository _files;
+		private readonly ISerializer _serializer;
+
+		public FilesController(
+			IApplicationFileRepository files,
+			IApplicationEventRepository events,
+			ISerializer serializer)
 		{
 			_files = files;
+			_events = events;
+			_serializer = serializer;
 		}
 
 		[HttpGet]
@@ -42,9 +63,13 @@ namespace Alicargo.Controllers
 		[HttpPost]
 		public virtual JsonResult Upload(long id, ApplicationFileType type, HttpPostedFileBase file)
 		{
-			var fileId = _files.Add(id, type, file.FileName, file.GetBytes());
+			var bytes = file.GetBytes();
 
-			return Json(new { id = fileId });
+			var fileId = _files.Add(id, type, file.FileName, bytes);
+
+			AddFileUploadEvent(id, TypesMapping[type], file.FileName, bytes);
+
+			return Json(new {id = fileId});
 		}
 
 		[HttpPost]
@@ -53,6 +78,19 @@ namespace Alicargo.Controllers
 			_files.Delete(id);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		private void AddFileUploadEvent(long applicationId, ApplicationEventType type,
+			string fileName, byte[] fileData)
+		{
+			if (fileData == null || fileData.Length == 0) return;
+
+			_events.Add(applicationId, type, _serializer.Serialize(
+				new FileHolder
+				{
+					Data = fileData,
+					Name = fileName
+				}));
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
@@ -29,8 +28,6 @@ namespace Alicargo.Services.Application
 			TransitEditModel transitModel)
 		{
 			_manager.Update(applicationId, model, carrierModel, transitModel);
-
-			HandleFilesUpload(applicationId, model);
 		}
 
 		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
@@ -111,47 +108,6 @@ namespace Alicargo.Services.Application
 		public void SetTransitCostEdited(long id, decimal? transitCost)
 		{
 			_manager.SetTransitCostEdited(id, transitCost);
-		}
-
-		private void HandleFilesUpload(long applicationId, ApplicationAdminModel model)
-		{
-			AddFileUploadEvent(applicationId, model, ApplicationEventType.CPFileUploaded,
-				model.CPFileName, model.CPFile);
-
-			AddFileUploadEvent(applicationId, model, ApplicationEventType.InvoiceFileUploaded,
-				model.InvoiceFileName, model.InvoiceFile);
-
-			AddFileUploadEvent(applicationId, model, ApplicationEventType.PackingFileUploaded,
-				model.PackingFileName, model.PackingFile);
-
-			AddFileUploadEvent(applicationId, model, ApplicationEventType.SwiftFileUploaded,
-				model.SwiftFileName, model.SwiftFile);
-
-			AddFileUploadEvent(applicationId, model, ApplicationEventType.DeliveryBillFileUploaded,
-				model.DeliveryBillFileName, model.DeliveryBillFile);
-
-			AddFileUploadEvent(applicationId, model, ApplicationEventType.Torg12FileUploaded,
-				model.Torg12FileName, model.Torg12File);
-		}
-
-		private void AddFileUploadEvent(long applicationId, ApplicationAdminModel model, ApplicationEventType type,
-			string fileName, byte[] fileData)
-		{
-			if (fileData == null || fileData.Length == 0) return;
-
-			_events.Add(applicationId, type, _serializer.Serialize(
-				new ApplicationFileUploadedEventData
-				{
-					Count = model.Count,
-					FactoryName = model.FactoryName,
-					MarkName = model.MarkName,
-					Invoice = model.Invoice,
-					File = new FileHolder
-					{
-						Data = fileData,
-						Name = fileName
-					}
-				}));
-		}
+		}		
 	}
 }

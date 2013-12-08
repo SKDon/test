@@ -34,11 +34,17 @@ namespace Alicargo.Contracts.Contracts
 		public long SenderId { get; set; }
 		public int? ClassId { get; set; }
 
+		[Obsolete]
 		public string InvoiceFileName { get; set; }
+		[Obsolete]
 		public string SwiftFileName { get; set; }
+		[Obsolete]
 		public string PackingFileName { get; set; }
+		[Obsolete]
 		public string DeliveryBillFileName { get; set; }
+		[Obsolete]
 		public string Torg12FileName { get; set; }
+		[Obsolete]
 		public string CPFileName { get; set; }
 		
 		public decimal? FactureCost { get; set; }

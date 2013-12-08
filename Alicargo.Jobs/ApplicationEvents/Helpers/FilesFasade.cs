@@ -41,7 +41,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case ApplicationEventType.SwiftFileUploaded:
 				case ApplicationEventType.DeliveryBillFileUploaded:
 				case ApplicationEventType.Torg12FileUploaded:
-					return new[] { _serializer.Deserialize<ApplicationFileUploadedEventData>(data).File };
+					return new[] { _serializer.Deserialize<FileHolder>(data) };
 
 				case ApplicationEventType.SetDateOfCargoReceipt:
 					return null;

@@ -49,8 +49,7 @@ namespace Alicargo.Services.Application
 
 			Map(model, data);
 
-			_applicationUpdater.Update(data, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
-									   model.Torg12File, model.PackingFile);
+			_applicationUpdater.Update(data);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -62,8 +61,7 @@ namespace Alicargo.Services.Application
 
 			var data = GetNewApplicationData(model, clientId, transitId);
 
-			var id = _applicationUpdater.Add(data, model.SwiftFile, model.InvoiceFile, model.CPFile, model.DeliveryBillFile,
-											 model.Torg12File, model.PackingFile);
+			var id = _applicationUpdater.Add(data);
 
 			_unitOfWork.SaveChanges();
 
@@ -207,12 +205,6 @@ namespace Alicargo.Services.Application
 		private static void Map(ApplicationAdminModel @from, ApplicationData to)
 		{
 			to.Invoice = @from.Invoice;
-			to.InvoiceFileName = @from.InvoiceFileName;
-			to.SwiftFileName = @from.SwiftFileName;
-			to.PackingFileName = @from.PackingFileName;
-			to.DeliveryBillFileName = @from.DeliveryBillFileName;
-			to.Torg12FileName = @from.Torg12FileName;
-			to.CPFileName = @from.CPFileName;
 			to.Characteristic = @from.Characteristic;
 			to.AddressLoad = @from.AddressLoad;
 			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
@@ -250,12 +242,6 @@ namespace Alicargo.Services.Application
 				ClassId = null,
 				TransitId = transitId,
 				Invoice = model.Invoice,
-				InvoiceFileName = model.InvoiceFileName,
-				SwiftFileName = model.SwiftFileName,
-				PackingFileName = model.PackingFileName,
-				DeliveryBillFileName = model.DeliveryBillFileName,
-				Torg12FileName = model.Torg12FileName,
-				CPFileName = model.CPFileName,
 				Characteristic = model.Characteristic,
 				AddressLoad = model.AddressLoad,
 				WarehouseWorkingTime = model.WarehouseWorkingTime,
