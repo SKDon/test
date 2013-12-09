@@ -9,26 +9,14 @@
 		@Html.Partial("FilesHolder", ApplicationFileType.Invoice)
 	</div>
 	<div class="span4">
-		@Html.Partial("FilesHolder", ApplicationFileType.CP)
-	</div>
-	<div class="span4">
-		@Html.Partial("FilesHolder", ApplicationFileType.DeliveryBill)
-	</div>
-</div>
-<br />
-<div class="row">
-	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.Packing)
 	</div>
 	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.Swift)
 	</div>
-	<div class="span4">
-		@Html.Partial("FilesHolder", ApplicationFileType.Torg12)
-	</div>
 </div>
 <p>
-	<a href="@Url.Action(MVC.Application.Edit((long)ViewBag.ApplicationId))" class="btn btn-primary">@Pages.ApplicationEdit</a>
+	<a href="@Url.Action(MVC.Application.Edit((long) ViewBag.ApplicationId))" class="btn btn-primary">@Pages.ApplicationEdit</a>
 </p>
 
 @section scripts

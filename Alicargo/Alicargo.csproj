@@ -168,6 +168,7 @@
       <DependentUpon>ApplicationEventType.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Abstract\ICityService.cs" />
+    <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelClientCalculation.cs" />
@@ -1600,8 +1601,9 @@
     <Content Include="Views\City\Edit.cshtml" />
     <Content Include="Views\City\Create.cshtml" />
     <Content Include="Views\City\EditorTemplates\CityEditModel.cshtml" />
-    <Content Include="Views\Files\Application.cshtml" />
+    <Content Include="Views\Files\AdminApplication.cshtml" />
     <Content Include="Views\Files\FilesHolder.cshtml" />
+    <Content Include="Views\Files\SenderApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

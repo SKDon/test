@@ -8,6 +8,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Extensions;
+using Alicargo.MvcHelpers.Filters;
 
 namespace Alicargo.Controllers
 {
@@ -46,7 +47,17 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		public virtual ViewResult Application(long id)
+		[Access(RoleType.Admin)]
+		public virtual ViewResult AdminApplication(long id)
+		{
+			ViewBag.ApplicationId = id;
+
+			return View();
+		}
+
+		[HttpGet]
+		[Access(RoleType.Sender)]
+		public virtual ViewResult SenderApplication(long id)
 		{
 			ViewBag.ApplicationId = id;
 
@@ -76,7 +87,7 @@ namespace Alicargo.Controllers
 
 			AddFileUploadEvent(id, TypesMapping[type], file.FileName, bytes);
 
-			return Json(new {id = fileId});
+			return Json(new { id = fileId });
 		}
 
 		[HttpPost]

@@ -94,11 +94,12 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.SenderApplication.Edit(id));
 		}
 
-		private void BindBag(long appId, int? count)
+		private void BindBag(long applicationId, int? count)
 		{
-			var nic = _clientRepository.GetNicByApplications(appId).First();
+			var nic = _clientRepository.GetNicByApplications(applicationId).First();
 			ViewBag.Nic = nic;
-			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(appId, count);
+			ViewBag.ApplicationId = applicationId;
+			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId, count);
 			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
 		}
 

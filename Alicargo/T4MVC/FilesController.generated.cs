@@ -49,9 +49,15 @@ namespace Alicargo.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Application()
+        public virtual System.Web.Mvc.ViewResult AdminApplication()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Application);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.AdminApplication);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult SenderApplication()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.SenderApplication);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -88,7 +94,8 @@ namespace Alicargo.Controllers
         public class ActionNamesClass
         {
             public readonly string Download = "Download";
-            public readonly string Application = "Application";
+            public readonly string AdminApplication = "AdminApplication";
+            public readonly string SenderApplication = "SenderApplication";
             public readonly string Files = "Files";
             public readonly string Upload = "Upload";
             public readonly string Delete = "Delete";
@@ -98,7 +105,8 @@ namespace Alicargo.Controllers
         public class ActionNameConstants
         {
             public const string Download = "Download";
-            public const string Application = "Application";
+            public const string AdminApplication = "AdminApplication";
+            public const string SenderApplication = "SenderApplication";
             public const string Files = "Files";
             public const string Upload = "Upload";
             public const string Delete = "Delete";
@@ -113,11 +121,19 @@ namespace Alicargo.Controllers
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Application s_params_Application = new ActionParamsClass_Application();
+        static readonly ActionParamsClass_AdminApplication s_params_AdminApplication = new ActionParamsClass_AdminApplication();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Application ApplicationParams { get { return s_params_Application; } }
+        public ActionParamsClass_AdminApplication AdminApplicationParams { get { return s_params_AdminApplication; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Application
+        public class ActionParamsClass_AdminApplication
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_SenderApplication s_params_SenderApplication = new ActionParamsClass_SenderApplication();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SenderApplication SenderApplicationParams { get { return s_params_SenderApplication; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SenderApplication
         {
             public readonly string id = "id";
         }
@@ -158,11 +174,13 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Application = "Application";
+                public readonly string AdminApplication = "AdminApplication";
                 public readonly string FilesHolder = "FilesHolder";
+                public readonly string SenderApplication = "SenderApplication";
             }
-            public readonly string Application = "~/Views/Files/Application.cshtml";
+            public readonly string AdminApplication = "~/Views/Files/AdminApplication.cshtml";
             public readonly string FilesHolder = "~/Views/Files/FilesHolder.cshtml";
+            public readonly string SenderApplication = "~/Views/Files/SenderApplication.cshtml";
         }
     }
 
@@ -181,13 +199,23 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void ApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void AdminApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
-        public override System.Web.Mvc.ViewResult Application(long id)
+        public override System.Web.Mvc.ViewResult AdminApplication(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Application);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.AdminApplication);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ApplicationOverride(callInfo, id);
+            AdminApplicationOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void SenderApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+
+        public override System.Web.Mvc.ViewResult SenderApplication(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.SenderApplication);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            SenderApplicationOverride(callInfo, id);
             return callInfo;
         }
 

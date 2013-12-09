@@ -109,7 +109,6 @@
     <Compile Include="Services\Email\DbMailSender.cs" />
     <Compile Include="Services\ExtensionsHelper.cs" />
     <Compile Include="Localization\LocalizeEnumExtension.cs" />
-    <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Abstract\ILog.cs" />
     <Compile Include="Services\Abstract\IMailSender.cs" />
     <Compile Include="Services\Abstract\IRecipients.cs" />
