@@ -75,12 +75,15 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				case ApplicationEventType.SetTransitReference:
 				case ApplicationEventType.Created:
+					break;
+
 				case ApplicationEventType.CPFileUploaded:
 				case ApplicationEventType.InvoiceFileUploaded:
 				case ApplicationEventType.PackingFileUploaded:
 				case ApplicationEventType.SwiftFileUploaded:
 				case ApplicationEventType.DeliveryBillFileUploaded:
 				case ApplicationEventType.Torg12FileUploaded:
+					OnFileUpload(bytes, localizedData);
 					break;
 
 				case ApplicationEventType.SetDateOfCargoReceipt:
@@ -92,6 +95,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			}
 
 			return localizedData;
+		}
+
+		private void OnFileUpload(byte[] bytes, TextLocalizedData localizedData)
+		{
+			var holder = _serializer.Deserialize<FileHolder>(bytes);
+
+			localizedData.UploadedFile = holder.Name;
 		}
 
 		private void OnSetDateOfCargoReceipt(byte[] bytes, CultureInfo culture, TextLocalizedData localizedData)

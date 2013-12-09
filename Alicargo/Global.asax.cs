@@ -37,7 +37,7 @@ namespace Alicargo
 
 			CompositionRoot.BindServices(_kernel, MainLogger);
 
-			CompositionJobsHelper.BindJobs(_kernel, _connectionString);
+			CompositionJobsHelper.BindJobs(_kernel, _connectionString, _filesConnectionString);
 
 			RegisterConfigs(_kernel);
 

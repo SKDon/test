@@ -87,5 +87,7 @@
 		public string AirWaybillDateOfArrival { get; set; }
 
 		public string AirWaybillGTD { get; set; }
+
+		public string UploadedFile { get; set; }
 	}
 }

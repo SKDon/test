@@ -29,7 +29,7 @@ namespace Alicargo.App_Start
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
 
-		public static void BindJobs(IKernel kernel, string connectionString)
+		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
 			const string calculationMailerJob = "CalculationMailerJob_";
 			const string calculationWatcherJob = "CalculationWatcherJob_";
@@ -42,10 +42,10 @@ namespace Alicargo.App_Start
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 0);
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 1);
 
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(0, 2)),
-				applicationMailCreatorJob + 0);
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(connectionString, new ShardSettings(1, 2)),
-				applicationMailCreatorJob + 1);
+			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(
+				connectionString, filesConnectionString, new ShardSettings(0, 2)), applicationMailCreatorJob + 0);
+			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(
+				connectionString, filesConnectionString, new ShardSettings(1, 2)), applicationMailCreatorJob + 1);
 			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(0, 2)),
 				applicationStateHistoryJob + 0);
 			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(1, 2)),
@@ -96,12 +96,12 @@ namespace Alicargo.App_Start
 			}
 		}
 
-		private static void GetApplicationMailCreatorJob(string connectionString, ShardSettings shard)
+		private static void GetApplicationMailCreatorJob(string connectionString, string filesConnectionString, ShardSettings shard)
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
 				var serializer = new Serializer();
-				var factory = GetMessageFactory(connection, serializer);
+				var factory = GetMessageFactory(connection, connectionString, filesConnectionString, serializer);
 				var executor = new SqlProcedureExecutor(connectionString);
 				var events = new ApplicationEventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
@@ -134,19 +134,20 @@ namespace Alicargo.App_Start
 			job.Run();
 		}
 
-		private static IMessageFactory GetMessageFactory(IDbConnection connection, Serializer serializer)
+		private static IMessageFactory GetMessageFactory(IDbConnection connection, string connectionString, string filesConnectionString, Serializer serializer)
 		{
 			var unitOfWork = new UnitOfWork(connection);
 			var users = new UserRepository(unitOfWork, new PasswordConverter());
-			var executor = new SqlProcedureExecutor(connection.ConnectionString);
-			var states = new StateRepository(executor);
+			var mainExecutor = new SqlProcedureExecutor(connectionString);
+			var filesExecutor = new SqlProcedureExecutor(filesConnectionString);
+			var states = new StateRepository(mainExecutor);
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
-			var files = new ApplicationFileRepository(executor);
+			var files = new ApplicationFileRepository(filesExecutor);
 			var filesFasade = new FilesFasade(serializer, awbs, files);
 			var textBulder = new TextBulder(serializer, states, files);
-			var stateSettings = new StateSettingsRepository(executor);
-			var templates = new EmailTemplateRepository(executor);
+			var stateSettings = new StateSettingsRepository(mainExecutor);
+			var templates = new EmailTemplateRepository(mainExecutor);
 			var recipientsFacade = new RecipientsFacade(awbs, serializer, stateSettings, templates, users);
 			var templatesFacade = new TemplatesFacade(serializer, templates);
 
