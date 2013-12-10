@@ -685,7 +685,9 @@
     <Content Include="Deploy\Scripts\Setup\create-sp-restore-db.sql" />
     <Content Include="Deploy\Scripts\Setup\init-db.ps1" />
     <Content Include="Deploy\Scripts\Setup\set-initial-data.sql" />
-    <Content Include="Deploy\Scripts\update.sql" />
+    <Content Include="Deploy\Scripts\update-2.sql" />
+    <Content Include="Deploy\Scripts\update-3.sql" />
+    <Content Include="Deploy\Scripts\update-1.sql" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />
