@@ -3415,13 +3415,26 @@
             situation, if one is detected.
             </param>
         </member>
+        <member name="M:Ploeh.AutoFixture.Kernel.RecursionGuard.#ctor(Ploeh.AutoFixture.Kernel.ISpecimenBuilder,Ploeh.AutoFixture.Kernel.IRecursionHandler,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.Kernel.RecursionGuard"/>
+            class.
+            </summary>
+            <param name="builder">The intercepted builder to decorate.</param>
+            <param name="recursionHandler">
+            An <see cref="T:Ploeh.AutoFixture.Kernel.IRecursionHandler"/> that will handle a recursion
+            situation, if one is detected.
+            </param>
+            <param name="recursionDepth">The recursion depth at which the request will be treated as a recursive
+            request</param>
+        </member>
         <member name="M:Ploeh.AutoFixture.Kernel.RecursionGuard.#ctor(Ploeh.AutoFixture.Kernel.ISpecimenBuilder,System.Collections.IEqualityComparer)">
             <summary>
             Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.Kernel.RecursionGuard"/> class.
             </summary>
             <param name="builder">The intercepted builder to decorate.</param>
             <param name="comparer">
-            An IEqualitycomparer implementation to use when comparing requests to determine recursion.
+            An IEqualityComparer implementation to use when comparing requests to determine recursion.
             </param>
         </member>
         <member name="M:Ploeh.AutoFixture.Kernel.RecursionGuard.#ctor(Ploeh.AutoFixture.Kernel.ISpecimenBuilder,Ploeh.AutoFixture.Kernel.IRecursionHandler,System.Collections.IEqualityComparer)">
@@ -3438,6 +3451,30 @@
             An <see cref="T:System.Collections.IEqualityComparer"/> implementation to use when
             comparing requests to determine recursion.
             </param>
+            <exception cref="T:System.ArgumentNullException">
+            builder
+            or
+            recursionHandler
+            or
+            comparer
+            </exception>
+        </member>
+        <member name="M:Ploeh.AutoFixture.Kernel.RecursionGuard.#ctor(Ploeh.AutoFixture.Kernel.ISpecimenBuilder,Ploeh.AutoFixture.Kernel.IRecursionHandler,System.Collections.IEqualityComparer,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.Kernel.RecursionGuard"/>
+            class.
+            </summary>
+            <param name="builder">The intercepted builder to decorate.</param>
+            <param name="recursionHandler">
+            An <see cref="T:Ploeh.AutoFixture.Kernel.IRecursionHandler"/> that will handle a recursion
+            situation, if one is detected.
+            </param>
+            <param name="comparer">
+            An <see cref="T:System.Collections.IEqualityComparer"/> implementation to use when
+            comparing requests to determine recursion.
+            </param>
+            <param name="recursionDepth">The recursion depth at which the request will be treated as a recursive
+            request</param>
             <exception cref="T:System.ArgumentNullException">
             builder
             or
@@ -3520,6 +3557,12 @@
             </value>
             <seealso cref="M:Ploeh.AutoFixture.Kernel.RecursionGuard.#ctor(Ploeh.AutoFixture.Kernel.ISpecimenBuilder,Ploeh.AutoFixture.Kernel.IRecursionHandler)"/>
             <seealso cref="M:Ploeh.AutoFixture.Kernel.RecursionGuard.#ctor(Ploeh.AutoFixture.Kernel.ISpecimenBuilder,Ploeh.AutoFixture.Kernel.IRecursionHandler,System.Collections.IEqualityComparer)"/>
+        </member>
+        <member name="P:Ploeh.AutoFixture.Kernel.RecursionGuard.RecursionDepth">
+            <summary>
+            The recursion depth at which the request will be treated as a 
+            recursive request
+            </summary>
         </member>
         <member name="P:Ploeh.AutoFixture.Kernel.RecursionGuard.Comparer">
             <summary>Gets the comparer supplied via the constructor.</summary>
@@ -3898,6 +3941,18 @@
             </para>
             </remarks>
         </member>
+        <member name="M:Ploeh.AutoFixture.OmitOnRecursionBehavior.#ctor">
+            <summary>
+            Initializes new instance of the <see cref="T:Ploeh.AutoFixture.OmitOnRecursionBehavior"/> class with default recursion depth.
+            The default recursion depth will omit assignment on first recursion.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.OmitOnRecursionBehavior.#ctor(System.Int32)">
+            <summary>
+            Initializes new instance of the <see cref="T:Ploeh.AutoFixture.OmitOnRecursionBehavior"/> class with specific recursion depth.
+            </summary>
+            <param name="recursionDepth">The recursion depth at which the request will be omitted.</param>
+        </member>
         <member name="M:Ploeh.AutoFixture.OmitOnRecursionBehavior.Transform(Ploeh.AutoFixture.Kernel.ISpecimenBuilder)">
             <summary>
             Decorates the supplied <see cref="T:Ploeh.AutoFixture.Kernel.ISpecimenBuilder"/> with an
@@ -4042,6 +4097,71 @@
             <value>
             The sequence of limits.
             </value>
+        </member>
+        <member name="T:Ploeh.AutoFixture.RandomRangedNumberCustomization">
+            <summary>
+            A customization that enables numeric specimens to be random and unique per equivalence set of type and range limits.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.RandomRangedNumberCustomization.Customize(Ploeh.AutoFixture.IFixture)">
+            <summary>
+            Customizes the specified fixture by adding a
+            <see cref="T:Ploeh.AutoFixture.RandomRangedNumberGenerator"/>.
+            </summary>
+            <param name="fixture">The fixture to customize.</param>
+            <exception cref="T:System.ArgumentNullException">
+            fixture is null
+            </exception>
+        </member>
+        <member name="T:Ploeh.AutoFixture.RandomRangedNumberGenerator">
+            <summary>
+            Creates a random sequence for a given type within a given range without repeating in the range until 
+            all values are exhausted. Once exhausted, will automatically reset the set and continue choosing randomly 
+            within the range.  Multiple requests (whether the same or different object) for the same
+            operand type, minimum, and maximum are treated as being drawn from the same set. 
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.RandomRangedNumberGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.RandomRangedNumberGenerator"/> class       
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.RandomRangedNumberGenerator.Create(System.Object,Ploeh.AutoFixture.Kernel.ISpecimenContext)">
+            <summary>
+            Creates a random number within the request range.
+            </summary>
+            <param name="request">The request that describes what to create. Other requests for same type and limits 
+            denote the same set. </param>
+            <param name="context">A context that can be used to create other specimens.</param>
+            <returns>
+            The next random number in a range <paramref name="request"/> is a request
+            for a numeric value; otherwise, a <see cref="T:Ploeh.AutoFixture.Kernel.NoSpecimen"/> instance.
+            </returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.RandomRangedNumberGenerator.SelectGenerator(Ploeh.AutoFixture.Kernel.RangedNumberRequest)">
+            <summary>
+            Choose the RandomNumericSequenceGenerator to fulfill the request.  Will add the request as a new key
+            to generatorMap if the request does not already have a generator for it.  Throws ArgumentException
+            if either of the limits in the request are non-numeric. 
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.RandomRangedNumberGenerator.ConvertLimits(System.Object,System.Object)">
+            <summary>
+            Converts provided minimum and maximum into a long array of size 2.  Throws ArgumentException
+            if either value is non-numeric or otherwise fails conversion. 
+            </summary>
+            <param name="minimum"></param>
+            <param name="maximum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.RandomRangedNumberGenerator.ConvertLimit(System.Object)">
+            <summary>
+            Converts the provided limit into an Int64.  Throws ArgumentException if limit is a non-numeric type.
+            </summary>
+            <param name="limit"></param>
+            <returns></returns>
         </member>
         <member name="T:Ploeh.AutoFixture.RangedNumberGenerator">
             <summary>
@@ -7509,6 +7629,18 @@
             <summary>
             Decorates a <see cref="T:Ploeh.AutoFixture.Kernel.ISpecimenBuilder"/> with a <see cref="T:Ploeh.AutoFixture.Kernel.NullRecursionGuard"/>.
             </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NullRecursionBehavior.#ctor">
+            <summary>
+            Initializes new instance of the <see cref="T:Ploeh.AutoFixture.NullRecursionBehavior"/> class with default recursion depth.
+            The default recursion depth will cause null assignment on first recursion.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NullRecursionBehavior.#ctor(System.Int32)">
+            <summary>
+            Initializes new instance of the <see cref="T:Ploeh.AutoFixture.NullRecursionBehavior"/> class with specific recursion depth.
+            </summary>
+            <param name="recursionDepth">The recursion depth at which the request will be assigned null.</param>
         </member>
         <member name="M:Ploeh.AutoFixture.NullRecursionBehavior.Transform(Ploeh.AutoFixture.Kernel.ISpecimenBuilder)">
             <summary>
