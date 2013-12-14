@@ -13,7 +13,7 @@ namespace Alicargo.MvcHelpers
 		 "~/Content/bootstrap/js/bootstrap.js",
 		 "~/Content/bootstrap/fileupload/bootstrap-fileupload.js",
 		 "~/Scripts/globalize/globalize.js",
-		 "~/Scripts/kendo/2013.2.716/kendo.web.min.js",
+		 "~/Scripts/kendo/2013.3.1119/kendo.web.min.js",
 		 "~/Scripts/jquery.cookie.js",
 		 "~/Scripts/app/CurrencyType.js",
 		 "~/Scripts/app/Common.js",
@@ -21,12 +21,12 @@ namespace Alicargo.MvcHelpers
 		public const string CommonJs = "~/js";
 
 		[Path("~/Scripts/globalize/cultures/globalize.culture.ru.js",
-		 "~/Scripts/kendo/2013.2.716/cultures/kendo.culture.ru.min.js",
+		 "~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.ru.min.js",
 		 "~/Scripts/app/ru.js")]
 		public const string RuJs = "~/js/ru";
 
 		[Path("~/Scripts/globalize/cultures/globalize.culture.it.js",
-		 "~/Scripts/kendo/2013.2.716/cultures/kendo.culture.it.min.js",
+		 "~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.it.min.js",
 		 "~/Scripts/app/it.js")]
 		public const string ItJs = "~/js/it";		
 
