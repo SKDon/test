@@ -1,29 +1,27 @@
-﻿using System.Reflection;
-
-namespace Alicargo.MvcHelpers.BundleHelpres
+﻿namespace Alicargo.MvcHelpers.BundleHelpres
 {
 	public static class JsPaths
 	{
-		[Path("~/Scripts/jquery-{version}.js",
-		 "~/Scripts/jquery-ui-{version}.js",
-		 "~/Scripts/jquery.validate.js",
-		 "~/Scripts/jquery.validate.unobtrusive.js",
+		[Path("~/Scripts/jQuery/jquery-{version}.js",
+		 "~/Scripts/jQuery/jquery-ui-{version}.js",
+		 "~/Scripts/jQuery/jquery.validate.js",
+		 "~/Scripts/jQuery/jquery.validate.unobtrusive.js",
 		 "~/Content/bootstrap/js/bootstrap.js",
 		 "~/Content/bootstrap/fileupload/bootstrap-fileupload.js",
 		 "~/Scripts/globalize/globalize.js",
 		 "~/Scripts/kendo/2013.3.1119/kendo.web.min.js",
-		 "~/Scripts/jquery.cookie.js",
+		 "~/Scripts/jQuery/jquery.cookie.js",
 		 "~/Scripts/app/CurrencyType.js",
 		 "~/Scripts/app/Common.js",
 		 "~/Scripts/app/Alicargo.js")]
 		public const string CommonJs = "~/js";
 
-		[Path("~/Scripts/globalize/cultures/globalize.culture.ru.js",
+		[Path("~/Scripts/jQuery/globalize/cultures/globalize.culture.ru.js",
 		 "~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.ru.min.js",
 		 "~/Scripts/app/ru.js")]
 		public const string RuJs = "~/js/ru";
 
-		[Path("~/Scripts/globalize/cultures/globalize.culture.it.js",
+		[Path("~/Scripts/jQuery/globalize/cultures/globalize.culture.it.js",
 		 "~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.it.min.js",
 		 "~/Scripts/app/it.js")]
 		public const string ItJs = "~/js/it";		
