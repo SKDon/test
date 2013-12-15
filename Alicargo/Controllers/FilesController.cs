@@ -56,6 +56,15 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
+		[Access(RoleType.Client)]
+		public virtual ViewResult ClientApplication(long id)
+		{
+			ViewBag.ApplicationId = id;
+
+			return View();
+		}
+
+		[HttpGet]
 		[Access(RoleType.Sender)]
 		public virtual ViewResult SenderApplication(long id)
 		{

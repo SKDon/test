@@ -762,6 +762,7 @@
     <Content Include="Views\ClientApplication\Create.cshtml" />
     <Content Include="Views\ClientApplication\EditorTemplates\ApplicationClientModel.cshtml" />
     <Content Include="Views\ClientApplication\Edit.cshtml" />
+    <Content Include="Views\Files\ClientApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

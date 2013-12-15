@@ -1,0 +1,25 @@
+﻿@using Alicargo.Contracts.Enums
+@using Alicargo.MvcHelpers.BundleHelpres
+@using Resources
+
+<h1>
+	@Pages.Application @ViewBag.ApplicationId
+</h1>
+<div class="row">
+	<div class="span4">
+		@Html.Partial("FilesHolder", ApplicationFileType.Invoice)
+	</div>
+	<div class="span4">
+		@Html.Partial("FilesHolder", ApplicationFileType.Swift)
+	</div>
+	<div class="span4">
+	</div>
+</div>
+<p>
+	<a href="@Url.Action(MVC.ClientApplication.Edit((long) ViewBag.ApplicationId))" class="btn btn-primary">@Pages.ApplicationEdit</a>
+</p>
+
+@section scripts
+{
+	@Scripts.Render(JsPaths.FilesJs)
+}
