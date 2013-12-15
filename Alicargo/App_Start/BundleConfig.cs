@@ -17,7 +17,7 @@ namespace Alicargo.App_Start
 			BundleTable.Bundles.IgnoreList.Ignore("-vsdoc.js", OptimizationMode.Always);
 			BundleTable.Bundles.IgnoreList.Ignore(".debug.js", OptimizationMode.Always);
 
-			BindContstants();
+			BindConstants();
 
 			BundleTable.Bundles.Add(new StyleRelativePathTransformBundle(PathConstants.StylesPath)
 				.Include(
@@ -37,7 +37,7 @@ namespace Alicargo.App_Start
 			//BundleTable.EnableOptimizations = true;
 		}
 
-		private static void BindContstants()
+		private static void BindConstants()
 		{
 			var fields = typeof (PathConstants).GetFields();
 
