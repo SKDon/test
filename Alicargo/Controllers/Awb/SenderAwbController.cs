@@ -6,7 +6,7 @@ using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 using Resources;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Awb
 {
 	public partial class SenderAwbController : Controller
 	{

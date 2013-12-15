@@ -201,7 +201,7 @@
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\ExcelController.cs" />
-    <Compile Include="Controllers\SenderAwbController.cs" />
+    <Compile Include="Controllers\Awb\SenderAwbController.cs" />
     <Compile Include="MvcHelpers\Extensions\DropDownListHelpers.cs" />
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\JsPaths.cs" />
@@ -218,7 +218,7 @@
     <Compile Include="MvcHelpers\ModelBinders\AwbBrokerModelBinder.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbAdminModelBinder.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
-    <Compile Include="Controllers\AirWaybillController.cs" />
+    <Compile Include="Controllers\Awb\AirWaybillController.cs" />
     <Compile Include="MvcHelpers\BaseWebViewPage.cs" />
     <Compile Include="MvcHelpers\Filters\HandleErrorAttribute.cs" />
     <Compile Include="MvcHelpers\Extensions\FileExtensions.cs" />
@@ -821,9 +821,7 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\Awb\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

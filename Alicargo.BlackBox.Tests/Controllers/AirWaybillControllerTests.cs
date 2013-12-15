@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Controllers;
+using Alicargo.Controllers.Awb;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;

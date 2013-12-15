@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Awb
 {
     public partial class AirWaybillController
     {
@@ -299,7 +299,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AirWaybillController : Alicargo.Controllers.AirWaybillController
+    public partial class T4MVC_AirWaybillController : Alicargo.Controllers.Awb.AirWaybillController
     {
         public T4MVC_AirWaybillController() : base(Dummy.Instance) { }
 

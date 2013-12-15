@@ -24,12 +24,13 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class MVC
 {
-    public static Alicargo.Controllers.AirWaybillController AirWaybill = new Alicargo.Controllers.T4MVC_AirWaybillController();
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
     public static Alicargo.Controllers.Application.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.Application.T4MVC_ApplicationUpdateController();
     public static Alicargo.Controllers.Application.SenderApplicationController SenderApplication = new Alicargo.Controllers.Application.T4MVC_SenderApplicationController();
     public static Alicargo.Controllers.AuthenticationController Authentication = new Alicargo.Controllers.T4MVC_AuthenticationController();
+    public static Alicargo.Controllers.Awb.AirWaybillController AirWaybill = new Alicargo.Controllers.Awb.T4MVC_AirWaybillController();
+    public static Alicargo.Controllers.Awb.SenderAwbController SenderAwb = new Alicargo.Controllers.Awb.T4MVC_SenderAwbController();
     public static Alicargo.Controllers.BrokerController Broker = new Alicargo.Controllers.T4MVC_BrokerController();
     public static Alicargo.Controllers.CalculationController Calculation = new Alicargo.Controllers.T4MVC_CalculationController();
     public static Alicargo.Controllers.CarrierController Carrier = new Alicargo.Controllers.T4MVC_CarrierController();
@@ -41,7 +42,6 @@ public static class MVC
     public static Alicargo.Controllers.ExcelController Excel = new Alicargo.Controllers.T4MVC_ExcelController();
     public static Alicargo.Controllers.FilesController Files = new Alicargo.Controllers.T4MVC_FilesController();
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
-    public static Alicargo.Controllers.SenderAwbController SenderAwb = new Alicargo.Controllers.T4MVC_SenderAwbController();
     public static Alicargo.Controllers.SenderCalculationController SenderCalculation = new Alicargo.Controllers.T4MVC_SenderCalculationController();
     public static Alicargo.Controllers.SenderController Sender = new Alicargo.Controllers.T4MVC_SenderController();
     public static Alicargo.Controllers.StateController State = new Alicargo.Controllers.T4MVC_StateController();
@@ -66,37 +66,9 @@ namespace T4MVC
 }
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
+internal partial class T4MVC_System_Web_Mvc_PartialViewResult : System.Web.Mvc.PartialViewResult, IT4MVCActionResult
 {
-    public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
-    {
-        this.InitMVCT4Result(area, controller, action, protocol);
-    }
-     
-    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public string Protocol { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult
-{
-    public T4MVC_System_Web_Mvc_ViewResult(string area, string controller, string action, string protocol = null): base()
-    {
-        this.InitMVCT4Result(area, controller, action, protocol);
-    }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public string Protocol { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult
-{
-    public T4MVC_System_Web_Mvc_JsonResult(string area, string controller, string action, string protocol = null): base()
+    public T4MVC_System_Web_Mvc_PartialViewResult(string area, string controller, string action, string protocol = null): base()
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -120,9 +92,37 @@ internal partial class T4MVC_System_Web_Mvc_HttpStatusCodeResult : System.Web.Mv
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_PartialViewResult : System.Web.Mvc.PartialViewResult, IT4MVCActionResult
+internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult
 {
-    public T4MVC_System_Web_Mvc_PartialViewResult(string area, string controller, string action, string protocol = null): base()
+    public T4MVC_System_Web_Mvc_ViewResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+     
+    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_JsonResult(string area, string controller, string action, string protocol = null): base()
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }

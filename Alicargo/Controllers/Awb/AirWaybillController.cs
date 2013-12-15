@@ -13,7 +13,7 @@ using Alicargo.ViewModels.AirWaybill;
 using Microsoft.Ajax.Utilities;
 using Resources;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Awb
 {
 	public partial class AirWaybillController : Controller
 	{
