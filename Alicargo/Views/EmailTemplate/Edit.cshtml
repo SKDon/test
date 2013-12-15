@@ -1,4 +1,5 @@
 ﻿@using Alicargo.Core.Localization
+@using Alicargo.MvcHelpers.BundleHelpres
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.EmailTemplate.ApplicationEventTemplateModel
@@ -11,5 +12,5 @@
 @Html.EditPage(Url.Action(MVC.EmailTemplate.Edit()), Pages.Save)
 @section scripts
 {
-	@Scripts.Render(PathConstants.TemplateEditJs)
+	@Scripts.Render(JsPaths.TemplateEditJs)
 }

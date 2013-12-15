@@ -1,11 +1,9 @@
 ﻿using System.Reflection;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.BundleHelpres
 {
-	public static class PathConstants
+	public static class JsPaths
 	{
-		public const string StylesPath = "~/css";
-
 		[Path("~/Scripts/jquery-{version}.js",
 		 "~/Scripts/jquery-ui-{version}.js",
 		 "~/Scripts/jquery.validate.js",
@@ -67,11 +65,6 @@ namespace Alicargo.MvcHelpers
 		public const string FilesJs = "~/js/files-js";
 
 		[Path("~/Scripts/app/City/Grid.js")]
-		public const string CityListJs = "~/js/city-list-js";		
-
-		public static readonly string Version =
-			Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-		static PathConstants() { }
+		public const string CityListJs = "~/js/city-list-js";	
 	}
 }

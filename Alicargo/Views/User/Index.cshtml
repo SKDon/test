@@ -1,4 +1,5 @@
 ﻿@using Alicargo.Contracts.Enums
+@using Alicargo.MvcHelpers.BundleHelpres
 @using Resources
 @model RoleType
 <style>
@@ -41,7 +42,7 @@
 <div id="user-grid" class="grid"></div>
 @section scripts
 {
-	@Scripts.Render(PathConstants.UserListJs)
+	@Scripts.Render(JsPaths.UserListJs)
 	<script>
 		$(function() { Alicargo.Users.Init('@Model'); });
 	</script>

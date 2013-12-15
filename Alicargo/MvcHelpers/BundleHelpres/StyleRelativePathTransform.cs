@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Optimization;
 using Microsoft.Ajax.Utilities;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.BundleHelpres
 {
 	internal sealed class StyleRelativePathTransform : IBundleTransform
 	{

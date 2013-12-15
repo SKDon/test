@@ -156,7 +156,8 @@
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
-    <Compile Include="MvcHelpers\PathAttribute.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
     <Compile Include="Resources\ApplicationEventType.ru.Designer.cs">
       <DependentUpon>ApplicationEventType.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -201,7 +202,7 @@
     <Compile Include="Controllers\SenderAwbController.cs" />
     <Compile Include="MvcHelpers\Extensions\DropDownListHelpers.cs" />
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
-    <Compile Include="MvcHelpers\PathConstants.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\JsPaths.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="Services\Calculation\CalculationService.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
@@ -210,8 +211,8 @@
     <Compile Include="Controllers\DynamicScriptController.cs" />
     <Compile Include="Controllers\SenderApplicationController.cs" />
     <Compile Include="Controllers\TransitController.cs" />
-    <Compile Include="MvcHelpers\StyleRelativePathTransform.cs" />
-    <Compile Include="MvcHelpers\StyleRelativePathTransformBundle.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransform.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransformBundle.cs" />
     <Compile Include="MvcHelpers\Filters\CustomHandleErrorInfo.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbBrokerModelBinder.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbAdminModelBinder.cs" />

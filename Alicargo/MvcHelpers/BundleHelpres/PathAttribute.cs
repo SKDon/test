@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.MvcHelpers
+namespace Alicargo.MvcHelpers.BundleHelpres
 {
 	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
 	public sealed class PathAttribute : Attribute

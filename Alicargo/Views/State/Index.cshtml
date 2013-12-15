@@ -1,4 +1,5 @@
-﻿@using Resources
+﻿@using Alicargo.MvcHelpers.BundleHelpres
+@using Resources
 <style>
 	.container {
 		padding: 0 20px;
@@ -12,5 +13,5 @@
 <div id="state-grid" class="grid"></div>
 @section scripts
 {
-	@Scripts.Render(PathConstants.StateListJs)
+	@Scripts.Render(JsPaths.StateListJs)
 }

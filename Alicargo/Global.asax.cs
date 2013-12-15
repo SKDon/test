@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -19,6 +20,9 @@ namespace Alicargo
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		private static readonly ILog MainLogger = new Log4NetWrapper(LogManager.GetLogger("Logger"));
 
+		public static readonly string Version =
+			Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
 		private readonly string _connectionString =
 			ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
 
@@ -28,6 +32,8 @@ namespace Alicargo
 		private readonly JobRunnerHelper _jobs = new JobRunnerHelper();
 
 		private readonly StandardKernel _kernel = new StandardKernel();
+
+		static MvcApplication() { }
 
 		protected override IKernel CreateKernel()
 		{
