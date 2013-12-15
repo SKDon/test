@@ -13,7 +13,7 @@ namespace Alicargo.Services.Application
 	internal sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applications;
-		private readonly ICountryRepository _countryRepository;
+		private readonly ICountryRepository _countries;
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _states;
 		private readonly IStateFilter _stateFilter;
@@ -21,13 +21,13 @@ namespace Alicargo.Services.Application
 		public ApplicationPresenter(
 			IApplicationRepository applications,
 			IIdentityService identity,
-			ICountryRepository countryRepository,
+			ICountryRepository countries,
 			IStateFilter stateFilter,
 			IStateRepository states)
 		{
 			_applications = applications;
 			_identity = identity;
-			_countryRepository = countryRepository;
+			_countries = countries;
 			_stateFilter = stateFilter;
 			_states = states;
 		}
@@ -111,7 +111,7 @@ namespace Alicargo.Services.Application
 
 		public IDictionary<long, string> GetLocalizedCountries()
 		{
-			return _countryRepository.Get()
+			return _countries.Get()
 				.ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 		}
 

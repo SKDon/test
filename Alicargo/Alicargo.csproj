@@ -154,6 +154,7 @@
     <Compile Include="Controllers\Application\ApplicationController.cs" />
     <Compile Include="Controllers\Application\ApplicationListController.cs" />
     <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
+    <Compile Include="Controllers\Application\ClientApplicatonController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
@@ -173,7 +174,9 @@
       <DependentUpon>ApplicationEventType.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Abstract\ICityService.cs" />
+    <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
+    <Compile Include="Services\Application\ClientApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelClientCalculation.cs" />
@@ -349,6 +352,9 @@
     <Compile Include="T4MVC\CityController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\ClientApplicationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\ClientCalculationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -406,6 +412,7 @@
     </Compile>
     <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
     <Compile Include="ViewModels\AirWaybill\AwbSenderModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationClientModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationGroup.cs" />
@@ -752,6 +759,9 @@
     <Content Include="Views\Files\AdminApplication.cshtml" />
     <Content Include="Views\Files\FilesHolder.cshtml" />
     <Content Include="Views\Files\SenderApplication.cshtml" />
+    <Content Include="Views\ClientApplication\Create.cshtml" />
+    <Content Include="Views\ClientApplication\EditorTemplates\ApplicationClientModel.cshtml" />
+    <Content Include="Views\ClientApplication\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

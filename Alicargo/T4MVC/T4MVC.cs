@@ -27,6 +27,7 @@ public static class MVC
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
     public static Alicargo.Controllers.Application.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.Application.T4MVC_ApplicationUpdateController();
+    public static Alicargo.Controllers.Application.ClientApplicationController ClientApplication = new Alicargo.Controllers.Application.T4MVC_ClientApplicationController();
     public static Alicargo.Controllers.Application.SenderApplicationController SenderApplication = new Alicargo.Controllers.Application.T4MVC_SenderApplicationController();
     public static Alicargo.Controllers.AuthenticationController Authentication = new Alicargo.Controllers.T4MVC_AuthenticationController();
     public static Alicargo.Controllers.Awb.AirWaybillController AirWaybill = new Alicargo.Controllers.Awb.T4MVC_AirWaybillController();

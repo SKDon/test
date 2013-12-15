@@ -13,14 +13,14 @@ namespace Alicargo.App_Start
 				"AirWaybill_Create",
 				"AirWaybill/Create/{applicationId}",
 				new { controller = "AirWaybill", action = "Create" },
-				new[] { "Alicargo.Controllers" }
+				new[] { "Alicargo.Controllers.Awb" }
 				);
 
 			routes.MapRoute(
 				"Application_Create",
 				"Application/Create/{clientId}",
 				new { controller = "Application", action = "Create", clientId = UrlParameter.Optional },
-				new[] { "Alicargo.Controllers" }
+				new[] { "Alicargo.Controllers.Application" }
 				);
 
 			routes.MapRoute(

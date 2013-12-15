@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -7,7 +8,6 @@ using Alicargo.Core.Helpers;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using System.Net;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers.Application
@@ -16,21 +16,21 @@ namespace Alicargo.Controllers.Application
 	{
 		private readonly IApplicationManager _applicationManager;
 		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IClientPresenter _clientPresenter;
-		private readonly IApplicationRepository _applicationRepository;
+		private readonly IApplicationRepository _applications;
+		private readonly IClientRepository _clients;
 		private readonly IUserRepository _users;
 
 		public ApplicationController(
 			IApplicationManager applicationManager,
 			IApplicationPresenter applicationPresenter,
-			IClientPresenter clientPresenter,
-			IApplicationRepository applicationRepository,
+			IApplicationRepository applications,
+			IClientRepository clients,
 			IUserRepository users)
 		{
 			_applicationManager = applicationManager;
 			_applicationPresenter = applicationPresenter;
-			_clientPresenter = clientPresenter;
-			_applicationRepository = applicationRepository;
+			_applications = applications;
+			_clients = clients;
 			_users = users;
 		}
 
@@ -40,11 +40,20 @@ namespace Alicargo.Controllers.Application
 			var application = _applicationPresenter.GetDetails(id);
 
 			return PartialView(application);
+		}		
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		public virtual HttpStatusCodeResult Delete(long id)
+		{
+			_applicationManager.Delete(id);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		private void BindBag(long? clientId, long? applicationId, int? count = 0)
+		private void BindBag(long clientId, long? applicationId, int? count = 0)
 		{
-			var client = _clientPresenter.GetCurrentClientData(clientId);
+			var client = _clients.Get(clientId);
 
 			ViewBag.ClientNic = client.Nic;
 
@@ -62,15 +71,6 @@ namespace Alicargo.Controllers.Application
 			ViewBag.Senders = _users.GetByRole(RoleType.Sender).OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
 		}
 
-		[HttpPost]
-		[Access(RoleType.Admin)]
-		public virtual HttpStatusCodeResult Delete(long id)
-		{
-			_applicationManager.Delete(id);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
 		#region Edit
 
 		[HttpGet]
@@ -79,7 +79,7 @@ namespace Alicargo.Controllers.Application
 		{
 			var application = _applicationPresenter.Get(id);
 
-			var clientId = _applicationRepository.GetClientId(id);
+			var clientId = _applications.GetClientId(id);
 
 			BindBag(clientId, id, application.Count);
 
@@ -94,7 +94,7 @@ namespace Alicargo.Controllers.Application
 		{
 			if (!ModelState.IsValid)
 			{
-				var clientId = _applicationRepository.GetClientId(id);
+				var clientId = _applications.GetClientId(id);
 				BindBag(clientId, id, model.Count);
 
 				return View(model);
@@ -109,8 +109,8 @@ namespace Alicargo.Controllers.Application
 
 		#region Create
 
-		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ViewResult Create(long? clientId)
+		[Access(RoleType.Admin)]
+		public virtual ViewResult Create(long clientId)
 		{
 			BindBag(clientId, null);
 
@@ -119,22 +119,20 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(long? clientId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
+		[Access(RoleType.Admin)]
+		public virtual ActionResult Create(long clientId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			var client = _clientPresenter.GetCurrentClientData(clientId);
-
 			if (!ModelState.IsValid)
 			{
-				BindBag(client.Id, null);
+				BindBag(clientId, null);
 
 				return View(model);
 			}
 
 			try
 			{
-				_applicationManager.Add(model, carrierModel, transitModel, client.Id);
+				_applicationManager.Add(model, carrierModel, transitModel, clientId);
 			}
 			catch (DublicateException ex)
 			{
