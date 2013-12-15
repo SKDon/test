@@ -333,4 +333,7 @@
   <data name="City" xml:space="preserve">
     <value>City</value>
   </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
 </root>

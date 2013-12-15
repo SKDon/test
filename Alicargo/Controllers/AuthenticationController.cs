@@ -33,6 +33,14 @@ namespace Alicargo.Controllers
 			return View();
 		}
 
+		[HttpGet]
+		public virtual RedirectToRouteResult SignOut()
+		{
+			_authentication.SignOut();
+
+			return RedirectToAction(MVC.Home.Index());
+		}
+
 		[HttpPost]
 		public virtual ActionResult Login(SignIdModel user)
 		{
@@ -59,6 +67,8 @@ namespace Alicargo.Controllers
 
 			return RedirectToAction(MVC.Home.Index());
 		}
+
+
 
 		#endregion
 

@@ -42,5 +42,11 @@ namespace Alicargo.Services
 			FormsAuthentication.SetAuthCookie(id.ToString(CultureInfo.InvariantCulture), createPersistentCookie);
 			_identity.Id = id;
 		}
+
+		public void SignOut()
+		{
+			_identity.Id = null;
+			FormsAuthentication.SignOut();
+		}
 	}
 }

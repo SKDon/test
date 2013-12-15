@@ -6,5 +6,6 @@ namespace Alicargo.Services.Abstract
     {
         bool Authenticate(SignIdModel user);
 	    void AuthenticateForce(long id, bool createPersistentCookie);
+	    void SignOut();
     }
 }

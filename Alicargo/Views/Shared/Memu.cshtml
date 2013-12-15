@@ -85,6 +85,9 @@
 					<li>
 						@Html.ActionLink(LanguageName.English, MVC.Home.Culture(TwoLetterISOLanguageName.English, Request.RawUrl))
 					</li>
+					<li>
+						@Html.ActionLink(Pages.Logout, MVC.Authentication.SignOut())
+					</li>
 				</ul>
 			</div>
 		</div>

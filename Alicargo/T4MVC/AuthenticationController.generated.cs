@@ -70,6 +70,7 @@ namespace Alicargo.Controllers
         public class ActionNamesClass
         {
             public readonly string Login = "Login";
+            public readonly string SignOut = "SignOut";
             public readonly string LoginAsUser = "LoginAsUser";
             public readonly string Client = "Client";
         }
@@ -78,6 +79,7 @@ namespace Alicargo.Controllers
         public class ActionNameConstants
         {
             public const string Login = "Login";
+            public const string SignOut = "SignOut";
             public const string LoginAsUser = "LoginAsUser";
             public const string Client = "Client";
         }
@@ -136,6 +138,15 @@ namespace Alicargo.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
             LoginOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void SignOutOverride(T4MVC_System_Web_Mvc_RedirectToRouteResult callInfo);
+
+        public override System.Web.Mvc.RedirectToRouteResult SignOut()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.SignOut);
+            SignOutOverride(callInfo);
             return callInfo;
         }
 
