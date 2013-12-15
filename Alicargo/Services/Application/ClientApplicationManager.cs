@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Enums;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -13,8 +14,6 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IApplicationRepository _applications;
 		private readonly IStateConfig _config;
-		private readonly IIdentityService _identity;
-		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
 
@@ -22,18 +21,14 @@ namespace Alicargo.Services.Application
 			IApplicationRepository applications,
 			IApplicationUpdateRepository applicationUpdater,
 			IStateConfig config,
-			IIdentityService identity,
 			ITransitService transitService,
-			IUnitOfWork unitOfWork,
-			IStateSettingsRepository settings)
+			IUnitOfWork unitOfWork)
 		{
 			_applications = applications;
 			_applicationUpdater = applicationUpdater;
 			_config = config;
-			_identity = identity;
 			_transitService = transitService;
 			_unitOfWork = unitOfWork;
-			_settings = settings;
 		}
 
 		public void Update(long applicationId, ApplicationClientModel model, CarrierSelectModel carrierModel,
@@ -52,7 +47,7 @@ namespace Alicargo.Services.Application
 
 		public ApplicationClientModel Get(long id)
 		{
-			// todo: 2. check permissions to the application for a sender
+			// todo: 2. check permissions to the application for a client
 
 			var application = _applications.Get(id);
 
@@ -65,7 +60,26 @@ namespace Alicargo.Services.Application
 		{
 			return new ApplicationClientModel
 			{
-
+				Count = application.Count,
+				FactoryName = application.FactoryName,
+				Weight = application.Weight,
+				Invoice = application.Invoice,
+				MarkName = application.MarkName,
+				Currency = new CurrencyModel
+				{
+					Value = application.Value,
+					CurrencyId = application.CurrencyId
+				},
+				Volume = application.Volume,
+				CountryId = application.CountryId,
+				AddressLoad = application.AddressLoad,
+				Characteristic = application.Characteristic,
+				FactoryContact = application.FactoryContact,
+				FactoryEmail = application.FactoryEmail,
+				FactoryPhone = application.FactoryPhone,
+				MethodOfDelivery = (MethodOfDelivery)application.MethodOfDeliveryId,
+				TermsOfDelivery = application.TermsOfDelivery,
+				WarehouseWorkingTime = application.WarehouseWorkingTime
 			};
 		}
 
@@ -74,7 +88,7 @@ namespace Alicargo.Services.Application
 		{
 			var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
-			var data = GetNewApplicationData(model, clientId, transitId);
+			var data = GetNewApplicationData(model, clientId, transitId, 1); // todo: set sender by country
 
 			var id = _applicationUpdater.Add(data);
 
@@ -101,19 +115,10 @@ namespace Alicargo.Services.Application
 			to.FactoryEmail = @from.FactoryEmail;
 			to.FactoryContact = @from.FactoryContact;
 			to.MarkName = @from.MarkName;
-			to.MethodOfDeliveryId = (int) @from.MethodOfDelivery;
-			to.FactureCost = @from.FactureCost;
-			to.TransitCost = @from.TransitCost;
-			to.PickupCost = @from.PickupCost;
-			to.TariffPerKg = @from.TariffPerKg;
-			to.FactureCostEdited = from.FactureCostEdited;
-			to.TransitCostEdited = from.TransitCostEdited;
-			to.PickupCostEdited = from.PickupCostEdited;
-			to.ScotchCostEdited = from.ScotchCostEdited;
-			to.SenderId = from.SenderId;
+			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
 		}
 
-		private ApplicationData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId)
+		private ApplicationData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId, long senderId)
 		{
 			return new ApplicationData
 			{
@@ -138,22 +143,23 @@ namespace Alicargo.Services.Application
 				FactoryEmail = model.FactoryEmail,
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
-				MethodOfDeliveryId = (int) model.MethodOfDelivery,
+				MethodOfDeliveryId = (int)model.MethodOfDelivery,
 				Id = 0,
 				AirWaybillId = null,
 				DateInStock = null,
 				DateOfCargoReceipt = null,
 				TransitReference = null,
 				ClientId = clientId,
-				PickupCost = model.PickupCost,
-				TransitCost = model.TransitCost,
-				FactureCost = model.FactureCost,
-				TariffPerKg = model.TariffPerKg,
-				ScotchCostEdited = model.ScotchCostEdited,
-				FactureCostEdited = model.FactureCostEdited,
-				TransitCostEdited = model.TransitCostEdited,
-				PickupCostEdited = model.PickupCostEdited,
-				SenderId = model.SenderId
+				PickupCost = null,
+				TransitCost = null,
+				FactureCost = null,
+				TariffPerKg = null,
+				ScotchCostEdited = null,
+				FactureCostEdited = null,
+				TransitCostEdited = null,
+				PickupCostEdited = null,
+				SenderId = senderId,
+				SenderRate = null
 			};
 		}
 	}

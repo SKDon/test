@@ -44,9 +44,6 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "Country")]
 		public long CountryId { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "Sender")]
-		public long SenderId { get; set; }
-
 		[Required, DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
@@ -64,30 +61,6 @@ namespace Alicargo.ViewModels.Application
 
 		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public MethodOfDelivery MethodOfDelivery { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
-		public decimal? FactureCost { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "PickupCost")]
-		public decimal? PickupCost { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "FactureCostEdited")]
-		public decimal? FactureCostEdited { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "TransitCostEdited")]
-		public decimal? TransitCostEdited { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "ScotchCostEdited")]
-		public decimal? ScotchCostEdited { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "PickupCostEdited")]
-		public decimal? PickupCostEdited { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
-		public decimal? TransitCost { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
-		public decimal? TariffPerKg { get; set; }
 
 		#endregion
 	}

@@ -33,7 +33,7 @@
 else if (IdentityService.IsInRole(RoleType.Client))
 {
 	<p>
-		@Html.ActionLink(Pages.ApplicationAdd, MVC.Application.Create(), new { @class = "btn btn-primary" })
+		@Html.ActionLink(Pages.ApplicationAdd, MVC.ClientApplication.Create(), new { @class = "btn btn-primary" })
 	</p>
 }
 else if (IdentityService.IsInRole(RoleType.Forwarder))
