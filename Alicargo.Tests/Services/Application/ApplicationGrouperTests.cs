@@ -24,21 +24,21 @@ namespace Alicargo.Tests.Services.Application
 			const int clientCount = 6;
 			const int awbCount = 9;
 
-			var ids = Enumerable.Range(0, awbCount).Select(x => (long)x).ToArray();
-			var datas = ids.Select(i => fixture.Build<AirWaybillData>()
-											   .With(d => d.Id, i)
-											   .Create()).ToArray();
-			awbRepository.Setup(x => x.Get(ids)).Returns(datas);
-			awbRepository.Setup(x => x.GetAggregate(ids))
-						 .Returns(ids.Select(x => new AirWaybillAggregate
-							 {
-								 AirWaybillId = x,
-								 StateId = 0,
-								 TotalCount = (int)x,
-								 TotalWeight = x
-							 }).ToArray());
-			awbRepository.Setup(x => x.GetTotalCountWithouAwb()).Returns((int?)null);
-			awbRepository.Setup(x => x.GetTotalWeightWithouAwb()).Returns((float?)null);
+			var awbIds = Enumerable.Range(0, awbCount).Select(x => (long) x).ToArray();
+			var awbsData = awbIds.Select(i => fixture.Build<AirWaybillData>()
+				.With(d => d.Id, i)
+				.Create()).ToArray();
+			awbRepository.Setup(x => x.Get(awbIds)).Returns(awbsData);
+			awbRepository.Setup(x => x.GetAggregate(awbIds))
+				.Returns(awbIds.Select(x => new AirWaybillAggregate
+				{
+					AirWaybillId = x,
+					StateId = 0,
+					TotalCount = (int) x,
+					TotalWeight = x
+				}).ToArray());
+			awbRepository.Setup(x => x.GetTotalCountWithouAwb()).Returns((int?) null);
+			awbRepository.Setup(x => x.GetTotalWeightWithouAwb()).Returns((float?) null);
 
 			var grouper = new ApplicationGrouper(awbRepository.Object);
 
@@ -46,18 +46,20 @@ namespace Alicargo.Tests.Services.Application
 			for (var i = 0; i < appCount; i++)
 			{
 				var item = applications[i];
-				item.AirWaybillId = i % awbCount;
+				item.AirWaybillId = i%awbCount;
 				item.Id = i;
-				item.ClientLegalEntity = "Client " + i % clientCount;
+				item.ClientLegalEntity = "Client " + i%clientCount;
 				item.Count = i;
 				item.Weight = i;
+				item.Value = i;
+				item.Volume = i;
 			}
 
 			var groups = grouper.Group(applications, new[]
-                {
-                    OrderType.AirWaybill,
-                    OrderType.LegalEntity
-                });
+			{
+				OrderType.AirWaybill,
+				OrderType.LegalEntity
+			});
 
 			groups.Count().ShouldBeEquivalentTo(awbCount);
 

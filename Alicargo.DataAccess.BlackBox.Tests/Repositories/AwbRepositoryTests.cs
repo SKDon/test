@@ -57,7 +57,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			Assert.AreEqual(airWaybillDatas.Length, count);
 
-			var range = _awbRepository.GetRange((int)count, 0);
+			var range = _awbRepository.GetRange((int) count, 0);
 
 			airWaybillDatas.ShouldBeEquivalentTo(range);
 		}
@@ -86,7 +86,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var client1 = clientRepository.Get(TestConstants.TestClientId1);
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);
-			var clients = new[] { client1, client2 };
+			var clients = new[] {client1, client2};
 
 			emails.ShouldBeEquivalentTo(clients.Select(x => x.Email).ToArray());
 		}
@@ -151,8 +151,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data = CreateAirWaybillData();
 
 			var id = _awbRepository.Add(data, _context.RandomBytes(), _context.RandomBytes(),
-										_context.RandomBytes(), _context.RandomBytes(),
-										_context.RandomBytes());
+				_context.RandomBytes(), _context.RandomBytes(),
+				_context.RandomBytes());
 
 			_context.UnitOfWork.SaveChanges();
 
@@ -164,63 +164,66 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_AwbRepository_GetAggregate()
 		{
-			var data1 = CreateApplicationData(TestConstants.TestClientId1);
-			var data2 = CreateApplicationData(TestConstants.TestClientId1);
-			var data3 = CreateApplicationData(TestConstants.TestClientId1);
-			var data4 = CreateApplicationData(TestConstants.TestClientId1);
+			var data11 = CreateApplicationData(TestConstants.TestClientId1);
+			var data12 = CreateApplicationData(TestConstants.TestClientId1);
+			var data21 = CreateApplicationData(TestConstants.TestClientId1);
+			var data22 = CreateApplicationData(TestConstants.TestClientId1);
 
-			var id1 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
-			var id2 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
+			var awbId1 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
+			var awbId2 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
 			_context.UnitOfWork.SaveChanges();
 
 			var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
-			var a1 = applications.Add(data1);
-			var a2 = applications.Add(data2);
-			var a3 = applications.Add(data3);
-			var a4 = applications.Add(data4);
+			var app11 = applications.Add(data11);
+			var app12 = applications.Add(data12);
+			var app21 = applications.Add(data21);
+			var app22 = applications.Add(data22);
 			_context.UnitOfWork.SaveChanges();
 
-			applications.SetAirWaybill(a1(), id1());
-			applications.SetAirWaybill(a2(), id1());
-			applications.SetAirWaybill(a3(), id2());
-			applications.SetAirWaybill(a4(), id2());
+			applications.SetAirWaybill(app11(), awbId1());
+			applications.SetAirWaybill(app12(), awbId1());
+			applications.SetAirWaybill(app21(), awbId2());
+			applications.SetAirWaybill(app22(), awbId2());
 			_context.UnitOfWork.SaveChanges();
 
-			var aggregates = _awbRepository.GetAggregate(id1(), id2());
+			var aggregates = _awbRepository.GetAggregate(awbId1(), awbId2());
 
 			aggregates.Count().ShouldBeEquivalentTo(2);
 
-			var aggregate1 = aggregates.First(x => x.AirWaybillId == id1());
-			var aggregate2 = aggregates.First(x => x.AirWaybillId == id2());
+			var aggregate1 = aggregates.First(x => x.AirWaybillId == awbId1());
+			aggregate1.TotalCount.ShouldBeEquivalentTo(data11.Count + data12.Count);
+			aggregate1.TotalWeight.ShouldBeEquivalentTo(data11.Weight + data12.Weight);
+			aggregate1.TotalVolume.ShouldBeEquivalentTo(data11.Volume + data12.Volume);
+			aggregate1.TotalValue.ShouldBeEquivalentTo(data11.Value + data12.Value);
 
-			aggregate1.TotalCount.ShouldBeEquivalentTo(data1.Count + data2.Count);
-			aggregate2.TotalCount.ShouldBeEquivalentTo(data3.Count + data4.Count);
-
-			aggregate1.TotalWeight.ShouldBeEquivalentTo(data1.Weight + data2.Weight);
-			aggregate2.TotalWeight.ShouldBeEquivalentTo(data3.Weight + data4.Weight);
+			var aggregate2 = aggregates.First(x => x.AirWaybillId == awbId2());
+			aggregate2.TotalCount.ShouldBeEquivalentTo(data21.Count + data22.Count);
+			aggregate2.TotalWeight.ShouldBeEquivalentTo(data21.Weight + data22.Weight);
+			aggregate2.TotalVolume.ShouldBeEquivalentTo(data21.Volume + data22.Volume);
+			aggregate2.TotalValue.ShouldBeEquivalentTo(data21.Value + data22.Value);
 		}
 
 		private ApplicationData CreateApplicationData(long clientId)
 		{
 			return _fixture
-						   .Build<ApplicationData>()
-						   .With(x => x.SenderId, TestConstants.TestSenderId)
-						   .With(x => x.ClientId, clientId)
-						   .With(x => x.AirWaybillId, null)
-						   .With(x => x.CountryId, TestConstants.TestCountryId)
-						   .With(x => x.StateId, TestConstants.DefaultStateId)
-						   .With(x => x.TransitId, 1)
-						   .With(x => x.CurrencyId, (int)CurrencyType.Dollar)
-						   .Create();
+				.Build<ApplicationData>()
+				.With(x => x.SenderId, TestConstants.TestSenderId)
+				.With(x => x.ClientId, clientId)
+				.With(x => x.AirWaybillId, null)
+				.With(x => x.CountryId, TestConstants.TestCountryId)
+				.With(x => x.StateId, TestConstants.DefaultStateId)
+				.With(x => x.TransitId, 1)
+				.With(x => x.CurrencyId, (int) CurrencyType.Dollar)
+				.Create();
 		}
 
 		private AirWaybillData CreateAirWaybillData()
 		{
 			return _fixture
-						   .Build<AirWaybillData>()
-						   .With(x => x.StateId, TestConstants.DefaultStateId)
-						   .With(x => x.BrokerId, TestConstants.TestBrokerId)
-						   .Create();
+				.Build<AirWaybillData>()
+				.With(x => x.StateId, TestConstants.DefaultStateId)
+				.With(x => x.BrokerId, TestConstants.TestBrokerId)
+				.Create();
 		}
 	}
 }

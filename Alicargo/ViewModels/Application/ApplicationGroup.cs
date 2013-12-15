@@ -1,37 +1,29 @@
 ﻿namespace Alicargo.ViewModels.Application
 {
-    public sealed class ApplicationGroup
-    {
-        // ReSharper disable InconsistentNaming
+	public sealed class ApplicationGroup
+	{
+		// ReSharper disable InconsistentNaming
+		public Aggregates aggregates { get; set; }
+		public string field { get; set; }
+		public string value { get; set; }
+		public bool hasSubgroups { get; set; }
+		public object[] items { get; set; }
+		// ReSharper restore InconsistentNaming
 
-        public Aggregates aggregates { get; set; }
-        public string field { get; set; }
-        public string value { get; set; }
-        public bool hasSubgroups { get; set; }
-        public object[] items { get; set; }
-
-        public sealed class Aggregates
-        {
-            public Aggregates(int count, float weight)
-            {
-				Count = new Holder<int>(count);
-				Weight = new Holder<float>(weight);
-            }
-
-			public Holder<int> Count { get; private set; }
-			public Holder<float> Weight { get; private set; }
-        }
-
-		public sealed class Holder<T>
+		public sealed class Aggregates
 		{
-			public readonly T sum;
-
-			public Holder(T value)
+			public Aggregates(int count, float weight, decimal value, float volume)
 			{
-				sum = value;
+				Count = new SumHolder<int>(count);
+				Weight = new SumHolder<float>(weight);
+				Value = new SumHolder<decimal>(value);
+				Volume = new SumHolder<float>(volume);
 			}
-		}
 
-        // ReSharper restore InconsistentNaming
-    }
+			public SumHolder<int> Count { get; private set; }
+			public SumHolder<float> Weight { get; private set; }
+			public SumHolder<decimal> Value { get; private set; }
+			public SumHolder<float> Volume { get; private set; }
+		}
+	}
 }

@@ -18,8 +18,10 @@ namespace Alicargo.Services.Application
 		private readonly IDictionary<OrderType, OrderFunction> _map;
 		private Dictionary<long, AirWaybillData> _airWaybills;
 		private Dictionary<long, AirWaybillAggregate> _awbAggregates;
-		private int? _countWithouAwb;
-		private float? _weightWithouAwb;
+		private int _countWithouAwb;
+		private float _weightWithouAwb;
+		private decimal _valueWithouAwb;
+		private float _volumeWithouAwb;
 
 		public ApplicationGrouper(IAwbRepository awbRepository)
 		{
@@ -37,14 +39,16 @@ namespace Alicargo.Services.Application
 		public ApplicationGroup[] Group(ApplicationListItem[] applications, OrderType[] groups)
 		{
 			var awbIds = applications.Select(x => x.AirWaybillId ?? 0)
-									 .Distinct()
-									 .ToArray();
+				.Distinct()
+				.ToArray();
 
+			// todo: need to pass current sender or forwarder or client id to the functions to get aggregate information correctry
 			_airWaybills = _awbRepository.Get(awbIds).ToDictionary(x => x.Id, x => x);
-
 			_awbAggregates = _awbRepository.GetAggregate(awbIds).ToDictionary(x => x.AirWaybillId, x => x);
-			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb();
-			_weightWithouAwb = _awbRepository.GetTotalWeightWithouAwb();
+			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb() ?? 0;
+			_weightWithouAwb = _awbRepository.GetTotalWeightWithouAwb() ?? 0;
+			_valueWithouAwb = _awbRepository.GetTotalValueWithouAwb();
+			_volumeWithouAwb = _awbRepository.GetTotalVolumeWithouAwb();
 
 			return GroupImpl(applications, groups);
 		}
@@ -61,28 +65,28 @@ namespace Alicargo.Services.Application
 		private ApplicationGroup[] ByClientNic(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
 			return applications.GroupBy(x => x.ClientNic)
-							   .Select(grouping =>
-								   GetApplicationGroup(grouping, groups, OrderHelper.ClientNicFieldName,
-									   g => g.Key))
-							   .ToArray();
+				.Select(grouping =>
+					GetApplicationGroup(grouping, groups, OrderHelper.ClientNicFieldName,
+						g => g.Key))
+				.ToArray();
 		}
 
 		private ApplicationGroup[] ByLegalEntity(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
 			return applications.GroupBy(x => x.ClientLegalEntity)
-							   .Select(grouping =>
-								   GetApplicationGroup(grouping, groups, OrderHelper.LegalEntityFieldName,
-									   g => g.Key))
-							   .ToArray();
+				.Select(grouping =>
+					GetApplicationGroup(grouping, groups, OrderHelper.LegalEntityFieldName,
+						g => g.Key))
+				.ToArray();
 		}
 
 		private ApplicationGroup[] ByState(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
 			return applications.GroupBy(x => x.State.StateName)
-							   .Select(grouping =>
-								   GetApplicationGroup(grouping, groups, OrderHelper.StateFieldName,
-									   g => g.Key))
-							   .ToArray();
+				.Select(grouping =>
+					GetApplicationGroup(grouping, groups, OrderHelper.StateFieldName,
+						g => g.Key))
+				.ToArray();
 		}
 
 		private ApplicationGroup[] ByAirWaybill(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
@@ -104,6 +108,8 @@ namespace Alicargo.Services.Application
 		{
 			int count;
 			float weight;
+			decimal value;
+			float volume;
 
 			if (field == OrderHelper.AwbFieldName)
 			{
@@ -112,22 +118,28 @@ namespace Alicargo.Services.Application
 				{
 					count = _awbAggregates[id].TotalCount;
 					weight = _awbAggregates[id].TotalWeight;
+					value = _awbAggregates[id].TotalValue;
+					volume = _awbAggregates[id].TotalVolume;
 				}
 				else
 				{
-					count = _countWithouAwb ?? 0;
-					weight = _weightWithouAwb ?? 0;
+					count = _countWithouAwb;
+					weight = _weightWithouAwb;
+					value = _valueWithouAwb;
+					volume = _volumeWithouAwb;
 				}
 			}
 			else
 			{
 				count = grouping.Sum(y => y.Count ?? 0);
 				weight = grouping.Sum(y => y.Weight ?? 0);
+				value = grouping.Sum(y => y.Value);
+				volume = grouping.Sum(y => y.Volume);
 			}
 
 			return new ApplicationGroup
 			{
-				aggregates = new ApplicationGroup.Aggregates(count, weight),
+				aggregates = new ApplicationGroup.Aggregates(count, weight, value, volume),
 				field = field,
 				value = getValue(grouping),
 				hasSubgroups = orders.Count > 0,

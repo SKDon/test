@@ -14,6 +14,8 @@ namespace Alicargo.Contracts.Repositories
 		AirWaybillAggregate[] GetAggregate(params long[] ids);
 		int? GetTotalCountWithouAwb();
 		float? GetTotalWeightWithouAwb();
+		decimal GetTotalValueWithouAwb();
+		float GetTotalVolumeWithouAwb();
 		string[] GetClientEmails(long id);
 
 		void Delete(long id);

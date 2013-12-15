@@ -98,7 +98,8 @@ namespace Alicargo.DataAccess.Repositories
 				{
 					y.Weight,
 					y.Value,
-					y.Count
+					y.Count,
+					y.Volume
 				})
 			}).ToDictionary(x => new { x.Id, x.StateId }, x => x.Data.ToArray());
 
@@ -107,6 +108,8 @@ namespace Alicargo.DataAccess.Repositories
 				AirWaybillId = x.Key.Id,
 				TotalCount = x.Value.Sum(y => y.Count ?? 0),
 				TotalWeight = x.Value.Sum(y => y.Weight ?? 0),
+				TotalValue = x.Value.Sum(y => y.Value),
+				TotalVolume = x.Value.Sum(y => y.Volume),
 				StateId = x.Key.StateId
 			}).ToArray();
 		}
@@ -114,6 +117,16 @@ namespace Alicargo.DataAccess.Repositories
 		public float? GetTotalWeightWithouAwb()
 		{
 			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Weight);
+		}
+
+		public decimal GetTotalValueWithouAwb()
+		{
+			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Value);
+		}
+
+		public float GetTotalVolumeWithouAwb()
+		{
+			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Volume);
 		}
 
 		public int? GetTotalCountWithouAwb()

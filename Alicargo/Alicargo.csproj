@@ -437,6 +437,7 @@
     <Compile Include="ViewModels\State\StateCreateModel.cs" />
     <Compile Include="ViewModels\State\StateEditModel.cs" />
     <Compile Include="ViewModels\State\StateSettingsModel.cs" />
+    <Compile Include="ViewModels\SumHolder.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
     <Compile Include="ViewModels\User\SenderModel.cs" />
