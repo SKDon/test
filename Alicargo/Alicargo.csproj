@@ -708,7 +708,6 @@
     <Content Include="Views\User\EditorTemplates\UserModel.cshtml" />
     <Content Include="Views\Application\DisplayTemplates\ApplicationDetailsModel.cshtml" />
     <Content Include="Views\Application\Details.cshtml" />
-    <Content Include="Views\Transit\Edit.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
     <Content Include="Views\Broker\AWB.cshtml" />
     <Content Include="Views\Broker\EditorTemplates\AwbBrokerModel.cshtml" />

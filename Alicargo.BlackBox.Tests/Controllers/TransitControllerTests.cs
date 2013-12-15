@@ -10,6 +10,7 @@ using Ninject;
 namespace Alicargo.BlackBox.Tests.Controllers
 {
 	[TestClass]
+	[Ignore]
 	public class TransitControllerTests
 	{
 		private AlicargoDataContext _db;
@@ -29,25 +30,5 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		{
 			_composition.Dispose();
 		}
-
-		[TestMethod, TestCategory("black-box")]
-		public void Test_Edit_Get()
-		{
-			var data = _db.Transits.First(x => x.Applications.Any());
-
-			var model = _controller.Edit(data.Id).Model;
-
-			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
-		}
-
-		//[TestMethod, TestCategory("black-box")]
-		//public void Test_Edit_Post()
-		//{
-		//	var first = _db.Transits.First(x => x.Applications.Any());
-
-		//	_client.PostAsJsonAsync("Transit/Edit", first)
-		//		   .ContinueWith(task => Assert.AreEqual(HttpStatusCode.OK, task.Result.StatusCode))
-		//		   .Wait();
-		//}
 	}
 }

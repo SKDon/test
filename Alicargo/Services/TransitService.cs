@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Alicargo.Contracts.Repositories;
+﻿using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
@@ -16,13 +15,6 @@ namespace Alicargo.Services
             _unitOfWork = unitOfWork;
             _carrierService = carrierService;
             _transitRepository = transitRepository;
-        }
-
-        public TransitEditModel[] Get(params long[] ids)
-        {
-            var data = _transitRepository.Get(ids);
-
-            return data.Select(TransitEditModel.GetModel).ToArray();
         }
 
         public void Update(long transitId, TransitEditModel transit, CarrierSelectModel carrierModel)

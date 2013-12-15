@@ -43,12 +43,6 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Edit()
-        {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.PartialViewResult EditByApplication()
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByApplication);
@@ -75,7 +69,6 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Edit = "Edit";
             public readonly string EditByApplication = "EditByApplication";
             public readonly string EditByClient = "EditByClient";
         }
@@ -83,22 +76,11 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Edit = "Edit";
             public const string EditByApplication = "EditByApplication";
             public const string EditByClient = "EditByClient";
         }
 
 
-        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Edit
-        {
-            public readonly string id = "id";
-            public readonly string model = "model";
-            public readonly string carrierSelectModel = "carrierSelectModel";
-        }
         static readonly ActionParamsClass_EditByApplication s_params_EditByApplication = new ActionParamsClass_EditByApplication();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_EditByApplication EditByApplicationParams { get { return s_params_EditByApplication; } }
@@ -125,11 +107,9 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Edit = "Edit";
                 public readonly string EditByApplication = "EditByApplication";
                 public readonly string EditByClient = "EditByClient";
             }
-            public readonly string Edit = "~/Views/Transit/Edit.cshtml";
             public readonly string EditByApplication = "~/Views/Transit/EditByApplication.cshtml";
             public readonly string EditByClient = "~/Views/Transit/EditByClient.cshtml";
         }
@@ -139,16 +119,6 @@ namespace Alicargo.Controllers
     public partial class T4MVC_TransitController : Alicargo.Controllers.TransitController
     {
         public T4MVC_TransitController() : base(Dummy.Instance) { }
-
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
-
-        public override System.Web.Mvc.ViewResult Edit(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            EditOverride(callInfo, id);
-            return callInfo;
-        }
 
         partial void EditByApplicationOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? applicationId);
 
@@ -167,18 +137,6 @@ namespace Alicargo.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByClient);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
             EditByClientOverride(callInfo, clientId);
-            return callInfo;
-        }
-
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.TransitEditModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel);
-
-        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.TransitEditModel model, Alicargo.ViewModels.CarrierSelectModel carrierSelectModel)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierSelectModel", carrierSelectModel);
-            EditOverride(callInfo, id, model, carrierSelectModel);
             return callInfo;
         }
 

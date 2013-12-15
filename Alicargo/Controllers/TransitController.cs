@@ -1,10 +1,6 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.MvcHelpers.Filters;
-using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Antlr.Runtime.Misc;
 
@@ -13,28 +9,10 @@ namespace Alicargo.Controllers
 	public partial class TransitController : Controller
 	{
 		private readonly ITransitRepository _transitRepository;
-		private readonly ITransitService _transitService;
 
-		public TransitController(
-			ITransitService transitService,
-			ITransitRepository transitRepository)
+		public TransitController(ITransitRepository transitRepository)
 		{
-			_transitService = transitService;
 			_transitRepository = transitRepository;
-		}
-
-		[HttpGet, Access(RoleType.Client)]
-		public virtual ViewResult Edit(long id)
-		{
-			var transit = _transitService.Get(id).First();
-
-			var applicationId = _transitRepository.GetaApplicationId(id);
-
-			ViewBag.ApplicationId = applicationId;
-
-			ViewBag.TransitId = id;
-
-			return View(transit);
 		}
 
 		[ChildActionOnly]
@@ -62,16 +40,6 @@ namespace Alicargo.Controllers
 		public virtual PartialViewResult EditByClient(long? clientId)
 		{
 			return GetEditPartialView(clientId, id => _transitRepository.GetByClient(id));
-		}
-
-		[HttpPost, Access(RoleType.Client)]
-		public virtual ActionResult Edit(long id, TransitEditModel model, CarrierSelectModel carrierSelectModel)
-		{
-			if (!ModelState.IsValid) return View(model);
-
-			_transitService.Update(id, model, carrierSelectModel);
-
-			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 	}
 }
