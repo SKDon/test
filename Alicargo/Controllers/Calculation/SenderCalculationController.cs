@@ -7,7 +7,7 @@ using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Calculation
 {
 	public partial class SenderCalculationController : Controller
 	{

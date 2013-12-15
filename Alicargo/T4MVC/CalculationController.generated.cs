@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Calculation
 {
     public partial class CalculationController
     {
@@ -282,7 +282,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_CalculationController : Alicargo.Controllers.CalculationController
+    public partial class T4MVC_CalculationController : Alicargo.Controllers.Calculation.CalculationController
     {
         public T4MVC_CalculationController() : base(Dummy.Instance) { }
 

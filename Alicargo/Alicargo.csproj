@@ -181,8 +181,8 @@
     <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
     <Compile Include="Services\Excel\ExcelAdminCalculation.cs" />
     <Compile Include="Services\LanguageName.cs" />
-    <Compile Include="Controllers\ClientCalculationController.cs" />
-    <Compile Include="Controllers\SenderCalculationController.cs" />
+    <Compile Include="Controllers\Calculation\ClientCalculationController.cs" />
+    <Compile Include="Controllers\Calculation\SenderCalculationController.cs" />
     <Compile Include="Controllers\SenderController.cs" />
     <Compile Include="MvcHelpers\ModelBinders\ClientModelBinder.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
@@ -199,7 +199,7 @@
     <Compile Include="App_Start\CompositionJobsHelper.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrokerController.cs" />
-    <Compile Include="Controllers\CalculationController.cs" />
+    <Compile Include="Controllers\Calculation\CalculationController.cs" />
     <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\Awb\SenderAwbController.cs" />
     <Compile Include="MvcHelpers\Extensions\DropDownListHelpers.cs" />
