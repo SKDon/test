@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Alicargo.ViewModels.Application;
+﻿using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract
 {
@@ -8,8 +6,5 @@ namespace Alicargo.Services.Abstract
 	{
 		ApplicationAdminModel Get(long id);
 		ApplicationStateModel[] GetStateAvailability(long id);
-
-		[Obsolete]
-		IDictionary<long, string> GetLocalizedCountries();
 	}
 }

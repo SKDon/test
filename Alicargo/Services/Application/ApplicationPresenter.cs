@@ -56,13 +56,7 @@ namespace Alicargo.Services.Application
 			states = _stateFilter.FilterByPosition(states, currentState.Position);
 
 			return ToApplicationStateModel(states);
-		}
-
-		public IDictionary<long, string> GetLocalizedCountries()
-		{
-			return _countries.Get()
-				.ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
-		}
+		}		
 
 		private ApplicationStateModel[] ToApplicationStateModel(long[] ids)
 		{

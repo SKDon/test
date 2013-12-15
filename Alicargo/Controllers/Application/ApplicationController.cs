@@ -16,6 +16,8 @@ namespace Alicargo.Controllers.Application
 	{
 		private readonly IApplicationManager _applicationManager;
 		private readonly IApplicationPresenter _applicationPresenter;
+		private readonly IIdentityService _identity;
+		private readonly ICountryRepository _countries;
 		private readonly IApplicationRepository _applications;
 		private readonly IClientRepository _clients;
 		private readonly IUserRepository _users;
@@ -23,12 +25,16 @@ namespace Alicargo.Controllers.Application
 		public ApplicationController(
 			IApplicationManager applicationManager,
 			IApplicationPresenter applicationPresenter,
+			IIdentityService identity,
+			ICountryRepository countries,
 			IApplicationRepository applications,
 			IClientRepository clients,
 			IUserRepository users)
 		{
 			_applicationManager = applicationManager;
 			_applicationPresenter = applicationPresenter;
+			_identity = identity;
+			_countries = countries;
 			_applications = applications;
 			_clients = clients;
 			_users = users;
@@ -58,7 +64,8 @@ namespace Alicargo.Controllers.Application
 				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count);
 			}
 
-			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
+			ViewBag.Countries = _countries.Get()
+			   .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 
 			ViewBag.Senders = _users.GetByRole(RoleType.Sender).OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
 		}

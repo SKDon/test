@@ -13,24 +13,24 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class SenderApplicationController : Controller
 	{
-		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IApplicationSenderManager _applicationSenderManager;
 		private readonly IClientRepository _clientRepository;
 		private readonly IIdentityService _identity;
+		private readonly ICountryRepository _countries;
 		private readonly ISenderRepository _senders;
 
 		public SenderApplicationController(
 			IApplicationSenderManager applicationSenderManager,
-			IClientRepository clientRepository, 
-			IIdentityService identity, 
-			ISenderRepository senders,
-			IApplicationPresenter applicationPresenter)
+			IClientRepository clientRepository,
+			IIdentityService identity,
+			ICountryRepository countries,
+			ISenderRepository senders)
 		{
 			_applicationSenderManager = applicationSenderManager;
 			_clientRepository = clientRepository;
 			_identity = identity;
+			_countries = countries;
 			_senders = senders;
-			_applicationPresenter = applicationPresenter;
 		}
 
 		[HttpGet, Access(RoleType.Sender)]
@@ -100,14 +100,16 @@ namespace Alicargo.Controllers.Application
 			ViewBag.Nic = nic;
 			ViewBag.ApplicationId = applicationId;
 			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId, count);
-			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
+			ViewBag.Countries = _countries.Get()
+			   .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 		}
 
 		private void BindBag(long clientId)
 		{
 			var clientData = _clientRepository.Get(clientId);
 			ViewBag.Nic = clientData.Nic;
-			ViewBag.Countries = _applicationPresenter.GetLocalizedCountries();
+			ViewBag.Countries = _countries.Get()
+			   .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 		}
 	}
 }
