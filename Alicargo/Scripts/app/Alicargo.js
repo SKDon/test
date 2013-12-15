@@ -19,11 +19,13 @@
 		return value;
 	};
 
-	function getGridHeight(grid) {
+	function getGridHeight(selector) {
 		var height = $(window).height();
-		var top = $(grid).position().top;
-
-		return height - top - 22;
+		var grid = $(selector);
+		var top = grid.position().top;
+		var marginAndBorder = 22;
+		
+		return height - top - marginAndBorder;
 	}
 
 	$a.CreateGrid = function(selector, settings) {
