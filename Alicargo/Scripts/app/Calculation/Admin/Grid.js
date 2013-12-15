@@ -180,10 +180,8 @@
 
 			$a.CreateGrid("#calculation-grid", {
 				columns: $c.Columns(),
-				pageable: $a.DefaultPageSizes,
 				dataSource: $c.DataSource(),
 				editable: true,
-				resizable: true,
 				save: save,
 				dataBound: dataBound,
 				edit: edit

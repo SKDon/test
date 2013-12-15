@@ -30,16 +30,22 @@
 				<div class="wrap-padding">&nbsp;</div>
 				@RenderBody()
 			</div>
-			<div class="wrap-padding">&nbsp;</div>
+			@if (!HttpContext.Current.User.Identity.IsAuthenticated)
+			{
+				<div class="wrap-padding">&nbsp;</div>
+			}
 		</div>
-		<footer>
-			<div class="container">
-				<p class="muted credit">
-					&copy; Alicargo
-					@Html.ActionLink(Pages.SignIn, MVC.Authentication.Login())
-				</p>
-			</div>
-		</footer>
+		@if (!HttpContext.Current.User.Identity.IsAuthenticated)
+		{
+			<footer>
+				<div class="container">
+					<p class="muted credit">
+						&copy; Alicargo
+						@Html.ActionLink(Pages.SignIn, MVC.Authentication.Login())
+					</p>
+				</div>
+			</footer>
+		}
 		@Html.Partial("DynamicScripts")
 		@RenderSection("scripts", false)
 	</body>

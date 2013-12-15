@@ -8,7 +8,7 @@
 		data: "Data",
 		total: "Total"
 	};
-
+	var gridSelector = "#AirWaybill-grid";
 	var dataSource = {
 		transport: {
 			read: {
@@ -19,7 +19,7 @@
 			}
 		},
 		schema: schema,
-		pageSize: $a.SelectedPageSize("#AirWaybill-grid"),
+		pageSize: $a.SelectedPageSize(gridSelector),
 		serverPaging: true,
 		editable: true,
 		error: $a.ShowError
@@ -27,11 +27,9 @@
 
 	var columns = $a.Awb.AddColumns();
 
-	$a.CreateGrid("#AirWaybill-grid", {
-		resizable: true,
-		dataSource: dataSource,
-		pageable: $a.DefaultPageSizes,
+	$a.CreateGrid(gridSelector, {
+		dataSource: dataSource,		
 		detailTemplate: kendo.template($("#AirWaybill-grid-details").html()),
-		columns: columns
+		columns: columns		
 	});
 });

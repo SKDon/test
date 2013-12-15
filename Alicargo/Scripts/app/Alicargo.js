@@ -1,7 +1,6 @@
 ﻿var Alicargo = (function($a) {
 	$a.MaxPageSize = 10000;
 	$a.DefaultPageSize = $a.MaxPageSize;
-	$a.DefaultPageSizes = { refresh: true, pageSizes: [10, 20, 50, 100, $a.MaxPageSize] };
 
 	$a.SelectedPageSize = function(selector, value) {
 		var key = selector + '-page-size';
@@ -20,7 +19,19 @@
 		return value;
 	};
 
+	function getGridHeight(grid) {
+		var height = $(window).height();
+		var top = $(grid).position().top;
+
+		return height - top - 22;
+	}
+
 	$a.CreateGrid = function(selector, settings) {
+		settings = $.extend(settings, {
+			resizable: true,
+			pageable: { refresh: true, pageSizes: [10, 20, 50, 100, $a.MaxPageSize] },
+			height: getGridHeight(selector)
+		});
 
 		$(selector).kendoGrid(settings);
 
@@ -47,10 +58,11 @@
 		$a.ShowMessage($a.Localization.Pages_AnError);
 	};
 	
+	
 	$a.ShowMessage = function(message) {
 		alert(message);
 	};
-	
+
 	$a.DefaultGridButtonWidth = "29px";
 	$a.Confirm = function(message) { return window.confirm(message); };
 

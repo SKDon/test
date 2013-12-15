@@ -28,7 +28,6 @@
 
 	var settings = {
 		dataSource: dataSource,
-		pageable: $a.DefaultPageSizes,
 		columns: [
 			{ field: "Name", title: $l.Pages_City }, {
 				command: [{

@@ -22,7 +22,7 @@ namespace Alicargo.App_Start
 			BindConstants(typeof(JsPaths).GetFields(), value => new ScriptBundle(value));
 			BindConstants(typeof(CssPaths).GetFields(), value => new StyleRelativePathTransformBundle(value));
 
-			BundleTable.EnableOptimizations = true;
+			//BundleTable.EnableOptimizations = true;
 		}
 
 		private static void BindConstants(IEnumerable<FieldInfo> fields, Func<string, Bundle> getBundle)

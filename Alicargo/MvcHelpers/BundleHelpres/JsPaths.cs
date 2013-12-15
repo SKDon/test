@@ -6,11 +6,11 @@
 		 "~/Scripts/jQuery/jquery-ui-{version}.js",
 		 "~/Scripts/jQuery/jquery.validate.js",
 		 "~/Scripts/jQuery/jquery.validate.unobtrusive.js",
+		 "~/Scripts/jQuery/globalize/globalize.js",
+		 "~/Scripts/jQuery/jquery.cookie.js",
 		 "~/Content/bootstrap/js/bootstrap.js",
 		 "~/Content/bootstrap/fileupload/bootstrap-fileupload.js",
-		 "~/Scripts/globalize/globalize.js",
 		 "~/Scripts/kendo/2013.3.1119/kendo.web.min.js",
-		 "~/Scripts/jQuery/jquery.cookie.js",
 		 "~/Scripts/app/CurrencyType.js",
 		 "~/Scripts/app/Common.js",
 		 "~/Scripts/app/Alicargo.js")]

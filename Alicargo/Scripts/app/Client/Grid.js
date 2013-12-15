@@ -31,7 +31,6 @@
 		dataSource: dataSource,
 		filterable: false,
 		sortable: false,
-		pageable: $a.DefaultPageSizes,
 		editable: false,
 		columns: [
 			{ field: "LegalEntity", title: $l.Entities_LegalEntity },

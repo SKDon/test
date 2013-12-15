@@ -7,8 +7,10 @@
 	var $s = $a.States;
 
 	$a.Application = (function($apl) {
+		var gridSelector = "#application-grid";
+		
 		$apl.GetGrid = function() {
-			var grid = $("#application-grid").data("kendoGrid");
+			var grid = $(gridSelector).data("kendoGrid");
 			$apl.GetGrid = function() { return grid; };
 			return $apl.GetGrid();
 		};
@@ -47,7 +49,7 @@
 					}
 				},
 				schema: schema,
-				pageSize: $a.SelectedPageSize("#application-grid"),
+				pageSize: $a.SelectedPageSize(gridSelector),
 				serverPaging: true,
 				serverGrouping: true,
 				error: $a.ShowError,
@@ -67,8 +69,6 @@
 				filterable: false,
 				sortable: false,
 				groupable: false,
-				pageable: $a.DefaultPageSizes,
-				resizable: true,
 				columns: $a.Application.GetColumns()
 			};
 
@@ -185,7 +185,7 @@
 			return settings;
 		}
 
-		$a.CreateGrid("#application-grid", getSettings());
+		$a.CreateGrid(gridSelector, getSettings());
 
 		return $apl;
 	})($a.Application || {});
