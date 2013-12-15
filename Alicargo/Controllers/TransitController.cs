@@ -32,6 +32,8 @@ namespace Alicargo.Controllers
 
 			ViewBag.ApplicationId = applicationId;
 
+			ViewBag.TransitId = id;
+
 			return View(transit);
 		}
 
