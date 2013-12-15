@@ -429,7 +429,6 @@
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
-    <Compile Include="ViewModels\Application\ApplicationDetailsModel.cs" />
     <Compile Include="ViewModels\EmailTemplate\ApplicationEventTemplateModel.cs" />
     <Compile Include="ViewModels\EmailTemplate\EmailTemplateSettingsModel.cs" />
     <Compile Include="ViewModels\Files\ApplicationFilesEdit.cs" />
@@ -707,7 +706,6 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\EditorTemplates\UserModel.cshtml" />
     <Content Include="Views\Application\DisplayTemplates\ApplicationDetailsModel.cshtml" />
-    <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
     <Content Include="Views\Broker\AWB.cshtml" />
     <Content Include="Views\Broker\EditorTemplates\AwbBrokerModel.cshtml" />

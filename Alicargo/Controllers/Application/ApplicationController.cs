@@ -34,14 +34,6 @@ namespace Alicargo.Controllers.Application
 			_users = users;
 		}
 
-		[ChildActionOnly]
-		public virtual PartialViewResult Details(long id)
-		{
-			var application = _applicationPresenter.GetDetails(id);
-
-			return PartialView(application);
-		}		
-
 		[HttpPost]
 		[Access(RoleType.Admin)]
 		public virtual HttpStatusCodeResult Delete(long id)

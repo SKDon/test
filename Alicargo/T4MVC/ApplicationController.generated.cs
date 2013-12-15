@@ -43,12 +43,6 @@ namespace Alicargo.Controllers.Application
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Details()
-        {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Details);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.HttpStatusCodeResult Delete()
         {
             return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
@@ -81,7 +75,6 @@ namespace Alicargo.Controllers.Application
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Details = "Details";
             public readonly string Delete = "Delete";
             public readonly string Edit = "Edit";
             public readonly string Create = "Create";
@@ -90,21 +83,12 @@ namespace Alicargo.Controllers.Application
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Details = "Details";
             public const string Delete = "Delete";
             public const string Edit = "Edit";
             public const string Create = "Create";
         }
 
 
-        static readonly ActionParamsClass_Details s_params_Details = new ActionParamsClass_Details();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Details DetailsParams { get { return s_params_Details; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Details
-        {
-            public readonly string id = "id";
-        }
         static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
@@ -146,11 +130,9 @@ namespace Alicargo.Controllers.Application
             public class _ViewNamesClass
             {
                 public readonly string Create = "Create";
-                public readonly string Details = "Details";
                 public readonly string Edit = "Edit";
             }
             public readonly string Create = "~/Views/Application/Create.cshtml";
-            public readonly string Details = "~/Views/Application/Details.cshtml";
             public readonly string Edit = "~/Views/Application/Edit.cshtml";
             static readonly _DisplayTemplatesClass s_DisplayTemplates = new _DisplayTemplatesClass();
             public _DisplayTemplatesClass DisplayTemplates { get { return s_DisplayTemplates; } }
@@ -173,16 +155,6 @@ namespace Alicargo.Controllers.Application
     public partial class T4MVC_ApplicationController : Alicargo.Controllers.Application.ApplicationController
     {
         public T4MVC_ApplicationController() : base(Dummy.Instance) { }
-
-        partial void DetailsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long id);
-
-        public override System.Web.Mvc.PartialViewResult Details(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Details);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            DetailsOverride(callInfo, id);
-            return callInfo;
-        }
 
         partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 

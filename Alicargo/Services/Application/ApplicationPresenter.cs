@@ -41,57 +41,6 @@ namespace Alicargo.Services.Application
 			return application;
 		}
 
-		public ApplicationDetailsModel GetDetails(long id)
-		{
-			var data = _applications.GetDetails(id);
-
-			var application = new ApplicationDetailsModel
-			{
-				AddressLoad = data.AddressLoad,
-				Id = data.Id,
-				FactoryName = data.FactoryName,
-				Invoice = data.Invoice,
-				MarkName = data.MarkName,
-				Volume = data.Volume,
-				Count = data.Count,
-				AirWaybill = data.AirWaybill,
-				Characteristic = data.Characteristic,
-				ClientNic = data.ClientNic,
-				ClientLegalEntity = data.ClientLegalEntity,
-				CreationTimestamp = data.CreationTimestamp,
-				DateOfCargoReceipt = data.DateOfCargoReceipt,
-				FactoryContact = data.FactoryContact,
-				FactoryEmail = data.FactoryEmail,
-				FactoryPhone = data.FactoryPhone,
-				StateChangeTimestamp = data.StateChangeTimestamp,
-				StateId = data.StateId,
-				TermsOfDelivery = data.TermsOfDelivery,
-				TransitAddress = data.TransitAddress,
-				TransitCarrierName = data.TransitCarrierName,
-				TransitCity = data.TransitCity,
-				TransitDeliveryTypeId = data.TransitDeliveryTypeId,
-				TransitMethodOfTransitId = data.TransitMethodOfTransitId,
-				TransitPhone = data.TransitPhone,
-				TransitRecipientName = data.TransitRecipientName,
-				TransitReference = data.TransitReference,
-				TransitWarehouseWorkingTime = data.TransitWarehouseWorkingTime,
-				WarehouseWorkingTime = data.WarehouseWorkingTime,
-				Weight = data.Weight,
-				MethodOfDeliveryId = data.MethodOfDeliveryId,
-				Value = data.Value,
-				CurrencyId = data.CurrencyId,
-				AirWaybillDateOfArrival = data.AirWaybillDateOfArrival,
-				AirWaybillDateOfDeparture = data.AirWaybillDateOfDeparture,
-				AirWaybillGTD = data.AirWaybillGTD,
-				ClientEmail = data.ClientEmail,
-				ClientUserId = data.ClientUserId,
-				CountryName = data.CountryName.First(x => x.Key == _identity.TwoLetterISOLanguageName).Value,
-				AirWaybillId = data.AirWaybillId
-			};
-
-			return application;
-		}
-
 		public ApplicationStateModel[] GetStateAvailability(long id)
 		{
 			var applicationData = _applications.Get(id);
