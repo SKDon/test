@@ -10,7 +10,7 @@ using Alicargo.ViewModels;
 using System.Net;
 using Alicargo.ViewModels.Application;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationController : Controller
 	{

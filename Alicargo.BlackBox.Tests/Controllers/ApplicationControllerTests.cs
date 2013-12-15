@@ -4,7 +4,7 @@ using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Controllers;
+using Alicargo.Controllers.Application;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;

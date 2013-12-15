@@ -151,9 +151,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Application\ApplicationController.cs" />
+    <Compile Include="Controllers\Application\ApplicationListController.cs" />
+    <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\Application\SenderApplicationController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
@@ -193,8 +197,6 @@
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\CompositionRootHelper.cs" />
     <Compile Include="App_Start\CompositionJobsHelper.cs" />
-    <Compile Include="Controllers\ApplicationListController.cs" />
-    <Compile Include="Controllers\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
@@ -209,7 +211,6 @@
     <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
-    <Compile Include="Controllers\SenderApplicationController.cs" />
     <Compile Include="Controllers\TransitController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransform.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransformBundle.cs" />
@@ -243,7 +244,6 @@
       <DependentUpon>Validation.ru.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -821,7 +821,9 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\Awb\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

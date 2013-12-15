@@ -6,7 +6,7 @@ using Alicargo.Core.Services.Abstract;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationUpdateController : Controller
 	{

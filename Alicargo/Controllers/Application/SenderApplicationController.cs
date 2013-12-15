@@ -9,7 +9,7 @@ using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Application
 {
 	public partial class SenderApplicationController : Controller
 	{

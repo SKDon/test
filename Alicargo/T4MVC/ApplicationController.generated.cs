@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Application
 {
     public partial class ApplicationController
     {
@@ -122,7 +122,7 @@ namespace Alicargo.Controllers
             public readonly string id = "id";
             public readonly string model = "model";
             public readonly string carrierModel = "carrierModel";
-            public readonly string transitModel = "Transit";
+            public readonly string transitModel = "transitModel";
         }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -133,7 +133,7 @@ namespace Alicargo.Controllers
             public readonly string clientId = "clientId";
             public readonly string model = "model";
             public readonly string carrierModel = "carrierModel";
-            public readonly string transitModel = "Transit";
+            public readonly string transitModel = "transitModel";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -170,7 +170,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ApplicationController : Alicargo.Controllers.ApplicationController
+    public partial class T4MVC_ApplicationController : Alicargo.Controllers.Application.ApplicationController
     {
         public T4MVC_ApplicationController() : base(Dummy.Instance) { }
 
@@ -212,7 +212,7 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
             EditOverride(callInfo, id, model, carrierModel, transitModel);
             return callInfo;
         }
@@ -235,7 +235,7 @@ namespace Alicargo.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "carrierModel", carrierModel);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
             CreateOverride(callInfo, clientId, model, carrierModel, transitModel);
             return callInfo;
         }
