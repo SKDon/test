@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;

@@ -101,7 +101,7 @@
     <Compile Include="Repositories\AwbRepositoryTests.cs" />
     <Compile Include="Repositories\BrockerRepositoryTests.cs" />
     <Compile Include="Repositories\CarrierRepositoryTests.cs" />
-    <Compile Include="Repositories\Tests.ClientRepository.cs" />
+    <Compile Include="Repositories\ClientRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepositoryTests.cs" />
     <Compile Include="Repositories\Tests.TransitRepository.cs" />
@@ -112,7 +112,6 @@
     </Compile>
     <Compile Include="Repositories\AuthenticationRepositoryTests.cs" />
     <Compile Include="Repositories\CalculationRepositoryTests.cs" />
-    <Compile Include="Repositories\ClientContractRepository.cs" />
     <Compile Include="Repositories\ApplicationEventRepositoryTests.cs" />
     <Compile Include="Repositories\EmailTemplateRepositoryTests.cs" />
     <Compile Include="Repositories\CityRepositoryTests.cs" />
