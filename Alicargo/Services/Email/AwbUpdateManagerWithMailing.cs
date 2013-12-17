@@ -10,7 +10,7 @@ namespace Alicargo.Services.Email
 {
 	internal sealed class AwbUpdateManagerWithMailing : IAwbUpdateManager
 	{
-		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"]; // todo: 2. hack
+		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IMailSender _mailSender;

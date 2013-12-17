@@ -70,7 +70,7 @@ namespace Alicargo.Services.Email
 
 			var aggregate = _awbPresenter.GetAggregate(awbId);
 
-			var from = ConfigurationManager.AppSettings["DefaultFrom"]; // todo: 2. hack
+			var from = ConfigurationManager.AppSettings["DefaultFrom"];
 
 			foreach (var recipient in to)
 			{

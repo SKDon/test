@@ -43,7 +43,7 @@ namespace Alicargo.Services.Email
 
 			var aggregate = _awbPresenter.GetAggregate(awbId.Value);
 
-			var from = ConfigurationManager.AppSettings["DefaultFrom"]; // todo: 2. hack
+			var from = ConfigurationManager.AppSettings["DefaultFrom"];
 
 			var to = _recipients.GetForwarderEmails();
 			foreach (var recipient in to)

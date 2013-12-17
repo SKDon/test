@@ -42,7 +42,7 @@ namespace Alicargo.Services.Application
 				.Distinct()
 				.ToArray();
 
-			// todo: need to pass current sender or forwarder or client id to the functions to get aggregate information correctry
+			// todo: 2. need to pass current sender or forwarder or client id to the functions to get aggregate information correctry
 			_airWaybills = _awbRepository.Get(awbIds).ToDictionary(x => x.Id, x => x);
 			_awbAggregates = _awbRepository.GetAggregate(awbIds).ToDictionary(x => x.AirWaybillId, x => x);
 			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb() ?? 0;

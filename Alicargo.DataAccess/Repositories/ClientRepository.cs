@@ -58,7 +58,7 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			var entity = new Client();
 
-			CopyTo(client, entity);
+			Map(client, entity);
 
 			_context.Clients.InsertOnSubmit(entity);
 
@@ -99,7 +99,7 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			var entity = _context.Clients.First(x => x.Id == client.Id);
 
-			CopyTo(client, entity);
+			Map(client, entity);
 		}
 
 		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
@@ -110,7 +110,7 @@ namespace Alicargo.DataAccess.Repositories
 						   .ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 
-		private static void CopyTo(ClientData @from, Client to)
+		private static void Map(ClientData @from, Client to)
 		{
 			to.Email = @from.Email;
 			to.LegalEntity = @from.LegalEntity;

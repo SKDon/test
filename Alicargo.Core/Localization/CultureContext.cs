@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Alicargo.Core.Localization
 {
-	// todo: review for thread safe
+	// todo: refactor
 	public sealed class CultureContext : ICultureContext
 	{
 		private CultureContext() { }

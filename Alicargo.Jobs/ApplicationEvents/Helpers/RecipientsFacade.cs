@@ -97,7 +97,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						break;
 
 					case RoleType.Forwarder:
-						// todo: get forwarder from application data
+						// todo: 1. get forwarder from application data
 						foreach (var user in users)
 						{
 							yield return GetRecipientData(user, role);

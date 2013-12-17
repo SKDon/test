@@ -15,7 +15,7 @@ namespace Alicargo.Services.Email
 		private readonly IClientManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
 
-		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"]; // todo: 2. hack
+		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
 
 		public ClientManagerWithMailing(
 			IRecipients recipients,

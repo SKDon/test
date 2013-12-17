@@ -88,7 +88,7 @@ namespace Alicargo.Services.Application
 		{
 			var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
-			var data = GetNewApplicationData(model, clientId, transitId, 1); // todo: set sender by country
+			var data = GetNewApplicationData(model, clientId, transitId, 1); // todo: 1. set sender by country
 
 			var id = _applicationUpdater.Add(data);
 
