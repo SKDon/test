@@ -89,7 +89,7 @@ namespace Alicargo.DataAccess.Repositories
 			_context.Transits.DeleteOnSubmit(transit);
 		}
 
-		public static void CopyTo(TransitData from, Transit to)
+		private static void CopyTo(TransitData from, Transit to)
 		{
 			to.City = from.City;
 			to.Address = from.Address;
