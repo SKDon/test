@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
@@ -58,7 +59,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			Assert.AreEqual(airWaybillDatas.Length, count);
 
-			var range = _awbRepository.GetRange((int) count, 0);
+			var range = _awbRepository.GetRange((int)count, 0);
 
 			airWaybillDatas.ShouldBeEquivalentTo(range);
 		}
@@ -87,9 +88,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var client1 = clientRepository.Get(TestConstants.TestClientId1);
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);
-			var clients = new[] {client1, client2};
+			var clients = new[] { client1, client2 };
 
-			emails.ShouldBeEquivalentTo(clients.Select(x => x.Emails).ToArray());
+			emails.ShouldBeEquivalentTo(clients.SelectMany(x => x.Emails).ToArray());
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -214,7 +215,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.With(x => x.CountryId, TestConstants.TestCountryId)
 				.With(x => x.StateId, TestConstants.DefaultStateId)
 				.With(x => x.TransitId, 1)
-				.With(x => x.CurrencyId, (int) CurrencyType.Dollar)
+				.With(x => x.CurrencyId, (int)CurrencyType.Dollar)
 				.Create();
 		}
 

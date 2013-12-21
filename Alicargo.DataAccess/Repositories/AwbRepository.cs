@@ -11,8 +11,8 @@ namespace Alicargo.DataAccess.Repositories
 {
 	public sealed class AwbRepository : IAwbRepository
 	{
-		private readonly Expression<Func<AirWaybill, AirWaybillData>> _selector;
 		private readonly AlicargoDataContext _context;
+		private readonly Expression<Func<AirWaybill, AirWaybillData>> _selector;
 
 		public AwbRepository(IUnitOfWork unitOfWork)
 		{
@@ -45,7 +45,7 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		public Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
-							  byte[] invoiceFile, byte[] awbFile)
+			byte[] invoiceFile, byte[] awbFile)
 		{
 			var entity = new AirWaybill();
 
@@ -80,9 +80,9 @@ namespace Alicargo.DataAccess.Repositories
 				airWaybills = airWaybills.Where(x => x.BrokerId == brokerId.Value);
 			}
 			return airWaybills.Skip((int)skip)
-							  .Take(take)
-							  .Select(_selector)
-							  .ToArray();
+				.Take(take)
+				.Select(_selector)
+				.ToArray();
 		}
 
 		public AirWaybillAggregate[] GetAggregate(params long[] ids)
@@ -138,10 +138,12 @@ namespace Alicargo.DataAccess.Repositories
 		public string[] GetClientEmails(long id)
 		{
 			return _context.AirWaybills
-						  .Where(x => x.Id == id)
-						  .SelectMany(x => x.Applications)
-						  .SelectMany(x => EmailsHelper.SplitEmails(x.Client.Emails))
-						  .ToArray();
+				.Where(x => x.Id == id)
+				.SelectMany(x => x.Applications)
+				.Select(x => x.Client.Emails)
+				.ToArray()
+				.SelectMany(EmailsHelper.SplitEmails)
+				.ToArray();
 		}
 
 		public void SetAdditionalCost(long awbId, decimal? additionalCost)
@@ -151,7 +153,7 @@ namespace Alicargo.DataAccess.Repositories
 		}
 
 		public void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
-						   byte[] invoiceFile, byte[] awbFile)
+			byte[] invoiceFile, byte[] awbFile)
 		{
 			var entity = _context.AirWaybills.First(x => x.Id == data.Id);
 
@@ -177,60 +179,60 @@ namespace Alicargo.DataAccess.Repositories
 		public FileHolder GetAWBFile(long id)
 		{
 			return GetFile(
-						   x => x.Id == id && x.AWBFileData != null && x.AWBFileName != null,
-						   x => new FileHolder
-						   {
-							   Data = x.AWBFileData.ToArray(),
-							   Name = x.AWBFileName
-						   });
+				x => x.Id == id && x.AWBFileData != null && x.AWBFileName != null,
+				x => new FileHolder
+				{
+					Data = x.AWBFileData.ToArray(),
+					Name = x.AWBFileName
+				});
 		}
 
 		public FileHolder GetGTDFile(long id)
 		{
 			return GetFile(
-						   x => x.Id == id && x.GTDFileName != null && x.GTDFileData != null,
-						   x => new FileHolder
-						   {
-							   Name = x.GTDFileName,
-							   Data = x.GTDFileData.ToArray()
-						   });
+				x => x.Id == id && x.GTDFileName != null && x.GTDFileData != null,
+				x => new FileHolder
+				{
+					Name = x.GTDFileName,
+					Data = x.GTDFileData.ToArray()
+				});
 		}
 
 		public FileHolder GetPackingFile(long id)
 		{
 			return GetFile(
-						   x => x.Id == id && x.PackingFileData != null && x.PackingFileName != null,
-						   x => new FileHolder
-						   {
-							   Data = x.PackingFileData.ToArray(),
-							   Name = x.PackingFileName
-						   });
+				x => x.Id == id && x.PackingFileData != null && x.PackingFileName != null,
+				x => new FileHolder
+				{
+					Data = x.PackingFileData.ToArray(),
+					Name = x.PackingFileName
+				});
 		}
 
 		public FileHolder GTDAdditionalFile(long id)
 		{
 			return GetFile(
-						   x => x.Id == id && x.GTDAdditionalFileName != null && x.GTDAdditionalFileData != null,
-						   x => new FileHolder
-						   {
-							   Name = x.GTDAdditionalFileName,
-							   Data = x.GTDAdditionalFileData.ToArray()
-						   });
+				x => x.Id == id && x.GTDAdditionalFileName != null && x.GTDAdditionalFileData != null,
+				x => new FileHolder
+				{
+					Name = x.GTDAdditionalFileName,
+					Data = x.GTDAdditionalFileData.ToArray()
+				});
 		}
 
 		public FileHolder GetInvoiceFile(long id)
 		{
 			return GetFile(
-						   x => x.Id == id && x.InvoiceFileName != null && x.InvoiceFileData != null,
-						   x => new FileHolder
-						   {
-							   Name = x.InvoiceFileName,
-							   Data = x.InvoiceFileData.ToArray()
-						   });
+				x => x.Id == id && x.InvoiceFileName != null && x.InvoiceFileData != null,
+				x => new FileHolder
+				{
+					Name = x.InvoiceFileName,
+					Data = x.InvoiceFileData.ToArray()
+				});
 		}
 
 		private FileHolder GetFile(Expression<Func<AirWaybill, bool>> where,
-								   Expression<Func<AirWaybill, FileHolder>> selector)
+			Expression<Func<AirWaybill, FileHolder>> selector)
 		{
 			return _context.AirWaybills.Where(where).Select(selector).FirstOrDefault();
 		}
@@ -238,7 +240,7 @@ namespace Alicargo.DataAccess.Repositories
 		#endregion
 
 		private static void Map(AirWaybillData @from, AirWaybill to,
-								byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
+			byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
 		{
 			if (to.Id == 0)
 			{
@@ -262,19 +264,19 @@ namespace Alicargo.DataAccess.Repositories
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 
 			FileDataHelper.SetFile(gtdFile, from.GTDFileName,
-								   bytes => to.GTDFileData = bytes, s => to.GTDFileName = s);
+				bytes => to.GTDFileData = bytes, s => to.GTDFileName = s);
 
 			FileDataHelper.SetFile(gtdAdditionalFile, from.GTDAdditionalFileName,
-								   bytes => to.GTDAdditionalFileData = bytes, s => to.GTDAdditionalFileName = s);
+				bytes => to.GTDAdditionalFileData = bytes, s => to.GTDAdditionalFileName = s);
 
 			FileDataHelper.SetFile(packingFile, from.PackingFileName,
-								   bytes => to.PackingFileData = bytes, s => to.PackingFileName = s);
+				bytes => to.PackingFileData = bytes, s => to.PackingFileName = s);
 
 			FileDataHelper.SetFile(invoiceFile, from.InvoiceFileName,
-								   bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
+				bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
 
 			FileDataHelper.SetFile(awbFile, from.AWBFileName,
-								   bytes => to.AWBFileData = bytes, s => to.AWBFileName = s);
+				bytes => to.AWBFileData = bytes, s => to.AWBFileName = s);
 		}
 	}
 }
