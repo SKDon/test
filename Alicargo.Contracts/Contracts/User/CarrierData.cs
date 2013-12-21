@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Contracts.Contracts
+﻿namespace Alicargo.Contracts.Contracts.User
 {
 	public sealed class CarrierData
 	{

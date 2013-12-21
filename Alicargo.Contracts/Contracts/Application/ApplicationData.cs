@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Contracts.Contracts
+namespace Alicargo.Contracts.Contracts.Application
 {
 	public sealed class ApplicationData
 	{

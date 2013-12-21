@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Services.Users.Client;
 using Alicargo.TestHelpers;

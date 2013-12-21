@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;

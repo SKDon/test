@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Helpers;

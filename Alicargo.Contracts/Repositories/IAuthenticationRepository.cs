@@ -1,5 +1,6 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 
 namespace Alicargo.Contracts.Repositories

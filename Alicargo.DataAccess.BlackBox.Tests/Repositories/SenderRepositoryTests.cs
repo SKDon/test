@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;

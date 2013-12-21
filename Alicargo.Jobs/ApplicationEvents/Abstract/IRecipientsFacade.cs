@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 

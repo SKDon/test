@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Core.Services;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

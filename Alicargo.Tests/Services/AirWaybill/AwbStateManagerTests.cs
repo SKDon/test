@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Services.AirWaybill;
 using Alicargo.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

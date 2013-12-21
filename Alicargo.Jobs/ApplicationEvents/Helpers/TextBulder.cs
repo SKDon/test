@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;

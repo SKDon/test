@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Transactions;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.State;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.Helpers;
 

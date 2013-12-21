@@ -1,4 +1,5 @@
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 
 namespace Alicargo.Contracts.Repositories
 {

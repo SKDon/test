@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Contracts.Contracts
+﻿namespace Alicargo.Contracts.Contracts.State
 {
 	public sealed class StateData
 	{

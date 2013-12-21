@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Helpers;
