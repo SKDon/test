@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.Contracts.Repositories.User
 {
 	public interface ISenderRepository
 	{
@@ -12,5 +11,6 @@ namespace Alicargo.Contracts.Repositories
 		long Add(SenderData data, string password);
 		void Update(long senderId, SenderData data);
 		long GetUserId(long senderId);
+		UserData[] GetAll();
 	}
 }

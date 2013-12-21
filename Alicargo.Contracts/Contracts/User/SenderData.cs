@@ -6,5 +6,6 @@
 		public string Name { get; set; }
 		public string Email { get; set; }
 		public decimal TariffOfTapePerBox { get; set; }
+		public string TwoLetterISOLanguageName { get; set; }
 	}
 }

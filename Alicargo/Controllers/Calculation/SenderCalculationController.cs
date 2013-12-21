@@ -2,7 +2,7 @@
 using System.IO;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel;

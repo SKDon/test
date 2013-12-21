@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
@@ -11,12 +11,12 @@ namespace Alicargo.Services.Users
 	internal sealed class SenderService : ISenderService
 	{
 		private readonly ISenderRepository _senders;
-		private readonly IAuthenticationRepository _authentications;
+		private readonly IUserRepository _users;
 
-		public SenderService(ISenderRepository senders, IAuthenticationRepository authentications)
+		public SenderService(ISenderRepository senders, IUserRepository users)
 		{
 			_senders = senders;
-			_authentications = authentications;
+			_users = users;
 		}
 
 		public SenderModel Get(long id)
@@ -44,7 +44,8 @@ namespace Alicargo.Services.Users
 				Email = model.Email,
 				Login = model.Authentication.Login,
 				Name = model.Name,
-				TariffOfTapePerBox = model.TariffOfTapePerBox	
+				TariffOfTapePerBox = model.TariffOfTapePerBox,
+				TwoLetterISOLanguageName = TwoLetterISOLanguageName.English
 			}, model.Authentication.NewPassword);
 
 			return id;
@@ -70,7 +71,7 @@ namespace Alicargo.Services.Users
 			{
 				var userId = _senders.GetUserId(id);
 
-				_authentications.SetPassword(userId, model.Authentication.NewPassword);
+				_users.SetPassword(userId, model.Authentication.NewPassword);
 			}
 		}
 	}

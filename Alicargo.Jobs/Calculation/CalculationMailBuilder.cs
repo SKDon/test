@@ -1,21 +1,19 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Jobs.Calculation
 {
 	public sealed class CalculationMailBuilder : ICalculationMailBuilder
 	{
 		private readonly IClientRepository _clients;
-		private readonly IRecipients _recipients;
+		private readonly IAdminRepository _admins;
 		private readonly string _from;
 
-		public CalculationMailBuilder(IClientRepository clients, IRecipients recipients, string from)
+		public CalculationMailBuilder(IClientRepository clients, IAdminRepository admins, string from)
 		{
 			_clients = clients;
-			_recipients = recipients;
+			_admins = admins;
 			_from = @from;
 		}
 
@@ -43,9 +41,11 @@ namespace Alicargo.Jobs.Calculation
 				calculation.FactoryName,
 				calculation.MarkName);
 
+			var admins = _admins.GetAll();
+
 			return new EmailMessage(subject, text, _from, client.Emails)
 			{
-				CopyTo = _recipients.GetAdminEmails().Select(x => x.Email).ToArray()
+				CopyTo = admins.Select(x => x.Email).ToArray()
 			};
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.DataAccess.DbContext;
@@ -36,6 +37,19 @@ namespace Alicargo.DataAccess.Repositories.User
 				},
 				Email = email
 			});
+		}
+
+		public UserData[] GetAll()
+		{
+			return _context.Admins.Select(x => new UserData
+			{
+				EntityId = x.Id,
+				UserId = x.UserId,
+				Name = x.Name,
+				Login = x.User.Login,
+				Email = x.Email,
+				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
+			}).ToArray();
 		}
 	}
 }

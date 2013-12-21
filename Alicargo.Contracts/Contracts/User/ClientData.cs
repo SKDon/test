@@ -19,5 +19,6 @@
 		public string RS { get; set; }
 		public string KS { get; set; }
 		public long TransitId { get; set; }
+		public string TwoLetterISOLanguageName { get; set; }
 	}
 }

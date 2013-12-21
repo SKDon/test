@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 
@@ -51,7 +51,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				data.Login,
 				PasswordHash = passwordHash,
 				PasswordSalt = salt,
-				TwoLetterISOLanguageName = TwoLetterISOLanguageName.English,
+				data.TwoLetterISOLanguageName,
 				data.Name,
 				data.Email,
 				data.TariffOfTapePerBox
@@ -66,8 +66,22 @@ namespace Alicargo.DataAccess.Repositories.User
 				data.Login,
 				data.Name,
 				data.Email,
-				data.TariffOfTapePerBox
+				data.TariffOfTapePerBox,
+				data.TwoLetterISOLanguageName
 			});
+		}
+
+		public UserData[] GetAll()
+		{
+			return _context.Senders.Select(x => new UserData
+			{
+				EntityId = x.Id,
+				UserId = x.UserId,
+				Name = x.Name,
+				Login = x.User.Login,
+				Email = x.Email,
+				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
+			}).ToArray();
 		}
 
 		public long GetUserId(long senderId)
