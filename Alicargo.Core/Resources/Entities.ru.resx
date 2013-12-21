@@ -450,4 +450,7 @@
   <data name="UseApplicationEventTemplate" xml:space="preserve">
     <value>Использовать шаблон события</value>
   </data>
+  <data name="Emails" xml:space="preserve">
+    <value>Электронные адреса</value>
+  </data>
 </root>

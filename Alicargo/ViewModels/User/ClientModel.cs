@@ -14,8 +14,8 @@ namespace Alicargo.ViewModels.User
 		[DataType(DataType.PhoneNumber), DisplayNameLocalized(typeof(Entities), "OfficePhone")]
 		public string Phone { get; set; }
 
-		[DataType(DataType.EmailAddress), Required, MaxLength(320), DisplayNameLocalized(typeof(Entities), "Email")]
-		public string Email { get; set; }
+		[DataType(DataType.MultilineText), Required, DisplayNameLocalized(typeof(Entities), "Emails")]
+		public string Emails { get; set; }
 
 		#endregion
 

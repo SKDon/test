@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
@@ -70,7 +71,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			return new ClientData
 			{
-				Email = client.Email,
+				Emails = EmailsHelper.SplitEmails(client.Emails),
 				LegalEntity = client.LegalEntity,
 				BIC = client.BIC,
 				Nic = client.Nic,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
@@ -15,7 +16,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public ClientRepository(IUnitOfWork unitOfWork)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = (AlicargoDataContext) unitOfWork.Context;
 
 			_selector = x => new ClientData
 			{
@@ -23,7 +24,7 @@ namespace Alicargo.DataAccess.Repositories
 				UserId = x.UserId,
 				BIC = x.BIC,
 				Phone = x.Phone,
-				Email = x.Email,
+				Emails = EmailsHelper.SplitEmails(x.Emails),
 				LegalEntity = x.LegalEntity,
 				Bank = x.Bank,
 				Contacts = x.Contacts,
@@ -47,11 +48,11 @@ namespace Alicargo.DataAccess.Repositories
 		public ClientData[] GetRange(int take, long skip)
 		{
 			return _context.Clients
-						   .OrderBy(x => x.LegalEntity)
-						   .Skip((int)skip)
-						   .Take(take)
-						   .Select(_selector)
-						   .ToArray();
+				.OrderBy(x => x.LegalEntity)
+				.Skip((int) skip)
+				.Take(take)
+				.Select(_selector)
+				.ToArray();
 		}
 
 		public Func<long> Add(ClientData client)
@@ -78,9 +79,9 @@ namespace Alicargo.DataAccess.Repositories
 		public ClientData Get(long clientId)
 		{
 			return _context.Clients
-						   .Where(x => x.Id == clientId)
-						   .Select(_selector)
-						   .FirstOrDefault();
+				.Where(x => x.Id == clientId)
+				.Select(_selector)
+				.FirstOrDefault();
 		}
 
 		public void Delete(long id)
@@ -105,14 +106,14 @@ namespace Alicargo.DataAccess.Repositories
 		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
 		{
 			return _context.Applications
-						   .Where(x => appIds.Contains(x.Id))
-						   .Select(x => new { x.Id, ClientNic = x.Client.Nic })
-						   .ToDictionary(x => x.Id, x => x.ClientNic);
+				.Where(x => appIds.Contains(x.Id))
+				.Select(x => new {x.Id, ClientNic = x.Client.Nic})
+				.ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 
 		private static void Map(ClientData @from, Client to)
 		{
-			to.Email = @from.Email;
+			to.Emails = EmailsHelper.JoinEmails(from.Emails);
 			to.LegalEntity = @from.LegalEntity;
 			to.BIC = @from.BIC;
 			to.Nic = @from.Nic;

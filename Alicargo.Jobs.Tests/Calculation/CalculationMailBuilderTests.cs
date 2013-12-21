@@ -64,7 +64,7 @@ namespace Alicargo.Jobs.Tests.Calculation
 
 			message.Body.ShouldBeEquivalentTo(text);
 			message.Subject.ShouldBeEquivalentTo(subject);
-			message.To.ShouldAllBeEquivalentTo(new[] { client.Email });
+			message.To.ShouldAllBeEquivalentTo(new[] { client.Emails });
 			message.CopyTo.ShouldAllBeEquivalentTo(admins.Select(x => x.Email));
 		}
 	}

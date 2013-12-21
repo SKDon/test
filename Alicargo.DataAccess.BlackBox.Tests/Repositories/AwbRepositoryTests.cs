@@ -88,7 +88,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);
 			var clients = new[] {client1, client2};
 
-			emails.ShouldBeEquivalentTo(clients.Select(x => x.Email).ToArray());
+			emails.ShouldBeEquivalentTo(clients.Select(x => x.Emails).ToArray());
 		}
 
 		[TestMethod, TestCategory("black-box")]

@@ -10,12 +10,11 @@ namespace Alicargo.Services.Email
 {
 	internal sealed class ClientManagerWithMailing : IClientManager
 	{
+		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
 		private readonly IMailSender _mailSender;
-		private readonly IRecipients _recipients;
 		private readonly IClientManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
-
-		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
+		private readonly IRecipients _recipients;
 
 		public ClientManagerWithMailing(
 			IRecipients recipients,
@@ -28,13 +27,13 @@ namespace Alicargo.Services.Email
 		}
 
 		public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-						   AuthenticationModel authenticationModel)
+			AuthenticationModel authenticationModel)
 		{
 			_manager.Update(clientId, model, carrierModel, transitModel, authenticationModel);
 		}
 
 		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-						AuthenticationModel authenticationModel)
+			AuthenticationModel authenticationModel)
 		{
 			var id = _manager.Add(model, carrierModel, transitModel, authenticationModel);
 
@@ -48,7 +47,7 @@ namespace Alicargo.Services.Email
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
 			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
 
-			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, DefaultFrom, model.Email) { CopyTo = admins });
+			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, DefaultFrom, model.Emails) { CopyTo = admins });
 		}
 	}
 }

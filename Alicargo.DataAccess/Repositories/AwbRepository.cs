@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
@@ -139,7 +140,7 @@ namespace Alicargo.DataAccess.Repositories
 			return _context.AirWaybills
 						  .Where(x => x.Id == id)
 						  .SelectMany(x => x.Applications)
-						  .Select(x => x.Client.Email)
+						  .SelectMany(x => EmailsHelper.SplitEmails(x.Client.Emails))
 						  .ToArray();
 		}
 

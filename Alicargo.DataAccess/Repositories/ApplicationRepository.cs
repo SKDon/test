@@ -195,7 +195,7 @@ namespace Alicargo.DataAccess.Repositories
 					AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
 					AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
 					AirWaybillGTD = x.AirWaybill.GTD,
-					ClientEmail = x.Client.Email,
+					ClientEmail = x.Client.Emails,
 					ClientUserId = x.Client.UserId,
 					AirWaybillId = x.AirWaybillId,
 					ClientNic = x.Client.Nic,

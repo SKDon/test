@@ -1,5 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -47,7 +48,7 @@ namespace Alicargo.Services.Users.Client
             
             data.BIC = model.BIC;
             data.Phone = model.Phone;
-            data.Email = model.Email;
+            data.Emails = EmailsHelper.SplitEmails(model.Emails);
             data.LegalEntity = model.LegalEntity;
             data.Bank = model.Bank;
             data.Contacts = model.Contacts;
@@ -81,7 +82,7 @@ namespace Alicargo.Services.Users.Client
                     UserId = userId(),
                     BIC = model.BIC,
                     Phone = model.Phone,
-                    Email = model.Email,
+                    Emails = EmailsHelper.SplitEmails(model.Emails),
                     LegalEntity = model.LegalEntity,
                     Bank = model.Bank,
                     Contacts = model.Contacts,

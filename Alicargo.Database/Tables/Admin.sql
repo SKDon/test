@@ -3,6 +3,7 @@
 	[UserId]	BIGINT			NOT NULL,
 	[Name]		NVARCHAR (MAX)	NOT NULL,
 	[Email]		NVARCHAR (320)	NOT NULL,
+
 	CONSTRAINT [PK_dbo.Admin] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Admin_dbo.User_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
 );

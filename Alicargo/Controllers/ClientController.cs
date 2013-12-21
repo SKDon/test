@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
@@ -134,7 +135,7 @@ namespace Alicargo.Controllers
 			{
 				BIC = client.BIC,
 				Phone = client.Phone,
-				Email = client.Email,
+				Emails = EmailsHelper.JoinEmails(client.Emails),
 				LegalEntity = client.LegalEntity,
 				Bank = client.Bank,
 				Contacts = client.Contacts,

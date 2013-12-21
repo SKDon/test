@@ -42,7 +42,7 @@ namespace Alicargo.Jobs.Calculation
 				calculation.FactoryName,
 				calculation.MarkName);
 
-			return new EmailMessage(subject, text, _from, client.Email)
+			return new EmailMessage(subject, text, _from, client.Emails)
 			{
 				CopyTo = _recipients.GetAdminEmails().Select(x => x.Email).ToArray()
 			};

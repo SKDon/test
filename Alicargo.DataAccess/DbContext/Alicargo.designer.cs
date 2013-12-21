@@ -2294,7 +2294,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _UserId;
 		
-		private string _Email;
+		private string _Emails;
 		
 		private string _Nic;
 		
@@ -2340,8 +2340,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnIdChanged();
     partial void OnUserIdChanging(long value);
     partial void OnUserIdChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
+    partial void OnEmailsChanging(string value);
+    partial void OnEmailsChanged();
     partial void OnNicChanging(string value);
     partial void OnNicChanged();
     partial void OnLegalEntityChanging(string value);
@@ -2425,22 +2425,22 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
-		public string Email
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emails", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Emails
 		{
 			get
 			{
-				return this._Email;
+				return this._Emails;
 			}
 			set
 			{
-				if ((this._Email != value))
+				if ((this._Emails != value))
 				{
-					this.OnEmailChanging(value);
+					this.OnEmailsChanging(value);
 					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
+					this._Emails = value;
+					this.SendPropertyChanged("Emails");
+					this.OnEmailsChanged();
 				}
 			}
 		}
