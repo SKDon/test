@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
-using Alicargo.DataAccess.Repositories;
+using Alicargo.DataAccess.Repositories.User;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;

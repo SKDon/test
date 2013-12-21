@@ -6,9 +6,8 @@
 
 	CONSTRAINT [PK_dbo.Admin] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Admin_dbo.User_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
-);
-
+)
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_UserId]
-	ON [dbo].[Admin]([UserId] ASC);
 
+CREATE UNIQUE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[Admin]([UserId] ASC)
+GO

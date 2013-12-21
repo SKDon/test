@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.User
 {
 	internal sealed class CarrierRepository : ICarrierRepository
 	{

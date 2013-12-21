@@ -9,6 +9,7 @@ using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
+using Alicargo.DataAccess.Repositories.User;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -95,7 +96,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			CheckUser(actual, newPassword, newLogin);
 		}
 
-		private AuthenticationData CreateTestUser()
+		private PasswordData CreateTestUser()
 		{
 			var id = _repository.Add(RandomString(), RandomString(), TwoLetterISOLanguageName.Russian);
 			_context.UnitOfWork.SaveChanges();
@@ -103,7 +104,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			return _repository.GetById(id());
 		}
 
-		private void CheckUser(AuthenticationData actual, string password, string login)
+		private void CheckUser(PasswordData actual, string password, string login)
 		{
 			Assert.IsNotNull(actual.PasswordSalt);
 			var passwordHash = _passwordConverter.GetPasswordHash(password, actual.PasswordSalt.ToArray());

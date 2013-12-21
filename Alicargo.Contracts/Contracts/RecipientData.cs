@@ -1,8 +1,18 @@
-﻿namespace Alicargo.Contracts.Contracts
+﻿using Alicargo.Contracts.Enums;
+
+namespace Alicargo.Contracts.Contracts
 {
-    public sealed class RecipientData
+	public sealed class RecipientData
 	{
-		public string Email { get; set; }
-		public string Culture { get; set; }
+		public RecipientData(string email, string culture, RoleType role)
+		{
+			Culture = culture;
+			Email = email;
+			Role = role;
+		}
+
+		public string Email { get; private set; }
+		public string Culture { get; private set; }
+		public RoleType Role { get; private set; }
 	}
 }

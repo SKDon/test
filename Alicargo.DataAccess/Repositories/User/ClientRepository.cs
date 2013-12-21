@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.DataAccess.DbContext;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.User
 {
 	public sealed class ClientRepository : IClientRepository
 	{
@@ -17,7 +17,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public ClientRepository(IUnitOfWork unitOfWork)
 		{
-			_context = (AlicargoDataContext) unitOfWork.Context;
+			_context = (AlicargoDataContext)unitOfWork.Context;
 
 			_selector = x => new ClientData
 			{
@@ -50,7 +50,7 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			return _context.Clients
 				.OrderBy(x => x.LegalEntity)
-				.Skip((int) skip)
+				.Skip((int)skip)
 				.Take(take)
 				.Select(_selector)
 				.ToArray();
@@ -108,7 +108,7 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			return _context.Applications
 				.Where(x => appIds.Contains(x.Id))
-				.Select(x => new {x.Id, ClientNic = x.Client.Nic})
+				.Select(x => new { x.Id, ClientNic = x.Client.Nic })
 				.ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 

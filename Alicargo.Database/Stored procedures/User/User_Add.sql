@@ -4,6 +4,8 @@
 	@PasswordSalt				VARBINARY(MAX),
 	@TwoLetterISOLanguageName	CHAR(2)
 AS
+BEGIN
+
 	SET NOCOUNT ON;
 
 	DECLARE @Table TABLE([UserId] BIGINT);
@@ -15,3 +17,6 @@ AS
 
 	SELECT TOP 1 @UserId = [UserId] FROM @Table
 	RETURN @UserId
+
+END
+GO

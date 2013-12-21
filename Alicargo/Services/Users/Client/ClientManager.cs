@@ -1,108 +1,108 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.User;
+﻿using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Users.Client
 {
-    internal sealed class ClientManager : IClientManager
-    {
-        private readonly IAuthenticationRepository _authentications;
-        private readonly IClientRepository _clientRepository;
-        private readonly IClientPermissions _clientPermissions;
-        private readonly IIdentityService _identity;
-        private readonly ITransitService _transitService;
-        private readonly IUnitOfWork _unitOfWork;
+	internal sealed class ClientManager : IClientManager
+	{
+		private readonly IAuthenticationRepository _authentications;
+		private readonly IClientPermissions _clientPermissions;
+		private readonly IClientRepository _clientRepository;
+		private readonly IIdentityService _identity;
+		private readonly ITransitService _transitService;
+		private readonly IUnitOfWork _unitOfWork;
 
-        public ClientManager(
-            IIdentityService identity,
-            IClientRepository clientRepository,
-            IClientPermissions clientPermissions,
-            ITransitService transitService,
-            IAuthenticationRepository authentications,
-            IUnitOfWork unitOfWork)
-        {
-            _identity = identity;
-            _clientRepository = clientRepository;
-            _clientPermissions = clientPermissions;
-            _transitService = transitService;
-            _authentications = authentications;
-            _unitOfWork = unitOfWork;
-        }
+		public ClientManager(
+			IIdentityService identity,
+			IClientRepository clientRepository,
+			IClientPermissions clientPermissions,
+			ITransitService transitService,
+			IAuthenticationRepository authentications,
+			IUnitOfWork unitOfWork)
+		{
+			_identity = identity;
+			_clientRepository = clientRepository;
+			_clientPermissions = clientPermissions;
+			_transitService = transitService;
+			_authentications = authentications;
+			_unitOfWork = unitOfWork;
+		}
 
-        public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel,
-                           TransitEditModel transitModel,
-                           AuthenticationModel authenticationModel)
-        {
-            var data = _clientRepository.Get(clientId);
+		public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel,
+			TransitEditModel transitModel,
+			AuthenticationModel authenticationModel)
+		{
+			var data = _clientRepository.Get(clientId);
 
-            if (!_clientPermissions.HaveAccessToClient(data))
-                throw new AccessForbiddenException();
+			if (!_clientPermissions.HaveAccessToClient(data))
+				throw new AccessForbiddenException();
 
-            _transitService.Update(data.TransitId, transitModel, carrierModel);
+			_transitService.Update(data.TransitId, transitModel, carrierModel);
 
-            _authentications.Update(data.UserId, authenticationModel.Login, authenticationModel.NewPassword);
-            
-            data.BIC = model.BIC;
-            data.Phone = model.Phone;
-            data.Emails = EmailsHelper.SplitEmails(model.Emails);
-            data.LegalEntity = model.LegalEntity;
-            data.Bank = model.Bank;
-            data.Contacts = model.Contacts;
-            data.INN = model.INN;
-            data.KPP = model.KPP;
-            data.KS = model.KS;
-            data.LegalAddress = model.LegalAddress;
-            data.MailingAddress = model.MailingAddress;
-            data.Nic = model.Nic;
-            data.OGRN = model.OGRN;
-            data.RS = model.RS;
+			_authentications.Update(data.UserId, authenticationModel.Login, authenticationModel.NewPassword);
 
-            _clientRepository.Update(data);
+			data.BIC = model.BIC;
+			data.Phone = model.Phone;
+			data.Emails = EmailsHelper.SplitEmails(model.Emails);
+			data.LegalEntity = model.LegalEntity;
+			data.Bank = model.Bank;
+			data.Contacts = model.Contacts;
+			data.INN = model.INN;
+			data.KPP = model.KPP;
+			data.KS = model.KS;
+			data.LegalAddress = model.LegalAddress;
+			data.MailingAddress = model.MailingAddress;
+			data.Nic = model.Nic;
+			data.OGRN = model.OGRN;
+			data.RS = model.RS;
 
-            _unitOfWork.SaveChanges();
-        }
+			_clientRepository.Update(data);
 
-        public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-                        AuthenticationModel authenticationModel)
-        {
-            var transitId = _transitService.AddTransit(transitModel, carrierModel);
+			_unitOfWork.SaveChanges();
+		}
 
-            var userId = _authentications.Add(authenticationModel.Login, authenticationModel.NewPassword,
-                                              _identity.TwoLetterISOLanguageName);
+		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
+			AuthenticationModel authenticationModel)
+		{
+			var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
-            _unitOfWork.SaveChanges();
-            
-            var data = new ClientData
-                {
-					Id = 0,
-                    UserId = userId(),
-                    BIC = model.BIC,
-                    Phone = model.Phone,
-                    Emails = EmailsHelper.SplitEmails(model.Emails),
-                    LegalEntity = model.LegalEntity,
-                    Bank = model.Bank,
-                    Contacts = model.Contacts,
-                    INN = model.INN,
-                    KPP = model.KPP,
-                    KS = model.KS,
-                    LegalAddress = model.LegalAddress,
-                    MailingAddress = model.MailingAddress,
-                    Nic = model.Nic,
-                    OGRN = model.OGRN,
-                    RS = model.RS,
-                    TransitId = transitId
-                };
+			var userId = _authentications.Add(authenticationModel.Login,
+				authenticationModel.NewPassword, _identity.TwoLetterISOLanguageName);
 
-            var id = _clientRepository.Add(data);
+			_unitOfWork.SaveChanges();
 
-            _unitOfWork.SaveChanges();
+			var data = new ClientData
+			{
+				Id = 0,
+				UserId = userId(),
+				BIC = model.BIC,
+				Phone = model.Phone,
+				Emails = EmailsHelper.SplitEmails(model.Emails),
+				LegalEntity = model.LegalEntity,
+				Bank = model.Bank,
+				Contacts = model.Contacts,
+				INN = model.INN,
+				KPP = model.KPP,
+				KS = model.KS,
+				LegalAddress = model.LegalAddress,
+				MailingAddress = model.MailingAddress,
+				Nic = model.Nic,
+				OGRN = model.OGRN,
+				RS = model.RS,
+				TransitId = transitId
+			};
 
-            return id();
-        }		
-    }
+			var id = _clientRepository.Add(data);
+
+			_unitOfWork.SaveChanges();
+
+			return id();
+		}
+	}
 }

@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -59,11 +60,7 @@ namespace Alicargo.Services.Email
 
 			var to = new[]
                 {
-                    new RecipientData
-                        {
-                            Culture = broker.TwoLetterISOLanguageName,
-                            Email = broker.Email
-                        }
+                    new RecipientData(broker.Email, broker.TwoLetterISOLanguageName, RoleType.Broker)
                 }
 				.Concat(_recipients.GetForwarderEmails())
 				.ToArray();

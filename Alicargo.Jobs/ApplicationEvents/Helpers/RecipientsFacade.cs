@@ -19,23 +19,19 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly IStateSettingsRepository _stateSettings;
 		private readonly IEmailTemplateRepository _templates;
 
-		private readonly IUserRepository _users;
-
 		public RecipientsFacade(
 			IAwbRepository awbs,
 			ISerializer serializer,
 			IStateSettingsRepository stateSettings,
-			IEmailTemplateRepository templates,
-			IUserRepository users)
+			IEmailTemplateRepository templates)
 		{
 			_awbs = awbs;
 			_serializer = serializer;
 			_stateSettings = stateSettings;
 			_templates = templates;
-			_users = users;
 		}
 
-		public Recipient[] GetRecipients(ApplicationDetailsData application, ApplicationEventType type, byte[] data)
+		public RecipientData[] GetRecipients(ApplicationDetailsData application, ApplicationEventType type, byte[] data)
 		{
 			var roles = GetRoles(type, data);
 
@@ -64,28 +60,23 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return roles;
 		}
 
-		private IEnumerable<Recipient> GetRecipients(ApplicationDetailsData application, IEnumerable<RoleType> roles)
+		private IEnumerable<RecipientData> GetRecipients(ApplicationDetailsData application, IEnumerable<RoleType> roles)
 		{
 			foreach (var role in roles)
 			{
-				var users = _users.GetByRole(role);
-				if (users == null || users.Length == 0)
-				{
-					continue;
-				}
-
 				switch (role)
 				{
 					case RoleType.Admin:
+
 						foreach (var user in users)
 						{
-							yield return GetRecipientData(user, role);
+							yield return new RecipientData(((UserData) user).Email, ((UserData) user).TwoLetterISOLanguageName, role);
 						}
 						break;
 
 					case RoleType.Sender:
 						var sender = users.Single(x => x.EntityId == application.SenderId);
-						yield return GetRecipientData(sender, role);
+						yield return new RecipientData(((UserData) sender).Email, ((UserData) sender).TwoLetterISOLanguageName, role);
 						break;
 
 					case RoleType.Broker:
@@ -94,7 +85,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 							var awb = _awbs.Get(application.AirWaybillId.Value).Single();
 							var broker = users.Single(x => x.EntityId == awb.BrokerId);
 
-							yield return GetRecipientData(broker, role);
+							yield return new RecipientData(((UserData) broker).Email, ((UserData) broker).TwoLetterISOLanguageName, role);
 						}
 						break;
 
@@ -102,29 +93,19 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						// todo: 1. get forwarder from application data
 						foreach (var user in users)
 						{
-							yield return GetRecipientData(user, role);
+							yield return new RecipientData(((UserData) user).Email, ((UserData) user).TwoLetterISOLanguageName, role);
 						}
 						break;
 
 					case RoleType.Client:
 						var client = users.Single(x => x.EntityId == application.ClientId);
-						yield return GetRecipientData(client, role);
+						yield return new RecipientData(((UserData) client).Email, ((UserData) client).TwoLetterISOLanguageName, role);
 						break;
 
 					default:
 						throw new InvalidOperationException("Unknown role " + role);
 				}
 			}
-		}
-
-		private static Recipient GetRecipientData(UserData data, RoleType role)
-		{
-			return new Recipient
-			{
-				Culture = data.TwoLetterISOLanguageName,
-				Email = data.Email,
-				Role = role
-			};
 		}
 	}
 }

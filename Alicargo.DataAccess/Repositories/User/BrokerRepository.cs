@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.DataAccess.DbContext;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.User
 {
 	internal sealed class BrokerRepository : IBrokerRepository
 	{
-		private readonly Expression<Func<Broker, BrokerData>> _selector;
 		private readonly AlicargoDataContext _context;
+		private readonly Expression<Func<Broker, BrokerData>> _selector;
 
 		public BrokerRepository(IUnitOfWork unitOfWork)
 		{
@@ -39,6 +39,30 @@ namespace Alicargo.DataAccess.Repositories
 		public BrokerData[] GetAll()
 		{
 			return _context.Brokers.Select(_selector).ToArray();
+		}
+
+		public void UpdateBroker(long id, string name, string login, string email)
+		{
+			var entity = _context.Brokers.First(x => x.Id == id);
+			entity.Name = name;
+			entity.User.Login = login;
+			entity.Email = email;
+		}
+
+		public void AddBroker(long id, string name, string login, string email, string twoLetterISOLanguageName)
+		{
+			_context.Brokers.InsertOnSubmit(new Broker
+			{
+				Name = name,
+				User = new DbContext.User
+				{
+					Login = login,
+					TwoLetterISOLanguageName = twoLetterISOLanguageName,
+					PasswordHash = new byte[0],
+					PasswordSalt = new byte[0]
+				},
+				Email = email
+			});
 		}
 	}
 }

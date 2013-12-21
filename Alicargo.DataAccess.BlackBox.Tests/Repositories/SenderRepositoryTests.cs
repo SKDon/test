@@ -1,10 +1,9 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.User;
+﻿using Alicargo.Contracts.Contracts.User;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
-using Alicargo.DataAccess.Repositories;
+using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

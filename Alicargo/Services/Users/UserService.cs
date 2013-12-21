@@ -4,6 +4,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;

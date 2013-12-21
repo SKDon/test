@@ -6,6 +6,7 @@ using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Controllers.Application;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;

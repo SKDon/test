@@ -6,6 +6,7 @@ using Alicargo.Core.Services;
 using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
+using Alicargo.DataAccess.Repositories.User;
 using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;

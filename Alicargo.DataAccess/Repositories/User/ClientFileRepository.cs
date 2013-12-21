@@ -1,7 +1,7 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.User
 {
 	public sealed class ClientFileRepository : IClientFileRepository
 	{

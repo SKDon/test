@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.Contracts.Repositories.User
 {
 	public interface IClientRepository
 	{

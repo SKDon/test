@@ -73,6 +73,10 @@
     <Folder Include="Stored procedures" />
     <Folder Include="Types" />
     <Folder Include="Scripts" />
+    <Folder Include="Stored procedures\User" />
+    <Folder Include="Stored procedures\State" />
+    <Folder Include="Stored procedures\EmailTemplate" />
+    <Folder Include="Stored procedures\ApplicationEvent" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -90,24 +94,12 @@
     <Build Include="Tables\Client.sql" />
     <Build Include="Tables\StateVisibility.sql" />
     <Build Include="Tables\Country.sql" />
-    <Build Include="Stored procedures\Client_DeleteForce.sql" />
     <Build Include="Tables\Calculation.sql" />
     <Build Include="Stored procedures\Calculation_SetState.sql" />
-    <Build Include="Stored procedures\Sender_Add.sql" />
-    <Build Include="Stored procedures\User_SetPassword.sql" />
-    <Build Include="Stored procedures\Sender_Update.sql" />
-    <Build Include="Stored procedures\Sender_GetUserId.sql" />
-    <Build Include="Stored procedures\Sender_Get.sql" />
-    <Build Include="Stored procedures\User_Add.sql" />
     <Build Include="Types\IdsTable.sql" />
-    <Build Include="Stored procedures\Sender_GetTariffs.sql" />
     <PostDeploy Include="Scripts\PostDeploy.sql" />
     <Build Include="Tables\EmailMessage.sql" />
     <Build Include="Tables\ApplicationEvent.sql" />
-    <Build Include="Stored procedures\ApplicationEvent_GetNext.sql" />
-    <Build Include="Stored procedures\ApplicationEvent_Add.sql" />
-    <Build Include="Stored procedures\ApplicationEvent_Delete.sql" />
-    <Build Include="Stored procedures\ApplicationEvent_SetState.sql" />
     <Build Include="Stored procedures\EmailMessage_GetNext.sql" />
     <Build Include="Stored procedures\EmailMessage_SetState.sql" />
     <Build Include="Stored procedures\EmailMessage_Add.sql" />
@@ -115,26 +107,9 @@
     <Build Include="Tables\StateEmailTemplate.sql" />
     <Build Include="Tables\EmailTemplateLocalization.sql" />
     <Build Include="Tables\StateEmailRecipient.sql" />
-    <Build Include="Stored procedures\State_GetOrderedList.sql" />
-    <Build Include="Stored procedures\State_Update.sql" />
-    <Build Include="Stored procedures\StateLocalization_Get.sql" />
-    <Build Include="Stored procedures\State_GetStateAvailabilities.sql" />
-    <Build Include="Stored procedures\State_GetStateEmailRecipients.sql" />
-    <Build Include="Stored procedures\State_GetStateVisibilities.sql" />
     <Build Include="Types\StringsTable.sql" />
-    <Build Include="Stored procedures\EmailTemplate_GetByStateId.sql" />
-    <Build Include="Stored procedures\EmailTemplateLocalization_Get.sql" />
-    <Build Include="Stored procedures\State_Delete.sql" />
-    <Build Include="Stored procedures\EmailTemplate_MergeState.sql" />
-    <Build Include="Stored procedures\State_SetStateAvailabilities.sql" />
-    <Build Include="Stored procedures\State_SetStateVisibilities.sql" />
-    <Build Include="Stored procedures\State_SetStateEmailRecipients.sql" />
     <Build Include="Tables\ApplicationEventEmailTemplate.sql" />
-    <Build Include="Stored procedures\EmailTemplate_GetByApplicationEvent.sql" />
-    <Build Include="Stored procedures\EmailTemplate_MergeApplicationEvent.sql" />
     <Build Include="Tables\ApplicationEventEmailRecipient.sql" />
-    <Build Include="Stored procedures\ApplicationEventEmailRecipient_Set.sql" />
-    <Build Include="Stored procedures\ApplicationEventEmailRecipient_Get.sql" />
     <None Include="Scripts\InitStates.sql" />
     <None Include="Scripts\InitCountries.sql" />
     <None Include="Scripts\InitUsers.sql" />
@@ -144,11 +119,42 @@
     <Build Include="Stored procedures\City_GetList.sql" />
     <Build Include="Stored procedures\City_Add.sql" />
     <Build Include="Stored procedures\City_Update.sql" />
+    <Build Include="Stored procedures\User\User_Add.sql" />
+    <Build Include="Stored procedures\User\User_SetPassword.sql" />
+    <Build Include="Stored procedures\State\State_Add.sql" />
+    <Build Include="Stored procedures\State\State_Delete.sql" />
+    <Build Include="Stored procedures\State\State_GetOrderedList.sql" />
+    <Build Include="Stored procedures\State\State_GetStateAvailabilities.sql" />
+    <Build Include="Stored procedures\State\State_GetStateEmailRecipients.sql" />
+    <Build Include="Stored procedures\State\State_GetStateVisibilities.sql" />
+    <Build Include="Stored procedures\State\State_SetStateAvailabilities.sql" />
+    <Build Include="Stored procedures\State\State_SetStateEmailRecipients.sql" />
+    <Build Include="Stored procedures\State\State_SetStateVisibilities.sql" />
+    <Build Include="Stored procedures\State\State_Update.sql" />
+    <Build Include="Stored procedures\State\StateLocalization_Get.sql" />
+    <Build Include="Stored procedures\State\StateLocalization_Merge.sql" />
+    <Build Include="Stored procedures\User\Sender_Update.sql" />
+    <Build Include="Stored procedures\User\Sender_Add.sql" />
+    <Build Include="Stored procedures\User\Sender_Get.sql" />
+    <Build Include="Stored procedures\User\Sender_GetTariffs.sql" />
+    <Build Include="Stored procedures\User\Sender_GetUserId.sql" />
+    <Build Include="Stored procedures\User\Client_DeleteForce.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByApplicationEvent.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByStateId.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeApplicationEvent.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeState.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplateLocalization_Get.sql" />
+    <Build Include="Stored procedures\ApplicationEvent\ApplicationEvent_Add.sql" />
+    <Build Include="Stored procedures\ApplicationEvent\ApplicationEvent_Delete.sql" />
+    <Build Include="Stored procedures\ApplicationEvent\ApplicationEvent_GetNext.sql" />
+    <Build Include="Stored procedures\ApplicationEvent\ApplicationEvent_SetState.sql" />
+    <Build Include="Stored procedures\ApplicationEvent\ApplicationEventEmailRecipient_Get.sql" />
+    <Build Include="Stored procedures\ApplicationEvent\ApplicationEventEmailRecipient_Set.sql" />
+    <Build Include="Stored procedures\User\User_GetPasswordData.sql" />
+    <Build Include="Stored procedures\User\User_SetLanguage.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
-    <Build Include="Stored procedures\State_Add.sql" />
-    <Build Include="Stored procedures\StateLocalization_Merge.sql" />
     <None Include="Scripts\InitCities.sql" />
   </ItemGroup>
 </Project>
