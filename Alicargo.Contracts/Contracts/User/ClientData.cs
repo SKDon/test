@@ -4,7 +4,7 @@
 	{
 		public long Id { get; set; }
 		public long UserId { get; set; }
-		public string Email { get; set; }
+		public string[] Emails { get; set; }
 		public string Nic { get; set; }
 		public string LegalEntity { get; set; }
 		public string Contacts { get; set; }

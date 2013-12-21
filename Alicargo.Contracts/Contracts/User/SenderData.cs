@@ -1,10 +1,10 @@
 ﻿namespace Alicargo.Contracts.Contracts
 {
-	public sealed class BrokerData
+	public sealed class SenderData
 	{
+		public string Login { get; set; }
 		public string Name { get; set; }
-		public long Id { get; set; }
 		public string Email { get; set; }
-		public string TwoLetterISOLanguageName { get; set; }
+		public decimal TariffOfTapePerBox { get; set; }
 	}
 }
