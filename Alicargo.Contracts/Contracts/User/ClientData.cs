@@ -3,7 +3,6 @@
 	public sealed class ClientData
 	{
 		public long Id { get; set; }
-		public long UserId { get; set; }
 		public string[] Emails { get; set; }
 		public string Nic { get; set; }
 		public string LegalEntity { get; set; }
@@ -20,5 +19,6 @@
 		public string KS { get; set; }
 		public long TransitId { get; set; }
 		public string TwoLetterISOLanguageName { get; set; }
+		public string Login { get; set; }
 	}
 }

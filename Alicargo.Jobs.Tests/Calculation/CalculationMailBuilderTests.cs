@@ -59,8 +59,6 @@ namespace Alicargo.Jobs.Tests.Calculation
 
 			_container.ClientRepository.Setup(x => x.Get(TestConstants.TestClientId1)).Returns(client);
 
-			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(admins);
-
 			var message = _builder.Build(data);
 
 			message.Body.ShouldBeEquivalentTo(text);

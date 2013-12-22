@@ -21,7 +21,7 @@ namespace Alicargo.Controllers.Application
 		private readonly ICountryRepository _countries;
 		private readonly IApplicationRepository _applications;
 		private readonly IClientRepository _clients;
-		private readonly IUserRepository _users;
+		private readonly ISenderRepository _senders;
 
 		public ApplicationController(
 			IApplicationManager applicationManager,
@@ -30,7 +30,7 @@ namespace Alicargo.Controllers.Application
 			ICountryRepository countries,
 			IApplicationRepository applications,
 			IClientRepository clients,
-			IUserRepository users)
+			ISenderRepository senders)
 		{
 			_applicationManager = applicationManager;
 			_applicationPresenter = applicationPresenter;
@@ -38,7 +38,7 @@ namespace Alicargo.Controllers.Application
 			_countries = countries;
 			_applications = applications;
 			_clients = clients;
-			_users = users;
+			_senders = senders;
 		}
 
 		[HttpPost]
@@ -68,7 +68,7 @@ namespace Alicargo.Controllers.Application
 			ViewBag.Countries = _countries.Get()
 			   .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
 
-			ViewBag.Senders = _users.GetByRole(RoleType.Sender).OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
+			ViewBag.Senders = _senders.GetAll().OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
 		}
 
 		#region Edit

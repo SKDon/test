@@ -9,7 +9,7 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
-	internal sealed class SenderRepository : ISenderRepository
+	public sealed class SenderRepository : ISenderRepository
 	{
 		private readonly AlicargoDataContext _context;
 		private readonly IPasswordConverter _converter;

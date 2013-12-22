@@ -8,7 +8,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
-	internal sealed class BrokerRepository : IBrokerRepository
+	public sealed class BrokerRepository : IBrokerRepository
 	{
 		private readonly AlicargoDataContext _context;
 		private readonly Expression<Func<Broker, BrokerData>> _selector;
@@ -22,7 +22,9 @@ namespace Alicargo.DataAccess.Repositories.User
 				Id = x.Id,
 				Name = x.Name,
 				Email = x.Email,
-				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
+				UserId = x.UserId,
+				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName,
+				Login = x.User.Login
 			};
 		}
 
@@ -41,15 +43,15 @@ namespace Alicargo.DataAccess.Repositories.User
 			return _context.Brokers.Select(_selector).ToArray();
 		}
 
-		public void UpdateBroker(long id, string name, string login, string email)
+		public void Update(long brokerId, string name, string login, string email)
 		{
-			var entity = _context.Brokers.First(x => x.Id == id);
+			var entity = _context.Brokers.First(x => x.Id == brokerId);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
 		}
 
-		public void AddBroker(long id, string name, string login, string email, string twoLetterISOLanguageName)
+		public void Add(string name, string login, string email, string language)
 		{
 			_context.Brokers.InsertOnSubmit(new Broker
 			{
@@ -57,7 +59,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				User = new DbContext.User
 				{
 					Login = login,
-					TwoLetterISOLanguageName = twoLetterISOLanguageName,
+					TwoLetterISOLanguageName = language,
 					PasswordHash = new byte[0],
 					PasswordSalt = new byte[0]
 				},

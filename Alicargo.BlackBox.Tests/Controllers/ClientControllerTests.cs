@@ -1,5 +1,5 @@
 ﻿using Alicargo.BlackBox.Tests.Properties;
-using Alicargo.Controllers;
+using Alicargo.Controllers.User;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
@@ -45,6 +45,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var carrierModel = _mock.Build<CarrierSelectModel>().Create();
 
 			var result = _controller.Create(model, transitModel, carrierModel, authenticationModel);
+			// todo: finish
 
 			//_context.HttpClient.PostAsJsonAsync("Client/Create", new { model, transitModel, carrierModel, authenticationModel })
 			//	.ContinueWith(task =>

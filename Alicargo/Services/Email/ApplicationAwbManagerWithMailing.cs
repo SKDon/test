@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -9,27 +10,27 @@ namespace Alicargo.Services.Email
 {
 	internal sealed class ApplicationAwbManagerWithMailing : IApplicationAwbManager
 	{
+		private readonly IApplicationRepository _applications;
 		private readonly IAwbPresenter _awbPresenter;
+		private readonly IForwarderRepository _forwarders;
 		private readonly IMailSender _mailSender;
 		private readonly IApplicationAwbManager _manager;
-		private readonly IApplicationRepository _applications;
 		private readonly IMessageBuilder _messageBuilder;
-		private readonly IRecipients _recipients;
 
 		public ApplicationAwbManagerWithMailing(
 			IApplicationAwbManager manager,
 			IApplicationRepository applications,
 			IAwbPresenter awbPresenter,
-			IRecipients recipients,
 			IMailSender mailSender,
-			IMessageBuilder messageBuilder)
+			IMessageBuilder messageBuilder,
+			IForwarderRepository forwarders)
 		{
 			_manager = manager;
 			_applications = applications;
 			_awbPresenter = awbPresenter;
-			_recipients = recipients;
 			_mailSender = mailSender;
 			_messageBuilder = messageBuilder;
+			_forwarders = forwarders;
 		}
 
 		public void SetAwb(long applicationId, long? awbId)
@@ -45,13 +46,16 @@ namespace Alicargo.Services.Email
 
 			var from = ConfigurationManager.AppSettings["DefaultFrom"];
 
-			var to = _recipients.GetForwarderEmails();
+			var to = _forwarders.GetAll();
+
 			foreach (var recipient in to)
 			{
-				var body = _messageBuilder.AwbSet(model,
-					ApplicationHelper.GetDisplayNumber(applicationModel.Id,
-						applicationModel.Count),
-					recipient.Culture, aggregate.TotalWeight, aggregate.TotalCount);
+				var body = _messageBuilder.AwbSet(
+					model,
+					ApplicationHelper.GetDisplayNumber(applicationModel.Id, applicationModel.Count),
+					recipient.TwoLetterISOLanguageName,
+					aggregate.TotalWeight,
+					aggregate.TotalCount);
 				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, from, recipient.Email));
 			}
 		}

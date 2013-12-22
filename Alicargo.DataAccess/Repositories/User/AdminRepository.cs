@@ -15,15 +15,15 @@ namespace Alicargo.DataAccess.Repositories.User
 			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
-		public void UpdateAdmin(long id, string name, string login, string email)
+		public void Update(long adminId, string name, string login, string email)
 		{
-			var entity = _context.Admins.First(x => x.Id == id);
+			var entity = _context.Admins.First(x => x.Id == adminId);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
 		}
 
-		public void AddAdmin(long id, string name, string login, string email, string language)
+		public void Add(string name, string login, string email, string language)
 		{
 			_context.Admins.InsertOnSubmit(new Admin
 			{

@@ -6,7 +6,7 @@ using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.User;
 using Resources;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
 	public partial class UserController : Controller
 	{

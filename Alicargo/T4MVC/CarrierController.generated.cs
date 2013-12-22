@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
     public partial class CarrierController
     {
@@ -98,7 +98,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_CarrierController : Alicargo.Controllers.CarrierController
+    public partial class T4MVC_CarrierController : Alicargo.Controllers.User.CarrierController
     {
         public T4MVC_CarrierController() : base(Dummy.Instance) { }
 

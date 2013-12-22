@@ -17,5 +17,6 @@ namespace Alicargo.Contracts.Repositories.User
 		ClientData[] GetRange(int take, long skip);
 		ClientData[] GetAll();
 		IDictionary<long, string> GetNicByApplications(params long[] appIds);
+		long GetUserId(long clientId);
 	}
 }

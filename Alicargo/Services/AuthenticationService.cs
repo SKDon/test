@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Security;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.User;
 
@@ -10,37 +10,37 @@ namespace Alicargo.Services
 {
 	internal sealed class AuthenticationService : IAuthenticationService
 	{
-		private readonly IAuthenticationRepository _authentications;
+		private readonly IUserRepository _users;
 		private readonly IPasswordConverter _passwordConverter;
 		private readonly IIdentityService _identity;
 
 		public AuthenticationService(
-			IAuthenticationRepository authentications,
+			IUserRepository users,
 			IPasswordConverter passwordConverter,
 			IIdentityService identity)
 		{
-			_authentications = authentications;
+			_users = users;
 			_passwordConverter = passwordConverter;
 			_identity = identity;
 		}
 
 		public bool Authenticate(SignIdModel user)
 		{
-			var data = _authentications.GetByLogin(user.Login);
+			var data = _users.GetPasswordData(user.Login);
 			if (data == null) return false;
 
 			var hash = _passwordConverter.GetPasswordHash(user.Password, data.PasswordSalt.ToArray());
 			if (!hash.SequenceEqual(data.PasswordHash.ToArray())) return false;
 
-			AuthenticateForce(data.Id, user.RememberMe);
+			AuthenticateForce(data.UserId, user.RememberMe);
 
 			return true;
 		}
 
-		public void AuthenticateForce(long id, bool createPersistentCookie)
+		public void AuthenticateForce(long usreId, bool createPersistentCookie)
 		{
-			FormsAuthentication.SetAuthCookie(id.ToString(CultureInfo.InvariantCulture), createPersistentCookie);
-			_identity.Id = id;
+			FormsAuthentication.SetAuthCookie(usreId.ToString(CultureInfo.InvariantCulture), createPersistentCookie);
+			_identity.Id = usreId;
 		}
 
 		public void SignOut()

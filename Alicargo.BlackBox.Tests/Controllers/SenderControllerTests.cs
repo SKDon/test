@@ -1,9 +1,8 @@
 ﻿using System.Data.SqlClient;
 using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
-using Alicargo.Controllers;
+using Alicargo.Controllers.User;
 using Alicargo.Core.Services;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;

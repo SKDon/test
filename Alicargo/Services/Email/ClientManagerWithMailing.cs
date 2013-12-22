@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -14,13 +15,13 @@ namespace Alicargo.Services.Email
 		private readonly IMailSender _mailSender;
 		private readonly IClientManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
-		private readonly IRecipients _recipients;
+		private readonly IAdminRepository _admins;
 
 		public ClientManagerWithMailing(
-			IRecipients recipients,
+			IAdminRepository admins,
 			IClientManager manager, IMailSender mailSender, IMessageBuilder messageBuilder)
 		{
-			_recipients = recipients;
+			_admins = admins;
 			_manager = manager;
 			_mailSender = mailSender;
 			_messageBuilder = messageBuilder;
@@ -45,7 +46,7 @@ namespace Alicargo.Services.Email
 		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)
 		{
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
-			var admins = _recipients.GetAdminEmails().Select(x => x.Email).ToArray();
+			var admins = _admins.GetAll().Select(x => x.Email).ToArray();
 
 			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, DefaultFrom, model.Emails) { CopyTo = admins });
 		}

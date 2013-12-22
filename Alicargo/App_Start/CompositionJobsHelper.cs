@@ -14,7 +14,6 @@ using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Services;
-using Alicargo.Services.Email;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
@@ -38,6 +37,7 @@ namespace Alicargo.App_Start
 			const string applicationStateHistoryJob = "ApplicationStateHistoryJob_";
 			const string mailSenderJobJob = "MailSenderJob_";
 
+			// ReSharper disable ImplicitlyCapturedClosure
 			BindStatelessJobRunner(kernel, () => GetCalculationMailerJob(connectionString), calculationMailerJob + 0);
 			BindStatelessJobRunner(kernel, () => GetCalculationMailerJob(connectionString), calculationMailerJob + 1);
 			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 0);
@@ -56,6 +56,7 @@ namespace Alicargo.App_Start
 			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 1), mailSenderJobJob + 1);
 			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, PartitionIdForOtherMails),
 				mailSenderJobJob + 2);
+			// ReSharper restore ImplicitlyCapturedClosure
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
@@ -84,12 +85,11 @@ namespace Alicargo.App_Start
 			using (var connection = new SqlConnection(connectionString))
 			{
 				var unitOfWork = new UnitOfWork(connection);
-				var users = new UserRepository(unitOfWork, new PasswordConverter());
 				var clients = new ClientRepository(unitOfWork);
 				var calculations = new CalculationRepository(unitOfWork);
-				var recipients = new Recipients(users);
 				var mailSender = new SilentMailSender(new MailSender(), JobsLogger);
-				var mailer = new CalculationMailer(mailSender, new CalculationMailBuilder(clients, recipients, DefaultFrom));
+				var mailer = new CalculationMailer(mailSender,
+					new CalculationMailBuilder(clients, new AdminRepository(unitOfWork), DefaultFrom));
 
 				var job = new CalculationMailerJob(calculations, mailer, JobsLogger);
 
@@ -97,7 +97,8 @@ namespace Alicargo.App_Start
 			}
 		}
 
-		private static void GetApplicationMailCreatorJob(string connectionString, string filesConnectionString, ShardSettings shard)
+		private static void GetApplicationMailCreatorJob(string connectionString, string filesConnectionString,
+			ShardSettings shard)
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
@@ -135,10 +136,11 @@ namespace Alicargo.App_Start
 			job.Run();
 		}
 
-		private static IMessageFactory GetMessageFactory(IDbConnection connection, string connectionString, string filesConnectionString, Serializer serializer)
+		private static IMessageFactory GetMessageFactory(IDbConnection connection, string connectionString,
+			string filesConnectionString, Serializer serializer)
 		{
 			var unitOfWork = new UnitOfWork(connection);
-			var users = new UserRepository(unitOfWork, new PasswordConverter());
+			var passwordConverter = new PasswordConverter();
 			var mainExecutor = new SqlProcedureExecutor(connectionString);
 			var filesExecutor = new SqlProcedureExecutor(filesConnectionString);
 			var states = new StateRepository(mainExecutor);
@@ -149,7 +151,14 @@ namespace Alicargo.App_Start
 			var textBulder = new TextBulder(serializer, states, files);
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new EmailTemplateRepository(mainExecutor);
-			var recipientsFacade = new RecipientsFacade(awbs, serializer, stateSettings, templates, users);
+			var recipientsFacade = new RecipientsFacade(
+				awbs, serializer, stateSettings,
+				new AdminRepository(unitOfWork),
+				new SenderRepository(unitOfWork, passwordConverter, new SqlProcedureExecutor(connectionString)),
+				new ClientRepository(unitOfWork),
+				new ForwarderRepository(unitOfWork),
+				new BrokerRepository(unitOfWork),
+				templates);
 			var templatesFacade = new TemplatesFacade(serializer, templates);
 
 			return new MessageFactory(DefaultFrom, filesFasade, textBulder, recipientsFacade, templatesFacade, applications);

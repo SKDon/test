@@ -22,7 +22,6 @@ namespace Alicargo.DataAccess.Repositories.User
 			_selector = x => new ClientData
 			{
 				Id = x.Id,
-				UserId = x.UserId,
 				BIC = x.BIC,
 				Phone = x.Phone,
 				Emails = EmailsHelper.SplitEmails(x.Emails),
@@ -37,7 +36,8 @@ namespace Alicargo.DataAccess.Repositories.User
 				Nic = x.Nic,
 				OGRN = x.OGRN,
 				RS = x.RS,
-				TransitId = x.TransitId
+				TransitId = x.TransitId,
+				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
 			};
 		}
 
@@ -58,7 +58,10 @@ namespace Alicargo.DataAccess.Repositories.User
 
 		public Func<long> Add(ClientData client)
 		{
-			var entity = new Client();
+			var entity = new Client
+			{
+				User = new DbContext.User()
+			};
 
 			Map(client, entity);
 
@@ -74,7 +77,10 @@ namespace Alicargo.DataAccess.Repositories.User
 
 		public ClientData GetByUserId(long userId)
 		{
-			return _context.Clients.Select(_selector).FirstOrDefault(x => x.UserId == userId);
+			return _context.Clients
+				.Where(x => x.UserId == userId)
+				.Select(_selector)
+				.FirstOrDefault();
 		}
 
 		public ClientData Get(long clientId)
@@ -112,9 +118,15 @@ namespace Alicargo.DataAccess.Repositories.User
 				.ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 
+		public long GetUserId(long clientId)
+		{
+			return _context.Clients.Where(x => x.Id == clientId).Select(x => x.UserId).First();
+		}
+
 		private static void Map(ClientData @from, Client to)
 		{
 			to.Emails = EmailsHelper.JoinEmails(from.Emails);
+			to.User.TwoLetterISOLanguageName = from.TwoLetterISOLanguageName;
 			to.LegalEntity = @from.LegalEntity;
 			to.BIC = @from.BIC;
 			to.Nic = @from.Nic;
@@ -129,7 +141,6 @@ namespace Alicargo.DataAccess.Repositories.User
 			to.RS = @from.RS;
 			to.KS = @from.KS;
 			to.TransitId = @from.TransitId;
-			to.UserId = @from.UserId;
 		}
 	}
 }

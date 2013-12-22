@@ -12,7 +12,7 @@ using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
 using Resources;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
 	public partial class BrokerController : Controller
 	{

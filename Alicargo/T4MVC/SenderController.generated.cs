@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
     public partial class SenderController
     {
@@ -118,7 +118,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_SenderController : Alicargo.Controllers.SenderController
+    public partial class T4MVC_SenderController : Alicargo.Controllers.User.SenderController
     {
         public T4MVC_SenderController() : base(Dummy.Instance) { }
 

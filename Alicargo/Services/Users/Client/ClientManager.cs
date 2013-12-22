@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts.User;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
@@ -11,26 +12,23 @@ namespace Alicargo.Services.Users.Client
 {
 	internal sealed class ClientManager : IClientManager
 	{
-		private readonly IAuthenticationRepository _authentications;
 		private readonly IClientPermissions _clientPermissions;
-		private readonly IClientRepository _clientRepository;
-		private readonly IIdentityService _identity;
+		private readonly IClientRepository _clients;
 		private readonly ITransitService _transitService;
+		private readonly IUserRepository _users;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public ClientManager(
-			IIdentityService identity,
-			IClientRepository clientRepository,
+			IClientRepository clients,
 			IClientPermissions clientPermissions,
 			ITransitService transitService,
-			IAuthenticationRepository authentications,
+			IUserRepository users,
 			IUnitOfWork unitOfWork)
 		{
-			_identity = identity;
-			_clientRepository = clientRepository;
+			_clients = clients;
 			_clientPermissions = clientPermissions;
 			_transitService = transitService;
-			_authentications = authentications;
+			_users = users;
 			_unitOfWork = unitOfWork;
 		}
 
@@ -38,14 +36,12 @@ namespace Alicargo.Services.Users.Client
 			TransitEditModel transitModel,
 			AuthenticationModel authenticationModel)
 		{
-			var data = _clientRepository.Get(clientId);
+			var data = _clients.Get(clientId);
 
 			if (!_clientPermissions.HaveAccessToClient(data))
 				throw new AccessForbiddenException();
 
 			_transitService.Update(data.TransitId, transitModel, carrierModel);
-
-			_authentications.Update(data.UserId, authenticationModel.Login, authenticationModel.NewPassword);
 
 			data.BIC = model.BIC;
 			data.Phone = model.Phone;
@@ -62,9 +58,15 @@ namespace Alicargo.Services.Users.Client
 			data.OGRN = model.OGRN;
 			data.RS = model.RS;
 
-			_clientRepository.Update(data);
+			_clients.Update(data);
 
 			_unitOfWork.SaveChanges();
+
+			if (!string.IsNullOrWhiteSpace(authenticationModel.NewPassword))
+			{
+				var userId = _clients.GetUserId(clientId);
+				_users.SetPassword(userId, authenticationModel.NewPassword);
+			}
 		}
 
 		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
@@ -72,15 +74,11 @@ namespace Alicargo.Services.Users.Client
 		{
 			var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
-			var userId = _authentications.Add(authenticationModel.Login,
-				authenticationModel.NewPassword, _identity.TwoLetterISOLanguageName);
-
 			_unitOfWork.SaveChanges();
 
 			var data = new ClientData
 			{
 				Id = 0,
-				UserId = userId(),
 				BIC = model.BIC,
 				Phone = model.Phone,
 				Emails = EmailsHelper.SplitEmails(model.Emails),
@@ -95,14 +93,20 @@ namespace Alicargo.Services.Users.Client
 				Nic = model.Nic,
 				OGRN = model.OGRN,
 				RS = model.RS,
-				TransitId = transitId
+				TransitId = transitId,
+				TwoLetterISOLanguageName = TwoLetterISOLanguageName.English
 			};
 
-			var id = _clientRepository.Add(data);
+			var id = _clients.Add(data);
 
 			_unitOfWork.SaveChanges();
 
-			return id();
+			var clientId = id();
+
+			var userId = _clients.GetUserId(clientId);
+			_users.SetPassword(userId, authenticationModel.NewPassword);
+
+			return clientId;
 		}
 	}
 }

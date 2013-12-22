@@ -6,7 +6,6 @@ using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
-using Alicargo.Jobs.ApplicationEvents.Entities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
@@ -60,7 +59,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return GetEmailMessages(templateId.Value, recipients, application, data, type, files).ToArray();
 		}
 
-		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, IEnumerable<Recipient> recipients,
+		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, IEnumerable<RecipientData> recipients,
 			ApplicationDetailsData application, byte[] data, ApplicationEventType type, FileHolder[] files)
 		{
 			foreach (var recipient in recipients)

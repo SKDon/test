@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
     public partial class BrokerController
     {
@@ -125,7 +125,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_BrokerController : Alicargo.Controllers.BrokerController
+    public partial class T4MVC_BrokerController : Alicargo.Controllers.User.BrokerController
     {
         public T4MVC_BrokerController() : base(Dummy.Instance) { }
 

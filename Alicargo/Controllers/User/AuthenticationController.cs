@@ -1,27 +1,27 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 using Resources;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
 	public partial class AuthenticationController : Controller
 	{
 		private readonly IAuthenticationService _authentication;
 		private readonly IIdentityService _identity;
-		private readonly IAuthenticationRepository _authentications;
+		private readonly IClientRepository _clients;
 
 		public AuthenticationController(
 			IIdentityService identity,
-			IAuthenticationRepository authentications,
+			IClientRepository clients,
 			IAuthenticationService authentication)
 		{
 			_identity = identity;
-			_authentications = authentications;
+			_clients = clients;
 			_authentication = authentication;
 		}
 
@@ -61,14 +61,10 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin), HttpGet]
 		public virtual ActionResult LoginAsUser(int id)
 		{
-			var user = _authentications.GetById(id);
-
-			_authentication.AuthenticateForce(user.Id, false);
+			_authentication.AuthenticateForce(id, false);
 
 			return RedirectToAction(MVC.Home.Index());
 		}
-
-
 
 		#endregion
 
@@ -79,7 +75,7 @@ namespace Alicargo.Controllers
 
 			if (!clientId.HasValue) return PartialView();
 
-			var data = _authentications.GetByClientId(clientId.Value);
+			var data = _clients.Get(clientId.Value);
 
 			var model = new AuthenticationModel(data.Login);
 

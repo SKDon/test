@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Services.Abstract;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
 	public partial class CarrierController : Controller
 	{

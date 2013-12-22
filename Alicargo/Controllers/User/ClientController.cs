@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -12,22 +11,22 @@ using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 using Resources;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
 	public partial class ClientController : Controller
 	{
-		private readonly IClientManager _clientManager;
-		private readonly IClientPresenter _clientPresenter;
+		private readonly IClientManager _manager;
+		private readonly IClientPresenter _clients;
 		private readonly IClientFileRepository _files;
 
 		public ClientController(
-			IClientManager clientManager,
+			IClientManager manager,
 			IClientFileRepository files,
-			IClientPresenter clientPresenter)
+			IClientPresenter clients)
 		{
-			_clientManager = clientManager;
+			_manager = manager;
 			_files = files;
-			_clientPresenter = clientPresenter;
+			_clients = clients;
 		}
 
 		#region List
@@ -42,7 +41,7 @@ namespace Alicargo.Controllers
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
 		{
-			var collection = _clientPresenter.GetList(take, skip);
+			var collection = _clients.GetList(take, skip);
 
 			return Json(collection);
 		}
@@ -71,7 +70,7 @@ namespace Alicargo.Controllers
 			{
 				try
 				{
-					clientId = _clientManager.Add(model, carrierModel, transitModel, authenticationModel);
+					clientId = _manager.Add(model, carrierModel, transitModel, authenticationModel);
 
 					if (model.ContractFile != null)
 					{
@@ -107,7 +106,7 @@ namespace Alicargo.Controllers
 		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
 		public virtual FileResult Contract(long? id)
 		{
-			var data = _clientPresenter.GetCurrentClientData(id);
+			var data = _clients.GetCurrentClientData(id);
 
 			var document = _files.GetClientContract(data.Id);
 
@@ -119,7 +118,7 @@ namespace Alicargo.Controllers
 		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id)
 		{
-			var data = _clientPresenter.GetCurrentClientData(id);
+			var data = _clients.GetCurrentClientData(id);
 
 			var contractFileName = _files.GetClientContractFileName(data.Id);
 
@@ -161,11 +160,11 @@ namespace Alicargo.Controllers
 		{
 			if (!ModelState.IsValid) return View();
 
-			var client = _clientPresenter.GetCurrentClientData(id);
+			var client = _clients.GetCurrentClientData(id);
 
 			try
 			{
-				_clientManager.Update(client.Id, model, carrierModel, transitModel, authenticationModel);
+				_manager.Update(client.Id, model, carrierModel, transitModel, authenticationModel);
 
 				MergeContract(model, client.Id);
 			}

@@ -17,6 +17,16 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor = executor;
 		}
 
+		public void SetLanguage(long userId, string language)
+		{
+			_executor.Execute("[dbo].[User_SetLanguage]", new { userId, language });
+		}
+
+		public string GetLanguage(long userId)
+		{
+			return _executor.Query<string>("[dbo].[User_GetLanguage]", new { userId });
+		}
+
 		public void SetPassword(long userId, string password)
 		{
 			if (password == null)
@@ -33,11 +43,6 @@ namespace Alicargo.DataAccess.Repositories.User
 		public PasswordData GetPasswordData(string login)
 		{
 			return _executor.Query<PasswordData>("[dbo].[User_GetPasswordData]", new { login });
-		}
-
-		public void SetLanguage(long userId, string language)
-		{
-			_executor.Execute("[dbo].[User_SetLanguage]", new { userId, language });
-		}
+		}		
 	}
 }

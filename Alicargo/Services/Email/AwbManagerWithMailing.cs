@@ -2,6 +2,7 @@
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -11,22 +12,22 @@ namespace Alicargo.Services.Email
 	internal sealed class AwbManagerWithMailing : IAwbManager
 	{
 		private readonly IAwbPresenter _awbPresenter;
+		private readonly IForwarderRepository _forwarders;
 		private readonly IMailSender _mailSender;
-		private readonly IMessageBuilder _messageBuilder;
-		private readonly IRecipients _recipients;
 		private readonly IAwbManager _manager;
+		private readonly IMessageBuilder _messageBuilder;
 
 		public AwbManagerWithMailing(
-			IRecipients recipients,
 			IAwbManager manager,
 			IAwbPresenter awbPresenter,
 			IMailSender mailSender,
+			IForwarderRepository forwarders,
 			IMessageBuilder messageBuilder)
 		{
-			_recipients = recipients;
 			_manager = manager;
 			_awbPresenter = awbPresenter;
 			_mailSender = mailSender;
+			_forwarders = forwarders;
 			_messageBuilder = messageBuilder;
 		}
 
@@ -59,10 +60,10 @@ namespace Alicargo.Services.Email
 			var broker = _awbPresenter.GetBroker(model.BrokerId);
 
 			var to = new[]
-                {
-                    new RecipientData(broker.Email, broker.TwoLetterISOLanguageName, RoleType.Broker)
-                }
-				.Concat(_recipients.GetForwarderEmails())
+			{
+				new RecipientData(broker.Email, broker.TwoLetterISOLanguageName, RoleType.Broker)
+			}
+				.Concat(_forwarders.GetAll().Select(x => new RecipientData(x.Email, x.TwoLetterISOLanguageName, RoleType.Forwarder)))
 				.ToArray();
 
 			var aggregate = _awbPresenter.GetAggregate(awbId);
@@ -72,7 +73,7 @@ namespace Alicargo.Services.Email
 			foreach (var recipient in to)
 			{
 				var body = _messageBuilder.AwbCreate(model, recipient.Culture, aggregate.TotalWeight,
-													 aggregate.TotalCount);
+					aggregate.TotalCount);
 				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, from, recipient.Email));
 			}
 		}

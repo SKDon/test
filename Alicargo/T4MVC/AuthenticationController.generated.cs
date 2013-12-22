@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.User
 {
     public partial class AuthenticationController
     {
@@ -128,7 +128,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AuthenticationController : Alicargo.Controllers.AuthenticationController
+    public partial class T4MVC_AuthenticationController : Alicargo.Controllers.User.AuthenticationController
     {
         public T4MVC_AuthenticationController() : base(Dummy.Instance) { }
 

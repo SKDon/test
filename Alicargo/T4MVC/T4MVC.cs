@@ -29,26 +29,26 @@ public static class MVC
     public static Alicargo.Controllers.Application.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.Application.T4MVC_ApplicationUpdateController();
     public static Alicargo.Controllers.Application.ClientApplicationController ClientApplication = new Alicargo.Controllers.Application.T4MVC_ClientApplicationController();
     public static Alicargo.Controllers.Application.SenderApplicationController SenderApplication = new Alicargo.Controllers.Application.T4MVC_SenderApplicationController();
-    public static Alicargo.Controllers.AuthenticationController Authentication = new Alicargo.Controllers.T4MVC_AuthenticationController();
     public static Alicargo.Controllers.Awb.AirWaybillController AirWaybill = new Alicargo.Controllers.Awb.T4MVC_AirWaybillController();
     public static Alicargo.Controllers.Awb.SenderAwbController SenderAwb = new Alicargo.Controllers.Awb.T4MVC_SenderAwbController();
-    public static Alicargo.Controllers.BrokerController Broker = new Alicargo.Controllers.T4MVC_BrokerController();
     public static Alicargo.Controllers.Calculation.CalculationController Calculation = new Alicargo.Controllers.Calculation.T4MVC_CalculationController();
     public static Alicargo.Controllers.Calculation.ClientCalculationController ClientCalculation = new Alicargo.Controllers.Calculation.T4MVC_ClientCalculationController();
     public static Alicargo.Controllers.Calculation.SenderCalculationController SenderCalculation = new Alicargo.Controllers.Calculation.T4MVC_SenderCalculationController();
-    public static Alicargo.Controllers.CarrierController Carrier = new Alicargo.Controllers.T4MVC_CarrierController();
     public static Alicargo.Controllers.CityController City = new Alicargo.Controllers.T4MVC_CityController();
-    public static Alicargo.Controllers.ClientController Client = new Alicargo.Controllers.T4MVC_ClientController();
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();
     public static Alicargo.Controllers.EmailTemplateController EmailTemplate = new Alicargo.Controllers.T4MVC_EmailTemplateController();
     public static Alicargo.Controllers.ExcelController Excel = new Alicargo.Controllers.T4MVC_ExcelController();
     public static Alicargo.Controllers.FilesController Files = new Alicargo.Controllers.T4MVC_FilesController();
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
-    public static Alicargo.Controllers.SenderController Sender = new Alicargo.Controllers.T4MVC_SenderController();
     public static Alicargo.Controllers.StateController State = new Alicargo.Controllers.T4MVC_StateController();
     public static Alicargo.Controllers.StateSettingsController StateSettings = new Alicargo.Controllers.T4MVC_StateSettingsController();
     public static Alicargo.Controllers.TransitController Transit = new Alicargo.Controllers.T4MVC_TransitController();
-    public static Alicargo.Controllers.UserController User = new Alicargo.Controllers.T4MVC_UserController();
+    public static Alicargo.Controllers.User.AuthenticationController Authentication = new Alicargo.Controllers.User.T4MVC_AuthenticationController();
+    public static Alicargo.Controllers.User.BrokerController Broker = new Alicargo.Controllers.User.T4MVC_BrokerController();
+    public static Alicargo.Controllers.User.CarrierController Carrier = new Alicargo.Controllers.User.T4MVC_CarrierController();
+    public static Alicargo.Controllers.User.ClientController Client = new Alicargo.Controllers.User.T4MVC_ClientController();
+    public static Alicargo.Controllers.User.SenderController Sender = new Alicargo.Controllers.User.T4MVC_SenderController();
+    public static Alicargo.Controllers.User.UserController User = new Alicargo.Controllers.User.T4MVC_UserController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -121,19 +121,6 @@ internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResu
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_RedirectToRouteResult : System.Web.Mvc.RedirectToRouteResult, IT4MVCActionResult
-{
-    public T4MVC_System_Web_Mvc_RedirectToRouteResult(string area, string controller, string action, string protocol = null): base(default(System.Web.Routing.RouteValueDictionary))
-    {
-        this.InitMVCT4Result(area, controller, action, protocol);
-    }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public string Protocol { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 internal partial class T4MVC_System_Web_Mvc_PartialViewResult : System.Web.Mvc.PartialViewResult, IT4MVCActionResult
 {
     public T4MVC_System_Web_Mvc_PartialViewResult(string area, string controller, string action, string protocol = null): base()
@@ -155,6 +142,19 @@ internal partial class T4MVC_System_Web_Mvc_FileResult : System.Web.Mvc.FileResu
     }
      
     protected override void WriteFile(System.Web.HttpResponseBase response) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_RedirectToRouteResult : System.Web.Mvc.RedirectToRouteResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_RedirectToRouteResult(string area, string controller, string action, string protocol = null): base(default(System.Web.Routing.RouteValueDictionary))
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
     
     public string Controller { get; set; }
     public string Action { get; set; }

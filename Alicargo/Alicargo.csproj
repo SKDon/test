@@ -186,7 +186,7 @@
     <Compile Include="Services\LanguageName.cs" />
     <Compile Include="Controllers\Calculation\ClientCalculationController.cs" />
     <Compile Include="Controllers\Calculation\SenderCalculationController.cs" />
-    <Compile Include="Controllers\SenderController.cs" />
+    <Compile Include="Controllers\User\SenderController.cs" />
     <Compile Include="MvcHelpers\ModelBinders\ClientModelBinder.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
     <Compile Include="Services\Abstract\ISenderCalculationPresenter.cs" />
@@ -200,8 +200,8 @@
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\CompositionRootHelper.cs" />
     <Compile Include="App_Start\CompositionJobsHelper.cs" />
-    <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\BrokerController.cs" />
+    <Compile Include="Controllers\User\AuthenticationController.cs" />
+    <Compile Include="Controllers\User\BrokerController.cs" />
     <Compile Include="Controllers\Calculation\CalculationController.cs" />
     <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\Awb\SenderAwbController.cs" />
@@ -220,7 +220,7 @@
     <Compile Include="MvcHelpers\Filters\CustomHandleErrorInfo.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbBrokerModelBinder.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbAdminModelBinder.cs" />
-    <Compile Include="Controllers\CarrierController.cs" />
+    <Compile Include="Controllers\User\CarrierController.cs" />
     <Compile Include="Controllers\Awb\AirWaybillController.cs" />
     <Compile Include="MvcHelpers\BaseWebViewPage.cs" />
     <Compile Include="MvcHelpers\Filters\HandleErrorAttribute.cs" />
@@ -247,9 +247,9 @@
       <DependentUpon>Validation.ru.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\User\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -455,6 +455,7 @@
     <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\ListCollection.cs" />
     <Compile Include="ViewModels\User\SignIdModel.cs" />
+    <Compile Include="ViewModels\User\UserListItem.cs" />
     <Compile Include="ViewModels\User\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>

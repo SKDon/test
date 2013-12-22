@@ -1,5 +1,4 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.User;
+﻿using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Services.Users.Client;
 using Alicargo.TestHelpers;
@@ -42,10 +41,12 @@ namespace Alicargo.Tests.Services.Client
             var container = new MockContainer();
             var data = container.Create<ClientData>();
             var permissions = container.Create<ClientPermissions>();
+	        var userId = container.Create<long>();
 
-            container.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
+	        container.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
             container.IdentityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
-            container.IdentityService.Setup(x => x.Id).Returns(data.UserId);
+	        container.ClientRepository.Setup(x => x.GetByUserId(userId)).Returns(data);
+            container.IdentityService.Setup(x => x.Id).Returns(userId);
 
             permissions.HaveAccessToClient(data).Should().BeTrue();
         }
@@ -56,10 +57,12 @@ namespace Alicargo.Tests.Services.Client
             var container = new MockContainer();
             var permissions = container.Create<ClientPermissions>();
             var data = container.Create<ClientData>();
+			var userId = container.Create<long>();
 
             container.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
             container.IdentityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
-            container.IdentityService.Setup(x => x.Id).Returns(data.UserId + 1);
+			container.ClientRepository.Setup(x => x.GetByUserId(userId)).Returns(container.Create<ClientData>());
+			container.IdentityService.Setup(x => x.Id).Returns(userId);
 
             permissions.HaveAccessToClient(data).Should().BeFalse();
         }

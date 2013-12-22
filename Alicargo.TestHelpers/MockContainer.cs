@@ -68,7 +68,6 @@ namespace Alicargo.TestHelpers
 			ApplicationManager = Inject<IApplicationManager>();
 			ApplicationPresenter = Inject<IApplicationPresenter>();
 			AirWaybillRepository = Inject<IAwbRepository>();
-			AuthenticationRepository = Inject<IAuthenticationRepository>();
 			StateConfig = Inject<IStateConfig>();
 			UnitOfWork = Inject<IUnitOfWork>();
 			Transaction = Inject<ITransaction>();
@@ -80,7 +79,6 @@ namespace Alicargo.TestHelpers
 			ClientRepository = Inject<IClientRepository>();
 			MailSender = Inject<IMailSender>();
 			MessageBuilder = Inject<IMessageBuilder>();
-			Recipients = Inject<IRecipients>();
 			ApplicationFileRepository = Inject<IApplicationFileRepository>();
 			StateSettingsRepository = Inject<IStateSettingsRepository>();
 			EmailTemplateRepository = Inject<IEmailTemplateRepository>();
@@ -100,7 +98,6 @@ namespace Alicargo.TestHelpers
 		public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }
 		public Mock<IApplicationPresenter> ApplicationPresenter { get; private set; }
 		public Mock<IAwbRepository> AirWaybillRepository { get; private set; }
-		public Mock<IAuthenticationRepository> AuthenticationRepository { get; private set; }
 		public Mock<IClientPermissions> ClientPermissions { get; private set; }
 		public Mock<IClientRepository> ClientRepository { get; private set; }
 		public Mock<ICountryRepository> CountryRepository { get; private set; }
@@ -112,7 +109,6 @@ namespace Alicargo.TestHelpers
 		public Mock<IStateFilter> StateService { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }
-		public Mock<IRecipients> Recipients { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
 		public Mock<IEmailTemplateRepository> EmailTemplateRepository { get; private set; }
 

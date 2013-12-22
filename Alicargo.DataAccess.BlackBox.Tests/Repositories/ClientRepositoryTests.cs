@@ -1,9 +1,7 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.User;
+﻿using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.DbContext;
-using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.User;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -88,7 +86,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				RS = client.RS,
 				KS = client.KS,
 				TransitId = client.TransitId,
-				UserId = client.UserId,
 				Id = client.Id
 			};
 		}
@@ -126,7 +123,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			client.ShouldBeEquivalentTo(byId);
 
-			var byUserId = _clientRepository.GetByUserId(client.UserId);
+			var userId = _clientRepository.GetUserId(client.Id);
+
+			var byUserId = _clientRepository.GetByUserId(userId);
 
 			Assert.IsNotNull(byUserId);
 
@@ -153,7 +152,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var client = CreateTestClient();
 			var newData = _fixture.Create<ClientData>();
 			newData.Id = client.Id;
-			newData.UserId = client.UserId;
 			newData.TransitId = client.TransitId;
 
 			_clientRepository.Update(newData);
