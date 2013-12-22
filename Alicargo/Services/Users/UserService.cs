@@ -2,9 +2,7 @@
 using System.Linq;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
@@ -16,20 +14,17 @@ namespace Alicargo.Services.Users
 		private readonly IAdminRepository _admins;
 		private readonly IBrokerRepository _brokers;
 		private readonly IForwarderRepository _forwarders;
-		private readonly IUnitOfWork _unitOfWork;
-		private readonly IUserRepository _userRepository;
+		private readonly IUserRepository _users;
 
-		public UserService(IUserRepository userRepository,
+		public UserService(IUserRepository users,
 			IAdminRepository admins,
 			IForwarderRepository forwarders,
-			IBrokerRepository brokers,
-			IUnitOfWork unitOfWork)
+			IBrokerRepository brokers)
 		{
-			_userRepository = userRepository;
+			_users = users;
 			_admins = admins;
 			_forwarders = forwarders;
 			_brokers = brokers;
-			_unitOfWork = unitOfWork;
 		}
 
 		public UserListItem[] List(RoleType role)
@@ -85,6 +80,54 @@ namespace Alicargo.Services.Users
 			};
 		}
 
+		public void Update(UserModel model)
+		{
+			long userId;
+			switch (model.RoleType)
+			{
+				case RoleType.Admin:
+					userId = _admins.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
+					break;
+
+				case RoleType.Broker:
+					userId = _brokers.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
+					break;
+
+				case RoleType.Forwarder:
+					userId = _forwarders.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException("model", @"Unknown role " + model.RoleType);
+			}
+
+			_users.SetPassword(userId, model.Authentication.NewPassword);
+		}
+
+		public void Add(UserModel model)
+		{
+			long userId;
+			switch (model.RoleType)
+			{
+				case RoleType.Admin:
+					userId = _admins.Add(model.Name, model.Authentication.Login, model.Email, TwoLetterISOLanguageName.English);
+					break;
+
+				case RoleType.Broker:
+					userId = _brokers.Add(model.Name, model.Authentication.Login, model.Email, TwoLetterISOLanguageName.English);
+					break;
+
+				case RoleType.Forwarder:
+					userId = _forwarders.Add(model.Name, model.Authentication.Login, model.Email, TwoLetterISOLanguageName.English);
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException("model", @"Unknown role " + model.RoleType);
+			}
+
+			_users.SetPassword(userId, model.Authentication.NewPassword);
+		}
+
 		private UserData GetByRole(RoleType role, long id)
 		{
 			switch (role)
@@ -110,59 +153,6 @@ namespace Alicargo.Services.Users
 				default:
 					throw new ArgumentOutOfRangeException("role");
 			}
-		}
-
-		public void Update(UserModel model)
-		{
-			//switch (model.RoleType)
-			//{
-			//	case RoleType.Admin:
-			//		_admins.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
-			//		_userRepository.SetPassword(model.Authentication., model.Authentication.NewPassword);
-			//		break;
-
-			//	case RoleType.Broker:
-			//		_userRepository.UpdateBroker(model.Id, model.Name, model.Authentication.Login, model.Email,
-			//			model.Authentication.NewPassword);
-			//		break;
-
-			//	case RoleType.Forwarder:
-			//		_userRepository.UpdateForwarder(model.Id, model.Name, model.Authentication.Login, model.Email,
-			//			model.Authentication.NewPassword);
-			//		break;
-
-			//	default:
-			//		throw new ArgumentOutOfRangeException("model", @"Unknown role " + model.RoleType);
-			//}
-
-			_unitOfWork.SaveChanges();
-		}
-
-		public void Add(UserModel model)
-		{
-			var twoLetterISOLanguageName = CultureContext.Current.GetTwoLetterISOLanguageName();
-
-			//switch (model.RoleType)
-			//{
-			//	case RoleType.Admin:
-			//		_admins.Add(model.Name, model.Authentication.Login, model.Email, twoLetterISOLanguageName);
-			//		break;
-
-			//	case RoleType.Broker:
-			//		_userRepository.AddBroker(model.Id, model.Name, model.Authentication.Login, model.Email,
-			//			model.Authentication.NewPassword, twoLetterISOLanguageName);
-			//		break;
-
-			//	case RoleType.Forwarder:
-			//		_userRepository.AddForwarder(model.Id, model.Name, model.Authentication.Login, model.Email,
-			//			model.Authentication.NewPassword, twoLetterISOLanguageName);
-			//		break;
-
-			//	default:
-			//		throw new ArgumentOutOfRangeException("model", @"Unknown role " + model.RoleType);
-			//}
-
-			_unitOfWork.SaveChanges();
 		}
 	}
 }

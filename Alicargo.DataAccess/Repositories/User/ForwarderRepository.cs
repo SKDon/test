@@ -15,28 +15,38 @@ namespace Alicargo.DataAccess.Repositories.User
 			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
-		public void Update(long forwarderId, string name, string login, string email)
+		public long Update(long forwarderId, string name, string login, string email)
 		{
 			var entity = _context.Forwarders.First(x => x.Id == forwarderId);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
+
+			_context.SubmitChanges();
+
+			return entity.UserId;
 		}
 
-		public void Add(string name, string login, string email, string twoLetterISOLanguageName)
+		public long Add(string name, string login, string email, string twoLetterISOLanguageName)
 		{
+			var user = new DbContext.User
+			{
+				Login = login,
+				TwoLetterISOLanguageName = twoLetterISOLanguageName,
+				PasswordHash = new byte[0],
+				PasswordSalt = new byte[0]
+			};
+
 			_context.Forwarders.InsertOnSubmit(new Forwarder
 			{
 				Name = name,
-				User = new DbContext.User
-				{
-					Login = login,
-					TwoLetterISOLanguageName = twoLetterISOLanguageName,
-					PasswordHash = new byte[0],
-					PasswordSalt = new byte[0]
-				},
+				User = user,
 				Email = email
 			});
+
+			_context.SubmitChanges();
+
+			return user.Id;
 		}
 
 		public UserData[] GetAll()

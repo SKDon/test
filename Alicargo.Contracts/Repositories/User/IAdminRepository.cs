@@ -4,8 +4,8 @@ namespace Alicargo.Contracts.Repositories.User
 {
 	public interface IAdminRepository
 	{
-		void Update(long adminId, string name, string login, string email);
-		void Add(string name, string login, string email, string language);
+		long Update(long adminId, string name, string login, string email);
+		long Add(string name, string login, string email, string language);
 		UserData[] GetAll();
 	}
 }

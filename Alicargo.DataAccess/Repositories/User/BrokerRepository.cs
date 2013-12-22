@@ -43,28 +43,38 @@ namespace Alicargo.DataAccess.Repositories.User
 			return _context.Brokers.Select(_selector).ToArray();
 		}
 
-		public void Update(long brokerId, string name, string login, string email)
+		public long Update(long brokerId, string name, string login, string email)
 		{
 			var entity = _context.Brokers.First(x => x.Id == brokerId);
 			entity.Name = name;
 			entity.User.Login = login;
 			entity.Email = email;
+
+			_context.SubmitChanges();
+
+			return entity.UserId;
 		}
 
-		public void Add(string name, string login, string email, string language)
+		public long Add(string name, string login, string email, string language)
 		{
+			var user = new DbContext.User
+			{
+				Login = login,
+				TwoLetterISOLanguageName = language,
+				PasswordHash = new byte[0],
+				PasswordSalt = new byte[0]
+			};
+
 			_context.Brokers.InsertOnSubmit(new Broker
 			{
 				Name = name,
-				User = new DbContext.User
-				{
-					Login = login,
-					TwoLetterISOLanguageName = language,
-					PasswordHash = new byte[0],
-					PasswordSalt = new byte[0]
-				},
+				User = user,
 				Email = email
 			});
+
+			_context.SubmitChanges();
+
+			return user.Id;
 		}
 	}
 }
