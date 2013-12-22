@@ -155,7 +155,7 @@ namespace Alicargo.Services.Users
 					return new UserData
 					{
 						Email = broker.Email,
-						TwoLetterISOLanguageName = broker.TwoLetterISOLanguageName,
+						Language = broker.Language,
 						Login = broker.Login,
 						EntityId = broker.Id,
 						Name = broker.Name,

@@ -28,7 +28,7 @@ namespace Alicargo.Controllers
 		[HttpPost, Access(RoleType.Admin), OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
 		{
-			var list = _cities.List(take, skip, _identity.TwoLetterISOLanguageName);
+			var list = _cities.List(take, skip, _identity.Language);
 
 			return Json(list);
 		}

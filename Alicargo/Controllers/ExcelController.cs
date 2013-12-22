@@ -39,21 +39,21 @@ namespace Alicargo.Controllers
 			{
 				var rows = _rowSource.GetAdminApplicationExcelRow();
 
-				return _generator.Get(rows, _identity.TwoLetterISOLanguageName);
+				return _generator.Get(rows, _identity.Language);
 			}
 
 			if (_identity.IsInRole(RoleType.Forwarder))
 			{
 				var rows = _rowSource.GetForwarderApplicationExcelRow();
 
-				return _generator.Get(rows, _identity.TwoLetterISOLanguageName);
+				return _generator.Get(rows, _identity.Language);
 			}
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
 				var rows = _rowSource.GetSenderApplicationExcelRow();
 
-				return _generator.Get(rows, _identity.TwoLetterISOLanguageName);
+				return _generator.Get(rows, _identity.Language);
 			}
 
 			throw new NotSupportedException("For other roles the method is not supported");

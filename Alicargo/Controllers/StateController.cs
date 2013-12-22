@@ -64,7 +64,7 @@ namespace Alicargo.Controllers
 				return View(model);
 			}
 
-			var language = _identity.TwoLetterISOLanguageName;
+			var language = _identity.Language;
 
 			var id = _states.Add(language, new StateData
 			{
@@ -82,7 +82,7 @@ namespace Alicargo.Controllers
 		{
 			BindLanguageList();
 
-			var model = GetStateModel(id, lang ?? _identity.TwoLetterISOLanguageName);
+			var model = GetStateModel(id, lang ?? _identity.Language);
 
 			return View(model);
 		}

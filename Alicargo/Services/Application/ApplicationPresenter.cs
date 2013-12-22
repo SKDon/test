@@ -52,7 +52,7 @@ namespace Alicargo.Services.Application
 
 			states = _stateFilter.FilterByBusinessLogic(applicationData, states);
 
-			var currentState = _states.Get(_identity.TwoLetterISOLanguageName, applicationData.StateId).Values.First();
+			var currentState = _states.Get(_identity.Language, applicationData.StateId).Values.First();
 
 			states = _stateFilter.FilterByPosition(states, currentState.Position);
 
@@ -61,7 +61,7 @@ namespace Alicargo.Services.Application
 
 		private ApplicationStateModel[] ToApplicationStateModel(long[] ids)
 		{
-			return _states.Get(_identity.TwoLetterISOLanguageName, ids)
+			return _states.Get(_identity.Language, ids)
 				.Select(x => new ApplicationStateModel
 				{
 					StateId = x.Key,

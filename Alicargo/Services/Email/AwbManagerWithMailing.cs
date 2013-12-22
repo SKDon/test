@@ -61,9 +61,9 @@ namespace Alicargo.Services.Email
 
 			var to = new[]
 			{
-				new RecipientData(broker.Email, broker.TwoLetterISOLanguageName, RoleType.Broker)
+				new RecipientData(broker.Email, broker.Language, RoleType.Broker)
 			}
-				.Concat(_forwarders.GetAll().Select(x => new RecipientData(x.Email, x.TwoLetterISOLanguageName, RoleType.Forwarder)))
+				.Concat(_forwarders.GetAll().Select(x => new RecipientData(x.Email, x.Language, RoleType.Forwarder)))
 				.ToArray();
 
 			var aggregate = _awbPresenter.GetAggregate(awbId);

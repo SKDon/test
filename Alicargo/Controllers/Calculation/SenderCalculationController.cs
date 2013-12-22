@@ -44,7 +44,7 @@ namespace Alicargo.Controllers.Calculation
 
 			var excel = new ExcelSenderCalculation();
 
-			var stream = excel.Get(data, _identity.TwoLetterISOLanguageName);
+			var stream = excel.Get(data, _identity.Language);
 
 			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "calculation.xlsx");
 		}

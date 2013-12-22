@@ -128,7 +128,7 @@ namespace Alicargo.Services.State
 
 		public long[] FilterByPosition(long[] states, int position)
 		{
-			return _states.Get(_identity.TwoLetterISOLanguageName, states)
+			return _states.Get(_identity.Language, states)
 				.Where(x => x.Value.Position >= position)
 				.Select(x => x.Key)
 				.ToArray();

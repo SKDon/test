@@ -58,7 +58,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				Name = x.Name,
 				Login = x.User.Login,
 				Email = x.Email,
-				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
+				Language = x.User.TwoLetterISOLanguageName
 			}).ToArray();
 		}
 	}

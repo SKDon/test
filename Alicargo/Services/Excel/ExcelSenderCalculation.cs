@@ -12,9 +12,9 @@ namespace Alicargo.Services.Excel
 {
 	internal sealed class ExcelSenderCalculation
 	{
-		internal MemoryStream Get(SenderCalculationListCollection data, string twoLetterISOLanguageName)
+		internal MemoryStream Get(SenderCalculationListCollection data, string language)
 		{
-			CultureContext.Current.Set(() => twoLetterISOLanguageName);
+			CultureContext.Current.Set(() => language);
 
 			var stream = new MemoryStream();
 

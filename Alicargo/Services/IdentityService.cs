@@ -27,7 +27,7 @@ namespace Alicargo.Services
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IUserRepository _users;
 		private long? _identity;
-		private string _twoLetterISOLanguageName;
+		private string _language;
 
 		public IdentityService(
 			IUserRepository users,
@@ -67,11 +67,11 @@ namespace Alicargo.Services
 			return _isInRole[Id.Value][role];
 		}
 
-		public string TwoLetterISOLanguageName
+		public string Language
 		{
 			get
 			{
-				if (_twoLetterISOLanguageName != null) return _twoLetterISOLanguageName;
+				if (_language != null) return _language;
 
 				if (Id.HasValue)
 				{
@@ -82,22 +82,22 @@ namespace Alicargo.Services
 						FormsAuthentication.SignOut();
 						throw new EntityNotFoundException("User " + userId + " not found");
 					}
-					_twoLetterISOLanguageName = language;
+					_language = language;
 				}
 				else
 				{
-					_twoLetterISOLanguageName = Contracts.Enums.TwoLetterISOLanguageName.Russian;
+					_language = TwoLetterISOLanguageName.Russian;
 				}
 
-				return _twoLetterISOLanguageName;
+				return _language;
 			}
 		}
 
-		public void SetTwoLetterISOLanguageName(string value)
+		public void SetLanguage(string value)
 		{
-			if (value != Contracts.Enums.TwoLetterISOLanguageName.Russian
-			    && value != Contracts.Enums.TwoLetterISOLanguageName.Italian
-			    && value != Contracts.Enums.TwoLetterISOLanguageName.English)
+			if (value != TwoLetterISOLanguageName.Russian
+			    && value != TwoLetterISOLanguageName.Italian
+			    && value != TwoLetterISOLanguageName.English)
 			{
 				throw new ArgumentOutOfRangeException("value");
 			}
@@ -108,7 +108,7 @@ namespace Alicargo.Services
 				_unitOfWork.SaveChanges();
 			}
 
-			_twoLetterISOLanguageName = value;
+			_language = value;
 		}
 
 		public bool IsAuthenticated

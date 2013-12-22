@@ -19,7 +19,7 @@
 		public string KS { get; set; }
 		public long TransitId { get; set; }
 
-		public string TwoLetterISOLanguageName { get; set; }
+		public string Language { get; set; }
 		public string Login { get; set; }
 	}
 }

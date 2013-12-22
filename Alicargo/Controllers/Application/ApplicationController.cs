@@ -66,7 +66,7 @@ namespace Alicargo.Controllers.Application
 			}
 
 			ViewBag.Countries = _countries.Get()
-			   .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
+			   .ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
 
 			ViewBag.Senders = _senders.GetAll().OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
 		}

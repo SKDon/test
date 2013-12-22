@@ -77,7 +77,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 				TransitId = client.TransitId,
 				ClientId = client.Id,
 				Login = user.Login,
-				TwoLetterISOLanguageName = user.TwoLetterISOLanguageName
+				Language = user.TwoLetterISOLanguageName
 			};
 		}
 
@@ -129,7 +129,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			var client = _fixture.Create<ClientData>();
 			client.TransitId = transit.Id;
-			client.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
+			client.Language = TwoLetterISOLanguageName.English;
 			var clientId = _clientRepository.Add(client);
 			_context.UnitOfWork.SaveChanges();
 			client.ClientId = clientId();
@@ -170,7 +170,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			var newData = _fixture.Create<ClientData>();
 			newData.ClientId = client.ClientId;
 			newData.TransitId = client.TransitId;
-			newData.TwoLetterISOLanguageName = TwoLetterISOLanguageName.Italian;
+			newData.Language = TwoLetterISOLanguageName.Italian;
 
 			_clientRepository.Update(newData);
 

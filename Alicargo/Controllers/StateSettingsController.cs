@@ -30,7 +30,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin)]
 		public virtual ViewResult Index(long id)
 		{
-			var state = _states.Get(_identity.TwoLetterISOLanguageName, id).First().Value;
+			var state = _states.Get(_identity.Language, id).First().Value;
 			ViewBag.StateName = state.LocalizedName;
 
 			var availabilities = _settings.GetStateAvailabilities().Where(x => x.StateId == id).Select(x => x.Role).ToArray();

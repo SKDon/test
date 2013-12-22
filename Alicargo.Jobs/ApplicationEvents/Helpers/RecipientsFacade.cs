@@ -83,7 +83,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				{
 					case RoleType.Admin:
 						var recipients =
-							_admins.GetAll().Select(user => new RecipientData(user.Email, user.TwoLetterISOLanguageName, RoleType.Admin));
+							_admins.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
 						foreach (var recipient in recipients)
 						{
 							yield return recipient;
@@ -92,7 +92,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 					case RoleType.Sender:
 						var sender = _senders.Get(application.SenderId);
-						yield return new RecipientData(sender.Email, sender.TwoLetterISOLanguageName, role);
+						yield return new RecipientData(sender.Email, sender.Language, role);
 						break;
 
 					case RoleType.Broker:
@@ -101,7 +101,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 							var awb = _awbs.Get(application.AirWaybillId.Value).Single();
 							var broker = _brokers.Get(awb.BrokerId);
 
-							yield return new RecipientData(broker.Email, broker.TwoLetterISOLanguageName, role);
+							yield return new RecipientData(broker.Email, broker.Language, role);
 						}
 						break;
 
@@ -110,7 +110,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						var forwarders = _forwarders.GetAll();
 						foreach (var user in forwarders)
 						{
-							yield return new RecipientData(user.Email, user.TwoLetterISOLanguageName, role);
+							yield return new RecipientData(user.Email, user.Language, role);
 						}
 						break;
 
@@ -118,7 +118,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						var client = _clients.Get(application.ClientId);
 						foreach (var email in client.Emails)
 						{
-							yield return new RecipientData(email, client.TwoLetterISOLanguageName, role);
+							yield return new RecipientData(email, client.Language, role);
 						}
 						break;
 

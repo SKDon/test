@@ -124,7 +124,7 @@ namespace Alicargo.Controllers.Application
 				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count);
 			}
 
-			ViewBag.Countries = _countries.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
+			ViewBag.Countries = _countries.Get().ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
 		}
 	}
 }

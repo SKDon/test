@@ -23,7 +23,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				Name = x.Name,
 				Email = x.Email,
 				UserId = x.UserId,
-				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName,
+				Language = x.User.TwoLetterISOLanguageName,
 				Login = x.User.Login
 			};
 		}

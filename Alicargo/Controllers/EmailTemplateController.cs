@@ -62,7 +62,7 @@ namespace Alicargo.Controllers
 		{
 			BindLanguageList();
 
-			var model = GetModel(id, lang ?? _identity.TwoLetterISOLanguageName);
+			var model = GetModel(id, lang ?? _identity.Language);
 
 			return View(model);
 		}

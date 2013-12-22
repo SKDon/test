@@ -37,7 +37,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				OGRN = x.OGRN,
 				RS = x.RS,
 				TransitId = x.TransitId,
-				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName,
+				Language = x.User.TwoLetterISOLanguageName,
 				Login = x.User.Login
 			};
 		}
@@ -131,7 +131,7 @@ namespace Alicargo.DataAccess.Repositories.User
 		private static void Map(ClientData @from, Client to)
 		{
 			to.Emails = EmailsHelper.JoinEmails(from.Emails);
-			to.User.TwoLetterISOLanguageName = from.TwoLetterISOLanguageName;
+			to.User.TwoLetterISOLanguageName = from.Language;
 			to.User.Login = from.Login;
 			to.LegalEntity = @from.LegalEntity;
 			to.BIC = @from.BIC;

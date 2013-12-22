@@ -1,9 +1,9 @@
 ﻿using System.IO;
 
-namespace Alicargo.Core.Services.Abstract
+namespace Alicargo.Services.Abstract
 {
 	public interface IExcelGenerator<in T>
 	{
-		MemoryStream Get(T[] rows, string twoLetterISOLanguageName);
+		MemoryStream Get(T[] rows, string language);
 	}
 }

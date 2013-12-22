@@ -4,7 +4,7 @@ namespace Alicargo.Core.Localization
 {
 	public interface ICultureContext
 	{
-		void Set(Func<string> getTwoLetterISOLanguageName);
-		string GetTwoLetterISOLanguageName();
+		void Set(Func<string> language);
+		string GetLanguage();
 	}
 }

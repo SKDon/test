@@ -57,7 +57,7 @@ namespace Alicargo.Tests.Services.Application
 			_context.ApplicationFileRepository.Setup(x => x.GetInfo(It.IsAny<long[]>(), It.IsAny<ApplicationFileType>()))
 				.Returns(new Dictionary<long, FileInfo[]>(0));
 
-			_context.IdentityService.SetupGet(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
+			_context.IdentityService.SetupGet(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 			_context.CountryRepository.Setup(x => x.Get()).Returns(_countries.ToArray());
 			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(_stateAvailability);
 			_context.StateConfig.SetupGet(x => x.CargoOnTransitStateId).Returns(CargoOnTransitStateId);

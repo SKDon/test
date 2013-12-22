@@ -17,9 +17,9 @@ namespace Alicargo.Core.Localization
 
 		public static ICultureContext Current { get; set; }
 
-		public void Set(Func<string> getTwoLetterISOLanguageName)
+		public void Set(Func<string> language)
 		{
-			var languageName = getTwoLetterISOLanguageName();
+			var languageName = language();
 
 			var culture = CultureInfo.GetCultures(CultureTypes.NeutralCultures).First(x =>
 				x.TwoLetterISOLanguageName.Equals(languageName,
@@ -29,7 +29,7 @@ namespace Alicargo.Core.Localization
 			Thread.CurrentThread.CurrentUICulture = culture;
 		}
 
-		public string GetTwoLetterISOLanguageName()
+		public string GetLanguage()
 		{
 			return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 		}

@@ -6,16 +6,16 @@ namespace Alicargo.MvcHelpers.Filters
 {
     internal sealed class CultureFilterAttribute : IAuthorizationFilter
 	{
-		private readonly Func<string> _getTwoLetterISOLanguageName;
+		private readonly Func<string> _getLanguage;
 
-		public CultureFilterAttribute(Func<string> getTwoLetterISOLanguageName)
+		public CultureFilterAttribute(Func<string> getLanguage)
 		{
-			_getTwoLetterISOLanguageName = getTwoLetterISOLanguageName;
+			_getLanguage = getLanguage;
 		}
 
 	    public void OnAuthorization(AuthorizationContext filterContext)
 		{
-			CultureContext.Current.Set(_getTwoLetterISOLanguageName);
+			CultureContext.Current.Set(_getLanguage);
 	    }
 	}
 }

@@ -38,7 +38,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		public void Test_Add_Get()
 		{
 			var data = _fixture.Create<SenderData>();
-			data.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
+			data.Language = TwoLetterISOLanguageName.English;
 
 			var password = _fixture.Create<string>();
 
@@ -68,7 +68,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		public void Test_Update()
 		{
 			var data = _fixture.Create<SenderData>();
-			data.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
+			data.Language = TwoLetterISOLanguageName.English;
 
 			_repository.Update(TestConstants.TestSenderId, data);
 

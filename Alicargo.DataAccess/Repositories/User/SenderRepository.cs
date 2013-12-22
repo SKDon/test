@@ -51,7 +51,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				data.Login,
 				PasswordHash = passwordHash,
 				PasswordSalt = salt,
-				data.TwoLetterISOLanguageName,
+				TwoLetterISOLanguageName = data.Language,
 				data.Name,
 				data.Email,
 				data.TariffOfTapePerBox
@@ -67,7 +67,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				data.Name,
 				data.Email,
 				data.TariffOfTapePerBox,
-				data.TwoLetterISOLanguageName
+				TwoLetterISOLanguageName = data.Language
 			});
 		}
 
@@ -80,7 +80,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				Name = x.Name,
 				Login = x.User.Login,
 				Email = x.Email,
-				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
+				Language = x.User.TwoLetterISOLanguageName
 			}).ToArray();
 		}
 

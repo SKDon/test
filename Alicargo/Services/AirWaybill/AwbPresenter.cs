@@ -6,7 +6,6 @@ using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Services;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
@@ -30,14 +29,14 @@ namespace Alicargo.Services.AirWaybill
 			_states = states;
 		}
 
-		public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, string twoLetterISOLanguageName)
+		public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, string language)
 		{
 			var data = _awbRepository.GetRange(take, skip, brokerId);
 			var ids = data.Select(x => x.Id).ToArray();
 
 			var aggregates = _awbRepository.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
 
-			var states = _states.Get(twoLetterISOLanguageName);
+			var states = _states.Get(language);
 			var currentCulture = CultureInfo.CurrentCulture;
 
 			var items = data.Select(x => new AirWaybillListItem

@@ -53,7 +53,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			Assert.AreEqual(login, actual.Login);
 			Assert.AreEqual(name, actual.Name);
 			Assert.AreEqual(email, actual.Email);
-			Assert.AreEqual(language, actual.TwoLetterISOLanguageName);
+			Assert.AreEqual(language, actual.Language);
 		}
 
 		[TestMethod, TestCategory("black-box")]

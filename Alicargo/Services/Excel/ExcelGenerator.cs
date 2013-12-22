@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Services.Abstract;
+using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel.Rows;
 using Ninject.Infrastructure.Language;
 using OfficeOpenXml;
@@ -16,9 +17,9 @@ namespace Alicargo.Services.Excel
 	public sealed class ExcelGenerator<T> : IExcelGenerator<T>
 		where T : BaseApplicationExcelRow
 	{
-		public MemoryStream Get(T[] rows, string twoLetterISOLanguageName)
+		public MemoryStream Get(T[] rows, string language)
 		{
-			CultureContext.Current.Set(() => twoLetterISOLanguageName);
+			CultureContext.Current.Set(() => language);
 
 			var properties = rows.GetType().GetElementType().GetProperties();
 

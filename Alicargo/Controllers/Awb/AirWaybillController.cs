@@ -98,7 +98,7 @@ namespace Alicargo.Controllers.Awb
 				brokerId = broker.Id;
 			}
 
-			var list = _awbPresenter.List(take, skip, brokerId, _identity.TwoLetterISOLanguageName);
+			var list = _awbPresenter.List(take, skip, brokerId, _identity.Language);
 
 			return Json(list);
 		}

@@ -44,8 +44,8 @@ namespace Alicargo.Services.Application
 			var appIds = data.Select(x => x.Id).ToArray();
 			var stateIds = data.Select(x => x.StateId).ToArray();
 
-			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
-			var states = _states.Get(_identity.TwoLetterISOLanguageName, stateIds);
+			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
+			var states = _states.Get(_identity.Language, stateIds);
 			var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
 			var calculations = _applications.GetCalculations(appIds);
 			var cps = _files.GetInfo(appIds, ApplicationFileType.CP);

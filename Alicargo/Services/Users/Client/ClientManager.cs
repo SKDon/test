@@ -95,7 +95,7 @@ namespace Alicargo.Services.Users.Client
 				OGRN = model.OGRN,
 				RS = model.RS,
 				TransitId = transitId,
-				TwoLetterISOLanguageName = TwoLetterISOLanguageName.English,
+				Language = TwoLetterISOLanguageName.English,
 				Login = authenticationModel.Login
 			};
 

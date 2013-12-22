@@ -45,7 +45,7 @@ namespace Alicargo.Services.Users
 				Login = model.Authentication.Login,
 				Name = model.Name,
 				TariffOfTapePerBox = model.TariffOfTapePerBox,
-				TwoLetterISOLanguageName = TwoLetterISOLanguageName.English
+				Language = TwoLetterISOLanguageName.English
 			}, model.Authentication.NewPassword);
 
 			return id;

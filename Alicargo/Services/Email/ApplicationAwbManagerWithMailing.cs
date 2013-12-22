@@ -53,7 +53,7 @@ namespace Alicargo.Services.Email
 				var body = _messageBuilder.AwbSet(
 					model,
 					ApplicationHelper.GetDisplayNumber(applicationModel.Id, applicationModel.Count),
-					recipient.TwoLetterISOLanguageName,
+					recipient.Language,
 					aggregate.TotalWeight,
 					aggregate.TotalCount);
 				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, from, recipient.Email));

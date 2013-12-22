@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using System.Transactions;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.State;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.Helpers;
@@ -18,7 +17,7 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public long Add(string twoLetterISOLanguageName, StateData data)
+		public long Add(string language, StateData data)
 		{
 			using (var scope = new TransactionScope())
 			{
@@ -32,7 +31,7 @@ namespace Alicargo.DataAccess.Repositories
 				_executor.Execute("[dbo].[StateLocalization_Merge]", new
 				{
 					Name = data.LocalizedName,
-					TwoLetterISOLanguageName = twoLetterISOLanguageName,
+					TwoLetterISOLanguageName = language,
 					StateId = id
 				});
 
@@ -47,7 +46,7 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Array<StateListItem>("[dbo].[State_GetOrderedList]");
 		}
 
-		public void Update(long id, string twoLetterISOLanguageName, StateData data)
+		public void Update(long id, string language, StateData data)
 		{
 			using (var scope = new TransactionScope())
 			{
@@ -61,7 +60,7 @@ namespace Alicargo.DataAccess.Repositories
 				_executor.Execute("[dbo].[StateLocalization_Merge]", new
 				{
 					Name = data.LocalizedName,
-					TwoLetterISOLanguageName = twoLetterISOLanguageName,
+					TwoLetterISOLanguageName = language,
 					StateId = id
 				});
 
@@ -74,7 +73,7 @@ namespace Alicargo.DataAccess.Repositories
 			_executor.Execute("[dbo].[State_Delete]", new { Id = id });
 		}
 
-		public IReadOnlyDictionary<long, StateData> Get(string twoLetterISOLanguageName, params long[] ids)
+		public IReadOnlyDictionary<long, StateData> Get(string language, params long[] ids)
 		{
 			var idsTable = TableParameters.GeIdsTable("Ids", ids.Distinct().ToArray());
 
@@ -82,7 +81,7 @@ namespace Alicargo.DataAccess.Repositories
 
 			var table = new DataTable("Localizations");
 			table.Columns.Add("Value");
-			table.Rows.Add(twoLetterISOLanguageName);
+			table.Rows.Add(language);
 
 			var localizations = _executor.Array<dynamic>(
 				"[dbo].[StateLocalization_Get]", new TableParameters(idsTable, table))
@@ -94,7 +93,7 @@ namespace Alicargo.DataAccess.Repositories
 				{
 					Name = x.Name,
 					Position = x.Position,
-					LocalizedName = localizations[x.Id][twoLetterISOLanguageName]
+					LocalizedName = localizations[x.Id][language]
 				});
 		}
 	}

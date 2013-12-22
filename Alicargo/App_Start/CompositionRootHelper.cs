@@ -88,9 +88,9 @@ namespace Alicargo.App_Start
 			return binded;
 		}
 
-		public static Func<string> GetTwoLetterISOLanguageName(IResolutionRoot kernel)
+		public static Func<string> GetLanguage(IResolutionRoot kernel)
 		{
-			return () => kernel.Get<IIdentityService>().TwoLetterISOLanguageName
+			return () => kernel.Get<IIdentityService>().Language
 						 ?? TwoLetterISOLanguageName.Russian;
 		}
 	}

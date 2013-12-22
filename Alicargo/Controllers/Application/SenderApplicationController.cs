@@ -102,7 +102,7 @@ namespace Alicargo.Controllers.Application
 			ViewBag.ApplicationId = applicationId;
 			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId, count);
 			ViewBag.Countries = _countries.Get()
-			   .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
+			   .ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
 		}
 
 		private void BindBag(long clientId)
@@ -110,7 +110,7 @@ namespace Alicargo.Controllers.Application
 			var clientData = _clientRepository.Get(clientId);
 			ViewBag.Nic = clientData.Nic;
 			ViewBag.Countries = _countries.Get()
-			   .ToDictionary(x => x.Id, x => x.Name[_identity.TwoLetterISOLanguageName]);
+			   .ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace Alicargo.TestHelpers
 
 			identityService.Setup(x => x.IsInRole(_type)).Returns(true);
 
-			identityService.Setup(x => x.TwoLetterISOLanguageName).Returns(TwoLetterISOLanguageName.English);
+			identityService.Setup(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 
 			Kernel.Rebind<IIdentityService>().ToConstant(identityService.Object).InSingletonScope();
 		}
