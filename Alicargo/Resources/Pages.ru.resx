@@ -336,4 +336,10 @@
   <data name="Logout" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Оплата</value>
+  </data>
 </root>

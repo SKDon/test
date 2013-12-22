@@ -470,6 +470,7 @@
     <Content Include="Content\app\common.css" />
     <Content Include="Content\app\entity.css" />
     <Content Include="Content\app\kendo.css" />
+    <Content Include="Content\app\payment.css" />
     <Content Include="Content\bootstrap\fileupload\bootstrap-fileupload.css" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
@@ -767,6 +768,7 @@
     <Content Include="Views\Files\ClientApplication.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\EditorTemplates\PaymentModel.cshtml" />
+    <Content Include="Views\Payment\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

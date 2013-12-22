@@ -47,6 +47,12 @@ namespace Alicargo.Controllers.Calculation
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult Payment()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Payment);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PaymentController Actions { get { return MVC.Payment; } }
@@ -64,12 +70,14 @@ namespace Alicargo.Controllers.Calculation
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Payment = "Payment";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Payment = "Payment";
         }
 
 
@@ -78,6 +86,14 @@ namespace Alicargo.Controllers.Calculation
         public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Index
+        {
+            public readonly string clientId = "clientId";
+        }
+        static readonly ActionParamsClass_Payment s_params_Payment = new ActionParamsClass_Payment();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Payment PaymentParams { get { return s_params_Payment; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Payment
         {
             public readonly string clientId = "clientId";
             public readonly string model = "model";
@@ -93,8 +109,10 @@ namespace Alicargo.Controllers.Calculation
             public class _ViewNamesClass
             {
                 public readonly string Index = "Index";
+                public readonly string Payment = "Payment";
             }
             public readonly string Index = "~/Views/Payment/Index.cshtml";
+            public readonly string Payment = "~/Views/Payment/Payment.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -120,14 +138,24 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
+        partial void PaymentOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long clientId);
 
-        public override System.Web.Mvc.ActionResult Index(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
+        public override System.Web.Mvc.PartialViewResult Payment(long clientId)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Payment);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
+            PaymentOverride(callInfo, clientId);
+            return callInfo;
+        }
+
+        partial void PaymentOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
+
+        public override System.Web.Mvc.ActionResult Payment(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Payment);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            IndexOverride(callInfo, clientId, model);
+            PaymentOverride(callInfo, clientId, model);
             return callInfo;
         }
 

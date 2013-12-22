@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Repositories;
+﻿using Alicargo.Contracts.Contracts.User;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 
 namespace Alicargo.DataAccess.Repositories.User
@@ -25,6 +26,11 @@ namespace Alicargo.DataAccess.Repositories.User
 		public void SetBalance(long clientId, decimal balance)
 		{
 			_executor.Execute("[dbo].[Client_SetBalance]", new { clientId, balance });
+		}
+
+		public ClientBalanceHistoryItem[] GetHistory(long clientId)
+		{
+			return _executor.Array<ClientBalanceHistoryItem>("[dbo].[ClientBalanceHistory_Get]", new { clientId });
 		}
 	}
 }

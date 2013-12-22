@@ -12,7 +12,8 @@
 			"~/Content/app/layout.css",
 			"~/Content/app/common.css",
 			"~/Content/app/entity.css",
-			"~/Content/app/calculation-grid.css")] 
+			"~/Content/app/calculation-grid.css",
+			"~/Content/app/payment.css")] 
 		public const string Common = "~/css";
 	}
 }

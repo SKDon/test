@@ -339,4 +339,7 @@
   <data name="Payment" xml:space="preserve">
     <value>Payment</value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
 </root>

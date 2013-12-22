@@ -157,6 +157,7 @@
     <Build Include="Stored procedures\User\Client_SetBalance.sql" />
     <Build Include="Tables\ClientBalanceHistory.sql" />
     <Build Include="Stored procedures\User\ClientBalanceHistory_Add.sql" />
+    <Build Include="Stored procedures\User\ClientBalanceHistory_Get.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

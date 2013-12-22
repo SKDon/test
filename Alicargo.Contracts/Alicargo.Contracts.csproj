@@ -54,6 +54,7 @@
     <Compile Include="Contracts\ApplicationEventData.cs" />
     <Compile Include="Contracts\ApplicationEventTemplateData.cs" />
     <Compile Include="Contracts\Application\ApplicationListItemData.cs" />
+    <Compile Include="Contracts\User\ClientBalanceHistoryItem.cs" />
     <Compile Include="Contracts\User\PasswordData.cs" />
     <Compile Include="Contracts\User\BrokerData.cs" />
     <Compile Include="Contracts\CalculationData.cs" />

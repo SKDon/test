@@ -29,17 +29,26 @@ namespace Alicargo.Controllers.Calculation
 		{
 			var client = _clients.Get(clientId);
 			var balance = _balance.GetBalance(clientId);
+			var items = _balance.GetHistory(clientId);
 
 			ViewBag.Nic = client.Nic;
 			ViewBag.Balance = balance;
 			ViewBag.ClientId = clientId;
 
-			return View();
+			return View(items);
+		}
+
+		[ChildActionOnly]
+		public virtual PartialViewResult Payment(long clientId)
+		{
+			ViewBag.ClientId = clientId;
+
+			return PartialView();
 		}
 
 		[Access(RoleType.Admin)]
 		[HttpPost]
-		public virtual ActionResult Index(long clientId, PaymentModel model)
+		public virtual ActionResult Payment(long clientId, PaymentModel model)
 		{
 			_manager.AddToBalance(clientId, model);
 

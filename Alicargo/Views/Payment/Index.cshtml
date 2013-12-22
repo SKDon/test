@@ -1,9 +1,53 @@
 ﻿@using Alicargo.Core.Resources
-@using Alicargo.MvcHelpers.Extensions
 @using Resources
-@model Alicargo.ViewModels.Calculation.Admin.PaymentModel
+@model Alicargo.Contracts.Contracts.User.ClientBalanceHistoryItem[]
 <h1>
 	@Pages.Payment: @ViewBag.Nic,
 	@Entities.Balance: @ViewBag.Balance.ToString("N2")
 </h1>
-@Html.EditPage(Url.Action(MVC.Payment.Index((long)ViewBag.ClientId)), Pages.Save)
+@if (Model.Length > 0)
+{
+	<b>
+		@Pages.History
+	</b>
+	<table class="payment-history">
+		<thead>
+			<tr>
+				<td class="timestamp">
+					@Entities.Timestamp
+				</td>
+				<td class="money">
+					@Entities.Balance
+				</td>
+				<td class="money">
+					@Entities.Input
+				</td>
+				<td>
+					@Entities.Comment
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in @Model)
+			{
+				<tr>
+					<td>
+						@item.Timestamp
+					</td>
+					<td>
+						@item.Balance.ToString("N2")
+					</td>
+					<td>
+						@item.Input.ToString("N2")
+					</td>
+					<td>
+						@item.Comment
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<br />
+	<hr />
+}
+@Html.Action(MVC.Payment.Payment((long)ViewBag.ClientId))

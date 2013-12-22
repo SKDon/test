@@ -214,6 +214,15 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm the new password.
         /// </summary>
         public static string ConfirmPassword {
@@ -520,6 +529,15 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input.
+        /// </summary>
+        public static string Input {
+            get {
+                return ResourceManager.GetString("Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insurance.
         /// </summary>
         public static string Insurance {
@@ -633,6 +651,15 @@ namespace Alicargo.Core.Resources {
         public static string MethodOfTransit {
             get {
                 return ResourceManager.GetString("MethodOfTransit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Money.
+        /// </summary>
+        public static string Money {
+            get {
+                return ResourceManager.GetString("Money", resourceCulture);
             }
         }
         
@@ -894,6 +921,15 @@ namespace Alicargo.Core.Resources {
         public static string TermsOfDelivery {
             get {
                 return ResourceManager.GetString("TermsOfDelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timestamp.
+        /// </summary>
+        public static string Timestamp {
+            get {
+                return ResourceManager.GetString("Timestamp", resourceCulture);
             }
         }
         
