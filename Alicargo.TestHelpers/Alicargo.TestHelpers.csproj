@@ -96,6 +96,10 @@
       <Project>{37068536-3066-4877-91E0-05031D2C5CA3}</Project>
       <Name>Alicargo.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Jobs\Alicargo.Jobs.csproj">
+      <Project>{C2133743-7762-4BD9-A824-EB039E41AF58}</Project>
+      <Name>Alicargo.Jobs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alicargo\Alicargo.csproj">
       <Project>{8666b402-84b6-49d4-abd7-b2966955c9cb}</Project>
       <Name>Alicargo</Name>

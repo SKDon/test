@@ -1,131 +1,74 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using Alicargo.Contracts.Contracts;
-//using Alicargo.Contracts.Enums;
-//using Alicargo.Jobs.ApplicationEvents;
-//using Alicargo.Jobs.ApplicationEvents.Abstract;
-//using Alicargo.Jobs.ApplicationEvents.Entities;
-//using Alicargo.Jobs.ApplicationEvents.Helpers;
-//using Alicargo.TestHelpers;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using Moq;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.Application;
+using Alicargo.Contracts.Enums;
+using Alicargo.Jobs.ApplicationEvents.Abstract;
+using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.TestHelpers;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
-//namespace Alicargo.Jobs.Tests
-//{
-//	[TestClass]
-//	public class MessageFactoryTests
-//	{
-//		private long _cargoAtCustomsStateId;
-//		private long _cargoIsCustomsClearedStateId;
-//		private long _cargoReceivedStateId;
-//		private MockContainer _container;
-//		private ApplicationDetailsData _details;
-//		private IMessageFactory _factory;
+namespace Alicargo.Jobs.Tests
+{
+	// ReSharper disable ImplicitlyCapturedClosure
+	[TestClass]
+	public class MessageFactoryTests
+	{
+		private MockContainer _container;
+		private IMessageFactory _factory;
 
-//		[TestInitialize]
-//		public void TestInitialize()
-//		{
-//			_container = new MockContainer();
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			_container = new MockContainer();
+			_factory = _container.Create<MessageFactory>();
+		}
 
-//			_cargoReceivedStateId = _container.Create<long>();
-//			_cargoAtCustomsStateId = _container.Create<long>();
-//			_cargoIsCustomsClearedStateId = _container.Create<long>();
-//			_container.StateConfig.SetupGet(x => x.CargoReceivedStateId).Returns(_cargoReceivedStateId);
-//			_container.StateConfig.SetupGet(x => x.CargoAtCustomsStateId).Returns(_cargoAtCustomsStateId);
-//			_container.StateConfig.SetupGet(x => x.CargoIsCustomsClearedStateId).Returns(_cargoIsCustomsClearedStateId);
-//			_details = _container.Create<ApplicationDetailsData>();
-//			_container.ApplicationRepository.Setup(x => x.GetDetails(It.IsAny<long>())).Returns(_details);
+		[TestMethod]
+		public void Test_SetStateForNoClient()
+		{
+			var applicationId = _container.Create<long>();
+			const ApplicationEventType eventType = ApplicationEventType.SetState;
+			var bytes = _container.Create<byte[]>();
+			var applicationDetailsData = _container.Create<ApplicationDetailsData>();
+			var recipientData = new RecipientData(_container.Create<string>(), _container.Create<string>(), RoleType.Broker);
+			var localization = _container.Create<EmailTemplateLocalizationData>();
+			var templateId = _container.Create<long>();
 
-//			_factory = _container.Create<MessageFactory>();
-//		}
+			_container.ApplicationRepository.Setup(x => x.GetDetails(applicationId)).Returns(applicationDetailsData);
+			_container.TemplatesFacade.Setup(x => x.GetTemplateId(eventType, bytes)).Returns(templateId);
+			_container.TemplatesFacade.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
+				.Returns(localization);
+			_container.FilesFasade.Setup(x => x.GetFiles(applicationId, It.IsAny<long?>(), eventType, bytes))
+				.Returns(new[] {_container.Create<FileHolder>()});
+			_container.RecipientsFacade.Setup(x => x.GetRecipients(applicationDetailsData, eventType, bytes))
+				.Returns(new[] {recipientData});
+			_container.TextBulder.Setup(
+				x => x.GetText(localization.Subject, recipientData.Culture, eventType, applicationDetailsData, bytes))
+				.Returns(localization.Subject);
+			_container.TextBulder.Setup(
+				x => x.GetText(localization.Body, recipientData.Culture, eventType, applicationDetailsData, bytes))
+				.Returns(localization.Body);
 
-//		[TestMethod]
-//		public void Test_SetState_CargoReceivedStateId()
-//		{
-//			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			Setup(_cargoReceivedStateId);
+			var messages = _factory.Get(applicationId, eventType, bytes);
 
-//			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());
+			messages[0].Files.Should().BeNull();
+			messages[0].IsBodyHtml.ShouldBeEquivalentTo(localization.IsBodyHtml);
+			messages[0].Body.ShouldBeEquivalentTo(localization.Body);
+			messages[0].Subject.ShouldBeEquivalentTo(localization.Subject);
+			messages[0].To[0].ShouldBeEquivalentTo(recipientData.Email);
 
-//			_container.Recipients.Verify(x => x.GetAdminEmails(), Times.Once());
-//			_container.Recipients.Verify(x => x.GetForwarderEmails(), Times.Once());
-//		}
+			_container.ApplicationRepository.Verify(x => x.GetDetails(applicationId));
+			_container.TemplatesFacade.Verify(x => x.GetTemplateId(eventType, bytes));
+			_container.TemplatesFacade.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
+			_container.FilesFasade.Verify(x => x.GetFiles(applicationId, It.IsAny<long?>(), eventType, bytes));
+			_container.RecipientsFacade.Verify(x => x.GetRecipients(applicationDetailsData, eventType, bytes));
+			_container.TextBulder.Verify(
+				x => x.GetText(localization.Subject, recipientData.Culture, eventType, applicationDetailsData, bytes));
+			_container.TextBulder.Verify(
+				x => x.GetText(localization.Body, recipientData.Culture, eventType, applicationDetailsData, bytes));
+		}
+	}
 
-//		private void SetupGetFiles()
-//		{
-//			_container.ApplicationFileRepository.Setup(x => x.GetInvoiceFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-//			_container.ApplicationFileRepository.Setup(x => x.GetDeliveryBillFile(It.IsAny<long>()))
-//				.Returns(It.IsAny<FileHolder>());
-//			_container.ApplicationFileRepository.Setup(x => x.GetCPFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-//			_container.ApplicationFileRepository.Setup(x => x.GetPackingFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-//			_container.ApplicationFileRepository.Setup(x => x.GetSwiftFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-//			_container.ApplicationFileRepository.Setup(x => x.GetTorg12File(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-//			_container.AirWaybillRepository.Setup(x => x.GTDAdditionalFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-//			_container.AirWaybillRepository.Setup(x => x.GetGTDFile(It.IsAny<long>())).Returns(It.IsAny<FileHolder>());
-//		}
-
-//		[TestMethod]
-//		public void Test_SetState_NotCargoReceivedStateId()
-//		{
-//			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			Setup(_cargoReceivedStateId + 1);
-
-//			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());
-
-//			_container.ClientRepository.Verify(x => x.GetLanguage(_details.ClientId), Times.Once());
-//			_container.Recipients.Verify(x => x.GetAdminEmails(), Times.Never());
-//			_container.Recipients.Verify(x => x.GetForwarderEmails(), Times.Never());
-//		}
-
-//		[TestMethod]
-//		public void Test_SetState_CargoAtCustomsStateId()
-//		{
-//			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			Setup(_cargoAtCustomsStateId);
-
-//			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());
-
-//			_container.ClientRepository.Verify(x => x.GetLanguage(_details.ClientId), Times.Once());
-//			_container.Recipients.Verify(x => x.GetAdminEmails(), Times.Once());
-//			_container.Recipients.Verify(x => x.GetForwarderEmails(), Times.Once());
-//		}
-
-//		[TestMethod]
-//		public void Test_SetState_CargoIsCustomsClearedStateId()
-//		{
-//			_container.Recipients.Setup(x => x.GetAdminEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			_container.Recipients.Setup(x => x.GetForwarderEmails()).Returns(_container.CreateMany<RecipientData>().ToArray());
-//			Setup(_cargoIsCustomsClearedStateId);
-
-//			_factory.Get(It.IsAny<long>(), ApplicationEventType.SetState, It.IsAny<byte[]>());
-
-//			_container.ClientRepository.Verify(x => x.GetLanguage(_details.ClientId), Times.Once());
-//			_container.Recipients.Verify(x => x.GetAdminEmails(), Times.Once());
-//			_container.Recipients.Verify(x => x.GetForwarderEmails(), Times.Once());
-//		}
-
-//		private void Setup(long stateId)
-//		{
-//			_container.Serializer.Setup(x => x.Deserialize<ApplicationSetStateEventData>(It.IsAny<byte[]>()))
-//				.Returns(new ApplicationSetStateEventData
-//				{
-//					Timestamp = DateTimeOffset.UtcNow,
-//					StateId = stateId
-//				});
-//			_container.ClientRepository.Setup(x => x.GetLanguage(_details.ClientId)).Returns(TwoLetterISOLanguageName.English);
-//			var stateData = new StateData { Name = "English", LocalizedName = "English" };
-
-//			_container.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, stateId)).Returns(new Dictionary<long, StateData>
-//			{
-//				{
-//					stateId, stateData
-//				}
-//			});
-//			SetupGetFiles();
-//		}
-//	}
-//}
+	// ReSharper restore ImplicitlyCapturedClosure
+}
