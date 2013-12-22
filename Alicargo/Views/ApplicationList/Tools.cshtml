@@ -5,7 +5,7 @@
 
 @if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
 {
-	<p class="application-grid-select-client">
+	<p class="select-client-holder">
 		@Entities.Nic:
 		@Html.DropDownList("selected-client-id", Model.Clients.Select(x => new SelectListItem
 		{
@@ -17,18 +17,6 @@
 		<a href="#" class="btn btn-primary" id="apply-link">@Pages.ApplicationAdd</a>
 		@Html.ActionLink(Pages.Excel, MVC.Excel.Applications(), new { @class = "btn btn-info" })
 	</p>
-	<script>
-		$(function () {
-			var link = $("#apply-link");
-			var select = $("#selected-client-id");
-
-			var updateLink = function () {
-				link.attr("href", select.val());
-			};
-			select.change(updateLink);
-			updateLink();
-		})
-	</script>
 }
 else if (IdentityService.IsInRole(RoleType.Client))
 {

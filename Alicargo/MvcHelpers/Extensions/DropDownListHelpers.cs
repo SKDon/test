@@ -25,6 +25,20 @@ namespace Alicargo.MvcHelpers.Extensions
 			return helper.DropDownListFor(expression, list, optionLabel, htmlAttributes);
 		}
 
+		public static MvcHtmlString DropDownList<TModel, TProperty>(
+			this HtmlHelper<TModel> helper, string name,
+			IDictionary<TProperty, string> data, string optionLabel = null,
+			object htmlAttributes = null)
+		{
+			var list = data.Select(x => new SelectListItem
+			{
+				Text = x.Value,
+				Value = x.Key.ToString()
+			}).ToList();
+
+			return helper.DropDownList(name, list, optionLabel, htmlAttributes);
+		}
+
 		public static MvcHtmlString DropDownListForEnum<TModel, TProperty>(
 			this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
 			where TProperty : struct, IComparable, IFormattable, IConvertible

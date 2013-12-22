@@ -6,6 +6,16 @@
 	var $r = $a.Roles;
 	var $s = $a.States;
 
+	if ($r.IsSender || $r.IsAdmin) {
+		var select = $("#selected-client-id");
+		var updateLink = function() {
+			var link = $("#apply-link");
+			link.attr("href", select.val());
+		};
+		select.change(updateLink);
+		updateLink();
+	}
+
 	$a.Application = (function($apl) {
 		var gridSelector = "#application-grid";
 		

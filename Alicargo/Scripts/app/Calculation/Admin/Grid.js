@@ -2,6 +2,14 @@
 
 	var $u = $a.Urls;
 
+	var select = $("#client-payment");
+	var updateLink = function() {
+		var link = $("#payment-link");
+		link.attr("href", select.val());
+	};
+	select.change(updateLink);
+	updateLink();
+
 	$a.Calculation = (function($c) {
 
 		$c.GetMainGrid = function() {

@@ -1,4 +1,5 @@
 ﻿@using Alicargo.MvcHelpers.BundleHelpres
+@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @inherits BaseWebViewPage
 <style>
@@ -7,15 +8,17 @@
 		width: auto;
 	}
 </style>
-<p>
+<p class="select-client-holder">
 	@Html.ActionLink(Pages.Excel, MVC.Calculation.Excel(), new { @class = "btn btn-info" })
+	@Html.DropDownList("client-payment", (IDictionary<string, string>)ViewBag.Clients)
+	<a href="#" class="btn btn-primary" id="payment-link">@Pages.Payment</a>
 </p>
 <div id="calculation-grid" class="grid"></div>
 
 @section scripts
 {
 	<script type="text/x-kendo-template" id="calculation-grid-details-template">
-        @Html.Partial("Details")
+		@Html.Partial("Details")
 	</script>
 	@Scripts.Render(JsPaths.CalculationJs)
 }

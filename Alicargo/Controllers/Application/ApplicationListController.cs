@@ -50,7 +50,7 @@ namespace Alicargo.Controllers.Application
 
 			var data = _applicationPresenter.List(take, skip, orders, client != null
 				? client.ClientId
-				: (long?)null, senderId,
+				: (long?) null, senderId,
 				isForwarder);
 
 			return Json(data);
@@ -60,16 +60,16 @@ namespace Alicargo.Controllers.Application
 		public virtual ViewResult Index()
 		{
 			var clients = _clients.GetAll()
-								  .OrderBy(x => x.Nic)
-								  .ToDictionary(x => x.ClientId, x => x.Nic);
+				.OrderBy(x => x.Nic)
+				.ToDictionary(x => x.ClientId, x => x.Nic);
 
 			var model = new ApplicationIndexModel
 			{
 				Clients = clients,
 				AirWaybills = _awbRepository.Get()
-											.Where(x => x.StateId == _stateConfig.CargoIsFlewStateId)
-											.OrderBy(x => x.Bill)
-											.ToDictionary(x => x.Id, x => x.Bill)
+					.Where(x => x.StateId == _stateConfig.CargoIsFlewStateId)
+					.OrderBy(x => x.Bill)
+					.ToDictionary(x => x.Id, x => x.Bill)
 			};
 
 			return View(model);

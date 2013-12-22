@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Enums;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
@@ -10,18 +12,21 @@ namespace Alicargo.Controllers.Calculation
 	public partial class CalculationController : Controller
 	{
 		private readonly IApplicationManager _applicationManager;
+		private readonly IClientRepository _clients;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly ICalculationService _calculation;
 		private readonly IIdentityService _identity;
 		private readonly IAdminCalculationPresenter _presenter;
 
 		public CalculationController(
+			IClientRepository clients,
 			IAwbUpdateManager awbUpdateManager,
 			IAdminCalculationPresenter presenter,
 			ICalculationService calculation,
 			IIdentityService identity,
 			IApplicationManager applicationManager)
 		{
+			_clients = clients;
 			_awbUpdateManager = awbUpdateManager;
 			_presenter = presenter;
 			_calculation = calculation;
@@ -32,6 +37,12 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Admin), HttpGet]
 		public virtual ActionResult Index()
 		{
+			var clients = _clients.GetAll()
+				.OrderBy(x => x.Nic)
+				.ToDictionary(x => Url.Action(MVC.Payment.Index(x.ClientId)), x => x.Nic);
+
+			ViewBag.Clients = clients;
+
 			return View();
 		}
 

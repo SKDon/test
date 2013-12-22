@@ -159,6 +159,7 @@
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\Application\SenderApplicationController.cs" />
+    <Compile Include="Controllers\Calculation\PaymentController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
@@ -373,6 +374,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\PaymentController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SenderApplicationController.generated.cs">
@@ -760,6 +764,7 @@
     <Content Include="Views\ClientApplication\EditorTemplates\ApplicationClientModel.cshtml" />
     <Content Include="Views\ClientApplication\Edit.cshtml" />
     <Content Include="Views\Files\ClientApplication.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

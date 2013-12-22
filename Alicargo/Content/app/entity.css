@@ -118,7 +118,7 @@
 			white-space: normal;
 		}
 
-.application-grid-select-client select {
+.select-client-holder select {
 	margin-bottom: 0;
 	width: auto;
 }
