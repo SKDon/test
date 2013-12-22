@@ -2324,6 +2324,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _TransitId;
 		
+		private decimal _Balance;
+		
 		private EntitySet<Calculation> _Calculations;
 		
 		private EntitySet<Application> _Applications;
@@ -2370,6 +2372,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnKSChanged();
     partial void OnTransitIdChanging(long value);
     partial void OnTransitIdChanged();
+    partial void OnBalanceChanging(decimal value);
+    partial void OnBalanceChanged();
     #endregion
 		
 		public Client()
@@ -2725,6 +2729,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._TransitId = value;
 					this.SendPropertyChanged("TransitId");
 					this.OnTransitIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Balance", DbType="Money NOT NULL")]
+		public decimal Balance
+		{
+			get
+			{
+				return this._Balance;
+			}
+			set
+			{
+				if ((this._Balance != value))
+				{
+					this.OnBalanceChanging(value);
+					this.SendPropertyChanging();
+					this._Balance = value;
+					this.SendPropertyChanged("Balance");
+					this.OnBalanceChanged();
 				}
 			}
 		}

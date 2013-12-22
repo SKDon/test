@@ -419,6 +419,7 @@
     <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationGroup.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\PaymentModel.cs" />
     <Compile Include="ViewModels\Calculation\CalculationHelper.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationListCollection.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationListCollection.cs" />
@@ -765,6 +766,7 @@
     <Content Include="Views\ClientApplication\Edit.cshtml" />
     <Content Include="Views\Files\ClientApplication.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\EditorTemplates\PaymentModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

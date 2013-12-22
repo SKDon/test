@@ -5,6 +5,7 @@ using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.Calculation.Admin;
 using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Email
@@ -41,6 +42,11 @@ namespace Alicargo.Services.Email
 			EmailOnAdd(model, authenticationModel);
 
 			return id;
+		}
+
+		public void AddToBalance(long clientId, PaymentModel model)
+		{
+			_manager.AddToBalance(clientId, model);
 		}
 
 		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)

@@ -119,6 +119,7 @@
       <Column Name="RS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="KS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="TransitId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+	  <Column Name="Balance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Association Name="Client_Calculation" Member="Calculations" ThisKey="Id" OtherKey="ClientId" Type="Calculation" />
       <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
       <Association Name="Transit_Client" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />

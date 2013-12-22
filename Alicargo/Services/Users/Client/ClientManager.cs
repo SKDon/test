@@ -6,6 +6,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
+using Alicargo.ViewModels.Calculation.Admin;
 using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Users.Client
@@ -109,6 +110,19 @@ namespace Alicargo.Services.Users.Client
 			_users.SetPassword(userId, authenticationModel.NewPassword);
 
 			return clientId;
+		}
+
+		public void AddToBalance(long clientId, PaymentModel model)
+		{
+			var data = _clients.Get(clientId);
+
+			data.Balance += model.Money;
+
+			_clients.Update(data);
+
+			_unitOfWork.SaveChanges();
+
+			//_clients.AddToBalanceHistory(clientId, model.Money, model.Comment);
 		}
 	}
 }

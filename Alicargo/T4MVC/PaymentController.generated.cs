@@ -80,6 +80,7 @@ namespace Alicargo.Controllers.Calculation
         public class ActionParamsClass_Index
         {
             public readonly string clientId = "clientId";
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -94,6 +95,13 @@ namespace Alicargo.Controllers.Calculation
                 public readonly string Index = "Index";
             }
             public readonly string Index = "~/Views/Payment/Index.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string PaymentModel = "PaymentModel";
+            }
         }
     }
 
@@ -109,6 +117,17 @@ namespace Alicargo.Controllers.Calculation
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
             IndexOverride(callInfo, clientId);
+            return callInfo;
+        }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
+
+        public override System.Web.Mvc.ActionResult Index(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            IndexOverride(callInfo, clientId, model);
             return callInfo;
         }
 
