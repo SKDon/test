@@ -12,17 +12,20 @@ namespace Alicargo.Services.Users
 	internal sealed class UserService : IUserService
 	{
 		private readonly IAdminRepository _admins;
+		private readonly ISenderRepository _senders;
 		private readonly IBrokerRepository _brokers;
 		private readonly IForwarderRepository _forwarders;
 		private readonly IUserRepository _users;
 
 		public UserService(IUserRepository users,
 			IAdminRepository admins,
+			ISenderRepository senders,
 			IForwarderRepository forwarders,
 			IBrokerRepository brokers)
 		{
 			_users = users;
 			_admins = admins;
+			_senders = senders;
 			_forwarders = forwarders;
 			_brokers = brokers;
 		}
@@ -51,6 +54,15 @@ namespace Alicargo.Services.Users
 
 				case RoleType.Forwarder:
 					return _forwarders.GetAll().Select(
+						x => new UserListItem
+						{
+							Name = x.Name,
+							EntityId = x.EntityId,
+							UserId = x.UserId
+						}).ToArray();
+
+				case  RoleType.Sender:
+					return _senders.GetAll().Select(
 						x => new UserListItem
 						{
 							Name = x.Name,
@@ -101,7 +113,10 @@ namespace Alicargo.Services.Users
 					throw new ArgumentOutOfRangeException("model", @"Unknown role " + model.RoleType);
 			}
 
-			_users.SetPassword(userId, model.Authentication.NewPassword);
+			if (!string.IsNullOrEmpty(model.Authentication.NewPassword))
+			{
+				_users.SetPassword(userId, model.Authentication.NewPassword);	
+			}
 		}
 
 		public void Add(UserModel model)
