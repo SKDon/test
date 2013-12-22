@@ -803,21 +803,27 @@ Created: {CreationTimestamp}', 0)
  
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (4, 2, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
 Изменение статуса заявки {DisplayNumber} - прикреплен документ Счет-фактура.
-Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
+Просьба подписать и выслать почтой по адресу:
+Россия - ООО "Трэйд Инвест"
+107113 Москва, Сокольническая пл. 4а офис 309
 
 С уважением,
 Alicargo  srl', 0)
  
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (5, 2, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. Commercial invoice is attached.
-Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+Please sign and send by mail to:
+Russia - LLC "Trade Invest"
+107113 Moscow, Sokolniki Sq. 4a office 309
 
 Sincerely,
 Alicargo  srl', 0)
  
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (6, 2, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. Commercial invoice is attached.
-Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+Please sign and send by mail to:
+Russia - LLC "Trade Invest"
+107113 Moscow, Sokolniki Sq. 4a office 309
 
 Sincerely,
 Alicargo  srl', 0)
@@ -842,21 +848,27 @@ INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISO
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (24, 8, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift.', 0)
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (25, 9, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
 Изменение статуса заявки {DisplayNumber} - прикреплен документ ТОРГ-12.
-Просьба подписать и выслать почтой по адресу: п/о Домодедово-4 а/я 649 (142004, Московская область, Домодедовский район, г. Домодедово, ул. Корнеева 36.
+Просьба подписать и выслать почтой по адресу:
+Россия - ООО "Трэйд Инвест"
+107113 Москва, Сокольническая пл. 4а офис 309
 
 С уважением,
 Alicargo  srl', 0)
 
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (26, 9, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. TORG-12 is attached.
-Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+Please sign and send by mail to:
+Russia - LLC "Trade Invest"
+107113 Moscow, Sokolniki Sq. 4a office 309
 
 Sincerely,
 Alicargo  srl', 0)
 
 INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES (27, 9, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. TORG-12 is attached.
-Please sign and send by mail to: Post Office Domodedovo-4 PO Box 649 (142004, Moscow region, Domodedovo district, Domodedovo, st. Korneev 36.
+Please sign and send by mail to:
+Russia - LLC "Trade Invest"
+107113 Moscow, Sokolniki Sq. 4a office 309
 
 Sincerely,
 Alicargo  srl', 0)
