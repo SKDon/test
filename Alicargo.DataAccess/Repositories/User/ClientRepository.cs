@@ -61,7 +61,11 @@ namespace Alicargo.DataAccess.Repositories.User
 		{
 			var entity = new Client
 			{
-				User = new DbContext.User()
+				User = new DbContext.User
+				{
+					PasswordHash = new byte[0],
+					PasswordSalt = new byte[0]
+				}
 			};
 
 			Map(client, entity);

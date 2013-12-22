@@ -36,19 +36,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		{
 			var db = (AlicargoDataContext)_context.UnitOfWork.Context;
 
-			var carrier = _fixture.Build<Carrier>()
-				.Without(x => x.Transits)
-				.Create();
-			db.Carriers.InsertOnSubmit(carrier);
-			db.SubmitChanges();
-
-			var transit = _fixture.Build<Transit>()
-				.Without(x => x.Applications)
-				.Without(x => x.Clients)
-				.With(x => x.Carrier, carrier)
-				.Create();
-			db.Transits.InsertOnSubmit(transit);
-			db.SubmitChanges();
+			var transit = GetTransit(db);
 
 			var user = _fixture.Build<DbContext.User>()
 				.Without(x => x.Admins)
@@ -93,6 +81,24 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			};
 		}
 
+		private Transit GetTransit(AlicargoDataContext db)
+		{
+			var carrier = _fixture.Build<Carrier>()
+				.Without(x => x.Transits)
+				.Create();
+			db.Carriers.InsertOnSubmit(carrier);
+			db.SubmitChanges();
+
+			var transit = _fixture.Build<Transit>()
+				.Without(x => x.Applications)
+				.Without(x => x.Clients)
+				.With(x => x.Carrier, carrier)
+				.Create();
+			db.Transits.InsertOnSubmit(transit);
+			db.SubmitChanges();
+			return transit;
+		}
+
 		[TestMethod, TestCategory("black-box")]
 		public void Test_ClientRepository_Count()
 		{
@@ -118,7 +124,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		[TestMethod, TestCategory("black-box")]
 		public void Test_ClientRepository_Add_GetByUserId_GetById_Delete()
 		{
-			var client = CreateTestClient();
+			var db = (AlicargoDataContext)_context.UnitOfWork.Context;
+			var transit = GetTransit(db);
+
+			var client = _fixture.Create<ClientData>();
+			client.TransitId = transit.Id;
+			client.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
+			var clientId = _clientRepository.Add(client);
+			_context.UnitOfWork.SaveChanges();
+			client.ClientId = clientId();
 
 			var byId = _clientRepository.Get(client.ClientId);
 

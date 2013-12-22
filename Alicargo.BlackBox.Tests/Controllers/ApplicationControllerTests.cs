@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Alicargo.BlackBox.Tests.Properties;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Helpers;
