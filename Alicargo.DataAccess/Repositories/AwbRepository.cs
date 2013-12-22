@@ -142,7 +142,7 @@ namespace Alicargo.DataAccess.Repositories
 				.SelectMany(x => x.Applications)
 				.Select(x => x.Client.Emails)
 				.ToArray()
-				.SelectMany(EmailsHelper.SplitEmails)
+				.SelectMany(EmailsHelper.SplitAndTrimEmails)
 				.ToArray();
 		}
 

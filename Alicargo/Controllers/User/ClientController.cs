@@ -62,6 +62,11 @@ namespace Alicargo.Controllers.User
 			CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
+			if (!EmailsHelper.Validate(model.Emails))
+			{
+				ModelState.AddModelError("Emails", @"Emails format is invalid");
+			}
+
 			if (!ModelState.IsValid) return View();
 
 			long clientId = 0;
@@ -158,6 +163,11 @@ namespace Alicargo.Controllers.User
 			CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
 		{
+			if (!EmailsHelper.Validate(model.Emails))
+			{
+				ModelState.AddModelError("Emails", @"Emails format is invalid");
+			}
+
 			if (!ModelState.IsValid) return View();
 
 			var client = _clients.GetCurrentClientData(id);

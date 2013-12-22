@@ -24,7 +24,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				ClientId = x.Id,
 				BIC = x.BIC,
 				Phone = x.Phone,
-				Emails = EmailsHelper.SplitEmails(x.Emails),
+				Emails = EmailsHelper.SplitAndTrimEmails(x.Emails),
 				LegalEntity = x.LegalEntity,
 				Bank = x.Bank,
 				Contacts = x.Contacts,

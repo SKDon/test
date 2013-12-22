@@ -32,20 +32,20 @@ namespace Alicargo.Services.Users.Client
 			_unitOfWork = unitOfWork;
 		}
 
-		public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel,
-			TransitEditModel transitModel,
-			AuthenticationModel authenticationModel)
+		public void Update(long clientId, ClientModel model, CarrierSelectModel carrier,
+			TransitEditModel transit,
+			AuthenticationModel authentication)
 		{
 			var data = _clients.Get(clientId);
 
 			if (!_clientPermissions.HaveAccessToClient(data))
 				throw new AccessForbiddenException();
 
-			_transitService.Update(data.TransitId, transitModel, carrierModel);
+			_transitService.Update(data.TransitId, transit, carrier);
 
 			data.BIC = model.BIC;
 			data.Phone = model.Phone;
-			data.Emails = EmailsHelper.SplitEmails(model.Emails);
+			data.Emails = EmailsHelper.SplitAndTrimEmails(model.Emails);
 			data.LegalEntity = model.LegalEntity;
 			data.Bank = model.Bank;
 			data.Contacts = model.Contacts;
@@ -57,15 +57,16 @@ namespace Alicargo.Services.Users.Client
 			data.Nic = model.Nic;
 			data.OGRN = model.OGRN;
 			data.RS = model.RS;
+			data.Login = authentication.Login;
 
 			_clients.Update(data);
 
 			_unitOfWork.SaveChanges();
 
-			if (!string.IsNullOrWhiteSpace(authenticationModel.NewPassword))
+			if (!string.IsNullOrWhiteSpace(authentication.NewPassword))
 			{
 				var userId = _clients.GetUserId(clientId);
-				_users.SetPassword(userId, authenticationModel.NewPassword);
+				_users.SetPassword(userId, authentication.NewPassword);
 			}
 		}
 
@@ -81,7 +82,7 @@ namespace Alicargo.Services.Users.Client
 				ClientId = 0,
 				BIC = model.BIC,
 				Phone = model.Phone,
-				Emails = EmailsHelper.SplitEmails(model.Emails),
+				Emails = EmailsHelper.SplitAndTrimEmails(model.Emails),
 				LegalEntity = model.LegalEntity,
 				Bank = model.Bank,
 				Contacts = model.Contacts,

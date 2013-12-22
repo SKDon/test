@@ -67,6 +67,7 @@
 	@Pages.Transit
 </h4>
 @Html.Action(MVC.Transit.EditByClient((long?)ViewBag.ClientId))
+@*@Html.Partial("EditorTemplates/TransitEditModel", (TransitEditModel)ViewBag.Transit)*@
 <hr />
 <h4>
 	@Pages.Authentication

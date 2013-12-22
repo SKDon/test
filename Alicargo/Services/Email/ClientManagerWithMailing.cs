@@ -27,10 +27,10 @@ namespace Alicargo.Services.Email
 			_messageBuilder = messageBuilder;
 		}
 
-		public void Update(long clientId, ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-			AuthenticationModel authenticationModel)
+		public void Update(long clientId, ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
+			AuthenticationModel authentication)
 		{
-			_manager.Update(clientId, model, carrierModel, transitModel, authenticationModel);
+			_manager.Update(clientId, model, carrier, transit, authentication);
 		}
 
 		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,

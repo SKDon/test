@@ -60,7 +60,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			return new ClientData
 			{
-				Emails = EmailsHelper.SplitEmails(client.Emails),
+				Emails = EmailsHelper.SplitAndTrimEmails(client.Emails),
 				LegalEntity = client.LegalEntity,
 				BIC = client.BIC,
 				Nic = client.Nic,

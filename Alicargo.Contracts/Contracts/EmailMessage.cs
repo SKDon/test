@@ -6,7 +6,7 @@ namespace Alicargo.Contracts.Contracts
 	public sealed class EmailMessage
 	{
 		public EmailMessage(string subject, string body, string from, string to)
-			: this(subject, body, from, EmailsHelper.SplitEmails(to))
+			: this(subject, body, from, EmailsHelper.SplitAndTrimEmails(to))
 		{
 		}
 
