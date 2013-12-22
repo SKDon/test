@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Contracts.User;
+﻿using System.Transactions;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Helpers;
@@ -121,11 +122,14 @@ namespace Alicargo.Services.Users.Client
 
 			balance += model.Money;
 
-			_balance.SetBalance(clientId, balance);
+			using (var scope = new TransactionScope())
+			{
+				_balance.SetBalance(clientId, balance);
 
-			_unitOfWork.SaveChanges();
+				_balance.AddToHistory(clientId, balance, model.Money, model.Comment);
 
-			_balance.AddToHistory(clientId, model.Money, model.Comment);
+				scope.Complete();
+			}
 		}
 	}
 }

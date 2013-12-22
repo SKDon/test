@@ -2,7 +2,7 @@
 {
 	public interface IClientBalanceRepository
 	{
-		void AddToHistory(long clientId, decimal money, string comment);
+		void AddToHistory(long clientId, decimal balance, decimal input, string comment);
 		decimal GetBalance(long clientId);
 		void SetBalance(long clientId, decimal balance);
 	}

@@ -1,5 +1,4 @@
-﻿using System;
-using Alicargo.Contracts.Repositories;
+﻿using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 
 namespace Alicargo.DataAccess.Repositories.User
@@ -13,8 +12,9 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor = executor;
 		}
 
-		public void AddToHistory(long clientId, decimal money, string comment)
+		public void AddToHistory(long clientId, decimal balance, decimal input, string comment)
 		{
+			_executor.Execute("[dbo].[ClientBalanceHistory_Add]", new { clientId, balance, input, comment });
 		}
 
 		public decimal GetBalance(long clientId)

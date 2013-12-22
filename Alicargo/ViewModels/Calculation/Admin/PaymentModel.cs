@@ -11,6 +11,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		public decimal Money { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Comment")]
+		[DataType(DataType.MultilineText)]
 		public string Comment { get; set; }
 	}
 }

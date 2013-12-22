@@ -56,8 +56,7 @@
 );
 GO
 
-CREATE NONCLUSTERED INDEX [IX_ClientId]
-    ON [dbo].[Application]([ClientId] ASC);
+CREATE NONCLUSTERED INDEX [IX_ClientId] ON [dbo].[Application]([ClientId] ASC);
 GO
 
 CREATE NONCLUSTERED INDEX [IX_StateId]

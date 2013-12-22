@@ -155,6 +155,8 @@
     <Build Include="Stored procedures\User\User_GetLanguage.sql" />
     <Build Include="Stored procedures\User\Client_GetBalance.sql" />
     <Build Include="Stored procedures\User\Client_SetBalance.sql" />
+    <Build Include="Tables\ClientBalanceHistory.sql" />
+    <Build Include="Stored procedures\User\ClientBalanceHistory_Add.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
