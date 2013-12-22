@@ -7,7 +7,7 @@ AS
 			s.[Email],
 			s.[TariffOfTapePerBox],
 			u.[Login],
-			u.[TwoLetterISOLanguageName]
+			u.[TwoLetterISOLanguageName] AS [Language]
 	FROM	[dbo].[Sender] s
 	JOIN	[dbo].[User] u
 	ON		u.[Id] = s.[UserId]
