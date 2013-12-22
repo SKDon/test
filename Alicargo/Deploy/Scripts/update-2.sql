@@ -1,4 +1,7 @@
-﻿--USE [$(MainDbName)];
+﻿:setvar MainDbName "Alicargo_2_1"
+GO
+
+USE [$(MainDbName)];
 
 
 GO

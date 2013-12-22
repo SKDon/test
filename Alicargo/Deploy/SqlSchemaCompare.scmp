@@ -3,13 +3,13 @@
   <Version>10</Version>
   <SourceModelProvider>
     <ProjectBasedModelProvider>
-      <ProjectGuid>{003cda24-6cee-4d28-917a-17d6e93b3109}</ProjectGuid>
-      <Name>Alicargo.Files.Database</Name>
+      <ProjectGuid>{73992516-430c-4ff8-ab71-1685a96da591}</ProjectGuid>
+      <Name>Alicargo.Database</Name>
     </ProjectBasedModelProvider>
   </SourceModelProvider>
   <TargetModelProvider>
     <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=.\sqlexpress;Initial Catalog=Alicargo_Files_2_1;Integrated Security=True;Pooling=False</ConnectionString>
+      <ConnectionString>Data Source=.\sqlexpress;Initial Catalog=Alicargo_2_1;Integrated Security=True;Pooling=False</ConnectionString>
     </ConnectionBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>
