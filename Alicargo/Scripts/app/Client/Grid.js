@@ -35,7 +35,6 @@
 		columns: [
 			{ field: "LegalEntity", title: $l.Entities_LegalEntity },
 			{ field: "Nic", title: $l.Entities_Nic },
-			{ field: "Email", title: $l.Entities_Email },
 			{
 				command: [{
 					name: "custom-edit",
@@ -44,7 +43,7 @@
 						e.preventDefault();
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
-						var url = $u.Client_Edit + "/" + data.Id;
+						var url = $u.Client_Edit + "/" + data.ClientId;
 						
 						$a.LoadPage(url);
 					}
@@ -60,7 +59,7 @@
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
 						if ($a.Confirm("Авторизаваться под клиентом " + data.Nic + "?")) {
-							var url = $u.Authentication_LoginAsUser + "/" + data.UserId;
+							var url = $u.Authentication_LoginAsClient + "/" + data.ClientId;
 							
 							$a.LoadPage(url);
 						}

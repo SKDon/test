@@ -49,6 +49,12 @@ namespace Alicargo.Controllers.User
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult LoginAsClient()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsClient);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.PartialViewResult Client()
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Client);
@@ -72,6 +78,7 @@ namespace Alicargo.Controllers.User
             public readonly string Login = "Login";
             public readonly string SignOut = "SignOut";
             public readonly string LoginAsUser = "LoginAsUser";
+            public readonly string LoginAsClient = "LoginAsClient";
             public readonly string Client = "Client";
         }
 
@@ -81,6 +88,7 @@ namespace Alicargo.Controllers.User
             public const string Login = "Login";
             public const string SignOut = "SignOut";
             public const string LoginAsUser = "LoginAsUser";
+            public const string LoginAsClient = "LoginAsClient";
             public const string Client = "Client";
         }
 
@@ -98,6 +106,14 @@ namespace Alicargo.Controllers.User
         public ActionParamsClass_LoginAsUser LoginAsUserParams { get { return s_params_LoginAsUser; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_LoginAsUser
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_LoginAsClient s_params_LoginAsClient = new ActionParamsClass_LoginAsClient();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LoginAsClient LoginAsClientParams { get { return s_params_LoginAsClient; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LoginAsClient
         {
             public readonly string id = "id";
         }
@@ -167,6 +183,16 @@ namespace Alicargo.Controllers.User
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsUser);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             LoginAsUserOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void LoginAsClientOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        public override System.Web.Mvc.ActionResult LoginAsClient(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsClient);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            LoginAsClientOverride(callInfo, id);
             return callInfo;
         }
 

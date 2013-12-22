@@ -25,8 +25,6 @@ namespace Alicargo.Controllers.User
 			_authentication = authentication;
 		}
 
-		#region Authentication
-
 		[HttpGet]
 		public virtual ActionResult Login()
 		{
@@ -66,7 +64,14 @@ namespace Alicargo.Controllers.User
 			return RedirectToAction(MVC.Home.Index());
 		}
 
-		#endregion
+		[Access(RoleType.Admin), HttpGet]
+		public virtual ActionResult LoginAsClient(int id)
+		{
+			var userId = _clients.GetUserId(id);
+			_authentication.AuthenticateForce(userId, false);
+
+			return RedirectToAction(MVC.Home.Index());
+		}
 
 		[ChildActionOnly]
 		public virtual PartialViewResult Client(long? clientId)

@@ -152,6 +152,7 @@
     <Build Include="Stored procedures\ApplicationEvent\ApplicationEventEmailRecipient_Set.sql" />
     <Build Include="Stored procedures\User\User_GetPasswordData.sql" />
     <Build Include="Stored procedures\User\User_SetLanguage.sql" />
+    <Build Include="Stored procedures\User\User_GetLanguage.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
