@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts.User;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Services;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
@@ -9,7 +10,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
+namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 {
 	[TestClass]
 	public class SenderRepositoryTests
@@ -37,6 +38,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_Add_Get()
 		{
 			var data = _fixture.Create<SenderData>();
+			data.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
 
 			var password = _fixture.Create<string>();
 
@@ -66,6 +68,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_Update()
 		{
 			var data = _fixture.Create<SenderData>();
+			data.TwoLetterISOLanguageName = TwoLetterISOLanguageName.English;
 
 			_repository.Update(TestConstants.TestSenderId, data);
 

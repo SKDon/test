@@ -110,7 +110,7 @@ namespace Alicargo.Controllers.Application
 		{
 			Debug.Assert(_identity.Id != null);
 
-			return _clients.GetByUserId(_identity.Id.Value).Id;
+			return _clients.GetByUserId(_identity.Id.Value).ClientId;
 		}
 
 		private void BindBag(long? applicationId, long clientId, int? count = 0)

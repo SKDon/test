@@ -29,7 +29,7 @@ namespace Alicargo.Services.Users.Client
 			Debug.Assert(_identity.Id != null);
 			var client = _clients.GetByUserId(_identity.Id.Value);
 
-			return client != null && client.Id == data.Id;
+			return client != null && client.ClientId == data.ClientId;
 		}
 	}
 }

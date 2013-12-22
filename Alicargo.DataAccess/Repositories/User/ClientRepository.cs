@@ -21,7 +21,7 @@ namespace Alicargo.DataAccess.Repositories.User
 
 			_selector = x => new ClientData
 			{
-				Id = x.Id,
+				ClientId = x.Id,
 				BIC = x.BIC,
 				Phone = x.Phone,
 				Emails = EmailsHelper.SplitEmails(x.Emails),
@@ -37,7 +37,8 @@ namespace Alicargo.DataAccess.Repositories.User
 				OGRN = x.OGRN,
 				RS = x.RS,
 				TransitId = x.TransitId,
-				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName
+				TwoLetterISOLanguageName = x.User.TwoLetterISOLanguageName,
+				Login = x.User.Login
 			};
 		}
 
@@ -68,6 +69,13 @@ namespace Alicargo.DataAccess.Repositories.User
 			_context.Clients.InsertOnSubmit(entity);
 
 			return () => entity.Id;
+		}
+
+		public void Update(ClientData client)
+		{
+			var entity = _context.Clients.First(x => x.Id == client.ClientId);
+
+			Map(client, entity);
 		}
 
 		public string GetLanguage(long clientId)
@@ -103,13 +111,6 @@ namespace Alicargo.DataAccess.Repositories.User
 			return _context.Clients.Select(_selector).ToArray();
 		}
 
-		public void Update(ClientData client)
-		{
-			var entity = _context.Clients.First(x => x.Id == client.Id);
-
-			Map(client, entity);
-		}
-
 		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
 		{
 			return _context.Applications
@@ -127,6 +128,7 @@ namespace Alicargo.DataAccess.Repositories.User
 		{
 			to.Emails = EmailsHelper.JoinEmails(from.Emails);
 			to.User.TwoLetterISOLanguageName = from.TwoLetterISOLanguageName;
+			to.User.Login = from.Login;
 			to.LegalEntity = @from.LegalEntity;
 			to.BIC = @from.BIC;
 			to.Nic = @from.Nic;

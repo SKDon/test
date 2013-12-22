@@ -82,12 +82,14 @@ namespace Alicargo.TestHelpers
 			ApplicationFileRepository = Inject<IApplicationFileRepository>();
 			StateSettingsRepository = Inject<IStateSettingsRepository>();
 			EmailTemplateRepository = Inject<IEmailTemplateRepository>();
+			AdminRepository = Inject<IAdminRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
 
 		public Fixture Fixture { get; private set; }
 
+		public Mock<IAdminRepository> AdminRepository { get; private set; }
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
 		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }
 		public Mock<ISerializer> Serializer { get; private set; }

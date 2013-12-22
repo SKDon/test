@@ -49,7 +49,7 @@ namespace Alicargo.Controllers.Application
 			var isForwarder = _identity.IsInRole(RoleType.Forwarder);
 
 			var data = _applicationPresenter.List(take, skip, orders, client != null
-				? client.Id
+				? client.ClientId
 				: (long?)null, senderId,
 				isForwarder);
 
@@ -61,7 +61,7 @@ namespace Alicargo.Controllers.Application
 		{
 			var clients = _clients.GetAll()
 								  .OrderBy(x => x.Nic)
-								  .ToDictionary(x => x.Id, x => x.Nic);
+								  .ToDictionary(x => x.ClientId, x => x.Nic);
 
 			var model = new ApplicationIndexModel
 			{

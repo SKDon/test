@@ -108,7 +108,7 @@ namespace Alicargo.Controllers.User
 		{
 			var data = _clients.GetCurrentClientData(id);
 
-			var document = _files.GetClientContract(data.Id);
+			var document = _files.GetClientContract(data.ClientId);
 
 			return document.GetFileResult();
 		}
@@ -120,11 +120,11 @@ namespace Alicargo.Controllers.User
 		{
 			var data = _clients.GetCurrentClientData(id);
 
-			var contractFileName = _files.GetClientContractFileName(data.Id);
+			var contractFileName = _files.GetClientContractFileName(data.ClientId);
 
 			var model = GetModel(data, contractFileName);
 
-			ViewBag.ClientId = data.Id;
+			ViewBag.ClientId = data.ClientId;
 
 			return View(model);
 		}
@@ -164,9 +164,9 @@ namespace Alicargo.Controllers.User
 
 			try
 			{
-				_manager.Update(client.Id, model, carrierModel, transitModel, authenticationModel);
+				_manager.Update(client.ClientId, model, carrierModel, transitModel, authenticationModel);
 
-				MergeContract(model, client.Id);
+				MergeContract(model, client.ClientId);
 			}
 			catch (DublicateLoginException)
 			{
@@ -175,7 +175,7 @@ namespace Alicargo.Controllers.User
 
 			if (!ModelState.IsValid) return View();
 
-			return RedirectToAction(MVC.Client.Edit(client.Id));
+			return RedirectToAction(MVC.Client.Edit(client.ClientId));
 		}
 
 		#endregion

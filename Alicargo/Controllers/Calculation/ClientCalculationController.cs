@@ -34,7 +34,7 @@ namespace Alicargo.Controllers.Calculation
 
 			var client = _clients.GetByUserId(_identity.Id.Value);
 
-			var data = _presenter.List(client.Id, take, skip);
+			var data = _presenter.List(client.ClientId, take, skip);
 
 			return Json(data);
 		}
@@ -46,7 +46,7 @@ namespace Alicargo.Controllers.Calculation
 
 			var client = _clients.GetByUserId(_identity.Id.Value);
 
-			var data = _presenter.List(client.Id, int.MaxValue, 0);
+			var data = _presenter.List(client.ClientId, int.MaxValue, 0);
 
 			var excel = new ExcelClientCalculation();
 

@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts.User;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.DbContext;
@@ -7,7 +8,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
+namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 {
 	[TestClass]
 	public class ClientRepositoryTests
@@ -49,13 +50,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			db.Transits.InsertOnSubmit(transit);
 			db.SubmitChanges();
 
-			var user = _fixture.Build<User>()
+			var user = _fixture.Build<DbContext.User>()
 				.Without(x => x.Admins)
 				.Without(x => x.Clients)
 				.Without(x => x.Brokers)
 				.Without(x => x.Forwarders)
 				.Without(x => x.Senders)
-				.With(x => x.TwoLetterISOLanguageName, "ru")
+				.With(x => x.TwoLetterISOLanguageName, TwoLetterISOLanguageName.Russian)
 				.Create();
 			db.Users.InsertOnSubmit(user);
 			db.SubmitChanges();
@@ -86,7 +87,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				RS = client.RS,
 				KS = client.KS,
 				TransitId = client.TransitId,
-				Id = client.Id
+				ClientId = client.Id,
+				Login = user.Login,
+				TwoLetterISOLanguageName = user.TwoLetterISOLanguageName
 			};
 		}
 
@@ -117,13 +120,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var client = CreateTestClient();
 
-			var byId = _clientRepository.Get(client.Id);
+			var byId = _clientRepository.Get(client.ClientId);
 
 			Assert.IsNotNull(byId);
 
 			client.ShouldBeEquivalentTo(byId);
 
-			var userId = _clientRepository.GetUserId(client.Id);
+			var userId = _clientRepository.GetUserId(client.ClientId);
 
 			var byUserId = _clientRepository.GetByUserId(userId);
 
@@ -137,11 +140,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var client = CreateTestClient();
 
-			_clientRepository.Delete(client.Id);
+			_clientRepository.Delete(client.ClientId);
 
 			_context.UnitOfWork.SaveChanges();
 
-			var byId = _clientRepository.Get(client.Id);
+			var byId = _clientRepository.Get(client.ClientId);
 
 			Assert.IsNull(byId);
 		}
@@ -151,14 +154,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var client = CreateTestClient();
 			var newData = _fixture.Create<ClientData>();
-			newData.Id = client.Id;
+			newData.ClientId = client.ClientId;
 			newData.TransitId = client.TransitId;
+			newData.TwoLetterISOLanguageName = TwoLetterISOLanguageName.Italian;
 
 			_clientRepository.Update(newData);
 
 			_context.UnitOfWork.SaveChanges();
 
-			var byId = _clientRepository.Get(client.Id);
+			var byId = _clientRepository.Get(client.ClientId);
 
 			newData.ShouldBeEquivalentTo(byId);
 		}

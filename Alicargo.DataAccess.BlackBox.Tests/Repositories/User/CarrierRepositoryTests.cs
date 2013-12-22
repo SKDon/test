@@ -6,7 +6,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
+namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 {
 	[TestClass]
 	public class CarrierRepositoryTests

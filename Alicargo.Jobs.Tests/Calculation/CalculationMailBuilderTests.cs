@@ -41,9 +41,10 @@ namespace Alicargo.Jobs.Tests.Calculation
 				Weight = 8
 			};
 
-			var client = _container.Build<ClientData>().With(x => x.Id, TestConstants.TestClientId1).Create();
-			var admins = _container.CreateMany<RecipientData>().ToArray();
+			var client = _container.Build<ClientData>().With(x => x.ClientId, TestConstants.TestClientId1).Create();
+			var admins = _container.CreateMany<UserData>().ToArray();
 
+			const string subject = @"Расчет стоимости заявки #ApplicationDisplay FactoryName/MarkName";
 			const string text = @"AirWaybillDisplay
 
 8.00 kg * 6.00€ = 48.00€
@@ -55,8 +56,7 @@ namespace Alicargo.Jobs.Tests.Calculation
 
 Итого - 69.00€";
 
-			const string subject = @"Расчет стоимости заявки #ApplicationDisplay FactoryName/MarkName";
-
+			_container.AdminRepository.Setup(x => x.GetAll()).Returns(admins);
 			_container.ClientRepository.Setup(x => x.Get(TestConstants.TestClientId1)).Returns(client);
 
 			var message = _builder.Build(data);

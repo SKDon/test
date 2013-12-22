@@ -56,7 +56,7 @@ namespace Alicargo.Controllers.Application
 
 			ViewBag.ClientNic = client.Nic;
 
-			ViewBag.ClientId = client.Id;
+			ViewBag.ClientId = client.ClientId;
 
 			ViewBag.ApplicationId = applicationId;
 

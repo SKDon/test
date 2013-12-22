@@ -78,7 +78,7 @@ namespace Alicargo.Services.Users.Client
 
 			var data = new ClientData
 			{
-				Id = 0,
+				ClientId = 0,
 				BIC = model.BIC,
 				Phone = model.Phone,
 				Emails = EmailsHelper.SplitEmails(model.Emails),

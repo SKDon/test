@@ -90,7 +90,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
             var transitModel = _fixture.Create<TransitEditModel>();
             var newCarrierName = _fixture.Create<string>();
 
-            var result = _controller.Create(clientData.Id, model, new CarrierSelectModel
+            var result = _controller.Create(clientData.ClientId, model, new CarrierSelectModel
             {
                 NewCarrierName = newCarrierName
             }, transitModel);
@@ -113,7 +113,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
                     Desc = true,
                     OrderType = OrderType.Id
                 }
-            }, 1, clientId: clientData.Id).First();
+            }, 1, clientId: clientData.ClientId).First();
 
             Validate(clientData, model, transitModel, newCarrierName, data);
         }

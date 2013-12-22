@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
-using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
+namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 {
 	[TestClass]
 	public class Tests
@@ -38,6 +37,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data = all.First(x => x.Id == TestConstants.TestBrokerId);
 
 			data.ShouldBeEquivalentTo(broker);
+
+			var byUserId = _repository.GetByUserId(broker.UserId);
+
+			data.ShouldBeEquivalentTo(byUserId);
 		}
 	}
 }
