@@ -86,6 +86,7 @@
     <Compile Include="Repositories\CalculationRepository.cs" />
     <Compile Include="Repositories\User\CarrierRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
+    <Compile Include="Repositories\User\ClientBalanceRepository.cs" />
     <Compile Include="Repositories\User\ClientRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\AwbRepository.cs" />

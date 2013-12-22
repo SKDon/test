@@ -13,22 +13,25 @@ namespace Alicargo.Services.Users.Client
 {
 	internal sealed class ClientManager : IClientManager
 	{
-		private readonly IClientPermissions _clientPermissions;
+		private readonly IClientPermissions _permissions;
 		private readonly IClientRepository _clients;
-		private readonly ITransitService _transitService;
+		private readonly IClientBalanceRepository _balance;
+		private readonly ITransitService _transits;
 		private readonly IUserRepository _users;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public ClientManager(
 			IClientRepository clients,
-			IClientPermissions clientPermissions,
-			ITransitService transitService,
+			IClientBalanceRepository balance,
+			IClientPermissions permissions,
+			ITransitService transits,
 			IUserRepository users,
 			IUnitOfWork unitOfWork)
 		{
 			_clients = clients;
-			_clientPermissions = clientPermissions;
-			_transitService = transitService;
+			_balance = balance;
+			_permissions = permissions;
+			_transits = transits;
 			_users = users;
 			_unitOfWork = unitOfWork;
 		}
@@ -39,10 +42,10 @@ namespace Alicargo.Services.Users.Client
 		{
 			var data = _clients.Get(clientId);
 
-			if (!_clientPermissions.HaveAccessToClient(data))
+			if (!_permissions.HaveAccessToClient(data))
 				throw new AccessForbiddenException();
 
-			_transitService.Update(data.TransitId, transit, carrier);
+			_transits.Update(data.TransitId, transit, carrier);
 
 			data.BIC = model.BIC;
 			data.Phone = model.Phone;
@@ -74,7 +77,7 @@ namespace Alicargo.Services.Users.Client
 		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
 			AuthenticationModel authenticationModel)
 		{
-			var transitId = _transitService.AddTransit(transitModel, carrierModel);
+			var transitId = _transits.AddTransit(transitModel, carrierModel);
 
 			_unitOfWork.SaveChanges();
 
@@ -114,15 +117,15 @@ namespace Alicargo.Services.Users.Client
 
 		public void AddToBalance(long clientId, PaymentModel model)
 		{
-			var data = _clients.Get(clientId);
+			var balance = _balance.GetBalance(clientId);
 
-			data.Balance += model.Money;
+			balance += model.Money;
 
-			_clients.Update(data);
+			_balance.SetBalance(clientId, balance);
 
 			_unitOfWork.SaveChanges();
 
-			//_clients.AddToBalanceHistory(clientId, model.Money, model.Comment);
+			_balance.AddToHistory(clientId, model.Money, model.Comment);
 		}
 	}
 }

@@ -153,6 +153,8 @@
     <Build Include="Stored procedures\User\User_GetPasswordData.sql" />
     <Build Include="Stored procedures\User\User_SetLanguage.sql" />
     <Build Include="Stored procedures\User\User_GetLanguage.sql" />
+    <Build Include="Stored procedures\User\Client_GetBalance.sql" />
+    <Build Include="Stored procedures\User\Client_SetBalance.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

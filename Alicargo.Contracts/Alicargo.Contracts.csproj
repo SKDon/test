@@ -109,6 +109,7 @@
     <Compile Include="Repositories\ICalculationRepository.cs" />
     <Compile Include="Repositories\User\ICarrierRepository.cs" />
     <Compile Include="Repositories\ICityRepository.cs" />
+    <Compile Include="Repositories\User\IClientBalanceRepository.cs" />
     <Compile Include="Repositories\User\IClientRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\User\IClientFileRepository.cs" />

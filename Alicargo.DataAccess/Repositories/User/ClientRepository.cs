@@ -38,8 +38,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				RS = x.RS,
 				TransitId = x.TransitId,
 				Language = x.User.TwoLetterISOLanguageName,
-				Login = x.User.Login,
-				Balance = x.Balance
+				Login = x.User.Login
 			};
 		}
 
@@ -148,7 +147,6 @@ namespace Alicargo.DataAccess.Repositories.User
 			to.RS = @from.RS;
 			to.KS = @from.KS;
 			to.TransitId = @from.TransitId;
-			to.Balance = from.Balance;
 		}
 	}
 }
