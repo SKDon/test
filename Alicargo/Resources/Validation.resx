@@ -132,4 +132,7 @@
   <data name="StateIsUsed" xml:space="preserve">
     <value>State is used</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found</value>
+  </data>
 </root>

@@ -73,6 +73,11 @@
 		padding: 7px 9px;
 	}
 
+	.form-signin ul {
+		margin-bottom: 0;
+	}
+
+
 .input-validation-error {
 	color: #b94a48 !important;
 	border-color: #e9322d !important;

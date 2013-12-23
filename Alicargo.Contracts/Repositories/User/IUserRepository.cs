@@ -6,6 +6,7 @@ namespace Alicargo.Contracts.Repositories.User
 	{
 		void SetLanguage(long userId, string language);
 		string GetLanguage(long userId);
+		long? GetUserIdByEmail(string email);
 
 		void SetPassword(long userId, string password);
 		PasswordData GetPasswordData(string login);

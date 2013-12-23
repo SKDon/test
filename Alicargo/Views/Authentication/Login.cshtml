@@ -12,8 +12,8 @@
 		</span>
 		@Html.CheckBoxFor(x => x.RememberMe)@Pages.RememberMe
 	</label>
-	@Html.ValidationSummary(true)
 	<div class="text-center">
 		<button class="btn btn-large btn-primary" type="submit">@Pages.SignIn</button>
 	</div>
+	@Html.ValidationSummary()
 }

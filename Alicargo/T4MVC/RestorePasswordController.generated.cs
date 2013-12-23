@@ -25,9 +25,6 @@ namespace Alicargo.Controllers.User
     public partial class RestorePasswordController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public RestorePasswordController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RestorePasswordController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -121,11 +118,11 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_RedirectToRouteResult callInfo, string email);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string email);
 
-        public override System.Web.Mvc.RedirectToRouteResult Index(string email)
+        public override System.Web.Mvc.ActionResult Index(string email)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.Index);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "email", email);
             IndexOverride(callInfo, email);
             return callInfo;
