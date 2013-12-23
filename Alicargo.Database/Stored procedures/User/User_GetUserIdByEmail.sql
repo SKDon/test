@@ -31,38 +31,5 @@ BEGIN
 		JOIN [dbo].[Forwarder] a ON a.[UserId] = u.[Id]
 		WHERE a.[Email] = @Email)) AS [Id]
 
-	--SELECT TOP 1 t.[Id]
-	--FROM
-	--(
-	--	SELECT TOP 1 u.[Id]
-	--	FROM [dbo].[User] u
-	--	JOIN [dbo].[Admin] a ON a.[UserId] = u.[Id]
-	--	WHERE a.[Email] = @Email
-
-	--	UNION ALL
-	--	SELECT TOP 1 u.[Id]
-	--	FROM [dbo].[User] u
-	--	JOIN [dbo].[Client] a ON a.[UserId] = u.[Id]
-	--	WHERE a.[Emails] LIKE @Email
-
-	--	UNION ALL
-	--	SELECT TOP 1 u.[Id]
-	--	FROM [dbo].[User] u
-	--	JOIN [dbo].[Sender] a ON a.[UserId] = u.[Id]
-	--	WHERE a.[Email] = @Email
-		
-	--	UNION ALL
-	--	SELECT TOP 1 u.[Id]
-	--	FROM [dbo].[User] u
-	--	JOIN [dbo].[Broker] a ON a.[UserId] = u.[Id]
-	--	WHERE a.[Email] = @Email
-		
-	--	UNION ALL
-	--	SELECT TOP 1 u.[Id]
-	--	FROM [dbo].[User] u
-	--	JOIN [dbo].[Forwarder] a ON a.[UserId] = u.[Id]
-	--	WHERE a.[Email] = @Email
-	--) AS t
-
 END
 GO
