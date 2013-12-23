@@ -40,7 +40,7 @@ namespace Alicargo.Controllers.User
 			var key = Guid.NewGuid().ToString();
 			SaveKey(id.Value, key);
 
-			var url = Url.Action(MVC.RestorePassword.NewPassword(id.Value, key));
+			var url = Url.Action(MVC.RestorePassword.NewPassword(id.Value, key), "http");
 			_sender.Send(new EmailMessage(Pages.RestorePassword, string.Format(Pages.RestorePasswordText, url),
 				EmailsHelper.DefaultFrom, email.Trim())
 			{
@@ -55,7 +55,7 @@ namespace Alicargo.Controllers.User
 		[HttpGet]
 		public virtual ActionResult NewPassword(long id, string key)
 		{
-			var savedKey = GetSavedKey(id);
+			var savedKey = GetSavedKey(GetCacheKey(id));
 
 			if (savedKey != key)
 			{
@@ -68,19 +68,20 @@ namespace Alicargo.Controllers.User
 		[HttpPost]
 		public virtual ActionResult NewPassword(long id, string key, string password)
 		{
-			var savedKey = GetSavedKey(id);
+			var cacheKey = GetCacheKey(id);
+			var savedKey = GetSavedKey(cacheKey);
 
 			if (savedKey != key)
 			{
 				return RedirectToAction(MVC.RestorePassword.UnknownKey());
 			}
 
-			HttpContext.Cache.Remove(GetCacheKey(id));
+			RemoveKey(cacheKey);
 
 			_users.SetPassword(id, password);
 
 			return RedirectToAction(MVC.RestorePassword.Success());
-		}
+		}		
 
 		[HttpGet]
 		public virtual ViewResult Finish()
@@ -100,22 +101,29 @@ namespace Alicargo.Controllers.User
 			return View();
 		}
 
+		private void RemoveKey(string cacheKey)
+		{
+			HttpContext.Cache.Remove(cacheKey);
+		}
+
 		private void SaveKey(long id, string key)
 		{
-			HttpContext.Cache.Add(GetCacheKey(id), key, null, DateTime.Now.AddHours(1),
+			var cacheKey = GetCacheKey(id);
+
+			RemoveKey(cacheKey);
+
+			HttpContext.Cache.Add(cacheKey, key, null, DateTime.Now.AddHours(1),
 				Cache.NoSlidingExpiration, CacheItemPriority.Default, null);
+		}
+
+		private string GetSavedKey(string cacheKey)
+		{
+			return (string)HttpContext.Cache[cacheKey];
 		}
 
 		private static string GetCacheKey(long id)
 		{
 			return "restore-password-key-" + id;
-		}
-
-		private string GetSavedKey(long id)
-		{
-			var key = GetCacheKey(id);
-
-			return (string)HttpContext.Cache[key];
 		}
 	}
 }
