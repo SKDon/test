@@ -1,6 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.Contracts.Repositories.User
 {
 	public interface IClientFileRepository
 	{
