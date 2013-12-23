@@ -37,13 +37,7 @@ namespace Alicargo.Controllers.User
 			_authentication.SignOut();
 
 			return RedirectToAction(MVC.Home.Index());
-		}
-
-		[HttpGet]
-		public virtual ViewResult RestorePassword()
-		{
-			return View();
-		}
+		}		
 
 		[HttpPost]
 		public virtual ActionResult Login(SignIdModel user)

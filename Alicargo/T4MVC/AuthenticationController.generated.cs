@@ -77,7 +77,6 @@ namespace Alicargo.Controllers.User
         {
             public readonly string Login = "Login";
             public readonly string SignOut = "SignOut";
-            public readonly string RestorePassword = "RestorePassword";
             public readonly string LoginAsUser = "LoginAsUser";
             public readonly string LoginAsClient = "LoginAsClient";
             public readonly string Client = "Client";
@@ -88,7 +87,6 @@ namespace Alicargo.Controllers.User
         {
             public const string Login = "Login";
             public const string SignOut = "SignOut";
-            public const string RestorePassword = "RestorePassword";
             public const string LoginAsUser = "LoginAsUser";
             public const string LoginAsClient = "LoginAsClient";
             public const string Client = "Client";
@@ -139,11 +137,9 @@ namespace Alicargo.Controllers.User
             {
                 public readonly string Client = "Client";
                 public readonly string Login = "Login";
-                public readonly string RestorePassword = "RestorePassword";
             }
             public readonly string Client = "~/Views/Authentication/Client.cshtml";
             public readonly string Login = "~/Views/Authentication/Login.cshtml";
-            public readonly string RestorePassword = "~/Views/Authentication/RestorePassword.cshtml";
         }
     }
 
@@ -167,15 +163,6 @@ namespace Alicargo.Controllers.User
         {
             var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.SignOut);
             SignOutOverride(callInfo);
-            return callInfo;
-        }
-
-        partial void RestorePasswordOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
-
-        public override System.Web.Mvc.ViewResult RestorePassword()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.RestorePassword);
-            RestorePasswordOverride(callInfo);
             return callInfo;
         }
 

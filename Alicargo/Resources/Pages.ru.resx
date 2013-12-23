@@ -348,4 +348,7 @@
   <data name="InputEmail" xml:space="preserve">
     <value>Введите ваш почтовый ящик</value>
   </data>
+  <data name="RestorePasswordFinish" xml:space="preserve">
+    <value>Вам выслано письмо с дальнейшими инструкциями по восстановлению пароля</value>
+  </data>
 </root>

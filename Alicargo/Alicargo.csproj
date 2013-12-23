@@ -162,6 +162,7 @@
     <Compile Include="Controllers\Calculation\PaymentController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
+    <Compile Include="Controllers\User\RestorePasswordController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
     <Compile Include="Resources\ApplicationEventType.ru.Designer.cs">
@@ -377,6 +378,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\PaymentController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\RestorePasswordController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SenderApplicationController.generated.cs">
@@ -770,7 +774,8 @@
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\EditorTemplates\PaymentModel.cshtml" />
     <Content Include="Views\Payment\Payment.cshtml" />
-    <Content Include="Views\Authentication\RestorePassword.cshtml" />
+    <Content Include="Views\RestorePassword\Index.cshtml" />
+    <Content Include="Views\RestorePassword\Finish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

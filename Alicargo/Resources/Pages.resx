@@ -348,4 +348,7 @@
   <data name="InputEmail" xml:space="preserve">
     <value>Input your email</value>
   </data>
+  <data name="RestorePasswordFinish" xml:space="preserve">
+    <value>You will receive an email with further instructions on how to reset your password</value>
+  </data>
 </root>

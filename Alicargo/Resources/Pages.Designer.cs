@@ -556,6 +556,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You will receive an email with further instructions on how to reset your password.
+        /// </summary>
+        public static string RestorePasswordFinish {
+            get {
+                return ResourceManager.GetString("RestorePasswordFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Russian.
         /// </summary>
         public static string Russian {
