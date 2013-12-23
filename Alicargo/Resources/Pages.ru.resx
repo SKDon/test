@@ -351,4 +351,13 @@
   <data name="RestorePasswordFinish" xml:space="preserve">
     <value>Вам выслано письмо с дальнейшими инструкциями по восстановлению пароля</value>
   </data>
+  <data name="RestorePasswordText" xml:space="preserve">
+    <value>Пройдите &lt;a href='{0}'&gt;по ссылке&lt;/a&gt;, чтобы задать новый пароль.&lt;br/&gt;Ссылка будет активна втечение часа.&lt;br/&gt;&lt;br/&gt;С уважением,&lt;br/&gt;Alicargo  srl</value>
+  </data>
+  <data name="RestorePasswordSuccess" xml:space="preserve">
+    <value>Пароль успешно обновлен</value>
+  </data>
+  <data name="RestorePasswordUnknownKey" xml:space="preserve">
+    <value>Ключ восстановления пароля невалидный</value>
+  </data>
 </root>

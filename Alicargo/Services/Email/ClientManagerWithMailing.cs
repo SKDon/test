@@ -1,6 +1,6 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -12,7 +12,6 @@ namespace Alicargo.Services.Email
 {
 	internal sealed class ClientManagerWithMailing : IClientManager
 	{
-		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
 		private readonly IMailSender _mailSender;
 		private readonly IClientManager _manager;
 		private readonly IMessageBuilder _messageBuilder;
@@ -54,7 +53,7 @@ namespace Alicargo.Services.Email
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);
 			var admins = _admins.GetAll().Select(x => x.Email).ToArray();
 
-			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, DefaultFrom, model.Emails) { CopyTo = admins });
+			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, EmailsHelper.DefaultFrom, model.Emails) { CopyTo = admins });
 		}
 	}
 }

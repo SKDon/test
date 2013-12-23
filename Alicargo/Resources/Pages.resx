@@ -351,4 +351,13 @@
   <data name="RestorePasswordFinish" xml:space="preserve">
     <value>You will receive an email with further instructions on how to reset your password</value>
   </data>
+  <data name="RestorePasswordText" xml:space="preserve">
+    <value>Follow &lt;a href='{0}'&gt;the link&lt;/a&gt; to create a new password.&lt;br/&gt;The link will be active for an hour.&lt;br/&gt;&lt;br/&gt;Sincerely,&lt;br/&gt;Alicargo  srl</value>
+  </data>
+  <data name="RestorePasswordSuccess" xml:space="preserve">
+    <value>Password updated successfully</value>
+  </data>
+  <data name="RestorePasswordUnknownKey" xml:space="preserve">
+    <value>Recovery key password is invalid</value>
+  </data>
 </root>

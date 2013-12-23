@@ -776,6 +776,9 @@
     <Content Include="Views\Payment\Payment.cshtml" />
     <Content Include="Views\RestorePassword\Index.cshtml" />
     <Content Include="Views\RestorePassword\Finish.cshtml" />
+    <Content Include="Views\RestorePassword\NewPassword.cshtml" />
+    <Content Include="Views\RestorePassword\UnknownKey.cshtml" />
+    <Content Include="Views\RestorePassword\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

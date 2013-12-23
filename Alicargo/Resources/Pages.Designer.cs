@@ -565,6 +565,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password updated successfully.
+        /// </summary>
+        public static string RestorePasswordSuccess {
+            get {
+                return ResourceManager.GetString("RestorePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow &lt;a href=&apos;{0}&apos;&gt;the link&lt;/a&gt; to create a new password.&lt;br/&gt;The link will be active for an hour.&lt;br/&gt;&lt;br/&gt;Sincerely,&lt;br/&gt;Alicargo  srl.
+        /// </summary>
+        public static string RestorePasswordText {
+            get {
+                return ResourceManager.GetString("RestorePasswordText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovery key password is invalid.
+        /// </summary>
+        public static string RestorePasswordUnknownKey {
+            get {
+                return ResourceManager.GetString("RestorePasswordUnknownKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Russian.
         /// </summary>
         public static string Russian {

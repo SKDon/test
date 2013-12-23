@@ -1,6 +1,6 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
@@ -10,8 +10,7 @@ using Alicargo.ViewModels.AirWaybill;
 namespace Alicargo.Services.Email
 {
 	internal sealed class AwbUpdateManagerWithMailing : IAwbUpdateManager
-	{
-		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
+	{		
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IAdminRepository _admins;
@@ -85,7 +84,7 @@ namespace Alicargo.Services.Email
 					.Select(x => x.Email)
 					.ToArray();
 				var file = _awbRepository.GetInvoiceFile(model.Id);
-				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, to) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, EmailsHelper.DefaultFrom, to) { Files = new[] { file } });
 			}
 
 			if (oldData.AWBFileName == null && model.AWBFileName != null)
@@ -98,7 +97,7 @@ namespace Alicargo.Services.Email
 					.ToArray();
 				var file = _awbRepository.GetAWBFile(model.Id);
 
-				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, to) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, EmailsHelper.DefaultFrom, to) { Files = new[] { file } });
 			}
 
 			if (oldData.PackingFileName == null && model.PackingFileName != null)
@@ -107,7 +106,7 @@ namespace Alicargo.Services.Email
 				var to = new[] { broker.Email }.Concat(_admins.GetAll().Select(x => x.Email)).ToArray();
 				var file = _awbRepository.GetPackingFile(model.Id);
 
-				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, to) { Files = new[] { file } });
+				_mailSender.Send(new EmailMessage(subject, body, EmailsHelper.DefaultFrom, to) { Files = new[] { file } });
 			}
 
 			if (oldData.GTDFileName == null && model.GTDFileName != null)
@@ -116,9 +115,9 @@ namespace Alicargo.Services.Email
 				var file = _awbRepository.GetGTDFile(model.Id);
 				foreach (var client in _awbRepository.GetClientEmails(model.Id))
 				{
-					_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, client) { Files = new[] { file } });
+					_mailSender.Send(new EmailMessage(subject, body, EmailsHelper.DefaultFrom, client) { Files = new[] { file } });
 				}
-				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom,
+				_mailSender.Send(new EmailMessage(subject, body, EmailsHelper.DefaultFrom,
 					_admins.GetAll().Select(x => x.Email).ToArray())
 				{
 					Files = new[] { file }
@@ -131,9 +130,9 @@ namespace Alicargo.Services.Email
 				var file = _awbRepository.GTDAdditionalFile(model.Id);
 				foreach (var client in _awbRepository.GetClientEmails(model.Id))
 				{
-					_mailSender.Send(new EmailMessage(subject, body, DefaultFrom, client) { Files = new[] { file } });
+					_mailSender.Send(new EmailMessage(subject, body, EmailsHelper.DefaultFrom, client) { Files = new[] { file } });
 				}
-				_mailSender.Send(new EmailMessage(subject, body, DefaultFrom,
+				_mailSender.Send(new EmailMessage(subject, body, EmailsHelper.DefaultFrom,
 					_admins.GetAll().Select(x => x.Email).ToArray())
 				{
 					Files = new[] { file }

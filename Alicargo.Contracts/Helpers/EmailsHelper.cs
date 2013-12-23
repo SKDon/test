@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -6,6 +7,8 @@ namespace Alicargo.Contracts.Helpers
 {
 	public static class EmailsHelper
 	{
+		public static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
+
 		private const string EmailPattern = @".+@.+\..+";
 
 		private const RegexOptions EmailRegexOptions =

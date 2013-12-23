@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
@@ -27,7 +28,6 @@ namespace Alicargo.App_Start
 		private static readonly TimeSpan DeadTimeout = TimeSpan.FromMinutes(30);
 		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
-		private static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
 
 		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
@@ -89,7 +89,7 @@ namespace Alicargo.App_Start
 				var calculations = new CalculationRepository(unitOfWork);
 				var mailSender = new SilentMailSender(new MailSender(), JobsLogger);
 				var mailer = new CalculationMailer(mailSender,
-					new CalculationMailBuilder(clients, new AdminRepository(unitOfWork), DefaultFrom));
+					new CalculationMailBuilder(clients, new AdminRepository(unitOfWork), EmailsHelper.DefaultFrom));
 
 				var job = new CalculationMailerJob(calculations, mailer, JobsLogger);
 
@@ -161,7 +161,7 @@ namespace Alicargo.App_Start
 				templates);
 			var templatesFacade = new TemplatesFacade(serializer, templates);
 
-			return new MessageFactory(DefaultFrom, filesFasade, textBulder, recipientsFacade, templatesFacade, applications);
+			return new MessageFactory(EmailsHelper.DefaultFrom, filesFasade, textBulder, recipientsFacade, templatesFacade, applications);
 		}
 	}
 }

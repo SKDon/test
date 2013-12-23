@@ -38,6 +38,13 @@ namespace Alicargo.App_Start
 				);
 
 			routes.MapRoute(
+				"RestorePassword",
+				"RestorePassword/NewPassword/{id}/{key}",
+				new { controller = "RestorePassword", action = "NewPassword" },
+				new[] { "Alicargo.Controllers.User" }
+				);
+
+			routes.MapRoute(
 				"Default",
 				"{controller}/{action}/{id}",
 				new { controller = "Home", action = "Index", id = UrlParameter.Optional },

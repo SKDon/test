@@ -1,5 +1,5 @@
-﻿using System.Configuration;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
@@ -44,8 +44,6 @@ namespace Alicargo.Services.Email
 
 			var aggregate = _awbPresenter.GetAggregate(awbId.Value);
 
-			var from = ConfigurationManager.AppSettings["DefaultFrom"];
-
 			var to = _forwarders.GetAll();
 
 			foreach (var recipient in to)
@@ -56,7 +54,7 @@ namespace Alicargo.Services.Email
 					recipient.Language,
 					aggregate.TotalWeight,
 					aggregate.TotalCount);
-				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, from, recipient.Email));
+				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, EmailsHelper.DefaultFrom, recipient.Email));
 			}
 		}
 	}

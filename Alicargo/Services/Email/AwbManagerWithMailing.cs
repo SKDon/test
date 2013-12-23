@@ -1,7 +1,7 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -68,13 +68,11 @@ namespace Alicargo.Services.Email
 
 			var aggregate = _awbPresenter.GetAggregate(awbId);
 
-			var from = ConfigurationManager.AppSettings["DefaultFrom"];
-
 			foreach (var recipient in to)
 			{
 				var body = _messageBuilder.AwbCreate(model, recipient.Culture, aggregate.TotalWeight,
 					aggregate.TotalCount);
-				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, from, recipient.Email));
+				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, EmailsHelper.DefaultFrom, recipient.Email));
 			}
 		}
 	}
