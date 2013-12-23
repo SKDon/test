@@ -7,6 +7,9 @@
 	@Html.TextBoxFor(x => x.Login, new { @class = "input-block-level", placeholder = Pages.Login })
 	@Html.PasswordFor(x => x.Password, new { @class = "input-block-level", placeholder = Pages.Password })
 	<label class="checkbox">
+		<span class="pull-right">
+			@Html.ActionLink(Pages.RestorePassword, MVC.Authentication.RestorePassword())
+		</span>
 		@Html.CheckBoxFor(x => x.RememberMe)@Pages.RememberMe
 	</label>
 	@Html.ValidationSummary(true)

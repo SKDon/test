@@ -342,4 +342,10 @@
   <data name="History" xml:space="preserve">
     <value>History</value>
   </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Restore password</value>
+  </data>
+  <data name="InputEmail" xml:space="preserve">
+    <value>Input your email</value>
+  </data>
 </root>

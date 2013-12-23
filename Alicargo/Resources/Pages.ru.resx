@@ -342,4 +342,10 @@
   <data name="Payment" xml:space="preserve">
     <value>Оплата</value>
   </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Восстановить пароль</value>
+  </data>
+  <data name="InputEmail" xml:space="preserve">
+    <value>Введите ваш почтовый ящик</value>
+  </data>
 </root>

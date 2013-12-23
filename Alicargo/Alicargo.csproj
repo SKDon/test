@@ -770,6 +770,7 @@
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\EditorTemplates\PaymentModel.cshtml" />
     <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\Authentication\RestorePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -439,6 +439,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input your email.
+        /// </summary>
+        public static string InputEmail {
+            get {
+                return ResourceManager.GetString("InputEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Italian.
         /// </summary>
         public static string Italian {
@@ -534,6 +543,15 @@ namespace Resources {
         public static string Report {
             get {
                 return ResourceManager.GetString("Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore password.
+        /// </summary>
+        public static string RestorePassword {
+            get {
+                return ResourceManager.GetString("RestorePassword", resourceCulture);
             }
         }
         

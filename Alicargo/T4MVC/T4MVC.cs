@@ -364,6 +364,8 @@ namespace Links
                  
             public static readonly string layout_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/layout.min.css") ? Url("layout.min.css") : Url("layout.css");
                  
+            public static readonly string payment_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/payment.min.css") ? Url("payment.min.css") : Url("payment.css");
+                 
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
