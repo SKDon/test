@@ -5,6 +5,7 @@ using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs.Calculation
 {
+	// todo: remove this class and use partitions in the Calculation table to eliminate racing between jobs
 	public sealed class CalculationWatcherJob : IJob
 	{
 		private readonly TimeSpan _deadTimeout;
