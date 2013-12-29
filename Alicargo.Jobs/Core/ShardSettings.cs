@@ -2,13 +2,13 @@
 {
 	public sealed class ShardSettings
 	{
-		public ShardSettings(int zeroBasedIndex, int total)
+		public ShardSettings(int zeroBasedIndex, int count)
 		{
 			ZeroBasedIndex = zeroBasedIndex;
-			Total = total;
+			Count = count;
 		}
 
-		public int Total { get; private set; }
+		public int Count { get; private set; }
 		public int ZeroBasedIndex { get; private set; }
 	}
 }

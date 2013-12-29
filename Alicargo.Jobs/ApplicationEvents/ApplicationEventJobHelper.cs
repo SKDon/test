@@ -15,7 +15,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 			Action<ApplicationEventData> action,
 			ApplicationEventState nextState)
 		{
-			var data = events.GetNext(nextState, shard.ZeroBasedIndex, shard.Total);
+			var data = events.GetNext(nextState, shard.ZeroBasedIndex, shard.Count);
 
 			while (data != null)
 			{
@@ -33,7 +33,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 					throw;
 				}
 
-				data = events.GetNext(nextState, shard.ZeroBasedIndex, shard.Total);
+				data = events.GetNext(nextState, shard.ZeroBasedIndex, shard.Count);
 			}
 		}
 	}

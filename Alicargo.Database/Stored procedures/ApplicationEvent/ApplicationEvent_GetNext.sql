@@ -1,17 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[ApplicationEvent_GetNext]
 	@State INT,
-	@Index INT,
-	@Total INT
-AS
+	@ShardIndex INT,
+	@ShardCount INT
+
+AS BEGIN
 	SET NOCOUNT ON;
 
-	SELECT TOP(1) 
+	SELECT	TOP(1) 
 			e.[Id],
 			e.[ApplicationId],
 			e.[EventTypeId] AS EventType,
 			e.[Data]
 	FROM [dbo].[ApplicationEvent] e
-	WHERE e.[StateId] = @State AND e.[ApplicationId] % @Total = @Index
+	WHERE e.[StateId] = @State AND e.[ApplicationId] % @ShardCount = @ShardIndex
 	ORDER BY e.[Id]
 
+END
 GO
