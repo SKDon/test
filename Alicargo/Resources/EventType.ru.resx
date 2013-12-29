@@ -117,11 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationCreated" xml:space="preserve">
+    <value>Созадние заявки</value>
+  </data>
+  <data name="ApplicationSetState" xml:space="preserve">
+    <value>Установка статуса</value>
+  </data>
+  <data name="BalanceDecreased" xml:space="preserve">
+    <value>Баланс клиента уменьшен</value>
+  </data>
+  <data name="BalanceIncreased" xml:space="preserve">
+    <value>Баланс клиента увеличен</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Расчет</value>
+  </data>
+  <data name="CalculationCanceled" xml:space="preserve">
+    <value>Расчет отменен</value>
+  </data>
   <data name="CPFileUploaded" xml:space="preserve">
     <value>Загружена счет-фактура</value>
-  </data>
-  <data name="Created" xml:space="preserve">
-    <value>Созадние заявки</value>
   </data>
   <data name="DeliveryBillFileUploaded" xml:space="preserve">
     <value>Загружен Счет за доставку</value>
@@ -134,9 +149,6 @@
   </data>
   <data name="SetDateOfCargoReceipt" xml:space="preserve">
     <value>Установлена дата получения груза</value>
-  </data>
-  <data name="SetState" xml:space="preserve">
-    <value>Установка статуса</value>
   </data>
   <data name="SetTransitReference" xml:space="preserve">
     <value>Установлен транзитный референс</value>

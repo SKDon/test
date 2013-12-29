@@ -19,7 +19,7 @@ namespace Alicargo.Services.Calculation
 		{
 			_service.Calculate(applicationId);
 
-			_events.Add(applicationId, EventType.CalculationFinished, EventState.Default);
+			_events.Add(applicationId, EventType.Calculate, EventState.Default);
 		}
 
 		public void CancelCalculatation(long applicationId)

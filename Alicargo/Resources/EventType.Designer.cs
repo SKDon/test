@@ -61,20 +61,65 @@ namespace Alicargo.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application is created.
+        /// </summary>
+        public static string ApplicationCreated {
+            get {
+                return ResourceManager.GetString("ApplicationCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set state.
+        /// </summary>
+        public static string ApplicationSetState {
+            get {
+                return ResourceManager.GetString("ApplicationSetState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Balance decreased.
+        /// </summary>
+        public static string BalanceDecreased {
+            get {
+                return ResourceManager.GetString("BalanceDecreased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Balance increased.
+        /// </summary>
+        public static string BalanceIncreased {
+            get {
+                return ResourceManager.GetString("BalanceIncreased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculate.
+        /// </summary>
+        public static string Calculate {
+            get {
+                return ResourceManager.GetString("Calculate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculation canceled.
+        /// </summary>
+        public static string CalculationCanceled {
+            get {
+                return ResourceManager.GetString("CalculationCanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CP file is uploaded.
         /// </summary>
         public static string CPFileUploaded {
             get {
                 return ResourceManager.GetString("CPFileUploaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Application is created.
-        /// </summary>
-        public static string Created {
-            get {
-                return ResourceManager.GetString("Created", resourceCulture);
             }
         }
         
@@ -111,15 +156,6 @@ namespace Alicargo.Resources {
         public static string SetDateOfCargoReceipt {
             get {
                 return ResourceManager.GetString("SetDateOfCargoReceipt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set state.
-        /// </summary>
-        public static string SetState {
-            get {
-                return ResourceManager.GetString("SetState", resourceCulture);
             }
         }
         

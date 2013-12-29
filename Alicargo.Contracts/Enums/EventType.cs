@@ -15,7 +15,7 @@
 		SetDateOfCargoReceipt = 9,
 		SetTransitReference = 10,
 
-		CalculationFinished = 11,
+		Calculate = 11,
 		CalculationCanceled = 12,
 
 		BalanceIncreased = 13,

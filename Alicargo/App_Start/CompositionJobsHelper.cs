@@ -13,7 +13,6 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
-using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Events.Helpers;
 using Alicargo.Services;
@@ -33,7 +32,7 @@ namespace Alicargo.App_Start
 
 		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
-			const string calculationMailerJob = "CalculationMailerJob_";
+			//const string calculationMailerJob = "CalculationMailerJob_";
 			const string applicationMailCreatorJob = "ApplicationMailCreatorJob_";
 			const string applicationStateHistoryJob = "ApplicationStateHistoryJob_";
 			const string mailSenderJobJob = "MailSenderJob_";
@@ -69,23 +68,23 @@ namespace Alicargo.App_Start
 				.Named(jobName);
 		}
 
-		[Obsolete]
-		private static void RunCalculationMailerJob(string connectionString)
-		{
-			using (var connection = new SqlConnection(connectionString))
-			{
-				var unitOfWork = new UnitOfWork(connection);
-				var clients = new ClientRepository(unitOfWork);
-				var calculations = new CalculationRepository(unitOfWork);
-				var mailSender = new SilentMailSender(new MailSender(), JobsLogger);
-				var mailer = new CalculationMailer(mailSender,
-					new CalculationMailBuilder(clients, new AdminRepository(unitOfWork), EmailsHelper.DefaultFrom));
+		//[Obsolete]
+		//private static void RunCalculationMailerJob(string connectionString)
+		//{
+		//	using (var connection = new SqlConnection(connectionString))
+		//	{
+		//		var unitOfWork = new UnitOfWork(connection);
+		//		var clients = new ClientRepository(unitOfWork);
+		//		var calculations = new CalculationRepository(unitOfWork);
+		//		var mailSender = new SilentMailSender(new MailSender(), JobsLogger);
+		//		var mailer = new CalculationMailer(mailSender,
+		//			new CalculationMailBuilder(clients, new AdminRepository(unitOfWork), EmailsHelper.DefaultFrom));
 
-				var job = new CalculationMailerJob(calculations, mailer, JobsLogger);
+		//		var job = new CalculationMailerJob(calculations, mailer, JobsLogger);
 
-				job.Run();
-			}
-		}
+		//		job.Run();
+		//	}
+		//}
 
 		private static void RunApplicationMailCreatorJob(string connectionString, string filesConnectionString,
 			int partitionId)
@@ -127,7 +126,7 @@ namespace Alicargo.App_Start
 		}
 
 		private static IMessageFactory GetMessageFactory(IDbConnection connection, string connectionString,
-			string filesConnectionString, Serializer serializer)
+			string filesConnectionString, ISerializer serializer)
 		{
 			var unitOfWork = new UnitOfWork(connection);
 			var passwordConverter = new PasswordConverter();

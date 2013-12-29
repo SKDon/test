@@ -117,11 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationCreated" xml:space="preserve">
+    <value>Application is created</value>
+  </data>
+  <data name="ApplicationSetState" xml:space="preserve">
+    <value>Set state</value>
+  </data>
+  <data name="BalanceDecreased" xml:space="preserve">
+    <value>Balance decreased</value>
+  </data>
+  <data name="BalanceIncreased" xml:space="preserve">
+    <value>Balance increased</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="CalculationCanceled" xml:space="preserve">
+    <value>Calculation canceled</value>
+  </data>
   <data name="CPFileUploaded" xml:space="preserve">
     <value>CP file is uploaded</value>
-  </data>
-  <data name="Created" xml:space="preserve">
-    <value>Application is created</value>
   </data>
   <data name="DeliveryBillFileUploaded" xml:space="preserve">
     <value>Delivery bill file is uploaded</value>
@@ -134,9 +149,6 @@
   </data>
   <data name="SetDateOfCargoReceipt" xml:space="preserve">
     <value>Set date of cargo receipt</value>
-  </data>
-  <data name="SetState" xml:space="preserve">
-    <value>Set state</value>
   </data>
   <data name="SetTransitReference" xml:space="preserve">
     <value>Set transit reference</value>
