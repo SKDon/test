@@ -47,7 +47,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var data = _templates.GetByStateId(id);
 
-			data.UseApplicationEventTemplate.Should().BeTrue();
+			data.UseEventTemplate.Should().BeTrue();
 
 			data.EnableEmailSend.Should().BeFalse();
 
@@ -57,7 +57,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_Set_SetForApplicationEvent()
+		public void Test_Set_SetForEvent()
 		{
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
@@ -65,7 +65,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var recipients = _fixture.CreateMany<RoleType>().ToArray();
 
-			_templates.SetForApplicationEvent(eventType, TwoLetterISOLanguageName.English, false, recipients, localizationData);
+			_templates.SetForEvent(eventType, TwoLetterISOLanguageName.English, false, recipients, localizationData);
 
 			var data = _templates.GetByEventType(eventType);
 
@@ -100,7 +100,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			data.EnableEmailSend.Should().BeTrue();
 
-			data.UseApplicationEventTemplate.Should().BeFalse();
+			data.UseEventTemplate.Should().BeFalse();
 
 			var localization = _templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English);
 
@@ -124,7 +124,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			data.EnableEmailSend.Should().BeTrue();
 
-			data.UseApplicationEventTemplate.Should().BeFalse();
+			data.UseEventTemplate.Should().BeFalse();
 
 			_templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English).ShouldBeEquivalentTo(localizationData);
 

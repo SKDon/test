@@ -13,6 +13,8 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.Jobs.Events;
+using Alicargo.Jobs.Events.Helpers;
 using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Services;

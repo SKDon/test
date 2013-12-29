@@ -111,7 +111,7 @@ namespace Alicargo.Controllers
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string ApplicationEventTemplateModel = "ApplicationEventTemplateModel";
+                public readonly string EventTemplateModel = "EventTemplateModel";
             }
         }
     }
@@ -159,9 +159,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.EmailTemplate.ApplicationEventTemplateModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.EmailTemplate.EventTemplateModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.EmailTemplate.ApplicationEventTemplateModel model)
+        public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.EmailTemplate.EventTemplateModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

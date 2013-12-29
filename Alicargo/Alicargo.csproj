@@ -165,15 +165,15 @@
     <Compile Include="Controllers\User\RestorePasswordController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
-    <Compile Include="Resources\ApplicationEventType.ru.Designer.cs">
-      <DependentUpon>ApplicationEventType.ru.resx</DependentUpon>
+    <Compile Include="Resources\EventType.ru.Designer.cs">
+      <DependentUpon>EventType.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\ApplicationEventType.Designer.cs">
+    <Compile Include="Resources\EventType.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ApplicationEventType.resx</DependentUpon>
+      <DependentUpon>EventType.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
@@ -758,7 +758,7 @@
     <Content Include="Views\StateSettings\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Edit.cshtml" />
-    <Content Include="Views\EmailTemplate\EditorTemplates\ApplicationEventTemplateModel.cshtml" />
+    <Content Include="Views\EmailTemplate\EditorTemplates\EventTemplateModel.cshtml" />
     <Content Include="Views\EmailTemplate\Help.cshtml" />
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\City\Edit.cshtml" />
@@ -807,13 +807,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ApplicationEventType.ru.resx">
+    <EmbeddedResource Include="Resources\EventType.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationEventType.ru.Designer.cs</LastGenOutput>
+      <LastGenOutput>EventType.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ApplicationEventType.resx">
+    <EmbeddedResource Include="Resources\EventType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationEventType.Designer.cs</LastGenOutput>
+      <LastGenOutput>EventType.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Validation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

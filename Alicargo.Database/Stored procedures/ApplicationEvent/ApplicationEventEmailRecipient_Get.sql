@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[ApplicationEventEmailRecipient_Get]
+﻿CREATE PROCEDURE [dbo].[EventEmailRecipient_Get]
 	@EventTypeId INT
 AS
 BEGIN
 	SET NOCOUNT ON;
 
 	SELECT [RoleId]
-	FROM [dbo].[ApplicationEventEmailRecipient]
+	FROM [dbo].[EventEmailRecipient]
 	WHERE [EventTypeId] = @EventTypeId
 END
 GO

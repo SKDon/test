@@ -6,7 +6,7 @@
 AS
 	SET NOCOUNT ON;
 
-	INSERT [dbo].[ApplicationEvent] ([ApplicationId], [EventTypeId], [StateId], [Data])
+	INSERT [dbo].[Event] ([ApplicationId], [EventTypeId], [StateId], [Data])
 	VALUES (@ApplicationId, @EventTypeId, @StateId, @Data)
 
 GO

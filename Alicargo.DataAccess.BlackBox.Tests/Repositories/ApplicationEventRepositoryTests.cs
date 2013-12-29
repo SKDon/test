@@ -18,7 +18,7 @@ using Ploeh.AutoFixture;
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 {
 	[TestClass]
-	public class ApplicationEventRepositoryTests
+	public class EventRepositoryTests
 	{
 		private DbTestContext _context;
 		private EventRepository _events;
@@ -50,7 +50,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
-				var count = connection.Query<int>("select count(1) from [dbo].[ApplicationEvent] where [ApplicationId] = @AppId AND [EventTypeId] = @Type",
+				var count = connection.Query<int>("select count(1) from [dbo].[Event] where [ApplicationId] = @AppId AND [EventTypeId] = @Type",
 					new { AppId = TestConstants.TestApplicationId, Type = EventType.ApplicationCreated }).First();
 
 				count.ShouldBeEquivalentTo(2);
@@ -60,7 +60,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
-				var count = connection.Query<int>("select count(1) from [dbo].[ApplicationEvent] where [ApplicationId] = @AppId",
+				var count = connection.Query<int>("select count(1) from [dbo].[Event] where [ApplicationId] = @AppId",
 					new { AppId = TestConstants.TestApplicationId, Type = EventType.ApplicationCreated }).First();
 
 				count.ShouldBeEquivalentTo(3);

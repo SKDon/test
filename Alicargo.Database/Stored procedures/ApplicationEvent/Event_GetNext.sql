@@ -11,7 +11,7 @@ AS BEGIN
 			e.[ApplicationId],
 			e.[EventTypeId] AS EventType,
 			e.[Data]
-	FROM [dbo].[ApplicationEvent] e
+	FROM [dbo].[Event] e
 	WHERE e.[StateId] = @State AND e.[ApplicationId] % @ShardCount = @ShardIndex
 	ORDER BY e.[Id]
 

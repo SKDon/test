@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ApplicationEventEmailRecipient_Set]
+﻿CREATE PROCEDURE [dbo].[EventEmailRecipient_Set]
 	@EventTypeId BIGINT,
 	@Recipients [dbo].[IdsTable] READONLY
 AS
@@ -8,14 +8,14 @@ BEGIN
 
 	BEGIN TRAN
 
-		DELETE [dbo].[ApplicationEventEmailRecipient]
+		DELETE [dbo].[EventEmailRecipient]
 		WHERE [EventTypeId] = @EventTypeId
 		AND [RoleId] NOT IN (SELECT [Id] FROM @Recipients)
 		
-		INSERT [dbo].[ApplicationEventEmailRecipient] ([EventTypeId], [RoleId])
+		INSERT [dbo].[EventEmailRecipient] ([EventTypeId], [RoleId])
 		SELECT @EventTypeId AS [StateId], r.[Id] AS [RoleId]
 		FROM @Recipients r
-		WHERE r.[Id] NOT IN (SELECT a.[RoleId] FROM [dbo].[ApplicationEventEmailRecipient] a WHERE a.[EventTypeId] = @EventTypeId)
+		WHERE r.[Id] NOT IN (SELECT a.[RoleId] FROM [dbo].[EventEmailRecipient] a WHERE a.[EventTypeId] = @EventTypeId)
 
 	COMMIT
 

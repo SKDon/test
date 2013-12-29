@@ -2,12 +2,12 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Jobs.ApplicationEvents.Entities;
-using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.Jobs.Events.Helpers;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.Tests.Events.Helpers
 {
 	[TestClass]
 	public class TemplatesFacadeTests
@@ -26,7 +26,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		[TestMethod]
 		public void Test_GetTemplateId_EnableEmailSend_False()
 		{
-			var eventTemplate = _container.Create<ApplicationEventTemplateData>();
+			var eventTemplate = _container.Create<EventTemplateData>();
 			eventTemplate.EnableEmailSend = false;
 			var eventType = _container.Create<EventType>();
 
@@ -38,17 +38,17 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		}
 
 		[TestMethod]
-		public void Test_GetTemplateId_UseApplicationEventTemplate_True()
+		public void Test_GetTemplateId_UseEventTemplate_True()
 		{
 			var bytes = _container.CreateMany<byte>().ToArray();
 			var stateTemplate = new StateEmailTemplateData
 			{
-				UseApplicationEventTemplate = true,
+				UseEventTemplate = true,
 				EnableEmailSend = true,
 				EmailTemplateId = _container.Create<long>()
 			};
 			var stateEventData = _container.Create<ApplicationSetStateEventData>();
-			var eventTemplate = _container.Create<ApplicationEventTemplateData>();
+			var eventTemplate = _container.Create<EventTemplateData>();
 			eventTemplate.EnableEmailSend = true;
 
 			_container.Serializer.Setup(x => x.Deserialize<ApplicationSetStateEventData>(bytes)).Returns(stateEventData);
@@ -61,15 +61,15 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		}
 
 		[TestMethod]
-		public void Test_GetTemplateId_UseApplicationEventTemplate_False()
+		public void Test_GetTemplateId_UseEventTemplate_False()
 		{
 			var bytes = _container.CreateMany<byte>().ToArray();
 			var stateEventData = _container.Create<ApplicationSetStateEventData>();
-			var eventTemplate = _container.Create<ApplicationEventTemplateData>();
+			var eventTemplate = _container.Create<EventTemplateData>();
 			eventTemplate.EnableEmailSend = true;
 			var stateTemplate = new StateEmailTemplateData
 			{
-				UseApplicationEventTemplate = false,
+				UseEventTemplate = false,
 				EnableEmailSend = true,
 				EmailTemplateId = _container.Create<long>()
 			};

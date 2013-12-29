@@ -4,7 +4,7 @@
 AS
 	SET NOCOUNT ON;
 
-	UPDATE TOP(1) [dbo].[ApplicationEvent]
+	UPDATE TOP(1) [dbo].[Event]
 	SET [StateId] = @State, [StateIdTimestamp] = GETUTCDATE()
 	WHERE [Id] = @Id
 

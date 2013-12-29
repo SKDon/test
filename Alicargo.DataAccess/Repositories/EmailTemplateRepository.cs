@@ -16,7 +16,7 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public void SetForState(long stateId, string language, bool enableEmailSend, bool useApplicationEventTemplate,
+		public void SetForState(long stateId, string language, bool enableEmailSend, bool useEventTemplate,
 			EmailTemplateLocalizationData localization)
 		{
 			_executor.Execute("[dbo].[EmailTemplate_MergeState]", new
@@ -27,16 +27,16 @@ namespace Alicargo.DataAccess.Repositories
 				localization.Subject,
 				TwoLetterISOLanguageName = language,
 				enableEmailSend,
-				useApplicationEventTemplate
+				useEventTemplate
 			});
 		}
 
-		public void SetForApplicationEvent(EventType eventType, string language, bool enableEmailSend,
+		public void SetForEvent(EventType eventType, string language, bool enableEmailSend,
 			RoleType[] recipients, EmailTemplateLocalizationData localization)
 		{
 			var table = TableParameters.GeIdsTable("Recipients", recipients.Select(x => (long)x).ToArray());
 
-			_executor.Execute("[dbo].[EmailTemplate_MergeApplicationEvent]", new
+			_executor.Execute("[dbo].[EmailTemplate_MergeEvent]", new
 			{
 				EventTypeId = eventType,
 				localization.Body,
@@ -46,12 +46,12 @@ namespace Alicargo.DataAccess.Repositories
 				enableEmailSend
 			});
 
-			_executor.Execute("[dbo].[ApplicationEventEmailRecipient_Set]", new TableParameters(new { EventTypeId = eventType }, table));
+			_executor.Execute("[dbo].[EventEmailRecipient_Set]", new TableParameters(new { EventTypeId = eventType }, table));
 		}
 
-		public ApplicationEventTemplateData GetByEventType(EventType eventType)
+		public EventTemplateData GetByEventType(EventType eventType)
 		{
-			return _executor.Query<ApplicationEventTemplateData>("[dbo].[EmailTemplate_GetByApplicationEvent]",
+			return _executor.Query<EventTemplateData>("[dbo].[EmailTemplate_GetByEvent]",
 				new { EventTypeId = (int)eventType });
 		}
 
@@ -62,7 +62,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public RoleType[] GetRecipientRoles(EventType eventType)
 		{
-			return _executor.Array<RoleType>("[dbo].[ApplicationEventEmailRecipient_Get]", new { EventTypeId = (int)eventType });
+			return _executor.Array<RoleType>("[dbo].[EventEmailRecipient_Get]", new { EventTypeId = (int)eventType });
 		}
 
 		public EmailTemplateLocalizationData GetLocalization(long templateId, string language)

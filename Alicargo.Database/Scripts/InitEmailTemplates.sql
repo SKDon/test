@@ -6,7 +6,7 @@ INSERT [dbo].[EmailTemplate] ([Id]) VALUES
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
-INSERT [dbo].[ApplicationEventEmailTemplate]
+INSERT [dbo].[EventEmailTemplate]
 ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES
 (1, 1, 1),
 (3, 2, 1),
@@ -256,7 +256,7 @@ SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] OFF
 
 
 INSERT [dbo].[StateEmailTemplate]
-([StateId],	[EmailTemplateId],	[EnableEmailSend],	[UseApplicationEventTemplate]) VALUES
+([StateId],	[EmailTemplateId],	[EnableEmailSend],	[UseEventTemplate]) VALUES
 (11,		11,					1,					1),
 (3,			12,					1,					1),
 (13,		13,					1,					1),
@@ -272,7 +272,7 @@ INSERT [dbo].[StateEmailTemplate]
 (14,		23,					1,					1)
 
 
-INSERT [dbo].[ApplicationEventEmailRecipient]
+INSERT [dbo].[EventEmailRecipient]
 ([RoleId], [EventTypeId]) VALUES
 (1, 1),
 (1, 2),

@@ -121,7 +121,7 @@ namespace Alicargo.Controllers
 				Position = model.Position
 			});
 
-			_templates.SetForState(model.Id, model.Language, model.EnableEmailSend, model.UseApplicationEventTemplate,
+			_templates.SetForState(model.Id, model.Language, model.EnableEmailSend, model.UseEventTemplate,
 				new EmailTemplateLocalizationData
 				{
 					Body = model.Body,
@@ -150,7 +150,7 @@ namespace Alicargo.Controllers
 				Body = localization != null ? localization.Body : null,
 				Position = state.Position,
 				EnableEmailSend = commonData != null && commonData.EnableEmailSend,
-				UseApplicationEventTemplate = commonData != null && commonData.UseApplicationEventTemplate
+				UseEventTemplate = commonData != null && commonData.UseEventTemplate
 			};
 		}
 

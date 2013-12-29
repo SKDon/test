@@ -49,7 +49,7 @@ namespace Alicargo.Controllers
 				.Select(x => new
 				{
 					Id = (int)x,
-					Name = Resources.ApplicationEventType.ResourceManager.GetString(x.ToString())
+					Name = Resources.EventType.ResourceManager.GetString(x.ToString())
 				})
 				.ToArray();
 
@@ -69,7 +69,7 @@ namespace Alicargo.Controllers
 
 		[HttpPost]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Edit(ApplicationEventTemplateModel model)
+		public virtual ActionResult Edit(EventTemplateModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -80,7 +80,7 @@ namespace Alicargo.Controllers
 
 			var roles = model.Settings.GetSettings();
 
-			_templates.SetForApplicationEvent(
+			_templates.SetForEvent(
 				model.EventType, model.Language, model.EnableEmailSend, roles,
 				new EmailTemplateLocalizationData
 				{
@@ -92,7 +92,7 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.EmailTemplate.Edit(model.EventType, model.Language));
 		}
 
-		private ApplicationEventTemplateModel GetModel(EventType eventType, string language)
+		private EventTemplateModel GetModel(EventType eventType, string language)
 		{
 			var commonData = _templates.GetByEventType(eventType);
 
@@ -100,7 +100,7 @@ namespace Alicargo.Controllers
 
 			var recipients = _templates.GetRecipientRoles(eventType);
 
-			return new ApplicationEventTemplateModel
+			return new EventTemplateModel
 			{
 				Body = localization != null ? localization.Body : null,
 				Subject = localization != null ? localization.Subject : null,

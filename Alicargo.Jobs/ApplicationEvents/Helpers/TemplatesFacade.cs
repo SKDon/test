@@ -7,7 +7,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.Events.Helpers
 {
 	public sealed class TemplatesFacade : ITemplatesFacade
 	{
@@ -35,7 +35,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			var stateEventData = _serializer.Deserialize<ApplicationSetStateEventData>(data);
 			var stateTemplate = _templates.GetByStateId(stateEventData.StateId);
-			if (stateTemplate != null && stateTemplate.EnableEmailSend && !stateTemplate.UseApplicationEventTemplate)
+			if (stateTemplate != null && stateTemplate.EnableEmailSend && !stateTemplate.UseEventTemplate)
 			{
 				return stateTemplate.EmailTemplateId;
 			}

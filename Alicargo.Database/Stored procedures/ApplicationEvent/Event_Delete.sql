@@ -4,7 +4,7 @@ AS
 	SET NOCOUNT ON;
 
 	DELETE TOP(1)
-	FROM [dbo].[ApplicationEvent]
+	FROM [dbo].[Event]
 	WHERE [Id] = @Id
 
 GO

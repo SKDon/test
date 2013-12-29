@@ -4,6 +4,6 @@
 	{
 		public long EmailTemplateId { get; set; }
 		public bool EnableEmailSend { get; set; }
-		public bool UseApplicationEventTemplate { get; set; }
+		public bool UseEventTemplate { get; set; }
 	}
 }

@@ -5,7 +5,7 @@ BEGIN
 	
 	SET NOCOUNT ON;
 
-	SELECT st.[EmailTemplateId], st.[EnableEmailSend], st.[UseApplicationEventTemplate]
+	SELECT st.[EmailTemplateId], st.[EnableEmailSend], st.[UseEventTemplate]
 	FROM  [dbo].[StateEmailTemplate] st
 	WHERE st.[StateId] = @StateId
 

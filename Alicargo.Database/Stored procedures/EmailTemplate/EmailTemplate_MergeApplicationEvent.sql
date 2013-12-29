@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[EmailTemplate_MergeApplicationEvent]
+﻿CREATE PROCEDURE [dbo].[EmailTemplate_MergeEvent]
 	@EventTypeId INT,
 	@Subject NVARCHAR (MAX),
 	@Body NVARCHAR (MAX),
@@ -13,7 +13,7 @@ BEGIN
 	DECLARE @TemplateId BIGINT;
 
 	SELECT TOP(1) @TemplateId = [EmailTemplateId]
-	FROM  [dbo].[ApplicationEventEmailTemplate]
+	FROM  [dbo].[EventEmailTemplate]
 	WHERE [EventTypeId] = @EventTypeId
 
 	IF @TemplateId IS NOT NULL BEGIN
@@ -32,7 +32,7 @@ BEGIN
 				INSERT ([EmailTemplateId], [Subject], [Body], [IsBodyHtml], [TwoLetterISOLanguageName])
 				VALUES (source.[EmailTemplateId], source.[Subject], source.[Body], source.[IsBodyHtml], source.[TwoLetterISOLanguageName]);
 
-			UPDATE TOP(1) [dbo].[ApplicationEventEmailTemplate]
+			UPDATE TOP(1) [dbo].[EventEmailTemplate]
 			SET [EnableEmailSend] = @EnableEmailSend
 			WHERE [EventTypeId] = @EventTypeId AND [EmailTemplateId] = @TemplateId
 		COMMIT
@@ -46,7 +46,7 @@ BEGIN
 					([EmailTemplateId], [Subject], [Body], [IsBodyHtml], [TwoLetterISOLanguageName])
 			VALUES (@TemplateId, @Subject, @Body, @IsBodyHtml, @TwoLetterISOLanguageName)
 
-			INSERT [dbo].[ApplicationEventEmailTemplate] 
+			INSERT [dbo].[EventEmailTemplate] 
 					([EmailTemplateId], [EnableEmailSend], [EventTypeId])
 			VALUES (@TemplateId, @EnableEmailSend, @EventTypeId);
 		COMMIT

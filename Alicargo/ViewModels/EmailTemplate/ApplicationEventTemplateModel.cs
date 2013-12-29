@@ -6,7 +6,7 @@ using Alicargo.Core.Resources;
 
 namespace Alicargo.ViewModels.EmailTemplate
 {
-	public sealed class ApplicationEventTemplateModel
+	public sealed class EventTemplateModel
 	{
 		[HiddenInput]
 		public EventType EventType { get; set; }

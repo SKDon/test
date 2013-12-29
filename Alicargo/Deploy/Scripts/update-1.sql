@@ -7,7 +7,7 @@ GO
 PRINT N'DROP OLD INDEXES AND CONSTRAINTS'
 GO
 
-DROP INDEX [IX_ApplicationEvent_StateId] ON [dbo].[ApplicationEvent];
+DROP INDEX [IX_ApplicationEvent_StateId] ON [dbo].[Event];
 GO
 
 DROP INDEX [IX_AvailableState_RoleId] ON [dbo].[AvailableState];
@@ -143,11 +143,11 @@ GO
 PRINT N'CREATING TABLES...'
 GO
 
-CREATE TABLE [dbo].[ApplicationEventEmailRecipient] (
+CREATE TABLE [dbo].[EventEmailRecipient] (
 	[RoleId] INT NOT NULL,
 	[EventTypeId] BIGINT NOT NULL,
 
-	CONSTRAINT [PK_dbo.ApplicationEventEmailRecipient] PRIMARY KEY CLUSTERED ([RoleId] ASC, [EventTypeId] ASC),
+	CONSTRAINT [PK_dbo.EventEmailRecipient] PRIMARY KEY CLUSTERED ([RoleId] ASC, [EventTypeId] ASC),
 );
 GO
 
@@ -157,15 +157,15 @@ CREATE TABLE [dbo].[EmailTemplate]
 );
 GO
 
-CREATE TABLE [dbo].[ApplicationEventEmailTemplate]
+CREATE TABLE [dbo].[EventEmailTemplate]
 (
 	[EventTypeId] BIGINT NOT NULL,
 	[EmailTemplateId] BIGINT NOT NULL,
 
-	[EnableEmailSend] BIT NOT NULL CONSTRAINT [DF_ApplicationEventEmailTemplate_EnableEmailSend] DEFAULT 1,
+	[EnableEmailSend] BIT NOT NULL CONSTRAINT [DF_EventEmailTemplate_EnableEmailSend] DEFAULT 1,
 	
-	CONSTRAINT [PK_dbo.ApplicationEventEmailTemplate] PRIMARY KEY CLUSTERED ([EmailTemplateId] ASC, [EventTypeId] ASC),
-	CONSTRAINT [FK_dbo.ApplicationEventEmailTemplate_dbo.EmailTemplate_EmailTemplateId] FOREIGN KEY
+	CONSTRAINT [PK_dbo.EventEmailTemplate] PRIMARY KEY CLUSTERED ([EmailTemplateId] ASC, [EventTypeId] ASC),
+	CONSTRAINT [FK_dbo.EventEmailTemplate_dbo.EmailTemplate_EmailTemplateId] FOREIGN KEY
 		([EmailTemplateId]) REFERENCES [dbo].[EmailTemplate] ([Id]) ON DELETE CASCADE
 );
 GO
@@ -202,7 +202,7 @@ CREATE TABLE [dbo].[StateEmailTemplate]
 	[EmailTemplateId] BIGINT NOT NULL,
 
 	[EnableEmailSend] BIT NOT NULL CONSTRAINT [DF_StateEmailTemplate_EnableEmailSend] DEFAULT 1,
-	[UseApplicationEventTemplate] BIT NOT NULL CONSTRAINT [DF_StateEmailTemplate_UseApplicationEventTemplate] DEFAULT 1,
+	[UseEventTemplate] BIT NOT NULL CONSTRAINT [DF_StateEmailTemplate_UseEventTemplate] DEFAULT 1,
 	
 	CONSTRAINT [PK_dbo.StateEmailTemplate] PRIMARY KEY CLUSTERED ([EmailTemplateId] ASC, [StateId] ASC),
 	CONSTRAINT [FK_dbo.StateEmailTemplate_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]) ON DELETE CASCADE,
@@ -221,19 +221,19 @@ CREATE TYPE [dbo].[StringsTable] AS TABLE
 );
 GO
 
-CREATE PROCEDURE [dbo].[ApplicationEventEmailRecipient_Get]
+CREATE PROCEDURE [dbo].[EventEmailRecipient_Get]
 	@EventTypeId INT
 AS
 BEGIN
 	SET NOCOUNT ON;
 
 	SELECT [RoleId]
-	FROM [dbo].[ApplicationEventEmailRecipient]
+	FROM [dbo].[EventEmailRecipient]
 	WHERE [EventTypeId] = @EventTypeId
 END
 GO
 
-CREATE PROCEDURE [dbo].[ApplicationEventEmailRecipient_Set]
+CREATE PROCEDURE [dbo].[EventEmailRecipient_Set]
 	@EventTypeId BIGINT,
 	@Recipients [dbo].[IdsTable] READONLY
 AS
@@ -243,14 +243,14 @@ BEGIN
 
 	BEGIN TRAN
 
-		DELETE [dbo].[ApplicationEventEmailRecipient]
+		DELETE [dbo].[EventEmailRecipient]
 		WHERE [EventTypeId] = @EventTypeId
 		AND [RoleId] NOT IN (SELECT [Id] FROM @Recipients)
 		
-		INSERT [dbo].[ApplicationEventEmailRecipient] ([EventTypeId], [RoleId])
+		INSERT [dbo].[EventEmailRecipient] ([EventTypeId], [RoleId])
 		SELECT @EventTypeId AS [StateId], r.[Id] AS [RoleId]
 		FROM @Recipients r
-		WHERE r.[Id] NOT IN (SELECT a.[RoleId] FROM [dbo].[ApplicationEventEmailRecipient] a WHERE a.[EventTypeId] = @EventTypeId)
+		WHERE r.[Id] NOT IN (SELECT a.[RoleId] FROM [dbo].[EventEmailRecipient] a WHERE a.[EventTypeId] = @EventTypeId)
 
 	COMMIT
 
@@ -285,7 +285,7 @@ BEGIN
 	
 	SET NOCOUNT ON;
 
-	SELECT st.[EmailTemplateId], st.[EnableEmailSend], st.[UseApplicationEventTemplate]
+	SELECT st.[EmailTemplateId], st.[EnableEmailSend], st.[UseEventTemplate]
 	FROM  [dbo].[StateEmailTemplate] st
 	WHERE st.[StateId] = @StateId
 
@@ -299,7 +299,7 @@ CREATE PROCEDURE [dbo].[EmailTemplate_MergeState]
 	@IsBodyHtml BIT,
 	@EnableEmailSend BIT,
 	@TwoLetterISOLanguageName CHAR(2),
-	@UseApplicationEventTemplate BIT
+	@UseEventTemplate BIT
 AS
 BEGIN
 	
@@ -329,7 +329,7 @@ BEGIN
 
 			UPDATE TOP(1) [dbo].[StateEmailTemplate]
 			SET [EnableEmailSend] = @EnableEmailSend,
-				[UseApplicationEventTemplate] = @UseApplicationEventTemplate
+				[UseEventTemplate] = @UseEventTemplate
 			WHERE [StateId] = @StateId AND [EmailTemplateId] = @TemplateId
 		COMMIT
 	END
@@ -343,15 +343,15 @@ BEGIN
 			VALUES (@TemplateId, @Subject, @Body, @IsBodyHtml, @TwoLetterISOLanguageName)
 
 			INSERT [dbo].[StateEmailTemplate] 
-					([EmailTemplateId], [EnableEmailSend], [StateId], [UseApplicationEventTemplate])
-			VALUES (@TemplateId, @EnableEmailSend, @StateId, @UseApplicationEventTemplate);
+					([EmailTemplateId], [EnableEmailSend], [StateId], [UseEventTemplate])
+			VALUES (@TemplateId, @EnableEmailSend, @StateId, @UseEventTemplate);
 		COMMIT
 	END
 
 END
 GO
 
-CREATE PROCEDURE [dbo].[EmailTemplate_MergeApplicationEvent]
+CREATE PROCEDURE [dbo].[EmailTemplate_MergeEvent]
 	@EventTypeId INT,
 	@Subject NVARCHAR (MAX),
 	@Body NVARCHAR (MAX),
@@ -366,7 +366,7 @@ BEGIN
 	DECLARE @TemplateId BIGINT;
 
 	SELECT TOP(1) @TemplateId = [EmailTemplateId]
-	FROM  [dbo].[ApplicationEventEmailTemplate]
+	FROM  [dbo].[EventEmailTemplate]
 	WHERE [EventTypeId] = @EventTypeId
 
 	IF @TemplateId IS NOT NULL BEGIN
@@ -385,7 +385,7 @@ BEGIN
 				INSERT ([EmailTemplateId], [Subject], [Body], [IsBodyHtml], [TwoLetterISOLanguageName])
 				VALUES (source.[EmailTemplateId], source.[Subject], source.[Body], source.[IsBodyHtml], source.[TwoLetterISOLanguageName]);
 
-			UPDATE TOP(1) [dbo].[ApplicationEventEmailTemplate]
+			UPDATE TOP(1) [dbo].[EventEmailTemplate]
 			SET [EnableEmailSend] = @EnableEmailSend
 			WHERE [EventTypeId] = @EventTypeId AND [EmailTemplateId] = @TemplateId
 		COMMIT
@@ -399,7 +399,7 @@ BEGIN
 					([EmailTemplateId], [Subject], [Body], [IsBodyHtml], [TwoLetterISOLanguageName])
 			VALUES (@TemplateId, @Subject, @Body, @IsBodyHtml, @TwoLetterISOLanguageName)
 
-			INSERT [dbo].[ApplicationEventEmailTemplate] 
+			INSERT [dbo].[EventEmailTemplate] 
 					([EmailTemplateId], [EnableEmailSend], [EventTypeId])
 			VALUES (@TemplateId, @EnableEmailSend, @EventTypeId);
 		COMMIT
@@ -408,7 +408,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [dbo].[EmailTemplate_GetByApplicationEvent]
+CREATE PROCEDURE [dbo].[EmailTemplate_GetByEvent]
 	@EventTypeId BIGINT
 AS
 BEGIN
@@ -416,7 +416,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	SELECT [EmailTemplateId], [EnableEmailSend]
-	FROM [dbo].[ApplicationEventEmailTemplate]
+	FROM [dbo].[EventEmailTemplate]
 	WHERE [EventTypeId] = @EventTypeId
 
 END
@@ -767,16 +767,16 @@ INSERT [dbo].[EmailTemplate] ([Id]) VALUES (23)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (1, 1, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (3, 2, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (7, 3, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (4, 4, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (5, 5, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (9, 6, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (10, 7, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (6, 8, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (8, 9, 1)
-INSERT [dbo].[ApplicationEventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (2, 10, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (1, 1, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (3, 2, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (7, 3, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (4, 4, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (5, 5, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (9, 6, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (10, 7, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (6, 8, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (8, 9, 1)
+INSERT [dbo].[EventEmailTemplate] ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES (2, 10, 1)
 
 
 SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] ON 
@@ -1006,39 +1006,39 @@ INSERT [dbo].[EmailTemplateLocalization] ([Id], [EmailTemplateId], [TwoLetterISO
 SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] OFF
 
 
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (11, 11, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (3, 12, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (13, 13, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (2, 14, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (10, 15, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (15, 16, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (4, 17, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (6, 18, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (7, 19, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (8, 20, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (9, 21, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (12, 22, 1, 1)
-INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseApplicationEventTemplate]) VALUES (14, 23, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (11, 11, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (3, 12, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (13, 13, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (2, 14, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (10, 15, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (15, 16, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (4, 17, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (6, 18, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (7, 19, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (8, 20, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (9, 21, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (12, 22, 1, 1)
+INSERT [dbo].[StateEmailTemplate] ([StateId], [EmailTemplateId], [EnableEmailSend], [UseEventTemplate]) VALUES (14, 23, 1, 1)
 
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 1)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 2)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 3)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 8)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 1)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 4)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 5)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 6)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (4, 2)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 1)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 2)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 3)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 4)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 5)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 6)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 7)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 8)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 9)
-INSERT [dbo].[ApplicationEventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 10)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 1)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 2)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 3)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (1, 8)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 1)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 4)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 5)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (2, 6)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (4, 2)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 1)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 2)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 3)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 4)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 5)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 6)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 7)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 8)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 9)
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (5, 10)
 
 INSERT [dbo].[StateEmailRecipient] ([RoleId], [StateId]) VALUES (1, 1)
 INSERT [dbo].[StateEmailRecipient] ([RoleId], [StateId]) VALUES (1, 8)

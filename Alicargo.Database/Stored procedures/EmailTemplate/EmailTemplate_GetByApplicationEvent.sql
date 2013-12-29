@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[EmailTemplate_GetByApplicationEvent]
+﻿CREATE PROCEDURE [dbo].[EmailTemplate_GetByEvent]
 	@EventTypeId BIGINT
 AS
 BEGIN
@@ -6,7 +6,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	SELECT [EmailTemplateId], [EnableEmailSend]
-	FROM [dbo].[ApplicationEventEmailTemplate]
+	FROM [dbo].[EventEmailTemplate]
 	WHERE [EventTypeId] = @EventTypeId
 
 END

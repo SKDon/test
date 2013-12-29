@@ -5,7 +5,7 @@
 	@IsBodyHtml BIT,
 	@EnableEmailSend BIT,
 	@TwoLetterISOLanguageName CHAR(2),
-	@UseApplicationEventTemplate BIT
+	@UseEventTemplate BIT
 AS
 BEGIN
 	
@@ -35,7 +35,7 @@ BEGIN
 
 			UPDATE TOP(1) [dbo].[StateEmailTemplate]
 			SET [EnableEmailSend] = @EnableEmailSend,
-				[UseApplicationEventTemplate] = @UseApplicationEventTemplate
+				[UseEventTemplate] = @UseEventTemplate
 			WHERE [StateId] = @StateId AND [EmailTemplateId] = @TemplateId
 		COMMIT
 	END
@@ -49,8 +49,8 @@ BEGIN
 			VALUES (@TemplateId, @Subject, @Body, @IsBodyHtml, @TwoLetterISOLanguageName)
 
 			INSERT [dbo].[StateEmailTemplate] 
-					([EmailTemplateId], [EnableEmailSend], [StateId], [UseApplicationEventTemplate])
-			VALUES (@TemplateId, @EnableEmailSend, @StateId, @UseApplicationEventTemplate);
+					([EmailTemplateId], [EnableEmailSend], [StateId], [UseEventTemplate])
+			VALUES (@TemplateId, @EnableEmailSend, @StateId, @UseEventTemplate);
 		COMMIT
 	END
 

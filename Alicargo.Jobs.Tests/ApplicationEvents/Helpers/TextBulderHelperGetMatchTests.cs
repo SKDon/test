@@ -1,9 +1,9 @@
-﻿using Alicargo.Jobs.ApplicationEvents.Helpers;
+﻿using Alicargo.Jobs.Events.Helpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.Tests.Events.Helpers
 {
 	[TestClass]
 	public class TextBulderHelperGetMatchTests
