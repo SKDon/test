@@ -13,9 +13,9 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public void Add(long applicationId, EventType eventType, byte[] data)
+		public void Add(long applicationId, EventType type, EventState state, byte[] data)
 		{
-			_executor.Execute("[dbo].[Event_Add]", new { applicationId, eventType, data, State = EventState.ApplicationEmailing });
+			_executor.Execute("[dbo].[Event_Add]", new { applicationId, EventTypeId = type, data, StateId = state });
 		}
 
 		public EventData GetNext(EventState state, int shardIndex, int shardCount)

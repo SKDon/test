@@ -45,8 +45,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_AddDublicate()
 		{
 			var data = _fixture.CreateMany<byte>().ToArray();
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, data);
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, data);
+			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
+			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
@@ -56,7 +56,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				count.ShouldBeEquivalentTo(2);
 			}
 
-			_events.Add(TestConstants.TestApplicationId, EventType.CPFileUploaded, _serializer.Serialize(_fixture.Create<FileHolder>()));
+			_events.Add(TestConstants.TestApplicationId, EventType.CPFileUploaded, EventState.ApplicationEmailing, _serializer.Serialize(_fixture.Create<FileHolder>()));
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
@@ -72,7 +72,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var eventData = _serializer.Serialize(_fixture.Create<ApplicationSetStateEventData>());
 
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, eventData);
+			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
 
 			_events.GetNext(EventState.StateHistorySaving, 0, 1).Should().BeNull();
 
@@ -89,7 +89,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
 
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, eventData);
+			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
 
 			var data = _events.GetNext(EventState.ApplicationEmailing, 0, 1);
 
@@ -105,7 +105,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
 
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, eventData);
+			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
 
 			var data = _events.GetNext(EventState.ApplicationEmailing, 0, 1);
 

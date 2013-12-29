@@ -2,7 +2,8 @@
 {
 	public enum EventState
 	{
-		Failed = 0,
+		Failed = -1,
+		Default = 0,
 
 		ApplicationEmailing,
 		StateHistorySaving

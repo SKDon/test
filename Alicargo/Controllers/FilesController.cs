@@ -112,7 +112,7 @@ namespace Alicargo.Controllers
 		{
 			if (fileData == null || fileData.Length == 0) return;
 
-			_events.Add(applicationId, type, _serializer.Serialize(
+			_events.Add(applicationId, type, EventState.ApplicationEmailing, _serializer.Serialize(
 				new FileHolder
 				{
 					Data = fileData,

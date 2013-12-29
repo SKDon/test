@@ -79,7 +79,7 @@
     <Folder Include="Stored procedures\ApplicationEvent" />
     <Folder Include="Tables\User" />
     <Folder Include="Tables\State" />
-    <Folder Include="Tables\Application" />
+    <Folder Include="Tables\Event" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Transit.sql" />
@@ -157,11 +157,11 @@
     <Build Include="Tables\State\StateLocalization.sql" />
     <Build Include="Tables\State\StateVisibility.sql" />
     <Build Include="Tables\User\ClientBalanceHistory.sql" />
-    <Build Include="Tables\Application\Application.sql" />
-    <Build Include="Tables\Application\ApplicationEvent.sql" />
-    <Build Include="Tables\Application\ApplicationEventEmailRecipient.sql" />
-    <Build Include="Tables\Application\ApplicationEventEmailTemplate.sql" />
     <Build Include="Tables\User\Forwarder.sql" />
+    <Build Include="Tables\Event\ApplicationEvent.sql" />
+    <Build Include="Tables\Event\ApplicationEventEmailRecipient.sql" />
+    <Build Include="Tables\Event\ApplicationEventEmailTemplate.sql" />
+    <Build Include="Tables\Application.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

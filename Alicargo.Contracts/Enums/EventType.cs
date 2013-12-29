@@ -15,10 +15,10 @@
 		SetDateOfCargoReceipt = 9,
 		SetTransitReference = 10,
 
-		//CalculationFinished = 11,
-		//CalculationCanceled = 12,
+		CalculationFinished = 11,
+		CalculationCanceled = 12,
 
-		//BalanceAdded = 13,
-		//BalanceRemoved = 14
+		BalanceIncreased = 13,
+		BalanceDecreased = 14
 	}
 }

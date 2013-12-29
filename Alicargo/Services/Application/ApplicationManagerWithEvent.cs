@@ -35,7 +35,7 @@ namespace Alicargo.Services.Application
 		{
 			var applicationId = _manager.Add(model, carrierModel, transitModel, clientId);
 
-			_events.Add(applicationId, EventType.ApplicationCreated, null);
+			_events.Add(applicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, null);
 
 			return applicationId;
 		}
@@ -49,7 +49,7 @@ namespace Alicargo.Services.Application
 		{
 			_manager.SetState(applicationId, stateId);
 
-			_events.Add(applicationId, EventType.ApplicationSetState, _serializer.Serialize(new ApplicationSetStateEventData
+			_events.Add(applicationId, EventType.ApplicationSetState, EventState.ApplicationEmailing, _serializer.Serialize(new ApplicationSetStateEventData
 			{
 				StateId = stateId,
 				Timestamp = DateTimeOffset.UtcNow
@@ -60,14 +60,14 @@ namespace Alicargo.Services.Application
 		{
 			_manager.SetTransitReference(id, transitReference);
 
-			_events.Add(id, EventType.SetTransitReference, _serializer.Serialize(transitReference));
+			_events.Add(id, EventType.SetTransitReference, EventState.ApplicationEmailing, _serializer.Serialize(transitReference));
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 
-			_events.Add(id, EventType.SetDateOfCargoReceipt, _serializer.Serialize(dateOfCargoReceipt));
+			_events.Add(id, EventType.SetDateOfCargoReceipt, EventState.ApplicationEmailing, _serializer.Serialize(dateOfCargoReceipt));
 		}
 
 		public void SetTransitCost(long id, decimal? transitCost)
