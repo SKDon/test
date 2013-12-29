@@ -89,7 +89,7 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Admin), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult RemoveCalculatation(long id, long awbId)
 		{
-			_calculation.RemoveCalculatation(id);
+			_calculation.CancelCalculatation(id);
 
 			var data = _presenter.Row(awbId);
 

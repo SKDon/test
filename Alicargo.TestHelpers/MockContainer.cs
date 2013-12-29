@@ -86,7 +86,7 @@ namespace Alicargo.TestHelpers
 			AdminRepository = Inject<IAdminRepository>();
 			TemplatesFacade = Inject<ITemplatesFacade>();
 			RecipientsFacade = Inject<IRecipientsFacade>();
-			FilesFasade = Inject<IFilesFasade>();
+			FilesFasade = Inject<IFilesFacade>();
 			TextBulder = Inject<ITextBulder>();
 
 			Transaction.Setup(x => x.Dispose());
@@ -120,7 +120,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IEmailTemplateRepository> EmailTemplateRepository { get; private set; }
 		public Mock<ITemplatesFacade> TemplatesFacade { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
-		public Mock<IFilesFasade> FilesFasade { get; private set; }
+		public Mock<IFilesFacade> FilesFasade { get; private set; }
 		public Mock<ITextBulder> TextBulder { get; private set; }
 
 		private Mock<T> Inject<T>() where T : class

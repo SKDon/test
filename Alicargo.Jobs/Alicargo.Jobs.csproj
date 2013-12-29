@@ -56,8 +56,8 @@
     <Compile Include="ApplicationEvents\ApplicationMailCreatorJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryJob.cs" />
     <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />
-    <Compile Include="ApplicationEvents\Helpers\FilesFasade.cs" />
-    <Compile Include="ApplicationEvents\Abstract\IFilesFasade.cs" />
+    <Compile Include="ApplicationEvents\Helpers\FilesFacade.cs" />
+    <Compile Include="ApplicationEvents\Abstract\IFilesFacade.cs" />
     <Compile Include="ApplicationEvents\Abstract\IMessageFactory.cs" />
     <Compile Include="ApplicationEvents\Abstract\IRecipientsFacade.cs" />
     <Compile Include="ApplicationEvents\Abstract\ITemplatesFacade.cs" />

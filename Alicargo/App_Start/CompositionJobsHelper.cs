@@ -137,7 +137,7 @@ namespace Alicargo.App_Start
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(filesExecutor);
-			var filesFasade = new FilesFasade(serializer, awbs, files);
+			var filesFasade = new FilesFacade(serializer, awbs, files);
 			var textBulder = new TextBulder(serializer, states, files);
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new EmailTemplateRepository(mainExecutor);

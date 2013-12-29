@@ -180,6 +180,7 @@
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
+    <Compile Include="Services\Calculation\CalculationServiceWithEvent.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelClientCalculation.cs" />
     <Compile Include="Services\Excel\ExcelConstants.cs" />

@@ -17,8 +17,8 @@ namespace Alicargo.Services.Calculation
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
 		private readonly ICalculationRepository _calculations;
-		private readonly IUnitOfWork _unitOfWork;
 		private readonly ISenderRepository _senders;
+		private readonly IUnitOfWork _unitOfWork;
 
 		public CalculationService(
 			ICalculationRepository calculations,
@@ -60,7 +60,7 @@ namespace Alicargo.Services.Calculation
 				FactureCost = facture,
 				InsuranceCost = insurance,
 				MarkName = application.MarkName,
-                FactoryName = application.FactoryName,
+				FactoryName = application.FactoryName,
 				ScotchCost = scotch,
 				TariffPerKg = tariffPerKg,
 				Weight = weight,
@@ -69,6 +69,13 @@ namespace Alicargo.Services.Calculation
 			};
 
 			_calculations.Add(calculation, applicationId);
+
+			_unitOfWork.SaveChanges();
+		}
+
+		public void CancelCalculatation(long applicationId)
+		{
+			_calculations.RemoveByApplication(applicationId);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -85,13 +92,6 @@ namespace Alicargo.Services.Calculation
 			}
 
 			return scotch ?? 0;
-		}
-
-		public void RemoveCalculatation(long applicationId)
-		{
-			_calculations.RemoveByApplication(applicationId);
-
-			_unitOfWork.SaveChanges();
 		}
 	}
 }

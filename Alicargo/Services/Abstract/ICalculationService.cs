@@ -3,6 +3,6 @@
 	public interface ICalculationService
 	{
 		void Calculate(long applicationId);
-		void RemoveCalculatation(long applicationId);
+		void CancelCalculatation(long applicationId);
 	}
 }

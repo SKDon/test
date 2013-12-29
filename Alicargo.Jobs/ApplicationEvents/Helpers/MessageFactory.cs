@@ -13,14 +13,14 @@ namespace Alicargo.Jobs.Events.Helpers
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly string _defaultFrom;
-		private readonly IFilesFasade _files;
+		private readonly IFilesFacade _files;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ITemplatesFacade _templates;
 		private readonly ITextBulder _textBulder;
 
 		public MessageFactory(
 			string defaultFrom,
-			IFilesFasade files,
+			IFilesFacade files,
 			ITextBulder textBulder,
 			IRecipientsFacade recipients,
 			ITemplatesFacade templates,

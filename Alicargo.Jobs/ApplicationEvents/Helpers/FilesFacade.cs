@@ -8,13 +8,13 @@ using Alicargo.Jobs.ApplicationEvents.Abstract;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	public sealed class FilesFasade : IFilesFasade
+	public sealed class FilesFacade : IFilesFacade
 	{
 		private readonly ISerializer _serializer;
 		private readonly IAwbRepository _awbs;
 		private readonly IApplicationFileRepository _files;
 
-		public FilesFasade(
+		public FilesFacade(
 			ISerializer serializer,
 			IAwbRepository awbs,
 			IApplicationFileRepository files)

@@ -4,15 +4,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Helpers;
+using Alicargo.Core.Event;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
-using Alicargo.Services;
-using Alicargo.Services.Abstract;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
@@ -29,10 +27,15 @@ namespace Alicargo.App_Start
 			kernel.Bind<ILog>().ToMethod(context => mainLog).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
+
+			kernel.Bind<IEventFacadeForApplication>().To<EventFacadeForApplication>().InSingletonScope();
+			
 			kernel.Bind<IPartitionConverter>().To<PartitionConverter>()
 				.InSingletonScope()
 				.WithConstructorArgument("partitionCount", CompositionJobsHelper.PartitionCount);
+			
 			kernel.Bind<ISerializer>().To<Serializer>().InThreadScope();
+
 			kernel.Bind<IMailSender>()
 				.To<DbMailSender>()
 				.InSingletonScope()
