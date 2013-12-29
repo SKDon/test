@@ -6,7 +6,7 @@ namespace Alicargo.Contracts.Repositories
 	public interface IApplicationEventRepository
 	{
 		void Add(long applicationId, ApplicationEventType eventType, byte[] data);
-		ApplicationEventData GetNext(ApplicationEventState state, int index, int total);
+		ApplicationEventData GetNext(ApplicationEventState state, int shardIndex, int shardCount);
 		void SetState(long id, ApplicationEventState state);
 		void Delete(long id);
 	}

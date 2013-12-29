@@ -8,7 +8,7 @@ using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
-using Alicargo.DataAccess.Repositories;
+using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
 using Ninject;
 using Ninject.Activation;

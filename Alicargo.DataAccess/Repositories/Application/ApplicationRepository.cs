@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
@@ -10,13 +9,13 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.Application
 {
 	public sealed class ApplicationRepository : IApplicationRepository
 	{
 		private readonly AlicargoDataContext _context;
 		private readonly IApplicationRepositoryOrderer _orderer;
-		private readonly Expression<Func<Application, ApplicationData>> _selector;
+		private readonly Expression<Func<DbContext.Application, ApplicationData>> _selector;
 
 		public ApplicationRepository(IUnitOfWork unitOfWork)
 		{
@@ -224,7 +223,7 @@ namespace Alicargo.DataAccess.Repositories
 				.ToDictionary(x => x.ApplicationHistoryId, x => x.Id);
 		}
 
-		private IQueryable<Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation,
+		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation,
 			long? cargoReceivedStateId, int? cargoReceivedDaysToShow)
 		{
 			var applications = stateIds != null && stateIds.Length > 0

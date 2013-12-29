@@ -2,7 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.Application
 {
 	public sealed class ApplicationEventRepository : IApplicationEventRepository
 	{
@@ -18,9 +18,9 @@ namespace Alicargo.DataAccess.Repositories
 			_executor.Execute("[dbo].[ApplicationEvent_Add]", new { applicationId, eventType, data, State = ApplicationEventState.New });
 		}
 
-		public ApplicationEventData GetNext(ApplicationEventState state, int index, int total)
+		public ApplicationEventData GetNext(ApplicationEventState state, int shardIndex, int shardCount)
 		{
-			return _executor.Query<ApplicationEventData>("[dbo].[ApplicationEvent_GetNext]", new { state, index, total });
+			return _executor.Query<ApplicationEventData>("[dbo].[ApplicationEvent_GetNext]", new { state, shardIndex, shardCount });
 		}
 
 		public void SetState(long id, ApplicationEventState state)

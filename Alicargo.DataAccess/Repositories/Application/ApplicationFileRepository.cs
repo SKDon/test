@@ -5,7 +5,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.Helpers;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.Application
 {
 	public sealed class ApplicationFileRepository : IApplicationFileRepository
 	{

@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
+using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

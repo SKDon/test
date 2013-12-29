@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
-namespace Alicargo.DataAccess.Repositories
+namespace Alicargo.DataAccess.Repositories.Application
 {
 	internal sealed class ApplicationUpdateRepository : IApplicationUpdateRepository
 	{
@@ -18,7 +17,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public Func<long> Add(ApplicationData application)
 		{
-			var entity = new Application();
+			var entity = new DbContext.Application();
 
 			CopyTo(application, entity);
 
@@ -108,13 +107,13 @@ namespace Alicargo.DataAccess.Repositories
 				CopyTo(application, entity));
 		}
 
-		private void Update(long id, Action<Application> action)
+		private void Update(long id, Action<DbContext.Application> action)
 		{
 			var application = _context.Applications.First(x => x.Id == id);
 			action(application);
 		}
 
-		private static void CopyTo(ApplicationData from, Application to)
+		private static void CopyTo(ApplicationData from, DbContext.Application to)
 		{
 			if (to.Id == 0)
 			{
