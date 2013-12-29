@@ -5,6 +5,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Abstract
 {
 	public interface IFilesFasade
 	{
-		FileHolder[] GetFiles(long applicationId, long? awbId, ApplicationEventType type, byte[] data);
+		FileHolder[] GetFiles(long applicationId, long? awbId, EventType type, byte[] data);
 	}
 }

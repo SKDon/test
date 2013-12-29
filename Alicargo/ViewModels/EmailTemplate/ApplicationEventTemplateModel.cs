@@ -9,7 +9,7 @@ namespace Alicargo.ViewModels.EmailTemplate
 	public sealed class ApplicationEventTemplateModel
 	{
 		[HiddenInput]
-		public ApplicationEventType EventType { get; set; }
+		public EventType EventType { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Subject")]
 		public string Subject { get; set; }

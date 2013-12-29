@@ -70,7 +70,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			_files.Setup(x => x.GetNames(_detailsData.Id, It.IsAny<ApplicationFileType>()))
 				.Returns(_fixture.Create<Dictionary<long, string>>());
 
-			var text = _bulder.GetText(sb.ToString(), TwoLetterISOLanguageName.Russian, ApplicationEventType.SetState,
+			var text = _bulder.GetText(sb.ToString(), TwoLetterISOLanguageName.Russian, EventType.ApplicationSetState,
 				_detailsData, _serializer.Serialize(_eventData));
 
 			text.Should().NotContain("{").And.NotContain("}");

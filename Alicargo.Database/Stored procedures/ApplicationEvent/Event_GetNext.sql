@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ApplicationEvent_GetNext]
+﻿CREATE PROCEDURE [dbo].[Event_GetNext]
 	@State INT,
 	@ShardIndex INT,
 	@ShardCount INT

@@ -22,7 +22,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_templates = templates;
 		}
 
-		public long? GetTemplateId(ApplicationEventType type, byte[] data)
+		public long? GetTemplateId(EventType type, byte[] data)
 		{
 			var eventTemplate = _templates.GetByEventType(type);
 			if (eventTemplate == null || !eventTemplate.EnableEmailSend)
@@ -30,7 +30,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				return null;
 			}
 
-			if (type != ApplicationEventType.SetState)
+			if (type != EventType.ApplicationSetState)
 				return eventTemplate.EmailTemplateId;
 
 			var stateEventData = _serializer.Deserialize<ApplicationSetStateEventData>(data);

@@ -6,6 +6,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Abstract
 {
 	public interface ITextBulder
 	{
-		string GetText(string template, string language, ApplicationEventType type, ApplicationDetailsData application, byte[] data);
+		string GetText(string template, string language, EventType type, ApplicationDetailsData application, byte[] data);
 	}
 }

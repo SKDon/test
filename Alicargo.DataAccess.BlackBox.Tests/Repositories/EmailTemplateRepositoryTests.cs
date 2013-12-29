@@ -61,7 +61,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			const ApplicationEventType eventType = ApplicationEventType.Created;
+			const EventType eventType = EventType.ApplicationCreated;
 
 			var recipients = _fixture.CreateMany<RoleType>().ToArray();
 

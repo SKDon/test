@@ -44,8 +44,8 @@ namespace Alicargo.Controllers
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List()
 		{
-			var types = Enum.GetValues(typeof(ApplicationEventType))
-				.Cast<ApplicationEventType>()
+			var types = Enum.GetValues(typeof(EventType))
+				.Cast<EventType>()
 				.Select(x => new
 				{
 					Id = (int)x,
@@ -58,7 +58,7 @@ namespace Alicargo.Controllers
 
 		[HttpGet]
 		[Access(RoleType.Admin)]
-		public virtual ViewResult Edit(ApplicationEventType id, string lang)
+		public virtual ViewResult Edit(EventType id, string lang)
 		{
 			BindLanguageList();
 
@@ -92,7 +92,7 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.EmailTemplate.Edit(model.EventType, model.Language));
 		}
 
-		private ApplicationEventTemplateModel GetModel(ApplicationEventType eventType, string language)
+		private ApplicationEventTemplateModel GetModel(EventType eventType, string language)
 		{
 			var commonData = _templates.GetByEventType(eventType);
 

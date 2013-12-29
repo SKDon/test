@@ -14,24 +14,24 @@ namespace Alicargo.Controllers
 {
 	public partial class FilesController : Controller
 	{
-		private static readonly IReadOnlyDictionary<ApplicationFileType, ApplicationEventType> TypesMapping
-			= new Dictionary<ApplicationFileType, ApplicationEventType>
+		private static readonly IReadOnlyDictionary<ApplicationFileType, EventType> TypesMapping
+			= new Dictionary<ApplicationFileType, EventType>
 			{
-				{ApplicationFileType.CP, ApplicationEventType.CPFileUploaded},
-				{ApplicationFileType.Invoice, ApplicationEventType.InvoiceFileUploaded},
-				{ApplicationFileType.DeliveryBill, ApplicationEventType.DeliveryBillFileUploaded},
-				{ApplicationFileType.Torg12, ApplicationEventType.Torg12FileUploaded},
-				{ApplicationFileType.Swift, ApplicationEventType.SwiftFileUploaded},
-				{ApplicationFileType.Packing, ApplicationEventType.PackingFileUploaded},
+				{ApplicationFileType.CP, EventType.CPFileUploaded},
+				{ApplicationFileType.Invoice, EventType.InvoiceFileUploaded},
+				{ApplicationFileType.DeliveryBill, EventType.DeliveryBillFileUploaded},
+				{ApplicationFileType.Torg12, EventType.Torg12FileUploaded},
+				{ApplicationFileType.Swift, EventType.SwiftFileUploaded},
+				{ApplicationFileType.Packing, EventType.PackingFileUploaded},
 			};
 
-		private readonly IApplicationEventRepository _events;
+		private readonly IEventRepository _events;
 		private readonly IApplicationFileRepository _files;
 		private readonly ISerializer _serializer;
 
 		public FilesController(
 			IApplicationFileRepository files,
-			IApplicationEventRepository events,
+			IEventRepository events,
 			ISerializer serializer)
 		{
 			_files = files;
@@ -107,7 +107,7 @@ namespace Alicargo.Controllers
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		private void AddFileUploadEvent(long applicationId, ApplicationEventType type,
+		private void AddFileUploadEvent(long applicationId, EventType type,
 			string fileName, byte[] fileData)
 		{
 			if (fileData == null || fileData.Length == 0) return;

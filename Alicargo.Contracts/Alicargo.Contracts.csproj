@@ -52,7 +52,7 @@
     <Compile Include="Contracts\AirWaybillAggregate.cs" />
     <Compile Include="Contracts\Application\ApplicationData.cs" />
     <Compile Include="Contracts\Application\ApplicationDetailsData.cs" />
-    <Compile Include="Contracts\ApplicationEventData.cs" />
+    <Compile Include="Contracts\EventData.cs" />
     <Compile Include="Contracts\ApplicationEventTemplateData.cs" />
     <Compile Include="Contracts\Application\ApplicationListItemData.cs" />
     <Compile Include="Contracts\User\ClientBalanceHistoryItem.cs" />
@@ -79,8 +79,8 @@
     <Compile Include="Contracts\State\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\User\UserData.cs" />
-    <Compile Include="Enums\ApplicationEventState.cs" />
-    <Compile Include="Enums\ApplicationEventType.cs" />
+    <Compile Include="Enums\EventState.cs" />
+    <Compile Include="Enums\EventType.cs" />
     <Compile Include="Enums\ApplicationFileType.cs" />
     <Compile Include="Enums\CalculationState.cs" />
     <Compile Include="Enums\EmailMessageState.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="Helpers\OrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\User\IAdminRepository.cs" />
-    <Compile Include="Repositories\IApplicationEventRepository.cs" />
+    <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Repositories\IApplicationFileRepository.cs" />
     <Compile Include="Repositories\IApplicationRepository.cs" />
     <Compile Include="Repositories\IApplicationUpdateRepository.cs" />

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ApplicationEvent_Delete]
+﻿CREATE PROCEDURE [dbo].[Event_Delete]
 	@Id BIGINT
 AS
 	SET NOCOUNT ON;

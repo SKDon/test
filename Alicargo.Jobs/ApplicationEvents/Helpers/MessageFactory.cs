@@ -34,7 +34,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_applications = applications;
 		}
 
-		public EmailMessage[] Get(long applicationId, ApplicationEventType type, byte[] data)
+		public EmailMessage[] Get(long applicationId, EventType type, byte[] data)
 		{
 			var application = _applications.GetDetails(applicationId);
 			if (application == null)
@@ -60,7 +60,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, IEnumerable<RecipientData> recipients,
-			ApplicationDetailsData application, byte[] data, ApplicationEventType type, FileHolder[] files)
+			ApplicationDetailsData application, byte[] data, EventType type, FileHolder[] files)
 		{
 			foreach (var recipient in recipients)
 			{
@@ -71,7 +71,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 					continue;
 				}
 
-				if (type == ApplicationEventType.SetState && recipient.Role != RoleType.Client)
+				if (type == EventType.ApplicationSetState && recipient.Role != RoleType.Client)
 				{
 					files = null;
 				}
@@ -81,7 +81,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,
-			ApplicationDetailsData application, byte[] data, ApplicationEventType type, FileHolder[] files)
+			ApplicationDetailsData application, byte[] data, EventType type, FileHolder[] files)
 		{
 			var subject = _textBulder.GetText(localization.Subject, culture, type, application, data);
 			var body = _textBulder.GetText(localization.Body, culture, type, application, data);

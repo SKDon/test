@@ -5,7 +5,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Abstract
 {
 	public interface ITemplatesFacade
 	{
-		long? GetTemplateId(ApplicationEventType type, byte[] data);
+		long? GetTemplateId(EventType type, byte[] data);
 		EmailTemplateLocalizationData GetLocalization(long templateId, string language);
 	}
 }

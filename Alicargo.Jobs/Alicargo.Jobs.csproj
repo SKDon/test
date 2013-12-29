@@ -52,7 +52,7 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="ApplicationEvents\ApplicationEventJobHelper.cs" />
+    <Compile Include="Core\EventJobHelper.cs" />
     <Compile Include="ApplicationEvents\ApplicationMailCreatorJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryJob.cs" />
     <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />

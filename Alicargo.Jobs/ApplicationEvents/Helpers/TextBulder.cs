@@ -31,7 +31,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_files = files;
 		}
 
-		public string GetText(string template, string language, ApplicationEventType type, ApplicationDetailsData application, byte[] bytes)
+		public string GetText(string template, string language, EventType type, ApplicationDetailsData application, byte[] bytes)
 		{
 			var data = GetTextLocalizedData(type, application, language, bytes);
 			var culture = CultureInfo.GetCultureInfo(language);
@@ -61,7 +61,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return builder.ToString();
 		}
 
-		private TextLocalizedData GetTextLocalizedData(ApplicationEventType type,
+		private TextLocalizedData GetTextLocalizedData(EventType type,
 			ApplicationDetailsData application, string language, byte[] bytes)
 		{
 			var culture = CultureInfo.GetCultureInfo(language);
@@ -70,24 +70,24 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			switch (type)
 			{
-				case ApplicationEventType.SetState:
+				case EventType.ApplicationSetState:
 					OnSetState(bytes, language, localizedData);
 					break;
 
-				case ApplicationEventType.SetTransitReference:
-				case ApplicationEventType.Created:
+				case EventType.SetTransitReference:
+				case EventType.ApplicationCreated:
 					break;
 
-				case ApplicationEventType.CPFileUploaded:
-				case ApplicationEventType.InvoiceFileUploaded:
-				case ApplicationEventType.PackingFileUploaded:
-				case ApplicationEventType.SwiftFileUploaded:
-				case ApplicationEventType.DeliveryBillFileUploaded:
-				case ApplicationEventType.Torg12FileUploaded:
+				case EventType.CPFileUploaded:
+				case EventType.InvoiceFileUploaded:
+				case EventType.PackingFileUploaded:
+				case EventType.SwiftFileUploaded:
+				case EventType.DeliveryBillFileUploaded:
+				case EventType.Torg12FileUploaded:
 					OnFileUpload(bytes, localizedData);
 					break;
 
-				case ApplicationEventType.SetDateOfCargoReceipt:
+				case EventType.SetDateOfCargoReceipt:
 					OnSetDateOfCargoReceipt(bytes, culture, localizedData);
 					break;
 

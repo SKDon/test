@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ApplicationEvent_Add]
+﻿CREATE PROCEDURE [dbo].[Event_Add]
 	@State INT,
 	@ApplicationId BIGINT,
 	@EventType INT,

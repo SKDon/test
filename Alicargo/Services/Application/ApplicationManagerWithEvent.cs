@@ -12,11 +12,11 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationManagerWithEvent : IApplicationManager
 	{
-		private readonly IApplicationEventRepository _events;
+		private readonly IEventRepository _events;
 		private readonly IApplicationManager _manager;
 		private readonly ISerializer _serializer;
 
-		public ApplicationManagerWithEvent(IApplicationManager manager, IApplicationEventRepository events,
+		public ApplicationManagerWithEvent(IApplicationManager manager, IEventRepository events,
 			ISerializer serializer)
 		{
 			_manager = manager;
@@ -35,7 +35,7 @@ namespace Alicargo.Services.Application
 		{
 			var applicationId = _manager.Add(model, carrierModel, transitModel, clientId);
 
-			_events.Add(applicationId, ApplicationEventType.Created, null);
+			_events.Add(applicationId, EventType.ApplicationCreated, null);
 
 			return applicationId;
 		}
@@ -49,7 +49,7 @@ namespace Alicargo.Services.Application
 		{
 			_manager.SetState(applicationId, stateId);
 
-			_events.Add(applicationId, ApplicationEventType.SetState, _serializer.Serialize(new ApplicationSetStateEventData
+			_events.Add(applicationId, EventType.ApplicationSetState, _serializer.Serialize(new ApplicationSetStateEventData
 			{
 				StateId = stateId,
 				Timestamp = DateTimeOffset.UtcNow
@@ -60,14 +60,14 @@ namespace Alicargo.Services.Application
 		{
 			_manager.SetTransitReference(id, transitReference);
 
-			_events.Add(id, ApplicationEventType.SetTransitReference, _serializer.Serialize(transitReference));
+			_events.Add(id, EventType.SetTransitReference, _serializer.Serialize(transitReference));
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 
-			_events.Add(id, ApplicationEventType.SetDateOfCargoReceipt, _serializer.Serialize(dateOfCargoReceipt));
+			_events.Add(id, EventType.SetDateOfCargoReceipt, _serializer.Serialize(dateOfCargoReceipt));
 		}
 
 		public void SetTransitCost(long id, decimal? transitCost)

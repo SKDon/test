@@ -3,17 +3,16 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services;
-using Alicargo.Jobs.Core;
 
-namespace Alicargo.Jobs.ApplicationEvents
+namespace Alicargo.Jobs.Core
 {
-	internal static class ApplicationEventJobHelper
+	internal static class EventJobHelper
 	{
 		public static void Run(
-			IApplicationEventRepository events,
+			IEventRepository events,
 			ShardSettings shard,
-			Action<ApplicationEventData> action,
-			ApplicationEventState nextState)
+			Action<EventData> action,
+			EventState nextState)
 		{
 			var data = events.GetNext(nextState, shard.ZeroBasedIndex, shard.Count);
 
@@ -27,7 +26,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 				{
 					if (!e.IsCritical())
 					{
-						events.SetState(data.Id, ApplicationEventState.Failed);
+						events.SetState(data.Id, EventState.Failed);
 					}
 
 					throw;

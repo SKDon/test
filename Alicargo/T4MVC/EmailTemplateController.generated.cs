@@ -148,9 +148,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Contracts.Enums.ApplicationEventType id, string lang);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Contracts.Enums.EventType id, string lang);
 
-        public override System.Web.Mvc.ViewResult Edit(Alicargo.Contracts.Enums.ApplicationEventType id, string lang)
+        public override System.Web.Mvc.ViewResult Edit(Alicargo.Contracts.Enums.EventType id, string lang)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

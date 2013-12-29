@@ -28,7 +28,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		{
 			var eventTemplate = _container.Create<ApplicationEventTemplateData>();
 			eventTemplate.EnableEmailSend = false;
-			var eventType = _container.Create<ApplicationEventType>();
+			var eventType = _container.Create<EventType>();
 
 			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
 
@@ -53,9 +53,9 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 
 			_container.Serializer.Setup(x => x.Deserialize<ApplicationSetStateEventData>(bytes)).Returns(stateEventData);
 			_container.EmailTemplateRepository.Setup(x => x.GetByStateId(stateEventData.StateId)).Returns(stateTemplate);
-			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(ApplicationEventType.SetState)).Returns(eventTemplate);
+			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(EventType.ApplicationSetState)).Returns(eventTemplate);
 
-			var templateId = _facade.GetTemplateId(ApplicationEventType.SetState, bytes);
+			var templateId = _facade.GetTemplateId(EventType.ApplicationSetState, bytes);
 
 			templateId.ShouldBeEquivalentTo(eventTemplate.EmailTemplateId);
 		}
@@ -76,9 +76,9 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 
 			_container.Serializer.Setup(x => x.Deserialize<ApplicationSetStateEventData>(bytes)).Returns(stateEventData);
 			_container.EmailTemplateRepository.Setup(x => x.GetByStateId(stateEventData.StateId)).Returns(stateTemplate);
-			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(ApplicationEventType.SetState)).Returns(eventTemplate);
+			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(EventType.ApplicationSetState)).Returns(eventTemplate);
 
-			var templateId = _facade.GetTemplateId(ApplicationEventType.SetState, bytes);
+			var templateId = _facade.GetTemplateId(EventType.ApplicationSetState, bytes);
 
 			templateId.ShouldBeEquivalentTo(stateTemplate.EmailTemplateId);
 		}

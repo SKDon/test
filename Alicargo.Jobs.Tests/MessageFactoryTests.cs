@@ -28,7 +28,7 @@ namespace Alicargo.Jobs.Tests
 		public void Test_SetStateForNoClient()
 		{
 			var applicationId = _container.Create<long>();
-			const ApplicationEventType eventType = ApplicationEventType.SetState;
+			const EventType eventType = EventType.ApplicationSetState;
 			var bytes = _container.Create<byte[]>();
 			var applicationDetailsData = _container.Create<ApplicationDetailsData>();
 			var recipientData = new RecipientData(_container.Create<string>(), _container.Create<string>(), RoleType.Broker);

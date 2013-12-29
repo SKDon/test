@@ -106,7 +106,7 @@ namespace Alicargo.App_Start
 				var serializer = new Serializer();
 				var factory = GetMessageFactory(connection, connectionString, filesConnectionString, serializer);
 				var executor = new SqlProcedureExecutor(connectionString);
-				var events = new ApplicationEventRepository(executor);
+				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
 
 				var job = new ApplicationMailCreatorJob(emails, factory, events, shard, serializer);
@@ -118,7 +118,7 @@ namespace Alicargo.App_Start
 		private static void GetApplicationStateHistoryJob(string connectionString, ShardSettings shard)
 		{
 			var executor = new SqlProcedureExecutor(connectionString);
-			var events = new ApplicationEventRepository(executor);
+			var events = new EventRepository(executor);
 
 			var job = new ApplicationStateHistoryJob(events, shard);
 

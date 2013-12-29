@@ -7,11 +7,11 @@ namespace Alicargo.Jobs.ApplicationEvents
 {
 	public sealed class ApplicationStateHistoryJob : IJob
 	{
-		private readonly IApplicationEventRepository _events;
+		private readonly IEventRepository _events;
 		private readonly ShardSettings _shard;
 
 		public ApplicationStateHistoryJob(
-			IApplicationEventRepository events,
+			IEventRepository events,
 			ShardSettings shard)
 		{
 			_events = events;
@@ -20,10 +20,10 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public void Run()
 		{
-			ApplicationEventJobHelper.Run(_events, _shard, ProcessEvent, ApplicationEventState.EmailPrepared);
+			EventJobHelper.Run(_events, _shard, ProcessEvent, EventState.StateHistorySaving);
 		}
 
-		private void ProcessEvent(ApplicationEventData data)
+		private void ProcessEvent(EventData data)
 		{
 			_events.Delete(data.Id);
 		}

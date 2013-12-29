@@ -15,8 +15,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly IApplicationFileRepository _files;
 
 		public FilesFasade(
-			ISerializer serializer, 
-			IAwbRepository awbs, 
+			ISerializer serializer,
+			IAwbRepository awbs,
 			IApplicationFileRepository files)
 		{
 			_serializer = serializer;
@@ -24,28 +24,28 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_files = files;
 		}
 
-		public FileHolder[] GetFiles(long applicationId, long? awbId, ApplicationEventType type, byte[] data)
+		public FileHolder[] GetFiles(long applicationId, long? awbId, EventType type, byte[] data)
 		{
 			switch (type)
 			{
-				case ApplicationEventType.Created:
+				case EventType.ApplicationCreated:
 					return null;
 
-				case ApplicationEventType.SetState:
+				case EventType.ApplicationSetState:
 					return GeAllFiles(applicationId, awbId);
 
-				case ApplicationEventType.CPFileUploaded:
-				case ApplicationEventType.InvoiceFileUploaded:
-				case ApplicationEventType.PackingFileUploaded:
-				case ApplicationEventType.SwiftFileUploaded:
-				case ApplicationEventType.DeliveryBillFileUploaded:
-				case ApplicationEventType.Torg12FileUploaded:
+				case EventType.CPFileUploaded:
+				case EventType.InvoiceFileUploaded:
+				case EventType.PackingFileUploaded:
+				case EventType.SwiftFileUploaded:
+				case EventType.DeliveryBillFileUploaded:
+				case EventType.Torg12FileUploaded:
 					return new[] { _serializer.Deserialize<FileHolder>(data) };
 
-				case ApplicationEventType.SetDateOfCargoReceipt:
+				case EventType.SetDateOfCargoReceipt:
 					return null;
 
-				case ApplicationEventType.SetTransitReference:
+				case EventType.SetTransitReference:
 					return null;
 
 				default:
@@ -57,7 +57,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		{
 			var files = new List<FileHolder>();
 
-			var types = Enum.GetValues(typeof (ApplicationFileType));
+			var types = Enum.GetValues(typeof(ApplicationFileType));
 			foreach (ApplicationFileType type in types)
 			{
 				var names = _files.GetNames(applicationId, type);

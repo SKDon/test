@@ -46,7 +46,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_templates = templates;
 		}
 
-		public RecipientData[] GetRecipients(ApplicationDetailsData application, ApplicationEventType type, byte[] data)
+		public RecipientData[] GetRecipients(ApplicationDetailsData application, EventType type, byte[] data)
 		{
 			var roles = GetRoles(type, data);
 
@@ -55,10 +55,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				: GetRecipients(application, roles).ToArray();
 		}
 
-		private RoleType[] GetRoles(ApplicationEventType type, byte[] data)
+		private RoleType[] GetRoles(EventType type, byte[] data)
 		{
 			RoleType[] roles;
-			if (type == ApplicationEventType.SetState)
+			if (type == EventType.ApplicationSetState)
 			{
 				var stateEventData = _serializer.Deserialize<ApplicationSetStateEventData>(data);
 

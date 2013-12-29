@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		public void SetForApplicationEvent(ApplicationEventType eventType, string language, bool enableEmailSend,
+		public void SetForApplicationEvent(EventType eventType, string language, bool enableEmailSend,
 			RoleType[] recipients, EmailTemplateLocalizationData localization)
 		{
 			var table = TableParameters.GeIdsTable("Recipients", recipients.Select(x => (long)x).ToArray());
@@ -49,7 +49,7 @@ namespace Alicargo.DataAccess.Repositories
 			_executor.Execute("[dbo].[ApplicationEventEmailRecipient_Set]", new TableParameters(new { EventTypeId = eventType }, table));
 		}
 
-		public ApplicationEventTemplateData GetByEventType(ApplicationEventType eventType)
+		public ApplicationEventTemplateData GetByEventType(EventType eventType)
 		{
 			return _executor.Query<ApplicationEventTemplateData>("[dbo].[EmailTemplate_GetByApplicationEvent]",
 				new { EventTypeId = (int)eventType });
@@ -60,7 +60,7 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Query<StateEmailTemplateData>("[dbo].[EmailTemplate_GetByStateId]", new { stateId });
 		}
 
-		public RoleType[] GetRecipientRoles(ApplicationEventType eventType)
+		public RoleType[] GetRecipientRoles(EventType eventType)
 		{
 			return _executor.Array<RoleType>("[dbo].[ApplicationEventEmailRecipient_Get]", new { EventTypeId = (int)eventType });
 		}

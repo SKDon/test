@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ApplicationEvent_SetState]
+﻿CREATE PROCEDURE [dbo].[Event_SetState]
 	@Id BIGINT,
 	@State INT
 AS

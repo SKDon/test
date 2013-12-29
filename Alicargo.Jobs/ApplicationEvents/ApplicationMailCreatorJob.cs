@@ -10,13 +10,13 @@ namespace Alicargo.Jobs.ApplicationEvents
 	public sealed class ApplicationMailCreatorJob : IJob
 	{
 		private readonly IEmailMessageRepository _emails;
-		private readonly IApplicationEventRepository _events;
+		private readonly IEventRepository _events;
 		private readonly IMessageFactory _messageFactory;
 		private readonly ISerializer _serializer;
 		private readonly ShardSettings _shard;
 
 		public ApplicationMailCreatorJob(IEmailMessageRepository emails, IMessageFactory messageFactory,
-			IApplicationEventRepository events, ShardSettings shard, ISerializer serializer)
+			IEventRepository events, ShardSettings shard, ISerializer serializer)
 		{
 			_emails = emails;
 			_messageFactory = messageFactory;
@@ -27,10 +27,10 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public void Run()
 		{
-			ApplicationEventJobHelper.Run(_events, _shard, ProcessEvent, ApplicationEventState.New);
+			EventJobHelper.Run(_events, _shard, ProcessEvent, EventState.ApplicationEmailing);
 		}
 
-		private void ProcessEvent(ApplicationEventData data)
+		private void ProcessEvent(EventData data)
 		{
 			var messages = _messageFactory.Get(data.ApplicationId, data.EventType, data.Data);
 
@@ -45,7 +45,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 				}
 			}
 
-			_events.SetState(data.Id, ApplicationEventState.EmailPrepared);
+			_events.SetState(data.Id, EventState.StateHistorySaving);
 		}
 	}
 }
