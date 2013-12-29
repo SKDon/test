@@ -13,14 +13,14 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public void Add(long applicationId, EventType type, EventState state, byte[] data)
+		public void Add(int partitionId, EventType type, EventState state, byte[] data)
 		{
-			_executor.Execute("[dbo].[Event_Add]", new { applicationId, EventTypeId = type, data, StateId = state });
+			_executor.Execute("[dbo].[Event_Add]", new { EventTypeId = type, data, StateId = state, partitionId });
 		}
 
-		public EventData GetNext(EventState state, int shardIndex, int shardCount)
+		public EventData GetNext(EventState state, int partitionId)
 		{
-			return _executor.Query<EventData>("[dbo].[Event_GetNext]", new { state, shardIndex, shardCount });
+			return _executor.Query<EventData>("[dbo].[Event_GetNext]", new { state, partitionId });
 		}
 
 		public void SetState(long id, EventState state)

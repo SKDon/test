@@ -13,10 +13,9 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
-using Alicargo.Jobs.Events;
-using Alicargo.Jobs.Events.Helpers;
 using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
+using Alicargo.Jobs.Events.Helpers;
 using Alicargo.Services;
 using log4net;
 using Ninject;
@@ -27,39 +26,38 @@ namespace Alicargo.App_Start
 {
 	internal static class CompositionJobsHelper
 	{
-		public const int PartitionIdForOtherMails = 2;
-		private static readonly TimeSpan DeadTimeout = TimeSpan.FromMinutes(30);
-		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
+		public const int PartitionCount = 2;
+		public const int PartitionIdForOtherMails = PartitionCount;
+		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 
 		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
 			const string calculationMailerJob = "CalculationMailerJob_";
-			const string calculationWatcherJob = "CalculationWatcherJob_";
 			const string applicationMailCreatorJob = "ApplicationMailCreatorJob_";
 			const string applicationStateHistoryJob = "ApplicationStateHistoryJob_";
 			const string mailSenderJobJob = "MailSenderJob_";
 
-			// ReSharper disable ImplicitlyCapturedClosure
-			BindStatelessJobRunner(kernel, () => GetCalculationMailerJob(connectionString), calculationMailerJob + 0);
-			BindStatelessJobRunner(kernel, () => GetCalculationMailerJob(connectionString), calculationMailerJob + 1);
-			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 0);
-			BindStatelessJobRunner(kernel, () => GetCalculationWatcherJob(connectionString), calculationWatcherJob + 1);
+			for (var i = 0; i < PartitionCount; i++)
+			{
+				var partitionId = i;
+				var mainConnectionString = connectionString;
 
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(
-				connectionString, filesConnectionString, new ShardSettings(0, 2)), applicationMailCreatorJob + 0);
-			BindStatelessJobRunner(kernel, () => GetApplicationMailCreatorJob(
-				connectionString, filesConnectionString, new ShardSettings(1, 2)), applicationMailCreatorJob + 1);
-			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(0, 2)),
-				applicationStateHistoryJob + 0);
-			BindStatelessJobRunner(kernel, () => GetApplicationStateHistoryJob(connectionString, new ShardSettings(1, 2)),
-				applicationStateHistoryJob + 1);
+				//BindStatelessJobRunner(kernel, () => RunCalculationMailerJob(mainConnectionString),
+				//	calculationMailerJob + partitionId);
 
-			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 0), mailSenderJobJob + 0);
-			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, 1), mailSenderJobJob + 1);
+				BindStatelessJobRunner(kernel, () => RunApplicationMailCreatorJob(
+					mainConnectionString, filesConnectionString, partitionId), applicationMailCreatorJob + partitionId);
+
+				BindStatelessJobRunner(kernel, () => RunApplicationStateHistoryJob(mainConnectionString, partitionId),
+					applicationStateHistoryJob + partitionId);
+
+				BindStatelessJobRunner(kernel, () => GetMailSenderJob(mainConnectionString, partitionId),
+					mailSenderJobJob + partitionId);
+			}
+
 			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, PartitionIdForOtherMails),
-				mailSenderJobJob + 2);
-			// ReSharper restore ImplicitlyCapturedClosure
+				mailSenderJobJob + PartitionIdForOtherMails);
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
@@ -71,19 +69,8 @@ namespace Alicargo.App_Start
 				.Named(jobName);
 		}
 
-		private static void GetCalculationWatcherJob(string connectionString)
-		{
-			using (var connection = new SqlConnection(connectionString))
-			{
-				var unitOfWork = new UnitOfWork(connection);
-
-				var job = new CalculationWatcherJob(DeadTimeout, new CalculationRepository(unitOfWork));
-
-				job.Run();
-			}
-		}
-
-		private static void GetCalculationMailerJob(string connectionString)
+		[Obsolete]
+		private static void RunCalculationMailerJob(string connectionString)
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
@@ -100,8 +87,8 @@ namespace Alicargo.App_Start
 			}
 		}
 
-		private static void GetApplicationMailCreatorJob(string connectionString, string filesConnectionString,
-			ShardSettings shard)
+		private static void RunApplicationMailCreatorJob(string connectionString, string filesConnectionString,
+			int partitionId)
 		{
 			using (var connection = new SqlConnection(connectionString))
 			{
@@ -111,18 +98,18 @@ namespace Alicargo.App_Start
 				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
 
-				var job = new ApplicationMailCreatorJob(emails, factory, events, shard, serializer);
+				var job = new ApplicationMailCreatorJob(emails, factory, events, partitionId, serializer);
 
 				job.Run();
 			}
 		}
 
-		private static void GetApplicationStateHistoryJob(string connectionString, ShardSettings shard)
+		private static void RunApplicationStateHistoryJob(string connectionString, int partitionId)
 		{
 			var executor = new SqlProcedureExecutor(connectionString);
 			var events = new EventRepository(executor);
 
-			var job = new ApplicationStateHistoryJob(events, shard);
+			var job = new ApplicationStateHistoryJob(events, partitionId);
 
 			job.Run();
 		}
@@ -164,7 +151,8 @@ namespace Alicargo.App_Start
 				templates);
 			var templatesFacade = new TemplatesFacade(serializer, templates);
 
-			return new MessageFactory(EmailsHelper.DefaultFrom, filesFasade, textBulder, recipientsFacade, templatesFacade, applications);
+			return new MessageFactory(EmailsHelper.DefaultFrom, filesFasade, textBulder, recipientsFacade, templatesFacade,
+				applications);
 		}
 	}
 }

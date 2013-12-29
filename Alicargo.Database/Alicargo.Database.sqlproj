@@ -76,7 +76,7 @@
     <Folder Include="Stored procedures\User" />
     <Folder Include="Stored procedures\State" />
     <Folder Include="Stored procedures\EmailTemplate" />
-    <Folder Include="Stored procedures\ApplicationEvent" />
+    <Folder Include="Stored procedures\Event" />
     <Folder Include="Tables\User" />
     <Folder Include="Tables\State" />
     <Folder Include="Tables\Event" />
@@ -130,12 +130,12 @@
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeApplicationEvent.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeState.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplateLocalization_Get.sql" />
-    <Build Include="Stored procedures\ApplicationEvent\Event_Add.sql" />
-    <Build Include="Stored procedures\ApplicationEvent\Event_Delete.sql" />
-    <Build Include="Stored procedures\ApplicationEvent\Event_GetNext.sql" />
-    <Build Include="Stored procedures\ApplicationEvent\Event_SetState.sql" />
-    <Build Include="Stored procedures\ApplicationEvent\ApplicationEventEmailRecipient_Get.sql" />
-    <Build Include="Stored procedures\ApplicationEvent\ApplicationEventEmailRecipient_Set.sql" />
+    <Build Include="Stored procedures\Event\Event_Add.sql" />
+    <Build Include="Stored procedures\Event\Event_Delete.sql" />
+    <Build Include="Stored procedures\Event\Event_GetNext.sql" />
+    <Build Include="Stored procedures\Event\Event_SetState.sql" />
+    <Build Include="Stored procedures\Event\EventEmailRecipient_Get.sql" />
+    <Build Include="Stored procedures\Event\EventEmailRecipient_Set.sql" />
     <Build Include="Stored procedures\User\User_GetPasswordData.sql" />
     <Build Include="Stored procedures\User\User_SetLanguage.sql" />
     <Build Include="Stored procedures\User\User_GetLanguage.sql" />
@@ -158,9 +158,9 @@
     <Build Include="Tables\State\StateVisibility.sql" />
     <Build Include="Tables\User\ClientBalanceHistory.sql" />
     <Build Include="Tables\User\Forwarder.sql" />
-    <Build Include="Tables\Event\ApplicationEvent.sql" />
-    <Build Include="Tables\Event\ApplicationEventEmailRecipient.sql" />
-    <Build Include="Tables\Event\ApplicationEventEmailTemplate.sql" />
+    <Build Include="Tables\Event\Event.sql" />
+    <Build Include="Tables\Event\EventEmailRecipient.sql" />
+    <Build Include="Tables\Event\EventEmailTemplate.sql" />
     <Build Include="Tables\Application.sql" />
   </ItemGroup>
   <ItemGroup>

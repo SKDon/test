@@ -79,7 +79,6 @@
     <Compile Include="Core\IJobRunner.cs" />
     <Compile Include="Core\JobException.cs" />
     <Compile Include="Core\JobRunnerHelper.cs" />
-    <Compile Include="Core\ShardSettings.cs" />
     <Compile Include="ApplicationEvents\Entities\ApplicationSetStateEventData.cs" />
     <Compile Include="MailSenderJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

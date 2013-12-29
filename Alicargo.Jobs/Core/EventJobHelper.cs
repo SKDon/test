@@ -10,11 +10,11 @@ namespace Alicargo.Jobs.Core
 	{
 		public static void Run(
 			IEventRepository events,
-			ShardSettings shard,
+			int partitionId,
 			Action<EventData> action,
 			EventState nextState)
 		{
-			var data = events.GetNext(nextState, shard.ZeroBasedIndex, shard.Count);
+			var data = events.GetNext(nextState, partitionId);
 
 			while (data != null)
 			{
@@ -32,7 +32,7 @@ namespace Alicargo.Jobs.Core
 					throw;
 				}
 
-				data = events.GetNext(nextState, shard.ZeroBasedIndex, shard.Count);
+				data = events.GetNext(nextState, partitionId);
 			}
 		}
 	}

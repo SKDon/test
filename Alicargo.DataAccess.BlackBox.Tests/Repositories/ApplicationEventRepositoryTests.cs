@@ -7,9 +7,6 @@ using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
-using Alicargo.DataAccess.Repositories.Application;
-using Alicargo.Jobs.ApplicationEvents.Entities;
-using Alicargo.TestHelpers;
 using Dapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -45,23 +42,25 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_AddDublicate()
 		{
 			var data = _fixture.CreateMany<byte>().ToArray();
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
+			var partitionId =_fixture.Create<int>();
+
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
-				var count = connection.Query<int>("select count(1) from [dbo].[Event] where [ApplicationId] = @AppId AND [EventTypeId] = @Type",
-					new { AppId = TestConstants.TestApplicationId, Type = EventType.ApplicationCreated }).First();
+				var count = connection.Query<int>("select count(1) from [dbo].[Event] where [PartitionId] = @partitionId AND [EventTypeId] = @Type",
+					new { partitionId, Type = EventType.ApplicationCreated }).First();
 
 				count.ShouldBeEquivalentTo(2);
 			}
 
-			_events.Add(TestConstants.TestApplicationId, EventType.CPFileUploaded, EventState.ApplicationEmailing, _serializer.Serialize(_fixture.Create<FileHolder>()));
+			_events.Add(partitionId, EventType.CPFileUploaded, EventState.ApplicationEmailing, _serializer.Serialize(_fixture.Create<FileHolder>()));
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
-				var count = connection.Query<int>("select count(1) from [dbo].[Event] where [ApplicationId] = @AppId",
-					new { AppId = TestConstants.TestApplicationId, Type = EventType.ApplicationCreated }).First();
+				var count = connection.Query<int>("select count(1) from [dbo].[Event] where [PartitionId] = @partitionId",
+					new { partitionId, Type = EventType.ApplicationCreated }).First();
 
 				count.ShouldBeEquivalentTo(3);
 			}
@@ -70,15 +69,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod, TestCategory("black-box")]
 		public void Test_GetNext()
 		{
-			var eventData = _serializer.Serialize(_fixture.Create<ApplicationSetStateEventData>());
+			var eventData = _fixture.CreateMany<byte>().ToArray();
+			var partitionId = _fixture.Create<int>();
 
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
 
-			_events.GetNext(EventState.StateHistorySaving, 0, 1).Should().BeNull();
+			_events.GetNext(EventState.StateHistorySaving, partitionId).Should().BeNull();
 
-			var data = _events.GetNext(EventState.ApplicationEmailing, 0, 1);
+			var data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
 
-			data.ApplicationId.ShouldBeEquivalentTo(TestConstants.TestApplicationId);
 			data.EventType.ShouldBeEquivalentTo(EventType.ApplicationCreated);
 			data.Data.ShouldBeEquivalentTo(eventData);
 			data.Id.Should().BeGreaterThan(0);
@@ -88,14 +87,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_SetState()
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
+			var partitionId =_fixture.Create<int>();
 
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
 
-			var data = _events.GetNext(EventState.ApplicationEmailing, 0, 1);
+			var data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
 
 			_events.SetState(data.Id, EventState.StateHistorySaving);
 
-			var next = _events.GetNext(EventState.StateHistorySaving, 0, 1);
+			var next = _events.GetNext(EventState.StateHistorySaving, partitionId);
 
 			next.ShouldBeEquivalentTo(data);
 		}
@@ -104,14 +104,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_Delete()
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
+			var partitionId =_fixture.Create<int>();
 
-			_events.Add(TestConstants.TestApplicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
 
-			var data = _events.GetNext(EventState.ApplicationEmailing, 0, 1);
+			var data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
 
 			_events.Delete(data.Id);
 
-			data = _events.GetNext(EventState.ApplicationEmailing, 0, 1);
+			data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
 
 			data.Should().BeNull();
 		}

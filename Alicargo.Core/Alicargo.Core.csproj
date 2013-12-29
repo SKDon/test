@@ -67,6 +67,8 @@
     <Compile Include="Enums\MethodOfDelivery.cs" />
     <Compile Include="Enums\MethodOfTransit.cs" />
     <Compile Include="Helpers\ApplicationHelper.cs" />
+    <Compile Include="Helpers\IPartitionConverter.cs" />
+    <Compile Include="Helpers\PartitionConverter.cs" />
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
     <Compile Include="Localization\CultureContext.cs" />
     <Compile Include="Localization\ICultureContext.cs" />

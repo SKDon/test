@@ -8,19 +8,19 @@ namespace Alicargo.Jobs.ApplicationEvents
 	public sealed class ApplicationStateHistoryJob : IJob
 	{
 		private readonly IEventRepository _events;
-		private readonly ShardSettings _shard;
+		private readonly int _partitionId;
 
 		public ApplicationStateHistoryJob(
 			IEventRepository events,
-			ShardSettings shard)
+			int partitionId)
 		{
 			_events = events;
-			_shard = shard;
+			_partitionId = partitionId;
 		}
 
 		public void Run()
 		{
-			EventJobHelper.Run(_events, _shard, ProcessEvent, EventState.StateHistorySaving);
+			EventJobHelper.Run(_events, _partitionId, ProcessEvent, EventState.StateHistorySaving);
 		}
 
 		private void ProcessEvent(EventData data)

@@ -7,8 +7,10 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Helpers;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
+using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers
 {
@@ -28,15 +30,18 @@ namespace Alicargo.Controllers
 		private readonly IEventRepository _events;
 		private readonly IApplicationFileRepository _files;
 		private readonly ISerializer _serializer;
+		private readonly IPartitionConverter _converter;
 
 		public FilesController(
 			IApplicationFileRepository files,
 			IEventRepository events,
-			ISerializer serializer)
+			ISerializer serializer,
+			IPartitionConverter converter)
 		{
 			_files = files;
 			_events = events;
 			_serializer = serializer;
+			_converter = converter;
 		}
 
 		public virtual FileResult Download(long id)
@@ -96,7 +101,7 @@ namespace Alicargo.Controllers
 
 			AddFileUploadEvent(id, TypesMapping[type], file.FileName, bytes);
 
-			return Json(new { id = fileId });
+			return Json(new {id = fileId});
 		}
 
 		[HttpPost]
@@ -112,12 +117,22 @@ namespace Alicargo.Controllers
 		{
 			if (fileData == null || fileData.Length == 0) return;
 
-			_events.Add(applicationId, type, EventState.ApplicationEmailing, _serializer.Serialize(
+			var data = _serializer.Serialize(
 				new FileHolder
 				{
 					Data = fileData,
 					Name = fileName
-				}));
+				});
+
+			_events.Add(
+				_converter.GetKey(applicationId), 
+				type, EventState.ApplicationEmailing,
+				_serializer.Serialize(
+					new EventDataForApplication
+					{
+						ApplicationId = applicationId,
+						Data = data
+					}));
 		}
 	}
 }
