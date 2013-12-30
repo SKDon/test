@@ -52,6 +52,8 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="BalanceJob.cs" />
+    <Compile Include="CalculationJob.cs" />
     <Compile Include="Core\EventJobHelper.cs" />
     <Compile Include="ApplicationEvents\ApplicationMailCreatorJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryJob.cs" />
@@ -68,14 +70,7 @@
     <Compile Include="ApplicationEvents\Helpers\TemplatesFacade.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulder.cs" />
     <Compile Include="ApplicationEvents\Entities\TextLocalizedData.cs" />
-    <Compile Include="Calculation\CalculationJobHelper.cs" />
-    <Compile Include="Calculation\CalculationMailBuilder.cs" />
-    <Compile Include="Calculation\CalculationWatcherJob.cs" />
-    <Compile Include="Calculation\CalculationMailer.cs" />
-    <Compile Include="Calculation\ICalculationMailBuilder.cs" />
-    <Compile Include="Calculation\ICalculationMailer.cs" />
     <Compile Include="Core\IJob.cs" />
-    <Compile Include="Calculation\CalculationMailerJob.cs" />
     <Compile Include="Core\IJobRunner.cs" />
     <Compile Include="Core\JobException.cs" />
     <Compile Include="Core\JobRunnerHelper.cs" />

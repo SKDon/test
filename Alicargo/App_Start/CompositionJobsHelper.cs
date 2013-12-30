@@ -13,6 +13,7 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Events.Helpers;
 using Alicargo.Services;
@@ -32,7 +33,7 @@ namespace Alicargo.App_Start
 
 		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
-			//const string calculationMailerJob = "CalculationMailerJob_";
+			const string calculationJob = "CalculationJob_";
 			const string applicationMailCreatorJob = "ApplicationMailCreatorJob_";
 			const string applicationStateHistoryJob = "ApplicationStateHistoryJob_";
 			const string mailSenderJobJob = "MailSenderJob_";
@@ -42,8 +43,8 @@ namespace Alicargo.App_Start
 				var partitionId = i;
 				var mainConnectionString = connectionString;
 
-				//BindStatelessJobRunner(kernel, () => RunCalculationMailerJob(mainConnectionString),
-				//	calculationMailerJob + partitionId);
+				BindStatelessJobRunner(kernel, () => RunCalculationJob(mainConnectionString, partitionId),
+					calculationJob + partitionId);
 
 				BindStatelessJobRunner(kernel, () => RunApplicationMailCreatorJob(
 					mainConnectionString, filesConnectionString, partitionId), applicationMailCreatorJob + partitionId);
@@ -51,11 +52,11 @@ namespace Alicargo.App_Start
 				BindStatelessJobRunner(kernel, () => RunApplicationStateHistoryJob(mainConnectionString, partitionId),
 					applicationStateHistoryJob + partitionId);
 
-				BindStatelessJobRunner(kernel, () => GetMailSenderJob(mainConnectionString, partitionId),
-					mailSenderJobJob + partitionId);
+				BindStatelessJobRunner(kernel, () => RunMailSenderJob(mainConnectionString, partitionId),
+					mailSenderJobJob + partitionId);				
 			}
 
-			BindStatelessJobRunner(kernel, () => GetMailSenderJob(connectionString, PartitionIdForOtherMails),
+			BindStatelessJobRunner(kernel, () => RunMailSenderJob(connectionString, PartitionIdForOtherMails),
 				mailSenderJobJob + PartitionIdForOtherMails);
 		}
 
@@ -68,23 +69,15 @@ namespace Alicargo.App_Start
 				.Named(jobName);
 		}
 
-		//[Obsolete]
-		//private static void RunCalculationMailerJob(string connectionString)
-		//{
-		//	using (var connection = new SqlConnection(connectionString))
-		//	{
-		//		var unitOfWork = new UnitOfWork(connection);
-		//		var clients = new ClientRepository(unitOfWork);
-		//		var calculations = new CalculationRepository(unitOfWork);
-		//		var mailSender = new SilentMailSender(new MailSender(), JobsLogger);
-		//		var mailer = new CalculationMailer(mailSender,
-		//			new CalculationMailBuilder(clients, new AdminRepository(unitOfWork), EmailsHelper.DefaultFrom));
+		private static void RunCalculationJob(string connectionString, int partitionId)
+		{
+			var executor = new SqlProcedureExecutor(connectionString);
+			var events = new EventRepository(executor);
 
-		//		var job = new CalculationMailerJob(calculations, mailer, JobsLogger);
+			var job = new CalculationJob(events, partitionId);
 
-		//		job.Run();
-		//	}
-		//}
+			job.Run();
+		}
 
 		private static void RunApplicationMailCreatorJob(string connectionString, string filesConnectionString,
 			int partitionId)
@@ -113,7 +106,7 @@ namespace Alicargo.App_Start
 			job.Run();
 		}
 
-		private static void GetMailSenderJob(string connectionString, int partitionId)
+		private static void RunMailSenderJob(string connectionString, int partitionId)
 		{
 			var serializer = new Serializer();
 			var executor = new SqlProcedureExecutor(connectionString);

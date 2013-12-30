@@ -1,9 +1,6 @@
 ﻿CREATE TABLE [dbo].[Calculation]
 (
 	[Id]					BIGINT			NOT NULL PRIMARY KEY IDENTITY(1, 1),
-	[RowVersion]			ROWVERSION		NOT NULL,
-	[StateId]				INT				NOT NULL,
-	[StateIdTimestamp]		DATETIMEOFFSET	CONSTRAINT [DF_Calculation_StateIdTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 
 	[ClientId]				BIGINT			NOT NULL,
 	[ApplicationHistoryId]	BIGINT			NOT NULL,
@@ -21,9 +18,6 @@
 
 	CONSTRAINT [FK_Calculation_Client] FOREIGN KEY ([ClientId]) REFERENCES [Client]([Id])
 )
-GO
-
-CREATE INDEX [IX_Calculation_StateId] ON [dbo].[Calculation] ([StateId])
 GO
 
 CREATE INDEX [IX_Calculation_ClientId] ON [dbo].[Calculation] ([ClientId])

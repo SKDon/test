@@ -86,7 +86,6 @@
     <Build Include="Tables\AirWaybill.sql" />
     <Build Include="Tables\Country.sql" />
     <Build Include="Tables\Calculation.sql" />
-    <Build Include="Stored procedures\Calculation_SetState.sql" />
     <Build Include="Types\IdsTable.sql" />
     <PostDeploy Include="Scripts\PostDeploy.sql" />
     <Build Include="Tables\EmailMessage.sql" />
