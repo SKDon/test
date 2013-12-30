@@ -110,7 +110,7 @@ namespace Alicargo.Controllers
 			if (fileData == null || fileData.Length == 0) return;
 
 			_facade.Add(applicationId,
-				type, EventState.ApplicationEmailing,
+				type, EventState.Emailing,
 				new FileHolder
 				{
 					Data = fileData,

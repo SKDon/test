@@ -15,7 +15,8 @@ namespace Alicargo.Jobs.ApplicationEvents
 		private readonly IMessageFactory _messageFactory;
 		private readonly ISerializer _serializer;
 
-		public ApplicationMailCreatorJob(IEmailMessageRepository emails, IMessageFactory messageFactory,
+		public ApplicationMailCreatorJob(
+			IEmailMessageRepository emails, IMessageFactory messageFactory,
 			IEventRepository events, int partitionId, ISerializer serializer)
 		{
 			_emails = emails;
@@ -27,14 +28,14 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public void Run()
 		{
-			EventJobHelper.Run(_events, _partitionId, ProcessEvent, EventState.ApplicationEmailing);
+			EventJobHelper.Run(_events, _partitionId, ProcessEvent, EventState.Emailing);
 		}
 
 		private void ProcessEvent(EventData data)
 		{
 			var applicationEventData = _serializer.Deserialize<EventDataForApplication>(data.Data);
 
-			var messages = _messageFactory.Get(applicationEventData.ApplicationId, data.EventType, applicationEventData.Data);
+			var messages = _messageFactory.Get(applicationEventData.ApplicationId, data.Type, applicationEventData.Data);
 
 			if (messages != null)
 			{

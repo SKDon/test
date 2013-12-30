@@ -31,7 +31,7 @@ namespace Alicargo.Services.Application
 		{
 			var applicationId = _manager.Add(model, carrierModel, transitModel, clientId);
 
-			_events.Add(applicationId, EventType.ApplicationCreated, EventState.ApplicationEmailing);
+			_events.Add(applicationId, EventType.ApplicationCreated, EventState.Emailing);
 
 			return applicationId;
 		}
@@ -46,7 +46,7 @@ namespace Alicargo.Services.Application
 			_manager.SetState(applicationId, stateId);
 
 			_events.Add(applicationId,
-				EventType.ApplicationSetState, EventState.ApplicationEmailing,
+				EventType.ApplicationSetState, EventState.Emailing,
 				new ApplicationSetStateEventData
 				{
 					StateId = stateId,
@@ -58,14 +58,14 @@ namespace Alicargo.Services.Application
 		{
 			_manager.SetTransitReference(applicationId, transitReference);
 
-			_events.Add(applicationId, EventType.SetTransitReference, EventState.ApplicationEmailing, transitReference);
+			_events.Add(applicationId, EventType.SetTransitReference, EventState.Emailing, transitReference);
 		}
 
 		public void SetDateOfCargoReceipt(long applicationId, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_manager.SetDateOfCargoReceipt(applicationId, dateOfCargoReceipt);
 
-			_events.Add(applicationId, EventType.SetDateOfCargoReceipt, EventState.ApplicationEmailing, dateOfCargoReceipt);
+			_events.Add(applicationId, EventType.SetDateOfCargoReceipt, EventState.Emailing, dateOfCargoReceipt);
 		}
 
 		public void SetTransitCost(long id, decimal? transitCost)

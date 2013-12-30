@@ -44,8 +44,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data = _fixture.CreateMany<byte>().ToArray();
 			var partitionId =_fixture.Create<int>();
 
-			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
-			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, data);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, data);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, data);
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
@@ -55,7 +55,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				count.ShouldBeEquivalentTo(2);
 			}
 
-			_events.Add(partitionId, EventType.CPFileUploaded, EventState.ApplicationEmailing, _serializer.Serialize(_fixture.Create<FileHolder>()));
+			_events.Add(partitionId, EventType.CPFileUploaded, EventState.Emailing, _serializer.Serialize(_fixture.Create<FileHolder>()));
 
 			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
@@ -72,13 +72,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var eventData = _fixture.CreateMany<byte>().ToArray();
 			var partitionId = _fixture.Create<int>();
 
-			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, eventData);
 
 			_events.GetNext(EventState.StateHistorySaving, partitionId).Should().BeNull();
 
-			var data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
+			var data = _events.GetNext(EventState.Emailing, partitionId);
 
-			data.EventType.ShouldBeEquivalentTo(EventType.ApplicationCreated);
+			data.Type.ShouldBeEquivalentTo(EventType.ApplicationCreated);
 			data.Data.ShouldBeEquivalentTo(eventData);
 			data.Id.Should().BeGreaterThan(0);
 		}
@@ -89,9 +89,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var eventData = _fixture.CreateMany<byte>().ToArray();
 			var partitionId =_fixture.Create<int>();
 
-			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, eventData);
 
-			var data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
+			var data = _events.GetNext(EventState.Emailing, partitionId);
 
 			_events.SetState(data.Id, EventState.StateHistorySaving);
 
@@ -106,13 +106,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var eventData = _fixture.CreateMany<byte>().ToArray();
 			var partitionId =_fixture.Create<int>();
 
-			_events.Add(partitionId, EventType.ApplicationCreated, EventState.ApplicationEmailing, eventData);
+			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, eventData);
 
-			var data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
+			var data = _events.GetNext(EventState.Emailing, partitionId);
 
 			_events.Delete(data.Id);
 
-			data = _events.GetNext(EventState.ApplicationEmailing, partitionId);
+			data = _events.GetNext(EventState.Emailing, partitionId);
 
 			data.Should().BeNull();
 		}
