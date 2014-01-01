@@ -33,36 +33,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
-		public void Test_UpdateConflict()
-		{
-			var data = GenerateData();
-
-			var versionedData = AddNew(data, TestConstants.TestApplicationId);
-
-			var result = _calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
-				CalculationState.New);
-
-			result.Should().NotBeNull();
-			result.RowVersion.SequenceEqual(versionedData.Version.RowVersion).Should().BeFalse();
-
-			try
-			{
-				_calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
-					CalculationState.New);
-			}
-			catch (EntityUpdateConflict)
-			{
-				_calculationRepository.Get(CalculationState.New)
-									  .SingleOrDefault(x => x.Data.AirWaybillDisplay == data.AirWaybillDisplay)
-									  .Should().NotBeNull();
-
-				return;
-			}
-
-			Assert.Fail("Should not get here");
-		}
-
 		[TestCategory("black-box"), TestMethod, ExpectedException(typeof (DublicateException))]
 		public void Test_Uniqueness()
 		{
@@ -81,27 +51,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var data = GenerateData();
 
-			var versionedData = AddNew(data, TestConstants.TestApplicationId);
+			var actual = AddNew(data, TestConstants.TestApplicationId);
 
-			versionedData.Data.ShouldBeEquivalentTo(data);
-			versionedData.Version.RowVersion.Should().NotBeNull();
-			versionedData.Version.StateTimestamp.Should().NotBeNull();
-		}
-
-		[TestMethod, TestCategory("black-box")]
-		public void Test_SetState()
-		{
-			var data = GenerateData();
-
-			var versionedData = AddNew(data, TestConstants.TestApplicationId);
-
-			var result = _calculationRepository.SetState(versionedData.Version.Id, versionedData.Version.RowVersion,
-				CalculationState.Done);
-
-			result.RowVersion.SequenceEqual(versionedData.Version.RowVersion).Should().BeFalse();
-			result.StateTimestamp.Should().BeGreaterThan(versionedData.Version.StateTimestamp);
-			result.Id.ShouldBeEquivalentTo(versionedData.Version.Id);
-			result.State.ShouldBeEquivalentTo(CalculationState.Done);
+			actual.ShouldBeEquivalentTo(data);
 		}
 
 		private CalculationData GenerateData()
@@ -109,13 +61,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			return _fixture.Build<CalculationData>().With(x => x.ClientId, TestConstants.TestClientId1).Create();
 		}
 
-		private VersionedData<CalculationState, CalculationData> AddNew(CalculationData data, long applicationId)
+		private CalculationData AddNew(CalculationData data, long applicationId)
 		{
 			_calculationRepository.Add(data, applicationId);
 			_context.UnitOfWork.SaveChanges();
 
 			return _calculationRepository.Get(CalculationState.New)
-										 .Single(x => x.Data.AirWaybillDisplay == data.AirWaybillDisplay);
+				.Single(x => x.AirWaybillDisplay == data.AirWaybillDisplay);
 		}
 	}
 }

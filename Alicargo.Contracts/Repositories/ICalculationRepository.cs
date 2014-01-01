@@ -6,8 +6,7 @@ namespace Alicargo.Contracts.Repositories
 	public interface ICalculationRepository
 	{
 		void Add(CalculationData data, long applicationId);
-		VersionedData<CalculationState, CalculationData>[] Get(CalculationState state);
-		VersionData<CalculationState> SetState(long id, byte[] rowVersion, CalculationState state);
+		CalculationData[] Get(CalculationState state);
 		CalculationData[] GetByClientId(long clientId);
 		void RemoveByApplication(long applicationId);
 	}

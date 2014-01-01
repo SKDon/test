@@ -74,7 +74,6 @@
   <Table Name="dbo.Calculation" Member="Calculations" AccessModifier="Internal">
     <Type Name="Calculation" AccessModifier="Internal" Modifier="Sealed">
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="StateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StateIdTimestamp" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />

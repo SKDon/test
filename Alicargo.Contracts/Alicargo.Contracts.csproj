@@ -72,8 +72,6 @@
     <Compile Include="Contracts\User\SenderData.cs" />
     <Compile Include="Contracts\State\StateListItem.cs" />
     <Compile Include="Contracts\State\StateRole.cs" />
-    <Compile Include="Contracts\VersionData.cs" />
-    <Compile Include="Contracts\VersionedData.cs" />
     <Compile Include="Contracts\CountryData.cs" />
     <Compile Include="Contracts\FileHolder.cs" />
     <Compile Include="Contracts\AirWaybillData.cs" />

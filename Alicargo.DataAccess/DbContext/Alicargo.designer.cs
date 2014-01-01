@@ -1691,8 +1691,6 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _Id;
 		
-		private System.Data.Linq.Binary _RowVersion;
-		
 		private int _StateId;
 		
 		private System.DateTimeOffset _StateIdTimestamp;
@@ -1731,8 +1729,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnCreated();
     partial void OnIdChanging(long value);
     partial void OnIdChanged();
-    partial void OnRowVersionChanging(System.Data.Linq.Binary value);
-    partial void OnRowVersionChanged();
     partial void OnStateIdChanging(int value);
     partial void OnStateIdChanged();
     partial void OnStateIdTimestampChanging(System.DateTimeOffset value);
@@ -1771,7 +1767,7 @@ namespace Alicargo.DataAccess.DbContext
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long Id
 		{
 			get
@@ -1791,27 +1787,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RowVersion", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary RowVersion
-		{
-			get
-			{
-				return this._RowVersion;
-			}
-			set
-			{
-				if ((this._RowVersion != value))
-				{
-					this.OnRowVersionChanging(value);
-					this.SendPropertyChanging();
-					this._RowVersion = value;
-					this.SendPropertyChanged("RowVersion");
-					this.OnRowVersionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateId", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateId", DbType="Int NOT NULL")]
 		public int StateId
 		{
 			get
@@ -1831,7 +1807,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateIdTimestamp", DbType="DateTimeOffset NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateIdTimestamp", DbType="DateTimeOffset NOT NULL")]
 		public System.DateTimeOffset StateIdTimestamp
 		{
 			get
@@ -1851,7 +1827,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientId", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientId", DbType="BigInt NOT NULL")]
 		public long ClientId
 		{
 			get
@@ -1875,7 +1851,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationHistoryId", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationHistoryId", DbType="BigInt NOT NULL")]
 		public long ApplicationHistoryId
 		{
 			get
@@ -1895,7 +1871,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AirWaybillDisplay", DbType="NVarChar(320) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AirWaybillDisplay", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
 		public string AirWaybillDisplay
 		{
 			get
@@ -1915,7 +1891,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationDisplay", DbType="NVarChar(320) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationDisplay", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
 		public string ApplicationDisplay
 		{
 			get
@@ -1935,7 +1911,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactoryName", DbType="NVarChar(320) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactoryName", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
 		public string FactoryName
 		{
 			get
@@ -1955,7 +1931,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MarkName", DbType="NVarChar(320) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MarkName", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
 		public string MarkName
 		{
 			get
@@ -1975,7 +1951,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Real NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Real NOT NULL")]
 		public float Weight
 		{
 			get
@@ -1995,7 +1971,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TariffPerKg", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TariffPerKg", DbType="Money NOT NULL")]
 		public decimal TariffPerKg
 		{
 			get
@@ -2015,7 +1991,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScotchCost", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScotchCost", DbType="Money NOT NULL")]
 		public decimal ScotchCost
 		{
 			get
@@ -2035,7 +2011,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceCost", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceCost", DbType="Money NOT NULL")]
 		public decimal InsuranceCost
 		{
 			get
@@ -2055,7 +2031,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactureCost", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactureCost", DbType="Money NOT NULL")]
 		public decimal FactureCost
 		{
 			get
@@ -2075,7 +2051,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransitCost", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransitCost", DbType="Money NOT NULL")]
 		public decimal TransitCost
 		{
 			get
@@ -2095,7 +2071,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PickupCost", DbType="Money NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PickupCost", DbType="Money NOT NULL")]
 		public decimal PickupCost
 		{
 			get
