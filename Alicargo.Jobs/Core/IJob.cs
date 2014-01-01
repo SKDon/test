@@ -2,6 +2,6 @@
 {
 	public interface IJob
 	{
-		void Run();
+		void Work();
 	}
 }

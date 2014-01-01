@@ -5,13 +5,13 @@ using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Jobs.Core
 {
-	public sealed class StatelessJobRunner : IJobRunner
+	public sealed class DefaultRunner : IRunner
 	{
 		private readonly Action _action;
 		private readonly ILog _log;
 		private readonly TimeSpan _pausePeriod;
 
-		public StatelessJobRunner(
+		public DefaultRunner(
 			Action action,
 			string name,
 			ILog log,

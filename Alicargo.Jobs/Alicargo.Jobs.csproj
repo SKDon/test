@@ -52,11 +52,11 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="BalanceJob.cs" />
+    <Compile Include="BalanceProcessor.cs" />
     <Compile Include="CalculationJob.cs" />
-    <Compile Include="Core\EventJobHelper.cs" />
-    <Compile Include="ApplicationEvents\ApplicationMailCreatorJob.cs" />
-    <Compile Include="ApplicationEvents\ApplicationStateHistoryJob.cs" />
+    <Compile Include="Core\DefaultEventJob.cs" />
+    <Compile Include="ApplicationEvents\ApplicationMailCreatorProcessor.cs" />
+    <Compile Include="ApplicationEvents\ApplicationStateHistoryProcessor.cs" />
     <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />
     <Compile Include="ApplicationEvents\Helpers\FilesFacade.cs" />
     <Compile Include="ApplicationEvents\Abstract\IFilesFacade.cs" />
@@ -70,10 +70,10 @@
     <Compile Include="ApplicationEvents\Helpers\TemplatesFacade.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulder.cs" />
     <Compile Include="ApplicationEvents\Entities\TextLocalizedData.cs" />
+    <Compile Include="Core\IEventProcessor.cs" />
     <Compile Include="Core\IJob.cs" />
-    <Compile Include="Core\IJobRunner.cs" />
+    <Compile Include="Core\IRunner.cs" />
     <Compile Include="Core\JobException.cs" />
-    <Compile Include="Core\JobRunnerHelper.cs" />
     <Compile Include="ApplicationEvents\Entities\ApplicationSetStateEventData.cs" />
     <Compile Include="MailSenderJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,7 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Core\StatelessJobRunner.cs" />
+    <Compile Include="Core\DefaultRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Calculation\Resources.resx">

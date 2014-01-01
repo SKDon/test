@@ -7,17 +7,20 @@ using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs.ApplicationEvents
 {
-	public sealed class ApplicationMailCreatorJob : IJob
+	public sealed class ApplicationMailCreatorProcessor : IEventProcessor
 	{
 		private readonly IEmailMessageRepository _emails;
 		private readonly IEventRepository _events;
-		private readonly int _partitionId;
 		private readonly IMessageFactory _messageFactory;
+		private readonly int _partitionId;
 		private readonly ISerializer _serializer;
 
-		public ApplicationMailCreatorJob(
-			IEmailMessageRepository emails, IMessageFactory messageFactory,
-			IEventRepository events, int partitionId, ISerializer serializer)
+		public ApplicationMailCreatorProcessor(
+			int partitionId,
+			IMessageFactory messageFactory,
+			IEmailMessageRepository emails,
+			IEventRepository events,
+			ISerializer serializer)
 		{
 			_emails = emails;
 			_messageFactory = messageFactory;
@@ -26,16 +29,11 @@ namespace Alicargo.Jobs.ApplicationEvents
 			_serializer = serializer;
 		}
 
-		public void Run()
-		{
-			EventJobHelper.Run(_events, _partitionId, ProcessEvent, EventState.Emailing);
-		}
-
-		private void ProcessEvent(EventData data)
+		public void ProcessEvent(EventType type, EventData data)
 		{
 			var applicationEventData = _serializer.Deserialize<EventDataForApplication>(data.Data);
 
-			var messages = _messageFactory.Get(applicationEventData.ApplicationId, data.Type, applicationEventData.Data);
+			var messages = _messageFactory.Get(applicationEventData.ApplicationId, type, applicationEventData.Data);
 
 			if (messages != null)
 			{

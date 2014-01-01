@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Email;
@@ -13,9 +15,7 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
-using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
-using Alicargo.Jobs.Events.Helpers;
 using Alicargo.Services;
 using log4net;
 using Ninject;
@@ -35,7 +35,6 @@ namespace Alicargo.App_Start
 		{
 			const string calculationJob = "CalculationJob_";
 			const string applicationMailCreatorJob = "ApplicationMailCreatorJob_";
-			const string applicationStateHistoryJob = "ApplicationStateHistoryJob_";
 			const string mailSenderJobJob = "MailSenderJob_";
 
 			for (var i = 0; i < PartitionCount; i++)
@@ -46,14 +45,11 @@ namespace Alicargo.App_Start
 				BindStatelessJobRunner(kernel, () => RunCalculationJob(mainConnectionString, partitionId),
 					calculationJob + partitionId);
 
-				BindStatelessJobRunner(kernel, () => RunApplicationMailCreatorJob(
+				BindStatelessJobRunner(kernel, () => RunApplicationEventsJob(
 					mainConnectionString, filesConnectionString, partitionId), applicationMailCreatorJob + partitionId);
 
-				BindStatelessJobRunner(kernel, () => RunApplicationStateHistoryJob(mainConnectionString, partitionId),
-					applicationStateHistoryJob + partitionId);
-
 				BindStatelessJobRunner(kernel, () => RunMailSenderJob(mainConnectionString, partitionId),
-					mailSenderJobJob + partitionId);				
+					mailSenderJobJob + partitionId);
 			}
 
 			BindStatelessJobRunner(kernel, () => RunMailSenderJob(connectionString, PartitionIdForOtherMails),
@@ -63,8 +59,8 @@ namespace Alicargo.App_Start
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
 			string jobName)
 		{
-			kernel.Bind<IJobRunner>()
-				.ToMethod(context => new StatelessJobRunner(action, jobName, JobsLogger, PausePeriod))
+			kernel.Bind<IRunner>()
+				.ToMethod(context => new DefaultRunner(action, jobName, JobsLogger, PausePeriod))
 				.InSingletonScope()
 				.Named(jobName);
 		}
@@ -74,12 +70,12 @@ namespace Alicargo.App_Start
 			var executor = new SqlProcedureExecutor(connectionString);
 			var events = new EventRepository(executor);
 
-			var job = new CalculationJob(events, partitionId);
+			//var job = new CalculationJob(events, partitionId);
 
-			job.Run();
+			//job.Work();
 		}
 
-		private static void RunApplicationMailCreatorJob(string connectionString, string filesConnectionString,
+		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,
 			int partitionId)
 		{
 			using (var connection = new SqlConnection(connectionString))
@@ -89,21 +85,29 @@ namespace Alicargo.App_Start
 				var executor = new SqlProcedureExecutor(connectionString);
 				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
+				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(partitionId, factory, emails, events, serializer);
 
-				var job = new ApplicationMailCreatorJob(emails, factory, events, partitionId, serializer);
+				var processors = new Dictionary<EventState, IEventProcessor>
+				{
+					{ EventState.Emailing, mailCreatorProcessor },
+					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor(events) }
+				};
 
-				job.Run();
+				new DefaultEventJob(events, partitionId,
+					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+					{
+						{ EventType.ApplicationCreated, processors },
+						{ EventType.ApplicationSetState, processors },
+						{ EventType.SetDateOfCargoReceipt, processors },
+						{ EventType.SetTransitReference, processors },
+						{ EventType.CPFileUploaded, processors },
+						{ EventType.InvoiceFileUploaded, processors },
+						{ EventType.PackingFileUploaded, processors },
+						{ EventType.SwiftFileUploaded, processors },
+						{ EventType.DeliveryBillFileUploaded, processors },
+						{ EventType.Torg12FileUploaded, processors }
+					}).Work();
 			}
-		}
-
-		private static void RunApplicationStateHistoryJob(string connectionString, int partitionId)
-		{
-			var executor = new SqlProcedureExecutor(connectionString);
-			var events = new EventRepository(executor);
-
-			var job = new ApplicationStateHistoryJob(events, partitionId);
-
-			job.Run();
 		}
 
 		private static void RunMailSenderJob(string connectionString, int partitionId)
@@ -115,7 +119,7 @@ namespace Alicargo.App_Start
 
 			var job = new MailSenderJob(messages, partitionId, sender, serializer);
 
-			job.Run();
+			job.Work();
 		}
 
 		private static IMessageFactory GetMessageFactory(IDbConnection connection, string connectionString,

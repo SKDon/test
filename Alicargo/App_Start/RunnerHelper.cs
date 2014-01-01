@@ -6,7 +6,7 @@ using Alicargo.Jobs.Core;
 
 namespace Alicargo.App_Start
 {
-	public sealed class JobRunnerHelper
+	public sealed class RunnerHelper
 	{
 		private readonly CancellationTokenSource _tokenSource = new CancellationTokenSource();
 		private Task[] _tasks;

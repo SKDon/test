@@ -2,7 +2,7 @@
 
 namespace Alicargo.Jobs.Core
 {
-	public interface IJobRunner
+	public interface IRunner
 	{
 		void Run(CancellationTokenSource tokenSource);
 		string Name { get; }

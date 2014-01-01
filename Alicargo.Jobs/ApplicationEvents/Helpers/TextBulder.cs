@@ -13,7 +13,7 @@ using Alicargo.Core.Helpers;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.Events.Helpers
+namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	public sealed class TextBulder : ITextBulder
 	{

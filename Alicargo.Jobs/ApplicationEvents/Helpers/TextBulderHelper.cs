@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.Events.Helpers
+namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	internal static class TextBulderHelper
 	{

@@ -29,7 +29,7 @@ namespace Alicargo
 		private readonly string _filesConnectionString =
 			ConfigurationManager.ConnectionStrings["FilesDbConnectionString"].ConnectionString;
 
-		private readonly JobRunnerHelper _jobs = new JobRunnerHelper();
+		private readonly RunnerHelper _runnerHelper = new RunnerHelper();
 
 		private readonly StandardKernel _kernel = new StandardKernel();
 
@@ -54,11 +54,14 @@ namespace Alicargo
 		{
 			try
 			{
-				_jobs.RunJobs(_kernel.GetAll<IJobRunner>().ToArray());
+				var runners = _kernel.GetAll<IRunner>().ToArray();
+
+				_runnerHelper.RunJobs(runners);
 			}
 			catch (Exception e)
 			{
 				MainLogger.Error("Failed to start runners ", e);
+
 				throw;
 			}
 
@@ -69,7 +72,7 @@ namespace Alicargo
 		{
 			try
 			{
-				var waitAll = _jobs.StopAndWait(PausePeriod.Add(PausePeriod));
+				var waitAll = _runnerHelper.StopAndWait(PausePeriod.Add(PausePeriod));
 
 				MainLogger.Info(waitAll
 					? "Jobs were stopped"

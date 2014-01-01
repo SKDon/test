@@ -1,4 +1,4 @@
-﻿using Alicargo.Jobs.Events.Helpers;
+﻿using Alicargo.Jobs.ApplicationEvents.Helpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;

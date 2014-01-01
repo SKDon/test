@@ -17,7 +17,10 @@ namespace Alicargo.Jobs
 		private readonly ISerializer _serializer;
 
 		public MailSenderJob(
-			IEmailMessageRepository messages, int partitionId, IMailSender sender, ISerializer serializer)
+			IEmailMessageRepository messages,
+			int partitionId,
+			IMailSender sender,
+			ISerializer serializer)
 		{
 			_messages = messages;
 			_partitionId = partitionId;
@@ -25,7 +28,7 @@ namespace Alicargo.Jobs
 			_serializer = serializer;
 		}
 
-		public void Run()
+		public void Work()
 		{
 			var data = _messages.GetNext(EmailMessageState.New, _partitionId);
 

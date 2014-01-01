@@ -7,7 +7,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.Events.Helpers
+namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	public sealed class TemplatesFacade : ITemplatesFacade
 	{

@@ -10,7 +10,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Services;
 using Alicargo.Jobs.ApplicationEvents.Entities;
-using Alicargo.Jobs.Events.Helpers;
+using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
