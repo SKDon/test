@@ -3,26 +3,26 @@
 	public enum EventType
 	{
 		// Application events
-		ApplicationCreated,
-		ApplicationSetState,
-		SetDateOfCargoReceipt,
-		SetTransitReference,
+		ApplicationCreated = 1,
+		ApplicationSetState = 2,
+		SetDateOfCargoReceipt = 9,
+		SetTransitReference = 10,
 
-		CPFileUploaded,
-		InvoiceFileUploaded,
-		PackingFileUploaded,
-		SwiftFileUploaded,
-		DeliveryBillFileUploaded,
-		Torg12FileUploaded,
+		CPFileUploaded = 3,
+		InvoiceFileUploaded = 4,
+		PackingFileUploaded = 5,
+		SwiftFileUploaded = 6,
+		DeliveryBillFileUploaded = 7,
+		Torg12FileUploaded = 8,
 
 
 		// Calculation events
-		Calculate,
-		CalculationCanceled,
+		Calculate = 11,
+		CalculationCanceled = 12,
 
 
 		// Balance events
-		BalanceIncreased,
-		BalanceDecreased
+		BalanceIncreased = 13,
+		BalanceDecreased = 14
 	}
 }

@@ -124,9 +124,9 @@
     <Build Include="Stored procedures\User\Sender_GetTariffs.sql" />
     <Build Include="Stored procedures\User\Sender_GetUserId.sql" />
     <Build Include="Stored procedures\User\Client_DeleteForce.sql" />
-    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByApplicationEvent.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByEvent.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByStateId.sql" />
-    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeApplicationEvent.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeEvent.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeState.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplateLocalization_Get.sql" />
     <Build Include="Stored procedures\Event\Event_Add.sql" />
