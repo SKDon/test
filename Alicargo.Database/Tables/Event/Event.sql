@@ -4,7 +4,6 @@
 
 	[StateId] INT NOT NULL,
 	[StateIdTimestamp] DATETIMEOFFSET CONSTRAINT [DF_Event_StateIdTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
-	[CreationTimestamp] DATETIMEOFFSET CONSTRAINT [DF_Event_CreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 	[PartitionId] INT NOT NULL,
 
 	[EventTypeId] INT NOT NULL,

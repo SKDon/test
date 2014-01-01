@@ -74,13 +74,24 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, eventData);
 
-			_events.GetNext(EventState.StateHistorySaving, partitionId).Should().BeNull();
+			_events.GetNext(EventType.BalanceDecreased, partitionId).Should().BeNull();
 
-			var data = _events.GetNext(EventState.Emailing, partitionId);
+			var data = _events.GetNext(EventType.ApplicationCreated, partitionId);
 
-			data.Type.ShouldBeEquivalentTo(EventType.ApplicationCreated);
+			data.State.ShouldBeEquivalentTo(EventState.Emailing);
 			data.Data.ShouldBeEquivalentTo(eventData);
 			data.Id.Should().BeGreaterThan(0);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_GetNextFaulted()
+		{
+			var eventType = _fixture.Create<EventType>();
+			var partitionId = _fixture.Create<int>();
+
+			_events.Add(partitionId, eventType, EventState.Failed, _fixture.CreateMany<byte>().ToArray());
+
+			_events.GetNext(eventType, partitionId).Should().BeNull();
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -88,16 +99,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
 			var partitionId =_fixture.Create<int>();
-
 			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, eventData);
-
-			var data = _events.GetNext(EventState.Emailing, partitionId);
+			var data = _events.GetNext(EventType.ApplicationCreated, partitionId);
 
 			_events.SetState(data.Id, EventState.StateHistorySaving);
 
-			var next = _events.GetNext(EventState.StateHistorySaving, partitionId);
+			var next = _events.GetNext(EventType.ApplicationCreated, partitionId);
 
-			next.ShouldBeEquivalentTo(data);
+			next.State.ShouldBeEquivalentTo(EventState.StateHistorySaving);
 		}
 
 		[TestMethod, TestCategory("black-box")]
@@ -105,15 +114,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
 			var partitionId =_fixture.Create<int>();
-
-			_events.Add(partitionId, EventType.ApplicationCreated, EventState.Emailing, eventData);
-
-			var data = _events.GetNext(EventState.Emailing, partitionId);
+			var type = _fixture.Create<EventType>();
+			_events.Add(partitionId, type, EventState.Emailing, eventData);
+			var data = _events.GetNext(type, partitionId);
 
 			_events.Delete(data.Id);
 
-			data = _events.GetNext(EventState.Emailing, partitionId);
-
+			data = _events.GetNext(type, partitionId);
 			data.Should().BeNull();
 		}
 
