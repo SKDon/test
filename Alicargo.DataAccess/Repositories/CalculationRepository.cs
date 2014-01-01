@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
@@ -29,36 +27,12 @@ namespace Alicargo.DataAccess.Repositories
 				MarkName = data.MarkName,
 				FactoryName = data.FactoryName,
 				ScotchCost = data.ScotchCost,
-				StateId = (int)CalculationState.New,
-				StateIdTimestamp = DateTimeOffset.UtcNow,
 				TariffPerKg = data.TariffPerKg,
 				Weight = data.Weight,
 				ApplicationHistoryId = applicationId,
 				TransitCost = data.TransitCost,
 				PickupCost = data.PickupCost
 			});
-		}
-
-		public CalculationData[] Get(CalculationState state)
-		{
-			return _context.Calculations.Where(x => x.StateId == (int)state)
-				.OrderBy(x => x.StateIdTimestamp)
-				.Select(x => new CalculationData
-				{
-					AirWaybillDisplay = x.AirWaybillDisplay,
-					ApplicationDisplay = x.ApplicationDisplay,
-					ClientId = x.ClientId,
-					FactureCost = x.FactureCost,
-					InsuranceCost = x.InsuranceCost,
-					MarkName = x.MarkName,
-					ScotchCost = x.ScotchCost,
-					TariffPerKg = x.TariffPerKg,
-					Weight = x.Weight,
-					TransitCost = x.TransitCost,
-					PickupCost = x.PickupCost,
-					FactoryName = x.FactoryName					
-				})
-				.ToArray();
 		}
 
 		public CalculationData[] GetByClientId(long clientId)

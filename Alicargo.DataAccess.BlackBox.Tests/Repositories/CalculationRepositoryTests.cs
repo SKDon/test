@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.Repositories;
@@ -66,7 +65,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_calculationRepository.Add(data, applicationId);
 			_context.UnitOfWork.SaveChanges();
 
-			return _calculationRepository.Get(CalculationState.New)
+			return _calculationRepository.GetByClientId(data.ClientId)
 				.Single(x => x.AirWaybillDisplay == data.AirWaybillDisplay);
 		}
 	}

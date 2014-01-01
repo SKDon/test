@@ -1691,10 +1691,6 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _Id;
 		
-		private int _StateId;
-		
-		private System.DateTimeOffset _StateIdTimestamp;
-		
 		private long _ClientId;
 		
 		private long _ApplicationHistoryId;
@@ -1729,10 +1725,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnCreated();
     partial void OnIdChanging(long value);
     partial void OnIdChanged();
-    partial void OnStateIdChanging(int value);
-    partial void OnStateIdChanged();
-    partial void OnStateIdTimestampChanging(System.DateTimeOffset value);
-    partial void OnStateIdTimestampChanged();
     partial void OnClientIdChanging(long value);
     partial void OnClientIdChanged();
     partial void OnApplicationHistoryIdChanging(long value);
@@ -1783,46 +1775,6 @@ namespace Alicargo.DataAccess.DbContext
 					this._Id = value;
 					this.SendPropertyChanged("Id");
 					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateId", DbType="Int NOT NULL")]
-		public int StateId
-		{
-			get
-			{
-				return this._StateId;
-			}
-			set
-			{
-				if ((this._StateId != value))
-				{
-					this.OnStateIdChanging(value);
-					this.SendPropertyChanging();
-					this._StateId = value;
-					this.SendPropertyChanged("StateId");
-					this.OnStateIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateIdTimestamp", DbType="DateTimeOffset NOT NULL")]
-		public System.DateTimeOffset StateIdTimestamp
-		{
-			get
-			{
-				return this._StateIdTimestamp;
-			}
-			set
-			{
-				if ((this._StateIdTimestamp != value))
-				{
-					this.OnStateIdTimestampChanging(value);
-					this.SendPropertyChanging();
-					this._StateIdTimestamp = value;
-					this.SendPropertyChanged("StateIdTimestamp");
-					this.OnStateIdTimestampChanged();
 				}
 			}
 		}
