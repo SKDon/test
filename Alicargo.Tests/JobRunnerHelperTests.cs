@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading;
+using Alicargo.App_Start;
 using Alicargo.Jobs.Core;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Alicargo.Jobs.Tests
+namespace Alicargo.Tests
 {
 	[TestClass]
 	public class JobRunnerHelperTests
@@ -15,7 +16,7 @@ namespace Alicargo.Jobs.Tests
 		{
 			var helper = new JobRunnerHelper();
 
-			var runner = new Mock<IJobRunner>(MockBehavior.Strict);
+			var runner = new Mock<IRunner>(MockBehavior.Strict);
 			runner.Setup(x => x.Run(It.IsAny<CancellationTokenSource>())).Throws(new Exception("Test_ExceptionOnStart"));
 
 			helper.RunJobs(new[] { runner.Object });

@@ -83,7 +83,6 @@
     <Compile Include="ApplicationEvents\Helpers\TextBulderTests.cs" />
     <Compile Include="MessageFactoryTests.cs" />
     <Compile Include="Calculation\CalculationMailBuilderTests.cs" />
-    <Compile Include="JobRunnerHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

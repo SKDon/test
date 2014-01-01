@@ -2,20 +2,21 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Alicargo.Jobs.Core;
 
-namespace Alicargo.Jobs.Core
+namespace Alicargo.App_Start
 {
 	public sealed class JobRunnerHelper
 	{
 		private readonly CancellationTokenSource _tokenSource = new CancellationTokenSource();
 		private Task[] _tasks;
 
-		public void RunJobs(IJobRunner[] runners)
+		public void RunJobs(IRunner[] runners)
 		{
 			_tasks = runners.Select(StartTask).ToArray();
 		}
 
-		private Task StartTask(IJobRunner runner)
+		private Task StartTask(IRunner runner)
 		{
 			return Task.Factory.StartNew(() => runner.Run(_tokenSource), CancellationToken.None);
 		}
