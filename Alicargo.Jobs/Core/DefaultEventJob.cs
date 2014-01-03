@@ -24,23 +24,27 @@ namespace Alicargo.Jobs.Core
 
 		public void Work()
 		{
-			foreach (var processorsForType in _processors)
+			foreach (var typeProcessors in _processors)
 			{
-				var type = processorsForType.Key;
+				var type = typeProcessors.Key;
 
 				var data = _events.GetNext(type, _partitionId);
 
 				if (data == null) continue;
 
-				var processorsForState = processorsForType.Value
+				var stateProcessors = typeProcessors.Value
 					.SkipWhile(x => x.Key != data.State)
 					.Select(x => x.Value);
 
-				foreach (var processor in processorsForState)
+				foreach (var processor in stateProcessors)
 				{
 					try
 					{
 						processor.ProcessEvent(type, data);
+					}
+					catch (BreakJobException)
+					{
+						break;
 					}
 					catch (Exception e)
 					{
