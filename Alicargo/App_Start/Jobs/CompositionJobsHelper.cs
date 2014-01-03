@@ -21,7 +21,6 @@ using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Services;
 using Alicargo.Services.Calculation;
 using Alicargo.Services.Excel;
-using Alicargo.Services.State;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
@@ -101,24 +100,14 @@ namespace Alicargo.App_Start.Jobs
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var clientRepository = new ClientRepository(unitOfWork);
 				var adminRepository = new AdminRepository(unitOfWork);
-				var passwordConverter = new PasswordConverter();
-				var userRepository = new UserRepository(passwordConverter, executor);
-				var senderRepository = new SenderRepository(unitOfWork, passwordConverter, executor);
 				var serializer = new Serializer();
 				var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(adminRepository, clientRepository,
 					eventEmailRecipient);
-				var forwarderRepository = new ForwarderRepository(unitOfWork);
-				var brokerRepository = new BrokerRepository(unitOfWork);
 				var awbRepository = new AwbRepository(unitOfWork);
 				var applicationRepository = new ApplicationRepository(unitOfWork);
 				var stateSettingsRepository = new StateSettingsRepository(executor);
-				var identityService = new IdentityService(userRepository, adminRepository, senderRepository, clientRepository,
-					forwarderRepository, brokerRepository, unitOfWork);
-				var stateRepository = new StateRepository(executor);
-				var stateFilter = new StateFilter(stateRepository, stateSettingsRepository, identityService, new StateConfig(),
-					awbRepository);
-				var clientCalculationPresenter = new ClientCalculationPresenter(applicationRepository, awbRepository, stateFilter,
-					clientRepository);
+				var clientCalculationPresenter = new ClientCalculationPresenter(applicationRepository, awbRepository,
+					clientRepository, stateSettingsRepository);
 				var templateRepository = new TemplateRepository(executor);
 				var textBuilder = new TextBuilder<Alicargo.Jobs.Balance.Entities.TextLocalizedData>();
 				var excelClientCalculation = new ExcelClientCalculation();

@@ -2,6 +2,7 @@
 using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
@@ -11,7 +12,6 @@ using Alicargo.Core.Calculation.Entities;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Localization;
-using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Helpers;
 
@@ -22,18 +22,18 @@ namespace Alicargo.Services.Calculation
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IClientRepository _clientRepository;
-		private readonly IStateFilter _stateFilter;
+		private readonly IStateSettingsRepository _settings;
 
 		public ClientCalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IAwbRepository awbRepository,
-			IStateFilter stateFilter,
-			IClientRepository clientRepository)
+			IClientRepository clientRepository,
+			IStateSettingsRepository settings)
 		{
 			_applicationRepository = applicationRepository;
 			_awbRepository = awbRepository;
-			_stateFilter = stateFilter;
 			_clientRepository = clientRepository;
+			_settings = settings;
 		}
 
 		public ClientCalculationListCollection List(long clientId, int take, long skip)
@@ -57,7 +57,7 @@ namespace Alicargo.Services.Calculation
 
 		private ApplicationListItemData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
 		{
-			var stateIds = _stateFilter.GetStateVisibility();
+			var stateIds = _settings.GetStateVisibilities().Where(x => x.Role == RoleType.Client).Select(x => x.StateId).ToArray();
 
 			var applications = _applicationRepository.List(stateIds, new[]
 			{
