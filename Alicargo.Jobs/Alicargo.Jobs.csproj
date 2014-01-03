@@ -54,7 +54,6 @@
     </Compile>
     <Compile Include="ApplicationEvents\Helpers\ApplicationEventTemplates.cs" />
     <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
-    <Compile Include="Balance\BalanceEmailCreatorProcessor.cs" />
     <Compile Include="Balance\Helpers\IRecipientsFacade.cs" />
     <Compile Include="Balance\Helpers\MessageBuilder.cs" />
     <Compile Include="Balance\Helpers\RecipientsFacade.cs" />
@@ -63,7 +62,6 @@
     <Compile Include="Calculation\MessageFactory.cs" />
     <Compile Include="Core\BreakJobException.cs" />
     <Compile Include="Core\SequentialEventJob.cs" />
-    <Compile Include="ApplicationEvents\ApplicationMailCreatorProcessor.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryProcessor.cs" />
     <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />
     <Compile Include="ApplicationEvents\Helpers\FilesFacade.cs" />
@@ -74,6 +72,7 @@
     <Compile Include="ApplicationEvents\Abstract\ITextBulder.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
+    <Compile Include="Helpers\DefaultEmailingProcessor.cs" />
     <Compile Include="Helpers\TextBulderHelper.cs" />
     <Compile Include="Helpers\TemplateRepositoryWrapper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulder.cs" />

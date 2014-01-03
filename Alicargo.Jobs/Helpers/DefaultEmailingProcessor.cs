@@ -4,15 +4,15 @@ using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers.Abstract;
 
-namespace Alicargo.Jobs.Balance
+namespace Alicargo.Jobs.Helpers
 {
-	internal sealed class BalanceEmailCreatorProcessor : IEventProcessor
+	internal sealed class DefaultEmailingProcessor : IEventProcessor
 	{
-		private readonly IMailSender _sender;
 		private readonly IMessageBuilder _messageBuilder;
+		private readonly IMailSender _sender;
 
-		public BalanceEmailCreatorProcessor(
-			IMailSender sender, 
+		public DefaultEmailingProcessor(
+			IMailSender sender,
 			IMessageBuilder messageBuilder)
 		{
 			_sender = sender;

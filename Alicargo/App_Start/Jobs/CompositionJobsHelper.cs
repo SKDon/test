@@ -128,12 +128,12 @@ namespace Alicargo.App_Start.Jobs
 			using (var connection = new SqlConnection(connectionString))
 			{
 				var serializer = new Serializer();
-				var factory = GetMessageFactory(connection, connectionString, filesConnectionString, serializer);
+				var messageBuilder = GetMessageFactory(connection, connectionString, filesConnectionString, serializer);
 				var executor = new SqlProcedureExecutor(connectionString);
 				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
 				var mailSender = new DbMailSender(partitionId, emails, serializer);
-				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(factory, mailSender);
+				var mailCreatorProcessor = new DefaultEmailingProcessor(mailSender, messageBuilder);
 
 				var processors = new Dictionary<EventState, IEventProcessor>
 				{
