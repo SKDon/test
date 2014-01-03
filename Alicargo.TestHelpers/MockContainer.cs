@@ -56,7 +56,7 @@ namespace Alicargo.TestHelpers
 
 			Fixture.Register(() => new StateData
 			{
-				Name = Fixture.Create<string>(), 
+				Name = Fixture.Create<string>(),
 				Position = Fixture.Create<int>(),
 				LocalizedName = Fixture.Create<string>()
 			});
@@ -89,6 +89,7 @@ namespace Alicargo.TestHelpers
 			RecipientsFacade = Inject<IRecipientsFacade>();
 			FilesFasade = Inject<IFilesFacade>();
 			TextBulder = Inject<ITextBulder>();
+			ApplicationEventTemplates = Inject<IApplicationEventTemplates>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -96,6 +97,7 @@ namespace Alicargo.TestHelpers
 		public Fixture Fixture { get; private set; }
 
 		public Mock<IAdminRepository> AdminRepository { get; private set; }
+		public Mock<IApplicationEventTemplates> ApplicationEventTemplates { get; private set; }
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
 		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }
 		public Mock<ISerializer> Serializer { get; private set; }

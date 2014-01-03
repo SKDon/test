@@ -6,6 +6,12 @@ namespace Alicargo.Jobs.Core
 	{
 		public JobException(string message, Exception innerException)
 			: base(message, innerException)
-		{ }
+		{
+		}
+
+		public JobException(string message)
+			: base(message)
+		{
+		}
 	}
 }

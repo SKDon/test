@@ -9,7 +9,6 @@ using Moq;
 
 namespace Alicargo.Jobs.Tests
 {
-	// ReSharper disable ImplicitlyCapturedClosure
 	[TestClass]
 	public class MessageFactoryTests
 	{
@@ -24,7 +23,7 @@ namespace Alicargo.Jobs.Tests
 		}
 
 		[TestMethod]
-		public void Test_SetStateForNoClient()
+		public void Test_SetStateForNotClient()
 		{
 			var applicationId = _container.Create<long>();
 			const EventType eventType = EventType.ApplicationSetState;
@@ -33,17 +32,16 @@ namespace Alicargo.Jobs.Tests
 			var recipientData = new RecipientData(_container.Create<string>(), _container.Create<string>(), RoleType.Broker);
 			var localization = _container.Create<EmailTemplateLocalizationData>();
 			var templateId = _container.Create<long>();
-			var templateData = _container.Create<EventTemplateData>();
-			templateData.EmailTemplateId = templateId;
 
+			// ReSharper disable ImplicitlyCapturedClosure
 			_container.ApplicationRepository.Setup(x => x.GetDetails(applicationId)).Returns(applicationDetailsData);
-			_container.TemplateRepositoryWrapper.Setup(x => x.GetByEventType(eventType)).Returns(templateData);
-			_container.TemplateRepositoryWrapper.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
+			_container.ApplicationEventTemplates.Setup(x => x.GetTemplateId(eventType, bytes)).Returns(templateId);
+			_container.ApplicationEventTemplates.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
 				.Returns(localization);
 			_container.FilesFasade.Setup(x => x.GetFiles(applicationId, It.IsAny<long?>(), eventType, bytes))
-				.Returns(new[] {_container.Create<FileHolder>()});
+				.Returns(new[] { _container.Create<FileHolder>() });
 			_container.RecipientsFacade.Setup(x => x.GetRecipients(applicationDetailsData, eventType, bytes))
-				.Returns(new[] {recipientData});
+				.Returns(new[] { recipientData });
 			_container.TextBulder.Setup(
 				x => x.GetText(localization.Subject, recipientData.Culture, eventType, applicationDetailsData, bytes))
 				.Returns(localization.Subject);
@@ -60,16 +58,15 @@ namespace Alicargo.Jobs.Tests
 			messages[0].To[0].ShouldBeEquivalentTo(recipientData.Email);
 
 			_container.ApplicationRepository.Verify(x => x.GetDetails(applicationId));
-			_container.TemplateRepositoryWrapper.Verify(x => x.GetByEventType(eventType));
-			_container.TemplateRepositoryWrapper.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
+			_container.ApplicationEventTemplates.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
+			_container.ApplicationEventTemplates.Verify(x => x.GetTemplateId(eventType, bytes));
 			_container.FilesFasade.Verify(x => x.GetFiles(applicationId, It.IsAny<long?>(), eventType, bytes));
 			_container.RecipientsFacade.Verify(x => x.GetRecipients(applicationDetailsData, eventType, bytes));
 			_container.TextBulder.Verify(
 				x => x.GetText(localization.Subject, recipientData.Culture, eventType, applicationDetailsData, bytes));
 			_container.TextBulder.Verify(
 				x => x.GetText(localization.Body, recipientData.Culture, eventType, applicationDetailsData, bytes));
+			// ReSharper restore ImplicitlyCapturedClosure
 		}
 	}
-
-	// ReSharper restore ImplicitlyCapturedClosure
 }

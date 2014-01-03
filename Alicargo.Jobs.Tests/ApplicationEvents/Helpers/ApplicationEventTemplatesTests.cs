@@ -38,14 +38,14 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			_container.Serializer.Setup(x => x.Deserialize<ApplicationSetStateEventData>(applicationEventData))
 				.Returns(stateEventData);
 			_container.EmailTemplateRepository.Setup(x => x.GetByStateId(stateEventData.StateId)).Returns(stateTemplate);
-			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(EventType.ApplicationSetState)).Returns(eventTemplate);
+			_container.TemplateRepositoryWrapper.Setup(x => x.GetByEventType(EventType.ApplicationSetState)).Returns(eventTemplate);
 
 			var templateId = _facade.GetTemplateId(EventType.ApplicationSetState, applicationEventData);
 
 			templateId.ShouldBeEquivalentTo(stateTemplate.EmailTemplateId);
 			_container.Serializer.Verify(x => x.Deserialize<ApplicationSetStateEventData>(applicationEventData));
 			_container.EmailTemplateRepository.Verify(x => x.GetByStateId(stateEventData.StateId));
-			_container.EmailTemplateRepository.Verify(x => x.GetByEventType(EventType.ApplicationSetState));
+			_container.TemplateRepositoryWrapper.Verify(x => x.GetByEventType(EventType.ApplicationSetState));
 		}
 	}
 }
