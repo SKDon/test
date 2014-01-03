@@ -75,10 +75,10 @@ namespace Alicargo.Services.Users.Client
 			}
 		}
 
-		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-			AuthenticationModel authenticationModel)
+		public long Add(ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
+			AuthenticationModel authentication)
 		{
-			var transitId = _transits.AddTransit(transitModel, carrierModel);
+			var transitId = _transits.AddTransit(transit, carrier);
 
 			_unitOfWork.SaveChanges();
 
@@ -101,7 +101,7 @@ namespace Alicargo.Services.Users.Client
 				RS = model.RS,
 				TransitId = transitId,
 				Language = TwoLetterISOLanguageName.English,
-				Login = authenticationModel.Login
+				Login = authentication.Login
 			};
 
 			var id = _clients.Add(data);
@@ -111,7 +111,7 @@ namespace Alicargo.Services.Users.Client
 			var clientId = id();
 
 			var userId = _clients.GetUserId(clientId);
-			_users.SetPassword(userId, authenticationModel.NewPassword);
+			_users.SetPassword(userId, authentication.NewPassword);
 
 			return clientId;
 		}

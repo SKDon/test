@@ -33,12 +33,12 @@ namespace Alicargo.Services.Email
 			_manager.Update(clientId, model, carrier, transit, authentication);
 		}
 
-		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-			AuthenticationModel authenticationModel)
+		public long Add(ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
+			AuthenticationModel authentication)
 		{
-			var id = _manager.Add(model, carrierModel, transitModel, authenticationModel);
+			var id = _manager.Add(model, carrier, transit, authentication);
 
-			EmailOnAdd(model, authenticationModel);
+			EmailOnAdd(model, authentication);
 
 			return id;
 		}

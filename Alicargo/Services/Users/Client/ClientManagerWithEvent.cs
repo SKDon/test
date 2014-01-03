@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Alicargo.Contracts.Enums;
+using Alicargo.Core.Event;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Calculation.Admin;
@@ -11,28 +9,39 @@ namespace Alicargo.Services.Users.Client
 {
 	internal sealed class ClientManagerWithEvent : IClientManager
 	{
+		private readonly IEventFacade _events;
 		private readonly IClientManager _manager;
 
-		public ClientManagerWithEvent(IClientManager manager)
+		public ClientManagerWithEvent(IClientManager manager, IEventFacade events)
 		{
 			_manager = manager;
+			_events = events;
 		}
 
 		public void Update(long clientId, ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
 			AuthenticationModel authentication)
 		{
-			throw new NotImplementedException();
+			_manager.Update(clientId, model, carrier, transit, authentication);
 		}
 
-		public long Add(ClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-			AuthenticationModel authenticationModel)
+		public long Add(ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
+			AuthenticationModel authentication)
 		{
-			throw new NotImplementedException();
+			return _manager.Add(model, carrier, transit, authentication);
 		}
 
 		public void AddToBalance(long clientId, PaymentModel model)
 		{
-			throw new NotImplementedException();
+			_manager.AddToBalance(clientId, model);
+
+			if (model.Money == 0)
+			{
+				return;
+			}
+
+			var eventType = model.Money > 0 ? EventType.BalanceIncreased : EventType.BalanceDecreased;
+
+			_events.Add(clientId, eventType, EventState.Emailing);
 		}
 	}
 }
