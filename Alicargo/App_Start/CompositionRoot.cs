@@ -34,11 +34,11 @@ namespace Alicargo.App_Start
 			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
 
 			kernel.Bind<IExcelClientCalculation>().To<ExcelClientCalculation>().InThreadScope();
-			
+
 			kernel.Bind<IPartitionConverter>().To<PartitionConverter>()
 				.InSingletonScope()
 				.WithConstructorArgument("partitionCount", CompositionJobsHelper.PartitionCount);
-			
+
 			kernel.Bind<ISerializer>().To<Serializer>().InThreadScope();
 
 			kernel.Bind<IMailSender>()
@@ -61,7 +61,8 @@ namespace Alicargo.App_Start
 			return type.IsClass && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
 		}
 
-		public static void BindDataAccess(IKernel kernel, string connectionString, string filesConnectionString, Func<IContext, object> scope)
+		public static void BindDataAccess(IKernel kernel, string connectionString, string filesConnectionString,
+			Func<IContext, object> scope)
 		{
 			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
 				.IncludingNonePublicTypes()
@@ -71,9 +72,9 @@ namespace Alicargo.App_Start
 				.Configure(y => y.InScope(scope)));
 
 			kernel.Bind<ISqlProcedureExecutor>()
-			.To<SqlProcedureExecutor>()
-			.InSingletonScope()
-			.WithConstructorArgument("connectionString", connectionString);
+				.To<SqlProcedureExecutor>()
+				.InSingletonScope()
+				.WithConstructorArgument("connectionString", connectionString);
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()

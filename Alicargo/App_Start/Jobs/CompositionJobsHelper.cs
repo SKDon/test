@@ -19,11 +19,13 @@ using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Services;
+using Alicargo.Services.Calculation;
+using Alicargo.Services.Excel;
+using Alicargo.Services.State;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
 using ILog = Alicargo.Core.Services.Abstract.ILog;
-using RecipientsFacade = Alicargo.Jobs.ApplicationEvents.Helpers.RecipientsFacade;
 
 namespace Alicargo.App_Start.Jobs
 {
@@ -91,36 +93,60 @@ namespace Alicargo.App_Start.Jobs
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
-			//using (var connection = new SqlConnection(connectionString))
-			//{
-			//	var unitOfWork = new UnitOfWork(connection);
-			//	var executor = new SqlProcedureExecutor(connectionString);
-			//	var events = new EventRepository(executor);
-			//	var templates = new TemplateRepository(executor);
-			//	var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
-			//	var admins = new AdminRepository(unitOfWork);
-			//	var clients = new ClientRepository(unitOfWork);
-			//	var recipients = new EventEmailRecipient(executor);
-			//	var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(admins, clients, recipients);
-			//	var serializer = new Serializer();
+			using (var connection = new SqlConnection(connectionString))
+			{
+				var unitOfWork = new UnitOfWork(connection);
+				var executor = new SqlProcedureExecutor(connectionString);
+				var events = new EventRepository(executor);
+				var eventEmailRecipient = new EventEmailRecipient(executor);
+				var clientRepository = new ClientRepository(unitOfWork);
+				var adminRepository = new AdminRepository(unitOfWork);
+				var passwordConverter = new PasswordConverter();
+				var userRepository = new UserRepository(passwordConverter, executor);
+				var senderRepository = new SenderRepository(unitOfWork, passwordConverter, executor);
+				var serializer = new Serializer();
+				var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(adminRepository, clientRepository,
+					eventEmailRecipient);
+				var forwarderRepository = new ForwarderRepository(unitOfWork);
+				var brokerRepository = new BrokerRepository(unitOfWork);
+				var awbRepository = new AwbRepository(unitOfWork);
+				var applicationRepository = new ApplicationRepository(unitOfWork);
+				var stateSettingsRepository = new StateSettingsRepository(executor);
+				var identityService = new IdentityService(userRepository, adminRepository, senderRepository, clientRepository,
+					forwarderRepository, brokerRepository, unitOfWork);
+				var stateRepository = new StateRepository(executor);
+				var stateFilter = new StateFilter(stateRepository, stateSettingsRepository, identityService, new StateConfig(),
+					awbRepository);
+				var clientCalculationPresenter = new ClientCalculationPresenter(applicationRepository, awbRepository, stateFilter,
+					clientRepository);
+				var templateRepository = new TemplateRepository(executor);
+				var textBuilder = new TextBuilder<Alicargo.Jobs.Balance.Entities.TextLocalizedData>();
+				var excelClientCalculation = new ExcelClientCalculation();
+				var templateRepositoryWrapper = new TemplateRepositoryWrapper(templateRepository);
+				var balanceProcessor = new DefaultEmailingProcessor(
+					new DbMailSender(partitionId, new EmailMessageRepository(executor), serializer),
+					new Alicargo.Jobs.Balance.MessageBuilder(
+						EmailsHelper.DefaultFrom,
+						recipientsFacade,
+						clientRepository,
+						clientCalculationPresenter,
+						excelClientCalculation,
+						serializer,
+						textBuilder,
+						templateRepositoryWrapper));
 
-			//	var balanceProcessor = new BalanceEmailCreatorProcessor(
-			//		events,
-			//		templateRepositoryWrapper,
-			//		recipientsFacade, 
-			//		serializer);
+				var processors = new Dictionary<EventState, IEventProcessor>
+				{
+					{ EventState.Emailing, balanceProcessor }
+				};
 
-			//	var processors = new Dictionary<EventState, IEventProcessor>
-			//	{
-			//		{ EventState.Emailing, balanceProcessor }
-			//	};
-
-			//	new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-			//	{
-			//		{ EventType.BalanceDecreased, processors },
-			//		{ EventType.BalanceIncreased, processors }
-			//	}).Work();
-			//}
+				new SequentialEventJob(events, partitionId,
+					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+					{
+						{ EventType.BalanceDecreased, processors },
+						{ EventType.BalanceIncreased, processors }
+					}).Work();
+			}
 		}
 
 		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,
