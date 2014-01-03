@@ -31,9 +31,9 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 		public void ProcessEvent(EventType type, EventData data)
 		{
-			var applicationEventData = _serializer.Deserialize<EventDataForApplication>(data.Data);
+			var applicationEventData = _serializer.Deserialize<EventDataForEntity>(data.Data);
 
-			var messages = _messageFactory.Get(applicationEventData.ApplicationId, type, applicationEventData.Data);
+			var messages = _messageFactory.Get(applicationEventData.EntityId, type, applicationEventData.Data);
 
 			if (messages != null)
 			{

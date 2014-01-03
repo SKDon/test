@@ -28,7 +28,7 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
-			kernel.Bind<IEventFacadeForApplication>().To<EventFacadeForApplication>().InSingletonScope();
+			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
 			
 			kernel.Bind<IPartitionConverter>().To<PartitionConverter>()
 				.InSingletonScope()

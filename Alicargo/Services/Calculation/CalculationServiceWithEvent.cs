@@ -6,10 +6,10 @@ namespace Alicargo.Services.Calculation
 {
 	internal sealed class CalculationServiceWithEvent : ICalculationService
 	{
-		private readonly IEventFacadeForApplication _events;
+		private readonly IEventFacade _events;
 		private readonly ICalculationService _service;
 
-		public CalculationServiceWithEvent(ICalculationService service, IEventFacadeForApplication events)
+		public CalculationServiceWithEvent(ICalculationService service, IEventFacade events)
 		{
 			_service = service;
 			_events = events;

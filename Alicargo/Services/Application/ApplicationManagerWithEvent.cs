@@ -11,10 +11,10 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationManagerWithEvent : IApplicationManager
 	{
-		private readonly IEventFacadeForApplication _events;
+		private readonly IEventFacade _events;
 		private readonly IApplicationManager _manager;
 
-		public ApplicationManagerWithEvent(IApplicationManager manager, IEventFacadeForApplication events)
+		public ApplicationManagerWithEvent(IApplicationManager manager, IEventFacade events)
 		{
 			_manager = manager;
 			_events = events;

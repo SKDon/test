@@ -68,12 +68,12 @@
     <Compile Include="Enums\MethodOfTransit.cs" />
     <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Event\IPartitionConverter.cs" />
-    <Compile Include="Event\IEventFacadeForApplication.cs" />
+    <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\PartitionConverter.cs" />
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
     <Compile Include="Localization\CultureContext.cs" />
     <Compile Include="Localization\ICultureContext.cs" />
-    <Compile Include="Event\EventFacadeForApplication.cs" />
+    <Compile Include="Event\EventFacade.cs" />
     <Compile Include="Resources\Entities.ru.Designer.cs">
       <DependentUpon>Entities.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>

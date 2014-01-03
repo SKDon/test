@@ -199,6 +199,7 @@
     <Compile Include="Services\Calculation\ClientCalculationPresenter.cs" />
     <Compile Include="Services\Calculation\SenderCalculationPresenter.cs" />
     <Compile Include="Services\Excel\Rows\BaseApplicationExcelRow.cs" />
+    <Compile Include="Services\Users\Client\ClientManagerWithEvent.cs" />
     <Compile Include="Services\Users\SenderService.cs" />
     <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\CompositionRoot.cs" />

@@ -25,12 +25,12 @@ namespace Alicargo.Controllers
 				{ApplicationFileType.Packing, EventType.PackingFileUploaded},
 			};
 
-		private readonly IEventFacadeForApplication _facade;
+		private readonly IEventFacade _facade;
 		private readonly IApplicationFileRepository _files;
 
 		public FilesController(
 			IApplicationFileRepository files,
-			IEventFacadeForApplication facade)
+			IEventFacade facade)
 		{
 			_files = files;
 			_facade = facade;
