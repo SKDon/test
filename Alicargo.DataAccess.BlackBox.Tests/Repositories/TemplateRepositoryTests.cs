@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.State;
 using Alicargo.Contracts.Enums;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
@@ -12,7 +11,7 @@ using Ploeh.AutoFixture;
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 {
 	[TestClass]
-	public class EmailTemplateRepositoryTests
+	public class TemplateRepositoryTests
 	{
 		private DbTestContext _context;
 		private Fixture _fixture;
@@ -54,29 +53,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var localization = _templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English);
 
 			localization.ShouldBeEquivalentTo(localizationData);
-		}
-
-		[TestMethod, TestCategory("black-box")]
-		public void Test_Set_SetForEvent()
-		{
-			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
-
-			const EventType eventType = EventType.ApplicationCreated;
-
-			var recipients = _fixture.CreateMany<RoleType>().ToArray();
-
-			_templates.SetForEvent(eventType, TwoLetterISOLanguageName.English, false, recipients, localizationData);
-
-			var data = _templates.GetByEventType(eventType);
-
-			data.EnableEmailSend.Should().BeFalse();
-
-			var localization = _templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English);
-
-			localization.ShouldBeEquivalentTo(localizationData);
-
-			_templates.GetRecipientRoles(eventType).ShouldAllBeEquivalentTo(recipients);
-		}
+		}	
 
 		private long AddTestState()
 		{

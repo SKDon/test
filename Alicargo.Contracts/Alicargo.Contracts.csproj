@@ -100,11 +100,12 @@
     <Compile Include="Helpers\OrderHelper.cs" />
     <Compile Include="Helpers\OrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IEventEmailRecipient.cs" />
     <Compile Include="Repositories\User\IAdminRepository.cs" />
     <Compile Include="Repositories\IEventRepository.cs" />
-    <Compile Include="Repositories\IApplicationFileRepository.cs" />
-    <Compile Include="Repositories\IApplicationRepository.cs" />
-    <Compile Include="Repositories\IApplicationUpdateRepository.cs" />
+    <Compile Include="Repositories\Application\IApplicationFileRepository.cs" />
+    <Compile Include="Repositories\Application\IApplicationRepository.cs" />
+    <Compile Include="Repositories\Application\IApplicationUpdateRepository.cs" />
     <Compile Include="Repositories\IAWBRepository.cs" />
     <Compile Include="Repositories\User\IBrokerRepository.cs" />
     <Compile Include="Repositories\ICalculationRepository.cs" />

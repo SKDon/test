@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
 using Alicargo.MvcHelpers.Filters;

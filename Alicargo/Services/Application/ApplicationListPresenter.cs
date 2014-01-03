@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;

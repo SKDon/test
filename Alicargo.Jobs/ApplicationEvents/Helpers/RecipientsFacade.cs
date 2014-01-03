@@ -22,7 +22,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly ISenderRepository _senders;
 		private readonly ISerializer _serializer;
 		private readonly IStateSettingsRepository _stateSettings;
-		private readonly ITemplateRepository _templates;
+		private readonly IEventEmailRecipient _recipients;
 
 		public RecipientsFacade(
 			IAwbRepository awbs,
@@ -33,7 +33,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			IClientRepository clients,
 			IForwarderRepository forwarders,
 			IBrokerRepository brokers,
-			ITemplateRepository templates)
+			IEventEmailRecipient recipients)
 		{
 			_awbs = awbs;
 			_serializer = serializer;
@@ -43,7 +43,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_clients = clients;
 			_forwarders = forwarders;
 			_brokers = brokers;
-			_templates = templates;
+			_recipients = recipients;
 		}
 
 		public RecipientData[] GetRecipients(ApplicationDetailsData application, EventType type, byte[] data)
@@ -69,7 +69,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			}
 			else
 			{
-				roles = _templates.GetRecipientRoles(type);
+				roles = _recipients.GetRecipientRoles(type);
 			}
 
 			return roles;

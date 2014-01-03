@@ -95,6 +95,7 @@
     <Compile Include="Helpers\ApplicationRepositoryOrdererTests.cs" />
     <Compile Include="Helpers\DbTestContext.cs" />
     <Compile Include="Repositories\EmailMessageRepositoryTests.cs" />
+    <Compile Include="Repositories\EventEmailRecipientTests.cs" />
     <Compile Include="Repositories\User\SenderRepositoryTests.cs" />
     <Compile Include="Repositories\StateSettingsRepositoryTests.cs" />
     <Compile Include="Repositories\StateRepositoryTests.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="Repositories\User\AdminRepositoryTests.cs" />
     <Compile Include="Repositories\CalculationRepositoryTests.cs" />
     <Compile Include="Repositories\EventRepositoryTests.cs" />
-    <Compile Include="Repositories\EmailTemplateRepositoryTests.cs" />
+    <Compile Include="Repositories\TemplateRepositoryTests.cs" />
     <Compile Include="Repositories\CityRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>

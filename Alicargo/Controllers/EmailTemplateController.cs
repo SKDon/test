@@ -17,12 +17,15 @@ namespace Alicargo.Controllers
 	{
 		private readonly IIdentityService _identity;
 		private readonly ITemplateRepository _templates;
+		private readonly IEventEmailRecipient _recipients;
 
 		public EmailTemplateController(
 			ITemplateRepository templates,
+			IEventEmailRecipient recipients,
 			IIdentityService identity)
 		{
 			_templates = templates;
+			_recipients = recipients;
 			_identity = identity;
 		}
 
@@ -80,7 +83,7 @@ namespace Alicargo.Controllers
 
 			var roles = model.Settings.GetSettings();
 
-			_templates.SetForEvent(
+			_recipients.SetForEvent(
 				model.EventType, model.Language, model.EnableEmailSend, roles,
 				new EmailTemplateLocalizationData
 				{
@@ -98,7 +101,7 @@ namespace Alicargo.Controllers
 
 			var localization = commonData != null ? _templates.GetLocalization(commonData.EmailTemplateId, language) : null;
 
-			var recipients = _templates.GetRecipientRoles(eventType);
+			var recipients = _recipients.GetRecipientRoles(eventType);
 
 			return new EventTemplateModel
 			{

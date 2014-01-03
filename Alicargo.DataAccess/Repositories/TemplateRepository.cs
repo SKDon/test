@@ -31,24 +31,6 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		public void SetForEvent(EventType eventType, string language, bool enableEmailSend,
-			RoleType[] recipients, EmailTemplateLocalizationData localization)
-		{
-			var table = TableParameters.GeIdsTable("Recipients", recipients.Select(x => (long)x).ToArray());
-
-			_executor.Execute("[dbo].[EmailTemplate_MergeEvent]", new
-			{
-				EventTypeId = eventType,
-				localization.Body,
-				localization.IsBodyHtml,
-				localization.Subject,
-				TwoLetterISOLanguageName = language,
-				enableEmailSend
-			});
-
-			_executor.Execute("[dbo].[EventEmailRecipient_Set]", new TableParameters(new { EventTypeId = eventType }, table));
-		}
-
 		public EventTemplateData GetByEventType(EventType eventType)
 		{
 			return _executor.Query<EventTemplateData>("[dbo].[EmailTemplate_GetByEvent]",
@@ -60,10 +42,6 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Query<StateEmailTemplateData>("[dbo].[EmailTemplate_GetByStateId]", new { stateId });
 		}
 
-		public RoleType[] GetRecipientRoles(EventType eventType)
-		{
-			return _executor.Array<RoleType>("[dbo].[EventEmailRecipient_Get]", new { EventTypeId = (int)eventType });
-		}
 
 		public EmailTemplateLocalizationData GetLocalization(long templateId, string language)
 		{

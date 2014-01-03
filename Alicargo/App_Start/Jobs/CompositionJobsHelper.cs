@@ -25,6 +25,7 @@ using Ninject;
 using Ninject.Syntax;
 using ILog = Alicargo.Core.Services.Abstract.ILog;
 using MessageFactory = Alicargo.Jobs.ApplicationEvents.Helpers.MessageFactory;
+using RecipientsFacade = Alicargo.Jobs.ApplicationEvents.Helpers.RecipientsFacade;
 
 namespace Alicargo.App_Start.Jobs
 {
@@ -92,23 +93,33 @@ namespace Alicargo.App_Start.Jobs
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
-			var executor = new SqlProcedureExecutor(connectionString);
-			var events = new EventRepository(executor);
-			var templates = new TemplateRepository(executor);
-			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
-
-			var balanceProcessor = new BalanceEmailCreatorProcessor(templateRepositoryWrapper);
-
-			var processors = new Dictionary<EventState, IEventProcessor>
+			using (var connection = new SqlConnection(connectionString))
 			{
-				{ EventState.Emailing, balanceProcessor }
-			};
+				var unitOfWork = new UnitOfWork(connection);
+				var executor = new SqlProcedureExecutor(connectionString);
+				var events = new EventRepository(executor);
+				var templates = new TemplateRepository(executor);
+				var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
+				var admins = new AdminRepository(unitOfWork);
+				var clients = new ClientRepository(unitOfWork);
+				var recipients = new EventEmailRecipient(executor);
+				var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(admins, clients, recipients);
+				var serializer = new Serializer();
 
-			new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-			{
-				{ EventType.BalanceDecreased, processors },
-				{ EventType.BalanceIncreased, processors }
-			}).Work();
+				var balanceProcessor = new BalanceEmailCreatorProcessor(templateRepositoryWrapper,
+					recipientsFacade, serializer);
+
+				var processors = new Dictionary<EventState, IEventProcessor>
+				{
+					{ EventState.Emailing, balanceProcessor }
+				};
+
+				new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+				{
+					{ EventType.BalanceDecreased, processors },
+					{ EventType.BalanceIncreased, processors }
+				}).Work();
+			}
 		}
 
 		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,
@@ -121,7 +132,8 @@ namespace Alicargo.App_Start.Jobs
 				var executor = new SqlProcedureExecutor(connectionString);
 				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
-				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(partitionId, factory, emails, events, serializer);
+				var mailSender = new DbMailSender(partitionId, emails, serializer);
+				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(factory, mailSender, events, serializer);
 
 				var processors = new Dictionary<EventState, IEventProcessor>
 				{
@@ -180,7 +192,7 @@ namespace Alicargo.App_Start.Jobs
 				new ClientRepository(unitOfWork),
 				new ForwarderRepository(unitOfWork),
 				new BrokerRepository(unitOfWork),
-				templates);
+				new EventEmailRecipient(mainExecutor));
 			var wrapper = new TemplateRepositoryWrapper(templates);
 			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
 

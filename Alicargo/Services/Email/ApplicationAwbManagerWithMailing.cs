@@ -1,6 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;

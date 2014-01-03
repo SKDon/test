@@ -1,8 +1,7 @@
 ﻿using System;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.Contracts.Repositories.Application
 {
 	public interface IApplicationUpdateRepository
 	{

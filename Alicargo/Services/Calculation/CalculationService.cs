@@ -4,6 +4,7 @@ using System.Web;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
 using Alicargo.Services.Abstract;

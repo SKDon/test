@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.AirWaybill

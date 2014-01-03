@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.Core;
 
@@ -9,23 +10,20 @@ namespace Alicargo.Jobs.ApplicationEvents
 {
 	public sealed class ApplicationMailCreatorProcessor : IEventProcessor
 	{
-		private readonly IEmailMessageRepository _emails;
+		private readonly IMailSender _sender;
 		private readonly IEventRepository _events;
 		private readonly IMessageFactory _messageFactory;
-		private readonly int _partitionId;
 		private readonly ISerializer _serializer;
 
 		public ApplicationMailCreatorProcessor(
-			int partitionId,
 			IMessageFactory messageFactory,
-			IEmailMessageRepository emails,
+			IMailSender sender,
 			IEventRepository events,
 			ISerializer serializer)
 		{
-			_emails = emails;
+			_sender = sender;
 			_messageFactory = messageFactory;
 			_events = events;
-			_partitionId = partitionId;
 			_serializer = serializer;
 		}
 
@@ -37,13 +35,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 
 			if (messages != null)
 			{
-				foreach (var message in messages)
-				{
-					var files = _serializer.Serialize(message.Files);
-
-					_emails.Add(_partitionId, message.From, message.To, message.CopyTo,
-						message.Subject, message.Body, message.IsBodyHtml, files);
-				}
+				_sender.Send(messages);
 			}
 
 			_events.SetState(data.Id, EventState.StateHistorySaving);

@@ -2,6 +2,7 @@
 using System.Linq;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories.Application

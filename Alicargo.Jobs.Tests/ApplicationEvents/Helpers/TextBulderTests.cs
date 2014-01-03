@@ -7,6 +7,7 @@ using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Contracts.State;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Services;
 using Alicargo.Jobs.ApplicationEvents.Entities;

@@ -2,7 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.Contracts.Repositories.Application
 {
 	public interface IApplicationFileRepository
 	{

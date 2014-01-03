@@ -22,8 +22,10 @@ namespace Alicargo.Core.Services.Email
 		{
 			foreach (var message in messages)
 			{
-				_repository.Add(_partitionId, message.From, message.To, message.CopyTo, message.Subject, message.Body,
-					message.IsBodyHtml, _serializer.Serialize(message.Files));
+				var files = _serializer.Serialize(message.Files);
+
+				_repository.Add(_partitionId, message.From, message.To, message.CopyTo,
+					message.Subject, message.Body, message.IsBodyHtml, files);
 			}
 		}
 	}
