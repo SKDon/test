@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace Alicargo.App_Start
+namespace Alicargo.App_Start.Mvc
 {
 	internal static class BinderConfig
 	{

@@ -151,7 +151,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\RunnerHelper.cs" />
+    <Compile Include="App_Start\Jobs\RunnerHelper.cs" />
     <Compile Include="Controllers\Application\ApplicationController.cs" />
     <Compile Include="Controllers\Application\ApplicationListController.cs" />
     <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
@@ -201,10 +201,10 @@
     <Compile Include="Services\Excel\Rows\BaseApplicationExcelRow.cs" />
     <Compile Include="Services\Users\Client\ClientManagerWithEvent.cs" />
     <Compile Include="Services\Users\SenderService.cs" />
-    <Compile Include="App_Start\BinderConfig.cs" />
+    <Compile Include="App_Start\Mvc\BinderConfig.cs" />
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\CompositionRootHelper.cs" />
-    <Compile Include="App_Start\CompositionJobsHelper.cs" />
+    <Compile Include="App_Start\Jobs\CompositionJobsHelper.cs" />
     <Compile Include="Controllers\User\AuthenticationController.cs" />
     <Compile Include="Controllers\User\BrokerController.cs" />
     <Compile Include="Controllers\Calculation\CalculationController.cs" />
@@ -251,7 +251,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Validation.ru.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\Mvc\BundleConfig.cs" />
     <Compile Include="Controllers\User\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
@@ -471,8 +471,8 @@
     <Compile Include="ViewModels\User\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Mvc\FilterConfig.cs" />
+    <Compile Include="App_Start\Mvc\RouteConfig.cs" />
     <Content Include="Content\app\calculation-grid.css" />
     <Content Include="Content\app\common.css" />
     <Content Include="Content\app\entity.css" />

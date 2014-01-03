@@ -54,7 +54,7 @@
     </Compile>
     <Compile Include="ApplicationEvents\Helpers\ApplicationEventTemplates.cs" />
     <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
-    <Compile Include="BalanceProcessor.cs" />
+    <Compile Include="Balance\BalanceEmailCreatorProcessor.cs" />
     <Compile Include="Calculation\CalculationEmailCreatorProcessor.cs" />
     <Compile Include="Calculation\CalculationProcessor.cs" />
     <Compile Include="Calculation\MessageFactory.cs" />

@@ -15,6 +15,8 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.Jobs.Balance;
+using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
 using Alicargo.Services;
@@ -22,8 +24,9 @@ using log4net;
 using Ninject;
 using Ninject.Syntax;
 using ILog = Alicargo.Core.Services.Abstract.ILog;
+using MessageFactory = Alicargo.Jobs.ApplicationEvents.Helpers.MessageFactory;
 
-namespace Alicargo.App_Start
+namespace Alicargo.App_Start.Jobs
 {
 	internal static class CompositionJobsHelper
 	{
@@ -34,27 +37,27 @@ namespace Alicargo.App_Start
 
 		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
-			const string calculationJob = "CalculationJob_";
-			const string applicationMailCreatorJob = "ApplicationMailCreatorJob_";
-			const string mailSenderJobJob = "MailSenderJob_";
-
 			for (var i = 0; i < PartitionCount; i++)
 			{
 				var partitionId = i;
 				var mainConnectionString = connectionString;
 
 				BindStatelessJobRunner(kernel, () => RunCalculationJob(mainConnectionString, partitionId),
-					calculationJob + partitionId);
+					"CalculationJob_" + partitionId);
+
+				BindStatelessJobRunner(kernel, () => RunBalaceJob(mainConnectionString, partitionId),
+					"BalaceJob_" + partitionId);
 
 				BindStatelessJobRunner(kernel, () => RunApplicationEventsJob(
-					mainConnectionString, filesConnectionString, partitionId), applicationMailCreatorJob + partitionId);
+					mainConnectionString, filesConnectionString, partitionId),
+					"ApplicationMailCreatorJob_" + partitionId);
 
 				BindStatelessJobRunner(kernel, () => RunMailSenderJob(mainConnectionString, partitionId),
-					mailSenderJobJob + partitionId);
+					"MailSenderJob_" + partitionId);
 			}
 
 			BindStatelessJobRunner(kernel, () => RunMailSenderJob(connectionString, PartitionIdForOtherMails),
-				mailSenderJobJob + PartitionIdForOtherMails);
+				"MailSenderJob_" + PartitionIdForOtherMails);
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
@@ -71,9 +74,38 @@ namespace Alicargo.App_Start
 			var executor = new SqlProcedureExecutor(connectionString);
 			var events = new EventRepository(executor);
 
-			//var job = new CalculationJob(events, partitionId);
+			var templates = new EmailTemplateRepository(executor);
+			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
 
-			//job.Work();
+			var processors = new Dictionary<EventState, IEventProcessor>
+			{
+				{ EventState.Emailing, new CalculationEmailCreatorProcessor(templateRepositoryWrapper) }
+			};
+
+			new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+			{
+				{ EventType.Calculate, processors },
+				{ EventType.CalculationCanceled, processors }
+			}).Work();
+		}
+
+		private static void RunBalaceJob(string connectionString, int partitionId)
+		{
+			var executor = new SqlProcedureExecutor(connectionString);
+			var events = new EventRepository(executor);
+
+			var balanceProcessor = new BalanceEmailCreatorProcessor();
+
+			var processors = new Dictionary<EventState, IEventProcessor>
+			{
+				{ EventState.Emailing, balanceProcessor }
+			};
+
+			new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+			{
+				{ EventType.BalanceDecreased, processors },
+				{ EventType.BalanceIncreased, processors }
+			}).Work();
 		}
 
 		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,

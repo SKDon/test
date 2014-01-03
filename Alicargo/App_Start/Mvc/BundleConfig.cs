@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Optimization;
-using Alicargo.App_Start;
+using Alicargo.App_Start.Mvc;
 using Alicargo.MvcHelpers.BundleHelpres;
 using WebActivatorEx;
 
 [assembly: PostApplicationStartMethod(typeof(BundleConfig), "RegisterBundles")]
 
-namespace Alicargo.App_Start
+namespace Alicargo.App_Start.Mvc
 {
 	internal sealed class BundleConfig
 	{

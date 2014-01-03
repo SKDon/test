@@ -3,7 +3,7 @@ using Alicargo.Core.Services.Abstract;
 using Alicargo.MvcHelpers.Filters;
 using Ninject;
 
-namespace Alicargo.App_Start
+namespace Alicargo.App_Start.Mvc
 {
 	internal static class FilterConfig
 	{
