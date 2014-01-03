@@ -71,57 +71,57 @@ namespace Alicargo.App_Start.Jobs
 
 		private static void RunCalculationJob(string connectionString, int partitionId)
 		{
-			var executor = new SqlProcedureExecutor(connectionString);
-			var events = new EventRepository(executor);
+			//var executor = new SqlProcedureExecutor(connectionString);
+			//var events = new EventRepository(executor);
 
-			var templates = new TemplateRepository(executor);
-			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
+			//var templates = new TemplateRepository(executor);
+			//var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
 
-			var processors = new Dictionary<EventState, IEventProcessor>
-			{
-				{ EventState.Calculating, new CalculationProcessor(events, new ClientBalanceRepository(executor)) },
-				{ EventState.Emailing, new CalculationEmailCreatorProcessor(templateRepositoryWrapper) }
-			};
+			//var processors = new Dictionary<EventState, IEventProcessor>
+			//{
+			//	{ EventState.Calculating, new CalculationProcessor(events, new ClientBalanceRepository(executor)) },
+			//	{ EventState.Emailing, new CalculationEmailCreatorProcessor(templateRepositoryWrapper) }
+			//};
 
-			new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-			{
-				{ EventType.Calculate, processors },
-				{ EventType.CalculationCanceled, processors }
-			}).Work();
+			//new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+			//{
+			//	{ EventType.Calculate, processors },
+			//	{ EventType.CalculationCanceled, processors }
+			//}).Work();
 		}
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
-			using (var connection = new SqlConnection(connectionString))
-			{
-				var unitOfWork = new UnitOfWork(connection);
-				var executor = new SqlProcedureExecutor(connectionString);
-				var events = new EventRepository(executor);
-				var templates = new TemplateRepository(executor);
-				var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
-				var admins = new AdminRepository(unitOfWork);
-				var clients = new ClientRepository(unitOfWork);
-				var recipients = new EventEmailRecipient(executor);
-				var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(admins, clients, recipients);
-				var serializer = new Serializer();
+			//using (var connection = new SqlConnection(connectionString))
+			//{
+			//	var unitOfWork = new UnitOfWork(connection);
+			//	var executor = new SqlProcedureExecutor(connectionString);
+			//	var events = new EventRepository(executor);
+			//	var templates = new TemplateRepository(executor);
+			//	var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
+			//	var admins = new AdminRepository(unitOfWork);
+			//	var clients = new ClientRepository(unitOfWork);
+			//	var recipients = new EventEmailRecipient(executor);
+			//	var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(admins, clients, recipients);
+			//	var serializer = new Serializer();
 
-				var balanceProcessor = new BalanceEmailCreatorProcessor(
-					events,
-					templateRepositoryWrapper,
-					recipientsFacade, 
-					serializer);
+			//	var balanceProcessor = new BalanceEmailCreatorProcessor(
+			//		events,
+			//		templateRepositoryWrapper,
+			//		recipientsFacade, 
+			//		serializer);
 
-				var processors = new Dictionary<EventState, IEventProcessor>
-				{
-					{ EventState.Emailing, balanceProcessor }
-				};
+			//	var processors = new Dictionary<EventState, IEventProcessor>
+			//	{
+			//		{ EventState.Emailing, balanceProcessor }
+			//	};
 
-				new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-				{
-					{ EventType.BalanceDecreased, processors },
-					{ EventType.BalanceIncreased, processors }
-				}).Work();
-			}
+			//	new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+			//	{
+			//		{ EventType.BalanceDecreased, processors },
+			//		{ EventType.BalanceIncreased, processors }
+			//	}).Work();
+			//}
 		}
 
 		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,

@@ -1,7 +1,7 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 
-namespace Alicargo.Jobs.Balance
+namespace Alicargo.Jobs.Balance.Helpers
 {
 	public interface IRecipientsFacade
 	{

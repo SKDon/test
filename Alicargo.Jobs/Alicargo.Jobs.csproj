@@ -55,8 +55,10 @@
     <Compile Include="ApplicationEvents\Helpers\ApplicationEventTemplates.cs" />
     <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
     <Compile Include="Balance\BalanceEmailCreatorProcessor.cs" />
-    <Compile Include="Balance\IRecipientsFacade.cs" />
-    <Compile Include="Balance\RecipientsFacade.cs" />
+    <Compile Include="Balance\Helpers\IMessageBuilder.cs" />
+    <Compile Include="Balance\Helpers\IRecipientsFacade.cs" />
+    <Compile Include="Balance\Helpers\MessageBuilder.cs" />
+    <Compile Include="Balance\Helpers\RecipientsFacade.cs" />
     <Compile Include="Calculation\CalculationEmailCreatorProcessor.cs" />
     <Compile Include="Calculation\CalculationProcessor.cs" />
     <Compile Include="Calculation\MessageFactory.cs" />

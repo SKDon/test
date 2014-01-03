@@ -2,44 +2,40 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Services.Abstract;
+using Alicargo.Jobs.Balance.Helpers;
 using Alicargo.Jobs.Core;
-using Alicargo.Jobs.Helpers;
 
 namespace Alicargo.Jobs.Balance
 {
-	public sealed class BalanceEmailCreatorProcessor : IEventProcessor
+	internal sealed class BalanceEmailCreatorProcessor : IEventProcessor
 	{
-		private readonly IRecipientsFacade _recipients;
-		private readonly ISerializer _serializer;
+		private readonly IMailSender _sender;
 		private readonly IEventRepository _events;
-		private readonly ITemplateRepositoryWrapper _templates;
+		private readonly IMessageBuilder _messageBuilder;
+		private readonly ISerializer _serializer;
 
 		public BalanceEmailCreatorProcessor(
 			IEventRepository events,
-			ITemplateRepositoryWrapper templates,
-			IRecipientsFacade recipients,
-			ISerializer serializer)
+			ISerializer serializer, 
+			IMailSender sender, 
+			IMessageBuilder messageBuilder)
 		{
 			_events = events;
-			_templates = templates;
-			_recipients = recipients;
 			_serializer = serializer;
+			_sender = sender;
+			_messageBuilder = messageBuilder;
 		}
 
 		public void ProcessEvent(EventType type, EventData data)
 		{
 			var eventData = _serializer.Deserialize<EventDataForEntity>(data.Data);
 
-			var templateId = _templates.GetTemplateId(type);
-			if (!templateId.HasValue)
-			{
-				return;
-			}
+			var messages = _messageBuilder.Get();
 
-			var recipients = _recipients.GetRecipients(type, eventData.EntityId);
-			foreach (var recipient in recipients)
+			if (messages != null)
 			{
-				var localization = _templates.GetLocalization(templateId.Value, recipient.Culture);
+				_sender.Send(messages);
 			}
 
 			_events.Delete(data.Id);

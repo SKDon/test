@@ -6,7 +6,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 
-namespace Alicargo.Jobs.Balance
+namespace Alicargo.Jobs.Balance.Helpers
 {
 	public sealed class RecipientsFacade : IRecipientsFacade
 	{
