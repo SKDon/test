@@ -9,13 +9,13 @@ namespace Alicargo.Jobs.Core
 {
 	using TProcessorCollection = IDictionary<EventType, IDictionary<EventState, IEventProcessor>>;
 
-	public sealed class DefaultEventJob : IJob
+	public sealed class SequentialEventJob : IJob
 	{
 		private readonly IEventRepository _events;
 		private readonly int _partitionId;
 		private readonly TProcessorCollection _processors;
 
-		public DefaultEventJob(IEventRepository events, int partitionId, TProcessorCollection processors)
+		public SequentialEventJob(IEventRepository events, int partitionId, TProcessorCollection processors)
 		{
 			_events = events;
 			_partitionId = partitionId;
@@ -34,13 +34,27 @@ namespace Alicargo.Jobs.Core
 
 				var stateProcessors = typeProcessors.Value
 					.SkipWhile(x => x.Key != data.State)
-					.Select(x => x.Value);
+					.ToArray();
 
-				foreach (var processor in stateProcessors)
+				for (var i = 0; i < stateProcessors.Length; i++)
 				{
+					var processor = stateProcessors[i].Value;
 					try
 					{
 						processor.ProcessEvent(type, data);
+
+						if (i + 1 != stateProcessors.Length)
+						{
+							var nextState = stateProcessors[i + 1].Key;
+
+							_events.SetState(data.Id, nextState);
+						}
+						else
+						{
+							_events.Delete(data.Id);
+
+							break;
+						}
 					}
 					catch (BreakJobException)
 					{

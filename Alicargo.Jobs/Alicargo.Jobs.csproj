@@ -62,7 +62,7 @@
     <Compile Include="Calculation\CalculationProcessor.cs" />
     <Compile Include="Calculation\MessageFactory.cs" />
     <Compile Include="Core\BreakJobException.cs" />
-    <Compile Include="Core\DefaultEventJob.cs" />
+    <Compile Include="Core\SequentialEventJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationMailCreatorProcessor.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryProcessor.cs" />
     <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />

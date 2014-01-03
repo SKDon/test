@@ -141,7 +141,7 @@ namespace Alicargo.App_Start.Jobs
 					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor(events) }
 				};
 
-				new DefaultEventJob(events, partitionId,
+				new SequentialEventJob(events, partitionId,
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
 						{ EventType.ApplicationCreated, processors },
