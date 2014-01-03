@@ -1,7 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
-using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.TestHelpers;
 using FluentAssertions;
@@ -15,7 +14,7 @@ namespace Alicargo.Jobs.Tests
 	public class MessageFactoryTests
 	{
 		private MockContainer _container;
-		private IMessageFactory _factory;
+		private MessageFactory _factory;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -34,10 +33,12 @@ namespace Alicargo.Jobs.Tests
 			var recipientData = new RecipientData(_container.Create<string>(), _container.Create<string>(), RoleType.Broker);
 			var localization = _container.Create<EmailTemplateLocalizationData>();
 			var templateId = _container.Create<long>();
+			var templateData = _container.Create<EventTemplateData>();
+			templateData.EmailTemplateId = templateId;
 
 			_container.ApplicationRepository.Setup(x => x.GetDetails(applicationId)).Returns(applicationDetailsData);
-			_container.TemplatesFacade.Setup(x => x.GetTemplateId(eventType, bytes)).Returns(templateId);
-			_container.TemplatesFacade.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
+			_container.TemplateRepositoryWrapper.Setup(x => x.GetByEventType(eventType)).Returns(templateData);
+			_container.TemplateRepositoryWrapper.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
 				.Returns(localization);
 			_container.FilesFasade.Setup(x => x.GetFiles(applicationId, It.IsAny<long?>(), eventType, bytes))
 				.Returns(new[] {_container.Create<FileHolder>()});
@@ -59,8 +60,8 @@ namespace Alicargo.Jobs.Tests
 			messages[0].To[0].ShouldBeEquivalentTo(recipientData.Email);
 
 			_container.ApplicationRepository.Verify(x => x.GetDetails(applicationId));
-			_container.TemplatesFacade.Verify(x => x.GetTemplateId(eventType, bytes));
-			_container.TemplatesFacade.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
+			_container.TemplateRepositoryWrapper.Verify(x => x.GetByEventType(eventType));
+			_container.TemplateRepositoryWrapper.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
 			_container.FilesFasade.Verify(x => x.GetFiles(applicationId, It.IsAny<long?>(), eventType, bytes));
 			_container.RecipientsFacade.Verify(x => x.GetRecipients(applicationDetailsData, eventType, bytes));
 			_container.TextBulder.Verify(

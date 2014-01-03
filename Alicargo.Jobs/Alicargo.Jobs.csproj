@@ -52,8 +52,12 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="ApplicationEvents\Helpers\ApplicationEventTemplates.cs" />
+    <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
     <Compile Include="BalanceProcessor.cs" />
-    <Compile Include="CalculationJob.cs" />
+    <Compile Include="Calculation\CalculationEmailCreatorProcessor.cs" />
+    <Compile Include="Calculation\CalculationProcessor.cs" />
+    <Compile Include="Calculation\MessageFactory.cs" />
     <Compile Include="Core\DefaultEventJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationMailCreatorProcessor.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryProcessor.cs" />
@@ -62,12 +66,12 @@
     <Compile Include="ApplicationEvents\Abstract\IFilesFacade.cs" />
     <Compile Include="ApplicationEvents\Abstract\IMessageFactory.cs" />
     <Compile Include="ApplicationEvents\Abstract\IRecipientsFacade.cs" />
-    <Compile Include="ApplicationEvents\Abstract\ITemplatesFacade.cs" />
+    <Compile Include="Helpers\ITemplateRepositoryWrapper.cs" />
     <Compile Include="ApplicationEvents\Abstract\ITextBulder.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageFactory.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulderHelper.cs" />
-    <Compile Include="ApplicationEvents\Helpers\TemplatesFacade.cs" />
+    <Compile Include="Helpers\TemplateRepositoryWrapper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulder.cs" />
     <Compile Include="ApplicationEvents\Entities\TextLocalizedData.cs" />
     <Compile Include="Core\IEventProcessor.cs" />

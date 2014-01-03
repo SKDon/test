@@ -3,9 +3,9 @@ using Alicargo.Contracts.Enums;
 
 namespace Alicargo.Jobs.ApplicationEvents.Abstract
 {
-	public interface ITemplatesFacade
+	public interface IApplicationEventTemplates
 	{
-		long? GetTemplateId(EventType type, byte[] data);
+		long? GetTemplateId(EventType type, byte[] applicationEventData);
 		EmailTemplateLocalizationData GetLocalization(long templateId, string language);
 	}
 }

@@ -16,6 +16,7 @@ using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.Jobs.Core;
+using Alicargo.Jobs.Helpers;
 using Alicargo.Services;
 using log4net;
 using Ninject;
@@ -145,9 +146,15 @@ namespace Alicargo.App_Start
 				new ForwarderRepository(unitOfWork),
 				new BrokerRepository(unitOfWork),
 				templates);
-			var templatesFacade = new TemplatesFacade(serializer, templates);
+			var wrapper = new TemplateRepositoryWrapper(templates);
+			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
 
-			return new MessageFactory(EmailsHelper.DefaultFrom, filesFasade, textBulder, recipientsFacade, templatesFacade,
+			return new MessageFactory(
+				EmailsHelper.DefaultFrom,
+				filesFasade,
+				textBulder,
+				recipientsFacade,
+				applicationEventTemplates,
 				applications);
 		}
 	}

@@ -77,7 +77,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ApplicationEvents\Helpers\TemplatesFacadeTests.cs" />
+    <Compile Include="ApplicationEvents\Helpers\ApplicationEventTemplatesTests.cs" />
+    <Compile Include="Helpers\TemplateRepositoryWrapperTests.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulderHelperGetMatchTests.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulderHelperGetTextTests.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulderTests.cs" />

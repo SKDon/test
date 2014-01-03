@@ -9,6 +9,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
+using Alicargo.Jobs.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 using Moq;
@@ -84,7 +85,7 @@ namespace Alicargo.TestHelpers
 			StateSettingsRepository = Inject<IStateSettingsRepository>();
 			EmailTemplateRepository = Inject<IEmailTemplateRepository>();
 			AdminRepository = Inject<IAdminRepository>();
-			TemplatesFacade = Inject<ITemplatesFacade>();
+			TemplateRepositoryWrapper = Inject<ITemplateRepositoryWrapper>();
 			RecipientsFacade = Inject<IRecipientsFacade>();
 			FilesFasade = Inject<IFilesFacade>();
 			TextBulder = Inject<ITextBulder>();
@@ -118,7 +119,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ITransaction> Transaction { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
 		public Mock<IEmailTemplateRepository> EmailTemplateRepository { get; private set; }
-		public Mock<ITemplatesFacade> TemplatesFacade { get; private set; }
+		public Mock<ITemplateRepositoryWrapper> TemplateRepositoryWrapper { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
 		public Mock<IFilesFacade> FilesFasade { get; private set; }
 		public Mock<ITextBulder> TextBulder { get; private set; }

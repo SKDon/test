@@ -15,7 +15,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly string _defaultFrom;
 		private readonly IFilesFacade _files;
 		private readonly IRecipientsFacade _recipients;
-		private readonly ITemplatesFacade _templates;
+		private readonly IApplicationEventTemplates _templates;
 		private readonly ITextBulder _textBulder;
 
 		public MessageFactory(
@@ -23,7 +23,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			IFilesFacade files,
 			ITextBulder textBulder,
 			IRecipientsFacade recipients,
-			ITemplatesFacade templates,
+			IApplicationEventTemplates templates,
 			IApplicationRepository applications)
 		{
 			_defaultFrom = defaultFrom;
