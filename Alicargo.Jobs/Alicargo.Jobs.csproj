@@ -72,7 +72,7 @@
     <Compile Include="ApplicationEvents\Abstract\ITextBulder.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
-    <Compile Include="ApplicationEvents\Helpers\TextBulderHelper.cs" />
+    <Compile Include="Helpers\TextBulderHelper.cs" />
     <Compile Include="Helpers\TemplateRepositoryWrapper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulder.cs" />
     <Compile Include="ApplicationEvents\Entities\TextLocalizedData.cs" />

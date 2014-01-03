@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.Helpers
 {
 	internal static class TextBulderHelper
 	{

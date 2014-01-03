@@ -11,6 +11,7 @@ using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
+using Alicargo.Jobs.Helpers;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
