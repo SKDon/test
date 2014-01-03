@@ -3,14 +3,15 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Alicargo.Jobs.Helpers.Abstract;
 
-namespace Alicargo.Jobs.Helpers.Abstract
+namespace Alicargo.Jobs.Helpers
 {
 	internal sealed class TextBuilder<T> : ITextBuilder<T>
 	{
 		// ReSharper disable StaticFieldInGenericType
-		private static readonly PropertyInfo[] Properties = typeof(T).GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
-		// ReSharper restore StaticFieldInGenericType
+		private static readonly PropertyInfo[] Properties = // ReSharper restore StaticFieldInGenericType
+			typeof (T).GetProperties().Where(x => x.PropertyType == typeof (string)).ToArray();
 
 		public string GetText(string template, string language, T data)
 		{

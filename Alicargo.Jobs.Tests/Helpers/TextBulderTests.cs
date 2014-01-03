@@ -2,6 +2,7 @@
 using System.Text;
 using Alicargo.Contracts.Enums;
 using Alicargo.Jobs.ApplicationEvents.Entities;
+using Alicargo.Jobs.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

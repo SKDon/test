@@ -57,6 +57,7 @@
     <Compile Include="Balance\IRecipientsFacade.cs" />
     <Compile Include="Balance\MessageBuilder.cs" />
     <Compile Include="Balance\RecipientsFacade.cs" />
+    <Compile Include="Balance\TextLocalizedData.cs" />
     <Compile Include="Calculation\CalculationEmailCreatorProcessor.cs" />
     <Compile Include="Calculation\CalculationProcessor.cs" />
     <Compile Include="Calculation\MessageFactory.cs" />
@@ -73,9 +74,9 @@
     <Compile Include="ApplicationEvents\Helpers\MessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITextBuilder.cs" />
-    <Compile Include="Helpers\Abstract\TextBuilderHelper.cs" />
+    <Compile Include="Helpers\TextBuilderHelper.cs" />
     <Compile Include="Helpers\DefaultEmailingProcessor.cs" />
-    <Compile Include="Helpers\Abstract\TextBuilder.cs" />
+    <Compile Include="Helpers\TextBuilder.cs" />
     <Compile Include="Helpers\TemplateRepositoryWrapper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBuilder.cs" />
     <Compile Include="ApplicationEvents\Entities\TextLocalizedData.cs" />

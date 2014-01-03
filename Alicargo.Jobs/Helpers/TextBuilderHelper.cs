@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.Helpers.Abstract
+namespace Alicargo.Jobs.Helpers
 {
 	internal static class TextBuilderHelper
 	{
