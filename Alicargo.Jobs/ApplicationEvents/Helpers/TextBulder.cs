@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
@@ -18,12 +16,9 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	public sealed class TextBulder : ITextBulder
 	{
-		private static readonly PropertyInfo[] Properties =
-			typeof(TextLocalizedData).GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
-
+		private readonly IApplicationFileRepository _files;
 		private readonly ISerializer _serializer;
 		private readonly IStateRepository _states;
-		private readonly IApplicationFileRepository _files;
 
 		public TextBulder(ISerializer serializer, IStateRepository states, IApplicationFileRepository files)
 		{
@@ -32,34 +27,12 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_files = files;
 		}
 
-		public string GetText(string template, string language, EventType type, ApplicationDetailsData application, byte[] bytes)
+		public string GetText(string template, string language, EventType type, ApplicationDetailsData application,
+			byte[] bytes)
 		{
 			var data = GetTextLocalizedData(type, application, language, bytes);
-			var culture = CultureInfo.GetCultureInfo(language);
-			var builder = new StringBuilder(template);
 
-			foreach (var property in Properties)
-			{
-				var name = property.Name;
-
-				string match;
-				string format;
-				while (TextBulderHelper.GetMatch(builder.ToString(), name, out match, out format))
-				{
-					var value = (string)property.GetValue(data);
-
-					var text = TextBulderHelper.GetText(culture, format, value);
-
-					if (string.IsNullOrEmpty(text))
-					{
-						builder.Replace(match + Environment.NewLine, string.Empty);
-					}
-
-					builder.Replace(match, text);
-				}
-			}
-
-			return builder.ToString();
+			return TextBulderHelper.GetText(template, language, data);
 		}
 
 		private TextLocalizedData GetTextLocalizedData(EventType type,
@@ -155,7 +128,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				InvoiceFiles = string.Join(", ", invoice),
 				LegalEntity = application.ClientLegalEntity,
 				MethodOfDelivery = LocalizationHelper.GetMethodOfDelivery((MethodOfDelivery)application.MethodOfDeliveryId, culture),
-				MethodOfTransit = LocalizationHelper.GetMethodOfTransit((MethodOfTransit)application.TransitMethodOfTransitId, culture),
+				MethodOfTransit =
+					LocalizationHelper.GetMethodOfTransit((MethodOfTransit)application.TransitMethodOfTransitId, culture),
 				PackingFiles = string.Join(", ", packing),
 				StateChangeTimestamp = LocalizationHelper.GetDate(application.StateChangeTimestamp, culture),
 				StateName = state != null ? state.LocalizedName : null,

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Contracts.State;
 using Alicargo.Contracts.Enums;
@@ -18,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.Jobs.Tests.Events.Helpers
+namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 {
 	[TestClass]
 	public class TextBulderTests

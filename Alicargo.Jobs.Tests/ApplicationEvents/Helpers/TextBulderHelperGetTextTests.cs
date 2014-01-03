@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.Jobs.Tests.Events.Helpers
+namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 {
 	[TestClass]
 	public class TextBulderHelperGetTextTests

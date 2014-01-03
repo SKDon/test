@@ -31,14 +31,12 @@ namespace Alicargo.Jobs.Balance
 			var eventData = _serializer.Deserialize<EventDataForEntity>(data.Data);
 
 			var templateId = _templates.GetTemplateId(type);
-
 			if (!templateId.HasValue)
 			{
 				return;
 			}
 
 			var recipients = _recipients.GetRecipients(type, eventData.EntityId);
-
 			foreach (var recipient in recipients)
 			{
 				var localization = _templates.GetLocalization(templateId.Value, recipient.Culture);
