@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System;
+using System.Transactions;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
@@ -116,7 +117,7 @@ namespace Alicargo.Services.Users.Client
 			return clientId;
 		}
 
-		public void AddToBalance(long clientId, PaymentModel model)
+		public void AddToBalance(long clientId, PaymentModel model, DateTimeOffset timestamp)
 		{
 			var balance = _balance.GetBalance(clientId);
 

@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Calculation;
+using Alicargo.Core.Helpers;
+using Alicargo.Jobs.Balance.Entities;
 using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Balance
@@ -11,6 +16,7 @@ namespace Alicargo.Jobs.Balance
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly IClientCalculationPresenter _calculationPresenter;
+		private readonly IClientRepository _clients;
 		private readonly string _defaultFrom;
 		private readonly IExcelClientCalculation _excel;
 		private readonly IRecipientsFacade _recipients;
@@ -21,6 +27,7 @@ namespace Alicargo.Jobs.Balance
 		public MessageBuilder(
 			string defaultFrom,
 			IRecipientsFacade recipients,
+			IClientRepository clients,
 			IClientCalculationPresenter calculationPresenter,
 			IExcelClientCalculation excel,
 			ISerializer serializer,
@@ -29,6 +36,7 @@ namespace Alicargo.Jobs.Balance
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;
+			_clients = clients;
 			_calculationPresenter = calculationPresenter;
 			_excel = excel;
 			_serializer = serializer;
@@ -52,16 +60,48 @@ namespace Alicargo.Jobs.Balance
 
 			var files = GetFiles(clientId, languages);
 
-			var localizedData = new TextLocalizedData();
+			var localizations = GetLocalizationData(eventData, languages, templateId.Value, clientId);
 
-			var localizations = languages.ToDictionary(x => x, x => _templates.GetLocalization(templateId.Value, x));
-			var subjects = localizations.ToDictionary(x => x.Key,
-				x => _textBuilder.GetText(x.Value.Subject, x.Key, localizedData));
-			var bodies = localizations.ToDictionary(x => x.Key,
-				x => _textBuilder.GetText(x.Value.Body, x.Key, localizedData));
+			return recipients.Select(x => GetEmailMessage(x.Email, localizations[x.Culture], files[x.Culture])).ToArray();
+		}
 
-			return recipients.Select(x => GetEmailMessage(x.Email, subjects[x.Culture], bodies[x.Culture], files[x.Culture]))
-				.ToArray();
+		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventData eventData, string[] languages,
+			long templateId, long clientId)
+		{
+			var clientData = _clients.Get(clientId);
+			var paymentEventData = _serializer.Deserialize<PaymentEventData>(eventData.Data);
+
+			var localizations = languages.ToDictionary(x => x,
+				language =>
+				{
+					var template = _templates.GetLocalization(templateId, language);
+					
+					var localizedData = GetLocalizedData(language, paymentEventData, clientData);
+
+					return new EmailTemplateLocalizationData
+					{
+						IsBodyHtml = template.IsBodyHtml,
+						Subject = _textBuilder.GetText(template.Subject, language, localizedData),
+						Body = _textBuilder.GetText(template.Body, language, localizedData)
+					};
+				});
+
+			return localizations;
+		}
+
+		private static TextLocalizedData GetLocalizedData(string language, PaymentEventData paymentEventData,
+			ClientData clientData)
+		{
+			var culture = CultureInfo.GetCultureInfo(language);
+
+			return new TextLocalizedData
+			{
+				AbsMoney = paymentEventData.AbsMoney.ToString("N2"),
+				Comment = paymentEventData.Comment,
+				ClientNic = clientData.Nic,
+				LegalEntity = clientData.LegalEntity,
+				Timestamp = LocalizationHelper.GetDate(paymentEventData.Timestamp, culture)
+			};
 		}
 
 		private Dictionary<string, FileHolder> GetFiles(long clientId, IEnumerable<string> languages)
@@ -84,12 +124,12 @@ namespace Alicargo.Jobs.Balance
 			return files;
 		}
 
-		private EmailMessage GetEmailMessage(string email, string subject, string body, FileHolder file)
+		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder file)
 		{
-			return new EmailMessage(subject, body, _defaultFrom, email)
+			return new EmailMessage(localizationData.Subject, localizationData.Body, _defaultFrom, email)
 			{
 				Files = new[] { file },
-				IsBodyHtml = false
+				IsBodyHtml = localizationData.IsBodyHtml
 			};
 		}
 	}

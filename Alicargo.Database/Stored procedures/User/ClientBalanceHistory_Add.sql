@@ -2,14 +2,15 @@
 	@ClientId BIGINT,
 	@Balance MONEY,
 	@Input MONEY,
-	@Comment NVARCHAR(MAX)
+	@Comment NVARCHAR(MAX),
+	@Timestamp DATETIMEOFFSET
 AS
 BEGIN
 	
 	SET NOCOUNT ON;
 
-	INSERT [dbo].[ClientBalanceHistory] ([Balance], [Comment], [ClientId], [Input])
-	VALUES (@Balance, @Comment, @ClientId, @Input)
+	INSERT [dbo].[ClientBalanceHistory] ([Balance], [Comment], [ClientId], [Input], [Timestamp])
+	VALUES (@Balance, @Comment, @ClientId, @Input, @Timestamp)
 
 END
 GO

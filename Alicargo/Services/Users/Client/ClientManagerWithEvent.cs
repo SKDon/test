@@ -1,5 +1,7 @@
-﻿using Alicargo.Contracts.Enums;
+﻿using System;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Event;
+using Alicargo.Jobs.Balance.Entities;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Calculation.Admin;
@@ -32,9 +34,9 @@ namespace Alicargo.Services.Users.Client
 			return id;
 		}
 
-		public void AddToBalance(long clientId, PaymentModel model)
+		public void AddToBalance(long clientId, PaymentModel model, DateTimeOffset timestamp)
 		{
-			_manager.AddToBalance(clientId, model);
+			_manager.AddToBalance(clientId, model, timestamp);
 
 			if (model.Money == 0)
 			{
@@ -43,7 +45,12 @@ namespace Alicargo.Services.Users.Client
 
 			var eventType = model.Money > 0 ? EventType.BalanceIncreased : EventType.BalanceDecreased;
 
-			_events.Add(clientId, eventType, EventState.Emailing);
+			_events.Add(clientId, eventType, EventState.Emailing, new PaymentEventData
+			{
+				AbsMoney = Math.Abs(model.Money),
+				Comment = model.Comment,
+				Timestamp = timestamp
+			});
 		}
 	}
 }

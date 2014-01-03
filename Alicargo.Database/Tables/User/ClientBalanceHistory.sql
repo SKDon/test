@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[ClientBalanceHistory]
 (
 	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
-	[Timestamp]	DATETIMEOFFSET NOT NULL CONSTRAINT [DF_ClientBalanceHistory_Timestamp] DEFAULT(GETUTCDATE()),
+	[Timestamp]	DATETIMEOFFSET NOT NULL,
 	[ClientId] BIGINT NOT NULL,
 
 	[Balance] MONEY NOT NULL,

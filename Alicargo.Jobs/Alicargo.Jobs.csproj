@@ -54,10 +54,11 @@
     </Compile>
     <Compile Include="ApplicationEvents\Helpers\ApplicationEventTemplates.cs" />
     <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
+    <Compile Include="Balance\Entities\PaymentEventData.cs" />
     <Compile Include="Balance\IRecipientsFacade.cs" />
     <Compile Include="Balance\MessageBuilder.cs" />
     <Compile Include="Balance\RecipientsFacade.cs" />
-    <Compile Include="Balance\TextLocalizedData.cs" />
+    <Compile Include="Balance\Entities\TextLocalizedData.cs" />
     <Compile Include="Calculation\CalculationEmailCreatorProcessor.cs" />
     <Compile Include="Calculation\CalculationProcessor.cs" />
     <Compile Include="Calculation\MessageFactory.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
@@ -50,7 +51,7 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		public virtual ActionResult Payment(long clientId, PaymentModel model)
 		{
-			_manager.AddToBalance(clientId, model);
+			_manager.AddToBalance(clientId, model, DateTimeOffset.UtcNow);
 
 			return RedirectToAction(MVC.Payment.Index(clientId));
 		}

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.User;
@@ -43,9 +44,9 @@ namespace Alicargo.Services.Email
 			return id;
 		}
 
-		public void AddToBalance(long clientId, PaymentModel model)
+		public void AddToBalance(long clientId, PaymentModel model, DateTimeOffset timestamp)
 		{
-			_manager.AddToBalance(clientId, model);
+			_manager.AddToBalance(clientId, model, timestamp);
 		}
 
 		// todo: use ClientManagerWithEvent
