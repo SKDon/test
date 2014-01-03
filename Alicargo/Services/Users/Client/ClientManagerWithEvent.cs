@@ -45,12 +45,13 @@ namespace Alicargo.Services.Users.Client
 
 			var eventType = model.Money > 0 ? EventType.BalanceIncreased : EventType.BalanceDecreased;
 
-			_events.Add(clientId, eventType, EventState.Emailing, new PaymentEventData
-			{
-				AbsMoney = Math.Abs(model.Money),
-				Comment = model.Comment,
-				Timestamp = timestamp
-			});
+			_events.Add(clientId, eventType, EventState.Emailing,
+				new PaymentEventData
+				{
+					AbsMoney = Math.Abs(model.Money),
+					Comment = model.Comment,
+					Timestamp = timestamp
+				});
 		}
 	}
 }

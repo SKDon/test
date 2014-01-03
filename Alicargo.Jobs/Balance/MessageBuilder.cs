@@ -60,12 +60,12 @@ namespace Alicargo.Jobs.Balance
 
 			var files = GetFiles(clientId, languages);
 
-			var localizations = GetLocalizationData(eventData, languages, templateId.Value, clientId);
+			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value, clientId);
 
 			return recipients.Select(x => GetEmailMessage(x.Email, localizations[x.Culture], files[x.Culture])).ToArray();
 		}
 
-		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventData eventData, string[] languages,
+		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventDataForEntity eventData, string[] languages,
 			long templateId, long clientId)
 		{
 			var clientData = _clients.Get(clientId);
