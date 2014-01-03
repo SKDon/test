@@ -1,4 +1,4 @@
-﻿namespace Alicargo.ViewModels
+﻿namespace Alicargo.Core.Helpers
 {
 	public sealed class SumHolder<T>
 	{

@@ -1,4 +1,4 @@
-﻿namespace Alicargo.ViewModels.Calculation.Client
+﻿namespace Alicargo.Core.Calculation
 {
 	public sealed class ClientCalculationItem
 	{

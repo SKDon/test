@@ -37,6 +37,8 @@ namespace Alicargo.Jobs.Balance
 
 				// TextBulderHelper
 			}
+
+			return null;
 		}
 	}
 }

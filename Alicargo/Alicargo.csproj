@@ -430,8 +430,6 @@
     <Compile Include="ViewModels\Calculation\CalculationHelper.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationListCollection.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationListCollection.cs" />
-    <Compile Include="ViewModels\Calculation\Client\ClientCalculationGroup.cs" />
-    <Compile Include="ViewModels\Calculation\Client\ClientCalculationItem.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationItem.cs" />
@@ -454,7 +452,6 @@
     <Compile Include="ViewModels\State\StateCreateModel.cs" />
     <Compile Include="ViewModels\State\StateEditModel.cs" />
     <Compile Include="ViewModels\State\StateSettingsModel.cs" />
-    <Compile Include="ViewModels\SumHolder.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
     <Compile Include="ViewModels\User\SenderModel.cs" />

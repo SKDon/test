@@ -1,18 +1,18 @@
 ﻿using System.Drawing;
 using System.IO;
 using System.Web;
+using Alicargo.Core.Calculation;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
-using Alicargo.ViewModels.Calculation.Client;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Resources;
 
 namespace Alicargo.Services.Excel
 {
-	internal sealed class ExcelClientCalculation
+	internal sealed class ExcelClientCalculation : IExcelClientCalculation
 	{
-		internal MemoryStream Get(ClientCalculationListCollection data, string language)
+		public MemoryStream Get(ClientCalculationGroup[] groups, string language)
 		{
 			CultureContext.Current.Set(() => language);
 
@@ -28,7 +28,7 @@ namespace Alicargo.Services.Excel
 				var count = DrawHeader(ws);
 
 				var iRow = 2;
-				foreach (var @group in data.Groups)
+				foreach (var @group in groups)
 				{
 					var awb = HttpUtility.HtmlDecode(@group.value);
 

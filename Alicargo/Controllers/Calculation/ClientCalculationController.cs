@@ -2,21 +2,27 @@
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
+using Alicargo.Core.Calculation;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.Excel;
 
 namespace Alicargo.Controllers.Calculation
 {
 	public partial class ClientCalculationController : Controller
     {
 		private readonly IClientCalculationPresenter _presenter;
+		private readonly IExcelClientCalculation _excel;
 		private readonly IClientRepository _clients;
 		private readonly IIdentityService _identity;
 
-		public ClientCalculationController(IClientCalculationPresenter presenter, IClientRepository clients, IIdentityService identity)
+		public ClientCalculationController(
+			IClientCalculationPresenter presenter,
+			IExcelClientCalculation excel,
+			IClientRepository clients, 
+			IIdentityService identity)
 		{
 			_presenter = presenter;
+			_excel = excel;
 			_clients = clients;
 			_identity = identity;
 		}
@@ -48,9 +54,7 @@ namespace Alicargo.Controllers.Calculation
 
 			var data = _presenter.List(client.ClientId, int.MaxValue, 0);
 
-			var excel = new ExcelClientCalculation();
-
-			var stream = excel.Get(data, _identity.Language);
+			var stream = _excel.Get(data.Groups, _identity.Language);
 
 			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "calculation.xlsx");
 		}

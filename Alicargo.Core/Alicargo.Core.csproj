@@ -60,6 +60,9 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="Calculation\ClientCalculationGroup.cs" />
+    <Compile Include="Calculation\ClientCalculationItem.cs" />
+    <Compile Include="Calculation\IExcelClientCalculation.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />
@@ -70,6 +73,7 @@
     <Compile Include="Event\IPartitionConverter.cs" />
     <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\PartitionConverter.cs" />
+    <Compile Include="Helpers\SumHolder.cs" />
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
     <Compile Include="Localization\CultureContext.cs" />
     <Compile Include="Localization\ICultureContext.cs" />
