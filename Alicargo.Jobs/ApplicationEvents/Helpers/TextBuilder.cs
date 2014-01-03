@@ -11,21 +11,24 @@ using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
-using Alicargo.Jobs.Helpers;
+using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	public sealed class TextBulder : ITextBulder
+	internal sealed class TextBuilder : ITextBuilder
 	{
+		private readonly ITextBuilder<TextLocalizedData> _bulder;
 		private readonly IApplicationFileRepository _files;
 		private readonly ISerializer _serializer;
 		private readonly IStateRepository _states;
 
-		public TextBulder(ISerializer serializer, IStateRepository states, IApplicationFileRepository files)
+		public TextBuilder(ISerializer serializer, IStateRepository states, IApplicationFileRepository files,
+			ITextBuilder<TextLocalizedData> bulder)
 		{
 			_serializer = serializer;
 			_states = states;
 			_files = files;
+			_bulder = bulder;
 		}
 
 		public string GetText(string template, string language, EventType type, ApplicationDetailsData application,
@@ -33,7 +36,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		{
 			var data = GetTextLocalizedData(type, application, language, bytes);
 
-			return TextBulderHelper.GetText(template, language, data);
+			return _bulder.GetText(template, language, data);
 		}
 
 		private TextLocalizedData GetTextLocalizedData(EventType type,

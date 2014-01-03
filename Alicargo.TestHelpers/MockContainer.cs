@@ -91,7 +91,7 @@ namespace Alicargo.TestHelpers
 			TemplateRepositoryWrapper = Inject<ITemplateRepositoryWrapper>();
 			RecipientsFacade = Inject<IRecipientsFacade>();
 			FilesFasade = Inject<IFilesFacade>();
-			TextBulder = Inject<ITextBulder>();
+			TextBulder = Inject<ITextBuilder>();
 			ApplicationEventTemplates = Inject<IApplicationEventTemplates>();
 
 			Transaction.Setup(x => x.Dispose());
@@ -127,7 +127,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ITemplateRepositoryWrapper> TemplateRepositoryWrapper { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
 		public Mock<IFilesFacade> FilesFasade { get; private set; }
-		public Mock<ITextBulder> TextBulder { get; private set; }
+		public Mock<ITextBuilder> TextBulder { get; private set; }
 
 		private Mock<T> Inject<T>() where T : class
 		{

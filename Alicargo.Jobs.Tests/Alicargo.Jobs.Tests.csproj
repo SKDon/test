@@ -81,7 +81,7 @@
     <Compile Include="Helpers\TemplateRepositoryWrapperTests.cs" />
     <Compile Include="Helpers\TextBulderHelperGetMatchTests.cs" />
     <Compile Include="Helpers\TextBulderHelperGetTextTests.cs" />
-    <Compile Include="ApplicationEvents\Helpers\TextBulderTests.cs" />
+    <Compile Include="Helpers\TextBulderTests.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageBuilderTests.cs" />
     <Compile Include="Calculation\CalculationMailBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,12 +19,12 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
 		private readonly IApplicationEventTemplates _templates;
-		private readonly ITextBulder _textBulder;
+		private readonly ITextBuilder _textBuilder;
 
 		public MessageBuilder(
 			string defaultFrom,
 			IFilesFacade files,
-			ITextBulder textBulder,
+			ITextBuilder textBuilder,
 			IRecipientsFacade recipients,
 			IApplicationEventTemplates templates,
 			IApplicationRepository applications,
@@ -32,7 +32,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		{
 			_defaultFrom = defaultFrom;
 			_files = files;
-			_textBulder = textBulder;
+			_textBuilder = textBuilder;
 			_recipients = recipients;
 			_templates = templates;
 			_applications = applications;
@@ -95,8 +95,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,
 			ApplicationDetailsData application, byte[] data, EventType type, FileHolder[] files)
 		{
-			var subject = _textBulder.GetText(localization.Subject, culture, type, application, data);
-			var body = _textBulder.GetText(localization.Body, culture, type, application, data);
+			var subject = _textBuilder.GetText(localization.Subject, culture, type, application, data);
+			var body = _textBuilder.GetText(localization.Body, culture, type, application, data);
 
 			return new EmailMessage(subject, body, _defaultFrom, email)
 			{

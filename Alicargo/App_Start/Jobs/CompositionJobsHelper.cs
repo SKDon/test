@@ -13,6 +13,7 @@ using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
+using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
@@ -182,7 +183,7 @@ namespace Alicargo.App_Start.Jobs
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(filesExecutor);
 			var filesFasade = new FilesFacade(serializer, awbs, files);
-			var textBulder = new TextBulder(serializer, states, files);
+			var textBulder = new TextBuilder(serializer, states, files, new TextBuilder<TextLocalizedData>());
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new TemplateRepository(mainExecutor);
 			var recipientsFacade = new RecipientsFacade(

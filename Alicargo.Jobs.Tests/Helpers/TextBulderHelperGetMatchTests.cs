@@ -1,4 +1,5 @@
 ﻿using Alicargo.Jobs.Helpers;
+using Alicargo.Jobs.Helpers.Abstract;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -21,7 +22,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch(_fixture.Create<string>(), _fixture.Create<string>(), out text, out format);
+			var match = TextBuilderHelper.GetMatch(_fixture.Create<string>(), _fixture.Create<string>(), out text, out format);
 
 			match.Should().BeFalse();
 			text.Should().BeNull();
@@ -33,7 +34,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {name1} asdfsa {name3}", "name2", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {name1} asdfsa {name3}", "name2", out text, out format);
 
 			match.Should().BeFalse();
 			text.Should().BeNull();
@@ -45,7 +46,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf { name} asdfsa", "name", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf { name} asdfsa", "name", out text, out format);
 
 			match.Should().BeFalse();
 			text.Should().BeNull();
@@ -57,7 +58,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {name [asdfsa]", "name", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {name [asdfsa]", "name", out text, out format);
 
 			match.Should().BeFalse();
 			text.Should().BeNull();
@@ -69,7 +70,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {name} asdfsa", "name", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {name} asdfsa", "name", out text, out format);
 
 			match.Should().BeTrue();
 			text.ShouldBeEquivalentTo("{name}");
@@ -81,7 +82,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {Имя} asdfsa", "Имя", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {Имя} asdfsa", "Имя", out text, out format);
 
 			match.Should().BeTrue();
 			text.ShouldBeEquivalentTo("{Имя}");
@@ -93,7 +94,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {name} {name [format]} asdfsa", "name", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {name} {name [format]} asdfsa", "name", out text, out format);
 
 			match.Should().BeTrue();
 			text.ShouldBeEquivalentTo("{name}");
@@ -105,7 +106,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {name[f1]} {name [f2]} asdfsa", "name", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {name[f1]} {name [f2]} asdfsa", "name", out text, out format);
 
 			match.Should().BeTrue();
 			text.ShouldBeEquivalentTo("{name[f1]}");
@@ -119,7 +120,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 			string formatOut;
 			const string format = "\"f1/0.123\":]\t[ '#{0}'!!!";
 			const string name = "{name [" + format + "]}";
-			var match = TextBulderHelper.GetMatch("asdfsf " + name + " asfasdfagt5t!!", "name", out text, out formatOut);
+			var match = TextBuilderHelper.GetMatch("asdfsf " + name + " asfasdfagt5t!!", "name", out text, out formatOut);
 
 			match.Should().BeTrue();
 			text.ShouldBeEquivalentTo(name);
@@ -131,7 +132,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {name [формат]} asfasdfagt5t!!", "name", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {name [формат]} asfasdfagt5t!!", "name", out text, out format);
 
 			match.Should().BeTrue();
 			text.ShouldBeEquivalentTo("{name [формат]}");
@@ -143,7 +144,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			string text;
 			string format;
-			var match = TextBulderHelper.GetMatch("asdfsf {name [f1]} asfasdfagt5t!!", "name", out text, out format);
+			var match = TextBuilderHelper.GetMatch("asdfsf {name [f1]} asfasdfagt5t!!", "name", out text, out format);
 
 			match.Should().BeTrue();
 			text.ShouldBeEquivalentTo("{name [f1]}");

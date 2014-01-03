@@ -3,6 +3,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Core.Calculation;
+using Alicargo.Jobs.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Balance
@@ -32,6 +33,7 @@ namespace Alicargo.Jobs.Balance
 		public EmailMessage[] Get(EventType type, EventData eventData)
 		{
 			var eventDataForEntity = _serializer.Deserialize<EventDataForEntity>(eventData.Data);
+			var clientId = eventDataForEntity.EntityId;
 
 			var templateId = _templates.GetTemplateId(type);
 			if (!templateId.HasValue)
@@ -39,20 +41,30 @@ namespace Alicargo.Jobs.Balance
 				return null;
 			}
 
-			// get excel file
-			var recipients = _recipients.GetRecipients(type, eventDataForEntity.EntityId);
+			var recipients = _recipients.GetRecipients(type, clientId);
 
-			var list = _calculationPresenter.List(eventDataForEntity.EntityId, int.MaxValue, 0);
+			var list = _calculationPresenter.List(clientId, int.MaxValue, 0);
 			var files = recipients.Select(x => x.Culture)
 				.Distinct()
-				.Select(x => _excel.Get(list.Groups, x))
+				.Select(x => new
+				{
+					Stream = _excel.Get(list.Groups, x),
+					Language = x
+				})
+				.ToDictionary(
+					x => x.Language,
+					x => new FileHolder
+					{
+						Data = x.Stream.ToArray(),
+						Name = "calculation.xlsx"
+					})
 				.ToArray();
 
 			foreach (var recipient in recipients)
 			{
 				var localization = _templates.GetLocalization(templateId.Value, recipient.Culture);
 
-				// TextBulderHelper
+				 
 			}
 
 			return null;

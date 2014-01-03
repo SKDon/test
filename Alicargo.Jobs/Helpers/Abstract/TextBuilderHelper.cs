@@ -1,48 +1,15 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 
-namespace Alicargo.Jobs.Helpers
+namespace Alicargo.Jobs.Helpers.Abstract
 {
-	internal static class TextBulderHelper
+	internal static class TextBuilderHelper
 	{
 		private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(30);
 
-		public static string GetText<T>(string template, string language, T data)
-		{
-			var properties = typeof(T).GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
-
-			var culture = CultureInfo.GetCultureInfo(language);
-			var builder = new StringBuilder(template);
-
-			foreach (var property in properties)
-			{
-				var name = property.Name;
-
-				string match;
-				string format;
-				while (GetMatch(builder.ToString(), name, out match, out format))
-				{
-					var value = (string)property.GetValue(data);
-
-					var text = GetText(culture, format, value);
-
-					if (string.IsNullOrEmpty(text))
-					{
-						builder.Replace(match + Environment.NewLine, string.Empty);
-					}
-
-					builder.Replace(match, text);
-				}
-			}
-
-			return builder.ToString();
-		}
-
-		internal static bool GetMatch(string template, string paremeterName, out string text, out string format)
+		public static bool GetMatch(string template, string paremeterName, out string text, out string format)
 		{
 			text = null;
 			format = null;
@@ -77,7 +44,7 @@ namespace Alicargo.Jobs.Helpers
 			}
 		}
 
-		internal static string GetText(CultureInfo culture, string format, string value)
+		public static string GetText(CultureInfo culture, string format, string value)
 		{
 			if (string.IsNullOrWhiteSpace(format))
 			{
