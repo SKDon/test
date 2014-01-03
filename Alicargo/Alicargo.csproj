@@ -194,7 +194,6 @@
     <Compile Include="MvcHelpers\ModelBinders\ClientModelBinder.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
     <Compile Include="Services\Abstract\ISenderCalculationPresenter.cs" />
-    <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
     <Compile Include="Services\Abstract\ISenderService.cs" />
     <Compile Include="Services\Calculation\ClientCalculationPresenter.cs" />
     <Compile Include="Services\Calculation\SenderCalculationPresenter.cs" />
@@ -429,7 +428,6 @@
     <Compile Include="ViewModels\Calculation\Admin\PaymentModel.cs" />
     <Compile Include="ViewModels\Calculation\CalculationHelper.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationListCollection.cs" />
-    <Compile Include="ViewModels\Calculation\Client\ClientCalculationListCollection.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationAwbInfo.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationItem.cs" />

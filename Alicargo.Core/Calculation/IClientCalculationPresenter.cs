@@ -1,6 +1,6 @@
-﻿using Alicargo.ViewModels.Calculation.Client;
+﻿using Alicargo.Core.Calculation.Entities;
 
-namespace Alicargo.Services.Abstract
+namespace Alicargo.Core.Calculation
 {
 	public interface IClientCalculationPresenter
 	{

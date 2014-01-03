@@ -7,12 +7,12 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Calculation;
+using Alicargo.Core.Calculation.Entities;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Localization;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
-using Alicargo.ViewModels.Calculation.Client;
 using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Calculation

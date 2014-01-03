@@ -1,6 +1,4 @@
-﻿using Alicargo.Core.Calculation;
-
-namespace Alicargo.ViewModels.Calculation.Client
+﻿namespace Alicargo.Core.Calculation.Entities
 {
 	public sealed class ClientCalculationListCollection
 	{

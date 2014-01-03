@@ -60,8 +60,10 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="Calculation\ClientCalculationGroup.cs" />
-    <Compile Include="Calculation\ClientCalculationItem.cs" />
+    <Compile Include="Calculation\Entities\ClientCalculationGroup.cs" />
+    <Compile Include="Calculation\Entities\ClientCalculationItem.cs" />
+    <Compile Include="Calculation\Entities\ClientCalculationListCollection.cs" />
+    <Compile Include="Calculation\IClientCalculationPresenter.cs" />
     <Compile Include="Calculation\IExcelClientCalculation.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />

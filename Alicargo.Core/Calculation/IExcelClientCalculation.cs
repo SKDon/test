@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Alicargo.Core.Calculation.Entities;
 
 namespace Alicargo.Core.Calculation
 {

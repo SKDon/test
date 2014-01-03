@@ -2,6 +2,7 @@
 using System.IO;
 using System.Web;
 using Alicargo.Core.Calculation;
+using Alicargo.Core.Calculation.Entities;
 using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
 using OfficeOpenXml;
