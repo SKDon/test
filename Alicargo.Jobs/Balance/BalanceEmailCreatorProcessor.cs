@@ -5,6 +5,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.Balance.Helpers;
 using Alicargo.Jobs.Core;
+using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Balance
 {
@@ -31,7 +32,7 @@ namespace Alicargo.Jobs.Balance
 		{
 			var eventData = _serializer.Deserialize<EventDataForEntity>(data.Data);
 
-			var messages = _messageBuilder.Get();
+			var messages = _messageBuilder.Get(type, data);
 
 			if (messages != null)
 			{

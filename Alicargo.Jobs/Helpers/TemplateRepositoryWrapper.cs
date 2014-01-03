@@ -3,6 +3,7 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Helpers
 {

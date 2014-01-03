@@ -11,6 +11,7 @@ using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.Helpers;
+using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 using Moq;

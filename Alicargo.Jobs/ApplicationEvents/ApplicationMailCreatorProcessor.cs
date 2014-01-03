@@ -3,8 +3,8 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Services.Abstract;
-using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.Core;
+using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.ApplicationEvents
 {
@@ -13,25 +13,20 @@ namespace Alicargo.Jobs.ApplicationEvents
 		private readonly IMailSender _sender;
 		private readonly IEventRepository _events;
 		private readonly IMessageBuilder _messageBuilder;
-		private readonly ISerializer _serializer;
 
 		public ApplicationMailCreatorProcessor(
 			IMessageBuilder messageBuilder,
 			IMailSender sender,
-			IEventRepository events,
-			ISerializer serializer)
+			IEventRepository events)
 		{
 			_sender = sender;
 			_messageBuilder = messageBuilder;
 			_events = events;
-			_serializer = serializer;
 		}
 
 		public void ProcessEvent(EventType type, EventData data)
 		{
-			var applicationEventData = _serializer.Deserialize<EventDataForEntity>(data.Data);
-
-			var messages = _messageBuilder.Get(applicationEventData.EntityId, type, applicationEventData.Data);
+			var messages = _messageBuilder.Get(type, data);
 
 			if (messages != null)
 			{

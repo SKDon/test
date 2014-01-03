@@ -13,12 +13,10 @@ using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
-using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
-using Alicargo.Jobs.Balance;
-using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
+using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Services;
 using log4net;
 using Ninject;
@@ -135,7 +133,7 @@ namespace Alicargo.App_Start.Jobs
 				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
 				var mailSender = new DbMailSender(partitionId, emails, serializer);
-				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(factory, mailSender, events, serializer);
+				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(factory, mailSender, events);
 
 				var processors = new Dictionary<EventState, IEventProcessor>
 				{
@@ -204,7 +202,8 @@ namespace Alicargo.App_Start.Jobs
 				textBulder,
 				recipientsFacade,
 				applicationEventTemplates,
-				applications);
+				applications,
+				serializer);
 		}
 	}
 }

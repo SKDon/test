@@ -1,7 +1,9 @@
 ﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.Helpers;
+using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Balance.Helpers
 {
@@ -36,6 +38,11 @@ namespace Alicargo.Jobs.Balance.Helpers
 			//}
 
 			return null;
+		}
+
+		public EmailMessage[] Get(EventType type, EventData eventData)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }
