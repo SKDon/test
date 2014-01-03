@@ -55,6 +55,7 @@ namespace Alicargo.App_Start
 				new[]
 				{
 					typeof (ClientManager),
+					typeof (ClientManagerWithEvent),
 					typeof (ClientManagerWithMailing)
 				}
 			},

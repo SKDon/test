@@ -24,8 +24,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		[TestMethod]
 		public void Test_GetTemplateId_UseEventTemplate_False()
 		{
-			var eventTemplate = _container.Create<EventTemplateData>();
-			eventTemplate.EnableEmailSend = true;
+			var emailTemplateId = _container.Create<long>();
 			var stateTemplate = new StateEmailTemplateData
 			{
 				UseEventTemplate = false,
@@ -37,15 +36,16 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 
 			_container.Serializer.Setup(x => x.Deserialize<ApplicationSetStateEventData>(applicationEventData))
 				.Returns(stateEventData);
-			_container.EmailTemplateRepository.Setup(x => x.GetByStateId(stateEventData.StateId)).Returns(stateTemplate);
-			_container.TemplateRepositoryWrapper.Setup(x => x.GetByEventType(EventType.ApplicationSetState)).Returns(eventTemplate);
+			_container.TemplateRepository.Setup(x => x.GetByStateId(stateEventData.StateId)).Returns(stateTemplate);
+			_container.TemplateRepositoryWrapper.Setup(x => x.GetTemplateId(EventType.ApplicationSetState)).Returns(emailTemplateId);
 
 			var templateId = _facade.GetTemplateId(EventType.ApplicationSetState, applicationEventData);
 
 			templateId.ShouldBeEquivalentTo(stateTemplate.EmailTemplateId);
+			templateId.Should().NotBe(emailTemplateId);
 			_container.Serializer.Verify(x => x.Deserialize<ApplicationSetStateEventData>(applicationEventData));
-			_container.EmailTemplateRepository.Verify(x => x.GetByStateId(stateEventData.StateId));
-			_container.TemplateRepositoryWrapper.Verify(x => x.GetByEventType(EventType.ApplicationSetState));
+			_container.TemplateRepository.Verify(x => x.GetByStateId(stateEventData.StateId));
+			_container.TemplateRepositoryWrapper.Verify(x => x.GetTemplateId(EventType.ApplicationSetState));
 		}
 	}
 }

@@ -8,20 +8,20 @@ namespace Alicargo.Jobs.Helpers
 {
 	public sealed class TemplateRepositoryWrapper : ITemplateRepositoryWrapper
 	{
-		private readonly IEmailTemplateRepository _templates;
+		private readonly ITemplateRepository _templates;
 
-		public TemplateRepositoryWrapper(IEmailTemplateRepository templates)
+		public TemplateRepositoryWrapper(ITemplateRepository templates)
 		{
 			_templates = templates;
 		}
 
-		public EventTemplateData GetByEventType(EventType type)
+		public long? GetTemplateId(EventType type)
 		{
 			var eventTemplate = _templates.GetByEventType(type);
 
 			return eventTemplate == null || !eventTemplate.EnableEmailSend
-				? null
-				: eventTemplate;
+				? (long?)null
+				: eventTemplate.EmailTemplateId;
 		}
 
 		public EmailTemplateLocalizationData GetLocalization(long templateId, string language)

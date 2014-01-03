@@ -3,7 +3,7 @@ using Alicargo.Contracts.Enums;
 
 namespace Alicargo.Contracts.Repositories
 {
-	public interface IEmailTemplateRepository
+	public interface ITemplateRepository
 	{
 		void SetForState(long stateId, string language, bool enableEmailSend,
 			bool useEventTemplate, EmailTemplateLocalizationData localization);

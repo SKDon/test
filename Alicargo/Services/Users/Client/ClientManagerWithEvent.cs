@@ -27,7 +27,9 @@ namespace Alicargo.Services.Users.Client
 		public long Add(ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
 			AuthenticationModel authentication)
 		{
-			return _manager.Add(model, carrier, transit, authentication);
+			var id = _manager.Add(model, carrier, transit, authentication);
+
+			return id;
 		}
 
 		public void AddToBalance(long clientId, PaymentModel model)

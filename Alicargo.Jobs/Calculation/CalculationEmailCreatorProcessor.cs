@@ -16,7 +16,7 @@ namespace Alicargo.Jobs.Calculation
 
 		public void ProcessEvent(EventType type, EventData data)
 		{
-			var template = _templates.GetByEventType(type);
+			var template = _templates.GetTemplateId(type);
 		}
 	}
 }

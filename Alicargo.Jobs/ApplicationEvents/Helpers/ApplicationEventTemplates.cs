@@ -12,11 +12,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 	{
 		private readonly ITemplateRepositoryWrapper _wrapper;
 		private readonly ISerializer _serializer;
-		private readonly IEmailTemplateRepository _templates;
+		private readonly ITemplateRepository _templates;
 
 		public ApplicationEventTemplates(
 			ITemplateRepositoryWrapper wrapper,
-			IEmailTemplateRepository templates,
+			ITemplateRepository templates,
 			ISerializer serializer)
 		{
 			_wrapper = wrapper;
@@ -26,10 +26,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		public long? GetTemplateId(EventType type, byte[] applicationEventData)
 		{
-			var eventTemplate = _wrapper.GetByEventType(type);
+			var templateId = _wrapper.GetTemplateId(type);
 
 			if (type != EventType.ApplicationSetState)
-				return eventTemplate.EmailTemplateId;
+				return templateId;
 
 			var stateEventData = _serializer.Deserialize<ApplicationSetStateEventData>(applicationEventData);
 			var stateTemplate = _templates.GetByStateId(stateEventData.StateId);
@@ -38,7 +38,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				return stateTemplate.EmailTemplateId;
 			}
 
-			return eventTemplate.EmailTemplateId;
+			return templateId;
 		}
 
 		public EmailTemplateLocalizationData GetLocalization(long templateId, string language)

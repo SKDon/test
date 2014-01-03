@@ -74,11 +74,12 @@ namespace Alicargo.App_Start.Jobs
 			var executor = new SqlProcedureExecutor(connectionString);
 			var events = new EventRepository(executor);
 
-			var templates = new EmailTemplateRepository(executor);
+			var templates = new TemplateRepository(executor);
 			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
 
 			var processors = new Dictionary<EventState, IEventProcessor>
 			{
+				{ EventState.Calculating, new CalculationProcessor(events, new ClientBalanceRepository(executor)) },
 				{ EventState.Emailing, new CalculationEmailCreatorProcessor(templateRepositoryWrapper) }
 			};
 
@@ -93,8 +94,10 @@ namespace Alicargo.App_Start.Jobs
 		{
 			var executor = new SqlProcedureExecutor(connectionString);
 			var events = new EventRepository(executor);
+			var templates = new TemplateRepository(executor);
+			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
 
-			var balanceProcessor = new BalanceEmailCreatorProcessor();
+			var balanceProcessor = new BalanceEmailCreatorProcessor(templateRepositoryWrapper);
 
 			var processors = new Dictionary<EventState, IEventProcessor>
 			{
@@ -169,7 +172,7 @@ namespace Alicargo.App_Start.Jobs
 			var filesFasade = new FilesFacade(serializer, awbs, files);
 			var textBulder = new TextBulder(serializer, states, files);
 			var stateSettings = new StateSettingsRepository(mainExecutor);
-			var templates = new EmailTemplateRepository(mainExecutor);
+			var templates = new TemplateRepository(mainExecutor);
 			var recipientsFacade = new RecipientsFacade(
 				awbs, serializer, stateSettings,
 				new AdminRepository(unitOfWork),

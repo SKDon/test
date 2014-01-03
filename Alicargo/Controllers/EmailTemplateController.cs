@@ -16,10 +16,10 @@ namespace Alicargo.Controllers
 	public partial class EmailTemplateController : Controller
 	{
 		private readonly IIdentityService _identity;
-		private readonly IEmailTemplateRepository _templates;
+		private readonly ITemplateRepository _templates;
 
 		public EmailTemplateController(
-			IEmailTemplateRepository templates,
+			ITemplateRepository templates,
 			IIdentityService identity)
 		{
 			_templates = templates;

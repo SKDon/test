@@ -92,7 +92,7 @@
     <Compile Include="Repositories\AwbRepository.cs" />
     <Compile Include="Repositories\User\ClientFileRepository.cs" />
     <Compile Include="Repositories\EmailMessageRepository.cs" />
-    <Compile Include="Repositories\EmailTemplateRepository.cs" />
+    <Compile Include="Repositories\TemplateRepository.cs" />
     <Compile Include="Repositories\User\SenderRepository.cs" />
     <Compile Include="Repositories\StateRepository.cs" />
     <Compile Include="Repositories\StateSettingsRepository.cs" />

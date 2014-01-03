@@ -48,6 +48,7 @@ namespace Alicargo.Services.Email
 			_manager.AddToBalance(clientId, model);
 		}
 
+		// todo: use ClientManagerWithEvent
 		private void EmailOnAdd(ClientModel model, AuthenticationModel authenticationModel)
 		{
 			var body = _messageBuilder.ClientAdd(model, authenticationModel);

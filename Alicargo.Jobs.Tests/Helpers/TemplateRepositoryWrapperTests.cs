@@ -28,11 +28,11 @@ namespace Alicargo.Jobs.Tests.Helpers
 			eventTemplate.EnableEmailSend = false;
 			var eventType = _container.Create<EventType>();
 
-			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
+			_container.TemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
 
-			var template = _templateRepositoryWrapper.GetByEventType(eventType);
+			var template = _templateRepositoryWrapper.GetTemplateId(eventType);
 
-			template.Should().BeNull();
+			template.Should().NotHaveValue();
 		}
 
 		[TestMethod]
@@ -42,11 +42,11 @@ namespace Alicargo.Jobs.Tests.Helpers
 			eventTemplate.EnableEmailSend = true;
 			var eventType = _container.Create<EventType>();
 
-			_container.EmailTemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
+			_container.TemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
 
-			var template = _templateRepositoryWrapper.GetByEventType(eventType);
+			var template = _templateRepositoryWrapper.GetTemplateId(eventType);
 
-			template.ShouldBeEquivalentTo(eventTemplate);
+			template.ShouldBeEquivalentTo(eventTemplate.EmailTemplateId);
 		}
 	}
 }

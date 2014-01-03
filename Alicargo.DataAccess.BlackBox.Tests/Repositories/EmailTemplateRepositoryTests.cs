@@ -17,7 +17,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private DbTestContext _context;
 		private Fixture _fixture;
 		private StateRepository _states;
-		private EmailTemplateRepository _templates;
+		private TemplateRepository _templates;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -26,7 +26,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_fixture = new Fixture();
 
 			var executor = new SqlProcedureExecutor(_context.Connection.ConnectionString);
-			_templates = new EmailTemplateRepository(executor);
+			_templates = new TemplateRepository(executor);
 			_states = new StateRepository(executor);
 		}
 

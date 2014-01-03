@@ -5,7 +5,7 @@ namespace Alicargo.Jobs.Helpers
 {
 	public interface ITemplateRepositoryWrapper
 	{
-		EventTemplateData GetByEventType(EventType type);
+		long? GetTemplateId(EventType type);
 		EmailTemplateLocalizationData GetLocalization(long templateId, string language);
 	}
 }

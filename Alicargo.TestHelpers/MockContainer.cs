@@ -83,7 +83,7 @@ namespace Alicargo.TestHelpers
 			MessageBuilder = Inject<IMessageBuilder>();
 			ApplicationFileRepository = Inject<IApplicationFileRepository>();
 			StateSettingsRepository = Inject<IStateSettingsRepository>();
-			EmailTemplateRepository = Inject<IEmailTemplateRepository>();
+			TemplateRepository = Inject<ITemplateRepository>();
 			AdminRepository = Inject<IAdminRepository>();
 			TemplateRepositoryWrapper = Inject<ITemplateRepositoryWrapper>();
 			RecipientsFacade = Inject<IRecipientsFacade>();
@@ -120,7 +120,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
-		public Mock<IEmailTemplateRepository> EmailTemplateRepository { get; private set; }
+		public Mock<ITemplateRepository> TemplateRepository { get; private set; }
 		public Mock<ITemplateRepositoryWrapper> TemplateRepositoryWrapper { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
 		public Mock<IFilesFacade> FilesFasade { get; private set; }

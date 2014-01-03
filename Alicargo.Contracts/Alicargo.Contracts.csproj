@@ -115,7 +115,7 @@
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\User\IClientFileRepository.cs" />
     <Compile Include="Repositories\IEmailMessageRepository.cs" />
-    <Compile Include="Repositories\IEmailTemplateRepository.cs" />
+    <Compile Include="Repositories\ITemplateRepository.cs" />
     <Compile Include="Repositories\User\IForwarderRepository.cs" />
     <Compile Include="Repositories\User\ISenderRepository.cs" />
     <Compile Include="Repositories\ISqlProcedureExecutor.cs" />

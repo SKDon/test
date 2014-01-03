@@ -7,11 +7,11 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	public sealed class EmailTemplateRepository : IEmailTemplateRepository
+	public sealed class TemplateRepository : ITemplateRepository
 	{
 		private readonly ISqlProcedureExecutor _executor;
 
-		public EmailTemplateRepository(ISqlProcedureExecutor executor)
+		public TemplateRepository(ISqlProcedureExecutor executor)
 		{
 			_executor = executor;
 		}

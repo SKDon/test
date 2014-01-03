@@ -4,7 +4,7 @@ using Alicargo.Contracts.Repositories.User;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
-	internal sealed class ClientBalanceRepository : IClientBalanceRepository
+	public sealed class ClientBalanceRepository : IClientBalanceRepository
 	{
 		private readonly ISqlProcedureExecutor _executor;
 

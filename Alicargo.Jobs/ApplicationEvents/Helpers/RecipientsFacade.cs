@@ -22,7 +22,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly ISenderRepository _senders;
 		private readonly ISerializer _serializer;
 		private readonly IStateSettingsRepository _stateSettings;
-		private readonly IEmailTemplateRepository _templates;
+		private readonly ITemplateRepository _templates;
 
 		public RecipientsFacade(
 			IAwbRepository awbs,
@@ -33,7 +33,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			IClientRepository clients,
 			IForwarderRepository forwarders,
 			IBrokerRepository brokers,
-			IEmailTemplateRepository templates)
+			ITemplateRepository templates)
 		{
 			_awbs = awbs;
 			_serializer = serializer;

@@ -19,11 +19,11 @@ namespace Alicargo.Controllers
 	{
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _states;
-		private readonly IEmailTemplateRepository _templates;
+		private readonly ITemplateRepository _templates;
 
 		public StateController(
 			IStateRepository states,
-			IEmailTemplateRepository templates,
+			ITemplateRepository templates,
 			IIdentityService identity)
 		{
 			_states = states;
