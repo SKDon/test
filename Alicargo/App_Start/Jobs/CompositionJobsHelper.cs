@@ -133,12 +133,12 @@ namespace Alicargo.App_Start.Jobs
 				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
 				var mailSender = new DbMailSender(partitionId, emails, serializer);
-				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(factory, mailSender, events);
+				var mailCreatorProcessor = new ApplicationMailCreatorProcessor(factory, mailSender);
 
 				var processors = new Dictionary<EventState, IEventProcessor>
 				{
 					{ EventState.Emailing, mailCreatorProcessor },
-					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor(events) }
+					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor() }
 				};
 
 				new SequentialEventJob(events, partitionId,

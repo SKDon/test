@@ -8,12 +8,10 @@ namespace Alicargo.Jobs.Calculation
 {
 	public sealed class CalculationProcessor : IEventProcessor
 	{
-		private readonly IEventRepository _events;
 		private readonly IClientBalanceRepository _balance;
 
-		public CalculationProcessor(IEventRepository events, IClientBalanceRepository balance)
+		public CalculationProcessor(IClientBalanceRepository balance)
 		{
-			_events = events;
 			_balance = balance;
 		}
 
@@ -30,8 +28,6 @@ namespace Alicargo.Jobs.Calculation
 				default:
 					throw new JobException("Unexpected type " + type + " in CalculationProcessor");
 			}
-
-			_events.SetState(data.Id, EventState.Emailing);
 		}
 	}
 }
