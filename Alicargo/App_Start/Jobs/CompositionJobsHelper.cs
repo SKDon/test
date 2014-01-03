@@ -24,7 +24,6 @@ using log4net;
 using Ninject;
 using Ninject.Syntax;
 using ILog = Alicargo.Core.Services.Abstract.ILog;
-using MessageFactory = Alicargo.Jobs.ApplicationEvents.Helpers.MessageFactory;
 using RecipientsFacade = Alicargo.Jobs.ApplicationEvents.Helpers.RecipientsFacade;
 
 namespace Alicargo.App_Start.Jobs
@@ -106,8 +105,11 @@ namespace Alicargo.App_Start.Jobs
 				var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(admins, clients, recipients);
 				var serializer = new Serializer();
 
-				var balanceProcessor = new BalanceEmailCreatorProcessor(templateRepositoryWrapper,
-					recipientsFacade, serializer);
+				var balanceProcessor = new BalanceEmailCreatorProcessor(
+					events,
+					templateRepositoryWrapper,
+					recipientsFacade, 
+					serializer);
 
 				var processors = new Dictionary<EventState, IEventProcessor>
 				{
@@ -170,7 +172,7 @@ namespace Alicargo.App_Start.Jobs
 			job.Work();
 		}
 
-		private static IMessageFactory GetMessageFactory(IDbConnection connection, string connectionString,
+		private static IMessageBuilder GetMessageFactory(IDbConnection connection, string connectionString,
 			string filesConnectionString, ISerializer serializer)
 		{
 			var unitOfWork = new UnitOfWork(connection);
@@ -196,7 +198,7 @@ namespace Alicargo.App_Start.Jobs
 			var wrapper = new TemplateRepositoryWrapper(templates);
 			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
 
-			return new MessageFactory(
+			return new MessageBuilder(
 				EmailsHelper.DefaultFrom,
 				filesFasade,
 				textBulder,

@@ -12,17 +12,17 @@ namespace Alicargo.Jobs.ApplicationEvents
 	{
 		private readonly IMailSender _sender;
 		private readonly IEventRepository _events;
-		private readonly IMessageFactory _messageFactory;
+		private readonly IMessageBuilder _messageBuilder;
 		private readonly ISerializer _serializer;
 
 		public ApplicationMailCreatorProcessor(
-			IMessageFactory messageFactory,
+			IMessageBuilder messageBuilder,
 			IMailSender sender,
 			IEventRepository events,
 			ISerializer serializer)
 		{
 			_sender = sender;
-			_messageFactory = messageFactory;
+			_messageBuilder = messageBuilder;
 			_events = events;
 			_serializer = serializer;
 		}
@@ -31,7 +31,7 @@ namespace Alicargo.Jobs.ApplicationEvents
 		{
 			var applicationEventData = _serializer.Deserialize<EventDataForEntity>(data.Data);
 
-			var messages = _messageFactory.Get(applicationEventData.EntityId, type, applicationEventData.Data);
+			var messages = _messageBuilder.Get(applicationEventData.EntityId, type, applicationEventData.Data);
 
 			if (messages != null)
 			{

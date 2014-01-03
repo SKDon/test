@@ -17,6 +17,7 @@ using Moq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using Ploeh.AutoFixture.Dsl;
+using IMessageBuilder = Alicargo.Services.Abstract.IMessageBuilder;
 
 namespace Alicargo.TestHelpers
 {

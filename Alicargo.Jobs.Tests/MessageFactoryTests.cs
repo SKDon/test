@@ -13,13 +13,13 @@ namespace Alicargo.Jobs.Tests
 	public class MessageFactoryTests
 	{
 		private MockContainer _container;
-		private MessageFactory _factory;
+		private MessageBuilder _builder;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_container = new MockContainer();
-			_factory = _container.Create<MessageFactory>();
+			_builder = _container.Create<MessageBuilder>();
 		}
 
 		[TestMethod]
@@ -49,7 +49,7 @@ namespace Alicargo.Jobs.Tests
 				x => x.GetText(localization.Body, recipientData.Culture, eventType, applicationDetailsData, bytes))
 				.Returns(localization.Body);
 
-			var messages = _factory.Get(applicationId, eventType, bytes);
+			var messages = _builder.Get(applicationId, eventType, bytes);
 
 			messages[0].Files.Should().BeNull();
 			messages[0].IsBodyHtml.ShouldBeEquivalentTo(localization.IsBodyHtml);

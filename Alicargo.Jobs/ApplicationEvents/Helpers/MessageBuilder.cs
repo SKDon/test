@@ -9,7 +9,7 @@ using Alicargo.Jobs.ApplicationEvents.Abstract;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
-	public sealed class MessageFactory : IMessageFactory
+	public sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly string _defaultFrom;
@@ -18,7 +18,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly IApplicationEventTemplates _templates;
 		private readonly ITextBulder _textBulder;
 
-		public MessageFactory(
+		public MessageBuilder(
 			string defaultFrom,
 			IFilesFacade files,
 			ITextBulder textBulder,

@@ -24,6 +24,15 @@ namespace Alicargo.Jobs.Balance
 			_recipients = recipients;
 		}
 
+		public RecipientData[] GetRecipients(EventType type, long clientId)
+		{
+			var roles = _recipients.GetRecipientRoles(type);
+
+			return roles.Length == 0
+				? null
+				: GetRecipients(roles, clientId).ToArray();
+		}
+
 		private IEnumerable<RecipientData> GetRecipients(IEnumerable<RoleType> roles, long clientId)
 		{
 			foreach (var role in roles)
@@ -31,8 +40,8 @@ namespace Alicargo.Jobs.Balance
 				switch (role)
 				{
 					case RoleType.Admin:
-						var recipients =
-							_admins.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
+						var recipients = _admins.GetAll()
+							.Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
 						foreach (var recipient in recipients)
 						{
 							yield return recipient;
@@ -40,16 +49,9 @@ namespace Alicargo.Jobs.Balance
 						break;
 
 					case RoleType.Sender:
-						yield return null;
-						break;
-
 					case RoleType.Broker:
-						yield return null;
-						break;
-
 					case RoleType.Forwarder:
-						yield return null;
-						break;
+						yield break;
 
 					case RoleType.Client:
 						var client = _clients.Get(clientId);
@@ -63,15 +65,6 @@ namespace Alicargo.Jobs.Balance
 						throw new InvalidOperationException("Unknown role " + role);
 				}
 			}
-		}
-
-		public RecipientData[] GetRecipients(EventType type, long clientId)
-		{
-			var roles = _recipients.GetRecipientRoles(type);
-
-			return roles.Length == 0
-				? null
-				: GetRecipients(roles, clientId).ToArray();
 		}
 	}
 }

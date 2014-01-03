@@ -1,6 +1,7 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
+using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
 
@@ -10,13 +11,16 @@ namespace Alicargo.Jobs.Balance
 	{
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
+		private readonly IEventRepository _events;
 		private readonly ITemplateRepositoryWrapper _templates;
 
 		public BalanceEmailCreatorProcessor(
+			IEventRepository events,
 			ITemplateRepositoryWrapper templates,
 			IRecipientsFacade recipients,
 			ISerializer serializer)
 		{
+			_events = events;
 			_templates = templates;
 			_recipients = recipients;
 			_serializer = serializer;
@@ -38,8 +42,9 @@ namespace Alicargo.Jobs.Balance
 			foreach (var recipient in recipients)
 			{
 				var localization = _templates.GetLocalization(templateId.Value, recipient.Culture);
-
 			}
+
+			_events.Delete(data.Id);
 		}
 	}
 }

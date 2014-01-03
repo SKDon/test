@@ -3,7 +3,7 @@ using Alicargo.Contracts.Enums;
 
 namespace Alicargo.Jobs.ApplicationEvents.Abstract
 {
-	public interface IMessageFactory
+	public interface IMessageBuilder
 	{
 		EmailMessage[] Get(long applicationId, EventType type, byte[] data);
 	}

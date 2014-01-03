@@ -66,11 +66,11 @@
     <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />
     <Compile Include="ApplicationEvents\Helpers\FilesFacade.cs" />
     <Compile Include="ApplicationEvents\Abstract\IFilesFacade.cs" />
-    <Compile Include="ApplicationEvents\Abstract\IMessageFactory.cs" />
+    <Compile Include="ApplicationEvents\Abstract\IMessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Abstract\IRecipientsFacade.cs" />
     <Compile Include="Helpers\ITemplateRepositoryWrapper.cs" />
     <Compile Include="ApplicationEvents\Abstract\ITextBulder.cs" />
-    <Compile Include="ApplicationEvents\Helpers\MessageFactory.cs" />
+    <Compile Include="ApplicationEvents\Helpers\MessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBulderHelper.cs" />
     <Compile Include="Helpers\TemplateRepositoryWrapper.cs" />
