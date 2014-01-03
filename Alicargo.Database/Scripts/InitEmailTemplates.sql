@@ -2,7 +2,7 @@
 INSERT [dbo].[EmailTemplate] ([Id]) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9),
 (10), (11), (12), (13), (14), (15), (16),
-(17), (18), (19), (20), (21), (22), (23)
+(17), (18), (19), (20), (21), (22), (23), (24)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
@@ -17,7 +17,8 @@ INSERT [dbo].[EventEmailTemplate]
 (10, 7, 1),
 (6, 8, 1),
 (8, 9, 1),
-(2, 10, 1)
+(2, 10, 1),
+(13, 24, 1)
 
 
 SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] ON 
@@ -251,7 +252,12 @@ Alicargo  srl', 0),
 (40, 20, N'ru', NULL, NULL, 0),
 (41, 21, N'ru', NULL, NULL, 0),
 (42, 22, N'ru', NULL, NULL, 0),
-(43, 23, N'ru', NULL, NULL, 0)
+(43, 23, N'ru', NULL, NULL, 0),
+(44, 24, N'ru', N'{AbsMoney}', N'{AbsMoney}
+{Comment}
+{ClientNic}
+{LegalEntity}
+{Timestamp}', 0)
 SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] OFF
 
 
@@ -278,6 +284,7 @@ INSERT [dbo].[EventEmailRecipient]
 (1, 2),
 (1, 3),
 (1, 8),
+(1, 13),
 (2, 1),
 (2, 4),
 (2, 5),
@@ -292,4 +299,5 @@ INSERT [dbo].[EventEmailRecipient]
 (5, 7),
 (5, 8),
 (5, 9),
-(5, 10)
+(5, 10),
+(5, 13)

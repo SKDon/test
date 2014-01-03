@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Contracts.User;
+﻿using System;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 
@@ -13,9 +14,9 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor = executor;
 		}
 
-		public void AddToHistory(long clientId, decimal balance, decimal input, string comment)
+		public void AddToHistory(long clientId, decimal balance, decimal input, string comment, DateTimeOffset timestamp)
 		{
-			_executor.Execute("[dbo].[ClientBalanceHistory_Add]", new { clientId, balance, input, comment });
+			_executor.Execute("[dbo].[ClientBalanceHistory_Add]", new { clientId, balance, input, comment, timestamp });
 		}
 
 		public decimal GetBalance(long clientId)

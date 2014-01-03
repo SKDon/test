@@ -127,7 +127,7 @@ namespace Alicargo.Services.Users.Client
 			{
 				_balance.SetBalance(clientId, balance);
 
-				_balance.AddToHistory(clientId, balance, model.Money, model.Comment);
+				_balance.AddToHistory(clientId, balance, model.Money, model.Comment, timestamp);
 
 				scope.Complete();
 			}

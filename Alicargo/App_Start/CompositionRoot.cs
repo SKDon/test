@@ -5,7 +5,6 @@ using System.Linq;
 using Alicargo.App_Start.Jobs;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Calculation;
 using Alicargo.Core.Event;
 using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
@@ -13,7 +12,6 @@ using Alicargo.Core.Services.Email;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
-using Alicargo.Services.Excel;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
@@ -32,8 +30,6 @@ namespace Alicargo.App_Start
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
 			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
-
-			kernel.Bind<IExcelClientCalculation>().To<ExcelClientCalculation>().InThreadScope();
 
 			kernel.Bind<IPartitionConverter>().To<PartitionConverter>()
 				.InSingletonScope()
