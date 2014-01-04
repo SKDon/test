@@ -1,11 +1,6 @@
 ﻿@using Alicargo.Core.Resources
 @using Resources
 @model Alicargo.Contracts.Contracts.User.ClientBalanceHistoryItem[]
-<h1>
-	@Pages.Payment: @ViewBag.Nic,
-	@Entities.Balance: @ViewBag.Balance.ToString("N2")
-</h1>
-@Html.Action(MVC.Balance.Payment((long)ViewBag.ClientId))
 @if (Model.Length > 0)
 {
 	<b>

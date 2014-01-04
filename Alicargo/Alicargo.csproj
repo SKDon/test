@@ -374,9 +374,6 @@
     <Compile Include="T4MVC\HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="T4MVC\PaymentController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="T4MVC\RestorePasswordController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -764,14 +761,14 @@
     <Content Include="Views\ClientApplication\EditorTemplates\ApplicationClientModel.cshtml" />
     <Content Include="Views\ClientApplication\Edit.cshtml" />
     <Content Include="Views\Files\ClientApplication.cshtml" />
-    <Content Include="Views\Balance\Index.cshtml" />
     <Content Include="Views\Balance\EditorTemplates\PaymentModel.cshtml" />
-    <Content Include="Views\Balance\Payment.cshtml" />
+    <Content Include="Views\Balance\Decrease.cshtml" />
     <Content Include="Views\RestorePassword\Index.cshtml" />
     <Content Include="Views\RestorePassword\Finish.cshtml" />
     <Content Include="Views\RestorePassword\NewPassword.cshtml" />
     <Content Include="Views\RestorePassword\UnknownKey.cshtml" />
     <Content Include="Views\RestorePassword\Success.cshtml" />
+    <Content Include="Views\Balance\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -43,15 +43,15 @@ namespace Alicargo.Controllers.Calculation
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Index()
+        public virtual System.Web.Mvc.PartialViewResult History()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.History);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Payment()
+        public virtual System.Web.Mvc.ViewResult Decrease()
         {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Payment);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Decrease);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -69,31 +69,31 @@ namespace Alicargo.Controllers.Calculation
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
-            public readonly string Payment = "Payment";
+            public readonly string History = "History";
+            public readonly string Decrease = "Decrease";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
-            public const string Payment = "Payment";
+            public const string History = "History";
+            public const string Decrease = "Decrease";
         }
 
 
-        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
+        static readonly ActionParamsClass_History s_params_History = new ActionParamsClass_History();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
+        public ActionParamsClass_History HistoryParams { get { return s_params_History; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Index
+        public class ActionParamsClass_History
         {
             public readonly string clientId = "clientId";
         }
-        static readonly ActionParamsClass_Payment s_params_Payment = new ActionParamsClass_Payment();
+        static readonly ActionParamsClass_Decrease s_params_Decrease = new ActionParamsClass_Decrease();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Payment PaymentParams { get { return s_params_Payment; } }
+        public ActionParamsClass_Decrease DecreaseParams { get { return s_params_Decrease; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Payment
+        public class ActionParamsClass_Decrease
         {
             public readonly string clientId = "clientId";
             public readonly string model = "model";
@@ -108,6 +108,17 @@ namespace Alicargo.Controllers.Calculation
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Decrease = "Decrease";
+                public readonly string History = "History";
+            }
+            public readonly string Decrease = "~/Views/Balance/Decrease.cshtml";
+            public readonly string History = "~/Views/Balance/History.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string PaymentModel = "PaymentModel";
             }
         }
     }
@@ -117,34 +128,34 @@ namespace Alicargo.Controllers.Calculation
     {
         public T4MVC_BalanceController() : base(Dummy.Instance) { }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long clientId);
+        partial void HistoryOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long clientId);
 
-        public override System.Web.Mvc.ViewResult Index(long clientId)
+        public override System.Web.Mvc.PartialViewResult History(long clientId)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.History);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
-            IndexOverride(callInfo, clientId);
+            HistoryOverride(callInfo, clientId);
             return callInfo;
         }
 
-        partial void PaymentOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long clientId);
+        partial void DecreaseOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long clientId);
 
-        public override System.Web.Mvc.PartialViewResult Payment(long clientId)
+        public override System.Web.Mvc.ViewResult Decrease(long clientId)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Payment);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Decrease);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
-            PaymentOverride(callInfo, clientId);
+            DecreaseOverride(callInfo, clientId);
             return callInfo;
         }
 
-        partial void PaymentOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
+        partial void DecreaseOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
 
-        public override System.Web.Mvc.ActionResult Payment(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
+        public override System.Web.Mvc.ActionResult Decrease(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Payment);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Decrease);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            PaymentOverride(callInfo, clientId, model);
+            DecreaseOverride(callInfo, clientId, model);
             return callInfo;
         }
 

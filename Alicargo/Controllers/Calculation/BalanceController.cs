@@ -10,9 +10,9 @@ namespace Alicargo.Controllers.Calculation
 {
 	public partial class BalanceController : Controller
 	{
-		private readonly IClientRepository _clients;
 		private readonly IClientBalance _balance;
 		private readonly IClientBalanceRepository _balanceRepository;
+		private readonly IClientRepository _clients;
 
 		public BalanceController(
 			IClientRepository clients,
@@ -24,32 +24,36 @@ namespace Alicargo.Controllers.Calculation
 			_balanceRepository = balanceRepository;
 		}
 
+		[ChildActionOnly]
+		public virtual PartialViewResult History(long clientId)
+		{
+			var items = _balanceRepository.GetHistory(clientId);
+
+			return PartialView(items);
+		}
+
 		[Access(RoleType.Admin)]
 		[HttpGet]
-		public virtual ViewResult Index(long clientId)
+		public virtual ViewResult Decrease(long clientId)
+		{
+			BindBag(clientId);
+
+			return View();
+		}
+
+		private void BindBag(long clientId)
 		{
 			var client = _clients.Get(clientId);
 			var balance = _balanceRepository.GetBalance(clientId);
-			var items = _balanceRepository.GetHistory(clientId);
-
+			ViewBag.ClientId = clientId;
 			ViewBag.Nic = client.Nic;
 			ViewBag.Balance = balance;
 			ViewBag.ClientId = clientId;
-
-			return View(items);
-		}
-
-		[ChildActionOnly]
-		public virtual PartialViewResult Payment(long clientId)
-		{
-			ViewBag.ClientId = clientId;
-
-			return PartialView();
 		}
 
 		[Access(RoleType.Admin)]
 		[HttpPost]
-		public virtual ActionResult Payment(long clientId, PaymentModel model)
+		public virtual ActionResult Decrease(long clientId, PaymentModel model)
 		{
 			try
 			{
@@ -57,14 +61,14 @@ namespace Alicargo.Controllers.Calculation
 			}
 			catch (ArgumentException e)
 			{
-				ViewBag.ClientId = clientId;
+				BindBag(clientId);
 
 				ModelState.AddModelError(e.ParamName, e.Message);
 
 				return View(model);
 			}
 
-			return RedirectToAction(MVC.Balance.Index(clientId));
+			return RedirectToAction(MVC.Balance.Decrease(clientId));
 		}
 	}
 }
