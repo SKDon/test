@@ -178,6 +178,7 @@
     </Compile>
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
+    <Compile Include="Services\Abstract\IClientBalance.cs" />
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
@@ -198,6 +199,8 @@
     <Compile Include="Services\Calculation\ClientCalculationPresenter.cs" />
     <Compile Include="Services\Calculation\SenderCalculationPresenter.cs" />
     <Compile Include="Services\Excel\Rows\BaseApplicationExcelRow.cs" />
+    <Compile Include="Services\Users\Client\ClientBalance.cs" />
+    <Compile Include="Services\Users\Client\ClientBalanceWithEvent.cs" />
     <Compile Include="Services\Users\Client\ClientManagerWithEvent.cs" />
     <Compile Include="Services\Users\SenderService.cs" />
     <Compile Include="App_Start\Mvc\BinderConfig.cs" />
@@ -303,7 +306,7 @@
     <Compile Include="Services\Users\Client\ClientPresenter.cs" />
     <Compile Include="Services\Abstract\IClientPermissions.cs" />
     <Compile Include="Services\Email\ApplicationAwbManagerWithMailing.cs" />
-    <Compile Include="Services\Email\ClientManagerWithMailing.cs" />
+    <Compile Include="Services\Users\Client\ClientManagerWithMailing.cs" />
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
     <Compile Include="Services\Excel\Rows\AdminApplicationExcelRow.cs" />

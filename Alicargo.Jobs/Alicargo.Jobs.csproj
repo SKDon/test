@@ -59,9 +59,7 @@
     <Compile Include="Balance\MessageBuilder.cs" />
     <Compile Include="Balance\RecipientsFacade.cs" />
     <Compile Include="Balance\Entities\TextLocalizedData.cs" />
-    <Compile Include="Calculation\CalculationEmailCreatorProcessor.cs" />
     <Compile Include="Calculation\CalculationProcessor.cs" />
-    <Compile Include="Calculation\MessageFactory.cs" />
     <Compile Include="Core\BreakJobException.cs" />
     <Compile Include="Core\SequentialEventJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryProcessor.cs" />

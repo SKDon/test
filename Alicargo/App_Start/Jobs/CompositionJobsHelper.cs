@@ -15,6 +15,7 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
@@ -71,23 +72,28 @@ namespace Alicargo.App_Start.Jobs
 
 		private static void RunCalculationJob(string connectionString, int partitionId)
 		{
-			//var executor = new SqlProcedureExecutor(connectionString);
-			//var events = new EventRepository(executor);
+			var executor = new SqlProcedureExecutor(connectionString);
+			var events = new EventRepository(executor);
+			var templates = new TemplateRepository(executor);
+			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
+			var serializer = new Serializer();
 
-			//var templates = new TemplateRepository(executor);
-			//var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
+			//var emailingProcessor = new DefaultEmailingProcessor(
+			//	new DbMailSender(partitionId, new EmailMessageRepository(executor), serializer),
+			//	messageBuilder);
 
 			//var processors = new Dictionary<EventState, IEventProcessor>
 			//{
-			//	{ EventState.Calculating, new CalculationProcessor(events, new ClientBalanceRepository(executor)) },
-			//	{ EventState.Emailing, new CalculationEmailCreatorProcessor(templateRepositoryWrapper) }
+			//	{ EventState.Calculating, new CalculationProcessor() },
+			//	{ EventState.Emailing, emailingProcessor }
 			//};
 
-			//new DefaultEventJob(events, partitionId, new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-			//{
-			//	{ EventType.Calculate, processors },
-			//	{ EventType.CalculationCanceled, processors }
-			//}).Work();
+			//new SequentialEventJob(events, partitionId,
+			//	new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+			//	{
+			//		{ EventType.Calculate, processors },
+			//		{ EventType.CalculationCanceled, processors }
+			//	}).Work();
 		}
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
@@ -112,21 +118,23 @@ namespace Alicargo.App_Start.Jobs
 				var textBuilder = new TextBuilder<Alicargo.Jobs.Balance.Entities.TextLocalizedData>();
 				var excelClientCalculation = new ExcelClientCalculation();
 				var templateRepositoryWrapper = new TemplateRepositoryWrapper(templateRepository);
-				var balanceProcessor = new DefaultEmailingProcessor(
+				var messageBuilder = new Alicargo.Jobs.Balance.MessageBuilder(
+					EmailsHelper.DefaultFrom,
+					recipientsFacade,
+					clientRepository,
+					clientCalculationPresenter,
+					excelClientCalculation,
+					serializer,
+					textBuilder,
+					templateRepositoryWrapper);
+
+				var emailingProcessor = new DefaultEmailingProcessor(
 					new DbMailSender(partitionId, new EmailMessageRepository(executor), serializer),
-					new Alicargo.Jobs.Balance.MessageBuilder(
-						EmailsHelper.DefaultFrom,
-						recipientsFacade,
-						clientRepository,
-						clientCalculationPresenter,
-						excelClientCalculation,
-						serializer,
-						textBuilder,
-						templateRepositoryWrapper));
+					messageBuilder);
 
 				var processors = new Dictionary<EventState, IEventProcessor>
 				{
-					{ EventState.Emailing, balanceProcessor }
+					{ EventState.Emailing, emailingProcessor }
 				};
 
 				new SequentialEventJob(events, partitionId,

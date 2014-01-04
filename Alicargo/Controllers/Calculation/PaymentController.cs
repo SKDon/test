@@ -11,17 +11,14 @@ namespace Alicargo.Controllers.Calculation
 	public partial class PaymentController : Controller
 	{
 		private readonly IClientRepository _clients;
-		private readonly IClientBalanceRepository _balance;
-		private readonly IClientManager _manager;
+		private readonly IClientBalance _balance;
 
 		public PaymentController(
 			IClientRepository clients,
-			IClientBalanceRepository balance,
-			IClientManager manager)
+			IClientBalance balance)
 		{
 			_clients = clients;
 			_balance = balance;
-			_manager = manager;
 		}
 
 		[Access(RoleType.Admin)]
@@ -51,7 +48,7 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		public virtual ActionResult Payment(long clientId, PaymentModel model)
 		{
-			_manager.AddToBalance(clientId, model, DateTimeOffset.UtcNow);
+			_balance.Add(clientId, model, DateTimeOffset.UtcNow);
 
 			return RedirectToAction(MVC.Payment.Index(clientId));
 		}

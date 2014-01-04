@@ -60,6 +60,14 @@ namespace Alicargo.App_Start
 				}
 			},
 			{
+				typeof (IClientBalance),
+				new[]
+				{
+					typeof (ClientBalance),
+					typeof (ClientBalanceWithEvent)
+				}
+			},
+			{
 				typeof (ICalculationService),
 				new[]
 				{

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using Alicargo.ViewModels.Calculation.Admin;
 using Alicargo.ViewModels.User;
 
-namespace Alicargo.Services.Email
+namespace Alicargo.Services.Users.Client
 {
 	internal sealed class ClientManagerWithMailing : IClientManager
 	{
@@ -20,7 +18,9 @@ namespace Alicargo.Services.Email
 
 		public ClientManagerWithMailing(
 			IAdminRepository admins,
-			IClientManager manager, IMailSender mailSender, IMessageBuilder messageBuilder)
+			IClientManager manager, 
+			IMailSender mailSender, 
+			IMessageBuilder messageBuilder)
 		{
 			_admins = admins;
 			_manager = manager;
@@ -42,11 +42,6 @@ namespace Alicargo.Services.Email
 			EmailOnAdd(model, authentication);
 
 			return id;
-		}
-
-		public void AddToBalance(long clientId, PaymentModel model, DateTimeOffset timestamp)
-		{
-			_manager.AddToBalance(clientId, model, timestamp);
 		}
 
 		// todo: use ClientManagerWithEvent

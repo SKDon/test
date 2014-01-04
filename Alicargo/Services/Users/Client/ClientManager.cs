@@ -1,6 +1,4 @@
-﻿using System;
-using System.Transactions;
-using Alicargo.Contracts.Contracts.User;
+﻿using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Helpers;
@@ -8,7 +6,6 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
-using Alicargo.ViewModels.Calculation.Admin;
 using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Users.Client
@@ -17,21 +14,18 @@ namespace Alicargo.Services.Users.Client
 	{
 		private readonly IClientPermissions _permissions;
 		private readonly IClientRepository _clients;
-		private readonly IClientBalanceRepository _balance;
 		private readonly ITransitService _transits;
 		private readonly IUserRepository _users;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public ClientManager(
 			IClientRepository clients,
-			IClientBalanceRepository balance,
 			IClientPermissions permissions,
 			ITransitService transits,
 			IUserRepository users,
 			IUnitOfWork unitOfWork)
 		{
 			_clients = clients;
-			_balance = balance;
 			_permissions = permissions;
 			_transits = transits;
 			_users = users;
@@ -115,22 +109,6 @@ namespace Alicargo.Services.Users.Client
 			_users.SetPassword(userId, authentication.NewPassword);
 
 			return clientId;
-		}
-
-		public void AddToBalance(long clientId, PaymentModel model, DateTimeOffset timestamp)
-		{
-			var balance = _balance.GetBalance(clientId);
-
-			balance += model.Money;
-
-			using (var scope = new TransactionScope())
-			{
-				_balance.SetBalance(clientId, balance);
-
-				_balance.AddToHistory(clientId, balance, model.Money, model.Comment, timestamp);
-
-				scope.Complete();
-			}
 		}
 	}
 }
