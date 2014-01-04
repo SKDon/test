@@ -9,7 +9,7 @@ using Resources;
 
 namespace Alicargo.MvcHelpers.Extensions
 {
-    public static class PageHelpers
+	public static class PageHelpers
 	{
 		public static string JavaScriptStringEncode(this string html)
 		{
@@ -26,7 +26,8 @@ namespace Alicargo.MvcHelpers.Extensions
 			return html.HtmlEncode().JavaScriptStringEncode().Replace("#", "\\#");
 		}
 
-		public static MvcHtmlString EditPage(this HtmlHelper html, string actionUrl, string buttonTitle, MvcHtmlString additionalHtml = null)
+		public static MvcHtmlString EditPage(this HtmlHelper html, string actionUrl, string buttonTitle,
+			MvcHtmlString additionalHtml = null)
 		{
 			var builder = new StringBuilder();
 
@@ -51,12 +52,12 @@ namespace Alicargo.MvcHelpers.Extensions
 			builder.Append(div.ToString(TagRenderMode.StartTag));
 
 			builder.Append(form.ToString(TagRenderMode.StartTag))
-			.Append(html.AntiForgeryToken().ToHtmlString())
-			.Append(html.EditorForModel())
-			.Append(new TagBuilder("hr").ToString(TagRenderMode.SelfClosing))
-			.Append(input.ToString(TagRenderMode.SelfClosing))
-			.Append("&nbsp;")
-			.Append(cancel.ToString(TagRenderMode.Normal));
+				.Append(html.AntiForgeryToken().ToHtmlString())
+				.Append(html.EditorForModel())
+				.Append(new TagBuilder("hr").ToString(TagRenderMode.SelfClosing))
+				.Append(input.ToString(TagRenderMode.SelfClosing))
+				.Append("&nbsp;")
+				.Append(cancel.ToString(TagRenderMode.Normal));
 
 			if (additionalHtml != null)
 			{
@@ -70,7 +71,8 @@ namespace Alicargo.MvcHelpers.Extensions
 			return new MvcHtmlString(builder.ToString());
 		}
 
-		public static MvcHtmlString EditorWithLabelFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
+		public static MvcHtmlString EditorWithLabelFor<TModel, TValue>(this HtmlHelper<TModel> html,
+			Expression<Func<TModel, TValue>> expression)
 		{
 			var labelFor = html.LabelFor(expression).ToHtmlString();
 			var editorFor = html.EditorFor(expression).ToHtmlString();
@@ -78,7 +80,8 @@ namespace Alicargo.MvcHelpers.Extensions
 			return new MvcHtmlString(labelFor + editorFor);
 		}
 
-		public static MvcHtmlString DisplayWithLabelFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
+		public static MvcHtmlString DisplayWithLabelFor<TModel, TValue>(this HtmlHelper<TModel> html,
+			Expression<Func<TModel, TValue>> expression)
 		{
 			var labelFor = html.LabelFor(expression).ToHtmlString();
 			var editorFor = html.DisplayFor(expression).ToHtmlString();

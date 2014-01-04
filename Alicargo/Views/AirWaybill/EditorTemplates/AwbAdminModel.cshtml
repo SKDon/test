@@ -20,16 +20,16 @@
 		<div class="span4">
 			@Html.LabelFor(x => x.PackingFile)
 			@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(),
-								  Model != null
-									  ? Model.PackingFileName
-									  : null)
+				Model != null
+					? Model.PackingFileName
+					: null)
 		</div>
 		<div class="span4">
 			@Html.LabelFor(x => x.InvoiceFile)
 			@Helpers.FileUploader(@Html.IdFor(x => x.InvoiceFile).ToHtmlString(),
-								  Model != null
-									  ? Model.InvoiceFileName
-									  : null)
+				Model != null
+					? Model.InvoiceFileName
+					: null)
 		</div>
 		<div class="span4">
 			@Html.LabelFor(x => x.AWBFile)
@@ -42,8 +42,11 @@
 
 @helper Gtd()
 {
-	if (Model == null) { return; }
-	
+	if (Model == null)
+	{
+		return;
+	}
+
 	<hr />
 	<h4>
 		@Entities.GTD
@@ -96,7 +99,7 @@
 			@Html.EditorWithLabelFor(model => model.CustomCost)
 		</div>
 		<script>
-			$(function () {
+			$(function() {
 				$(".date-holder input").kendoDatePicker();
 			})
 		</script>

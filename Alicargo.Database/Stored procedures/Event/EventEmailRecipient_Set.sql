@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[EventEmailRecipient_Set]
-	@EventTypeId BIGINT,
+	@EventTypeId INT,
 	@Recipients [dbo].[IdsTable] READONLY
 AS
 BEGIN

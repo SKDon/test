@@ -1,5 +1,6 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts.User;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 
@@ -14,9 +15,22 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor = executor;
 		}
 
-		public void AddToHistory(long clientId, decimal balance, decimal input, string comment, DateTimeOffset timestamp)
+		public void AddToHistory(long clientId, decimal balance, decimal money, EventType type, DateTimeOffset timestamp, string comment)
 		{
-			_executor.Execute("[dbo].[ClientBalanceHistory_Add]", new { clientId, balance, input, comment, timestamp });
+			_executor.Execute("[dbo].[ClientBalanceHistory_Add]", new
+			{
+				clientId,
+				balance,
+				money,
+				EventTypeId = type,
+				timestamp,
+				comment
+			});
+		}
+
+		public ClientBalanceHistoryItem[] GetHistory(long clientId)
+		{
+			return _executor.Array<ClientBalanceHistoryItem>("[dbo].[ClientBalanceHistory_Get]", new { clientId });
 		}
 
 		public decimal GetBalance(long clientId)
@@ -27,11 +41,6 @@ namespace Alicargo.DataAccess.Repositories.User
 		public void SetBalance(long clientId, decimal balance)
 		{
 			_executor.Execute("[dbo].[Client_SetBalance]", new { clientId, balance });
-		}
-
-		public ClientBalanceHistoryItem[] GetHistory(long clientId)
-		{
-			return _executor.Array<ClientBalanceHistoryItem>("[dbo].[ClientBalanceHistory_Get]", new { clientId });
 		}
 	}
 }

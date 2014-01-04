@@ -5,7 +5,7 @@ BEGIN
 	
 	SET NOCOUNT ON;
 
-	SELECT [Balance], [Comment], [Timestamp], [Input]
+	SELECT [Balance], [Comment], [Timestamp], [Money], [CreationTimestamp], [EventTypeId] AS [EventType]
 	FROM [dbo].[ClientBalanceHistory]
 	WHERE [ClientId] = @ClientId
 

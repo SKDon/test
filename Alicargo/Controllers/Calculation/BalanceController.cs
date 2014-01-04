@@ -53,7 +53,10 @@ namespace Alicargo.Controllers.Calculation
 		{
 			BindBag(clientId);
 
-			return View();
+			return View(new PaymentModel
+			{
+				Timestamp = DateTimeOffset.UtcNow
+			});
 		}
 
 		[Access(RoleType.Admin)]
@@ -62,7 +65,7 @@ namespace Alicargo.Controllers.Calculation
 		{
 			try
 			{
-				_balance.Decrease(clientId, model.Money, model.Comment, DateTimeOffset.UtcNow);
+				_balance.Decrease(clientId, (decimal)model.Money, model.Comment, model.Timestamp);
 			}
 			catch (ArgumentException e)
 			{
@@ -82,7 +85,10 @@ namespace Alicargo.Controllers.Calculation
 		{
 			BindBag(clientId);
 
-			return View();
+			return View(new PaymentModel
+			{
+				Timestamp = DateTimeOffset.UtcNow
+			});
 		}
 
 		[Access(RoleType.Admin)]
@@ -91,7 +97,7 @@ namespace Alicargo.Controllers.Calculation
 		{
 			try
 			{
-				_balance.Increase(clientId, model.Money, model.Comment, DateTimeOffset.UtcNow);
+				_balance.Increase(clientId, (decimal)model.Money, model.Comment, model.Timestamp);
 			}
 			catch (ArgumentException e)
 			{

@@ -10,14 +10,18 @@
 		<thead>
 			<tr>
 				<td class="timestamp">
+					@Entities.CreationTimestamp
+				</td>
+				<td class="timestamp">
 					@Entities.Timestamp
 				</td>
 				<td class="money">
 					@Entities.Balance
 				</td>
 				<td class="money">
-					@Entities.Input
+					@Entities.Money
 				</td>
+				<td class="timestamp"></td>
 				<td>
 					@Entities.Comment
 				</td>
@@ -28,13 +32,19 @@
 			{
 				<tr>
 					<td>
+						@item.CreationTimestamp
+					</td>
+					<td>
 						@item.Timestamp
 					</td>
 					<td>
 						@item.Balance.ToString("N2")
 					</td>
 					<td>
-						@item.Input.ToString("N2")
+						@item.Money.ToString("N2")
+					</td>
+					<td>
+						@Alicargo.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())
 					</td>
 					<td>
 						@item.Comment

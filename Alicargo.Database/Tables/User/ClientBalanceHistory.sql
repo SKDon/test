@@ -1,11 +1,13 @@
 ﻿CREATE TABLE [dbo].[ClientBalanceHistory]
 (
 	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
+	[CreationTimestamp] DATETIMEOFFSET CONSTRAINT [DF_ClientBalanceHistory_CreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 	[Timestamp]	DATETIMEOFFSET NOT NULL,
 	[ClientId] BIGINT NOT NULL,
+	[EventTypeId] INT NOT NULL,
 
 	[Balance] MONEY NOT NULL,
-	[Input] MONEY NOT NULL,
+	[Money] MONEY NOT NULL,
 	[Comment] NVARCHAR(MAX) NULL,
 
 	CONSTRAINT [PK_dbo.ClientBalanceHistory] PRIMARY KEY CLUSTERED ([Id] ASC),
