@@ -43,6 +43,12 @@ namespace Alicargo.Controllers.Calculation
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult History()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.History);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult List()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
@@ -64,6 +70,7 @@ namespace Alicargo.Controllers.Calculation
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string History = "History";
             public readonly string List = "List";
             public readonly string Excel = "Excel";
         }
@@ -72,11 +79,20 @@ namespace Alicargo.Controllers.Calculation
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string History = "History";
             public const string List = "List";
             public const string Excel = "Excel";
         }
 
 
+        static readonly ActionParamsClass_History s_params_History = new ActionParamsClass_History();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_History HistoryParams { get { return s_params_History; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_History
+        {
+            public readonly string clientId = "clientId";
+        }
         static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_List ListParams { get { return s_params_List; } }
@@ -96,8 +112,10 @@ namespace Alicargo.Controllers.Calculation
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string History = "History";
                 public readonly string Index = "Index";
             }
+            public readonly string History = "~/Views/ClientCalculation/History.cshtml";
             public readonly string Index = "~/Views/ClientCalculation/Index.cshtml";
         }
     }
@@ -113,6 +131,16 @@ namespace Alicargo.Controllers.Calculation
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void HistoryOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long clientId);
+
+        public override System.Web.Mvc.ViewResult History(long clientId)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.History);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
+            HistoryOverride(callInfo, clientId);
             return callInfo;
         }
 

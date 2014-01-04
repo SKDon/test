@@ -771,6 +771,7 @@
     <Content Include="Views\Balance\History.cshtml" />
     <Content Include="Views\Balance\Increase.cshtml" />
     <Content Include="Views\Balance\BalanceButtons.cshtml" />
+    <Content Include="Views\ClientCalculation\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
