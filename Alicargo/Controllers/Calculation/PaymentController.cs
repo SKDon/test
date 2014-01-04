@@ -2,8 +2,8 @@
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.MvcHelpers.Filters;
-using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation.Admin;
 
 namespace Alicargo.Controllers.Calculation
@@ -12,13 +12,16 @@ namespace Alicargo.Controllers.Calculation
 	{
 		private readonly IClientRepository _clients;
 		private readonly IClientBalance _balance;
+		private readonly IClientBalanceRepository _balanceRepository;
 
 		public PaymentController(
 			IClientRepository clients,
-			IClientBalance balance)
+			IClientBalance balance,
+			IClientBalanceRepository balanceRepository)
 		{
 			_clients = clients;
 			_balance = balance;
+			_balanceRepository = balanceRepository;
 		}
 
 		[Access(RoleType.Admin)]
@@ -26,8 +29,8 @@ namespace Alicargo.Controllers.Calculation
 		public virtual ViewResult Index(long clientId)
 		{
 			var client = _clients.Get(clientId);
-			var balance = _balance.GetBalance(clientId);
-			var items = _balance.GetHistory(clientId);
+			var balance = _balanceRepository.GetBalance(clientId);
+			var items = _balanceRepository.GetHistory(clientId);
 
 			ViewBag.Nic = client.Nic;
 			ViewBag.Balance = balance;
@@ -48,7 +51,7 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		public virtual ActionResult Payment(long clientId, PaymentModel model)
 		{
-			_balance.Add(clientId, model, DateTimeOffset.UtcNow);
+			_balance.Add(clientId, model.Money, model.Comment, DateTimeOffset.UtcNow);
 
 			return RedirectToAction(MVC.Payment.Index(clientId));
 		}

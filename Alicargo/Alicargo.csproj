@@ -178,7 +178,6 @@
     </Compile>
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
-    <Compile Include="Services\Abstract\IClientBalance.cs" />
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />

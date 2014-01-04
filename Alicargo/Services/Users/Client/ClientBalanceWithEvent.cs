@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Transactions;
-using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Event;
+using Alicargo.Core.Services.Abstract;
 using Alicargo.Jobs.Balance.Entities;
-using Alicargo.Services.Abstract;
-using Alicargo.ViewModels.Calculation.Admin;
 
 namespace Alicargo.Services.Users.Client
 {
@@ -20,40 +18,30 @@ namespace Alicargo.Services.Users.Client
 			_events = events;
 		}
 
-		public void Add(long clientId, PaymentModel model, DateTimeOffset timestamp)
+		public void Add(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
 			using (var scope = new TransactionScope())
 			{
-				_instance.Add(clientId, model, timestamp);
+				_instance.Add(clientId, money, comment, timestamp);
 
-				if (model.Money != 0)
+				if (money != 0)
 				{
-					AddEvent(clientId, model, timestamp);
+					AddEvent(clientId, money, comment, timestamp);
 				}
 
 				scope.Complete();
 			}
 		}
 
-		public decimal GetBalance(long clientId)
+		private void AddEvent(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
-			return _instance.GetBalance(clientId);
-		}
-
-		public ClientBalanceHistoryItem[] GetHistory(long clientId)
-		{
-			return _instance.GetHistory(clientId);
-		}
-
-		private void AddEvent(long clientId, PaymentModel model, DateTimeOffset timestamp)
-		{
-			var eventType = model.Money > 0 ? EventType.BalanceIncreased : EventType.BalanceDecreased;
+			var eventType = money > 0 ? EventType.BalanceIncreased : EventType.BalanceDecreased;
 
 			_events.Add(clientId, eventType, EventState.Emailing,
 				new PaymentEventData
 				{
-					AbsMoney = Math.Abs(model.Money),
-					Comment = model.Comment,
+					AbsMoney = Math.Abs(money),
+					Comment = comment,
 					Timestamp = timestamp
 				});
 		}

@@ -1,8 +1,6 @@
 ﻿using System;
-using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Services.Abstract;
-using Alicargo.ViewModels.Calculation.Admin;
+using Alicargo.Core.Services.Abstract;
 
 namespace Alicargo.Services.Users.Client
 {
@@ -15,25 +13,15 @@ namespace Alicargo.Services.Users.Client
 			_balance = balance;
 		}
 
-		public void Add(long clientId, PaymentModel model, DateTimeOffset timestamp)
+		public void Add(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
 			var balance = _balance.GetBalance(clientId);
 
-			balance += model.Money;
+			balance += money;
 
 			_balance.SetBalance(clientId, balance);
 
-			_balance.AddToHistory(clientId, balance, model.Money, model.Comment, timestamp);
-		}
-
-		public decimal GetBalance(long clientId)
-		{
-			return _balance.GetBalance(clientId);
-		}
-
-		public ClientBalanceHistoryItem[] GetHistory(long clientId)
-		{
-			return _balance.GetHistory(clientId);
+			_balance.AddToHistory(clientId, balance, money, comment, timestamp);
 		}
 	}
 }

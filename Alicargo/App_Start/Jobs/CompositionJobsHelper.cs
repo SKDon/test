@@ -22,10 +22,12 @@ using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Services;
 using Alicargo.Services.Calculation;
 using Alicargo.Services.Excel;
+using Alicargo.Services.Users.Client;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
 using ILog = Alicargo.Core.Services.Abstract.ILog;
+using MessageBuilder = Alicargo.Jobs.Calculation.MessageBuilder;
 
 namespace Alicargo.App_Start.Jobs
 {
@@ -77,23 +79,26 @@ namespace Alicargo.App_Start.Jobs
 			var templates = new TemplateRepository(executor);
 			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
 			var serializer = new Serializer();
+			var emailMessageRepository = new EmailMessageRepository(executor);
+			var emailingProcessor = new DefaultEmailingProcessor(
+				new DbMailSender(partitionId, emailMessageRepository, serializer),
+				new MessageBuilder());
+			var clientBalanceRepository = new ClientBalanceRepository(executor);
+			var clientBalance = new ClientBalance(clientBalanceRepository);
+			var calculationProcessor = new CalculationProcessor(clientBalance);
 
-			//var emailingProcessor = new DefaultEmailingProcessor(
-			//	new DbMailSender(partitionId, new EmailMessageRepository(executor), serializer),
-			//	messageBuilder);
+			var processors = new Dictionary<EventState, IEventProcessor>
+			{
+				{ EventState.Calculating, calculationProcessor },
+				{ EventState.Emailing, emailingProcessor }
+			};
 
-			//var processors = new Dictionary<EventState, IEventProcessor>
-			//{
-			//	{ EventState.Calculating, new CalculationProcessor() },
-			//	{ EventState.Emailing, emailingProcessor }
-			//};
-
-			//new SequentialEventJob(events, partitionId,
-			//	new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-			//	{
-			//		{ EventType.Calculate, processors },
-			//		{ EventType.CalculationCanceled, processors }
-			//	}).Work();
+			new SequentialEventJob(events, partitionId,
+				new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+				{
+					{ EventType.Calculate, processors },
+					{ EventType.CalculationCanceled, processors }
+				}).Work();
 		}
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
@@ -220,7 +225,7 @@ namespace Alicargo.App_Start.Jobs
 			var wrapper = new TemplateRepositoryWrapper(templates);
 			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
 
-			return new MessageBuilder(
+			return new Alicargo.Jobs.ApplicationEvents.Helpers.MessageBuilder(
 				EmailsHelper.DefaultFrom,
 				filesFasade,
 				textBulder,

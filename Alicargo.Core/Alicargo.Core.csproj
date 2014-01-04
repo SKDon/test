@@ -130,6 +130,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Services\Abstract\IClientBalance.cs" />
     <Compile Include="Services\Abstract\IStateConfig.cs" />
     <Compile Include="Services\Email\DbMailSender.cs" />
     <Compile Include="Services\ExtensionsHelper.cs" />
