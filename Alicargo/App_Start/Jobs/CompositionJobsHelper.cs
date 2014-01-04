@@ -85,7 +85,7 @@ namespace Alicargo.App_Start.Jobs
 				new MessageBuilder());
 			var clientBalanceRepository = new ClientBalanceRepository(executor);
 			var clientBalance = new ClientBalance(clientBalanceRepository);
-			var calculationProcessor = new CalculationProcessor(clientBalance);
+			var calculationProcessor = new CalculationProcessor(clientBalance, serializer);
 
 			var processors = new Dictionary<EventState, IEventProcessor>
 			{

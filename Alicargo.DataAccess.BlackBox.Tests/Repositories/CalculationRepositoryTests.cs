@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
@@ -53,19 +52,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data = GenerateData();
 
 			var actual = AddNew(data, TestConstants.TestApplicationId);
-
-			actual.ShouldBeEquivalentTo(data);
-		}
-
-		[TestMethod, TestCategory("black-box")]
-		public void Test_Add_GetByClient()
-		{
-			var data = GenerateData();
-
-			_calculationRepository.Add(data, TestConstants.TestApplicationId);
-
-			var actual = _calculationRepository.GetByClient(data.ClientId)
-				.Single(x => x.ApplicationDisplay == data.ApplicationDisplay);
 
 			actual.ShouldBeEquivalentTo(data);
 		}

@@ -18,11 +18,26 @@ namespace Alicargo.Services.Users.Client
 			_events = events;
 		}
 
-		public void Add(long clientId, decimal money, string comment, DateTimeOffset timestamp)
+		public void Increase(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
 			using (var scope = new TransactionScope())
 			{
-				_instance.Add(clientId, money, comment, timestamp);
+				_instance.Increase(clientId, money, comment, timestamp);
+
+				if (money != 0)
+				{
+					AddEvent(clientId, money, comment, timestamp);
+				}
+
+				scope.Complete();
+			}
+		}
+
+		public void Decrease(long clientId, decimal money, string comment, DateTimeOffset timestamp)
+		{
+			using (var scope = new TransactionScope())
+			{
+				_instance.Decrease(clientId, money, comment, timestamp);
 
 				if (money != 0)
 				{

@@ -32,11 +32,6 @@ namespace Alicargo.DataAccess.Repositories
 			});
 		}
 
-		public CalculationData[] GetByClient(long clientId)
-		{
-			return _executor.Array<CalculationData>("[dbo].[Calculation_GetByClient]", new { clientId });
-		}
-
 		public CalculationData GetByApplication(long applicationId)
 		{
 			return _executor.Query<CalculationData>("[dbo].[Calculation_GetByApplication]", new { applicationId });

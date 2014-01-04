@@ -6,8 +6,6 @@ namespace Alicargo.Contracts.Repositories
 	{
 		void Add(CalculationData data, long applicationId);
 		void RemoveByApplication(long applicationId);
-
-		CalculationData[] GetByClient(long clientId);
 		CalculationData GetByApplication(long applicationId);
 	}
 }

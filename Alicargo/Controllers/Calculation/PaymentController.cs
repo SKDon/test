@@ -51,7 +51,16 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		public virtual ActionResult Payment(long clientId, PaymentModel model)
 		{
-			_balance.Add(clientId, model.Money, model.Comment, DateTimeOffset.UtcNow);
+			try
+			{
+				_balance.Decrease(clientId, model.Money, model.Comment, DateTimeOffset.UtcNow);
+			}
+			catch (ArgumentException e)
+			{
+				ModelState.AddModelError(e.ParamName, e.Message);
+
+				return View(model);
+			}
 
 			return RedirectToAction(MVC.Payment.Index(clientId));
 		}

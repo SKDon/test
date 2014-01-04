@@ -162,7 +162,6 @@
     <Build Include="Tables\Event\EventEmailTemplate.sql" />
     <Build Include="Tables\Application.sql" />
     <Build Include="Stored procedures\Calculation_Add.sql" />
-    <Build Include="Stored procedures\Calculation_GetByClient.sql" />
     <Build Include="Stored procedures\Calculation_GetByApplication.sql" />
     <Build Include="Stored procedures\Calculation_RemoveByApplication.sql" />
   </ItemGroup>
