@@ -2,10 +2,13 @@
 
 	var $u = $a.Urls;
 
-	var select = $("#client-payment");
+	var select = $("#client-balance-select");
 	var updateLink = function() {
-		var link = $("#payment-link");
-		link.attr("href", select.val());
+		var decrease = $("#client-balance-decrease-link");
+		var increase = $("#client-balance-increase-link");
+		var urls = select.val().split(";");
+		decrease.attr("href", urls[0]);
+		increase.attr("href", urls[1]);
 	};
 	select.change(updateLink);
 	updateLink();

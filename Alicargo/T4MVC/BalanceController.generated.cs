@@ -53,6 +53,12 @@ namespace Alicargo.Controllers.Calculation
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Decrease);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult Increase()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Increase);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BalanceController Actions { get { return MVC.Balance; } }
@@ -70,14 +76,18 @@ namespace Alicargo.Controllers.Calculation
         public class ActionNamesClass
         {
             public readonly string History = "History";
+            public readonly string BalanceButtons = "BalanceButtons";
             public readonly string Decrease = "Decrease";
+            public readonly string Increase = "Increase";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string History = "History";
+            public const string BalanceButtons = "BalanceButtons";
             public const string Decrease = "Decrease";
+            public const string Increase = "Increase";
         }
 
 
@@ -98,6 +108,15 @@ namespace Alicargo.Controllers.Calculation
             public readonly string clientId = "clientId";
             public readonly string model = "model";
         }
+        static readonly ActionParamsClass_Increase s_params_Increase = new ActionParamsClass_Increase();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Increase IncreaseParams { get { return s_params_Increase; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Increase
+        {
+            public readonly string clientId = "clientId";
+            public readonly string model = "model";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -108,11 +127,15 @@ namespace Alicargo.Controllers.Calculation
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string BalanceButtons = "BalanceButtons";
                 public readonly string Decrease = "Decrease";
                 public readonly string History = "History";
+                public readonly string Increase = "Increase";
             }
+            public readonly string BalanceButtons = "~/Views/Balance/BalanceButtons.cshtml";
             public readonly string Decrease = "~/Views/Balance/Decrease.cshtml";
             public readonly string History = "~/Views/Balance/History.cshtml";
+            public readonly string Increase = "~/Views/Balance/Increase.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -138,6 +161,15 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        partial void BalanceButtonsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        public override System.Web.Mvc.PartialViewResult BalanceButtons()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.BalanceButtons);
+            BalanceButtonsOverride(callInfo);
+            return callInfo;
+        }
+
         partial void DecreaseOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long clientId);
 
         public override System.Web.Mvc.ViewResult Decrease(long clientId)
@@ -156,6 +188,27 @@ namespace Alicargo.Controllers.Calculation
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             DecreaseOverride(callInfo, clientId, model);
+            return callInfo;
+        }
+
+        partial void IncreaseOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long clientId);
+
+        public override System.Web.Mvc.ViewResult Increase(long clientId)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Increase);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
+            IncreaseOverride(callInfo, clientId);
+            return callInfo;
+        }
+
+        partial void IncreaseOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
+
+        public override System.Web.Mvc.ActionResult Increase(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Increase);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            IncreaseOverride(callInfo, clientId, model);
             return callInfo;
         }
 

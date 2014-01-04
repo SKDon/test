@@ -3,8 +3,8 @@
 @using Resources
 @model Alicargo.ViewModels.Calculation.Admin.PaymentModel
 <h1>
-	@Pages.BalanceDecrease: @ViewBag.Nic,
+	@Pages.BalanceIncrease: @ViewBag.Nic,
 	@Entities.Balance: @ViewBag.Balance.ToString("N2")
 </h1>
-@Html.EditPage(Url.Action(MVC.Balance.Decrease((long)ViewBag.ClientId)), Pages.BalanceDecrease)
+@Html.EditPage(Url.Action(MVC.Balance.Increase((long)ViewBag.ClientId)), Pages.BalanceIncrease)
 @Html.Action(MVC.Balance.History((long)ViewBag.ClientId))

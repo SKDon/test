@@ -360,4 +360,10 @@
   <data name="RestorePasswordUnknownKey" xml:space="preserve">
     <value>Ключ восстановления пароля невалидный</value>
   </data>
+  <data name="BalanceDecrease" xml:space="preserve">
+    <value>Списание денежных средств</value>
+  </data>
+  <data name="BalanceIncrease" xml:space="preserve">
+    <value>Поступление денежных средств</value>
+  </data>
 </root>

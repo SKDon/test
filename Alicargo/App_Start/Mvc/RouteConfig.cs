@@ -31,9 +31,9 @@ namespace Alicargo.App_Start.Mvc
 				);
 
 			routes.MapRoute(
-				"Payment",
-				"Payment/{action}/{clientId}",
-				new { controller = "Payment", action = "Index" },
+				"Balance",
+				"Balance/{action}/{clientId}",
+				new { controller = "Balance" },
 				new[] { "Alicargo.Controllers.User" }
 				);
 

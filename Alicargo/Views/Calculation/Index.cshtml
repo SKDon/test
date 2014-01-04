@@ -10,8 +10,7 @@
 </style>
 <p class="select-client-holder">
 	@Html.ActionLink(Pages.Excel, MVC.Calculation.Excel(), new { @class = "btn btn-info" })
-	@Html.DropDownList("client-payment", (IDictionary<string, string>)ViewBag.Clients)
-	<a href="#" class="btn btn-primary" id="payment-link">@Pages.Payment</a>
+	@Html.Action(MVC.Balance.BalanceButtons())
 </p>
 <div id="calculation-grid" class="grid"></div>
 

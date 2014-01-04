@@ -187,6 +187,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Debiting.
+        /// </summary>
+        public static string BalanceDecrease {
+            get {
+                return ResourceManager.GetString("BalanceDecrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash inflow.
+        /// </summary>
+        public static string BalanceIncrease {
+            get {
+                return ResourceManager.GetString("BalanceIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a Broker.
         /// </summary>
         public static string BrokerAdd {

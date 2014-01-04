@@ -769,6 +769,8 @@
     <Content Include="Views\RestorePassword\UnknownKey.cshtml" />
     <Content Include="Views\RestorePassword\Success.cshtml" />
     <Content Include="Views\Balance\History.cshtml" />
+    <Content Include="Views\Balance\Increase.cshtml" />
+    <Content Include="Views\Balance\BalanceButtons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

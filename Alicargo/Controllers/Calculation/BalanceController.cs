@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
@@ -32,6 +33,20 @@ namespace Alicargo.Controllers.Calculation
 			return PartialView(items);
 		}
 
+		[ChildActionOnly]
+		public virtual PartialViewResult BalanceButtons()
+		{
+			var clients = _clients.GetAll().OrderBy(x => x.Nic).ToArray();
+
+			var urls = clients.ToDictionary(
+				x => Url.Action(MVC.Balance.Decrease(x.ClientId)) + ";" + Url.Action(MVC.Balance.Increase(x.ClientId)),
+				x => x.Nic);
+
+			ViewBag.Urls = urls;
+
+			return PartialView();
+		}
+
 		[Access(RoleType.Admin)]
 		[HttpGet]
 		public virtual ViewResult Decrease(long clientId)
@@ -39,16 +54,6 @@ namespace Alicargo.Controllers.Calculation
 			BindBag(clientId);
 
 			return View();
-		}
-
-		private void BindBag(long clientId)
-		{
-			var client = _clients.Get(clientId);
-			var balance = _balanceRepository.GetBalance(clientId);
-			ViewBag.ClientId = clientId;
-			ViewBag.Nic = client.Nic;
-			ViewBag.Balance = balance;
-			ViewBag.ClientId = clientId;
 		}
 
 		[Access(RoleType.Admin)]
@@ -69,6 +74,45 @@ namespace Alicargo.Controllers.Calculation
 			}
 
 			return RedirectToAction(MVC.Balance.Decrease(clientId));
+		}
+
+		[Access(RoleType.Admin)]
+		[HttpGet]
+		public virtual ViewResult Increase(long clientId)
+		{
+			BindBag(clientId);
+
+			return View();
+		}
+
+		[Access(RoleType.Admin)]
+		[HttpPost]
+		public virtual ActionResult Increase(long clientId, PaymentModel model)
+		{
+			try
+			{
+				_balance.Increase(clientId, model.Money, model.Comment, DateTimeOffset.UtcNow);
+			}
+			catch (ArgumentException e)
+			{
+				BindBag(clientId);
+
+				ModelState.AddModelError(e.ParamName, e.Message);
+
+				return View(model);
+			}
+
+			return RedirectToAction(MVC.Balance.Increase(clientId));
+		}
+
+		private void BindBag(long clientId)
+		{
+			var client = _clients.Get(clientId);
+			var balance = _balanceRepository.GetBalance(clientId);
+			ViewBag.ClientId = clientId;
+			ViewBag.Nic = client.Nic;
+			ViewBag.Balance = balance;
+			ViewBag.ClientId = clientId;
 		}
 	}
 }

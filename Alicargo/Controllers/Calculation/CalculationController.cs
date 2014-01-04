@@ -37,12 +37,6 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Admin), HttpGet]
 		public virtual ActionResult Index()
 		{
-			var clients = _clients.GetAll()
-				.OrderBy(x => x.Nic)
-				.ToDictionary(x => Url.Action(MVC.Balance.Decrease(x.ClientId)), x => x.Nic);
-
-			ViewBag.Clients = clients;
-
 			return View();
 		}
 
