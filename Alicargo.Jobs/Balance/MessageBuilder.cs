@@ -15,9 +15,9 @@ namespace Alicargo.Jobs.Balance
 {
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
+		private readonly string _defaultFrom;
 		private readonly IClientCalculationPresenter _calculationPresenter;
 		private readonly IClientRepository _clients;
-		private readonly string _defaultFrom;
 		private readonly IExcelClientCalculation _excel;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;

@@ -4,7 +4,6 @@ using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
-using Alicargo.Jobs.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
