@@ -33,7 +33,7 @@ public static class MVC
     public static Alicargo.Controllers.Awb.SenderAwbController SenderAwb = new Alicargo.Controllers.Awb.T4MVC_SenderAwbController();
     public static Alicargo.Controllers.Calculation.CalculationController Calculation = new Alicargo.Controllers.Calculation.T4MVC_CalculationController();
     public static Alicargo.Controllers.Calculation.ClientCalculationController ClientCalculation = new Alicargo.Controllers.Calculation.T4MVC_ClientCalculationController();
-    public static Alicargo.Controllers.Calculation.PaymentController Payment = new Alicargo.Controllers.Calculation.T4MVC_PaymentController();
+    public static Alicargo.Controllers.Calculation.BalanceController Balance = new Alicargo.Controllers.Calculation.T4MVC_BalanceController();
     public static Alicargo.Controllers.Calculation.SenderCalculationController SenderCalculation = new Alicargo.Controllers.Calculation.T4MVC_SenderCalculationController();
     public static Alicargo.Controllers.CityController City = new Alicargo.Controllers.T4MVC_CityController();
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();
@@ -51,6 +51,7 @@ public static class MVC
     public static Alicargo.Controllers.User.RestorePasswordController RestorePassword = new Alicargo.Controllers.User.T4MVC_RestorePasswordController();
     public static Alicargo.Controllers.User.SenderController Sender = new Alicargo.Controllers.User.T4MVC_SenderController();
     public static Alicargo.Controllers.User.UserController User = new Alicargo.Controllers.User.T4MVC_UserController();
+    public static T4MVC.PaymentController Payment = new T4MVC.PaymentController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

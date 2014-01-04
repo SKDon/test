@@ -39,7 +39,7 @@ namespace Alicargo.Controllers.Calculation
 		{
 			var clients = _clients.GetAll()
 				.OrderBy(x => x.Nic)
-				.ToDictionary(x => Url.Action(MVC.Payment.Index(x.ClientId)), x => x.Nic);
+				.ToDictionary(x => Url.Action(MVC.Balance.Index(x.ClientId)), x => x.Nic);
 
 			ViewBag.Clients = clients;
 

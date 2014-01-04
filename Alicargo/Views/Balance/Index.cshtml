@@ -5,7 +5,7 @@
 	@Pages.Payment: @ViewBag.Nic,
 	@Entities.Balance: @ViewBag.Balance.ToString("N2")
 </h1>
-@Html.Action(MVC.Payment.Payment((long)ViewBag.ClientId))
+@Html.Action(MVC.Balance.Payment((long)ViewBag.ClientId))
 @if (Model.Length > 0)
 {
 	<b>

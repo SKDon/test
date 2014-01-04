@@ -8,13 +8,13 @@ using Alicargo.ViewModels.Calculation.Admin;
 
 namespace Alicargo.Controllers.Calculation
 {
-	public partial class PaymentController : Controller
+	public partial class BalanceController : Controller
 	{
 		private readonly IClientRepository _clients;
 		private readonly IClientBalance _balance;
 		private readonly IClientBalanceRepository _balanceRepository;
 
-		public PaymentController(
+		public BalanceController(
 			IClientRepository clients,
 			IClientBalance balance,
 			IClientBalanceRepository balanceRepository)
@@ -64,7 +64,7 @@ namespace Alicargo.Controllers.Calculation
 				return View(model);
 			}
 
-			return RedirectToAction(MVC.Payment.Index(clientId));
+			return RedirectToAction(MVC.Balance.Index(clientId));
 		}
 	}
 }
