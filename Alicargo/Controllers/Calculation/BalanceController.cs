@@ -47,8 +47,8 @@ namespace Alicargo.Controllers.Calculation
 			return PartialView();
 		}
 
-		[Access(RoleType.Admin)]
 		[HttpGet]
+		[Access(RoleType.Admin)]
 		public virtual ViewResult Decrease(long clientId)
 		{
 			BindBag(clientId);
@@ -59,13 +59,20 @@ namespace Alicargo.Controllers.Calculation
 			});
 		}
 
-		[Access(RoleType.Admin)]
 		[HttpPost]
+		[Access(RoleType.Admin)]
 		public virtual ActionResult Decrease(long clientId, PaymentModel model)
 		{
+			if (!ModelState.IsValid)
+			{
+				BindBag(clientId);
+
+				return View(model);
+			}
+
 			try
 			{
-				_balance.Decrease(clientId, (decimal)model.Money, model.Comment, model.Timestamp);
+				_balance.Decrease(clientId, model.Money, model.Comment, model.Timestamp);
 			}
 			catch (ArgumentException e)
 			{
@@ -79,8 +86,8 @@ namespace Alicargo.Controllers.Calculation
 			return RedirectToAction(MVC.Balance.Decrease(clientId));
 		}
 
-		[Access(RoleType.Admin)]
 		[HttpGet]
+		[Access(RoleType.Admin)]
 		public virtual ViewResult Increase(long clientId)
 		{
 			BindBag(clientId);
@@ -91,13 +98,20 @@ namespace Alicargo.Controllers.Calculation
 			});
 		}
 
-		[Access(RoleType.Admin)]
 		[HttpPost]
+		[Access(RoleType.Admin)]
 		public virtual ActionResult Increase(long clientId, PaymentModel model)
 		{
+			if (!ModelState.IsValid)
+			{
+				BindBag(clientId);
+
+				return View(model);
+			}
+
 			try
 			{
-				_balance.Increase(clientId, (decimal)model.Money, model.Comment, model.Timestamp);
+				_balance.Increase(clientId, model.Money, model.Comment, model.Timestamp);
 			}
 			catch (ArgumentException e)
 			{

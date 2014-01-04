@@ -8,8 +8,9 @@ namespace Alicargo.ViewModels.Calculation.Admin
 	public sealed class PaymentModel
 	{
 		[Required]
+		[DataType(DataType.Currency)]
 		[DisplayNameLocalized(typeof(Entities), "Money")]
-		public float Money { get; set; }
+		public decimal Money { get; set; }
 
 		[DataType(DataType.MultilineText)]
 		[DisplayNameLocalized(typeof(Entities), "Comment")]

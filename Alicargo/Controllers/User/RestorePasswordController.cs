@@ -34,6 +34,7 @@ namespace Alicargo.Controllers.User
 			if (!id.HasValue)
 			{
 				ModelState.AddModelError("email", Validation.UserNotFound);
+
 				return View();
 			}
 
