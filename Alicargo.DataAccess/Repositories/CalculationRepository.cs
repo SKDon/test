@@ -1,67 +1,50 @@
-﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
+﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	public sealed class CalculationRepository : ICalculationRepository
+	internal sealed class CalculationRepository : ICalculationRepository
 	{
-		private readonly AlicargoDataContext _context;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public CalculationRepository(IUnitOfWork unitOfWork)
+		public CalculationRepository(ISqlProcedureExecutor executor)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_executor = executor;
 		}
 
 		public void Add(CalculationData data, long applicationId)
 		{
-			_context.Calculations.InsertOnSubmit(new Calculation
+			_executor.Execute("[dbo].[Calculation_Add]", new
 			{
-				AirWaybillDisplay = data.AirWaybillDisplay,
-				ApplicationDisplay = data.ApplicationDisplay,
-				ClientId = data.ClientId,
-				FactureCost = data.FactureCost,
-				Id = 0,
-				InsuranceCost = data.InsuranceCost,
-				MarkName = data.MarkName,
-				FactoryName = data.FactoryName,
-				ScotchCost = data.ScotchCost,
-				TariffPerKg = data.TariffPerKg,
-				Weight = data.Weight,
+				data.ClientId,
 				ApplicationHistoryId = applicationId,
-				TransitCost = data.TransitCost,
-				PickupCost = data.PickupCost
+				data.AirWaybillDisplay,
+				data.ApplicationDisplay,
+				data.MarkName,
+				data.Weight,
+				data.TariffPerKg,
+				data.ScotchCost,
+				data.InsuranceCost,
+				data.FactureCost,
+				data.TransitCost,
+				data.PickupCost,
+				data.FactoryName
 			});
 		}
 
-		public CalculationData[] GetByClientId(long clientId)
+		public CalculationData[] GetByClient(long clientId)
 		{
-			return _context.Calculations.Where(x => x.ClientId == clientId)
-				.OrderBy(x => x.ApplicationDisplay)
-				.Select(x =>
-					new CalculationData
-					{
-						AirWaybillDisplay = x.AirWaybillDisplay,
-						ApplicationDisplay = x.ApplicationDisplay,
-						ClientId = x.ClientId,
-						FactureCost = x.FactureCost,
-						TransitCost = x.TransitCost,
-						InsuranceCost = x.InsuranceCost,
-						MarkName = x.MarkName,
-						FactoryName = x.FactoryName,
-						ScotchCost = x.ScotchCost,
-						TariffPerKg = x.TariffPerKg,
-						Weight = x.Weight,
-						PickupCost = x.PickupCost
-					}).ToArray();
+			return _executor.Array<CalculationData>("[dbo].[Calculation_GetByClient]", new { clientId });
+		}
+
+		public CalculationData GetByApplication(long applicationId)
+		{
+			return _executor.Query<CalculationData>("[dbo].[Calculation_GetByApplication]", new { applicationId });
 		}
 
 		public void RemoveByApplication(long applicationId)
 		{
-			var calculation = _context.Calculations.First(x => x.ApplicationHistoryId == applicationId);
-
-			_context.Calculations.DeleteOnSubmit(calculation);
+			_executor.Execute("[dbo].[Calculation_RemoveByApplication]", new { applicationId });
 		}
 	}
 }

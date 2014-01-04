@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [dbo].[Calculation]
 (
-	[Id]					BIGINT			NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	[Id]					BIGINT			NOT NULL IDENTITY(1, 1),
 
 	[ClientId]				BIGINT			NOT NULL,
 	[ApplicationHistoryId]	BIGINT			NOT NULL,
 	[AirWaybillDisplay]		NVARCHAR(320)	NOT NULL,
-	[ApplicationDisplay]	NVARCHAR(320)	NOT NULL,	
+	[ApplicationDisplay]	NVARCHAR(320)	NOT NULL,
 	[MarkName]				NVARCHAR(320)	NOT NULL,
 	[Weight]				REAL			NOT NULL,
 	[TariffPerKg]			MONEY			NOT NULL,
@@ -16,6 +16,7 @@
 	[PickupCost]			MONEY			NOT NULL,
 	[FactoryName]			NVARCHAR(320)	NOT NULL, 
 
+	CONSTRAINT [PK_dbo.Calculation] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_Calculation_Client] FOREIGN KEY ([ClientId]) REFERENCES [Client]([Id])
 )
 GO

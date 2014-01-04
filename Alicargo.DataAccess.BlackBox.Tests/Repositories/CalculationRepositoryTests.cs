@@ -2,6 +2,8 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
+using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;
 using FluentAssertions;
@@ -23,7 +25,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context = new DbTestContext();
 			_fixture = new Fixture();
 
-			_calculationRepository = new CalculationRepository(_context.UnitOfWork);
+			_calculationRepository = new CalculationRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
 		[TestCleanup]
@@ -46,13 +48,38 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod, TestCategory("black-box")]
-		public void Test_AddGet()
+		public void Test_Add_GetByApplication()
 		{
 			var data = GenerateData();
 
 			var actual = AddNew(data, TestConstants.TestApplicationId);
 
 			actual.ShouldBeEquivalentTo(data);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_Add_GetByClient()
+		{
+			var data = GenerateData();
+
+			_calculationRepository.Add(data, TestConstants.TestApplicationId);
+
+			var actual = _calculationRepository.GetByClient(data.ClientId)
+				.Single(x => x.ApplicationDisplay == data.ApplicationDisplay);
+
+			actual.ShouldBeEquivalentTo(data);
+		}
+
+		[TestMethod, TestCategory("black-box")]
+		public void Test_RemoveByApplication()
+		{
+			var data = GenerateData();
+
+			AddNew(data, TestConstants.TestApplicationId).Should().NotBeNull();
+
+			_calculationRepository.RemoveByApplication(TestConstants.TestApplicationId);
+
+			_calculationRepository.GetByApplication(TestConstants.TestApplicationId).Should().BeNull();
 		}
 
 		private CalculationData GenerateData()
@@ -63,10 +90,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private CalculationData AddNew(CalculationData data, long applicationId)
 		{
 			_calculationRepository.Add(data, applicationId);
-			_context.UnitOfWork.SaveChanges();
 
-			return _calculationRepository.GetByClientId(data.ClientId)
-				.Single(x => x.AirWaybillDisplay == data.AirWaybillDisplay);
+			return _calculationRepository.GetByApplication(applicationId);
 		}
 	}
 }

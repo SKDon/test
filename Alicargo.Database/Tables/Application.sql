@@ -59,14 +59,11 @@ GO
 CREATE NONCLUSTERED INDEX [IX_ClientId] ON [dbo].[Application]([ClientId] ASC);
 GO
 
-CREATE NONCLUSTERED INDEX [IX_StateId]
-    ON [dbo].[Application]([StateId] ASC);
+CREATE NONCLUSTERED INDEX [IX_StateId] ON [dbo].[Application]([StateId] ASC);
 GO
 
-CREATE NONCLUSTERED INDEX [IX_Application_TransitId]
-    ON [dbo].[Application]([TransitId] ASC);
+CREATE NONCLUSTERED INDEX [IX_Application_TransitId] ON [dbo].[Application]([TransitId] ASC);
 GO
 
-CREATE NONCLUSTERED INDEX [IX_AirWaybillId]
-    ON [dbo].[Application]([AirWaybillId] ASC);
+CREATE NONCLUSTERED INDEX [IX_AirWaybillId] ON [dbo].[Application]([AirWaybillId] ASC);
 GO

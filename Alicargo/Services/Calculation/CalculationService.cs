@@ -19,17 +19,14 @@ namespace Alicargo.Services.Calculation
 		private readonly IAwbRepository _awbs;
 		private readonly ICalculationRepository _calculations;
 		private readonly ISenderRepository _senders;
-		private readonly IUnitOfWork _unitOfWork;
 
 		public CalculationService(
 			ICalculationRepository calculations,
-			IUnitOfWork unitOfWork,
 			ISenderRepository senders,
 			IAwbRepository awbs,
 			IApplicationRepository applications)
 		{
 			_calculations = calculations;
-			_unitOfWork = unitOfWork;
 			_senders = senders;
 			_awbs = awbs;
 			_applications = applications;
@@ -41,13 +38,13 @@ namespace Alicargo.Services.Calculation
 
 			if (application.AirWaybillId == null)
 				throw new InvalidOperationException("For calculation an air waybill should be presented. Applicaiton id: "
-													+ application.Id);
+				                                    + application.Id);
 
 			var awb = _awbs.Get(application.AirWaybillId.Value).First();
 
 			var weight = application.Weight ?? 0;
 			var tariffPerKg = application.TariffPerKg ?? 0;
-			var insurance = application.Value / CalculationHelper.InsuranceRate;
+			var insurance = application.Value/CalculationHelper.InsuranceRate;
 			var scotch = GetTapeCost(application);
 			var facture = application.FactureCostEdited ?? application.FactureCost ?? 0;
 			var transitCost = application.TransitCostEdited ?? application.TransitCost ?? 0;
@@ -70,15 +67,11 @@ namespace Alicargo.Services.Calculation
 			};
 
 			_calculations.Add(calculation, applicationId);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void CancelCalculatation(long applicationId)
 		{
 			_calculations.RemoveByApplication(applicationId);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		private decimal GetTapeCost(ApplicationData application)

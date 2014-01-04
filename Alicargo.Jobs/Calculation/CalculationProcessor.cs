@@ -16,6 +16,7 @@ namespace Alicargo.Jobs.Calculation
 
 		public void ProcessEvent(EventType type, EventData data)
 		{
+			
 			switch (type)
 			{
 				case EventType.Calculate:
