@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Alicargo.Resources {
+namespace Alicargo.Contracts.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Alicargo.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Alicargo.Resources.EventType", typeof(EventType).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Alicargo.Contracts.Resources.EventType", typeof(EventType).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

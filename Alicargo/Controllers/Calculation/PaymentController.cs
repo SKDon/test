@@ -57,6 +57,8 @@ namespace Alicargo.Controllers.Calculation
 			}
 			catch (ArgumentException e)
 			{
+				ViewBag.ClientId = clientId;
+
 				ModelState.AddModelError(e.ParamName, e.Message);
 
 				return View(model);

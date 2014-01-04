@@ -29,11 +29,12 @@ namespace Alicargo.Jobs.Calculation
 			switch (type)
 			{
 				case EventType.Calculate:
-					_balance.Increase(calculation.ClientId, money, "", DateTimeOffset.UtcNow);
+					_balance.Decrease(calculation.ClientId, money, Contracts.Resources.EventType.Calculate, DateTimeOffset.UtcNow);
 					break;
 
 				case EventType.CalculationCanceled:
-					_balance.Decrease(calculation.ClientId, money, "", DateTimeOffset.UtcNow);
+					_balance.Increase(calculation.ClientId, money, Contracts.Resources.EventType.CalculationCanceled,
+						DateTimeOffset.UtcNow);
 					break;
 
 				default:

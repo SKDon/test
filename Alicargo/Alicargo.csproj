@@ -166,16 +166,6 @@
     <Compile Include="Controllers\User\RestorePasswordController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
-    <Compile Include="Resources\EventType.ru.Designer.cs">
-      <DependentUpon>EventType.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\EventType.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EventType.resx</DependentUpon>
-    </Compile>
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
@@ -807,14 +797,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\EventType.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>EventType.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\EventType.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>EventType.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Validation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Validation.Designer.cs</LastGenOutput>

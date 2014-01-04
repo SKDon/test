@@ -52,7 +52,7 @@ namespace Alicargo.Controllers
 				.Select(x => new
 				{
 					Id = (int)x,
-					Name = Resources.EventType.ResourceManager.GetString(x.ToString())
+					Name = Contracts.Resources.EventType.ResourceManager.GetString(x.ToString())
 				})
 				.ToArray();
 
