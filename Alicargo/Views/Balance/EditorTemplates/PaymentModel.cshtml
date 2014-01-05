@@ -4,8 +4,6 @@
 <div class="row">
 	<div class="span2">
 		@Html.EditorWithLabelFor(x => x.Money)
-	</div>
-	<div class="span2">
 		@Html.LabelFor(model => model.Timestamp)
 		<div class="date-holder">
 			@Html.EditorFor(model => model.Timestamp)
@@ -16,8 +14,6 @@
 			})
 		</script>
 	</div>
-</div>
-<div class="row">
 	<div class="span8">
 		@Html.EditorWithLabelFor(x => x.Comment)
 	</div>

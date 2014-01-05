@@ -25,7 +25,7 @@ namespace Alicargo.Jobs.Calculation
 			var calculation = _serializer.Deserialize<CalculationData>(eventDataForEntity.Data);
 
 			var money = (decimal)calculation.Weight * calculation.TariffPerKg + calculation.ScotchCost
-						+ calculation.InsuranceCost + calculation.FactureCost + calculation.TransitCost + calculation.PickupCost;
+			            + calculation.InsuranceCost + calculation.FactureCost + calculation.TransitCost + calculation.PickupCost;
 
 			switch (type)
 			{
@@ -47,10 +47,10 @@ namespace Alicargo.Jobs.Calculation
 		private static string GetComment(string type, CalculationData calculation)
 		{
 			return type
-				   + Environment.NewLine
-				   + Entities.AWB + ": " + calculation.AirWaybillDisplay
-				   + Environment.NewLine
-				   + Entities.Application + ": " + calculation.ApplicationDisplay;
+			       + Environment.NewLine
+			       + Entities.AWB + ": " + calculation.AirWaybillDisplay
+			       + Environment.NewLine
+			       + Entities.Application + ": " + calculation.ApplicationDisplay;
 		}
 	}
 }
