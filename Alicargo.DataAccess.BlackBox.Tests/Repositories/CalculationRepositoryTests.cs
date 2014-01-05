@@ -14,7 +14,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	[TestClass]
 	public class CalculationRepositoryTests
 	{
-		private CalculationRepository _calculationRepository;
+		private CalculationRepository _calculation;
 		private DbTestContext _context;
 		private Fixture _fixture;
 
@@ -24,7 +24,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context = new DbTestContext();
 			_fixture = new Fixture();
 
-			_calculationRepository = new CalculationRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
+			_calculation = new CalculationRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
 		[TestCleanup]
@@ -33,7 +33,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestCategory("black-box"), TestMethod, ExpectedException(typeof (DublicateException))]
+		[TestMethod]
+		[TestCategory("black-box")]
+		[ExpectedException(typeof(DublicateException))]
 		public void Test_Uniqueness()
 		{
 			var data1 = GenerateData();
@@ -46,7 +48,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			AddNew(data2, TestConstants.TestApplicationId);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
+		[TestCategory("black-box")]
 		public void Test_Add_GetByApplication()
 		{
 			var data = GenerateData();
@@ -56,16 +59,38 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			actual.ShouldBeEquivalentTo(data);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
+		[TestCategory("black-box")]
 		public void Test_RemoveByApplication()
 		{
 			var data = GenerateData();
 
 			AddNew(data, TestConstants.TestApplicationId).Should().NotBeNull();
 
-			_calculationRepository.RemoveByApplication(TestConstants.TestApplicationId);
+			_calculation.RemoveByApplication(TestConstants.TestApplicationId);
 
-			_calculationRepository.GetByApplication(TestConstants.TestApplicationId).Should().BeNull();
+			_calculation.GetByApplication(TestConstants.TestApplicationId).Should().BeNull();
+		}
+
+		[TestMethod]
+		public void Test_GetCalculatedSum()
+		{
+			var firstSum = _calculation.GetCalculatedSum();
+			var data = _fixture.Create<CalculationData>();
+			data.ClientId = TestConstants.TestClientId1;
+			var added = (decimal)data.Weight * data.TariffPerKg + data.FactureCost + data.InsuranceCost + data.PickupCost +
+						data.PickupCost + data.ScotchCost + data.TransitCost;
+			var applicationId = _fixture.Create<long>();
+
+			_calculation.Add(data, applicationId);
+
+			var secondSum = _calculation.GetCalculatedSum();
+
+			secondSum.ShouldBeEquivalentTo(firstSum + added);
+
+			_calculation.RemoveByApplication(applicationId);
+
+			_calculation.GetCalculatedSum().ShouldBeEquivalentTo(firstSum);
 		}
 
 		private CalculationData GenerateData()
@@ -75,9 +100,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private CalculationData AddNew(CalculationData data, long applicationId)
 		{
-			_calculationRepository.Add(data, applicationId);
+			_calculation.Add(data, applicationId);
 
-			return _calculationRepository.GetByApplication(applicationId);
+			return _calculation.GetByApplication(applicationId);
 		}
 	}
 }

@@ -76,8 +76,6 @@ namespace Alicargo.App_Start.Jobs
 		{
 			var executor = new SqlProcedureExecutor(connectionString);
 			var events = new EventRepository(executor);
-			var templates = new TemplateRepository(executor);
-			var templateRepositoryWrapper = new TemplateRepositoryWrapper(templates);
 			var serializer = new Serializer();
 			var emailMessageRepository = new EmailMessageRepository(executor);
 			var emailingProcessor = new DefaultEmailingProcessor(

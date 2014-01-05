@@ -79,7 +79,7 @@ namespace Alicargo.Services.Calculation
 
 		public decimal GetSaldo()
 		{
-			return _balances.SumBalance();
+			return _balances.SumBalance() - _calculations.GetCalculatedSum();
 		}
 
 		private decimal GetTapeCost(ApplicationData application)
