@@ -4,6 +4,6 @@
 	{
 		void Calculate(long applicationId);
 		void CancelCalculatation(long applicationId);
-		decimal GetSaldo();
+		decimal GetTotalBalance();
 	}
 }

@@ -77,7 +77,7 @@ namespace Alicargo.Services.Calculation
 			_calculations.RemoveByApplication(applicationId);
 		}
 
-		public decimal GetSaldo()
+		public decimal GetTotalBalance()
 		{
 			return _balances.SumBalance() - _calculations.GetCalculatedSum();
 		}
