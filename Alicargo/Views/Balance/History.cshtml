@@ -21,7 +21,6 @@
 				<td class="money">
 					@Entities.Money
 				</td>
-				<td class="timestamp"></td>
 				<td>
 					@Entities.Comment
 				</td>
@@ -44,9 +43,7 @@
 						@item.Money.ToString("N2")
 					</td>
 					<td>
-						@Alicargo.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())
-					</td>
-					<td>
+						<u>@Alicargo.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())</u><br />
 						@if (item.Comment != null)
 						{
 							@Html.Raw(item.Comment.Replace(Environment.NewLine, "<br/>"))
