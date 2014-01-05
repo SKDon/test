@@ -4,7 +4,6 @@
 	{
 		Failed = -1,
 
-		Calculating,
 		Emailing,
 		StateHistorySaving
 	}

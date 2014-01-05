@@ -26,7 +26,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var data = _service.Calculate(applicationId);
 
-			_events.Add(applicationId, EventType.Calculate, EventState.Calculating, data);
+			_events.Add(applicationId, EventType.Calculate, EventState.Emailing, data);
 
 			return data;
 		}
@@ -37,7 +37,7 @@ namespace Alicargo.Services.Calculation
 
 			_service.CancelCalculatation(applicationId);
 
-			_events.Add(applicationId, EventType.CalculationCanceled, EventState.Calculating, data);
+			_events.Add(applicationId, EventType.CalculationCanceled, EventState.Emailing, data);
 		}
 	}
 }
