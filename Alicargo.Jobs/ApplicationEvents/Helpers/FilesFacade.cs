@@ -35,6 +35,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case EventType.ApplicationSetState:
 					return GeAllFiles(applicationId, awbId);
 
+				case EventType.Calculate:
+				case EventType.CalculationCanceled:
+					return null; // a file is generated in the MessageBuilder because it needs to know a recipient language
+
 				case EventType.CPFileUploaded:
 				case EventType.InvoiceFileUploaded:
 				case EventType.PackingFileUploaded:

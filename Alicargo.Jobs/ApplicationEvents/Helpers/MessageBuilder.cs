@@ -87,6 +87,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				{
 					files = null;
 				}
+				else if (type == EventType.Calculate || type == EventType.CalculationCanceled)
+				{
+					throw new NotImplementedException();
+				}
 
 				yield return GetEmailMessage(recipient.Email, recipient.Culture, localization, application, data, type, files);
 			}

@@ -56,6 +56,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case EventType.ApplicationCreated:
 					break;
 
+				case EventType.Calculate:
+				case EventType.CalculationCanceled:
+					OnCalculation(bytes, language, localizedData);
+					break;
+
 				case EventType.CPFileUploaded:
 				case EventType.InvoiceFileUploaded:
 				case EventType.PackingFileUploaded:
@@ -74,6 +79,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			}
 
 			return localizedData;
+		}
+
+		private void OnCalculation(byte[] bytes, string language, TextLocalizedData localizedData)
+		{
+			throw new NotImplementedException();
 		}
 
 		private void OnFileUpload(byte[] bytes, TextLocalizedData localizedData)
