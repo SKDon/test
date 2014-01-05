@@ -18,18 +18,15 @@ namespace Alicargo.Services.Calculation
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
 		private readonly ICalculationRepository _calculations;
-		private readonly IClientBalanceRepository _balances;
 		private readonly ISenderRepository _senders;
 
 		public CalculationService(
 			ICalculationRepository calculations,
-			IClientBalanceRepository balances,
 			ISenderRepository senders,
 			IAwbRepository awbs,
 			IApplicationRepository applications)
 		{
 			_calculations = calculations;
-			_balances = balances;
 			_senders = senders;
 			_awbs = awbs;
 			_applications = applications;
@@ -75,12 +72,7 @@ namespace Alicargo.Services.Calculation
 		public void CancelCalculatation(long applicationId)
 		{
 			_calculations.RemoveByApplication(applicationId);
-		}
-
-		public decimal GetTotalBalance()
-		{
-			return _balances.SumBalance() - _calculations.GetCalculatedSum();
-		}
+		}		
 
 		private decimal GetTapeCost(ApplicationData application)
 		{

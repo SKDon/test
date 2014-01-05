@@ -32,7 +32,7 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Admin), HttpGet]
 		public virtual ActionResult Index()
 		{
-			ViewBag.Balance = _calculation.GetTotalBalance();
+			ViewBag.Balance = _presenter.GetTotalBalance();
 
 			return View();
 		}

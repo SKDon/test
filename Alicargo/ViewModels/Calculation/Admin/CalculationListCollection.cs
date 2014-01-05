@@ -5,5 +5,6 @@
 		public long Total { get; set; }
 		public CalculationGroup[] Groups { get; set; }
 		public CalculationAwbInfo[] Info { get; set; }
+		public string TotalBalance { get; set; }
 	}
 }

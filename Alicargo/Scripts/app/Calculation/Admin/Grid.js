@@ -3,16 +3,16 @@
 	var $u = $a.Urls;
 
 	var select = $("#client-balance-select");
-	var updateLink = function() {
+	var updateBalanceButtons = function() {
 		var decrease = $("#client-balance-decrease-link");
 		var increase = $("#client-balance-increase-link");
 		var urls = select.val().split(";");
 		decrease.attr("href", urls[0]);
 		increase.attr("href", urls[1]);
 	};
-	select.change(updateLink);
-	updateLink();
-
+	select.change(updateBalanceButtons);
+	updateBalanceButtons();
+	
 	$a.Calculation = (function($c) {
 
 		$c.GetMainGrid = function() {
@@ -44,6 +44,7 @@
 			var scrollTop = $(window).scrollTop();
 			$.post(url, data).success(function(awbData) {
 				updateMailGrid(awbId, awbData);
+				$("#total-balance").text(awbData.TotalBalance);
 				$(window).scrollTop(scrollTop);
 			}).fail($a.ShowError);
 		}

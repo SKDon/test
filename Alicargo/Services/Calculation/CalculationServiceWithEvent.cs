@@ -38,10 +38,5 @@ namespace Alicargo.Services.Calculation
 
 			_events.Add(applicationId, EventType.CalculationCanceled, EventState.Calculating, data);
 		}
-
-		public decimal GetTotalBalance()
-		{
-			return _service.GetTotalBalance();
-		}
 	}
 }

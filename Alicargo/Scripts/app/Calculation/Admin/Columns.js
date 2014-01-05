@@ -96,6 +96,26 @@
 					});
 			}
 
+			function onCalculate(e) {
+				e.preventDefault();
+				if ($a.Confirm($l.Pages_ConfrimCalculation)) {
+					var button = $(e.target).closest("a")[0];
+					var appId = $.data(button, "ApplicationId");
+					var awbId = $.data(button, "AirWaybillId");
+					$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
+				}
+			}
+
+			function onCancelCalculate(e) {
+				e.preventDefault();
+				if ($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
+					var button = $(e.target).closest("a")[0];
+					var appId = $.data(button, "ApplicationId");
+					var awbId = $.data(button, "AirWaybillId");
+					$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
+				}
+			}
+
 			var c = [
 				{
 					field: "AirWaybillId",
@@ -134,28 +154,11 @@
 					command: [{
 							name: "custom-gear",
 							text: "&nbsp;",
-							title: $l.Pages_Calculate,
-							click: function(e) {
-								e.preventDefault();
-								if($a.Confirm($l.Pages_ConfrimCalculation)) {
-									var button = $(e.target).closest("a")[0];
-									var appId = $.data(button, "ApplicationId");
-									var awbId = $.data(button, "AirWaybillId");
-									$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
-								}
-							}
+							click: onCalculate
 						}, {
 							name: "custom-cancel",
 							text: "&nbsp;",
-							click: function(e) {
-								e.preventDefault();
-								if($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
-									var button = $(e.target).closest("a")[0];
-									var appId = $.data(button, "ApplicationId");
-									var awbId = $.data(button, "AirWaybillId");
-									$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
-								}
-							}
+							click: onCancelCalculate
 						}],
 					title: "&nbsp;",
 					width: $a.DefaultGridButtonWidth
