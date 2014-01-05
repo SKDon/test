@@ -81,6 +81,8 @@
     <Folder Include="Tables\State" />
     <Folder Include="Tables\Event" />
     <Folder Include="Stored procedures\User\Client" />
+    <Folder Include="Stored procedures\Calculation" />
+    <Folder Include="Stored procedures\User\Sender" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Transit.sql" />
@@ -119,11 +121,6 @@
     <Build Include="Stored procedures\State\State_Update.sql" />
     <Build Include="Stored procedures\State\StateLocalization_Get.sql" />
     <Build Include="Stored procedures\State\StateLocalization_Merge.sql" />
-    <Build Include="Stored procedures\User\Sender_Update.sql" />
-    <Build Include="Stored procedures\User\Sender_Add.sql" />
-    <Build Include="Stored procedures\User\Sender_Get.sql" />
-    <Build Include="Stored procedures\User\Sender_GetTariffs.sql" />
-    <Build Include="Stored procedures\User\Sender_GetUserId.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByEvent.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByStateId.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeEvent.sql" />
@@ -157,15 +154,20 @@
     <Build Include="Tables\Event\EventEmailRecipient.sql" />
     <Build Include="Tables\Event\EventEmailTemplate.sql" />
     <Build Include="Tables\Application.sql" />
-    <Build Include="Stored procedures\Calculation_Add.sql" />
-    <Build Include="Stored procedures\Calculation_GetByApplication.sql" />
-    <Build Include="Stored procedures\Calculation_RemoveByApplication.sql" />
     <Build Include="Stored procedures\User\Client\Client_DeleteForce.sql" />
     <Build Include="Stored procedures\User\Client\Client_GetBalance.sql" />
     <Build Include="Stored procedures\User\Client\Client_SetBalance.sql" />
     <Build Include="Stored procedures\User\Client\ClientBalanceHistory_Add.sql" />
     <Build Include="Stored procedures\User\Client\ClientBalanceHistory_Get.sql" />
     <Build Include="Stored procedures\User\Client\Client_SumBalance.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_Add.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_GetByApplication.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_RemoveByApplication.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_Update.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_Add.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_Get.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetTariffs.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetUserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
