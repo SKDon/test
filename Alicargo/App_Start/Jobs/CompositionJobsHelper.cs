@@ -114,7 +114,7 @@ namespace Alicargo.App_Start.Jobs
 				var templateRepository = new TemplateRepository(executor);
 				var textBuilder = new TextBuilder<Alicargo.Jobs.Balance.Entities.TextLocalizedData>();
 				var excelClientCalculation = new ExcelClientCalculation();
-				var templateRepositoryWrapper = new TemplateRepositoryWrapper(templateRepository);
+				var templateRepositoryWrapper = new TemplateRepositoryHelper(templateRepository);
 				var messageBuilder = new Alicargo.Jobs.Balance.MessageBuilder(
 					EmailsHelper.DefaultFrom,
 					recipientsFacade,
@@ -214,7 +214,7 @@ namespace Alicargo.App_Start.Jobs
 				new ForwarderRepository(unitOfWork),
 				new BrokerRepository(unitOfWork),
 				new EventEmailRecipient(mainExecutor));
-			var wrapper = new TemplateRepositoryWrapper(templates);
+			var wrapper = new TemplateRepositoryHelper(templates);
 			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
 
 			return new Alicargo.Jobs.ApplicationEvents.Helpers.MessageBuilder(

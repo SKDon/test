@@ -8,6 +8,7 @@
 		SetDateOfCargoReceipt = 9,
 		SetTransitReference = 10,
 
+		// Application's file events
 		CPFileUploaded = 3,
 		InvoiceFileUploaded = 4,
 		PackingFileUploaded = 5,
@@ -15,13 +16,12 @@
 		DeliveryBillFileUploaded = 7,
 		Torg12FileUploaded = 8,
 
-
-		// Calculation events
+		// Application's calculation events
 		Calculate = 11,
 		CalculationCanceled = 12,
 
 
-		// Balance events
+		// Client balance events
 		BalanceIncreased = 13,
 		BalanceDecreased = 14
 	}

@@ -7,11 +7,11 @@ using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Helpers
 {
-	public sealed class TemplateRepositoryWrapper : ITemplateRepositoryWrapper
+	public sealed class TemplateRepositoryHelper : ITemplateRepositoryHelper
 	{
 		private readonly ITemplateRepository _templates;
 
-		public TemplateRepositoryWrapper(ITemplateRepository templates)
+		public TemplateRepositoryHelper(ITemplateRepository templates)
 		{
 			_templates = templates;
 		}

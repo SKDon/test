@@ -11,14 +11,14 @@ namespace Alicargo.Jobs.Tests.Helpers
 	public class TemplateRepositoryWrapperTests
 	{
 		private MockContainer _container;
-		private TemplateRepositoryWrapper _templateRepositoryWrapper;
+		private TemplateRepositoryHelper _templateRepositoryHelper;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_container = new MockContainer();
 
-			_templateRepositoryWrapper = _container.Create<TemplateRepositoryWrapper>();
+			_templateRepositoryHelper = _container.Create<TemplateRepositoryHelper>();
 		}
 
 		[TestMethod]
@@ -30,7 +30,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 
 			_container.TemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
 
-			var template = _templateRepositoryWrapper.GetTemplateId(eventType);
+			var template = _templateRepositoryHelper.GetTemplateId(eventType);
 
 			template.Should().NotHaveValue();
 		}
@@ -44,7 +44,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 
 			_container.TemplateRepository.Setup(x => x.GetByEventType(eventType)).Returns(eventTemplate);
 
-			var template = _templateRepositoryWrapper.GetTemplateId(eventType);
+			var template = _templateRepositoryHelper.GetTemplateId(eventType);
 
 			template.ShouldBeEquivalentTo(eventTemplate.EmailTemplateId);
 		}

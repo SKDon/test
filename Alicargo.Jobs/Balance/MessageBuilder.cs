@@ -21,7 +21,7 @@ namespace Alicargo.Jobs.Balance
 		private readonly IExcelClientCalculation _excel;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
-		private readonly ITemplateRepositoryWrapper _templates;
+		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder<TextLocalizedData> _textBuilder;
 
 		public MessageBuilder(
@@ -32,7 +32,7 @@ namespace Alicargo.Jobs.Balance
 			IExcelClientCalculation excel,
 			ISerializer serializer,
 			ITextBuilder<TextLocalizedData> textBuilder,
-			ITemplateRepositoryWrapper templates)
+			ITemplateRepositoryHelper templates)
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;

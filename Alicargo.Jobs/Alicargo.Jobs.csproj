@@ -68,7 +68,7 @@
     <Compile Include="ApplicationEvents\Abstract\IFilesFacade.cs" />
     <Compile Include="Helpers\Abstract\IMessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Abstract\IRecipientsFacade.cs" />
-    <Compile Include="Helpers\Abstract\ITemplateRepositoryWrapper.cs" />
+    <Compile Include="Helpers\Abstract\ITemplateRepositoryHelper.cs" />
     <Compile Include="ApplicationEvents\Abstract\ITextBuilder.cs" />
     <Compile Include="ApplicationEvents\Helpers\MessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
@@ -76,7 +76,7 @@
     <Compile Include="Helpers\TextBuilderHelper.cs" />
     <Compile Include="Helpers\DefaultEmailingProcessor.cs" />
     <Compile Include="Helpers\TextBuilder.cs" />
-    <Compile Include="Helpers\TemplateRepositoryWrapper.cs" />
+    <Compile Include="Helpers\TemplateRepositoryHelper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBuilder.cs" />
     <Compile Include="ApplicationEvents\Entities\TextLocalizedData.cs" />
     <Compile Include="Core\IEventProcessor.cs" />
