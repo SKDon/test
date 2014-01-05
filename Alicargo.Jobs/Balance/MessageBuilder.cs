@@ -15,14 +15,14 @@ namespace Alicargo.Jobs.Balance
 {
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
-		private readonly string _defaultFrom;
 		private readonly IClientCalculationPresenter _calculationPresenter;
 		private readonly IClientRepository _clients;
+		private readonly string _defaultFrom;
 		private readonly IExcelClientCalculation _excel;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
 		private readonly ITemplateRepositoryHelper _templates;
-		private readonly ITextBuilder<TextLocalizedData> _textBuilder;
+		private readonly ITextBuilder _textBuilder;
 
 		public MessageBuilder(
 			string defaultFrom,
@@ -31,7 +31,7 @@ namespace Alicargo.Jobs.Balance
 			IClientCalculationPresenter calculationPresenter,
 			IExcelClientCalculation excel,
 			ISerializer serializer,
-			ITextBuilder<TextLocalizedData> textBuilder,
+			ITextBuilder textBuilder,
 			ITemplateRepositoryHelper templates)
 		{
 			_defaultFrom = defaultFrom;
@@ -65,7 +65,8 @@ namespace Alicargo.Jobs.Balance
 			return recipients.Select(x => GetEmailMessage(x.Email, localizations[x.Culture], files[x.Culture])).ToArray();
 		}
 
-		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventDataForEntity eventData, string[] languages,
+		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventDataForEntity eventData,
+			string[] languages,
 			long templateId, long clientId)
 		{
 			var clientData = _clients.Get(clientId);
@@ -75,7 +76,7 @@ namespace Alicargo.Jobs.Balance
 				language =>
 				{
 					var template = _templates.GetLocalization(templateId, language);
-					
+
 					var localizedData = GetLocalizedData(language, paymentEventData, clientData);
 
 					return new EmailTemplateLocalizationData
@@ -89,18 +90,18 @@ namespace Alicargo.Jobs.Balance
 			return localizations;
 		}
 
-		private static TextLocalizedData GetLocalizedData(string language, PaymentEventData paymentEventData,
+		private static IDictionary<string, string> GetLocalizedData(string language, PaymentEventData paymentEventData,
 			ClientData clientData)
 		{
 			var culture = CultureInfo.GetCultureInfo(language);
 
-			return new TextLocalizedData
+			return new Dictionary<string, string>
 			{
-				AbsMoney = paymentEventData.AbsMoney.ToString("N2"),
-				Comment = paymentEventData.Comment,
-				ClientNic = clientData.Nic,
-				LegalEntity = clientData.LegalEntity,
-				Timestamp = LocalizationHelper.GetDate(paymentEventData.Timestamp, culture)
+				{ "AbsMoney", paymentEventData.AbsMoney.ToString("N2") },
+				{ "Comment", paymentEventData.Comment },
+				{ "ClientNic", clientData.Nic },
+				{ "LegalEntity", clientData.LegalEntity },
+				{ "Timestamp", LocalizationHelper.GetDate(paymentEventData.Timestamp, culture) }
 			};
 		}
 
@@ -112,7 +113,7 @@ namespace Alicargo.Jobs.Balance
 					x => x,
 					x =>
 					{
-						using (var stream = _excel.Get(list.Groups, x))
+						using(var stream = _excel.Get(list.Groups, x))
 						{
 							return new FileHolder
 							{

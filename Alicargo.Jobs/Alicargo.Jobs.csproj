@@ -58,7 +58,6 @@
     <Compile Include="Balance\IRecipientsFacade.cs" />
     <Compile Include="Balance\MessageBuilder.cs" />
     <Compile Include="Balance\RecipientsFacade.cs" />
-    <Compile Include="Balance\Entities\TextLocalizedData.cs" />
     <Compile Include="Core\BreakJobException.cs" />
     <Compile Include="Core\SequentialEventJob.cs" />
     <Compile Include="ApplicationEvents\ApplicationStateHistoryProcessor.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Helpers\TextBuilder.cs" />
     <Compile Include="Helpers\TemplateRepositoryHelper.cs" />
     <Compile Include="ApplicationEvents\Helpers\TextBuilder.cs" />
-    <Compile Include="ApplicationEvents\Entities\TextLocalizedData.cs" />
     <Compile Include="Core\IEventProcessor.cs" />
     <Compile Include="Core\IJob.cs" />
     <Compile Include="Core\IRunner.cs" />

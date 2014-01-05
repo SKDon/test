@@ -13,7 +13,6 @@ using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
-using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
@@ -25,6 +24,7 @@ using log4net;
 using Ninject;
 using Ninject.Syntax;
 using ILog = Alicargo.Core.Services.Abstract.ILog;
+using TextBuilder = Alicargo.Jobs.Helpers.TextBuilder;
 
 namespace Alicargo.App_Start.Jobs
 {
@@ -114,7 +114,7 @@ namespace Alicargo.App_Start.Jobs
 				var clientCalculationPresenter = new ClientCalculationPresenter(applicationRepository, awbRepository,
 					clientRepository, stateSettingsRepository);
 				var templateRepository = new TemplateRepository(executor);
-				var textBuilder = new TextBuilder<Alicargo.Jobs.Balance.Entities.TextLocalizedData>();
+				var textBuilder = new TextBuilder();
 				var excelClientCalculation = new ExcelClientCalculation();
 				var templateRepositoryWrapper = new TemplateRepositoryHelper(templateRepository);
 				var messageBuilder = new Alicargo.Jobs.Balance.MessageBuilder(
@@ -212,7 +212,7 @@ namespace Alicargo.App_Start.Jobs
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(filesExecutor);
 			var filesFasade = new FilesFacade(serializer, awbs, files);
-			var textBulder = new TextBuilder(serializer, states, files, new TextBuilder<TextLocalizedData>());
+			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(serializer, states, files, new TextBuilder());
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new TemplateRepository(mainExecutor);
 			var recipientsFacade = new RecipientsFacade(

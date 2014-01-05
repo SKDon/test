@@ -8,6 +8,7 @@ using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.Helpers.Abstract;
+using ITextBuilder = Alicargo.Jobs.ApplicationEvents.Abstract.ITextBuilder;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
