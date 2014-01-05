@@ -42,8 +42,8 @@ namespace Alicargo.App_Start.Jobs
 				var partitionId = i;
 				var mainConnectionString = connectionString;
 
-				BindStatelessJobRunner(kernel, () => RunCalculationJob(mainConnectionString, filesConnectionString, partitionId),
-					"CalculationJob_" + partitionId);
+				//BindStatelessJobRunner(kernel, () => RunCalculationJob(mainConnectionString, filesConnectionString, partitionId),
+				//	"CalculationJob_" + partitionId);
 
 				BindStatelessJobRunner(kernel, () => RunBalaceJob(mainConnectionString, partitionId),
 					"BalaceJob_" + partitionId);
@@ -69,31 +69,31 @@ namespace Alicargo.App_Start.Jobs
 				.Named(jobName);
 		}
 
-		private static void RunCalculationJob(string connectionString, string filesConnectionString, int partitionId)
-		{
-			using(var connection = new SqlConnection(connectionString))
-			{
-				var executor = new SqlProcedureExecutor(connectionString);
-				var events = new EventRepository(executor);
-				var serializer = new Serializer();
-				var emailMessageRepository = new EmailMessageRepository(executor);
-				var emailingProcessor = new DefaultEmailingProcessor(
-					new DbMailSender(partitionId, emailMessageRepository, serializer),
-					GetMessageFactory(connection, connectionString, filesConnectionString, serializer));
+		//private static void RunCalculationJob(string connectionString, string filesConnectionString, int partitionId)
+		//{
+		//	using(var connection = new SqlConnection(connectionString))
+		//	{
+		//		var executor = new SqlProcedureExecutor(connectionString);
+		//		var events = new EventRepository(executor);
+		//		var serializer = new Serializer();
+		//		var emailMessageRepository = new EmailMessageRepository(executor);
+		//		var emailingProcessor = new DefaultEmailingProcessor(
+		//			new DbMailSender(partitionId, emailMessageRepository, serializer),
+		//			GetMessageFactory(connection, connectionString, filesConnectionString, serializer));
 
-				var processors = new Dictionary<EventState, IEventProcessor>
-				{
-					{ EventState.Emailing, emailingProcessor }
-				};
+		//		var processors = new Dictionary<EventState, IEventProcessor>
+		//		{
+		//			{ EventState.Emailing, emailingProcessor }
+		//		};
 
-				new SequentialEventJob(events, partitionId,
-					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-					{
-						{ EventType.Calculate, processors },
-						{ EventType.CalculationCanceled, processors }
-					}).Work();
-			}
-		}
+		//		new SequentialEventJob(events, partitionId,
+		//			new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+		//			{
+		//				{ EventType.Calculate, processors },
+		//				{ EventType.CalculationCanceled, processors }
+		//			}).Work();
+		//	}
+		//}
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
