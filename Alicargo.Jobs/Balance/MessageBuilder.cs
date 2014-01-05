@@ -111,9 +111,9 @@ namespace Alicargo.Jobs.Balance
 			var files = languages
 				.ToDictionary(
 					x => x,
-					x =>
+					language =>
 					{
-						using(var stream = _excel.Get(list.Groups, x))
+						using(var stream = _excel.Get(list.Groups, language))
 						{
 							return new FileHolder
 							{
@@ -122,6 +122,7 @@ namespace Alicargo.Jobs.Balance
 							};
 						}
 					});
+
 			return files;
 		}
 

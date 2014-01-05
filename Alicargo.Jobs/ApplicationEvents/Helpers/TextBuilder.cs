@@ -61,7 +61,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				case EventType.Calculate:
 				case EventType.CalculationCanceled:
-					OnCalculation(bytes, language, localizedData);
+					OnCalculation(bytes, culture, localizedData);
 					break;
 
 				case EventType.CPFileUploaded:
@@ -84,9 +84,21 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return localizedData;
 		}
 
-		private void OnCalculation(byte[] bytes, string language, IDictionary<string, string> localizedData)
+		private void OnCalculation(byte[] bytes, CultureInfo culture, IDictionary<string, string> localizedData)
 		{
-			throw new NotImplementedException();
+			var calculation = _serializer.Deserialize<CalculationData>(bytes);
+
+			Add(localizedData, "AirWaybillDisplay", calculation.AirWaybillDisplay);
+			Add(localizedData, "ApplicationDisplay", calculation.ApplicationDisplay);
+			Add(localizedData, "MarkName", calculation.MarkName);
+			Add(localizedData, "FactoryName", calculation.FactoryName);
+			Add(localizedData, "Weight", calculation.Weight.ToString("N2", culture));
+			Add(localizedData, "TariffPerKg", calculation.TariffPerKg.ToString("N2", culture));
+			Add(localizedData, "ScotchCost", calculation.ScotchCost.ToString("N2", culture));
+			Add(localizedData, "InsuranceCost", calculation.InsuranceCost.ToString("N2", culture));
+			Add(localizedData, "FactureCost", calculation.FactureCost.ToString("N2", culture));
+			Add(localizedData, "TransitCost", calculation.TransitCost.ToString("N2", culture));
+			Add(localizedData, "PickupCost", calculation.PickupCost.ToString("N2", culture));
 		}
 
 		private void OnFileUpload(byte[] bytes, IDictionary<string, string> localizedData)

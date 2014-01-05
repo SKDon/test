@@ -215,16 +215,20 @@ namespace Alicargo.App_Start.Jobs
 			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(serializer, states, files, new TextBuilder());
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new TemplateRepository(mainExecutor);
+			var clientRepository = new ClientRepository(unitOfWork);
 			var recipientsFacade = new RecipientsFacade(
 				awbs, serializer, stateSettings,
 				new AdminRepository(unitOfWork),
-				new SenderRepository(unitOfWork, passwordConverter, new SqlProcedureExecutor(connectionString)),
-				new ClientRepository(unitOfWork),
+				new SenderRepository(unitOfWork, passwordConverter, mainExecutor),
+				clientRepository,
 				new ForwarderRepository(unitOfWork),
 				new BrokerRepository(unitOfWork),
 				new EventEmailRecipient(mainExecutor));
 			var wrapper = new TemplateRepositoryHelper(templates);
 			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
+			var excelClientCalculation = new ExcelClientCalculation();
+			var clientCalculationPresenter = new ClientCalculationPresenter(applications, awbs,
+				clientRepository, stateSettings);
 
 			return new MessageBuilder(
 				EmailsHelper.DefaultFrom,
@@ -233,6 +237,8 @@ namespace Alicargo.App_Start.Jobs
 				recipientsFacade,
 				applicationEventTemplates,
 				applications,
+				clientCalculationPresenter,
+				excelClientCalculation,
 				serializer);
 		}
 	}
