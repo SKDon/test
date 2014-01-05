@@ -47,7 +47,10 @@
 						@Alicargo.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())
 					</td>
 					<td>
-						@item.Comment
+						@if (item.Comment != null)
+						{
+							@Html.Raw(item.Comment.Replace(Environment.NewLine, "<br/>"))
+						}
 					</td>
 				</tr>
 			}
