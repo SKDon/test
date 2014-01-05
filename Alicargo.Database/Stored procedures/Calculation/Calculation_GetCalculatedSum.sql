@@ -3,13 +3,18 @@
 AS BEGIN
 	SET NOCOUNT ON;
 
-	SELECT SUM([Weight] * [TariffPerKg])
+	DECLARE @Result MONEY;
+
+	SELECT @Result
+		= SUM([Weight] * [TariffPerKg])
 		+ SUM([ScotchCost])
 		+ SUM([InsuranceCost])
 		+ SUM([FactureCost])
 		+ SUM([TransitCost])
 		+ SUM([PickupCost])
 	FROM [dbo].[Calculation]
+
+	SELECT COALESCE(@Result, 0);
 
 END
 GO
