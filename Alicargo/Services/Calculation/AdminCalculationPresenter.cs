@@ -27,8 +27,8 @@ namespace Alicargo.Services.Calculation
 			IApplicationRepository applications,
 			IAwbRepository awbs,
 			ISenderRepository senders,
-			IClientRepository clients, 
-			ICalculationRepository calculations, 
+			IClientRepository clients,
+			ICalculationRepository calculations,
 			IClientBalanceRepository balances)
 		{
 			_applications = applications;
@@ -53,11 +53,6 @@ namespace Alicargo.Services.Calculation
 			return List(data);
 		}
 
-		public decimal GetTotalBalance()
-		{
-			return _balances.SumBalance() - _calculations.GetCalculatedSum();
-		}
-
 		private CalculationListCollection List(IList<AirWaybillData> data)
 		{
 			var awbs = data.ToDictionary(x => x.Id, x => x);
@@ -77,7 +72,8 @@ namespace Alicargo.Services.Calculation
 				Groups = groups.ToArray(),
 				Total = _awbs.Count(),
 				Info = info,
-				TotalBalance = GetTotalBalance().ToString("N2")
+				TotalBalance = _balances.SumBalance().ToString("N2"),
+				TotalCalculation = _calculations.GetCalculatedSum().ToString("N2")
 			};
 		}
 

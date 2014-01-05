@@ -45,6 +45,7 @@
 			$.post(url, data).success(function(awbData) {
 				updateMailGrid(awbId, awbData);
 				$("#total-balance").text(awbData.TotalBalance);
+				$("#total-calculation").text(awbData.TotalCalculation);
 				$(window).scrollTop(scrollTop);
 			}).fail($a.ShowError);
 		}
