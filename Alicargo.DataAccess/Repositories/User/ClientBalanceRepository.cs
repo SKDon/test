@@ -38,6 +38,11 @@ namespace Alicargo.DataAccess.Repositories.User
 			return _executor.Query<decimal>("[dbo].[Client_GetBalance]", new { clientId });
 		}
 
+		public decimal SumBalance()
+		{
+			return _executor.Query<decimal>("[dbo].[Client_SumBalance]");
+		}
+
 		public void SetBalance(long clientId, decimal balance)
 		{
 			_executor.Execute("[dbo].[Client_SetBalance]", new { clientId, balance });
