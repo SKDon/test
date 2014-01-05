@@ -19,61 +19,62 @@ namespace Alicargo.App_Start
 		public static readonly IDictionary<Type, Type[]> Decorators = new Dictionary<Type, Type[]>
 		{
 			{
-				typeof (IAwbManager),
+				typeof(IAwbManager),
 				new[]
 				{
-					typeof (AwbManager),
-					typeof (AwbManagerWithMailing)
+					typeof(AwbManager),
+					typeof(AwbManagerWithMailing)
 				}
 			},
 			{
-				typeof (IAwbUpdateManager),
+				typeof(IAwbUpdateManager),
 				new[]
 				{
-					typeof (AwbUpdateManager),
-					typeof (AwbUpdateGtdManager),
-					typeof (AwbUpdateManagerWithMailing)
+					typeof(AwbUpdateManager),
+					typeof(AwbUpdateGtdManager),
+					typeof(AwbUpdateManagerWithMailing)
 				}
 			},
 			{
-				typeof (IApplicationAwbManager),
+				typeof(IApplicationAwbManager),
 				new[]
 				{
-					typeof (ApplicationAwbManager),
-					typeof (ApplicationAwbManagerWithMailing)
+					typeof(ApplicationAwbManager),
+					typeof(ApplicationAwbManagerWithMailing)
 				}
 			},
 			{
-				typeof (IApplicationManager),
+				typeof(IApplicationManager),
 				new[]
 				{
-					typeof (ApplicationManager),
-					typeof (ApplicationManagerWithEvent)
+					typeof(ApplicationManager),
+					typeof(ApplicationManagerWithEvent)
 				}
 			},
 			{
-				typeof (IClientManager),
+				typeof(IClientManager),
 				new[]
 				{
-					typeof (ClientManager),
-					typeof (ClientManagerWithEvent),
-					typeof (ClientManagerWithMailing)
+					typeof(ClientManager),
+					typeof(ClientManagerWithEvent),
+					typeof(ClientManagerWithMailing)
 				}
 			},
 			{
-				typeof (IClientBalance),
+				typeof(IClientBalance),
 				new[]
 				{
-					typeof (ClientBalance),
-					typeof (ClientBalanceWithEvent)
+					typeof(ClientBalance),
+					typeof(ClientBalanceWithEvent)
 				}
 			},
 			{
-				typeof (ICalculationService),
+				typeof(ICalculationService),
 				new[]
 				{
-					typeof (CalculationService),
-					typeof (CalculationServiceWithEvent)
+					typeof(CalculationService),
+					typeof(CalculationServiceWithBalace),
+					typeof(CalculationServiceWithEvent)
 				}
 			}
 		};
@@ -103,6 +104,8 @@ namespace Alicargo.App_Start
 					binded.Add(current);
 				}
 			}
+
+			kernel.Bind<IClientBalance>().To<ClientBalance>().WhenInjectedInto<CalculationServiceWithBalace>();
 
 			return binded;
 		}

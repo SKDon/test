@@ -1,8 +1,10 @@
-﻿namespace Alicargo.Services.Abstract
+﻿using Alicargo.Contracts.Contracts;
+
+namespace Alicargo.Services.Abstract
 {
 	public interface ICalculationService
 	{
-		void Calculate(long applicationId);
+		CalculationData Calculate(long applicationId);
 		void CancelCalculatation(long applicationId);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Enums;
+﻿using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Event;
 using Alicargo.Services.Abstract;
@@ -21,13 +22,13 @@ namespace Alicargo.Services.Calculation
 			_calculations = calculations;
 		}
 
-		public void Calculate(long applicationId)
+		public CalculationData Calculate(long applicationId)
 		{
-			_service.Calculate(applicationId);
-
-			var data = _calculations.GetByApplication(applicationId);
+			var data = _service.Calculate(applicationId);
 
 			_events.Add(applicationId, EventType.Calculate, EventState.Calculating, data);
+
+			return data;
 		}
 
 		public void CancelCalculatation(long applicationId)

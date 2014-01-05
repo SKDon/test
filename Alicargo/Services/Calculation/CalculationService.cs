@@ -32,7 +32,7 @@ namespace Alicargo.Services.Calculation
 			_applications = applications;
 		}
 
-		public void Calculate(long applicationId)
+		public CalculationData Calculate(long applicationId)
 		{
 			var application = _applications.Get(applicationId);
 
@@ -67,6 +67,8 @@ namespace Alicargo.Services.Calculation
 			};
 
 			_calculations.Add(calculation, applicationId);
+
+			return calculation;
 		}
 
 		public void CancelCalculatation(long applicationId)

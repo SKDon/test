@@ -15,14 +15,12 @@ using Alicargo.Jobs;
 using Alicargo.Jobs.ApplicationEvents;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
-using Alicargo.Jobs.Calculation;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Services;
 using Alicargo.Services.Calculation;
 using Alicargo.Services.Excel;
-using Alicargo.Services.Users.Client;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
@@ -81,13 +79,9 @@ namespace Alicargo.App_Start.Jobs
 			var emailingProcessor = new DefaultEmailingProcessor(
 				new DbMailSender(partitionId, emailMessageRepository, serializer),
 				new MessageBuilder());
-			var clientBalanceRepository = new ClientBalanceRepository(executor);
-			var clientBalance = new ClientBalance(clientBalanceRepository);
-			var calculationProcessor = new CalculationProcessor(clientBalance, serializer);
 
 			var processors = new Dictionary<EventState, IEventProcessor>
 			{
-				{ EventState.Calculating, calculationProcessor },
 				{ EventState.Emailing, emailingProcessor }
 			};
 
