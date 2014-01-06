@@ -369,4 +369,7 @@
   <data name="Debiting" xml:space="preserve">
     <value>Debiting</value>
   </data>
+  <data name="AddDate" xml:space="preserve">
+    <value>Add date</value>
+  </data>
 </root>

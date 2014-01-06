@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add date.
+        /// </summary>
+        public static string AddDate {
+            get {
+                return ResourceManager.GetString("AddDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administrators.
         /// </summary>
         public static string Admins {

@@ -369,4 +369,7 @@
   <data name="Debiting" xml:space="preserve">
     <value>Списание</value>
   </data>
+  <data name="AddDate" xml:space="preserve">
+    <value>Время добавления</value>
+  </data>
 </root>

@@ -41,11 +41,11 @@
 		}
 
 		function post(url, data, awbId) {
-			var scrollTop = $(window).scrollTop();
+			var scrollTop = $(".k-grid-content").scrollTop();
 			$.post(url, data).success(function(awbData) {
 				updateMailGrid(awbId, awbData);
 				$("#total-balance").text(awbData.TotalBalance);
-				$(window).scrollTop(scrollTop);
+				$(".k-grid-content").scrollTop(scrollTop);
 			}).fail($a.ShowError);
 		}
 		$c.Post = post;
