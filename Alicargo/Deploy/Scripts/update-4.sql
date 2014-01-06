@@ -13,22 +13,6 @@ GO
 ALTER TABLE [dbo].[Client] ADD [Balance] MONEY CONSTRAINT [DF_Client_Balance] DEFAULT (0) NOT NULL
 GO
 
-CREATE TABLE [dbo].[ClientBalanceHistory] (
-    [Id]        BIGINT             IDENTITY (1, 1) NOT NULL,
-    [Timestamp] DATETIMEOFFSET (7) CONSTRAINT [DF_ClientBalanceHistory_Timestamp] DEFAULT (GETUTCDATE()) NOT NULL,
-    [ClientId]  BIGINT             NOT NULL,
-    [Balance]   MONEY              NOT NULL,
-    [Input]     MONEY              NOT NULL,
-    [Comment]   NVARCHAR (MAX)     NULL,
-    CONSTRAINT [PK_dbo.ClientBalanceHistory] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_dbo.ClientBalanceHistory_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]) ON DELETE CASCADE
-);
-GO
-
-CREATE NONCLUSTERED INDEX [IX_ClientId]
-    ON [dbo].[ClientBalanceHistory]([ClientId] ASC);
-GO
-
 ALTER PROCEDURE [dbo].[Sender_Get]
 	@Id BIGINT
 AS
@@ -140,42 +124,8 @@ BEGIN
 	WHERE [Id] = @ClientId
 
 END
-GO
-PRINT N'Creating [dbo].[ClientBalanceHistory_Add]...';
 
 
-GO
-CREATE PROCEDURE [dbo].[ClientBalanceHistory_Add]
-	@ClientId BIGINT,
-	@Balance MONEY,
-	@Input MONEY,
-	@Comment NVARCHAR(MAX)
-AS
-BEGIN
-	
-	SET NOCOUNT ON;
-
-	INSERT [dbo].[ClientBalanceHistory] ([Balance], [Comment], [ClientId], [Input])
-	VALUES (@Balance, @Comment, @ClientId, @Input)
-
-END
-GO
-PRINT N'Creating [dbo].[ClientBalanceHistory_Get]...';
-
-
-GO
-CREATE PROCEDURE [dbo].[ClientBalanceHistory_Get]
-	@ClientId BIGINT
-AS
-BEGIN
-	
-	SET NOCOUNT ON;
-
-	SELECT [Balance], [Comment], [Timestamp], [Input]
-	FROM [dbo].[ClientBalanceHistory]
-	WHERE [ClientId] = @ClientId
-
-END
 GO
 PRINT N'Creating [dbo].[User_GetLanguage]...';
 
