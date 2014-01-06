@@ -255,19 +255,18 @@ Alicargo  srl', 0),
 (21, N'ru', NULL, NULL, 0),
 (22, N'ru', NULL, NULL, 0),
 (23, N'ru', NULL, NULL, 0),
-
+-- calculate
 (24, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}',
-N'Расчет стоимости {AirWaybillDisplay}, {ApplicationDisplay}.
-Сальдо на ({CalculationTimestamp}) - {ClientBalance}€.', 0),
+N'Расчет стоимости заявки {ApplicationDisplay}.
+Сальдо: {ClientBalance}€ ({CalculationTimestamp}).', 0),
 (25, N'ru', NULL, NULL, 0),
-(26, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}',
-N'{AbsMoney}
-{Comment}
-{ClientNic}
-{LegalEntity}
-{Timestamp}', 0),
-(27, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}', NULL, 0)
-SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] OFF
+-- balnce
+(26, N'ru', N'Поступление денежных средств {ClientNic}',
+N'Поступление денежных средств: {Money}€{Comment [ ({0}).]} 
+Сальдо: {ClientBalance}€ ({Timestamp}).', 0),
+(27, N'ru', N'Списание денежных средств {ClientNic}',
+N'Списание денежных средств: {Money}€{Comment [ ({0}).]} 
+Сальдо: {ClientBalance}€ ({Timestamp}).', 0)
 
 
 INSERT [dbo].[StateEmailTemplate]

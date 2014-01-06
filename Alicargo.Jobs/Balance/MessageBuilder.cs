@@ -102,7 +102,7 @@ namespace Alicargo.Jobs.Balance
 			return new Dictionary<string, string>
 			{
 				{ "ClientBalance", balance.ToString("N2") },
-				{ "AbsMoney", paymentEventData.Money.ToString("N2") },
+				{ "Money", paymentEventData.Money.ToString("N2") },
 				{ "Comment", paymentEventData.Comment },
 				{ "ClientNic", clientData.Nic },
 				{ "LegalEntity", clientData.LegalEntity },
