@@ -10,7 +10,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		[Required]
 		[DataType(DataType.Currency)]
 		[DisplayNameLocalized(typeof(Entities), "Money")]
-		public decimal Money { get; set; }
+		public decimal? Money { get; set; }
 
 		[DataType(DataType.MultilineText)]
 		[DisplayNameLocalized(typeof(Entities), "Comment")]

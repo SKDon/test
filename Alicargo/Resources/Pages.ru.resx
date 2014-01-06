@@ -364,6 +364,9 @@
     <value>Списание денежных средств</value>
   </data>
   <data name="BalanceIncrease" xml:space="preserve">
-    <value>Поступление денежных средств</value>
+    <value>Оплата клиента за доставку</value>
+  </data>
+  <data name="Debiting" xml:space="preserve">
+    <value>Списание</value>
   </data>
 </root>

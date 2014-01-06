@@ -366,4 +366,7 @@
   <data name="BalanceIncrease" xml:space="preserve">
     <value>Cash inflow</value>
   </data>
+  <data name="Debiting" xml:space="preserve">
+    <value>Debiting</value>
+  </data>
 </root>

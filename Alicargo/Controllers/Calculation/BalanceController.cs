@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
@@ -63,6 +64,8 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Decrease(long clientId, PaymentModel model)
 		{
+			Debug.Assert(model.Money != null);
+
 			if (!ModelState.IsValid)
 			{
 				BindBag(clientId);
@@ -71,8 +74,8 @@ namespace Alicargo.Controllers.Calculation
 			}
 
 			try
-			{
-				_balance.Decrease(clientId, model.Money, model.Comment, model.Timestamp);
+			{				
+				_balance.Decrease(clientId, model.Money.Value, model.Comment, model.Timestamp);
 			}
 			catch (ArgumentException e)
 			{
@@ -102,6 +105,8 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Increase(long clientId, PaymentModel model)
 		{
+			Debug.Assert(model.Money != null);
+
 			if (!ModelState.IsValid)
 			{
 				BindBag(clientId);
@@ -111,7 +116,7 @@ namespace Alicargo.Controllers.Calculation
 
 			try
 			{
-				_balance.Increase(clientId, model.Money, model.Comment, model.Timestamp);
+				_balance.Increase(clientId, model.Money.Value, model.Comment, model.Timestamp);
 			}
 			catch (ArgumentException e)
 			{

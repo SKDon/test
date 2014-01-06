@@ -16,7 +16,7 @@ namespace Alicargo.Services.Users.Client
 
 		public void Increase(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
-			if (money < 0)
+			if (money <= 0)
 			{
 				throw new ArgumentException(@"Money value must be positive", "money");
 			}
@@ -32,7 +32,7 @@ namespace Alicargo.Services.Users.Client
 
 		public void Decrease(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
-			if (money < 0)
+			if (money <= 0)
 			{
 				throw new ArgumentException(@"Money value must be positive", "money");
 			}
