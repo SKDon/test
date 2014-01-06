@@ -16,7 +16,8 @@ AS BEGIN
 		[FactureCost],
 		[TransitCost],
 		[PickupCost],
-		[FactoryName]
+		[FactoryName],
+		[CreationTimestamp]
 	FROM [dbo].[Calculation]
 	WHERE [ApplicationHistoryId] = @ApplicationId
 

@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Calculation]
 (
 	[Id]					BIGINT			NOT NULL IDENTITY(1, 1),
+	[CreationTimestamp]		DATETIMEOFFSET CONSTRAINT [DF_Calculation_CreationTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 
 	[ClientId]				BIGINT			NOT NULL,
 	[ApplicationHistoryId]	BIGINT			NOT NULL,

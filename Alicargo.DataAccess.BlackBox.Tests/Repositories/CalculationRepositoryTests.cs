@@ -1,4 +1,5 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using System;
+using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
@@ -56,7 +57,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var actual = AddNew(data, TestConstants.TestApplicationId);
 
-			actual.ShouldBeEquivalentTo(data);
+			actual.ShouldBeEquivalentTo(data, options => options.Excluding(x => x.CreationTimestamp));
+			actual.CreationTimestamp.Should().NotBe(default(DateTimeOffset));
 		}
 
 		[TestMethod]

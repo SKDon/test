@@ -1,7 +1,10 @@
-﻿namespace Alicargo.Contracts.Contracts
+﻿using System;
+
+namespace Alicargo.Contracts.Contracts
 {
 	public sealed class CalculationData
 	{
+		public DateTimeOffset CreationTimestamp { get; set; }
 		public long ClientId { get; set; }
 		public string AirWaybillDisplay { get; set; }
 		public string ApplicationDisplay { get; set; }
