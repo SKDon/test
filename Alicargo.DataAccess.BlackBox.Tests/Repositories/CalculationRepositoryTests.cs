@@ -56,7 +56,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var actual = AddNew(data, TestConstants.TestApplicationId);
 
-			actual.ShouldBeEquivalentTo(data, options => options.Excluding(x => x.CreationTimestamp));
+			actual.ShouldBeEquivalentTo(data);
 			actual.CreationTimestamp.Should().NotBe(default(DateTimeOffset));
 		}
 

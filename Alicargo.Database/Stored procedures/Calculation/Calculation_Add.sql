@@ -11,7 +11,8 @@
     @FactureCost MONEY,
     @TransitCost MONEY,
     @PickupCost MONEY,
-    @FactoryName NVARCHAR(320)
+    @FactoryName NVARCHAR(320),
+	@CreationTimestamp DATETIMEOFFSET
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -29,7 +30,8 @@ AS BEGIN
            ,[FactureCost]
            ,[TransitCost]
            ,[PickupCost]
-           ,[FactoryName])
+           ,[FactoryName]
+		   ,[CreationTimestamp])
      VALUES
            (@ClientId
            ,@ApplicationHistoryId
@@ -43,6 +45,7 @@ AS BEGIN
            ,@FactureCost
            ,@TransitCost
            ,@PickupCost
-           ,@FactoryName)
+           ,@FactoryName
+		   ,@CreationTimestamp)
 END
 GO

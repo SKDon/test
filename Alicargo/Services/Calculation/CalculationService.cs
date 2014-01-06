@@ -63,7 +63,8 @@ namespace Alicargo.Services.Calculation
 				TariffPerKg = tariffPerKg,
 				Weight = weight,
 				TransitCost = transitCost,
-				PickupCost = pickupCost
+				PickupCost = pickupCost,
+				CreationTimestamp = DateTimeOffset.UtcNow
 			};
 
 			_calculations.Add(calculation, applicationId);

@@ -28,7 +28,8 @@ namespace Alicargo.DataAccess.Repositories
 				data.FactureCost,
 				data.TransitCost,
 				data.PickupCost,
-				data.FactoryName
+				data.FactoryName,
+				data.CreationTimestamp
 			});
 		}
 
