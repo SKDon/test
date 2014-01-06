@@ -37,11 +37,6 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Query<CalculationData>("[dbo].[Calculation_GetByApplication]", new { applicationId });
 		}
 
-		public decimal GetCalculatedSum()
-		{
-			return _executor.Query<decimal>("[dbo].[Calculation_GetCalculatedSum]");
-		}
-
 		public void RemoveByApplication(long applicationId)
 		{
 			_executor.Execute("[dbo].[Calculation_RemoveByApplication]", new { applicationId });

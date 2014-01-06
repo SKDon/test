@@ -13,10 +13,6 @@
 		@Entities.Balance:
 		<span id="total-balance">
 			@ViewBag.TotalBalance.ToString("N2")
-		</span>€,
-		@Pages.Calculation:
-		<span id="total-calculation">
-			@ViewBag.TotalCalculation.ToString("N2")
 		</span>€
 	</span>
 	@Html.ActionLink(Pages.Excel, MVC.Calculation.Excel(), new { @class = "btn btn-info" })

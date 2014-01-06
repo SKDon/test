@@ -7,6 +7,5 @@ namespace Alicargo.Contracts.Repositories
 		void Add(CalculationData data, long applicationId);
 		void RemoveByApplication(long applicationId);
 		CalculationData GetByApplication(long applicationId);
-		decimal GetCalculatedSum();
 	}
 }

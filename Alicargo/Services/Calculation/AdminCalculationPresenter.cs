@@ -20,7 +20,6 @@ namespace Alicargo.Services.Calculation
 		private readonly IAwbRepository _awbs;
 		private readonly IClientRepository _clients;
 		private readonly ISenderRepository _senders;
-		private readonly ICalculationRepository _calculations;
 		private readonly IClientBalanceRepository _balances;
 
 		public AdminCalculationPresenter(
@@ -28,14 +27,12 @@ namespace Alicargo.Services.Calculation
 			IAwbRepository awbs,
 			ISenderRepository senders,
 			IClientRepository clients,
-			ICalculationRepository calculations,
 			IClientBalanceRepository balances)
 		{
 			_applications = applications;
 			_awbs = awbs;
 			_senders = senders;
 			_clients = clients;
-			_calculations = calculations;
 			_balances = balances;
 		}
 
@@ -72,8 +69,7 @@ namespace Alicargo.Services.Calculation
 				Groups = groups.ToArray(),
 				Total = _awbs.Count(),
 				Info = info,
-				TotalBalance = _balances.SumBalance().ToString("N2"),
-				TotalCalculation = _calculations.GetCalculatedSum().ToString("N2")
+				TotalBalance = _balances.SumBalance().ToString("N2")
 			};
 		}
 

@@ -30,7 +30,7 @@ namespace Alicargo.Services.Calculation
 			var money = GetMoney(calculation);
 
 			_balance.Decrease(calculation.ClientId, money,
-				GetComment(Contracts.Resources.EventType.CalculationCanceled, calculation), DateTimeOffset.UtcNow);
+				GetComment(Contracts.Resources.EventType.Calculate, calculation), DateTimeOffset.UtcNow);
 
 			return calculation;
 		}

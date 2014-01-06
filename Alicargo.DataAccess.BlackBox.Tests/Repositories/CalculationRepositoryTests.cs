@@ -72,32 +72,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_calculation.GetByApplication(TestConstants.TestApplicationId).Should().BeNull();
 		}
 
-		[TestMethod]
-		[TestCategory("black-box")]
-		public void Test_GetCalculatedSum()
-		{
-			var firstSum = _calculation.GetCalculatedSum();
-			var data = _fixture.Create<CalculationData>();
-			data.ClientId = TestConstants.TestClientId1;
-			var added = (decimal)data.Weight * data.TariffPerKg
-			            + data.FactureCost
-			            + data.InsuranceCost
-			            + data.PickupCost
-			            + data.ScotchCost
-			            + data.TransitCost;
-			var applicationId = _fixture.Create<long>();
-
-			_calculation.Add(data, applicationId);
-
-			var secondSum = _calculation.GetCalculatedSum();
-
-			secondSum.ShouldBeEquivalentTo(firstSum + added);
-
-			_calculation.RemoveByApplication(applicationId);
-
-			_calculation.GetCalculatedSum().ShouldBeEquivalentTo(firstSum);
-		}
-
 		private CalculationData GenerateData()
 		{
 			return _fixture.Build<CalculationData>().With(x => x.ClientId, TestConstants.TestClientId1).Create();

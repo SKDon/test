@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Enums;
 using Alicargo.MvcHelpers.Filters;
@@ -16,7 +15,6 @@ namespace Alicargo.Controllers.Calculation
 		private readonly ICalculationService _calculation;
 		private readonly IIdentityService _identity;
 		private readonly IAdminCalculationPresenter _presenter;
-		private readonly ICalculationRepository _calculations;
 		private readonly IClientBalanceRepository _balances;
 
 		public CalculationController(
@@ -25,7 +23,6 @@ namespace Alicargo.Controllers.Calculation
 			ICalculationService calculation,
 			IIdentityService identity,
 			IApplicationManager applicationManager,
-			ICalculationRepository calculations,
 			IClientBalanceRepository balances)
 		{
 			_awbUpdateManager = awbUpdateManager;
@@ -33,7 +30,6 @@ namespace Alicargo.Controllers.Calculation
 			_calculation = calculation;
 			_identity = identity;
 			_applicationManager = applicationManager;
-			_calculations = calculations;
 			_balances = balances;
 		}
 
@@ -41,7 +37,6 @@ namespace Alicargo.Controllers.Calculation
 		public virtual ActionResult Index()
 		{
 			ViewBag.TotalBalance = _balances.SumBalance();
-			ViewBag.TotalCalculation = _calculations.GetCalculatedSum();
 
 			return View();
 		}
