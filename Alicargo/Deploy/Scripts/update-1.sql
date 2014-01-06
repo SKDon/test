@@ -7,7 +7,7 @@ GO
 PRINT N'DROP OLD INDEXES AND CONSTRAINTS'
 GO
 
-DROP INDEX [IX_ApplicationEvent_StateId] ON [dbo].[Event];
+DROP INDEX [IX_ApplicationEvent_StateId] ON [dbo].[ApplicationEvent];
 GO
 
 DROP INDEX [IX_AvailableState_RoleId] ON [dbo].[AvailableState];
