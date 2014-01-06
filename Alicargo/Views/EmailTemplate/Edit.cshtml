@@ -1,12 +1,11 @@
-﻿@using Alicargo.Core.Localization
-@using Alicargo.MvcHelpers.BundleHelpres
+﻿@using Alicargo.MvcHelpers.BundleHelpres
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.EmailTemplate.EventTemplateModel
 <p>
 	@Html.ActionLink(Pages.Help, MVC.EmailTemplate.Help(), new { @class = "pull-right", target = "balnk" })
 	<b>
-		@Pages.Event - @Model.EventType.ToLocalString()
+		@Pages.Event - @Alicargo.Contracts.Resources.EventType.ResourceManager.GetString(Model.EventType.ToString())
 	</b>
 </p>
 @Html.EditPage(Url.Action(MVC.EmailTemplate.Edit()), Pages.Save)

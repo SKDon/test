@@ -105,7 +105,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private static FileHolder[] GetFiles(EventType type, FileHolder[] files,
-			RecipientData recipient, Dictionary<string, FileHolder> excels)
+			RecipientData recipient, IReadOnlyDictionary<string, FileHolder> excels)
 		{
 			if (type == EventType.ApplicationSetState && recipient.Role != RoleType.Client)
 			{
