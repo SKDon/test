@@ -10,8 +10,10 @@
 </style>
 <p>
 	@Html.ActionLink(Pages.Excel, MVC.ClientCalculation.Excel(), new { @class = "btn btn-info" })
-	@Entities.Balance: @ViewBag.Balance.ToString("N2")
-	@Html.ActionLink(Pages.History, MVC.ClientCalculation.History((long)ViewBag.ClientId))
+	<span class="pull-right">
+		@Entities.Balance: @ViewBag.Balance.ToString("N2")€
+		@Html.ActionLink(Pages.History, MVC.ClientCalculation.History((long)ViewBag.ClientId))
+	</span>
 </p>
 <div id="calculation-grid" class="grid"></div>
 
