@@ -1,8 +1,8 @@
 ﻿SET IDENTITY_INSERT [dbo].[EmailTemplate] ON 
 INSERT [dbo].[EmailTemplate] ([Id]) VALUES
-(1), (2), (3), (4), (5), (6), (7), (8), (9),
-(10), (11), (12), (13), (14), (15), (16),
-(17), (18), (19), (20), (21), (22), (23), (24)
+(1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
+(11), (12), (13), (14), (15), (16), (17), (18), (19), (20),
+(21), (22), (23), (24), (25), (26), (27)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
@@ -18,34 +18,36 @@ INSERT [dbo].[EventEmailTemplate]
 (6, 8, 1),
 (8, 9, 1),
 (2, 10, 1),
-(13, 24, 1)
+(11, 24, 1), -- Calculate
+(12, 25, 0), -- CalculationCanceled
+(13, 26, 1), -- BalanceIncreased
+(14, 27, 1) -- BalanceDecreased
 
 
-SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] ON 
 INSERT [dbo].[EmailTemplateLocalization]
-([Id], [EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES
-(1, 1, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Создана новая заявка.
+([EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES
+(1, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Создана новая заявка.
 Номер заявки: {DisplayNumber}
 Клиент: {ClientNic}
 Производитель: {FactoryName}
 Марка: {MarkName}
 Дата создания: {CreationTimestamp}', 0),
 
-(2, 1, N'en', N'Alicargo : Order#{DisplayNumber}', N'Created new order.
+(1, N'en', N'Alicargo : Order#{DisplayNumber}', N'Created new order.
 Number order: {DisplayNumber}
 Client: {ClientNic}
 Factory: {FactoryName}
 Brands: {MarkName}
 Created: {CreationTimestamp}', 0),
 
-(3, 1, N'it', N'Alicargo : Order#{DisplayNumber}', N'Created new order.
+(1, N'it', N'Alicargo : Order#{DisplayNumber}', N'Created new order.
 Number order: {DisplayNumber}
 Client: {ClientNic}
 Factory: {FactoryName}
 Brands: {MarkName}
 Created: {CreationTimestamp}', 0),
 
-(4, 2, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
+(2, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
 Изменение статуса заявки {DisplayNumber} - прикреплен документ Счет-фактура.
 Просьба подписать и выслать почтой по адресу:
 Россия - ООО "Трэйд Инвест"
@@ -54,7 +56,7 @@ Created: {CreationTimestamp}', 0),
 С уважением,
 Alicargo  srl', 0),
 
-(5, 2, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+(2, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. Commercial invoice is attached.
 Please sign and send by mail to:
 Russia - LLC "Trade Invest"
@@ -63,7 +65,7 @@ Russia - LLC "Trade Invest"
 Sincerely,
 Alicargo  srl', 0),
  
-(6, 2, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+(2, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. Commercial invoice is attached.
 Please sign and send by mail to:
 Russia - LLC "Trade Invest"
@@ -72,31 +74,31 @@ Russia - LLC "Trade Invest"
 Sincerely,
 Alicargo  srl', 0),
 
-(7, 3, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен счет за доставку.', 0),
-(8, 3, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0),
-(9, 3, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0),
+(3, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен счет за доставку.', 0),
+(3, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0),
+(3, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added due for delivery.', 0),
 
-(10, 4, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен инвойс {UploadedFile}.', 0),
-(11, 4, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {UploadedFile}.', 0),
-(12, 4, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {UploadedFile}.', 0),
+(4, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен инвойс {UploadedFile}.', 0),
+(4, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {UploadedFile}.', 0),
+(4, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added invoice {UploadedFile}.', 0),
 
-(13, 5, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен пакинг {UploadedFile}.', 0),
-(14, 5, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing {UploadedFile}.', 0),
-(15, 5, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing {UploadedFile}.', 0),
+(5, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки:  {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен пакинг {UploadedFile}.', 0),
+(5, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing {UploadedFile}.', 0),
+(5, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added packing {UploadedFile}.', 0),
 
-(16, 6, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0),
-(17, 6, N'en', N'Alicargo : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0),
-(18, 6, N'it', N'Alicargo : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0),
+(6, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0),
+(6, N'en', N'Alicargo : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0),
+(6, N'it', N'Alicargo : Order#{DisplayNumber}', N'Предположительная дата получения — {DateOfCargoReceipt}.', 0),
 
-(19, 7, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Задан транзитный референс {TransitReference}.', 0),
-(20, 7, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0),
-(21, 7, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0),
+(7, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Задан транзитный референс {TransitReference}.', 0),
+(7, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0),
+(7, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}. Specified transit reference {TransitReference}.', 0),
 
-(22, 8, N'ru', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен swift {UploadedFile}.', 0),
-(23, 8, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift {UploadedFile}.', 0),
-(24, 8, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift {UploadedFile}.', 0),
+(8, N'ru', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, добавлен swift {UploadedFile}.', 0),
+(8, N'en', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift {UploadedFile}.', 0),
+(8, N'it', N'Alicargo : Order#{DisplayNumber}', N'Changing the status of the application: {DisplayNumber}, {FactoryName}, {MarkName}, {Invoice}, added a swift {UploadedFile}.', 0),
 
-(25, 9, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
+(9, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Добрый день, {LegalEntity}
 Изменение статуса заявки {DisplayNumber} - прикреплен документ ТОРГ-12.
 Просьба подписать и выслать почтой по адресу:
 Россия - ООО "Трэйд Инвест"
@@ -105,7 +107,7 @@ Alicargo  srl', 0),
 С уважением,
 Alicargo  srl', 0),
 
-(26, 9, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+(9, N'en', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. TORG-12 is attached.
 Please sign and send by mail to:
 Russia - LLC "Trade Invest"
@@ -114,7 +116,7 @@ Russia - LLC "Trade Invest"
 Sincerely,
 Alicargo  srl', 0),
 
-(27, 9, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
+(9, N'it', N'Alicargo : Order#{DisplayNumber}', N'Hello, {LegalEntity}
 Changing the status of the application {DisplayNumber}. TORG-12 is attached.
 Please sign and send by mail to:
 Russia - LLC "Trade Invest"
@@ -123,7 +125,7 @@ Russia - LLC "Trade Invest"
 Sincerely,
 Alicargo  srl', 0),
 
-(28, 10, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {StateName}
+(10, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCargoReceipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
@@ -162,7 +164,7 @@ Alicargo  srl', 0),
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}', 0),
 
-(29, 10, N'en', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
+(10, N'en', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCargoReceipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
@@ -201,7 +203,7 @@ Alicargo  srl', 0),
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}', 0),
 
-(30, 10, N'it', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
+(10, N'it', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCargoReceipt [Предположительная дата получения: {0}]}
 {TransitCarrierName [Перевозчик: {0}]}
@@ -239,25 +241,32 @@ Alicargo  srl', 0),
 {AirWaybillDateOfDeparture [Дата вылета: {0}]}
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}', 0),
- 
-(31, 11, N'ru', NULL, NULL, 0),
-(32, 12, N'ru', NULL, NULL, 0),
-(33, 13, N'ru', NULL, NULL, 0),
-(34, 14, N'ru', NULL, NULL, 0),
-(35, 15, N'ru', NULL, NULL, 0),
-(36, 16, N'ru', NULL, NULL, 0),
-(37, 17, N'ru', NULL, NULL, 0),
-(38, 18, N'ru', NULL, NULL, 0),
-(39, 19, N'ru', NULL, NULL, 0),
-(40, 20, N'ru', NULL, NULL, 0),
-(41, 21, N'ru', NULL, NULL, 0),
-(42, 22, N'ru', NULL, NULL, 0),
-(43, 23, N'ru', NULL, NULL, 0),
-(44, 24, N'ru', N'{AbsMoney}', N'{AbsMoney}
+ -- for states
+(11, N'ru', NULL, NULL, 0),
+(12, N'ru', NULL, NULL, 0),
+(13, N'ru', NULL, NULL, 0),
+(14, N'ru', NULL, NULL, 0),
+(15, N'ru', NULL, NULL, 0),
+(16, N'ru', NULL, NULL, 0),
+(17, N'ru', NULL, NULL, 0),
+(18, N'ru', NULL, NULL, 0),
+(19, N'ru', NULL, NULL, 0),
+(20, N'ru', NULL, NULL, 0),
+(21, N'ru', NULL, NULL, 0),
+(22, N'ru', NULL, NULL, 0),
+(23, N'ru', NULL, NULL, 0),
+
+(24, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}',
+N'Расчет стоимости {AirWaybillDisplay}, {ApplicationDisplay}.
+Сальдо на ({CalculationTimestamp}) - {ClientBalance}€.', 0),
+(25, N'ru', NULL, NULL, 0),
+(26, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}',
+N'{AbsMoney}
 {Comment}
 {ClientNic}
 {LegalEntity}
-{Timestamp}', 0)
+{Timestamp}', 0),
+(27, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}', NULL, 0)
 SET IDENTITY_INSERT [dbo].[EmailTemplateLocalization] OFF
 
 
@@ -280,16 +289,22 @@ INSERT [dbo].[StateEmailTemplate]
 
 INSERT [dbo].[EventEmailRecipient]
 ([RoleId], [EventTypeId]) VALUES
+-- Admin 1
 (1, 1),
 (1, 2),
 (1, 3),
 (1, 8),
+(1, 11),
 (1, 13),
+(1, 14),
+-- Sender 2
 (2, 1),
 (2, 4),
 (2, 5),
 (2, 6),
+-- Forwarder 4
 (4, 2),
+-- Client 5
 (5, 1),
 (5, 2),
 (5, 3),
@@ -300,4 +315,6 @@ INSERT [dbo].[EventEmailRecipient]
 (5, 8),
 (5, 9),
 (5, 10),
-(5, 13)
+(5, 11),
+(5, 13),
+(5, 14)
