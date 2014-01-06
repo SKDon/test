@@ -20,14 +20,11 @@ namespace Alicargo.Services.Users.Client
 
 		public void Increase(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
-			using (var scope = new TransactionScope())
+			using(var scope = new TransactionScope())
 			{
 				_instance.Increase(clientId, money, comment, timestamp);
 
-				if (money != 0)
-				{
-					AddEvent(clientId, money, comment, timestamp);
-				}
+				AddEvent(clientId, money, comment, timestamp, EventType.BalanceIncreased);
 
 				scope.Complete();
 			}
@@ -35,27 +32,22 @@ namespace Alicargo.Services.Users.Client
 
 		public void Decrease(long clientId, decimal money, string comment, DateTimeOffset timestamp)
 		{
-			using (var scope = new TransactionScope())
+			using(var scope = new TransactionScope())
 			{
 				_instance.Decrease(clientId, money, comment, timestamp);
 
-				if (money != 0)
-				{
-					AddEvent(clientId, money, comment, timestamp);
-				}
+				AddEvent(clientId, money, comment, timestamp, EventType.BalanceDecreased);
 
 				scope.Complete();
 			}
 		}
 
-		private void AddEvent(long clientId, decimal money, string comment, DateTimeOffset timestamp)
+		private void AddEvent(long clientId, decimal money, string comment, DateTimeOffset timestamp, EventType eventType)
 		{
-			var eventType = money > 0 ? EventType.BalanceIncreased : EventType.BalanceDecreased;
-
 			_events.Add(clientId, eventType, EventState.Emailing,
 				new PaymentEventData
 				{
-					AbsMoney = Math.Abs(money),
+					Money = money,
 					Comment = comment,
 					Timestamp = timestamp
 				});
