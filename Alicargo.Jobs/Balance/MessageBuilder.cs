@@ -15,6 +15,7 @@ namespace Alicargo.Jobs.Balance
 {
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
+		private readonly IClientBalanceRepository _balance;
 		private readonly IClientCalculationPresenter _calculationPresenter;
 		private readonly IClientRepository _clients;
 		private readonly string _defaultFrom;
@@ -27,6 +28,7 @@ namespace Alicargo.Jobs.Balance
 		public MessageBuilder(
 			string defaultFrom,
 			IRecipientsFacade recipients,
+			IClientBalanceRepository balance,
 			IClientRepository clients,
 			IClientCalculationPresenter calculationPresenter,
 			IExcelClientCalculation excel,
@@ -36,6 +38,7 @@ namespace Alicargo.Jobs.Balance
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;
+			_balance = balance;
 			_clients = clients;
 			_calculationPresenter = calculationPresenter;
 			_excel = excel;
@@ -90,13 +93,15 @@ namespace Alicargo.Jobs.Balance
 			return localizations;
 		}
 
-		private static IDictionary<string, string> GetLocalizedData(string language, PaymentEventData paymentEventData,
+		private IDictionary<string, string> GetLocalizedData(string language, PaymentEventData paymentEventData,
 			ClientData clientData)
 		{
 			var culture = CultureInfo.GetCultureInfo(language);
+			var balance = _balance.GetBalance(clientData.ClientId);
 
 			return new Dictionary<string, string>
 			{
+				{ "ClientBalance", balance.ToString("N2") },
 				{ "AbsMoney", paymentEventData.AbsMoney.ToString("N2") },
 				{ "Comment", paymentEventData.Comment },
 				{ "ClientNic", clientData.Nic },

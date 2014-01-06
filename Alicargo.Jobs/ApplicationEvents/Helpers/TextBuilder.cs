@@ -8,6 +8,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
@@ -17,6 +18,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
 	internal sealed class TextBuilder : ITextBuilder
 	{
+		private readonly IClientBalanceRepository _balance;
 		private readonly Jobs.Helpers.Abstract.ITextBuilder _bulder;
 		private readonly IApplicationFileRepository _files;
 		private readonly ISerializer _serializer;
@@ -26,11 +28,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			ISerializer serializer,
 			IStateRepository states,
 			IApplicationFileRepository files,
+			IClientBalanceRepository balance,
 			Jobs.Helpers.Abstract.ITextBuilder bulder)
 		{
 			_serializer = serializer;
 			_states = states;
 			_files = files;
+			_balance = balance;
 			_bulder = bulder;
 		}
 
@@ -87,7 +91,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private void OnCalculation(byte[] bytes, CultureInfo culture, IDictionary<string, string> localizedData)
 		{
 			var calculation = _serializer.Deserialize<CalculationData>(bytes);
+			var balance = _balance.GetBalance(calculation.ClientId);
 
+			Add(localizedData, "ClientBalance", balance.ToString("N2"));
+			Add(localizedData, "CalculationTimestamp", LocalizationHelper.GetDate(calculation.CreationTimestamp, culture));
 			Add(localizedData, "AirWaybillDisplay", calculation.AirWaybillDisplay);
 			Add(localizedData, "ApplicationDisplay", calculation.ApplicationDisplay);
 			Add(localizedData, "MarkName", calculation.MarkName);

@@ -68,7 +68,7 @@ namespace Alicargo.App_Start.Jobs
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
-			using(var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(connectionString))
 			{
 				var unitOfWork = new UnitOfWork(connection);
 				var executor = new SqlProcedureExecutor(connectionString);
@@ -91,6 +91,7 @@ namespace Alicargo.App_Start.Jobs
 				var messageBuilder = new Alicargo.Jobs.Balance.MessageBuilder(
 					EmailsHelper.DefaultFrom,
 					recipientsFacade,
+					new ClientBalanceRepository(executor),
 					clientRepository,
 					clientCalculationPresenter,
 					excelClientCalculation,
@@ -119,7 +120,7 @@ namespace Alicargo.App_Start.Jobs
 		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,
 			int partitionId)
 		{
-			using(var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(connectionString))
 			{
 				var serializer = new Serializer();
 				var messageBuilder = GetMessageFactory(connection, connectionString, filesConnectionString, serializer);
@@ -183,7 +184,8 @@ namespace Alicargo.App_Start.Jobs
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(filesExecutor);
 			var filesFasade = new FilesFacade(serializer, awbs, files);
-			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(serializer, states, files, new TextBuilder());
+			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(
+				serializer, states, files, new ClientBalanceRepository(mainExecutor), new TextBuilder());
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new TemplateRepository(mainExecutor);
 			var clientRepository = new ClientRepository(unitOfWork);
