@@ -599,6 +599,7 @@
     <Content Include="Deploy\Scripts\update-1.sql" />
     <Content Include="Deploy\Scripts\update-4.sql" />
     <Content Include="Deploy\Scripts\update-5.sql" />
+    <Content Include="Deploy\Scripts\update-6.sql" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />
@@ -631,6 +632,7 @@
     <Content Include="Deploy\server-release-dev.ps1" />
     <None Include="Deploy\Scripts\prepare-iis.ps1" />
     <Content Include="Deploy\SqlSchemaCompare.scmp" />
+    <Content Include="Deploy\Scripts\run-updates.ps1" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.0.3.intellisense.js" />
