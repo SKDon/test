@@ -124,13 +124,14 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				filesToSend.Add(excel);
 			}
 
-			return filesToSend.ToArray();
+			return filesToSend.Count != 0 ? filesToSend.ToArray() : null;
 		}
 
 		private Dictionary<string, FileHolder> GetExcels(long clientId, IEnumerable<string> languages)
 		{
 			var list = _calculationPresenter.List(clientId, int.MaxValue, 0);
 			var files = languages
+				.Distinct()
 				.ToDictionary(
 					x => x,
 					language =>

@@ -123,7 +123,7 @@ namespace Alicargo.App_Start.Jobs
 			using (var connection = new SqlConnection(connectionString))
 			{
 				var serializer = new Serializer();
-				var messageBuilder = GetMessageFactory(connection, connectionString, filesConnectionString, serializer);
+				var messageBuilder = GetMessageBuilder(connection, connectionString, filesConnectionString, serializer);
 				var executor = new SqlProcedureExecutor(connectionString);
 				var events = new EventRepository(executor);
 				var emails = new EmailMessageRepository(executor);
@@ -172,7 +172,7 @@ namespace Alicargo.App_Start.Jobs
 			job.Work();
 		}
 
-		internal static IMessageBuilder GetMessageFactory(IDbConnection connection, string connectionString,
+		internal static IMessageBuilder GetMessageBuilder(IDbConnection connection, string connectionString,
 			string filesConnectionString, ISerializer serializer)
 		{
 			var unitOfWork = new UnitOfWork(connection);
