@@ -1,4 +1,4 @@
-﻿using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+﻿using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
@@ -18,10 +18,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_repository = new ClientBalanceRepository(new SqlProcedureExecutor(_context.Connection.ConnectionString));
+			_repository = new ClientBalanceRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
 		[TestCleanup]

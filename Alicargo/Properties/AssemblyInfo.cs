@@ -27,3 +27,4 @@ using log4net.Config;
 [assembly: InternalsVisibleTo("Alicargo.Tests")]
 [assembly: InternalsVisibleTo("Alicargo.BlackBox.Tests")]
 [assembly: InternalsVisibleTo("Alicargo.TestHelpers")]
+[assembly: InternalsVisibleTo("Alicargo.Jobs.BlackBox.Tests")]

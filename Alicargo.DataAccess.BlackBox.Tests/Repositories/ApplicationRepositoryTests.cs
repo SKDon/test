@@ -3,7 +3,7 @@ using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
-using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.Application;
@@ -26,11 +26,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
-			_stateRepository = new StateRepository(new SqlProcedureExecutor(_context.Connection.ConnectionString));
+			_stateRepository = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
 		}
 

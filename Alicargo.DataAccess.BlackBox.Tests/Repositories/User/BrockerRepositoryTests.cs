@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
 using FluentAssertions;
@@ -16,7 +16,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 
 			_repository = new BrokerRepository(_context.UnitOfWork);
 		}

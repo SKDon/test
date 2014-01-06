@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;
@@ -21,9 +21,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 
-			var executor = new SqlProcedureExecutor(_context.Connection.ConnectionString);
+			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 			_settings = new StateSettingsRepository(executor);
 			_states = new StateRepository(executor);
 		}

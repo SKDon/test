@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.State;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
+using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -24,10 +24,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_states = new StateRepository(new SqlProcedureExecutor(_context.Connection.ConnectionString));
+			_states = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
 		[TestCleanup]

@@ -172,7 +172,7 @@ namespace Alicargo.App_Start.Jobs
 			job.Work();
 		}
 
-		private static IMessageBuilder GetMessageFactory(IDbConnection connection, string connectionString,
+		internal static IMessageBuilder GetMessageFactory(IDbConnection connection, string connectionString,
 			string filesConnectionString, ISerializer serializer)
 		{
 			var unitOfWork = new UnitOfWork(connection);

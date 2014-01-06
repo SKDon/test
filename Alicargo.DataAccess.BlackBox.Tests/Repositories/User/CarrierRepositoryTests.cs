@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Alicargo.Contracts.Contracts.User;
-using Alicargo.DataAccess.BlackBox.Tests.Helpers;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Repositories.User;
+using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -18,7 +19,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 			_repository = new CarrierRepository(_context.UnitOfWork);
 		}

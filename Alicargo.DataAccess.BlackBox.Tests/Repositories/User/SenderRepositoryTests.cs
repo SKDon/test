@@ -1,7 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Services;
-using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.User;
@@ -22,7 +21,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
 			_repository = new SenderRepository(_context.UnitOfWork, new PasswordConverter(), new SqlProcedureExecutor(Settings.Default.MainConnectionString));

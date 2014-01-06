@@ -3,10 +3,10 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Services;
-using Alicargo.DataAccess.BlackBox.Tests.Helpers;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
+using Alicargo.TestHelpers;
 using Dapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,7 +25,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext();
+			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_serializer = new Serializer();
 			_fixture = new Fixture();
 
