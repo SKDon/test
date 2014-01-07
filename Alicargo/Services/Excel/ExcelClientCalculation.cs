@@ -15,7 +15,7 @@ namespace Alicargo.Services.Excel
 	{
 		public MemoryStream Get(ClientCalculationGroup[] groups, string language)
 		{
-			CultureContext.Current.Set(() => language);
+			CultureProvider.Current.Set(() => language);
 
 			var stream = new MemoryStream();
 

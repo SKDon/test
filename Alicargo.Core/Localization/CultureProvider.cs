@@ -6,16 +6,16 @@ using System.Threading;
 namespace Alicargo.Core.Localization
 {
 	// todo: refactor
-	public sealed class CultureContext : ICultureContext
+	public sealed class CultureProvider : ICultureProvider
 	{
-		private CultureContext() { }
+		private CultureProvider() { }
 
-		static CultureContext()
+		static CultureProvider()
 		{
-			Current = new CultureContext();
+			Current = new CultureProvider();
 		}
 
-		public static ICultureContext Current { get; set; }
+		public static ICultureProvider Current { get; set; }
 
 		public void Set(Func<string> language)
 		{

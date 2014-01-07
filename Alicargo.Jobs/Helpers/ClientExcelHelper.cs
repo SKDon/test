@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Helpers;
@@ -10,7 +13,7 @@ using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Helpers
 {
-	public sealed class ClientExcelHelper : IClientExcelHelper
+	internal sealed class ClientExcelHelper : IClientExcelHelper
 	{
 		private readonly IClientRepository _clients;
 		private readonly IClientCalculationPresenter _presenter;
@@ -30,8 +33,7 @@ namespace Alicargo.Jobs.Helpers
 		{
 			var clientData = _clients.Get(clientId);
 			var list = _presenter.List(clientId, int.MaxValue, 0);
-			var date = LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.GetCultureInfo(clientData.Language));
-			var name = "calculation_" + date + "_" + clientData.Nic + ".xlsx";
+			var name = GetName(clientData);
 
 			var files = languages
 				.Distinct()
@@ -50,6 +52,16 @@ namespace Alicargo.Jobs.Helpers
 					});
 
 			return files;
+		}
+
+		internal static string GetName(ClientData clientData)
+		{
+			var date = LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.GetCultureInfo(clientData.Language));
+			var name = "calculation_" + date + "_" + clientData.Nic + ".xlsx";
+			name = Regex.Replace(
+				name, "[" + Regex.Escape(new string(Path.GetInvalidFileNameChars())) + "]", "_");
+
+			return name;
 		}
 	}
 }

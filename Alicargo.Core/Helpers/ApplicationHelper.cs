@@ -23,7 +23,7 @@ namespace Alicargo.Core.Helpers
 		{
 			var currency = ((CurrencyType)currencyId);
 
-			var culture = CultureContext.Current.GetLanguage();
+			var culture = CultureProvider.Current.GetLanguage();
 
 			return LocalizationHelper.GetValueString(value, currency, CultureInfo.GetCultureInfo(culture));
 		}
