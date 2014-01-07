@@ -37,7 +37,7 @@ namespace Alicargo.App_Start.Jobs
 
 		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
 		{
-			for (var i = 0; i < PartitionCount; i++)
+			for(var i = 0; i < PartitionCount; i++)
 			{
 				var partitionId = i;
 				var mainConnectionString = connectionString;
@@ -68,7 +68,7 @@ namespace Alicargo.App_Start.Jobs
 
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using(var connection = new SqlConnection(connectionString))
 			{
 				var unitOfWork = new UnitOfWork(connection);
 				var executor = new SqlProcedureExecutor(connectionString);
@@ -88,15 +88,15 @@ namespace Alicargo.App_Start.Jobs
 				var textBuilder = new TextBuilder();
 				var excelClientCalculation = new ExcelClientCalculation();
 				var templateRepositoryWrapper = new TemplateRepositoryHelper(templateRepository);
+				var clientExcelHelper = new ClientExcelHelper(clientRepository, clientCalculationPresenter, excelClientCalculation);
 				var messageBuilder = new Alicargo.Jobs.Balance.MessageBuilder(
 					EmailsHelper.DefaultFrom,
 					recipientsFacade,
 					new ClientBalanceRepository(executor),
 					clientRepository,
-					clientCalculationPresenter,
-					excelClientCalculation,
 					serializer,
 					textBuilder,
+					clientExcelHelper,
 					templateRepositoryWrapper);
 
 				var emailingProcessor = new DefaultEmailingProcessor(
@@ -120,7 +120,7 @@ namespace Alicargo.App_Start.Jobs
 		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,
 			int partitionId)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using(var connection = new SqlConnection(connectionString))
 			{
 				var serializer = new Serializer();
 				var messageBuilder = GetMessageBuilder(connection, connectionString, filesConnectionString, serializer);
@@ -202,6 +202,7 @@ namespace Alicargo.App_Start.Jobs
 			var excelClientCalculation = new ExcelClientCalculation();
 			var clientCalculationPresenter = new ClientCalculationPresenter(applications, awbs,
 				clientRepository, stateSettings);
+			var clientExcelHelper = new ClientExcelHelper(clientRepository, clientCalculationPresenter, excelClientCalculation);
 
 			return new MessageBuilder(
 				EmailsHelper.DefaultFrom,
@@ -210,8 +211,7 @@ namespace Alicargo.App_Start.Jobs
 				recipientsFacade,
 				applicationEventTemplates,
 				applications,
-				clientCalculationPresenter,
-				excelClientCalculation,
+				clientExcelHelper,
 				serializer);
 		}
 	}

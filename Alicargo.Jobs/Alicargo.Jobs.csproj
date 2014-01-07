@@ -64,6 +64,7 @@
     <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />
     <Compile Include="ApplicationEvents\Helpers\FilesFacade.cs" />
     <Compile Include="ApplicationEvents\Abstract\IFilesFacade.cs" />
+    <Compile Include="Helpers\Abstract\IClientExcelHelper.cs" />
     <Compile Include="Helpers\Abstract\IMessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Abstract\IRecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITemplateRepositoryHelper.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="ApplicationEvents\Helpers\MessageBuilder.cs" />
     <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITextBuilder.cs" />
+    <Compile Include="Helpers\ClientExcelHelper.cs" />
     <Compile Include="Helpers\TextBuilderHelper.cs" />
     <Compile Include="Helpers\DefaultEmailingProcessor.cs" />
     <Compile Include="Helpers\TextBuilder.cs" />

@@ -6,7 +6,6 @@ using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.Jobs.Balance.Entities;
 using Alicargo.Jobs.Helpers.Abstract;
@@ -15,35 +14,32 @@ namespace Alicargo.Jobs.Balance
 {
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
-		private readonly IClientBalanceRepository _balance;
-		private readonly IClientCalculationPresenter _calculationPresenter;
+		private readonly IClientBalanceRepository _balance;		
 		private readonly IClientRepository _clients;
 		private readonly string _defaultFrom;
-		private readonly IExcelClientCalculation _excel;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
 		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder _textBuilder;
+		private readonly IClientExcelHelper _excel;
 
 		public MessageBuilder(
 			string defaultFrom,
 			IRecipientsFacade recipients,
 			IClientBalanceRepository balance,
 			IClientRepository clients,
-			IClientCalculationPresenter calculationPresenter,
-			IExcelClientCalculation excel,
 			ISerializer serializer,
 			ITextBuilder textBuilder,
+			IClientExcelHelper excel,
 			ITemplateRepositoryHelper templates)
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;
 			_balance = balance;
 			_clients = clients;
-			_calculationPresenter = calculationPresenter;
-			_excel = excel;
 			_serializer = serializer;
 			_textBuilder = textBuilder;
+			_excel = excel;
 			_templates = templates;
 		}
 
@@ -61,7 +57,7 @@ namespace Alicargo.Jobs.Balance
 			var recipients = _recipients.GetRecipients(type, clientId);
 			var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
 
-			var files = GetFiles(clientId, languages);
+			var files = _excel.GetExcels(clientId, languages);
 
 			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value, clientId);
 
@@ -108,28 +104,7 @@ namespace Alicargo.Jobs.Balance
 				{ "LegalEntity", clientData.LegalEntity },
 				{ "Timestamp", LocalizationHelper.GetDate(paymentEventData.Timestamp, culture) }
 			};
-		}
-
-		private Dictionary<string, FileHolder> GetFiles(long clientId, IEnumerable<string> languages)
-		{
-			var list = _calculationPresenter.List(clientId, int.MaxValue, 0);
-			var files = languages
-				.ToDictionary(
-					x => x,
-					language =>
-					{
-						using(var stream = _excel.Get(list.Groups, language))
-						{
-							return new FileHolder
-							{
-								Data = stream.ToArray(),
-								Name = "calculation.xlsx"
-							};
-						}
-					});
-
-			return files;
-		}
+		}		
 
 		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder file)
 		{
