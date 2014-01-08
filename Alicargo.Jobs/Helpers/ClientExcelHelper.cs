@@ -56,7 +56,7 @@ namespace Alicargo.Jobs.Helpers
 
 		internal static string GetName(ClientData clientData)
 		{
-			var date = LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.GetCultureInfo(clientData.Language));
+			var date = LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.GetCultureInfo(clientData.Language));
 			var name = "calculation_" + date + "_" + clientData.Nic + ".xlsx";
 			name = Regex.Replace(
 				name, "[" + Regex.Escape(new string(Path.GetInvalidFileNameChars())) + "]", "_");

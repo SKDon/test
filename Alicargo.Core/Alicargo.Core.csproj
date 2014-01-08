@@ -75,6 +75,7 @@
     <Compile Include="Event\IPartitionConverter.cs" />
     <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\PartitionConverter.cs" />
+    <Compile Include="Helpers\DateTimeProvider.cs" />
     <Compile Include="Helpers\SumHolder.cs" />
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />
     <Compile Include="Localization\CultureProvider.cs" />
