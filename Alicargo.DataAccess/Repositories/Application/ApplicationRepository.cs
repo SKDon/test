@@ -7,6 +7,7 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
+using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 
@@ -257,7 +258,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			if (cargoReceivedStateId.HasValue && cargoReceivedDaysToShow.HasValue)
 			{
-				var offset = DateTimeOffset.UtcNow.AddDays(-cargoReceivedDaysToShow.Value);
+				var offset = DateTimeProvider.Now.AddDays(-cargoReceivedDaysToShow.Value);
 
 				applications = applications.Where(x => x.StateId != cargoReceivedStateId.Value || x.StateChangeTimestamp > offset);
 			}

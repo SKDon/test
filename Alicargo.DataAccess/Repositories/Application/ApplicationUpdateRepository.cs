@@ -3,6 +3,7 @@ using System.Linq;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
+using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories.Application
@@ -38,7 +39,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			Update(id, application =>
 			{
 				application.StateId = stateId;
-				application.StateChangeTimestamp = DateTimeOffset.UtcNow;
+				application.StateChangeTimestamp = DateTimeProvider.Now;
 			});
 		}
 

@@ -25,7 +25,7 @@ namespace Alicargo.Core.Helpers
 		{
 			DateTimeOffset IDateTimeProvider.Now
 			{
-				get { return DateTimeOffset.UtcNow; }
+				get { return DateTimeOffset.Now; }
 			}
 		}
 

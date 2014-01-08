@@ -3,6 +3,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
@@ -89,8 +90,8 @@ namespace Alicargo.Services.AirWaybill
 			return new AirWaybillData
 			{
 				StateId = cargoIsFlewStateId,
-				CreationTimestamp = DateTimeOffset.UtcNow,
-				StateChangeTimestamp = DateTimeOffset.UtcNow,
+				CreationTimestamp = DateTimeProvider.Now,
+				StateChangeTimestamp = DateTimeProvider.Now,
 				Id = 0,
 				PackingFileName = model.PackingFileName,
 				InvoiceFileName = null,
@@ -117,8 +118,8 @@ namespace Alicargo.Services.AirWaybill
 			return new AirWaybillData
 			{
 				StateId = cargoIsFlewStateId,
-				CreationTimestamp = DateTimeOffset.UtcNow,
-				StateChangeTimestamp = DateTimeOffset.UtcNow,
+				CreationTimestamp = DateTimeProvider.Now,
+				StateChangeTimestamp = DateTimeProvider.Now,
 				Id = 0,
 				PackingFileName = model.PackingFileName,
 				InvoiceFileName = model.InvoiceFileName,

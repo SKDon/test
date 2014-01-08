@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.ViewModels.Calculation.Admin;
@@ -56,7 +57,7 @@ namespace Alicargo.Controllers.Calculation
 
 			return View(new PaymentModel
 			{
-				Timestamp = DateTimeOffset.UtcNow
+				Timestamp = DateTimeProvider.Now
 			});
 		}
 
@@ -97,7 +98,7 @@ namespace Alicargo.Controllers.Calculation
 
 			return View(new PaymentModel
 			{
-				Timestamp = DateTimeOffset.UtcNow
+				Timestamp = DateTimeProvider.Now
 			});
 		}
 

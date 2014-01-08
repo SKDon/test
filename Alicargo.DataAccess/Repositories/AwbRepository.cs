@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 
@@ -171,7 +172,7 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			var airWaybill = _context.AirWaybills.First(x => x.Id == airWaybillId);
 			airWaybill.StateId = stateId;
-			airWaybill.StateChangeTimestamp = DateTimeOffset.UtcNow;
+			airWaybill.StateChangeTimestamp = DateTimeProvider.Now;
 		}
 
 		#region Files

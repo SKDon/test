@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -71,8 +72,8 @@ namespace Alicargo.Services.Application
 			applicationData.TransitId = transitId;
 			applicationData.StateId = _stateConfig.DefaultStateId;
 			applicationData.ClassId = null;
-			applicationData.StateChangeTimestamp = DateTimeOffset.UtcNow;
-			applicationData.CreationTimestamp = DateTimeOffset.UtcNow;
+			applicationData.StateChangeTimestamp = DateTimeProvider.Now;
+			applicationData.CreationTimestamp = DateTimeProvider.Now;
 			applicationData.SenderId = senderId;
 			applicationData.ClientId = clientId;
 

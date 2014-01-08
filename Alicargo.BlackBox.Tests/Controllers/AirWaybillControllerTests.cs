@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Linq;
+﻿using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
@@ -52,8 +51,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _fixture
 				.Build<AwbAdminModel>()
 				.With(x => x.BrokerId, entity.BrokerId)
-				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
-				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
 				.Create();
 
 			_controller.Edit(entity.Id, model);
@@ -88,8 +87,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				.Build<AwbAdminModel>()
 				.Without(x => x.GTD)
 				.With(x => x.BrokerId, broker.Id)
-				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
-				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeOffset.UtcNow, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
 				.Create();
 
 			_controller.Create(applicationData.Id, model);

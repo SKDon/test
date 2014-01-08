@@ -3,6 +3,7 @@ using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -123,8 +124,8 @@ namespace Alicargo.Services.Application
 		{
 			return new ApplicationData
 			{
-				CreationTimestamp = DateTimeOffset.UtcNow,
-				StateChangeTimestamp = DateTimeOffset.UtcNow,
+				CreationTimestamp = DateTimeProvider.Now,
+				StateChangeTimestamp = DateTimeProvider.Now,
 				StateId = _config.DefaultStateId,
 				ClassId = null,
 				TransitId = transitId,

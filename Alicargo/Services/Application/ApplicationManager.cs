@@ -6,6 +6,7 @@ using Alicargo.Contracts.Exceptions;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -189,7 +190,7 @@ namespace Alicargo.Services.Application
 			// todo: 2. test logic with states
 			if (stateId == _config.CargoInStockStateId)
 			{
-				_applicationUpdater.SetDateInStock(applicationId, DateTimeOffset.UtcNow);
+				_applicationUpdater.SetDateInStock(applicationId, DateTimeProvider.Now);
 			}
 
 			_applicationUpdater.SetState(applicationId, stateId);
@@ -237,8 +238,8 @@ namespace Alicargo.Services.Application
 		{
 			return new ApplicationData
 			{
-				CreationTimestamp = DateTimeOffset.UtcNow,
-				StateChangeTimestamp = DateTimeOffset.UtcNow,
+				CreationTimestamp = DateTimeProvider.Now,
+				StateChangeTimestamp = DateTimeProvider.Now,
 				StateId = _config.DefaultStateId,
 				ClassId = null,
 				TransitId = transitId,

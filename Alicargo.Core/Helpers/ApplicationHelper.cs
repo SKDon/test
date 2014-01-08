@@ -16,7 +16,7 @@ namespace Alicargo.Core.Helpers
 
 		public static int GetDaysInWork(DateTimeOffset creationTimestamp)
 		{
-			return (DateTimeOffset.UtcNow - creationTimestamp.ToUniversalTime()).Days;
+			return (DateTimeProvider.Now - creationTimestamp.ToUniversalTime()).Days;
 		}
 
 		public static string GetValueString(decimal value, int currencyId)

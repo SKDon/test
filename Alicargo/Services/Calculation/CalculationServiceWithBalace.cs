@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -30,7 +31,7 @@ namespace Alicargo.Services.Calculation
 			var money = GetMoney(calculation);
 
 			_balance.Decrease(calculation.ClientId, money,
-				GetComment(Contracts.Resources.EventType.Calculate, calculation), DateTimeOffset.UtcNow);
+				GetComment(Contracts.Resources.EventType.Calculate, calculation), DateTimeProvider.Now);
 
 			return calculation;
 		}
@@ -44,7 +45,7 @@ namespace Alicargo.Services.Calculation
 			var money = GetMoney(calculation);
 
 			_balance.Increase(calculation.ClientId, money,
-				GetComment(Contracts.Resources.EventType.CalculationCanceled, calculation), DateTimeOffset.UtcNow);
+				GetComment(Contracts.Resources.EventType.CalculationCanceled, calculation), DateTimeProvider.Now);
 		}
 
 		private static string GetComment(string type, CalculationData calculation)

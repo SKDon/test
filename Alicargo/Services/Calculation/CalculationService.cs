@@ -64,7 +64,7 @@ namespace Alicargo.Services.Calculation
 				Weight = weight,
 				TransitCost = transitCost,
 				PickupCost = pickupCost,
-				CreationTimestamp = DateTimeOffset.UtcNow
+				CreationTimestamp = DateTimeProvider.Now
 			};
 
 			_calculations.Add(calculation, applicationId);

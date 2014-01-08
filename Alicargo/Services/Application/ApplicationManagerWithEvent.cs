@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Event;
+using Alicargo.Core.Helpers;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -50,7 +51,7 @@ namespace Alicargo.Services.Application
 				new ApplicationSetStateEventData
 				{
 					StateId = stateId,
-					Timestamp = DateTimeOffset.UtcNow
+					Timestamp = DateTimeProvider.Now
 				});
 		}
 
