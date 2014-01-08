@@ -45,14 +45,7 @@ namespace Alicargo.Services.Excel
 					DrawGroupTotal(ws, @group, iRow++);
 				}
 
-				for(var j = 1; j <= count; j++)
-				{
-					ws.Column(j).AutoFit();
-					for(var i = 1; i < iRow; i++)
-					{
-						ws.Cells[i, j].Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Gray);
-					}
-				}
+				AdjustExcel(count, ws, iRow);
 
 				pck.SaveAs(stream);
 			}
@@ -62,10 +55,23 @@ namespace Alicargo.Services.Excel
 			return stream;
 		}
 
+		private static void AdjustExcel(int count, ExcelWorksheet ws, int iRow)
+		{
+			for(var j = 1; j <= count; j++)
+			{
+				ws.Column(j).AutoFit();
+				for(var i = 1; i < iRow; i++)
+				{
+					ws.Cells[i, j].Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Gray);
+				}
+			}
+		}
+
 		private static void DrawGroupTotal(ExcelWorksheet ws, ClientCalculationGroup @group, int iRow)
 		{
-			ws.Cells[iRow, 17].Value = group.aggregates.Profit.sum;
-			ws.Cells[iRow, 1, iRow, 17].Style.Font.Bold = true;
+			const int iColor = 17;
+			ws.Cells[iRow, iColor].Value = group.aggregates.Profit.sum;
+			ws.Cells[iRow, 1, iRow, iColor].Style.Font.Bold = true;
 		}
 
 		private static void DrawRow(ExcelWorksheet ws, ClientCalculationItem item, int iRow)
@@ -131,12 +137,15 @@ namespace Alicargo.Services.Excel
 			ws.Cells[iRow, iColumn].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 
 			ws.Cells[1, iColumn - 1].Value = Entities.Balance;
-			ws.Cells[1, iColumn].Value = balance.ToString("N2") + CurrencyName.Euro;
-			ws.Cells[1, iColumn].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+			var balanceCell = ws.Cells[1, iColumn];
+			balanceCell.Value = balance.ToString("N2") + CurrencyName.Euro;
+			balanceCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+			balanceCell.Style.Font.Color.SetColor(Color.Red);
 
-			var cell = ws.Cells[1, 1, iRow, iColumn];
-			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
-			cell.Style.Font.Bold = true;
+			var headerCells = ws.Cells[1, 1, iRow, iColumn];
+			headerCells.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
+			headerCells.Style.Font.Bold = true;
+
 			ws.View.FreezePanes(3, iColumn);
 			ws.Row(1).Height = ExcelConstants.DefaultRowHeight;
 			ws.Row(2).Height = ExcelConstants.DefaultRowHeight;
