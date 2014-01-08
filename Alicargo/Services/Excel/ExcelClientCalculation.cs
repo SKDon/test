@@ -3,6 +3,7 @@ using System.IO;
 using System.Web;
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Calculation.Entities;
+using Alicargo.Core.Enums;
 using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
@@ -13,29 +14,29 @@ namespace Alicargo.Services.Excel
 {
 	internal sealed class ExcelClientCalculation : IExcelClientCalculation
 	{
-		public MemoryStream Get(ClientCalculationGroup[] groups, string language)
+		public MemoryStream Get(ClientCalculationGroup[] groups, decimal balance, string language)
 		{
 			CultureProvider.Current.Set(() => language);
 
 			var stream = new MemoryStream();
 
-			using (var pck = new ExcelPackage())
+			using(var pck = new ExcelPackage())
 			{
 				var ws = pck.Workbook.Worksheets.Add(Pages.Applications);
 				ws.Cells.Style.Font.Name = ExcelConstants.DefaultFontName;
 				ws.Cells.Style.Font.Size = ExcelConstants.DefaultFontSize;
 				ws.Cells.Style.Numberformat.Format = "0.00";
 
-				var count = DrawHeader(ws);
+				var count = DrawHeader(ws, balance);
 
-				var iRow = 2;
-				foreach (var @group in groups)
+				var iRow = 3;
+				foreach(var @group in groups)
 				{
 					var awb = HttpUtility.HtmlDecode(@group.value);
 
 					DrawAwb(awb, ws, iRow++, count);
 
-					foreach (var item in @group.items)
+					foreach(var item in @group.items)
 					{
 						ws.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
 						DrawRow(ws, item, iRow++);
@@ -44,10 +45,10 @@ namespace Alicargo.Services.Excel
 					DrawGroupTotal(ws, @group, iRow++);
 				}
 
-				for (int j = 1; j <= count; j++)
+				for(var j = 1; j <= count; j++)
 				{
 					ws.Column(j).AutoFit();
-					for (int i = 1; i < iRow; i++)
+					for(var i = 1; i < iRow; i++)
 					{
 						ws.Cells[i, j].Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Gray);
 					}
@@ -77,7 +78,7 @@ namespace Alicargo.Services.Excel
 			ws.Cells[iRow, iColumn++].Value = item.ClassName;
 			ws.Cells[iRow, iColumn++].Value = item.Count;
 			ws.Cells[iRow, iColumn++].Value = item.Weight;
-			ws.Cells[iRow, iColumn++].Value = item.Invoice;			
+			ws.Cells[iRow, iColumn++].Value = item.Invoice;
 			ws.Cells[iRow, iColumn++].Value = item.Value;
 			ws.Cells[iRow, iColumn++].Value = item.TariffPerKg;
 			ws.Cells[iRow, iColumn].Style.Font.Bold = true;
@@ -105,40 +106,42 @@ namespace Alicargo.Services.Excel
 			range.Style.Fill.BackgroundColor.SetColor(Color.Yellow);
 		}
 
-		private static int DrawHeader(ExcelWorksheet ws)
+		private static int DrawHeader(ExcelWorksheet ws, decimal balance)
 		{
 			var iColumn = 1;
+			const int iRow = 2;
 
-			ws.Cells[1, iColumn++].Value = Pages.Client;
-			ws.Cells[1, iColumn++].Value = Entities.DisplayNumber;
-			ws.Cells[1, iColumn++].Value = Entities.FactoryName;
-			ws.Cells[1, iColumn++].Value = Entities.Mark;
-			ws.Cells[1, iColumn++].Value = Entities.Class;
-			ws.Cells[1, iColumn++].Value = Entities.Count;
-			ws.Cells[1, iColumn++].Value = Entities.Weight;
-			ws.Cells[1, iColumn++].Value = Entities.Invoice;
-			ws.Cells[1, iColumn++].Value = Entities.Value;
-			ws.Cells[1, iColumn++].Value = Entities.TariffPerKg;
-			ws.Cells[1, iColumn++].Value = Entities.TotalTariffCost;
-			ws.Cells[1, iColumn++].Value = Entities.ScotchCost;
-			ws.Cells[1, iColumn++].Value = Entities.Insurance;
-			ws.Cells[1, iColumn++].Value = Entities.FactureCost;
-			ws.Cells[1, iColumn++].Value = Entities.PickupCost;
-			ws.Cells[1, iColumn++].Value = Entities.TransitCost;
-			ws.Cells[1, iColumn].Value = Entities.Total;
+			ws.Cells[iRow, iColumn++].Value = Pages.Client;
+			ws.Cells[iRow, iColumn++].Value = Entities.DisplayNumber;
+			ws.Cells[iRow, iColumn++].Value = Entities.FactoryName;
+			ws.Cells[iRow, iColumn++].Value = Entities.Mark;
+			ws.Cells[iRow, iColumn++].Value = Entities.Class;
+			ws.Cells[iRow, iColumn++].Value = Entities.Count;
+			ws.Cells[iRow, iColumn++].Value = Entities.Weight;
+			ws.Cells[iRow, iColumn++].Value = Entities.Invoice;
+			ws.Cells[iRow, iColumn++].Value = Entities.Value;
+			ws.Cells[iRow, iColumn++].Value = Entities.TariffPerKg;
+			ws.Cells[iRow, iColumn++].Value = Entities.TotalTariffCost;
+			ws.Cells[iRow, iColumn++].Value = Entities.ScotchCost;
+			ws.Cells[iRow, iColumn++].Value = Entities.Insurance;
+			ws.Cells[iRow, iColumn++].Value = Entities.FactureCost;
+			ws.Cells[iRow, iColumn++].Value = Entities.PickupCost;
+			ws.Cells[iRow, iColumn++].Value = Entities.TransitCost;
+			ws.Cells[iRow, iColumn].Value = Entities.Total;
+			ws.Cells[iRow, iColumn].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 
-			HeaderStyles(ws, ws.Cells[1, 1, 1, iColumn]);
+			ws.Cells[1, iColumn - 1].Value = Entities.Balance;
+			ws.Cells[1, iColumn].Value = balance.ToString("N2") + CurrencyName.Euro;
+			ws.Cells[1, iColumn].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 
-			return iColumn;
-		}
-
-		private static void HeaderStyles(ExcelWorksheet ws, ExcelRange cell)
-		{
+			var cell = ws.Cells[1, 1, iRow, iColumn];
 			cell.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
 			cell.Style.Font.Bold = true;
-			cell.Style.Locked = true;
-			ws.View.FreezePanes(2, 1);
+			ws.View.FreezePanes(3, iColumn);
 			ws.Row(1).Height = ExcelConstants.DefaultRowHeight;
+			ws.Row(2).Height = ExcelConstants.DefaultRowHeight;
+
+			return iColumn;
 		}
 	}
 }

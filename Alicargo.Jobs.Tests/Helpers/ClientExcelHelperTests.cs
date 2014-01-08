@@ -31,15 +31,15 @@ namespace Alicargo.Jobs.Tests.Helpers
 		[TestMethod]
 		public void Test_GetWithInvalidFileNameChars()
 		{
-			var invalidName = Path.GetInvalidFileNameChars().Aggregate("", (s, c) => s + c);
+			var invalidString = Path.GetInvalidFileNameChars().Aggregate(" \t\r\n", (s, c) => s + c);
 
 			var clientData = _fixture.Create<ClientData>();
-			clientData.Nic = invalidName;
+			clientData.Nic = invalidString + invalidString;
 			clientData.Language = TwoLetterISOLanguageName.English;
 
 			var actual = ClientExcelHelper.GetName(clientData);
 
-			actual.ShouldBeEquivalentTo("calculation_1_1_2000__________________________________________.xlsx");
+			actual.ShouldBeEquivalentTo("calculation_1_1_2000___________________________________________________________________________________________.xlsx");
 		}
 	}
 }

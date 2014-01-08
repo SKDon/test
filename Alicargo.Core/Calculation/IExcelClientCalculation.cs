@@ -5,6 +5,6 @@ namespace Alicargo.Core.Calculation
 {
 	public interface IExcelClientCalculation
 	{
-		MemoryStream Get(ClientCalculationGroup[] groups, string language);
+		MemoryStream Get(ClientCalculationGroup[] groups, decimal balance, string language);
 	}
 }

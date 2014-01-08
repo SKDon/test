@@ -88,11 +88,13 @@ namespace Alicargo.App_Start.Jobs
 				var textBuilder = new TextBuilder();
 				var excelClientCalculation = new ExcelClientCalculation();
 				var templateRepositoryWrapper = new TemplateRepositoryHelper(templateRepository);
-				var clientExcelHelper = new ClientExcelHelper(clientRepository, clientCalculationPresenter, excelClientCalculation);
+				var clientBalanceRepository = new ClientBalanceRepository(executor);
+				var clientExcelHelper = new ClientExcelHelper(clientRepository,
+					clientBalanceRepository, clientCalculationPresenter, excelClientCalculation);
 				var messageBuilder = new Alicargo.Jobs.Balance.MessageBuilder(
 					EmailsHelper.DefaultFrom,
 					recipientsFacade,
-					new ClientBalanceRepository(executor),
+					clientBalanceRepository,
 					clientRepository,
 					serializer,
 					textBuilder,
@@ -184,8 +186,9 @@ namespace Alicargo.App_Start.Jobs
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(filesExecutor);
 			var filesFasade = new FilesFacade(serializer, awbs, files);
+			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(
-				serializer, states, files, new ClientBalanceRepository(mainExecutor), new TextBuilder());
+				serializer, states, files, clientBalanceRepository, new TextBuilder());
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new TemplateRepository(mainExecutor);
 			var clientRepository = new ClientRepository(unitOfWork);
@@ -200,9 +203,10 @@ namespace Alicargo.App_Start.Jobs
 			var wrapper = new TemplateRepositoryHelper(templates);
 			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
 			var excelClientCalculation = new ExcelClientCalculation();
-			var clientCalculationPresenter = new ClientCalculationPresenter(applications, awbs,
-				clientRepository, stateSettings);
-			var clientExcelHelper = new ClientExcelHelper(clientRepository, clientCalculationPresenter, excelClientCalculation);
+			var clientCalculationPresenter = new ClientCalculationPresenter(applications,
+				awbs, clientRepository, stateSettings);
+			var clientExcelHelper = new ClientExcelHelper(clientRepository,
+				clientBalanceRepository, clientCalculationPresenter, excelClientCalculation);
 
 			return new MessageBuilder(
 				EmailsHelper.DefaultFrom,

@@ -80,7 +80,9 @@ namespace Alicargo.Controllers.Calculation
 
 			var data = _presenter.List(client.ClientId, int.MaxValue, 0);
 
-			var stream = _excel.Get(data.Groups, _identity.Language);
+			var balance = _balance.GetBalance(client.ClientId);
+
+			var stream = _excel.Get(data.Groups, balance, _identity.Language);
 
 			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "calculation.xlsx");
 		}
