@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Services.Abstract;
+using Alicargo.Utilities;
 
 namespace Alicargo.Core.Services.Email
 {

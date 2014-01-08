@@ -3,7 +3,7 @@ using Alicargo.Contracts.Contracts;
 
 namespace Alicargo.Jobs.Helpers.Abstract
 {
-	internal interface IClientExcelHelper
+	public interface IClientExcelHelper
 	{
 		IReadOnlyDictionary<string, FileHolder> GetExcels(long clientId, string[] languages);
 	}

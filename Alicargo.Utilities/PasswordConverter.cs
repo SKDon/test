@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Alicargo.Contracts.Helpers;
 
-namespace Alicargo.Core.Services
+namespace Alicargo.Utilities
 {    
     public sealed class PasswordConverter : IPasswordConverter
     {

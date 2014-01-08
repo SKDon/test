@@ -1,10 +1,9 @@
-﻿using System;
-using Alicargo.Contracts.Contracts.Application;
+﻿using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
-using Alicargo.Core.Helpers;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
+using Alicargo.Utilities;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 

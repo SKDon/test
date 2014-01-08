@@ -4,9 +4,9 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Localization;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
+using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Alicargo.Core.Localization;
+using Alicargo.Utilities.Localization;
 
 namespace Alicargo.MvcHelpers.Filters
 {

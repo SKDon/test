@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using Alicargo.Jobs.Helpers;
-using Alicargo.Jobs.Helpers.Abstract;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;

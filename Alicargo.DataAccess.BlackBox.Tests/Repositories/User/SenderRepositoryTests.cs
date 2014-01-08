@@ -1,10 +1,10 @@
 ﻿using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Services;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;

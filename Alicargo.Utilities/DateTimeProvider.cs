@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Core.Helpers
+namespace Alicargo.Utilities
 {
 	public static class DateTimeProvider
 	{

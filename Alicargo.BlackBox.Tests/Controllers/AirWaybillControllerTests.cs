@@ -8,6 +8,7 @@ using Alicargo.Controllers.Awb;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
 using Alicargo.ViewModels.AirWaybill;
 using Dapper;
 using FluentAssertions;

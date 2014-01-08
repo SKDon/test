@@ -4,9 +4,9 @@ using System.Linq.Expressions;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
+using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories
 {

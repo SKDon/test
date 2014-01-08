@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Core.Localization
+namespace Alicargo.Utilities.Localization
 {
 	public interface ICultureProvider
 	{

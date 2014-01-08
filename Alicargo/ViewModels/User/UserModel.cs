@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
+using Alicargo.Utilities.Localization;
 using Resources;
 
 namespace Alicargo.ViewModels.User

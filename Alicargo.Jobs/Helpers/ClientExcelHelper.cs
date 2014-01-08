@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,6 +9,7 @@ using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
+using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.Helpers
 {

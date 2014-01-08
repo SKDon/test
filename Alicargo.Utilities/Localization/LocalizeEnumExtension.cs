@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Alicargo.Core.Localization
+namespace Alicargo.Utilities.Localization
 {
 	public static class LocalizeEnumExtension
 	{

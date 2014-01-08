@@ -1,6 +1,5 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.Application;
-using Alicargo.Core.Services;
+﻿using Alicargo.Contracts.Contracts.Application;
+using Alicargo.Utilities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;

@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
-using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
+using Alicargo.Utilities;
 
 namespace Alicargo.Services.State
 {

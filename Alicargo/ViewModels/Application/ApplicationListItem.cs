@@ -3,7 +3,7 @@ using System.Globalization;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Localization;
+using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels.Application
 {

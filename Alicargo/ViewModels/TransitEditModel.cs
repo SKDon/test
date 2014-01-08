@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Localization;
 using Alicargo.Core.Resources;
+using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels
 {

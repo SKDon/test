@@ -1,10 +1,10 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Jobs.Helpers.Abstract;
+using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {

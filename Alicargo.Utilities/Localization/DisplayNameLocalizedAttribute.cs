@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 
-namespace Alicargo.Core.Localization
+namespace Alicargo.Utilities.Localization
 {
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum | AttributeTargets.Field)]
 	public sealed class DisplayNameLocalizedAttribute : DisplayNameAttribute

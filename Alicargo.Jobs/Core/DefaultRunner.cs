@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
-using Alicargo.Core.Services;
 using Alicargo.Core.Services.Abstract;
+using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.Core
 {

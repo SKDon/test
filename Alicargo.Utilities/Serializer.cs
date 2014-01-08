@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using System.Text;
-using Alicargo.Contracts.Helpers;
 using Newtonsoft.Json;
 
-namespace Alicargo.Core.Services
+namespace Alicargo.Utilities
 {
 	public sealed class Serializer : ISerializer
 	{

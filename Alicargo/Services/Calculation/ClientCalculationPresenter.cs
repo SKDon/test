@@ -11,7 +11,7 @@ using Alicargo.Core.Calculation;
 using Alicargo.Core.Calculation.Entities;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Localization;
+using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Helpers;
 

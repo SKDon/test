@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using Alicargo.Core.Localization;
+using Alicargo.Utilities.Localization;
 
 namespace Alicargo.MvcHelpers.Extensions
 {

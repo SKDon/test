@@ -2,9 +2,9 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Enums;
 using Alicargo.Core.Event;
-using Alicargo.Core.Helpers;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Services.Abstract;
+using Alicargo.Utilities;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 

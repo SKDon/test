@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Contracts.Helpers
+﻿namespace Alicargo.Utilities
 {
 	public interface ISerializer
 	{

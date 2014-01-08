@@ -2,9 +2,9 @@
 using Alicargo.App_Start.Jobs;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
-using Alicargo.Core.Services;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;

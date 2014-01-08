@@ -1,4 +1,4 @@
-﻿using Alicargo.Core.Localization;
+﻿using Alicargo.Utilities.Localization;
 
 namespace Alicargo.Core.Enums
 {

@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Alicargo.BlackBox.Tests.Properties;
+﻿using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 

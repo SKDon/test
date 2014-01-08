@@ -4,11 +4,11 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
 using Alicargo.Jobs.Balance.Entities;
 using Alicargo.Jobs.Helpers.Abstract;
+using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.Balance
 {

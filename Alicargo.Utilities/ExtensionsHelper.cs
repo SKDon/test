@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace Alicargo.Core.Services
+namespace Alicargo.Utilities
 {
 	public static class ExtensionsHelper
 	{

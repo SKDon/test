@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Alicargo.App_Start;
 using Alicargo.App_Start.Jobs;
 using Alicargo.Jobs.Core;
 using FluentAssertions;

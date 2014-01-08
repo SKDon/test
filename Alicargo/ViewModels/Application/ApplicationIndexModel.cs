@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Alicargo.Core.Localization;
+using Alicargo.Utilities.Localization;
 using Resources;
 
 namespace Alicargo.ViewModels.Application

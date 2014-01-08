@@ -7,9 +7,9 @@ using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
+using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.Application
 {

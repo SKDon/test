@@ -4,10 +4,10 @@ using System.Linq;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.Helpers.Abstract;
+using Alicargo.Utilities;
 using ITextBuilder = Alicargo.Jobs.ApplicationEvents.Abstract.ITextBuilder;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers

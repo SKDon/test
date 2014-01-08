@@ -1,8 +1,8 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
+using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.User
 {

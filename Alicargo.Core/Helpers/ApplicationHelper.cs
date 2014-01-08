@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using Alicargo.Core.Enums;
-using Alicargo.Core.Localization;
+using Alicargo.Utilities;
+using Alicargo.Utilities.Localization;
 
 namespace Alicargo.Core.Helpers
 {

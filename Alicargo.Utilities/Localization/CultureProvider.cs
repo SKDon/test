@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 
-namespace Alicargo.Core.Localization
+namespace Alicargo.Utilities.Localization
 {
 	// todo: refactor
 	public sealed class CultureProvider : ICultureProvider
