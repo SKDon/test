@@ -94,8 +94,6 @@
     <Compile Include="Exceptions\InvalidLogicException.cs" />
     <Compile Include="Exceptions\UnexpectedStateException.cs" />
     <Compile Include="Helpers\EmailsHelper.cs" />
-    <Compile Include="Helpers\IPasswordConverter.cs" />
-    <Compile Include="Helpers\ISerializer.cs" />
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Helpers\OrderHelper.cs" />
     <Compile Include="Helpers\OrderType.cs" />

@@ -802,6 +802,10 @@
       <Project>{c2133743-7762-4bd9-a824-eb039e41af58}</Project>
       <Name>Alicargo.Jobs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Utilities\Alicargo.Utilities.csproj">
+      <Project>{28A88A2C-7BA4-4F4E-9131-AD69B070CD31}</Project>
+      <Name>Alicargo.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Validation.resx">

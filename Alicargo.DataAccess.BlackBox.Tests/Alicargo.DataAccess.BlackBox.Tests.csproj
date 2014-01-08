@@ -138,6 +138,10 @@
       <Project>{BB7C7B4A-D181-4812-89BC-29EB406E9656}</Project>
       <Name>Alicargo.TestHelpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Utilities\Alicargo.Utilities.csproj">
+      <Project>{28A88A2C-7BA4-4F4E-9131-AD69B070CD31}</Project>
+      <Name>Alicargo.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
