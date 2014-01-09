@@ -1,4 +1,5 @@
 ﻿using System;
+using Alicargo.Core.Enums;
 
 namespace Alicargo.Contracts.Contracts
 {
@@ -10,6 +11,7 @@ namespace Alicargo.Contracts.Contracts
 		public string ApplicationDisplay { get; set; }
 		public string MarkName { get; set; }
 		public string FactoryName { get; set; }
+
 		public float Weight { get; set; }
 		public decimal TariffPerKg { get; set; }
 		public decimal ScotchCost { get; set; }
@@ -17,5 +19,10 @@ namespace Alicargo.Contracts.Contracts
 		public decimal FactureCost { get; set; }
 		public decimal TransitCost { get; set; }
 		public decimal PickupCost { get; set; }
+
+		public ClassType Class { get; set; }
+		public int Count { get; set; }
+		public string Invoice { get; set; }
+		public decimal Value { get; set; }
 	}
 }

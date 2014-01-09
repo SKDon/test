@@ -15,28 +15,20 @@ namespace Alicargo.Jobs.Helpers
 {
 	internal sealed class ClientExcelHelper : IClientExcelHelper
 	{
-		private readonly IClientBalanceRepository _balance;
 		private readonly IClientRepository _clients;
 		private readonly IExcelClientCalculation _excel;
-		private readonly IClientCalculationPresenter _presenter;
 
 		public ClientExcelHelper(
 			IClientRepository clients,
-			IClientBalanceRepository balance,
-			IClientCalculationPresenter presenter,
 			IExcelClientCalculation excel)
 		{
 			_clients = clients;
-			_balance = balance;
-			_presenter = presenter;
 			_excel = excel;
 		}
 
 		public IReadOnlyDictionary<string, FileHolder> GetExcels(long clientId, string[] languages)
 		{
 			var clientData = _clients.Get(clientId);
-			var list = _presenter.List(clientId, int.MaxValue, 0);
-			var balance = _balance.GetBalance(clientId);
 			var name = GetName(clientData);
 
 			var files = languages
@@ -45,7 +37,7 @@ namespace Alicargo.Jobs.Helpers
 					x => x,
 					language =>
 					{
-						using(var stream = _excel.Get(list.Groups, balance, language))
+						using(var stream = _excel.Get(clientId, language))
 						{
 							return new FileHolder
 							{

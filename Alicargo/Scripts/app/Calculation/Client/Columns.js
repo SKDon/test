@@ -7,8 +7,7 @@
 			return {
 				schema: {
 					total: "Total",
-					groups: "Groups",
-					model: { id: "ApplicationId" }
+					groups: "Groups"
 				},
 				transport: {
 					read: {
@@ -23,7 +22,6 @@
 				serverGrouping: true,
 				error: $a.ShowError,
 				group: {
-					field: "AirWaybillId",
 					dir: "asc",
 					aggregates: [
 						{ field: "Profit", aggregate: "sum" }

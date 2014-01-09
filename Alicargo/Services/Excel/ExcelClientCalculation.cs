@@ -1,9 +1,13 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using System.Web;
+using System.Linq;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Calculation;
-using Alicargo.Core.Calculation.Entities;
 using Alicargo.Core.Enums;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
@@ -14,9 +18,33 @@ namespace Alicargo.Services.Excel
 {
 	internal sealed class ExcelClientCalculation : IExcelClientCalculation
 	{
-		public MemoryStream Get(ClientCalculationGroup[] groups, decimal balance, string language)
+		private readonly IClientBalanceRepository _balance;
+		private readonly ICalculationRepository _calculations;
+		private readonly IClientRepository _clients;
+
+		public ExcelClientCalculation(
+			ICalculationRepository calculations,
+			IClientBalanceRepository balance,
+			IClientRepository clients)
+		{
+			_balance = balance;
+			_calculations = calculations;
+			_clients = clients;
+		}
+
+		public MemoryStream Get(long clientId, string language)
 		{
 			CultureProvider.Current.Set(() => language);
+
+			var history = _balance.GetHistory(clientId);
+
+			var client = _clients.Get(clientId);
+
+			var balance = _balance.GetBalance(clientId);
+
+			IReadOnlyDictionary<string, CalculationData[]> groups = _calculations.GetByClient(clientId)
+				.GroupBy(x => x.AirWaybillDisplay)
+				.ToDictionary(x => x.Key, x => x.ToArray());
 
 			var stream = new MemoryStream();
 
@@ -32,17 +60,22 @@ namespace Alicargo.Services.Excel
 				var iRow = 3;
 				foreach(var @group in groups)
 				{
-					var awb = HttpUtility.HtmlDecode(@group.value);
+					var awb = @group.Key;
 
 					DrawAwb(awb, ws, iRow++, count);
 
-					foreach(var item in @group.items)
+					decimal totalProfit = 0;
+					foreach(var item in @group.Value)
 					{
 						ws.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
-						DrawRow(ws, item, iRow++);
+						var money = CalculationDataHelper.GetMoney(item);
+
+						DrawRow(iRow++, ws, item, client.Nic, money);
+						totalProfit += money;
 					}
 					ws.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
-					DrawGroupTotal(ws, @group, iRow++);
+
+					DrawGroupTotal(ws, totalProfit, iRow++);
 				}
 
 				AdjustExcel(count, ws, iRow);
@@ -67,35 +100,35 @@ namespace Alicargo.Services.Excel
 			}
 		}
 
-		private static void DrawGroupTotal(ExcelWorksheet ws, ClientCalculationGroup @group, int iRow)
+		private static void DrawGroupTotal(ExcelWorksheet ws, decimal totalProfit, int iRow)
 		{
 			const int iColor = 17;
-			ws.Cells[iRow, iColor].Value = group.aggregates.Profit.sum;
+			ws.Cells[iRow, iColor].Value = totalProfit;
 			ws.Cells[iRow, 1, iRow, iColor].Style.Font.Bold = true;
 		}
 
-		private static void DrawRow(ExcelWorksheet ws, ClientCalculationItem item, int iRow)
+		private static void DrawRow(int iRow, ExcelWorksheet ws, CalculationData item, string nic, decimal money)
 		{
 			var iColumn = 1;
-			ws.Cells[iRow, iColumn++].Value = item.ClientNic;
-			ws.Cells[iRow, iColumn++].Value = item.DisplayNumber;
-			ws.Cells[iRow, iColumn++].Value = item.Factory;
-			ws.Cells[iRow, iColumn++].Value = item.Mark;
-			ws.Cells[iRow, iColumn++].Value = item.ClassName;
+			ws.Cells[iRow, iColumn++].Value = nic;
+			ws.Cells[iRow, iColumn++].Value = item.ApplicationDisplay;
+			ws.Cells[iRow, iColumn++].Value = item.FactoryName;
+			ws.Cells[iRow, iColumn++].Value = item.MarkName;
+			ws.Cells[iRow, iColumn++].Value = item.Class;
 			ws.Cells[iRow, iColumn++].Value = item.Count;
 			ws.Cells[iRow, iColumn++].Value = item.Weight;
 			ws.Cells[iRow, iColumn++].Value = item.Invoice;
 			ws.Cells[iRow, iColumn++].Value = item.Value;
 			ws.Cells[iRow, iColumn++].Value = item.TariffPerKg;
 			ws.Cells[iRow, iColumn].Style.Font.Bold = true;
-			ws.Cells[iRow, iColumn++].Value = item.TotalTariffCost;
+			ws.Cells[iRow, iColumn++].Value = item.TariffPerKg * (decimal)item.Weight;
 			ws.Cells[iRow, iColumn++].Value = item.ScotchCost;
 			ws.Cells[iRow, iColumn++].Value = item.InsuranceCost;
 			ws.Cells[iRow, iColumn++].Value = item.FactureCost;
 			ws.Cells[iRow, iColumn++].Value = item.PickupCost;
 			ws.Cells[iRow, iColumn++].Value = item.TransitCost;
 			ws.Cells[iRow, iColumn].Style.Font.Bold = true;
-			ws.Cells[iRow, iColumn].Value = item.Profit;
+			ws.Cells[iRow, iColumn].Value = money;
 		}
 
 		private static void DrawAwb(string currentAwb, ExcelWorksheet ws, int iRow, int count)

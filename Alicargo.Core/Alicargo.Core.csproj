@@ -65,63 +65,13 @@
     <Compile Include="Calculation\Entities\ClientCalculationListCollection.cs" />
     <Compile Include="Calculation\IClientCalculationPresenter.cs" />
     <Compile Include="Calculation\IExcelClientCalculation.cs" />
-    <Compile Include="Enums\ClassType.cs" />
-    <Compile Include="Enums\CurrencyName.cs" />
-    <Compile Include="Enums\CurrencyType.cs" />
-    <Compile Include="Enums\DeliveryType.cs" />
-    <Compile Include="Enums\MethodOfDelivery.cs" />
-    <Compile Include="Enums\MethodOfTransit.cs" />
     <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Event\IPartitionConverter.cs" />
     <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\PartitionConverter.cs" />
+    <Compile Include="Helpers\CalculationDataHelper.cs" />
     <Compile Include="Helpers\SumHolder.cs" />
     <Compile Include="Event\EventFacade.cs" />
-    <Compile Include="Resources\Entities.ru.Designer.cs">
-      <DependentUpon>Entities.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Entities.Designer.cs">
-      <DependentUpon>Entities.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Entities.it.Designer.cs">
-      <DependentUpon>Entities.it.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Enums.ru.Designer.cs">
-      <DependentUpon>Enums.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Enums.Designer.cs">
-      <DependentUpon>Enums.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Enums.it.Designer.cs">
-      <DependentUpon>Enums.it.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\ApplicationFileType.ru.Designer.cs">
-      <DependentUpon>ApplicationFileType.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\ApplicationFileType.it.Designer.cs">
-      <DependentUpon>ApplicationFileType.it.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\ApplicationFileType.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ApplicationFileType.resx</DependentUpon>
-    </Compile>
     <Compile Include="Resources\Mail.Designer.cs">
       <DependentUpon>Mail.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -151,45 +101,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Entities.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.ru.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.it.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ApplicationFileType.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationFileType.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ApplicationFileType.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationFileType.it.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ApplicationFileType.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationFileType.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Mail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Mail.Designer.cs</LastGenOutput>

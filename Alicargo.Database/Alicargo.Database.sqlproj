@@ -168,6 +168,7 @@
     <Build Include="Stored procedures\User\Sender\Sender_Get.sql" />
     <Build Include="Stored procedures\User\Sender\Sender_GetTariffs.sql" />
     <Build Include="Stored procedures\User\Sender\Sender_GetUserId.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_GetByClient.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

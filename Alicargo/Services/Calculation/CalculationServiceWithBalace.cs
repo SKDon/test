@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
@@ -28,7 +29,7 @@ namespace Alicargo.Services.Calculation
 		{
 			var calculation = _service.Calculate(applicationId);
 
-			var money = GetMoney(calculation);
+			var money = CalculationDataHelper.GetMoney(calculation);
 
 			_balance.Decrease(calculation.ClientId, money,
 				GetComment(Contracts.Resources.EventType.Calculate, calculation), DateTimeProvider.Now);
@@ -42,7 +43,7 @@ namespace Alicargo.Services.Calculation
 
 			_service.CancelCalculatation(applicationId);
 
-			var money = GetMoney(calculation);
+			var money = CalculationDataHelper.GetMoney(calculation);
 
 			_balance.Increase(calculation.ClientId, money,
 				GetComment(Contracts.Resources.EventType.CalculationCanceled, calculation), DateTimeProvider.Now);
@@ -55,12 +56,6 @@ namespace Alicargo.Services.Calculation
 			       + Entities.AWB + ": " + calculation.AirWaybillDisplay
 			       + Environment.NewLine
 			       + Entities.Application + ": " + calculation.ApplicationDisplay;
-		}
-
-		private static decimal GetMoney(CalculationData calculation)
-		{
-			return (decimal)calculation.Weight * calculation.TariffPerKg + calculation.ScotchCost
-			       + calculation.InsuranceCost + calculation.FactureCost + calculation.TransitCost + calculation.PickupCost;
 		}
 	}
 }

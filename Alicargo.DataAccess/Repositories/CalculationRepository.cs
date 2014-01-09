@@ -3,7 +3,7 @@ using Alicargo.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class CalculationRepository : ICalculationRepository
+	public sealed class CalculationRepository : ICalculationRepository
 	{
 		private readonly ISqlProcedureExecutor _executor;
 
@@ -36,6 +36,11 @@ namespace Alicargo.DataAccess.Repositories
 		public CalculationData GetByApplication(long applicationId)
 		{
 			return _executor.Query<CalculationData>("[dbo].[Calculation_GetByApplication]", new { applicationId });
+		}
+
+		public CalculationData[] GetByClient(long clientId)
+		{
+			return _executor.Array<CalculationData>("[dbo].[Calculation_GetByClient]", new { clientId });
 		}
 
 		public void RemoveByApplication(long applicationId)
