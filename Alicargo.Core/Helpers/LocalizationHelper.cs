@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using Alicargo.Core.Enums;
-using Alicargo.Core.Resources;
+using Alicargo.Contracts.Enums;
+using Alicargo.Contracts.Resources;
 
 namespace Alicargo.Core.Helpers
 {

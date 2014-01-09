@@ -1,6 +1,6 @@
 ﻿using Alicargo.Utilities.Localization;
 
-namespace Alicargo.Core.Enums
+namespace Alicargo.Contracts.Enums
 {
 	public enum DeliveryType
 	{

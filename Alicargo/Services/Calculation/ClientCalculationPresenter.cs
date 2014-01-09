@@ -9,7 +9,6 @@ using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Calculation.Entities;
-using Alicargo.Core.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Calculation;

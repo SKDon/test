@@ -1,8 +1,8 @@
 ﻿using System;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Contracts.Resources;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Resources;
 using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alicargo.Core.Resources;
+using Alicargo.Contracts.Resources;
 using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels.Application

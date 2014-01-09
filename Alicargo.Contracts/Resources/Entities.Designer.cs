@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Alicargo.Core.Resources {
+namespace Alicargo.Contracts.Resources {
 	/// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

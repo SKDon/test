@@ -1,4 +1,4 @@
-﻿using Alicargo.Core.Enums;
+﻿using Alicargo.Contracts.Enums;
 
 namespace Alicargo.ViewModels.Calculation.Admin
 {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Alicargo.Contracts.Enums;
-using Alicargo.Core.Resources;
+using Alicargo.Contracts.Resources;
 using Alicargo.Utilities.Localization;
+using EventType = Alicargo.Contracts.Enums.EventType;
 
 namespace Alicargo.ViewModels.EmailTemplate
 {

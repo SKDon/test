@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Enums;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Helpers;
 using Alicargo.Utilities.Localization;
 

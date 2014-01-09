@@ -65,7 +65,11 @@ namespace Alicargo.Services.Calculation
 				Weight = weight,
 				TransitCost = transitCost,
 				PickupCost = pickupCost,
-				CreationTimestamp = DateTimeProvider.Now
+				CreationTimestamp = DateTimeProvider.Now,
+				//Count = application.Count ?? 0,
+				//Invoice = application.Invoice,
+				//Value = application.Value,
+				//Class = (ClassType)application.ClassId
 			};
 
 			_calculations.Add(calculation, applicationId);
