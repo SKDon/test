@@ -88,13 +88,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
-      <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
-      <Name>Alicargo.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
       <Project>{577B60F9-32F7-4117-97DA-40743BFF4CA0}</Project>
       <Name>Alicargo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.DataAccess.Contracts\Alicargo.DataAccess.Contracts.csproj">
+      <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
+      <Name>Alicargo.DataAccess.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alicargo.Jobs\Alicargo.Jobs.csproj">
       <Project>{c2133743-7762-4bd9-a824-eb039e41af58}</Project>

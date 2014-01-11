@@ -31,10 +31,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
-      <Name>Alicargo.Contracts</Name>
-      <Project>{e2f1a146-9076-4833-995e-084ac1b3eac7}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
       <Name>Alicargo.Core</Name>
       <Project>{577b60f9-32f7-4117-97da-40743bff4ca0}</Project>

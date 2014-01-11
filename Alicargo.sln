@@ -26,8 +26,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.Core.Tests", "Alic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.TestHelpers", "Alicargo.TestHelpers\Alicargo.TestHelpers.csproj", "{BB7C7B4A-D181-4812-89BC-29EB406E9656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.Contracts", "Alicargo.Contracts\Alicargo.Contracts.csproj", "{E2F1A146-9076-4833-995E-084AC1B3EAC7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.BlackBox.Tests", "Alicargo.BlackBox.Tests\Alicargo.BlackBox.Tests.csproj", "{6338CF8C-E339-44CC-A185-14D7CF0301BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.DataAccess.BlackBox.Tests", "Alicargo.DataAccess.BlackBox.Tests\Alicargo.DataAccess.BlackBox.Tests.csproj", "{80AA7A64-E347-4A12-89F0-E81E4B581954}"
@@ -49,6 +47,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.Utilities", "Alicargo.Utilities\Alicargo.Utilities.csproj", "{28A88A2C-7BA4-4F4E-9131-AD69B070CD31}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Alicargo.ConceptualModels", "Alicargo.ConceptualModels\Alicargo.ConceptualModels.modelproj", "{8708C0B4-BC8B-49DF-8969-24850A780FD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.Core.Contracts", "Alicargo.Core.Contracts\Alicargo.Core.Contracts.csproj", "{5D298560-5149-4DBB-9444-EE2EE9430483}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.DataAccess.Contracts", "Alicargo.DataAccess.Contracts\Alicargo.DataAccess.Contracts.csproj", "{E2F1A146-9076-4833-995E-084AC1B3EAC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,12 +101,6 @@ Global
 		{BB7C7B4A-D181-4812-89BC-29EB406E9656}.Dev|Any CPU.Build.0 = Dev|Any CPU
 		{BB7C7B4A-D181-4812-89BC-29EB406E9656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB7C7B4A-D181-4812-89BC-29EB406E9656}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
-		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Dev|Any CPU.Build.0 = Dev|Any CPU
-		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6338CF8C-E339-44CC-A185-14D7CF0301BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6338CF8C-E339-44CC-A185-14D7CF0301BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6338CF8C-E339-44CC-A185-14D7CF0301BF}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
@@ -159,6 +155,18 @@ Global
 		{8708C0B4-BC8B-49DF-8969-24850A780FD5}.Dev|Any CPU.Build.0 = Debug|Any CPU
 		{8708C0B4-BC8B-49DF-8969-24850A780FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8708C0B4-BC8B-49DF-8969-24850A780FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D298560-5149-4DBB-9444-EE2EE9430483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D298560-5149-4DBB-9444-EE2EE9430483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D298560-5149-4DBB-9444-EE2EE9430483}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D298560-5149-4DBB-9444-EE2EE9430483}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{5D298560-5149-4DBB-9444-EE2EE9430483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D298560-5149-4DBB-9444-EE2EE9430483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Dev|Any CPU.Build.0 = Dev|Any CPU
+		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2F1A146-9076-4833-995E-084AC1B3EAC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
