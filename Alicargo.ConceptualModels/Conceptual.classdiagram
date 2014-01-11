@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="6a49b113-4100-4f93-b8af-e5190b2af8dd" name="Conceptual" linkedPackageId="3d88e39f-cd8a-4b09-8e4f-e6c6e876caef" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="e8cff46b-a31e-413a-b909-7581fec0ab12">
+      <profileInstance Id="04b4ed5d-553e-45c5-9624-d6f960f05b1c" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="54052049-ac37-4ee2-b7b0-df681852ac96">
+      <profileInstance Id="c8b6b313-c5aa-41d6-bad4-4e9f5fd6ee4d" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="3eadf8eb-9b1d-4f9a-b9e7-73ce7c1452d8" name="Databases">
+        <elementDefinition Id="ef4d077a-dbef-413c-bbff-a37ff58a8ae8" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="5a232be8-8bf3-4509-9625-92f3635db705" name="Procedures" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="0716f69b-aa07-45f7-9a28-16f0e189420a" />
+              <suppliersInternal>
+                <dependency Id="279f5ab5-3836-4af0-861c-f195614acf43">
+                  <classMoniker Id="efeb8c6c-795c-4a9a-be53-cb1266ce5918" LastKnownName="Tables" />
+                  <elementDefinition Id="68af503c-1345-4878-9ae9-f421e2d47adf" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="efeb8c6c-795c-4a9a-be53-cb1266ce5918" name="Tables" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="2a82fd83-550e-4699-b3be-aa641f0a1ccd" />
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="5e86891a-56d1-49f7-86ff-8a43be7345fe" name="DAL">
+        <elementDefinition Id="b77ec0e1-719d-43f2-a098-a059497fd7ca" />
+        <importedPackagesInternal>
+          <packageImport Id="00f31dee-1e24-477d-b792-d1ec8a770f66" visibility="Public">
+            <packageMoniker Id="11daef5a-e301-4229-93a4-344dd2bff2bc" LastKnownName="BLL" />
+            <elementDefinition Id="fcd85511-908f-4e9d-976c-e5353b22b9ff" />
+          </packageImport>
+          <packageImport Id="4b6337a1-16cc-4da4-a384-9b072d99ff45" visibility="Public">
+            <packageMoniker Id="3eadf8eb-9b1d-4f9a-b9e7-73ce7c1452d8" LastKnownName="Databases" />
+            <elementDefinition Id="0489c685-eda5-401c-a529-6cefeef45e78" />
+          </packageImport>
+        </importedPackagesInternal>
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="93d31674-ec26-4ca9-9457-f13fbbd411a5" name="POCO" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="a2489f38-f804-41bd-84de-3775842780b6" />
+              <suppliersInternal>
+                <dependency Id="63d92a2f-d51d-4622-91ab-f64ff738bc64">
+                  <classMoniker Id="efeb8c6c-795c-4a9a-be53-cb1266ce5918" LastKnownName="Tables" />
+                  <elementDefinition Id="a3f78b50-8101-4d32-8b33-19f25631736d" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="60ebc8c0-f956-49c5-9c9d-30a95ab7c3d1" name="Repositories" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="8ece4307-3708-45ac-90b7-171391357e90" />
+              <suppliersInternal>
+                <dependency Id="98cc6c4b-d824-41b5-b69b-e9df082f664f">
+                  <classMoniker Id="93d31674-ec26-4ca9-9457-f13fbbd411a5" LastKnownName="POCO" />
+                  <elementDefinition Id="669ae088-5ac5-48c9-bb64-bd9f4f975413" />
+                </dependency>
+                <dependency Id="85349ec7-7ef9-4fd6-a065-d9208ee072be">
+                  <classMoniker Id="5a232be8-8bf3-4509-9625-92f3635db705" LastKnownName="Procedures" />
+                  <elementDefinition Id="0017b84a-2c1d-45c8-9d2a-2dec2ae25ae3" />
+                </dependency>
+                <interfaceRealization Id="abbbfdea-a8aa-494e-9548-b28a50fdba3b">
+                  <interfaceMoniker Id="19da07e7-5da2-4e0e-a9b2-5f576ceb6b05" LastKnownName="Repositories" />
+                  <elementDefinition Id="fa27d4d5-1616-4fab-9f53-2e9786a2596f" />
+                </interfaceRealization>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="9752ecee-0aa3-4d20-bf47-d40c49c632c1" name="Client">
+        <elementDefinition Id="34d1b14f-d54d-44c9-b332-18917b44fa94" />
+        <importedPackagesInternal>
+          <packageImport Id="74df701f-4225-4450-b8f1-c390d3065ac1" visibility="Public">
+            <packageMoniker Id="11daef5a-e301-4229-93a4-344dd2bff2bc" LastKnownName="BLL" />
+            <elementDefinition Id="d8916acc-46fc-4a40-bbcb-bf71d7340c46" />
+          </packageImport>
+        </importedPackagesInternal>
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="3b1d9b96-042f-4bcb-b327-e046e20bad7c" name="Model mappers" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="aec5323d-89ea-4114-aca7-4bc167f67792" />
+              <suppliersInternal>
+                <dependency Id="dc295e3c-d0c9-4ce4-bd38-c102522d6cf7">
+                  <classMoniker Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" LastKnownName="Business Objects" />
+                  <elementDefinition Id="25ef790d-77a0-4eea-aebe-cb5a742406c0" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="79f42b85-ca9f-4499-b29d-23de52d9344b" name="View" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="956ad7e6-822a-4c7f-aa9b-f275dd4eecad" />
+              <suppliersInternal>
+                <dependency Id="521fa320-99c9-4e2a-80be-822a209d4cbe">
+                  <classMoniker Id="83749164-90c9-4465-a4ce-523f6153035a" LastKnownName="Models" />
+                  <elementDefinition Id="11fc4723-3578-4f6d-b7c9-8cc5e1d0e636" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="83749164-90c9-4465-a4ce-523f6153035a" name="Models" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="4dfb69a7-e824-4560-a415-2866707ea430" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="9fa3a1ff-fe63-45b2-99a0-fb95ca1ebd5d" name="Controllers" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="cc19c467-2291-45af-b9e3-7eedfdb658e3" />
+              <suppliersInternal>
+                <dependency Id="fa9a6958-9127-4ab5-850c-818fedb5a22d">
+                  <classMoniker Id="3b1d9b96-042f-4bcb-b327-e046e20bad7c" LastKnownName="Model mappers" />
+                  <elementDefinition Id="39eedc57-2a31-4fc3-8109-6602a81479b9" />
+                </dependency>
+                <dependency Id="f872e599-ea3e-4bf9-b8a2-f8536d247ce6">
+                  <classMoniker Id="a80ee784-cd2b-4711-ab83-e19df9a8ad10" LastKnownName="Implementation" />
+                  <elementDefinition Id="4f5e168a-42f0-43ee-9298-195049ed350c" />
+                </dependency>
+                <dependency Id="f625b118-aea1-49d3-8295-085d9c631d3e">
+                  <classMoniker Id="83749164-90c9-4465-a4ce-523f6153035a" LastKnownName="Models" />
+                  <elementDefinition Id="b6cee3f1-92fa-4914-a6bd-3f4d2cb4a560" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="11daef5a-e301-4229-93a4-344dd2bff2bc" name="BLL">
+        <elementDefinition Id="751e3eab-5b80-4d0d-b28f-f846214869f0" />
+        <importedPackagesInternal>
+          <packageImport Id="24e50a87-f44f-4c80-9dd4-45d37028f17b" visibility="Public">
+            <packageMoniker Id="5e86891a-56d1-49f7-86ff-8a43be7345fe" LastKnownName="DAL" />
+            <elementDefinition Id="e3ad2bfc-8776-4970-aa15-5acfa89fa97e" />
+          </packageImport>
+        </importedPackagesInternal>
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="75da6fc8-2abd-4481-b0a6-9a1e6e312842" name="Value Objets" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="bcafb96d-3b96-480b-ab0e-0a1a59a37b31" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" name="Business Objects" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad" />
+              <targetEnds>
+                <association Id="db166e66-1673-490c-888b-c475fa79ded1" isDerived="false" sourceEndRoleName="Business Objects" targetEndRoleName="Value Objets" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="75da6fc8-2abd-4481-b0a6-9a1e6e312842" LastKnownName="Value Objets" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="5778eadd-b0b8-465e-8893-58c0e71f5ee3" name="Business Objects" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                        <elementDefinition Id="11296bb8-d64b-432d-a08a-35a6a159c14b" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="d3b94443-f28f-409a-8b24-20e3fcbb27da" name="Value Objets" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="863ccfea-8db2-4c4a-9d18-6404e56cc6ba" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="57b5c978-f6b7-4815-949b-fd4d3b644d08" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <Interface Id="19da07e7-5da2-4e0e-a9b2-5f576ceb6b05" name="Repositories" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="9df76bd5-ccea-4a0b-8c7a-98df7e3a52c6" />
+              <suppliersInternal>
+                <dependency Id="b9ababca-63a0-4173-a349-72ec61b0d65f">
+                  <classMoniker Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" LastKnownName="Business Objects" />
+                  <elementDefinition Id="a9b7066e-0890-418c-b8aa-171adcecb830" />
+                </dependency>
+              </suppliersInternal>
+            </Interface>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="a80ee784-cd2b-4711-ab83-e19df9a8ad10" name="Implementation" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="6d2564e1-5d6d-44e7-9672-f15c6844c8b8" />
+              <suppliersInternal>
+                <dependency Id="0f7f6e41-765b-4691-9990-75e15abd8135">
+                  <interfaceMoniker Id="19da07e7-5da2-4e0e-a9b2-5f576ceb6b05" LastKnownName="Repositories" />
+                  <elementDefinition Id="94c35851-7148-4f26-bf58-91b26e7bc700" />
+                </dependency>
+                <dependency Id="563825fe-7670-46cf-be8a-42ca1fc443de">
+                  <classMoniker Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" LastKnownName="Business Objects" />
+                  <elementDefinition Id="4e79110f-aab5-4c25-8bf1-6bd90abddd30" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="3d88e39f-cd8a-4b09-8e4f-e6c6e876caef" name="Alicargo.ConceptualModels">
+    <elementDefinition Id="6ef81f4b-ba1e-4185-84f2-becd1df83371" />
+    <profileInstances>
+      <packageHasProfileInstances Id="dac0052b-1323-4d66-9152-bffb39d5d87b">
+        <profileInstance Id="30920b8c-1106-4d0c-8459-e6f328809b96" name="TextTemplateBindings">
+          <elementDefinition Id="26048530-1018-4b8a-8e98-5a54e9c53552" />
+        </profileInstance>
+        <elementDefinition Id="66ac7475-c775-4542-a8dd-b69259fa2945" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>
