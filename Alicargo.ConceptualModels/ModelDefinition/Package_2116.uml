@@ -33,8 +33,8 @@
           <association
             Id="57b5c978-f6b7-4815-949b-fd4d3b644d08"
             isDerived="false"
-            sourceEndRoleName="Business Objects"
-            targetEndRoleName="Value Objets"
+            sourceEndRoleName=""
+            targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -45,7 +45,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="11296bb8-d64b-432d-a08a-35a6a159c14b"
-                  name="Business Objects"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -58,14 +57,26 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="863ccfea-8db2-4c4a-9d18-6404e56cc6ba"
-                  name="Value Objets"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="0be2c321-838d-4db1-9e39-1edc2e0ed5ca"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="05e48ed0-9aa0-4a69-b650-b119edc80647"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -80,10 +91,10 @@
         isLeaf="false">
         <suppliersInternal>
           <dependency
-            Id="a9b7066e-0890-418c-b8aa-171adcecb830">
+            Id="c3717662-9191-4803-bcf1-04da79c5d748">
             <classMoniker
-              Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad"
-              LastKnownName="Business Objects"
+              Id="aedbc228-bcad-4df4-972f-72405dcc9cd8"
+              LastKnownName="DTO"
               LastKnownLocation="Package_2116.uml" />
           </dependency>
         </suppliersInternal>
@@ -92,7 +103,7 @@
     <packageHasNamedElement>
       <class
         Id="6d2564e1-5d6d-44e7-9672-f15c6844c8b8"
-        name="Implementation"
+        name="Business Logic"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -105,10 +116,96 @@
               LastKnownLocation="Package_2116.uml" />
           </dependency>
           <dependency
-            Id="4e79110f-aab5-4c25-8bf1-6bd90abddd30">
+            Id="4370d095-c61a-4306-824d-6b35737445f1">
+            <classMoniker
+              Id="1e88681a-3c04-408f-b0a2-40a64e216965"
+              LastKnownName="Mappres"
+              LastKnownLocation="Package_2116.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="aedbc228-bcad-4df4-972f-72405dcc9cd8"
+        name="DTO"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="30e56562-06a4-4cc4-aabe-ad6d73b612ff"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="bcafb96d-3b96-480b-ab0e-0a1a59a37b31"
+              LastKnownName="Value Objets"
+              LastKnownLocation="Package_2116.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="15cb11b8-9b74-407d-96ec-0245a9f0983c"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c0f13d71-bae4-4a4e-9ae7-9911da1564ab"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="2e447f93-1422-485a-adb8-e5219f0d91f1"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="78c17533-868b-4258-9ca6-2b80de71802b"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1e88681a-3c04-408f-b0a2-40a64e216965"
+        name="Mappres"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="30a644c9-1786-412e-a3e9-01cefcc99860">
             <classMoniker
               Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad"
               LastKnownName="Business Objects"
+              LastKnownLocation="Package_2116.uml" />
+          </dependency>
+          <dependency
+            Id="58652784-6bb2-41cb-9b24-f27f2381d06f">
+            <classMoniker
+              Id="aedbc228-bcad-4df4-972f-72405dcc9cd8"
+              LastKnownName="DTO"
               LastKnownLocation="Package_2116.uml" />
           </dependency>
         </suppliersInternal>

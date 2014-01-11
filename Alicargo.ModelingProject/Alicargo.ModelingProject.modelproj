@@ -31,19 +31,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Validate Include="Projects.layerdiagram">
-      <SubType>Content</SubType>
-    </Validate>
-    <Validate Include="Projects.layerdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>Projects.layerdiagram</DependentUpon>
-    </Validate>
-    <Validate Include="Projects.layerdiagram.suppressions">
-      <SubType>Content</SubType>
-      <DependentUpon>Projects.layerdiagram</DependentUpon>
-    </Validate>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Alicargo.Contracts\Alicargo.Contracts.csproj">
       <Name>Alicargo.Contracts</Name>
       <Project>{e2f1a146-9076-4833-995e-084ac1b3eac7}</Project>
