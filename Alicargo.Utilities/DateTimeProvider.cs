@@ -21,7 +21,7 @@ namespace Alicargo.Utilities
 			_current = value;
 		}
 
-		private class DefaultDateTimeProvider : IDateTimeProvider
+		private sealed class DefaultDateTimeProvider : IDateTimeProvider
 		{
 			DateTimeOffset IDateTimeProvider.Now
 			{

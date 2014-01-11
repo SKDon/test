@@ -34,7 +34,7 @@ namespace Alicargo.Services.Excel
 
 		public MemoryStream Get(long clientId, string language)
 		{
-			CultureProvider.Current.Set(() => language);
+			CultureProvider.Set(() => language);
 
 			var history = _balance.GetHistory(clientId);
 

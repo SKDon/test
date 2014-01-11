@@ -15,7 +15,7 @@ namespace Alicargo.MvcHelpers.Filters
 
 	    public void OnAuthorization(AuthorizationContext filterContext)
 		{
-			CultureProvider.Current.Set(_getLanguage);
+			CultureProvider.Set(_getLanguage);
 	    }
 	}
 }

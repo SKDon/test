@@ -56,7 +56,6 @@
     <Compile Include="Localization\CultureProvider.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="ExtensionsHelper.cs" />
-    <Compile Include="Localization\ICultureProvider.cs" />
     <Compile Include="IPasswordConverter.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="Localization\DisplayNameLocalizedAttribute.cs" />

@@ -14,7 +14,7 @@ namespace Alicargo.Services.Excel
 	{
 		internal MemoryStream Get(SenderCalculationListCollection data, string language)
 		{
-			CultureProvider.Current.Set(() => language);
+			CultureProvider.Set(() => language);
 
 			var stream = new MemoryStream();
 

@@ -7,13 +7,13 @@ namespace Alicargo.Utilities
 {    
     public sealed class PasswordConverter : IPasswordConverter
     {
-        private static readonly Lazy<SHA256> Lazy = new Lazy<SHA256>(SHA256.Create);
+        private static readonly Lazy<SHA256> SHA256 = new Lazy<SHA256>(System.Security.Cryptography.SHA256.Create);
 
         public byte[] GetPasswordHash(string password, byte[] salt)
         {
             var bytes = Encoding.UTF8.GetBytes(password).Concat(salt).ToArray();
 
-            return Lazy.Value.ComputeHash(bytes);
+            return SHA256.Value.ComputeHash(bytes);
         }
 
 	    public byte[] GenerateSalt()

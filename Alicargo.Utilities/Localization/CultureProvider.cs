@@ -5,33 +5,54 @@ using System.Threading;
 
 namespace Alicargo.Utilities.Localization
 {
-	// todo: refactor
-	public sealed class CultureProvider : ICultureProvider
+	public static class CultureProvider
 	{
-		private CultureProvider() { }
+		private static ICultureProvider _current;
 
 		static CultureProvider()
 		{
-			Current = new CultureProvider();
+			SetProvider(new DefaultCultureProvider());
 		}
 
-		public static ICultureProvider Current { get; set; }
-
-		public void Set(Func<string> language)
+		public static void SetProvider(ICultureProvider value)
 		{
-			var languageName = language();
-
-			var culture = CultureInfo.GetCultures(CultureTypes.NeutralCultures).First(x =>
-				x.TwoLetterISOLanguageName.Equals(languageName,
-					StringComparison.InvariantCultureIgnoreCase));
-
-			Thread.CurrentThread.CurrentCulture = culture;
-			Thread.CurrentThread.CurrentUICulture = culture;
+			_current = value;
 		}
 
-		public string GetLanguage()
+		public static void Set(Func<string> language)
 		{
-			return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+			_current.Set(language);
+		}
+
+		public static string Get()
+		{
+			return _current.GetLanguage();
+		}
+
+		private sealed class DefaultCultureProvider : ICultureProvider
+		{
+			void ICultureProvider.Set(Func<string> language)
+			{
+				var languageName = language();
+
+				var culture = CultureInfo.GetCultures(CultureTypes.NeutralCultures).First(x =>
+					x.TwoLetterISOLanguageName.Equals(languageName,
+						StringComparison.InvariantCultureIgnoreCase));
+
+				Thread.CurrentThread.CurrentCulture = culture;
+				Thread.CurrentThread.CurrentUICulture = culture;
+			}
+
+			string ICultureProvider.GetLanguage()
+			{
+				return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+			}
+		}
+
+		public interface ICultureProvider
+		{
+			void Set(Func<string> language);
+			string GetLanguage();
 		}
 	}
 }
