@@ -50,7 +50,7 @@ PRINT N'Creating [dbo].[City_GetList]...';
 
 GO
 CREATE PROCEDURE [dbo].[City_GetList]
-	@Language VARCHAR(2)
+	@Language CHAR(2)
 AS
 BEGIN
 	
