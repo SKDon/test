@@ -18,7 +18,7 @@ namespace Alicargo.Core.Calculation
 			int columnCount)
 		{
 			return history.Select(x => (IDrawable)new ClientBalanceHistoryItemDrawable(
-				x, client.Nic, columnCount, excel)).ToArray();
+				x, columnCount, excel)).ToArray();
 		}
 	}
 }

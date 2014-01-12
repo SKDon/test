@@ -72,7 +72,7 @@ namespace Alicargo.Core.Calculation
 			return stream;
 		}
 
-		private static int DrawRows(ClientData client, CalculationData[] calculations, 
+		private static int DrawRows(ClientData client, CalculationData[] calculations,
 			ClientBalanceHistoryItem[] history, int columnCount, int iRow, ExcelWorksheet excel)
 		{
 			var drawables = DrawableMapper.Get(history, excel, client, columnCount)
@@ -82,7 +82,7 @@ namespace Alicargo.Core.Calculation
 
 			foreach(var drawable in drawables)
 			{
-				iRow = drawable.Draw(iRow);
+				iRow = drawable.Draw(iRow) + 1;
 			}
 
 			return iRow;

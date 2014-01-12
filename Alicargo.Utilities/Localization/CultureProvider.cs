@@ -29,6 +29,11 @@ namespace Alicargo.Utilities.Localization
 			return _current.GetLanguage();
 		}
 
+		public static CultureInfo GetCultureInfo()
+		{
+			return CultureInfo.GetCultureInfo(_current.GetLanguage());
+		}
+
 		private sealed class DefaultCultureProvider : ICultureProvider
 		{
 			void ICultureProvider.Set(Func<string> language)
