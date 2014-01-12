@@ -88,6 +88,10 @@
     <Compile Include="Services\Email\SilentMailSender.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alicargo.Core.Contracts\Alicargo.Core.Contracts.csproj">
+      <Project>{5d298560-5149-4dbb-9444-ee2ee9430483}</Project>
+      <Name>Alicargo.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alicargo.DataAccess.Contracts\Alicargo.DataAccess.Contracts.csproj">
       <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
       <Name>Alicargo.DataAccess.Contracts</Name>

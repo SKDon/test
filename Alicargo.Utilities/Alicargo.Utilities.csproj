@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
+      <Link>Properties\ProjectInfo.cs</Link>
+    </Compile>
     <Compile Include="Localization\CultureProvider.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="ExtensionsHelper.cs" />
