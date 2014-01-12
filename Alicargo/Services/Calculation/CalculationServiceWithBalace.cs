@@ -33,7 +33,7 @@ namespace Alicargo.Services.Calculation
 			var money = CalculationDataHelper.GetMoney(calculation);
 
 			_balance.Decrease(calculation.ClientId, money,
-				GetComment(EventType.Calculate, calculation), DateTimeProvider.Now);
+				GetComment(EventType.Calculate, calculation), DateTimeProvider.Now, true);
 
 			return calculation;
 		}
@@ -47,7 +47,7 @@ namespace Alicargo.Services.Calculation
 			var money = CalculationDataHelper.GetMoney(calculation);
 
 			_balance.Increase(calculation.ClientId, money,
-				GetComment(EventType.CalculationCanceled, calculation), DateTimeProvider.Now);
+				GetComment(EventType.CalculationCanceled, calculation), DateTimeProvider.Now, true);
 		}
 
 		private static string GetComment(string type, CalculationData calculation)

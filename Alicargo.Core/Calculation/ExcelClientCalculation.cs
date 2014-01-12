@@ -43,7 +43,7 @@ namespace Alicargo.Core.Calculation
 
 			var calculations = _calculations.GetByClient(clientId);
 
-			var history = _balance.GetHistory(clientId);
+			var history = _balance.GetHistory(clientId).Where(x => !x.IsCalculation).ToArray();
 
 			return Get(client, balance, calculations, history);
 		}

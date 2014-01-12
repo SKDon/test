@@ -1,6 +1,5 @@
 ﻿using System;
 using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
@@ -15,9 +14,9 @@ namespace Alicargo.Services.Users.Client
 			_balance = balance;
 		}
 
-		public void Increase(long clientId, decimal money, string comment, DateTimeOffset timestamp)
+		public void Increase(long clientId, decimal money, string comment, DateTimeOffset timestamp, bool isCalculation)
 		{
-			if (money <= 0)
+			if(money <= 0)
 			{
 				throw new ArgumentException(@"Money value must be positive", "money");
 			}
@@ -28,12 +27,12 @@ namespace Alicargo.Services.Users.Client
 
 			_balance.SetBalance(clientId, balance);
 
-			_balance.AddToHistory(clientId, balance, money, EventType.BalanceIncreased, timestamp, comment);
+			_balance.AddToHistory(clientId, balance, money, EventType.BalanceIncreased, timestamp, comment, isCalculation);
 		}
 
-		public void Decrease(long clientId, decimal money, string comment, DateTimeOffset timestamp)
+		public void Decrease(long clientId, decimal money, string comment, DateTimeOffset timestamp, bool isCalculation)
 		{
-			if (money <= 0)
+			if(money <= 0)
 			{
 				throw new ArgumentException(@"Money value must be positive", "money");
 			}
@@ -44,7 +43,7 @@ namespace Alicargo.Services.Users.Client
 
 			_balance.SetBalance(clientId, balance);
 
-			_balance.AddToHistory(clientId, balance, money, EventType.BalanceDecreased, timestamp, comment);
+			_balance.AddToHistory(clientId, balance, money, EventType.BalanceDecreased, timestamp, comment, isCalculation);
 		}
 	}
 }

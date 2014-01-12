@@ -9,6 +9,7 @@
 	[Balance] MONEY NOT NULL,
 	[Money] MONEY NOT NULL,
 	[Comment] NVARCHAR(MAX) NULL,
+	[IsCalculation] BIT NOT NULL
 
 	CONSTRAINT [PK_dbo.ClientBalanceHistory] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.ClientBalanceHistory_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]) ON DELETE CASCADE,

@@ -3,7 +3,6 @@ using System.Transactions;
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Event;
-using Alicargo.Core.Event;
 using Alicargo.Jobs.Balance.Entities;
 
 namespace Alicargo.Services.Users.Client
@@ -19,11 +18,11 @@ namespace Alicargo.Services.Users.Client
 			_events = events;
 		}
 
-		public void Increase(long clientId, decimal money, string comment, DateTimeOffset timestamp)
+		public void Increase(long clientId, decimal money, string comment, DateTimeOffset timestamp, bool isCalculation)
 		{
 			using(var scope = new TransactionScope())
 			{
-				_instance.Increase(clientId, money, comment, timestamp);
+				_instance.Increase(clientId, money, comment, timestamp, isCalculation);
 
 				AddEvent(clientId, money, comment, timestamp, EventType.BalanceIncreased);
 
@@ -31,11 +30,11 @@ namespace Alicargo.Services.Users.Client
 			}
 		}
 
-		public void Decrease(long clientId, decimal money, string comment, DateTimeOffset timestamp)
+		public void Decrease(long clientId, decimal money, string comment, DateTimeOffset timestamp, bool isCalculation)
 		{
 			using(var scope = new TransactionScope())
 			{
-				_instance.Decrease(clientId, money, comment, timestamp);
+				_instance.Decrease(clientId, money, comment, timestamp, isCalculation);
 
 				AddEvent(clientId, money, comment, timestamp, EventType.BalanceDecreased);
 

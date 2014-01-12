@@ -68,7 +68,7 @@ namespace Alicargo.Controllers.Calculation
 		{
 			Debug.Assert(model.Money != null);
 
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindBag(clientId);
 
@@ -76,10 +76,10 @@ namespace Alicargo.Controllers.Calculation
 			}
 
 			try
-			{				
-				_balance.Decrease(clientId, model.Money.Value, model.Comment, model.Timestamp);
+			{
+				_balance.Decrease(clientId, model.Money.Value, model.Comment, model.Timestamp, false);
 			}
-			catch (ArgumentException e)
+			catch(ArgumentException e)
 			{
 				BindBag(clientId);
 
@@ -109,7 +109,7 @@ namespace Alicargo.Controllers.Calculation
 		{
 			Debug.Assert(model.Money != null);
 
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindBag(clientId);
 
@@ -118,9 +118,9 @@ namespace Alicargo.Controllers.Calculation
 
 			try
 			{
-				_balance.Increase(clientId, model.Money.Value, model.Comment, model.Timestamp);
+				_balance.Increase(clientId, model.Money.Value, model.Comment, model.Timestamp, false);
 			}
-			catch (ArgumentException e)
+			catch(ArgumentException e)
 			{
 				BindBag(clientId);
 

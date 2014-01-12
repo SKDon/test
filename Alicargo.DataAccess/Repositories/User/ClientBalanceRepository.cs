@@ -1,8 +1,6 @@
 ﻿using System;
-using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
@@ -17,7 +15,8 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor = executor;
 		}
 
-		public void AddToHistory(long clientId, decimal balance, decimal money, EventType type, DateTimeOffset timestamp, string comment)
+		public void AddToHistory(long clientId, decimal balance, decimal money, EventType type, DateTimeOffset timestamp,
+			string comment, bool isCalculation)
 		{
 			_executor.Execute("[dbo].[ClientBalanceHistory_Add]", new
 			{
@@ -26,7 +25,8 @@ namespace Alicargo.DataAccess.Repositories.User
 				money,
 				EventTypeId = type,
 				timestamp,
-				comment
+				comment,
+				isCalculation
 			});
 		}
 

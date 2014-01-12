@@ -11,5 +11,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.User
 		public decimal Balance { get; set; }
 		public decimal Money { get; set; }
 		public string Comment { get; set; }
+		public bool IsCalculation { get; set; }
 	}
 }
