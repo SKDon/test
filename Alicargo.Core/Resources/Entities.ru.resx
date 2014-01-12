@@ -468,4 +468,7 @@
   <data name="Money" xml:space="preserve">
     <value>Деньги</value>
   </data>
+  <data name="Client" xml:space="preserve">
+    <value>Клиент</value>
+  </data>
 </root>

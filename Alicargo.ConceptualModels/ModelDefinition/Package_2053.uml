@@ -3,16 +3,6 @@
   dslVersion="1.0.0.0"
   Id="b77ec0e1-719d-43f2-a098-a059497fd7ca"
   name="DAL" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
-  <importedPackagesInternal>
-    <packageImport
-      Id="0489c685-eda5-401c-a529-6cefeef45e78"
-      visibility="Public">
-      <packageMoniker
-        Id="ef4d077a-dbef-413c-bbff-a37ff58a8ae8"
-        LastKnownName="Databases"
-        LastKnownLocation="Package_2045.uml" />
-    </packageImport>
-  </importedPackagesInternal>
   <packagedElements>
     <packageHasNamedElement>
       <class
@@ -45,7 +35,7 @@
             <interfaceMoniker
               Id="9df76bd5-ccea-4a0b-8c7a-98df7e3a52c6"
               LastKnownName="Repositories"
-              LastKnownLocation="Package_2116.uml" />
+              LastKnownLocation="Package_1542.uml" />
           </interfaceRealization>
           <dependency
             Id="669ae088-5ac5-48c9-bb64-bd9f4f975413">

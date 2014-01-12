@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Web;
 using Alicargo.Contracts.Resources;
+using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Calculation.Sender;
 using System.IO;

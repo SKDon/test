@@ -119,21 +119,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Entities.Designer.cs">
-      <DependentUpon>Entities.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Entities.it.Designer.cs">
-      <DependentUpon>Entities.it.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Entities.ru.Designer.cs">
-      <DependentUpon>Entities.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\Enums.Designer.cs">
       <DependentUpon>Enums.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -198,21 +183,6 @@
     <EmbeddedResource Include="Resources\ApplicationFileType.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationFileType.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Entities.ru.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums.it.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

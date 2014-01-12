@@ -48,6 +48,18 @@
         LastKnownName="BLL"
         LastKnownLocation="Package_2116.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="5ae1b42a-aaed-47bc-98ff-8f2cba1ca231"
+        LastKnownName="DAL Contracts"
+        LastKnownLocation="Package_1542.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="aeb230cd-be16-49c3-b13d-45d467cc5b2d"
+        LastKnownName="BLL Contracts"
+        LastKnownLocation="Package_1547.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

@@ -42,6 +42,7 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="Calculation\IExcelClientCalculation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

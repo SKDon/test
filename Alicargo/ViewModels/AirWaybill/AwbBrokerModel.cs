@@ -1,4 +1,4 @@
-﻿using Alicargo.Contracts.Resources;
+﻿using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels.AirWaybill

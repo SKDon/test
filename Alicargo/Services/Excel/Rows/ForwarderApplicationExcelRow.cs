@@ -1,4 +1,5 @@
 ﻿using Alicargo.Contracts.Resources;
+using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Application;
 

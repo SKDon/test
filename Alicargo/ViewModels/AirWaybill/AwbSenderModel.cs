@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alicargo.Contracts.Resources;
 using Alicargo.Utilities.Localization;
+using Alicargo.Core.Resources;
 
 namespace Alicargo.ViewModels.AirWaybill
 {

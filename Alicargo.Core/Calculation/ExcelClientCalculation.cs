@@ -9,14 +9,14 @@ using Alicargo.Contracts.Repositories.User;
 using Alicargo.Contracts.Resources;
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Helpers;
+using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using Resources;
 
 namespace Alicargo.Services.Excel
 {
-	internal sealed class ExcelClientCalculation : IExcelClientCalculation
+	public sealed class ExcelClientCalculation : IExcelClientCalculation
 	{
 		private readonly IClientBalanceRepository _balance;
 		private readonly ICalculationRepository _calculations;
@@ -50,7 +50,7 @@ namespace Alicargo.Services.Excel
 
 			using(var pck = new ExcelPackage())
 			{
-				var ws = pck.Workbook.Worksheets.Add(Pages.Applications);
+				var ws = pck.Workbook.Worksheets.Add(Entities.Application);
 				ws.Cells.Style.Font.Name = ExcelConstants.DefaultFontName;
 				ws.Cells.Style.Font.Size = ExcelConstants.DefaultFontSize;
 				ws.Cells.Style.Numberformat.Format = "0.00";
@@ -150,7 +150,7 @@ namespace Alicargo.Services.Excel
 			var iColumn = 1;
 			const int iRow = 2;
 
-			ws.Cells[iRow, iColumn++].Value = Pages.Client;
+			ws.Cells[iRow, iColumn++].Value = Entities.Client;
 			ws.Cells[iRow, iColumn++].Value = Entities.DisplayNumber;
 			ws.Cells[iRow, iColumn++].Value = Entities.FactoryName;
 			ws.Cells[iRow, iColumn++].Value = Entities.Mark;

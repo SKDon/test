@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Web;
-using Alicargo.Contracts.Resources;
+using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Calculation.Admin;
 using System.IO;
@@ -218,7 +218,7 @@ namespace Alicargo.Services.Excel
 		private static int DrawHeader(ExcelWorksheet ws)
 		{
 			var iColumn = 1;
-			ws.Cells[1, iColumn++].Value = Pages.Client;
+			ws.Cells[1, iColumn++].Value = Entities.Client;
 			ws.Cells[1, iColumn++].Value = Entities.DisplayNumber;
 			ws.Cells[1, iColumn++].Value = Entities.FactoryName;
 			ws.Cells[1, iColumn++].Value = Entities.Mark;

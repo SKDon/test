@@ -41,6 +41,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.3.1.3.3\lib\net35\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -49,6 +52,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -63,8 +67,9 @@
     <Compile Include="Calculation\Entities\ClientCalculationGroup.cs" />
     <Compile Include="Calculation\Entities\ClientCalculationItem.cs" />
     <Compile Include="Calculation\Entities\ClientCalculationListCollection.cs" />
+    <Compile Include="Calculation\ExcelClientCalculation.cs" />
     <Compile Include="Calculation\IClientCalculationPresenter.cs" />
-    <Compile Include="Calculation\IExcelClientCalculation.cs" />
+    <Compile Include="Excel\ExcelConstants.cs" />
     <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Event\IPartitionConverter.cs" />
     <Compile Include="Event\IEventFacade.cs" />
@@ -72,6 +77,21 @@
     <Compile Include="Helpers\CalculationDataHelper.cs" />
     <Compile Include="Helpers\SumHolder.cs" />
     <Compile Include="Event\EventFacade.cs" />
+    <Compile Include="Resources\Entities.Designer.cs">
+      <DependentUpon>Entities.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Entities.it.Designer.cs">
+      <DependentUpon>Entities.it.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Entities.ru.Designer.cs">
+      <DependentUpon>Entities.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Mail.Designer.cs">
       <DependentUpon>Mail.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -105,6 +125,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Entities.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Entities.it.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Entities.ru.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Mail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Mail.Designer.cs</LastGenOutput>

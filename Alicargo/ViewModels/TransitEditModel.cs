@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Resources;
+using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels

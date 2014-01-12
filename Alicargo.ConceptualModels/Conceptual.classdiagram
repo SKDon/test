@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="6a49b113-4100-4f93-b8af-e5190b2af8dd" name="Conceptual" linkedPackageId="3d88e39f-cd8a-4b09-8e4f-e6c6e876caef" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="e8cff46b-a31e-413a-b909-7581fec0ab12">
-      <profileInstance Id="04b4ed5d-553e-45c5-9624-d6f960f05b1c" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="54052049-ac37-4ee2-b7b0-df681852ac96">
-      <profileInstance Id="c8b6b313-c5aa-41d6-bad4-4e9f5fd6ee4d" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <logicalClassDesignerModelHasPackages>
       <package Id="3eadf8eb-9b1d-4f9a-b9e7-73ce7c1452d8" name="Databases">
@@ -41,12 +27,6 @@
     <logicalClassDesignerModelHasPackages>
       <package Id="5e86891a-56d1-49f7-86ff-8a43be7345fe" name="DAL">
         <elementDefinition Id="b77ec0e1-719d-43f2-a098-a059497fd7ca" />
-        <importedPackagesInternal>
-          <packageImport Id="4b6337a1-16cc-4da4-a384-9b072d99ff45" visibility="Public">
-            <packageMoniker Id="3eadf8eb-9b1d-4f9a-b9e7-73ce7c1452d8" LastKnownName="Databases" />
-            <elementDefinition Id="0489c685-eda5-401c-a529-6cefeef45e78" />
-          </packageImport>
-        </importedPackagesInternal>
         <packagedElements>
           <packageHasNamedElement>
             <class Id="93d31674-ec26-4ca9-9457-f13fbbd411a5" name="POCO" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -84,24 +64,18 @@
     <logicalClassDesignerModelHasPackages>
       <package Id="9752ecee-0aa3-4d20-bf47-d40c49c632c1" name="Client">
         <elementDefinition Id="34d1b14f-d54d-44c9-b332-18917b44fa94" />
-        <importedPackagesInternal>
-          <packageImport Id="74df701f-4225-4450-b8f1-c390d3065ac1" visibility="Public">
-            <packageMoniker Id="11daef5a-e301-4229-93a4-344dd2bff2bc" LastKnownName="BLL" />
-            <elementDefinition Id="d8916acc-46fc-4a40-bbcb-bf71d7340c46" />
-          </packageImport>
-        </importedPackagesInternal>
         <packagedElements>
           <packageHasNamedElement>
             <class Id="3b1d9b96-042f-4bcb-b327-e046e20bad7c" name="Mappers" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="aec5323d-89ea-4114-aca7-4bc167f67792" />
               <suppliersInternal>
-                <dependency Id="dc295e3c-d0c9-4ce4-bd38-c102522d6cf7">
-                  <classMoniker Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" LastKnownName="Business Objects" />
-                  <elementDefinition Id="25ef790d-77a0-4eea-aebe-cb5a742406c0" />
-                </dependency>
                 <dependency Id="fefa7b26-8e88-4009-b00d-fad15044e2e0">
                   <classMoniker Id="83749164-90c9-4465-a4ce-523f6153035a" LastKnownName="Models" />
                   <elementDefinition Id="0873555d-8db3-4df1-8762-2f8a8f9cc909" />
+                </dependency>
+                <dependency Id="e8d8f7bc-d42a-4d89-b1b7-7146fad314a3">
+                  <classMoniker Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" LastKnownName="Business Objects" />
+                  <elementDefinition Id="4128ada7-96d0-436b-ab9a-add84bb471ad" />
                 </dependency>
               </suppliersInternal>
             </class>
@@ -123,16 +97,16 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="9fa3a1ff-fe63-45b2-99a0-fb95ca1ebd5d" name="Controllers" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="9fa3a1ff-fe63-45b2-99a0-fb95ca1ebd5d" name="Client Logic" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="cc19c467-2291-45af-b9e3-7eedfdb658e3" />
               <suppliersInternal>
                 <dependency Id="fa9a6958-9127-4ab5-850c-818fedb5a22d">
                   <classMoniker Id="3b1d9b96-042f-4bcb-b327-e046e20bad7c" LastKnownName="Mappers" />
                   <elementDefinition Id="39eedc57-2a31-4fc3-8109-6602a81479b9" />
                 </dependency>
-                <dependency Id="f872e599-ea3e-4bf9-b8a2-f8536d247ce6">
-                  <classMoniker Id="a80ee784-cd2b-4711-ab83-e19df9a8ad10" LastKnownName="Business Logic" />
-                  <elementDefinition Id="4f5e168a-42f0-43ee-9298-195049ed350c" />
+                <dependency Id="5d8c364f-a787-4241-b071-b457c6265527">
+                  <interfaceMoniker Id="be9a308d-c1f3-4e9e-ab25-4ba2ec7d49a0" LastKnownName="Business Logic" />
+                  <elementDefinition Id="bd39cd5c-14f4-4276-a0bd-fd916bee9847" />
                 </dependency>
               </suppliersInternal>
               <targetEnds>
@@ -181,62 +155,7 @@
     <logicalClassDesignerModelHasPackages>
       <package Id="11daef5a-e301-4229-93a4-344dd2bff2bc" name="BLL">
         <elementDefinition Id="751e3eab-5b80-4d0d-b28f-f846214869f0" />
-        <importedPackagesInternal>
-          <packageImport Id="33f14bd7-a1c2-4a22-b7b0-59a76413867e" visibility="Public">
-            <packageMoniker Id="5e86891a-56d1-49f7-86ff-8a43be7345fe" LastKnownName="DAL" />
-            <elementDefinition Id="2c68ae0f-9423-4c56-8f07-be8ab24c1f0a" />
-          </packageImport>
-        </importedPackagesInternal>
         <packagedElements>
-          <packageHasNamedElement>
-            <class Id="75da6fc8-2abd-4481-b0a6-9a1e6e312842" name="Value Objets" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="bcafb96d-3b96-480b-ab0e-0a1a59a37b31" />
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" name="Business Objects" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad" />
-              <targetEnds>
-                <association Id="db166e66-1673-490c-888b-c475fa79ded1" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="75da6fc8-2abd-4481-b0a6-9a1e6e312842" LastKnownName="Value Objets" />
-                  <relationshipOwnedElementsInternal>
-                    <associationHasOwnedEnds>
-                      <memberEnd Id="5778eadd-b0b8-465e-8893-58c0e71f5ee3" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                        <elementDefinition Id="11296bb8-d64b-432d-a08a-35a6a159c14b" />
-                      </memberEnd>
-                    </associationHasOwnedEnds>
-                    <associationHasOwnedEnds>
-                      <memberEnd Id="d3b94443-f28f-409a-8b24-20e3fcbb27da" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                        <lowerValueInternal>
-                          <literalString Id="e97e6cb5-80ae-42da-8aca-61d9394422ad" name="Lower" value="1">
-                            <elementDefinition Id="0be2c321-838d-4db1-9e39-1edc2e0ed5ca" />
-                          </literalString>
-                        </lowerValueInternal>
-                        <upperValueInternal>
-                          <literalString Id="9f5e762e-b74a-426f-b263-ae43ab91bea8" name="Upper" value="*">
-                            <elementDefinition Id="05e48ed0-9aa0-4a69-b650-b119edc80647" />
-                          </literalString>
-                        </upperValueInternal>
-                        <elementDefinition Id="863ccfea-8db2-4c4a-9d18-6404e56cc6ba" />
-                      </memberEnd>
-                    </associationHasOwnedEnds>
-                  </relationshipOwnedElementsInternal>
-                  <elementDefinition Id="57b5c978-f6b7-4815-949b-fd4d3b644d08" />
-                </association>
-              </targetEnds>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <Interface Id="19da07e7-5da2-4e0e-a9b2-5f576ceb6b05" name="Repositories" isAbstract="false" isLeaf="false">
-              <elementDefinition Id="9df76bd5-ccea-4a0b-8c7a-98df7e3a52c6" />
-              <suppliersInternal>
-                <dependency Id="92a7091a-6873-4ade-8025-d747ca640574">
-                  <classMoniker Id="5159f770-8dbb-469a-9701-cdefe6e8cb19" LastKnownName="DTO" />
-                  <elementDefinition Id="c3717662-9191-4803-bcf1-04da79c5d748" />
-                </dependency>
-              </suppliersInternal>
-            </Interface>
-          </packageHasNamedElement>
           <packageHasNamedElement>
             <class Id="a80ee784-cd2b-4711-ab83-e19df9a8ad10" name="Business Logic" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="6d2564e1-5d6d-44e7-9672-f15c6844c8b8" />
@@ -249,7 +168,49 @@
                   <classMoniker Id="7718d5a6-fe67-44bc-ba26-271fcb4d182e" LastKnownName="Mappres" />
                   <elementDefinition Id="4370d095-c61a-4306-824d-6b35737445f1" />
                 </dependency>
+                <interfaceRealization Id="9afbd146-2bfc-4cb9-83a7-b01921173c42">
+                  <interfaceMoniker Id="be9a308d-c1f3-4e9e-ab25-4ba2ec7d49a0" LastKnownName="Business Logic" />
+                  <elementDefinition Id="5e9c7cbb-d700-431e-bfaa-9ff618b69e7a" />
+                </interfaceRealization>
               </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="7718d5a6-fe67-44bc-ba26-271fcb4d182e" name="Mappres" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="1e88681a-3c04-408f-b0a2-40a64e216965" />
+              <suppliersInternal>
+                <dependency Id="272febb9-8cfb-4271-a77c-ed79e371b448">
+                  <classMoniker Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" LastKnownName="Business Objects" />
+                  <elementDefinition Id="30a644c9-1786-412e-a3e9-01cefcc99860" />
+                </dependency>
+                <dependency Id="d89526de-6cc1-4daa-a5f7-b4862cfe4183">
+                  <classMoniker Id="5159f770-8dbb-469a-9701-cdefe6e8cb19" LastKnownName="DTO" />
+                  <elementDefinition Id="58652784-6bb2-41cb-9b24-f27f2381d06f" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="e9e24f38-5291-45c6-8be5-b7d6d07a7780" name="DAL Contracts">
+        <elementDefinition Id="5ae1b42a-aaed-47bc-98ff-8f2cba1ca231" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <Interface Id="19da07e7-5da2-4e0e-a9b2-5f576ceb6b05" name="Repositories" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="9df76bd5-ccea-4a0b-8c7a-98df7e3a52c6" />
+              <suppliersInternal>
+                <dependency Id="92a7091a-6873-4ade-8025-d747ca640574">
+                  <classMoniker Id="5159f770-8dbb-469a-9701-cdefe6e8cb19" LastKnownName="DTO" />
+                  <elementDefinition Id="c3717662-9191-4803-bcf1-04da79c5d748" />
+                </dependency>
+              </suppliersInternal>
+            </Interface>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="75da6fc8-2abd-4481-b0a6-9a1e6e312842" name="Value Objets" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="bcafb96d-3b96-480b-ab0e-0a1a59a37b31" />
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
@@ -285,20 +246,56 @@
               </targetEnds>
             </class>
           </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="c5f9725e-7d90-4c7d-b8ff-4449f0482197" name="BLL Contracts">
+        <elementDefinition Id="aeb230cd-be16-49c3-b13d-45d467cc5b2d" />
+        <packagedElements>
           <packageHasNamedElement>
-            <class Id="7718d5a6-fe67-44bc-ba26-271fcb4d182e" name="Mappres" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="1e88681a-3c04-408f-b0a2-40a64e216965" />
+            <class Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" name="Business Objects" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad" />
+              <targetEnds>
+                <association Id="db166e66-1673-490c-888b-c475fa79ded1" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="75da6fc8-2abd-4481-b0a6-9a1e6e312842" LastKnownName="Value Objets" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="5778eadd-b0b8-465e-8893-58c0e71f5ee3" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                        <elementDefinition Id="11296bb8-d64b-432d-a08a-35a6a159c14b" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="d3b94443-f28f-409a-8b24-20e3fcbb27da" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <lowerValueInternal>
+                          <literalString Id="e97e6cb5-80ae-42da-8aca-61d9394422ad" name="Lower" value="1">
+                            <elementDefinition Id="0be2c321-838d-4db1-9e39-1edc2e0ed5ca" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="9f5e762e-b74a-426f-b263-ae43ab91bea8" name="Upper" value="*">
+                            <elementDefinition Id="05e48ed0-9aa0-4a69-b650-b119edc80647" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="863ccfea-8db2-4c4a-9d18-6404e56cc6ba" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="57b5c978-f6b7-4815-949b-fd4d3b644d08" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <Interface Id="be9a308d-c1f3-4e9e-ab25-4ba2ec7d49a0" name="Business Logic" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="ec88c62f-2f5b-43dc-a185-c3828419a7af" />
               <suppliersInternal>
-                <dependency Id="272febb9-8cfb-4271-a77c-ed79e371b448">
+                <dependency Id="e3135bba-f554-4f4b-93b5-bdfc23b973ea">
                   <classMoniker Id="05997602-9eaf-4c71-a3cf-cfd68d79ded1" LastKnownName="Business Objects" />
-                  <elementDefinition Id="30a644c9-1786-412e-a3e9-01cefcc99860" />
-                </dependency>
-                <dependency Id="d89526de-6cc1-4daa-a5f7-b4862cfe4183">
-                  <classMoniker Id="5159f770-8dbb-469a-9701-cdefe6e8cb19" LastKnownName="DTO" />
-                  <elementDefinition Id="58652784-6bb2-41cb-9b24-f27f2381d06f" />
+                  <elementDefinition Id="e2b621c8-8788-4ef7-97e7-77e199b3f5f2" />
                 </dependency>
               </suppliersInternal>
-            </class>
+            </Interface>
           </packageHasNamedElement>
         </packagedElements>
       </package>
@@ -312,6 +309,18 @@
           <elementDefinition Id="26048530-1018-4b8a-8e98-5a54e9c53552" />
         </profileInstance>
         <elementDefinition Id="66ac7475-c775-4542-a8dd-b69259fa2945" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="e8cff46b-a31e-413a-b909-7581fec0ab12">
+        <profileInstance Id="04b4ed5d-553e-45c5-9624-d6f960f05b1c" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="54052049-ac37-4ee2-b7b0-df681852ac96">
+        <profileInstance Id="c8b6b313-c5aa-41d6-bad4-4e9f5fd6ee4d" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
       </packageHasProfileInstances>
     </profileInstances>
   </package>

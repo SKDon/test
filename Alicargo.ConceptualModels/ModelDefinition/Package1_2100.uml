@@ -3,16 +3,6 @@
   dslVersion="1.0.0.0"
   Id="34d1b14f-d54d-44c9-b332-18917b44fa94"
   name="Client" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
-  <importedPackagesInternal>
-    <packageImport
-      Id="d8916acc-46fc-4a40-bbcb-bf71d7340c46"
-      visibility="Public">
-      <packageMoniker
-        Id="751e3eab-5b80-4d0d-b28f-f846214869f0"
-        LastKnownName="BLL"
-        LastKnownLocation="Package_2116.uml" />
-    </packageImport>
-  </importedPackagesInternal>
   <packagedElements>
     <packageHasNamedElement>
       <class
@@ -23,18 +13,18 @@
         isActiveClass="false">
         <suppliersInternal>
           <dependency
-            Id="25ef790d-77a0-4eea-aebe-cb5a742406c0">
-            <classMoniker
-              Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad"
-              LastKnownName="Business Objects"
-              LastKnownLocation="Package_2116.uml" />
-          </dependency>
-          <dependency
             Id="0873555d-8db3-4df1-8762-2f8a8f9cc909">
             <classMoniker
               Id="4dfb69a7-e824-4560-a415-2866707ea430"
               LastKnownName="Models"
               LastKnownLocation="Package1_2100.uml" />
+          </dependency>
+          <dependency
+            Id="4128ada7-96d0-436b-ab9a-add84bb471ad">
+            <classMoniker
+              Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad"
+              LastKnownName="Business Objects"
+              LastKnownLocation="Package_1547.uml" />
           </dependency>
         </suppliersInternal>
       </class>
@@ -68,7 +58,7 @@
     <packageHasNamedElement>
       <class
         Id="cc19c467-2291-45af-b9e3-7eedfdb658e3"
-        name="Controllers"
+        name="Client Logic"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -81,11 +71,11 @@
               LastKnownLocation="Package1_2100.uml" />
           </dependency>
           <dependency
-            Id="4f5e168a-42f0-43ee-9298-195049ed350c">
-            <classMoniker
-              Id="6d2564e1-5d6d-44e7-9672-f15c6844c8b8"
-              LastKnownName="Implementation"
-              LastKnownLocation="Package_2116.uml" />
+            Id="bd39cd5c-14f4-4276-a0bd-fd916bee9847">
+            <interfaceMoniker
+              Id="ec88c62f-2f5b-43dc-a185-c3828419a7af"
+              LastKnownName="Business Logic"
+              LastKnownLocation="Package_1547.uml" />
           </dependency>
         </suppliersInternal>
         <targetEnds>
