@@ -11,3 +11,6 @@ Sqlcmd -S $server -i "update-3.sql" -v MainDbName = "$mainDbPrefix`_$newVersion"
 Sqlcmd -S $server -i "update-4.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 Sqlcmd -S $server -i "update-5.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 Sqlcmd -S $server -i "update-6.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
+Sqlcmd -S $server -i "update-7.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
+
+cmd /c pause | out-null
