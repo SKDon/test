@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alicargo.Contracts.Resources;
+using Alicargo.DataAccess.Contracts.Resources;
 using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels.EmailTemplate

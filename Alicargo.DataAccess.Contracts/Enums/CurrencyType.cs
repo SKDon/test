@@ -2,6 +2,8 @@
 
 namespace Alicargo.Contracts.Enums
 {
+	using Resources = DataAccess.Contracts.Resources;
+
 	public enum CurrencyType
 	{
 		[DisplayNameLocalized(typeof(Resources.Enums), CurrencyName.Pound)]
