@@ -7,6 +7,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Calculation.Admin;

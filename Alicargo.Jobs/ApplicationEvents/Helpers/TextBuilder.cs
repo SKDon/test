@@ -9,6 +9,7 @@ using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Utilities;

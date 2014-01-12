@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Core.Contracts.Excel;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using OfficeOpenXml;
 
 namespace Alicargo.Core.Calculation

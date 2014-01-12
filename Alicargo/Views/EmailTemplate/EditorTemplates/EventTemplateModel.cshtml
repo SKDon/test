@@ -1,4 +1,4 @@
-﻿@using Alicargo.Contracts.Resources
+﻿@using Resources = Alicargo.DataAccess.Contracts.Resources
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.EmailTemplate.EventTemplateModel
@@ -17,15 +17,15 @@
 			</b>
 
 			@Html.CheckBoxFor(x => x.Settings.Admin)
-			@Html.LabelFor(x => x.Settings.Admin, Enums.Admin)
+			@Html.LabelFor(x => x.Settings.Admin, Resources.Enums.Admin)
 			@Html.CheckBoxFor(x => x.Settings.Sender)
-			@Html.LabelFor(x => x.Settings.Sender, Enums.Sender)
+			@Html.LabelFor(x => x.Settings.Sender, Resources.Enums.Sender)
 			@Html.CheckBoxFor(x => x.Settings.Broker)
-			@Html.LabelFor(x => x.Settings.Broker, Enums.Broker)
+			@Html.LabelFor(x => x.Settings.Broker, Resources.Enums.Broker)
 			@Html.CheckBoxFor(x => x.Settings.Forwarder)
-			@Html.LabelFor(x => x.Settings.Forwarder, Enums.Forwarder)
+			@Html.LabelFor(x => x.Settings.Forwarder, Resources.Enums.Forwarder)
 			@Html.CheckBoxFor(x => x.Settings.Client)
-			@Html.LabelFor(x => x.Settings.Client, Enums.Client)
+			@Html.LabelFor(x => x.Settings.Client, Resources.Enums.Client)
 		</p>
 	</div>
 </div>

@@ -1,6 +1,7 @@
 ﻿@using Alicargo.Core.Resources
 @using Resources
-@model Alicargo.Contracts.Contracts.User.ClientBalanceHistoryItem[]
+@using Alicargo.DataAccess.Contracts.Contracts.User
+@model ClientBalanceHistoryItem[]
 @if (Model.Length > 0)
 {
 	<b>
@@ -43,7 +44,7 @@
 						@item.Money.ToString("N2")
 					</td>
 					<td>
-						<u>@Alicargo.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())</u><br />
+						<u>@Alicargo.DataAccess.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())</u><br />
 						@if (item.Comment != null)
 						{
 							@Html.Raw(item.Comment.Replace(Environment.NewLine, "<br/>"))

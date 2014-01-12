@@ -5,7 +5,7 @@
 <p>
 	@Html.ActionLink(Pages.Help, MVC.EmailTemplate.Help(), new { @class = "pull-right", target = "balnk" })
 	<b>
-		@Pages.Event - @Alicargo.Contracts.Resources.EventType.ResourceManager.GetString(Model.EventType.ToString())
+		@Pages.Event - @Alicargo.DataAccess.Contracts.Resources.EventType.ResourceManager.GetString(Model.EventType.ToString())
 	</b>
 </p>
 @Html.EditPage(Url.Action(MVC.EmailTemplate.Edit()), Pages.Save)

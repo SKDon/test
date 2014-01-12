@@ -6,6 +6,7 @@ using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.Balance.Entities;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;

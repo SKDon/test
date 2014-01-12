@@ -1,7 +1,7 @@
 ﻿@using Alicargo.Contracts.Enums
 @model ApplicationFileType
 
-<b>@Alicargo.Contracts.Resources.ApplicationFileType.ResourceManager.GetString(Model.ToString())</b>
+<b>@Alicargo.DataAccess.Contracts.Resources.ApplicationFileType.ResourceManager.GetString(Model.ToString())</b>
 <div data-type="@Model" data-app-id="@ViewBag.ApplicationId" class="files-holder">
 	<input id="@Model" name="file" type="file" />
 </div>

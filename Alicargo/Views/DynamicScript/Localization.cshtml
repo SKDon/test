@@ -1,6 +1,6 @@
 ﻿@using System.Reflection
 @using System.Resources
-@using Alicargo.Contracts.Resources
+@using Alicargo.Core.Resources
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 
@@ -25,7 +25,7 @@ $a.Localization = (function($l){
 
 @Generate("$l.Entities_", Entities.ResourceManager, typeof(Entities))
 @Generate("$l.Pages_", Pages.ResourceManager, typeof(Pages))
-@Generate("$l.Enums_", Enums.ResourceManager, typeof(Enums))
+@Generate("$l.Enums_", Alicargo.DataAccess.Contracts.Resources.Enums.ResourceManager, typeof(Alicargo.DataAccess.Contracts.Resources.Enums))
 
 return $l;
 }($a.Localization || {}));

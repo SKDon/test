@@ -2,6 +2,7 @@
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Contracts.Client;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 
 namespace Alicargo.Services.Users.Client
 {
