@@ -46,6 +46,7 @@
     <Compile Include="Client\IClientBalance.cs" />
     <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\IPartitionConverter.cs" />
+    <Compile Include="Excel\IDrawable.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IMailSender.cs" />
     <Compile Include="IStateConfig.cs" />

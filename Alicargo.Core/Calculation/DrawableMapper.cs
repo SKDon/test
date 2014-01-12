@@ -1,0 +1,24 @@
+﻿using System.Linq;
+using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Contracts.User;
+using Alicargo.Core.Contracts.Excel;
+using OfficeOpenXml;
+
+namespace Alicargo.Core.Calculation
+{
+	internal static class DrawableMapper
+	{
+		public static IDrawable[] Get(CalculationData[] calculations, ExcelWorksheet excel, ClientData client, int columnCount)
+		{
+			return calculations.Select(x => (IDrawable)new CalculationDataDrawable(
+				x, client.Nic, columnCount, excel)).ToArray();
+		}
+
+		public static IDrawable[] Get(ClientBalanceHistoryItem[] history, ExcelWorksheet excel, ClientData client,
+			int columnCount)
+		{
+			return history.Select(x => (IDrawable)new ClientBalanceHistoryItemDrawable(
+				x, client.Nic, columnCount, excel)).ToArray();
+		}
+	}
+}
