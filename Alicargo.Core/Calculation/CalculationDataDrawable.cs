@@ -81,6 +81,7 @@ namespace Alicargo.Core.Calculation
 			_excel.Cells[iRow, iColumn].Value = money;
 
 			_excel.Cells[iRow, iColumn + 1].Value = (-money).ToString("N2") + CurrencyName.Euro;
+			_excel.Cells[iRow, iColumn + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 			_excel.Cells[iRow, iColumn + 1].Style.Font.Color.SetColor(Color.Red);
 			var cultureInfo = CultureProvider.GetCultureInfo();
 			_excel.Cells[iRow, _columnCount + 2].Value = LocalizationHelper.GetDate(_data.CreationTimestamp, cultureInfo);

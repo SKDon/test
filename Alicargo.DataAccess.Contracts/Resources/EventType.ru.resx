@@ -124,10 +124,10 @@
     <value>Установка статуса</value>
   </data>
   <data name="BalanceDecreased" xml:space="preserve">
-    <value>Баланс клиента уменьшен</value>
+    <value>Списание средств</value>
   </data>
   <data name="BalanceIncreased" xml:space="preserve">
-    <value>Баланс клиента увеличен</value>
+    <value>Поступление средств</value>
   </data>
   <data name="Calculate" xml:space="preserve">
     <value>Расчет</value>

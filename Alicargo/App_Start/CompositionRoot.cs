@@ -31,7 +31,7 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
-			kernel.Bind<IExcelClientCalculation>().To<ExcelClientCalculation>().InThreadScope();
+			kernel.Bind<IExcelClientCalculation>().To<ExcelClientCalculation>().InRequestScope();
 
 			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
 
