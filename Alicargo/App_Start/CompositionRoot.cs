@@ -4,7 +4,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using Alicargo.App_Start.Jobs;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Calculation;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Event;
 using Alicargo.Core.Email;
 using Alicargo.Core.Event;
@@ -28,6 +30,8 @@ namespace Alicargo.App_Start
 			kernel.Bind<ILog>().ToMethod(context => mainLog).InSingletonScope();
 
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
+
+			kernel.Bind<IExcelClientCalculation>().To<ExcelClientCalculation>().InThreadScope();
 
 			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
 
