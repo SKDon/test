@@ -3,7 +3,7 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 

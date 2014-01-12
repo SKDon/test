@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Web.Mvc;
 using Alicargo.Contracts.Exceptions;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 using WebGrease.Css.Extensions;
 
 namespace Alicargo.MvcHelpers.Filters

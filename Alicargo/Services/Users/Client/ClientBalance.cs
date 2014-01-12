@@ -1,7 +1,7 @@
 ﻿using System;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts.Client;
 
 namespace Alicargo.Services.Users.Client
 {

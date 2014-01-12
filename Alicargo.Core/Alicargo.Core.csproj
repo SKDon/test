@@ -64,15 +64,9 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="Calculation\Entities\ClientCalculationGroup.cs" />
-    <Compile Include="Calculation\Entities\ClientCalculationItem.cs" />
-    <Compile Include="Calculation\Entities\ClientCalculationListCollection.cs" />
     <Compile Include="Calculation\ExcelClientCalculation.cs" />
-    <Compile Include="Calculation\IClientCalculationPresenter.cs" />
     <Compile Include="Excel\ExcelConstants.cs" />
     <Compile Include="Helpers\ApplicationHelper.cs" />
-    <Compile Include="Event\IPartitionConverter.cs" />
-    <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\PartitionConverter.cs" />
     <Compile Include="Helpers\CalculationDataHelper.cs" />
     <Compile Include="Helpers\SumHolder.cs" />
@@ -97,15 +91,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Services\Abstract\IClientBalance.cs" />
-    <Compile Include="Services\Abstract\IStateConfig.cs" />
-    <Compile Include="Services\Email\DbMailSender.cs" />
-    <Compile Include="Services\Abstract\ILog.cs" />
-    <Compile Include="Services\Abstract\IMailSender.cs" />
+    <Compile Include="Email\DbMailSender.cs" />
     <Compile Include="Helpers\LocalizationHelper.cs" />
-    <Compile Include="Services\Email\MailSender.cs" />
+    <Compile Include="Email\MailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Email\SilentMailSender.cs" />
+    <Compile Include="Email\SilentMailSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Core.Contracts\Alicargo.Core.Contracts.csproj">

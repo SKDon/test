@@ -6,14 +6,15 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Calculation;
+using Alicargo.Core.Contracts.Calculation;
+using Alicargo.Core.Excel;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace Alicargo.Services.Excel
+namespace Alicargo.Core.Calculation
 {
 	public sealed class ExcelClientCalculation : IExcelClientCalculation
 	{

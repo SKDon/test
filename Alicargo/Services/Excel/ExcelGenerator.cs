@@ -3,6 +3,7 @@ using System.Linq;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using Alicargo.Core.Excel;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel.Rows;
 using Alicargo.Utilities.Localization;

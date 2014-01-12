@@ -1,5 +1,5 @@
 ﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 using Alicargo.Services.Abstract;
 using Microsoft.Ajax.Utilities;
 

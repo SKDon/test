@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Alicargo.Core.Calculation
+namespace Alicargo.Core.Contracts.Calculation
 {
 	public interface IExcelClientCalculation
 	{

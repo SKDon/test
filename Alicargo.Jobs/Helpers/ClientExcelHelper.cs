@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Calculation;
+using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;

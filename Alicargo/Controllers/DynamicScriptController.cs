@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.UI;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.ViewModels;
 

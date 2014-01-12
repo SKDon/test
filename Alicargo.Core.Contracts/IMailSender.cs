@@ -1,6 +1,6 @@
 ﻿using Alicargo.Contracts.Contracts;
 
-namespace Alicargo.Core.Services.Abstract
+namespace Alicargo.Core.Contracts
 {
 	public interface IMailSender
 	{

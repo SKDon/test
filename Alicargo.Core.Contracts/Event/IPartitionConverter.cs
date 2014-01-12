@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Event
+﻿namespace Alicargo.Core.Contracts.Event
 {
 	public interface IPartitionConverter
 	{

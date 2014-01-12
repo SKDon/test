@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts.Client;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Utilities;
 using Alicargo.ViewModels.Calculation.Admin;

@@ -1,4 +1,5 @@
-﻿using Alicargo.Core.Event;
+﻿using Alicargo.Core.Contracts.Event;
+using Alicargo.Core.Event;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;

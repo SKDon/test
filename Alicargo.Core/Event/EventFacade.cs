@@ -1,6 +1,7 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
+using Alicargo.Core.Contracts.Event;
 using Alicargo.Utilities;
 
 namespace Alicargo.Core.Event

@@ -5,7 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Helpers;
-using Alicargo.Core.Services.Email;
+using Alicargo.Core.Calculation;
+using Alicargo.Core.Email;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.Application;
@@ -22,7 +23,7 @@ using Alicargo.Utilities;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
-using ILog = Alicargo.Core.Services.Abstract.ILog;
+using ILog = Alicargo.Core.Contracts.ILog;
 using TextBuilder = Alicargo.Jobs.Helpers.TextBuilder;
 
 namespace Alicargo.App_Start.Jobs

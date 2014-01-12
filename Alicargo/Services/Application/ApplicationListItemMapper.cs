@@ -3,7 +3,7 @@ using Alicargo.Contracts.Contracts.Application;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.Application;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Application;

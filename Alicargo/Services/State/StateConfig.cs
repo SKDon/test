@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 using Alicargo.Utilities;
 
 namespace Alicargo.Services.State

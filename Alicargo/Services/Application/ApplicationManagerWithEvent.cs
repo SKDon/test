@@ -1,5 +1,6 @@
 ﻿using System;
 using Alicargo.Contracts.Enums;
+using Alicargo.Core.Contracts.Event;
 using Alicargo.Core.Event;
 using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Services.Abstract;

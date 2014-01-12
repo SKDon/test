@@ -43,7 +43,19 @@
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
     <Compile Include="Calculation\IExcelClientCalculation.cs" />
+    <Compile Include="Client\IClientBalance.cs" />
+    <Compile Include="Event\IEventFacade.cs" />
+    <Compile Include="Event\IPartitionConverter.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="IMailSender.cs" />
+    <Compile Include="IStateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alicargo.DataAccess.Contracts\Alicargo.DataAccess.Contracts.csproj">
+      <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
+      <Name>Alicargo.DataAccess.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

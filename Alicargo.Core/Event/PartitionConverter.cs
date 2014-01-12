@@ -1,4 +1,6 @@
-﻿namespace Alicargo.Core.Event
+﻿using Alicargo.Core.Contracts.Event;
+
+namespace Alicargo.Core.Event
 {
 	public sealed class PartitionConverter : IPartitionConverter
 	{

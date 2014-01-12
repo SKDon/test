@@ -1,5 +1,5 @@
 ﻿using System;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 
 namespace Alicargo.TestHelpers
 {

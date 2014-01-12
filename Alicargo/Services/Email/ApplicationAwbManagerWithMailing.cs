@@ -2,8 +2,8 @@
 using Alicargo.Contracts.Helpers;
 using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Contracts.Repositories.User;
+using Alicargo.Core.Contracts;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Services.Abstract;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.Email

@@ -1,9 +1,9 @@
 ﻿using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Services.Abstract;
+using Alicargo.Core.Contracts;
 using Alicargo.Utilities;
 
-namespace Alicargo.Core.Services.Email
+namespace Alicargo.Core.Email
 {
 	public sealed class DbMailSender : IMailSender
 	{

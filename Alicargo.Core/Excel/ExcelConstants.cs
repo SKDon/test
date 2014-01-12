@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Services.Excel
+﻿namespace Alicargo.Core.Excel
 {
 	public static class ExcelConstants
 	{
