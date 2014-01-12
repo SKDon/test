@@ -42,10 +42,6 @@
       <package Id="5e86891a-56d1-49f7-86ff-8a43be7345fe" name="DAL">
         <elementDefinition Id="b77ec0e1-719d-43f2-a098-a059497fd7ca" />
         <importedPackagesInternal>
-          <packageImport Id="00f31dee-1e24-477d-b792-d1ec8a770f66" visibility="Public">
-            <packageMoniker Id="11daef5a-e301-4229-93a4-344dd2bff2bc" LastKnownName="BLL" />
-            <elementDefinition Id="fcd85511-908f-4e9d-976c-e5353b22b9ff" />
-          </packageImport>
           <packageImport Id="4b6337a1-16cc-4da4-a384-9b072d99ff45" visibility="Public">
             <packageMoniker Id="3eadf8eb-9b1d-4f9a-b9e7-73ce7c1452d8" LastKnownName="Databases" />
             <elementDefinition Id="0489c685-eda5-401c-a529-6cefeef45e78" />
@@ -186,9 +182,9 @@
       <package Id="11daef5a-e301-4229-93a4-344dd2bff2bc" name="BLL">
         <elementDefinition Id="751e3eab-5b80-4d0d-b28f-f846214869f0" />
         <importedPackagesInternal>
-          <packageImport Id="24e50a87-f44f-4c80-9dd4-45d37028f17b" visibility="Public">
+          <packageImport Id="33f14bd7-a1c2-4a22-b7b0-59a76413867e" visibility="Public">
             <packageMoniker Id="5e86891a-56d1-49f7-86ff-8a43be7345fe" LastKnownName="DAL" />
-            <elementDefinition Id="e3ad2bfc-8776-4970-aa15-5acfa89fa97e" />
+            <elementDefinition Id="2c68ae0f-9423-4c56-8f07-be8ab24c1f0a" />
           </packageImport>
         </importedPackagesInternal>
         <packagedElements>

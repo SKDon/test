@@ -206,23 +206,9 @@
         <packageShapeMoniker Id="ec09a438-aab1-46f4-bc51-08218debb521" />
       </nodes>
     </packageImportConnector>
-    <packageImportConnector edgePoints="[(5.53125 : 2.5); (5.53125 : 3.26800346374512)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
-      <packageImportMoniker Id="00f31dee-1e24-477d-b792-d1ec8a770f66" />
+    <packageImportConnector edgePoints="[(5.25 : 3); (5.25 : 2.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <packageImportMoniker Id="33f14bd7-a1c2-4a22-b7b0-59a76413867e" />
       <relativeChildShapes />
-      <moveableDecoratorHostShapes>
-        <moveableDecoratorHostShape manuallySized="true" manuallyPlaced="true" absoluteBounds="5.625, 2.625, 0.56249999999999911, 0.14800345897674561" shapeFieldName="&lt;&lt;Import&gt;&gt;" />
-      </moveableDecoratorHostShapes>
-      <nodes>
-        <packageShapeMoniker Id="43349ae0-dcf6-4317-8f0f-e37751536cc2" />
-        <packageShapeMoniker Id="ec09a438-aab1-46f4-bc51-08218debb521" />
-      </nodes>
-    </packageImportConnector>
-    <packageImportConnector edgePoints="[(4.828125 : 3); (4.828125 : 2.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
-      <packageImportMoniker Id="24e50a87-f44f-4c80-9dd4-45d37028f17b" />
-      <relativeChildShapes />
-      <moveableDecoratorHostShapes>
-        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="4.25, 2.625, 0.51197189092636108, 0.14800345897674561" shapeFieldName="&lt;&lt;Import&gt;&gt;" />
-      </moveableDecoratorHostShapes>
       <nodes>
         <packageShapeMoniker Id="ec09a438-aab1-46f4-bc51-08218debb521" />
         <packageShapeMoniker Id="43349ae0-dcf6-4317-8f0f-e37751536cc2" />

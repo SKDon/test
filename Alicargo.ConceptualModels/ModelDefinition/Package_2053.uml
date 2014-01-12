@@ -5,14 +5,6 @@
   name="DAL" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
   <importedPackagesInternal>
     <packageImport
-      Id="fcd85511-908f-4e9d-976c-e5353b22b9ff"
-      visibility="Public">
-      <packageMoniker
-        Id="751e3eab-5b80-4d0d-b28f-f846214869f0"
-        LastKnownName="BLL Contracts"
-        LastKnownLocation="Package_2116.uml" />
-    </packageImport>
-    <packageImport
       Id="0489c685-eda5-401c-a529-6cefeef45e78"
       visibility="Public">
       <packageMoniker
