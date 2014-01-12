@@ -66,10 +66,10 @@ namespace Alicargo.Services.Calculation
 				TransitCost = transitCost,
 				PickupCost = pickupCost,
 				CreationTimestamp = DateTimeProvider.Now,
-				//Count = application.Count ?? 0,
-				//Invoice = application.Invoice,
-				//Value = application.Value,
-				//Class = (ClassType)application.ClassId
+				Count = application.Count ?? 0,
+				Invoice = application.Invoice,
+				Value = application.Value,
+				Class = application.ClassId
 			};
 
 			_calculations.Add(calculation, applicationId);

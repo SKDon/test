@@ -16,7 +16,11 @@ AS BEGIN
 			[TransitCost],
 			[PickupCost],
 			[FactoryName],
-			[CreationTimestamp]
+			[CreationTimestamp],
+			[ClassId],
+			[Invoice],
+			[Value],
+			[Count]
 	FROM [dbo].[Calculation]
 	WHERE [ClientId] = @ClientId
 

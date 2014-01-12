@@ -82,7 +82,7 @@ namespace Alicargo.Core.Calculation
 
 			foreach(var drawable in drawables)
 			{
-				iRow = drawable.Draw(iRow) + 1;
+				iRow = drawable.Draw(iRow);
 			}
 
 			return iRow;

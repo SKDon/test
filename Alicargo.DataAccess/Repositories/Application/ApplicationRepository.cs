@@ -52,7 +52,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				CountryId = x.CountryId,
 				StateChangeTimestamp = x.StateChangeTimestamp,
 				StateId = x.StateId,
-				ClassId = x.ClassId,
+				ClassId = (ClassType?)x.ClassId,
 				ClientId = x.ClientId,
 				TransitId = x.TransitId,
 				FactureCost = x.FactureCost,
@@ -86,7 +86,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			applications = applications.Skip(skip);
 
-			if (take.HasValue)
+			if(take.HasValue)
 				applications = applications.Take(take.Value);
 
 			return applications.Select(x => new ApplicationListItemData
@@ -216,7 +216,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 		public long GetClientId(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id).Select(x => x.ClientId).First();
-		}		
+		}
 
 		public IReadOnlyDictionary<long, long> GetCalculations(long[] appIds)
 		{
@@ -232,31 +232,31 @@ namespace Alicargo.DataAccess.Repositories.Application
 				? _context.Applications.Where(x => stateIds.Contains(x.StateId))
 				: _context.Applications.AsQueryable();
 
-			if (clientId.HasValue)
+			if(clientId.HasValue)
 			{
 				applications = applications.Where(x => x.ClientId == clientId.Value);
 			}
 
-			if (senderId.HasValue)
+			if(senderId.HasValue)
 			{
 				applications = applications.Where(x => x.SenderId == senderId.Value);
 			}
 
-			if (hasCalculation.HasValue && hasCalculation.Value)
+			if(hasCalculation.HasValue && hasCalculation.Value)
 			{
 				applications =
 					applications.Where(
 						x => _context.Calculations.Any(c => c.ApplicationHistoryId == x.Id && c.ClientId == x.ClientId));
 			}
 
-			if (hasCalculation.HasValue && !hasCalculation.Value)
+			if(hasCalculation.HasValue && !hasCalculation.Value)
 			{
 				applications =
 					applications.Where(
 						x => _context.Calculations.All(c => c.ApplicationHistoryId != x.Id && c.ClientId == x.ClientId));
 			}
 
-			if (cargoReceivedStateId.HasValue && cargoReceivedDaysToShow.HasValue)
+			if(cargoReceivedStateId.HasValue && cargoReceivedDaysToShow.HasValue)
 			{
 				var offset = DateTimeProvider.Now.AddDays(-cargoReceivedDaysToShow.Value);
 

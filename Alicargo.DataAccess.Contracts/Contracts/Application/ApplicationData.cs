@@ -1,4 +1,5 @@
 ﻿using System;
+using Alicargo.Contracts.Enums;
 
 namespace Alicargo.Contracts.Contracts.Application
 {
@@ -32,7 +33,7 @@ namespace Alicargo.Contracts.Contracts.Application
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
 		public long SenderId { get; set; }
-		public int? ClassId { get; set; }
+		public ClassType? ClassId { get; set; }
 
 		public decimal? FactureCost { get; set; }
 		public decimal? PickupCost { get; set; }

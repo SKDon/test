@@ -20,7 +20,7 @@ namespace Alicargo.Contracts.Contracts
 		public decimal TransitCost { get; set; }
 		public decimal PickupCost { get; set; }
 
-		public ClassType Class { get; set; }
+		public ClassType? Class { get; set; }
 		public int Count { get; set; }
 		public string Invoice { get; set; }
 		public decimal Value { get; set; }

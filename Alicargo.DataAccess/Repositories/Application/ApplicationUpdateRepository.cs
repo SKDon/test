@@ -141,7 +141,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			to.ClientId = @from.ClientId;
 			to.TransitId = @from.TransitId;
-			to.ClassId = from.ClassId;
+			to.ClassId = (int?)@from.ClassId;
 			to.AirWaybillId = @from.AirWaybillId;
 			to.CountryId = @from.CountryId;
 			to.SenderId = from.SenderId;

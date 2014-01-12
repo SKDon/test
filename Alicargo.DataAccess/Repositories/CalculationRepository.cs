@@ -29,7 +29,11 @@ namespace Alicargo.DataAccess.Repositories
 				data.TransitCost,
 				data.PickupCost,
 				data.FactoryName,
-				data.CreationTimestamp
+				data.CreationTimestamp,
+				ClassId = data.Class,
+				data.Count,
+				data.Invoice,
+				data.Value
 			});
 		}
 

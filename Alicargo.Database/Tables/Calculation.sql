@@ -15,7 +15,11 @@
 	[FactureCost]			MONEY			NOT NULL,
 	[TransitCost]			MONEY			NOT NULL,
 	[PickupCost]			MONEY			NOT NULL,
-	[FactoryName]			NVARCHAR(320)	NOT NULL, 
+	[FactoryName]			NVARCHAR(320)	NOT NULL,
+	[ClassId]				INT					NULL,
+	[Invoice]				NVARCHAR (MAX)	NOT NULL,
+	[Value]					MONEY			NOT NULL,
+	[Count]					INT					NULL,
 
 	CONSTRAINT [PK_dbo.Calculation] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_Calculation_Client] FOREIGN KEY ([ClientId]) REFERENCES [Client]([Id])
