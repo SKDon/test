@@ -62,7 +62,7 @@ namespace Alicargo.Core.Calculation
 
 				var columnCount = DrawHeader(excel, balance);
 
-				var iRow = DrawRows(client, calculations, history, columnCount, 4, excel);
+				var iRow = DrawRows(client, calculations, history, columnCount, 3, excel);
 
 				AdjustExcel(columnCount, excel, iRow);
 
@@ -126,17 +126,18 @@ namespace Alicargo.Core.Calculation
 			excel.Cells[iRow, iColumn].Value = Entities.Total;
 			excel.Cells[iRow, iColumn].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 
-			excel.Cells[1, iColumn - 1].Value = Entities.Balance;
-			var balanceCell = excel.Cells[1, iColumn];
+			excel.Cells[1, iColumn].Value = Entities.Balance;
+			excel.Cells[1, iColumn].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+			var balanceCell = excel.Cells[1, iColumn + 1];
 			balanceCell.Value = balance.ToString("N2") + CurrencyName.Euro;
 			balanceCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 			balanceCell.Style.Font.Color.SetColor(Color.Red);
 
-			var headerCells = excel.Cells[1, 1, iRow, iColumn];
+			var headerCells = excel.Cells[1, 1, iRow, iColumn + 1];
 			headerCells.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
 			headerCells.Style.Font.Bold = true;
 
-			excel.View.FreezePanes(3, iColumn);
+			excel.View.FreezePanes(3, 1);
 			excel.Row(1).Height = ExcelConstants.DefaultRowHeight;
 			excel.Row(2).Height = ExcelConstants.DefaultRowHeight;
 

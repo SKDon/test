@@ -2,7 +2,7 @@
 {
 	public interface IDrawable
 	{
-		int Draw(int row);
+		int Draw(int iRow);
 
 		long Position { get; }
 	}

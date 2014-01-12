@@ -1,11 +1,12 @@
 ﻿using System.Drawing;
-using Alicargo.Contracts.Contracts.User;
 using Alicargo.Contracts.Enums;
 using Alicargo.Core.Contracts.Excel;
+using Alicargo.Core.Excel;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace Alicargo.Core.Calculation
 {
@@ -27,21 +28,30 @@ namespace Alicargo.Core.Calculation
 			_excel = excel;
 		}
 
-		public int Draw(int row)
+		public int Draw(int iRow)
 		{
+			_excel.Row(iRow++).Height = ExcelConstants.DefaultRowHeight;
 			var cultureInfo = CultureProvider.GetCultureInfo();
+
 			var money = _item.EventType == EventType.BalanceDecreased ? -_item.Money : _item.Money;
 
-			_excel.Cells[row, _columnCount].Value = _item.EventType.ToLocalString();
-			_excel.Cells[row, _columnCount + 1].Value = money.ToString("N2") + CurrencyName.Euro;
+			_excel.Cells[iRow, _columnCount].Value = _item.EventType.ToLocalString();
+			var moneyCell = _excel.Cells[iRow, _columnCount + 1];
+			moneyCell.Value = money.ToString("N2") + CurrencyName.Euro;
+			moneyCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 			if(_item.EventType == EventType.BalanceDecreased)
 			{
-				_excel.Cells[row, _columnCount + 1].Style.Font.Color.SetColor(Color.Red);
+				moneyCell.Style.Font.Color.SetColor(Color.Red);
 			}
-			_excel.Cells[row, _columnCount + 2].Value = LocalizationHelper.GetDate(_item.Timestamp, cultureInfo);
-			_excel.Cells[row, _columnCount + 3].Value = _item.Comment;
+			_excel.Cells[iRow, _columnCount + 2].Value = LocalizationHelper.GetDate(_item.Timestamp, cultureInfo);
+			_excel.Cells[iRow, _columnCount + 3].Value = _item.Comment;
 
-			return ++row;
+			_excel.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
+			var range = _excel.Cells[iRow, 1, iRow, _columnCount];
+			range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+			range.Style.Fill.BackgroundColor.SetColor(_item.EventType == EventType.BalanceDecreased ? Color.Yellow : Color.LawnGreen);
+
+			return ++iRow;
 		}
 
 		public long Position

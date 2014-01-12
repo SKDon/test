@@ -1,8 +1,10 @@
 ﻿using System.Drawing;
 using Alicargo.Contracts.Contracts;
+using Alicargo.Contracts.Enums;
 using Alicargo.Core.Contracts.Excel;
 using Alicargo.Core.Excel;
 using Alicargo.Core.Helpers;
+using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
@@ -25,7 +27,7 @@ namespace Alicargo.Core.Calculation
 
 		public int Draw(int iRow)
 		{
-			_excel.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
+			_excel.Row(iRow++).Height = ExcelConstants.DefaultRowHeight;
 			DrawAwb(_data.AirWaybillDisplay, _excel, iRow++, _columnCount);
 
 			_excel.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
@@ -77,6 +79,11 @@ namespace Alicargo.Core.Calculation
 			_excel.Cells[iRow, iColumn++].Value = _data.TransitCost;
 			_excel.Cells[iRow, iColumn].Style.Font.Bold = true;
 			_excel.Cells[iRow, iColumn].Value = money;
+
+			_excel.Cells[iRow, iColumn + 1].Value = (-money).ToString("N2") + CurrencyName.Euro;
+			_excel.Cells[iRow, iColumn + 1].Style.Font.Color.SetColor(Color.Red);
+			var cultureInfo = CultureProvider.GetCultureInfo();
+			_excel.Cells[iRow, _columnCount + 2].Value = LocalizationHelper.GetDate(_data.CreationTimestamp, cultureInfo);
 		}
 	}
 }

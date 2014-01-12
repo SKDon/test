@@ -4,7 +4,7 @@
 	{
 		public const int DefaultRowHeight = 13;
 		public const int DefaultFontSize = 6;
-		public const int AwbRowHeight = 20;
+		public const int AwbRowHeight = DefaultRowHeight;
 		public const string DefaultFontName = "Arial";
 	}
 }

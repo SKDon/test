@@ -1,4 +1,6 @@
-﻿namespace Alicargo.Contracts.Enums
+﻿using Alicargo.Utilities.Localization;
+
+namespace Alicargo.Contracts.Enums
 {
 	public enum EventType
 	{
@@ -22,7 +24,10 @@
 
 
 		// Client balance events
+		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.EventType), "BalanceIncreased")]
 		BalanceIncreased = 13,
+
+		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.EventType), "BalanceDecreased")]
 		BalanceDecreased = 14
 	}
 }
