@@ -6,7 +6,6 @@ using Alicargo.Contracts.Contracts;
 using Alicargo.Contracts.Enums;
 using Alicargo.Contracts.Repositories;
 using Alicargo.Contracts.Repositories.User;
-using Alicargo.Contracts.Resources;
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
