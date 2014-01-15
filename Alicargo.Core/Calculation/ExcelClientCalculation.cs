@@ -33,7 +33,7 @@ namespace Alicargo.Core.Calculation
 
 		public MemoryStream Get(long clientId, string language)
 		{
-			CultureProvider.Set(() => language);
+			CultureProvider.Set(language);
 
 			var client = _clients.Get(clientId);
 

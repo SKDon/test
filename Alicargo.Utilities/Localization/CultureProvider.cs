@@ -24,6 +24,11 @@ namespace Alicargo.Utilities.Localization
 			_current.Set(language);
 		}
 
+		public static void Set(string language)
+		{
+			_current.Set(() => language);
+		}
+
 		public static string Get()
 		{
 			return _current.GetLanguage();

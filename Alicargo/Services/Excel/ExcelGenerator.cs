@@ -19,7 +19,7 @@ namespace Alicargo.Services.Excel
 	{
 		public MemoryStream Get(T[] rows, string language)
 		{
-			CultureProvider.Set(() => language);
+			CultureProvider.Set(language);
 
 			var properties = rows.GetType().GetElementType().GetProperties();
 
