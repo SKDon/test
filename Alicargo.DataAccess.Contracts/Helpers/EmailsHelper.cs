@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Alicargo.Contracts.Helpers
+namespace Alicargo.DataAccess.Contracts.Helpers
 {
 	public static class EmailsHelper
 	{

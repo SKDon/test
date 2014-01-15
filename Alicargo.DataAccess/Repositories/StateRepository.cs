@@ -2,8 +2,8 @@
 using System.Data;
 using System.Linq;
 using System.Transactions;
-using Alicargo.Contracts.Contracts.State;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Contracts.State;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories

@@ -1,6 +1,6 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using Alicargo.DataAccess.Contracts.Contracts;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface ICalculationRepository
 	{

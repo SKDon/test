@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Alicargo.Contracts.Helpers
+namespace Alicargo.DataAccess.Contracts.Helpers
 {
 	public static class OrderHelper
 	{

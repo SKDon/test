@@ -1,7 +1,7 @@
 ﻿using System;
-using Alicargo.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Contracts.Contracts.Application
+namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
 	public sealed class ApplicationData
 	{

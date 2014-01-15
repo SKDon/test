@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
 using Alicargo.Services.Abstract;

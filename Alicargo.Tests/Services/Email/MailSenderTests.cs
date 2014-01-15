@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Email;
+using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.TestHelpers;
 using Alicargo.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

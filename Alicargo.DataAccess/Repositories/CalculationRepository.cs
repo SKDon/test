@@ -1,5 +1,5 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Repositories;
+﻿using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.Repositories
 {

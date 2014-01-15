@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Alicargo.Contracts.Contracts.Application;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Exceptions;
-using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Microsoft.Ajax.Utilities;
 

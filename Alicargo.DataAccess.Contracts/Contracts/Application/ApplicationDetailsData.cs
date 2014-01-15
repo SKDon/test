@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alicargo.Contracts.Contracts.Application
+namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
 	public sealed class ApplicationDetailsData
 	{

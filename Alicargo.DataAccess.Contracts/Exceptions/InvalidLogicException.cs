@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Contracts.Exceptions
+namespace Alicargo.DataAccess.Contracts.Exceptions
 {
 	public sealed class InvalidLogicException : Exception
 	{

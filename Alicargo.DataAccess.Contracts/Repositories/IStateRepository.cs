@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Alicargo.Contracts.Contracts.State;
+using Alicargo.DataAccess.Contracts.Contracts.State;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface IStateRepository
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface ITransaction : IDisposable
 	{

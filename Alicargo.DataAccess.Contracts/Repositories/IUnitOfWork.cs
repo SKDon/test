@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Contracts.Repositories
+﻿namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface IUnitOfWork
 	{

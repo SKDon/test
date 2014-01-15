@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Contracts.Contracts.User
+﻿namespace Alicargo.DataAccess.Contracts.Contracts.User
 {
 	public sealed class ClientData
 	{

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Exceptions;
-using Alicargo.Contracts.Repositories;
 using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 

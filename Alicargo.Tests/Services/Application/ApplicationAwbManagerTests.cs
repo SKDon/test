@@ -1,5 +1,5 @@
 ﻿using System;
-using Alicargo.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.Services.Application;
 using Alicargo.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

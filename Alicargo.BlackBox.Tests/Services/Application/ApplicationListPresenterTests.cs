@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Data.SqlClient;
 using Alicargo.BlackBox.Tests.Properties;
-using Alicargo.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Services.Application;
 using Alicargo.TestHelpers;
 using Dapper;

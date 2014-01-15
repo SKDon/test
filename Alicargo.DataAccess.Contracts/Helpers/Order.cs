@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Contracts.Helpers
+﻿namespace Alicargo.DataAccess.Contracts.Helpers
 {
 	public sealed class Order
 	{

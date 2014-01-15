@@ -1,9 +1,9 @@
-﻿using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Exceptions;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.User;
+﻿using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;

@@ -1,6 +1,6 @@
-﻿using Alicargo.Contracts.Enums;
+﻿using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Contracts.Contracts.State
+namespace Alicargo.DataAccess.Contracts.Contracts.State
 {
 	public sealed class StateRole
 	{

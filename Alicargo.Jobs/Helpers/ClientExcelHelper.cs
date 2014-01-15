@@ -3,11 +3,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Helpers;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;
 

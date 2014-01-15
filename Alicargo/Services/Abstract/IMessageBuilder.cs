@@ -1,4 +1,4 @@
-﻿using Alicargo.Contracts.Contracts;
+﻿using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 

@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Contracts.Enums
+﻿namespace Alicargo.DataAccess.Contracts.Enums
 {
 	public enum EventState
 	{

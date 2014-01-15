@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
+using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;

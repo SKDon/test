@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Alicargo.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Utilities;
 using Alicargo.Utilities.Localization;
 

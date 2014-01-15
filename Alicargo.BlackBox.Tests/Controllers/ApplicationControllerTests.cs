@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Alicargo.BlackBox.Tests.Properties;
-using Alicargo.Contracts.Contracts.Application;
-using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories.Application;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Controllers.Application;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;

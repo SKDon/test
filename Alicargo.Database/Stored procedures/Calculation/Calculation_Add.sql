@@ -14,7 +14,7 @@
 	@FactoryName NVARCHAR(320),
 	@CreationTimestamp DATETIMEOFFSET,
 	@ClassId INT,
-	@Invoice NVARCHAR,
+	@Invoice NVARCHAR(MAX),
 	@Value MONEY,
 	@Count INT
 

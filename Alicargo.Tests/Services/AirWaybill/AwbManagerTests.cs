@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.Application;
-using Alicargo.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.Services.AirWaybill;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;

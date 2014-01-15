@@ -164,9 +164,9 @@ namespace Alicargo.Controllers.User
     {
         public T4MVC_UserController() : base(Dummy.Instance) { }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Contracts.Enums.RoleType roleType);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType);
 
-        public override System.Web.Mvc.ViewResult Index(Alicargo.Contracts.Enums.RoleType roleType)
+        public override System.Web.Mvc.ViewResult Index(Alicargo.DataAccess.Contracts.Enums.RoleType roleType)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "roleType", roleType);
@@ -174,9 +174,9 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
-        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Alicargo.Contracts.Enums.RoleType roleType);
+        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType);
 
-        public override System.Web.Mvc.JsonResult List(Alicargo.Contracts.Enums.RoleType roleType)
+        public override System.Web.Mvc.JsonResult List(Alicargo.DataAccess.Contracts.Enums.RoleType roleType)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "roleType", roleType);
@@ -184,9 +184,9 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Contracts.Enums.RoleType roleType, long id);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType, long id);
 
-        public override System.Web.Mvc.ViewResult Edit(Alicargo.Contracts.Enums.RoleType roleType, long id)
+        public override System.Web.Mvc.ViewResult Edit(Alicargo.DataAccess.Contracts.Enums.RoleType roleType, long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "roleType", roleType);
@@ -195,9 +195,9 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.Contracts.Enums.RoleType roleType);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType);
 
-        public override System.Web.Mvc.ViewResult Create(Alicargo.Contracts.Enums.RoleType roleType)
+        public override System.Web.Mvc.ViewResult Create(Alicargo.DataAccess.Contracts.Enums.RoleType roleType)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "roleType", roleType);

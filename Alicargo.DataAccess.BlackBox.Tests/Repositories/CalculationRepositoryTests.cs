@@ -1,7 +1,7 @@
 ﻿using System;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Exceptions;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;

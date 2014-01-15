@@ -1,5 +1,5 @@
-﻿using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Enums;
+﻿using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Services.Users.Client;
 using Alicargo.TestHelpers;
 using FluentAssertions;

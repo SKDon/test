@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Exceptions;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.User;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Mvc;
-using Alicargo.Contracts.Exceptions;
 using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using WebGrease.Css.Extensions;
 
 namespace Alicargo.MvcHelpers.Filters

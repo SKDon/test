@@ -1,6 +1,6 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.User;
+﻿using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 
 namespace Alicargo.DataAccess.Repositories.User
 {

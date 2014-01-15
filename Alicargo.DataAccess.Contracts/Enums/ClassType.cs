@@ -1,9 +1,7 @@
 ﻿using Alicargo.Utilities.Localization;
 
-namespace Alicargo.Contracts.Enums
+namespace Alicargo.DataAccess.Contracts.Enums
 {
-	using Resources = DataAccess.Contracts.Resources;
-
 	public enum ClassType
 	{
 		[DisplayNameLocalized(typeof(Resources.Enums), "Econom")]

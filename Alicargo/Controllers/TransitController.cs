@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.ViewModels;
 using Antlr.Runtime.Misc;
 

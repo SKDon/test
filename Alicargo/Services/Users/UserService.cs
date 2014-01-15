@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories.User;
+using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;

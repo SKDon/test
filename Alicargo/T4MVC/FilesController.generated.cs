@@ -247,9 +247,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void FilesOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.Contracts.Enums.ApplicationFileType type);
+        partial void FilesOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type);
 
-        public override System.Web.Mvc.JsonResult Files(long id, Alicargo.Contracts.Enums.ApplicationFileType type)
+        public override System.Web.Mvc.JsonResult Files(long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Files);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -258,9 +258,9 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
-        partial void UploadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.Contracts.Enums.ApplicationFileType type, System.Web.HttpPostedFileBase file);
+        partial void UploadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type, System.Web.HttpPostedFileBase file);
 
-        public override System.Web.Mvc.JsonResult Upload(long id, Alicargo.Contracts.Enums.ApplicationFileType type, System.Web.HttpPostedFileBase file)
+        public override System.Web.Mvc.JsonResult Upload(long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type, System.Web.HttpPostedFileBase file)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Upload);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

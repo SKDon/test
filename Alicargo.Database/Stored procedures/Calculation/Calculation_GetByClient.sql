@@ -17,7 +17,7 @@ AS BEGIN
 			[PickupCost],
 			[FactoryName],
 			[CreationTimestamp],
-			[ClassId],
+			[ClassId] AS [Class],
 			[Invoice],
 			[Value],
 			[Count]

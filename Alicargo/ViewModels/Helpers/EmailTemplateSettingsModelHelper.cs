@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.ViewModels.EmailTemplate;
 
 namespace Alicargo.ViewModels.Helpers

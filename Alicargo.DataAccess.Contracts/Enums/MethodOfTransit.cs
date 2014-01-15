@@ -1,6 +1,6 @@
 ﻿using Alicargo.Utilities.Localization;
 
-namespace Alicargo.Contracts.Enums
+namespace Alicargo.DataAccess.Contracts.Enums
 {
 	public enum MethodOfTransit
 	{

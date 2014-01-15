@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 

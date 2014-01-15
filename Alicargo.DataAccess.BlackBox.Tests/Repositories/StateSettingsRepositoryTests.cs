@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.TestHelpers;

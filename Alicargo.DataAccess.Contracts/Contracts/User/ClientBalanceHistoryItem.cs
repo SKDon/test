@@ -1,5 +1,5 @@
 ﻿using System;
-using Alicargo.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Enums;
 
 namespace Alicargo.DataAccess.Contracts.Contracts.User
 {

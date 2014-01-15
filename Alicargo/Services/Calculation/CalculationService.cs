@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.Application;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.Application;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 using Alicargo.ViewModels.Calculation;

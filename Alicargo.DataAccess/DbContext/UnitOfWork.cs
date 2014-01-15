@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.Linq;
 using System.Diagnostics;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.DbContext
 {

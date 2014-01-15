@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 using Alicargo.Utilities;

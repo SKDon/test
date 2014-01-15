@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Linq;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Dapper;
 
 namespace Alicargo.DataAccess.DbContext

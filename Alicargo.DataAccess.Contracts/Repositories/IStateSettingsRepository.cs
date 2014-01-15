@@ -1,7 +1,7 @@
-﻿using Alicargo.Contracts.Contracts.State;
-using Alicargo.Contracts.Enums;
+﻿using Alicargo.DataAccess.Contracts.Contracts.State;
+using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Contracts.Repositories
+namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface IStateSettingsRepository
 	{

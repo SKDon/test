@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
-using Alicargo.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Exceptions;
 
 namespace Alicargo.DataAccess.DbContext
 {

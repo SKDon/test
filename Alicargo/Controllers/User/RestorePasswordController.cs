@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Caching;
 using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Resources;
 
 namespace Alicargo.Controllers.User

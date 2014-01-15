@@ -2,7 +2,7 @@
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
 
 namespace Alicargo.MvcHelpers.Extensions
 {

@@ -1,6 +1,6 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Core.Contracts;
+﻿using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.Utilities;
 
 namespace Alicargo.Core.Email

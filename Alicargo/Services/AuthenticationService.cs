@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Web.Security;
-using Alicargo.Contracts.Repositories.User;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 using Alicargo.ViewModels.User;

@@ -1,6 +1,6 @@
-﻿using Alicargo.Contracts.Enums;
+﻿using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Contracts.Contracts
+namespace Alicargo.DataAccess.Contracts.Contracts
 {
 	public sealed class EventData
 	{

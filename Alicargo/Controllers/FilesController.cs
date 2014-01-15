@@ -3,11 +3,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Core.Contracts.Event;
 using Alicargo.Core.Event;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 

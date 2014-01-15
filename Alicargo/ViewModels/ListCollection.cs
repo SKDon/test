@@ -1,4 +1,4 @@
-﻿using Alicargo.Contracts.Helpers;
+﻿using Alicargo.DataAccess.Contracts.Helpers;
 
 namespace Alicargo.ViewModels
 {

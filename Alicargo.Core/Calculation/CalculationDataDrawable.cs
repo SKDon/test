@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
 using Alicargo.Core.Contracts.Excel;
 using Alicargo.Core.Excel;
 using Alicargo.Core.Helpers;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;

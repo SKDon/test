@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Contracts.Repositories.Application
+namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
 	public interface IApplicationFileRepository
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alicargo.Contracts.Contracts
+namespace Alicargo.DataAccess.Contracts.Contracts
 {
 	public sealed class CountryData
 	{

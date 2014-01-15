@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.Application;
 using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel.Rows;
 using Alicargo.ViewModels.Application;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Utilities;
 

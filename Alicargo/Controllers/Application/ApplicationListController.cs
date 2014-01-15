@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;

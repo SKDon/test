@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Transactions;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.TestHelpers

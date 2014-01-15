@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Contracts.Contracts
+namespace Alicargo.DataAccess.Contracts.Contracts
 {
 	public sealed class AirWaybillData
 	{

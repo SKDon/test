@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Alicargo.Contracts.Enums
+namespace Alicargo.DataAccess.Contracts.Enums
 {
 	public static class CurrencyName
 	{

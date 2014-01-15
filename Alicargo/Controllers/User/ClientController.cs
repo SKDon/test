@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Exceptions;
-using Alicargo.Contracts.Helpers;
-using Alicargo.Contracts.Repositories.User;
+using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;

@@ -1,6 +1,6 @@
-﻿using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Enums;
-using Alicargo.Core.Contracts;
+﻿using Alicargo.Core.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers.Abstract;
 

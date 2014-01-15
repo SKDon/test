@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Helpers;
 using Alicargo.Utilities;
 using FluentAssertions;

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
-using Alicargo.Contracts.Contracts;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
+using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;

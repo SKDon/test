@@ -1,7 +1,7 @@
 ﻿using System;
-using Alicargo.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Helpers;
 
-namespace Alicargo.Contracts.Contracts
+namespace Alicargo.DataAccess.Contracts.Contracts
 {
 	public sealed class EmailMessage
 	{

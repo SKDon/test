@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Alicargo.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts;
 
 namespace Alicargo.Jobs.Helpers.Abstract
 {

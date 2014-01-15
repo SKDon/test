@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.Core

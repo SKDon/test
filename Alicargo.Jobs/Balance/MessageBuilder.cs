@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.User;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Repositories.User;
 using Alicargo.Core.Helpers;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.User;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.Balance.Entities;
 using Alicargo.Jobs.Helpers.Abstract;

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.User;

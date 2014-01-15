@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Contracts.Contracts;
-using Alicargo.Contracts.Contracts.Application;
-using Alicargo.Contracts.Contracts.State;
-using Alicargo.Contracts.Enums;
-using Alicargo.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.State;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.Services.State;
 using Alicargo.TestHelpers;
 using FluentAssertions;

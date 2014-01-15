@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Transactions;
-using Alicargo.Contracts.Enums;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Event;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Balance.Entities;
 
 namespace Alicargo.Services.Users.Client
