@@ -8,7 +8,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 	{
 		[Required]
 		[DataType(DataType.Currency)]
-		[DisplayNameLocalized(typeof(Entities), "Money")]
+		[DisplayNameLocalized(typeof(Entities), "Sum")]
 		public decimal? Money { get; set; }
 
 		[DataType(DataType.MultilineText)]
@@ -17,7 +17,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 
 		[Required]
 		[DataType(DataType.DateTime)]
-		[DisplayNameLocalized(typeof(Entities), "Timestamp")]
+		[DisplayNameLocalized(typeof(Entities), "Date")]
 		public string Timestamp { get; set; }
 	}
 }
