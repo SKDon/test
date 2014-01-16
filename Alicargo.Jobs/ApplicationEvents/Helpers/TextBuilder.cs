@@ -52,7 +52,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			var localizedData = GetTextLocalizedData(application, language, culture);
 
-			switch (type)
+			switch(type)
 			{
 				case EventType.ApplicationSetState:
 					OnSetState(bytes, language, localizedData);
@@ -100,11 +100,14 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			Add(localizedData, "FactoryName", calculation.FactoryName);
 			Add(localizedData, "Weight", calculation.Weight.ToString("N2", culture));
 			Add(localizedData, "TariffPerKg", calculation.TariffPerKg.ToString("N2", culture));
+			var weightCost = calculation.TariffPerKg * (decimal)calculation.Weight;
+			Add(localizedData, "WeightCost", weightCost.ToString("N2", culture));
 			Add(localizedData, "ScotchCost", calculation.ScotchCost.ToString("N2", culture));
 			Add(localizedData, "InsuranceCost", calculation.InsuranceCost.ToString("N2", culture));
 			Add(localizedData, "FactureCost", calculation.FactureCost.ToString("N2", culture));
 			Add(localizedData, "TransitCost", calculation.TransitCost.ToString("N2", culture));
 			Add(localizedData, "PickupCost", calculation.PickupCost.ToString("N2", culture));
+			Add(localizedData, "TotalCost", CalculationDataHelper.GetMoney(calculation).ToString("N2", culture));
 		}
 
 		private void OnFileUpload(byte[] bytes, IDictionary<string, string> localizedData)
@@ -189,7 +192,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		private static void Add(IDictionary<string, string> localizedData, string key, string value)
 		{
-			if (localizedData.ContainsKey(key))
+			if(localizedData.ContainsKey(key))
 			{
 				localizedData[key] = value;
 			}
@@ -205,7 +208,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			var state = _states.Get(language, data.StateId).Select(x => x.Value).FirstOrDefault();
 
-			if (state != null)
+			if(state != null)
 			{
 				Add(templateData, "StateName", state.LocalizedName);
 				Add(templateData, "StateChangeTimestamp",

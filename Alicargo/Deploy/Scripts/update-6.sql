@@ -262,9 +262,21 @@ Alicargo  srl', 0),
 (22, N'ru', NULL, NULL, 0),
 (23, N'ru', NULL, NULL, 0),
 -- calculate
-(24, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}',
+(24, N'ru', 
+N'Расчет стоимости заявки {ApplicationDisplay}',
 N'Расчет стоимости заявки {ApplicationDisplay}.
-Сальдо: {ClientBalance}€ ({CalculationTimestamp}).', 0),
+Сальдо: {ClientBalance}€ ({CalculationTimestamp}).
+
+{AirWaybillDisplay}
+
+{Weight} kg * {TariffPerKg}€ = {WeightCost}€
+скотч - {ScotchCost}€
+страховка - {InsuranceCost}€
+фактура - {FactureCost}€
+доставка - {TransitCost}€
+забор с фабрики - {PickupCost}€
+
+Итого - {TotalCost}€', 0),
 (25, N'ru', NULL, NULL, 0),
 -- balnce
 (26, N'ru', N'Поступление денежных средств {ClientNic}',

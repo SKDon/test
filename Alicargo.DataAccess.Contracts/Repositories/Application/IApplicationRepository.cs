@@ -12,7 +12,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
         
 		ApplicationData[] GetByAirWaybill(params long[] ids);
 
-		// todo: remove hasCalculation parameter from List and Count methods
+		// todo: 1. remove hasCalculation parameter from List and Count methods
 		ApplicationListItemData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
             long? clientId = null, long? senderId = null, bool? hasCalculation = null,
 			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null);
