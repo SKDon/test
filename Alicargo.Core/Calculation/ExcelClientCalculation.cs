@@ -77,7 +77,7 @@ namespace Alicargo.Core.Calculation
 		{
 			var drawables = DrawableMapper.Get(history, excel, client, columnCount)
 				.Union(DrawableMapper.Get(calculations, excel, client, columnCount))
-				.OrderBy(x => x.Position)
+				.OrderByDescending(x => x.Position)
 				.ToArray();
 
 			foreach(var drawable in drawables)
