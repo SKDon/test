@@ -129,7 +129,10 @@ namespace Alicargo.Core.Calculation
 			var balanceCell = excel.Cells[1, iColumn + 1];
 			balanceCell.Value = balance.ToString("N2") + CurrencyName.Euro;
 			balanceCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
-			balanceCell.Style.Font.Color.SetColor(Color.Red);
+			if(balance < 0)
+			{
+				balanceCell.Style.Font.Color.SetColor(Color.Red);	
+			}
 
 			var headerCells = excel.Cells[1, 1, iRow, iColumn + 1];
 			headerCells.Style.Border.BorderAround(ExcelBorderStyle.Thin, Color.Black);
