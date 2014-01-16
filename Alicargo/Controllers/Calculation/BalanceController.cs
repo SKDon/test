@@ -57,7 +57,7 @@ namespace Alicargo.Controllers.Calculation
 
 			return View(new PaymentModel
 			{
-				Timestamp = DateTimeProvider.Now
+				Timestamp = DateTimeProvider.Now.Date.ToShortDateString()
 			});
 		}
 
@@ -76,7 +76,8 @@ namespace Alicargo.Controllers.Calculation
 
 			try
 			{
-				_balance.Decrease(clientId, model.Money.Value, model.Comment, model.Timestamp, false);
+				var timestamp = DateTimeOffset.Parse(model.Timestamp);
+				_balance.Decrease(clientId, model.Money.Value, model.Comment, timestamp, false);
 			}
 			catch(ArgumentException e)
 			{
@@ -98,7 +99,7 @@ namespace Alicargo.Controllers.Calculation
 
 			return View(new PaymentModel
 			{
-				Timestamp = DateTimeProvider.Now
+				Timestamp = DateTimeProvider.Now.Date.ToShortDateString()
 			});
 		}
 
@@ -117,7 +118,8 @@ namespace Alicargo.Controllers.Calculation
 
 			try
 			{
-				_balance.Increase(clientId, model.Money.Value, model.Comment, model.Timestamp, false);
+				var timestamp = DateTimeOffset.Parse(model.Timestamp);
+				_balance.Increase(clientId, model.Money.Value, model.Comment, timestamp, false);
 			}
 			catch(ArgumentException e)
 			{

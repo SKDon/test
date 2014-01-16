@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 
@@ -19,6 +18,6 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		[Required]
 		[DataType(DataType.DateTime)]
 		[DisplayNameLocalized(typeof(Entities), "Timestamp")]
-		public DateTimeOffset Timestamp { get; set; }
+		public string Timestamp { get; set; }
 	}
 }
