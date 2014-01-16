@@ -1,4 +1,4 @@
-﻿--:setvar FilesDbName "Alicargo_Files_2_1"
+﻿:setvar FilesDbName "Alicargo_Files_Dev"
 GO
 
 USE [$(FilesDbName)];
