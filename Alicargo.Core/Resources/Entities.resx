@@ -459,11 +459,11 @@
   <data name="Input" xml:space="preserve">
     <value>Input</value>
   </data>
-  <data name="Timestamp" xml:space="preserve">
-    <value>Timestamp</value>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
-  <data name="Money" xml:space="preserve">
-    <value>Money</value>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Application</value>

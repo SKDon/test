@@ -462,11 +462,11 @@
   <data name="Input" xml:space="preserve">
     <value>Ввод</value>
   </data>
-  <data name="Timestamp" xml:space="preserve">
-    <value>Время</value>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
   </data>
-  <data name="Money" xml:space="preserve">
-    <value>Деньги</value>
+  <data name="Sum" xml:space="preserve">
+    <value> Сумма</value>
   </data>
   <data name="Client" xml:space="preserve">
     <value>Клиент</value>

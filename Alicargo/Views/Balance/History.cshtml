@@ -2,56 +2,55 @@
 @using Resources
 @using Alicargo.DataAccess.Contracts.Contracts.User
 @model ClientBalanceHistoryItem[]
-@if (Model.Length > 0)
+@if(Model.Length > 0)
 {
 	<b>
 		@Pages.History
 	</b>
-	<table class="payment-history">
-		<thead>
-			<tr>
-				<td class="timestamp">
-					@Pages.AddDate
-				</td>
-				<td class="timestamp">
-					@Entities.Timestamp
-				</td>
-				<td class="money">
-					@Entities.Balance
-				</td>
-				<td class="money">
-					@Entities.Money
-				</td>
-				<td>
-					@Entities.Comment
-				</td>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in @Model)
-			{
+		<table class="payment-history grid">
+			<thead>
 				<tr>
-					<td>
-						@item.CreationTimestamp
+					<td class="timestamp">
+						@Entities.Date
+					</td>
+					<td class="timestamp">
+						@Pages.Event
+					</td>
+					<td class="money">
+						@Entities.Sum
+					</td>
+					<td class="money">
+						@Entities.Balance
 					</td>
 					<td>
-						@item.Timestamp
-					</td>
-					<td>
-						@item.Balance.ToString("N2")
-					</td>
-					<td>
-						@item.Money.ToString("N2")
-					</td>
-					<td>
-						<u>@Alicargo.DataAccess.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())</u><br />
-						@if (item.Comment != null)
-						{
-							@Html.Raw(item.Comment.Replace(Environment.NewLine, "<br/>"))
-						}
+						@Entities.Comment
 					</td>
 				</tr>
-			}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				@foreach(var item in @Model)
+				{
+					<tr>
+						<td>
+							@item.Timestamp.Date.ToShortDateString()
+						</td>
+						<td>
+							@Alicargo.DataAccess.Contracts.Resources.EventType.ResourceManager.GetString(item.EventType.ToString())
+						</td>
+						<td>
+							@item.Money.ToString("N2")€
+						</td>
+						<td>
+							@item.Balance.ToString("N2")€
+						</td>
+						<td>
+							@if(item.Comment != null)
+							{
+								@Html.Raw(item.Comment.Replace(Environment.NewLine, "<br/>"))
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
 }
