@@ -598,7 +598,7 @@
     <Content Include="Deploy\Scripts\Setup\init-db.ps1" />
     <Content Include="Deploy\Scripts\Setup\set-initial-data.sql" />
     <Content Include="Deploy\Scripts\update-2.sql" />
-    <Content Include="Deploy\Scripts\update-3.sql" />
+    <Content Include="Deploy\Scripts\update-0.sql" />
     <Content Include="Deploy\Scripts\update-1.sql" />
     <Content Include="Deploy\Scripts\update-4.sql" />
     <Content Include="Deploy\Scripts\update-5.sql" />
