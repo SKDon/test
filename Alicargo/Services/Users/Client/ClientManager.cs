@@ -1,4 +1,5 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts.User;
+﻿using Alicargo.Core.Contracts.Client;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Helpers;

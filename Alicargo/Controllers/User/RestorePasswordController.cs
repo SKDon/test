@@ -2,6 +2,7 @@
 using System.Web.Caching;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories.User;

@@ -1,4 +1,5 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts.User;
+﻿using Alicargo.Core.Contracts.Common;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services.Abstract

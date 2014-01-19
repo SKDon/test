@@ -1,6 +1,6 @@
 ﻿using Alicargo.DataAccess.Contracts.Helpers;
 
-namespace Alicargo.ViewModels
+namespace Alicargo.Core.Contracts.Common
 {
 	public sealed class ListCollection<T>
 	{

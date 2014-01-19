@@ -23,7 +23,7 @@ using Alicargo.Utilities;
 using log4net;
 using Ninject;
 using Ninject.Syntax;
-using ILog = Alicargo.Core.Contracts.ILog;
+using ILog = Alicargo.Core.Contracts.Common.ILog;
 using TextBuilder = Alicargo.Jobs.Helpers.TextBuilder;
 
 namespace Alicargo.App_Start.Jobs

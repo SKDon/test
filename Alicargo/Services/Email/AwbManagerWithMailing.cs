@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.AirWaybill;
+using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;

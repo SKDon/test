@@ -1,6 +1,6 @@
 ﻿using Alicargo.Core.Calculation.Entities;
 
-namespace Alicargo.Core.Calculation
+namespace Alicargo.Services.Abstract
 {
 	public interface IClientCalculationPresenter
 	{

@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.Services.Abstract;
-using Microsoft.Ajax.Utilities;
 
-namespace Alicargo.Services.State
+namespace Alicargo.Core.State
 {
-	internal sealed class StateFilter : IStateFilter
+	public sealed class StateFilter : IStateFilter
 	{
 		private readonly IAwbRepository _awbs;
 		private readonly IStateConfig _config;
@@ -152,7 +152,7 @@ namespace Alicargo.Services.State
 			if (applicationData.AirWaybillId.HasValue)
 			{
 				var airWaybillData = _awbs.Get(applicationData.AirWaybillId.Value).First();
-				if (airWaybillData.GTD.IsNullOrWhiteSpace())
+				if (string.IsNullOrWhiteSpace(airWaybillData.GTD))
 				{
 					states.Remove(_config.CargoAtCustomsStateId);
 				}

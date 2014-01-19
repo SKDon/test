@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using System.Web.UI;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.State;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.ViewModels;
 

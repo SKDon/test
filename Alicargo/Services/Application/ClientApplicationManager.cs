@@ -1,4 +1,5 @@
 ﻿using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;

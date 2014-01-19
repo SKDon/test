@@ -1,6 +1,6 @@
 ﻿using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Services.Abstract
+namespace Alicargo.Core.Contracts.Common
 {
 	public interface IIdentityService
 	{

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using Alicargo.Core.Contracts.Client;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.User;

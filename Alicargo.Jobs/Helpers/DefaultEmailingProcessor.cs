@@ -1,4 +1,5 @@
 ﻿using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Core;

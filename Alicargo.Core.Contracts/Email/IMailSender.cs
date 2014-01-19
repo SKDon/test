@@ -1,6 +1,6 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts;
 
-namespace Alicargo.Core.Contracts
+namespace Alicargo.Core.Contracts.Email
 {
 	public interface IMailSender
 	{

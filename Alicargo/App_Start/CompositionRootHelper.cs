@@ -5,6 +5,7 @@ using Alicargo.Core.Calculation;
 using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Client;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Web.Mvc;
+using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.Excel;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Alicargo.Services.Abstract
+namespace Alicargo.Core.Contracts.Excel
 {
 	public interface IExcelGenerator<in T>
 	{

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Net.Mail;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 
 namespace Alicargo.Core.Email

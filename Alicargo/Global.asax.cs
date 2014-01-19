@@ -13,7 +13,7 @@ using Alicargo.Services;
 using log4net;
 using Ninject;
 using Ninject.Web.Common;
-using ILog = Alicargo.Core.Contracts.ILog;
+using ILog = Alicargo.Core.Contracts.Common.ILog;
 
 namespace Alicargo
 {

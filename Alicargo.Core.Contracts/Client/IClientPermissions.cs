@@ -1,6 +1,6 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts.User;
 
-namespace Alicargo.Services.Abstract
+namespace Alicargo.Core.Contracts.Client
 {
     public interface IClientPermissions
     {

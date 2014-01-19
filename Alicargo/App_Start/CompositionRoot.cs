@@ -5,12 +5,15 @@ using System.Linq;
 using Alicargo.App_Start.Jobs;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
+using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.Email;
 using Alicargo.Core.Contracts.Event;
+using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Email;
 using Alicargo.Core.Event;
+using Alicargo.Core.State;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
@@ -36,6 +39,10 @@ namespace Alicargo.App_Start
 			kernel.Bind<IExcelClientCalculation>().To<ExcelClientCalculation>().InRequestScope();
 
 			kernel.Bind<IAwbGtdHelper>().To<AwbGtdHelper>().InRequestScope();
+
+			kernel.Bind<IStateConfig>().To<StateConfig>().InRequestScope();
+
+			kernel.Bind<IStateFilter>().To<StateFilter>().InRequestScope();
 
 			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
 

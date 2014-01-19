@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;

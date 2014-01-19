@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Core.Contracts
+namespace Alicargo.Core.Contracts.Common
 {
 	public interface ILog
 	{

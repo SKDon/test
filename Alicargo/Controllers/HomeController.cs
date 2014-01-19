@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.SessionState;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.Services.Abstract;
 
 namespace Alicargo.Controllers

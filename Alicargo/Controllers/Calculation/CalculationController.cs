@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Core.Contracts.Calculation;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;

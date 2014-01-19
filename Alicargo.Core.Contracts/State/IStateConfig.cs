@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Contracts
+﻿namespace Alicargo.Core.Contracts.State
 {
 	public interface IStateConfig
 	{

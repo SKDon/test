@@ -11,6 +11,7 @@ using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
+using Alicargo.Services.Abstract;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Helpers;

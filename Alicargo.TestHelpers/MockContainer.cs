@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.AirWaybill;
+using Alicargo.Core.Contracts.Client;
+using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.Email;
+using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.State;

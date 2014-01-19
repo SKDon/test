@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;

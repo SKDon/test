@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.User;

@@ -1,10 +1,10 @@
 ﻿using System.Configuration;
-using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.State;
 using Alicargo.Utilities;
 
-namespace Alicargo.Services.State
+namespace Alicargo.Core.State
 {
-	internal sealed class StateConfig : IStateConfig
+	public sealed class StateConfig : IStateConfig
 	{
 		public long CargoIsCustomsClearedStateId
 		{

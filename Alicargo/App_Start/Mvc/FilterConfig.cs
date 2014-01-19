@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.MvcHelpers.Filters;
 using Ninject;
 

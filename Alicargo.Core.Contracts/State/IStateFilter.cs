@@ -1,6 +1,6 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts.Application;
 
-namespace Alicargo.Services.Abstract
+namespace Alicargo.Core.Contracts.State
 {
 	public interface IStateFilter
 	{

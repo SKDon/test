@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.State;
 using Alicargo.Services.Abstract;
 using Ninject;
 
