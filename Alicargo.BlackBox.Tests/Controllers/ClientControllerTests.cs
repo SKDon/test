@@ -43,13 +43,14 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				.Create();
 			var model = _mock.Build<ClientModel>()
 				.With(x => x.Emails, "mail@mail.com")
+				.With(x => x.Authentication, authentication)
 				.Create();
 			var transit = _mock.Build<TransitEditModel>()
 				.With(x => x.CityId, TestConstants.TestCityId1)
 				.Create();
 			var carrier = _mock.Build<CarrierSelectModel>().Create();
 
-			_controller.Create(model, transit, carrier, authentication);
+			_controller.Create(model, transit, carrier);
 
 			var context = new AlicargoDataContext(Settings.Default.MainConnectionString);
 			var client = context.Clients.First(x => x.User.Login == authentication.Login);

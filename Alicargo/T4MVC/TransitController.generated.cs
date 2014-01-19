@@ -112,6 +112,13 @@ namespace Alicargo.Controllers
             }
             public readonly string EditByApplication = "~/Views/Transit/EditByApplication.cshtml";
             public readonly string EditByClient = "~/Views/Transit/EditByClient.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string TransitEditModel = "TransitEditModel";
+            }
         }
     }
 

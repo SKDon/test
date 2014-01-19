@@ -59,30 +59,30 @@ namespace Alicargo.Controllers.User
 		[ValidateAntiForgeryToken, HttpPost, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Create(ClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel,
-			CarrierSelectModel carrierModel,
-			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
+			CarrierSelectModel carrierModel)
 		{
-			if (!EmailsHelper.Validate(model.Emails))
+			if(!EmailsHelper.Validate(model.Emails))
 			{
 				ModelState.AddModelError("Emails", @"Emails format is invalid");
 			}
 
-			if (!ModelState.IsValid) return View();
+			if(!ModelState.IsValid) return View();
 
+			var authenticationModel = model.Authentication;
 			long clientId = 0;
 			var passwordDefined = !string.IsNullOrWhiteSpace(authenticationModel.NewPassword);
-			if (passwordDefined)
+			if(passwordDefined)
 			{
 				try
 				{
 					clientId = _manager.Add(model, carrierModel, transitModel, authenticationModel);
 
-					if (model.ContractFile != null)
+					if(model.ContractFile != null)
 					{
 						MergeContract(model, clientId);
 					}
 				}
-				catch (DublicateLoginException)
+				catch(DublicateLoginException)
 				{
 					ModelState.AddModelError("Login", Validation.LoginExists);
 				}
@@ -92,7 +92,7 @@ namespace Alicargo.Controllers.User
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
 			}
 
-			if (!ModelState.IsValid) return View();
+			if(!ModelState.IsValid) return View();
 
 			return RedirectToAction(MVC.Client.Edit(clientId));
 		}
@@ -102,7 +102,7 @@ namespace Alicargo.Controllers.User
 		private void MergeContract(ClientModel model, long clientId)
 		{
 			var oldFileName = _files.GetClientContractFileName(clientId);
-			if (oldFileName != model.ContractFileName)
+			if(oldFileName != model.ContractFileName)
 			{
 				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
 			}
@@ -153,37 +153,39 @@ namespace Alicargo.Controllers.User
 				OGRN = client.OGRN,
 				RS = client.RS,
 				ContractFile = null,
-				ContractFileName = contractFileName
+				ContractFileName = contractFileName,
+				Authentication = new AuthenticationModel(client.Login)
 			};
 		}
 
 		[ValidateAntiForgeryToken, HttpPost, Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id, ClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel,
-			CarrierSelectModel carrierModel,
-			[Bind(Prefix = "Authentication")] AuthenticationModel authenticationModel)
+			CarrierSelectModel carrierModel)
 		{
-			if (!EmailsHelper.Validate(model.Emails))
+			if(!EmailsHelper.Validate(model.Emails))
 			{
 				ModelState.AddModelError("Emails", @"Emails format is invalid");
 			}
 
-			if (!ModelState.IsValid) return View();
+			if(!ModelState.IsValid) return View();
 
 			var client = _clients.GetCurrentClientData(id);
 
 			try
 			{
+				var authenticationModel = model.Authentication;
+
 				_manager.Update(client.ClientId, model, carrierModel, transitModel, authenticationModel);
 
 				MergeContract(model, client.ClientId);
 			}
-			catch (DublicateLoginException)
+			catch(DublicateLoginException)
 			{
 				ModelState.AddModelError("Login", Validation.LoginExists);
 			}
 
-			if (!ModelState.IsValid) return View();
+			if(!ModelState.IsValid) return View();
 
 			return RedirectToAction(MVC.Client.Edit(client.ClientId));
 		}

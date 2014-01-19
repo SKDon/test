@@ -661,7 +661,7 @@
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\EditorTemplates\ClientModel.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\TransitEditModel.cshtml" />
+    <Content Include="Views\Transit\EditorTemplates\TransitEditModel.cshtml" />
     <Content Include="Scripts\jQuery\jquery-2.0.3.min.map" />
     <None Include="Scripts\jQuery\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jQuery\jquery.validate.js" />

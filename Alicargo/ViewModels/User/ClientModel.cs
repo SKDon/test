@@ -6,8 +6,6 @@ namespace Alicargo.ViewModels.User
 {
 	public sealed class ClientModel
 	{
-		#region Contatct info
-
 		[Required, DataType(DataType.MultilineText), DisplayNameLocalized(typeof(Entities), "Contacts")]
 		public string Contacts { get; set; }
 
@@ -16,10 +14,6 @@ namespace Alicargo.ViewModels.User
 
 		[DataType(DataType.MultilineText), Required, DisplayNameLocalized(typeof(Entities), "Emails")]
 		public string Emails { get; set; }
-
-		#endregion
-
-		#region Legal entry attributes
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Nic")]
 		public string Nic { get; set; }
@@ -60,6 +54,6 @@ namespace Alicargo.ViewModels.User
 		[DisplayNameLocalized(typeof(Entities), "Contract")]
 		public byte[] ContractFile { get; set; }
 
-		#endregion
+		public AuthenticationModel Authentication { get; set; }
 	}
 }
