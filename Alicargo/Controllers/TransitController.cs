@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.ViewModels;
@@ -8,11 +10,18 @@ namespace Alicargo.Controllers
 {
 	public partial class TransitController : Controller
 	{
-		private readonly ITransitRepository _transitRepository;
+		private readonly IIdentityService _identity;
+		private readonly ICityRepository _cities;
+		private readonly ITransitRepository _transits;
 
-		public TransitController(ITransitRepository transitRepository)
+		public TransitController(
+			IIdentityService identity,
+			ICityRepository cities,
+			ITransitRepository transits)
 		{
-			_transitRepository = transitRepository;
+			_identity = identity;
+			_cities = cities;
+			_transits = transits;
 		}
 
 		[ChildActionOnly]
@@ -22,16 +31,18 @@ namespace Alicargo.Controllers
 
 			return !applicationId.HasValue
 				? PartialView()
-				: GetEditPartialView(() => _transitRepository.GetByApplication(applicationId.Value));
+				: GetEditPartialView(() => _transits.GetByApplication(applicationId.Value));
 		}
 
 		private PartialViewResult GetEditPartialView(Func<TransitData> getData)
 		{
 			var data = getData();
 
-			var transit = TransitEditModel.GetModel(data);
+			var transit = TransitMapper.Map(data);
 
 			ViewBag.TransitId = data.Id;
+
+			ViewBag.Cities = _cities.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 
 			return PartialView(transit);
 		}
@@ -43,7 +54,7 @@ namespace Alicargo.Controllers
 
 			return !clientId.HasValue
 				? PartialView()
-				: GetEditPartialView(() => _transitRepository.GetByClient(clientId.Value));
+				: GetEditPartialView(() => _transits.GetByClient(clientId.Value));
 		}
 	}
 }

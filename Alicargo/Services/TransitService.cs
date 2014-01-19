@@ -21,7 +21,7 @@ namespace Alicargo.Services
         {
             var carrierId = _carrierService.AddOrGetCarrier(carrierModel);
 
-            var data = TransitEditModel.GetData(transit, carrierId);
+            var data = TransitMapper.Map(transit, carrierId);
 
             data.Id = transitId;
 
@@ -41,7 +41,7 @@ namespace Alicargo.Services
         {
             var carrierId = _carrierService.AddOrGetCarrier(carrierModel);
 
-	        var data = TransitEditModel.GetData(model, carrierId);
+	        var data = TransitMapper.Map(model, carrierId);
 
 	        var transitId = _transitRepository.Add(data);
 
