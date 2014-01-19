@@ -1,13 +1,12 @@
-﻿using Alicargo.Core.Contracts.Event;
-using Alicargo.Core.Event;
+﻿using Alicargo.Core.Contracts.Calculation;
+using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.Services.Abstract;
 
-namespace Alicargo.Services.Calculation
+namespace Alicargo.Core.Calculation
 {
-	internal sealed class CalculationServiceWithEvent : ICalculationService
+	public sealed class CalculationServiceWithEvent : ICalculationService
 	{
 		private readonly ICalculationRepository _calculations;
 		private readonly IEventFacade _events;

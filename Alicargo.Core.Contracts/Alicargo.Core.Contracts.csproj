@@ -54,6 +54,7 @@
     <Compile Include="AirWaybill\IApplicationAwbManager.cs" />
     <Compile Include="AirWaybill\IAwbManager.cs" />
     <Compile Include="AirWaybill\IAwbStateManager.cs" />
+    <Compile Include="Calculation\ICalculationService.cs" />
     <Compile Include="Calculation\IExcelClientCalculation.cs" />
     <Compile Include="Client\IClientBalance.cs" />
     <Compile Include="Event\IEventFacade.cs" />

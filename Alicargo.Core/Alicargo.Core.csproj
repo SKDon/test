@@ -54,6 +54,7 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,8 +66,13 @@
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
     <Compile Include="AirWaybill\AwbGtdHelper.cs" />
+    <Compile Include="AirWaybill\AwbHelper.cs" />
     <Compile Include="AirWaybill\AwbManager.cs" />
     <Compile Include="Calculation\CalculationDataDrawable.cs" />
+    <Compile Include="Calculation\CalculationHelper.cs" />
+    <Compile Include="Calculation\CalculationService.cs" />
+    <Compile Include="Calculation\CalculationServiceWithBalace.cs" />
+    <Compile Include="Calculation\CalculationServiceWithEvent.cs" />
     <Compile Include="Calculation\ClientBalanceHistoryItemDrawable.cs" />
     <Compile Include="Calculation\DrawableMapper.cs" />
     <Compile Include="Calculation\ExcelClientCalculation.cs" />

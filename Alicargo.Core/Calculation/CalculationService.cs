@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+using Alicargo.Core.AirWaybill;
+using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
-using Alicargo.ViewModels.Calculation;
-using Alicargo.ViewModels.Helpers;
 
-namespace Alicargo.Services.Calculation
+namespace Alicargo.Core.Calculation
 {
-	internal sealed class CalculationService : ICalculationService
+	public sealed class CalculationService : ICalculationService
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;

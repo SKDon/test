@@ -1,16 +1,16 @@
 ﻿using System;
+using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Resources;
-using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 
-namespace Alicargo.Services.Calculation
+namespace Alicargo.Core.Calculation
 {
-	internal sealed class CalculationServiceWithBalace : ICalculationService
+	public sealed class CalculationServiceWithBalace : ICalculationService
 	{
 		private readonly IClientBalance _balance;
 		private readonly ICalculationRepository _calculations;

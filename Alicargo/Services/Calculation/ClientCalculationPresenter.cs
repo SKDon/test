@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Calculation.Entities;
 using Alicargo.Core.Helpers;

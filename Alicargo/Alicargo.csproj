@@ -174,8 +174,6 @@
     <Compile Include="Services\AirWaybill\AwbMapper.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
-    <Compile Include="Services\Calculation\CalculationServiceWithBalace.cs" />
-    <Compile Include="Services\Calculation\CalculationServiceWithEvent.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
     <Compile Include="Services\Excel\ExcelAdminCalculation.cs" />
@@ -207,7 +205,6 @@
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\JsPaths.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
-    <Compile Include="Services\Calculation\CalculationService.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
@@ -272,7 +269,6 @@
     <Compile Include="Services\Abstract\IAwbUpdateManager.cs" />
     <Compile Include="Services\Abstract\IAwbPresenter.cs" />
     <Compile Include="Services\Abstract\IAdminCalculationPresenter.cs" />
-    <Compile Include="Services\Abstract\ICalculationService.cs" />
     <Compile Include="Services\Abstract\ICarrierService.cs" />
     <Compile Include="Services\Abstract\IClientManager.cs" />
     <Compile Include="Services\Abstract\IIdentityService.cs" />
@@ -414,7 +410,6 @@
     <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Admin\PaymentModel.cs" />
-    <Compile Include="ViewModels\Calculation\CalculationHelper.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationListCollection.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationItem.cs" />
@@ -430,7 +425,6 @@
     <Compile Include="ViewModels\EmailTemplate\ApplicationEventTemplateModel.cs" />
     <Compile Include="ViewModels\EmailTemplate\EmailTemplateSettingsModel.cs" />
     <Compile Include="ViewModels\Files\ApplicationFilesEdit.cs" />
-    <Compile Include="ViewModels\Helpers\AwbHelper.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />
     <Compile Include="ViewModels\AirWaybill\AwbBrokerModel.cs" />

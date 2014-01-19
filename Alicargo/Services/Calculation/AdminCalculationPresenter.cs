@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Core.AirWaybill;
+using Alicargo.Core.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
-using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Calculation.Admin;
-using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Calculation
 {
@@ -169,7 +168,7 @@ namespace Alicargo.Services.Calculation
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),
-				ClassId = (ClassType?)a.ClassId
+				ClassId = a.ClassId
 			}).OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
 		}
 	}

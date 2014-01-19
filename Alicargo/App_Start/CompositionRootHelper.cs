@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alicargo.Core.AirWaybill;
+using Alicargo.Core.Calculation;
 using Alicargo.Core.Contracts.AirWaybill;
+using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
 using Alicargo.Services.Application;
-using Alicargo.Services.Calculation;
 using Alicargo.Services.Email;
 using Alicargo.Services.Users.Client;
 using Ninject;

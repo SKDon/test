@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 
-namespace Alicargo.ViewModels.Calculation
+namespace Alicargo.Core.Calculation
 {
-	internal static class CalculationHelper
+	public static class CalculationHelper
 	{
 		public const decimal InsuranceRate = 100;
 
