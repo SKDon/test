@@ -1,6 +1,6 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts;
 
-namespace Alicargo.Services.Abstract
+namespace Alicargo.Core.Contracts.AirWaybill
 {
 	public interface IAwbGtdHelper
     {

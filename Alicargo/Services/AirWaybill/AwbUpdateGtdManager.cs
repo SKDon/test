@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;

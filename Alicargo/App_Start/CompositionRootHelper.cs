@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alicargo.Core.AirWaybill;
+using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Services.Abstract;

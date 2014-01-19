@@ -1,8 +1,8 @@
 ﻿using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.Services.Abstract;
 
-namespace Alicargo.Services.AirWaybill
+namespace Alicargo.Core.AirWaybill
 {
 	public sealed class AwbGtdHelper : IAwbGtdHelper
 	{

@@ -1,7 +1,7 @@
-﻿using Alicargo.Core.Contracts;
+﻿using Alicargo.Core.AirWaybill;
+using Alicargo.Core.Contracts;
+using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.Services.Abstract;
-using Alicargo.Services.AirWaybill;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;

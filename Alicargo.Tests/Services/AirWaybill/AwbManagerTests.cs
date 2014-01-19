@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Alicargo.Core.AirWaybill;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Exceptions;
