@@ -29,6 +29,9 @@ namespace Alicargo.Controllers
 		{
 			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
 
+			ViewBag.Cities = _cities.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
+
+
 			return !applicationId.HasValue
 				? PartialView()
 				: GetEditPartialView(() => _transits.GetByApplication(applicationId.Value));
@@ -42,8 +45,6 @@ namespace Alicargo.Controllers
 
 			ViewBag.TransitId = data.Id;
 
-			ViewBag.Cities = _cities.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
-
 			return PartialView(transit);
 		}
 
@@ -51,6 +52,8 @@ namespace Alicargo.Controllers
 		public virtual PartialViewResult EditByClient(long? clientId)
 		{
 			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
+
+			ViewBag.Cities = _cities.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 
 			return !clientId.HasValue
 				? PartialView()

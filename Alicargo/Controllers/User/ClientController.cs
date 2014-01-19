@@ -66,7 +66,10 @@ namespace Alicargo.Controllers.User
 				ModelState.AddModelError("Emails", @"Emails format is invalid");
 			}
 
-			if(!ModelState.IsValid) return View();
+			if(!ModelState.IsValid)
+			{
+				return View();
+			}
 
 			var authenticationModel = model.Authentication;
 			long clientId = 0;
@@ -168,7 +171,10 @@ namespace Alicargo.Controllers.User
 				ModelState.AddModelError("Emails", @"Emails format is invalid");
 			}
 
-			if(!ModelState.IsValid) return View();
+			if(!ModelState.IsValid)
+			{
+				return View();
+			}
 
 			var client = _clients.GetCurrentClientData(id);
 
