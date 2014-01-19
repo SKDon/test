@@ -117,9 +117,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				TransitId = x.TransitId,
 				TransitAddress = x.Transit.Address,
 				TransitCarrierName = x.Transit.Carrier.Name,
-				TransitCity = x.Transit.City,
-				TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
-				TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
+				TransitCity = x.Transit.City.Name_Ru, // todo: 1. bad design
+				TransitDeliveryType = (DeliveryType)x.Transit.DeliveryTypeId,
+				TransitMethodOfTransit = (MethodOfTransit)x.Transit.MethodOfTransitId,
 				TransitPhone = x.Transit.Phone,
 				TransitRecipientName = x.Transit.RecipientName,
 				TransitReference = x.TransitReference,
@@ -182,7 +182,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 					TermsOfDelivery = x.TermsOfDelivery,
 					TransitAddress = x.Transit.Address,
 					TransitCarrierName = x.Transit.Carrier.Name,
-					TransitCity = x.Transit.City,
+					TransitCity = x.Transit.City.Name_Ru, // todo: 1. bad design
 					TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
 					TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
 					TransitPhone = x.Transit.Phone,

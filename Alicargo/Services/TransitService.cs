@@ -41,11 +41,11 @@ namespace Alicargo.Services
         {
             var carrierId = _carrierService.AddOrGetCarrier(carrierModel);
 
-            var transitId = _transitRepository.Add(TransitEditModel.GetData(model, carrierId));
+	        var data = TransitEditModel.GetData(model, carrierId);
 
-            _unitOfWork.SaveChanges();
+	        var transitId = _transitRepository.Add(data);
 
-            return transitId();
+            return transitId;
         }
     }
 }

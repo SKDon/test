@@ -1,5 +1,4 @@
-﻿using Alicargo.Core.Contracts;
-using Alicargo.Core.Contracts.State;
+﻿using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -85,10 +84,8 @@ namespace Alicargo.Services.Application
 		private long CopyTransitDataFromClient(long clientId)
 		{
 			var transitData = _transits.GetByClient(clientId);
-			var tid = _transits.Add(transitData);
-			_unitOfWork.SaveChanges();
-			var transitId = tid();
-			return transitId;
+
+			return _transits.Add(transitData);
 		}
 
 		private static void Map(ApplicationSenderModel @from, ApplicationData to)

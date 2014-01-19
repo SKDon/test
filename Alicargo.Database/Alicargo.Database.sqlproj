@@ -83,6 +83,7 @@
     <Folder Include="Stored procedures\User\Client" />
     <Folder Include="Stored procedures\Calculation" />
     <Folder Include="Stored procedures\User\Sender" />
+    <Folder Include="Stored procedures\Transit" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Transit.sql" />
@@ -172,6 +173,12 @@
     <Build Include="Stored procedures\Country_Add.sql" />
     <Build Include="Stored procedures\Country_GetList.sql" />
     <Build Include="Stored procedures\Country_Update.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Add.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Update.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Get.sql" />
+    <Build Include="Stored procedures\Transit\Transit_GetByApplication.sql" />
+    <Build Include="Stored procedures\Transit\Transit_GetByClient.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

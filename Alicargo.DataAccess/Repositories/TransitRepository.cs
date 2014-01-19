@@ -1,104 +1,65 @@
-﻿using System;
+﻿using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.DataAccess.DbContext;
+using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
 	internal sealed class TransitRepository : ITransitRepository
 	{
-		private readonly Expression<Func<Transit, TransitData>> _selector;
-		private readonly AlicargoDataContext _context;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public TransitRepository(IUnitOfWork unitOfWork)
+		public TransitRepository(ISqlProcedureExecutor executor)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
-
-			_selector = x => new TransitData
-			{
-				Address = x.Address,
-				CarrierId = x.CarrierId,
-				Id = x.Id,
-				City = x.City,
-				DeliveryTypeId = x.DeliveryTypeId,
-				MethodOfTransitId = x.MethodOfTransitId,
-				Phone = x.Phone,
-				RecipientName = x.RecipientName,
-				WarehouseWorkingTime = x.WarehouseWorkingTime
-			};
+			_executor = executor;
 		}
 
-		public Func<long> Add(TransitData transit)
+		public long Add(TransitData transit)
 		{
-			var entity = new Transit();
+			if(transit.Id > 0)
+			{
+				throw new InvalidDataException("Id should be undefined");
+			}
 
-			CopyTo(transit, entity);
-
-			_context.Transits.InsertOnSubmit(entity);
-
-			return () => entity.Id;
+			return _executor.Query<long>("[dbo].[Transit_Add]", new
+			{
+				transit.Address,
+				transit.Phone,
+				transit.CarrierId,
+				transit.CityId,
+				transit.DeliveryType,
+				transit.MethodOfTransit,
+				transit.RecipientName,
+				transit.WarehouseWorkingTime
+			});
 		}
 
 		public void Update(TransitData transit)
 		{
-			var entity = _context.Transits.First(x => x.Id == transit.Id);
-
-			CopyTo(transit, entity);
+			_executor.Execute("[dbo].[Transit_Update]", transit);
 		}
 
 		public TransitData[] Get(params long[] ids)
 		{
-			return _context.Transits
-						  .Where(x => ids.Contains(x.Id))
-						  .Select(_selector)
-						  .ToArray();
+			var idsTable = TableParameters.GeIdsTable("Ids", ids.Distinct().ToArray());
+
+			return _executor.Array<TransitData>("[dbo].[Transit_Get]", new TableParameters(idsTable));
 		}
 
-		public long? GetaApplicationId(long id)
+		public TransitData GetByApplication(long applicationId)
 		{
-			return _context.Applications
-						  .Where(x => x.TransitId == id)
-						  .Select(x => x.Id)
-						  .FirstOrDefault();
-		}
-
-		public TransitData GetByApplication(long id)
-		{
-			return _context.Applications
-						  .Where(x => x.Id == id)
-						  .Select(x => x.Transit)
-						  .Select(_selector)
-						  .FirstOrDefault();
+			return _executor.Query<TransitData>("[dbo].[Transit_GetByApplication]", new { applicationId });
 		}
 
 		public TransitData GetByClient(long clientId)
 		{
-			return _context.Clients
-						  .Where(x => x.Id == clientId)
-						  .Select(x => x.Transit)
-						  .Select(_selector)
-						  .FirstOrDefault();
+			return _executor.Query<TransitData>("[dbo].[Transit_GetByClient]", new { clientId });
 		}
 
 		public void Delete(long transitId)
 		{
-			var transit = _context.Transits.First(x => x.Id == transitId);
-
-			_context.Transits.DeleteOnSubmit(transit);
-		}
-
-		private static void CopyTo(TransitData from, Transit to)
-		{
-			to.City = from.City;
-			to.Address = from.Address;
-			to.RecipientName = from.RecipientName;
-			to.Phone = from.Phone;
-			to.MethodOfTransitId = from.MethodOfTransitId;
-			to.DeliveryTypeId = from.DeliveryTypeId;
-			to.CarrierId = from.CarrierId;
-			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
+			_executor.Execute("[dbo].[Transit_Delete]", new { Id = transitId });
 		}
 	}
 }

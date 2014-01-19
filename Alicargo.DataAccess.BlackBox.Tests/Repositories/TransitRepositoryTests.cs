@@ -23,7 +23,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_transitRepository = new TransitRepository(_context.UnitOfWork);
+			_transitRepository = new TransitRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
 		[TestCleanup]
@@ -48,10 +48,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var oldData = CreateTestTransit();
 
 			var newData = _fixture.Create<TransitData>();
-			newData.CarrierId = oldData.CarrierId;
+			newData.CarrierId = TestConstants.TestCarrierId2;
 			newData.Id = oldData.Id;
+			newData.CityId = TestConstants.TestCityId2;
+
 			_transitRepository.Update(newData);
 			_context.UnitOfWork.SaveChanges();
+			
 			var actual = _transitRepository.Get(newData.Id).First();
 
 			oldData.Should().NotBeSameAs(actual);
@@ -60,34 +63,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 		private TransitData CreateTestTransit()
 		{
-			var db = (AlicargoDataContext) _context.UnitOfWork.Context;
+			var data = _fixture.Create<TransitData>();
+			data.Id = 0;
+			data.CarrierId = TestConstants.TestCarrierId1;
+			data.CityId = TestConstants.TestCityId1;
 
-			var carrier = _fixture.Build<Carrier>()
-				.Without(x => x.Transits)
-				.Create();
-			db.Carriers.InsertOnSubmit(carrier);
-			db.SubmitChanges();
+			data.Id = _transitRepository.Add(data);
 
-			var transit = _fixture.Build<Transit>()
-				.Without(x => x.Applications)
-				.Without(x => x.Clients)
-				.With(x => x.Carrier, carrier)
-				.Create();
-			db.Transits.InsertOnSubmit(transit);
-			db.SubmitChanges();
-
-			return new TransitData
-			{
-				City = transit.City,
-				Address = transit.Address,
-				RecipientName = transit.RecipientName,
-				Phone = transit.Phone,
-				MethodOfTransitId = transit.MethodOfTransitId,
-				DeliveryTypeId = transit.DeliveryTypeId,
-				CarrierId = transit.CarrierId,
-				WarehouseWorkingTime = transit.WarehouseWorkingTime,
-				Id = transit.Id
-			};
+			return data;
 		}
 	}
 }

@@ -44,7 +44,9 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _mock.Build<ClientModel>()
 				.With(x => x.Emails, "mail@mail.com")
 				.Create();
-			var transit = _mock.Build<TransitEditModel>().Create();
+			var transit = _mock.Build<TransitEditModel>()
+				.With(x => x.CityId, TestConstants.TestCityId1)
+				.Create();
 			var carrier = _mock.Build<CarrierSelectModel>().Create();
 
 			_controller.Create(model, transit, carrier, authentication);

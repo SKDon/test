@@ -1,4 +1,5 @@
 ﻿using System;
+using Alicargo.DataAccess.Contracts.Enums;
 
 namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
@@ -22,9 +23,9 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public string TransitWarehouseWorkingTime { get; set; }
 
-		public int TransitMethodOfTransitId { get; set; }
+		public MethodOfTransit TransitMethodOfTransit { get; set; }
 
-		public int TransitDeliveryTypeId { get; set; }
+		public DeliveryType TransitDeliveryType { get; set; }
 
 		public string TransitCarrierName { get; set; }
 

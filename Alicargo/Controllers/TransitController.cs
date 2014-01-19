@@ -18,16 +18,16 @@ namespace Alicargo.Controllers
 		[ChildActionOnly]
 		public virtual PartialViewResult EditByApplication(long? applicationId)
 		{
-			return GetEditPartialView(applicationId, id => _transitRepository.GetByApplication(id));
-		}
-
-		private PartialViewResult GetEditPartialView(long? id, Func<long, TransitData> getData)
-		{
 			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
 
-			if (!id.HasValue) return PartialView();
+			return !applicationId.HasValue
+				? PartialView()
+				: GetEditPartialView(() => _transitRepository.GetByApplication(applicationId.Value));
+		}
 
-			var data = getData(id.Value);
+		private PartialViewResult GetEditPartialView(Func<TransitData> getData)
+		{
+			var data = getData();
 
 			var transit = TransitEditModel.GetModel(data);
 
@@ -39,7 +39,11 @@ namespace Alicargo.Controllers
 		[ChildActionOnly]
 		public virtual PartialViewResult EditByClient(long? clientId)
 		{
-			return GetEditPartialView(clientId, id => _transitRepository.GetByClient(id));
+			ViewData.TemplateInfo.HtmlFieldPrefix = "Transit";
+
+			return !clientId.HasValue
+				? PartialView()
+				: GetEditPartialView(() => _transitRepository.GetByClient(clientId.Value));
 		}
 	}
 }

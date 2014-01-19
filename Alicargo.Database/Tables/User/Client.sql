@@ -19,7 +19,7 @@
 	[Balance]			MONEY			NOT NULL CONSTRAINT [DF_Client_Balance] DEFAULT(0),
 
 	CONSTRAINT [PK_dbo.Client] PRIMARY KEY CLUSTERED ([Id] ASC),
-	CONSTRAINT [FK_dbo.Client_dbo.Transit_Transit_Id] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),
+	CONSTRAINT [FK_dbo.Client_dbo.Transit_TransitId] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),
 	CONSTRAINT [FK_dbo.Client_dbo.User_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
 )
 GO

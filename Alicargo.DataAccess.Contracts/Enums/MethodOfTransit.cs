@@ -4,13 +4,10 @@ namespace Alicargo.DataAccess.Contracts.Enums
 {
 	public enum MethodOfTransit
 	{
-		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.Enums), "Avia")]
-		Avia = 0,
+		[DisplayNameLocalized(typeof(Resources.Enums), "Avia")] Avia = 0,
 
-		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.Enums), "Auto")]
-		Auto = 1,
+		[DisplayNameLocalized(typeof(Resources.Enums), "Auto")] Auto = 1,
 
-		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.Enums), "Self")]
-		Self = 2
+		[DisplayNameLocalized(typeof(Resources.Enums), "Self")] Self = 2
 	}
 }

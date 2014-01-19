@@ -13,5 +13,9 @@
 		public const long TestCountryId = 1;
 		public const long TestApplicationId = 1;
 		public const long TestSenderId = 1;
+		public const long TestCarrierId1 = 1;
+		public const long TestCityId1 = 1;
+		public const long TestCarrierId2 = 2;
+		public const long TestCityId2 = 2;
 	}
 }

@@ -116,11 +116,11 @@
       <Column Name="RS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="KS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="TransitId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-	  <Column Name="Balance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Association Name="Client_Calculation" Member="Calculations" ThisKey="Id" OtherKey="ClientId" Type="Calculation" />
       <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
-      <Association Name="Transit_Client" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
       <Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Transit_Client" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Country" Member="Countries" AccessModifier="Internal">
@@ -128,7 +128,6 @@
       <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name_En" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="Name_Ru" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="Code" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
       <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Country_Application" Member="Applications" ThisKey="Id" OtherKey="CountryId" Type="Application" />
     </Type>
@@ -172,22 +171,6 @@
       <Column Name="TwoLetterISOLanguageName" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
       <Column Name="StateId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Association Name="State_StateLocalization" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Transit" Member="Transits" AccessModifier="Internal">
-    <Type Name="Transit" AccessModifier="Internal" Modifier="Sealed">
-      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="City" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="RecipientName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="WarehouseWorkingTime" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="MethodOfTransitId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="DeliveryTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CarrierId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="Transit_Client" Member="Clients" ThisKey="Id" OtherKey="TransitId" Type="Client" />
-      <Association Name="Transit_Application" Member="Applications" ThisKey="Id" OtherKey="TransitId" Type="Application" />
-      <Association Name="Carrier_Transit" Member="Carrier" ThisKey="CarrierId" OtherKey="Id" Type="Carrier" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users" AccessModifier="Internal">
@@ -251,6 +234,32 @@
       <Association Name="Sender_Application" Member="Sender" ThisKey="SenderId" OtherKey="Id" Type="Sender" IsForeignKey="true" />
       <Association Name="State_Application" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
       <Association Name="Transit_Application" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transit" Member="Transits" AccessModifier="Internal">
+    <Type Name="Transit" AccessModifier="Internal">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CityId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="RecipientName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="WarehouseWorkingTime" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MethodOfTransitId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DeliveryTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CarrierId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="Transit_Client" Member="Clients" ThisKey="Id" OtherKey="TransitId" Type="Client" />
+      <Association Name="Transit_Application" Member="Applications" ThisKey="Id" OtherKey="TransitId" Type="Application" />
+      <Association Name="Carrier_Transit" Member="Carrier" ThisKey="CarrierId" OtherKey="Id" Type="Carrier" IsForeignKey="true" />
+      <Association Name="City_Transit" Member="City" ThisKey="CityId" OtherKey="Id" Type="City" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.City" Member="Cities" AccessModifier="Internal">
+    <Type Name="City" AccessModifier="Internal">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name_En" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Name_Ru" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="City_Transit" Member="Transits" ThisKey="Id" OtherKey="CityId" Type="Transit" />
     </Type>
   </Table>
   <Function Name="dbo.Calculation_SetState" Method="Calculation_SetState">

@@ -13,7 +13,11 @@ namespace Alicargo.DataAccess.DbContext
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
+	using System.Data;
+	using System.Collections.Generic;
 	using System.Reflection;
+	using System.Linq;
+	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
 	
@@ -65,15 +69,18 @@ namespace Alicargo.DataAccess.DbContext
     partial void InsertStateLocalization(StateLocalization instance);
     partial void UpdateStateLocalization(StateLocalization instance);
     partial void DeleteStateLocalization(StateLocalization instance);
-    partial void InsertTransit(Transit instance);
-    partial void UpdateTransit(Transit instance);
-    partial void DeleteTransit(Transit instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
     partial void InsertApplication(Application instance);
     partial void UpdateApplication(Application instance);
     partial void DeleteApplication(Application instance);
+    partial void InsertTransit(Transit instance);
+    partial void UpdateTransit(Transit instance);
+    partial void DeleteTransit(Transit instance);
+    partial void InsertCity(City instance);
+    partial void UpdateCity(City instance);
+    partial void DeleteCity(City instance);
     #endregion
 		
 		public AlicargoDataContext(string connection) : 
@@ -212,14 +219,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		internal System.Data.Linq.Table<Transit> Transits
-		{
-			get
-			{
-				return this.GetTable<Transit>();
-			}
-		}
-		
 		internal System.Data.Linq.Table<User> Users
 		{
 			get
@@ -233,6 +232,22 @@ namespace Alicargo.DataAccess.DbContext
 			get
 			{
 				return this.GetTable<Application>();
+			}
+		}
+		
+		internal System.Data.Linq.Table<Transit> Transits
+		{
+			get
+			{
+				return this.GetTable<Transit>();
+			}
+		}
+		
+		internal System.Data.Linq.Table<City> Cities
+		{
+			get
+			{
+				return this.GetTable<City>();
 			}
 		}
 		
@@ -891,7 +906,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDFileData
 		{
 			get
@@ -931,7 +946,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDAdditionalFileData
 		{
 			get
@@ -971,7 +986,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary PackingFileData
 		{
 			get
@@ -1011,7 +1026,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary InvoiceFileData
 		{
 			get
@@ -1051,7 +1066,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary AWBFileData
 		{
 			get
@@ -2254,9 +2269,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntitySet<Application> _Applications;
 		
-		private EntityRef<Transit> _Transit;
-		
 		private EntityRef<User> _User;
+		
+		private EntityRef<Transit> _Transit;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2304,8 +2319,8 @@ namespace Alicargo.DataAccess.DbContext
 		{
 			this._Calculations = new EntitySet<Calculation>(new Action<Calculation>(this.attach_Calculations), new Action<Calculation>(this.detach_Calculations));
 			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
-			this._Transit = default(EntityRef<Transit>);
 			this._User = default(EntityRef<User>);
+			this._Transit = default(EntityRef<Transit>);
 			OnCreated();
 		}
 		
@@ -2703,40 +2718,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Transit", ThisKey="TransitId", OtherKey="Id", IsForeignKey=true)]
-		public Transit Transit
-		{
-			get
-			{
-				return this._Transit.Entity;
-			}
-			set
-			{
-				Transit previousValue = this._Transit.Entity;
-				if (((previousValue != value) 
-							|| (this._Transit.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Transit.Entity = null;
-						previousValue.Clients.Remove(this);
-					}
-					this._Transit.Entity = value;
-					if ((value != null))
-					{
-						value.Clients.Add(this);
-						this._TransitId = value.Id;
-					}
-					else
-					{
-						this._TransitId = default(long);
-					}
-					this.SendPropertyChanged("Transit");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Client", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public User User
 		{
@@ -2767,6 +2748,40 @@ namespace Alicargo.DataAccess.DbContext
 						this._UserId = default(long);
 					}
 					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Transit", ThisKey="TransitId", OtherKey="Id", IsForeignKey=true)]
+		public Transit Transit
+		{
+			get
+			{
+				return this._Transit.Entity;
+			}
+			set
+			{
+				Transit previousValue = this._Transit.Entity;
+				if (((previousValue != value) 
+							|| (this._Transit.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Transit.Entity = null;
+						previousValue.Clients.Remove(this);
+					}
+					this._Transit.Entity = value;
+					if ((value != null))
+					{
+						value.Clients.Add(this);
+						this._TransitId = value.Id;
+					}
+					else
+					{
+						this._TransitId = default(long);
+					}
+					this.SendPropertyChanged("Transit");
 				}
 			}
 		}
@@ -2828,8 +2843,6 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private string _Name_Ru;
 		
-		private string _Code;
-		
 		private int _Position;
 		
 		private EntitySet<Application> _Applications;
@@ -2844,8 +2857,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnName_EnChanged();
     partial void OnName_RuChanging(string value);
     partial void OnName_RuChanged();
-    partial void OnCodeChanging(string value);
-    partial void OnCodeChanged();
     partial void OnPositionChanging(int value);
     partial void OnPositionChanged();
     #endregion
@@ -2912,26 +2923,6 @@ namespace Alicargo.DataAccess.DbContext
 					this._Name_Ru = value;
 					this.SendPropertyChanged("Name_Ru");
 					this.OnName_RuChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="Char(2) NOT NULL", CanBeNull=false)]
-		public string Code
-		{
-			get
-			{
-				return this._Code;
-			}
-			set
-			{
-				if ((this._Code != value))
-				{
-					this.OnCodeChanging(value);
-					this.SendPropertyChanging();
-					this._Code = value;
-					this.SendPropertyChanged("Code");
-					this.OnCodeChanged();
 				}
 			}
 		}
@@ -3826,357 +3817,6 @@ namespace Alicargo.DataAccess.DbContext
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Transit")]
-	internal sealed partial class Transit : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _Id;
-		
-		private string _City;
-		
-		private string _Address;
-		
-		private string _RecipientName;
-		
-		private string _Phone;
-		
-		private string _WarehouseWorkingTime;
-		
-		private int _MethodOfTransitId;
-		
-		private int _DeliveryTypeId;
-		
-		private long _CarrierId;
-		
-		private EntitySet<Client> _Clients;
-		
-		private EntitySet<Application> _Applications;
-		
-		private EntityRef<Carrier> _Carrier;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(long value);
-    partial void OnIdChanged();
-    partial void OnCityChanging(string value);
-    partial void OnCityChanged();
-    partial void OnAddressChanging(string value);
-    partial void OnAddressChanged();
-    partial void OnRecipientNameChanging(string value);
-    partial void OnRecipientNameChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnWarehouseWorkingTimeChanging(string value);
-    partial void OnWarehouseWorkingTimeChanged();
-    partial void OnMethodOfTransitIdChanging(int value);
-    partial void OnMethodOfTransitIdChanged();
-    partial void OnDeliveryTypeIdChanging(int value);
-    partial void OnDeliveryTypeIdChanged();
-    partial void OnCarrierIdChanging(long value);
-    partial void OnCarrierIdChanged();
-    #endregion
-		
-		public Transit()
-		{
-			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
-			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
-			this._Carrier = default(EntityRef<Carrier>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string City
-		{
-			get
-			{
-				return this._City;
-			}
-			set
-			{
-				if ((this._City != value))
-				{
-					this.OnCityChanging(value);
-					this.SendPropertyChanging();
-					this._City = value;
-					this.SendPropertyChanged("City");
-					this.OnCityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Address
-		{
-			get
-			{
-				return this._Address;
-			}
-			set
-			{
-				if ((this._Address != value))
-				{
-					this.OnAddressChanging(value);
-					this.SendPropertyChanging();
-					this._Address = value;
-					this.SendPropertyChanged("Address");
-					this.OnAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecipientName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string RecipientName
-		{
-			get
-			{
-				return this._RecipientName;
-			}
-			set
-			{
-				if ((this._RecipientName != value))
-				{
-					this.OnRecipientNameChanging(value);
-					this.SendPropertyChanging();
-					this._RecipientName = value;
-					this.SendPropertyChanged("RecipientName");
-					this.OnRecipientNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WarehouseWorkingTime", DbType="NVarChar(MAX)")]
-		public string WarehouseWorkingTime
-		{
-			get
-			{
-				return this._WarehouseWorkingTime;
-			}
-			set
-			{
-				if ((this._WarehouseWorkingTime != value))
-				{
-					this.OnWarehouseWorkingTimeChanging(value);
-					this.SendPropertyChanging();
-					this._WarehouseWorkingTime = value;
-					this.SendPropertyChanged("WarehouseWorkingTime");
-					this.OnWarehouseWorkingTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MethodOfTransitId", DbType="Int NOT NULL")]
-		public int MethodOfTransitId
-		{
-			get
-			{
-				return this._MethodOfTransitId;
-			}
-			set
-			{
-				if ((this._MethodOfTransitId != value))
-				{
-					this.OnMethodOfTransitIdChanging(value);
-					this.SendPropertyChanging();
-					this._MethodOfTransitId = value;
-					this.SendPropertyChanged("MethodOfTransitId");
-					this.OnMethodOfTransitIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryTypeId", DbType="Int NOT NULL")]
-		public int DeliveryTypeId
-		{
-			get
-			{
-				return this._DeliveryTypeId;
-			}
-			set
-			{
-				if ((this._DeliveryTypeId != value))
-				{
-					this.OnDeliveryTypeIdChanging(value);
-					this.SendPropertyChanging();
-					this._DeliveryTypeId = value;
-					this.SendPropertyChanged("DeliveryTypeId");
-					this.OnDeliveryTypeIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarrierId", DbType="BigInt NOT NULL")]
-		public long CarrierId
-		{
-			get
-			{
-				return this._CarrierId;
-			}
-			set
-			{
-				if ((this._CarrierId != value))
-				{
-					if (this._Carrier.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCarrierIdChanging(value);
-					this.SendPropertyChanging();
-					this._CarrierId = value;
-					this.SendPropertyChanged("CarrierId");
-					this.OnCarrierIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Clients", ThisKey="Id", OtherKey="TransitId")]
-		public EntitySet<Client> Clients
-		{
-			get
-			{
-				return this._Clients;
-			}
-			set
-			{
-				this._Clients.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Application", Storage="_Applications", ThisKey="Id", OtherKey="TransitId")]
-		public EntitySet<Application> Applications
-		{
-			get
-			{
-				return this._Applications;
-			}
-			set
-			{
-				this._Applications.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Carrier_Transit", Storage="_Carrier", ThisKey="CarrierId", OtherKey="Id", IsForeignKey=true)]
-		public Carrier Carrier
-		{
-			get
-			{
-				return this._Carrier.Entity;
-			}
-			set
-			{
-				Carrier previousValue = this._Carrier.Entity;
-				if (((previousValue != value) 
-							|| (this._Carrier.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Carrier.Entity = null;
-						previousValue.Transits.Remove(this);
-					}
-					this._Carrier.Entity = value;
-					if ((value != null))
-					{
-						value.Transits.Add(this);
-						this._CarrierId = value.Id;
-					}
-					else
-					{
-						this._CarrierId = default(long);
-					}
-					this.SendPropertyChanged("Carrier");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		private void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		private void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transit = this;
-		}
-		
-		private void detach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transit = null;
-		}
-		
-		private void attach_Applications(Application entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transit = this;
-		}
-		
-		private void detach_Applications(Application entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transit = null;
 		}
 	}
 	
@@ -5695,6 +5335,560 @@ namespace Alicargo.DataAccess.DbContext
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Transit")]
+	internal partial class Transit : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _Id;
+		
+		private long _CityId;
+		
+		private string _Address;
+		
+		private string _RecipientName;
+		
+		private string _Phone;
+		
+		private string _WarehouseWorkingTime;
+		
+		private int _MethodOfTransitId;
+		
+		private int _DeliveryTypeId;
+		
+		private long _CarrierId;
+		
+		private EntitySet<Client> _Clients;
+		
+		private EntitySet<Application> _Applications;
+		
+		private EntityRef<Carrier> _Carrier;
+		
+		private EntityRef<City> _City;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(long value);
+    partial void OnIdChanged();
+    partial void OnCityIdChanging(long value);
+    partial void OnCityIdChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnRecipientNameChanging(string value);
+    partial void OnRecipientNameChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnWarehouseWorkingTimeChanging(string value);
+    partial void OnWarehouseWorkingTimeChanged();
+    partial void OnMethodOfTransitIdChanging(int value);
+    partial void OnMethodOfTransitIdChanged();
+    partial void OnDeliveryTypeIdChanging(int value);
+    partial void OnDeliveryTypeIdChanged();
+    partial void OnCarrierIdChanging(long value);
+    partial void OnCarrierIdChanged();
+    #endregion
+		
+		public Transit()
+		{
+			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
+			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
+			this._Carrier = default(EntityRef<Carrier>);
+			this._City = default(EntityRef<City>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityId", DbType="BigInt NOT NULL")]
+		public long CityId
+		{
+			get
+			{
+				return this._CityId;
+			}
+			set
+			{
+				if ((this._CityId != value))
+				{
+					if (this._City.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCityIdChanging(value);
+					this.SendPropertyChanging();
+					this._CityId = value;
+					this.SendPropertyChanged("CityId");
+					this.OnCityIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecipientName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string RecipientName
+		{
+			get
+			{
+				return this._RecipientName;
+			}
+			set
+			{
+				if ((this._RecipientName != value))
+				{
+					this.OnRecipientNameChanging(value);
+					this.SendPropertyChanging();
+					this._RecipientName = value;
+					this.SendPropertyChanged("RecipientName");
+					this.OnRecipientNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WarehouseWorkingTime", DbType="NVarChar(MAX)")]
+		public string WarehouseWorkingTime
+		{
+			get
+			{
+				return this._WarehouseWorkingTime;
+			}
+			set
+			{
+				if ((this._WarehouseWorkingTime != value))
+				{
+					this.OnWarehouseWorkingTimeChanging(value);
+					this.SendPropertyChanging();
+					this._WarehouseWorkingTime = value;
+					this.SendPropertyChanged("WarehouseWorkingTime");
+					this.OnWarehouseWorkingTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MethodOfTransitId", DbType="Int NOT NULL")]
+		public int MethodOfTransitId
+		{
+			get
+			{
+				return this._MethodOfTransitId;
+			}
+			set
+			{
+				if ((this._MethodOfTransitId != value))
+				{
+					this.OnMethodOfTransitIdChanging(value);
+					this.SendPropertyChanging();
+					this._MethodOfTransitId = value;
+					this.SendPropertyChanged("MethodOfTransitId");
+					this.OnMethodOfTransitIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryTypeId", DbType="Int NOT NULL")]
+		public int DeliveryTypeId
+		{
+			get
+			{
+				return this._DeliveryTypeId;
+			}
+			set
+			{
+				if ((this._DeliveryTypeId != value))
+				{
+					this.OnDeliveryTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._DeliveryTypeId = value;
+					this.SendPropertyChanged("DeliveryTypeId");
+					this.OnDeliveryTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarrierId", DbType="BigInt NOT NULL")]
+		public long CarrierId
+		{
+			get
+			{
+				return this._CarrierId;
+			}
+			set
+			{
+				if ((this._CarrierId != value))
+				{
+					if (this._Carrier.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCarrierIdChanging(value);
+					this.SendPropertyChanging();
+					this._CarrierId = value;
+					this.SendPropertyChanged("CarrierId");
+					this.OnCarrierIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Client", Storage="_Clients", ThisKey="Id", OtherKey="TransitId")]
+		public EntitySet<Client> Clients
+		{
+			get
+			{
+				return this._Clients;
+			}
+			set
+			{
+				this._Clients.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transit_Application", Storage="_Applications", ThisKey="Id", OtherKey="TransitId")]
+		public EntitySet<Application> Applications
+		{
+			get
+			{
+				return this._Applications;
+			}
+			set
+			{
+				this._Applications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Carrier_Transit", Storage="_Carrier", ThisKey="CarrierId", OtherKey="Id", IsForeignKey=true)]
+		public Carrier Carrier
+		{
+			get
+			{
+				return this._Carrier.Entity;
+			}
+			set
+			{
+				Carrier previousValue = this._Carrier.Entity;
+				if (((previousValue != value) 
+							|| (this._Carrier.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Carrier.Entity = null;
+						previousValue.Transits.Remove(this);
+					}
+					this._Carrier.Entity = value;
+					if ((value != null))
+					{
+						value.Transits.Add(this);
+						this._CarrierId = value.Id;
+					}
+					else
+					{
+						this._CarrierId = default(long);
+					}
+					this.SendPropertyChanged("Carrier");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Transit", Storage="_City", ThisKey="CityId", OtherKey="Id", IsForeignKey=true)]
+		public City City
+		{
+			get
+			{
+				return this._City.Entity;
+			}
+			set
+			{
+				City previousValue = this._City.Entity;
+				if (((previousValue != value) 
+							|| (this._City.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._City.Entity = null;
+						previousValue.Transits.Remove(this);
+					}
+					this._City.Entity = value;
+					if ((value != null))
+					{
+						value.Transits.Add(this);
+						this._CityId = value.Id;
+					}
+					else
+					{
+						this._CityId = default(long);
+					}
+					this.SendPropertyChanged("City");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transit = this;
+		}
+		
+		private void detach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transit = null;
+		}
+		
+		private void attach_Applications(Application entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transit = this;
+		}
+		
+		private void detach_Applications(Application entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transit = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.City")]
+	internal partial class City : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _Id;
+		
+		private string _Name_En;
+		
+		private string _Name_Ru;
+		
+		private int _Position;
+		
+		private EntitySet<Transit> _Transits;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(long value);
+    partial void OnIdChanged();
+    partial void OnName_EnChanging(string value);
+    partial void OnName_EnChanged();
+    partial void OnName_RuChanging(string value);
+    partial void OnName_RuChanged();
+    partial void OnPositionChanging(int value);
+    partial void OnPositionChanged();
+    #endregion
+		
+		public City()
+		{
+			this._Transits = new EntitySet<Transit>(new Action<Transit>(this.attach_Transits), new Action<Transit>(this.detach_Transits));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name_En", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string Name_En
+		{
+			get
+			{
+				return this._Name_En;
+			}
+			set
+			{
+				if ((this._Name_En != value))
+				{
+					this.OnName_EnChanging(value);
+					this.SendPropertyChanging();
+					this._Name_En = value;
+					this.SendPropertyChanged("Name_En");
+					this.OnName_EnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name_Ru", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string Name_Ru
+		{
+			get
+			{
+				return this._Name_Ru;
+			}
+			set
+			{
+				if ((this._Name_Ru != value))
+				{
+					this.OnName_RuChanging(value);
+					this.SendPropertyChanging();
+					this._Name_Ru = value;
+					this.SendPropertyChanged("Name_Ru");
+					this.OnName_RuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position", DbType="Int NOT NULL")]
+		public int Position
+		{
+			get
+			{
+				return this._Position;
+			}
+			set
+			{
+				if ((this._Position != value))
+				{
+					this.OnPositionChanging(value);
+					this.SendPropertyChanging();
+					this._Position = value;
+					this.SendPropertyChanged("Position");
+					this.OnPositionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Transit", Storage="_Transits", ThisKey="Id", OtherKey="CityId")]
+		public EntitySet<Transit> Transits
+		{
+			get
+			{
+				return this._Transits;
+			}
+			set
+			{
+				this._Transits.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Transits(Transit entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = this;
+		}
+		
+		private void detach_Transits(Transit entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = null;
 		}
 	}
 }

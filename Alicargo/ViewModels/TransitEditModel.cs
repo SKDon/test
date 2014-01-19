@@ -15,7 +15,7 @@ namespace Alicargo.ViewModels
 		public DeliveryType DeliveryType { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "City")]
-		public string City { get; set; }
+		public long CityId { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Address")]
 		public string Address { get; set; }
@@ -38,9 +38,9 @@ namespace Alicargo.ViewModels
 				Address = model.Address,
 				CarrierId = carrierId,
 				WarehouseWorkingTime = model.WarehouseWorkingTime,
-				City = model.City,
-				DeliveryTypeId = (int)model.DeliveryType,
-				MethodOfTransitId = (int)model.MethodOfTransit,
+				CityId = model.CityId,
+				DeliveryType = model.DeliveryType,
+				MethodOfTransit = model.MethodOfTransit,
 				Phone = model.Phone,
 				RecipientName = model.RecipientName
 			};
@@ -52,9 +52,9 @@ namespace Alicargo.ViewModels
 			{
 				Address = data.Address,
 				WarehouseWorkingTime = data.WarehouseWorkingTime,
-				City = data.City,
-				DeliveryType = (DeliveryType)data.DeliveryTypeId,
-				MethodOfTransit = (MethodOfTransit)data.MethodOfTransitId,
+				CityId = data.CityId,
+				DeliveryType = data.DeliveryType,
+				MethodOfTransit = data.MethodOfTransit,
 				Phone = data.Phone,
 				RecipientName = data.RecipientName
 			};
