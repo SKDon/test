@@ -169,6 +169,9 @@
     <Build Include="Stored procedures\User\Sender\Sender_GetTariffs.sql" />
     <Build Include="Stored procedures\User\Sender\Sender_GetUserId.sql" />
     <Build Include="Stored procedures\Calculation\Calculation_GetByClient.sql" />
+    <Build Include="Stored procedures\Country_Add.sql" />
+    <Build Include="Stored procedures\Country_GetList.sql" />
+    <Build Include="Stored procedures\Country_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

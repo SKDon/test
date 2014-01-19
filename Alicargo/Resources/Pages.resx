@@ -372,4 +372,10 @@
   <data name="AddDate" xml:space="preserve">
     <value>Add date</value>
   </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Countries</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
 </root>

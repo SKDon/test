@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -16,7 +15,7 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationFileRepository _files;
-		private readonly ICountryRepository _countryRepository;
+		private readonly ICountryRepository _countries;
 		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateFilter _stateFilter;
@@ -28,7 +27,7 @@ namespace Alicargo.Services.Application
 			IStateConfig stateConfig,
 			IApplicationRepository applications,
 			IApplicationFileRepository files,
-			ICountryRepository countryRepository,
+			ICountryRepository countries,
 			IIdentityService identity)
 		{
 			_stateFilter = stateFilter;
@@ -36,7 +35,7 @@ namespace Alicargo.Services.Application
 			_stateConfig = stateConfig;
 			_applications = applications;
 			_files = files;
-			_countryRepository = countryRepository;
+			_countries = countries;
 			_identity = identity;
 		}
 
@@ -45,7 +44,7 @@ namespace Alicargo.Services.Application
 			var appIds = data.Select(x => x.Id).ToArray();
 			var stateIds = data.Select(x => x.StateId).ToArray();
 
-			var countries = _countryRepository.Get().ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
+			var countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 			var states = _states.Get(_identity.Language, stateIds);
 			var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
 			var calculations = _applications.GetCalculations(appIds);

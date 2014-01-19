@@ -1,38 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Enums;
+﻿using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories
 {
 	internal sealed class CountryRepository : ICountryRepository
 	{
-		private readonly AlicargoDataContext _context;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public CountryRepository(IUnitOfWork unitOfWork)
+		public CountryRepository(ISqlProcedureExecutor executor)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_executor = executor;
 		}
 
-		public CountryData[] Get(params long[] ids)
+		public CountryData[] All(string language)
 		{
-			var countries = ids.Length > 0
-				? _context.Countries.Where(x => ids.Contains(x.Id))
-					.OrderBy(x => x.Position)
-					.ThenBy(x => x.Code)
-					.ToArray()
-				: _context.Countries.OrderBy(x => x.Position)
-					.ThenBy(x => x.Code)
-					.ToArray();
+			return _executor.Array<CountryData>("[dbo].[Country_GetList]", new { language });
+		}
 
-			return countries.Select(x => new CountryData(x.Id, new Dictionary<string, string>
-			{
-				{TwoLetterISOLanguageName.English, x.Name_En},
-				{TwoLetterISOLanguageName.Italian, x.Name_En},
-				{TwoLetterISOLanguageName.Russian, x.Name_Ru},
-			})).ToArray();
+		public long Add(string englishName, string russianName, int position)
+		{
+			return _executor.Query<long>("[dbo].[Country_Add]", new { englishName, russianName, position });
+		}
+
+		public void Update(long id, string englishName, string russianName, int position)
+		{
+			_executor.Execute("[dbo].[Country_Update]", new { englishName, russianName, position, id });
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace Alicargo.Controllers.Application
 		{
 			var clientId = id;
 
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindBag(clientId);
 
@@ -61,7 +61,7 @@ namespace Alicargo.Controllers.Application
 
 			var senderId = _senders.GetByUserId(_identity.Id.Value);
 
-			if (!senderId.HasValue)
+			if(!senderId.HasValue)
 			{
 				throw new EntityNotFoundException("Current user is not sender.");
 			}
@@ -84,7 +84,7 @@ namespace Alicargo.Controllers.Application
 		[HttpPost, Access(RoleType.Sender)]
 		public virtual ActionResult Edit(long id, ApplicationSenderModel model)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindBag(id, model.Count);
 
@@ -102,16 +102,14 @@ namespace Alicargo.Controllers.Application
 			ViewBag.Nic = nic;
 			ViewBag.ApplicationId = applicationId;
 			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId, count);
-			ViewBag.Countries = _countries.Get()
-			   .ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
+			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 		}
 
 		private void BindBag(long clientId)
 		{
 			var clientData = _clientRepository.Get(clientId);
 			ViewBag.Nic = clientData.Nic;
-			ViewBag.Countries = _countries.Get()
-			   .ToDictionary(x => x.Id, x => x.Name[_identity.Language]);
+			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 		}
 	}
 }

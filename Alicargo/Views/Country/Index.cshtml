@@ -1,0 +1,17 @@
+﻿@using Alicargo.MvcHelpers.BundleHelpres
+@using Resources
+<style>
+	.container {
+		padding: 0 20px;
+		width: auto;
+	}
+</style>
+<p>
+	<b>@Pages.Countries</b>
+	@Html.ActionLink(Pages.Add, MVC.Country.Create())
+</p>
+<div id="country-grid" class="grid"></div>
+@section scripts
+{
+	@Scripts.Render(JsPaths.CountryListJs)
+}

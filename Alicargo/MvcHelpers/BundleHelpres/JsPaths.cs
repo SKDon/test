@@ -63,6 +63,9 @@
 		public const string FilesJs = "~/js/files-js";
 
 		[Path("~/Scripts/app/City/Grid.js")]
-		public const string CityListJs = "~/js/city-list-js";	
+		public const string CityListJs = "~/js/city-list-js";
+
+		[Path("~/Scripts/app/Country/Grid.js")]
+		public static string CountryListJs = "~/js/сountry-list-js";
 	}
 }

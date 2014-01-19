@@ -36,6 +36,7 @@ public static class MVC
     public static Alicargo.Controllers.Calculation.ClientCalculationController ClientCalculation = new Alicargo.Controllers.Calculation.T4MVC_ClientCalculationController();
     public static Alicargo.Controllers.Calculation.SenderCalculationController SenderCalculation = new Alicargo.Controllers.Calculation.T4MVC_SenderCalculationController();
     public static Alicargo.Controllers.CityController City = new Alicargo.Controllers.T4MVC_CityController();
+    public static Alicargo.Controllers.CountryController Country = new Alicargo.Controllers.T4MVC_CountryController();
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();
     public static Alicargo.Controllers.EmailTemplateController EmailTemplate = new Alicargo.Controllers.T4MVC_EmailTemplateController();
     public static Alicargo.Controllers.ExcelController Excel = new Alicargo.Controllers.T4MVC_ExcelController();
@@ -248,6 +249,14 @@ namespace Links
             }
         
             public static readonly string Common_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Common.min.js") ? Url("Common.min.js") : Url("Common.js");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Country {
+                private const string URLPATH = "~/Scripts/app/Country";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+            }
+        
             public static readonly string CurrencyType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CurrencyType.min.js") ? Url("CurrencyType.min.js") : Url("CurrencyType.js");
             public static readonly string Files_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Files.min.js") ? Url("Files.min.js") : Url("Files.js");
             public static readonly string it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/it.min.js") ? Url("it.min.js") : Url("it.js");

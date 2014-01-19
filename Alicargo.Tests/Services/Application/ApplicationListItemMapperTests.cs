@@ -38,12 +38,12 @@ namespace Alicargo.Tests.Services.Application
 
 			for (var i = 0; i < count; i++)
 			{
-				var country = new CountryData(i, new Dictionary<string, string>
+				var country = new CountryData
 				{
-					{
-						TwoLetterISOLanguageName.English, _context.Create<string>()
-					}
-				});
+					Id = i,
+					Name = _context.Create<string>(),
+					Position = i
+				};
 				_countries.Add(country);
 				_localazedStates.Add(i, _context.Create<string>());
 
@@ -58,7 +58,7 @@ namespace Alicargo.Tests.Services.Application
 				.Returns(new Dictionary<long, FileInfo[]>(0));
 
 			_context.IdentityService.SetupGet(x => x.Language).Returns(TwoLetterISOLanguageName.English);
-			_context.CountryRepository.Setup(x => x.Get()).Returns(_countries.ToArray());
+			_context.CountryRepository.Setup(x => x.All(TwoLetterISOLanguageName.English)).Returns(_countries.ToArray());
 			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(_stateAvailability);
 			_context.StateConfig.SetupGet(x => x.CargoOnTransitStateId).Returns(CargoOnTransitStateId);
 			_context.ApplicationRepository.Setup(x => x.GetCalculations(It.IsAny<long[]>())).Returns(_calculations);
@@ -89,7 +89,7 @@ namespace Alicargo.Tests.Services.Application
 				var data = _data[i];
 
 				var country = data.CountryId.HasValue && _countries.Any(x => x.Id == data.CountryId.Value)
-					? _countries.First(x => x.Id == data.CountryId.Value).Name.First().Value
+					? _countries.First(x => x.Id == data.CountryId.Value).Name
 					: null;
 
 				item.CountryName.ShouldBeEquivalentTo(country);

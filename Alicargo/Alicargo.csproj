@@ -157,6 +157,7 @@
     <Compile Include="Controllers\Application\ApplicationListController.cs" />
     <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\Application\ClientApplicatonController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
@@ -167,12 +168,14 @@
     <Compile Include="Controllers\User\RestorePasswordController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
+    <Compile Include="Services\Abstract\ICountryService.cs" />
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
     <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
     <Compile Include="Services\AirWaybill\AwbMapper.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
+    <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelGenerator.cs" />
     <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
@@ -345,6 +348,9 @@
     <Compile Include="T4MVC\ClientController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\CountryController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\DynamicScriptController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -412,6 +418,7 @@
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationItem.cs" />
     <Compile Include="ViewModels\Calculation\Sender\SenderCalculationListCollection.cs" />
+    <Compile Include="ViewModels\CountryEditModel.cs" />
     <Compile Include="ViewModels\CityEditModel.cs" />
     <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
     <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
@@ -597,6 +604,7 @@
     <Content Include="Scripts\app\Calculation\Client\Grid.js" />
     <Content Include="Scripts\app\Calculation\Sender\Columns.js" />
     <Content Include="Scripts\app\Calculation\Sender\Grid.js" />
+    <Content Include="Scripts\app\Country\Grid.js" />
     <Content Include="Scripts\app\City\Grid.js" />
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
@@ -761,6 +769,10 @@
     <Content Include="Views\Balance\Increase.cshtml" />
     <Content Include="Views\Balance\BalanceButtons.cshtml" />
     <Content Include="Views\ClientCalculation\History.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Country\EditorTemplates\CountryEditModel.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

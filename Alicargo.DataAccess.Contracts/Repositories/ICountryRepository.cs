@@ -4,6 +4,8 @@ namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface ICountryRepository
 	{
-		CountryData[] Get(params long[] ids);
+		CountryData[] All(string language);
+		long Add(string englishName, string russianName, int position);
+		void Update(long id, string englishName, string russianName, int position);
 	}
 }

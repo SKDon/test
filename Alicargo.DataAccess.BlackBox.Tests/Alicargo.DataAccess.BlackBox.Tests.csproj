@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Helpers\ApplicationHelperTests.cs" />
     <Compile Include="Helpers\ApplicationRepositoryOrdererTests.cs" />
+    <Compile Include="Repositories\CountryRepositoryTests.cs" />
     <Compile Include="Repositories\EmailMessageRepositoryTests.cs" />
     <Compile Include="Repositories\EventEmailRecipientTests.cs" />
     <Compile Include="Repositories\User\SenderRepositoryTests.cs" />
