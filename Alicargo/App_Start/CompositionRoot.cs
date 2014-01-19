@@ -13,6 +13,8 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
+using Alicargo.Services.Abstract;
+using Alicargo.Services.AirWaybill;
 using Alicargo.Utilities;
 using Ninject;
 using Ninject.Activation;
@@ -32,6 +34,8 @@ namespace Alicargo.App_Start
 			kernel.Bind<IPasswordConverter>().To<PasswordConverter>().InThreadScope();
 
 			kernel.Bind<IExcelClientCalculation>().To<ExcelClientCalculation>().InRequestScope();
+
+			kernel.Bind<IAwbGtdHelper>().To<AwbGtdHelper>().InRequestScope();
 
 			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
 

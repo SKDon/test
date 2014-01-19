@@ -51,11 +51,15 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="AirWaybill\IApplicationAwbManager.cs" />
+    <Compile Include="AirWaybill\IAwbManager.cs" />
+    <Compile Include="AirWaybill\IAwbStateManager.cs" />
     <Compile Include="Calculation\IExcelClientCalculation.cs" />
     <Compile Include="Client\IClientBalance.cs" />
     <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\IPartitionConverter.cs" />
     <Compile Include="Excel\IDrawable.cs" />
+    <Compile Include="AirWaybill\IAwbGtdHelper.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IMailSender.cs" />
     <Compile Include="IStateConfig.cs" />

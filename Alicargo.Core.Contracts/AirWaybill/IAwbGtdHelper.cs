@@ -2,7 +2,7 @@
 
 namespace Alicargo.Services.Abstract
 {
-    internal interface IAwbGtdHelper
+	public interface IAwbGtdHelper
     {
         void ProcessGtd(AirWaybillData data, string newGtd);
     }

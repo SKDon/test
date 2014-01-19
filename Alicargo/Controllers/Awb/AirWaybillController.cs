@@ -9,6 +9,7 @@ using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.Services.AirWaybill;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
 using Microsoft.Ajax.Utilities;
@@ -21,12 +22,12 @@ namespace Alicargo.Controllers.Awb
 		private readonly IApplicationAwbManager _applicationAwbManager;
 		private readonly IAwbManager _awbManager;
 		private readonly IAwbPresenter _awbPresenter;
-		private readonly IAwbRepository _awbs;
 		private readonly IAwbStateManager _awbStateManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
+		private readonly IAwbRepository _awbs;
 		private readonly IBrokerRepository _brokers;
-		private readonly IIdentityService _identity;
 		private readonly IStateConfig _config;
+		private readonly IIdentityService _identity;
 
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
@@ -58,18 +59,22 @@ namespace Alicargo.Controllers.Awb
 			return View();
 		}
 
-		[HttpPost, Access(RoleType.Admin)]
+		[HttpPost]
+		[Access(RoleType.Admin)]
 		public virtual ActionResult Create(long? applicationId, AwbAdminModel model)
 		{
-			if (!ModelState.IsValid) return View(model);
+			if(!ModelState.IsValid) return View(model);
 
 			try
 			{
-				_awbManager.Create(applicationId, model);
+				var data = AwbMapper.Map(model, _config.CargoIsFlewStateId);
+
+				_awbManager.Create(applicationId, data, model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
+					model.InvoiceFile, model.AWBFile);
 
 				return RedirectToAction(MVC.AirWaybill.Index());
 			}
-			catch (DublicateException)
+			catch(DublicateException)
 			{
 				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
 
@@ -81,18 +86,20 @@ namespace Alicargo.Controllers.Awb
 
 		#region List
 
-		[Access(RoleType.Admin, RoleType.Broker, RoleType.Sender), HttpGet]
+		[Access(RoleType.Admin, RoleType.Broker, RoleType.Sender)]
+		[HttpGet]
 		public virtual ViewResult Index()
 		{
 			return View();
 		}
 
-		[Access(RoleType.Admin, RoleType.Broker, RoleType.Sender), HttpPost]
+		[Access(RoleType.Admin, RoleType.Broker, RoleType.Sender)]
+		[HttpPost]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
 		{
 			long? brokerId = null;
-			if (_identity.IsInRole(RoleType.Broker) && _identity.Id.HasValue)
+			if(_identity.IsInRole(RoleType.Broker) && _identity.Id.HasValue)
 			{
 				var broker = _brokers.GetByUserId(_identity.Id.Value);
 				brokerId = broker.Id;
@@ -107,7 +114,8 @@ namespace Alicargo.Controllers.Awb
 
 		#region Actions
 
-		[HttpPost, Access(RoleType.Admin, RoleType.Sender)]
+		[HttpPost]
+		[Access(RoleType.Admin, RoleType.Sender)]
 		public virtual HttpStatusCodeResult Delete(long id)
 		{
 			_awbManager.Delete(id);
@@ -115,7 +123,8 @@ namespace Alicargo.Controllers.Awb
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		[Access(RoleType.Admin, RoleType.Sender)]
+		[HttpPost]
 		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
 		{
 			_applicationAwbManager.SetAwb(applicationId, airWaybillId);
@@ -123,11 +132,12 @@ namespace Alicargo.Controllers.Awb
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		[Access(RoleType.Admin, RoleType.Broker), HttpPost]
+		[Access(RoleType.Admin, RoleType.Broker)]
+		[HttpPost]
 		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
 		{
 			var data = _awbs.Get(id).First();
-			if (data.GTD.IsNullOrWhiteSpace())
+			if(data.GTD.IsNullOrWhiteSpace())
 			{
 				throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
 			}
@@ -156,7 +166,8 @@ namespace Alicargo.Controllers.Awb
 
 		#region Edit
 
-		[Access(RoleType.Admin), HttpGet]
+		[Access(RoleType.Admin)]
+		[HttpGet]
 		public virtual ViewResult Edit(long id)
 		{
 			var model = _awbPresenter.Get(id);
@@ -166,10 +177,11 @@ namespace Alicargo.Controllers.Awb
 			return View(model);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
+		[Access(RoleType.Admin)]
+		[HttpPost]
 		public virtual ActionResult Edit(long id, AwbAdminModel model)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				ViewBag.AwbId = id;
 
@@ -180,7 +192,7 @@ namespace Alicargo.Controllers.Awb
 			{
 				_awbUpdateManager.Update(id, model);
 			}
-			catch (DublicateException)
+			catch(DublicateException)
 			{
 				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
 				return View(model);

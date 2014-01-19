@@ -5,7 +5,6 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.Email
 {
@@ -31,22 +30,15 @@ namespace Alicargo.Services.Email
 			_messageBuilder = messageBuilder;
 		}
 
-		public long Create(long? applicationId, AwbAdminModel model)
+		public long Create(long? applicationId, AirWaybillData data, byte[] gtdFile,
+			byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
 		{
-			var awbId = _manager.Create(applicationId, model);
+			var awbId = _manager.Create(applicationId, data,
+				gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
 
 			SendOnCreate(awbId);
 
 			return awbId;
-		}
-
-		public long Create(long? applicationId, AwbSenderModel model)
-		{
-			var id = _manager.Create(applicationId, model);
-
-			SendOnCreate(id);
-
-			return id;
 		}
 
 		public void Delete(long awbId)
@@ -68,7 +60,7 @@ namespace Alicargo.Services.Email
 
 			var aggregate = _awbPresenter.GetAggregate(awbId);
 
-			foreach (var recipient in to)
+			foreach(var recipient in to)
 			{
 				var body = _messageBuilder.AwbCreate(model, recipient.Culture, aggregate.TotalWeight,
 					aggregate.TotalCount);

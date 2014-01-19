@@ -64,6 +64,8 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="AirWaybill\AwbGtdHelper.cs" />
+    <Compile Include="AirWaybill\AwbManager.cs" />
     <Compile Include="Calculation\CalculationDataDrawable.cs" />
     <Compile Include="Calculation\ClientBalanceHistoryItemDrawable.cs" />
     <Compile Include="Calculation\DrawableMapper.cs" />

@@ -171,6 +171,7 @@
     <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
     <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
+    <Compile Include="Services\AirWaybill\AwbMapper.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
     <Compile Include="Services\Calculation\CalculationServiceWithBalace.cs" />
@@ -208,7 +209,6 @@
     <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="Services\Calculation\CalculationService.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
-    <Compile Include="Services\Abstract\IAwbStateManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
     <Compile Include="Controllers\TransitController.cs" />
@@ -280,16 +280,11 @@
     <Compile Include="Services\Abstract\IStateFilter.cs" />
     <Compile Include="Services\Abstract\ITransitService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
-    <Compile Include="Services\AirWaybill\AwbGtdHelper.cs" />
-    <Compile Include="Services\AirWaybill\AwbManager.cs" />
-    <Compile Include="Services\Abstract\IAwbManager.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateGtdManager.cs" />
     <Compile Include="Services\AirWaybill\AwbStateManager.cs" />
-    <Compile Include="Services\Abstract\IAwbGtdHelper.cs" />
     <Compile Include="Services\Application\ApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
-    <Compile Include="Services\Abstract\IApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationSenderManager.cs" />
     <Compile Include="Services\Calculation\AdminCalculationPresenter.cs" />
     <Compile Include="Services\Users\Client\ClientPermissions.cs" />
