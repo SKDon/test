@@ -20,6 +20,36 @@
 				error: $a.ShowError
 			};
 
+			function getUrl(data) {
+				switch (role) {
+					case "Sender":
+						return $u.Sender_Edit + "/" + data.EntityId;
+					case "Forwarder":
+						return $u.Forwarder_Edit + "/" + data.EntityId;
+					default:
+						return $u.User_Edit + "/" + role + "/" + data.EntityId;
+				}
+			}
+
+			function onEdit(e) {
+				var tr = $(e.target).closest("tr");
+				var data = this.dataItem(tr);
+				var url = getUrl(data);
+
+				$a.LoadPage(url);
+			}
+
+			function onAuthenticate(e) {
+				e.preventDefault();
+				var tr = $(e.target).closest("tr");
+				var data = this.dataItem(tr);
+				if ($a.Confirm("Авторизаваться под пользователем " + data.Name + "?")) {
+					var url = $u.Authentication_LoginAsUser + "/" + data.UserId;
+
+					$a.LoadPage(url);
+				}
+			}
+
 			$("#user-grid").kendoGrid({
 				dataSource: dataSource,
 				pageable: false,
@@ -29,30 +59,15 @@
 						command: [{
 							name: "custom-edit",
 							text: "",
-							click: function(e) {
-								var tr = $(e.target).closest("tr");
-								var data = this.dataItem(tr);
-								var url = role == "Sender"
-									? $u.Sender_Edit + "/" + data.EntityId
-									: $u.User_Edit + "/" + role + "/" + data.EntityId;
-								
-								$a.LoadPage(url);
-							}
-						}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
+							click: onEdit
+						}],
+						title: "&nbsp;",
+						width: $a.DefaultGridButtonWidth
 					}, {
 						command: [{
 							name: "custom-authenticate",
 							text: "",
-							click: function(e) {
-								e.preventDefault();
-								var tr = $(e.target).closest("tr");
-								var data = this.dataItem(tr);
-								if ($a.Confirm("Авторизаваться под пользователем " + data.Name + "?")) {
-									var url = $u.Authentication_LoginAsUser + "/" + data.UserId;
-									
-									$a.LoadPage(url);
-								}
-							}
+							click: onAuthenticate
 						}],
 						title: "&nbsp;",
 						width: Alicargo.DefaultGridButtonWidth

@@ -1,7 +1,7 @@
 ﻿@using Alicargo.DataAccess.Contracts.Enums
 @using Alicargo.MvcHelpers.BundleHelpres
 @using Resources
-@model RoleType
+@model Alicargo.DataAccess.Contracts.Enums.RoleType
 <style>
 	.container {
 		padding: 0 20px;
@@ -10,34 +10,45 @@
 </style>
 <p>
 	<b>
-		@switch (Model)
+		@switch(Model)
 		{
 			case RoleType.Admin:
 				@Pages.Admins
 				break;
 
 			case RoleType.Sender:
-			@Pages.Senders
+				@Pages.Senders
 				break;
 			case RoleType.Broker:
-			@Pages.Brokers
+				@Pages.Brokers
 				break;
 
 			case RoleType.Forwarder:
-			@Pages.Forwarders
+				@Pages.Forwarders
 				break;
 
 			case RoleType.Client:
-			@Pages.Clients
+				@Pages.Clients
 				break;
 
 			default:
 				throw new ArgumentOutOfRangeException();
 		}
 	</b>
-	@Html.ActionLink(Pages.Add, Model == RoleType.Sender
-		? MVC.Sender.Create()
-		: MVC.User.Create(Model))
+	@switch(Model)
+	{
+		case RoleType.Sender:
+			@Html.ActionLink(Pages.Add, MVC.Sender.Create())
+			break;
+
+		case RoleType.Forwarder:
+			@Html.ActionLink(Pages.Add, MVC.Forwarder.Create())
+			break;
+
+		default:
+			@Html.ActionLink(Pages.Add, MVC.User.Create(Model))
+			break;
+	}
 </p>
 <div id="user-grid" class="grid"></div>
 @section scripts

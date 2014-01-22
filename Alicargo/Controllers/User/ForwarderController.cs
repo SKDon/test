@@ -2,11 +2,13 @@
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
+using Resources;
 
 namespace Alicargo.Controllers.User
 {
@@ -15,19 +17,22 @@ namespace Alicargo.Controllers.User
 		private readonly ICityRepository _cities;
 		private readonly IForwarderRepository _forwarders;
 		private readonly IIdentityService _identity;
+		private readonly IUserRepository _users;
 
 		public ForwarderController(
 			ICityRepository cities,
+			IUserRepository users,
 			IForwarderRepository forwarders,
 			IIdentityService identity)
 		{
 			_cities = cities;
+			_users = users;
 			_forwarders = forwarders;
 			_identity = identity;
 		}
 
-		[Access(RoleType.Admin)]
 		[HttpGet]
+		[Access(RoleType.Admin)]
 		public virtual ViewResult Create()
 		{
 			BindBag();
@@ -35,13 +40,39 @@ namespace Alicargo.Controllers.User
 			return View();
 		}
 
-		private void BindBag()
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		public virtual ActionResult Create(ForwarderModel model)
 		{
-			ViewBag.Cities = _cities.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
+			if(string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
+				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
+
+			if(!ModelState.IsValid)
+			{
+				BindBag();
+
+				return View();
+			}
+
+			try
+			{
+				var id = _forwarders.Add(model.Name, model.Authentication.Login, model.Authentication.NewPassword, model.Email,
+					_identity.Language, model.CityId);
+
+				return RedirectToAction(MVC.Forwarder.Edit(id));
+			}
+			catch(DublicateLoginException)
+			{
+				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
+
+				BindBag();
+
+				return View();
+			}
 		}
 
-		[Access(RoleType.Admin, RoleType.Sender)]
 		[HttpGet]
+		[Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id)
 		{
 			BindBag();
@@ -57,6 +88,45 @@ namespace Alicargo.Controllers.User
 			};
 
 			return View(model);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		public virtual ActionResult Edit(long id, ForwarderModel model)
+		{
+			if(!ModelState.IsValid)
+			{
+				BindBag();
+
+				return View();
+			}
+
+			try
+			{
+				_forwarders.Update(id, model.Name, model.Authentication.Login, model.Email, model.CityId);
+
+				if(!string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
+				{
+					var data = _forwarders.Get(id);
+
+					_users.SetPassword(data.UserId, model.Authentication.NewPassword);
+				}
+
+				return RedirectToAction(MVC.Forwarder.Edit(id));
+			}
+			catch(DublicateLoginException)
+			{
+				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
+
+				BindBag();
+
+				return View();
+			}
+		}
+
+		private void BindBag()
+		{
+			ViewBag.Cities = _cities.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 		}
 	}
 }

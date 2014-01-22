@@ -13,12 +13,12 @@ namespace Alicargo.Controllers.User
 {
 	public partial class SenderController : Controller
 	{
-		private readonly ISenderService _senders;
-		private readonly IIdentityService _identity;
 		private readonly ICountryRepository _countries;
+		private readonly IIdentityService _identity;
+		private readonly ISenderService _senders;
 
 		public SenderController(
-			ISenderService senders, 
+			ISenderService senders,
 			IIdentityService identity,
 			ICountryRepository countries)
 		{
@@ -27,7 +27,8 @@ namespace Alicargo.Controllers.User
 			_countries = countries;
 		}
 
-		[Access(RoleType.Admin), HttpGet]
+		[HttpGet]
+		[Access(RoleType.Admin)]
 		public virtual ViewResult Create()
 		{
 			BindBag();
@@ -35,12 +36,8 @@ namespace Alicargo.Controllers.User
 			return View();
 		}
 
-		private void BindBag()
-		{
-			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
-		}
-
-		[Access(RoleType.Admin, RoleType.Sender), HttpGet]
+		[HttpGet]
+		[Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id)
 		{
 			BindBag();
@@ -50,13 +47,19 @@ namespace Alicargo.Controllers.User
 			return View(model);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
+		[HttpPost]
+		[Access(RoleType.Admin)]
 		public virtual ActionResult Create(SenderModel model)
 		{
-			if (string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
+			if(string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
 
-			if (!ModelState.IsValid) return View();
+			if(!ModelState.IsValid)
+			{
+				BindBag();
+
+				return View();
+			}
 
 			try
 			{
@@ -64,18 +67,26 @@ namespace Alicargo.Controllers.User
 
 				return RedirectToAction(MVC.Sender.Edit(id));
 			}
-			catch (DublicateLoginException)
+			catch(DublicateLoginException)
 			{
 				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
+
+				BindBag();
 
 				return View();
 			}
 		}
 
-		[Access(RoleType.Admin, RoleType.Sender), HttpPost]
+		[HttpPost]
+		[Access(RoleType.Admin)]
 		public virtual ActionResult Edit(long id, SenderModel model)
 		{
-			if (!ModelState.IsValid) return View();
+			if(!ModelState.IsValid)
+			{
+				BindBag();
+
+				return View();
+			}
 
 			try
 			{
@@ -83,12 +94,19 @@ namespace Alicargo.Controllers.User
 
 				return RedirectToAction(MVC.Sender.Edit(id));
 			}
-			catch (DublicateLoginException)
+			catch(DublicateLoginException)
 			{
 				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
 
+				BindBag();
+
 				return View();
 			}
+		}
+
+		private void BindBag()
+		{
+			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 		}
 	}
 }
