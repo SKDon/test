@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -223,7 +222,7 @@ namespace Alicargo.Services.Application
 			to.FactoryEmail = @from.FactoryEmail;
 			to.FactoryContact = @from.FactoryContact;
 			to.MarkName = @from.MarkName;
-			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
+			to.MethodOfDelivery = @from.MethodOfDelivery;
 			to.FactureCost = @from.FactureCost;
 			to.TransitCost = @from.TransitCost;
 			to.PickupCost = @from.PickupCost;
@@ -242,7 +241,7 @@ namespace Alicargo.Services.Application
 				CreationTimestamp = DateTimeProvider.Now,
 				StateChangeTimestamp = DateTimeProvider.Now,
 				StateId = _config.DefaultStateId,
-				ClassId = null,
+				Class = null,
 				TransitId = transitId,
 				Invoice = model.Invoice,
 				Characteristic = model.Characteristic,
@@ -260,7 +259,7 @@ namespace Alicargo.Services.Application
 				FactoryEmail = model.FactoryEmail,
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
-				MethodOfDeliveryId = (int)model.MethodOfDelivery,
+				MethodOfDelivery = model.MethodOfDelivery,
 				Id = 0,
 				AirWaybillId = null,
 				DateInStock = null,

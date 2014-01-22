@@ -28,12 +28,12 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string MarkName { get; set; }
 		public string TransitReference { get; set; }
 		public long StateId { get; set; }
-		public int MethodOfDeliveryId { get; set; }
+		public MethodOfDelivery MethodOfDelivery { get; set; }
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
 		public long SenderId { get; set; }
-		public ClassType? ClassId { get; set; }
+		public ClassType? Class { get; set; }
 
 		public decimal? FactureCost { get; set; }
 		public decimal? PickupCost { get; set; }

@@ -89,7 +89,7 @@ namespace Alicargo.Services.Application
 				Weight = data.Weight,
 				Invoice = data.Invoice,
 				MarkName = data.MarkName,
-				MethodOfDelivery = (MethodOfDelivery)data.MethodOfDeliveryId,
+				MethodOfDelivery = data.MethodOfDelivery,
 				TermsOfDelivery = data.TermsOfDelivery,
 				CountryId = data.CountryId,
 				Volume = data.Volume,

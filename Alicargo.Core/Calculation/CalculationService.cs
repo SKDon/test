@@ -68,7 +68,7 @@ namespace Alicargo.Core.Calculation
 				Count = application.Count ?? 0,
 				Invoice = application.Invoice,
 				Value = application.Value,
-				Class = application.ClassId
+				Class = application.Class
 			};
 
 			_calculations.Add(calculation, applicationId);

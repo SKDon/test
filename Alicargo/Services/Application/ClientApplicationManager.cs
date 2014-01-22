@@ -79,7 +79,7 @@ namespace Alicargo.Services.Application
 				FactoryContact = application.FactoryContact,
 				FactoryEmail = application.FactoryEmail,
 				FactoryPhone = application.FactoryPhone,
-				MethodOfDelivery = (MethodOfDelivery)application.MethodOfDeliveryId,
+				MethodOfDelivery = application.MethodOfDelivery,
 				TermsOfDelivery = application.TermsOfDelivery,
 				WarehouseWorkingTime = application.WarehouseWorkingTime
 			};
@@ -117,7 +117,7 @@ namespace Alicargo.Services.Application
 			to.FactoryEmail = @from.FactoryEmail;
 			to.FactoryContact = @from.FactoryContact;
 			to.MarkName = @from.MarkName;
-			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
+			to.MethodOfDelivery = @from.MethodOfDelivery;
 		}
 
 		private ApplicationData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId, long senderId)
@@ -127,7 +127,7 @@ namespace Alicargo.Services.Application
 				CreationTimestamp = DateTimeProvider.Now,
 				StateChangeTimestamp = DateTimeProvider.Now,
 				StateId = _config.DefaultStateId,
-				ClassId = null,
+				Class = null,
 				TransitId = transitId,
 				Invoice = model.Invoice,
 				Characteristic = model.Characteristic,
@@ -145,7 +145,7 @@ namespace Alicargo.Services.Application
 				FactoryEmail = model.FactoryEmail,
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
-				MethodOfDeliveryId = (int)model.MethodOfDelivery,
+				MethodOfDelivery = model.MethodOfDelivery,
 				Id = 0,
 				AirWaybillId = null,
 				DateInStock = null,

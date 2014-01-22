@@ -134,14 +134,14 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.TermsOfDelivery = @from.TermsOfDelivery;
 			to.Value = @from.Value;
 			to.CurrencyId = @from.CurrencyId;
-			to.MethodOfDeliveryId = @from.MethodOfDeliveryId;
+			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
 			to.DateInStock = @from.DateInStock;
 			to.DateOfCargoReceipt = @from.DateOfCargoReceipt;
 			to.TransitReference = @from.TransitReference;
 
 			to.ClientId = @from.ClientId;
 			to.TransitId = @from.TransitId;
-			to.ClassId = (int?)@from.ClassId;
+			to.ClassId = (int?)@from.Class;
 			to.AirWaybillId = @from.AirWaybillId;
 			to.CountryId = @from.CountryId;
 			to.SenderId = from.SenderId;

@@ -1,4 +1,5 @@
-﻿CREATE TABLE [dbo].[Transit] (
+﻿CREATE TABLE [dbo].[Transit] 
+(
 	[Id]					BIGINT			IDENTITY (1, 1) NOT NULL,
 	[CityId]				BIGINT			NOT NULL,
 	[Address]				NVARCHAR (MAX)	NOT NULL,
@@ -13,9 +14,7 @@
 	CONSTRAINT [FK_dbo.Transit_dbo.Carrier_CarrierId] FOREIGN KEY ([CarrierId]) REFERENCES [dbo].[Carrier] ([Id]),
 	CONSTRAINT [FK_dbo.Transit_dbo.City_CityId] FOREIGN KEY ([CityId]) REFERENCES [dbo].[City] ([Id])
 );
-
-
 GO
-CREATE NONCLUSTERED INDEX [IX_CarrierId]
-    ON [dbo].[Transit]([CarrierId] ASC);
 
+CREATE NONCLUSTERED INDEX [IX_CarrierId] ON [dbo].[Transit]([CarrierId] ASC);
+GO

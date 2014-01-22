@@ -168,7 +168,7 @@ namespace Alicargo.Services.Calculation
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),
-				ClassId = a.ClassId
+				ClassId = a.Class
 			}).OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
 		}
 	}
