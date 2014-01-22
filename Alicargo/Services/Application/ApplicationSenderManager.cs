@@ -2,6 +2,7 @@
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 using Alicargo.ViewModels;
@@ -13,18 +14,21 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IApplicationRepository _applications;
+		private readonly ISenderRepository _senders;
 		private readonly IStateConfig _stateConfig;
 		private readonly ITransitRepository _transits;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public ApplicationSenderManager(
 			IApplicationRepository applications,
+			ISenderRepository senders,
 			IApplicationUpdateRepository applicationUpdater,
 			IUnitOfWork unitOfWork,
 			ITransitRepository transits,
 			IStateConfig stateConfig)
 		{
 			_applications = applications;
+			_senders = senders;
 			_applicationUpdater = applicationUpdater;
 			_unitOfWork = unitOfWork;
 			_transits = transits;
@@ -67,6 +71,7 @@ namespace Alicargo.Services.Application
 		private void Add(ApplicationData applicationData, long clientId, long senderId)
 		{
 			var transitId = CopyTransitDataFromClient(clientId);
+			var sender = _senders.Get(senderId);
 
 			applicationData.TransitId = transitId;
 			applicationData.StateId = _stateConfig.DefaultStateId;
@@ -75,6 +80,7 @@ namespace Alicargo.Services.Application
 			applicationData.CreationTimestamp = DateTimeProvider.Now;
 			applicationData.SenderId = senderId;
 			applicationData.ClientId = clientId;
+			applicationData.CountryId = sender.CountryId;
 
 			_applicationUpdater.Add(applicationData);
 
@@ -84,6 +90,8 @@ namespace Alicargo.Services.Application
 		private long CopyTransitDataFromClient(long clientId)
 		{
 			var transitData = _transits.GetByClient(clientId);
+
+			transitData.Id = 0;
 
 			return _transits.Add(transitData);
 		}
@@ -100,7 +108,6 @@ namespace Alicargo.Services.Application
 			to.Volume = @from.Volume;
 			to.FactureCost = @from.FactureCost;
 			to.PickupCost = from.PickupCost;
-			to.CountryId = from.CountryId;
 		}
 
 		private static ApplicationSenderModel GetModel(ApplicationData application)
@@ -120,7 +127,6 @@ namespace Alicargo.Services.Application
 				Volume = application.Volume,
 				FactureCost = application.FactureCost,
 				PickupCost = application.PickupCost,
-				CountryId = application.CountryId
 			};
 		}
 	}

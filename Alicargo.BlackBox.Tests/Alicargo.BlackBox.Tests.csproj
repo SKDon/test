@@ -129,7 +129,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Controllers\AirWaybillControllerTests.cs" />
-    <Compile Include="Controllers\ApplicationControllerTests.cs" />
+    <Compile Include="Controllers\Application\ApplicationControllerTests.cs" />
+    <Compile Include="Controllers\Application\SenderApplicationControllerTests.cs" />
     <Compile Include="Controllers\ClientControllerTests.cs" />
     <Compile Include="Controllers\TransitControllerTests.cs" />
     <Compile Include="Controllers\SenderControllerTests.cs" />

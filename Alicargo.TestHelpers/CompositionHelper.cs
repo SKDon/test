@@ -6,7 +6,6 @@ using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
-using Alicargo.Services.Abstract;
 using Moq;
 using Ninject;
 
@@ -55,6 +54,28 @@ namespace Alicargo.TestHelpers
 			{
 				var item1 = item;
 				identityService.Setup(x => x.IsInRole(item1)).Returns(false);
+				switch(item)
+				{
+					case RoleType.Admin:
+						identityService.Setup(x => x.Id).Returns(TestConstants.TestAdminUserId);
+						break;
+
+					case RoleType.Sender:
+						identityService.Setup(x => x.Id).Returns(TestConstants.TestSenderUserId);
+						break;
+
+					case RoleType.Broker:
+						break;
+
+					case RoleType.Forwarder:
+						break;
+
+					case RoleType.Client:
+						break;
+
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
 			}
 
 			identityService.Setup(x => x.IsInRole(_type)).Returns(true);

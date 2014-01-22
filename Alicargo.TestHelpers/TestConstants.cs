@@ -17,5 +17,8 @@
 		public const long TestCityId1 = 1;
 		public const long TestCarrierId2 = 2;
 		public const long TestCityId2 = 2;
+
+		public const long TestAdminUserId = 1;
+		public const long TestSenderUserId = 4;
 	}
 }

@@ -37,8 +37,5 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof (Entities), "PickupCost")]
 		public decimal? PickupCost { get; set; }
-
-		[DisplayNameLocalized(typeof (Entities), "Country")]
-		public long CountryId { get; set; }
 	}
 }

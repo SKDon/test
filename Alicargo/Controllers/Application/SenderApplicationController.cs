@@ -17,8 +17,8 @@ namespace Alicargo.Controllers.Application
 	{
 		private readonly IApplicationSenderManager _applicationSenderManager;
 		private readonly IClientRepository _clientRepository;
-		private readonly IIdentityService _identity;
 		private readonly ICountryRepository _countries;
+		private readonly IIdentityService _identity;
 		private readonly ISenderRepository _senders;
 
 		public SenderApplicationController(
@@ -35,7 +35,8 @@ namespace Alicargo.Controllers.Application
 			_senders = senders;
 		}
 
-		[HttpGet, Access(RoleType.Sender)]
+		[HttpGet]
+		[Access(RoleType.Sender)]
 		public virtual ViewResult Create(long id)
 		{
 			var clientId = id;
@@ -45,7 +46,8 @@ namespace Alicargo.Controllers.Application
 			return View(new ApplicationSenderModel());
 		}
 
-		[HttpPost, Access(RoleType.Sender)]
+		[HttpPost]
+		[Access(RoleType.Sender)]
 		public virtual ActionResult Create(long id, ApplicationSenderModel model)
 		{
 			var clientId = id;
@@ -71,7 +73,8 @@ namespace Alicargo.Controllers.Application
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
 
-		[HttpGet, Access(RoleType.Sender)]
+		[HttpGet]
+		[Access(RoleType.Sender)]
 		public virtual ViewResult Edit(long id)
 		{
 			var model = _applicationSenderManager.Get(id);
@@ -81,7 +84,8 @@ namespace Alicargo.Controllers.Application
 			return View(model);
 		}
 
-		[HttpPost, Access(RoleType.Sender)]
+		[HttpPost]
+		[Access(RoleType.Sender)]
 		public virtual ActionResult Edit(long id, ApplicationSenderModel model)
 		{
 			if(!ModelState.IsValid)
