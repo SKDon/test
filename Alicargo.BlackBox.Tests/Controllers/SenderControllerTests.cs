@@ -36,7 +36,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			_composition.Dispose();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
+		[TestCategory("black-box")]
 		public void Test_Create()
 		{
 			var password = _fixture.Create<string>();
@@ -50,7 +51,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			VerifyPassword(model.Authentication.Login, password);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
+		[TestCategory("black-box")]
 		public void Test_Edit()
 		{
 			var password = _fixture.Create<string>();
@@ -66,12 +68,12 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 		private static void VerifyData(SenderModel model)
 		{
-			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				connection.Open();
 
 				var actual = connection.Query<SenderData>(
-					"select u.Login, s.Name, s.Email, s.TariffOfTapePerBox from sender s " +
+					"select u.Login, s.Name, s.Email, s.TariffOfTapePerBox, s.CountryId from sender s " +
 					"join [dbo].[user] u on s.userid = u.id where u.login = @login",
 					new { model.Authentication.Login }).First();
 
@@ -82,17 +84,18 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private SenderModel GetSenderModel(string password)
 		{
 			return _fixture.Build<SenderModel>()
-						   .With(x => x.Authentication,
-							   _fixture.Build<AuthenticationModel>()
-									   .With(x => x.NewPassword, password)
-									   .With(x => x.ConfirmPassword, password)
-									   .Create())
-						   .Create();
+				.With(x => x.CountryId, TestConstants.TestCountryId)
+				.With(x => x.Authentication,
+					_fixture.Build<AuthenticationModel>()
+						.With(x => x.NewPassword, password)
+						.With(x => x.ConfirmPassword, password)
+						.Create())
+				.Create();
 		}
 
 		private static void VerifyPassword(string login, string password)
 		{
-			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				connection.Open();
 
@@ -101,7 +104,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 					new { login }).First();
 
 				new PasswordConverter().GetPasswordHash(password, (byte[])passwordData.PasswordSalt)
-									   .ShouldBeEquivalentTo((byte[])passwordData.PasswordHash);
+					.ShouldBeEquivalentTo((byte[])passwordData.PasswordHash);
 			}
 		}
 	}

@@ -4,10 +4,10 @@
 	@Name NVARCHAR (MAX),
 	@Email NVARCHAR (320),
 	@TwoLetterISOLanguageName CHAR(2),
-	@TariffOfTapePerBox	MONEY
-AS
-BEGIN
+	@TariffOfTapePerBox	MONEY,
+	@CountryId BIGINT
 
+AS BEGIN
 	SET NOCOUNT ON;
 
 	DECLARE @Table TABLE(UserId BIGINT);
@@ -17,6 +17,7 @@ BEGIN
 		UPDATE	TOP(1) [dbo].[Sender]
 		SET		[Name] = @Name,
 				[Email] = @Email,
+				[CountryId] = @CountryId,
 				[TariffOfTapePerBox] = @TariffOfTapePerBox
 		OUTPUT	inserted.[UserId] INTO @Table
 		WHERE	[Id] = @Id

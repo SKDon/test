@@ -179,6 +179,8 @@
     <Build Include="Stored procedures\Transit\Transit_GetByApplication.sql" />
     <Build Include="Stored procedures\Transit\Transit_GetByClient.sql" />
     <Build Include="Stored procedures\Transit\Transit_Delete.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetByUser.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

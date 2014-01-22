@@ -28,7 +28,8 @@ namespace Alicargo.Services.Users
 				Name = data.Name,
 				Authentication = new AuthenticationModel(data.Login),
 				Email = data.Email,
-				TariffOfTapePerBox = data.TariffOfTapePerBox
+				TariffOfTapePerBox = data.TariffOfTapePerBox,
+				CountryId = data.CountryId
 			};
 		}
 
@@ -45,7 +46,8 @@ namespace Alicargo.Services.Users
 				Login = model.Authentication.Login,
 				Name = model.Name,
 				TariffOfTapePerBox = model.TariffOfTapePerBox,
-				Language = TwoLetterISOLanguageName.English
+				Language = TwoLetterISOLanguageName.English,
+				CountryId = model.CountryId
 			}, model.Authentication.NewPassword);
 
 			return id;
@@ -64,6 +66,7 @@ namespace Alicargo.Services.Users
 			data.Login = model.Authentication.Login;
 			data.Email = model.Email;
 			data.TariffOfTapePerBox = model.TariffOfTapePerBox;
+			data.CountryId = model.CountryId;
 
 			_senders.Update(id, data);
 

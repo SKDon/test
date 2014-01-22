@@ -362,7 +362,3 @@ AS BEGIN
 
 END
 GO
-PRINT N'Update complete.';
-
-
-GO

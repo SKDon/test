@@ -3,7 +3,6 @@ using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
 using Alicargo.Utilities;
 
@@ -11,20 +10,18 @@ namespace Alicargo.DataAccess.Repositories.User
 {
 	public sealed class SenderRepository : ISenderRepository
 	{
-		private readonly AlicargoDataContext _context;
 		private readonly IPasswordConverter _converter;
 		private readonly ISqlProcedureExecutor _executor;
 
-		public SenderRepository(IUnitOfWork unitOfWork, IPasswordConverter converter, ISqlProcedureExecutor executor)
+		public SenderRepository(IPasswordConverter converter, ISqlProcedureExecutor executor)
 		{
 			_converter = converter;
 			_executor = executor;
-			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
 		public long? GetByUserId(long userId)
 		{
-			return _context.Senders.Where(x => x.UserId == userId).Select(x => (long?)x.Id).FirstOrDefault();
+			return _executor.Query<long?>("[dbo].[Sender_GetByUser]", new { userId });
 		}
 
 		public SenderData Get(long senderId)
@@ -54,7 +51,8 @@ namespace Alicargo.DataAccess.Repositories.User
 				TwoLetterISOLanguageName = data.Language,
 				data.Name,
 				data.Email,
-				data.TariffOfTapePerBox
+				data.TariffOfTapePerBox,
+				data.CountryId
 			});
 		}
 
@@ -67,21 +65,14 @@ namespace Alicargo.DataAccess.Repositories.User
 				data.Name,
 				data.Email,
 				data.TariffOfTapePerBox,
-				TwoLetterISOLanguageName = data.Language
+				TwoLetterISOLanguageName = data.Language,
+				data.CountryId
 			});
 		}
 
 		public UserData[] GetAll()
 		{
-			return _context.Senders.Select(x => new UserData
-			{
-				EntityId = x.Id,
-				UserId = x.UserId,
-				Name = x.Name,
-				Login = x.User.Login,
-				Email = x.Email,
-				Language = x.User.TwoLetterISOLanguageName
-			}).ToArray();
+			return _executor.Array<UserData>("[dbo].[Sender_GetAll]");
 		}
 
 		public long GetUserId(long senderId)

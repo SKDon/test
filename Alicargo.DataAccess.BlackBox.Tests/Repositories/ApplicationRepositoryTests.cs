@@ -100,6 +100,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			newData.Id = old.Id;
 			newData.StateId = old.StateId;
 			newData.SenderId = TestConstants.TestSenderId;
+			newData.CountryId = TestConstants.TestCountryId;
 			newData.ClientId = old.ClientId;
 			newData.TransitId = old.TransitId;
 			newData.AirWaybillId = old.AirWaybillId;

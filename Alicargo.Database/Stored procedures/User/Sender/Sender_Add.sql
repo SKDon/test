@@ -5,10 +5,10 @@
 	@TwoLetterISOLanguageName CHAR(2),
 	@Name NVARCHAR (MAX),
 	@Email NVARCHAR (320),
-	@TariffOfTapePerBox MONEY
-AS
-BEGIN
+	@TariffOfTapePerBox MONEY,
+	@CountryId BIGINT
 
+AS BEGIN
 	SET NOCOUNT ON;
 
 	BEGIN TRAN
@@ -20,9 +20,9 @@ BEGIN
 				@TwoLetterISOLanguageName = @TwoLetterISOLanguageName
 
 		INSERT	[dbo].[Sender]
-				([UserId], [Name], [Email], [TariffOfTapePerBox])
-		OUTPUT	inserted.[Id]
-		VALUES	(@UserId, @Name, @Email, @TariffOfTapePerBox)
+				([UserId], [Name], [Email], [TariffOfTapePerBox], [CountryId])
+		OUTPUT	INSERTED.[Id]
+		VALUES	(@UserId, @Name, @Email, @TariffOfTapePerBox, @CountryId)
 
 	COMMIT
 

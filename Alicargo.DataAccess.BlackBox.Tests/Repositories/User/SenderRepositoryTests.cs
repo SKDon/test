@@ -24,7 +24,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_repository = new SenderRepository(_context.UnitOfWork, new PasswordConverter(), new SqlProcedureExecutor(Settings.Default.MainConnectionString));
+			_repository = new SenderRepository(new PasswordConverter(), new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
 		[TestCleanup]

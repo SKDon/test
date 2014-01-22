@@ -191,7 +191,7 @@ namespace Alicargo.App_Start.Jobs
 			var recipientsFacade = new RecipientsFacade(
 				awbs, serializer, stateSettings,
 				new AdminRepository(unitOfWork),
-				new SenderRepository(unitOfWork, passwordConverter, mainExecutor),
+				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
 				new ForwarderRepository(unitOfWork),
 				new BrokerRepository(unitOfWork),

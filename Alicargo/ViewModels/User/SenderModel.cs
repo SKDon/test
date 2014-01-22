@@ -17,5 +17,8 @@ namespace Alicargo.ViewModels.User
 
 		[Required, DisplayNameLocalized(typeof(Entities), "TariffOfTapePerBox")]
 		public decimal TariffOfTapePerBox { get; set; }
+
+		[Required, DisplayNameLocalized(typeof(Entities), "Country")]
+		public long CountryId { get; set; }
 	}
 }
