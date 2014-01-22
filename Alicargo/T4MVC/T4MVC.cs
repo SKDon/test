@@ -49,6 +49,7 @@ public static class MVC
     public static Alicargo.Controllers.User.BrokerController Broker = new Alicargo.Controllers.User.T4MVC_BrokerController();
     public static Alicargo.Controllers.User.CarrierController Carrier = new Alicargo.Controllers.User.T4MVC_CarrierController();
     public static Alicargo.Controllers.User.ClientController Client = new Alicargo.Controllers.User.T4MVC_ClientController();
+    public static Alicargo.Controllers.User.ForwarderController Forwarder = new Alicargo.Controllers.User.T4MVC_ForwarderController();
     public static Alicargo.Controllers.User.RestorePasswordController RestorePassword = new Alicargo.Controllers.User.T4MVC_RestorePasswordController();
     public static Alicargo.Controllers.User.SenderController Sender = new Alicargo.Controllers.User.T4MVC_SenderController();
     public static Alicargo.Controllers.User.UserController User = new Alicargo.Controllers.User.T4MVC_UserController();

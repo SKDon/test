@@ -1,65 +1,52 @@
-﻿using System.Linq;
-using Alicargo.DataAccess.Contracts.Contracts.User;
+﻿using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.DataAccess.DbContext;
+using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
 	public sealed class ForwarderRepository : IForwarderRepository
 	{
-		private readonly AlicargoDataContext _context;
+		private readonly IPasswordConverter _converter;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public ForwarderRepository(IUnitOfWork unitOfWork)
+		public ForwarderRepository(IPasswordConverter converter, ISqlProcedureExecutor executor)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_converter = converter;
+			_executor = executor;
 		}
 
-		public long Update(long forwarderId, string name, string login, string email)
+
+		public void Update(long id, string name, string login, string email, long cityId)
 		{
-			var entity = _context.Forwarders.First(x => x.Id == forwarderId);
-			entity.Name = name;
-			entity.User.Login = login;
-			entity.Email = email;
-
-			_context.SubmitChanges();
-
-			return entity.UserId;
+			_executor.Execute("[dbo].[Forwarder_Update]", new { id, name, login, email, cityId });
 		}
 
-		public long Add(string name, string login, string email, string twoLetterISOLanguageName)
+		public long Add(string name, string login, string password, string email, string language, long cityId)
 		{
-			var user = new DbContext.User
-			{
-				Login = login,
-				TwoLetterISOLanguageName = twoLetterISOLanguageName,
-				PasswordHash = new byte[0],
-				PasswordSalt = new byte[0]
-			};
+			var salt = _converter.GenerateSalt();
+			var passwordHash = _converter.GetPasswordHash(password, salt);
 
-			_context.Forwarders.InsertOnSubmit(new Forwarder
+			return _executor.Query<long>("[dbo].[Forwarder_Add]", new
 			{
-				Name = name,
-				User = user,
-				Email = email
+				login,
+				PasswordHash = passwordHash,
+				PasswordSalt = salt,
+				language,
+				name,
+				email,
+				cityId
 			});
-
-			_context.SubmitChanges();
-
-			return user.Id;
 		}
 
-		public UserData[] GetAll()
+		public ForwarderData[] GetAll()
 		{
-			return _context.Forwarders.Select(x => new UserData
-			{
-				EntityId = x.Id,
-				UserId = x.UserId,
-				Name = x.Name,
-				Login = x.User.Login,
-				Email = x.Email,
-				Language = x.User.TwoLetterISOLanguageName
-			}).ToArray();
+			return _executor.Array<ForwarderData>("[dbo].[Forwarder_GetAll]");
+		}
+
+		public ForwarderData Get(long id)
+		{
+			return _executor.Query<ForwarderData>("[dbo].[Forwarder_Get]", new { id });
 		}
 	}
 }

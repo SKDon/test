@@ -18,7 +18,6 @@ using Alicargo.Jobs.Core;
 using Alicargo.Jobs.Helpers;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Services;
-using Alicargo.Services.Excel;
 using Alicargo.Utilities;
 using log4net;
 using Ninject;
@@ -193,7 +192,7 @@ namespace Alicargo.App_Start.Jobs
 				new AdminRepository(unitOfWork),
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
-				new ForwarderRepository(unitOfWork),
+				new ForwarderRepository(passwordConverter, mainExecutor),
 				new BrokerRepository(unitOfWork),
 				new EventEmailRecipient(mainExecutor));
 			var wrapper = new TemplateRepositoryHelper(templates);

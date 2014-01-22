@@ -77,6 +77,7 @@
     <Compile Include="Contracts\AirWaybillData.cs" />
     <Compile Include="Contracts\State\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
+    <Compile Include="Contracts\User\ForwarderData.cs" />
     <Compile Include="Contracts\User\UserData.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />

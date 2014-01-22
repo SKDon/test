@@ -75,7 +75,7 @@ SET IDENTITY_INSERT [dbo].[Admin] OFF
 
 /****** Object:  Table [dbo].[Forwarder]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Forwarder] ON
-INSERT [dbo].[Forwarder] ([Id], [UserId], [Name], [Email]) VALUES (1, 3, N'Forwarder', N'Forwarder@timez.org')
+INSERT [dbo].[Forwarder] ([Id], [UserId], [Name], [Email], [CityId]) VALUES (1, 3, N'Forwarder', N'Forwarder@timez.org', 1)
 SET IDENTITY_INSERT [dbo].[Forwarder] OFF
 
 

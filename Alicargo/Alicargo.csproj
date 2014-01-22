@@ -165,6 +165,7 @@
     <Compile Include="Controllers\Calculation\BalanceController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StateSettingsController.cs" />
+    <Compile Include="Controllers\User\ForwarderController.cs" />
     <Compile Include="Controllers\User\RestorePasswordController.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
@@ -363,6 +364,9 @@
     <Compile Include="T4MVC\FilesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\ForwarderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -439,6 +443,7 @@
     <Compile Include="ViewModels\TransitMapper.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
+    <Compile Include="ViewModels\User\ForwarderModel.cs" />
     <Compile Include="ViewModels\User\SenderModel.cs" />
     <Compile Include="ViewModels\User\UserList.cs" />
     <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
@@ -774,6 +779,9 @@
     <Content Include="Views\Country\Edit.cshtml" />
     <Content Include="Views\Country\EditorTemplates\CountryEditModel.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Forwarder\Create.cshtml" />
+    <Content Include="Views\Forwarder\Edit.cshtml" />
+    <Content Include="Views\Forwarder\EditorTemplates\ForwarderModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -10,7 +10,7 @@
 AS BEGIN
 	SET NOCOUNT ON;
 
-	DECLARE @Table TABLE(UserId BIGINT);
+	DECLARE @Table TABLE ([UserId] BIGINT);
 
 	BEGIN TRAN
 
@@ -25,7 +25,7 @@ AS BEGIN
 		UPDATE	TOP(1) [dbo].[User]
 		SET		[Login] = @Login,
 				[TwoLetterISOLanguageName] = @TwoLetterISOLanguageName
-		WHERE	[Id] IN(SELECT [UserId] FROM @Table);
+		WHERE	[Id] IN (SELECT [UserId] FROM @Table);
 
 	COMMIT
 

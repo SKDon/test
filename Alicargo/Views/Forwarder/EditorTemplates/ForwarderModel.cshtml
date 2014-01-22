@@ -1,0 +1,16 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.ViewModels.User.ForwarderModel
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Name)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Email)
+
+	</div>
+	<div class="span4">
+		@Html.LabelFor(x => x.CityId)
+		@Html.DropDownListFor(x => x.CityId, (IDictionary<long, string>)ViewBag.Cities)
+	</div>
+</div>
+@Html.EditorFor(x => x.Authentication)

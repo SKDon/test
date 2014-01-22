@@ -1,0 +1,7 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.ViewModels.User.ForwarderModel
+<h1>
+	@Pages.Edit
+</h1>
+@Html.EditPage(Url.Action(MVC.Forwarder.Edit()), Pages.Save)

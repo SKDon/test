@@ -57,7 +57,7 @@ namespace Alicargo.Services.Users
 						x => new UserListItem
 						{
 							Name = x.Name,
-							EntityId = x.EntityId,
+							EntityId = x.Id,
 							UserId = x.UserId
 						}).ToArray();
 
@@ -105,10 +105,6 @@ namespace Alicargo.Services.Users
 					userId = _brokers.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
 					break;
 
-				case RoleType.Forwarder:
-					userId = _forwarders.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
-					break;
-
 				default:
 					throw new ArgumentOutOfRangeException("model", @"Unknown role " + model.RoleType);
 			}
@@ -130,10 +126,6 @@ namespace Alicargo.Services.Users
 
 				case RoleType.Broker:
 					userId = _brokers.Add(model.Name, model.Authentication.Login, model.Email, TwoLetterISOLanguageName.English);
-					break;
-
-				case RoleType.Forwarder:
-					userId = _forwarders.Add(model.Name, model.Authentication.Login, model.Email, TwoLetterISOLanguageName.English);
 					break;
 
 				default:
@@ -161,9 +153,6 @@ namespace Alicargo.Services.Users
 						Name = broker.Name,
 						UserId = broker.UserId
 					};
-
-				case RoleType.Forwarder:
-					return _forwarders.GetAll().First(x => x.EntityId == id);
 
 				default:
 					throw new ArgumentOutOfRangeException("role");

@@ -84,6 +84,7 @@
     <Folder Include="Stored procedures\Calculation" />
     <Folder Include="Stored procedures\User\Sender" />
     <Folder Include="Stored procedures\Transit" />
+    <Folder Include="Stored procedures\User\Forwarder" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Transit.sql" />
@@ -181,6 +182,10 @@
     <Build Include="Stored procedures\Transit\Transit_Delete.sql" />
     <Build Include="Stored procedures\User\Sender\Sender_GetByUser.sql" />
     <Build Include="Stored procedures\User\Sender\Sender_GetAll.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_Get.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_GetAll.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_Add.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
