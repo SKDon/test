@@ -3,19 +3,23 @@
 @model TransitEditModel
 
 <div class="row">
-	<div class="span8">
+	<div class="span4">
 		@Html.LabelFor(x => x.CityId)
 		@Html.DropDownListFor(x => x.CityId, (IDictionary<long, string>)ViewBag.Cities)
 		@Html.EditorWithLabelFor(model => model.Address)
 		@Html.EditorWithLabelFor(model => model.RecipientName)
-		@Html.EditorWithLabelFor(model => model.Phone)
-		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
+
 	</div>
 	<div class="span4">
-		@Html.Action(MVC.Carrier.Select((long?)ViewBag.TransitId))
 		@Html.LabelFor(model => model.MethodOfTransit)
 		@Html.DropDownListForEnum(model => model.MethodOfTransit)
 		@Html.LabelFor(model => model.DeliveryType)
 		@Html.DropDownListForEnum(model => model.DeliveryType)
+		@Html.EditorWithLabelFor(model => model.Phone)
+
+	</div>
+	<div class="span4">
+		@Html.Action(MVC.Carrier.Select((long?)ViewBag.TransitId))
+		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
 	</div>
 </div>

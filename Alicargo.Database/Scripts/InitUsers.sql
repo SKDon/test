@@ -77,14 +77,14 @@ SET IDENTITY_INSERT [dbo].[Admin] OFF
 
 /****** Object:  Table [dbo].[Forwarder]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Forwarder] ON
-INSERT [dbo].[Forwarder] ([Id], [UserId], [Name], [Email], [CityId]) VALUES (1, 3, N'Forwarder', N'Forwarder@timez.org', 1)
+INSERT [dbo].[Forwarder] ([Id], [UserId], [Name], [Email], [CityId]) VALUES (1, 3, N'Forwarder1', N'Forwarder1@timez.org', 1)
 INSERT [dbo].[Forwarder] ([Id], [UserId], [Name], [Email], [CityId]) VALUES (2, 9, N'Forwarder2', N'Forwarder2@timez.org', 2)
 SET IDENTITY_INSERT [dbo].[Forwarder] OFF
 
 
 /****** Object:  Table [dbo].[Sender]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Sender] ON
-INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email], [CountryId]) VALUES (1, 4, N'Sender', N'Sender@timez.org', 1)
+INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email], [CountryId]) VALUES (1, 4, N'Sender1', N'Sender1@timez.org', 1)
 INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email], [CountryId]) VALUES (2, 11, N'Sender2', N'Sender2@timez.org', 108)
 SET IDENTITY_INSERT [dbo].[Sender] OFF
 
