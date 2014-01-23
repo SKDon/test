@@ -471,4 +471,7 @@
   <data name="Client" xml:space="preserve">
     <value>Client</value>
   </data>
+  <data name="Forwarder" xml:space="preserve">
+    <value>Forwarder</value>
+  </data>
 </root>

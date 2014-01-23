@@ -529,6 +529,15 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forwarder.
+        /// </summary>
+        public static string Forwarder {
+            get {
+                return ResourceManager.GetString("Forwarder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GTD.
         /// </summary>
         public static string GTD {

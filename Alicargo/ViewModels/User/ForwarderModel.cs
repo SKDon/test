@@ -20,7 +20,7 @@ namespace Alicargo.ViewModels.User
 		public string Email { get; set; }
 
 		[Required]
-		[DisplayNameLocalized(typeof(Entities), "Country")]
+		[DisplayNameLocalized(typeof(Entities), "City")]
 		public long CityId { get; set; }
 	}
 }

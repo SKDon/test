@@ -14,7 +14,6 @@ namespace Alicargo.Services.Application
 	internal sealed class ApplicationPresenter : IApplicationPresenter
 	{
 		private readonly IApplicationRepository _applications;
-		private readonly ICountryRepository _countries;
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _states;
 		private readonly IStateFilter _stateFilter;
@@ -22,13 +21,11 @@ namespace Alicargo.Services.Application
 		public ApplicationPresenter(
 			IApplicationRepository applications,
 			IIdentityService identity,
-			ICountryRepository countries,
 			IStateFilter stateFilter,
 			IStateRepository states)
 		{
 			_applications = applications;
 			_identity = identity;
-			_countries = countries;
 			_stateFilter = stateFilter;
 			_states = states;
 		}
@@ -102,7 +99,8 @@ namespace Alicargo.Services.Application
 				FactureCostEdited = data.FactureCostEdited,
 				TransitCostEdited = data.TransitCostEdited,
 				PickupCostEdited = data.PickupCostEdited,
-				SenderId = data.SenderId
+				SenderId = data.SenderId,
+				ForwarderId = data.ForwarderId
 			};
 		}
 	}
