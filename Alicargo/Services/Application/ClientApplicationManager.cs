@@ -2,7 +2,6 @@
 using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
-using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -168,12 +167,7 @@ namespace Alicargo.Services.Application
 		{
 			var id = _senders.GetByCountry(countryId).FirstOrDefault();
 
-			if(id == 0)
-			{
-				return _senders.GetAll().First().EntityId;
-			}
-
-			throw new InvalidLogicException("Can't find a sender");
+			return id == 0 ? _senders.GetAll().First().EntityId : id;
 		}
 
 		private static void Map(ApplicationClientModel @from, ApplicationData to, long forwarderId)
