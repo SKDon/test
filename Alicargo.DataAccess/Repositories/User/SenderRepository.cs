@@ -75,6 +75,11 @@ namespace Alicargo.DataAccess.Repositories.User
 			return _executor.Array<UserData>("[dbo].[Sender_GetAll]");
 		}
 
+		public long[] GetByCountry(long countryId)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public long GetUserId(long senderId)
 		{
 			return _executor.Query<long>("[dbo].[Sender_GetUserId]", new { id = senderId });

@@ -5,6 +5,7 @@ using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.TestHelpers;
+using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 using Dapper;
 using FluentAssertions;
@@ -15,10 +16,10 @@ using Ploeh.AutoFixture;
 namespace Alicargo.BlackBox.Tests.Controllers.Application
 {
 	[TestClass]
-	public class SenderApplicationControllerTests
+	public class ClientApplicatonControllerTests
 	{
 		private CompositionHelper _context;
-		private SenderApplicationController _controller;
+		private ClientApplicationController _controller;
 		private Fixture _fixture;
 
 		[TestCleanup]
@@ -32,39 +33,44 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		{
 			_fixture = new Fixture();
 			_context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString,
-				RoleType.Sender);
+				RoleType.Client);
 
-			_controller = _context.Kernel.Get<SenderApplicationController>();
+			_controller = _context.Kernel.Get<ClientApplicationController>();
 		}
 
 		[TestMethod]
 		[TestCategory("black-box")]
 		public void Test_Create_Post()
 		{
-			var model = _fixture.Create<ApplicationSenderModel>();
+			var model = _fixture.Create<ApplicationClientModel>();
 
-			var result = _controller.Create(TestConstants.TestClientId1, model);
+			var result = _controller.Create(model, _fixture.Create<CarrierSelectModel>(), _fixture.Create<TransitEditModel>());
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				var data = connection.Query("select top 1 * from [dbo].[Application] order by [Id] desc").First();
+				var countryId = connection.Query<long>("select [CountryId] from [dbo].[Sender] where [Id] = @Id",
+					new { Id = data.SenderId }).First();
 
 				model.Count.ShouldBeEquivalentTo((int)data.Count);
 				model.FactoryName.ShouldBeEquivalentTo((string)data.FactoryName);
+				model.FactoryPhone.ShouldBeEquivalentTo((string)data.FactoryPhone);
+				model.FactoryEmail.ShouldBeEquivalentTo((string)data.FactoryEmail);
+				model.FactoryContact.ShouldBeEquivalentTo((string)data.FactoryContact);
 				model.MarkName.ShouldBeEquivalentTo((string)data.MarkName);
+				model.Characteristic.ShouldBeEquivalentTo((string)data.Characteristic);
+				model.MethodOfDelivery.ShouldBeEquivalentTo((MethodOfDelivery)data.MethodOfDelivery);
+				model.AddressLoad.ShouldBeEquivalentTo((string)data.AddressLoad);
 				model.Invoice.ShouldBeEquivalentTo((string)data.Invoice);
+				model.WarehouseWorkingTime.ShouldBeEquivalentTo((string)data.WarehouseWorkingTime);
+				model.TermsOfDelivery.ShouldBeEquivalentTo((string)data.TermsOfDelivery);
 				model.Weight.ShouldBeEquivalentTo((float)data.Weight);
 				model.Volume.ShouldBeEquivalentTo((float)data.Volume);
-				model.FactureCost.ShouldBeEquivalentTo((decimal)data.FactureCost);
-				model.PickupCost.ShouldBeEquivalentTo((decimal)data.PickupCost);
 				model.Currency.CurrencyId.ShouldBeEquivalentTo((int)data.CurrencyId);
 				model.Currency.Value.ShouldBeEquivalentTo((decimal)data.Value);
-
-				var countryId = connection.Query<long>("select [CountryId] from [dbo].[Sender] where [UserId] = @UserId",
-					new { UserId = TestConstants.TestSenderUserId }).First();
-
+				model.CountryId.ShouldBeEquivalentTo((long)data.CountryId);
 				countryId.ShouldBeEquivalentTo((long)data.CountryId);
 				TestConstants.DefaultStateId.ShouldBeEquivalentTo((long)data.StateId);
 			}

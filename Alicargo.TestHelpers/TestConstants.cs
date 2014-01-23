@@ -20,5 +20,6 @@
 
 		public const long TestAdminUserId = 1;
 		public const long TestSenderUserId = 4;
+		public const long TestClientUserId = 5;
 	}
 }

@@ -12,5 +12,6 @@ namespace Alicargo.DataAccess.Contracts.Repositories.User
 		void Update(long senderId, SenderData data);
 		long GetUserId(long senderId);
 		UserData[] GetAll();
+		long[] GetByCountry(long countryId);
 	}
 }

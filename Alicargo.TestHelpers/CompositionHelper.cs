@@ -71,6 +71,7 @@ namespace Alicargo.TestHelpers
 						break;
 
 					case RoleType.Client:
+						identityService.Setup(x => x.Id).Returns(TestConstants.TestClientUserId);
 						break;
 
 					default:

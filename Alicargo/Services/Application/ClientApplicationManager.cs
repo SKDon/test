@@ -1,9 +1,9 @@
-﻿using Alicargo.Core.Contracts;
+﻿using System.Linq;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
-using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 using Alicargo.ViewModels;
@@ -13,23 +13,26 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ClientApplicationManager : IClientApplicationManager
 	{
-		private readonly IApplicationUpdateRepository _applicationUpdater;
+		private readonly IApplicationUpdateRepository _updater;
+		private readonly ISenderRepository _senders;
 		private readonly IApplicationRepository _applications;
 		private readonly IStateConfig _config;
-		private readonly ITransitService _transitService;
+		private readonly ITransitService _transits;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public ClientApplicationManager(
 			IApplicationRepository applications,
-			IApplicationUpdateRepository applicationUpdater,
+			IApplicationUpdateRepository updater,
+			ISenderRepository senders,
 			IStateConfig config,
-			ITransitService transitService,
+			ITransitService transits,
 			IUnitOfWork unitOfWork)
 		{
 			_applications = applications;
-			_applicationUpdater = applicationUpdater;
+			_updater = updater;
+			_senders = senders;
 			_config = config;
-			_transitService = transitService;
+			_transits = transits;
 			_unitOfWork = unitOfWork;
 		}
 
@@ -38,19 +41,17 @@ namespace Alicargo.Services.Application
 		{
 			var data = _applications.Get(applicationId);
 
-			_transitService.Update(data.TransitId, transitModel, carrierModel);
+			_transits.Update(data.TransitId, transitModel, carrierModel);
 
 			Map(model, data);
 
-			_applicationUpdater.Update(data);
+			_updater.Update(data);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public ApplicationClientModel Get(long id)
 		{
-			// todo: 2. check permissions to the application for a client
-
 			var application = _applications.Get(id);
 
 			var model = GetModel(application);
@@ -88,11 +89,13 @@ namespace Alicargo.Services.Application
 		public long Add(ApplicationClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
 			long clientId)
 		{
-			var transitId = _transitService.AddTransit(transitModel, carrierModel);
+			var transitId = _transits.AddTransit(transitModel, carrierModel);
 
-			var data = GetNewApplicationData(model, clientId, transitId, 1); // todo: 1. set sender by country
+			var senders = _senders.GetByCountry(model.CountryId);
 
-			var id = _applicationUpdater.Add(data);
+			var data = GetNewApplicationData(model, clientId, transitId, senders.First());
+
+			var id = _updater.Add(data);
 
 			_unitOfWork.SaveChanges();
 
