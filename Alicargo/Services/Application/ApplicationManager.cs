@@ -16,13 +16,13 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationManager : IApplicationManager
 	{
-		private readonly IApplicationRepository _applications;
 		private readonly IApplicationUpdateRepository _applicationUpdater;
+		private readonly IApplicationRepository _applications;
 		private readonly IStateConfig _config;
 		private readonly IIdentityService _identity;
+		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IStateSettingsRepository _settings;
 
 		public ApplicationManager(
 			IApplicationRepository applications,
@@ -43,7 +43,7 @@ namespace Alicargo.Services.Application
 		}
 
 		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
-						   TransitEditModel transitModel)
+			TransitEditModel transitModel)
 		{
 			var data = _applications.Get(applicationId);
 
@@ -57,7 +57,7 @@ namespace Alicargo.Services.Application
 		}
 
 		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-						long clientId)
+			long clientId)
 		{
 			var transitId = _transitService.AddTransit(transitModel, carrierModel);
 
@@ -101,7 +101,7 @@ namespace Alicargo.Services.Application
 		{
 			var calculations = _applications.GetCalculations(new[] { id });
 
-			if (calculations.ContainsKey(id))
+			if(calculations.ContainsKey(id))
 			{
 				throw new InvalidLogicException("Can't set transit cost after a calculation was submitted.");
 			}
@@ -113,7 +113,7 @@ namespace Alicargo.Services.Application
 
 		public void SetTransitCostEdited(long id, decimal? transitCost)
 		{
-			if (!_identity.IsInRole(RoleType.Admin))
+			if(!_identity.IsInRole(RoleType.Admin))
 			{
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
@@ -132,7 +132,7 @@ namespace Alicargo.Services.Application
 
 		public void SetPickupCostEdited(long id, decimal? pickupCost)
 		{
-			if (!_identity.IsInRole(RoleType.Admin))
+			if(!_identity.IsInRole(RoleType.Admin))
 			{
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
@@ -144,7 +144,7 @@ namespace Alicargo.Services.Application
 
 		public void SetFactureCostEdited(long id, decimal? factureCost)
 		{
-			if (!_identity.IsInRole(RoleType.Admin))
+			if(!_identity.IsInRole(RoleType.Admin))
 			{
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
@@ -156,7 +156,7 @@ namespace Alicargo.Services.Application
 
 		public void SetScotchCostEdited(long id, decimal? scotchCost)
 		{
-			if (!_identity.IsInRole(RoleType.Admin))
+			if(!_identity.IsInRole(RoleType.Admin))
 			{
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
@@ -182,13 +182,13 @@ namespace Alicargo.Services.Application
 
 		public void SetState(long applicationId, long stateId)
 		{
-			if (!HasPermissionToSetState(stateId))
+			if(!HasPermissionToSetState(stateId))
 				throw new AccessForbiddenException("User don't have access to the state " + stateId);
 
 			// todo: 2. check permissions to the application for a sender
 
 			// todo: 2. test logic with states
-			if (stateId == _config.CargoInStockStateId)
+			if(stateId == _config.CargoInStockStateId)
 			{
 				_applicationUpdater.SetDateInStock(applicationId, DateTimeProvider.Now);
 			}
@@ -196,42 +196,6 @@ namespace Alicargo.Services.Application
 			_applicationUpdater.SetState(applicationId, stateId);
 
 			_unitOfWork.SaveChanges();
-		}
-
-		private bool HasPermissionToSetState(long stateId)
-		{
-			return _settings.GetStateAvailabilities()
-				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
-		}
-
-		private static void Map(ApplicationAdminModel @from, ApplicationData to)
-		{
-			to.Invoice = @from.Invoice;
-			to.Characteristic = @from.Characteristic;
-			to.AddressLoad = @from.AddressLoad;
-			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
-			to.Weight = @from.Weight;
-			to.Count = @from.Count;
-			to.Volume = @from.Volume;
-			to.TermsOfDelivery = @from.TermsOfDelivery;
-			to.Value = @from.Currency.Value;
-			to.CurrencyId = @from.Currency.CurrencyId;
-			to.CountryId = @from.CountryId;
-			to.FactoryName = @from.FactoryName;
-			to.FactoryPhone = @from.FactoryPhone;
-			to.FactoryEmail = @from.FactoryEmail;
-			to.FactoryContact = @from.FactoryContact;
-			to.MarkName = @from.MarkName;
-			to.MethodOfDelivery = @from.MethodOfDelivery;
-			to.FactureCost = @from.FactureCost;
-			to.TransitCost = @from.TransitCost;
-			to.PickupCost = @from.PickupCost;
-			to.TariffPerKg = @from.TariffPerKg;
-			to.FactureCostEdited = from.FactureCostEdited;
-			to.TransitCostEdited = from.TransitCostEdited;
-			to.PickupCostEdited = from.PickupCostEdited;
-			to.ScotchCostEdited = from.ScotchCostEdited;
-			to.SenderId = from.SenderId;
 		}
 
 		private ApplicationData GetNewApplicationData(ApplicationAdminModel model, long clientId, long transitId)
@@ -274,8 +238,47 @@ namespace Alicargo.Services.Application
 				FactureCostEdited = model.FactureCostEdited,
 				TransitCostEdited = model.TransitCostEdited,
 				PickupCostEdited = model.PickupCostEdited,
-				SenderId = model.SenderId
+				SenderId = model.SenderId,
+				ForwarderId = model.ForwarderId,
+				SenderRate = null
 			};
+		}
+
+		private bool HasPermissionToSetState(long stateId)
+		{
+			return _settings.GetStateAvailabilities()
+				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
+		}
+
+		private static void Map(ApplicationAdminModel @from, ApplicationData to)
+		{
+			to.Invoice = @from.Invoice;
+			to.Characteristic = @from.Characteristic;
+			to.AddressLoad = @from.AddressLoad;
+			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
+			to.Weight = @from.Weight;
+			to.Count = @from.Count;
+			to.Volume = @from.Volume;
+			to.TermsOfDelivery = @from.TermsOfDelivery;
+			to.Value = @from.Currency.Value;
+			to.CurrencyId = @from.Currency.CurrencyId;
+			to.CountryId = @from.CountryId;
+			to.FactoryName = @from.FactoryName;
+			to.FactoryPhone = @from.FactoryPhone;
+			to.FactoryEmail = @from.FactoryEmail;
+			to.FactoryContact = @from.FactoryContact;
+			to.MarkName = @from.MarkName;
+			to.MethodOfDelivery = @from.MethodOfDelivery;
+			to.FactureCost = @from.FactureCost;
+			to.TransitCost = @from.TransitCost;
+			to.PickupCost = @from.PickupCost;
+			to.TariffPerKg = @from.TariffPerKg;
+			to.FactureCostEdited = from.FactureCostEdited;
+			to.TransitCostEdited = from.TransitCostEdited;
+			to.PickupCostEdited = from.PickupCostEdited;
+			to.ScotchCostEdited = from.ScotchCostEdited;
+			to.SenderId = from.SenderId;
+			to.ForwarderId = from.ForwarderId;
 		}
 	}
 }

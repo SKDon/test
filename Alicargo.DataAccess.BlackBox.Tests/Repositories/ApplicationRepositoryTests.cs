@@ -106,6 +106,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			newData.AirWaybillId = old.AirWaybillId;
 			newData.CreationTimestamp = old.CreationTimestamp;
 			newData.StateChangeTimestamp = old.StateChangeTimestamp;
+			newData.ForwarderId = TestConstants.TestForwarderId2;
 
 			_applicationUpater.Update(newData);
 			_context.UnitOfWork.SaveChanges();
@@ -126,6 +127,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.With(x => x.StateId, TestConstants.DefaultStateId)
 				.With(x => x.CountryId, TestConstants.TestCountryId)
 				.With(x => x.AirWaybillId, null)
+				.With(x => x.ForwarderId, TestConstants.TestForwarderId1)
 				.Create();
 
 			var id = _applicationUpater.Add(application);

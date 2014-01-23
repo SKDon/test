@@ -51,6 +51,16 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			{
 				var data = connection.Query("select top 1 * from [dbo].[Application] order by [Id] desc").First();
 
+				var cityId = connection.Query<long>(
+					"select f.[CityId] from [dbo].[Forwarder] f JOIN [dbo].[Application] a ON a.[ForwarderId] = f.[Id] WHERE a.[Id] = @Id",
+					new { data.Id }).First();
+
+				var clientCity = connection.Query<long>(
+					"select t.[CityId] from [dbo].[Client] c JOIN [dbo].[Transit] t ON t.[Id] = c.[TransitId] WHERE c.[Id] = @ClientId",
+					new { data.ClientId })
+					.First();
+
+				cityId.ShouldBeEquivalentTo(clientCity);
 				model.Count.ShouldBeEquivalentTo((int)data.Count);
 				model.FactoryName.ShouldBeEquivalentTo((string)data.FactoryName);
 				model.MarkName.ShouldBeEquivalentTo((string)data.MarkName);

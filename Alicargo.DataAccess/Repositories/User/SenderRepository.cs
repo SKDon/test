@@ -77,7 +77,7 @@ namespace Alicargo.DataAccess.Repositories.User
 
 		public long[] GetByCountry(long countryId)
 		{
-			throw new System.NotImplementedException();
+			return _executor.Array<long>("[dbo].[Sender_GetByCountry]", new { countryId });
 		}
 
 		public long GetUserId(long senderId)

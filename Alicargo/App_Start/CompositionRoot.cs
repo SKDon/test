@@ -11,9 +11,11 @@ using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.Email;
 using Alicargo.Core.Contracts.Event;
 using Alicargo.Core.Contracts.State;
+using Alicargo.Core.Contracts.Users;
 using Alicargo.Core.Email;
 using Alicargo.Core.Event;
 using Alicargo.Core.State;
+using Alicargo.Core.Users;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
@@ -43,6 +45,8 @@ namespace Alicargo.App_Start
 			kernel.Bind<IStateConfig>().To<StateConfig>().InRequestScope();
 
 			kernel.Bind<IStateFilter>().To<StateFilter>().InRequestScope();
+
+			kernel.Bind<IForwarderService>().To<ForwarderService>().InRequestScope();
 
 			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
 

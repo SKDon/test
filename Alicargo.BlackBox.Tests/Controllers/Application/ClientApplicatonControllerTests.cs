@@ -43,8 +43,11 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		public void Test_Create_Post()
 		{
 			var model = _fixture.Create<ApplicationClientModel>();
+			model.CountryId = TestConstants.TestCountryId;
+			var transit = _fixture.Create<TransitEditModel>();
+			transit.CityId = TestConstants.TestCityId1;
 
-			var result = _controller.Create(model, _fixture.Create<CarrierSelectModel>(), _fixture.Create<TransitEditModel>());
+			var result = _controller.Create(model, _fixture.Create<CarrierSelectModel>(), transit);
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 
@@ -54,6 +57,8 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				var countryId = connection.Query<long>("select [CountryId] from [dbo].[Sender] where [Id] = @Id",
 					new { Id = data.SenderId }).First();
 
+				var cityId = connection.Query<long>("select [CityId] from [dbo].[Forwarder] where [Id] = @Id", new { Id = data.ForwarderId }).First();
+				cityId.ShouldBeEquivalentTo(transit.CityId);
 				model.Count.ShouldBeEquivalentTo((int)data.Count);
 				model.FactoryName.ShouldBeEquivalentTo((string)data.FactoryName);
 				model.FactoryPhone.ShouldBeEquivalentTo((string)data.FactoryPhone);
@@ -61,7 +66,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				model.FactoryContact.ShouldBeEquivalentTo((string)data.FactoryContact);
 				model.MarkName.ShouldBeEquivalentTo((string)data.MarkName);
 				model.Characteristic.ShouldBeEquivalentTo((string)data.Characteristic);
-				model.MethodOfDelivery.ShouldBeEquivalentTo((MethodOfDelivery)data.MethodOfDelivery);
+				model.MethodOfDelivery.ShouldBeEquivalentTo((MethodOfDelivery)data.MethodOfDeliveryId);
 				model.AddressLoad.ShouldBeEquivalentTo((string)data.AddressLoad);
 				model.Invoice.ShouldBeEquivalentTo((string)data.Invoice);
 				model.WarehouseWorkingTime.ShouldBeEquivalentTo((string)data.WarehouseWorkingTime);

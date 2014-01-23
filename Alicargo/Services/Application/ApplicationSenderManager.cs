@@ -1,4 +1,5 @@
 ﻿using Alicargo.Core.Contracts.State;
+using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -12,24 +13,27 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ApplicationSenderManager : IApplicationSenderManager
 	{
-		private readonly IApplicationUpdateRepository _applicationUpdater;
 		private readonly IApplicationRepository _applications;
+		private readonly IForwarderService _forwarders;
 		private readonly ISenderRepository _senders;
 		private readonly IStateConfig _stateConfig;
 		private readonly ITransitRepository _transits;
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IApplicationUpdateRepository _updater;
 
 		public ApplicationSenderManager(
 			IApplicationRepository applications,
 			ISenderRepository senders,
-			IApplicationUpdateRepository applicationUpdater,
+			IApplicationUpdateRepository updater,
+			IForwarderService forwarders,
 			IUnitOfWork unitOfWork,
 			ITransitRepository transits,
 			IStateConfig stateConfig)
 		{
 			_applications = applications;
 			_senders = senders;
-			_applicationUpdater = applicationUpdater;
+			_updater = updater;
+			_forwarders = forwarders;
 			_unitOfWork = unitOfWork;
 			_transits = transits;
 			_stateConfig = stateConfig;
@@ -37,8 +41,6 @@ namespace Alicargo.Services.Application
 
 		public ApplicationSenderModel Get(long id)
 		{
-			// todo: 2. check permissions to the application for a sender
-
 			var application = _applications.Get(id);
 
 			var model = GetModel(application);
@@ -48,13 +50,11 @@ namespace Alicargo.Services.Application
 
 		public void Update(long id, ApplicationSenderModel model)
 		{
-			// todo: 2. check permissions to the application for a sender
-
 			var applicationData = _applications.Get(id);
 
 			Map(model, applicationData);
 
-			_applicationUpdater.Update(applicationData);
+			_updater.Update(applicationData);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -70,44 +70,33 @@ namespace Alicargo.Services.Application
 
 		private void Add(ApplicationData applicationData, long clientId, long senderId)
 		{
-			var transitId = CopyTransitDataFromClient(clientId);
-			var sender = _senders.Get(senderId);
-
-			applicationData.TransitId = transitId;
+			CopyTransitDataFromClient(clientId, applicationData);
 			applicationData.StateId = _stateConfig.DefaultStateId;
 			applicationData.Class = null;
 			applicationData.StateChangeTimestamp = DateTimeProvider.Now;
 			applicationData.CreationTimestamp = DateTimeProvider.Now;
 			applicationData.SenderId = senderId;
 			applicationData.ClientId = clientId;
-			applicationData.CountryId = sender.CountryId;
+			applicationData.CountryId = _senders.Get(senderId).CountryId;
 
-			_applicationUpdater.Add(applicationData);
+			_updater.Add(applicationData);
 
 			_unitOfWork.SaveChanges();
 		}
 
-		private long CopyTransitDataFromClient(long clientId)
+		private void CopyTransitDataFromClient(long clientId, ApplicationData applicationData)
 		{
-			var transitData = _transits.GetByClient(clientId);
+			var transit = _transits.GetByClient(clientId);
 
-			transitData.Id = 0;
+			transit.Id = 0;
 
-			return _transits.Add(transitData);
-		}
+			var forwarder = _forwarders.GetByCityOrDefault(transit.CityId);
 
-		private static void Map(ApplicationSenderModel @from, ApplicationData to)
-		{
-			to.Count = @from.Count;
-			to.FactoryName = @from.FactoryName;
-			to.Weight = @from.Weight;
-			to.Invoice = @from.Invoice;
-			to.MarkName = @from.MarkName;
-			to.Value = @from.Currency.Value;
-			to.CurrencyId = @from.Currency.CurrencyId;
-			to.Volume = @from.Volume;
-			to.FactureCost = @from.FactureCost;
-			to.PickupCost = from.PickupCost;
+			var transitId = _transits.Add(transit);
+
+			applicationData.TransitId = transitId;
+
+			applicationData.ForwarderId = forwarder.Id;
 		}
 
 		private static ApplicationSenderModel GetModel(ApplicationData application)
@@ -128,6 +117,20 @@ namespace Alicargo.Services.Application
 				FactureCost = application.FactureCost,
 				PickupCost = application.PickupCost,
 			};
+		}
+
+		private static void Map(ApplicationSenderModel @from, ApplicationData to)
+		{
+			to.Count = @from.Count;
+			to.FactoryName = @from.FactoryName;
+			to.Weight = @from.Weight;
+			to.Invoice = @from.Invoice;
+			to.MarkName = @from.MarkName;
+			to.Value = @from.Currency.Value;
+			to.CurrencyId = @from.Currency.CurrencyId;
+			to.Volume = @from.Volume;
+			to.FactureCost = @from.FactureCost;
+			to.PickupCost = from.PickupCost;
 		}
 	}
 }

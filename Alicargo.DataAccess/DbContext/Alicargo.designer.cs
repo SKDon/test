@@ -906,7 +906,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDFileData
 		{
 			get
@@ -946,7 +946,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDAdditionalFileData
 		{
 			get
@@ -986,7 +986,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary PackingFileData
 		{
 			get
@@ -1026,7 +1026,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary InvoiceFileData
 		{
 			get
@@ -1066,7 +1066,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary AWBFileData
 		{
 			get
@@ -4174,6 +4174,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private long _SenderId;
 		
+		private long _ForwarderId;
+		
 		private string _FactoryName;
 		
 		private string _FactoryPhone;
@@ -4209,6 +4211,8 @@ namespace Alicargo.DataAccess.DbContext
 		private EntityRef<Country> _Country;
 		
 		private EntityRef<Sender> _Sender;
+		
+		private EntityRef<Forwarder> _Forwarder;
 		
 		private EntityRef<State> _State;
 		
@@ -4268,6 +4272,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnAirWaybillIdChanged();
     partial void OnSenderIdChanging(long value);
     partial void OnSenderIdChanged();
+    partial void OnForwarderIdChanging(long value);
+    partial void OnForwarderIdChanged();
     partial void OnFactoryNameChanging(string value);
     partial void OnFactoryNameChanged();
     partial void OnFactoryPhoneChanging(string value);
@@ -4304,6 +4310,7 @@ namespace Alicargo.DataAccess.DbContext
 			this._Client = default(EntityRef<Client>);
 			this._Country = default(EntityRef<Country>);
 			this._Sender = default(EntityRef<Sender>);
+			this._Forwarder = default(EntityRef<Forwarder>);
 			this._State = default(EntityRef<State>);
 			this._Transit = default(EntityRef<Transit>);
 			OnCreated();
@@ -4833,6 +4840,30 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForwarderId", DbType="BigInt")]
+		public long ForwarderId
+		{
+			get
+			{
+				return this._ForwarderId;
+			}
+			set
+			{
+				if ((this._ForwarderId != value))
+				{
+					if (this._Forwarder.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnForwarderIdChanging(value);
+					this.SendPropertyChanging();
+					this._ForwarderId = value;
+					this.SendPropertyChanged("ForwarderId");
+					this.OnForwarderIdChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactoryName", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
 		public string FactoryName
 		{
@@ -5245,6 +5276,24 @@ namespace Alicargo.DataAccess.DbContext
 						this._SenderId = default(long);
 					}
 					this.SendPropertyChanged("Sender");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Forwarder_Application", Storage="_Forwarder", ThisKey="ForwarderId", OtherKey="Id", IsForeignKey=true)]
+		public Forwarder Forwarder
+		{
+			get
+			{
+				return this._Forwarder.Entity;
+			}
+			set
+			{
+				if ((this._Forwarder.Entity != value))
+				{
+					this.SendPropertyChanging();
+					this._Forwarder.Entity = value;
+					this.SendPropertyChanged("Forwarder");
 				}
 			}
 		}

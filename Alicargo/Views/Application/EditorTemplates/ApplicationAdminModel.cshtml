@@ -39,7 +39,9 @@
 	</div>
 	<div class="span4">
 		@Html.LabelFor(x => x.SenderId)
-		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long, string>)ViewBag.Senders, "")
+		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long, string>)ViewBag.Senders)
+		@Html.LabelFor(x => x.ForwarderId)
+		@Html.DropDownListFor(x => x.ForwarderId, (IDictionary<long, string>)ViewBag.Forwarders)
 	</div>
 	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)

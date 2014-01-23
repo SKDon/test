@@ -10,9 +10,11 @@
 		public const long CargoIsFlewStateId = 7;
 		public const long CargoReceivedStateId = 11;
 		public const long TestTransitId = 1;
-		public const long TestCountryId = 1;
+		public const long TestCountryId = 108;
 		public const long TestApplicationId = 1;
 		public const long TestSenderId = 1;
+		public const long TestForwarderId1 = 1;
+		public const long TestForwarderId2 = 2;
 		public const long TestCarrierId1 = 1;
 		public const long TestCityId1 = 1;
 		public const long TestCarrierId2 = 2;

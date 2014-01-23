@@ -11,31 +11,36 @@ namespace Alicargo.ViewModels.Application
 			Currency = new CurrencyModel();
 		}
 
-		[Required, DisplayNameLocalized(typeof (Entities), "FactoryName")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Mark")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Mark")]
 		public string MarkName { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Invoice")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Invoice")]
 		public string Invoice { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Weight")]
+		[DisplayNameLocalized(typeof(Entities), "Weight")]
 		public float? Weight { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Count")]
+		[DisplayNameLocalized(typeof(Entities), "Count")]
 		public int? Count { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "Volume"), Required]
+		[DisplayNameLocalized(typeof(Entities), "Volume")]
+		[Required]
 		public float Volume { get; set; }
 
-		[Required, DisplayNameLocalized(typeof (Entities), "Value")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Value")]
 		public CurrencyModel Currency { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "FactureCost")]
+		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
 		public decimal? FactureCost { get; set; }
 
-		[DisplayNameLocalized(typeof (Entities), "PickupCost")]
+		[DisplayNameLocalized(typeof(Entities), "PickupCost")]
 		public decimal? PickupCost { get; set; }
 	}
 }

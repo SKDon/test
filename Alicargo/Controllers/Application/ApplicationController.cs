@@ -19,6 +19,7 @@ namespace Alicargo.Controllers.Application
 	{
 		private readonly IApplicationManager _applicationManager;
 		private readonly IApplicationPresenter _applicationPresenter;
+		private readonly IForwarderRepository _forwarders;
 		private readonly IIdentityService _identity;
 		private readonly ICountryRepository _countries;
 		private readonly IApplicationRepository _applications;
@@ -28,6 +29,7 @@ namespace Alicargo.Controllers.Application
 		public ApplicationController(
 			IApplicationManager applicationManager,
 			IApplicationPresenter applicationPresenter,
+			IForwarderRepository forwarders,
 			IIdentityService identity,
 			ICountryRepository countries,
 			IApplicationRepository applications,
@@ -36,6 +38,7 @@ namespace Alicargo.Controllers.Application
 		{
 			_applicationManager = applicationManager;
 			_applicationPresenter = applicationPresenter;
+			_forwarders = forwarders;
 			_identity = identity;
 			_countries = countries;
 			_applications = applications;
@@ -70,6 +73,8 @@ namespace Alicargo.Controllers.Application
 			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 
 			ViewBag.Senders = _senders.GetAll().OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
+
+			ViewBag.Forwarders = _forwarders.GetAll().OrderBy(x => x.Name).ToDictionary(x => x.Id, x => x.Name);
 		}
 
 		#region Edit
@@ -96,6 +101,7 @@ namespace Alicargo.Controllers.Application
 			if (!ModelState.IsValid)
 			{
 				var clientId = _applications.GetClientId(id);
+
 				BindBag(clientId, id, model.Count);
 
 				return View(model);
@@ -138,6 +144,8 @@ namespace Alicargo.Controllers.Application
 			catch (DublicateException ex)
 			{
 				ModelState.AddModelError("DublicateException", ex.ToString());
+
+				BindBag(clientId, null);
 
 				return View(model);
 			}

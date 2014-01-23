@@ -53,35 +53,36 @@ namespace Alicargo.TestHelpers
 			foreach (RoleType item in Enum.GetValues(typeof(RoleType)))
 			{
 				var item1 = item;
-				identityService.Setup(x => x.IsInRole(item1)).Returns(false);
-				switch(item)
-				{
-					case RoleType.Admin:
-						identityService.Setup(x => x.Id).Returns(TestConstants.TestAdminUserId);
-						break;
-
-					case RoleType.Sender:
-						identityService.Setup(x => x.Id).Returns(TestConstants.TestSenderUserId);
-						break;
-
-					case RoleType.Broker:
-						break;
-
-					case RoleType.Forwarder:
-						break;
-
-					case RoleType.Client:
-						identityService.Setup(x => x.Id).Returns(TestConstants.TestClientUserId);
-						break;
-
-					default:
-						throw new ArgumentOutOfRangeException();
-				}
+				identityService.Setup(x => x.IsInRole(item1)).Returns(false);			
 			}
 
 			identityService.Setup(x => x.IsInRole(_type)).Returns(true);
 
 			identityService.Setup(x => x.Language).Returns(TwoLetterISOLanguageName.English);
+
+			switch(_type)
+			{
+				case RoleType.Admin:
+					identityService.Setup(x => x.Id).Returns(TestConstants.TestAdminUserId);
+					break;
+
+				case RoleType.Sender:
+					identityService.Setup(x => x.Id).Returns(TestConstants.TestSenderUserId);
+					break;
+
+				case RoleType.Broker:
+					break;
+
+				case RoleType.Forwarder:
+					break;
+
+				case RoleType.Client:
+					identityService.Setup(x => x.Id).Returns(TestConstants.TestClientUserId);
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 
 			Kernel.Rebind<IIdentityService>().ToConstant(identityService.Object).InSingletonScope();
 		}

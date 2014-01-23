@@ -33,6 +33,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
 		public long SenderId { get; set; }
+		public long ForwarderId { get; set; }
 		public ClassType? Class { get; set; }
 
 		public decimal? FactureCost { get; set; }

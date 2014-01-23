@@ -14,7 +14,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		public ApplicationUpdateRepository(IUnitOfWork unitOfWork)
 		{
-			_context = (AlicargoDataContext) unitOfWork.Context;
+			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
 		public Func<long> Add(ApplicationData application)
@@ -105,19 +105,12 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		public void Update(ApplicationData application)
 		{
-			Update(application.Id, entity =>
-				CopyTo(application, entity));
-		}
-
-		private void Update(long id, Action<DbContext.Application> action)
-		{
-			var application = _context.Applications.First(x => x.Id == id);
-			action(application);
+			Update(application.Id, entity => CopyTo(application, entity));
 		}
 
 		private static void CopyTo(ApplicationData from, DbContext.Application to)
 		{
-			if (to.Id == 0)
+			if(to.Id == 0)
 			{
 				to.Id = @from.Id;
 				to.CreationTimestamp = @from.CreationTimestamp;
@@ -145,6 +138,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.AirWaybillId = @from.AirWaybillId;
 			to.CountryId = @from.CountryId;
 			to.SenderId = from.SenderId;
+			to.ForwarderId = from.ForwarderId;
 
 			to.FactoryName = @from.FactoryName;
 			to.FactoryPhone = @from.FactoryPhone;
@@ -161,7 +155,14 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.TransitCostEdited = @from.TransitCostEdited;
 			to.PickupCostEdited = @from.PickupCostEdited;
 			to.ScotchCostEdited = @from.ScotchCostEdited;
-			to.SenderRate = @from.SenderRate;			
+			to.SenderRate = @from.SenderRate;
+		}
+
+		private void Update(long id, Action<DbContext.Application> action)
+		{
+			var application = _context.Applications.First(x => x.Id == id);
+
+			action(application);
 		}
 	}
 }

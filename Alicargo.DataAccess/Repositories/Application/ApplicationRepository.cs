@@ -64,7 +64,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				TransitCostEdited = x.TransitCostEdited,
 				ScotchCostEdited = x.ScotchCostEdited,
 				PickupCostEdited = x.PickupCostEdited,
-				SenderId = x.SenderId
+				SenderId = x.SenderId,
+				ForwarderId = x.ForwarderId
 			};
 		}
 

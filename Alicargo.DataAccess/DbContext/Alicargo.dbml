@@ -214,6 +214,7 @@
       <Column Name="CountryId" Type="System.Int64" DbType="BigInt" CanBeNull="false" />
       <Column Name="AirWaybillId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="SenderId" Type="System.Int64" DbType="BigInt" CanBeNull="false" />
+      <Column Name="ForwarderId" Type="System.Int64" DbType="BigInt" CanBeNull="false" />
       <Column Name="FactoryName" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Column Name="FactoryPhone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="FactoryContact" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
@@ -232,6 +233,7 @@
       <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
       <Association Name="Country_Application" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
       <Association Name="Sender_Application" Member="Sender" ThisKey="SenderId" OtherKey="Id" Type="Sender" IsForeignKey="true" />
+      <Association Name="Forwarder_Application" Member="Forwarder" ThisKey="ForwarderId" OtherKey="Id" Type="Forwarder" IsForeignKey="true" />
       <Association Name="State_Application" Member="State" ThisKey="StateId" OtherKey="Id" Type="State" IsForeignKey="true" />
       <Association Name="Transit_Application" Member="Transit" ThisKey="TransitId" OtherKey="Id" Type="Transit" IsForeignKey="true" />
     </Type>

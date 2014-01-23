@@ -109,6 +109,7 @@
     <Compile Include="Email\SilentMailSender.cs" />
     <Compile Include="State\StateConfig.cs" />
     <Compile Include="State\StateFilter.cs" />
+    <Compile Include="Users\ForwarderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Core.Contracts\Alicargo.Core.Contracts.csproj">

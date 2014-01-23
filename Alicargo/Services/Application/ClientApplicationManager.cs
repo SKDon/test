@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts.State;
+using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -13,15 +15,17 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class ClientApplicationManager : IClientApplicationManager
 	{
-		private readonly IApplicationUpdateRepository _updater;
-		private readonly ISenderRepository _senders;
 		private readonly IApplicationRepository _applications;
 		private readonly IStateConfig _config;
+		private readonly IForwarderService _forwarders;
+		private readonly ISenderRepository _senders;
 		private readonly ITransitService _transits;
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IApplicationUpdateRepository _updater;
 
 		public ClientApplicationManager(
 			IApplicationRepository applications,
+			IForwarderService forwarders,
 			IApplicationUpdateRepository updater,
 			ISenderRepository senders,
 			IStateConfig config,
@@ -29,6 +33,7 @@ namespace Alicargo.Services.Application
 			IUnitOfWork unitOfWork)
 		{
 			_applications = applications;
+			_forwarders = forwarders;
 			_updater = updater;
 			_senders = senders;
 			_config = config;
@@ -36,14 +41,40 @@ namespace Alicargo.Services.Application
 			_unitOfWork = unitOfWork;
 		}
 
-		public void Update(long applicationId, ApplicationClientModel model, CarrierSelectModel carrierModel,
+		public long Add(
+			ApplicationClientModel model,
+			CarrierSelectModel carrierModel,
+			TransitEditModel transitModel,
+			long clientId)
+		{
+			var transitId = _transits.AddTransit(transitModel, carrierModel);
+
+			var forwarder = _forwarders.GetByCityOrDefault(transitModel.CityId);
+
+			var senderId = GetSenderId(model.CountryId);
+
+			var data = GetNewApplicationData(model, clientId, transitId, senderId, forwarder.Id);
+
+			var id = _updater.Add(data);
+
+			_unitOfWork.SaveChanges();
+
+			return id();
+		}
+
+		public void Update(
+			long applicationId,
+			ApplicationClientModel model,
+			CarrierSelectModel carrierModel,
 			TransitEditModel transitModel)
 		{
 			var data = _applications.Get(applicationId);
 
 			_transits.Update(data.TransitId, transitModel, carrierModel);
 
-			Map(model, data);
+			var forwarder = _forwarders.GetByCityOrDefault(transitModel.CityId);
+
+			Map(model, data, forwarder.Id);
 
 			_updater.Update(data);
 
@@ -86,44 +117,8 @@ namespace Alicargo.Services.Application
 			};
 		}
 
-		public long Add(ApplicationClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-			long clientId)
-		{
-			var transitId = _transits.AddTransit(transitModel, carrierModel);
-
-			var senders = _senders.GetByCountry(model.CountryId);
-
-			var data = GetNewApplicationData(model, clientId, transitId, senders.First());
-
-			var id = _updater.Add(data);
-
-			_unitOfWork.SaveChanges();
-
-			return id();
-		}
-
-		private static void Map(ApplicationClientModel @from, ApplicationData to)
-		{
-			to.Invoice = @from.Invoice;
-			to.Characteristic = @from.Characteristic;
-			to.AddressLoad = @from.AddressLoad;
-			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
-			to.Weight = @from.Weight;
-			to.Count = @from.Count;
-			to.Volume = @from.Volume;
-			to.TermsOfDelivery = @from.TermsOfDelivery;
-			to.Value = @from.Currency.Value;
-			to.CurrencyId = @from.Currency.CurrencyId;
-			to.CountryId = @from.CountryId;
-			to.FactoryName = @from.FactoryName;
-			to.FactoryPhone = @from.FactoryPhone;
-			to.FactoryEmail = @from.FactoryEmail;
-			to.FactoryContact = @from.FactoryContact;
-			to.MarkName = @from.MarkName;
-			to.MethodOfDelivery = @from.MethodOfDelivery;
-		}
-
-		private ApplicationData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId, long senderId)
+		private ApplicationData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId,
+			long senderId, long forwarderId)
 		{
 			return new ApplicationData
 			{
@@ -164,8 +159,43 @@ namespace Alicargo.Services.Application
 				TransitCostEdited = null,
 				PickupCostEdited = null,
 				SenderId = senderId,
-				SenderRate = null
+				SenderRate = null,
+				ForwarderId = forwarderId
 			};
+		}
+
+		private long GetSenderId(long countryId)
+		{
+			var id = _senders.GetByCountry(countryId).FirstOrDefault();
+
+			if(id == 0)
+			{
+				return _senders.GetAll().First().EntityId;
+			}
+
+			throw new InvalidLogicException("Can't find a sender");
+		}
+
+		private static void Map(ApplicationClientModel @from, ApplicationData to, long forwarderId)
+		{
+			to.Invoice = @from.Invoice;
+			to.Characteristic = @from.Characteristic;
+			to.AddressLoad = @from.AddressLoad;
+			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
+			to.Weight = @from.Weight;
+			to.Count = @from.Count;
+			to.Volume = @from.Volume;
+			to.TermsOfDelivery = @from.TermsOfDelivery;
+			to.Value = @from.Currency.Value;
+			to.CurrencyId = @from.Currency.CurrencyId;
+			to.CountryId = @from.CountryId;
+			to.FactoryName = @from.FactoryName;
+			to.FactoryPhone = @from.FactoryPhone;
+			to.FactoryEmail = @from.FactoryEmail;
+			to.FactoryContact = @from.FactoryContact;
+			to.MarkName = @from.MarkName;
+			to.MethodOfDelivery = @from.MethodOfDelivery;
+			to.ForwarderId = forwarderId;
 		}
 	}
 }
