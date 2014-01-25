@@ -3,7 +3,7 @@ using Alicargo.DataAccess.Contracts.Repositories;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	internal sealed class CountryRepository : ICountryRepository
+	public sealed class CountryRepository : ICountryRepository
 	{
 		private readonly ISqlProcedureExecutor _executor;
 

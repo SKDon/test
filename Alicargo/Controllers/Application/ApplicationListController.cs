@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -50,10 +49,9 @@ namespace Alicargo.Controllers.Application
 
 			var isForwarder = _identity.IsInRole(RoleType.Forwarder);
 
-			var data = _applicationPresenter.List(take, skip, orders, client != null
+			var data = _applicationPresenter.List(_identity.Language, take, skip, orders, client != null
 				? client.ClientId
-				: (long?) null, senderId,
-				isForwarder);
+				: (long?) null, senderId, isForwarder);
 
 			return Json(data);
 		}

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Application;
@@ -42,7 +43,7 @@ namespace Alicargo.Tests.Services.Application
 			var data = _context.CreateMany<ApplicationListItemData>().ToArray();
 			var map = _context.CreateMany<ApplicationListItem>().ToArray();
 			_context.StateService.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
-			_context.ApplicationListItemMapper.Setup(x => x.Map(data)).Returns(map);
+			_context.ApplicationListItemMapper.Setup(x => x.Map(data, TwoLetterISOLanguageName.English)).Returns(map);
 			const int cargoReceivedDaysToShow = 10;
 			_context.StateConfig.Setup(x => x.CargoReceivedDaysToShow).Returns(cargoReceivedDaysToShow);
 			_context.ApplicationGrouper.Setup(x => x.Group(map, new[] { OrderType.LegalEntity }))
@@ -52,13 +53,13 @@ namespace Alicargo.Tests.Services.Application
 					x.List(_stateIds, _orders, 0, 0, clientId, null, null, null, cargoReceivedDaysToShow))
 				.Returns(data);
 
-			var collection = _service.List(0, 0, _orders, clientId);
+			var collection = _service.List(TwoLetterISOLanguageName.English, 0, 0, _orders, clientId);
 
 			collection.Data.Should().BeNull();
 			collection.Groups.Should().NotBeNull();
 
 			_context.StateService.Verify(x => x.GetStateVisibility(), Times.Once());
-			_context.ApplicationListItemMapper.Verify(x => x.Map(data));
+			_context.ApplicationListItemMapper.Verify(x => x.Map(data, TwoLetterISOLanguageName.English));
 			_context.ApplicationGrouper.Verify(x => x.Group(map, new[] { OrderType.LegalEntity }), Times.Once());
 			_context.ApplicationRepository.Verify(x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedDaysToShow), Times.Once());
 			_context.ApplicationRepository.Verify(x =>

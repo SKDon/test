@@ -19,25 +19,31 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 	{
 		private readonly IClientBalanceRepository _balance;
 		private readonly Jobs.Helpers.Abstract.ITextBuilder _bulder;
+		private readonly ICityRepository _cities;
+		private readonly ICountryRepository _countries;
 		private readonly IApplicationFileRepository _files;
 		private readonly ISerializer _serializer;
 		private readonly IStateRepository _states;
 
 		public TextBuilder(
 			ISerializer serializer,
+			ICountryRepository countries,
+			ICityRepository cities,
 			IStateRepository states,
 			IApplicationFileRepository files,
 			IClientBalanceRepository balance,
 			Jobs.Helpers.Abstract.ITextBuilder bulder)
 		{
 			_serializer = serializer;
+			_countries = countries;
+			_cities = cities;
 			_states = states;
 			_files = files;
 			_balance = balance;
 			_bulder = bulder;
 		}
 
-		public string GetText(string template, string language, EventType type, ApplicationDetailsData application,
+		public string GetText(string template, string language, EventType type, ApplicationListItemData application,
 			byte[] bytes)
 		{
 			var data = GetTextLocalizedData(type, application, language, bytes);
@@ -45,8 +51,20 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return _bulder.GetText(template, language, data);
 		}
 
+		private static void Add(IDictionary<string, string> localizedData, string key, string value)
+		{
+			if(localizedData.ContainsKey(key))
+			{
+				localizedData[key] = value;
+			}
+			else
+			{
+				localizedData.Add(key, value);
+			}
+		}
+
 		private IDictionary<string, string> GetTextLocalizedData(EventType type,
-			ApplicationDetailsData application, string language, byte[] bytes)
+			ApplicationListItemData application, string language, byte[] bytes)
 		{
 			var culture = CultureInfo.GetCultureInfo(language);
 
@@ -88,6 +106,73 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return localizedData;
 		}
 
+		private IDictionary<string, string> GetTextLocalizedData(ApplicationListItemData application, string language,
+			CultureInfo culture)
+		{
+			var state = _states.Get(language, application.StateId).Select(x => x.Value).FirstOrDefault();
+			var countryName = _countries.All(language).First(x => x.Id == application.CountryId).Name;
+			var cityName = _cities.All(language).First(x => x.Id == application.TransitCityId).Name;
+			var value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, culture);
+
+			var deliveryBill = _files.GetNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Value).ToArray();
+			var invoice = _files.GetNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Value).ToArray();
+			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
+			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
+			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
+
+			var localizedData = new Dictionary<string, string>();
+			Add(localizedData, "AddressLoad", application.AddressLoad);
+			Add(localizedData, "FactoryName", application.FactoryName);
+			Add(localizedData, "Id", application.Id.ToString(culture));
+			Add(localizedData, "Count", application.Count.HasValue ? application.Count.Value.ToString(culture) : null);
+			Add(localizedData, "MarkName", application.MarkName);
+			Add(localizedData, "Invoice", application.Invoice);
+			Add(localizedData, "CountryName", countryName);
+			Add(localizedData, "CreationTimestamp", LocalizationHelper.GetDate(application.CreationTimestamp, culture));
+			Add(localizedData, "Value", value);
+			Add(localizedData, "Weight", application.Weight.HasValue ? application.Weight.Value.ToString(culture) : null);
+			Add(localizedData, "AirWaybill", application.AirWaybill);
+			Add(localizedData, "AirWaybillDateOfArrival",
+				LocalizationHelper.GetDate(application.AirWaybillDateOfArrival, culture));
+			Add(localizedData, "AirWaybillDateOfDeparture",
+				LocalizationHelper.GetDate(application.AirWaybillDateOfDeparture, culture));
+			Add(localizedData, "AirWaybillGTD", application.AirWaybillGTD);
+			Add(localizedData, "Characteristic", application.Characteristic);
+			Add(localizedData, "ClientNic", application.ClientNic);
+			Add(localizedData, "DateOfCargoReceipt", LocalizationHelper.GetDate(application.DateOfCargoReceipt, culture));
+			Add(localizedData, "DaysInWork", ApplicationHelper.GetDaysInWork(application.CreationTimestamp).ToString(culture));
+			Add(localizedData, "DeliveryBillFiles", string.Join(", ", deliveryBill));
+			Add(localizedData, "DeliveryType",
+				LocalizationHelper.GetDeliveryType(application.TransitDeliveryType, culture));
+			Add(localizedData, "DisplayNumber", ApplicationHelper.GetDisplayNumber(application.Id, application.Count));
+			Add(localizedData, "FactoryContact", application.FactoryContact);
+			Add(localizedData, "FactoryEmail", application.FactoryEmail);
+			Add(localizedData, "FactoryPhone", application.FactoryPhone);
+			Add(localizedData, "InvoiceFiles", string.Join(", ", invoice));
+			Add(localizedData, "LegalEntity", application.ClientLegalEntity);
+			Add(localizedData, "MethodOfDelivery",
+				LocalizationHelper.GetMethodOfDelivery((MethodOfDelivery)application.MethodOfDeliveryId, culture));
+			Add(localizedData, "MethodOfTransit",
+				LocalizationHelper.GetMethodOfTransit(application.TransitMethodOfTransit, culture));
+			Add(localizedData, "PackingFiles", string.Join(", ", packing));
+			Add(localizedData, "StateChangeTimestamp", LocalizationHelper.GetDate(application.StateChangeTimestamp, culture));
+			Add(localizedData, "StateName", state != null ? state.LocalizedName : null);
+			Add(localizedData, "SwiftFiles", string.Join(", ", swift));
+			Add(localizedData, "TermsOfDelivery", application.TermsOfDelivery);
+			Add(localizedData, "Torg12Files", string.Join(", ", torg12));
+			Add(localizedData, "TransitAddress", application.TransitAddress);
+			Add(localizedData, "TransitCarrierName", application.TransitCarrierName);
+			Add(localizedData, "TransitCity", cityName);
+			Add(localizedData, "TransitPhone", application.TransitPhone);
+			Add(localizedData, "TransitRecipientName", application.TransitRecipientName);
+			Add(localizedData, "TransitReference", application.TransitReference);
+			Add(localizedData, "TransitWarehouseWorkingTime", application.TransitWarehouseWorkingTime);
+			Add(localizedData, "Volume", application.Volume.ToString("N2", culture));
+			Add(localizedData, "WarehouseWorkingTime", application.WarehouseWorkingTime);
+
+			return localizedData;
+		}
+
 		private void OnCalculation(byte[] bytes, CultureInfo culture, IDictionary<string, string> localizedData)
 		{
 			var calculation = _serializer.Deserialize<CalculationData>(bytes);
@@ -123,84 +208,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			var dateOfCargoReceipt = _serializer.Deserialize<DateTimeOffset?>(bytes);
 
 			Add(localizedData, "DateOfCargoReceipt", LocalizationHelper.GetDate(dateOfCargoReceipt, culture));
-		}
-
-		private IDictionary<string, string> GetTextLocalizedData(ApplicationDetailsData application, string language,
-			CultureInfo culture)
-		{
-			var state = _states.Get(language, application.StateId).Select(x => x.Value).FirstOrDefault();
-			var countryName = application.CountryName.First(x => x.Key == language).Value;
-			var value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, culture);
-
-			var deliveryBill = _files.GetNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Value).ToArray();
-			var invoice = _files.GetNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Value).ToArray();
-			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
-			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
-			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
-
-			var localizedData = new Dictionary<string, string>();
-			Add(localizedData, "AddressLoad", application.AddressLoad);
-			Add(localizedData, "FactoryName", application.FactoryName);
-			Add(localizedData, "Id", application.Id.ToString(culture));
-			Add(localizedData, "Count", application.Count.HasValue ? application.Count.Value.ToString(culture) : null);
-			Add(localizedData, "MarkName", application.MarkName);
-			Add(localizedData, "Invoice", application.Invoice);
-			Add(localizedData, "CountryName", countryName);
-			Add(localizedData, "CreationTimestamp", LocalizationHelper.GetDate(application.CreationTimestamp, culture));
-			Add(localizedData, "Value", value);
-			Add(localizedData, "Weight", application.Weight.HasValue ? application.Weight.Value.ToString(culture) : null);
-			Add(localizedData, "AirWaybill", application.AirWaybill);
-			Add(localizedData, "AirWaybillDateOfArrival",
-				LocalizationHelper.GetDate(application.AirWaybillDateOfArrival, culture));
-			Add(localizedData, "AirWaybillDateOfDeparture",
-				LocalizationHelper.GetDate(application.AirWaybillDateOfDeparture, culture));
-			Add(localizedData, "AirWaybillGTD", application.AirWaybillGTD);
-			Add(localizedData, "Characteristic", application.Characteristic);
-			Add(localizedData, "ClientNic", application.ClientNic);
-			Add(localizedData, "DateOfCargoReceipt", LocalizationHelper.GetDate(application.DateOfCargoReceipt, culture));
-			Add(localizedData, "DaysInWork", ApplicationHelper.GetDaysInWork(application.CreationTimestamp).ToString(culture));
-			Add(localizedData, "DeliveryBillFiles", string.Join(", ", deliveryBill));
-			Add(localizedData, "DeliveryType",
-				LocalizationHelper.GetDeliveryType((DeliveryType)application.TransitDeliveryTypeId, culture));
-			Add(localizedData, "DisplayNumber", ApplicationHelper.GetDisplayNumber(application.Id, application.Count));
-			Add(localizedData, "FactoryContact", application.FactoryContact);
-			Add(localizedData, "FactoryEmail", application.FactoryEmail);
-			Add(localizedData, "FactoryPhone", application.FactoryPhone);
-			Add(localizedData, "InvoiceFiles", string.Join(", ", invoice));
-			Add(localizedData, "LegalEntity", application.ClientLegalEntity);
-			Add(localizedData, "MethodOfDelivery",
-				LocalizationHelper.GetMethodOfDelivery((MethodOfDelivery)application.MethodOfDeliveryId, culture));
-			Add(localizedData, "MethodOfTransit",
-				LocalizationHelper.GetMethodOfTransit((MethodOfTransit)application.TransitMethodOfTransitId, culture));
-			Add(localizedData, "PackingFiles", string.Join(", ", packing));
-			Add(localizedData, "StateChangeTimestamp", LocalizationHelper.GetDate(application.StateChangeTimestamp, culture));
-			Add(localizedData, "StateName", state != null ? state.LocalizedName : null);
-			Add(localizedData, "SwiftFiles", string.Join(", ", swift));
-			Add(localizedData, "TermsOfDelivery", application.TermsOfDelivery);
-			Add(localizedData, "Torg12Files", string.Join(", ", torg12));
-			Add(localizedData, "TransitAddress", application.TransitAddress);
-			Add(localizedData, "TransitCarrierName", application.TransitCarrierName);
-			Add(localizedData, "TransitCity", application.TransitCity);
-			Add(localizedData, "TransitPhone", application.TransitPhone);
-			Add(localizedData, "TransitRecipientName", application.TransitRecipientName);
-			Add(localizedData, "TransitReference", application.TransitReference);
-			Add(localizedData, "TransitWarehouseWorkingTime", application.TransitWarehouseWorkingTime);
-			Add(localizedData, "Volume", application.Volume.ToString("N2", culture));
-			Add(localizedData, "WarehouseWorkingTime", application.WarehouseWorkingTime);
-
-			return localizedData;
-		}
-
-		private static void Add(IDictionary<string, string> localizedData, string key, string value)
-		{
-			if(localizedData.ContainsKey(key))
-			{
-				localizedData[key] = value;
-			}
-			else
-			{
-				localizedData.Add(key, value);
-			}
 		}
 
 		private void OnSetState(byte[] bytes, string language, IDictionary<string, string> templateData)

@@ -8,7 +8,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
     {
         ApplicationData Get(long id);
         
-		ApplicationDetailsData GetDetails(long id);
+		ApplicationListItemData GetDetails(long id);
         
 		ApplicationData[] GetByAirWaybill(params long[] ids);
 

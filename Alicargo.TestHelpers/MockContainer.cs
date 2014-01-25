@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Common;
@@ -41,14 +40,8 @@ namespace Alicargo.TestHelpers
 				.With(x => x.Culture, TwoLetterISOLanguageName.English)
 				.Create());
 
-			Fixture.Register(() => Fixture.Build<ApplicationDetailsData>()
+			Fixture.Register(() => Fixture.Build<ApplicationListItemData>()
 				.With(x => x.CurrencyId, 1)
-				.With(x => x.CountryName, new[]
-				{
-					new KeyValuePair<string, string>(TwoLetterISOLanguageName.English, Fixture.Create<string>()),
-					new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, Fixture.Create<string>()),
-					new KeyValuePair<string, string>(TwoLetterISOLanguageName.Italian, Fixture.Create<string>())
-				})
 				.Create());
 
 			Fixture.Register(() => Fixture.Build<AwbAdminModel>()

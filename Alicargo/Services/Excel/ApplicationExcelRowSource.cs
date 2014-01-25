@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web;
 using Alicargo.Core.AirWaybill;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Helpers;
@@ -11,7 +10,6 @@ using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel.Rows;
 using Alicargo.ViewModels.Application;
-using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Excel
 {
@@ -37,27 +35,27 @@ namespace Alicargo.Services.Excel
 			_itemMapper = itemMapper;
 		}
 
-		public AdminApplicationExcelRow[] GetAdminApplicationExcelRow()
+		public AdminApplicationExcelRow[] GetAdminApplicationExcelRow(string language)
 		{
-			var items = GetApplicationListItems(false);
+			var items = GetApplicationListItems(false, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
 			return items.Select(x => new AdminApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow()
+		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow(string language)
 		{
-			var items = GetApplicationListItems(true);
+			var items = GetApplicationListItems(true, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
 			return items.Select(x => new ForwarderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		public SenderApplicationExcelRow[] GetSenderApplicationExcelRow()
+		public SenderApplicationExcelRow[] GetSenderApplicationExcelRow(string language)
 		{
-			var items = GetApplicationListItems(false);
+			var items = GetApplicationListItems(false, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
@@ -71,7 +69,7 @@ namespace Alicargo.Services.Excel
 					   .FirstOrDefault();
 		}
 
-		private ApplicationListItem[] GetApplicationListItems(bool isForwarder)
+		private ApplicationListItem[] GetApplicationListItems(bool isForwarder, string language)
 		{
 			var stateIds = _stateFilter.GetStateVisibility();
 
@@ -92,7 +90,7 @@ namespace Alicargo.Services.Excel
 
 			data = withoutAwb.Concat(withAwb).ToArray();
 
-			return _itemMapper.Map(data);
+			return _itemMapper.Map(data, language);
 		}
 	}
 }

@@ -13,31 +13,30 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationGrouper _grouper;
-		private readonly IApplicationListItemMapper _itemMapper;
+		private readonly IApplicationListItemMapper _mapper;
 		private readonly IStateFilter _stateFilter;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListPresenter(
 			IApplicationRepository applications,
-			IApplicationListItemMapper itemMapper,
+			IApplicationListItemMapper mapper,
 			IStateFilter stateFilter,
 			IStateConfig stateConfig,
 			IApplicationGrouper grouper)
 		{
 			_applications = applications;
-			_itemMapper = itemMapper;
+			_mapper = mapper;
 			_stateFilter = stateFilter;
 			_stateConfig = stateConfig;
 			_grouper = grouper;
 		}
 
-		public ApplicationListCollection List(int? take = null, int skip = 0, Order[] groups = null,
-			long? clientId = null, long? senderId = null, bool? isForwarder = null)
+		public ApplicationListCollection List(string language, int? take = null, int skip = 0, Order[] groups = null, long? clientId = null, long? senderId = null, bool? isForwarder = null)
 		{
 			long total;
 			var data = GetList(take, skip, groups, clientId, senderId, isForwarder, out total);
 
-			var applications = _itemMapper.Map(data);
+			var applications = _mapper.Map(data, language);
 
 			if (groups == null || groups.Length == 0)
 				return new ApplicationListCollection

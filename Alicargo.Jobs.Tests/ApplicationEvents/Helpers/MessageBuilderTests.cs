@@ -26,7 +26,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 		public void Test_SetStateForNotClient()
 		{
 			const EventType eventType = EventType.ApplicationSetState;
-			var applicationDetailsData = _container.Create<ApplicationDetailsData>();
+			var applicationDetailsData = _container.Create<ApplicationListItemData>();
 			var eventDataForEntity = _container.Create<EventDataForEntity>();
 			var eventData = _container.Create<EventData>();
 			var recipientData = new RecipientData(_container.Create<string>(), _container.Create<string>(), RoleType.Broker);

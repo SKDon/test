@@ -4,8 +4,8 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IApplicationExcelRowSource
 	{
-		AdminApplicationExcelRow[] GetAdminApplicationExcelRow();
-		ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow();
-		SenderApplicationExcelRow[] GetSenderApplicationExcelRow();
+		AdminApplicationExcelRow[] GetAdminApplicationExcelRow(string language);
+		ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow(string language);
+		SenderApplicationExcelRow[] GetSenderApplicationExcelRow(string language);
 	}
 }

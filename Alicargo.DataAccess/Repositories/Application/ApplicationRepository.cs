@@ -16,6 +16,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 	public sealed class ApplicationRepository : IApplicationRepository
 	{
 		private readonly AlicargoDataContext _context;
+		private readonly Expression<Func<DbContext.Application, ApplicationListItemData>> _extendedSelector;
 		private readonly IApplicationRepositoryOrderer _orderer;
 		private readonly Expression<Func<DbContext.Application, ApplicationData>> _selector;
 
@@ -24,6 +25,65 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context = (AlicargoDataContext)unitOfWork.Context;
 
 			_orderer = new ApplicationRepositoryOrderer();
+
+			_extendedSelector = x => new ApplicationListItemData
+			{
+				AddressLoad = x.AddressLoad,
+				Id = x.Id,
+				FactoryName = x.FactoryName,
+				Invoice = x.Invoice,
+				MarkName = x.MarkName,
+				Volume = x.Volume,
+				Count = x.Count,
+				AirWaybill = x.AirWaybill.Bill,
+				Characteristic = x.Characteristic,
+				ClientLegalEntity = x.Client.LegalEntity,
+				ClientId = x.ClientId,
+				ClientNic = x.Client.Nic,
+				CountryId = x.CountryId,
+				ClassId = x.ClassId,
+				CreationTimestamp = x.CreationTimestamp,
+				DateInStock = x.DateInStock,
+				DateOfCargoReceipt = x.DateOfCargoReceipt,
+				FactoryContact = x.FactoryContact,
+				FactoryEmail = x.FactoryEmail,
+				FactoryPhone = x.FactoryPhone,
+				StateChangeTimestamp = x.StateChangeTimestamp,
+				StateId = x.StateId,
+				TermsOfDelivery = x.TermsOfDelivery,
+				TransitId = x.TransitId,
+				TransitAddress = x.Transit.Address,
+				TransitCarrierName = x.Transit.Carrier.Name,
+				TransitCityId = x.Transit.CityId,
+				TransitDeliveryType = (DeliveryType)x.Transit.DeliveryTypeId,
+				TransitMethodOfTransit = (MethodOfTransit)x.Transit.MethodOfTransitId,
+				TransitPhone = x.Transit.Phone,
+				TransitRecipientName = x.Transit.RecipientName,
+				TransitReference = x.TransitReference,
+				TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
+				WarehouseWorkingTime = x.WarehouseWorkingTime,
+				Weight = x.Weight,
+				MethodOfDeliveryId = x.MethodOfDeliveryId,
+				Value = x.Value,
+				CurrencyId = x.CurrencyId,
+				AirWaybillId = x.AirWaybillId,
+				FactureCost = x.FactureCostEdited ?? x.FactureCost,
+				SenderFactureCost = x.FactureCost,
+				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
+				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
+				TariffPerKg = x.TariffPerKg,
+				TransitCost = x.TransitCostEdited ?? x.TransitCost,
+				ForwarderTransitCost = x.TransitCost,
+				PickupCost = x.PickupCostEdited ?? x.PickupCost,
+				SenderPickupCost = x.PickupCost,
+				SenderRate = x.SenderRate,
+				SenderId = x.SenderId,
+				AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
+				AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
+				AirWaybillGTD = x.AirWaybill.GTD,
+				ClientEmail = x.Client.Emails,
+				ClientUserId = x.Client.UserId
+			};
 
 			_selector = x => new ApplicationData
 			{
@@ -90,59 +150,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			if(take.HasValue)
 				applications = applications.Take(take.Value);
 
-			return applications.Select(x => new ApplicationListItemData
-			{
-				AddressLoad = x.AddressLoad,
-				Id = x.Id,
-				FactoryName = x.FactoryName,
-				Invoice = x.Invoice,
-				MarkName = x.MarkName,
-				Volume = x.Volume,
-				Count = x.Count,
-				AirWaybill = x.AirWaybill.Bill,
-				Characteristic = x.Characteristic,
-				ClientLegalEntity = x.Client.LegalEntity,
-				ClientId = x.ClientId,
-				ClientNic = x.Client.Nic,
-				CountryId = x.CountryId,
-				ClassId = x.ClassId,
-				CreationTimestamp = x.CreationTimestamp,
-				DateInStock = x.DateInStock,
-				DateOfCargoReceipt = x.DateOfCargoReceipt,
-				FactoryContact = x.FactoryContact,
-				FactoryEmail = x.FactoryEmail,
-				FactoryPhone = x.FactoryPhone,
-				StateChangeTimestamp = x.StateChangeTimestamp,
-				StateId = x.StateId,
-				TermsOfDelivery = x.TermsOfDelivery,
-				TransitId = x.TransitId,
-				TransitAddress = x.Transit.Address,
-				TransitCarrierName = x.Transit.Carrier.Name,
-				TransitCity = x.Transit.City.Name_Ru, // todo: 1. bad design
-				TransitDeliveryType = (DeliveryType)x.Transit.DeliveryTypeId,
-				TransitMethodOfTransit = (MethodOfTransit)x.Transit.MethodOfTransitId,
-				TransitPhone = x.Transit.Phone,
-				TransitRecipientName = x.Transit.RecipientName,
-				TransitReference = x.TransitReference,
-				TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
-				WarehouseWorkingTime = x.WarehouseWorkingTime,
-				Weight = x.Weight,
-				MethodOfDeliveryId = x.MethodOfDeliveryId,
-				Value = x.Value,
-				CurrencyId = x.CurrencyId,
-				AirWaybillId = x.AirWaybillId,
-				FactureCost = x.FactureCostEdited ?? x.FactureCost,
-				SenderFactureCost = x.FactureCost,
-				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
-				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
-				TariffPerKg = x.TariffPerKg,
-				TransitCost = x.TransitCostEdited ?? x.TransitCost,
-				ForwarderTransitCost = x.TransitCost,
-				PickupCost = x.PickupCostEdited ?? x.PickupCost,
-				SenderPickupCost = x.PickupCost,
-				SenderRate = x.SenderRate,
-				SenderId = x.SenderId
-			}).ToArray();
+			return applications.Select(_extendedSelector).ToArray();
 		}
 
 		public ApplicationData Get(long id)
@@ -158,60 +166,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
-		public ApplicationDetailsData GetDetails(long id)
+		public ApplicationListItemData GetDetails(long id)
 		{
-			return _context.Applications.Where(x => x.Id == id)
-				.Select(x => new ApplicationDetailsData
-				{
-					AddressLoad = x.AddressLoad,
-					Id = x.Id,
-					FactoryName = x.FactoryName,
-					Invoice = x.Invoice,
-					MarkName = x.MarkName,
-					Volume = x.Volume,
-					Count = x.Count,
-					AirWaybill = x.AirWaybill.Bill,
-					Characteristic = x.Characteristic,
-					CreationTimestamp = x.CreationTimestamp,
-					DateInStock = x.DateInStock,
-					DateOfCargoReceipt = x.DateOfCargoReceipt,
-					FactoryContact = x.FactoryContact,
-					FactoryEmail = x.FactoryEmail,
-					FactoryPhone = x.FactoryPhone,
-					StateChangeTimestamp = x.StateChangeTimestamp,
-					StateId = x.StateId,
-					TermsOfDelivery = x.TermsOfDelivery,
-					TransitAddress = x.Transit.Address,
-					TransitCarrierName = x.Transit.Carrier.Name,
-					TransitCity = x.Transit.City.Name_Ru, // todo: 1. bad design
-					TransitDeliveryTypeId = x.Transit.DeliveryTypeId,
-					TransitMethodOfTransitId = x.Transit.MethodOfTransitId,
-					TransitPhone = x.Transit.Phone,
-					TransitRecipientName = x.Transit.RecipientName,
-					TransitReference = x.TransitReference,
-					TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
-					WarehouseWorkingTime = x.WarehouseWorkingTime,
-					Weight = x.Weight,
-					MethodOfDeliveryId = x.MethodOfDeliveryId,
-					Value = x.Value,
-					CurrencyId = x.CurrencyId,
-					AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
-					AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
-					AirWaybillGTD = x.AirWaybill.GTD,
-					ClientEmail = x.Client.Emails,
-					ClientUserId = x.Client.UserId,
-					AirWaybillId = x.AirWaybillId,
-					ClientNic = x.Client.Nic,
-					ClientLegalEntity = x.Client.LegalEntity,
-					ClientId = x.ClientId,
-					CountryName = new[]
-					{
-						new KeyValuePair<string, string>(TwoLetterISOLanguageName.English, x.Country.Name_En),
-						new KeyValuePair<string, string>(TwoLetterISOLanguageName.Italian, x.Country.Name_En),
-						new KeyValuePair<string, string>(TwoLetterISOLanguageName.Russian, x.Country.Name_Ru)
-					},
-					SenderId = x.SenderId
-				}).FirstOrDefault();
+			return _context.Applications.Where(x => x.Id == id).Select(_extendedSelector).FirstOrDefault();
 		}
 
 		public long GetClientId(long id)

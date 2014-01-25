@@ -36,7 +36,7 @@ namespace Alicargo.Tests.Services.Application
 			_data = _context.CreateMany<ApplicationListItemData>(count).ToArray();
 			_calculations = _data.Take(count / 2).ToDictionary(x => x.Id, x => _context.Create<long>());
 
-			for (var i = 0; i < count; i++)
+			for(var i = 0; i < count; i++)
 			{
 				var country = new CountryData
 				{
@@ -48,10 +48,7 @@ namespace Alicargo.Tests.Services.Application
 				_localazedStates.Add(i, _context.Create<string>());
 
 				_data[i].StateId = i;
-				if (_data[i].CountryId.HasValue)
-				{
-					_data[i].CountryId = i * 2;
-				}
+				_data[i].CountryId = i * 2;
 			}
 
 			_context.ApplicationFileRepository.Setup(x => x.GetInfo(It.IsAny<long[]>(), It.IsAny<ApplicationFileType>()))
@@ -80,17 +77,14 @@ namespace Alicargo.Tests.Services.Application
 		[TestMethod]
 		public void Test_ApplicationListItemMapper_Map()
 		{
-			var items = _mapper.Map(_data);
+			var items = _mapper.Map(_data, TwoLetterISOLanguageName.English);
 
 			_data.ShouldAllBeEquivalentTo(items, options => options.ExcludingMissingProperties());
-			for (var i = 0; i < _data.Length; i++)
+			for(var i = 0; i < _data.Length; i++)
 			{
 				var item = items[i];
 				var data = _data[i];
-
-				var country = data.CountryId.HasValue && _countries.Any(x => x.Id == data.CountryId.Value)
-					? _countries.First(x => x.Id == data.CountryId.Value).Name
-					: null;
+				var country = _countries.First(x => x.Id == data.CountryId).Name;
 
 				item.CountryName.ShouldBeEquivalentTo(country);
 				item.State.ShouldBeEquivalentTo(new ApplicationStateModel

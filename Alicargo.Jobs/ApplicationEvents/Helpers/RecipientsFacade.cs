@@ -46,7 +46,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_recipients = recipients;
 		}
 
-		public RecipientData[] GetRecipients(ApplicationDetailsData application, EventType type, byte[] data)
+		public RecipientData[] GetRecipients(ApplicationListItemData application, EventType type, byte[] data)
 		{
 			var roles = GetRoles(type, data);
 
@@ -75,7 +75,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return roles;
 		}
 
-		private IEnumerable<RecipientData> GetRecipients(ApplicationDetailsData application, IEnumerable<RoleType> roles)
+		private IEnumerable<RecipientData> GetRecipients(ApplicationListItemData application, IEnumerable<RoleType> roles)
 		{
 			foreach (var role in roles)
 			{

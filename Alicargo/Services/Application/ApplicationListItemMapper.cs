@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -16,36 +15,36 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationFileRepository _files;
 		private readonly ICountryRepository _countries;
-		private readonly IIdentityService _identity;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateFilter _stateFilter;
 		private readonly IStateRepository _states;
+		private readonly ICityRepository _cities;
 
 		public ApplicationListItemMapper(
 			IStateFilter stateFilter,
 			IStateRepository states,
+			ICityRepository cities,
 			IStateConfig stateConfig,
 			IApplicationRepository applications,
 			IApplicationFileRepository files,
-			ICountryRepository countries,
-			IIdentityService identity)
+			ICountryRepository countries)
 		{
 			_stateFilter = stateFilter;
 			_states = states;
+			_cities = cities;
 			_stateConfig = stateConfig;
 			_applications = applications;
 			_files = files;
 			_countries = countries;
-			_identity = identity;
 		}
 
-		public ApplicationListItem[] Map(ApplicationListItemData[] data)
+		public ApplicationListItem[] Map(ApplicationListItemData[] data, string language)
 		{
 			var appIds = data.Select(x => x.Id).ToArray();
 			var stateIds = data.Select(x => x.StateId).ToArray();
 
-			var countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
-			var states = _states.Get(_identity.Language, stateIds);
+			var countries = _countries.All(language).ToDictionary(x => x.Id, x => x.Name);
+			var states = _states.Get(language, stateIds);
 			var stateAvailability = _stateFilter.GetStateAvailabilityToSet();
 			var calculations = _applications.GetCalculations(appIds);
 			var cps = _files.GetInfo(appIds, ApplicationFileType.CP);
@@ -54,12 +53,11 @@ namespace Alicargo.Services.Application
 			var packings = _files.GetInfo(appIds, ApplicationFileType.Packing);
 			var swifts = _files.GetInfo(appIds, ApplicationFileType.Swift);
 			var torg12 = _files.GetInfo(appIds, ApplicationFileType.Torg12);
+			var cities = _cities.All(language).ToDictionary(x => x.Id, x => x.Name);
 
 			return data.Select(x => new ApplicationListItem
 			{
-				CountryName = x.CountryId.HasValue && countries.ContainsKey(x.CountryId.Value)
-					? countries[x.CountryId.Value]
-					: null,
+				CountryName = countries[x.CountryId],
 				State = new ApplicationStateModel
 				{
 					StateId = x.StateId,
@@ -90,7 +88,7 @@ namespace Alicargo.Services.Application
 				TransitAddress = x.TransitAddress,
 				TransitCarrierName = x.TransitCarrierName,
 				TransitId = x.TransitId,
-				TransitCity = x.TransitCity,
+				TransitCity = cities[x.TransitCityId],
 				TransitDeliveryTypeString = x.TransitDeliveryType.ToLocalString(),
 				TransitMethodOfTransitString = x.TransitMethodOfTransit.ToLocalString(),
 				TransitPhone = x.TransitPhone,

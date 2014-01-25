@@ -140,7 +140,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			data.ClientNic.ShouldBeEquivalentTo(clientData.Nic);
 			data.TransitAddress.ShouldBeEquivalentTo(transitModel.Address);
 			data.TransitCarrierName.ShouldBeEquivalentTo(newCarrierName);
-			data.TransitCity.ShouldBeEquivalentTo("Москва");
+			data.TransitCityId.ShouldBeEquivalentTo(TestConstants.TestCityId1);
 			data.TransitDeliveryType.ShouldBeEquivalentTo(transitModel.DeliveryType);
 			data.TransitMethodOfTransit.ShouldBeEquivalentTo(transitModel.MethodOfTransit);
 			data.TransitPhone.ShouldBeEquivalentTo(transitModel.Phone);

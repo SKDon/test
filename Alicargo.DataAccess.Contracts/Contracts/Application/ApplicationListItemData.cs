@@ -5,28 +5,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
 	public sealed class ApplicationListItemData
 	{
-		public string ClientLegalEntity { get; set; }
-
-		public string ClientNic { get; set; }
-
-		public string AirWaybill { get; set; }
-
-		public string TransitCity { get; set; }
-
-		public string TransitAddress { get; set; }
-
-		public string TransitRecipientName { get; set; }
-
-		public string TransitPhone { get; set; }
-
-		public string TransitWarehouseWorkingTime { get; set; }
-
-		public MethodOfTransit TransitMethodOfTransit { get; set; }
-
-		public DeliveryType TransitDeliveryType { get; set; }
-
-		public string TransitCarrierName { get; set; }
-
 		public long Id { get; set; }
 
 		public DateTimeOffset CreationTimestamp { get; set; }
@@ -53,6 +31,64 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public DateTimeOffset? DateOfCargoReceipt { get; set; }
 
+		public string TransitReference { get; set; }
+
+		public long StateId { get; set; }
+
+		public int MethodOfDeliveryId { get; set; }
+
+		public int? ClassId { get; set; }
+
+		public int CurrencyId { get; set; }
+
+		public decimal Value { get; set; }
+
+
+
+		public long ClientId { get; set; }
+
+		public string ClientLegalEntity { get; set; }
+
+		public string ClientNic { get; set; }
+
+		public long ClientUserId { get; set; }
+
+		public string ClientEmail { get; set; }
+
+		
+
+		public long? AirWaybillId { get; set; }		
+
+		public string AirWaybill { get; set; }
+
+		public string AirWaybillGTD { get; set; }
+
+		public DateTimeOffset? AirWaybillDateOfDeparture { get; set; }
+
+		public DateTimeOffset? AirWaybillDateOfArrival { get; set; }
+
+
+
+		public long TransitId { get; set; }
+		
+		public long TransitCityId { get; set; }
+
+		public string TransitAddress { get; set; }
+
+		public string TransitRecipientName { get; set; }
+
+		public string TransitPhone { get; set; }
+
+		public string TransitWarehouseWorkingTime { get; set; }
+
+		public MethodOfTransit TransitMethodOfTransit { get; set; }
+
+		public DeliveryType TransitDeliveryType { get; set; }
+
+		public string TransitCarrierName { get; set; }		
+
+
+
 		public string FactoryName { get; set; }
 
 		public string FactoryPhone { get; set; }
@@ -63,26 +99,8 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public string MarkName { get; set; }
 
-		public string TransitReference { get; set; }
 
-		public long StateId { get; set; }
-
-		public long? AirWaybillId { get; set; }
-
-		public long? SenderId { get; set; }
-
-		public long? CountryId { get; set; }
-
-		public int MethodOfDeliveryId { get; set; }
-
-		public int? ClassId { get; set; }
-
-		public int CurrencyId { get; set; }
-
-		public decimal Value { get; set; }
-
-		public long TransitId { get; set; }
-
+		
 		public decimal? FactureCost { get; set; }
 
 		public decimal? SenderFactureCost { get; set; }
@@ -99,10 +117,14 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public decimal? PickupCost { get; set; }
 
+		
+
+		public long SenderId { get; set; }
+
+		public long CountryId { get; set; }
+
 		public decimal? SenderPickupCost { get; set; }
 
 		public decimal? SenderRate { get; set; }
-
-		public long ClientId { get; set; }
 	}
 }

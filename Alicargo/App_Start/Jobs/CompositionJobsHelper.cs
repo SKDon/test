@@ -65,6 +65,50 @@ namespace Alicargo.App_Start.Jobs
 				.Named(jobName);
 		}
 
+		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,
+			int partitionId)
+		{
+			using(var connection = new SqlConnection(connectionString))
+			{
+				var serializer = new Serializer();
+				var messageBuilder = GetMessageBuilder(connection, connectionString, filesConnectionString, serializer);
+				var executor = new SqlProcedureExecutor(connectionString);
+				var events = new EventRepository(executor);
+				var emails = new EmailMessageRepository(executor);
+				var mailSender = new DbMailSender(partitionId, emails, serializer);
+				var mailCreatorProcessor = new DefaultEmailingProcessor(mailSender, messageBuilder);
+
+				var processors = new Dictionary<EventState, IEventProcessor>
+				{
+					{ EventState.Emailing, mailCreatorProcessor }
+				};
+
+				var processorsForApplicationSetState = new Dictionary<EventState, IEventProcessor>
+				{
+					{ EventState.Emailing, mailCreatorProcessor },
+					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor() }
+				};
+
+				new SequentialEventJob(events, partitionId,
+					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+					{
+						{ EventType.ApplicationCreated, processors },
+						{ EventType.ApplicationSetState, processorsForApplicationSetState },
+						{ EventType.SetDateOfCargoReceipt, processors },
+						{ EventType.SetTransitReference, processors },
+						{ EventType.CPFileUploaded, processors },
+						{ EventType.InvoiceFileUploaded, processors },
+						{ EventType.PackingFileUploaded, processors },
+						{ EventType.SwiftFileUploaded, processors },
+						{ EventType.DeliveryBillFileUploaded, processors },
+						{ EventType.Torg12FileUploaded, processors },
+						{ EventType.Calculate, processors },
+						{ EventType.SetSender, processors },
+						{ EventType.CalculationCanceled, processors }
+					}).Work();
+			}
+		}
+
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
 			using(var connection = new SqlConnection(connectionString))
@@ -114,50 +158,6 @@ namespace Alicargo.App_Start.Jobs
 			}
 		}
 
-		private static void RunApplicationEventsJob(string connectionString, string filesConnectionString,
-			int partitionId)
-		{
-			using(var connection = new SqlConnection(connectionString))
-			{
-				var serializer = new Serializer();
-				var messageBuilder = GetMessageBuilder(connection, connectionString, filesConnectionString, serializer);
-				var executor = new SqlProcedureExecutor(connectionString);
-				var events = new EventRepository(executor);
-				var emails = new EmailMessageRepository(executor);
-				var mailSender = new DbMailSender(partitionId, emails, serializer);
-				var mailCreatorProcessor = new DefaultEmailingProcessor(mailSender, messageBuilder);
-
-				var processors = new Dictionary<EventState, IEventProcessor>
-				{
-					{ EventState.Emailing, mailCreatorProcessor }
-				};
-
-				var processorsForApplicationSetState = new Dictionary<EventState, IEventProcessor>
-				{
-					{ EventState.Emailing, mailCreatorProcessor },
-					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor() }
-				};
-
-				new SequentialEventJob(events, partitionId,
-					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-					{
-						{ EventType.ApplicationCreated, processors },
-						{ EventType.ApplicationSetState, processorsForApplicationSetState },
-						{ EventType.SetDateOfCargoReceipt, processors },
-						{ EventType.SetTransitReference, processors },
-						{ EventType.CPFileUploaded, processors },
-						{ EventType.InvoiceFileUploaded, processors },
-						{ EventType.PackingFileUploaded, processors },
-						{ EventType.SwiftFileUploaded, processors },
-						{ EventType.DeliveryBillFileUploaded, processors },
-						{ EventType.Torg12FileUploaded, processors },
-						{ EventType.Calculate, processors },
-						{ EventType.SetSender, processors },
-						{ EventType.CalculationCanceled, processors }
-					}).Work();
-			}
-		}
-
 		private static void RunMailSenderJob(string connectionString, int partitionId)
 		{
 			var serializer = new Serializer();
@@ -183,8 +183,10 @@ namespace Alicargo.App_Start.Jobs
 			var files = new ApplicationFileRepository(filesExecutor);
 			var filesFasade = new FilesFacade(serializer, awbs, files);
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
+			var countries = new CountryRepository(mainExecutor);
+			var cities = new CityRepository(mainExecutor);
 			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(
-				serializer, states, files, clientBalanceRepository, new TextBuilder());
+				serializer, countries, cities, states, files, clientBalanceRepository, new TextBuilder());
 			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new TemplateRepository(mainExecutor);
 			var clientRepository = new ClientRepository(unitOfWork);

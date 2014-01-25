@@ -46,7 +46,7 @@ namespace Alicargo.Services.Calculation
 
 			var groups = GetGroups(items);
 
-			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).ToArray());
+			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId).ToArray());
 
 			var info = GetInfo(groups, applications, tariffs);
 
