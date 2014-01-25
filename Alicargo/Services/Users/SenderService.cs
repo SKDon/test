@@ -83,13 +83,21 @@ namespace Alicargo.Services.Users
 			}
 		}
 
-		public long GetByCountryOrAny(long countryId)
+		public long GetByCountryOrAny(long countryId, long? oldSenderId)
 		{
 			var list = _senders.GetByCountry(countryId);
 
-			return list.Length != 0
-				? list.First()
-				: _senders.GetAll().Select(x => x.EntityId).First();
+			if(list.Length == 0)
+			{
+				return _senders.GetAll().Select(x => x.EntityId).First();
+			}
+
+			if(oldSenderId.HasValue && list.Contains(oldSenderId.Value))
+			{
+				return oldSenderId.Value;
+			}
+
+			return list.First();
 		}
 	}
 }

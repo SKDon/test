@@ -102,6 +102,7 @@
     <Compile Include="Services\Email\MailSenderTests.cs" />
     <Compile Include="Services\StateServiceTests.cs" />
     <Compile Include="Services\Client\ClientManagerTests.cs" />
+    <Compile Include="Services\Users\SenderServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

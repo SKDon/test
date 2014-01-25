@@ -97,6 +97,7 @@ namespace Alicargo.TestHelpers
 			FilesFasade = Inject<IFilesFacade>();
 			TextBulder = Inject<ITextBuilder>();
 			ApplicationEventTemplates = Inject<IApplicationEventTemplates>();
+			SenderRepository = Inject<ISenderRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -104,6 +105,7 @@ namespace Alicargo.TestHelpers
 		public Fixture Fixture { get; private set; }
 
 		public Mock<IAdminRepository> AdminRepository { get; private set; }
+		public Mock<ISenderRepository> SenderRepository { get; private set; }
 		public Mock<IApplicationEventTemplates> ApplicationEventTemplates { get; private set; }
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
 		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }

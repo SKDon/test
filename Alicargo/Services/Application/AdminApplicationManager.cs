@@ -16,14 +16,14 @@ namespace Alicargo.Services.Application
 {
 	internal sealed class AdminApplicationManager : IAdminApplicationManager
 	{
-		private readonly IApplicationUpdateRepository _updater;
 		private readonly IApplicationRepository _applications;
-		private readonly ISenderService _senders;
 		private readonly IStateConfig _config;
 		private readonly IIdentityService _identity;
+		private readonly ISenderService _senders;
 		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IApplicationUpdateRepository _updater;
 
 		public AdminApplicationManager(
 			IApplicationRepository applications,
@@ -201,12 +201,6 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
-		private bool HasPermissionToSetState(long stateId)
-		{
-			return _settings.GetStateAvailabilities()
-				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
-		}
-
 		private ApplicationData GetNewApplicationData(ApplicationAdminModel model, long clientId, long transitId)
 		{
 			return new ApplicationData
@@ -247,15 +241,23 @@ namespace Alicargo.Services.Application
 				FactureCostEdited = model.FactureCostEdited,
 				TransitCostEdited = model.TransitCostEdited,
 				PickupCostEdited = model.PickupCostEdited,
-				SenderId = GetSenderId(model),
+				SenderId = GetSenderId(model, null),
 				ForwarderId = model.ForwarderId,
 				SenderRate = null
 			};
 		}
 
-		private long GetSenderId(ApplicationAdminModel model)
+		private long GetSenderId(ApplicationAdminModel model, long? oldSenderId)
 		{
-			return model.SenderId.HasValue ? model.SenderId.Value : _senders.GetByCountryOrAny(model.CountryId);
+			return model.SenderId.HasValue
+				? model.SenderId.Value
+				: _senders.GetByCountryOrAny(model.CountryId, oldSenderId);
+		}
+
+		private bool HasPermissionToSetState(long stateId)
+		{
+			return _settings.GetStateAvailabilities()
+				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
 		}
 
 		private void Map(ApplicationAdminModel @from, ApplicationData to)
@@ -285,7 +287,7 @@ namespace Alicargo.Services.Application
 			to.TransitCostEdited = from.TransitCostEdited;
 			to.PickupCostEdited = from.PickupCostEdited;
 			to.ScotchCostEdited = from.ScotchCostEdited;
-			to.SenderId = GetSenderId(@from);
+			to.SenderId = GetSenderId(@from, to.SenderId);
 			to.ForwarderId = from.ForwarderId;
 		}
 	}
