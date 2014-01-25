@@ -38,10 +38,10 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		
 		public void Test_Create_Post()
 		{
 			var model = _fixture.Create<ApplicationSenderModel>();
+			model.CountryId = TestConstants.TestCountryId;
 
 			var result = _controller.Create(TestConstants.TestClientId1, model);
 
@@ -60,6 +60,10 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 					new { data.ClientId })
 					.First();
 
+				var countries = connection.Query<long>(
+					"select c.[CountryId] from [dbo].[SenderCountry] c where c.[SenderId] = @SenderId",
+					new { data.SenderId }).ToArray();
+
 				cityId.ShouldBeEquivalentTo(clientCity);
 				model.Count.ShouldBeEquivalentTo((int)data.Count);
 				model.FactoryName.ShouldBeEquivalentTo((string)data.FactoryName);
@@ -71,12 +75,8 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				model.PickupCost.ShouldBeEquivalentTo((decimal)data.PickupCost);
 				model.Currency.CurrencyId.ShouldBeEquivalentTo((int)data.CurrencyId);
 				model.Currency.Value.ShouldBeEquivalentTo((decimal)data.Value);
-
-				var countryId = connection.Query<long>("select [CountryId] from [dbo].[Sender] where [UserId] = @UserId",
-					new { UserId = TestConstants.TestSenderUserId }).First();
-
-				countryId.ShouldBeEquivalentTo((long)data.CountryId);
 				TestConstants.DefaultStateId.ShouldBeEquivalentTo((long)data.StateId);
+				countries.Should().Contain((long)data.CountryId);
 			}
 		}
 	}

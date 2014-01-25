@@ -39,7 +39,6 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		
 		public void Test_Create_Post()
 		{
 			var model = _fixture.Create<ApplicationClientModel>();
@@ -54,10 +53,15 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				var data = connection.Query("select top 1 * from [dbo].[Application] order by [Id] desc").First();
-				var countryId = connection.Query<long>("select [CountryId] from [dbo].[Sender] where [Id] = @Id",
-					new { Id = data.SenderId }).First();
+				
+				var countries = connection.Query<long>(
+					"select c.[CountryId] from [dbo].[SenderCountry] c where c.[SenderId] = @SenderId",
+					new { data.SenderId }).ToArray();
 
-				var cityId = connection.Query<long>("select [CityId] from [dbo].[Forwarder] where [Id] = @Id", new { Id = data.ForwarderId }).First();
+				var cityId = connection.Query<long>(
+					"select [CityId] from [dbo].[Forwarder] where [Id] = @Id",
+					new { Id = data.ForwarderId }).First();
+
 				cityId.ShouldBeEquivalentTo(transit.CityId);
 				model.Count.ShouldBeEquivalentTo((int)data.Count);
 				model.FactoryName.ShouldBeEquivalentTo((string)data.FactoryName);
@@ -76,7 +80,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				model.Currency.CurrencyId.ShouldBeEquivalentTo((int)data.CurrencyId);
 				model.Currency.Value.ShouldBeEquivalentTo((decimal)data.Value);
 				model.CountryId.ShouldBeEquivalentTo((long)data.CountryId);
-				countryId.ShouldBeEquivalentTo((long)data.CountryId);
+				countries.Should().Contain((long)data.CountryId);
 				TestConstants.DefaultStateId.ShouldBeEquivalentTo((long)data.StateId);
 			}
 		}

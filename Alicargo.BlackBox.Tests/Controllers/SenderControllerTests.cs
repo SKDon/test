@@ -22,6 +22,12 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private SenderController _controller;
 		private Fixture _fixture;
 
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_composition.Dispose();
+		}
+
 		[TestInitialize]
 		public void TestInitialize()
 		{
@@ -30,14 +36,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			_fixture = new Fixture();
 		}
 
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_composition.Dispose();
-		}
-
 		[TestMethod]
-		
 		public void Test_Create()
 		{
 			var password = _fixture.Create<string>();
@@ -52,7 +51,6 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		}
 
 		[TestMethod]
-		
 		public void Test_Edit()
 		{
 			var password = _fixture.Create<string>();
@@ -66,6 +64,18 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			VerifyPassword(model.Authentication.Login, password);
 		}
 
+		private SenderModel GetSenderModel(string password)
+		{
+			return _fixture.Build<SenderModel>()
+				.With(x => x.Countries, new[] { TestConstants.TestCountryId })
+				.With(x => x.Authentication,
+					_fixture.Build<AuthenticationModel>()
+						.With(x => x.NewPassword, password)
+						.With(x => x.ConfirmPassword, password)
+						.Create())
+				.Create();
+		}
+
 		private static void VerifyData(SenderModel model)
 		{
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
@@ -73,24 +83,20 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				connection.Open();
 
 				var actual = connection.Query<SenderData>(
-					"select u.Login, s.Name, s.Email, s.TariffOfTapePerBox, s.CountryId from sender s " +
-					"join [dbo].[user] u on s.userid = u.id where u.login = @login",
+					"select u.Login, s.Name, s.Email, s.TariffOfTapePerBox from [dbo].[sender] s "
+					+ "join [dbo].[user] u on s.userid = u.id where u.login = @login",
 					new { model.Authentication.Login }).First();
 
 				actual.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
-			}
-		}
 
-		private SenderModel GetSenderModel(string password)
-		{
-			return _fixture.Build<SenderModel>()
-				//.With(x => x.Countries, new[] { TestConstants.TestCountryId })
-				.With(x => x.Authentication,
-					_fixture.Build<AuthenticationModel>()
-						.With(x => x.NewPassword, password)
-						.With(x => x.ConfirmPassword, password)
-						.Create())
-				.Create();
+				var countries = connection.Query<long>(
+					"select c.[CountryId] from [dbo].[SenderCountry] c "
+					+ "join [dbo].[sender] s on s.[id] = c.[SenderId] "
+					+ "join [dbo].[user] u on s.userid = u.id where u.login = @login",
+					new { model.Authentication.Login }).ToArray();
+
+				model.Countries.ShouldBeEquivalentTo(countries);
+			}
 		}
 
 		private static void VerifyPassword(string login, string password)
