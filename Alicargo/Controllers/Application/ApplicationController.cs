@@ -17,18 +17,18 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationController : Controller
 	{
-		private readonly IAdminApplicationManager _applicationManager;
-		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IForwarderRepository _forwarders;
-		private readonly IIdentityService _identity;
-		private readonly ICountryRepository _countries;
+		private readonly IAdminApplicationManager _manager;
+		private readonly IApplicationPresenter _presenter;
 		private readonly IApplicationRepository _applications;
 		private readonly IClientRepository _clients;
+		private readonly ICountryRepository _countries;
+		private readonly IForwarderRepository _forwarders;
+		private readonly IIdentityService _identity;
 		private readonly ISenderRepository _senders;
 
 		public ApplicationController(
-			IAdminApplicationManager applicationManager,
-			IApplicationPresenter applicationPresenter,
+			IAdminApplicationManager manager,
+			IApplicationPresenter presenter,
 			IForwarderRepository forwarders,
 			IIdentityService identity,
 			ICountryRepository countries,
@@ -36,8 +36,8 @@ namespace Alicargo.Controllers.Application
 			IClientRepository clients,
 			ISenderRepository senders)
 		{
-			_applicationManager = applicationManager;
-			_applicationPresenter = applicationPresenter;
+			_manager = manager;
+			_presenter = presenter;
 			_forwarders = forwarders;
 			_identity = identity;
 			_countries = countries;
@@ -50,7 +50,7 @@ namespace Alicargo.Controllers.Application
 		[Access(RoleType.Admin)]
 		public virtual HttpStatusCodeResult Delete(long id)
 		{
-			_applicationManager.Delete(id);
+			_manager.Delete(id);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -65,14 +65,14 @@ namespace Alicargo.Controllers.Application
 
 			ViewBag.ApplicationId = applicationId;
 
-			if (applicationId.HasValue)
+			if(applicationId.HasValue)
 			{
 				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count);
 			}
 
 			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
 
-			ViewBag.Senders = _senders.GetAll().OrderBy(x => x.Name).ToDictionary(x => x.EntityId, x => x.Name);
+			ViewBag.Senders = _senders.GetAll().OrderBy(x => x.Name).ToDictionary(x => (long?)x.EntityId, x => x.Name);
 
 			ViewBag.Forwarders = _forwarders.GetAll().OrderBy(x => x.Name).ToDictionary(x => x.Id, x => x.Name);
 		}
@@ -83,7 +83,7 @@ namespace Alicargo.Controllers.Application
 		[Access(RoleType.Admin)]
 		public virtual ViewResult Edit(long id)
 		{
-			var application = _applicationPresenter.Get(id);
+			var application = _presenter.Get(id);
 
 			var clientId = _applications.GetClientId(id);
 
@@ -98,7 +98,7 @@ namespace Alicargo.Controllers.Application
 		public virtual ActionResult Edit(long id, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				var clientId = _applications.GetClientId(id);
 
@@ -107,7 +107,7 @@ namespace Alicargo.Controllers.Application
 				return View(model);
 			}
 
-			_applicationManager.Update(id, model, carrierModel, transitModel);
+			_manager.Update(id, model, carrierModel, transitModel);
 
 			return RedirectToAction(MVC.Application.Edit(id));
 		}
@@ -130,7 +130,7 @@ namespace Alicargo.Controllers.Application
 		public virtual ActionResult Create(long clientId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindBag(clientId, null);
 
@@ -139,9 +139,9 @@ namespace Alicargo.Controllers.Application
 
 			try
 			{
-				_applicationManager.Add(model, carrierModel, transitModel, clientId);
+				_manager.Add(model, carrierModel, transitModel, clientId);
 			}
-			catch (DublicateException ex)
+			catch(DublicateException ex)
 			{
 				ModelState.AddModelError("DublicateException", ex.ToString());
 

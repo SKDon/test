@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Define by contry.
+        /// </summary>
+        public static string DefineByContry {
+            get {
+                return ResourceManager.GetString("DefineByContry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {

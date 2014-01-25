@@ -378,4 +378,7 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="DefineByContry" xml:space="preserve">
+    <value>Define by contry</value>
+  </data>
 </root>

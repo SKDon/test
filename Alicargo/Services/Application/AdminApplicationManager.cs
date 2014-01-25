@@ -7,7 +7,6 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 using Alicargo.ViewModels;

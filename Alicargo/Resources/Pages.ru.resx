@@ -378,4 +378,7 @@
   <data name="Country" xml:space="preserve">
     <value>Страна</value>
   </data>
+  <data name="DefineByContry" xml:space="preserve">
+    <value>Определить по стране</value>
+  </data>
 </root>
