@@ -20,7 +20,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private IApplicationRepository _applications;
 		private IStateRepository _stateRepository;
 		private DbTestContext _context;
-		private ApplicationEditor _applicationUpater;
+		private ApplicationEditor _editor;
 		private Fixture _fixture;
 
 		[TestInitialize]
@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
 			_stateRepository = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
-			_applicationUpater = new ApplicationEditor(_context.UnitOfWork);
+			_editor = new ApplicationEditor(_context.UnitOfWork);
 		}
 
 		[TestCleanup]
@@ -83,7 +83,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var application = CreateTestApplication();
 			var state = _stateRepository.Get(TwoLetterISOLanguageName.Italian).First(x => x.Key != application.StateId);
 
-			_applicationUpater.SetState(application.Id, state.Key);
+			_editor.SetState(application.Id, state.Key);
 			_context.UnitOfWork.SaveChanges();
 
 			var actual = _applications.Get(application.Id);
@@ -108,7 +108,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			newData.StateChangeTimestamp = old.StateChangeTimestamp;
 			newData.ForwarderId = TestConstants.TestForwarderId2;
 
-			_applicationUpater.Update(newData);
+			_editor.Update(newData);
 			_context.UnitOfWork.SaveChanges();
 
 			var data = _applications.Get(old.Id);
@@ -130,10 +130,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.With(x => x.ForwarderId, TestConstants.TestForwarderId1)
 				.Create();
 
-			var id = _applicationUpater.Add(application);
-			_context.UnitOfWork.SaveChanges();
-
-			application.Id = id();
+			application.Id = _editor.Add(application);
 
 			return application;
 		}

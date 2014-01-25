@@ -80,12 +80,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var app12 = applications.Add(data12);
 			var app21 = applications.Add(data21);
 			var app22 = applications.Add(data22);
-			_context.UnitOfWork.SaveChanges();
 
-			applications.SetAirWaybill(app11(), awbId1());
-			applications.SetAirWaybill(app12(), awbId1());
-			applications.SetAirWaybill(app21(), awbId2());
-			applications.SetAirWaybill(app22(), awbId2());
+			applications.SetAirWaybill(app11, awbId1());
+			applications.SetAirWaybill(app12, awbId1());
+			applications.SetAirWaybill(app21, awbId2());
+			applications.SetAirWaybill(app22, awbId2());
 			_context.UnitOfWork.SaveChanges();
 
 			var aggregates = _awbRepository.GetAggregate(awbId1(), awbId2());
@@ -135,10 +134,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var applications = new ApplicationEditor(_context.UnitOfWork);
 			var a1 = applications.Add(data1);
 			var a2 = applications.Add(data2);
-			_context.UnitOfWork.SaveChanges();
 
-			applications.SetAirWaybill(a1(), id());
-			applications.SetAirWaybill(a2(), id());
+			applications.SetAirWaybill(a1, id());
+			applications.SetAirWaybill(a2, id());
 			_context.UnitOfWork.SaveChanges();
 
 			var emails = _awbRepository.GetClientEmails(id());

@@ -50,11 +50,7 @@ namespace Alicargo.Services.Application
 
 			var data = GetNewApplicationData(model, clientId, transitId, forwarder.Id);
 
-			var id = _updater.Add(data);
-
-			_unitOfWork.SaveChanges();
-
-			return id();
+			return _updater.Add(data);
 		}
 
 		public void Update(

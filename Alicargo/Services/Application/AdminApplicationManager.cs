@@ -66,11 +66,7 @@ namespace Alicargo.Services.Application
 
 			var data = GetNewApplicationData(model, clientId, transitId);
 
-			var id = _updater.Add(data);
-
-			_unitOfWork.SaveChanges();
-
-			return id();
+			return _updater.Add(data);
 		}
 
 		public void Delete(long id)

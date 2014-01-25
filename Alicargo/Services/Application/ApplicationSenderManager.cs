@@ -96,8 +96,6 @@ namespace Alicargo.Services.Application
 			applicationData.ClientId = clientId;
 
 			_updater.Add(applicationData);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		private void CopyTransitDataFromClient(long clientId, ApplicationData applicationData)

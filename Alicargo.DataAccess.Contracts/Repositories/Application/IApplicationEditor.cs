@@ -6,7 +6,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 	public interface IApplicationEditor
 	{
 		void Update(ApplicationData application);
-		Func<long> Add(ApplicationData application);
+		long Add(ApplicationData application);
 		void Delete(long id);
 
 		void SetAirWaybill(long applicationId, long? airWaybillId);
