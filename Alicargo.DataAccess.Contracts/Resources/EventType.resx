@@ -159,4 +159,7 @@
   <data name="Torg12FileUploaded" xml:space="preserve">
     <value>Torg12 file is uploaded</value>
   </data>
+  <data name="SetSender" xml:space="preserve">
+    <value>Set sender</value>
+  </data>
 </root>

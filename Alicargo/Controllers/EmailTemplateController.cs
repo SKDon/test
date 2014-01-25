@@ -8,7 +8,7 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
-using Alicargo.Services.Abstract;
+using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.EmailTemplate;
 using Alicargo.ViewModels.Helpers;
 
@@ -53,7 +53,7 @@ namespace Alicargo.Controllers
 				.Select(x => new
 				{
 					Id = (int)x,
-					Name = DataAccess.Contracts.Resources.EventType.ResourceManager.GetString(x.ToString())
+					Name = x.ToLocalString()
 				})
 				.ToArray();
 

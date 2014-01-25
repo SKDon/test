@@ -160,6 +160,15 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set sender.
+        /// </summary>
+        public static string SetSender {
+            get {
+                return ResourceManager.GetString("SetSender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set transit reference.
         /// </summary>
         public static string SetTransitReference {
