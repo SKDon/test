@@ -3,7 +3,6 @@ using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 using Alicargo.ViewModels;
@@ -15,7 +14,7 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IForwarderService _forwarders;
-		private readonly ISenderRepository _senders;
+		private readonly ISenderService _senders;
 		private readonly IStateConfig _stateConfig;
 		private readonly ITransitRepository _transits;
 		private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +22,7 @@ namespace Alicargo.Services.Application
 
 		public ApplicationSenderManager(
 			IApplicationRepository applications,
-			ISenderRepository senders,
+			ISenderService senders,
 			IApplicationUpdateRepository updater,
 			IForwarderService forwarders,
 			IUnitOfWork unitOfWork,
@@ -66,6 +65,8 @@ namespace Alicargo.Services.Application
 		{
 			var applicationData = _applications.Get(id);
 
+			_senders.CheckCountry(applicationData.SenderId, model.CountryId);
+
 			Map(model, applicationData);
 
 			_updater.Update(applicationData);
@@ -75,6 +76,8 @@ namespace Alicargo.Services.Application
 
 		public void Add(ApplicationSenderModel model, long clientId, long creatorSenderId)
 		{
+			_senders.CheckCountry(creatorSenderId, model.CountryId);
+
 			var applicationData = new ApplicationData();
 
 			Map(model, applicationData);

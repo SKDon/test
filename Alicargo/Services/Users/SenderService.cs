@@ -2,6 +2,7 @@
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -98,6 +99,14 @@ namespace Alicargo.Services.Users
 			}
 
 			return list.First();
+		}
+
+		public void CheckCountry(long senderId, long countryId)
+		{
+			if(!_senders.GetCountries(senderId).Contains(countryId))
+			{
+				throw new InvalidLogicException("Country " + countryId + " is not defined for sender " + senderId);
+			}
 		}
 	}
 }
