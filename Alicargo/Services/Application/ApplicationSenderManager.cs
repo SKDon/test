@@ -43,9 +43,23 @@ namespace Alicargo.Services.Application
 		{
 			var application = _applications.Get(id);
 
-			var model = GetModel(application);
-
-			return model;
+			return new ApplicationSenderModel
+			{
+				Count = application.Count,
+				FactoryName = application.FactoryName,
+				Weight = application.Weight,
+				Invoice = application.Invoice,
+				MarkName = application.MarkName,
+				Currency = new CurrencyModel
+				{
+					Value = application.Value,
+					CurrencyId = application.CurrencyId
+				},
+				Volume = application.Volume,
+				FactureCost = application.FactureCost,
+				PickupCost = application.PickupCost,
+				CountryId = application.CountryId
+			};
 		}
 
 		public void Update(long id, ApplicationSenderModel model)
@@ -77,7 +91,6 @@ namespace Alicargo.Services.Application
 			applicationData.CreationTimestamp = DateTimeProvider.Now;
 			applicationData.SenderId = senderId;
 			applicationData.ClientId = clientId;
-			// applicationData.CountryId = _senders.Get(senderId).; todo set country by sender
 
 			_updater.Add(applicationData);
 
@@ -99,26 +112,6 @@ namespace Alicargo.Services.Application
 			applicationData.ForwarderId = forwarder.Id;
 		}
 
-		private static ApplicationSenderModel GetModel(ApplicationData application)
-		{
-			return new ApplicationSenderModel
-			{
-				Count = application.Count,
-				FactoryName = application.FactoryName,
-				Weight = application.Weight,
-				Invoice = application.Invoice,
-				MarkName = application.MarkName,
-				Currency = new CurrencyModel
-				{
-					Value = application.Value,
-					CurrencyId = application.CurrencyId
-				},
-				Volume = application.Volume,
-				FactureCost = application.FactureCost,
-				PickupCost = application.PickupCost,
-			};
-		}
-
 		private static void Map(ApplicationSenderModel @from, ApplicationData to)
 		{
 			to.Count = @from.Count;
@@ -131,6 +124,7 @@ namespace Alicargo.Services.Application
 			to.Volume = @from.Volume;
 			to.FactureCost = @from.FactureCost;
 			to.PickupCost = from.PickupCost;
+			to.CountryId = from.CountryId;
 		}
 	}
 }

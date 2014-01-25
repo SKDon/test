@@ -6,6 +6,8 @@
 		@Html.EditorWithLabelFor(model => model.FactoryName)
 		@Html.EditorWithLabelFor(model => model.MarkName)
 		@Html.EditorWithLabelFor(model => model.Invoice)
+		@Html.LabelFor(x => x.CountryId)
+		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Weight)
