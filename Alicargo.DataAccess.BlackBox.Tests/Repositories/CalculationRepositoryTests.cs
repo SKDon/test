@@ -34,7 +34,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		[ExpectedException(typeof(DublicateException))]
 		public void Test_Uniqueness()
 		{
@@ -49,7 +49,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Add_GetByApplication()
 		{
 			var data = GenerateData();
@@ -61,7 +61,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_RemoveByApplication()
 		{
 			var data = GenerateData();

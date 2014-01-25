@@ -38,7 +38,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_AddDublicate()
 		{
 			var data = _fixture.CreateMany<byte>().ToArray();
@@ -66,7 +66,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			}
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_GetNext()
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
@@ -83,7 +83,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			data.Id.Should().BeGreaterThan(0);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_GetNextFaulted()
 		{
 			var eventType = _fixture.Create<EventType>();
@@ -94,7 +94,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_events.GetNext(eventType, partitionId).Should().BeNull();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_SetState()
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
@@ -109,7 +109,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			next.State.ShouldBeEquivalentTo(EventState.StateHistorySaving);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Delete()
 		{
 			var eventData = _fixture.CreateMany<byte>().ToArray();
@@ -124,7 +124,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			data.Should().BeNull();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_DeleteEmpty()
 		{
 			_events.Delete(-1);

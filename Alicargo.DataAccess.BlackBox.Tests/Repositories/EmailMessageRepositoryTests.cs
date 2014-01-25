@@ -32,7 +32,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_GetNext()
 		{
 			var partitionId = _fixture.Create<int>();
@@ -66,7 +66,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			return data;
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_SetState()
 		{
 			var partitionId = _fixture.Create<int>();

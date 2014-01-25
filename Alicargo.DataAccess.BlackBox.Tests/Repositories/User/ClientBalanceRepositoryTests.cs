@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_SumBalance()
 		{
 			var first = _repository.SumBalance();

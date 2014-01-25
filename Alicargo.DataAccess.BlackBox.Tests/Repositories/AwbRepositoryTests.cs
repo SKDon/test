@@ -37,7 +37,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_AwbRepository_Count_GetRange()
 		{
 			var airWaybillDatas = _awbRepository.Get();
@@ -51,7 +51,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_AwbRepository_Delete()
 		{
 			var data = CreateTestAirWaybill();
@@ -63,7 +63,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_AwbRepository_GetAggregate()
 		{
 			var data11 = CreateApplicationData(TestConstants.TestClientId1);
@@ -106,7 +106,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_AwbRepository_GetAll_Add_Get()
 		{
 			var oldData = _awbRepository.Get();
@@ -123,7 +123,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_AwbRepository_GetClientEmails()
 		{
 			var data1 = CreateApplicationData(TestConstants.TestClientId1);
@@ -153,7 +153,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_AwbRepository_SetState()
 		{
 			var data = CreateTestAirWaybill();
@@ -168,7 +168,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_AwbRepository_Update()
 		{
 			var data = CreateTestAirWaybill();

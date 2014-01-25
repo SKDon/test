@@ -38,7 +38,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Create_Post()
 		{
 			var model = _fixture.Create<ApplicationSenderModel>();

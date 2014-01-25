@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 			_orderer = new ApplicationRepositoryOrderer();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		[ExpectedException(typeof(KeyNotFoundException))]
 		public void Test_KeyNotFoundException()
 		{
@@ -30,7 +30,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 			_orderer.Order(list, orders);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Order()
 		{
 			var list = new[]

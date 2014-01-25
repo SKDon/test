@@ -37,7 +37,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Create()
 		{
 			var password = _fixture.Create<string>();
@@ -52,7 +52,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Edit()
 		{
 			var password = _fixture.Create<string>();
@@ -84,7 +84,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private SenderModel GetSenderModel(string password)
 		{
 			return _fixture.Build<SenderModel>()
-				.With(x => x.CountryId, TestConstants.TestCountryId)
+				//.With(x => x.Countries, new[] { TestConstants.TestCountryId })
 				.With(x => x.Authentication,
 					_fixture.Build<AuthenticationModel>()
 						.With(x => x.NewPassword, password)

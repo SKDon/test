@@ -32,7 +32,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Add()
 		{
 			var position = _fixture.Create<int>();

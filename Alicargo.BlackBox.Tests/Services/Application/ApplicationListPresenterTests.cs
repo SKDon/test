@@ -32,7 +32,7 @@ namespace Alicargo.BlackBox.Tests.Services.Application
 			_context.Dispose();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_FilterByCargoReceivedDaysShow()
 		{
 			var application = _presenter.List(isForwarder: true).Data.First(x => x.StateId != TestConstants.CargoReceivedStateId);

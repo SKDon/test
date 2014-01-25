@@ -36,7 +36,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Add_Get()
 		{
 			var data = _fixture.Create<ForwarderData>();
@@ -55,7 +55,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Update()
 		{
 			var original = _repository.GetAll().First();

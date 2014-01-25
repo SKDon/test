@@ -36,7 +36,7 @@ namespace Alicargo.Jobs.BlackBox.Tests.ApplicationEvents.Helpers
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Get()
 		{
 			var calculation = _fixture.Create<CalculationData>();

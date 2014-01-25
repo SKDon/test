@@ -33,7 +33,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			_composition.Dispose();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Create()
 		{
 			var password = _mock.Create<string>();

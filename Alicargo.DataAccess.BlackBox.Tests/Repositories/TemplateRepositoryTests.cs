@@ -36,7 +36,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Set_New()
 		{
 			var id = AddTestState();
@@ -61,7 +61,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			return _states.Add(TwoLetterISOLanguageName.English, _fixture.Create<StateData>());
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Set_WithSameLanguage()
 		{
 			var id = AddTestState();
@@ -85,7 +85,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			localization.ShouldBeEquivalentTo(newLocalizationData);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Set_WithOtherLanguage()
 		{
 			var id = AddTestState();

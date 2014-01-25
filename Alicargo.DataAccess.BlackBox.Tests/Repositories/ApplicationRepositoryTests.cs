@@ -40,7 +40,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ApplicationRepository_Add_Get()
 		{
 			var expected = CreateTestApplication();
@@ -52,7 +52,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			expected.ShouldBeEquivalentTo(actual);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ApplicationRepository_Add_GetDetails()
 		{
 			var expected = CreateTestApplication();
@@ -64,7 +64,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			expected.ShouldBeEquivalentTo(actual, options => options.ExcludingMissingProperties());
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ApplicationRepository_Count()
 		{
 			var defaultState = _stateRepository.Get(TwoLetterISOLanguageName.Italian, TestConstants.DefaultStateId).First();
@@ -77,7 +77,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Assert.AreEqual(newCount, count + 1);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ApplicationRepository_UpdateState()
 		{
 			var application = CreateTestApplication();
@@ -91,7 +91,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Assert.AreEqual(state.Key, actual.StateId);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ApplicationRepository_Update()
 		{
 			var old = CreateTestApplication();

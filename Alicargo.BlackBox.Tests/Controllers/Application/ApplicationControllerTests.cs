@@ -45,7 +45,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Create_Get()
 		{
 			var clientData = _clientRepository.Get(TestConstants.TestClientId1);
@@ -60,7 +60,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Create_Post()
 		{
 			var clientData = _clientRepository.Get(TestConstants.TestClientId1);
@@ -80,7 +80,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		[TestCategory("black-box")]
+		
 		public void Test_Edit_Post()
 		{
 			var model = _fixture.Create<ApplicationAdminModel>();

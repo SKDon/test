@@ -32,7 +32,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_TransitRepository_Add_Get()
 		{
 			var transit = CreateTestTransit();
@@ -42,7 +42,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			transit.ShouldBeEquivalentTo(actual);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_TransitRepository_Update()
 		{
 			var oldData = CreateTestTransit();

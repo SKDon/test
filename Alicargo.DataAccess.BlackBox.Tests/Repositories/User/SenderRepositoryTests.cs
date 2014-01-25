@@ -33,7 +33,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Add_Get()
 		{
 			var data = _fixture.Create<SenderData>();
@@ -48,7 +48,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			actual.ShouldBeEquivalentTo(data);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_GetTraiffs()
 		{
 			var data1 = _fixture.Create<SenderData>();
@@ -63,7 +63,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			actual[id2].ShouldBeEquivalentTo(data2.TariffOfTapePerBox);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Update()
 		{
 			var data = _fixture.Create<SenderData>();

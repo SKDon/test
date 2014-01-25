@@ -42,7 +42,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			return data;
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_CarrierRepository_Add_Get()
 		{
 			var carrier = CreateTestCarrier();

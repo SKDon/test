@@ -27,7 +27,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_BrokerRepository_Get()
 		{
 			var all = _repository.GetAll();

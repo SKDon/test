@@ -100,7 +100,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			return transit;
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ClientRepository_Count()
 		{
 			var all = _clientRepository.GetAll();
@@ -110,7 +110,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			Assert.AreEqual(all.Length, count);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ClientRepository_GetRange()
 		{
 			var count = (int)_clientRepository.Count();
@@ -122,7 +122,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			Assert.AreEqual(range.Length, take);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ClientRepository_Add_GetByUserId_GetById_Delete()
 		{
 			var db = (AlicargoDataContext)_context.UnitOfWork.Context;
@@ -150,7 +150,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			client.ShouldBeEquivalentTo(byUserId);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ClientRepository_Delete()
 		{
 			var client = CreateTestClient();
@@ -164,7 +164,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			Assert.IsNull(byId);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_ClientRepository_Update()
 		{
 			var client = CreateTestClient();

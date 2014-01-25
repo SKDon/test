@@ -32,7 +32,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_AuthenticationRepository_Add_GetById()
 		{
 			var login = _fixture.Create<string>();
@@ -57,7 +57,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			Assert.AreEqual(language, actual.Language);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_AuthenticationRepository_Update()
 		{
 			var login = _fixture.Create<string>();

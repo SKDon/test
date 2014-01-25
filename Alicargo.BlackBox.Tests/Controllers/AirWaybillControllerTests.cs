@@ -44,7 +44,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			_composition.Dispose();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Edit()
 		{
 			var entity = _db.AirWaybills.First();
@@ -76,7 +76,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			}
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_Create()
 		{
 			var broker = _db.Brokers.First();
@@ -121,7 +121,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			_db.SubmitChanges();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_SetAirWaybill()
 		{
 			var application = _db.Applications.First(x => !x.AirWaybillId.HasValue);

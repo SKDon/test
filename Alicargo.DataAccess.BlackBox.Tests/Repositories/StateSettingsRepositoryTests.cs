@@ -34,7 +34,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context.Cleanup();
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_StateRepository_GetStateAvailability()
 		{
 			var availabilities = _settings.GetStateAvailabilities().Where(x => x.Role == RoleType.Admin).ToArray();
@@ -49,7 +49,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			}
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_StateRepository_SetStateAvailability()
 		{
 			const long stateId = 7;
@@ -67,7 +67,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			array.Should().Contain(x => x.Role == RoleType.Forwarder);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_StateRepository_SetStateAvailability_Add()
 		{
 			const long stateId = 7;
@@ -87,7 +87,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			array.Should().Contain(x => x.Role == RoleType.Sender);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_StateRepository_SetStateAvailability_None()
 		{
 			const long stateId = 7;
@@ -101,7 +101,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			array.Length.ShouldBeEquivalentTo(0);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_StateRepository_SetStateAvailability_One()
 		{
 			_settings.GetStateAvailabilities().Count(x => x.StateId == TestConstants.DefaultStateId).ShouldBeEquivalentTo(3);
@@ -116,7 +116,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			array.Should().Contain(x => x.Role == RoleType.Broker);
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_StateRepository_GetStateVisibility()
 		{
 			var visibilities = _settings.GetStateVisibilities().Where(x => x.Role == RoleType.Admin).ToArray();
@@ -131,7 +131,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			}
 		}
 
-		[TestMethod, TestCategory("black-box")]
+		[TestMethod]
 		public void Test_StateRepository_GetAvailableRoles()
 		{
 			var roles = _settings.GetStateAvailabilities()
