@@ -5,8 +5,7 @@
 	@TwoLetterISOLanguageName CHAR(2),
 	@Name NVARCHAR (MAX),
 	@Email NVARCHAR (320),
-	@TariffOfTapePerBox MONEY,
-	@CountryId BIGINT
+	@TariffOfTapePerBox MONEY
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -19,10 +18,9 @@ AS BEGIN
 				@PasswordSalt = @PasswordSalt, 
 				@TwoLetterISOLanguageName = @TwoLetterISOLanguageName
 
-		INSERT	[dbo].[Sender]
-				([UserId], [Name], [Email], [TariffOfTapePerBox], [CountryId])
+		INSERT	[dbo].[Sender] ([UserId], [Name], [Email], [TariffOfTapePerBox])
 		OUTPUT	INSERTED.[Id]
-		VALUES	(@UserId, @Name, @Email, @TariffOfTapePerBox, @CountryId)
+		VALUES	(@UserId, @Name, @Email, @TariffOfTapePerBox)
 
 	COMMIT
 

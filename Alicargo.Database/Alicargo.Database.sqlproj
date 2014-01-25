@@ -187,6 +187,9 @@
     <Build Include="Stored procedures\User\Forwarder\Forwarder_Add.sql" />
     <Build Include="Stored procedures\User\Forwarder\Forwarder_Update.sql" />
     <Build Include="Stored procedures\User\Sender\Sender_GetByCountry.sql" />
+    <Build Include="Tables\User\SenderCountry.sql" />
+    <Build Include="Stored procedures\User\Sender\SenderCountry_Set.sql" />
+    <Build Include="Stored procedures\User\Sender\SenderCountry_Get.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

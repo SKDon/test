@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Sender_GetAll]
+
 AS BEGIN
 	SET NOCOUNT ON;
 

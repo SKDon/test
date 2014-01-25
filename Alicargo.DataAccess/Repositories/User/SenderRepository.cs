@@ -33,9 +33,9 @@ namespace Alicargo.DataAccess.Repositories.User
 		{
 			var table = TableParameters.GeIdsTable("Ids", ids);
 
-			var tariffs = _executor.Array<SenderTariff>("[dbo].[Sender_GetTariffs]", new TableParameters(table));
+			var tariffs = _executor.Array<dynamic>("[dbo].[Sender_GetTariffs]", new TableParameters(table));
 
-			return tariffs.ToDictionary(x => x.Id, x => x.TariffOfTapePerBox);
+			return tariffs.ToDictionary(x => (long)x.Id, x => (decimal)x.TariffOfTapePerBox);
 		}
 
 		public long Add(SenderData data, string password)
@@ -51,8 +51,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				TwoLetterISOLanguageName = data.Language,
 				data.Name,
 				data.Email,
-				data.TariffOfTapePerBox,
-				data.CountryId
+				data.TariffOfTapePerBox
 			});
 		}
 
@@ -65,8 +64,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				data.Name,
 				data.Email,
 				data.TariffOfTapePerBox,
-				TwoLetterISOLanguageName = data.Language,
-				data.CountryId
+				TwoLetterISOLanguageName = data.Language
 			});
 		}
 
@@ -75,22 +73,26 @@ namespace Alicargo.DataAccess.Repositories.User
 			return _executor.Array<UserData>("[dbo].[Sender_GetAll]");
 		}
 
-		public long[] GetByCountry(long countryId)
-		{
-			return _executor.Array<long>("[dbo].[Sender_GetByCountry]", new { countryId });
-		}
-
 		public long GetUserId(long senderId)
 		{
 			return _executor.Query<long>("[dbo].[Sender_GetUserId]", new { id = senderId });
 		}
 
-		// ReSharper disable ClassNeverInstantiated.Local
-		private sealed class SenderTariff// ReSharper restore ClassNeverInstantiated.Local
+		public long[] GetByCountry(long countryId)
 		{
-			// ReSharper disable UnusedAutoPropertyAccessor.Local
-			public decimal TariffOfTapePerBox { get; set; }
-			public long Id { get; set; }// ReSharper restore UnusedAutoPropertyAccessor.Local
+			return _executor.Array<long>("[dbo].[Sender_GetByCountry]", new { countryId });
+		}
+
+		public void SetCountries(long senderId, long[] countries)
+		{
+			var table = TableParameters.GeIdsTable("CountryIds", countries);
+
+			_executor.Execute("[dbo].[SenderCountry_Set]", new TableParameters(new { senderId }, table));
+		}
+
+		public long[] GetCountries(long senderId)
+		{
+			return _executor.Array<long>("[dbo].[SenderCountry_Get]", new { senderId });
 		}
 	}
 }

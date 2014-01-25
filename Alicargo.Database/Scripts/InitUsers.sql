@@ -84,9 +84,11 @@ SET IDENTITY_INSERT [dbo].[Forwarder] OFF
 
 /****** Object:  Table [dbo].[Sender]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Sender] ON
-INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email], [CountryId]) VALUES (1, 4, N'Sender1', N'Sender1@timez.org', 1)
-INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email], [CountryId]) VALUES (2, 11, N'Sender2', N'Sender2@timez.org', 108)
+INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email]) VALUES (1, 4, N'Sender1', N'Sender1@timez.org')
+INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email]) VALUES (2, 11, N'Sender2', N'Sender2@timez.org')
 SET IDENTITY_INSERT [dbo].[Sender] OFF
+
+INSERT [dbo].[SenderCountry] ([CountryId], [SenderId]) VALUES (1, 1), (108, 2)
 
 
 /****** Object:  Table [dbo].[Client]    Script Date: 05/18/2013 14:17:27 ******/

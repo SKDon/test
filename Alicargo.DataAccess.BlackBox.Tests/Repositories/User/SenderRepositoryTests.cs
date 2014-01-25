@@ -83,5 +83,17 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			Assert.IsNull(id);
 		}
+
+		[TestMethod]
+		public void Test_Get_And_Set_Countries()
+		{
+			var countries = new long[] { 1, 2, 3, 108 };
+
+			_repository.SetCountries(TestConstants.TestSenderId, countries);
+
+			var actual = _repository.GetCountries(TestConstants.TestSenderId);
+
+			actual.ShouldAllBeEquivalentTo(countries);
+		}
 	}
 }
