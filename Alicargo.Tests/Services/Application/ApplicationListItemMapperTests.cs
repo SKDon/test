@@ -24,13 +24,15 @@ namespace Alicargo.Tests.Services.Application
 		private Dictionary<long, string> _localazedStates;
 		private ApplicationListItemMapper _mapper;
 		private long[] _stateAvailability;
+		private List<CityData> _cities;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			const int count = 10;
+			const int count = 20;
 			_context = new MockContainer();
 			_countries = new List<CountryData>();
+			_cities = new List<CityData>();
 			_localazedStates = new Dictionary<long, string>();
 			_stateAvailability = Enumerable.Range(0, count / 2).Select(x => (long)x).ToArray();
 			_data = _context.CreateMany<ApplicationListItemData>(count).ToArray();
@@ -45,10 +47,17 @@ namespace Alicargo.Tests.Services.Application
 					Position = i
 				};
 				_countries.Add(country);
+				_cities.Add(new CityData
+				{
+					Id = i,
+					Name = _context.Create<string>(),
+					Position = i
+				});
 				_localazedStates.Add(i, _context.Create<string>());
 
 				_data[i].StateId = i;
-				_data[i].CountryId = i * 2;
+				_data[i].CountryId = i / 2;
+				_data[i].TransitCityId = i / 3;
 			}
 
 			_context.ApplicationFileRepository.Setup(x => x.GetInfo(It.IsAny<long[]>(), It.IsAny<ApplicationFileType>()))
@@ -56,6 +65,7 @@ namespace Alicargo.Tests.Services.Application
 
 			_context.IdentityService.SetupGet(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 			_context.CountryRepository.Setup(x => x.All(TwoLetterISOLanguageName.English)).Returns(_countries.ToArray());
+			_context.CityRepository.Setup(x => x.All(TwoLetterISOLanguageName.English)).Returns(_cities.ToArray());
 			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(_stateAvailability);
 			_context.StateConfig.SetupGet(x => x.CargoOnTransitStateId).Returns(CargoOnTransitStateId);
 			_context.ApplicationRepository.Setup(x => x.GetCalculations(It.IsAny<long[]>())).Returns(_calculations);
@@ -85,6 +95,7 @@ namespace Alicargo.Tests.Services.Application
 				var item = items[i];
 				var data = _data[i];
 				var country = _countries.First(x => x.Id == data.CountryId).Name;
+				var city = _cities.First(x => x.Id == data.TransitCityId).Name;
 
 				item.CountryName.ShouldBeEquivalentTo(country);
 				item.State.ShouldBeEquivalentTo(new ApplicationStateModel
@@ -92,6 +103,7 @@ namespace Alicargo.Tests.Services.Application
 					StateId = i,
 					StateName = _localazedStates[i]
 				});
+				item.TransitCity.ShouldBeEquivalentTo(city);
 				item.CanClose.ShouldBeEquivalentTo(item.StateId == CargoOnTransitStateId);
 				item.CanSetState.ShouldBeEquivalentTo(_stateAvailability.Contains(item.StateId));
 				item.TransitDeliveryTypeString.Should().NotBeNullOrEmpty();

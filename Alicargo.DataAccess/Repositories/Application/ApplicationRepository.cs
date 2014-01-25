@@ -67,22 +67,23 @@ namespace Alicargo.DataAccess.Repositories.Application
 				Value = x.Value,
 				CurrencyId = x.CurrencyId,
 				AirWaybillId = x.AirWaybillId,
-				FactureCost = x.FactureCostEdited ?? x.FactureCost,
-				SenderFactureCost = x.FactureCost,
-				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
-				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
-				TariffPerKg = x.TariffPerKg,
-				TransitCost = x.TransitCostEdited ?? x.TransitCost,
-				ForwarderTransitCost = x.TransitCost,
-				PickupCost = x.PickupCostEdited ?? x.PickupCost,
-				SenderPickupCost = x.PickupCost,
-				SenderRate = x.SenderRate,
 				SenderId = x.SenderId,
 				AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
 				AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
 				AirWaybillGTD = x.AirWaybill.GTD,
 				ClientEmail = x.Client.Emails,
-				ClientUserId = x.Client.UserId
+				ClientUserId = x.Client.UserId,
+				TariffPerKg = x.TariffPerKg,
+				SenderRate = x.SenderRate,
+
+				FactureCost = x.FactureCostEdited ?? x.FactureCost,
+				SenderFactureCost = x.FactureCost,
+				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
+				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
+				TransitCost = x.TransitCostEdited ?? x.TransitCost,
+				ForwarderTransitCost = x.TransitCost,
+				PickupCost = x.PickupCostEdited ?? x.PickupCost,
+				SenderPickupCost = x.PickupCost
 			};
 
 			_selector = x => new ApplicationData

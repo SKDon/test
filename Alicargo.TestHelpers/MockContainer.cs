@@ -91,6 +91,7 @@ namespace Alicargo.TestHelpers
 			TextBulder = Inject<ITextBuilder>();
 			ApplicationEventTemplates = Inject<IApplicationEventTemplates>();
 			SenderRepository = Inject<ISenderRepository>();
+			CityRepository = Inject<ICityRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -113,6 +114,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IClientPermissions> ClientPermissions { get; private set; }
 		public Mock<IClientRepository> ClientRepository { get; private set; }
 		public Mock<ICountryRepository> CountryRepository { get; private set; }
+		public Mock<ICityRepository> CityRepository { get; private set; }
 		public Mock<IIdentityService> IdentityService { get; private set; }
 		public Mock<IMailSender> MailSender { get; private set; }
 		public Mock<IMessageBuilder> MessageBuilder { get; private set; }

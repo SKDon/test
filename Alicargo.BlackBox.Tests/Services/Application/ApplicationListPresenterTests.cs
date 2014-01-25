@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Services.Application;
@@ -17,41 +17,45 @@ namespace Alicargo.BlackBox.Tests.Services.Application
 		private ApplicationListPresenter _presenter;
 
 
-		[TestInitialize]
-		public void TestInitialize()
-		{
-			_context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString, RoleType.Forwarder);
-			_context.Kernel.Bind<ApplicationListPresenter>().ToSelf();
-
-			_presenter = _context.Kernel.Get<ApplicationListPresenter>();
-		}
-
 		[TestCleanup]
 		public void TestCleanup()
 		{
 			_context.Dispose();
 		}
 
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			_context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString,
+				RoleType.Forwarder);
+			_context.Kernel.Bind<ApplicationListPresenter>().ToSelf();
+
+			_presenter = _context.Kernel.Get<ApplicationListPresenter>();
+		}
+
 		[TestMethod]
 		public void Test_FilterByCargoReceivedDaysShow()
 		{
-			var application = _presenter.List(TwoLetterISOLanguageName.English).Data.First(x => x.StateId != TestConstants.CargoReceivedStateId);
+			var application = _presenter.List(TwoLetterISOLanguageName.English, isForwarder: true).Data
+				.First(x => x.StateId != TestConstants.CargoReceivedStateId);
 
-			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
-				connection.Execute("update [dbo].[Application] set [StateId] = @StateId, [StateChangeTimestamp] = GETUTCDATE() where [Id] = @Id",
+				connection.Execute(
+					"update [dbo].[Application] set [StateId] = @StateId, [StateChangeTimestamp] = GETUTCDATE() where [Id] = @Id",
 					new { StateId = TestConstants.CargoReceivedStateId, application.Id });
 			}
 
-			Assert.IsTrue(_presenter.List(TwoLetterISOLanguageName.English).Data.Any(x => x.Id == application.Id && x.StateId == TestConstants.CargoReceivedStateId));
+			Assert.IsTrue(_presenter.List(TwoLetterISOLanguageName.English, isForwarder: true)
+				.Data.Any(x => x.Id == application.Id && x.StateId == TestConstants.CargoReceivedStateId));
 
-			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				connection.Execute("update [dbo].[Application] set [StateChangeTimestamp] = GETUTCDATE() - 20 where [Id] = @Id",
 					new { application.Id });
 			}
 
-			Assert.IsFalse(_presenter.List(TwoLetterISOLanguageName.English).Data.Any(x => x.Id == application.Id));
+			Assert.IsFalse(_presenter.List(TwoLetterISOLanguageName.English, isForwarder: true).Data.Any(x => x.Id == application.Id));
 		}
 	}
 }

@@ -18,10 +18,16 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	public class ApplicationRepositoryTests
 	{
 		private IApplicationRepository _applications;
-		private IStateRepository _stateRepository;
 		private DbTestContext _context;
 		private ApplicationEditor _editor;
 		private Fixture _fixture;
+		private IStateRepository _stateRepository;
+
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -32,12 +38,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_applications = new ApplicationRepository(_context.UnitOfWork);
 			_stateRepository = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 			_editor = new ApplicationEditor(_context.UnitOfWork);
-		}
-
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_context.Cleanup();
 		}
 
 		[TestMethod]
@@ -61,7 +61,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			Assert.IsNotNull(actual);
 
-			expected.ShouldBeEquivalentTo(actual, options => options.ExcludingMissingProperties());
+			expected.ShouldBeEquivalentTo(actual,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.FactureCost)
+					.Excluding(x => x.PickupCost)
+					.Excluding(x => x.TransitCost));
+
+			actual.FactureCost.ShouldBeEquivalentTo(expected.FactureCostEdited);
+			actual.PickupCost.ShouldBeEquivalentTo(expected.PickupCostEdited);
+			actual.TransitCost.ShouldBeEquivalentTo(expected.TransitCostEdited);
 		}
 
 		[TestMethod]
@@ -75,20 +83,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var newCount = _applications.Count(new[] { defaultState.Key });
 
 			Assert.AreEqual(newCount, count + 1);
-		}
-
-		[TestMethod]
-		public void Test_ApplicationRepository_UpdateState()
-		{
-			var application = CreateTestApplication();
-			var state = _stateRepository.Get(TwoLetterISOLanguageName.Italian).First(x => x.Key != application.StateId);
-
-			_editor.SetState(application.Id, state.Key);
-			_context.UnitOfWork.SaveChanges();
-
-			var actual = _applications.Get(application.Id);
-
-			Assert.AreEqual(state.Key, actual.StateId);
 		}
 
 		[TestMethod]
@@ -114,6 +108,20 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data = _applications.Get(old.Id);
 
 			data.ShouldBeEquivalentTo(newData);
+		}
+
+		[TestMethod]
+		public void Test_ApplicationRepository_UpdateState()
+		{
+			var application = CreateTestApplication();
+			var state = _stateRepository.Get(TwoLetterISOLanguageName.Italian).First(x => x.Key != application.StateId);
+
+			_editor.SetState(application.Id, state.Key);
+			_context.UnitOfWork.SaveChanges();
+
+			var actual = _applications.Get(application.Id);
+
+			Assert.AreEqual(state.Key, actual.StateId);
 		}
 
 		private ApplicationData CreateTestApplication()
