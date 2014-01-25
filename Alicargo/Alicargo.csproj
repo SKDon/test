@@ -175,7 +175,6 @@
     <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
     <Compile Include="Services\AirWaybill\AwbMapper.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
-    <Compile Include="Services\Application\AdminApplicationManagerWithEvent.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelGenerator.cs" />

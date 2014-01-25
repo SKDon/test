@@ -4,7 +4,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Event;
-using Alicargo.Core.Event;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;

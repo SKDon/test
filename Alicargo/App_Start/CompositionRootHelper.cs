@@ -59,14 +59,6 @@ namespace Alicargo.App_Start
 				}
 			},
 			{
-				typeof(IAdminApplicationManager),
-				new[]
-				{
-					typeof(AdminApplicationManager),
-					typeof(AdminApplicationManagerWithEvent)
-				}
-			},
-			{
 				typeof(IClientManager),
 				new[]
 				{

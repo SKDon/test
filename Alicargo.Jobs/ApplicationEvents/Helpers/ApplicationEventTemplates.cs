@@ -1,8 +1,8 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts;
+﻿using Alicargo.Core.Contracts.Event;
+using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
-using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;
 

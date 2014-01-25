@@ -24,10 +24,10 @@ namespace Alicargo.DataAccess.Contracts.Enums
 
 
 		// Client balance events
-		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.EventType), "BalanceIncreased")]
+		[DisplayNameLocalized(typeof(Resources.EventType), "BalanceIncreased")]
 		BalanceIncreased = 13,
 
-		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.EventType), "BalanceDecreased")]
+		[DisplayNameLocalized(typeof(Resources.EventType), "BalanceDecreased")]
 		BalanceDecreased = 14
 	}
 }

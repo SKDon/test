@@ -83,6 +83,7 @@ namespace Alicargo.App_Start
 				.IncludingNonePublicTypes()
 				.Select(IsServiceType)
 				.Excluding<SqlProcedureExecutor>()
+				.Excluding<ApplicationEditor>()
 				.BindDefaultInterface()
 				.Configure(y => y.InScope(scope)));
 

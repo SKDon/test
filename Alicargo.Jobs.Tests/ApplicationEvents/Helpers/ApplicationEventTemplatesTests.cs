@@ -1,6 +1,6 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts;
+﻿using Alicargo.Core.Contracts.Event;
+using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Jobs.ApplicationEvents.Helpers;
 using Alicargo.TestHelpers;
 using FluentAssertions;

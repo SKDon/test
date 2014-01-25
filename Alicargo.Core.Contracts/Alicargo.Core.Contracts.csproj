@@ -60,6 +60,7 @@
     <Compile Include="Client\IClientPermissions.cs" />
     <Compile Include="Common\IIdentityService.cs" />
     <Compile Include="Common\ListCollection.cs" />
+    <Compile Include="Event\ApplicationSetStateEventData.cs" />
     <Compile Include="Event\IEventFacade.cs" />
     <Compile Include="Event\IPartitionConverter.cs" />
     <Compile Include="Excel\IDrawable.cs" />

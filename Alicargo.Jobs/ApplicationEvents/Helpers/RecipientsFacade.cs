@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
-using Alicargo.Jobs.ApplicationEvents.Entities;
 using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers

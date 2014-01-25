@@ -1,7 +1,9 @@
 ﻿using System;
 using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.Utilities;
 
 namespace Alicargo.Core.Event
 {
@@ -23,12 +25,16 @@ namespace Alicargo.Core.Event
 
 		public long Add(ApplicationData application)
 		{
-			return _editor.Add(application);
+			var applicationId = _editor.Add(application);
+
+			_events.Add(applicationId, EventType.ApplicationCreated, EventState.Emailing);
+
+			return applicationId;
 		}
 
-		public void Delete(long id)
+		public void Delete(long applicationId)
 		{
-			_editor.Delete(id);
+			_editor.Delete(applicationId);
 		}
 
 		public void SetAirWaybill(long applicationId, long? airWaybillId)
@@ -36,9 +42,17 @@ namespace Alicargo.Core.Event
 			_editor.SetAirWaybill(applicationId, airWaybillId);
 		}
 
-		public void SetState(long id, long stateId)
+		public void SetState(long applicationId, long stateId)
 		{
-			_editor.SetState(id, stateId);
+			_editor.SetState(applicationId, stateId);
+
+			_events.Add(applicationId,
+				EventType.ApplicationSetState, EventState.Emailing,
+				new ApplicationSetStateEventData
+				{
+					StateId = stateId,
+					Timestamp = DateTimeProvider.Now
+				});
 		}
 
 		public void SetDateInStock(long applicationId, DateTimeOffset dateTimeOffset)
@@ -46,54 +60,58 @@ namespace Alicargo.Core.Event
 			_editor.SetDateInStock(applicationId, dateTimeOffset);
 		}
 
-		public void SetTransitReference(long id, string transitReference)
+		public void SetTransitReference(long applicationId, string transitReference)
 		{
-			_editor.SetTransitReference(id, transitReference);
+			_editor.SetTransitReference(applicationId, transitReference);
+
+			_events.Add(applicationId, EventType.SetTransitReference, EventState.Emailing, transitReference);
 		}
 
-		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
+		public void SetDateOfCargoReceipt(long applicationId, DateTimeOffset? dateOfCargoReceipt)
 		{
-			_editor.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+			_editor.SetDateOfCargoReceipt(applicationId, dateOfCargoReceipt);
+
+			_events.Add(applicationId, EventType.SetDateOfCargoReceipt, EventState.Emailing, dateOfCargoReceipt);
 		}
 
-		public void SetTransitCost(long id, decimal? transitCost)
+		public void SetTransitCost(long applicationId, decimal? transitCost)
 		{
-			_editor.SetTransitCost(id, transitCost);
+			_editor.SetTransitCost(applicationId, transitCost);
 		}
 
-		public void SetTransitCostEdited(long id, decimal? transitCost)
+		public void SetTransitCostEdited(long applicationId, decimal? transitCost)
 		{
-			_editor.SetTransitCostEdited(id, transitCost);
+			_editor.SetTransitCostEdited(applicationId, transitCost);
 		}
 
-		public void SetTariffPerKg(long id, decimal? tariffPerKg)
+		public void SetTariffPerKg(long applicationId, decimal? tariffPerKg)
 		{
-			_editor.SetTariffPerKg(id, tariffPerKg);
+			_editor.SetTariffPerKg(applicationId, tariffPerKg);
 		}
 
-		public void SetPickupCostEdited(long id, decimal? pickupCost)
+		public void SetPickupCostEdited(long applicationId, decimal? pickupCost)
 		{
-			_editor.SetPickupCostEdited(id, pickupCost);
+			_editor.SetPickupCostEdited(applicationId, pickupCost);
 		}
 
-		public void SetFactureCostEdited(long id, decimal? factureCost)
+		public void SetFactureCostEdited(long applicationId, decimal? factureCost)
 		{
-			_editor.SetFactureCostEdited(id, factureCost);
+			_editor.SetFactureCostEdited(applicationId, factureCost);
 		}
 
-		public void SetScotchCostEdited(long id, decimal? scotchCost)
+		public void SetScotchCostEdited(long applicationId, decimal? scotchCost)
 		{
-			_editor.SetScotchCostEdited(id, scotchCost);
+			_editor.SetScotchCostEdited(applicationId, scotchCost);
 		}
 
-		public void SetSenderRate(long id, decimal? senderRate)
+		public void SetSenderRate(long applicationId, decimal? senderRate)
 		{
-			_editor.SetSenderRate(id, senderRate);
+			_editor.SetSenderRate(applicationId, senderRate);
 		}
 
-		public void SetClass(long id, int? classId)
+		public void SetClass(long applicationId, int? classId)
 		{
-			_editor.SetClass(id, classId);
+			_editor.SetClass(applicationId, classId);
 		}
 	}
 }
