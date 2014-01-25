@@ -3,7 +3,7 @@ using Alicargo.DataAccess.Contracts.Contracts.Application;
 
 namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
-	public interface IApplicationUpdateRepository
+	public interface IApplicationEditor
 	{
 		void Update(ApplicationData application);
 		Func<long> Add(ApplicationData application);

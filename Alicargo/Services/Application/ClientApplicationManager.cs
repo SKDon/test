@@ -18,12 +18,12 @@ namespace Alicargo.Services.Application
 		private readonly ISenderService _senders;
 		private readonly ITransitService _transits;
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IApplicationUpdateRepository _updater;
+		private readonly IApplicationEditor _updater;
 
 		public ClientApplicationManager(
 			IApplicationRepository applications,
 			IForwarderService forwarders,
-			IApplicationUpdateRepository updater,
+			IApplicationEditor updater,
 			ISenderService senders,
 			IStateConfig config,
 			ITransitService transits,

@@ -8,11 +8,11 @@ using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.Application
 {
-	internal sealed class ApplicationUpdateRepository : IApplicationUpdateRepository
+	internal sealed class ApplicationEditor : IApplicationEditor
 	{
 		private readonly AlicargoDataContext _context;
 
-		public ApplicationUpdateRepository(IUnitOfWork unitOfWork)
+		public ApplicationEditor(IUnitOfWork unitOfWork)
 		{
 			_context = (AlicargoDataContext)unitOfWork.Context;
 		}

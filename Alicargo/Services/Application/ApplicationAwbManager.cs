@@ -11,7 +11,7 @@ namespace Alicargo.Services.Application
     public sealed class ApplicationAwbManager : IApplicationAwbManager
     {
         private readonly IAdminApplicationManager _applicationManager;
-        private readonly IApplicationUpdateRepository _applicationUpdater;
+        private readonly IApplicationEditor _applicationUpdater;
         private readonly IAwbRepository _awbRepository;
 	    private readonly IStateConfig _stateConfig;
 	    private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +21,7 @@ namespace Alicargo.Services.Application
 			IStateConfig stateConfig,
             IUnitOfWork unitOfWork,
             IAdminApplicationManager applicationManager,
-            IApplicationUpdateRepository applicationUpdater)
+            IApplicationEditor applicationUpdater)
         {
             _awbRepository = awbRepository;
 	        _stateConfig = stateConfig;

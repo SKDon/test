@@ -75,7 +75,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var awbId2 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
 			_context.UnitOfWork.SaveChanges();
 
-			var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
+			var applications = new ApplicationEditor(_context.UnitOfWork);
 			var app11 = applications.Add(data11);
 			var app12 = applications.Add(data12);
 			var app21 = applications.Add(data21);
@@ -132,7 +132,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var id = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
 			_context.UnitOfWork.SaveChanges();
 
-			var applications = new ApplicationUpdateRepository(_context.UnitOfWork);
+			var applications = new ApplicationEditor(_context.UnitOfWork);
 			var a1 = applications.Add(data1);
 			var a2 = applications.Add(data2);
 			_context.UnitOfWork.SaveChanges();

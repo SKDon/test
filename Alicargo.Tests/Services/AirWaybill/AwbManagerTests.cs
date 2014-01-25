@@ -115,14 +115,14 @@ namespace Alicargo.Tests.Services.AirWaybill
 			var id = _context.Create<long>();
 			var applications = _context.CreateMany<ApplicationData>().ToArray();
 			_context.ApplicationRepository.Setup(x => x.GetByAirWaybill(id)).Returns(applications);
-			_context.ApplicationUpdater.Setup(x => x.SetAirWaybill(It.IsAny<long>(), null));
+			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(It.IsAny<long>(), null));
 			_context.AirWaybillRepository.Setup(x => x.Delete(id));
 			_context.UnitOfWork.Setup(x => x.SaveChanges());
 
 			_manager.Delete(id);
 
 			_context.ApplicationRepository.Verify(x => x.GetByAirWaybill(id), Times.Once());
-			_context.ApplicationUpdater.Verify(
+			_context.ApplicationEditor.Verify(
 				x => x.SetAirWaybill(It.Is<long>(i => applications.Any(a => a.Id == i)), null),
 				Times.Exactly(applications.Length));
 			_context.AirWaybillRepository.Verify(x => x.Delete(id), Times.Once());

@@ -10,7 +10,7 @@ namespace Alicargo.Core.AirWaybill
 	{
 		private readonly IApplicationAwbManager _applicationAwbManager;
 		private readonly IApplicationRepository _applicationRepository;
-		private readonly IApplicationUpdateRepository _applicationUpdater;
+		private readonly IApplicationEditor _applicationUpdater;
 		private readonly IAwbRepository _awbRepository;
 		private readonly IUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace Alicargo.Core.AirWaybill
 			IApplicationAwbManager applicationAwbManager,
 			IApplicationRepository applicationRepository,
 			IUnitOfWork unitOfWork,
-			IApplicationUpdateRepository applicationUpdater)
+			IApplicationEditor applicationUpdater)
 		{
 			_awbRepository = awbRepository;
 			_applicationAwbManager = applicationAwbManager;

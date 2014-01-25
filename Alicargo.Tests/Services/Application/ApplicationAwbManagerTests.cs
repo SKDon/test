@@ -27,14 +27,14 @@ namespace Alicargo.Tests.Services.Application
 			var applicationId = _context.Create<long>();
 			var stateId = _context.Create<long>();
 
-			_context.ApplicationUpdater.Setup(x => x.SetAirWaybill(applicationId, null));
+			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(applicationId, null));
 			_context.UnitOfWork.Setup(x => x.SaveChanges());
 			_context.ApplicationManager.Setup(x => x.SetState(applicationId, stateId));
 			_context.StateConfig.Setup(x => x.CargoInStockStateId).Returns(stateId);
 
 			_manager.SetAwb(applicationId, null);
 
-			_context.ApplicationUpdater.Verify(x => x.SetAirWaybill(applicationId, null), Times.Once());
+			_context.ApplicationEditor.Verify(x => x.SetAirWaybill(applicationId, null), Times.Once());
 			_context.ApplicationManager.Verify(x => x.SetState(applicationId, stateId), Times.Once);
 			_context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
 		}
@@ -59,14 +59,14 @@ namespace Alicargo.Tests.Services.Application
 
 			// ReSharper disable ImplicitlyCapturedClosure
 			_context.AirWaybillRepository.Setup(x => x.GetAggregate(airWaybillId)).Returns(new[] { aggregate });
-			_context.ApplicationUpdater.Setup(x => x.SetAirWaybill(applicationId, airWaybillId));
+			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(applicationId, airWaybillId));
 			_context.ApplicationManager.Setup(x => x.SetState(applicationId, aggregate.StateId));
 			_context.UnitOfWork.Setup(x => x.SaveChanges());
 
 			_manager.SetAwb(applicationId, airWaybillId);
 
 			_context.AirWaybillRepository.Verify(x => x.GetAggregate(airWaybillId), Times.Once());
-			_context.ApplicationUpdater.Verify(x => x.SetAirWaybill(applicationId, airWaybillId), Times.Once());
+			_context.ApplicationEditor.Verify(x => x.SetAirWaybill(applicationId, airWaybillId), Times.Once());
 			_context.ApplicationManager.Verify(x => x.SetState(applicationId, aggregate.StateId), Times.Once());
 			// ReSharper restore ImplicitlyCapturedClosure
 			_context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());

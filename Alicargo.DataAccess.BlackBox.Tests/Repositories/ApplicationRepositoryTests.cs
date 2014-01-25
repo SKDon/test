@@ -20,7 +20,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private IApplicationRepository _applications;
 		private IStateRepository _stateRepository;
 		private DbTestContext _context;
-		private ApplicationUpdateRepository _applicationUpater;
+		private ApplicationEditor _applicationUpater;
 		private Fixture _fixture;
 
 		[TestInitialize]
@@ -31,7 +31,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
 			_stateRepository = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
-			_applicationUpater = new ApplicationUpdateRepository(_context.UnitOfWork);
+			_applicationUpater = new ApplicationEditor(_context.UnitOfWork);
 		}
 
 		[TestCleanup]
