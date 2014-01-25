@@ -7,6 +7,7 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
 using Alicargo.ViewModels;
@@ -14,19 +15,21 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	internal sealed class ApplicationManager : IApplicationManager
+	internal sealed class AdminApplicationManager : IAdminApplicationManager
 	{
-		private readonly IApplicationUpdateRepository _applicationUpdater;
+		private readonly IApplicationUpdateRepository _updater;
 		private readonly IApplicationRepository _applications;
+		private readonly ISenderService _senders;
 		private readonly IStateConfig _config;
 		private readonly IIdentityService _identity;
 		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
 
-		public ApplicationManager(
+		public AdminApplicationManager(
 			IApplicationRepository applications,
-			IApplicationUpdateRepository applicationUpdater,
+			ISenderService senders,
+			IApplicationUpdateRepository updater,
 			IStateConfig config,
 			IIdentityService identity,
 			ITransitService transitService,
@@ -34,7 +37,8 @@ namespace Alicargo.Services.Application
 			IStateSettingsRepository settings)
 		{
 			_applications = applications;
-			_applicationUpdater = applicationUpdater;
+			_senders = senders;
+			_updater = updater;
 			_config = config;
 			_identity = identity;
 			_transitService = transitService;
@@ -51,7 +55,7 @@ namespace Alicargo.Services.Application
 
 			Map(model, data);
 
-			_applicationUpdater.Update(data);
+			_updater.Update(data);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -63,7 +67,7 @@ namespace Alicargo.Services.Application
 
 			var data = GetNewApplicationData(model, clientId, transitId);
 
-			var id = _applicationUpdater.Add(data);
+			var id = _updater.Add(data);
 
 			_unitOfWork.SaveChanges();
 
@@ -74,7 +78,7 @@ namespace Alicargo.Services.Application
 		{
 			var applicationData = _applications.Get(id);
 
-			_applicationUpdater.Delete(id);
+			_updater.Delete(id);
 
 			_unitOfWork.SaveChanges();
 
@@ -85,14 +89,14 @@ namespace Alicargo.Services.Application
 		{
 			SetState(id, _config.CargoOnTransitStateId);
 
-			_applicationUpdater.SetTransitReference(id, transitReference);
+			_updater.SetTransitReference(id, transitReference);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
-			_applicationUpdater.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+			_updater.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -106,7 +110,7 @@ namespace Alicargo.Services.Application
 				throw new InvalidLogicException("Can't set transit cost after a calculation was submitted.");
 			}
 
-			_applicationUpdater.SetTransitCost(id, transitCost);
+			_updater.SetTransitCost(id, transitCost);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -118,14 +122,14 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_applicationUpdater.SetTransitCostEdited(id, transitCost);
+			_updater.SetTransitCostEdited(id, transitCost);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetTariffPerKg(long id, decimal? tariffPerKg)
 		{
-			_applicationUpdater.SetTariffPerKg(id, tariffPerKg);
+			_updater.SetTariffPerKg(id, tariffPerKg);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -137,7 +141,7 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_applicationUpdater.SetPickupCostEdited(id, pickupCost);
+			_updater.SetPickupCostEdited(id, pickupCost);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -149,7 +153,7 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_applicationUpdater.SetFactureCostEdited(id, factureCost);
+			_updater.SetFactureCostEdited(id, factureCost);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -161,21 +165,21 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_applicationUpdater.SetScotchCostEdited(id, scotchCost);
+			_updater.SetScotchCostEdited(id, scotchCost);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetSenderRate(long id, decimal? senderRate)
 		{
-			_applicationUpdater.SetSenderRate(id, senderRate);
+			_updater.SetSenderRate(id, senderRate);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetClass(long id, ClassType? classType)
 		{
-			_applicationUpdater.SetClass(id, (int?)classType);
+			_updater.SetClass(id, (int?)classType);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -190,12 +194,18 @@ namespace Alicargo.Services.Application
 			// todo: 2. test logic with states
 			if(stateId == _config.CargoInStockStateId)
 			{
-				_applicationUpdater.SetDateInStock(applicationId, DateTimeProvider.Now);
+				_updater.SetDateInStock(applicationId, DateTimeProvider.Now);
 			}
 
-			_applicationUpdater.SetState(applicationId, stateId);
+			_updater.SetState(applicationId, stateId);
 
 			_unitOfWork.SaveChanges();
+		}
+
+		private bool HasPermissionToSetState(long stateId)
+		{
+			return _settings.GetStateAvailabilities()
+				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
 		}
 
 		private ApplicationData GetNewApplicationData(ApplicationAdminModel model, long clientId, long transitId)
@@ -238,19 +248,18 @@ namespace Alicargo.Services.Application
 				FactureCostEdited = model.FactureCostEdited,
 				TransitCostEdited = model.TransitCostEdited,
 				PickupCostEdited = model.PickupCostEdited,
-				SenderId = model.SenderId,
+				SenderId = GetSenderId(model),
 				ForwarderId = model.ForwarderId,
 				SenderRate = null
 			};
 		}
 
-		private bool HasPermissionToSetState(long stateId)
+		private long GetSenderId(ApplicationAdminModel model)
 		{
-			return _settings.GetStateAvailabilities()
-				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
+			return model.SenderId.HasValue ? model.SenderId.Value : _senders.GetByCountryOrAny(model.CountryId);
 		}
 
-		private static void Map(ApplicationAdminModel @from, ApplicationData to)
+		private void Map(ApplicationAdminModel @from, ApplicationData to)
 		{
 			to.Invoice = @from.Invoice;
 			to.Characteristic = @from.Characteristic;
@@ -277,7 +286,7 @@ namespace Alicargo.Services.Application
 			to.TransitCostEdited = from.TransitCostEdited;
 			to.PickupCostEdited = from.PickupCostEdited;
 			to.ScotchCostEdited = from.ScotchCostEdited;
-			to.SenderId = from.SenderId;
+			to.SenderId = GetSenderId(@from);
 			to.ForwarderId = from.ForwarderId;
 		}
 	}
