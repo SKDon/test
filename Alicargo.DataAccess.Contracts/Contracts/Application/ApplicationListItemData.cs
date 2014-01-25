@@ -5,8 +5,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
 	public sealed class ApplicationListItemData
 	{
-		#region Additional
-
 		public string ClientLegalEntity { get; set; }
 
 		public string ClientNic { get; set; }
@@ -28,10 +26,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public DeliveryType TransitDeliveryType { get; set; }
 
 		public string TransitCarrierName { get; set; }
-
-		#endregion
-
-		#region Application Data
 
 		public long Id { get; set; }
 
@@ -110,7 +104,5 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public decimal? SenderRate { get; set; }
 
 		public long ClientId { get; set; }
-
-		#endregion
 	}
 }

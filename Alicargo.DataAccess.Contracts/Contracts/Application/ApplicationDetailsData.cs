@@ -5,8 +5,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
 	public sealed class ApplicationDetailsData
 	{
-		#region Additional
-
 		public long ClientUserId { get; set; }
 
 		public string ClientEmail { get; set; }
@@ -38,10 +36,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string TransitRecipientName { get; set; }
 
 		public string TransitWarehouseWorkingTime { get; set; }
-
-		#endregion
-
-		#region Application Data
 
 		public long Id { get; set; }
 
@@ -96,7 +90,5 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public long ClientId { get; set; }
 
 		public long SenderId { get; set; }
-
-		#endregion
 	}
 }
