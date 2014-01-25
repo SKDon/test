@@ -167,7 +167,7 @@
     <Compile Include="Controllers\StateSettingsController.cs" />
     <Compile Include="Controllers\User\ForwarderController.cs" />
     <Compile Include="Controllers\User\RestorePasswordController.cs" />
-    <Compile Include="MvcHelpers\BundleHelpres\CssPaths.cs" />
+    <Compile Include="App_Start\Mvc\CssPaths.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
     <Compile Include="Services\Abstract\ICountryService.cs" />
     <Compile Include="Services\Abstract\ICityService.cs" />
@@ -207,7 +207,7 @@
     <Compile Include="Controllers\Awb\SenderAwbController.cs" />
     <Compile Include="MvcHelpers\Extensions\DropDownListHelpers.cs" />
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
-    <Compile Include="MvcHelpers\BundleHelpres\JsPaths.cs" />
+    <Compile Include="App_Start\Mvc\JsPaths.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
@@ -461,7 +461,6 @@
     <Compile Include="App_Start\Mvc\RouteConfig.cs" />
     <Content Include="Content\app\calculation-grid.css" />
     <Content Include="Content\app\common.css" />
-    <Content Include="Content\app\entity.css" />
     <Content Include="Content\app\kendo.css" />
     <Content Include="Content\app\payment.css" />
     <Content Include="Content\bootstrap\fileupload\bootstrap-fileupload.css" />

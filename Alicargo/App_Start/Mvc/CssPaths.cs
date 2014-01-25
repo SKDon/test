@@ -1,4 +1,6 @@
-﻿namespace Alicargo.MvcHelpers.BundleHelpres
+﻿using Alicargo.MvcHelpers.BundleHelpres;
+
+namespace Alicargo.App_Start.Mvc
 {
 	public sealed class CssPaths
 	{
@@ -11,7 +13,6 @@
 			"~/Content/app/kendo.css",
 			"~/Content/app/layout.css",
 			"~/Content/app/common.css",
-			"~/Content/app/entity.css",
 			"~/Content/app/calculation-grid.css",
 			"~/Content/app/payment.css")] 
 		public const string Common = "~/css";

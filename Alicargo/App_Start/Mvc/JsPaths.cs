@@ -1,4 +1,6 @@
-﻿namespace Alicargo.MvcHelpers.BundleHelpres
+﻿using Alicargo.MvcHelpers.BundleHelpres;
+
+namespace Alicargo.App_Start.Mvc
 {
 	public static class JsPaths
 	{
