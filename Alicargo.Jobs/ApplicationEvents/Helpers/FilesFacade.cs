@@ -27,9 +27,12 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		public FileHolder[] GetFiles(long applicationId, long? awbId, EventType type, byte[] data)
 		{
-			switch (type)
+			switch(type)
 			{
+				case EventType.SetDateOfCargoReceipt:
+				case EventType.SetTransitReference:
 				case EventType.ApplicationCreated:
+				case EventType.SetSender:
 					return null;
 
 				case EventType.ApplicationSetState:
@@ -37,7 +40,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				case EventType.Calculate:
 				case EventType.CalculationCanceled:
-					return null; // a file is generated in the MessageBuilder because it needs to know a recipient language
+					return null; // calculation file is generated in the MessageBuilder because it needs to know a recipient language
 
 				case EventType.CPFileUploaded:
 				case EventType.InvoiceFileUploaded:
@@ -46,12 +49,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case EventType.DeliveryBillFileUploaded:
 				case EventType.Torg12FileUploaded:
 					return new[] { _serializer.Deserialize<FileHolder>(data) };
-
-				case EventType.SetDateOfCargoReceipt:
-					return null;
-
-				case EventType.SetTransitReference:
-					return null;
 
 				default:
 					throw new ArgumentOutOfRangeException("type");
@@ -63,10 +60,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			var files = new List<FileHolder>();
 
 			var types = Enum.GetValues(typeof(ApplicationFileType));
-			foreach (ApplicationFileType type in types)
+			foreach(ApplicationFileType type in types)
 			{
 				var names = _files.GetNames(applicationId, type);
-				foreach (var name in names)
+				foreach(var name in names)
 				{
 					var holder = _files.Get(name.Key);
 
@@ -74,13 +71,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				}
 			}
 
-			if (awbId.HasValue)
+			if(awbId.HasValue)
 			{
 				var gtdFile = _awbs.GetGTDFile(awbId.Value);
 				var gtdAdditionalFile = _awbs.GTDAdditionalFile(awbId.Value);
 
-				if (gtdFile != null) files.Add(gtdFile);
-				if (gtdAdditionalFile != null) files.Add(gtdAdditionalFile);
+				if(gtdFile != null) files.Add(gtdFile);
+				if(gtdAdditionalFile != null) files.Add(gtdAdditionalFile);
 			}
 
 			return files.ToArray();

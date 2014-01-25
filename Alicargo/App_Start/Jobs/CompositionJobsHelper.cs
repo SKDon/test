@@ -152,6 +152,7 @@ namespace Alicargo.App_Start.Jobs
 						{ EventType.DeliveryBillFileUploaded, processors },
 						{ EventType.Torg12FileUploaded, processors },
 						{ EventType.Calculate, processors },
+						{ EventType.SetSender, processors },
 						{ EventType.CalculationCanceled, processors }
 					}).Work();
 			}

@@ -10,17 +10,29 @@ namespace Alicargo.Core.Event
 	public sealed class ApplicationEditorWithEvent : IApplicationEditor
 	{
 		private readonly IEventFacade _events;
+		private readonly IApplicationRepository _applications;
 		private readonly IApplicationEditor _editor;
 
-		public ApplicationEditorWithEvent(IEventFacade events, IApplicationEditor editor)
+		public ApplicationEditorWithEvent(
+			IEventFacade events,
+			IApplicationRepository applications,
+			IApplicationEditor editor)
 		{
 			_events = events;
+			_applications = applications;
 			_editor = editor;
 		}
 
 		public void Update(ApplicationData application)
 		{
+			var oldData = _applications.Get(application.Id);
+
 			_editor.Update(application);
+
+			if(oldData.SenderId != application.SenderId)
+			{
+				_events.Add(application.Id, EventType.SetSender, EventState.Emailing, application.SenderId);
+			}
 		}
 
 		public long Add(ApplicationData application)
@@ -28,6 +40,8 @@ namespace Alicargo.Core.Event
 			var applicationId = _editor.Add(application);
 
 			_events.Add(applicationId, EventType.ApplicationCreated, EventState.Emailing);
+
+			_events.Add(applicationId, EventType.SetSender, EventState.Emailing, application.SenderId);
 
 			return applicationId;
 		}

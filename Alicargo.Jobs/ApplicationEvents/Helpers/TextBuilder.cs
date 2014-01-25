@@ -60,6 +60,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 				case EventType.SetTransitReference:
 				case EventType.ApplicationCreated:
+				case EventType.SetSender:
 					break;
 
 				case EventType.Calculate:
