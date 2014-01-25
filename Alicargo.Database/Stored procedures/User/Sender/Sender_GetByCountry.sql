@@ -4,9 +4,9 @@
 AS BEGIN
 	SET NOCOUNT ON;
 
-	SELECT	s.[SenderId]
-	FROM	[dbo].[SenderCountry] s
-	WHERE	s.[CountryId] = @CountryId
+	SELECT s.[SenderId]
+	FROM [dbo].[SenderCountry] s
+	WHERE s.[CountryId] = @CountryId
 
 END
 GO

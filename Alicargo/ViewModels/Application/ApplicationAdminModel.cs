@@ -43,7 +43,7 @@ namespace Alicargo.ViewModels.Application
 		public long CountryId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Sender")]
-		public long SenderId { get; set; }
+		public long? SenderId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Forwarder")]
 		public long ForwarderId { get; set; }

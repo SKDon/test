@@ -77,7 +77,7 @@ namespace Alicargo.Services.Application
 			applicationData.CreationTimestamp = DateTimeProvider.Now;
 			applicationData.SenderId = senderId;
 			applicationData.ClientId = clientId;
-			applicationData.CountryId = _senders.Get(senderId).CountryId;
+			// applicationData.CountryId = _senders.Get(senderId).; todo set country by sender
 
 			_updater.Add(applicationData);
 

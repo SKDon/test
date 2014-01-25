@@ -88,7 +88,15 @@ INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email]) VALUES (1, 4, N'Sender1'
 INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email]) VALUES (2, 11, N'Sender2', N'Sender2@timez.org')
 SET IDENTITY_INSERT [dbo].[Sender] OFF
 
-INSERT [dbo].[SenderCountry] ([CountryId], [SenderId]) VALUES (1, 1), (108, 2)
+INSERT [dbo].[SenderCountry] ([CountryId], [SenderId])
+SELECT [Id] AS [CountryId], 1 AS [SenderId]
+FROM [dbo].[Country]
+WHERE [Id] < 127
+
+INSERT [dbo].[SenderCountry] ([CountryId], [SenderId])
+SELECT [Id] AS [CountryId], 2 AS [SenderId]
+FROM [dbo].[Country]
+WHERE [Id] >= 127
 
 
 /****** Object:  Table [dbo].[Client]    Script Date: 05/18/2013 14:17:27 ******/

@@ -12,11 +12,11 @@ namespace Alicargo.Controllers.Application
 	public partial class ApplicationUpdateController : Controller
 	{
 		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IApplicationManager _applicationManager;
+		private readonly IAdminApplicationManager _applicationManager;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationUpdateController(IApplicationPresenter applicationPresenter,
-			IApplicationManager applicationManager, IStateConfig stateConfig)
+			IAdminApplicationManager applicationManager, IStateConfig stateConfig)
 		{
 			_applicationPresenter = applicationPresenter;
 			_applicationManager = applicationManager;

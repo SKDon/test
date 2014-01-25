@@ -8,7 +8,7 @@ namespace Alicargo.Services.AirWaybill
 {	
     internal sealed class AwbStateManager : IAwbStateManager
     {
-        private readonly IApplicationManager _applicationManager;
+        private readonly IAdminApplicationManager _applicationManager;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IAwbRepository _awbRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -17,7 +17,7 @@ namespace Alicargo.Services.AirWaybill
             IAwbRepository awbRepository,
             IApplicationRepository applicationRepository,
             IUnitOfWork unitOfWork,
-            IApplicationManager applicationManager)
+            IAdminApplicationManager applicationManager)
         {
             _awbRepository = awbRepository;
             _applicationRepository = applicationRepository;

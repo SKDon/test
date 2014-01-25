@@ -11,7 +11,7 @@ namespace Alicargo.Controllers.Calculation
 {
 	public partial class CalculationController : Controller
 	{
-		private readonly IApplicationManager _applicationManager;
+		private readonly IAdminApplicationManager _applicationManager;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly ICalculationService _calculation;
 		private readonly IIdentityService _identity;
@@ -23,7 +23,7 @@ namespace Alicargo.Controllers.Calculation
 			IAdminCalculationPresenter presenter,
 			ICalculationService calculation,
 			IIdentityService identity,
-			IApplicationManager applicationManager,
+			IAdminApplicationManager applicationManager,
 			IClientBalanceRepository balances)
 		{
 			_awbUpdateManager = awbUpdateManager;

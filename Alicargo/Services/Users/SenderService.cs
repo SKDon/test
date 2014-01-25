@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -80,6 +81,15 @@ namespace Alicargo.Services.Users
 
 				_users.SetPassword(userId, model.Authentication.NewPassword);
 			}
+		}
+
+		public long GetByCountryOrAny(long countryId)
+		{
+			var list = _senders.GetByCountry(countryId);
+
+			return list.Length != 0
+				? list.First()
+				: _senders.GetAll().Select(x => x.EntityId).First();
 		}
 	}
 }

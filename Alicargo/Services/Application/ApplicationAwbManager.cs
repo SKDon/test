@@ -10,7 +10,7 @@ namespace Alicargo.Services.Application
 {
     public sealed class ApplicationAwbManager : IApplicationAwbManager
     {
-        private readonly IApplicationManager _applicationManager;
+        private readonly IAdminApplicationManager _applicationManager;
         private readonly IApplicationUpdateRepository _applicationUpdater;
         private readonly IAwbRepository _awbRepository;
 	    private readonly IStateConfig _stateConfig;
@@ -20,7 +20,7 @@ namespace Alicargo.Services.Application
             IAwbRepository awbRepository,
 			IStateConfig stateConfig,
             IUnitOfWork unitOfWork,
-            IApplicationManager applicationManager,
+            IAdminApplicationManager applicationManager,
             IApplicationUpdateRepository applicationUpdater)
         {
             _awbRepository = awbRepository;

@@ -48,11 +48,11 @@ namespace Alicargo.App_Start
 				}
 			},
 			{
-				typeof(IApplicationManager),
+				typeof(IAdminApplicationManager),
 				new[]
 				{
-					typeof(ApplicationManager),
-					typeof(ApplicationManagerWithEvent)
+					typeof(AdminApplicationManager),
+					typeof(AdminApplicationManagerWithEvent)
 				}
 			},
 			{

@@ -10,12 +10,12 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	internal sealed class ApplicationManagerWithEvent : IApplicationManager
+	internal sealed class AdminApplicationManagerWithEvent : IAdminApplicationManager
 	{
 		private readonly IEventFacade _events;
-		private readonly IApplicationManager _manager;
+		private readonly IAdminApplicationManager _manager;
 
-		public ApplicationManagerWithEvent(IApplicationManager manager, IEventFacade events)
+		public AdminApplicationManagerWithEvent(IAdminApplicationManager manager, IEventFacade events)
 		{
 			_manager = manager;
 			_events = events;

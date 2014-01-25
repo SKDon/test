@@ -175,7 +175,7 @@
     <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
     <Compile Include="Services\AirWaybill\AwbMapper.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
-    <Compile Include="Services\Application\ApplicationManagerWithEvent.cs" />
+    <Compile Include="Services\Application\AdminApplicationManagerWithEvent.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelGenerator.cs" />
@@ -267,7 +267,7 @@
     </Compile>
     <Compile Include="Services\Abstract\IApplicationListItemMapper.cs" />
     <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
-    <Compile Include="Services\Abstract\IApplicationManager.cs" />
+    <Compile Include="Services\Abstract\IAdminApplicationManager.cs" />
     <Compile Include="Services\Abstract\IApplicationPresenter.cs" />
     <Compile Include="Services\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Abstract\IAwbUpdateManager.cs" />
@@ -298,7 +298,7 @@
     <Compile Include="Services\Excel\Rows\SenderApplicationExcelRow.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateManager.cs" />
     <Compile Include="Services\Email\AwbUpdateManagerWithMailing.cs" />
-    <Compile Include="Services\Application\ApplicationManager.cs" />
+    <Compile Include="Services\Application\AdminApplicationManager.cs" />
     <Compile Include="Services\Application\ApplicationPresenter.cs" />
     <Compile Include="Services\Application\ApplicationGrouper.cs" />
     <Compile Include="Services\AuthenticationService.cs" />

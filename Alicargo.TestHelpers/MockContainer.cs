@@ -74,7 +74,7 @@ namespace Alicargo.TestHelpers
 			StateService = Inject<IStateFilter>();
 			ApplicationRepository = Inject<IApplicationRepository>();
 			ApplicationUpdater = Inject<IApplicationUpdateRepository>();
-			ApplicationManager = Inject<IApplicationManager>();
+			ApplicationManager = Inject<IAdminApplicationManager>();
 			ApplicationPresenter = Inject<IApplicationPresenter>();
 			AirWaybillRepository = Inject<IAwbRepository>();
 			StateConfig = Inject<IStateConfig>();
@@ -109,7 +109,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }
 		public Mock<ISerializer> Serializer { get; private set; }
 		public Mock<IApplicationUpdateRepository> ApplicationUpdater { get; private set; }
-		public Mock<IApplicationManager> ApplicationManager { get; private set; }
+		public Mock<IAdminApplicationManager> ApplicationManager { get; private set; }
 		public Mock<IApplicationAwbManager> ApplicationAwbManager { get; private set; }
 		public Mock<IApplicationGrouper> ApplicationGrouper { get; private set; }
 		public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }

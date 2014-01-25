@@ -17,7 +17,7 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationController : Controller
 	{
-		private readonly IApplicationManager _applicationManager;
+		private readonly IAdminApplicationManager _applicationManager;
 		private readonly IApplicationPresenter _applicationPresenter;
 		private readonly IForwarderRepository _forwarders;
 		private readonly IIdentityService _identity;
@@ -27,7 +27,7 @@ namespace Alicargo.Controllers.Application
 		private readonly ISenderRepository _senders;
 
 		public ApplicationController(
-			IApplicationManager applicationManager,
+			IAdminApplicationManager applicationManager,
 			IApplicationPresenter applicationPresenter,
 			IForwarderRepository forwarders,
 			IIdentityService identity,

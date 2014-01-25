@@ -5,7 +5,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Abstract
 {
-	public interface IApplicationManager
+	public interface IAdminApplicationManager
 	{
 		void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel);
 		long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, long clientId);
