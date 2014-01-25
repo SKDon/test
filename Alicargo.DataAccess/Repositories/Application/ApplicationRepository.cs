@@ -75,7 +75,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				ClientUserId = x.Client.UserId,
 				TariffPerKg = x.TariffPerKg,
 				SenderRate = x.SenderRate,
-
+				SenderName = x.Sender.Name,
 				FactureCost = x.FactureCostEdited ?? x.FactureCost,
 				SenderFactureCost = x.FactureCost,
 				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
