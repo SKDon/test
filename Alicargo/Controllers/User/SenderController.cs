@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
@@ -36,17 +35,6 @@ namespace Alicargo.Controllers.User
 			return View();
 		}
 
-		[HttpGet]
-		[Access(RoleType.Admin)]
-		public virtual ViewResult Edit(long id)
-		{
-			BindBag();
-
-			var model = _senders.Get(id);
-
-			return View(model);
-		}
-
 		[HttpPost]
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Create(SenderModel model)
@@ -75,6 +63,17 @@ namespace Alicargo.Controllers.User
 
 				return View();
 			}
+		}
+
+		[HttpGet]
+		[Access(RoleType.Admin)]
+		public virtual ViewResult Edit(long id)
+		{
+			BindBag();
+
+			var model = _senders.Get(id);
+
+			return View(model);
 		}
 
 		[HttpPost]
@@ -106,7 +105,9 @@ namespace Alicargo.Controllers.User
 
 		private void BindBag()
 		{
-			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
+			var countries = _countries.All(_identity.Language);
+
+			ViewBag.Countries = countries;
 		}
 	}
 }

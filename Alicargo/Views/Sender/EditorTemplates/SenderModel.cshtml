@@ -1,15 +1,38 @@
-﻿@using Alicargo.MvcHelpers.Extensions
+﻿@using Alicargo.DataAccess.Contracts.Contracts
+@using Alicargo.MvcHelpers.Extensions
 @model Alicargo.ViewModels.User.SenderModel
+
+@helper SelectCountries()
+{
+	@Html.LabelFor(x => x.Countries)
+
+	var countries = (CountryData[])ViewBag.Countries;
+
+	var id = Html.IdFor(x => x.Countries);
+
+	<select id="@Html.Raw(id)" name="@Html.Raw(id)" multiple="multiple">
+		@foreach(var country in countries)
+		{
+			var isSelected = Model != null && Model.Countries.Contains(country.Id);
+			<option @Html.Raw(isSelected ? "selected" : null) value="@country.Id">@country.Name</option>
+		}
+	</select>
+	<script>$("#@Html.Raw(id)").kendoMultiSelect().data("kendoMultiSelect");</script>
+}
 <div class="row">
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Name)
-		@Html.EditorWithLabelFor(model => model.Email)
-
 	</div>
 	<div class="span4">
-		@Html.LabelFor(x => x.CountryId)
-		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
+		@Html.EditorWithLabelFor(model => model.Email)
+	</div>
+	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.TariffOfTapePerBox)
+	</div>
+</div>
+<div class="row">
+	<div class="span12 countries">
+		@SelectCountries()
 	</div>
 </div>
 @Html.EditorFor(x => x.Authentication)
