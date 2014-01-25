@@ -15,8 +15,6 @@ namespace Alicargo.ViewModels.Application
 		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
 		public CurrencyModel Currency { get; set; }
 
-		#region Data
-
 		[Required, DisplayNameLocalized(typeof(Entities), "Invoice")]
 		public string Invoice { get; set; }		
 
@@ -61,7 +59,5 @@ namespace Alicargo.ViewModels.Application
 
 		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public MethodOfDelivery MethodOfDelivery { get; set; }
-
-		#endregion
 	}
 }
