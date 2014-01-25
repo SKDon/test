@@ -76,6 +76,7 @@
     <Compile Include="Calculation\ClientBalanceHistoryItemDrawable.cs" />
     <Compile Include="Calculation\DrawableMapper.cs" />
     <Compile Include="Calculation\ExcelClientCalculation.cs" />
+    <Compile Include="Event\ApplicationEditorWithEvent.cs" />
     <Compile Include="Excel\ExcelConstants.cs" />
     <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Event\PartitionConverter.cs" />

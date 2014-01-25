@@ -6,7 +6,10 @@ using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Event;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
 using Alicargo.Services.Application;
@@ -28,6 +31,14 @@ namespace Alicargo.App_Start
 				{
 					typeof(AwbManager),
 					typeof(AwbManagerWithMailing)
+				}
+			},
+			{
+				typeof(IApplicationEditor),
+				new[]
+				{
+					typeof(ApplicationEditor),
+					typeof(ApplicationEditorWithEvent)
 				}
 			},
 			{

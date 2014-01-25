@@ -8,7 +8,7 @@ using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.Application
 {
-	internal sealed class ApplicationEditor : IApplicationEditor
+	public sealed class ApplicationEditor : IApplicationEditor
 	{
 		private readonly AlicargoDataContext _context;
 
@@ -17,7 +17,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
-		public Func<long> Add(ApplicationData application)
+		public long Add(ApplicationData application)
 		{
 			var entity = new DbContext.Application();
 
@@ -25,7 +25,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_context.Applications.InsertOnSubmit(entity);
 
-			return () => entity.Id;
+			_context.SubmitChanges();
+
+			return entity.Id;
 		}
 
 		public void Delete(long id)
