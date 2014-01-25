@@ -71,8 +71,6 @@ namespace Alicargo.ViewModels.Application
 
 		#endregion
 
-		#region Additional
-
 		public string ClientLegalEntity { get; set; }
 
 		public string ClientNic { get; set; }
@@ -94,10 +92,6 @@ namespace Alicargo.ViewModels.Application
 		public string TransitDeliveryTypeString { get; set; }
 
 		public string TransitCarrierName { get; set; }
-
-		#endregion
-
-		#region Application Data
 
 		public long Id { get; set; }
 
@@ -165,6 +159,8 @@ namespace Alicargo.ViewModels.Application
 
 		public decimal? ScotchCost { get; set; }
 
+		public string SenderName { get; set; }
+
 		public decimal? SenderScotchCost { get; set; }
 
 		public decimal? TariffPerKg { get; set; }
@@ -174,8 +170,6 @@ namespace Alicargo.ViewModels.Application
 		public decimal? ForwarderTransitCost { get; set; }
 
 		public decimal? PickupCost { get; set; }
-
-		#endregion
 
 		public ApplicationStateModel State { get; set; }
 
