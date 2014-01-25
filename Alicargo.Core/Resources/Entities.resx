@@ -474,4 +474,10 @@
   <data name="Forwarder" xml:space="preserve">
     <value>Forwarder</value>
   </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Cities</value>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Countries</value>
+  </data>
 </root>

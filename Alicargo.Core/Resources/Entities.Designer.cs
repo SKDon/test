@@ -205,6 +205,15 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cities.
+        /// </summary>
+        public static string Cities {
+            get {
+                return ResourceManager.GetString("Cities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
@@ -282,6 +291,15 @@ namespace Alicargo.Core.Resources {
         public static string Count {
             get {
                 return ResourceManager.GetString("Count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Countries.
+        /// </summary>
+        public static string Countries {
+            get {
+                return ResourceManager.GetString("Countries", resourceCulture);
             }
         }
         
