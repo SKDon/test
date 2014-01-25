@@ -13,8 +13,8 @@
 	<select id="@Html.Raw(id)" name="@Html.Raw(id)" multiple="multiple">
 		@foreach(var country in countries)
 		{
-			var isSelected = Model != null && Model.Countries.Contains(country.Id);
-			<option @Html.Raw(isSelected ? "selected" : null) value="@country.Id">@country.Name</option>
+			var selected = Model != null && Model.Countries.Contains(country.Id);
+			<option @Html.Raw(selected ? "selected" : null) value="@country.Id">@country.Name</option>
 		}
 	</select>
 	<script>$("#@Html.Raw(id)").kendoMultiSelect().data("kendoMultiSelect");</script>

@@ -23,19 +23,21 @@ namespace Alicargo.Services.Users
 		{
 			var data = _senders.Get(id);
 
+			var countries = _senders.GetCountries(id);
+
 			return new SenderModel
 			{
 				Name = data.Name,
 				Authentication = new AuthenticationModel(data.Login),
 				Email = data.Email,
 				TariffOfTapePerBox = data.TariffOfTapePerBox,
-				CountryId = data.CountryId
+				Countries = countries
 			};
 		}
 
 		public long Add(SenderModel model)
 		{
-			if (model.TariffOfTapePerBox < 0)
+			if(model.TariffOfTapePerBox < 0)
 			{
 				throw new InvalidDataException("TariffOfTapePerBox can't be less than 0.");
 			}
@@ -46,16 +48,17 @@ namespace Alicargo.Services.Users
 				Login = model.Authentication.Login,
 				Name = model.Name,
 				TariffOfTapePerBox = model.TariffOfTapePerBox,
-				Language = TwoLetterISOLanguageName.English,
-				CountryId = model.CountryId
+				Language = TwoLetterISOLanguageName.English
 			}, model.Authentication.NewPassword);
+
+			_senders.SetCountries(id, model.Countries);
 
 			return id;
 		}
 
 		public void Update(long id, SenderModel model)
 		{
-			if (model.TariffOfTapePerBox < 0)
+			if(model.TariffOfTapePerBox < 0)
 			{
 				throw new InvalidDataException("TariffOfTapePerBox can't be less than 0.");
 			}
@@ -66,11 +69,12 @@ namespace Alicargo.Services.Users
 			data.Login = model.Authentication.Login;
 			data.Email = model.Email;
 			data.TariffOfTapePerBox = model.TariffOfTapePerBox;
-			data.CountryId = model.CountryId;
 
 			_senders.Update(id, data);
 
-			if (!string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
+			_senders.SetCountries(id, model.Countries);
+
+			if(!string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
 			{
 				var userId = _senders.GetUserId(id);
 

@@ -10,9 +10,7 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels.Calculation;
 using Alicargo.ViewModels.Calculation.Sender;
-using Alicargo.ViewModels.Helpers;
 using Resources;
 
 namespace Alicargo.Services.Calculation
