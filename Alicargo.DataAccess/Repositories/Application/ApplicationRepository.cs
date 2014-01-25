@@ -16,7 +16,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 	public sealed class ApplicationRepository : IApplicationRepository
 	{
 		private readonly AlicargoDataContext _context;
-		private readonly Expression<Func<DbContext.Application, ApplicationListItemData>> _extendedSelector;
+		private readonly Expression<Func<DbContext.Application, ApplicationExtendedData>> _extendedSelector;
 		private readonly IApplicationRepositoryOrderer _orderer;
 		private readonly Expression<Func<DbContext.Application, ApplicationData>> _selector;
 
@@ -26,7 +26,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_orderer = new ApplicationRepositoryOrderer();
 
-			_extendedSelector = x => new ApplicationListItemData
+			_extendedSelector = x => new ApplicationExtendedData
 			{
 				AddressLoad = x.AddressLoad,
 				Id = x.Id,
@@ -138,7 +138,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return applications.LongCount();
 		}
 
-		public ApplicationListItemData[] List(long[] stateIds, Order[] orders, int? take = null,
+		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null,
 			int skip = 0, long? clientId = null, long? senderId = null, bool? hasCalculation = null,
 			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null)
 		{
@@ -167,7 +167,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
-		public ApplicationListItemData GetDetails(long id)
+		public ApplicationExtendedData GetDetails(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id).Select(_extendedSelector).FirstOrDefault();
 		}

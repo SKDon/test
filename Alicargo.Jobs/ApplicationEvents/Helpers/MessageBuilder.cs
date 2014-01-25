@@ -76,7 +76,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, RecipientData[] recipients,
-			ApplicationListItemData application, byte[] data, EventType type, FileHolder[] files)
+			ApplicationExtendedData application, byte[] data, EventType type, FileHolder[] files)
 		{
 			IReadOnlyDictionary<string, FileHolder> excels = null;
 			if(type == EventType.Calculate || type == EventType.CalculationCanceled)
@@ -125,7 +125,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,
-			ApplicationListItemData application, byte[] data, EventType type, FileHolder[] files)
+			ApplicationExtendedData application, byte[] data, EventType type, FileHolder[] files)
 		{
 			var subject = _textBuilder.GetText(localization.Subject, culture, type, application, data);
 			var body = _textBuilder.GetText(localization.Body, culture, type, application, data);

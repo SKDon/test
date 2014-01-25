@@ -37,7 +37,7 @@ namespace Alicargo.Core.Calculation
 				   + (application.TransitCostEdited ?? application.TransitCost ?? 0);
 		}
 
-		public static decimal GetProfit(ApplicationListItemData application)
+		public static decimal GetProfit(ApplicationExtendedData application)
 		{
 			return GetTotalTariffCost(application.TariffPerKg, application.Weight)
 				   + (application.ScotchCost ?? 0)

@@ -3,7 +3,7 @@ using Alicargo.DataAccess.Contracts.Enums;
 
 namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
-	public sealed class ApplicationListItemData
+	public sealed class ApplicationExtendedData
 	{
 		public long Id { get; set; }
 

@@ -6,6 +6,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Abstract
 {
 	public interface IRecipientsFacade
 	{
-		RecipientData[] GetRecipients(ApplicationListItemData application, EventType type, byte[] data);
+		RecipientData[] GetRecipients(ApplicationExtendedData application, EventType type, byte[] data);
 	}
 }

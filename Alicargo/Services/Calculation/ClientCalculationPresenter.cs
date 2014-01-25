@@ -57,7 +57,7 @@ namespace Alicargo.Services.Calculation
 			};
 		}
 
-		private ApplicationListItemData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
+		private ApplicationExtendedData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
 		{
 			var stateIds = _settings.GetStateVisibilities().Where(x => x.Role == RoleType.Client).Select(x => x.StateId).ToArray();
 
@@ -87,7 +87,7 @@ namespace Alicargo.Services.Calculation
 			}).ToList();
 		}
 
-		private IEnumerable<ClientCalculationItem> GetItems(ApplicationListItemData[] applications)
+		private IEnumerable<ClientCalculationItem> GetItems(ApplicationExtendedData[] applications)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var nics = _clientRepository.GetNicByApplications(appIds);

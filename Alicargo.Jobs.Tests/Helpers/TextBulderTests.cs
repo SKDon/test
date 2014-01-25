@@ -27,7 +27,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		public void Test_GetText()
 		{
 			var properties =
-				typeof(ApplicationListItemData).GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
+				typeof(ApplicationExtendedData).GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
 			var dictionary = new Dictionary<string, string>();
 			var sb = new StringBuilder();
 			foreach (var property in properties)

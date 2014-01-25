@@ -40,7 +40,7 @@ namespace Alicargo.TestHelpers
 				.With(x => x.Culture, TwoLetterISOLanguageName.English)
 				.Create());
 
-			Fixture.Register(() => Fixture.Build<ApplicationListItemData>()
+			Fixture.Register(() => Fixture.Build<ApplicationExtendedData>()
 				.With(x => x.CurrencyId, 1)
 				.Create());
 

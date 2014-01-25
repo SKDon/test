@@ -124,7 +124,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
-			string newCarrierName, ApplicationListItemData data)
+			string newCarrierName, ApplicationExtendedData data)
 		{
 			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
 				.Excluding(x => x.FactureCost)

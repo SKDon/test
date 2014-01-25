@@ -40,7 +40,7 @@ namespace Alicargo.Tests.Services.Application
 		public void Test_List()
 		{
 			const long clientId = 1;
-			var data = _context.CreateMany<ApplicationListItemData>().ToArray();
+			var data = _context.CreateMany<ApplicationExtendedData>().ToArray();
 			var map = _context.CreateMany<ApplicationListItem>().ToArray();
 			_context.StateService.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
 			_context.ApplicationListItemMapper.Setup(x => x.Map(data, TwoLetterISOLanguageName.English)).Returns(map);

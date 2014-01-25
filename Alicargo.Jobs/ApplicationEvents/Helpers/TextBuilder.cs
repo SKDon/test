@@ -43,7 +43,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_bulder = bulder;
 		}
 
-		public string GetText(string template, string language, EventType type, ApplicationListItemData application,
+		public string GetText(string template, string language, EventType type, ApplicationExtendedData application,
 			byte[] bytes)
 		{
 			var data = GetTextLocalizedData(type, application, language, bytes);
@@ -64,7 +64,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		}
 
 		private IDictionary<string, string> GetTextLocalizedData(EventType type,
-			ApplicationListItemData application, string language, byte[] bytes)
+			ApplicationExtendedData application, string language, byte[] bytes)
 		{
 			var culture = CultureInfo.GetCultureInfo(language);
 
@@ -106,7 +106,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			return localizedData;
 		}
 
-		private IDictionary<string, string> GetTextLocalizedData(ApplicationListItemData application, string language,
+		private IDictionary<string, string> GetTextLocalizedData(ApplicationExtendedData application, string language,
 			CultureInfo culture)
 		{
 			var state = _states.Get(language, application.StateId).Select(x => x.Value).FirstOrDefault();

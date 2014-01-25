@@ -63,7 +63,7 @@ namespace Alicargo.Services.Application
 			};
 		}
 
-		private ApplicationListItemData[] GetList(int? take, int skip, IEnumerable<Order> groups, long? clientId,
+		private ApplicationExtendedData[] GetList(int? take, int skip, IEnumerable<Order> groups, long? clientId,
 			long? senderId, bool? isForwarder, out long total)
 		{
 			var stateIds = _stateFilter.GetStateVisibility();

@@ -8,12 +8,12 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
     {
         ApplicationData Get(long id);
         
-		ApplicationListItemData GetDetails(long id);
+		ApplicationExtendedData GetDetails(long id);
         
 		ApplicationData[] GetByAirWaybill(params long[] ids);
 
 		// todo: 1. remove hasCalculation parameter from List and Count methods
-		ApplicationListItemData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
+		ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
             long? clientId = null, long? senderId = null, bool? hasCalculation = null,
 			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null);
 		
