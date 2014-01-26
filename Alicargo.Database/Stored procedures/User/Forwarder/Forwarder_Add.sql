@@ -4,8 +4,7 @@
 	@PasswordSalt VARBINARY(MAX),
 	@Language CHAR(2),
 	@Name NVARCHAR (MAX),
-	@Email NVARCHAR (320),
-	@CityId BIGINT
+	@Email NVARCHAR (320)
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -19,9 +18,9 @@ AS BEGIN
 				@TwoLetterISOLanguageName = @Language
 
 		INSERT	[dbo].[Forwarder]
-				([UserId], [Name], [Email], [CityId])
+				([UserId], [Name], [Email])
 		OUTPUT	INSERTED.[Id]
-		VALUES	(@UserId, @Name, @Email, @CityId)
+		VALUES	(@UserId, @Name, @Email)
 
 	COMMIT
 

@@ -57,7 +57,9 @@ namespace Alicargo.Controllers.User
 			try
 			{
 				var id = _forwarders.Add(model.Name, model.Authentication.Login, model.Authentication.NewPassword, model.Email,
-					_identity.Language, model.CityId);
+					_identity.Language);
+
+				_forwarders.SetCities(id, model.Cities);
 
 				return RedirectToAction(MVC.Forwarder.Edit(id));
 			}
@@ -82,8 +84,8 @@ namespace Alicargo.Controllers.User
 			var model = new ForwarderModel
 			{
 				Authentication = new AuthenticationModel(data.Login),
-				CityId = data.CityId,
 				Email = data.Email,
+				Cities = _forwarders.GetCities(id),
 				Name = data.Name
 			};
 
@@ -103,7 +105,9 @@ namespace Alicargo.Controllers.User
 
 			try
 			{
-				_forwarders.Update(id, model.Name, model.Authentication.Login, model.Email, model.CityId);
+				_forwarders.Update(id, model.Name, model.Authentication.Login, model.Email);
+
+				_forwarders.SetCities(id, model.Cities);
 
 				if(!string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
 				{
@@ -126,7 +130,7 @@ namespace Alicargo.Controllers.User
 
 		private void BindBag()
 		{
-			ViewBag.Cities = _cities.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
+			ViewBag.Cities = _cities.All(_identity.Language);
 		}
 	}
 }

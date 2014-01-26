@@ -289,7 +289,7 @@
 	width: auto;
 }
 
-.countries .k-multiselect {
+.multiselect .k-multiselect {
 	margin-bottom: 10px;
 	max-height: 200px;
 	overflow-x: hidden;

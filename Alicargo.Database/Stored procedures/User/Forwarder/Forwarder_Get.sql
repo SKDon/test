@@ -7,7 +7,6 @@ AS BEGIN
 	SELECT	TOP(1) 
 			f.[Id],
 			u.[Id] AS [UserId],
-			f.[CityId],
 			f.[Email],
 			u.[TwoLetterISOLanguageName] AS [Language],
 			u.[Login],

@@ -1,9 +1,7 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts.User;
-
-namespace Alicargo.Core.Contracts.Users
+﻿namespace Alicargo.Core.Contracts.Users
 {
 	public interface IForwarderService
 	{
-		ForwarderData GetByCityOrDefault(long cityId);
+		long GetByCityOrAny(long cityId, long? oldForwarderId);
 	}
 }

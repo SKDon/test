@@ -78,39 +78,39 @@ namespace Alicargo.Services.Application
 		{
 			_senders.CheckCountry(creatorSenderId, model.CountryId);
 
-			var applicationData = new ApplicationData();
+			var application = new ApplicationData();
 
-			Map(model, applicationData);
+			Map(model, application);
 
-			Add(applicationData, clientId, creatorSenderId);
+			Add(application, clientId, creatorSenderId);
 		}
 
-		private void Add(ApplicationData applicationData, long clientId, long senderId)
+		private void Add(ApplicationData application, long clientId, long senderId)
 		{
-			CopyTransitDataFromClient(clientId, applicationData);
-			applicationData.StateId = _stateConfig.DefaultStateId;
-			applicationData.Class = null;
-			applicationData.StateChangeTimestamp = DateTimeProvider.Now;
-			applicationData.CreationTimestamp = DateTimeProvider.Now;
-			applicationData.SenderId = senderId;
-			applicationData.ClientId = clientId;
+			CopyTransitDataFromClient(clientId, application);
+			application.StateId = _stateConfig.DefaultStateId;
+			application.Class = null;
+			application.StateChangeTimestamp = DateTimeProvider.Now;
+			application.CreationTimestamp = DateTimeProvider.Now;
+			application.SenderId = senderId;
+			application.ClientId = clientId;
 
-			_updater.Add(applicationData);
+			_updater.Add(application);
 		}
 
-		private void CopyTransitDataFromClient(long clientId, ApplicationData applicationData)
+		private void CopyTransitDataFromClient(long clientId, ApplicationData application)
 		{
 			var transit = _transits.GetByClient(clientId);
 
 			transit.Id = 0;
 
-			var forwarder = _forwarders.GetByCityOrDefault(transit.CityId);
+			var forwarderId = _forwarders.GetByCityOrAny(transit.CityId, application.ForwarderId);
 
 			var transitId = _transits.Add(transit);
 
-			applicationData.TransitId = transitId;
+			application.TransitId = transitId;
 
-			applicationData.ForwarderId = forwarder.Id;
+			application.ForwarderId = forwarderId;
 		}
 
 		private static void Map(ApplicationSenderModel @from, ApplicationData to)

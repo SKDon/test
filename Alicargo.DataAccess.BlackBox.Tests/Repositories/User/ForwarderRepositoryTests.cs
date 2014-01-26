@@ -19,6 +19,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		private Fixture _fixture;
 		private ForwarderRepository _repository;
 
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
+
 		[TestInitialize]
 		public void TestInitialize()
 		{
@@ -29,23 +35,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 				new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_context.Cleanup();
-		}
-
 		[TestMethod]
-		
 		public void Test_Add_Get()
 		{
 			var data = _fixture.Create<ForwarderData>();
 			data.Language = TwoLetterISOLanguageName.English;
-			data.CityId = TestConstants.TestCityId2;
 
 			var password = _fixture.Create<string>();
 
-			var id = _repository.Add(data.Name, data.Login, password, data.Email, data.Language, data.CityId);
+			var id = _repository.Add(data.Name, data.Login, password, data.Email, data.Language);
 
 			var actual = _repository.Get(id);
 
@@ -55,14 +53,36 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		}
 
 		[TestMethod]
-		
+		public void Test_Get_And_Set_Countries()
+		{
+			var cities = new long[] { 1, 2, 3, 4 };
+
+			_repository.SetCities(TestConstants.TestForwarderId1, cities);
+
+			var actual = _repository.GetCities(TestConstants.TestForwarderId1);
+
+			actual.ShouldAllBeEquivalentTo(cities);
+		}
+
+		[TestMethod]
+		public void Test_Set_Empty_Countries()
+		{
+			var cities = new long[] { };
+
+			_repository.SetCities(TestConstants.TestForwarderId1, cities);
+
+			var actual = _repository.GetCities(TestConstants.TestForwarderId1);
+
+			actual.Should().HaveCount(0);
+		}
+
+		[TestMethod]
 		public void Test_Update()
 		{
 			var original = _repository.GetAll().First();
 			var data = _fixture.Create<ForwarderData>();
-			data.CityId = TestConstants.TestCityId2;
 
-			_repository.Update(original.Id, data.Name, data.Login, data.Email, data.CityId);
+			_repository.Update(original.Id, data.Name, data.Login, data.Email);
 
 			var actual = _repository.Get(original.Id);
 

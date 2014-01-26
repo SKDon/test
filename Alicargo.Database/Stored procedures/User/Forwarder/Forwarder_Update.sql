@@ -2,8 +2,7 @@
 	@Id BIGINT,
 	@Name NVARCHAR (MAX),
 	@Login NVARCHAR(320),
-	@Email NVARCHAR (320),
-	@CityId BIGINT
+	@Email NVARCHAR (320)
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -14,8 +13,7 @@ AS BEGIN
 
 		UPDATE	TOP(1) [dbo].[Forwarder]
 		SET		[Name] = @Name,
-				[Email] = @Email,
-				[CityId] = @CityId
+				[Email] = @Email
 		OUTPUT	INSERTED.[UserId] INTO @Table
 		WHERE	[Id] = @Id
 

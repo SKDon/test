@@ -46,9 +46,9 @@ namespace Alicargo.Services.Application
 		{
 			var transitId = _transits.AddTransit(transitModel, carrierModel);
 
-			var forwarder = _forwarders.GetByCityOrDefault(transitModel.CityId);
+			var forwarderId = _forwarders.GetByCityOrAny(transitModel.CityId, null);
 
-			var data = GetNewApplicationData(model, clientId, transitId, forwarder.Id);
+			var data = GetNewApplicationData(model, clientId, transitId, forwarderId);
 
 			return _updater.Add(data);
 		}
@@ -63,9 +63,9 @@ namespace Alicargo.Services.Application
 
 			_transits.Update(data.TransitId, transitModel, carrierModel);
 
-			var forwarder = _forwarders.GetByCityOrDefault(transitModel.CityId);
+			var forwarderId = _forwarders.GetByCityOrAny(transitModel.CityId, data.ForwarderId);
 
-			Map(model, data, forwarder.Id);
+			Map(model, data, forwarderId);
 
 			_updater.Update(data);
 

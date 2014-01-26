@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts.Users;
-using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
 namespace Alicargo.Core.Users
@@ -14,13 +13,21 @@ namespace Alicargo.Core.Users
 			_forwarders = forwarders;
 		}
 
-		public ForwarderData GetByCityOrDefault(long cityId)
+		public long GetByCityOrAny(long cityId, long? oldForwarderId)
 		{
-			var forwarders = _forwarders.GetAll();
+			var list = _forwarders.GetByCity(cityId);
 
-			var forwarder = forwarders.FirstOrDefault(x => x.CityId == cityId) ?? forwarders.First();
+			if(list.Length == 0)
+			{
+				return _forwarders.GetAll().Select(x => x.Id).First();
+			}
 
-			return forwarder;
+			if(oldForwarderId.HasValue && list.Contains(oldForwarderId.Value))
+			{
+				return oldForwarderId.Value;
+			}
+
+			return list.First();
 		}
 	}
 }

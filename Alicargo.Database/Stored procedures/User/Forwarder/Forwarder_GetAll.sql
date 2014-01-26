@@ -4,7 +4,6 @@ AS BEGIN
 
 	SELECT	f.[Id],
 			u.[Id] AS [UserId],
-			f.[CityId],
 			f.[Email],
 			u.[TwoLetterISOLanguageName] AS [Language],
 			u.[Login],

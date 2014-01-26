@@ -190,6 +190,10 @@
     <Build Include="Tables\User\SenderCountry.sql" />
     <Build Include="Stored procedures\User\Sender\SenderCountry_Set.sql" />
     <Build Include="Stored procedures\User\Sender\SenderCountry_Get.sql" />
+    <Build Include="Tables\User\ForwarderCity.sql" />
+    <Build Include="Stored procedures\User\Forwarder\ForwarderCity_Get.sql" />
+    <Build Include="Stored procedures\User\Forwarder\ForwarderCity_Set.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_GetByCity.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
