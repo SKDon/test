@@ -16,7 +16,7 @@
 	[RS]				NVARCHAR (MAX)	NULL,
 	[KS]				NVARCHAR (MAX)	NULL,
 	[TransitId]			BIGINT			NOT NULL,
-	[Balance]			MONEY			NOT NULL CONSTRAINT [DF_Client_Balance] DEFAULT(0),
+	[Balance]			MONEY			NOT NULL CONSTRAINT [DF_Client_Balance] DEFAULT((0)),
 
 	CONSTRAINT [PK_dbo.Client] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Client_dbo.Transit_TransitId] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),

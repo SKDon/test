@@ -30,7 +30,6 @@
 	[CountryId]				BIGINT				NOT NULL,
 	[AirWaybillId]			BIGINT				NULL,
 	[SenderId]				BIGINT				NOT NULL,
-	[ForwarderId]			BIGINT				NOT NULL,
 
 	[FactoryName]			NVARCHAR(320)		NOT NULL, 
 	[FactoryPhone]			NVARCHAR(MAX)		NULL, 
@@ -47,6 +46,7 @@
 	[SenderRate]			MONEY				NULL,
 	[TransitCost]			MONEY				NULL,
 	[TransitCostEdited]		MONEY				NULL,
+	[ForwarderId]			BIGINT				NOT NULL,
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),

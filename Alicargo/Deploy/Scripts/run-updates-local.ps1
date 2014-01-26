@@ -1,0 +1,1 @@
+﻿.\run-updates.ps1 .\SQLEXPRESS Alicargo Alicargo_Files

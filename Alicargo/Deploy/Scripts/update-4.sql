@@ -1,7 +1,4 @@
-﻿--:setvar MainDbName "Alicargo_2_1"
-GO
-
-USE [$(MainDbName)];
+﻿USE [$(MainDbName)];
 GO
 
 EXEC sp_rename 'Client.Email', 'Emails', 'COLUMN'
