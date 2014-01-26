@@ -208,7 +208,7 @@
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="App_Start\Mvc\JsPaths.cs" />
     <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
-    <Compile Include="Services\Abstract\IApplicationSenderManager.cs" />
+    <Compile Include="Services\Abstract\ISenderApplicationManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
     <Compile Include="Controllers\TransitController.cs" />
@@ -282,7 +282,7 @@
     <Compile Include="Services\Application\ApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
-    <Compile Include="Services\Application\ApplicationSenderManager.cs" />
+    <Compile Include="Services\Application\SenderApplicationManager.cs" />
     <Compile Include="Services\Calculation\AdminCalculationPresenter.cs" />
     <Compile Include="Services\Users\Client\ClientPermissions.cs" />
     <Compile Include="Services\Users\Client\ClientPresenter.cs" />

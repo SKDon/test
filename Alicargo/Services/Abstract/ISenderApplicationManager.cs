@@ -2,7 +2,7 @@
 
 namespace Alicargo.Services.Abstract
 {
-	public interface IApplicationSenderManager
+	public interface ISenderApplicationManager
 	{
 		void Add(ApplicationSenderModel model, long clientId, long creatorSenderId);
 		ApplicationSenderModel Get(long id);

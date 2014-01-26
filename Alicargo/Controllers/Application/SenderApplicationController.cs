@@ -15,20 +15,20 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class SenderApplicationController : Controller
 	{
-		private readonly IApplicationSenderManager _applicationSenderManager;
+		private readonly ISenderApplicationManager _senderApplicationManager;
 		private readonly IClientRepository _clientRepository;
 		private readonly ICountryRepository _countries;
 		private readonly IIdentityService _identity;
 		private readonly ISenderRepository _senders;
 
 		public SenderApplicationController(
-			IApplicationSenderManager applicationSenderManager,
+			ISenderApplicationManager senderApplicationManager,
 			IClientRepository clientRepository,
 			IIdentityService identity,
 			ICountryRepository countries,
 			ISenderRepository senders)
 		{
-			_applicationSenderManager = applicationSenderManager;
+			_senderApplicationManager = senderApplicationManager;
 			_clientRepository = clientRepository;
 			_identity = identity;
 			_countries = countries;
@@ -68,7 +68,7 @@ namespace Alicargo.Controllers.Application
 				throw new EntityNotFoundException("Current user is not sender.");
 			}
 
-			_applicationSenderManager.Add(model, clientId, senderId.Value);
+			_senderApplicationManager.Add(model, clientId, senderId.Value);
 
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
@@ -77,7 +77,7 @@ namespace Alicargo.Controllers.Application
 		[Access(RoleType.Sender)]
 		public virtual ViewResult Edit(long id)
 		{
-			var model = _applicationSenderManager.Get(id);
+			var model = _senderApplicationManager.Get(id);
 
 			BindBag(id, model.Count);
 
@@ -95,7 +95,7 @@ namespace Alicargo.Controllers.Application
 				return View(model);
 			}
 
-			_applicationSenderManager.Update(id, model);
+			_senderApplicationManager.Update(id, model);
 
 			return RedirectToAction(MVC.SenderApplication.Edit(id));
 		}

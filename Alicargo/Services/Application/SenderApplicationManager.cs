@@ -10,7 +10,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	internal sealed class ApplicationSenderManager : IApplicationSenderManager
+	internal sealed class SenderApplicationManager : ISenderApplicationManager
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IForwarderService _forwarders;
@@ -19,7 +19,7 @@ namespace Alicargo.Services.Application
 		private readonly ITransitRepository _transits;
 		private readonly IApplicationEditor _updater;
 
-		public ApplicationSenderManager(
+		public SenderApplicationManager(
 			IApplicationRepository applications,
 			ISenderService senders,
 			IApplicationEditor updater,
@@ -99,13 +99,11 @@ namespace Alicargo.Services.Application
 
 			transit.Id = 0;
 
-			var forwarderId = _forwarders.GetByCityOrAny(transit.CityId, application.ForwarderId);
-
 			var transitId = _transits.Add(transit);
 
 			application.TransitId = transitId;
 
-			application.ForwarderId = forwarderId;
+			application.ForwarderId = _forwarders.GetByCityOrAny(transit.CityId, application.ForwarderId);
 		}
 
 		private static void Map(ApplicationSenderModel @from, ApplicationData to)
