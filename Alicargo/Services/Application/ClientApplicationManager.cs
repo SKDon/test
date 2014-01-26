@@ -1,7 +1,6 @@
 ﻿using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
@@ -17,7 +16,6 @@ namespace Alicargo.Services.Application
 		private readonly IForwarderService _forwarders;
 		private readonly ISenderService _senders;
 		private readonly ITransitService _transits;
-		private readonly IUnitOfWork _unitOfWork;
 		private readonly IApplicationEditor _updater;
 
 		public ClientApplicationManager(
@@ -26,8 +24,7 @@ namespace Alicargo.Services.Application
 			IApplicationEditor updater,
 			ISenderService senders,
 			IStateConfig config,
-			ITransitService transits,
-			IUnitOfWork unitOfWork)
+			ITransitService transits)
 		{
 			_applications = applications;
 			_forwarders = forwarders;
@@ -35,7 +32,6 @@ namespace Alicargo.Services.Application
 			_senders = senders;
 			_config = config;
 			_transits = transits;
-			_unitOfWork = unitOfWork;
 		}
 
 		public long Add(
@@ -68,8 +64,6 @@ namespace Alicargo.Services.Application
 			Map(model, data, forwarderId);
 
 			_updater.Update(data);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public ApplicationClientModel Get(long id)

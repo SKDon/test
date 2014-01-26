@@ -2,6 +2,7 @@
 using System.Linq;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
+using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
@@ -18,6 +19,7 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IStateConfig _config;
+		private readonly IForwarderService _forwarders;
 		private readonly IIdentityService _identity;
 		private readonly ISenderService _senders;
 		private readonly IStateSettingsRepository _settings;
@@ -27,6 +29,7 @@ namespace Alicargo.Services.Application
 
 		public AdminApplicationManager(
 			IApplicationRepository applications,
+			IForwarderService forwarders,
 			ISenderService senders,
 			IApplicationEditor updater,
 			IStateConfig config,
@@ -36,6 +39,7 @@ namespace Alicargo.Services.Application
 			IStateSettingsRepository settings)
 		{
 			_applications = applications;
+			_forwarders = forwarders;
 			_senders = senders;
 			_updater = updater;
 			_config = config;
@@ -45,28 +49,93 @@ namespace Alicargo.Services.Application
 			_settings = settings;
 		}
 
+		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transit,
+			long clientId)
+		{
+			var transitId = _transitService.AddTransit(transit, carrierModel);
+
+			var data = new ApplicationData
+			{
+				Id = 0,
+				CreationTimestamp = DateTimeProvider.Now,
+				StateChangeTimestamp = DateTimeProvider.Now,
+				StateId = _config.DefaultStateId,
+				Class = null,
+				TransitId = transitId,
+				Invoice = model.Invoice,
+				Characteristic = model.Characteristic,
+				AddressLoad = model.AddressLoad,
+				WarehouseWorkingTime = model.WarehouseWorkingTime,
+				Weight = model.Weight,
+				Count = model.Count,
+				Volume = model.Volume,
+				TermsOfDelivery = model.TermsOfDelivery,
+				Value = model.Currency.Value,
+				CurrencyId = model.Currency.CurrencyId,
+				CountryId = model.CountryId,
+				FactoryName = model.FactoryName,
+				FactoryPhone = model.FactoryPhone,
+				FactoryEmail = model.FactoryEmail,
+				FactoryContact = model.FactoryContact,
+				MarkName = model.MarkName,
+				MethodOfDelivery = model.MethodOfDelivery,
+				AirWaybillId = null,
+				DateInStock = null,
+				DateOfCargoReceipt = null,
+				TransitReference = null,
+				ClientId = clientId,
+				PickupCost = model.PickupCost,
+				TransitCost = model.TransitCost,
+				FactureCost = model.FactureCost,
+				TariffPerKg = model.TariffPerKg,
+				ScotchCostEdited = model.ScotchCostEdited,
+				FactureCostEdited = model.FactureCostEdited,
+				TransitCostEdited = model.TransitCostEdited,
+				PickupCostEdited = model.PickupCostEdited,
+				SenderId = GetSenderId(model.SenderId, model.CountryId, null),
+				ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, null),
+				SenderRate = null
+			};
+
+			return _updater.Add(data);
+		}
+
 		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
-			TransitEditModel transitModel)
+			TransitEditModel transit)
 		{
 			var data = _applications.Get(applicationId);
 
-			_transitService.Update(data.TransitId, transitModel, carrierModel);
+			_transitService.Update(data.TransitId, transit, carrierModel);
 
-			Map(model, data);
+			data.Invoice = model.Invoice;
+			data.Characteristic = model.Characteristic;
+			data.AddressLoad = model.AddressLoad;
+			data.WarehouseWorkingTime = model.WarehouseWorkingTime;
+			data.Weight = model.Weight;
+			data.Count = model.Count;
+			data.Volume = model.Volume;
+			data.TermsOfDelivery = model.TermsOfDelivery;
+			data.Value = model.Currency.Value;
+			data.CurrencyId = model.Currency.CurrencyId;
+			data.CountryId = model.CountryId;
+			data.FactoryName = model.FactoryName;
+			data.FactoryPhone = model.FactoryPhone;
+			data.FactoryEmail = model.FactoryEmail;
+			data.FactoryContact = model.FactoryContact;
+			data.MarkName = model.MarkName;
+			data.MethodOfDelivery = model.MethodOfDelivery;
+			data.FactureCost = model.FactureCost;
+			data.TransitCost = model.TransitCost;
+			data.PickupCost = model.PickupCost;
+			data.TariffPerKg = model.TariffPerKg;
+			data.FactureCostEdited = model.FactureCostEdited;
+			data.TransitCostEdited = model.TransitCostEdited;
+			data.PickupCostEdited = model.PickupCostEdited;
+			data.ScotchCostEdited = model.ScotchCostEdited;
+			data.SenderId = GetSenderId(model.SenderId, model.CountryId, data.SenderId);
+			data.ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, data.ForwarderId);
 
 			_updater.Update(data);
-
-			_unitOfWork.SaveChanges();
-		}
-
-		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel,
-			long clientId)
-		{
-			var transitId = _transitService.AddTransit(transitModel, carrierModel);
-
-			var data = GetNewApplicationData(model, clientId, transitId);
-
-			return _updater.Add(data);
 		}
 
 		public void Delete(long id)
@@ -197,94 +266,24 @@ namespace Alicargo.Services.Application
 			_unitOfWork.SaveChanges();
 		}
 
-		private ApplicationData GetNewApplicationData(ApplicationAdminModel model, long clientId, long transitId)
+		private long GetForwarderId(long? forwarderId, long cityId, long? oldForwarderId)
 		{
-			return new ApplicationData
-			{
-				CreationTimestamp = DateTimeProvider.Now,
-				StateChangeTimestamp = DateTimeProvider.Now,
-				StateId = _config.DefaultStateId,
-				Class = null,
-				TransitId = transitId,
-				Invoice = model.Invoice,
-				Characteristic = model.Characteristic,
-				AddressLoad = model.AddressLoad,
-				WarehouseWorkingTime = model.WarehouseWorkingTime,
-				Weight = model.Weight,
-				Count = model.Count,
-				Volume = model.Volume,
-				TermsOfDelivery = model.TermsOfDelivery,
-				Value = model.Currency.Value,
-				CurrencyId = model.Currency.CurrencyId,
-				CountryId = model.CountryId,
-				FactoryName = model.FactoryName,
-				FactoryPhone = model.FactoryPhone,
-				FactoryEmail = model.FactoryEmail,
-				FactoryContact = model.FactoryContact,
-				MarkName = model.MarkName,
-				MethodOfDelivery = model.MethodOfDelivery,
-				Id = 0,
-				AirWaybillId = null,
-				DateInStock = null,
-				DateOfCargoReceipt = null,
-				TransitReference = null,
-				ClientId = clientId,
-				PickupCost = model.PickupCost,
-				TransitCost = model.TransitCost,
-				FactureCost = model.FactureCost,
-				TariffPerKg = model.TariffPerKg,
-				ScotchCostEdited = model.ScotchCostEdited,
-				FactureCostEdited = model.FactureCostEdited,
-				TransitCostEdited = model.TransitCostEdited,
-				PickupCostEdited = model.PickupCostEdited,
-				SenderId = GetSenderId(model, null),
-				ForwarderId = model.ForwarderId,
-				SenderRate = null
-			};
+			return forwarderId.HasValue
+				? forwarderId.Value
+				: _forwarders.GetByCityOrAny(cityId, oldForwarderId);
 		}
 
-		private long GetSenderId(ApplicationAdminModel model, long? oldSenderId)
+		private long GetSenderId(long? senderId, long countryId, long? oldSenderId)
 		{
-			return model.SenderId.HasValue
-				? model.SenderId.Value
-				: _senders.GetByCountryOrAny(model.CountryId, oldSenderId);
+			return senderId.HasValue
+				? senderId.Value
+				: _senders.GetByCountryOrAny(countryId, oldSenderId);
 		}
 
 		private bool HasPermissionToSetState(long stateId)
 		{
 			return _settings.GetStateAvailabilities()
 				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
-		}
-
-		private void Map(ApplicationAdminModel @from, ApplicationData to)
-		{
-			to.Invoice = @from.Invoice;
-			to.Characteristic = @from.Characteristic;
-			to.AddressLoad = @from.AddressLoad;
-			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
-			to.Weight = @from.Weight;
-			to.Count = @from.Count;
-			to.Volume = @from.Volume;
-			to.TermsOfDelivery = @from.TermsOfDelivery;
-			to.Value = @from.Currency.Value;
-			to.CurrencyId = @from.Currency.CurrencyId;
-			to.CountryId = @from.CountryId;
-			to.FactoryName = @from.FactoryName;
-			to.FactoryPhone = @from.FactoryPhone;
-			to.FactoryEmail = @from.FactoryEmail;
-			to.FactoryContact = @from.FactoryContact;
-			to.MarkName = @from.MarkName;
-			to.MethodOfDelivery = @from.MethodOfDelivery;
-			to.FactureCost = @from.FactureCost;
-			to.TransitCost = @from.TransitCost;
-			to.PickupCost = @from.PickupCost;
-			to.TariffPerKg = @from.TariffPerKg;
-			to.FactureCostEdited = from.FactureCostEdited;
-			to.TransitCostEdited = from.TransitCostEdited;
-			to.PickupCostEdited = from.PickupCostEdited;
-			to.ScotchCostEdited = from.ScotchCostEdited;
-			to.SenderId = GetSenderId(@from, to.SenderId);
-			to.ForwarderId = from.ForwarderId;
 		}
 	}
 }

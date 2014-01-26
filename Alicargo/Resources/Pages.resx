@@ -381,4 +381,7 @@
   <data name="DefineByContry" xml:space="preserve">
     <value>Define by contry</value>
   </data>
+  <data name="DefineByCity" xml:space="preserve">
+    <value>Define by city</value>
+  </data>
 </root>

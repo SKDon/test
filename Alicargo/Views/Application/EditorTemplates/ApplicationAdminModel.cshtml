@@ -24,7 +24,7 @@
 		@Html.LabelFor(x => x.SenderId)
 		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long?, string>)ViewBag.Senders, Pages.DefineByContry)
 		@Html.LabelFor(x => x.ForwarderId)
-		@Html.DropDownListFor(x => x.ForwarderId, (IDictionary<long, string>)ViewBag.Forwarders)
+		@Html.DropDownListFor(x => x.ForwarderId, (IDictionary<long?, string>)ViewBag.Forwarders, Pages.DefineByCity)
 		@Html.LabelFor(model => model.MethodOfDelivery)
 		@Html.DropDownListForEnum(model => model.MethodOfDelivery)
 	</div>

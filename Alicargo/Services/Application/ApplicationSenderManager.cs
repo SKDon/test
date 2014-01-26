@@ -17,7 +17,6 @@ namespace Alicargo.Services.Application
 		private readonly ISenderService _senders;
 		private readonly IStateConfig _stateConfig;
 		private readonly ITransitRepository _transits;
-		private readonly IUnitOfWork _unitOfWork;
 		private readonly IApplicationEditor _updater;
 
 		public ApplicationSenderManager(
@@ -25,7 +24,6 @@ namespace Alicargo.Services.Application
 			ISenderService senders,
 			IApplicationEditor updater,
 			IForwarderService forwarders,
-			IUnitOfWork unitOfWork,
 			ITransitRepository transits,
 			IStateConfig stateConfig)
 		{
@@ -33,7 +31,6 @@ namespace Alicargo.Services.Application
 			_senders = senders;
 			_updater = updater;
 			_forwarders = forwarders;
-			_unitOfWork = unitOfWork;
 			_transits = transits;
 			_stateConfig = stateConfig;
 		}
@@ -70,8 +67,6 @@ namespace Alicargo.Services.Application
 			Map(model, applicationData);
 
 			_updater.Update(applicationData);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void Add(ApplicationSenderModel model, long clientId, long creatorSenderId)

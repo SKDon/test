@@ -12,11 +12,13 @@ namespace Alicargo.ViewModels.Application
 			Currency = new CurrencyModel();
 		}
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Value")]
 		public CurrencyModel Currency { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Invoice")]
-		public string Invoice { get; set; }		
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Invoice")]
+		public string Invoice { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Characteristic")]
 		public string Characteristic { get; set; }
@@ -33,7 +35,8 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "Count")]
 		public int? Count { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "Volume"), Required]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Volume")]
 		public float Volume { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "TermsOfDelivery")]
@@ -46,24 +49,30 @@ namespace Alicargo.ViewModels.Application
 		public long? SenderId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Forwarder")]
-		public long ForwarderId { get; set; }
+		public long? ForwarderId { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "FactoryName")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FactoryPhone")]
 		public string FactoryPhone { get; set; }
 
-		[DataType(DataType.EmailAddress), MaxLength(320), DisplayNameLocalized(typeof(Entities), "FactoryEmail")]
+		[MaxLength(320)]
+		[DataType(DataType.EmailAddress)]
+		[DisplayNameLocalized(typeof(Entities), "FactoryEmail")]
 		public string FactoryEmail { get; set; }
 
-		[DataType(DataType.Text), DisplayNameLocalized(typeof(Entities), "FactoryContact")]
+		[DataType(DataType.Text)]
+		[DisplayNameLocalized(typeof(Entities), "FactoryContact")]
 		public string FactoryContact { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Mark")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Mark")]
 		public string MarkName { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public MethodOfDelivery MethodOfDelivery { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FactureCost")]

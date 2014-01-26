@@ -103,7 +103,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			newData.ForwarderId = TestConstants.TestForwarderId2;
 
 			_editor.Update(newData);
-			_context.UnitOfWork.SaveChanges();
 
 			var data = _applications.Get(old.Id);
 

@@ -108,6 +108,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 		public void Update(ApplicationData application)
 		{
 			Update(application.Id, entity => CopyTo(application, entity));
+
+			_context.SubmitChanges();
 		}
 
 		private static void CopyTo(ApplicationData from, DbContext.Application to)

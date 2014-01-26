@@ -74,7 +74,7 @@ namespace Alicargo.Controllers.Application
 
 			ViewBag.Senders = _senders.GetAll().OrderBy(x => x.Name).ToDictionary(x => (long?)x.EntityId, x => x.Name);
 
-			ViewBag.Forwarders = _forwarders.GetAll().OrderBy(x => x.Name).ToDictionary(x => x.Id, x => x.Name);
+			ViewBag.Forwarders = _forwarders.GetAll().OrderBy(x => x.Name).ToDictionary(x => (long?)x.Id, x => x.Name);
 		}
 
 		#region Edit

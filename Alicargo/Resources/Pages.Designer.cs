@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Define by city.
+        /// </summary>
+        public static string DefineByCity {
+            get {
+                return ResourceManager.GetString("DefineByCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Define by contry.
         /// </summary>
         public static string DefineByContry {
