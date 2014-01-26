@@ -12,5 +12,6 @@ namespace Alicargo.DataAccess.Contracts.Repositories.User
 		long[] GetCities(long forwarderId);
 		void SetCities(long forwarderId, long[] cities);
 		long[] GetByCity(long cityId);
+		long? GetByUserId(long userId);
 	}
 }

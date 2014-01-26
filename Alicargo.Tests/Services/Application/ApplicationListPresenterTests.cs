@@ -44,13 +44,16 @@ namespace Alicargo.Tests.Services.Application
 			var map = _context.CreateMany<ApplicationListItem>().ToArray();
 			_context.StateService.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
 			_context.ApplicationListItemMapper.Setup(x => x.Map(data, TwoLetterISOLanguageName.English)).Returns(map);
-			const int cargoReceivedDaysToShow = 10;
+			var cargoReceivedDaysToShow = _context.Create<int>();
+			var cargoReceivedStateId = _context.Create<int>();
 			_context.StateConfig.Setup(x => x.CargoReceivedDaysToShow).Returns(cargoReceivedDaysToShow);
+			_context.StateConfig.Setup(x => x.CargoReceivedStateId).Returns(cargoReceivedStateId);
 			_context.ApplicationGrouper.Setup(x => x.Group(map, new[] { OrderType.LegalEntity }))
 				.Returns(new ApplicationGroup[0]);
-			_context.ApplicationRepository.Setup(x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedDaysToShow)).Returns(It.IsAny<long>());
+			_context.ApplicationRepository.Setup(
+				x => x.Count(_stateIds, clientId, null, null, cargoReceivedStateId, cargoReceivedDaysToShow, null)).Returns(It.IsAny<long>());
 			_context.ApplicationRepository.Setup(x =>
-					x.List(_stateIds, _orders, 0, 0, clientId, null, null, null, cargoReceivedDaysToShow))
+				x.List(_stateIds, _orders, 0, 0, clientId, null, null, cargoReceivedStateId, cargoReceivedDaysToShow, null))
 				.Returns(data);
 
 			var collection = _service.List(TwoLetterISOLanguageName.English, 0, 0, _orders, clientId);
@@ -61,9 +64,10 @@ namespace Alicargo.Tests.Services.Application
 			_context.StateService.Verify(x => x.GetStateVisibility(), Times.Once());
 			_context.ApplicationListItemMapper.Verify(x => x.Map(data, TwoLetterISOLanguageName.English));
 			_context.ApplicationGrouper.Verify(x => x.Group(map, new[] { OrderType.LegalEntity }), Times.Once());
-			_context.ApplicationRepository.Verify(x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedDaysToShow), Times.Once());
+			_context.ApplicationRepository.Verify(
+				x => x.Count(_stateIds, clientId, null, null, cargoReceivedStateId, cargoReceivedDaysToShow, null), Times.Once());
 			_context.ApplicationRepository.Verify(x =>
-				x.List(_stateIds, _orders, 0, 0, clientId, null, null, null, cargoReceivedDaysToShow),
+				x.List(_stateIds, _orders, 0, 0, clientId, null, null, cargoReceivedStateId, cargoReceivedDaysToShow, null),
 				Times.Once());
 		}
 	}

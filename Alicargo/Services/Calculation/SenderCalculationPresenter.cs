@@ -64,11 +64,11 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applications.List(stateIds, new[]
 			{
-			    new Order
-			    {
-			        Desc = true,
-			        OrderType = OrderType.AirWaybill
-			    }
+				new Order
+				{
+					Desc = true,
+					OrderType = OrderType.AirWaybill
+				}
 			}, take, skip, senderId: senderId).ToArray();
 
 			total = _applications.Count(stateIds, senderId: senderId);

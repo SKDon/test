@@ -194,6 +194,7 @@
     <Build Include="Stored procedures\User\Forwarder\ForwarderCity_Get.sql" />
     <Build Include="Stored procedures\User\Forwarder\ForwarderCity_Set.sql" />
     <Build Include="Stored procedures\User\Forwarder\Forwarder_GetByCity.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_GetByUserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

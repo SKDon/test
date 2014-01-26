@@ -9,7 +9,6 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services
 {
@@ -147,7 +146,7 @@ namespace Alicargo.Services
 					return _brokers.GetByUserId(userId) != null;
 
 				case RoleType.Forwarder:
-					return _forwarders.GetAll().Any(x => x.UserId == userId);
+					return _forwarders.GetByUserId(userId) != null;
 
 				case RoleType.Client:
 					return _clients.GetByUserId(userId) != null;

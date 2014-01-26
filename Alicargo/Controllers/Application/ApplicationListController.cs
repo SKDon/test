@@ -16,44 +16,25 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationListController : Controller
 	{
-		private readonly IApplicationListPresenter _applicationPresenter;
-		private readonly IAwbRepository _awbRepository;
+		private readonly IApplicationListPresenter _presenter;
+		private readonly IAwbRepository _awbs;
 		private readonly IClientRepository _clients;
+		private readonly IForwarderRepository _forwarders;
 		private readonly IIdentityService _identity;
 		private readonly ISenderRepository _senders;
 		private readonly IStateConfig _stateConfig;
 
-		public ApplicationListController(IApplicationListPresenter applicationPresenter,
-			IClientRepository clients, ISenderRepository senders, IAwbRepository awbRepository,
-			IStateConfig stateConfig, IIdentityService identity)
+		public ApplicationListController(IApplicationListPresenter presenter,
+			IClientRepository clients, ISenderRepository senders, IAwbRepository awbs,
+			IStateConfig stateConfig, IIdentityService identity, IForwarderRepository forwarders)
 		{
-			_applicationPresenter = applicationPresenter;
+			_presenter = presenter;
 			_clients = clients;
 			_senders = senders;
-			_awbRepository = awbRepository;
+			_awbs = awbs;
 			_stateConfig = stateConfig;
 			_identity = identity;
-		}
-
-		[HttpPost, Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender),
-		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult List(int take, int skip, Dictionary<string, string>[] group)
-		{
-			var orders = OrderHelper.Get(group);
-
-			Debug.Assert(_identity.Id != null);
-
-			var client = _clients.GetByUserId(_identity.Id.Value);
-
-			var senderId = _senders.GetByUserId(_identity.Id.Value);
-
-			var isForwarder = _identity.IsInRole(RoleType.Forwarder);
-
-			var data = _applicationPresenter.List(_identity.Language, take, skip, orders, client != null
-				? client.ClientId
-				: (long?) null, senderId, isForwarder);
-
-			return Json(data);
+			_forwarders = forwarders;
 		}
 
 		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
@@ -66,13 +47,37 @@ namespace Alicargo.Controllers.Application
 			var model = new ApplicationIndexModel
 			{
 				Clients = clients,
-				AirWaybills = _awbRepository.Get()
+				AirWaybills = _awbs.Get()
 					.Where(x => x.StateId == _stateConfig.CargoIsFlewStateId)
 					.OrderBy(x => x.Bill)
 					.ToDictionary(x => x.Id, x => x.Bill)
 			};
 
 			return View(model);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult List(int take, int skip, Dictionary<string, string>[] group)
+		{
+			var orders = OrderHelper.Get(group);
+
+			Debug.Assert(_identity.Id != null);
+
+			var senderId = _senders.GetByUserId(_identity.Id.Value);
+
+			var forwarderId = _forwarders.GetByUserId(_identity.Id.Value);
+
+			var client = _clients.GetByUserId(_identity.Id.Value);
+
+			var clientId = client != null
+				? client.ClientId
+				: (long?)null;
+
+			var data = _presenter.List(_identity.Language, take, skip, orders, clientId, senderId, forwarderId);
+
+			return Json(data);
 		}
 	}
 }

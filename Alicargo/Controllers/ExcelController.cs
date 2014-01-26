@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.Excel;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.Excel.Rows;
@@ -13,15 +16,18 @@ namespace Alicargo.Controllers
 	public partial class ExcelController : Controller
 	{
 		private readonly IExcelGenerator<BaseApplicationExcelRow> _generator;
+		private readonly IForwarderRepository _forwarders;
 		private readonly IApplicationExcelRowSource _rowSource;
 		private readonly IIdentityService _identity;
 
 		public ExcelController(
 			IExcelGenerator<BaseApplicationExcelRow> generator,
+			IForwarderRepository forwarders,
 			IApplicationExcelRowSource rowSource,
 			IIdentityService identity)
 		{
 			_generator = generator;
+			_forwarders = forwarders;
 			_rowSource = rowSource;
 			_identity = identity;
 		}
@@ -45,7 +51,16 @@ namespace Alicargo.Controllers
 
 			if (_identity.IsInRole(RoleType.Forwarder))
 			{
-				var rows = _rowSource.GetForwarderApplicationExcelRow(_identity.Language);
+				Debug.Assert(_identity.Id != null);
+
+				var forwarderId = _forwarders.GetByUserId(_identity.Id.Value);
+
+				if(!forwarderId.HasValue)
+				{
+					throw new InvalidLogicException("Expected that current user is forwarder");
+				}
+
+				var rows = _rowSource.GetForwarderApplicationExcelRow(forwarderId.Value, _identity.Language);
 
 				return _generator.Get(rows, _identity.Language);
 			}

@@ -133,18 +133,20 @@ namespace Alicargo.DataAccess.Repositories.Application
 		}
 
 		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, bool? hasCalculation = null,
-			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null)
+			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, long? forwarderId = null)
 		{
-			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow);
+			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
+				forwarderId);
 
 			return applications.LongCount();
 		}
 
-		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null,
-			int skip = 0, long? clientId = null, long? senderId = null, bool? hasCalculation = null,
-			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null)
+		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
+			long? clientId = null, long? senderId = null, bool? hasCalculation = null, long? cargoReceivedStateId = null,
+			int? cargoReceivedDaysToShow = null, long? forwarderId = null)
 		{
-			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow);
+			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
+				forwarderId);
 
 			applications = _orderer.Order(applications, orders);
 
@@ -169,7 +171,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
-		public ApplicationExtendedData GetDetails(long id)
+		public ApplicationExtendedData GetExtendedData(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id).Select(_extendedSelector).FirstOrDefault();
 		}
@@ -187,7 +189,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 		}
 
 		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation,
-			long? cargoReceivedStateId, int? cargoReceivedDaysToShow)
+			long? cargoReceivedStateId, int? cargoReceivedDaysToShow, long? forwarderId)
 		{
 			var applications = stateIds != null && stateIds.Length > 0
 				? _context.Applications.Where(x => stateIds.Contains(x.StateId))
@@ -205,23 +207,26 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			if(hasCalculation.HasValue && hasCalculation.Value)
 			{
-				applications =
-					applications.Where(
-						x => _context.Calculations.Any(c => c.ApplicationHistoryId == x.Id && c.ClientId == x.ClientId));
+				applications = applications.Where(
+					x => _context.Calculations.Any(c => c.ApplicationHistoryId == x.Id && c.ClientId == x.ClientId));
 			}
 
 			if(hasCalculation.HasValue && !hasCalculation.Value)
 			{
-				applications =
-					applications.Where(
-						x => _context.Calculations.All(c => c.ApplicationHistoryId != x.Id && c.ClientId == x.ClientId));
+				applications = applications.Where(
+					x => _context.Calculations.All(c => c.ApplicationHistoryId != x.Id && c.ClientId == x.ClientId));
 			}
 
-			if(cargoReceivedStateId.HasValue && cargoReceivedDaysToShow.HasValue)
+			if(forwarderId.HasValue)
 			{
-				var offset = DateTimeProvider.Now.AddDays(-cargoReceivedDaysToShow.Value);
+				applications = applications.Where(x => x.ForwarderId == forwarderId.Value);
 
-				applications = applications.Where(x => x.StateId != cargoReceivedStateId.Value || x.StateChangeTimestamp > offset);
+				if(cargoReceivedStateId.HasValue && cargoReceivedDaysToShow.HasValue)
+				{
+					var offset = DateTimeProvider.Now.AddDays(-cargoReceivedDaysToShow.Value);
+
+					applications = applications.Where(x => x.StateId != cargoReceivedStateId.Value || x.StateChangeTimestamp > offset);
+				}
 			}
 
 			return applications;

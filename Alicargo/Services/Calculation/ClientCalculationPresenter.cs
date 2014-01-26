@@ -13,8 +13,6 @@ using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities.Localization;
-using Alicargo.ViewModels.Calculation;
-using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Calculation
 {
@@ -63,11 +61,11 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applicationRepository.List(stateIds, new[]
 			{
-			    new Order
-			    {
-			        Desc = true,
-			        OrderType = OrderType.AirWaybill
-			    }
+				new Order
+				{
+					Desc = true,
+					OrderType = OrderType.AirWaybill
+				}
 			}, take, (int)skip, clientId, hasCalculation: true).ToArray();
 
 			total = _applicationRepository.Count(stateIds, clientId, hasCalculation: true);

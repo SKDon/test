@@ -91,7 +91,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			transitModel.CityId = TestConstants.TestCityId1;
 			var newCarrierName = _fixture.Create<string>();
 			var old = _applicationRepository.List(new[] { TestConstants.DefaultStateId },
-				new[] { new Order { OrderType = OrderType.Id } }, 1).First();
+				new[] { new Order { OrderType = OrderType.Id } }, take: 1).First();
 
 			var result = _controller.Edit(old.Id, model, new CarrierSelectModel
 			{
@@ -119,7 +119,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 					Desc = true,
 					OrderType = OrderType.Id
 				}
-			}, 1, clientId: clientData.ClientId).First();
+			}, take: 1, clientId: clientData.ClientId).First();
 
 			Validate(clientData, model, transitModel, newCarrierName, data);
 		}

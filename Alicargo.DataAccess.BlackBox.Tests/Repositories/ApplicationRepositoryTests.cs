@@ -57,7 +57,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var expected = CreateTestApplication();
 
-			var actual = _applications.GetDetails(expected.Id);
+			var actual = _applications.GetExtendedData(expected.Id);
 
 			Assert.IsNotNull(actual);
 

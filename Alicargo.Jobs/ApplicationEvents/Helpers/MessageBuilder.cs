@@ -52,7 +52,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		private EmailMessage[] Get(EventType type, long applicationId, byte[] applicationEventData)
 		{
-			var application = _applications.GetDetails(applicationId);
+			var application = _applications.GetExtendedData(applicationId);
 			if(application == null)
 			{
 				throw new InvalidOperationException("Can't find application by id " + applicationId);

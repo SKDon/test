@@ -32,10 +32,10 @@ namespace Alicargo.Services.Application
 		}
 
 		public ApplicationListCollection List(string language, int? take = null, int skip = 0, Order[] groups = null,
-			long? clientId = null, long? senderId = null, bool? isForwarder = null)
+			long? clientId = null, long? senderId = null, long? forwarderId = null)
 		{
 			long total;
-			var data = GetList(take, skip, groups, clientId, senderId, isForwarder, out total);
+			var data = GetList(take, skip, groups, clientId, senderId, forwarderId, out total);
 
 			var applications = _mapper.Map(data, language);
 
@@ -64,21 +64,17 @@ namespace Alicargo.Services.Application
 		}
 
 		private ApplicationExtendedData[] GetList(int? take, int skip, IEnumerable<Order> groups, long? clientId,
-			long? senderId, bool? isForwarder, out long total)
+			long? senderId, long? forwarderId, out long total)
 		{
 			var stateIds = _stateFilter.GetStateVisibility();
 
 			var orders = GetOrders(groups);
 
-			var cargoReceivedStateId = isForwarder.HasValue && isForwarder.Value
-				? _stateConfig.CargoReceivedStateId
-				: (long?)null;
-
-			total = _applications.Count(stateIds, clientId, null, null, cargoReceivedStateId,
-				_stateConfig.CargoReceivedDaysToShow);
+			total = _applications.Count(stateIds, clientId, null, null, 
+				_stateConfig.CargoReceivedStateId, _stateConfig.CargoReceivedDaysToShow, forwarderId);
 
 			return _applications.List(stateIds, orders, take, skip, clientId, senderId, null,
-				cargoReceivedStateId, _stateConfig.CargoReceivedDaysToShow);
+				_stateConfig.CargoReceivedStateId, _stateConfig.CargoReceivedDaysToShow, forwarderId);
 		}
 
 		private static Order[] GetOrders(IEnumerable<Order> orders)

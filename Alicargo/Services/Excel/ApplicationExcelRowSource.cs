@@ -17,8 +17,8 @@ namespace Alicargo.Services.Excel
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
-		private readonly IStateConfig _stateConfig;
 		private readonly IApplicationListItemMapper _itemMapper;
+		private readonly IStateConfig _stateConfig;
 		private readonly IStateFilter _stateFilter;
 
 		public ApplicationExcelRowSource(
@@ -37,16 +37,16 @@ namespace Alicargo.Services.Excel
 
 		public AdminApplicationExcelRow[] GetAdminApplicationExcelRow(string language)
 		{
-			var items = GetApplicationListItems(false, language);
+			var items = GetApplicationListItems(null, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
 			return items.Select(x => new AdminApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow(string language)
+		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow(long forwarderId, string language)
 		{
-			var items = GetApplicationListItems(true, language);
+			var items = GetApplicationListItems(forwarderId, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
@@ -55,7 +55,7 @@ namespace Alicargo.Services.Excel
 
 		public SenderApplicationExcelRow[] GetSenderApplicationExcelRow(string language)
 		{
-			var items = GetApplicationListItems(false, language);
+			var items = GetApplicationListItems(null, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
@@ -65,24 +65,22 @@ namespace Alicargo.Services.Excel
 		private static string GetAirWaybillDisplay(IEnumerable<AirWaybillData> awbs, ApplicationListItem application)
 		{
 			return awbs.Where(a => a.Id == application.AirWaybillId)
-					   .Select(data => HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(data)))
-					   .FirstOrDefault();
+				.Select(data => HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(data)))
+				.FirstOrDefault();
 		}
 
-		private ApplicationListItem[] GetApplicationListItems(bool isForwarder, string language)
+		private ApplicationListItem[] GetApplicationListItems(long? forwarderId, string language)
 		{
 			var stateIds = _stateFilter.GetStateVisibility();
 
-			var cargoReceivedStateId = isForwarder
-				? _stateConfig.CargoReceivedStateId
-				: (long?)null;
-
 			var data = _applications.List(stateIds, new[]
 			{
-			    new Order {Desc = true, OrderType = OrderType.AirWaybill},
-			    new Order {Desc = false, OrderType = OrderType.ClientNic},
-			    new Order {Desc = true, OrderType = OrderType.Id}
-			}, cargoReceivedStateId: cargoReceivedStateId, cargoReceivedDaysToShow: _stateConfig.CargoReceivedDaysToShow);
+				new Order { Desc = true, OrderType = OrderType.AirWaybill },
+				new Order { Desc = false, OrderType = OrderType.ClientNic },
+				new Order { Desc = true, OrderType = OrderType.Id }
+			}, cargoReceivedStateId: _stateConfig.CargoReceivedStateId,
+				cargoReceivedDaysToShow: _stateConfig.CargoReceivedDaysToShow,
+				forwarderId: forwarderId);
 
 			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
 
