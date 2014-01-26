@@ -67,7 +67,7 @@ namespace Alicargo.DataAccess.Repositories.User
 
 		public long? GetByUserId(long userId)
 		{
-			return _executor.Query<long>("[dbo].[Forwarder_GetByUserId]", new { userId });
+			return _executor.Query<long?>("[dbo].[Forwarder_GetByUserId]", new { userId });
 		}
 	}
 }

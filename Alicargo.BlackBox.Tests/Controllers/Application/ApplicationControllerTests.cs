@@ -45,7 +45,6 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		
 		public void Test_Create_Get()
 		{
 			var clientData = _clientRepository.Get(TestConstants.TestClientId1);
@@ -60,7 +59,6 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		
 		public void Test_Create_Post()
 		{
 			var clientData = _clientRepository.Get(TestConstants.TestClientId1);
@@ -80,7 +78,6 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		
 		public void Test_Edit_Post()
 		{
 			var model = _fixture.Create<ApplicationAdminModel>();
@@ -91,7 +88,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			transitModel.CityId = TestConstants.TestCityId1;
 			var newCarrierName = _fixture.Create<string>();
 			var old = _applicationRepository.List(new[] { TestConstants.DefaultStateId },
-				new[] { new Order { OrderType = OrderType.Id } }, take: 1).First();
+				new[] { new Order { OrderType = OrderType.Id } }, 1).First();
 
 			var result = _controller.Edit(old.Id, model, new CarrierSelectModel
 			{
@@ -119,7 +116,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 					Desc = true,
 					OrderType = OrderType.Id
 				}
-			}, take: 1, clientId: clientData.ClientId).First();
+			}, 1, clientId: clientData.ClientId).First();
 
 			Validate(clientData, model, transitModel, newCarrierName, data);
 		}
