@@ -53,16 +53,16 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				var data = connection.Query("select top 1 * from [dbo].[Application] order by [Id] desc").First();
-				
+
 				var countries = connection.Query<long>(
 					"select c.[CountryId] from [dbo].[SenderCountry] c where c.[SenderId] = @SenderId",
 					new { data.SenderId }).ToArray();
 
-				var cityId = connection.Query<long>(
-					"select [CityId] from [dbo].[Forwarder] where [Id] = @Id",
-					new { Id = data.ForwarderId }).First();
+				var forwarders = connection.Query<long>(
+					"select [ForwarderId] from [dbo].[ForwarderCity] where [CityId] = @CityId",
+					new { transit.CityId }).ToArray();
 
-				cityId.ShouldBeEquivalentTo(transit.CityId);
+				forwarders.Should().Contain((long)data.ForwarderId);
 				model.Count.ShouldBeEquivalentTo((int)data.Count);
 				model.FactoryName.ShouldBeEquivalentTo((string)data.FactoryName);
 				model.FactoryPhone.ShouldBeEquivalentTo((string)data.FactoryPhone);

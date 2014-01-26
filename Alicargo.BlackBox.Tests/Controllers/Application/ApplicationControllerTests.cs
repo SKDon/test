@@ -85,6 +85,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		{
 			var model = _fixture.Create<ApplicationAdminModel>();
 			model.SenderId = TestConstants.TestSenderId;
+			model.CountryId = TestConstants.TestCountryId;
 			model.ForwarderId = TestConstants.TestForwarderId2;
 			var transitModel = _fixture.Create<TransitEditModel>();
 			transitModel.CityId = TestConstants.TestCityId1;

@@ -52,7 +52,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				var data = connection.Query("select top 1 * from [dbo].[Application] order by [Id] desc").First();
 
 				var cityId = connection.Query<long>(
-					"select f.[CityId] from [dbo].[Forwarder] f JOIN [dbo].[Application] a ON a.[ForwarderId] = f.[Id] WHERE a.[Id] = @Id",
+					"select f.[CityId] from [dbo].[ForwarderCity] f JOIN [dbo].[Application] a ON a.[ForwarderId] = f.[ForwarderId] WHERE a.[Id] = @Id",
 					new { data.Id }).First();
 
 				var clientCity = connection.Query<long>(
