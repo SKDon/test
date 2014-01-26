@@ -58,7 +58,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private RoleType[] GetRoles(EventType type, byte[] data)
 		{
 			RoleType[] roles;
-			if (type == EventType.ApplicationSetState)
+			if(type == EventType.ApplicationSetState)
 			{
 				var stateEventData = _serializer.Deserialize<ApplicationSetStateEventData>(data);
 
@@ -77,14 +77,14 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		private IEnumerable<RecipientData> GetRecipients(ApplicationExtendedData application, IEnumerable<RoleType> roles)
 		{
-			foreach (var role in roles)
+			foreach(var role in roles)
 			{
-				switch (role)
+				switch(role)
 				{
 					case RoleType.Admin:
 						var recipients =
 							_admins.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
-						foreach (var recipient in recipients)
+						foreach(var recipient in recipients)
 						{
 							yield return recipient;
 						}
@@ -96,7 +96,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						break;
 
 					case RoleType.Broker:
-						if (application.AirWaybillId.HasValue)
+						if(application.AirWaybillId.HasValue)
 						{
 							var awb = _awbs.Get(application.AirWaybillId.Value).Single();
 							var broker = _brokers.Get(awb.BrokerId);
@@ -106,17 +106,13 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 						break;
 
 					case RoleType.Forwarder:
-						// todo: 1. get forwarder from application data
-						var forwarders = _forwarders.GetAll();
-						foreach (var user in forwarders)
-						{
-							yield return new RecipientData(user.Email, user.Language, role);
-						}
+						var forwarder = _forwarders.Get(application.ForwarderId);
+						yield return new RecipientData(forwarder.Email, forwarder.Language, role);
 						break;
 
 					case RoleType.Client:
 						var client = _clients.Get(application.ClientId);
-						foreach (var email in client.Emails)
+						foreach(var email in client.Emails)
 						{
 							yield return new RecipientData(email, client.Language, role);
 						}

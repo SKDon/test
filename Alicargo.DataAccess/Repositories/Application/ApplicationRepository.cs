@@ -83,7 +83,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				TransitCost = x.TransitCostEdited ?? x.TransitCost,
 				ForwarderTransitCost = x.TransitCost,
 				PickupCost = x.PickupCostEdited ?? x.PickupCost,
-				SenderPickupCost = x.PickupCost
+				SenderPickupCost = x.PickupCost,
+				ForwarderName = x.Forwarder.Name,
+				ForwarderId = x.ForwarderId
 			};
 
 			_selector = x => new ApplicationData

@@ -31,7 +31,12 @@ namespace Alicargo.Core.Event
 
 			if(oldData.SenderId != application.SenderId)
 			{
-				_events.Add(application.Id, EventType.SetSender, EventState.Emailing, application.SenderId);
+				_events.Add(application.Id, EventType.SetSender, EventState.Emailing);
+			}
+
+			if(oldData.ForwarderId != application.ForwarderId)
+			{
+				_events.Add(application.Id, EventType.SetForwarder, EventState.Emailing);
 			}
 		}
 
@@ -41,7 +46,9 @@ namespace Alicargo.Core.Event
 
 			_events.Add(applicationId, EventType.ApplicationCreated, EventState.Emailing);
 
-			_events.Add(applicationId, EventType.SetSender, EventState.Emailing, application.SenderId);
+			_events.Add(applicationId, EventType.SetSender, EventState.Emailing);
+
+			_events.Add(applicationId, EventType.SetForwarder, EventState.Emailing);
 
 			return applicationId;
 		}

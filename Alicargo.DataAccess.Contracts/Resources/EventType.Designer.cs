@@ -160,6 +160,15 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set forwarder.
+        /// </summary>
+        public static string SetForwarder {
+            get {
+                return ResourceManager.GetString("SetForwarder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set sender.
         /// </summary>
         public static string SetSender {

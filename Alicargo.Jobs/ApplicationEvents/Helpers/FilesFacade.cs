@@ -33,6 +33,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case EventType.SetTransitReference:
 				case EventType.ApplicationCreated:
 				case EventType.SetSender:
+				case EventType.SetForwarder:
 					return null;
 
 				case EventType.ApplicationSetState:

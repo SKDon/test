@@ -79,6 +79,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case EventType.SetTransitReference:
 				case EventType.ApplicationCreated:
 				case EventType.SetSender:
+				case EventType.SetForwarder:
 					break;
 
 				case EventType.Calculate:
@@ -169,6 +170,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			Add(localizedData, "Volume", application.Volume.ToString("N2", culture));
 			Add(localizedData, "WarehouseWorkingTime", application.WarehouseWorkingTime);
 			Add(localizedData, "SenderName", application.SenderName);
+			Add(localizedData, "ForwarderName", application.ForwarderName);
 
 			return localizedData;
 		}

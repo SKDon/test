@@ -162,4 +162,7 @@
   <data name="SetSender" xml:space="preserve">
     <value>Set sender</value>
   </data>
+  <data name="SetForwarder" xml:space="preserve">
+    <value>Set forwarder</value>
+  </data>
 </root>

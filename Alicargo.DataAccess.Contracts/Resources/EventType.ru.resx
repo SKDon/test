@@ -162,4 +162,7 @@
   <data name="SetSender" xml:space="preserve">
     <value>Установка отправителя</value>
   </data>
+  <data name="SetForwarder" xml:space="preserve">
+    <value>Установка перевозчика</value>
+  </data>
 </root>

@@ -39,25 +39,21 @@ namespace Alicargo.Services.Email
 		{
 			_manager.SetAwb(applicationId, awbId);
 
-			if (!awbId.HasValue) return;
+			if(!awbId.HasValue) return;
 
-			var model = _awbPresenter.GetData(awbId.Value);
-			var applicationModel = _applications.Get(applicationId);
-
+			var awb = _awbPresenter.GetData(awbId.Value);
+			var application = _applications.Get(applicationId);
 			var aggregate = _awbPresenter.GetAggregate(awbId.Value);
+			var forwarder = _forwarders.Get(application.ForwarderId);
 
-			var to = _forwarders.GetAll();
+			var body = _messageBuilder.AwbSet(
+				awb,
+				ApplicationHelper.GetDisplayNumber(application.Id, application.Count),
+				forwarder.Language,
+				aggregate.TotalWeight,
+				aggregate.TotalCount);
 
-			foreach (var recipient in to)
-			{
-				var body = _messageBuilder.AwbSet(
-					model,
-					ApplicationHelper.GetDisplayNumber(applicationModel.Id, applicationModel.Count),
-					recipient.Language,
-					aggregate.TotalWeight,
-					aggregate.TotalCount);
-				_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, EmailsHelper.DefaultFrom, recipient.Email));
-			}
+			_mailSender.Send(new EmailMessage(_messageBuilder.DefaultSubject, body, EmailsHelper.DefaultFrom, forwarder.Email));
 		}
 	}
 }

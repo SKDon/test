@@ -43,6 +43,10 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public decimal Value { get; set; }
 
+		public long ForwarderId { get; set; }
+
+		public string ForwarderName { get; set; }
+
 
 
 		public long ClientId { get; set; }
@@ -127,6 +131,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public decimal? SenderRate { get; set; }
 
-		public string SenderName { get; set; }
+		public string SenderName { get; set; }		
 	}
 }
