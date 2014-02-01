@@ -1,55 +1,73 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Alicargo.DataAccess.Contracts.Contracts.User;
+﻿using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.DataAccess.DbContext;
+using Alicargo.DataAccess.Helpers;
+using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
 	internal sealed class CarrierRepository : ICarrierRepository
 	{
-		private readonly Expression<Func<Carrier, CarrierData>> _selector;
-		private readonly AlicargoDataContext _context;
+		private readonly IPasswordConverter _converter;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public CarrierRepository(IUnitOfWork unitOfWork)			
+		public CarrierRepository(IPasswordConverter converter, ISqlProcedureExecutor executor)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_converter = converter;
+			_executor = executor;
+		}
 
-			_selector = x => new CarrierData
+		public void Update(long id, string name, string login, string email)
+		{
+			_executor.Execute("[dbo].[Carrier_Update]", new { id, name, login, email });
+		}
+
+		public long Add(string name, string login, string password, string email, string language)
+		{
+			var salt = _converter.GenerateSalt();
+			var passwordHash = _converter.GetPasswordHash(password, salt);
+
+			return _executor.Query<long>("[dbo].[Carrier_Add]", new
 			{
-				Name = x.Name,
-				Id = x.Id
-			};
+				login,
+				PasswordHash = passwordHash,
+				PasswordSalt = salt,
+				language,
+				name,
+				email
+			});
 		}
 
 		public CarrierData[] GetAll()
 		{
-			return _context.Carriers.Select(_selector).ToArray();
+			return _executor.Array<CarrierData>("[dbo].[Carrier_GetAll]");
 		}
 
-		public Func<long> Add(CarrierData carrier)
+		public CarrierData Get(long id)
 		{
-			var entity = new Carrier
-			{
-				Name = carrier.Name,
-				Transits = null,
-				Id = 0
-			};
-			_context.Carriers.InsertOnSubmit(entity);
-
-			return () => entity.Id;
+			return _executor.Query<CarrierData>("[dbo].[Carrier_Get]", new { id });
 		}
 
-		public CarrierData Get(string name)
+		public long[] GetCities(long carrierId)
 		{
-			return _context.Carriers.Select(_selector).FirstOrDefault(x => x.Name.Equals(name));
+			return _executor.Array<long>("[dbo].[CarrierCity_Get]", new { carrierId });
+		}
+
+		public void SetCities(long carrierId, long[] cities)
+		{
+			var table = TableParameters.GeIdsTable("CityIds", cities);
+
+			_executor.Execute("[dbo].[CarrierCity_Set]", new TableParameters(new { carrierId }, table));
+		}
+
+		public long[] GetByCity(long cityId)
+		{
+			return _executor.Array<long>("[dbo].[Carrier_GetByCity]", new { cityId });
 		}
 
 		public long? GetByUserId(long userId)
 		{
-			throw new NotImplementedException();
+			return _executor.Query<long?>("[dbo].[Carrier_GetByUserId]", new { userId });
 		}
 	}
 }

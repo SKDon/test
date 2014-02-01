@@ -1,11 +1,14 @@
-﻿CREATE TABLE [dbo].[Carrier] (
-    [Id]   BIGINT         IDENTITY (1, 1) NOT NULL,
-    [Name] NVARCHAR (320) NOT NULL,
+﻿CREATE TABLE [dbo].[Carrier]
+(
+	[Id]		BIGINT			IDENTITY (1, 1) NOT NULL,
+	[UserId]	BIGINT			NOT NULL,
+	[Name]		NVARCHAR (MAX)	NOT NULL,
+	[Email]		NVARCHAR (320)	NOT NULL,
 
-    CONSTRAINT [PK_dbo.Carrier] PRIMARY KEY CLUSTERED ([Id] ASC)
+	CONSTRAINT [PK_dbo.Carrier] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_dbo.Carrier_dbo.User_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
 );
-
-
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_Carrier_Name]
-    ON [dbo].[Carrier]([Name] ASC);
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[Carrier]([UserId] ASC);
+GO

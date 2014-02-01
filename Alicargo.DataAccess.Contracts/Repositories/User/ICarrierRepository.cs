@@ -1,13 +1,17 @@
-﻿using System;
-using Alicargo.DataAccess.Contracts.Contracts.User;
+﻿using Alicargo.DataAccess.Contracts.Contracts.User;
 
 namespace Alicargo.DataAccess.Contracts.Repositories.User
 {
 	public interface ICarrierRepository
 	{
+		void Update(long id, string name, string login, string email);
+		long Add(string name, string login, string password, string email, string language);
 		CarrierData[] GetAll();
-		Func<long> Add(CarrierData carrier);
-		CarrierData Get(string name);
+		CarrierData Get(long id);
+
+		long[] GetCities(long carrierId);
+		void SetCities(long carrierId, long[] cities);
+		long[] GetByCity(long cityId);
 		long? GetByUserId(long userId);
 	}
 }

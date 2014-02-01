@@ -54,6 +54,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				TransitId = x.TransitId,
 				TransitAddress = x.Transit.Address,
 				TransitCarrierName = x.Transit.Carrier.Name,
+				CarrierId = x.Transit.CarrierId,
 				TransitCityId = x.Transit.CityId,
 				TransitDeliveryType = (DeliveryType)x.Transit.DeliveryTypeId,
 				TransitMethodOfTransit = (MethodOfTransit)x.Transit.MethodOfTransitId,

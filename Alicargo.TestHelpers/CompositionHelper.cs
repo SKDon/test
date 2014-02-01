@@ -50,10 +50,10 @@ namespace Alicargo.TestHelpers
 		{
 			var identityService = new Mock<IIdentityService>(MockBehavior.Strict);
 
-			foreach (RoleType item in Enum.GetValues(typeof(RoleType)))
+			foreach(RoleType item in Enum.GetValues(typeof(RoleType)))
 			{
 				var item1 = item;
-				identityService.Setup(x => x.IsInRole(item1)).Returns(false);			
+				identityService.Setup(x => x.IsInRole(item1)).Returns(false);
 			}
 
 			identityService.Setup(x => x.IsInRole(_type)).Returns(true);
@@ -71,6 +71,9 @@ namespace Alicargo.TestHelpers
 					break;
 
 				case RoleType.Broker:
+					break;
+
+				case RoleType.Carrier:
 					break;
 
 				case RoleType.Forwarder:

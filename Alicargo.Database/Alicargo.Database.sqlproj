@@ -85,6 +85,7 @@
     <Folder Include="Stored procedures\User\Sender" />
     <Folder Include="Stored procedures\Transit" />
     <Folder Include="Stored procedures\User\Forwarder" />
+    <Folder Include="Stored procedures\User\Carrier" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Transit.sql" />
@@ -195,6 +196,15 @@
     <Build Include="Stored procedures\User\Forwarder\ForwarderCity_Set.sql" />
     <Build Include="Stored procedures\User\Forwarder\Forwarder_GetByCity.sql" />
     <Build Include="Stored procedures\User\Forwarder\Forwarder_GetByUserId.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_Add.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_Get.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_GetAll.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_GetByCity.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_GetByUserId.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_Update.sql" />
+    <Build Include="Stored procedures\User\Carrier\CarrierCity_Get.sql" />
+    <Build Include="Stored procedures\User\Carrier\CarrierCity_Set.sql" />
+    <Build Include="Tables\User\CarrierCity.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
