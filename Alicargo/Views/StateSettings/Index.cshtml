@@ -1,4 +1,5 @@
-﻿@using Alicargo.DataAccess.Contracts.Resources
+﻿@using Alicargo.Core.Resources
+@using Alicargo.DataAccess.Contracts.Resources
 @using Resources
 @model Alicargo.ViewModels.State.StateSettingsModel
 
@@ -16,6 +17,7 @@
 				<td class="title">@Enums.Broker</td>
 				<td class="title">@Enums.Forwarder</td>
 				<td class="title">@Enums.Client</td>
+				<td class="title">@Entities.Carrier</td>
 			</tr>
 			<tr>
 				<td class="title">@Pages.StateSettings_Recipients</td>
@@ -24,6 +26,7 @@
 				<td>@Html.CheckBoxFor(x => x.Recipients.Broker)</td>
 				<td>@Html.CheckBoxFor(x => x.Recipients.Forwarder)</td>
 				<td>@Html.CheckBoxFor(x => x.Recipients.Client)</td>
+				<td>@Html.CheckBoxFor(x => x.Recipients.Carrier)</td>
 			</tr>
 			<tr>
 				<td class="title">@Pages.StateSettings_Availabilities</td>
@@ -32,6 +35,7 @@
 				<td>@Html.CheckBoxFor(x => x.Availabilities.Broker)</td>
 				<td>@Html.CheckBoxFor(x => x.Availabilities.Forwarder)</td>
 				<td>@Html.CheckBoxFor(x => x.Availabilities.Client)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Carrier)</td>
 			</tr>
 			<tr>
 				<td class="title">@Pages.StateSettings_Visibilities</td>
@@ -40,6 +44,7 @@
 				<td>@Html.CheckBoxFor(x => x.Visibilities.Broker)</td>
 				<td>@Html.CheckBoxFor(x => x.Visibilities.Forwarder)</td>
 				<td>@Html.CheckBoxFor(x => x.Visibilities.Client)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Carrier)</td>
 			</tr>
 		</table>
 		<p>

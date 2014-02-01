@@ -192,7 +192,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation, long? cargoReceivedStateId, int? cargoReceivedDaysToShow, long? forwarderId, long? carrierId)
 		{
-			var applications = stateIds != null && stateIds.Length > 0
+			var applications = stateIds != null
 				? _context.Applications.Where(x => stateIds.Contains(x.StateId))
 				: _context.Applications.AsQueryable();
 

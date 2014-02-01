@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Resources;
 using Alicargo.Utilities.Localization;
 
@@ -27,7 +28,7 @@ namespace Alicargo.ViewModels.EmailTemplate
 		public bool Client { get; set; }
 
 		[Required]
-		[DisplayNameLocalized(typeof(Enums), "Carrier")]
+		[DisplayNameLocalized(typeof(Entities), "Carrier")]
 		public bool Carrier { get; set; }
 	}
 }

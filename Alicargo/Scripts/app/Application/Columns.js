@@ -175,7 +175,8 @@
 			{ field: "TransitAddress", title: $l.Entities_Address, groupable: false, width: "100px" },
 			{ field: "TransitPhone", title: $l.Entities_Phone, groupable: false, width: "100px" },
 			{ field: "TransitWarehouseWorkingTime", title: $l.Entities_WarehouseWorkingTime, groupable: false, width: "90px" },
-			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" }];
+			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
+			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
 		var senderColumns = [
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true },

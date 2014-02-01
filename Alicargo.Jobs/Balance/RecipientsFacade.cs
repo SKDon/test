@@ -51,6 +51,8 @@ namespace Alicargo.Jobs.Balance
 					case RoleType.Sender:
 					case RoleType.Broker:
 					case RoleType.Forwarder:
+					case RoleType.Carrier:
+						// todo: balance can get only admin and client so this roles could not be here
 						yield break;
 
 					case RoleType.Client:

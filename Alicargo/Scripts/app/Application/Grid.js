@@ -145,11 +145,11 @@
 				});
 			}
 
-			if (!$r.IsClient && !$r.IsBroker && !$r.IsCarrier)
+			if (!$r.IsClient && !$r.IsBroker)
 				$.extend(settings, {
 					editable: true,
 					edit: function(e) {
-						var canEdit = e.container.find("input[name='TransitReference']").length != 0;
+						var canEdit = !$r.IsCarrier && e.container.find("input[name='TransitReference']").length != 0;
 
 						if (!canEdit) {
 							canEdit = e.container.find("input[name='DateOfCargoReceiptLocalString']").length != 0;

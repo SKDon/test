@@ -18,6 +18,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly IAwbRepository _awbs;
 		private readonly IBrokerRepository _brokers;
 		private readonly IClientRepository _clients;
+		private readonly ICarrierRepository _carriers;
 		private readonly IForwarderRepository _forwarders;
 		private readonly ISenderRepository _senders;
 		private readonly ISerializer _serializer;
@@ -31,6 +32,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			IAdminRepository admins,
 			ISenderRepository senders,
 			IClientRepository clients,
+			ICarrierRepository carriers,
 			IForwarderRepository forwarders,
 			IBrokerRepository brokers,
 			IEventEmailRecipient recipients)
@@ -41,6 +43,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			_admins = admins;
 			_senders = senders;
 			_clients = clients;
+			_carriers = carriers;
 			_forwarders = forwarders;
 			_brokers = brokers;
 			_recipients = recipients;
@@ -108,6 +111,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 					case RoleType.Forwarder:
 						var forwarder = _forwarders.Get(application.ForwarderId);
 						yield return new RecipientData(forwarder.Email, forwarder.Language, role);
+						break;
+
+					case RoleType.Carrier:
+						var carrier = _carriers.Get(application.CarrierId);
+						yield return new RecipientData(carrier.Email, carrier.Language, role);
 						break;
 
 					case RoleType.Client:

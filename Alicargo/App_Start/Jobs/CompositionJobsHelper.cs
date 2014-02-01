@@ -196,6 +196,7 @@ namespace Alicargo.App_Start.Jobs
 				new AdminRepository(unitOfWork),
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
+				new CarrierRepository(passwordConverter, mainExecutor), 
 				new ForwarderRepository(passwordConverter, mainExecutor),
 				new BrokerRepository(unitOfWork),
 				new EventEmailRecipient(mainExecutor));
