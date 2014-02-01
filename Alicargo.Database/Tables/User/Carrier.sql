@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Carrier]
 (
 	[Id]		BIGINT			IDENTITY (1, 1) NOT NULL,
-	[UserId]	BIGINT			NOT NULL,
 	[Name]		NVARCHAR (MAX)	NOT NULL,
+	[UserId]	BIGINT			NOT NULL,
 	[Email]		NVARCHAR (320)	NOT NULL,
 
 	CONSTRAINT [PK_dbo.Carrier] PRIMARY KEY CLUSTERED ([Id] ASC),

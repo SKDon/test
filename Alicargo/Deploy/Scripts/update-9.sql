@@ -1,4 +1,7 @@
-﻿INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (6, 2)
+﻿USE [$(MainDbName)]
+GO
+
+INSERT [dbo].[EventEmailRecipient] ([RoleId], [EventTypeId]) VALUES (6, 2)
 
 INSERT [dbo].[StateAvailability] ([RoleId], [StateId]) VALUES (6, 9)
 INSERT [dbo].[StateAvailability] ([RoleId], [StateId]) VALUES (6, 12)

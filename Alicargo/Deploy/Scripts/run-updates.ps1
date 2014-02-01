@@ -12,6 +12,7 @@ Sqlcmd -S $server -i "update-5.sql" -v MainDbName = "$mainDbPrefix`_$newVersion"
 Sqlcmd -S $server -i "update-6.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 Sqlcmd -S $server -i "update-7.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 Sqlcmd -S $server -i "update-8.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
+Sqlcmd -S $server -i "update-9.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 
 Write-Host "Done"
 

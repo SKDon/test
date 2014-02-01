@@ -629,3 +629,205 @@ AS BEGIN
  
 END
 GO
+
+
+INSERT [dbo].[User] ([Login], [PasswordHash], [PasswordSalt], [TwoLetterISOLanguageName])
+SELECT 'Carrier_' + [Name], 0x0, 0x0, 'ru'
+FROM [Carrier]
+GO
+
+ALTER TABLE [dbo].[Carrier] ADD [UserId] BIGINT NULL, [Email] NVARCHAR (320) NULL
+GO
+
+UPDATE c
+SET c.[UserId] = u.[Id],
+	c.[Email] = u.[Login]
+FROM [dbo].[Carrier] c
+JOIN [dbo].[User] u ON 'Carrier_' + c.[Name] = u.[Login]
+GO
+
+DROP INDEX [IX_Carrier_Name] ON [dbo].[Carrier];
+GO
+
+ALTER TABLE [dbo].[Carrier] ALTER COLUMN [Email] NVARCHAR (320) NOT NULL
+ALTER TABLE [dbo].[Carrier] ALTER COLUMN [Name] NVARCHAR (MAX) NOT NULL
+ALTER TABLE [dbo].[Carrier] ALTER COLUMN [UserId] BIGINT NOT NULL
+GO
+
+ALTER TABLE [dbo].[Carrier] ADD CONSTRAINT [FK_dbo.Carrier_dbo.User_UserId]
+	FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[Carrier]([UserId] ASC);
+GO
+
+
+
+CREATE TABLE [dbo].[CarrierCity]
+(
+	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
+	[CarrierId] BIGINT NOT NULL,
+	[CityId] BIGINT NOT NULL,
+
+	CONSTRAINT [PK_dbo.CarrierCity] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_dbo.CarrierCity_dbo.Carrier_CarrierId] FOREIGN KEY ([CarrierId]) REFERENCES [dbo].[Carrier] ([Id]) ON DELETE CASCADE,
+	CONSTRAINT [FK_dbo.CarrierCity_dbo.City_CityId] FOREIGN KEY ([CityId]) REFERENCES [dbo].[City] ([Id]) ON DELETE CASCADE
+)
+GO
+
+CREATE PROCEDURE [dbo].[Carrier_Add]
+	@Login NVARCHAR(320),
+	@PasswordHash VARBINARY(MAX),
+	@PasswordSalt VARBINARY(MAX),
+	@Language CHAR(2),
+	@Name NVARCHAR (MAX),
+	@Email NVARCHAR (320)
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRAN
+
+		DECLARE @UserId BIGINT;
+		EXEC	@UserId = [dbo].[User_Add]
+				@Login = @Login, @PasswordHash = @PasswordHash, 
+				@PasswordSalt = @PasswordSalt, 
+				@TwoLetterISOLanguageName = @Language
+
+		INSERT	[dbo].[Carrier]
+				([UserId], [Name], [Email])
+		OUTPUT	INSERTED.[Id]
+		VALUES	(@UserId, @Name, @Email)
+
+	COMMIT
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[Carrier_Get]
+	@Id BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT	TOP(1) 
+			f.[Id],
+			u.[Id] AS [UserId],
+			f.[Email],
+			u.[TwoLetterISOLanguageName] AS [Language],
+			u.[Login],
+			f.[Name]
+	FROM	[dbo].[Carrier] f
+	JOIN	[dbo].[User] u
+	ON		u.[Id] = f.[UserId]
+	WHERE	f.[Id] = @Id
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[Carrier_GetAll]
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT	f.[Id],
+			u.[Id] AS [UserId],
+			f.[Email],
+			u.[TwoLetterISOLanguageName] AS [Language],
+			u.[Login],
+			f.[Name]
+	FROM	[dbo].[Carrier] f
+	JOIN	[dbo].[User] u
+	ON		u.[Id] = f.[UserId]
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[Carrier_GetByCity]
+	@CityId BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT s.[CarrierId]
+	FROM [dbo].[CarrierCity] s
+	WHERE s.[CityId] = @CityId
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[Carrier_GetByUserId]
+	@UserId BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT	TOP(1) [Id]
+	FROM	[dbo].[Carrier]
+	WHERE	[UserId] = @UserId
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[Carrier_Update]
+	@Id BIGINT,
+	@Name NVARCHAR (MAX),
+	@Login NVARCHAR(320),
+	@Email NVARCHAR (320)
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE @Table TABLE ([UserId] BIGINT);
+
+	BEGIN TRAN
+
+		UPDATE	TOP(1) [dbo].[Carrier]
+		SET		[Name] = @Name,
+				[Email] = @Email
+		OUTPUT	INSERTED.[UserId] INTO @Table
+		WHERE	[Id] = @Id
+
+		UPDATE	TOP(1) [dbo].[User]
+		SET		[Login] = @Login
+		WHERE	[Id] IN (SELECT [UserId] FROM @Table);
+
+	COMMIT
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[CarrierCity_Get]
+	@CarrierId BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT [CityId]
+	FROM [dbo].[CarrierCity]
+	WHERE [CarrierId] = @CarrierId
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[CarrierCity_Set]
+	@CityIds [dbo].[IdsTable] READONLY,
+	@CarrierId BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRAN
+
+		DELETE [dbo].[CarrierCity]
+		WHERE [CarrierId] = @CarrierId
+		AND [CityId] NOT IN (SELECT [Id] FROM @CityIds)
+		
+		INSERT [dbo].[CarrierCity] ([CityId], [CarrierId])
+		SELECT [Id] AS [CityId],  @CarrierId AS [CarrierId]
+		FROM @CityIds
+		WHERE [Id] NOT IN (SELECT [CityId] FROM [CarrierCity] WHERE [CarrierId] = @CarrierId)
+
+	COMMIT
+
+END
+GO
