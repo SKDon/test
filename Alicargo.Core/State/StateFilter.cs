@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -31,6 +30,7 @@ namespace Alicargo.Core.State
 			_awbs = awbs;
 		}
 
+		// todo: 1. refactor. remove Except(_config.AwbStates), pass role to method, remove ifs
 		public long[] GetStateAvailabilityToSet()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
@@ -54,6 +54,14 @@ namespace Alicargo.Core.State
 			{
 				return _settings.GetStateAvailabilities()
 					.Where(x => x.Role == RoleType.Forwarder)
+					.Select(x => x.StateId)
+					.ToArray();
+			}
+
+			if(_identity.IsInRole(RoleType.Carrier))
+			{
+				return _settings.GetStateAvailabilities()
+					.Where(x => x.Role == RoleType.Carrier)
 					.Select(x => x.StateId)
 					.ToArray();
 			}
@@ -101,6 +109,14 @@ namespace Alicargo.Core.State
 			{
 				return _settings.GetStateVisibilities()
 					.Where(x => x.Role == RoleType.Forwarder)
+					.Select(x => x.StateId)
+					.ToArray();
+			}
+
+			if(_identity.IsInRole(RoleType.Carrier))
+			{
+				return _settings.GetStateVisibilities()
+					.Where(x => x.Role == RoleType.Carrier)
 					.Select(x => x.StateId)
 					.ToArray();
 			}

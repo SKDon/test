@@ -37,13 +37,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		{
 			var db = (AlicargoDataContext)_context.UnitOfWork.Context;
 
-			var transit = GetTransit(db);
-
 			var user = _fixture.Build<DbContext.User>()
 				.Without(x => x.Admins)
 				.Without(x => x.Clients)
 				.Without(x => x.Brokers)
 				.Without(x => x.Forwarders)
+				.Without(x => x.Carriers)
 				.Without(x => x.Senders)
 				.With(x => x.TwoLetterISOLanguageName, TwoLetterISOLanguageName.Russian)
 				.Create();
@@ -53,7 +52,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			var client = _fixture.Build<Client>()
 				.Without(x => x.Applications)
 				.Without(x => x.Calculations)
-				.With(x => x.Transit, transit)
+				.Without(x => x.Transit)
+				.With(x => x.TransitId, TestConstants.TestTransitId)
 				.With(x => x.User, user)
 				.Create();
 			db.Clients.InsertOnSubmit(client);
@@ -82,24 +82,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			};
 		}
 
-		private Transit GetTransit(AlicargoDataContext db)
-		{
-			var carrier = _fixture.Build<Carrier>()
-				.Without(x => x.Transits)
-				.Create();
-			db.Carriers.InsertOnSubmit(carrier);
-			db.SubmitChanges();
-
-			var transit = _fixture.Build<Transit>()
-				.Without(x => x.Applications)
-				.Without(x => x.Clients)
-				.With(x => x.Carrier, carrier)
-				.Create();
-			db.Transits.InsertOnSubmit(transit);
-			db.SubmitChanges();
-			return transit;
-		}
-
 		[TestMethod]
 		public void Test_ClientRepository_Count()
 		{
@@ -125,11 +107,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		[TestMethod]
 		public void Test_ClientRepository_Add_GetByUserId_GetById_Delete()
 		{
-			var db = (AlicargoDataContext)_context.UnitOfWork.Context;
-			var transit = GetTransit(db);
-
 			var client = _fixture.Create<ClientData>();
-			client.TransitId = transit.Id;
+			client.TransitId = TestConstants.TestTransitId;
 			client.Language = TwoLetterISOLanguageName.English;
 			var clientId = _clientRepository.Add(client);
 			_context.UnitOfWork.SaveChanges();

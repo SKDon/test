@@ -23,7 +23,7 @@ namespace Alicargo.DataAccess.DbContext
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Alicargo")]
-	internal sealed partial class AlicargoDataContext : System.Data.Linq.DataContext
+	internal partial class AlicargoDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -48,9 +48,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void InsertCalculation(Calculation instance);
     partial void UpdateCalculation(Calculation instance);
     partial void DeleteCalculation(Calculation instance);
-    partial void InsertCarrier(Carrier instance);
-    partial void UpdateCarrier(Carrier instance);
-    partial void DeleteCarrier(Carrier instance);
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
@@ -81,6 +78,9 @@ namespace Alicargo.DataAccess.DbContext
     partial void InsertCity(City instance);
     partial void UpdateCity(City instance);
     partial void DeleteCity(City instance);
+    partial void InsertCarrier(Carrier instance);
+    partial void UpdateCarrier(Carrier instance);
+    partial void DeleteCarrier(Carrier instance);
     #endregion
 		
 		public AlicargoDataContext(string connection) : 
@@ -160,14 +160,6 @@ namespace Alicargo.DataAccess.DbContext
 			get
 			{
 				return this.GetTable<Calculation>();
-			}
-		}
-		
-		internal System.Data.Linq.Table<Carrier> Carriers
-		{
-			get
-			{
-				return this.GetTable<Carrier>();
 			}
 		}
 		
@@ -251,6 +243,14 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
+		public System.Data.Linq.Table<Carrier> Carriers
+		{
+			get
+			{
+				return this.GetTable<Carrier>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Calculation_SetState")]
 		public ISingleResult<VersionData> Calculation_SetState([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id", DbType="BigInt")] System.Nullable<long> id, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RowVersion", DbType="rowversion")] System.Data.Linq.Binary rowVersion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="State", DbType="Int")] System.Nullable<int> state)
 		{
@@ -260,7 +260,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
-	internal sealed partial class VersionData
+	public partial class VersionData
 	{
 		
 		private byte[] _RowVersion = default(byte[]);
@@ -291,7 +291,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
-	internal sealed partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -448,7 +448,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -456,7 +456,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -466,7 +466,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StateVisibility")]
-	internal sealed partial class StateVisibility : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class StateVisibility : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -575,7 +575,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -583,7 +583,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -593,7 +593,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AirWaybill")]
-	internal sealed partial class AirWaybill : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class AirWaybill : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1335,7 +1335,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -1343,7 +1343,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -1365,7 +1365,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StateAvailability")]
-	internal sealed partial class StateAvailability : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class StateAvailability : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1474,7 +1474,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -1482,7 +1482,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -1492,7 +1492,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Broker")]
-	internal sealed partial class Broker : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Broker : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1665,7 +1665,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -1673,7 +1673,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -1695,7 +1695,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Calculation")]
-	internal sealed partial class Calculation : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Calculation : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2092,7 +2092,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -2100,131 +2100,17 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Carrier")]
-	internal sealed partial class Carrier : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _Id;
-		
-		private string _Name;
-		
-		private EntitySet<Transit> _Transits;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(long value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Carrier()
-		{
-			this._Transits = new EntitySet<Transit>(new Action<Transit>(this.attach_Transits), new Action<Transit>(this.detach_Transits));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Carrier_Transit", Storage="_Transits", ThisKey="Id", OtherKey="CarrierId")]
-		public EntitySet<Transit> Transits
-		{
-			get
-			{
-				return this._Transits;
-			}
-			set
-			{
-				this._Transits.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		private void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		private void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Transits(Transit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Carrier = this;
-		}
-		
-		private void detach_Transits(Transit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Carrier = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
-	internal sealed partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2790,7 +2676,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -2798,7 +2684,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -2832,7 +2718,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Country")]
-	internal sealed partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2964,7 +2850,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -2972,7 +2858,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -2994,7 +2880,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Forwarder")]
-	internal sealed partial class Forwarder : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Forwarder : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3151,7 +3037,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -3159,7 +3045,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -3169,7 +3055,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sender")]
-	internal sealed partial class Sender : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Sender : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3366,7 +3252,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -3374,7 +3260,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -3396,7 +3282,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.State")]
-	internal sealed partial class State : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class State : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3568,7 +3454,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -3576,7 +3462,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -3646,7 +3532,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StateLocalization")]
-	internal sealed partial class StateLocalization : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class StateLocalization : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3803,7 +3689,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -3811,7 +3697,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -3821,7 +3707,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	internal sealed partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3846,6 +3732,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntitySet<Sender> _Senders;
 		
+		private EntitySet<Carrier> _Carriers;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3869,6 +3757,7 @@ namespace Alicargo.DataAccess.DbContext
 			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._Forwarders = new EntitySet<Forwarder>(new Action<Forwarder>(this.attach_Forwarders), new Action<Forwarder>(this.detach_Forwarders));
 			this._Senders = new EntitySet<Sender>(new Action<Sender>(this.attach_Senders), new Action<Sender>(this.detach_Senders));
+			this._Carriers = new EntitySet<Carrier>(new Action<Carrier>(this.attach_Carriers), new Action<Carrier>(this.detach_Carriers));
 			OnCreated();
 		}
 		
@@ -4037,11 +3926,24 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Carrier", Storage="_Carriers", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<Carrier> Carriers
+		{
+			get
+			{
+				return this._Carriers;
+			}
+			set
+			{
+				this._Carriers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -4049,7 +3951,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -4116,10 +4018,22 @@ namespace Alicargo.DataAccess.DbContext
 			this.SendPropertyChanging();
 			entity.User = null;
 		}
+		
+		private void attach_Carriers(Carrier entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Carriers(Carrier entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Application")]
-	internal sealed partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -5370,7 +5284,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private void SendPropertyChanging()
+		protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{
@@ -5378,7 +5292,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		private void SendPropertyChanged(String propertyName)
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
 			if ((this.PropertyChanged != null))
 			{
@@ -5388,7 +5302,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Transit")]
-	internal partial class Transit : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Transit : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -5415,9 +5329,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntitySet<Application> _Applications;
 		
-		private EntityRef<Carrier> _Carrier;
-		
 		private EntityRef<City> _City;
+		
+		private EntityRef<Carrier> _Carrier;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -5447,8 +5361,8 @@ namespace Alicargo.DataAccess.DbContext
 		{
 			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
-			this._Carrier = default(EntityRef<Carrier>);
 			this._City = default(EntityRef<City>);
+			this._Carrier = default(EntityRef<Carrier>);
 			OnCreated();
 		}
 		
@@ -5666,40 +5580,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Carrier_Transit", Storage="_Carrier", ThisKey="CarrierId", OtherKey="Id", IsForeignKey=true)]
-		public Carrier Carrier
-		{
-			get
-			{
-				return this._Carrier.Entity;
-			}
-			set
-			{
-				Carrier previousValue = this._Carrier.Entity;
-				if (((previousValue != value) 
-							|| (this._Carrier.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Carrier.Entity = null;
-						previousValue.Transits.Remove(this);
-					}
-					this._Carrier.Entity = value;
-					if ((value != null))
-					{
-						value.Transits.Add(this);
-						this._CarrierId = value.Id;
-					}
-					else
-					{
-						this._CarrierId = default(long);
-					}
-					this.SendPropertyChanged("Carrier");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Transit", Storage="_City", ThisKey="CityId", OtherKey="Id", IsForeignKey=true)]
 		public City City
 		{
@@ -5730,6 +5610,40 @@ namespace Alicargo.DataAccess.DbContext
 						this._CityId = default(long);
 					}
 					this.SendPropertyChanged("City");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Carrier_Transit", Storage="_Carrier", ThisKey="CarrierId", OtherKey="Id", IsForeignKey=true)]
+		public Carrier Carrier
+		{
+			get
+			{
+				return this._Carrier.Entity;
+			}
+			set
+			{
+				Carrier previousValue = this._Carrier.Entity;
+				if (((previousValue != value) 
+							|| (this._Carrier.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Carrier.Entity = null;
+						previousValue.Transits.Remove(this);
+					}
+					this._Carrier.Entity = value;
+					if ((value != null))
+					{
+						value.Transits.Add(this);
+						this._CarrierId = value.Id;
+					}
+					else
+					{
+						this._CarrierId = default(long);
+					}
+					this.SendPropertyChanged("Carrier");
 				}
 			}
 		}
@@ -5780,7 +5694,7 @@ namespace Alicargo.DataAccess.DbContext
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.City")]
-	internal partial class City : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -5938,6 +5852,209 @@ namespace Alicargo.DataAccess.DbContext
 		{
 			this.SendPropertyChanging();
 			entity.City = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Carrier")]
+	public partial class Carrier : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _Id;
+		
+		private long _UserId;
+		
+		private string _Name;
+		
+		private string _Email;
+		
+		private EntitySet<Transit> _Transits;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(long value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(long value);
+    partial void OnUserIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    #endregion
+		
+		public Carrier()
+		{
+			this._Transits = new EntitySet<Transit>(new Action<Transit>(this.attach_Transits), new Action<Transit>(this.detach_Transits));
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="BigInt NOT NULL")]
+		public long UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(320) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Carrier_Transit", Storage="_Transits", ThisKey="Id", OtherKey="CarrierId")]
+		public EntitySet<Transit> Transits
+		{
+			get
+			{
+				return this._Transits;
+			}
+			set
+			{
+				this._Transits.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Carrier", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Carriers.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Carriers.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(long);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Transits(Transit entity)
+		{
+			this.SendPropertyChanging();
+			entity.Carrier = this;
+		}
+		
+		private void detach_Transits(Transit entity)
+		{
+			this.SendPropertyChanging();
+			entity.Carrier = null;
 		}
 	}
 }

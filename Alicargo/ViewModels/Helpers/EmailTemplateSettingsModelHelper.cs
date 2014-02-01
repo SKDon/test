@@ -20,33 +20,43 @@ namespace Alicargo.ViewModels.Helpers
 				Sender = roles.Any(x => x == RoleType.Sender),
 				Broker = roles.Any(x => x == RoleType.Broker),
 				Forwarder = roles.Any(x => x == RoleType.Forwarder),
+				Carrier = roles.Any(x => x == RoleType.Carrier),
 				Client = roles.Any(x => x == RoleType.Client)
 			};
 		}
 
 		public static RoleType[] GetSettings(this EmailTemplateSettingsModel settings)
 		{
-			var list = new List<RoleType>(5);
+			var list = new List<RoleType>(6);
 
 			if (settings.Admin)
 			{
 				list.Add(RoleType.Admin);
 			}
+
 			if (settings.Broker)
 			{
 				list.Add(RoleType.Broker);
 			}
+
 			if (settings.Client)
 			{
 				list.Add(RoleType.Client);
 			}
+
 			if (settings.Forwarder)
 			{
 				list.Add(RoleType.Forwarder);
 			}
+
 			if (settings.Sender)
 			{
 				list.Add(RoleType.Sender);
+			}
+
+			if(settings.Carrier)
+			{
+				list.Add(RoleType.Carrier);
 			}
 
 			return list.ToArray();

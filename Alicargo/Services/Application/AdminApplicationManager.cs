@@ -25,13 +25,13 @@ namespace Alicargo.Services.Application
 		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IApplicationEditor _updater;
+		private readonly IApplicationEditor _editor;
 
 		public AdminApplicationManager(
 			IApplicationRepository applications,
 			IForwarderService forwarders,
 			ISenderService senders,
-			IApplicationEditor updater,
+			IApplicationEditor editor,
 			IStateConfig config,
 			IIdentityService identity,
 			ITransitService transitService,
@@ -41,7 +41,7 @@ namespace Alicargo.Services.Application
 			_applications = applications;
 			_forwarders = forwarders;
 			_senders = senders;
-			_updater = updater;
+			_editor = editor;
 			_config = config;
 			_identity = identity;
 			_transitService = transitService;
@@ -49,10 +49,10 @@ namespace Alicargo.Services.Application
 			_settings = settings;
 		}
 
-		public long Add(ApplicationAdminModel model, CarrierSelectModel carrierModel, TransitEditModel transit,
+		public long Add(ApplicationAdminModel model, TransitEditModel transit,
 			long clientId)
 		{
-			var transitId = _transitService.AddTransit(transit, carrierModel);
+			var transitId = _transitService.Add(transit, model.CarrierId);
 
 			var data = new ApplicationData
 			{
@@ -97,15 +97,14 @@ namespace Alicargo.Services.Application
 				SenderRate = null
 			};
 
-			return _updater.Add(data);
+			return _editor.Add(data);
 		}
 
-		public void Update(long applicationId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
-			TransitEditModel transit)
+		public void Update(long applicationId, ApplicationAdminModel model, TransitEditModel transit)
 		{
 			var data = _applications.Get(applicationId);
 
-			_transitService.Update(data.TransitId, transit, carrierModel);
+			_transitService.Update(data.TransitId, transit, model.CarrierId);
 
 			data.Invoice = model.Invoice;
 			data.Characteristic = model.Characteristic;
@@ -135,14 +134,14 @@ namespace Alicargo.Services.Application
 			data.SenderId = GetSenderId(model.SenderId, model.CountryId, data.SenderId);
 			data.ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, data.ForwarderId);
 
-			_updater.Update(data);
+			_editor.Update(data);
 		}
 
 		public void Delete(long id)
 		{
 			var applicationData = _applications.Get(id);
 
-			_updater.Delete(id);
+			_editor.Delete(id);
 
 			_unitOfWork.SaveChanges();
 
@@ -153,14 +152,14 @@ namespace Alicargo.Services.Application
 		{
 			SetState(id, _config.CargoOnTransitStateId);
 
-			_updater.SetTransitReference(id, transitReference);
+			_editor.SetTransitReference(id, transitReference);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
-			_updater.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+			_editor.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -174,7 +173,7 @@ namespace Alicargo.Services.Application
 				throw new InvalidLogicException("Can't set transit cost after a calculation was submitted.");
 			}
 
-			_updater.SetTransitCost(id, transitCost);
+			_editor.SetTransitCost(id, transitCost);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -186,14 +185,14 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_updater.SetTransitCostEdited(id, transitCost);
+			_editor.SetTransitCostEdited(id, transitCost);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetTariffPerKg(long id, decimal? tariffPerKg)
 		{
-			_updater.SetTariffPerKg(id, tariffPerKg);
+			_editor.SetTariffPerKg(id, tariffPerKg);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -205,7 +204,7 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_updater.SetPickupCostEdited(id, pickupCost);
+			_editor.SetPickupCostEdited(id, pickupCost);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -217,7 +216,7 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_updater.SetFactureCostEdited(id, factureCost);
+			_editor.SetFactureCostEdited(id, factureCost);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -229,21 +228,21 @@ namespace Alicargo.Services.Application
 				throw new AccessForbiddenException("Edited value can be defined only be admin");
 			}
 
-			_updater.SetScotchCostEdited(id, scotchCost);
+			_editor.SetScotchCostEdited(id, scotchCost);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetSenderRate(long id, decimal? senderRate)
 		{
-			_updater.SetSenderRate(id, senderRate);
+			_editor.SetSenderRate(id, senderRate);
 
 			_unitOfWork.SaveChanges();
 		}
 
 		public void SetClass(long id, ClassType? classType)
 		{
-			_updater.SetClass(id, (int?)classType);
+			_editor.SetClass(id, (int?)classType);
 
 			_unitOfWork.SaveChanges();
 		}
@@ -258,10 +257,10 @@ namespace Alicargo.Services.Application
 			// todo: 2. test logic with states
 			if(stateId == _config.CargoInStockStateId)
 			{
-				_updater.SetDateInStock(applicationId, DateTimeProvider.Now);
+				_editor.SetDateInStock(applicationId, DateTimeProvider.Now);
 			}
 
-			_updater.SetState(applicationId, stateId);
+			_editor.SetState(applicationId, stateId);
 
 			_unitOfWork.SaveChanges();
 		}

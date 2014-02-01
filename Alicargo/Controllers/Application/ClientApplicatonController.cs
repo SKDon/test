@@ -49,17 +49,17 @@ namespace Alicargo.Controllers.Application
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Client)]
-		public virtual ActionResult Edit(long id, ApplicationClientModel model, CarrierSelectModel carrierModel,
+		public virtual ActionResult Edit(long id, ApplicationClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindBag(id, GetClientId(), model.Count);
 
 				return View(model);
 			}
 
-			_manager.Update(id, model, carrierModel, transitModel);
+			_manager.Update(id, model, transitModel);
 
 			return RedirectToAction(MVC.ClientApplication.Edit(id));
 		}
@@ -79,12 +79,12 @@ namespace Alicargo.Controllers.Application
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Client)]
-		public virtual ActionResult Create(ApplicationClientModel model, CarrierSelectModel carrierModel,
+		public virtual ActionResult Create(ApplicationClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			var clientId = GetClientId();
 
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindBag(null, clientId);
 
@@ -93,9 +93,9 @@ namespace Alicargo.Controllers.Application
 
 			try
 			{
-				_manager.Add(model, carrierModel, transitModel, clientId);
+				_manager.Add(model, transitModel, clientId);
 			}
-			catch (DublicateException ex)
+			catch(DublicateException ex)
 			{
 				ModelState.AddModelError("DublicateException", ex.ToString());
 
@@ -107,25 +107,25 @@ namespace Alicargo.Controllers.Application
 
 		#endregion
 
-		private long GetClientId()
-		{
-			Debug.Assert(_identity.Id != null);
-
-			return _clients.GetByUserId(_identity.Id.Value).ClientId;
-		}
-
 		private void BindBag(long? applicationId, long clientId, int? count = 0)
 		{
 			ViewBag.ClientId = clientId;
 
 			ViewBag.ApplicationId = applicationId;
 
-			if (applicationId.HasValue)
+			if(applicationId.HasValue)
 			{
 				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count);
 			}
 
 			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
+		}
+
+		private long GetClientId()
+		{
+			Debug.Assert(_identity.Id != null);
+
+			return _clients.GetByUserId(_identity.Id.Value).ClientId;
 		}
 	}
 }

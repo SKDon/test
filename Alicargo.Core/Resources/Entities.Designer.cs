@@ -189,6 +189,15 @@ namespace Alicargo.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Carrier.
         /// </summary>
+        public static string Carrier {
+            get {
+                return ResourceManager.GetString("Carrier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carrier.
+        /// </summary>
         public static string CarrierName {
             get {
                 return ResourceManager.GetString("CarrierName", resourceCulture);

@@ -90,7 +90,7 @@ namespace Alicargo.Services.Users
 
 			if(list.Length == 0)
 			{
-				return _senders.GetAll().Select(x => x.EntityId).First();
+				return oldSenderId ?? _senders.GetAll().Select(x => x.EntityId).First();
 			}
 
 			if(oldSenderId.HasValue && list.Contains(oldSenderId.Value))

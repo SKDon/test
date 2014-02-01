@@ -24,8 +24,7 @@ namespace Alicargo.Tests.Services.Client
 
 			var manager = container.Create<ClientManager>();
 
-			manager.Update(clientId, It.IsAny<ClientModel>(), It.IsAny<CarrierSelectModel>(),
-						   It.IsAny<TransitEditModel>(), It.IsAny<AuthenticationModel>());
+			manager.Update(clientId, It.IsAny<ClientModel>(), It.IsAny<TransitEditModel>(), It.IsAny<AuthenticationModel>());
 		}
 	}
 }

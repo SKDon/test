@@ -33,16 +33,14 @@ namespace Alicargo.Services.Users.Client
 			_unitOfWork = unitOfWork;
 		}
 
-		public void Update(long clientId, ClientModel model, CarrierSelectModel carrier,
-			TransitEditModel transit,
-			AuthenticationModel authentication)
+		public void Update(long clientId, ClientModel model, TransitEditModel transit, AuthenticationModel authentication)
 		{
 			var data = _clients.Get(clientId);
 
-			if (!_permissions.HaveAccessToClient(data))
+			if(!_permissions.HaveAccessToClient(data))
 				throw new AccessForbiddenException();
 
-			_transits.Update(data.TransitId, transit, carrier);
+			_transits.Update(data.TransitId, transit, null);
 
 			data.BIC = model.BIC;
 			data.Phone = model.Phone;
@@ -64,37 +62,36 @@ namespace Alicargo.Services.Users.Client
 
 			_unitOfWork.SaveChanges();
 
-			if (!string.IsNullOrWhiteSpace(authentication.NewPassword))
+			if(!string.IsNullOrWhiteSpace(authentication.NewPassword))
 			{
 				var userId = _clients.GetUserId(clientId);
 				_users.SetPassword(userId, authentication.NewPassword);
 			}
 		}
 
-		public long Add(ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
-			AuthenticationModel authentication)
+		public long Add(ClientModel client, TransitEditModel transit, AuthenticationModel authentication)
 		{
-			var transitId = _transits.AddTransit(transit, carrier);
+			var transitId = _transits.Add(transit, null);
 
 			_unitOfWork.SaveChanges();
 
 			var data = new ClientData
 			{
 				ClientId = 0,
-				BIC = model.BIC,
-				Phone = model.Phone,
-				Emails = EmailsHelper.SplitAndTrimEmails(model.Emails),
-				LegalEntity = model.LegalEntity,
-				Bank = model.Bank,
-				Contacts = model.Contacts,
-				INN = model.INN,
-				KPP = model.KPP,
-				KS = model.KS,
-				LegalAddress = model.LegalAddress,
-				MailingAddress = model.MailingAddress,
-				Nic = model.Nic,
-				OGRN = model.OGRN,
-				RS = model.RS,
+				BIC = client.BIC,
+				Phone = client.Phone,
+				Emails = EmailsHelper.SplitAndTrimEmails(client.Emails),
+				LegalEntity = client.LegalEntity,
+				Bank = client.Bank,
+				Contacts = client.Contacts,
+				INN = client.INN,
+				KPP = client.KPP,
+				KS = client.KS,
+				LegalAddress = client.LegalAddress,
+				MailingAddress = client.MailingAddress,
+				Nic = client.Nic,
+				OGRN = client.OGRN,
+				RS = client.RS,
 				TransitId = transitId,
 				Language = TwoLetterISOLanguageName.English,
 				Login = authentication.Login

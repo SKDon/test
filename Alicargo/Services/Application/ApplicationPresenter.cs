@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
-using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -17,16 +16,19 @@ namespace Alicargo.Services.Application
 		private readonly IIdentityService _identity;
 		private readonly IStateRepository _states;
 		private readonly IStateFilter _stateFilter;
+		private readonly ITransitRepository _transits;
 
 		public ApplicationPresenter(
 			IApplicationRepository applications,
 			IIdentityService identity,
 			IStateFilter stateFilter,
+			ITransitRepository transits,
 			IStateRepository states)
 		{
 			_applications = applications;
 			_identity = identity;
 			_stateFilter = stateFilter;
+			_transits = transits;
 			_states = states;
 		}
 
@@ -34,41 +36,8 @@ namespace Alicargo.Services.Application
 		{
 			var data = _applications.Get(id);
 
-			var application = GetModel(data);
+			var transit = _transits.Get(data.TransitId).Single();
 
-			return application;
-		}
-
-		public ApplicationStateModel[] GetStateAvailability(long id)
-		{
-			var applicationData = _applications.Get(id);
-
-			var states = _stateFilter.GetStateAvailabilityToSet();
-
-			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
-
-			states = _stateFilter.FilterByBusinessLogic(applicationData, states);
-
-			var currentState = _states.Get(_identity.Language, applicationData.StateId).Values.First();
-
-			states = _stateFilter.FilterByPosition(states, currentState.Position);
-
-			return ToApplicationStateModel(states);
-		}		
-
-		private ApplicationStateModel[] ToApplicationStateModel(long[] ids)
-		{
-			return _states.Get(_identity.Language, ids)
-				.Select(x => new ApplicationStateModel
-				{
-					StateId = x.Key,
-					StateName = x.Value.LocalizedName
-				})
-				.ToArray();
-		}
-
-		private static ApplicationAdminModel GetModel(ApplicationData data)
-		{
 			return new ApplicationAdminModel
 			{
 				AddressLoad = data.AddressLoad,
@@ -100,8 +69,37 @@ namespace Alicargo.Services.Application
 				TransitCostEdited = data.TransitCostEdited,
 				PickupCostEdited = data.PickupCostEdited,
 				SenderId = data.SenderId,
-				ForwarderId = data.ForwarderId
+				ForwarderId = data.ForwarderId,
+				CarrierId = transit.CarrierId
 			};
+		}
+
+		public ApplicationStateModel[] GetStateAvailability(long id)
+		{
+			var applicationData = _applications.Get(id);
+
+			var states = _stateFilter.GetStateAvailabilityToSet();
+
+			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
+
+			states = _stateFilter.FilterByBusinessLogic(applicationData, states);
+
+			var currentState = _states.Get(_identity.Language, applicationData.StateId).Values.First();
+
+			states = _stateFilter.FilterByPosition(states, currentState.Position);
+
+			return ToApplicationStateModel(states);
+		}		
+
+		private ApplicationStateModel[] ToApplicationStateModel(long[] ids)
+		{
+			return _states.Get(_identity.Language, ids)
+				.Select(x => new ApplicationStateModel
+				{
+					StateId = x.Key,
+					StateName = x.Value.LocalizedName
+				})
+				.ToArray();
 		}
 	}
 }

@@ -65,16 +65,13 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			var model = _fixture.Create<ApplicationAdminModel>();
 			model.SenderId = TestConstants.TestSenderId;
 			model.ForwarderId = TestConstants.TestForwarderId1;
+			model.CarrierId = null;
 			var transitModel = _fixture.Create<TransitEditModel>();
 			transitModel.CityId = TestConstants.TestCityId1;
-			var newCarrierName = _fixture.Create<string>();
 
-			var result = _controller.Create(clientData.ClientId, model, new CarrierSelectModel
-			{
-				NewCarrierName = newCarrierName
-			}, transitModel);
+			var result = _controller.Create(clientData.ClientId, model, transitModel);
 
-			Validate(result, clientData, model, transitModel, newCarrierName);
+			Validate(result, clientData, model, transitModel);
 		}
 
 		[TestMethod]
@@ -84,16 +81,13 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			model.SenderId = TestConstants.TestSenderId;
 			model.CountryId = TestConstants.TestCountryId;
 			model.ForwarderId = TestConstants.TestForwarderId2;
+			model.CarrierId = null;
 			var transitModel = _fixture.Create<TransitEditModel>();
 			transitModel.CityId = TestConstants.TestCityId1;
-			var newCarrierName = _fixture.Create<string>();
 			var old = _applicationRepository.List(new[] { TestConstants.DefaultStateId },
 				new[] { new Order { OrderType = OrderType.Id } }, 1).First();
 
-			var result = _controller.Edit(old.Id, model, new CarrierSelectModel
-			{
-				NewCarrierName = newCarrierName
-			}, transitModel);
+			var result = _controller.Edit(old.Id, model, transitModel);
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 			var data = _applicationRepository.Get(old.Id);
@@ -102,7 +96,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		}
 
 		private void Validate(ActionResult result, ClientData clientData, ApplicationAdminModel model,
-			TransitEditModel transitModel, string newCarrierName)
+			TransitEditModel transitModel)
 		{
 			result.Should().BeOfType<RedirectToRouteResult>();
 
@@ -118,16 +112,17 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				}
 			}, 1, clientId: clientData.ClientId).First();
 
-			Validate(clientData, model, transitModel, newCarrierName, data);
+			Validate(clientData, model, transitModel, data);
 		}
 
-		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
-			string newCarrierName, ApplicationExtendedData data)
+		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel, ApplicationExtendedData data)
 		{
 			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
 				.Excluding(x => x.FactureCost)
 				.Excluding(x => x.TransitCost)
 				.Excluding(x => x.PickupCost)
+				.Excluding(x => x.CarrierId)
+				.Excluding(x => x.TransitCarrierName)
 				.Excluding(x => x.ScotchCost));
 			data.FactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
 			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);
@@ -137,8 +132,8 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			data.ClientLegalEntity.ShouldBeEquivalentTo(clientData.LegalEntity);
 			data.ClientNic.ShouldBeEquivalentTo(clientData.Nic);
 			data.TransitAddress.ShouldBeEquivalentTo(transitModel.Address);
-			data.TransitCarrierName.ShouldBeEquivalentTo(newCarrierName);
 			data.TransitCityId.ShouldBeEquivalentTo(TestConstants.TestCityId1);
+			data.CarrierId.ShouldBeEquivalentTo(TestConstants.TestCarrierId1);
 			data.TransitDeliveryType.ShouldBeEquivalentTo(transitModel.DeliveryType);
 			data.TransitMethodOfTransit.ShouldBeEquivalentTo(transitModel.MethodOfTransit);
 			data.TransitPhone.ShouldBeEquivalentTo(transitModel.Phone);

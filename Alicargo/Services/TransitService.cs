@@ -1,51 +1,70 @@
-﻿using Alicargo.DataAccess.Contracts.Repositories;
+﻿using System.Linq;
+using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 
 namespace Alicargo.Services
 {
-    internal sealed class TransitService : ITransitService
-    {
-        private readonly ICarrierService _carrierService;
-        private readonly ITransitRepository _transitRepository;
-        private readonly IUnitOfWork _unitOfWork;
+	internal sealed class TransitService : ITransitService
+	{
+		private readonly ICarrierRepository _carriers;
+		private readonly ITransitRepository _transits;
 
-        public TransitService(IUnitOfWork unitOfWork, ICarrierService carrierService, ITransitRepository transitRepository)
-        {
-            _unitOfWork = unitOfWork;
-            _carrierService = carrierService;
-            _transitRepository = transitRepository;
-        }
+		public TransitService(ITransitRepository transits, ICarrierRepository carriers)
+		{
+			_transits = transits;
+			_carriers = carriers;
+		}
 
-        public void Update(long transitId, TransitEditModel transit, CarrierSelectModel carrierModel)
-        {
-            var carrierId = _carrierService.AddOrGetCarrier(carrierModel);
+		public void Update(long transitId, TransitEditModel transit, long? forsedCarrierId)
+		{
+			var data = _transits.Get(transitId).Single();
 
-            var data = TransitMapper.Map(transit, carrierId);
+			TransitMapper.Map(transit, data, GetCarrier(forsedCarrierId, transit.CityId, data.CarrierId));
 
-            data.Id = transitId;
+			_transits.Update(data);
+		}
 
-            _transitRepository.Update(data);
+		public void Delete(long transitId)
+		{
+			_transits.Delete(transitId);
+		}
 
-            _unitOfWork.SaveChanges();
-        }
+		public long Add(TransitEditModel transit, long? forsedCarrierId)
+		{
+			var data = new TransitData();
 
-        public void Delete(long transitId)
-        {
-            _transitRepository.Delete(transitId);
+			TransitMapper.Map(transit, data, GetCarrier(forsedCarrierId, transit.CityId, null));
 
-            _unitOfWork.SaveChanges();
-        }
+			var transitId = _transits.Add(data);
 
-        public long AddTransit(TransitEditModel model, CarrierSelectModel carrierModel)
-        {
-            var carrierId = _carrierService.AddOrGetCarrier(carrierModel);
+			return transitId;
+		}
 
-	        var data = TransitMapper.Map(model, carrierId);
+		private long GetByCityOrAny(long cityId, long? oldCarrierId)
+		{
+			var inCity = _carriers.GetByCity(cityId);
 
-	        var transitId = _transitRepository.Add(data);
+			if(inCity.Length == 0)
+			{
+				return oldCarrierId ?? _carriers.GetAll().Select(x => x.Id).First();
+			}
 
-            return transitId;
-        }
-    }
+			if(oldCarrierId.HasValue && inCity.Contains(oldCarrierId.Value))
+			{
+				return oldCarrierId.Value;
+			}
+
+			return inCity.First();
+		}
+
+		private long GetCarrier(long? carrierId, long cityId, long? oldCarrierId)
+		{
+			return carrierId.HasValue
+				? carrierId.Value
+				: GetByCityOrAny(cityId, oldCarrierId);
+		}
+	}
 }

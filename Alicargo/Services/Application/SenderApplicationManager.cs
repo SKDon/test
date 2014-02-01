@@ -83,6 +83,7 @@ namespace Alicargo.Services.Application
 		private void Add(ApplicationData application, long clientId, long senderId)
 		{
 			CopyTransitDataFromClient(clientId, application);
+
 			application.StateId = _stateConfig.DefaultStateId;
 			application.Class = null;
 			application.StateChangeTimestamp = DateTimeProvider.Now;

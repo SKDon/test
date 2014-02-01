@@ -61,8 +61,7 @@ namespace Alicargo.Controllers.User
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
-			CarrierSelectModel carrierModel)
+		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!EmailsHelper.Validate(model.Emails))
 			{
@@ -81,7 +80,7 @@ namespace Alicargo.Controllers.User
 			{
 				try
 				{
-					clientId = _manager.Add(model, carrierModel, transitModel, authenticationModel);
+					clientId = _manager.Add(model, transitModel, authenticationModel);
 
 					if(model.ContractFile != null)
 					{
@@ -137,8 +136,7 @@ namespace Alicargo.Controllers.User
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id, ClientModel model,
-			[Bind(Prefix = "Transit")] TransitEditModel transitModel,
-			CarrierSelectModel carrierModel)
+			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!EmailsHelper.Validate(model.Emails))
 			{
@@ -156,7 +154,7 @@ namespace Alicargo.Controllers.User
 			{
 				var authenticationModel = model.Authentication;
 
-				_manager.Update(client.ClientId, model, carrierModel, transitModel, authenticationModel);
+				_manager.Update(client.ClientId, model, transitModel, authenticationModel);
 
 				MergeContract(model, client.ClientId);
 			}

@@ -1,5 +1,4 @@
 ﻿using Alicargo.Core.Contracts.Event;
-using Alicargo.Core.Event;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
@@ -8,6 +7,7 @@ namespace Alicargo.Services.Users.Client
 {
 	internal sealed class ClientManagerWithEvent : IClientManager
 	{
+		// todo: use ClientManagerWithMailing
 		private readonly IEventFacade _events;
 		private readonly IClientManager _manager;
 
@@ -17,16 +17,14 @@ namespace Alicargo.Services.Users.Client
 			_events = events;
 		}
 
-		public void Update(long clientId, ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
-			AuthenticationModel authentication)
+		public void Update(long clientId, ClientModel model, TransitEditModel transit, AuthenticationModel authentication)
 		{
-			_manager.Update(clientId, model, carrier, transit, authentication);
+			_manager.Update(clientId, model, transit, authentication);
 		}
 
-		public long Add(ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
-			AuthenticationModel authentication)
+		public long Add(ClientModel client, TransitEditModel transit, AuthenticationModel authentication)
 		{
-			var id = _manager.Add(model, carrier, transit, authentication);
+			var id = _manager.Add(client, transit, authentication);
 
 			return id;
 		}

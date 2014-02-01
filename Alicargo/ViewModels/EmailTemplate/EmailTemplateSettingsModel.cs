@@ -6,24 +6,28 @@ namespace Alicargo.ViewModels.EmailTemplate
 {
 	public sealed class EmailTemplateSettingsModel
 	{
-		[DisplayNameLocalized(typeof(Enums), "Admin")]
 		[Required]
+		[DisplayNameLocalized(typeof(Enums), "Admin")]
 		public bool Admin { get; set; }
 
-		[DisplayNameLocalized(typeof(Enums), "Sender")]
 		[Required]
+		[DisplayNameLocalized(typeof(Enums), "Sender")]
 		public bool Sender { get; set; }
 
-		[DisplayNameLocalized(typeof(Enums), "Broker")]
 		[Required]
+		[DisplayNameLocalized(typeof(Enums), "Broker")]
 		public bool Broker { get; set; }
 
-		[DisplayNameLocalized(typeof(Enums), "Forwarder")]
 		[Required]
+		[DisplayNameLocalized(typeof(Enums), "Forwarder")]
 		public bool Forwarder { get; set; }
 
-		[DisplayNameLocalized(typeof(Enums), "Client")]
 		[Required]
+		[DisplayNameLocalized(typeof(Enums), "Client")]
 		public bool Client { get; set; }
+
+		[Required]
+		[DisplayNameLocalized(typeof(Enums), "Carrier")]
+		public bool Carrier { get; set; }
 	}
 }

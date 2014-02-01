@@ -5,11 +5,8 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IClientApplicationManager
 	{
-		long Add(ApplicationClientModel model, CarrierSelectModel carrierModel, TransitEditModel transitModel, long clientId);
-
-		void Update(long applicationId, ApplicationClientModel model, CarrierSelectModel carrierModel,
-			TransitEditModel transitModel);
-
-		ApplicationClientModel Get(long id);
+		long Add(ApplicationClientModel application, TransitEditModel transit, long clientId);
+		ApplicationClientModel Get(long applicationId);
+		void Update(long applicationId, ApplicationClientModel application, TransitEditModel transit);
 	}
 }

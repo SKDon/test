@@ -35,7 +35,7 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Broker, RoleType.Forwarder, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Broker, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual HttpStatusCodeResult SetState(long id, long stateId)
 		{
 			_applicationManager.SetState(id, stateId);

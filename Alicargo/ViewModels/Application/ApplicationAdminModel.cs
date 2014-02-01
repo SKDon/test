@@ -51,6 +51,9 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "Forwarder")]
 		public long? ForwarderId { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "Carrier")]
+		public long? CarrierId { get; set; }
+
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "FactoryName")]
 		public string FactoryName { get; set; }

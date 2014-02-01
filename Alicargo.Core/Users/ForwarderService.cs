@@ -19,7 +19,7 @@ namespace Alicargo.Core.Users
 
 			if(list.Length == 0)
 			{
-				return _forwarders.GetAll().Select(x => x.Id).First();
+				return oldForwarderId ?? _forwarders.GetAll().Select(x => x.Id).First();
 			}
 
 			if(oldForwarderId.HasValue && list.Contains(oldForwarderId.Value))

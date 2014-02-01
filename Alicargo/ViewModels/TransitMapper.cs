@@ -4,19 +4,16 @@ namespace Alicargo.ViewModels
 {
 	public sealed class TransitMapper
 	{
-		public static TransitData Map(TransitEditModel model, long carrierId)
+		public static void Map(TransitEditModel @from, TransitData to, long carrierId)
 		{
-			return new TransitData
-			{
-				Address = model.Address,
-				CarrierId = carrierId,
-				WarehouseWorkingTime = model.WarehouseWorkingTime,
-				CityId = model.CityId,
-				DeliveryType = model.DeliveryType,
-				MethodOfTransit = model.MethodOfTransit,
-				Phone = model.Phone,
-				RecipientName = model.RecipientName
-			};
+			to.Address = @from.Address;
+			to.CarrierId = carrierId;
+			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
+			to.CityId = @from.CityId;
+			to.DeliveryType = @from.DeliveryType;
+			to.MethodOfTransit = @from.MethodOfTransit;
+			to.Phone = @from.Phone;
+			to.RecipientName = @from.RecipientName;
 		}
 
 		public static TransitEditModel Map(TransitData data)

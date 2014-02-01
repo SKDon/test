@@ -480,4 +480,7 @@
   <data name="Countries" xml:space="preserve">
     <value>Страны</value>
   </data>
+  <data name="Carrier" xml:space="preserve">
+    <value>Курьер</value>
+  </data>
 </root>

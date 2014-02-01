@@ -46,7 +46,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			var transit = _fixture.Create<TransitEditModel>();
 			transit.CityId = TestConstants.TestCityId1;
 
-			var result = _controller.Create(model, _fixture.Create<CarrierSelectModel>(), transit);
+			var result = _controller.Create(model, transit);
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 

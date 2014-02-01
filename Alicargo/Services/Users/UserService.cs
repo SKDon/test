@@ -12,6 +12,7 @@ namespace Alicargo.Services.Users
 	internal sealed class UserService : IUserService
 	{
 		private readonly IAdminRepository _admins;
+		private readonly ICarrierRepository _carriers;
 		private readonly ISenderRepository _senders;
 		private readonly IBrokerRepository _brokers;
 		private readonly IForwarderRepository _forwarders;
@@ -19,12 +20,14 @@ namespace Alicargo.Services.Users
 
 		public UserService(IUserRepository users,
 			IAdminRepository admins,
+			ICarrierRepository carriers,
 			ISenderRepository senders,
 			IForwarderRepository forwarders,
 			IBrokerRepository brokers)
 		{
 			_users = users;
 			_admins = admins;
+			_carriers = carriers;
 			_senders = senders;
 			_forwarders = forwarders;
 			_brokers = brokers;
@@ -54,6 +57,15 @@ namespace Alicargo.Services.Users
 
 				case RoleType.Forwarder:
 					return _forwarders.GetAll().Select(
+						x => new UserListItem
+						{
+							Name = x.Name,
+							EntityId = x.Id,
+							UserId = x.UserId
+						}).ToArray();
+
+				case RoleType.Carrier:
+					return _carriers.GetAll().Select(
 						x => new UserListItem
 						{
 							Name = x.Name,

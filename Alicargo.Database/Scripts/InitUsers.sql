@@ -18,12 +18,21 @@ INSERT INTO [dbo].[User] ([Id], [Login], [PasswordHash], [PasswordSalt], [TwoLet
 COMMIT;
 SET IDENTITY_INSERT [dbo].[User] OFF;
 
-
 /****** Object:  Table [dbo].[Carrier]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Carrier] ON
 INSERT [dbo].[Carrier] ([Id], [UserId], [Name], [Email]) VALUES (1, 13, N'Carrier1', N'Carrier1@timez.org')
 INSERT [dbo].[Carrier] ([Id], [UserId], [Name], [Email]) VALUES (2, 12, N'Carrier2', N'Carrier2@timez.org')
 SET IDENTITY_INSERT [dbo].[Carrier] OFF
+
+INSERT [dbo].[CarrierCity] ([CityId], [CarrierId])
+SELECT [Id] AS [CityId], 1 AS [CarrierId]
+FROM [dbo].[City]
+WHERE [Id] < 8
+
+INSERT [dbo].[CarrierCity] ([CityId], [CarrierId])
+SELECT [Id] AS [CityId], 2 AS [CarrierId]
+FROM [dbo].[City]
+WHERE [Id] >= 8
 
 
 /****** Object:  Table [dbo].[Transit]    Script Date: 05/18/2013 14:17:27 ******/

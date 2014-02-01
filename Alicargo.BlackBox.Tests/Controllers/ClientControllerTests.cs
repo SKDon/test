@@ -48,9 +48,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var transit = _mock.Build<TransitEditModel>()
 				.With(x => x.CityId, TestConstants.TestCityId1)
 				.Create();
-			var carrier = _mock.Build<CarrierSelectModel>().Create();
 
-			_controller.Create(model, transit, carrier);
+			_controller.Create(model, transit);
 
 			var context = new AlicargoDataContext(Settings.Default.MainConnectionString);
 			var client = context.Clients.First(x => x.User.Login == authentication.Login);
@@ -59,7 +58,6 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			client.User.PasswordSalt.Should().NotBe(new byte[0]);
 			client.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
 			client.Transit.ShouldBeEquivalentTo(transit, options => options.ExcludingMissingProperties());
-			client.Transit.ShouldBeEquivalentTo(carrier, options => options.ExcludingMissingProperties().Excluding(x => x.CarrierId));
 		}
 	}
 }

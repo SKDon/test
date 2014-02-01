@@ -448,7 +448,6 @@
     <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
     <Compile Include="ViewModels\Application\ApplicationAdminModel.cs" />
-    <Compile Include="ViewModels\CarrierSelectModel.cs" />
     <Compile Include="ViewModels\AirWaybill\AwbAdminModel.cs" />
     <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\User\SignIdModel.cs" />

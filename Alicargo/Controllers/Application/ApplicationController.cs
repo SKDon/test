@@ -17,19 +17,21 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationController : Controller
 	{
-		private readonly IAdminApplicationManager _manager;
-		private readonly IApplicationPresenter _presenter;
 		private readonly IApplicationRepository _applications;
+		private readonly ICarrierRepository _carriers;
 		private readonly IClientRepository _clients;
 		private readonly ICountryRepository _countries;
 		private readonly IForwarderRepository _forwarders;
 		private readonly IIdentityService _identity;
+		private readonly IAdminApplicationManager _manager;
+		private readonly IApplicationPresenter _presenter;
 		private readonly ISenderRepository _senders;
 
 		public ApplicationController(
 			IAdminApplicationManager manager,
 			IApplicationPresenter presenter,
 			IForwarderRepository forwarders,
+			ICarrierRepository carriers,
 			IIdentityService identity,
 			ICountryRepository countries,
 			IApplicationRepository applications,
@@ -39,6 +41,7 @@ namespace Alicargo.Controllers.Application
 			_manager = manager;
 			_presenter = presenter;
 			_forwarders = forwarders;
+			_carriers = carriers;
 			_identity = identity;
 			_countries = countries;
 			_applications = applications;
@@ -75,6 +78,8 @@ namespace Alicargo.Controllers.Application
 			ViewBag.Senders = _senders.GetAll().OrderBy(x => x.Name).ToDictionary(x => (long?)x.EntityId, x => x.Name);
 
 			ViewBag.Forwarders = _forwarders.GetAll().OrderBy(x => x.Name).ToDictionary(x => (long?)x.Id, x => x.Name);
+
+			ViewBag.Carriers = _carriers.GetAll().OrderBy(x => x.Name).ToDictionary(x => (long?)x.Id, x => x.Name);
 		}
 
 		#region Edit
@@ -95,7 +100,7 @@ namespace Alicargo.Controllers.Application
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Edit(long id, ApplicationAdminModel model, CarrierSelectModel carrierModel,
+		public virtual ActionResult Edit(long id, ApplicationAdminModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!ModelState.IsValid)
@@ -107,7 +112,7 @@ namespace Alicargo.Controllers.Application
 				return View(model);
 			}
 
-			_manager.Update(id, model, carrierModel, transitModel);
+			_manager.Update(id, model, transitModel);
 
 			return RedirectToAction(MVC.Application.Edit(id));
 		}
@@ -127,7 +132,7 @@ namespace Alicargo.Controllers.Application
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Access(RoleType.Admin)]
-		public virtual ActionResult Create(long clientId, ApplicationAdminModel model, CarrierSelectModel carrierModel,
+		public virtual ActionResult Create(long clientId, ApplicationAdminModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!ModelState.IsValid)
@@ -139,7 +144,7 @@ namespace Alicargo.Controllers.Application
 
 			try
 			{
-				_manager.Add(model, carrierModel, transitModel, clientId);
+				_manager.Add(model, transitModel, clientId);
 			}
 			catch(DublicateException ex)
 			{

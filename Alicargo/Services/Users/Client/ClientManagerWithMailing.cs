@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Helpers;
@@ -19,8 +18,8 @@ namespace Alicargo.Services.Users.Client
 
 		public ClientManagerWithMailing(
 			IAdminRepository admins,
-			IClientManager manager, 
-			IMailSender mailSender, 
+			IClientManager manager,
+			IMailSender mailSender,
 			IMessageBuilder messageBuilder)
 		{
 			_admins = admins;
@@ -29,18 +28,16 @@ namespace Alicargo.Services.Users.Client
 			_messageBuilder = messageBuilder;
 		}
 
-		public void Update(long clientId, ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
-			AuthenticationModel authentication)
+		public void Update(long clientId, ClientModel model, TransitEditModel transit,AuthenticationModel authentication)
 		{
-			_manager.Update(clientId, model, carrier, transit, authentication);
+			_manager.Update(clientId, model, transit, authentication);
 		}
 
-		public long Add(ClientModel model, CarrierSelectModel carrier, TransitEditModel transit,
-			AuthenticationModel authentication)
+		public long Add(ClientModel client, TransitEditModel transit,AuthenticationModel authentication)
 		{
-			var id = _manager.Add(model, carrier, transit, authentication);
+			var id = _manager.Add(client, transit, authentication);
 
-			EmailOnAdd(model, authentication);
+			EmailOnAdd(client, authentication);
 
 			return id;
 		}

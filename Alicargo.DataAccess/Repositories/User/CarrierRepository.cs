@@ -1,4 +1,5 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts.User;
+﻿using System.Linq;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.DataAccess.Helpers;
@@ -69,5 +70,7 @@ namespace Alicargo.DataAccess.Repositories.User
 		{
 			return _executor.Query<long?>("[dbo].[Carrier_GetByUserId]", new { userId });
 		}
+
+		
 	}
 }

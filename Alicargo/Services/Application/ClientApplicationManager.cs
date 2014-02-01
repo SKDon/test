@@ -34,41 +34,33 @@ namespace Alicargo.Services.Application
 			_transits = transits;
 		}
 
-		public long Add(
-			ApplicationClientModel model,
-			CarrierSelectModel carrierModel,
-			TransitEditModel transitModel,
-			long clientId)
+		public long Add(ApplicationClientModel application, TransitEditModel transit, long clientId)
 		{
-			var transitId = _transits.AddTransit(transitModel, carrierModel);
+			var transitId = _transits.Add(transit, null);
 
-			var forwarderId = _forwarders.GetByCityOrAny(transitModel.CityId, null);
+			var forwarderId = _forwarders.GetByCityOrAny(transit.CityId, null);
 
-			var data = GetNewApplicationData(model, clientId, transitId, forwarderId);
+			var data = GetNewApplicationData(application, clientId, transitId, forwarderId);
 
 			return _updater.Add(data);
 		}
 
-		public void Update(
-			long applicationId,
-			ApplicationClientModel model,
-			CarrierSelectModel carrierModel,
-			TransitEditModel transitModel)
+		public void Update(long applicationId, ApplicationClientModel application, TransitEditModel transit)
 		{
 			var data = _applications.Get(applicationId);
 
-			_transits.Update(data.TransitId, transitModel, carrierModel);
+			_transits.Update(data.TransitId, transit, null);
 
-			var forwarderId = _forwarders.GetByCityOrAny(transitModel.CityId, data.ForwarderId);
+			var forwarderId = _forwarders.GetByCityOrAny(transit.CityId, data.ForwarderId);
 
-			Map(model, data, forwarderId);
+			Map(application, data, forwarderId);
 
 			_updater.Update(data);
 		}
 
-		public ApplicationClientModel Get(long id)
+		public ApplicationClientModel Get(long applicationId)
 		{
-			var application = _applications.Get(id);
+			var application = _applications.Get(applicationId);
 
 			return new ApplicationClientModel
 			{

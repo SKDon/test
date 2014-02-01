@@ -74,6 +74,7 @@ namespace Alicargo.TestHelpers
 					break;
 
 				case RoleType.Carrier:
+					identityService.Setup(x => x.Id).Returns(TestConstants.TestCarrierUserId1);
 					break;
 
 				case RoleType.Forwarder:
