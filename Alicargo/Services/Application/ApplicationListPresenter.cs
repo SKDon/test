@@ -19,6 +19,7 @@ namespace Alicargo.Services.Application
 
 		public ApplicationListPresenter(
 			IApplicationRepository applications,
+
 			IApplicationListItemMapper mapper,
 			IStateFilter stateFilter,
 			IStateConfig stateConfig,

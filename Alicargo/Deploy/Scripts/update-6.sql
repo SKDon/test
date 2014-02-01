@@ -285,11 +285,11 @@ N'Поступление денежных средств: {Money}€{Comment [ (
 N'Списание денежных средств: {Money}€{Comment [ ({0}).]} 
 Сальдо: {ClientBalance}€ ({Timestamp}).', 0),
 
-(28, N'ru', 'Установлен отправитель {SenderName} на заявку {ApplicationDisplay}',
-'Установлен отправитель {SenderName} на заявку {ApplicationDisplay}', 0),
+(28, N'ru', N'Установлен отправитель {SenderName} на заявку {DisplayNumber}',
+N'Установлен отправитель {SenderName} на заявку {DisplayNumber}', 0),
 
-(29, N'ru', 'Установлен перевозчик {ForwarderName} на заявку {ApplicationDisplay}',
-'Установлен перевозчик {ForwarderName} на заявку {ApplicationDisplay}', 0)
+(29, N'ru', N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}',
+N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}', 0)
 
 INSERT [dbo].[StateEmailTemplate]
 ([StateId],	[EmailTemplateId],	[EnableEmailSend],	[UseEventTemplate]) VALUES
