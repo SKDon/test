@@ -83,9 +83,7 @@ namespace Alicargo.Services.Excel
 				new Order { Desc = true, OrderType = OrderType.AirWaybill },
 				new Order { Desc = false, OrderType = OrderType.ClientNic },
 				new Order { Desc = true, OrderType = OrderType.Id }
-			}, cargoReceivedStateId: _stateConfig.CargoReceivedStateId,
-				cargoReceivedDaysToShow: _stateConfig.CargoReceivedDaysToShow,
-				forwarderId: forwarderId);
+			});
 
 			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
 

@@ -66,9 +66,9 @@ namespace Alicargo.Services.Calculation
 					Desc = true,
 					OrderType = OrderType.AirWaybill
 				}
-			}, take, (int)skip, clientId, hasCalculation: true).ToArray();
+			}, take: take, skip: (int)skip, clientId: clientId, hasCalculation: true).ToArray();
 
-			total = _applicationRepository.Count(stateIds, clientId, hasCalculation: true);
+			total = _applicationRepository.Count(stateIds, clientId: clientId, hasCalculation: true);
 
 			return applications;
 		}

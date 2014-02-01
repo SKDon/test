@@ -85,7 +85,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			var transitModel = _fixture.Create<TransitEditModel>();
 			transitModel.CityId = TestConstants.TestCityId1;
 			var old = _applicationRepository.List(new[] { TestConstants.DefaultStateId },
-				new[] { new Order { OrderType = OrderType.Id } }, 1).First();
+				new[] { new Order { OrderType = OrderType.Id } }, take: 1).First();
 
 			var result = _controller.Edit(old.Id, model, transitModel);
 
@@ -110,7 +110,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 					Desc = true,
 					OrderType = OrderType.Id
 				}
-			}, 1, clientId: clientData.ClientId).First();
+			}, take: 1, clientId: clientData.ClientId).First();
 
 			Validate(clientData, model, transitModel, data);
 		}

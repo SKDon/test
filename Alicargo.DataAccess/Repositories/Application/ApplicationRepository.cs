@@ -134,20 +134,21 @@ namespace Alicargo.DataAccess.Repositories.Application
 		}
 
 		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, bool? hasCalculation = null,
-			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, long? forwarderId = null)
+			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, long? forwarderId = null,
+			long? carrierId = null)
 		{
 			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
-				forwarderId);
+				forwarderId, carrierId);
 
 			return applications.LongCount();
 		}
 
 		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
 			long? clientId = null, long? senderId = null, bool? hasCalculation = null, long? cargoReceivedStateId = null,
-			int? cargoReceivedDaysToShow = null, long? forwarderId = null)
+			int? cargoReceivedDaysToShow = null, long? forwarderId = null, long? carrierId = null)
 		{
 			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
-				forwarderId);
+				forwarderId, carrierId);
 
 			applications = _orderer.Order(applications, orders);
 
@@ -189,8 +190,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToDictionary(x => x.ApplicationHistoryId, x => x.Id);
 		}
 
-		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation,
-			long? cargoReceivedStateId, int? cargoReceivedDaysToShow, long? forwarderId)
+		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation, long? cargoReceivedStateId, int? cargoReceivedDaysToShow, long? forwarderId, long? carrierId)
 		{
 			var applications = stateIds != null && stateIds.Length > 0
 				? _context.Applications.Where(x => stateIds.Contains(x.StateId))
@@ -216,6 +216,11 @@ namespace Alicargo.DataAccess.Repositories.Application
 			{
 				applications = applications.Where(
 					x => _context.Calculations.All(c => c.ApplicationHistoryId != x.Id && c.ClientId == x.ClientId));
+			}
+
+			if(carrierId.HasValue)
+			{
+				applications = applications.Where(x => x.Transit.CarrierId == carrierId.Value);
 			}
 
 			if(forwarderId.HasValue)

@@ -36,7 +36,7 @@ namespace Alicargo.BlackBox.Tests.Services.Application
 		[TestMethod]
 		public void Test_FilterByCargoReceivedDaysShow()
 		{
-			var application = _presenter.List(TwoLetterISOLanguageName.English, forwarderId: TestConstants.TestForwarderId1).Data
+			var application = _presenter.List(TwoLetterISOLanguageName.English).Data
 				.First(x => x.StateId != TestConstants.CargoReceivedStateId);
 
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
@@ -46,7 +46,7 @@ namespace Alicargo.BlackBox.Tests.Services.Application
 					new { StateId = TestConstants.CargoReceivedStateId, application.Id });
 			}
 
-			Assert.IsTrue(_presenter.List(TwoLetterISOLanguageName.English, forwarderId: TestConstants.TestForwarderId1)
+			Assert.IsTrue(_presenter.List(TwoLetterISOLanguageName.English)
 				.Data.Any(x => x.Id == application.Id && x.StateId == TestConstants.CargoReceivedStateId));
 
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
@@ -55,7 +55,7 @@ namespace Alicargo.BlackBox.Tests.Services.Application
 					new { application.Id });
 			}
 
-			Assert.IsFalse(_presenter.List(TwoLetterISOLanguageName.English, forwarderId: TestConstants.TestForwarderId1).Data.Any(x => x.Id == application.Id));
+			Assert.IsFalse(_presenter.List(TwoLetterISOLanguageName.English).Data.Any(x => x.Id == application.Id));
 		}
 	}
 }

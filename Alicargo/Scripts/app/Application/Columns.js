@@ -161,6 +161,21 @@
 				width: "150px",
 				groupHeaderTemplate: groupHeaderTemplateAwb
 			}];
+		
+		var carrierColumns = [
+			{ field: "State", title: $l.Entities_StateName, groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },
+			{ field: "ClientLegalEntity", title: $l.Entities_LegalEntity, groupable: true, width: "150px" },
+			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
+			countField,
+			weightField,
+			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
+			{ field: "TransitDeliveryTypeString", title: $l.Entities_DeliveryType, groupable: false, width: "75px" },
+			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
+			{ field: "TransitRecipientName", title: $l.Entities_RecipientName, groupable: false, width: "100px" },
+			{ field: "TransitAddress", title: $l.Entities_Address, groupable: false, width: "100px" },
+			{ field: "TransitPhone", title: $l.Entities_Phone, groupable: false, width: "100px" },
+			{ field: "TransitWarehouseWorkingTime", title: $l.Entities_WarehouseWorkingTime, groupable: false, width: "90px" },
+			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" }];
 
 		var senderColumns = [
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true },
@@ -186,7 +201,10 @@
 				return senderColumns;
 			} else if ($r.IsAdmin) {
 				return adminColumns;
+			} else if ($r.IsCarrier) {
+				return carrierColumns;
 			}
+			
 			return null;
 		};
 

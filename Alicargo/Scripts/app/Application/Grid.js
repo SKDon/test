@@ -86,7 +86,7 @@
 				$.extend(settings, { groupable: true });
 			}
 
-			if (!$r.IsForwarder) {
+			if (!$r.IsForwarder && !$r.IsCarrier) {
 				var detailExpand = function(e) {
 					var data = $a.Application.GetGrid().dataItem(e.masterRow);
 
@@ -145,7 +145,7 @@
 				});
 			}
 
-			if (!$r.IsClient && !$r.IsBroker)
+			if (!$r.IsClient && !$r.IsBroker && !$r.IsCarrier)
 				$.extend(settings, {
 					editable: true,
 					edit: function(e) {

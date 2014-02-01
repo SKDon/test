@@ -16,28 +16,36 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationListController : Controller
 	{
-		private readonly IApplicationListPresenter _presenter;
 		private readonly IAwbRepository _awbs;
+		private readonly ICarrierRepository _carriers;
 		private readonly IClientRepository _clients;
 		private readonly IForwarderRepository _forwarders;
 		private readonly IIdentityService _identity;
+		private readonly IApplicationListPresenter _presenter;
 		private readonly ISenderRepository _senders;
 		private readonly IStateConfig _stateConfig;
 
-		public ApplicationListController(IApplicationListPresenter presenter,
-			IClientRepository clients, ISenderRepository senders, IAwbRepository awbs,
-			IStateConfig stateConfig, IIdentityService identity, IForwarderRepository forwarders)
+		public ApplicationListController(
+			IApplicationListPresenter presenter,
+			IClientRepository clients,
+			ISenderRepository senders,
+			IAwbRepository awbs,
+			ICarrierRepository carriers,
+			IStateConfig stateConfig,
+			IIdentityService identity,
+			IForwarderRepository forwarders)
 		{
 			_presenter = presenter;
 			_clients = clients;
 			_senders = senders;
 			_awbs = awbs;
+			_carriers = carriers;
 			_stateConfig = stateConfig;
 			_identity = identity;
 			_forwarders = forwarders;
 		}
 
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual ViewResult Index()
 		{
 			var clients = _clients.GetAll()
@@ -57,8 +65,8 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual JsonResult List(int take, int skip, Dictionary<string, string>[] group)
 		{
 			var orders = OrderHelper.Get(group);
@@ -71,11 +79,13 @@ namespace Alicargo.Controllers.Application
 
 			var client = _clients.GetByUserId(_identity.Id.Value);
 
+			var carrierId = _carriers.GetByUserId(_identity.Id.Value);
+
 			var clientId = client != null
 				? client.ClientId
 				: (long?)null;
 
-			var data = _presenter.List(_identity.Language, take, skip, orders, clientId, senderId, forwarderId);
+			var data = _presenter.List(_identity.Language, take, skip, orders, clientId, senderId, forwarderId, carrierId);
 
 			return Json(data);
 		}
