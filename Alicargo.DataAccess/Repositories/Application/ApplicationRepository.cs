@@ -133,9 +133,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			};
 		}
 
-		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, bool? hasCalculation = null,
-			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, long? forwarderId = null,
-			long? carrierId = null)
+		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, long? carrierId = null, long? forwarderId = null, long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, bool? hasCalculation = null)
 		{
 			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
 				forwarderId, carrierId);
@@ -143,9 +141,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return applications.LongCount();
 		}
 
-		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
-			long? clientId = null, long? senderId = null, bool? hasCalculation = null, long? cargoReceivedStateId = null,
-			int? cargoReceivedDaysToShow = null, long? forwarderId = null, long? carrierId = null)
+		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0, long? clientId = null, long? senderId = null, long? carrierId = null, long? forwarderId = null, long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, bool? hasCalculation = null)
 		{
 			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
 				forwarderId, carrierId);

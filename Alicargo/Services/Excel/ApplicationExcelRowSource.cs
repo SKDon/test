@@ -35,36 +35,40 @@ namespace Alicargo.Services.Excel
 			_itemMapper = itemMapper;
 		}
 
-		public BaseApplicationExcelRow[] GetAdminApplicationExcelRow(string language)
+		public AdminApplicationExcelRow[] GetAdminApplicationExcelRow(string language)
 		{
-			var items = GetApplicationListItems(null, language);
+			var items = GetApplicationListItems(null, null, null, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
-			return items.Select(x => (BaseApplicationExcelRow)new AdminApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
+			return items.Select(x => new AdminApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		public BaseApplicationExcelRow[] GetForwarderApplicationExcelRow(long forwarderId, string language)
+		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow(long forwarderId, string language)
 		{
-			var items = GetApplicationListItems(forwarderId, language);
+			var items = GetApplicationListItems(null, null, forwarderId, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
-			return items.Select(x => (BaseApplicationExcelRow)new ForwarderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
+			return items.Select(x => new ForwarderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		public BaseApplicationExcelRow[] GetSenderApplicationExcelRow(long senderId, string language)
+		public SenderApplicationExcelRow[] GetSenderApplicationExcelRow(long senderId, string language)
 		{
-			var items = GetApplicationListItems(null, language);
+			var items = GetApplicationListItems(senderId, null, null, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
-			return items.Select(x => (BaseApplicationExcelRow)new SenderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
+			return items.Select(x => new SenderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		public BaseApplicationExcelRow[] GetCarrierApplicationExcelRow(long carrierId, string language)
+		public CarrierApplicationExcelRow[] GetCarrierApplicationExcelRow(long carrierId, string language)
 		{
-			throw new System.NotImplementedException();
+			var items = GetApplicationListItems(null, carrierId, null, language);
+
+			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
+
+			return items.Select(x => new CarrierApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
 		private static string GetAirWaybillDisplay(IEnumerable<AirWaybillData> awbs, ApplicationListItem application)
@@ -74,7 +78,8 @@ namespace Alicargo.Services.Excel
 				.FirstOrDefault();
 		}
 
-		private ApplicationListItem[] GetApplicationListItems(long? forwarderId, string language)
+		private ApplicationListItem[] GetApplicationListItems(long? senderId, long? carrierId, long? forwarderId,
+			string language)
 		{
 			var stateIds = _stateFilter.GetStateVisibility();
 
@@ -83,7 +88,8 @@ namespace Alicargo.Services.Excel
 				new Order { Desc = true, OrderType = OrderType.AirWaybill },
 				new Order { Desc = false, OrderType = OrderType.ClientNic },
 				new Order { Desc = true, OrderType = OrderType.Id }
-			});
+			}, null, 0, null, senderId, carrierId, forwarderId, _stateConfig.CargoReceivedStateId,
+				_stateConfig.CargoReceivedDaysToShow);
 
 			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
 

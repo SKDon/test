@@ -181,6 +181,7 @@
     <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
     <Compile Include="Services\Excel\ExcelAdminCalculation.cs" />
     <Compile Include="Services\Abstract\IExcelGenerator.cs" />
+    <Compile Include="Services\Excel\Rows\CarrierApplicationExcelRow.cs" />
     <Compile Include="Services\LanguageName.cs" />
     <Compile Include="Controllers\Calculation\ClientCalculationController.cs" />
     <Compile Include="Controllers\Calculation\SenderCalculationController.cs" />

@@ -70,11 +70,9 @@ namespace Alicargo.Services.Application
 
 			var orders = GetOrders(groups);
 
-			total = _applications.Count(stateIds, clientId, senderId, null,
-				_stateConfig.CargoReceivedStateId, _stateConfig.CargoReceivedDaysToShow, forwarderId, carrierId);
+			total = _applications.Count(stateIds, clientId: clientId, senderId: senderId, carrierId: carrierId, forwarderId: forwarderId, cargoReceivedStateId: _stateConfig.CargoReceivedStateId, cargoReceivedDaysToShow: _stateConfig.CargoReceivedDaysToShow, hasCalculation: null);
 
-			return _applications.List(stateIds, orders, take, skip, clientId, senderId, null,
-				_stateConfig.CargoReceivedStateId, _stateConfig.CargoReceivedDaysToShow, forwarderId, carrierId);
+			return _applications.List(stateIds, orders, take: take, skip: skip, clientId: clientId, senderId: senderId, carrierId: carrierId, forwarderId: forwarderId, cargoReceivedStateId: _stateConfig.CargoReceivedStateId, cargoReceivedDaysToShow: _stateConfig.CargoReceivedDaysToShow, hasCalculation: null);
 		}
 
 		private static Order[] GetOrders(IEnumerable<Order> orders)
