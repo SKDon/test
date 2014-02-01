@@ -88,8 +88,14 @@
 			{ field: "State", title: $l.Entities_StateName, groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
 			{ field: "DateOfCargoReceiptLocalString", title: $l.Entities_DateOfCargoReceipt, groupable: false, editor: dateEditor, width: "90px", template: "#= DateOfCargoReceiptLocalString == null ? '' : kendo.toString(DateOfCargoReceiptLocalString, 'd') #" },
 			{ field: "DateInStockLocalString", title: $l.Entities_DateInStock, groupable: false, width: "90px" },
-			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true, width: "100px" },			
-			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, groupable: false, width: "60px" },
+			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true, width: "100px" },
+			{
+				field: "DisplayNumber",
+				title: $l.Entities_DisplayNumber,
+				template: "<a href='" + $u.Application_Edit + "/#=Id#'>#= DisplayNumber #</a>",
+				groupable: false,
+				width: "60px"
+			},
 			{ field: "SenderName", title: $l.Entities_Sender, groupable: true, width: "100px" },
 			{ field: "ForwarderName", title: $l.Entities_Forwarder, groupable: true, width: "100px" },
 			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: true, width: "100px" },
@@ -105,7 +111,20 @@
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
 			{ field: "TransitCarrierName", title: $l.Entities_CarrierName, groupable: false, width: "100px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
-			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
+			{
+				field: "AirWaybill",
+				title: $l.Entities_AirWaybill,
+				groupable: true,
+				width: "150px",
+				template: function(data) {
+					if (data.AirWaybillId) {
+						return "<a href='" + $u.AirWaybill_Edit + "/" + data.AirWaybillId + "'>" + data.AirWaybill + "</a>";
+					}
+
+					return "";
+				},
+				groupHeaderTemplate: groupHeaderTemplateAwb
+			}];
 
 		var clientColumns = [
 			{ field: "CreationTimestampLocalString", title: $l.Entities_CreationTimestamp, groupable: false, width: "70px" },
@@ -163,7 +182,7 @@
 				width: "150px",
 				groupHeaderTemplate: groupHeaderTemplateAwb
 			}];
-		
+
 		var carrierColumns = [
 			{ field: "State", title: $l.Entities_StateName, groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },
 			{ field: "ClientLegalEntity", title: $l.Entities_LegalEntity, groupable: true, width: "150px" },
@@ -208,7 +227,7 @@
 			} else if ($r.IsCarrier) {
 				return carrierColumns;
 			}
-			
+
 			return null;
 		};
 
