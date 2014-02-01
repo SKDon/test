@@ -105,6 +105,7 @@ namespace Alicargo.Services.Application
 				FactureCost = x.FactureCost,
 				ScotchCost = x.ScotchCost,
 				SenderName = x.SenderName,
+				ForwarderName = x.ForwarderName,
 				SenderScotchCost = x.SenderScotchCost,
 				TariffPerKg = x.TariffPerKg,
 				TransitCost = x.TransitCost,

@@ -180,5 +180,7 @@ namespace Alicargo.ViewModels.Application
 		public bool CanSetState { get; set; }
 
 		public bool CanSetTransitCost { get; set; }
+
+		public string ForwarderName { get; set; }
 	}
 }
