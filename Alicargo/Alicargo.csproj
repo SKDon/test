@@ -597,6 +597,7 @@
     <Content Include="Deploy\Scripts\update-6.sql" />
     <Content Include="Deploy\Scripts\update-7.sql" />
     <Content Include="Deploy\Scripts\update-8.sql" />
+    <Content Include="Deploy\Scripts\update-9.sql" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />

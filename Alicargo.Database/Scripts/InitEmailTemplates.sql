@@ -327,4 +327,6 @@ INSERT [dbo].[EventEmailRecipient]
 (5, 10),
 (5, 11),
 (5, 13),
-(5, 14)
+(5, 14),
+-- Carrier
+(6, 2)
