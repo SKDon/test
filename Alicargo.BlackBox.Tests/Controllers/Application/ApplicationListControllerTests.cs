@@ -45,5 +45,22 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				data.Data.Should().HaveCount(5);
 			}
 		}
+
+		[TestMethod]
+		public void Test_List_ByCarrier()
+		{
+			using(var context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString, RoleType.Carrier))
+			{
+				var controller = context.Kernel.Get<ApplicationListController>();
+
+				var result = controller.List(5, 0, null);
+
+				var data = (ApplicationListCollection)result.Data;
+
+				data.Total.ShouldBeEquivalentTo(6);
+
+				data.Data.Should().HaveCount(5);
+			}
+		}
 	}
 }

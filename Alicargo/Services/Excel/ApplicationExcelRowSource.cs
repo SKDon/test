@@ -53,13 +53,18 @@ namespace Alicargo.Services.Excel
 			return items.Select(x => (BaseApplicationExcelRow)new ForwarderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
 		}
 
-		public BaseApplicationExcelRow[] GetSenderApplicationExcelRow(string language)
+		public BaseApplicationExcelRow[] GetSenderApplicationExcelRow(long senderId, string language)
 		{
 			var items = GetApplicationListItems(null, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 
 			return items.Select(x => (BaseApplicationExcelRow)new SenderApplicationExcelRow(x, GetAirWaybillDisplay(awbs, x))).ToArray();
+		}
+
+		public BaseApplicationExcelRow[] GetCarrierApplicationExcelRow(long carrierId, string language)
+		{
+			throw new System.NotImplementedException();
 		}
 
 		private static string GetAirWaybillDisplay(IEnumerable<AirWaybillData> awbs, ApplicationListItem application)

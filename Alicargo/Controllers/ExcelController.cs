@@ -16,22 +16,28 @@ namespace Alicargo.Controllers
 	{
 		private readonly IExcelGenerator<BaseApplicationExcelRow> _generator;
 		private readonly IForwarderRepository _forwarders;
+		private readonly ICarrierRepository _carriers;
+		private readonly ISenderRepository _senders;
 		private readonly IApplicationExcelRowSource _rowSource;
 		private readonly IIdentityService _identity;
 
 		public ExcelController(
 			IExcelGenerator<BaseApplicationExcelRow> generator,
 			IForwarderRepository forwarders,
+			ICarrierRepository carriers,
+			ISenderRepository senders,
 			IApplicationExcelRowSource rowSource,
 			IIdentityService identity)
 		{
 			_generator = generator;
 			_forwarders = forwarders;
+			_carriers = carriers;
+			_senders = senders;
 			_rowSource = rowSource;
 			_identity = identity;
 		}
 
-		[Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual FileResult Applications()
 		{
 			var stream = GetStream();
@@ -64,9 +70,34 @@ namespace Alicargo.Controllers
 				return _generator.Get(rows, _identity.Language);
 			}
 
+			if(_identity.IsInRole(RoleType.Carrier))
+			{
+				Debug.Assert(_identity.Id != null);
+
+				var carrierId = _carriers.GetByUserId(_identity.Id.Value);
+
+				if(!carrierId.HasValue)
+				{
+					throw new InvalidLogicException("Expected that current user is carrier");
+				}
+
+				var rows = _rowSource.GetCarrierApplicationExcelRow(carrierId.Value, _identity.Language);
+
+				return _generator.Get(rows, _identity.Language);
+			}
+
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				var rows = _rowSource.GetSenderApplicationExcelRow(_identity.Language);
+				Debug.Assert(_identity.Id != null);
+
+				var senderId = _senders.GetByUserId(_identity.Id.Value);
+
+				if(!senderId.HasValue)
+				{
+					throw new InvalidLogicException("Expected that current user is sender");
+				}
+
+				var rows = _rowSource.GetSenderApplicationExcelRow(senderId.Value, _identity.Language);
 
 				return _generator.Get(rows, _identity.Language);
 			}

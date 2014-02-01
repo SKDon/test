@@ -8,5 +8,6 @@ namespace Alicargo.DataAccess.Contracts.Repositories.User
 		CarrierData[] GetAll();
 		Func<long> Add(CarrierData carrier);
 		CarrierData Get(string name);
+		long? GetByUserId(long userId);
 	}
 }

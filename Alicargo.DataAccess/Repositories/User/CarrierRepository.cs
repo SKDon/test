@@ -46,5 +46,10 @@ namespace Alicargo.DataAccess.Repositories.User
 		{
 			return _context.Carriers.Select(_selector).FirstOrDefault(x => x.Name.Equals(name));
 		}
+
+		public long? GetByUserId(long userId)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
