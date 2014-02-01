@@ -15,9 +15,9 @@ namespace Alicargo.Controllers.User
 {
 	public partial class ClientController : Controller
 	{
-		private readonly IClientManager _manager;
 		private readonly IClientPresenter _clients;
 		private readonly IClientFileRepository _files;
+		private readonly IClientManager _manager;
 
 		public ClientController(
 			IClientManager manager,
@@ -31,14 +31,15 @@ namespace Alicargo.Controllers.User
 
 		#region List
 
-		[Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender)]
+		[Access(RoleType.Admin)]
 		public virtual ViewResult Index()
 		{
 			return View();
 		}
 
-		[HttpPost, Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender),
-		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
 		{
 			var collection = _clients.GetList(take, skip);
@@ -50,15 +51,17 @@ namespace Alicargo.Controllers.User
 
 		#region Create
 
-		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
+		[HttpGet]
+		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ViewResult Create()
 		{
 			return View();
 		}
 
-		[ValidateAntiForgeryToken, HttpPost, Access(RoleType.Admin, RoleType.Client)]
-		public virtual ActionResult Create(ClientModel model,
-			[Bind(Prefix = "Transit")] TransitEditModel transitModel,
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Access(RoleType.Admin, RoleType.Client)]
+		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel,
 			CarrierSelectModel carrierModel)
 		{
 			if(!EmailsHelper.Validate(model.Emails))
@@ -102,16 +105,8 @@ namespace Alicargo.Controllers.User
 
 		#endregion
 
-		private void MergeContract(ClientModel model, long clientId)
-		{
-			var oldFileName = _files.GetClientContractFileName(clientId);
-			if(oldFileName != model.ContractFileName)
-			{
-				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
-			}
-		}
-
-		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
+		[HttpGet]
+		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual FileResult Contract(long? id)
 		{
 			var data = _clients.GetCurrentClientData(id);
@@ -123,7 +118,8 @@ namespace Alicargo.Controllers.User
 
 		#region Edit
 
-		[HttpGet, Access(RoleType.Admin, RoleType.Client)]
+		[HttpGet]
+		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id)
 		{
 			var data = _clients.GetCurrentClientData(id);
@@ -137,31 +133,9 @@ namespace Alicargo.Controllers.User
 			return View(model);
 		}
 
-		private static ClientModel GetModel(ClientData client, string contractFileName)
-		{
-			return new ClientModel
-			{
-				BIC = client.BIC,
-				Phone = client.Phone,
-				Emails = EmailsHelper.JoinEmails(client.Emails),
-				LegalEntity = client.LegalEntity,
-				Bank = client.Bank,
-				Contacts = client.Contacts,
-				INN = client.INN,
-				KPP = client.KPP,
-				KS = client.KS,
-				LegalAddress = client.LegalAddress,
-				MailingAddress = client.MailingAddress,
-				Nic = client.Nic,
-				OGRN = client.OGRN,
-				RS = client.RS,
-				ContractFile = null,
-				ContractFileName = contractFileName,
-				Authentication = new AuthenticationModel(client.Login)
-			};
-		}
-
-		[ValidateAntiForgeryToken, HttpPost, Access(RoleType.Admin, RoleType.Client)]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Access(RoleType.Admin, RoleType.Client)]
 		public virtual ActionResult Edit(long? id, ClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel,
 			CarrierSelectModel carrierModel)
@@ -196,6 +170,39 @@ namespace Alicargo.Controllers.User
 			return RedirectToAction(MVC.Client.Edit(client.ClientId));
 		}
 
+		private static ClientModel GetModel(ClientData client, string contractFileName)
+		{
+			return new ClientModel
+			{
+				BIC = client.BIC,
+				Phone = client.Phone,
+				Emails = EmailsHelper.JoinEmails(client.Emails),
+				LegalEntity = client.LegalEntity,
+				Bank = client.Bank,
+				Contacts = client.Contacts,
+				INN = client.INN,
+				KPP = client.KPP,
+				KS = client.KS,
+				LegalAddress = client.LegalAddress,
+				MailingAddress = client.MailingAddress,
+				Nic = client.Nic,
+				OGRN = client.OGRN,
+				RS = client.RS,
+				ContractFile = null,
+				ContractFileName = contractFileName,
+				Authentication = new AuthenticationModel(client.Login)
+			};
+		}
+
 		#endregion
+
+		private void MergeContract(ClientModel model, long clientId)
+		{
+			var oldFileName = _files.GetClientContractFileName(clientId);
+			if(oldFileName != model.ContractFileName)
+			{
+				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
+			}
+		}
 	}
 }

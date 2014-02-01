@@ -6,7 +6,7 @@ using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
-	internal sealed class CarrierRepository : ICarrierRepository
+	public sealed class CarrierRepository : ICarrierRepository
 	{
 		private readonly IPasswordConverter _converter;
 		private readonly ISqlProcedureExecutor _executor;

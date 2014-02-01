@@ -313,12 +313,12 @@ namespace Links
                 public static readonly string globalize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.min.js") ? Url("globalize.min.js") : Url("globalize.js");
             }
         
-            public static readonly string jquery_2_0_3_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.0.3.intellisense.min.js") ? Url("jquery-2.0.3.intellisense.min.js") : Url("jquery-2.0.3.intellisense.js");
-            public static readonly string jquery_2_0_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.0.3.min.js") ? Url("jquery-2.0.3.min.js") : Url("jquery-2.0.3.js");
-            public static readonly string jquery_2_0_3_min_js = Url("jquery-2.0.3.min.js");
-            public static readonly string jquery_2_0_3_min_map = Url("jquery-2.0.3.min.map");
-            public static readonly string jquery_ui_1_10_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.10.3.min.js") ? Url("jquery-ui-1.10.3.min.js") : Url("jquery-ui-1.10.3.js");
-            public static readonly string jquery_ui_1_10_3_min_js = Url("jquery-ui-1.10.3.min.js");
+            public static readonly string jquery_2_1_0_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.0.intellisense.min.js") ? Url("jquery-2.1.0.intellisense.min.js") : Url("jquery-2.1.0.intellisense.js");
+            public static readonly string jquery_2_1_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.0.min.js") ? Url("jquery-2.1.0.min.js") : Url("jquery-2.1.0.js");
+            public static readonly string jquery_2_1_0_min_js = Url("jquery-2.1.0.min.js");
+            public static readonly string jquery_2_1_0_min_map = Url("jquery-2.1.0.min.map");
+            public static readonly string jquery_ui_1_10_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.10.4.min.js") ? Url("jquery-ui-1.10.4.min.js") : Url("jquery-ui-1.10.4.js");
+            public static readonly string jquery_ui_1_10_4_min_js = Url("jquery-ui-1.10.4.min.js");
             public static readonly string jquery_cookie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cookie.min.js") ? Url("jquery.cookie.min.js") : Url("jquery.cookie.js");
             public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
             public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
@@ -346,9 +346,11 @@ namespace Links
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string kendo_culture_it_min_js = Url("kendo.culture.it.min.js");
                     public static readonly string kendo_culture_ru_min_js = Url("kendo.culture.ru.min.js");
+                    public static readonly string kendo_culture_ru_min_js_map = Url("kendo.culture.ru.min.js.map");
                 }
             
                 public static readonly string kendo_web_min_js = Url("kendo.web.min.js");
+                public static readonly string kendo_web_min_js_map = Url("kendo.web.min.js.map");
             }
         
         }
@@ -368,8 +370,6 @@ namespace Links
             public static readonly string calculation_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/calculation-grid.min.css") ? Url("calculation-grid.min.css") : Url("calculation-grid.css");
                  
             public static readonly string common_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/common.min.css") ? Url("common.min.css") : Url("common.css");
-                 
-            public static readonly string entity_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/entity.min.css") ? Url("entity.min.css") : Url("entity.css");
                  
             public static readonly string kendo_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/kendo.min.css") ? Url("kendo.min.css") : Url("kendo.css");
                  

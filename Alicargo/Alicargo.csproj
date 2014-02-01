@@ -273,7 +273,6 @@
     <Compile Include="Services\Abstract\IAwbUpdateManager.cs" />
     <Compile Include="Services\Abstract\IAwbPresenter.cs" />
     <Compile Include="Services\Abstract\IAdminCalculationPresenter.cs" />
-    <Compile Include="Services\Abstract\ICarrierService.cs" />
     <Compile Include="Services\Abstract\IClientManager.cs" />
     <Compile Include="Services\Abstract\IMessageBuilder.cs" />
     <Compile Include="Services\Abstract\ITransitService.cs" />
@@ -302,7 +301,6 @@
     <Compile Include="Services\Application\ApplicationPresenter.cs" />
     <Compile Include="Services\Application\ApplicationGrouper.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
-    <Compile Include="Services\CarrierService.cs" />
     <Compile Include="Services\Users\Client\ClientManager.cs" />
     <Compile Include="Services\Email\MessageBuilder.cs" />
     <Compile Include="Services\IdentityService.cs" />
@@ -443,6 +441,7 @@
     <Compile Include="ViewModels\TransitMapper.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
     <Compile Include="ViewModels\TransitEditModel.cs" />
+    <Compile Include="ViewModels\User\CarrierModel.cs" />
     <Compile Include="ViewModels\User\ForwarderModel.cs" />
     <Compile Include="ViewModels\User\SenderModel.cs" />
     <Compile Include="ViewModels\User\UserList.cs" />
@@ -701,7 +700,6 @@
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
     <Content Include="Views\AirWaybill\EditorTemplates\AwbAdminModel.cshtml" />
-    <Content Include="Views\Carrier\Select.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SelectModel.cshtml" />
     <Content Include="Views\AirWaybill\Index.cshtml" />
     <Content Include="Views\AirWaybill\Edit.cshtml" />
@@ -785,6 +783,9 @@
     <Content Include="Views\Forwarder\Create.cshtml" />
     <Content Include="Views\Forwarder\Edit.cshtml" />
     <Content Include="Views\Forwarder\EditorTemplates\ForwarderModel.cshtml" />
+    <Content Include="Views\Carrier\EditorTemplates\CarrierModel.cshtml" />
+    <Content Include="Views\Carrier\Create.cshtml" />
+    <Content Include="Views\Carrier\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

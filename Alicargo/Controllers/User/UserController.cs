@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.MvcHelpers.Filters;
@@ -41,6 +42,11 @@ namespace Alicargo.Controllers.User
 		[Access(RoleType.Admin), HttpGet]
 		public virtual ViewResult Edit(RoleType roleType, long id)
 		{
+			if(roleType != RoleType.Admin && roleType != RoleType.Broker)
+			{
+				throw new NotSupportedException();
+			}
+
 			var model = _userService.Get(roleType, id);
 
 			return View(model);
@@ -49,6 +55,11 @@ namespace Alicargo.Controllers.User
 		[Access(RoleType.Admin), HttpGet]
 		public virtual ViewResult Create(RoleType roleType)
 		{
+			if(roleType != RoleType.Admin && roleType != RoleType.Broker)
+			{
+				throw new NotSupportedException();
+			}
+
 			return View();
 		}
 

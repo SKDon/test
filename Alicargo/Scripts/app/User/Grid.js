@@ -26,6 +26,8 @@
 						return $u.Sender_Edit + "/" + data.EntityId;
 					case "Forwarder":
 						return $u.Forwarder_Edit + "/" + data.EntityId;
+					case "Carrier":
+						return $u.Carrier_Edit + "/" + data.EntityId;
 					default:
 						return $u.User_Edit + "/" + role + "/" + data.EntityId;
 				}

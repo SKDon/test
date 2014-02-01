@@ -384,4 +384,7 @@
   <data name="DefineByCity" xml:space="preserve">
     <value>Определить по городу</value>
   </data>
+  <data name="Carriers" xml:space="preserve">
+    <value>Курьеры</value>
+  </data>
 </root>

@@ -384,4 +384,7 @@
   <data name="DefineByCity" xml:space="preserve">
     <value>Define by city</value>
   </data>
+  <data name="Carriers" xml:space="preserve">
+    <value>Carriers</value>
+  </data>
 </root>

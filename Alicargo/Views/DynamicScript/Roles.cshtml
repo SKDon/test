@@ -10,6 +10,7 @@ $r.IsSender = @IdentityService.IsInRole(RoleType.Sender).ToString().ToLowerInvar
 $r.IsBroker = @IdentityService.IsInRole(RoleType.Broker).ToString().ToLowerInvariant();
 $r.IsClient = @IdentityService.IsInRole(RoleType.Client).ToString().ToLowerInvariant();
 $r.IsForwarder = @IdentityService.IsInRole(RoleType.Forwarder).ToString().ToLowerInvariant();
+$r.IsCarrier = @IdentityService.IsInRole(RoleType.Carrier).ToString().ToLowerInvariant();
 
 return $r;
 }($a.Roles || {}));

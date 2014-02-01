@@ -63,15 +63,15 @@ namespace Alicargo.Controllers.Application
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string List = "List";
             public readonly string Index = "Index";
+            public readonly string List = "List";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string List = "List";
             public const string Index = "Index";
+            public const string List = "List";
         }
 
 
@@ -120,6 +120,15 @@ namespace Alicargo.Controllers.Application
     {
         public T4MVC_ApplicationListController() : base(Dummy.Instance) { }
 
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        public override System.Web.Mvc.ViewResult Index()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
+            return callInfo;
+        }
+
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip, System.Collections.Generic.Dictionary<string,string>[] group);
 
         public override System.Web.Mvc.JsonResult List(int take, int skip, System.Collections.Generic.Dictionary<string,string>[] group)
@@ -129,15 +138,6 @@ namespace Alicargo.Controllers.Application
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skip", skip);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "group", group);
             ListOverride(callInfo, take, skip, group);
-            return callInfo;
-        }
-
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
-
-        public override System.Web.Mvc.ViewResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
             return callInfo;
         }
 

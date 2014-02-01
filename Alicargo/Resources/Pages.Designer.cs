@@ -286,6 +286,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Carriers.
+        /// </summary>
+        public static string Carriers {
+            get {
+                return ResourceManager.GetString("Carriers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change the file.
         /// </summary>
         public static string ChangeFile {
