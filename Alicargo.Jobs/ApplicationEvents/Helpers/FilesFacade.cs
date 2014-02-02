@@ -34,6 +34,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case EventType.ApplicationCreated:
 				case EventType.SetSender:
 				case EventType.SetForwarder:
+				case EventType.SetCarrier:
 					return null;
 
 				case EventType.ApplicationSetState:

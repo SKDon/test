@@ -80,6 +80,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				case EventType.ApplicationCreated:
 				case EventType.SetSender:
 				case EventType.SetForwarder:
+				case EventType.SetCarrier:
 					break;
 
 				case EventType.Calculate:
@@ -161,7 +162,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			Add(localizedData, "TermsOfDelivery", application.TermsOfDelivery);
 			Add(localizedData, "Torg12Files", string.Join(", ", torg12));
 			Add(localizedData, "TransitAddress", application.TransitAddress);
-			Add(localizedData, "TransitCarrierName", application.TransitCarrierName);
+			Add(localizedData, "CarrierName", application.TransitCarrierName);
 			Add(localizedData, "TransitCity", cityName);
 			Add(localizedData, "TransitPhone", application.TransitPhone);
 			Add(localizedData, "TransitRecipientName", application.TransitRecipientName);

@@ -104,7 +104,7 @@ namespace Alicargo.Services.Application
 		{
 			var data = _applications.Get(applicationId);
 
-			_transitService.Update(data.TransitId, transit, model.CarrierId);
+			_transitService.Update(data.TransitId, transit, model.CarrierId, applicationId);
 
 			data.Invoice = model.Invoice;
 			data.Characteristic = model.Characteristic;

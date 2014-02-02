@@ -105,6 +105,7 @@ namespace Alicargo.App_Start.Jobs
 						{ EventType.Calculate, processors },
 						{ EventType.SetSender, processors },
 						{ EventType.SetForwarder, processors },
+						{ EventType.SetCarrier, processors },
 						{ EventType.CalculationCanceled, processors }
 					}).Work();
 			}

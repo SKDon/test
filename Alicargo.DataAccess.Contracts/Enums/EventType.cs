@@ -23,6 +23,9 @@ namespace Alicargo.DataAccess.Contracts.Enums
 		[DisplayNameLocalized(typeof(Resources.EventType), "SetForwarder")]
 		SetForwarder = 16,
 
+		[DisplayNameLocalized(typeof(Resources.EventType), "SetCarrier")]
+		SetCarrier = 17,
+
 
 		// Application's file events
 		[DisplayNameLocalized(typeof(Resources.EventType), "CPFileUploaded")]

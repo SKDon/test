@@ -151,6 +151,15 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set carrier.
+        /// </summary>
+        public static string SetCarrier {
+            get {
+                return ResourceManager.GetString("SetCarrier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set date of cargo receipt.
         /// </summary>
         public static string SetDateOfCargoReceipt {

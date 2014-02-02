@@ -165,4 +165,7 @@
   <data name="SetForwarder" xml:space="preserve">
     <value>Установка перевозчика</value>
   </data>
+  <data name="SetCarrier" xml:space="preserve">
+    <value>Установка курьера</value>
+  </data>
 </root>

@@ -165,4 +165,7 @@
   <data name="SetForwarder" xml:space="preserve">
     <value>Set forwarder</value>
   </data>
+  <data name="SetCarrier" xml:space="preserve">
+    <value>Set carrier</value>
+  </data>
 </root>

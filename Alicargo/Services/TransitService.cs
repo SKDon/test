@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
@@ -10,19 +12,28 @@ namespace Alicargo.Services
 	internal sealed class TransitService : ITransitService
 	{
 		private readonly ICarrierRepository _carriers;
+		private readonly IEventFacade _events;
 		private readonly ITransitRepository _transits;
 
-		public TransitService(ITransitRepository transits, ICarrierRepository carriers)
+		public TransitService(ITransitRepository transits, ICarrierRepository carriers, IEventFacade events)
 		{
 			_transits = transits;
 			_carriers = carriers;
+			_events = events;
 		}
 
-		public void Update(long transitId, TransitEditModel transit, long? forsedCarrierId)
+		public void Update(long transitId, TransitEditModel transit, long? forsedCarrierId, long? applicationId)
 		{
 			var data = _transits.Get(transitId).Single();
 
-			TransitMapper.Map(transit, data, GetCarrier(forsedCarrierId, transit.CityId, data.CarrierId));
+			var carrierId = GetCarrier(forsedCarrierId, transit.CityId, data.CarrierId);
+
+			if(applicationId.HasValue && data.CarrierId != carrierId)
+			{
+				_events.Add(applicationId.Value, EventType.SetCarrier, EventState.Emailing);
+			}
+
+			TransitMapper.Map(transit, data, carrierId);
 
 			_transits.Update(data);
 		}
@@ -37,6 +48,7 @@ namespace Alicargo.Services
 			var data = new TransitData();
 
 			TransitMapper.Map(transit, data, GetCarrier(forsedCarrierId, transit.CityId, null));
+
 
 			var transitId = _transits.Add(data);
 

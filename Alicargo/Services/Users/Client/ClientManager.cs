@@ -40,7 +40,7 @@ namespace Alicargo.Services.Users.Client
 			if(!_permissions.HaveAccessToClient(data))
 				throw new AccessForbiddenException();
 
-			_transits.Update(data.TransitId, transit, null);
+			_transits.Update(data.TransitId, transit, null, null);
 
 			data.BIC = model.BIC;
 			data.Phone = model.Phone;

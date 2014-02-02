@@ -49,7 +49,7 @@ namespace Alicargo.Services.Application
 		{
 			var data = _applications.Get(applicationId);
 
-			_transits.Update(data.TransitId, transit, null);
+			_transits.Update(data.TransitId, transit, null, applicationId);
 
 			var forwarderId = _forwarders.GetByCityOrAny(transit.CityId, data.ForwarderId);
 
