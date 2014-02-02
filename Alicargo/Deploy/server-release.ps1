@@ -22,6 +22,6 @@ Write-Host "Repository has been cloned..."
 
 cd "$newFolder`Deploy\"
 
-.\Scripts\prepare-release-db.ps1 $server $backupLocation $mainDbPrefix $filesDbPrefix $dataFolder $oldVersion $newVersion $poolName
+#.\Scripts\prepare-release-db.ps1 $server $backupLocation $mainDbPrefix $filesDbPrefix $dataFolder $oldVersion $newVersion $poolName
 
 #.\Scripts\prepare-iis.ps1

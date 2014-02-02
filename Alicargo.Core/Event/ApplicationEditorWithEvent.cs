@@ -46,12 +46,6 @@ namespace Alicargo.Core.Event
 
 			_events.Add(applicationId, EventType.ApplicationCreated, EventState.Emailing);
 
-			_events.Add(applicationId, EventType.SetSender, EventState.Emailing);
-
-			_events.Add(applicationId, EventType.SetForwarder, EventState.Emailing);
-
-			_events.Add(applicationId, EventType.SetCarrier, EventState.Emailing);
-
 			return applicationId;
 		}
 

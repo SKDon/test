@@ -2,7 +2,7 @@
 INSERT [dbo].[EmailTemplate] ([Id]) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
 (11), (12), (13), (14), (15), (16), (17), (18), (19), (20),
-(21), (22), (23), (24), (25), (26), (27)
+(21), (22), (23), (24), (25), (26), (27), (28), (29)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
@@ -21,7 +21,9 @@ INSERT [dbo].[EventEmailTemplate]
 (11, 24, 1), -- Calculate
 (12, 25, 0), -- CalculationCanceled
 (13, 26, 1), -- BalanceIncreased
-(14, 27, 1) -- BalanceDecreased
+(14, 27, 1), -- BalanceDecreased
+(15, 28, 1), -- SetSender
+(16, 29, 1) -- SetForwarder
 
 
 INSERT [dbo].[EmailTemplateLocalization]
@@ -256,7 +258,8 @@ Alicargo  srl', 0),
 (22, N'ru', NULL, NULL, 0),
 (23, N'ru', NULL, NULL, 0),
 -- calculate
-(24, N'ru', N'Расчет стоимости заявки {ApplicationDisplay}',
+(24, N'ru', 
+N'Расчет стоимости заявки {ApplicationDisplay}',
 N'Расчет стоимости заявки {ApplicationDisplay}.
 Сальдо: {ClientBalance}€ ({CalculationTimestamp}).
 
@@ -277,8 +280,13 @@ N'Поступление денежных средств: {Money}€{Comment [ (
 Сальдо: {ClientBalance}€ ({Timestamp}).', 0),
 (27, N'ru', N'Списание денежных средств {ClientNic}',
 N'Списание денежных средств: {Money}€{Comment [ ({0}).]} 
-Сальдо: {ClientBalance}€ ({Timestamp}).', 0)
+Сальдо: {ClientBalance}€ ({Timestamp}).', 0),
 
+(28, N'ru', N'Установлен отправитель {SenderName} на заявку {DisplayNumber}',
+N'Установлен отправитель {SenderName} на заявку {DisplayNumber}', 0),
+
+(29, N'ru', N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}',
+N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}', 0)
 
 INSERT [dbo].[StateEmailTemplate]
 ([StateId],	[EmailTemplateId],	[EnableEmailSend],	[UseEventTemplate]) VALUES
@@ -307,13 +315,17 @@ INSERT [dbo].[EventEmailRecipient]
 (1, 11),
 (1, 13),
 (1, 14),
+(1, 15),
+(1, 16),
 -- Sender 2
 (2, 1),
 (2, 4),
 (2, 5),
 (2, 6),
+(2, 15),
 -- Forwarder 4
 (4, 2),
+(4, 16),
 -- Client 5
 (5, 1),
 (5, 2),
@@ -328,5 +340,7 @@ INSERT [dbo].[EventEmailRecipient]
 (5, 11),
 (5, 13),
 (5, 14),
+(5, 15),
+(5, 16)
 -- Carrier
 (6, 2)
