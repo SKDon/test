@@ -5,5 +5,3 @@ param (
 Sqlcmd -S $server -i "create-sp-for-backup-db.sql"
 
 Sqlcmd -S $server -i "create-sp-restore-db.sql"
-
-Sqlcmd -S $server -i "set-initial-data.sql"
