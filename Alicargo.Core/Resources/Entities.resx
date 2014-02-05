@@ -141,9 +141,6 @@
   <data name="Broker" xml:space="preserve">
     <value>Broker</value>
   </data>
-  <data name="CarrierName" xml:space="preserve">
-    <value>Carrier</value>
-  </data>
   <data name="Characteristic" xml:space="preserve">
     <value>Characteristics of the goods</value>
   </data>
@@ -251,9 +248,6 @@
   </data>
   <data name="MethodOfTransit" xml:space="preserve">
     <value>Method of transit</value>
-  </data>
-  <data name="NewCarrierName" xml:space="preserve">
-    <value>Specify another carrier</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Set new password</value>

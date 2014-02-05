@@ -88,8 +88,7 @@
 			{ field: "State", title: $l.Entities_StateName, groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
 			{ field: "DateOfCargoReceiptLocalString", title: $l.Entities_DateOfCargoReceipt, groupable: false, editor: dateEditor, width: "90px", template: "#= DateOfCargoReceiptLocalString == null ? '' : kendo.toString(DateOfCargoReceiptLocalString, 'd') #" },
 			{ field: "DateInStockLocalString", title: $l.Entities_DateInStock, groupable: false, width: "90px" },
-			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true, width: "100px" },
-			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
+			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true, width: "100px" },			
 			{
 				field: "DisplayNumber",
 				title: $l.Entities_DisplayNumber,
@@ -107,9 +106,9 @@
 			valueField,
 			{ field: "SenderName", title: $l.Entities_Sender, groupable: true, width: "100px" },
 			{ field: "ForwarderName", title: $l.Entities_Forwarder, groupable: true, width: "100px" },
+			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
 			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: true, width: "100px" },
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },			
-			{ field: "TransitCarrierName", title: $l.Entities_CarrierName, groupable: false, width: "100px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{
 				field: "AirWaybill",
@@ -155,7 +154,7 @@
 				width: "70px"
 			},
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false },
-			{ field: "TransitCarrierName", title: $l.Entities_CarrierName, groupable: false },
+			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: false },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
@@ -165,7 +164,7 @@
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
 			countField,
 			weightField,
-			{ field: "TransitCarrierName", title: $l.Entities_CarrierName, groupable: false, width: "100px" },
+			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: false, width: "100px" },
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
 			{ field: "TransitDeliveryTypeString", title: $l.Entities_DeliveryType, groupable: false, width: "75px" },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },

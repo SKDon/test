@@ -130,7 +130,7 @@ Alicargo  srl', 0),
 (10, N'ru', N'Alicargo : Заявка #{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCargoReceipt [Предположительная дата получения: {0}]}
-{TransitCarrierName [Перевозчик: {0}]}
+{CarrierName [Перевозчик: {0}]}
 {FactoryName [Производитель: {0}]}
 {FactoryEmail [Email фабрики: {0}]}
 {FactoryPhone [Телефон фабрики: {0}]}
@@ -169,7 +169,7 @@ Alicargo  srl', 0),
 (10, N'en', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCargoReceipt [Предположительная дата получения: {0}]}
-{TransitCarrierName [Перевозчик: {0}]}
+{CarrierName [Перевозчик: {0}]}
 {FactoryName [Производитель: {0}]}
 {FactoryEmail [Email фабрики: {0}]}
 {FactoryPhone [Телефон фабрики: {0}]}
@@ -208,7 +208,7 @@ Alicargo  srl', 0),
 (10, N'it', N'Alicargo : Order#{DisplayNumber}', N'Изменение статуса заявки: {StateName}
 Номер заказа: {DisplayNumber}
 {DateOfCargoReceipt [Предположительная дата получения: {0}]}
-{TransitCarrierName [Перевозчик: {0}]}
+{CarrierName [Перевозчик: {0}]}
 {FactoryName [Производитель: {0}]}
 {FactoryEmail [Email фабрики: {0}]}
 {FactoryPhone [Телефон фабрики: {0}]}

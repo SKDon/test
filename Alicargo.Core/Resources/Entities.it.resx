@@ -189,7 +189,7 @@
   <data name="Address" xml:space="preserve">
     <value>Indirizzo</value>
   </data>
-  <data name="CarrierName" xml:space="preserve">
+  <data name="Carrier" xml:space="preserve">
     <value>Carrier</value>
   </data>
   <data name="City" xml:space="preserve">
@@ -200,9 +200,6 @@
   </data>
   <data name="MethodOfTransit" xml:space="preserve">
     <value>Il metodo di transito</value>
-  </data>
-  <data name="NewCarrierName" xml:space="preserve">
-    <value>Specificare un altro vettore</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Telefono</value>

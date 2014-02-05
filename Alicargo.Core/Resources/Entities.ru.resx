@@ -189,9 +189,6 @@
   <data name="Address" xml:space="preserve">
     <value>Адрес</value>
   </data>
-  <data name="CarrierName" xml:space="preserve">
-    <value>Перевозчик</value>
-  </data>
   <data name="City" xml:space="preserve">
     <value>Город</value>
   </data>
@@ -200,9 +197,6 @@
   </data>
   <data name="MethodOfTransit" xml:space="preserve">
     <value>Способ транзита</value>
-  </data>
-  <data name="NewCarrierName" xml:space="preserve">
-    <value>Указать другого перевозчика</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Телефон</value>

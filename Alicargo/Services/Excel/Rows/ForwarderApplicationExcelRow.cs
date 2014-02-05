@@ -45,7 +45,7 @@ namespace Alicargo.Services.Excel.Rows
 			get { return _application.Weight; }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "CarrierName")]
+		[DisplayNameLocalized(typeof(Entities), "Carrier")]
 		public string TransitCarrierName
 		{
 			get { return _application.TransitCarrierName; }

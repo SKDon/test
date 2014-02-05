@@ -196,15 +196,6 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Carrier.
-        /// </summary>
-        public static string CarrierName {
-            get {
-                return ResourceManager.GetString("CarrierName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Characteristics of the goods.
         /// </summary>
         public static string Characteristic {
@@ -714,15 +705,6 @@ namespace Alicargo.Core.Resources {
         public static string MethodOfTransit {
             get {
                 return ResourceManager.GetString("MethodOfTransit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Specify another carrier.
-        /// </summary>
-        public static string NewCarrierName {
-            get {
-                return ResourceManager.GetString("NewCarrierName", resourceCulture);
             }
         }
         
