@@ -54,7 +54,7 @@ namespace Alicargo.Tests.Services.Application
 		[TestMethod]
 		public void Test_ApplicationGrouper_GroupWithAirWaybill()
 		{
-			_awbRepository.Setup(x => x.GetAggregate(_awbIds))
+			_awbRepository.Setup(x => x.GetAggregate(_awbIds, null, null, null, null))
 				.Returns(_awbIds.Select(x => new AirWaybillAggregate
 				{
 					AirWaybillId = x,
@@ -102,7 +102,7 @@ namespace Alicargo.Tests.Services.Application
 			var weidht = _fixture.Create<float>();
 			var value = _fixture.Create<decimal>();
 			var volume = _fixture.Create<float>();
-			_awbRepository.Setup(x => x.GetAggregate(_awbIds)).Returns(new AirWaybillAggregate[0]);
+			_awbRepository.Setup(x => x.GetAggregate(_awbIds, null, null, null, null)).Returns(new AirWaybillAggregate[0]);
 			_awbRepository.Setup(x => x.GetTotalCountWithouAwb()).Returns(count);
 			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb()).Returns(weidht);
 			_awbRepository.Setup(x => x.GetTotalValueWithouAwb()).Returns(value);

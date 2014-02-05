@@ -76,7 +76,7 @@ namespace Alicargo.DataAccess.Repositories
 		public AirWaybillData[] GetRange(int take, long skip, long? brokerId = null)
 		{
 			var airWaybills = _context.AirWaybills.OrderByDescending(x => x.CreationTimestamp).AsQueryable();
-			if (brokerId.HasValue)
+			if(brokerId.HasValue)
 			{
 				airWaybills = airWaybills.Where(x => x.BrokerId == brokerId.Value);
 			}
@@ -86,23 +86,26 @@ namespace Alicargo.DataAccess.Repositories
 				.ToArray();
 		}
 
-		public AirWaybillAggregate[] GetAggregate(params long[] ids)
+		public AirWaybillAggregate[] GetAggregate(long[] awbIds, long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null)
 		{
-			var waybills = ids.Length == 0
+			var waybills = awbIds.Length == 0
 				? _context.AirWaybills.AsQueryable()
-				: _context.AirWaybills.Where(x => ids.Contains(x.Id));
+				: _context.AirWaybills.Where(x => awbIds.Contains(x.Id));
 
 			var data = waybills.Select(x => new
 			{
 				x.Id,
 				x.StateId,
-				Data = x.Applications.Select(y => new
-				{
-					y.Weight,
-					y.Value,
-					y.Count,
-					y.Volume
-				})
+				Data = x.Applications
+					//.Where(y => !forwarderId.HasValue || y.ForwarderId == forwarderId.Value)
+					.Select(y => new
+					{
+						y.Weight,
+						y.Value,
+						y.Count,
+						y.Volume
+					})
 			}).ToDictionary(x => new { x.Id, x.StateId }, x => x.Data.ToArray());
 
 			return data.Select(x => new AirWaybillAggregate
@@ -243,7 +246,7 @@ namespace Alicargo.DataAccess.Repositories
 		private static void Map(AirWaybillData @from, AirWaybill to,
 			byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
 		{
-			if (to.Id == 0)
+			if(to.Id == 0)
 			{
 				to.Id = @from.Id;
 				to.CreationTimestamp = @from.CreationTimestamp;

@@ -7,7 +7,6 @@ using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Application;
-using Alicargo.ViewModels.Helpers;
 
 namespace Alicargo.Services.Application
 {

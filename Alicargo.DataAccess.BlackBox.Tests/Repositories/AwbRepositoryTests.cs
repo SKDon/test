@@ -87,7 +87,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			applications.SetAirWaybill(app22, awbId2());
 			_context.UnitOfWork.SaveChanges();
 
-			var aggregates = _awbRepository.GetAggregate(awbId1(), awbId2());
+			var aggregates = _awbRepository.GetAggregate(new[] { awbId1(), awbId2() });
 
 			aggregates.Count().ShouldBeEquivalentTo(2);
 
