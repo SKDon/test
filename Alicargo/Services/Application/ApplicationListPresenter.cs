@@ -46,13 +46,15 @@ namespace Alicargo.Services.Application
 					Total = total,
 				};
 
-			return GetGroupedResult(groups, applications, total);
+			return GetGroupedResult(groups, applications, total, clientId, senderId, forwarderId, carrierId);
 		}
 
 		private ApplicationListCollection GetGroupedResult(IEnumerable<Order> groups, ApplicationListItem[] applications,
-			long total)
+			long total, long? clientId = null, long? senderId = null, long? forwarderId = null, long? carrierId = null)
 		{
-			var applicationGroups = _grouper.Group(applications, groups.Select(x => x.OrderType).ToArray());
+			var orderTypes = groups.Select(x => x.OrderType).ToArray();
+
+			var applicationGroups = _grouper.Group(applications, orderTypes, clientId, senderId, forwarderId, carrierId);
 
 			OrderBottomGroupByClient(applicationGroups);
 

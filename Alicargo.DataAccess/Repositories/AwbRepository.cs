@@ -98,7 +98,11 @@ namespace Alicargo.DataAccess.Repositories
 				x.Id,
 				x.StateId,
 				Data = x.Applications
-					//.Where(y => !forwarderId.HasValue || y.ForwarderId == forwarderId.Value)
+					.Where(y
+						=> (!forwarderId.HasValue || y.ForwarderId == forwarderId)
+						&& (!clientId.HasValue || y.ClientId == clientId)
+						&& (!senderId.HasValue || y.SenderId == senderId)
+						&& (!carrierId.HasValue || y.Transit.CarrierId == carrierId))
 					.Select(y => new
 					{
 						y.Weight,

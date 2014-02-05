@@ -19,9 +19,9 @@ namespace Alicargo.Services.Application
 		private Dictionary<long, AirWaybillData> _airWaybills;
 		private Dictionary<long, AirWaybillAggregate> _awbAggregates;
 		private int _countWithouAwb;
-		private float _weightWithouAwb;
 		private decimal _valueWithouAwb;
 		private float _volumeWithouAwb;
+		private float _weightWithouAwb;
 
 		public ApplicationGrouper(IAwbRepository awbRepository)
 		{
@@ -29,22 +29,21 @@ namespace Alicargo.Services.Application
 
 			_map = new Dictionary<OrderType, OrderFunction>
 			{
-				{OrderType.AirWaybill, ByAirWaybill},
-				{OrderType.State, ByState},
-				{OrderType.ClientNic, ByClientNic},
-				{OrderType.LegalEntity, ByLegalEntity}
+				{ OrderType.AirWaybill, ByAirWaybill },
+				{ OrderType.State, ByState },
+				{ OrderType.ClientNic, ByClientNic },
+				{ OrderType.LegalEntity, ByLegalEntity }
 			};
 		}
 
-		public ApplicationGroup[] Group(ApplicationListItem[] applications, OrderType[] groups)
+		public ApplicationGroup[] Group(ApplicationListItem[] applications, OrderType[] groups, long? clientId = null,
+			long? senderId = null, long? forwarderId = null, long? carrierId = null)
 		{
-			var awbIds = applications.Select(x => x.AirWaybillId ?? 0)
-				.Distinct()
-				.ToArray();
+			var awbIds = applications.Select(x => x.AirWaybillId ?? 0).Distinct().ToArray();
 
-			// todo: 2. need to pass current sender or forwarder or client id to the functions to get aggregate information correctry
 			_airWaybills = _awbRepository.Get(awbIds).ToDictionary(x => x.Id, x => x);
-			_awbAggregates = _awbRepository.GetAggregate(awbIds).ToDictionary(x => x.AirWaybillId, x => x);
+			_awbAggregates = _awbRepository.GetAggregate(awbIds, clientId, senderId, forwarderId, carrierId)
+				.ToDictionary(x => x.AirWaybillId, x => x);
 			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb() ?? 0;
 			_weightWithouAwb = _awbRepository.GetTotalWeightWithouAwb() ?? 0;
 			_valueWithouAwb = _awbRepository.GetTotalValueWithouAwb();
@@ -53,13 +52,15 @@ namespace Alicargo.Services.Application
 			return GroupImpl(applications, groups);
 		}
 
-		private ApplicationGroup[] GroupImpl(IEnumerable<ApplicationListItem> applications,
-			IReadOnlyCollection<OrderType> groups)
+		private ApplicationGroup[] ByAirWaybill(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
 		{
-			var current = groups.First();
-			var rest = groups.Except(new[] { current }).ToArray();
-
-			return _map[current](applications, rest);
+			return applications
+				.GroupBy(x => x.AirWaybillId ?? 0)
+				.Select(grouping => GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
+					awb => _airWaybills.ContainsKey(awb.Key)
+						? AwbHelper.GetAirWaybillDisplay(_airWaybills[awb.Key])
+						: ""))
+				.ToArray();
 		}
 
 		private ApplicationGroup[] ByClientNic(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
@@ -89,17 +90,6 @@ namespace Alicargo.Services.Application
 				.ToArray();
 		}
 
-		private ApplicationGroup[] ByAirWaybill(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
-		{
-			return applications
-				.GroupBy(x => x.AirWaybillId ?? 0)
-				.Select(grouping => GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
-					awb => _airWaybills.ContainsKey(awb.Key)
-						? AwbHelper.GetAirWaybillDisplay(_airWaybills[awb.Key])
-						: ""))
-				.ToArray();
-		}
-
 		private ApplicationGroup GetApplicationGroup<T>(
 			IGrouping<T, ApplicationListItem> grouping,
 			IReadOnlyCollection<OrderType> orders,
@@ -111,10 +101,10 @@ namespace Alicargo.Services.Application
 			decimal value;
 			float volume;
 
-			if (field == OrderHelper.AwbFieldName)
+			if(field == OrderHelper.AwbFieldName)
 			{
 				var id = (long)(object)grouping.Key;
-				if (_awbAggregates.ContainsKey(id))
+				if(_awbAggregates.ContainsKey(id))
 				{
 					count = _awbAggregates[id].TotalCount;
 					weight = _awbAggregates[id].TotalWeight;
@@ -147,6 +137,15 @@ namespace Alicargo.Services.Application
 					? GroupImpl(grouping.ToArray(), orders).Cast<object>().ToArray()
 					: grouping.Cast<object>().ToArray()
 			};
+		}
+
+		private ApplicationGroup[] GroupImpl(IEnumerable<ApplicationListItem> applications,
+			IReadOnlyCollection<OrderType> groups)
+		{
+			var current = groups.First();
+			var rest = groups.Except(new[] { current }).ToArray();
+
+			return _map[current](applications, rest);
 		}
 	}
 }
