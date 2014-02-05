@@ -36,26 +36,32 @@ namespace Alicargo.BlackBox.Tests.Services.Application
 		[TestMethod]
 		public void Test_FilterByCargoReceivedDaysShow()
 		{
-			var application = _presenter.List(TwoLetterISOLanguageName.English).Data
-				.First(x => x.StateId != TestConstants.CargoReceivedStateId);
+			long applicationId;
+			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			{
+				applicationId = connection.Query<long>(
+					"select TOP 1 [Id] from [dbo].[Application] where [StateId] <> @StateId and [ForwarderId] = @ForwarderId",
+					new { StateId = TestConstants.CargoReceivedStateId, ForwarderId = TestConstants.TestForwarderId1 }).First();
+			}
 
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				connection.Execute(
 					"update [dbo].[Application] set [StateId] = @StateId, [StateChangeTimestamp] = GETUTCDATE() where [Id] = @Id",
-					new { StateId = TestConstants.CargoReceivedStateId, application.Id });
+					new { StateId = TestConstants.CargoReceivedStateId, Id = applicationId });
 			}
 
-			Assert.IsTrue(_presenter.List(TwoLetterISOLanguageName.English)
-				.Data.Any(x => x.Id == application.Id && x.StateId == TestConstants.CargoReceivedStateId));
+			Assert.IsTrue(_presenter.List(TwoLetterISOLanguageName.English, forwarderId: TestConstants.TestForwarderId1)
+				.Data.Any(x => x.Id == applicationId && x.StateId == TestConstants.CargoReceivedStateId));
 
 			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				connection.Execute("update [dbo].[Application] set [StateChangeTimestamp] = GETUTCDATE() - 20 where [Id] = @Id",
-					new { application.Id });
+					new { Id = applicationId });
 			}
 
-			Assert.IsFalse(_presenter.List(TwoLetterISOLanguageName.English).Data.Any(x => x.Id == application.Id));
+			Assert.IsFalse(_presenter.List(TwoLetterISOLanguageName.English, forwarderId: TestConstants.TestForwarderId1)
+				.Data.Any(x => x.Id == applicationId));
 		}
 	}
 }

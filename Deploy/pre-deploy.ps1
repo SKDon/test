@@ -28,6 +28,4 @@ git commit --all -m "Deploy at $date" --quiet
 
 git push -f --all --quiet
 
-cd "$sourcePath\Deploy"
-
 cmd /c pause | out-null

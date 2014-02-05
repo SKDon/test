@@ -15,8 +15,8 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		[TestMethod]
 		public void Test_List_ByAdmin()
 		{
-			using(
-				var context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString))
+			using(var context = new CompositionHelper(
+				Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString))
 			{
 				var controller = context.Kernel.Get<ApplicationListController>();
 
@@ -33,9 +33,8 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		[TestMethod]
 		public void Test_List_ByCarrier()
 		{
-			using(
-				var context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString,
-					RoleType.Carrier))
+			using(var context = new CompositionHelper(
+				Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString, RoleType.Carrier))
 			{
 				var controller = context.Kernel.Get<ApplicationListController>();
 
@@ -43,7 +42,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 
 				var data = (ApplicationListCollection)result.Data;
 
-				data.Total.ShouldBeEquivalentTo(6);
+				data.Total.ShouldBeEquivalentTo(10);
 
 				data.Data.Should().HaveCount(5);
 			}
@@ -52,9 +51,8 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		[TestMethod]
 		public void Test_List_ByForwarder()
 		{
-			using(
-				var context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString,
-					RoleType.Forwarder))
+			using(var context = new CompositionHelper(
+				Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString, RoleType.Forwarder))
 			{
 				var controller = context.Kernel.Get<ApplicationListController>();
 
