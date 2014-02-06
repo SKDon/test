@@ -6,4 +6,4 @@
 	@Entities.AWB:
 	@ViewBag.AWB
 </h3>
-@Html.EditPage(Url.Action(MVC.Broker.AWB()), Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))
+@Html.EditPage(Url.Action(MVC.BrokerAwb.Edit()), Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))

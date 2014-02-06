@@ -20,12 +20,12 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers.User
+namespace Alicargo.Controllers.Awb
 {
-    public partial class BrokerController
+    public partial class BrokerAwbController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected BrokerController(Dummy d) { }
+        protected BrokerAwbController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -43,19 +43,19 @@ namespace Alicargo.Controllers.User
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult AWB()
+        public virtual System.Web.Mvc.ViewResult Edit()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.AWB);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public BrokerController Actions { get { return MVC.Broker; } }
+        public BrokerAwbController Actions { get { return MVC.BrokerAwb; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Broker";
+        public readonly string Name = "BrokerAwb";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Broker";
+        public const string NameConst = "BrokerAwb";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -63,21 +63,21 @@ namespace Alicargo.Controllers.User
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string AWB = "AWB";
+            public readonly string Edit = "Edit";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string AWB = "AWB";
+            public const string Edit = "Edit";
         }
 
 
-        static readonly ActionParamsClass_AWB s_params_AWB = new ActionParamsClass_AWB();
+        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_AWB AWBParams { get { return s_params_AWB; } }
+        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_AWB
+        public class ActionParamsClass_Edit
         {
             public readonly string id = "id";
             public readonly string model = "model";
@@ -92,9 +92,9 @@ namespace Alicargo.Controllers.User
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string AWB = "AWB";
+                public readonly string Edit = "Edit";
             }
-            public readonly string AWB = "~/Views/Broker/AWB.cshtml";
+            public readonly string Edit = "~/Views/BrokerAwb/Edit.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -106,28 +106,28 @@ namespace Alicargo.Controllers.User
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_BrokerController : Alicargo.Controllers.User.BrokerController
+    public partial class T4MVC_BrokerAwbController : Alicargo.Controllers.Awb.BrokerAwbController
     {
-        public T4MVC_BrokerController() : base(Dummy.Instance) { }
+        public T4MVC_BrokerAwbController() : base(Dummy.Instance) { }
 
-        partial void AWBOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
-        public override System.Web.Mvc.ViewResult AWB(long id)
+        public override System.Web.Mvc.ViewResult Edit(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.AWB);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            AWBOverride(callInfo, id);
+            EditOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void AWBOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model);
 
-        public override System.Web.Mvc.ActionResult AWB(long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model)
+        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AWB);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            AWBOverride(callInfo, id, model);
+            EditOverride(callInfo, id, model);
             return callInfo;
         }
 

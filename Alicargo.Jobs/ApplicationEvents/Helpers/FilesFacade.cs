@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
 using Alicargo.Utilities;
@@ -12,17 +11,17 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 	public sealed class FilesFacade : IFilesFacade
 	{
 		private readonly ISerializer _serializer;
-		private readonly IAwbRepository _awbs;
-		private readonly IApplicationFileRepository _files;
+		private readonly IAwbFileRepository _awbFiles;
+		private readonly IApplicationFileRepository _applicationFiles;
 
 		public FilesFacade(
 			ISerializer serializer,
-			IAwbRepository awbs,
-			IApplicationFileRepository files)
+			IAwbFileRepository awbFiles,
+			IApplicationFileRepository applicationFiles)
 		{
 			_serializer = serializer;
-			_awbs = awbs;
-			_files = files;
+			_awbFiles = awbFiles;
+			_applicationFiles = applicationFiles;
 		}
 
 		public FileHolder[] GetFiles(long applicationId, long? awbId, EventType type, byte[] data)
@@ -64,10 +63,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			var types = Enum.GetValues(typeof(ApplicationFileType));
 			foreach(ApplicationFileType type in types)
 			{
-				var names = _files.GetNames(applicationId, type);
+				var names = _applicationFiles.GetNames(applicationId, type);
 				foreach(var name in names)
 				{
-					var holder = _files.Get(name.Key);
+					var holder = _applicationFiles.Get(name.Key);
 
 					files.Add(holder);
 				}
@@ -75,8 +74,8 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 			if(awbId.HasValue)
 			{
-				var gtdFile = _awbs.GetGTDFile(awbId.Value);
-				var gtdAdditionalFile = _awbs.GTDAdditionalFile(awbId.Value);
+				var gtdFile = _awbFiles.GetGTDFile(awbId.Value);
+				var gtdAdditionalFile = _awbFiles.GTDAdditionalFile(awbId.Value);
 
 				if(gtdFile != null) files.Add(gtdFile);
 				if(gtdAdditionalFile != null) files.Add(gtdAdditionalFile);

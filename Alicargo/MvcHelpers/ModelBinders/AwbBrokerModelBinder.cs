@@ -25,6 +25,13 @@ namespace Alicargo.MvcHelpers.ModelBinders
 					model.GTDFile = bytes;
 				});
 
+			if(model.DrawFile == null && model.DrawFileName == null)
+				request.ReadFile("DrawFile", (name, bytes) =>
+				{
+					model.DrawFileName = name;
+					model.DrawFile = bytes;
+				});
+
 			if (model.GTDAdditionalFile == null && model.GTDAdditionalFileName == null)
 				request.ReadFile("GTDAdditionalFile", (name, bytes) =>
 				{

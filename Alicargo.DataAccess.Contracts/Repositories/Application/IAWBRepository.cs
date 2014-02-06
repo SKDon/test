@@ -1,7 +1,7 @@
 ﻿using System;
 using Alicargo.DataAccess.Contracts.Contracts;
 
-namespace Alicargo.DataAccess.Contracts.Repositories
+namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
 	public interface IAwbRepository
 	{
@@ -10,18 +10,14 @@ namespace Alicargo.DataAccess.Contracts.Repositories
 
 		long Count(long? brokerId = null);
 		void Delete(long id);
-		FileHolder GTDAdditionalFile(long id);
 
 		AirWaybillData[] Get(params long[] ids);
-		FileHolder GetAWBFile(long id);
-
+		
 		AirWaybillAggregate[] GetAggregate(long[] awbIds, long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null);
 
 		string[] GetClientEmails(long id);
-		FileHolder GetGTDFile(long id);
-		FileHolder GetInvoiceFile(long id);
-		FileHolder GetPackingFile(long id);
+		
 		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null);
 
 		int? GetTotalCountWithouAwb();

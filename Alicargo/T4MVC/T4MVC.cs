@@ -30,6 +30,8 @@ public static class MVC
     public static Alicargo.Controllers.Application.ClientApplicationController ClientApplication = new Alicargo.Controllers.Application.T4MVC_ClientApplicationController();
     public static Alicargo.Controllers.Application.SenderApplicationController SenderApplication = new Alicargo.Controllers.Application.T4MVC_SenderApplicationController();
     public static Alicargo.Controllers.Awb.AirWaybillController AirWaybill = new Alicargo.Controllers.Awb.T4MVC_AirWaybillController();
+    public static Alicargo.Controllers.Awb.AwbFileController AwbFile = new Alicargo.Controllers.Awb.T4MVC_AwbFileController();
+    public static Alicargo.Controllers.Awb.BrokerAwbController BrokerAwb = new Alicargo.Controllers.Awb.T4MVC_BrokerAwbController();
     public static Alicargo.Controllers.Awb.SenderAwbController SenderAwb = new Alicargo.Controllers.Awb.T4MVC_SenderAwbController();
     public static Alicargo.Controllers.Calculation.BalanceController Balance = new Alicargo.Controllers.Calculation.T4MVC_BalanceController();
     public static Alicargo.Controllers.Calculation.CalculationController Calculation = new Alicargo.Controllers.Calculation.T4MVC_CalculationController();
@@ -46,7 +48,6 @@ public static class MVC
     public static Alicargo.Controllers.StateSettingsController StateSettings = new Alicargo.Controllers.T4MVC_StateSettingsController();
     public static Alicargo.Controllers.TransitController Transit = new Alicargo.Controllers.T4MVC_TransitController();
     public static Alicargo.Controllers.User.AuthenticationController Authentication = new Alicargo.Controllers.User.T4MVC_AuthenticationController();
-    public static Alicargo.Controllers.User.BrokerController Broker = new Alicargo.Controllers.User.T4MVC_BrokerController();
     public static Alicargo.Controllers.User.CarrierController Carrier = new Alicargo.Controllers.User.T4MVC_CarrierController();
     public static Alicargo.Controllers.User.ClientController Client = new Alicargo.Controllers.User.T4MVC_ClientController();
     public static Alicargo.Controllers.User.ForwarderController Forwarder = new Alicargo.Controllers.User.T4MVC_ForwarderController();

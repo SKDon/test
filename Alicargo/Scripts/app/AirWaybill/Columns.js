@@ -93,7 +93,7 @@
 			title: $a.Localization.Entities_CustomCost, format: "{0:n0}"
 		});
 
-		addEditButton(columns, $a.Urls.Broker_AWB);
+		addEditButton(columns, $a.Urls.BrokerAwb_Edit);
 	}
 
 	$a.Awb = (function ($awb) {

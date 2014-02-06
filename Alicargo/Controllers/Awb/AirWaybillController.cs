@@ -6,9 +6,8 @@ using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
-using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
@@ -219,45 +218,6 @@ namespace Alicargo.Controllers.Awb
 			BindBag(id);
 
 			return View(model);
-		}
-
-		#endregion
-
-		#region Files
-
-		public virtual FileResult AWBFile(long id)
-		{
-			var file = _awbs.GetAWBFile(id);
-
-			return file.GetFileResult();
-		}
-
-		public virtual FileResult GTDAdditionalFile(long id)
-		{
-			var file = _awbs.GTDAdditionalFile(id);
-
-			return file.GetFileResult();
-		}
-
-		public virtual FileResult GTDFile(long id)
-		{
-			var file = _awbs.GetGTDFile(id);
-
-			return file.GetFileResult();
-		}
-
-		public virtual FileResult InvoiceFile(long id)
-		{
-			var file = _awbs.GetInvoiceFile(id);
-
-			return file.GetFileResult();
-		}
-
-		public virtual FileResult PackingFile(long id)
-		{
-			var file = _awbs.GetPackingFile(id);
-
-			return file.GetFileResult();
 		}
 
 		#endregion

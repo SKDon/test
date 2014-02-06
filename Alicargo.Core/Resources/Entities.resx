@@ -477,4 +477,7 @@
   <data name="Carrier" xml:space="preserve">
     <value>Carrier</value>
   </data>
+  <data name="Draw" xml:space="preserve">
+    <value>Draw</value>
+  </data>
 </root>

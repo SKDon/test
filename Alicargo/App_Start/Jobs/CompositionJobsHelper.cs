@@ -183,7 +183,7 @@ namespace Alicargo.App_Start.Jobs
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(filesExecutor);
-			var filesFasade = new FilesFacade(serializer, awbs, files);
+			var filesFasade = new FilesFacade(serializer, new AwbFileRepository(unitOfWork), files);
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var countries = new CountryRepository(mainExecutor);
 			var cities = new CityRepository(mainExecutor);

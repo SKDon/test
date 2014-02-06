@@ -21,6 +21,12 @@
 			<a href="@Url.Action(MVC.AirWaybill.GTDAdditionalFile())/#= Id #">#= GTDAdditionalFileName #</a>
 		</p>
 		# } #
+		# if(DrawFileName != null){ #
+		<p>
+			<span>@Entities.Draw:</span>
+			<a href="@Url.Action(MVC.AirWaybill.GTDAdditionalFile())/#= Id #">#= DrawFileName #</a>
+		</p>
+		# } #
 		# if(PackingFileName != null){ #
 		<p>
 			<span>@Entities.Packing:</span>

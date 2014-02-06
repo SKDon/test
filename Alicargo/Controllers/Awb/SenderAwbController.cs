@@ -21,7 +21,6 @@ namespace Alicargo.Controllers.Awb
 		private readonly IBrokerRepository _brokers;
 		private readonly IStateConfig _stateConfig;
 
-
 		public SenderAwbController(
 			IAwbUpdateManager awbUpdateManager,
 			IAwbManager awbManager,

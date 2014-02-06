@@ -157,6 +157,7 @@
     <Compile Include="Controllers\Application\ApplicationListController.cs" />
     <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\Application\ClientApplicatonController.cs" />
+    <Compile Include="Controllers\Awb\AwbFileController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
@@ -202,7 +203,7 @@
     <Compile Include="App_Start\CompositionRootHelper.cs" />
     <Compile Include="App_Start\Jobs\CompositionJobsHelper.cs" />
     <Compile Include="Controllers\User\AuthenticationController.cs" />
-    <Compile Include="Controllers\User\BrokerController.cs" />
+    <Compile Include="Controllers\Awb\BrokerAwbController.cs" />
     <Compile Include="Controllers\Calculation\CalculationController.cs" />
     <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\Awb\SenderAwbController.cs" />
@@ -324,10 +325,13 @@
     <Compile Include="T4MVC\AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\AwbFileController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\BalanceController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="T4MVC\BrokerController.generated.cs">
+    <Compile Include="T4MVC\BrokerAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\CalculationController.generated.cs">
@@ -683,8 +687,8 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\EditorTemplates\UserModel.cshtml" />
     <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
-    <Content Include="Views\Broker\AWB.cshtml" />
-    <Content Include="Views\Broker\EditorTemplates\AwbBrokerModel.cshtml" />
+    <Content Include="Views\BrokerAwb\Edit.cshtml" />
+    <Content Include="Views\BrokerAwb\EditorTemplates\AwbBrokerModel.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\SenderApplication\Edit.cshtml" />
     <Content Include="Views\SenderApplication\EditorTemplates\ApplicationSenderModel.cshtml" />

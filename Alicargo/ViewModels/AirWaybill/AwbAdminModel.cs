@@ -68,6 +68,10 @@ namespace Alicargo.ViewModels.AirWaybill
 		public byte[] AWBFile { get; set; }
 		public string AWBFileName { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "Draw")]
+		public byte[] DrawFile { get; set; }
+		public string DrawFileName { get; set; }
+
 		#endregion
 	}
 }

@@ -4,21 +4,21 @@ using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
-using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.AirWaybill;
 using Resources;
 
-namespace Alicargo.Controllers.User
+namespace Alicargo.Controllers.Awb
 {
-	public partial class BrokerController : Controller
+	public partial class BrokerAwbController : Controller
 	{
 		private readonly IAwbRepository _awbRepository;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IStateConfig _stateConfig;
 
-		public BrokerController(
+		public BrokerAwbController(
 			IStateConfig stateConfig,
 			IAwbRepository awbRepository,
 			IAwbUpdateManager awbUpdateManager)
@@ -28,26 +28,18 @@ namespace Alicargo.Controllers.User
 			_awbUpdateManager = awbUpdateManager;
 		}
 
-		[Access(RoleType.Broker), HttpGet]
-		public virtual ViewResult AWB(long id)
+		[HttpGet]
+		[Access(RoleType.Broker)]
+		public virtual ViewResult Edit(long id)
 		{
 			var data = _awbRepository.Get(id).First();
 
-			if (data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
+			if(data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
 			{
-				return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
+				return View("Message", (object)string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
-			var model = Map(data);
-
-			BindBag(data);
-
-			return View(model);
-		}
-
-		private static AwbBrokerModel Map(AirWaybillData data)
-		{
-			return new AwbBrokerModel
+			var model = new AwbBrokerModel
 			{
 				GTD = data.GTD,
 				GTDAdditionalFileName = data.GTDAdditionalFileName,
@@ -61,42 +53,49 @@ namespace Alicargo.Controllers.User
 				BrokerCost = data.BrokerCost,
 				CustomCost = data.CustomCost
 			};
+
+			BindBag(data);
+
+			return View(model);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Broker)]
+		public virtual ActionResult Edit(long id, AwbBrokerModel model)
+		{
+			try
+			{
+				if(ModelState.IsValid)
+				{
+					_awbUpdateManager.Update(id, model);
+
+					return RedirectToAction(MVC.BrokerAwb.Edit(id));
+				}
+
+				var data = _awbRepository.Get(id).First();
+
+				BindBag(data);
+
+				return View(model);
+			}
+			catch(UnexpectedStateException ex)
+			{
+				if(ex.StateId == _stateConfig.CargoIsCustomsClearedStateId)
+				{
+					var data = _awbRepository.Get(id).First();
+
+					return View("Message", (object)string.Format(Pages.CantEditAirWaybill, data.Bill));
+				}
+
+				throw;
+			}
 		}
 
 		private void BindBag(AirWaybillData data)
 		{
 			ViewBag.AWB = data.Bill;
+
 			ViewBag.AwbId = data.Id;
-		}
-
-		[Access(RoleType.Broker), HttpPost]
-		public virtual ActionResult AWB(long id, AwbBrokerModel model)
-		{
-			if (!ModelState.IsValid)
-			{
-				var data = _awbRepository.Get(id).First();
-				BindBag(data);
-
-				return View(model);
-			}
-
-			try
-			{
-				_awbUpdateManager.Update(id, model);
-			}
-			catch (UnexpectedStateException ex)
-			{
-				if (ex.StateId == _stateConfig.CargoIsCustomsClearedStateId)
-				{
-					var data = _awbRepository.Get(id).First();
-
-					return View("Message", (object) string.Format(Pages.CantEditAirWaybill, data.Bill));
-				}
-
-				throw;
-			}
-
-			return RedirectToAction(MVC.Broker.AWB(id));
 		}
 	}
 }

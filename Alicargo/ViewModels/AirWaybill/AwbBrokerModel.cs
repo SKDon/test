@@ -24,6 +24,10 @@ namespace Alicargo.ViewModels.AirWaybill
 		public byte[] PackingFile { get; set; }
 		public string PackingFileName { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "Draw")]
+		public byte[] DrawFile { get; set; }
+		public string DrawFileName { get; set; }
+
 		[DisplayNameLocalized(typeof(Entities), "CustomCost")]
 		public decimal? CustomCost { get; set; }
 

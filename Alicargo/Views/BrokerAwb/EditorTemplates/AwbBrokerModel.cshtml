@@ -1,7 +1,6 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.AirWaybill.AwbBrokerModel
-
 <div class="row">
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.GTD)
@@ -18,28 +17,34 @@
 	@Pages.Files
 </h4>
 <div class="row">
-	<div class="span3">
+	<div class="span2">
 		@Html.LabelFor(model => model.GTDFile)
 		@Helpers.FileUploader(@Html.IdFor(x => x.GTDFile).ToHtmlString(), Model != null
 			? Model.GTDFileName
 			: null)
 	</div>
-	<div class="span3">
+	<div class="span2">
 		@Html.LabelFor(model => model.GTDAdditionalFile)
 		@Helpers.FileUploader(@Html.IdFor(x => x.GTDAdditionalFile).ToHtmlString(), Model != null
 			? Model.GTDAdditionalFileName
 			: null)
 	</div>
-	<div class="span3">
+	<div class="span2">
 		@Html.LabelFor(x => x.InvoiceFile)
 		@Helpers.FileUploader(@Html.IdFor(x => x.InvoiceFile).ToHtmlString(), Model != null
 			? Model.InvoiceFileName
 			: null)
 	</div>
-	<div class="span3">
+	<div class="span2">
 		@Html.LabelFor(x => x.PackingFile)
 		@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(), Model != null
 			? Model.PackingFileName
+			: null)
+	</div>
+	<div class="span2">
+		@Html.LabelFor(model => model.DrawFile)
+		@Helpers.FileUploader(@Html.IdFor(x => x.DrawFile).ToHtmlString(), Model != null
+			? Model.DrawFileName
 			: null)
 	</div>
 </div>

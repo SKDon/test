@@ -3,8 +3,7 @@ using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.DataAccess.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
@@ -17,7 +16,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	[TestClass]
 	public class AwbRepositoryTests
 	{
-		private IAwbRepository _awbRepository;
+		private IAwbRepository _awbs;
+		private IAwbFileRepository _files;
 		private DbTestContext _context;
 		private Fixture _fixture;
 
@@ -33,19 +33,20 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_awbRepository = new AwbRepository(_context.UnitOfWork);
+			_awbs = new AwbRepository(_context.UnitOfWork);
+			_files = new AwbFileRepository(_context.UnitOfWork);
 		}
 
 		[TestMethod]
 		
 		public void Test_AwbRepository_Count_GetRange()
 		{
-			var airWaybillDatas = _awbRepository.Get();
-			var count = _awbRepository.Count();
+			var airWaybillDatas = _awbs.Get();
+			var count = _awbs.Count();
 
 			Assert.AreEqual(airWaybillDatas.Length, count);
 
-			var range = _awbRepository.GetRange((int)count, 0);
+			var range = _awbs.GetRange((int)count, 0);
 
 			airWaybillDatas.ShouldBeEquivalentTo(range);
 		}
@@ -56,10 +57,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var data = CreateTestAirWaybill();
 
-			_awbRepository.Delete(data.Id);
+			_awbs.Delete(data.Id);
 			_context.UnitOfWork.SaveChanges();
 
-			_awbRepository.Get(data.Id).Count().ShouldBeEquivalentTo(0);
+			_awbs.Get(data.Id).Count().ShouldBeEquivalentTo(0);
 		}
 
 		[TestMethod]
@@ -71,8 +72,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data21 = CreateApplicationData(TestConstants.TestClientId1);
 			var data22 = CreateApplicationData(TestConstants.TestClientId1);
 
-			var awbId1 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
-			var awbId2 = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
+			var awbId1 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null);
+			var awbId2 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null);
 			_context.UnitOfWork.SaveChanges();
 
 			var applications = new ApplicationEditor(_context.UnitOfWork);
@@ -87,7 +88,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			applications.SetAirWaybill(app22, awbId2());
 			_context.UnitOfWork.SaveChanges();
 
-			var aggregates = _awbRepository.GetAggregate(new[] { awbId1(), awbId2() });
+			var aggregates = _awbs.GetAggregate(new[] { awbId1(), awbId2() });
 
 			aggregates.Count().ShouldBeEquivalentTo(2);
 
@@ -108,15 +109,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		
 		public void Test_AwbRepository_GetAll_Add_Get()
 		{
-			var oldData = _awbRepository.Get();
+			var oldData = _awbs.Get();
 
 			var data = CreateTestAirWaybill();
 
-			var newData = _awbRepository.Get();
+			var newData = _awbs.Get();
 
 			Assert.AreEqual(oldData.Length + 1, newData.Length);
 
-			var airWaybill = _awbRepository.Get(data.Id).First();
+			var airWaybill = _awbs.Get(data.Id).First();
 
 			data.ShouldBeEquivalentTo(airWaybill);
 		}
@@ -128,7 +129,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data1 = CreateApplicationData(TestConstants.TestClientId1);
 			var data2 = CreateApplicationData(TestConstants.TestClientId2);
 
-			var id = _awbRepository.Add(CreateAirWaybillData(), null, null, null, null, null);
+			var id = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null);
 			_context.UnitOfWork.SaveChanges();
 
 			var applications = new ApplicationEditor(_context.UnitOfWork);
@@ -139,7 +140,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			applications.SetAirWaybill(a2, id());
 			_context.UnitOfWork.SaveChanges();
 
-			var emails = _awbRepository.GetClientEmails(id());
+			var emails = _awbs.GetClientEmails(id());
 
 			var clientRepository = new ClientRepository(_context.UnitOfWork);
 
@@ -156,10 +157,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var data = CreateTestAirWaybill();
 
-			_awbRepository.SetState(data.Id, TestConstants.CargoIsFlewStateId);
+			_awbs.SetState(data.Id, TestConstants.CargoIsFlewStateId);
 			_context.UnitOfWork.SaveChanges();
 
-			var actual = _awbRepository.Get(data.Id).First();
+			var actual = _awbs.Get(data.Id).First();
 
 			actual.StateId.ShouldBeEquivalentTo(TestConstants.CargoIsFlewStateId);
 			actual.StateChangeTimestamp.Should().NotBe(data.StateChangeTimestamp);
@@ -183,17 +184,17 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var packingFile = _context.RandomBytes();
 			var invoiceFile = _context.RandomBytes();
 			var awbFile = _context.RandomBytes();
-			_awbRepository.Update(newData, gtdFile, additionalFile, packingFile, invoiceFile, awbFile);
+			_awbs.Update(newData, gtdFile, additionalFile, packingFile, invoiceFile, awbFile);
 			_context.UnitOfWork.SaveChanges();
 
-			var actual = _awbRepository.Get(newData.Id).First();
+			var actual = _awbs.Get(newData.Id).First();
 			actual.ShouldBeEquivalentTo(newData);
 
-			_awbRepository.GetGTDFile(newData.Id).Data.ShouldBeEquivalentTo(gtdFile);
-			_awbRepository.GTDAdditionalFile(newData.Id).Data.ShouldBeEquivalentTo(additionalFile);
-			_awbRepository.GetPackingFile(newData.Id).Data.ShouldBeEquivalentTo(packingFile);
-			_awbRepository.GetInvoiceFile(newData.Id).Data.ShouldBeEquivalentTo(invoiceFile);
-			_awbRepository.GetAWBFile(newData.Id).Data.ShouldBeEquivalentTo(awbFile);
+			_files.GetGTDFile(newData.Id).Data.ShouldBeEquivalentTo(gtdFile);
+			_files.GTDAdditionalFile(newData.Id).Data.ShouldBeEquivalentTo(additionalFile);
+			_files.GetPackingFile(newData.Id).Data.ShouldBeEquivalentTo(packingFile);
+			_files.GetInvoiceFile(newData.Id).Data.ShouldBeEquivalentTo(invoiceFile);
+			_files.GetAWBFile(newData.Id).Data.ShouldBeEquivalentTo(awbFile);
 		}
 
 		private AirWaybillData CreateAirWaybillData()
@@ -224,7 +225,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var data = CreateAirWaybillData();
 
-			var id = _awbRepository.Add(data, _context.RandomBytes(), _context.RandomBytes(),
+			var id = _awbs.Add(data, _context.RandomBytes(), _context.RandomBytes(),
 				_context.RandomBytes(), _context.RandomBytes(),
 				_context.RandomBytes());
 
