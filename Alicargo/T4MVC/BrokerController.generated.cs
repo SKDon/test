@@ -43,12 +43,6 @@ namespace Alicargo.Controllers.User
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Select()
-        {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Select);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ViewResult AWB()
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.AWB);
@@ -69,27 +63,16 @@ namespace Alicargo.Controllers.User
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Select = "Select";
             public readonly string AWB = "AWB";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Select = "Select";
             public const string AWB = "AWB";
         }
 
 
-        static readonly ActionParamsClass_Select s_params_Select = new ActionParamsClass_Select();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Select SelectParams { get { return s_params_Select; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Select
-        {
-            public readonly string name = "name";
-            public readonly string selectedId = "selectedId";
-        }
         static readonly ActionParamsClass_AWB s_params_AWB = new ActionParamsClass_AWB();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_AWB AWBParams { get { return s_params_AWB; } }
@@ -110,10 +93,8 @@ namespace Alicargo.Controllers.User
             public class _ViewNamesClass
             {
                 public readonly string AWB = "AWB";
-                public readonly string Select = "Select";
             }
             public readonly string AWB = "~/Views/Broker/AWB.cshtml";
-            public readonly string Select = "~/Views/Broker/Select.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -128,17 +109,6 @@ namespace Alicargo.Controllers.User
     public partial class T4MVC_BrokerController : Alicargo.Controllers.User.BrokerController
     {
         public T4MVC_BrokerController() : base(Dummy.Instance) { }
-
-        partial void SelectOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string name, long? selectedId);
-
-        public override System.Web.Mvc.PartialViewResult Select(string name, long? selectedId)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Select);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "name", name);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "selectedId", selectedId);
-            SelectOverride(callInfo, name, selectedId);
-            return callInfo;
-        }
 
         partial void AWBOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 

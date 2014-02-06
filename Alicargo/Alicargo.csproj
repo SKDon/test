@@ -450,7 +450,6 @@
     <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
     <Compile Include="ViewModels\Application\ApplicationAdminModel.cs" />
     <Compile Include="ViewModels\AirWaybill\AwbAdminModel.cs" />
-    <Compile Include="ViewModels\SelectModel.cs" />
     <Compile Include="ViewModels\User\SignIdModel.cs" />
     <Compile Include="ViewModels\User\UserListItem.cs" />
     <Compile Include="ViewModels\User\UserModel.cs" />
@@ -674,10 +673,8 @@
     <Content Include="Views\ApplicationList\Tools.cshtml" />
     <Content Include="Views\AirWaybill\Create.cshtml" />
     <Content Include="Views\AirWaybill\EditorTemplates\AwbAdminModel.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\SelectModel.cshtml" />
     <Content Include="Views\AirWaybill\Index.cshtml" />
     <Content Include="Views\AirWaybill\Edit.cshtml" />
-    <Content Include="Views\Broker\Select.cshtml" />
     <Content Include="Views\AirWaybill\AdminDetails.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\ApplicationList\AdminDetails.cshtml" />

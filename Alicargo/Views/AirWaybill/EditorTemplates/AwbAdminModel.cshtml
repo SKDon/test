@@ -3,13 +3,6 @@
 @using Resources
 @inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AwbAdminModel>
 
-@helper SelectBroker()
-{
-	var name = Html.IdFor(x => x.BrokerId).ToHtmlString();
-	var action = MVC.Broker.Select(name, Model == null ? (long?)null : Model.BrokerId);
-	@Html.Action(action)
-}
-
 @helper Files()
 {
 	<hr />
@@ -42,7 +35,7 @@
 
 @helper Gtd()
 {
-	if (Model == null)
+	if(Model == null)
 	{
 		return;
 	}
@@ -77,7 +70,7 @@
 		<div class="span4">
 			@Html.EditorWithLabelFor(model => model.Bill)
 			@Html.LabelFor(x => x.BrokerId)
-			@SelectBroker()
+			@Html.DropDownListFor(x => x.BrokerId, (IDictionary<long, string>)ViewBag.Brokers)
 			@Html.EditorWithLabelFor(model => model.BrokerCost)
 			@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
 		</div>

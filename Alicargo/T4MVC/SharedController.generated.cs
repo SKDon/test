@@ -53,7 +53,6 @@ namespace T4MVC
             {
                 public readonly string AuthenticationModel = "AuthenticationModel";
                 public readonly string CurrencyModel = "CurrencyModel";
-                public readonly string SelectModel = "SelectModel";
             }
         }
     }

@@ -5,10 +5,8 @@ using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
 using Alicargo.ViewModels.AirWaybill;
 using Resources;
 
@@ -18,36 +16,16 @@ namespace Alicargo.Controllers.User
 	{
 		private readonly IAwbRepository _awbRepository;
 		private readonly IAwbUpdateManager _awbUpdateManager;
-		private readonly IBrokerRepository _brokerRepository;
 		private readonly IStateConfig _stateConfig;
 
 		public BrokerController(
-			IBrokerRepository brokerRepository,
 			IStateConfig stateConfig,
 			IAwbRepository awbRepository,
 			IAwbUpdateManager awbUpdateManager)
 		{
-			_brokerRepository = brokerRepository;
 			_stateConfig = stateConfig;
 			_awbRepository = awbRepository;
 			_awbUpdateManager = awbUpdateManager;
-		}
-
-		[ChildActionOnly]
-		public virtual PartialViewResult Select(string name, long? selectedId)
-		{
-			var all = _brokerRepository.GetAll();
-
-			var model = new SelectModel
-			{
-				Id = selectedId.HasValue
-					? selectedId.Value
-					: all.First().Id,
-				List = all.ToDictionary(x => x.Id, x => x.Name),
-				Name = name
-			};
-
-			return PartialView(model);
 		}
 
 		[Access(RoleType.Broker), HttpGet]

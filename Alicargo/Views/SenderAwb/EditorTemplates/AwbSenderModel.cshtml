@@ -2,13 +2,6 @@
 @using Resources
 @inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AwbSenderModel>
 
-@helper SelectBroker()
-{
-	var name = Html.IdFor(x => x.BrokerId).ToHtmlString();
-	var action = MVC.Broker.Select(name, Model == null ? (long?)null : Model.BrokerId);
-	@Html.Action(action)
-}
-
 @helper Files()
 {
 	<hr />
@@ -19,7 +12,7 @@
 		<div class="span4">
 			@Html.LabelFor(x => x.PackingFile)
 			@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(),
-					Model != null ? Model.PackingFileName : null)
+				Model != null ? Model.PackingFileName : null)
 		</div>
 		<div class="span4">
 			@Html.LabelFor(x => x.AWBFile)
@@ -34,7 +27,7 @@
 		<div class="span4">
 			@Html.EditorWithLabelFor(model => model.Bill)
 			@Html.LabelFor(x => x.BrokerId)
-			@SelectBroker()
+			@Html.DropDownListFor(x => x.BrokerId, (IDictionary<long, string>)ViewBag.Brokers)
 			@Html.EditorWithLabelFor(model => model.FlightCost)
 		</div>
 		<div class="span4">
@@ -53,7 +46,7 @@
 			</div>
 		</div>
 		<script>
-			$(function () {
+			$(function() {
 				$(".date-holder input").kendoDatePicker();
 			})
 		</script>
