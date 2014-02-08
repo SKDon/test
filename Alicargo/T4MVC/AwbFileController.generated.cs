@@ -43,33 +43,39 @@ namespace Alicargo.Controllers.Awb
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult AWBFile()
+        public virtual System.Web.Mvc.FileResult AWB()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.AWBFile);
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.AWB);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult GTDAdditionalFile()
+        public virtual System.Web.Mvc.FileResult GTDAdditional()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDAdditionalFile);
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDAdditional);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult GTDFile()
+        public virtual System.Web.Mvc.FileResult GTD()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDFile);
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTD);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult InvoiceFile()
+        public virtual System.Web.Mvc.FileResult Invoice()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.InvoiceFile);
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Invoice);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult PackingFile()
+        public virtual System.Web.Mvc.FileResult Packing()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.PackingFile);
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Packing);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.FileResult Draw()
+        {
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Draw);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -87,61 +93,71 @@ namespace Alicargo.Controllers.Awb
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string AWBFile = "AWBFile";
-            public readonly string GTDAdditionalFile = "GTDAdditionalFile";
-            public readonly string GTDFile = "GTDFile";
-            public readonly string InvoiceFile = "InvoiceFile";
-            public readonly string PackingFile = "PackingFile";
+            public readonly string AWB = "AWB";
+            public readonly string GTDAdditional = "GTDAdditional";
+            public readonly string GTD = "GTD";
+            public readonly string Invoice = "Invoice";
+            public readonly string Packing = "Packing";
+            public readonly string Draw = "Draw";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string AWBFile = "AWBFile";
-            public const string GTDAdditionalFile = "GTDAdditionalFile";
-            public const string GTDFile = "GTDFile";
-            public const string InvoiceFile = "InvoiceFile";
-            public const string PackingFile = "PackingFile";
+            public const string AWB = "AWB";
+            public const string GTDAdditional = "GTDAdditional";
+            public const string GTD = "GTD";
+            public const string Invoice = "Invoice";
+            public const string Packing = "Packing";
+            public const string Draw = "Draw";
         }
 
 
-        static readonly ActionParamsClass_AWBFile s_params_AWBFile = new ActionParamsClass_AWBFile();
+        static readonly ActionParamsClass_AWB s_params_AWB = new ActionParamsClass_AWB();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_AWBFile AWBFileParams { get { return s_params_AWBFile; } }
+        public ActionParamsClass_AWB AWBParams { get { return s_params_AWB; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_AWBFile
+        public class ActionParamsClass_AWB
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_GTDAdditionalFile s_params_GTDAdditionalFile = new ActionParamsClass_GTDAdditionalFile();
+        static readonly ActionParamsClass_GTDAdditional s_params_GTDAdditional = new ActionParamsClass_GTDAdditional();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_GTDAdditionalFile GTDAdditionalFileParams { get { return s_params_GTDAdditionalFile; } }
+        public ActionParamsClass_GTDAdditional GTDAdditionalParams { get { return s_params_GTDAdditional; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_GTDAdditionalFile
+        public class ActionParamsClass_GTDAdditional
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_GTDFile s_params_GTDFile = new ActionParamsClass_GTDFile();
+        static readonly ActionParamsClass_GTD s_params_GTD = new ActionParamsClass_GTD();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_GTDFile GTDFileParams { get { return s_params_GTDFile; } }
+        public ActionParamsClass_GTD GTDParams { get { return s_params_GTD; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_GTDFile
+        public class ActionParamsClass_GTD
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_InvoiceFile s_params_InvoiceFile = new ActionParamsClass_InvoiceFile();
+        static readonly ActionParamsClass_Invoice s_params_Invoice = new ActionParamsClass_Invoice();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_InvoiceFile InvoiceFileParams { get { return s_params_InvoiceFile; } }
+        public ActionParamsClass_Invoice InvoiceParams { get { return s_params_Invoice; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_InvoiceFile
+        public class ActionParamsClass_Invoice
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_PackingFile s_params_PackingFile = new ActionParamsClass_PackingFile();
+        static readonly ActionParamsClass_Packing s_params_Packing = new ActionParamsClass_Packing();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_PackingFile PackingFileParams { get { return s_params_PackingFile; } }
+        public ActionParamsClass_Packing PackingParams { get { return s_params_Packing; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_PackingFile
+        public class ActionParamsClass_Packing
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Draw s_params_Draw = new ActionParamsClass_Draw();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Draw DrawParams { get { return s_params_Draw; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Draw
         {
             public readonly string id = "id";
         }
@@ -164,53 +180,63 @@ namespace Alicargo.Controllers.Awb
     {
         public T4MVC_AwbFileController() : base(Dummy.Instance) { }
 
-        partial void AWBFileOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void AWBOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
-        public override System.Web.Mvc.FileResult AWBFile(long id)
+        public override System.Web.Mvc.FileResult AWB(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.AWBFile);
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.AWB);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            AWBFileOverride(callInfo, id);
+            AWBOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void GTDAdditionalFileOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void GTDAdditionalOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
-        public override System.Web.Mvc.FileResult GTDAdditionalFile(long id)
+        public override System.Web.Mvc.FileResult GTDAdditional(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDAdditionalFile);
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDAdditional);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            GTDAdditionalFileOverride(callInfo, id);
+            GTDAdditionalOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void GTDFileOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void GTDOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
-        public override System.Web.Mvc.FileResult GTDFile(long id)
+        public override System.Web.Mvc.FileResult GTD(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDFile);
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTD);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            GTDFileOverride(callInfo, id);
+            GTDOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void InvoiceFileOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void InvoiceOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
-        public override System.Web.Mvc.FileResult InvoiceFile(long id)
+        public override System.Web.Mvc.FileResult Invoice(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.InvoiceFile);
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Invoice);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            InvoiceFileOverride(callInfo, id);
+            InvoiceOverride(callInfo, id);
             return callInfo;
         }
 
-        partial void PackingFileOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void PackingOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
-        public override System.Web.Mvc.FileResult PackingFile(long id)
+        public override System.Web.Mvc.FileResult Packing(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.PackingFile);
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Packing);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            PackingFileOverride(callInfo, id);
+            PackingOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void DrawOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+
+        public override System.Web.Mvc.FileResult Draw(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Draw);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DrawOverride(callInfo, id);
             return callInfo;
         }
 

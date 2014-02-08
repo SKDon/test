@@ -13,37 +13,44 @@ namespace Alicargo.Controllers.Awb
 			_files = files;
 		}
 
-		public virtual FileResult AWBFile(long id)
+		public virtual FileResult AWB(long id)
 		{
 			var file = _files.GetAWBFile(id);
 
 			return file.GetFileResult();
 		}
 
-		public virtual FileResult GTDAdditionalFile(long id)
+		public virtual FileResult GTDAdditional(long id)
 		{
 			var file = _files.GTDAdditionalFile(id);
 
 			return file.GetFileResult();
 		}
 
-		public virtual FileResult GTDFile(long id)
+		public virtual FileResult GTD(long id)
 		{
 			var file = _files.GetGTDFile(id);
 
 			return file.GetFileResult();
 		}
 
-		public virtual FileResult InvoiceFile(long id)
+		public virtual FileResult Invoice(long id)
 		{
 			var file = _files.GetInvoiceFile(id);
 
 			return file.GetFileResult();
 		}
 
-		public virtual FileResult PackingFile(long id)
+		public virtual FileResult Packing(long id)
 		{
 			var file = _files.GetPackingFile(id);
+
+			return file.GetFileResult();
+		}
+
+		public virtual FileResult Draw(long id)
+		{
+			var file = _files.GetDrawFile(id);
 
 			return file.GetFileResult();
 		}

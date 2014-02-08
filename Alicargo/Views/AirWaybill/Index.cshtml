@@ -11,7 +11,7 @@
 @if (IdentityService.IsInRole(RoleType.Admin))
 {
 	<p>
-		@Html.ActionLink(Pages.AirWaybillAdd, MVC.AirWaybill.Create())
+		@Html.ActionLink(Pages.AirWaybillAdd, MVC.AdminAwb.Create())
 	</p>
 }
 else if (IdentityService.IsInRole(RoleType.Sender))

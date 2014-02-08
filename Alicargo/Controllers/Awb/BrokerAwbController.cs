@@ -47,8 +47,6 @@ namespace Alicargo.Controllers.Awb
 			return View(model);
 		}
 
-		
-
 		[HttpPost]
 		[Access(RoleType.Broker)]
 		public virtual ActionResult Edit(long id, AwbBrokerModel model)

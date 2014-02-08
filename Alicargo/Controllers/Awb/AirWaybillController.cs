@@ -10,11 +10,8 @@ using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
-using Alicargo.Services.AirWaybill;
 using Alicargo.ViewModels;
-using Alicargo.ViewModels.AirWaybill;
 using Microsoft.Ajax.Utilities;
-using Resources;
 
 namespace Alicargo.Controllers.Awb
 {
@@ -24,7 +21,6 @@ namespace Alicargo.Controllers.Awb
 		private readonly IAwbManager _awbManager;
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbStateManager _awbStateManager;
-		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IAwbRepository _awbs;
 		private readonly IBrokerRepository _brokers;
 		private readonly IStateConfig _config;
@@ -33,7 +29,6 @@ namespace Alicargo.Controllers.Awb
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
 			IApplicationAwbManager applicationAwbManager,
-			IAwbUpdateManager awbUpdateManager,
 			IAwbManager awbManager,
 			IStateConfig config,
 			IAwbRepository awbs,
@@ -44,7 +39,6 @@ namespace Alicargo.Controllers.Awb
 			_awbPresenter = awbPresenter;
 			_brokers = brokers;
 			_applicationAwbManager = applicationAwbManager;
-			_awbUpdateManager = awbUpdateManager;
 			_awbManager = awbManager;
 			_config = config;
 			_awbs = awbs;
@@ -53,57 +47,7 @@ namespace Alicargo.Controllers.Awb
 			_identity = identity;
 		}
 
-		private void BindBag(long? awbId)
-		{
-			ViewBag.AwbId = awbId;
-
-			ViewBag.Brokers = _brokers.GetAll().ToDictionary(x => x.Id, x => x.Name);
-		}
-
-		#region Create
-
-		[Access(RoleType.Admin)]
-		public virtual ActionResult Create(long? applicationId)
-		{
-			BindBag(null);
-
-			return View();
-		}
-
-		[HttpPost]
-		[Access(RoleType.Admin)]
-		public virtual ActionResult Create(long? applicationId, AwbAdminModel model)
-		{
-			try
-			{
-				if(ModelState.IsValid)
-				{
-					var data = AwbMapper.GetData(model, _config.CargoIsFlewStateId);
-
-					_awbManager.Create(
-						applicationId,
-						data,
-						model.GTDFile,
-						model.GTDAdditionalFile,
-						model.PackingFile,
-						model.InvoiceFile,
-						model.AWBFile,
-						model.DrawFile);
-
-					return RedirectToAction(MVC.AirWaybill.Index());
-				}
-			}
-			catch(DublicateException)
-			{
-				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);
-			}
-
-			BindBag(null);
-
-			return View(model);
-		}
-
-		#endregion
+	
 
 		#region List
 
@@ -135,8 +79,8 @@ namespace Alicargo.Controllers.Awb
 
 		#region Actions
 
-		[Access(RoleType.Admin, RoleType.Broker)]
 		[HttpPost]
+		[Access(RoleType.Admin, RoleType.Broker)]
 		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
 		{
 			var data = _awbs.Get(id).First();
@@ -174,51 +118,13 @@ namespace Alicargo.Controllers.Awb
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		[Access(RoleType.Admin, RoleType.Sender)]
 		[HttpPost]
+		[Access(RoleType.Admin, RoleType.Sender)]
 		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
 		{
 			_applicationAwbManager.SetAwb(applicationId, airWaybillId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		#endregion
-
-		#region Edit
-
-		[Access(RoleType.Admin)]
-		[HttpGet]
-		public virtual ViewResult Edit(long id)
-		{
-			var model = _awbPresenter.Get(id);
-
-			BindBag(id);
-
-			return View(model);
-		}
-
-		[Access(RoleType.Admin)]
-		[HttpPost]
-		public virtual ActionResult Edit(long id, AwbAdminModel model)
-		{
-			try
-			{
-				if(ModelState.IsValid)
-				{
-					_awbUpdateManager.Update(id, model);
-
-					return RedirectToAction(MVC.AirWaybill.Edit(id));
-				}
-			}
-			catch(DublicateException)
-			{
-				ModelState.AddModelError("Bill", Validation.AirWaybillAlreadyExists);				
-			}
-
-			BindBag(id);
-
-			return View(model);
 		}
 
 		#endregion

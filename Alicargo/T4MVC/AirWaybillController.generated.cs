@@ -43,12 +43,6 @@ namespace Alicargo.Controllers.Awb
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Create()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult List()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
@@ -77,12 +71,6 @@ namespace Alicargo.Controllers.Awb
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAirWaybill);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Edit()
-        {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public AirWaybillController Actions { get { return MVC.AirWaybill; } }
@@ -99,39 +87,26 @@ namespace Alicargo.Controllers.Awb
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Create = "Create";
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string CargoIsCustomsCleared = "CargoIsCustomsCleared";
             public readonly string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
             public readonly string Delete = "Delete";
             public readonly string SetAirWaybill = "SetAirWaybill";
-            public readonly string Edit = "Edit";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Create = "Create";
             public const string Index = "Index";
             public const string List = "List";
             public const string CargoIsCustomsCleared = "CargoIsCustomsCleared";
             public const string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
             public const string Delete = "Delete";
             public const string SetAirWaybill = "SetAirWaybill";
-            public const string Edit = "Edit";
         }
 
 
-        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Create
-        {
-            public readonly string applicationId = "applicationId";
-            public readonly string model = "model";
-        }
         static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_List ListParams { get { return s_params_List; } }
@@ -174,15 +149,6 @@ namespace Alicargo.Controllers.Awb
             public readonly string applicationId = "applicationId";
             public readonly string airWaybillId = "airWaybillId";
         }
-        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Edit
-        {
-            public readonly string id = "id";
-            public readonly string model = "model";
-        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -196,25 +162,14 @@ namespace Alicargo.Controllers.Awb
                 public readonly string AdminDetails = "AdminDetails";
                 public readonly string BrokerDetails = "BrokerDetails";
                 public readonly string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
-                public readonly string Create = "Create";
-                public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
                 public readonly string SenderDetails = "SenderDetails";
             }
             public readonly string AdminDetails = "~/Views/AirWaybill/AdminDetails.cshtml";
             public readonly string BrokerDetails = "~/Views/AirWaybill/BrokerDetails.cshtml";
             public readonly string CargoIsCustomsClearedButton = "~/Views/AirWaybill/CargoIsCustomsClearedButton.cshtml";
-            public readonly string Create = "~/Views/AirWaybill/Create.cshtml";
-            public readonly string Edit = "~/Views/AirWaybill/Edit.cshtml";
             public readonly string Index = "~/Views/AirWaybill/Index.cshtml";
             public readonly string SenderDetails = "~/Views/AirWaybill/SenderDetails.cshtml";
-            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
-            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public partial class _EditorTemplatesClass
-            {
-                public readonly string AwbAdminModel = "AwbAdminModel";
-            }
         }
     }
 
@@ -222,27 +177,6 @@ namespace Alicargo.Controllers.Awb
     public partial class T4MVC_AirWaybillController : Alicargo.Controllers.Awb.AirWaybillController
     {
         public T4MVC_AirWaybillController() : base(Dummy.Instance) { }
-
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? applicationId);
-
-        public override System.Web.Mvc.ActionResult Create(long? applicationId)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
-            CreateOverride(callInfo, applicationId);
-            return callInfo;
-        }
-
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? applicationId, Alicargo.ViewModels.AirWaybill.AwbAdminModel model);
-
-        public override System.Web.Mvc.ActionResult Create(long? applicationId, Alicargo.ViewModels.AirWaybill.AwbAdminModel model)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            CreateOverride(callInfo, applicationId, model);
-            return callInfo;
-        }
 
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
@@ -302,27 +236,6 @@ namespace Alicargo.Controllers.Awb
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "airWaybillId", airWaybillId);
             SetAirWaybillOverride(callInfo, applicationId, airWaybillId);
-            return callInfo;
-        }
-
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
-
-        public override System.Web.Mvc.ViewResult Edit(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            EditOverride(callInfo, id);
-            return callInfo;
-        }
-
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbAdminModel model);
-
-        public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AwbAdminModel model)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            EditOverride(callInfo, id, model);
             return callInfo;
         }
 

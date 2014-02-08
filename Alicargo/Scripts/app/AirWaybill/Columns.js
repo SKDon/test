@@ -67,7 +67,7 @@
 			title: $a.Localization.Entities_TotalCostOfSenderForWeight, format: "{0:n0}"
 		});
 
-		addEditButton(columns, $a.Urls.AirWaybill_Edit);
+		addEditButton(columns, $a.Urls.AdminAwb_Edit);
 		addDeleteButton(columns);
 	}
 
