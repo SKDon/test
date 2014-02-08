@@ -41,11 +41,6 @@ namespace Alicargo.DataAccess.Repositories
 			}
 		}
 
-		public StateListItem[] All()
-		{
-			return _executor.Array<StateListItem>("[dbo].[State_GetOrderedList]");
-		}
-
 		public void Update(long id, string language, StateData data)
 		{
 			using (var scope = new TransactionScope())

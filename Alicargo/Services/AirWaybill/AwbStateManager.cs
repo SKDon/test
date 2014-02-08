@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts.AirWaybill;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 
@@ -9,28 +8,25 @@ namespace Alicargo.Services.AirWaybill
     internal sealed class AwbStateManager : IAwbStateManager
     {
         private readonly IAdminApplicationManager _applicationManager;
-        private readonly IApplicationRepository _applicationRepository;
-        private readonly IAwbRepository _awbRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IApplicationRepository _applications;
+        private readonly IAwbRepository _awbs;
 
         public AwbStateManager(
-            IAwbRepository awbRepository,
-            IApplicationRepository applicationRepository,
-            IUnitOfWork unitOfWork,
+            IAwbRepository awbs,
+            IApplicationRepository applications,
             IAdminApplicationManager applicationManager)
         {
-            _awbRepository = awbRepository;
-            _applicationRepository = applicationRepository;
-            _unitOfWork = unitOfWork;
+            _awbs = awbs;
+            _applications = applications;
             _applicationManager = applicationManager;
         }
 
         public void SetState(long airWaybillId, long stateId)
         {
-            var oldData = _awbRepository.Get(airWaybillId).First();
+            var oldData = _awbs.Get(airWaybillId).First();
             var oldStateId = oldData.StateId;
 
-            _awbRepository.SetState(airWaybillId, stateId);
+            _awbs.SetState(airWaybillId, stateId);
 
             UpdateApplicationsState(airWaybillId, stateId, oldStateId);
         }
@@ -42,7 +38,7 @@ namespace Alicargo.Services.AirWaybill
                 return;
             }
 
-            var applications = _applicationRepository.GetByAirWaybill(airWaybillId);
+            var applications = _applications.GetByAirWaybill(airWaybillId);
             foreach (var application in applications)
             {
                 if (oldStateId == application.StateId)

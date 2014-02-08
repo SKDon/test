@@ -10,7 +10,6 @@ using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
-using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.State;
 using Resources;
 
@@ -42,7 +41,7 @@ namespace Alicargo.Controllers
 		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List()
 		{
-			var states = _states.All();
+			var states = _states.Get(_identity.Language);
 
 			return Json(states);
 		}
@@ -58,7 +57,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Create(StateCreateModel model)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindLanguageList();
 
@@ -96,7 +95,7 @@ namespace Alicargo.Controllers
 			{
 				_states.Delete(id);
 			}
-			catch (DeleteConflictedWithConstraintException)
+			catch(DeleteConflictedWithConstraintException)
 			{
 				return Content(Validation.StateIsUsed);
 			}
@@ -108,7 +107,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Edit(StateEditModel model)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindLanguageList();
 

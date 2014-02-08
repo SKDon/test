@@ -50,7 +50,7 @@
 			pageable: false,
 			dataBound: dataBound,
 			columns: [
-				{ field: "Name", title: $l.Pages_Name }, {
+				{
 					command: [{
 						name: "custom-gear",
 						text: "",
@@ -91,7 +91,7 @@
 					}],
 					title: "&nbsp;",
 					width: Alicargo.DefaultGridButtonWidth
-				}]
+				}, { field: "Name", title: $l.Pages_Name }]
 		});
 
 		return $states;

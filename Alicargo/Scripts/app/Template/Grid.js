@@ -23,7 +23,7 @@
 			dataSource: dataSource,
 			pageable: false,
 			columns: [
-				{ field: "Name", title: $l.Pages_Event }, {
+				{
 					command: [{
 						name: "custom-edit",
 						text: "",
@@ -35,8 +35,10 @@
 
 							$a.LoadPage(url);
 						}
-					}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
-				}]
+					}],
+					title: "&nbsp;",
+					width: $a.DefaultGridButtonWidth
+				}, { field: "Name", title: $l.Pages_Event }]
 		});
 
 		return $t;
