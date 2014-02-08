@@ -21,6 +21,8 @@
 	[InvoiceFileName]				NVARCHAR(320)		NULL,
 	[AWBFileData]					VARBINARY (MAX)		NULL,
 	[AWBFileName]					NVARCHAR(320)		NULL,
+	[DrawFileData]					VARBINARY (MAX)		NULL,
+	[DrawFileName]					NVARCHAR(320)		NULL,
 
 	[StateId]						BIGINT				NOT NULL,
 	[StateChangeTimestamp]			DATETIMEOFFSET		CONSTRAINT [DF_AirWaybill_StateChangeTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,

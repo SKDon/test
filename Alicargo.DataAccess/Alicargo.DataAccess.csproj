@@ -72,7 +72,6 @@
     <Compile Include="DbContext\SqlHelper.cs" />
     <Compile Include="DbContext\UnitOfWork.cs" />
     <Compile Include="Helpers\ApplicationRepositoryOrderer.cs" />
-    <Compile Include="Helpers\FileDataHelper.cs" />
     <Compile Include="Helpers\IApplicationRepositoryOrderer.cs" />
     <Compile Include="DbContext\SqlProcedureExecutor.cs" />
     <Compile Include="Helpers\TableParameter.cs" />
@@ -106,8 +105,8 @@
   <ItemGroup>
     <None Include="DbContext\Alicargo.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Alicargo.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Alicargo.designer.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

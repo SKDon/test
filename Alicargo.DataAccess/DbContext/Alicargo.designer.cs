@@ -636,6 +636,10 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private string _AWBFileName;
 		
+		private System.Data.Linq.Binary _DrawFileData;
+		
+		private string _DrawFileName;
+		
 		private long _StateId;
 		
 		private System.DateTimeOffset _StateChangeTimestamp;
@@ -698,6 +702,10 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnAWBFileDataChanged();
     partial void OnAWBFileNameChanging(string value);
     partial void OnAWBFileNameChanged();
+    partial void OnDrawFileDataChanging(System.Data.Linq.Binary value);
+    partial void OnDrawFileDataChanged();
+    partial void OnDrawFileNameChanging(string value);
+    partial void OnDrawFileNameChanged();
     partial void OnStateIdChanging(long value);
     partial void OnStateIdChanged();
     partial void OnStateChangeTimestampChanging(System.DateTimeOffset value);
@@ -1102,6 +1110,46 @@ namespace Alicargo.DataAccess.DbContext
 					this._AWBFileName = value;
 					this.SendPropertyChanged("AWBFileName");
 					this.OnAWBFileNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary DrawFileData
+		{
+			get
+			{
+				return this._DrawFileData;
+			}
+			set
+			{
+				if ((this._DrawFileData != value))
+				{
+					this.OnDrawFileDataChanging(value);
+					this.SendPropertyChanging();
+					this._DrawFileData = value;
+					this.SendPropertyChanged("DrawFileData");
+					this.OnDrawFileDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawFileName", DbType="NVarChar(320)")]
+		public string DrawFileName
+		{
+			get
+			{
+				return this._DrawFileName;
+			}
+			set
+			{
+				if ((this._DrawFileName != value))
+				{
+					this.OnDrawFileNameChanging(value);
+					this.SendPropertyChanging();
+					this._DrawFileName = value;
+					this.SendPropertyChanged("DrawFileName");
+					this.OnDrawFileNameChanged();
 				}
 			}
 		}

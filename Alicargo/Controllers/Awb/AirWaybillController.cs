@@ -78,7 +78,7 @@ namespace Alicargo.Controllers.Awb
 			{
 				if(ModelState.IsValid)
 				{
-					var data = AwbMapper.Map(model, _config.CargoIsFlewStateId);
+					var data = AwbMapper.GetData(model, _config.CargoIsFlewStateId);
 
 					_awbManager.Create(
 						applicationId,
@@ -87,7 +87,8 @@ namespace Alicargo.Controllers.Awb
 						model.GTDAdditionalFile,
 						model.PackingFile,
 						model.InvoiceFile,
-						model.AWBFile);
+						model.AWBFile,
+						model.DrawFile);
 
 					return RedirectToAction(MVC.AirWaybill.Index());
 				}

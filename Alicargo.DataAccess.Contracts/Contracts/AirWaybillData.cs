@@ -27,5 +27,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 		public string PackingFileName { get; set; }
 		public string InvoiceFileName { get; set; }
 		public string AWBFileName { get; set; }
+		public string DrawFileName { get; set; }
 	}
 }

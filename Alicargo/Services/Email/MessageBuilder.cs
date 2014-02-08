@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -8,6 +9,7 @@ using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Email
 {
+	[Obsolete]
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
 		public string DefaultSubject

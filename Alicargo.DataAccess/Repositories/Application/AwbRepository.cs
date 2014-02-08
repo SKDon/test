@@ -6,7 +6,6 @@ using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
-using Alicargo.DataAccess.Helpers;
 using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories.Application
@@ -32,30 +31,33 @@ namespace Alicargo.DataAccess.Repositories.Application
 				GTD = x.GTD,
 				GTDFileName = x.GTDFileName,
 				Id = x.Id,
-				AWBFileName = x.AWBFileName,
-				InvoiceFileName = x.InvoiceFileName,
-				PackingFileName = x.PackingFileName,
 				StateId = x.StateId,
 				StateChangeTimestamp = x.StateChangeTimestamp,
-				GTDAdditionalFileName = x.GTDAdditionalFileName,
 				AdditionalCost = x.AdditionalCost,
 				BrokerCost = x.BrokerCost,
 				CustomCost = x.CustomCost,
 				FlightCost = x.FlightCost,
-				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight
+				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
+				AWBFileName = x.AWBFileName,
+				DrawFileName = x.DrawFileName,
+				InvoiceFileName = x.InvoiceFileName,
+				PackingFileName = x.PackingFileName,
+				GTDAdditionalFileName = x.GTDAdditionalFileName
 			};
 		}
 
-		public Func<long> Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
-			byte[] invoiceFile, byte[] awbFile)
+		public long Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
+			byte[] invoiceFile, byte[] awbFile, byte[] drawFile)
 		{
 			var entity = new AirWaybill();
 
-			Map(data, entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
+			Map(data, entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile, drawFile);
 
 			_context.AirWaybills.InsertOnSubmit(entity);
 
-			return () => entity.Id;
+			_context.SubmitChanges();
+
+			return entity.Id;
 		}
 
 		public AirWaybillData[] Get(params long[] ids)
@@ -101,9 +103,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				Data = x.Applications
 					.Where(y
 						=> (!forwarderId.HasValue || y.ForwarderId == forwarderId)
-						&& (!clientId.HasValue || y.ClientId == clientId)
-						&& (!senderId.HasValue || y.SenderId == senderId)
-						&& (!carrierId.HasValue || y.Transit.CarrierId == carrierId))
+						   && (!clientId.HasValue || y.ClientId == clientId)
+						   && (!senderId.HasValue || y.SenderId == senderId)
+						   && (!carrierId.HasValue || y.Transit.CarrierId == carrierId))
 					.Select(y => new
 					{
 						y.Weight,
@@ -159,21 +161,18 @@ namespace Alicargo.DataAccess.Repositories.Application
 		{
 			var data = _context.AirWaybills.First(x => x.Id == awbId);
 			data.AdditionalCost = additionalCost;
+
+			_context.SubmitChanges();
 		}
 
 		public void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
-			byte[] invoiceFile, byte[] awbFile)
+			byte[] invoiceFile, byte[] awbFile, byte[] drawFile)
 		{
 			var entity = _context.AirWaybills.First(x => x.Id == data.Id);
 
-			Map(data, entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
-		}
+			Map(data, entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile, drawFile);
 
-		public void Delete(long id)
-		{
-			var airWaybill = _context.AirWaybills.First(x => x.Id == id);
-
-			_context.AirWaybills.DeleteOnSubmit(airWaybill);
+			_context.SubmitChanges();
 		}
 
 		public void SetState(long airWaybillId, long stateId)
@@ -181,10 +180,21 @@ namespace Alicargo.DataAccess.Repositories.Application
 			var airWaybill = _context.AirWaybills.First(x => x.Id == airWaybillId);
 			airWaybill.StateId = stateId;
 			airWaybill.StateChangeTimestamp = DateTimeProvider.Now;
+
+			_context.SubmitChanges();
+		}
+
+		public void Delete(long id)
+		{
+			var airWaybill = _context.AirWaybills.First(x => x.Id == id);
+
+			_context.AirWaybills.DeleteOnSubmit(airWaybill);
+
+			_context.SubmitChanges();
 		}
 
 		private static void Map(AirWaybillData @from, AirWaybill to,
-			byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
+			byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile, byte[] drawFile)
 		{
 			if(to.Id == 0)
 			{
@@ -207,20 +217,32 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.FlightCost = @from.FlightCost;
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 
-			FileDataHelper.SetFile(gtdFile, from.GTDFileName,
-				bytes => to.GTDFileData = bytes, s => to.GTDFileName = s);
+			SetFile(gtdFile, from.GTDFileName, bytes => to.GTDFileData = bytes, s => to.GTDFileName = s);
 
-			FileDataHelper.SetFile(gtdAdditionalFile, from.GTDAdditionalFileName,
-				bytes => to.GTDAdditionalFileData = bytes, s => to.GTDAdditionalFileName = s);
+			SetFile(gtdAdditionalFile, from.GTDAdditionalFileName, bytes => to.GTDAdditionalFileData = bytes,
+				s => to.GTDAdditionalFileName = s);
 
-			FileDataHelper.SetFile(packingFile, from.PackingFileName,
-				bytes => to.PackingFileData = bytes, s => to.PackingFileName = s);
+			SetFile(packingFile, from.PackingFileName, bytes => to.PackingFileData = bytes, s => to.PackingFileName = s);
 
-			FileDataHelper.SetFile(invoiceFile, from.InvoiceFileName,
-				bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
+			SetFile(invoiceFile, from.InvoiceFileName, bytes => to.InvoiceFileData = bytes, s => to.InvoiceFileName = s);
 
-			FileDataHelper.SetFile(awbFile, from.AWBFileName,
-				bytes => to.AWBFileData = bytes, s => to.AWBFileName = s);
+			SetFile(awbFile, from.AWBFileName, bytes => to.AWBFileData = bytes, s => to.AWBFileName = s);
+
+			SetFile(drawFile, from.DrawFileName, bytes => to.DrawFileData = bytes, s => to.DrawFileName = s);
+		}
+
+		private static void SetFile(byte[] file, string name, Action<byte[]> setFile, Action<string> setName)
+		{
+			if(file != null && file.Length > 0)
+			{
+				setFile(file);
+				setName(name);
+			}
+			else if(string.IsNullOrWhiteSpace(name))
+			{
+				setFile(null);
+				setName(null);
+			}
 		}
 	}
 }

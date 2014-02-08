@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Helpers;
@@ -9,6 +10,7 @@ using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.Email
 {
+	[Obsolete]
 	internal sealed class AwbUpdateManagerWithMailing : IAwbUpdateManager
 	{		
 		private readonly IAwbPresenter _awbPresenter;

@@ -17,8 +17,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	public class AwbRepositoryTests
 	{
 		private IAwbRepository _awbs;
-		private IAwbFileRepository _files;
 		private DbTestContext _context;
+		private IAwbFileRepository _files;
 		private Fixture _fixture;
 
 		[TestCleanup]
@@ -38,7 +38,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		
 		public void Test_AwbRepository_Count_GetRange()
 		{
 			var airWaybillDatas = _awbs.Get();
@@ -52,19 +51,16 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		
 		public void Test_AwbRepository_Delete()
 		{
 			var data = CreateTestAirWaybill();
 
 			_awbs.Delete(data.Id);
-			_context.UnitOfWork.SaveChanges();
 
 			_awbs.Get(data.Id).Count().ShouldBeEquivalentTo(0);
 		}
 
 		[TestMethod]
-		
 		public void Test_AwbRepository_GetAggregate()
 		{
 			var data11 = CreateApplicationData(TestConstants.TestClientId1);
@@ -72,9 +68,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var data21 = CreateApplicationData(TestConstants.TestClientId1);
 			var data22 = CreateApplicationData(TestConstants.TestClientId1);
 
-			var awbId1 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null);
-			var awbId2 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null);
-			_context.UnitOfWork.SaveChanges();
+			var awbId1 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
+			var awbId2 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
 
 			var applications = new ApplicationEditor(_context.UnitOfWork);
 			var app11 = applications.Add(data11);
@@ -82,23 +77,22 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var app21 = applications.Add(data21);
 			var app22 = applications.Add(data22);
 
-			applications.SetAirWaybill(app11, awbId1());
-			applications.SetAirWaybill(app12, awbId1());
-			applications.SetAirWaybill(app21, awbId2());
-			applications.SetAirWaybill(app22, awbId2());
-			_context.UnitOfWork.SaveChanges();
+			applications.SetAirWaybill(app11, awbId1);
+			applications.SetAirWaybill(app12, awbId1);
+			applications.SetAirWaybill(app21, awbId2);
+			applications.SetAirWaybill(app22, awbId2);
 
-			var aggregates = _awbs.GetAggregate(new[] { awbId1(), awbId2() });
+			var aggregates = _awbs.GetAggregate(new[] { awbId1, awbId2 });
 
 			aggregates.Count().ShouldBeEquivalentTo(2);
 
-			var aggregate1 = aggregates.First(x => x.AirWaybillId == awbId1());
+			var aggregate1 = aggregates.First(x => x.AirWaybillId == awbId1);
 			aggregate1.TotalCount.ShouldBeEquivalentTo(data11.Count + data12.Count);
 			aggregate1.TotalWeight.ShouldBeEquivalentTo(data11.Weight + data12.Weight);
 			aggregate1.TotalVolume.ShouldBeEquivalentTo(data11.Volume + data12.Volume);
 			aggregate1.TotalValue.ShouldBeEquivalentTo(data11.Value + data12.Value);
 
-			var aggregate2 = aggregates.First(x => x.AirWaybillId == awbId2());
+			var aggregate2 = aggregates.First(x => x.AirWaybillId == awbId2);
 			aggregate2.TotalCount.ShouldBeEquivalentTo(data21.Count + data22.Count);
 			aggregate2.TotalWeight.ShouldBeEquivalentTo(data21.Weight + data22.Weight);
 			aggregate2.TotalVolume.ShouldBeEquivalentTo(data21.Volume + data22.Volume);
@@ -106,7 +100,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		
 		public void Test_AwbRepository_GetAll_Add_Get()
 		{
 			var oldData = _awbs.Get();
@@ -123,24 +116,21 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		
 		public void Test_AwbRepository_GetClientEmails()
 		{
 			var data1 = CreateApplicationData(TestConstants.TestClientId1);
 			var data2 = CreateApplicationData(TestConstants.TestClientId2);
 
-			var id = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null);
-			_context.UnitOfWork.SaveChanges();
+			var id = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
 
 			var applications = new ApplicationEditor(_context.UnitOfWork);
 			var a1 = applications.Add(data1);
 			var a2 = applications.Add(data2);
 
-			applications.SetAirWaybill(a1, id());
-			applications.SetAirWaybill(a2, id());
-			_context.UnitOfWork.SaveChanges();
+			applications.SetAirWaybill(a1, id);
+			applications.SetAirWaybill(a2, id);
 
-			var emails = _awbs.GetClientEmails(id());
+			var emails = _awbs.GetClientEmails(id);
 
 			var clientRepository = new ClientRepository(_context.UnitOfWork);
 
@@ -152,13 +142,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		
 		public void Test_AwbRepository_SetState()
 		{
 			var data = CreateTestAirWaybill();
 
 			_awbs.SetState(data.Id, TestConstants.CargoIsFlewStateId);
-			_context.UnitOfWork.SaveChanges();
 
 			var actual = _awbs.Get(data.Id).First();
 
@@ -167,7 +155,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		
 		public void Test_AwbRepository_Update()
 		{
 			var data = CreateTestAirWaybill();
@@ -184,8 +171,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var packingFile = _context.RandomBytes();
 			var invoiceFile = _context.RandomBytes();
 			var awbFile = _context.RandomBytes();
-			_awbs.Update(newData, gtdFile, additionalFile, packingFile, invoiceFile, awbFile);
-			_context.UnitOfWork.SaveChanges();
+			var drawFile = _context.RandomBytes();
+			_awbs.Update(newData, gtdFile, additionalFile, packingFile, invoiceFile, awbFile, drawFile);
 
 			var actual = _awbs.Get(newData.Id).First();
 			actual.ShouldBeEquivalentTo(newData);
@@ -195,6 +182,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_files.GetPackingFile(newData.Id).Data.ShouldBeEquivalentTo(packingFile);
 			_files.GetInvoiceFile(newData.Id).Data.ShouldBeEquivalentTo(invoiceFile);
 			_files.GetAWBFile(newData.Id).Data.ShouldBeEquivalentTo(awbFile);
+			_files.GetDrawFile(newData.Id).Data.ShouldBeEquivalentTo(drawFile);
 		}
 
 		private AirWaybillData CreateAirWaybillData()
@@ -227,11 +215,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var id = _awbs.Add(data, _context.RandomBytes(), _context.RandomBytes(),
 				_context.RandomBytes(), _context.RandomBytes(),
-				_context.RandomBytes());
+				_context.RandomBytes(), _context.RandomBytes());
 
-			_context.UnitOfWork.SaveChanges();
-
-			data.Id = id();
+			data.Id = id;
 
 			return data;
 		}

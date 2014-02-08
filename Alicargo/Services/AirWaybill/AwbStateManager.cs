@@ -33,8 +33,6 @@ namespace Alicargo.Services.AirWaybill
             _awbRepository.SetState(airWaybillId, stateId);
 
             UpdateApplicationsState(airWaybillId, stateId, oldStateId);
-
-            _unitOfWork.SaveChanges();
         }
 
         private void UpdateApplicationsState(long airWaybillId, long stateId, long oldStateId)

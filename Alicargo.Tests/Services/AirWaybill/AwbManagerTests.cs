@@ -42,42 +42,71 @@ namespace Alicargo.Tests.Services.AirWaybill
 			_context.AirWaybillRepository.Setup(
 				x =>
 					x.Add(It.IsAny<AirWaybillData>(), model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
-						model.InvoiceFile, model.AWBFile))
+						model.InvoiceFile, model.AWBFile, model.DrawFile))
 				.Returns(() => airWaybillId);
 
-			var airWaybillData = AwbMapper.Map(model, _context.StateConfig.Object.CargoIsFlewStateId);
+			var airWaybillData = AwbMapper.GetData(model, _context.StateConfig.Object.CargoIsFlewStateId);
 
 			_manager.Create(applicationId, airWaybillData, model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
-				model.InvoiceFile, model.AWBFile);
+				model.InvoiceFile, model.AWBFile, model.DrawFile);
 
 			_context.ApplicationAwbManager.Verify(x => x.SetAwb(applicationId, airWaybillId), Times.Once());
 			_context.UnitOfWork.Verify(x => x.SaveChanges());
-			_context.AirWaybillRepository.Verify(
-				x => x.Add(It.Is<AirWaybillData>(data => data.Id == 0
-				                                         && data.StateId == cargoIsFlewStateId
-				                                         && data.CreationTimestamp != null
-				                                         && data.StateChangeTimestamp != null
-				                                         && data.PackingFileName == model.PackingFileName
-				                                         && data.InvoiceFileName == model.InvoiceFileName
-				                                         && data.AWBFileName == model.AWBFileName
-				                                         && data.ArrivalAirport == model.ArrivalAirport
-				                                         && data.Bill == model.Bill
-				                                         && data.DepartureAirport == model.DepartureAirport
-				                                         && data.BrokerId == model.BrokerId
-				                                         &&
-				                                         data.DateOfArrival ==
-				                                         DateTimeOffset.Parse(model.DateOfArrivalLocalString)
-				                                         &&
-				                                         data.DateOfDeparture ==
-				                                         DateTimeOffset.Parse(model.DateOfDepartureLocalString)
-				                                         && data.GTD == null
-				                                         && data.GTDAdditionalFileName == model.GTDAdditionalFileName
-				                                         && data.GTDFileName == model.GTDFileName),
-					model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
-					model.InvoiceFile, model.AWBFile),
+			_context.AirWaybillRepository.Verify(x => x.Add(It.Is<AirWaybillData>(
+				data => data.Id == 0
+				        && data.StateId == cargoIsFlewStateId
+				        && data.CreationTimestamp != null
+				        && data.StateChangeTimestamp != null
+				        && data.PackingFileName == model.PackingFileName
+				        && data.InvoiceFileName == model.InvoiceFileName
+				        && data.AWBFileName == model.AWBFileName
+				        && data.ArrivalAirport == model.ArrivalAirport
+				        && data.Bill == model.Bill
+				        && data.DepartureAirport == model.DepartureAirport
+				        && data.BrokerId == model.BrokerId
+				        &&
+				        data.DateOfArrival ==
+				        DateTimeOffset.Parse(model.DateOfArrivalLocalString)
+				        &&
+				        data.DateOfDeparture ==
+				        DateTimeOffset.Parse(model.DateOfDepartureLocalString)
+				        && data.GTD == null
+				        && data.GTDAdditionalFileName == model.GTDAdditionalFileName
+				        && data.GTDFileName == model.GTDFileName
+				        && data.DrawFileName == model.DrawFileName),
+				model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
+				model.InvoiceFile, model.AWBFile, model.DrawFile),
 				Times.Once());
 
 			_context.StateConfig.Verify(x => x.CargoIsFlewStateId, Times.Once());
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(InvalidLogicException))]
+		public void Test_AwbManager_Create_WithGtd()
+		{
+			var data = _context.Create<AirWaybillData>();
+
+			_manager.Create(It.IsAny<long>(), data, It.IsAny<byte[]>(), It.IsAny<byte[]>(), It.IsAny<byte[]>(),
+				It.IsAny<byte[]>(), It.IsAny<byte[]>(), It.IsAny<byte[]>());
+		}
+
+		[TestMethod]
+		public void Test_AwbManager_Delete()
+		{
+			var id = _context.Create<long>();
+			var applications = _context.CreateMany<ApplicationData>().ToArray();
+			_context.ApplicationRepository.Setup(x => x.GetByAirWaybill(id)).Returns(applications);
+			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(It.IsAny<long>(), null));
+			_context.AirWaybillRepository.Setup(x => x.Delete(id));
+
+			_manager.Delete(id);
+
+			_context.ApplicationRepository.Verify(x => x.GetByAirWaybill(id), Times.Once());
+			_context.ApplicationEditor.Verify(
+				x => x.SetAirWaybill(It.Is<long>(i => applications.Any(a => a.Id == i)), null),
+				Times.Exactly(applications.Length));
+			_context.AirWaybillRepository.Verify(x => x.Delete(id), Times.Once());
 		}
 
 		[TestMethod]
@@ -85,7 +114,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 		{
 			var cargoIsFlewStateId = _context.Create<long>();
 			var model = _context.Create<AwbAdminModel>();
-			var data = AwbMapper.Map(model, cargoIsFlewStateId);
+			var data = AwbMapper.GetData(model, cargoIsFlewStateId);
 
 			model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties()
 				.Excluding(x => x.GTD));
@@ -100,43 +129,13 @@ namespace Alicargo.Tests.Services.AirWaybill
 		{
 			var cargoIsFlewStateId = _context.Create<long>();
 			var model = _context.Create<AwbSenderModel>();
-			var data = AwbMapper.Map(model, cargoIsFlewStateId);
+			var data = AwbMapper.GetData(model, cargoIsFlewStateId);
 
 			model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
 
 			data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
 			data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));
 			data.GTD.Should().BeNull();
-		}
-
-		[TestMethod]
-		public void Test_AwbManager_Delete()
-		{
-			var id = _context.Create<long>();
-			var applications = _context.CreateMany<ApplicationData>().ToArray();
-			_context.ApplicationRepository.Setup(x => x.GetByAirWaybill(id)).Returns(applications);
-			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(It.IsAny<long>(), null));
-			_context.AirWaybillRepository.Setup(x => x.Delete(id));
-			_context.UnitOfWork.Setup(x => x.SaveChanges());
-
-			_manager.Delete(id);
-
-			_context.ApplicationRepository.Verify(x => x.GetByAirWaybill(id), Times.Once());
-			_context.ApplicationEditor.Verify(
-				x => x.SetAirWaybill(It.Is<long>(i => applications.Any(a => a.Id == i)), null),
-				Times.Exactly(applications.Length));
-			_context.AirWaybillRepository.Verify(x => x.Delete(id), Times.Once());
-			_context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
-		}
-
-		[TestMethod]
-		[ExpectedException(typeof(InvalidLogicException))]
-		public void Test_AwbManager_Create_WithGtd()
-		{
-			var data = _context.Create<AirWaybillData>();
-
-			_manager.Create(It.IsAny<long>(), data, It.IsAny<byte[]>(), It.IsAny<byte[]>(), It.IsAny<byte[]>(),
-				It.IsAny<byte[]>(), It.IsAny<byte[]>());
 		}
 	}
 }

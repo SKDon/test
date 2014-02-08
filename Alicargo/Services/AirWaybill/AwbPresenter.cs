@@ -16,26 +16,26 @@ namespace Alicargo.Services.AirWaybill
 {
 	internal sealed class AwbPresenter : IAwbPresenter
 	{
-		private readonly IAwbRepository _awbRepository;
-		private readonly IBrokerRepository _brokerRepository;
+		private readonly IAwbRepository _awbs;
+		private readonly IBrokerRepository _brokers;
 		private readonly IStateRepository _states;
 
 		public AwbPresenter(
-			IAwbRepository awbRepository,
-			IBrokerRepository brokerRepository,
+			IAwbRepository awbs,
+			IBrokerRepository brokers,
 			IStateRepository states)
 		{
-			_awbRepository = awbRepository;
-			_brokerRepository = brokerRepository;
+			_awbs = awbs;
+			_brokers = brokers;
 			_states = states;
 		}
 
 		public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, string language)
 		{
-			var data = _awbRepository.GetRange(take, skip, brokerId);
+			var data = _awbs.GetRange(take, skip, brokerId);
 			var ids = data.Select(x => x.Id).ToArray();
 
-			var aggregates = _awbRepository.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
+			var aggregates = _awbs.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
 
 			var states = _states.Get(language);
 			var currentCulture = CultureInfo.CurrentCulture;
@@ -59,8 +59,9 @@ namespace Alicargo.Services.AirWaybill
 				StateChangeTimestampLocalString = LocalizationHelper.GetDate(x.StateChangeTimestamp, currentCulture),
 				DepartureAirport = x.DepartureAirport,
 				GTD = x.GTD,
-				GTDAdditionalFileName = x.GTDAdditionalFileName,
+				GTDAdditionalFileName = x.GTDAdditionalFileName,				
 				GTDFileName = x.GTDFileName,
+				DrawFileName = x.DrawFileName,
 				TotalCount = aggregates[x.Id].TotalCount,
 				TotalWeight = aggregates[x.Id].TotalWeight,
 				AdditionalCost = x.AdditionalCost,
@@ -70,83 +71,40 @@ namespace Alicargo.Services.AirWaybill
 				FlightCost = x.FlightCost,
 			}).ToArray();
 
-			var total = _awbRepository.Count(brokerId);
+			var total = _awbs.Count(brokerId);
 
 			return new ListCollection<AirWaybillListItem> { Data = items, Total = total };
 		}
 
 		public AwbAdminModel Get(long id)
 		{
-			var data = _awbRepository.Get(id).FirstOrDefault();
+			var data = _awbs.Get(id).FirstOrDefault();
 
-			if (data == null) throw new EntityNotFoundException("Refarence: " + id);
+			if(data == null) throw new EntityNotFoundException("Refarence: " + id);
 
-			return Map(data);
+			return AwbMapper.GetAdminModel(data);
 		}
 
 		public AwbSenderModel GetSenderAwbModel(long id)
 		{
-			var data = _awbRepository.Get(id).First();
+			var data = _awbs.Get(id).First();
 
-			return new AwbSenderModel
-			{
-				AWBFile = null,
-				AWBFileName = data.AWBFileName,
-				ArrivalAirport = data.ArrivalAirport,
-				Bill = data.Bill,
-				BrokerId = data.BrokerId,
-				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, CultureInfo.CurrentCulture),
-				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, CultureInfo.CurrentCulture),
-				DepartureAirport = data.DepartureAirport,
-				PackingFile = null,
-				PackingFileName = data.PackingFileName,
-				FlightCost = data.FlightCost,
-				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight
-			};
-		}
-
-		public static AwbAdminModel Map(AirWaybillData data)
-		{
-			return new AwbAdminModel
-			{
-				PackingFileName = data.PackingFileName,
-				InvoiceFileName = data.InvoiceFileName,
-				PackingFile = null,
-				AWBFileName = data.AWBFileName,
-				ArrivalAirport = data.ArrivalAirport,
-				Bill = data.Bill,
-				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, CultureInfo.CurrentCulture),
-				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, CultureInfo.CurrentCulture),
-				DepartureAirport = data.DepartureAirport,
-				GTD = data.GTD,
-				GTDFileName = data.GTDFileName,
-				InvoiceFile = null,
-				AWBFile = null,
-				BrokerId = data.BrokerId,
-				GTDAdditionalFile = null,
-				GTDFile = null,
-				AdditionalCost = data.AdditionalCost,
-				BrokerCost = data.BrokerCost,
-				CustomCost = data.CustomCost,
-				FlightCost = data.FlightCost,
-				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight
-			};
+			return AwbMapper.GetSenderModel(data);
 		}
 
 		public AirWaybillData GetData(long id)
 		{
-			return _awbRepository.Get(id).First();
+			return _awbs.Get(id).First();
 		}
 
 		public AirWaybillAggregate GetAggregate(long id)
 		{
-			return _awbRepository.GetAggregate(new[] { id }).First();
+			return _awbs.GetAggregate(new[] { id }).First();
 		}
 
 		public BrokerData GetBroker(long brokerId)
 		{
-			return _brokerRepository.Get(brokerId);
+			return _brokers.Get(brokerId);
 		}
 	}
 }

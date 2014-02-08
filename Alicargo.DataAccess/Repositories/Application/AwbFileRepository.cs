@@ -50,6 +50,17 @@ namespace Alicargo.DataAccess.Repositories.Application
 				});
 		}
 
+		public FileHolder GetDrawFile(long id)
+		{
+			return GetFile(
+				x => x.Id == id && x.DrawFileData != null && x.DrawFileName != null,
+				x => new FileHolder
+				{
+					Data = x.DrawFileData.ToArray(),
+					Name = x.DrawFileName
+				});
+		}
+
 		public FileHolder GTDAdditionalFile(long id)
 		{
 			return GetFile(

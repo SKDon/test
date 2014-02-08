@@ -8,6 +8,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		FileHolder GetAWBFile(long id);
 		FileHolder GetGTDFile(long id);
 		FileHolder GetInvoiceFile(long id);
-		FileHolder GetPackingFile(long id); 
+		FileHolder GetPackingFile(long id);
+		FileHolder GetDrawFile(long id);
 	}
 }

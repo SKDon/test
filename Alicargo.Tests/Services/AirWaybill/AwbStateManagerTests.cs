@@ -37,7 +37,6 @@ namespace Alicargo.Tests.Services.AirWaybill
             _context.AirWaybillRepository.Setup(x => x.SetState(_airWaybillId, _stateId));
             _context.ApplicationRepository.Setup(x => x.GetByAirWaybill(_airWaybillId)).Returns(applicationData);
             _context.ApplicationManager.Setup(x => x.SetState(applicationData[0].Id, _stateId));
-            _context.UnitOfWork.Setup(x => x.SaveChanges());
 
             _stateManager.SetState(_airWaybillId, _stateId);
 
@@ -45,8 +44,6 @@ namespace Alicargo.Tests.Services.AirWaybill
             _context.AirWaybillRepository.Verify(x => x.SetState(_airWaybillId, _stateId), Times.Once());
             _context.ApplicationRepository.Verify(x => x.GetByAirWaybill(_airWaybillId), Times.Once());
             _context.ApplicationManager.Verify(x => x.SetState(applicationData[0].Id, _stateId), Times.Once());
-            _context.UnitOfWork.Verify(x => x.SaveChanges(), Times.Once());
-
         }
     }
 }

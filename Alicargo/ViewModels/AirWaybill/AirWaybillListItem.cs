@@ -38,6 +38,8 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		public string AWBFileName { get; set; }
 
+		public string DrawFileName { get; set; }
+
 		public decimal? FlightCost { get; set; }
 
 		public decimal? CustomCost { get; set; }

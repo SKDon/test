@@ -1,4 +1,5 @@
-﻿using Alicargo.Core.Contracts.AirWaybill;
+﻿using System;
+using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -7,6 +8,7 @@ using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.Email
 {
+	[Obsolete]
 	internal sealed class AwbManagerWithMailing : IAwbManager
 	{
 		private readonly IAwbPresenter _awbPresenter;
@@ -27,10 +29,10 @@ namespace Alicargo.Services.Email
 		}
 
 		public long Create(long? applicationId, AirWaybillData data, byte[] gtdFile,
-			byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
+			byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile, byte[] drawFile)
 		{
-			var awbId = _manager.Create(applicationId, data,
-				gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile);
+			var awbId = _manager.Create(applicationId, data, gtdFile,
+				gtdAdditionalFile, packingFile, invoiceFile, awbFile, drawFile);
 
 			SendOnCreate(awbId);
 

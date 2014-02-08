@@ -44,7 +44,7 @@ namespace Alicargo.Tests.Services.AirWaybill
             var model = _context.Create<AwbAdminModel>();
             var data = new AirWaybillData();
 
-            AwbUpdateManager.Map(model, data);
+            AwbMapper.Map(model, data);
 
             model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
             data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
@@ -57,7 +57,7 @@ namespace Alicargo.Tests.Services.AirWaybill
             var model = _context.Create<AwbBrokerModel>();
             var data = new AirWaybillData();
 
-            AwbUpdateManager.Map(model, data);
+            AwbMapper.Map(model, data);
 
             model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
         }

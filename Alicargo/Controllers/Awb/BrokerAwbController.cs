@@ -7,6 +7,7 @@ using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.Services.AirWaybill;
 using Alicargo.ViewModels.AirWaybill;
 using Resources;
 
@@ -39,25 +40,14 @@ namespace Alicargo.Controllers.Awb
 				return View("Message", (object)string.Format(Pages.CantEditAirWaybill, data.Bill));
 			}
 
-			var model = new AwbBrokerModel
-			{
-				GTD = data.GTD,
-				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				InvoiceFileName = data.InvoiceFileName,
-				GTDFileName = data.GTDFileName,
-				PackingFileName = data.PackingFileName,
-				GTDAdditionalFile = null,
-				InvoiceFile = null,
-				GTDFile = null,
-				PackingFile = null,
-				BrokerCost = data.BrokerCost,
-				CustomCost = data.CustomCost
-			};
+			var model = AwbMapper.GetBrokerModel(data);
 
 			BindBag(data);
 
 			return View(model);
 		}
+
+		
 
 		[HttpPost]
 		[Access(RoleType.Broker)]

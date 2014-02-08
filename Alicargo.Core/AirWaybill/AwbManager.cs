@@ -1,7 +1,6 @@
 ﻿using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Exceptions;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 
 namespace Alicargo.Core.AirWaybill
@@ -12,24 +11,21 @@ namespace Alicargo.Core.AirWaybill
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IApplicationEditor _applicationUpdater;
 		private readonly IAwbRepository _awbRepository;
-		private readonly IUnitOfWork _unitOfWork;
 
 		public AwbManager(
 			IAwbRepository awbRepository,
 			IApplicationAwbManager applicationAwbManager,
 			IApplicationRepository applicationRepository,
-			IUnitOfWork unitOfWork,
 			IApplicationEditor applicationUpdater)
 		{
 			_awbRepository = awbRepository;
 			_applicationAwbManager = applicationAwbManager;
 			_applicationRepository = applicationRepository;
-			_unitOfWork = unitOfWork;
 			_applicationUpdater = applicationUpdater;
 		}
 
 		public long Create(long? applicationId, AirWaybillData data, byte[] gtdFile,
-			byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile)
+			byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile, byte[] drawFile)
 		{
 			if(data.GTD != null)
 			{
@@ -37,16 +33,14 @@ namespace Alicargo.Core.AirWaybill
 			}
 
 			var id = _awbRepository.Add(data, gtdFile, gtdAdditionalFile, packingFile,
-				invoiceFile, awbFile);
-
-			_unitOfWork.SaveChanges();
+				invoiceFile, awbFile, drawFile);
 
 			if(applicationId.HasValue)
 			{
-				_applicationAwbManager.SetAwb(applicationId.Value, id());
+				_applicationAwbManager.SetAwb(applicationId.Value, id);
 			}
 
-			return id();
+			return id;
 		}
 
 		public void Delete(long awbId)
@@ -59,8 +53,6 @@ namespace Alicargo.Core.AirWaybill
 			}
 
 			_awbRepository.Delete(awbId);
-
-			_unitOfWork.SaveChanges();
 		}
 	}
 }
