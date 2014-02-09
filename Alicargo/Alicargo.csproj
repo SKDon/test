@@ -290,7 +290,6 @@
     <Compile Include="Services\Users\Client\ClientPermissions.cs" />
     <Compile Include="Services\Users\Client\ClientPresenter.cs" />
     <Compile Include="Services\Email\ApplicationAwbManagerWithMailing.cs" />
-    <Compile Include="Services\Users\Client\ClientManagerWithMailing.cs" />
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
     <Compile Include="Services\Excel\Rows\AdminApplicationExcelRow.cs" />

@@ -8,5 +8,3 @@
 Sqlcmd -S $server -i "update-1.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 
 Write-Host "Done"
-
-cmd /c pause | out-null

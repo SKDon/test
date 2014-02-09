@@ -52,8 +52,58 @@ namespace Alicargo.App_Start.Jobs
 					"MailSenderJob_" + partitionId);
 			}
 
-			BindStatelessJobRunner(kernel, () => RunMailSenderJob(connectionString, PartitionIdForOtherMails),
-				"MailSenderJob_" + PartitionIdForOtherMails);
+			BindStatelessJobRunner(kernel, () => RunClientJob(connectionString, PartitionIdForOtherMails), "ClientJob");
+
+			BindStatelessJobRunner(kernel, () => RunMailSenderJob(connectionString, PartitionIdForOtherMails), "MailSenderJob_ForOtherMails");
+		}
+
+		private static void RunClientJob(string connectionString, int partitionId)
+		{
+			//using(var connection = new SqlConnection(connectionString))
+			//{
+			//	//var unitOfWork = new UnitOfWork(connection);
+			//	var executor = new SqlProcedureExecutor(connectionString);
+			//	//var events = new EventRepository(executor);
+			//	//var eventEmailRecipient = new EventEmailRecipient(executor);
+			//	//var clientRepository = new ClientRepository(unitOfWork);
+			//	//var adminRepository = new AdminRepository(unitOfWork);
+			//	var serializer = new Serializer();
+			//	//var recipientsFacade = new Alicargo.Jobs.Balance.RecipientsFacade(adminRepository, clientRepository,
+			//	//	eventEmailRecipient);
+			//	//var templateRepository = new TemplateRepository(executor);
+			//	//var textBuilder = new TextBuilder();
+			//	//var clientBalanceRepository = new ClientBalanceRepository(executor);
+			//	//var calculationRepository = new CalculationRepository(executor);
+			//	//var excelClientCalculation = new ExcelClientCalculation(calculationRepository, clientBalanceRepository,
+			//	//	clientRepository);
+			//	//var templateRepositoryWrapper = new TemplateRepositoryHelper(templateRepository);
+			//	//var clientExcelHelper = new ClientExcelHelper(clientRepository, excelClientCalculation);
+			//	//var messageBuilder = new Alicargo.Jobs.Balance.MessageBuilder(
+			//	//	EmailsHelper.DefaultFrom,
+			//	//	recipientsFacade,
+			//	//	clientBalanceRepository,
+			//	//	clientRepository,
+			//	//	serializer,
+			//	//	textBuilder,
+			//	//	clientExcelHelper,
+			//	//	templateRepositoryWrapper);
+
+			//	var emailingProcessor = new DefaultEmailingProcessor(
+			//		new DbMailSender(partitionId, new EmailMessageRepository(executor), serializer),
+			//		messageBuilder);
+
+			//	var processors = new Dictionary<EventState, IEventProcessor>
+			//	{
+			//		{ EventState.Emailing, emailingProcessor }
+			//	};
+
+			//	new SequentialEventJob(events, partitionId,
+			//		new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+			//		{
+			//			{ EventType.BalanceDecreased, processors },
+			//			{ EventType.BalanceIncreased, processors }
+			//		}).Work();
+			//}
 		}
 
 		private static void BindStatelessJobRunner(IBindingRoot kernel, Action action,
@@ -196,7 +246,7 @@ namespace Alicargo.App_Start.Jobs
 				new AdminRepository(unitOfWork),
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
-				new CarrierRepository(passwordConverter, mainExecutor), 
+				new CarrierRepository(passwordConverter, mainExecutor),
 				new ForwarderRepository(passwordConverter, mainExecutor),
 				new BrokerRepository(unitOfWork),
 				new EventEmailRecipient(mainExecutor));

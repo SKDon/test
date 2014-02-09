@@ -61,6 +61,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{FCD332
 		Deploy\run-updates-local.ps1 = Deploy\run-updates-local.ps1
 		Deploy\run-updates.ps1 = Deploy\run-updates.ps1
 		Deploy\SqlSchemaCompare.scmp = Deploy\SqlSchemaCompare.scmp
+		updated-1.sql = updated-1.sql
+		updated-2.sql = updated-2.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B66F9FBC-5917-4450-B151-D3F4FD909245}"

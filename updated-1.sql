@@ -1,0 +1,2 @@
+﻿USE [$(MainDbName)]
+GO

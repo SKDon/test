@@ -1,30 +1,36 @@
 ﻿SET IDENTITY_INSERT [dbo].[EmailTemplate] ON 
 INSERT [dbo].[EmailTemplate] ([Id]) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
-(11), (12), (13), (14), (15), (16), (17), (18), (19), (20),
-(21), (22), (23), (24), (25), (26), (27), (28), (29)
+(24), (25), (26), (27), (28), (29), (30)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
 INSERT [dbo].[EventEmailTemplate]
 ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES
+-- Application events
 (1, 1, 1),
-(3, 2, 1),
-(7, 3, 1),
-(4, 4, 1),
-(5, 5, 1),
+(2, 10, 1),
 (9, 6, 1),
 (10, 7, 1),
+(15, 28, 1), -- SetSender
+(16, 29, 1), -- SetForwarder
+
+-- Application's file events
+(3, 2, 1),
+(4, 4, 1),
+(5, 5, 1),
 (6, 8, 1),
+(7, 3, 1),
 (8, 9, 1),
-(2, 10, 1),
+
+-- Application's calculation events
 (11, 24, 1), -- Calculate
 (12, 25, 0), -- CalculationCanceled
+
+-- Client events
 (13, 26, 1), -- BalanceIncreased
 (14, 27, 1), -- BalanceDecreased
-(15, 28, 1), -- SetSender
-(16, 29, 1) -- SetForwarder
-
+(18, 30, 1)
 
 INSERT [dbo].[EmailTemplateLocalization]
 ([EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES
@@ -243,20 +249,6 @@ Alicargo  srl', 0),
 {AirWaybillDateOfDeparture [Дата вылета: {0}]}
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}', 0),
- -- for states
-(11, N'ru', NULL, NULL, 0),
-(12, N'ru', NULL, NULL, 0),
-(13, N'ru', NULL, NULL, 0),
-(14, N'ru', NULL, NULL, 0),
-(15, N'ru', NULL, NULL, 0),
-(16, N'ru', NULL, NULL, 0),
-(17, N'ru', NULL, NULL, 0),
-(18, N'ru', NULL, NULL, 0),
-(19, N'ru', NULL, NULL, 0),
-(20, N'ru', NULL, NULL, 0),
-(21, N'ru', NULL, NULL, 0),
-(22, N'ru', NULL, NULL, 0),
-(23, N'ru', NULL, NULL, 0),
 -- calculate
 (24, N'ru', 
 N'Расчет стоимости заявки {ApplicationDisplay}',
@@ -286,7 +278,10 @@ N'Списание денежных средств: {Money}€{Comment [ ({0}).]
 N'Установлен отправитель {SenderName} на заявку {DisplayNumber}', 0),
 
 (29, N'ru', N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}',
-N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}', 0)
+N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}', 0),
+
+(30, N'ru', N'Alicargo',
+N'Добрый день, {ClientNic}! Вы зарегистрированны в системе отслеживания грузов компании Alicargo. Имя доступа: {Login}, Пароль: {Password}.', 0)
 
 INSERT [dbo].[EventEmailRecipient]
 ([RoleId], [EventTypeId]) VALUES

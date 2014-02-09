@@ -14,14 +14,14 @@ namespace Alicargo.Jobs.Balance
 {
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
-		private readonly IClientBalanceRepository _balance;		
+		private readonly IClientBalanceRepository _balance;
 		private readonly IClientRepository _clients;
 		private readonly string _defaultFrom;
+		private readonly IClientExcelHelper _excel;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
 		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder _textBuilder;
-		private readonly IClientExcelHelper _excel;
 
 		public MessageBuilder(
 			string defaultFrom,
@@ -49,7 +49,7 @@ namespace Alicargo.Jobs.Balance
 			var clientId = eventDataForEntity.EntityId;
 
 			var templateId = _templates.GetTemplateId(type);
-			if (!templateId.HasValue)
+			if(!templateId.HasValue)
 			{
 				return null;
 			}
@@ -61,22 +61,30 @@ namespace Alicargo.Jobs.Balance
 
 			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value, clientId);
 
-			return recipients.Select(x => GetEmailMessage(x.Email, localizations[x.Culture], files[x.Culture])).ToArray();
+			return recipients.Select(x =>
+				GetEmailMessage(x.Email, localizations[x.Culture], files != null ? files[x.Culture] : null)).ToArray();
+		}
+
+		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder file)
+		{
+			return new EmailMessage(localizationData.Subject, localizationData.Body, _defaultFrom, email)
+			{
+				Files = file != null ? new[] { file } : null,
+				IsBodyHtml = localizationData.IsBodyHtml
+			};
 		}
 
 		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventDataForEntity eventData,
-			string[] languages,
-			long templateId, long clientId)
+			string[] languages, long templateId, long clientId)
 		{
 			var clientData = _clients.Get(clientId);
-			var paymentEventData = _serializer.Deserialize<PaymentEventData>(eventData.Data);
 
-			var localizations = languages.ToDictionary(x => x,
+			return languages.ToDictionary(x => x,
 				language =>
 				{
 					var template = _templates.GetLocalization(templateId, language);
 
-					var localizedData = GetLocalizedData(language, paymentEventData, clientData);
+					var localizedData = GetLocalizedData(language, eventData.Data, clientData);
 
 					return new EmailTemplateLocalizationData
 					{
@@ -85,13 +93,13 @@ namespace Alicargo.Jobs.Balance
 						Body = _textBuilder.GetText(template.Body, language, localizedData)
 					};
 				});
-
-			return localizations;
 		}
 
-		private IDictionary<string, string> GetLocalizedData(string language, PaymentEventData paymentEventData,
+		private IDictionary<string, string> GetLocalizedData(string language, byte[] eventData,
 			ClientData clientData)
 		{
+			var paymentEventData = _serializer.Deserialize<PaymentEventData>(eventData);
+
 			var culture = CultureInfo.GetCultureInfo(language);
 			var balance = _balance.GetBalance(clientData.ClientId);
 
@@ -103,15 +111,6 @@ namespace Alicargo.Jobs.Balance
 				{ "ClientNic", clientData.Nic },
 				{ "LegalEntity", clientData.LegalEntity },
 				{ "Timestamp", LocalizationHelper.GetDate(paymentEventData.Timestamp, culture) }
-			};
-		}		
-
-		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder file)
-		{
-			return new EmailMessage(localizationData.Subject, localizationData.Body, _defaultFrom, email)
-			{
-				Files = new[] { file },
-				IsBodyHtml = localizationData.IsBodyHtml
 			};
 		}
 	}

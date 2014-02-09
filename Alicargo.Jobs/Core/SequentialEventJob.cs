@@ -22,7 +22,7 @@ namespace Alicargo.Jobs.Core
 			_processors = processors;
 		}
 
-		public void Work()
+		public void Work()                                          
 		{
 			foreach (var typeProcessors in _processors)
 			{

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -50,14 +48,12 @@ namespace Alicargo.Jobs.Helpers
 			return files;
 		}
 
-		internal static string GetName(ClientData clientData)
+		private static string GetName(ClientData clientData)
 		{
 			var date = LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.GetCultureInfo(clientData.Language));
 			var name = "calculation_" + date + "_" + clientData.Nic + ".xlsx";
-			name = Regex.Replace(
-				name, "[" + Regex.Escape(new string(Path.GetInvalidFileNameChars())) + "\\s]", "_");
 
-			return name;
+			return name.EscapeFileName();
 		}
 	}
 }

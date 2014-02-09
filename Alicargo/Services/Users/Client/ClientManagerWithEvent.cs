@@ -1,4 +1,5 @@
 ﻿using Alicargo.Core.Contracts.Event;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
@@ -7,7 +8,6 @@ namespace Alicargo.Services.Users.Client
 {
 	internal sealed class ClientManagerWithEvent : IClientManager
 	{
-		// todo: use ClientManagerWithMailing
 		private readonly IEventFacade _events;
 		private readonly IClientManager _manager;
 
@@ -25,6 +25,8 @@ namespace Alicargo.Services.Users.Client
 		public long Add(ClientModel client, TransitEditModel transit, AuthenticationModel authentication)
 		{
 			var id = _manager.Add(client, transit, authentication);
+
+			_events.Add(id, EventType.ClientAdd, EventState.Emailing, authentication.NewPassword);
 
 			return id;
 		}

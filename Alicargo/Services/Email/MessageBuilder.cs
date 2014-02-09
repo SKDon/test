@@ -4,8 +4,6 @@ using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.Services.Abstract;
-using Alicargo.ViewModels;
-using Alicargo.ViewModels.User;
 
 namespace Alicargo.Services.Email
 {
@@ -15,12 +13,6 @@ namespace Alicargo.Services.Email
 		public string DefaultSubject
 		{
 			get { return Mail.Default_Subject; }
-		}
-
-		public string ClientAdd(ClientModel model, AuthenticationModel authenticationModel)
-		{
-			return string.Format(Mail.Client_Add, model.Contacts, authenticationModel.Login,
-								 authenticationModel.NewPassword);
 		}
 
 		#region AWB
