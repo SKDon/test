@@ -41,11 +41,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var states = _states.Get(TwoLetterISOLanguageName.Italian);
 
-			var all = _states.All();
+			var all = _states.Get(TwoLetterISOLanguageName.English);
 
-			Assert.AreNotEqual(0, all.Length);
-
-			Assert.AreEqual(all.Length, states.Count);
+			Assert.AreEqual(all.Count, states.Count);
 		}
 
 		[TestMethod]

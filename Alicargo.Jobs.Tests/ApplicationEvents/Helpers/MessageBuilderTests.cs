@@ -36,8 +36,8 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			// ReSharper disable ImplicitlyCapturedClosure
 			_container.Serializer.Setup(x => x.Deserialize<EventDataForEntity>(eventData.Data)).Returns(eventDataForEntity);
 			_container.ApplicationRepository.Setup(x => x.GetExtendedData(eventDataForEntity.EntityId)).Returns(applicationDetailsData);
-			_container.ApplicationEventTemplates.Setup(x => x.GetTemplateId(eventType, eventDataForEntity.Data)).Returns(templateId);
-			_container.ApplicationEventTemplates.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
+			_container.TemplateRepositoryHelper.Setup(x => x.GetTemplateId(eventType)).Returns(templateId);
+			_container.TemplateRepositoryHelper.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
 				.Returns(localization);
 			_container.FilesFasade.Setup(x => x.GetFiles(eventDataForEntity.EntityId, It.IsAny<long?>(), eventType, eventDataForEntity.Data))
 				.Returns(new[] { _container.Create<FileHolder>() });
@@ -59,8 +59,8 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			messages[0].To[0].ShouldBeEquivalentTo(recipientData.Email);
 
 			_container.ApplicationRepository.Verify(x => x.GetExtendedData(eventDataForEntity.EntityId));
-			_container.ApplicationEventTemplates.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
-			_container.ApplicationEventTemplates.Verify(x => x.GetTemplateId(eventType, eventDataForEntity.Data));
+			_container.TemplateRepositoryHelper.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
+			_container.TemplateRepositoryHelper.Verify(x => x.GetTemplateId(eventType));
 			_container.FilesFasade.Verify(x => x.GetFiles(eventDataForEntity.EntityId, It.IsAny<long?>(), eventType, eventDataForEntity.Data));
 			_container.RecipientsFacade.Verify(x => x.GetRecipients(applicationDetailsData, eventType, eventDataForEntity.Data));
 			_container.TextBulder.Verify(

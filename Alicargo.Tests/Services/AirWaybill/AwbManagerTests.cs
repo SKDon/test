@@ -38,7 +38,6 @@ namespace Alicargo.Tests.Services.AirWaybill
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
 			_context.ApplicationAwbManager.Setup(x => x.SetAwb(applicationId, airWaybillId));
-			_context.UnitOfWork.Setup(x => x.SaveChanges());
 			_context.AirWaybillRepository.Setup(
 				x =>
 					x.Add(It.IsAny<AirWaybillData>(), model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
@@ -51,7 +50,6 @@ namespace Alicargo.Tests.Services.AirWaybill
 				model.InvoiceFile, model.AWBFile, model.DrawFile);
 
 			_context.ApplicationAwbManager.Verify(x => x.SetAwb(applicationId, airWaybillId), Times.Once());
-			_context.UnitOfWork.Verify(x => x.SaveChanges());
 			_context.AirWaybillRepository.Verify(x => x.Add(It.Is<AirWaybillData>(
 				data => data.Id == 0
 				        && data.StateId == cargoIsFlewStateId

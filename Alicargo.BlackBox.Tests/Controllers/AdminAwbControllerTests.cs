@@ -62,7 +62,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			{
 				var actual = connection.Query<AwbAdminModel>(
 					"select *, GTDFileData as GTDFile, GTDAdditionalFileData as GTDAdditionalFile, PackingFileData as PackingFile," +
-					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile " +
+					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile, DrawFileData AS DrawFile " +
 					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
 				var actualData = connection.Query<AirWaybillData>(
@@ -100,7 +100,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			{
 				var actual = connection.Query<AwbAdminModel>(
 					"select *, GTDFileData as GTDFile, GTDAdditionalFileData as GTDAdditionalFile, PackingFileData as PackingFile," +
-					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile " +
+					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile, DrawFileData AS DrawFile " +
 					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
 				var actualData = connection.Query<AirWaybillData>(

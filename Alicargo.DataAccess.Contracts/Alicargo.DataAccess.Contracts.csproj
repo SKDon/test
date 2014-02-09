@@ -67,9 +67,7 @@
     <Compile Include="Contracts\EmailTemplateLocalizationData.cs" />
     <Compile Include="Contracts\FileInfo.cs" />
     <Compile Include="Contracts\RecipientData.cs" />
-    <Compile Include="Contracts\StateEmailTemplateData.cs" />
     <Compile Include="Contracts\User\SenderData.cs" />
-    <Compile Include="Contracts\State\StateListItem.cs" />
     <Compile Include="Contracts\State\StateRole.cs" />
     <Compile Include="Contracts\CountryData.cs" />
     <Compile Include="Contracts\FileHolder.cs" />

@@ -189,11 +189,10 @@ namespace Alicargo.App_Start.Jobs
 			var cities = new CityRepository(mainExecutor);
 			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(
 				serializer, countries, cities, states, files, clientBalanceRepository, new TextBuilder());
-			var stateSettings = new StateSettingsRepository(mainExecutor);
 			var templates = new TemplateRepository(mainExecutor);
 			var clientRepository = new ClientRepository(unitOfWork);
 			var recipientsFacade = new RecipientsFacade(
-				awbs, serializer, stateSettings,
+				awbs,
 				new AdminRepository(unitOfWork),
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
@@ -201,8 +200,7 @@ namespace Alicargo.App_Start.Jobs
 				new ForwarderRepository(passwordConverter, mainExecutor),
 				new BrokerRepository(unitOfWork),
 				new EventEmailRecipient(mainExecutor));
-			var wrapper = new TemplateRepositoryHelper(templates);
-			var applicationEventTemplates = new ApplicationEventTemplates(wrapper, templates, serializer);
+			var templateRepositoryHelper = new TemplateRepositoryHelper(templates);
 			var calculationRepository = new CalculationRepository(mainExecutor);
 			var excelClientCalculation = new ExcelClientCalculation(calculationRepository, clientBalanceRepository,
 				clientRepository);
@@ -213,7 +211,7 @@ namespace Alicargo.App_Start.Jobs
 				filesFasade,
 				textBulder,
 				recipientsFacade,
-				applicationEventTemplates,
+				templateRepositoryHelper,
 				applications,
 				clientExcelHelper,
 				serializer);

@@ -288,23 +288,6 @@ N'Установлен отправитель {SenderName} на заявку {Di
 (29, N'ru', N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}',
 N'Установлен перевозчик {ForwarderName} на заявку {DisplayNumber}', 0)
 
-INSERT [dbo].[StateEmailTemplate]
-([StateId],	[EmailTemplateId],	[EnableEmailSend],	[UseEventTemplate]) VALUES
-(11,		11,					1,					1),
-(3,			12,					1,					1),
-(13,		13,					1,					1),
-(2,			14,					1,					1),
-(10,		15,					1,					1),
-(15,		16,					1,					1),
-(4,			17,					1,					1),
-(6,			18,					1,					1),
-(7,			19,					1,					1),
-(8,			20,					1,					1),
-(9,			21,					1,					1),
-(12,		22,					1,					1),
-(14,		23,					1,					1)
-
-
 INSERT [dbo].[EventEmailRecipient]
 ([RoleId], [EventTypeId]) VALUES
 -- Admin 1

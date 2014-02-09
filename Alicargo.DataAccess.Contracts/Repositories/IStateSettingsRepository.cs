@@ -7,9 +7,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories
 	{
 		StateRole[] GetStateAvailabilities();
 		StateRole[] GetStateVisibilities();
-		StateRole[] GetStateEmailRecipients();
 		void SetStateAvailabilities(long stateId, RoleType[] roles);
 		void SetStateVisibilities(long stateId, RoleType[] roles);
-		void SetStateEmailRecipients(long stateId, RoleType[] roles);
 	}
 }

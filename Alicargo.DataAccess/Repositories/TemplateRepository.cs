@@ -16,32 +16,11 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public void SetForState(long stateId, string language, bool enableEmailSend, bool useEventTemplate,
-			EmailTemplateLocalizationData localization)
-		{
-			_executor.Execute("[dbo].[EmailTemplate_MergeState]", new
-			{
-				StateId = stateId,
-				localization.Body,
-				localization.IsBodyHtml,
-				localization.Subject,
-				TwoLetterISOLanguageName = language,
-				enableEmailSend,
-				useEventTemplate
-			});
-		}
-
 		public EventTemplateData GetByEventType(EventType eventType)
 		{
 			return _executor.Query<EventTemplateData>("[dbo].[EmailTemplate_GetByEvent]",
 				new { EventTypeId = (int)eventType });
 		}
-
-		public StateEmailTemplateData GetByStateId(long stateId)
-		{
-			return _executor.Query<StateEmailTemplateData>("[dbo].[EmailTemplate_GetByStateId]", new { stateId });
-		}
-
 
 		public EmailTemplateLocalizationData GetLocalization(long templateId, string language)
 		{
@@ -53,6 +32,19 @@ namespace Alicargo.DataAccess.Repositories
 				"[dbo].[EmailTemplateLocalization_Get]",
 				new TableParameters(new { TemplateId = templateId }, table))
 				.Single();
+		}
+
+		public void SetForEvent(EventType eventType, string language, bool enableEmailSend, EmailTemplateLocalizationData localization)
+		{
+			_executor.Execute("[dbo].[EmailTemplate_MergeEvent]", new
+			{
+				EventTypeId = eventType,
+				localization.Body,
+				localization.IsBodyHtml,
+				localization.Subject,
+				TwoLetterISOLanguageName = language,
+				enableEmailSend
+			});
 		}
 	}
 }

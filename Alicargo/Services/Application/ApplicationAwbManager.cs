@@ -40,16 +40,12 @@ namespace Alicargo.Services.Application
 				_applicationUpdater.SetAirWaybill(applicationId, awbId.Value);
 
 				_applicationManager.SetState(applicationId, aggregate.StateId);
-
-				_unitOfWork.SaveChanges();
 			}
 			else
 			{
 				_applicationUpdater.SetAirWaybill(applicationId, null);
 
 				_applicationManager.SetState(applicationId, _stateConfig.CargoInStockStateId);
-
-				_unitOfWork.SaveChanges();
 			}
 		}
 	}

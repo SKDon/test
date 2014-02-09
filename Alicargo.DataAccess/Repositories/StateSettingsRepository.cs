@@ -27,14 +27,9 @@ namespace Alicargo.DataAccess.Repositories
 			return _executor.Array<StateRole>("[dbo].[State_GetStateVisibilities]");
 		}
 
-		public StateRole[] GetStateEmailRecipients()
-		{
-			return _executor.Array<StateRole>("[dbo].[State_GetStateEmailRecipients]");
-		}
-
 		public void SetStateAvailabilities(long stateId, RoleType[] roles)
 		{
-			if (roles ==null)
+			if(roles == null)
 			{
 				throw new ArgumentNullException("roles");
 			}
@@ -46,7 +41,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void SetStateVisibilities(long stateId, RoleType[] roles)
 		{
-			if (roles == null)
+			if(roles == null)
 			{
 				throw new ArgumentNullException("roles");
 			}
@@ -54,18 +49,6 @@ namespace Alicargo.DataAccess.Repositories
 			var table = TableParameters.GeIdsTable("Roles", roles.Select(x => (long)x).ToArray());
 
 			_executor.Execute("[dbo].[State_SetStateVisibilities]", new TableParameters(new { stateId }, table));
-		}
-
-		public void SetStateEmailRecipients(long stateId, RoleType[] roles)
-		{
-			if (roles == null)
-			{
-				throw new ArgumentNullException("roles");
-			}
-
-			var table = TableParameters.GeIdsTable("Roles", roles.Select(x => (long)x).ToArray());
-
-			_executor.Execute("[dbo].[State_SetStateEmailRecipients]", new TableParameters(new { stateId }, table));
 		}
 	}
 }

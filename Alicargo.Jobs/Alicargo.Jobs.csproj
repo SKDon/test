@@ -52,7 +52,6 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="ApplicationEvents\Helpers\ApplicationEventTemplates.cs" />
     <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
     <Compile Include="Balance\Entities\PaymentEventData.cs" />
     <Compile Include="Balance\IRecipientsFacade.cs" />

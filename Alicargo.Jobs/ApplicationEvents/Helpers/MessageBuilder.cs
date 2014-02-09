@@ -20,7 +20,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly IFilesFacade _files;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
-		private readonly IApplicationEventTemplates _templates;
+		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder _textBuilder;
 
 		public MessageBuilder(
@@ -28,7 +28,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			IFilesFacade files,
 			ITextBuilder textBuilder,
 			IRecipientsFacade recipients,
-			IApplicationEventTemplates templates,
+			ITemplateRepositoryHelper templates,
 			IApplicationRepository applications,
 			IClientExcelHelper excel,
 			ISerializer serializer)
@@ -58,7 +58,7 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 				throw new InvalidOperationException("Can't find application by id " + applicationId);
 			}
 
-			var templateId = _templates.GetTemplateId(type, applicationEventData);
+			var templateId = _templates.GetTemplateId(type);
 			if(!templateId.HasValue)
 			{
 				return null;

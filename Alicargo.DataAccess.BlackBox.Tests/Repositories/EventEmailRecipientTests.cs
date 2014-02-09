@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
@@ -17,7 +16,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private DbTestContext _context;
 		private Fixture _fixture;
 		private EventEmailRecipient _recipients;
-		private TemplateRepository _templates;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -27,7 +25,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 			_recipients = new EventEmailRecipient(executor);
-			_templates = new TemplateRepository(executor);
 		}
 
 		[TestCleanup]
@@ -39,21 +36,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_Set_SetForEvent()
 		{
-			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
-
 			const EventType eventType = EventType.ApplicationCreated;
 
 			var recipients = _fixture.CreateMany<RoleType>().ToArray();
 
-			_recipients.SetForEvent(eventType, TwoLetterISOLanguageName.English, false, recipients, localizationData);
-
-			var data = _templates.GetByEventType(eventType);
-
-			data.EnableEmailSend.Should().BeFalse();
-
-			var localization = _templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English);
-
-			localization.ShouldBeEquivalentTo(localizationData);
+			_recipients.Set(eventType, recipients);
 
 			_recipients.GetRecipientRoles(eventType).ShouldAllBeEquivalentTo(recipients);
 		}

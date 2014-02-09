@@ -1,6 +1,5 @@
 ﻿using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
@@ -16,8 +15,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private DbTestContext _context;
 		private Fixture _fixture;
-		private StateRepository _states;
 		private TemplateRepository _templates;
+
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -27,86 +31,66 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 			_templates = new TemplateRepository(executor);
-			_states = new StateRepository(executor);
-		}
-
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_context.Cleanup();
 		}
 
 		[TestMethod]
 		public void Test_Set_New()
 		{
-			var id = AddTestState();
+			const EventType newEventType = (EventType)(-1);
 
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.SetForState(id, TwoLetterISOLanguageName.English, false, true, localizationData);
+			_templates.SetForEvent(newEventType, TwoLetterISOLanguageName.English, false, localizationData);
 
-			var data = _templates.GetByStateId(id);
-
-			data.UseEventTemplate.Should().BeTrue();
+			var data = _templates.GetByEventType(newEventType);
 
 			data.EnableEmailSend.Should().BeFalse();
 
 			var localization = _templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English);
 
 			localization.ShouldBeEquivalentTo(localizationData);
-		}	
-
-		private long AddTestState()
-		{
-			return _states.Add(TwoLetterISOLanguageName.English, _fixture.Create<StateData>());
-		}
-
-		[TestMethod]
-		public void Test_Set_WithSameLanguage()
-		{
-			var id = AddTestState();
-
-			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
-
-			_templates.SetForState(id, TwoLetterISOLanguageName.English, false, true, localizationData);
-
-			var newLocalizationData = _fixture.Create<EmailTemplateLocalizationData>();
-
-			_templates.SetForState(id, TwoLetterISOLanguageName.English, true, false, newLocalizationData);
-
-			var data = _templates.GetByStateId(id);
-
-			data.EnableEmailSend.Should().BeTrue();
-
-			data.UseEventTemplate.Should().BeFalse();
-
-			var localization = _templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English);
-
-			localization.ShouldBeEquivalentTo(newLocalizationData);
 		}
 
 		[TestMethod]
 		public void Test_Set_WithOtherLanguage()
 		{
-			var id = AddTestState();
-
 			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.SetForState(id, TwoLetterISOLanguageName.English, false, true, localizationData);
+			_templates.SetForEvent(EventType.ApplicationCreated, TwoLetterISOLanguageName.English, false, localizationData);
 
 			var newLocalizationData = _fixture.Create<EmailTemplateLocalizationData>();
 
-			_templates.SetForState(id, TwoLetterISOLanguageName.Italian, true, false, newLocalizationData);
+			_templates.SetForEvent(EventType.ApplicationCreated, TwoLetterISOLanguageName.Italian, true, newLocalizationData);
 
-			var data = _templates.GetByStateId(id);
+			var data = _templates.GetByEventType(EventType.ApplicationCreated);
 
 			data.EnableEmailSend.Should().BeTrue();
 
-			data.UseEventTemplate.Should().BeFalse();
+			_templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English)
+				.ShouldBeEquivalentTo(localizationData);
 
-			_templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English).ShouldBeEquivalentTo(localizationData);
+			_templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.Italian)
+				.ShouldBeEquivalentTo(newLocalizationData);
+		}
 
-			_templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.Italian).ShouldBeEquivalentTo(newLocalizationData);
+		[TestMethod]
+		public void Test_Set_WithSameLanguage()
+		{
+			var localizationData = _fixture.Create<EmailTemplateLocalizationData>();
+
+			_templates.SetForEvent(EventType.ApplicationCreated, TwoLetterISOLanguageName.English, false, localizationData);
+
+			var newLocalizationData = _fixture.Create<EmailTemplateLocalizationData>();
+
+			_templates.SetForEvent(EventType.ApplicationCreated, TwoLetterISOLanguageName.English, true, newLocalizationData);
+
+			var data = _templates.GetByEventType(EventType.ApplicationCreated);
+
+			data.EnableEmailSend.Should().BeTrue();
+
+			var localization = _templates.GetLocalization(data.EmailTemplateId, TwoLetterISOLanguageName.English);
+
+			localization.ShouldBeEquivalentTo(newLocalizationData);
 		}
 	}
 }

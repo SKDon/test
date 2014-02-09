@@ -17,8 +17,8 @@ namespace Alicargo.Controllers
 	public partial class EmailTemplateController : Controller
 	{
 		private readonly IIdentityService _identity;
-		private readonly ITemplateRepository _templates;
 		private readonly IEventEmailRecipient _recipients;
+		private readonly ITemplateRepository _templates;
 
 		public EmailTemplateController(
 			ITemplateRepository templates,
@@ -28,36 +28,6 @@ namespace Alicargo.Controllers
 			_templates = templates;
 			_recipients = recipients;
 			_identity = identity;
-		}
-
-		[HttpGet]
-		[Access(RoleType.Admin)]
-		public virtual ViewResult Index()
-		{
-			return View();
-		}
-
-		[HttpGet]
-		[Access(RoleType.Admin)]
-		public virtual ViewResult Help()
-		{
-			return View();
-		}
-
-		[HttpPost, Access(RoleType.Admin),
-		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult List()
-		{
-			var types = Enum.GetValues(typeof(EventType))
-				.Cast<EventType>()
-				.Select(x => new
-				{
-					Id = (int)x,
-					Name = x.ToLocalString()
-				})
-				.ToArray();
-
-			return Json(types);
 		}
 
 		[HttpGet]
@@ -75,7 +45,7 @@ namespace Alicargo.Controllers
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Edit(EventTemplateModel model)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				BindLanguageList();
 
@@ -84,16 +54,57 @@ namespace Alicargo.Controllers
 
 			var roles = model.Settings.GetSettings();
 
-			_recipients.SetForEvent(
-				model.EventType, model.Language, model.EnableEmailSend, roles,
-				new EmailTemplateLocalizationData
-				{
-					Body = model.Body,
-					IsBodyHtml = false,
-					Subject = model.Subject
-				});
+			_recipients.Set(model.EventType, roles);
+
+			_templates.SetForEvent(model.EventType, model.Language, model.EnableEmailSend, new EmailTemplateLocalizationData
+			{
+				Body = model.Body,
+				IsBodyHtml = false,
+				Subject = model.Subject
+			});
 
 			return RedirectToAction(MVC.EmailTemplate.Edit(model.EventType, model.Language));
+		}
+
+		[HttpGet]
+		[Access(RoleType.Admin)]
+		public virtual ViewResult Help()
+		{
+			return View();
+		}
+
+		[HttpGet]
+		[Access(RoleType.Admin)]
+		public virtual ViewResult Index()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult List()
+		{
+			var types = Enum.GetValues(typeof(EventType))
+				.Cast<EventType>()
+				.Select(x => new
+				{
+					Id = (int)x,
+					Name = x.ToLocalString()
+				})
+				.ToArray();
+
+			return Json(types);
+		}
+
+		private void BindLanguageList()
+		{
+			ViewBag.Languages = new Dictionary<string, string>
+			{
+				{ TwoLetterISOLanguageName.English, LanguageName.English },
+				{ TwoLetterISOLanguageName.Russian, LanguageName.Russian },
+				{ TwoLetterISOLanguageName.Italian, LanguageName.Italian },
+			};
 		}
 
 		private EventTemplateModel GetModel(EventType eventType, string language)
@@ -112,16 +123,6 @@ namespace Alicargo.Controllers
 				Language = language,
 				EventType = eventType,
 				Settings = EmailTemplateSettingsModelHelper.GetModel(recipients)
-			};
-		}
-
-		private void BindLanguageList()
-		{
-			ViewBag.Languages = new Dictionary<string, string>
-			{
-				{TwoLetterISOLanguageName.English, LanguageName.English},
-				{TwoLetterISOLanguageName.Russian, LanguageName.Russian},
-				{TwoLetterISOLanguageName.Italian, LanguageName.Italian},
 			};
 		}
 	}

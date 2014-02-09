@@ -85,7 +85,7 @@ namespace Alicargo.TestHelpers
 			StateSettingsRepository = Inject<IStateSettingsRepository>();
 			TemplateRepository = Inject<ITemplateRepository>();
 			AdminRepository = Inject<IAdminRepository>();
-			TemplateRepositoryWrapper = Inject<ITemplateRepositoryHelper>();
+			TemplateRepositoryHelper = Inject<ITemplateRepositoryHelper>();
 			RecipientsFacade = Inject<IRecipientsFacade>();
 			FilesFasade = Inject<IFilesFacade>();
 			TextBulder = Inject<ITextBuilder>();
@@ -125,7 +125,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ITransaction> Transaction { get; private set; }
 		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
 		public Mock<ITemplateRepository> TemplateRepository { get; private set; }
-		public Mock<ITemplateRepositoryHelper> TemplateRepositoryWrapper { get; private set; }
+		public Mock<ITemplateRepositoryHelper> TemplateRepositoryHelper { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
 		public Mock<IFilesFacade> FilesFasade { get; private set; }
 		public Mock<ITextBuilder> TextBulder { get; private set; }

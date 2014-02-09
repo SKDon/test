@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -9,7 +8,6 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.ApplicationEvents.Abstract;
-using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.ApplicationEvents.Helpers
 {
@@ -22,14 +20,10 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 		private readonly ICarrierRepository _carriers;
 		private readonly IForwarderRepository _forwarders;
 		private readonly ISenderRepository _senders;
-		private readonly ISerializer _serializer;
-		private readonly IStateSettingsRepository _stateSettings;
 		private readonly IEventEmailRecipient _recipients;
 
 		public RecipientsFacade(
 			IAwbRepository awbs,
-			ISerializer serializer,
-			IStateSettingsRepository stateSettings,
 			IAdminRepository admins,
 			ISenderRepository senders,
 			IClientRepository clients,
@@ -39,8 +33,6 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 			IEventEmailRecipient recipients)
 		{
 			_awbs = awbs;
-			_serializer = serializer;
-			_stateSettings = stateSettings;
 			_admins = admins;
 			_senders = senders;
 			_clients = clients;
@@ -52,31 +44,11 @@ namespace Alicargo.Jobs.ApplicationEvents.Helpers
 
 		public RecipientData[] GetRecipients(ApplicationExtendedData application, EventType type, byte[] data)
 		{
-			var roles = GetRoles(type, data);
+			var roles = _recipients.GetRecipientRoles(type);
 
 			return roles.Length == 0
 				? null
 				: GetRecipients(application, roles).ToArray();
-		}
-
-		private RoleType[] GetRoles(EventType type, byte[] data)
-		{
-			RoleType[] roles;
-			if(type == EventType.ApplicationSetState)
-			{
-				var stateEventData = _serializer.Deserialize<ApplicationSetStateEventData>(data);
-
-				roles = _stateSettings.GetStateEmailRecipients()
-					.Where(x => x.StateId == stateEventData.StateId)
-					.Select(x => x.Role)
-					.ToArray();
-			}
-			else
-			{
-				roles = _recipients.GetRecipientRoles(type);
-			}
-
-			return roles;
 		}
 
 		private IEnumerable<RecipientData> GetRecipients(ApplicationExtendedData application, IEnumerable<RoleType> roles)

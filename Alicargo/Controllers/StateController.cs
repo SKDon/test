@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
@@ -29,21 +28,6 @@ namespace Alicargo.Controllers
 			_states = states;
 			_templates = templates;
 			_identity = identity;
-		}
-
-		[Access(RoleType.Admin)]
-		public virtual ActionResult Index()
-		{
-			return View();
-		}
-
-		[HttpPost, Access(RoleType.Admin),
-		 OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult List()
-		{
-			var states = _states.Get(_identity.Language);
-
-			return Json(states);
 		}
 
 		[HttpGet]
@@ -76,17 +60,6 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.State.Edit(id, language));
 		}
 
-		[HttpGet]
-		[Access(RoleType.Admin)]
-		public virtual ViewResult Edit(long id, string lang)
-		{
-			BindLanguageList();
-
-			var model = GetStateModel(id, lang ?? _identity.Language);
-
-			return View(model);
-		}
-
 		[HttpPost]
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Delete(long id)
@@ -101,6 +74,17 @@ namespace Alicargo.Controllers
 			}
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[HttpGet]
+		[Access(RoleType.Admin)]
+		public virtual ViewResult Edit(long id, string lang)
+		{
+			BindLanguageList();
+
+			var model = GetStateModel(id, lang ?? _identity.Language);
+
+			return View(model);
 		}
 
 		[HttpPost]
@@ -121,46 +105,53 @@ namespace Alicargo.Controllers
 				Position = model.Position
 			});
 
-			_templates.SetForState(model.Id, model.Language, model.EnableEmailSend, model.UseEventTemplate,
-				new EmailTemplateLocalizationData
-				{
-					Body = model.Body,
-					IsBodyHtml = false,
-					Subject = model.Subject
-				});
-
 			return RedirectToAction(MVC.State.Edit(model.Id, model.Language));
 		}
 
-		private StateEditModel GetStateModel(long id, string language)
+		[Access(RoleType.Admin)]
+		public virtual ActionResult Index()
 		{
-			var state = _states.Get(language, id).Single().Value;
+			return View();
+		}
 
-			var commonData = _templates.GetByStateId(id);
-
-			var localization = commonData != null ? _templates.GetLocalization(commonData.EmailTemplateId, language) : null;
-
-			return new StateEditModel
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult List()
+		{
+			var states = _states.Get(_identity.Language).Select(x => new
 			{
-				Id = id,
-				Name = state.Name,
-				Language = language,
-				LocalizedName = state.LocalizedName,
-				Subject = localization != null ? localization.Subject : null,
-				Body = localization != null ? localization.Body : null,
-				Position = state.Position,
-				EnableEmailSend = commonData != null && commonData.EnableEmailSend,
-				UseEventTemplate = commonData != null && commonData.UseEventTemplate
-			};
+				Id = x.Key,
+				Name = x.Value.LocalizedName
+			}).ToArray();
+
+			return Json(states);
 		}
 
 		private void BindLanguageList()
 		{
 			ViewBag.Languages = new Dictionary<string, string>
 			{
-				{TwoLetterISOLanguageName.English, LanguageName.English},
-				{TwoLetterISOLanguageName.Russian, LanguageName.Russian},
-				{TwoLetterISOLanguageName.Italian, LanguageName.Italian},
+				{ TwoLetterISOLanguageName.English, LanguageName.English },
+				{ TwoLetterISOLanguageName.Russian, LanguageName.Russian },
+				{ TwoLetterISOLanguageName.Italian, LanguageName.Italian },
+			};
+		}
+
+		private StateEditModel GetStateModel(long stateId, string language)
+		{
+			var state = _states.Get(language, stateId).Single().Value;
+
+			var commonData = _templates.GetByEventType(EventType.ApplicationSetState);
+
+			return new StateEditModel
+			{
+				Id = stateId,
+				Name = state.Name,
+				Language = language,
+				LocalizedName = state.LocalizedName,
+				Position = state.Position,
+				EnableEmailSend = commonData != null && commonData.EnableEmailSend
 			};
 		}
 	}

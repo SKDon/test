@@ -7,7 +7,7 @@
 	<b>
 		@ViewBag.StateName
 	</b>
-	@using (Html.BeginForm())
+	@using(Html.BeginForm())
 	{
 		<table>
 			<tr>
@@ -18,15 +18,6 @@
 				<td class="title">@Enums.Forwarder</td>
 				<td class="title">@Enums.Client</td>
 				<td class="title">@Entities.Carrier</td>
-			</tr>
-			<tr>
-				<td class="title">@Pages.StateSettings_Recipients</td>
-				<td>@Html.CheckBoxFor(x => x.Recipients.Admin)</td>
-				<td>@Html.CheckBoxFor(x => x.Recipients.Sender)</td>
-				<td>@Html.CheckBoxFor(x => x.Recipients.Broker)</td>
-				<td>@Html.CheckBoxFor(x => x.Recipients.Forwarder)</td>
-				<td>@Html.CheckBoxFor(x => x.Recipients.Client)</td>
-				<td>@Html.CheckBoxFor(x => x.Recipients.Carrier)</td>
 			</tr>
 			<tr>
 				<td class="title">@Pages.StateSettings_Availabilities</td>
@@ -49,7 +40,7 @@
 		</table>
 		<p>
 			<input type="submit" class="btn btn-primary" value="@Pages.Save" />
-			@Html.ActionLink(Pages.Cancel, MVC.StateSettings.Index(), new {@class = "btn"})
+			@Html.ActionLink(Pages.Cancel, MVC.StateSettings.Index(), new { @class = "btn" })
 		</p>
 	}
 </div>

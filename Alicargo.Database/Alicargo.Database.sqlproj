@@ -116,18 +116,14 @@
     <Build Include="Stored procedures\State\State_Delete.sql" />
     <Build Include="Stored procedures\State\State_GetOrderedList.sql" />
     <Build Include="Stored procedures\State\State_GetStateAvailabilities.sql" />
-    <Build Include="Stored procedures\State\State_GetStateEmailRecipients.sql" />
     <Build Include="Stored procedures\State\State_GetStateVisibilities.sql" />
     <Build Include="Stored procedures\State\State_SetStateAvailabilities.sql" />
-    <Build Include="Stored procedures\State\State_SetStateEmailRecipients.sql" />
     <Build Include="Stored procedures\State\State_SetStateVisibilities.sql" />
     <Build Include="Stored procedures\State\State_Update.sql" />
     <Build Include="Stored procedures\State\StateLocalization_Get.sql" />
     <Build Include="Stored procedures\State\StateLocalization_Merge.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByEvent.sql" />
-    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByStateId.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeEvent.sql" />
-    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeState.sql" />
     <Build Include="Stored procedures\EmailTemplate\EmailTemplateLocalization_Get.sql" />
     <Build Include="Stored procedures\Event\Event_Add.sql" />
     <Build Include="Stored procedures\Event\Event_Delete.sql" />
@@ -147,8 +143,6 @@
     <Build Include="Tables\User\User.sql" />
     <Build Include="Tables\State\State.sql" />
     <Build Include="Tables\State\StateAvailability.sql" />
-    <Build Include="Tables\State\StateEmailRecipient.sql" />
-    <Build Include="Tables\State\StateEmailTemplate.sql" />
     <Build Include="Tables\State\StateLocalization.sql" />
     <Build Include="Tables\State\StateVisibility.sql" />
     <Build Include="Tables\User\ClientBalanceHistory.sql" />

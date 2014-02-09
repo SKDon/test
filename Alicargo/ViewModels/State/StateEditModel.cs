@@ -10,29 +10,24 @@ namespace Alicargo.ViewModels.State
 		[HiddenInput]
 		public long Id { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "StateName")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "StateName")]
 		public string Name { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Position")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Position")]
 		public int Position { get; set; }
 
-		[DisplayNameLocalized(typeof(Entities), "Subject")]
-		public string Subject { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "Body")]
-		[DataType(DataType.MultilineText)]
-		public string Body { get; set; }
-
-		[Required, DisplayNameLocalized(typeof(Entities), "LocalizedName")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "LocalizedName")]
 		public string LocalizedName { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Language")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Language")]
 		public string Language { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "EnableEmailSend")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "EnableEmailSend")]
 		public bool EnableEmailSend { get; set; }
-
-		[Required, DisplayNameLocalized(typeof(Entities), "UseEventTemplate")]
-		public bool UseEventTemplate { get; set; }
 	}
 }

@@ -167,6 +167,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 			var application = _context.Applications.First(x => x.Id == id);
 
 			action(application);
+
+			_context.SubmitChanges();
 		}
 	}
 }

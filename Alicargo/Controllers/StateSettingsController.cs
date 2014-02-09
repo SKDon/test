@@ -5,7 +5,6 @@ using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
-using Alicargo.Services.Abstract;
 using Alicargo.ViewModels.Helpers;
 using Alicargo.ViewModels.State;
 
@@ -35,13 +34,11 @@ namespace Alicargo.Controllers
 			ViewBag.StateName = state.LocalizedName;
 
 			var availabilities = _settings.GetStateAvailabilities().Where(x => x.StateId == id).Select(x => x.Role).ToArray();
-			var emailRecipients = _settings.GetStateEmailRecipients().Where(x => x.StateId == id).Select(x => x.Role).ToArray();
 			var visibilities = _settings.GetStateVisibilities().Where(x => x.StateId == id).Select(x => x.Role).ToArray();
 
 			var model = new StateSettingsModel
 			{
 				Availabilities = EmailTemplateSettingsModelHelper.GetModel(availabilities),
-				Recipients = EmailTemplateSettingsModelHelper.GetModel(emailRecipients),
 				Visibilities = EmailTemplateSettingsModelHelper.GetModel(visibilities)
 			};
 
@@ -58,7 +55,6 @@ namespace Alicargo.Controllers
 			}
 
 			_settings.SetStateAvailabilities(id, model.Availabilities.GetSettings());
-			_settings.SetStateEmailRecipients(id, model.Recipients.GetSettings());
 			_settings.SetStateVisibilities(id, model.Visibilities.GetSettings());
 
 			return RedirectToAction(MVC.StateSettings.Index(id));

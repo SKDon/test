@@ -19,7 +19,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public long Add(string language, StateData data)
 		{
-			using (var scope = new TransactionScope())
+			using(var scope = new TransactionScope())
 			{
 				var id = _executor.Query<long>("[dbo].[State_Add]", new
 				{
@@ -43,7 +43,7 @@ namespace Alicargo.DataAccess.Repositories
 
 		public void Update(long id, string language, StateData data)
 		{
-			using (var scope = new TransactionScope())
+			using(var scope = new TransactionScope())
 			{
 				_executor.Execute("[dbo].[State_Update]", new
 				{
@@ -90,6 +90,15 @@ namespace Alicargo.DataAccess.Repositories
 					Position = x.Position,
 					LocalizedName = localizations[x.Id][language]
 				});
+		}
+
+		private sealed class StateListItem
+		{
+			public long Id { get; set; }
+
+			public string Name { get; set; }
+
+			public int Position { get; set; }
 		}
 	}
 }
