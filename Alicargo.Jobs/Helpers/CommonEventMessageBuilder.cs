@@ -58,7 +58,7 @@ namespace Alicargo.Jobs.Helpers
 			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value);
 
 			return recipients.Select(x =>
-				GetEmailMessage(x.Email, localizations[x.Culture], files[x.Culture])).ToArray();
+				GetEmailMessage(x.Email, localizations[x.Culture], files != null ? files[x.Culture] : null)).ToArray();
 		}
 
 		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder[] files)
