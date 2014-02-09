@@ -18,7 +18,7 @@ namespace Alicargo.Jobs.Application.Helpers
 		public ApplicationEventFilesFacade(
 			ISerializer serializer,
 			IAwbFileRepository awbFiles,
-			IApplicationFileRepository applicationFiles, 
+			IApplicationFileRepository applicationFiles,
 			IApplicationRepository applications)
 		{
 			_serializer = serializer;
@@ -45,6 +45,7 @@ namespace Alicargo.Jobs.Application.Helpers
 				case EventType.SetSender:
 				case EventType.SetForwarder:
 				case EventType.SetCarrier:
+				case EventType.SetAwb:
 					return null;
 
 				case EventType.ApplicationSetState:

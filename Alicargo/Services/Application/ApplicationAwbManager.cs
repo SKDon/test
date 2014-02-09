@@ -6,7 +6,7 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 
-namespace Alicargo.Services.AirWaybill
+namespace Alicargo.Services.Application
 {
 	public sealed class ApplicationAwbManager : IApplicationAwbManager
 	{
@@ -40,7 +40,7 @@ namespace Alicargo.Services.AirWaybill
 
 				_manager.SetState(applicationId, aggregate.StateId);
 
-				_events.Add(awbId.Value, EventType.AwbSet, EventState.Emailing, applicationId);
+				_events.Add(applicationId, EventType.SetAwb, EventState.Emailing, awbId.Value);
 			}
 			else
 			{

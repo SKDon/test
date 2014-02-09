@@ -17,6 +17,7 @@ namespace Alicargo.Jobs.Application.Helpers
 {
 	internal sealed class TextBuilder : ITextBuilder
 	{
+		private readonly IAwbRepository _awbs;
 		private readonly IClientBalanceRepository _balance;
 		private readonly Jobs.Helpers.Abstract.ITextBuilder _bulder;
 		private readonly ICityRepository _cities;
@@ -27,6 +28,7 @@ namespace Alicargo.Jobs.Application.Helpers
 
 		public TextBuilder(
 			ISerializer serializer,
+			IAwbRepository awbs,
 			ICountryRepository countries,
 			ICityRepository cities,
 			IStateRepository states,
@@ -35,6 +37,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			Jobs.Helpers.Abstract.ITextBuilder bulder)
 		{
 			_serializer = serializer;
+			_awbs = awbs;
 			_countries = countries;
 			_cities = cities;
 			_states = states;
@@ -99,6 +102,10 @@ namespace Alicargo.Jobs.Application.Helpers
 
 				case EventType.SetDateOfCargoReceipt:
 					OnSetDateOfCargoReceipt(bytes, culture, localizedData);
+					break;
+
+				case EventType.SetAwb:
+					OnSetAwb(bytes, culture, localizedData);
 					break;
 
 				default:
@@ -204,6 +211,22 @@ namespace Alicargo.Jobs.Application.Helpers
 			var holder = _serializer.Deserialize<FileHolder>(bytes);
 
 			Add(localizedData, "UploadedFile", holder.Name);
+		}
+
+		private void OnSetAwb(byte[] bytes, CultureInfo culture, IDictionary<string, string> localizedData)
+		{
+			var awbId = _serializer.Deserialize<long>(bytes);
+			var awb = _awbs.Get(awbId).Single();
+			var aggregate = _awbs.GetAggregate(new[] { awb.Id }).Single();
+
+			Add(localizedData, "DepartureAirport", awb.DepartureAirport);
+			Add(localizedData, "DateOfDeparture", LocalizationHelper.GetDate(awb.DateOfDeparture, culture));
+			Add(localizedData, "ArrivalAirport", awb.ArrivalAirport);
+			Add(localizedData, "DateOfArrival", LocalizationHelper.GetDate(awb.DateOfArrival, culture));
+			Add(localizedData, "TotalWeight", aggregate.TotalWeight.ToString("N2"));
+			Add(localizedData, "TotalCount", aggregate.TotalCount.ToString("N2"));
+			Add(localizedData, "TotalValue", aggregate.TotalValue.ToString("N2"));
+			Add(localizedData, "TotalVolume", aggregate.TotalVolume.ToString("N2"));
 		}
 
 		private void OnSetDateOfCargoReceipt(byte[] bytes, CultureInfo culture, IDictionary<string, string> localizedData)

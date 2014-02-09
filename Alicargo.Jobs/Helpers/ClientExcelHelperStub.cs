@@ -2,7 +2,7 @@
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.Jobs.Helpers.Abstract;
 
-namespace Alicargo.Jobs.Client.ClientAdd
+namespace Alicargo.Jobs.Helpers
 {
 	internal sealed class ClientExcelHelperStub : IClientExcelHelper
 	{

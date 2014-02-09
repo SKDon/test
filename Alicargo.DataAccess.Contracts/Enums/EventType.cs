@@ -26,6 +26,9 @@ namespace Alicargo.DataAccess.Contracts.Enums
 		[DisplayNameLocalized(typeof(Resources.EventType), "SetCarrier")]
 		SetCarrier = 17,
 
+		[DisplayNameLocalized(typeof(Resources.EventType), "SetAwb")]
+		SetAwb = 20,
+
 
 		// Application's file events
 		[DisplayNameLocalized(typeof(Resources.EventType), "CPFileUploaded")]
@@ -68,9 +71,6 @@ namespace Alicargo.DataAccess.Contracts.Enums
 
 		// Awb events
 		[DisplayNameLocalized(typeof(Resources.EventType), "AwbCreated")]
-		AwbCreated = 19,
-
-		[DisplayNameLocalized(typeof(Resources.EventType), "AwbSet")]
-		AwbSet = 20
+		AwbCreated = 19
 	}
 }

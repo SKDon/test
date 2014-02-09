@@ -282,7 +282,7 @@
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateGtdManager.cs" />
     <Compile Include="Services\AirWaybill\AwbStateManager.cs" />
-    <Compile Include="Services\AirWaybill\ApplicationAwbManager.cs" />
+    <Compile Include="Services\Application\ApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Application\SenderApplicationManager.cs" />
