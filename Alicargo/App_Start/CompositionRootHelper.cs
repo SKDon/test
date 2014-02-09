@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
-using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Common;
@@ -12,8 +10,6 @@ using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
-using Alicargo.Services.Application;
-using Alicargo.Services.Email;
 using Alicargo.Services.Users.Client;
 using Ninject;
 using Ninject.Syntax;
@@ -39,7 +35,7 @@ namespace Alicargo.App_Start
 				{
 					typeof(AwbUpdateManager),
 					typeof(AwbUpdateGtdManager),
-					typeof(AwbUpdateManagerWithMailing)
+					typeof(AwbUpdateManagerWithEvent)
 				}
 			},
 			{

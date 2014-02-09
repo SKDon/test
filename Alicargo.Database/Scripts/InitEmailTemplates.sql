@@ -1,7 +1,8 @@
 ﻿SET IDENTITY_INSERT [dbo].[EmailTemplate] ON 
 INSERT [dbo].[EmailTemplate] ([Id]) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
-(24), (25), (26), (27), (28), (29), (30), (31), (32)
+(24), (25), (26), (27), (28), (29), (30), 
+(31), (32), (33), (34), (35), (36), (37), (38)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
@@ -14,6 +15,7 @@ INSERT [dbo].[EventEmailTemplate]
 (10, 7, 1),
 (15, 28, 1), -- SetSender
 (16, 29, 1), -- SetForwarder
+(20, 32, 1),
 
 -- Application's file events
 (3, 2, 1),
@@ -34,7 +36,13 @@ INSERT [dbo].[EventEmailTemplate]
 
 -- Awb
 (19, 31, 1),
-(20, 32, 1)
+(21, 33, 1), -- GTDFileUploaded
+(22, 34, 1), -- GTDAdditionalFileUploaded
+(23, 35, 1), -- AwbPackingFileUploaded
+(24, 36, 1), -- AwbInvoiceFileUploaded
+(25, 37, 1), -- AWBFileUploaded
+(26, 38, 1)  -- DrawFileUploaded
+
 
 INSERT [dbo].[EmailTemplateLocalization]
 ([EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES
@@ -291,7 +299,26 @@ N'Добрый день, {ClientNic}! Вы зарегистрированны в
 N'Создана авианакладная, Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}, Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}, Вес: {TotalWeight}, Количество мест: {TotalCount}. Номер накладной: {AirWaybill}.', 0),
 
 (32, N'ru', N'Alicargo',
-N'Заявке {DisplayNumber} задана авианакладная, Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}, Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}, Вес: {TotalWeight}, Количество мест: {TotalCount}. Номер накладной: {AirWaybill}.', 0)
+N'Заявке {DisplayNumber} задана авианакладная, Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}, Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}, Вес: {TotalWeight}, Количество мест: {TotalCount}. Номер накладной: {AirWaybill}.', 0),
+
+(33, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {AirWaybill}, «добавлен ГТД»', 0),
+(33, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {AirWaybill}, "added GTD"', 0),
+
+(34, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен ГТД-дополнение»', 0),
+(34, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, "added the GTD-complement"', 0),
+
+(35, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен пакинг-лист»', 0),
+(35, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, "added paking-list"', 0),
+
+(36, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен инвойс»', 0),
+(36, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, "added invoice"', 0),
+
+(37, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, добавлена авиа-накладная', 0),
+(37, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, added air waybill', 0),
+
+(38, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, добавлен Draw', 0),
+(38, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, added Draw', 0)
+
 
 INSERT [dbo].[EventEmailRecipient]
 ([RoleId], [EventTypeId]) VALUES
@@ -308,14 +335,24 @@ INSERT [dbo].[EventEmailRecipient]
 (1, 18),
 (1, 19),
 (1, 20),
+(1, 21),
+(1, 22),
+(1, 24),
+(1, 25),
+(1, 26),
 -- Sender 2
 (2, 1),
 (2, 4),
 (2, 5),
 (2, 6),
 (2, 15),
+(2, 24),
+(2, 25),
 -- Broker 3
 (3, 19),
+(3, 23),
+(3, 25),
+(3, 26),
 -- Forwarder 4
 (4, 2),
 (4, 16),
@@ -337,5 +374,7 @@ INSERT [dbo].[EventEmailRecipient]
 (5, 15),
 (5, 16),
 (5, 18),
+(5, 21),
+(5, 22),
 -- Carrier
 (6, 2)
