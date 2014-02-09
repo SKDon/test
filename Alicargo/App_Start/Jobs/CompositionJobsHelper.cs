@@ -160,9 +160,9 @@ namespace Alicargo.App_Start.Jobs
 				var brokerRepository = new BrokerRepository(unitOfWork);
 				var clientExcelHelper = new ClientExcelHelperStub();
 				var awbs = new AwbRepository(unitOfWork);
-				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs, serializer);
+				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
-				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, brokerRepository, awbs, serializer, eventEmailRecipient);
+				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, brokerRepository, awbs, eventEmailRecipient);
 
 				var messageBuilder = GetMessageBuilder(
 					executor, serializer, clientExcelHelper, localizedDataHelper,

@@ -57,17 +57,17 @@ N'Заявке {DisplayNumber} задана авианакладная, Аэро
 (33, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {AirWaybill}, «добавлен ГТД»', 0),
 (33, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {AirWaybill}, "added GTD"', 0),
 
-(34, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен ГТД-дополнение»', 0),
-(34, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, "added the GTD-complement"', 0),
+(34, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {AirWaybill}, «добавлен ГТД-дополнение»', 0),
+(34, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {AirWaybill}, "added the GTD-complement"', 0),
 
-(35, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен пакинг-лист»', 0),
-(35, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, "added paking-list"', 0),
+(35, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {AirWaybill}, «добавлен пакинг-лист»', 0),
+(35, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {AirWaybill}, "added paking-list"', 0),
 
-(36, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен инвойс»', 0),
-(36, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, "added invoice"', 0),
+(36, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {AirWaybill}, «добавлен инвойс»', 0),
+(36, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {AirWaybill}, "added invoice"', 0),
 
-(37, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, добавлена авиа-накладная', 0),
-(37, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, added air waybill', 0),
+(37, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {AirWaybill}, добавлена авиа-накладная', 0),
+(37, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {AirWaybill}, added air waybill', 0),
 
-(38, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {0}, добавлен Draw', 0),
-(38, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {0}, added Draw', 0)
+(38, N'ru', N'Alicargo', N'Изменение статуса  AWB: Номер авиа-накладной {AirWaybill}, добавлен Draw', 0),
+(38, N'en', N'Alicargo', N'Changing the status of AWB: air waybill number {AirWaybill}, added Draw', 0)

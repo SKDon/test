@@ -5,24 +5,21 @@ using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Jobs.Helpers.Abstract;
-using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.Awb
 {
 	public sealed class AwbEventLocalizedDataHelper : ILocalizedDataHelper
 	{
 		private readonly IAwbRepository _awbs;
-		private readonly ISerializer _serializer;
 
-		public AwbEventLocalizedDataHelper(IAwbRepository awbs, ISerializer serializer)
+		public AwbEventLocalizedDataHelper(IAwbRepository awbs)
 		{
 			_awbs = awbs;
-			_serializer = serializer;
 		}
 
 		public IDictionary<string, string> Get(string language, EventDataForEntity eventData)
 		{
-			var awb = _serializer.Deserialize<AirWaybillData>(eventData.Data);
+			var awb = _awbs.Get(eventData.EntityId).Single();
 			var aggregate = _awbs.GetAggregate(new[] { awb.Id }).Single();
 			var culture = CultureInfo.GetCultureInfo(language);
 

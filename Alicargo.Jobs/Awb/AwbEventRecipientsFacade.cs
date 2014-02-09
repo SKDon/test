@@ -8,7 +8,6 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.Helpers.Abstract;
-using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.Awb
 {
@@ -18,19 +17,16 @@ namespace Alicargo.Jobs.Awb
 		private readonly IAwbRepository _awbs;
 		private readonly IBrokerRepository _brokers;
 		private readonly IEventEmailRecipient _recipients;
-		private readonly ISerializer _serializer;
 
 		public AwbEventRecipientsFacade(
 			IAdminRepository admins,
 			IBrokerRepository brokers,
 			IAwbRepository awbs,
-			ISerializer serializer,
 			IEventEmailRecipient recipients)
 		{
 			_admins = admins;
 			_brokers = brokers;
 			_awbs = awbs;
-			_serializer = serializer;
 			_recipients = recipients;
 		}
 
@@ -59,7 +55,7 @@ namespace Alicargo.Jobs.Awb
 						break;
 
 					case RoleType.Broker:
-						var brokerId = _serializer.Deserialize<AirWaybillData>(data.Data).BrokerId;
+						var brokerId = _awbs.Get(data.EntityId).Single().BrokerId;
 						var broker = _brokers.Get(brokerId);
 
 						yield return new RecipientData(broker.Email, broker.Language, role);
