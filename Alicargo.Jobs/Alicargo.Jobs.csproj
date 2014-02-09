@@ -52,7 +52,7 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
+    <Compile Include="Application\Abstract\IApplicationEventTemplates.cs" />
     <Compile Include="Client\Balance\BalanceLocalizedDataHelper.cs" />
     <Compile Include="Client\Balance\PaymentEventData.cs" />
     <Compile Include="Client\ClientAdd\ClientExcelHelperStub.cs" />
@@ -63,24 +63,24 @@
     <Compile Include="Client\ILocalizedDataHelper.cs" />
     <Compile Include="Core\BreakJobException.cs" />
     <Compile Include="Core\SequentialEventJob.cs" />
-    <Compile Include="ApplicationEvents\ApplicationStateHistoryProcessor.cs" />
-    <Compile Include="ApplicationEvents\Entities\TextBulderException.cs" />
-    <Compile Include="ApplicationEvents\Helpers\FilesFacade.cs" />
-    <Compile Include="ApplicationEvents\Abstract\IFilesFacade.cs" />
+    <Compile Include="Application\ApplicationStateHistoryProcessor.cs" />
+    <Compile Include="Application\Entities\TextBulderException.cs" />
+    <Compile Include="Application\Helpers\FilesFacade.cs" />
+    <Compile Include="Application\Abstract\IFilesFacade.cs" />
     <Compile Include="Helpers\Abstract\IClientExcelHelper.cs" />
     <Compile Include="Helpers\Abstract\IMessageBuilder.cs" />
-    <Compile Include="ApplicationEvents\Abstract\IRecipientsFacade.cs" />
+    <Compile Include="Application\Abstract\IRecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITemplateRepositoryHelper.cs" />
-    <Compile Include="ApplicationEvents\Abstract\ITextBuilder.cs" />
-    <Compile Include="ApplicationEvents\Helpers\MessageBuilder.cs" />
-    <Compile Include="ApplicationEvents\Helpers\RecipientsFacade.cs" />
+    <Compile Include="Application\Abstract\ITextBuilder.cs" />
+    <Compile Include="Application\Helpers\MessageBuilder.cs" />
+    <Compile Include="Application\Helpers\RecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITextBuilder.cs" />
     <Compile Include="Helpers\ClientExcelHelper.cs" />
     <Compile Include="Helpers\TextBuilderHelper.cs" />
     <Compile Include="Helpers\DefaultEmailingProcessor.cs" />
     <Compile Include="Helpers\TextBuilder.cs" />
     <Compile Include="Helpers\TemplateRepositoryHelper.cs" />
-    <Compile Include="ApplicationEvents\Helpers\TextBuilder.cs" />
+    <Compile Include="Application\Helpers\TextBuilder.cs" />
     <Compile Include="Core\IEventProcessor.cs" />
     <Compile Include="Core\IJob.cs" />
     <Compile Include="Core\IRunner.cs" />
@@ -118,7 +118,9 @@
       <Name>Alicargo.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Awb\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

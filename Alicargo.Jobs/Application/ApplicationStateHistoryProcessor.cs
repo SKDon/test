@@ -3,7 +3,7 @@ using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Core;
 
-namespace Alicargo.Jobs.ApplicationEvents
+namespace Alicargo.Jobs.Application
 {
 	internal sealed class ApplicationStateHistoryProcessor : IEventProcessor
 	{

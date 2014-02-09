@@ -122,9 +122,6 @@
 
 Changing the status of AWB: air waybill number {0}, added air waybill</value>
   </data>
-  <data name="Awb_Create" xml:space="preserve">
-    <value>Создана авианакладная, Аэропорт вылета: {0}/{1}, Аэропорт прилета: {2}/{3}, Вес: {4}, Количество мест: {5}. Номер накладной: {6}</value>
-  </data>
   <data name="Awb_GTDAdditionalFileAdd" xml:space="preserve">
     <value>Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен ГТД-дополнение»
 
@@ -145,10 +142,7 @@ Changing the status of AWB: air waybill number {0}, "added invoice"</value>
 
 Changing the status of AWB: air waybill number {0}, "added paking-list"</value>
   </data>
-  <data name="Awb_Set" xml:space="preserve">
-    <value>Заявке {7} задана авианакладная, Аэропорт вылета: {0}/{1}, Аэропорт прилета: {2}/{3}, Вес: {4}, Количество мест: {5}. Номер накладной: {6}</value>
-  </data>
   <data name="Default_Subject" xml:space="preserve">
-    <value>Alicargo</value>
+    <value>Default_Subject</value>
   </data>
 </root>

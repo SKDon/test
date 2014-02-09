@@ -1,6 +1,6 @@
 ﻿using System;
 using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.Services.Application;
+using Alicargo.Services.AirWaybill;
 using Alicargo.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

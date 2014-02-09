@@ -7,9 +7,9 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.Jobs.ApplicationEvents.Abstract;
+using Alicargo.Jobs.Application.Abstract;
 
-namespace Alicargo.Jobs.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.Application.Helpers
 {
 	public sealed class RecipientsFacade : IRecipientsFacade
 	{

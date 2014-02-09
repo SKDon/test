@@ -14,8 +14,8 @@ using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.Jobs;
-using Alicargo.Jobs.ApplicationEvents;
-using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.Jobs.Application;
+using Alicargo.Jobs.Application.Helpers;
 using Alicargo.Jobs.Client;
 using Alicargo.Jobs.Client.Balance;
 using Alicargo.Jobs.Client.ClientAdd;
@@ -57,6 +57,8 @@ namespace Alicargo.App_Start.Jobs
 					"MailSenderJob_" + partitionId);
 
 				BindStatelessJobRunner(kernel, () => RunClientJob(mainConnectionString, partitionId), "ClientJob_" + partitionId);
+
+				//BindStatelessJobRunner(kernel, () => RunAwbJob(mainConnectionString, partitionId), "AwbJob_" + partitionId);
 			}
 
 			BindStatelessJobRunner(kernel, () => RunMailSenderJob(connectionString, PartitionIdForOtherMails),
@@ -149,6 +151,38 @@ namespace Alicargo.App_Start.Jobs
 			}
 		}
 
+		private static void RunAwbJob(string mainConnectionString, int partitionId)
+		{
+			using(var connection = new SqlConnection(mainConnectionString))
+			{
+				var executor = new SqlProcedureExecutor(mainConnectionString);
+				var serializer = new Serializer();
+				var events = new EventRepository(executor);
+
+				var unitOfWork = new UnitOfWork(connection);
+				var clientRepository = new ClientRepository(unitOfWork);
+				var adminRepository = new AdminRepository(unitOfWork);
+
+				var clientExcelHelper = new ClientExcelHelperStub();
+				var localizedDataHelper = new CommonLocalizedDataHelper(serializer);
+
+				var messageBuilder = GetClientEventMessageBuilder(executor, serializer, clientExcelHelper, localizedDataHelper,
+					clientRepository, adminRepository);
+				var emailingProcessor = GetDefaultEmailingProcessor(partitionId, executor, serializer, messageBuilder);
+
+				var processors = new Dictionary<EventState, IEventProcessor>
+				{
+					{ EventState.Emailing, emailingProcessor }
+				};
+
+				new SequentialEventJob(events, partitionId,
+					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
+					{
+						{ EventType.ClientAdded, processors },
+					}).Work();
+			}
+		}
+
 		private static void RunBalaceJob(string connectionString, int partitionId)
 		{
 			using(var connection = new SqlConnection(connectionString))
@@ -213,7 +247,7 @@ namespace Alicargo.App_Start.Jobs
 				new SequentialEventJob(events, partitionId,
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
-						{ EventType.ClientAdd, processors },
+						{ EventType.ClientAdded, processors },
 					}).Work();
 			}
 		}
@@ -245,7 +279,7 @@ namespace Alicargo.App_Start.Jobs
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var countries = new CountryRepository(mainExecutor);
 			var cities = new CityRepository(mainExecutor);
-			var textBulder = new Alicargo.Jobs.ApplicationEvents.Helpers.TextBuilder(
+			var textBulder = new Alicargo.Jobs.Application.Helpers.TextBuilder(
 				serializer, countries, cities, states, files, clientBalanceRepository, new TextBuilder());
 			var templates = new TemplateRepository(mainExecutor);
 			var clientRepository = new ClientRepository(unitOfWork);

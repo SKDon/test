@@ -26,7 +26,7 @@ namespace Alicargo.Services.Users.Client
 		{
 			var id = _manager.Add(client, transit, authentication);
 
-			_events.Add(id, EventType.ClientAdd, EventState.Emailing, authentication.NewPassword);
+			_events.Add(id, EventType.ClientAdded, EventState.Emailing, authentication.NewPassword);
 
 			return id;
 		}

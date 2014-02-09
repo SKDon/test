@@ -7,7 +7,6 @@ namespace Alicargo.Services.Abstract
 		string DefaultSubject { get; }
 
 		string AwbCreate(AirWaybillData model, string culture, float totalWeight, int totalCount);
-		string AwbSet(AirWaybillData model, string applicationNumber, string culture, float totalWeight, int totalCount);
 		string AwbPackingFileAdded(AirWaybillData model);
 		string AwbAWBFileAdded(AirWaybillData model);
 		string AwbGTDAdditionalFileAdded(AirWaybillData model);

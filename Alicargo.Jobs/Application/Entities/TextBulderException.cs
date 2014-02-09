@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Jobs.ApplicationEvents.Entities
+namespace Alicargo.Jobs.Application.Entities
 {
 	internal sealed class TextBulderException : Exception
 	{

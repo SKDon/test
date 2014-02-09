@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using Alicargo.Core.Helpers;
 using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.Services.Abstract;
@@ -15,24 +13,14 @@ namespace Alicargo.Services.Email
 			get { return Mail.Default_Subject; }
 		}
 
-		#region AWB
-
 		public string AwbCreate(AirWaybillData model, string culture, float totalWeight, int totalCount)
 		{
-			return string.Format(Mail.Awb_Create, model.DepartureAirport,
-								 LocalizationHelper.GetDate(model.DateOfDeparture, CultureInfo.GetCultureInfo(culture)),
-								 model.ArrivalAirport,
-								 LocalizationHelper.GetDate(model.DateOfArrival, CultureInfo.GetCultureInfo(culture)),
-								 totalWeight, totalCount, model.Bill);
-		}
-
-		public string AwbSet(AirWaybillData model, string applicationNumber, string culture, float totalWeight, int totalCount)
-		{
-			return string.Format(Mail.Awb_Set, model.DepartureAirport,
-								 LocalizationHelper.GetDate(model.DateOfDeparture, CultureInfo.GetCultureInfo(culture)),
-								 model.ArrivalAirport,
-								 LocalizationHelper.GetDate(model.DateOfArrival, CultureInfo.GetCultureInfo(culture)),
-								 totalWeight, totalCount, model.Bill, applicationNumber);
+			return "";
+			//return string.Format(Mail.Awb_Create, model.DepartureAirport,
+			//					 LocalizationHelper.GetDate(model.DateOfDeparture, CultureInfo.GetCultureInfo(culture)),
+			//					 model.ArrivalAirport,
+			//					 LocalizationHelper.GetDate(model.DateOfArrival, CultureInfo.GetCultureInfo(culture)),
+			//					 totalWeight, totalCount, model.Bill);
 		}
 
 		public string AwbPackingFileAdded(AirWaybillData model)
@@ -59,7 +47,5 @@ namespace Alicargo.Services.Email
 		{
 			return string.Format(Mail.Awb_InvoiceFileAdd, model.Bill);
 		}
-
-		#endregion
 	}
 }

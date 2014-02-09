@@ -54,8 +54,7 @@ namespace Alicargo.App_Start
 				typeof(IApplicationAwbManager),
 				new[]
 				{
-					typeof(ApplicationAwbManager),
-					typeof(ApplicationAwbManagerWithMailing)
+					typeof(ApplicationAwbManager)
 				}
 			},
 			{

@@ -10,10 +10,10 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.Jobs.ApplicationEvents.Abstract;
+using Alicargo.Jobs.Application.Abstract;
 using Alicargo.Utilities;
 
-namespace Alicargo.Jobs.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.Application.Helpers
 {
 	internal sealed class TextBuilder : ITextBuilder
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Alicargo.Jobs.ApplicationEvents.Entities;
+using Alicargo.Jobs.Application.Entities;
 
 namespace Alicargo.Jobs.Helpers
 {

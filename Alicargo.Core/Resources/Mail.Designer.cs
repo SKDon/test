@@ -72,15 +72,6 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Создана авианакладная, Аэропорт вылета: {0}/{1}, Аэропорт прилета: {2}/{3}, Вес: {4}, Количество мест: {5}. Номер накладной: {6}.
-        /// </summary>
-        public static string Awb_Create {
-            get {
-                return ResourceManager.GetString("Awb_Create", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Изменение статуса  AWB: Номер авиа-накладной {0}, «добавлен ГТД-дополнение»
         ///
         ///Changing the status of AWB: air waybill number {0}, &quot;added the GTD-complement&quot;.
@@ -125,16 +116,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Заявке {7} задана авианакладная, Аэропорт вылета: {0}/{1}, Аэропорт прилета: {2}/{3}, Вес: {4}, Количество мест: {5}. Номер накладной: {6}.
-        /// </summary>
-        public static string Awb_Set {
-            get {
-                return ResourceManager.GetString("Awb_Set", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Alicargo.
+        ///   Looks up a localized string similar to Default_Subject.
         /// </summary>
         public static string Default_Subject {
             get {

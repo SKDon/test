@@ -282,14 +282,13 @@
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\AirWaybill\AwbUpdateGtdManager.cs" />
     <Compile Include="Services\AirWaybill\AwbStateManager.cs" />
-    <Compile Include="Services\Application\ApplicationAwbManager.cs" />
+    <Compile Include="Services\AirWaybill\ApplicationAwbManager.cs" />
     <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
     <Compile Include="Services\Application\ApplicationListPresenter.cs" />
     <Compile Include="Services\Application\SenderApplicationManager.cs" />
     <Compile Include="Services\Calculation\AdminCalculationPresenter.cs" />
     <Compile Include="Services\Users\Client\ClientPermissions.cs" />
     <Compile Include="Services\Users\Client\ClientPresenter.cs" />
-    <Compile Include="Services\Email\ApplicationAwbManagerWithMailing.cs" />
     <Compile Include="Services\Abstract\IClientPresenter.cs" />
     <Compile Include="Services\Email\AwbManagerWithMailing.cs" />
     <Compile Include="Services\Excel\Rows\AdminApplicationExcelRow.cs" />
@@ -833,9 +832,7 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\State\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

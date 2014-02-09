@@ -62,7 +62,15 @@ namespace Alicargo.DataAccess.Contracts.Enums
 		[DisplayNameLocalized(typeof(Resources.EventType), "BalanceDecreased")]
 		BalanceDecreased = 14,
 
-		[DisplayNameLocalized(typeof(Resources.EventType), "ClientAdd")]
-		ClientAdd = 18
+		[DisplayNameLocalized(typeof(Resources.EventType), "ClientAdded")]
+		ClientAdded = 18,
+
+
+		// Awb events
+		[DisplayNameLocalized(typeof(Resources.EventType), "AwbCreated")]
+		AwbCreated = 19,
+
+		[DisplayNameLocalized(typeof(Resources.EventType), "AwbSet")]
+		AwbSet = 20
 	}
 }

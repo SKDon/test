@@ -1,7 +1,7 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Jobs.ApplicationEvents.Abstract
+namespace Alicargo.Jobs.Application.Abstract
 {
 	public interface ITextBuilder
 	{

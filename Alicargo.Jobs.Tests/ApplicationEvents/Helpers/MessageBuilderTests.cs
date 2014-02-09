@@ -1,7 +1,7 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.Jobs.ApplicationEvents.Helpers;
+using Alicargo.Jobs.Application.Helpers;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

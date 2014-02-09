@@ -19,7 +19,7 @@
 			</b>
 			@if(Model.EventType == EventType.BalanceDecreased 
 				|| Model.EventType == EventType.BalanceIncreased
-				|| Model.EventType == EventType.ClientAdd)
+				|| Model.EventType == EventType.ClientAdded)
 			{
 				@Html.CheckBoxFor(x => x.Settings.Admin)
 				@Html.LabelFor(x => x.Settings.Admin, Resources.Enums.Admin)

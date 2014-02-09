@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.Jobs.ApplicationEvents.Abstract;
+using Alicargo.Jobs.Application.Abstract;
 using Alicargo.Utilities;
 
-namespace Alicargo.Jobs.ApplicationEvents.Helpers
+namespace Alicargo.Jobs.Application.Helpers
 {
 	public sealed class FilesFacade : IFilesFacade
 	{
