@@ -79,7 +79,7 @@ namespace Alicargo.App_Start.Jobs
 			ILocalizedDataHelper localizedDataHelper, IClientRepository clientRepository, IAdminRepository adminRepository)
 		{
 			var eventEmailRecipient = new EventEmailRecipient(executor);
-			var recipientsFacade = new ClientEventClientEventRecipientsFacade(adminRepository, clientRepository,
+			var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository,
 				eventEmailRecipient);
 			var templateRepository = new TemplateRepository(executor);
 			var textBuilder = new TextBuilder();
@@ -282,7 +282,7 @@ namespace Alicargo.App_Start.Jobs
 				serializer, countries, cities, states, files, clientBalanceRepository, new TextBuilder());
 			var templates = new TemplateRepository(mainExecutor);
 			var clientRepository = new ClientRepository(unitOfWork);
-			var recipientsFacade = new RecipientsFacade(
+			var recipientsFacade = new ApplicationEventRecipientsFacade(
 				awbs,
 				applications,
 				new AdminRepository(unitOfWork),

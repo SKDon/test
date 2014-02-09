@@ -5,16 +5,17 @@ using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
+using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Client
 {
-	public sealed class ClientEventClientEventRecipientsFacade : IClientEventRecipientsFacade
+	public sealed class ClientEventRecipientsFacade : IRecipientsFacade
 	{
 		private readonly IAdminRepository _admins;
 		private readonly IClientRepository _clients;
 		private readonly IEventEmailRecipient _recipients;
 
-		public ClientEventClientEventRecipientsFacade(
+		public ClientEventRecipientsFacade(
 			IAdminRepository admins,
 			IClientRepository clients,
 			IEventEmailRecipient recipients)
@@ -24,25 +25,25 @@ namespace Alicargo.Jobs.Client
 			_recipients = recipients;
 		}
 
-		public RecipientData[] GetRecipients(EventType type, long clientId)
+		public RecipientData[] GetRecipients(EventType type, EventDataForEntity data)
 		{
 			var roles = _recipients.GetRecipientRoles(type);
 
 			return roles.Length == 0
 				? null
-				: GetRecipients(roles, clientId).ToArray();
+				: GetRecipients(roles, data.EntityId).ToArray();
 		}
 
 		private IEnumerable<RecipientData> GetRecipients(IEnumerable<RoleType> roles, long clientId)
 		{
-			foreach (var role in roles)
+			foreach(var role in roles)
 			{
-				switch (role)
+				switch(role)
 				{
 					case RoleType.Admin:
 						var recipients = _admins.GetAll()
 							.Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
-						foreach (var recipient in recipients)
+						foreach(var recipient in recipients)
 						{
 							yield return recipient;
 						}
@@ -50,7 +51,7 @@ namespace Alicargo.Jobs.Client
 
 					case RoleType.Client:
 						var client = _clients.Get(clientId);
-						foreach (var email in client.Emails)
+						foreach(var email in client.Emails)
 						{
 							yield return new RecipientData(email, client.Language, role);
 						}

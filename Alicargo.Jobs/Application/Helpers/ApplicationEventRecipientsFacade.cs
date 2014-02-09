@@ -7,11 +7,11 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.Jobs.Application.Abstract;
+using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Application.Helpers
 {
-	public sealed class RecipientsFacade : IRecipientsFacade
+	public sealed class ApplicationEventRecipientsFacade : IRecipientsFacade
 	{
 		private readonly IAdminRepository _admins;
 		private readonly IApplicationRepository _applications;
@@ -23,7 +23,7 @@ namespace Alicargo.Jobs.Application.Helpers
 		private readonly IEventEmailRecipient _recipients;
 		private readonly ISenderRepository _senders;
 
-		public RecipientsFacade(
+		public ApplicationEventRecipientsFacade(
 			IAwbRepository awbs,
 			IApplicationRepository applications,
 			IAdminRepository admins,

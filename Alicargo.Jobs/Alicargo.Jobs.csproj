@@ -57,9 +57,8 @@
     <Compile Include="Client\Balance\PaymentEventData.cs" />
     <Compile Include="Client\ClientAdd\FileHelperStub.cs" />
     <Compile Include="Client\ClientAdd\CommonLocalizedDataHelper.cs" />
-    <Compile Include="Client\IClientEventRecipientsFacade.cs" />
     <Compile Include="Helpers\CommonEventMessageBuilder.cs" />
-    <Compile Include="Client\ClientEventClientEventRecipientsFacade.cs" />
+    <Compile Include="Client\ClientEventRecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ILocalizedDataHelper.cs" />
     <Compile Include="Core\BreakJobException.cs" />
     <Compile Include="Core\SequentialEventJob.cs" />
@@ -69,11 +68,11 @@
     <Compile Include="Application\Abstract\IFilesFacade.cs" />
     <Compile Include="Helpers\Abstract\IClientExcelHelper.cs" />
     <Compile Include="Helpers\Abstract\IMessageBuilder.cs" />
-    <Compile Include="Application\Abstract\IRecipientsFacade.cs" />
+    <Compile Include="Helpers\Abstract\IRecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITemplateRepositoryHelper.cs" />
     <Compile Include="Application\Abstract\ITextBuilder.cs" />
     <Compile Include="Application\Helpers\MessageBuilder.cs" />
-    <Compile Include="Application\Helpers\RecipientsFacade.cs" />
+    <Compile Include="Application\Helpers\ApplicationEventRecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITextBuilder.cs" />
     <Compile Include="Helpers\ClientExcelHelper.cs" />
     <Compile Include="Helpers\TextBuilderHelper.cs" />

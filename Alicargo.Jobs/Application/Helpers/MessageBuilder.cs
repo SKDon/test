@@ -47,20 +47,6 @@ namespace Alicargo.Jobs.Application.Helpers
 		{
 			var data = _serializer.Deserialize<EventDataForEntity>(eventData.Data);
 
-			return Get(type, data);
-		}
-
-		private EmailMessage[] Get(EventType type, EventDataForEntity data)
-		{
-			var applicationEventData = data.Data;
-			var applicationId = data.EntityId;
-
-			var application = _applications.GetExtendedData(applicationId);
-			if(application == null)
-			{
-				throw new InvalidOperationException("Can't find application by id " + applicationId);
-			}
-
 			var templateId = _templates.GetTemplateId(type);
 			if(!templateId.HasValue)
 			{
@@ -73,9 +59,15 @@ namespace Alicargo.Jobs.Application.Helpers
 				return null;
 			}
 
-			var files = _files.GetFiles(applicationId, application.AirWaybillId, type, applicationEventData);
+			var application = _applications.GetExtendedData(data.EntityId);
+			if(application == null)
+			{
+				throw new InvalidOperationException("Can't find application by id " + data.EntityId);
+			}
 
-			return GetEmailMessages(templateId.Value, recipients, application, applicationEventData, type, files).ToArray();
+			var files = _files.GetFiles(data.EntityId, application.AirWaybillId, type, data.Data);
+
+			return GetEmailMessages(templateId.Value, recipients, application, data.Data, type, files).ToArray();
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, RecipientData[] recipients,

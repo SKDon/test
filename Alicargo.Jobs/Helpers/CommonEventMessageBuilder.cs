@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.Jobs.Client;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;
 
@@ -13,14 +12,14 @@ namespace Alicargo.Jobs.Helpers
 		private readonly string _defaultFrom;
 		private readonly IClientExcelHelper _file;
 		private readonly ILocalizedDataHelper _localizedHelper;
-		private readonly IClientEventRecipientsFacade _recipients;
+		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
 		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder _textBuilder;
 
 		public CommonEventMessageBuilder(
 			string defaultFrom,
-			IClientEventRecipientsFacade recipients,
+			IRecipientsFacade recipients,
 			ISerializer serializer,
 			ITextBuilder textBuilder,
 			IClientExcelHelper file,
@@ -46,8 +45,8 @@ namespace Alicargo.Jobs.Helpers
 				return null;
 			}
 
-			var recipients = _recipients.GetRecipients(type, eventDataForEntity.EntityId);
-			if(recipients.Length == 0)
+			var recipients = _recipients.GetRecipients(type, eventDataForEntity);
+			if(recipients == null || recipients.Length == 0)
 			{
 				return null;
 			}
