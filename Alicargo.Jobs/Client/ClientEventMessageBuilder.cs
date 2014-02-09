@@ -1,45 +1,41 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.User;
-using Alicargo.Jobs.Balance.Entities;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;
 
-namespace Alicargo.Jobs.Balance
+namespace Alicargo.Jobs.Client
 {
-	internal sealed class MessageBuilder : IMessageBuilder
+	internal sealed class ClientEventMessageBuilder : IMessageBuilder
 	{
-		private readonly IClientBalanceRepository _balance;
+		private readonly ISerializer _serializer;
 		private readonly IClientRepository _clients;
 		private readonly string _defaultFrom;
 		private readonly IClientExcelHelper _excel;
-		private readonly IRecipientsFacade _recipients;
-		private readonly ISerializer _serializer;
+		private readonly ILocalizedDataHelper _localizedHelper;
+		private readonly IClientEventRecipientsFacade _recipients;
 		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder _textBuilder;
 
-		public MessageBuilder(
+		public ClientEventMessageBuilder(
 			string defaultFrom,
-			IRecipientsFacade recipients,
-			IClientBalanceRepository balance,
+			IClientEventRecipientsFacade recipients,
 			IClientRepository clients,
 			ISerializer serializer,
 			ITextBuilder textBuilder,
 			IClientExcelHelper excel,
+			ILocalizedDataHelper localizedHelper,
 			ITemplateRepositoryHelper templates)
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;
-			_balance = balance;
 			_clients = clients;
 			_serializer = serializer;
 			_textBuilder = textBuilder;
 			_excel = excel;
+			_localizedHelper = localizedHelper;
 			_templates = templates;
 		}
 
@@ -84,7 +80,7 @@ namespace Alicargo.Jobs.Balance
 				{
 					var template = _templates.GetLocalization(templateId, language);
 
-					var localizedData = GetLocalizedData(language, eventData.Data, clientData);
+					var localizedData = _localizedHelper.Get(language, eventData.Data, clientData);
 
 					return new EmailTemplateLocalizationData
 					{
@@ -93,25 +89,6 @@ namespace Alicargo.Jobs.Balance
 						Body = _textBuilder.GetText(template.Body, language, localizedData)
 					};
 				});
-		}
-
-		private IDictionary<string, string> GetLocalizedData(string language, byte[] eventData,
-			ClientData clientData)
-		{
-			var paymentEventData = _serializer.Deserialize<PaymentEventData>(eventData);
-
-			var culture = CultureInfo.GetCultureInfo(language);
-			var balance = _balance.GetBalance(clientData.ClientId);
-
-			return new Dictionary<string, string>
-			{
-				{ "ClientBalance", balance.ToString("N2") },
-				{ "Money", paymentEventData.Money.ToString("N2") },
-				{ "Comment", paymentEventData.Comment },
-				{ "ClientNic", clientData.Nic },
-				{ "LegalEntity", clientData.LegalEntity },
-				{ "Timestamp", LocalizationHelper.GetDate(paymentEventData.Timestamp, culture) }
-			};
 		}
 	}
 }

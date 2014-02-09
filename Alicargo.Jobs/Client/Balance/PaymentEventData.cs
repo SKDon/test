@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.Jobs.Balance.Entities
+namespace Alicargo.Jobs.Client.Balance
 {
 	public sealed class PaymentEventData
 	{

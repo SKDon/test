@@ -6,15 +6,15 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
-namespace Alicargo.Jobs.Balance
+namespace Alicargo.Jobs.Client
 {
-	public sealed class RecipientsFacade : IRecipientsFacade
+	public sealed class ClientEventClientEventRecipientsFacade : IClientEventRecipientsFacade
 	{
 		private readonly IAdminRepository _admins;
 		private readonly IClientRepository _clients;
 		private readonly IEventEmailRecipient _recipients;
 
-		public RecipientsFacade(
+		public ClientEventClientEventRecipientsFacade(
 			IAdminRepository admins,
 			IClientRepository clients,
 			IEventEmailRecipient recipients)
@@ -48,13 +48,6 @@ namespace Alicargo.Jobs.Balance
 						}
 						break;
 
-					case RoleType.Sender:
-					case RoleType.Broker:
-					case RoleType.Forwarder:
-					case RoleType.Carrier:
-						// todo: balance can get only admin and client so this roles could not be here
-						yield break;
-
 					case RoleType.Client:
 						var client = _clients.Get(clientId);
 						foreach (var email in client.Emails)
@@ -62,6 +55,12 @@ namespace Alicargo.Jobs.Balance
 							yield return new RecipientData(email, client.Language, role);
 						}
 						break;
+
+					case RoleType.Sender:
+					case RoleType.Broker:
+					case RoleType.Forwarder:
+					case RoleType.Carrier:
+						throw new NotSupportedException("Only client and admin can be recipient of client event");
 
 					default:
 						throw new InvalidOperationException("Unknown role " + role);

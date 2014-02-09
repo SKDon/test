@@ -3,7 +3,7 @@ using System.Transactions;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.Jobs.Balance.Entities;
+using Alicargo.Jobs.Client.Balance;
 
 namespace Alicargo.Services.Users.Client
 {

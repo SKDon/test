@@ -1,9 +1,9 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.Jobs.Balance
+namespace Alicargo.Jobs.Client
 {
-	public interface IRecipientsFacade
+	public interface IClientEventRecipientsFacade
 	{
 		RecipientData[] GetRecipients(EventType type, long clientId);
 	}
