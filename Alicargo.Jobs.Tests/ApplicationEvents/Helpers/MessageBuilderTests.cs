@@ -41,7 +41,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 				.Returns(localization);
 			_container.FilesFasade.Setup(x => x.GetFiles(eventDataForEntity.EntityId, It.IsAny<long?>(), eventType, eventDataForEntity.Data))
 				.Returns(new[] { _container.Create<FileHolder>() });
-			_container.RecipientsFacade.Setup(x => x.GetRecipients(applicationDetailsData, eventType, eventDataForEntity.Data))
+			_container.RecipientsFacade.Setup(x => x.GetRecipients(eventType, eventDataForEntity))
 				.Returns(new[] { recipientData });
 			_container.TextBulder.Setup(
 				x => x.GetText(localization.Subject, recipientData.Culture, eventType, applicationDetailsData, eventDataForEntity.Data))
@@ -62,7 +62,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			_container.TemplateRepositoryHelper.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
 			_container.TemplateRepositoryHelper.Verify(x => x.GetTemplateId(eventType));
 			_container.FilesFasade.Verify(x => x.GetFiles(eventDataForEntity.EntityId, It.IsAny<long?>(), eventType, eventDataForEntity.Data));
-			_container.RecipientsFacade.Verify(x => x.GetRecipients(applicationDetailsData, eventType, eventDataForEntity.Data));
+			_container.RecipientsFacade.Verify(x => x.GetRecipients(eventType, eventDataForEntity));
 			_container.TextBulder.Verify(
 				x => x.GetText(localization.Subject, recipientData.Culture, eventType, applicationDetailsData, eventDataForEntity.Data));
 			_container.TextBulder.Verify(

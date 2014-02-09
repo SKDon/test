@@ -1,11 +1,10 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 
 namespace Alicargo.Jobs.Application.Abstract
 {
 	public interface IRecipientsFacade
 	{
-		RecipientData[] GetRecipients(ApplicationExtendedData application, EventType type, byte[] data);
+		RecipientData[] GetRecipients(EventType type, EventDataForEntity data);
 	}
 }

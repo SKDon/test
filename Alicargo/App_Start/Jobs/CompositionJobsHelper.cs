@@ -284,6 +284,7 @@ namespace Alicargo.App_Start.Jobs
 			var clientRepository = new ClientRepository(unitOfWork);
 			var recipientsFacade = new RecipientsFacade(
 				awbs,
+				applications,
 				new AdminRepository(unitOfWork),
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,

@@ -47,6 +47,11 @@ namespace Alicargo.Jobs.Helpers
 			}
 
 			var recipients = _recipients.GetRecipients(type, eventDataForEntity.EntityId);
+			if(recipients.Length == 0)
+			{
+				return null;
+			}
+
 			var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
 
 			var files = _file.GetExcels(eventDataForEntity.EntityId, languages);

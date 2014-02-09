@@ -47,11 +47,14 @@ namespace Alicargo.Jobs.Application.Helpers
 		{
 			var data = _serializer.Deserialize<EventDataForEntity>(eventData.Data);
 
-			return Get(type, data.EntityId, data.Data);
+			return Get(type, data);
 		}
 
-		private EmailMessage[] Get(EventType type, long applicationId, byte[] applicationEventData)
+		private EmailMessage[] Get(EventType type, EventDataForEntity data)
 		{
+			var applicationEventData = data.Data;
+			var applicationId = data.EntityId;
+
 			var application = _applications.GetExtendedData(applicationId);
 			if(application == null)
 			{
@@ -64,7 +67,7 @@ namespace Alicargo.Jobs.Application.Helpers
 				return null;
 			}
 
-			var recipients = _recipients.GetRecipients(application, type, applicationEventData);
+			var recipients = _recipients.GetRecipients(type, data);
 			if(recipients == null || recipients.Length == 0)
 			{
 				return null;

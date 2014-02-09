@@ -14,16 +14,18 @@ namespace Alicargo.Jobs.Application.Helpers
 	public sealed class RecipientsFacade : IRecipientsFacade
 	{
 		private readonly IAdminRepository _admins;
+		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
 		private readonly IBrokerRepository _brokers;
-		private readonly IClientRepository _clients;
 		private readonly ICarrierRepository _carriers;
+		private readonly IClientRepository _clients;
 		private readonly IForwarderRepository _forwarders;
-		private readonly ISenderRepository _senders;
 		private readonly IEventEmailRecipient _recipients;
+		private readonly ISenderRepository _senders;
 
 		public RecipientsFacade(
 			IAwbRepository awbs,
+			IApplicationRepository applications,
 			IAdminRepository admins,
 			ISenderRepository senders,
 			IClientRepository clients,
@@ -33,6 +35,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			IEventEmailRecipient recipients)
 		{
 			_awbs = awbs;
+			_applications = applications;
 			_admins = admins;
 			_senders = senders;
 			_clients = clients;
@@ -42,8 +45,10 @@ namespace Alicargo.Jobs.Application.Helpers
 			_recipients = recipients;
 		}
 
-		public RecipientData[] GetRecipients(ApplicationExtendedData application, EventType type, byte[] data)
+		public RecipientData[] GetRecipients(EventType type, EventDataForEntity data)
 		{
+			var application = _applications.GetExtendedData(data.EntityId);
+
 			var roles = _recipients.GetRecipientRoles(type);
 
 			return roles.Length == 0

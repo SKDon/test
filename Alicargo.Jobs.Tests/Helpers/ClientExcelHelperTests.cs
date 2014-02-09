@@ -27,8 +27,7 @@ namespace Alicargo.Jobs.Tests.Helpers
 		{
 			var invalidString = Path.GetInvalidFileNameChars().Aggregate(" \t\r\n", (s, c) => s + c);
 
-			invalidString.EscapeFileName()
-				.ShouldBeEquivalentTo("___________________________________________________________________________________________");
+			invalidString.EscapeFileName().ShouldBeEquivalentTo("_____________________________________________");
 		}
 	}
 }
