@@ -10,7 +10,7 @@ namespace Alicargo.Jobs.Helpers
 	internal sealed class CommonEventMessageBuilder : IMessageBuilder
 	{
 		private readonly string _defaultFrom;
-		private readonly IClientExcelHelper _file;
+		private readonly IClientExcelHelper _excel;
 		private readonly ILocalizedDataHelper _localizedHelper;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
@@ -22,7 +22,7 @@ namespace Alicargo.Jobs.Helpers
 			IRecipientsFacade recipients,
 			ISerializer serializer,
 			ITextBuilder textBuilder,
-			IClientExcelHelper file,
+			IClientExcelHelper excel,
 			ILocalizedDataHelper localizedHelper,
 			ITemplateRepositoryHelper templates)
 		{
@@ -30,7 +30,7 @@ namespace Alicargo.Jobs.Helpers
 			_recipients = recipients;
 			_serializer = serializer;
 			_textBuilder = textBuilder;
-			_file = file;
+			_excel = excel;
 			_localizedHelper = localizedHelper;
 			_templates = templates;
 		}
@@ -53,21 +53,57 @@ namespace Alicargo.Jobs.Helpers
 
 			var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
 
-			var files = _file.GetExcels(eventDataForEntity.EntityId, languages);
+			var files = GetFiles(type, eventDataForEntity, languages);
 
 			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value);
 
 			return recipients.Select(x =>
-				GetEmailMessage(x.Email, localizations[x.Culture], files != null ? files[x.Culture] : null)).ToArray();
+				GetEmailMessage(x.Email, localizations[x.Culture], files[x.Culture])).ToArray();
 		}
 
-		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder file)
+		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder[] files)
 		{
 			return new EmailMessage(localizationData.Subject, localizationData.Body, _defaultFrom, email)
 			{
-				Files = file != null ? new[] { file } : null,
+				Files = files,
 				IsBodyHtml = localizationData.IsBodyHtml
 			};
+		}
+
+		private IReadOnlyDictionary<string, FileHolder[]> GetFiles(EventType type, EventDataForEntity eventData,
+			string[] languages)
+		{
+			var excels = _excel.GetExcels(eventData.EntityId, languages);
+			FileHolder file = null;
+
+			switch(type)
+			{
+				case EventType.CPFileUploaded:
+				case EventType.InvoiceFileUploaded:
+				case EventType.PackingFileUploaded:
+				case EventType.SwiftFileUploaded:
+				case EventType.DeliveryBillFileUploaded:
+				case EventType.Torg12FileUploaded:
+				case EventType.GTDFileUploaded:
+				case EventType.GTDAdditionalFileUploaded:
+				case EventType.AwbPackingFileUploaded:
+				case EventType.AwbInvoiceFileUploaded:
+				case EventType.AWBFileUploaded:
+				case EventType.DrawFileUploaded:
+					file = _serializer.Deserialize<FileHolder>(eventData.Data);
+					break;
+			}
+
+			if(file != null)
+			{
+				return excels != null
+					? languages.ToDictionary(x => x, x => new[] { file, excels[x] })
+					: languages.ToDictionary(x => x, x => new[] { file });
+			}
+
+			return excels != null
+				? languages.ToDictionary(x => x, x => new[] { excels[x] })
+				: null;
 		}
 
 		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventDataForEntity eventData,
