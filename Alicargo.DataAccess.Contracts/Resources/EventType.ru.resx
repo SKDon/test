@@ -168,4 +168,31 @@
   <data name="SetCarrier" xml:space="preserve">
     <value>Установка курьера</value>
   </data>
+  <data name="AwbCreated" xml:space="preserve">
+    <value>Создана накладная</value>
+  </data>
+  <data name="AWBFileUploaded" xml:space="preserve">
+    <value>Файл накладной загружен</value>
+  </data>
+  <data name="AwbInvoiceFileUploaded" xml:space="preserve">
+    <value>Инфойс загружен в накладную</value>
+  </data>
+  <data name="AwbPackingFileUploaded" xml:space="preserve">
+    <value>Файл пакинг загружен в накладную</value>
+  </data>
+  <data name="ClientAdded" xml:space="preserve">
+    <value>Клиент добавлен</value>
+  </data>
+  <data name="DrawFileUploaded" xml:space="preserve">
+    <value>Файл Draw загружен</value>
+  </data>
+  <data name="GTDAdditionalFileUploaded" xml:space="preserve">
+    <value>Файл ГТД-дополнение загружен</value>
+  </data>
+  <data name="GTDFileUploaded" xml:space="preserve">
+    <value>Файл ГТД загружен</value>
+  </data>
+  <data name="SetAwb" xml:space="preserve">
+    <value>Заявке установлена накладная</value>
+  </data>
 </root>

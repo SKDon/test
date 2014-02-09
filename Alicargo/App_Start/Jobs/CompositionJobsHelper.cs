@@ -162,7 +162,7 @@ namespace Alicargo.App_Start.Jobs
 				var awbs = new AwbRepository(unitOfWork);
 				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs, serializer);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
-				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, brokerRepository, serializer, eventEmailRecipient);
+				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, brokerRepository, awbs, serializer, eventEmailRecipient);
 
 				var messageBuilder = GetMessageBuilder(
 					executor, serializer, clientExcelHelper, localizedDataHelper,
@@ -178,6 +178,12 @@ namespace Alicargo.App_Start.Jobs
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
 						{ EventType.AwbCreated, processors },
+						{ EventType.GTDFileUploaded, processors },
+						{ EventType.GTDAdditionalFileUploaded, processors },
+						{ EventType.AwbPackingFileUploaded, processors },
+						{ EventType.AwbInvoiceFileUploaded, processors },
+						{ EventType.AWBFileUploaded, processors },
+						{ EventType.DrawFileUploaded, processors }
 					}).Work();
 			}
 		}
@@ -200,8 +206,8 @@ namespace Alicargo.App_Start.Jobs
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var clientExcelHelper = new ClientExcelHelper(clientRepository, excelClientCalculation);
 				var localizedDataHelper = new BalanceLocalizedDataHelper(clientBalanceRepository, serializer, clientRepository);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository,eventEmailRecipient);
-				
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository, eventEmailRecipient);
+
 				var messageBuilder = GetMessageBuilder(executor, serializer, clientExcelHelper, localizedDataHelper,
 					recipientsFacade);
 				var emailingProcessor = GetDefaultEmailingProcessor(partitionId, executor, serializer, messageBuilder);
@@ -234,7 +240,7 @@ namespace Alicargo.App_Start.Jobs
 				var clientExcelHelper = new ClientExcelHelperStub();
 				var localizedDataHelper = new CommonLocalizedDataHelper(serializer, clientRepository);
 				var recipients = new EventEmailRecipient(executor);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository,recipients);
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository, recipients);
 
 				var messageBuilder = GetMessageBuilder(executor, serializer, clientExcelHelper, localizedDataHelper,
 					recipientsFacade);

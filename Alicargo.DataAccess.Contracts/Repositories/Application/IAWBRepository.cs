@@ -1,4 +1,5 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 
 namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
@@ -16,9 +17,12 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		AirWaybillAggregate[] GetAggregate(long[] awbIds, long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null);
 
-		string[] GetClientEmails(long id);
+		EmailData[] GetCarrierEmails(long awbId);
+		EmailData[] GetClientEmails(long awbId);
+		EmailData[] GetForwarderEmails(long awbId);
 
 		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null);
+		EmailData[] GetSenderEmails(long awbId);
 
 		int? GetTotalCountWithouAwb();
 

@@ -168,4 +168,31 @@
   <data name="SetCarrier" xml:space="preserve">
     <value>Set carrier</value>
   </data>
+  <data name="AwbCreated" xml:space="preserve">
+    <value>Awb created</value>
+  </data>
+  <data name="AWBFileUploaded" xml:space="preserve">
+    <value>AWB file uploaded</value>
+  </data>
+  <data name="AwbInvoiceFileUploaded" xml:space="preserve">
+    <value>Awb invoice file uploaded</value>
+  </data>
+  <data name="AwbPackingFileUploaded" xml:space="preserve">
+    <value>Awb packing file uploaded</value>
+  </data>
+  <data name="ClientAdded" xml:space="preserve">
+    <value>Client added</value>
+  </data>
+  <data name="DrawFileUploaded" xml:space="preserve">
+    <value>Draw file uploaded</value>
+  </data>
+  <data name="GTDAdditionalFileUploaded" xml:space="preserve">
+    <value>GTD additional file uploaded</value>
+  </data>
+  <data name="GTDFileUploaded" xml:space="preserve">
+    <value>GTD file uploaded</value>
+  </data>
+  <data name="SetAwb" xml:space="preserve">
+    <value>Set awb</value>
+  </data>
 </root>

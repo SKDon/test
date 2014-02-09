@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
@@ -78,6 +78,20 @@ namespace Alicargo.DataAccess.Repositories.Application
 				: _context.AirWaybills.LongCount();
 		}
 
+		public EmailData[] GetForwarderEmails(long awbId)
+		{
+			return _context.AirWaybills
+				.Where(x => x.Id == awbId)
+				.SelectMany(x => x.Applications)
+				.Select(x => x.Forwarder)
+				.Select(x => new EmailData
+				{
+					Email = x.Email,
+					Language = x.User.TwoLetterISOLanguageName
+				})
+				.ToArray();
+		}
+
 		public AirWaybillData[] GetRange(int take, long skip, long? brokerId = null)
 		{
 			var airWaybills = _context.AirWaybills.OrderByDescending(x => x.CreationTimestamp).AsQueryable();
@@ -89,6 +103,20 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.Take(take)
 				.Select(_selector)
 				.ToArray();
+		}
+
+		public EmailData[] GetSenderEmails(long awbId)
+		{
+			return _context.AirWaybills
+			.Where(x => x.Id == awbId)
+			.SelectMany(x => x.Applications)
+			.Select(x => x.Sender)
+			.Select(x => new EmailData
+			{
+				Email = x.Email,
+				Language = x.User.TwoLetterISOLanguageName
+			})
+			.ToArray();
 		}
 
 		public AirWaybillAggregate[] GetAggregate(long[] awbIds, long? clientId = null, long? senderId = null,
@@ -128,6 +156,20 @@ namespace Alicargo.DataAccess.Repositories.Application
 			}).ToArray();
 		}
 
+		public EmailData[] GetCarrierEmails(long awbId)
+		{
+			return _context.AirWaybills
+			.Where(x => x.Id == awbId)
+			.SelectMany(x => x.Applications)
+			.Select(x => x.Transit.Carrier)
+			.Select(x => new EmailData
+			{
+				Email = x.Email,
+				Language = x.User.TwoLetterISOLanguageName
+			})
+			.ToArray();
+		}
+
 		public float? GetTotalWeightWithouAwb()
 		{
 			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Weight);
@@ -148,14 +190,17 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Count);
 		}
 
-		public string[] GetClientEmails(long id)
+		public EmailData[] GetClientEmails(long awbId)
 		{
 			return _context.AirWaybills
-				.Where(x => x.Id == id)
+				.Where(x => x.Id == awbId)
 				.SelectMany(x => x.Applications)
-				.Select(x => x.Client.Emails)
-				.ToArray()
-				.SelectMany(EmailsHelper.SplitAndTrimEmails)
+				.Select(x => x.Client)
+				.Select(x => new EmailData
+				{
+					Email = x.Emails,
+					Language = x.User.TwoLetterISOLanguageName
+				})
 				.ToArray();
 		}
 

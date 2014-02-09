@@ -57,9 +57,9 @@ namespace Alicargo.DataAccess.Contracts.Enums
 
 		[DisplayNameLocalized(typeof(Resources.EventType), "GTDAdditionalFileUploaded")] GTDAdditionalFileUploaded = 22,
 
-		[DisplayNameLocalized(typeof(Resources.EventType), "PackingFileUploaded")] AwbPackingFileUploaded = 23,
+		[DisplayNameLocalized(typeof(Resources.EventType), "AwbPackingFileUploaded")] AwbPackingFileUploaded = 23,
 
-		[DisplayNameLocalized(typeof(Resources.EventType), "InvoiceFileUploaded")] AwbInvoiceFileUploaded = 24,
+		[DisplayNameLocalized(typeof(Resources.EventType), "AwbInvoiceFileUploaded")] AwbInvoiceFileUploaded = 24,
 
 		[DisplayNameLocalized(typeof(Resources.EventType), "AWBFileUploaded")] AWBFileUploaded = 25,
 

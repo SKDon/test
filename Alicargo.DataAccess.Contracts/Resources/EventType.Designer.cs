@@ -79,6 +79,42 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Awb created.
+        /// </summary>
+        public static string AwbCreated {
+            get {
+                return ResourceManager.GetString("AwbCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AWB file uploaded.
+        /// </summary>
+        public static string AWBFileUploaded {
+            get {
+                return ResourceManager.GetString("AWBFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Awb invoice file uploaded.
+        /// </summary>
+        public static string AwbInvoiceFileUploaded {
+            get {
+                return ResourceManager.GetString("AwbInvoiceFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Awb packing file uploaded.
+        /// </summary>
+        public static string AwbPackingFileUploaded {
+            get {
+                return ResourceManager.GetString("AwbPackingFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Balance decreased.
         /// </summary>
         public static string BalanceDecreased {
@@ -115,6 +151,15 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client added.
+        /// </summary>
+        public static string ClientAdded {
+            get {
+                return ResourceManager.GetString("ClientAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CP file is uploaded.
         /// </summary>
         public static string CPFileUploaded {
@@ -133,6 +178,33 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Draw file uploaded.
+        /// </summary>
+        public static string DrawFileUploaded {
+            get {
+                return ResourceManager.GetString("DrawFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GTD additional file uploaded.
+        /// </summary>
+        public static string GTDAdditionalFileUploaded {
+            get {
+                return ResourceManager.GetString("GTDAdditionalFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GTD file uploaded.
+        /// </summary>
+        public static string GTDFileUploaded {
+            get {
+                return ResourceManager.GetString("GTDFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invoice file is uploaded.
         /// </summary>
         public static string InvoiceFileUploaded {
@@ -147,6 +219,15 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         public static string PackingFileUploaded {
             get {
                 return ResourceManager.GetString("PackingFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set awb.
+        /// </summary>
+        public static string SetAwb {
+            get {
+                return ResourceManager.GetString("SetAwb", resourceCulture);
             }
         }
         

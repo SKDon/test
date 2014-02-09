@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -9,10 +11,21 @@ namespace Alicargo.DataAccess.Repositories.User
 	public sealed class AdminRepository : IAdminRepository
 	{
 		private readonly AlicargoDataContext _context;
+		private readonly Expression<Func<Admin, UserData>> _selector;
 
 		public AdminRepository(IUnitOfWork unitOfWork)
 		{
 			_context = (AlicargoDataContext)unitOfWork.Context;
+
+			_selector = x => new UserData
+			{
+				EntityId = x.Id,
+				UserId = x.UserId,
+				Name = x.Name,
+				Login = x.User.Login,
+				Email = x.Email,
+				Language = x.User.TwoLetterISOLanguageName
+			};
 		}
 
 		public long Update(long adminId, string name, string login, string email)
@@ -50,16 +63,8 @@ namespace Alicargo.DataAccess.Repositories.User
 		}
 
 		public UserData[] GetAll()
-		{
-			return _context.Admins.Select(x => new UserData
-			{
-				EntityId = x.Id,
-				UserId = x.UserId,
-				Name = x.Name,
-				Login = x.User.Login,
-				Email = x.Email,
-				Language = x.User.TwoLetterISOLanguageName
-			}).ToArray();
+		{			
+			return _context.Admins.Select(_selector).ToArray();
 		}
 	}
 }
