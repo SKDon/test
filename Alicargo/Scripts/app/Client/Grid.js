@@ -33,8 +33,6 @@
 		sortable: false,
 		editable: false,
 		columns: [
-			{ field: "LegalEntity", title: $l.Entities_LegalEntity },
-			{ field: "Nic", title: $l.Entities_Nic },
 			{
 				command: [{
 					name: "custom-edit",
@@ -44,7 +42,7 @@
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
 						var url = $u.Client_Edit + "/" + data.ClientId;
-						
+
 						$a.LoadPage(url);
 					}
 				}],
@@ -60,13 +58,15 @@
 						var data = this.dataItem(tr);
 						if ($a.Confirm("Авторизаваться под клиентом " + data.Nic + "?")) {
 							var url = $u.Authentication_LoginAsClient + "/" + data.ClientId;
-							
+
 							$a.LoadPage(url);
 						}
 					}
 				}],
 				title: "&nbsp;",
 				width: Alicargo.DefaultGridButtonWidth
-			}]
+			},
+			{ field: "Nic", title: $l.Entities_Nic },
+			{ field: "LegalEntity", title: $l.Entities_LegalEntity }]
 	});
 });

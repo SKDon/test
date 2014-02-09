@@ -10,9 +10,9 @@ namespace Alicargo.Jobs.Client
 {
 	internal sealed class ClientEventMessageBuilder : IMessageBuilder
 	{
+		private readonly string _defaultFrom;
 		private readonly ISerializer _serializer;
 		private readonly IClientRepository _clients;
-		private readonly string _defaultFrom;
 		private readonly IClientExcelHelper _excel;
 		private readonly ILocalizedDataHelper _localizedHelper;
 		private readonly IClientEventRecipientsFacade _recipients;

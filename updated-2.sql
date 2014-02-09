@@ -13,6 +13,11 @@ INSERT [dbo].[EventEmailTemplate]
 ([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES
 (18, 30, 1)
 
+INSERT [dbo].[EventEmailRecipient]
+([RoleId], [EventTypeId]) VALUES
+(1, 18),
+(5, 18)
+
 INSERT [dbo].[EmailTemplateLocalization]
 ([EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES
 (30, N'ru', N'Alicargo',

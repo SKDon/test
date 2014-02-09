@@ -55,6 +55,8 @@
     <Compile Include="ApplicationEvents\Abstract\IApplicationEventTemplates.cs" />
     <Compile Include="Client\Balance\BalanceLocalizedDataHelper.cs" />
     <Compile Include="Client\Balance\PaymentEventData.cs" />
+    <Compile Include="Client\ClientAdd\ClientExcelHelperStub.cs" />
+    <Compile Include="Client\ClientAdd\CommonLocalizedDataHelper.cs" />
     <Compile Include="Client\IClientEventRecipientsFacade.cs" />
     <Compile Include="Client\ClientEventMessageBuilder.cs" />
     <Compile Include="Client\ClientEventClientEventRecipientsFacade.cs" />
@@ -116,9 +118,7 @@
       <Name>Alicargo.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Client\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
