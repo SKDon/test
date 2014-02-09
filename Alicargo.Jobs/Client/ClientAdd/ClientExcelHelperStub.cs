@@ -4,7 +4,7 @@ using Alicargo.Jobs.Helpers.Abstract;
 
 namespace Alicargo.Jobs.Client.ClientAdd
 {
-	internal sealed class FileHelperStub : IClientExcelHelper
+	internal sealed class ClientExcelHelperStub : IClientExcelHelper
 	{
 		public IReadOnlyDictionary<string, FileHolder> GetExcels(long clientId, string[] languages)
 		{
