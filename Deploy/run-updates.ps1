@@ -6,5 +6,6 @@
 )
 
 Sqlcmd -S $server -i "update-1.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
+Sqlcmd -S $server -i "update-2.sql" -v MainDbName = "$mainDbPrefix`_$newVersion" FilesDbName = "$filesDbPrefix`_$newVersion"
 
 Write-Host "Done"
