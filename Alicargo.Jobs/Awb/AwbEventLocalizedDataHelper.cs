@@ -35,6 +35,7 @@ namespace Alicargo.Jobs.Awb
 				{ "TotalWeight", aggregate.TotalWeight.ToString("N2") },
 				{ "TotalCount", aggregate.TotalCount.ToString("N2") },
 				{ "TotalValue", aggregate.TotalValue.ToString("N2") },
+				{ "AirWaybill", awb.Bill },
 				{ "TotalVolume", aggregate.TotalVolume.ToString("N2") }
 			};
 		}
