@@ -41,6 +41,3 @@ GO
 
 CREATE NONCLUSTERED INDEX [IX_BrokerId] ON [dbo].[AirWaybill]([BrokerId] ASC);
 GO
-
-CREATE UNIQUE INDEX [IX_AirWaybill_Bill] ON [dbo].[AirWaybill] ([Bill]);
-GO

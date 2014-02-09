@@ -57,6 +57,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_context.SubmitChanges();
 
+			data.Id = entity.Id;
+
 			return entity.Id;
 		}
 

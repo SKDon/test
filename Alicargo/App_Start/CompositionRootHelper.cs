@@ -26,14 +26,6 @@ namespace Alicargo.App_Start
 		public static readonly IDictionary<Type, Type[]> Decorators = new Dictionary<Type, Type[]>
 		{
 			{
-				typeof(IAwbManager),
-				new[]
-				{
-					typeof(AwbManager),
-					typeof(AwbManagerWithMailing)
-				}
-			},
-			{
 				typeof(IApplicationEditor),
 				new[]
 				{
@@ -48,13 +40,6 @@ namespace Alicargo.App_Start
 					typeof(AwbUpdateManager),
 					typeof(AwbUpdateGtdManager),
 					typeof(AwbUpdateManagerWithMailing)
-				}
-			},
-			{
-				typeof(IApplicationAwbManager),
-				new[]
-				{
-					typeof(ApplicationAwbManager)
 				}
 			},
 			{

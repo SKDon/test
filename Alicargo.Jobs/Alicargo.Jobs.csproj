@@ -53,8 +53,10 @@
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
     <Compile Include="Application\Abstract\IApplicationEventTemplates.cs" />
+    <Compile Include="Awb\AwbEventRecipientsFacade.cs" />
     <Compile Include="Client\Balance\BalanceLocalizedDataHelper.cs" />
     <Compile Include="Client\Balance\PaymentEventData.cs" />
+    <Compile Include="Awb\AwbEventLocalizedDataHelper.cs" />
     <Compile Include="Helpers\ClientExcelHelperStub.cs" />
     <Compile Include="Client\ClientAdd\CommonLocalizedDataHelper.cs" />
     <Compile Include="Helpers\CommonEventMessageBuilder.cs" />

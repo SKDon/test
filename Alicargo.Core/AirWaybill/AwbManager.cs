@@ -1,5 +1,7 @@
 ﻿using Alicargo.Core.Contracts.AirWaybill;
+using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 
@@ -8,20 +10,23 @@ namespace Alicargo.Core.AirWaybill
 	public sealed class AwbManager : IAwbManager
 	{
 		private readonly IApplicationAwbManager _applicationAwbManager;
-		private readonly IApplicationRepository _applicationRepository;
-		private readonly IApplicationEditor _applicationUpdater;
-		private readonly IAwbRepository _awbRepository;
+		private readonly IApplicationRepository _applications;
+		private readonly IApplicationEditor _editor;
+		private readonly IAwbRepository _awbs;
+		private readonly IEventFacade _events;
 
 		public AwbManager(
-			IAwbRepository awbRepository,
+			IAwbRepository awbs,
+			IEventFacade events,
 			IApplicationAwbManager applicationAwbManager,
-			IApplicationRepository applicationRepository,
-			IApplicationEditor applicationUpdater)
+			IApplicationRepository applications,
+			IApplicationEditor editor)
 		{
-			_awbRepository = awbRepository;
+			_awbs = awbs;
+			_events = events;
 			_applicationAwbManager = applicationAwbManager;
-			_applicationRepository = applicationRepository;
-			_applicationUpdater = applicationUpdater;
+			_applications = applications;
+			_editor = editor;
 		}
 
 		public long Create(long? applicationId, AirWaybillData data, byte[] gtdFile,
@@ -32,7 +37,7 @@ namespace Alicargo.Core.AirWaybill
 				throw new InvalidLogicException("GTD data should be defined by update");
 			}
 
-			var id = _awbRepository.Add(data, gtdFile, gtdAdditionalFile, packingFile,
+			var id = _awbs.Add(data, gtdFile, gtdAdditionalFile, packingFile,
 				invoiceFile, awbFile, drawFile);
 
 			if(applicationId.HasValue)
@@ -40,19 +45,21 @@ namespace Alicargo.Core.AirWaybill
 				_applicationAwbManager.SetAwb(applicationId.Value, id);
 			}
 
+			_events.Add(id, EventType.AwbCreated, EventState.Emailing, data);
+
 			return id;
 		}
 
 		public void Delete(long awbId)
 		{
-			var applicationDatas = _applicationRepository.GetByAirWaybill(awbId);
+			var applicationDatas = _applications.GetByAirWaybill(awbId);
 
 			foreach(var app in applicationDatas)
 			{
-				_applicationUpdater.SetAirWaybill(app.Id, null);
+				_editor.SetAirWaybill(app.Id, null);
 			}
 
-			_awbRepository.Delete(awbId);
+			_awbs.Delete(awbId);
 		}
 	}
 }
