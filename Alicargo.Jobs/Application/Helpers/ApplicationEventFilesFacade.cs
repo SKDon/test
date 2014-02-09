@@ -8,24 +8,35 @@ using Alicargo.Utilities;
 
 namespace Alicargo.Jobs.Application.Helpers
 {
-	public sealed class FilesFacade : IFilesFacade
+	public sealed class ApplicationEventFilesFacade : IFilesFacade
 	{
 		private readonly ISerializer _serializer;
 		private readonly IAwbFileRepository _awbFiles;
 		private readonly IApplicationFileRepository _applicationFiles;
+		private readonly IApplicationRepository _applications;
 
-		public FilesFacade(
+		public ApplicationEventFilesFacade(
 			ISerializer serializer,
 			IAwbFileRepository awbFiles,
-			IApplicationFileRepository applicationFiles)
+			IApplicationFileRepository applicationFiles, 
+			IApplicationRepository applications)
 		{
 			_serializer = serializer;
 			_awbFiles = awbFiles;
 			_applicationFiles = applicationFiles;
+			_applications = applications;
 		}
 
-		public FileHolder[] GetFiles(long applicationId, long? awbId, EventType type, byte[] data)
+		public FileHolder[] GetFiles(EventType type, EventDataForEntity data)
 		{
+			var applicationId = data.EntityId;
+
+			var application = _applications.GetExtendedData(data.EntityId);
+			if(application == null)
+			{
+				throw new InvalidOperationException("Can't find application by id " + data.EntityId);
+			}
+
 			switch(type)
 			{
 				case EventType.SetDateOfCargoReceipt:
@@ -37,7 +48,7 @@ namespace Alicargo.Jobs.Application.Helpers
 					return null;
 
 				case EventType.ApplicationSetState:
-					return GeAllFiles(applicationId, awbId);
+					return GeAllFiles(applicationId, application.AirWaybillId);
 
 				case EventType.Calculate:
 				case EventType.CalculationCanceled:
@@ -49,7 +60,7 @@ namespace Alicargo.Jobs.Application.Helpers
 				case EventType.SwiftFileUploaded:
 				case EventType.DeliveryBillFileUploaded:
 				case EventType.Torg12FileUploaded:
-					return new[] { _serializer.Deserialize<FileHolder>(data) };
+					return new[] { _serializer.Deserialize<FileHolder>(data.Data) };
 
 				default:
 					throw new ArgumentOutOfRangeException("type");

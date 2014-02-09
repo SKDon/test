@@ -274,7 +274,7 @@ namespace Alicargo.App_Start.Jobs
 			var applications = new ApplicationRepository(unitOfWork);
 			var awbs = new AwbRepository(unitOfWork);
 			var files = new ApplicationFileRepository(filesExecutor);
-			var filesFasade = new FilesFacade(serializer, new AwbFileRepository(unitOfWork), files);
+			var filesFasade = new ApplicationEventFilesFacade(serializer, new AwbFileRepository(unitOfWork), files, applications);
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var countries = new CountryRepository(mainExecutor);
 			var cities = new CityRepository(mainExecutor);
@@ -304,9 +304,9 @@ namespace Alicargo.App_Start.Jobs
 				textBulder,
 				recipientsFacade,
 				templateRepositoryHelper,
-				applications,
 				clientExcelHelper,
-				serializer);
+				serializer,
+				applications);
 		}
 	}
 }

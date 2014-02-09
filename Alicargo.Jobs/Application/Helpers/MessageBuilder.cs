@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -14,7 +13,6 @@ namespace Alicargo.Jobs.Application.Helpers
 {
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
-		private readonly IApplicationRepository _applications;
 		private readonly string _defaultFrom;
 		private readonly IClientExcelHelper _excel;
 		private readonly IFilesFacade _files;
@@ -22,6 +20,7 @@ namespace Alicargo.Jobs.Application.Helpers
 		private readonly ISerializer _serializer;
 		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder _textBuilder;
+		private readonly IApplicationRepository _applications;
 
 		public MessageBuilder(
 			string defaultFrom,
@@ -29,18 +28,18 @@ namespace Alicargo.Jobs.Application.Helpers
 			ITextBuilder textBuilder,
 			IRecipientsFacade recipients,
 			ITemplateRepositoryHelper templates,
-			IApplicationRepository applications,
 			IClientExcelHelper excel,
-			ISerializer serializer)
+			ISerializer serializer, 
+			IApplicationRepository applications)
 		{
 			_defaultFrom = defaultFrom;
 			_files = files;
 			_textBuilder = textBuilder;
 			_recipients = recipients;
 			_templates = templates;
-			_applications = applications;
 			_excel = excel;
 			_serializer = serializer;
+			_applications = applications;
 		}
 
 		public EmailMessage[] Get(EventType type, EventData eventData)
@@ -57,22 +56,18 @@ namespace Alicargo.Jobs.Application.Helpers
 			if(recipients == null || recipients.Length == 0)
 			{
 				return null;
-			}
+			}			
 
-			var application = _applications.GetExtendedData(data.EntityId);
-			if(application == null)
-			{
-				throw new InvalidOperationException("Can't find application by id " + data.EntityId);
-			}
+			var files = _files.GetFiles(type, data);
 
-			var files = _files.GetFiles(data.EntityId, application.AirWaybillId, type, data.Data);
-
-			return GetEmailMessages(templateId.Value, recipients, application, data.Data, type, files).ToArray();
+			return GetEmailMessages(templateId.Value, recipients, data, type, files).ToArray();
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, RecipientData[] recipients,
-			ApplicationExtendedData application, byte[] data, EventType type, FileHolder[] files)
+			EventDataForEntity data, EventType type, FileHolder[] files)
 		{
+			var application = _applications.GetExtendedData(data.EntityId);
+
 			IReadOnlyDictionary<string, FileHolder> excels = null;
 			if(type == EventType.Calculate || type == EventType.CalculationCanceled)
 			{
@@ -92,7 +87,7 @@ namespace Alicargo.Jobs.Application.Helpers
 				var filesToSend = GetFiles(type, files, recipient, excels);
 
 				yield return GetEmailMessage(recipient.Email, recipient.Culture,
-					localization, application, data, type, filesToSend);
+					localization, application, data.Data, type, filesToSend);
 			}
 		}
 

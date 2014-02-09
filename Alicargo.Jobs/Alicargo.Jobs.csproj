@@ -64,7 +64,7 @@
     <Compile Include="Core\SequentialEventJob.cs" />
     <Compile Include="Application\ApplicationStateHistoryProcessor.cs" />
     <Compile Include="Application\Entities\TextBulderException.cs" />
-    <Compile Include="Application\Helpers\FilesFacade.cs" />
+    <Compile Include="Application\Helpers\ApplicationEventFilesFacade.cs" />
     <Compile Include="Application\Abstract\IFilesFacade.cs" />
     <Compile Include="Helpers\Abstract\IClientExcelHelper.cs" />
     <Compile Include="Helpers\Abstract\IMessageBuilder.cs" />
