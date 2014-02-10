@@ -22,14 +22,14 @@
 
 			function getUrl(data) {
 				switch (role) {
-					case "Sender":
-						return $u.Sender_Edit + "/" + data.EntityId;
-					case "Forwarder":
-						return $u.Forwarder_Edit + "/" + data.EntityId;
-					case "Carrier":
-						return $u.Carrier_Edit + "/" + data.EntityId;
-					default:
-						return $u.User_Edit + "/" + role + "/" + data.EntityId;
+				case "Sender":
+					return $u.Sender_Edit + "/" + data.EntityId;
+				case "Forwarder":
+					return $u.Forwarder_Edit + "/" + data.EntityId;
+				case "Carrier":
+					return $u.Carrier_Edit + "/" + data.EntityId;
+				default:
+					return $u.User_Edit + "/" + role + "/" + data.EntityId;
 				}
 			}
 
@@ -55,17 +55,7 @@
 			$("#user-grid").kendoGrid({
 				dataSource: dataSource,
 				pageable: false,
-				columns: [
-					{ field: "Name", title: $l.Pages_Name },
-					{
-						command: [{
-							name: "custom-edit",
-							text: "",
-							click: onEdit
-						}],
-						title: "&nbsp;",
-						width: $a.DefaultGridButtonWidth
-					}, {
+				columns: [{
 						command: [{
 							name: "custom-authenticate",
 							text: "",
@@ -73,7 +63,16 @@
 						}],
 						title: "&nbsp;",
 						width: Alicargo.DefaultGridButtonWidth
-					}]
+					}, {
+						command: [{
+							name: "custom-edit",
+							text: "",
+							click: onEdit
+						}],
+						title: "&nbsp;",
+						width: $a.DefaultGridButtonWidth
+					},
+					{ field: "Name", title: $l.Pages_Name }]
 			});
 		};
 

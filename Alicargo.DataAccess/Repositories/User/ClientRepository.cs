@@ -50,7 +50,7 @@ namespace Alicargo.DataAccess.Repositories.User
 		public ClientData[] GetRange(int take, long skip)
 		{
 			return _context.Clients
-				.OrderBy(x => x.LegalEntity)
+				.OrderBy(x => x.Nic)
 				.Skip((int)skip)
 				.Take(take)
 				.Select(_selector)

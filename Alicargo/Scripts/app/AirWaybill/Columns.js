@@ -1,18 +1,18 @@
-﻿var Alicargo = (function ($a) {
+﻿var Alicargo = (function($a) {
 
 	function getGrid() {
 		var grid = $("#AirWaybill-grid").data("kendoGrid");
-		getGrid = function () { return grid; };
+		getGrid = function() { return grid; };
 
 		return getGrid();
 	};
 
 	function addEditButton(columns, editUrl) {
-		columns.push({
+		columns.splice(0, 0, {
 			command: [{
 				name: "custom-edit",
 				text: "",
-				click: function (e) {
+				click: function(e) {
 					var tr = $(e.target).closest("tr");
 					var data = this.dataItem(tr);
 					var url = editUrl + "/" + data.Id;
@@ -30,8 +30,8 @@
 			command: [{
 				name: "custom-delete",
 				text: "",
-				click: function (e) {
-					var updateGrid = function () {
+				click: function(e) {
+					var updateGrid = function() {
 						var grid = getGrid();
 						grid.dataSource.read();
 						grid.refresh();
@@ -96,8 +96,8 @@
 		addEditButton(columns, $a.Urls.BrokerAwb_Edit);
 	}
 
-	$a.Awb = (function ($awb) {
-		$awb.AddColumns = function () {
+	$a.Awb = (function($awb) {
+		$awb.AddColumns = function() {
 			var columns = [
 				{ field: "CreationTimestampLocalString", title: $a.Localization.Entities_CreationTimestamp },
 				{ field: "State", title: $a.Localization.Entities_StateName, template: "#= !!State && !!State.StateName ? State.StateName : '' #" },

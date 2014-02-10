@@ -32,23 +32,7 @@
 		filterable: false,
 		sortable: false,
 		editable: false,
-		columns: [
-			{
-				command: [{
-					name: "custom-edit",
-					text: "",
-					click: function(e) {
-						e.preventDefault();
-						var tr = $(e.target).closest("tr");
-						var data = this.dataItem(tr);
-						var url = $u.Client_Edit + "/" + data.ClientId;
-
-						$a.LoadPage(url);
-					}
-				}],
-				title: "&nbsp;",
-				width: Alicargo.DefaultGridButtonWidth
-			}, {
+		columns: [{
 				command: [{
 					name: "custom-authenticate",
 					text: "",
@@ -61,6 +45,21 @@
 
 							$a.LoadPage(url);
 						}
+					}
+				}],
+				title: "&nbsp;",
+				width: Alicargo.DefaultGridButtonWidth
+			}, {
+				command: [{
+					name: "custom-edit",
+					text: "",
+					click: function(e) {
+						e.preventDefault();
+						var tr = $(e.target).closest("tr");
+						var data = this.dataItem(tr);
+						var url = $u.Client_Edit + "/" + data.ClientId;
+
+						$a.LoadPage(url);
 					}
 				}],
 				title: "&nbsp;",

@@ -28,21 +28,22 @@
 
 	var settings = {
 		dataSource: dataSource,
-		columns: [
-			{ field: "Name", title: $l.Pages_City }, {
-				command: [{
-					name: "custom-edit",
-					text: "",
-					click: function(e) {
-						e.preventDefault();
-						var tr = $(e.target).closest("tr");
-						var data = this.dataItem(tr);
-						var url = $u.City_Edit + "/" + data.Id;
+		columns: [{
+			command: [{
+				name: "custom-edit",
+				text: "",
+				click: function(e) {
+					e.preventDefault();
+					var tr = $(e.target).closest("tr");
+					var data = this.dataItem(tr);
+					var url = $u.City_Edit + "/" + data.Id;
 
-						$a.LoadPage(url);
-					}
-				}], title: "&nbsp;", width: $a.DefaultGridButtonWidth
-			}]
+					$a.LoadPage(url);
+				}
+			}],
+			title: "&nbsp;",
+			width: $a.DefaultGridButtonWidth
+		}, { field: "Name", title: $l.Pages_City }]
 	};
 
 	$a.CreateGrid("#city-grid", settings);

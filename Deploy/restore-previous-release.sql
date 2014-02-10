@@ -24,14 +24,14 @@ DROP DATABASE [Alicargo_Files_2_2]
 GO
 
 exec [dbo].[sp_RestoreDatabase] 
-	'Alicargo_2_2', 
+	'Alicargo_2_3', 
 	'Alicargo_2_2', 
 	'A:\Projects\Alicargo_2_2.bak', 
 	'A:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\'
 GO
 
 exec [dbo].[sp_RestoreDatabase] 
-	'Alicargo_Files_2_2', 
+	'Alicargo_Files_2_3', 
 	'Alicargo_Files_2_2', 
 	'A:\Projects\Alicargo_Files_2_2.bak', 
 	'A:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\'
