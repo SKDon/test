@@ -35,7 +35,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public long StateId { get; set; }
 
-		public int MethodOfDeliveryId { get; set; }
+		public MethodOfDelivery MethodOfDelivery { get; set; }
 
 		public int? ClassId { get; set; }
 

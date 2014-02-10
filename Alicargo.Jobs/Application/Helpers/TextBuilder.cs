@@ -127,6 +127,10 @@ namespace Alicargo.Jobs.Application.Helpers
 			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
 			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
 			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
+			var methodOfDelivery = DataAccess.Contracts.Resources.Enums.ResourceManager.GetString(
+				application.MethodOfDelivery.ToString(), culture);
+			var transitMethodOfTransit = DataAccess.Contracts.Resources.Enums.ResourceManager.GetString(
+				application.TransitMethodOfTransit.ToString(), culture);
 
 			var localizedData = new Dictionary<string, string>();
 			Add(localizedData, "AddressLoad", application.AddressLoad);
@@ -158,10 +162,8 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "FactoryPhone", application.FactoryPhone);
 			Add(localizedData, "InvoiceFiles", string.Join(", ", invoice));
 			Add(localizedData, "LegalEntity", application.ClientLegalEntity);
-			Add(localizedData, "MethodOfDelivery",
-				LocalizationHelper.GetMethodOfDelivery((MethodOfDelivery)application.MethodOfDeliveryId, culture));
-			Add(localizedData, "MethodOfTransit",
-				LocalizationHelper.GetMethodOfTransit(application.TransitMethodOfTransit, culture));
+			Add(localizedData, "MethodOfDelivery", methodOfDelivery);
+			Add(localizedData, "MethodOfTransit", transitMethodOfTransit);
 			Add(localizedData, "PackingFiles", string.Join(", ", packing));
 			Add(localizedData, "StateChangeTimestamp", LocalizationHelper.GetDate(application.StateChangeTimestamp, culture));
 			Add(localizedData, "StateName", state != null ? state.LocalizedName : null);

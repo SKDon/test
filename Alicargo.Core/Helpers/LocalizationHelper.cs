@@ -32,7 +32,7 @@ namespace Alicargo.Core.Helpers
 		{
 			if (value == 0)
 			{
-				return String.Empty;
+				return null;
 			}
 
 			return value.ToString("### ### ### ###", cultureInfo) + CurrencyName.Names[currency];

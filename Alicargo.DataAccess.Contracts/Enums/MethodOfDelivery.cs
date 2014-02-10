@@ -4,10 +4,10 @@ namespace Alicargo.DataAccess.Contracts.Enums
 {
     public enum MethodOfDelivery
     {
-		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.Enums), "Avia")]
+		[DisplayNameLocalized(typeof(Resources.Enums), "Avia")]
         Avia = 0,
 
-		[DisplayNameLocalized(typeof(DataAccess.Contracts.Resources.Enums), "Auto")]
+		[DisplayNameLocalized(typeof(Resources.Enums), "Auto")]
         Auto = 1
     }
 }

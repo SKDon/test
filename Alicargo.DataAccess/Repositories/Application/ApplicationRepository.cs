@@ -64,7 +64,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				TransitWarehouseWorkingTime = x.Transit.WarehouseWorkingTime,
 				WarehouseWorkingTime = x.WarehouseWorkingTime,
 				Weight = x.Weight,
-				MethodOfDeliveryId = x.MethodOfDeliveryId,
+				MethodOfDelivery = (MethodOfDelivery)x.MethodOfDeliveryId,
 				Value = x.Value,
 				CurrencyId = x.CurrencyId,
 				AirWaybillId = x.AirWaybillId,
