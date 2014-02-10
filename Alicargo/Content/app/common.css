@@ -216,6 +216,10 @@
 	padding: 10px;
 }
 
+	.grid-details hr {
+		margin: 10px 0;
+	}
+
 	.grid-details p:last-child {
 		margin-bottom: 0;
 	}
@@ -242,6 +246,19 @@
 	.grid-details-toolbar label {
 		display: inline-block;
 	}
+
+	.grid-details-toolbar .files {
+		-moz-column-count: 5;
+		-webkit-column-count: 5;
+		column-count: 5;
+		white-space: normal;
+		margin-bottom: -5px;
+	}
+
+		.grid-details-toolbar .files a {
+			margin-top: 5px;
+			white-space: nowrap;
+		}
 
 .select-client-holder select {
 	margin-bottom: 0;
