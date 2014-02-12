@@ -57,9 +57,17 @@ namespace Alicargo.Services.Application
 			return applications
 				.GroupBy(x => x.AirWaybillId ?? 0)
 				.Select(grouping => GetApplicationGroup(grouping, groups, OrderHelper.AwbFieldName,
-					awb => _airWaybills.ContainsKey(awb.Key)
-						? AwbHelper.GetAirWaybillDisplay(_airWaybills[awb.Key])
-						: ""))
+					delegate(IGrouping<long, ApplicationListItem> awb)
+					{
+						if(_airWaybills.ContainsKey(awb.Key))
+						{
+							var item = _airWaybills[awb.Key];
+
+							return string.Format("{{\"id\":\"{0}\",\"text\":\"{1}\"}}", item.Id, AwbHelper.GetAirWaybillDisplay(item));
+						}
+
+						return null;
+					}))
 				.ToArray();
 		}
 

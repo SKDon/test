@@ -27,10 +27,6 @@
 	background-color: #ffff00;
 }
 
-#calculation-grid .k-grouping-row td a {
-	color: #2e2e2e;
-}
-
 #calculation-grid .k-group-sub-footer td.total {
 	font-weight: bold;
 }

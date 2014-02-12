@@ -54,3 +54,7 @@
 .k-grid-custom-authenticate span {
 	background-position: -49px -241px;
 }
+
+ .k-grouping-row td a {
+	color: #2e2e2e;
+}

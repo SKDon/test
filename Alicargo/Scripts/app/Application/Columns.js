@@ -88,14 +88,14 @@
 			{ field: "State", title: $l.Entities_StateName, groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
 			{ field: "DateOfCargoReceiptLocalString", title: $l.Entities_DateOfCargoReceipt, groupable: false, editor: dateEditor, width: "90px", template: "#= DateOfCargoReceiptLocalString == null ? '' : kendo.toString(DateOfCargoReceiptLocalString, 'd') #" },
 			{ field: "DateInStockLocalString", title: $l.Entities_DateInStock, groupable: false, width: "90px" },
-			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true, width: "100px" },			
+			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true, width: "100px" },
 			{
 				field: "DisplayNumber",
 				title: $l.Entities_DisplayNumber,
 				template: "<a href='" + $u.Application_Edit + "/#=Id#'>#= DisplayNumber #</a>",
 				groupable: false,
 				width: "60px"
-			},			
+			},
 			{ field: "CountryName", title: $l.Entities_Country, groupable: false, width: "70px" },
 			{ field: "FactoryName", title: $l.Entities_FactoryName, groupable: false, width: "100px" },
 			{ field: "MarkName", title: $l.Entities_Mark, groupable: false, width: "100px" },
@@ -108,21 +108,22 @@
 			{ field: "ForwarderName", title: $l.Entities_Forwarder, groupable: true, width: "100px" },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
 			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: true, width: "100px" },
-			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },			
+			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{
 				field: "AirWaybill",
 				title: $l.Entities_AirWaybill,
 				groupable: true,
 				width: "150px",
-				template: function(data) {
-					if (data.AirWaybillId) {
-						return "<a href='" + $u.AirWaybill_Edit + "/" + data.AirWaybillId + "'>" + data.AirWaybill + "</a>";
+				groupHeaderTemplate: function(data) {
+					if (!!data.value) {
+						var json = $.parseJSON(data.value);
+						return $l.Entities_AWB + ': ' + "<a href='" + $u.AdminAwb_Edit + "/" + json.id + "'>"
+							+ json.text + "</a>";
 					}
 
-					return "";
-				},
-				groupHeaderTemplate: groupHeaderTemplateAwb
+					return $l.Entities_AWB + ': ' + $l.Pages_NoAirWaybill;
+				}
 			}];
 
 		var clientColumns = [
@@ -202,16 +203,16 @@
 			{ field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false },
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "70px" },
-			{ field: "State", title: $l.Entities_StateName, groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #" },			
+			{ field: "State", title: $l.Entities_StateName, groupable: true, editor: stateDropDownEditor, template: "#= State.StateName #" },
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
-			{ field: "CountryName", title: $l.Entities_Country, groupable: false, width: "70px" },			
+			{ field: "CountryName", title: $l.Entities_Country, groupable: false, width: "70px" },
 			{ field: "FactoryName", title: $l.Entities_FactoryName, groupable: false },
 			{ field: "MarkName", title: $l.Entities_Mark, groupable: false },
 			countField,
 			weightField,
-			volumeField,			
+			volumeField,
 			{ field: "Invoice", title: $l.Entities_Invoice, groupable: false },
-			valueField,						
+			valueField,
 			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: true, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
 		$apl.GetColumns = function() {
