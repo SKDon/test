@@ -266,6 +266,8 @@
 			<Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
 			<Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
 			<Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+			<Column Name="Phone" Type="System.String" DbType="NVarChar(MAX) NULL" CanBeNull="true" />
+			<Column Name="Contact" Type="System.String" DbType="NVarChar(MAX) NULL" CanBeNull="true" />
 			<Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
 			<Association Name="Carrier_Transit" Member="Transits" ThisKey="Id" OtherKey="CarrierId" Type="Transit" />
 			<Association Name="User_Carrier" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />

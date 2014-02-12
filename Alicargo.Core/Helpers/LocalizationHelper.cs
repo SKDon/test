@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Resources;
 
 namespace Alicargo.Core.Helpers
 {
@@ -15,17 +15,17 @@ namespace Alicargo.Core.Helpers
 
 		public static string GetMethodOfDelivery(MethodOfDelivery methodOfDelivery, CultureInfo cultureInfo)
 		{
-			return Entities.ResourceManager.GetString("MethodOfDelivery", cultureInfo);
+			return Enums.ResourceManager.GetString(methodOfDelivery.ToString(), cultureInfo);
 		}
 
 		public static string GetMethodOfTransit(MethodOfTransit methodOfTransit, CultureInfo cultureInfo)
 		{
-			return Entities.ResourceManager.GetString("MethodOfTransit", cultureInfo);
+			return Enums.ResourceManager.GetString(methodOfTransit.ToString(), cultureInfo);
 		}
 
 		public static string GetDeliveryType(DeliveryType deliveryType, CultureInfo cultureInfo)
 		{
-			return Entities.ResourceManager.GetString("DeliveryType", cultureInfo);
+			return Enums.ResourceManager.GetString(deliveryType.ToString(), cultureInfo);
 		}
 
 		public static string GetValueString(decimal value, CurrencyType currency, CultureInfo cultureInfo)

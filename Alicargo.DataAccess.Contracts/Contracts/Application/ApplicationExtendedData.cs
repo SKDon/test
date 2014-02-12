@@ -89,9 +89,13 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public DeliveryType TransitDeliveryType { get; set; }
 
-		public string TransitCarrierName { get; set; }
-
 		public long CarrierId { get; set; }
+
+		public string CarrierName { get; set; }
+
+		public string CarrierPhone { get; set; }
+
+		public string CarrierContact { get; set; }
 
 
 

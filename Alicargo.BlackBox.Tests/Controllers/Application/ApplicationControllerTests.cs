@@ -122,7 +122,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				.Excluding(x => x.TransitCost)
 				.Excluding(x => x.PickupCost)
 				.Excluding(x => x.CarrierId)
-				.Excluding(x => x.TransitCarrierName)
+				.Excluding(x => x.CarrierName)
 				.Excluding(x => x.ScotchCost));
 			data.FactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
 			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);

@@ -127,10 +127,6 @@ namespace Alicargo.Jobs.Application.Helpers
 			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
 			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
 			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
-			var methodOfDelivery = DataAccess.Contracts.Resources.Enums.ResourceManager.GetString(
-				application.MethodOfDelivery.ToString(), culture);
-			var transitMethodOfTransit = DataAccess.Contracts.Resources.Enums.ResourceManager.GetString(
-				application.TransitMethodOfTransit.ToString(), culture);
 
 			var localizedData = new Dictionary<string, string>();
 			Add(localizedData, "AddressLoad", application.AddressLoad);
@@ -144,26 +140,23 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "Value", value);
 			Add(localizedData, "Weight", application.Weight.HasValue ? application.Weight.Value.ToString(culture) : null);
 			Add(localizedData, "AirWaybill", application.AirWaybill);
-			Add(localizedData, "AirWaybillDateOfArrival",
-				LocalizationHelper.GetDate(application.AirWaybillDateOfArrival, culture));
-			Add(localizedData, "AirWaybillDateOfDeparture",
-				LocalizationHelper.GetDate(application.AirWaybillDateOfDeparture, culture));
+			Add(localizedData, "AirWaybillDateOfArrival", LocalizationHelper.GetDate(application.AirWaybillDateOfArrival, culture));
+			Add(localizedData, "AirWaybillDateOfDeparture", LocalizationHelper.GetDate(application.AirWaybillDateOfDeparture, culture));
 			Add(localizedData, "AirWaybillGTD", application.AirWaybillGTD);
 			Add(localizedData, "Characteristic", application.Characteristic);
 			Add(localizedData, "ClientNic", application.ClientNic);
 			Add(localizedData, "DateOfCargoReceipt", LocalizationHelper.GetDate(application.DateOfCargoReceipt, culture));
 			Add(localizedData, "DaysInWork", ApplicationHelper.GetDaysInWork(application.CreationTimestamp).ToString(culture));
 			Add(localizedData, "DeliveryBillFiles", string.Join(", ", deliveryBill));
-			Add(localizedData, "DeliveryType",
-				LocalizationHelper.GetDeliveryType(application.TransitDeliveryType, culture));
+			Add(localizedData, "DeliveryType", LocalizationHelper.GetDeliveryType(application.TransitDeliveryType, culture));
 			Add(localizedData, "DisplayNumber", ApplicationHelper.GetDisplayNumber(application.Id, application.Count));
 			Add(localizedData, "FactoryContact", application.FactoryContact);
 			Add(localizedData, "FactoryEmail", application.FactoryEmail);
 			Add(localizedData, "FactoryPhone", application.FactoryPhone);
 			Add(localizedData, "InvoiceFiles", string.Join(", ", invoice));
 			Add(localizedData, "LegalEntity", application.ClientLegalEntity);
-			Add(localizedData, "MethodOfDelivery", methodOfDelivery);
-			Add(localizedData, "MethodOfTransit", transitMethodOfTransit);
+			Add(localizedData, "MethodOfDelivery", LocalizationHelper.GetMethodOfDelivery(application.MethodOfDelivery, culture));
+			Add(localizedData, "MethodOfTransit", LocalizationHelper.GetMethodOfTransit(application.TransitMethodOfTransit, culture));
 			Add(localizedData, "PackingFiles", string.Join(", ", packing));
 			Add(localizedData, "StateChangeTimestamp", LocalizationHelper.GetDate(application.StateChangeTimestamp, culture));
 			Add(localizedData, "StateName", state != null ? state.LocalizedName : null);
@@ -171,7 +164,9 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "TermsOfDelivery", application.TermsOfDelivery);
 			Add(localizedData, "Torg12Files", string.Join(", ", torg12));
 			Add(localizedData, "TransitAddress", application.TransitAddress);
-			Add(localizedData, "CarrierName", application.TransitCarrierName);
+			Add(localizedData, "CarrierName", application.CarrierName);
+			Add(localizedData, "CarrierPhone", application.CarrierPhone);
+			Add(localizedData, "CarrierContact", application.CarrierContact);
 			Add(localizedData, "TransitCity", cityName);
 			Add(localizedData, "TransitPhone", application.TransitPhone);
 			Add(localizedData, "TransitRecipientName", application.TransitRecipientName);

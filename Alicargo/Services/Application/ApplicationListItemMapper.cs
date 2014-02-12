@@ -86,7 +86,7 @@ namespace Alicargo.Services.Application
 				StateId = x.StateId,
 				TermsOfDelivery = x.TermsOfDelivery,
 				TransitAddress = x.TransitAddress,
-				TransitCarrierName = x.TransitCarrierName,
+				TransitCarrierName = x.CarrierName,
 				TransitId = x.TransitId,
 				TransitCity = cities[x.TransitCityId],
 				TransitDeliveryTypeString = x.TransitDeliveryType.ToLocalString(),
