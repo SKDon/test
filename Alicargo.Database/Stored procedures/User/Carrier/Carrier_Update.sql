@@ -2,6 +2,8 @@
 	@Id BIGINT,
 	@Name NVARCHAR (MAX),
 	@Login NVARCHAR(320),
+	@Contact NVARCHAR (MAX),
+	@Phone NVARCHAR (MAX),
 	@Email NVARCHAR (320)
 
 AS BEGIN
@@ -13,7 +15,9 @@ AS BEGIN
 
 		UPDATE	TOP(1) [dbo].[Carrier]
 		SET		[Name] = @Name,
-				[Email] = @Email
+				[Email] = @Email,
+				[Contact] = @Contact,
+				[Phone] = @Phone
 		OUTPUT	INSERTED.[UserId] INTO @Table
 		WHERE	[Id] = @Id
 

@@ -1,16 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[Carrier_GetAll]
+
 AS BEGIN
 	SET NOCOUNT ON;
 
-	SELECT	f.[Id],
+	SELECT	c.[Id],
 			u.[Id] AS [UserId],
-			f.[Email],
+			c.[Email],
 			u.[TwoLetterISOLanguageName] AS [Language],
 			u.[Login],
-			f.[Name]
-	FROM	[dbo].[Carrier] f
+			c.[Name],
+			c.[Contact],
+			c.[Phone]
+	FROM	[dbo].[Carrier] c
 	JOIN	[dbo].[User] u
-	ON		u.[Id] = f.[UserId]
+	ON		u.[Id] = c.[UserId]
 
 END
 GO

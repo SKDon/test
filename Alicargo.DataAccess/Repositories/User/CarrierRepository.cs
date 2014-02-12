@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Alicargo.DataAccess.Contracts.Contracts.User;
+﻿using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.DataAccess.Helpers;
@@ -18,12 +17,21 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor = executor;
 		}
 
-		public void Update(long id, string name, string login, string email)
+		public void Update(long id, string name, string email, string phone, string contact, string login)
 		{
-			_executor.Execute("[dbo].[Carrier_Update]", new { id, name, login, email });
+			_executor.Execute("[dbo].[Carrier_Update]", new
+			{
+				id,
+				name,
+				login,
+				email,
+				phone,
+				contact
+			});
 		}
 
-		public long Add(string name, string login, string password, string email, string language)
+		public long Add(string name, string email, string phone, string contact, string login, string password,
+			string language)
 		{
 			var salt = _converter.GenerateSalt();
 			var passwordHash = _converter.GetPasswordHash(password, salt);
@@ -35,7 +43,9 @@ namespace Alicargo.DataAccess.Repositories.User
 				PasswordSalt = salt,
 				language,
 				name,
-				email
+				email,
+				phone,
+				contact
 			});
 		}
 
@@ -70,7 +80,5 @@ namespace Alicargo.DataAccess.Repositories.User
 		{
 			return _executor.Query<long?>("[dbo].[Carrier_GetByUserId]", new { userId });
 		}
-
-		
 	}
 }

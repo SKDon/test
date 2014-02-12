@@ -51,8 +51,8 @@ namespace Alicargo.Controllers.User
 
 			try
 			{
-				var id = _carriers.Add(model.Name, model.Authentication.Login, model.Authentication.NewPassword, model.Email,
-					_identity.Language);
+				var id = _carriers.Add(model.Name, model.Email, model.Phone, model.Contact,
+					model.Authentication.Login, model.Authentication.NewPassword, _identity.Language);
 
 				_carriers.SetCities(id, model.Cities);
 
@@ -81,7 +81,9 @@ namespace Alicargo.Controllers.User
 				Authentication = new AuthenticationModel(data.Login),
 				Email = data.Email,
 				Cities = _carriers.GetCities(id),
-				Name = data.Name
+				Name = data.Name,
+				Contact = data.Contact,
+				Phone = data.Phone
 			};
 
 			return View(model);
@@ -100,7 +102,7 @@ namespace Alicargo.Controllers.User
 
 			try
 			{
-				_carriers.Update(id, model.Name, model.Authentication.Login, model.Email);
+				_carriers.Update(id, model.Name, model.Email, model.Phone, model.Contact, model.Authentication.Login);
 
 				_carriers.SetCities(id, model.Cities);
 

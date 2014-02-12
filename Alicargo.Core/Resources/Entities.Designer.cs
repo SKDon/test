@@ -259,7 +259,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact.
+        ///   Looks up a localized string similar to Contacts.
         /// </summary>
         public static string Contacts {
             get {

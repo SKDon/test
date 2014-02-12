@@ -130,7 +130,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			applications.SetAirWaybill(a1, id);
 			applications.SetAirWaybill(a2, id);
 
-			var emails = _awbs.GetClientEmails(id);
+			var emails = _awbs.GetClientEmails(id).Select(x=>x.Email).ToArray();
 
 			var clientRepository = new ClientRepository(_context.UnitOfWork);
 
@@ -138,7 +138,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);
 			var clients = new[] { client1, client2 };
 
-			emails.ShouldBeEquivalentTo(clients.SelectMany(x => x.Emails).ToArray());
+			emails.ShouldAllBeEquivalentTo(clients.SelectMany(x => x.Emails).ToArray());
 		}
 
 		[TestMethod]

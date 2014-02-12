@@ -43,7 +43,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			var password = _fixture.Create<string>();
 
-			var id = _repository.Add(data.Name, data.Login, password, data.Email, data.Language);
+			var id = _repository.Add(data.Name, data.Email, data.Phone, data.Contact, data.Login, password, data.Language);
 
 			var actual = _repository.Get(id);
 
@@ -82,7 +82,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			var original = _repository.GetAll().First();
 			var data = _fixture.Create<CarrierData>();
 
-			_repository.Update(original.Id, data.Name, data.Login, data.Email);
+			_repository.Update(original.Id, data.Name, data.Email, data.Phone, data.Contact, data.Login);
 
 			var actual = _repository.Get(original.Id);
 
