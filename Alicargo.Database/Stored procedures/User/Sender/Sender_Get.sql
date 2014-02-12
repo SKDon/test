@@ -9,6 +9,9 @@ AS BEGIN
 			s.[Email],
 			s.[TariffOfTapePerBox],
 			u.[Login],
+			s.[Contact],
+			s.[Phone],
+			s.[Address],
 			u.[TwoLetterISOLanguageName] AS [Language]
 	FROM	[dbo].[Sender] s
 	JOIN	[dbo].[User] u

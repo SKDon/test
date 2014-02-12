@@ -4,7 +4,10 @@
 	@Name NVARCHAR (MAX),
 	@Email NVARCHAR (320),
 	@TwoLetterISOLanguageName CHAR(2),
-	@TariffOfTapePerBox	MONEY
+	@TariffOfTapePerBox	MONEY,
+	@Contact NVARCHAR (MAX),
+	@Phone NVARCHAR (MAX),
+	@Address NVARCHAR (MAX)
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -16,7 +19,10 @@ AS BEGIN
 		UPDATE	TOP(1) [dbo].[Sender]
 		SET		[Name] = @Name,
 				[Email] = @Email,
-				[TariffOfTapePerBox] = @TariffOfTapePerBox
+				[TariffOfTapePerBox] = @TariffOfTapePerBox,
+				[Contact] = @Contact,
+				[Phone] = @Phone,
+				[Address] = @Address
 		OUTPUT	inserted.[UserId] INTO @Table
 		WHERE	[Id] = @Id
 

@@ -175,6 +175,9 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "Volume", application.Volume.ToString("N2", culture));
 			Add(localizedData, "WarehouseWorkingTime", application.WarehouseWorkingTime);
 			Add(localizedData, "SenderName", application.SenderName);
+			Add(localizedData, "SenderContact", application.SenderContact);
+			Add(localizedData, "SenderPhone", application.SenderPhone);
+			Add(localizedData, "SenderAddress", application.SenderAddress);
 			Add(localizedData, "ForwarderName", application.ForwarderName);
 
 			return localizedData;

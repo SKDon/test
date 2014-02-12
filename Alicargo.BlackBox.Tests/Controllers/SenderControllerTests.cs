@@ -83,7 +83,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				connection.Open();
 
 				var actual = connection.Query<SenderData>(
-					"select u.Login, s.Name, s.Email, s.TariffOfTapePerBox from [dbo].[sender] s "
+					"select u.Login, s.Name, s.Email, s.TariffOfTapePerBox, s.Contact, s.Phone, s.Address from [dbo].[sender] s "
 					+ "join [dbo].[user] u on s.userid = u.id where u.login = @login",
 					new { model.Authentication.Login }).First();
 

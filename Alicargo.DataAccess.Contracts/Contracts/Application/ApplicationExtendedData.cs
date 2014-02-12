@@ -48,7 +48,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string ForwarderName { get; set; }
 
 
-
 		public long ClientId { get; set; }
 
 		public string ClientLegalEntity { get; set; }
@@ -59,9 +58,8 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public string ClientEmail { get; set; }
 
-		
 
-		public long? AirWaybillId { get; set; }		
+		public long? AirWaybillId { get; set; }
 
 		public string AirWaybill { get; set; }
 
@@ -72,9 +70,8 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public DateTimeOffset? AirWaybillDateOfArrival { get; set; }
 
 
-
 		public long TransitId { get; set; }
-		
+
 		public long TransitCityId { get; set; }
 
 		public string TransitAddress { get; set; }
@@ -98,7 +95,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string CarrierContact { get; set; }
 
 
-
 		public string FactoryName { get; set; }
 
 		public string FactoryPhone { get; set; }
@@ -110,7 +106,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string MarkName { get; set; }
 
 
-		
 		public decimal? FactureCost { get; set; }
 
 		public decimal? SenderFactureCost { get; set; }
@@ -127,7 +122,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public decimal? PickupCost { get; set; }
 
-		
 
 		public long SenderId { get; set; }
 
@@ -137,6 +131,12 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public decimal? SenderRate { get; set; }
 
-		public string SenderName { get; set; }		
+		public string SenderName { get; set; }
+
+		public string SenderContact { get; set; }
+
+		public string SenderPhone { get; set; }
+
+		public string SenderAddress { get; set; }
 	}
 }

@@ -51,7 +51,10 @@ namespace Alicargo.DataAccess.Repositories.User
 				TwoLetterISOLanguageName = data.Language,
 				data.Name,
 				data.Email,
-				data.TariffOfTapePerBox
+				data.TariffOfTapePerBox,
+				data.Contact,
+				data.Phone,
+				data.Address
 			});
 		}
 
@@ -64,7 +67,10 @@ namespace Alicargo.DataAccess.Repositories.User
 				data.Name,
 				data.Email,
 				data.TariffOfTapePerBox,
-				TwoLetterISOLanguageName = data.Language
+				TwoLetterISOLanguageName = data.Language,
+				data.Contact,
+				data.Phone,
+				data.Address
 			});
 		}
 

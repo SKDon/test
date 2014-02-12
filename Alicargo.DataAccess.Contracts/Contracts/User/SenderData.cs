@@ -7,5 +7,8 @@
 		public string Email { get; set; }
 		public decimal TariffOfTapePerBox { get; set; }
 		public string Language { get; set; }
+		public string Contact { get; set; }
+		public string Phone { get; set; }
+		public string Address { get; set; }
 	}
 }

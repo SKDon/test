@@ -13,6 +13,15 @@ namespace Alicargo.ViewModels.User
 		[DisplayNameLocalized(typeof(Pages), "Name")]
 		public string Name { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "Contacts")]
+		public string Contact { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "Phone")]
+		public string Phone { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "Address")]
+		public string Address { get; set; }
+
 		[Required]
 		[MaxLength(320)]
 		[DataType(DataType.EmailAddress)]

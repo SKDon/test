@@ -8,6 +8,9 @@ AS BEGIN
 			s.[Name],
 			u.[Login],
 			s.[Email],
+			s.[Contact],
+			s.[Phone],
+			s.[Address],
 			u.[TwoLetterISOLanguageName] AS [Language]
 	FROM	[dbo].[Sender] s
 	JOIN	[dbo].[User] u

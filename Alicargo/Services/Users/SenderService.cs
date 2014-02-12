@@ -33,7 +33,10 @@ namespace Alicargo.Services.Users
 				Authentication = new AuthenticationModel(data.Login),
 				Email = data.Email,
 				TariffOfTapePerBox = data.TariffOfTapePerBox,
-				Countries = countries
+				Countries = countries,
+				Address = data.Address,
+				Contact = data.Contact,
+				Phone = data.Phone
 			};
 		}
 
@@ -50,7 +53,10 @@ namespace Alicargo.Services.Users
 				Login = model.Authentication.Login,
 				Name = model.Name,
 				TariffOfTapePerBox = model.TariffOfTapePerBox,
-				Language = TwoLetterISOLanguageName.English
+				Language = TwoLetterISOLanguageName.English,
+				Contact = model.Contact,
+				Phone = model.Phone,
+				Address = model.Address
 			}, model.Authentication.NewPassword);
 
 			_senders.SetCountries(id, model.Countries);
@@ -71,6 +77,9 @@ namespace Alicargo.Services.Users
 			data.Login = model.Authentication.Login;
 			data.Email = model.Email;
 			data.TariffOfTapePerBox = model.TariffOfTapePerBox;
+			data.Contact = model.Contact;
+			data.Phone = model.Phone;
+			data.Address = model.Address;
 
 			_senders.Update(id, data);
 

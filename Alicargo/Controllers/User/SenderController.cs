@@ -42,27 +42,23 @@ namespace Alicargo.Controllers.User
 			if(string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
 
-			if(!ModelState.IsValid)
-			{
-				BindBag();
-
-				return View();
-			}
-
 			try
 			{
-				var id = _senders.Add(model);
+				if(ModelState.IsValid)
+				{
+					var id = _senders.Add(model);
 
-				return RedirectToAction(MVC.Sender.Edit(id));
+					return RedirectToAction(MVC.Sender.Edit(id));
+				}
 			}
 			catch(DublicateLoginException)
 			{
 				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
-
-				BindBag();
-
-				return View();
 			}
+
+			BindBag();
+
+			return View();
 		}
 
 		[HttpGet]
@@ -80,27 +76,23 @@ namespace Alicargo.Controllers.User
 		[Access(RoleType.Admin)]
 		public virtual ActionResult Edit(long id, SenderModel model)
 		{
-			if(!ModelState.IsValid)
-			{
-				BindBag();
-
-				return View();
-			}
-
 			try
 			{
-				_senders.Update(id, model);
+				if(ModelState.IsValid)
+				{
+					_senders.Update(id, model);
 
-				return RedirectToAction(MVC.Sender.Edit(id));
+					return RedirectToAction(MVC.Sender.Edit(id));
+				}
 			}
 			catch(DublicateLoginException)
 			{
-				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);
-
-				BindBag();
-
-				return View();
+				ModelState.AddModelError("Authentication.Login", Validation.LoginExists);				
 			}
+
+			BindBag();
+
+			return View();
 		}
 
 		private void BindBag()

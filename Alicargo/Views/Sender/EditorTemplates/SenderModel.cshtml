@@ -22,12 +22,15 @@
 <div class="row">
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Name)
+		@Html.EditorWithLabelFor(model => model.Contact)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Email)
+		@Html.EditorWithLabelFor(model => model.Phone)
 	</div>
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.TariffOfTapePerBox)
+		@Html.EditorWithLabelFor(model => model.Address)
 	</div>
 </div>
 <div class="row">

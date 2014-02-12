@@ -3114,6 +3114,12 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private string _Name;
 		
+		private string _Contact;
+		
+		private string _Phone;
+		
+		private string _Address;
+		
 		private string _Email;
 		
 		private decimal _TariffOfTapePerBox;
@@ -3132,6 +3138,12 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnUserIdChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
+    partial void OnContactChanging(string value);
+    partial void OnContactChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
     partial void OnTariffOfTapePerBoxChanging(decimal value);
@@ -3205,6 +3217,66 @@ namespace Alicargo.DataAccess.DbContext
 					this._Name = value;
 					this.SendPropertyChanged("Name");
 					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="NVarChar(MAX) NULL")]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this.OnContactChanging(value);
+					this.SendPropertyChanging();
+					this._Contact = value;
+					this.SendPropertyChanged("Contact");
+					this.OnContactChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(MAX) NULL")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(MAX) NULL")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
 				}
 			}
 		}
