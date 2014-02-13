@@ -16,6 +16,7 @@ namespace Alicargo.Tests.Services.Application
 	public class ApplicationListPresenterTests
 	{
 		private MockContainer _context;
+		private ApplicationListItem[] _models;
 		private Order[] _orders;
 		private IApplicationListPresenter _service;
 		private long[] _stateIds;
@@ -29,11 +30,12 @@ namespace Alicargo.Tests.Services.Application
 			{
 				new Order
 				{
-					OrderType = OrderType.LegalEntity,
+					OrderType = OrderType.State,
 					Desc = false
 				}
 			};
 			_stateIds = new[] { 0L };
+			_models = _context.CreateMany<ApplicationListItem>().ToArray();
 		}
 
 		[TestMethod]
@@ -41,14 +43,14 @@ namespace Alicargo.Tests.Services.Application
 		{
 			const long clientId = 1;
 			var data = _context.CreateMany<ApplicationExtendedData>().ToArray();
-			var map = _context.CreateMany<ApplicationListItem>().ToArray();
-			_context.StateService.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
-			_context.ApplicationListItemMapper.Setup(x => x.Map(data, TwoLetterISOLanguageName.English)).Returns(map);
 			var cargoReceivedDaysToShow = _context.Create<int>();
 			var cargoReceivedStateId = _context.Create<int>();
+
+			_context.StateService.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
+			_context.ApplicationListItemMapper.Setup(x => x.Map(data, TwoLetterISOLanguageName.English)).Returns(_models);
 			_context.StateConfig.Setup(x => x.CargoReceivedDaysToShow).Returns(cargoReceivedDaysToShow);
 			_context.StateConfig.Setup(x => x.CargoReceivedStateId).Returns(cargoReceivedStateId);
-			_context.ApplicationGrouper.Setup(x => x.Group(map, new[] { OrderType.LegalEntity }, clientId, null, null, null))
+			_context.ApplicationGrouper.Setup(x => x.Group(_models, new[] { OrderType.State }, clientId, null, null, null))
 				.Returns(new ApplicationGroup[0]);
 			_context.ApplicationRepository.Setup(
 				x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedStateId, cargoReceivedDaysToShow, null))
@@ -61,10 +63,10 @@ namespace Alicargo.Tests.Services.Application
 
 			collection.Data.Should().BeNull();
 			collection.Groups.Should().NotBeNull();
-
 			_context.StateService.Verify(x => x.GetStateVisibility(), Times.Once());
 			_context.ApplicationListItemMapper.Verify(x => x.Map(data, TwoLetterISOLanguageName.English));
-			_context.ApplicationGrouper.Verify(x => x.Group(map, new[] { OrderType.LegalEntity }, clientId, null, null, null), Times.Once());
+			_context.ApplicationGrouper.Verify(x => x.Group(_models, new[] { OrderType.State }, clientId, null, null, null),
+				Times.Once());
 			_context.ApplicationRepository.Verify(
 				x => x.Count(_stateIds, clientId, null, null, null, cargoReceivedStateId, cargoReceivedDaysToShow, null),
 				Times.Once());

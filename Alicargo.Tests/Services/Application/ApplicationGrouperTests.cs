@@ -14,15 +14,15 @@ namespace Alicargo.Tests.Services.Application
 	[TestClass]
 	public class ApplicationGrouperTests
 	{
-		private Fixture _fixture;
-		private Mock<IAwbRepository> _awbRepository;
-		private long[] _awbIds;
-		private AirWaybillData[] _awbsData;
+		private const int AppCount = 99;
+		private const int ClientCount = 6;
+		private const int AWBCount = 9;
 		private ApplicationListItem[] _applications;
+		private long[] _awbIds;
+		private Mock<IAwbRepository> _awbRepository;
+		private AirWaybillData[] _awbsData;
+		private Fixture _fixture;
 		private ApplicationGrouper _grouper;
-		const int AppCount = 99;
-		const int ClientCount = 6;
-		const int AWBCount = 9;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -36,12 +36,12 @@ namespace Alicargo.Tests.Services.Application
 			_awbRepository.Setup(x => x.Get(_awbIds)).Returns(_awbsData);
 
 			_applications = _fixture.CreateMany<ApplicationListItem>(AppCount).ToArray();
-			for (var i = 0; i < AppCount; i++)
+			for(var i = 0; i < AppCount; i++)
 			{
 				var item = _applications[i];
 				item.AirWaybillId = i % AWBCount;
 				item.Id = i;
-				item.ClientLegalEntity = "Client " + i % ClientCount;
+				item.ClientNic = "Client " + i % ClientCount;
 				item.Count = i;
 				item.Weight = i;
 				item.Value = i;
@@ -72,12 +72,12 @@ namespace Alicargo.Tests.Services.Application
 			var groups = _grouper.Group(_applications, new[]
 			{
 				OrderType.AirWaybill,
-				OrderType.LegalEntity
+				OrderType.ClientNic
 			});
 
 			groups.Count().ShouldBeEquivalentTo(AWBCount);
 
-			for (var index = 0; index < groups.Length; index++)
+			for(var index = 0; index < groups.Length; index++)
 			{
 				var @group = groups[index];
 				@group.aggregates.Count.sum.ShouldBeEquivalentTo(index);
@@ -85,7 +85,7 @@ namespace Alicargo.Tests.Services.Application
 				@group.aggregates.Value.sum.ShouldBeEquivalentTo(index);
 				@group.aggregates.Volume.sum.ShouldBeEquivalentTo(index);
 				@group.hasSubgroups.ShouldBeEquivalentTo(true);
-				foreach (ApplicationGroup item in @group.items)
+				foreach(ApplicationGroup item in @group.items)
 				{
 					item.hasSubgroups.ShouldBeEquivalentTo(false);
 					item.items.Count()
@@ -111,12 +111,12 @@ namespace Alicargo.Tests.Services.Application
 			var groups = _grouper.Group(_applications, new[]
 			{
 				OrderType.AirWaybill,
-				OrderType.LegalEntity
+				OrderType.ClientNic
 			});
 
 			groups.Count().ShouldBeEquivalentTo(AWBCount);
 
-			for (var index = 0; index < groups.Length; index++)
+			for(var index = 0; index < groups.Length; index++)
 			{
 				var @group = groups[index];
 				@group.aggregates.Count.sum.ShouldBeEquivalentTo(count);
@@ -124,7 +124,7 @@ namespace Alicargo.Tests.Services.Application
 				@group.aggregates.Value.sum.ShouldBeEquivalentTo(value);
 				@group.aggregates.Volume.sum.ShouldBeEquivalentTo(volume);
 				@group.hasSubgroups.ShouldBeEquivalentTo(true);
-				foreach (ApplicationGroup item in @group.items)
+				foreach(ApplicationGroup item in @group.items)
 				{
 					item.hasSubgroups.ShouldBeEquivalentTo(false);
 					item.items.Count()

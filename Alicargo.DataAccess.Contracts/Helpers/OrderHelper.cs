@@ -5,7 +5,6 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 {
 	public static class OrderHelper
 	{
-		public const string LegalEntityFieldName = "ClientLegalEntity";
 		public const string StateFieldName = "State";
 		public const string AwbFieldName = "AirWaybill";
 		public const string IdFieldName = "Id";
@@ -13,7 +12,6 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 
 		private static readonly IDictionary<string, OrderType> Map = new Dictionary<string, OrderType>
 		{
-			{ LegalEntityFieldName, OrderType.LegalEntity },
 			{ ClientNicFieldName, OrderType.ClientNic },
 			{ StateFieldName, OrderType.State },
 			{ AwbFieldName, OrderType.AirWaybill }

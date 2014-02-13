@@ -5,7 +5,6 @@
 		Id,
 		AirWaybill,
 		State,
-		LegalEntity,
 		ClientNic
 	}
 }

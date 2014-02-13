@@ -31,8 +31,7 @@ namespace Alicargo.Services.Application
 			{
 				{ OrderType.AirWaybill, ByAirWaybill },
 				{ OrderType.State, ByState },
-				{ OrderType.ClientNic, ByClientNic },
-				{ OrderType.LegalEntity, ByLegalEntity }
+				{ OrderType.ClientNic, ByClientNic }
 			};
 		}
 
@@ -76,15 +75,6 @@ namespace Alicargo.Services.Application
 			return applications.GroupBy(x => x.ClientNic)
 				.Select(grouping =>
 					GetApplicationGroup(grouping, groups, OrderHelper.ClientNicFieldName,
-						g => g.Key))
-				.ToArray();
-		}
-
-		private ApplicationGroup[] ByLegalEntity(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
-		{
-			return applications.GroupBy(x => x.ClientLegalEntity)
-				.Select(grouping =>
-					GetApplicationGroup(grouping, groups, OrderHelper.LegalEntityFieldName,
 						g => g.Key))
 				.ToArray();
 		}

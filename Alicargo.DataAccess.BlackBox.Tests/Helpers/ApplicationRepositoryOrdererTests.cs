@@ -23,7 +23,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 		[ExpectedException(typeof(KeyNotFoundException))]
 		public void Test_KeyNotFoundException()
 		{
-			var list = new[] { GetApplication(1, "1", 1, "1", 10) }.AsQueryable();
+			var list = new[] { GetApplication(1, "1", 1, "1") }.AsQueryable();
 
 			var orders = new[] { new Order { OrderType = (OrderType)(-1) } };
 
@@ -35,16 +35,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 		{
 			var list = new[]
 			{
-				GetApplication(1, "1", 1, "1", 10),
-				GetApplication(2, "1", 3, "1", 8),
-				GetApplication(3, "1", 5, "0", 6),
-				GetApplication(4, "1", 4, "0", 7),
-				GetApplication(5, "0", 2, "0", 9)
+				GetApplication(1, "1", 1, "1"),
+				GetApplication(2, "1", 3, "1"),
+				GetApplication(3, "1", 5, "0"),
+				GetApplication(4, "1", 4, "0"),
+				GetApplication(5, "0", 2, "0")
 			}.AsQueryable();
 
 			var expected = list
 				.OrderByDescending(x => x.State.Name)
-				.ThenBy(x => x.Client.LegalEntity)
 				.ThenByDescending(x => x.Id)
 				.ThenBy(x => x.AirWaybill.Bill).ToArray();
 
@@ -54,11 +53,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 				{
 					OrderType = OrderType.State,
 					Desc = true
-				},
-				new Order
-				{
-					OrderType = OrderType.LegalEntity,
-					Desc = false
 				},
 				new Order
 				{
@@ -74,13 +68,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Helpers
 
 			var actual = _orderer.Order(list, orders).ToArray();
 
-			for (var i = 0; i < orders.Length; i++)
+			for(var i = 0; i < orders.Length; i++)
 			{
 				Assert.AreSame(expected[i], actual[i]);
 			}
 		}
 
-		private static Application GetApplication(long id, string bill, long stateId, string legalEntity, long nextId)
+		private static Application GetApplication(long id, string bill, long stateId, string legalEntity)
 		{
 			return new Application
 			{
