@@ -16,7 +16,7 @@ namespace Alicargo.DataAccess.Helpers
 			{ OrderType.Id, ById },
 			{ OrderType.AirWaybill, ByAirWaybillBill },
 			{ OrderType.State, ByState },
-			{ OrderType.ClientNic, ByClientNic },
+			{ OrderType.Client, ByClientNic },
 		};
 
 		public IQueryable<Application> Order(IQueryable<Application> applications, IList<Order> orders)

@@ -5,6 +5,13 @@
 		Id,
 		AirWaybill,
 		State,
-		ClientNic
+		Client,
+		Country,
+		Factory,
+		Mark,
+		Sender,
+		Forwarder,
+		City,
+		Carrier
 	}
 }

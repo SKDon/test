@@ -72,7 +72,7 @@ namespace Alicargo.Tests.Services.Application
 			var groups = _grouper.Group(_applications, new[]
 			{
 				OrderType.AirWaybill,
-				OrderType.ClientNic
+				OrderType.Client
 			});
 
 			groups.Count().ShouldBeEquivalentTo(AWBCount);
@@ -111,7 +111,7 @@ namespace Alicargo.Tests.Services.Application
 			var groups = _grouper.Group(_applications, new[]
 			{
 				OrderType.AirWaybill,
-				OrderType.ClientNic
+				OrderType.Client
 			});
 
 			groups.Count().ShouldBeEquivalentTo(AWBCount);
