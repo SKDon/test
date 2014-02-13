@@ -41,8 +41,7 @@ namespace Alicargo.Services.Calculation
 			long total;
 			var applications = GetCalculatedApplications(clientId, take, skip, out total);
 
-			// ReSharper disable PossibleInvalidOperationException
-			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId.Value).ToArray()).ToArray(); // ReSharper restore PossibleInvalidOperationException
+			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId.Value).ToArray()).ToArray();
 
 			var items = GetItems(applications);
 
