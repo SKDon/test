@@ -17,6 +17,13 @@ namespace Alicargo.DataAccess.Helpers
 			{ OrderType.AirWaybill, ByAirWaybillBill },
 			{ OrderType.State, ByState },
 			{ OrderType.Client, ByClientNic },
+			{ OrderType.Country, ByCountry },
+			{ OrderType.Factory, ByFactory },
+			{ OrderType.Mark, ByMark },
+			{ OrderType.Sender, BySender },
+			{ OrderType.Forwarder, ByForwarder },
+			{ OrderType.Carrier, ByCarrier },
+			{ OrderType.City, ByCity }
 		};
 
 		public IQueryable<Application> Order(IQueryable<Application> applications, IList<Order> orders)
@@ -68,6 +75,41 @@ namespace Alicargo.DataAccess.Helpers
 		private static IOrderedQueryable<Application> ById(IQueryable<Application> applications, bool desc, bool isFirst)
 		{
 			return Order(applications, desc, isFirst, x => x.Id);
+		}
+
+		private static IOrderedQueryable<Application> ByCountry(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, x => x.Country.Position);
+		}
+
+		private static IOrderedQueryable<Application> ByFactory(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, x => x.FactoryName);
+		}
+
+		private static IOrderedQueryable<Application> ByMark(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, x => x.MarkName);
+		}
+
+		private static IOrderedQueryable<Application> BySender(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, x => x.Sender.Name);
+		}
+
+		private static IOrderedQueryable<Application> ByForwarder(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, x => x.Forwarder.Name);
+		}
+
+		private static IOrderedQueryable<Application> ByCarrier(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, x => x.Transit.Carrier.Name);
+		}
+
+		private static IOrderedQueryable<Application> ByCity(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, x => x.Transit.City.Position);
 		}
 
 		private static IOrderedQueryable<Application> ByState(IQueryable<Application> applications, bool desc, bool isFirst)

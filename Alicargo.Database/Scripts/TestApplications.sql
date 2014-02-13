@@ -17,14 +17,14 @@ INSERT [dbo].[Application]
 (2, 2, CAST(0x076970408C4214370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, 9, 4, 9, NEWID(), CAST(0x077A97408C4219370B0000 AS DateTimeOffset), 10, 10.0000, 2, 1, 5, 15, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 10),
 (2, 2, CAST(0x07BC33418C421D370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, 0, 0, 10, NEWID(), CAST(0x07CC5A418C421D370B0000 AS DateTimeOffset), 11, 11.0000, 2, 0, 1, 16, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 11),
 (2, 2, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, 1, 1, 11, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 12, 12.0000, 2, 1, 2, 17, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 12),
-(2, 2, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 13),
-(2, 2, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f1', 'f1', 'f1@mail.ru', 'm1', 14),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 4, 17, 2, 'f1', 'f1', 'f1@mail.ru', 'm1', 15),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 2, 'f1', 'f1', 'f1@mail.ru', 'm1', 16),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 17),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 18),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 19),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f1', 'f1', 'f1@mail.ru', 'm1', 10)
+(2, 2, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f2', 'f1', 'f1@mail.ru', 'm2', 13),
+(2, 2, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f2', 'f1', 'f1@mail.ru', 'm2', 14),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 4, 17, 2, 'f2', 'f1', 'f1@mail.ru', 'm2', 15),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 2, 'f2', 'f1', 'f1@mail.ru', 'm2', 16),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 17),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 18),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 19),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 10)
 GO
 
 UPDATE [dbo].[Application]
