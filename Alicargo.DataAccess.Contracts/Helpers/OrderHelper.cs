@@ -13,15 +13,15 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 
 		private static readonly IDictionary<string, OrderType> Map = new Dictionary<string, OrderType>
 		{
-			{LegalEntityFieldName, OrderType.LegalEntity},
-			{ClientNicFieldName, OrderType.ClientNic},
-			{StateFieldName, OrderType.State},
-			{AwbFieldName, OrderType.AirWaybill}
+			{ LegalEntityFieldName, OrderType.LegalEntity },
+			{ ClientNicFieldName, OrderType.ClientNic },
+			{ StateFieldName, OrderType.State },
+			{ AwbFieldName, OrderType.AirWaybill }
 		};
 
 		public static Order[] Get(Dictionary<string, string>[] group)
 		{
-			if (@group == null)
+			if(@group == null)
 			{
 				return null;
 			}
