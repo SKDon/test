@@ -10,12 +10,12 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Services.Application
 {
-	using OrderFunction = Func<IEnumerable<ApplicationListItem>, OrderType[], ApplicationGroup[]>;
+	using TOrder = Tuple<Func<ApplicationListItem, string>, string>;
 
 	internal sealed class ApplicationGrouper : IApplicationGrouper
 	{
 		private readonly IAwbRepository _awbRepository;
-		private readonly IDictionary<OrderType, OrderFunction> _map;
+		private readonly IDictionary<OrderType, TOrder> _map;
 		private Dictionary<long, AirWaybillData> _airWaybills;
 		private Dictionary<long, AirWaybillAggregate> _awbAggregates;
 		private int _countWithouAwb;
@@ -27,11 +27,10 @@ namespace Alicargo.Services.Application
 		{
 			_awbRepository = awbRepository;
 
-			_map = new Dictionary<OrderType, OrderFunction>
+			_map = new Dictionary<OrderType, TOrder>
 			{
-				{ OrderType.AirWaybill, ByAirWaybill },
-				{ OrderType.State, ByState },
-				{ OrderType.ClientNic, ByClientNic }
+				{ OrderType.State, new TOrder(item => item.State.StateName, OrderHelper.StateFieldName) },
+				{ OrderType.Client, new TOrder(item => item.ClientNic, OrderHelper.ClientFieldName)  }
 			};
 		}
 
@@ -70,21 +69,11 @@ namespace Alicargo.Services.Application
 				.ToArray();
 		}
 
-		private ApplicationGroup[] ByClientNic(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
+		private ApplicationGroup[] Group(IEnumerable<ApplicationListItem> applications, OrderType[] groups,
+			Func<ApplicationListItem, string> selector, string fieldName)
 		{
-			return applications.GroupBy(x => x.ClientNic)
-				.Select(grouping =>
-					GetApplicationGroup(grouping, groups, OrderHelper.ClientNicFieldName,
-						g => g.Key))
-				.ToArray();
-		}
-
-		private ApplicationGroup[] ByState(IEnumerable<ApplicationListItem> applications, OrderType[] groups)
-		{
-			return applications.GroupBy(x => x.State.StateName)
-				.Select(grouping =>
-					GetApplicationGroup(grouping, groups, OrderHelper.StateFieldName,
-						g => g.Key))
+			return applications.GroupBy(selector)
+				.Select(grouping => GetApplicationGroup(grouping, groups, fieldName, g => g.Key))
 				.ToArray();
 		}
 
@@ -143,7 +132,9 @@ namespace Alicargo.Services.Application
 			var current = groups.First();
 			var rest = groups.Except(new[] { current }).ToArray();
 
-			return _map[current](applications, rest);
+			return current == OrderType.AirWaybill
+				? ByAirWaybill(applications, rest)
+				: Group(applications, rest, _map[current].Item1, _map[current].Item2);
 		}
 	}
 }

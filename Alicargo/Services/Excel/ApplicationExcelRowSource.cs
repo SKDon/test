@@ -86,7 +86,7 @@ namespace Alicargo.Services.Excel
 			var data = _applications.List(stateIds, new[]
 			{
 				new Order { Desc = true, OrderType = OrderType.AirWaybill },
-				new Order { Desc = false, OrderType = OrderType.ClientNic },
+				new Order { Desc = false, OrderType = OrderType.Client },
 				new Order { Desc = true, OrderType = OrderType.Id }
 			}, null, 0, null, senderId, carrierId, forwarderId, _stateConfig.CargoReceivedStateId,
 				_stateConfig.CargoReceivedDaysToShow);
