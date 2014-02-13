@@ -29,8 +29,15 @@ namespace Alicargo.Services.Application
 
 			_map = new Dictionary<OrderType, TOrder>
 			{
+				{ OrderType.Country, new TOrder(item => item.CountryName, OrderHelper.CountryFieldName) },
+				{ OrderType.Factory, new TOrder(item => item.FactoryName, OrderHelper.FactoryFieldName) },
+				{ OrderType.Mark, new TOrder(item => item.MarkName, OrderHelper.MarkFieldName) },
+				{ OrderType.Sender, new TOrder(item => item.SenderName, OrderHelper.SenderFieldName) },
+				{ OrderType.Forwarder, new TOrder(item => item.ForwarderName, OrderHelper.ForwarderFieldName) },
+				{ OrderType.City, new TOrder(item => item.TransitCity, OrderHelper.CityFieldName) },
+				{ OrderType.Carrier, new TOrder(item => item.TransitCarrierName, OrderHelper.CarrierFieldName) },
 				{ OrderType.State, new TOrder(item => item.State.StateName, OrderHelper.StateFieldName) },
-				{ OrderType.Client, new TOrder(item => item.ClientNic, OrderHelper.ClientFieldName)  }
+				{ OrderType.Client, new TOrder(item => item.ClientNic, OrderHelper.ClientFieldName) }
 			};
 		}
 
@@ -66,14 +73,6 @@ namespace Alicargo.Services.Application
 
 						return null;
 					}))
-				.ToArray();
-		}
-
-		private ApplicationGroup[] Group(IEnumerable<ApplicationListItem> applications, OrderType[] groups,
-			Func<ApplicationListItem, string> selector, string fieldName)
-		{
-			return applications.GroupBy(selector)
-				.Select(grouping => GetApplicationGroup(grouping, groups, fieldName, g => g.Key))
 				.ToArray();
 		}
 
@@ -124,6 +123,14 @@ namespace Alicargo.Services.Application
 					? GroupImpl(grouping.ToArray(), orders).Cast<object>().ToArray()
 					: grouping.Cast<object>().ToArray()
 			};
+		}
+
+		private ApplicationGroup[] Group(IEnumerable<ApplicationListItem> applications, OrderType[] groups,
+			Func<ApplicationListItem, string> selector, string fieldName)
+		{
+			return applications.GroupBy(selector)
+				.Select(grouping => GetApplicationGroup(grouping, groups, fieldName, g => g.Key))
+				.ToArray();
 		}
 
 		private ApplicationGroup[] GroupImpl(IEnumerable<ApplicationListItem> applications,
