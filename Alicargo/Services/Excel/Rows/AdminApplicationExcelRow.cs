@@ -243,6 +243,12 @@ namespace Alicargo.Services.Excel.Rows
 			get { return _application.FactureCost; }
 		}
 
+		[DisplayNameLocalized(typeof(Entities), "FactureCostEx")]
+		public decimal? FactureCostEx
+		{
+			get { return _application.FactureCostEx; }
+		}
+
 		[DisplayNameLocalized(typeof(Entities), "ScotchCost")]
 		public decimal? ScotchCost
 		{
