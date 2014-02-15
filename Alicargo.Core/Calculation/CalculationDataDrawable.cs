@@ -75,6 +75,7 @@ namespace Alicargo.Core.Calculation
 			_excel.Cells[iRow, iColumn++].Value = _data.ScotchCost;
 			_excel.Cells[iRow, iColumn++].Value = _data.InsuranceCost;
 			_excel.Cells[iRow, iColumn++].Value = _data.FactureCost;
+			_excel.Cells[iRow, iColumn++].Value = _data.FactureCostEx;
 			_excel.Cells[iRow, iColumn++].Value = _data.PickupCost;
 			_excel.Cells[iRow, iColumn++].Value = _data.TransitCost;
 			_excel.Cells[iRow, iColumn].Style.Font.Bold = true;

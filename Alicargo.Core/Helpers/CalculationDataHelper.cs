@@ -6,8 +6,13 @@ namespace Alicargo.Core.Helpers
 	{
 		public static decimal GetMoney(CalculationData calculation)
 		{
-			return (decimal)calculation.Weight * calculation.TariffPerKg + calculation.ScotchCost
-			       + calculation.InsuranceCost + calculation.FactureCost + calculation.TransitCost + calculation.PickupCost;
+			return (decimal)calculation.Weight * calculation.TariffPerKg
+			       + calculation.ScotchCost
+			       + calculation.InsuranceCost
+			       + calculation.FactureCost
+			       + calculation.FactureCostEx
+			       + calculation.TransitCost
+			       + calculation.PickupCost;
 		}
 	}
 }

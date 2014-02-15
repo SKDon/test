@@ -119,6 +119,7 @@ namespace Alicargo.Core.Calculation
 			excel.Cells[iRow, iColumn++].Value = Entities.ScotchCost;
 			excel.Cells[iRow, iColumn++].Value = Entities.Insurance;
 			excel.Cells[iRow, iColumn++].Value = Entities.FactureCost;
+			excel.Cells[iRow, iColumn++].Value = Entities.FactureCostEx;
 			excel.Cells[iRow, iColumn++].Value = Entities.PickupCost;
 			excel.Cells[iRow, iColumn++].Value = Entities.TransitCost;
 			excel.Cells[iRow, iColumn].Value = Entities.Total;
