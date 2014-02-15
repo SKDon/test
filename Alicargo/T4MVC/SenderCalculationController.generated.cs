@@ -63,16 +63,16 @@ namespace Alicargo.Controllers.Calculation
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
             public readonly string Excel = "Excel";
+            public readonly string Index = "Index";
             public readonly string List = "List";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
             public const string Excel = "Excel";
+            public const string Index = "Index";
             public const string List = "List";
         }
 
@@ -109,21 +109,21 @@ namespace Alicargo.Controllers.Calculation
     {
         public T4MVC_SenderCalculationController() : base(Dummy.Instance) { }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        public override System.Web.Mvc.ActionResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
-            return callInfo;
-        }
-
         partial void ExcelOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
 
         public override System.Web.Mvc.FileResult Excel()
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Excel);
             ExcelOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult Index()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
             return callInfo;
         }
 

@@ -166,7 +166,10 @@ namespace Alicargo.Services.Calculation
 				PickupCost = a.SenderPickupCost,
 				AirWaybillId = a.AirWaybillId,
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				Profit = (a.SenderScotchCost ?? 0) + (a.OriginalFactureCost ?? 0) + (a.SenderPickupCost ?? 0)
+				Profit = (a.SenderScotchCost ?? 0)
+				         + (a.OriginalFactureCost ?? 0)
+				         + (a.OriginalFactureCostEx ?? 0)
+				         + (a.SenderPickupCost ?? 0)
 				         + CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				SenderRate = a.SenderRate
