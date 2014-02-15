@@ -73,9 +73,10 @@ namespace Alicargo.Services.Excel
 			ws.Cells[iRow, 10].Value = group.aggregates.TotalSenderRate.sum;
 			ws.Cells[iRow, 11].Value = group.aggregates.SenderScotchCost.sum;
 			ws.Cells[iRow, 12].Value = group.aggregates.FactureCost.sum;
-			ws.Cells[iRow, 13].Value = group.aggregates.PickupCost.sum;
-			ws.Cells[iRow, 14].Value = group.aggregates.Profit.sum;
-			ws.Cells[iRow, 1, iRow, 14].Style.Font.Bold = true;
+			ws.Cells[iRow, 13].Value = group.aggregates.FactureCostEx.sum;
+			ws.Cells[iRow, 14].Value = group.aggregates.PickupCost.sum;
+			ws.Cells[iRow, 15].Value = group.aggregates.Profit.sum;
+			ws.Cells[iRow, 1, iRow, 16].Style.Font.Bold = true;
 		}
 
 		private static int DrawInfo(ExcelWorksheet ws, SenderCalculationAwbInfo info, int iRow, int count)
@@ -92,26 +93,27 @@ namespace Alicargo.Services.Excel
 			ws.Cells[iRow, 10].Value = info.TotalSenderRate;
 			ws.Cells[iRow, 11].Value = info.TotalScotchCost;
 			ws.Cells[iRow, 12].Value = info.TotalFactureCost;
-			ws.Cells[iRow, 13].Value = info.TotalPickupCost;
-			ws.Cells[iRow, 14].Value = info.TotalOfSender;
+			ws.Cells[iRow, 13].Value = info.TotalFactureCostEx;
+			ws.Cells[iRow, 14].Value = info.TotalPickupCost;
+			ws.Cells[iRow, 15].Value = info.TotalOfSender;
 			ws.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
 			ws.Cells[iRow, 1, iRow, 14].Style.Font.Bold = true;
 			iRow++;
 
 			ws.Cells[iRow, 1].Value = "flight";
 			ws.Cells[iRow, 2].Value = info.FlightCostPerKg;
-			ws.Cells[iRow, 14].Value = info.FlightCost;
+			ws.Cells[iRow, 15].Value = info.FlightCost;
 			ws.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
 			ws.Cells[iRow, 1, iRow, 14].Style.Font.Bold = true;
 			iRow++;
 
 			ws.Cells[iRow, 1].Value = "cost total";
-			ws.Cells[iRow, 14].Value = info.Total;
+			ws.Cells[iRow, 15].Value = info.Total;
 			var rangeCost = ws.Cells[iRow, 1, iRow, count];
 			rangeCost.Style.Fill.PatternType = ExcelFillStyle.Solid;
 			rangeCost.Style.Fill.BackgroundColor.SetColor(Color.HotPink);
 			ws.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
-			ws.Cells[iRow, 1, iRow, 14].Style.Font.Bold = true;
+			ws.Cells[iRow, 1, iRow, 15].Style.Font.Bold = true;
 			iRow++;
 
 			return iRow;
@@ -133,6 +135,7 @@ namespace Alicargo.Services.Excel
 			ws.Cells[iRow, iColumn++].Value = item.TotalSenderRate;
 			ws.Cells[iRow, iColumn++].Value = item.SenderScotchCost;
 			ws.Cells[iRow, iColumn++].Value = item.FactureCost;
+			ws.Cells[iRow, iColumn++].Value = item.FactureCostEx;
 			ws.Cells[iRow, iColumn++].Value = item.PickupCost;
 			ws.Cells[iRow, iColumn].Style.Font.Bold = true;
 			ws.Cells[iRow, iColumn].Value = item.Profit;
@@ -167,6 +170,7 @@ namespace Alicargo.Services.Excel
 			ws.Cells[1, iColumn++].Value = Entities.TotalSenderRate;
 			ws.Cells[1, iColumn++].Value = Entities.ScotchCost;
 			ws.Cells[1, iColumn++].Value = Entities.FactureCost;
+			ws.Cells[1, iColumn++].Value = Entities.FactureCostEx;
 			ws.Cells[1, iColumn++].Value = Entities.PickupCost;
 			ws.Cells[1, iColumn].Value = Entities.Total;
 
