@@ -19,17 +19,24 @@
 	<script> $("#@Html.Raw(id)").kendoMultiSelect().data("kendoMultiSelect"); </script>
 }
 <div class="row">
-	<div class="span3">
+	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Name)
 	</div>
-	<div class="span3">
+	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Email)
 	</div>
-	<div class="span3">
+	<div class="span4">
+	</div>	
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Contact)
+	</div>
+	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.Phone)
 	</div>
-	<div class="span3">
-		@Html.EditorWithLabelFor(model => model.Contact)
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Address)
 	</div>
 </div>
 <div class="row">

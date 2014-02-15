@@ -92,6 +92,8 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public string CarrierPhone { get; set; }
 
+		public string CarrierAddress { get; set; }
+
 		public string CarrierContact { get; set; }
 
 

@@ -28,5 +28,8 @@ namespace Alicargo.ViewModels.User
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "Cities")]
 		public long[] Cities { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "Address")]
+		public string Address { get; set; }
 	}
 }

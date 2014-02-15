@@ -17,7 +17,7 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor = executor;
 		}
 
-		public void Update(long id, string name, string email, string phone, string contact, string login)
+		public void Update(long id, string name, string email, string phone, string contact, string address, string login)
 		{
 			_executor.Execute("[dbo].[Carrier_Update]", new
 			{
@@ -26,12 +26,13 @@ namespace Alicargo.DataAccess.Repositories.User
 				login,
 				email,
 				phone,
-				contact
+				contact,
+				address
 			});
 		}
 
-		public long Add(string name, string email, string phone, string contact, string login, string password,
-			string language)
+		public long Add(string name, string email, string phone, string contact, string address,
+			string login, string password, string language)
 		{
 			var salt = _converter.GenerateSalt();
 			var passwordHash = _converter.GetPasswordHash(password, salt);
@@ -45,7 +46,8 @@ namespace Alicargo.DataAccess.Repositories.User
 				name,
 				email,
 				phone,
-				contact
+				contact,
+				address
 			});
 		}
 

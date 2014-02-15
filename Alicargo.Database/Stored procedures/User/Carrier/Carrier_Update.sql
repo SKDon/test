@@ -4,6 +4,7 @@
 	@Login NVARCHAR(320),
 	@Contact NVARCHAR (MAX),
 	@Phone NVARCHAR (MAX),
+	@Address NVARCHAR (MAX),
 	@Email NVARCHAR (320)
 
 AS BEGIN
@@ -17,9 +18,11 @@ AS BEGIN
 		SET		[Name] = @Name,
 				[Email] = @Email,
 				[Contact] = @Contact,
-				[Phone] = @Phone
+				[Phone] = @Phone,
+				[Address] = @Address
 		OUTPUT	INSERTED.[UserId] INTO @Table
 		WHERE	[Id] = @Id
+
 
 		UPDATE	TOP(1) [dbo].[User]
 		SET		[Login] = @Login

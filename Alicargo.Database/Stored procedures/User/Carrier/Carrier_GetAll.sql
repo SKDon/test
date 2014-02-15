@@ -10,7 +10,8 @@ AS BEGIN
 			u.[Login],
 			c.[Name],
 			c.[Contact],
-			c.[Phone]
+			c.[Phone],
+			c.[Address]
 	FROM	[dbo].[Carrier] c
 	JOIN	[dbo].[User] u
 	ON		u.[Id] = c.[UserId]

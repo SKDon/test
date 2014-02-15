@@ -93,6 +93,12 @@ namespace Alicargo.ViewModels.Application
 
 		public string CarrierName { get; set; }
 
+		public string CarrierPhone { get; set; }
+
+		public string CarrierAddress { get; set; }
+
+		public string CarrierContact { get; set; }
+
 		public long Id { get; set; }
 
 		public DateTimeOffset CreationTimestamp { get; set; }

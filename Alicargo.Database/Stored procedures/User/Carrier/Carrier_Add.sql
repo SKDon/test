@@ -6,6 +6,7 @@
 	@Name NVARCHAR (MAX),
 	@Contact NVARCHAR (MAX),
 	@Phone NVARCHAR (MAX),
+	@Address NVARCHAR (MAX),
 	@Email NVARCHAR (320)
 
 AS BEGIN
@@ -20,9 +21,9 @@ AS BEGIN
 				@PasswordSalt = @PasswordSalt, 
 				@TwoLetterISOLanguageName = @Language
 
-		INSERT [dbo].[Carrier] ([UserId], [Name], [Email], [Contact], [Phone])
+		INSERT [dbo].[Carrier] ([UserId], [Name], [Email], [Contact], [Phone], [Address])
 		OUTPUT INSERTED.[Id]
-		VALUES (@UserId, @Name, @Email, @Contact, @Phone)
+		VALUES (@UserId, @Name, @Email, @Contact, @Phone, @Address)
 
 	COMMIT
 

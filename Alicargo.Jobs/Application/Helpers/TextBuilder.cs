@@ -165,8 +165,9 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "Torg12Files", string.Join(", ", torg12));
 			Add(localizedData, "TransitAddress", application.TransitAddress);
 			Add(localizedData, "CarrierName", application.CarrierName);
-			Add(localizedData, "CarrierPhone", application.CarrierPhone);
 			Add(localizedData, "CarrierContact", application.CarrierContact);
+			Add(localizedData, "CarrierAddress", application.CarrierAddress);
+			Add(localizedData, "CarrierPhone", application.CarrierPhone);
 			Add(localizedData, "TransitCity", cityName);
 			Add(localizedData, "TransitPhone", application.TransitPhone);
 			Add(localizedData, "TransitRecipientName", application.TransitRecipientName);
