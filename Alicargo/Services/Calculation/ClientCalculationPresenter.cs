@@ -41,7 +41,9 @@ namespace Alicargo.Services.Calculation
 			long total;
 			var applications = GetCalculatedApplications(clientId, take, skip, out total);
 
-			var awbsData = _awbRepository.Get(applications.Select(x => x.AirWaybillId.Value).ToArray()).ToArray();
+			var awbIds = applications.Select(x => x.AirWaybillId.Value).ToArray();
+
+			var awbsData = _awbRepository.Get(awbIds).ToArray();
 
 			var items = GetItems(applications);
 
