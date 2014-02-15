@@ -64,10 +64,10 @@ namespace Alicargo.Tests.Services.Application
 					TotalValue = x,
 					TotalVolume = x
 				}).ToArray());
-			_awbRepository.Setup(x => x.GetTotalCountWithouAwb()).Returns((int?)null);
-			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb()).Returns((float?)null);
-			_awbRepository.Setup(x => x.GetTotalValueWithouAwb()).Returns(0);
-			_awbRepository.Setup(x => x.GetTotalVolumeWithouAwb()).Returns(0);
+			_awbRepository.Setup(x => x.GetTotalCountWithouAwb(null, null, null, null)).Returns((int?)null);
+			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb(null, null, null, null)).Returns((float?)null);
+			_awbRepository.Setup(x => x.GetTotalValueWithouAwb(null, null, null, null)).Returns(0);
+			_awbRepository.Setup(x => x.GetTotalVolumeWithouAwb(null, null, null, null)).Returns(0);
 
 			var groups = _grouper.Group(_applications, new[]
 			{
@@ -103,10 +103,10 @@ namespace Alicargo.Tests.Services.Application
 			var value = _fixture.Create<decimal>();
 			var volume = _fixture.Create<float>();
 			_awbRepository.Setup(x => x.GetAggregate(_awbIds, null, null, null, null)).Returns(new AirWaybillAggregate[0]);
-			_awbRepository.Setup(x => x.GetTotalCountWithouAwb()).Returns(count);
-			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb()).Returns(weidht);
-			_awbRepository.Setup(x => x.GetTotalValueWithouAwb()).Returns(value);
-			_awbRepository.Setup(x => x.GetTotalVolumeWithouAwb()).Returns(volume);
+			_awbRepository.Setup(x => x.GetTotalCountWithouAwb(null, null, null, null)).Returns(count);
+			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb(null, null, null, null)).Returns(weidht);
+			_awbRepository.Setup(x => x.GetTotalValueWithouAwb(null, null, null, null)).Returns(value);
+			_awbRepository.Setup(x => x.GetTotalVolumeWithouAwb(null, null, null, null)).Returns(volume);
 
 			var groups = _grouper.Group(_applications, new[]
 			{
@@ -116,9 +116,8 @@ namespace Alicargo.Tests.Services.Application
 
 			groups.Count().ShouldBeEquivalentTo(AWBCount);
 
-			for(var index = 0; index < groups.Length; index++)
+			foreach(var @group in groups)
 			{
-				var @group = groups[index];
 				@group.aggregates.Count.sum.ShouldBeEquivalentTo(count);
 				@group.aggregates.Weight.sum.ShouldBeEquivalentTo(weidht);
 				@group.aggregates.Value.sum.ShouldBeEquivalentTo(value);

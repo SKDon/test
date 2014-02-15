@@ -24,13 +24,17 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null);
 		EmailData[] GetSenderEmails(long awbId);
 
-		int? GetTotalCountWithouAwb();
+		int? GetTotalCountWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null);
 
-		decimal GetTotalValueWithouAwb();
+		decimal GetTotalValueWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null);
 
-		float GetTotalVolumeWithouAwb();
+		float GetTotalVolumeWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null);
 
-		float? GetTotalWeightWithouAwb();
+		float? GetTotalWeightWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null);
 
 		void SetAdditionalCost(long awbId, decimal? additionalCost);
 

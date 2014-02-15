@@ -173,24 +173,30 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
-		public float? GetTotalWeightWithouAwb()
+		public float? GetTotalWeightWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null)
 		{
-			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Weight);
+			var applications = GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId);
+
+			return applications.Sum(x => x.Weight);
 		}
 
-		public decimal GetTotalValueWithouAwb()
+		public decimal GetTotalValueWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null)
 		{
-			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Value);
+			return GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId).Sum(x => x.Value);
 		}
 
-		public float GetTotalVolumeWithouAwb()
+		public float GetTotalVolumeWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null)
 		{
-			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Volume);
+			return GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId).Sum(x => x.Volume);
 		}
 
-		public int? GetTotalCountWithouAwb()
+		public int? GetTotalCountWithouAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null)
 		{
-			return _context.Applications.Where(x => !x.AirWaybillId.HasValue).Sum(x => x.Count);
+			return GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId).Sum(x => x.Count);
 		}
 
 		public EmailData[] GetClientEmails(long awbId)
@@ -242,6 +248,17 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context.AirWaybills.DeleteOnSubmit(airWaybill);
 
 			_context.SubmitChanges();
+		}
+
+		private IQueryable<DbContext.Application> GetApplicationsWithoutAwb(long? clientId = null, long? senderId = null,
+			long? forwarderId = null, long? carrierId = null)
+		{
+			return _context.Applications.Where(
+				y => !y.AirWaybillId.HasValue
+				     && (!forwarderId.HasValue || y.ForwarderId == forwarderId)
+				     && (!clientId.HasValue || y.ClientId == clientId)
+				     && (!senderId.HasValue || y.SenderId == senderId)
+				     && (!carrierId.HasValue || y.Transit.CarrierId == carrierId));
 		}
 
 		private static void Map(AirWaybillData @from, AirWaybill to,
