@@ -15,7 +15,7 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 		public const string SenderFieldName = "SenderName";
 		public const string ForwarderFieldName = "ForwarderName";
 		public const string CityFieldName = "TransitCity";
-		public const string CarrierFieldName = "TransitCarrierName";
+		public const string CarrierFieldName = "CarrierName";
 
 		private static readonly IDictionary<string, OrderType> Map = new Dictionary<string, OrderType>
 		{

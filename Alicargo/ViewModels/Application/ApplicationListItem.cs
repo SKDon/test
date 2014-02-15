@@ -91,7 +91,7 @@ namespace Alicargo.ViewModels.Application
 
 		public string TransitDeliveryTypeString { get; set; }
 
-		public string TransitCarrierName { get; set; }
+		public string CarrierName { get; set; }
 
 		public long Id { get; set; }
 

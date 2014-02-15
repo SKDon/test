@@ -46,9 +46,9 @@ namespace Alicargo.Services.Excel.Rows
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "Carrier")]
-		public string TransitCarrierName
+		public string CarrierName
 		{
-			get { return _application.TransitCarrierName; }
+			get { return _application.CarrierName; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "MethodOfTransit")]

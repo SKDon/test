@@ -123,7 +123,7 @@
 			{ field: "SenderName", title: $l.Entities_Sender, groupable: true, width: "100px" },
 			{ field: "ForwarderName", title: $l.Entities_Forwarder, groupable: true, width: "100px" },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: true, width: "100px" },
-			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: true, width: "100px" },
+			{ field: "CarrierName", title: $l.Entities_Carrier, groupable: true, width: "100px" },
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{
@@ -163,7 +163,7 @@
 				width: "70px"
 			},
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false },
-			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: false },
+			{ field: "CarrierName", title: $l.Entities_Carrier, groupable: false },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: false, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
@@ -173,14 +173,13 @@
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
 			countField,
 			weightField,
-			{ field: "TransitCarrierName", title: $l.Entities_Carrier, groupable: false, width: "100px" },
+			volumeField,
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
 			{ field: "TransitDeliveryTypeString", title: $l.Entities_DeliveryType, groupable: false, width: "75px" },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },
-			{ field: "TransitRecipientName", title: $l.Entities_RecipientName, groupable: false, width: "100px" },
-			{ field: "TransitAddress", title: $l.Entities_Address, groupable: false, width: "100px" },
-			{ field: "TransitPhone", title: $l.Entities_Phone, groupable: false, width: "100px" },
-			{ field: "TransitWarehouseWorkingTime", title: $l.Entities_WarehouseWorkingTime, groupable: false, width: "90px" },
+			{ field: "CarrierName", title: $l.Entities_Carrier, groupable: false, width: "100px" },
+			{ field: "TransitCarrierAddress", title: $l.Entities_Address, groupable: false, width: "100px" },
+			{ field: "TransitCarrierPhone", title: $l.Entities_Phone, groupable: false, width: "100px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{ field: "ForwarderTransitCost", title: $l.Entities_TransitCost, groupable: false, width: "150px" },
 			{
