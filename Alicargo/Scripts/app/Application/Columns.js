@@ -197,6 +197,7 @@
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
 			countField,
 			weightField,
+			volumeField,
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
 			{ field: "TransitDeliveryTypeString", title: $l.Entities_DeliveryType, groupable: false, width: "75px" },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },

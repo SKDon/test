@@ -15,10 +15,28 @@ namespace Alicargo.Services.Excel.Rows
 			_airWaybillDisplay = airWaybillDisplay;
 		}
 
+		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
+		public string StateChangeTimestampLocalString
+		{
+			get { return _application.StateChangeTimestampLocalString; }
+		}
+
 		[DisplayNameLocalized(typeof(Entities), "Nic")]
 		public string ClientNic
 		{
 			get { return _application.ClientNic; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "City")]
+		public string TransitCity
+		{
+			get { return _application.TransitCity; }
+		}
+		
+		[DisplayNameLocalized(typeof(Entities), "StateName")]
+		public string StateName
+		{
+			get { return _application.State.StateName; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "DisplayNumber")]
@@ -73,18 +91,6 @@ namespace Alicargo.Services.Excel.Rows
 		public string ValueString
 		{
 			get { return _application.ValueString; }
-		}
-
-		[DisplayNameLocalized(typeof(Entities), "StateName")]
-		public string StateName
-		{
-			get { return _application.State.StateName; }
-		}
-
-		[DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
-		public string StateChangeTimestampLocalString
-		{
-			get { return _application.StateChangeTimestampLocalString; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "AirWaybill")]

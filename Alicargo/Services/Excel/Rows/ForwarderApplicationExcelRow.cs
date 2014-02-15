@@ -45,6 +45,12 @@ namespace Alicargo.Services.Excel.Rows
 			get { return _application.Weight; }
 		}
 
+		[DisplayNameLocalized(typeof(Entities), "Volume")]
+		public float? Volume
+		{
+			get { return _application.Volume; }
+		}
+
 		[DisplayNameLocalized(typeof(Entities), "Carrier")]
 		public string CarrierName
 		{
@@ -70,28 +76,21 @@ namespace Alicargo.Services.Excel.Rows
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "RecipientName")]
-		public string TransitRecipientName
+		public string CarrierContact
 		{
-			get { return _application.TransitRecipientName; }
+			get { return _application.CarrierContact; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "Address")]
-		public string TransitAddress
+		public string CarrierAddress
 		{
-			get { return _application.TransitAddress; }
+			get { return _application.CarrierAddress; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "Phone")]
-		public string TransitPhone
+		public string CarrierPhone
 		{
-			get { return _application.TransitPhone; }
-		}
-
-
-		[DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
-		public string TransitWarehouseWorkingTime
-		{
-			get { return _application.TransitWarehouseWorkingTime; }
+			get { return _application.CarrierPhone; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "TransitReference")]
@@ -99,7 +98,6 @@ namespace Alicargo.Services.Excel.Rows
 		{
 			get { return _application.TransitReference; }
 		}
-
 
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost

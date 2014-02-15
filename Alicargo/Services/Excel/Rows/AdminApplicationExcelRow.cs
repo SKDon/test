@@ -99,10 +99,16 @@ namespace Alicargo.Services.Excel.Rows
 			get { return _application.ValueString; }
 		}
 
-		[DisplayNameLocalized(typeof(Entities), "MethodOfTransit")]
-		public string TransitMethodOfTransitString
+		[DisplayNameLocalized(typeof(Entities), "Sender")]
+		public string SenderName
 		{
-			get { return _application.TransitMethodOfTransitString; }
+			get { return _application.SenderName; }
+		}
+
+		[DisplayNameLocalized(typeof(Entities), "Forwarder")]
+		public string ForwarderName
+		{
+			get { return _application.ForwarderName; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "City")]
@@ -115,6 +121,12 @@ namespace Alicargo.Services.Excel.Rows
 		public string CarrierName
 		{
 			get { return _application.CarrierName; }
+		}		
+
+		[DisplayNameLocalized(typeof(Entities), "MethodOfTransit")]
+		public string TransitMethodOfTransitString
+		{
+			get { return _application.TransitMethodOfTransitString; }
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "TransitReference")]

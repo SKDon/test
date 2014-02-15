@@ -45,6 +45,12 @@ namespace Alicargo.Services.Excel.Rows
 			get { return _application.Weight; }
 		}
 
+		[DisplayNameLocalized(typeof(Entities), "Volume")]
+		public float? Volume
+		{
+			get { return _application.Volume; }
+		}
+
 		[DisplayNameLocalized(typeof(Entities), "MethodOfTransit")]
 		public string TransitMethodOfTransitString
 		{
