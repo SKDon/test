@@ -6,7 +6,6 @@ using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Helpers;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
@@ -69,7 +68,7 @@ namespace Alicargo.Services.Calculation
 					Desc = true,
 					OrderType = OrderType.AirWaybill
 				}
-			}, take: take, skip: skip, senderId: senderId).ToArray();
+			}, take, skip, senderId: senderId).ToArray();
 
 			total = _applications.Count(stateIds, senderId: senderId);
 

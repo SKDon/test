@@ -252,8 +252,6 @@ namespace Alicargo.Services.Application
 			if(!HasPermissionToSetState(stateId))
 				throw new AccessForbiddenException("User don't have access to the state " + stateId);
 
-			// todo: 2. check permissions to the application for a sender
-
 			// todo: 2. test logic with states
 			if(stateId == _config.CargoInStockStateId)
 			{
