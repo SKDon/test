@@ -201,7 +201,9 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "WeightCost", weightCost.ToString("N2", culture));
 			Add(localizedData, "ScotchCost", calculation.ScotchCost.ToString("N2", culture));
 			Add(localizedData, "InsuranceCost", calculation.InsuranceCost.ToString("N2", culture));
-			Add(localizedData, "FactureCost", calculation.FactureCost.ToString("N2", culture));
+			Add(localizedData, "FactureCost", (calculation.FactureCost + calculation.FactureCostEx).ToString("N2", culture));
+			Add(localizedData, "FactureCostT1", calculation.FactureCost.ToString("N2", culture));
+			Add(localizedData, "FactureCostEx", calculation.FactureCostEx.ToString("N2", culture));
 			Add(localizedData, "TransitCost", calculation.TransitCost.ToString("N2", culture));
 			Add(localizedData, "PickupCost", calculation.PickupCost.ToString("N2", culture));
 			Add(localizedData, "TotalCost", CalculationDataHelper.GetMoney(calculation).ToString("N2", culture));
