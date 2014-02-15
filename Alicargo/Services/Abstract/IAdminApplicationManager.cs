@@ -17,6 +17,7 @@ namespace Alicargo.Services.Abstract
 		void SetTariffPerKg(long id, decimal? tariffPerKg);
 		void SetPickupCostEdited(long id, decimal? pickupCost);
 		void SetFactureCostEdited(long id, decimal? factureCost);
+		void SetFactureCostExEdited(long id, decimal? factureCostEx);
 		void SetScotchCostEdited(long id, decimal? scotchCost);
 		void SetSenderRate(long id, decimal? senderRate);
 		void SetClass(long id, ClassType? classType);

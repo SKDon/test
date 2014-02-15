@@ -4222,9 +4222,13 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<decimal> _FactureCost;
 		
+		private System.Nullable<decimal> _FactureCostEx;
+		
 		private System.Nullable<decimal> _PickupCost;
 		
 		private System.Nullable<decimal> _FactureCostEdited;
+		
+		private System.Nullable<decimal> _FactureCostExEdited;
 		
 		private System.Nullable<decimal> _ScotchCostEdited;
 		
@@ -4320,10 +4324,14 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnMarkNameChanged();
     partial void OnFactureCostChanging(System.Nullable<decimal> value);
     partial void OnFactureCostChanged();
+    partial void OnFactureCostExChanging(System.Nullable<decimal> value);
+    partial void OnFactureCostExChanged();
     partial void OnPickupCostChanging(System.Nullable<decimal> value);
     partial void OnPickupCostChanged();
     partial void OnFactureCostEditedChanging(System.Nullable<decimal> value);
     partial void OnFactureCostEditedChanged();
+    partial void OnFactureCostExEditedChanging(System.Nullable<decimal> value);
+    partial void OnFactureCostExEditedChanged();
     partial void OnScotchCostEditedChanging(System.Nullable<decimal> value);
     partial void OnScotchCostEditedChanged();
     partial void OnPickupCostEditedChanging(System.Nullable<decimal> value);
@@ -5018,6 +5026,26 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactureCostEx", DbType="Money")]
+		public System.Nullable<decimal> FactureCostEx
+		{
+			get
+			{
+				return this._FactureCostEx;
+			}
+			set
+			{
+				if ((this._FactureCostEx != value))
+				{
+					this.OnFactureCostExChanging(value);
+					this.SendPropertyChanging();
+					this._FactureCostEx = value;
+					this.SendPropertyChanged("FactureCostEx");
+					this.OnFactureCostExChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PickupCost", DbType="Money")]
 		public System.Nullable<decimal> PickupCost
 		{
@@ -5054,6 +5082,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._FactureCostEdited = value;
 					this.SendPropertyChanged("FactureCostEdited");
 					this.OnFactureCostEditedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactureCostExEdited", DbType="Money")]
+		public System.Nullable<decimal> FactureCostExEdited
+		{
+			get
+			{
+				return this._FactureCostExEdited;
+			}
+			set
+			{
+				if ((this._FactureCostExEdited != value))
+				{
+					this.OnFactureCostExEditedChanging(value);
+					this.SendPropertyChanging();
+					this._FactureCostExEdited = value;
+					this.SendPropertyChanged("FactureCostExEdited");
+					this.OnFactureCostExEditedChanged();
 				}
 			}
 		}

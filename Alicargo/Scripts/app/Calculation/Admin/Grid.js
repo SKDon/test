@@ -161,6 +161,13 @@
 						factureCost: e.values.FactureCost
 					}, awbId);
 				}
+				if (e.values.FactureCostEx !== undefined) {
+					post($u.Calculation_SetFactureCostExEdited, {
+						id: applicationId,
+						awbId: awbId,
+						factureCostEx: e.values.FactureCostEx
+					}, awbId);
+				}
 				if (e.values.PickupCost !== undefined) {
 					post($u.Calculation_SetPickupCostEdited, {
 						id: applicationId,

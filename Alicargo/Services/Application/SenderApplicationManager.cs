@@ -53,6 +53,7 @@ namespace Alicargo.Services.Application
 				},
 				Volume = application.Volume,
 				FactureCost = application.FactureCost,
+				FactureCostEx = application.FactureCostEx,
 				PickupCost = application.PickupCost,
 				CountryId = application.CountryId
 			};
@@ -107,17 +108,18 @@ namespace Alicargo.Services.Application
 			application.ForwarderId = _forwarders.GetByCityOrAny(transit.CityId, application.ForwarderId);
 		}
 
-		private static void Map(ApplicationSenderModel @from, ApplicationData to)
+		private static void Map(ApplicationSenderModel from, ApplicationData to)
 		{
-			to.Count = @from.Count;
-			to.FactoryName = @from.FactoryName;
-			to.Weight = @from.Weight;
-			to.Invoice = @from.Invoice;
-			to.MarkName = @from.MarkName;
-			to.Value = @from.Currency.Value;
-			to.CurrencyId = @from.Currency.CurrencyId;
-			to.Volume = @from.Volume;
-			to.FactureCost = @from.FactureCost;
+			to.Count = from.Count;
+			to.FactoryName = from.FactoryName;
+			to.Weight = from.Weight;
+			to.Invoice = from.Invoice;
+			to.MarkName = from.MarkName;
+			to.Value = from.Currency.Value;
+			to.CurrencyId = from.Currency.CurrencyId;
+			to.Volume = from.Volume;
+			to.FactureCost = from.FactureCost;
+			to.FactureCostEx = from.FactureCostEx;
 			to.PickupCost = from.PickupCost;
 			to.CountryId = from.CountryId;
 		}

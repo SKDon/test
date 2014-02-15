@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
-using Alicargo.Core.Calculation.Entities;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -13,6 +12,7 @@ using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities.Localization;
+using Alicargo.ViewModels.Calculation.Client;
 
 namespace Alicargo.Services.Calculation
 {
@@ -98,7 +98,8 @@ namespace Alicargo.Services.Calculation
 				Count = a.Count,
 				ClientNic = nics[a.Id],
 				Factory = a.FactoryName,
-				FactureCost = a.FactureCost,
+				FactureCost = a.AdjustedFactureCost,
+				FactureCostEx = a.AdjustedFactureCostEx,
 				Invoice = a.Invoice,
 				Mark = a.MarkName,
 				ScotchCost = a.ScotchCost,

@@ -30,6 +30,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 				SenderScotchCost = new SumHolder<decimal>(items.Sum(x => x.SenderScotchCost ?? 0));
 				PickupCost = new SumHolder<decimal>(items.Sum(x => x.PickupCost ?? 0));
 				FactureCost = new SumHolder<decimal>(items.Sum(x => x.FactureCost ?? 0));
+				FactureCostEx = new SumHolder<decimal>(items.Sum(x => x.FactureCostEx ?? 0));
 			}
 
 			public SumHolder<decimal> Profit { get; private set; }
@@ -40,6 +41,7 @@ namespace Alicargo.ViewModels.Calculation.Sender
 			public SumHolder<decimal> SenderScotchCost { get; private set; }
 			public SumHolder<decimal> PickupCost { get; private set; }
 			public SumHolder<decimal> FactureCost { get; private set; }
+			public SumHolder<decimal> FactureCostEx { get; private set; }
 		}
 	}
 }

@@ -9,6 +9,7 @@
 	@ScotchCost MONEY,
 	@InsuranceCost MONEY,
 	@FactureCost MONEY,
+	@FactureCostEx MONEY,
 	@TransitCost MONEY,
 	@PickupCost MONEY,
 	@FactoryName NVARCHAR(320),
@@ -32,6 +33,7 @@ AS BEGIN
 		,[ScotchCost]
 		,[InsuranceCost]
 		,[FactureCost]
+		,[FactureCostEx]
 		,[TransitCost]
 		,[PickupCost]
 		,[FactoryName]
@@ -51,6 +53,7 @@ AS BEGIN
 		,@ScotchCost
 		,@InsuranceCost
 		,@FactureCost
+		,@FactureCostEx
 		,@TransitCost
 		,@PickupCost
 		,@FactoryName

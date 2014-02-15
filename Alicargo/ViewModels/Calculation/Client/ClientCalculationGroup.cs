@@ -1,6 +1,6 @@
 ﻿using Alicargo.Core.Helpers;
 
-namespace Alicargo.Core.Calculation.Entities
+namespace Alicargo.ViewModels.Calculation.Client
 {
 	public sealed class ClientCalculationGroup
 	{

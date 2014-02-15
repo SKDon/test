@@ -35,6 +35,7 @@
 						{ field: "SenderScotchCost", aggregate: "sum" },
 						{ field: "TotalSenderRate", aggregate: "sum" },
 						{ field: "FactureCost", aggregate: "sum" },
+						{ field: "FactureCostEx", aggregate: "sum" },
 						{ field: "PickupCost", aggregate: "sum" },
 						{ field: "Profit", aggregate: "sum" }
 					]
@@ -73,6 +74,7 @@
 				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
 				{ field: "SenderScotchCost", title: $l.Entities_ScotchCost, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
 				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
+				{ field: "FactureCostEx", title: $l.Entities_FactureCostEx, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
 				{ field: "PickupCost", title: $l.Entities_PickupCost, attributes: textRight, format: n2Format, groupFooterTemplate: groupFooterTemplate, footerAttributes: textRight },
 				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: textRight, footerAttributes: textRight }
 			];

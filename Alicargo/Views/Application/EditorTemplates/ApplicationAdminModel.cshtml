@@ -39,19 +39,23 @@
 	</div>
 </div>
 <div class="row">
-	<div class="span3">
+	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.FactureCost)
 		@Html.EditorWithLabelFor(model => model.FactureCostEdited)
 	</div>
-	<div class="span3">
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.FactureCostEx)
+		@Html.EditorWithLabelFor(model => model.FactureCostExEdited)
+	</div>
+	<span class="span2">
 		@Html.EditorWithLabelFor(model => model.TransitCost)
 		@Html.EditorWithLabelFor(model => model.TransitCostEdited)
-	</div>
-	<div class="span3">
+	</span>
+	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.PickupCost)
 		@Html.EditorWithLabelFor(model => model.PickupCostEdited)
 	</div>
-	<div class="span3">
+	<div class="span2">
 		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)
 		@Html.EditorWithLabelFor(model => model.TariffPerKg)
 	</div>

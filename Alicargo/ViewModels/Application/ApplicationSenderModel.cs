@@ -40,6 +40,9 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
 		public decimal? FactureCost { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "FactureCostEx")]
+		public decimal? FactureCostEx { get; set; }
+
 		[DisplayNameLocalized(typeof(Entities), "PickupCost")]
 		public decimal? PickupCost { get; set; }
 

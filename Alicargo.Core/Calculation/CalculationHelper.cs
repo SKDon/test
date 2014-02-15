@@ -42,7 +42,7 @@ namespace Alicargo.Core.Calculation
 			return GetTotalTariffCost(application.TariffPerKg, application.Weight)
 				   + (application.ScotchCost ?? 0)
 				   + GetInsuranceCost(application.Value)
-				   + (application.FactureCost ?? 0)
+				   + (application.AdjustedFactureCost ?? 0)
 				   + (application.PickupCost ?? 0)
 				   + (application.TransitCost ?? 0);
 		}

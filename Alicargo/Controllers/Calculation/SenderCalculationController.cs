@@ -12,21 +12,16 @@ namespace Alicargo.Controllers.Calculation
 {
 	public partial class SenderCalculationController : Controller
 	{
+		private readonly IIdentityService _identity;
 		private readonly ISenderCalculationPresenter _presenter;
 		private readonly ISenderRepository _senders;
-		private readonly IIdentityService _identity;
 
-		public SenderCalculationController(ISenderCalculationPresenter presenter, ISenderRepository senders, IIdentityService identity)
+		public SenderCalculationController(ISenderCalculationPresenter presenter, ISenderRepository senders,
+			IIdentityService identity)
 		{
 			_presenter = presenter;
 			_senders = senders;
 			_identity = identity;
-		}
-
-		[Access(RoleType.Sender), HttpGet]
-		public virtual ActionResult Index()
-		{
-			return View();
 		}
 
 		[Access(RoleType.Sender)]
@@ -36,7 +31,7 @@ namespace Alicargo.Controllers.Calculation
 
 			var senderId = _senders.GetByUserId(_identity.Id.Value);
 
-			if (!senderId.HasValue)
+			if(!senderId.HasValue)
 			{
 				throw new InvalidDataException();
 			}
@@ -50,14 +45,23 @@ namespace Alicargo.Controllers.Calculation
 			return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "calculation.xlsx");
 		}
 
-		[Access(RoleType.Sender), HttpPost, OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[HttpGet]
+		[Access(RoleType.Sender)]
+		public virtual ActionResult Index()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[Access(RoleType.Sender)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
 			Debug.Assert(_identity.Id != null);
 
 			var senderId = _senders.GetByUserId(_identity.Id.Value);
 
-			if (!senderId.HasValue)
+			if(!senderId.HasValue)
 			{
 				throw new InvalidDataException();
 			}
@@ -66,6 +70,5 @@ namespace Alicargo.Controllers.Calculation
 
 			return Json(data);
 		}
-
 	}
 }

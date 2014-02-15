@@ -38,8 +38,10 @@
 	[MarkName]				NVARCHAR(320)		NOT NULL, 
 
 	[FactureCost]			MONEY				NULL,
+	[FactureCostEx]			MONEY				NULL,
 	[PickupCost]			MONEY				NULL,
 	[FactureCostEdited]		MONEY				NULL,
+	[FactureCostExEdited]	MONEY				NULL,
 	[ScotchCostEdited]		MONEY				NULL,
 	[PickupCostEdited]		MONEY				NULL,
 	[TariffPerKg]			MONEY				NULL,

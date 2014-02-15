@@ -17,6 +17,7 @@
 		public decimal TotalSenderRate { get; set; }
 		public decimal? SenderScotchCost { get; set; }
 		public decimal? FactureCost { get; set; }
+		public decimal? FactureCostEx { get; set; }
 		public decimal? PickupCost { get; set; }
 		public decimal Profit { get; set; }
 	}

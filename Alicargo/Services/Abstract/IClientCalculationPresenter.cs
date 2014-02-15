@@ -1,4 +1,4 @@
-﻿using Alicargo.Core.Calculation.Entities;
+﻿using Alicargo.ViewModels.Calculation.Client;
 
 namespace Alicargo.Services.Abstract
 {

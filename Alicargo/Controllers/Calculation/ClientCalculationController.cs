@@ -31,8 +31,8 @@ namespace Alicargo.Controllers.Calculation
 			_identity = identity;
 		}
 
-		[Access(RoleType.Client)]
 		[HttpGet]
+		[Access(RoleType.Client)]
 		public virtual ActionResult Index()
 		{
 			Debug.Assert(_identity.Id != null);

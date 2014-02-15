@@ -14,6 +14,7 @@ AS BEGIN
 		[ScotchCost],
 		[InsuranceCost],
 		[FactureCost],
+		[FactureCostEx],
 		[TransitCost],
 		[PickupCost],
 		[FactoryName],

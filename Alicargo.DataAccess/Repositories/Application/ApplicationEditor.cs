@@ -21,7 +21,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 		{
 			var entity = new DbContext.Application();
 
-			CopyTo(application, entity);
+			Map(application, entity);
 
 			_context.Applications.InsertOnSubmit(entity);
 
@@ -75,6 +75,11 @@ namespace Alicargo.DataAccess.Repositories.Application
 			Update(id, application => application.TariffPerKg = tariffPerKg);
 		}
 
+		public void SetFactureCostExEdited(long id, decimal? factureCostEx)
+		{
+			Update(id, application => application.FactureCostExEdited = factureCostEx);
+		}
+
 		public void SetPickupCostEdited(long id, decimal? pickupCost)
 		{
 			Update(id, application => application.PickupCostEdited = pickupCost);
@@ -107,59 +112,61 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		public void Update(ApplicationData application)
 		{
-			Update(application.Id, entity => CopyTo(application, entity));
+			Update(application.Id, entity => Map(application, entity));
 
 			_context.SubmitChanges();
 		}
 
-		private static void CopyTo(ApplicationData from, DbContext.Application to)
+		private static void Map(ApplicationData from, DbContext.Application to)
 		{
 			if(to.Id == 0)
 			{
-				to.Id = @from.Id;
-				to.CreationTimestamp = @from.CreationTimestamp;
-				to.StateChangeTimestamp = @from.StateChangeTimestamp;
-				to.StateId = @from.StateId;
+				to.Id = from.Id;
+				to.CreationTimestamp = from.CreationTimestamp;
+				to.StateChangeTimestamp = from.StateChangeTimestamp;
+				to.StateId = from.StateId;
 			}
 
-			to.Characteristic = @from.Characteristic;
-			to.AddressLoad = @from.AddressLoad;
-			to.WarehouseWorkingTime = @from.WarehouseWorkingTime;
-			to.Weight = @from.Weight;
-			to.Count = @from.Count;
-			to.Volume = @from.Volume;
-			to.TermsOfDelivery = @from.TermsOfDelivery;
-			to.Value = @from.Value;
-			to.CurrencyId = @from.CurrencyId;
-			to.MethodOfDeliveryId = (int)@from.MethodOfDelivery;
-			to.DateInStock = @from.DateInStock;
-			to.DateOfCargoReceipt = @from.DateOfCargoReceipt;
-			to.TransitReference = @from.TransitReference;
+			to.Characteristic = from.Characteristic;
+			to.AddressLoad = from.AddressLoad;
+			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
+			to.Weight = from.Weight;
+			to.Count = from.Count;
+			to.Volume = from.Volume;
+			to.TermsOfDelivery = from.TermsOfDelivery;
+			to.Value = from.Value;
+			to.CurrencyId = from.CurrencyId;
+			to.MethodOfDeliveryId = (int)from.MethodOfDelivery;
+			to.DateInStock = from.DateInStock;
+			to.DateOfCargoReceipt = from.DateOfCargoReceipt;
+			to.TransitReference = from.TransitReference;
 
-			to.ClientId = @from.ClientId;
-			to.TransitId = @from.TransitId;
-			to.ClassId = (int?)@from.Class;
-			to.AirWaybillId = @from.AirWaybillId;
-			to.CountryId = @from.CountryId;
+			to.ClientId = from.ClientId;
+			to.TransitId = from.TransitId;
+			to.ClassId = (int?)from.Class;
+			to.AirWaybillId = from.AirWaybillId;
+			to.CountryId = from.CountryId;
 			to.SenderId = from.SenderId;
 			to.ForwarderId = from.ForwarderId;
 
-			to.FactoryName = @from.FactoryName;
-			to.FactoryPhone = @from.FactoryPhone;
-			to.FactoryEmail = @from.FactoryEmail;
-			to.FactoryContact = @from.FactoryContact;
-			to.MarkName = @from.MarkName;
-			to.Invoice = @from.Invoice;
+			to.FactoryName = from.FactoryName;
+			to.FactoryPhone = from.FactoryPhone;
+			to.FactoryEmail = from.FactoryEmail;
+			to.FactoryContact = from.FactoryContact;
+			to.MarkName = from.MarkName;
+			to.Invoice = from.Invoice;
 
-			to.FactureCost = @from.FactureCost;
-			to.TariffPerKg = @from.TariffPerKg;
-			to.TransitCost = @from.TransitCost;
-			to.PickupCost = @from.PickupCost;
-			to.FactureCostEdited = @from.FactureCostEdited;
-			to.TransitCostEdited = @from.TransitCostEdited;
-			to.PickupCostEdited = @from.PickupCostEdited;
-			to.ScotchCostEdited = @from.ScotchCostEdited;
-			to.SenderRate = @from.SenderRate;
+			to.FactureCost = from.FactureCost;
+			to.FactureCostEx = from.FactureCostEx;
+			to.TariffPerKg = from.TariffPerKg;
+			to.TransitCost = from.TransitCost;
+			to.PickupCost = from.PickupCost;
+			to.FactureCostEdited = from.FactureCostEdited;
+			to.FactureCostExEdited = from.FactureCostExEdited;
+			to.TransitCostEdited = from.TransitCostEdited;
+			to.PickupCostEdited = from.PickupCostEdited;
+			to.ScotchCostEdited = from.ScotchCostEdited;
+			to.SenderRate = from.SenderRate;
 		}
 
 		private void Update(long id, Action<DbContext.Application> action)

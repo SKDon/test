@@ -84,7 +84,7 @@ namespace Alicargo.Services.Calculation
 				var itemsGroup = g.Key.HasValue
 					? g.OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray()
 					: g.OrderByDescending(x => x.ApplicationId).ToArray();
-				
+
 				var awb = awbsData.FirstOrDefault(x => x.Id == g.Key);
 
 				var text = awb != null
@@ -109,34 +109,6 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
-		private SenderCalculationItem[] GetItems(ApplicationExtendedData[] applications)
-		{
-			var appIds = applications.Select(x => x.Id).ToArray();
-			var nics = _clients.GetNicByApplications(appIds);
-
-			return applications.Select(a => new SenderCalculationItem
-			{
-				ApplicationId = a.Id,
-				Value = a.Value,
-				Count = a.Count,
-				ClientNic = nics[a.Id],
-				Factory = a.FactoryName,
-				FactureCost = a.SenderFactureCost,
-				Invoice = a.Invoice,
-				Mark = a.MarkName,
-				SenderScotchCost = a.SenderScotchCost,
-				ValueCurrencyId = a.CurrencyId,
-				Weight = a.Weight,
-				PickupCost = a.SenderPickupCost,
-				AirWaybillId = a.AirWaybillId,
-				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				Profit = (a.SenderScotchCost ?? 0) + (a.SenderFactureCost ?? 0) + (a.SenderPickupCost ?? 0)
-						 + CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
-				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
-				SenderRate = a.SenderRate
-			}).ToArray();
-		}
-
 		private static SenderCalculationAwbInfo[] GetInfo(
 			IEnumerable<SenderCalculationGroup> groups,
 			IEnumerable<ApplicationExtendedData> items,
@@ -153,7 +125,8 @@ namespace Alicargo.Services.Calculation
 					FlightCost = g.FlightCost,
 					TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
 					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
-					TotalFactureCost = rows.Sum(x => x.SenderFactureCost ?? 0),
+					TotalFactureCost = rows.Sum(x => x.OriginalFactureCost ?? 0),
+					TotalFactureCostEx = rows.Sum(x => x.OriginalFactureCostEx ?? 0),
 					TotalPickupCost = rows.Sum(x => x.SenderPickupCost ?? 0),
 					CostPerKgOfSender = null,
 					FlightCostPerKg = null
@@ -161,13 +134,42 @@ namespace Alicargo.Services.Calculation
 
 				var totalWeight = (decimal)rows.Sum(x => x.Weight ?? 0);
 
-				if (totalWeight != 0)
+				if(totalWeight != 0)
 				{
 					info.CostPerKgOfSender = info.TotalSenderRate / totalWeight;
 					info.FlightCostPerKg = info.FlightCost / totalWeight;
 				}
 
 				return info;
+			}).ToArray();
+		}
+
+		private SenderCalculationItem[] GetItems(ApplicationExtendedData[] applications)
+		{
+			var appIds = applications.Select(x => x.Id).ToArray();
+			var nics = _clients.GetNicByApplications(appIds);
+
+			return applications.Select(a => new SenderCalculationItem
+			{
+				ApplicationId = a.Id,
+				Value = a.Value,
+				Count = a.Count,
+				ClientNic = nics[a.Id],
+				Factory = a.FactoryName,
+				FactureCost = a.OriginalFactureCost,
+				FactureCostEx = a.OriginalFactureCostEx,
+				Invoice = a.Invoice,
+				Mark = a.MarkName,
+				SenderScotchCost = a.SenderScotchCost,
+				ValueCurrencyId = a.CurrencyId,
+				Weight = a.Weight,
+				PickupCost = a.SenderPickupCost,
+				AirWaybillId = a.AirWaybillId,
+				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
+				Profit = (a.SenderScotchCost ?? 0) + (a.OriginalFactureCost ?? 0) + (a.SenderPickupCost ?? 0)
+				         + CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
+				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
+				SenderRate = a.SenderRate
 			}).ToArray();
 		}
 	}

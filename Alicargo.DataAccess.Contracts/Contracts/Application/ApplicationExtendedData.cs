@@ -108,9 +108,13 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string MarkName { get; set; }
 
 
-		public decimal? FactureCost { get; set; }
+		public decimal? AdjustedFactureCost { get; set; }
 
-		public decimal? SenderFactureCost { get; set; }
+		public decimal? AdjustedFactureCostEx { get; set; }
+
+		public decimal? OriginalFactureCost { get; set; }
+
+		public decimal? OriginalFactureCostEx { get; set; }
 
 		public decimal? ScotchCost { get; set; }
 

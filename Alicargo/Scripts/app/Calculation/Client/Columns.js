@@ -50,6 +50,7 @@
 				{ field: "ScotchCost", title: $l.Entities_ScotchCost, attributes: texRight },
 				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: texRight },
 				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: texRight },
+				{ field: "FactureCostEx", title: $l.Entities_FactureCostEx, attributes: texRight },
 				{ field: "PickupCost", title: $l.Entities_PickupCost, attributes: texRight },
 				{ field: "TransitCost", title: $l.Entities_TransitCost, attributes: texRight },
 				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: { "class": "text-bold" }, attributes: texRight, footerAttributes: texRight }

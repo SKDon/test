@@ -9,9 +9,9 @@ namespace Alicargo.Core.Event
 {
 	public sealed class ApplicationEditorWithEvent : IApplicationEditor
 	{
-		private readonly IEventFacade _events;
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationEditor _editor;
+		private readonly IEventFacade _events;
 
 		public ApplicationEditorWithEvent(
 			IEventFacade events,
@@ -104,6 +104,11 @@ namespace Alicargo.Core.Event
 		public void SetTariffPerKg(long applicationId, decimal? tariffPerKg)
 		{
 			_editor.SetTariffPerKg(applicationId, tariffPerKg);
+		}
+
+		public void SetFactureCostExEdited(long id, decimal? factureCostEx)
+		{
+			_editor.SetFactureCostExEdited(id, factureCostEx);
 		}
 
 		public void SetPickupCostEdited(long applicationId, decimal? pickupCost)

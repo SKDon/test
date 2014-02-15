@@ -37,8 +37,10 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public ClassType? Class { get; set; }
 
 		public decimal? FactureCost { get; set; }
+		public decimal? FactureCostEx { get; set; }
 		public decimal? PickupCost { get; set; }
 		public decimal? FactureCostEdited { get; set; }
+		public decimal? FactureCostExEdited { get; set; }
 		public decimal? TransitCostEdited { get; set; }
 		public decimal? ScotchCostEdited { get; set; }
 		public decimal? PickupCostEdited { get; set; }

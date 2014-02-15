@@ -13,6 +13,7 @@
 	[ScotchCost]			MONEY			NOT NULL,
 	[InsuranceCost]			MONEY			NOT NULL,
 	[FactureCost]			MONEY			NOT NULL,
+	[FactureCostEx]			MONEY			NOT NULL,
 	[TransitCost]			MONEY			NOT NULL,
 	[PickupCost]			MONEY			NOT NULL,
 	[FactoryName]			NVARCHAR(320)	NOT NULL,

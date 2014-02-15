@@ -19,13 +19,13 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IStateConfig _config;
+		private readonly IApplicationEditor _editor;
 		private readonly IForwarderService _forwarders;
 		private readonly IIdentityService _identity;
 		private readonly ISenderService _senders;
 		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IApplicationEditor _editor;
 
 		public AdminApplicationManager(
 			IApplicationRepository applications,
@@ -87,9 +87,11 @@ namespace Alicargo.Services.Application
 				PickupCost = model.PickupCost,
 				TransitCost = model.TransitCost,
 				FactureCost = model.FactureCost,
+				FactureCostEx = model.FactureCostEx,
 				TariffPerKg = model.TariffPerKg,
 				ScotchCostEdited = model.ScotchCostEdited,
 				FactureCostEdited = model.FactureCostEdited,
+				FactureCostExEdited = model.FactureCostExEdited,
 				TransitCostEdited = model.TransitCostEdited,
 				PickupCostEdited = model.PickupCostEdited,
 				SenderId = GetSenderId(model.SenderId, model.CountryId, null),
@@ -124,10 +126,12 @@ namespace Alicargo.Services.Application
 			data.MarkName = model.MarkName;
 			data.MethodOfDelivery = model.MethodOfDelivery;
 			data.FactureCost = model.FactureCost;
+			data.FactureCostEx = model.FactureCostEx;
 			data.TransitCost = model.TransitCost;
 			data.PickupCost = model.PickupCost;
 			data.TariffPerKg = model.TariffPerKg;
 			data.FactureCostEdited = model.FactureCostEdited;
+			data.FactureCostExEdited = model.FactureCostExEdited;
 			data.TransitCostEdited = model.TransitCostEdited;
 			data.PickupCostEdited = model.PickupCostEdited;
 			data.ScotchCostEdited = model.ScotchCostEdited;
@@ -217,6 +221,18 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetFactureCostEdited(id, factureCost);
+
+			_unitOfWork.SaveChanges();
+		}
+
+		public void SetFactureCostExEdited(long id, decimal? factureCostEx)
+		{
+			if(!_identity.IsInRole(RoleType.Admin))
+			{
+				throw new AccessForbiddenException("Edited value can be defined only be admin");
+			}
+
+			_editor.SetFactureCostExEdited(id, factureCostEx);
 
 			_unitOfWork.SaveChanges();
 		}

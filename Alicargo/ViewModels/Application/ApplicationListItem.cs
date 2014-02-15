@@ -163,6 +163,8 @@ namespace Alicargo.ViewModels.Application
 
 		public decimal? FactureCost { get; set; }
 
+		public decimal? FactureCostEx { get; set; }
+
 		public decimal? ScotchCost { get; set; }
 
 		public string SenderName { get; set; }

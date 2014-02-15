@@ -5,7 +5,6 @@ using Alicargo.Core.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
@@ -92,6 +91,7 @@ namespace Alicargo.Services.Calculation
 					TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
 					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
 					TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
+					TotalFactureCostEx = rows.Sum(x => x.FactureCostEx ?? 0),
 					TotalPickupCost = rows.Sum(x => x.PickupCost ?? 0),
 					TotalTransitCost = rows.Sum(x => x.TransitCost ?? 0),
 					TotalInsuranceCost = rows.Sum(x => CalculationHelper.GetInsuranceCost(x.Value)),
@@ -152,6 +152,7 @@ namespace Alicargo.Services.Calculation
 				ClientNic = nics[a.Id],
 				Factory = a.FactoryName,
 				FactureCost = a.FactureCostEdited ?? a.FactureCost,
+				FactureCostEx = a.FactureCostExEdited ?? a.FactureCostEx,
 				Invoice = a.Invoice,
 				Mark = a.MarkName,
 				ScotchCost = a.ScotchCostEdited ?? CalculationHelper.GetSenderScotchCost(tariffs, a.SenderId, a.Count),

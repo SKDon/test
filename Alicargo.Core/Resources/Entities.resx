@@ -337,7 +337,7 @@
     <value>Flight cost (€)</value>
   </data>
   <data name="FactureCost" xml:space="preserve">
-    <value>Facture (€)</value>
+    <value>Facture T1(€)</value>
   </data>
   <data name="Insurance" xml:space="preserve">
     <value>Insurance</value>
@@ -397,7 +397,7 @@
     <value>Profit (total, €)</value>
   </data>
   <data name="FactureCostEdited" xml:space="preserve">
-    <value>Facture* (€)</value>
+    <value>Facture T1* (€)</value>
   </data>
   <data name="ScotchCostEdited" xml:space="preserve">
     <value>Tape* (€)</value>
@@ -479,5 +479,11 @@
   </data>
   <data name="Draw" xml:space="preserve">
     <value>Draw</value>
+  </data>
+  <data name="FactureCostEx" xml:space="preserve">
+    <value>Facture EX-1(€)</value>
+  </data>
+  <data name="FactureCostExEdited" xml:space="preserve">
+    <value>Facture EX-1* (€)</value>
   </data>
 </root>

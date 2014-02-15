@@ -14,11 +14,13 @@
 
 		public decimal TotalFactureCost { get; set; }
 
+		public decimal TotalFactureCostEx { get; set; }
+
 		public decimal TotalPickupCost { get; set; }
 
 		public decimal TotalOfSender
 		{
-			get { return TotalSenderRate + TotalScotchCost + TotalFactureCost + TotalPickupCost; }
+			get { return TotalSenderRate + TotalScotchCost + TotalFactureCost + TotalPickupCost + TotalFactureCostEx; }
 		}
 
 		public decimal Total

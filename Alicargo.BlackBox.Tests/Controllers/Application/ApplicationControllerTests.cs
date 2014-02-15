@@ -118,13 +118,13 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel, ApplicationExtendedData data)
 		{
 			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
-				.Excluding(x => x.FactureCost)
+				.Excluding(x => x.AdjustedFactureCost)
 				.Excluding(x => x.TransitCost)
 				.Excluding(x => x.PickupCost)
 				.Excluding(x => x.CarrierId)
 				.Excluding(x => x.CarrierName)
 				.Excluding(x => x.ScotchCost));
-			data.FactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
+			data.AdjustedFactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
 			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);
 			data.PickupCost.ShouldBeEquivalentTo(model.PickupCostEdited);
 			data.ScotchCost.ShouldBeEquivalentTo(model.ScotchCostEdited);
