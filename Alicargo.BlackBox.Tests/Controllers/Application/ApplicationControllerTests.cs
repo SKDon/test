@@ -119,12 +119,14 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 		{
 			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
 				.Excluding(x => x.AdjustedFactureCost)
+				.Excluding(x => x.AdjustedFactureCostEx)
 				.Excluding(x => x.TransitCost)
 				.Excluding(x => x.PickupCost)
 				.Excluding(x => x.CarrierId)
 				.Excluding(x => x.CarrierName)
 				.Excluding(x => x.ScotchCost));
 			data.AdjustedFactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
+			data.AdjustedFactureCostEx.ShouldBeEquivalentTo(model.FactureCostExEdited);
 			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);
 			data.PickupCost.ShouldBeEquivalentTo(model.PickupCostEdited);
 			data.ScotchCost.ShouldBeEquivalentTo(model.ScotchCostEdited);

@@ -33,6 +33,7 @@ namespace Alicargo.Core.Calculation
 				   + (application.ScotchCostEdited ?? GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
 				   + GetInsuranceCost(application.Value)
 				   + (application.FactureCostEdited ?? application.FactureCost ?? 0)
+				   + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
 				   + (application.PickupCostEdited ?? application.PickupCost ?? 0)
 				   + (application.TransitCostEdited ?? application.TransitCost ?? 0);
 		}
@@ -43,6 +44,7 @@ namespace Alicargo.Core.Calculation
 				   + (application.ScotchCost ?? 0)
 				   + GetInsuranceCost(application.Value)
 				   + (application.AdjustedFactureCost ?? 0)
+				   + (application.AdjustedFactureCostEx ?? 0)
 				   + (application.PickupCost ?? 0)
 				   + (application.TransitCost ?? 0);
 		}

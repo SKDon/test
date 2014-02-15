@@ -46,7 +46,6 @@ namespace Alicargo.Core.Calculation
 			var tariffPerKg = application.TariffPerKg ?? 0;
 			var insurance = application.Value/CalculationHelper.InsuranceRate;
 			var scotch = GetTapeCost(application);
-			var facture = application.FactureCostEdited ?? application.FactureCost ?? 0;
 			var transitCost = application.TransitCostEdited ?? application.TransitCost ?? 0;
 			var pickupCost = application.PickupCostEdited ?? application.PickupCost ?? 0;
 
@@ -55,7 +54,8 @@ namespace Alicargo.Core.Calculation
 				AirWaybillDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(awb)),
 				ApplicationDisplay = ApplicationHelper.GetDisplayNumber(application.Id, application.Count),
 				ClientId = application.ClientId,
-				FactureCost = facture,
+				FactureCost = application.FactureCostEdited ?? application.FactureCost ?? 0,
+				FactureCostEx = application.FactureCostExEdited ?? application.FactureCostEx ?? 0,
 				InsuranceCost = insurance,
 				MarkName = application.MarkName,
 				FactoryName = application.FactoryName,

@@ -64,10 +64,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			expected.ShouldBeEquivalentTo(actual,
 				options => options.ExcludingMissingProperties()
 					.Excluding(x => x.FactureCost)
+					.Excluding(x => x.FactureCostEx)
 					.Excluding(x => x.PickupCost)
 					.Excluding(x => x.TransitCost));
 
 			actual.AdjustedFactureCost.ShouldBeEquivalentTo(expected.FactureCostEdited);
+			actual.AdjustedFactureCostEx.ShouldBeEquivalentTo(expected.FactureCostExEdited);
 			actual.PickupCost.ShouldBeEquivalentTo(expected.PickupCostEdited);
 			actual.TransitCost.ShouldBeEquivalentTo(expected.TransitCostEdited);
 		}
