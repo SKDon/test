@@ -12,22 +12,25 @@ CREATE PROCEDURE [dbo].[sp_RestoreDatabase]
 	@oldDb NVARCHAR(50),
 	@fromFile NVARCHAR(200),
 	@dataFolder NVARCHAR(200)
-AS
 
-BEGIN
- 
+AS BEGIN
 	SET NOCOUNT ON;
 
-	DECLARE @sqlRestoreDb NVARCHAR(1000) 
+	DECLARE @sqlRestoreDb NVARCHAR(1000)
 		= N'RESTORE DATABASE ' + @newDb + N' FROM '
 		+ N'DISK = N''' + @fromFile + N''' WITH FILE = 1, '
 		+ N'MOVE N''' + @oldDb + N''' TO N''' + @dataFolder +  @newDb + N'.mdf'', '
 		+ N'MOVE N''' + @oldDb + N'_log'' TO N''' + @dataFolder + @newDb + N'_log.ldf'', '
-		+ N'NOUNLOAD, REPLACE, STATS = 5;'
-		+ N'ALTER DATABASE ' + @newDb + N' MODIFY FILE (NAME=N'''+ @oldDb + N''', NEWNAME=N''' + @newDb + N''');'
-		+ N'ALTER DATABASE ' + @newDb + N' MODIFY FILE (NAME=N'''+ @oldDb + N'_log'', NEWNAME=N''' + @newDb + N'_log'');'
-
+		+ N'NOUNLOAD, REPLACE, STATS = 5;';
 	EXEC(@sqlRestoreDb)	
 
-END
+	IF @newDb <> @oldDb BEGIN
+		DECLARE @sqlModifyName NVARCHAR(1000)
+			= N'ALTER DATABASE ' + @newDb + N' MODIFY FILE (NAME=N'''+ @oldDb + N''', NEWNAME=N''' + @newDb + N''');'
+			+ N'ALTER DATABASE ' + @newDb + N' MODIFY FILE (NAME=N'''+ @oldDb + N'_log'', NEWNAME=N''' + @newDb + N'_log'');'
 
+		EXEC(@sqlModifyName)	
+	END
+
+END
+GO

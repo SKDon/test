@@ -37,11 +37,9 @@
 	[FactoryEmail]			NVARCHAR(320)		NULL, 
 	[MarkName]				NVARCHAR(320)		NOT NULL, 
 
-	[FactureCost]			MONEY				NULL,
-	[FactureCostEx]			MONEY				NULL,
+	[FactureCost]			MONEY				NULL,	
 	[PickupCost]			MONEY				NULL,
 	[FactureCostEdited]		MONEY				NULL,
-	[FactureCostExEdited]	MONEY				NULL,
 	[ScotchCostEdited]		MONEY				NULL,
 	[PickupCostEdited]		MONEY				NULL,
 	[TariffPerKg]			MONEY				NULL,
@@ -49,6 +47,8 @@
 	[TransitCost]			MONEY				NULL,
 	[TransitCostEdited]		MONEY				NULL,
 	[ForwarderId]			BIGINT				NOT NULL,
+	[FactureCostEx]			MONEY				NULL,
+	[FactureCostExEdited]	MONEY				NULL,
 	[InsuranceRate]			REAL				NOT NULL CONSTRAINT [DF_Application_InsuranceRate] DEFAULT 0.01,
 	[InsuranceRateForClient] REAL				NOT NULL CONSTRAINT [DF_Application_InsuranceRateForClient] DEFAULT 0.01,
 	
