@@ -112,7 +112,7 @@ namespace Alicargo.Services.Calculation
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
 				Profit = CalculationHelper.GetProfit(a),
-				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
+				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRateForClient),
 				ClassName = a.ClassId.HasValue
 					? ((ClassType)a.ClassId.Value).ToLocalString()
 					: ""

@@ -36,15 +36,15 @@ namespace Alicargo.Core.Calculation
 		{
 			var application = _applications.Get(applicationId);
 
-			if (application.AirWaybillId == null)
+			if(application.AirWaybillId == null)
 				throw new InvalidOperationException("For calculation an air waybill should be presented. Applicaiton id: "
-				                                    + application.Id);
+													+ application.Id);
 
 			var awb = _awbs.Get(application.AirWaybillId.Value).First();
 
 			var weight = application.Weight ?? 0;
 			var tariffPerKg = application.TariffPerKg ?? 0;
-			var insurance = application.Value/CalculationHelper.InsuranceRate;
+			var insurance = application.Value * (decimal)(application.InsuranceRate);
 			var scotch = GetTapeCost(application);
 			var transitCost = application.TransitCostEdited ?? application.TransitCost ?? 0;
 			var pickupCost = application.PickupCostEdited ?? application.PickupCost ?? 0;
@@ -79,13 +79,13 @@ namespace Alicargo.Core.Calculation
 		public void CancelCalculatation(long applicationId)
 		{
 			_calculations.RemoveByApplication(applicationId);
-		}		
+		}
 
 		private decimal GetTapeCost(ApplicationData application)
 		{
 			var scotch = application.ScotchCostEdited;
 
-			if (!scotch.HasValue)
+			if(!scotch.HasValue)
 			{
 				var tariffs = _senders.GetTariffs(application.SenderId);
 

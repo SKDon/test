@@ -128,6 +128,10 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public decimal? PickupCost { get; set; }
 
+		public float InsuranceRate { get; set; }
+
+		public float InsuranceRateForClient { get; set; }
+
 
 		public long SenderId { get; set; }
 

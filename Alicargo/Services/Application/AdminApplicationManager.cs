@@ -96,7 +96,9 @@ namespace Alicargo.Services.Application
 				PickupCostEdited = model.PickupCostEdited,
 				SenderId = GetSenderId(model.SenderId, model.CountryId, null),
 				ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, null),
-				SenderRate = null
+				SenderRate = null,
+				InsuranceRate = model.InsuranceRate / 100,
+				InsuranceRateForClient = model.InsuranceRateForClient / 100
 			};
 
 			return _editor.Add(data);
@@ -137,6 +139,8 @@ namespace Alicargo.Services.Application
 			data.ScotchCostEdited = model.ScotchCostEdited;
 			data.SenderId = GetSenderId(model.SenderId, model.CountryId, data.SenderId);
 			data.ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, data.ForwarderId);
+			data.InsuranceRate = model.InsuranceRate / 100;
+			data.InsuranceRateForClient = model.InsuranceRateForClient / 100;
 
 			_editor.Update(data);
 		}

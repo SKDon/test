@@ -483,4 +483,10 @@
   <data name="FactureCostExEdited" xml:space="preserve">
     <value>Фактура EX-1* (€)</value>
   </data>
+  <data name="InsuranceRate" xml:space="preserve">
+    <value>Страховка (%)</value>
+  </data>
+  <data name="InsuranceRateForClient" xml:space="preserve">
+    <value>Страховка у клиента (%)</value>
+  </data>
 </root>

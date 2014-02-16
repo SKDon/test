@@ -15,21 +15,21 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class SenderApplicationController : Controller
 	{
-		private readonly ISenderApplicationManager _senderApplicationManager;
-		private readonly IClientRepository _clientRepository;
+		private readonly ISenderApplicationManager _manager;
+		private readonly IClientRepository _clients;
 		private readonly ICountryRepository _countries;
 		private readonly IIdentityService _identity;
 		private readonly ISenderRepository _senders;
 
 		public SenderApplicationController(
-			ISenderApplicationManager senderApplicationManager,
-			IClientRepository clientRepository,
+			ISenderApplicationManager manager,
+			IClientRepository clients,
 			IIdentityService identity,
 			ICountryRepository countries,
 			ISenderRepository senders)
 		{
-			_senderApplicationManager = senderApplicationManager;
-			_clientRepository = clientRepository;
+			_manager = manager;
+			_clients = clients;
 			_identity = identity;
 			_countries = countries;
 			_senders = senders;
@@ -68,7 +68,7 @@ namespace Alicargo.Controllers.Application
 				throw new EntityNotFoundException("Current user is not sender.");
 			}
 
-			_senderApplicationManager.Add(model, clientId, senderId.Value);
+			_manager.Add(model, clientId, senderId.Value);
 
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
@@ -77,7 +77,7 @@ namespace Alicargo.Controllers.Application
 		[Access(RoleType.Sender)]
 		public virtual ViewResult Edit(long id)
 		{
-			var model = _senderApplicationManager.Get(id);
+			var model = _manager.Get(id);
 
 			BindBag(id, model.Count);
 
@@ -95,14 +95,14 @@ namespace Alicargo.Controllers.Application
 				return View(model);
 			}
 
-			_senderApplicationManager.Update(id, model);
+			_manager.Update(id, model);
 
 			return RedirectToAction(MVC.SenderApplication.Edit(id));
 		}
 
 		private void BindBag(long applicationId, int? count)
 		{
-			var nic = _clientRepository.GetNicByApplications(applicationId).First();
+			var nic = _clients.GetNicByApplications(applicationId).First();
 			ViewBag.ApplicationId = applicationId;
 			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId, count);
 			ViewBag.Nic = nic;
@@ -111,7 +111,7 @@ namespace Alicargo.Controllers.Application
 
 		private void BindBag(long clientId)
 		{
-			var clientData = _clientRepository.Get(clientId);
+			var clientData = _clients.Get(clientId);
 			ViewBag.Nic = clientData.Nic;
 			BindCountries();
 		}

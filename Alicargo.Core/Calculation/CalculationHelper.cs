@@ -5,8 +5,6 @@ namespace Alicargo.Core.Calculation
 {
 	public static class CalculationHelper
 	{
-		public const decimal InsuranceRate = 100;
-
 		public static decimal GetTotalTariffCost(decimal? tariffPerKg, float? weight)
 		{
 			return (tariffPerKg ?? 0) * (decimal)(weight ?? 0);
@@ -17,9 +15,9 @@ namespace Alicargo.Core.Calculation
 			return (senderRate ?? 0) * (decimal)(weight ?? 0);
 		}
 
-		public static decimal GetInsuranceCost(decimal value)
+		public static decimal GetInsuranceCost(decimal value, float insuranceRate)
 		{
-			return value / InsuranceRate;
+			return value * (decimal)insuranceRate;
 		}
 
 		public static decimal? GetSenderScotchCost(IReadOnlyDictionary<long, decimal> tariffs, long? senderId, int? count)
@@ -31,7 +29,7 @@ namespace Alicargo.Core.Calculation
 		{
 			return GetTotalTariffCost(application.TariffPerKg, application.Weight)
 				   + (application.ScotchCostEdited ?? GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
-				   + GetInsuranceCost(application.Value)
+				   + GetInsuranceCost(application.Value, application.InsuranceRate)
 				   + (application.FactureCostEdited ?? application.FactureCost ?? 0)
 				   + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
 				   + (application.PickupCostEdited ?? application.PickupCost ?? 0)
@@ -42,7 +40,7 @@ namespace Alicargo.Core.Calculation
 		{
 			return GetTotalTariffCost(application.TariffPerKg, application.Weight)
 				   + (application.ScotchCost ?? 0)
-				   + GetInsuranceCost(application.Value)
+				   + GetInsuranceCost(application.Value, application.InsuranceRate)
 				   + (application.AdjustedFactureCost ?? 0)
 				   + (application.AdjustedFactureCostEx ?? 0)
 				   + (application.PickupCost ?? 0)

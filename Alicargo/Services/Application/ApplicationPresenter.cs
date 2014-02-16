@@ -72,7 +72,9 @@ namespace Alicargo.Services.Application
 				PickupCostEdited = data.PickupCostEdited,
 				SenderId = data.SenderId,
 				ForwarderId = data.ForwarderId,
-				CarrierId = transit.CarrierId
+				CarrierId = transit.CarrierId,
+				InsuranceRate = data.InsuranceRate * 100,
+				InsuranceRateForClient = data.InsuranceRateForClient * 100
 			};
 		}
 

@@ -229,6 +229,8 @@
 			<Column Name="PickupCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="TariffPerKg" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="SenderRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+			<Column Name="InsuranceRate" Type="System.Single" DbType="Real" CanBeNull="false" />
+			<Column Name="InsuranceRateForClient" Type="System.Single" DbType="Real" CanBeNull="false" />
 			<Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="TransitCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />

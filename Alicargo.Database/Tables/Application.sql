@@ -49,6 +49,8 @@
 	[TransitCost]			MONEY				NULL,
 	[TransitCostEdited]		MONEY				NULL,
 	[ForwarderId]			BIGINT				NOT NULL,
+	[InsuranceRate]			REAL				NOT NULL CONSTRAINT [DF_Application_InsuranceRate] DEFAULT 0.01,
+	[InsuranceRateForClient] REAL				NOT NULL CONSTRAINT [DF_Application_InsuranceRateForClient] DEFAULT 0.01,
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),

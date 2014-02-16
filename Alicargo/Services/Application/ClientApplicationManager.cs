@@ -132,7 +132,9 @@ namespace Alicargo.Services.Application
 				PickupCostEdited = null,
 				SenderId = _senders.GetByCountryOrAny(model.CountryId, null),
 				SenderRate = null,
-				ForwarderId = forwarderId
+				ForwarderId = forwarderId,
+				InsuranceRate = _applications.GetDefaultInsuranceRate(),
+				InsuranceRateForClient = _applications.GetDefaultInsuranceRate()
 			};
 		}
 

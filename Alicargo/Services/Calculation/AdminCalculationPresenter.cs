@@ -94,7 +94,7 @@ namespace Alicargo.Services.Calculation
 					TotalFactureCostEx = rows.Sum(x => x.FactureCostEx ?? 0),
 					TotalPickupCost = rows.Sum(x => x.PickupCost ?? 0),
 					TotalTransitCost = rows.Sum(x => x.TransitCost ?? 0),
-					TotalInsuranceCost = rows.Sum(x => CalculationHelper.GetInsuranceCost(x.Value)),
+					TotalInsuranceCost = rows.Sum(x => CalculationHelper.GetInsuranceCost(x.Value, x.InsuranceRate)),
 					BrokerCostPerKg = null,
 					CostPerKgOfSender = null,
 					CustomCostPerKg = null,
@@ -161,12 +161,12 @@ namespace Alicargo.Services.Calculation
 				TransitCost = a.TransitCostEdited ?? a.TransitCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weight = a.Weight,
-				PickupCost = a.PickupCostEdited ?? a.PickupCost, // ReSharper disable PossibleInvalidOperationException
-				AirWaybillId = a.AirWaybillId.Value, // ReSharper restore PossibleInvalidOperationException
+				PickupCost = a.PickupCostEdited ?? a.PickupCost,
+				AirWaybillId = a.AirWaybillId.Value,
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
 				Profit = CalculationHelper.GetProfit(a, tariffs),
-				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value),
+				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),
 				ClassId = a.Class

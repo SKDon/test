@@ -126,7 +126,11 @@ namespace Alicargo.Controllers.Application
 		{
 			BindBag(clientId, null);
 
-			return View(new ApplicationAdminModel());
+			return View(new ApplicationAdminModel
+			{
+				InsuranceRate = _applications.GetDefaultInsuranceRate() * 100,
+				InsuranceRateForClient = _applications.GetDefaultInsuranceRate() * 100
+			});
 		}
 
 		[HttpPost]

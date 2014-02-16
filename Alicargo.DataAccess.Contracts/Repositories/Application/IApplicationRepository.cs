@@ -18,6 +18,8 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 
 		long GetClientId(long id);
 
+		float GetDefaultInsuranceRate();
+
 		ApplicationExtendedData GetExtendedData(long id);
 
 		// todo: 1. remove hasCalculation parameter from List and Count methods

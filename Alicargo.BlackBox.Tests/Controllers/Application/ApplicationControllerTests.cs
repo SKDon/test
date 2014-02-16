@@ -85,14 +85,18 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			var transitModel = _fixture.Create<TransitEditModel>();
 			transitModel.CityId = TestConstants.TestCityId1;
 			var old = _applicationRepository.List(new[] { TestConstants.DefaultStateId },
-				new[] { new Order { OrderType = OrderType.Id } }, take: 1).First();
+				new[] { new Order { OrderType = OrderType.Id } }, 1).First();
 
 			var result = _controller.Edit(old.Id, model, transitModel);
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 			var data = _applicationRepository.Get(old.Id);
-			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
+
+			data.ShouldBeEquivalentTo(model, options =>
+				options.ExcludingMissingProperties().Excluding(x => x.InsuranceRate).Excluding(x => x.InsuranceRateForClient));
 			data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);
+			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
+			data.InsuranceRateForClient.ShouldBeEquivalentTo(model.InsuranceRateForClient / 100);
 		}
 
 		private void Validate(ActionResult result, ClientData clientData, ApplicationAdminModel model,
@@ -110,12 +114,13 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 					Desc = true,
 					OrderType = OrderType.Id
 				}
-			}, take: 1, clientId: clientData.ClientId).First();
+			}, 1, clientId: clientData.ClientId).First();
 
 			Validate(clientData, model, transitModel, data);
 		}
 
-		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel, ApplicationExtendedData data)
+		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
+			ApplicationExtendedData data)
 		{
 			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
 				.Excluding(x => x.AdjustedFactureCost)
@@ -124,7 +129,11 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				.Excluding(x => x.PickupCost)
 				.Excluding(x => x.CarrierId)
 				.Excluding(x => x.CarrierName)
+				.Excluding(x => x.InsuranceRateForClient)
+				.Excluding(x => x.InsuranceRate)
 				.Excluding(x => x.ScotchCost));
+			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
+			data.InsuranceRateForClient.ShouldBeEquivalentTo(model.InsuranceRateForClient / 100);
 			data.AdjustedFactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
 			data.AdjustedFactureCostEx.ShouldBeEquivalentTo(model.FactureCostExEdited);
 			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);

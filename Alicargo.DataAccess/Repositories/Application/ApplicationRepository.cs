@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -94,7 +95,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				PickupCost = x.PickupCostEdited ?? x.PickupCost,
 				SenderPickupCost = x.PickupCost,
 				ForwarderName = x.Forwarder.Name,
-				ForwarderId = x.ForwarderId
+				ForwarderId = x.ForwarderId,
+				InsuranceRate = x.InsuranceRate,
+				InsuranceRateForClient = x.InsuranceRateForClient
 			};
 
 			_selector = x => new ApplicationData
@@ -139,11 +142,15 @@ namespace Alicargo.DataAccess.Repositories.Application
 				ScotchCostEdited = x.ScotchCostEdited,
 				PickupCostEdited = x.PickupCostEdited,
 				SenderId = x.SenderId,
-				ForwarderId = x.ForwarderId
+				ForwarderId = x.ForwarderId,
+				InsuranceRate = x.InsuranceRate,
+				InsuranceRateForClient = x.InsuranceRateForClient
 			};
 		}
 
-		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, long? carrierId = null, long? forwarderId = null, long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, bool? hasCalculation = null)
+		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, long? carrierId = null,
+			long? forwarderId = null, long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null,
+			bool? hasCalculation = null)
 		{
 			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
 				forwarderId, carrierId);
@@ -151,7 +158,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return applications.LongCount();
 		}
 
-		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0, long? clientId = null, long? senderId = null, long? carrierId = null, long? forwarderId = null, long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, bool? hasCalculation = null)
+		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
+			long? clientId = null, long? senderId = null, long? carrierId = null, long? forwarderId = null,
+			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, bool? hasCalculation = null)
 		{
 			var applications = Where(stateIds, clientId, senderId, hasCalculation, cargoReceivedStateId, cargoReceivedDaysToShow,
 				forwarderId, carrierId);
@@ -179,6 +188,11 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
+		public float GetDefaultInsuranceRate()
+		{
+			return (float)ConfigurationManager.AppSettings["DefaultInsuranceRate"].ToDouble();
+		}
+
 		public ApplicationExtendedData GetExtendedData(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id).Select(_extendedSelector).FirstOrDefault();
@@ -196,7 +210,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToDictionary(x => x.ApplicationHistoryId, x => x.Id);
 		}
 
-		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation, long? cargoReceivedStateId, int? cargoReceivedDaysToShow, long? forwarderId, long? carrierId)
+		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation,
+			long? cargoReceivedStateId, int? cargoReceivedDaysToShow, long? forwarderId, long? carrierId)
 		{
 			var applications = stateIds != null
 				? _context.Applications.Where(x => stateIds.Contains(x.StateId))

@@ -117,6 +117,15 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context.SubmitChanges();
 		}
 
+		private void Update(long id, Action<DbContext.Application> action)
+		{
+			var application = _context.Applications.First(x => x.Id == id);
+
+			action(application);
+
+			_context.SubmitChanges();
+		}
+
 		private static void Map(ApplicationData from, DbContext.Application to)
 		{
 			if(to.Id == 0)
@@ -167,15 +176,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.PickupCostEdited = from.PickupCostEdited;
 			to.ScotchCostEdited = from.ScotchCostEdited;
 			to.SenderRate = from.SenderRate;
-		}
-
-		private void Update(long id, Action<DbContext.Application> action)
-		{
-			var application = _context.Applications.First(x => x.Id == id);
-
-			action(application);
-
-			_context.SubmitChanges();
+			to.InsuranceRate = from.InsuranceRate;
+			to.InsuranceRateForClient = from.InsuranceRateForClient;
 		}
 	}
 }

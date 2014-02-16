@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Utilities.Localization;
@@ -107,5 +108,13 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
 		public decimal? TariffPerKg { get; set; }
+
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "InsuranceRate")]
+		public float InsuranceRate { get; set; }
+
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "InsuranceRateForClient")]
+		public float InsuranceRateForClient { get; set; }
 	}
 }

@@ -74,7 +74,11 @@ namespace Alicargo.Services.Application
 		{
 			_senders.CheckCountry(creatorSenderId, model.CountryId);
 
-			var application = new ApplicationData();
+			var application = new ApplicationData
+			{
+				InsuranceRate = _applications.GetDefaultInsuranceRate(),
+				InsuranceRateForClient = _applications.GetDefaultInsuranceRate()
+			};
 
 			Map(model, application);
 
