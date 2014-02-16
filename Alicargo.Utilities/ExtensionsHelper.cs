@@ -38,12 +38,17 @@ namespace Alicargo.Utilities
 
 		public static int ToInt(this string @string)
 		{
-			return int.Parse(@string, NumberStyles.AllowLeadingSign);
+			return int.Parse(@string, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
+		}
+
+		public static double ToDouble(this string @string)
+		{
+			return double.Parse(@string, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
 		}
 
 		public static long ToLong(this string @string)
 		{
-			return long.Parse(@string, NumberStyles.AllowLeadingSign);
+			return long.Parse(@string, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
 		}
 	}
 }
