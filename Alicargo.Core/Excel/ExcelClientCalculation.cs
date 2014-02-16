@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using Alicargo.Core.Contracts.Calculation;
-using Alicargo.Core.Excel;
 using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.User;
@@ -13,7 +12,7 @@ using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace Alicargo.Core.Calculation
+namespace Alicargo.Core.Excel
 {
 	public sealed class ExcelClientCalculation : IExcelClientCalculation
 	{
@@ -44,48 +43,6 @@ namespace Alicargo.Core.Calculation
 			var history = _balance.GetHistory(clientId).Where(x => !x.IsCalculation).ToArray();
 
 			return Get(client, balance, calculations, history);
-		}
-
-		private static MemoryStream Get(ClientData client, decimal balance, CalculationData[] calculations,
-			ClientBalanceHistoryItem[] history)
-		{
-			var stream = new MemoryStream();
-
-			using(var pck = new ExcelPackage())
-			{
-				var excel = pck.Workbook.Worksheets.Add(Entities.Application);
-				excel.Cells.Style.Font.Name = ExcelConstants.DefaultFontName;
-				excel.Cells.Style.Font.Size = ExcelConstants.DefaultFontSize;
-				excel.Cells.Style.Numberformat.Format = "0.00";
-
-				var columnCount = DrawHeader(excel, balance);
-
-				var iRow = DrawRows(client, calculations, history, columnCount, 3, excel);
-
-				AdjustExcel(columnCount, excel, iRow);
-
-				pck.SaveAs(stream);
-			}
-
-			stream.Position = 0;
-
-			return stream;
-		}
-
-		private static int DrawRows(ClientData client, CalculationData[] calculations,
-			ClientBalanceHistoryItem[] history, int columnCount, int iRow, ExcelWorksheet excel)
-		{
-			var drawables = DrawableMapper.Get(history, excel, client, columnCount)
-				.Union(DrawableMapper.Get(calculations, excel, client, columnCount))
-				.OrderByDescending(x => x.Position)
-				.ToArray();
-
-			foreach(var drawable in drawables)
-			{
-				iRow = drawable.Draw(iRow);
-			}
-
-			return iRow;
 		}
 
 		private static void AdjustExcel(int count, ExcelWorksheet excel, int iRow)
@@ -132,7 +89,7 @@ namespace Alicargo.Core.Calculation
 			balanceCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 			if(balance < 0)
 			{
-				balanceCell.Style.Font.Color.SetColor(Color.Red);	
+				balanceCell.Style.Font.Color.SetColor(Color.Red);
 			}
 
 			var headerCells = excel.Cells[1, 1, iRow, iColumn + 1];
@@ -144,6 +101,48 @@ namespace Alicargo.Core.Calculation
 			excel.Row(2).Height = ExcelConstants.DefaultRowHeight;
 
 			return iColumn;
+		}
+
+		private static int DrawRows(ClientData client, CalculationData[] calculations,
+			ClientBalanceHistoryItem[] history, int columnCount, int iRow, ExcelWorksheet excel)
+		{
+			var drawables = DrawableMapper.Get(history, excel, client, columnCount)
+				.Union(DrawableMapper.Get(calculations, excel, client, columnCount))
+				.OrderByDescending(x => x.Position)
+				.ToArray();
+
+			foreach(var drawable in drawables)
+			{
+				iRow = drawable.Draw(iRow);
+			}
+
+			return iRow;
+		}
+
+		private static MemoryStream Get(ClientData client, decimal balance, CalculationData[] calculations,
+			ClientBalanceHistoryItem[] history)
+		{
+			var stream = new MemoryStream();
+
+			using(var pck = new ExcelPackage())
+			{
+				var excel = pck.Workbook.Worksheets.Add(Entities.Application);
+				excel.Cells.Style.Font.Name = ExcelConstants.DefaultFontName;
+				excel.Cells.Style.Font.Size = ExcelConstants.DefaultFontSize;
+				excel.Cells.Style.Numberformat.Format = "0.00";
+
+				var columnCount = DrawHeader(excel, balance);
+
+				var iRow = DrawRows(client, calculations, history, columnCount, 3, excel);
+
+				AdjustExcel(columnCount, excel, iRow);
+
+				pck.SaveAs(stream);
+			}
+
+			stream.Position = 0;
+
+			return stream;
 		}
 	}
 }

@@ -100,7 +100,7 @@ namespace Alicargo.Services.Calculation
 					CustomCostPerKg = null,
 					FlightCostPerKg = null,
 					ProfitPerKg = null,
-					Profit = 0xBAD
+					Profit = 0
 				};
 
 				info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x, tariffs)) - info.TotalExpenses;

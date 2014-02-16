@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using Alicargo.Core.Contracts.Excel;
-using Alicargo.Core.Excel;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -8,13 +7,13 @@ using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace Alicargo.Core.Calculation
+namespace Alicargo.Core.Excel
 {
 	public sealed class ClientBalanceHistoryItemDrawable : IDrawable
 	{
-		private readonly ClientBalanceHistoryItem _item;
 		private readonly int _columnCount;
 		private readonly ExcelWorksheet _excel;
+		private readonly ClientBalanceHistoryItem _item;
 
 		public ClientBalanceHistoryItemDrawable(ClientBalanceHistoryItem item)
 		{
@@ -49,17 +48,16 @@ namespace Alicargo.Core.Calculation
 			_excel.Row(iRow).Height = ExcelConstants.DefaultRowHeight;
 			var range = _excel.Cells[iRow, 1, iRow, _columnCount];
 			range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-			range.Style.Fill.BackgroundColor.SetColor(_item.EventType == EventType.BalanceDecreased ? Color.Yellow : Color.LawnGreen);
+			range.Style.Fill.BackgroundColor.SetColor(_item.EventType == EventType.BalanceDecreased
+				? Color.Yellow
+				: Color.LawnGreen);
 
 			return ++iRow;
 		}
 
 		public long Position
 		{
-			get
-			{
-				return _item.Timestamp.Ticks;
-			}
+			get { return _item.Timestamp.Ticks; }
 		}
 	}
 }

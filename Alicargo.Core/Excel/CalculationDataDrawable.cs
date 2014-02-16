@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using Alicargo.Core.Contracts.Excel;
-using Alicargo.Core.Excel;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -8,7 +7,7 @@ using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace Alicargo.Core.Calculation
+namespace Alicargo.Core.Excel
 {
 	public sealed class CalculationDataDrawable : IDrawable
 	{
@@ -39,20 +38,6 @@ namespace Alicargo.Core.Calculation
 		public long Position
 		{
 			get { return _data.CreationTimestamp.Ticks; }
-		}
-
-		private static void DrawAwb(string currentAwb, ExcelWorksheet excel, int iRow, int count)
-		{
-			var row = excel.Row(iRow);
-			row.Height = ExcelConstants.AwbRowHeight;
-			row.Style.Font.Bold = true;
-
-			excel.Cells[iRow, 1].Value = currentAwb;
-
-			var range = excel.Cells[iRow, 1, iRow, count];
-			range.Merge = true;
-			range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-			range.Style.Fill.BackgroundColor.SetColor(Color.Yellow);
 		}
 
 		private void DrawRow(int iRow)
@@ -86,6 +71,20 @@ namespace Alicargo.Core.Calculation
 			_excel.Cells[iRow, iColumn + 1].Style.Font.Color.SetColor(Color.Red);
 			var cultureInfo = CultureProvider.GetCultureInfo();
 			_excel.Cells[iRow, _columnCount + 2].Value = LocalizationHelper.GetDate(_data.CreationTimestamp, cultureInfo);
+		}
+
+		private static void DrawAwb(string currentAwb, ExcelWorksheet excel, int iRow, int count)
+		{
+			var row = excel.Row(iRow);
+			row.Height = ExcelConstants.AwbRowHeight;
+			row.Style.Font.Bold = true;
+
+			excel.Cells[iRow, 1].Value = currentAwb;
+
+			var range = excel.Cells[iRow, 1, iRow, count];
+			range.Merge = true;
+			range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+			range.Style.Fill.BackgroundColor.SetColor(Color.Yellow);
 		}
 	}
 }

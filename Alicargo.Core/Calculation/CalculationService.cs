@@ -44,7 +44,7 @@ namespace Alicargo.Core.Calculation
 
 			var weight = application.Weight ?? 0;
 			var tariffPerKg = application.TariffPerKg ?? 0;
-			var insurance = application.Value * (decimal)(application.InsuranceRate);
+			var insurance = application.Value * (decimal)(application.InsuranceRateForClient);
 			var scotch = GetTapeCost(application);
 			var transitCost = application.TransitCostEdited ?? application.TransitCost ?? 0;
 			var pickupCost = application.PickupCostEdited ?? application.PickupCost ?? 0;

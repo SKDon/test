@@ -34,17 +34,6 @@ namespace Alicargo.Core.Calculation
 				   + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
 				   + (application.PickupCostEdited ?? application.PickupCost ?? 0)
 				   + (application.TransitCostEdited ?? application.TransitCost ?? 0);
-		}
-
-		public static decimal GetProfit(ApplicationExtendedData application)
-		{
-			return GetTotalTariffCost(application.TariffPerKg, application.Weight)
-				   + (application.ScotchCost ?? 0)
-				   + GetInsuranceCost(application.Value, application.InsuranceRate)
-				   + (application.AdjustedFactureCost ?? 0)
-				   + (application.AdjustedFactureCostEx ?? 0)
-				   + (application.PickupCost ?? 0)
-				   + (application.TransitCost ?? 0);
-		}
+		}		
 	}
 }

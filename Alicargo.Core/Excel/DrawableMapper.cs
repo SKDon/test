@@ -4,7 +4,7 @@ using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using OfficeOpenXml;
 
-namespace Alicargo.Core.Calculation
+namespace Alicargo.Core.Excel
 {
 	internal static class DrawableMapper
 	{

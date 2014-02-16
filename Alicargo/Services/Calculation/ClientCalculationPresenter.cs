@@ -58,7 +58,9 @@ namespace Alicargo.Services.Calculation
 
 		private ApplicationExtendedData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
 		{
-			var stateIds = _settings.GetStateVisibilities().Where(x => x.Role == RoleType.Client).Select(x => x.StateId).ToArray();
+			var stateIds = _settings.GetStateVisibilities()
+				.Where(x => x.Role == RoleType.Client).Select(x => x.StateId)
+				.ToArray();
 
 			var applications = _applicationRepository.List(stateIds, new[]
 			{
@@ -72,18 +74,6 @@ namespace Alicargo.Services.Calculation
 			total = _applicationRepository.Count(stateIds, clientId, hasCalculation: true);
 
 			return applications;
-		}
-
-		private static List<ClientCalculationGroup> GetGroups(IEnumerable<AirWaybillData> awbsData,
-			IEnumerable<ClientCalculationItem> items)
-		{
-			return items.GroupBy(x => x.AirWaybillId).Select(g => new ClientCalculationGroup
-			{
-				AirWaybillId = g.Key,
-				items = g.ToArray(),
-				value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
-				aggregates = new ClientCalculationGroup.Aggregates(g.Sum(x => x.Profit))
-			}).ToList();
 		}
 
 		private IEnumerable<ClientCalculationItem> GetItems(ApplicationExtendedData[] applications)
@@ -111,12 +101,35 @@ namespace Alicargo.Services.Calculation
 				AirWaybillId = a.AirWaybillId.Value,
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
-				Profit = CalculationHelper.GetProfit(a),
+				Profit = GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRateForClient),
 				ClassName = a.ClassId.HasValue
 					? ((ClassType)a.ClassId.Value).ToLocalString()
 					: ""
 			}).ToArray();
+		}
+
+		private static List<ClientCalculationGroup> GetGroups(IEnumerable<AirWaybillData> awbsData,
+			IEnumerable<ClientCalculationItem> items)
+		{
+			return items.GroupBy(x => x.AirWaybillId).Select(g => new ClientCalculationGroup
+			{
+				AirWaybillId = g.Key,
+				items = g.ToArray(),
+				value = AwbHelper.GetAirWaybillDisplay(awbsData.First(x => x.Id == g.Key)),
+				aggregates = new ClientCalculationGroup.Aggregates(g.Sum(x => x.Profit))
+			}).ToList();
+		}
+
+		private static decimal GetProfit(ApplicationExtendedData application)
+		{
+			return CalculationHelper.GetTotalTariffCost(application.TariffPerKg, application.Weight)
+			       + (application.ScotchCost ?? 0)
+			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRateForClient)
+			       + (application.AdjustedFactureCost ?? 0)
+			       + (application.AdjustedFactureCostEx ?? 0)
+			       + (application.PickupCost ?? 0)
+			       + (application.TransitCost ?? 0);
 		}
 	}
 }
