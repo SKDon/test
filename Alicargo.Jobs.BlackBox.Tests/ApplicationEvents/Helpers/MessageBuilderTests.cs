@@ -19,6 +19,12 @@ namespace Alicargo.Jobs.BlackBox.Tests.ApplicationEvents.Helpers
 		private Fixture _fixture;
 		private Serializer _serializer;
 
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
+
 		[TestInitialize]
 		public void TestInitialize()
 		{
@@ -29,14 +35,7 @@ namespace Alicargo.Jobs.BlackBox.Tests.ApplicationEvents.Helpers
 				Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString, _serializer);
 		}
 
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_context.Cleanup();
-		}
-
 		[TestMethod]
-		
 		public void Test_Get()
 		{
 			var calculation = _fixture.Create<CalculationData>();
