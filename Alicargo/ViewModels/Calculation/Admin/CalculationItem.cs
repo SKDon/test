@@ -9,11 +9,9 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		public decimal TotalTariffCost { get; set; }
 		public decimal TotalSenderRate { get; set; }
 		public decimal InsuranceCost { get; set; }
+		public decimal InsuranceCostForClient { get; set; }
 		public decimal Profit { get; set; }
 		public bool IsCalculated { get; set; }
-
-		#region Application data
-
 		public long ApplicationId { get; set; }
 		public string Factory { get; set; }
 		public string Mark { get; set; }
@@ -30,9 +28,6 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		public decimal? TariffPerKg { get; set; }
 		public decimal? SenderRate { get; set; }
 		public long AirWaybillId { get; set; }
-
 		public ClassType? ClassId { get; set; }
-
-		#endregion
 	}
 }

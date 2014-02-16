@@ -32,6 +32,7 @@
 							"PickupCost": { type: "string", editable: true },
 							"TransitCost": { type: "string", editable: true },
 							"InsuranceCost": { type: "number", editable: false },
+							"InsuranceCostForClient": { type: "number", editable: false },
 							"Profit": { type: "number", editable: false }
 						}
 					}
@@ -147,6 +148,7 @@
 				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
 				{ field: "ScotchCost", groupFooterTemplate: groupFooterTemplate, title: $l.Entities_ScotchCost, attributes: textRight, footerAttributes: textRight },
 				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: textRight, footerAttributes: textRight },
+				{ field: "InsuranceCostForClient", title: $l.Entities_InsuranceForClient, template: "#= kendo.toString(InsuranceCostForClient, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: textRight, footerAttributes: textRight },
 				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: textRight },
 				{ field: "FactureCostEx", title: $l.Entities_FactureCostEx, attributes: textRight },
 				{ field: "PickupCost", title: $l.Entities_PickupCost, attributes: textRight },
@@ -155,14 +157,14 @@
 				{
 					attributes: { "class": "cell-button" },
 					command: [{
-							name: "custom-gear",
-							text: "&nbsp;",
-							click: onCalculate
-						}, {
-							name: "custom-cancel",
-							text: "&nbsp;",
-							click: onCancelCalculate
-						}],
+						name: "custom-gear",
+						text: "&nbsp;",
+						click: onCalculate
+					}, {
+						name: "custom-cancel",
+						text: "&nbsp;",
+						click: onCancelCalculate
+					}],
 					title: "&nbsp;",
 					width: $a.DefaultGridButtonWidth
 				}

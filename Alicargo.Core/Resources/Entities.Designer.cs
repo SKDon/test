@@ -628,6 +628,15 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insurance (Client).
+        /// </summary>
+        public static string InsuranceForClient {
+            get {
+                return ResourceManager.GetString("InsuranceForClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insurance (%).
         /// </summary>
         public static string InsuranceRate {

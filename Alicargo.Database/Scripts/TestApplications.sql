@@ -4,7 +4,9 @@ INSERT [dbo].[AirWaybill] ([CreationTimestamp], [Bill], [ArrivalAirport], [Depar
 INSERT [dbo].[AirWaybill] ([CreationTimestamp], [Bill], [ArrivalAirport], [DepartureAirport], [DateOfDeparture], [DateOfArrival], [BrokerId], [GTD], [StateId]) VALUES (CAST(GETDATE() - 1 AS DateTimeOffset), NEWID(), N'ArrivalAirport', N'DepartureAirport', CAST(GETDATE() AS DateTimeOffset), CAST(GETDATE() AS DateTimeOffset), 1, NEWID(), 7)
 
 INSERT [dbo].[Application] 
-([SenderId], [ForwarderId], [CreationTimestamp], [Invoice], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume], [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId], [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES 
+([SenderId], [ForwarderId], [CreationTimestamp], [Invoice], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume],
+ [TermsOfDelivery], [StateChangeTimestamp], [StateId], [Value], [CurrencyId], [MethodOfDeliveryId], [ClientId], [TransitId], [AirWaybillId],
+ [FactoryName], [FactoryPhone], [FactoryEmail], [MarkName], [CountryId]) VALUES
 (1, 1, CAST(0x073F7B288C421D370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, 0, 0, 0, NEWID(), CAST(0x07D4DA298C421D370B0000 AS DateTimeOffset), 1, 1.0000, 2, 0, 1, 6, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 1),
 (1, 1, CAST(0x07E877338C421C370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, 1, 1, 1, NEWID(), CAST(0x0755D3368C421C370B0000 AS DateTimeOffset), 2, 2.0000, 2, 1, 2, 7, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 2),
 (1, 1, CAST(0x07C9E4378C421B370B0000 AS DateTimeOffset), NEWID(), NULL, NULL, NULL, 2, 2, 2, NEWID(), CAST(0x070B81388C421B370B0000 AS DateTimeOffset), 3, 3.0000, 2, 0, 3, 8, NULL, 'f1', 'f1', 'f1@mail.ru', 'm1', 3),
@@ -21,9 +23,9 @@ INSERT [dbo].[Application]
 (2, 2, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 2, 17, 1, 'f2', 'f1', 'f1@mail.ru', 'm2', 14),
 (2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 4, 17, 2, 'f2', 'f1', 'f1@mail.ru', 'm2', 15),
 (2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 2, 'f2', 'f1', 'f1@mail.ru', 'm2', 16),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 17),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 18),
-(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 19),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 1, 'f2', 'f1', 'f1@mail.ru', 'm2', 17),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 5, 17, 2, 'f2', 'f1', 'f1@mail.ru', 'm2', 18),
+(2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 2, 'f2', 'f1', 'f1@mail.ru', 'm2', 19),
 (2, 1, CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), NEWID(), 1, 1, 1, NEWID(), CAST(0x070FF7418C421C370B0000 AS DateTimeOffset), 7, 12.0000, 1, 1, 1, 17, 3, 'f2', 'f1', 'f1@mail.ru', 'm2', 10)
 GO
 

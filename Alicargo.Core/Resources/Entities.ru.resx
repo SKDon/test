@@ -489,4 +489,7 @@
   <data name="InsuranceRateForClient" xml:space="preserve">
     <value>Страховка у клиента (%)</value>
   </data>
+  <data name="InsuranceForClient" xml:space="preserve">
+    <value>Страховка (клиент)</value>
+  </data>
 </root>
