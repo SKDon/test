@@ -7,7 +7,7 @@ using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace Alicargo.Core.Excel
+namespace Alicargo.Core.Excel.Client
 {
 	public sealed class ClientBalanceHistoryItemDrawable : IDrawable
 	{

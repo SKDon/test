@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Alicargo.Core.Calculation;
 using Alicargo.Core.Contracts.Excel;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -7,7 +8,7 @@ using Alicargo.Utilities.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace Alicargo.Core.Excel
+namespace Alicargo.Core.Excel.Client
 {
 	public sealed class CalculationDataDrawable : IDrawable
 	{
@@ -42,7 +43,8 @@ namespace Alicargo.Core.Excel
 
 		private void DrawRow(int iRow)
 		{
-			var money = CalculationDataHelper.GetMoney(_data);
+			var insuranceRate = _data.InsuranceRateForClient;
+			var money = CalculationDataHelper.GetMoney(_data, insuranceRate);
 
 			var iColumn = 1;
 			_excel.Cells[iRow, iColumn++].Value = _clientNick;
@@ -58,7 +60,7 @@ namespace Alicargo.Core.Excel
 			_excel.Cells[iRow, iColumn].Style.Font.Bold = true;
 			_excel.Cells[iRow, iColumn++].Value = _data.TariffPerKg * (decimal)_data.Weight;
 			_excel.Cells[iRow, iColumn++].Value = _data.ScotchCost;
-			_excel.Cells[iRow, iColumn++].Value = _data.InsuranceCost;
+			_excel.Cells[iRow, iColumn++].Value = CalculationHelper.GetInsuranceCost(_data.Value, insuranceRate);
 			_excel.Cells[iRow, iColumn++].Value = _data.FactureCost;
 			_excel.Cells[iRow, iColumn++].Value = _data.FactureCostEx;
 			_excel.Cells[iRow, iColumn++].Value = _data.PickupCost;

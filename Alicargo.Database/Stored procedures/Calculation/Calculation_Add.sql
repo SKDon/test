@@ -7,7 +7,8 @@
 	@Weight REAL,
 	@TariffPerKg MONEY,
 	@ScotchCost MONEY,
-	@InsuranceCost MONEY,
+	@InsuranceRate REAL,
+	@InsuranceRateForClient REAL,
 	@FactureCost MONEY,
 	@FactureCostEx MONEY,
 	@TransitCost MONEY,
@@ -31,7 +32,6 @@ AS BEGIN
 		,[Weight]
 		,[TariffPerKg]
 		,[ScotchCost]
-		,[InsuranceCost]
 		,[FactureCost]
 		,[FactureCostEx]
 		,[TransitCost]
@@ -41,7 +41,9 @@ AS BEGIN
 		,[ClassId]
 		,[Invoice]
 		,[Value]
-		,[Count])
+		,[Count]
+		,[InsuranceRate]
+		,[InsuranceRateForClient])
      VALUES
 		(@ClientId
 		,@ApplicationHistoryId
@@ -51,7 +53,6 @@ AS BEGIN
 		,@Weight
 		,@TariffPerKg
 		,@ScotchCost
-		,@InsuranceCost
 		,@FactureCost
 		,@FactureCostEx
 		,@TransitCost
@@ -61,6 +62,8 @@ AS BEGIN
 		,@ClassId
 		,@Invoice
 		,@Value
-		,@Count)
+		,@Count
+		,@InsuranceRate
+		,@InsuranceRateForClient)
 END
 GO

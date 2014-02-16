@@ -11,7 +11,6 @@ AS BEGIN
 			[Weight],
 			[TariffPerKg],
 			[ScotchCost],
-			[InsuranceCost],
 			[FactureCost],
 			[FactureCostEx],
 			[TransitCost],
@@ -21,7 +20,9 @@ AS BEGIN
 			[ClassId] AS [Class],
 			[Invoice],
 			[Value],
-			[Count]
+			[Count],
+			[InsuranceRate],
+			[InsuranceRateForClient]
 	FROM [dbo].[Calculation]
 	WHERE [ClientId] = @ClientId
 

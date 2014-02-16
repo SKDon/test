@@ -10,8 +10,7 @@
 	[MarkName]				NVARCHAR(320)	NOT NULL,
 	[Weight]				REAL			NOT NULL,
 	[TariffPerKg]			MONEY			NOT NULL,
-	[ScotchCost]			MONEY			NOT NULL,
-	[InsuranceCost]			MONEY			NOT NULL,
+	[ScotchCost]			MONEY			NOT NULL,	
 	[FactureCost]			MONEY			NOT NULL,
 	[FactureCostEx]			MONEY			NOT NULL,
 	[TransitCost]			MONEY			NOT NULL,
@@ -21,6 +20,8 @@
 	[Invoice]				NVARCHAR (MAX)	NOT NULL,
 	[Value]					MONEY			NOT NULL,
 	[Count]					INT					NULL,
+	[InsuranceRate]			REAL				NOT NULL CONSTRAINT [DF_Calculation_InsuranceRate] DEFAULT 0.01,
+	[InsuranceRateForClient] REAL				NOT NULL CONSTRAINT [DF_Calculation_InsuranceRateForClient] DEFAULT 0.01,
 
 	CONSTRAINT [PK_dbo.Calculation] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_Calculation_Client] FOREIGN KEY ([ClientId]) REFERENCES [Client]([Id])

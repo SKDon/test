@@ -44,7 +44,6 @@ namespace Alicargo.Core.Calculation
 
 			var weight = application.Weight ?? 0;
 			var tariffPerKg = application.TariffPerKg ?? 0;
-			var insurance = application.Value * (decimal)(application.InsuranceRateForClient);
 			var scotch = GetTapeCost(application);
 			var transitCost = application.TransitCostEdited ?? application.TransitCost ?? 0;
 			var pickupCost = application.PickupCostEdited ?? application.PickupCost ?? 0;
@@ -56,7 +55,6 @@ namespace Alicargo.Core.Calculation
 				ClientId = application.ClientId,
 				FactureCost = application.FactureCostEdited ?? application.FactureCost ?? 0,
 				FactureCostEx = application.FactureCostExEdited ?? application.FactureCostEx ?? 0,
-				InsuranceCost = insurance,
 				MarkName = application.MarkName,
 				FactoryName = application.FactoryName,
 				ScotchCost = scotch,
@@ -68,7 +66,9 @@ namespace Alicargo.Core.Calculation
 				Count = application.Count ?? 0,
 				Invoice = application.Invoice,
 				Value = application.Value,
-				Class = application.Class
+				Class = application.Class,
+				InsuranceRate = application.InsuranceRate,
+				InsuranceRateForClient = application.InsuranceRateForClient
 			};
 
 			_calculations.Add(calculation, applicationId);

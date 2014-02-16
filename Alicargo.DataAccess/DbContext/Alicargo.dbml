@@ -86,7 +86,8 @@
 			<Column Name="Weight" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
 			<Column Name="TariffPerKg" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
 			<Column Name="ScotchCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-			<Column Name="InsuranceCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+			<Column Name="InsuranceRate" Type="System.Decimal" DbType="Real" CanBeNull="false" />
+			<Column Name="InsuranceRateForClient" Type="System.Decimal" DbType="Real" CanBeNull="false" />
 			<Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
 			<Column Name="TransitCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
 			<Column Name="PickupCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
@@ -229,8 +230,8 @@
 			<Column Name="PickupCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="TariffPerKg" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="SenderRate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-			<Column Name="InsuranceRate" Type="System.Single" DbType="Real" CanBeNull="false" />
-			<Column Name="InsuranceRateForClient" Type="System.Single" DbType="Real" CanBeNull="false" />
+			<Column Name="InsuranceRate" Type="System.Decimal" DbType="Real" CanBeNull="false" />
+			<Column Name="InsuranceRateForClient" Type="System.Decimal" DbType="Real" CanBeNull="false" />
 			<Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="TransitCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />

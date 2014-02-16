@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Alicargo.Core.Email;
 using Alicargo.Core.Excel;
+using Alicargo.Core.Excel.Client;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;

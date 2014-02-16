@@ -16,9 +16,9 @@ namespace Alicargo.Services.Calculation
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
+		private readonly IClientBalanceRepository _balances;
 		private readonly IClientRepository _clients;
 		private readonly ISenderRepository _senders;
-		private readonly IClientBalanceRepository _balances;
 
 		public AdminCalculationPresenter(
 			IApplicationRepository applications,
@@ -48,6 +48,43 @@ namespace Alicargo.Services.Calculation
 			return List(data);
 		}
 
+		private IEnumerable<CalculationItem> GetItems(
+			ApplicationData[] applications,
+			IReadOnlyDictionary<long, decimal> tariffs)
+		{
+			var appIds = applications.Select(x => x.Id).ToArray();
+			var calculations = _applications.GetCalculations(appIds);
+			var nics = _clients.GetNicByApplications(appIds);
+
+			return applications.Select(a => new CalculationItem
+			{
+				ApplicationId = a.Id,
+				Value = a.Value,
+				Count = a.Count,
+				ClientNic = nics[a.Id],
+				Factory = a.FactoryName,
+				FactureCost = a.FactureCostEdited ?? a.FactureCost,
+				FactureCostEx = a.FactureCostExEdited ?? a.FactureCostEx,
+				Invoice = a.Invoice,
+				Mark = a.MarkName,
+				ScotchCost = a.ScotchCostEdited ?? CalculationHelper.GetSenderScotchCost(tariffs, a.SenderId, a.Count),
+				TariffPerKg = a.TariffPerKg,
+				SenderRate = a.SenderRate,
+				TransitCost = a.TransitCostEdited ?? a.TransitCost,
+				ValueCurrencyId = a.CurrencyId,
+				Weight = a.Weight,
+				PickupCost = a.PickupCostEdited ?? a.PickupCost,
+				AirWaybillId = a.AirWaybillId.Value,
+				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
+				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
+				Profit = GetProfit(a, tariffs),
+				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
+				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
+				IsCalculated = calculations.ContainsKey(a.Id),
+				ClassId = a.Class
+			}).OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
+		}
+
 		private CalculationListCollection List(IList<AirWaybillData> data)
 		{
 			var awbs = data.ToDictionary(x => x.Id, x => x);
@@ -69,6 +106,22 @@ namespace Alicargo.Services.Calculation
 				Info = info,
 				TotalBalance = _balances.SumBalance().ToString("N2")
 			};
+		}
+
+		private static List<CalculationGroup> GetGroups(IEnumerable<AirWaybillData> data, IEnumerable<CalculationItem> items)
+		{
+			return data.Select(awb =>
+			{
+				var rows = items.Where(a => a.AirWaybillId == awb.Id).ToArray();
+
+				return new CalculationGroup
+				{
+					AirWaybillId = awb.Id,
+					items = rows,
+					value = new { id = awb.Id, text = AwbHelper.GetAirWaybillDisplay(awb) },
+					aggregates = new CalculationGroup.Aggregates(rows)
+				};
+			}).ToList();
 		}
 
 		private static CalculationAwbInfo[] GetInfo(
@@ -103,11 +156,11 @@ namespace Alicargo.Services.Calculation
 					Profit = 0
 				};
 
-				info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x, tariffs)) - info.TotalExpenses;
+				info.Profit = rows.Sum(x => GetProfit(x, tariffs)) - info.TotalExpenses;
 
 				var totalWeight = (decimal)rows.Sum(x => x.Weight ?? 0);
 
-				if (totalWeight != 0)
+				if(totalWeight != 0)
 				{
 					info.ProfitPerKg = info.Profit / totalWeight;
 					info.CostPerKgOfSender = info.TotalSenderRate / totalWeight;
@@ -120,57 +173,17 @@ namespace Alicargo.Services.Calculation
 			}).ToArray();
 		}
 
-		private static List<CalculationGroup> GetGroups(IEnumerable<AirWaybillData> data, IEnumerable<CalculationItem> items)
+		private static decimal GetProfit(ApplicationData application, IReadOnlyDictionary<long, decimal> tariffs)
 		{
-			return data.Select(awb =>
-			{
-				var rows = items.Where(a => a.AirWaybillId == awb.Id).ToArray();
-
-				return new CalculationGroup
-				{
-					AirWaybillId = awb.Id,
-					items = rows,
-					value = new { id = awb.Id, text = AwbHelper.GetAirWaybillDisplay(awb) },
-					aggregates = new CalculationGroup.Aggregates(rows)
-				};
-			}).ToList();
-		}
-
-		private IEnumerable<CalculationItem> GetItems(
-			ApplicationData[] applications,
-			IReadOnlyDictionary<long, decimal> tariffs)
-		{
-			var appIds = applications.Select(x => x.Id).ToArray();
-			var calculations = _applications.GetCalculations(appIds);
-			var nics = _clients.GetNicByApplications(appIds);
-
-			return applications.Select(a => new CalculationItem
-			{
-				ApplicationId = a.Id,
-				Value = a.Value,
-				Count = a.Count,
-				ClientNic = nics[a.Id],
-				Factory = a.FactoryName,
-				FactureCost = a.FactureCostEdited ?? a.FactureCost,
-				FactureCostEx = a.FactureCostExEdited ?? a.FactureCostEx,
-				Invoice = a.Invoice,
-				Mark = a.MarkName,
-				ScotchCost = a.ScotchCostEdited ?? CalculationHelper.GetSenderScotchCost(tariffs, a.SenderId, a.Count),
-				TariffPerKg = a.TariffPerKg,
-				SenderRate = a.SenderRate,
-				TransitCost = a.TransitCostEdited ?? a.TransitCost,
-				ValueCurrencyId = a.CurrencyId,
-				Weight = a.Weight,
-				PickupCost = a.PickupCostEdited ?? a.PickupCost,
-				AirWaybillId = a.AirWaybillId.Value,
-				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
-				Profit = CalculationHelper.GetProfit(a, tariffs),
-				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
-				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
-				IsCalculated = calculations.ContainsKey(a.Id),
-				ClassId = a.Class
-			}).OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
+			return CalculationHelper.GetTotalTariffCost(application.TariffPerKg, application.Weight)
+			       +
+			       (application.ScotchCostEdited ??
+			        CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
+			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
+			       + (application.FactureCostEdited ?? application.FactureCost ?? 0)
+			       + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
+			       + (application.PickupCostEdited ?? application.PickupCost ?? 0)
+			       + (application.TransitCostEdited ?? application.TransitCost ?? 0);
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Alicargo.Core.Calculation;
 using Alicargo.Core.Contracts.Event;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -52,18 +53,6 @@ namespace Alicargo.Jobs.Application.Helpers
 			var data = GetTextLocalizedData(type, application, language, bytes);
 
 			return _bulder.GetText(template, language, data);
-		}
-
-		private static void Add(IDictionary<string, string> localizedData, string key, string value)
-		{
-			if(localizedData.ContainsKey(key))
-			{
-				localizedData[key] = value;
-			}
-			else
-			{
-				localizedData.Add(key, value);
-			}
 		}
 
 		private IDictionary<string, string> GetTextLocalizedData(EventType type,
@@ -140,8 +129,10 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "Value", value);
 			Add(localizedData, "Weight", application.Weight.HasValue ? application.Weight.Value.ToString(culture) : null);
 			Add(localizedData, "AirWaybill", application.AirWaybill);
-			Add(localizedData, "AirWaybillDateOfArrival", LocalizationHelper.GetDate(application.AirWaybillDateOfArrival, culture));
-			Add(localizedData, "AirWaybillDateOfDeparture", LocalizationHelper.GetDate(application.AirWaybillDateOfDeparture, culture));
+			Add(localizedData, "AirWaybillDateOfArrival",
+				LocalizationHelper.GetDate(application.AirWaybillDateOfArrival, culture));
+			Add(localizedData, "AirWaybillDateOfDeparture",
+				LocalizationHelper.GetDate(application.AirWaybillDateOfDeparture, culture));
 			Add(localizedData, "AirWaybillGTD", application.AirWaybillGTD);
 			Add(localizedData, "Characteristic", application.Characteristic);
 			Add(localizedData, "ClientNic", application.ClientNic);
@@ -156,7 +147,8 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "InvoiceFiles", string.Join(", ", invoice));
 			Add(localizedData, "LegalEntity", application.ClientLegalEntity);
 			Add(localizedData, "MethodOfDelivery", LocalizationHelper.GetMethodOfDelivery(application.MethodOfDelivery, culture));
-			Add(localizedData, "MethodOfTransit", LocalizationHelper.GetMethodOfTransit(application.TransitMethodOfTransit, culture));
+			Add(localizedData, "MethodOfTransit",
+				LocalizationHelper.GetMethodOfTransit(application.TransitMethodOfTransit, culture));
 			Add(localizedData, "PackingFiles", string.Join(", ", packing));
 			Add(localizedData, "StateChangeTimestamp", LocalizationHelper.GetDate(application.StateChangeTimestamp, culture));
 			Add(localizedData, "StateName", state != null ? state.LocalizedName : null);
@@ -188,6 +180,10 @@ namespace Alicargo.Jobs.Application.Helpers
 		{
 			var calculation = _serializer.Deserialize<CalculationData>(bytes);
 			var balance = _balance.GetBalance(calculation.ClientId);
+			var insuranceRate = calculation.InsuranceRateForClient;
+			var insuranceCost = CalculationHelper.GetInsuranceCost(calculation.Value, insuranceRate);
+			var weightCost = calculation.TariffPerKg * (decimal)calculation.Weight;
+			var total = CalculationDataHelper.GetMoney(calculation, insuranceRate);
 
 			Add(localizedData, "ClientBalance", balance.ToString("N2"));
 			Add(localizedData, "CalculationTimestamp", LocalizationHelper.GetDate(calculation.CreationTimestamp, culture));
@@ -197,16 +193,15 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "FactoryName", calculation.FactoryName);
 			Add(localizedData, "Weight", calculation.Weight.ToString("N2", culture));
 			Add(localizedData, "TariffPerKg", calculation.TariffPerKg.ToString("N2", culture));
-			var weightCost = calculation.TariffPerKg * (decimal)calculation.Weight;
 			Add(localizedData, "WeightCost", weightCost.ToString("N2", culture));
 			Add(localizedData, "ScotchCost", calculation.ScotchCost.ToString("N2", culture));
-			Add(localizedData, "InsuranceCost", calculation.InsuranceCost.ToString("N2", culture));
+			Add(localizedData, "InsuranceCost", insuranceCost.ToString("N2", culture));
 			Add(localizedData, "FactureCost", (calculation.FactureCost + calculation.FactureCostEx).ToString("N2", culture));
 			Add(localizedData, "FactureCostT1", calculation.FactureCost.ToString("N2", culture));
 			Add(localizedData, "FactureCostEx", calculation.FactureCostEx.ToString("N2", culture));
 			Add(localizedData, "TransitCost", calculation.TransitCost.ToString("N2", culture));
 			Add(localizedData, "PickupCost", calculation.PickupCost.ToString("N2", culture));
-			Add(localizedData, "TotalCost", CalculationDataHelper.GetMoney(calculation).ToString("N2", culture));
+			Add(localizedData, "TotalCost", total.ToString("N2", culture));
 		}
 
 		private void OnFileUpload(byte[] bytes, IDictionary<string, string> localizedData)
@@ -250,6 +245,18 @@ namespace Alicargo.Jobs.Application.Helpers
 				Add(templateData, "StateName", state.LocalizedName);
 				Add(templateData, "StateChangeTimestamp",
 					LocalizationHelper.GetDate(data.Timestamp, CultureInfo.GetCultureInfo(language)));
+			}
+		}
+
+		private static void Add(IDictionary<string, string> localizedData, string key, string value)
+		{
+			if(localizedData.ContainsKey(key))
+			{
+				localizedData[key] = value;
+			}
+			else
+			{
+				localizedData.Add(key, value);
 			}
 		}
 	}

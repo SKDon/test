@@ -914,7 +914,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDFileData
 		{
 			get
@@ -954,7 +954,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDAdditionalFileData
 		{
 			get
@@ -994,7 +994,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary PackingFileData
 		{
 			get
@@ -1034,7 +1034,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary InvoiceFileData
 		{
 			get
@@ -1074,7 +1074,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary AWBFileData
 		{
 			get
@@ -1114,7 +1114,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary DrawFileData
 		{
 			get
@@ -1768,7 +1768,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _ScotchCost;
 		
-		private decimal _InsuranceCost;
+		private decimal _InsuranceRate;
+		
+		private decimal _InsuranceRateForClient;
 		
 		private decimal _FactureCost;
 		
@@ -1802,8 +1804,10 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnTariffPerKgChanged();
     partial void OnScotchCostChanging(decimal value);
     partial void OnScotchCostChanged();
-    partial void OnInsuranceCostChanging(decimal value);
-    partial void OnInsuranceCostChanged();
+    partial void OnInsuranceRateChanging(decimal value);
+    partial void OnInsuranceRateChanged();
+    partial void OnInsuranceRateForClientChanging(decimal value);
+    partial void OnInsuranceRateForClientChanged();
     partial void OnFactureCostChanging(decimal value);
     partial void OnFactureCostChanged();
     partial void OnTransitCostChanging(decimal value);
@@ -2022,22 +2026,42 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceCost", DbType="Money NOT NULL")]
-		public decimal InsuranceCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceRate", DbType="Real")]
+		public decimal InsuranceRate
 		{
 			get
 			{
-				return this._InsuranceCost;
+				return this._InsuranceRate;
 			}
 			set
 			{
-				if ((this._InsuranceCost != value))
+				if ((this._InsuranceRate != value))
 				{
-					this.OnInsuranceCostChanging(value);
+					this.OnInsuranceRateChanging(value);
 					this.SendPropertyChanging();
-					this._InsuranceCost = value;
-					this.SendPropertyChanged("InsuranceCost");
-					this.OnInsuranceCostChanged();
+					this._InsuranceRate = value;
+					this.SendPropertyChanged("InsuranceRate");
+					this.OnInsuranceRateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceRateForClient", DbType="Real")]
+		public decimal InsuranceRateForClient
+		{
+			get
+			{
+				return this._InsuranceRateForClient;
+			}
+			set
+			{
+				if ((this._InsuranceRateForClient != value))
+				{
+					this.OnInsuranceRateForClientChanging(value);
+					this.SendPropertyChanging();
+					this._InsuranceRateForClient = value;
+					this.SendPropertyChanged("InsuranceRateForClient");
+					this.OnInsuranceRateForClientChanged();
 				}
 			}
 		}
@@ -4238,9 +4262,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<decimal> _SenderRate;
 		
-		private float _InsuranceRate;
+		private decimal _InsuranceRate;
 		
-		private float _InsuranceRateForClient;
+		private decimal _InsuranceRateForClient;
 		
 		private System.Nullable<decimal> _TransitCost;
 		
@@ -4344,9 +4368,9 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnTariffPerKgChanged();
     partial void OnSenderRateChanging(System.Nullable<decimal> value);
     partial void OnSenderRateChanged();
-    partial void OnInsuranceRateChanging(float value);
+    partial void OnInsuranceRateChanging(decimal value);
     partial void OnInsuranceRateChanged();
-    partial void OnInsuranceRateForClientChanging(float value);
+    partial void OnInsuranceRateForClientChanging(decimal value);
     partial void OnInsuranceRateForClientChanged();
     partial void OnTransitCostChanging(System.Nullable<decimal> value);
     partial void OnTransitCostChanged();
@@ -5195,7 +5219,7 @@ namespace Alicargo.DataAccess.DbContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceRate", DbType="Real")]
-		public float InsuranceRate
+		public decimal InsuranceRate
 		{
 			get
 			{
@@ -5215,7 +5239,7 @@ namespace Alicargo.DataAccess.DbContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceRateForClient", DbType="Real")]
-		public float InsuranceRateForClient
+		public decimal InsuranceRateForClient
 		{
 			get
 			{

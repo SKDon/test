@@ -30,7 +30,7 @@ namespace Alicargo.Core.Calculation
 		{
 			var calculation = _service.Calculate(applicationId);
 
-			var money = CalculationDataHelper.GetMoney(calculation);
+			var money = CalculationDataHelper.GetMoney(calculation, calculation.InsuranceRateForClient);
 
 			_balance.Decrease(calculation.ClientId, money,
 				GetComment(EventType.Calculate, calculation), DateTimeProvider.Now, true);
@@ -44,7 +44,7 @@ namespace Alicargo.Core.Calculation
 
 			_service.CancelCalculatation(applicationId);
 
-			var money = CalculationDataHelper.GetMoney(calculation);
+			var money = CalculationDataHelper.GetMoney(calculation, calculation.InsuranceRateForClient);
 
 			_balance.Increase(calculation.ClientId, money,
 				GetComment(EventType.CalculationCanceled, calculation), DateTimeProvider.Now, true);

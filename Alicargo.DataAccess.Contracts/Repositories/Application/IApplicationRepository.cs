@@ -18,7 +18,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 
 		long GetClientId(long id);
 
-		float GetDefaultInsuranceRate();
+		decimal GetDefaultInsuranceRate();
 
 		ApplicationExtendedData GetExtendedData(long id);
 
