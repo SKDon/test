@@ -128,8 +128,10 @@ namespace Alicargo.Controllers.User
     {
         public T4MVC_RestorePasswordController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
@@ -137,8 +139,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string email);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Index(string email)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
@@ -147,8 +151,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void NewPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, string key);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult NewPassword(long id, string key)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewPassword);
@@ -158,8 +164,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void NewPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, string key, string password);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult NewPassword(long id, string key, string password)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewPassword);
@@ -170,8 +178,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void FinishOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Finish()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Finish);
@@ -179,8 +189,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void UnknownKeyOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult UnknownKey()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.UnknownKey);
@@ -188,8 +200,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void SuccessOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Success()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Success);

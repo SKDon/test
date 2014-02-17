@@ -129,8 +129,10 @@ namespace Alicargo.Controllers.Awb
     {
         public T4MVC_AdminAwbController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Edit(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -139,8 +141,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbAdminModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AwbAdminModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -150,8 +154,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? applicationId);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Create(long? applicationId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
@@ -160,8 +166,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? applicationId, Alicargo.ViewModels.AirWaybill.AwbAdminModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Create(long? applicationId, Alicargo.ViewModels.AirWaybill.AwbAdminModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);

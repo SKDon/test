@@ -286,8 +286,10 @@ namespace Alicargo.Controllers.Calculation
     {
         public T4MVC_CalculationController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
@@ -295,8 +297,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void ExcelOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Excel()
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Excel);
@@ -304,8 +308,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, long skip);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List(int take, long skip)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
@@ -315,8 +321,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetTariffPerKgOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? tariffPerKg);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetTariffPerKg(long id, long awbId, decimal? tariffPerKg)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTariffPerKg);
@@ -327,8 +335,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void CalculateOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult Calculate(long id, long awbId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Calculate);
@@ -338,8 +348,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void RemoveCalculatationOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult RemoveCalculatation(long id, long awbId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.RemoveCalculatation);
@@ -349,8 +361,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetSenderRateOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? senderRate);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetSenderRate(long id, long awbId, decimal? senderRate)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetSenderRate);
@@ -361,8 +375,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetScotchCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? scotchCost);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetScotchCostEdited(long id, long awbId, decimal? scotchCost)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetScotchCostEdited);
@@ -373,8 +389,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetFactureCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? factureCost);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetFactureCostEdited(long id, long awbId, decimal? factureCost)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetFactureCostEdited);
@@ -385,8 +403,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetTransitCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? transitCost);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCostEdited);
@@ -397,8 +417,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetPickupCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? pickupCost);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetPickupCostEdited);
@@ -409,8 +431,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetAdditionalCostOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long awbId, decimal? additionalCost);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetAdditionalCost(long awbId, decimal? additionalCost)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetAdditionalCost);
@@ -420,8 +444,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void SetClassOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, int? classId);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult SetClass(long id, long awbId, int? classId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetClass);

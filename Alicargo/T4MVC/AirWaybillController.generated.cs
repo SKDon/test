@@ -178,8 +178,10 @@ namespace Alicargo.Controllers.Awb
     {
         public T4MVC_AirWaybillController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
@@ -187,8 +189,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List(int take, int skip)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
@@ -198,8 +202,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void CargoIsCustomsClearedOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult CargoIsCustomsCleared(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.CargoIsCustomsCleared);
@@ -208,8 +214,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void CargoIsCustomsClearedButtonOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult CargoIsCustomsClearedButton(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.CargoIsCustomsClearedButton);
@@ -218,8 +226,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult Delete(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
@@ -228,8 +238,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void SetAirWaybillOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId, long? airWaybillId);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAirWaybill);

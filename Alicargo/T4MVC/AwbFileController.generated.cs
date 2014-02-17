@@ -180,8 +180,10 @@ namespace Alicargo.Controllers.Awb
     {
         public T4MVC_AwbFileController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void AWBOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult AWB(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.AWB);
@@ -190,8 +192,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void GTDAdditionalOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult GTDAdditional(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDAdditional);
@@ -200,8 +204,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void GTDOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult GTD(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTD);
@@ -210,8 +216,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void InvoiceOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Invoice(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Invoice);
@@ -220,8 +228,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void PackingOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Packing(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Packing);
@@ -230,8 +240,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void DrawOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Draw(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Draw);

@@ -207,8 +207,10 @@ namespace Alicargo.Controllers
     {
         public T4MVC_FilesController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void DownloadOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Download(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
@@ -217,8 +219,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void AdminApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult AdminApplication(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.AdminApplication);
@@ -227,8 +231,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void ClientApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult ClientApplication(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ClientApplication);
@@ -237,8 +243,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void SenderApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult SenderApplication(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.SenderApplication);
@@ -247,8 +255,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void FilesOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult Files(long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Files);
@@ -258,8 +268,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void UploadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type, System.Web.HttpPostedFileBase file);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult Upload(long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type, System.Web.HttpPostedFileBase file)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Upload);
@@ -270,8 +282,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult Delete(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);

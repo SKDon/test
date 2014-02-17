@@ -148,8 +148,10 @@ namespace Alicargo.Controllers.User
     {
         public T4MVC_AuthenticationController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Login()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
@@ -157,8 +159,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void SignOutOverride(T4MVC_System_Web_Mvc_RedirectToRouteResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.RedirectToRouteResult SignOut()
         {
             var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.SignOut);
@@ -166,8 +170,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.SignIdModel user);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Login(Alicargo.ViewModels.User.SignIdModel user)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
@@ -176,8 +182,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void LoginAsUserOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult LoginAsUser(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsUser);
@@ -186,8 +194,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void LoginAsClientOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult LoginAsClient(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsClient);
@@ -196,8 +206,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void ClientOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? clientId);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult Client(long? clientId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Client);

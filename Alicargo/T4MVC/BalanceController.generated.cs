@@ -151,8 +151,10 @@ namespace Alicargo.Controllers.Calculation
     {
         public T4MVC_BalanceController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void HistoryOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long clientId);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult History(long clientId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.History);
@@ -161,8 +163,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void BalanceButtonsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult BalanceButtons()
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.BalanceButtons);
@@ -170,8 +174,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void DecreaseOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long clientId);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Decrease(long clientId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Decrease);
@@ -180,8 +186,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void DecreaseOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Decrease(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Decrease);
@@ -191,8 +199,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void IncreaseOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long clientId);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Increase(long clientId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Increase);
@@ -201,8 +211,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void IncreaseOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Increase(long clientId, Alicargo.ViewModels.Calculation.Admin.PaymentModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Increase);

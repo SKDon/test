@@ -161,8 +161,10 @@ namespace Alicargo.Controllers.User
     {
         public T4MVC_ClientController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
@@ -170,8 +172,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List(int take, int skip)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
@@ -181,8 +185,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Create()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
@@ -190,8 +196,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.User.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
@@ -201,8 +209,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void ContractOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long? id);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Contract(long? id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Contract);
@@ -211,8 +221,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? id);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(long? id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -221,8 +233,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long? id, Alicargo.ViewModels.User.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(long? id, Alicargo.ViewModels.User.ClientModel model, Alicargo.ViewModels.TransitEditModel transitModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);

@@ -86,8 +86,10 @@ namespace Alicargo.Controllers
     {
         public T4MVC_ExcelController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void ApplicationsOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Applications()
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Applications);

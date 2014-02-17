@@ -164,8 +164,10 @@ namespace Alicargo.Controllers.User
     {
         public T4MVC_UserController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Index(Alicargo.DataAccess.Contracts.Enums.RoleType roleType)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
@@ -174,8 +176,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List(Alicargo.DataAccess.Contracts.Enums.RoleType roleType)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
@@ -184,8 +188,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Edit(Alicargo.DataAccess.Contracts.Enums.RoleType roleType, long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -195,8 +201,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.DataAccess.Contracts.Enums.RoleType roleType);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Create(Alicargo.DataAccess.Contracts.Enums.RoleType roleType)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
@@ -205,8 +213,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.UserModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.User.UserModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -215,8 +225,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.UserModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.User.UserModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
