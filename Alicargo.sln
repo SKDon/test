@@ -41,9 +41,6 @@ EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Alicargo.ModelingProject", "Alicargo.ModelingProject\Alicargo.ModelingProject.modelproj", "{82D6AE8B-43D6-4BDB-8BF3-173BA51BF83B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{80428DE9-C391-4A41-AB26-2216CCC0F77A}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alicargo.Jobs.BlackBox.Tests", "Alicargo.Jobs.BlackBox.Tests\Alicargo.Jobs.BlackBox.Tests.csproj", "{E7172376-8458-443B-BA70-11279FDBD2DB}"
 EndProject
