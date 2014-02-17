@@ -1,6 +1,6 @@
 ﻿var Alicargo = (function($a) {
 	$a.MaxPageSize = 10000;
-	$a.DefaultPageSize = $a.MaxPageSize;
+	$a.DefaultPageSize = 20;
 
 	$a.SelectedPageSize = function(selector, value) {
 		var key = selector + '-page-size';
