@@ -103,8 +103,10 @@ namespace Alicargo.Controllers
     {
         public T4MVC_StateSettingsController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Index(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
@@ -113,8 +115,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.State.StateSettingsModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Index(long id, Alicargo.ViewModels.State.StateSettingsModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);

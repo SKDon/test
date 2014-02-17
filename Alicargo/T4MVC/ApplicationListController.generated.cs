@@ -120,8 +120,10 @@ namespace Alicargo.Controllers.Application
     {
         public T4MVC_ApplicationListController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
@@ -129,8 +131,10 @@ namespace Alicargo.Controllers.Application
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, int skip, System.Collections.Generic.Dictionary<string,string>[] group);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List(int take, int skip, System.Collections.Generic.Dictionary<string,string>[] group)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);

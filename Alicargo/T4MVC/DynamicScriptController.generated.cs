@@ -100,8 +100,10 @@ namespace Alicargo.Controllers
     {
         public T4MVC_DynamicScriptController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void RolesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult Roles()
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Roles);
@@ -109,8 +111,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void UrlsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult Urls()
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Urls);
@@ -118,8 +122,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void LocalizationOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult Localization()
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Localization);
@@ -127,8 +133,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void StatesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult States()
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.States);

@@ -121,8 +121,10 @@ namespace Alicargo.Controllers
     {
         public T4MVC_EmailTemplateController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, Alicargo.DataAccess.Contracts.Enums.EventType id, string lang);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Edit(Alicargo.DataAccess.Contracts.Enums.EventType id, string lang)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -132,8 +134,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.EmailTemplate.EventTemplateModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.EmailTemplate.EventTemplateModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -142,8 +146,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void HelpOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Help()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Help);
@@ -151,8 +157,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
@@ -160,8 +168,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List()
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);

@@ -127,8 +127,10 @@ namespace Alicargo.Controllers
     {
         public T4MVC_TransitController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void EditByApplicationOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? applicationId);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult EditByApplication(long? applicationId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByApplication);
@@ -137,8 +139,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void EditByClientOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? clientId);
 
+        [NonAction]
         public override System.Web.Mvc.PartialViewResult EditByClient(long? clientId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EditByClient);

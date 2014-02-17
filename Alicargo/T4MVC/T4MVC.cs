@@ -22,7 +22,7 @@ using System.Web.Routing;
 using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public static class MVC
+public static partial class MVC
 {
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();

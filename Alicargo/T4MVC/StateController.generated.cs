@@ -146,8 +146,10 @@ namespace Alicargo.Controllers
     {
         public T4MVC_StateController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Create()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
@@ -155,8 +157,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.State.StateCreateModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.State.StateCreateModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
@@ -165,8 +169,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void DeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Delete(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
@@ -175,8 +181,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id, string lang);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Edit(long id, string lang)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -186,8 +194,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.State.StateEditModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.State.StateEditModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
@@ -196,8 +206,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
@@ -205,8 +217,10 @@ namespace Alicargo.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List()
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);

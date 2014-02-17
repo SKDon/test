@@ -122,8 +122,10 @@ namespace Alicargo.Controllers.User
     {
         public T4MVC_SenderController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Create()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Create);
@@ -131,8 +133,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.User.SenderModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.User.SenderModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
@@ -141,8 +145,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Edit(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -151,8 +157,10 @@ namespace Alicargo.Controllers.User
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.User.SenderModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.User.SenderModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);

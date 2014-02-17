@@ -109,8 +109,10 @@ namespace Alicargo.Controllers.Calculation
     {
         public T4MVC_SenderCalculationController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void ExcelOverride(T4MVC_System_Web_Mvc_FileResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.FileResult Excel()
         {
             var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Excel);
@@ -118,8 +120,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
@@ -127,8 +131,10 @@ namespace Alicargo.Controllers.Calculation
             return callInfo;
         }
 
+        [NonAction]
         partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int take, long skip);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult List(int take, long skip)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);

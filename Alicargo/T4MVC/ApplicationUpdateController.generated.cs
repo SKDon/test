@@ -184,8 +184,10 @@ namespace Alicargo.Controllers.Application
     {
         public T4MVC_ApplicationUpdateController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void CloseOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult Close(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Close);
@@ -194,8 +196,10 @@ namespace Alicargo.Controllers.Application
             return callInfo;
         }
 
+        [NonAction]
         partial void SetStateOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, long stateId);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult SetState(long id, long stateId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetState);
@@ -205,8 +209,10 @@ namespace Alicargo.Controllers.Application
             return callInfo;
         }
 
+        [NonAction]
         partial void StatesOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.JsonResult States(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.States);
@@ -215,8 +221,10 @@ namespace Alicargo.Controllers.Application
             return callInfo;
         }
 
+        [NonAction]
         partial void SetTransitReferenceOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, string transitReference);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult SetTransitReference(long id, string transitReference)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetTransitReference);
@@ -226,8 +234,10 @@ namespace Alicargo.Controllers.Application
             return callInfo;
         }
 
+        [NonAction]
         partial void SetTransitCostOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, decimal? transitCost);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult SetTransitCost(long id, decimal? transitCost)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetTransitCost);
@@ -237,8 +247,10 @@ namespace Alicargo.Controllers.Application
             return callInfo;
         }
 
+        [NonAction]
         partial void SetDateOfCargoReceiptOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, System.DateTimeOffset? dateOfCargoReceipt);
 
+        [NonAction]
         public override System.Web.Mvc.HttpStatusCodeResult SetDateOfCargoReceipt(long id, System.DateTimeOffset? dateOfCargoReceipt)
         {
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetDateOfCargoReceipt);

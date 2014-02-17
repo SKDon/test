@@ -110,8 +110,10 @@ namespace Alicargo.Controllers.Awb
     {
         public T4MVC_BrokerAwbController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Edit(long id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -120,8 +122,10 @@ namespace Alicargo.Controllers.Awb
             return callInfo;
         }
 
+        [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Edit(long id, Alicargo.ViewModels.AirWaybill.AwbBrokerModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
