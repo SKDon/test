@@ -2,19 +2,26 @@
 @model ApplicationSenderModel
 
 <div class="row">
-	<div class="span4">
+	<div class="span3">		
 		@Html.EditorWithLabelFor(model => model.FactoryName)
 		@Html.EditorWithLabelFor(model => model.MarkName)
 		@Html.EditorWithLabelFor(model => model.Invoice)
 		@Html.LabelFor(x => x.CountryId)
 		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
 	</div>
-	<div class="span4">
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.FactoryEmail)
+		@Html.EditorWithLabelFor(model => model.FactoryPhone)
+		@Html.EditorWithLabelFor(model => model.FactoryContact)
+		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.AddressLoad)
 		@Html.EditorWithLabelFor(model => model.Weight)
 		@Html.EditorWithLabelFor(model => model.Count)
 		@Html.EditorWithLabelFor(model => model.Currency)
 	</div>
-	<div class="span4">
+	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.FactureCost)
 		@Html.EditorWithLabelFor(model => model.FactureCostEx)
 		@Html.EditorWithLabelFor(model => model.PickupCost)

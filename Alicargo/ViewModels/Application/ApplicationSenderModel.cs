@@ -48,5 +48,23 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof(Entities), "Country")]
 		public long CountryId { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "FactoryPhone")]
+		public string FactoryPhone { get; set; }
+
+		[MaxLength(320)]
+		[DataType(DataType.EmailAddress)]
+		[DisplayNameLocalized(typeof(Entities), "FactoryEmail")]
+		public string FactoryEmail { get; set; }
+
+		[DataType(DataType.Text)]
+		[DisplayNameLocalized(typeof(Entities), "FactoryContact")]
+		public string FactoryContact { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "AddressLoad")]
+		public string AddressLoad { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
+		public string WarehouseWorkingTime { get; set; }
 	}
 }

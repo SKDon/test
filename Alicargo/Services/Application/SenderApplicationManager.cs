@@ -55,7 +55,12 @@ namespace Alicargo.Services.Application
 				FactureCost = application.FactureCost,
 				FactureCostEx = application.FactureCostEx,
 				PickupCost = application.PickupCost,
-				CountryId = application.CountryId
+				CountryId = application.CountryId,
+				AddressLoad = application.AddressLoad,
+				FactoryContact = application.FactoryContact,
+				FactoryEmail = application.FactoryEmail,
+				FactoryPhone = application.FactoryPhone,
+				WarehouseWorkingTime = application.WarehouseWorkingTime
 			};
 		}
 
@@ -126,6 +131,11 @@ namespace Alicargo.Services.Application
 			to.FactureCostEx = from.FactureCostEx;
 			to.PickupCost = from.PickupCost;
 			to.CountryId = from.CountryId;
+			to.AddressLoad = from.AddressLoad;
+			to.FactoryContact = from.FactoryContact;
+			to.FactoryEmail = from.FactoryEmail;
+			to.FactoryPhone = from.FactoryPhone;
+			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
 		}
 	}
 }
