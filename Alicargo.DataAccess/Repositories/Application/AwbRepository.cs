@@ -173,30 +173,28 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
-		public float? GetTotalWeightWithouAwb(long? clientId = null, long? senderId = null,
+		public float GetTotalWeightWithouAwb(long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null)
 		{
-			var applications = GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId);
-
-			return applications.Sum(x => x.Weight);
+			return (float)SelectApplicationsWithoutAwb(x => x.Weight, clientId, senderId, forwarderId, carrierId).Sum();
 		}
 
 		public decimal GetTotalValueWithouAwb(long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null)
 		{
-			return GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId).Sum(x => x.Value);
+			return SelectApplicationsWithoutAwb(x => x.Value, clientId, senderId, forwarderId, carrierId).Sum();
 		}
 
 		public float GetTotalVolumeWithouAwb(long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null)
 		{
-			return GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId).Sum(x => x.Volume);
+			return SelectApplicationsWithoutAwb(x => x.Volume, clientId, senderId, forwarderId, carrierId).Sum();
 		}
 
-		public int? GetTotalCountWithouAwb(long? clientId = null, long? senderId = null,
+		public int GetTotalCountWithouAwb(long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null)
 		{
-			return GetApplicationsWithoutAwb(clientId, senderId, forwarderId, carrierId).Sum(x => x.Count);
+			return (int)SelectApplicationsWithoutAwb(x => x.Count, clientId, senderId, forwarderId, carrierId).Sum();
 		}
 
 		public EmailData[] GetClientEmails(long awbId)
@@ -250,15 +248,17 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context.SubmitChanges();
 		}
 
-		private IQueryable<DbContext.Application> GetApplicationsWithoutAwb(long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null)
+		private T[] SelectApplicationsWithoutAwb<T>(Expression<Func<DbContext.Application, T>> selector,
+			long? clientId = null, long? senderId = null, long? forwarderId = null, long? carrierId = null)
 		{
-			return _context.Applications.Where(
-				y => !y.AirWaybillId.HasValue
-				     && (!forwarderId.HasValue || y.ForwarderId == forwarderId)
-				     && (!clientId.HasValue || y.ClientId == clientId)
-				     && (!senderId.HasValue || y.SenderId == senderId)
-				     && (!carrierId.HasValue || y.Transit.CarrierId == carrierId));
+			return _context.Applications
+				.Where(y => !y.AirWaybillId.HasValue
+				            && (!forwarderId.HasValue || y.ForwarderId == forwarderId)
+				            && (!clientId.HasValue || y.ClientId == clientId)
+				            && (!senderId.HasValue || y.SenderId == senderId)
+				            && (!carrierId.HasValue || y.Transit.CarrierId == carrierId))
+				.Select(selector)
+				.ToArray();
 		}
 
 		private static void Map(AirWaybillData @from, AirWaybill to,

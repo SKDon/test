@@ -49,8 +49,8 @@ namespace Alicargo.Services.Application
 			_airWaybills = _awbRepository.Get(awbIds).ToDictionary(x => x.Id, x => x);
 			_awbAggregates = _awbRepository.GetAggregate(awbIds, clientId, senderId, forwarderId, carrierId)
 				.ToDictionary(x => x.AirWaybillId, x => x);
-			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb(clientId, senderId, forwarderId, carrierId) ?? 0;
-			_weightWithouAwb = _awbRepository.GetTotalWeightWithouAwb(clientId, senderId, forwarderId, carrierId) ?? 0;
+			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb(clientId, senderId, forwarderId, carrierId);
+			_weightWithouAwb = _awbRepository.GetTotalWeightWithouAwb(clientId, senderId, forwarderId, carrierId);
 			_valueWithouAwb = _awbRepository.GetTotalValueWithouAwb(clientId, senderId, forwarderId, carrierId);
 			_volumeWithouAwb = _awbRepository.GetTotalVolumeWithouAwb(clientId, senderId, forwarderId, carrierId);
 

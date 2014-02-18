@@ -64,8 +64,8 @@ namespace Alicargo.Tests.Services.Application
 					TotalValue = x,
 					TotalVolume = x
 				}).ToArray());
-			_awbRepository.Setup(x => x.GetTotalCountWithouAwb(null, null, null, null)).Returns((int?)null);
-			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb(null, null, null, null)).Returns((float?)null);
+			_awbRepository.Setup(x => x.GetTotalCountWithouAwb(null, null, null, null)).Returns(0);
+			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb(null, null, null, null)).Returns(0);
 			_awbRepository.Setup(x => x.GetTotalValueWithouAwb(null, null, null, null)).Returns(0);
 			_awbRepository.Setup(x => x.GetTotalVolumeWithouAwb(null, null, null, null)).Returns(0);
 
