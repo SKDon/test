@@ -37,6 +37,7 @@ namespace Alicargo.Services.Application
 				{ OrderType.City, new TOrder(item => item.TransitCity, OrderHelper.CityFieldName) },
 				{ OrderType.Carrier, new TOrder(item => item.CarrierName, OrderHelper.CarrierFieldName) },
 				{ OrderType.State, new TOrder(item => item.State.StateName, OrderHelper.StateFieldName) },
+				{ OrderType.MethodOfTransit, new TOrder(item => item.TransitMethodOfTransitString, OrderHelper.MethodOfTransitFieldName) },
 				{ OrderType.Client, new TOrder(item => item.ClientNic, OrderHelper.ClientFieldName) }
 			};
 		}

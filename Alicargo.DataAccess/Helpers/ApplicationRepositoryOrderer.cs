@@ -16,6 +16,7 @@ namespace Alicargo.DataAccess.Helpers
 			{ OrderType.Id, ById },
 			{ OrderType.AirWaybill, ByAirWaybillBill },
 			{ OrderType.State, ByState },
+			{ OrderType.MethodOfTransit, ByMethodOfTransit },
 			{ OrderType.Client, ByClientNic },
 			{ OrderType.Country, ByCountry },
 			{ OrderType.Factory, ByFactory },
@@ -25,6 +26,11 @@ namespace Alicargo.DataAccess.Helpers
 			{ OrderType.Carrier, ByCarrier },
 			{ OrderType.City, ByCity }
 		};
+
+		private static IOrderedQueryable<Application> ByMethodOfTransit(IQueryable<Application> applications, bool desc, bool isFirst)
+		{
+			return Order(applications, desc, isFirst, a => a.Transit.MethodOfTransitId);
+		}
 
 		public IQueryable<Application> Order(IQueryable<Application> applications, IList<Order> orders)
 		{

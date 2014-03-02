@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alicargo.DataAccess.Contracts.Helpers;
 
-namespace Alicargo.DataAccess.Contracts.Helpers
+namespace Alicargo.Services.Application
 {
 	public static class OrderHelper
 	{
@@ -16,6 +17,7 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 		public const string ForwarderFieldName = "ForwarderName";
 		public const string CityFieldName = "TransitCity";
 		public const string CarrierFieldName = "CarrierName";
+		public const string MethodOfTransitFieldName = "TransitMethodOfTransitString";
 
 		private static readonly IDictionary<string, OrderType> Map = new Dictionary<string, OrderType>
 		{
@@ -27,6 +29,7 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 			{ CityFieldName, OrderType.City },
 			{ CarrierFieldName, OrderType.Carrier },
 			{ StateFieldName, OrderType.State },
+			{ MethodOfTransitFieldName, OrderType.MethodOfTransit },
 			{ CountryFieldName, OrderType.Country },
 			{ AwbFieldName, OrderType.AirWaybill }
 		};

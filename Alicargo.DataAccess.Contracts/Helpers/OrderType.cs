@@ -12,6 +12,7 @@
 		Sender,
 		Forwarder,
 		City,
-		Carrier
+		Carrier,
+		MethodOfTransit
 	}
 }
