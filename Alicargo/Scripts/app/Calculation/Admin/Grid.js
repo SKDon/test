@@ -12,7 +12,7 @@
 	};
 	select.change(updateBalanceButtons);
 	updateBalanceButtons();
-	
+
 	$a.Calculation = (function($c) {
 
 		$c.GetMainGrid = function() {
@@ -139,55 +139,54 @@
 						awbId: awbId,
 						classId: id
 					}, awbId);
+
+					return;
 				}
-				if (e.values.TariffPerKg !== undefined) {
-					post($u.Calculation_SetTariffPerKg, {
-						id: applicationId,
-						awbId: awbId,
-						tariffPerKg: e.values.TariffPerKg
-					}, awbId);
-				}
-				if (e.values.ScotchCost !== undefined) {
-					post($u.Calculation_SetScotchCostEdited, {
-						id: applicationId,
-						awbId: awbId,
-						scotchCost: e.values.ScotchCost
-					}, awbId);
-				}
-				if (e.values.FactureCost !== undefined) {
-					post($u.Calculation_SetFactureCostEdited, {
-						id: applicationId,
-						awbId: awbId,
-						factureCost: e.values.FactureCost
-					}, awbId);
-				}
-				if (e.values.FactureCostEx !== undefined) {
-					post($u.Calculation_SetFactureCostExEdited, {
-						id: applicationId,
-						awbId: awbId,
-						factureCostEx: e.values.FactureCostEx
-					}, awbId);
-				}
-				if (e.values.PickupCost !== undefined) {
-					post($u.Calculation_SetPickupCostEdited, {
-						id: applicationId,
-						awbId: awbId,
-						pickupCost: e.values.PickupCost
-					}, awbId);
-				}
-				if (e.values.TransitCost !== undefined) {
-					post($u.Calculation_SetTransitCostEdited, {
-						id: applicationId,
-						awbId: awbId,
-						transitCost: e.values.TransitCost
-					}, awbId);
-				}
-				if (e.values.SenderRate !== undefined) {
-					post($u.Calculation_SetSenderRate, {
-						id: applicationId,
-						awbId: awbId,
-						senderRate: e.values.SenderRate
-					}, awbId);
+
+				var settings = {
+					TariffPerKg: {
+						Url: $u.Calculation_SetTariffPerKg,
+						ArgumentName: "tariffPerKg"
+					},
+					ScotchCost: {
+						Url: $u.Calculation_SetScotchCostEdited,
+						ArgumentName: "scotchCost"
+					},
+					FactureCost: {
+						Url: $u.Calculation_SetFactureCostEdited,
+						ArgumentName: "factureCost"
+					},
+					FactureCostEx: {
+						Url: $u.Calculation_SetFactureCostExEdited,
+						ArgumentName: "factureCostEx"
+					},
+					PickupCost: {
+						Url: $u.Calculation_SetPickupCostEdited,
+						ArgumentName: "pickupCost"
+					},
+					TransitCost: {
+						Url: $u.Calculation_SetTransitCostEdited,
+						ArgumentName: "transitCost"
+					},
+					SenderRate: {
+						Url: $u.Calculation_SetSenderRate,
+						ArgumentName: "senderRate"
+					}
+				};
+
+				var data = {
+					id: applicationId,
+					awbId: awbId
+				};
+
+				for (var fieldName in e.values){
+					if (e.values[fieldName] !== undefined) {
+						var setting = settings[fieldName];
+						data[setting.ArgumentName] = e.values[fieldName];
+						post(setting.Url, data, awbId);
+
+						return;
+					}
 				}
 			}
 
