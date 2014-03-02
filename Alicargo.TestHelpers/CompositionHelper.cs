@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Transactions;
 using Alicargo.App_Start;
@@ -36,6 +37,7 @@ namespace Alicargo.TestHelpers
 		private void Init()
 		{
 			_connection.Open();
+			_kernel.Bind<IDbConnection>().ToConstant(_connection);
 
 			BindServices();
 			BindIdentityService();
