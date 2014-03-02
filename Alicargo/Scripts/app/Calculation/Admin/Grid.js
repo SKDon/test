@@ -131,46 +131,53 @@
 			function save(e) {
 				var awbId = e.model.AirWaybillId;
 				var applicationId = e.model.ApplicationId;
-
-				if (e.values.ClassType !== undefined) {
-					var id = e.values.ClassType == null ? null : e.values.ClassType.ClassId;
-					post($u.Calculation_SetClass, {
-						id: applicationId,
-						awbId: awbId,
-						classId: id
-					}, awbId);
-
-					return;
+				
+				function numberConverter(value) {
+					return kendo.toString(value, 'n2');
 				}
 
 				var settings = {
+					ClassType: {
+						Url: $u.Calculation_SetClass,
+						ArgumentName: "classId",
+						Convert: function(classType) {
+							return classType == null ? null : classType.ClassId;
+						}
+					},
 					TariffPerKg: {
 						Url: $u.Calculation_SetTariffPerKg,
-						ArgumentName: "tariffPerKg"
+						ArgumentName: "tariffPerKg",
+						Convert: numberConverter
 					},
 					ScotchCost: {
 						Url: $u.Calculation_SetScotchCostEdited,
-						ArgumentName: "scotchCost"
+						ArgumentName: "scotchCost",
+						Convert: numberConverter
 					},
 					FactureCost: {
 						Url: $u.Calculation_SetFactureCostEdited,
-						ArgumentName: "factureCost"
+						ArgumentName: "factureCost",
+						Convert: numberConverter
 					},
 					FactureCostEx: {
 						Url: $u.Calculation_SetFactureCostExEdited,
-						ArgumentName: "factureCostEx"
+						ArgumentName: "factureCostEx",
+						Convert: numberConverter
 					},
 					PickupCost: {
 						Url: $u.Calculation_SetPickupCostEdited,
-						ArgumentName: "pickupCost"
+						ArgumentName: "pickupCost",
+						Convert: numberConverter
 					},
 					TransitCost: {
 						Url: $u.Calculation_SetTransitCostEdited,
-						ArgumentName: "transitCost"
+						ArgumentName: "transitCost",
+						Convert: numberConverter
 					},
 					SenderRate: {
 						Url: $u.Calculation_SetSenderRate,
-						ArgumentName: "senderRate"
+						ArgumentName: "senderRate",
+						Convert: numberConverter
 					},
 					Count: {
 						Url: $u.Calculation_SetCount,
@@ -178,15 +185,18 @@
 					},
 					Weight: {
 						Url: $u.Calculation_SetWeight,
-						ArgumentName: "value"
+						ArgumentName: "value",
+						Convert: numberConverter
 					},
 					InsuranceCost: {
 						Url: $u.Calculation_SetInsuranceCost,
-						ArgumentName: "value"
+						ArgumentName: "value",
+						Convert: numberConverter
 					},
 					InsuranceCostForClient: {
 						Url: $u.Calculation_SetInsuranceCostForClient,
-						ArgumentName: "value"
+						ArgumentName: "value",
+						Convert: numberConverter
 					}
 				};
 
@@ -195,10 +205,12 @@
 					awbId: awbId
 				};
 
-				for (var fieldName in e.values){
+				for (var fieldName in e.values) {
 					if (e.values[fieldName] !== undefined) {
 						var setting = settings[fieldName];
-						data[setting.ArgumentName] = e.values[fieldName];
+						data[setting.ArgumentName] = setting.Convert
+							? setting.Convert(e.values[fieldName])
+							: e.values[fieldName];
 						post(setting.Url, data, awbId);
 
 						return;

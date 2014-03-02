@@ -627,7 +627,6 @@
     <Content Include="Scripts\jQuery\jquery.cookie.js" />
     <Content Include="Scripts\jQuery\globalize\cultures\globalize.culture.it.js" />
     <Content Include="Scripts\jQuery\globalize\cultures\globalize.culture.ru.js" />
-    <Content Include="Scripts\jQuery\globalize\cultures\globalize.cultures.js" />
     <Content Include="Scripts\jQuery\globalize\globalize.js" />
     <Content Include="Scripts\kendo\2013.3.1119\cultures\kendo.culture.it.min.js" />
     <Content Include="Scripts\kendo\2013.3.1119\cultures\kendo.culture.ru.min.js" />

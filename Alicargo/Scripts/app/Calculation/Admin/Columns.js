@@ -19,20 +19,20 @@
 							"Mark": { type: "string", editable: false },
 							"Class": { type: "string", editable: true },
 							"Count": { type: "number", editable: true },
-							"Weight": { type: "string", editable: true },
+							"Weight": { type: "number", editable: true },
 							"Invoice": { type: "string", editable: false },
 							"Value": { type: "number", editable: false },
-							"TariffPerKg": { type: "string", editable: true },
-							"SenderRate": { type: "string", editable: true },
+							"TariffPerKg": { type: "number", editable: true },
+							"SenderRate": { type: "number", editable: true },
 							"TotalTariffCost": { type: "number", editable: false },
 							"TotalSenderRate": { type: "number", editable: false },
-							"ScotchCost": { type: "string", editable: true },
-							"FactureCost": { type: "string", editable: true },
-							"FactureCostEx": { type: "string", editable: true },
-							"PickupCost": { type: "string", editable: true },
-							"TransitCost": { type: "string", editable: true },
-							"InsuranceCost": { type: "string", editable: true },
-							"InsuranceCostForClient": { type: "string", editable: true },
+							"ScotchCost": { type: "number", editable: true },
+							"FactureCost": { type: "number", editable: true },
+							"FactureCostEx": { type: "number", editable: true },
+							"PickupCost": { type: "number", editable: true },
+							"TransitCost": { type: "number", editable: true },
+							"InsuranceCost": { type: "number", editable: true },
+							"InsuranceCostForClient": { type: "number", editable: true },
 							"Profit": { type: "number", editable: false }
 						}
 					}
@@ -118,6 +118,16 @@
 				}
 			}
 
+			function numberEditor(container, options) {
+				$('<input name="' + options.field + '"/>')
+					.appendTo(container)
+					.kendoNumericTextBox({
+						format: n2Format,
+						decimals: 2,
+						step: 0.5
+					});
+			}
+
 			var c = [
 				{
 					field: "AirWaybillId",
@@ -128,43 +138,165 @@
 							+ data.value.text + "</a>";
 					}
 				},
-				{ field: "ClientNic", title: $l.Pages_Client },
-				{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, template: "<a href='" + $u.Application_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>" },
-				{ field: "Factory", title: $l.Entities_FactoryName },
-				{ field: "Mark", title: $l.Entities_Mark },
+				{
+					field: "ClientNic",
+					title: $l.Pages_Client
+				},
+				{
+					field: "DisplayNumber",
+					title: $l.Entities_DisplayNumber,
+					template: "<a href='" + $u.Application_Edit + "/#=ApplicationId#'>#= DisplayNumber #</a>"
+				},
+				{
+					field: "Factory",
+					title: $l.Entities_FactoryName
+				},
+				{
+					field: "Mark",
+					title: $l.Entities_Mark
+				},
 				{
 					field: "ClassId",
 					title: $l.Entities_Class,
 					editor: classEditor,
 					template: function(model) { return classType[model.ClassId]; }
 				},
-				{ field: "Count", title: $l.Entities_Count, groupFooterTemplate: "#= sum #", attributes: textRight, footerAttributes: textRight },
-				{ field: "Weight", title: $l.Entities_Weight, groupFooterTemplate: groupFooterTemplate, format: n2Format, attributes: textRight, footerAttributes: textRight },
-				{ field: "SenderRate", title: $l.Entities_SenderRate, format: n2Format, attributes: textRight },
-				{ field: "TotalSenderRate", title: $l.Entities_TotalSenderRate, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
-				{ field: "Invoice", title: $l.Entities_Invoice },
-				{ field: "Value", title: $l.Entities_Value, template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: textRight, footerAttributes: textRight },
-				{ field: "TariffPerKg", title: $l.Entities_TariffPerKg, format: n2Format, attributes: textRight },
-				{ field: "TotalTariffCost", title: $l.Entities_TotalTariffCost, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
-				{ field: "ScotchCost", groupFooterTemplate: groupFooterTemplate, title: $l.Entities_ScotchCost, attributes: textRight, footerAttributes: textRight },
-				{ field: "InsuranceCost", title: $l.Entities_Insurance, template: "#= kendo.toString(InsuranceCost, 'n2') + CurrencyType[ValueCurrencyId] #", groupFooterTemplate: groupFooterTemplate, attributes: textRight, footerAttributes: textRight },
-				{ field: "InsuranceCostForClient", title: $l.Entities_InsuranceForClient, template: "#= kendo.toString(InsuranceCostForClient, 'n2') + CurrencyType[ValueCurrencyId] #", attributes: textRight, footerAttributes: textRight },
-				{ field: "FactureCost", title: $l.Entities_FactureCost, attributes: textRight },
-				{ field: "FactureCostEx", title: $l.Entities_FactureCostEx, attributes: textRight },
-				{ field: "PickupCost", title: $l.Entities_PickupCost, attributes: textRight },
-				{ field: "TransitCost", title: $l.Entities_TransitCost, groupFooterTemplate: "#= kendo.toString(sum, 'n0') #", attributes: textRight, footerAttributes: textRight },
-				{ field: "Profit", title: $l.Entities_Total, groupFooterTemplate: groupFooterTemplate, template: "<b>#= kendo.toString(Profit, 'n2') #</b>", headerAttributes: textBold, attributes: textRight, footerAttributes: textRight },
+				{
+					field: "Count",
+					title: $l.Entities_Count,
+					groupFooterTemplate: "#= sum #",
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "Weight",
+					title: $l.Entities_Weight,
+					groupFooterTemplate: groupFooterTemplate,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "SenderRate",
+					title: $l.Entities_SenderRate,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight
+				},
+				{
+					field: "TotalSenderRate",
+					title: $l.Entities_TotalSenderRate,
+					groupFooterTemplate: groupFooterTemplate,
+					template: "<b>#= kendo.toString(TotalSenderRate, 'n2') #</b>",
+					headerAttributes: textBold,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "Invoice",
+					title: $l.Entities_Invoice
+				},
+				{
+					field: "Value",
+					title: $l.Entities_Value,
+					template: "#= kendo.toString(Value, 'n2') + CurrencyType[ValueCurrencyId] #",
+					groupFooterTemplate: groupFooterTemplate,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "TariffPerKg",
+					title: $l.Entities_TariffPerKg,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight
+				},
+				{
+					field: "TotalTariffCost",
+					title: $l.Entities_TotalTariffCost,
+					groupFooterTemplate: groupFooterTemplate,
+					template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>",
+					headerAttributes: textBold,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "ScotchCost",
+					groupFooterTemplate: groupFooterTemplate,
+					title: $l.Entities_ScotchCost,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "InsuranceCost",
+					title: $l.Entities_Insurance,
+					groupFooterTemplate: groupFooterTemplate,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "InsuranceCostForClient",
+					title: $l.Entities_InsuranceForClient,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "FactureCost",
+					title: $l.Entities_FactureCost,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight
+				},
+				{
+					field: "FactureCostEx",
+					title: $l.Entities_FactureCostEx,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight
+				},
+				{
+					field: "PickupCost",
+					title: $l.Entities_PickupCost,
+					format: n2Format,
+					editor: numberEditor,
+					attributes: textRight
+				},
+				{
+					field: "TransitCost",
+					title: $l.Entities_TransitCost,
+					format: n2Format,
+					editor: numberEditor,
+					groupFooterTemplate: "#= kendo.toString(sum, 'n0') #",
+					attributes: textRight,
+					footerAttributes: textRight
+				},
+				{
+					field: "Profit",
+					title: $l.Entities_Total,
+					groupFooterTemplate: groupFooterTemplate,
+					template: "<b>#= kendo.toString(Profit, 'n2') #</b>",
+					headerAttributes: textBold,
+					attributes: textRight,
+					footerAttributes: textRight
+				},
 				{
 					attributes: { "class": "cell-button" },
 					command: [{
-						name: "custom-gear",
-						text: "&nbsp;",
-						click: onCalculate
-					}, {
-						name: "custom-cancel",
-						text: "&nbsp;",
-						click: onCancelCalculate
-					}],
+							name: "custom-gear",
+							text: "&nbsp;",
+							click: onCalculate
+						}, {
+							name: "custom-cancel",
+							text: "&nbsp;",
+							click: onCancelCalculate
+						}],
 					title: "&nbsp;",
 					width: $a.DefaultGridButtonWidth
 				}
