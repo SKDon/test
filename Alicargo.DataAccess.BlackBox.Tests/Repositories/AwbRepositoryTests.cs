@@ -130,7 +130,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			applications.SetAirWaybill(a1, id);
 			applications.SetAirWaybill(a2, id);
 
-			var emails = _awbs.GetClientEmails(id).Select(x=>x.Email).ToArray();
+			var emails = _awbs.GetClientEmails(id).Select(x => x.Email).ToArray();
 
 			var clientRepository = new ClientRepository(_context.UnitOfWork);
 

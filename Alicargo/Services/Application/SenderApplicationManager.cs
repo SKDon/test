@@ -92,8 +92,12 @@ namespace Alicargo.Services.Application
 
 		private void Add(ApplicationData application, long clientId, long senderId)
 		{
-			CopyTransitDataFromClient(clientId, application);
+			var transit = _transits.GetByClient(clientId);
+			transit.Id = 0;
+			var transitId = _transits.Add(transit);
 
+			application.TransitId = transitId;
+			application.ForwarderId = _forwarders.GetByCityOrAny(transit.CityId, null);
 			application.StateId = _stateConfig.DefaultStateId;
 			application.Class = null;
 			application.StateChangeTimestamp = DateTimeProvider.Now;
@@ -102,19 +106,6 @@ namespace Alicargo.Services.Application
 			application.ClientId = clientId;
 
 			_updater.Add(application);
-		}
-
-		private void CopyTransitDataFromClient(long clientId, ApplicationData application)
-		{
-			var transit = _transits.GetByClient(clientId);
-
-			transit.Id = 0;
-
-			var transitId = _transits.Add(transit);
-
-			application.TransitId = transitId;
-
-			application.ForwarderId = _forwarders.GetByCityOrAny(transit.CityId, application.ForwarderId);
 		}
 
 		private static void Map(ApplicationSenderModel from, ApplicationData to)
