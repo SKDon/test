@@ -4,9 +4,9 @@ namespace Alicargo.Core.Calculation
 {
 	public static class CalculationHelper
 	{
-		public static decimal GetInsuranceCost(decimal value, decimal insuranceRate)
+		public static decimal GetInsuranceCost(decimal value, float insuranceRate)
 		{
-			return value * insuranceRate;
+			return value * (decimal)insuranceRate;
 		}
 
 		public static decimal? GetSenderScotchCost(IReadOnlyDictionary<long, decimal> tariffs, long? senderId, int? count)

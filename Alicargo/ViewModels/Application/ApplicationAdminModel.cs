@@ -110,10 +110,10 @@ namespace Alicargo.ViewModels.Application
 
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "InsuranceRate")]
-		public decimal InsuranceRate { get; set; }
+		public float InsuranceRate { get; set; }
 
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "InsuranceRateForClient")]
-		public decimal InsuranceRateForClient { get; set; }
+		public float InsuranceRateForClient { get; set; }
 	}
 }

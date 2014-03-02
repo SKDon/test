@@ -22,5 +22,9 @@ namespace Alicargo.Services.Abstract
 		void SetSenderRate(long id, decimal? senderRate);
 		void SetClass(long id, ClassType? classType);
 		void SetTransitCostEdited(long id, decimal? transitCost);
+		void SetCount(long id, int? value);
+		void SetWeight(long id, float? value);
+		void SetInsuranceCost(long id, float? value);
+		void SetInsuranceCostForClient(long id, float? value);
 	}
 }

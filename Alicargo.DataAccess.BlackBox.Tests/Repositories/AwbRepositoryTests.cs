@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.SqlClient;
+using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -71,7 +72,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var awbId1 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
 			var awbId2 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
 
-			var applications = new ApplicationEditor(_context.UnitOfWork);
+			var applications = new ApplicationEditor(new SqlConnection(Settings.Default.MainConnectionString));
 			var app11 = applications.Add(data11);
 			var app12 = applications.Add(data12);
 			var app21 = applications.Add(data21);
@@ -123,7 +124,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var id = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
 
-			var applications = new ApplicationEditor(_context.UnitOfWork);
+			var applications = new ApplicationEditor(new SqlConnection(Settings.Default.MainConnectionString));
 			var a1 = applications.Add(data1);
 			var a2 = applications.Add(data2);
 

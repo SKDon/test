@@ -188,9 +188,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
-		public decimal GetDefaultInsuranceRate()
+		public float GetDefaultInsuranceRate()
 		{
-			return (decimal)ConfigurationManager.AppSettings["DefaultInsuranceRate"].ToDouble();
+			return (float)ConfigurationManager.AppSettings["DefaultInsuranceRate"].ToDouble();
 		}
 
 		public ApplicationExtendedData GetExtendedData(long id)

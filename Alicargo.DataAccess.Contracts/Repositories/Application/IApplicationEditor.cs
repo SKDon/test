@@ -21,6 +21,10 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		void SetTransitCost(long id, decimal? transitCost);
 		void SetTransitCostEdited(long id, decimal? transitCost);
 		void SetTransitReference(long id, string transitReference);
+		void SetCount(long id, int? value);
+		void SetWeight(long id, float? value);
+		void SetInsuranceRate(long id, float insuranceRate);
+		void SetInsuranceRateForClient(long id, float insuranceRate);
 		void Update(ApplicationData application);
 	}
 }

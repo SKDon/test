@@ -25,7 +25,6 @@ namespace Alicargo.Services.Application
 		private readonly ISenderService _senders;
 		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
-		private readonly IUnitOfWork _unitOfWork;
 
 		public AdminApplicationManager(
 			IApplicationRepository applications,
@@ -35,7 +34,6 @@ namespace Alicargo.Services.Application
 			IStateConfig config,
 			IIdentityService identity,
 			ITransitService transitService,
-			IUnitOfWork unitOfWork,
 			IStateSettingsRepository settings)
 		{
 			_applications = applications;
@@ -45,7 +43,6 @@ namespace Alicargo.Services.Application
 			_config = config;
 			_identity = identity;
 			_transitService = transitService;
-			_unitOfWork = unitOfWork;
 			_settings = settings;
 		}
 
@@ -151,8 +148,6 @@ namespace Alicargo.Services.Application
 
 			_editor.Delete(id);
 
-			_unitOfWork.SaveChanges();
-
 			_transitService.Delete(applicationData.TransitId);
 		}
 
@@ -161,15 +156,11 @@ namespace Alicargo.Services.Application
 			SetState(id, _config.CargoOnTransitStateId);
 
 			_editor.SetTransitReference(id, transitReference);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_editor.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetTransitCost(long id, decimal? transitCost)
@@ -182,8 +173,6 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetTransitCost(id, transitCost);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetTransitCostEdited(long id, decimal? transitCost)
@@ -194,15 +183,39 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetTransitCostEdited(id, transitCost);
+		}
 
-			_unitOfWork.SaveChanges();
+		public void SetCount(long id, int? value)
+		{
+			_editor.SetCount(id, value);
+		}
+
+		public void SetWeight(long id, float? value)
+		{
+			_editor.SetWeight(id, value);
+		}
+
+		public void SetInsuranceCost(long id, float? value)
+		{
+			var data = _applications.Get(id);
+
+			var insurance = value.HasValue ? (decimal)value.Value / data.Value : 0;
+
+			_editor.SetInsuranceRate(id, (float)insurance);
+		}
+
+		public void SetInsuranceCostForClient(long id, float? value)
+		{
+			var data = _applications.Get(id);
+
+			var insurance = value.HasValue ? (decimal)value.Value / data.Value : 0;
+
+			_editor.SetInsuranceRateForClient(id, (float)insurance);
 		}
 
 		public void SetTariffPerKg(long id, decimal? tariffPerKg)
 		{
 			_editor.SetTariffPerKg(id, tariffPerKg);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetPickupCostEdited(long id, decimal? pickupCost)
@@ -213,8 +226,6 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetPickupCostEdited(id, pickupCost);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetFactureCostEdited(long id, decimal? factureCost)
@@ -225,8 +236,6 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetFactureCostEdited(id, factureCost);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetFactureCostExEdited(long id, decimal? factureCostEx)
@@ -237,8 +246,6 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetFactureCostExEdited(id, factureCostEx);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetScotchCostEdited(long id, decimal? scotchCost)
@@ -249,22 +256,16 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetScotchCostEdited(id, scotchCost);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetSenderRate(long id, decimal? senderRate)
 		{
 			_editor.SetSenderRate(id, senderRate);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetClass(long id, ClassType? classType)
 		{
 			_editor.SetClass(id, (int?)classType);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		public void SetState(long applicationId, long stateId)
@@ -279,8 +280,6 @@ namespace Alicargo.Services.Application
 			}
 
 			_editor.SetState(applicationId, stateId);
-
-			_unitOfWork.SaveChanges();
 		}
 
 		private long GetForwarderId(long? forwarderId, long cityId, long? oldForwarderId)

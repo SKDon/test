@@ -18,8 +18,8 @@
 							"Factory": { type: "string", editable: false },
 							"Mark": { type: "string", editable: false },
 							"Class": { type: "string", editable: true },
-							"Count": { type: "number", editable: false },
-							"Weight": { type: "number", editable: false },
+							"Count": { type: "number", editable: true },
+							"Weight": { type: "string", editable: true },
 							"Invoice": { type: "string", editable: false },
 							"Value": { type: "number", editable: false },
 							"TariffPerKg": { type: "string", editable: true },
@@ -31,8 +31,8 @@
 							"FactureCostEx": { type: "string", editable: true },
 							"PickupCost": { type: "string", editable: true },
 							"TransitCost": { type: "string", editable: true },
-							"InsuranceCost": { type: "number", editable: false },
-							"InsuranceCostForClient": { type: "number", editable: false },
+							"InsuranceCost": { type: "string", editable: true },
+							"InsuranceCostForClient": { type: "string", editable: true },
 							"Profit": { type: "number", editable: false }
 						}
 					}

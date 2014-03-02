@@ -171,6 +171,22 @@
 					SenderRate: {
 						Url: $u.Calculation_SetSenderRate,
 						ArgumentName: "senderRate"
+					},
+					Count: {
+						Url: $u.Calculation_SetCount,
+						ArgumentName: "value"
+					},
+					Weight: {
+						Url: $u.Calculation_SetWeight,
+						ArgumentName: "value"
+					},
+					InsuranceCost: {
+						Url: $u.Calculation_SetInsuranceCost,
+						ArgumentName: "value"
+					},
+					InsuranceCostForClient: {
+						Url: $u.Calculation_SetInsuranceCostForClient,
+						ArgumentName: "value"
 					}
 				};
 

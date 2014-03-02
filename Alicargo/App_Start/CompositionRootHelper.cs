@@ -91,7 +91,7 @@ namespace Alicargo.App_Start
 				}
 			}
 
-			kernel.Bind<IClientBalance>().To<ClientBalance>().WhenInjectedInto<CalculationServiceWithBalace>();
+			kernel.Bind<IClientBalance>().To<ClientBalance>().WhenInjectedInto<CalculationServiceWithBalace>().InRequestScope();
 
 			return binded;
 		}

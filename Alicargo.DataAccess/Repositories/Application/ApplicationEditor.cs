@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.Utilities;
@@ -12,9 +12,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 	{
 		private readonly AlicargoDataContext _context;
 
-		public ApplicationEditor(IUnitOfWork unitOfWork)
+		public ApplicationEditor(IDbConnection connection)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = new AlicargoDataContext(connection);
 		}
 
 		public long Add(ApplicationData application)
@@ -34,6 +34,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 		{
 			var application = _context.Applications.First(x => x.Id == id);
 			_context.Applications.DeleteOnSubmit(application);
+
+			_context.SubmitChanges();
 		}
 
 		public void SetState(long id, long stateId)
@@ -58,6 +60,26 @@ namespace Alicargo.DataAccess.Repositories.Application
 		public void SetTransitReference(long id, string transitReference)
 		{
 			Update(id, application => application.TransitReference = transitReference);
+		}
+
+		public void SetCount(long id, int? value)
+		{
+			Update(id, application => application.Count = value);
+		}
+
+		public void SetWeight(long id, float? value)
+		{
+			Update(id, application => application.Weight = value);
+		}
+
+		public void SetInsuranceRate(long id, float insuranceRate)
+		{
+			Update(id, application => application.InsuranceRate = insuranceRate);
+		}
+
+		public void SetInsuranceRateForClient(long id, float insuranceRate)
+		{
+			Update(id, application => application.InsuranceRateForClient = insuranceRate);
 		}
 
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
@@ -113,8 +135,6 @@ namespace Alicargo.DataAccess.Repositories.Application
 		public void Update(ApplicationData application)
 		{
 			Update(application.Id, entity => Map(application, entity));
-
-			_context.SubmitChanges();
 		}
 
 		private void Update(long id, Action<DbContext.Application> action)

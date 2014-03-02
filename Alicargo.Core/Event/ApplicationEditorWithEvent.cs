@@ -23,6 +23,11 @@ namespace Alicargo.Core.Event
 			_editor = editor;
 		}
 
+		public void SetInsuranceRateForClient(long id, float insuranceRate)
+		{
+			_editor.SetInsuranceRateForClient(id, insuranceRate);
+		}
+
 		public void Update(ApplicationData application)
 		{
 			var oldData = _applications.Get(application.Id);
@@ -82,6 +87,21 @@ namespace Alicargo.Core.Event
 			_editor.SetTransitReference(applicationId, transitReference);
 
 			_events.Add(applicationId, EventType.SetTransitReference, EventState.Emailing, transitReference);
+		}
+
+		public void SetCount(long id, int? value)
+		{
+			_editor.SetCount(id, value);
+		}
+
+		public void SetWeight(long id, float? value)
+		{
+			_editor.SetWeight(id, value);
+		}
+
+		public void SetInsuranceRate(long id, float insuranceRate)
+		{
+			_editor.SetInsuranceRate(id, insuranceRate);
 		}
 
 		public void SetDateOfCargoReceipt(long applicationId, DateTimeOffset? dateOfCargoReceipt)

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.SqlClient;
+using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -37,7 +38,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			_applications = new ApplicationRepository(_context.UnitOfWork);
 			_stateRepository = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
-			_editor = new ApplicationEditor(_context.UnitOfWork);
+			_editor = new ApplicationEditor(new SqlConnection(Settings.Default.MainConnectionString));
 		}
 
 		[TestMethod]
