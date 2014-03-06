@@ -86,7 +86,6 @@
       <Column Name="TariffPerKg" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="ScotchCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="InsuranceRate" Type="System.Decimal" DbType="Real" CanBeNull="false" />
-      <Column Name="InsuranceRateForClient" Type="System.Decimal" DbType="Real" CanBeNull="false" />
       <Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="PickupCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />

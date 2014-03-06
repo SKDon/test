@@ -1770,8 +1770,6 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _InsuranceRate;
 		
-		private decimal _InsuranceRateForClient;
-		
 		private decimal _FactureCost;
 		
 		private decimal _TransitCost;
@@ -1806,8 +1804,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnScotchCostChanged();
     partial void OnInsuranceRateChanging(decimal value);
     partial void OnInsuranceRateChanged();
-    partial void OnInsuranceRateForClientChanging(decimal value);
-    partial void OnInsuranceRateForClientChanged();
     partial void OnFactureCostChanging(decimal value);
     partial void OnFactureCostChanged();
     partial void OnTransitCostChanging(decimal value);
@@ -2042,26 +2038,6 @@ namespace Alicargo.DataAccess.DbContext
 					this._InsuranceRate = value;
 					this.SendPropertyChanged("InsuranceRate");
 					this.OnInsuranceRateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceRateForClient", DbType="Real")]
-		public decimal InsuranceRateForClient
-		{
-			get
-			{
-				return this._InsuranceRateForClient;
-			}
-			set
-			{
-				if ((this._InsuranceRateForClient != value))
-				{
-					this.OnInsuranceRateForClientChanging(value);
-					this.SendPropertyChanging();
-					this._InsuranceRateForClient = value;
-					this.SendPropertyChanged("InsuranceRateForClient");
-					this.OnInsuranceRateForClientChanged();
 				}
 			}
 		}
