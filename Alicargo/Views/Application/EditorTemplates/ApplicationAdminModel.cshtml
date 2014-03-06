@@ -34,8 +34,7 @@
 		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>&nbsp;)</label>
 		@Html.EditorFor(model => model.Volume)
 		@Html.EditorWithLabelFor(model => model.Weight)
-		@Html.EditorWithLabelFor(model => model.Count)
-		@Html.EditorWithLabelFor(model => model.Currency)
+		@Html.EditorWithLabelFor(model => model.Count)		
 	</div>
 </div>
 <div class="row">
@@ -60,6 +59,7 @@
 		@Html.EditorWithLabelFor(model => model.TariffPerKg)
 	</div>
 	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.Currency)
 		@Html.EditorWithLabelFor(model => model.InsuranceRate)
 	</div>
 </div>

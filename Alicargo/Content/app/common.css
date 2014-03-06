@@ -62,19 +62,22 @@
 
 .form-signin {
 	-moz-border-radius: 5px;
+	-moz-box-shadow: 0 1px 2px #000000;
 	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	-webkit-border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px #000000;
 	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	background-color: #fff;
 	border: 1px solid #e5e5e5;
 	border-radius: 5px;
+	box-shadow: 0 1px 2px #000000;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	margin: 200px auto 20px;
 	max-width: 300px;
 	padding: 19px 29px 19px;
 }
 
-	.form-signin .form-signin-heading,
+.form-signin .form-signin-heading,
 	.form-signin .checkbox {
 		margin-bottom: 10px;
 	}
@@ -129,6 +132,10 @@
 
 	.entity-edit .span3 .currency-holder input {
 		width: 210px;
+	}
+
+	.entity-edit .span2 .currency-holder input {
+		width: 111px;
 	}
 
 	.entity-edit .span4 input {
