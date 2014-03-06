@@ -272,7 +272,6 @@
       <Column Name="FactureCostEx" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="FactureCostExEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="InsuranceRate" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
-      <Column Name="InsuranceRateForClient" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
       <Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />
       <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
       <Association Name="Country_Application" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />

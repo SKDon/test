@@ -180,10 +180,9 @@ namespace Alicargo.Jobs.Application.Helpers
 		{
 			var calculation = _serializer.Deserialize<CalculationData>(bytes);
 			var balance = _balance.GetBalance(calculation.ClientId);
-			var insuranceRate = calculation.InsuranceRateForClient;
-			var insuranceCost = CalculationHelper.GetInsuranceCost(calculation.Value, insuranceRate);
+			var insuranceCost = CalculationHelper.GetInsuranceCost(calculation.Value, calculation.InsuranceRate);
 			var weightCost = calculation.TariffPerKg * (decimal)calculation.Weight;
-			var total = CalculationDataHelper.GetMoney(calculation, insuranceRate);
+			var total = CalculationDataHelper.GetMoney(calculation, calculation.InsuranceRate);
 
 			Add(localizedData, "ClientBalance", balance.ToString("N2"));
 			Add(localizedData, "CalculationTimestamp", LocalizationHelper.GetDate(calculation.CreationTimestamp, culture));

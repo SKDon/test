@@ -81,8 +81,7 @@ namespace Alicargo.Services.Application
 
 			var application = new ApplicationData
 			{
-				InsuranceRate = _applications.GetDefaultInsuranceRate(),
-				InsuranceRateForClient = _applications.GetDefaultInsuranceRate()
+				InsuranceRate = _applications.GetDefaultInsuranceRate()
 			};
 
 			Map(model, application);

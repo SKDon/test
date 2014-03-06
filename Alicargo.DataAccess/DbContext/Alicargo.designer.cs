@@ -5125,8 +5125,6 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private float _InsuranceRate;
 		
-		private float _InsuranceRateForClient;
-		
 		private EntityRef<AirWaybill> _AirWaybill;
 		
 		private EntityRef<Client> _Client;
@@ -5231,8 +5229,6 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnFactureCostExEditedChanged();
     partial void OnInsuranceRateChanging(float value);
     partial void OnInsuranceRateChanged();
-    partial void OnInsuranceRateForClientChanging(float value);
-    partial void OnInsuranceRateForClientChanged();
     #endregion
 		
 		public Application()
@@ -6131,26 +6127,6 @@ namespace Alicargo.DataAccess.DbContext
 					this._InsuranceRate = value;
 					this.SendPropertyChanged("InsuranceRate");
 					this.OnInsuranceRateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceRateForClient", DbType="Real NOT NULL")]
-		public float InsuranceRateForClient
-		{
-			get
-			{
-				return this._InsuranceRateForClient;
-			}
-			set
-			{
-				if ((this._InsuranceRateForClient != value))
-				{
-					this.OnInsuranceRateForClientChanging(value);
-					this.SendPropertyChanging();
-					this._InsuranceRateForClient = value;
-					this.SendPropertyChanged("InsuranceRateForClient");
-					this.OnInsuranceRateForClientChanged();
 				}
 			}
 		}

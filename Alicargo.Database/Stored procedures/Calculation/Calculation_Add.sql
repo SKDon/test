@@ -8,7 +8,6 @@
 	@TariffPerKg MONEY,
 	@ScotchCost MONEY,
 	@InsuranceRate REAL,
-	@InsuranceRateForClient REAL,
 	@FactureCost MONEY,
 	@FactureCostEx MONEY,
 	@TransitCost MONEY,
@@ -23,7 +22,7 @@
 AS BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO [dbo].[Calculation]
+	INSERT [dbo].[Calculation]
 		([ClientId]
 		,[ApplicationHistoryId]
 		,[AirWaybillDisplay]
@@ -42,8 +41,7 @@ AS BEGIN
 		,[Invoice]
 		,[Value]
 		,[Count]
-		,[InsuranceRate]
-		,[InsuranceRateForClient])
+		,[InsuranceRate])
      VALUES
 		(@ClientId
 		,@ApplicationHistoryId
@@ -63,7 +61,6 @@ AS BEGIN
 		,@Invoice
 		,@Value
 		,@Count
-		,@InsuranceRate
-		,@InsuranceRateForClient)
+		,@InsuranceRate)
 END
 GO

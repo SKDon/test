@@ -309,7 +309,6 @@ namespace Links
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string globalize_culture_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.culture.it.min.js") ? Url("globalize.culture.it.min.js") : Url("globalize.culture.it.js");
                     public static readonly string globalize_culture_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.culture.ru.min.js") ? Url("globalize.culture.ru.min.js") : Url("globalize.culture.ru.js");
-                    public static readonly string globalize_cultures_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.cultures.min.js") ? Url("globalize.cultures.min.js") : Url("globalize.cultures.js");
                 }
             
                 public static readonly string globalize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.min.js") ? Url("globalize.min.js") : Url("globalize.js");

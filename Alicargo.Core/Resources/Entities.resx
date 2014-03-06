@@ -489,10 +489,4 @@
   <data name="InsuranceRate" xml:space="preserve">
     <value>Insurance (%)</value>
   </data>
-  <data name="InsuranceRateForClient" xml:space="preserve">
-    <value>Insurance to client (%)</value>
-  </data>
-  <data name="InsuranceForClient" xml:space="preserve">
-    <value>Insurance (Client)</value>
-  </data>
 </root>

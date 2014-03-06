@@ -16,7 +16,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 		public decimal TariffPerKg { get; set; }
 		public decimal ScotchCost { get; set; }
 		public float InsuranceRate { get; set; }
-		public float InsuranceRateForClient { get; set; }
 		public decimal FactureCost { get; set; }
 		public decimal FactureCostEx { get; set; }
 		public decimal TransitCost { get; set; }

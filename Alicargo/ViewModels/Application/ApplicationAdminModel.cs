@@ -111,9 +111,5 @@ namespace Alicargo.ViewModels.Application
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "InsuranceRate")]
 		public float InsuranceRate { get; set; }
-
-		[Required]
-		[DisplayNameLocalized(typeof(Entities), "InsuranceRateForClient")]
-		public float InsuranceRateForClient { get; set; }
 	}
 }

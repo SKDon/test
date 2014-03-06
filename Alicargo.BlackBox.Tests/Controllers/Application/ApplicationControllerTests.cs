@@ -93,10 +93,9 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			var data = _applicationRepository.Get(old.Id);
 
 			data.ShouldBeEquivalentTo(model, options =>
-				options.ExcludingMissingProperties().Excluding(x => x.InsuranceRate).Excluding(x => x.InsuranceRateForClient));
+				options.ExcludingMissingProperties().Excluding(x => x.InsuranceRate));
 			data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);
 			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
-			data.InsuranceRateForClient.ShouldBeEquivalentTo(model.InsuranceRateForClient / 100);
 		}
 
 		private void Validate(ActionResult result, ClientData clientData, ApplicationAdminModel model,
@@ -129,11 +128,9 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				.Excluding(x => x.PickupCost)
 				.Excluding(x => x.CarrierId)
 				.Excluding(x => x.CarrierName)
-				.Excluding(x => x.InsuranceRateForClient)
 				.Excluding(x => x.InsuranceRate)
 				.Excluding(x => x.ScotchCost));
 			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
-			data.InsuranceRateForClient.ShouldBeEquivalentTo(model.InsuranceRateForClient / 100);
 			data.AdjustedFactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
 			data.AdjustedFactureCostEx.ShouldBeEquivalentTo(model.FactureCostExEdited);
 			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);

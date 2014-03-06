@@ -32,7 +32,6 @@
 							"PickupCost": { type: "number", editable: true },
 							"TransitCost": { type: "number", editable: true },
 							"InsuranceCost": { type: "number", editable: true },
-							"InsuranceCostForClient": { type: "number", editable: true },
 							"Profit": { type: "number", editable: false }
 						}
 					}
@@ -234,14 +233,6 @@
 					field: "InsuranceCost",
 					title: $l.Entities_Insurance,
 					groupFooterTemplate: groupFooterTemplate,
-					format: n2Format,
-					editor: numberEditor,
-					attributes: textRight,
-					footerAttributes: textRight
-				},
-				{
-					field: "InsuranceCostForClient",
-					title: $l.Entities_InsuranceForClient,
 					format: n2Format,
 					editor: numberEditor,
 					attributes: textRight,

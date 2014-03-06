@@ -25,6 +25,5 @@ namespace Alicargo.Services.Abstract
 		void SetCount(long id, int? value);
 		void SetWeight(long id, float? value);
 		void SetInsuranceCost(long id, float? value);
-		void SetInsuranceCostForClient(long id, float? value);
 	}
 }

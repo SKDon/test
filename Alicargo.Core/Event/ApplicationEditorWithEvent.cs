@@ -23,11 +23,6 @@ namespace Alicargo.Core.Event
 			_editor = editor;
 		}
 
-		public void SetInsuranceRateForClient(long id, float insuranceRate)
-		{
-			_editor.SetInsuranceRateForClient(id, insuranceRate);
-		}
-
 		public void Update(ApplicationData application)
 		{
 			var oldData = _applications.Get(application.Id);

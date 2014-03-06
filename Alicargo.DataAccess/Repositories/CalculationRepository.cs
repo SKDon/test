@@ -25,7 +25,6 @@ namespace Alicargo.DataAccess.Repositories
 				data.TariffPerKg,
 				data.ScotchCost,
 				data.InsuranceRate,
-				data.InsuranceRateForClient,
 				data.FactureCost,
 				data.FactureCostEx,
 				data.TransitCost,

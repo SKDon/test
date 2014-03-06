@@ -77,11 +77,6 @@ namespace Alicargo.DataAccess.Repositories.Application
 			Update(id, application => application.InsuranceRate = insuranceRate);
 		}
 
-		public void SetInsuranceRateForClient(long id, float insuranceRate)
-		{
-			Update(id, application => application.InsuranceRateForClient = insuranceRate);
-		}
-
 		public void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			Update(id, application => application.DateOfCargoReceipt = dateOfCargoReceipt);
@@ -197,7 +192,6 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.ScotchCostEdited = from.ScotchCostEdited;
 			to.SenderRate = from.SenderRate;
 			to.InsuranceRate = from.InsuranceRate;
-			to.InsuranceRateForClient = from.InsuranceRateForClient;
 		}
 	}
 }

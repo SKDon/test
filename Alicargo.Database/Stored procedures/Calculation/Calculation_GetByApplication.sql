@@ -22,8 +22,7 @@ AS BEGIN
 		[Invoice],
 		[Value],
 		[Count],
-		[InsuranceRate],
-		[InsuranceRateForClient]
+		[InsuranceRate]
 	FROM [dbo].[Calculation]
 	WHERE [ApplicationHistoryId] = @ApplicationId
 

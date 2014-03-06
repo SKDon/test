@@ -96,8 +96,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				SenderPickupCost = x.PickupCost,
 				ForwarderName = x.Forwarder.Name,
 				ForwarderId = x.ForwarderId,
-				InsuranceRate = x.InsuranceRate,
-				InsuranceRateForClient = x.InsuranceRateForClient
+				InsuranceRate = x.InsuranceRate
 			};
 
 			_selector = x => new ApplicationData
@@ -143,8 +142,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				PickupCostEdited = x.PickupCostEdited,
 				SenderId = x.SenderId,
 				ForwarderId = x.ForwarderId,
-				InsuranceRate = x.InsuranceRate,
-				InsuranceRateForClient = x.InsuranceRateForClient
+				InsuranceRate = x.InsuranceRate
 			};
 		}
 

@@ -233,17 +233,5 @@ namespace Alicargo.Controllers.Calculation
 
 			return Json(data);
 		}
-
-		[HttpPost]
-		[Access(RoleType.Admin)]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetInsuranceCostForClient(long id, long awbId, float? value)
-		{
-			_applicationManager.SetInsuranceCostForClient(id, value);
-
-			var data = _presenter.Row(awbId);
-
-			return Json(data);
-		}
 	}
 }

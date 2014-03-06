@@ -192,11 +192,6 @@
 						Url: $u.Calculation_SetInsuranceCost,
 						ArgumentName: "value",
 						Convert: numberConverter
-					},
-					InsuranceCostForClient: {
-						Url: $u.Calculation_SetInsuranceCostForClient,
-						ArgumentName: "value",
-						Convert: numberConverter
 					}
 				};
 

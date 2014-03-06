@@ -130,8 +130,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public float  InsuranceRate { get; set; }
 
-		public float InsuranceRateForClient { get; set; }
-
 
 		public long SenderId { get; set; }
 

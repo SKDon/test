@@ -128,8 +128,7 @@ namespace Alicargo.Controllers.Application
 
 			return View(new ApplicationAdminModel
 			{
-				InsuranceRate = _applications.GetDefaultInsuranceRate() * 100,
-				InsuranceRateForClient = _applications.GetDefaultInsuranceRate() * 100
+				InsuranceRate = _applications.GetDefaultInsuranceRate() * 100
 			});
 		}
 

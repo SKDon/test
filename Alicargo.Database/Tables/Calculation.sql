@@ -21,7 +21,6 @@
 	[Count]					INT					NULL,
 	[FactureCostEx]			MONEY			NOT NULL,
 	[InsuranceRate]			REAL				NOT NULL CONSTRAINT [DF_Calculation_InsuranceRate] DEFAULT 0.01,
-	[InsuranceRateForClient] REAL				NOT NULL CONSTRAINT [DF_Calculation_InsuranceRateForClient] DEFAULT 0.01,
 
 	CONSTRAINT [PK_dbo.Calculation] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_Calculation_Client] FOREIGN KEY ([ClientId]) REFERENCES [Client]([Id])

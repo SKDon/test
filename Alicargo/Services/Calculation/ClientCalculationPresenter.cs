@@ -102,7 +102,7 @@ namespace Alicargo.Services.Calculation
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
 				Profit = GetProfit(a),
-				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRateForClient),
+				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
 				ClassName = a.ClassId.HasValue
 					? ((ClassType)a.ClassId.Value).ToLocalString()
 					: ""
@@ -125,7 +125,7 @@ namespace Alicargo.Services.Calculation
 		{
 			return CalculationHelper.GetTotalTariffCost(application.TariffPerKg, application.Weight)
 			       + (application.ScotchCost ?? 0)
-			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRateForClient)
+				   + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
 			       + (application.AdjustedFactureCost ?? 0)
 			       + (application.AdjustedFactureCostEx ?? 0)
 			       + (application.PickupCost ?? 0)

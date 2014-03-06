@@ -131,12 +131,6 @@ namespace Alicargo.Controllers.Calculation
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCost);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetInsuranceCostForClient()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCostForClient);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CalculationController Actions { get { return MVC.Calculation; } }
@@ -170,7 +164,6 @@ namespace Alicargo.Controllers.Calculation
             public readonly string SetCount = "SetCount";
             public readonly string SetWeight = "SetWeight";
             public readonly string SetInsuranceCost = "SetInsuranceCost";
-            public readonly string SetInsuranceCostForClient = "SetInsuranceCostForClient";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -193,7 +186,6 @@ namespace Alicargo.Controllers.Calculation
             public const string SetCount = "SetCount";
             public const string SetWeight = "SetWeight";
             public const string SetInsuranceCost = "SetInsuranceCost";
-            public const string SetInsuranceCostForClient = "SetInsuranceCostForClient";
         }
 
 
@@ -338,16 +330,6 @@ namespace Alicargo.Controllers.Calculation
         public ActionParamsClass_SetInsuranceCost SetInsuranceCostParams { get { return s_params_SetInsuranceCost; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_SetInsuranceCost
-        {
-            public readonly string id = "id";
-            public readonly string awbId = "awbId";
-            public readonly string value = "value";
-        }
-        static readonly ActionParamsClass_SetInsuranceCostForClient s_params_SetInsuranceCostForClient = new ActionParamsClass_SetInsuranceCostForClient();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetInsuranceCostForClient SetInsuranceCostForClientParams { get { return s_params_SetInsuranceCostForClient; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetInsuranceCostForClient
         {
             public readonly string id = "id";
             public readonly string awbId = "awbId";
@@ -601,20 +583,6 @@ namespace Alicargo.Controllers.Calculation
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
             SetInsuranceCostOverride(callInfo, id, awbId, value);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SetInsuranceCostForClientOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, float? value);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult SetInsuranceCostForClient(long id, long awbId, float? value)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCostForClient);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
-            SetInsuranceCostForClientOverride(callInfo, id, awbId, value);
             return callInfo;
         }
 

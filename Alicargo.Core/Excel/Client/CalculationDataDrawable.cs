@@ -43,8 +43,7 @@ namespace Alicargo.Core.Excel.Client
 
 		private void DrawRow(int iRow)
 		{
-			var insuranceRate = _data.InsuranceRateForClient;
-			var money = CalculationDataHelper.GetMoney(_data, insuranceRate);
+			var money = CalculationDataHelper.GetMoney(_data, _data.InsuranceRate);
 
 			var iColumn = 1;
 			_excel.Cells[iRow, iColumn++].Value = _clientNick;
@@ -60,7 +59,7 @@ namespace Alicargo.Core.Excel.Client
 			_excel.Cells[iRow, iColumn].Style.Font.Bold = true;
 			_excel.Cells[iRow, iColumn++].Value = _data.TariffPerKg * (decimal)_data.Weight;
 			_excel.Cells[iRow, iColumn++].Value = _data.ScotchCost;
-			_excel.Cells[iRow, iColumn++].Value = CalculationHelper.GetInsuranceCost(_data.Value, insuranceRate);
+			_excel.Cells[iRow, iColumn++].Value = CalculationHelper.GetInsuranceCost(_data.Value, _data.InsuranceRate);
 			_excel.Cells[iRow, iColumn++].Value = _data.FactureCost;
 			_excel.Cells[iRow, iColumn++].Value = _data.FactureCostEx;
 			_excel.Cells[iRow, iColumn++].Value = _data.PickupCost;

@@ -79,7 +79,6 @@ namespace Alicargo.Services.Calculation
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
 				Profit = GetProfit(a, tariffs),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
-				InsuranceCostForClient = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRateForClient),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),
 				ClassId = a.Class

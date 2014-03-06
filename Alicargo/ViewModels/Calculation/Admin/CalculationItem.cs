@@ -9,7 +9,6 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		public decimal TotalTariffCost { get; set; }
 		public decimal TotalSenderRate { get; set; }
 		public decimal InsuranceCost { get; set; }
-		public decimal InsuranceCostForClient { get; set; }
 		public decimal Profit { get; set; }
 		public bool IsCalculated { get; set; }
 		public long ApplicationId { get; set; }
