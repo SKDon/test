@@ -13,6 +13,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -35,10 +36,22 @@ namespace Alicargo.Controllers.Calculation
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -131,6 +144,18 @@ namespace Alicargo.Controllers.Calculation
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCost);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetTotalTariffCost()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTotalTariffCost);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetProfit()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetProfit);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CalculationController Actions { get { return MVC.Calculation; } }
@@ -164,6 +189,8 @@ namespace Alicargo.Controllers.Calculation
             public readonly string SetCount = "SetCount";
             public readonly string SetWeight = "SetWeight";
             public readonly string SetInsuranceCost = "SetInsuranceCost";
+            public readonly string SetTotalTariffCost = "SetTotalTariffCost";
+            public readonly string SetProfit = "SetProfit";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -186,6 +213,8 @@ namespace Alicargo.Controllers.Calculation
             public const string SetCount = "SetCount";
             public const string SetWeight = "SetWeight";
             public const string SetInsuranceCost = "SetInsuranceCost";
+            public const string SetTotalTariffCost = "SetTotalTariffCost";
+            public const string SetProfit = "SetProfit";
         }
 
 
@@ -330,6 +359,26 @@ namespace Alicargo.Controllers.Calculation
         public ActionParamsClass_SetInsuranceCost SetInsuranceCostParams { get { return s_params_SetInsuranceCost; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_SetInsuranceCost
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string value = "value";
+        }
+        static readonly ActionParamsClass_SetTotalTariffCost s_params_SetTotalTariffCost = new ActionParamsClass_SetTotalTariffCost();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetTotalTariffCost SetTotalTariffCostParams { get { return s_params_SetTotalTariffCost; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetTotalTariffCost
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string value = "value";
+        }
+        static readonly ActionParamsClass_SetProfit s_params_SetProfit = new ActionParamsClass_SetProfit();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetProfit SetProfitParams { get { return s_params_SetProfit; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetProfit
         {
             public readonly string id = "id";
             public readonly string awbId = "awbId";
@@ -583,6 +632,34 @@ namespace Alicargo.Controllers.Calculation
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
             SetInsuranceCostOverride(callInfo, id, awbId, value);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetTotalTariffCostOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? value);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetTotalTariffCost(long id, long awbId, decimal? value)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTotalTariffCost);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
+            SetTotalTariffCostOverride(callInfo, id, awbId, value);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetProfitOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? value);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetProfit(long id, long awbId, decimal? value)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetProfit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
+            SetProfitOverride(callInfo, id, awbId, value);
             return callInfo;
         }
 

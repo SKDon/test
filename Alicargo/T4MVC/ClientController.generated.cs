@@ -13,6 +13,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -35,10 +36,22 @@ namespace Alicargo.Controllers.User
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -109,7 +122,7 @@ namespace Alicargo.Controllers.User
         public class ActionParamsClass_Create
         {
             public readonly string model = "model";
-            public readonly string transitModel = "Transit";
+            public readonly string transitModel = "transitModel";
         }
         static readonly ActionParamsClass_Contract s_params_Contract = new ActionParamsClass_Contract();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -127,7 +140,7 @@ namespace Alicargo.Controllers.User
         {
             public readonly string id = "id";
             public readonly string model = "model";
-            public readonly string transitModel = "Transit";
+            public readonly string transitModel = "transitModel";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -204,7 +217,7 @@ namespace Alicargo.Controllers.User
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
             CreateOverride(callInfo, model, transitModel);
             return callInfo;
         }
@@ -242,7 +255,7 @@ namespace Alicargo.Controllers.User
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
             EditOverride(callInfo, id, model, transitModel);
             return callInfo;
         }

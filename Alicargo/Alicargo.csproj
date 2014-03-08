@@ -98,7 +98,7 @@
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -135,7 +135,7 @@
     </Reference>
     <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\T4MVCExtensions.3.7.5\lib\net40\T4MVCExtensions.dll</HintPath>
+      <HintPath>..\packages\T4MVCExtensions.3.8.1\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
     <Reference Include="WebActivator, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -151,7 +151,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\Application\OrderHelper.cs" />
     <Compile Include="T4MVC\AdminAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -167,7 +166,6 @@
     <Compile Include="T4MVC\ApplicationUpdateController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\Jobs\RunnerHelper.cs" />
     <Compile Include="T4MVC\AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -198,23 +196,6 @@
     <Compile Include="T4MVC\ClientController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\Application\ApplicationController.cs" />
-    <Compile Include="Controllers\Application\ApplicationListController.cs" />
-    <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
-    <Compile Include="Controllers\Application\ClientApplicatonController.cs" />
-    <Compile Include="Controllers\Awb\AdminAwbController.cs" />
-    <Compile Include="Controllers\Awb\AwbFileController.cs" />
-    <Compile Include="Controllers\CountryController.cs" />
-    <Compile Include="Controllers\CityController.cs" />
-    <Compile Include="Controllers\EmailTemplateController.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
-    <Compile Include="Controllers\Application\SenderApplicationController.cs" />
-    <Compile Include="Controllers\Calculation\BalanceController.cs" />
-    <Compile Include="Controllers\StateController.cs" />
-    <Compile Include="Controllers\StateSettingsController.cs" />
-    <Compile Include="Controllers\User\ForwarderController.cs" />
-    <Compile Include="Controllers\User\RestorePasswordController.cs" />
-    <Compile Include="App_Start\Mvc\CssPaths.cs" />
     <Compile Include="T4MVC\CountryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -236,7 +217,6 @@
     <Compile Include="T4MVC\HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
     <Compile Include="T4MVC\RestorePasswordController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -252,6 +232,40 @@
     <Compile Include="T4MVC\SenderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\Application\OrderHelper.cs" />
+    <Compile Include="T4MVC\SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\StateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\StateSettingsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\Jobs\RunnerHelper.cs" />
+    <Compile Include="Controllers\Application\ApplicationController.cs" />
+    <Compile Include="Controllers\Application\ApplicationListController.cs" />
+    <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
+    <Compile Include="Controllers\Application\ClientApplicatonController.cs" />
+    <Compile Include="Controllers\Awb\AdminAwbController.cs" />
+    <Compile Include="Controllers\Awb\AwbFileController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\EmailTemplateController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\Application\SenderApplicationController.cs" />
+    <Compile Include="Controllers\Calculation\BalanceController.cs" />
+    <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\StateSettingsController.cs" />
+    <Compile Include="Controllers\User\ForwarderController.cs" />
+    <Compile Include="Controllers\User\RestorePasswordController.cs" />
+    <Compile Include="App_Start\Mvc\CssPaths.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
     <Compile Include="Services\Abstract\ICountryService.cs" />
     <Compile Include="Services\Abstract\ICityService.cs" />
     <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
@@ -386,20 +400,6 @@
     <Compile Include="Services\Log4NetWrapper.cs" />
     <Compile Include="Services\TransitService.cs" />
     <Compile Include="Services\Users\UserService.cs" />
-    <Compile Include="T4MVC\SharedController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC\StateController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC\StateSettingsController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC\T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="T4MVC\TransitController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -630,14 +630,14 @@
     <Content Include="Scripts\kendo\2013.3.1119\cultures\kendo.culture.it.min.js" />
     <Content Include="Scripts\kendo\2013.3.1119\cultures\kendo.culture.ru.min.js" />
     <Content Include="Scripts\kendo\2013.3.1119\kendo.web.min.js" />
-    <None Include="T4MVC\T4MVC.tt.settings.xml" />
-    <Content Include="Scripts\kendo\2013.3.1119\kendo.web.min.js.map" />
-    <Content Include="Scripts\kendo\2013.3.1119\cultures\kendo.culture.ru.min.js.map" />
     <None Include="T4MVC\T4MVC.tt.hooks.t4" />
     <None Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\kendo\2013.3.1119\kendo.web.min.js.map" />
+    <Content Include="Scripts\kendo\2013.3.1119\cultures\kendo.culture.ru.min.js.map" />
+    <None Include="T4MVC\T4MVC.tt.settings.xml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
