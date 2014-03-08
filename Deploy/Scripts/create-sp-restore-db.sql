@@ -16,12 +16,16 @@ CREATE PROCEDURE [dbo].[sp_RestoreDatabase]
 AS BEGIN
 	SET NOCOUNT ON;
 
+	EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = @oldDb
+	
+	EXEC(N'ALTER DATABASE [' + @oldDb + N'] SET SINGLE_USER WITH ROLLBACK IMMEDIATE')
+
 	DECLARE @sqlRestoreDb NVARCHAR(1000)
 		= N'RESTORE DATABASE ' + @newDb + N' FROM '
 		+ N'DISK = N''' + @fromFile + N''' WITH FILE = 1, '
 		+ N'MOVE N''' + @oldDb + N''' TO N''' + @dataFolder +  @newDb + N'.mdf'', '
 		+ N'MOVE N''' + @oldDb + N'_log'' TO N''' + @dataFolder + @newDb + N'_log.ldf'', '
-		+ N'NOUNLOAD, REPLACE, STATS = 5;';
+		+ N'NOUNLOAD, REPLACE, STATS = 5';
 	EXEC(@sqlRestoreDb)	
 
 	IF @newDb <> @oldDb BEGIN

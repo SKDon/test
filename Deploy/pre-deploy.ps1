@@ -28,5 +28,5 @@ git commit --all -m "Deploy at $date" --quiet
 
 git push -f --all --quiet
 
-Write-Host "Done"
+Write-Host "Done publish"
 cmd /c pause | out-null

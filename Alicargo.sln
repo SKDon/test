@@ -57,7 +57,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{FCD33282-F61E-468E-83EE-867B4699AE86}"
 	ProjectSection(SolutionItems) = preProject
 		Deploy\pre-deploy.ps1 = Deploy\pre-deploy.ps1
-		Deploy\restore-previous-release.sql = Deploy\restore-previous-release.sql
+		Deploy\restore-previous.ps1 = Deploy\restore-previous.ps1
+		Deploy\restore-previous.sql = Deploy\restore-previous.sql
 		Deploy\run-updates-local.ps1 = Deploy\run-updates-local.ps1
 		Deploy\run-updates.ps1 = Deploy\run-updates.ps1
 		Deploy\SqlSchemaCompare.scmp = Deploy\SqlSchemaCompare.scmp
