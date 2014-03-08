@@ -44,6 +44,10 @@ namespace Alicargo.App_Start
 
 			kernel.Bind<IAwbManager>().To<AwbManager>().InRequestScope();
 
+			kernel.Bind<IApplicationStateManager>().To<ApplicationStateManager>().InRequestScope();
+
+			kernel.Bind<IAwbStateManager>().To<AwbStateManager>().InRequestScope();
+
 			kernel.Bind<IStateConfig>().To<StateConfig>().InRequestScope();
 
 			kernel.Bind<IStateFilter>().To<StateFilter>().InRequestScope();

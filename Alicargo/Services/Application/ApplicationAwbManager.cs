@@ -4,30 +4,29 @@ using Alicargo.Core.Contracts.Event;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.Services.Abstract;
 
 namespace Alicargo.Services.Application
 {
 	public sealed class ApplicationAwbManager : IApplicationAwbManager
 	{
-		private readonly IAdminApplicationManager _manager;
-		private readonly IEventFacade _events;
-		private readonly IApplicationEditor _editor;
 		private readonly IAwbRepository _awbs;
 		private readonly IStateConfig _config;
+		private readonly IApplicationEditor _editor;
+		private readonly IEventFacade _events;
+		private readonly IApplicationStateManager _states;
 
 		public ApplicationAwbManager(
 			IAwbRepository awbs,
 			IStateConfig config,
-			IAdminApplicationManager manager,
 			IEventFacade events,
-			IApplicationEditor editor)
+			IApplicationEditor editor,
+			IApplicationStateManager states)
 		{
 			_awbs = awbs;
 			_config = config;
-			_manager = manager;
 			_events = events;
 			_editor = editor;
+			_states = states;
 		}
 
 		public void SetAwb(long applicationId, long? awbId)
@@ -38,7 +37,7 @@ namespace Alicargo.Services.Application
 
 				_editor.SetAirWaybill(applicationId, awbId.Value);
 
-				_manager.SetState(applicationId, aggregate.StateId);
+				_states.SetState(applicationId, aggregate.StateId);
 
 				_events.Add(applicationId, EventType.SetAwb, EventState.Emailing, awbId.Value);
 			}
@@ -46,7 +45,7 @@ namespace Alicargo.Services.Application
 			{
 				_editor.SetAirWaybill(applicationId, null);
 
-				_manager.SetState(applicationId, _config.CargoInStockStateId);
+				_states.SetState(applicationId, _config.CargoInStockStateId);
 			}
 		}
 	}

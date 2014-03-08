@@ -104,6 +104,8 @@
     <Compile Include="Email\MailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Email\SilentMailSender.cs" />
+    <Compile Include="State\ApplicationStateManager.cs" />
+    <Compile Include="State\AwbStateManager.cs" />
     <Compile Include="State\StateConfig.cs" />
     <Compile Include="State\StateFilter.cs" />
     <Compile Include="Users\ForwarderService.cs" />

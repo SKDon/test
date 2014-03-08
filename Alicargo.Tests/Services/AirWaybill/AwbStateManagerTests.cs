@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using Alicargo.Core.State;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
-using Alicargo.Services.AirWaybill;
 using Alicargo.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -36,14 +36,14 @@ namespace Alicargo.Tests.Services.AirWaybill
             _context.AirWaybillRepository.Setup(x => x.Get(_airWaybillId)).Returns(new[] { data });
             _context.AirWaybillRepository.Setup(x => x.SetState(_airWaybillId, _stateId));
             _context.ApplicationRepository.Setup(x => x.GetByAirWaybill(_airWaybillId)).Returns(applicationData);
-            _context.ApplicationManager.Setup(x => x.SetState(applicationData[0].Id, _stateId));
+			_context.ApplicationStateManager.Setup(x => x.SetState(applicationData[0].Id, _stateId));
 
             _stateManager.SetState(_airWaybillId, _stateId);
 
             _context.AirWaybillRepository.Verify(x => x.Get(_airWaybillId), Times.Once());
             _context.AirWaybillRepository.Verify(x => x.SetState(_airWaybillId, _stateId), Times.Once());
             _context.ApplicationRepository.Verify(x => x.GetByAirWaybill(_airWaybillId), Times.Once());
-            _context.ApplicationManager.Verify(x => x.SetState(applicationData[0].Id, _stateId), Times.Once());
+			_context.ApplicationStateManager.Verify(x => x.SetState(applicationData[0].Id, _stateId), Times.Once());
         }
     }
 }

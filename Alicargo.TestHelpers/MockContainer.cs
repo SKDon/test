@@ -91,6 +91,7 @@ namespace Alicargo.TestHelpers
 			ApplicationEventTemplates = Inject<IApplicationEventTemplates>();
 			SenderRepository = Inject<ISenderRepository>();
 			CityRepository = Inject<ICityRepository>();
+			ApplicationStateManager = Inject<IApplicationStateManager>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -105,6 +106,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ISerializer> Serializer { get; private set; }
 		public Mock<IApplicationEditor> ApplicationEditor { get; private set; }
 		public Mock<IAdminApplicationManager> ApplicationManager { get; private set; }
+		public Mock<IApplicationStateManager> ApplicationStateManager { get; private set; }
 		public Mock<IApplicationAwbManager> ApplicationAwbManager { get; private set; }
 		public Mock<IApplicationGrouper> ApplicationGrouper { get; private set; }
 		public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }

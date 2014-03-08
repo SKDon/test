@@ -10,7 +10,6 @@ namespace Alicargo.Services.Abstract
 		long Add(ApplicationAdminModel model, TransitEditModel transit, long clientId);
 		void Update(long applicationId, ApplicationAdminModel model, TransitEditModel transit);
 		void Delete(long id);
-		void SetState(long applicationId, long stateId);
 		void SetTransitReference(long id, string transitReference);
 		void SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt);
 		void SetTransitCost(long id, decimal? transitCost);

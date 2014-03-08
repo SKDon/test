@@ -10,16 +10,21 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class ApplicationUpdateController : Controller
 	{
-		private readonly IApplicationPresenter _applicationPresenter;
-		private readonly IAdminApplicationManager _applicationManager;
-		private readonly IStateConfig _stateConfig;
+		private readonly IAdminApplicationManager _manager;
+		private readonly IApplicationStateManager _states;
+		private readonly IApplicationPresenter _presenter;
+		private readonly IStateConfig _config;
 
-		public ApplicationUpdateController(IApplicationPresenter applicationPresenter,
-			IAdminApplicationManager applicationManager, IStateConfig stateConfig)
+		public ApplicationUpdateController(
+			IApplicationStateManager states,
+			IApplicationPresenter presenter,
+			IAdminApplicationManager manager,
+			IStateConfig config)
 		{
-			_applicationPresenter = applicationPresenter;
-			_applicationManager = applicationManager;
-			_stateConfig = stateConfig;
+			_states = states;
+			_presenter = presenter;
+			_manager = manager;
+			_config = config;
 		}
 
 		#region Set state
@@ -28,7 +33,7 @@ namespace Alicargo.Controllers.Application
 		[Access(RoleType.Client, RoleType.Admin)]
 		public virtual HttpStatusCodeResult Close(long id)
 		{
-			_applicationManager.SetState(id, _stateConfig.CargoReceivedStateId);
+			_states.SetState(id, _config.CargoReceivedStateId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -37,7 +42,7 @@ namespace Alicargo.Controllers.Application
 		[Access(RoleType.Admin, RoleType.Broker, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual HttpStatusCodeResult SetState(long id, long stateId)
 		{
-			_applicationManager.SetState(id, stateId);
+			_states.SetState(id, stateId);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
@@ -46,31 +51,34 @@ namespace Alicargo.Controllers.Application
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult States(long id)
 		{
-			return Json(_applicationPresenter.GetStateAvailability(id));
+			return Json(_presenter.GetStateAvailability(id));
 		}
 
 		#endregion
 
-		[Access(RoleType.Admin, RoleType.Forwarder), HttpPost]
-		public virtual HttpStatusCodeResult SetTransitReference(long id, string transitReference)
-		{
-			_applicationManager.SetTransitReference(id, transitReference);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		[Access(RoleType.Forwarder), HttpPost]
-		public virtual HttpStatusCodeResult SetTransitCost(long id, decimal? transitCost)
-		{
-			_applicationManager.SetTransitCost(id, transitCost);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		[Access(RoleType.Admin), HttpPost]
+		[HttpPost]
+		[Access(RoleType.Admin)]
 		public virtual HttpStatusCodeResult SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
-			_applicationManager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+			_manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Forwarder)]
+		public virtual HttpStatusCodeResult SetTransitCost(long id, decimal? transitCost)
+		{
+			_manager.SetTransitCost(id, transitCost);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin, RoleType.Forwarder)]
+		public virtual HttpStatusCodeResult SetTransitReference(long id, string transitReference)
+		{
+			_manager.SetTransitReference(id, transitReference);
 
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}

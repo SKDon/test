@@ -1,4 +1,4 @@
-﻿namespace Alicargo.Core.Contracts.AirWaybill
+﻿namespace Alicargo.Core.Contracts.State
 {
 	public interface IAwbStateManager
 	{

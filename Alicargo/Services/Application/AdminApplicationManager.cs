@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Linq;
-using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
@@ -18,32 +15,29 @@ namespace Alicargo.Services.Application
 	internal sealed class AdminApplicationManager : IAdminApplicationManager
 	{
 		private readonly IApplicationRepository _applications;
+		private readonly IApplicationStateManager _states;
 		private readonly IStateConfig _config;
 		private readonly IApplicationEditor _editor;
 		private readonly IForwarderService _forwarders;
-		private readonly IIdentityService _identity;
 		private readonly ISenderService _senders;
-		private readonly IStateSettingsRepository _settings;
 		private readonly ITransitService _transitService;
 
 		public AdminApplicationManager(
 			IApplicationRepository applications,
+			IApplicationStateManager states,
 			IForwarderService forwarders,
 			ISenderService senders,
 			IApplicationEditor editor,
 			IStateConfig config,
-			IIdentityService identity,
-			ITransitService transitService,
-			IStateSettingsRepository settings)
+			ITransitService transitService)
 		{
 			_applications = applications;
+			_states = states;
 			_forwarders = forwarders;
 			_senders = senders;
 			_editor = editor;
 			_config = config;
-			_identity = identity;
 			_transitService = transitService;
-			_settings = settings;
 		}
 
 		public long Add(ApplicationAdminModel model, TransitEditModel transit,
@@ -151,7 +145,7 @@ namespace Alicargo.Services.Application
 
 		public void SetTransitReference(long id, string transitReference)
 		{
-			SetState(id, _config.CargoOnTransitStateId);
+			_states.SetState(id, _config.CargoOnTransitStateId);
 
 			_editor.SetTransitReference(id, transitReference);
 		}
@@ -240,21 +234,7 @@ namespace Alicargo.Services.Application
 		public void SetClass(long id, ClassType? classType)
 		{
 			_editor.SetClass(id, (int?)classType);
-		}
-
-		public void SetState(long applicationId, long stateId)
-		{
-			if(!HasPermissionToSetState(stateId))
-				throw new AccessForbiddenException("User don't have access to the state " + stateId);
-
-			// todo: 2. test logic with states
-			if(stateId == _config.CargoInStockStateId)
-			{
-				_editor.SetDateInStock(applicationId, DateTimeProvider.Now);
-			}
-
-			_editor.SetState(applicationId, stateId);
-		}
+		}		
 
 		private long GetForwarderId(long? forwarderId, long cityId, long? oldForwarderId)
 		{
@@ -268,12 +248,6 @@ namespace Alicargo.Services.Application
 			return senderId.HasValue
 				? senderId.Value
 				: _senders.GetByCountryOrAny(countryId, oldSenderId);
-		}
-
-		private bool HasPermissionToSetState(long stateId)
-		{
-			return _settings.GetStateAvailabilities()
-				.Any(x => x.StateId == stateId && _identity.IsInRole(x.Role));
 		}
 	}
 }
