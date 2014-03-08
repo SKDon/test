@@ -1776,9 +1776,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _PickupCost;
 		
-		private decimal _TotalTariffCost;
+		private System.Nullable<decimal> _TotalTariffCost;
 		
-		private decimal _Profit;
+		private System.Nullable<decimal> _Profit;
 		
 		private EntityRef<Client> _Client;
 		
@@ -1814,9 +1814,9 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnTransitCostChanged();
     partial void OnPickupCostChanging(decimal value);
     partial void OnPickupCostChanged();
-    partial void OnTotalTariffCostChanging(decimal value);
+    partial void OnTotalTariffCostChanging(System.Nullable<decimal> value);
     partial void OnTotalTariffCostChanged();
-    partial void OnProfitChanging(decimal value);
+    partial void OnProfitChanging(System.Nullable<decimal> value);
     partial void OnProfitChanged();
     #endregion
 		
@@ -2110,8 +2110,8 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalTariffCost", DbType="Money NOT NULL")]
-		public decimal TotalTariffCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalTariffCost", DbType="Money NULL")]
+		public System.Nullable<decimal> TotalTariffCost
 		{
 			get
 			{
@@ -2130,8 +2130,8 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Profit", DbType="Money NOT NULL")]
-		public decimal Profit
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Profit", DbType="Money NULL")]
+		public System.Nullable<decimal> Profit
 		{
 			get
 			{

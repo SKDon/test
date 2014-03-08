@@ -89,8 +89,8 @@
       <Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="PickupCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="TotalTariffCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="Profit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="TotalTariffCost" Type="System.Decimal" DbType="Money NULL" CanBeNull="true" />
+      <Column Name="Profit" Type="System.Decimal" DbType="Money NULL" CanBeNull="true" />
       <Association Name="Client_Calculation" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>

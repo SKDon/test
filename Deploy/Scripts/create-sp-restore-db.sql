@@ -16,9 +16,9 @@ CREATE PROCEDURE [dbo].[sp_RestoreDatabase]
 AS BEGIN
 	SET NOCOUNT ON;
 
-	EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = @oldDb
+	EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = @newDb
 	
-	EXEC(N'ALTER DATABASE [' + @oldDb + N'] SET SINGLE_USER WITH ROLLBACK IMMEDIATE')
+	EXEC(N'ALTER DATABASE [' + @newDb + N'] SET SINGLE_USER WITH ROLLBACK IMMEDIATE')
 
 	DECLARE @sqlRestoreDb NVARCHAR(1000)
 		= N'RESTORE DATABASE ' + @newDb + N' FROM '
