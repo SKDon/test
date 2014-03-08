@@ -21,7 +21,9 @@ AS BEGIN
 			[Invoice],
 			[Value],
 			[Count],
-			[InsuranceRate]
+			[InsuranceRate],
+			[TotalTariffCost],
+			[Profit]
 	FROM [dbo].[Calculation]
 	WHERE [ClientId] = @ClientId
 

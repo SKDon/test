@@ -202,6 +202,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.ScotchCostEdited = from.ScotchCostEdited;
 			to.SenderRate = from.SenderRate;
 			to.InsuranceRate = from.InsuranceRate;
+			to.CalculationProfit = from.CalculationProfit;
+			to.CalculationTotalTariffCost = from.CalculationTotalTariffCost;
 		}
 	}
 }

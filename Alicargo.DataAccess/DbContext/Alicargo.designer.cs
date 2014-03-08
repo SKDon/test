@@ -1776,9 +1776,9 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _PickupCost;
 		
-		private decimal _CalculationTotalTariffCost;
+		private decimal _TotalTariffCost;
 		
-		private decimal _CalculationProfit;
+		private decimal _Profit;
 		
 		private EntityRef<Client> _Client;
 		
@@ -1814,10 +1814,10 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnTransitCostChanged();
     partial void OnPickupCostChanging(decimal value);
     partial void OnPickupCostChanged();
-    partial void OnCalculationTotalTariffCostChanging(decimal value);
-    partial void OnCalculationTotalTariffCostChanged();
-    partial void OnCalculationProfitChanging(decimal value);
-    partial void OnCalculationProfitChanged();
+    partial void OnTotalTariffCostChanging(decimal value);
+    partial void OnTotalTariffCostChanged();
+    partial void OnProfitChanging(decimal value);
+    partial void OnProfitChanged();
     #endregion
 		
 		public Calculation()
@@ -2110,42 +2110,42 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationTotalTariffCost", DbType="Money NOT NULL")]
-		public decimal CalculationTotalTariffCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalTariffCost", DbType="Money NOT NULL")]
+		public decimal TotalTariffCost
 		{
 			get
 			{
-				return this._CalculationTotalTariffCost;
+				return this._TotalTariffCost;
 			}
 			set
 			{
-				if ((this._CalculationTotalTariffCost != value))
+				if ((this._TotalTariffCost != value))
 				{
-					this.OnCalculationTotalTariffCostChanging(value);
+					this.OnTotalTariffCostChanging(value);
 					this.SendPropertyChanging();
-					this._CalculationTotalTariffCost = value;
-					this.SendPropertyChanged("CalculationTotalTariffCost");
-					this.OnCalculationTotalTariffCostChanged();
+					this._TotalTariffCost = value;
+					this.SendPropertyChanged("TotalTariffCost");
+					this.OnTotalTariffCostChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationProfit", DbType="Money NOT NULL")]
-		public decimal CalculationProfit
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Profit", DbType="Money NOT NULL")]
+		public decimal Profit
 		{
 			get
 			{
-				return this._CalculationProfit;
+				return this._Profit;
 			}
 			set
 			{
-				if ((this._CalculationProfit != value))
+				if ((this._Profit != value))
 				{
-					this.OnCalculationProfitChanging(value);
+					this.OnProfitChanging(value);
 					this.SendPropertyChanging();
-					this._CalculationProfit = value;
-					this.SendPropertyChanged("CalculationProfit");
-					this.OnCalculationProfitChanged();
+					this._Profit = value;
+					this.SendPropertyChanged("Profit");
+					this.OnProfitChanged();
 				}
 			}
 		}

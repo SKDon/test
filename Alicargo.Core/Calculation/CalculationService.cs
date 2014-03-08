@@ -67,7 +67,7 @@ namespace Alicargo.Core.Calculation
 				Invoice = application.Invoice,
 				Value = application.Value,
 				Class = application.Class,
-				InsuranceRate = application.InsuranceRate
+				InsuranceRate = application.InsuranceRate,
 			};
 
 			_calculations.Add(calculation, applicationId);

@@ -34,7 +34,9 @@ namespace Alicargo.DataAccess.Repositories
 				ClassId = data.Class,
 				data.Count,
 				data.Invoice,
-				data.Value
+				data.Value,
+				data.Profit,
+				data.TotalTariffCost
 			});
 		}
 

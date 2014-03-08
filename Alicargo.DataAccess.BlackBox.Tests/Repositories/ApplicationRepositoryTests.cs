@@ -3,8 +3,6 @@ using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.Application;
@@ -18,11 +16,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	[TestClass]
 	public class ApplicationRepositoryTests
 	{
-		private IApplicationRepository _applications;
+		private ApplicationRepository _applications;
 		private DbTestContext _context;
 		private ApplicationEditor _editor;
 		private Fixture _fixture;
-		private IStateRepository _stateRepository;
+		private StateRepository _stateRepository;
 
 		[TestCleanup]
 		public void TestCleanup()

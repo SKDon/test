@@ -17,50 +17,56 @@
 	@ClassId INT,
 	@Invoice NVARCHAR(MAX),
 	@Value MONEY,
-	@Count INT
+	@Count INT,
+	@TotalTariffCost MONEY,
+	@Profit MONEY
 
 AS BEGIN
 	SET NOCOUNT ON;
 
-	INSERT [dbo].[Calculation]
-		([ClientId]
-		,[ApplicationHistoryId]
-		,[AirWaybillDisplay]
-		,[ApplicationDisplay]
-		,[MarkName]
-		,[Weight]
-		,[TariffPerKg]
-		,[ScotchCost]
-		,[FactureCost]
-		,[FactureCostEx]
-		,[TransitCost]
-		,[PickupCost]
-		,[FactoryName]
-		,[CreationTimestamp]
-		,[ClassId]
-		,[Invoice]
-		,[Value]
-		,[Count]
-		,[InsuranceRate])
-     VALUES
-		(@ClientId
-		,@ApplicationHistoryId
-		,@AirWaybillDisplay
-		,@ApplicationDisplay
-		,@MarkName
-		,@Weight
-		,@TariffPerKg
-		,@ScotchCost
-		,@FactureCost
-		,@FactureCostEx
-		,@TransitCost
-		,@PickupCost
-		,@FactoryName
-		,@CreationTimestamp
-		,@ClassId
-		,@Invoice
-		,@Value
-		,@Count
-		,@InsuranceRate)
+	INSERT	[dbo].[Calculation]
+			([ClientId]
+			,[ApplicationHistoryId]
+			,[AirWaybillDisplay]
+			,[ApplicationDisplay]
+			,[MarkName]
+			,[Weight]
+			,[TariffPerKg]
+			,[ScotchCost]
+			,[FactureCost]
+			,[FactureCostEx]
+			,[TransitCost]
+			,[PickupCost]
+			,[FactoryName]
+			,[CreationTimestamp]
+			,[ClassId]
+			,[Invoice]
+			,[Value]
+			,[Count]
+			,[InsuranceRate]
+			,[TotalTariffCost]
+			,[Profit])
+     VALUES	(@ClientId
+			,@ApplicationHistoryId
+			,@AirWaybillDisplay
+			,@ApplicationDisplay
+			,@MarkName
+			,@Weight
+			,@TariffPerKg
+			,@ScotchCost
+			,@FactureCost
+			,@FactureCostEx
+			,@TransitCost
+			,@PickupCost
+			,@FactoryName
+			,@CreationTimestamp
+			,@ClassId
+			,@Invoice
+			,@Value
+			,@Count
+			,@InsuranceRate
+			,@TotalTariffCost
+			,@Profit)
+
 END
 GO

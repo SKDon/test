@@ -142,7 +142,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				PickupCostEdited = x.PickupCostEdited,
 				SenderId = x.SenderId,
 				ForwarderId = x.ForwarderId,
-				InsuranceRate = x.InsuranceRate
+				InsuranceRate = x.InsuranceRate,
+				CalculationProfit = x.CalculationProfit,
+				CalculationTotalTariffCost = x.CalculationTotalTariffCost
 			};
 		}
 
