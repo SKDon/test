@@ -69,7 +69,9 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public decimal? TransitCost { get; set; }
 		public decimal? ForwarderTransitCost { get; set; }
 		public decimal? PickupCost { get; set; }
-		public float  InsuranceRate { get; set; }
+		public float InsuranceRate { get; set; }
+		public decimal? CalculationTotalTariffCost { get; set; }
+		public decimal? CalculationProfit { get; set; }
 
 		public long SenderId { get; set; }
 		public long CountryId { get; set; }

@@ -19,9 +19,9 @@ namespace Alicargo.Core.Calculation
 			return (senderRate ?? 0) * (decimal)(weight ?? 0);
 		}
 
-		public static decimal GetTotalTariffCost(decimal? tariffPerKg, float? weight)
+		public static decimal GetTotalTariffCost(decimal? calculationTotalTariffCost, decimal? tariffPerKg, float? weight)
 		{
-			return (tariffPerKg ?? 0) * (decimal)(weight ?? 0);
+			return calculationTotalTariffCost ?? ((tariffPerKg ?? 0) * (decimal)(weight ?? 0));
 		}
 	}
 }

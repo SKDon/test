@@ -61,14 +61,18 @@ namespace Alicargo.Services.Calculation
 		{
 			var stateIds = _stateFilter.GetStateVisibility();
 
-			var applications = _applications.List(stateIds, new[]
-			{
-				new Order
+			var applications = _applications.List(stateIds,
+				new[]
 				{
-					Desc = true,
-					OrderType = OrderType.AirWaybill
-				}
-			}, take, skip, senderId: senderId).ToArray();
+					new Order
+					{
+						Desc = true,
+						OrderType = OrderType.AirWaybill
+					}
+				},
+				take,
+				skip,
+				senderId: senderId).ToArray();
 
 			total = _applications.Count(stateIds, senderId: senderId);
 
@@ -109,6 +113,34 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
+		private SenderCalculationItem[] GetItems(ApplicationExtendedData[] applications)
+		{
+			var appIds = applications.Select(x => x.Id).ToArray();
+			var nics = _clients.GetNicByApplications(appIds);
+
+			return applications.Select(a => new SenderCalculationItem
+			{
+				ApplicationId = a.Id,
+				Value = a.Value,
+				Count = a.Count,
+				ClientNic = nics[a.Id],
+				Factory = a.FactoryName,
+				FactureCost = a.OriginalFactureCost,
+				FactureCostEx = a.OriginalFactureCostEx,
+				Invoice = a.Invoice,
+				Mark = a.MarkName,
+				SenderScotchCost = a.SenderScotchCost,
+				ValueCurrencyId = a.CurrencyId,
+				Weight = a.Weight,
+				PickupCost = a.SenderPickupCost,
+				AirWaybillId = a.AirWaybillId,
+				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
+				Profit = GetProfit(a),
+				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
+				SenderRate = a.SenderRate
+			}).ToArray();
+		}
+
 		private static SenderCalculationAwbInfo[] GetInfo(
 			IEnumerable<SenderCalculationGroup> groups,
 			IEnumerable<ApplicationExtendedData> items,
@@ -144,36 +176,13 @@ namespace Alicargo.Services.Calculation
 			}).ToArray();
 		}
 
-		private SenderCalculationItem[] GetItems(ApplicationExtendedData[] applications)
+		private static decimal GetProfit(ApplicationExtendedData data)
 		{
-			var appIds = applications.Select(x => x.Id).ToArray();
-			var nics = _clients.GetNicByApplications(appIds);
-
-			return applications.Select(a => new SenderCalculationItem
-			{
-				ApplicationId = a.Id,
-				Value = a.Value,
-				Count = a.Count,
-				ClientNic = nics[a.Id],
-				Factory = a.FactoryName,
-				FactureCost = a.OriginalFactureCost,
-				FactureCostEx = a.OriginalFactureCostEx,
-				Invoice = a.Invoice,
-				Mark = a.MarkName,
-				SenderScotchCost = a.SenderScotchCost,
-				ValueCurrencyId = a.CurrencyId,
-				Weight = a.Weight,
-				PickupCost = a.SenderPickupCost,
-				AirWaybillId = a.AirWaybillId,
-				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				Profit = (a.SenderScotchCost ?? 0)
-				         + (a.OriginalFactureCost ?? 0)
-				         + (a.OriginalFactureCostEx ?? 0)
-				         + (a.SenderPickupCost ?? 0)
-				         + CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
-				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
-				SenderRate = a.SenderRate
-			}).ToArray();
+			return (data.SenderScotchCost ?? 0)
+			       + (data.OriginalFactureCost ?? 0)
+			       + (data.OriginalFactureCostEx ?? 0)
+			       + (data.SenderPickupCost ?? 0)
+			       + CalculationHelper.GetTotalSenderRate(data.SenderRate, data.Weight);
 		}
 	}
 }

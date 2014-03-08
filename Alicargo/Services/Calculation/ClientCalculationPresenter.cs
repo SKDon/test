@@ -62,14 +62,19 @@ namespace Alicargo.Services.Calculation
 				.Where(x => x.Role == RoleType.Client).Select(x => x.StateId)
 				.ToArray();
 
-			var applications = _applicationRepository.List(stateIds, new[]
-			{
-				new Order
+			var applications = _applicationRepository.List(stateIds,
+				new[]
 				{
-					Desc = true,
-					OrderType = OrderType.AirWaybill
-				}
-			}, take, (int)skip, clientId, hasCalculation: true).ToArray();
+					new Order
+					{
+						Desc = true,
+						OrderType = OrderType.AirWaybill
+					}
+				},
+				take,
+				(int)skip,
+				clientId,
+				hasCalculation: true).ToArray();
 
 			total = _applicationRepository.Count(stateIds, clientId, hasCalculation: true);
 
@@ -100,7 +105,7 @@ namespace Alicargo.Services.Calculation
 				PickupCost = a.PickupCost,
 				AirWaybillId = a.AirWaybillId.Value,
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
+				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
 				Profit = GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
 				ClassName = a.ClassId.HasValue
@@ -109,7 +114,8 @@ namespace Alicargo.Services.Calculation
 			}).ToArray();
 		}
 
-		private static List<ClientCalculationGroup> GetGroups(IEnumerable<AirWaybillData> awbsData,
+		private static List<ClientCalculationGroup> GetGroups(
+			IEnumerable<AirWaybillData> awbsData,
 			IEnumerable<ClientCalculationItem> items)
 		{
 			return items.GroupBy(x => x.AirWaybillId).Select(g => new ClientCalculationGroup
@@ -123,9 +129,12 @@ namespace Alicargo.Services.Calculation
 
 		private static decimal GetProfit(ApplicationExtendedData application)
 		{
-			return CalculationHelper.GetTotalTariffCost(application.TariffPerKg, application.Weight)
+			return application.CalculationProfit
+			       ?? CalculationHelper.GetTotalTariffCost(application.CalculationTotalTariffCost,
+				       application.TariffPerKg,
+				       application.Weight)
 			       + (application.ScotchCost ?? 0)
-				   + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
+			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
 			       + (application.AdjustedFactureCost ?? 0)
 			       + (application.AdjustedFactureCostEx ?? 0)
 			       + (application.PickupCost ?? 0)

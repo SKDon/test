@@ -76,12 +76,12 @@ namespace Alicargo.Services.Calculation
 				PickupCost = a.PickupCostEdited ?? a.PickupCost,
 				AirWaybillId = a.AirWaybillId.Value,
 				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
-				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.TariffPerKg, a.Weight),
-				Profit = GetProfit(a, tariffs),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),
-				ClassId = a.Class
+				ClassId = a.Class,
+				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
+				Profit = GetProfit(a, tariffs)
 			}).OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
 		}
 
@@ -175,9 +175,10 @@ namespace Alicargo.Services.Calculation
 
 		private static decimal GetProfit(ApplicationData application, IReadOnlyDictionary<long, decimal> tariffs)
 		{
-			return CalculationHelper.GetTotalTariffCost(application.TariffPerKg, application.Weight)
-			       + (application.ScotchCostEdited ??
-			          CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
+			return application.CalculationProfit
+			       ?? CalculationHelper.GetTotalTariffCost(application.CalculationTotalTariffCost, application.TariffPerKg, application.Weight)
+			       + (application.ScotchCostEdited
+			          ?? CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
 			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
 			       + (application.FactureCostEdited ?? application.FactureCost ?? 0)
 			       + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
