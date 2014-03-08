@@ -57,7 +57,7 @@ namespace Alicargo.Core.Excel.Client
 			_excel.Cells[iRow, iColumn++].Value = _data.Value;
 			_excel.Cells[iRow, iColumn++].Value = _data.TariffPerKg;
 			_excel.Cells[iRow, iColumn].Style.Font.Bold = true;
-			_excel.Cells[iRow, iColumn++].Value = _data.TariffPerKg * (decimal)_data.Weight;
+			_excel.Cells[iRow, iColumn++].Value = CalculationHelper.GetTotalTariffCost(_data.TotalTariffCost, _data.TariffPerKg, _data.Weight);
 			_excel.Cells[iRow, iColumn++].Value = _data.ScotchCost;
 			_excel.Cells[iRow, iColumn++].Value = CalculationHelper.GetInsuranceCost(_data.Value, _data.InsuranceRate);
 			_excel.Cells[iRow, iColumn++].Value = _data.FactureCost;

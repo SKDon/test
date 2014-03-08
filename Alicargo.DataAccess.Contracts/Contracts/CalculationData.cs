@@ -20,8 +20,8 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 		public decimal FactureCostEx { get; set; }
 		public decimal TransitCost { get; set; }
 		public decimal PickupCost { get; set; }
-		public decimal TotalTariffCost { get; set; }
-		public decimal Profit { get; set; }
+		public decimal? TotalTariffCost { get; set; }
+		public decimal? Profit { get; set; }
 
 		public ClassType? Class { get; set; }
 		public int Count { get; set; }
