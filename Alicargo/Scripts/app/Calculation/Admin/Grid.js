@@ -133,7 +133,16 @@
 				var applicationId = e.model.ApplicationId;
 				
 				function numberConverter(value) {
-					return kendo.toString(value, 'n2');
+					if (!!!value) {
+						return null;
+					}
+					
+					// todo: fix hack
+					if (Globalize.culture().name == 'en') {
+						return value.toFixed(2);
+					}
+					
+					return value.toFixed(2).replace(".", ","); 
 				}
 
 				var settings = {
