@@ -175,11 +175,6 @@ namespace Alicargo.Services.Application
 
 		public void SetTransitCostEdited(long id, decimal? transitCost)
 		{
-			if(!_identity.IsInRole(RoleType.Admin))
-			{
-				throw new AccessForbiddenException("Edited value can be defined only be admin");
-			}
-
 			_editor.SetTransitCostEdited(id, transitCost);
 		}
 
@@ -202,6 +197,16 @@ namespace Alicargo.Services.Application
 			_editor.SetInsuranceRate(id, (float)insurance);
 		}
 
+		public void SetTotalTariffCost(long id, decimal? value)
+		{
+			_editor.SetTotalTariffCost(id, value);
+		}
+
+		public void SetProfit(long id, decimal? value)
+		{
+			_editor.SetProfit(id, value);
+		}
+
 		public void SetTariffPerKg(long id, decimal? tariffPerKg)
 		{
 			_editor.SetTariffPerKg(id, tariffPerKg);
@@ -209,41 +214,21 @@ namespace Alicargo.Services.Application
 
 		public void SetPickupCostEdited(long id, decimal? pickupCost)
 		{
-			if(!_identity.IsInRole(RoleType.Admin))
-			{
-				throw new AccessForbiddenException("Edited value can be defined only be admin");
-			}
-
 			_editor.SetPickupCostEdited(id, pickupCost);
 		}
 
 		public void SetFactureCostEdited(long id, decimal? factureCost)
 		{
-			if(!_identity.IsInRole(RoleType.Admin))
-			{
-				throw new AccessForbiddenException("Edited value can be defined only be admin");
-			}
-
 			_editor.SetFactureCostEdited(id, factureCost);
 		}
 
 		public void SetFactureCostExEdited(long id, decimal? factureCostEx)
 		{
-			if(!_identity.IsInRole(RoleType.Admin))
-			{
-				throw new AccessForbiddenException("Edited value can be defined only be admin");
-			}
-
 			_editor.SetFactureCostExEdited(id, factureCostEx);
 		}
 
 		public void SetScotchCostEdited(long id, decimal? scotchCost)
 		{
-			if(!_identity.IsInRole(RoleType.Admin))
-			{
-				throw new AccessForbiddenException("Edited value can be defined only be admin");
-			}
-
 			_editor.SetScotchCostEdited(id, scotchCost);
 		}
 

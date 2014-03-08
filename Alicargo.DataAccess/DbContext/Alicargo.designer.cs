@@ -1776,6 +1776,10 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _PickupCost;
 		
+		private decimal _CalculationTotalTariffCost;
+		
+		private decimal _CalculationProfit;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -1810,6 +1814,10 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnTransitCostChanged();
     partial void OnPickupCostChanging(decimal value);
     partial void OnPickupCostChanged();
+    partial void OnCalculationTotalTariffCostChanging(decimal value);
+    partial void OnCalculationTotalTariffCostChanged();
+    partial void OnCalculationProfitChanging(decimal value);
+    partial void OnCalculationProfitChanged();
     #endregion
 		
 		public Calculation()
@@ -2098,6 +2106,46 @@ namespace Alicargo.DataAccess.DbContext
 					this._PickupCost = value;
 					this.SendPropertyChanged("PickupCost");
 					this.OnPickupCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationTotalTariffCost", DbType="Money NOT NULL")]
+		public decimal CalculationTotalTariffCost
+		{
+			get
+			{
+				return this._CalculationTotalTariffCost;
+			}
+			set
+			{
+				if ((this._CalculationTotalTariffCost != value))
+				{
+					this.OnCalculationTotalTariffCostChanging(value);
+					this.SendPropertyChanging();
+					this._CalculationTotalTariffCost = value;
+					this.SendPropertyChanged("CalculationTotalTariffCost");
+					this.OnCalculationTotalTariffCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationProfit", DbType="Money NOT NULL")]
+		public decimal CalculationProfit
+		{
+			get
+			{
+				return this._CalculationProfit;
+			}
+			set
+			{
+				if ((this._CalculationProfit != value))
+				{
+					this.OnCalculationProfitChanging(value);
+					this.SendPropertyChanging();
+					this._CalculationProfit = value;
+					this.SendPropertyChanged("CalculationProfit");
+					this.OnCalculationProfitChanged();
 				}
 			}
 		}
@@ -5099,6 +5147,10 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<decimal> _FactureCostExEdited;
 		
+		private System.Nullable<decimal> _CalculationProfit;
+		
+		private System.Nullable<decimal> _CalculationTotalTariffCost;
+		
 		private float _InsuranceRate;
 		
 		private EntityRef<AirWaybill> _AirWaybill;
@@ -5203,6 +5255,10 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnFactureCostExChanged();
     partial void OnFactureCostExEditedChanging(System.Nullable<decimal> value);
     partial void OnFactureCostExEditedChanged();
+    partial void OnCalculationProfitChanging(System.Nullable<decimal> value);
+    partial void OnCalculationProfitChanged();
+    partial void OnCalculationTotalTariffCostChanging(System.Nullable<decimal> value);
+    partial void OnCalculationTotalTariffCostChanged();
     partial void OnInsuranceRateChanging(float value);
     partial void OnInsuranceRateChanged();
     #endregion
@@ -6083,6 +6139,46 @@ namespace Alicargo.DataAccess.DbContext
 					this._FactureCostExEdited = value;
 					this.SendPropertyChanged("FactureCostExEdited");
 					this.OnFactureCostExEditedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationProfit", DbType="Money")]
+		public System.Nullable<decimal> CalculationProfit
+		{
+			get
+			{
+				return this._CalculationProfit;
+			}
+			set
+			{
+				if ((this._CalculationProfit != value))
+				{
+					this.OnCalculationProfitChanging(value);
+					this.SendPropertyChanging();
+					this._CalculationProfit = value;
+					this.SendPropertyChanged("CalculationProfit");
+					this.OnCalculationProfitChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationTotalTariffCost", DbType="Money")]
+		public System.Nullable<decimal> CalculationTotalTariffCost
+		{
+			get
+			{
+				return this._CalculationTotalTariffCost;
+			}
+			set
+			{
+				if ((this._CalculationTotalTariffCost != value))
+				{
+					this.OnCalculationTotalTariffCostChanging(value);
+					this.SendPropertyChanging();
+					this._CalculationTotalTariffCost = value;
+					this.SendPropertyChanged("CalculationTotalTariffCost");
+					this.OnCalculationTotalTariffCostChanged();
 				}
 			}
 		}

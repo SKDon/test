@@ -24,7 +24,7 @@
 							"Value": { type: "number", editable: false },
 							"TariffPerKg": { type: "number", editable: true },
 							"SenderRate": { type: "number", editable: true },
-							"TotalTariffCost": { type: "number", editable: false },
+							"TotalTariffCost": { type: "number", editable: true },
 							"TotalSenderRate": { type: "number", editable: false },
 							"ScotchCost": { type: "number", editable: true },
 							"FactureCost": { type: "number", editable: true },
@@ -32,7 +32,7 @@
 							"PickupCost": { type: "number", editable: true },
 							"TransitCost": { type: "number", editable: true },
 							"InsuranceCost": { type: "number", editable: true },
-							"Profit": { type: "number", editable: false }
+							"Profit": { type: "number", editable: true }
 						}
 					}
 				},
@@ -216,6 +216,7 @@
 					title: $l.Entities_TotalTariffCost,
 					groupFooterTemplate: groupFooterTemplate,
 					template: "<b>#= kendo.toString(TotalTariffCost, 'n2') #</b>",
+					editor: numberEditor,
 					headerAttributes: textBold,
 					attributes: textRight,
 					footerAttributes: textRight
@@ -273,6 +274,7 @@
 					title: $l.Entities_Total,
 					groupFooterTemplate: groupFooterTemplate,
 					template: "<b>#= kendo.toString(Profit, 'n2') #</b>",
+					editor: numberEditor,
 					headerAttributes: textBold,
 					attributes: textRight,
 					footerAttributes: textRight

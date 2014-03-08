@@ -40,6 +40,16 @@ namespace Alicargo.Core.Event
 			}
 		}
 
+		public void SetTotalTariffCost(long id, decimal? value)
+		{
+			_editor.SetTotalTariffCost(id, value);
+		}
+
+		public void SetProfit(long id, decimal? value)
+		{
+			_editor.SetProfit(id, value);
+		}
+
 		public long Add(ApplicationData application)
 		{
 			var applicationId = _editor.Add(application);

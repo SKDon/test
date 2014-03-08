@@ -11,26 +11,26 @@ namespace Alicargo.Controllers.Calculation
 {
 	public partial class CalculationController : Controller
 	{
-		private readonly IAdminApplicationManager _applicationManager;
-		private readonly IAwbUpdateManager _awbUpdateManager;
+		private readonly IAdminApplicationManager _applications;
+		private readonly IAwbUpdateManager _awbUpdater;
 		private readonly IClientBalanceRepository _balances;
 		private readonly ICalculationService _calculation;
 		private readonly IIdentityService _identity;
 		private readonly IAdminCalculationPresenter _presenter;
 
 		public CalculationController(
-			IAwbUpdateManager awbUpdateManager,
+			IAwbUpdateManager awbUpdater,
 			IAdminCalculationPresenter presenter,
 			ICalculationService calculation,
 			IIdentityService identity,
-			IAdminApplicationManager applicationManager,
+			IAdminApplicationManager applications,
 			IClientBalanceRepository balances)
 		{
-			_awbUpdateManager = awbUpdateManager;
+			_awbUpdater = awbUpdater;
 			_presenter = presenter;
 			_calculation = calculation;
 			_identity = identity;
-			_applicationManager = applicationManager;
+			_applications = applications;
 			_balances = balances;
 		}
 
@@ -95,7 +95,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetAdditionalCost(long awbId, decimal? additionalCost)
 		{
-			_awbUpdateManager.SetAdditionalCost(awbId, additionalCost);
+			_awbUpdater.SetAdditionalCost(awbId, additionalCost);
 
 			var data = _presenter.Row(awbId);
 
@@ -107,7 +107,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetClass(long id, long awbId, int? classId)
 		{
-			_applicationManager.SetClass(id, (ClassType?)classId);
+			_applications.SetClass(id, (ClassType?)classId);
 
 			var data = _presenter.Row(awbId);
 
@@ -119,7 +119,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetFactureCostEdited(long id, long awbId, decimal? factureCost)
 		{
-			_applicationManager.SetFactureCostEdited(id, factureCost);
+			_applications.SetFactureCostEdited(id, factureCost);
 
 			var data = _presenter.Row(awbId);
 
@@ -131,7 +131,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetFactureCostExEdited(long id, long awbId, decimal? factureCostEx)
 		{
-			_applicationManager.SetFactureCostExEdited(id, factureCostEx);
+			_applications.SetFactureCostExEdited(id, factureCostEx);
 
 			var data = _presenter.Row(awbId);
 
@@ -143,7 +143,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
 		{
-			_applicationManager.SetPickupCostEdited(id, pickupCost);
+			_applications.SetPickupCostEdited(id, pickupCost);
 
 			var data = _presenter.Row(awbId);
 
@@ -155,7 +155,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetScotchCostEdited(long id, long awbId, decimal? scotchCost)
 		{
-			_applicationManager.SetScotchCostEdited(id, scotchCost);
+			_applications.SetScotchCostEdited(id, scotchCost);
 
 			var data = _presenter.Row(awbId);
 
@@ -167,7 +167,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetSenderRate(long id, long awbId, decimal? senderRate)
 		{
-			_applicationManager.SetSenderRate(id, senderRate);
+			_applications.SetSenderRate(id, senderRate);
 
 			var data = _presenter.Row(awbId);
 
@@ -179,7 +179,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTariffPerKg(long id, long awbId, decimal? tariffPerKg)
 		{
-			_applicationManager.SetTariffPerKg(id, tariffPerKg);
+			_applications.SetTariffPerKg(id, tariffPerKg);
 
 			var data = _presenter.Row(awbId);
 
@@ -191,7 +191,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
 		{
-			_applicationManager.SetTransitCostEdited(id, transitCost);
+			_applications.SetTransitCostEdited(id, transitCost);
 
 			var data = _presenter.Row(awbId);
 
@@ -203,7 +203,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetCount(long id, long awbId, int? value)
 		{
-			_applicationManager.SetCount(id, value);
+			_applications.SetCount(id, value);
 
 			var data = _presenter.Row(awbId);
 
@@ -215,7 +215,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetWeight(long id, long awbId, float? value)
 		{
-			_applicationManager.SetWeight(id, value);
+			_applications.SetWeight(id, value);
 
 			var data = _presenter.Row(awbId);
 
@@ -227,7 +227,31 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetInsuranceCost(long id, long awbId, float? value)
 		{
-			_applicationManager.SetInsuranceCost(id, value);
+			_applications.SetInsuranceCost(id, value);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetTotalTariffCost(long id, long awbId, decimal? value)
+		{
+			_applications.SetTotalTariffCost(id, value);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetProfit(long id, long awbId, decimal? value)
+		{
+			_applications.SetProfit(id, value);
 
 			var data = _presenter.Row(awbId);
 

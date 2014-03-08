@@ -89,6 +89,8 @@
       <Column Name="FactureCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="PickupCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CalculationTotalTariffCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CalculationProfit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Association Name="Client_Calculation" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
@@ -270,6 +272,8 @@
       <Column Name="ForwarderId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="FactureCostEx" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="FactureCostExEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CalculationProfit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CalculationTotalTariffCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="InsuranceRate" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
       <Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />
       <Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />

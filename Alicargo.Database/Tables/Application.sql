@@ -50,6 +50,8 @@
 	[FactureCostEx]			MONEY				NULL,
 	[FactureCostExEdited]	MONEY				NULL,
 	[InsuranceRate]			REAL				NOT NULL CONSTRAINT [DF_Application_InsuranceRate] DEFAULT 0.01,
+	[CalculationTotalTariffCost] MONEY			NULL,
+	[CalculationProfit]		MONEY				NULL,
 	
 	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),

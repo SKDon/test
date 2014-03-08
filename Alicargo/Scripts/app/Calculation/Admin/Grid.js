@@ -192,6 +192,16 @@
 						Url: $u.Calculation_SetInsuranceCost,
 						ArgumentName: "value",
 						Convert: numberConverter
+					},
+					TotalTariffCost: {
+						Url: $u.Calculation_SetTotalTariffCost,
+						ArgumentName: "value",
+						Convert: numberConverter
+					},
+					Profit: {
+						Url: $u.Calculation_SetProfit,
+						ArgumentName: "value",
+						Convert: numberConverter
 					}
 				};
 

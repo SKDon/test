@@ -132,6 +132,16 @@ namespace Alicargo.DataAccess.Repositories.Application
 			Update(application.Id, entity => Map(application, entity));
 		}
 
+		public void SetTotalTariffCost(long id, decimal? value)
+		{
+			Update(id, application => application.CalculationTotalTariffCost = value);
+		}
+
+		public void SetProfit(long id, decimal? value)
+		{
+			Update(id, application => application.CalculationProfit = value);
+		}
+
 		private void Update(long id, Action<DbContext.Application> action)
 		{
 			var application = _context.Applications.First(x => x.Id == id);

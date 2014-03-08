@@ -25,5 +25,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		void SetWeight(long id, float? value);
 		void SetInsuranceRate(long id, float insuranceRate);
 		void Update(ApplicationData application);
+		void SetTotalTariffCost(long id, decimal? value);
+		void SetProfit(long id, decimal? value);
 	}
 }
