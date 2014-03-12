@@ -160,6 +160,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "CarrierContact", application.CarrierContact);
 			Add(localizedData, "CarrierAddress", application.CarrierAddress);
 			Add(localizedData, "CarrierPhone", application.CarrierPhone);
+			Add(localizedData, "CarrierEmail", application.CarrierEmail);
 			Add(localizedData, "TransitCity", cityName);
 			Add(localizedData, "TransitPhone", application.TransitPhone);
 			Add(localizedData, "TransitRecipientName", application.TransitRecipientName);
@@ -171,6 +172,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "SenderContact", application.SenderContact);
 			Add(localizedData, "SenderPhone", application.SenderPhone);
 			Add(localizedData, "SenderAddress", application.SenderAddress);
+			Add(localizedData, "SenderEmail", application.SenderEmail);
 			Add(localizedData, "ForwarderName", application.ForwarderName);
 
 			return localizedData;

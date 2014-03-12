@@ -1,5 +1,5 @@
 ﻿USE [$(MainDbName)]
-GO
+
 
 GO
 PRINT N'Altering [dbo].[Calculation_Add]...';
@@ -466,8 +466,4 @@ AS BEGIN
 	COMMIT
 
 END
-GO
-PRINT N'Update complete.';
-
-
 GO

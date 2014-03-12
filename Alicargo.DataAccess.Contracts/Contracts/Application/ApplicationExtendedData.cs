@@ -52,6 +52,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string CarrierPhone { get; set; }
 		public string CarrierAddress { get; set; }
 		public string CarrierContact { get; set; }
+		public string CarrierEmail { get; set; }
 
 		public string FactoryName { get; set; }
 		public string FactoryPhone { get; set; }
@@ -81,5 +82,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string SenderContact { get; set; }
 		public string SenderPhone { get; set; }
 		public string SenderAddress { get; set; }
+		public string SenderEmail { get; set; }
 	}
 }
