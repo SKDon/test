@@ -69,7 +69,6 @@ INSERT [dbo].[EmailTemplateLocalization]
 {TermsOfDelivery [Условия поставки: {0}]}
 {MethodOfDelivery [Способ доставки: {0}]}
 {TransitReference [Транзитный референс: {0}]}
-{ForwarderName [Транзитный перевозчик: {0}]}
 
 {SenderName [Отправитель: {0}]}
 {SenderContact [Отправитель, контактное лицо: {0}]}
@@ -213,7 +212,6 @@ N'Изменение статуса заявки: {StateName}
 {TermsOfDelivery [Условия поставки: {0}]}
 {MethodOfDelivery [Способ доставки: {0}]}
 {TransitReference [Транзитный референс: {0}]}
-{ForwarderName [Транзитный перевозчик: {0}]}
 
 {SenderName [Отправитель: {0}]}
 {SenderContact [Отправитель, контактное лицо: {0}]}

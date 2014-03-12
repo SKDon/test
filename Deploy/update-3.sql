@@ -25,7 +25,6 @@ SET [Body] = N'Создана новая заявка.
 {TermsOfDelivery [Условия поставки: {0}]}
 {MethodOfDelivery [Способ доставки: {0}]}
 {TransitReference [Транзитный референс: {0}]}
-{ForwarderName [Транзитный перевозчик: {0}]}
 
 {SenderName [Отправитель: {0}]}
 {SenderContact [Отправитель, контактное лицо: {0}]}
@@ -52,7 +51,7 @@ SET [Body] = N'Создана новая заявка.
 {AirWaybillDateOfDeparture [Дата вылета: {0}]}
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}'
-WHERE [EmailTemplateId] = 1 AND [TwoLetterISOLanguageName] = 'ru'
+WHERE [EmailTemplateId] = 1
 GO
 
 UPDATE [EmailTemplateLocalization]
@@ -79,7 +78,6 @@ SET [Body] = N'Изменение статуса заявки: {StateName}
 {TermsOfDelivery [Условия поставки: {0}]}
 {MethodOfDelivery [Способ доставки: {0}]}
 {TransitReference [Транзитный референс: {0}]}
-{ForwarderName [Транзитный перевозчик: {0}]}
 
 {SenderName [Отправитель: {0}]}
 {SenderContact [Отправитель, контактное лицо: {0}]}
@@ -106,6 +104,6 @@ SET [Body] = N'Изменение статуса заявки: {StateName}
 {AirWaybillDateOfDeparture [Дата вылета: {0}]}
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}'
-WHERE [EmailTemplateId] = 10 AND [TwoLetterISOLanguageName] = 'ru'
+WHERE [EmailTemplateId] = 10
 
 GO
