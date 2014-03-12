@@ -27,7 +27,7 @@ namespace Alicargo.ViewModels.AirWaybill
 		public string GTD { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Broker")]
-		public long BrokerId { get; set; }
+		public long? BrokerId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FlightCost")]
 		public decimal? FlightCost { get; set; }

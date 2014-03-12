@@ -29,7 +29,7 @@
       <Column Name="DepartureAirport" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="DateOfDeparture" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="DateOfArrival" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
-      <Column Name="BrokerId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="BrokerId" Type="System.Int64" DbType="BigInt NULL" CanBeNull="true" />
       <Column Name="GTD" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="Bill" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
       <Column Name="GTDFileData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />

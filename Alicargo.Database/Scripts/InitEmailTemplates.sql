@@ -2,7 +2,7 @@
 INSERT [dbo].[EmailTemplate] ([Id]) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
 (24), (25), (26), (27), (28), (29), (30), 
-(31), (32), (33), (34), (35), (36), (37), (38)
+(31), (32), (33), (34), (35), (36), (37), (38), (39)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
@@ -35,13 +35,14 @@ INSERT [dbo].[EventEmailTemplate]
 (18, 30, 1),
 
 -- Awb
-(19, 31, 1),
+(19, 31, 1), -- AwbCreated
 (21, 33, 1), -- GTDFileUploaded
 (22, 34, 1), -- GTDAdditionalFileUploaded
 (23, 35, 1), -- AwbPackingFileUploaded
 (24, 36, 1), -- AwbInvoiceFileUploaded
 (25, 37, 1), -- AWBFileUploaded
-(26, 38, 1)  -- DrawFileUploaded
+(26, 38, 1), -- DrawFileUploaded
+(27, 39, 1)  -- SetBroker
 
 
 INSERT [dbo].[EmailTemplateLocalization]
@@ -276,7 +277,20 @@ N'Установлен перевозчик {ForwarderName} на заявку {D
 N'Добрый день, {ClientNic}! Вы зарегистрированны в системе отслеживания грузов компании Alicargo. Имя доступа: {Login}, Пароль: {Password}.', 0),
 
 (31, 'ru', N'Alicargo',
-N'Создана авианакладная, Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}, Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}, Вес: {TotalWeight}, Количество мест: {TotalCount}. Номер накладной: {AirWaybill}.', 0),
+N'Создана авианакладная. Номер накладной: {AirWaybill}.
+Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}.
+Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}.
+Вес: {TotalWeight}.
+Количество мест: {TotalCount}.', 0),
+
+(39, 'ru', N'Создана авианакладная',
+N'Номер накладной: {AirWaybill}.
+Дата вылета: {DateOfDeparture}.
+Дата прилета: {DateOfArrival}.
+Аэропорт вылета: {DepartureAirport}.
+Аэропорт прилета: {ArrivalAirport}.
+Количество мест: {TotalCount}.
+Общий вес {TotalWeight}.', 0),
 
 (32, 'ru', N'Alicargo',
 N'Заявке {DisplayNumber} задана авианакладная, Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}, Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}, Вес: {TotalWeight}, Количество мест: {TotalCount}. Номер накладной: {AirWaybill}.', 0),
@@ -329,7 +343,7 @@ INSERT [dbo].[EventEmailRecipient]
 (2, 24),
 (2, 25),
 -- Broker 3
-(3, 19),
+(3, 27),
 (3, 23),
 (3, 25),
 (3, 26),

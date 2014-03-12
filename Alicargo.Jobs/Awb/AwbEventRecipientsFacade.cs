@@ -52,13 +52,18 @@ namespace Alicargo.Jobs.Awb
 						{
 							yield return recipient;
 						}
+
 						break;
 
 					case RoleType.Broker:
 						var brokerId = _awbs.Get(data.EntityId).Single().BrokerId;
-						var broker = _brokers.Get(brokerId);
+						if(brokerId.HasValue)
+						{
+							var broker = _brokers.Get(brokerId.Value);
 
-						yield return new RecipientData(broker.Email, broker.Language, role);
+							yield return new RecipientData(broker.Email, broker.Language, role);	
+						}
+
 						break;
 
 					case RoleType.Sender:
@@ -66,6 +71,7 @@ namespace Alicargo.Jobs.Awb
 						{
 							yield return new RecipientData(email.Email, email.Language, RoleType.Client);
 						}
+
 						break;
 
 					case RoleType.Client:
@@ -76,6 +82,7 @@ namespace Alicargo.Jobs.Awb
 								yield return new RecipientData(email, emailData.Language, RoleType.Client);
 							}
 						}
+
 						break;
 
 					case RoleType.Forwarder:
@@ -83,6 +90,7 @@ namespace Alicargo.Jobs.Awb
 						{
 							yield return new RecipientData(email.Email, email.Language, RoleType.Client);
 						}
+
 						break;
 
 					case RoleType.Carrier:
@@ -90,6 +98,7 @@ namespace Alicargo.Jobs.Awb
 						{
 							yield return new RecipientData(email.Email, email.Language, RoleType.Client);
 						}
+
 						break;
 
 					default:

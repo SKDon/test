@@ -10,57 +10,57 @@ namespace Alicargo.Services.AirWaybill
 {
 	internal sealed class AwbUpdateManager : IAwbUpdateManager
 	{
-		private readonly IAwbRepository _awbRepository;
-		private readonly IStateConfig _stateConfig;
+		private readonly IAwbRepository _awbs;
+		private readonly IStateConfig _config;
 
 		public AwbUpdateManager(
-			IAwbRepository awbRepository,
-			IStateConfig stateConfig)
+			IAwbRepository awbs,
+			IStateConfig config)
 		{
-			_awbRepository = awbRepository;
-			_stateConfig = stateConfig;
+			_awbs = awbs;
+			_config = config;
 		}
 
 		public void Update(long id, AwbAdminModel model)
 		{
-			var data = _awbRepository.Get(id).First();
+			var data = _awbs.Get(id).First();
 
 			AwbMapper.Map(model, data);
 
-			_awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile,
+			_awbs.Update(data, model.GTDFile, model.GTDAdditionalFile,
 				model.PackingFile, model.InvoiceFile, model.AWBFile, model.DrawFile);
 		}
 
 		public void Update(long id, AwbBrokerModel model)
 		{
-			var data = _awbRepository.Get(id).First();
+			var data = _awbs.Get(id).First();
 
-			if(data.StateId == _stateConfig.CargoIsCustomsClearedStateId)
+			if(data.StateId == _config.CargoIsCustomsClearedStateId)
 			{
 				throw new UnexpectedStateException(
 					data.StateId,
 					"Can't update an AWB while it has the state "
-					+ _stateConfig.CargoIsCustomsClearedStateId.ToString(CultureInfo.InvariantCulture));
+					+ _config.CargoIsCustomsClearedStateId.ToString(CultureInfo.InvariantCulture));
 			}
 
 			AwbMapper.Map(model, data);
 
-			_awbRepository.Update(data, model.GTDFile, model.GTDAdditionalFile,
+			_awbs.Update(data, model.GTDFile, model.GTDAdditionalFile,
 				model.PackingFile, model.InvoiceFile, null, model.DrawFile);
 		}
 
 		public void Update(long id, AwbSenderModel model)
 		{
-			var data = _awbRepository.Get(id).First();
+			var data = _awbs.Get(id).First();
 
 			AwbMapper.Map(model, data);
 
-			_awbRepository.Update(data, null, null, model.PackingFile, null, model.AWBFile, null);
+			_awbs.Update(data, null, null, model.PackingFile, null, model.AWBFile, null);
 		}
 
 		public void SetAdditionalCost(long awbId, decimal? additionalCost)
 		{
-			_awbRepository.SetAdditionalCost(awbId, additionalCost);
+			_awbs.SetAdditionalCost(awbId, additionalCost);
 		}
 	}
 }

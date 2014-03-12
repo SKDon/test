@@ -195,4 +195,7 @@
   <data name="SetAwb" xml:space="preserve">
     <value>Set awb</value>
   </data>
+  <data name="SetBroker" xml:space="preserve">
+    <value>Set broker</value>
+  </data>
 </root>

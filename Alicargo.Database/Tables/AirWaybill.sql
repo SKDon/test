@@ -7,7 +7,7 @@
 	[DateOfDeparture]				DATETIMEOFFSET		NOT NULL,
 	[DateOfArrival]					DATETIMEOFFSET		NOT NULL,
 
-	[BrokerId]						BIGINT				NOT NULL,
+	[BrokerId]						BIGINT				NULL,
 	[GTD]							NVARCHAR (320)		NULL,
 	[Bill]							NVARCHAR (320)		NOT NULL,
 

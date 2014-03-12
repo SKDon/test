@@ -45,6 +45,11 @@ namespace Alicargo.Core.AirWaybill
 				_applicationAwbManager.SetAwb(applicationId.Value, id);
 			}
 
+			if(data.BrokerId.HasValue)
+			{
+				_events.Add(id, EventType.SetBroker, EventState.Emailing);
+			}
+
 			_events.Add(id, EventType.AwbCreated, EventState.Emailing, data);
 
 			return id;

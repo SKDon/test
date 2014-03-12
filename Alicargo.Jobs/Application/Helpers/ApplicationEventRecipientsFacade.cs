@@ -80,10 +80,14 @@ namespace Alicargo.Jobs.Application.Helpers
 						if(application.AirWaybillId.HasValue)
 						{
 							var awb = _awbs.Get(application.AirWaybillId.Value).Single();
-							var broker = _brokers.Get(awb.BrokerId);
+							if(awb.BrokerId.HasValue)
+							{
+								var broker = _brokers.Get(awb.BrokerId.Value);
 
-							yield return new RecipientData(broker.Email, broker.Language, role);
+								yield return new RecipientData(broker.Email, broker.Language, role);	
+							}
 						}
+
 						break;
 
 					case RoleType.Forwarder:

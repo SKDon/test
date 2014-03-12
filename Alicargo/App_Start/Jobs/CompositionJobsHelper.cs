@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using Alicargo.Core.Email;
-using Alicargo.Core.Excel;
 using Alicargo.Core.Excel.Client;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;
@@ -141,7 +140,7 @@ namespace Alicargo.App_Start.Jobs
 						{ EventType.Calculate, processors },
 						{ EventType.SetSender, processors },
 						{ EventType.SetForwarder, processors },
-						{ EventType.SetCarrier, processors },
+						{ EventType.SetCarrier, processors },						
 						{ EventType.SetAwb, processors },
 						{ EventType.CalculationCanceled, processors }
 					}).Work();
@@ -179,6 +178,7 @@ namespace Alicargo.App_Start.Jobs
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
 						{ EventType.AwbCreated, processors },
+						{ EventType.SetBroker, processors },
 						{ EventType.GTDFileUploaded, processors },
 						{ EventType.GTDAdditionalFileUploaded, processors },
 						{ EventType.AwbPackingFileUploaded, processors },

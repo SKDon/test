@@ -11,7 +11,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 		public string DepartureAirport { get; set; }
 		public DateTimeOffset DateOfDeparture { get; set; }
 		public DateTimeOffset DateOfArrival { get; set; }
-		public long BrokerId { get; set; }
+		public long? BrokerId { get; set; }
 		public string GTD { get; set; }
 		public long StateId { get; set; }
 		public DateTimeOffset StateChangeTimestamp { get; set; }

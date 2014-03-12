@@ -610,7 +610,7 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.DateTimeOffset _DateOfArrival;
 		
-		private long _BrokerId;
+		private System.Nullable<long> _BrokerId;
 		
 		private string _GTD;
 		
@@ -676,7 +676,7 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnDateOfDepartureChanged();
     partial void OnDateOfArrivalChanging(System.DateTimeOffset value);
     partial void OnDateOfArrivalChanged();
-    partial void OnBrokerIdChanging(long value);
+    partial void OnBrokerIdChanging(System.Nullable<long> value);
     partial void OnBrokerIdChanged();
     partial void OnGTDChanging(string value);
     partial void OnGTDChanged();
@@ -850,8 +850,8 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BrokerId", DbType="BigInt NOT NULL")]
-		public long BrokerId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BrokerId", DbType="BigInt NULL")]
+		public System.Nullable<long> BrokerId
 		{
 			get
 			{
@@ -1338,7 +1338,7 @@ namespace Alicargo.DataAccess.DbContext
 					}
 					else
 					{
-						this._BrokerId = default(long);
+						this._BrokerId = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("Broker");
 				}
