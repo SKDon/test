@@ -4,7 +4,6 @@ using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.Jobs.Application.Abstract;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;
 using ITextBuilder = Alicargo.Jobs.Application.Abstract.ITextBuilder;
@@ -14,8 +13,7 @@ namespace Alicargo.Jobs.Application.Helpers
 	internal sealed class MessageBuilder : IMessageBuilder
 	{
 		private readonly string _defaultFrom;
-		private readonly IClientExcelHelper _excel;
-		private readonly IFilesFacade _files;
+		private readonly ICommonFilesFacade _files;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
 		private readonly ITemplateRepositoryHelper _templates;
@@ -24,11 +22,10 @@ namespace Alicargo.Jobs.Application.Helpers
 
 		public MessageBuilder(
 			string defaultFrom,
-			IFilesFacade files,
+			ICommonFilesFacade files,
 			ITextBuilder textBuilder,
 			IRecipientsFacade recipients,
 			ITemplateRepositoryHelper templates,
-			IClientExcelHelper excel,
 			ISerializer serializer, 
 			IApplicationRepository applications)
 		{
@@ -37,7 +34,6 @@ namespace Alicargo.Jobs.Application.Helpers
 			_textBuilder = textBuilder;
 			_recipients = recipients;
 			_templates = templates;
-			_excel = excel;
 			_serializer = serializer;
 			_applications = applications;
 		}
@@ -56,24 +52,19 @@ namespace Alicargo.Jobs.Application.Helpers
 			if(recipients == null || recipients.Length == 0)
 			{
 				return null;
-			}			
+			}
 
-			var files = _files.GetFiles(type, data);
+			var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
+
+			var files = _files.GetFiles(type, data, languages);
 
 			return GetEmailMessages(templateId.Value, recipients, data, type, files).ToArray();
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, RecipientData[] recipients,
-			EventDataForEntity data, EventType type, FileHolder[] files)
+			EventDataForEntity data, EventType type, IReadOnlyDictionary<string, FileHolder[]> files)
 		{
 			var application = _applications.GetExtendedData(data.EntityId);
-
-			IReadOnlyDictionary<string, FileHolder> excels = null;
-			if(type == EventType.Calculate || type == EventType.CalculationCanceled)
-			{
-				var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
-				excels = _excel.GetExcels(application.ClientId, languages);
-			}
 
 			foreach(var recipient in recipients)
 			{
@@ -84,34 +75,21 @@ namespace Alicargo.Jobs.Application.Helpers
 					continue;
 				}
 
-				var filesToSend = GetFiles(type, files, recipient, excels);
+				var filesToSend = GetFiles(type, recipient, files);
 
 				yield return GetEmailMessage(recipient.Email, recipient.Culture,
 					localization, application, data.Data, type, filesToSend);
 			}
 		}
 
-		private static FileHolder[] GetFiles(EventType type, FileHolder[] files,
-			RecipientData recipient, IReadOnlyDictionary<string, FileHolder> excels)
+		private static FileHolder[] GetFiles(EventType type, RecipientData recipient, IReadOnlyDictionary<string, FileHolder[]> files)
 		{
 			if(type == EventType.ApplicationSetState && recipient.Role != RoleType.Client)
 			{
-				files = null;
+				return null;
 			}
 
-			var filesToSend = new List<FileHolder>();
-			if(files != null)
-			{
-				filesToSend.AddRange(files);
-			}
-
-			if(excels != null)
-			{
-				var excel = excels[recipient.Culture];
-				filesToSend.Add(excel);
-			}
-
-			return filesToSend.Count != 0 ? filesToSend.ToArray() : null;
+			return files[recipient.Culture];
 		}
 
 		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,

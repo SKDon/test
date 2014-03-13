@@ -10,7 +10,7 @@ namespace Alicargo.Jobs.Helpers
 	internal sealed class CommonEventMessageBuilder : IMessageBuilder
 	{
 		private readonly string _defaultFrom;
-		private readonly ICommonFilesFacade _filesFacade;
+		private readonly ICommonFilesFacade _files;
 		private readonly ILocalizedDataHelper _localizedHelper;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
@@ -24,7 +24,7 @@ namespace Alicargo.Jobs.Helpers
 			ITextBuilder textBuilder,
 			ILocalizedDataHelper localizedHelper,
 			ITemplateRepositoryHelper templates,
-			ICommonFilesFacade filesFacade)
+			ICommonFilesFacade files)
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;
@@ -32,7 +32,7 @@ namespace Alicargo.Jobs.Helpers
 			_textBuilder = textBuilder;
 			_localizedHelper = localizedHelper;
 			_templates = templates;
-			_filesFacade = filesFacade;
+			_files = files;
 		}
 
 		public EmailMessage[] Get(EventType type, EventData eventData)
@@ -53,7 +53,7 @@ namespace Alicargo.Jobs.Helpers
 
 			var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
 
-			var files = _filesFacade.GetFiles(type, eventDataForEntity, languages);
+			var files = _files.GetFiles(type, eventDataForEntity, languages);
 
 			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value);
 
