@@ -40,7 +40,7 @@ namespace Alicargo.Controllers.Awb
 		{
 			ViewBag.AwbId = awbId;
 
-			ViewBag.Brokers = _brokers.GetAll().ToDictionary(x => x.Id, x => x.Name);
+			ViewBag.Brokers = _brokers.GetAll().ToDictionary(x => (long?)x.Id, x => x.Name);
 		}
 
 		#region Edit

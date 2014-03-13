@@ -22,7 +22,7 @@
 		<div class="span3">
 			@Html.EditorWithLabelFor(model => model.Bill)
 			@Html.LabelFor(x => x.BrokerId)
-			@Html.DropDownListFor(x => x.BrokerId, (IDictionary<long, string>)ViewBag.Brokers)
+			@Html.DropDownListFor(x => x.BrokerId, (IDictionary<long?, string>)ViewBag.Brokers, "")
 		</div>
 		<div class="span3">
 			@Html.EditorWithLabelFor(model => model.DepartureAirport)

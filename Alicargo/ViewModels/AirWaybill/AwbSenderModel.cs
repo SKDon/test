@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alicargo.Utilities.Localization;
 using Alicargo.Core.Resources;
+using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels.AirWaybill
 {
@@ -8,22 +8,27 @@ namespace Alicargo.ViewModels.AirWaybill
 	{
 		#region Data
 
-		[Required, DisplayNameLocalized(typeof(Entities), "AirWaybill")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "AirWaybill")]
 		public string Bill { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "ArrivalAirport")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "ArrivalAirport")]
 		public string ArrivalAirport { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "DepartureAirport")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "DepartureAirport")]
 		public string DepartureAirport { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "DateOfDeparture")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "DateOfDeparture")]
 		public string DateOfDepartureLocalString { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "DateOfArrival")]
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "DateOfArrival")]
 		public string DateOfArrivalLocalString { get; set; }
 
-		[Required, DisplayNameLocalized(typeof(Entities), "Broker")]
+		[DisplayNameLocalized(typeof(Entities), "Broker")]
 		public long? BrokerId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FlightCost")]
@@ -38,10 +43,12 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		[DisplayNameLocalized(typeof(Entities), "Packing")]
 		public byte[] PackingFile { get; set; }
+
 		public string PackingFileName { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "AWB")]
 		public byte[] AWBFile { get; set; }
+
 		public string AWBFileName { get; set; }
 
 		#endregion
