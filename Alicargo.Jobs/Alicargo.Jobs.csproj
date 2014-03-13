@@ -57,6 +57,7 @@
     <Compile Include="Client\Balance\BalanceLocalizedDataHelper.cs" />
     <Compile Include="Client\Balance\PaymentEventData.cs" />
     <Compile Include="Awb\AwbEventLocalizedDataHelper.cs" />
+    <Compile Include="Helpers\Abstract\ICommonFilesFacade.cs" />
     <Compile Include="Helpers\ClientExcelHelperStub.cs" />
     <Compile Include="Client\ClientAdd\CommonLocalizedDataHelper.cs" />
     <Compile Include="Helpers\CommonEventMessageBuilder.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Application\Helpers\ApplicationEventRecipientsFacade.cs" />
     <Compile Include="Helpers\Abstract\ITextBuilder.cs" />
     <Compile Include="Helpers\ClientExcelHelper.cs" />
+    <Compile Include="Helpers\CommonFilesFacade.cs" />
     <Compile Include="Helpers\TextBuilderHelper.cs" />
     <Compile Include="Helpers\DefaultEmailingProcessor.cs" />
     <Compile Include="Helpers\TextBuilder.cs" />

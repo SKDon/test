@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;
 
@@ -11,9 +9,8 @@ namespace Alicargo.Jobs.Helpers
 {
 	internal sealed class CommonEventMessageBuilder : IMessageBuilder
 	{
-		private readonly IAwbFileRepository _awbFiles;
 		private readonly string _defaultFrom;
-		private readonly IClientExcelHelper _excel;
+		private readonly ICommonFilesFacade _filesFacade;
 		private readonly ILocalizedDataHelper _localizedHelper;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
@@ -23,21 +20,19 @@ namespace Alicargo.Jobs.Helpers
 		public CommonEventMessageBuilder(
 			string defaultFrom,
 			IRecipientsFacade recipients,
-			IAwbFileRepository awbFiles,
 			ISerializer serializer,
 			ITextBuilder textBuilder,
-			IClientExcelHelper excel,
 			ILocalizedDataHelper localizedHelper,
-			ITemplateRepositoryHelper templates)
+			ITemplateRepositoryHelper templates,
+			ICommonFilesFacade filesFacade)
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;
-			_awbFiles = awbFiles;
 			_serializer = serializer;
 			_textBuilder = textBuilder;
-			_excel = excel;
 			_localizedHelper = localizedHelper;
 			_templates = templates;
+			_filesFacade = filesFacade;
 		}
 
 		public EmailMessage[] Get(EventType type, EventData eventData)
@@ -58,7 +53,7 @@ namespace Alicargo.Jobs.Helpers
 
 			var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
 
-			var files = GetFiles(type, eventDataForEntity, languages);
+			var files = _filesFacade.GetFiles(type, eventDataForEntity, languages);
 
 			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value);
 
@@ -73,54 +68,6 @@ namespace Alicargo.Jobs.Helpers
 				Files = files,
 				IsBodyHtml = localizationData.IsBodyHtml
 			};
-		}
-
-		private IReadOnlyDictionary<string, FileHolder[]> GetFiles(
-			EventType type, EventDataForEntity eventData,
-			string[] languages)
-		{
-			switch(type)
-			{
-				case EventType.BalanceDecreased:
-				case EventType.BalanceIncreased:
-					var excels = _excel.GetExcels(eventData.EntityId, languages);
-					return excels.ToDictionary(x => x.Key, x => new[] { excels[x.Key] });
-
-				case EventType.CPFileUploaded:
-				case EventType.InvoiceFileUploaded:
-				case EventType.PackingFileUploaded:
-				case EventType.SwiftFileUploaded:
-				case EventType.DeliveryBillFileUploaded:
-				case EventType.Torg12FileUploaded:
-				case EventType.GTDFileUploaded:
-				case EventType.GTDAdditionalFileUploaded:
-				case EventType.AwbPackingFileUploaded:
-				case EventType.AwbInvoiceFileUploaded:
-				case EventType.AWBFileUploaded:
-				case EventType.DrawFileUploaded:
-					var file = _serializer.Deserialize<FileHolder>(eventData.Data);
-					return languages.ToDictionary(x => x, x => new[] { file });
-
-				case EventType.SetBroker:
-					var queue = new Queue<FileHolder>();
-					var packing = _awbFiles.GetPackingFile(eventData.EntityId);
-					if(packing != null)
-					{
-						queue.Enqueue(packing);
-					}
-
-					var awbFile = _awbFiles.GetAWBFile(eventData.EntityId);
-					if(awbFile != null)
-					{
-						queue.Enqueue(awbFile);
-					}
-
-					var files = queue.ToArray();
-					return languages.ToDictionary(x => x, x => files);
-
-				default:
-					throw new ArgumentOutOfRangeException("type");
-			}
 		}
 
 		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(
