@@ -175,10 +175,21 @@ namespace Alicargo.Services.Calculation
 
 		private static decimal GetProfit(ApplicationData application, IReadOnlyDictionary<long, decimal> tariffs)
 		{
-			return application.CalculationProfit
-			       ?? CalculationHelper.GetTotalTariffCost(application.CalculationTotalTariffCost, application.TariffPerKg, application.Weight)
-			       + (application.ScotchCostEdited
-			          ?? CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0)
+			if(application.CalculationProfit != null)
+			{
+				return application.CalculationProfit.Value;
+			}
+
+			var totalTariffCost = CalculationHelper.GetTotalTariffCost(
+				application.CalculationTotalTariffCost,
+				application.TariffPerKg,
+				application.Weight);
+
+			var scotchCost = application.ScotchCostEdited
+			                 ?? CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0;
+
+			return totalTariffCost
+			       + scotchCost
 			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
 			       + (application.FactureCostEdited ?? application.FactureCost ?? 0)
 			       + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)

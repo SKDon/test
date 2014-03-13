@@ -68,8 +68,8 @@ namespace Alicargo.Core.Calculation
 				Value = application.Value,
 				Class = application.Class,
 				InsuranceRate = application.InsuranceRate,
-				Profit = application.CalculationProfit ?? 0,
-				TotalTariffCost = application.CalculationTotalTariffCost ?? 0
+				Profit = application.CalculationProfit,
+				TotalTariffCost = application.CalculationTotalTariffCost
 			};
 
 			_calculations.Add(calculation, applicationId);

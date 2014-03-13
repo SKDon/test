@@ -7,11 +7,15 @@ namespace Alicargo.Core.Helpers
 	{
 		public static decimal GetMoney(CalculationData calculation, float insuranceRate)
 		{
-			return calculation.Profit
-			       ?? CalculationHelper.GetTotalTariffCost(
-				       calculation.TotalTariffCost,
-				       calculation.TariffPerKg,
-				       calculation.Weight)
+			if(calculation.Profit.HasValue)
+			{
+				return calculation.Profit.Value;
+			}
+
+			return CalculationHelper.GetTotalTariffCost(
+				calculation.TotalTariffCost,
+				calculation.TariffPerKg,
+				calculation.Weight)
 			       + calculation.ScotchCost
 			       + calculation.Value * (decimal)insuranceRate
 			       + calculation.FactureCost

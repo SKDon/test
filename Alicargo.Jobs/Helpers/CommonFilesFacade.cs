@@ -40,6 +40,8 @@ namespace Alicargo.Jobs.Helpers
 				case EventType.SetForwarder:
 				case EventType.SetCarrier:
 				case EventType.SetAwb:
+				case EventType.ClientAdded:
+				case EventType.AwbCreated:
 					return null;
 
 				case EventType.ApplicationSetState:
