@@ -86,7 +86,7 @@ namespace Alicargo.TestHelpers
 			AdminRepository = Inject<IAdminRepository>();
 			TemplateRepositoryHelper = Inject<ITemplateRepositoryHelper>();
 			RecipientsFacade = Inject<IRecipientsFacade>();
-			FilesFasade = Inject<IFilesFacade>();
+			CommonFilesFacade = Inject<ICommonFilesFacade>();
 			TextBulder = Inject<ITextBuilder>();
 			ApplicationEventTemplates = Inject<IApplicationEventTemplates>();
 			SenderRepository = Inject<ISenderRepository>();
@@ -128,7 +128,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ITemplateRepository> TemplateRepository { get; private set; }
 		public Mock<ITemplateRepositoryHelper> TemplateRepositoryHelper { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
-		public Mock<IFilesFacade> FilesFasade { get; private set; }
+		public Mock<ICommonFilesFacade> CommonFilesFacade { get; private set; }
 		public Mock<ITextBuilder> TextBulder { get; private set; }
 
 		private Mock<T> Inject<T>() where T : class

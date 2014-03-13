@@ -10,7 +10,7 @@ using ITextBuilder = Alicargo.Jobs.Application.Abstract.ITextBuilder;
 
 namespace Alicargo.Jobs.Application.Helpers
 {
-	internal sealed class MessageBuilder : IMessageBuilder
+	internal sealed class ApplicationMessageBuilder : IMessageBuilder
 	{
 		private readonly string _defaultFrom;
 		private readonly ICommonFilesFacade _files;
@@ -20,7 +20,7 @@ namespace Alicargo.Jobs.Application.Helpers
 		private readonly ITextBuilder _textBuilder;
 		private readonly IApplicationRepository _applications;
 
-		public MessageBuilder(
+		public ApplicationMessageBuilder(
 			string defaultFrom,
 			ICommonFilesFacade files,
 			ITextBuilder textBuilder,
@@ -89,7 +89,7 @@ namespace Alicargo.Jobs.Application.Helpers
 				return null;
 			}
 
-			return files[recipient.Culture];
+			return files == null ? null : files[recipient.Culture];
 		}
 
 		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,

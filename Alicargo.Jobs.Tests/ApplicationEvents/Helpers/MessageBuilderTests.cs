@@ -1,10 +1,12 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts;
+﻿using System.Collections.Generic;
+using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Application.Helpers;
 using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 {
@@ -12,13 +14,13 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 	public class MessageBuilderTests
 	{
 		private MockContainer _container;
-		private MessageBuilder _builder;
+		private ApplicationMessageBuilder _builder;
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_container = new MockContainer();
-			_builder = _container.Create<MessageBuilder>();
+			_builder = _container.Create<ApplicationMessageBuilder>();
 		}
 
 		[TestMethod]
@@ -38,8 +40,8 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			_container.TemplateRepositoryHelper.Setup(x => x.GetTemplateId(eventType)).Returns(templateId);
 			_container.TemplateRepositoryHelper.Setup(x => x.GetLocalization(templateId, recipientData.Culture))
 				.Returns(localization);
-			_container.FilesFasade.Setup(x => x.GetFiles(eventType, eventDataForEntity))
-				.Returns(new[] { _container.Create<FileHolder>() });
+			_container.CommonFilesFacade.Setup(x => x.GetFiles(eventType, eventDataForEntity, It.IsAny<string[]>()))
+				.Returns(_container.Create<IReadOnlyDictionary<string, FileHolder[]>>());
 			_container.RecipientsFacade.Setup(x => x.GetRecipients(eventType, eventDataForEntity))
 				.Returns(new[] { recipientData });
 			_container.TextBulder.Setup(
@@ -60,7 +62,7 @@ namespace Alicargo.Jobs.Tests.ApplicationEvents.Helpers
 			_container.ApplicationRepository.Verify(x => x.GetExtendedData(eventDataForEntity.EntityId));
 			_container.TemplateRepositoryHelper.Verify(x => x.GetLocalization(templateId, recipientData.Culture));
 			_container.TemplateRepositoryHelper.Verify(x => x.GetTemplateId(eventType));
-			_container.FilesFasade.Verify(x => x.GetFiles(eventType, eventDataForEntity));
+			_container.CommonFilesFacade.Verify(x => x.GetFiles(eventType, eventDataForEntity, It.IsAny<string[]>()));
 			_container.RecipientsFacade.Verify(x => x.GetRecipients(eventType, eventDataForEntity));
 			_container.TextBulder.Verify(
 				x => x.GetText(localization.Subject, recipientData.Culture, eventType, applicationDetailsData, eventDataForEntity.Data));

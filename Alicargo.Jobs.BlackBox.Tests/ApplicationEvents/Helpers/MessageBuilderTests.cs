@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using Alicargo.App_Start.Jobs;
+﻿using Alicargo.App_Start.Jobs;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Helpers.Abstract;
@@ -31,8 +30,9 @@ namespace Alicargo.Jobs.BlackBox.Tests.ApplicationEvents.Helpers
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 			_serializer = new Serializer();
-			_builder = CompositionJobsHelper.GetMessageBuilder(new SqlConnection(Settings.Default.MainConnectionString),
-				Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString, _serializer);
+			_builder = CompositionJobsHelper.GetApplicationMessageBuilder(_context.UnitOfWork,
+				Settings.Default.MainConnectionString,
+				Settings.Default.FilesConnectionString);
 		}
 
 		[TestMethod]
