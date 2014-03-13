@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.Utilities;
 
@@ -9,6 +11,7 @@ namespace Alicargo.Jobs.Helpers
 {
 	internal sealed class CommonEventMessageBuilder : IMessageBuilder
 	{
+		private readonly IAwbFileRepository _awbFiles;
 		private readonly string _defaultFrom;
 		private readonly IClientExcelHelper _excel;
 		private readonly ILocalizedDataHelper _localizedHelper;
@@ -20,6 +23,7 @@ namespace Alicargo.Jobs.Helpers
 		public CommonEventMessageBuilder(
 			string defaultFrom,
 			IRecipientsFacade recipients,
+			IAwbFileRepository awbFiles,
 			ISerializer serializer,
 			ITextBuilder textBuilder,
 			IClientExcelHelper excel,
@@ -28,6 +32,7 @@ namespace Alicargo.Jobs.Helpers
 		{
 			_defaultFrom = defaultFrom;
 			_recipients = recipients;
+			_awbFiles = awbFiles;
 			_serializer = serializer;
 			_textBuilder = textBuilder;
 			_excel = excel;
@@ -70,14 +75,17 @@ namespace Alicargo.Jobs.Helpers
 			};
 		}
 
-		private IReadOnlyDictionary<string, FileHolder[]> GetFiles(EventType type, EventDataForEntity eventData,
+		private IReadOnlyDictionary<string, FileHolder[]> GetFiles(
+			EventType type, EventDataForEntity eventData,
 			string[] languages)
 		{
-			var excels = _excel.GetExcels(eventData.EntityId, languages);
-			FileHolder file = null;
-
 			switch(type)
 			{
+				case EventType.BalanceDecreased:
+				case EventType.BalanceIncreased:
+					var excels = _excel.GetExcels(eventData.EntityId, languages);
+					return excels.ToDictionary(x => x.Key, x => new[] { excels[x.Key] });
+
 				case EventType.CPFileUploaded:
 				case EventType.InvoiceFileUploaded:
 				case EventType.PackingFileUploaded:
@@ -90,23 +98,33 @@ namespace Alicargo.Jobs.Helpers
 				case EventType.AwbInvoiceFileUploaded:
 				case EventType.AWBFileUploaded:
 				case EventType.DrawFileUploaded:
-					file = _serializer.Deserialize<FileHolder>(eventData.Data);
-					break;
-			}
+					var file = _serializer.Deserialize<FileHolder>(eventData.Data);
+					return languages.ToDictionary(x => x, x => new[] { file });
 
-			if(file != null)
-			{
-				return excels != null
-					? languages.ToDictionary(x => x, x => new[] { file, excels[x] })
-					: languages.ToDictionary(x => x, x => new[] { file });
-			}
+				case EventType.SetBroker:
+					var queue = new Queue<FileHolder>();
+					var packing = _awbFiles.GetPackingFile(eventData.EntityId);
+					if(packing != null)
+					{
+						queue.Enqueue(packing);
+					}
 
-			return excels != null
-				? languages.ToDictionary(x => x, x => new[] { excels[x] })
-				: null;
+					var awbFile = _awbFiles.GetAWBFile(eventData.EntityId);
+					if(awbFile != null)
+					{
+						queue.Enqueue(awbFile);
+					}
+
+					var files = queue.ToArray();
+					return languages.ToDictionary(x => x, x => files);
+
+				default:
+					throw new ArgumentOutOfRangeException("type");
+			}
 		}
 
-		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(EventDataForEntity eventData,
+		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(
+			EventDataForEntity eventData,
 			string[] languages, long templateId)
 		{
 			return languages.ToDictionary(x => x,
