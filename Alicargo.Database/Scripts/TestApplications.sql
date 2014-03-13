@@ -1,8 +1,11 @@
-﻿/****** Object:  Table [dbo].[AirWaybill]    Script Date: 05/18/2013 14:17:27 ******/
-INSERT [dbo].[AirWaybill] ([CreationTimestamp], [Bill], [ArrivalAirport], [DepartureAirport], [DateOfDeparture], [DateOfArrival], [BrokerId], [GTD], [StateId]) VALUES 
-(CAST(GETDATE() - 3 AS DateTimeOffset), NEWID(), NEWID(), NEWID(), CAST(GETDATE() AS DateTimeOffset), CAST(GETDATE() AS DateTimeOffset), 1, NEWID(), 7),
-(CAST(GETDATE() - 2 AS DateTimeOffset), NEWID(), N'ArrivalAirport', N'DepartureAirport', CAST(GETDATE() AS DateTimeOffset), CAST(GETDATE() AS DateTimeOffset), 1, NEWID(), 7),
-(CAST(GETDATE() - 1 AS DateTimeOffset), NEWID(), N'ArrivalAirport', N'DepartureAirport', CAST(GETDATE() AS DateTimeOffset), CAST(GETDATE() AS DateTimeOffset), 1, NEWID(), 7)
+﻿INSERT [dbo].[AirWaybill] ([CreationTimestamp], [Bill], [ArrivalAirport], [DepartureAirport],
+[DateOfDeparture], [DateOfArrival],[BrokerId], [GTD], [StateId]) VALUES 
+(SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)),CAST(NEWID() AS NVARCHAR(50)), CAST(NEWID() AS NVARCHAR(50)),
+SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7),
+(SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)), N'ArrivalAirport', N'DepartureAirport',
+SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7),
+(SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)), N'ArrivalAirport', N'DepartureAirport',
+SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7)
 
 INSERT [dbo].[Application] 
 ([SenderId], [ForwarderId], [CreationTimestamp], [Invoice], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume],

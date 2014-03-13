@@ -17,10 +17,10 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context = (AlicargoDataContext)unitOfWork.Context;
 		}
 
-		public FileHolder GetAWBFile(long id)
+		public FileHolder GetAWBFile(long awbId)
 		{
 			return GetFile(
-				x => x.Id == id && x.AWBFileData != null && x.AWBFileName != null,
+				x => x.Id == awbId && x.AWBFileData != null && x.AWBFileName != null,
 				x => new FileHolder
 				{
 					Data = x.AWBFileData.ToArray(),
@@ -28,10 +28,10 @@ namespace Alicargo.DataAccess.Repositories.Application
 				});
 		}
 
-		public FileHolder GetGTDFile(long id)
+		public FileHolder GetGTDFile(long awbId)
 		{
 			return GetFile(
-				x => x.Id == id && x.GTDFileName != null && x.GTDFileData != null,
+				x => x.Id == awbId && x.GTDFileName != null && x.GTDFileData != null,
 				x => new FileHolder
 				{
 					Name = x.GTDFileName,
@@ -39,10 +39,10 @@ namespace Alicargo.DataAccess.Repositories.Application
 				});
 		}
 
-		public FileHolder GetPackingFile(long id)
+		public FileHolder GetPackingFile(long awbId)
 		{
 			return GetFile(
-				x => x.Id == id && x.PackingFileData != null && x.PackingFileName != null,
+				x => x.Id == awbId && x.PackingFileData != null && x.PackingFileName != null,
 				x => new FileHolder
 				{
 					Data = x.PackingFileData.ToArray(),
@@ -50,10 +50,10 @@ namespace Alicargo.DataAccess.Repositories.Application
 				});
 		}
 
-		public FileHolder GetDrawFile(long id)
+		public FileHolder GetDrawFile(long awbId)
 		{
 			return GetFile(
-				x => x.Id == id && x.DrawFileData != null && x.DrawFileName != null,
+				x => x.Id == awbId && x.DrawFileData != null && x.DrawFileName != null,
 				x => new FileHolder
 				{
 					Data = x.DrawFileData.ToArray(),
@@ -61,10 +61,10 @@ namespace Alicargo.DataAccess.Repositories.Application
 				});
 		}
 
-		public FileHolder GTDAdditionalFile(long id)
+		public FileHolder GTDAdditionalFile(long awbId)
 		{
 			return GetFile(
-				x => x.Id == id && x.GTDAdditionalFileName != null && x.GTDAdditionalFileData != null,
+				x => x.Id == awbId && x.GTDAdditionalFileName != null && x.GTDAdditionalFileData != null,
 				x => new FileHolder
 				{
 					Name = x.GTDAdditionalFileName,
@@ -72,10 +72,10 @@ namespace Alicargo.DataAccess.Repositories.Application
 				});
 		}
 
-		public FileHolder GetInvoiceFile(long id)
+		public FileHolder GetInvoiceFile(long awbId)
 		{
 			return GetFile(
-				x => x.Id == id && x.InvoiceFileName != null && x.InvoiceFileData != null,
+				x => x.Id == awbId && x.InvoiceFileName != null && x.InvoiceFileData != null,
 				x => new FileHolder
 				{
 					Name = x.InvoiceFileName,
