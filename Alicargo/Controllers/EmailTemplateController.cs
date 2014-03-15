@@ -92,6 +92,7 @@ namespace Alicargo.Controllers
 					Id = (int)x,
 					Name = x.ToLocalString()
 				})
+				.OrderBy(x => x.Name)
 				.ToArray();
 
 			return Json(types);
