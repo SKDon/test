@@ -1,8 +1,9 @@
 ﻿SET IDENTITY_INSERT [dbo].[EmailTemplate] ON 
 INSERT [dbo].[EmailTemplate] ([Id]) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
+(11),
 (24), (25), (26), (27), (28), (29), (30), 
-(31), (32), (33), (34), (35), (36), (37), (38), (39)
+(31), (32), (33), (34), (35), (36), (37), (38)
 SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
 
 
@@ -42,7 +43,7 @@ INSERT [dbo].[EventEmailTemplate]
 (24, 36, 1), -- AwbInvoiceFileUploaded
 (25, 37, 1), -- AWBFileUploaded
 (26, 38, 1), -- DrawFileUploaded
-(27, 39, 1)  -- SetBroker
+(27, 11, 1)  -- SetBroker
 
 
 INSERT [dbo].[EmailTemplateLocalization]
@@ -242,6 +243,15 @@ N'Изменение статуса заявки: {StateName}
 (10, 'en', N'Alicargo : Order#{DisplayNumber}', N'State is changed: {StateName}', 0),
 (10, 'it', N'Alicargo : Order#{DisplayNumber}', N'State is changed: {StateName}', 0),
 
+(11, 'ru', N'Создана авианакладная',
+N'Номер накладной: {AirWaybill}.
+Дата вылета: {DateOfDeparture}.
+Дата прилета: {DateOfArrival}.
+Аэропорт вылета: {DepartureAirport}.
+Аэропорт прилета: {ArrivalAirport}.
+Количество мест: {TotalCount}.
+Общий вес {TotalWeight}.', 0),
+
 -- calculate
 (24, 'ru', 
 N'Расчет стоимости заявки {ApplicationDisplay}',
@@ -282,15 +292,6 @@ N'Создана авианакладная. Номер накладной: {Air
 Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}.
 Вес: {TotalWeight}.
 Количество мест: {TotalCount}.', 0),
-
-(39, 'ru', N'Создана авианакладная',
-N'Номер накладной: {AirWaybill}.
-Дата вылета: {DateOfDeparture}.
-Дата прилета: {DateOfArrival}.
-Аэропорт вылета: {DepartureAirport}.
-Аэропорт прилета: {ArrivalAirport}.
-Количество мест: {TotalCount}.
-Общий вес {TotalWeight}.', 0),
 
 (32, 'ru', N'Alicargo',
 N'Заявке {DisplayNumber} задана авианакладная, Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}, Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}, Вес: {TotalWeight}, Количество мест: {TotalCount}. Номер накладной: {AirWaybill}.', 0),
@@ -343,14 +344,15 @@ INSERT [dbo].[EventEmailRecipient]
 (2, 24),
 (2, 25),
 -- Broker 3
-(3, 27),
 (3, 23),
 (3, 25),
 (3, 26),
+(3, 27),
 -- Forwarder 4
 (4, 2),
 (4, 16),
 (4, 20),
+(4, 27),
 -- Client 5
 (5, 1),
 (5, 2),
@@ -370,5 +372,6 @@ INSERT [dbo].[EventEmailRecipient]
 (5, 18),
 (5, 21),
 (5, 22),
+(5, 27),
 -- Carrier
 (6, 2)

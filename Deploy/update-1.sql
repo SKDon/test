@@ -83,3 +83,6 @@ ALTER TABLE [dbo].[Sender]
     ADD [Contact] NVARCHAR (MAX) NULL,
         [Phone]   NVARCHAR (MAX) NULL,
         [Address] NVARCHAR (MAX) NULL;
+
+GO
+ALTER TABLE [dbo].[AirWaybill] ALTER COLUMN [BrokerId] BIGINT NULL;

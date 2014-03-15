@@ -105,5 +105,45 @@ SET [Body] = N'Изменение статуса заявки: {StateName}
 {AirWaybillDateOfArrival [Дата прилета: {0}]}
 {AirWaybillGTD [Номер ГТД: {0}]}'
 WHERE [EmailTemplateId] = 10
+GO
 
+UPDATE [EmailTemplateLocalization]
+SET [Body] = N'Создана авианакладная. Номер накладной: {AirWaybill}.
+Аэропорт вылета: {DepartureAirport}/{DateOfDeparture}.
+Аэропорт прилета: {ArrivalAirport}/{DateOfArrival}.
+Вес: {TotalWeight}.
+Количество мест: {TotalCount}.'
+WHERE [EmailTemplateId] = 32
+GO
+
+SET IDENTITY_INSERT [dbo].[EmailTemplate] ON 
+INSERT [dbo].[EmailTemplate] ([Id]) VALUES
+(11)
+SET IDENTITY_INSERT [dbo].[EmailTemplate] OFF
+
+INSERT [dbo].[EmailTemplateLocalization]
+([EmailTemplateId], [TwoLetterISOLanguageName], [Subject], [Body], [IsBodyHtml]) VALUES
+(11, 'ru', N'Создана авианакладная',
+N'Номер накладной: {AirWaybill}.
+Дата вылета: {DateOfDeparture}.
+Дата прилета: {DateOfArrival}.
+Аэропорт вылета: {DepartureAirport}.
+Аэропорт прилета: {ArrivalAirport}.
+Количество мест: {TotalCount}.
+Общий вес {TotalWeight}.', 0)
+
+INSERT [dbo].[EventEmailTemplate]
+([EventTypeId], [EmailTemplateId], [EnableEmailSend]) VALUES
+(27, 11, 1)  -- SetBroker
+
+INSERT [dbo].[EventEmailRecipient]
+([RoleId], [EventTypeId]) VALUES
+(3, 27),
+(4, 27),
+(5, 27)
+GO
+
+DELETE FROM [dbo].[EventEmailRecipient]
+WHERE ([RoleId] = 3 AND [EventTypeId] = 2) 
+OR ([RoleId] = 3 AND [EventTypeId] = 19)
 GO
