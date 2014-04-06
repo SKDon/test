@@ -37,9 +37,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			var first = _repository.SumBalance();
 			var balance = _fixture.Create<decimal>();
 
+			var old = _repository.GetBalance(TestConstants.TestClientId1);
+
 			_repository.SetBalance(TestConstants.TestClientId1, balance);
 
-			_repository.SumBalance().ShouldBeEquivalentTo(first + balance);
+			_repository.SumBalance().ShouldBeEquivalentTo(first + balance - old);
 		}
 	}
 }
