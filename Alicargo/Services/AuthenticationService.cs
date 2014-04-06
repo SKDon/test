@@ -31,7 +31,7 @@ namespace Alicargo.Services
 			if (data == null) return false;
 
 			var hash = _passwordConverter.GetPasswordHash(user.Password, data.PasswordSalt.ToArray());
-			if (!hash.SequenceEqual(data.PasswordHash.ToArray())) return false;
+			if (!hash.SequenceEqual(data.PasswordHash)) return false;
 
 			AuthenticateForce(data.UserId, user.RememberMe);
 

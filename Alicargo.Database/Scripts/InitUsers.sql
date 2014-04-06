@@ -1,22 +1,21 @@
 ﻿/****** Object:  Table [dbo].[User]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[User] ON;
-BEGIN TRANSACTION;
 INSERT INTO [dbo].[User] ([Id], [Login], [PasswordHash], [PasswordSalt], [TwoLetterISOLanguageName]) VALUES
-(1, N'Admin', 0xD620502F233C7DE84C19612F3BFB3C9AF4F18485B8E4D7F3A0C82CBE8E75B0A3, 0x811BE7CE29ABCC4CABF9628D1FEBF5FB, N'ru'),
-(2, N'Broker1', NEWID(), NEWID(), N'ru'),
-(14, N'Broker2', NEWID(), NEWID(), N'ru'),
-(3, N'Forwarder1', NEWID(), NEWID(), N'ru'),
-(4, N'Sender1', NEWID(), NEWID(), N'ru'),
-(5, N'c1', NEWID(), NEWID(), N'ru'),
-(6, N'c2', NEWID(), NEWID(), N'ru'),
-(7, N'c3', NEWID(), NEWID(), N'ru'),
-(8, N'c4', NEWID(), NEWID(), N'ru'),
-(9, N'c5', NEWID(), NEWID(), N'ru'),
-(10, N'Forwarder2', NEWID(), NEWID(), N'ru'),
-(11, N'Sender2', NEWID(), NEWID(), N'ru'),
-(12, N'Carrier1', NEWID(), NEWID(), N'ru'),
-(13, N'Carrier2', NEWID(), NEWID(), N'ru')
-COMMIT;
+(1, N'Admin', 0xD620502F233C7DE84C19612F3BFB3C9AF4F18485B8E4D7F3A0C82CBE8E75B0A3, 0x811BE7CE29ABCC4CABF9628D1FEBF5FB, N'ru')
+INSERT INTO [dbo].[User] ([Id], [Login], [PasswordHash], [PasswordSalt], [TwoLetterISOLanguageName]) VALUES
+(2, N'Broker1', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(14, N'Broker2', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(3, N'Forwarder1', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(4, N'Sender1', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(5, N'c1', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(6, N'c2', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(7, N'c3', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(8, N'c4', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(9, N'c5', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(10, N'Forwarder2', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(11, N'Sender2', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(12, N'Carrier1', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru'),
+(13, N'Carrier2', CAST(NEWID() AS VARBINARY(MAX)), CAST(NEWID() AS VARBINARY(MAX)), N'ru')
 SET IDENTITY_INSERT [dbo].[User] OFF;
 
 /****** Object:  Table [dbo].[Carrier]    Script Date: 05/18/2013 14:17:27 ******/
