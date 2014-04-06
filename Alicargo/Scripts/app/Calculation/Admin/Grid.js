@@ -133,7 +133,7 @@
 				var applicationId = e.model.ApplicationId;
 				
 				function numberConverter(value) {
-					if (!!!value) {
+					if (value == null) {
 						return null;
 					}
 					
