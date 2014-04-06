@@ -5,7 +5,7 @@
 
 	var schema = {
 		model: {
-			id: "Id"
+			id: "ClientId"
 		},
 		data: "Data",
 		total: "Total"
@@ -66,6 +66,7 @@
 				width: Alicargo.DefaultGridButtonWidth
 			},
 			{ field: "Nic", title: $l.Entities_Nic },
+			{ field: "Balance", title: $l.Entities_Balance, width: "100px", format: "{0:n2}" },
 			{ field: "LegalEntity", title: $l.Entities_LegalEntity }]
 	});
 });
