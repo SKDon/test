@@ -337,18 +337,18 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class _2013_3_1119 {
-                private const string URLPATH = "~/Scripts/kendo/2013.3.1119";
+            public static class _2014_1_318 {
+                private const string URLPATH = "~/Scripts/kendo/2014.1.318";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class cultures {
-                    private const string URLPATH = "~/Scripts/kendo/2013.3.1119/cultures";
+                    private const string URLPATH = "~/Scripts/kendo/2014.1.318/cultures";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string kendo_culture_en_min_js = Url("kendo.culture.en.min.js");
                     public static readonly string kendo_culture_it_min_js = Url("kendo.culture.it.min.js");
                     public static readonly string kendo_culture_ru_min_js = Url("kendo.culture.ru.min.js");
-                    public static readonly string kendo_culture_ru_min_js_map = Url("kendo.culture.ru.min.js.map");
                 }
             
                 public static readonly string kendo_web_min_js = Url("kendo.web.min.js");
@@ -437,13 +437,13 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class _2013_3_1119 {
-                private const string URLPATH = "~/Content/kendo/2013.3.1119";
+            public static class _2014_1_318 {
+                private const string URLPATH = "~/Content/kendo/2014.1.318";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class Default {
-                    private const string URLPATH = "~/Content/kendo/2013.3.1119/Default";
+                    private const string URLPATH = "~/Content/kendo/2014.1.318/Default";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string editor_png = Url("editor.png");
@@ -462,7 +462,7 @@ namespace Links
                 public static readonly string kendo_default_min_css = Url("kendo.default.min.css");
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class textures {
-                    private const string URLPATH = "~/Content/kendo/2013.3.1119/textures";
+                    private const string URLPATH = "~/Content/kendo/2014.1.318/textures";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string brushed_metal_png = Url("brushed-metal.png");

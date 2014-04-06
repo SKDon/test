@@ -12,19 +12,19 @@ namespace Alicargo.App_Start.Mvc
 		 "~/Scripts/jQuery/jquery.cookie.js",
 		 "~/Content/bootstrap/js/bootstrap.js",
 		 "~/Content/bootstrap/fileupload/bootstrap-fileupload.js",
-		 "~/Scripts/kendo/2013.3.1119/kendo.web.min.js",
+		 "~/Scripts/kendo/2014.1.318/kendo.web.min.js",
 		 "~/Scripts/app/CurrencyType.js",
 		 "~/Scripts/app/Common.js",
 		 "~/Scripts/app/Alicargo.js")]
 		public const string CommonJs = "~/js";
 
 		[Path("~/Scripts/jQuery/globalize/cultures/globalize.culture.ru.js",
-		 "~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.ru.min.js",
+		 "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.ru.min.js",
 		 "~/Scripts/app/ru.js")]
 		public const string RuJs = "~/js/ru";
 
 		[Path("~/Scripts/jQuery/globalize/cultures/globalize.culture.it.js",
-		 "~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.it.min.js",
+		 "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.it.min.js",
 		 "~/Scripts/app/it.js")]
 		public const string ItJs = "~/js/it";		
 
