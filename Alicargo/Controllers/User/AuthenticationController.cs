@@ -13,8 +13,8 @@ namespace Alicargo.Controllers.User
 	public partial class AuthenticationController : Controller
 	{
 		private readonly IAuthenticationService _authentication;
-		private readonly IIdentityService _identity;
 		private readonly IClientRepository _clients;
+		private readonly IIdentityService _identity;
 
 		public AuthenticationController(
 			IIdentityService identity,
@@ -26,46 +26,45 @@ namespace Alicargo.Controllers.User
 			_authentication = authentication;
 		}
 
+		[ChildActionOnly]
+		public virtual PartialViewResult Client(long? clientId)
+		{
+			ViewData.TemplateInfo.HtmlFieldPrefix = "Authentication";
+
+			if(!clientId.HasValue) return PartialView();
+
+			var data = _clients.Get(clientId.Value);
+
+			var model = new AuthenticationModel(data.Login);
+
+			return PartialView(model);
+		}
+
 		[HttpGet]
 		public virtual ActionResult Login()
 		{
 			return View();
 		}
 
-		[HttpGet]
-		public virtual RedirectToRouteResult SignOut()
-		{
-			_authentication.SignOut();
-
-			return RedirectToAction(MVC.Home.Index());
-		}		
-
 		[HttpPost]
 		public virtual ActionResult Login(SignIdModel user)
 		{
-			if (!ModelState.IsValid) return View(user);
+			if(!ModelState.IsValid) return View(user);
 
-			if (!_authentication.Authenticate(user))
+			if(!_authentication.Authenticate(user))
 			{
 				ModelState.AddModelError("Login", Validation.WrongLoginOrPassword);
 				return View(user);
 			}
 
-			if (_identity.IsInRole(RoleType.Admin))
+			if(_identity.IsInRole(RoleType.Admin))
 				return RedirectToAction(MVC.Home.Index());
 
 			return RedirectToAction(MVC.Home.Index());
 		}
 
-		[Access(RoleType.Admin), HttpGet]
-		public virtual ActionResult LoginAsUser(int id)
-		{
-			_authentication.AuthenticateForce(id, false);
-
-			return RedirectToAction(MVC.Home.Index());
-		}
-
-		[Access(RoleType.Admin), HttpGet]
+		[HttpGet]
+		[Access(RoleType.Admin)]
 		public virtual ActionResult LoginAsClient(int id)
 		{
 			var userId = _clients.GetUserId(id);
@@ -74,18 +73,21 @@ namespace Alicargo.Controllers.User
 			return RedirectToAction(MVC.Home.Index());
 		}
 
-		[ChildActionOnly]
-		public virtual PartialViewResult Client(long? clientId)
+		[Access(RoleType.Admin)]
+		[HttpGet]
+		public virtual ActionResult LoginAsUser(int id)
 		{
-			ViewData.TemplateInfo.HtmlFieldPrefix = "Authentication";
+			_authentication.AuthenticateForce(id, false);
 
-			if (!clientId.HasValue) return PartialView();
+			return RedirectToAction(MVC.Home.Index());
+		}
 
-			var data = _clients.Get(clientId.Value);
+		[HttpGet]
+		public virtual RedirectToRouteResult SignOut()
+		{
+			_authentication.SignOut();
 
-			var model = new AuthenticationModel(data.Login);
-
-			return PartialView(model);
+			return RedirectToAction(MVC.Home.Index());
 		}
 	}
 }

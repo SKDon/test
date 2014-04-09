@@ -29,7 +29,7 @@ namespace Alicargo.Jobs.BlackBox.Tests.ApplicationEvents.Helpers
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 			_serializer = new Serializer();
-			_builder = CompositionJobsHelper.GetApplicationMessageBuilder(_context.UnitOfWork,
+			_builder = CompositionJobsHelper.GetApplicationMessageBuilder(_context.Connection,
 				Settings.Default.MainConnectionString,
 				Settings.Default.FilesConnectionString);
 		}

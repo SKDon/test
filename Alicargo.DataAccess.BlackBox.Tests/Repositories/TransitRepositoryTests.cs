@@ -53,7 +53,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			newData.CityId = TestConstants.TestCityId2;
 
 			_transitRepository.Update(newData);
-			_context.UnitOfWork.SaveChanges();
 			
 			var actual = _transitRepository.Get(newData.Id).First();
 

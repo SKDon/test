@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Helpers;
@@ -21,9 +21,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 		private readonly IApplicationRepositoryOrderer _orderer;
 		private readonly Expression<Func<DbContext.Application, ApplicationData>> _selector;
 
-		public ApplicationRepository(IUnitOfWork unitOfWork)
+		public ApplicationRepository(IDbConnection connection)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = new AlicargoDataContext(connection);
 
 			_orderer = new ApplicationRepositoryOrderer();
 

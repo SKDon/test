@@ -34,7 +34,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_applications = new ApplicationRepository(_context.UnitOfWork);
+			_applications = new ApplicationRepository(_context.Connection);
 			_stateRepository = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 			_editor = new ApplicationEditor(new SqlConnection(Settings.Default.MainConnectionString));
 		}
@@ -117,7 +117,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var state = _stateRepository.Get(TwoLetterISOLanguageName.Italian).First(x => x.Key != application.StateId);
 
 			_editor.SetState(application.Id, state.Key);
-			_context.UnitOfWork.SaveChanges();
 
 			var actual = _applications.Get(application.Id);
 

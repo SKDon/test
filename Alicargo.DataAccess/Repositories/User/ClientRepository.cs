@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Helpers;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.DataAccess.DbContext;
 
@@ -15,9 +15,9 @@ namespace Alicargo.DataAccess.Repositories.User
 		private readonly AlicargoDataContext _context;
 		private readonly Expression<Func<Client, ClientData>> _selector;
 
-		public ClientRepository(IUnitOfWork unitOfWork)
+		public ClientRepository(IDbConnection connection)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = new AlicargoDataContext(connection);
 
 			_selector = x => new ClientData
 			{
@@ -57,7 +57,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				.ToArray();
 		}
 
-		public Func<long> Add(ClientData client)
+		public long Add(ClientData client)
 		{
 			var entity = new Client
 			{
@@ -72,7 +72,9 @@ namespace Alicargo.DataAccess.Repositories.User
 
 			_context.Clients.InsertOnSubmit(entity);
 
-			return () => entity.Id;
+			_context.SaveChanges();
+
+			return entity.Id;
 		}
 
 		public void Update(ClientData client)
@@ -80,6 +82,8 @@ namespace Alicargo.DataAccess.Repositories.User
 			var entity = _context.Clients.First(x => x.Id == client.ClientId);
 
 			Map(client, entity);
+
+			_context.SaveChanges();
 		}
 
 		public string GetLanguage(long clientId)
@@ -108,6 +112,8 @@ namespace Alicargo.DataAccess.Repositories.User
 			var entity = _context.Clients.First(x => x.Id == id);
 
 			_context.Clients.DeleteOnSubmit(entity);
+
+			_context.SaveChanges();
 		}
 
 		public ClientData[] GetAll()

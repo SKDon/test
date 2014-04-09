@@ -1,37 +1,30 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Transactions;
-using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.TestHelpers
 {
 	public sealed class DbTestContext
-    {
-        private readonly TransactionScope _transactionScope;
-        private readonly SqlConnection _connection;
+	{
+		private readonly SqlConnection _connection;
+		private readonly TransactionScope _transactionScope;
 
-        public IUnitOfWork UnitOfWork { get; private set; }
+		public DbTestContext(string connectionString)
+		{
+			_connection = new SqlConnection(connectionString);
+			Connection.Open();
 
-	    public DbTestContext(string connectionString)
-        {
-            _connection = new SqlConnection(connectionString);
-			_connection.Open();
+			_transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
+		}
 
-            _transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
+		public SqlConnection Connection
+		{
+			get { return _connection; }
+		}
 
-			UnitOfWork = new UnitOfWork(_connection);
-        }
-
-        public void Cleanup()
-        {
-            _transactionScope.Dispose();
-			_connection.Close();
-        }
-
-        public byte[] RandomBytes()
-        {
-            return Guid.NewGuid().ToByteArray();
-        }
-    }
+		public void Cleanup()
+		{
+			_transactionScope.Dispose();
+			Connection.Close();
+		}
+	}
 }

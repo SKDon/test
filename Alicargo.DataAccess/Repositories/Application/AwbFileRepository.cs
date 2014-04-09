@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 
@@ -12,9 +12,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 	{
 		private readonly AlicargoDataContext _context;
 
-		public AwbFileRepository(IUnitOfWork unitOfWork)
+		public AwbFileRepository(IDbConnection connection)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = new AlicargoDataContext(connection);
 		}
 
 		public FileHolder GetAWBFile(long awbId)

@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.DataAccess.DbContext;
 
@@ -13,9 +13,9 @@ namespace Alicargo.DataAccess.Repositories.User
 		private readonly AlicargoDataContext _context;
 		private readonly Expression<Func<Broker, BrokerData>> _selector;
 
-		public BrokerRepository(IUnitOfWork unitOfWork)
+		public BrokerRepository(IDbConnection connection)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = new AlicargoDataContext(connection);
 
 			_selector = x => new BrokerData
 			{
@@ -50,7 +50,7 @@ namespace Alicargo.DataAccess.Repositories.User
 			entity.User.Login = login;
 			entity.Email = email;
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 
 			return entity.UserId;
 		}
@@ -72,7 +72,7 @@ namespace Alicargo.DataAccess.Repositories.User
 				Email = email
 			});
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 
 			return user.Id;
 		}

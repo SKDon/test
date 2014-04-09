@@ -167,7 +167,6 @@
     <Compile Include="Repositories\IStateRepository.cs" />
     <Compile Include="Repositories\ITransaction.cs" />
     <Compile Include="Repositories\ITransitRepository.cs" />
-    <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\User\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

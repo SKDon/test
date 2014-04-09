@@ -25,7 +25,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_context.Applications.InsertOnSubmit(entity);
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 
 			return entity.Id;
 		}
@@ -35,7 +35,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			var application = _context.Applications.First(x => x.Id == id);
 			_context.Applications.DeleteOnSubmit(application);
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 		}
 
 		public void SetState(long id, long stateId)
@@ -148,7 +148,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			action(application);
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 		}
 
 		private static void Map(ApplicationData from, DbContext.Application to)

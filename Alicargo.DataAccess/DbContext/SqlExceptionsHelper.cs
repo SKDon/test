@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Linq;
 using System.Data.SqlClient;
 using Alicargo.DataAccess.Contracts.Exceptions;
 
@@ -39,6 +40,12 @@ namespace Alicargo.DataAccess.DbContext
 
 				throw;
 			}
+		}
+
+		[Obsolete]
+		public static void SaveChanges(this AlicargoDataContext context)
+		{
+			Action(() => context.SubmitChanges(ConflictMode.FailOnFirstConflict));			
 		}
 	}
 }

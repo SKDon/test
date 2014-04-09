@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.User;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.Utilities;
@@ -15,9 +15,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 		private readonly AlicargoDataContext _context;
 		private readonly Expression<Func<AirWaybill, AirWaybillData>> _selector;
 
-		public AwbRepository(IUnitOfWork unitOfWork)
+		public AwbRepository(IDbConnection connection)
 		{
-			_context = (AlicargoDataContext)unitOfWork.Context;
+			_context = new AlicargoDataContext(connection);
 
 			_selector = x => new AirWaybillData
 			{
@@ -55,7 +55,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_context.AirWaybills.InsertOnSubmit(entity);
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 
 			data.Id = entity.Id;
 
@@ -217,7 +217,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			var data = _context.AirWaybills.First(x => x.Id == awbId);
 			data.AdditionalCost = additionalCost;
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 		}
 
 		public void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile,
@@ -227,7 +227,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			Map(data, entity, gtdFile, gtdAdditionalFile, packingFile, invoiceFile, awbFile, drawFile);
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 		}
 
 		public void SetState(long airWaybillId, long stateId)
@@ -236,7 +236,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			airWaybill.StateId = stateId;
 			airWaybill.StateChangeTimestamp = DateTimeProvider.Now;
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 		}
 
 		public void Delete(long id)
@@ -245,7 +245,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_context.AirWaybills.DeleteOnSubmit(airWaybill);
 
-			_context.SubmitChanges();
+			_context.SaveChanges();
 		}
 
 		private T[] SelectApplicationsWithoutAwb<T>(Expression<Func<DbContext.Application, T>> selector,

@@ -4,8 +4,6 @@ using System.Data.SqlClient;
 using System.Transactions;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Repositories;
-using Alicargo.DataAccess.DbContext;
 using Moq;
 using Ninject;
 
@@ -13,11 +11,10 @@ namespace Alicargo.TestHelpers
 {
 	public sealed class CompositionHelper : IDisposable
 	{
-		private readonly string _mainConnectionString;
+		private readonly SqlConnection _connection;
 		private readonly string _filesConnectionString;
 		private readonly StandardKernel _kernel = new StandardKernel();
-		private readonly IUnitOfWork _unitOfWork;
-		private readonly SqlConnection _connection;
+		private readonly string _mainConnectionString;
 		private readonly TransactionScope _transactionScope;
 		private readonly RoleType _type;
 
@@ -28,23 +25,20 @@ namespace Alicargo.TestHelpers
 			_filesConnectionString = filesConnectionString;
 			_connection = new SqlConnection(_mainConnectionString);
 			_transactionScope = new TransactionScope();
-			_unitOfWork = new UnitOfWork(_connection);
 
 			Init();
-		}
-
-		private void Init()
-		{
-			_connection.Open();
-			_kernel.Bind<IDbConnection>().ToConstant(_connection);
-
-			BindServices();
-			BindIdentityService();
 		}
 
 		public IKernel Kernel
 		{
 			get { return _kernel; }
+		}
+
+		public void Dispose()
+		{
+			_transactionScope.Dispose();
+			_connection.Close();
+			Kernel.Dispose();
 		}
 
 		private void BindIdentityService()
@@ -97,16 +91,16 @@ namespace Alicargo.TestHelpers
 		{
 			CompositionRoot.BindDataAccess(Kernel, _mainConnectionString, _filesConnectionString, context => this);
 
-			Kernel.Rebind<IUnitOfWork>().ToConstant(_unitOfWork).InSingletonScope();
-
 			CompositionRoot.BindServices(Kernel, new ConsoleLogger());
 		}
 
-		public void Dispose()
+		private void Init()
 		{
-			_transactionScope.Dispose();
-			_connection.Close();
-			Kernel.Dispose();
+			_connection.Open();
+			_kernel.Bind<IDbConnection>().ToConstant(_connection);
+
+			BindServices();
+			BindIdentityService();
 		}
 	}
 }

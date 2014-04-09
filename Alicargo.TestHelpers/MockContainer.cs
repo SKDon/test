@@ -70,7 +70,6 @@ namespace Alicargo.TestHelpers
 			ApplicationPresenter = Inject<IApplicationPresenter>();
 			AirWaybillRepository = Inject<IAwbRepository>();
 			StateConfig = Inject<IStateConfig>();
-			UnitOfWork = Inject<IUnitOfWork>();
 			Transaction = Inject<ITransaction>();
 			ApplicationListItemMapper = Inject<IApplicationListItemMapper>();
 			CountryRepository = Inject<ICountryRepository>();
@@ -124,7 +123,6 @@ namespace Alicargo.TestHelpers
 		public Mock<IStateFilter> StateService { get; private set; }
 		public Mock<IStateConfig> StateConfig { get; private set; }
 		public Mock<ITransaction> Transaction { get; private set; }
-		public Mock<IUnitOfWork> UnitOfWork { get; private set; }
 		public Mock<ITemplateRepository> TemplateRepository { get; private set; }
 		public Mock<ITemplateRepositoryHelper> TemplateRepositoryHelper { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }

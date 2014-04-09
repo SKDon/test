@@ -3,7 +3,6 @@ using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Helpers;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -17,20 +16,17 @@ namespace Alicargo.Services.Users.Client
 		private readonly IClientRepository _clients;
 		private readonly ITransitService _transits;
 		private readonly IUserRepository _users;
-		private readonly IUnitOfWork _unitOfWork;
 
 		public ClientManager(
 			IClientRepository clients,
 			IClientPermissions permissions,
 			ITransitService transits,
-			IUserRepository users,
-			IUnitOfWork unitOfWork)
+			IUserRepository users)
 		{
 			_clients = clients;
 			_permissions = permissions;
 			_transits = transits;
 			_users = users;
-			_unitOfWork = unitOfWork;
 		}
 
 		public void Update(long clientId, ClientModel model, TransitEditModel transit, AuthenticationModel authentication)
@@ -60,8 +56,6 @@ namespace Alicargo.Services.Users.Client
 
 			_clients.Update(data);
 
-			_unitOfWork.SaveChanges();
-
 			if(!string.IsNullOrWhiteSpace(authentication.NewPassword))
 			{
 				var userId = _clients.GetUserId(clientId);
@@ -72,8 +66,6 @@ namespace Alicargo.Services.Users.Client
 		public long Add(ClientModel client, TransitEditModel transit, AuthenticationModel authentication)
 		{
 			var transitId = _transits.Add(transit, null);
-
-			_unitOfWork.SaveChanges();
 
 			var data = new ClientData
 			{
@@ -97,11 +89,7 @@ namespace Alicargo.Services.Users.Client
 				Login = authentication.Login
 			};
 
-			var id = _clients.Add(data);
-
-			_unitOfWork.SaveChanges();
-
-			var clientId = id();
+			var clientId = _clients.Add(data);
 
 			var userId = _clients.GetUserId(clientId);
 			_users.SetPassword(userId, authentication.NewPassword);

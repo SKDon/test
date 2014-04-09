@@ -15,21 +15,21 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 	public class AdminRepositoryTests
 	{
 		private DbTestContext _context;
-		private IAdminRepository _repository;
 		private Fixture _fixture;
+		private IAdminRepository _repository;
+
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
 
 		[TestInitialize]
 		public void TestInitialize()
 		{
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
-			_repository = new AdminRepository(_context.UnitOfWork);
-		}
-
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_context.Cleanup();
+			_repository = new AdminRepository(_context.Connection);
 		}
 
 		[TestMethod]
@@ -40,10 +40,28 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			var email = _fixture.Create<string>();
 
 			_repository.Add(name, login, email, TwoLetterISOLanguageName.Russian);
-			_context.UnitOfWork.SaveChanges();
 
 			var actual = _repository.GetAll().Last();
 
+			CheckUser(actual, login, name, email, TwoLetterISOLanguageName.Russian);
+		}
+
+		[TestMethod]
+		public void Test_AuthenticationRepository_Update()
+		{
+			var login = _fixture.Create<string>();
+			var name = _fixture.Create<string>();
+			var email = _fixture.Create<string>();
+
+			_repository.Add(name, login, email, TwoLetterISOLanguageName.Russian);
+			var actual = _repository.GetAll().Last();
+
+			login = _fixture.Create<string>();
+			name = _fixture.Create<string>();
+			email = _fixture.Create<string>();
+			_repository.Update(actual.EntityId, name, login, email);
+
+			actual = _repository.GetAll().Last();
 			CheckUser(actual, login, name, email, TwoLetterISOLanguageName.Russian);
 		}
 
@@ -57,28 +75,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			Assert.AreEqual(language, actual.Language);
 		}
 
-		[TestMethod]
-		public void Test_AuthenticationRepository_Update()
-		{
-			var login = _fixture.Create<string>();
-			var name = _fixture.Create<string>();
-			var email = _fixture.Create<string>();
-
-			_repository.Add(name, login, email, TwoLetterISOLanguageName.Russian);
-			_context.UnitOfWork.SaveChanges();
-			var actual = _repository.GetAll().Last();
-
-			login = _fixture.Create<string>();
-			name = _fixture.Create<string>();
-			email = _fixture.Create<string>();
-			_repository.Update(actual.EntityId, name, login, email);
-			_context.UnitOfWork.SaveChanges();
-
-			actual = _repository.GetAll().Last();
-			CheckUser(actual, login, name, email, TwoLetterISOLanguageName.Russian);
-		}
-
-		//[TestMethod, Ignore] // this is not test
+		// do not remove. this is not test
+		//[TestMethod, Ignore] 
 		//public void UpdatePasswords()
 		//{
 		//	_transactionScope.Dispose();

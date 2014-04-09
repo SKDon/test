@@ -34,8 +34,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_awbs = new AwbRepository(_context.UnitOfWork);
-			_files = new AwbFileRepository(_context.UnitOfWork);
+			_awbs = new AwbRepository(_context.Connection);
+			_files = new AwbFileRepository(_context.Connection);
 		}
 
 		[TestMethod]
@@ -133,7 +133,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var emails = _awbs.GetClientEmails(id).Select(x => x.Email).ToArray();
 
-			var clientRepository = new ClientRepository(_context.UnitOfWork);
+			var clientRepository = new ClientRepository(_context.Connection);
 
 			var client1 = clientRepository.Get(TestConstants.TestClientId1);
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);
@@ -167,12 +167,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			newData.CreationTimestamp = data.CreationTimestamp;
 			newData.StateChangeTimestamp = data.StateChangeTimestamp;
 
-			var gtdFile = _context.RandomBytes();
-			var additionalFile = _context.RandomBytes();
-			var packingFile = _context.RandomBytes();
-			var invoiceFile = _context.RandomBytes();
-			var awbFile = _context.RandomBytes();
-			var drawFile = _context.RandomBytes();
+			var gtdFile = _fixture.Create<byte[]>();
+			var additionalFile = _fixture.Create<byte[]>();
+			var packingFile = _fixture.Create<byte[]>();
+			var invoiceFile = _fixture.Create<byte[]>();
+			var awbFile = _fixture.Create<byte[]>();
+			var drawFile = _fixture.Create<byte[]>();
 			_awbs.Update(newData, gtdFile, additionalFile, packingFile, invoiceFile, awbFile, drawFile);
 
 			var actual = _awbs.Get(newData.Id).First();
@@ -214,9 +214,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		{
 			var data = CreateAirWaybillData();
 
-			var id = _awbs.Add(data, _context.RandomBytes(), _context.RandomBytes(),
-				_context.RandomBytes(), _context.RandomBytes(),
-				_context.RandomBytes(), _context.RandomBytes());
+			var id = _awbs.Add(data, _fixture.Create<byte[]>(), _fixture.Create<byte[]>(),
+				_fixture.Create<byte[]>(), _fixture.Create<byte[]>(),
+				_fixture.Create<byte[]>(), _fixture.Create<byte[]>());
 
 			data.Id = id;
 

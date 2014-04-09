@@ -24,7 +24,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_clientRepository = new ClientRepository(_context.UnitOfWork);
+			_clientRepository = new ClientRepository(_context.Connection);
 		}
 
 		[TestCleanup]
@@ -35,7 +35,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 		private ClientData CreateTestClient()
 		{
-			var db = (AlicargoDataContext)_context.UnitOfWork.Context;
+			var db = new AlicargoDataContext(_context.Connection);
 
 			var user = _fixture.Build<DbContext.User>()
 				.Without(x => x.Admins)
@@ -111,8 +111,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			client.TransitId = TestConstants.TestTransitId;
 			client.Language = TwoLetterISOLanguageName.English;
 			var clientId = _clientRepository.Add(client);
-			_context.UnitOfWork.SaveChanges();
-			client.ClientId = clientId();
+			client.ClientId = clientId;
 
 			var byId = _clientRepository.Get(client.ClientId);
 
@@ -136,8 +135,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			_clientRepository.Delete(client.ClientId);
 
-			_context.UnitOfWork.SaveChanges();
-
 			var byId = _clientRepository.Get(client.ClientId);
 
 			Assert.IsNull(byId);
@@ -153,8 +150,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			newData.Language = TwoLetterISOLanguageName.Italian;
 
 			_clientRepository.Update(newData);
-
-			_context.UnitOfWork.SaveChanges();
 
 			var byId = _clientRepository.Get(client.ClientId);
 

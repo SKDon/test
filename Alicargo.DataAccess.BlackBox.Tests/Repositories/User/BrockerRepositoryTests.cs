@@ -18,7 +18,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		{
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 
-			_repository = new BrokerRepository(_context.UnitOfWork);
+			_repository = new BrokerRepository(_context.Connection);
 		}
 
 		[TestCleanup]
