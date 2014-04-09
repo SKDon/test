@@ -11,7 +11,6 @@ using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
-using Alicargo.Jobs;
 using Alicargo.Jobs.Application;
 using Alicargo.Jobs.Application.Helpers;
 using Alicargo.Jobs.Awb;
@@ -29,7 +28,7 @@ using Ninject.Syntax;
 using ILog = Alicargo.Core.Contracts.Common.ILog;
 using TextBuilder = Alicargo.Jobs.Helpers.TextBuilder;
 
-namespace Alicargo.App_Start.Jobs
+namespace Alicargo.Jobs
 {
 	internal static class CompositionJobsHelper
 	{
@@ -323,7 +322,7 @@ namespace Alicargo.App_Start.Jobs
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var countries = new CountryRepository(mainExecutor);
 			var cities = new CityRepository(mainExecutor);
-			var textBulder = new Alicargo.Jobs.Application.Helpers.TextBuilder(
+			var textBulder = new Application.Helpers.TextBuilder(
 				serializer,
 				awbs,
 				countries,

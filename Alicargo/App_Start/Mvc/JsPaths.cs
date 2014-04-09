@@ -1,6 +1,6 @@
 ﻿using Alicargo.MvcHelpers.BundleHelpres;
 
-namespace Alicargo.App_Start.Mvc
+namespace Alicargo.Mvc
 {
 	public static class JsPaths
 	{

@@ -5,6 +5,4 @@
 	[string] $version = (Read-Host -Prompt "Input version")
 )
 
-Sqlcmd -S $server -i "update-1.sql" -v MainDbName = "$mainDbPrefix`_$version" FilesDbName = "$filesDbPrefix`_$version"
-Sqlcmd -S $server -i "update-2.sql" -v MainDbName = "$mainDbPrefix`_$version" FilesDbName = "$filesDbPrefix`_$version"
-Sqlcmd -S $server -i "update-3.sql" -v MainDbName = "$mainDbPrefix`_$version" FilesDbName = "$filesDbPrefix`_$version"
+Sqlcmd -S $server -i "updates.sql" -v MainDbName = "$mainDbPrefix`_$version" FilesDbName = "$filesDbPrefix`_$version"

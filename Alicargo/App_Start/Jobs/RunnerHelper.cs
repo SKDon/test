@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Alicargo.Jobs.Core;
 
-namespace Alicargo.App_Start.Jobs
+namespace Alicargo.Jobs
 {
 	public sealed class RunnerHelper
 	{

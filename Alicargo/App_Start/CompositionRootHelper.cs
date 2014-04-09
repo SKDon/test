@@ -15,7 +15,7 @@ using Ninject;
 using Ninject.Syntax;
 using Ninject.Web.Common;
 
-namespace Alicargo.App_Start
+namespace Alicargo
 {
 	public static class CompositionRootHelper
 	{

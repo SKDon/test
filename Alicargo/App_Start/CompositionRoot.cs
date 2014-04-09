@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Alicargo.App_Start.Jobs;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
@@ -20,13 +19,14 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
+using Alicargo.Jobs;
 using Alicargo.Utilities;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
 
-namespace Alicargo.App_Start
+namespace Alicargo
 {
 	internal static class CompositionRoot
 	{

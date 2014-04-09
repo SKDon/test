@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Alicargo.App_Start.Mvc
+namespace Alicargo.Mvc
 {
 	internal sealed class RouteConfig
 	{

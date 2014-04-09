@@ -1,5 +1,4 @@
-﻿using Alicargo.App_Start.Jobs;
-using Alicargo.DataAccess.Contracts.Contracts;
+﻿using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Jobs.Helpers.Abstract;
 using Alicargo.TestHelpers;

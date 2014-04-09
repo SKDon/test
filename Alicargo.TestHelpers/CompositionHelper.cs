@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Transactions;
-using Alicargo.App_Start;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;

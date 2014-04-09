@@ -1,10 +1,9 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.MvcHelpers.Filters;
 using Ninject;
 
-namespace Alicargo.App_Start.Mvc
+namespace Alicargo.Mvc
 {
 	internal static class FilterConfig
 	{
