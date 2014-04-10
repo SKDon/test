@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Web.Security;
-using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities;
@@ -13,16 +12,16 @@ namespace Alicargo.Services
 	{
 		private readonly IUserRepository _users;
 		private readonly IPasswordConverter _passwordConverter;
-		private readonly IIdentityService _identity;
+		//private readonly IIdentityService _identity;
 
 		public AuthenticationService(
 			IUserRepository users,
-			IPasswordConverter passwordConverter,
-			IIdentityService identity)
+			IPasswordConverter passwordConverter)
+			//IIdentityService identity)
 		{
 			_users = users;
 			_passwordConverter = passwordConverter;
-			_identity = identity;
+			//_identity = identity;
 		}
 
 		public bool Authenticate(SignIdModel user)
@@ -40,13 +39,14 @@ namespace Alicargo.Services
 
 		public void AuthenticateForce(long usreId, bool createPersistentCookie)
 		{
+			SignOut();
 			FormsAuthentication.SetAuthCookie(usreId.ToString(CultureInfo.InvariantCulture), createPersistentCookie);
-			_identity.Id = usreId;
+			//_identity.Id = usreId;
 		}
 
 		public void SignOut()
 		{
-			_identity.Id = null;
+			//AccessAttribute = null;
 			FormsAuthentication.SignOut();
 		}
 	}

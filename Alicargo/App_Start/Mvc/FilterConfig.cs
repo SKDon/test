@@ -12,6 +12,8 @@ namespace Alicargo.Mvc
 			filters.Add(new CustomHandleErrorAttribute(kernel.Get<ILog>()));
 
 			filters.Add(new CultureFilterAttribute(CompositionRootHelper.GetLanguage(kernel)));
+
+			filters.Add(new AccessAuthorizationFilter(() => kernel.Get<IIdentityService>()));
 		}
 	}
 }

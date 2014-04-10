@@ -152,6 +152,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvcHelpers\Filters\AccessAuthorizationFilter.cs" />
     <Compile Include="T4MVC\AdminAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

@@ -23,9 +23,8 @@ namespace Alicargo.Services
 			new Dictionary<long, Dictionary<RoleType, bool>>();
 
 		private readonly ISenderRepository _senders;
-
 		private readonly IUserRepository _users;
-		private long? _identity;
+		//private long? _identity;
 		private string _language;
 
 		public IdentityService(
@@ -118,16 +117,19 @@ namespace Alicargo.Services
 		{
 			get
 			{
-				if(_identity.HasValue)
-					return _identity.Value;
+				//if(_identity.HasValue)
+				//	return _identity.Value;
 
 				long id;
 				if(long.TryParse(HttpContext.Current.User.Identity.Name, NumberStyles.Number, null, out id))
-					_identity = id;
+					//_identity = id;
+					return id;
 
-				return _identity;
+				return null;
+
+				//return _identity;
 			}
-			set { _identity = value; }
+			//set { _identity = value; }
 		}
 
 		private bool InRole(RoleType role, long userId)
