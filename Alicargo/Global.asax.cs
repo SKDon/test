@@ -57,7 +57,7 @@ namespace Alicargo
 			{
 				var runners = _kernel.GetAll<IRunner>().ToArray();
 
-				_runnerHelper.RunJobs(runners);
+				//_runnerHelper.RunJobs(runners);
 			}
 			catch (Exception e)
 			{
