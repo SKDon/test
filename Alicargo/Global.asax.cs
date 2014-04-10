@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Jobs;
@@ -40,7 +39,7 @@ namespace Alicargo
 		{
 			CompositionRoot.BindConnection(_kernel, _connectionString);
 
-			CompositionRoot.BindDataAccess(_kernel, _connectionString, _filesConnectionString, context => HttpContext.Current);
+			CompositionRoot.BindDataAccess(_kernel, _connectionString, _filesConnectionString);
 
 			CompositionRoot.BindServices(_kernel, MainLogger);
 
@@ -57,7 +56,7 @@ namespace Alicargo
 			{
 				var runners = _kernel.GetAll<IRunner>().ToArray();
 
-				//_runnerHelper.RunJobs(runners);
+				_runnerHelper.RunJobs(runners);
 			}
 			catch (Exception e)
 			{

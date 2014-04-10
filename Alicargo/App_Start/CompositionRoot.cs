@@ -22,7 +22,6 @@ using Alicargo.DataAccess.Repositories.User;
 using Alicargo.Jobs;
 using Alicargo.Utilities;
 using Ninject;
-using Ninject.Activation;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
 
@@ -82,8 +81,7 @@ namespace Alicargo
 			return type.IsClass && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
 		}
 
-		public static void BindDataAccess(IKernel kernel, string connectionString, string filesConnectionString,
-			Func<IContext, object> scope)
+		public static void BindDataAccess(IKernel kernel, string connectionString, string filesConnectionString)
 		{
 			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
 				.IncludingNonePublicTypes()
@@ -91,7 +89,7 @@ namespace Alicargo
 				.Excluding<SqlProcedureExecutor>()
 				.Excluding<ApplicationEditor>()
 				.BindDefaultInterface()
-				.Configure(y => y.InScope(scope)));
+				.Configure(syntax => syntax.InRequestScope()));
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()

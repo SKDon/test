@@ -89,7 +89,7 @@ namespace Alicargo.TestHelpers
 
 		private void BindServices()
 		{
-			CompositionRoot.BindDataAccess(Kernel, _mainConnectionString, _filesConnectionString, context => this);
+			CompositionRoot.BindDataAccess(Kernel, _mainConnectionString, _filesConnectionString);
 
 			CompositionRoot.BindServices(Kernel, new ConsoleLogger());
 		}
