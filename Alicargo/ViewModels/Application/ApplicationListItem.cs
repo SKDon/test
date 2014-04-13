@@ -9,67 +9,21 @@ namespace Alicargo.ViewModels.Application
 {
 	public sealed class ApplicationListItem
 	{
-		#region Computed
+		public string DisplayNumber { get; set; }
 
-		public string DisplayNumber
-		{
-			get
-			{
-				return ApplicationHelper.GetDisplayNumber(Id, Count);
-			}
-		}
+		public int DaysInWork { get; set; }
 
-		public int DaysInWork
-		{
-			get
-			{
-				return ApplicationHelper.GetDaysInWork(CreationTimestamp);
-			}
-		}
+		public string CreationTimestampLocalString { get; set; }
 
-		public string CreationTimestampLocalString
-		{
-			get
-			{
-				return LocalizationHelper.GetDate(CreationTimestamp, CultureInfo.CurrentCulture);
-			}
-		}
+		public string StateChangeTimestampLocalString { get; set; }
 
-		public string StateChangeTimestampLocalString
-		{
-			get
-			{
-				return LocalizationHelper.GetDate(StateChangeTimestamp, CultureInfo.CurrentCulture);
-			}
-		}
+		public string DateOfCargoReceiptLocalString { get; set; }
 
-		public string DateOfCargoReceiptLocalString
-		{
-			get
-			{
-				return DateOfCargoReceipt.HasValue ? LocalizationHelper.GetDate(DateOfCargoReceipt.Value, CultureInfo.CurrentCulture) : null;
-			}
-		}
+		public string DateInStockLocalString { get; set; }
 
-		public string DateInStockLocalString
-		{
-			get
-			{
-				return DateInStock.HasValue ? LocalizationHelper.GetDate(DateInStock.Value, CultureInfo.CurrentCulture) : null;
-			}
-		}
+		public string MethodOfDeliveryLocalString { get; set; }
 
-		public string MethodOfDeliveryLocalString
-		{
-			get { return ((MethodOfDelivery)MethodOfDeliveryId).ToLocalString(); }
-		}
-
-		public string ValueString
-		{
-			get { return ApplicationHelper.GetValueString(Value, CurrencyId); }
-		}
-
-		#endregion
+		public string ValueString { get; set; }
 
 		public string ClientLegalEntity { get; set; }
 

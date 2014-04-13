@@ -51,7 +51,7 @@ namespace Alicargo.Core.Calculation
 			var calculation = new CalculationData
 			{
 				AirWaybillDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(awb)),
-				ApplicationDisplay = ApplicationHelper.GetDisplayNumber(application.Id, application.Count),
+				ApplicationDisplay = ApplicationHelper.GetApplicationDisplay(application.DisplayNumber, application.Count),
 				ClientId = application.ClientId,
 				FactureCost = application.FactureCostEdited ?? application.FactureCost ?? 0,
 				FactureCostEx = application.FactureCostExEdited ?? application.FactureCostEx ?? 0,

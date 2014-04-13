@@ -104,7 +104,7 @@ namespace Alicargo.Services.Calculation
 				Weight = a.Weight,
 				PickupCost = a.PickupCost,
 				AirWaybillId = a.AirWaybillId.Value,
-				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
+				DisplayNumber = ApplicationHelper.GetApplicationDisplay(a.DisplayNumber, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
 				Profit = GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),

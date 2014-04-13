@@ -8,11 +8,9 @@ namespace Alicargo.Core.Helpers
 {
 	public sealed class ApplicationHelper
 	{
-		public static string GetDisplayNumber(long id, long? count)
+		public static string GetApplicationDisplay(int number, long? count)
 		{
-			id = id % 1000;
-
-			return String.Format("{0:000}{1}", id, count.HasValue && count > 0 ? "/" + count.Value : "");
+			return String.Format("{0:000}{1}", number % 1000, count.HasValue && count > 0 ? "/" + count.Value : "");
 		}
 
 		public static int GetDaysInWork(DateTimeOffset creationTimestamp)

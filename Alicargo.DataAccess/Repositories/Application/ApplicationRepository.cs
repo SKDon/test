@@ -100,7 +100,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				ForwarderId = x.ForwarderId,
 				InsuranceRate = x.InsuranceRate,
 				CalculationProfit = x.CalculationProfit,
-				CalculationTotalTariffCost = x.CalculationTotalTariffCost
+				CalculationTotalTariffCost = x.CalculationTotalTariffCost,
+				DisplayNumber = x.DisplayNumber
 			};
 
 			_selector = x => new ApplicationData
@@ -148,7 +149,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				ForwarderId = x.ForwarderId,
 				InsuranceRate = x.InsuranceRate,
 				CalculationProfit = x.CalculationProfit,
-				CalculationTotalTariffCost = x.CalculationTotalTariffCost
+				CalculationTotalTariffCost = x.CalculationTotalTariffCost,
+				DisplayNumber = x.DisplayNumber
 			};
 		}
 

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts.State;
+using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
@@ -13,12 +14,12 @@ namespace Alicargo.Services.Application
 	internal sealed class ApplicationListItemMapper : IApplicationListItemMapper
 	{
 		private readonly IApplicationRepository _applications;
-		private readonly IApplicationFileRepository _files;
+		private readonly ICityRepository _cities;
 		private readonly ICountryRepository _countries;
+		private readonly IApplicationFileRepository _files;
 		private readonly IStateConfig _stateConfig;
 		private readonly IStateFilter _stateFilter;
 		private readonly IStateRepository _states;
-		private readonly ICityRepository _cities;
 
 		public ApplicationListItemMapper(
 			IStateFilter stateFilter,
@@ -120,7 +121,20 @@ namespace Alicargo.Services.Application
 				InvoiceFiles = invoices.ContainsKey(x.Id) ? invoices[x.Id] : null,
 				PackingFiles = packings.ContainsKey(x.Id) ? packings[x.Id] : null,
 				SwiftFiles = swifts.ContainsKey(x.Id) ? swifts[x.Id] : null,
-				Torg12Files = torg12.ContainsKey(x.Id) ? torg12[x.Id] : null
+				Torg12Files = torg12.ContainsKey(x.Id) ? torg12[x.Id] : null,
+				DisplayNumber = ApplicationHelper.GetApplicationDisplay(x.DisplayNumber, x.Count),
+				DaysInWork = ApplicationHelper.GetDaysInWork(x.CreationTimestamp),
+				CreationTimestampLocalString = LocalizationHelper.GetDate(x.CreationTimestamp, CultureProvider.GetCultureInfo()),
+				StateChangeTimestampLocalString =
+					LocalizationHelper.GetDate(x.StateChangeTimestamp, CultureProvider.GetCultureInfo()),
+				DateOfCargoReceiptLocalString =
+					x.DateOfCargoReceipt.HasValue
+						? LocalizationHelper.GetDate(x.DateOfCargoReceipt.Value, CultureProvider.GetCultureInfo())
+						: null,
+				DateInStockLocalString =
+					x.DateInStock.HasValue ? LocalizationHelper.GetDate(x.DateInStock.Value, CultureProvider.GetCultureInfo()) : null,
+				MethodOfDeliveryLocalString = x.MethodOfDelivery.ToLocalString(),
+				ValueString = ApplicationHelper.GetValueString(x.Value, x.CurrencyId)
 			}).ToArray();
 		}
 	}

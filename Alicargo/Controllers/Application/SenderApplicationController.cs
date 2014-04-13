@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
@@ -104,7 +105,8 @@ namespace Alicargo.Controllers.Application
 		{
 			var nic = _clients.GetNicByApplications(applicationId).First();
 			ViewBag.ApplicationId = applicationId;
-			ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId, count);
+			throw new NotImplementedException("set ApplicationNumber");
+	//			ViewBag.ApplicationNumber = ApplicationHelper.GetApplicationDisplay(applicationId, count);
 			ViewBag.Nic = nic;
 			BindCountries();
 		}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.State;
@@ -18,13 +19,13 @@ namespace Alicargo.Tests.Services.Application
 	{
 		private const int CargoOnTransitStateId = 0;
 		private Dictionary<long, long> _calculations;
+		private List<CityData> _cities;
 		private MockContainer _context;
 		private List<CountryData> _countries;
 		private ApplicationExtendedData[] _data;
 		private Dictionary<long, string> _localazedStates;
 		private ApplicationListItemMapper _mapper;
 		private long[] _stateAvailability;
-		private List<CityData> _cities;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -71,15 +72,15 @@ namespace Alicargo.Tests.Services.Application
 			_context.ApplicationRepository.Setup(x => x.GetCalculations(It.IsAny<long[]>())).Returns(_calculations);
 			_context.StateRepository.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<long[]>())).Returns(
 				(string lang, long[] ids) => ids.ToDictionary(
-				x => x,
-				x =>
-					new StateData
-					{
-						Name = "State " + x,
-						Position = (int)x,
-						LocalizedName = _localazedStates[x]
-					}
-				));
+					x => x,
+					x =>
+						new StateData
+						{
+							Name = "State " + x,
+							Position = (int)x,
+							LocalizedName = _localazedStates[x]
+						}
+					));
 
 			_mapper = _context.Create<ApplicationListItemMapper>();
 		}
@@ -89,7 +90,7 @@ namespace Alicargo.Tests.Services.Application
 		{
 			var items = _mapper.Map(_data, TwoLetterISOLanguageName.English);
 
-			_data.ShouldAllBeEquivalentTo(items, options => options.ExcludingMissingProperties());
+			_data.ShouldAllBeEquivalentTo(items, options => options.ExcludingMissingProperties().Excluding(x => x.DisplayNumber));
 			for(var i = 0; i < _data.Length; i++)
 			{
 				var item = items[i];
@@ -103,6 +104,7 @@ namespace Alicargo.Tests.Services.Application
 					StateId = i,
 					StateName = _localazedStates[i]
 				});
+				item.DisplayNumber.ShouldBeEquivalentTo(ApplicationHelper.GetApplicationDisplay(data.DisplayNumber, data.Count));
 				item.TransitCity.ShouldBeEquivalentTo(city);
 				item.CanClose.ShouldBeEquivalentTo(item.StateId == CargoOnTransitStateId);
 				item.CanSetState.ShouldBeEquivalentTo(_stateAvailability.Contains(item.StateId));

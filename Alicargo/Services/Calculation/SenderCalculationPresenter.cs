@@ -134,7 +134,7 @@ namespace Alicargo.Services.Calculation
 				Weight = a.Weight,
 				PickupCost = a.SenderPickupCost,
 				AirWaybillId = a.AirWaybillId,
-				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
+				DisplayNumber = ApplicationHelper.GetApplicationDisplay(a.DisplayNumber, a.Count),
 				Profit = GetProfit(a),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				SenderRate = a.SenderRate

@@ -75,7 +75,7 @@ namespace Alicargo.Services.Calculation
 				Weight = a.Weight,
 				PickupCost = a.PickupCostEdited ?? a.PickupCost,
 				AirWaybillId = a.AirWaybillId.Value,
-				DisplayNumber = ApplicationHelper.GetDisplayNumber(a.Id, a.Count),
+				DisplayNumber = ApplicationHelper.GetApplicationDisplay(a.DisplayNumber, a.Count),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),

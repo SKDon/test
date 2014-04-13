@@ -26,6 +26,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public decimal Value { get; set; }
 		public long ForwarderId { get; set; }
 		public string ForwarderName { get; set; }
+		public int DisplayNumber { get; set; }
 
 		public long ClientId { get; set; }
 		public string ClientLegalEntity { get; set; }

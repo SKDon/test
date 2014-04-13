@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
@@ -70,7 +71,8 @@ namespace Alicargo.Controllers.Application
 
 			if(applicationId.HasValue)
 			{
-				ViewBag.ApplicationNumber = ApplicationHelper.GetDisplayNumber(applicationId.Value, count);
+				throw new NotImplementedException("set ApplicationNumber");
+				// ViewBag.ApplicationNumber = ApplicationHelper.GetApplicationDisplay(applicationId.Value, count);
 			}
 
 			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);

@@ -140,7 +140,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "DaysInWork", ApplicationHelper.GetDaysInWork(application.CreationTimestamp).ToString(culture));
 			Add(localizedData, "DeliveryBillFiles", string.Join(", ", deliveryBill));
 			Add(localizedData, "DeliveryType", LocalizationHelper.GetDeliveryType(application.TransitDeliveryType, culture));
-			Add(localizedData, "DisplayNumber", ApplicationHelper.GetDisplayNumber(application.Id, application.Count));
+			Add(localizedData, "DisplayNumber", ApplicationHelper.GetApplicationDisplay(application.DisplayNumber, application.Count));
 			Add(localizedData, "FactoryContact", application.FactoryContact);
 			Add(localizedData, "FactoryEmail", application.FactoryEmail);
 			Add(localizedData, "FactoryPhone", application.FactoryPhone);
