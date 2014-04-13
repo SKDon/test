@@ -82,7 +82,7 @@ namespace Alicargo.Core.Calculation
 			_calculations.RemoveByApplication(applicationId);
 		}
 
-		private decimal GetTapeCost(ApplicationData application)
+		private decimal GetTapeCost(ApplicationExtendedData application)
 		{
 			var scotch = application.ScotchCostEdited;
 

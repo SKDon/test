@@ -14,11 +14,11 @@ namespace Alicargo.Core.Tests.Services
 		{
 			var serializer = new Serializer();
 			var fixture = new Fixture();
-			var data = fixture.Create<ApplicationData>();
+			var data = fixture.Create<ApplicationEditData>();
 
 			var bytes = serializer.Serialize(data);
 
-			var actual = serializer.Deserialize<ApplicationData>(bytes);
+			var actual = serializer.Deserialize<ApplicationEditData>(bytes);
 
 			actual.ShouldBeEquivalentTo(data);
 		}

@@ -23,20 +23,20 @@ namespace Alicargo.Core.Event
 			_editor = editor;
 		}
 
-		public void Update(ApplicationData application)
+		public void Update(long applicationId, ApplicationEditData application)
 		{
-			var oldData = _applications.Get(application.Id);
+			var oldData = _applications.Get(applicationId);
 
-			_editor.Update(application);
+			_editor.Update(applicationId, application);
 
 			if(oldData.SenderId != application.SenderId)
 			{
-				_events.Add(application.Id, EventType.SetSender, EventState.Emailing);
+				_events.Add(applicationId, EventType.SetSender, EventState.Emailing);
 			}
 
 			if(oldData.ForwarderId != application.ForwarderId)
 			{
-				_events.Add(application.Id, EventType.SetForwarder, EventState.Emailing);
+				_events.Add(applicationId, EventType.SetForwarder, EventState.Emailing);
 			}
 		}
 
@@ -50,7 +50,7 @@ namespace Alicargo.Core.Event
 			_editor.SetProfit(id, value);
 		}
 
-		public long Add(ApplicationData application)
+		public long Add(ApplicationEditData application)
 		{
 			var applicationId = _editor.Add(application);
 

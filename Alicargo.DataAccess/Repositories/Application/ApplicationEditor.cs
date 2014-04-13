@@ -17,7 +17,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context = new AlicargoDataContext(connection);
 		}
 
-		public long Add(ApplicationData application)
+		public long Add(ApplicationEditData application)
 		{
 			var entity = new DbContext.Application();
 
@@ -127,9 +127,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 			Update(id, application => application.ClassId = classId);
 		}
 
-		public void Update(ApplicationData application)
+		public void Update(long applicationId, ApplicationEditData application)
 		{
-			Update(application.Id, entity => Map(application, entity));
+			Update(applicationId, entity => Map(application, entity));
 		}
 
 		public void SetTotalTariffCost(long id, decimal? value)
@@ -151,16 +151,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context.SaveChanges();
 		}
 
-		private static void Map(ApplicationData from, DbContext.Application to)
+		private static void Map(ApplicationEditData from, DbContext.Application to)
 		{
-			if(to.Id == 0)
-			{
-				to.Id = from.Id;
-				to.CreationTimestamp = from.CreationTimestamp;
-				to.StateChangeTimestamp = from.StateChangeTimestamp;
-				to.StateId = from.StateId;
-			}
-
 			to.Characteristic = from.Characteristic;
 			to.AddressLoad = from.AddressLoad;
 			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
@@ -174,7 +166,6 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.DateInStock = from.DateInStock;
 			to.DateOfCargoReceipt = from.DateOfCargoReceipt;
 			to.TransitReference = from.TransitReference;
-			to.DisplayNumber = from.DisplayNumber;
 
 			to.ClientId = from.ClientId;
 			to.TransitId = from.TransitId;

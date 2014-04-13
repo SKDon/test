@@ -7,7 +7,7 @@ namespace Alicargo.Core.Contracts.State
 		long[] GetStateAvailabilityToSet();
 		long[] GetStateVisibility();
 
-		long[] FilterByBusinessLogic(ApplicationData applicationData, long[] stateAvailability);
+		long[] FilterByBusinessLogic(ApplicationEditData applicationData, long[] stateAvailability);
 		long[] FilterByPosition(long[] states, int position);
 	}
 }

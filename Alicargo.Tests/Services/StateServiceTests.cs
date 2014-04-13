@@ -127,7 +127,7 @@ namespace Alicargo.Tests.Services
 		[TestMethod]
 		public void Test_ApplyBusinessLogicToStates_Weight()
 		{
-			var applicationData = _context.Create<ApplicationData>();
+			var applicationData = _context.Create<ApplicationEditData>();
 			applicationData.Weight = null;
 			applicationData.AirWaybillId = null;
 			var stateAvailability = new[] { _context.Create<long>() };
@@ -144,7 +144,7 @@ namespace Alicargo.Tests.Services
 		[TestMethod]
 		public void Test_ApplyBusinessLogicToStates_Count()
 		{
-			var applicationData = _context.Create<ApplicationData>();
+			var applicationData = _context.Create<ApplicationEditData>();
 			applicationData.Count = null;
 			applicationData.AirWaybillId = null;
 			var stateAvailability = _context.CreateMany<long>(1).ToArray();
@@ -161,7 +161,7 @@ namespace Alicargo.Tests.Services
 		[TestMethod]
 		public void Test_ApplyBusinessLogicToStates_AirWaybillIdNull()
 		{
-			var applicationData = _context.Create<ApplicationData>();
+			var applicationData = _context.Create<ApplicationEditData>();
 			applicationData.AirWaybillId = null;
 			var stateAvailability = _context.CreateMany<long>(2).ToArray();
 
@@ -176,7 +176,7 @@ namespace Alicargo.Tests.Services
 		[TestMethod]
 		public void Test_ApplyBusinessLogicToStates_AirWaybillIdNotNull()
 		{
-			var applicationData = _context.Create<ApplicationData>();
+			var applicationData = _context.Create<ApplicationEditData>();
 			var airWaybillData = _context.CreateMany<AirWaybillData>().ToArray();
 			airWaybillData[0].GTD = null;
 			var stateAvailability = _context.CreateMany<long>(1).ToArray();

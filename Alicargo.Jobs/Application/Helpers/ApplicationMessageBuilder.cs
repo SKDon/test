@@ -64,7 +64,7 @@ namespace Alicargo.Jobs.Application.Helpers
 		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, RecipientData[] recipients,
 			EventDataForEntity data, EventType type, IReadOnlyDictionary<string, FileHolder[]> files)
 		{
-			var application = _applications.GetExtendedData(data.EntityId);
+			var application = _applications.Get(data.EntityId);
 
 			foreach(var recipient in recipients)
 			{

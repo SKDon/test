@@ -30,7 +30,7 @@ namespace Alicargo.Tests.Services.AirWaybill
         public void Test_SetState()
         {
             var data = _context.Create<AirWaybillData>();
-            var applicationData = _context.CreateMany<ApplicationData>().ToArray();
+			var applicationData = _context.CreateMany<ApplicationExtendedData>().ToArray();
             applicationData[0].StateId = data.StateId;
 
             _context.AirWaybillRepository.Setup(x => x.Get(_airWaybillId)).Returns(new[] { data });

@@ -5,7 +5,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
 	public interface IApplicationEditor
 	{
-		long Add(ApplicationData application);
+		long Add(ApplicationEditData application);
 		void Delete(long id);
 		void SetAirWaybill(long applicationId, long? airWaybillId);
 		void SetClass(long id, int? classId);
@@ -24,7 +24,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		void SetCount(long id, int? value);
 		void SetWeight(long id, float? value);
 		void SetInsuranceRate(long id, float insuranceRate);
-		void Update(ApplicationData application);
+		void Update(long applicationId, ApplicationEditData application);
 		void SetTotalTariffCost(long id, decimal? value);
 		void SetProfit(long id, decimal? value);
 	}

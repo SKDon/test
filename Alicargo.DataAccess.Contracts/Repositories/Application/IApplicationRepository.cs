@@ -10,9 +10,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 			long? forwarderId = null, long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null,
 			bool? hasCalculation = null);
 
-		ApplicationData Get(long id);
-
-		ApplicationData[] GetByAirWaybill(params long[] ids);
+		ApplicationExtendedData[] GetByAirWaybill(params long[] ids);
 
 		IReadOnlyDictionary<long, long> GetCalculations(long[] appIds);
 
@@ -20,7 +18,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 
 		float GetDefaultInsuranceRate();
 
-		ApplicationExtendedData GetExtendedData(long id);
+		ApplicationExtendedData Get(long id);
 
 		// todo: 1. remove hasCalculation parameter from List and Count methods
 		ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0, long? clientId = null,

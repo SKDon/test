@@ -55,7 +55,7 @@ namespace Alicargo.Services.Application
 
 			Map(application, data, forwarderId);
 
-			_updater.Update(data);
+			_updater.Update(applicationId, data);
 		}
 
 		public ApplicationClientModel Get(long applicationId)
@@ -87,13 +87,11 @@ namespace Alicargo.Services.Application
 			};
 		}
 
-		private ApplicationData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId,
+		private ApplicationEditData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId,
 			long forwarderId)
 		{
-			return new ApplicationData
+			return new ApplicationEditData
 			{
-				CreationTimestamp = DateTimeProvider.Now,
-				StateChangeTimestamp = DateTimeProvider.Now,
 				StateId = _config.DefaultStateId,
 				Class = null,
 				TransitId = transitId,
@@ -114,7 +112,6 @@ namespace Alicargo.Services.Application
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
 				MethodOfDelivery = model.MethodOfDelivery,
-				Id = 0,
 				AirWaybillId = null,
 				DateInStock = null,
 				DateOfCargoReceipt = null,
@@ -137,7 +134,7 @@ namespace Alicargo.Services.Application
 			};
 		}
 
-		private void Map(ApplicationClientModel @from, ApplicationData to, long forwarderId)
+		private void Map(ApplicationClientModel @from, ApplicationEditData to, long forwarderId)
 		{
 			if(from.CountryId != to.CountryId)
 			{

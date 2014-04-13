@@ -47,7 +47,7 @@ namespace Alicargo.Jobs.Application.Helpers
 
 		public RecipientData[] GetRecipients(EventType type, EventDataForEntity data)
 		{
-			var application = _applications.GetExtendedData(data.EntityId);
+			var application = _applications.Get(data.EntityId);
 
 			var roles = _recipients.GetRecipientRoles(type);
 

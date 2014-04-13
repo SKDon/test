@@ -109,7 +109,7 @@ namespace Alicargo.Jobs.Helpers
 			EventDataForEntity eventData, string[] languages)
 		{
 			var applicationId = eventData.EntityId;
-			var application = _applications.GetExtendedData(applicationId);
+			var application = _applications.Get(applicationId);
 			if(application == null)
 			{
 				throw new InvalidOperationException("Can't find application by id " + applicationId);

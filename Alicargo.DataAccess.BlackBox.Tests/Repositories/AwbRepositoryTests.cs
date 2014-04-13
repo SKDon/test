@@ -195,10 +195,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.Create();
 		}
 
-		private ApplicationData CreateApplicationData(long clientId)
+		private ApplicationEditData CreateApplicationData(long clientId)
 		{
 			return _fixture
-				.Build<ApplicationData>()
+				.Build<ApplicationEditData>()
 				.With(x => x.SenderId, TestConstants.TestSenderId)
 				.With(x => x.ClientId, clientId)
 				.With(x => x.AirWaybillId, null)

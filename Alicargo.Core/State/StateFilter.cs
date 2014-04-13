@@ -150,7 +150,7 @@ namespace Alicargo.Core.State
 				.ToArray();
 		}
 
-		public long[] FilterByBusinessLogic(ApplicationData applicationData, long[] stateAvailability)
+		public long[] FilterByBusinessLogic(ApplicationEditData applicationData, long[] stateAvailability)
 		{
 			var states = stateAvailability.ToList();
 

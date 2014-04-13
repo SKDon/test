@@ -42,9 +42,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_ApplicationRepository_Add_Get()
 		{
-			var expected = CreateTestApplication();
+			long id;
+			var expected = CreateTestApplication(out id);
 
-			var actual = _applications.Get(expected.Id);
+			var actual = _applications.Get(id);
 
 			Assert.IsNotNull(actual);
 
@@ -54,9 +55,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_ApplicationRepository_Add_GetDetails()
 		{
-			var expected = CreateTestApplication();
+			long id;
+			var expected = CreateTestApplication(out id);
 
-			var actual = _applications.GetExtendedData(expected.Id);
+			var actual = _applications.Get(id);
 
 			Assert.IsNotNull(actual);
 
@@ -79,7 +81,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var defaultState = _stateRepository.Get(TwoLetterISOLanguageName.Italian, TestConstants.DefaultStateId).First();
 			var count = _applications.Count(new[] { defaultState.Key });
 
-			CreateTestApplication();
+			long id;
+			CreateTestApplication(out id);
 
 			var newCount = _applications.Count(new[] { defaultState.Key });
 
@@ -89,23 +92,21 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_ApplicationRepository_Update()
 		{
-			var old = CreateTestApplication();
+			long id;
+			var old = CreateTestApplication(out id);
 
-			var newData = _fixture.Create<ApplicationData>();
-			newData.Id = old.Id;
+			var newData = _fixture.Create<ApplicationEditData>();
 			newData.StateId = old.StateId;
 			newData.SenderId = TestConstants.TestSenderId;
 			newData.CountryId = TestConstants.TestCountryId;
 			newData.ClientId = old.ClientId;
 			newData.TransitId = old.TransitId;
 			newData.AirWaybillId = old.AirWaybillId;
-			newData.CreationTimestamp = old.CreationTimestamp;
-			newData.StateChangeTimestamp = old.StateChangeTimestamp;
 			newData.ForwarderId = TestConstants.TestForwarderId2;
 
-			_editor.Update(newData);
+			_editor.Update(id, newData);
 
-			var data = _applications.Get(old.Id);
+			var data = _applications.Get(id);
 
 			data.ShouldBeEquivalentTo(newData);
 		}
@@ -113,21 +114,21 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_ApplicationRepository_UpdateState()
 		{
-			var application = CreateTestApplication();
+			long id;
+			var application = CreateTestApplication(out id);
 			var state = _stateRepository.Get(TwoLetterISOLanguageName.Italian).First(x => x.Key != application.StateId);
 
-			_editor.SetState(application.Id, state.Key);
+			_editor.SetState(id, state.Key);
 
-			var actual = _applications.Get(application.Id);
+			var actual = _applications.Get(id);
 
 			Assert.AreEqual(state.Key, actual.StateId);
 		}
 
-		private ApplicationData CreateTestApplication()
+		private ApplicationEditData CreateTestApplication(out long id)
 		{
 			var application = _fixture
-				.Build<ApplicationData>()
-				.Without(x => x.Id)
+				.Build<ApplicationEditData>()
 				.With(x => x.SenderId, TestConstants.TestSenderId)
 				.With(x => x.ClientId, TestConstants.TestClientId1)
 				.With(x => x.TransitId, TestConstants.TestTransitId)
@@ -137,7 +138,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.With(x => x.ForwarderId, TestConstants.TestForwarderId1)
 				.Create();
 
-			application.Id = _editor.Add(application);
+			id = _editor.Add(application);
 
 			return application;
 		}

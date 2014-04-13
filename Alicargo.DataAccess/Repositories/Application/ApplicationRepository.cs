@@ -17,9 +17,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 	public sealed class ApplicationRepository : IApplicationRepository
 	{
 		private readonly AlicargoDataContext _context;
-		private readonly Expression<Func<DbContext.Application, ApplicationExtendedData>> _extendedSelector;
+		private readonly Expression<Func<DbContext.Application, ApplicationExtendedData>> _selector;
 		private readonly IApplicationRepositoryOrderer _orderer;
-		private readonly Expression<Func<DbContext.Application, ApplicationData>> _selector;
 
 		public ApplicationRepository(IDbConnection connection)
 		{
@@ -27,7 +26,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_orderer = new ApplicationRepositoryOrderer();
 
-			_extendedSelector = x => new ApplicationExtendedData
+			_selector = x => new ApplicationExtendedData
 			{
 				AddressLoad = x.AddressLoad,
 				Id = x.Id,
@@ -101,57 +100,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				FactureCostExEdited = x.FactureCostExEdited,
 				PickupCostEdited = x.PickupCostEdited,
 				ScotchCostEdited = x.ScotchCostEdited,
-				TransitCostEdited = x.TransitCostEdited
-			};
-
-			_selector = x => new ApplicationData
-			{
-				Id = x.Id,
-				CreationTimestamp = x.CreationTimestamp,
-				FactoryEmail = x.FactoryEmail,
-				FactoryName = x.FactoryName,
-				FactoryPhone = x.FactoryPhone,
-				FactoryContact = x.FactoryContact,
-				Weight = x.Weight,
-				AddressLoad = x.AddressLoad,
-				Characteristic = x.Characteristic,
-				Count = x.Count,
-				Invoice = x.Invoice,
-				MethodOfDelivery = (MethodOfDelivery)x.MethodOfDeliveryId,
-				TermsOfDelivery = x.TermsOfDelivery,
-				Value = x.Value,
-				CurrencyId = x.CurrencyId,
-				Volume = x.Volume,
-				WarehouseWorkingTime = x.WarehouseWorkingTime,
-				DateInStock = x.DateInStock,
-				DateOfCargoReceipt = x.DateOfCargoReceipt,
-				TransitReference = x.TransitReference,
-				MarkName = x.MarkName,
-				AirWaybillId = x.AirWaybillId,
-				CountryId = x.CountryId,
-				StateChangeTimestamp = x.StateChangeTimestamp,
-				StateId = x.StateId,
-				Class = (ClassType?)x.ClassId,
-				ClientId = x.ClientId,
-				TransitId = x.TransitId,
-				FactureCost = x.FactureCost,
-				FactureCostEx = x.FactureCostEx,
-				TariffPerKg = x.TariffPerKg,
-				SenderRate = x.SenderRate,
-				TransitCost = x.TransitCost,
-				PickupCost = x.PickupCost,
-				FactureCostEdited = x.FactureCostEdited,
-				FactureCostExEdited = x.FactureCostExEdited,
-				TransitCostEdited = x.TransitCostEdited,
-				ScotchCostEdited = x.ScotchCostEdited,
-				PickupCostEdited = x.PickupCostEdited,
-				SenderId = x.SenderId,
-				ForwarderId = x.ForwarderId,
-				InsuranceRate = x.InsuranceRate,
-				CalculationProfit = x.CalculationProfit,
-				CalculationTotalTariffCost = x.CalculationTotalTariffCost,
-				DisplayNumber = x.DisplayNumber
-			};
+				TransitCostEdited = x.TransitCostEdited				
+			};			
 		}
 
 		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, long? carrierId = null,
@@ -178,15 +128,15 @@ namespace Alicargo.DataAccess.Repositories.Application
 			if(take.HasValue)
 				applications = applications.Take(take.Value);
 
-			return applications.Select(_extendedSelector).ToArray();
+			return applications.Select(_selector).ToArray();
 		}
 
-		public ApplicationData Get(long id)
-		{
-			return _context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
-		}
+		//public ApplicationData Get(long id)
+		//{
+		//	return _context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
+		//}
 
-		public ApplicationData[] GetByAirWaybill(params long[] ids)
+		public ApplicationExtendedData[] GetByAirWaybill(params long[] ids)
 		{
 			return _context.Applications
 				.Where(x => x.AirWaybillId.HasValue && ids.Contains(x.AirWaybillId.Value))
@@ -199,9 +149,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return (float)ConfigurationManager.AppSettings["DefaultInsuranceRate"].ToDouble();
 		}
 
-		public ApplicationExtendedData GetExtendedData(long id)
+		public ApplicationExtendedData Get(long id)
 		{
-			return _context.Applications.Where(x => x.Id == id).Select(_extendedSelector).FirstOrDefault();
+			return _context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
 		}
 
 		public long GetClientId(long id)

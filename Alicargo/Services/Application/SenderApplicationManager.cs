@@ -4,7 +4,6 @@ using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
-using Alicargo.Utilities;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 
@@ -17,19 +16,19 @@ namespace Alicargo.Services.Application
 		private readonly ISenderService _senders;
 		private readonly IStateConfig _stateConfig;
 		private readonly ITransitRepository _transits;
-		private readonly IApplicationEditor _updater;
+		private readonly IApplicationEditor _editor;
 
 		public SenderApplicationManager(
 			IApplicationRepository applications,
 			ISenderService senders,
-			IApplicationEditor updater,
+			IApplicationEditor editor,
 			IForwarderService forwarders,
 			ITransitRepository transits,
 			IStateConfig stateConfig)
 		{
 			_applications = applications;
 			_senders = senders;
-			_updater = updater;
+			_editor = editor;
 			_forwarders = forwarders;
 			_transits = transits;
 			_stateConfig = stateConfig;
@@ -72,14 +71,14 @@ namespace Alicargo.Services.Application
 
 			Map(model, applicationData);
 
-			_updater.Update(applicationData);
+			_editor.Update(id, applicationData);
 		}
 
 		public void Add(ApplicationSenderModel model, long clientId, long creatorSenderId)
 		{
 			_senders.CheckCountry(creatorSenderId, model.CountryId);
 
-			var application = new ApplicationData
+			var application = new ApplicationEditData
 			{
 				InsuranceRate = _applications.GetDefaultInsuranceRate()
 			};
@@ -89,7 +88,7 @@ namespace Alicargo.Services.Application
 			Add(application, clientId, creatorSenderId);
 		}
 
-		private void Add(ApplicationData application, long clientId, long senderId)
+		private void Add(ApplicationEditData application, long clientId, long senderId)
 		{
 			var transit = _transits.GetByClient(clientId);
 			transit.Id = 0;
@@ -99,15 +98,13 @@ namespace Alicargo.Services.Application
 			application.ForwarderId = _forwarders.GetByCityOrAny(transit.CityId, null);
 			application.StateId = _stateConfig.DefaultStateId;
 			application.Class = null;
-			application.StateChangeTimestamp = DateTimeProvider.Now;
-			application.CreationTimestamp = DateTimeProvider.Now;
 			application.SenderId = senderId;
 			application.ClientId = clientId;
 
-			_updater.Add(application);
+			_editor.Add(application);
 		}
 
-		private static void Map(ApplicationSenderModel from, ApplicationData to)
+		private static void Map(ApplicationSenderModel from, ApplicationEditData to)
 		{
 			to.Count = from.Count;
 			to.FactoryName = from.FactoryName;

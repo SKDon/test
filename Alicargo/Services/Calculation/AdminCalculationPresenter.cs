@@ -49,7 +49,7 @@ namespace Alicargo.Services.Calculation
 		}
 
 		private IEnumerable<CalculationItem> GetItems(
-			ApplicationData[] applications,
+			ApplicationExtendedData[] applications,
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
@@ -126,7 +126,7 @@ namespace Alicargo.Services.Calculation
 
 		private static CalculationAwbInfo[] GetInfo(
 			IEnumerable<AirWaybillData> awbs,
-			IEnumerable<ApplicationData> items,
+			IEnumerable<ApplicationEditData> items,
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			return awbs.Select(awb =>
@@ -173,7 +173,7 @@ namespace Alicargo.Services.Calculation
 			}).ToArray();
 		}
 
-		private static decimal GetProfit(ApplicationData application, IReadOnlyDictionary<long, decimal> tariffs)
+		private static decimal GetProfit(ApplicationEditData application, IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			if(application.CalculationProfit != null)
 			{

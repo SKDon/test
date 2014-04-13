@@ -6,7 +6,6 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
-using Alicargo.Utilities;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 
@@ -45,11 +44,8 @@ namespace Alicargo.Services.Application
 		{
 			var transitId = _transitService.Add(transit, model.CarrierId);
 
-			var data = new ApplicationData
+			var data = new ApplicationEditData
 			{
-				Id = 0,
-				CreationTimestamp = DateTimeProvider.Now,
-				StateChangeTimestamp = DateTimeProvider.Now,
 				StateId = _config.DefaultStateId,
 				Class = null,
 				TransitId = transitId,
@@ -131,7 +127,7 @@ namespace Alicargo.Services.Application
 			data.ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, data.ForwarderId);
 			data.InsuranceRate = model.InsuranceRate / 100;
 
-			_editor.Update(data);
+			_editor.Update(applicationId, data);
 		}
 
 		public void Delete(long id)
