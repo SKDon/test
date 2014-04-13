@@ -42,7 +42,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				ClientId = x.ClientId,
 				ClientNic = x.Client.Nic,
 				CountryId = x.CountryId,
-				ClassId = x.ClassId,
+				Class = (ClassType?)x.ClassId,
 				CreationTimestamp = x.CreationTimestamp,
 				DateInStock = x.DateInStock,
 				DateOfCargoReceipt = x.DateOfCargoReceipt,
@@ -81,15 +81,13 @@ namespace Alicargo.DataAccess.Repositories.Application
 				AirWaybillDateOfArrival = x.AirWaybill.DateOfArrival,
 				AirWaybillDateOfDeparture = x.AirWaybill.DateOfDeparture,
 				AirWaybillGTD = x.AirWaybill.GTD,
-				ClientEmail = x.Client.Emails,
+				ClientEmails = x.Client.Emails,
 				ClientUserId = x.Client.UserId,
 				TariffPerKg = x.TariffPerKg,
 				SenderRate = x.SenderRate,
 				SenderName = x.Sender.Name,
-				AdjustedFactureCost = x.FactureCostEdited ?? x.FactureCost,
-				AdjustedFactureCostEx = x.FactureCostExEdited ?? x.FactureCostEx,
-				OriginalFactureCost = x.FactureCost,
-				OriginalFactureCostEx = x.FactureCostEx,
+				FactureCost = x.FactureCost,
+				FactureCostEx = x.FactureCostEx,
 				SenderScotchCost = x.Sender.TariffOfTapePerBox * x.Count,
 				ScotchCost = x.ScotchCostEdited ?? (x.Sender.TariffOfTapePerBox * x.Count),
 				TransitCost = x.TransitCostEdited ?? x.TransitCost,
@@ -101,7 +99,12 @@ namespace Alicargo.DataAccess.Repositories.Application
 				InsuranceRate = x.InsuranceRate,
 				CalculationProfit = x.CalculationProfit,
 				CalculationTotalTariffCost = x.CalculationTotalTariffCost,
-				DisplayNumber = x.DisplayNumber
+				DisplayNumber = x.DisplayNumber,
+				FactureCostEdited = x.FactureCostEdited,
+				FactureCostExEdited = x.FactureCostExEdited,
+				PickupCostEdited = x.PickupCostEdited,
+				ScotchCostEdited = x.ScotchCostEdited,
+				TransitCostEdited = x.TransitCostEdited
 			};
 
 			_selector = x => new ApplicationData

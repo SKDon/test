@@ -122,8 +122,6 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			ApplicationExtendedData data)
 		{
 			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
-				.Excluding(x => x.AdjustedFactureCost)
-				.Excluding(x => x.AdjustedFactureCostEx)
 				.Excluding(x => x.TransitCost)
 				.Excluding(x => x.PickupCost)
 				.Excluding(x => x.CarrierId)
@@ -131,8 +129,8 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				.Excluding(x => x.InsuranceRate)
 				.Excluding(x => x.ScotchCost));
 			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
-			data.AdjustedFactureCost.ShouldBeEquivalentTo(model.FactureCostEdited);
-			data.AdjustedFactureCostEx.ShouldBeEquivalentTo(model.FactureCostExEdited);
+			data.GetAdjustedFactureCost().ShouldBeEquivalentTo(model.FactureCostEdited);
+			data.GetAdjustedFactureCostEx().ShouldBeEquivalentTo(model.FactureCostExEdited);
 			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);
 			data.PickupCost.ShouldBeEquivalentTo(model.PickupCostEdited);
 			data.ScotchCost.ShouldBeEquivalentTo(model.ScotchCostEdited);

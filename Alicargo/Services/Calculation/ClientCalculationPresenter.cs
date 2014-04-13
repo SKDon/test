@@ -93,8 +93,8 @@ namespace Alicargo.Services.Calculation
 				Count = a.Count,
 				ClientNic = nics[a.Id],
 				Factory = a.FactoryName,
-				FactureCost = a.AdjustedFactureCost,
-				FactureCostEx = a.AdjustedFactureCostEx,
+				FactureCost = a.GetAdjustedFactureCost(),
+				FactureCostEx = a.GetAdjustedFactureCostEx(),
 				Invoice = a.Invoice,
 				Mark = a.MarkName,
 				ScotchCost = a.ScotchCost,
@@ -108,8 +108,8 @@ namespace Alicargo.Services.Calculation
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
 				Profit = GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
-				ClassName = a.ClassId.HasValue
-					? ((ClassType)a.ClassId.Value).ToLocalString()
+				ClassName = a.Class.HasValue
+					? a.Class.Value.ToLocalString()
 					: ""
 			}).ToArray();
 		}
@@ -135,8 +135,8 @@ namespace Alicargo.Services.Calculation
 				       application.Weight)
 			       + (application.ScotchCost ?? 0)
 			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
-			       + (application.AdjustedFactureCost ?? 0)
-			       + (application.AdjustedFactureCostEx ?? 0)
+			       + (application.GetAdjustedFactureCost() ?? 0)
+			       + (application.GetAdjustedFactureCostEx() ?? 0)
 			       + (application.PickupCost ?? 0)
 			       + (application.TransitCost ?? 0);
 		}

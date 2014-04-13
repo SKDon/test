@@ -21,7 +21,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string TransitReference { get; set; }
 		public long StateId { get; set; }
 		public MethodOfDelivery MethodOfDelivery { get; set; }
-		public int? ClassId { get; set; }
+		public ClassType? Class { get; set; }
 		public int CurrencyId { get; set; }
 		public decimal Value { get; set; }
 		public long ForwarderId { get; set; }
@@ -32,7 +32,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string ClientLegalEntity { get; set; }
 		public string ClientNic { get; set; }
 		public long ClientUserId { get; set; }
-		public string ClientEmail { get; set; }
+		public string ClientEmails { get; set; }
 
 		public long? AirWaybillId { get; set; }
 		public string AirWaybill { get; set; }
@@ -59,18 +59,21 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string FactoryPhone { get; set; }
 		public string FactoryEmail { get; set; }
 		public string FactoryContact { get; set; }
-		public string MarkName { get; set; }
+		public string MarkName { get; set; }		
 
-		public decimal? AdjustedFactureCost { get; set; }
-		public decimal? AdjustedFactureCostEx { get; set; }
-		public decimal? OriginalFactureCost { get; set; }
-		public decimal? OriginalFactureCostEx { get; set; }
+		public decimal? FactureCost { get; set; }
+		public decimal? FactureCostEdited { get; set; }
+		public decimal? FactureCostExEdited { get; set; }
+		public decimal? FactureCostEx { get; set; }
 		public decimal? ScotchCost { get; set; }
+		public decimal? ScotchCostEdited { get; set; }
 		public decimal? SenderScotchCost { get; set; }
 		public decimal? TariffPerKg { get; set; }
 		public decimal? TransitCost { get; set; }
+		public decimal? TransitCostEdited { get; set; }
 		public decimal? ForwarderTransitCost { get; set; }
 		public decimal? PickupCost { get; set; }
+		public decimal? PickupCostEdited { get; set; }
 		public float InsuranceRate { get; set; }
 		public decimal? CalculationTotalTariffCost { get; set; }
 		public decimal? CalculationProfit { get; set; }
@@ -84,5 +87,15 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string SenderPhone { get; set; }
 		public string SenderAddress { get; set; }
 		public string SenderEmail { get; set; }
+
+		public decimal? GetAdjustedFactureCost()
+		{
+			return FactureCostEdited ?? FactureCost;
+		}
+
+		public decimal? GetAdjustedFactureCostEx()
+		{
+			return FactureCostExEdited ?? FactureCostEx;
+		}
 	}
 }

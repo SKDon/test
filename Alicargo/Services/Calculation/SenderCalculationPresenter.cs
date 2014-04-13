@@ -125,8 +125,8 @@ namespace Alicargo.Services.Calculation
 				Count = a.Count,
 				ClientNic = nics[a.Id],
 				Factory = a.FactoryName,
-				FactureCost = a.OriginalFactureCost,
-				FactureCostEx = a.OriginalFactureCostEx,
+				FactureCost = a.FactureCost,
+				FactureCostEx = a.FactureCostEx,
 				Invoice = a.Invoice,
 				Mark = a.MarkName,
 				SenderScotchCost = a.SenderScotchCost,
@@ -157,8 +157,8 @@ namespace Alicargo.Services.Calculation
 					FlightCost = g.FlightCost,
 					TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
 					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
-					TotalFactureCost = rows.Sum(x => x.OriginalFactureCost ?? 0),
-					TotalFactureCostEx = rows.Sum(x => x.OriginalFactureCostEx ?? 0),
+					TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
+					TotalFactureCostEx = rows.Sum(x => x.FactureCostEx ?? 0),
 					TotalPickupCost = rows.Sum(x => x.SenderPickupCost ?? 0),
 					CostPerKgOfSender = null,
 					FlightCostPerKg = null
@@ -179,8 +179,8 @@ namespace Alicargo.Services.Calculation
 		private static decimal GetProfit(ApplicationExtendedData data)
 		{
 			return (data.SenderScotchCost ?? 0)
-			       + (data.OriginalFactureCost ?? 0)
-			       + (data.OriginalFactureCostEx ?? 0)
+			       + (data.FactureCost ?? 0)
+			       + (data.FactureCostEx ?? 0)
 			       + (data.SenderPickupCost ?? 0)
 			       + CalculationHelper.GetTotalSenderRate(data.SenderRate, data.Weight);
 		}
