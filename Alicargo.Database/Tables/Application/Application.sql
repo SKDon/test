@@ -52,8 +52,9 @@
 	[InsuranceRate]			REAL				NOT NULL CONSTRAINT [DF_Application_InsuranceRate] DEFAULT 0.01,
 	[CalculationTotalTariffCost] MONEY			NULL,
 	[CalculationProfit]		MONEY				NULL,
-	
-	CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
+	[DisplayNumber]			INT					NOT NULL,
+
+    CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),
 	CONSTRAINT [FK_dbo.Application_dbo.Sender_SenderId] FOREIGN KEY ([SenderId]) REFERENCES [dbo].[Sender] ([Id]),
 	CONSTRAINT [FK_dbo.Application_dbo.Forwarder_ForwarderId] FOREIGN KEY ([ForwarderId]) REFERENCES [dbo].[Forwarder] ([Id]),

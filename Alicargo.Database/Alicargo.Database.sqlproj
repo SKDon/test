@@ -86,12 +86,11 @@
     <Folder Include="Stored procedures\Transit" />
     <Folder Include="Stored procedures\User\Forwarder" />
     <Folder Include="Stored procedures\User\Carrier" />
+    <Folder Include="Tables\Application" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Transit.sql" />
-    <Build Include="Tables\AirWaybill.sql" />
     <Build Include="Tables\Country.sql" />
-    <Build Include="Tables\Calculation.sql" />
     <Build Include="Types\IdsTable.sql" />
     <PostDeploy Include="Scripts\PostDeploy.sql" />
     <Build Include="Tables\EmailMessage.sql" />
@@ -150,7 +149,6 @@
     <Build Include="Tables\Event\Event.sql" />
     <Build Include="Tables\Event\EventEmailRecipient.sql" />
     <Build Include="Tables\Event\EventEmailTemplate.sql" />
-    <Build Include="Tables\Application.sql" />
     <Build Include="Stored procedures\User\Client\Client_DeleteForce.sql" />
     <Build Include="Stored procedures\User\Client\Client_GetBalance.sql" />
     <Build Include="Stored procedures\User\Client\Client_SetBalance.sql" />
@@ -199,6 +197,11 @@
     <Build Include="Stored procedures\User\Carrier\CarrierCity_Get.sql" />
     <Build Include="Stored procedures\User\Carrier\CarrierCity_Set.sql" />
     <Build Include="Tables\User\CarrierCity.sql" />
+    <Build Include="Tables\Application\AirWaybill.sql" />
+    <Build Include="Tables\Application\Application.sql" />
+    <Build Include="Tables\Application\Calculation.sql" />
+    <Build Include="Tables\Application\DisplayNumberCounter.sql" />
+    <Build Include="Stored procedures\GetNextDisplayNumber.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
