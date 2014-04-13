@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
@@ -51,7 +50,7 @@ namespace Alicargo.Core.Calculation
 			var calculation = new CalculationData
 			{
 				AirWaybillDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(awb)),
-				ApplicationDisplay = ApplicationHelper.GetApplicationDisplay(application.DisplayNumber, application.Count),
+				ApplicationDisplay = application.GetApplicationDisplay(),
 				ClientId = application.ClientId,
 				FactureCost = application.FactureCostEdited ?? application.FactureCost ?? 0,
 				FactureCostEx = application.FactureCostExEdited ?? application.FactureCostEx ?? 0,

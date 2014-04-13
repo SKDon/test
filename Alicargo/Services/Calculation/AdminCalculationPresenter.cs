@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -75,7 +74,7 @@ namespace Alicargo.Services.Calculation
 				Weight = a.Weight,
 				PickupCost = a.PickupCostEdited ?? a.PickupCost,
 				AirWaybillId = a.AirWaybillId.Value,
-				DisplayNumber = ApplicationHelper.GetApplicationDisplay(a.DisplayNumber, a.Count),
+				DisplayNumber = a.GetApplicationDisplay(),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),
 				TotalSenderRate = CalculationHelper.GetTotalSenderRate(a.SenderRate, a.Weight),
 				IsCalculated = calculations.ContainsKey(a.Id),

@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -104,7 +103,7 @@ namespace Alicargo.Services.Calculation
 				Weight = a.Weight,
 				PickupCost = a.GetAdjustedPickupCost(),
 				AirWaybillId = a.AirWaybillId.Value,
-				DisplayNumber = ApplicationHelper.GetApplicationDisplay(a.DisplayNumber, a.Count),
+				DisplayNumber = a.GetApplicationDisplay(),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
 				Profit = GetProfit(a),
 				InsuranceCost = CalculationHelper.GetInsuranceCost(a.Value, a.InsuranceRate),

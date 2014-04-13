@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.State;
@@ -90,7 +89,14 @@ namespace Alicargo.Tests.Services.Application
 		{
 			var items = _mapper.Map(_data, TwoLetterISOLanguageName.English);
 
-			_data.ShouldAllBeEquivalentTo(items, options => options.ExcludingMissingProperties().Excluding(x => x.DisplayNumber));
+			_data.ShouldAllBeEquivalentTo(items, options => options
+				.ExcludingMissingProperties()
+				.Excluding(x => x.DisplayNumber)
+				.Excluding(x => x.FactureCost)
+				.Excluding(x => x.FactureCostEx)
+				.Excluding(x => x.PickupCost)
+				.Excluding(x => x.TransitCost));
+
 			for(var i = 0; i < _data.Length; i++)
 			{
 				var item = items[i];
@@ -104,7 +110,11 @@ namespace Alicargo.Tests.Services.Application
 					StateId = i,
 					StateName = _localazedStates[i]
 				});
-				item.DisplayNumber.ShouldBeEquivalentTo(ApplicationHelper.GetApplicationDisplay(data.DisplayNumber, data.Count));
+				item.DisplayNumber.ShouldBeEquivalentTo(data.GetApplicationDisplay());
+				item.FactureCost.ShouldBeEquivalentTo(data.GetAdjustedFactureCost());
+				item.FactureCostEx.ShouldBeEquivalentTo(data.GetAdjustedFactureCostEx());
+				item.PickupCost.ShouldBeEquivalentTo(data.GetAdjustedPickupCost());
+				item.TransitCost.ShouldBeEquivalentTo(data.GetAdjustedTransitCost());
 				item.TransitCity.ShouldBeEquivalentTo(city);
 				item.CanClose.ShouldBeEquivalentTo(item.StateId == CargoOnTransitStateId);
 				item.CanSetState.ShouldBeEquivalentTo(_stateAvailability.Contains(item.StateId));

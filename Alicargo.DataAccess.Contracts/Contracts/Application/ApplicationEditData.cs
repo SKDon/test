@@ -5,54 +5,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
 	public class ApplicationEditData
 	{
-		public static ApplicationEditData Copy(ApplicationEditData data)
-		{
-			return new ApplicationEditData
-			{
-				Invoice = data.Invoice,
-				Characteristic = data.Characteristic,
-				AddressLoad = data.AddressLoad,
-				WarehouseWorkingTime = data.WarehouseWorkingTime,
-				Weight = data.Weight,
-				Count = data.Count,
-				Volume = data.Volume,
-				TermsOfDelivery = data.TermsOfDelivery,
-				Value = data.Value,
-				CurrencyId = data.CurrencyId,
-				CountryId = data.CountryId,
-				DateInStock = data.DateInStock,
-				DateOfCargoReceipt = data.DateOfCargoReceipt,
-				FactoryName = data.FactoryName,
-				FactoryPhone = data.FactoryPhone,
-				FactoryEmail = data.FactoryEmail,
-				FactoryContact = data.FactoryContact,
-				MarkName = data.MarkName,
-				TransitReference = data.TransitReference,
-				StateId = data.StateId,
-				MethodOfDelivery = data.MethodOfDelivery,
-				ClientId = data.ClientId,
-				TransitId = data.TransitId,
-				AirWaybillId = data.AirWaybillId,
-				SenderId = data.SenderId,
-				ForwarderId = data.ForwarderId,
-				Class = data.Class,
-				FactureCost = data.FactureCost,
-				FactureCostEx = data.FactureCostEx,
-				PickupCost = data.PickupCost,
-				FactureCostEdited = data.FactureCostEdited,
-				FactureCostExEdited = data.FactureCostExEdited,
-				TransitCostEdited = data.TransitCostEdited,
-				ScotchCostEdited = data.ScotchCostEdited,
-				PickupCostEdited = data.PickupCostEdited,
-				TariffPerKg = data.TariffPerKg,
-				TransitCost = data.TransitCost,
-				SenderRate = data.SenderRate,
-				CalculationTotalTariffCost = data.CalculationTotalTariffCost,
-				CalculationProfit = data.CalculationProfit,
-				InsuranceRate = data.InsuranceRate
-			};
-		}
-
 		public string Invoice { get; set; }
 		public string Characteristic { get; set; }
 		public string AddressLoad { get; set; }

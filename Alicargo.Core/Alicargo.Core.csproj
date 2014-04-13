@@ -79,7 +79,6 @@
     <Compile Include="Excel\Client\ExcelClientCalculation.cs" />
     <Compile Include="Event\ApplicationEditorWithEvent.cs" />
     <Compile Include="Excel\ExcelConstants.cs" />
-    <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Event\PartitionConverter.cs" />
     <Compile Include="Helpers\CalculationDataHelper.cs" />
     <Compile Include="Helpers\SumHolder.cs" />

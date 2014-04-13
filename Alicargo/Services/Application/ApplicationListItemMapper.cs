@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -122,8 +123,8 @@ namespace Alicargo.Services.Application
 				PackingFiles = packings.ContainsKey(x.Id) ? packings[x.Id] : null,
 				SwiftFiles = swifts.ContainsKey(x.Id) ? swifts[x.Id] : null,
 				Torg12Files = torg12.ContainsKey(x.Id) ? torg12[x.Id] : null,
-				DisplayNumber = ApplicationHelper.GetApplicationDisplay(x.DisplayNumber, x.Count),
-				DaysInWork = ApplicationHelper.GetDaysInWork(x.CreationTimestamp),
+				DisplayNumber = x.GetApplicationDisplay(),
+				DaysInWork = x.GetDaysInWork(),
 				CreationTimestampLocalString = LocalizationHelper.GetDate(x.CreationTimestamp, CultureProvider.GetCultureInfo()),
 				StateChangeTimestampLocalString =
 					LocalizationHelper.GetDate(x.StateChangeTimestamp, CultureProvider.GetCultureInfo()),
@@ -134,8 +135,17 @@ namespace Alicargo.Services.Application
 				DateInStockLocalString =
 					x.DateInStock.HasValue ? LocalizationHelper.GetDate(x.DateInStock.Value, CultureProvider.GetCultureInfo()) : null,
 				MethodOfDeliveryLocalString = x.MethodOfDelivery.ToLocalString(),
-				ValueString = ApplicationHelper.GetValueString(x.Value, x.CurrencyId)
+				ValueString = GetValueString(x.Value, x.CurrencyId)
 			}).ToArray();
+		}
+
+		private static string GetValueString(decimal value, int currencyId)
+		{
+			var currency = ((CurrencyType)currencyId);
+
+			var culture = CultureProvider.Get();
+
+			return LocalizationHelper.GetValueString(value, currency, CultureInfo.GetCultureInfo(culture));
 		}
 	}
 }

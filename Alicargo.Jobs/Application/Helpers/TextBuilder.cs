@@ -137,10 +137,10 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "Characteristic", application.Characteristic);
 			Add(localizedData, "ClientNic", application.ClientNic);
 			Add(localizedData, "DateOfCargoReceipt", LocalizationHelper.GetDate(application.DateOfCargoReceipt, culture));
-			Add(localizedData, "DaysInWork", ApplicationHelper.GetDaysInWork(application.CreationTimestamp).ToString(culture));
+			Add(localizedData, "DaysInWork", application.GetDaysInWork().ToString(culture));
 			Add(localizedData, "DeliveryBillFiles", string.Join(", ", deliveryBill));
 			Add(localizedData, "DeliveryType", LocalizationHelper.GetDeliveryType(application.TransitDeliveryType, culture));
-			Add(localizedData, "DisplayNumber", ApplicationHelper.GetApplicationDisplay(application.DisplayNumber, application.Count));
+			Add(localizedData, "DisplayNumber", application.GetApplicationDisplay());
 			Add(localizedData, "FactoryContact", application.FactoryContact);
 			Add(localizedData, "FactoryEmail", application.FactoryEmail);
 			Add(localizedData, "FactoryPhone", application.FactoryPhone);
