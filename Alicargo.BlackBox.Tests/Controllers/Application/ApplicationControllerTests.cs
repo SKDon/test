@@ -85,20 +85,23 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			var transitModel = _fixture.Create<TransitEditModel>();
 			transitModel.CityId = TestConstants.TestCityId1;
 			var old = _applicationRepository.List(new[] { TestConstants.DefaultStateId },
-				new[] { new Order { OrderType = OrderType.Id } }, 1).First();
+				new[] { new Order { OrderType = OrderType.Id } },
+				1).First();
 
 			var result = _controller.Edit(old.Id, model, transitModel);
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 			var data = _applicationRepository.Get(old.Id);
 
-			data.ShouldBeEquivalentTo(model, options =>
-				options.ExcludingMissingProperties().Excluding(x => x.InsuranceRate));
+			data.ShouldBeEquivalentTo(model,
+				options =>
+					options.ExcludingMissingProperties().Excluding(x => x.InsuranceRate));
 			data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);
 			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
 		}
 
-		private void Validate(ActionResult result, ClientData clientData, ApplicationAdminModel model,
+		private void Validate(
+			ActionResult result, ClientData clientData, ApplicationAdminModel model,
 			TransitEditModel transitModel)
 		{
 			result.Should().BeOfType<RedirectToRouteResult>();
@@ -106,34 +109,37 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			var data = _applicationRepository.List(new[]
 			{
 				TestConstants.DefaultStateId
-			}, new[]
-			{
-				new Order
+			},
+				new[]
 				{
-					Desc = true,
-					OrderType = OrderType.Id
-				}
-			}, 1, clientId: clientData.ClientId).First();
+					new Order
+					{
+						Desc = true,
+						OrderType = OrderType.Id
+					}
+				},
+				1,
+				clientId: clientData.ClientId).First();
 
 			Validate(clientData, model, transitModel, data);
 		}
 
-		private static void Validate(ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
+		private static void Validate(
+			ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
 			ApplicationExtendedData data)
 		{
-			data.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties()
-				.Excluding(x => x.TransitCost)
-				.Excluding(x => x.PickupCost)
-				.Excluding(x => x.CarrierId)
-				.Excluding(x => x.CarrierName)
-				.Excluding(x => x.InsuranceRate)
-				.Excluding(x => x.ScotchCost));
+			data.ShouldBeEquivalentTo(model,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.PickupCost)
+					.Excluding(x => x.CarrierId)
+					.Excluding(x => x.CarrierName)
+					.Excluding(x => x.InsuranceRate));
 			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
 			data.GetAdjustedFactureCost().ShouldBeEquivalentTo(model.FactureCostEdited);
 			data.GetAdjustedFactureCostEx().ShouldBeEquivalentTo(model.FactureCostExEdited);
-			data.TransitCost.ShouldBeEquivalentTo(model.TransitCostEdited);
-			data.PickupCost.ShouldBeEquivalentTo(model.PickupCostEdited);
-			data.ScotchCost.ShouldBeEquivalentTo(model.ScotchCostEdited);
+			data.GetAdjustedTransitCost().ShouldBeEquivalentTo(model.TransitCostEdited);
+			data.GetAdjustedPickupCost().ShouldBeEquivalentTo(model.PickupCostEdited);
+			data.GetAdjustedScotchCost().ShouldBeEquivalentTo(model.ScotchCostEdited);
 			data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);
 			data.ClientLegalEntity.ShouldBeEquivalentTo(clientData.LegalEntity);
 			data.ClientNic.ShouldBeEquivalentTo(clientData.Nic);

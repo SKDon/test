@@ -97,12 +97,12 @@ namespace Alicargo.Services.Calculation
 				FactureCostEx = a.GetAdjustedFactureCostEx(),
 				Invoice = a.Invoice,
 				Mark = a.MarkName,
-				ScotchCost = a.ScotchCost,
+				ScotchCost = a.GetAdjustedScotchCost(),
 				TariffPerKg = a.TariffPerKg,
-				TransitCost = a.TransitCost,
+				TransitCost = a.GetAdjustedTransitCost(),
 				ValueCurrencyId = a.CurrencyId,
 				Weight = a.Weight,
-				PickupCost = a.PickupCost,
+				PickupCost = a.GetAdjustedPickupCost(),
 				AirWaybillId = a.AirWaybillId.Value,
 				DisplayNumber = ApplicationHelper.GetApplicationDisplay(a.DisplayNumber, a.Count),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
@@ -133,12 +133,12 @@ namespace Alicargo.Services.Calculation
 			       ?? CalculationHelper.GetTotalTariffCost(application.CalculationTotalTariffCost,
 				       application.TariffPerKg,
 				       application.Weight)
-			       + (application.ScotchCost ?? 0)
+			       + (application.GetAdjustedScotchCost() ?? 0)
 			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
 			       + (application.GetAdjustedFactureCost() ?? 0)
 			       + (application.GetAdjustedFactureCostEx() ?? 0)
-			       + (application.PickupCost ?? 0)
-			       + (application.TransitCost ?? 0);
+			       + (application.GetAdjustedPickupCost() ?? 0)
+			       + (application.GetAdjustedTransitCost() ?? 0);
 		}
 	}
 }

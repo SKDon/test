@@ -132,7 +132,7 @@ namespace Alicargo.Services.Calculation
 				SenderScotchCost = a.SenderScotchCost,
 				ValueCurrencyId = a.CurrencyId,
 				Weight = a.Weight,
-				PickupCost = a.SenderPickupCost,
+				PickupCost = a.PickupCost,
 				AirWaybillId = a.AirWaybillId,
 				DisplayNumber = ApplicationHelper.GetApplicationDisplay(a.DisplayNumber, a.Count),
 				Profit = GetProfit(a),
@@ -159,7 +159,7 @@ namespace Alicargo.Services.Calculation
 					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
 					TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
 					TotalFactureCostEx = rows.Sum(x => x.FactureCostEx ?? 0),
-					TotalPickupCost = rows.Sum(x => x.SenderPickupCost ?? 0),
+					TotalPickupCost = rows.Sum(x => x.PickupCost ?? 0),
 					CostPerKgOfSender = null,
 					FlightCostPerKg = null
 				};
@@ -181,7 +181,7 @@ namespace Alicargo.Services.Calculation
 			return (data.SenderScotchCost ?? 0)
 			       + (data.FactureCost ?? 0)
 			       + (data.FactureCostEx ?? 0)
-			       + (data.SenderPickupCost ?? 0)
+			       + (data.PickupCost ?? 0)
 			       + CalculationHelper.GetTotalSenderRate(data.SenderRate, data.Weight);
 		}
 	}

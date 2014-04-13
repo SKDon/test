@@ -64,15 +64,12 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public decimal? FactureCost { get; set; }
 		public decimal? FactureCostEdited { get; set; }
 		public decimal? FactureCostExEdited { get; set; }
-		public decimal? FactureCostEx { get; set; }
-		public decimal? ScotchCost { get; set; }
+		public decimal? FactureCostEx { get; set; }		
 		public decimal? ScotchCostEdited { get; set; }
 		public decimal? SenderScotchCost { get; set; }
 		public decimal? TariffPerKg { get; set; }
-		public decimal? TransitCost { get; set; }
 		public decimal? TransitCostEdited { get; set; }
-		public decimal? ForwarderTransitCost { get; set; }
-		public decimal? PickupCost { get; set; }
+		public decimal? TransitCost { get; set; }
 		public decimal? PickupCostEdited { get; set; }
 		public float InsuranceRate { get; set; }
 		public decimal? CalculationTotalTariffCost { get; set; }
@@ -80,13 +77,28 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public long SenderId { get; set; }
 		public long CountryId { get; set; }
-		public decimal? SenderPickupCost { get; set; }
+		public decimal? PickupCost { get; set; }
 		public decimal? SenderRate { get; set; }
 		public string SenderName { get; set; }
 		public string SenderContact { get; set; }
 		public string SenderPhone { get; set; }
 		public string SenderAddress { get; set; }
 		public string SenderEmail { get; set; }
+
+		public decimal? GetAdjustedPickupCost()
+		{
+			return PickupCostEdited ?? PickupCost;
+		}
+
+		public decimal? GetAdjustedTransitCost()
+		{
+			return TransitCostEdited ?? TransitCost;
+		}
+
+		public decimal? GetAdjustedScotchCost()
+		{
+			return ScotchCostEdited ?? SenderScotchCost;
+		}
 
 		public decimal? GetAdjustedFactureCost()
 		{

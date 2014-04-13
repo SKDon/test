@@ -69,8 +69,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			actual.GetAdjustedFactureCost().ShouldBeEquivalentTo(expected.FactureCostEdited);
 			actual.GetAdjustedFactureCostEx().ShouldBeEquivalentTo(expected.FactureCostExEdited);
-			actual.PickupCost.ShouldBeEquivalentTo(expected.PickupCostEdited);
-			actual.TransitCost.ShouldBeEquivalentTo(expected.TransitCostEdited);
+			actual.GetAdjustedPickupCost().ShouldBeEquivalentTo(expected.PickupCostEdited);
+			actual.GetAdjustedTransitCost().ShouldBeEquivalentTo(expected.TransitCostEdited);
 		}
 
 		[TestMethod]
