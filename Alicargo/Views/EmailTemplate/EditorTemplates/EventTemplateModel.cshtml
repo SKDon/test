@@ -23,6 +23,8 @@
 			{
 				@Html.CheckBoxFor(x => x.Settings.Admin)
 				@Html.LabelFor(x => x.Settings.Admin, Resources.Enums.Admin)
+				@Html.CheckBoxFor(x => x.Settings.Manager)
+				@Html.LabelFor(x => x.Settings.Manager, Resources.Enums.Manager)
 				@Html.CheckBoxFor(x => x.Settings.Client)
 				@Html.LabelFor(x => x.Settings.Client, Resources.Enums.Client)
 			}
@@ -30,6 +32,8 @@
 			{
 				@Html.CheckBoxFor(x => x.Settings.Admin)
 				@Html.LabelFor(x => x.Settings.Admin, Resources.Enums.Admin)
+				@Html.CheckBoxFor(x => x.Settings.Manager)
+				@Html.LabelFor(x => x.Settings.Manager, Resources.Enums.Manager)
 				@Html.CheckBoxFor(x => x.Settings.Sender)
 				@Html.LabelFor(x => x.Settings.Sender, Resources.Enums.Sender)
 				@Html.CheckBoxFor(x => x.Settings.Broker)

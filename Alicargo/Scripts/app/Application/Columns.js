@@ -213,6 +213,7 @@
 			{ field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false },
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: false },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "70px" },
+			{ field: "MethodOfDeliveryLocalString", title: $l.Entities_MethodOfDelivery, groupable: true, width: "75px" },
 			{ field: "State", title: $l.Entities_StateName, groupable: false, editor: stateDropDownEditor, template: "#= State.StateName #" },
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
 			{ field: "CountryName", title: $l.Entities_Country, groupable: false, width: "70px" },
