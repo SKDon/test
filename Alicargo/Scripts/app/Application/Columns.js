@@ -232,7 +232,7 @@
 				return forwarderColumns;
 			} else if ($r.IsSender) {
 				return senderColumns;
-			} else if ($r.IsAdmin) {
+			} else if ($r.IsAdmin || $r.IsManager) {
 				return adminColumns;
 			} else if ($r.IsCarrier) {
 				return carrierColumns;

@@ -20,6 +20,7 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
+using Alicargo.Jobs;
 using Alicargo.Utilities;
 using Ninject;
 using Ninject.Activation;

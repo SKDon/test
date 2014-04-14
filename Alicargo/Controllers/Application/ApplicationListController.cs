@@ -45,7 +45,7 @@ namespace Alicargo.Controllers.Application
 			_forwarders = forwarders;
 		}
 
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual ViewResult Index()
 		{
 			var clients = _clients.GetAll()
@@ -66,7 +66,7 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		[Access(RoleType.Admin, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual JsonResult List(int take, int skip, Dictionary<string, string>[] group)
 		{
 			var orders = OrderHelper.Get(group);

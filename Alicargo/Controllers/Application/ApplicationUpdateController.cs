@@ -30,7 +30,7 @@ namespace Alicargo.Controllers.Application
 		#region Set state
 
 		[HttpPost]
-		[Access(RoleType.Client, RoleType.Admin)]
+		[Access(RoleType.Client, RoleType.Admin, RoleType.Manager)]
 		public virtual HttpStatusCodeResult Close(long id)
 		{
 			_states.SetState(id, _config.CargoReceivedStateId);
@@ -39,7 +39,7 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Broker, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual HttpStatusCodeResult SetState(long id, long stateId)
 		{
 			_states.SetState(id, stateId);
@@ -57,7 +57,7 @@ namespace Alicargo.Controllers.Application
 		#endregion
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual HttpStatusCodeResult SetDateOfCargoReceipt(long id, DateTimeOffset? dateOfCargoReceipt)
 		{
 			_manager.SetDateOfCargoReceipt(id, dateOfCargoReceipt);
@@ -75,7 +75,7 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Forwarder)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Forwarder)]
 		public virtual HttpStatusCodeResult SetTransitReference(long id, string transitReference)
 		{
 			_manager.SetTransitReference(id, transitReference);

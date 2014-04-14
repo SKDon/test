@@ -112,7 +112,7 @@
 				{ field: "GTD", title: $a.Localization.Entities_GTD }
 			];
 
-			if ($a.Roles.IsAdmin) {
+			if ($a.Roles.IsAdmin || $a.Roles.IsManager) {
 				addAdminColumns(columns);
 			} else if ($a.Roles.IsSender) {
 				addSenderColumns(columns);

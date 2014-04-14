@@ -11,7 +11,6 @@ using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
-using Alicargo.Jobs;
 using Alicargo.Jobs.Application;
 using Alicargo.Jobs.Application.Helpers;
 using Alicargo.Jobs.Awb;
@@ -29,7 +28,7 @@ using Ninject.Syntax;
 using ILog = Alicargo.Core.Contracts.Common.ILog;
 using TextBuilder = Alicargo.Jobs.Helpers.TextBuilder;
 
-namespace Alicargo.App_Start.Jobs
+namespace Alicargo.Jobs
 {
 	internal static class CompositionJobsHelper
 	{
@@ -191,7 +190,8 @@ namespace Alicargo.App_Start.Jobs
 				var awbs = new AwbRepository(unitOfWork);
 				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
-				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, brokerRepository, awbs, eventEmailRecipient);
+				var managerRepository = new ManagerRepository(unitOfWork);
+				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, managerRepository,  brokerRepository, awbs, eventEmailRecipient);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					unitOfWork,
@@ -235,7 +235,8 @@ namespace Alicargo.App_Start.Jobs
 				var adminRepository = new AdminRepository(unitOfWork);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var localizedDataHelper = new BalanceLocalizedDataHelper(clientBalanceRepository, serializer, clientRepository);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository, eventEmailRecipient);
+				var managerRepository = new ManagerRepository(unitOfWork);
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, managerRepository,  clientRepository, eventEmailRecipient);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					unitOfWork,
@@ -272,7 +273,8 @@ namespace Alicargo.App_Start.Jobs
 				var adminRepository = new AdminRepository(unitOfWork);
 				var localizedDataHelper = new CommonLocalizedDataHelper(serializer, clientRepository);
 				var recipients = new EventEmailRecipient(executor);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository, recipients);
+				var managerRepository = new ManagerRepository(unitOfWork);
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, managerRepository,  clientRepository, recipients);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					unitOfWork,
@@ -323,7 +325,7 @@ namespace Alicargo.App_Start.Jobs
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var countries = new CountryRepository(mainExecutor);
 			var cities = new CityRepository(mainExecutor);
-			var textBulder = new Alicargo.Jobs.Application.Helpers.TextBuilder(
+			var textBulder = new Application.Helpers.TextBuilder(
 				serializer,
 				awbs,
 				countries,
@@ -337,6 +339,7 @@ namespace Alicargo.App_Start.Jobs
 				awbs,
 				applications,
 				new AdminRepository(unitOfWork),
+				new ManagerRepository(unitOfWork), 
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
 				new CarrierRepository(passwordConverter, mainExecutor),

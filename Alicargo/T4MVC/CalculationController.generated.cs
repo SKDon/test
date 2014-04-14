@@ -86,6 +86,12 @@ namespace Alicargo.Controllers.Calculation
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetCount()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetCount);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult SetFactureCostEdited()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetFactureCostEdited);
@@ -98,9 +104,21 @@ namespace Alicargo.Controllers.Calculation
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetInsuranceCost()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCost);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult SetPickupCostEdited()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetPickupCostEdited);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetProfit()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetProfit);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -122,39 +140,21 @@ namespace Alicargo.Controllers.Calculation
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetTransitCostEdited()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCostEdited);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetCount()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetCount);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetWeight()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetWeight);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetInsuranceCost()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCost);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult SetTotalTariffCost()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTotalTariffCost);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult SetProfit()
+        public virtual System.Web.Mvc.JsonResult SetTransitCostEdited()
         {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetProfit);
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCostEdited);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetWeight()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetWeight);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -179,18 +179,18 @@ namespace Alicargo.Controllers.Calculation
             public readonly string RemoveCalculatation = "RemoveCalculatation";
             public readonly string SetAdditionalCost = "SetAdditionalCost";
             public readonly string SetClass = "SetClass";
+            public readonly string SetCount = "SetCount";
             public readonly string SetFactureCostEdited = "SetFactureCostEdited";
             public readonly string SetFactureCostExEdited = "SetFactureCostExEdited";
+            public readonly string SetInsuranceCost = "SetInsuranceCost";
             public readonly string SetPickupCostEdited = "SetPickupCostEdited";
+            public readonly string SetProfit = "SetProfit";
             public readonly string SetScotchCostEdited = "SetScotchCostEdited";
             public readonly string SetSenderRate = "SetSenderRate";
             public readonly string SetTariffPerKg = "SetTariffPerKg";
-            public readonly string SetTransitCostEdited = "SetTransitCostEdited";
-            public readonly string SetCount = "SetCount";
-            public readonly string SetWeight = "SetWeight";
-            public readonly string SetInsuranceCost = "SetInsuranceCost";
             public readonly string SetTotalTariffCost = "SetTotalTariffCost";
-            public readonly string SetProfit = "SetProfit";
+            public readonly string SetTransitCostEdited = "SetTransitCostEdited";
+            public readonly string SetWeight = "SetWeight";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -203,18 +203,18 @@ namespace Alicargo.Controllers.Calculation
             public const string RemoveCalculatation = "RemoveCalculatation";
             public const string SetAdditionalCost = "SetAdditionalCost";
             public const string SetClass = "SetClass";
+            public const string SetCount = "SetCount";
             public const string SetFactureCostEdited = "SetFactureCostEdited";
             public const string SetFactureCostExEdited = "SetFactureCostExEdited";
+            public const string SetInsuranceCost = "SetInsuranceCost";
             public const string SetPickupCostEdited = "SetPickupCostEdited";
+            public const string SetProfit = "SetProfit";
             public const string SetScotchCostEdited = "SetScotchCostEdited";
             public const string SetSenderRate = "SetSenderRate";
             public const string SetTariffPerKg = "SetTariffPerKg";
-            public const string SetTransitCostEdited = "SetTransitCostEdited";
-            public const string SetCount = "SetCount";
-            public const string SetWeight = "SetWeight";
-            public const string SetInsuranceCost = "SetInsuranceCost";
             public const string SetTotalTariffCost = "SetTotalTariffCost";
-            public const string SetProfit = "SetProfit";
+            public const string SetTransitCostEdited = "SetTransitCostEdited";
+            public const string SetWeight = "SetWeight";
         }
 
 
@@ -264,6 +264,16 @@ namespace Alicargo.Controllers.Calculation
             public readonly string awbId = "awbId";
             public readonly string classId = "classId";
         }
+        static readonly ActionParamsClass_SetCount s_params_SetCount = new ActionParamsClass_SetCount();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetCount SetCountParams { get { return s_params_SetCount; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetCount
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string value = "value";
+        }
         static readonly ActionParamsClass_SetFactureCostEdited s_params_SetFactureCostEdited = new ActionParamsClass_SetFactureCostEdited();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_SetFactureCostEdited SetFactureCostEditedParams { get { return s_params_SetFactureCostEdited; } }
@@ -284,6 +294,16 @@ namespace Alicargo.Controllers.Calculation
             public readonly string awbId = "awbId";
             public readonly string factureCostEx = "factureCostEx";
         }
+        static readonly ActionParamsClass_SetInsuranceCost s_params_SetInsuranceCost = new ActionParamsClass_SetInsuranceCost();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetInsuranceCost SetInsuranceCostParams { get { return s_params_SetInsuranceCost; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetInsuranceCost
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string value = "value";
+        }
         static readonly ActionParamsClass_SetPickupCostEdited s_params_SetPickupCostEdited = new ActionParamsClass_SetPickupCostEdited();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_SetPickupCostEdited SetPickupCostEditedParams { get { return s_params_SetPickupCostEdited; } }
@@ -293,6 +313,16 @@ namespace Alicargo.Controllers.Calculation
             public readonly string id = "id";
             public readonly string awbId = "awbId";
             public readonly string pickupCost = "pickupCost";
+        }
+        static readonly ActionParamsClass_SetProfit s_params_SetProfit = new ActionParamsClass_SetProfit();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetProfit SetProfitParams { get { return s_params_SetProfit; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetProfit
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string value = "value";
         }
         static readonly ActionParamsClass_SetScotchCostEdited s_params_SetScotchCostEdited = new ActionParamsClass_SetScotchCostEdited();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -324,46 +354,6 @@ namespace Alicargo.Controllers.Calculation
             public readonly string awbId = "awbId";
             public readonly string tariffPerKg = "tariffPerKg";
         }
-        static readonly ActionParamsClass_SetTransitCostEdited s_params_SetTransitCostEdited = new ActionParamsClass_SetTransitCostEdited();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetTransitCostEdited SetTransitCostEditedParams { get { return s_params_SetTransitCostEdited; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetTransitCostEdited
-        {
-            public readonly string id = "id";
-            public readonly string awbId = "awbId";
-            public readonly string transitCost = "transitCost";
-        }
-        static readonly ActionParamsClass_SetCount s_params_SetCount = new ActionParamsClass_SetCount();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetCount SetCountParams { get { return s_params_SetCount; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetCount
-        {
-            public readonly string id = "id";
-            public readonly string awbId = "awbId";
-            public readonly string value = "value";
-        }
-        static readonly ActionParamsClass_SetWeight s_params_SetWeight = new ActionParamsClass_SetWeight();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetWeight SetWeightParams { get { return s_params_SetWeight; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetWeight
-        {
-            public readonly string id = "id";
-            public readonly string awbId = "awbId";
-            public readonly string value = "value";
-        }
-        static readonly ActionParamsClass_SetInsuranceCost s_params_SetInsuranceCost = new ActionParamsClass_SetInsuranceCost();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetInsuranceCost SetInsuranceCostParams { get { return s_params_SetInsuranceCost; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetInsuranceCost
-        {
-            public readonly string id = "id";
-            public readonly string awbId = "awbId";
-            public readonly string value = "value";
-        }
         static readonly ActionParamsClass_SetTotalTariffCost s_params_SetTotalTariffCost = new ActionParamsClass_SetTotalTariffCost();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_SetTotalTariffCost SetTotalTariffCostParams { get { return s_params_SetTotalTariffCost; } }
@@ -374,11 +364,21 @@ namespace Alicargo.Controllers.Calculation
             public readonly string awbId = "awbId";
             public readonly string value = "value";
         }
-        static readonly ActionParamsClass_SetProfit s_params_SetProfit = new ActionParamsClass_SetProfit();
+        static readonly ActionParamsClass_SetTransitCostEdited s_params_SetTransitCostEdited = new ActionParamsClass_SetTransitCostEdited();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SetProfit SetProfitParams { get { return s_params_SetProfit; } }
+        public ActionParamsClass_SetTransitCostEdited SetTransitCostEditedParams { get { return s_params_SetTransitCostEdited; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SetProfit
+        public class ActionParamsClass_SetTransitCostEdited
+        {
+            public readonly string id = "id";
+            public readonly string awbId = "awbId";
+            public readonly string transitCost = "transitCost";
+        }
+        static readonly ActionParamsClass_SetWeight s_params_SetWeight = new ActionParamsClass_SetWeight();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetWeight SetWeightParams { get { return s_params_SetWeight; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetWeight
         {
             public readonly string id = "id";
             public readonly string awbId = "awbId";
@@ -496,6 +496,20 @@ namespace Alicargo.Controllers.Calculation
         }
 
         [NonAction]
+        partial void SetCountOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, int? value);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetCount(long id, long awbId, int? value)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetCount);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
+            SetCountOverride(callInfo, id, awbId, value);
+            return callInfo;
+        }
+
+        [NonAction]
         partial void SetFactureCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? factureCost);
 
         [NonAction]
@@ -524,6 +538,20 @@ namespace Alicargo.Controllers.Calculation
         }
 
         [NonAction]
+        partial void SetInsuranceCostOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, float? value);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetInsuranceCost(long id, long awbId, float? value)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCost);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
+            SetInsuranceCostOverride(callInfo, id, awbId, value);
+            return callInfo;
+        }
+
+        [NonAction]
         partial void SetPickupCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? pickupCost);
 
         [NonAction]
@@ -534,6 +562,20 @@ namespace Alicargo.Controllers.Calculation
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pickupCost", pickupCost);
             SetPickupCostEditedOverride(callInfo, id, awbId, pickupCost);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetProfitOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? value);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetProfit(long id, long awbId, decimal? value)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetProfit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
+            SetProfitOverride(callInfo, id, awbId, value);
             return callInfo;
         }
 
@@ -580,62 +622,6 @@ namespace Alicargo.Controllers.Calculation
         }
 
         [NonAction]
-        partial void SetTransitCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? transitCost);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCostEdited);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitCost", transitCost);
-            SetTransitCostEditedOverride(callInfo, id, awbId, transitCost);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SetCountOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, int? value);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult SetCount(long id, long awbId, int? value)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetCount);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
-            SetCountOverride(callInfo, id, awbId, value);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SetWeightOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, float? value);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult SetWeight(long id, long awbId, float? value)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetWeight);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
-            SetWeightOverride(callInfo, id, awbId, value);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SetInsuranceCostOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, float? value);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult SetInsuranceCost(long id, long awbId, float? value)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetInsuranceCost);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
-            SetInsuranceCostOverride(callInfo, id, awbId, value);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void SetTotalTariffCostOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? value);
 
         [NonAction]
@@ -650,16 +636,30 @@ namespace Alicargo.Controllers.Calculation
         }
 
         [NonAction]
-        partial void SetProfitOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? value);
+        partial void SetTransitCostEditedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, decimal? transitCost);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult SetProfit(long id, long awbId, decimal? value)
+        public override System.Web.Mvc.JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetProfit);
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetTransitCostEdited);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitCost", transitCost);
+            SetTransitCostEditedOverride(callInfo, id, awbId, transitCost);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetWeightOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, long awbId, float? value);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetWeight(long id, long awbId, float? value)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetWeight);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "awbId", awbId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
-            SetProfitOverride(callInfo, id, awbId, value);
+            SetWeightOverride(callInfo, id, awbId, value);
             return callInfo;
         }
 

@@ -50,7 +50,7 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Decrease(long clientId)
 		{
 			BindBag(clientId);
@@ -62,7 +62,7 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Decrease(long clientId, PaymentModel model)
 		{
 			Debug.Assert(model.Money != null);
@@ -92,7 +92,7 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Increase(long clientId)
 		{
 			BindBag(clientId);
@@ -104,7 +104,7 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Increase(long clientId, PaymentModel model)
 		{
 			Debug.Assert(model.Money != null);

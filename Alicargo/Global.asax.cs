@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Alicargo.App_Start;
 using Alicargo.App_Start.Jobs;
 using Alicargo.App_Start.Mvc;
+using Alicargo.Jobs;
 using Alicargo.Jobs.Core;
 using Alicargo.Services;
 using log4net;

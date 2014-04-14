@@ -14,17 +14,20 @@ namespace Alicargo.Jobs.Awb
 	public sealed class AwbEventRecipientsFacade : IRecipientsFacade
 	{
 		private readonly IAdminRepository _admins;
+		private readonly IManagerRepository _managers;
 		private readonly IAwbRepository _awbs;
 		private readonly IBrokerRepository _brokers;
 		private readonly IEventEmailRecipient _recipients;
 
 		public AwbEventRecipientsFacade(
 			IAdminRepository admins,
+			IManagerRepository managers,
 			IBrokerRepository brokers,
 			IAwbRepository awbs,
 			IEventEmailRecipient recipients)
 		{
 			_admins = admins;
+			_managers = managers;
 			_brokers = brokers;
 			_awbs = awbs;
 			_recipients = recipients;
@@ -46,13 +49,25 @@ namespace Alicargo.Jobs.Awb
 				switch(role)
 				{
 					case RoleType.Admin:
-						var recipients = _admins.GetAll()
-							.Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
-						foreach(var recipient in recipients)
 						{
-							yield return recipient;
+							var recipients = _admins.GetAll()
+								.Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
+							foreach(var recipient in recipients)
+							{
+								yield return recipient;
+							}
 						}
+						break;
 
+					case RoleType.Manager:
+						{
+							var recipients = _managers.GetAll()
+								.Select(user => new RecipientData(user.Email, user.Language, RoleType.Manager));
+							foreach(var recipient in recipients)
+							{
+								yield return recipient;
+							}
+						}
 						break;
 
 					case RoleType.Broker:
@@ -61,7 +76,7 @@ namespace Alicargo.Jobs.Awb
 						{
 							var broker = _brokers.Get(brokerId.Value);
 
-							yield return new RecipientData(broker.Email, broker.Language, role);	
+							yield return new RecipientData(broker.Email, broker.Language, role);
 						}
 
 						break;

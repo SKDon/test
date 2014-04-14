@@ -6,7 +6,7 @@
 	var $r = $a.Roles;
 	var $s = $a.States;
 
-	if ($r.IsSender || $r.IsAdmin) {
+	if ($r.IsSender || $r.IsAdmin || $r.IsManager) {
 		var select = $("#selected-client-id");
 		var updateLink = function() {
 			var link = $("#apply-link");
@@ -82,7 +82,7 @@
 				columns: $a.Application.GetColumns()
 			};
 
-			if ($r.IsAdmin) {
+			if ($r.IsAdmin || $r.IsManager) {
 				$.extend(settings, { groupable: true });
 			}
 
@@ -177,13 +177,13 @@
 								transitCost: e.values.ForwarderTransitCost
 							});
 						}
-						if (($r.IsForwarder || $r.IsAdmin) && e.values.TransitReference !== undefined) {
+						if (($r.IsForwarder || $r.IsAdmin || $r.IsManager) && e.values.TransitReference !== undefined) {
 							$.post($u.ApplicationUpdate_SetTransitReference, {
 								id: e.model.Id,
 								TransitReference: e.values.TransitReference
 							}).done($apl.UpdateGrid).fail($a.ShowError);
 						}
-						if ($r.IsAdmin && e.values.DateOfCargoReceiptLocalString !== undefined) {
+						if (($r.IsAdmin || $r.IsManager) && e.values.DateOfCargoReceiptLocalString !== undefined) {
 							post($u.ApplicationUpdate_SetDateOfCargoReceipt, {
 								id: e.model.Id,
 								dateOfCargoReceipt: kendo.toString(e.values.DateOfCargoReceiptLocalString, "d")

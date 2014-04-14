@@ -117,6 +117,18 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetCount(long id, long awbId, int? value)
+		{
+			_applications.SetCount(id, value);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetFactureCostEdited(long id, long awbId, decimal? factureCost)
 		{
 			_applications.SetFactureCostEdited(id, factureCost);
@@ -141,9 +153,33 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetInsuranceCost(long id, long awbId, float? value)
+		{
+			_applications.SetInsuranceCost(id, value);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
 		{
 			_applications.SetPickupCostEdited(id, pickupCost);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetProfit(long id, long awbId, decimal? value)
+		{
+			_applications.SetProfit(id, value);
 
 			var data = _presenter.Row(awbId);
 
@@ -189,54 +225,6 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
-		{
-			_applications.SetTransitCostEdited(id, transitCost);
-
-			var data = _presenter.Row(awbId);
-
-			return Json(data);
-		}
-
-		[HttpPost]
-		[Access(RoleType.Admin)]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetCount(long id, long awbId, int? value)
-		{
-			_applications.SetCount(id, value);
-
-			var data = _presenter.Row(awbId);
-
-			return Json(data);
-		}
-
-		[HttpPost]
-		[Access(RoleType.Admin)]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetWeight(long id, long awbId, float? value)
-		{
-			_applications.SetWeight(id, value);
-
-			var data = _presenter.Row(awbId);
-
-			return Json(data);
-		}
-
-		[HttpPost]
-		[Access(RoleType.Admin)]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetInsuranceCost(long id, long awbId, float? value)
-		{
-			_applications.SetInsuranceCost(id, value);
-
-			var data = _presenter.Row(awbId);
-
-			return Json(data);
-		}
-
-		[HttpPost]
-		[Access(RoleType.Admin)]
-		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTotalTariffCost(long id, long awbId, decimal? value)
 		{
 			_applications.SetTotalTariffCost(id, value);
@@ -249,9 +237,21 @@ namespace Alicargo.Controllers.Calculation
 		[HttpPost]
 		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		public virtual JsonResult SetProfit(long id, long awbId, decimal? value)
+		public virtual JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
 		{
-			_applications.SetProfit(id, value);
+			_applications.SetTransitCostEdited(id, transitCost);
+
+			var data = _presenter.Row(awbId);
+
+			return Json(data);
+		}
+
+		[HttpPost]
+		[Access(RoleType.Admin)]
+		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		public virtual JsonResult SetWeight(long id, long awbId, float? value)
+		{
+			_applications.SetWeight(id, value);
 
 			var data = _presenter.Row(awbId);
 

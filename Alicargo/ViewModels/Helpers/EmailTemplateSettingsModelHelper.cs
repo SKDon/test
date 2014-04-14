@@ -17,6 +17,7 @@ namespace Alicargo.ViewModels.Helpers
 			return new EmailTemplateSettingsModel
 			{
 				Admin = roles.Any(x => x == RoleType.Admin),
+				Manager = roles.Any(x => x == RoleType.Manager),
 				Sender = roles.Any(x => x == RoleType.Sender),
 				Broker = roles.Any(x => x == RoleType.Broker),
 				Forwarder = roles.Any(x => x == RoleType.Forwarder),
@@ -32,6 +33,11 @@ namespace Alicargo.ViewModels.Helpers
 			if (settings.Admin)
 			{
 				list.Add(RoleType.Admin);
+			}
+
+			if(settings.Manager)
+			{
+				list.Add(RoleType.Manager);
 			}
 
 			if (settings.Broker)

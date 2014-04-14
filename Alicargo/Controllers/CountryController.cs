@@ -20,13 +20,13 @@ namespace Alicargo.Controllers
 			_identity = identity;
 		}
 
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Index()
 		{
 			return View();
 		}
 
-		[HttpPost, Access(RoleType.Admin), OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[HttpPost, Access(RoleType.Admin, RoleType.Manager), OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
 		{
 			var list = _countries.List(take, skip, _identity.Language);
@@ -34,7 +34,7 @@ namespace Alicargo.Controllers
 			return Json(list);
 		}
 
-		[HttpGet, Access(RoleType.Admin)]
+		[HttpGet, Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Edit(long id)
 		{
 			var model = _countries.Get(id);
@@ -42,13 +42,13 @@ namespace Alicargo.Controllers
 			return View(model);
 		}
 
-		[HttpGet, Access(RoleType.Admin)]
+		[HttpGet, Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Create()
 		{
 			return View();
 		}
 
-		[HttpPost, Access(RoleType.Admin)]
+		[HttpPost, Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Edit(long id, CountryEditModel model)
 		{
 			if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.Country.Edit(id));
 		}
 
-		[HttpPost, Access(RoleType.Admin)]
+		[HttpPost, Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Create(CountryEditModel model)
 		{
 			if (!ModelState.IsValid)

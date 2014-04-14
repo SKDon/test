@@ -31,14 +31,14 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Create()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Create(StateCreateModel model)
 		{
 			if(!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Delete(long id)
 		{
 			try
@@ -77,7 +77,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Edit(long id, string lang)
 		{
 			BindLanguageList();
@@ -88,7 +88,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Edit(StateEditModel model)
 		{
 			if(!ModelState.IsValid)
@@ -108,14 +108,14 @@ namespace Alicargo.Controllers
 			return RedirectToAction(MVC.State.Edit(model.Id, model.Language));
 		}
 
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Index()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List()
 		{

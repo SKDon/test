@@ -12,6 +12,7 @@ namespace Alicargo.Services.Users
 	internal sealed class UserService : IUserService
 	{
 		private readonly IAdminRepository _admins;
+		private readonly IManagerRepository _managers;
 		private readonly ICarrierRepository _carriers;
 		private readonly ISenderRepository _senders;
 		private readonly IBrokerRepository _brokers;
@@ -20,6 +21,7 @@ namespace Alicargo.Services.Users
 
 		public UserService(IUserRepository users,
 			IAdminRepository admins,
+			IManagerRepository managers,
 			ICarrierRepository carriers,
 			ISenderRepository senders,
 			IForwarderRepository forwarders,
@@ -27,6 +29,7 @@ namespace Alicargo.Services.Users
 		{
 			_users = users;
 			_admins = admins;
+			_managers = managers;
 			_carriers = carriers;
 			_senders = senders;
 			_forwarders = forwarders;
@@ -35,8 +38,17 @@ namespace Alicargo.Services.Users
 
 		public UserListItem[] List(RoleType role)
 		{
-			switch (role)
+			switch(role)
 			{
+				case RoleType.Manager:
+					return _managers.GetAll().Select(
+						x => new UserListItem
+						{
+							Name = x.Name,
+							EntityId = x.EntityId,
+							UserId = x.UserId
+						}).ToArray();
+
 				case RoleType.Admin:
 					return _admins.GetAll().Select(
 						x => new UserListItem
@@ -73,7 +85,7 @@ namespace Alicargo.Services.Users
 							UserId = x.UserId
 						}).ToArray();
 
-				case  RoleType.Sender:
+				case RoleType.Sender:
 					return _senders.GetAll().Select(
 						x => new UserListItem
 						{
@@ -107,10 +119,14 @@ namespace Alicargo.Services.Users
 		public void Update(UserModel model)
 		{
 			long userId;
-			switch (model.RoleType)
+			switch(model.RoleType)
 			{
 				case RoleType.Admin:
 					userId = _admins.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
+					break;
+
+				case RoleType.Manager:
+					userId = _managers.Update(model.Id, model.Name, model.Authentication.Login, model.Email);
 					break;
 
 				case RoleType.Broker:
@@ -121,19 +137,23 @@ namespace Alicargo.Services.Users
 					throw new ArgumentOutOfRangeException("model", @"Unknown role " + model.RoleType);
 			}
 
-			if (!string.IsNullOrEmpty(model.Authentication.NewPassword))
+			if(!string.IsNullOrEmpty(model.Authentication.NewPassword))
 			{
-				_users.SetPassword(userId, model.Authentication.NewPassword);	
+				_users.SetPassword(userId, model.Authentication.NewPassword);
 			}
 		}
 
 		public void Add(UserModel model)
 		{
 			long userId;
-			switch (model.RoleType)
+			switch(model.RoleType)
 			{
 				case RoleType.Admin:
 					userId = _admins.Add(model.Name, model.Authentication.Login, model.Email, TwoLetterISOLanguageName.English);
+					break;
+
+				case RoleType.Manager:
+					userId = _managers.Add(model.Name, model.Authentication.Login, model.Email, TwoLetterISOLanguageName.English);
 					break;
 
 				case RoleType.Broker:
@@ -149,10 +169,13 @@ namespace Alicargo.Services.Users
 
 		private UserData GetByRole(RoleType role, long id)
 		{
-			switch (role)
+			switch(role)
 			{
 				case RoleType.Admin:
 					return _admins.GetAll().First(x => x.EntityId == id);
+
+				case RoleType.Manager:
+					return _managers.GetAll().First(x => x.EntityId == id);
 
 				case RoleType.Broker:
 					var broker = _brokers.Get(id);

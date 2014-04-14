@@ -199,6 +199,7 @@
     <Build Include="Stored procedures\User\Carrier\CarrierCity_Get.sql" />
     <Build Include="Stored procedures\User\Carrier\CarrierCity_Set.sql" />
     <Build Include="Tables\User\CarrierCity.sql" />
+    <Build Include="Tables\User\Manager.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

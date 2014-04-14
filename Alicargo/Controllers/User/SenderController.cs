@@ -27,7 +27,7 @@ namespace Alicargo.Controllers.User
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Create()
 		{
 			BindBag();
@@ -36,7 +36,7 @@ namespace Alicargo.Controllers.User
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Create(SenderModel model)
 		{
 			if(string.IsNullOrWhiteSpace(model.Authentication.NewPassword))
@@ -62,7 +62,7 @@ namespace Alicargo.Controllers.User
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Edit(long id)
 		{
 			BindBag();
@@ -73,7 +73,7 @@ namespace Alicargo.Controllers.User
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Edit(long id, SenderModel model)
 		{
 			try

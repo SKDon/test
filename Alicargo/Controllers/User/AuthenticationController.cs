@@ -51,13 +51,10 @@ namespace Alicargo.Controllers.User
 				return View(user);
 			}
 
-			if (_identity.IsInRole(RoleType.Admin))
-				return RedirectToAction(MVC.Home.Index());
-
 			return RedirectToAction(MVC.Home.Index());
 		}
 
-		[Access(RoleType.Admin), HttpGet]
+		[Access(RoleType.Admin, RoleType.Manager), HttpGet]
 		public virtual ActionResult LoginAsUser(int id)
 		{
 			_authentication.AuthenticateForce(id, false);
@@ -65,7 +62,7 @@ namespace Alicargo.Controllers.User
 			return RedirectToAction(MVC.Home.Index());
 		}
 
-		[Access(RoleType.Admin), HttpGet]
+		[Access(RoleType.Admin, RoleType.Manager), HttpGet]
 		public virtual ActionResult LoginAsClient(int id)
 		{
 			var userId = _clients.GetUserId(id);

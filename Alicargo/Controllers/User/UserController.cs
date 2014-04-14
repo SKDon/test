@@ -20,13 +20,13 @@ namespace Alicargo.Controllers.User
 
 		#region List
 
-		[Access(RoleType.Admin), HttpGet]
+		[Access(RoleType.Admin, RoleType.Manager), HttpGet]
 		public virtual ViewResult Index(RoleType roleType)
 		{
 			return View(roleType);
 		}
 
-		[Access(RoleType.Admin), HttpPost]
+		[Access(RoleType.Admin, RoleType.Manager), HttpPost]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(RoleType roleType)
 		{
@@ -39,10 +39,10 @@ namespace Alicargo.Controllers.User
 
 		#region Edit/Create
 
-		[Access(RoleType.Admin), HttpGet]
+		[Access(RoleType.Admin, RoleType.Manager), HttpGet]
 		public virtual ViewResult Edit(RoleType roleType, long id)
 		{
-			if(roleType != RoleType.Admin && roleType != RoleType.Broker)
+			if(roleType != RoleType.Admin && roleType != RoleType.Broker && roleType != RoleType.Manager)
 			{
 				throw new NotSupportedException();
 			}
@@ -52,10 +52,10 @@ namespace Alicargo.Controllers.User
 			return View(model);
 		}
 
-		[Access(RoleType.Admin), HttpGet]
+		[Access(RoleType.Admin, RoleType.Manager), HttpGet]
 		public virtual ViewResult Create(RoleType roleType)
 		{
-			if(roleType != RoleType.Admin && roleType != RoleType.Broker)
+			if(roleType != RoleType.Admin && roleType != RoleType.Broker && roleType != RoleType.Manager)
 			{
 				throw new NotSupportedException();
 			}
@@ -63,7 +63,7 @@ namespace Alicargo.Controllers.User
 			return View();
 		}
 
-		[Access(RoleType.Admin), HttpPost]
+		[Access(RoleType.Admin, RoleType.Manager), HttpPost]
 		public virtual ActionResult Edit(UserModel model)
 		{
 			if (!ModelState.IsValid) return View();
@@ -82,7 +82,7 @@ namespace Alicargo.Controllers.User
 			}
 		}
 
-		[Access(RoleType.Admin), HttpPost]
+		[Access(RoleType.Admin, RoleType.Manager), HttpPost]
 		public virtual ActionResult Create(UserModel model)
 		{
 			if (string.IsNullOrWhiteSpace(model.Authentication.NewPassword))

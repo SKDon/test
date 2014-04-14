@@ -16,23 +16,27 @@
 				@Pages.Admins
 				break;
 
+			case RoleType.Manager:
+				@Pages.Managers
+				break;
+
 			case RoleType.Sender:
-			@Pages.Senders
+				@Pages.Senders
 				break;
 			case RoleType.Broker:
-			@Pages.Brokers
+				@Pages.Brokers
 				break;
 
 			case RoleType.Forwarder:
-			@Pages.Forwarders
+				@Pages.Forwarders
 				break;
 
 			case RoleType.Carrier:
-			@Pages.Carriers
+				@Pages.Carriers
 				break;
 
 			case RoleType.Client:
-			@Pages.Clients
+				@Pages.Clients
 				break;
 
 			default:
@@ -46,15 +50,15 @@
 			break;
 
 		case RoleType.Forwarder:
-		@Html.ActionLink(Pages.Add, MVC.Forwarder.Create())
+			@Html.ActionLink(Pages.Add, MVC.Forwarder.Create())
 			break;
 
 		case RoleType.Carrier:
-		@Html.ActionLink(Pages.Add, MVC.Carrier.Create())
+			@Html.ActionLink(Pages.Add, MVC.Carrier.Create())
 			break;
 
 		default:
-		@Html.ActionLink(Pages.Add, MVC.User.Create(Model))
+			@Html.ActionLink(Pages.Add, MVC.User.Create(Model))
 			break;
 	}
 </p>

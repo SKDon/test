@@ -144,6 +144,9 @@
   <data name="Lux" xml:space="preserve">
     <value>Lux</value>
   </data>
+  <data name="Manager" xml:space="preserve">
+    <value>Manager</value>
+  </data>
   <data name="Self" xml:space="preserve">
     <value>Pickup</value>
   </data>

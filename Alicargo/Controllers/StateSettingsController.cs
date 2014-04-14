@@ -27,7 +27,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Index(long id)
 		{
 			var state = _states.Get(_identity.Language, id).First().Value;
@@ -46,7 +46,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Index(long id, StateSettingsModel model)
 		{
 			if (!ModelState.IsValid)
