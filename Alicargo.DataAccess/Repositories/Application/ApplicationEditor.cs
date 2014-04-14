@@ -153,6 +153,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		private static void Map(ApplicationEditData from, DbContext.Application to)
 		{
+			to.StateId = from.StateId;
 			to.Characteristic = from.Characteristic;
 			to.AddressLoad = from.AddressLoad;
 			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
