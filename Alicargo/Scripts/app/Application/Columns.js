@@ -125,6 +125,7 @@
 			{ field: "TransitCity", title: $l.Entities_City, groupable: true, width: "100px" },
 			{ field: "CarrierName", title: $l.Entities_Carrier, groupable: true, width: "100px" },
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: true, width: "75px" },
+			{ field: "MethodOfDeliveryLocalString", title: $l.Entities_MethodOfDelivery, groupable: true, width: "75px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{
 				field: "AirWaybill",
