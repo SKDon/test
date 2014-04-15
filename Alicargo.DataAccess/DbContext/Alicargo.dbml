@@ -9,6 +9,15 @@
 			<Association Name="User_Admin" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
 		</Type>
 	</Table>
+	<Table Name="dbo.Manager" Member="Managers" AccessModifier="Internal">
+		<Type Name="Manager">
+			<Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+			<Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+			<Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+			<Column Name="Email" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />
+			<Association Name="User_Manager" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+		</Type>
+	</Table>
 	<Table Name="dbo.StateVisibility" Member="StateVisibility" AccessModifier="Internal">
 		<Type Name="StateVisibility">
 			<Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -177,6 +186,7 @@
 			<Column Name="PasswordSalt" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
 			<Column Name="TwoLetterISOLanguageName" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
 			<Association Name="User_Admin" Member="Admins" ThisKey="Id" OtherKey="UserId" Type="Admin" />
+      <Association Name="User_Manager" Member="Managers" ThisKey="Id" OtherKey="UserId" Type="Manager" />
 			<Association Name="User_Broker" Member="Brokers" ThisKey="Id" OtherKey="UserId" Type="Broker" />
 			<Association Name="User_Client" Member="Clients" ThisKey="Id" OtherKey="UserId" Type="Client" />
 			<Association Name="User_Forwarder" Member="Forwarders" ThisKey="Id" OtherKey="UserId" Type="Forwarder" />

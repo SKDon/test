@@ -3,14 +3,14 @@
 @using Alicargo.DataAccess.Contracts.Enums
 @using Resources
 
-@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Sender))
+@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager) || IdentityService.IsInRole(RoleType.Sender))
 {
 	<p class="select-client-holder">
 		@Entities.Nic:
 		@Html.DropDownList("selected-client-id", Model.Clients.Select(x => new SelectListItem
 		{
 			Text = x.Value,
-			Value = IdentityService.IsInRole(RoleType.Admin)
+			Value = IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager)
 				? Url.Action(MVC.Application.Create(x.Key))
 				: Url.Action(MVC.SenderApplication.Create(x.Key))
 		}))

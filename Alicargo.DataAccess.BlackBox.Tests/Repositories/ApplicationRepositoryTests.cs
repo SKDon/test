@@ -108,7 +108,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var data = _applications.Get(id);
 
-			data.ShouldBeEquivalentTo(newData);
+			data.ShouldBeEquivalentTo(newData, options => options.ExcludingMissingProperties());
 		}
 
 		[TestMethod]

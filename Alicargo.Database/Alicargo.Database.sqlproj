@@ -197,6 +197,7 @@
     <Build Include="Stored procedures\User\Carrier\CarrierCity_Get.sql" />
     <Build Include="Stored procedures\User\Carrier\CarrierCity_Set.sql" />
     <Build Include="Tables\User\CarrierCity.sql" />
+    <Build Include="Tables\User\Manager.sql" />
     <Build Include="Tables\Application\AirWaybill.sql" />
     <Build Include="Tables\Application\Application.sql" />
     <Build Include="Tables\Application\Calculation.sql" />

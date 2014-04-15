@@ -45,7 +45,7 @@ namespace Alicargo.Controllers.Awb
 
 		#region Edit
 
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		[HttpGet]
 		public virtual ViewResult Edit(long id)
 		{
@@ -57,7 +57,7 @@ namespace Alicargo.Controllers.Awb
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Edit(long id, AwbAdminModel model)
 		{
 			try
@@ -83,7 +83,7 @@ namespace Alicargo.Controllers.Awb
 
 		#region Create
 
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Create(long? applicationId)
 		{
 			BindBag(null);
@@ -92,7 +92,7 @@ namespace Alicargo.Controllers.Awb
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Create(long? applicationId, AwbAdminModel model)
 		{
 			try

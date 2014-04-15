@@ -56,9 +56,9 @@ namespace Alicargo.Controllers.User
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult LoginAsUser()
+        public virtual System.Web.Mvc.PartialViewResult Client()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsUser);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Client);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -68,9 +68,9 @@ namespace Alicargo.Controllers.User
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Client()
+        public virtual System.Web.Mvc.ActionResult LoginAsUser()
         {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Client);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsUser);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -88,24 +88,32 @@ namespace Alicargo.Controllers.User
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Login = "Login";
-            public readonly string SignOut = "SignOut";
-            public readonly string LoginAsUser = "LoginAsUser";
-            public readonly string LoginAsClient = "LoginAsClient";
             public readonly string Client = "Client";
+            public readonly string Login = "Login";
+            public readonly string LoginAsClient = "LoginAsClient";
+            public readonly string LoginAsUser = "LoginAsUser";
+            public readonly string SignOut = "SignOut";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Login = "Login";
-            public const string SignOut = "SignOut";
-            public const string LoginAsUser = "LoginAsUser";
-            public const string LoginAsClient = "LoginAsClient";
             public const string Client = "Client";
+            public const string Login = "Login";
+            public const string LoginAsClient = "LoginAsClient";
+            public const string LoginAsUser = "LoginAsUser";
+            public const string SignOut = "SignOut";
         }
 
 
+        static readonly ActionParamsClass_Client s_params_Client = new ActionParamsClass_Client();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Client ClientParams { get { return s_params_Client; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Client
+        {
+            public readonly string clientId = "clientId";
+        }
         static readonly ActionParamsClass_Login s_params_Login = new ActionParamsClass_Login();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Login LoginParams { get { return s_params_Login; } }
@@ -113,14 +121,6 @@ namespace Alicargo.Controllers.User
         public class ActionParamsClass_Login
         {
             public readonly string user = "user";
-        }
-        static readonly ActionParamsClass_LoginAsUser s_params_LoginAsUser = new ActionParamsClass_LoginAsUser();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_LoginAsUser LoginAsUserParams { get { return s_params_LoginAsUser; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_LoginAsUser
-        {
-            public readonly string id = "id";
         }
         static readonly ActionParamsClass_LoginAsClient s_params_LoginAsClient = new ActionParamsClass_LoginAsClient();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -130,13 +130,13 @@ namespace Alicargo.Controllers.User
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Client s_params_Client = new ActionParamsClass_Client();
+        static readonly ActionParamsClass_LoginAsUser s_params_LoginAsUser = new ActionParamsClass_LoginAsUser();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Client ClientParams { get { return s_params_Client; } }
+        public ActionParamsClass_LoginAsUser LoginAsUserParams { get { return s_params_LoginAsUser; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Client
+        public class ActionParamsClass_LoginAsUser
         {
-            public readonly string clientId = "clientId";
+            public readonly string id = "id";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -162,6 +162,18 @@ namespace Alicargo.Controllers.User
         public T4MVC_AuthenticationController() : base(Dummy.Instance) { }
 
         [NonAction]
+        partial void ClientOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? clientId);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult Client(long? clientId)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Client);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
+            ClientOverride(callInfo, clientId);
+            return callInfo;
+        }
+
+        [NonAction]
         partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
@@ -169,17 +181,6 @@ namespace Alicargo.Controllers.User
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
             LoginOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SignOutOverride(T4MVC_System_Web_Mvc_RedirectToRouteResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.RedirectToRouteResult SignOut()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.SignOut);
-            SignOutOverride(callInfo);
             return callInfo;
         }
 
@@ -196,18 +197,6 @@ namespace Alicargo.Controllers.User
         }
 
         [NonAction]
-        partial void LoginAsUserOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult LoginAsUser(int id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsUser);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            LoginAsUserOverride(callInfo, id);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void LoginAsClientOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
 
         [NonAction]
@@ -220,14 +209,25 @@ namespace Alicargo.Controllers.User
         }
 
         [NonAction]
-        partial void ClientOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long? clientId);
+        partial void LoginAsUserOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Client(long? clientId)
+        public override System.Web.Mvc.ActionResult LoginAsUser(int id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Client);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
-            ClientOverride(callInfo, clientId);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LoginAsUser);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            LoginAsUserOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SignOutOverride(T4MVC_System_Web_Mvc_RedirectToRouteResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.RedirectToRouteResult SignOut()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.SignOut);
+            SignOutOverride(callInfo);
             return callInfo;
         }
 

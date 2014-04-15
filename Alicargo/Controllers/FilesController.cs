@@ -44,7 +44,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult AdminApplication(long id)
 		{
 			ViewBag.ApplicationId = id;

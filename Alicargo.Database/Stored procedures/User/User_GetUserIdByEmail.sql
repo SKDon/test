@@ -13,6 +13,11 @@ BEGIN
 
 		(SELECT TOP 1 u.[Id]
 		FROM [dbo].[User] u
+		JOIN [dbo].[Manager] a ON a.[UserId] = u.[Id]
+		WHERE a.[Email] = @Email),
+
+		(SELECT TOP 1 u.[Id]
+		FROM [dbo].[User] u
 		JOIN [dbo].[Client] a ON a.[UserId] = u.[Id]
 		WHERE a.[Emails] LIKE @Email),
 

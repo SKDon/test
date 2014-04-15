@@ -51,14 +51,14 @@ namespace Alicargo.Controllers.Awb
 
 		#region List
 
-		[Access(RoleType.Admin, RoleType.Broker, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]
 		[HttpGet]
 		public virtual ViewResult Index()
 		{
 			return View();
 		}
 
-		[Access(RoleType.Admin, RoleType.Broker, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]
 		[HttpPost]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
@@ -80,7 +80,7 @@ namespace Alicargo.Controllers.Awb
 		#region Actions
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Broker)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker)]
 		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
 		{
 			var data = _awbs.Get(id).First();
@@ -110,7 +110,7 @@ namespace Alicargo.Controllers.Awb
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Sender)]
 		public virtual HttpStatusCodeResult Delete(long id)
 		{
 			_awbManager.Delete(id);
@@ -119,7 +119,7 @@ namespace Alicargo.Controllers.Awb
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Sender)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Sender)]
 		public virtual ActionResult SetAirWaybill(long applicationId, long? airWaybillId)
 		{
 			_applicationAwbManager.SetAwb(applicationId, airWaybillId);

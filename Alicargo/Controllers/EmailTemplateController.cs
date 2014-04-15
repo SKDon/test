@@ -31,7 +31,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Edit(EventType id, string lang)
 		{
 			BindLanguageList();
@@ -42,7 +42,7 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Edit(EventTemplateModel model)
 		{
 			if(!ModelState.IsValid)
@@ -67,21 +67,21 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Help()
 		{
 			return View();
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Index()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List()
 		{

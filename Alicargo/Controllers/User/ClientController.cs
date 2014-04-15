@@ -31,14 +31,14 @@ namespace Alicargo.Controllers.User
 
 		#region List
 
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Index()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, int skip)
 		{
@@ -52,7 +52,7 @@ namespace Alicargo.Controllers.User
 		#region Create
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual ViewResult Create()
 		{
 			return View();
@@ -60,7 +60,7 @@ namespace Alicargo.Controllers.User
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!EmailsHelper.Validate(model.Emails))
@@ -105,7 +105,7 @@ namespace Alicargo.Controllers.User
 		#endregion
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual FileResult Contract(long? id)
 		{
 			var data = _clients.GetCurrentClientData(id);
@@ -118,7 +118,7 @@ namespace Alicargo.Controllers.User
 		#region Edit
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual ActionResult Edit(long? id)
 		{
 			var data = _clients.GetCurrentClientData(id);
@@ -134,7 +134,7 @@ namespace Alicargo.Controllers.User
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Client)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual ActionResult Edit(long? id, ClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{

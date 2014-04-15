@@ -13,6 +13,7 @@
 			<tr>
 				<td class="title"></td>
 				<td class="title">@Enums.Admin</td>
+				<td class="title">@Enums.Manager</td>
 				<td class="title">@Enums.Sender</td>
 				<td class="title">@Enums.Broker</td>
 				<td class="title">@Enums.Forwarder</td>
@@ -22,6 +23,7 @@
 			<tr>
 				<td class="title">@Pages.StateSettings_Availabilities</td>
 				<td>@Html.CheckBoxFor(x => x.Availabilities.Admin)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Manager)</td>
 				<td>@Html.CheckBoxFor(x => x.Availabilities.Sender)</td>
 				<td>@Html.CheckBoxFor(x => x.Availabilities.Broker)</td>
 				<td>@Html.CheckBoxFor(x => x.Availabilities.Forwarder)</td>
@@ -31,6 +33,7 @@
 			<tr>
 				<td class="title">@Pages.StateSettings_Visibilities</td>
 				<td>@Html.CheckBoxFor(x => x.Visibilities.Admin)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Manager)</td>
 				<td>@Html.CheckBoxFor(x => x.Visibilities.Sender)</td>
 				<td>@Html.CheckBoxFor(x => x.Visibilities.Broker)</td>
 				<td>@Html.CheckBoxFor(x => x.Visibilities.Forwarder)</td>

@@ -83,7 +83,10 @@ namespace Alicargo.Services.Application
 
 			var states = _stateFilter.GetStateAvailabilityToSet();
 
-			if (_identity.IsInRole(RoleType.Admin)) return ToApplicationStateModel(states);
+			if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Manager))
+			{
+				return ToApplicationStateModel(states);
+			}
 
 			states = _stateFilter.FilterByBusinessLogic(applicationData, states);
 

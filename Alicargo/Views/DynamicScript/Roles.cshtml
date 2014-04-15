@@ -6,6 +6,7 @@ var Alicargo = (function($a){
 $a.Roles = (function($r){
 
 $r.IsAdmin = @IdentityService.IsInRole(RoleType.Admin).ToString().ToLowerInvariant();
+$r.IsManager = @IdentityService.IsInRole(RoleType.Manager).ToString().ToLowerInvariant();
 $r.IsSender = @IdentityService.IsInRole(RoleType.Sender).ToString().ToLowerInvariant();
 $r.IsBroker = @IdentityService.IsInRole(RoleType.Broker).ToString().ToLowerInvariant();
 $r.IsClient = @IdentityService.IsInRole(RoleType.Client).ToString().ToLowerInvariant();

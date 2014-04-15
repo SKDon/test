@@ -42,6 +42,14 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
+			if(_identity.IsInRole(RoleType.Manager))
+			{
+				return _settings.GetStateAvailabilities()
+					.Where(x => x.Role == RoleType.Manager)
+					.Select(x => x.StateId)
+					.ToArray();
+			}
+
 			if (_identity.IsInRole(RoleType.Client))
 			{
 				return _settings.GetStateAvailabilities()
@@ -94,6 +102,14 @@ namespace Alicargo.Core.State
 			{
 				return _settings.GetStateVisibilities()
 					.Where(x => x.Role == RoleType.Admin)
+					.Select(x => x.StateId)
+					.ToArray();
+			}
+
+			if(_identity.IsInRole(RoleType.Manager))
+			{
+				return _settings.GetStateVisibilities()
+					.Where(x => x.Role == RoleType.Manager)
 					.Select(x => x.StateId)
 					.ToArray();
 			}

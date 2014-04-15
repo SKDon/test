@@ -37,7 +37,7 @@ namespace Alicargo.Controllers
 			_identity = identity;
 		}
 
-		[Access(RoleType.Admin, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual FileResult Applications()
 		{
 			var stream = GetStream();
@@ -47,7 +47,7 @@ namespace Alicargo.Controllers
 
 		private MemoryStream GetStream()
 		{
-			if (_identity.IsInRole(RoleType.Admin))
+			if (_identity.IsInRole(RoleType.Admin) || _identity.IsInRole(RoleType.Manager))
 			{
 				var rows = _rowSource.GetAdminApplicationExcelRow(_identity.Language);
 

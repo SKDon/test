@@ -125,6 +125,7 @@
 			{ field: "TransitCity", title: $l.Entities_City, groupable: true, width: "100px" },
 			{ field: "CarrierName", title: $l.Entities_Carrier, groupable: true, width: "100px" },
 			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: true, width: "75px" },
+			{ field: "MethodOfDeliveryLocalString", title: $l.Entities_MethodOfDelivery, groupable: true, width: "75px" },
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{
 				field: "AirWaybill",
@@ -212,6 +213,7 @@
 			{ field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false },
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: false },
 			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "70px" },
+			{ field: "MethodOfDeliveryLocalString", title: $l.Entities_MethodOfDelivery, groupable: true, width: "75px" },
 			{ field: "State", title: $l.Entities_StateName, groupable: false, editor: stateDropDownEditor, template: "#= State.StateName #" },
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
 			{ field: "CountryName", title: $l.Entities_Country, groupable: false, width: "70px" },
@@ -231,7 +233,7 @@
 				return forwarderColumns;
 			} else if ($r.IsSender) {
 				return senderColumns;
-			} else if ($r.IsAdmin) {
+			} else if ($r.IsAdmin || $r.IsManager) {
 				return adminColumns;
 			} else if ($r.IsCarrier) {
 				return carrierColumns;

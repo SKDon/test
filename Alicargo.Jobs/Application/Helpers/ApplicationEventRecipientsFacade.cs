@@ -20,6 +20,7 @@ namespace Alicargo.Jobs.Application.Helpers
 		private readonly ICarrierRepository _carriers;
 		private readonly IClientRepository _clients;
 		private readonly IForwarderRepository _forwarders;
+		private readonly IManagerRepository _managers;
 		private readonly IEventEmailRecipient _recipients;
 		private readonly ISenderRepository _senders;
 
@@ -27,6 +28,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			IAwbRepository awbs,
 			IApplicationRepository applications,
 			IAdminRepository admins,
+			IManagerRepository managers,
 			ISenderRepository senders,
 			IClientRepository clients,
 			ICarrierRepository carriers,
@@ -37,6 +39,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			_awbs = awbs;
 			_applications = applications;
 			_admins = admins;
+			_managers = managers;
 			_senders = senders;
 			_clients = clients;
 			_carriers = carriers;
@@ -63,9 +66,14 @@ namespace Alicargo.Jobs.Application.Helpers
 				switch(role)
 				{
 					case RoleType.Admin:
-						var recipients =
-							_admins.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin));
-						foreach(var recipient in recipients)
+						foreach(var recipient in _admins.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin)))
+						{
+							yield return recipient;
+						}
+						break;
+
+					case RoleType.Manager:
+						foreach(var recipient in _managers.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Manager)))
 						{
 							yield return recipient;
 						}
@@ -84,7 +92,7 @@ namespace Alicargo.Jobs.Application.Helpers
 							{
 								var broker = _brokers.Get(awb.BrokerId.Value);
 
-								yield return new RecipientData(broker.Email, broker.Language, role);	
+								yield return new RecipientData(broker.Email, broker.Language, role);
 							}
 						}
 

@@ -144,6 +144,9 @@
   <data name="Lux" xml:space="preserve">
     <value>Люкс</value>
   </data>
+  <data name="Manager" xml:space="preserve">
+    <value>Менеджер</value>
+  </data>
   <data name="Self" xml:space="preserve">
     <value>Самовывоз</value>
   </data>

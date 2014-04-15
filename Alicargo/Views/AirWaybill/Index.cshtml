@@ -8,7 +8,7 @@
 		width: auto;
 	}
 </style>
-@if (IdentityService.IsInRole(RoleType.Admin))
+@if(IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager))
 {
 	<p>
 		@Html.ActionLink(Pages.AirWaybillAdd, MVC.AdminAwb.Create())

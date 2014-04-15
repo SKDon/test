@@ -387,4 +387,7 @@
   <data name="Carriers" xml:space="preserve">
     <value>Курьеры</value>
   </data>
+  <data name="Managers" xml:space="preserve">
+    <value>Менеджеры</value>
+  </data>
 </root>

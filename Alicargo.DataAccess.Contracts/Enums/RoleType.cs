@@ -7,6 +7,7 @@
 		Broker = 3,
 		Forwarder = 4,
 		Client = 5,
-		Carrier = 6
+		Carrier = 6,
+		Manager = 7
 	}
 }

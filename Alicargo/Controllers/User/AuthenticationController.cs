@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
@@ -14,14 +13,11 @@ namespace Alicargo.Controllers.User
 	{
 		private readonly IAuthenticationService _authentication;
 		private readonly IClientRepository _clients;
-		private readonly IIdentityService _identity;
 
 		public AuthenticationController(
-			IIdentityService identity,
 			IClientRepository clients,
 			IAuthenticationService authentication)
 		{
-			_identity = identity;
 			_clients = clients;
 			_authentication = authentication;
 		}
@@ -57,14 +53,11 @@ namespace Alicargo.Controllers.User
 				return View(user);
 			}
 
-			if(_identity.IsInRole(RoleType.Admin))
-				return RedirectToAction(MVC.Home.Index());
-
 			return RedirectToAction(MVC.Home.Index());
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult LoginAsClient(int id)
 		{
 			var userId = _clients.GetUserId(id);
@@ -73,8 +66,8 @@ namespace Alicargo.Controllers.User
 			return RedirectToAction(MVC.Home.Index());
 		}
 
-		[Access(RoleType.Admin)]
 		[HttpGet]
+		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult LoginAsUser(int id)
 		{
 			_authentication.AuthenticateForce(id, false);

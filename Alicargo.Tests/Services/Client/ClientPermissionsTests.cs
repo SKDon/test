@@ -18,7 +18,7 @@ namespace Alicargo.Tests.Services.Client
 
             var permissions = container.Create<ClientPermissions>();
 
-            container.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
+            container.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);            
 
             permissions.HaveAccessToClient(It.IsAny<ClientData>()).Should().BeTrue();
         }
@@ -44,6 +44,7 @@ namespace Alicargo.Tests.Services.Client
 	        var userId = container.Create<long>();
 
 	        container.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
+			container.IdentityService.Setup(x => x.IsInRole(RoleType.Manager)).Returns(false);
             container.IdentityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
 	        container.ClientRepository.Setup(x => x.GetByUserId(userId)).Returns(data);
             container.IdentityService.Setup(x => x.Id).Returns(userId);
@@ -60,6 +61,7 @@ namespace Alicargo.Tests.Services.Client
 			var userId = container.Create<long>();
 
             container.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
+			container.IdentityService.Setup(x => x.IsInRole(RoleType.Manager)).Returns(false);
             container.IdentityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(false);
 			container.ClientRepository.Setup(x => x.GetByUserId(userId)).Returns(container.Create<ClientData>());
 			container.IdentityService.Setup(x => x.Id).Returns(userId);

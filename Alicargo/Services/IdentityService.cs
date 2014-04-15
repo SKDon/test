@@ -14,6 +14,7 @@ namespace Alicargo.Services
 	internal sealed class IdentityService : IIdentityService
 	{
 		private readonly IAdminRepository _admins;
+		private readonly IManagerRepository _managers;
 		private readonly IBrokerRepository _brokers;
 		private readonly ICarrierRepository _carriers;
 		private readonly IClientRepository _clients;
@@ -30,6 +31,7 @@ namespace Alicargo.Services
 		public IdentityService(
 			IUserRepository users,
 			IAdminRepository admins,
+			IManagerRepository managers,
 			ICarrierRepository carriers,
 			ISenderRepository senders,
 			IClientRepository clients,
@@ -41,6 +43,7 @@ namespace Alicargo.Services
 
 			_users = users;
 			_admins = admins;
+			_managers = managers;
 			_carriers = carriers;
 			_senders = senders;
 			_clients = clients;
@@ -136,6 +139,9 @@ namespace Alicargo.Services
 		{
 			switch(role)
 			{
+				case RoleType.Manager:
+					return _managers.GetAll().Any(x => x.UserId == userId);
+
 				case RoleType.Admin:
 					return _admins.GetAll().Any(x => x.UserId == userId);
 

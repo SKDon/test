@@ -93,9 +93,12 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			result.Should().BeOfType<RedirectToRouteResult>();
 			var data = _applicationRepository.Get(old.Id);
 
-			data.ShouldBeEquivalentTo(model,
-				options =>
-					options.ExcludingMissingProperties().Excluding(x => x.InsuranceRate));
+			data.ShouldBeEquivalentTo(
+				model,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.InsuranceRate)
+					.Excluding(x => x.CarrierId));
+			data.CarrierId.ShouldBeEquivalentTo(TestConstants.TestCarrierId1);
 			data.CurrencyId.ShouldBeEquivalentTo(model.Currency.CurrencyId);
 			data.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
 		}

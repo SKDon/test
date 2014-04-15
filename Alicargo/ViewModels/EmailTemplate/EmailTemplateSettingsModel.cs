@@ -12,6 +12,10 @@ namespace Alicargo.ViewModels.EmailTemplate
 		public bool Admin { get; set; }
 
 		[Required]
+		[DisplayNameLocalized(typeof(Enums), "Manager")]
+		public bool Manager { get; set; }
+
+		[Required]
 		[DisplayNameLocalized(typeof(Enums), "Sender")]
 		public bool Sender { get; set; }
 

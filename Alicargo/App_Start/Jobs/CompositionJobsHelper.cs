@@ -189,7 +189,8 @@ namespace Alicargo.Jobs
 				var awbs = new AwbRepository(connection);
 				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
-				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, brokerRepository, awbs, eventEmailRecipient);
+				var managerRepository = new ManagerRepository(connection);
+				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, managerRepository,  brokerRepository, awbs, eventEmailRecipient);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					connection,
@@ -232,7 +233,8 @@ namespace Alicargo.Jobs
 				var adminRepository = new AdminRepository(connection);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var localizedDataHelper = new BalanceLocalizedDataHelper(clientBalanceRepository, serializer, clientRepository);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository, eventEmailRecipient);
+				var managerRepository = new ManagerRepository(connection);
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, managerRepository,  clientRepository, eventEmailRecipient);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					connection,
@@ -268,7 +270,8 @@ namespace Alicargo.Jobs
 				var adminRepository = new AdminRepository(connection);
 				var localizedDataHelper = new CommonLocalizedDataHelper(serializer, clientRepository);
 				var recipients = new EventEmailRecipient(executor);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, clientRepository, recipients);
+				var managerRepository = new ManagerRepository(connection);
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, managerRepository,  clientRepository, recipients);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					connection,
@@ -333,6 +336,7 @@ namespace Alicargo.Jobs
 				awbs,
 				applications,
 				new AdminRepository(connection),
+				new ManagerRepository(connection), 
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
 				new CarrierRepository(passwordConverter, mainExecutor),
