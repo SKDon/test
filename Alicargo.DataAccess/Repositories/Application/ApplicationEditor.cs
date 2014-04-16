@@ -2,6 +2,7 @@
 using System.Data;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.Utilities;
@@ -10,10 +11,14 @@ namespace Alicargo.DataAccess.Repositories.Application
 {
 	public sealed class ApplicationEditor : IApplicationEditor
 	{
+		private readonly ISqlProcedureExecutor _executor;
+		private readonly long _defaultStateId;
 		private readonly AlicargoDataContext _context;
 
-		public ApplicationEditor(IDbConnection connection)
+		public ApplicationEditor(IDbConnection connection, ISqlProcedureExecutor executor, long defaultStateId)
 		{
+			_executor = executor;
+			_defaultStateId = defaultStateId;
 			_context = new AlicargoDataContext(connection);
 		}
 
@@ -22,6 +27,11 @@ namespace Alicargo.DataAccess.Repositories.Application
 			var entity = new DbContext.Application();
 
 			Map(application, entity);
+
+			entity.StateId = _defaultStateId;
+			entity.StateChangeTimestamp = DateTimeProvider.Now;
+			entity.DisplayNumber = _executor.Query<int>("[dbo].[GetNextDisplayNumber]");
+			entity.CreationTimestamp = DateTimeProvider.Now;
 
 			_context.Applications.InsertOnSubmit(entity);
 
@@ -153,7 +163,6 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		private static void Map(ApplicationEditData from, DbContext.Application to)
 		{
-			to.StateId = from.StateId;
 			to.Characteristic = from.Characteristic;
 			to.AddressLoad = from.AddressLoad;
 			to.WarehouseWorkingTime = from.WarehouseWorkingTime;

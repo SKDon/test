@@ -1,4 +1,4 @@
-﻿using System.Data.SqlClient;
+﻿using System;
 using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -7,8 +7,10 @@ using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Ploeh.AutoFixture;
 
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
@@ -21,6 +23,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private ApplicationEditor _editor;
 		private Fixture _fixture;
 		private StateRepository _stateRepository;
+		private Mock<DateTimeProvider.IDateTimeProvider> _dateTimeProvider;
 
 		[TestCleanup]
 		public void TestCleanup()
@@ -35,40 +38,32 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_fixture = new Fixture();
 
 			_applications = new ApplicationRepository(_context.Connection);
-			_stateRepository = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
-			_editor = new ApplicationEditor(new SqlConnection(Settings.Default.MainConnectionString));
+			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
+			_stateRepository = new StateRepository(executor);
+			_editor = new ApplicationEditor(_context.Connection, executor, TestConstants.DefaultStateId);
+
+			_dateTimeProvider = new Mock<DateTimeProvider.IDateTimeProvider>(MockBehavior.Strict);			
+
+			DateTimeProvider.SetProvider(_dateTimeProvider.Object);
 		}
 
 		[TestMethod]
 		public void Test_ApplicationRepository_Add_Get()
 		{
+			var now = _fixture.Create<DateTimeOffset>();
+			_dateTimeProvider.SetupProperty(x => x.Now).SetupGet(provider => now);
+
 			long id;
 			var expected = CreateTestApplication(out id);
-
+			
 			var actual = _applications.Get(id);
 
 			Assert.IsNotNull(actual);
-
-			expected.ShouldBeEquivalentTo(actual);
-		}
-
-		[TestMethod]
-		public void Test_ApplicationRepository_Add_GetDetails()
-		{
-			long id;
-			var expected = CreateTestApplication(out id);
-
-			var actual = _applications.Get(id);
-
-			Assert.IsNotNull(actual);
-
-			expected.ShouldBeEquivalentTo(actual,
-				options => options.ExcludingMissingProperties()
-					.Excluding(x => x.FactureCost)
-					.Excluding(x => x.FactureCostEx)
-					.Excluding(x => x.PickupCost)
-					.Excluding(x => x.TransitCost));
-
+			actual.StateId.ShouldBeEquivalentTo(TestConstants.DefaultStateId);
+			actual.DisplayNumber.Should().NotBe(0);
+			actual.ShouldBeEquivalentTo(expected);
+			actual.CreationTimestamp.ShouldBeEquivalentTo(now);
+			actual.StateChangeTimestamp.ShouldBeEquivalentTo(now);
 			actual.GetAdjustedFactureCost().ShouldBeEquivalentTo(expected.FactureCostEdited);
 			actual.GetAdjustedFactureCostEx().ShouldBeEquivalentTo(expected.FactureCostExEdited);
 			actual.GetAdjustedPickupCost().ShouldBeEquivalentTo(expected.PickupCostEdited);
@@ -92,37 +87,46 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_ApplicationRepository_Update()
 		{
+			var now = _fixture.Create<DateTimeOffset>();
+			_dateTimeProvider.SetupProperty(x => x.Now).SetupGet(provider => now);
+
 			long id;
-			var old = CreateTestApplication(out id);
+			var editData = CreateTestApplication(out id);
 
-			var newData = _fixture.Create<ApplicationEditData>();
-			newData.StateId = old.StateId;
-			newData.SenderId = TestConstants.TestSenderId;
-			newData.CountryId = TestConstants.TestCountryId;
-			newData.ClientId = old.ClientId;
-			newData.TransitId = old.TransitId;
-			newData.AirWaybillId = old.AirWaybillId;
-			newData.ForwarderId = TestConstants.TestForwarderId2;
+			var expectation = _fixture.Create<ApplicationEditData>();
+			expectation.SenderId = TestConstants.TestSenderId;
+			expectation.CountryId = TestConstants.TestCountryId;
+			expectation.ClientId = editData.ClientId;
+			expectation.TransitId = editData.TransitId;
+			expectation.AirWaybillId = editData.AirWaybillId;
+			expectation.ForwarderId = TestConstants.TestForwarderId2;
 
-			_editor.Update(id, newData);
+			_editor.Update(id, expectation);
 
-			var data = _applications.Get(id);
+			var actual = _applications.Get(id);
 
-			data.ShouldBeEquivalentTo(newData, options => options.ExcludingMissingProperties());
+			actual.StateId.ShouldBeEquivalentTo(TestConstants.DefaultStateId);
+			actual.DisplayNumber.Should().NotBe(0);
+			actual.ShouldBeEquivalentTo(expectation);
+			actual.CreationTimestamp.ShouldBeEquivalentTo(now);
+			actual.StateChangeTimestamp.ShouldBeEquivalentTo(now);
+			actual.GetAdjustedFactureCost().ShouldBeEquivalentTo(expectation.FactureCostEdited);
+			actual.GetAdjustedFactureCostEx().ShouldBeEquivalentTo(expectation.FactureCostExEdited);
+			actual.GetAdjustedPickupCost().ShouldBeEquivalentTo(expectation.PickupCostEdited);
+			actual.GetAdjustedTransitCost().ShouldBeEquivalentTo(expectation.TransitCostEdited);
 		}
 
 		[TestMethod]
 		public void Test_ApplicationRepository_UpdateState()
 		{
 			long id;
-			var application = CreateTestApplication(out id);
-			var state = _stateRepository.Get(TwoLetterISOLanguageName.Italian).First(x => x.Key != application.StateId);
+			CreateTestApplication(out id);
 
-			_editor.SetState(id, state.Key);
+			Assert.AreEqual(TestConstants.DefaultStateId, _applications.Get(id).StateId);
 
-			var actual = _applications.Get(id);
+			_editor.SetState(id, TestConstants.CargoIsFlewStateId);
 
-			Assert.AreEqual(state.Key, actual.StateId);
+			Assert.AreEqual(TestConstants.CargoIsFlewStateId, _applications.Get(id).StateId);
 		}
 
 		private ApplicationEditData CreateTestApplication(out long id)
@@ -132,7 +136,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 				.With(x => x.SenderId, TestConstants.TestSenderId)
 				.With(x => x.ClientId, TestConstants.TestClientId1)
 				.With(x => x.TransitId, TestConstants.TestTransitId)
-				.With(x => x.StateId, TestConstants.DefaultStateId)
 				.With(x => x.CountryId, TestConstants.TestCountryId)
 				.With(x => x.AirWaybillId, null)
 				.With(x => x.ForwarderId, TestConstants.TestForwarderId1)

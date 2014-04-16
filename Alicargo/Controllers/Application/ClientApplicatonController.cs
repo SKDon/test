@@ -1,12 +1,11 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
@@ -19,6 +18,7 @@ namespace Alicargo.Controllers.Application
 	{
 		private readonly IClientRepository _clients;
 		private readonly ICountryRepository _countries;
+		private readonly IApplicationRepository _applications;
 		private readonly IIdentityService _identity;
 		private readonly IClientApplicationManager _manager;
 
@@ -26,12 +26,14 @@ namespace Alicargo.Controllers.Application
 			IClientApplicationManager manager,
 			ICountryRepository countries,
 			IIdentityService identity,
-			IClientRepository clients)
+			IClientRepository clients, 
+			IApplicationRepository applications)
 		{
 			_manager = manager;
 			_countries = countries;
 			_identity = identity;
 			_clients = clients;
+			_applications = applications;
 		}
 
 		#region Edit
@@ -42,7 +44,7 @@ namespace Alicargo.Controllers.Application
 		{
 			var application = _manager.Get(id);
 
-			BindBag(id, GetClientId(), application.Count);
+			BindBag(id, GetClientId());
 
 			return View(application);
 		}
@@ -55,7 +57,7 @@ namespace Alicargo.Controllers.Application
 		{
 			if(!ModelState.IsValid)
 			{
-				BindBag(id, GetClientId(), model.Count);
+				BindBag(id, GetClientId());
 
 				return View(model);
 			}
@@ -108,7 +110,7 @@ namespace Alicargo.Controllers.Application
 
 		#endregion
 
-		private void BindBag(long? applicationId, long clientId, int? count = 0)
+		private void BindBag(long? applicationId, long clientId)
 		{
 			ViewBag.ClientId = clientId;
 
@@ -116,8 +118,9 @@ namespace Alicargo.Controllers.Application
 
 			if(applicationId.HasValue)
 			{
-				throw new NotImplementedException("set ApplicationNumber");
-				// ViewBag.ApplicationNumber = ApplicationHelper.GetApplicationDisplay(applicationId.Value, count);
+				var data = _applications.Get(applicationId.Value);
+
+				ViewBag.ApplicationNumber = data.DisplayNumber;
 			}
 
 			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);

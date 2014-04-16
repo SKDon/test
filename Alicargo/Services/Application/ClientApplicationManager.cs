@@ -1,9 +1,7 @@
-﻿using Alicargo.Core.Contracts.State;
-using Alicargo.Core.Contracts.Users;
+﻿using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
-using Alicargo.Utilities;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
 
@@ -12,7 +10,6 @@ namespace Alicargo.Services.Application
 	internal sealed class ClientApplicationManager : IClientApplicationManager
 	{
 		private readonly IApplicationRepository _applications;
-		private readonly IStateConfig _config;
 		private readonly IForwarderService _forwarders;
 		private readonly ISenderService _senders;
 		private readonly ITransitService _transits;
@@ -23,14 +20,12 @@ namespace Alicargo.Services.Application
 			IForwarderService forwarders,
 			IApplicationEditor updater,
 			ISenderService senders,
-			IStateConfig config,
 			ITransitService transits)
 		{
 			_applications = applications;
 			_forwarders = forwarders;
 			_updater = updater;
 			_senders = senders;
-			_config = config;
 			_transits = transits;
 		}
 
@@ -87,12 +82,12 @@ namespace Alicargo.Services.Application
 			};
 		}
 
-		private ApplicationEditData GetNewApplicationData(ApplicationClientModel model, long clientId, long transitId,
+		private ApplicationEditData GetNewApplicationData(
+			ApplicationClientModel model, long clientId, long transitId,
 			long forwarderId)
 		{
 			return new ApplicationEditData
 			{
-				StateId = _config.DefaultStateId,
 				Class = null,
 				TransitId = transitId,
 				Invoice = model.Invoice,

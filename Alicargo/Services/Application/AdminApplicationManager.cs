@@ -46,7 +46,6 @@ namespace Alicargo.Services.Application
 
 			var data = new ApplicationEditData
 			{
-				StateId = _config.DefaultStateId,
 				Class = null,
 				TransitId = transitId,
 				Invoice = model.Invoice,

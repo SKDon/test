@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
@@ -59,7 +57,7 @@ namespace Alicargo.Controllers.Application
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		private void BindBag(long clientId, long? applicationId, int? count = 0)
+		private void BindBag(long clientId, long? applicationId)
 		{
 			var client = _clients.Get(clientId);
 
@@ -71,8 +69,9 @@ namespace Alicargo.Controllers.Application
 
 			if(applicationId.HasValue)
 			{
-				throw new NotImplementedException("set ApplicationNumber");
-				// ViewBag.ApplicationNumber = ApplicationHelper.GetApplicationDisplay(applicationId.Value, count);
+				var data = _applications.Get(applicationId.Value);
+
+				ViewBag.ApplicationNumber = data.DisplayNumber;
 			}
 
 			ViewBag.Countries = _countries.All(_identity.Language).ToDictionary(x => x.Id, x => x.Name);
@@ -94,7 +93,7 @@ namespace Alicargo.Controllers.Application
 
 			var clientId = _applications.GetClientId(id);
 
-			BindBag(clientId, id, application.Count);
+			BindBag(clientId, id);
 
 			return View(application);
 		}
@@ -109,7 +108,7 @@ namespace Alicargo.Controllers.Application
 			{
 				var clientId = _applications.GetClientId(id);
 
-				BindBag(clientId, id, model.Count);
+				BindBag(clientId, id);
 
 				return View(model);
 			}

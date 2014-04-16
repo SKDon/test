@@ -8,6 +8,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 	{
 		public long Id { get; set; }
 		public DateTimeOffset CreationTimestamp { get; set; }
+		public long StateId { get; set; }
 		public DateTimeOffset StateChangeTimestamp { get; set; }
 		public int DisplayNumber { get; set; }
 

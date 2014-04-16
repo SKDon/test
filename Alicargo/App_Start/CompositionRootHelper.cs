@@ -4,10 +4,7 @@ using Alicargo.Core.Calculation;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Common;
-using Alicargo.Core.Event;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
 using Alicargo.Services.Users.Client;
@@ -21,14 +18,6 @@ namespace Alicargo
 	{
 		public static readonly IDictionary<Type, Type[]> Decorators = new Dictionary<Type, Type[]>
 		{
-			{
-				typeof(IApplicationEditor),
-				new[]
-				{
-					typeof(ApplicationEditor),
-					typeof(ApplicationEditorWithEvent)
-				}
-			},
 			{
 				typeof(IAwbUpdateManager),
 				new[]

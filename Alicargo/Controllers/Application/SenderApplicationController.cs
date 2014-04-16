@@ -1,12 +1,11 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
-using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
@@ -16,10 +15,11 @@ namespace Alicargo.Controllers.Application
 {
 	public partial class SenderApplicationController : Controller
 	{
-		private readonly ISenderApplicationManager _manager;
+		private readonly IApplicationRepository _applications;
 		private readonly IClientRepository _clients;
 		private readonly ICountryRepository _countries;
 		private readonly IIdentityService _identity;
+		private readonly ISenderApplicationManager _manager;
 		private readonly ISenderRepository _senders;
 
 		public SenderApplicationController(
@@ -27,13 +27,15 @@ namespace Alicargo.Controllers.Application
 			IClientRepository clients,
 			IIdentityService identity,
 			ICountryRepository countries,
-			ISenderRepository senders)
+			ISenderRepository senders,
+			IApplicationRepository applications)
 		{
 			_manager = manager;
 			_clients = clients;
 			_identity = identity;
 			_countries = countries;
 			_senders = senders;
+			_applications = applications;
 		}
 
 		[HttpGet]
@@ -42,7 +44,7 @@ namespace Alicargo.Controllers.Application
 		{
 			var clientId = id;
 
-			BindBag(clientId);
+			BindBagWithClient(clientId);
 
 			return View(new ApplicationSenderModel());
 		}
@@ -55,7 +57,7 @@ namespace Alicargo.Controllers.Application
 
 			if(!ModelState.IsValid)
 			{
-				BindBag(clientId);
+				BindBagWithClient(clientId);
 
 				return View(model);
 			}
@@ -80,7 +82,7 @@ namespace Alicargo.Controllers.Application
 		{
 			var model = _manager.Get(id);
 
-			BindBag(id, model.Count);
+			BindBag(id);
 
 			return View(model);
 		}
@@ -91,7 +93,7 @@ namespace Alicargo.Controllers.Application
 		{
 			if(!ModelState.IsValid)
 			{
-				BindBag(id, model.Count);
+				BindBag(id);
 
 				return View(model);
 			}
@@ -101,17 +103,18 @@ namespace Alicargo.Controllers.Application
 			return RedirectToAction(MVC.SenderApplication.Edit(id));
 		}
 
-		private void BindBag(long applicationId, int? count)
+		private void BindBag(long applicationId)
 		{
 			var nic = _clients.GetNicByApplications(applicationId).First();
+			var data = _applications.Get(applicationId);
 			ViewBag.ApplicationId = applicationId;
-			throw new NotImplementedException("set ApplicationNumber");
-	//			ViewBag.ApplicationNumber = ApplicationHelper.GetApplicationDisplay(applicationId, count);
+			ViewBag.ApplicationNumber = data.DisplayNumber;
+
 			ViewBag.Nic = nic;
 			BindCountries();
 		}
 
-		private void BindBag(long clientId)
+		private void BindBagWithClient(long clientId)
 		{
 			var clientData = _clients.Get(clientId);
 			ViewBag.Nic = clientData.Nic;

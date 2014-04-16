@@ -24,7 +24,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string FactoryContact { get; set; }
 		public string MarkName { get; set; }
 		public string TransitReference { get; set; }
-		public long StateId { get; set; }
 		public MethodOfDelivery MethodOfDelivery { get; set; }
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }

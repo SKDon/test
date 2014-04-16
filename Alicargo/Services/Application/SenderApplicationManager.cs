@@ -1,5 +1,4 @@
-﻿using Alicargo.Core.Contracts.State;
-using Alicargo.Core.Contracts.Users;
+﻿using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -12,26 +11,23 @@ namespace Alicargo.Services.Application
 	internal sealed class SenderApplicationManager : ISenderApplicationManager
 	{
 		private readonly IApplicationRepository _applications;
+		private readonly IApplicationEditor _editor;
 		private readonly IForwarderService _forwarders;
 		private readonly ISenderService _senders;
-		private readonly IStateConfig _stateConfig;
 		private readonly ITransitRepository _transits;
-		private readonly IApplicationEditor _editor;
 
 		public SenderApplicationManager(
 			IApplicationRepository applications,
 			ISenderService senders,
 			IApplicationEditor editor,
 			IForwarderService forwarders,
-			ITransitRepository transits,
-			IStateConfig stateConfig)
+			ITransitRepository transits)
 		{
 			_applications = applications;
 			_senders = senders;
 			_editor = editor;
 			_forwarders = forwarders;
 			_transits = transits;
-			_stateConfig = stateConfig;
 		}
 
 		public ApplicationSenderModel Get(long id)
@@ -96,7 +92,6 @@ namespace Alicargo.Services.Application
 
 			application.TransitId = transitId;
 			application.ForwarderId = _forwarders.GetByCityOrAny(transit.CityId, null);
-			application.StateId = _stateConfig.DefaultStateId;
 			application.Class = null;
 			application.SenderId = senderId;
 			application.ClientId = clientId;

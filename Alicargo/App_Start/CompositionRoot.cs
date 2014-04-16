@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,6 +17,7 @@ using Alicargo.Core.Excel.Client;
 using Alicargo.Core.State;
 using Alicargo.Core.Users;
 using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
@@ -30,6 +32,11 @@ namespace Alicargo
 	internal static class CompositionRoot
 	{
 		private const string AlicargoDataAccessDll = "Alicargo.DataAccess.dll";
+
+		private static long DefaultStateId
+		{
+			get { return ConfigurationManager.AppSettings["StateId-Default"].ToLong(); }
+		}
 
 		public static void BindServices(IKernel kernel, ILog mainLog)
 		{
@@ -61,6 +68,11 @@ namespace Alicargo
 
 			kernel.Bind<ISerializer>().To<Serializer>().InThreadScope();
 
+			kernel.Bind<IApplicationEditor>().To<ApplicationEditorWithEvent>();
+			kernel.Bind<IApplicationEditor>().To<ApplicationEditor>()
+				.WhenInjectedExactlyInto<ApplicationEditorWithEvent>()
+				.WithConstructorArgument("defaultStateId", DefaultStateId);
+
 			kernel.Bind<IMailSender>()
 				.To<DbMailSender>()
 				.InSingletonScope()
@@ -72,6 +84,7 @@ namespace Alicargo
 				.IncludingNonePublicTypes()
 				.Select(IsServiceType)
 				.Excluding(binded)
+				.Excluding<ApplicationEditorWithEvent>()
 				.BindDefaultInterface()
 				.Configure(binding => binding.InRequestScope()));
 		}
