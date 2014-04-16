@@ -10,7 +10,6 @@ using Alicargo.TestHelpers;
 using Alicargo.Utilities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Ploeh.AutoFixture;
 
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
@@ -23,7 +22,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private ApplicationEditor _editor;
 		private Fixture _fixture;
 		private StateRepository _stateRepository;
-		private Mock<DateTimeProvider.IDateTimeProvider> _dateTimeProvider;
 
 		[TestCleanup]
 		public void TestCleanup()
@@ -41,17 +39,13 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 			_stateRepository = new StateRepository(executor);
 			_editor = new ApplicationEditor(_context.Connection, executor, TestConstants.DefaultStateId);
-
-			_dateTimeProvider = new Mock<DateTimeProvider.IDateTimeProvider>(MockBehavior.Strict);			
-
-			DateTimeProvider.SetProvider(_dateTimeProvider.Object);
 		}
 
 		[TestMethod]
 		public void Test_ApplicationRepository_Add_Get()
 		{
 			var now = _fixture.Create<DateTimeOffset>();
-			_dateTimeProvider.SetupProperty(x => x.Now).SetupGet(provider => now);
+			DateTimeProvider.SetProvider(new DateTimeProviderStub(now));
 
 			long id;
 			var expected = CreateTestApplication(out id);
@@ -61,7 +55,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Assert.IsNotNull(actual);
 			actual.StateId.ShouldBeEquivalentTo(TestConstants.DefaultStateId);
 			actual.DisplayNumber.Should().NotBe(0);
-			actual.ShouldBeEquivalentTo(expected);
+			actual.ShouldBeEquivalentTo(expected, options => options.ExcludingMissingProperties());
 			actual.CreationTimestamp.ShouldBeEquivalentTo(now);
 			actual.StateChangeTimestamp.ShouldBeEquivalentTo(now);
 			actual.GetAdjustedFactureCost().ShouldBeEquivalentTo(expected.FactureCostEdited);
@@ -88,32 +82,32 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_ApplicationRepository_Update()
 		{
 			var now = _fixture.Create<DateTimeOffset>();
-			_dateTimeProvider.SetupProperty(x => x.Now).SetupGet(provider => now);
+			DateTimeProvider.SetProvider(new DateTimeProviderStub(now));
 
 			long id;
 			var editData = CreateTestApplication(out id);
 
-			var expectation = _fixture.Create<ApplicationEditData>();
-			expectation.SenderId = TestConstants.TestSenderId;
-			expectation.CountryId = TestConstants.TestCountryId;
-			expectation.ClientId = editData.ClientId;
-			expectation.TransitId = editData.TransitId;
-			expectation.AirWaybillId = editData.AirWaybillId;
-			expectation.ForwarderId = TestConstants.TestForwarderId2;
+			var expected = _fixture.Create<ApplicationEditData>();
+			expected.SenderId = TestConstants.TestSenderId;
+			expected.CountryId = TestConstants.TestCountryId;
+			expected.ClientId = editData.ClientId;
+			expected.TransitId = editData.TransitId;
+			expected.AirWaybillId = editData.AirWaybillId;
+			expected.ForwarderId = TestConstants.TestForwarderId2;
 
-			_editor.Update(id, expectation);
+			_editor.Update(id, expected);
 
 			var actual = _applications.Get(id);
 
 			actual.StateId.ShouldBeEquivalentTo(TestConstants.DefaultStateId);
 			actual.DisplayNumber.Should().NotBe(0);
-			actual.ShouldBeEquivalentTo(expectation);
+			actual.ShouldBeEquivalentTo(expected, options => options.ExcludingMissingProperties());
 			actual.CreationTimestamp.ShouldBeEquivalentTo(now);
 			actual.StateChangeTimestamp.ShouldBeEquivalentTo(now);
-			actual.GetAdjustedFactureCost().ShouldBeEquivalentTo(expectation.FactureCostEdited);
-			actual.GetAdjustedFactureCostEx().ShouldBeEquivalentTo(expectation.FactureCostExEdited);
-			actual.GetAdjustedPickupCost().ShouldBeEquivalentTo(expectation.PickupCostEdited);
-			actual.GetAdjustedTransitCost().ShouldBeEquivalentTo(expectation.TransitCostEdited);
+			actual.GetAdjustedFactureCost().ShouldBeEquivalentTo(expected.FactureCostEdited);
+			actual.GetAdjustedFactureCostEx().ShouldBeEquivalentTo(expected.FactureCostExEdited);
+			actual.GetAdjustedPickupCost().ShouldBeEquivalentTo(expected.PickupCostEdited);
+			actual.GetAdjustedTransitCost().ShouldBeEquivalentTo(expected.TransitCostEdited);
 		}
 
 		[TestMethod]

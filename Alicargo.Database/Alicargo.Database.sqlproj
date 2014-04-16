@@ -201,8 +201,8 @@
     <Build Include="Tables\Application\AirWaybill.sql" />
     <Build Include="Tables\Application\Application.sql" />
     <Build Include="Tables\Application\Calculation.sql" />
-    <Build Include="Tables\Application\DisplayNumberCounter.sql" />
     <Build Include="Stored procedures\GetNextDisplayNumber.sql" />
+    <Build Include="Types\DisplayNumberCounter.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />
