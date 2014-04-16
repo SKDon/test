@@ -32,7 +32,8 @@ namespace Alicargo.Jobs.Core
 					_action();
 				}
 				catch (Exception e)
-				{					
+				{
+					// todo: 1. think again
 					if (e.IsCritical())
 					{
 						tokenSource.Cancel(false);

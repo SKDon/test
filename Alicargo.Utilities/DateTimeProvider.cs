@@ -8,12 +8,17 @@ namespace Alicargo.Utilities
 
 		static DateTimeProvider()
 		{
-			SetProvider(new DefaultDateTimeProvider());
+			SetDefault();
 		}
 
 		public static DateTimeOffset Now
 		{
 			get { return _current.Now; }
+		}
+
+		public static void SetDefault()
+		{
+			SetProvider(new DefaultDateTimeProvider());
 		}
 
 		public static void SetProvider(IDateTimeProvider value)
