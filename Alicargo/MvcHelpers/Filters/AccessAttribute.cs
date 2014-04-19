@@ -4,7 +4,7 @@ using Alicargo.DataAccess.Contracts.Enums;
 
 namespace Alicargo.MvcHelpers.Filters
 {
-	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 	internal sealed class AccessAttribute : FilterAttribute
 	{
 		private readonly RoleType[] _roles;

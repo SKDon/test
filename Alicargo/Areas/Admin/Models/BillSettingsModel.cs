@@ -1,4 +1,6 @@
-﻿namespace Alicargo.Areas.Admin.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Alicargo.Areas.Admin.Models
 {
 	public sealed class BillSettingsModel
 	{
@@ -6,7 +8,7 @@
 		/// Банк получателя
 		/// </summary>
 		public string Bank { get; set; }
-		
+
 		/// <summary>
 		/// БИК
 		/// </summary>
@@ -36,5 +38,25 @@
 		/// Получатель
 		/// </summary>
 		public string Payee { get; set; }
+
+		/// <summary>
+		/// Поставщик
+		/// </summary>
+		public string Shipper { get; set; }
+
+		/// <summary>
+		/// Руководитель
+		/// </summary>
+		public string Head { get; set; }
+
+		/// <summary>
+		/// Поставщик
+		/// </summary>
+		public string Accountant { get; set; }
+
+		/// <summary>
+		/// Предупреждение
+		/// </summary>
+		public string HeaderText { get; set; }
 	}
 }

@@ -1,6 +1,55 @@
-﻿.bill-settings {
+﻿.bill-settings .span12 textarea {
+	height: auto;
 }
 
-.bill-settings .bank td {
-	border: 1px solid;
+.bill-settings .bank-details {
+	margin-bottom: 20px;
 }
+
+	.bill-settings .bank-details input, .bill-settings .bank-details textarea {
+		-ms-box-shadow: none;
+		-webkit-box-shadow: none;
+		border: 0 none;
+		box-shadow: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	.bill-settings .bank-details table {
+		width: 100%;
+	}
+
+	.bill-settings .bank-details td {
+		border: 1px solid #cccccc;
+		height: 20px;
+		padding: 2px 6px;
+		vertical-align: top;
+	}
+
+		.bill-settings .bank-details td label {
+			display: inline-block;
+			margin: 0;
+		}
+
+		.bill-settings .bank-details td.bank {
+			border-bottom: 0 none;
+			width: 60%;
+		}
+
+		.bill-settings .bank-details td.title {
+			width: 50px;
+		}
+
+		.bill-settings .bank-details td.info {
+			border-top: 0 none;
+			vertical-align: bottom;
+		}
+
+.bill-settings .other-details {
+	margin-bottom: 20px;
+}
+
+	.bill-settings .other-details label {
+		display: inline-block;
+	}

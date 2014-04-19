@@ -1,0 +1,56 @@
+﻿@model Alicargo.Areas.Admin.Models.BillSettingsModel
+
+<div class="bill-settings">
+	<div class="row">
+		<div class="span12">
+			@Html.LabelFor(x => x.HeaderText, "Текст в начале:")
+			@Html.TextAreaFor(x => x.HeaderText, new { rows = 4 })
+		</div>
+	</div>
+	<div class="bank-details">
+		<table>
+			<tr>
+				<td colspan="4" rowspan="2" class="bank">@Html.TextAreaFor(x => x.Bank, new { rows = 3, cols = 100 })</td>
+				<td>@Html.LabelFor(x => x.BIC, "БИК")</td>
+				<td>@Html.EditorFor(x => x.BIC)</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="title">@Html.LabelFor(x => x.CorrespondentAccount, "Сч. №")</td>
+				<td rowspan="2">@Html.TextAreaFor(x => x.CorrespondentAccount, new { rows = 3, cols = 100 })</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="info">@Html.LabelFor(x => x.Bank, "Банк получателя")</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(x => x.TIN, "ИНН")</td>
+				<td>@Html.EditorFor(x => x.TIN)</td>
+				<td>@Html.LabelFor(x => x.TaxRegistrationReasonCode, "КПП")</td>
+				<td class="trrc">@Html.EditorFor(x => x.TaxRegistrationReasonCode)</td>
+				<td rowspan="3">@Html.LabelFor(x => x.CurrentAccount, "Сч. №")</td>
+				<td rowspan="3">@Html.TextAreaFor(x => x.CurrentAccount, new { rows = 4, cols = 100 })</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="bank">@Html.TextAreaFor(x => x.Payee, new { rows = 2, cols = 100 })</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="info">@Html.LabelFor(x => x.Payee, "Получатель")</td>
+			</tr>
+		</table>
+	</div>
+	<div class="other-details">
+		<div class="row">
+			<div class="span4">
+				@Html.LabelFor(x => x.Shipper, "Поставщик:")
+				@Html.EditorFor(x => x.Shipper)
+			</div>
+			<div class="span4">
+				@Html.LabelFor(x => x.Head, "Руководитель:")
+				@Html.EditorFor(x => x.Head)
+			</div>
+			<div class="span4">
+				@Html.LabelFor(x => x.Accountant, "Бухгалтер:")
+				@Html.EditorFor(x => x.Accountant)
+			</div>
+		</div>
+	</div>
+</div>
