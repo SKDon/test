@@ -1,0 +1,122 @@
+﻿@using Alicargo.Utilities
+@model Alicargo.Areas.Admin.Models.BillSettingsModel
+
+<div class="bill-settings">
+	<h1>
+		Параметры счёта
+	</h1>
+	@*<div class="allert">
+			Внимание! Оплата данного счета означает согласие с условиями поставки товара. Уведомление об оплате
+			обязательно, в противном случае не гарантируется наличие товара на складе. Товар отпускается по факту
+			прихода денег на р/с Поставщика, самовывозом, при наличии доверенности и паспорта.
+		</div>*@
+	<h2>
+		Реквизиты счёта
+	</h2>
+	<div class="bank">
+		<table>
+			<tr>
+				<td colspan="4" rowspan="2" style="height: 40px">@Html.TextBoxFor(x => x.Bank)</td>
+				<td>БИК</td>
+				<td>@Html.TextBoxFor(x => x.BIC)</td>
+			</tr>
+			<tr>
+				<td rowspan="2">Сч. №</td>
+				<td rowspan="2">@Html.TextBoxFor(x => x.CorrespondentAccount)</td>
+			</tr>
+			<tr>
+				<td colspan="4">Банк получателя</td>
+			</tr>
+			<tr>
+				<td>ИНН</td>
+				<td>@Html.TextBoxFor(x => x.TIN)</td>
+				<td>КПП</td>
+				<td>@Html.TextBoxFor(x => x.TaxRegistrationReasonCode)</td>
+				<td rowspan="3">Сч. №</td>
+				<td rowspan="3">@Html.TextBoxFor(x => x.CurrentAccount)</td>
+			</tr>
+			<tr>
+				<td colspan="4">@Html.TextBoxFor(x => x.Payee)</td>
+			</tr>
+			<tr>
+				<td colspan="4">Получатель</td>
+			</tr>
+		</table>
+	</div>
+	@*<h1>
+			Счет на оплату № @ViewBag.NextBillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")г.
+		</h1>*@
+	<div class="participants">
+		<table>
+			<tr>
+				<td>Поставщик:</td>
+				<td>
+					Трэйд Инвест ООО, ИНН 7718953820, КПП 771801001, 107113, Москва г,
+					Сокольническая площадь, дом № 4, корпус a, офис 309, тел.: 88005558523
+				</td>
+			</tr>
+			<tr>
+				<td>Покупатель:</td>
+				<td>
+					Общество с ограниченной ответственностью "Престиж", ИНН 7453186275, 454000,
+					Челябинская обл, Елькина, дом № 43
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="positions">
+		<table>
+			<tr>
+				<td>№</td>
+				<td>Товары (работы, услуги)</td>
+				<td>Кол-во</td>
+				<td>Ед.</td>
+				<td>Цена</td>
+				<td>Сумма</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					Оплата по договору 139/14 от 3 марта 2014 года. За одежду,
+					обувь и другие непродоволдьственные товары
+				</td>
+				<td>1</td>
+				<td>шт</td>
+				<td>77 616,00</td>
+				<td>77 616,00</td>
+			</tr>
+		</table>
+	</div>
+	<div class="money">
+		<table>
+			<tr>
+				<td>Итого:</td>
+				<td>77 616,00</td>
+			</tr>
+			<tr>
+				<td>В том числе НДС:</td>
+				<td>11 839,73</td>
+			</tr>
+			<tr>
+				<td>Всего к оплате: </td>
+				<td>77 616,00</td>
+			</tr>
+		</table>
+		<div>
+			Всего наименований 1, на сумму 77 616,00 руб.
+		</div>
+		<div>
+			Семьдесят семь тысяч шестьсот шестнадцать рублей 00 копеек
+		</div>
+	</div>
+	<div class="bottom">
+		<table>
+			<tr>
+				<td>Руководитель</td>
+				<td>Надин Я.Н.</td>
+				<td>Бухгалтер</td>
+				<td> Надин Я.Н.</td>
+			</tr>
+		</table>
+	</div>
+</div>

@@ -152,7 +152,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BillSettingsController.cs" />
+    <Compile Include="Areas\Admin\Models\BillSettingsModel.cs" />
     <Compile Include="MvcHelpers\Filters\AccessAuthorizationFilter.cs" />
+    <Compile Include="T4MVC\Admin.BillSettingsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Admin.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\AdminAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -460,6 +469,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Mvc\FilterConfig.cs" />
     <Compile Include="App_Start\Mvc\RouteConfig.cs" />
+    <Content Include="Content\app\bill-settings.css" />
     <Content Include="Content\app\calculation-grid.css" />
     <Content Include="Content\app\common.css" />
     <Content Include="Content\app\kendo.css" />
@@ -609,6 +619,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Code\Helpers.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\BillSettings\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.0.intellisense.js" />
@@ -828,7 +841,9 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Shared\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

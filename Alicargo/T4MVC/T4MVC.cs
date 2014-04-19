@@ -25,6 +25,8 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static partial class MVC
 {
+    static readonly AdminClass s_Admin = new AdminClass();
+    public static AdminClass Admin { get { return s_Admin; } }
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
     public static Alicargo.Controllers.Application.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.Application.T4MVC_ApplicationUpdateController();
@@ -61,6 +63,13 @@ public static partial class MVC
 
 namespace T4MVC
 {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class AdminClass
+    {
+        public readonly string Name = "Admin";
+        public Alicargo.Areas.Admin.Controllers.BillSettingsController BillSettings = new Alicargo.Areas.Admin.Controllers.T4MVC_BillSettingsController();
+        public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
+    }
 }
 
 namespace T4MVC

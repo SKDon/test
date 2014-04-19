@@ -14,7 +14,8 @@ namespace Alicargo.Mvc
 			"~/Content/app/layout.css",
 			"~/Content/app/common.css",
 			"~/Content/app/calculation-grid.css",
-			"~/Content/app/payment.css")] 
+			"~/Content/app/payment.css",
+			"~/Content/app/bill-settings.css")] 
 		public const string Common = "~/css";
 	}
 }
