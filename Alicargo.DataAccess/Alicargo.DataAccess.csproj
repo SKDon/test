@@ -82,6 +82,7 @@
     <Compile Include="Repositories\Application\ApplicationFileRepository.cs" />
     <Compile Include="Repositories\Application\ApplicationRepository.cs" />
     <Compile Include="Repositories\Application\ApplicationEditor.cs" />
+    <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\User\ManagerRepository.cs" />
     <Compile Include="Repositories\User\BrokerRepository.cs" />
     <Compile Include="Repositories\CalculationRepository.cs" />

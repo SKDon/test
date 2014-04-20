@@ -9,3 +9,5 @@
 :r .\TestApplications.sql
 
 :r .\InitEmailTemplates.sql
+
+:r .\InitSettings.sql

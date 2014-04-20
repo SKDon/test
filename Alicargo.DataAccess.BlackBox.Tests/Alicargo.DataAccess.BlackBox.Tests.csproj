@@ -96,6 +96,7 @@
     <Compile Include="Repositories\CountryRepositoryTests.cs" />
     <Compile Include="Repositories\EmailMessageRepositoryTests.cs" />
     <Compile Include="Repositories\EventEmailRecipientTests.cs" />
+    <Compile Include="Repositories\SettingRepositoryTests.cs" />
     <Compile Include="Repositories\User\ForwarderRepositoryTests.cs" />
     <Compile Include="Repositories\User\SenderRepositoryTests.cs" />
     <Compile Include="Repositories\StateSettingsRepositoryTests.cs" />

@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Setting]
+(
+	[Type] INT NOT NULL PRIMARY KEY,
+	[RowVersion] ROWVERSION NOT NULL,
+	[Data] VARBINARY(MAX) NOT NULL
+)
+GO
