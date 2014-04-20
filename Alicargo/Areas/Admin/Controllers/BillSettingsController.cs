@@ -3,6 +3,7 @@ using Alicargo.Areas.Admin.Models;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Utilities;
@@ -26,7 +27,7 @@ namespace Alicargo.Areas.Admin.Controllers
 		{
 			var setting = _settings.Get(SettingType.Bill);
 
-			var data = _serializer.Deserialize<BillSettings>(setting.Data) ?? new BillSettings();
+			var data = _serializer.Deserialize<BillSettings>(setting.Data);
 
 			var model = new BillSettingsModel
 			{
@@ -47,12 +48,21 @@ namespace Alicargo.Areas.Admin.Controllers
 
 			var data = _serializer.Serialize(model.Data);
 
-			_settings.AddOrReplace(new Setting
+			try
 			{
-				Data = data,
-				RowVersion = model.Version,
-				Type = SettingType.Bill
-			});
+				_settings.AddOrReplace(new Setting
+				{
+					Data = data,
+					RowVersion = model.Version,
+					Type = SettingType.Bill
+				});
+			}
+			catch(UpdateConflictException)
+			{
+				ModelState.AddModelError("Version", @"Outdated data, refresh the page and try again");
+
+				return View(model);
+			}
 
 			return RedirectToAction(MVC.Admin.BillSettings.Index());
 		}
