@@ -47,8 +47,6 @@ namespace Alicargo.Controllers.Awb
 			_identity = identity;
 		}
 
-	
-
 		#region List
 
 		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]

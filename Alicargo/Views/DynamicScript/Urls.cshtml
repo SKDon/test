@@ -1,9 +1,9 @@
 ﻿@model DynamicScriptMethodDescription[]
-
 var Alicargo = (function($a){$a.Urls = (function($u){
-@foreach (var item in Model)
+@foreach(var item in Model)
 {
-	var line = string.Format("$u.{0}_{1}='{2}';", item.Controller, item.Action, Url.Action(item.Action, item.Controller));
-	@Html.Raw(line)
+	@(string.IsNullOrEmpty(item.Area)
+		  ? Html.Raw(string.Format("$u.{0}_{1}='{2}';", item.Controller, item.Action, Url.Action(item.Action, item.Controller)))
+		  : Html.Raw(string.Format("$u.{0}_{1}_{2}='{3}';", item.Area, item.Controller, item.Action, Url.Action(item.Action, item.Controller, new { item.Area }))))
 }
 return $u;}($a.Urls || {}));return $a;}(Alicargo || {}))
