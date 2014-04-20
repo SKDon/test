@@ -153,9 +153,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BillController.cs" />
     <Compile Include="Areas\Admin\Controllers\BillSettingsController.cs" />
     <Compile Include="Areas\Admin\Models\BillSettingsModel.cs" />
     <Compile Include="MvcHelpers\Filters\AccessAuthorizationFilter.cs" />
+    <Compile Include="T4MVC\Admin.BillController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\Admin.BillSettingsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -623,6 +627,7 @@
     <Content Include="Areas\Admin\Views\BillSettings\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\BillSettings\EditorTemplates\BillSettingsModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill\Preview.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.0.intellisense.js" />
