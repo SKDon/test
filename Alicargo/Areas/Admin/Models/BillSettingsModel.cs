@@ -1,62 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alicargo.Core.Contracts.Calculation;
 
 namespace Alicargo.Areas.Admin.Models
 {
 	public sealed class BillSettingsModel
 	{
-		/// <summary>
-		/// Банк получателя
-		/// </summary>
-		public string Bank { get; set; }
+		public BillSettings Data { get; set; }
 
-		/// <summary>
-		/// БИК
-		/// </summary>
-		public string BIC { get; set; }
-
-		/// <summary>
-		/// Корреспондентский счёт
-		/// </summary>
-		public string CorrespondentAccount { get; set; }
-
-		/// <summary>
-		/// ИНН
-		/// </summary>
-		public string TIN { get; set; }
-
-		/// <summary>
-		/// КПП
-		/// </summary>
-		public string TaxRegistrationReasonCode { get; set; }
-
-		/// <summary>
-		/// Расчетный счёт
-		/// </summary>
-		public string CurrentAccount { get; set; }
-
-		/// <summary>
-		/// Получатель
-		/// </summary>
-		public string Payee { get; set; }
-
-		/// <summary>
-		/// Поставщик
-		/// </summary>
-		public string Shipper { get; set; }
-
-		/// <summary>
-		/// Руководитель
-		/// </summary>
-		public string Head { get; set; }
-
-		/// <summary>
-		/// Поставщик
-		/// </summary>
-		public string Accountant { get; set; }
-
-		/// <summary>
-		/// Предупреждение
-		/// </summary>
-		public string HeaderText { get; set; }
+		[Timestamp]
+		public byte[] Version { get; set; }
 	}
 }
