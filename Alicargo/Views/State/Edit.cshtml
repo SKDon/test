@@ -2,11 +2,13 @@
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.State.StateEditModel
-<h1>
-	@Pages.StateEdit
-</h1>
-@Html.EditPage(Url.Action(MVC.State.Edit()), Pages.Save)
-@section scripts
+<div class="container-edit">
+	<h1>
+		@Pages.StateEdit
+	</h1>
+	@Html.EditPage(Url.Action(MVC.State.Edit()), Pages.Save)
+	@section scripts
 {
-	@Scripts.Render(JsPaths.StateEditJs)
-}
+		@Scripts.Render(JsPaths.StateEditJs)
+	}
+</div>

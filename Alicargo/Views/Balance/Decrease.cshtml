@@ -2,9 +2,11 @@
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.Calculation.Admin.PaymentModel
-<h1>
-	@Pages.BalanceDecrease: @ViewBag.Nic,
-	@Entities.Balance: @ViewBag.Balance.ToString("N2")
-</h1>
-@Html.EditPage(Url.Action(MVC.Balance.Decrease((long)ViewBag.ClientId)), Pages.Debiting)
-@Html.Action(MVC.Balance.History((long)ViewBag.ClientId))
+<div class="container-edit">
+	<h1>
+		@Pages.BalanceDecrease: @ViewBag.Nic,
+		@Entities.Balance: @ViewBag.Balance.ToString("N2")
+	</h1>
+	@Html.EditPage(Url.Action(MVC.Balance.Decrease((long)ViewBag.ClientId)), Pages.Debiting)
+	@Html.Action(MVC.Balance.History((long)ViewBag.ClientId))
+</div>

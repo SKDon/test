@@ -3,13 +3,15 @@
 @using Alicargo.Utilities.Localization
 @using Resources
 @model Alicargo.ViewModels.EmailTemplate.EventTemplateModel
-<p>
-	@Html.ActionLink(Pages.Help, MVC.EmailTemplate.Help(), new { @class = "pull-right", target = "balnk" })
-	<b>
-		@Pages.Event - @Model.EventType.ToLocalString()
-	</b>
-</p>
-@Html.EditPage(Url.Action(MVC.EmailTemplate.Edit()), Pages.Save)
+<div class="container-edit">
+	<p>
+		@Html.ActionLink(Pages.Help, MVC.EmailTemplate.Help(), new { @class = "pull-right", target = "balnk" })
+		<b>
+			@Pages.Event - @Model.EventType.ToLocalString()
+		</b>
+	</p>
+	@Html.EditPage(Url.Action(MVC.EmailTemplate.Edit()), Pages.Save)
+</div>
 @section scripts
 {
 	@Scripts.Render(JsPaths.TemplateEditJs)

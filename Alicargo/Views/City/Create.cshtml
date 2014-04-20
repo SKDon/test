@@ -1,6 +1,7 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model CityEditModel
-
-<h1>@Pages.Add @Pages.City</h1>
-@Html.EditPage(Url.Action(MVC.City.Create()), Pages.Save)
+<div class="container-edit">
+	<h1>@Pages.Add @Pages.City</h1>
+	@Html.EditPage(Url.Action(MVC.City.Create()), Pages.Save)
+</div>

@@ -1,7 +1,9 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.User.CarrierModel
-<h1>
-	@Pages.Add
-</h1>
-@Html.EditPage(Url.Action(MVC.Carrier.Create()), Pages.Save)
+<div class="container-edit">
+	<h1>
+		@Pages.Add
+	</h1>
+	@Html.EditPage(Url.Action(MVC.Carrier.Create()), Pages.Save)
+</div>

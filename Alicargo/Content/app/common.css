@@ -14,7 +14,8 @@
 
 .home-page {
 	font-family: "Myriad pro", Arial, Helvetica, sans-serif;
-	margin-top: 200px;
+	width: 1170px;
+	margin: 200px auto 0;
 }
 
 	.home-page h1 {

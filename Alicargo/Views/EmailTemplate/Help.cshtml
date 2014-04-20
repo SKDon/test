@@ -1,101 +1,103 @@
-﻿<p>
-	<b>Как настраивать шаблон.</b> Шаблон - это обычный текст со специальными вставками.
-	Например {FactoryName}, {MarkName}. При отправке письма по заявке вместо этих значений подставляются реальные данные.
-	Вставки можно использовать как в теле письма, так и в заголовке.
-	Иногда в заявке может не быть значения, и вместо вставки будет вставлено пустое значение.
-	Например, можно написать так: "Город: {TransitCity}".
-	Если город в заявке указан, то результат будет выглядить нормально -  "Город: Москва", а если город не указан, то это будет выглядеть так: "Город: ".
-	Это выглядит не очень хорошо. Чтобы решить эту проблему, можно указать во вставке уточнение формата в квадратных скобках.
-	Например, такая вставка {TransitCity [Город: {0}]} будет заменена на текст "Город: Москва", если город в заявке указан, а если город не указан, то ничего добавлено не будет, вставка в результат не добавляется.
-	В формате {0} указывает, куда будет поставлено реальное значение.
-</p>
-<p>
-	<b>Полный список вставок, которые можно использовать:</b>
-	<ul>
-		<li>Id - ИД заявки</li>
-		<li>Count - Места (коробки)</li>
-		<li>DisplayNumber - Номер заявки</li>
-		<li>ClientNic - Ник клиента</li>
-		<li>LegalEntity - Юридическое лицо клиента</li>
-		<li>CreationTimestamp - Дата создания заявки</li>
-		<li>FactoryName - Фабрика</li>
-		<li>MarkName - Марка</li>
-		<li>Invoice - Инвойс</li>
-		<li>InvoiceFiles - Название файла инвойса</li>
-		<li>PackingFiles - Название файла пакинга</li>
-		<li>SwiftFiles - Название файла SWIFT</li>
-		<li>DeliveryBillFiles - Название файла Счет за доставку</li>
-		<li>Torg12Files -  Название файла  ТОРГ12</li>
-		<li>DateOfCargoReceipt - Дата получения груза</li>
-		<li>TransitReference - Транзитный референс</li>
-		<li>CarrierName - Курьер</li>
-		<li>CarrierPhone - Курьер, телефон</li>
-		<li>CarrierContact - Курьер, контакт</li>
-		<li>CarrierAddress - Курьер, адресс</li>
-		<li>CarrierEmail - Курьер, email</li>
-		<li>FactoryEmail - Email фабрики</li>
-		<li>FactoryPhone - Телефон фабрики</li>
-		<li>FactoryContact - Контактное лицо фабрики</li>
-		<li>DaysInWork  - Дней в работе</li>
-		<li>StateChangeTimestamp - Дата изменения статуса заявки</li>
-		<li>StateName - Текущий статус заявки</li>
-		<li>Volume - Объем</li>
-		<li>Weight - Вес</li>
-		<li>Characteristic - Характеристика торвара</li>
-		<li>Value - Стоимость</li>
-		<li>AddressLoad - Адрес забора груза</li>
-		<li>CountryName - Страна</li>
-		<li>WarehouseWorkingTime - Время работы склада</li>
-		<li>TermsOfDelivery - Условия поставки</li>
-		<li>MethodOfDelivery - Способ доставки</li>
-		<li>TransitCity - Город доставки</li>
-		<li>TransitAddress - Адрес доставки</li>
-		<li>TransitRecipientName - Получатель</li>
-		<li>TransitPhone - Телефон достаки</li>
-		<li>TransitWarehouseWorkingTime - Время работы склада доставки</li>
-		<li>MethodOfTransit - Способ транзита</li>
-		<li>DeliveryType - Тип доставки</li>
-		<li>AirWaybill - Авианакладная</li>
-		<li>AirWaybillDateOfDeparture - Дата вылета</li>
-		<li>AirWaybillDateOfArrival - Дата прилета</li>
-		<li>AirWaybillGTD - ГТД</li>
-		<li>UploadedFile - Загруженный файл</li>
-		<li>SenderName - Отправитель</li>
-		<li>SenderContact - Отправитель, контакт</li>
-		<li>SenderPhone - Отправитель, телефон</li>
-		<li>SenderAddress - Отправитель, адрес</li>
-		<li>SenderEmail - Отправитель, email</li>
-		<li>ForwarderName - Имя перевозчика</li>
-	</ul>
-</p>
-<p>
-	<b>Для событий "Расчет" и "Расчет отменен" можно использовать:</b>
-	<ul>
-		<li>ClientBalance - Баланс клиента</li>
-		<li>CalculationTimestamp - Время расчета</li>
-		<li>AirWaybillDisplay - Авианакладная</li>
-		<li>ApplicationDisplay - Заявка</li>
-		<li>TariffPerKg - Тариф за килограм</li>
-		<li>Weight - Вес</li>
-		<li>WeightCost - Цена за вес</li>
-		<li>ScotchCost - Цена за скотч</li>
-		<li>InsuranceCost - Страховка</li>
-		<li>FactureCost - Фактура T1 + Фактура EX-1</li>
-		<li>FactureCostT1 - Фактура T1</li>
-		<li>FactureCostEx - Фактура EX-1</li>
-		<li>TransitCost - Цена за доставку</li>
-		<li>PickupCost - Цена за забор</li>
-		<li>TotalCost - Итого</li>
-	</ul>
-</p>
-<p>
-	<b>Для событий "Баланс клиента увеличен" и "Баланс клиента уменьшен отменен" можно использовать:</b>
-	<ul>
-		<li>ClientBalance - Баланс клиента</li>
-		<li>Money - Введенные деньги</li>
-		<li>Comment - Комментарий</li>
-		<li>ClientNic - Ник клиента</li>
-		<li>LegalEntity - Юридическое лицо клиента</li>
-		<li>Timestamp - Время операции</li>
-	</ul>
-</p>
+﻿<div class="container-edit">
+	<p>
+		<b>Как настраивать шаблон.</b> Шаблон - это обычный текст со специальными вставками.
+		Например {FactoryName}, {MarkName}. При отправке письма по заявке вместо этих значений подставляются реальные данные.
+		Вставки можно использовать как в теле письма, так и в заголовке.
+		Иногда в заявке может не быть значения, и вместо вставки будет вставлено пустое значение.
+		Например, можно написать так: "Город: {TransitCity}".
+		Если город в заявке указан, то результат будет выглядить нормально -  "Город: Москва", а если город не указан, то это будет выглядеть так: "Город: ".
+		Это выглядит не очень хорошо. Чтобы решить эту проблему, можно указать во вставке уточнение формата в квадратных скобках.
+		Например, такая вставка {TransitCity [Город: {0}]} будет заменена на текст "Город: Москва", если город в заявке указан, а если город не указан, то ничего добавлено не будет, вставка в результат не добавляется.
+		В формате {0} указывает, куда будет поставлено реальное значение.
+	</p>
+	<p>
+		<b>Полный список вставок, которые можно использовать:</b>
+		<ul>
+			<li>Id - ИД заявки</li>
+			<li>Count - Места (коробки)</li>
+			<li>DisplayNumber - Номер заявки</li>
+			<li>ClientNic - Ник клиента</li>
+			<li>LegalEntity - Юридическое лицо клиента</li>
+			<li>CreationTimestamp - Дата создания заявки</li>
+			<li>FactoryName - Фабрика</li>
+			<li>MarkName - Марка</li>
+			<li>Invoice - Инвойс</li>
+			<li>InvoiceFiles - Название файла инвойса</li>
+			<li>PackingFiles - Название файла пакинга</li>
+			<li>SwiftFiles - Название файла SWIFT</li>
+			<li>DeliveryBillFiles - Название файла Счет за доставку</li>
+			<li>Torg12Files -  Название файла  ТОРГ12</li>
+			<li>DateOfCargoReceipt - Дата получения груза</li>
+			<li>TransitReference - Транзитный референс</li>
+			<li>CarrierName - Курьер</li>
+			<li>CarrierPhone - Курьер, телефон</li>
+			<li>CarrierContact - Курьер, контакт</li>
+			<li>CarrierAddress - Курьер, адресс</li>
+			<li>CarrierEmail - Курьер, email</li>
+			<li>FactoryEmail - Email фабрики</li>
+			<li>FactoryPhone - Телефон фабрики</li>
+			<li>FactoryContact - Контактное лицо фабрики</li>
+			<li>DaysInWork  - Дней в работе</li>
+			<li>StateChangeTimestamp - Дата изменения статуса заявки</li>
+			<li>StateName - Текущий статус заявки</li>
+			<li>Volume - Объем</li>
+			<li>Weight - Вес</li>
+			<li>Characteristic - Характеристика торвара</li>
+			<li>Value - Стоимость</li>
+			<li>AddressLoad - Адрес забора груза</li>
+			<li>CountryName - Страна</li>
+			<li>WarehouseWorkingTime - Время работы склада</li>
+			<li>TermsOfDelivery - Условия поставки</li>
+			<li>MethodOfDelivery - Способ доставки</li>
+			<li>TransitCity - Город доставки</li>
+			<li>TransitAddress - Адрес доставки</li>
+			<li>TransitRecipientName - Получатель</li>
+			<li>TransitPhone - Телефон достаки</li>
+			<li>TransitWarehouseWorkingTime - Время работы склада доставки</li>
+			<li>MethodOfTransit - Способ транзита</li>
+			<li>DeliveryType - Тип доставки</li>
+			<li>AirWaybill - Авианакладная</li>
+			<li>AirWaybillDateOfDeparture - Дата вылета</li>
+			<li>AirWaybillDateOfArrival - Дата прилета</li>
+			<li>AirWaybillGTD - ГТД</li>
+			<li>UploadedFile - Загруженный файл</li>
+			<li>SenderName - Отправитель</li>
+			<li>SenderContact - Отправитель, контакт</li>
+			<li>SenderPhone - Отправитель, телефон</li>
+			<li>SenderAddress - Отправитель, адрес</li>
+			<li>SenderEmail - Отправитель, email</li>
+			<li>ForwarderName - Имя перевозчика</li>
+		</ul>
+	</p>
+	<p>
+		<b>Для событий "Расчет" и "Расчет отменен" можно использовать:</b>
+		<ul>
+			<li>ClientBalance - Баланс клиента</li>
+			<li>CalculationTimestamp - Время расчета</li>
+			<li>AirWaybillDisplay - Авианакладная</li>
+			<li>ApplicationDisplay - Заявка</li>
+			<li>TariffPerKg - Тариф за килограм</li>
+			<li>Weight - Вес</li>
+			<li>WeightCost - Цена за вес</li>
+			<li>ScotchCost - Цена за скотч</li>
+			<li>InsuranceCost - Страховка</li>
+			<li>FactureCost - Фактура T1 + Фактура EX-1</li>
+			<li>FactureCostT1 - Фактура T1</li>
+			<li>FactureCostEx - Фактура EX-1</li>
+			<li>TransitCost - Цена за доставку</li>
+			<li>PickupCost - Цена за забор</li>
+			<li>TotalCost - Итого</li>
+		</ul>
+	</p>
+	<p>
+		<b>Для событий "Баланс клиента увеличен" и "Баланс клиента уменьшен отменен" можно использовать:</b>
+		<ul>
+			<li>ClientBalance - Баланс клиента</li>
+			<li>Money - Введенные деньги</li>
+			<li>Comment - Комментарий</li>
+			<li>ClientNic - Ник клиента</li>
+			<li>LegalEntity - Юридическое лицо клиента</li>
+			<li>Timestamp - Время операции</li>
+		</ul>
+	</p>
+</div>

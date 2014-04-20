@@ -1,8 +1,9 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model ApplicationClientModel
-
-<h1>
-	@Pages.ApplicationAdd
-</h1>
-@Html.EditPage(Url.Action(MVC.ClientApplication.Create()), Pages.ApplicationAdd)
+<div class="container-edit">
+	<h1>
+		@Pages.ApplicationAdd
+	</h1>
+	@Html.EditPage(Url.Action(MVC.ClientApplication.Create()), Pages.ApplicationAdd)
+</div>

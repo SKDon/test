@@ -390,4 +390,7 @@
   <data name="Managers" xml:space="preserve">
     <value>Менеджеры</value>
   </data>
+  <data name="BillSettings" xml:space="preserve">
+    <value>Настройки счета</value>
+  </data>
 </root>

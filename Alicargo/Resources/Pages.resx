@@ -390,4 +390,7 @@
   <data name="Managers" xml:space="preserve">
     <value>Managers</value>
   </data>
+  <data name="BillSettings" xml:space="preserve">
+    <value>Bill settings</value>
+  </data>
 </root>

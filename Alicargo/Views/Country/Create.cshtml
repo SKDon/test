@@ -1,6 +1,7 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model CountryEditModel
-
-<h1>@Pages.Add @Pages.Country</h1>
-@Html.EditPage(Url.Action(MVC.Country.Create()), Pages.Save)
+<div class="container-edit">
+	<h1>@Pages.Add @Pages.Country</h1>
+	@Html.EditPage(Url.Action(MVC.Country.Create()), Pages.Save)
+</div>

@@ -2,9 +2,11 @@
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model ApplicationAdminModel
-<h1>
-	@Pages.ApplicationEdit @ViewBag.ApplicationNumber
-	<span>@Entities.Nic: @Html.ViewBag.ClientNic</span>
-</h1>
-@Html.EditPage(Url.Action(MVC.Application.Edit()), Pages.Update,
-	Html.ActionLink(Pages.Files, MVC.Files.AdminApplication((long) ViewBag.ApplicationId), new {@class = "btn btn-info"}))
+<div class="container-edit">
+	<h1>
+		@Pages.ApplicationEdit @ViewBag.ApplicationNumber
+		<span>@Entities.Nic: @Html.ViewBag.ClientNic</span>
+	</h1>
+	@Html.EditPage(Url.Action(MVC.Application.Edit()), Pages.Update,
+	Html.ActionLink(Pages.Files, MVC.Files.AdminApplication((long)ViewBag.ApplicationId), new { @class = "btn btn-info" }))
+</div>
