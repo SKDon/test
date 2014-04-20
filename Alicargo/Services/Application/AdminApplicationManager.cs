@@ -1,9 +1,9 @@
 ﻿using System;
+using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;

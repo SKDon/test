@@ -1,8 +1,8 @@
 ﻿using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Event;
+using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 
 namespace Alicargo.Core.AirWaybill

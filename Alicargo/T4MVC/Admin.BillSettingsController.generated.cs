@@ -26,9 +26,6 @@ namespace Alicargo.Areas.Admin.Controllers
     public partial class BillSettingsController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public BillSettingsController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected BillSettingsController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -83,6 +80,14 @@ namespace Alicargo.Areas.Admin.Controllers
         }
 
 
+        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Index
+        {
+            public readonly string model = "model";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -96,6 +101,13 @@ namespace Alicargo.Areas.Admin.Controllers
                 public readonly string Index = "Index";
             }
             public readonly string Index = "~/Areas/Admin/Views/BillSettings/Index.cshtml";
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string BillSettingsModel = "BillSettingsModel";
+            }
         }
     }
 
@@ -112,6 +124,18 @@ namespace Alicargo.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.Areas.Admin.Models.BillSettingsModel model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Index(Alicargo.Areas.Admin.Models.BillSettingsModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            IndexOverride(callInfo, model);
             return callInfo;
         }
 

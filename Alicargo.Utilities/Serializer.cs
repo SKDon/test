@@ -49,7 +49,7 @@ namespace Alicargo.Utilities
 			using (var stream = new MemoryStream(data))
 			using (var reader = new StreamReader(stream, Encoding.UTF8))
 			{
-				return (T)new JsonSerializer().Deserialize(reader, typeof(T));
+				return (T)_serializer.Deserialize(reader, typeof(T));
 			}
 		}
 	}

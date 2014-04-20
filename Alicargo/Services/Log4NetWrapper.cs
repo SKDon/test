@@ -1,5 +1,4 @@
 ﻿using System;
-using Alicargo.Core.Contracts;
 using Alicargo.Core.Contracts.Common;
 
 namespace Alicargo.Services

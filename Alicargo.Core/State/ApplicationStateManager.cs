@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.Core.Contracts.State;
-using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Utilities;

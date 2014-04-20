@@ -1,6 +1,4 @@
 ﻿using Alicargo.Core.AirWaybill;
-using Alicargo.Core.Contracts;
-using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

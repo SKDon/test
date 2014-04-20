@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alicargo.DataAccess.Contracts.Exceptions
+namespace Alicargo.Core.Contracts.Exceptions
 {
 	public sealed class EntityNotFoundException : Exception
 	{

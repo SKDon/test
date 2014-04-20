@@ -5,8 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using Alicargo.Core.Contracts.Common;
+using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
 namespace Alicargo.Services
