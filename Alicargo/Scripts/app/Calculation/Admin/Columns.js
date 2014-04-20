@@ -97,24 +97,36 @@
 					});
 			}
 
+			function getData(e) {
+				return $c.GetMainGrid().dataItem($(e.target).closest("tr"));
+			}
+
 			function onCalculate(e) {
 				e.preventDefault();
 				if ($a.Confirm($l.Pages_ConfrimCalculation)) {
-					var button = $(e.target).closest("a")[0];
-					var appId = $.data(button, "ApplicationId");
-					var awbId = $.data(button, "AirWaybillId");
-					$c.Post($u.Calculation_Calculate, { id: appId, awbId: awbId }, awbId);
+					var data = getData(e);
+					$c.Post($u.Calculation_Calculate, { id: data.ApplicationId, awbId: data.AirWaybillId }, data.AirWaybillId);
 				}
 			}
 
 			function onCancelCalculate(e) {
 				e.preventDefault();
 				if ($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
-					var button = $(e.target).closest("a")[0];
-					var appId = $.data(button, "ApplicationId");
-					var awbId = $.data(button, "AirWaybillId");
-					$c.Post($u.Calculation_RemoveCalculatation, { id: appId, awbId: awbId }, awbId);
+					var data = getData(e);
+					$c.Post($u.Calculation_RemoveCalculatation, { id: data.ApplicationId, awbId: data.AirWaybillId }, data.AirWaybillId);
 				}
+			}
+
+			function onBill(e) {
+				e.preventDefault();
+				var data = getData(e);
+				
+				$("<div></div>").kendoWindow({
+					width: "800px",
+					animation: false,
+					modal: true,
+					content: $u.Admin_Bill_Preview + "?applicationId=" + data.ApplicationId
+				}).data("kendoWindow").open().center();
 			}
 
 			function numberEditor(container, options) {
@@ -282,14 +294,25 @@
 				{
 					attributes: { "class": "cell-button" },
 					command: [{
-							name: "custom-gear",
-							text: "&nbsp;",
-							click: onCalculate
-						}, {
-							name: "custom-cancel",
-							text: "&nbsp;",
-							click: onCancelCalculate
-						}],
+						name: "custom-gear",
+						text: "&nbsp;",
+						click: onCalculate
+					}, {
+						name: "custom-cancel",
+						text: "&nbsp;",
+						click: onCancelCalculate
+					}],
+					title: "&nbsp;",
+					width: $a.DefaultGridButtonWidth
+				}
+				,
+				{
+					attributes: { "class": "cell-button" },
+					command: [{
+						name: "custom-bill",
+						text: "&nbsp;",
+						click: onBill
+					}],
 					title: "&nbsp;",
 					width: $a.DefaultGridButtonWidth
 				}

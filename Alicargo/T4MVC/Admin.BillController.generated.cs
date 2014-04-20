@@ -21,12 +21,15 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Areas.Admin.Controllers
 {
-    public partial class DynamicScriptController
+    public partial class BillController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected DynamicScriptController(Dummy d) { }
+        public BillController() { }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected BillController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -54,15 +57,21 @@ namespace Alicargo.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Preview()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Preview);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public DynamicScriptController Actions { get { return MVC.DynamicScript; } }
+        public BillController Actions { get { return MVC.Admin.Bill; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "DynamicScript";
+        public readonly string Name = "Bill";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "DynamicScript";
+        public const string NameConst = "Bill";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -70,22 +79,24 @@ namespace Alicargo.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Localization = "Localization";
-            public readonly string Roles = "Roles";
-            public readonly string States = "States";
-            public readonly string Urls = "Urls";
+            public readonly string Preview = "Preview";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Localization = "Localization";
-            public const string Roles = "Roles";
-            public const string States = "States";
-            public const string Urls = "Urls";
+            public const string Preview = "Preview";
         }
 
 
+        static readonly ActionParamsClass_Preview s_params_Preview = new ActionParamsClass_Preview();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Preview PreviewParams { get { return s_params_Preview; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Preview
+        {
+            public readonly string applicationId = "applicationId";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -96,64 +107,26 @@ namespace Alicargo.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Localization = "Localization";
-                public readonly string Roles = "Roles";
-                public readonly string States = "States";
-                public readonly string Urls = "Urls";
+                public readonly string Preview = "Preview";
             }
-            public readonly string Localization = "~/Views/DynamicScript/Localization.cshtml";
-            public readonly string Roles = "~/Views/DynamicScript/Roles.cshtml";
-            public readonly string States = "~/Views/DynamicScript/States.cshtml";
-            public readonly string Urls = "~/Views/DynamicScript/Urls.cshtml";
+            public readonly string Preview = "~/Areas/Admin/Views/Bill/Preview.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_DynamicScriptController : Alicargo.Controllers.DynamicScriptController
+    public partial class T4MVC_BillController : Alicargo.Areas.Admin.Controllers.BillController
     {
-        public T4MVC_DynamicScriptController() : base(Dummy.Instance) { }
+        public T4MVC_BillController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void LocalizationOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+        partial void PreviewOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Localization()
+        public override System.Web.Mvc.ActionResult Preview(long applicationId)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Localization);
-            LocalizationOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void RolesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.PartialViewResult Roles()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Roles);
-            RolesOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void StatesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.PartialViewResult States()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.States);
-            StatesOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void UrlsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.PartialViewResult Urls()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Urls);
-            UrlsOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Preview);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
+            PreviewOverride(callInfo, applicationId);
             return callInfo;
         }
 

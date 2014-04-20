@@ -98,8 +98,6 @@
 				$("tr a.k-grid-custom-gear").each(function() {
 					var button = $(this);
 					var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
-					$.data(button[0], "ApplicationId", dataItem.ApplicationId);
-					$.data(button[0], "AirWaybillId", dataItem.AirWaybillId);
 					if (dataItem.IsCalculated) {
 						button.remove();
 					}
@@ -108,8 +106,6 @@
 				$("tr a.k-grid-custom-cancel").each(function() {
 					var button = $(this);
 					var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
-					$.data(button[0], "ApplicationId", dataItem.ApplicationId);
-					$.data(button[0], "AirWaybillId", dataItem.AirWaybillId);
 					if (!dataItem.IsCalculated) {
 						button.remove();
 					}
@@ -117,9 +113,7 @@
 
 				$("tr.k-group-footer").each(function(i) {
 					var awbId = $c.CalculationInfo[i].AirWaybillId;
-
 					var awbDetails = getDetails(awbId);
-
 					var detailsHtml = $(detailsTemplate(awbDetails));
 
 					initAdditionalCost(detailsHtml, awbDetails);
@@ -136,7 +130,7 @@
 					if (value == null) {
 						return null;
 					}
-					
+
 					// todo: fix hack
 					if (Globalize.culture().name == 'en') {
 						return value.toFixed(2);

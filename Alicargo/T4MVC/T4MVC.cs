@@ -67,6 +67,7 @@ namespace T4MVC
     public class AdminClass
     {
         public readonly string Name = "Admin";
+        public Alicargo.Areas.Admin.Controllers.BillController Bill = new Alicargo.Areas.Admin.Controllers.T4MVC_BillController();
         public Alicargo.Areas.Admin.Controllers.BillSettingsController BillSettings = new Alicargo.Areas.Admin.Controllers.T4MVC_BillSettingsController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
