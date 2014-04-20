@@ -2,7 +2,8 @@ namespace Alicargo.DataAccess.DbContext
 {
 	internal enum SqlError
 	{
-		CannotInsertDuplicateKeyRow = 2601,
+		ViolationOfUniqueIndex = 2601,
+		ViolationOfConstraint = 2627,
 		DeleteStatementConflictedWihtConstraint = 547
 	}
 }

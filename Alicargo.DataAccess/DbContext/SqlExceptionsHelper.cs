@@ -22,17 +22,20 @@ namespace Alicargo.DataAccess.DbContext
 			{
 				return action();
 			}
-			catch (SqlException exception)
+			catch(SqlException exception)
 			{
-				switch ((SqlError)exception.Number)
+				switch((SqlError)exception.Number)
 				{
-					case SqlError.CannotInsertDuplicateKeyRow:
-						if (exception.Message.Contains("IX_User_Login"))
+					case SqlError.ViolationOfConstraint:
+						throw new DublicateException("Failed to add dublicate entity", exception);
+
+					case SqlError.ViolationOfUniqueIndex:
+						if(exception.Message.Contains("IX_User_Login"))
 						{
 							throw new DublicateLoginException("The login is occupied", exception);
 						}
 
-						throw new DublicateException("Failed to add dublicate entity", exception);
+						throw new DublicateException("Failed to add or update dublicate entity", exception);
 
 					case SqlError.DeleteStatementConflictedWihtConstraint:
 						throw new DeleteConflictedWithConstraintException("Can't delete an entity", exception);
@@ -45,7 +48,7 @@ namespace Alicargo.DataAccess.DbContext
 		[Obsolete]
 		public static void SaveChanges(this AlicargoDataContext context)
 		{
-			Action(() => context.SubmitChanges(ConflictMode.FailOnFirstConflict));			
+			Action(() => context.SubmitChanges(ConflictMode.FailOnFirstConflict));
 		}
 	}
 }
