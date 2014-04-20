@@ -24,7 +24,7 @@
 		var grid = $(selector);
 		var top = grid.position().top;
 		var marginAndBorder = 22;
-		
+
 		return height - top - marginAndBorder;
 	}
 
@@ -59,14 +59,16 @@
 	$a.ShowError = function() {
 		$a.ShowMessage($a.Localization.Pages_AnError);
 	};
-	
-	
+
+
 	$a.ShowMessage = function(message) {
 		alert(message);
 	};
 
 	$a.DefaultGridButtonWidth = "29px";
-	$a.Confirm = function(message) { return window.confirm(message); };
+	$a.Confirm = function(message) {
+		return window.confirm(message);
+	};
 
 	$a.LoadPage = function(url) {
 		window.location.href = url;

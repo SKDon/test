@@ -12,11 +12,11 @@
 				var that = $(this).attr("disabled", "disabled");
 				$.post('@Url.Action(MVC.AirWaybill.CargoIsCustomsCleared(Model.Id))')
 					.done(function () {
-						alert("@Pages.SuccessOperation.JavaScriptStringEncode()");
+						Alicargo.ShowMessage("@Pages.SuccessOperation.JavaScriptStringEncode()");
 						// todo: for a broker do rediret to the awb grid page
 					})
 					.error(function () {
-						alert("@Pages.AnError.JavaScriptStringEncode()");
+						Alicargo.ShowMessage("@Pages.AnError.JavaScriptStringEncode()");
 						that.removeAttr("disabled");
 					});
 			});
