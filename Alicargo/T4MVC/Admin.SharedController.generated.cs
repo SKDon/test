@@ -36,7 +36,9 @@ namespace T4MVC.Admin
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string BankDetails = "BankDetails";
             }
+            public readonly string BankDetails = "~/Areas/Admin/Views/Shared/BankDetails.cshtml";
         }
     }
 

@@ -31,7 +31,7 @@ namespace Alicargo.Areas.Admin.Controllers
 
 			var model = new BillSettingsModel
 			{
-				Data = data,
+				Settings = data,
 				Version = setting.RowVersion
 			};
 
@@ -46,7 +46,7 @@ namespace Alicargo.Areas.Admin.Controllers
 				return View(model);
 			}
 
-			var data = _serializer.Serialize(model.Data);
+			var data = _serializer.Serialize(model.Settings);
 
 			try
 			{

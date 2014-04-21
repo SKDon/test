@@ -4,51 +4,22 @@
 	@Html.HiddenFor(x => x.Version)
 	<div class="row">
 		<div class="span12">
-			@Html.LabelFor(x => x.Data.HeaderText, "Текст в начале:")
-			@Html.TextAreaFor(x => x.Data.HeaderText, new { rows = 3 })
+			@Html.LabelFor(x => x.Settings.HeaderText, "Текст в начале:")
+			@Html.TextAreaFor(x => x.Settings.HeaderText, new { rows = 3 })
 		</div>
 	</div>
-	<div class="bank-details">
-		<table>
-			<tr>
-				<td colspan="4" rowspan="2" class="bank">@Html.TextAreaFor(x => x.Data.Bank, new { rows = 2, cols = 100 })</td>
-				<td>@Html.LabelFor(x => x.Data.BIC, "БИК")</td>
-				<td>@Html.EditorFor(x => x.Data.BIC)</td>
-			</tr>
-			<tr>
-				<td rowspan="2" class="title">@Html.LabelFor(x => x.Data.CorrespondentAccount, "Сч. №")</td>
-				<td rowspan="2">@Html.TextAreaFor(x => x.Data.CorrespondentAccount, new { rows = 2, cols = 100 })</td>
-			</tr>
-			<tr>
-				<td colspan="4" class="info">@Html.LabelFor(x => x.Data.Bank, "Банк получателя")</td>
-			</tr>
-			<tr>
-				<td>@Html.LabelFor(x => x.Data.TIN, "ИНН")</td>
-				<td>@Html.EditorFor(x => x.Data.TIN)</td>
-				<td>@Html.LabelFor(x => x.Data.TaxRegistrationReasonCode, "КПП")</td>
-				<td class="trrc">@Html.EditorFor(x => x.Data.TaxRegistrationReasonCode)</td>
-				<td rowspan="3">@Html.LabelFor(x => x.Data.CurrentAccount, "Сч. №")</td>
-				<td rowspan="3">@Html.TextAreaFor(x => x.Data.CurrentAccount, new { rows = 4, cols = 100 })</td>
-			</tr>
-			<tr>
-				<td colspan="4" class="bank">@Html.TextAreaFor(x => x.Data.Payee, new { rows = 2, cols = 100 })</td>
-			</tr>
-			<tr>
-				<td colspan="4" class="info">@Html.LabelFor(x => x.Data.Payee, "Получатель")</td>
-			</tr>
-		</table>
-	</div>
+	@Html.Partial("BankDetails", Model.Settings)
 	<div class="other-details">
 		<div class="row">
 			<div class="span8">
-				@Html.LabelFor(x => x.Data.Shipper, "Поставщик:")
-				@Html.TextAreaFor(x => x.Data.Shipper)
+				@Html.LabelFor(x => x.Settings.Shipper, "Поставщик:")
+				@Html.TextAreaFor(x => x.Settings.Shipper)
 			</div>
 			<div class="span4">
-				@Html.LabelFor(x => x.Data.Head, "Руководитель:")
-				@Html.EditorFor(x => x.Data.Head)
-				@Html.LabelFor(x => x.Data.Accountant, "Бухгалтер:")
-				@Html.EditorFor(x => x.Data.Accountant)
+				@Html.LabelFor(x => x.Settings.Head, "Руководитель:")
+				@Html.EditorFor(x => x.Settings.Head)
+				@Html.LabelFor(x => x.Settings.Accountant, "Бухгалтер:")
+				@Html.EditorFor(x => x.Settings.Accountant)
 			</div>
 		</div>
 	</div>

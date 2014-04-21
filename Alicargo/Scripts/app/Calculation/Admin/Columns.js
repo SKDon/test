@@ -120,13 +120,20 @@
 			function onBill(e) {
 				e.preventDefault();
 				var data = getData(e);
-				
-				$("<div></div>").kendoWindow({
-					width: "800px",
+
+				var window = $("<div></div>");
+				window.kendoWindow({
+					width: "1000px",
+					position: {
+						top: 60,
+						left: 200
+					},
+					title:"Счёт",
 					animation: false,
 					modal: true,
 					content: $u.Admin_Bill_Preview + "?applicationId=" + data.ApplicationId
-				}).data("kendoWindow").open().center();
+				});
+				window.data("kendoWindow").open();
 			}
 
 			function numberEditor(container, options) {

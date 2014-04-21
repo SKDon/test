@@ -26,9 +26,6 @@ namespace Alicargo.Areas.Admin.Controllers
     public partial class BillController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public BillController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected BillController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -59,9 +56,9 @@ namespace Alicargo.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Preview()
+        public virtual System.Web.Mvc.PartialViewResult Preview()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Preview);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Preview);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -119,12 +116,12 @@ namespace Alicargo.Areas.Admin.Controllers
         public T4MVC_BillController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void PreviewOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long applicationId);
+        partial void PreviewOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long applicationId);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Preview(long applicationId)
+        public override System.Web.Mvc.PartialViewResult Preview(long applicationId)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Preview);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Preview);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
             PreviewOverride(callInfo, applicationId);
             return callInfo;

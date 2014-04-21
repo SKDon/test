@@ -1,1 +1,58 @@
-﻿
+﻿@using Alicargo.Utilities
+@model Alicargo.Areas.Admin.Models.BillModel
+
+<div class="bill-preview">
+	<div class="textedit-holder">
+		@Html.TextAreaFor(x => x.Settings.HeaderText, new { rows = 3 })
+	</div>
+	<div class="bill-settings">
+		@Html.Partial("BankDetails", Model.Settings)
+	</div>
+	<div>
+		<h1>
+			Счет на оплату № @ViewBag.BillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")
+		</h1>
+	</div>
+	<div>
+		<table>
+			<tr>
+				<td class="info">@Html.LabelFor(x => x.Settings.Shipper, "Поставщик:")</td>
+				<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Settings.Shipper)</div></td>
+			</tr>
+			<tr>
+				<td class="info">@Html.LabelFor(x => x.Settings.Shipper, "Покупатель:")</td>
+				<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Client)</div></td>
+			</tr>
+		</table>
+	</div>
+	<div class="goods">
+		<table>
+			<tr class="head">
+				<td style="width: 20px;">№</td>
+				<td>Товары (работы, услуги)</td>
+				<td class="narrow">Кол-во</td>
+				<td style="width: 20px">Ед.</td>
+				<td class="narrow">Цена</td>
+				<td class="narrow">Сумма</td>
+			</tr>
+			<tr>
+				<td class="info">1</td>
+				<td><div class="textedit-holder">@Html.TextAreaFor(x => x.Goods)</div></td>
+				<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Count)</div></td>
+				<td class="info">шт.</td>
+				<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Price)</div></td>
+				<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Total)</div></td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<table>
+			<tr>
+				<td class="info">@Html.LabelFor(x => x.Settings.Head, "Руководитель:")</td>
+				<td>@Html.EditorFor(x => x.Settings.Head)</td>
+				<td class="info">@Html.LabelFor(x => x.Settings.Accountant, "Бухгалтер:")</td>
+				<td>@Html.EditorFor(x => x.Settings.Accountant)</td>
+			</tr>
+		</table>
+	</div>
+</div>

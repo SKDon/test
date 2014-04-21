@@ -5,7 +5,7 @@ namespace Alicargo.Areas.Admin.Models
 {
 	public sealed class BillSettingsModel
 	{
-		public BillSettings Data { get; set; }
+		public BillSettings Settings { get; set; }
 
 		[Timestamp]
 		public byte[] Version { get; set; }

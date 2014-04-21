@@ -155,6 +155,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BillController.cs" />
     <Compile Include="Areas\Admin\Controllers\BillSettingsController.cs" />
+    <Compile Include="Areas\Admin\Models\BillModel.cs" />
     <Compile Include="Areas\Admin\Models\BillSettingsModel.cs" />
     <Compile Include="MvcHelpers\Filters\AccessAuthorizationFilter.cs" />
     <Compile Include="T4MVC\Admin.BillController.generated.cs">
@@ -628,6 +629,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\BillSettings\EditorTemplates\BillSettingsModel.cshtml" />
     <Content Include="Areas\Admin\Views\Bill\Preview.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\BankDetails.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.0.intellisense.js" />
@@ -847,9 +849,7 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Shared\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

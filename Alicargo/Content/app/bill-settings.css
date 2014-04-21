@@ -6,16 +6,6 @@
 	margin-bottom: 20px;
 }
 
-	.bill-settings .bank-details input, .bill-settings .bank-details textarea {
-		-ms-box-shadow: none;
-		-webkit-box-shadow: none;
-		border: 0 none;
-		box-shadow: none;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-	}
-
 	.bill-settings .bank-details table {
 		width: 100%;
 	}
@@ -23,7 +13,7 @@
 	.bill-settings .bank-details td {
 		border: 1px solid #cccccc;
 		height: 20px;
-		padding: 2px 6px;
+		padding: 2px;
 		vertical-align: top;
 	}
 
@@ -37,12 +27,19 @@
 			width: 60%;
 		}
 
-		.bill-settings .bank-details td.title {
-			width: 50px;
+		.bill-settings .bank-details td.caption {
+			border-right: 0 none;
+			padding: 6px 8px 0 8px;
+			width: 40px;
 		}
+
+			.bill-settings .bank-details td.caption + td {
+				border-left: 0 none;
+			}
 
 		.bill-settings .bank-details td.info {
 			border-top: 0 none;
+			padding-left: 8px;
 			vertical-align: bottom;
 		}
 
@@ -52,4 +49,32 @@
 
 	.bill-settings .other-details label {
 		display: inline-block;
+	}
+
+.bill-preview .goods table {
+	width: 100%;
+}
+
+.bill-preview td {
+	vertical-align: top;
+}
+
+.bill-preview td.info {
+	padding-left: 8px;
+	padding-right: 4px;
+	padding-top: 6px;
+	text-align: right;
+	vertical-align: top;
+}
+
+.bill-preview .goods {
+	margin: 10px 0;
+}
+
+	.bill-preview .goods .narrow {
+		width: 100px;
+	}
+
+	.bill-preview .goods .head {
+		font-weight: bold;
 	}
