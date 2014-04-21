@@ -78,7 +78,7 @@
 	padding: 19px 29px 19px;
 }
 
-.form-signin .form-signin-heading,
+	.form-signin .form-signin-heading,
 	.form-signin .checkbox {
 		margin-bottom: 10px;
 	}
@@ -319,4 +319,18 @@
 	max-height: 200px;
 	overflow-x: hidden;
 	overflow-y: auto;
+}
+
+.textedit-holder {
+	height: 100%;
+	width: 100%;
+}
+
+.textedit-holder textarea, .textedit-holder input[type="text"] {
+	width: 100%;
+	height: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
 }
