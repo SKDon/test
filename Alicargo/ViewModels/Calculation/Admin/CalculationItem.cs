@@ -16,7 +16,7 @@ namespace Alicargo.ViewModels.Calculation.Admin
 		public float? Weight { get; set; }
 		public string Invoice { get; set; }
 		public decimal Value { get; set; }
-		public int ValueCurrencyId { get; set; }
+		public CurrencyType ValueCurrencyId { get; set; }
 		public decimal? ScotchCost { get; set; }
 		public decimal? FactureCost { get; set; }
 		public decimal? FactureCostEx { get; set; }

@@ -110,7 +110,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			var state = _states.Get(language, application.StateId).Select(x => x.Value).FirstOrDefault();
 			var countryName = _countries.All(language).First(x => x.Id == application.CountryId).Name;
 			var cityName = _cities.All(language).First(x => x.Id == application.TransitCityId).Name;
-			var value = LocalizationHelper.GetValueString(application.Value, (CurrencyType)application.CurrencyId, culture);
+			var value = LocalizationHelper.GetValueString(application.Value, application.CurrencyId, culture);
 			var deliveryBill = _files.GetNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Value).ToArray();
 			var invoice = _files.GetNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Value).ToArray();
 			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();

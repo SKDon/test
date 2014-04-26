@@ -6,7 +6,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 {
 	internal sealed class BillRepository : IBillRepository
 	{
-		public void AddOrReplace(BillEditData data)
+		public void AddOrReplace(long applicationId, BillEditData data)
 		{
 		}
 

@@ -1,4 +1,6 @@
-﻿namespace Alicargo.ViewModels.Calculation.Sender
+﻿using Alicargo.DataAccess.Contracts.Enums;
+
+namespace Alicargo.ViewModels.Calculation.Sender
 {
 	public sealed class SenderCalculationItem
 	{
@@ -12,7 +14,7 @@
 		public float? Weight { get; set; }
 		public string Invoice { get; set; }
 		public decimal Value { get; set; }
-		public int ValueCurrencyId { get; set; }
+		public CurrencyType ValueCurrencyId { get; set; }
 		public decimal? SenderRate { get; set; }
 		public decimal TotalSenderRate { get; set; }
 		public decimal? SenderScotchCost { get; set; }

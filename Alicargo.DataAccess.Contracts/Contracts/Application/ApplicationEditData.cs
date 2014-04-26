@@ -14,7 +14,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public float Volume { get; set; }
 		public string TermsOfDelivery { get; set; }
 		public decimal Value { get; set; }
-		public int CurrencyId { get; set; }
+		public CurrencyType CurrencyId { get; set; }
 		public long CountryId { get; set; }
 		public DateTimeOffset? DateInStock { get; set; }
 		public DateTimeOffset? DateOfCargoReceipt { get; set; }

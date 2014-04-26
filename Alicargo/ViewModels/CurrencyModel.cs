@@ -9,13 +9,13 @@ namespace Alicargo.ViewModels
 	{
 		public CurrencyModel()
 		{
-			CurrencyId = (int)CurrencyType.Euro;
+			CurrencyId = CurrencyType.Euro;
 		}
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Value")]
 		public decimal Value { get; set; }
 
 		[Required]
-		public int CurrencyId { get; set; }
+		public CurrencyType CurrencyId { get; set; }
 	}
 }

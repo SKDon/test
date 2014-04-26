@@ -171,7 +171,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.Volume = from.Volume;
 			to.TermsOfDelivery = from.TermsOfDelivery;
 			to.Value = from.Value;
-			to.CurrencyId = from.CurrencyId;
+			to.CurrencyId = (int)@from.CurrencyId;
 			to.MethodOfDeliveryId = (int)from.MethodOfDelivery;
 			to.DateInStock = from.DateInStock;
 			to.DateOfCargoReceipt = from.DateOfCargoReceipt;

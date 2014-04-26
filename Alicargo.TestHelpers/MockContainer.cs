@@ -40,7 +40,7 @@ namespace Alicargo.TestHelpers
 				.Create());
 
 			Fixture.Register(() => Fixture.Build<ApplicationData>()
-				.With(x => x.CurrencyId, 1)
+				.With(x => x.CurrencyId, CurrencyType.Euro)
 				.Create());
 
 			Fixture.Register(() => Fixture.Build<AwbAdminModel>()

@@ -104,7 +104,7 @@ namespace Alicargo.Services.Application
 				Weight = x.Weight,
 				MethodOfDeliveryId = (int)x.MethodOfDelivery,
 				Value = x.Value,
-				CurrencyId = x.CurrencyId,
+				CurrencyId = (int)x.CurrencyId,
 				AirWaybillId = x.AirWaybillId,
 				PickupCost = x.GetAdjustedPickupCost(),
 				FactureCost = x.GetAdjustedFactureCost(),
@@ -139,9 +139,9 @@ namespace Alicargo.Services.Application
 			}).ToArray();
 		}
 
-		private static string GetValueString(decimal value, int currencyId)
+		private static string GetValueString(decimal value, CurrencyType currencyId)
 		{
-			var currency = ((CurrencyType)currencyId);
+			var currency = currencyId;
 
 			var culture = CultureProvider.Get();
 

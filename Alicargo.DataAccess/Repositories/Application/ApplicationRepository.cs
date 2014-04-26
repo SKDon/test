@@ -70,7 +70,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				Weight = x.Weight,
 				MethodOfDelivery = (MethodOfDelivery)x.MethodOfDeliveryId,
 				Value = x.Value,
-				CurrencyId = x.CurrencyId,
+				CurrencyId = (CurrencyType)x.CurrencyId,
 				AirWaybillId = x.AirWaybillId,
 				SenderId = x.SenderId,
 				SenderContact = x.Sender.Contact,
