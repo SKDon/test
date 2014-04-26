@@ -3,10 +3,11 @@
 @model Alicargo.Areas.Admin.Models.BillModel
 
 <div class="bill-preview">
-	<div class="textedit-holder">
+	<div class="textedit-holder header-text">
 		@Html.TextAreaFor(x => x.Settings.HeaderText, new { rows = 3 })
 	</div>
 	<div class="bill-settings">
+		<label>Реквизиты:</label>
 		@Html.EditorFor(x => x.Settings)
 	</div>
 	<div>

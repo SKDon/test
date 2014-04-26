@@ -24,6 +24,7 @@
 
 		.bill-settings .bank-details td.bank {
 			border-bottom: 0 none;
+			height: 64px;
 			width: 60%;
 		}
 
@@ -59,13 +60,13 @@
 	vertical-align: top;
 }
 
-.bill-preview td.info {
-	padding-left: 8px;
-	padding-right: 4px;
-	padding-top: 6px;
-	text-align: right;
-	vertical-align: top;
-}
+	.bill-preview td.info {
+		padding-left: 8px;
+		padding-right: 4px;
+		padding-top: 6px;
+		text-align: right;
+		vertical-align: top;
+	}
 
 .bill-preview .goods {
 	margin: 10px 0;
@@ -78,3 +79,7 @@
 	.bill-preview .goods .head {
 		font-weight: bold;
 	}
+
+.bill-preview .header-text {
+	margin-bottom: 10px;
+}
