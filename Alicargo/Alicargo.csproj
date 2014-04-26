@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BillController.cs" />
     <Compile Include="Areas\Admin\Controllers\BillSettingsController.cs" />
+    <Compile Include="Areas\Admin\Models\BankDetails.cs" />
     <Compile Include="Areas\Admin\Models\BillModel.cs" />
     <Compile Include="Areas\Admin\Models\BillSettingsModel.cs" />
     <Compile Include="AuthenticationController.generated.cs">
@@ -631,7 +632,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\BillSettings\EditorTemplates\BillSettingsModel.cshtml" />
     <Content Include="Areas\Admin\Views\Bill\Preview.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BillSettings.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BankDetails.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.0.intellisense.js" />

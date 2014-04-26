@@ -27,12 +27,26 @@ namespace Alicargo.Areas.Admin.Controllers
 		{
 			var setting = _settings.Get(SettingType.Bill);
 
-			var data = _serializer.Deserialize<BillSettings>(setting.Data);
+			var billSettings = _serializer.Deserialize<BillSettings>(setting.Data);
 
 			var model = new BillSettingsModel
 			{
-				Settings = data,
-				Version = setting.RowVersion
+				BankDetails = new BankDetails
+				{
+					Bank = billSettings.Bank,
+					BIC = billSettings.BIC,
+					CorrespondentAccount = billSettings.CorrespondentAccount,
+					CurrentAccount = billSettings.CurrentAccount,
+					Payee = billSettings.Payee,
+					TaxRegistrationReasonCode = billSettings.TaxRegistrationReasonCode,
+					TIN = billSettings.TIN
+				},
+				Version = setting.RowVersion,
+				Accountant = billSettings.Accountant,
+				Head = billSettings.Head,
+				HeaderText = billSettings.HeaderText,
+				Shipper = billSettings.Shipper,
+				VAT = (uint)(billSettings.VAT * 100)
 			};
 
 			return View(model);
@@ -46,7 +60,21 @@ namespace Alicargo.Areas.Admin.Controllers
 				return View(model);
 			}
 
-			var data = _serializer.Serialize(model.Settings);
+			var data = _serializer.Serialize(new BillSettings
+			{
+				Accountant = model.Accountant,
+				Bank = model.BankDetails.Bank,
+				BIC = model.BankDetails.BIC,
+				CorrespondentAccount = model.BankDetails.CorrespondentAccount,
+				CurrentAccount = model.BankDetails.CurrentAccount,
+				Head = model.Head,
+				HeaderText = model.HeaderText,
+				Payee = model.BankDetails.Payee,
+				Shipper = model.Shipper,
+				TaxRegistrationReasonCode = model.BankDetails.TaxRegistrationReasonCode,
+				TIN = model.BankDetails.TIN,
+				VAT = (float)model.VAT / 100
+			});
 
 			try
 			{

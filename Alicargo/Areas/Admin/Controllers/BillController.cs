@@ -51,20 +51,20 @@ namespace Alicargo.Areas.Admin.Controllers
 			{
 				return new BillModel
 				{
-					Settings = new BillSettings
+					BankDetails = new BankDetails
 					{
-						Accountant = bill.Accountant,
 						Bank = bill.Bank,
 						BIC = bill.BIC,
 						CorrespondentAccount = bill.CorrespondentAccount,
-						CurrentAccount = bill.CurrentAccount,
-						Head = bill.Head,
-						HeaderText = bill.HeaderText,
-						Payee = bill.Payee,
-						Shipper = bill.Shipper,
+						CurrentAccount = bill.CurrentAccount,						
+						Payee = bill.Payee,						
 						TaxRegistrationReasonCode = bill.TaxRegistrationReasonCode,
 						TIN = bill.TIN
 					},
+					Accountant = bill.Accountant,
+					Head = bill.Head,
+					HeaderText = bill.HeaderText,
+					Shipper = bill.Shipper,
 					Client = bill.Client,
 					Count = bill.Count,
 					Goods = bill.Goods,
@@ -77,7 +77,16 @@ namespace Alicargo.Areas.Admin.Controllers
 
 			return new BillModel
 			{
-				Settings = billSettings,
+				BankDetails = new BankDetails
+				{
+					Bank = billSettings.Bank,
+					BIC = billSettings.BIC,
+					CorrespondentAccount = billSettings.CorrespondentAccount,
+					CurrentAccount = billSettings.CurrentAccount,
+					Payee = billSettings.Payee,
+					TaxRegistrationReasonCode = billSettings.TaxRegistrationReasonCode,
+					TIN = billSettings.TIN
+				},
 				Count = "1",
 				Client = application.ClientLegalEntity,
 				Goods = application.FactoryName,

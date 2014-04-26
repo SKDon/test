@@ -1,26 +1,29 @@
-﻿@model Alicargo.Areas.Admin.Models.BillSettingsModel
+﻿@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.Areas.Admin.Models.BillSettingsModel
 
 <div class="bill-settings">
 	@Html.HiddenFor(x => x.Version)
 	<div class="row">
 		<div class="span12">
-			@Html.LabelFor(x => x.Settings.HeaderText, "Текст в начале:")
-			@Html.TextAreaFor(x => x.Settings.HeaderText, new { rows = 3 })
+			@Html.EditorWithLabelFor(x => x.HeaderText)
 		</div>
 	</div>
-	<label>Реквизиты:</label>
-	@Html.EditorFor(x => x.Settings)
+	@Html.EditorWithLabelFor(x => x.BankDetails)
 	<div class="other-details">
 		<div class="row">
-			<div class="span8">
-				@Html.LabelFor(x => x.Settings.Shipper, "Поставщик:")
-				@Html.TextAreaFor(x => x.Settings.Shipper)
+			<div class="span12">
+				@Html.EditorWithLabelFor(x => x.Shipper)
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				@Html.EditorWithLabelFor(x => x.Head)
 			</div>
 			<div class="span4">
-				@Html.LabelFor(x => x.Settings.Head, "Руководитель:")
-				@Html.EditorFor(x => x.Settings.Head)
-				@Html.LabelFor(x => x.Settings.Accountant, "Бухгалтер:")
-				@Html.EditorFor(x => x.Settings.Accountant)
+				@Html.EditorWithLabelFor(x => x.Accountant)
+			</div>
+			<div class="span4">
+				@Html.EditorWithLabelFor(x => x.VAT)
 			</div>
 		</div>
 	</div>
