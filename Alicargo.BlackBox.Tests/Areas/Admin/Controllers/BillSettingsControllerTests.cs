@@ -66,7 +66,7 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Controllers
 
 			result.Should().BeOfType<RedirectToRouteResult>();
 			billSettings.ShouldBeEquivalentTo(model, options => options.Excluding(x => x.VAT).ExcludingMissingProperties());
-			billSettings.VAT.ShouldBeEquivalentTo((float)model.VAT / 100);
+			billSettings.VAT.ShouldBeEquivalentTo((decimal)model.VAT / 100);
 			billSettings.ShouldBeEquivalentTo(model.BankDetails, options => options.ExcludingMissingProperties());
 		}
 

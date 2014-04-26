@@ -13,6 +13,6 @@
 		public string Head { get; set; }
 		public string Accountant { get; set; }
 		public string HeaderText { get; set; }
-		public float VAT { get; set; }
+		public decimal VAT { get; set; }
 	}
 }

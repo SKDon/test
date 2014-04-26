@@ -73,7 +73,7 @@ namespace Alicargo.Areas.Admin.Controllers
 				Shipper = model.Shipper,
 				TaxRegistrationReasonCode = model.BankDetails.TaxRegistrationReasonCode,
 				TIN = model.BankDetails.TIN,
-				VAT = (float)model.VAT / 100
+				VAT = (decimal)model.VAT / 100
 			});
 
 			try

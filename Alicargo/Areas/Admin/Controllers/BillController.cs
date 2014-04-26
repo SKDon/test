@@ -45,7 +45,7 @@ namespace Alicargo.Areas.Admin.Controllers
 			return _serializer.Deserialize<T>(_settings.Get(type).Data);
 		}
 
-		private static BillModel GetModel(BillSettings billSettings, ApplicationData application, BillEditData bill)
+		private static BillModel GetModel(BillSettings settings, ApplicationData application, BillEditData bill)
 		{
 			if(bill != null)
 			{
@@ -56,8 +56,8 @@ namespace Alicargo.Areas.Admin.Controllers
 						Bank = bill.Bank,
 						BIC = bill.BIC,
 						CorrespondentAccount = bill.CorrespondentAccount,
-						CurrentAccount = bill.CurrentAccount,						
-						Payee = bill.Payee,						
+						CurrentAccount = bill.CurrentAccount,
+						Payee = bill.Payee,
 						TaxRegistrationReasonCode = bill.TaxRegistrationReasonCode,
 						TIN = bill.TIN
 					},
@@ -73,25 +73,29 @@ namespace Alicargo.Areas.Admin.Controllers
 				};
 			}
 
-			var price = LocalizationHelper.GetValueString(application.Value, application.CurrencyId, CultureProvider.GetCultureInfo());
+			var price = (application.Value * (settings.VAT + 1)).ToString("n2");
 
 			return new BillModel
 			{
 				BankDetails = new BankDetails
 				{
-					Bank = billSettings.Bank,
-					BIC = billSettings.BIC,
-					CorrespondentAccount = billSettings.CorrespondentAccount,
-					CurrentAccount = billSettings.CurrentAccount,
-					Payee = billSettings.Payee,
-					TaxRegistrationReasonCode = billSettings.TaxRegistrationReasonCode,
-					TIN = billSettings.TIN
+					Bank = settings.Bank,
+					BIC = settings.BIC,
+					CorrespondentAccount = settings.CorrespondentAccount,
+					CurrentAccount = settings.CurrentAccount,
+					Payee = settings.Payee,
+					TaxRegistrationReasonCode = settings.TaxRegistrationReasonCode,
+					TIN = settings.TIN
 				},
 				Count = "1",
 				Client = application.ClientLegalEntity,
 				Goods = application.FactoryName,
 				Price = price,
-				Total = price
+				Total = price,
+				Accountant = settings.Accountant,
+				Head = settings.Head,
+				HeaderText = settings.HeaderText,
+				Shipper = settings.Shipper
 			};
 		}
 	}

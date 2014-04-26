@@ -1,14 +1,14 @@
-﻿@using Alicargo.Utilities
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Alicargo.Utilities
 @using Resources
 @model Alicargo.Areas.Admin.Models.BillModel
 
 <div class="bill-preview">
 	<div class="textedit-holder header-text">
-		@Html.TextAreaFor(x => x.Settings.HeaderText, new { rows = 3 })
+		@Html.EditorWithLabelFor(x => x.HeaderText)
 	</div>
 	<div class="bill-settings">
-		<label>Реквизиты:</label>
-		@Html.EditorFor(x => x.Settings)
+		@Html.EditorWithLabelFor(x => x.BankDetails)
 	</div>
 	<div>
 		<h1>
@@ -18,11 +18,11 @@
 	<div>
 		<table>
 			<tr>
-				<td class="info">@Html.LabelFor(x => x.Settings.Shipper, "Поставщик:")</td>
-				<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Settings.Shipper)</div></td>
+				<td class="info">@Html.LabelFor(x => x.Shipper, "Поставщик")</td>
+				<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Shipper)</div></td>
 			</tr>
 			<tr>
-				<td class="info">@Html.LabelFor(x => x.Settings.Shipper, "Покупатель:")</td>
+				<td class="info">@Html.LabelFor(x => x.Shipper, "Покупатель")</td>
 				<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Client)</div></td>
 			</tr>
 		</table>
@@ -50,10 +50,10 @@
 	<div>
 		<table>
 			<tr>
-				<td class="info">@Html.LabelFor(x => x.Settings.Head, "Руководитель:")</td>
-				<td>@Html.EditorFor(x => x.Settings.Head)</td>
-				<td class="info">@Html.LabelFor(x => x.Settings.Accountant, "Бухгалтер:")</td>
-				<td>@Html.EditorFor(x => x.Settings.Accountant)</td>
+				<td class="info">@Html.LabelFor(x => x.Head, "Руководитель")</td>
+				<td>@Html.EditorFor(x => x.Head)</td>
+				<td class="info">@Html.LabelFor(x => x.Accountant, "Бухгалтер")</td>
+				<td>@Html.EditorFor(x => x.Accountant)</td>
 			</tr>
 		</table>
 	</div>
