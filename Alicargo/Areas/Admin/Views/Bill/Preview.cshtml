@@ -1,4 +1,5 @@
 ﻿@using Alicargo.Utilities
+@using Resources
 @model Alicargo.Areas.Admin.Models.BillModel
 
 <div class="bill-preview">
@@ -54,5 +55,10 @@
 				<td>@Html.EditorFor(x => x.Settings.Accountant)</td>
 			</tr>
 		</table>
+	</div>
+	<div>
+		<input class="btn btn-primary" value="@Pages.Save" />
+		<input class="btn btn-success" value="@Pages.Send" />
+		<input class="btn" value="@Pages.Cancel" />
 	</div>
 </div>
