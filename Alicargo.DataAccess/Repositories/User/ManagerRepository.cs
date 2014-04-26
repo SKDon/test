@@ -8,7 +8,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
-	// todo: 1. tests
+	// todo: 1. tests (262)
 	public sealed class ManagerRepository : IManagerRepository
 	{
 		private readonly AlicargoDataContext _context;

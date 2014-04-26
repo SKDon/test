@@ -32,7 +32,7 @@ namespace Alicargo.Core.State
 			if(!HasPermissionToSetState(stateId))
 				throw new AccessForbiddenException("User don't have access to the state " + stateId);
 
-			// todo: 2. test logic with states
+			// todo: 2. test logic with states (260)
 			if(stateId == _config.CargoInStockStateId)
 			{
 				_editor.SetDateInStock(applicationId, DateTimeProvider.Now);

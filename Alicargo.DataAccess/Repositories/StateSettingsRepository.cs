@@ -7,7 +7,7 @@ using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories
 {
-	// todo: refactor Get methods: remove StateRole class and pass a condition to a SP
+	// todo: refactor Get methods: remove StateRole class and pass a condition to a SP (261)
 	public sealed class StateSettingsRepository : IStateSettingsRepository
 	{
 		private readonly ISqlProcedureExecutor _executor;

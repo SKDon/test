@@ -65,7 +65,7 @@ namespace Alicargo.Tests.Services
 			}
 		}
 
-		[Ignore] // todo: 3. this test should work because a broker can't set a state
+		[Ignore] // todo: 3. this test should work because a broker can't set a state (259)
 		[TestMethod, ExpectedException(typeof(InvalidLogicException))]
 		public void Test_GetStateAvailabilityToSet_Broker()
 		{
@@ -109,7 +109,7 @@ namespace Alicargo.Tests.Services
 			}
 		}
 
-		[Ignore] // 3. todo: this test should work because a broker can't view applications
+		[Ignore] // 3. todo: this test should work because a broker can't view applications (259)
 		[TestMethod, ExpectedException(typeof(InvalidLogicException))]
 		public void Test_GetStateVisibility_Broker()
 		{

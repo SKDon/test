@@ -31,7 +31,7 @@ namespace Alicargo.Core.State
 			_awbs = awbs;
 		}
 
-		// todo: 1. refactor. remove Except(_config.AwbStates), pass role to method, remove ifs
+		// todo: 1. refactor. remove Except(_config.AwbStates), pass role to method, remove ifs (261)
 		public long[] GetStateAvailabilityToSet()
 		{
 			if (_identity.IsInRole(RoleType.Admin))
@@ -84,7 +84,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			// todo: 3. a Broker should not be here because he don't use states
+			// todo: 3. a Broker should not be here because he don't use states (259)
 			if (_identity.IsInRole(RoleType.Broker))
 			{
 				return _settings.GetStateAvailabilities()
@@ -146,7 +146,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			// todo: 3. Broker should not be here because he don't use states
+			// todo: 3. Broker should not be here because he don't use states (259)
 			if (_identity.IsInRole(RoleType.Broker))
 			{
 				return _settings.GetStateVisibilities()

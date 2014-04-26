@@ -131,11 +131,6 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return applications.Select(_selector).ToArray();
 		}
 
-		//public ApplicationData Get(long id)
-		//{
-		//	return _context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
-		//}
-
 		public ApplicationExtendedData[] GetByAirWaybill(params long[] ids)
 		{
 			return _context.Applications

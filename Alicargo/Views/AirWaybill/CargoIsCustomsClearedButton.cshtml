@@ -13,7 +13,7 @@
 				$.post('@Url.Action(MVC.AirWaybill.CargoIsCustomsCleared(Model.Id))')
 					.done(function () {
 						Alicargo.ShowMessage("@Pages.SuccessOperation.JavaScriptStringEncode()");
-						// todo: for a broker do rediret to the awb grid page
+						// todo: for a broker do rediret to the awb grid page (259)
 					})
 					.error(function () {
 						Alicargo.ShowMessage("@Pages.AnError.JavaScriptStringEncode()");

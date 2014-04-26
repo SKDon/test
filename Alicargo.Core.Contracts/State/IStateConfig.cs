@@ -24,7 +24,7 @@
 
 		#region AWB
 
-		// todo: add an AWB flag to the States table
+		// todo: add an AWB flag to the States table (264)
 		long[] AwbStates { get; }
 
 		/// <summary>

@@ -9,7 +9,6 @@ namespace Alicargo.Core.Helpers
 	{
 		public static string GetDate(DateTimeOffset? date, CultureInfo cultureInfo, TimeSpan? timeZone = null)
 		{
-			// todo: apply timezone
 			return date.HasValue ? date.Value.Date.ToString("d", cultureInfo) : null;
 		}
 

@@ -33,12 +33,12 @@ namespace Alicargo.Jobs.Core
 				}
 				catch (Exception e)
 				{
-					// todo: 1. think again
+					// todo: 1. think again (263)
 					if (e.IsCritical())
 					{
 						tokenSource.Cancel(false);
 						_log.Error("CRITICAL ERROR occurred during a job running in the runner " + Name, e);
-						// todo: restart application, send email to support
+						// todo: restart application, send email to support (263)
 						throw;
 					}
 
