@@ -1,40 +1,28 @@
-﻿namespace Alicargo.Areas.Admin.Models
+﻿using System.ComponentModel;
+
+namespace Alicargo.Areas.Admin.Models
 {
 	public sealed class BankDetails
 	{
-		/// <summary>
-		/// Банк получателя
-		/// </summary>
+		[DisplayName(@"Банк получателя")]
 		public string Bank { get; set; }
 
-		/// <summary>
-		/// БИК
-		/// </summary>
+		[DisplayName(@"БИК")]
 		public string BIC { get; set; }
 
-		/// <summary>
-		/// Корреспондентский счёт
-		/// </summary>
+		[DisplayName(@"Корреспондентский счёт")]
 		public string CorrespondentAccount { get; set; }
 
-		/// <summary>
-		/// ИНН
-		/// </summary>
+		[DisplayName(@"ИНН")]
 		public string TIN { get; set; }
 
-		/// <summary>
-		/// КПП
-		/// </summary>
+		[DisplayName(@"КПП")]
 		public string TaxRegistrationReasonCode { get; set; }
 
-		/// <summary>
-		/// Расчетный счёт
-		/// </summary>
+		[DisplayName(@"Расчетный счёт")]
 		public string CurrentAccount { get; set; }
 
-		/// <summary>
-		/// Получатель
-		/// </summary>
+		[DisplayName(@"Получатель")]
 		public string Payee { get; set; }
 	}
 }
