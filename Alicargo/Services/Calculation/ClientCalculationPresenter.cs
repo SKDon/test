@@ -15,7 +15,6 @@ using Alicargo.ViewModels.Calculation.Client;
 
 namespace Alicargo.Services.Calculation
 {
-	// todo: 1. refactor to use calculated data
 	public sealed class ClientCalculationPresenter : IClientCalculationPresenter
 	{
 		private readonly IApplicationRepository _applicationRepository;

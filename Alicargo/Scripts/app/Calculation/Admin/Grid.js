@@ -131,7 +131,7 @@
 						return null;
 					}
 
-					// todo: fix hack
+					// todo: 1. fix hack (256)
 					if (Globalize.culture().name == 'en') {
 						return value.toFixed(2);
 					}

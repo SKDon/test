@@ -19,7 +19,7 @@ namespace Alicargo.Core.AirWaybill
 		{
 			if(!IsReadyForCargoAtCustomsStateId(data.GTD, newGtd)) return;
 
-			// todo: 1. check order of states and return if current state is supper than CargoAtCustomsStateId
+			// todo: 1. check order of states and return if current state is supper than CargoAtCustomsStateId (257)
 			if(data.StateId == _stateConfig.CargoIsCustomsClearedStateId) return;
 
 			_stateManager.SetState(data.Id, _stateConfig.CargoAtCustomsStateId);
