@@ -5,6 +5,6 @@ namespace Alicargo.Jobs.Application.Abstract
 {
 	public interface ITextBuilder
 	{
-		string GetText(string template, string language, EventType type, ApplicationExtendedData application, byte[] data);
+		string GetText(string template, string language, EventType type, ApplicationData application, byte[] data);
 	}
 }

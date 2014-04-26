@@ -42,7 +42,7 @@ namespace Alicargo.Tests.Services.Application
 		public void Test_List()
 		{
 			const long clientId = 1;
-			var data = _context.CreateMany<ApplicationExtendedData>().ToArray();
+			var data = _context.CreateMany<ApplicationData>().ToArray();
 			var cargoReceivedDaysToShow = _context.Create<int>();
 			var cargoReceivedStateId = _context.Create<int>();
 

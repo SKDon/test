@@ -40,7 +40,7 @@ namespace Alicargo.Services.Application
 			_countries = countries;
 		}
 
-		public ApplicationListItem[] Map(ApplicationExtendedData[] data, string language)
+		public ApplicationListItem[] Map(ApplicationData[] data, string language)
 		{
 			var appIds = data.Select(x => x.Id).ToArray();
 			var stateIds = data.Select(x => x.StateId).ToArray();

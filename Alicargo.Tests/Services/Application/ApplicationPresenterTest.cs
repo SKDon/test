@@ -14,7 +14,7 @@ namespace Alicargo.Tests.Services.Application
 	[TestClass]
 	public class ApplicationPresenterTest
 	{
-		private ApplicationExtendedData _applicationData;
+		private ApplicationData _applicationData;
 		private MockContainer _context;
 		private ApplicationPresenter _service;
 
@@ -25,7 +25,7 @@ namespace Alicargo.Tests.Services.Application
 
 			_service = _context.Create<ApplicationPresenter>();
 
-			_applicationData = _context.Create<ApplicationExtendedData>();
+			_applicationData = _context.Create<ApplicationData>();
 		}
 
 		[TestMethod]

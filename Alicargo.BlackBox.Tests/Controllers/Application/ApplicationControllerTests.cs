@@ -129,7 +129,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 
 		private static void Validate(
 			ClientData clientData, ApplicationAdminModel model, TransitEditModel transitModel,
-			ApplicationExtendedData data)
+			ApplicationData data)
 		{
 			data.ShouldBeEquivalentTo(model,
 				options => options.ExcludingMissingProperties()

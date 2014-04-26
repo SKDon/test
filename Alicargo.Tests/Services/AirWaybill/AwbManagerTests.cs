@@ -93,7 +93,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 		public void Test_AwbManager_Delete()
 		{
 			var id = _context.Create<long>();
-			var applications = _context.CreateMany<ApplicationExtendedData>().ToArray();
+			var applications = _context.CreateMany<ApplicationData>().ToArray();
 			_context.ApplicationRepository.Setup(x => x.GetByAirWaybill(id)).Returns(applications);
 			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(It.IsAny<long>(), null));
 			_context.AirWaybillRepository.Setup(x => x.Delete(id));

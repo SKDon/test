@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Web;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -81,7 +80,7 @@ namespace Alicargo.Core.Calculation
 			_calculations.RemoveByApplication(applicationId);
 		}
 
-		private decimal GetTapeCost(ApplicationExtendedData application)
+		private decimal GetTapeCost(ApplicationEditData application)
 		{
 			var scotch = application.ScotchCostEdited;
 

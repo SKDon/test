@@ -93,7 +93,7 @@ namespace Alicargo.Jobs.Application.Helpers
 		}
 
 		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,
-			ApplicationExtendedData application, byte[] data, EventType type, FileHolder[] files)
+			ApplicationData application, byte[] data, EventType type, FileHolder[] files)
 		{
 			var subject = _textBuilder.GetText(localization.Subject, culture, type, application, data);
 			var body = _textBuilder.GetText(localization.Body, culture, type, application, data);

@@ -4,7 +4,7 @@ using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
-	public sealed class ApplicationExtendedData : ApplicationEditData
+	public sealed class ApplicationData : ApplicationEditData
 	{
 		public long Id { get; set; }
 		public DateTimeOffset CreationTimestamp { get; set; }

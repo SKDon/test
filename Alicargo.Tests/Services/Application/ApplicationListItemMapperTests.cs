@@ -21,7 +21,7 @@ namespace Alicargo.Tests.Services.Application
 		private List<CityData> _cities;
 		private MockContainer _context;
 		private List<CountryData> _countries;
-		private ApplicationExtendedData[] _data;
+		private ApplicationData[] _data;
 		private Dictionary<long, string> _localazedStates;
 		private ApplicationListItemMapper _mapper;
 		private long[] _stateAvailability;
@@ -35,7 +35,7 @@ namespace Alicargo.Tests.Services.Application
 			_cities = new List<CityData>();
 			_localazedStates = new Dictionary<long, string>();
 			_stateAvailability = Enumerable.Range(0, count / 2).Select(x => (long)x).ToArray();
-			_data = _context.CreateMany<ApplicationExtendedData>(count).ToArray();
+			_data = _context.CreateMany<ApplicationData>(count).ToArray();
 			_calculations = _data.Take(count / 2).ToDictionary(x => x.Id, x => _context.Create<long>());
 
 			for(var i = 0; i < count; i++)

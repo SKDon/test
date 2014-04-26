@@ -48,7 +48,7 @@ namespace Alicargo.Services.Calculation
 		}
 
 		private IEnumerable<CalculationItem> GetItems(
-			ApplicationExtendedData[] applications,
+			ApplicationData[] applications,
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();

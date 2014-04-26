@@ -5,6 +5,6 @@ namespace Alicargo.Services.Abstract
 {
     public interface IApplicationListItemMapper
     {
-        ApplicationListItem[] Map(ApplicationExtendedData[] data, string language);
+        ApplicationListItem[] Map(ApplicationData[] data, string language);
     }
 }

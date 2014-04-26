@@ -17,7 +17,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 	public sealed class ApplicationRepository : IApplicationRepository
 	{
 		private readonly AlicargoDataContext _context;
-		private readonly Expression<Func<DbContext.Application, ApplicationExtendedData>> _selector;
+		private readonly Expression<Func<DbContext.Application, ApplicationData>> _selector;
 		private readonly IApplicationRepositoryOrderer _orderer;
 
 		public ApplicationRepository(IDbConnection connection)
@@ -26,7 +26,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			_orderer = new ApplicationRepositoryOrderer();
 
-			_selector = x => new ApplicationExtendedData
+			_selector = x => new ApplicationData
 			{
 				AddressLoad = x.AddressLoad,
 				Id = x.Id,
@@ -114,7 +114,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return applications.LongCount();
 		}
 
-		public ApplicationExtendedData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
+		public ApplicationData[] List(long[] stateIds, Order[] orders, int? take = null, int skip = 0,
 			long? clientId = null, long? senderId = null, long? carrierId = null, long? forwarderId = null,
 			long? cargoReceivedStateId = null, int? cargoReceivedDaysToShow = null, bool? hasCalculation = null)
 		{
@@ -131,7 +131,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return applications.Select(_selector).ToArray();
 		}
 
-		public ApplicationExtendedData[] GetByAirWaybill(params long[] ids)
+		public ApplicationData[] GetByAirWaybill(params long[] ids)
 		{
 			return _context.Applications
 				.Where(x => x.AirWaybillId.HasValue && ids.Contains(x.AirWaybillId.Value))
@@ -144,7 +144,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return (float)ConfigurationManager.AppSettings["DefaultInsuranceRate"].ToDouble();
 		}
 
-		public ApplicationExtendedData Get(long id)
+		public ApplicationData Get(long id)
 		{
 			return _context.Applications.Where(x => x.Id == id).Select(_selector).FirstOrDefault();
 		}

@@ -56,7 +56,7 @@ namespace Alicargo.Services.Calculation
 			};
 		}
 
-		private ApplicationExtendedData[] GetApplications(long senderId, int take, int skip, out long total)
+		private ApplicationData[] GetApplications(long senderId, int take, int skip, out long total)
 		{
 			var stateIds = _stateFilter.GetStateVisibility();
 
@@ -112,7 +112,7 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
-		private SenderCalculationItem[] GetItems(ApplicationExtendedData[] applications)
+		private SenderCalculationItem[] GetItems(ApplicationData[] applications)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var nics = _clients.GetNicByApplications(appIds);
@@ -142,7 +142,7 @@ namespace Alicargo.Services.Calculation
 
 		private static SenderCalculationAwbInfo[] GetInfo(
 			IEnumerable<SenderCalculationGroup> groups,
-			IEnumerable<ApplicationExtendedData> items,
+			IEnumerable<ApplicationData> items,
 			IReadOnlyDictionary<long, decimal> tariffs)
 		{
 			return groups.Select(g =>
@@ -175,7 +175,7 @@ namespace Alicargo.Services.Calculation
 			}).ToArray();
 		}
 
-		private static decimal GetProfit(ApplicationExtendedData data)
+		private static decimal GetProfit(ApplicationData data)
 		{
 			return (data.SenderScotchCost ?? 0)
 			       + (data.FactureCost ?? 0)

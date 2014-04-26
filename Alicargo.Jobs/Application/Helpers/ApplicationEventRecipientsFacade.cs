@@ -59,7 +59,7 @@ namespace Alicargo.Jobs.Application.Helpers
 				: GetRecipients(application, roles).ToArray();
 		}
 
-		private IEnumerable<RecipientData> GetRecipients(ApplicationExtendedData application, IEnumerable<RoleType> roles)
+		private IEnumerable<RecipientData> GetRecipients(ApplicationData application, IEnumerable<RoleType> roles)
 		{
 			foreach(var role in roles)
 			{

@@ -54,7 +54,7 @@ namespace Alicargo.Services.Calculation
 			};
 		}
 
-		private ApplicationExtendedData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
+		private ApplicationData[] GetCalculatedApplications(long clientId, int take, long skip, out long total)
 		{
 			var stateIds = _settings.GetStateVisibilities()
 				.Where(x => x.Role == RoleType.Client).Select(x => x.StateId)
@@ -79,7 +79,7 @@ namespace Alicargo.Services.Calculation
 			return applications;
 		}
 
-		private IEnumerable<ClientCalculationItem> GetItems(ApplicationExtendedData[] applications)
+		private IEnumerable<ClientCalculationItem> GetItems(ApplicationData[] applications)
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var nics = _clientRepository.GetNicByApplications(appIds);
@@ -125,7 +125,7 @@ namespace Alicargo.Services.Calculation
 			}).ToList();
 		}
 
-		private static decimal GetProfit(ApplicationExtendedData application)
+		private static decimal GetProfit(ApplicationData application)
 		{
 			return application.CalculationProfit
 			       ?? CalculationHelper.GetTotalTariffCost(application.CalculationTotalTariffCost,
