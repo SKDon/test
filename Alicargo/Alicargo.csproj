@@ -604,6 +604,7 @@
     <Content Include="Scripts\app\Application\Columns.js" />
     <Content Include="Scripts\app\Application\Grid.js" />
     <Content Include="Scripts\app\Calculation\Admin\Columns.js" />
+    <Content Include="Scripts\app\Calculation\Admin\DataSource.js" />
     <Content Include="Scripts\app\Calculation\Admin\Grid.js" />
     <Content Include="Scripts\app\Calculation\Client\Columns.js" />
     <Content Include="Scripts\app\Calculation\Client\Grid.js" />

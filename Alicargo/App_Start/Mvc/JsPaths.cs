@@ -26,7 +26,7 @@ namespace Alicargo.Mvc
 		[Path("~/Scripts/jQuery/globalize/cultures/globalize.culture.it.js",
 		 "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.it.min.js",
 		 "~/Scripts/app/it.js")]
-		public const string ItJs = "~/js/it";		
+		public const string ItJs = "~/js/it";
 
 		[Path("~/Scripts/app/AirWaybill/Columns.js", "~/Scripts/app/AirWaybill/Grid.js")]
 		public const string AwbListJs = "~/js/awb-list-js";
@@ -37,7 +37,9 @@ namespace Alicargo.Mvc
 		[Path("~/Scripts/app/Client/Grid.js")]
 		public const string ClientListJs = "~/js/client-list-js";
 
-		[Path("~/scripts/app/calculation/admin/Columns.js", "~/scripts/app/calculation/admin/Grid.js")]
+		[Path("~/scripts/app/calculation/admin/Columns.js",
+		 "~/scripts/app/calculation/admin/DataSource.js",
+		 "~/scripts/app/calculation/admin/Grid.js")]
 		public const string CalculationJs = "~/js/calc-js";
 
 		[Path("~/scripts/app/calculation/client/Columns.js", "~/scripts/app/calculation/client/Grid.js")]
