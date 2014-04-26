@@ -4,16 +4,14 @@
 @model Alicargo.Areas.Admin.Models.BillModel
 
 <div class="bill-preview">
+	<h1>
+		Счет на оплату № @ViewBag.BillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")
+	</h1>
 	<div class="textedit-holder header-text">
 		@Html.EditorWithLabelFor(x => x.HeaderText)
 	</div>
 	<div class="bill-settings">
 		@Html.EditorWithLabelFor(x => x.BankDetails)
-	</div>
-	<div>
-		<h1>
-			Счет на оплату № @ViewBag.BillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")
-		</h1>
 	</div>
 	<div>
 		<table>
