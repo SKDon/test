@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -73,7 +72,7 @@ namespace Alicargo.Services.Excel
 		private static string GetAirWaybillDisplay(IEnumerable<AirWaybillData> awbs, ApplicationListItem application)
 		{
 			return awbs.Where(a => a.Id == application.AirWaybillId)
-				.Select(data => HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(data)))
+				.Select(AwbHelper.GetAirWaybillDisplay)
 				.FirstOrDefault();
 		}
 

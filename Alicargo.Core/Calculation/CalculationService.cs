@@ -49,7 +49,7 @@ namespace Alicargo.Core.Calculation
 
 			var calculation = new CalculationData
 			{
-				AirWaybillDisplay = HttpUtility.HtmlDecode(AwbHelper.GetAirWaybillDisplay(awb)),
+				AirWaybillDisplay = AwbHelper.GetAirWaybillDisplay(awb),
 				ApplicationDisplay = application.GetApplicationDisplay(),
 				ClientId = application.ClientId,
 				FactureCost = application.FactureCostEdited ?? application.FactureCost ?? 0,
