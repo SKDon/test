@@ -31,7 +31,8 @@ namespace Alicargo.Areas.Admin.Controllers
 
 			return PartialView(new BillModel
 			{
-				Settings = billSettings
+				Settings = billSettings,
+				Count = "1"
 			});
 		}
 
