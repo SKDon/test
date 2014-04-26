@@ -6,7 +6,7 @@
 		@Html.TextAreaFor(x => x.Settings.HeaderText, new { rows = 3 })
 	</div>
 	<div class="bill-settings">
-		@Html.Partial("BankDetails", Model.Settings)
+		@Html.EditorFor(x => x.Settings)
 	</div>
 	<div>
 		<h1>

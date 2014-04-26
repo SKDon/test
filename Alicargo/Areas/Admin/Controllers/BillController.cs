@@ -13,12 +13,14 @@ namespace Alicargo.Areas.Admin.Controllers
 		private readonly ISettingRepository _settings;
 		private readonly ISerializer _serializer;
 		private readonly IApplicationRepository _applications;
+		private readonly IBillRepository _bills;
 
-		public BillController(ISettingRepository settings, ISerializer serializer, IApplicationRepository applications)
+		public BillController(ISettingRepository settings, ISerializer serializer, IApplicationRepository applications, IBillRepository bills)
 		{
 			_settings = settings;
 			_serializer = serializer;
 			_applications = applications;
+			_bills = bills;
 		}
 
 		public virtual PartialViewResult Preview(long applicationId)

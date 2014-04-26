@@ -8,7 +8,7 @@
 			@Html.TextAreaFor(x => x.Settings.HeaderText, new { rows = 3 })
 		</div>
 	</div>
-	@Html.Partial("BankDetails", Model.Settings)
+	@Html.EditorFor(x => x.Settings)
 	<div class="other-details">
 		<div class="row">
 			<div class="span8">
