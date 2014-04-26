@@ -93,6 +93,13 @@
 				return awbDetails;
 			}
 
+			$("tr a.k-button").each(function() {
+				var button = $(this);
+				var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));
+				$.data(button[0], "ApplicationId", dataItem.ApplicationId);
+				$.data(button[0], "AirWaybillId", dataItem.AirWaybillId);
+			});
+
 			$("tr a.k-grid-custom-gear").each(function() {
 				var button = $(this);
 				var dataItem = $c.GetMainGrid().dataItem(button.closest("tr"));

@@ -3,86 +3,81 @@
 		var $l = $a.Localization;
 		var $u = $a.Urls;
 
-		$c.Columns = function() {
-			var groupFooterTemplate = "#= kendo.toString(sum, 'n2') #";
-			var n2Format = "{0:n2}";
-			var textRight = { "class": "text-right" };
-			var textBold = { "class": "text-bold" };
+		var groupFooterTemplate = "#= kendo.toString(sum, 'n2') #";
+		var n2Format = "{0:n2}";
+		var textRight = { "class": "text-right" };
+		var textBold = { "class": "text-bold" };
 
-			var classType = {
-				"null": "",
-				"1": $l.Enums_Econom,
-				"2": $l.Enums_Comfort,
-				"3": $l.Enums_Lux
-			};
+		var classType = {
+			"null": "",
+			"1": $l.Enums_Econom,
+			"2": $l.Enums_Comfort,
+			"3": $l.Enums_Lux
+		};
 
-			function classEditor(container, options) {
-				$('<input required data-text-field="ClassName" data-value-field="ClassId" data-bind="value: ClassType"/>')
-					.appendTo(container)
-					.kendoDropDownList({
-						autoBind: false,
-						value: options.model.ClassId,
-						dataSource: {
-							type: "json",
-							data: [
-								{ ClassName: classType["null"], ClassId: "" },
-								{ ClassName: classType["1"], ClassId: 1 },
-								{ ClassName: classType["2"], ClassId: 2 },
-								{ ClassName: classType["3"], ClassId: 3 }
-							]
-						}
-					});
-			}
-
-			function getData(e) {
-				return $c.GetMainGrid().dataItem($(e.target).closest("tr"));
-			}
-
-			function onCalculate(e) {
-				e.preventDefault();
-				if ($a.Confirm($l.Pages_ConfrimCalculation)) {
-					var data = getData(e);
-					$c.Post($u.Calculation_Calculate, { id: data.ApplicationId, awbId: data.AirWaybillId }, data.AirWaybillId);
-				}
-			}
-
-			function onCancelCalculate(e) {
-				e.preventDefault();
-				if ($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
-					var data = getData(e);
-					$c.Post($u.Calculation_RemoveCalculatation, { id: data.ApplicationId, awbId: data.AirWaybillId }, data.AirWaybillId);
-				}
-			}
-
-			function onBill(e) {
-				e.preventDefault();
-				var data = getData(e);
-
-				var window = $("<div></div>");
-				window.kendoWindow({
-					width: "1000px",
-					position: {
-						top: 60,
-						left: 200
-					},
-					title: "Счёт",
-					animation: false,
-					modal: true,
-					content: $u.Admin_Bill_Preview + "?applicationId=" + data.ApplicationId
+		function classEditor(container, options) {
+			$('<input required data-text-field="ClassName" data-value-field="ClassId" data-bind="value: ClassType"/>')
+				.appendTo(container)
+				.kendoDropDownList({
+					autoBind: false,
+					value: options.model.ClassId,
+					dataSource: {
+						type: "json",
+						data: [
+							{ ClassName: classType["null"], ClassId: "" },
+							{ ClassName: classType["1"], ClassId: 1 },
+							{ ClassName: classType["2"], ClassId: 2 },
+							{ ClassName: classType["3"], ClassId: 3 }
+						]
+					}
 				});
-				window.data("kendoWindow").open();
-			}
+		}
 
-			function numberEditor(container, options) {
-				$('<input name="' + options.field + '"/>')
-					.appendTo(container)
-					.kendoNumericTextBox({
-						format: n2Format,
-						decimals: 2,
-						step: 0.5
-					});
-			}
+		function getData(e) {
+			return $.data(e.currentTarget);
+		}
 
+		function onCalculate(e) {
+			e.preventDefault();
+			if ($a.Confirm($l.Pages_ConfrimCalculation)) {
+				var data = getData(e);
+				$c.Post($u.Calculation_Calculate, { id: data.ApplicationId, awbId: data.AirWaybillId }, data.AirWaybillId);
+			}
+		}
+
+		function onCancelCalculate(e) {
+			e.preventDefault();
+			if ($a.Confirm($l.Pages_ConfirmCancelCalculation)) {
+				var data = getData(e);
+				$c.Post($u.Calculation_RemoveCalculatation, { id: data.ApplicationId, awbId: data.AirWaybillId }, data.AirWaybillId);
+			}
+		}
+
+		function onBill(e) {
+			e.preventDefault();
+
+			var data = getData(e);
+			$("<div></div>").kendoWindow({
+				width: "1000px",
+				position: { top: 60, left: 100 },
+				title: "Счёт",
+				animation: false,
+				modal: true,
+				content: $u.Admin_Bill_Preview + "?applicationId=" + data.ApplicationId
+			}).data("kendoWindow").open();
+		}
+
+		function numberEditor(container, options) {
+			$('<input name="' + options.field + '"/>')
+				.appendTo(container)
+				.kendoNumericTextBox({
+					format: n2Format,
+					decimals: 2,
+					step: 0.5
+				});
+		}
+
+		$c.Columns = function() {
 			var c = [
 				{
 					field: "AirWaybillId",
