@@ -12,7 +12,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
-namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
+namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 {
 	[TestClass]
 	public class ApplicationRepositoryTests

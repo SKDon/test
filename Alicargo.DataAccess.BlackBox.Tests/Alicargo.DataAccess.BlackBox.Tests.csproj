@@ -98,16 +98,17 @@
     <Compile Include="Repositories\EmailMessageRepositoryTests.cs" />
     <Compile Include="Repositories\EventEmailRecipientTests.cs" />
     <Compile Include="Repositories\SettingRepositoryTests.cs" />
+    <Compile Include="Repositories\Application\BillRepositoryTests.cs" />
     <Compile Include="Repositories\User\ForwarderRepositoryTests.cs" />
     <Compile Include="Repositories\User\SenderRepositoryTests.cs" />
     <Compile Include="Repositories\StateSettingsRepositoryTests.cs" />
     <Compile Include="Repositories\StateRepositoryTests.cs" />
-    <Compile Include="Repositories\AwbRepositoryTests.cs" />
+    <Compile Include="Repositories\Application\AwbRepositoryTests.cs" />
     <Compile Include="Repositories\User\BrockerRepositoryTests.cs" />
     <Compile Include="Repositories\User\CarrierRepositoryTests.cs" />
     <Compile Include="Repositories\User\ClientRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ApplicationRepositoryTests.cs" />
+    <Compile Include="Repositories\Application\ApplicationRepositoryTests.cs" />
     <Compile Include="Repositories\TransitRepositoryTests.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

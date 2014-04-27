@@ -87,6 +87,7 @@
     <Folder Include="Stored procedures\User\Forwarder" />
     <Folder Include="Stored procedures\User\Carrier" />
     <Folder Include="Tables\Application" />
+    <Folder Include="Stored procedures\Application" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Transit.sql" />
@@ -208,6 +209,8 @@
     <Build Include="Tables\Application\Bill.sql" />
     <Build Include="Stored procedures\Setting_Merge.sql" />
     <Build Include="Stored procedures\Setting_Get.sql" />
+    <Build Include="Stored procedures\Application\Bill_AddOrReplace.sql" />
+    <Build Include="Stored procedures\Application\Bill_GetByApplicationId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

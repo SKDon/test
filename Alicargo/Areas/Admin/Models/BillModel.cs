@@ -12,7 +12,7 @@ namespace Alicargo.Areas.Admin.Models
 		public string Goods { get; set; }
 
 		[Range(1, short.MaxValue)]
-		public ushort Count { get; set; }
+		public short Count { get; set; }
 
 		[Required]
 		public decimal? PriceRuble { get; set; }

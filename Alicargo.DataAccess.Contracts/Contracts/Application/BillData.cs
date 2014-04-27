@@ -15,7 +15,7 @@
 		public string HeaderText { get; set; }
 		public string Client { get; set; }
 		public string Goods { get; set; }
-		public ushort Count { get; set; }
+		public short Count { get; set; }
 		public decimal Price { get; set; } // Euro
 		public decimal VAT { get; set; }
 		public decimal EuroToRuble { get; set; } // EUR/RUB

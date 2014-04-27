@@ -16,20 +16,23 @@ namespace Alicargo.DataAccess.DbContext
 
 		public T Query<T>(string sql, object param = null)
 		{
-			return SqlHelper.Action(_connectionString, connection =>
-				connection.Query<T>(sql, param, commandType: CommandType.StoredProcedure).FirstOrDefault());
+			return SqlHelper.Action(_connectionString,
+				connection =>
+					connection.Query<T>(sql, param, commandType: CommandType.StoredProcedure).FirstOrDefault());
 		}
 
 		public T[] Array<T>(string sql, object param = null)
 		{
-			return SqlHelper.Action(_connectionString, connection =>
-				connection.Query<T>(sql, param, commandType: CommandType.StoredProcedure).ToArray());
+			return SqlHelper.Action(_connectionString,
+				connection =>
+					connection.Query<T>(sql, param, commandType: CommandType.StoredProcedure).ToArray());
 		}
 
 		public int Execute(string sql, object param = null)
 		{
-			return SqlHelper.Action(_connectionString, connection =>
-				connection.Execute(sql, param, commandType: CommandType.StoredProcedure));
+			return SqlHelper.Action(_connectionString,
+				connection =>
+					connection.Execute(sql, param, commandType: CommandType.StoredProcedure));
 		}
 	}
 }
