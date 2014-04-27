@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics;
 using Alicargo.Areas.Admin.Models;
+using Alicargo.Areas.Admin.Serivices.Abstract;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 
-namespace Alicargo.Areas.Admin.Serivices
+namespace Alicargo.Areas.Admin.Serivices.Bill
 {
 	internal sealed class BillManager : IBillManager
 	{

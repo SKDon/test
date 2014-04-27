@@ -1,4 +1,5 @@
 ﻿using Alicargo.Areas.Admin.Models;
+using Alicargo.Areas.Admin.Serivices.Abstract;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -7,7 +8,7 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
-namespace Alicargo.Areas.Admin.Serivices
+namespace Alicargo.Areas.Admin.Serivices.Bill
 {
 	internal sealed class BillModelFactory : IBillModelFactory
 	{

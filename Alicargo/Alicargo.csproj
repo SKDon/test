@@ -76,6 +76,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.MVC3.3.2.0.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -182,10 +189,12 @@
     <Compile Include="Areas\Admin\Models\BankDetails.cs" />
     <Compile Include="Areas\Admin\Models\BillModel.cs" />
     <Compile Include="Areas\Admin\Models\BillSettingsModel.cs" />
-    <Compile Include="Areas\Admin\Serivices\BillManager.cs" />
-    <Compile Include="Areas\Admin\Serivices\BillModelFactory.cs" />
-    <Compile Include="Areas\Admin\Serivices\IBillManager.cs" />
-    <Compile Include="Areas\Admin\Serivices\IBillModelFactory.cs" />
+    <Compile Include="Areas\Admin\Serivices\Abstract\IBillPdf.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\BillManager.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\BillModelFactory.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\BillPdf.cs" />
+    <Compile Include="Areas\Admin\Serivices\Abstract\IBillManager.cs" />
+    <Compile Include="Areas\Admin\Serivices\Abstract\IBillModelFactory.cs" />
     <Compile Include="AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

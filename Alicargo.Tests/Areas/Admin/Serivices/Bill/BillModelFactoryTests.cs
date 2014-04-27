@@ -1,4 +1,4 @@
-﻿using Alicargo.Areas.Admin.Serivices;
+﻿using Alicargo.Areas.Admin.Serivices.Bill;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -9,7 +9,7 @@ using Alicargo.TestHelpers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Alicargo.Tests.Areas.Admin.Serivices
+namespace Alicargo.Tests.Areas.Admin.Serivices.Bill
 {
 	[TestClass]
 	public class BillModelFactoryTests

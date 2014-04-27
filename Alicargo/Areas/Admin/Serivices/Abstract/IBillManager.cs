@@ -1,6 +1,6 @@
 ﻿using Alicargo.Areas.Admin.Models;
 
-namespace Alicargo.Areas.Admin.Serivices
+namespace Alicargo.Areas.Admin.Serivices.Abstract
 {
 	public interface IBillManager
 	{

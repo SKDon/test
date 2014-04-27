@@ -1,9 +1,10 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Areas.Admin.Models;
-using Alicargo.Areas.Admin.Serivices;
+using Alicargo.Areas.Admin.Serivices.Abstract;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Resources;
 
@@ -15,14 +16,18 @@ namespace Alicargo.Areas.Admin.Controllers
 		private readonly IBillRepository _bills;
 		private readonly IBillManager _manager;
 		private readonly IBillModelFactory _modelFactory;
+		private readonly IBillPdf _pdf;
 		private readonly ISettingRepository _settings;
 
-		public BillController(ISettingRepository settings,
-			IBillModelFactory modelFactory, 
-			IBillRepository bills, 
+		public BillController(
+			ISettingRepository settings,
+			IBillPdf pdf,
+			IBillModelFactory modelFactory,
+			IBillRepository bills,
 			IBillManager manager)
 		{
 			_settings = settings;
+			_pdf = pdf;
 			_modelFactory = modelFactory;
 			_bills = bills;
 			_manager = manager;
@@ -37,9 +42,14 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Download(long id, BillModel model)
 		{
-			Save(id, model);
+			if(!SaveImpl(id, model))
+			{
+				return View("Preview", model);
+			}
 
-			return RedirectToAction(MVC.Admin.Bill.Preview(id));
+			var file = _pdf.Get(id);
+
+			return file.GetFileResult();
 		}
 
 		[HttpGet]
@@ -67,6 +77,24 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Save(long id, BillModel model)
 		{
+			if(!SaveImpl(id, model))
+			{
+				return View("Preview", model);
+			}
+
+			return RedirectToAction(MVC.Admin.Bill.Preview(id));
+		}
+
+		[HttpPost]
+		public virtual ActionResult Send(long id, BillModel model)
+		{
+			Save(id, model);
+
+			return RedirectToAction(MVC.Admin.Bill.Preview(id));
+		}
+
+		private bool SaveImpl(long id, BillModel model)
+		{
 			if(!model.PriceRuble.HasValue || model.PriceRuble.Value <= 0)
 			{
 				ModelState.AddModelError("PriceRuble", Validation.InvalidValue);
@@ -80,20 +108,12 @@ namespace Alicargo.Areas.Admin.Controllers
 				ViewBag.ApplicationId = id;
 				ViewBag.BillNumber = number;
 
-				return View("Preview", model);
+				return false;
 			}
 
 			_manager.SaveBill(id, number, model);
 
-			return RedirectToAction(MVC.Admin.Bill.Preview(id));
-		}
-
-		[HttpPost]
-		public virtual ActionResult Send(long id, BillModel model)
-		{
-			Save(id, model);
-
-			return RedirectToAction(MVC.Admin.Bill.Preview(id));
+			return true;
 		}
 	}
 }

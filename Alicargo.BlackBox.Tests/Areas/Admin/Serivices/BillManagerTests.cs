@@ -1,6 +1,5 @@
-﻿using System;
-using Alicargo.Areas.Admin.Models;
-using Alicargo.Areas.Admin.Serivices;
+﻿using Alicargo.Areas.Admin.Models;
+using Alicargo.Areas.Admin.Serivices.Bill;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.TestHelpers;
@@ -14,10 +13,10 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 	[TestClass]
 	public class BillManagerTests
 	{
+		private IBillRepository _billRepository;
 		private CompositionHelper _composition;
 		private Fixture _fixture;
 		private BillManager _manager;
-		private IBillRepository _billRepository;
 
 		[TestCleanup]
 		public void TestCleanup()

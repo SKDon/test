@@ -1,7 +1,7 @@
 ﻿using Alicargo.Areas.Admin.Models;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 
-namespace Alicargo.Areas.Admin.Serivices
+namespace Alicargo.Areas.Admin.Serivices.Abstract
 {
 	public interface IBillModelFactory
 	{
