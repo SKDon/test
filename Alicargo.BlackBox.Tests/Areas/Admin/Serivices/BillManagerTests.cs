@@ -45,8 +45,10 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 
 			var billData = _billRepository.Get(TestConstants.TestApplicationId);
 
-			billData.ShouldBeEquivalentTo(model);
-			billData.ShouldBeEquivalentTo(model.BankDetails);
+			billData.Number.ShouldBeEquivalentTo(number);
+			billData.Price.ShouldBeEquivalentTo(model.PriceRuble / billData.EuroToRuble);
+			billData.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
+			billData.ShouldBeEquivalentTo(model.BankDetails, options => options.ExcludingMissingProperties());
 		}
 
 		[TestMethod]
@@ -61,8 +63,9 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 			var billData = _billRepository.Get(TestConstants.TestApplicationId);
 
 			billData.Number.ShouldBeEquivalentTo(number);
-			billData.ShouldBeEquivalentTo(model);
-			billData.ShouldBeEquivalentTo(model.BankDetails);
+			billData.Price.ShouldBeEquivalentTo(model.PriceRuble / billData.EuroToRuble);
+			billData.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
+			billData.ShouldBeEquivalentTo(model.BankDetails, options => options.ExcludingMissingProperties());
 		}
 	}
 }
