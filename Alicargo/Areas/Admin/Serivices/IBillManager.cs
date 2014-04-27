@@ -4,6 +4,6 @@ namespace Alicargo.Areas.Admin.Serivices
 {
 	public interface IBillManager
 	{
-		void SaveBill(long id, BillModel model);
+		void SaveBill(long id, int number, BillModel model);
 	}
 }

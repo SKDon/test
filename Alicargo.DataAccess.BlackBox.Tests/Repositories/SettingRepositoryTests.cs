@@ -1,4 +1,6 @@
-﻿using Alicargo.DataAccess.BlackBox.Tests.Properties;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
@@ -37,24 +39,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		public void Test_Get()
-		{
-			var setting = _repository.Get(SettingType.BillLastNumber);
-
-			setting.RowVersion.Should().NotBeNull();
-			setting.Type.ShouldBeEquivalentTo(SettingType.BillLastNumber);
-			_serializer.Deserialize<int>(setting.Data).Should().BeGreaterOrEqualTo(1);
-		}
-
-		[TestMethod]
-		public void Test_GetUnknown()
-		{
-			var setting = _repository.Get((SettingType)(-1));
-
-			setting.Should().BeNull();
-		}
-
-		[TestMethod]
 		public void Test_Add()
 		{
 			var setting = _fixture.Create<Setting>();
@@ -65,6 +49,48 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var actual = _repository.Get(setting.Type);
 
 			actual.ShouldBeEquivalentTo(setting);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(UpdateConflictException))]
+		public void Test_EntityUpdateConflictException()
+		{
+			var setting = _fixture.Build<Setting>()
+				.With(x => x.Type, SettingType.BillLastNumber)
+				.Create();
+
+			_repository.AddOrReplace(setting);
+		}
+
+		[TestMethod]
+		public void Test_Get()
+		{
+			var setting = _repository.Get(SettingType.BillLastNumber);
+
+			setting.RowVersion.Should().NotBeNull();
+			setting.Type.ShouldBeEquivalentTo(SettingType.BillLastNumber);
+			_serializer.Deserialize<int>(setting.Data).Should().BeGreaterOrEqualTo(1);
+		}
+
+		[TestMethod]
+		public void Test_GetNextBillNumber()
+		{
+			var numbers = new int[10];
+			var tasks = Enumerable.Range(0, 10)
+				.Select(x => Task.Run(() => { numbers[x] = _repository.GetNextBillNumber(); }))
+				.ToArray();
+
+			Task.WaitAll(tasks);
+
+			numbers.Distinct().Count().ShouldBeEquivalentTo(10);
+		}
+
+		[TestMethod]
+		public void Test_GetUnknown()
+		{
+			var setting = _repository.Get((SettingType)(-1));
+
+			setting.Should().BeNull();
 		}
 
 		[TestMethod]
@@ -82,17 +108,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var actual = _repository.Get(old.Type);
 
 			actual.ShouldBeEquivalentTo(setting);
-		}
-
-		[TestMethod]
-		[ExpectedException(typeof(UpdateConflictException))]
-		public void Test_EntityUpdateConflictException()
-		{
-			var setting = _fixture.Build<Setting>()
-				.With(x => x.Type, SettingType.BillLastNumber)
-				.Create();
-
-			_repository.AddOrReplace(setting);
 		}
 	}
 }

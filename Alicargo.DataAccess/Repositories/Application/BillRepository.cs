@@ -35,7 +35,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 					data.TaxRegistrationReasonCode,
 					data.TIN,
 					data.VAT,
-					data.EuroToRuble
+					data.EuroToRuble,
+					data.Number
 				});
 		}
 

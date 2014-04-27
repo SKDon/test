@@ -131,6 +131,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\BillSettingsControllerTests.cs" />
+    <Compile Include="Areas\Admin\Serivices\BillManagerTests.cs" />
     <Compile Include="Controllers\AdminAwbControllerTests.cs" />
     <Compile Include="Controllers\AirWaybillControllerTests.cs" />
     <Compile Include="Controllers\Application\ApplicationControllerTests.cs" />

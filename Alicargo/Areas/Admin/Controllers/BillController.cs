@@ -17,8 +17,10 @@ namespace Alicargo.Areas.Admin.Controllers
 		private readonly IBillModelFactory _modelFactory;
 		private readonly ISettingRepository _settings;
 
-		public BillController(
-			ISettingRepository settings, IBillModelFactory modelFactory, IBillRepository bills, IBillManager manager)
+		public BillController(ISettingRepository settings,
+			IBillModelFactory modelFactory, 
+			IBillRepository bills, 
+			IBillManager manager)
 		{
 			_settings = settings;
 			_modelFactory = modelFactory;
@@ -35,12 +37,7 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Download(long id, BillModel model)
 		{
-			if(!ModelState.IsValid)
-			{
-				BindDefaultBag(id);
-
-				return View("Preview", model);
-			}
+			Save(id, model);
 
 			return RedirectToAction(MVC.Admin.Bill.Preview(id));
 		}
@@ -54,14 +51,15 @@ namespace Alicargo.Areas.Admin.Controllers
 			if(bill == null)
 			{
 				model = _modelFactory.GetBillModelByApplication(id);
-				BindDefaultBag(id);
+				ViewBag.BillNumber = _settings.GetData<int>(SettingType.BillLastNumber) + 1;
 			}
 			else
 			{
 				model = _modelFactory.GetBillModel(bill);
-				ViewBag.ApplicationId = id;
 				ViewBag.BillNumber = bill.Number;
 			}
+
+			ViewBag.ApplicationId = id;
 
 			return View(model);
 		}
@@ -74,14 +72,18 @@ namespace Alicargo.Areas.Admin.Controllers
 				ModelState.AddModelError("PriceRuble", Validation.InvalidValue);
 			}
 
+			var bill = _bills.Get(id);
+			var number = bill != null ? bill.Number : _settings.GetNextBillNumber();
+
 			if(!ModelState.IsValid)
 			{
-				BindDefaultBag(id);
+				ViewBag.ApplicationId = id;
+				ViewBag.BillNumber = number;
 
 				return View("Preview", model);
 			}
 
-			_manager.SaveBill(id, model);
+			_manager.SaveBill(id, number, model);
 
 			return RedirectToAction(MVC.Admin.Bill.Preview(id));
 		}
@@ -89,20 +91,9 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Send(long id, BillModel model)
 		{
-			if(!ModelState.IsValid)
-			{
-				BindDefaultBag(id);
-
-				return View("Preview", model);
-			}
+			Save(id, model);
 
 			return RedirectToAction(MVC.Admin.Bill.Preview(id));
-		}
-
-		private void BindDefaultBag(long id)
-		{
-			ViewBag.ApplicationId = id;
-			ViewBag.BillNumber = _settings.GetData<int>(SettingType.BillLastNumber) + 1;
 		}
 	}
 }
