@@ -88,7 +88,10 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Send(long id, BillModel model)
 		{
-			Save(id, model);
+			if(!SaveImpl(id, model))
+			{
+				return View("Preview", model);
+			}
 
 			return RedirectToAction(MVC.Admin.Bill.Preview(id));
 		}
