@@ -25,24 +25,19 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 		}
 
 		[TestMethod]
-		public void Test_Bill()
+		public void Test_GetBillModel()
 		{
-			var applicationId = _container.Create<long>();
 			var bill = _container.Create<BillData>();
 
-			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns(bill);
-
-			var model = _factory.GetModel(applicationId);
+			var model = _factory.GetBillModel(bill);
 
 			model.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
 			model.BankDetails.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
 			model.PriceRuble.ShouldBeEquivalentTo(bill.Price * bill.EuroToRuble);
-
-			_container.BillRepository.Verify(x => x.Get(applicationId));
 		}
 
 		[TestMethod]
-		public void Test_NoBill_Calc()
+		public void Test_GetBillModelByApplication_WithCalc()
 		{
 			var applicationId = _container.Create<long>();
 			var settings = _container.Create<BillSettings>();
@@ -54,14 +49,13 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			_container.SettingRepository.Setup(x => x.GetData<BillSettings>(SettingType.Bill)).Returns(settings);
 			_container.ApplicationRepository.Setup(x => x.Get(applicationId)).Returns(application);
 			_container.ClientRepository.Setup(x => x.Get(application.ClientId)).Returns(client);
-			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns((BillData)null);
 			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns(calculation);
 
-			var model = _factory.GetModel(applicationId);
+			var model = _factory.GetBillModelByApplication(applicationId);
 
 			model.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.BankDetails.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
-			model.Count.ShouldBeEquivalentTo("1");
+			model.Count.ShouldBeEquivalentTo(1);
 			model.PriceRuble.ShouldBeEquivalentTo(money);
 			model.Goods.Should().Contain(application.GetApplicationDisplay());
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
@@ -69,12 +63,11 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			_container.SettingRepository.Verify(x => x.GetData<BillSettings>(SettingType.Bill));
 			_container.ApplicationRepository.Verify(x => x.Get(applicationId));
 			_container.ClientRepository.Verify(x => x.Get(application.ClientId));
-			_container.BillRepository.Verify(x => x.Get(applicationId));
 			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
 		}
 
 		[TestMethod]
-		public void Test_NoBill_NoCalc()
+		public void Test_GetBillModelByApplication_NoCalc()
 		{
 			var applicationId = _container.Create<long>();
 			var settings = _container.Create<BillSettings>();
@@ -84,14 +77,13 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			_container.SettingRepository.Setup(x => x.GetData<BillSettings>(SettingType.Bill)).Returns(settings);
 			_container.ApplicationRepository.Setup(x => x.Get(applicationId)).Returns(application);
 			_container.ClientRepository.Setup(x => x.Get(application.ClientId)).Returns(client);
-			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns((BillData)null);
 			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns((CalculationData)null);
 
-			var model = _factory.GetModel(applicationId);
+			var model = _factory.GetBillModelByApplication(applicationId);
 
 			model.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.BankDetails.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
-			model.Count.ShouldBeEquivalentTo("1");
+			model.Count.ShouldBeEquivalentTo(1);
 			model.PriceRuble.ShouldBeEquivalentTo(null);
 			model.Goods.Should().Contain(application.GetApplicationDisplay());
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
@@ -99,7 +91,6 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			_container.SettingRepository.Verify(x => x.GetData<BillSettings>(SettingType.Bill));
 			_container.ApplicationRepository.Verify(x => x.Get(applicationId));
 			_container.ClientRepository.Verify(x => x.Get(application.ClientId));
-			_container.BillRepository.Verify(x => x.Get(applicationId));
 			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
 		}
 	}

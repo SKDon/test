@@ -2,6 +2,7 @@
 {
 	public sealed class BillData
 	{
+		public int Number { get; set; }
 		public string Bank { get; set; }
 		public string BIC { get; set; }
 		public string CorrespondentAccount { get; set; }

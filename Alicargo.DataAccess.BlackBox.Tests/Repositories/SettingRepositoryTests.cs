@@ -39,10 +39,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_Get()
 		{
-			var setting = _repository.Get(SettingType.BillNumberCounter);
+			var setting = _repository.Get(SettingType.BillLastNumber);
 
 			setting.RowVersion.Should().NotBeNull();
-			setting.Type.ShouldBeEquivalentTo(SettingType.BillNumberCounter);
+			setting.Type.ShouldBeEquivalentTo(SettingType.BillLastNumber);
 			_serializer.Deserialize<int>(setting.Data).Should().BeGreaterOrEqualTo(1);
 		}
 
@@ -70,7 +70,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_Update()
 		{
-			var old = _repository.Get(SettingType.BillNumberCounter);
+			var old = _repository.Get(SettingType.BillLastNumber);
 
 			var setting = _fixture.Build<Setting>()
 				.With(x => x.Type, old.Type)
@@ -89,7 +89,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_EntityUpdateConflictException()
 		{
 			var setting = _fixture.Build<Setting>()
-				.With(x => x.Type, SettingType.BillNumberCounter)
+				.With(x => x.Type, SettingType.BillLastNumber)
 				.Create();
 
 			_repository.AddOrReplace(setting);

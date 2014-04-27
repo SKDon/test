@@ -1,26 +1,29 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices;
-using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Filters;
+using Resources;
 
 namespace Alicargo.Areas.Admin.Controllers
 {
 	[Access(RoleType.Admin)]
 	public partial class BillController : Controller
 	{
-		private readonly IBillModelFactory _modelFactory;
 		private readonly IBillRepository _bills;
+		private readonly IBillManager _manager;
+		private readonly IBillModelFactory _modelFactory;
 		private readonly ISettingRepository _settings;
 
-		public BillController(ISettingRepository settings, IBillModelFactory modelFactory, IBillRepository bills)
+		public BillController(
+			ISettingRepository settings, IBillModelFactory modelFactory, IBillRepository bills, IBillManager manager)
 		{
 			_settings = settings;
 			_modelFactory = modelFactory;
 			_bills = bills;
+			_manager = manager;
 		}
 
 		[HttpPost]
@@ -34,7 +37,7 @@ namespace Alicargo.Areas.Admin.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
-				BindBag(id);
+				BindDefaultBag(id);
 
 				return View("Preview", model);
 			}
@@ -45,9 +48,20 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpGet]
 		public virtual ViewResult Preview(long id)
 		{
-			var model = _modelFactory.GetModel(id);
+			var bill = _bills.Get(id);
 
-			BindBag(id);
+			BillModel model;
+			if(bill == null)
+			{
+				model = _modelFactory.GetBillModelByApplication(id);
+				BindDefaultBag(id);
+			}
+			else
+			{
+				model = _modelFactory.GetBillModel(bill);
+				ViewBag.ApplicationId = id;
+				ViewBag.BillNumber = bill.Number;
+			}
 
 			return View(model);
 		}
@@ -55,30 +69,19 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Save(long id, BillModel model)
 		{
+			if(!model.PriceRuble.HasValue || model.PriceRuble.Value <= 0)
+			{
+				ModelState.AddModelError("PriceRuble", Validation.InvalidValue);
+			}
+
 			if(!ModelState.IsValid)
 			{
-				BindBag(id);
+				BindDefaultBag(id);
 
 				return View("Preview", model);
 			}
 
-			_bills.AddOrReplace(id, new BillData
-			{
-				Accountant = model.Accountant,
-				Bank = model.BankDetails.Bank,
-				BIC = model.BankDetails.BIC,
-				CorrespondentAccount = model.BankDetails.CorrespondentAccount,
-				CurrentAccount = model.BankDetails.CurrentAccount,
-				Head = model.Head,
-				HeaderText = model.HeaderText,
-				Payee = model.BankDetails.Payee,
-				Shipper = model.Shipper,
-				TaxRegistrationReasonCode = model.BankDetails.TaxRegistrationReasonCode,
-				TIN = model.BankDetails.TIN,
-				Client = model.Client,
-				Count = model.Count,
-				Goods = model.Goods
-			});
+			_manager.SaveBill(id, model);
 
 			return RedirectToAction(MVC.Admin.Bill.Preview(id));
 		}
@@ -88,7 +91,7 @@ namespace Alicargo.Areas.Admin.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
-				BindBag(id);
+				BindDefaultBag(id);
 
 				return View("Preview", model);
 			}
@@ -96,11 +99,10 @@ namespace Alicargo.Areas.Admin.Controllers
 			return RedirectToAction(MVC.Admin.Bill.Preview(id));
 		}
 
-		private void BindBag(long id)
+		private void BindDefaultBag(long id)
 		{
-			var billNumber = _settings.GetData<int>(SettingType.ApplicationNumberCounter);
 			ViewBag.ApplicationId = id;
-			ViewBag.BillNumber = billNumber;
+			ViewBag.BillNumber = _settings.GetData<int>(SettingType.BillLastNumber) + 1;
 		}
 	}
 }

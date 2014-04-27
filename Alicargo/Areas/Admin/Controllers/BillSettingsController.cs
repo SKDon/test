@@ -46,7 +46,7 @@ namespace Alicargo.Areas.Admin.Controllers
 				Head = billSettings.Head,
 				HeaderText = billSettings.HeaderText,
 				Shipper = billSettings.Shipper,
-				VAT = (uint)(billSettings.VAT * 100),
+				VAT = (byte)(billSettings.VAT * 100),
 				EuroToRuble = billSettings.EuroToRuble
 			};
 
@@ -56,6 +56,16 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Index(BillSettingsModel model)
 		{
+			if(model.EuroToRuble <= 0)
+			{
+				ModelState.AddModelError("EuroToRuble", @"EUR/RUB must have positive value");
+			}
+
+			if(model.VAT <= 0)
+			{
+				ModelState.AddModelError("VAT", @"VAT must have positive value");
+			}
+
 			if(!ModelState.IsValid)
 			{
 				return View(model);

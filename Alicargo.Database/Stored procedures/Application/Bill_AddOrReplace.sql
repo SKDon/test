@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[Bill_AddOrReplace]
 	@ApplicationId BIGINT,
+	@Number INT,
 	@Bank NVARCHAR(MAX),
 	@BIC NVARCHAR(MAX),
 	@CorrespondentAccount NVARCHAR(MAX),
@@ -23,6 +24,7 @@ AS BEGIN
 
 	MERGE [dbo].[Bill] AS target
 		USING (SELECT @ApplicationId,
+					@Number,
 					@Bank,
 					@BIC,
 					@CorrespondentAccount,
@@ -41,6 +43,7 @@ AS BEGIN
 					@VAT,
 					@EuroToRuble)
 			AS source ([ApplicationId],
+					[Number],
 					[Bank],
 					[BIC],
 					[CorrespondentAccount],
@@ -61,6 +64,7 @@ AS BEGIN
 			ON (target.[ApplicationId] = source.[ApplicationId])
 		WHEN MATCHED THEN 
 			UPDATE SET [Bank] = source.[Bank],
+						[Number] = source.[Number],
 						[BIC] = source.[BIC],
 						[CorrespondentAccount] = source.[CorrespondentAccount],
 						[TIN] = source.[TIN],
@@ -79,6 +83,7 @@ AS BEGIN
 						[EuroToRuble] = source.[EuroToRuble]
 		WHEN NOT MATCHED THEN
 			INSERT ([ApplicationId],
+					[Number],
 					[Bank],
 					[BIC],
 					[CorrespondentAccount],
@@ -97,6 +102,7 @@ AS BEGIN
 					[VAT],
 					[EuroToRuble])
 			VALUES (source.[ApplicationId],
+					source.[Number],
 					source.[Bank],
 					source.[BIC],
 					source.[CorrespondentAccount],

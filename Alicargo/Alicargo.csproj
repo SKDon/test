@@ -182,7 +182,9 @@
     <Compile Include="Areas\Admin\Models\BankDetails.cs" />
     <Compile Include="Areas\Admin\Models\BillModel.cs" />
     <Compile Include="Areas\Admin\Models\BillSettingsModel.cs" />
+    <Compile Include="Areas\Admin\Serivices\BillManager.cs" />
     <Compile Include="Areas\Admin\Serivices\BillModelFactory.cs" />
+    <Compile Include="Areas\Admin\Serivices\IBillManager.cs" />
     <Compile Include="Areas\Admin\Serivices\IBillModelFactory.cs" />
     <Compile Include="AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>

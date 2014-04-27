@@ -12,53 +12,24 @@ namespace Alicargo.Areas.Admin.Serivices
 	internal sealed class BillModelFactory : IBillModelFactory
 	{
 		private readonly IApplicationRepository _applications;
-		private readonly IBillRepository _bills;
 		private readonly ICalculationRepository _calculations;
 		private readonly IClientRepository _clients;
 		private readonly ISettingRepository _settings;
 
 		public BillModelFactory(
-			IBillRepository bills,
 			IApplicationRepository applications,
 			ICalculationRepository calculations,
 			IClientRepository clients,
 			ISettingRepository settings)
 		{
-			_bills = bills;
 			_applications = applications;
 			_calculations = calculations;
 			_clients = clients;
 			_settings = settings;
 		}
 
-		public BillModel GetModel(long applicationId)
+		public BillModel GetBillModelByApplication(long applicationId)
 		{
-			var bill = _bills.Get(applicationId);
-			if(bill != null)
-			{
-				return new BillModel
-				{
-					BankDetails = new BankDetails
-					{
-						Bank = bill.Bank,
-						BIC = bill.BIC,
-						CorrespondentAccount = bill.CorrespondentAccount,
-						CurrentAccount = bill.CurrentAccount,
-						Payee = bill.Payee,
-						TaxRegistrationReasonCode = bill.TaxRegistrationReasonCode,
-						TIN = bill.TIN
-					},
-					Accountant = bill.Accountant,
-					Head = bill.Head,
-					HeaderText = bill.HeaderText,
-					Shipper = bill.Shipper,
-					Client = bill.Client,
-					Count = bill.Count,
-					Goods = bill.Goods,
-					PriceRuble = bill.Price * bill.EuroToRuble
-				};
-			}
-
 			var application = _applications.Get(applicationId);
 			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
 			var money = GetMoney(applicationId, settings.EuroToRuble);
@@ -85,6 +56,31 @@ namespace Alicargo.Areas.Admin.Serivices
 				Shipper = settings.Shipper
 			};
 		}
+
+		public BillModel GetBillModel(BillData bill)
+		{
+			return new BillModel
+			{
+				BankDetails = new BankDetails
+				{
+					Bank = bill.Bank,
+					BIC = bill.BIC,
+					CorrespondentAccount = bill.CorrespondentAccount,
+					CurrentAccount = bill.CurrentAccount,
+					Payee = bill.Payee,
+					TaxRegistrationReasonCode = bill.TaxRegistrationReasonCode,
+					TIN = bill.TIN
+				},
+				Accountant = bill.Accountant,
+				Head = bill.Head,
+				HeaderText = bill.HeaderText,
+				Shipper = bill.Shipper,
+				Client = bill.Client,
+				Count = bill.Count,
+				Goods = bill.Goods,
+				PriceRuble = bill.Price * bill.EuroToRuble
+			};
+		}		
 
 		private string GetClientString(ApplicationEditData application)
 		{

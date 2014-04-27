@@ -22,8 +22,9 @@ namespace Alicargo.Areas.Admin.Models
 		[DataType(DataType.MultilineText)]
 		public string HeaderText { get; set; }
 
+		[Range(1, 100)]
 		[DisplayName(@"НДС (%)")]
-		public uint VAT { get; set; }
+		public byte VAT { get; set; }
 
 		[DisplayName(@"EUR/RUB")]
 		public decimal EuroToRuble { get; set; }

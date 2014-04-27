@@ -2,6 +2,7 @@
 (
 	[Id] BIGINT NOT NULL IDENTITY(1, 1),
 	[ApplicationId] BIGINT NOT NULL,
+	[Number] INT NOT NULL,
 	[Bank] NVARCHAR(MAX) NOT NULL,
 	[BIC] NVARCHAR(MAX) NOT NULL,
 	[CorrespondentAccount] NVARCHAR(MAX) NOT NULL,

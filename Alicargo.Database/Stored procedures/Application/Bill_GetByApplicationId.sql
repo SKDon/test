@@ -20,7 +20,8 @@ AS BEGIN
 		[Count],
 		[Price],
 		[VAT],
-		[EuroToRuble]
+		[EuroToRuble],
+		[Number]
 	FROM [dbo].[Bill]
 	WHERE [ApplicationId] = @ApplicationId
 

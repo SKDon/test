@@ -1,9 +1,11 @@
 ﻿using Alicargo.Areas.Admin.Models;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
 
 namespace Alicargo.Areas.Admin.Serivices
 {
 	public interface IBillModelFactory
 	{
-		BillModel GetModel(long applicationId);
+		BillModel GetBillModel(BillData bill);
+		BillModel GetBillModelByApplication(long applicationId);
 	}
 }
