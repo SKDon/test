@@ -11,17 +11,17 @@ namespace Alicargo.Areas.Admin.Serivices
 {
 	internal sealed class BillModelFactory : IBillModelFactory
 	{
-		private readonly IBillRepository _bills;
 		private readonly IApplicationRepository _applications;
+		private readonly IBillRepository _bills;
 		private readonly ICalculationRepository _calculations;
 		private readonly IClientRepository _clients;
 		private readonly ISettingRepository _settings;
 
 		public BillModelFactory(
-			IBillRepository bills, 
+			IBillRepository bills,
 			IApplicationRepository applications,
-			ICalculationRepository calculations, 
-			IClientRepository clients, 
+			ICalculationRepository calculations,
+			IClientRepository clients,
 			ISettingRepository settings)
 		{
 			_bills = bills;
@@ -33,14 +33,8 @@ namespace Alicargo.Areas.Admin.Serivices
 
 		public BillModel GetModel(long applicationId)
 		{
-			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
-			var application = _applications.Get(applicationId);
 			var bill = _bills.Get(applicationId);
-			var calculation = _calculations.GetByApplication(applicationId);
-
-			var money = calculation != null
-				? (CalculationDataHelper.GetMoney(calculation) * (1 - settings.VAT)).ToString("n2")
-				: null;
+			var money = GetMoney(applicationId);
 
 			if(bill != null)
 			{
@@ -67,6 +61,9 @@ namespace Alicargo.Areas.Admin.Serivices
 					Total = string.IsNullOrWhiteSpace(bill.Total) ? money : bill.Total,
 				};
 			}
+
+			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
+			var application = _applications.Get(applicationId);
 
 			return new BillModel
 			{
@@ -97,6 +94,15 @@ namespace Alicargo.Areas.Admin.Serivices
 			var client = _clients.Get(application.ClientId);
 
 			return string.Format("{0}, ИНН {1}, {2}, {3}", client.LegalEntity, client.INN, client.LegalAddress, client.Contacts);
+		}
+
+		private string GetMoney(long applicationId)
+		{
+			var calculation = _calculations.GetByApplication(applicationId);
+
+			return calculation != null
+				? CalculationDataHelper.GetMoney(calculation).ToString("n2")
+				: null;
 		}
 
 		private static string GetGoodsString(ApplicationData application)

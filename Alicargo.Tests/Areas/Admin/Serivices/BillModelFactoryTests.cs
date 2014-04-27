@@ -28,18 +28,12 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 		public void Test_Bill_Calc()
 		{
 			var applicationId = _container.Create<long>();
-			var settings = _container.Create<BillSettings>();
-			var application = _container.Create<ApplicationData>();
-			var client = _container.Create<ClientData>();
 			var bill = _container.Create<BillEditData>();
 			bill.Price = "";
 			bill.Total = " ";
 			var calculation = _container.Create<CalculationData>();
-			var money = (CalculationDataHelper.GetMoney(calculation) * (1 - settings.VAT)).ToString("n2");
+			var money = CalculationDataHelper.GetMoney(calculation).ToString("n2");
 
-			_container.SettingRepository.Setup(x => x.GetData<BillSettings>(SettingType.Bill)).Returns(settings);
-			_container.ApplicationRepository.Setup(x => x.Get(applicationId)).Returns(application);
-			_container.ClientRepository.Setup(x => x.Get(application.ClientId)).Returns(client);
 			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns(bill);
 			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns(calculation);
 
@@ -50,20 +44,17 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			model.BankDetails.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
 			model.Price.ShouldBeEquivalentTo(money);
 			model.Total.ShouldBeEquivalentTo(money);
+
+			_container.BillRepository.Verify(x => x.Get(applicationId));
+			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
 		}
 
 		[TestMethod]
 		public void Test_Bill_NoCalc()
 		{
 			var applicationId = _container.Create<long>();
-			var settings = _container.Create<BillSettings>();
-			var application = _container.Create<ApplicationData>();
-			var client = _container.Create<ClientData>();
 			var bill = _container.Create<BillEditData>();
 
-			_container.SettingRepository.Setup(x => x.GetData<BillSettings>(SettingType.Bill)).Returns(settings);
-			_container.ApplicationRepository.Setup(x => x.Get(applicationId)).Returns(application);
-			_container.ClientRepository.Setup(x => x.Get(application.ClientId)).Returns(client);
 			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns(bill);
 			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns((CalculationData)null);
 
@@ -71,6 +62,9 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 
 			model.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
 			model.BankDetails.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
+
+			_container.BillRepository.Verify(x => x.Get(applicationId));
+			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
 		}
 
 		[TestMethod]
@@ -81,7 +75,7 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			var application = _container.Create<ApplicationData>();
 			var client = _container.Create<ClientData>();
 			var calculation = _container.Create<CalculationData>();
-			var money = (CalculationDataHelper.GetMoney(calculation) * (1 - settings.VAT)).ToString("n2");
+			var money = CalculationDataHelper.GetMoney(calculation).ToString("n2");
 
 			_container.SettingRepository.Setup(x => x.GetData<BillSettings>(SettingType.Bill)).Returns(settings);
 			_container.ApplicationRepository.Setup(x => x.Get(applicationId)).Returns(application);
@@ -98,6 +92,12 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			model.Total.ShouldBeEquivalentTo(money);
 			model.Goods.Should().Contain(application.GetApplicationDisplay());
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
+
+			_container.SettingRepository.Verify(x => x.GetData<BillSettings>(SettingType.Bill));
+			_container.ApplicationRepository.Verify(x => x.Get(applicationId));
+			_container.ClientRepository.Verify(x => x.Get(application.ClientId));
+			_container.BillRepository.Verify(x => x.Get(applicationId));
+			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
 		}
 
 		[TestMethod]
@@ -123,6 +123,12 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			model.Total.ShouldBeEquivalentTo(null);
 			model.Goods.Should().Contain(application.GetApplicationDisplay());
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
+
+			_container.SettingRepository.Verify(x => x.GetData<BillSettings>(SettingType.Bill));
+			_container.ApplicationRepository.Verify(x => x.Get(applicationId));
+			_container.ClientRepository.Verify(x => x.Get(application.ClientId));
+			_container.BillRepository.Verify(x => x.Get(applicationId));
+			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
 		}
 	}
 }
