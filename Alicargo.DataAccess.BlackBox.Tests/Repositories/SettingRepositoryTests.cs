@@ -73,7 +73,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
-		public void Test_GetNextBillNumber()
+		public void Test_GetNextBillNumber_Concurency()
 		{
 			var numbers = new int[10];
 			var tasks = Enumerable.Range(0, 10)
@@ -83,6 +83,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			Task.WaitAll(tasks);
 
 			numbers.Distinct().Count().ShouldBeEquivalentTo(10);
+		}
+
+		[TestMethod]
+		public void Test_GetNextBillNumber()
+		{
+			var last = _repository.GetData<int>(SettingType.BillLastNumber);
+			var next = _repository.GetNextBillNumber();
+
+			next.ShouldBeEquivalentTo(last + 1);
 		}
 
 		[TestMethod]

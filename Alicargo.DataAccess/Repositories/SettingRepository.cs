@@ -54,9 +54,9 @@ namespace Alicargo.DataAccess.Repositories
 				{
 					var data = Get(SettingType.BillLastNumber);
 
-					var number = _serializer.Deserialize<int>(data.Data);
+					var number = _serializer.Deserialize<int>(data.Data) + 1;
 
-					data.Data = _serializer.Serialize(number + 1);
+					data.Data = _serializer.Serialize(number);
 
 					AddOrReplace(data);
 
