@@ -56,9 +56,33 @@ namespace Alicargo.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Cancel()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Cancel);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Download()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Download);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ViewResult Preview()
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Preview);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Save()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Save);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Send()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Send);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,21 +100,63 @@ namespace Alicargo.Areas.Admin.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Cancel = "Cancel";
+            public readonly string Download = "Download";
             public readonly string Preview = "Preview";
+            public readonly string Save = "Save";
+            public readonly string Send = "Send";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Cancel = "Cancel";
+            public const string Download = "Download";
             public const string Preview = "Preview";
+            public const string Save = "Save";
+            public const string Send = "Send";
         }
 
 
+        static readonly ActionParamsClass_Cancel s_params_Cancel = new ActionParamsClass_Cancel();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Cancel CancelParams { get { return s_params_Cancel; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Cancel
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Download s_params_Download = new ActionParamsClass_Download();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Download DownloadParams { get { return s_params_Download; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Download
+        {
+            public readonly string id = "id";
+            public readonly string model = "model";
+        }
         static readonly ActionParamsClass_Preview s_params_Preview = new ActionParamsClass_Preview();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Preview PreviewParams { get { return s_params_Preview; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Preview
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Save s_params_Save = new ActionParamsClass_Save();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Save SaveParams { get { return s_params_Save; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Save
+        {
+            public readonly string id = "id";
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_Send s_params_Send = new ActionParamsClass_Send();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Send SendParams { get { return s_params_Send; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Send
         {
             public readonly string id = "id";
             public readonly string model = "model";
@@ -117,6 +183,31 @@ namespace Alicargo.Areas.Admin.Controllers
         public T4MVC_BillController() : base(Dummy.Instance) { }
 
         [NonAction]
+        partial void CancelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Cancel(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Cancel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            CancelOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void DownloadOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.Areas.Admin.Models.BillModel model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Download(long id, Alicargo.Areas.Admin.Models.BillModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Download);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            DownloadOverride(callInfo, id, model);
+            return callInfo;
+        }
+
+        [NonAction]
         partial void PreviewOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
         [NonAction]
@@ -129,15 +220,28 @@ namespace Alicargo.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void PreviewOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.Areas.Admin.Models.BillModel model);
+        partial void SaveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.Areas.Admin.Models.BillModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Preview(long id, Alicargo.Areas.Admin.Models.BillModel model)
+        public override System.Web.Mvc.ActionResult Save(long id, Alicargo.Areas.Admin.Models.BillModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Preview);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Save);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            PreviewOverride(callInfo, id, model);
+            SaveOverride(callInfo, id, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SendOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.Areas.Admin.Models.BillModel model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Send(long id, Alicargo.Areas.Admin.Models.BillModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Send);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            SendOverride(callInfo, id, model);
             return callInfo;
         }
 

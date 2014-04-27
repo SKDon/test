@@ -3,8 +3,7 @@
 @using Resources
 @model Alicargo.Areas.Admin.Models.BillModel
 
-@using(Html.BeginForm(MVC.Admin.Bill.Preview()))
-{
+<form method="POST">
 	<div class="bill-preview container-edit">
 		<h1>
 			Счет на оплату № @ViewBag.BillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")
@@ -59,10 +58,11 @@
 		</div>
 		<hr />
 		<div>
-			<input class="btn btn-primary" name="save" value="@Pages.Save" />
-			<input class="btn btn-success" name="send" value="@Pages.Send" />
-			<input class="btn btn-info" name="download" value="@Pages.Download" />
-			<input class="btn" name="cansel" value="@Pages.Cancel" />
+			<input class="btn btn-primary" type="submit" value="@Pages.Save" formaction="/Admin/Bill/Save/@ViewBag.ApplicationId" />
+			<input class="btn btn-success" type="submit" value="@Pages.Send" formaction="/Admin/Bill/Send/@ViewBag.ApplicationId" />
+			<input class="btn btn-info" type="submit" value="@Pages.Download" formaction="/Admin/Bill/Download/@ViewBag.ApplicationId" />
+			<input class="btn" type="submit" value="@Pages.Cancel" formaction="/Admin/Bill/Cancel/@ViewBag.ApplicationId" />
 		</div>
+		@Html.ValidationSummary(false)
 	</div>
-}
+</form>
