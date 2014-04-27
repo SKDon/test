@@ -10,9 +10,12 @@ namespace Alicargo.Areas.Admin.Models
 
 		public string Client { get; set; }
 		public string Goods { get; set; }
-		public string Count { get; set; }
-		public string Price { get; set; }
-		public string Total { get; set; }
+
+		[Range(1, short.MaxValue)]
+		public ushort Count { get; set; }
+
+		[Required]
+		public decimal? PriceRuble { get; set; }
 
 		[DisplayName(@"Бухгалтер")]
 		public string Accountant { get; set; }

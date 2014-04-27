@@ -1,7 +1,7 @@
 ﻿namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
-	public sealed class BillEditData
-	{		
+	public sealed class BillData
+	{
 		public string Bank { get; set; }
 		public string BIC { get; set; }
 		public string CorrespondentAccount { get; set; }
@@ -13,11 +13,11 @@
 		public string Head { get; set; }
 		public string Accountant { get; set; }
 		public string HeaderText { get; set; }
-
 		public string Client { get; set; }
 		public string Goods { get; set; }
-		public string Count { get; set; }
-		public string Price { get; set; }
-		public string Total { get; set; }
+		public ushort Count { get; set; }
+		public decimal Price { get; set; } // Euro
+		public decimal VAT { get; set; }
+		public decimal EuroToRuble { get; set; } // EUR/RUB
 	}
 }

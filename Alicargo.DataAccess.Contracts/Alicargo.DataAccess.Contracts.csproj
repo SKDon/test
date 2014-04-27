@@ -51,7 +51,7 @@
     </Compile>
     <Compile Include="Contracts\AirWaybillAggregate.cs" />
     <Compile Include="Contracts\Application\ApplicationEditData.cs" />
-    <Compile Include="Contracts\Application\BillEditData.cs" />
+    <Compile Include="Contracts\Application\BillData.cs" />
     <Compile Include="Contracts\EventData.cs" />
     <Compile Include="Contracts\ApplicationEventTemplateData.cs" />
     <Compile Include="Contracts\Application\ApplicationData.cs" />

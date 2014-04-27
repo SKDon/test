@@ -25,46 +25,20 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 		}
 
 		[TestMethod]
-		public void Test_Bill_Calc()
+		public void Test_Bill()
 		{
 			var applicationId = _container.Create<long>();
-			var bill = _container.Create<BillEditData>();
-			bill.Price = "";
-			bill.Total = " ";
-			var calculation = _container.Create<CalculationData>();
-			var money = CalculationDataHelper.GetMoney(calculation).ToString("n2");
+			var bill = _container.Create<BillData>();
 
 			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns(bill);
-			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns(calculation);
-
-			var model = _factory.GetModel(applicationId);
-
-			model.ShouldBeEquivalentTo(bill,
-				options => options.ExcludingMissingProperties().Excluding(x => x.Price).Excluding(x => x.Total));
-			model.BankDetails.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
-			model.Price.ShouldBeEquivalentTo(money);
-			model.Total.ShouldBeEquivalentTo(money);
-
-			_container.BillRepository.Verify(x => x.Get(applicationId));
-			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
-		}
-
-		[TestMethod]
-		public void Test_Bill_NoCalc()
-		{
-			var applicationId = _container.Create<long>();
-			var bill = _container.Create<BillEditData>();
-
-			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns(bill);
-			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns((CalculationData)null);
 
 			var model = _factory.GetModel(applicationId);
 
 			model.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
 			model.BankDetails.ShouldBeEquivalentTo(bill, options => options.ExcludingMissingProperties());
+			model.PriceRuble.ShouldBeEquivalentTo(bill.Price * bill.EuroToRuble);
 
 			_container.BillRepository.Verify(x => x.Get(applicationId));
-			_container.CalculationRepository.Verify(x => x.GetByApplication(applicationId));
 		}
 
 		[TestMethod]
@@ -75,12 +49,12 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			var application = _container.Create<ApplicationData>();
 			var client = _container.Create<ClientData>();
 			var calculation = _container.Create<CalculationData>();
-			var money = CalculationDataHelper.GetMoney(calculation).ToString("n2");
+			var money = CalculationDataHelper.GetMoney(calculation) * settings.EuroToRuble;
 
 			_container.SettingRepository.Setup(x => x.GetData<BillSettings>(SettingType.Bill)).Returns(settings);
 			_container.ApplicationRepository.Setup(x => x.Get(applicationId)).Returns(application);
 			_container.ClientRepository.Setup(x => x.Get(application.ClientId)).Returns(client);
-			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns((BillEditData)null);
+			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns((BillData)null);
 			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns(calculation);
 
 			var model = _factory.GetModel(applicationId);
@@ -88,8 +62,7 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			model.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.BankDetails.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.Count.ShouldBeEquivalentTo("1");
-			model.Price.ShouldBeEquivalentTo(money);
-			model.Total.ShouldBeEquivalentTo(money);
+			model.PriceRuble.ShouldBeEquivalentTo(money);
 			model.Goods.Should().Contain(application.GetApplicationDisplay());
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
 
@@ -111,7 +84,7 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			_container.SettingRepository.Setup(x => x.GetData<BillSettings>(SettingType.Bill)).Returns(settings);
 			_container.ApplicationRepository.Setup(x => x.Get(applicationId)).Returns(application);
 			_container.ClientRepository.Setup(x => x.Get(application.ClientId)).Returns(client);
-			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns((BillEditData)null);
+			_container.BillRepository.Setup(x => x.Get(applicationId)).Returns((BillData)null);
 			_container.CalculationRepository.Setup(x => x.GetByApplication(applicationId)).Returns((CalculationData)null);
 
 			var model = _factory.GetModel(applicationId);
@@ -119,8 +92,7 @@ namespace Alicargo.Tests.Areas.Admin.Serivices
 			model.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.BankDetails.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.Count.ShouldBeEquivalentTo("1");
-			model.Price.ShouldBeEquivalentTo(null);
-			model.Total.ShouldBeEquivalentTo(null);
+			model.PriceRuble.ShouldBeEquivalentTo(null);
 			model.Goods.Should().Contain(application.GetApplicationDisplay());
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
 

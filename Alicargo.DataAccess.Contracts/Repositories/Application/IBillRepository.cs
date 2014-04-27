@@ -4,7 +4,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
 	public interface IBillRepository
 	{
-		void AddOrReplace(long applicationId, BillEditData data);
-		BillEditData Get(long applicationId);
+		void AddOrReplace(long applicationId, BillData data);
+		BillData Get(long applicationId);
 	}
 }

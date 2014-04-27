@@ -34,15 +34,13 @@
 					<td style="width: 50px;">Кол-во</td>
 					<td style="width: 20px">Ед.</td>
 					<td class="narrow">Цена</td>
-					<td class="narrow">Сумма</td>
 				</tr>
 				<tr>
 					<td class="info">1</td>
 					<td><div class="textedit-holder">@Html.TextAreaFor(x => x.Goods)</div></td>
 					<td><div class="textedit-holder">@Html.EditorFor(x => x.Count)</div></td>
 					<td class="info">шт.</td>
-					<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Price)</div></td>
-					<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Total)</div></td>
+					<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.PriceRuble)</div></td>
 				</tr>
 			</table>
 		</div>

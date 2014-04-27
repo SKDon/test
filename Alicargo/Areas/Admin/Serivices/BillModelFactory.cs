@@ -34,8 +34,6 @@ namespace Alicargo.Areas.Admin.Serivices
 		public BillModel GetModel(long applicationId)
 		{
 			var bill = _bills.Get(applicationId);
-			var money = GetMoney(applicationId);
-
 			if(bill != null)
 			{
 				return new BillModel
@@ -57,13 +55,13 @@ namespace Alicargo.Areas.Admin.Serivices
 					Client = bill.Client,
 					Count = bill.Count,
 					Goods = bill.Goods,
-					Price = string.IsNullOrWhiteSpace(bill.Price) ? money : bill.Price,
-					Total = string.IsNullOrWhiteSpace(bill.Total) ? money : bill.Total,
+					PriceRuble = bill.Price * bill.EuroToRuble
 				};
 			}
 
-			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
 			var application = _applications.Get(applicationId);
+			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
+			var money = GetMoney(applicationId, settings.EuroToRuble);
 
 			return new BillModel
 			{
@@ -77,11 +75,10 @@ namespace Alicargo.Areas.Admin.Serivices
 					TaxRegistrationReasonCode = settings.TaxRegistrationReasonCode,
 					TIN = settings.TIN
 				},
-				Count = "1",
+				Count = 1,
 				Client = GetClientString(application),
 				Goods = GetGoodsString(application),
-				Price = money,
-				Total = money,
+				PriceRuble = money,
 				Accountant = settings.Accountant,
 				Head = settings.Head,
 				HeaderText = settings.HeaderText,
@@ -96,13 +93,13 @@ namespace Alicargo.Areas.Admin.Serivices
 			return string.Format("{0}, ИНН {1}, {2}, {3}", client.LegalEntity, client.INN, client.LegalAddress, client.Contacts);
 		}
 
-		private string GetMoney(long applicationId)
+		private decimal? GetMoney(long applicationId, decimal euroToRuble)
 		{
 			var calculation = _calculations.GetByApplication(applicationId);
 
 			return calculation != null
-				? CalculationDataHelper.GetMoney(calculation).ToString("n2")
-				: null;
+				? CalculationDataHelper.GetMoney(calculation) * euroToRuble
+				: (decimal?)null;
 		}
 
 		private static string GetGoodsString(ApplicationData application)

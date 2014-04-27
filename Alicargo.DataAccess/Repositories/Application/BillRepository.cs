@@ -1,18 +1,47 @@
-﻿using System;
-using Alicargo.DataAccess.Contracts.Contracts.Application;
+﻿using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 
 namespace Alicargo.DataAccess.Repositories.Application
 {
 	internal sealed class BillRepository : IBillRepository
 	{
-		public void AddOrReplace(long applicationId, BillEditData data)
+		private readonly ISqlProcedureExecutor _executor;
+
+		public BillRepository(ISqlProcedureExecutor executor)
 		{
+			_executor = executor;
 		}
 
-		public BillEditData Get(long applicationId)
+		public void AddOrReplace(long applicationId, BillData data)
 		{
-			return null;
+			_executor.Execute("[dbo].[Bill_AddOrReplace]",
+				new
+				{
+					applicationId,
+					data.Accountant,
+					data.Bank,
+					data.BIC,
+					data.Client,
+					data.CorrespondentAccount,
+					data.Count,
+					data.CurrentAccount,
+					data.Goods,
+					data.Head,
+					data.HeaderText,
+					data.Payee,
+					data.Price,
+					data.Shipper,
+					data.TaxRegistrationReasonCode,
+					data.TIN,
+					data.VAT,
+					data.EuroToRuble
+				});
+		}
+
+		public BillData Get(long applicationId)
+		{
+			return _executor.Query<BillData>("[dbo].[Bill_GetByApplicationId]", new { applicationId });
 		}
 	}
 }
