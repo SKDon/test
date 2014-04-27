@@ -181,7 +181,7 @@ namespace Alicargo.Tests.Services
 			airWaybillData[0].GTD = null;
 			var stateAvailability = _context.CreateMany<long>(1).ToArray();
 
-			_context.AirWaybillRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(airWaybillData);
+			_context.AwbRepository.Setup(x => x.Get(applicationData.AirWaybillId.Value)).Returns(airWaybillData);
 			_context.StateConfig.Setup(x => x.CargoAtCustomsStateId).Returns(stateAvailability[0]);
 
 			var stateModels = _stateFilter.FilterByBusinessLogic(applicationData, stateAvailability);

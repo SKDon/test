@@ -5,6 +5,11 @@ namespace Alicargo.Core.Helpers
 {
 	public static class CalculationDataHelper
 	{
+		public static decimal GetMoney(CalculationData calculation)
+		{
+			return GetMoney(calculation, calculation.InsuranceRate);
+		}
+
 		public static decimal GetMoney(CalculationData calculation, float insuranceRate)
 		{
 			if(calculation.Profit.HasValue)

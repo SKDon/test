@@ -38,7 +38,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
 			_context.ApplicationAwbManager.Setup(x => x.SetAwb(applicationId, airWaybillId));
-			_context.AirWaybillRepository.Setup(
+			_context.AwbRepository.Setup(
 				x =>
 					x.Add(It.IsAny<AirWaybillData>(), model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
 						model.InvoiceFile, model.AWBFile, model.DrawFile))
@@ -50,7 +50,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 				model.InvoiceFile, model.AWBFile, model.DrawFile);
 
 			_context.ApplicationAwbManager.Verify(x => x.SetAwb(applicationId, airWaybillId), Times.Once());
-			_context.AirWaybillRepository.Verify(x => x.Add(It.Is<AirWaybillData>(
+			_context.AwbRepository.Verify(x => x.Add(It.Is<AirWaybillData>(
 				data => data.Id == 0
 				        && data.StateId == cargoIsFlewStateId
 				        && data.CreationTimestamp != null
@@ -96,7 +96,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 			var applications = _context.CreateMany<ApplicationData>().ToArray();
 			_context.ApplicationRepository.Setup(x => x.GetByAirWaybill(id)).Returns(applications);
 			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(It.IsAny<long>(), null));
-			_context.AirWaybillRepository.Setup(x => x.Delete(id));
+			_context.AwbRepository.Setup(x => x.Delete(id));
 
 			_manager.Delete(id);
 
@@ -104,7 +104,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 			_context.ApplicationEditor.Verify(
 				x => x.SetAirWaybill(It.Is<long>(i => applications.Any(a => a.Id == i)), null),
 				Times.Exactly(applications.Length));
-			_context.AirWaybillRepository.Verify(x => x.Delete(id), Times.Once());
+			_context.AwbRepository.Verify(x => x.Delete(id), Times.Once());
 		}
 
 		[TestMethod]

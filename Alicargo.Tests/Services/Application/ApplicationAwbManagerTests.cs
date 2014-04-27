@@ -43,7 +43,7 @@ namespace Alicargo.Tests.Services.Application
 		{
 			var id = _context.Create<long>();
 
-			_context.AirWaybillRepository.Setup(x => x.GetAggregate(new[] { id }, null, null, null, null)).Returns(new AirWaybillAggregate[0]);
+			_context.AwbRepository.Setup(x => x.GetAggregate(new[] { id }, null, null, null, null)).Returns(new AirWaybillAggregate[0]);
 
 			_manager.SetAwb(It.IsAny<long>(), id);
 		}
@@ -56,13 +56,13 @@ namespace Alicargo.Tests.Services.Application
 			var aggregate = _context.Create<AirWaybillAggregate>();
 
 			// ReSharper disable ImplicitlyCapturedClosure
-			_context.AirWaybillRepository.Setup(x => x.GetAggregate(new[] { airWaybillId }, null, null, null, null)).Returns(new[] { aggregate });
+			_context.AwbRepository.Setup(x => x.GetAggregate(new[] { airWaybillId }, null, null, null, null)).Returns(new[] { aggregate });
 			_context.ApplicationEditor.Setup(x => x.SetAirWaybill(applicationId, airWaybillId));
 			_context.ApplicationStateManager.Setup(x => x.SetState(applicationId, aggregate.StateId));
 
 			_manager.SetAwb(applicationId, airWaybillId);
 
-			_context.AirWaybillRepository.Verify(x => x.GetAggregate(new[] { airWaybillId }, null, null, null, null), Times.Once());
+			_context.AwbRepository.Verify(x => x.GetAggregate(new[] { airWaybillId }, null, null, null, null), Times.Once());
 			_context.ApplicationEditor.Verify(x => x.SetAirWaybill(applicationId, airWaybillId), Times.Once());
 			_context.ApplicationStateManager.Verify(x => x.SetState(applicationId, aggregate.StateId), Times.Once());
 			// ReSharper restore ImplicitlyCapturedClosure

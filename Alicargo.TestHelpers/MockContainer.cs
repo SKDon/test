@@ -68,7 +68,7 @@ namespace Alicargo.TestHelpers
 			ApplicationEditor = Inject<IApplicationEditor>();
 			ApplicationManager = Inject<IAdminApplicationManager>();
 			ApplicationPresenter = Inject<IApplicationPresenter>();
-			AirWaybillRepository = Inject<IAwbRepository>();
+			AwbRepository = Inject<IAwbRepository>();
 			StateConfig = Inject<IStateConfig>();
 			Transaction = Inject<ITransaction>();
 			ApplicationListItemMapper = Inject<IApplicationListItemMapper>();
@@ -91,43 +91,49 @@ namespace Alicargo.TestHelpers
 			SenderRepository = Inject<ISenderRepository>();
 			CityRepository = Inject<ICityRepository>();
 			ApplicationStateManager = Inject<IApplicationStateManager>();
+			BillRepository = Inject<IBillRepository>();
+			SettingRepository = Inject<ISettingRepository>();
+			CalculationRepository = Inject<ICalculationRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
 
 		public Fixture Fixture { get; private set; }
 
-		public Mock<IAdminRepository> AdminRepository { get; private set; }
-		public Mock<ISenderRepository> SenderRepository { get; private set; }
-		public Mock<IApplicationEventTemplates> ApplicationEventTemplates { get; private set; }
-		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
-		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }
-		public Mock<ISerializer> Serializer { get; private set; }
-		public Mock<IApplicationEditor> ApplicationEditor { get; private set; }
 		public Mock<IAdminApplicationManager> ApplicationManager { get; private set; }
-		public Mock<IApplicationStateManager> ApplicationStateManager { get; private set; }
+		public Mock<IAdminRepository> AdminRepository { get; private set; }
 		public Mock<IApplicationAwbManager> ApplicationAwbManager { get; private set; }
+		public Mock<IApplicationEditor> ApplicationEditor { get; private set; }
+		public Mock<IApplicationEventTemplates> ApplicationEventTemplates { get; private set; }
+		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }
 		public Mock<IApplicationGrouper> ApplicationGrouper { get; private set; }
 		public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }
 		public Mock<IApplicationPresenter> ApplicationPresenter { get; private set; }
-		public Mock<IAwbRepository> AirWaybillRepository { get; private set; }
+		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
+		public Mock<IApplicationStateManager> ApplicationStateManager { get; private set; }
+		public Mock<IAwbRepository> AwbRepository { get; private set; }
+		public Mock<IBillRepository> BillRepository { get; private set; }
+		public Mock<ICalculationRepository> CalculationRepository { get; private set; }
+		public Mock<ICityRepository> CityRepository { get; private set; }
 		public Mock<IClientPermissions> ClientPermissions { get; private set; }
 		public Mock<IClientRepository> ClientRepository { get; private set; }
+		public Mock<ICommonFilesFacade> CommonFilesFacade { get; private set; }
 		public Mock<ICountryRepository> CountryRepository { get; private set; }
-		public Mock<ICityRepository> CityRepository { get; private set; }
 		public Mock<IIdentityService> IdentityService { get; private set; }
 		public Mock<IMailSender> MailSender { get; private set; }
 		public Mock<IMessageBuilder> MessageBuilder { get; private set; }
+		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
+		public Mock<ISenderRepository> SenderRepository { get; private set; }
+		public Mock<ISerializer> Serializer { get; private set; }
+		public Mock<ISettingRepository> SettingRepository { get; private set; }
+		public Mock<IStateConfig> StateConfig { get; private set; }
+		public Mock<IStateFilter> StateService { get; private set; }
 		public Mock<IStateRepository> StateRepository { get; private set; }
 		public Mock<IStateSettingsRepository> StateSettingsRepository { get; private set; }
-		public Mock<IStateFilter> StateService { get; private set; }
-		public Mock<IStateConfig> StateConfig { get; private set; }
-		public Mock<ITransaction> Transaction { get; private set; }
 		public Mock<ITemplateRepository> TemplateRepository { get; private set; }
 		public Mock<ITemplateRepositoryHelper> TemplateRepositoryHelper { get; private set; }
-		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
-		public Mock<ICommonFilesFacade> CommonFilesFacade { get; private set; }
 		public Mock<ITextBuilder> TextBulder { get; private set; }
+		public Mock<ITransaction> Transaction { get; private set; }
 
 		private Mock<T> Inject<T>() where T : class
 		{

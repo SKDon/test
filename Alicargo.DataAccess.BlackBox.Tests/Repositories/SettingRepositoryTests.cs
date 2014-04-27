@@ -33,7 +33,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_fixture = new Fixture();
 			_serializer = new Serializer();
 
-			_repository = new SettingRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
+			_repository = new SettingRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString), _serializer);
 		}
 
 		[TestMethod]

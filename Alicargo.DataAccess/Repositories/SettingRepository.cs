@@ -2,16 +2,19 @@
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.Utilities;
 
 namespace Alicargo.DataAccess.Repositories
 {
 	public sealed class SettingRepository : ISettingRepository
 	{
 		private readonly ISqlProcedureExecutor _executor;
+		private readonly ISerializer _serializer;
 
-		public SettingRepository(ISqlProcedureExecutor executor)
+		public SettingRepository(ISqlProcedureExecutor executor, ISerializer serializer)
 		{
 			_executor = executor;
+			_serializer = serializer;
 		}
 
 		public Setting AddOrReplace(Setting setting)
@@ -36,6 +39,11 @@ namespace Alicargo.DataAccess.Repositories
 		public Setting Get(SettingType type)
 		{
 			return _executor.Query<Setting>("[dbo].[Setting_Get]", new { type });
+		}
+
+		public T GetData<T>(SettingType type)
+		{
+			return _serializer.Deserialize<T>(Get(type).Data);
 		}
 	}
 }

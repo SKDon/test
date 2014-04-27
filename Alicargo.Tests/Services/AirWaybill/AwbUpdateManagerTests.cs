@@ -33,7 +33,7 @@ namespace Alicargo.Tests.Services.AirWaybill
             data.StateId = cargoIsCustomsClearedStateId;
 
             _context.StateConfig.SetupGet(x => x.CargoIsCustomsClearedStateId).Returns(cargoIsCustomsClearedStateId);
-            _context.AirWaybillRepository.Setup(x => x.Get(id)).Returns(new[] { data });
+            _context.AwbRepository.Setup(x => x.Get(id)).Returns(new[] { data });
 
             _manager.Update(id, It.IsAny<AwbBrokerModel>());
         }

@@ -33,15 +33,15 @@ namespace Alicargo.Tests.Services.AirWaybill
 			var applicationData = _context.CreateMany<ApplicationData>().ToArray();
             applicationData[0].StateId = data.StateId;
 
-            _context.AirWaybillRepository.Setup(x => x.Get(_airWaybillId)).Returns(new[] { data });
-            _context.AirWaybillRepository.Setup(x => x.SetState(_airWaybillId, _stateId));
+            _context.AwbRepository.Setup(x => x.Get(_airWaybillId)).Returns(new[] { data });
+            _context.AwbRepository.Setup(x => x.SetState(_airWaybillId, _stateId));
             _context.ApplicationRepository.Setup(x => x.GetByAirWaybill(_airWaybillId)).Returns(applicationData);
 			_context.ApplicationStateManager.Setup(x => x.SetState(applicationData[0].Id, _stateId));
 
             _stateManager.SetState(_airWaybillId, _stateId);
 
-            _context.AirWaybillRepository.Verify(x => x.Get(_airWaybillId), Times.Once());
-            _context.AirWaybillRepository.Verify(x => x.SetState(_airWaybillId, _stateId), Times.Once());
+            _context.AwbRepository.Verify(x => x.Get(_airWaybillId), Times.Once());
+            _context.AwbRepository.Verify(x => x.SetState(_airWaybillId, _stateId), Times.Once());
             _context.ApplicationRepository.Verify(x => x.GetByAirWaybill(_airWaybillId), Times.Once());
 			_context.ApplicationStateManager.Verify(x => x.SetState(applicationData[0].Id, _stateId), Times.Once());
         }
