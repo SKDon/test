@@ -3,61 +3,66 @@
 @using Resources
 @model Alicargo.Areas.Admin.Models.BillModel
 
-<div class="bill-preview">
-	<h1>
-		Счет на оплату № @ViewBag.BillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")
-	</h1>
-	<div class="textedit-holder header-text">
-		@Html.EditorWithLabelFor(x => x.HeaderText)
+@using(Html.BeginForm(MVC.Admin.Bill.Preview()))
+{
+	<div class="bill-preview container-edit">
+		<h1>
+			Счет на оплату № @ViewBag.BillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")
+		</h1>
+		<div class="textedit-holder header-text">
+			@Html.EditorWithLabelFor(x => x.HeaderText)
+		</div>
+		<div class="bill-settings">
+			@Html.EditorWithLabelFor(x => x.BankDetails)
+		</div>
+		<div>
+			<table>
+				<tr>
+					<td class="info">@Html.LabelFor(x => x.Shipper, "Поставщик")</td>
+					<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Shipper)</div></td>
+				</tr>
+				<tr>
+					<td class="info">@Html.LabelFor(x => x.Shipper, "Покупатель")</td>
+					<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Client)</div></td>
+				</tr>
+			</table>
+		</div>
+		<div class="goods">
+			<table>
+				<tr class="head">
+					<td style="width: 20px;">№</td>
+					<td>Товары (работы, услуги)</td>
+					<td style="width: 50px;">Кол-во</td>
+					<td style="width: 20px">Ед.</td>
+					<td class="narrow">Цена</td>
+					<td class="narrow">Сумма</td>
+				</tr>
+				<tr>
+					<td class="info">1</td>
+					<td><div class="textedit-holder">@Html.TextAreaFor(x => x.Goods)</div></td>
+					<td><div class="textedit-holder">@Html.EditorFor(x => x.Count)</div></td>
+					<td class="info">шт.</td>
+					<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Price)</div></td>
+					<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Total)</div></td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<td class="info">@Html.LabelFor(x => x.Head, "Руководитель")</td>
+					<td>@Html.EditorFor(x => x.Head)</td>
+					<td class="info">@Html.LabelFor(x => x.Accountant, "Бухгалтер")</td>
+					<td>@Html.EditorFor(x => x.Accountant)</td>
+				</tr>
+			</table>
+		</div>
+		<hr />
+		<div>
+			<input class="btn btn-primary" name="save" value="@Pages.Save" />
+			<input class="btn btn-success" name="send" value="@Pages.Send" />
+			<input class="btn btn-info" name="download" value="@Pages.Download" />
+			<input class="btn" name="cansel" value="@Pages.Cancel" />
+		</div>
 	</div>
-	<div class="bill-settings">
-		@Html.EditorWithLabelFor(x => x.BankDetails)
-	</div>
-	<div>
-		<table>
-			<tr>
-				<td class="info">@Html.LabelFor(x => x.Shipper, "Поставщик")</td>
-				<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Shipper)</div></td>
-			</tr>
-			<tr>
-				<td class="info">@Html.LabelFor(x => x.Shipper, "Покупатель")</td>
-				<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Client)</div></td>
-			</tr>
-		</table>
-	</div>
-	<div class="goods">
-		<table>
-			<tr class="head">
-				<td style="width: 20px;">№</td>
-				<td>Товары (работы, услуги)</td>
-				<td class="narrow">Кол-во</td>
-				<td style="width: 20px">Ед.</td>
-				<td class="narrow">Цена</td>
-				<td class="narrow">Сумма</td>
-			</tr>
-			<tr>
-				<td class="info">1</td>
-				<td><div class="textedit-holder">@Html.TextAreaFor(x => x.Goods)</div></td>
-				<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Count)</div></td>
-				<td class="info">шт.</td>
-				<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Price)</div></td>
-				<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.Total)</div></td>
-			</tr>
-		</table>
-	</div>
-	<div>
-		<table>
-			<tr>
-				<td class="info">@Html.LabelFor(x => x.Head, "Руководитель")</td>
-				<td>@Html.EditorFor(x => x.Head)</td>
-				<td class="info">@Html.LabelFor(x => x.Accountant, "Бухгалтер")</td>
-				<td>@Html.EditorFor(x => x.Accountant)</td>
-			</tr>
-		</table>
-	</div>
-	<div>
-		<input class="btn btn-primary" value="@Pages.Save" />
-		<input class="btn btn-success" value="@Pages.Send" />
-		<input class="btn" value="@Pages.Cancel" />
-	</div>
-</div>
+}

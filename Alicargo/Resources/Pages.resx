@@ -396,4 +396,7 @@
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
 </root>

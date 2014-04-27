@@ -36,9 +36,14 @@ namespace T4MVC.Admin
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+            }
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
                 public readonly string BankDetails = "BankDetails";
             }
-            public readonly string BankDetails = "~/Areas/Admin/Views/Shared/BankDetails.cshtml";
         }
     }
 

@@ -56,9 +56,9 @@ namespace Alicargo.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Preview()
+        public virtual System.Web.Mvc.ViewResult Preview()
         {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Preview);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Preview);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -92,7 +92,8 @@ namespace Alicargo.Areas.Admin.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Preview
         {
-            public readonly string applicationId = "applicationId";
+            public readonly string id = "id";
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -116,14 +117,27 @@ namespace Alicargo.Areas.Admin.Controllers
         public T4MVC_BillController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void PreviewOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long applicationId);
+        partial void PreviewOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Preview(long applicationId)
+        public override System.Web.Mvc.ViewResult Preview(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Preview);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "applicationId", applicationId);
-            PreviewOverride(callInfo, applicationId);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Preview);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            PreviewOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PreviewOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.Areas.Admin.Models.BillModel model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Preview(long id, Alicargo.Areas.Admin.Models.BillModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Preview);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            PreviewOverride(callInfo, id, model);
             return callInfo;
         }
 

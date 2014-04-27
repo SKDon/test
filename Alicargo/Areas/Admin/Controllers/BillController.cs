@@ -1,10 +1,13 @@
 ﻿using System.Web.Mvc;
+using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.MvcHelpers.Filters;
 
 namespace Alicargo.Areas.Admin.Controllers
 {
+	[Access(RoleType.Admin)]
 	public partial class BillController : Controller
 	{
 		private readonly IBillModelFactory _modelFactory;
@@ -16,14 +19,26 @@ namespace Alicargo.Areas.Admin.Controllers
 			_modelFactory = modelFactory;
 		}
 
-		public virtual PartialViewResult Preview(long applicationId)
+		[HttpGet]
+		public virtual ViewResult Preview(long id)
 		{
 			var billNumber = _settings.GetData<int>(SettingType.ApplicationNumberCounter);
-			var model = _modelFactory.GetModel(applicationId);
+			var model = _modelFactory.GetModel(id);
 
 			ViewBag.BillNumber = billNumber;
 
-			return PartialView(model);
+			return View(model);
+		}
+
+		[HttpPost]
+		public virtual ActionResult Preview(long id, BillModel model)
+		{
+			if(!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			return RedirectToAction(MVC.Admin.Bill.Preview(id));
 		}
 	}
 }
