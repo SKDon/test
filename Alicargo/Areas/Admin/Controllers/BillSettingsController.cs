@@ -46,7 +46,8 @@ namespace Alicargo.Areas.Admin.Controllers
 				Head = billSettings.Head,
 				HeaderText = billSettings.HeaderText,
 				Shipper = billSettings.Shipper,
-				VAT = (uint)(billSettings.VAT * 100)
+				VAT = (uint)(billSettings.VAT * 100),
+				EuroToRuble = billSettings.EuroToRuble
 			};
 
 			return View(model);
@@ -73,7 +74,8 @@ namespace Alicargo.Areas.Admin.Controllers
 				Shipper = model.Shipper,
 				TaxRegistrationReasonCode = model.BankDetails.TaxRegistrationReasonCode,
 				TIN = model.BankDetails.TIN,
-				VAT = (decimal)model.VAT / 100
+				VAT = (decimal)model.VAT / 100,
+				EuroToRuble = model.EuroToRuble
 			});
 
 			try

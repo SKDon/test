@@ -14,5 +14,6 @@
 		public string Accountant { get; set; }
 		public string HeaderText { get; set; }
 		public decimal VAT { get; set; }
+		public decimal EuroToRuble { get; set; } // EUR/RUB
 	}
 }

@@ -25,6 +25,9 @@ namespace Alicargo.Areas.Admin.Models
 		[DisplayName(@"НДС (%)")]
 		public uint VAT { get; set; }
 
+		[DisplayName(@"EUR/RUB")]
+		public decimal EuroToRuble { get; set; }
+
 		[Timestamp]
 		public byte[] Version { get; set; }
 	}
