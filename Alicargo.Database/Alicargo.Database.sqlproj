@@ -204,7 +204,6 @@
     <Build Include="Tables\Application\Calculation.sql" />
     <Build Include="Stored procedures\GetNextDisplayNumber.sql" />
     <Build Include="Types\DisplayNumberCounter.sql" />
-    <Build Include="Types\BillNumberCounter.sql" />
     <Build Include="Tables\Setting.sql" />
     <Build Include="Tables\Application\Bill.sql" />
     <Build Include="Stored procedures\Setting_Merge.sql" />
