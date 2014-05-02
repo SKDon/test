@@ -1,8 +1,11 @@
-﻿namespace Alicargo.DataAccess.Contracts.Contracts.Application
+﻿using System;
+
+namespace Alicargo.DataAccess.Contracts.Contracts.Application
 {
 	public sealed class BillData
 	{
 		public int Number { get; set; }
+		public DateTimeOffset SaveDate { get; set; }
 		public string Bank { get; set; }
 		public string BIC { get; set; }
 		public string CorrespondentAccount { get; set; }

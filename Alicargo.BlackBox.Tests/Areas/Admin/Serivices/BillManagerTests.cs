@@ -3,6 +3,7 @@ using Alicargo.Areas.Admin.Serivices.Bill;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
@@ -40,7 +41,7 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 			var model = _fixture.Create<BillModel>();
 			var number = _fixture.Create<int>();
 
-			_manager.SaveBill(TestConstants.TestApplicationId, number, model);
+			_manager.SaveBill(TestConstants.TestApplicationId, number, model, DateTimeProvider.Now);
 
 			var billData = _billRepository.Get(TestConstants.TestApplicationId);
 
@@ -53,11 +54,11 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 		[TestMethod]
 		public void Test_UpdateBill()
 		{
-			_manager.SaveBill(TestConstants.TestApplicationId, _fixture.Create<int>(), _fixture.Create<BillModel>());
+			_manager.SaveBill(TestConstants.TestApplicationId, _fixture.Create<int>(), _fixture.Create<BillModel>(), DateTimeProvider.Now);
 
 			var model = _fixture.Create<BillModel>();
 			var number = _fixture.Create<int>();
-			_manager.SaveBill(TestConstants.TestApplicationId, number, model);
+			_manager.SaveBill(TestConstants.TestApplicationId, number, model, DateTimeProvider.Now);
 
 			var billData = _billRepository.Get(TestConstants.TestApplicationId);
 

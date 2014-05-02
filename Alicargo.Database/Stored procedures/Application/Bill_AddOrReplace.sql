@@ -17,7 +17,8 @@
 	@Count SMALLINT,
 	@Price MONEY,
 	@VAT MONEY,
-	@EuroToRuble MONEY
+	@EuroToRuble MONEY,
+	@SaveDate DATETIMEOFFSET
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -41,7 +42,8 @@ AS BEGIN
 					@Count,
 					@Price,
 					@VAT,
-					@EuroToRuble)
+					@EuroToRuble,
+					@SaveDate)
 			AS source ([ApplicationId],
 					[Number],
 					[Bank],
@@ -60,7 +62,8 @@ AS BEGIN
 					[Count],
 					[Price],
 					[VAT],
-					[EuroToRuble])
+					[EuroToRuble],
+					[SaveDate])
 			ON (target.[ApplicationId] = source.[ApplicationId])
 		WHEN MATCHED THEN 
 			UPDATE SET [Bank] = source.[Bank],
@@ -80,7 +83,8 @@ AS BEGIN
 						[Count] = source.[Count],
 						[Price] = source.[Price],
 						[VAT] = source.[VAT],
-						[EuroToRuble] = source.[EuroToRuble]
+						[EuroToRuble] = source.[EuroToRuble],
+						[SaveDate] = source.[SaveDate]
 		WHEN NOT MATCHED THEN
 			INSERT ([ApplicationId],
 					[Number],
@@ -100,7 +104,8 @@ AS BEGIN
 					[Count],
 					[Price],
 					[VAT],
-					[EuroToRuble])
+					[EuroToRuble],
+					[SaveDate])
 			VALUES (source.[ApplicationId],
 					source.[Number],
 					source.[Bank],
@@ -119,7 +124,8 @@ AS BEGIN
 					source.[Count],
 					source.[Price],
 					source.[VAT],
-					source.[EuroToRuble])
+					source.[EuroToRuble],
+					source.[SaveDate])
 		OUTPUT INSERTED.[Id];
 END
 GO

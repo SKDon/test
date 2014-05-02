@@ -21,7 +21,8 @@ AS BEGIN
 		[Price],
 		[VAT],
 		[EuroToRuble],
-		[Number]
+		[Number],
+		[SaveDate]
 	FROM [dbo].[Bill]
 	WHERE [ApplicationId] = @ApplicationId
 

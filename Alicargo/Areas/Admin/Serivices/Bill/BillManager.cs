@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices.Abstract;
 using Alicargo.Core.Contracts.Calculation;
@@ -6,6 +7,7 @@ using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.Utilities;
 
 namespace Alicargo.Areas.Admin.Serivices.Bill
 {
@@ -20,7 +22,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 			_bills = bills;
 		}
 
-		public void SaveBill(long id, int number, BillModel model)
+		public void SaveBill(long id, int number, BillModel model, DateTimeOffset saveDate)
 		{
 			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
 
@@ -45,7 +47,8 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 					EuroToRuble = settings.EuroToRuble,
 					VAT = settings.VAT,
 					Price = model.PriceRuble.Value / settings.EuroToRuble,
-					Number = number
+					Number = number,
+					SaveDate = saveDate
 				});
 		}
 	}

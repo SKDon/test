@@ -6,7 +6,7 @@
 <form method="POST">
 	<div class="bill-preview container-edit">
 		<h1>
-			Счет на оплату № @ViewBag.BillNumber от @DateTimeProvider.Now.ToString("dd MMMM yyyy")
+			Счет на оплату № @ViewBag.BillNumber от @ViewBag.Date.ToString("dd MMMM yyyy")
 		</h1>
 		<div class="textedit-holder header-text">
 			@Html.EditorWithLabelFor(x => x.HeaderText)

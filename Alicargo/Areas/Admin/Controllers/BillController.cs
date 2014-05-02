@@ -6,6 +6,7 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
+using Alicargo.Utilities;
 using Resources;
 
 namespace Alicargo.Areas.Admin.Controllers
@@ -62,11 +63,13 @@ namespace Alicargo.Areas.Admin.Controllers
 			{
 				model = _modelFactory.GetBillModelByApplication(id);
 				ViewBag.BillNumber = _settings.GetData<int>(SettingType.BillLastNumber) + 1;
+				ViewBag.Date = DateTimeProvider.Now;
 			}
 			else
 			{
 				model = _modelFactory.GetBillModel(bill);
 				ViewBag.BillNumber = bill.Number;
+				ViewBag.Date = bill.SaveDate;
 			}
 
 			ViewBag.ApplicationId = id;
@@ -105,16 +108,18 @@ namespace Alicargo.Areas.Admin.Controllers
 
 			var bill = _bills.Get(id);
 			var number = bill != null ? bill.Number : _settings.GetNextBillNumber();
+			var date = bill != null ? bill.SaveDate : DateTimeProvider.Now;
 
 			if(!ModelState.IsValid)
 			{
 				ViewBag.ApplicationId = id;
 				ViewBag.BillNumber = number;
+				ViewBag.Date = date;
 
 				return false;
 			}
 
-			_manager.SaveBill(id, number, model);
+			_manager.SaveBill(id, number, model, date);
 
 			return true;
 		}
