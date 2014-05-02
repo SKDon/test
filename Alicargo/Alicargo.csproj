@@ -191,6 +191,7 @@
     <Compile Include="Areas\Admin\Serivices\Bill\BillPdf.cs" />
     <Compile Include="Areas\Admin\Serivices\Abstract\IBillManager.cs" />
     <Compile Include="Areas\Admin\Serivices\Abstract\IBillModelFactory.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\NumByWords.cs" />
     <Compile Include="AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
