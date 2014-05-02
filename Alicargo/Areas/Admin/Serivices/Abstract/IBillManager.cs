@@ -5,6 +5,7 @@ namespace Alicargo.Areas.Admin.Serivices.Abstract
 {
 	public interface IBillManager
 	{
-		void SaveBill(long id, int number, BillModel model, DateTimeOffset saveDate);
+		void Save(long applicationId, int number, BillModel model, DateTimeOffset saveDate);
+		void Send(long applicationId);
 	}
 }

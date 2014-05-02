@@ -643,6 +643,7 @@
     <Content Include="Areas\Admin\Views\BillSettings\EditorTemplates\BillSettingsModel.cshtml" />
     <Content Include="Areas\Admin\Views\Bill\Preview.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BankDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill\Sent.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.0.intellisense.js" />

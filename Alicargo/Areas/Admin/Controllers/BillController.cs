@@ -96,7 +96,17 @@ namespace Alicargo.Areas.Admin.Controllers
 				return View("Preview", model);
 			}
 
-			return RedirectToAction(MVC.Admin.Bill.Preview(id));
+			_manager.Send(id);
+
+			return RedirectToAction(MVC.Admin.Bill.Sent(id));
+		}
+
+		[HttpGet]
+		public virtual ActionResult Sent(long id)
+		{
+			var bill = _bills.Get(id);
+
+			return View(bill);
 		}
 
 		private bool SaveImpl(long id, BillModel model)
@@ -119,7 +129,7 @@ namespace Alicargo.Areas.Admin.Controllers
 				return false;
 			}
 
-			_manager.SaveBill(id, number, model, date);
+			_manager.Save(id, number, model, date);
 
 			return true;
 		}

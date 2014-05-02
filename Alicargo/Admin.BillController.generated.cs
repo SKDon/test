@@ -84,6 +84,12 @@ namespace Alicargo.Areas.Admin.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Send);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Sent()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Sent);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BillController Actions { get { return MVC.Admin.Bill; } }
@@ -105,6 +111,7 @@ namespace Alicargo.Areas.Admin.Controllers
             public readonly string Preview = "Preview";
             public readonly string Save = "Save";
             public readonly string Send = "Send";
+            public readonly string Sent = "Sent";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -115,6 +122,7 @@ namespace Alicargo.Areas.Admin.Controllers
             public const string Preview = "Preview";
             public const string Save = "Save";
             public const string Send = "Send";
+            public const string Sent = "Sent";
         }
 
 
@@ -161,6 +169,14 @@ namespace Alicargo.Areas.Admin.Controllers
             public readonly string id = "id";
             public readonly string model = "model";
         }
+        static readonly ActionParamsClass_Sent s_params_Sent = new ActionParamsClass_Sent();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Sent SentParams { get { return s_params_Sent; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Sent
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -172,8 +188,10 @@ namespace Alicargo.Areas.Admin.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Preview = "Preview";
+                public readonly string Sent = "Sent";
             }
             public readonly string Preview = "~/Areas/Admin/Views/Bill/Preview.cshtml";
+            public readonly string Sent = "~/Areas/Admin/Views/Bill/Sent.cshtml";
         }
     }
 
@@ -242,6 +260,18 @@ namespace Alicargo.Areas.Admin.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             SendOverride(callInfo, id, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SentOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Sent(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Sent);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            SentOverride(callInfo, id);
             return callInfo;
         }
 
