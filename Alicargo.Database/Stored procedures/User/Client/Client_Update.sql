@@ -13,7 +13,9 @@
     @LegalAddress NVARCHAR(MAX),
     @MailingAddress NVARCHAR(MAX),
     @RS NVARCHAR(MAX),
-    @KS NVARCHAR(MAX)
+    @KS NVARCHAR(MAX),
+    @ContractNumber NVARCHAR(MAX),
+    @ContractDate DATETIMEOFFSET
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -32,7 +34,9 @@ AS BEGIN
 		[LegalAddress] = @LegalAddress,
 		[MailingAddress] = @MailingAddress,
 		[RS] = @RS,
-		[KS] = @KS
+		[KS] = @KS,
+		[ContractNumber] = @ContractNumber,
+		[ContractDate] = @ContractDate
 	WHERE [Id] = @ClientId
 
 END

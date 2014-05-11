@@ -33,7 +33,9 @@ namespace Alicargo.DataAccess.Repositories.User
 					client.Phone,
 					client.RS,
 					UserId = userId,
-					TransitId = transitId
+					TransitId = transitId,
+					client.ContractDate,
+					client.ContractNumber
 				});
 		}
 
@@ -72,6 +74,8 @@ namespace Alicargo.DataAccess.Repositories.User
 					client.OGRN,
 					client.Phone,
 					client.RS,
+					client.ContractDate,
+					client.ContractNumber
 				});
 		}
 	}

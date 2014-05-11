@@ -23,7 +23,9 @@ AS BEGIN
 		c.[TransitId],
 		c.[Balance],
 		u.[Login],
-		u.[TwoLetterISOLanguageName] AS [Language]
+		u.[TwoLetterISOLanguageName] AS [Language],
+		c.[ContractDate],
+		c.[ContractNumber]
 	  FROM [dbo].[Client] c
 	  JOIN [dbo].[User] u
 	  ON c.[UserId] = u.[Id]

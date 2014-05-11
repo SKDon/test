@@ -18,7 +18,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.User
 		public string MailingAddress { get; set; }
 		public string RS { get; set; }
 		public string KS { get; set; }
-		//public string ContractNumber { get; set; }
-		//public DateTimeOffset ContractDate { get; set; }
+		public string ContractNumber { get; set; }
+		public DateTimeOffset ContractDate { get; set; }
 	}
 }

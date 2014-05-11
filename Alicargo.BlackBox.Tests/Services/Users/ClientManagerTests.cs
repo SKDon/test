@@ -34,9 +34,7 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new CompositionHelper(Settings.Default.MainConnectionString,
-				Settings.Default.FilesConnectionString,
-				RoleType.Forwarder);
+			_context = new CompositionHelper(Settings.Default.MainConnectionString, Settings.Default.FilesConnectionString);
 			_fixture = new Fixture();
 
 			_manager = _context.Kernel.Get<IClientManager>();

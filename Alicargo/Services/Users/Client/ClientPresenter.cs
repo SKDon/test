@@ -46,14 +46,16 @@ namespace Alicargo.Services.Users.Client
 			}
 
 			if(!_permissions.HaveAccessToClient(data))
+			{
 				throw new AccessForbiddenException();
+			}
 
 			return data;
 		}
 
 		public ListCollection<ClientListItem> GetList(int take, int skip)
 		{
-			var all = _clients.GetAll();
+			var all = _clients.GetAll().OrderBy(x => x.Nic).ToArray();
 
 			var data = all.Skip(skip).Take(take)
 				.Select(x => new ClientListItem

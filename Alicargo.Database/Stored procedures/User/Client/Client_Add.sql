@@ -14,6 +14,8 @@
     @MailingAddress NVARCHAR(MAX),
     @RS NVARCHAR(MAX),
     @KS NVARCHAR(MAX),
+    @ContractNumber NVARCHAR(MAX),
+    @ContractDate DATETIMEOFFSET,
     @TransitId BIGINT
 
 AS BEGIN
@@ -35,7 +37,9 @@ AS BEGIN
 		,[MailingAddress]
 		,[RS]
 		,[KS]
-		,[TransitId])
+		,[TransitId]
+		,[ContractNumber]
+		,[ContractDate])
 	OUTPUT INSERTED.[Id]
 	VALUES
 		(@UserId,
@@ -53,7 +57,9 @@ AS BEGIN
 		@MailingAddress,
 		@RS,
 		@KS,
-		@TransitId)
+		@TransitId,
+		@ContractNumber,
+		@ContractDate)
 
 END
 GO

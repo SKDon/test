@@ -145,7 +145,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);
 			var clients = new[] { client1, client2 };
 
-			emails.ShouldAllBeEquivalentTo(clients.SelectMany(x => x.Emails).ToArray());
+			emails.ShouldAllBeEquivalentTo(clients.Select(x => x.Emails).ToArray());
 		}
 
 		[TestMethod]
