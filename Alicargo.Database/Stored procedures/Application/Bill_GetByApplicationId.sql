@@ -4,7 +4,8 @@
 AS BEGIN
 	SET NOCOUNT ON;
 
-	SELECT TOP 1 [Bank],
+	SELECT TOP 1
+		[Bank],
 		[BIC],
 		[CorrespondentAccount],
 		[TIN],
@@ -22,7 +23,8 @@ AS BEGIN
 		[VAT],
 		[EuroToRuble],
 		[Number],
-		[SaveDate]
+		[SaveDate],
+		[SendDate]
 	FROM [dbo].[Bill]
 	WHERE [ApplicationId] = @ApplicationId
 

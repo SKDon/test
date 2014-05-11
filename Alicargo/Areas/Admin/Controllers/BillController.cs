@@ -107,6 +107,7 @@ namespace Alicargo.Areas.Admin.Controllers
 		public virtual ActionResult Sent(long id)
 		{
 			var bill = _bills.Get(id);
+			ViewBag.ApplicationId = id;
 
 			return View(bill);
 		}
@@ -122,7 +123,11 @@ namespace Alicargo.Areas.Admin.Controllers
 			var application = _applications.Get(id);
 			var number = bill != null ? bill.Number : application.DisplayNumber;
 			var date = bill != null ? bill.SaveDate : DateTimeProvider.Now;
-			var sendDate = isSend || bill == null ? DateTimeProvider.Now : bill.SendDate;
+			var sendDate = isSend
+				? DateTimeProvider.Now
+				: bill != null
+					? bill.SendDate
+					: null;
 
 			if(!ModelState.IsValid)
 			{
@@ -133,7 +138,7 @@ namespace Alicargo.Areas.Admin.Controllers
 
 				return false;
 			}
-			
+
 			_manager.Save(id, number, model, date, sendDate);
 
 			return true;

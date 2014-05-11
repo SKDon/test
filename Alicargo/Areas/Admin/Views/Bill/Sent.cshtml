@@ -1,6 +1,8 @@
-﻿@model Alicargo.DataAccess.Contracts.Contracts.Application.BillData
+﻿@using Resources
+@model Alicargo.DataAccess.Contracts.Contracts.Application.BillData
 <div class="bill-preview container-edit">
 	<h1>
 		Счет на оплату № @Model.Number от @Model.SaveDate.ToString("dd MMMM yyyy") отправлен клиенту @Model.Client
 	</h1>
+	@Html.ActionLink(Pages.Back, MVC.Admin.Bill.Preview((long)ViewBag.ApplicationId))
 </div>
