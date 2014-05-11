@@ -212,6 +212,9 @@
     <Build Include="Stored procedures\Application\Bill_GetByApplicationId.sql" />
     <Build Include="Stored procedures\User\Client\Client_Add.sql" />
     <Build Include="Stored procedures\User\User_SetLogin.sql" />
+    <Build Include="Stored procedures\User\Client\Client_Get.sql" />
+    <Build Include="Stored procedures\User\Client\Client_GetByUserId.sql" />
+    <Build Include="Stored procedures\User\Client\Client_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

@@ -38,11 +38,6 @@ namespace Alicargo.DataAccess.Repositories.User
 				});
 		}
 
-		public void Delete(long id)
-		{
-			_executor.Execute("[dbo].[Client_Delete]", new { id });
-		}
-
 		public ClientData GetByUserId(long userId)
 		{
 			return _executor.Query<ClientData>("[dbo].[Client_GetByUserId]", new { userId });

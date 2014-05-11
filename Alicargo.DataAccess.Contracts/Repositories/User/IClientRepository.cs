@@ -5,7 +5,6 @@ namespace Alicargo.DataAccess.Contracts.Repositories.User
 	public interface IClientRepository
 	{
 		long Add(ClientEditData client, long userId, long transitId);
-		void Delete(long id);
 		ClientData Get(long clientId);
 		ClientData[] GetAll();
 		ClientData GetByUserId(long userId);

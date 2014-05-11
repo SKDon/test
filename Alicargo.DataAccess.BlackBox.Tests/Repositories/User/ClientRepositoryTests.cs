@@ -123,18 +123,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		}
 
 		[TestMethod]
-		public void Test_ClientRepository_Delete()
-		{
-			var client = CreateTestClient();
-
-			_clientRepository.Delete(client.ClientId);
-
-			var byId = _clientRepository.Get(client.ClientId);
-
-			Assert.IsNull(byId);
-		}
-
-		[TestMethod]
 		public void Test_ClientRepository_Update()
 		{
 			var client = CreateTestClient();
