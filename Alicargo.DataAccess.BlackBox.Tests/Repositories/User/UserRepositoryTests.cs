@@ -49,5 +49,20 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			passwordData.UserId.ShouldBeEquivalentTo(id);
 			passwordData.PasswordHash.ShouldAllBeEquivalentTo(_converter.GetPasswordHash(password, passwordData.PasswordSalt));
 		}
+
+		[TestMethod]
+		public void Test_SetLogin()
+		{
+			var login1 = _fixture.Create<string>();
+			var login2 = _fixture.Create<string>();
+
+			var id = _repository.Add(login1, _fixture.Create<string>(), _fixture.Create<string>().Substring(0, 2));
+			var one = _repository.GetPasswordData(login1);
+
+			_repository.SetLogin(id, login2);
+			
+			var other = _repository.GetPasswordData(login2);
+			one.ShouldBeEquivalentTo(other);
+		}
 	}
 }

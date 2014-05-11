@@ -73,14 +73,13 @@ namespace Alicargo.Controllers.User
 				return View();
 			}
 
-			var authenticationModel = model.Authentication;
 			long clientId = 0;
-			var passwordDefined = !string.IsNullOrWhiteSpace(authenticationModel.NewPassword);
+			var passwordDefined = !string.IsNullOrWhiteSpace(model.Authentication.NewPassword);
 			if(passwordDefined)
 			{
 				try
 				{
-					clientId = _manager.Add(model, transitModel, authenticationModel);
+					clientId = _manager.Add(model, transitModel);
 
 					if(model.ContractFile != null)
 					{
@@ -152,9 +151,7 @@ namespace Alicargo.Controllers.User
 
 			try
 			{
-				var authenticationModel = model.Authentication;
-
-				_manager.Update(client.ClientId, model, transitModel, authenticationModel);
+				_manager.Update(client.ClientId, model, transitModel);
 
 				MergeContract(model, client.ClientId);
 			}

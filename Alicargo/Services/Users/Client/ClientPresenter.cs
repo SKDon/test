@@ -53,9 +53,9 @@ namespace Alicargo.Services.Users.Client
 
 		public ListCollection<ClientListItem> GetList(int take, int skip)
 		{
-			var total = _clients.Count();
+			var all = _clients.GetAll();
 
-			var data = _clients.GetRange(take, skip)
+			var data = all.Skip(skip).Take(take)
 				.Select(x => new ClientListItem
 				{
 					Nic = x.Nic,
@@ -68,7 +68,7 @@ namespace Alicargo.Services.Users.Client
 			return new ListCollection<ClientListItem>
 			{
 				Data = data,
-				Total = total
+				Total = all.Length
 			};
 		}
 	}

@@ -60,7 +60,7 @@ namespace Alicargo.Controllers.User
 		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult LoginAsClient(int id)
 		{
-			var userId = _clients.GetUserId(id);
+			var userId = _clients.Get(id).UserId;
 			_authentication.AuthenticateForce(userId, false);
 
 			return RedirectToAction(MVC.Home.Index());

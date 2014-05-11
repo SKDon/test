@@ -4,6 +4,7 @@ using Alicargo.Utilities.Localization;
 
 namespace Alicargo.ViewModels.User
 {
+	// todo: add TransitEditModel field (61)
 	public sealed class ClientModel
 	{
 		[Required, DataType(DataType.MultilineText), DisplayNameLocalized(typeof(Entities), "Contacts")]

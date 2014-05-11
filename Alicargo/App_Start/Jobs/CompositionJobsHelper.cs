@@ -116,7 +116,7 @@ namespace Alicargo.Jobs
 			var mainExecutor = new SqlProcedureExecutor(connectionString);
 			var filesExecutor = new SqlProcedureExecutor(filesConnectionString);
 			var applicationFiles = new ApplicationFileRepository(filesExecutor);
-			var clientRepository = new ClientRepository(connection, mainExecutor);
+			var clientRepository = new ClientRepository(mainExecutor);
 			var calculationRepository = new CalculationRepository(mainExecutor);
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var applications = new ApplicationRepository(connection);
@@ -229,7 +229,7 @@ namespace Alicargo.Jobs
 				var serializer = new Serializer();
 				var events = new EventRepository(executor);
 				var clientBalanceRepository = new ClientBalanceRepository(executor);
-				var clientRepository = new ClientRepository(connection, executor);
+				var clientRepository = new ClientRepository(executor);
 				var adminRepository = new AdminRepository(connection);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var localizedDataHelper = new BalanceLocalizedDataHelper(clientBalanceRepository, serializer, clientRepository);
@@ -266,7 +266,7 @@ namespace Alicargo.Jobs
 				var executor = new SqlProcedureExecutor(mainConnectionString);
 				var serializer = new Serializer();
 				var events = new EventRepository(executor);
-				var clientRepository = new ClientRepository(connection, executor);
+				var clientRepository = new ClientRepository(executor);
 				var adminRepository = new AdminRepository(connection);
 				var localizedDataHelper = new CommonLocalizedDataHelper(serializer, clientRepository);
 				var recipients = new EventEmailRecipient(executor);
@@ -318,7 +318,7 @@ namespace Alicargo.Jobs
 			var applications = new ApplicationRepository(connection);
 			var awbs = new AwbRepository(connection);
 			var applicationFiles = new ApplicationFileRepository(filesExecutor);
-			var clientRepository = new ClientRepository(connection, mainExecutor);
+			var clientRepository = new ClientRepository(mainExecutor);
 			var clientBalanceRepository = new ClientBalanceRepository(mainExecutor);
 			var countries = new CountryRepository(mainExecutor);
 			var cities = new CityRepository(mainExecutor);

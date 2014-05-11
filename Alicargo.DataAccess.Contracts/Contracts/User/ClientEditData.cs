@@ -2,7 +2,7 @@
 
 namespace Alicargo.DataAccess.Contracts.Contracts.User
 {
-	public sealed class ClientEditData
+	public class ClientEditData
 	{
 		public string[] Emails { get; set; }
 		public string Nic { get; set; }

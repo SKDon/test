@@ -17,16 +17,16 @@ namespace Alicargo.Services.Users.Client
 			_events = events;
 		}
 
-		public void Update(long clientId, ClientModel model, TransitEditModel transit, AuthenticationModel authentication)
+		public void Update(long clientId, ClientModel model, TransitEditModel transit)
 		{
-			_manager.Update(clientId, model, transit, authentication);
+			_manager.Update(clientId, model, transit);
 		}
 
-		public long Add(ClientModel client, TransitEditModel transit, AuthenticationModel authentication)
+		public long Add(ClientModel client, TransitEditModel transit)
 		{
-			var id = _manager.Add(client, transit, authentication);
+			var id = _manager.Add(client, transit);
 
-			_events.Add(id, EventType.ClientAdded, EventState.Emailing, authentication.NewPassword);
+			_events.Add(id, EventType.ClientAdded, EventState.Emailing, client.Authentication.NewPassword);
 
 			return id;
 		}

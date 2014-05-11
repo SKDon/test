@@ -139,7 +139,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 
 			var emails = _awbs.GetClientEmails(id).Select(x => x.Email).ToArray();
 
-			var clientRepository = new ClientRepository(_context.Connection, _executor);
+			var clientRepository = new ClientRepository(_executor);
 
 			var client1 = clientRepository.Get(TestConstants.TestClientId1);
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);

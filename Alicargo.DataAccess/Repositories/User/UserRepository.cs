@@ -22,6 +22,11 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor.Execute("[dbo].[User_SetLanguage]", new { userId, language });
 		}
 
+		public void SetLogin(long userId, string login)
+		{
+			_executor.Execute("[dbo].[User_SetLogin]", new { userId, login });
+		}
+
 		public string GetLanguage(long userId)
 		{
 			return _executor.Query<string>("[dbo].[User_GetLanguage]", new { userId });

@@ -28,7 +28,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 			_userRepository = new UserRepository(new PasswordConverter(), executor);
-			_clientRepository = new ClientRepository(_context.Connection, executor);
+			_clientRepository = new ClientRepository(executor);
 		}
 
 		[TestCleanup]
@@ -82,30 +82,25 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 				TransitId = client.TransitId,
 				ClientId = client.Id,
 				Login = user.Login,
-				Language = user.TwoLetterISOLanguageName
+				Language = user.TwoLetterISOLanguageName,
+				UserId = user.Id
 			};
 		}
 
 		[TestMethod]
 		public void Test_ClientRepository_Count()
 		{
-			var all = _clientRepository.GetAll();
+			var all1 = _clientRepository.GetAll();
 
-			var count = _clientRepository.Count();
+			var testClient = CreateTestClient();
 
-			Assert.AreEqual(all.Length, count);
-		}
+			all1.Should().NotContain(testClient);
 
-		[TestMethod]
-		public void Test_ClientRepository_GetRange()
-		{
-			var count = (int)_clientRepository.Count();
+			var all2 = _clientRepository.GetAll();
 
-			var take = count - count / 2;
+			all2.Should().Contain(testClient);
 
-			var range = _clientRepository.GetRange(take, 0);
-
-			Assert.AreEqual(range.Length, take);
+			all1.Length.ShouldBeEquivalentTo(all2.Length - 1);
 		}
 
 		[TestMethod]
@@ -143,12 +138,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		public void Test_ClientRepository_Update()
 		{
 			var client = CreateTestClient();
-			var newData = _fixture.Create<ClientData>();
-			newData.ClientId = client.ClientId;
-			newData.TransitId = client.TransitId;
-			newData.Language = TwoLetterISOLanguageName.Italian;
+			var newData = _fixture.Create<ClientEditData>();
 
-			_clientRepository.Update(newData);
+			_clientRepository.Update(client.ClientId, newData);
 
 			var byId = _clientRepository.Get(client.ClientId);
 
