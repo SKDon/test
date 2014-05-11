@@ -1,4 +1,5 @@
-﻿using Alicargo.Areas.Admin.Models;
+﻿using System;
+using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices.Bill;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -41,11 +42,12 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 			var model = _fixture.Create<BillModel>();
 			var number = _fixture.Create<int>();
 
-			_manager.Save(TestConstants.TestApplicationId, number, model, DateTimeProvider.Now);
+			_manager.Save(TestConstants.TestApplicationId, number, model, DateTimeProvider.Now, null);
 
 			var billData = _billRepository.Get(TestConstants.TestApplicationId);
 
 			billData.Number.ShouldBeEquivalentTo(number);
+			billData.SendDate.Should().NotHaveValue();
 			billData.Price.ShouldBeEquivalentTo(model.PriceRuble / billData.EuroToRuble);
 			billData.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
 			billData.ShouldBeEquivalentTo(model.BankDetails, options => options.ExcludingMissingProperties());
@@ -54,15 +56,17 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 		[TestMethod]
 		public void Test_UpdateBill()
 		{
-			_manager.Save(TestConstants.TestApplicationId, _fixture.Create<int>(), _fixture.Create<BillModel>(), DateTimeProvider.Now);
+			_manager.Save(TestConstants.TestApplicationId, _fixture.Create<int>(), _fixture.Create<BillModel>(), DateTimeProvider.Now, DateTimeProvider.Now);
 
 			var model = _fixture.Create<BillModel>();
 			var number = _fixture.Create<int>();
-			_manager.Save(TestConstants.TestApplicationId, number, model, DateTimeProvider.Now);
+			var sendDate = new DateTimeOffset(new DateTime(2000, 1, 1));
+			_manager.Save(TestConstants.TestApplicationId, number, model, DateTimeProvider.Now, sendDate);
 
 			var billData = _billRepository.Get(TestConstants.TestApplicationId);
 
 			billData.Number.ShouldBeEquivalentTo(number);
+			billData.SendDate.ShouldBeEquivalentTo(sendDate);
 			billData.Price.ShouldBeEquivalentTo(model.PriceRuble / billData.EuroToRuble);
 			billData.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
 			billData.ShouldBeEquivalentTo(model.BankDetails, options => options.ExcludingMissingProperties());

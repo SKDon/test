@@ -5,7 +5,7 @@
 <form method="POST">
 	<div class="bill-preview container-edit">
 		<h1>
-			Счет на оплату № @ViewBag.BillNumber от @ViewBag.Date.ToString("dd MMMM yyyy")
+			Счет на оплату № @ViewBag.BillNumber от @ViewBag.SaveDate.ToString("dd MMMM yyyy")
 		</h1>
 		<div class="textedit-holder header-text">
 			@Html.EditorWithLabelFor(x => x.HeaderText)
@@ -57,6 +57,13 @@
 			<input class="btn btn-success" type="submit" value="@Pages.Send" formaction="/Admin/Bill/Send/@ViewBag.ApplicationId" />
 			<input class="btn btn-info" type="submit" value="@Pages.Download" formaction="/Admin/Bill/Download/@ViewBag.ApplicationId" />
 			<input class="btn" type="submit" value="@Pages.Cancel" formaction="/Admin/Bill/Cancel/@ViewBag.ApplicationId" />
+			@if(ViewBag.SendDate != null)
+			{
+				<text>
+					Счет отправлен:
+				</text>
+				@ViewBag.SendDate.ToString()
+			}
 		</div>
 		@Html.ValidationSummary(false)
 	</div>

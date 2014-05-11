@@ -6,6 +6,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 	{
 		public int Number { get; set; }
 		public DateTimeOffset SaveDate { get; set; }
+		public DateTimeOffset? SendDate { get; set; }
 		public string Bank { get; set; }
 		public string BIC { get; set; }
 		public string CorrespondentAccount { get; set; }

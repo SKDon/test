@@ -63,13 +63,15 @@ namespace Alicargo.Areas.Admin.Controllers
 				model = _modelFactory.GetBillModelByApplication(id);
 				var application = _applications.Get(id);
 				ViewBag.BillNumber = application.DisplayNumber;
-				ViewBag.Date = DateTimeProvider.Now;
+				ViewBag.SaveDate = DateTimeProvider.Now;
+				ViewBag.SendDate = null;
 			}
 			else
 			{
 				model = _modelFactory.GetBillModel(bill);
 				ViewBag.BillNumber = bill.Number;
-				ViewBag.Date = bill.SaveDate;
+				ViewBag.SaveDate = bill.SaveDate;
+				ViewBag.SendDate = bill.SendDate;
 			}
 
 			ViewBag.ApplicationId = id;
@@ -91,7 +93,7 @@ namespace Alicargo.Areas.Admin.Controllers
 		[HttpPost]
 		public virtual ActionResult Send(long id, BillModel model)
 		{
-			if(!SaveImpl(id, model))
+			if(!SaveImpl(id, model, true))
 			{
 				return View("Preview", model);
 			}
@@ -109,7 +111,7 @@ namespace Alicargo.Areas.Admin.Controllers
 			return View(bill);
 		}
 
-		private bool SaveImpl(long id, BillModel model)
+		private bool SaveImpl(long id, BillModel model, bool isSend = false)
 		{
 			if(!model.PriceRuble.HasValue || model.PriceRuble.Value <= 0)
 			{
@@ -120,17 +122,19 @@ namespace Alicargo.Areas.Admin.Controllers
 			var application = _applications.Get(id);
 			var number = bill != null ? bill.Number : application.DisplayNumber;
 			var date = bill != null ? bill.SaveDate : DateTimeProvider.Now;
+			var sendDate = isSend || bill == null ? DateTimeProvider.Now : bill.SendDate;
 
 			if(!ModelState.IsValid)
 			{
 				ViewBag.ApplicationId = id;
 				ViewBag.BillNumber = number;
-				ViewBag.Date = date;
+				ViewBag.SaveDate = date;
+				ViewBag.SendDate = sendDate;
 
 				return false;
 			}
-
-			_manager.Save(id, number, model, date);
+			
+			_manager.Save(id, number, model, date, sendDate);
 
 			return true;
 		}

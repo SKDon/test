@@ -40,7 +40,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 			_mail = mail;
 		}
 
-		public void Save(long applicationId, int number, BillModel model, DateTimeOffset saveDate)
+		public void Save(long applicationId, int number, BillModel model, DateTimeOffset saveDate, DateTimeOffset? sendDate)
 		{
 			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
 
@@ -66,7 +66,8 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 					VAT = settings.VAT,
 					Price = model.PriceRuble.Value / settings.EuroToRuble,
 					Number = number,
-					SaveDate = saveDate
+					SaveDate = saveDate,
+					SendDate = sendDate
 				});
 		}
 
