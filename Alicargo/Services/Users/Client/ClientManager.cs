@@ -3,7 +3,6 @@ using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
@@ -94,7 +93,7 @@ namespace Alicargo.Services.Users.Client
 			{
 				BIC = model.BIC,
 				Phone = model.Phone,
-				Emails = EmailsHelper.SplitAndTrimEmails(model.Emails),
+				Emails = model.Emails,
 				LegalEntity = model.LegalEntity,
 				Bank = model.Bank,
 				Contacts = model.Contacts,

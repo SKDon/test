@@ -25,11 +25,6 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 				.ToArray();
 		}
 
-		public static string JoinEmails(string[] emails)
-		{
-			return string.Join(DefaultEmailSeparator, string.Join(DefaultEmailSeparator, emails));
-		}
-
 		public static bool Validate(string emails)
 		{
 			var items = SplitAndTrimEmails(emails);

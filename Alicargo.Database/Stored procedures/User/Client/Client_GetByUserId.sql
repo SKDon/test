@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetByUserId]
+﻿CREATE PROCEDURE [dbo].[Client_GetByUserId]
 	@UserId BIGINT
 
 AS BEGIN

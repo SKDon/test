@@ -4,7 +4,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.User
 {
 	public class ClientEditData
 	{
-		public string[] Emails { get; set; }
+		public string Emails { get; set; }
 		public string Nic { get; set; }
 		public string LegalEntity { get; set; }
 		public string Contacts { get; set; }

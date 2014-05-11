@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
@@ -58,8 +57,7 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 			var clientData = _clientRepository.Get(clientId);
 			var transitData = _transitRepository.Get(clientData.TransitId).Single();
 
-			clientData.ShouldBeEquivalentTo(clientModel, options => options.ExcludingMissingProperties().Excluding(x => x.Emails));
-			clientData.Emails.ShouldAllBeEquivalentTo(EmailsHelper.SplitAndTrimEmails(clientModel.Emails));
+			clientData.ShouldBeEquivalentTo(clientModel, options => options.ExcludingMissingProperties());
 			transitData.ShouldBeEquivalentTo(transitEditModel, options => options.ExcludingMissingProperties());
 		}
 
@@ -78,8 +76,7 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 			var passwordData = _userRepository.GetPasswordData(clientModel.Authentication.Login);
 			var converter = _context.Kernel.Get<IPasswordConverter>();
 
-			clientData.ShouldBeEquivalentTo(clientModel, options => options.ExcludingMissingProperties().Excluding(x => x.Emails));
-			clientData.Emails.ShouldAllBeEquivalentTo(EmailsHelper.SplitAndTrimEmails(clientModel.Emails));
+			clientData.ShouldBeEquivalentTo(clientModel, options => options.ExcludingMissingProperties());
 			transitData.ShouldBeEquivalentTo(transitEditModel, options => options.ExcludingMissingProperties());
 			passwordData.PasswordHash.ShouldAllBeEquivalentTo(converter.GetPasswordHash(clientModel.Authentication.NewPassword, passwordData.PasswordSalt));
 		}

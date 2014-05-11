@@ -1,7 +1,6 @@
 ﻿using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
@@ -65,7 +64,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			return new ClientData
 			{
-				Emails = EmailsHelper.SplitAndTrimEmails(client.Emails),
+				Emails = client.Emails,
 				LegalEntity = client.LegalEntity,
 				BIC = client.BIC,
 				Nic = client.Nic,
@@ -88,7 +87,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		}
 
 		[TestMethod]
-		public void Test_ClientRepository_Count()
+		public void Test_ClientRepository_GetAll()
 		{
 			var all1 = _clientRepository.GetAll();
 
@@ -104,7 +103,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		}
 
 		[TestMethod]
-		public void Test_ClientRepository_Add_GetByUserId_GetById_Delete()
+		public void Test_ClientRepository_Add_GetByUserId_GetById()
 		{
 			var client = _fixture.Create<ClientEditData>();
 			var userId = _userRepository.Add(_fixture.Create<string>(), _fixture.Create<string>(), TwoLetterISOLanguageName.English);

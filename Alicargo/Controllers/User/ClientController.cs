@@ -171,7 +171,7 @@ namespace Alicargo.Controllers.User
 			{
 				BIC = client.BIC,
 				Phone = client.Phone,
-				Emails = EmailsHelper.JoinEmails(client.Emails),
+				Emails = client.Emails,
 				LegalEntity = client.LegalEntity,
 				Bank = client.Bank,
 				Contacts = client.Contacts,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Jobs.Helpers.Abstract;
@@ -67,7 +68,7 @@ namespace Alicargo.Jobs.Client
 
 					case RoleType.Client:
 						var client = _clients.Get(clientId);
-						foreach(var email in client.Emails)
+						foreach(var email in EmailsHelper.SplitAndTrimEmails(client.Emails))
 						{
 							yield return new RecipientData(email, client.Language, role);
 						}

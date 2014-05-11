@@ -1,5 +1,4 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts.User;
-using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
@@ -22,7 +21,7 @@ namespace Alicargo.DataAccess.Repositories.User
 					client.BIC,
 					client.Bank,
 					client.Contacts,
-					Emails = EmailsHelper.JoinEmails(client.Emails),
+					client.Emails,
 					client.INN,
 					client.KPP,
 					client.KS,
@@ -62,7 +61,7 @@ namespace Alicargo.DataAccess.Repositories.User
 					client.BIC,
 					client.Bank,
 					client.Contacts,
-					Emails = EmailsHelper.JoinEmails(client.Emails),
+					client.Emails,
 					client.INN,
 					client.KPP,
 					client.KS,
