@@ -1,8 +1,10 @@
-﻿using Alicargo.Areas.Admin.Models;
+﻿using System;
+using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices.Abstract;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -34,6 +36,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 			var application = _applications.Get(applicationId);
 			var settings = _settings.GetData<BillSettings>(SettingType.Bill);
 			var money = GetMoney(applicationId, settings.EuroToRuble);
+			var client = _clients.Get(application.ClientId);
 
 			return new BillModel
 			{
@@ -49,7 +52,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 				},
 				Count = 1,
 				Client = GetClientString(application),
-				Goods = GetGoodsString(application),
+				Goods = GetGoodsString(client),
 				PriceRuble = money,
 				Accountant = settings.Accountant,
 				Head = settings.Head,
@@ -81,7 +84,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 				Goods = bill.Goods,
 				PriceRuble = bill.Price * bill.EuroToRuble
 			};
-		}		
+		}
 
 		private string GetClientString(ApplicationEditData application)
 		{
@@ -99,12 +102,17 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 				: (decimal?)null;
 		}
 
-		private static string GetGoodsString(ApplicationData application)
+		private static string GetGoodsString(ClientData client)
 		{
+			var contractNumber = string.IsNullOrWhiteSpace(client.ContractNumber) ? "___" : client.ContractNumber;
+			var contractDate = DateTimeOffset.Equals(client.ContractDate, DateTimeOffset.MinValue)
+				? "______________"
+				: client.ContractDate.ToString("dd MMMM yyyy");
+
 			return string.Format(
-				"Оплата по договору {0} от {1} года. За одежду, обувь и другие непродоволдьственные товары.",
-				application.GetApplicationDisplay(),
-				application.CreationTimestamp.ToString("dd MMMM yyyy"));
+				"Оплата по договору {0} от {1}. За одежду, обувь и другие непродовольственные заказы.",
+				contractNumber,
+				contractDate);
 		}
 	}
 }
