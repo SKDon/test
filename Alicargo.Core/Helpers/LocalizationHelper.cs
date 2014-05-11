@@ -9,7 +9,9 @@ namespace Alicargo.Core.Helpers
 	{
 		public static string GetDate(DateTimeOffset? date, CultureInfo cultureInfo, TimeSpan? timeZone = null)
 		{
-			return date.HasValue ? date.Value.Date.ToString("d", cultureInfo) : null;
+			return date.HasValue && !date.Value.Equals(DateTimeOffset.MinValue)
+				? date.Value.Date.ToString("d", cultureInfo)
+				: null;
 		}
 
 		public static string GetDeliveryType(DeliveryType deliveryType, CultureInfo cultureInfo)
