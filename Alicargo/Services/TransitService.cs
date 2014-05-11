@@ -49,7 +49,6 @@ namespace Alicargo.Services
 
 			TransitMapper.Map(transit, data, GetCarrier(forsedCarrierId, transit.CityId, null));
 
-
 			var transitId = _transits.Add(data);
 
 			return transitId;

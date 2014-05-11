@@ -34,7 +34,7 @@ namespace Alicargo.DataAccess.Repositories.User
 
 		public void SetPassword(long userId, string password)
 		{
-			if (password == null)
+			if(password == null)
 			{
 				throw new ArgumentNullException("password");
 			}
@@ -48,6 +48,21 @@ namespace Alicargo.DataAccess.Repositories.User
 		public PasswordData GetPasswordData(string login)
 		{
 			return _executor.Query<PasswordData>("[dbo].[User_GetPasswordData]", new { login });
+		}
+
+		public long Add(string login, string password, string language)
+		{
+			var salt = _converter.GenerateSalt();
+			var hash = _converter.GetPasswordHash(password, salt);
+
+			return _executor.Query<long>("[dbo].[User_Add]",
+				new
+				{
+					Login = login,
+					PasswordSalt = salt,
+					PasswordHash = hash,
+					@TwoLetterISOLanguageName = language
+				});
 		}
 	}
 }
