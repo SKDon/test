@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
@@ -7,6 +8,7 @@ using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 using Resources;
@@ -185,7 +187,9 @@ namespace Alicargo.Controllers.User
 				RS = client.RS,
 				ContractFile = null,
 				ContractFileName = contractFileName,
-				Authentication = new AuthenticationModel(client.Login)
+				Authentication = new AuthenticationModel(client.Login),
+				ContractDate = LocalizationHelper.GetDate(client.ContractDate, CultureProvider.GetCultureInfo()),
+				ContractNumber = client.ContractNumber
 			};
 		}
 

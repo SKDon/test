@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
-using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;

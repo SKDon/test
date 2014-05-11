@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.Core.Helpers;
@@ -9,6 +8,7 @@ using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
+using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.AirWaybill;
 using Alicargo.ViewModels.Application;
 
@@ -38,7 +38,7 @@ namespace Alicargo.Services.AirWaybill
 			var aggregates = _awbs.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
 
 			var states = _states.Get(language);
-			var currentCulture = CultureInfo.CurrentCulture;
+			var currentCulture = CultureProvider.GetCultureInfo();
 
 			var items = data.Select(x => new AirWaybillListItem
 			{

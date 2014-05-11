@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System;
+using System.Transactions;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
@@ -89,6 +90,11 @@ namespace Alicargo.Services.Users.Client
 
 		private static ClientEditData GetData(ClientModel model)
 		{
+			if(string.IsNullOrWhiteSpace(model.ContractDate))
+			{
+				throw new InvalidOperationException("ContractDate should have value");
+			}
+
 			return new ClientEditData
 			{
 				BIC = model.BIC,
@@ -104,7 +110,9 @@ namespace Alicargo.Services.Users.Client
 				MailingAddress = model.MailingAddress,
 				Nic = model.Nic,
 				OGRN = model.OGRN,
-				RS = model.RS
+				RS = model.RS,
+				ContractNumber = model.ContractNumber,
+				ContractDate = DateTimeOffset.Parse(model.ContractDate)
 			};
 		}
 	}

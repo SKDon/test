@@ -12,6 +12,11 @@ namespace Alicargo.Core.Helpers
 			return date.HasValue ? date.Value.Date.ToString("d", cultureInfo) : null;
 		}
 
+		public static string GetDeliveryType(DeliveryType deliveryType, CultureInfo cultureInfo)
+		{
+			return Enums.ResourceManager.GetString(deliveryType.ToString(), cultureInfo);
+		}
+
 		public static string GetMethodOfDelivery(MethodOfDelivery methodOfDelivery, CultureInfo cultureInfo)
 		{
 			return Enums.ResourceManager.GetString(methodOfDelivery.ToString(), cultureInfo);
@@ -22,14 +27,9 @@ namespace Alicargo.Core.Helpers
 			return Enums.ResourceManager.GetString(methodOfTransit.ToString(), cultureInfo);
 		}
 
-		public static string GetDeliveryType(DeliveryType deliveryType, CultureInfo cultureInfo)
-		{
-			return Enums.ResourceManager.GetString(deliveryType.ToString(), cultureInfo);
-		}
-
 		public static string GetValueString(decimal value, CurrencyType currency, CultureInfo cultureInfo)
 		{
-			if (value == 0)
+			if(value == 0)
 			{
 				return null;
 			}

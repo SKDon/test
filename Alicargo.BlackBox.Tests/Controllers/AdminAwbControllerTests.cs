@@ -9,6 +9,7 @@ using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.Utilities;
+using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.AirWaybill;
 using Dapper;
 using FluentAssertions;
@@ -27,6 +28,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		private AdminAwbController _controller;
 		private AlicargoDataContext _db;
 		private Fixture _fixture;
+		private readonly CultureInfo _currentCulture = CultureProvider.GetCultureInfo();
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -52,8 +54,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _fixture
 				.Build<AwbAdminModel>()
 				.With(x => x.BrokerId, entity.BrokerId)
-				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
-				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, _currentCulture))
+				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, _currentCulture))
 				.Create();
 
 			_controller.Edit(entity.Id, model);
@@ -69,8 +71,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 					"select * " +
 					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
-				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, CultureInfo.CurrentCulture);
-				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, CultureInfo.CurrentCulture);
+				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, _currentCulture);
+				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, _currentCulture);
 
 				model.ShouldBeEquivalentTo(actual);
 			}
@@ -88,8 +90,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				.Build<AwbAdminModel>()
 				.Without(x => x.GTD)
 				.With(x => x.BrokerId, broker.Id)
-				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
-				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, CultureInfo.CurrentCulture))
+				.With(x => x.DateOfArrivalLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, _currentCulture))
+				.With(x => x.DateOfDepartureLocalString, LocalizationHelper.GetDate(DateTimeProvider.Now, _currentCulture))
 				.Create();
 
 			_controller.Create(applicationData.Id, model);
@@ -107,8 +109,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 					"select * " +
 					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
 
-				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, CultureInfo.CurrentCulture);
-				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, CultureInfo.CurrentCulture);
+				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, _currentCulture);
+				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, _currentCulture);
 
 				model.ShouldBeEquivalentTo(actual);
 			}

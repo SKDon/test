@@ -486,4 +486,10 @@
   <data name="InsuranceRate" xml:space="preserve">
     <value>Страховка (%)</value>
   </data>
+  <data name="ContractDate" xml:space="preserve">
+    <value>Дата договора</value>
+  </data>
+  <data name="ContractNumber" xml:space="preserve">
+    <value>Номер договора</value>
+  </data>
 </root>

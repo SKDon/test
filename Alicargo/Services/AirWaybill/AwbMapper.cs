@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Globalization;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.Utilities;
+using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.AirWaybill;
 
 namespace Alicargo.Services.AirWaybill
@@ -11,12 +11,14 @@ namespace Alicargo.Services.AirWaybill
 	{
 		public static AwbAdminModel GetAdminModel(AirWaybillData data)
 		{
+			var cultureInfo = CultureProvider.GetCultureInfo();
+
 			return new AwbAdminModel
 			{
 				ArrivalAirport = data.ArrivalAirport,
 				Bill = data.Bill,
-				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, CultureInfo.CurrentCulture),
-				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, CultureInfo.CurrentCulture),
+				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, cultureInfo),
+				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, cultureInfo),
 				DepartureAirport = data.DepartureAirport,
 				GTD = data.GTD,
 				BrokerId = data.BrokerId,
@@ -120,13 +122,15 @@ namespace Alicargo.Services.AirWaybill
 
 		public static AwbSenderModel GetSenderModel(AirWaybillData data)
 		{
+			var currentCulture = CultureProvider.GetCultureInfo();
+
 			return new AwbSenderModel
 			{
 				ArrivalAirport = data.ArrivalAirport,
 				Bill = data.Bill,
 				BrokerId = data.BrokerId,
-				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, CultureInfo.CurrentCulture),
-				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, CultureInfo.CurrentCulture),
+				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, currentCulture),
+				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, currentCulture),
 				DepartureAirport = data.DepartureAirport,
 				FlightCost = data.FlightCost,
 				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight,

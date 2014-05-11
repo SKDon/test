@@ -13,40 +13,9 @@
 <div class="row">
 	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.INN)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.LegalAddress)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.MailingAddress)
-	</div>
-</div>
-<div class="row">
-	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.OGRN)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.Bank)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.BIC)
-	</div>
-</div>
-<div class="row">
-	<div class="span4">
 		@Html.EditorWithLabelFor(model => model.KPP)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.RS)
-	</div>
-	<div class="span4">
-		@Html.EditorWithLabelFor(model => model.KS)
-	</div>
-</div>
-<div class="row">
-	<div class="span8">
-		@Html.LabelFor(model => model.Contacts)
-		@Html.TextAreaFor(model => model.Contacts)
+		@Html.EditorWithLabelFor(model => model.Contacts)
 		@Html.LabelFor(model => model.ContractFile)
 		@Helpers.FileUploader(
 			Html.IdFor(x => x.ContractFile).ToHtmlString(),
@@ -58,8 +27,25 @@
 				: null)
 	</div>
 	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.LegalAddress)
+		@Html.EditorWithLabelFor(model => model.Bank)
+		@Html.EditorWithLabelFor(model => model.RS)
 		@Html.EditorWithLabelFor(model => model.Emails)
+		@Html.EditorWithLabelFor(x => x.ContractNumber)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.MailingAddress)
+		@Html.EditorWithLabelFor(model => model.BIC)
+		@Html.EditorWithLabelFor(model => model.KS)
 		@Html.EditorWithLabelFor(model => model.Phone)
+		<div class="date-holder">
+			@Html.EditorWithLabelFor(x => x.ContractDate)
+		</div>
+		<script>
+			$(function() {
+				$(".date-holder input").kendoDatePicker();
+			})
+		</script>
 	</div>
 </div>
 <hr />
