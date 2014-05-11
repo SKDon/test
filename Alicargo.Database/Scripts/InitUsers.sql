@@ -124,10 +124,12 @@ WHERE [Id] >= 127
 
 /****** Object:  Table [dbo].[Client]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Client] ON
-INSERT [dbo].[Client] ([Id], [UserId], [Emails], [Nic], [LegalEntity], [Contacts], [Phone], [INN], [KPP], [OGRN], [Bank], [BIC], [LegalAddress], [MailingAddress], [RS], [KS], [TransitId]) VALUES 
-(1, 5, N'u1@timez.org, u12@timez.org; u13@timez.org', N'Nic 0', N'LegalEntity 0', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 1),
-(2, 6, N'u2@timez.org', N'Nic 1', N'LegalEntity 1', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 2),
-(3, 7, N'u3@timez.org', N'Nic 2', N'LegalEntity 2', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 3),
-(4, 8, N'u4@timez.org', N'Nic 3', N'LegalEntity 3', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 4),
-(5, 9, N'u5@timez.org', N'Nic 4', N'LegalEntity 4', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 5)
+INSERT [dbo].[Client] 
+([Id], [UserId], [Emails], [Nic], [LegalEntity], [Contacts], [Phone], [INN], [KPP], [OGRN], 
+[Bank], [BIC], [LegalAddress], [MailingAddress], [RS], [KS], [TransitId], [ContractDate], [ContractNumber]) VALUES 
+(1, 5, N'u1@timez.org, u12@timez.org; u13@timez.org', N'Nic 0', N'LegalEntity 0', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 1, GETUTCDATE(), 1),
+(2, 6, N'u2@timez.org', N'Nic 1', N'LegalEntity 1', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 2, GETUTCDATE(), 2),
+(3, 7, N'u3@timez.org', N'Nic 2', N'LegalEntity 2', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 3, GETUTCDATE(), 3),
+(4, 8, N'u4@timez.org', N'Nic 3', N'LegalEntity 3', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 4, GETUTCDATE(), 4),
+(5, 9, N'u5@timez.org', N'Nic 4', N'LegalEntity 4', NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), NEWID(), 5, GETUTCDATE(), 5)
 SET IDENTITY_INSERT [dbo].[Client] OFF

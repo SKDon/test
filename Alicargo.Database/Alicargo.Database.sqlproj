@@ -221,5 +221,6 @@
     <None Include="Master.Database.publish.xml" />
     <None Include="Scripts\InitCities.sql" />
     <None Include="Scripts\InitSettings.sql" />
+    <None Include="SqlSchemaCompare.scmp" />
   </ItemGroup>
 </Project>
