@@ -101,7 +101,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 			var table = new PdfPTable(6) { WidthPercentage = 100 };
 			table.SetWidths(new[]
 			{
-				30, 270, 60, 60, 150, 150
+				30, 370, 60, 60, 100, 100
 			});
 
 			table.AddCell("№".Phrase(BoldFont).CenterCell());

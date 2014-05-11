@@ -2,7 +2,6 @@
 using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices.Abstract;
 using Alicargo.DataAccess.Contracts.Enums;
-using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
@@ -14,22 +13,22 @@ namespace Alicargo.Areas.Admin.Controllers
 	[Access(RoleType.Admin)]
 	public partial class BillController : Controller
 	{
+		private readonly IApplicationRepository _applications;
 		private readonly IBillRepository _bills;
 		private readonly IBillManager _manager;
 		private readonly IBillModelFactory _modelFactory;
 		private readonly IBillPdf _pdf;
-		private readonly ISettingRepository _settings;
 
 		public BillController(
-			ISettingRepository settings,
 			IBillPdf pdf,
 			IBillModelFactory modelFactory,
+			IApplicationRepository applications,
 			IBillRepository bills,
 			IBillManager manager)
 		{
-			_settings = settings;
 			_pdf = pdf;
 			_modelFactory = modelFactory;
+			_applications = applications;
 			_bills = bills;
 			_manager = manager;
 		}
@@ -62,7 +61,8 @@ namespace Alicargo.Areas.Admin.Controllers
 			if(bill == null)
 			{
 				model = _modelFactory.GetBillModelByApplication(id);
-				ViewBag.BillNumber = _settings.GetData<int>(SettingType.BillLastNumber) + 1;
+				var application = _applications.Get(id);
+				ViewBag.BillNumber = application.DisplayNumber;
 				ViewBag.Date = DateTimeProvider.Now;
 			}
 			else
@@ -117,7 +117,8 @@ namespace Alicargo.Areas.Admin.Controllers
 			}
 
 			var bill = _bills.Get(id);
-			var number = bill != null ? bill.Number : _settings.GetNextBillNumber();
+			var application = _applications.Get(id);
+			var number = bill != null ? bill.Number : application.DisplayNumber;
 			var date = bill != null ? bill.SaveDate : DateTimeProvider.Now;
 
 			if(!ModelState.IsValid)

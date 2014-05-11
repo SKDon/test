@@ -45,27 +45,5 @@ namespace Alicargo.DataAccess.Repositories
 		{
 			return _serializer.Deserialize<T>(Get(type).Data);
 		}
-
-		public int GetNextBillNumber()
-		{
-			while(true)
-			{
-				try
-				{
-					var data = Get(SettingType.BillLastNumber);
-
-					var number = _serializer.Deserialize<int>(data.Data) + 1;
-
-					data.Data = _serializer.Serialize(number);
-
-					AddOrReplace(data);
-
-					return number;
-				}
-				catch(UpdateConflictException)
-				{
-				}
-			}
-		}
 	}
 }

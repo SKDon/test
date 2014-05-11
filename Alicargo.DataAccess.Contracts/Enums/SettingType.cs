@@ -2,8 +2,6 @@
 {
 	public enum SettingType
 	{
-		Bill = 1,
-		BillLastNumber = 2,
-		//ApplicationNumberCounter = 3
+		Bill = 1
 	}
 }

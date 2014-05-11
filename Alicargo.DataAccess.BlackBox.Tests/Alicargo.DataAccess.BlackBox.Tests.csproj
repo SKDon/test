@@ -124,6 +124,10 @@
     <Compile Include="Repositories\User\UserRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alicargo.Core.Contracts\Alicargo.Core.Contracts.csproj">
+      <Project>{5D298560-5149-4DBB-9444-EE2EE9430483}</Project>
+      <Name>Alicargo.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
       <Project>{577B60F9-32F7-4117-97DA-40743BFF4CA0}</Project>
       <Name>Alicargo.Core</Name>

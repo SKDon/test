@@ -8,6 +8,5 @@ namespace Alicargo.DataAccess.Contracts.Repositories
 		Setting AddOrReplace(Setting setting);
 		Setting Get(SettingType type);
 		T GetData<T>(SettingType type);
-		int GetNextBillNumber();
 	}
 }

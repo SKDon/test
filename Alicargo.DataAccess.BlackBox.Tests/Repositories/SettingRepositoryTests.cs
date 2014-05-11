@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Alicargo.DataAccess.BlackBox.Tests.Properties;
+﻿using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
@@ -56,42 +54,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		public void Test_EntityUpdateConflictException()
 		{
 			var setting = _fixture.Build<Setting>()
-				.With(x => x.Type, SettingType.BillLastNumber)
+				.With(x => x.Type, SettingType.Bill)
 				.Create();
 
 			_repository.AddOrReplace(setting);
-		}
-
-		[TestMethod]
-		public void Test_Get()
-		{
-			var setting = _repository.Get(SettingType.BillLastNumber);
-
-			setting.RowVersion.Should().NotBeNull();
-			setting.Type.ShouldBeEquivalentTo(SettingType.BillLastNumber);
-			_serializer.Deserialize<int>(setting.Data).Should().BeGreaterOrEqualTo(1);
-		}
-
-		[TestMethod]
-		public void Test_GetNextBillNumber_Concurency()
-		{
-			var numbers = new int[10];
-			var tasks = Enumerable.Range(0, 10)
-				.Select(x => Task.Run(() => { numbers[x] = _repository.GetNextBillNumber(); }))
-				.ToArray();
-
-			Task.WaitAll(tasks);
-
-			numbers.Distinct().Count().ShouldBeEquivalentTo(10);
-		}
-
-		[TestMethod]
-		public void Test_GetNextBillNumber()
-		{
-			var last = _repository.GetData<int>(SettingType.BillLastNumber);
-			var next = _repository.GetNextBillNumber();
-
-			next.ShouldBeEquivalentTo(last + 1);
 		}
 
 		[TestMethod]
@@ -105,7 +71,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		[TestMethod]
 		public void Test_Update()
 		{
-			var old = _repository.Get(SettingType.BillLastNumber);
+			var old = _repository.Get(SettingType.Bill);
 
 			var setting = _fixture.Build<Setting>()
 				.With(x => x.Type, old.Type)
