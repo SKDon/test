@@ -17,7 +17,6 @@ namespace Alicargo.Services.Calculation
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
-		private readonly IClientRepository _clients;
 		private readonly ISenderRepository _senders;
 		private readonly IStateFilter _stateFilter;
 
@@ -25,13 +24,11 @@ namespace Alicargo.Services.Calculation
 			IApplicationRepository applications,
 			IStateFilter stateFilter,
 			IAwbRepository awbs,
-			IClientRepository clients,
 			ISenderRepository senders)
 		{
 			_applications = applications;
 			_stateFilter = stateFilter;
 			_awbs = awbs;
-			_clients = clients;
 			_senders = senders;
 		}
 
@@ -112,17 +109,14 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
-		private SenderCalculationItem[] GetItems(ApplicationData[] applications)
+		private static SenderCalculationItem[] GetItems(ApplicationData[] applications)
 		{
-			var appIds = applications.Select(x => x.Id).ToArray();
-			var nics = _clients.GetNicByApplications(appIds);
-
 			return applications.Select(a => new SenderCalculationItem
 			{
 				ApplicationId = a.Id,
 				Value = a.Value,
 				Count = a.Count,
-				ClientNic = nics[a.Id],
+				ClientNic = a.ClientNic,
 				Factory = a.FactoryName,
 				FactureCost = a.FactureCost,
 				FactureCostEx = a.FactureCostEx,

@@ -8,7 +8,6 @@ using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.Calculation.Client;
@@ -19,18 +18,15 @@ namespace Alicargo.Services.Calculation
 	{
 		private readonly IApplicationRepository _applicationRepository;
 		private readonly IAwbRepository _awbRepository;
-		private readonly IClientRepository _clientRepository;
 		private readonly IStateSettingsRepository _settings;
 
 		public ClientCalculationPresenter(
 			IApplicationRepository applicationRepository,
 			IAwbRepository awbRepository,
-			IClientRepository clientRepository,
 			IStateSettingsRepository settings)
 		{
 			_applicationRepository = applicationRepository;
 			_awbRepository = awbRepository;
-			_clientRepository = clientRepository;
 			_settings = settings;
 		}
 
@@ -79,17 +75,14 @@ namespace Alicargo.Services.Calculation
 			return applications;
 		}
 
-		private IEnumerable<ClientCalculationItem> GetItems(ApplicationData[] applications)
+		private static IEnumerable<ClientCalculationItem> GetItems(ApplicationData[] applications)
 		{
-			var appIds = applications.Select(x => x.Id).ToArray();
-			var nics = _clientRepository.GetNicByApplications(appIds);
-
 			return applications.Select(a => new ClientCalculationItem
 			{
 				ApplicationId = a.Id,
 				Value = a.Value,
 				Count = a.Count,
-				ClientNic = nics[a.Id],
+				ClientNic = a.ClientNic,
 				Factory = a.FactoryName,
 				FactureCost = a.GetAdjustedFactureCost(),
 				FactureCostEx = a.GetAdjustedFactureCostEx(),

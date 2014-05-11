@@ -105,12 +105,11 @@ namespace Alicargo.Controllers.Application
 
 		private void BindBag(long applicationId)
 		{
-			var nic = _clients.GetNicByApplications(applicationId).First();
 			var data = _applications.Get(applicationId);
 			ViewBag.ApplicationId = applicationId;
 			ViewBag.ApplicationNumber = data.DisplayNumber;
 
-			ViewBag.Nic = nic;
+			ViewBag.Nic = data.ClientNic;
 			BindCountries();
 		}
 

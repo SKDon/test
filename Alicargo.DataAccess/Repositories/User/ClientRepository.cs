@@ -86,11 +86,6 @@ namespace Alicargo.DataAccess.Repositories.User
 			_context.SaveChanges();
 		}
 
-		public string GetLanguage(long clientId)
-		{
-			return _context.Clients.Where(x => x.Id == clientId).Select(x => x.User.TwoLetterISOLanguageName).First();
-		}
-
 		public ClientData GetByUserId(long userId)
 		{
 			return _context.Clients
@@ -119,14 +114,6 @@ namespace Alicargo.DataAccess.Repositories.User
 		public ClientData[] GetAll()
 		{
 			return _context.Clients.Select(_selector).ToArray();
-		}
-
-		public IDictionary<long, string> GetNicByApplications(params long[] appIds)
-		{
-			return _context.Applications
-				.Where(x => appIds.Contains(x.Id))
-				.Select(x => new { x.Id, ClientNic = x.Client.Nic })
-				.ToDictionary(x => x.Id, x => x.ClientNic);
 		}
 
 		public long GetUserId(long clientId)

@@ -16,20 +16,17 @@ namespace Alicargo.Services.Calculation
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
 		private readonly IClientBalanceRepository _balances;
-		private readonly IClientRepository _clients;
 		private readonly ISenderRepository _senders;
 
 		public AdminCalculationPresenter(
 			IApplicationRepository applications,
 			IAwbRepository awbs,
 			ISenderRepository senders,
-			IClientRepository clients,
 			IClientBalanceRepository balances)
 		{
 			_applications = applications;
 			_awbs = awbs;
 			_senders = senders;
-			_clients = clients;
 			_balances = balances;
 		}
 
@@ -53,14 +50,13 @@ namespace Alicargo.Services.Calculation
 		{
 			var appIds = applications.Select(x => x.Id).ToArray();
 			var calculations = _applications.GetCalculations(appIds);
-			var nics = _clients.GetNicByApplications(appIds);
 
 			return applications.Select(a => new CalculationItem
 			{
 				ApplicationId = a.Id,
 				Value = a.Value,
 				Count = a.Count,
-				ClientNic = nics[a.Id],
+				ClientNic = a.ClientNic,
 				Factory = a.FactoryName,
 				FactureCost = a.FactureCostEdited ?? a.FactureCost,
 				FactureCostEx = a.FactureCostExEdited ?? a.FactureCostEx,
