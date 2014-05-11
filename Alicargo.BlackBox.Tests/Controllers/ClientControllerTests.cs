@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers.User;
 using Alicargo.DataAccess.DbContext;
@@ -59,7 +58,8 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			client.User.PasswordHash.Should().NotBe(new byte[0]);
 			client.User.PasswordSalt.Should().NotBe(new byte[0]);
-			client.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
+			client.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties().Excluding(x=>x.ContractDate));
+			client.ContractDate.ToString().ShouldBeEquivalentTo(model.ContractDate);
 			client.Transit.ShouldBeEquivalentTo(transit, options => options.ExcludingMissingProperties());
 		}
 	}

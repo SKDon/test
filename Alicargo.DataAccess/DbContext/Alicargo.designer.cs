@@ -13,6 +13,11 @@ namespace Alicargo.DataAccess.DbContext
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
+	using System.Data;
+	using System.Collections.Generic;
+	using System.Reflection;
+	using System.Linq;
+	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
 	
@@ -1049,7 +1054,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDFileData
 		{
 			get
@@ -1089,7 +1094,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GTDAdditionalFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary GTDAdditionalFileData
 		{
 			get
@@ -1129,7 +1134,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary PackingFileData
 		{
 			get
@@ -1169,7 +1174,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary InvoiceFileData
 		{
 			get
@@ -1209,7 +1214,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AWBFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary AWBFileData
 		{
 			get
@@ -1249,7 +1254,7 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawFileData", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawFileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary DrawFileData
 		{
 			get
@@ -2382,6 +2387,10 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private decimal _Balance;
 		
+		private string _ContractNumber;
+		
+		private System.DateTimeOffset _ContractDate;
+		
 		private EntitySet<Calculation> _Calculations;
 		
 		private EntitySet<Application> _Applications;
@@ -2430,6 +2439,10 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnTransitIdChanged();
     partial void OnBalanceChanging(decimal value);
     partial void OnBalanceChanged();
+    partial void OnContractNumberChanging(string value);
+    partial void OnContractNumberChanged();
+    partial void OnContractDateChanging(System.DateTimeOffset value);
+    partial void OnContractDateChanged();
     #endregion
 		
 		public Client()
@@ -2805,6 +2818,46 @@ namespace Alicargo.DataAccess.DbContext
 					this._Balance = value;
 					this.SendPropertyChanged("Balance");
 					this.OnBalanceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractNumber", DbType="NVarChar(MAX)", CanBeNull=false)]
+		public string ContractNumber
+		{
+			get
+			{
+				return this._ContractNumber;
+			}
+			set
+			{
+				if ((this._ContractNumber != value))
+				{
+					this.OnContractNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ContractNumber = value;
+					this.SendPropertyChanged("ContractNumber");
+					this.OnContractNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractDate", DbType="DateTimeOffset NOT NULL")]
+		public System.DateTimeOffset ContractDate
+		{
+			get
+			{
+				return this._ContractDate;
+			}
+			set
+			{
+				if ((this._ContractDate != value))
+				{
+					this.OnContractDateChanging(value);
+					this.SendPropertyChanging();
+					this._ContractDate = value;
+					this.SendPropertyChanged("ContractDate");
+					this.OnContractDateChanged();
 				}
 			}
 		}

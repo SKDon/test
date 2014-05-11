@@ -83,7 +83,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 				ClientId = client.Id,
 				Login = user.Login,
 				Language = user.TwoLetterISOLanguageName,
-				UserId = user.Id
+				UserId = user.Id,
+				ContractDate = client.ContractDate,
+				ContractNumber = client.ContractNumber
 			};
 		}
 
