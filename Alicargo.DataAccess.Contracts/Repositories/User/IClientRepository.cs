@@ -4,7 +4,6 @@ namespace Alicargo.DataAccess.Contracts.Repositories.User
 {
 	public interface IClientRepository
 	{
-		long Add(ClientData client);
 		long Count();
 		void Delete(long id);
 		ClientData Get(long clientId);
@@ -12,6 +11,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.User
 		ClientData GetByUserId(long userId);
 		ClientData[] GetRange(int take, long skip);
 		long GetUserId(long clientId);
+		long Add(ClientEditData client, long userId, long transitId);
 		void Update(ClientData client);
 	}
 }

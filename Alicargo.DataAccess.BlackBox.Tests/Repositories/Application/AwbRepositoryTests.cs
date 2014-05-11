@@ -3,6 +3,7 @@ using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
@@ -22,6 +23,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		private DbTestContext _context;
 		private IAwbFileRepository _files;
 		private Fixture _fixture;
+		private ISqlProcedureExecutor _executor;
 
 		[TestCleanup]
 		public void TestCleanup()
@@ -34,11 +36,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		{
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
+			_executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 
 			_awbs = new AwbRepository(_context.Connection);
 			_files = new AwbFileRepository(_context.Connection);
 			_applicationEditor = new ApplicationEditor(_context.Connection,
-				new SqlProcedureExecutor(Settings.Default.MainConnectionString),
+				_executor,
 				TestConstants.DefaultStateId);
 		}
 
@@ -136,7 +139,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 
 			var emails = _awbs.GetClientEmails(id).Select(x => x.Email).ToArray();
 
-			var clientRepository = new ClientRepository(_context.Connection);
+			var clientRepository = new ClientRepository(_context.Connection, _executor);
 
 			var client1 = clientRepository.Get(TestConstants.TestClientId1);
 			var client2 = clientRepository.Get(TestConstants.TestClientId2);

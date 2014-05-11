@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Helpers;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.DataAccess.DbContext;
 
@@ -12,10 +13,12 @@ namespace Alicargo.DataAccess.Repositories.User
 	public sealed class ClientRepository : IClientRepository
 	{
 		private readonly AlicargoDataContext _context;
+		private readonly ISqlProcedureExecutor _executor;
 		private readonly Expression<Func<Client, ClientData>> _selector;
 
-		public ClientRepository(IDbConnection connection)
+		public ClientRepository(IDbConnection connection, ISqlProcedureExecutor executor)
 		{
+			_executor = executor;
 			_context = new AlicargoDataContext(connection);
 
 			_selector = x => new ClientData
@@ -56,24 +59,28 @@ namespace Alicargo.DataAccess.Repositories.User
 				.ToArray();
 		}
 
-		public long Add(ClientData client)
+		public long Add(ClientEditData client, long userId, long transitId)
 		{
-			var entity = new Client
-			{
-				User = new DbContext.User
+			return _executor.Query<long>("[dbo].[Client_Add]",
+				new
 				{
-					PasswordHash = new byte[0],
-					PasswordSalt = new byte[0]
-				}
-			};
-
-			Map(client, entity);
-
-			_context.Clients.InsertOnSubmit(entity);
-
-			_context.SaveChanges();
-
-			return entity.Id;
+					client.BIC,
+					client.Bank,
+					client.Contacts,
+					Emails = EmailsHelper.JoinEmails(client.Emails),
+					client.INN,
+					client.KPP,
+					client.KS,
+					client.LegalAddress,
+					client.LegalEntity,
+					client.MailingAddress,
+					client.Nic,
+					client.OGRN,
+					client.Phone,
+					client.RS,
+					UserId = userId,
+					TransitId = transitId
+				});
 		}
 
 		public void Update(ClientData client)

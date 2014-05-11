@@ -5,6 +5,7 @@ using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -17,6 +18,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		private ClientRepository _clientRepository;
 		private DbTestContext _context;
 		private Fixture _fixture;
+		private UserRepository _userRepository;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -24,7 +26,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
 
-			_clientRepository = new ClientRepository(_context.Connection);
+			var executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
+			_userRepository = new UserRepository(new PasswordConverter(), executor);
+			_clientRepository = new ClientRepository(_context.Connection, executor);
 		}
 
 		[TestCleanup]
@@ -107,19 +111,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		[TestMethod]
 		public void Test_ClientRepository_Add_GetByUserId_GetById_Delete()
 		{
-			var client = _fixture.Create<ClientData>();
-			client.TransitId = TestConstants.TestTransitId;
-			client.Language = TwoLetterISOLanguageName.English;
-			var clientId = _clientRepository.Add(client);
-			client.ClientId = clientId;
+			var client = _fixture.Create<ClientEditData>();
+			var userId = _userRepository.Add(_fixture.Create<string>(), _fixture.Create<string>(), TwoLetterISOLanguageName.English);
 
-			var byId = _clientRepository.Get(client.ClientId);
+			var clientId = _clientRepository.Add(client, userId, TestConstants.TestTransitId);
 
-			Assert.IsNotNull(byId);
+			var byId = _clientRepository.Get(clientId);
 
 			client.ShouldBeEquivalentTo(byId);
-
-			var userId = _clientRepository.GetUserId(client.ClientId);
 
 			var byUserId = _clientRepository.GetByUserId(userId);
 

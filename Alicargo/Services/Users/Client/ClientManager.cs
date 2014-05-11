@@ -1,4 +1,5 @@
-﻿using Alicargo.Core.Contracts.Client;
+﻿using System.Transactions;
+using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -65,36 +66,36 @@ namespace Alicargo.Services.Users.Client
 
 		public long Add(ClientModel client, TransitEditModel transit, AuthenticationModel authentication)
 		{
-			var transitId = _transits.Add(transit, null);
-
-			var data = new ClientData
+			using(var ts = new TransactionScope())
 			{
-				ClientId = 0,
-				BIC = client.BIC,
-				Phone = client.Phone,
-				Emails = EmailsHelper.SplitAndTrimEmails(client.Emails),
-				LegalEntity = client.LegalEntity,
-				Bank = client.Bank,
-				Contacts = client.Contacts,
-				INN = client.INN,
-				KPP = client.KPP,
-				KS = client.KS,
-				LegalAddress = client.LegalAddress,
-				MailingAddress = client.MailingAddress,
-				Nic = client.Nic,
-				OGRN = client.OGRN,
-				RS = client.RS,
-				TransitId = transitId,
-				Language = TwoLetterISOLanguageName.English,
-				Login = authentication.Login
-			};
+				var transitId = _transits.Add(transit, null);
 
-			var clientId = _clients.Add(data);
+				var userId = _users.Add(authentication.Login, authentication.NewPassword, TwoLetterISOLanguageName.English);
 
-			var userId = _clients.GetUserId(clientId);
-			_users.SetPassword(userId, authentication.NewPassword);
+				var data = new ClientEditData
+				{
+					BIC = client.BIC,
+					Phone = client.Phone,
+					Emails = EmailsHelper.SplitAndTrimEmails(client.Emails),
+					LegalEntity = client.LegalEntity,
+					Bank = client.Bank,
+					Contacts = client.Contacts,
+					INN = client.INN,
+					KPP = client.KPP,
+					KS = client.KS,
+					LegalAddress = client.LegalAddress,
+					MailingAddress = client.MailingAddress,
+					Nic = client.Nic,
+					OGRN = client.OGRN,
+					RS = client.RS
+				};
 
-			return clientId;
+				var clientId = _clients.Add(data, userId, transitId);
+
+				ts.Complete();
+
+				return clientId;
+			}
 		}
 	}
 }

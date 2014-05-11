@@ -58,6 +58,7 @@
     <Compile Include="Contracts\EventDataForEntity.cs" />
     <Compile Include="Contracts\Setting.cs" />
     <Compile Include="Contracts\User\ClientBalanceHistoryItem.cs" />
+    <Compile Include="Contracts\User\ClientEditData.cs" />
     <Compile Include="Contracts\User\EmailData.cs" />
     <Compile Include="Contracts\User\PasswordData.cs" />
     <Compile Include="Contracts\User\BrokerData.cs" />
