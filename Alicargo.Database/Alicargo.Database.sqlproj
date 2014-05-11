@@ -215,6 +215,7 @@
     <Build Include="Stored procedures\User\Client\Client_Get.sql" />
     <Build Include="Stored procedures\User\Client\Client_GetByUserId.sql" />
     <Build Include="Stored procedures\User\Client\Client_GetAll.sql" />
+    <Build Include="Stored procedures\User\Client\Client_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

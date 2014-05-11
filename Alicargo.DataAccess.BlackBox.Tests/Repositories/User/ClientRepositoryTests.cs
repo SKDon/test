@@ -1,4 +1,5 @@
-﻿using Alicargo.DataAccess.BlackBox.Tests.Properties;
+﻿using System.Linq;
+using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.DbContext;
@@ -90,15 +91,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 		public void Test_ClientRepository_GetAll()
 		{
 			var all1 = _clientRepository.GetAll();
-
-			var testClient = CreateTestClient();
-
-			all1.Should().NotContain(testClient);
-
+			var expected = CreateTestClient();
 			var all2 = _clientRepository.GetAll();
+			var actual = all2.Single(x => x.ClientId == expected.ClientId);
 
-			all2.Should().Contain(testClient);
-
+			all1.Should().NotContain(expected);
+			actual.ShouldBeEquivalentTo(expected);
 			all1.Length.ShouldBeEquivalentTo(all2.Length - 1);
 		}
 
