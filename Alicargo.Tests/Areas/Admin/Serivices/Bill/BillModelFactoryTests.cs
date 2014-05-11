@@ -57,7 +57,8 @@ namespace Alicargo.Tests.Areas.Admin.Serivices.Bill
 			model.BankDetails.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.Count.ShouldBeEquivalentTo(1);
 			model.PriceRuble.ShouldBeEquivalentTo(money);
-			model.Goods.Should().Contain(application.GetApplicationDisplay());
+			model.Goods.Should().Contain(client.ContractNumber);
+			model.Goods.Should().Contain(client.ContractDate.ToString("dd MMMM yyyy"));
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
 
 			_container.SettingRepository.Verify(x => x.GetData<BillSettings>(SettingType.Bill));
@@ -85,7 +86,8 @@ namespace Alicargo.Tests.Areas.Admin.Serivices.Bill
 			model.BankDetails.ShouldBeEquivalentTo(settings, options => options.ExcludingMissingProperties());
 			model.Count.ShouldBeEquivalentTo(1);
 			model.PriceRuble.ShouldBeEquivalentTo(null);
-			model.Goods.Should().Contain(application.GetApplicationDisplay());
+			model.Goods.Should().Contain(client.ContractNumber);
+			model.Goods.Should().Contain(client.ContractDate.ToString("dd MMMM yyyy"));
 			model.Client.Should().Contain(client.LegalEntity).And.Contain(client.LegalAddress).And.Contain(client.INN);
 
 			_container.SettingRepository.Verify(x => x.GetData<BillSettings>(SettingType.Bill));

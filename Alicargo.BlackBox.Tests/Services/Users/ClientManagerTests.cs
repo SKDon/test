@@ -46,6 +46,7 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 		public void Test_Add()
 		{
 			var clientModel = _fixture.Create<ClientModel>();
+			clientModel.ContractDate = DateTimeProvider.Now.ToString();
 			var transitEditModel = _fixture.Create<TransitEditModel>();
 			transitEditModel.CityId = TestConstants.TestCityId1;
 
@@ -54,7 +55,9 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 			var clientData = _clientRepository.Get(clientId);
 			var transitData = _transitRepository.Get(clientData.TransitId).Single();
 
-			clientData.ShouldBeEquivalentTo(clientModel, options => options.ExcludingMissingProperties());
+			clientData.ShouldBeEquivalentTo(clientModel,
+				options => options.ExcludingMissingProperties().Excluding(x => x.ContractDate));
+			clientData.ContractDate.ToString().ShouldBeEquivalentTo(clientModel.ContractDate);
 			transitData.ShouldBeEquivalentTo(transitEditModel, options => options.ExcludingMissingProperties());
 		}
 
@@ -63,6 +66,7 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 		{
 			const long clientId = TestConstants.TestClientId1;
 			var clientModel = _fixture.Create<ClientModel>();
+			clientModel.ContractDate = DateTimeProvider.Now.ToString();
 			var transitEditModel = _fixture.Create<TransitEditModel>();
 			transitEditModel.CityId = TestConstants.TestCityId1;
 
@@ -73,9 +77,12 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 			var passwordData = _userRepository.GetPasswordData(clientModel.Authentication.Login);
 			var converter = _context.Kernel.Get<IPasswordConverter>();
 
-			clientData.ShouldBeEquivalentTo(clientModel, options => options.ExcludingMissingProperties());
+			clientData.ShouldBeEquivalentTo(clientModel,
+				options => options.ExcludingMissingProperties().Excluding(x => x.ContractDate));
+			clientData.ContractDate.ToString().ShouldBeEquivalentTo(clientModel.ContractDate);
 			transitData.ShouldBeEquivalentTo(transitEditModel, options => options.ExcludingMissingProperties());
-			passwordData.PasswordHash.ShouldAllBeEquivalentTo(converter.GetPasswordHash(clientModel.Authentication.NewPassword, passwordData.PasswordSalt));
+			passwordData.PasswordHash.ShouldAllBeEquivalentTo(converter.GetPasswordHash(clientModel.Authentication.NewPassword,
+				passwordData.PasswordSalt));
 		}
 	}
 }

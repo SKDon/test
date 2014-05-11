@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers.User;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.User;
 using FluentAssertions;
@@ -44,6 +46,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 			var model = _mock.Build<ClientModel>()
 				.With(x => x.Emails, "mail@mail.com")
 				.With(x => x.Authentication, authentication)
+				.With(x => x.ContractDate, DateTimeProvider.Now.ToString())
 				.Create();
 			var transit = _mock.Build<TransitEditModel>()
 				.With(x => x.CityId, TestConstants.TestCityId1)
