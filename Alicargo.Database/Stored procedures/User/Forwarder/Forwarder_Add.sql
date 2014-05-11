@@ -11,16 +11,16 @@ AS BEGIN
 
 	BEGIN TRAN
 
-		DECLARE @UserId BIGINT;
-		EXEC	@UserId = [dbo].[User_Add]
-				@Login = @Login, @PasswordHash = @PasswordHash, 
-				@PasswordSalt = @PasswordSalt, 
-				@TwoLetterISOLanguageName = @Language
+		DECLARE @Table TABLE([UserId] BIGINT);
+		INSERT @Table EXEC [dbo].[User_Add]
+			@Login = @Login, @PasswordHash = @PasswordHash, 
+			@PasswordSalt = @PasswordSalt, 
+			@TwoLetterISOLanguageName = @Language
 
-		INSERT	[dbo].[Forwarder]
-				([UserId], [Name], [Email])
-		OUTPUT	INSERTED.[Id]
-		VALUES	(@UserId, @Name, @Email)
+		INSERT [dbo].[Forwarder] ([UserId], [Name], [Email])
+		OUTPUT INSERTED.[Id]
+		SELECT [UserId], @Name, @Email
+		FROM @Table
 
 	COMMIT
 

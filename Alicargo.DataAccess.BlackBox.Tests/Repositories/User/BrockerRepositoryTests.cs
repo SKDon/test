@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 {
 	[TestClass]
-	public class Tests
+	public class BrockerRepositoryTests
 	{
 		private BrokerRepository _repository;
 		private DbTestContext _context;

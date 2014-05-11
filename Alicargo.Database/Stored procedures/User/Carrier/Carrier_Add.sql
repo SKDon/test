@@ -14,16 +14,17 @@ AS BEGIN
 
 	BEGIN TRAN
 
-		DECLARE @UserId BIGINT;
-		EXEC @UserId = [dbo].[User_Add]
-				@Login = @Login,
-				@PasswordHash = @PasswordHash, 
-				@PasswordSalt = @PasswordSalt, 
-				@TwoLetterISOLanguageName = @Language
+		DECLARE @Table TABLE([UserId] BIGINT);
+		INSERT @Table EXEC [dbo].[User_Add]
+			@Login = @Login,
+			@PasswordHash = @PasswordHash, 
+			@PasswordSalt = @PasswordSalt, 
+			@TwoLetterISOLanguageName = @Language
 
 		INSERT [dbo].[Carrier] ([UserId], [Name], [Email], [Contact], [Phone], [Address])
 		OUTPUT INSERTED.[Id]
-		VALUES (@UserId, @Name, @Email, @Contact, @Phone, @Address)
+		SELECT [UserId], @Name, @Email, @Contact, @Phone, @Address
+		FROM @Table
 
 	COMMIT
 

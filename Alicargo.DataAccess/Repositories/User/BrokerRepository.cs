@@ -8,6 +8,7 @@ using Alicargo.DataAccess.DbContext;
 
 namespace Alicargo.DataAccess.Repositories.User
 {
+	// todo: tests and refactor 276
 	public sealed class BrokerRepository : IBrokerRepository
 	{
 		private readonly AlicargoDataContext _context;
@@ -54,7 +55,7 @@ namespace Alicargo.DataAccess.Repositories.User
 
 			return entity.UserId;
 		}
-
+		
 		public long Add(string name, string login, string email, string language)
 		{
 			var user = new DbContext.User

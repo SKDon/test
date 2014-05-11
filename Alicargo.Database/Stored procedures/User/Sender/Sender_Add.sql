@@ -15,15 +15,16 @@ AS BEGIN
 
 	BEGIN TRAN
 
-		DECLARE @UserId BIGINT;
-		EXEC	@UserId = [dbo].[User_Add]
-				@Login = @Login, @PasswordHash = @PasswordHash, 
-				@PasswordSalt = @PasswordSalt, 
-				@TwoLetterISOLanguageName = @TwoLetterISOLanguageName
+		DECLARE @Table TABLE([UserId] BIGINT);
+		INSERT @Table EXEC [dbo].[User_Add]
+			@Login = @Login, @PasswordHash = @PasswordHash, 
+			@PasswordSalt = @PasswordSalt, 
+			@TwoLetterISOLanguageName = @TwoLetterISOLanguageName
 
-		INSERT	[dbo].[Sender] ([UserId], [Name], [Email], [TariffOfTapePerBox], [Contact], [Phone], [Address])
-		OUTPUT	INSERTED.[Id]
-		VALUES	(@UserId, @Name, @Email, @TariffOfTapePerBox, @Contact, @Phone, @Address)
+		INSERT [dbo].[Sender] ([UserId], [Name], [Email], [TariffOfTapePerBox], [Contact], [Phone], [Address])
+		OUTPUT INSERTED.[Id]
+		SELECT [UserId], @Name, @Email, @TariffOfTapePerBox, @Contact, @Phone, @Address
+		FROM @Table
 
 	COMMIT
 
