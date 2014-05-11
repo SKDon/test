@@ -1,5 +1,5 @@
 ﻿USE [$(MainDbName)] 
-GO
+
 
 GO
 PRINT N'Dropping DF_Application_CreationTimestamp...';
@@ -238,6 +238,16 @@ CREATE NONCLUSTERED INDEX [IX_AirWaybillId]
 
 
 GO
+PRINT N'Altering [dbo].[Client]...';
+
+
+GO
+ALTER TABLE [dbo].[Client]
+    ADD [ContractNumber] NVARCHAR (MAX)     NULL,
+        [ContractDate]   DATETIMEOFFSET (7) NULL;
+
+
+GO
 PRINT N'Creating [dbo].[Bill]...';
 
 
@@ -246,6 +256,7 @@ CREATE TABLE [dbo].[Bill] (
     [Id]                        BIGINT             IDENTITY (1, 1) NOT NULL,
     [ApplicationId]             BIGINT             NOT NULL,
     [SaveDate]                  DATETIMEOFFSET (7) NOT NULL,
+    [SendDate]                  DATETIMEOFFSET (7) NULL,
     [Number]                    INT                NOT NULL,
     [Bank]                      NVARCHAR (MAX)     NOT NULL,
     [BIC]                       NVARCHAR (MAX)     NOT NULL,
@@ -282,14 +293,12 @@ PRINT N'Creating [dbo].[Setting]...';
 
 
 GO
-CREATE TABLE [dbo].[Setting]
-(
-	[Type] INT NOT NULL,
-	[RowVersion] ROWVERSION NOT NULL,
-	[Data] VARBINARY(MAX) NOT NULL,
-
-	CONSTRAINT [PK_dbo.Setting] PRIMARY KEY CLUSTERED ([Type] ASC),
-)
+CREATE TABLE [dbo].[Setting] (
+    [Type]       INT             NOT NULL,
+    [RowVersion] ROWVERSION      NOT NULL,
+    [Data]       VARBINARY (MAX) NOT NULL,
+    CONSTRAINT [PK_dbo.Setting] PRIMARY KEY CLUSTERED ([Type] ASC)
+);
 
 
 GO
@@ -356,6 +365,25 @@ ALTER TABLE [dbo].[Application] WITH NOCHECK
 
 
 GO
+PRINT N'Altering [dbo].[User_Add]...';
+
+
+GO
+ALTER PROCEDURE [dbo].[User_Add]
+	@Login						NVARCHAR(320),
+	@PasswordHash				VARBINARY(MAX),
+	@PasswordSalt				VARBINARY(MAX),
+	@TwoLetterISOLanguageName	CHAR(2)
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	INSERT	[dbo].[User] ([Login], [PasswordHash], [PasswordSalt], [TwoLetterISOLanguageName])
+	OUTPUT	INSERTED.[Id]
+	VALUES	(@Login, @PasswordHash, @PasswordSalt, @TwoLetterISOLanguageName)
+
+END
+GO
 PRINT N'Creating [dbo].[Bill_AddOrReplace]...';
 
 
@@ -380,7 +408,8 @@ CREATE PROCEDURE [dbo].[Bill_AddOrReplace]
 	@Price MONEY,
 	@VAT MONEY,
 	@EuroToRuble MONEY,
-	@SaveDate DATETIMEOFFSET
+	@SaveDate DATETIMEOFFSET,
+	@SendDate DATETIMEOFFSET
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -405,7 +434,8 @@ AS BEGIN
 					@Price,
 					@VAT,
 					@EuroToRuble,
-					@SaveDate)
+					@SaveDate,
+					@SendDate)
 			AS source ([ApplicationId],
 					[Number],
 					[Bank],
@@ -425,7 +455,8 @@ AS BEGIN
 					[Price],
 					[VAT],
 					[EuroToRuble],
-					[SaveDate])
+					[SaveDate],
+					[SendDate])
 			ON (target.[ApplicationId] = source.[ApplicationId])
 		WHEN MATCHED THEN 
 			UPDATE SET [Bank] = source.[Bank],
@@ -446,7 +477,8 @@ AS BEGIN
 						[Price] = source.[Price],
 						[VAT] = source.[VAT],
 						[EuroToRuble] = source.[EuroToRuble],
-						[SaveDate] = source.[SaveDate]
+						[SaveDate] = source.[SaveDate],
+						[SendDate] = source.[SendDate]
 		WHEN NOT MATCHED THEN
 			INSERT ([ApplicationId],
 					[Number],
@@ -467,7 +499,8 @@ AS BEGIN
 					[Price],
 					[VAT],
 					[EuroToRuble],
-					[SaveDate])
+					[SaveDate],
+					[SendDate])
 			VALUES (source.[ApplicationId],
 					source.[Number],
 					source.[Bank],
@@ -487,7 +520,8 @@ AS BEGIN
 					source.[Price],
 					source.[VAT],
 					source.[EuroToRuble],
-					source.[SaveDate])
+					source.[SaveDate],
+					source.[SendDate])
 		OUTPUT INSERTED.[Id];
 END
 GO
@@ -501,7 +535,8 @@ CREATE PROCEDURE [dbo].[Bill_GetByApplicationId]
 AS BEGIN
 	SET NOCOUNT ON;
 
-	SELECT TOP 1 [Bank],
+	SELECT TOP 1
+		[Bank],
 		[BIC],
 		[CorrespondentAccount],
 		[TIN],
@@ -519,9 +554,244 @@ AS BEGIN
 		[VAT],
 		[EuroToRuble],
 		[Number],
-		[SaveDate]
+		[SaveDate],
+		[SendDate]
 	FROM [dbo].[Bill]
 	WHERE [ApplicationId] = @ApplicationId
+
+END
+GO
+PRINT N'Creating [dbo].[Client_Add]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[Client_Add]
+	@UserId BIGINT,
+    @Emails NVARCHAR(MAX),
+    @Nic NVARCHAR(MAX),
+    @LegalEntity NVARCHAR(MAX),
+    @Contacts NVARCHAR(MAX),
+    @Phone NVARCHAR(MAX),
+    @INN NVARCHAR(MAX),
+    @KPP NVARCHAR(MAX),
+    @OGRN NVARCHAR(MAX),
+    @Bank NVARCHAR(MAX),
+    @BIC NVARCHAR(MAX),
+    @LegalAddress NVARCHAR(MAX),
+    @MailingAddress NVARCHAR(MAX),
+    @RS NVARCHAR(MAX),
+    @KS NVARCHAR(MAX),
+    @ContractNumber NVARCHAR(MAX),
+    @ContractDate DATETIMEOFFSET,
+    @TransitId BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	INSERT [dbo].[Client]
+		([UserId]
+		,[Emails]
+		,[Nic]
+		,[LegalEntity]
+		,[Contacts]
+		,[Phone]
+		,[INN]
+		,[KPP]
+		,[OGRN]
+		,[Bank]
+		,[BIC]
+		,[LegalAddress]
+		,[MailingAddress]
+		,[RS]
+		,[KS]
+		,[TransitId]
+		,[ContractNumber]
+		,[ContractDate])
+	OUTPUT INSERTED.[Id]
+	VALUES
+		(@UserId,
+		@Emails,
+		@Nic,
+		@LegalEntity,
+		@Contacts,
+		@Phone,
+		@INN,
+		@KPP,
+		@OGRN,
+		@Bank,
+		@BIC,
+		@LegalAddress,
+		@MailingAddress,
+		@RS,
+		@KS,
+		@TransitId,
+		@ContractNumber,
+		@ContractDate)
+
+END
+GO
+PRINT N'Creating [dbo].[Client_Get]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[Client_Get]
+	@ClientId BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT TOP(1)
+		c.[Id] AS [ClientId],
+		u.[Id] AS [UserId],
+		c.[Emails],
+		c.[Nic],
+		c.[LegalEntity],
+		c.[Contacts],
+		c.[Phone],
+		c.[INN],
+		c.[KPP],
+		c.[OGRN],
+		c.[Bank],
+		c.[BIC],
+		c.[LegalAddress],
+		c.[MailingAddress],
+		c.[RS],
+		c.[KS],
+		c.[TransitId],
+		c.[Balance],
+		u.[Login],
+		u.[TwoLetterISOLanguageName] AS [Language],
+		c.[ContractDate],
+		c.[ContractNumber]
+	  FROM [dbo].[Client] c
+	  JOIN [dbo].[User] u
+	  ON c.[UserId] = u.[Id]
+	  WHERE c.[Id] = @ClientId
+
+END
+GO
+PRINT N'Creating [dbo].[Client_GetAll]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[Client_GetAll]
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT
+		c.[Id] AS [ClientId],
+		u.[Id] AS [UserId],
+		c.[Emails],
+		c.[Nic],
+		c.[LegalEntity],
+		c.[Contacts],
+		c.[Phone],
+		c.[INN],
+		c.[KPP],
+		c.[OGRN],
+		c.[Bank],
+		c.[BIC],
+		c.[LegalAddress],
+		c.[MailingAddress],
+		c.[RS],
+		c.[KS],
+		c.[TransitId],
+		c.[Balance],
+		u.[Login],
+		u.[TwoLetterISOLanguageName] AS [Language],
+		c.[ContractDate],
+		c.[ContractNumber]
+	  FROM [dbo].[Client] c
+	  JOIN [dbo].[User] u
+	  ON c.[UserId] = u.[Id]
+
+END
+GO
+PRINT N'Creating [dbo].[Client_GetByUserId]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[Client_GetByUserId]
+	@UserId BIGINT
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	SELECT TOP(1)
+		c.[Id] AS [ClientId],
+		u.[Id] AS [UserId],
+		c.[Emails],
+		c.[Nic],
+		c.[LegalEntity],
+		c.[Contacts],
+		c.[Phone],
+		c.[INN],
+		c.[KPP],
+		c.[OGRN],
+		c.[Bank],
+		c.[BIC],
+		c.[LegalAddress],
+		c.[MailingAddress],
+		c.[RS],
+		c.[KS],
+		c.[TransitId],
+		c.[Balance],
+		u.[Login],
+		u.[TwoLetterISOLanguageName] AS [Language],
+		c.[ContractDate],
+		c.[ContractNumber]
+	  FROM [dbo].[Client] c
+	  JOIN [dbo].[User] u
+	  ON c.[UserId] = u.[Id]
+	  WHERE u.[Id] = @UserId
+
+END
+GO
+PRINT N'Creating [dbo].[Client_Update]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[Client_Update]
+	@ClientId BIGINT,
+    @Emails NVARCHAR(MAX),
+    @Nic NVARCHAR(MAX),
+    @LegalEntity NVARCHAR(MAX),
+    @Contacts NVARCHAR(MAX),
+    @Phone NVARCHAR(MAX),
+    @INN NVARCHAR(MAX),
+    @KPP NVARCHAR(MAX),
+    @OGRN NVARCHAR(MAX),
+    @Bank NVARCHAR(MAX),
+    @BIC NVARCHAR(MAX),
+    @LegalAddress NVARCHAR(MAX),
+    @MailingAddress NVARCHAR(MAX),
+    @RS NVARCHAR(MAX),
+    @KS NVARCHAR(MAX),
+    @ContractNumber NVARCHAR(MAX),
+    @ContractDate DATETIMEOFFSET
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	UPDATE [dbo].[Client]
+	SET [Emails] = @Emails,
+		[Nic] = @Nic,
+		[LegalEntity] = @LegalEntity,
+		[Contacts] = @Contacts,
+		[Phone] = @Phone,
+		[INN] = @INN,
+		[KPP] = @KPP,
+		[OGRN] = @OGRN,
+		[Bank] = @Bank,
+		[BIC] = @BIC,
+		[LegalAddress] = @LegalAddress,
+		[MailingAddress] = @MailingAddress,
+		[RS] = @RS,
+		[KS] = @KS,
+		[ContractNumber] = @ContractNumber,
+		[ContractDate] = @ContractDate
+	WHERE [Id] = @ClientId
 
 END
 GO
@@ -563,6 +833,127 @@ AS BEGIN
 
 END
 GO
+PRINT N'Creating [dbo].[User_SetLogin]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[User_SetLogin]
+	@UserId BIGINT,
+	@Login NVARCHAR (320)
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	UPDATE TOP(1) [dbo].[User]
+	SET [Login] = @Login
+	WHERE [Id] = @UserId
+
+END
+GO
+PRINT N'Altering [dbo].[Carrier_Add]...';
+
+
+GO
+ALTER PROCEDURE [dbo].[Carrier_Add]
+	@Login NVARCHAR(320),
+	@PasswordHash VARBINARY(MAX),
+	@PasswordSalt VARBINARY(MAX),
+	@Language CHAR(2),
+	@Name NVARCHAR (MAX),
+	@Contact NVARCHAR (MAX),
+	@Phone NVARCHAR (MAX),
+	@Address NVARCHAR (MAX),
+	@Email NVARCHAR (320)
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRAN
+
+		DECLARE @Table TABLE([UserId] BIGINT);
+		INSERT @Table EXEC [dbo].[User_Add]
+			@Login = @Login,
+			@PasswordHash = @PasswordHash, 
+			@PasswordSalt = @PasswordSalt, 
+			@TwoLetterISOLanguageName = @Language
+
+		INSERT [dbo].[Carrier] ([UserId], [Name], [Email], [Contact], [Phone], [Address])
+		OUTPUT INSERTED.[Id]
+		SELECT [UserId], @Name, @Email, @Contact, @Phone, @Address
+		FROM @Table
+
+	COMMIT
+
+END
+GO
+PRINT N'Altering [dbo].[Forwarder_Add]...';
+
+
+GO
+ALTER PROCEDURE [dbo].[Forwarder_Add]
+	@Login NVARCHAR(320),
+	@PasswordHash VARBINARY(MAX),
+	@PasswordSalt VARBINARY(MAX),
+	@Language CHAR(2),
+	@Name NVARCHAR (MAX),
+	@Email NVARCHAR (320)
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRAN
+
+		DECLARE @Table TABLE([UserId] BIGINT);
+		INSERT @Table EXEC [dbo].[User_Add]
+			@Login = @Login, @PasswordHash = @PasswordHash, 
+			@PasswordSalt = @PasswordSalt, 
+			@TwoLetterISOLanguageName = @Language
+
+		INSERT [dbo].[Forwarder] ([UserId], [Name], [Email])
+		OUTPUT INSERTED.[Id]
+		SELECT [UserId], @Name, @Email
+		FROM @Table
+
+	COMMIT
+
+END
+GO
+PRINT N'Altering [dbo].[Sender_Add]...';
+
+
+GO
+ALTER PROCEDURE [dbo].[Sender_Add]
+	@Login NVARCHAR(320),
+	@PasswordHash VARBINARY(MAX),
+	@PasswordSalt VARBINARY(MAX),
+	@TwoLetterISOLanguageName CHAR(2),
+	@Name NVARCHAR (MAX),
+	@Email NVARCHAR (320),
+	@TariffOfTapePerBox MONEY,
+	@Contact NVARCHAR (MAX),
+	@Phone NVARCHAR (MAX),
+	@Address NVARCHAR (MAX)
+
+AS BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRAN
+
+		DECLARE @Table TABLE([UserId] BIGINT);
+		INSERT @Table EXEC [dbo].[User_Add]
+			@Login = @Login, @PasswordHash = @PasswordHash, 
+			@PasswordSalt = @PasswordSalt, 
+			@TwoLetterISOLanguageName = @TwoLetterISOLanguageName
+
+		INSERT [dbo].[Sender] ([UserId], [Name], [Email], [TariffOfTapePerBox], [Contact], [Phone], [Address])
+		OUTPUT INSERTED.[Id]
+		SELECT [UserId], @Name, @Email, @TariffOfTapePerBox, @Contact, @Phone, @Address
+		FROM @Table
+
+	COMMIT
+
+END
+GO
 PRINT N'Refreshing [dbo].[Client_DeleteForce]...';
 
 
@@ -579,7 +970,48 @@ EXECUTE sp_refreshsqlmodule N'[dbo].[Transit_GetByApplication]';
 
 
 GO
+PRINT N'Refreshing [dbo].[Client_GetBalance]...';
+
+
+GO
+EXECUTE sp_refreshsqlmodule N'[dbo].[Client_GetBalance]';
+
+
+GO
+PRINT N'Refreshing [dbo].[Client_SetBalance]...';
+
+
+GO
+EXECUTE sp_refreshsqlmodule N'[dbo].[Client_SetBalance]';
+
+
+GO
+PRINT N'Refreshing [dbo].[Client_SumBalance]...';
+
+
+GO
+EXECUTE sp_refreshsqlmodule N'[dbo].[Client_SumBalance]';
+
+
+GO
+PRINT N'Refreshing [dbo].[Transit_GetByClient]...';
+
+
+GO
+EXECUTE sp_refreshsqlmodule N'[dbo].[Transit_GetByClient]';
+
+
+GO
+PRINT N'Refreshing [dbo].[User_GetUserIdByEmail]...';
+
+
+GO
+EXECUTE sp_refreshsqlmodule N'[dbo].[User_GetUserIdByEmail]';
+
+
+GO
 PRINT N'Checking existing data against newly created constraints';
+
 
 GO
 USE [$(MainDbName)] 
@@ -600,12 +1032,9 @@ ALTER TABLE [dbo].[Application] WITH CHECK CHECK CONSTRAINT [FK_dbo.Application_
 
 ALTER TABLE [dbo].[Application] WITH CHECK CHECK CONSTRAINT [FK_dbo.Application_dbo.AirWaybill_AirWaybillId];
 
-
 GO
-
 INSERT [dbo].[Setting] ([Type], [Data]) VALUES
-(1, 0xEFBBBF7B2242616E6B223A22D090D09AD091205C22D0A0D09ED0A1D095D092D0A0D09ED091D090D09DD09A5C222028D09ED090D09E2920D0932E20D09CD09ED0A1D09AD092D090222C22424943223A22303434353835373737222C22436F72726573706F6E64656E744163636F756E74223A223330313031383130383030303030303030373737222C2254494E223A2237373138393533383230222C22546178526567697374726174696F6E526561736F6E436F6465223A22373731383031303031222C2243757272656E744163636F756E74223A223430373032383130393030303030333430333430222C225061796565223A22D0A2D180D18DD0B9D0B420D098D0BDD0B2D0B5D181D18220D09ED09ED09E222C2253686970706572223A22D0A2D180D18DD0B9D0B420D098D0BDD0B2D0B5D181D18220D09ED09ED09E2C20D098D09DD09D20373731383935333832302C20D09AD09FD09F203737313830313030312C203130373131332C20D09CD0BED181D0BAD0B2D0B020D0B32C20D0A1D0BED0BAD0BED0BBD18CD0BDD0B8D187D0B5D181D0BAD0B0D18F20D0BFD0BBD0BED189D0B0D0B4D18C2C20D0B4D0BED0BC20E2849620342C20D0BAD0BED180D0BFD183D18120612C20D0BED184D0B8D181203330392C20D182D0B5D0BB2E3A203838303035353538353233222C2248656164223A22D09DD0B0D0B4D0B8D0BD20D0AF2ED09D2E222C224163636F756E74616E74223A22D09DD0B0D0B4D0B8D0BD20D0AF2ED09D2E222C2248656164657254657874223A22D092D0BDD0B8D0BCD0B0D0BDD0B8D0B52120D09ED0BFD0BBD0B0D182D0B020D0B4D0B0D0BDD0BDD0BED0B3D0BE20D181D187D0B5D182D0B020D0BED0B7D0BDD0B0D187D0B0D0B5D18220D181D0BED0B3D0BBD0B0D181D0B8D0B520D18120D183D181D0BBD0BED0B2D0B8D18FD0BCD0B820D0BFD0BED181D182D0B0D0B2D0BAD0B820D182D0BED0B2D0B0D180D0B02E20D0A3D0B2D0B5D0B4D0BED0BCD0BBD0B5D0BDD0B8D0B520D0BED0B120D0BED0BFD0BBD0B0D182D0B520D0BED0B1D18FD0B7D0B0D182D0B5D0BBD18CD0BDD0BE2C20D0B220D0BFD180D0BED182D0B8D0B2D0BDD0BED0BC20D181D0BBD183D187D0B0D0B520D0BDD0B520D0B3D0B0D180D0B0D0BDD182D0B8D180D183D0B5D182D181D18F20D0BDD0B0D0BBD0B8D187D0B8D0B520D182D0BED0B2D0B0D180D0B020D0BDD0B020D181D0BAD0BBD0B0D0B4D0B52E20D0A2D0BED0B2D0B0D18020D0BED182D0BFD183D181D0BAD0B0D0B5D182D181D18F20D0BFD0BE20D184D0B0D0BAD182D18320D0BFD180D0B8D185D0BED0B4D0B020D0B4D0B5D0BDD0B5D0B320D0BDD0B020D1802FD18120D09FD0BED181D182D0B0D0B2D189D0B8D0BAD0B02C20D181D0B0D0BCD0BED0B2D18BD0B2D0BED0B7D0BED0BC2C20D0BFD180D0B820D0BDD0B0D0BBD0B8D187D0B8D0B820D0B4D0BED0B2D0B5D180D0B5D0BDD0BDD0BED181D182D0B820D0B820D0BFD0B0D181D0BFD0BED180D182D0B02E222C22564154223A302E31382C224575726F546F5275626C65223A35302E307D),
-(2, 0x31)
+(1, 0xEFBBBF7B2242616E6B223A22D090D09AD091205C22D0A0D09ED0A1D095D092D0A0D09ED091D090D09DD09A5C222028D09ED090D09E2920D0932E20D09CD09ED0A1D09AD092D090222C22424943223A22303434353835373737222C22436F72726573706F6E64656E744163636F756E74223A223330313031383130383030303030303030373737222C2254494E223A2237373138393533383230222C22546178526567697374726174696F6E526561736F6E436F6465223A22373731383031303031222C2243757272656E744163636F756E74223A223430373032383130393030303030333430333430222C225061796565223A22D0A2D180D18DD0B9D0B420D098D0BDD0B2D0B5D181D18220D09ED09ED09E222C2253686970706572223A22D0A2D180D18DD0B9D0B420D098D0BDD0B2D0B5D181D18220D09ED09ED09E2C20D098D09DD09D20373731383935333832302C20D09AD09FD09F203737313830313030312C203130373131332C20D09CD0BED181D0BAD0B2D0B020D0B32C20D0A1D0BED0BAD0BED0BBD18CD0BDD0B8D187D0B5D181D0BAD0B0D18F20D0BFD0BBD0BED189D0B0D0B4D18C2C20D0B4D0BED0BC20E2849620342C20D0BAD0BED180D0BFD183D18120612C20D0BED184D0B8D181203330392C20D182D0B5D0BB2E3A203838303035353538353233222C2248656164223A22D09DD0B0D0B4D0B8D0BD20D0AF2ED09D2E222C224163636F756E74616E74223A22D09DD0B0D0B4D0B8D0BD20D0AF2ED09D2E222C2248656164657254657874223A22D092D0BDD0B8D0BCD0B0D0BDD0B8D0B52120D09ED0BFD0BBD0B0D182D0B020D0B4D0B0D0BDD0BDD0BED0B3D0BE20D181D187D0B5D182D0B020D0BED0B7D0BDD0B0D187D0B0D0B5D18220D181D0BED0B3D0BBD0B0D181D0B8D0B520D18120D183D181D0BBD0BED0B2D0B8D18FD0BCD0B820D0BFD0BED181D182D0B0D0B2D0BAD0B820D182D0BED0B2D0B0D180D0B02E20D0A3D0B2D0B5D0B4D0BED0BCD0BBD0B5D0BDD0B8D0B520D0BED0B120D0BED0BFD0BBD0B0D182D0B520D0BED0B1D18FD0B7D0B0D182D0B5D0BBD18CD0BDD0BE2C20D0B220D0BFD180D0BED182D0B8D0B2D0BDD0BED0BC20D181D0BBD183D187D0B0D0B520D0BDD0B520D0B3D0B0D180D0B0D0BDD182D0B8D180D183D0B5D182D181D18F20D0BDD0B0D0BBD0B8D187D0B8D0B520D182D0BED0B2D0B0D180D0B020D0BDD0B020D181D0BAD0BBD0B0D0B4D0B52E20D0A2D0BED0B2D0B0D18020D0BED182D0BFD183D181D0BAD0B0D0B5D182D181D18F20D0BFD0BE20D184D0B0D0BAD182D18320D0BFD180D0B8D185D0BED0B4D0B020D0B4D0B5D0BDD0B5D0B320D0BDD0B020D1802FD18120D09FD0BED181D182D0B0D0B2D189D0B8D0BAD0B02C20D181D0B0D0BCD0BED0B2D18BD0B2D0BED0B7D0BED0BC2C20D0BFD180D0B820D0BDD0B0D0BBD0B8D187D0B8D0B820D0B4D0BED0B2D0B5D180D0B5D0BDD0BDD0BED181D182D0B820D0B820D0BFD0B0D181D0BFD0BED180D182D0B02E222C22564154223A302E31382C224575726F546F5275626C65223A35302E307D)
 
 GO
 PRINT N'Update complete.';

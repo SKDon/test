@@ -10,6 +10,6 @@ param (
 	[string] $newVersion = (Read-Host -Prompt "Input new version")
 )
 
-Sqlcmd -S $server -i "restore-previous.sql" -v DbFolder = "$DbFolder" `
+Sqlcmd -S $server -i ".\Scripts\restore-previous.sql" -v DbFolder = "$DbFolder" `
 		MainDbNew = "$mainDbPrefix`_$newVersion" MainDbOld = "$mainDbPrefix`_$oldVersion" MainDbPath = "$MainDbPath" `
 		FilesDbNew = "$filesDbPrefix`_$newVersion" FilesDbOld = "$filesDbPrefix`_$oldVersion" FilesDbPath = "$FilesDbPath"
