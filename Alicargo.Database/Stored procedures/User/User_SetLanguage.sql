@@ -1,9 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[User_SetLanguage]
 	@UserId BIGINT,
 	@Language CHAR(2)
-AS
-BEGIN
 
+AS BEGIN
 	SET NOCOUNT ON;
 
 	UPDATE TOP(1) [dbo].[User]
