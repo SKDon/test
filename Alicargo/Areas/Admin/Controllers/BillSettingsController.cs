@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Alicargo.Areas.Admin.Models;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -47,7 +48,10 @@ namespace Alicargo.Areas.Admin.Controllers
 				HeaderText = billSettings.HeaderText,
 				Shipper = billSettings.Shipper,
 				VAT = (byte)(billSettings.VAT * 100),
-				EuroToRuble = billSettings.EuroToRuble
+				EuroToRuble = billSettings.EuroToRuble,
+				SourceUrl = billSettings.SourceUrl,
+				AutoUpdatePeriodHours =
+					billSettings.AutoUpdatePeriod.HasValue ? billSettings.AutoUpdatePeriod.Value.Hours : (int?)null
 			};
 
 			return View(model);
@@ -85,7 +89,11 @@ namespace Alicargo.Areas.Admin.Controllers
 				TaxRegistrationReasonCode = model.BankDetails.TaxRegistrationReasonCode,
 				TIN = model.BankDetails.TIN,
 				VAT = (decimal)model.VAT / 100,
-				EuroToRuble = model.EuroToRuble
+				EuroToRuble = model.EuroToRuble,
+				SourceUrl = model.SourceUrl,
+				AutoUpdatePeriod = model.AutoUpdatePeriodHours.HasValue
+					? TimeSpan.FromHours(model.AutoUpdatePeriodHours.Value)
+					: (TimeSpan?)null
 			});
 
 			try
