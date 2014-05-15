@@ -6,19 +6,14 @@ using Alicargo.Jobs.Core;
 
 namespace Alicargo.Jobs
 {
-	public sealed class RunnerHelper
+	public sealed class RunnerController
 	{
 		private readonly CancellationTokenSource _tokenSource = new CancellationTokenSource();
 		private Task[] _tasks;
 
-		public void RunJobs(IRunner[] runners)
+		public void Run(IRunner[] runners)
 		{
-			_tasks = runners.Select(StartTask).ToArray();
-		}
-
-		private Task StartTask(IRunner runner)
-		{
-			return Task.Factory.StartNew(() => runner.Run(_tokenSource), CancellationToken.None);
+			_tasks = runners.Select(Start).ToArray();
 		}
 
 		public bool StopAndWait(TimeSpan stopTimeout)
@@ -26,6 +21,11 @@ namespace Alicargo.Jobs
 			_tokenSource.Cancel(false);
 
 			return Task.WaitAll(_tasks, stopTimeout);
+		}
+
+		private Task Start(IRunner runner)
+		{
+			return Task.Run(() => runner.Run(_tokenSource), CancellationToken.None);
 		}
 	}
 }

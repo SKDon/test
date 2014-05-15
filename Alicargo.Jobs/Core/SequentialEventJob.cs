@@ -24,15 +24,15 @@ namespace Alicargo.Jobs.Core
 
 		public void Work()                                          
 		{
-			foreach (var typeProcessors in _processors)
+			foreach (var eventProcessors in _processors)
 			{
-				var type = typeProcessors.Key;
+				var type = eventProcessors.Key;
 
 				var data = _events.GetNext(type, _partitionId);
 
 				if (data == null) continue;
 
-				var stateProcessors = typeProcessors.Value
+				var stateProcessors = eventProcessors.Value
 					.SkipWhile(x => x.Key != data.State)
 					.ToArray();
 

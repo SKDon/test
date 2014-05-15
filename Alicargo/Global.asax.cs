@@ -29,7 +29,7 @@ namespace Alicargo
 		private readonly string _filesConnectionString =
 			ConfigurationManager.ConnectionStrings["FilesDbConnectionString"].ConnectionString;
 
-		private readonly RunnerHelper _runnerHelper = new RunnerHelper();
+		private readonly RunnerController _runnerController = new RunnerController();
 
 		private readonly StandardKernel _kernel = new StandardKernel();
 
@@ -56,7 +56,7 @@ namespace Alicargo
 			{
 				var runners = _kernel.GetAll<IRunner>().ToArray();
 
-				_runnerHelper.RunJobs(runners);
+				_runnerController.Run(runners);
 			}
 			catch (Exception e)
 			{
@@ -72,7 +72,7 @@ namespace Alicargo
 		{
 			try
 			{
-				var waitAll = _runnerHelper.StopAndWait(PausePeriod.Add(PausePeriod));
+				var waitAll = _runnerController.StopAndWait(PausePeriod.Add(PausePeriod));
 
 				MainLogger.Info(waitAll
 					? "Jobs were stopped"

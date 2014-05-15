@@ -14,12 +14,12 @@ namespace Alicargo.Tests
 		[TestMethod, ExpectedException(typeof(AggregateException))]
 		public void Test_ExceptionOnStart()
 		{
-			var helper = new RunnerHelper();
+			var helper = new RunnerController();
 
 			var runner = new Mock<IRunner>(MockBehavior.Strict);
 			runner.Setup(x => x.Run(It.IsAny<CancellationTokenSource>())).Throws(new Exception("Test_ExceptionOnStart"));
 
-			helper.RunJobs(new[] { runner.Object });
+			helper.Run(new[] { runner.Object });
 
 			try
 			{
