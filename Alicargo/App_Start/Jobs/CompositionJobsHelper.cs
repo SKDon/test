@@ -15,6 +15,7 @@ using Alicargo.DataAccess.Repositories.User;
 using Alicargo.Jobs.Application;
 using Alicargo.Jobs.Application.Helpers;
 using Alicargo.Jobs.Awb;
+using Alicargo.Jobs.Bill;
 using Alicargo.Jobs.Client;
 using Alicargo.Jobs.Client.Balance;
 using Alicargo.Jobs.Client.ClientAdd;
@@ -36,6 +37,10 @@ namespace Alicargo.Jobs
 		public const int PartitionCount = 2;
 		public const int PartitionIdForOtherMails = PartitionCount;
 		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
+
+		private static readonly TimeSpan EuroCourseUpdatePeriod =
+			TimeSpan.Parse(ConfigurationManager.AppSettings["EuroCourseUpdatePeriod"]);
+
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 
 		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
@@ -45,40 +50,49 @@ namespace Alicargo.Jobs
 				var partitionId = i;
 				var mainConnectionString = connectionString;
 
-				BindStatelessJobRunner(kernel,
+				BindDefaultJobRunner(kernel,
 					() => RunBalaceJob(mainConnectionString, filesConnectionString, partitionId),
 					"BalaceJob_" + partitionId);
 
-				BindStatelessJobRunner(kernel,
+				BindDefaultJobRunner(kernel,
 					() => RunApplicationEventsJob(mainConnectionString, filesConnectionString, partitionId),
 					"ApplicationMailCreatorJob_" + partitionId);
 
-				BindStatelessJobRunner(kernel,
+				BindDefaultJobRunner(kernel,
 					() => RunMailSenderJob(mainConnectionString, partitionId),
 					"MailSenderJob_" + partitionId);
 
-				BindStatelessJobRunner(kernel,
+				BindDefaultJobRunner(kernel,
 					() => RunClientJob(mainConnectionString, filesConnectionString, partitionId),
 					"ClientJob_" + partitionId);
 
-				BindStatelessJobRunner(kernel,
+				BindDefaultJobRunner(kernel,
 					() => RunAwbJob(mainConnectionString, filesConnectionString, partitionId),
 					"AwbJob_" + partitionId);
 			}
 
-			BindStatelessJobRunner(kernel,
+			BindDefaultJobRunner(kernel,
 				() => RunMailSenderJob(connectionString, PartitionIdForOtherMails),
 				"MailSenderJob_ForOtherMails");
+
+			BindDefaultJobRunner(kernel, () => RunEuroCourseJob(kernel), "EuroCourseJob", EuroCourseUpdatePeriod);
 		}
 
-		private static void BindStatelessJobRunner(
+		private static void BindDefaultJobRunner(
+			IBindingRoot kernel, Action action,
+			string jobName, TimeSpan pausePeriod)
+		{
+			kernel.Bind<IRunner>()
+				.ToMethod(context => new DefaultRunner(action, jobName, JobsLogger, pausePeriod))
+				.InSingletonScope()
+				.Named(jobName);
+		}
+
+		private static void BindDefaultJobRunner(
 			IBindingRoot kernel, Action action,
 			string jobName)
 		{
-			kernel.Bind<IRunner>()
-				.ToMethod(context => new DefaultRunner(action, jobName, JobsLogger, PausePeriod))
-				.InSingletonScope()
-				.Named(jobName);
+			BindDefaultJobRunner(kernel, action, jobName, PausePeriod);
 		}
 
 		private static IMessageBuilder GetCommonMessageBuilder(
@@ -190,7 +204,11 @@ namespace Alicargo.Jobs
 				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var managerRepository = new ManagerRepository(connection);
-				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository, managerRepository,  brokerRepository, awbs, eventEmailRecipient);
+				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository,
+					managerRepository,
+					brokerRepository,
+					awbs,
+					eventEmailRecipient);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					connection,
@@ -234,7 +252,10 @@ namespace Alicargo.Jobs
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var localizedDataHelper = new BalanceLocalizedDataHelper(clientBalanceRepository, serializer, clientRepository);
 				var managerRepository = new ManagerRepository(connection);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, managerRepository,  clientRepository, eventEmailRecipient);
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository,
+					managerRepository,
+					clientRepository,
+					eventEmailRecipient);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					connection,
@@ -271,7 +292,10 @@ namespace Alicargo.Jobs
 				var localizedDataHelper = new CommonLocalizedDataHelper(serializer, clientRepository);
 				var recipients = new EventEmailRecipient(executor);
 				var managerRepository = new ManagerRepository(connection);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository, managerRepository,  clientRepository, recipients);
+				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository,
+					managerRepository,
+					clientRepository,
+					recipients);
 
 				var messageBuilder = GetCommonMessageBuilder(
 					connection,
@@ -293,6 +317,11 @@ namespace Alicargo.Jobs
 						{ EventType.ClientAdded, processors },
 					}).Work();
 			}
+		}
+
+		private static void RunEuroCourseJob(IResolutionRoot kernel)
+		{
+			kernel.Get<EuroCourseJob>().Work();
 		}
 
 		private static void RunMailSenderJob(string connectionString, int partitionId)
@@ -336,7 +365,7 @@ namespace Alicargo.Jobs
 				awbs,
 				applications,
 				new AdminRepository(connection),
-				new ManagerRepository(connection), 
+				new ManagerRepository(connection),
 				new SenderRepository(passwordConverter, mainExecutor),
 				clientRepository,
 				new CarrierRepository(passwordConverter, mainExecutor),

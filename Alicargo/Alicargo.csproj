@@ -274,7 +274,6 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\Application\OrderHelper.cs" />
-    <Compile Include="App_Start\Jobs\RunnerController.cs" />
     <Compile Include="Controllers\Application\ApplicationController.cs" />
     <Compile Include="Controllers\Application\ApplicationListController.cs" />
     <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />

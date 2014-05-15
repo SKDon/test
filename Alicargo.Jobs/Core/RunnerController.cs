@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Alicargo.Jobs.Core;
 
-namespace Alicargo.Jobs
+namespace Alicargo.Jobs.Core
 {
 	public sealed class RunnerController
 	{
