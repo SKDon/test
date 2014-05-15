@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Alicargo.Core.Common;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,11 +20,11 @@ namespace Alicargo.Core.BlackBox.Tests.Common
 		[TestMethod]
 		public void TestGet()
 		{
-			var bytes = _httpClient.Get("http://export.rbc.ru/free/cb.0/free.fcgi?period=DAILY&tickers=EUR&separator=;&data_format=BROWSER");
+			var bytes = _httpClient.Get("http://export.rbc.ru/free/cb.0/free.fcgi?period=DAILY&tickers=EUR&lastdays=0&separator=;&data_format=BROWSER&header=0");
 
-			var result = Encoding.UTF8.GetString(bytes);
+			var result = Encoding.ASCII.GetString(bytes);
 
-			result.Should().NotBeNull();
+			result.Should().StartWith("EUR;" + DateTime.Now.ToString("yyyy-MM-dd;"));
 		}
 	}
 }

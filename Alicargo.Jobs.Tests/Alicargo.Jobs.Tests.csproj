@@ -81,6 +81,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Bill\EuroCourseJobTests.cs" />
     <Compile Include="Helpers\TemplateRepositoryHelperTests.cs" />
     <Compile Include="Helpers\ClientExcelHelperTests.cs" />
     <Compile Include="Helpers\TemplateRepositoryWrapperTests.cs" />

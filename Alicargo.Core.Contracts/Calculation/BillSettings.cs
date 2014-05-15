@@ -1,4 +1,6 @@
-﻿namespace Alicargo.Core.Contracts.Calculation
+﻿using System;
+
+namespace Alicargo.Core.Contracts.Calculation
 {
 	public sealed class BillSettings
 	{		
@@ -15,5 +17,7 @@
 		public string HeaderText { get; set; }
 		public decimal VAT { get; set; }
 		public decimal EuroToRuble { get; set; } // EUR/RUB
+		public TimeSpan? AutoUpdatePeriod { get; set; }
+		public string SourceUrl { get; set; }
 	}
 }
