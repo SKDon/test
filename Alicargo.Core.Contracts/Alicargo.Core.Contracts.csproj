@@ -54,6 +54,7 @@
     <Compile Include="AirWaybill\IApplicationAwbManager.cs" />
     <Compile Include="AirWaybill\IAwbManager.cs" />
     <Compile Include="Calculation\BillSettings.cs" />
+    <Compile Include="Common\IHttpClient.cs" />
     <Compile Include="Exceptions\AccessForbidenException.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidLogicException.cs" />
