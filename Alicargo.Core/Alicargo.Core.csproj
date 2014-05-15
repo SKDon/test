@@ -77,6 +77,7 @@
     <Compile Include="AirWaybill\AwbGtdHelper.cs" />
     <Compile Include="AirWaybill\AwbHelper.cs" />
     <Compile Include="AirWaybill\AwbManager.cs" />
+    <Compile Include="Common\Holder.cs" />
     <Compile Include="Common\HttpClient.cs" />
     <Compile Include="Excel\Client\CalculationDataDrawable.cs" />
     <Compile Include="Calculation\CalculationHelper.cs" />
