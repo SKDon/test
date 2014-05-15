@@ -34,7 +34,7 @@ namespace Alicargo.Jobs.Bill
 			var data = _settings.Get(SettingType.Bill);
 			var settings = _serializer.Deserialize<BillSettings>(data.Data);
 
-			if(!settings.AutoUpdatePeriod.HasValue)
+			if(!settings.AutoUpdatePeriod.HasValue || string.IsNullOrWhiteSpace(settings.SourceUrl))
 			{
 				return;
 			}

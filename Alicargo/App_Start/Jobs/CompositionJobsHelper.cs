@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Alicargo.Core.Common;
 using Alicargo.Core.Email;
 using Alicargo.Core.Excel.Client;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -37,45 +38,44 @@ namespace Alicargo.Jobs
 		public const int PartitionCount = 2;
 		public const int PartitionIdForOtherMails = PartitionCount;
 		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
-
-		private static readonly TimeSpan EuroCourseUpdatePeriod =
-			TimeSpan.Parse(ConfigurationManager.AppSettings["EuroCourseUpdatePeriod"]);
-
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 
-		public static void BindJobs(IKernel kernel, string connectionString, string filesConnectionString)
+		private static readonly Holder<DateTimeOffset> PreviousRunEuroCourseJobRubTime =
+			new Holder<DateTimeOffset>(DateTimeProvider.Now);
+
+		public static void BindJobs(IKernel kernel, string mainConnectionString, string filesConnectionString)
 		{
 			for(var i = 0; i < PartitionCount; i++)
 			{
 				var partitionId = i;
-				var mainConnectionString = connectionString;
+				var connectionString = mainConnectionString;
 
 				BindDefaultJobRunner(kernel,
-					() => RunBalaceJob(mainConnectionString, filesConnectionString, partitionId),
+					() => RunBalaceJob(connectionString, filesConnectionString, partitionId),
 					"BalaceJob_" + partitionId);
 
 				BindDefaultJobRunner(kernel,
-					() => RunApplicationEventsJob(mainConnectionString, filesConnectionString, partitionId),
+					() => RunApplicationEventsJob(connectionString, filesConnectionString, partitionId),
 					"ApplicationMailCreatorJob_" + partitionId);
 
 				BindDefaultJobRunner(kernel,
-					() => RunMailSenderJob(mainConnectionString, partitionId),
+					() => RunMailSenderJob(connectionString, partitionId),
 					"MailSenderJob_" + partitionId);
 
 				BindDefaultJobRunner(kernel,
-					() => RunClientJob(mainConnectionString, filesConnectionString, partitionId),
+					() => RunClientJob(connectionString, filesConnectionString, partitionId),
 					"ClientJob_" + partitionId);
 
 				BindDefaultJobRunner(kernel,
-					() => RunAwbJob(mainConnectionString, filesConnectionString, partitionId),
+					() => RunAwbJob(connectionString, filesConnectionString, partitionId),
 					"AwbJob_" + partitionId);
 			}
 
 			BindDefaultJobRunner(kernel,
-				() => RunMailSenderJob(connectionString, PartitionIdForOtherMails),
+				() => RunMailSenderJob(mainConnectionString, PartitionIdForOtherMails),
 				"MailSenderJob_ForOtherMails");
 
-			BindDefaultJobRunner(kernel, () => RunEuroCourseJob(kernel), "EuroCourseJob", EuroCourseUpdatePeriod);
+			BindDefaultJobRunner(kernel, () => RunEuroCourseJob(mainConnectionString), "EuroCourseJob");
 		}
 
 		private static void BindDefaultJobRunner(
@@ -319,9 +319,14 @@ namespace Alicargo.Jobs
 			}
 		}
 
-		private static void RunEuroCourseJob(IResolutionRoot kernel)
+		private static void RunEuroCourseJob(string connectionString)
 		{
-			kernel.Get<EuroCourseJob>().Work();
+			var serializer = new Serializer();
+			var executor = new SqlProcedureExecutor(connectionString);
+			var settings = new SettingRepository(executor, serializer);
+			var httpClient = new HttpClient();
+
+			new EuroCourseJob(settings, httpClient, serializer, PreviousRunEuroCourseJobRubTime).Work();
 		}
 
 		private static void RunMailSenderJob(string connectionString, int partitionId)
