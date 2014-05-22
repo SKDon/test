@@ -7,7 +7,7 @@
 	$("#Language").change(function(e) {
 		e.preventDefault();
 		var lang = $(e.target).val();
-		var url = $u.State_Edit + "/" + stateId + "?lang=" + lang;
+		var url = $u.Admin_State_Edit + "/" + stateId + "?lang=" + lang;
 
 		$a.LoadPage(url);
 	});

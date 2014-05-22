@@ -2,7 +2,7 @@
 using Alicargo.Core.Resources;
 using Alicargo.Utilities.Localization;
 
-namespace Alicargo.ViewModels.State
+namespace Alicargo.Areas.Admin.Models.State
 {
 	public sealed class StateCreateModel
 	{

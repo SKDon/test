@@ -10,7 +10,7 @@
 			transport: {
 				read: {
 					dataType: "json",
-					url: $u.State_List,
+					url: $u.Admin_State_List,
 					type: "POST",
 					cache: false
 				}
@@ -58,7 +58,7 @@
 							e.preventDefault();
 							var tr = $(e.target).closest("tr");
 							var data = this.dataItem(tr);
-							var url = $u.StateSettings_Index + "/Index/" + data.Id;
+							var url = $u.Admin_StateSettings_Index + "/Index/" + data.Id;
 
 							$a.LoadPage(url);
 						}
@@ -71,7 +71,7 @@
 							e.preventDefault();
 							var tr = $(e.target).closest("tr");
 							var data = this.dataItem(tr);
-							var url = $u.State_Edit + "/" + data.Id;
+							var url = $u.Admin_State_Edit + "/" + data.Id;
 
 							$a.LoadPage(url);
 						}
@@ -84,7 +84,7 @@
 							if ($a.Confirm($a.Localization.Pages_DeleteConfirm)) {
 								var tr = $(e.target).closest("tr");
 								var data = this.dataItem(tr);
-								var url = $u.State_Delete;
+								var url = $u.Admin_State_Delete;
 								$.post(url, { id: data.Id }).done(updateGrid).fail($a.ShowError);
 							}
 						}

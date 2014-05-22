@@ -21,7 +21,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Areas.Admin.Controllers
 {
     public partial class StateController
     {
@@ -68,9 +68,9 @@ namespace Alicargo.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public StateController Actions { get { return MVC.State; } }
+        public StateController Actions { get { return MVC.Admin.State; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "State";
         [GeneratedCode("T4MVC", "2.0")]
@@ -140,9 +140,9 @@ namespace Alicargo.Controllers
                 public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
             }
-            public readonly string Create = "~/Views/State/Create.cshtml";
-            public readonly string Edit = "~/Views/State/Edit.cshtml";
-            public readonly string Index = "~/Views/State/Index.cshtml";
+            public readonly string Create = "~/Areas/Admin/Views/State/Create.cshtml";
+            public readonly string Edit = "~/Areas/Admin/Views/State/Edit.cshtml";
+            public readonly string Index = "~/Areas/Admin/Views/State/Index.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -155,7 +155,7 @@ namespace Alicargo.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_StateController : Alicargo.Controllers.StateController
+    public partial class T4MVC_StateController : Alicargo.Areas.Admin.Controllers.StateController
     {
         public T4MVC_StateController() : base(Dummy.Instance) { }
 
@@ -171,10 +171,10 @@ namespace Alicargo.Controllers
         }
 
         [NonAction]
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.State.StateCreateModel model);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.Areas.Admin.Models.State.StateCreateModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Create(Alicargo.ViewModels.State.StateCreateModel model)
+        public override System.Web.Mvc.ActionResult Create(Alicargo.Areas.Admin.Models.State.StateCreateModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -208,10 +208,10 @@ namespace Alicargo.Controllers
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.State.StateEditModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.Areas.Admin.Models.State.StateEditModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Edit(Alicargo.ViewModels.State.StateEditModel model)
+        public override System.Web.Mvc.ActionResult Edit(Alicargo.Areas.Admin.Models.State.StateEditModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

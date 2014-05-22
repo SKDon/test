@@ -164,6 +164,12 @@
     <Compile Include="Admin.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Admin.StateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.StateSettingsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="AdminAwbController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -263,12 +269,6 @@
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="StateController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StateSettingsController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -287,8 +287,8 @@
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\Application\SenderApplicationController.cs" />
     <Compile Include="Controllers\Calculation\BalanceController.cs" />
-    <Compile Include="Controllers\StateController.cs" />
-    <Compile Include="Controllers\StateSettingsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StateController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StateSettingsController.cs" />
     <Compile Include="Controllers\User\ForwarderController.cs" />
     <Compile Include="Controllers\User\RestorePasswordController.cs" />
     <Compile Include="App_Start\Mvc\CssPaths.cs" />
@@ -463,9 +463,9 @@
     <Compile Include="ViewModels\Calculation\Admin\CalculationItem.cs" />
     <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
     <Compile Include="ViewModels\Helpers\EmailTemplateSettingsModelHelper.cs" />
-    <Compile Include="ViewModels\State\StateCreateModel.cs" />
-    <Compile Include="ViewModels\State\StateEditModel.cs" />
-    <Compile Include="ViewModels\State\StateSettingsModel.cs" />
+    <Compile Include="Areas\Admin\Models\State\StateCreateModel.cs" />
+    <Compile Include="Areas\Admin\Models\State\StateEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\State\StateSettingsModel.cs" />
     <Compile Include="ViewModels\TransitMapper.cs" />
     <Compile Include="ViewModels\User\ClientListItem.cs" />
     <Compile Include="ViewModels\User\ClientModel.cs" />
@@ -752,12 +752,12 @@
     <Content Include="Views\Sender\EditorTemplates\SenderModel.cshtml" />
     <Content Include="Views\SenderCalculation\Index.cshtml" />
     <Content Include="Views\SenderCalculation\Details.cshtml" />
-    <Content Include="Views\State\Index.cshtml" />
-    <Content Include="Views\State\Create.cshtml" />
-    <Content Include="Views\State\Edit.cshtml" />
-    <Content Include="Views\State\EditorTemplates\StateEditModel.cshtml" />
-    <Content Include="Views\State\EditorTemplates\StateCreateModel.cshtml" />
-    <Content Include="Views\StateSettings\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\State\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\State\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\State\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\State\EditorTemplates\StateEditModel.cshtml" />
+    <Content Include="Areas\Admin\Views\State\EditorTemplates\StateCreateModel.cshtml" />
+    <Content Include="Areas\Admin\Views\StateSettings\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Index.cshtml" />
     <Content Include="Views\EmailTemplate\Edit.cshtml" />
     <Content Include="Views\EmailTemplate\EditorTemplates\EventTemplateModel.cshtml" />

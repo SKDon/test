@@ -1,7 +1,7 @@
 ﻿@using Alicargo.Core.Resources
 @using Alicargo.DataAccess.Contracts.Resources
 @using Resources
-@model Alicargo.ViewModels.State.StateSettingsModel
+@model Alicargo.Areas.Admin.Models.State.StateSettingsModel
 <div class="template-edit-settings container-edit">
 	<b>
 		@ViewBag.StateName
@@ -42,7 +42,7 @@
 		</table>
 		<p>
 			<input type="submit" class="btn btn-primary" value="@Pages.Save" />
-			@Html.ActionLink(Pages.Cancel, MVC.StateSettings.Index(), new { @class = "btn" })
+			@Html.ActionLink(Pages.Cancel, MVC.Admin.StateSettings.Index(), new { @class = "btn" })
 		</p>
 	}
 </div>

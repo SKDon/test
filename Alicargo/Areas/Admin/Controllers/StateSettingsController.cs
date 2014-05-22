@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Alicargo.Areas.Admin.Models.State;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.ViewModels.Helpers;
-using Alicargo.ViewModels.State;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Areas.Admin.Controllers
 {
+	[Access(RoleType.Admin, RoleType.Manager)]
 	public partial class StateSettingsController : Controller
 	{
 		private readonly IIdentityService _identity;
@@ -27,7 +28,6 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Index(long id)
 		{
 			var state = _states.Get(_identity.Language, id).First().Value;
@@ -46,10 +46,9 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Index(long id, StateSettingsModel model)
 		{
-			if (!ModelState.IsValid)
+			if(!ModelState.IsValid)
 			{
 				throw new InvalidOperationException("Failed to save state settings. State id: " + id);
 			}
@@ -57,7 +56,7 @@ namespace Alicargo.Controllers
 			_settings.SetStateAvailabilities(id, model.Availabilities.GetSettings());
 			_settings.SetStateVisibilities(id, model.Visibilities.GetSettings());
 
-			return RedirectToAction(MVC.StateSettings.Index(id));
+			return RedirectToAction(MVC.Admin.StateSettings.Index(id));
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Alicargo.Areas.Admin.Models.State;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -9,11 +10,11 @@ using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
-using Alicargo.ViewModels.State;
 using Resources;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Areas.Admin.Controllers
 {
+	[Access(RoleType.Admin, RoleType.Manager)]
 	public partial class StateController : Controller
 	{
 		private readonly IIdentityService _identity;
@@ -31,14 +32,12 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Create()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Create(StateCreateModel model)
 		{
 			if(!ModelState.IsValid)
@@ -50,18 +49,18 @@ namespace Alicargo.Controllers
 
 			var language = _identity.Language;
 
-			var id = _states.Add(language, new StateData
-			{
-				LocalizedName = model.Name,
-				Name = model.Name,
-				Position = model.Position
-			});
+			var id = _states.Add(language,
+				new StateData
+				{
+					LocalizedName = model.Name,
+					Name = model.Name,
+					Position = model.Position
+				});
 
-			return RedirectToAction(MVC.State.Edit(id, language));
+			return RedirectToAction(MVC.Admin.State.Edit(id, language));
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Delete(long id)
 		{
 			try
@@ -77,7 +76,6 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Edit(long id, string lang)
 		{
 			BindLanguageList();
@@ -88,7 +86,6 @@ namespace Alicargo.Controllers
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Edit(StateEditModel model)
 		{
 			if(!ModelState.IsValid)
@@ -98,24 +95,24 @@ namespace Alicargo.Controllers
 				return View(model);
 			}
 
-			_states.Update(model.Id, model.Language, new StateData
-			{
-				LocalizedName = model.LocalizedName,
-				Name = model.Name,
-				Position = model.Position
-			});
+			_states.Update(model.Id,
+				model.Language,
+				new StateData
+				{
+					LocalizedName = model.LocalizedName,
+					Name = model.Name,
+					Position = model.Position
+				});
 
-			return RedirectToAction(MVC.State.Edit(model.Id, model.Language));
+			return RedirectToAction(MVC.Admin.State.Edit(model.Id, model.Language));
 		}
 
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Index()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List()
 		{

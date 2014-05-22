@@ -1,6 +1,6 @@
 ﻿using Alicargo.ViewModels.EmailTemplate;
 
-namespace Alicargo.ViewModels.State
+namespace Alicargo.Areas.Admin.Models.State
 {
 	public sealed class StateSettingsModel
 	{

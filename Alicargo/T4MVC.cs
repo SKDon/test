@@ -48,8 +48,6 @@ public static partial class MVC
     public static Alicargo.Controllers.ExcelController Excel = new Alicargo.Controllers.T4MVC_ExcelController();
     public static Alicargo.Controllers.FilesController Files = new Alicargo.Controllers.T4MVC_FilesController();
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
-    public static Alicargo.Controllers.StateController State = new Alicargo.Controllers.T4MVC_StateController();
-    public static Alicargo.Controllers.StateSettingsController StateSettings = new Alicargo.Controllers.T4MVC_StateSettingsController();
     public static Alicargo.Controllers.TransitController Transit = new Alicargo.Controllers.T4MVC_TransitController();
     public static Alicargo.Controllers.User.AuthenticationController Authentication = new Alicargo.Controllers.User.T4MVC_AuthenticationController();
     public static Alicargo.Controllers.User.CarrierController Carrier = new Alicargo.Controllers.User.T4MVC_CarrierController();
@@ -69,6 +67,8 @@ namespace T4MVC
         public readonly string Name = "Admin";
         public Alicargo.Areas.Admin.Controllers.BillController Bill = new Alicargo.Areas.Admin.Controllers.T4MVC_BillController();
         public Alicargo.Areas.Admin.Controllers.BillSettingsController BillSettings = new Alicargo.Areas.Admin.Controllers.T4MVC_BillSettingsController();
+        public Alicargo.Areas.Admin.Controllers.StateController State = new Alicargo.Areas.Admin.Controllers.T4MVC_StateController();
+        public Alicargo.Areas.Admin.Controllers.StateSettingsController StateSettings = new Alicargo.Areas.Admin.Controllers.T4MVC_StateSettingsController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
 }

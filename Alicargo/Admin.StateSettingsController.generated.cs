@@ -21,7 +21,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Areas.Admin.Controllers
 {
     public partial class StateSettingsController
     {
@@ -62,9 +62,9 @@ namespace Alicargo.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public StateSettingsController Actions { get { return MVC.StateSettings; } }
+        public StateSettingsController Actions { get { return MVC.Admin.StateSettings; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "StateSettings";
         [GeneratedCode("T4MVC", "2.0")]
@@ -107,12 +107,12 @@ namespace Alicargo.Controllers
             {
                 public readonly string Index = "Index";
             }
-            public readonly string Index = "~/Views/StateSettings/Index.cshtml";
+            public readonly string Index = "~/Areas/Admin/Views/StateSettings/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_StateSettingsController : Alicargo.Controllers.StateSettingsController
+    public partial class T4MVC_StateSettingsController : Alicargo.Areas.Admin.Controllers.StateSettingsController
     {
         public T4MVC_StateSettingsController() : base(Dummy.Instance) { }
 
@@ -129,10 +129,10 @@ namespace Alicargo.Controllers
         }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.ViewModels.State.StateSettingsModel model);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id, Alicargo.Areas.Admin.Models.State.StateSettingsModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(long id, Alicargo.ViewModels.State.StateSettingsModel model)
+        public override System.Web.Mvc.ActionResult Index(long id, Alicargo.Areas.Admin.Models.State.StateSettingsModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
