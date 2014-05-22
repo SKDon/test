@@ -1,1 +1,0 @@
-﻿.\Scripts\resend-failed-emails.ps1 .\SQLEXPRESS "Alicargo" Dev
