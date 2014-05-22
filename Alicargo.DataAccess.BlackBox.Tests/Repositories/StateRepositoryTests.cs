@@ -46,7 +46,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
 
-			actual.ShouldBeEquivalentTo(data);
+			actual.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
+			actual.IsSystem.Should().BeFalse();
 
 			_states.Delete(id);
 
@@ -98,7 +99,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
 
-			actual.ShouldBeEquivalentTo(data);
+			actual.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
+			actual.IsSystem.Should().BeFalse();
 
 			var newData = _fixture.Create<StateEditData>();
 			newData.Language = TwoLetterISOLanguageName.English;
@@ -107,13 +109,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
 
-			actual.ShouldBeEquivalentTo(newData);
+			actual.ShouldBeEquivalentTo(newData, options => options.ExcludingMissingProperties());
+			actual.IsSystem.Should().BeFalse();
 		}
 
 		[TestMethod]
 		public void Test_StateRepository_UpdateOtheLang()
 		{
-			var id = _states.Add(_fixture.Build<StateEditData>().With(x => x.Language, TwoLetterISOLanguageName.English).Create());
+			var data = _fixture.Build<StateEditData>().With(x => x.Language, TwoLetterISOLanguageName.English).Create();
+			var id = _states.Add(data);
 
 			var itData = _fixture.Build<StateEditData>().With(x => x.Language, TwoLetterISOLanguageName.Italian).Create();
 
@@ -121,11 +125,14 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 
 			var itActual = _states.Get(TwoLetterISOLanguageName.Italian, id).Single().Value;
 
-			itActual.ShouldBeEquivalentTo(itData);
+			itActual.ShouldBeEquivalentTo(itData, options => options.ExcludingMissingProperties());
+			itActual.IsSystem.Should().BeFalse();
 
 			var enActual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
 
 			enActual.ShouldBeEquivalentTo(itActual, options => options.Excluding(x => x.LocalizedName));
+			enActual.IsSystem.Should().BeFalse();
+			enActual.LocalizedName.ShouldBeEquivalentTo(data.LocalizedName);
 		}
 	}
 }
