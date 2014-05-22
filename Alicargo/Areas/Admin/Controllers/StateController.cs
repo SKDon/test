@@ -49,12 +49,13 @@ namespace Alicargo.Areas.Admin.Controllers
 
 			var language = _identity.Language;
 
-			var id = _states.Add(language,
-				new StateData
+			var id = _states.Add(
+				new StateEditData
 				{
 					LocalizedName = model.Name,
 					Name = model.Name,
-					Position = model.Position
+					Position = model.Position,
+					Language = language
 				});
 
 			return RedirectToAction(MVC.Admin.State.Edit(id, language));
@@ -96,12 +97,12 @@ namespace Alicargo.Areas.Admin.Controllers
 			}
 
 			_states.Update(model.Id,
-				model.Language,
-				new StateData
+				new StateEditData
 				{
 					LocalizedName = model.LocalizedName,
 					Name = model.Name,
-					Position = model.Position
+					Position = model.Position,
+					Language = model.Language
 				});
 
 			return RedirectToAction(MVC.Admin.State.Edit(model.Id, model.Language));
@@ -119,7 +120,8 @@ namespace Alicargo.Areas.Admin.Controllers
 			var states = _states.Get(_identity.Language).Select(x => new
 			{
 				Id = x.Key,
-				Name = x.Value.LocalizedName
+				Name = x.Value.LocalizedName,
+				CanDelete = !x.Value.IsSystem
 			}).ToArray();
 
 			return Json(states);

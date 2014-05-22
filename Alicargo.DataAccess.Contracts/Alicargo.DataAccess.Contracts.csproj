@@ -57,6 +57,7 @@
     <Compile Include="Contracts\Application\ApplicationData.cs" />
     <Compile Include="Contracts\EventDataForEntity.cs" />
     <Compile Include="Contracts\Setting.cs" />
+    <Compile Include="Contracts\State\StateEditData.cs" />
     <Compile Include="Contracts\User\ClientBalanceHistoryItem.cs" />
     <Compile Include="Contracts\User\ClientEditData.cs" />
     <Compile Include="Contracts\User\EmailData.cs" />

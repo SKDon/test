@@ -17,9 +17,15 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	{
 		private const long DefaultStateId = 1;
 
-		private IStateRepository _states;
 		private DbTestContext _context;
 		private Fixture _fixture;
+		private IStateRepository _states;
+
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -30,10 +36,29 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			_states = new StateRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
 		}
 
-		[TestCleanup]
-		public void TestCleanup()
+		[TestMethod]
+		public void Test_StateRepository_Delete()
 		{
-			_context.Cleanup();
+			var data = _fixture.Create<StateEditData>();
+			data.Language = TwoLetterISOLanguageName.English;
+
+			var id = _states.Add(data);
+
+			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
+
+			actual.ShouldBeEquivalentTo(data);
+
+			_states.Delete(id);
+
+			_states.Get(TwoLetterISOLanguageName.English, id).Should().BeEmpty();
+		}
+
+		[TestMethod]
+		public void Test_StateRepository_Get()
+		{
+			var states = _states.Get(TwoLetterISOLanguageName.Italian, 1, 2, 3);
+
+			states.Count.ShouldBeEquivalentTo(3);
 		}
 
 		[TestMethod]
@@ -44,14 +69,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var all = _states.Get(TwoLetterISOLanguageName.English);
 
 			Assert.AreEqual(all.Count, states.Count);
-		}
-
-		[TestMethod]
-		public void Test_StateRepository_Get()
-		{
-			var states = _states.Get(TwoLetterISOLanguageName.Italian, 1, 2, 3);
-
-			states.Count.ShouldBeEquivalentTo(3);
 		}
 
 		[TestMethod]
@@ -72,13 +89,35 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		}
 
 		[TestMethod]
+		public void Test_StateRepository_Upate()
+		{
+			var data = _fixture.Create<StateEditData>();
+			data.Language = TwoLetterISOLanguageName.English;
+
+			var id = _states.Add(data);
+
+			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
+
+			actual.ShouldBeEquivalentTo(data);
+
+			var newData = _fixture.Create<StateEditData>();
+			newData.Language = TwoLetterISOLanguageName.English;
+
+			_states.Update(id, newData);
+
+			actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
+
+			actual.ShouldBeEquivalentTo(newData);
+		}
+
+		[TestMethod]
 		public void Test_StateRepository_UpdateOtheLang()
 		{
-			var id = _states.Add(TwoLetterISOLanguageName.English, _fixture.Create<StateData>());
+			var id = _states.Add(_fixture.Build<StateEditData>().With(x => x.Language, TwoLetterISOLanguageName.English).Create());
 
-			var itData = _fixture.Create<StateData>();
+			var itData = _fixture.Build<StateEditData>().With(x => x.Language, TwoLetterISOLanguageName.Italian).Create();
 
-			_states.Update(id, TwoLetterISOLanguageName.Italian, itData);
+			_states.Update(id, itData);
 
 			var itActual = _states.Get(TwoLetterISOLanguageName.Italian, id).Single().Value;
 
@@ -87,42 +126,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 			var enActual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
 
 			enActual.ShouldBeEquivalentTo(itActual, options => options.Excluding(x => x.LocalizedName));
-		}
-
-		[TestMethod]
-		public void Test_StateRepository_Upate()
-		{
-			var data = _fixture.Create<StateData>();
-
-			var id = _states.Add(TwoLetterISOLanguageName.English, data);
-
-			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
-
-			actual.ShouldBeEquivalentTo(data);
-
-			var newData = _fixture.Create<StateData>();
-
-			_states.Update(id, TwoLetterISOLanguageName.English, newData);
-
-			actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
-
-			actual.ShouldBeEquivalentTo(newData);
-		}
-
-		[TestMethod]
-		public void Test_StateRepository_Delete()
-		{
-			var data = _fixture.Create<StateData>();
-
-			var id = _states.Add(TwoLetterISOLanguageName.English, data);
-
-			var actual = _states.Get(TwoLetterISOLanguageName.English, id).Single().Value;
-
-			actual.ShouldBeEquivalentTo(data);
-
-			_states.Delete(id);
-
-			_states.Get(TwoLetterISOLanguageName.English, id).Should().BeEmpty();
 		}
 	}
 }

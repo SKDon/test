@@ -5,9 +5,9 @@ namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface IStateRepository
 	{
-		long Add(string language, StateData data);
-		IReadOnlyDictionary<long, StateData> Get(string language, params long[] ids);
-		void Update(long id, string language, StateData data);
+		long Add(StateEditData data);
 		void Delete(long id);
+		IReadOnlyDictionary<long, StateData> Get(string language, params long[] ids);
+		void Update(long id, StateEditData data);
 	}
 }
