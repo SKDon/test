@@ -6,10 +6,10 @@
 	"Alicargo" `
 	"Alicargo_Files" `
 	2_4 `
-	Dev
+	2_5
 
 Write-Host "Updating..."
-.\Scripts\update-db.ps1 .\SQLEXPRESS Alicargo Alicargo_Files Dev
+.\Scripts\update-db.ps1 .\SQLEXPRESS Alicargo Alicargo_Files 2_5
 
 Write-Host "Done."
 cmd /c pause | out-null
