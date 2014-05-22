@@ -39,7 +39,7 @@
 			$("tr a.k-grid-custom-delete").each(function() {
 				var button = $(this);
 				var dataItem = getGrid().dataItem(button.closest("tr"));
-				if (dataItem.IsSystem) {
+				if (!dataItem.Deletable) {
 					button.remove();
 				}
 			});

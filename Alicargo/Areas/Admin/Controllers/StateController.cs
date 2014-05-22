@@ -121,7 +121,7 @@ namespace Alicargo.Areas.Admin.Controllers
 			{
 				Id = x.Key,
 				Name = x.Value.LocalizedName,
-				CanDelete = !x.Value.IsSystem
+				Deletable = !x.Value.IsSystem
 			}).ToArray();
 
 			return Json(states);
