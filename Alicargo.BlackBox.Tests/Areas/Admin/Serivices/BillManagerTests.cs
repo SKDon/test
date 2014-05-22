@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices.Bill;
 using Alicargo.BlackBox.Tests.Properties;
@@ -48,7 +49,8 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 
 			billData.Number.ShouldBeEquivalentTo(number);
 			billData.SendDate.Should().NotHaveValue();
-			billData.Price.ShouldBeEquivalentTo(model.PriceRuble / billData.EuroToRuble);
+			Debug.Assert(model.PriceRuble != null, "model.PriceRuble != null");
+			billData.Price.Should().BeApproximately(model.PriceRuble.Value / billData.EuroToRuble, (decimal)0.0001);
 			billData.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
 			billData.ShouldBeEquivalentTo(model.BankDetails, options => options.ExcludingMissingProperties());
 		}
@@ -67,7 +69,8 @@ namespace Alicargo.BlackBox.Tests.Areas.Admin.Serivices
 
 			billData.Number.ShouldBeEquivalentTo(number);
 			billData.SendDate.ShouldBeEquivalentTo(sendDate);
-			billData.Price.ShouldBeEquivalentTo(model.PriceRuble / billData.EuroToRuble);
+			Debug.Assert(model.PriceRuble != null, "model.PriceRuble != null");
+			billData.Price.Should().BeApproximately(model.PriceRuble.Value / billData.EuroToRuble, (decimal)0.0001);
 			billData.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties());
 			billData.ShouldBeEquivalentTo(model.BankDetails, options => options.ExcludingMissingProperties());
 		}
