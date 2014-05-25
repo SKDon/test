@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Alicargo.Core.Contracts.Common;
 
 namespace Alicargo.Jobs.Bill.Helpers
@@ -8,12 +9,14 @@ namespace Alicargo.Jobs.Bill.Helpers
 		private readonly ushort _attempts;
 		private readonly ICourseSource _courseSource;
 		private readonly ILog _log;
+		private readonly TimeSpan _waitPeriod;
 
-		public CourseSourceRetryPolicy(ICourseSource courseSource, ushort attempts, ILog log)
+		public CourseSourceRetryPolicy(ICourseSource courseSource, ushort attempts, ILog log, TimeSpan waitPeriod)
 		{
 			_courseSource = courseSource;
 			_attempts = attempts;
 			_log = log;
+			_waitPeriod = waitPeriod;
 		}
 
 		public decimal GetEuroToRuble(string url)
@@ -31,6 +34,7 @@ namespace Alicargo.Jobs.Bill.Helpers
 					if(counter < _attempts)
 					{
 						_log.Warning("Attempt "  + counter + " to get course of euro to ruble is failed." + Environment.NewLine + e);
+						Thread.Sleep(_waitPeriod);
 					}
 					else
 					{

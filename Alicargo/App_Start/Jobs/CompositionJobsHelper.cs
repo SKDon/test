@@ -333,7 +333,7 @@ namespace Alicargo.Jobs
 			var emailMessageRepository = new EmailMessageRepository(executor);
 			var mailSender = new DbMailSender(PartitionIdForOtherMails, emailMessageRepository, serializer);
 			var courseSource = new CourseSourceFailPolicy(
-				new CourseSourceRetryPolicy(new CourseSource(httpClient), CourseSourceAttempts, JobsLogger),
+				new CourseSourceRetryPolicy(new CourseSource(httpClient), CourseSourceAttempts, JobsLogger, TimeSpan.FromMinutes(1)),
 				mailSender,
 				EmailsHelper.DefaultFrom,
 				EmailsHelper.SupportEmail);
