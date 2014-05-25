@@ -10,6 +10,11 @@ namespace Alicargo.TestHelpers
 			Console.WriteLine(message + exception);
 		}
 
+		public void Warning(string message)
+		{
+			Console.WriteLine(message);
+		}
+
 		public void Info(string message)
 		{
 			Console.WriteLine(message);
