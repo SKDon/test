@@ -19,6 +19,11 @@ namespace Alicargo.Services
 			_log.Error(message, exception);
 		}
 
+		public void Warning(string message)
+		{
+			_log.Warn(message);
+		}
+
 		public void Info(string message)
 		{
 			_log.Info(message);
