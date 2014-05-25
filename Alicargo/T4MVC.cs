@@ -327,10 +327,10 @@ namespace Links
                 public static readonly string globalize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.min.js") ? Url("globalize.min.js") : Url("globalize.js");
             }
         
-            public static readonly string jquery_2_1_0_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.0.intellisense.min.js") ? Url("jquery-2.1.0.intellisense.min.js") : Url("jquery-2.1.0.intellisense.js");
-            public static readonly string jquery_2_1_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.0.min.js") ? Url("jquery-2.1.0.min.js") : Url("jquery-2.1.0.js");
-            public static readonly string jquery_2_1_0_min_js = Url("jquery-2.1.0.min.js");
-            public static readonly string jquery_2_1_0_min_map = Url("jquery-2.1.0.min.map");
+            public static readonly string jquery_2_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.intellisense.min.js") ? Url("jquery-2.1.1.intellisense.min.js") : Url("jquery-2.1.1.intellisense.js");
+            public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
+            public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
+            public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
             public static readonly string jquery_ui_1_10_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.10.4.min.js") ? Url("jquery-ui-1.10.4.min.js") : Url("jquery-ui-1.10.4.js");
             public static readonly string jquery_ui_1_10_4_min_js = Url("jquery-ui-1.10.4.min.js");
             public static readonly string jquery_cookie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cookie.min.js") ? Url("jquery.cookie.min.js") : Url("jquery.cookie.js");
