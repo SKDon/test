@@ -22,7 +22,7 @@ namespace Alicargo.Jobs.Bill.Helpers
 			var response = Encoding.ASCII.GetString(bytes);
 			if(string.IsNullOrWhiteSpace(response))
 			{
-				throw new InvalidDataException("Was no data on the EUR course");
+				throw new InvalidDataException("Was no data on the EUR course. Source: " + url);
 			}
 
 			var part = response.Split(new[] { ';' }, StringSplitOptions.None)[EurPosition];
