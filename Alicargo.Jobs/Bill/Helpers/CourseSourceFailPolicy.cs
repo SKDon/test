@@ -7,10 +7,14 @@ namespace Alicargo.Jobs.Bill.Helpers
 	public sealed class CourseSourceFailPolicy : ICourseSource
 	{
 		private readonly ICourseSource _courseSource;
+		private readonly string _fromEmail;
 		private readonly IMailSender _sender;
+		private readonly string _supportEmail;
 
-		public CourseSourceFailPolicy(ICourseSource courseSource, IMailSender sender)
+		public CourseSourceFailPolicy(ICourseSource courseSource, IMailSender sender, string fromEmail, string supportEmail)
 		{
+			_supportEmail = supportEmail;
+			_fromEmail = fromEmail;
 			_courseSource = courseSource;
 			_sender = sender;
 		}
@@ -23,7 +27,13 @@ namespace Alicargo.Jobs.Bill.Helpers
 			}
 			catch(Exception e)
 			{
-				//_sender.Send(new EmailMessage("Alicargo. Ошибка", "Не удалось обновить курс евро по ",));
+				if(!string.IsNullOrWhiteSpace(_supportEmail))
+				{
+					var body = "Не удалось обновить курс евро из " + url + Environment.NewLine + e;
+					var message = new EmailMessage("Alicargo. Ошибка обновления курса", body, _fromEmail, _supportEmail);
+
+					_sender.Send(message);
+				}
 
 				throw;
 			}

@@ -8,6 +8,7 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 	public static class EmailsHelper
 	{
 		public static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
+		public static readonly string SupportEmail = ConfigurationManager.AppSettings["SupportEmail"];
 
 		private const string EmailPattern = @".+@.+\..+";
 

@@ -39,7 +39,10 @@ namespace Alicargo.Jobs
 		public const int PartitionCount = 2;
 		public const int PartitionIdForOtherMails = PartitionCount;
 		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
-		private static readonly ushort CourseSourceAttempts = ushort.Parse(ConfigurationManager.AppSettings["CourseSourceAttempts"]);
+
+		private static readonly ushort CourseSourceAttempts =
+			ushort.Parse(ConfigurationManager.AppSettings["CourseSourceAttempts"]);
+
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 
 		private static readonly Holder<DateTimeOffset> PreviousRunEuroCourseJobRubTime =
@@ -331,7 +334,9 @@ namespace Alicargo.Jobs
 			var mailSender = new DbMailSender(PartitionIdForOtherMails, emailMessageRepository, serializer);
 			var courseSource = new CourseSourceFailPolicy(
 				new CourseSourceRetryPolicy(new CourseSource(httpClient), CourseSourceAttempts, JobsLogger),
-				mailSender);
+				mailSender,
+				EmailsHelper.DefaultFrom,
+				EmailsHelper.SupportEmail);
 
 			new EuroCourseJob(settings, courseSource, serializer, PreviousRunEuroCourseJobRubTime).Work();
 		}
