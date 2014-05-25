@@ -49,7 +49,7 @@ namespace Alicargo.DataAccess.Helpers
 			{
 				var index = identity.ForDynamicParameters(type);
 
-				return SqlMapper.CreateParamInfoGenerator(index, true);
+				return SqlMapper.CreateParamInfoGenerator(index, true, true);
 			});
 
 			paramInfoGenerator(command, parameters);
