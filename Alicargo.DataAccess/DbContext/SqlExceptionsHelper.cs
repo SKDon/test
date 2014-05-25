@@ -45,7 +45,6 @@ namespace Alicargo.DataAccess.DbContext
 			}
 		}
 
-		[Obsolete]
 		public static void SaveChanges(this AlicargoDataContext context)
 		{
 			Action(() => context.SubmitChanges(ConflictMode.FailOnFirstConflict));
