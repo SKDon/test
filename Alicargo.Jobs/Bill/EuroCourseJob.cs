@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Globalization;
-using System.Text;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
+using Alicargo.Jobs.Bill.Helpers;
 using Alicargo.Jobs.Core;
 using Alicargo.Utilities;
 
@@ -14,17 +13,19 @@ namespace Alicargo.Jobs.Bill
 {
 	public sealed class EuroCourseJob : IJob
 	{
-		private const int EurPosition = 5;
-		private readonly IHttpClient _httpClient;
+		private readonly ICourseSource _courseSource;
 		private readonly IHolder<DateTimeOffset> _previousTime;
 		private readonly ISerializer _serializer;
 		private readonly ISettingRepository _settings;
 
 		public EuroCourseJob(
-			ISettingRepository settings, IHttpClient httpClient, ISerializer serializer, IHolder<DateTimeOffset> previousTime)
+			ISettingRepository settings,
+			ICourseSource courseSource,
+			ISerializer serializer,
+			IHolder<DateTimeOffset> previousTime)
 		{
 			_settings = settings;
-			_httpClient = httpClient;
+			_courseSource = courseSource;
 			_serializer = serializer;
 			_previousTime = previousTime;
 		}
@@ -45,23 +46,13 @@ namespace Alicargo.Jobs.Bill
 				return;
 			}
 
-			settings.EuroToRuble = GetEuroToRuble(settings.SourceUrl);
+			settings.EuroToRuble = _courseSource.GetEuroToRuble(settings.SourceUrl);
 
 			data.Data = _serializer.Serialize(settings);
 
 			Update(data);
 
 			_previousTime.Set(DateTimeProvider.Now);
-		}
-
-		private decimal GetEuroToRuble(string sourceUrl)
-		{
-			// todo: send email on fail (279, 280)
-			var bytes = _httpClient.Get(sourceUrl);
-			var response = Encoding.ASCII.GetString(bytes);
-			var part = response.Split(new[] { ';' }, StringSplitOptions.None)[EurPosition];
-
-			return decimal.Parse(part, new NumberFormatInfo { CurrencyDecimalSeparator = "." });
 		}
 
 		private void Update(Setting data)

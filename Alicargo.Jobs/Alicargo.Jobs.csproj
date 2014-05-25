@@ -54,7 +54,11 @@
     </Compile>
     <Compile Include="Application\Abstract\IApplicationEventTemplates.cs" />
     <Compile Include="Awb\AwbEventRecipientsFacade.cs" />
+    <Compile Include="Bill\Helpers\CourseSource.cs" />
+    <Compile Include="Bill\Helpers\CourseSourceFailPolicy.cs" />
+    <Compile Include="Bill\Helpers\CourseSourceRetryPolicy.cs" />
     <Compile Include="Bill\EuroCourseJob.cs" />
+    <Compile Include="Bill\Helpers\ICourseSource.cs" />
     <Compile Include="Client\Balance\BalanceLocalizedDataHelper.cs" />
     <Compile Include="Client\Balance\PaymentEventData.cs" />
     <Compile Include="Awb\AwbEventLocalizedDataHelper.cs" />

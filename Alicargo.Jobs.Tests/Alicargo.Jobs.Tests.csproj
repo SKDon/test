@@ -82,6 +82,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Bill\EuroCourseJobTests.cs" />
+    <Compile Include="Bill\Helpers\CourseSourceRetryPolicyTests.cs" />
+    <Compile Include="Bill\Helpers\CourseSourceTests.cs" />
     <Compile Include="Helpers\TemplateRepositoryHelperTests.cs" />
     <Compile Include="Helpers\ClientExcelHelperTests.cs" />
     <Compile Include="Helpers\TemplateRepositoryWrapperTests.cs" />

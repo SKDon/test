@@ -17,6 +17,7 @@ using Alicargo.Jobs.Application;
 using Alicargo.Jobs.Application.Helpers;
 using Alicargo.Jobs.Awb;
 using Alicargo.Jobs.Bill;
+using Alicargo.Jobs.Bill.Helpers;
 using Alicargo.Jobs.Client;
 using Alicargo.Jobs.Client.Balance;
 using Alicargo.Jobs.Client.ClientAdd;
@@ -38,6 +39,7 @@ namespace Alicargo.Jobs
 		public const int PartitionCount = 2;
 		public const int PartitionIdForOtherMails = PartitionCount;
 		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
+		private static readonly ushort CourseSourceAttempts = ushort.Parse(ConfigurationManager.AppSettings["CourseSourceAttempts"]);
 		private static readonly ILog JobsLogger = new Log4NetWrapper(LogManager.GetLogger("JobsLogger"));
 
 		private static readonly Holder<DateTimeOffset> PreviousRunEuroCourseJobRubTime =
@@ -325,8 +327,13 @@ namespace Alicargo.Jobs
 			var executor = new SqlProcedureExecutor(connectionString);
 			var settings = new SettingRepository(executor, serializer);
 			var httpClient = new HttpClient();
+			var emailMessageRepository = new EmailMessageRepository(executor);
+			var mailSender = new DbMailSender(PartitionIdForOtherMails, emailMessageRepository, serializer);
+			var courseSource = new CourseSourceFailPolicy(
+				new CourseSourceRetryPolicy(new CourseSource(httpClient), CourseSourceAttempts, JobsLogger),
+				mailSender);
 
-			new EuroCourseJob(settings, httpClient, serializer, PreviousRunEuroCourseJobRubTime).Work();
+			new EuroCourseJob(settings, courseSource, serializer, PreviousRunEuroCourseJobRubTime).Work();
 		}
 
 		private static void RunMailSenderJob(string connectionString, int partitionId)
