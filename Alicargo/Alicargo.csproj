@@ -635,7 +635,10 @@
     <Content Include="Areas\Admin\Views\Bill\Sent.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
-    <None Include="Scripts\jQuery\jquery-2.1.0.intellisense.js" />
+    <None Include="Scripts\jQuery\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.1.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.1.min.map" />
     <None Include="Scripts\jQuery\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jQuery\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jQuery\jquery.unobtrusive-ajax.min.js" />
@@ -643,9 +646,6 @@
     <Content Include="Scripts\jQuery\jquery.validate.min.js" />
     <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jQuery\jquery-2.1.0.js" />
-    <Content Include="Scripts\jQuery\jquery-2.1.0.min.js" />
-    <Content Include="Scripts\jQuery\jquery-2.1.0.min.map" />
     <Content Include="Scripts\app\State\Edit.js" />
     <Content Include="Scripts\app\State\Grid.js" />
     <Content Include="Scripts\app\Template\Edit.js" />
