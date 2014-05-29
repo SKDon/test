@@ -70,18 +70,26 @@
     <Folder Include="Tables" />
     <Folder Include="Stored procedures" />
     <Folder Include="Types" />
+    <Folder Include="Stored procedures\ApplicationFile" />
+    <Folder Include="Stored procedures\ClientContract" />
+    <Folder Include="Stored procedures\AwbFile" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ClientContract.sql" />
-    <Build Include="Stored procedures\ClientContract_Get.sql" />
-    <Build Include="Stored procedures\ClientContract_GetFileName.sql" />
-    <Build Include="Stored procedures\ClientContract_Merge.sql" />
     <Build Include="Tables\ApplicationFile.sql" />
-    <Build Include="Stored procedures\ApplicationFile_GetNames.sql" />
-    <Build Include="Stored procedures\ApplicationFile_Add.sql" />
-    <Build Include="Stored procedures\ApplicationFile_Delete.sql" />
-    <Build Include="Stored procedures\ApplicationFile_Get.sql" />
     <Build Include="Types\IdsTable.sql" />
+    <Build Include="Tables\AwbFile.sql" />
+    <Build Include="Stored procedures\ApplicationFile\ApplicationFile_Add.sql" />
+    <Build Include="Stored procedures\ApplicationFile\ApplicationFile_Delete.sql" />
+    <Build Include="Stored procedures\ApplicationFile\ApplicationFile_Get.sql" />
+    <Build Include="Stored procedures\ApplicationFile\ApplicationFile_GetNames.sql" />
+    <Build Include="Stored procedures\ClientContract\ClientContract_Get.sql" />
+    <Build Include="Stored procedures\ClientContract\ClientContract_GetFileName.sql" />
+    <Build Include="Stored procedures\ClientContract\ClientContract_Merge.sql" />
+    <Build Include="Stored procedures\AwbFile\AwbFile_Add.sql" />
+    <Build Include="Stored procedures\AwbFile\AwbFile_Delete.sql" />
+    <Build Include="Stored procedures\AwbFile\AwbFile_Get.sql" />
+    <Build Include="Stored procedures\AwbFile\AwbFile_GetNames.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.publish.xml" />

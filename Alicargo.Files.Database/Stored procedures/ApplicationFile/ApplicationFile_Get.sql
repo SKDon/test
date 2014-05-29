@@ -1,8 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[ApplicationFile_Get]
 	@Id BIGINT
-AS
-BEGIN
 
+AS BEGIN
 	SET NOCOUNT ON;
 
 	SELECT TOP(1) [Name], [Data]

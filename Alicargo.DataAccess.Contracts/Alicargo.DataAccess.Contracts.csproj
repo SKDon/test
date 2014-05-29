@@ -79,6 +79,7 @@
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\User\ForwarderData.cs" />
     <Compile Include="Contracts\User\UserData.cs" />
+    <Compile Include="Enums\AwbFileType.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\CurrencyName.cs" />
     <Compile Include="Enums\CurrencyType.cs" />

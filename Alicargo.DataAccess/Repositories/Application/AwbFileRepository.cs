@@ -1,92 +1,59 @@
-﻿using System;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
-using Alicargo.DataAccess.DbContext;
+using Alicargo.DataAccess.Helpers;
 
 namespace Alicargo.DataAccess.Repositories.Application
 {
 	public sealed class AwbFileRepository : IAwbFileRepository
 	{
-		private readonly AlicargoDataContext _context;
+		private readonly ISqlProcedureExecutor _executor;
 
-		public AwbFileRepository(IDbConnection connection)
+		public AwbFileRepository(ISqlProcedureExecutor executor)
 		{
-			_context = new AlicargoDataContext(connection);
+			_executor = executor;
 		}
 
-		public FileHolder GetAWBFile(long awbId)
+		public IReadOnlyDictionary<long, string> GetNames(long awbId, AwbFileType type)
 		{
-			return GetFile(
-				x => x.Id == awbId && x.AWBFileData != null && x.AWBFileName != null,
-				x => new FileHolder
-				{
-					Data = x.AWBFileData.ToArray(),
-					Name = x.AWBFileName
-				});
+			var idsTable = TableParameters.GeIdsTable("AwbIds", new[] { awbId });
+			var parameters = new TableParameters(new { TypeId = type }, idsTable);
+
+			return _executor.Array<dynamic>("[dbo].[AwbFile_GetNames]", parameters)
+				.ToDictionary(x => (long)x.Id, x => (string)x.Name);
 		}
 
-		public FileHolder GetGTDFile(long awbId)
+		public IReadOnlyDictionary<long, FileInfo[]> GetInfo(long[] awbIds, AwbFileType type)
 		{
-			return GetFile(
-				x => x.Id == awbId && x.GTDFileName != null && x.GTDFileData != null,
-				x => new FileHolder
-				{
-					Name = x.GTDFileName,
-					Data = x.GTDFileData.ToArray()
-				});
+			var idsTable = TableParameters.GeIdsTable("AwbIds", awbIds);
+			var parameters = new TableParameters(new { TypeId = type }, idsTable);
+
+			return _executor.Array<dynamic>("[dbo].[AwbFile_GetNames]", parameters)
+				.GroupBy(x => (long)x.AwbId)
+				.ToDictionary(a => a.Key,
+					a => a.Select(x => new FileInfo
+					{
+						Id = x.Id,
+						Name = x.Name
+					}).ToArray());
 		}
 
-		public FileHolder GetPackingFile(long awbId)
+		public FileHolder Get(long id)
 		{
-			return GetFile(
-				x => x.Id == awbId && x.PackingFileData != null && x.PackingFileName != null,
-				x => new FileHolder
-				{
-					Data = x.PackingFileData.ToArray(),
-					Name = x.PackingFileName
-				});
+			return _executor.Query<FileHolder>("[dbo].[AwbFile_Get]", new { id });
 		}
 
-		public FileHolder GetDrawFile(long awbId)
+		public long Add(long awbId, AwbFileType type, string name, byte[] data)
 		{
-			return GetFile(
-				x => x.Id == awbId && x.DrawFileData != null && x.DrawFileName != null,
-				x => new FileHolder
-				{
-					Data = x.DrawFileData.ToArray(),
-					Name = x.DrawFileName
-				});
+			return _executor.Query<long>("[dbo].[AwbFile_Add]", new { awbId, TypeId = type, name, data });
 		}
 
-		public FileHolder GTDAdditionalFile(long awbId)
+		public void Delete(long id)
 		{
-			return GetFile(
-				x => x.Id == awbId && x.GTDAdditionalFileName != null && x.GTDAdditionalFileData != null,
-				x => new FileHolder
-				{
-					Name = x.GTDAdditionalFileName,
-					Data = x.GTDAdditionalFileData.ToArray()
-				});
-		}
-
-		public FileHolder GetInvoiceFile(long awbId)
-		{
-			return GetFile(
-				x => x.Id == awbId && x.InvoiceFileName != null && x.InvoiceFileData != null,
-				x => new FileHolder
-				{
-					Name = x.InvoiceFileName,
-					Data = x.InvoiceFileData.ToArray()
-				});
-		}
-
-		private FileHolder GetFile(Expression<Func<AirWaybill, bool>> where,
-			Expression<Func<AirWaybill, FileHolder>> selector)
-		{
-			return _context.AirWaybills.Where(where).Select(selector).FirstOrDefault();
+			_executor.Execute("[dbo].[AwbFile_Delete]", new { id });
 		}
 	}
 }

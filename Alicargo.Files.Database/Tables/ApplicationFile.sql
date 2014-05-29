@@ -11,6 +11,3 @@
 	CONSTRAINT [PK_dbo.ApplicationFile] PRIMARY KEY CLUSTERED ([Id] ASC)
 )
 GO
-
-CREATE NONCLUSTERED INDEX [IX_ApplicationFile_ApplicationId_TypeId] ON [dbo].[ApplicationFile]([ApplicationId], [TypeId])
-GO

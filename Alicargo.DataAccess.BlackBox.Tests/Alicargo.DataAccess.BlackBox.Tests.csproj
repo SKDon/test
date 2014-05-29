@@ -95,6 +95,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\ApplicationRepositoryOrdererTests.cs" />
+    <Compile Include="Repositories\Application\UnitTest1.cs" />
     <Compile Include="Repositories\CountryRepositoryTests.cs" />
     <Compile Include="Repositories\EmailMessageRepositoryTests.cs" />
     <Compile Include="Repositories\EventEmailRecipientTests.cs" />

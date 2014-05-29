@@ -1,8 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[ApplicationFile_Delete]
 	@Id BIGINT
-AS
-BEGIN
 
+AS BEGIN
 	SET NOCOUNT ON;
 
 	DELETE TOP(1) [dbo].[ApplicationFile]
