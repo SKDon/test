@@ -19,6 +19,7 @@ namespace Alicargo.Controllers.Application
 			{
 				{ ApplicationFileType.CP, EventType.CPFileUploaded },
 				{ ApplicationFileType.Invoice, EventType.InvoiceFileUploaded },
+				{ ApplicationFileType.Other, EventType.OtherFileUploaded },
 				{ ApplicationFileType.DeliveryBill, EventType.DeliveryBillFileUploaded },
 				{ ApplicationFileType.Torg12, EventType.Torg12FileUploaded },
 				{ ApplicationFileType.Swift, EventType.SwiftFileUploaded },

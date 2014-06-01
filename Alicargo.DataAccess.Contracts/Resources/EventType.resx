@@ -198,4 +198,7 @@
   <data name="SetBroker" xml:space="preserve">
     <value>Set broker</value>
   </data>
+  <data name="OtherFileUploaded" xml:space="preserve">
+    <value>Other file uploaded</value>
+  </data>
 </root>

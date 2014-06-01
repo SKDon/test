@@ -49,6 +49,9 @@ namespace Alicargo.DataAccess.Contracts.Enums
 		[DisplayNameLocalized(typeof(Resources.EventType), "Torg12FileUploaded")]
 		Torg12FileUploaded = 8,
 
+		[DisplayNameLocalized(typeof(Resources.EventType), "OtherFileUploaded")]
+		OtherFileUploaded,
+
 
 		// Application's calculation events
 		[DisplayNameLocalized(typeof(Resources.EventType), "Calculate")]

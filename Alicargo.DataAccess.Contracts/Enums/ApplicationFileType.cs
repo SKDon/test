@@ -2,6 +2,7 @@
 {
 	public enum ApplicationFileType
 	{
+		Other = 0,
 		Invoice = 1,
 		Swift = 2,
 		CP = 3,

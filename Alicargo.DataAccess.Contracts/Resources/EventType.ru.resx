@@ -198,4 +198,7 @@
   <data name="SetBroker" xml:space="preserve">
     <value>Установка брокера</value>
   </data>
+  <data name="OtherFileUploaded" xml:space="preserve">
+    <value>Загружен файл без типа</value>
+  </data>
 </root>

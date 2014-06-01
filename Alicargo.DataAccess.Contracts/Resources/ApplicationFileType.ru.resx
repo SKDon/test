@@ -126,6 +126,9 @@
   <data name="Invoice" xml:space="preserve">
     <value>Инвойс</value>
   </data>
+  <data name="Other" xml:space="preserve">
+    <value>Другое</value>
+  </data>
   <data name="Packing" xml:space="preserve">
     <value>Пакинг</value>
   </data>

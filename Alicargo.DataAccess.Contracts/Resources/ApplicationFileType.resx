@@ -126,6 +126,9 @@
   <data name="Invoice" xml:space="preserve">
     <value>Invoice</value>
   </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="Packing" xml:space="preserve">
     <value>Packing</value>
   </data>
