@@ -10,9 +10,9 @@ using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Extensions;
 using Alicargo.MvcHelpers.Filters;
 
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Application
 {
-	public partial class FilesController : Controller
+	public partial class ApplicationFilesController : Controller
 	{
 		private static readonly IReadOnlyDictionary<ApplicationFileType, EventType> TypesMapping
 			= new Dictionary<ApplicationFileType, EventType>
@@ -28,7 +28,7 @@ namespace Alicargo.Controllers
 		private readonly IEventFacade _facade;
 		private readonly IApplicationFileRepository _files;
 
-		public FilesController(
+		public ApplicationFilesController(
 			IApplicationFileRepository files,
 			IEventFacade facade)
 		{
@@ -79,8 +79,8 @@ namespace Alicargo.Controllers
 
 			return Json(names.Select(x => new
 			{
-				id = x.Key,
-				name = x.Value
+				id = x.Id,
+				name = x.Name
 			}), JsonRequestBehavior.AllowGet);
 		}
 

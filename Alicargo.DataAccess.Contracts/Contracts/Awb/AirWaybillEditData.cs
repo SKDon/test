@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace Alicargo.DataAccess.Contracts.Contracts
+namespace Alicargo.DataAccess.Contracts.Contracts.Awb
 {
-	public sealed class AirWaybillData
+	public class AirWaybillEditData
 	{
-		public long Id { get; set; }
 		public DateTimeOffset CreationTimestamp { get; set; }
 		public string Bill { get; set; }
 		public string ArrivalAirport { get; set; }
@@ -20,13 +19,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 		public decimal? CustomCost { get; set; }
 		public decimal? BrokerCost { get; set; }
 		public decimal? AdditionalCost { get; set; }
-		public decimal? TotalCostOfSenderForWeight { get; set; }
-		
-		public string GTDFileName { get; set; }
-		public string GTDAdditionalFileName { get; set; }
-		public string PackingFileName { get; set; }
-		public string InvoiceFileName { get; set; }
-		public string AWBFileName { get; set; }
-		public string DrawFileName { get; set; }
+		public decimal? TotalCostOfSenderForWeight { get; set; }		
 	}
 }

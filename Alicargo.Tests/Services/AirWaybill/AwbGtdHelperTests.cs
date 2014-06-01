@@ -1,6 +1,7 @@
 ﻿using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;

@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[User] (
 	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
 	[Login] NVARCHAR (320) NOT NULL,
-	[PasswordHash] VARBINARY (MAX) NOT NULL,
-	[PasswordSalt] VARBINARY (MAX) NOT NULL,
+	[PasswordHash] VARBINARY (8000) NOT NULL,
+	[PasswordSalt] VARBINARY (8000) NOT NULL,
 	[TwoLetterISOLanguageName] CHAR(2) NOT NULL CONSTRAINT [DF_User_TwoLetterISOLanguageName] DEFAULT 'en',
 
 	CONSTRAINT [PK_dbo.User] PRIMARY KEY CLUSTERED ([Id] ASC)

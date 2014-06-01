@@ -143,7 +143,7 @@ namespace Alicargo.Jobs
 				calculationRepository,
 				clientBalanceRepository,
 				clientRepository);
-			var awbFiles = new AwbFileRepository(connection);
+			var awbFiles = new AwbFileRepository(filesExecutor);
 			var clientExcelHelper = new ClientExcelHelper(clientRepository, excelClientCalculation);
 			var serializer = new Serializer();
 

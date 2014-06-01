@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -17,28 +17,42 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_executor = executor;
 		}
 
-		public IReadOnlyDictionary<long, string> GetNames(long awbId, AwbFileType type)
+		public ReadOnlyCollection<FileInfo> GetNames(long awbId, AwbFileType type)
 		{
 			var idsTable = TableParameters.GeIdsTable("AwbIds", new[] { awbId });
 			var parameters = new TableParameters(new { TypeId = type }, idsTable);
 
-			return _executor.Array<dynamic>("[dbo].[AwbFile_GetNames]", parameters)
-				.ToDictionary(x => (long)x.Id, x => (string)x.Name);
+			var infos = _executor.Array<dynamic>("[dbo].[AwbFile_GetNames]", parameters)
+				.Select(x => new FileInfo
+				{
+					Id = x.Id,
+					Name = x.Name
+				})
+				.ToArray();
+
+			return new ReadOnlyCollection<FileInfo>(infos);
 		}
 
-		public IReadOnlyDictionary<long, FileInfo[]> GetInfo(long[] awbIds, AwbFileType type)
+		public ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>> GetInfo(long[] awbIds, AwbFileType type)
 		{
 			var idsTable = TableParameters.GeIdsTable("AwbIds", awbIds);
-			var parameters = new TableParameters(new { TypeId = type }, idsTable);
+			var parameters = new TableParameters(new { TypAwbFile_GetNameseId = type }, idsTable);
 
-			return _executor.Array<dynamic>("[dbo].[AwbFile_GetNames]", parameters)
+			var dictionary = _executor.Array<dynamic>("[dbo].[]", parameters)
 				.GroupBy(x => (long)x.AwbId)
 				.ToDictionary(a => a.Key,
-					a => a.Select(x => new FileInfo
+					a =>
 					{
-						Id = x.Id,
-						Name = x.Name
-					}).ToArray());
+						var infos = a.Select(x => new FileInfo
+						{
+							Id = x.Id,
+							Name = x.Name
+						}).ToArray();
+
+						return new ReadOnlyCollection<FileInfo>(infos);
+					});
+
+			return new ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>>(dictionary);
 		}
 
 		public FileHolder Get(long id)
@@ -54,6 +68,43 @@ namespace Alicargo.DataAccess.Repositories.Application
 		public void Delete(long id)
 		{
 			_executor.Execute("[dbo].[AwbFile_Delete]", new { id });
+		}
+
+		public FileHolder GTDAdditionalFile(long awbId)
+		{
+			return GetFileHolder(awbId, AwbFileType.GTDAdditional);
+		}
+
+		public FileHolder GetAWBFile(long awbId)
+		{
+			return GetFileHolder(awbId, AwbFileType.AWB);
+		}
+
+		public FileHolder GetGTDFile(long awbId)
+		{
+			return GetFileHolder(awbId, AwbFileType.GTD);
+		}
+
+		public FileHolder GetInvoiceFile(long awbId)
+		{
+			return GetFileHolder(awbId, AwbFileType.Invoice);
+		}
+
+		public FileHolder GetPackingFile(long awbId)
+		{
+			return GetFileHolder(awbId, AwbFileType.Packing);
+		}
+
+		public FileHolder GetDrawFile(long awbId)
+		{
+			return GetFileHolder(awbId, AwbFileType.Draw);
+		}
+
+		private FileHolder GetFileHolder(long awbId, AwbFileType awbFileType)
+		{
+			var name = GetNames(awbId, awbFileType).FirstOrDefault();
+
+			return name != null ? Get(name.Id) : null;
 		}
 	}
 }

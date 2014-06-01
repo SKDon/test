@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Filters;

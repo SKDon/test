@@ -2,6 +2,7 @@
 using Alicargo.Core.Contracts.Event;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 
@@ -11,8 +12,8 @@ namespace Alicargo.Core.AirWaybill
 	{
 		private readonly IApplicationAwbManager _applicationAwbManager;
 		private readonly IApplicationRepository _applications;
-		private readonly IApplicationEditor _editor;
 		private readonly IAwbRepository _awbs;
+		private readonly IApplicationEditor _editor;
 		private readonly IEventFacade _events;
 
 		public AwbManager(
@@ -29,16 +30,14 @@ namespace Alicargo.Core.AirWaybill
 			_editor = editor;
 		}
 
-		public long Create(long? applicationId, AirWaybillData data, byte[] gtdFile,
-			byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile, byte[] awbFile, byte[] drawFile)
+		public long Create(long? applicationId, AirWaybillData data)
 		{
 			if(data.GTD != null)
 			{
 				throw new InvalidLogicException("GTD data should be defined by update");
 			}
 
-			var id = _awbs.Add(data, gtdFile, gtdAdditionalFile, packingFile,
-				invoiceFile, awbFile, drawFile);
+			var id = _awbs.Add(data);
 
 			if(applicationId.HasValue)
 			{

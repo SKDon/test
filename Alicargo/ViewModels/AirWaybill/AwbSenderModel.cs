@@ -6,8 +6,6 @@ namespace Alicargo.ViewModels.AirWaybill
 {
 	public sealed class AwbSenderModel
 	{
-		#region Data
-
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "AirWaybill")]
 		public string Bill { get; set; }
@@ -36,21 +34,5 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		[DisplayNameLocalized(typeof(Entities), "TotalCostOfSenderForWeight")]
 		public decimal? TotalCostOfSenderForWeight { get; set; }
-
-		#endregion
-
-		#region Files
-
-		[DisplayNameLocalized(typeof(Entities), "Packing")]
-		public byte[] PackingFile { get; set; }
-
-		public string PackingFileName { get; set; }
-
-		[DisplayNameLocalized(typeof(Entities), "AWB")]
-		public byte[] AWBFile { get; set; }
-
-		public string AWBFileName { get; set; }
-
-		#endregion
 	}
 }

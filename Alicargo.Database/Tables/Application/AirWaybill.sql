@@ -11,19 +11,6 @@
 	[GTD]							NVARCHAR (320)		NULL,
 	[Bill]							NVARCHAR (320)		NOT NULL,
 
-	[GTDFileData]					VARBINARY (MAX)		NULL,
-	[GTDFileName]					NVARCHAR(320)		NULL,
-	[GTDAdditionalFileData]			VARBINARY (MAX)		NULL,
-	[GTDAdditionalFileName]			NVARCHAR(320)		NULL,
-	[PackingFileData]				VARBINARY (MAX)		NULL,
-	[PackingFileName]				NVARCHAR(320)		NULL,
-	[InvoiceFileData]				VARBINARY (MAX)		NULL,
-	[InvoiceFileName]				NVARCHAR(320)		NULL,
-	[AWBFileData]					VARBINARY (MAX)		NULL,
-	[AWBFileName]					NVARCHAR(320)		NULL,
-	[DrawFileData]					VARBINARY (MAX)		NULL,
-	[DrawFileName]					NVARCHAR(320)		NULL,
-
 	[StateId]						BIGINT				NOT NULL,
 	[StateChangeTimestamp]			DATETIMEOFFSET		CONSTRAINT [DF_AirWaybill_StateChangeTimestamp] DEFAULT (GETUTCDATE()) NOT NULL,
 

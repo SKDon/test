@@ -21,12 +21,12 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Alicargo.Controllers
+namespace Alicargo.Controllers.Application
 {
-    public partial class FilesController
+    public partial class ApplicationFilesController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected FilesController(Dummy d) { }
+        protected ApplicationFilesController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -98,13 +98,13 @@ namespace Alicargo.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public FilesController Actions { get { return MVC.Files; } }
+        public ApplicationFilesController Actions { get { return MVC.ApplicationFiles; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Files";
+        public readonly string Name = "ApplicationFiles";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Files";
+        public const string NameConst = "ApplicationFiles";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -208,17 +208,17 @@ namespace Alicargo.Controllers
                 public readonly string FilesHolder = "FilesHolder";
                 public readonly string SenderApplication = "SenderApplication";
             }
-            public readonly string AdminApplication = "~/Views/Files/AdminApplication.cshtml";
-            public readonly string ClientApplication = "~/Views/Files/ClientApplication.cshtml";
-            public readonly string FilesHolder = "~/Views/Files/FilesHolder.cshtml";
-            public readonly string SenderApplication = "~/Views/Files/SenderApplication.cshtml";
+            public readonly string AdminApplication = "~/Views/ApplicationFiles/AdminApplication.cshtml";
+            public readonly string ClientApplication = "~/Views/ApplicationFiles/ClientApplication.cshtml";
+            public readonly string FilesHolder = "~/Views/ApplicationFiles/FilesHolder.cshtml";
+            public readonly string SenderApplication = "~/Views/ApplicationFiles/SenderApplication.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_FilesController : Alicargo.Controllers.FilesController
+    public partial class T4MVC_ApplicationFilesController : Alicargo.Controllers.Application.ApplicationFilesController
     {
-        public T4MVC_FilesController() : base(Dummy.Instance) { }
+        public T4MVC_ApplicationFilesController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void DownloadOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);

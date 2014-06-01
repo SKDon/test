@@ -111,11 +111,11 @@ namespace Alicargo.Jobs.Application.Helpers
 			var countryName = _countries.All(language).First(x => x.Id == application.CountryId).Name;
 			var cityName = _cities.All(language).First(x => x.Id == application.TransitCityId).Name;
 			var value = LocalizationHelper.GetValueString(application.Value, application.CurrencyId, culture);
-			var deliveryBill = _files.GetNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Value).ToArray();
-			var invoice = _files.GetNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Value).ToArray();
-			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Value).ToArray();
-			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Value).ToArray();
-			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Value).ToArray();
+			var deliveryBill = _files.GetNames(application.Id, ApplicationFileType.DeliveryBill).Select(x => x.Name).ToArray();
+			var invoice = _files.GetNames(application.Id, ApplicationFileType.Invoice).Select(x => x.Name).ToArray();
+			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Name).ToArray();
+			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Name).ToArray();
+			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Name).ToArray();
 
 			var localizedData = new Dictionary<string, string>();
 			Add(localizedData, "AddressLoad", application.AddressLoad);

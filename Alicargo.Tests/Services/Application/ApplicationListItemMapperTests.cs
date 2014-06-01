@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
@@ -61,7 +62,7 @@ namespace Alicargo.Tests.Services.Application
 			}
 
 			_context.ApplicationFileRepository.Setup(x => x.GetInfo(It.IsAny<long[]>(), It.IsAny<ApplicationFileType>()))
-				.Returns(new Dictionary<long, FileInfo[]>(0));
+				.Returns(new ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>>(new Dictionary<long, ReadOnlyCollection<FileInfo>>(0)));
 
 			_context.IdentityService.SetupGet(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 			_context.CountryRepository.Setup(x => x.All(TwoLetterISOLanguageName.English)).Returns(_countries.ToArray());

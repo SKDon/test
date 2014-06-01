@@ -7,7 +7,7 @@
 	@:# if(StateId != @StateConfig.CargoReceivedStateId){ #
 	<a href="@Url.Action(MVC.ClientApplication.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
 	@:# } #
-	<a href="@Url.Action(MVC.Files.ClientApplication())/#= Id #" class="btn btn-info">@Pages.Files</a>
+	<a href="@Url.Action(MVC.ApplicationFiles.ClientApplication())/#= Id #" class="btn btn-info">@Pages.Files</a>
 }
 
 @helper CloseButton()
@@ -30,42 +30,42 @@
 			# for(var i in InvoiceFiles) { #
 			# var item = InvoiceFiles[i]; #
 			# if(!item || !item.Id) continue; #
-			<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #
 			# } #
 			# if(SwiftFiles != null){ #
 			# for(var i in SwiftFiles) { #
 			# var item = SwiftFiles[i]; #
 			# if(!item || !item.Id) continue; #
-			<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #
 			# } #
 			# if(DeliveryBillFiles != null){ #
 			# for(i in DeliveryBillFiles) { #
 			# var item = DeliveryBillFiles[i]; #
 			# if(!item || !item.Id) continue; #
-			<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #
 			# } #
 			# if(Torg12Files != null){ #
 			# for(i in Torg12Files) { #
 			# var item = Torg12Files[i]; #
 			# if(!item || !item.Id) continue; #
-			<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #
 			# } #
 			# if(CPFiles != null){ #
 			# for(i in CPFiles) { #
 			# var item = CPFiles[i]; #
 			# if(!item || !item.Id) continue; #
-			<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #
 			# } #
 			# if(PackingFiles != null){ #
 			# for(i in PackingFiles) { #
 			# var item = PackingFiles[i]; #
 			# if(!item || !item.Id) continue; #
-			<a class="btn btn-info" href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #
 			# } #
 		</div>

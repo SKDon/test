@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Application;

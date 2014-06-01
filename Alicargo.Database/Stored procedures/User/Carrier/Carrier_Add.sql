@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[Carrier_Add]
 	@Login NVARCHAR(320),
-	@PasswordHash VARBINARY(MAX),
-	@PasswordSalt VARBINARY(MAX),
+	@PasswordHash VARBINARY(8000),
+	@PasswordSalt VARBINARY(8000),
 	@Language CHAR(2),
 	@Name NVARCHAR (MAX),
 	@Contact NVARCHAR (MAX),

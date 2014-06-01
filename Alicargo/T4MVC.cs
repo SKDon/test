@@ -28,6 +28,7 @@ public static partial class MVC
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
+    public static Alicargo.Controllers.Application.ApplicationFilesController ApplicationFiles = new Alicargo.Controllers.Application.T4MVC_ApplicationFilesController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
     public static Alicargo.Controllers.Application.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.Application.T4MVC_ApplicationUpdateController();
     public static Alicargo.Controllers.Application.ClientApplicationController ClientApplication = new Alicargo.Controllers.Application.T4MVC_ClientApplicationController();
@@ -46,7 +47,6 @@ public static partial class MVC
     public static Alicargo.Controllers.DynamicScriptController DynamicScript = new Alicargo.Controllers.T4MVC_DynamicScriptController();
     public static Alicargo.Controllers.EmailTemplateController EmailTemplate = new Alicargo.Controllers.T4MVC_EmailTemplateController();
     public static Alicargo.Controllers.ExcelController Excel = new Alicargo.Controllers.T4MVC_ExcelController();
-    public static Alicargo.Controllers.FilesController Files = new Alicargo.Controllers.T4MVC_FilesController();
     public static Alicargo.Controllers.HomeController Home = new Alicargo.Controllers.T4MVC_HomeController();
     public static Alicargo.Controllers.TransitController Transit = new Alicargo.Controllers.T4MVC_TransitController();
     public static Alicargo.Controllers.User.AuthenticationController Authentication = new Alicargo.Controllers.User.T4MVC_AuthenticationController();
@@ -125,6 +125,21 @@ internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.Action
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_FileResult : System.Web.Mvc.FileResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_FileResult(string area, string controller, string action, string protocol = null): base(" ")
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+     
+    protected override void WriteFile(System.Web.HttpResponseBase response) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult
 {
     public T4MVC_System_Web_Mvc_JsonResult(string area, string controller, string action, string protocol = null): base()
@@ -144,21 +159,6 @@ internal partial class T4MVC_System_Web_Mvc_PartialViewResult : System.Web.Mvc.P
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public string Protocol { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_FileResult : System.Web.Mvc.FileResult, IT4MVCActionResult
-{
-    public T4MVC_System_Web_Mvc_FileResult(string area, string controller, string action, string protocol = null): base(" ")
-    {
-        this.InitMVCT4Result(area, controller, action, protocol);
-    }
-     
-    protected override void WriteFile(System.Web.HttpResponseBase response) { }
     
     public string Controller { get; set; }
     public string Action { get; set; }

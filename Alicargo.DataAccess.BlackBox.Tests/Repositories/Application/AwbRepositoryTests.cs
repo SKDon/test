@@ -2,6 +2,7 @@
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -21,7 +22,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		private ApplicationEditor _applicationEditor;
 		private IAwbRepository _awbs;
 		private DbTestContext _context;
-		private IAwbFileRepository _files;
 		private Fixture _fixture;
 		private ISqlProcedureExecutor _executor;
 
@@ -39,7 +39,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			_executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
 
 			_awbs = new AwbRepository(_context.Connection);
-			_files = new AwbFileRepository(_context.Connection);
 			_applicationEditor = new ApplicationEditor(_context.Connection,
 				_executor,
 				TestConstants.DefaultStateId);
@@ -76,8 +75,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var data21 = CreateApplicationData(TestConstants.TestClientId1);
 			var data22 = CreateApplicationData(TestConstants.TestClientId1);
 
-			var awbId1 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
-			var awbId2 = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
+			var awbId1 = _awbs.Add(CreateAirWaybillData());
+			var awbId2 = _awbs.Add(CreateAirWaybillData());
 
 			var applications = _applicationEditor;
 			var app11 = applications.Add(data11);
@@ -129,7 +128,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var data1 = CreateApplicationData(TestConstants.TestClientId1);
 			var data2 = CreateApplicationData(TestConstants.TestClientId2);
 
-			var id = _awbs.Add(CreateAirWaybillData(), null, null, null, null, null, null);
+			var id = _awbs.Add(CreateAirWaybillData());
 
 			var a1 = _applicationEditor.Add(data1);
 			var a2 = _applicationEditor.Add(data2);
@@ -173,23 +172,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			newData.CreationTimestamp = data.CreationTimestamp;
 			newData.StateChangeTimestamp = data.StateChangeTimestamp;
 
-			var gtdFile = _fixture.Create<byte[]>();
-			var additionalFile = _fixture.Create<byte[]>();
-			var packingFile = _fixture.Create<byte[]>();
-			var invoiceFile = _fixture.Create<byte[]>();
-			var awbFile = _fixture.Create<byte[]>();
-			var drawFile = _fixture.Create<byte[]>();
-			_awbs.Update(newData, gtdFile, additionalFile, packingFile, invoiceFile, awbFile, drawFile);
+			_awbs.Update(newData.Id, newData);
 
 			var actual = _awbs.Get(newData.Id).First();
 			actual.ShouldBeEquivalentTo(newData);
-
-			_files.GetGTDFile(newData.Id).Data.ShouldBeEquivalentTo(gtdFile);
-			_files.GTDAdditionalFile(newData.Id).Data.ShouldBeEquivalentTo(additionalFile);
-			_files.GetPackingFile(newData.Id).Data.ShouldBeEquivalentTo(packingFile);
-			_files.GetInvoiceFile(newData.Id).Data.ShouldBeEquivalentTo(invoiceFile);
-			_files.GetAWBFile(newData.Id).Data.ShouldBeEquivalentTo(awbFile);
-			_files.GetDrawFile(newData.Id).Data.ShouldBeEquivalentTo(drawFile);
 		}
 
 		private AirWaybillData CreateAirWaybillData()
@@ -219,13 +205,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		{
 			var data = CreateAirWaybillData();
 
-			var id = _awbs.Add(data,
-				_fixture.Create<byte[]>(),
-				_fixture.Create<byte[]>(),
-				_fixture.Create<byte[]>(),
-				_fixture.Create<byte[]>(),
-				_fixture.Create<byte[]>(),
-				_fixture.Create<byte[]>());
+			var id = _awbs.Add(data);
 
 			data.Id = id;
 

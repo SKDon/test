@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.Services.AirWaybill;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;

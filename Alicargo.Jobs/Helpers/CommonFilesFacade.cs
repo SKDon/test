@@ -87,7 +87,7 @@ namespace Alicargo.Jobs.Helpers
 				var names = _applicationFiles.GetNames(applicationId, type);
 				foreach(var name in names)
 				{
-					var holder = _applicationFiles.Get(name.Key);
+					var holder = _applicationFiles.Get(name.Id);
 
 					files.Add(holder);
 				}

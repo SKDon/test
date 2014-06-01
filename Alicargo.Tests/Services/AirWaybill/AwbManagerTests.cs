@@ -4,6 +4,7 @@ using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.Services.AirWaybill;
 using Alicargo.TestHelpers;
 using Alicargo.ViewModels.AirWaybill;
@@ -38,16 +39,12 @@ namespace Alicargo.Tests.Services.AirWaybill
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
 			_context.ApplicationAwbManager.Setup(x => x.SetAwb(applicationId, airWaybillId));
-			_context.AwbRepository.Setup(
-				x =>
-					x.Add(It.IsAny<AirWaybillData>(), model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
-						model.InvoiceFile, model.AWBFile, model.DrawFile))
+			_context.AwbRepository.Setup(x => x.Add(It.IsAny<AirWaybillData>()))
 				.Returns(() => airWaybillId);
 
 			var airWaybillData = AwbMapper.GetData(model, _context.StateConfig.Object.CargoIsFlewStateId);
 
-			_manager.Create(applicationId, airWaybillData, model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
-				model.InvoiceFile, model.AWBFile, model.DrawFile);
+			_manager.Create(applicationId, airWaybillData);
 
 			_context.ApplicationAwbManager.Verify(x => x.SetAwb(applicationId, airWaybillId), Times.Once());
 			_context.AwbRepository.Verify(x => x.Add(It.Is<AirWaybillData>(
@@ -55,25 +52,13 @@ namespace Alicargo.Tests.Services.AirWaybill
 				        && data.StateId == cargoIsFlewStateId
 				        && data.CreationTimestamp != null
 				        && data.StateChangeTimestamp != null
-				        && data.PackingFileName == model.PackingFileName
-				        && data.InvoiceFileName == model.InvoiceFileName
-				        && data.AWBFileName == model.AWBFileName
 				        && data.ArrivalAirport == model.ArrivalAirport
 				        && data.Bill == model.Bill
 				        && data.DepartureAirport == model.DepartureAirport
 				        && data.BrokerId == model.BrokerId
-				        &&
-				        data.DateOfArrival ==
-				        DateTimeOffset.Parse(model.DateOfArrivalLocalString)
-				        &&
-				        data.DateOfDeparture ==
-				        DateTimeOffset.Parse(model.DateOfDepartureLocalString)
-				        && data.GTD == null
-				        && data.GTDAdditionalFileName == model.GTDAdditionalFileName
-				        && data.GTDFileName == model.GTDFileName
-				        && data.DrawFileName == model.DrawFileName),
-				model.GTDFile, model.GTDAdditionalFile, model.PackingFile,
-				model.InvoiceFile, model.AWBFile, model.DrawFile),
+				        && data.DateOfArrival == DateTimeOffset.Parse(model.DateOfArrivalLocalString)
+				        && data.DateOfDeparture == DateTimeOffset.Parse(model.DateOfDepartureLocalString)
+				        && data.GTD == null)),
 				Times.Once());
 
 			_context.StateConfig.Verify(x => x.CargoIsFlewStateId, Times.Once());
@@ -85,8 +70,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 		{
 			var data = _context.Create<AirWaybillData>();
 
-			_manager.Create(It.IsAny<long>(), data, It.IsAny<byte[]>(), It.IsAny<byte[]>(), It.IsAny<byte[]>(),
-				It.IsAny<byte[]>(), It.IsAny<byte[]>(), It.IsAny<byte[]>());
+			_manager.Create(It.IsAny<long>(), data);
 		}
 
 		[TestMethod]
@@ -114,8 +98,9 @@ namespace Alicargo.Tests.Services.AirWaybill
 			var model = _context.Create<AwbAdminModel>();
 			var data = AwbMapper.GetData(model, cargoIsFlewStateId);
 
-			model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties()
-				.Excluding(x => x.GTD));
+			model.ShouldBeEquivalentTo(data,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.GTD));
 
 			data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
 			data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));

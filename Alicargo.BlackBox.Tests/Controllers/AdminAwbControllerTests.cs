@@ -6,6 +6,7 @@ using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers.Awb;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.Utilities;

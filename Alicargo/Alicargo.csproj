@@ -168,6 +168,9 @@
     <Compile Include="ApplicationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationFilesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationListController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -229,9 +232,6 @@
     <Compile Include="ExcelController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="FilesController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="ForwarderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -273,7 +273,7 @@
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\Application\ApplicationFilesController.cs" />
     <Compile Include="Controllers\Application\SenderApplicationController.cs" />
     <Compile Include="Controllers\Calculation\BalanceController.cs" />
     <Compile Include="Areas\Admin\Controllers\StateController.cs" />
@@ -322,7 +322,6 @@
     <Compile Include="MvcHelpers\Extensions\DropDownListHelpers.cs" />
     <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
     <Compile Include="App_Start\Mvc\JsPaths.cs" />
-    <Compile Include="MvcHelpers\ModelBinders\AwbSenderModelBinder.cs" />
     <Compile Include="Services\Abstract\ISenderApplicationManager.cs" />
     <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
     <Compile Include="Controllers\DynamicScriptController.cs" />
@@ -330,8 +329,6 @@
     <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransform.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransformBundle.cs" />
     <Compile Include="MvcHelpers\Filters\CustomHandleErrorInfo.cs" />
-    <Compile Include="MvcHelpers\ModelBinders\AwbBrokerModelBinder.cs" />
-    <Compile Include="MvcHelpers\ModelBinders\AwbAdminModelBinder.cs" />
     <Compile Include="Controllers\User\CarrierController.cs" />
     <Compile Include="Controllers\Awb\AirWaybillController.cs" />
     <Compile Include="MvcHelpers\BaseWebViewPage.cs" />
@@ -755,13 +752,13 @@
     <Content Include="Views\City\Edit.cshtml" />
     <Content Include="Views\City\Create.cshtml" />
     <Content Include="Views\City\EditorTemplates\CityEditModel.cshtml" />
-    <Content Include="Views\Files\AdminApplication.cshtml" />
-    <Content Include="Views\Files\FilesHolder.cshtml" />
-    <Content Include="Views\Files\SenderApplication.cshtml" />
+    <Content Include="Views\ApplicationFiles\AdminApplication.cshtml" />
+    <Content Include="Views\ApplicationFiles\FilesHolder.cshtml" />
+    <Content Include="Views\ApplicationFiles\SenderApplication.cshtml" />
     <Content Include="Views\ClientApplication\Create.cshtml" />
     <Content Include="Views\ClientApplication\EditorTemplates\ApplicationClientModel.cshtml" />
     <Content Include="Views\ClientApplication\Edit.cshtml" />
-    <Content Include="Views\Files\ClientApplication.cshtml" />
+    <Content Include="Views\ApplicationFiles\ClientApplication.cshtml" />
     <Content Include="Views\Balance\EditorTemplates\PaymentModel.cshtml" />
     <Content Include="Views\Balance\Decrease.cshtml" />
     <Content Include="Views\RestorePassword\Index.cshtml" />

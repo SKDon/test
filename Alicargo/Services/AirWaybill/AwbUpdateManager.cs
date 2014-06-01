@@ -27,8 +27,7 @@ namespace Alicargo.Services.AirWaybill
 
 			AwbMapper.Map(model, data);
 
-			_awbs.Update(data, model.GTDFile, model.GTDAdditionalFile,
-				model.PackingFile, model.InvoiceFile, model.AWBFile, model.DrawFile);
+			_awbs.Update(id, data);
 		}
 
 		public void Update(long id, AwbBrokerModel model)
@@ -45,8 +44,7 @@ namespace Alicargo.Services.AirWaybill
 
 			AwbMapper.Map(model, data);
 
-			_awbs.Update(data, model.GTDFile, model.GTDAdditionalFile,
-				model.PackingFile, model.InvoiceFile, null, model.DrawFile);
+			_awbs.Update(id, data);
 		}
 
 		public void Update(long id, AwbSenderModel model)
@@ -55,7 +53,7 @@ namespace Alicargo.Services.AirWaybill
 
 			AwbMapper.Map(model, data);
 
-			_awbs.Update(data, null, null, model.PackingFile, null, model.AWBFile, null);
+			_awbs.Update(id, data);
 		}
 
 		public void SetAdditionalCost(long awbId, decimal? additionalCost)

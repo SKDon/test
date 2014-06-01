@@ -1,4 +1,4 @@
-namespace Alicargo.DataAccess.Contracts.Contracts
+namespace Alicargo.DataAccess.Contracts.Contracts.Awb
 {
 	public sealed class AirWaybillAggregate
 	{

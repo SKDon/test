@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.DbContext;
@@ -55,10 +54,37 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var name = _fixture.CreateMany<string>(2).ToArray();
 			const AwbFileType fileType = (AwbFileType)(-1);
 
-			_repository.Add(TestConstants.TestAwbId, fileType, name[0], bytes);
-			_repository.Add(TestConstants.TestAwbId, fileType, name[1], bytes);
+			var id1 = _repository.Add(TestConstants.TestAwbId, fileType, name[0], bytes);
+			var id2 = _repository.Add(TestConstants.TestAwbId, fileType, name[1], bytes);
 
-			_repository.GetNames(TestConstants.TestAwbId,fileType)
+			var names = _repository.GetNames(TestConstants.TestAwbId, fileType);
+
+			names.Should().HaveCount(2);
+			names[0].Id.ShouldBeEquivalentTo(id1);
+			names[1].Id.ShouldBeEquivalentTo(id2);
+			names[0].Name.ShouldBeEquivalentTo(name[0]);
+			names[1].Name.ShouldBeEquivalentTo(name[1]);
+		}
+
+		[TestMethod]
+		public void Test_GetInfo()
+		{
+			var bytes = _fixture.Create<byte[]>();
+			var name = _fixture.CreateMany<string>(2).ToArray();
+			const AwbFileType fileType = (AwbFileType)(-1);
+
+			var id1 = _repository.Add(TestConstants.TestAwbId, fileType, name[0], bytes);
+			var id2 = _repository.Add(TestConstants.TestAwbId, fileType, name[1], bytes);
+
+			var dictionary = _repository.GetInfo(new[] { TestConstants.TestAwbId }, fileType);
+
+			dictionary.Should().HaveCount(1);
+			var names = dictionary[0];
+			names.Should().HaveCount(2);
+			names[0].Id.ShouldBeEquivalentTo(id1);
+			names[1].Id.ShouldBeEquivalentTo(id2);
+			names[0].Name.ShouldBeEquivalentTo(name[0]);
+			names[1].Name.ShouldBeEquivalentTo(name[1]);
 		}
 	}
 }

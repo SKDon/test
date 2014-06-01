@@ -101,15 +101,7 @@ namespace Alicargo.Controllers.Awb
 				{
 					var data = AwbMapper.GetData(model, _config.CargoIsFlewStateId);
 
-					var id = _awbManager.Create(
-						applicationId,
-						data,
-						model.GTDFile,
-						model.GTDAdditionalFile,
-						model.PackingFile,
-						model.InvoiceFile,
-						model.AWBFile,
-						model.DrawFile);
+					var id = _awbManager.Create(applicationId, data);
 
 					return RedirectToAction(MVC.AdminAwb.Edit(id));
 				}

@@ -1,6 +1,7 @@
 ﻿using System;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.Utilities;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.AirWaybill;
@@ -26,19 +27,7 @@ namespace Alicargo.Services.AirWaybill
 				BrokerCost = data.BrokerCost,
 				CustomCost = data.CustomCost,
 				FlightCost = data.FlightCost,
-				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight,
-				PackingFileName = data.PackingFileName,
-				PackingFile = null,
-				InvoiceFileName = data.InvoiceFileName,
-				InvoiceFile = null,
-				AWBFileName = data.AWBFileName,
-				AWBFile = null,
-				GTDFileName = data.GTDFileName,
-				GTDFile = null,
-				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				GTDAdditionalFile = null,
-				DrawFileName = data.DrawFileName,
-				DrawFile = null
+				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight
 			};
 		}
 
@@ -48,17 +37,7 @@ namespace Alicargo.Services.AirWaybill
 			{
 				GTD = data.GTD,
 				BrokerCost = data.BrokerCost,
-				CustomCost = data.CustomCost,
-				PackingFileName = data.PackingFileName,
-				PackingFile = null,
-				InvoiceFileName = data.InvoiceFileName,
-				InvoiceFile = null,
-				GTDFileName = data.GTDFileName,
-				GTDFile = null,
-				GTDAdditionalFileName = data.GTDAdditionalFileName,
-				GTDAdditionalFile = null,
-				DrawFileName = data.DrawFileName,
-				DrawFile = null
+				CustomCost = data.CustomCost
 			};
 		}
 
@@ -81,13 +60,7 @@ namespace Alicargo.Services.AirWaybill
 				BrokerCost = null,
 				CustomCost = null,
 				FlightCost = model.FlightCost,
-				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight,
-				PackingFileName = model.PackingFileName,
-				InvoiceFileName = null,
-				AWBFileName = model.AWBFileName,
-				DrawFileName = null,
-				GTDAdditionalFileName = null,
-				GTDFileName = null
+				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight
 			};
 		}
 
@@ -110,13 +83,7 @@ namespace Alicargo.Services.AirWaybill
 				BrokerCost = model.BrokerCost,
 				CustomCost = model.CustomCost,
 				FlightCost = model.FlightCost,
-				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight,
-				PackingFileName = model.PackingFileName,
-				InvoiceFileName = model.InvoiceFileName,
-				AWBFileName = model.AWBFileName,
-				DrawFileName = model.DrawFileName,
-				GTDAdditionalFileName = model.GTDAdditionalFileName,
-				GTDFileName = model.GTDFileName
+				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight
 			};
 		}
 
@@ -133,27 +100,17 @@ namespace Alicargo.Services.AirWaybill
 				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, currentCulture),
 				DepartureAirport = data.DepartureAirport,
 				FlightCost = data.FlightCost,
-				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight,
-				PackingFileName = data.PackingFileName,
-				PackingFile = null,
-				AWBFileName = data.AWBFileName,
-				AWBFile = null
+				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight
 			};
 		}
 
 		public static void Map(AwbAdminModel from, AirWaybillData to)
 		{
-			to.PackingFileName = from.PackingFileName;
-			to.InvoiceFileName = from.InvoiceFileName;
-			to.AWBFileName = from.AWBFileName;
 			to.ArrivalAirport = from.ArrivalAirport;
 			to.Bill = from.Bill;
 			to.DepartureAirport = from.DepartureAirport;
 			to.GTD = from.GTD;
-			to.GTDFileName = from.GTDFileName;
-			to.DrawFileName = from.DrawFileName;
 			to.BrokerId = from.BrokerId;
-			to.GTDAdditionalFileName = from.GTDAdditionalFileName;
 			to.DateOfArrival = DateTimeOffset.Parse(from.DateOfArrivalLocalString);
 			to.DateOfDeparture = DateTimeOffset.Parse(from.DateOfDepartureLocalString);
 			to.AdditionalCost = from.AdditionalCost;
@@ -171,20 +128,13 @@ namespace Alicargo.Services.AirWaybill
 			to.DateOfArrival = DateTimeOffset.Parse(from.DateOfArrivalLocalString);
 			to.DateOfDeparture = DateTimeOffset.Parse(from.DateOfDepartureLocalString);
 			to.BrokerId = from.BrokerId;
-			to.PackingFileName = from.PackingFileName;
-			to.AWBFileName = from.AWBFileName;
 			to.FlightCost = from.FlightCost;
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}
 
 		public static void Map(AwbBrokerModel from, AirWaybillData to)
 		{
-			to.PackingFileName = from.PackingFileName;
-			to.InvoiceFileName = from.InvoiceFileName;
 			to.GTD = from.GTD;
-			to.GTDFileName = from.GTDFileName;
-			to.DrawFileName = from.DrawFileName;
-			to.GTDAdditionalFileName = from.GTDAdditionalFileName;
 			to.BrokerCost = from.BrokerCost;
 			to.CustomCost = from.CustomCost;
 		}

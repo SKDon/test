@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -17,27 +17,41 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_executor = executor;
 		}
 
-		public IReadOnlyDictionary<long, string> GetNames(long applicationId, ApplicationFileType type)
+		public ReadOnlyCollection<FileInfo> GetNames(long applicationId, ApplicationFileType type)
 		{
 			var idsTable = TableParameters.GeIdsTable("AppIds", new[] { applicationId });
 			var parameters = new TableParameters(new { TypeId = type }, idsTable);
 
-			return _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", parameters)
-				.ToDictionary(x => (long)x.Id, x => (string)x.Name);
+			var names = _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", parameters)
+				.Select(x => new FileInfo
+				{
+					Name = x.Name,
+					Id = x.Id
+				}).ToArray();
+
+			return new ReadOnlyCollection<FileInfo>(names);
 		}
 
-		public IReadOnlyDictionary<long, FileInfo[]> GetInfo(long[] applicationIds, ApplicationFileType type)
+		public ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>> GetInfo(long[] applicationIds, ApplicationFileType type)
 		{
 			var idsTable = TableParameters.GeIdsTable("AppIds", applicationIds);
 			var parameters = new TableParameters(new { TypeId = type }, idsTable);
 
-			return _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", parameters)
+			var dictionary = _executor.Array<dynamic>("[dbo].[ApplicationFile_GetNames]", parameters)
 				.GroupBy(x => (long)x.ApplicationId)
-				.ToDictionary(a => a.Key, a => a.Select(x => new FileInfo
-				{
-					Id = x.Id,
-					Name = x.Name
-				}).ToArray());
+				.ToDictionary(a => a.Key,
+					a =>
+					{
+						var names = a.Select(x => new FileInfo
+						{
+							Id = x.Id,
+							Name = x.Name
+						}).ToArray();
+
+						return new ReadOnlyCollection<FileInfo>(names);
+					});
+
+			return new ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>>(dictionary);
 		}
 
 		public FileHolder Get(long id)

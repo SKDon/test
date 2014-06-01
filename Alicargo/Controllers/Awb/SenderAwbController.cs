@@ -53,7 +53,7 @@ namespace Alicargo.Controllers.Awb
 				{
 					var airWaybillData = AwbMapper.GetData(model, _stateConfig.CargoIsFlewStateId);
 
-					_awbManager.Create(id, airWaybillData, null, null, model.PackingFile, null, model.AWBFile, null);
+					_awbManager.Create(id, airWaybillData);
 
 					return RedirectToAction(MVC.AirWaybill.Index());
 				}

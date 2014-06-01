@@ -132,7 +132,7 @@
 	# for(var i in InvoiceFiles) { #
 	# var item = InvoiceFiles[i]; #
 	# if(!item || !item.Id) continue; #
-	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	<a href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 	# } #
 </p>
 # } #
@@ -142,7 +142,7 @@
 	# for(var i in SwiftFiles) { #
 	# var item = SwiftFiles[i]; #
 	# if(!item || !item.Id) continue; #
-	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	<a href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 	# } #
 </p>
 # } #
@@ -152,7 +152,7 @@
 	# for(i in PackingFiles) { #
 	# var item = PackingFiles[i]; #
 	# if(!item || !item.Id) continue; #
-	<a href="@Url.Action(MVC.Files.Download())/#=item.Id#">#= item.Name #</a>
+	<a href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 	# } #
 </p>
 # } #

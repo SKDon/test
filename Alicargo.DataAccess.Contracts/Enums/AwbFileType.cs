@@ -2,11 +2,11 @@
 {
 	public enum AwbFileType
 	{
-		GTDAdditional = 1,
-		AWB,
-		GTD,
-		Invoice,
-		Packing,
-		Draw
+		AWB = 1,
+		GTD = 2,
+		GTDAdditional = 3,		
+		Invoice = 4,
+		Packing = 5,
+		Draw = 6
 	}
 }

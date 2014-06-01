@@ -1,87 +1,36 @@
 ﻿@using Alicargo.MvcHelpers.Extensions
 @inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AwbAdminModel>
-
-@helper Files()
-{
-	<div class="row">
-		<div class="span2">
-			@Html.LabelFor(x => x.PackingFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.PackingFile).ToHtmlString(),
-				Model != null
-					? Model.PackingFileName
-					: null)
-		</div>
-		<div class="span2">
-			@Html.LabelFor(model => model.GTDFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.GTDFile).ToHtmlString(), Model != null
-				? Model.GTDFileName
-				: null)
-		</div>
-		<div class="span2">
-			@Html.LabelFor(x => x.InvoiceFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.InvoiceFile).ToHtmlString(),
-				Model != null
-					? Model.InvoiceFileName
-					: null)
-		</div>
-		<div class="span2">
-			@Html.LabelFor(model => model.GTDAdditionalFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.GTDAdditionalFile).ToHtmlString(), Model != null
-				? Model.GTDAdditionalFileName
-				: null)
-		</div>
-		<div class="span2">
-			@Html.LabelFor(x => x.AWBFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.AWBFile).ToHtmlString(), Model != null
-				? Model.AWBFileName
-				: null)
-		</div>
-		<div class="span2">
-			@Html.LabelFor(x => x.DrawFile)
-			@Helpers.FileUploader(@Html.IdFor(x => x.DrawFile).ToHtmlString(), Model != null
-				? Model.DrawFileName
-				: null)
-		</div>
+<div class="row">
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.Bill)
+		@Html.EditorWithLabelFor(model => model.GTD)
+		@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
 	</div>
-}
-
-@helper Parameters()
-{
-	<div class="row">
-		<div class="span3">
-			@Html.EditorWithLabelFor(model => model.Bill)
-			@Html.EditorWithLabelFor(model => model.GTD)
-			@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.DepartureAirport)
+		@Html.LabelFor(model => model.DateOfDepartureLocalString)
+		<div class="date-holder">
+			@Html.EditorFor(model => model.DateOfDepartureLocalString)
 		</div>
-		<div class="span3">
-			@Html.EditorWithLabelFor(model => model.DepartureAirport)
-			@Html.LabelFor(model => model.DateOfDepartureLocalString)
-			<div class="date-holder">
-				@Html.EditorFor(model => model.DateOfDepartureLocalString)
-			</div>
-			@Html.EditorWithLabelFor(model => model.FlightCost)
-		</div>
-		<div class="span3">
-			@Html.EditorWithLabelFor(model => model.ArrivalAirport)
-			@Html.LabelFor(model => model.DateOfArrivalLocalString)
-			<div class="date-holder">
-				@Html.EditorFor(model => model.DateOfArrivalLocalString)
-			</div>
-			@Html.EditorWithLabelFor(model => model.AdditionalCost)
-		</div>
-		<div class="span3">
-			@Html.LabelFor(x => x.BrokerId)
-			@Html.DropDownListFor(x => x.BrokerId, (IDictionary<long?, string>)ViewBag.Brokers, "")
-			@Html.EditorWithLabelFor(model => model.BrokerCost)
-			@Html.EditorWithLabelFor(model => model.CustomCost)
-		</div>
-		<script>
-			$(function() {
-				$(".date-holder input").kendoDatePicker();
-			})
-		</script>
+		@Html.EditorWithLabelFor(model => model.FlightCost)
 	</div>
-}
-
-@Parameters()
-@Files()
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.ArrivalAirport)
+		@Html.LabelFor(model => model.DateOfArrivalLocalString)
+		<div class="date-holder">
+			@Html.EditorFor(model => model.DateOfArrivalLocalString)
+		</div>
+		@Html.EditorWithLabelFor(model => model.AdditionalCost)
+	</div>
+	<div class="span3">
+		@Html.LabelFor(x => x.BrokerId)
+		@Html.DropDownListFor(x => x.BrokerId, (IDictionary<long?, string>)ViewBag.Brokers, "")
+		@Html.EditorWithLabelFor(model => model.BrokerCost)
+		@Html.EditorWithLabelFor(model => model.CustomCost)
+	</div>
+	<script>
+		$(function() {
+			$(".date-holder input").kendoDatePicker();
+		})
+	</script>
+</div>

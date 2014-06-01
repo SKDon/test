@@ -47,9 +47,10 @@
     <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="Contracts\AirWaybillAggregate.cs" />
+    <Compile Include="Contracts\Awb\AirWaybillAggregate.cs" />
     <Compile Include="Contracts\Application\ApplicationEditData.cs" />
     <Compile Include="Contracts\Application\BillData.cs" />
+    <Compile Include="Contracts\Awb\AirWaybillEditData.cs" />
     <Compile Include="Contracts\EventData.cs" />
     <Compile Include="Contracts\ApplicationEventTemplateData.cs" />
     <Compile Include="Contracts\Application\ApplicationData.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="Contracts\State\StateRole.cs" />
     <Compile Include="Contracts\CountryData.cs" />
     <Compile Include="Contracts\FileHolder.cs" />
-    <Compile Include="Contracts\AirWaybillData.cs" />
+    <Compile Include="Contracts\Awb\AirWaybillData.cs" />
     <Compile Include="Contracts\State\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\User\ForwarderData.cs" />

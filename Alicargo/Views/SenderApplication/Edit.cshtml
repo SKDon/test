@@ -8,5 +8,5 @@
 		<span>@Entities.Nic: @ViewBag.Nic</span>
 	</h1>
 	@Html.EditPage(Url.Action(MVC.SenderApplication.Edit()), Pages.Save,
-	Html.ActionLink(Pages.Files, MVC.Files.SenderApplication((long)ViewBag.ApplicationId), new { @class = "btn btn-info" }))
+	Html.ActionLink(Pages.Files, MVC.ApplicationFiles.SenderApplication((long)ViewBag.ApplicationId), new { @class = "btn btn-info" }))
 </div>

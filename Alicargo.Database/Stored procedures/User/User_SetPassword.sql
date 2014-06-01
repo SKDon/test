@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[User_SetPassword]
 	@UserId BIGINT,
-	@Salt VARBINARY(MAX),
-	@Hash VARBINARY(MAX)
+	@Salt VARBINARY(8000),
+	@Hash VARBINARY(8000)
 AS
 	SET NOCOUNT ON;
 

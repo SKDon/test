@@ -1,12 +1,12 @@
 ﻿using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 
 namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
 	public interface IAwbRepository
 	{
-		long Add(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile,
-			byte[] awbFile, byte[] drawFile);
+		long Add(AirWaybillEditData data);
 
 		long Count(long? brokerId = null);
 
@@ -14,7 +14,8 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 
 		AirWaybillData[] Get(params long[] ids);
 
-		AirWaybillAggregate[] GetAggregate(long[] awbIds, long? clientId = null, long? senderId = null,
+		AirWaybillAggregate[] GetAggregate(
+			long[] awbIds, long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null);
 
 		EmailData[] GetCarrierEmails(long awbId);
@@ -24,23 +25,26 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null);
 		EmailData[] GetSenderEmails(long awbId);
 
-		int GetTotalCountWithouAwb(long? clientId = null, long? senderId = null,
+		int GetTotalCountWithouAwb(
+			long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null);
 
-		decimal GetTotalValueWithouAwb(long? clientId = null, long? senderId = null,
+		decimal GetTotalValueWithouAwb(
+			long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null);
 
-		float GetTotalVolumeWithouAwb(long? clientId = null, long? senderId = null,
+		float GetTotalVolumeWithouAwb(
+			long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null);
 
-		float GetTotalWeightWithouAwb(long? clientId = null, long? senderId = null,
+		float GetTotalWeightWithouAwb(
+			long? clientId = null, long? senderId = null,
 			long? forwarderId = null, long? carrierId = null);
 
 		void SetAdditionalCost(long awbId, decimal? additionalCost);
 
 		void SetState(long airWaybillId, long stateId);
 
-		void Update(AirWaybillData data, byte[] gtdFile, byte[] gtdAdditionalFile, byte[] packingFile, byte[] invoiceFile,
-			byte[] awbFile, byte[] drawFile);
+		void Update(long awbId, AirWaybillEditData data);
 	}
 }
