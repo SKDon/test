@@ -8,8 +8,8 @@
 		$("#" + type).kendoUpload({
 			multiple: true,
 			async: {
-				saveUrl: $u.Files_Upload + "/" + appId + "?type=" + type,
-				removeUrl: $u.Files_Delete,
+				saveUrl: $u.ApplicationFiles_Upload + "/" + appId + "?type=" + type,
+				removeUrl: $u.ApplicationFiles_Delete,
 				removeField: "Id",
 				autoUpload: true
 			},
@@ -32,7 +32,7 @@
 		var type = holder.data("type");
 		var appId = holder.data("app-id");
 
-		$.getJSON($u.Files_Files + "/" + appId + "?type=" + type).done(function(data) {
+		$.getJSON($u.ApplicationFiles_Files + "/" + appId + "?type=" + type).done(function(data) {
 			initUploader(appId, type, data);
 		}).fail($a.ShowError);
 	}
