@@ -17,12 +17,12 @@ namespace Alicargo.Controllers.Application
 		private static readonly IReadOnlyDictionary<ApplicationFileType, EventType> TypesMapping
 			= new Dictionary<ApplicationFileType, EventType>
 			{
-				{ApplicationFileType.CP, EventType.CPFileUploaded},
-				{ApplicationFileType.Invoice, EventType.InvoiceFileUploaded},
-				{ApplicationFileType.DeliveryBill, EventType.DeliveryBillFileUploaded},
-				{ApplicationFileType.Torg12, EventType.Torg12FileUploaded},
-				{ApplicationFileType.Swift, EventType.SwiftFileUploaded},
-				{ApplicationFileType.Packing, EventType.PackingFileUploaded},
+				{ ApplicationFileType.CP, EventType.CPFileUploaded },
+				{ ApplicationFileType.Invoice, EventType.InvoiceFileUploaded },
+				{ ApplicationFileType.DeliveryBill, EventType.DeliveryBillFileUploaded },
+				{ ApplicationFileType.Torg12, EventType.Torg12FileUploaded },
+				{ ApplicationFileType.Swift, EventType.SwiftFileUploaded },
+				{ ApplicationFileType.Packing, EventType.PackingFileUploaded },
 			};
 
 		private readonly IEventFacade _facade;
@@ -34,13 +34,6 @@ namespace Alicargo.Controllers.Application
 		{
 			_files = files;
 			_facade = facade;
-		}
-
-		public virtual FileResult Download(long id)
-		{
-			var file = _files.Get(id);
-
-			return file.GetFileResult();
 		}
 
 		[HttpGet]
@@ -61,13 +54,19 @@ namespace Alicargo.Controllers.Application
 			return View();
 		}
 
-		[HttpGet]
-		[Access(RoleType.Sender)]
-		public virtual ViewResult SenderApplication(long id)
+		[HttpPost]
+		public virtual HttpStatusCodeResult Delete(long id)
 		{
-			ViewBag.ApplicationId = id;
+			_files.Delete(id);
 
-			return View();
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
+		public virtual FileResult Download(long id)
+		{
+			var file = _files.Get(id);
+
+			return file.GetFileResult();
 		}
 
 		[HttpGet]
@@ -81,7 +80,17 @@ namespace Alicargo.Controllers.Application
 			{
 				id = x.Id,
 				name = x.Name
-			}), JsonRequestBehavior.AllowGet);
+			}),
+				JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpGet]
+		[Access(RoleType.Sender)]
+		public virtual ViewResult SenderApplication(long id)
+		{
+			ViewBag.ApplicationId = id;
+
+			return View();
 		}
 
 		[HttpPost]
@@ -96,21 +105,15 @@ namespace Alicargo.Controllers.Application
 			return Json(new { id = fileId });
 		}
 
-		[HttpPost]
-		public virtual HttpStatusCodeResult Delete(long id)
-		{
-			_files.Delete(id);
-
-			return new HttpStatusCodeResult(HttpStatusCode.OK);
-		}
-
-		private void AddFileUploadEvent(long applicationId, EventType type,
+		private void AddFileUploadEvent(
+			long applicationId, EventType type,
 			string fileName, byte[] fileData)
 		{
-			if (fileData == null || fileData.Length == 0) return;
+			if(fileData == null || fileData.Length == 0) return;
 
 			_facade.Add(applicationId,
-				type, EventState.Emailing,
+				type,
+				EventState.Emailing,
 				new FileHolder
 				{
 					Data = fileData,
