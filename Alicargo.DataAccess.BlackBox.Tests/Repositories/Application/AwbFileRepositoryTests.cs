@@ -26,10 +26,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			_context = new DbTestContext(Settings.Default.MainConnectionString);
+			_context = new DbTestContext(Settings.Default.FilesConnectionString);
 			_fixture = new Fixture();
 
-			_repository = new AwbFileRepository(new SqlProcedureExecutor(Settings.Default.MainConnectionString));
+			_repository = new AwbFileRepository(new SqlProcedureExecutor(Settings.Default.FilesConnectionString));
 		}
 
 		[TestMethod]
@@ -51,7 +51,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		public void Test_GetNames()
 		{
 			var bytes = _fixture.Create<byte[]>();
-			var name = _fixture.CreateMany<string>(2).ToArray();
+			var name = _fixture.CreateMany<string>(2).OrderBy(x => x).ToArray();
 			const AwbFileType fileType = (AwbFileType)(-1);
 
 			var id1 = _repository.Add(TestConstants.TestAwbId, fileType, name[0], bytes);
@@ -70,7 +70,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		public void Test_GetInfo()
 		{
 			var bytes = _fixture.Create<byte[]>();
-			var name = _fixture.CreateMany<string>(2).ToArray();
+			var name = _fixture.CreateMany<string>(2).OrderBy(x => x).ToArray();
 			const AwbFileType fileType = (AwbFileType)(-1);
 
 			var id1 = _repository.Add(TestConstants.TestAwbId, fileType, name[0], bytes);
@@ -79,7 +79,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var dictionary = _repository.GetInfo(new[] { TestConstants.TestAwbId }, fileType);
 
 			dictionary.Should().HaveCount(1);
-			var names = dictionary[0];
+			var names = dictionary[TestConstants.TestAwbId];
 			names.Should().HaveCount(2);
 			names[0].Id.ShouldBeEquivalentTo(id1);
 			names[1].Id.ShouldBeEquivalentTo(id2);

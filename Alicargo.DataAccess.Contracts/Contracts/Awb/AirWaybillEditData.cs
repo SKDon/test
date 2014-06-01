@@ -4,7 +4,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Awb
 {
 	public class AirWaybillEditData
 	{
-		public DateTimeOffset CreationTimestamp { get; set; }
 		public string Bill { get; set; }
 		public string ArrivalAirport { get; set; }
 		public string DepartureAirport { get; set; }
@@ -12,8 +11,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Awb
 		public DateTimeOffset DateOfArrival { get; set; }
 		public long? BrokerId { get; set; }
 		public string GTD { get; set; }
-		public long StateId { get; set; }
-		public DateTimeOffset StateChangeTimestamp { get; set; }
 
 		public decimal? FlightCost { get; set; }
 		public decimal? CustomCost { get; set; }

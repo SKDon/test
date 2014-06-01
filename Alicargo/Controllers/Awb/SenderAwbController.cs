@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.AirWaybill;
-using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -19,19 +18,16 @@ namespace Alicargo.Controllers.Awb
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrokerRepository _brokers;
-		private readonly IStateConfig _stateConfig;
 
 		public SenderAwbController(
 			IAwbUpdateManager awbUpdateManager,
 			IAwbManager awbManager,
 			IAwbPresenter awbPresenter,
-			IStateConfig stateConfig,
 			IBrokerRepository brokers)
 		{
 			_awbUpdateManager = awbUpdateManager;
 			_awbManager = awbManager;
 			_awbPresenter = awbPresenter;
-			_stateConfig = stateConfig;
 			_brokers = brokers;
 		}
 
@@ -51,7 +47,7 @@ namespace Alicargo.Controllers.Awb
 			{
 				if(ModelState.IsValid)
 				{
-					var airWaybillData = AwbMapper.GetData(model, _stateConfig.CargoIsFlewStateId);
+					var airWaybillData = AwbMapper.GetData(model);
 
 					_awbManager.Create(id, airWaybillData);
 

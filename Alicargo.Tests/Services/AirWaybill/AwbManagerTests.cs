@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.Exceptions;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.Services.AirWaybill;
@@ -39,26 +38,22 @@ namespace Alicargo.Tests.Services.AirWaybill
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
 			_context.ApplicationAwbManager.Setup(x => x.SetAwb(applicationId, airWaybillId));
-			_context.AwbRepository.Setup(x => x.Add(It.IsAny<AirWaybillData>()))
+			_context.AwbRepository.Setup(x => x.Add(It.IsAny<AirWaybillEditData>(), cargoIsFlewStateId))
 				.Returns(() => airWaybillId);
 
-			var airWaybillData = AwbMapper.GetData(model, _context.StateConfig.Object.CargoIsFlewStateId);
+			var airWaybillData = AwbMapper.GetData(model);
 
 			_manager.Create(applicationId, airWaybillData);
 
 			_context.ApplicationAwbManager.Verify(x => x.SetAwb(applicationId, airWaybillId), Times.Once());
-			_context.AwbRepository.Verify(x => x.Add(It.Is<AirWaybillData>(
-				data => data.Id == 0
-				        && data.StateId == cargoIsFlewStateId
-				        && data.CreationTimestamp != null
-				        && data.StateChangeTimestamp != null
-				        && data.ArrivalAirport == model.ArrivalAirport
+			_context.AwbRepository.Verify(x => x.Add(It.Is<AirWaybillEditData>(
+				data => data.ArrivalAirport == model.ArrivalAirport
 				        && data.Bill == model.Bill
 				        && data.DepartureAirport == model.DepartureAirport
 				        && data.BrokerId == model.BrokerId
 				        && data.DateOfArrival == DateTimeOffset.Parse(model.DateOfArrivalLocalString)
 				        && data.DateOfDeparture == DateTimeOffset.Parse(model.DateOfDepartureLocalString)
-				        && data.GTD == null)),
+				        && data.GTD == null), cargoIsFlewStateId),
 				Times.Once());
 
 			_context.StateConfig.Verify(x => x.CargoIsFlewStateId, Times.Once());
@@ -94,9 +89,8 @@ namespace Alicargo.Tests.Services.AirWaybill
 		[TestMethod]
 		public void Test_AwbManager_Map_AirWaybillEditModel()
 		{
-			var cargoIsFlewStateId = _context.Create<long>();
 			var model = _context.Create<AwbAdminModel>();
-			var data = AwbMapper.GetData(model, cargoIsFlewStateId);
+			var data = AwbMapper.GetData(model);
 
 			model.ShouldBeEquivalentTo(data,
 				options => options.ExcludingMissingProperties()
@@ -110,9 +104,8 @@ namespace Alicargo.Tests.Services.AirWaybill
 		[TestMethod]
 		public void Test_AwbManager_Map_SenderAwbModel()
 		{
-			var cargoIsFlewStateId = _context.Create<long>();
 			var model = _context.Create<AwbSenderModel>();
-			var data = AwbMapper.GetData(model, cargoIsFlewStateId);
+			var data = AwbMapper.GetData(model);
 
 			model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
 

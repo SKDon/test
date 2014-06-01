@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -41,9 +40,14 @@ namespace Alicargo.DataAccess.Repositories.Application
 			};
 		}
 
-		public long Add(AirWaybillEditData data)
+		public long Add(AirWaybillEditData data, long stateId)
 		{
-			var entity = new AirWaybill { CreationTimestamp = DateTimeProvider.Now, StateChangeTimestamp = DateTimeProvider.Now };
+			var entity = new AirWaybill
+			{
+				CreationTimestamp = DateTimeProvider.Now,
+				StateChangeTimestamp = DateTimeProvider.Now,
+				StateId = stateId
+			};
 
 			Map(data, entity);
 
@@ -260,7 +264,6 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		private static void Map(AirWaybillEditData @from, AirWaybill to)
 		{
-			to.StateId = @from.StateId;
 			to.ArrivalAirport = @from.ArrivalAirport;
 			to.Bill = @from.Bill;
 			to.BrokerId = @from.BrokerId;

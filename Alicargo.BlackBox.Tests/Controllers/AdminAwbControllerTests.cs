@@ -5,8 +5,6 @@ using System.Linq;
 using Alicargo.BlackBox.Tests.Properties;
 using Alicargo.Controllers.Awb;
 using Alicargo.Core.Helpers;
-using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.TestHelpers;
 using Alicargo.Utilities;
@@ -61,21 +59,27 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			_controller.Edit(entity.Id, model);
 
-			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
+			Validate(model, entity.Id);
+		}
+
+		private void Validate(AwbAdminModel expectation, long id)
+		{
+			using(var connection = new SqlConnection(Settings.Default.MainConnectionString))
 			{
 				var actual = connection.Query<AwbAdminModel>(
-					"select *, GTDFileData as GTDFile, GTDAdditionalFileData as GTDAdditionalFile, PackingFileData as PackingFile," +
-					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile, DrawFileData AS DrawFile " +
-					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
-
-				var actualData = connection.Query<AirWaybillData>(
 					"select * " +
-					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
+					"from [dbo].[AirWaybill] where id = @id",
+					new { id }).First();
+
+				var actualData = connection.Query<dynamic>(
+					"select DateOfDeparture, DateOfArrival " +
+					"from [dbo].[AirWaybill] where id = @id",
+					new { id }).First();
 
 				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, _currentCulture);
 				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, _currentCulture);
 
-				model.ShouldBeEquivalentTo(actual);
+				actual.ShouldBeEquivalentTo(expectation);
 			}
 		}
 
@@ -99,22 +103,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			var entity = _db.AirWaybills.Skip(count).Take(1).First();
 
-			using (var connection = new SqlConnection(Settings.Default.MainConnectionString))
-			{
-				var actual = connection.Query<AwbAdminModel>(
-					"select *, GTDFileData as GTDFile, GTDAdditionalFileData as GTDAdditionalFile, PackingFileData as PackingFile," +
-					"InvoiceFileData as InvoiceFile, AWBFileData as AWBFile, DrawFileData AS DrawFile " +
-					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
-
-				var actualData = connection.Query<AirWaybillData>(
-					"select * " +
-					"from [dbo].[AirWaybill] where id = @id", new { entity.Id }).First();
-
-				actual.DateOfDepartureLocalString = LocalizationHelper.GetDate(actualData.DateOfDeparture, _currentCulture);
-				actual.DateOfArrivalLocalString = LocalizationHelper.GetDate(actualData.DateOfArrival, _currentCulture);
-
-				model.ShouldBeEquivalentTo(actual);
-			}
+			Validate(model, entity.Id);
 
 			_db.Refresh(RefreshMode.OverwriteCurrentValues, applicationData);
 			Assert.AreEqual(FirstStateId, applicationData.StateId);

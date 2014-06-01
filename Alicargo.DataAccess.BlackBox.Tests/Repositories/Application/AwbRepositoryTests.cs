@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alicargo.DataAccess.BlackBox.Tests.Properties;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -10,6 +10,8 @@ using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.Application;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;
+using Alicargo.Utilities;
+using EmitMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
@@ -22,8 +24,9 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		private ApplicationEditor _applicationEditor;
 		private IAwbRepository _awbs;
 		private DbTestContext _context;
-		private Fixture _fixture;
 		private ISqlProcedureExecutor _executor;
+		private Fixture _fixture;
+		private DateTimeOffset _now;
 
 		[TestCleanup]
 		public void TestCleanup()
@@ -36,12 +39,11 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		{
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 			_fixture = new Fixture();
+			_now = _fixture.Create<DateTimeOffset>();
 			_executor = new SqlProcedureExecutor(Settings.Default.MainConnectionString);
-
+			DateTimeProvider.SetProvider(new DateTimeProviderStub(_now));
 			_awbs = new AwbRepository(_context.Connection);
-			_applicationEditor = new ApplicationEditor(_context.Connection,
-				_executor,
-				TestConstants.DefaultStateId);
+			_applicationEditor = new ApplicationEditor(_context.Connection, _executor, TestConstants.DefaultStateId);
 		}
 
 		[TestMethod]
@@ -75,8 +77,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var data21 = CreateApplicationData(TestConstants.TestClientId1);
 			var data22 = CreateApplicationData(TestConstants.TestClientId1);
 
-			var awbId1 = _awbs.Add(CreateAirWaybillData());
-			var awbId2 = _awbs.Add(CreateAirWaybillData());
+			var awbId1 = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId);
+			var awbId2 = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId);
 
 			var applications = _applicationEditor;
 			var app11 = applications.Add(data11);
@@ -128,7 +130,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var data1 = CreateApplicationData(TestConstants.TestClientId1);
 			var data2 = CreateApplicationData(TestConstants.TestClientId2);
 
-			var id = _awbs.Add(CreateAirWaybillData());
+			var id = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId);
 
 			var a1 = _applicationEditor.Add(data1);
 			var a2 = _applicationEditor.Add(data2);
@@ -157,7 +159,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var actual = _awbs.Get(data.Id).First();
 
 			actual.StateId.ShouldBeEquivalentTo(TestConstants.CargoIsFlewStateId);
-			actual.StateChangeTimestamp.Should().NotBe(data.StateChangeTimestamp);
 		}
 
 		[TestMethod]
@@ -166,23 +167,21 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var data = CreateTestAirWaybill();
 
 			var newData = CreateAirWaybillData();
-			newData.StateId = data.StateId;
-			newData.Id = data.Id;
 			newData.BrokerId = data.BrokerId;
-			newData.CreationTimestamp = data.CreationTimestamp;
-			newData.StateChangeTimestamp = data.StateChangeTimestamp;
 
-			_awbs.Update(newData.Id, newData);
+			_awbs.Update(data.Id, newData);
 
-			var actual = _awbs.Get(newData.Id).First();
-			actual.ShouldBeEquivalentTo(newData);
+			var actual = _awbs.Get(data.Id).First();
+			actual.ShouldBeEquivalentTo(newData, options => options.ExcludingMissingProperties());
+			actual.CreationTimestamp.ShouldBeEquivalentTo(_now);
+			actual.StateChangeTimestamp.ShouldBeEquivalentTo(_now);
+			actual.StateId = data.StateId;
 		}
 
-		private AirWaybillData CreateAirWaybillData()
+		private AirWaybillEditData CreateAirWaybillData()
 		{
 			return _fixture
-				.Build<AirWaybillData>()
-				.With(x => x.StateId, TestConstants.DefaultStateId)
+				.Build<AirWaybillEditData>()
 				.With(x => x.BrokerId, TestConstants.TestBrokerId)
 				.Create();
 		}
@@ -205,11 +204,18 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		{
 			var data = CreateAirWaybillData();
 
-			var id = _awbs.Add(data);
+			var id = _awbs.Add(data, TestConstants.DefaultStateId);
 
-			data.Id = id;
+			var result = ObjectMapperManager.DefaultInstance
+				.GetMapper<AirWaybillEditData, AirWaybillData>()
+				.Map(data);
 
-			return data;
+			result.Id = id;
+			result.CreationTimestamp = _now;
+			result.StateChangeTimestamp = _now;
+			result.StateId = TestConstants.DefaultStateId;
+
+			return result;
 		}
 	}
 }

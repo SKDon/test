@@ -1,12 +1,11 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Contracts.Awb;
+﻿using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 
 namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
 	public interface IAwbRepository
 	{
-		long Add(AirWaybillEditData data);
+		long Add(AirWaybillEditData data, long stateId);
 
 		long Count(long? brokerId = null);
 

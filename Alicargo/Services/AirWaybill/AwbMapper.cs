@@ -1,8 +1,6 @@
 ﻿using System;
 using Alicargo.Core.Helpers;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
-using Alicargo.Utilities;
 using Alicargo.Utilities.Localization;
 using Alicargo.ViewModels.AirWaybill;
 
@@ -10,7 +8,7 @@ namespace Alicargo.Services.AirWaybill
 {
 	internal static class AwbMapper
 	{
-		public static AwbAdminModel GetAdminModel(AirWaybillData data)
+		public static AwbAdminModel GetAdminModel(AirWaybillEditData data)
 		{
 			var cultureInfo = CultureProvider.GetCultureInfo();
 
@@ -31,7 +29,7 @@ namespace Alicargo.Services.AirWaybill
 			};
 		}
 
-		public static AwbBrokerModel GetBrokerModel(AirWaybillData data)
+		public static AwbBrokerModel GetBrokerModel(AirWaybillEditData data)
 		{
 			return new AwbBrokerModel
 			{
@@ -41,14 +39,10 @@ namespace Alicargo.Services.AirWaybill
 			};
 		}
 
-		public static AirWaybillData GetData(AwbSenderModel model, long cargoIsFlewStateId)
+		public static AirWaybillEditData GetData(AwbSenderModel model)
 		{
-			return new AirWaybillData
+			return new AirWaybillEditData
 			{
-				Id = 0,
-				StateId = cargoIsFlewStateId,
-				CreationTimestamp = DateTimeProvider.Now,
-				StateChangeTimestamp = DateTimeProvider.Now,
 				ArrivalAirport = model.ArrivalAirport,
 				Bill = model.Bill,
 				DepartureAirport = model.DepartureAirport,
@@ -64,14 +58,10 @@ namespace Alicargo.Services.AirWaybill
 			};
 		}
 
-		public static AirWaybillData GetData(AwbAdminModel model, long cargoIsFlewStateId)
+		public static AirWaybillEditData GetData(AwbAdminModel model)
 		{
-			return new AirWaybillData
+			return new AirWaybillEditData
 			{
-				Id = 0,
-				StateId = cargoIsFlewStateId,
-				CreationTimestamp = DateTimeProvider.Now,
-				StateChangeTimestamp = DateTimeProvider.Now,
 				ArrivalAirport = model.ArrivalAirport,
 				Bill = model.Bill,
 				DepartureAirport = model.DepartureAirport,
@@ -87,7 +77,7 @@ namespace Alicargo.Services.AirWaybill
 			};
 		}
 
-		public static AwbSenderModel GetSenderModel(AirWaybillData data)
+		public static AwbSenderModel GetSenderModel(AirWaybillEditData data)
 		{
 			var currentCulture = CultureProvider.GetCultureInfo();
 
@@ -104,7 +94,7 @@ namespace Alicargo.Services.AirWaybill
 			};
 		}
 
-		public static void Map(AwbAdminModel from, AirWaybillData to)
+		public static void Map(AwbAdminModel from, AirWaybillEditData to)
 		{
 			to.ArrivalAirport = from.ArrivalAirport;
 			to.Bill = from.Bill;
@@ -120,7 +110,7 @@ namespace Alicargo.Services.AirWaybill
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}
 
-		public static void Map(AwbSenderModel from, AirWaybillData to)
+		public static void Map(AwbSenderModel from, AirWaybillEditData to)
 		{
 			to.Bill = from.Bill;
 			to.ArrivalAirport = from.ArrivalAirport;
@@ -132,7 +122,7 @@ namespace Alicargo.Services.AirWaybill
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}
 
-		public static void Map(AwbBrokerModel from, AirWaybillData to)
+		public static void Map(AwbBrokerModel from, AirWaybillEditData to)
 		{
 			to.GTD = from.GTD;
 			to.BrokerCost = from.BrokerCost;

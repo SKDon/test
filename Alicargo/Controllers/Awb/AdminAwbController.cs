@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.AirWaybill;
-using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -19,21 +18,18 @@ namespace Alicargo.Controllers.Awb
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrokerRepository _brokers;
-		private readonly IStateConfig _config;
 
 
 		public AdminAwbController(
 			IAwbManager awbManager,
 			IAwbPresenter awbPresenter,
 			IAwbUpdateManager awbUpdateManager,
-			IBrokerRepository brokers,
-			IStateConfig config)
+			IBrokerRepository brokers)
 		{
 			_awbManager = awbManager;
 			_awbPresenter = awbPresenter;
 			_awbUpdateManager = awbUpdateManager;
 			_brokers = brokers;
-			_config = config;
 		}
 
 		private void BindBag(long? awbId)
@@ -99,7 +95,7 @@ namespace Alicargo.Controllers.Awb
 			{
 				if(ModelState.IsValid)
 				{
-					var data = AwbMapper.GetData(model, _config.CargoIsFlewStateId);
+					var data = AwbMapper.GetData(model);
 
 					var id = _awbManager.Create(applicationId, data);
 

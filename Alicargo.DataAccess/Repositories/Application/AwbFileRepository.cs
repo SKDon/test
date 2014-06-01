@@ -36,9 +36,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 		public ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>> GetInfo(long[] awbIds, AwbFileType type)
 		{
 			var idsTable = TableParameters.GeIdsTable("AwbIds", awbIds);
-			var parameters = new TableParameters(new { TypAwbFile_GetNameseId = type }, idsTable);
+			var parameters = new TableParameters(new { TypeId = type }, idsTable);
 
-			var dictionary = _executor.Array<dynamic>("[dbo].[]", parameters)
+			var dictionary = _executor.Array<dynamic>("[dbo].[AwbFile_GetNames]", parameters)
 				.GroupBy(x => (long)x.AwbId)
 				.ToDictionary(a => a.Key,
 					a =>
