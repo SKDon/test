@@ -49,16 +49,16 @@ namespace Alicargo.Controllers.Awb
 
 		#region List
 
-		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]
 		[HttpGet]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]
 		public virtual ViewResult Index()
 		{
 			return View();
 		}
 
-		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]
 		[HttpPost]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]
 		public virtual JsonResult List(int take, int skip)
 		{
 			long? brokerId = null;

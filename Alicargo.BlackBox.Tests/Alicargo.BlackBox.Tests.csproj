@@ -147,6 +147,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\AirWaybill\AwbPresenterTests.cs" />
     <Compile Include="Services\Application\ApplicationListPresenterTests.cs" />
     <Compile Include="Services\Users\ClientManagerTests.cs" />
   </ItemGroup>

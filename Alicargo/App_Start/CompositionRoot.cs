@@ -94,7 +94,7 @@ namespace Alicargo
 			return type.IsClass && type.GetInterfaces().Any(intface => intface.Name == "I" + type.Name);
 		}
 
-		public static void BindDataAccess(IKernel kernel, string connectionString, string filesConnectionString)
+		public static void BindDataAccess(IKernel kernel, string mainConnectionString, string filesConnectionString)
 		{
 			kernel.Bind(x => x.FromAssembliesMatching(AlicargoDataAccessDll)
 				.IncludingNonePublicTypes()
@@ -107,7 +107,7 @@ namespace Alicargo
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
 				.InSingletonScope()
-				.WithConstructorArgument("connectionString", connectionString);
+				.WithConstructorArgument("connectionString", mainConnectionString);
 
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
@@ -118,6 +118,12 @@ namespace Alicargo
 			kernel.Bind<ISqlProcedureExecutor>()
 				.To<SqlProcedureExecutor>()
 				.WhenInjectedInto<ApplicationFileRepository>()
+				.InSingletonScope()
+				.WithConstructorArgument("connectionString", filesConnectionString);
+
+			kernel.Bind<ISqlProcedureExecutor>()
+				.To<SqlProcedureExecutor>()
+				.WhenInjectedInto<AwbFileRepository>()
 				.InSingletonScope()
 				.WithConstructorArgument("connectionString", filesConnectionString);
 		}
