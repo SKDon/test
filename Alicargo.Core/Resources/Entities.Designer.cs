@@ -799,6 +799,15 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other files.
+        /// </summary>
+        public static string OtherFiles {
+            get {
+                return ResourceManager.GetString("OtherFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Packing.
         /// </summary>
         public static string Packing {

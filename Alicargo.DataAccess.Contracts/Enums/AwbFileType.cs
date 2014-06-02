@@ -2,6 +2,7 @@
 {
 	public enum AwbFileType
 	{
+		Other = 0,
 		AWB = 1,
 		GTD = 2,
 		GTDAdditional = 3,		

@@ -106,7 +106,7 @@
     <Compile Include="Repositories\StateSettingsRepositoryTests.cs" />
     <Compile Include="Repositories\StateRepositoryTests.cs" />
     <Compile Include="Repositories\Application\AwbRepositoryTests.cs" />
-    <Compile Include="Repositories\User\BrockerRepositoryTests.cs" />
+    <Compile Include="Repositories\User\BrokerRepositoryTests.cs" />
     <Compile Include="Repositories\User\CarrierRepositoryTests.cs" />
     <Compile Include="Repositories\User\ClientRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

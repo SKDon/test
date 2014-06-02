@@ -8,10 +8,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 {
 	[TestClass]
-	public class BrockerRepositoryTests
+	public class BrokerRepositoryTests
 	{
-		private BrokerRepository _repository;
 		private DbTestContext _context;
+		private BrokerRepository _repository;
+
+		[TestCleanup]
+		public void TestCleanup()
+		{
+			_context.Cleanup();
+		}
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -19,12 +25,6 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			_context = new DbTestContext(Settings.Default.MainConnectionString);
 
 			_repository = new BrokerRepository(_context.Connection);
-		}
-
-		[TestCleanup]
-		public void TestCleanup()
-		{
-			_context.Cleanup();
 		}
 
 		[TestMethod]

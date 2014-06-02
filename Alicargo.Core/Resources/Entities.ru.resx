@@ -492,4 +492,7 @@
   <data name="ContractNumber" xml:space="preserve">
     <value>Номер договора</value>
   </data>
+  <data name="OtherFiles" xml:space="preserve">
+    <value>Другие файлы</value>
+  </data>
 </root>

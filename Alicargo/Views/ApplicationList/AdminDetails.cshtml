@@ -247,3 +247,13 @@
 	# } #
 </p>
 # } #
+# if(OtherFiles != null){ #
+<p>
+	<span>@Entities.OtherFiles:</span>
+	# for(i in OtherFiles) { #
+	# var item = OtherFiles[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.AwbFile.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
+</p>
+# } #

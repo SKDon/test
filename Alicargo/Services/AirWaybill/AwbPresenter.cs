@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.Exceptions;
@@ -20,8 +20,8 @@ namespace Alicargo.Services.AirWaybill
 	internal sealed class AwbPresenter : IAwbPresenter
 	{
 		private readonly IAwbRepository _awbs;
-		private readonly IAwbFileRepository _files;
 		private readonly IBrokerRepository _brokers;
+		private readonly IAwbFileRepository _files;
 		private readonly IStateRepository _states;
 
 		public AwbPresenter(
@@ -45,24 +45,24 @@ namespace Alicargo.Services.AirWaybill
 
 			var states = _states.Get(language);
 			var currentCulture = CultureProvider.GetCultureInfo();
-			var awbFiles = GetNames(ids, AwbFileType.AWB);
-			var packingFiles = GetNames(ids, AwbFileType.Packing);
-			var drawFiles = GetNames(ids, AwbFileType.Draw);
-			var gtdFiles = GetNames(ids, AwbFileType.GTD);
-			var gtdAddFiles = GetNames(ids, AwbFileType.GTDAdditional);
-			var invoiceFiles = GetNames(ids, AwbFileType.Invoice);
+			var awbFiles = GetFileInfo(ids, AwbFileType.AWB);
+			var packingFiles = GetFileInfo(ids, AwbFileType.Packing);
+			var drawFiles = GetFileInfo(ids, AwbFileType.Draw);
+			var gtdFiles = GetFileInfo(ids, AwbFileType.GTD);
+			var gtdAddFiles = GetFileInfo(ids, AwbFileType.GTDAdditional);
+			var invoiceFiles = GetFileInfo(ids, AwbFileType.Invoice);
 
 			var items = data.Select(x => new AirWaybillListItem
 			{
 				Id = x.Id,
-				PackingFileName = GetName(packingFiles, x.Id),
-				InvoiceFileName = GetName(invoiceFiles, x.Id),
+				PackingFiles = GetFileInfo(packingFiles, x.Id),
+				InvoiceFiles = GetFileInfo(invoiceFiles, x.Id),
 				State = new ApplicationStateModel
 				{
 					StateName = states[x.StateId].LocalizedName,
 					StateId = x.StateId
 				},
-				AWBFileName = GetName(awbFiles, x.Id),
+				AWBFiles = GetFileInfo(awbFiles, x.Id),
 				ArrivalAirport = x.ArrivalAirport,
 				Bill = x.Bill,
 				CreationTimestampLocalString = LocalizationHelper.GetDate(x.CreationTimestamp, currentCulture),
@@ -71,9 +71,9 @@ namespace Alicargo.Services.AirWaybill
 				StateChangeTimestampLocalString = LocalizationHelper.GetDate(x.StateChangeTimestamp, currentCulture),
 				DepartureAirport = x.DepartureAirport,
 				GTD = x.GTD,
-				GTDAdditionalFileName = GetName(gtdAddFiles, x.Id),
-				GTDFileName = GetName(gtdFiles, x.Id),
-				DrawFileName = GetName(drawFiles, x.Id),
+				GTDAdditionalFiles = GetFileInfo(gtdAddFiles, x.Id),
+				GTDFiles = GetFileInfo(gtdFiles, x.Id),
+				DrawFiles = GetFileInfo(drawFiles, x.Id),
 				TotalCount = aggregates[x.Id].TotalCount,
 				TotalWeight = aggregates[x.Id].TotalWeight,
 				AdditionalCost = x.AdditionalCost,
@@ -86,16 +86,6 @@ namespace Alicargo.Services.AirWaybill
 			var total = _awbs.Count(brokerId);
 
 			return new ListCollection<AirWaybillListItem> { Data = items, Total = total };
-		}
-
-		private Dictionary<long, string> GetNames(long[] ids, AwbFileType type)
-		{
-			return _files.GetInfo(ids, type).ToDictionary(x => x.Key, x => string.Join(", ", x.Value.Select(y => y.Name)));
-		}
-
-		private static string GetName(Dictionary<long, string> names, long awbId)
-		{
-			return names != null && names.ContainsKey(awbId) ? names[awbId] : null;
 		}
 
 		public AwbAdminModel Get(long id)
@@ -127,6 +117,16 @@ namespace Alicargo.Services.AirWaybill
 		public BrokerData GetBroker(long brokerId)
 		{
 			return _brokers.Get(brokerId);
+		}
+
+		private ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>> GetFileInfo(long[] ids, AwbFileType type)
+		{
+			return _files.GetInfo(ids, type);
+		}
+
+		private static FileInfo[] GetFileInfo(ReadOnlyDictionary<long, ReadOnlyCollection<FileInfo>> names, long awbId)
+		{
+			return names != null && names.ContainsKey(awbId) ? names[awbId].ToArray() : null;
 		}
 	}
 }

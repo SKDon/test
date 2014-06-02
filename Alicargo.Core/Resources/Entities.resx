@@ -495,4 +495,7 @@
   <data name="ContractNumber" xml:space="preserve">
     <value>Contract number</value>
   </data>
+  <data name="OtherFiles" xml:space="preserve">
+    <value>Other files</value>
+  </data>
 </root>

@@ -56,39 +56,45 @@ namespace Alicargo.Controllers.Awb
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult AWB()
+        public virtual System.Web.Mvc.ViewResult Admin()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.AWB);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Admin);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult GTDAdditional()
+        public virtual System.Web.Mvc.ViewResult Broker()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDAdditional);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Broker);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult GTD()
+        public virtual System.Web.Mvc.HttpStatusCodeResult Delete()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTD);
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult Invoice()
+        public virtual System.Web.Mvc.FileResult Download()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Invoice);
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult Packing()
+        public virtual System.Web.Mvc.JsonResult Files()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Packing);
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Files);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult Draw()
+        public virtual System.Web.Mvc.ViewResult Sender()
         {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Draw);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Sender);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult Upload()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Upload);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -106,73 +112,86 @@ namespace Alicargo.Controllers.Awb
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string AWB = "AWB";
-            public readonly string GTDAdditional = "GTDAdditional";
-            public readonly string GTD = "GTD";
-            public readonly string Invoice = "Invoice";
-            public readonly string Packing = "Packing";
-            public readonly string Draw = "Draw";
+            public readonly string Admin = "Admin";
+            public readonly string Broker = "Broker";
+            public readonly string Delete = "Delete";
+            public readonly string Download = "Download";
+            public readonly string Files = "Files";
+            public readonly string Sender = "Sender";
+            public readonly string Upload = "Upload";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string AWB = "AWB";
-            public const string GTDAdditional = "GTDAdditional";
-            public const string GTD = "GTD";
-            public const string Invoice = "Invoice";
-            public const string Packing = "Packing";
-            public const string Draw = "Draw";
+            public const string Admin = "Admin";
+            public const string Broker = "Broker";
+            public const string Delete = "Delete";
+            public const string Download = "Download";
+            public const string Files = "Files";
+            public const string Sender = "Sender";
+            public const string Upload = "Upload";
         }
 
 
-        static readonly ActionParamsClass_AWB s_params_AWB = new ActionParamsClass_AWB();
+        static readonly ActionParamsClass_Admin s_params_Admin = new ActionParamsClass_Admin();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_AWB AWBParams { get { return s_params_AWB; } }
+        public ActionParamsClass_Admin AdminParams { get { return s_params_Admin; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_AWB
+        public class ActionParamsClass_Admin
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_GTDAdditional s_params_GTDAdditional = new ActionParamsClass_GTDAdditional();
+        static readonly ActionParamsClass_Broker s_params_Broker = new ActionParamsClass_Broker();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_GTDAdditional GTDAdditionalParams { get { return s_params_GTDAdditional; } }
+        public ActionParamsClass_Broker BrokerParams { get { return s_params_Broker; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_GTDAdditional
+        public class ActionParamsClass_Broker
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_GTD s_params_GTD = new ActionParamsClass_GTD();
+        static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_GTD GTDParams { get { return s_params_GTD; } }
+        public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_GTD
+        public class ActionParamsClass_Delete
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Invoice s_params_Invoice = new ActionParamsClass_Invoice();
+        static readonly ActionParamsClass_Download s_params_Download = new ActionParamsClass_Download();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Invoice InvoiceParams { get { return s_params_Invoice; } }
+        public ActionParamsClass_Download DownloadParams { get { return s_params_Download; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Invoice
+        public class ActionParamsClass_Download
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Packing s_params_Packing = new ActionParamsClass_Packing();
+        static readonly ActionParamsClass_Files s_params_Files = new ActionParamsClass_Files();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Packing PackingParams { get { return s_params_Packing; } }
+        public ActionParamsClass_Files FilesParams { get { return s_params_Files; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Packing
+        public class ActionParamsClass_Files
+        {
+            public readonly string id = "id";
+            public readonly string type = "type";
+        }
+        static readonly ActionParamsClass_Sender s_params_Sender = new ActionParamsClass_Sender();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Sender SenderParams { get { return s_params_Sender; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Sender
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Draw s_params_Draw = new ActionParamsClass_Draw();
+        static readonly ActionParamsClass_Upload s_params_Upload = new ActionParamsClass_Upload();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Draw DrawParams { get { return s_params_Draw; } }
+        public ActionParamsClass_Upload UploadParams { get { return s_params_Upload; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Draw
+        public class ActionParamsClass_Upload
         {
             public readonly string id = "id";
+            public readonly string type = "type";
+            public readonly string file = "file";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -184,7 +203,15 @@ namespace Alicargo.Controllers.Awb
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Admin = "Admin";
+                public readonly string Broker = "Broker";
+                public readonly string FilesHolder = "FilesHolder";
+                public readonly string Sender = "Sender";
             }
+            public readonly string Admin = "~/Views/AwbFile/Admin.cshtml";
+            public readonly string Broker = "~/Views/AwbFile/Broker.cshtml";
+            public readonly string FilesHolder = "~/Views/AwbFile/FilesHolder.cshtml";
+            public readonly string Sender = "~/Views/AwbFile/Sender.cshtml";
         }
     }
 
@@ -194,74 +221,89 @@ namespace Alicargo.Controllers.Awb
         public T4MVC_AwbFileController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void AWBOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void AdminOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.FileResult AWB(long id)
+        public override System.Web.Mvc.ViewResult Admin(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.AWB);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Admin);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            AWBOverride(callInfo, id);
+            AdminOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void GTDAdditionalOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void BrokerOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.FileResult GTDAdditional(long id)
+        public override System.Web.Mvc.ViewResult Broker(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTDAdditional);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Broker);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            GTDAdditionalOverride(callInfo, id);
+            BrokerOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void GTDOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.FileResult GTD(long id)
+        public override System.Web.Mvc.HttpStatusCodeResult Delete(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.GTD);
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            GTDOverride(callInfo, id);
+            DeleteOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void InvoiceOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void DownloadOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.FileResult Invoice(long id)
+        public override System.Web.Mvc.FileResult Download(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Invoice);
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            InvoiceOverride(callInfo, id);
+            DownloadOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void PackingOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void FilesOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.DataAccess.Contracts.Enums.AwbFileType type);
 
         [NonAction]
-        public override System.Web.Mvc.FileResult Packing(long id)
+        public override System.Web.Mvc.JsonResult Files(long id, Alicargo.DataAccess.Contracts.Enums.AwbFileType type)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Packing);
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Files);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            PackingOverride(callInfo, id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "type", type);
+            FilesOverride(callInfo, id, type);
             return callInfo;
         }
 
         [NonAction]
-        partial void DrawOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+        partial void SenderOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.FileResult Draw(long id)
+        public override System.Web.Mvc.ViewResult Sender(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Draw);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Sender);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            DrawOverride(callInfo, id);
+            SenderOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void UploadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.DataAccess.Contracts.Enums.AwbFileType type, System.Web.HttpPostedFileBase file);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult Upload(long id, Alicargo.DataAccess.Contracts.Enums.AwbFileType type, System.Web.HttpPostedFileBase file)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Upload);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "type", type);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "file", file);
+            UploadOverride(callInfo, id, type, file);
             return callInfo;
         }
 

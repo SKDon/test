@@ -780,6 +780,10 @@
     <Content Include="Views\Carrier\EditorTemplates\CarrierModel.cshtml" />
     <Content Include="Views\Carrier\Create.cshtml" />
     <Content Include="Views\Carrier\Edit.cshtml" />
+    <Content Include="Views\AwbFile\Admin.cshtml" />
+    <Content Include="Views\AwbFile\Broker.cshtml" />
+    <Content Include="Views\AwbFile\Sender.cshtml" />
+    <Content Include="Views\AwbFile\FilesHolder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

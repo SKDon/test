@@ -53,6 +53,7 @@ namespace Alicargo.Services.Application
 			var deliveryBills = _files.GetInfo(appIds, ApplicationFileType.DeliveryBill);
 			var invoices = _files.GetInfo(appIds, ApplicationFileType.Invoice);
 			var packings = _files.GetInfo(appIds, ApplicationFileType.Packing);
+			var otherFiles = _files.GetInfo(appIds, ApplicationFileType.Other);
 			var swifts = _files.GetInfo(appIds, ApplicationFileType.Swift);
 			var torg12 = _files.GetInfo(appIds, ApplicationFileType.Torg12);
 			var cities = _cities.All(language).ToDictionary(x => x.Id, x => x.Name);
@@ -121,6 +122,7 @@ namespace Alicargo.Services.Application
 				DeliveryBillFiles = deliveryBills.ContainsKey(x.Id) ? deliveryBills[x.Id].ToArray() : null,
 				InvoiceFiles = invoices.ContainsKey(x.Id) ? invoices[x.Id].ToArray() : null,
 				PackingFiles = packings.ContainsKey(x.Id) ? packings[x.Id].ToArray() : null,
+				OtherFiles = otherFiles.ContainsKey(x.Id) ? otherFiles[x.Id].ToArray() : null,
 				SwiftFiles = swifts.ContainsKey(x.Id) ? swifts[x.Id].ToArray() : null,
 				Torg12Files = torg12.ContainsKey(x.Id) ? torg12[x.Id].ToArray() : null,
 				DisplayNumber = x.GetApplicationDisplay(),

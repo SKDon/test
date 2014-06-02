@@ -56,12 +56,6 @@ namespace Alicargo.Controllers.Application
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.FileResult Download()
-        {
-            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ViewResult AdminApplication()
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.AdminApplication);
@@ -74,9 +68,15 @@ namespace Alicargo.Controllers.Application
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult SenderApplication()
+        public virtual System.Web.Mvc.HttpStatusCodeResult Delete()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.SenderApplication);
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.FileResult Download()
+        {
+            return new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -86,15 +86,15 @@ namespace Alicargo.Controllers.Application
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult Upload()
+        public virtual System.Web.Mvc.ViewResult SenderApplication()
         {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Upload);
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.SenderApplication);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.HttpStatusCodeResult Delete()
+        public virtual System.Web.Mvc.JsonResult Upload()
         {
-            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Upload);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -112,36 +112,28 @@ namespace Alicargo.Controllers.Application
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Download = "Download";
             public readonly string AdminApplication = "AdminApplication";
             public readonly string ClientApplication = "ClientApplication";
-            public readonly string SenderApplication = "SenderApplication";
-            public readonly string Files = "Files";
-            public readonly string Upload = "Upload";
             public readonly string Delete = "Delete";
+            public readonly string Download = "Download";
+            public readonly string Files = "Files";
+            public readonly string SenderApplication = "SenderApplication";
+            public readonly string Upload = "Upload";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Download = "Download";
             public const string AdminApplication = "AdminApplication";
             public const string ClientApplication = "ClientApplication";
-            public const string SenderApplication = "SenderApplication";
-            public const string Files = "Files";
-            public const string Upload = "Upload";
             public const string Delete = "Delete";
+            public const string Download = "Download";
+            public const string Files = "Files";
+            public const string SenderApplication = "SenderApplication";
+            public const string Upload = "Upload";
         }
 
 
-        static readonly ActionParamsClass_Download s_params_Download = new ActionParamsClass_Download();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Download DownloadParams { get { return s_params_Download; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Download
-        {
-            public readonly string id = "id";
-        }
         static readonly ActionParamsClass_AdminApplication s_params_AdminApplication = new ActionParamsClass_AdminApplication();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_AdminApplication AdminApplicationParams { get { return s_params_AdminApplication; } }
@@ -158,11 +150,19 @@ namespace Alicargo.Controllers.Application
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_SenderApplication s_params_SenderApplication = new ActionParamsClass_SenderApplication();
+        static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SenderApplication SenderApplicationParams { get { return s_params_SenderApplication; } }
+        public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SenderApplication
+        public class ActionParamsClass_Delete
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Download s_params_Download = new ActionParamsClass_Download();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Download DownloadParams { get { return s_params_Download; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Download
         {
             public readonly string id = "id";
         }
@@ -175,6 +175,14 @@ namespace Alicargo.Controllers.Application
             public readonly string id = "id";
             public readonly string type = "type";
         }
+        static readonly ActionParamsClass_SenderApplication s_params_SenderApplication = new ActionParamsClass_SenderApplication();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SenderApplication SenderApplicationParams { get { return s_params_SenderApplication; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SenderApplication
+        {
+            public readonly string id = "id";
+        }
         static readonly ActionParamsClass_Upload s_params_Upload = new ActionParamsClass_Upload();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Upload UploadParams { get { return s_params_Upload; } }
@@ -184,14 +192,6 @@ namespace Alicargo.Controllers.Application
             public readonly string id = "id";
             public readonly string type = "type";
             public readonly string file = "file";
-        }
-        static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Delete
-        {
-            public readonly string id = "id";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -221,18 +221,6 @@ namespace Alicargo.Controllers.Application
         public T4MVC_ApplicationFilesController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void DownloadOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
-
-        [NonAction]
-        public override System.Web.Mvc.FileResult Download(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            DownloadOverride(callInfo, id);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void AdminApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
 
         [NonAction]
@@ -257,14 +245,26 @@ namespace Alicargo.Controllers.Application
         }
 
         [NonAction]
-        partial void SenderApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult SenderApplication(long id)
+        public override System.Web.Mvc.HttpStatusCodeResult Delete(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.SenderApplication);
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            SenderApplicationOverride(callInfo, id);
+            DeleteOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void DownloadOverride(T4MVC_System_Web_Mvc_FileResult callInfo, long id);
+
+        [NonAction]
+        public override System.Web.Mvc.FileResult Download(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_FileResult(Area, Name, ActionNames.Download);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DownloadOverride(callInfo, id);
             return callInfo;
         }
 
@@ -282,6 +282,18 @@ namespace Alicargo.Controllers.Application
         }
 
         [NonAction]
+        partial void SenderApplicationOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+
+        [NonAction]
+        public override System.Web.Mvc.ViewResult SenderApplication(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.SenderApplication);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            SenderApplicationOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
         partial void UploadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, long id, Alicargo.DataAccess.Contracts.Enums.ApplicationFileType type, System.Web.HttpPostedFileBase file);
 
         [NonAction]
@@ -292,18 +304,6 @@ namespace Alicargo.Controllers.Application
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "type", type);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "file", file);
             UploadOverride(callInfo, id, type, file);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void DeleteOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id);
-
-        [NonAction]
-        public override System.Web.Mvc.HttpStatusCodeResult Delete(long id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            DeleteOverride(callInfo, id);
             return callInfo;
         }
 

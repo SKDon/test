@@ -1,8 +1,9 @@
-﻿using Alicargo.ViewModels.Application;
+﻿using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.ViewModels.Application;
 
 namespace Alicargo.ViewModels.AirWaybill
 {
-    public sealed class AirWaybillListItem
+	public sealed class AirWaybillListItem
 	{
 		public long Id { get; set; }
 
@@ -28,18 +29,6 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		public string GTD { get; set; }
 
-		public string GTDFileName { get; set; }
-
-		public string GTDAdditionalFileName { get; set; }
-
-		public string PackingFileName { get; set; }
-
-		public string InvoiceFileName { get; set; }
-
-		public string AWBFileName { get; set; }
-
-		public string DrawFileName { get; set; }
-
 		public decimal? FlightCost { get; set; }
 
 		public decimal? CustomCost { get; set; }
@@ -49,5 +38,19 @@ namespace Alicargo.ViewModels.AirWaybill
 		public decimal? AdditionalCost { get; set; }
 
 		public decimal? TotalCostOfSenderForWeight { get; set; }
+
+		public FileInfo[] GTDFiles { get; set; }
+
+		public FileInfo[] GTDAdditionalFiles { get; set; }
+
+		public FileInfo[] PackingFiles { get; set; }
+
+		public FileInfo[] InvoiceFiles { get; set; }
+
+		public FileInfo[] AWBFiles { get; set; }
+
+		public FileInfo[] DrawFiles { get; set; }
+
+		public FileInfo[] OtherFiles { get; set; }
 	}
 }

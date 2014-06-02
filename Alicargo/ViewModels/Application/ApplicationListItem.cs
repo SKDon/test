@@ -67,6 +67,8 @@ namespace Alicargo.ViewModels.Application
 
 		public FileInfo[] CPFiles { get; set; }
 
+		public FileInfo[] OtherFiles { get; set; }
+
 		public string Characteristic { get; set; }
 
 		public string AddressLoad { get; set; }
