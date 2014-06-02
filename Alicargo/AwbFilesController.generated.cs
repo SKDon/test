@@ -23,10 +23,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace Alicargo.Controllers.Awb
 {
-    public partial class AwbFileController
+    public partial class AwbFilesController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected AwbFileController(Dummy d) { }
+        protected AwbFilesController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -98,13 +98,13 @@ namespace Alicargo.Controllers.Awb
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AwbFileController Actions { get { return MVC.AwbFile; } }
+        public AwbFilesController Actions { get { return MVC.AwbFiles; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "AwbFile";
+        public readonly string Name = "AwbFiles";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "AwbFile";
+        public const string NameConst = "AwbFiles";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -208,17 +208,17 @@ namespace Alicargo.Controllers.Awb
                 public readonly string FilesHolder = "FilesHolder";
                 public readonly string Sender = "Sender";
             }
-            public readonly string Admin = "~/Views/AwbFile/Admin.cshtml";
-            public readonly string Broker = "~/Views/AwbFile/Broker.cshtml";
-            public readonly string FilesHolder = "~/Views/AwbFile/FilesHolder.cshtml";
-            public readonly string Sender = "~/Views/AwbFile/Sender.cshtml";
+            public readonly string Admin = "~/Views/AwbFiles/Admin.cshtml";
+            public readonly string Broker = "~/Views/AwbFiles/Broker.cshtml";
+            public readonly string FilesHolder = "~/Views/AwbFiles/FilesHolder.cshtml";
+            public readonly string Sender = "~/Views/AwbFiles/Sender.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AwbFileController : Alicargo.Controllers.Awb.AwbFileController
+    public partial class T4MVC_AwbFilesController : Alicargo.Controllers.Awb.AwbFilesController
     {
-        public T4MVC_AwbFileController() : base(Dummy.Instance) { }
+        public T4MVC_AwbFilesController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void AdminOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);

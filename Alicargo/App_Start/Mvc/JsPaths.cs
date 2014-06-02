@@ -64,8 +64,11 @@ namespace Alicargo.Mvc
 		[Path("~/Scripts/app/Template/Edit.js")]
 		public const string TemplateEditJs = "~/js/template-edit-js";
 
-		[Path("~/Scripts/app/files.js")]
-		public const string FilesJs = "~/js/files-js";
+		[Path("~/Scripts/app/Application/files.js")]
+		public const string ApplicationFilesJs = "~/js/app-files-js";
+
+		[Path("~/Scripts/app/AirWaybill/files.js")]
+		public const string AwbFilesJs = "~/js/awb-files-js";
 
 		[Path("~/Scripts/app/City/Grid.js")]
 		public const string CityListJs = "~/js/city-list-js";

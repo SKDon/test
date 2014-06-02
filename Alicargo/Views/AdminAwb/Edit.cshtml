@@ -5,5 +5,5 @@
 	<h1>
 		@Pages.AirWaybillEdit
 	</h1>
-	@Html.EditPage(Url.Action(MVC.AdminAwb.Edit()), Pages.Save, @Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))
+	@Html.EditPage(Url.Action(MVC.AdminAwb.Edit()), Pages.Save, @Html.Partial("EditButtons", (long)ViewBag.AwbId))
 </div>

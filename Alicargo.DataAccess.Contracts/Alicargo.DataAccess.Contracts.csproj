@@ -107,6 +107,11 @@
     <Compile Include="Repositories\Application\IBillRepository.cs" />
     <Compile Include="Repositories\ISettingRepository.cs" />
     <Compile Include="Repositories\User\IManagerRepository.cs" />
+    <Compile Include="Resources\AwbFileType.Designer.cs">
+      <DependentUpon>AwbFileType.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\ApplicationFileType.Designer.cs">
       <DependentUpon>ApplicationFileType.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -114,6 +119,11 @@
     </Compile>
     <Compile Include="Resources\ApplicationFileType.it.Designer.cs">
       <DependentUpon>ApplicationFileType.it.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\AwbFileType.ru.Designer.cs">
+      <DependentUpon>AwbFileType.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -174,6 +184,10 @@
     <Compile Include="Repositories\User\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\AwbFileType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AwbFileType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ApplicationFileType.it.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationFileType.it.Designer.cs</LastGenOutput>
@@ -181,6 +195,10 @@
     <EmbeddedResource Include="Resources\ApplicationFileType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationFileType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AwbFileType.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AwbFileType.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ApplicationFileType.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

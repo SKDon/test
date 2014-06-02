@@ -35,7 +35,7 @@ public static partial class MVC
     public static Alicargo.Controllers.Application.SenderApplicationController SenderApplication = new Alicargo.Controllers.Application.T4MVC_SenderApplicationController();
     public static Alicargo.Controllers.Awb.AdminAwbController AdminAwb = new Alicargo.Controllers.Awb.T4MVC_AdminAwbController();
     public static Alicargo.Controllers.Awb.AirWaybillController AirWaybill = new Alicargo.Controllers.Awb.T4MVC_AirWaybillController();
-    public static Alicargo.Controllers.Awb.AwbFileController AwbFile = new Alicargo.Controllers.Awb.T4MVC_AwbFileController();
+    public static Alicargo.Controllers.Awb.AwbFilesController AwbFiles = new Alicargo.Controllers.Awb.T4MVC_AwbFilesController();
     public static Alicargo.Controllers.Awb.BrokerAwbController BrokerAwb = new Alicargo.Controllers.Awb.T4MVC_BrokerAwbController();
     public static Alicargo.Controllers.Awb.SenderAwbController SenderAwb = new Alicargo.Controllers.Awb.T4MVC_SenderAwbController();
     public static Alicargo.Controllers.Calculation.BalanceController Balance = new Alicargo.Controllers.Calculation.T4MVC_BalanceController();
@@ -199,6 +199,7 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
+                public static readonly string Files_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Files.min.js") ? Url("Files.min.js") : Url("Files.js");
                 public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
             }
         
@@ -209,6 +210,7 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
+                public static readonly string Files_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Files.min.js") ? Url("Files.min.js") : Url("Files.js");
                 public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
             }
         

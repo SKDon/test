@@ -12,7 +12,7 @@ using Alicargo.MvcHelpers.Filters;
 
 namespace Alicargo.Controllers.Awb
 {
-	public partial class AwbFileController : Controller
+	public partial class AwbFilesController : Controller
 	{
 		private static readonly IReadOnlyDictionary<AwbFileType, EventType> TypesMapping
 			= new Dictionary<AwbFileType, EventType>
@@ -29,7 +29,7 @@ namespace Alicargo.Controllers.Awb
 		private readonly IEventFacade _facade;
 		private readonly IAwbFileRepository _files;
 
-		public AwbFileController(IAwbFileRepository files, IEventFacade facade)
+		public AwbFilesController(IAwbFileRepository files, IEventFacade facade)
 		{
 			_files = files;
 			_facade = facade;

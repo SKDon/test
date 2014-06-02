@@ -2,6 +2,6 @@
 @model AwbFileType
 
 <b>@Alicargo.DataAccess.Contracts.Resources.AwbFileType.ResourceManager.GetString(Model.ToString())</b>
-<div data-type="@Model" data-app-id="@ViewBag.AwbId" class="files-holder">
+<div data-type="@Model" data-awb-id="@ViewBag.AwbId" class="files-holder">
 	<input id="@Model" name="file" type="file" />
 </div>

@@ -6,13 +6,13 @@
 		# if(PackingFileName != null){ #
 		<p>
 			<span>@Entities.Packing:</span>
-			<a href="@Url.Action(MVC.AwbFile.Packing())/#= Id #">#= PackingFileName #</a>
+			<a href="@Url.Action(MVC.AwbFiles.Packing())/#= Id #">#= PackingFileName #</a>
 		</p>
 		# } #
 		# if(AWBFileName != null){ #
 		<p>
 			<span>@Entities.AWB:</span>
-			<a href="@Url.Action(MVC.AwbFile.AWB())/#= Id #">#= AWBFileName #</a>
+			<a href="@Url.Action(MVC.AwbFiles.AWB())/#= Id #">#= AWBFileName #</a>
 		</p>
 		# } #
 	</div>

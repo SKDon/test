@@ -193,7 +193,7 @@
     <Compile Include="AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="AwbFileController.generated.cs">
+    <Compile Include="AwbFilesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="BalanceController.generated.cs">
@@ -269,7 +269,7 @@
     <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
     <Compile Include="Controllers\Application\ClientApplicatonController.cs" />
     <Compile Include="Controllers\Awb\AdminAwbController.cs" />
-    <Compile Include="Controllers\Awb\AwbFileController.cs" />
+    <Compile Include="Controllers\Awb\AwbFilesController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
@@ -596,9 +596,11 @@
     <Content Include="Content\themes\jMetro\images\ui-icons_ffffff_0.png" />
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
+    <Content Include="Scripts\app\AirWaybill\Files.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />
     <Content Include="Scripts\app\Application\Columns.js" />
+    <Content Include="Scripts\app\Application\Files.js" />
     <Content Include="Scripts\app\Application\Grid.js" />
     <Content Include="Scripts\app\Calculation\Admin\Bill.js" />
     <Content Include="Scripts\app\Calculation\Admin\Columns.js" />
@@ -780,10 +782,11 @@
     <Content Include="Views\Carrier\EditorTemplates\CarrierModel.cshtml" />
     <Content Include="Views\Carrier\Create.cshtml" />
     <Content Include="Views\Carrier\Edit.cshtml" />
-    <Content Include="Views\AwbFile\Admin.cshtml" />
-    <Content Include="Views\AwbFile\Broker.cshtml" />
-    <Content Include="Views\AwbFile\Sender.cshtml" />
-    <Content Include="Views\AwbFile\FilesHolder.cshtml" />
+    <Content Include="Views\AwbFiles\Admin.cshtml" />
+    <Content Include="Views\AwbFiles\Broker.cshtml" />
+    <Content Include="Views\AwbFiles\Sender.cshtml" />
+    <Content Include="Views\AwbFiles\FilesHolder.cshtml" />
+    <Content Include="Views\AdminAwb\EditButtons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
