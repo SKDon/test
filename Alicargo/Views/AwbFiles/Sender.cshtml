@@ -1,1 +1,27 @@
-﻿
+﻿@using Alicargo.DataAccess.Contracts.Enums
+@using Alicargo.Mvc
+@using Resources
+<div class="container-edit">
+	<h1>
+		@ViewBag.Awb
+	</h1>
+	<div class="row">
+		<div class="span3">
+			@Html.Partial("FilesHolder", AwbFileType.Packing)
+		</div>
+		<div class="span3">
+			@Html.Partial("FilesHolder", AwbFileType.Draw)
+		</div>
+		<div class="span3">
+			@Html.Partial("FilesHolder", AwbFileType.Other)
+		</div>
+	</div>
+	<br />
+	<p>
+		<a href="@Url.Action(MVC.SenderAwb.Edit((long) ViewBag.AwbId))" class="btn btn-primary">@Pages.Edit</a>
+	</p>
+	@section scripts
+	{
+		@Scripts.Render(JsPaths.AwbFilesJs)
+	}
+</div>

@@ -1,5 +1,4 @@
 ﻿using Alicargo.Core.Resources;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 
 namespace Alicargo.Core.AirWaybill
@@ -8,7 +7,8 @@ namespace Alicargo.Core.AirWaybill
 	{
 		public static string GetAirWaybillDisplay(AirWaybillData data)
 		{
-			return string.Format("{0} ± {1}_{2} ± {3}_{4}{5}", data.Bill,
+			return string.Format("{0} ± {1}_{2} ± {3}_{4}{5}",
+				data.Bill,
 				data.DepartureAirport,
 				data.DateOfDeparture.ToString("ddMMMyyyy").ToUpperInvariant(),
 				data.ArrivalAirport,

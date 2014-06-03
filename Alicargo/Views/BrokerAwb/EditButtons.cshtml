@@ -1,0 +1,5 @@
+﻿@using Resources
+@model long
+		   
+@Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton(Model))
+@Html.ActionLink(Pages.Files, MVC.AwbFiles.Broker(Model), new { @class = "btn btn-info" })

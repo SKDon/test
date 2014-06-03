@@ -3,16 +3,34 @@
 
 <div class='grid-details'>
 	<div class="properties">
-		# if(PackingFileName != null){ #
+		# if(AWBFiles != null){ #
+		<p>
+			<span>@Entities.Invoice:</span>
+			# for(i in AWBFiles) { #
+			# var item = AWBFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+		</p>
+		# } #		
+		# if(PackingFiles != null){ #
 		<p>
 			<span>@Entities.Packing:</span>
-			<a href="@Url.Action(MVC.AwbFiles.Packing())/#= Id #">#= PackingFileName #</a>
+			# for(i in PackingFiles) { #
+			# var item = PackingFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
 		</p>
-		# } #
-		# if(AWBFileName != null){ #
+		# } #		
+		# if(OtherFiles != null){ #
 		<p>
-			<span>@Entities.AWB:</span>
-			<a href="@Url.Action(MVC.AwbFiles.AWB())/#= Id #">#= AWBFileName #</a>
+			<span>@Entities.OtherFiles:</span>
+			# for(i in OtherFiles) { #
+			# var item = OtherFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
 		</p>
 		# } #
 	</div>

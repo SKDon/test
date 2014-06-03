@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.Event;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -26,20 +27,22 @@ namespace Alicargo.Controllers.Awb
 				{ AwbFileType.Draw, EventType.DrawFileUploaded },
 			};
 
+		private readonly IAwbRepository _awbs;
 		private readonly IEventFacade _facade;
 		private readonly IAwbFileRepository _files;
 
-		public AwbFilesController(IAwbFileRepository files, IEventFacade facade)
+		public AwbFilesController(IAwbFileRepository files, IEventFacade facade, IAwbRepository awbs)
 		{
 			_files = files;
 			_facade = facade;
+			_awbs = awbs;
 		}
 
 		[HttpGet]
 		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Admin(long id)
 		{
-			ViewBag.AwbId = id;
+			BindBag(id);
 
 			return View();
 		}
@@ -48,7 +51,7 @@ namespace Alicargo.Controllers.Awb
 		[Access(RoleType.Broker)]
 		public virtual ViewResult Broker(long id)
 		{
-			ViewBag.AwbId = id;
+			BindBag(id);
 
 			return View();
 		}
@@ -88,7 +91,7 @@ namespace Alicargo.Controllers.Awb
 		[Access(RoleType.Sender)]
 		public virtual ViewResult Sender(long id)
 		{
-			ViewBag.AwbId = id;
+			BindBag(id);
 
 			return View();
 		}
@@ -119,6 +122,13 @@ namespace Alicargo.Controllers.Awb
 					Data = fileData,
 					Name = fileName
 				});
+		}
+
+		private void BindBag(long id)
+		{
+			ViewBag.AwbId = id;
+			var awb = _awbs.Get(id).Single();
+			ViewBag.Awb = AwbHelper.GetAirWaybillDisplay(awb);
 		}
 	}
 }

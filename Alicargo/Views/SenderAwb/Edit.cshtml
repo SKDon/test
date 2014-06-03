@@ -2,5 +2,6 @@
 @using Resources
 @model Alicargo.ViewModels.AirWaybill.AwbSenderModel
 <div class="container-edit">
-	@Html.EditPage(Url.Action(MVC.SenderAwb.Edit()), Pages.Save)
+	@Html.EditPage(Url.Action(MVC.SenderAwb.Edit()), Pages.Save,
+		@Html.Partial("EditButtons", (long)ViewBag.AwbId))
 </div>

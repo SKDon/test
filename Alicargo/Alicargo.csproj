@@ -787,6 +787,8 @@
     <Content Include="Views\AwbFiles\Sender.cshtml" />
     <Content Include="Views\AwbFiles\FilesHolder.cshtml" />
     <Content Include="Views\AdminAwb\EditButtons.cshtml" />
+    <Content Include="Views\BrokerAwb\EditButtons.cshtml" />
+    <Content Include="Views\SenderAwb\EditButtons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
