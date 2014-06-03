@@ -1,6 +1,8 @@
 ﻿@using Alicargo.DataAccess.Contracts.Enums
 @using Alicargo.Mvc
-@using Resources
+@{
+	Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
 <div class="container-edit">
 	<h1>
 		@ViewBag.Awb
@@ -31,10 +33,6 @@
 			@Html.Partial("FilesHolder", AwbFileType.AWB)
 		</div>
 	</div>
-	<br />
-	<p>
-		<a href="@Url.Action(MVC.AdminAwb.Edit((long) ViewBag.AwbId))" class="btn btn-primary">@Pages.Edit</a>
-	</p>
 	@section scripts
 	{
 		@Scripts.Render(JsPaths.AwbFilesJs)

@@ -1,4 +1,5 @@
 ﻿@using Alicargo.Core.Resources
+@using Alicargo.Mvc
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model Alicargo.ViewModels.AirWaybill.AwbBrokerModel
@@ -10,3 +11,7 @@
 	@Html.EditPage(Url.Action(MVC.BrokerAwb.Edit()), Pages.Save,
 		@Html.Partial("EditButtons", (long)ViewBag.AwbId))
 </div>
+@section scripts
+{
+	@Scripts.Render(JsPaths.AwbFileButtonJs)
+}

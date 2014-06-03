@@ -70,6 +70,9 @@ namespace Alicargo.Mvc
 		[Path("~/Scripts/app/AirWaybill/files.js")]
 		public const string AwbFilesJs = "~/js/awb-files-js";
 
+		[Path("~/Scripts/app/AirWaybill/FileButton.js")]
+		public const string AwbFileButtonJs = "~/js/awb-file-button-js";
+
 		[Path("~/Scripts/app/City/Grid.js")]
 		public const string CityListJs = "~/js/city-list-js";
 
