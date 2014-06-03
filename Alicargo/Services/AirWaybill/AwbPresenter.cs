@@ -51,6 +51,7 @@ namespace Alicargo.Services.AirWaybill
 			var gtdFiles = GetFileInfo(ids, AwbFileType.GTD);
 			var gtdAddFiles = GetFileInfo(ids, AwbFileType.GTDAdditional);
 			var invoiceFiles = GetFileInfo(ids, AwbFileType.Invoice);
+			var otherFiles = GetFileInfo(ids, AwbFileType.Other);
 
 			var items = data.Select(x => new AirWaybillListItem
 			{
@@ -63,6 +64,7 @@ namespace Alicargo.Services.AirWaybill
 					StateId = x.StateId
 				},
 				AWBFiles = GetFileInfo(awbFiles, x.Id),
+				OtherFiles = GetFileInfo(otherFiles, x.Id),
 				ArrivalAirport = x.ArrivalAirport,
 				Bill = x.Bill,
 				CreationTimestampLocalString = LocalizationHelper.GetDate(x.CreationTimestamp, currentCulture),
