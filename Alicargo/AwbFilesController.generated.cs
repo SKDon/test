@@ -56,15 +56,15 @@ namespace Alicargo.Controllers.Awb
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Admin()
+        public virtual System.Web.Mvc.PartialViewResult Admin()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Admin);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Admin);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Broker()
+        public virtual System.Web.Mvc.PartialViewResult Broker()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Broker);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Broker);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -86,9 +86,9 @@ namespace Alicargo.Controllers.Awb
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Sender()
+        public virtual System.Web.Mvc.PartialViewResult Sender()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Sender);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Sender);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -221,24 +221,24 @@ namespace Alicargo.Controllers.Awb
         public T4MVC_AwbFilesController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void AdminOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void AdminOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Admin(long id)
+        public override System.Web.Mvc.PartialViewResult Admin(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Admin);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Admin);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             AdminOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void BrokerOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void BrokerOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Broker(long id)
+        public override System.Web.Mvc.PartialViewResult Broker(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Broker);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Broker);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             BrokerOverride(callInfo, id);
             return callInfo;
@@ -282,12 +282,12 @@ namespace Alicargo.Controllers.Awb
         }
 
         [NonAction]
-        partial void SenderOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, long id);
+        partial void SenderOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, long id);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Sender(long id)
+        public override System.Web.Mvc.PartialViewResult Sender(long id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Sender);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Sender);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             SenderOverride(callInfo, id);
             return callInfo;

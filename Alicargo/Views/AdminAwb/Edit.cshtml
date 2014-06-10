@@ -7,9 +7,10 @@
 		@Pages.AirWaybillEdit
 	</h1>
 	@Html.EditPage(Url.Action(MVC.AdminAwb.Edit()), Pages.Save,
-		@Html.Partial("EditButtons", (long)ViewBag.AwbId))
+		@Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))
+	@Html.Action(MVC.AwbFiles.Admin((long)ViewBag.AwbId))
 </div>
 @section scripts
 {
-	@Scripts.Render(JsPaths.AwbFileButtonJs)
+	@Scripts.Render(JsPaths.AwbFilesJs)
 }

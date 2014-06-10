@@ -5,7 +5,7 @@
 	var $l = $a.Localization;
 
 	function initUploader(awbId, type, files) {
-		$("#" + type).kendoUpload({
+		$("#awb-file-" + type).kendoUpload({
 			multiple: true,
 			async: {
 				saveUrl: $u.AwbFiles_Upload + "/" + awbId + "?type=" + type,

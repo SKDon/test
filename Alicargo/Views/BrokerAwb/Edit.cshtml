@@ -9,9 +9,10 @@
 		@ViewBag.AWB
 	</h3>
 	@Html.EditPage(Url.Action(MVC.BrokerAwb.Edit()), Pages.Save,
-		@Html.Partial("EditButtons", (long)ViewBag.AwbId))
+		@Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))
+	@Html.Action(MVC.AwbFiles.Broker((long)ViewBag.AwbId))
 </div>
 @section scripts
 {
-	@Scripts.Render(JsPaths.AwbFileButtonJs)
+	@Scripts.Render(JsPaths.AwbFilesJs)
 }

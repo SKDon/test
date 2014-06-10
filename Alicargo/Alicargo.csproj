@@ -596,7 +596,6 @@
     <Content Include="Content\themes\jMetro\images\ui-icons_ffffff_0.png" />
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
-    <Content Include="Scripts\app\AirWaybill\FileButton.js" />
     <Content Include="Scripts\app\AirWaybill\Files.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
     <Content Include="Scripts\app\Alicargo.js" />
@@ -787,9 +786,6 @@
     <Content Include="Views\AwbFiles\Broker.cshtml" />
     <Content Include="Views\AwbFiles\Sender.cshtml" />
     <Content Include="Views\AwbFiles\FilesHolder.cshtml" />
-    <Content Include="Views\AdminAwb\EditButtons.cshtml" />
-    <Content Include="Views\BrokerAwb\EditButtons.cshtml" />
-    <Content Include="Views\SenderAwb\EditButtons.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>

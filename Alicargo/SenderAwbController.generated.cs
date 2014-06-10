@@ -124,11 +124,9 @@ namespace Alicargo.Controllers.Awb
             {
                 public readonly string Create = "Create";
                 public readonly string Edit = "Edit";
-                public readonly string EditButtons = "EditButtons";
             }
             public readonly string Create = "~/Views/SenderAwb/Create.cshtml";
             public readonly string Edit = "~/Views/SenderAwb/Edit.cshtml";
-            public readonly string EditButtons = "~/Views/SenderAwb/EditButtons.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

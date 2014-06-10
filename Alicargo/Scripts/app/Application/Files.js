@@ -5,7 +5,7 @@
 	var $l = $a.Localization;
 
 	function initUploader(appId, type, files) {
-		$("#" + type).kendoUpload({
+		$("#appl-file-" + type).kendoUpload({
 			multiple: true,
 			async: {
 				saveUrl: $u.ApplicationFiles_Upload + "/" + appId + "?type=" + type,
