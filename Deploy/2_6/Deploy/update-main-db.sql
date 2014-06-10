@@ -1,4 +1,4 @@
-﻿USE [$(MainDbName)];
+﻿USE [$(DatabaseName)];
 
 
 GO
@@ -480,7 +480,7 @@ PRINT N'Checking existing data against newly created constraints';
 
 
 GO
-USE [$(MainDbName)];
+USE [$(DatabaseName)];
 
 
 GO
