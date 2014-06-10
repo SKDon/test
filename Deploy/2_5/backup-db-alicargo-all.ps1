@@ -1,2 +1,0 @@
-.\Scripts\backup-db.ps1 -server .\SQLEXPRESS -backupLocation C:\AlicargoDbBackups\ -databaseName Alicargo_2_5
-.\Scripts\backup-db.ps1 -server .\SQLEXPRESS -backupLocation C:\AlicargoDbBackups\ -databaseName Alicargo_Files_2_5
