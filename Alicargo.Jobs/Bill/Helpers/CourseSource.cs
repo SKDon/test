@@ -20,6 +20,7 @@ namespace Alicargo.Jobs.Bill.Helpers
 		{
 			var bytes = _httpClient.Get(url);
 			var response = Encoding.ASCII.GetString(bytes);
+
 			if(string.IsNullOrWhiteSpace(response))
 			{
 				throw new InvalidDataException("Was no data on the EUR course. Source: " + url);
