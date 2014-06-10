@@ -1,11 +1,11 @@
 ﻿@using System.Globalization
+@using System.Linq
 @using Resources
 @inherits BaseWebViewPage<ApplicationIndexModel>
 
 @helper EditButton()
 {
 	<a href="@Url.Action(MVC.SenderApplication.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
-	<a href="@Url.Action(MVC.ApplicationFiles.SenderApplication())/#= Id #" class="btn btn-info">@Pages.Files</a>
 	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
 }
 

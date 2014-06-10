@@ -1,4 +1,5 @@
 ﻿@using Alicargo.Core.Resources
+@using Alicargo.Mvc
 @using Alicargo.MvcHelpers.Extensions
 @using Resources
 @model ApplicationSenderModel
@@ -7,6 +8,10 @@
 		@Pages.ApplicationEdit @ViewBag.ApplicationNumber
 		<span>@Entities.Nic: @ViewBag.Nic</span>
 	</h1>
-	@Html.EditPage(Url.Action(MVC.SenderApplication.Edit()), Pages.Save,
-	Html.ActionLink(Pages.Files, MVC.ApplicationFiles.SenderApplication((long)ViewBag.ApplicationId), new { @class = "btn btn-info" }))
+	@Html.EditPage(Url.Action(MVC.SenderApplication.Edit()), Pages.Save)
+	@Html.Action(MVC.ApplicationFiles.Sender((long)ViewBag.ApplicationId))
 </div>
+@section scripts
+{
+	@Scripts.Render(JsPaths.ApplicationFilesJs)
+}

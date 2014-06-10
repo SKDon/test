@@ -8,7 +8,6 @@ using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Extensions;
-using Alicargo.MvcHelpers.Filters;
 
 namespace Alicargo.Controllers.Awb
 {
@@ -35,8 +34,7 @@ namespace Alicargo.Controllers.Awb
 			_facade = facade;
 		}
 
-		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Manager)]
+		[ChildActionOnly]
 		public virtual PartialViewResult Admin(long id)
 		{
 			ViewBag.AwbId = id;
@@ -44,8 +42,7 @@ namespace Alicargo.Controllers.Awb
 			return PartialView();
 		}
 
-		[HttpGet]
-		[Access(RoleType.Broker)]
+		[ChildActionOnly]
 		public virtual PartialViewResult Broker(long id)
 		{
 			ViewBag.AwbId = id;
@@ -84,8 +81,7 @@ namespace Alicargo.Controllers.Awb
 				JsonRequestBehavior.AllowGet);
 		}
 
-		[HttpGet]
-		[Access(RoleType.Sender)]
+		[ChildActionOnly]
 		public virtual PartialViewResult Sender(long id)
 		{
 			ViewBag.AwbId = id;

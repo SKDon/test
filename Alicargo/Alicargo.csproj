@@ -754,13 +754,13 @@
     <Content Include="Views\City\Edit.cshtml" />
     <Content Include="Views\City\Create.cshtml" />
     <Content Include="Views\City\EditorTemplates\CityEditModel.cshtml" />
-    <Content Include="Views\ApplicationFiles\AdminApplication.cshtml" />
+    <Content Include="Views\ApplicationFiles\Admin.cshtml" />
     <Content Include="Views\ApplicationFiles\FilesHolder.cshtml" />
-    <Content Include="Views\ApplicationFiles\SenderApplication.cshtml" />
+    <Content Include="Views\ApplicationFiles\Sender.cshtml" />
     <Content Include="Views\ClientApplication\Create.cshtml" />
     <Content Include="Views\ClientApplication\EditorTemplates\ApplicationClientModel.cshtml" />
     <Content Include="Views\ClientApplication\Edit.cshtml" />
-    <Content Include="Views\ApplicationFiles\ClientApplication.cshtml" />
+    <Content Include="Views\ApplicationFiles\Client.cshtml" />
     <Content Include="Views\Balance\EditorTemplates\PaymentModel.cshtml" />
     <Content Include="Views\Balance\Decrease.cshtml" />
     <Content Include="Views\RestorePassword\Index.cshtml" />
