@@ -14,11 +14,11 @@
 
 clear
 
-git clone http://git.alicargo.ru/Deploy.git $newSiteFolder -b $branch
+#git clone http://git.alicargo.ru/Deploy.git $newSiteFolder -b $branch
 
 Write-Host "Backuping old db..."
-.\backup-db.ps1 $server $backupLocation $mainDbPrefix`_$oldVersion
-.\backup-db.ps1 $server $backupLocation $filesDbPrefix`_$oldVersion
+#.\backup-db.ps1 $server $backupLocation $mainDbPrefix`_$oldVersion
+#.\backup-db.ps1 $server $backupLocation $filesDbPrefix`_$oldVersion
 
 Write-Host "Creating new db..."
 $mainDbBackup = Get-ChildItem $mainDbPrefix`_$oldVersion*.bak -Path $backupLocation | Sort-Object LastAccessTime -Descending | Select-Object -First 1
@@ -26,6 +26,11 @@ $filesDbBackup = Get-ChildItem $filesDbPrefix`_$oldVersion*.bak -Path $backupLoc
 .\restore-previous.ps1 $server $dbFolder "`"$backupLocation$mainDbBackup`"" $mainDbPrefix $oldVersion $newVersion
 .\restore-previous.ps1 $server $dbFolder "`"$backupLocation$filesDbBackup`"" $filesDbPrefix $oldVersion $newVersion
 
-Write-Host "Updating db..."
-Sqlcmd -S $server -i update-main-db.sql -v DatabaseName = $mainDbPrefix`_$newVersion
+Write-Host "Updating files db..."
 Sqlcmd -S $server -i update-files-db.sql -v DatabaseName = $filesDbPrefix`_$newVersion
+
+Write-Host "Migrating files..."
+.\Alicargo.FilesMigration\Alicargo.FilesMigration.exe
+
+Write-Host "Updating main db..."
+Sqlcmd -S $server -i update-main-db.sql -v DatabaseName = $mainDbPrefix`_$newVersion

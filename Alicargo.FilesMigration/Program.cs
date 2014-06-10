@@ -13,58 +13,50 @@ namespace Alicargo.FilesMigration
 			using(var filesDb = new SqlConnection(Settings.Default.FilesConnectionString))
 			{
 				mainDb.Open();
-				var applications = mainDb.Query(
+				var awbs = mainDb.Query(
 					@"SELECT [Id]
-						  ,[InvoiceFileData]
-						  ,[InvoiceFileName]
-						  ,[SwiftFileData]
-						  ,[SwiftFileName]
-						  ,[DeliveryBillFileData]
-						  ,[DeliveryBillFileName]
-						  ,[Torg12FileData]
-						  ,[Torg12FileName]
-						  ,[CPFileData]
-						  ,[CPFileName]
-						  ,[PackingFileData]
-						  ,[PackingFileName]
-					  FROM [dbo].[Application]");
+						,[GTDFileData]
+						,[GTDFileName]
+						,[GTDAdditionalFileData]
+						,[GTDAdditionalFileName]
+						,[PackingFileData]
+						,[PackingFileName]
+						,[InvoiceFileData]
+						,[InvoiceFileName]
+						,[AWBFileData]
+						,[AWBFileName]
+						,[DrawFileData]
+						,[DrawFileName]
+					  FROM [dbo].[AirWaybill]");
 
 				filesDb.Open();
-				foreach(var application in applications)
+				foreach(var awb in awbs)
 				{
-					var id = application.Id;
+					var id = awb.Id;
 
-					Insert(filesDb, id, ApplicationFileType.Invoice, application.InvoiceFileName, application.InvoiceFileData);
-					Insert(filesDb, id, ApplicationFileType.CP, application.CPFileName, application.CPFileData);
-					Insert(filesDb, id, ApplicationFileType.DeliveryBill, application.DeliveryBillFileName, application.DeliveryBillFileData);
-					Insert(filesDb, id, ApplicationFileType.Packing, application.PackingFileName, application.PackingFileData);
-					Insert(filesDb, id, ApplicationFileType.Swift, application.SwiftFileName, application.SwiftFileData);
-					Insert(filesDb, id, ApplicationFileType.Torg12, application.Torg12FileName, application.Torg12FileData);
+					Insert(filesDb, id, AwbFileType.AWB, awb.AWBFileName, awb.AWBFileData);
+					Insert(filesDb, id, AwbFileType.GTD, awb.GTDFileName, awb.GTDFileData);
+					Insert(filesDb, id, AwbFileType.GTDAdditional, awb.GTDAdditionalFileName, awb.GTDAdditionalFileData);
+					Insert(filesDb, id, AwbFileType.Invoice, awb.InvoiceFileName, awb.InvoiceFileData);
+					Insert(filesDb, id, AwbFileType.Packing, awb.PackingFileName, awb.PackingFileData);
+					Insert(filesDb, id, AwbFileType.Draw, awb.DrawFileName, awb.DrawFileData);
 				}
 			}
 		}
 
 		private static void Insert(SqlConnection filesDb, long id,
-			ApplicationFileType fileType, string fileName, byte[] fileData)
+			AwbFileType fileType, string fileName, byte[] fileData)
 		{
 			if(string.IsNullOrEmpty(fileName) || fileData == null)
 			{
 				return;
 			}
 
-			filesDb.Execute(
-				@"INSERT INTO [dbo].[ApplicationFile]
-							([ApplicationId],
-							 [TypeId],
-							 [Name],
-							 [Data])
-							VALUES
-							(@ApplicationId,
-							 @TypeId,
-							 @Name,
-							 @Data)", new
+			filesDb.Execute(@"
+					INSERT [dbo].[AwbFile] ([AwbId], [Data], [Name], [TypeId])
+					VALUES (@AwbId, @Data, @Name, @TypeId)", new
 				{
-					ApplicationId = id,
+					AwbId = id,
 					TypeId = fileType,
 					Name = fileName,
 					Data = fileData
