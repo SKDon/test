@@ -17,8 +17,8 @@ clear
 #git clone http://git.alicargo.ru/Deploy.git $newSiteFolder -b $branch
 
 Write-Host "Backuping old db..."
-#.\backup-db.ps1 $server $backupLocation $mainDbPrefix`_$oldVersion
-#.\backup-db.ps1 $server $backupLocation $filesDbPrefix`_$oldVersion
+.\backup-db.ps1 $server $backupLocation $mainDbPrefix`_$oldVersion
+.\backup-db.ps1 $server $backupLocation $filesDbPrefix`_$oldVersion
 
 Write-Host "Creating new db..."
 $mainDbBackup = Get-ChildItem $mainDbPrefix`_$oldVersion*.bak -Path $backupLocation | Sort-Object LastAccessTime -Descending | Select-Object -First 1

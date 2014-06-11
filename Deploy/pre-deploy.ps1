@@ -1,6 +1,6 @@
 ﻿Param(
-	[string] $Configuration = (read-host "Enter a build configuration"),
-	[string] $branch = (read-host "Enter a branch")
+	[string] $Configuration = (read-host "Enter build configuration"),
+	[string] $branch = (read-host "Enter branch name")
 )
 
 $msbuild = $env:systemroot + "\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe"
