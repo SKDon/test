@@ -50,7 +50,7 @@ namespace Alicargo.DataAccess.Contracts.Enums
 		Torg12FileUploaded = 8,
 
 		[DisplayNameLocalized(typeof(Resources.EventType), "OtherFileUploaded")]
-		OtherFileUploaded,
+		OtherApplFileUploaded = 28,
 
 
 		// Application's calculation events
@@ -93,6 +93,9 @@ namespace Alicargo.DataAccess.Contracts.Enums
 
 		[DisplayNameLocalized(typeof(Resources.EventType), "DrawFileUploaded")]
 		DrawFileUploaded = 26,
+
+		[DisplayNameLocalized(typeof(Resources.EventType), "OtherFileUploaded")]
+		OtherAwbFileUploaded = 29,
 
 		[DisplayNameLocalized(typeof(Resources.EventType), "SetBroker")]
 		SetBroker = 27

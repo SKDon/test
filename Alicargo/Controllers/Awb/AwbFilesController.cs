@@ -18,10 +18,10 @@ namespace Alicargo.Controllers.Awb
 			{
 				{ AwbFileType.AWB, EventType.AWBFileUploaded },
 				{ AwbFileType.GTD, EventType.GTDFileUploaded },
-				{ AwbFileType.Other, EventType.OtherFileUploaded },
+				{ AwbFileType.Other, EventType.OtherAwbFileUploaded },
 				{ AwbFileType.GTDAdditional, EventType.GTDAdditionalFileUploaded },
-				{ AwbFileType.Invoice, EventType.InvoiceFileUploaded },
-				{ AwbFileType.Packing, EventType.PackingFileUploaded },
+				{ AwbFileType.Invoice, EventType.AwbInvoiceFileUploaded },
+				{ AwbFileType.Packing, EventType.AwbPackingFileUploaded },
 				{ AwbFileType.Draw, EventType.DrawFileUploaded },
 			};
 

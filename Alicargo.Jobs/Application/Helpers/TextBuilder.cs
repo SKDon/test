@@ -86,6 +86,7 @@ namespace Alicargo.Jobs.Application.Helpers
 				case EventType.SwiftFileUploaded:
 				case EventType.DeliveryBillFileUploaded:
 				case EventType.Torg12FileUploaded:
+				case EventType.OtherApplFileUploaded:
 					OnFileUpload(bytes, localizedData);
 					break;
 

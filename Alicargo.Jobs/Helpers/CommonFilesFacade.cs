@@ -67,6 +67,8 @@ namespace Alicargo.Jobs.Helpers
 				case EventType.AwbInvoiceFileUploaded:
 				case EventType.AWBFileUploaded:
 				case EventType.DrawFileUploaded:
+				case EventType.OtherAwbFileUploaded:
+				case EventType.OtherApplFileUploaded:
 					return OnFileUploaded(eventData, languages);
 
 				case EventType.SetBroker:
