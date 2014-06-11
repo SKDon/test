@@ -214,11 +214,20 @@ namespace Alicargo.DataAccess.Contracts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other file uploaded.
+        ///   Looks up a localized string similar to Other file uploaded to application.
         /// </summary>
-        public static string OtherFileUploaded {
+        public static string OtherApplFileUploaded {
             get {
-                return ResourceManager.GetString("OtherFileUploaded", resourceCulture);
+                return ResourceManager.GetString("OtherApplFileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other file uploaded to AWB.
+        /// </summary>
+        public static string OtherAwbFileUploaded {
+            get {
+                return ResourceManager.GetString("OtherAwbFileUploaded", resourceCulture);
             }
         }
         

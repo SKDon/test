@@ -198,7 +198,10 @@
   <data name="SetBroker" xml:space="preserve">
     <value>Set broker</value>
   </data>
-  <data name="OtherFileUploaded" xml:space="preserve">
-    <value>Other file uploaded</value>
+  <data name="OtherAwbFileUploaded" xml:space="preserve">
+    <value>Other file uploaded to AWB</value>
+  </data>
+  <data name="OtherApplFileUploaded" xml:space="preserve">
+    <value>Other file uploaded to application</value>
   </data>
 </root>

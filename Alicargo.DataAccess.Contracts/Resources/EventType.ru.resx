@@ -198,7 +198,10 @@
   <data name="SetBroker" xml:space="preserve">
     <value>Установка брокера</value>
   </data>
-  <data name="OtherFileUploaded" xml:space="preserve">
-    <value>Загружен файл без типа</value>
+  <data name="OtherApplFileUploaded" xml:space="preserve">
+    <value>Загружен файл без типа в заявку</value>
+  </data>
+  <data name="OtherAwbFileUploaded" xml:space="preserve">
+    <value>Загружен файл без типа в накладную</value>
   </data>
 </root>
