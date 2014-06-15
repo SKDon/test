@@ -34,3 +34,4 @@ Write-Host "Migrating files..."
 
 Write-Host "Updating main db..."
 Sqlcmd -S $server -i update-main-db.sql -v DatabaseName = $mainDbPrefix`_$newVersion
+Sqlcmd -S $server -i update-main-db-senderid-null.sql -v DatabaseName = $mainDbPrefix`_$newVersion

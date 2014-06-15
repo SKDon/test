@@ -1,4 +1,6 @@
+USE [$(DatabaseName)];
 GO
+
 ALTER TABLE [dbo].[Application] DROP CONSTRAINT [FK_dbo.Application_dbo.Sender_SenderId];
 
 GO
