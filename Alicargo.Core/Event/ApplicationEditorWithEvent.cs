@@ -29,7 +29,7 @@ namespace Alicargo.Core.Event
 
 			_editor.Update(applicationId, application);
 
-			if(oldData.SenderId != application.SenderId)
+			if(oldData.SenderId != application.SenderId && application.SenderId.HasValue)
 			{
 				_events.Add(applicationId, EventType.SetSender, EventState.Emailing);
 			}

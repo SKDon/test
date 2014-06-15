@@ -13,18 +13,15 @@ namespace Alicargo.Services.Application
 		private readonly IApplicationRepository _applications;
 		private readonly IApplicationEditor _editor;
 		private readonly IForwarderService _forwarders;
-		private readonly ISenderService _senders;
 		private readonly ITransitRepository _transits;
 
 		public SenderApplicationManager(
 			IApplicationRepository applications,
-			ISenderService senders,
 			IApplicationEditor editor,
 			IForwarderService forwarders,
 			ITransitRepository transits)
 		{
 			_applications = applications;
-			_senders = senders;
 			_editor = editor;
 			_forwarders = forwarders;
 			_transits = transits;
@@ -63,11 +60,6 @@ namespace Alicargo.Services.Application
 		{
 			var applicationData = _applications.Get(id);
 
-			if(applicationData.SenderId.HasValue)
-			{
-				_senders.CheckCountry(applicationData.SenderId.Value, model.CountryId);
-			}
-
 			Map(model, applicationData);
 
 			_editor.Update(id, applicationData);
@@ -75,8 +67,6 @@ namespace Alicargo.Services.Application
 
 		public void Add(ApplicationSenderModel model, long clientId, long creatorSenderId)
 		{
-			_senders.CheckCountry(creatorSenderId, model.CountryId);
-
 			var application = new ApplicationEditData
 			{
 				InsuranceRate = _applications.GetDefaultInsuranceRate()

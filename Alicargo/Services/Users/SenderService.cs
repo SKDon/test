@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
-using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -91,14 +89,6 @@ namespace Alicargo.Services.Users
 				var userId = _senders.GetUserId(id);
 
 				_users.SetPassword(userId, model.Authentication.NewPassword);
-			}
-		}
-
-		public void CheckCountry(long senderId, long countryId)
-		{
-			if(!_senders.GetCountries(senderId).Contains(countryId))
-			{
-				throw new InvalidLogicException("Country " + countryId + " is not defined for sender " + senderId);
 			}
 		}
 	}
