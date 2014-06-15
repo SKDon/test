@@ -57,7 +57,8 @@ namespace Alicargo.Services.Users
 				Contact = model.Contact,
 				Phone = model.Phone,
 				Address = model.Address
-			}, model.Authentication.NewPassword);
+			},
+				model.Authentication.NewPassword);
 
 			_senders.SetCountries(id, model.Countries);
 
@@ -91,23 +92,6 @@ namespace Alicargo.Services.Users
 
 				_users.SetPassword(userId, model.Authentication.NewPassword);
 			}
-		}
-
-		public long GetByCountryOrAny(long countryId, long? oldSenderId)
-		{
-			var list = _senders.GetByCountry(countryId);
-
-			if(list.Length == 0)
-			{
-				return oldSenderId ?? _senders.GetAll().Select(x => x.EntityId).First();
-			}
-
-			if(oldSenderId.HasValue && list.Contains(oldSenderId.Value))
-			{
-				return oldSenderId.Value;
-			}
-
-			return list.First();
 		}
 
 		public void CheckCountry(long senderId, long countryId)

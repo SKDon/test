@@ -54,10 +54,6 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			{
 				var data = connection.Query("select top 1 * from [dbo].[Application] order by [Id] desc").First();
 
-				var countries = connection.Query<long>(
-					"select c.[CountryId] from [dbo].[SenderCountry] c where c.[SenderId] = @SenderId",
-					new { data.SenderId }).ToArray();
-
 				var forwarders = connection.Query<long>(
 					"select [ForwarderId] from [dbo].[ForwarderCity] where [CityId] = @CityId",
 					new { transit.CityId }).ToArray();
@@ -80,7 +76,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 				model.Currency.CurrencyId.ShouldBeEquivalentTo((int)data.CurrencyId);
 				model.Currency.Value.ShouldBeEquivalentTo((decimal)data.Value);
 				model.CountryId.ShouldBeEquivalentTo((long)data.CountryId);
-				countries.Should().Contain((long)data.CountryId);
+				((object)data.SenderId).Should().BeNull();
 				TestConstants.DefaultStateId.ShouldBeEquivalentTo((long)data.StateId);
 			}
 		}

@@ -18,14 +18,12 @@ namespace Alicargo.Services.Application
 		private readonly IStateConfig _config;
 		private readonly IApplicationEditor _editor;
 		private readonly IForwarderService _forwarders;
-		private readonly ISenderService _senders;
 		private readonly ITransitService _transitService;
 
 		public AdminApplicationManager(
 			IApplicationRepository applications,
 			IApplicationStateManager states,
 			IForwarderService forwarders,
-			ISenderService senders,
 			IApplicationEditor editor,
 			IStateConfig config,
 			ITransitService transitService)
@@ -33,7 +31,6 @@ namespace Alicargo.Services.Application
 			_applications = applications;
 			_states = states;
 			_forwarders = forwarders;
-			_senders = senders;
 			_editor = editor;
 			_config = config;
 			_transitService = transitService;
@@ -80,7 +77,7 @@ namespace Alicargo.Services.Application
 				FactureCostExEdited = model.FactureCostExEdited,
 				TransitCostEdited = model.TransitCostEdited,
 				PickupCostEdited = model.PickupCostEdited,
-				SenderId = GetSenderId(model.SenderId, model.CountryId, null),
+				SenderId = model.SenderId,
 				ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, null),
 				SenderRate = null,
 				InsuranceRate = model.InsuranceRate / 100
@@ -122,7 +119,7 @@ namespace Alicargo.Services.Application
 			data.TransitCostEdited = model.TransitCostEdited;
 			data.PickupCostEdited = model.PickupCostEdited;
 			data.ScotchCostEdited = model.ScotchCostEdited;
-			data.SenderId = GetSenderId(model.SenderId, model.CountryId, data.SenderId);
+			data.SenderId = model.SenderId;
 			data.ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, data.ForwarderId);
 			data.InsuranceRate = model.InsuranceRate / 100;
 
@@ -236,13 +233,6 @@ namespace Alicargo.Services.Application
 			return forwarderId.HasValue
 				? forwarderId.Value
 				: _forwarders.GetByCityOrAny(cityId, oldForwarderId);
-		}
-
-		private long GetSenderId(long? senderId, long countryId, long? oldSenderId)
-		{
-			return senderId.HasValue
-				? senderId.Value
-				: _senders.GetByCountryOrAny(countryId, oldSenderId);
 		}
 	}
 }

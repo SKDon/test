@@ -63,7 +63,10 @@ namespace Alicargo.Services.Application
 		{
 			var applicationData = _applications.Get(id);
 
-			_senders.CheckCountry(applicationData.SenderId, model.CountryId);
+			if(applicationData.SenderId.HasValue)
+			{
+				_senders.CheckCountry(applicationData.SenderId.Value, model.CountryId);
+			}
 
 			Map(model, applicationData);
 

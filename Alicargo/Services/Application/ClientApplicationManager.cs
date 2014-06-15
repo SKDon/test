@@ -11,7 +11,6 @@ namespace Alicargo.Services.Application
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IForwarderService _forwarders;
-		private readonly ISenderService _senders;
 		private readonly ITransitService _transits;
 		private readonly IApplicationEditor _updater;
 
@@ -19,13 +18,11 @@ namespace Alicargo.Services.Application
 			IApplicationRepository applications,
 			IForwarderService forwarders,
 			IApplicationEditor updater,
-			ISenderService senders,
 			ITransitService transits)
 		{
 			_applications = applications;
 			_forwarders = forwarders;
 			_updater = updater;
-			_senders = senders;
 			_transits = transits;
 		}
 
@@ -122,21 +119,16 @@ namespace Alicargo.Services.Application
 				FactureCostExEdited = null,
 				TransitCostEdited = null,
 				PickupCostEdited = null,
-				SenderId = _senders.GetByCountryOrAny(model.CountryId, null),
+				SenderId = null,
 				SenderRate = null,
 				ForwarderId = forwarderId,
 				InsuranceRate = _applications.GetDefaultInsuranceRate()
 			};
 		}
 
-		private void Map(ApplicationClientModel @from, ApplicationEditData to, long forwarderId)
+		private static void Map(ApplicationClientModel @from, ApplicationEditData to, long forwarderId)
 		{
-			if(from.CountryId != to.CountryId)
-			{
-				to.SenderId = _senders.GetByCountryOrAny(@from.CountryId, to.SenderId);
-				to.CountryId = @from.CountryId;
-			}
-
+			to.CountryId = @from.CountryId;
 			to.Invoice = @from.Invoice;
 			to.Characteristic = @from.Characteristic;
 			to.AddressLoad = @from.AddressLoad;

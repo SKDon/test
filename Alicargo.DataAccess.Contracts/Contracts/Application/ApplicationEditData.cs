@@ -28,7 +28,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public long ClientId { get; set; }
 		public long TransitId { get; set; }
 		public long? AirWaybillId { get; set; }
-		public long SenderId { get; set; }
+		public long? SenderId { get; set; }
 		public long ForwarderId { get; set; }
 		public ClassType? Class { get; set; }
 

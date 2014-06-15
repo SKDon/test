@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -87,7 +86,7 @@ namespace Alicargo.Services.Calculation
 
 			var applications = _applications.GetByAirWaybill(awbs.Select(x => x.Key).ToArray()).ToArray();
 
-			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId).ToArray());
+			var tariffs = _senders.GetTariffs(applications.Select(x => x.SenderId ?? 0).ToArray());
 
 			var items = GetItems(applications, tariffs);
 
@@ -182,15 +181,15 @@ namespace Alicargo.Services.Calculation
 				application.Weight);
 
 			var scotchCost = application.ScotchCostEdited
-			                 ?? CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0;
+							 ?? CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0;
 
 			return totalTariffCost
-			       + scotchCost
-			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
-			       + (application.FactureCostEdited ?? application.FactureCost ?? 0)
-			       + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
-			       + (application.PickupCostEdited ?? application.PickupCost ?? 0)
-			       + (application.TransitCostEdited ?? application.TransitCost ?? 0);
+				   + scotchCost
+				   + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
+				   + (application.FactureCostEdited ?? application.FactureCost ?? 0)
+				   + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
+				   + (application.PickupCostEdited ?? application.PickupCost ?? 0)
+				   + (application.TransitCostEdited ?? application.TransitCost ?? 0);
 		}
 	}
 }

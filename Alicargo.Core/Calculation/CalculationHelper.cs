@@ -11,7 +11,9 @@ namespace Alicargo.Core.Calculation
 
 		public static decimal? GetSenderScotchCost(IReadOnlyDictionary<long, decimal> tariffs, long? senderId, int? count)
 		{
-			return senderId.HasValue ? tariffs[senderId.Value] * (count ?? 0) : (decimal?)null;
+			return senderId.HasValue && tariffs.ContainsKey(senderId.Value)
+				? tariffs[senderId.Value] * (count ?? 0)
+				: (decimal?)null;
 		}
 
 		public static decimal GetTotalSenderRate(decimal? senderRate, float? weight)

@@ -33,7 +33,7 @@
 	[TransitId]				BIGINT				NOT NULL,
 	[CountryId]				BIGINT				NOT NULL,
 	[AirWaybillId]			BIGINT				NULL,
-	[SenderId]				BIGINT				NOT NULL,
+	[SenderId]				BIGINT				NULL,
 	[ForwarderId]			BIGINT				NOT NULL,
 
 	[FactureCost]			MONEY				NULL,

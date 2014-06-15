@@ -67,22 +67,28 @@ namespace Alicargo.Jobs.Application.Helpers
 				switch(role)
 				{
 					case RoleType.Admin:
-						foreach(var recipient in _admins.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin)))
+						foreach(
+							var recipient in _admins.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Admin)))
 						{
 							yield return recipient;
 						}
 						break;
 
 					case RoleType.Manager:
-						foreach(var recipient in _managers.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Manager)))
+						foreach(
+							var recipient in
+								_managers.GetAll().Select(user => new RecipientData(user.Email, user.Language, RoleType.Manager)))
 						{
 							yield return recipient;
 						}
 						break;
 
 					case RoleType.Sender:
-						var sender = _senders.Get(application.SenderId);
-						yield return new RecipientData(sender.Email, sender.Language, role);
+						if(application.SenderId.HasValue)
+						{
+							var sender = _senders.Get(application.SenderId.Value);
+							yield return new RecipientData(sender.Email, sender.Language, role);
+						}
 						break;
 
 					case RoleType.Broker:
