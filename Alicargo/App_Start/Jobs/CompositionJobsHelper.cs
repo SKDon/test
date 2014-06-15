@@ -39,6 +39,7 @@ namespace Alicargo.Jobs
 		public const int PartitionCount = 2;
 		public const int PartitionIdForOtherMails = PartitionCount;
 		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
+		private static readonly TimeSpan CourseSourceRetryPolicyPeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["CourseSourceRetryPolicyPeriod"]);
 
 		private static readonly ushort CourseSourceAttempts =
 			ushort.Parse(ConfigurationManager.AppSettings["CourseSourceAttempts"]);
@@ -335,7 +336,7 @@ namespace Alicargo.Jobs
 			var emailMessageRepository = new EmailMessageRepository(executor);
 			var mailSender = new DbMailSender(PartitionIdForOtherMails, emailMessageRepository, serializer);
 			var courseSource = new CourseSourceFailPolicy(
-				new CourseSourceRetryPolicy(new CourseSource(httpClient), CourseSourceAttempts, JobsLogger, TimeSpan.FromMinutes(1)),
+				new CourseSourceRetryPolicy(new CourseSource(httpClient), CourseSourceAttempts, JobsLogger, CourseSourceRetryPolicyPeriod),
 				mailSender,
 				EmailsHelper.DefaultFrom,
 				EmailsHelper.SupportEmail);
