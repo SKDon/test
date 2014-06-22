@@ -35,7 +35,7 @@ namespace Alicargo.Tests.Services.Application
 			var dictionary = _context.Create<Dictionary<long, StateData>>();
 
 			_context.ApplicationRepository.Setup(x => x.Get(_applicationData.Id)).Returns(_applicationData);
-			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(stateAvailability);
+			_context.StateFilter.Setup(x => x.GetStateAvailabilityToSet()).Returns(stateAvailability);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(true);
 			_context.IdentityService.Setup(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 			_context.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, stateAvailability)).Returns(dictionary);
@@ -48,7 +48,7 @@ namespace Alicargo.Tests.Services.Application
 			}
 			_context.IdentityService.Verify(x => x.IsInRole(RoleType.Admin), Times.Once());
 			_context.ApplicationRepository.Verify(x => x.Get(_applicationData.Id), Times.Once());
-			_context.StateService.Verify(x => x.GetStateAvailabilityToSet(), Times.Once());
+			_context.StateFilter.Verify(x => x.GetStateAvailabilityToSet(), Times.Once());
 			_context.IdentityService.Verify(x => x.Language, Times.Exactly(1));
 			_context.StateRepository.Verify(x => x.Get(TwoLetterISOLanguageName.English, stateAvailability), Times.Once());
 		}
@@ -63,16 +63,15 @@ namespace Alicargo.Tests.Services.Application
 			var currentState = _context.Create<StateData>();
 
 			_context.ApplicationRepository.Setup(x => x.Get(_applicationData.Id)).Returns(_applicationData);
-			_context.StateService.Setup(x => x.GetStateAvailabilityToSet()).Returns(stateAvailability);
+			_context.StateFilter.Setup(x => x.GetStateAvailabilityToSet()).Returns(stateAvailability);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Manager)).Returns(false);
 			_context.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, new[] { _applicationData.StateId })).Returns(new Dictionary<long, StateData>
 			{
 				{_applicationData.StateId, currentState}
 			});
-			_context.StateService.Setup(x => x.FilterByBusinessLogic(_applicationData, stateAvailability))
+			_context.StateFilter.Setup(x => x.FilterByBusinessLogic(_applicationData, stateAvailability))
 				.Returns(withLogic);
-			_context.StateService.Setup(x => x.FilterByPosition(withLogic, currentState.Position)).Returns(filtered);
 			_context.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, filtered)).Returns(dictionary);
 			_context.IdentityService.Setup(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 
@@ -84,10 +83,9 @@ namespace Alicargo.Tests.Services.Application
 			}
 			_context.IdentityService.Verify(x => x.IsInRole(RoleType.Admin), Times.Once());
 			_context.IdentityService.Verify(x => x.IsInRole(RoleType.Manager), Times.Once());
-			_context.StateService.Verify(x => x.FilterByBusinessLogic(_applicationData, stateAvailability), Times.Once());
-			_context.StateService.Verify(x => x.FilterByPosition(withLogic, currentState.Position), Times.Once());
+			_context.StateFilter.Verify(x => x.FilterByBusinessLogic(_applicationData, stateAvailability), Times.Once());
 			_context.ApplicationRepository.Verify(x => x.Get(_applicationData.Id), Times.Once());
-			_context.StateService.Verify(x => x.GetStateAvailabilityToSet(), Times.Once());
+			_context.StateFilter.Verify(x => x.GetStateAvailabilityToSet(), Times.Once());
 			_context.StateRepository.Verify(x => x.Get(TwoLetterISOLanguageName.English, new[] { _applicationData.StateId }), Times.Once());
 			_context.StateRepository.Verify(x => x.Get(TwoLetterISOLanguageName.English, filtered), Times.Once());
 			_context.IdentityService.Verify(x => x.Language, Times.Exactly(2));

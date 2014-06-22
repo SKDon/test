@@ -90,10 +90,6 @@ namespace Alicargo.Services.Application
 
 			states = _stateFilter.FilterByBusinessLogic(applicationData, states);
 
-			var currentState = _states.Get(_identity.Language, applicationData.StateId).Values.First();
-
-			states = _stateFilter.FilterByPosition(states, currentState.Position);
-
 			return ToApplicationStateModel(states);
 		}		
 

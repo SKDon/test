@@ -15,16 +15,13 @@ namespace Alicargo.Core.State
 		private readonly IStateConfig _config;
 		private readonly IIdentityService _identity;
 		private readonly IStateSettingsRepository _settings;
-		private readonly IStateRepository _states;
 
 		public StateFilter(
-			IStateRepository states,
 			IStateSettingsRepository settings,
 			IIdentityService identity,
 			IStateConfig config,
 			IAwbRepository awbs)
 		{
-			_states = states;
 			_settings = settings;
 			_identity = identity;
 			_config = config;
@@ -34,7 +31,7 @@ namespace Alicargo.Core.State
 		// todo: 1. refactor. remove Except(_config.AwbStates), pass role to method, remove ifs (261)
 		public long[] GetStateAvailabilityToSet()
 		{
-			if (_identity.IsInRole(RoleType.Admin))
+			if(_identity.IsInRole(RoleType.Admin))
 			{
 				return _settings.GetStateAvailabilities()
 					.Where(x => x.Role == RoleType.Admin)
@@ -50,7 +47,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			if (_identity.IsInRole(RoleType.Client))
+			if(_identity.IsInRole(RoleType.Client))
 			{
 				return _settings.GetStateAvailabilities()
 					.Where(x => x.Role == RoleType.Client)
@@ -59,7 +56,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			if (_identity.IsInRole(RoleType.Forwarder))
+			if(_identity.IsInRole(RoleType.Forwarder))
 			{
 				return _settings.GetStateAvailabilities()
 					.Where(x => x.Role == RoleType.Forwarder)
@@ -75,7 +72,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			if (_identity.IsInRole(RoleType.Sender))
+			if(_identity.IsInRole(RoleType.Sender))
 			{
 				return _settings.GetStateAvailabilities()
 					.Where(x => x.Role == RoleType.Sender)
@@ -85,7 +82,7 @@ namespace Alicargo.Core.State
 			}
 
 			// todo: 3. a Broker should not be here because he don't use states (259)
-			if (_identity.IsInRole(RoleType.Broker))
+			if(_identity.IsInRole(RoleType.Broker))
 			{
 				return _settings.GetStateAvailabilities()
 					.Where(x => x.Role == RoleType.Broker)
@@ -98,7 +95,7 @@ namespace Alicargo.Core.State
 
 		public long[] GetStateVisibility()
 		{
-			if (_identity.IsInRole(RoleType.Admin))
+			if(_identity.IsInRole(RoleType.Admin))
 			{
 				return _settings.GetStateVisibilities()
 					.Where(x => x.Role == RoleType.Admin)
@@ -114,7 +111,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			if (_identity.IsInRole(RoleType.Client))
+			if(_identity.IsInRole(RoleType.Client))
 			{
 				return _settings.GetStateVisibilities()
 					.Where(x => x.Role == RoleType.Client)
@@ -122,7 +119,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			if (_identity.IsInRole(RoleType.Forwarder))
+			if(_identity.IsInRole(RoleType.Forwarder))
 			{
 				return _settings.GetStateVisibilities()
 					.Where(x => x.Role == RoleType.Forwarder)
@@ -138,7 +135,7 @@ namespace Alicargo.Core.State
 					.ToArray();
 			}
 
-			if (_identity.IsInRole(RoleType.Sender))
+			if(_identity.IsInRole(RoleType.Sender))
 			{
 				return _settings.GetStateVisibilities()
 					.Where(x => x.Role == RoleType.Sender)
@@ -147,7 +144,7 @@ namespace Alicargo.Core.State
 			}
 
 			// todo: 3. Broker should not be here because he don't use states (259)
-			if (_identity.IsInRole(RoleType.Broker))
+			if(_identity.IsInRole(RoleType.Broker))
 			{
 				return _settings.GetStateVisibilities()
 					.Where(x => x.Role == RoleType.Broker)
@@ -158,34 +155,26 @@ namespace Alicargo.Core.State
 			throw new InvalidLogicException();
 		}
 
-		public long[] FilterByPosition(long[] states, int position)
-		{
-			return _states.Get(_identity.Language, states)
-				.Where(x => x.Value.Position >= position)
-				.Select(x => x.Key)
-				.ToArray();
-		}
-
 		public long[] FilterByBusinessLogic(ApplicationEditData applicationData, long[] stateAvailability)
 		{
 			var states = stateAvailability.ToList();
 
-			if (!applicationData.Weight.HasValue || !applicationData.Count.HasValue)
+			if(!applicationData.Weight.HasValue || !applicationData.Count.HasValue)
 			{
 				states.Remove(_config.CargoInStockStateId);
 			}
 
 			#region AWB
 
-			if (!applicationData.AirWaybillId.HasValue)
+			if(!applicationData.AirWaybillId.HasValue)
 			{
 				states.Remove(_config.CargoIsFlewStateId);
 			}
 
-			if (applicationData.AirWaybillId.HasValue)
+			if(applicationData.AirWaybillId.HasValue)
 			{
 				var airWaybillData = _awbs.Get(applicationData.AirWaybillId.Value).First();
-				if (string.IsNullOrWhiteSpace(airWaybillData.GTD))
+				if(string.IsNullOrWhiteSpace(airWaybillData.GTD))
 				{
 					states.Remove(_config.CargoAtCustomsStateId);
 				}

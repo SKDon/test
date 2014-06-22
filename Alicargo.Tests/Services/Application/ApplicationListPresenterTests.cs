@@ -46,7 +46,7 @@ namespace Alicargo.Tests.Services.Application
 			var cargoReceivedDaysToShow = _context.Create<int>();
 			var cargoReceivedStateId = _context.Create<int>();
 
-			_context.StateService.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
+			_context.StateFilter.Setup(x => x.GetStateVisibility()).Returns(_stateIds);
 			_context.ApplicationListItemMapper.Setup(x => x.Map(data, TwoLetterISOLanguageName.English)).Returns(_models);
 			_context.StateConfig.Setup(x => x.CargoReceivedDaysToShow).Returns(cargoReceivedDaysToShow);
 			_context.StateConfig.Setup(x => x.CargoReceivedStateId).Returns(cargoReceivedStateId);
@@ -63,7 +63,7 @@ namespace Alicargo.Tests.Services.Application
 
 			collection.Data.Should().BeNull();
 			collection.Groups.Should().NotBeNull();
-			_context.StateService.Verify(x => x.GetStateVisibility(), Times.Once());
+			_context.StateFilter.Verify(x => x.GetStateVisibility(), Times.Once());
 			_context.ApplicationListItemMapper.Verify(x => x.Map(data, TwoLetterISOLanguageName.English));
 			_context.ApplicationGrouper.Verify(x => x.Group(_models, new[] { OrderType.State }, clientId, null, null, null),
 				Times.Once());
