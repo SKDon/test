@@ -232,6 +232,14 @@ namespace Alicargo.DataAccess.Repositories.Application
 			_context.SaveChanges();
 		}
 
+		public void SetActive(long awbId, bool isActive)
+		{
+			var data = _context.AirWaybills.First(x => x.Id == awbId);
+			data.IsActive = isActive;
+
+			_context.SaveChanges();
+		}
+
 		public void SetState(long airWaybillId, long stateId)
 		{
 			var airWaybill = _context.AirWaybills.First(x => x.Id == airWaybillId);

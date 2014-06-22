@@ -45,5 +45,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		void SetState(long airWaybillId, long stateId);
 
 		void Update(long awbId, AirWaybillEditData data);
+
+		void SetActive(long awbId, bool isActive);
 	}
 }

@@ -178,6 +178,17 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			actual.StateId = data.StateId;
 		}
 
+		[TestMethod]
+		public void Test_SetActive()
+		{
+			var expected = CreateTestAirWaybill();
+			var isActive = _fixture.Create<bool>();
+
+			_awbs.SetActive(expected.Id, isActive);
+
+			_awbs.Get(expected.Id).Single().IsActive.ShouldBeEquivalentTo(isActive);
+		}
+
 		private AirWaybillEditData CreateAirWaybillData()
 		{
 			return _fixture
