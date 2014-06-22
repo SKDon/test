@@ -92,6 +92,15 @@ namespace Alicargo.Controllers.Awb
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
+		[HttpPost]
+		[Access(RoleType.Admin, RoleType.Manager, RoleType.Sender)]
+		public virtual HttpStatusCodeResult SetActive(long id, bool isActive)
+		{
+			_awbs.SetActive(id, isActive);
+
+			return new HttpStatusCodeResult(HttpStatusCode.OK);
+		}
+
 		[ChildActionOnly]
 		public virtual PartialViewResult CargoIsCustomsClearedButton(long id)
 		{

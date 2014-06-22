@@ -25,11 +25,20 @@
 		error: $a.ShowError
 	};
 
-	var columns = $a.Awb.AddColumns();
+	var columns = $a.Awb.Columns();
 
 	$a.CreateGrid(gridSelector, {
 		dataSource: dataSource,		
 		detailTemplate: kendo.template($("#AirWaybill-grid-details").html()),
-		columns: columns		
+		columns: columns,
+		dataBound: function() {
+			$(".awb-is-active").click(function() {
+				var checkbox = $(this);
+				var awbId = checkbox.data("awb-id");
+				var checked = checkbox.prop('checked');
+
+				$.post($a.Urls.AirWaybill_SetActive, { id: awbId, isActive: checked }).fail($a.ShowError);
+			});
+		}
 	});
 });

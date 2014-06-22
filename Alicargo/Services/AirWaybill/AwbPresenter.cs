@@ -83,6 +83,7 @@ namespace Alicargo.Services.AirWaybill
 				BrokerCost = x.BrokerCost,
 				CustomCost = x.CustomCost,
 				FlightCost = x.FlightCost,
+				IsActive = x.IsActive
 			}).ToArray();
 
 			var total = _awbs.Count(brokerId);

@@ -7,6 +7,12 @@
 		return getGrid();
 	};
 
+	var updateGrid = function() {
+		var grid = getGrid();
+		grid.dataSource.read();
+		grid.refresh();
+	};
+
 	function addEditButton(columns, editUrl) {
 		columns.splice(0, 0, {
 			command: [{
@@ -25,17 +31,21 @@
 		});
 	}
 
+	function addActivateButton(columns) {
+		columns.push({
+			field: "IsActive",
+			title: "&nbsp;",
+			template: "<input title='Is active' type='checkbox' #= IsActive ? 'checked=checked' : '' # data-awb-id='#= Id #' class='awb-is-active' />",
+			width: $a.DefaultGridButtonWidth
+		});
+	}
+
 	function addDeleteButton(columns) {
 		columns.push({
 			command: [{
 				name: "custom-delete",
 				text: "",
 				click: function(e) {
-					var updateGrid = function() {
-						var grid = getGrid();
-						grid.dataSource.read();
-						grid.refresh();
-					};
 					if ($a.Confirm($a.Localization.Pages_DeleteConfirm)) {
 						var tr = $(e.target).closest("tr");
 						var data = this.dataItem(tr);
@@ -68,6 +78,7 @@
 		});
 
 		addEditButton(columns, $a.Urls.AdminAwb_Edit);
+		addActivateButton(columns);
 		addDeleteButton(columns);
 	}
 
@@ -81,6 +92,7 @@
 		});
 
 		addEditButton(columns, $a.Urls.SenderAwb_Edit);
+		addActivateButton(columns);
 		addDeleteButton(columns);
 	}
 
@@ -97,7 +109,7 @@
 	}
 
 	$a.Awb = (function($awb) {
-		$awb.AddColumns = function() {
+		$awb.Columns = function() {
 			var columns = [
 				{ field: "CreationTimestampLocalString", title: $a.Localization.Entities_CreationTimestamp },
 				{ field: "State", title: $a.Localization.Entities_StateName, template: "#= !!State && !!State.StateName ? State.StateName : '' #" },

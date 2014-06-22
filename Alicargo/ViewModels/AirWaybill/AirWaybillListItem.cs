@@ -39,6 +39,8 @@ namespace Alicargo.ViewModels.AirWaybill
 
 		public decimal? TotalCostOfSenderForWeight { get; set; }
 
+		public bool IsActive { get; set; }
+
 		public FileInfo[] GTDFiles { get; set; }
 
 		public FileInfo[] GTDAdditionalFiles { get; set; }
