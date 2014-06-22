@@ -214,6 +214,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			result.CreationTimestamp = _now;
 			result.StateChangeTimestamp = _now;
 			result.StateId = TestConstants.DefaultStateId;
+			result.IsActive = true;
 
 			return result;
 		}

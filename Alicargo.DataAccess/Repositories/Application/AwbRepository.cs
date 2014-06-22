@@ -36,7 +36,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				BrokerCost = x.BrokerCost,
 				CustomCost = x.CustomCost,
 				FlightCost = x.FlightCost,
-				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight
+				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
+				IsActive = x.IsActive
 			};
 		}
 
@@ -46,7 +47,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 			{
 				CreationTimestamp = DateTimeProvider.Now,
 				StateChangeTimestamp = DateTimeProvider.Now,
-				StateId = stateId
+				StateId = stateId,
+				IsActive = true
 			};
 
 			Map(data, entity);

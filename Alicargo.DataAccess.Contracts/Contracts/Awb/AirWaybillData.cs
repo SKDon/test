@@ -8,5 +8,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Awb
 		public long StateId { get; set; }
 		public DateTimeOffset CreationTimestamp { get; set; }
 		public DateTimeOffset StateChangeTimestamp { get; set; }
+		public bool IsActive { get; set; }
 	}
 }

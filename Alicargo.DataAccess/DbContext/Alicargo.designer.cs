@@ -770,6 +770,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<decimal> _TotalCostOfSenderForWeight;
 		
+		private bool _IsActive;
+		
 		private EntitySet<Application> _Applications;
 		
 		private EntityRef<Broker> _Broker;
@@ -812,6 +814,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnAdditionalCostChanged();
     partial void OnTotalCostOfSenderForWeightChanging(System.Nullable<decimal> value);
     partial void OnTotalCostOfSenderForWeightChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
     #endregion
 		
 		public AirWaybill()
@@ -1146,6 +1150,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._TotalCostOfSenderForWeight = value;
 					this.SendPropertyChanged("TotalCostOfSenderForWeight");
 					this.OnTotalCostOfSenderForWeightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
 				}
 			}
 		}

@@ -19,6 +19,7 @@
 	[BrokerCost]					MONEY				NULL,	
 	[AdditionalCost]				MONEY				NULL,
 	[TotalCostOfSenderForWeight]	MONEY				NULL,
+	[IsActive]						BIT					CONSTRAINT [DF_AirWaybill_IsActive] DEFAULT (1) NOT NULL
 
 	CONSTRAINT [PK_dbo.AirWaybill] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.AirWaybill_dbo.Broker_BrokerId] FOREIGN KEY ([BrokerId]) REFERENCES [dbo].[Broker] ([Id]),

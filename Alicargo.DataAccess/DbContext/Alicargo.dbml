@@ -51,6 +51,7 @@
 			<Column Name="BrokerCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="AdditionalCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
 			<Column Name="TotalCostOfSenderForWeight" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+			<Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
 			<Association Name="AirWaybill_Application" Member="Applications" ThisKey="Id" OtherKey="AirWaybillId"
 			             Type="Application" />
 			<Association Name="Broker_AirWaybill" Member="Broker" ThisKey="BrokerId" OtherKey="Id" Type="Broker"
