@@ -58,21 +58,15 @@ namespace Alicargo.Tests.Services.Application
 		{
 			var stateAvailability = _context.CreateMany<long>(6).ToArray();
 			var withLogic = stateAvailability.Take(3).ToArray();
-			var filtered = withLogic.Take(2).ToArray();
 			var dictionary = _context.Create<Dictionary<long, StateData>>();
-			var currentState = _context.Create<StateData>();
 
 			_context.ApplicationRepository.Setup(x => x.Get(_applicationData.Id)).Returns(_applicationData);
 			_context.StateFilter.Setup(x => x.GetStateAvailabilityToSet()).Returns(stateAvailability);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Admin)).Returns(false);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Manager)).Returns(false);
-			_context.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, new[] { _applicationData.StateId })).Returns(new Dictionary<long, StateData>
-			{
-				{_applicationData.StateId, currentState}
-			});
 			_context.StateFilter.Setup(x => x.FilterByBusinessLogic(_applicationData, stateAvailability))
 				.Returns(withLogic);
-			_context.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, filtered)).Returns(dictionary);
+			_context.StateRepository.Setup(x => x.Get(TwoLetterISOLanguageName.English, withLogic)).Returns(dictionary);
 			_context.IdentityService.Setup(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 
 			var stateModels = _service.GetStateAvailability(_applicationData.Id);
@@ -86,9 +80,8 @@ namespace Alicargo.Tests.Services.Application
 			_context.StateFilter.Verify(x => x.FilterByBusinessLogic(_applicationData, stateAvailability), Times.Once());
 			_context.ApplicationRepository.Verify(x => x.Get(_applicationData.Id), Times.Once());
 			_context.StateFilter.Verify(x => x.GetStateAvailabilityToSet(), Times.Once());
-			_context.StateRepository.Verify(x => x.Get(TwoLetterISOLanguageName.English, new[] { _applicationData.StateId }), Times.Once());
-			_context.StateRepository.Verify(x => x.Get(TwoLetterISOLanguageName.English, filtered), Times.Once());
-			_context.IdentityService.Verify(x => x.Language, Times.Exactly(2));
+			_context.StateRepository.Verify(x => x.Get(TwoLetterISOLanguageName.English, withLogic), Times.Once());
+			_context.IdentityService.Verify(x => x.Language, Times.Once());
 		}
 	}
 }
