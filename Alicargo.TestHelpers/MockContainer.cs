@@ -94,6 +94,9 @@ namespace Alicargo.TestHelpers
 			BillRepository = Inject<IBillRepository>();
 			SettingRepository = Inject<ISettingRepository>();
 			CalculationRepository = Inject<ICalculationRepository>();
+			ApplicationListPresenter = Inject<IApplicationListPresenter>();
+			CarrierRepository = Inject<ICarrierRepository>();
+			ForwarderRepository = Inject<IForwarderRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -108,11 +111,13 @@ namespace Alicargo.TestHelpers
 		public Mock<IApplicationFileRepository> ApplicationFileRepository { get; private set; }
 		public Mock<IApplicationGrouper> ApplicationGrouper { get; private set; }
 		public Mock<IApplicationListItemMapper> ApplicationListItemMapper { get; private set; }
+		public Mock<IApplicationListPresenter> ApplicationListPresenter { get; private set; }
 		public Mock<IApplicationPresenter> ApplicationPresenter { get; private set; }
 		public Mock<IApplicationRepository> ApplicationRepository { get; private set; }
 		public Mock<IApplicationStateManager> ApplicationStateManager { get; private set; }
 		public Mock<IAwbRepository> AwbRepository { get; private set; }
 		public Mock<IBillRepository> BillRepository { get; private set; }
+		public Mock<ICarrierRepository> CarrierRepository { get; private set; }
 		public Mock<ICalculationRepository> CalculationRepository { get; private set; }
 		public Mock<ICityRepository> CityRepository { get; private set; }
 		public Mock<IClientPermissions> ClientPermissions { get; private set; }
@@ -120,6 +125,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ICommonFilesFacade> CommonFilesFacade { get; private set; }
 		public Mock<ICountryRepository> CountryRepository { get; private set; }
 		public Mock<IIdentityService> IdentityService { get; private set; }
+		public Mock<IForwarderRepository> ForwarderRepository { get; private set; }
 		public Mock<IMailSender> MailSender { get; private set; }
 		public Mock<IMessageBuilder> MessageBuilder { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }

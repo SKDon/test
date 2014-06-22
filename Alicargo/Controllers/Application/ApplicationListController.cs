@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
+using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -23,12 +24,14 @@ namespace Alicargo.Controllers.Application
 		private readonly IIdentityService _identity;
 		private readonly IApplicationListPresenter _presenter;
 		private readonly ISenderRepository _senders;
+		private readonly IAdminRepository _admins;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListController(
 			IApplicationListPresenter presenter,
 			IClientRepository clients,
 			ISenderRepository senders,
+			IAdminRepository admins,
 			IAwbRepository awbs,
 			ICarrierRepository carriers,
 			IStateConfig stateConfig,
@@ -38,6 +41,7 @@ namespace Alicargo.Controllers.Application
 			_presenter = presenter;
 			_clients = clients;
 			_senders = senders;
+			_admins = admins;
 			_awbs = awbs;
 			_carriers = carriers;
 			_stateConfig = stateConfig;
@@ -52,13 +56,12 @@ namespace Alicargo.Controllers.Application
 				.OrderBy(x => x.Nic)
 				.ToDictionary(x => x.ClientId, x => x.Nic);
 
+			var awbs = GetAwbs();
+
 			var model = new ApplicationIndexModel
 			{
 				Clients = clients,
-				AirWaybills = _awbs.Get()
-					.Where(x => x.StateId == _stateConfig.CargoIsFlewStateId && x.IsActive)
-					.OrderBy(x => x.Bill)
-					.ToDictionary(x => x.Id, x => x.Bill)
+				AirWaybills = awbs.OrderBy(x => x.Bill).ToDictionary(x => x.Id, x => x.Bill)
 			};
 
 			return View(model);
@@ -88,6 +91,22 @@ namespace Alicargo.Controllers.Application
 			var data = _presenter.List(_identity.Language, take, skip, orders, clientId, senderId, forwarderId, carrierId);
 
 			return Json(data);
+		}
+
+		private IEnumerable<AirWaybillData> GetAwbs()
+		{
+			var cargoIsFlewStateId = _stateConfig.CargoIsFlewStateId;
+			var awbs = _awbs.Get().Where(x => x.StateId == cargoIsFlewStateId && x.IsActive);
+
+			if(_identity.IsInRole(RoleType.Sender))
+			{
+				var adminUserIds = _admins.GetAll().Select(x => x.UserId).ToArray();
+
+				var currentUserId = _identity.Id;
+				awbs = awbs.Where(x => x.CreatorUserId == currentUserId || adminUserIds.Contains(x.CreatorUserId));
+			}
+
+			return awbs;
 		}
 	}
 }
