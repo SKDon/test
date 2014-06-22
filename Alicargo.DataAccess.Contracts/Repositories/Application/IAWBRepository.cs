@@ -5,7 +5,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 {
 	public interface IAwbRepository
 	{
-		long Add(AirWaybillEditData data, long stateId);
+		long Add(AirWaybillEditData data, long stateId, long creatorUserId);
 
 		long Count(long? brokerId = null);
 

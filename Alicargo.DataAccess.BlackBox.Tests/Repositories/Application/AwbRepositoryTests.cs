@@ -77,8 +77,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var data21 = CreateApplicationData(TestConstants.TestClientId1);
 			var data22 = CreateApplicationData(TestConstants.TestClientId1);
 
-			var awbId1 = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId);
-			var awbId2 = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId);
+			var awbId1 = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId, TestConstants.TestAdminUserId);
+			var awbId2 = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId, TestConstants.TestAdminUserId);
 
 			var applications = _applicationEditor;
 			var app11 = applications.Add(data11);
@@ -119,7 +119,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 
 			Assert.AreEqual(oldData.Length + 1, newData.Length);
 
-			var airWaybill = _awbs.Get(data.Id).First();
+			var airWaybill = _awbs.Get(data.Id).Single();
 
 			data.ShouldBeEquivalentTo(airWaybill);
 		}
@@ -130,7 +130,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			var data1 = CreateApplicationData(TestConstants.TestClientId1);
 			var data2 = CreateApplicationData(TestConstants.TestClientId2);
 
-			var id = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId);
+			var id = _awbs.Add(CreateAirWaybillData(), TestConstants.DefaultStateId, TestConstants.TestAdminUserId);
 
 			var a1 = _applicationEditor.Add(data1);
 			var a2 = _applicationEditor.Add(data2);
@@ -215,7 +215,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 		{
 			var data = CreateAirWaybillData();
 
-			var id = _awbs.Add(data, TestConstants.DefaultStateId);
+			var id = _awbs.Add(data, TestConstants.DefaultStateId, TestConstants.TestAdminUserId);
 
 			var result = ObjectMapperManager.DefaultInstance
 				.GetMapper<AirWaybillEditData, AirWaybillData>()
@@ -226,6 +226,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			result.StateChangeTimestamp = _now;
 			result.StateId = TestConstants.DefaultStateId;
 			result.IsActive = true;
+			result.CreatorUserId = TestConstants.TestAdminUserId;
 
 			return result;
 		}

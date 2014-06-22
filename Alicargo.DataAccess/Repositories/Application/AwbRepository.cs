@@ -37,18 +37,20 @@ namespace Alicargo.DataAccess.Repositories.Application
 				CustomCost = x.CustomCost,
 				FlightCost = x.FlightCost,
 				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
-				IsActive = x.IsActive
+				IsActive = x.IsActive,
+				CreatorUserId = x.CreatorUserId
 			};
 		}
 
-		public long Add(AirWaybillEditData data, long stateId)
+		public long Add(AirWaybillEditData data, long stateId, long creatorUserId)
 		{
 			var entity = new AirWaybill
 			{
 				CreationTimestamp = DateTimeProvider.Now,
 				StateChangeTimestamp = DateTimeProvider.Now,
 				StateId = stateId,
-				IsActive = true
+				IsActive = true,
+				CreatorUserId = creatorUserId
 			};
 
 			Map(data, entity);

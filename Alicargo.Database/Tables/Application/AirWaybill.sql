@@ -19,11 +19,13 @@
 	[BrokerCost]					MONEY				NULL,	
 	[AdditionalCost]				MONEY				NULL,
 	[TotalCostOfSenderForWeight]	MONEY				NULL,
-	[IsActive]						BIT					CONSTRAINT [DF_AirWaybill_IsActive] DEFAULT (1) NOT NULL
+	[IsActive]						BIT					CONSTRAINT [DF_AirWaybill_IsActive] DEFAULT (1) NOT NULL,
+	[CreatorUserId]					BIGINT				NOT NULL,
 
 	CONSTRAINT [PK_dbo.AirWaybill] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.AirWaybill_dbo.Broker_BrokerId] FOREIGN KEY ([BrokerId]) REFERENCES [dbo].[Broker] ([Id]),
-	CONSTRAINT [FK_dbo.AirWaybill_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id])
+	CONSTRAINT [FK_dbo.AirWaybill_dbo.State_StateId] FOREIGN KEY ([StateId]) REFERENCES [dbo].[State] ([Id]),
+	CONSTRAINT [FK_dbo.AirWaybill_dbo.User_CreatorUserId] FOREIGN KEY ([CreatorUserId]) REFERENCES [dbo].[User] ([Id])
 );
 GO
 

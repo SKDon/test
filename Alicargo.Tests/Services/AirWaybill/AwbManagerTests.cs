@@ -38,12 +38,12 @@ namespace Alicargo.Tests.Services.AirWaybill
 
 			_context.StateConfig.Setup(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
 			_context.ApplicationAwbManager.Setup(x => x.SetAwb(applicationId, airWaybillId));
-			_context.AwbRepository.Setup(x => x.Add(It.IsAny<AirWaybillEditData>(), cargoIsFlewStateId))
+			_context.AwbRepository.Setup(x => x.Add(It.IsAny<AirWaybillEditData>(), cargoIsFlewStateId, TestConstants.TestAdminUserId))
 				.Returns(() => airWaybillId);
 
 			var airWaybillData = AwbMapper.GetData(model);
 
-			_manager.Create(applicationId, airWaybillData);
+			_manager.Create(applicationId, airWaybillData, TestConstants.TestAdminUserId);
 
 			_context.ApplicationAwbManager.Verify(x => x.SetAwb(applicationId, airWaybillId), Times.Once());
 			_context.AwbRepository.Verify(x => x.Add(It.Is<AirWaybillEditData>(
@@ -53,7 +53,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 				        && data.BrokerId == model.BrokerId
 				        && data.DateOfArrival == DateTimeOffset.Parse(model.DateOfArrivalLocalString)
 				        && data.DateOfDeparture == DateTimeOffset.Parse(model.DateOfDepartureLocalString)
-				        && data.GTD == null), cargoIsFlewStateId),
+						&& data.GTD == null), cargoIsFlewStateId, TestConstants.TestAdminUserId),
 				Times.Once());
 
 			_context.StateConfig.Verify(x => x.CargoIsFlewStateId, Times.Once());
@@ -65,7 +65,7 @@ namespace Alicargo.Tests.Services.AirWaybill
 		{
 			var data = _context.Create<AirWaybillData>();
 
-			_manager.Create(It.IsAny<long>(), data);
+			_manager.Create(It.IsAny<long>(), data, TestConstants.TestAdminUserId);
 		}
 
 		[TestMethod]

@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.AirWaybill;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -12,26 +14,30 @@ using Resources;
 
 namespace Alicargo.Controllers.Awb
 {
+	[Access(RoleType.Sender)]
 	public partial class SenderAwbController : Controller
 	{
 		private readonly IAwbManager _awbManager;
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrokerRepository _brokers;
+		private readonly IIdentityService _identity;
 
 		public SenderAwbController(
+			IIdentityService identity,
 			IAwbUpdateManager awbUpdateManager,
 			IAwbManager awbManager,
 			IAwbPresenter awbPresenter,
 			IBrokerRepository brokers)
 		{
+			_identity = identity;
 			_awbUpdateManager = awbUpdateManager;
 			_awbManager = awbManager;
 			_awbPresenter = awbPresenter;
 			_brokers = brokers;
 		}
 
-		[Access(RoleType.Sender)]
+		[HttpGet]
 		public virtual ActionResult Create(long? id)
 		{
 			BindBag(null);
@@ -40,7 +46,6 @@ namespace Alicargo.Controllers.Awb
 		}
 
 		[HttpPost]
-		[Access(RoleType.Sender)]
 		public virtual ActionResult Create(long? id, AwbSenderModel model)
 		{
 			try
@@ -49,7 +54,8 @@ namespace Alicargo.Controllers.Awb
 				{
 					var airWaybillData = AwbMapper.GetData(model);
 
-					_awbManager.Create(id, airWaybillData);
+					Debug.Assert(_identity.Id != null);
+					_awbManager.Create(id, airWaybillData, _identity.Id.Value);
 
 					return RedirectToAction(MVC.AirWaybill.Index());
 				}
@@ -64,7 +70,6 @@ namespace Alicargo.Controllers.Awb
 			return View(model);
 		}
 
-		[Access(RoleType.Sender)]
 		[HttpGet]
 		public virtual ViewResult Edit(long id)
 		{
@@ -75,7 +80,6 @@ namespace Alicargo.Controllers.Awb
 			return View(model);
 		}
 
-		[Access(RoleType.Sender)]
 		[HttpPost]
 		public virtual ActionResult Edit(long id, AwbSenderModel model)
 		{

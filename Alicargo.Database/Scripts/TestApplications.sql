@@ -1,11 +1,11 @@
 ﻿INSERT [dbo].[AirWaybill] ([CreationTimestamp], [Bill], [ArrivalAirport], [DepartureAirport],
-[DateOfDeparture], [DateOfArrival],[BrokerId], [GTD], [StateId]) VALUES 
+[DateOfDeparture], [DateOfArrival],[BrokerId], [GTD], [StateId], [CreatorUserId]) VALUES 
 (SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)),CAST(NEWID() AS NVARCHAR(50)), CAST(NEWID() AS NVARCHAR(50)),
-SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7),
+SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7, 1),
 (SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)), N'ArrivalAirport', N'DepartureAirport',
-SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7),
+SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7, 1),
 (SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)), N'ArrivalAirport', N'DepartureAirport',
-SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7)
+SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7, 1)
 
 INSERT [dbo].[Application] 
 ([SenderId], [ForwarderId], [CreationTimestamp], [Invoice], [Characteristic], [AddressLoad], [WarehouseWorkingTime], [Weight], [Count], [Volume],

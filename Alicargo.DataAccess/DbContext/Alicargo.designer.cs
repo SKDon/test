@@ -752,6 +752,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<long> _BrokerId;
 		
+		private long _CreatorUserId;
+		
 		private string _GTD;
 		
 		private string _Bill;
@@ -776,6 +778,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private EntityRef<Broker> _Broker;
 		
+		private EntityRef<User> _Creator;
+		
 		private EntityRef<State> _State;
 		
     #region Extensibility Method Definitions
@@ -796,6 +800,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnDateOfArrivalChanged();
     partial void OnBrokerIdChanging(System.Nullable<long> value);
     partial void OnBrokerIdChanged();
+    partial void OnCreatorUserIdChanging(long value);
+    partial void OnCreatorUserIdChanged();
     partial void OnGTDChanging(string value);
     partial void OnGTDChanged();
     partial void OnBillChanging(string value);
@@ -822,6 +828,7 @@ namespace Alicargo.DataAccess.DbContext
 		{
 			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
 			this._Broker = default(EntityRef<Broker>);
+			this._Creator = default(EntityRef<User>);
 			this._State = default(EntityRef<State>);
 			OnCreated();
 		}
@@ -966,6 +973,30 @@ namespace Alicargo.DataAccess.DbContext
 					this._BrokerId = value;
 					this.SendPropertyChanged("BrokerId");
 					this.OnBrokerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorUserId", DbType="BigInt")]
+		public long CreatorUserId
+		{
+			get
+			{
+				return this._CreatorUserId;
+			}
+			set
+			{
+				if ((this._CreatorUserId != value))
+				{
+					if (this._Creator.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCreatorUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._CreatorUserId = value;
+					this.SendPropertyChanged("CreatorUserId");
+					this.OnCreatorUserIdChanged();
 				}
 			}
 		}
@@ -1217,6 +1248,24 @@ namespace Alicargo.DataAccess.DbContext
 						this._BrokerId = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("Broker");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_AirWaybill", Storage="_Creator", ThisKey="CreatorUserId", OtherKey="Id", IsForeignKey=true)]
+		public User Creator
+		{
+			get
+			{
+				return this._Creator.Entity;
+			}
+			set
+			{
+				if ((this._Creator.Entity != value))
+				{
+					this.SendPropertyChanging();
+					this._Creator.Entity = value;
+					this.SendPropertyChanged("Creator");
 				}
 			}
 		}

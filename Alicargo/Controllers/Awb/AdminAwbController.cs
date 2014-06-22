@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.AirWaybill;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -12,20 +14,23 @@ using Resources;
 
 namespace Alicargo.Controllers.Awb
 {
+	[Access(RoleType.Admin, RoleType.Manager)]
 	public partial class AdminAwbController : Controller
 	{
+		private readonly IIdentityService _identity;
 		private readonly IAwbManager _awbManager;
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrokerRepository _brokers;
 
-
 		public AdminAwbController(
+			IIdentityService identity,
 			IAwbManager awbManager,
 			IAwbPresenter awbPresenter,
 			IAwbUpdateManager awbUpdateManager,
 			IBrokerRepository brokers)
 		{
+			_identity = identity;
 			_awbManager = awbManager;
 			_awbPresenter = awbPresenter;
 			_awbUpdateManager = awbUpdateManager;
@@ -41,7 +46,6 @@ namespace Alicargo.Controllers.Awb
 
 		#region Edit
 
-		[Access(RoleType.Admin, RoleType.Manager)]
 		[HttpGet]
 		public virtual ViewResult Edit(long id)
 		{
@@ -53,7 +57,6 @@ namespace Alicargo.Controllers.Awb
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Edit(long id, AwbAdminModel model)
 		{
 			try
@@ -79,7 +82,7 @@ namespace Alicargo.Controllers.Awb
 
 		#region Create
 
-		[Access(RoleType.Admin, RoleType.Manager)]
+		[HttpGet]
 		public virtual ActionResult Create(long? applicationId)
 		{
 			BindBag(null);
@@ -88,7 +91,6 @@ namespace Alicargo.Controllers.Awb
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Create(long? applicationId, AwbAdminModel model)
 		{
 			try
@@ -97,7 +99,8 @@ namespace Alicargo.Controllers.Awb
 				{
 					var data = AwbMapper.GetData(model);
 
-					var id = _awbManager.Create(applicationId, data);
+					Debug.Assert(_identity.Id != null);
+					var id = _awbManager.Create(applicationId, data, _identity.Id.Value);
 
 					return RedirectToAction(MVC.AdminAwb.Edit(id));
 				}

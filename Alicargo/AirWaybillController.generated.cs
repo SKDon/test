@@ -68,6 +68,12 @@ namespace Alicargo.Controllers.Awb
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.HttpStatusCodeResult SetActive()
+        {
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetActive);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.PartialViewResult CargoIsCustomsClearedButton()
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.CargoIsCustomsClearedButton);
@@ -103,6 +109,7 @@ namespace Alicargo.Controllers.Awb
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string CargoIsCustomsCleared = "CargoIsCustomsCleared";
+            public readonly string SetActive = "SetActive";
             public readonly string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
             public readonly string Delete = "Delete";
             public readonly string SetAirWaybill = "SetAirWaybill";
@@ -114,6 +121,7 @@ namespace Alicargo.Controllers.Awb
             public const string Index = "Index";
             public const string List = "List";
             public const string CargoIsCustomsCleared = "CargoIsCustomsCleared";
+            public const string SetActive = "SetActive";
             public const string CargoIsCustomsClearedButton = "CargoIsCustomsClearedButton";
             public const string Delete = "Delete";
             public const string SetAirWaybill = "SetAirWaybill";
@@ -136,6 +144,15 @@ namespace Alicargo.Controllers.Awb
         public class ActionParamsClass_CargoIsCustomsCleared
         {
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_SetActive s_params_SetActive = new ActionParamsClass_SetActive();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetActive SetActiveParams { get { return s_params_SetActive; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetActive
+        {
+            public readonly string id = "id";
+            public readonly string isActive = "isActive";
         }
         static readonly ActionParamsClass_CargoIsCustomsClearedButton s_params_CargoIsCustomsClearedButton = new ActionParamsClass_CargoIsCustomsClearedButton();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -224,6 +241,19 @@ namespace Alicargo.Controllers.Awb
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.CargoIsCustomsCleared);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             CargoIsCustomsClearedOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetActiveOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, long id, bool isActive);
+
+        [NonAction]
+        public override System.Web.Mvc.HttpStatusCodeResult SetActive(long id, bool isActive)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.SetActive);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "isActive", isActive);
+            SetActiveOverride(callInfo, id, isActive);
             return callInfo;
         }
 

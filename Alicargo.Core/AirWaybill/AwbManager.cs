@@ -33,14 +33,14 @@ namespace Alicargo.Core.AirWaybill
 			_editor = editor;
 		}
 
-		public long Create(long? applicationId, AirWaybillEditData data)
+		public long Create(long? applicationId, AirWaybillEditData data, long creatorUserId)
 		{
 			if(data.GTD != null)
 			{
 				throw new InvalidLogicException("GTD data should be defined by update");
 			}
 
-			var id = _awbs.Add(data, _stateConfig.CargoIsFlewStateId);
+			var id = _awbs.Add(data, _stateConfig.CargoIsFlewStateId, creatorUserId);
 
 			if(applicationId.HasValue)
 			{
