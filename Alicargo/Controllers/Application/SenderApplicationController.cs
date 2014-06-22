@@ -13,6 +13,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers.Application
 {
+	[Access(RoleType.Sender)]
 	public partial class SenderApplicationController : Controller
 	{
 		private readonly IApplicationRepository _applications;
@@ -39,7 +40,6 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpGet]
-		[Access(RoleType.Sender)]
 		public virtual ViewResult Create(long id)
 		{
 			var clientId = id;
@@ -50,7 +50,6 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[Access(RoleType.Sender)]
 		public virtual ActionResult Create(long id, ApplicationSenderModel model)
 		{
 			var clientId = id;
@@ -77,7 +76,6 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpGet]
-		[Access(RoleType.Sender)]
 		public virtual ViewResult Edit(long id)
 		{
 			var model = _manager.Get(id);
@@ -88,7 +86,6 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[Access(RoleType.Sender)]
 		public virtual ActionResult Edit(long id, ApplicationSenderModel model)
 		{
 			if(!ModelState.IsValid)

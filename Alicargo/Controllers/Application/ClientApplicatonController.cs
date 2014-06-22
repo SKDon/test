@@ -14,6 +14,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers.Application
 {
+	[Access(RoleType.Client)]
 	public partial class ClientApplicationController : Controller
 	{
 		private readonly IClientRepository _clients;
@@ -39,7 +40,6 @@ namespace Alicargo.Controllers.Application
 		#region Edit
 
 		[HttpGet]
-		[Access(RoleType.Client)]
 		public virtual ViewResult Edit(long id)
 		{
 			var application = _manager.Get(id);
@@ -51,7 +51,6 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Access(RoleType.Client)]
 		public virtual ActionResult Edit(long id, ApplicationClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
@@ -71,7 +70,7 @@ namespace Alicargo.Controllers.Application
 
 		#region Create
 
-		[Access(RoleType.Client)]
+		[HttpGet]
 		public virtual ViewResult Create()
 		{
 			BindBag(null, GetClientId());
@@ -80,8 +79,7 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
-		[Access(RoleType.Client)]
+		[ValidateAntiForgeryToken]		
 		public virtual ActionResult Create(ApplicationClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{

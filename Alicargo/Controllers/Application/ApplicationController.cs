@@ -14,6 +14,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers.Application
 {
+	[Access(RoleType.Admin, RoleType.Manager)]
 	public partial class ApplicationController : Controller
 	{
 		private readonly IApplicationRepository _applications;
@@ -49,7 +50,6 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual HttpStatusCodeResult Delete(long id)
 		{
 			_manager.Delete(id);
@@ -86,7 +86,6 @@ namespace Alicargo.Controllers.Application
 		#region Edit
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Edit(long id)
 		{
 			var application = _presenter.Get(id);
@@ -100,8 +99,8 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Manager)]
-		public virtual ActionResult Edit(long id, ApplicationAdminModel model,
+		public virtual ActionResult Edit(
+			long id, ApplicationAdminModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!ModelState.IsValid)
@@ -122,7 +121,7 @@ namespace Alicargo.Controllers.Application
 
 		#region Create
 
-		[Access(RoleType.Admin, RoleType.Manager)]
+		[HttpGet]
 		public virtual ViewResult Create(long clientId)
 		{
 			BindBag(clientId, null);
@@ -135,8 +134,8 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Access(RoleType.Admin, RoleType.Manager)]
-		public virtual ActionResult Create(long clientId, ApplicationAdminModel model,
+		public virtual ActionResult Create(
+			long clientId, ApplicationAdminModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!ModelState.IsValid)
