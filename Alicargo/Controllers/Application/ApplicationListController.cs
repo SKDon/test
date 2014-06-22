@@ -56,7 +56,7 @@ namespace Alicargo.Controllers.Application
 			{
 				Clients = clients,
 				AirWaybills = _awbs.Get()
-					.Where(x => x.StateId == _stateConfig.CargoIsFlewStateId)
+					.Where(x => x.StateId == _stateConfig.CargoIsFlewStateId && x.IsActive)
 					.OrderBy(x => x.Bill)
 					.ToDictionary(x => x.Id, x => x.Bill)
 			};
