@@ -8,6 +8,7 @@
 	</h1>
 	@Html.EditPage(Url.Action(MVC.AdminAwb.Edit()), Pages.Save,
 		@Html.Action(MVC.AirWaybill.CargoIsCustomsClearedButton((long)ViewBag.AwbId)))
+	<hr />
 	@Html.Action(MVC.AwbFiles.Admin((long)ViewBag.AwbId))
 </div>
 @section scripts

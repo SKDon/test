@@ -4,6 +4,7 @@
 @model Alicargo.ViewModels.AirWaybill.AwbSenderModel
 <div class="container-edit">
 	@Html.EditPage(Url.Action(MVC.SenderAwb.Edit()), Pages.Save)
+	<hr />
 	@Html.Action(MVC.AwbFiles.Sender((long)ViewBag.AwbId))
 </div>
 @section scripts

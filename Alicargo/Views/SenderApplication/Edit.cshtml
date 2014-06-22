@@ -9,6 +9,7 @@
 		<span>@Entities.Nic: @ViewBag.Nic</span>
 	</h1>
 	@Html.EditPage(Url.Action(MVC.SenderApplication.Edit()), Pages.Save)
+	<hr />
 	@Html.Action(MVC.ApplicationFiles.Sender((long)ViewBag.ApplicationId))
 </div>
 @section scripts
