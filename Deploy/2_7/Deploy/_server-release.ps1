@@ -14,7 +14,7 @@
 
 clear
 
-#git clone http://git.alicargo.ru/Deploy.git $newSiteFolder -b $branch
+git clone http://git.alicargo.ru/Deploy.git $newSiteFolder -b $branch
 
 Write-Host "Backuping old db..."
 .\backup-db.ps1 $server $backupLocation $mainDbPrefix`_$oldVersion
