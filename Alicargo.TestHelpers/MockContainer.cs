@@ -97,6 +97,7 @@ namespace Alicargo.TestHelpers
 			ApplicationListPresenter = Inject<IApplicationListPresenter>();
 			CarrierRepository = Inject<ICarrierRepository>();
 			ForwarderRepository = Inject<IForwarderRepository>();
+			ManagerRepository = Inject<IManagerRepository>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -127,6 +128,7 @@ namespace Alicargo.TestHelpers
 		public Mock<IIdentityService> IdentityService { get; private set; }
 		public Mock<IForwarderRepository> ForwarderRepository { get; private set; }
 		public Mock<IMailSender> MailSender { get; private set; }
+		public Mock<IManagerRepository> ManagerRepository { get; private set; }
 		public Mock<IMessageBuilder> MessageBuilder { get; private set; }
 		public Mock<IRecipientsFacade> RecipientsFacade { get; private set; }
 		public Mock<ISenderRepository> SenderRepository { get; private set; }
