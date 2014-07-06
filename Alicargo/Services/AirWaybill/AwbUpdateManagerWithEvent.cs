@@ -39,10 +39,6 @@ namespace Alicargo.Services.AirWaybill
 
 		public void Update(long id, AwbSenderModel model)
 		{
-			var old = _awbs.Get(id).First();
-
-			AddBrokerEvent(id, old.BrokerId, model.BrokerId);
-
 			_manager.Update(id, model);
 		}
 

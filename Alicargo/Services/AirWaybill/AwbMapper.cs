@@ -46,7 +46,6 @@ namespace Alicargo.Services.AirWaybill
 				ArrivalAirport = model.ArrivalAirport,
 				Bill = model.Bill,
 				DepartureAirport = model.DepartureAirport,
-				BrokerId = model.BrokerId,
 				DateOfArrival = DateTimeOffset.Parse(model.DateOfArrivalLocalString),
 				DateOfDeparture = DateTimeOffset.Parse(model.DateOfDepartureLocalString),
 				GTD = null,
@@ -85,7 +84,6 @@ namespace Alicargo.Services.AirWaybill
 			{
 				ArrivalAirport = data.ArrivalAirport,
 				Bill = data.Bill,
-				BrokerId = data.BrokerId,
 				DateOfArrivalLocalString = LocalizationHelper.GetDate(data.DateOfArrival, currentCulture),
 				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, currentCulture),
 				DepartureAirport = data.DepartureAirport,
@@ -117,7 +115,6 @@ namespace Alicargo.Services.AirWaybill
 			to.DepartureAirport = from.DepartureAirport;
 			to.DateOfArrival = DateTimeOffset.Parse(from.DateOfArrivalLocalString);
 			to.DateOfDeparture = DateTimeOffset.Parse(from.DateOfDepartureLocalString);
-			to.BrokerId = from.BrokerId;
 			to.FlightCost = from.FlightCost;
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
 		}

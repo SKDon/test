@@ -105,8 +105,6 @@ namespace Alicargo.Controllers.Awb
 		private void BindBag(long? awbId)
 		{
 			ViewBag.AwbId = awbId;
-
-			ViewBag.Brokers = _brokers.GetAll().ToDictionary(x => (long?)x.Id, x => x.Name);
 		}
 	}
 }
