@@ -1,11 +1,9 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
-using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
 using Alicargo.Services.AirWaybill;
@@ -20,21 +18,18 @@ namespace Alicargo.Controllers.Awb
 		private readonly IAwbManager _awbManager;
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbUpdateManager _awbUpdateManager;
-		private readonly IBrokerRepository _brokers;
 		private readonly IIdentityService _identity;
 
 		public SenderAwbController(
 			IIdentityService identity,
 			IAwbUpdateManager awbUpdateManager,
 			IAwbManager awbManager,
-			IAwbPresenter awbPresenter,
-			IBrokerRepository brokers)
+			IAwbPresenter awbPresenter)
 		{
 			_identity = identity;
 			_awbUpdateManager = awbUpdateManager;
 			_awbManager = awbManager;
 			_awbPresenter = awbPresenter;
-			_brokers = brokers;
 		}
 
 		[HttpGet]
@@ -52,9 +47,10 @@ namespace Alicargo.Controllers.Awb
 			{
 				if(ModelState.IsValid)
 				{
-					var airWaybillData = AwbMapper.GetData(model);
-
 					Debug.Assert(_identity.Id != null);
+
+					var airWaybillData = AwbMapper.GetData(model, _identity.Id.Value);
+
 					_awbManager.Create(id, airWaybillData, _identity.Id.Value);
 
 					return RedirectToAction(MVC.AirWaybill.Index());

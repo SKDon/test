@@ -752,6 +752,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<long> _BrokerId;
 		
+		private System.Nullable<long> _SenderUserId;
+		
 		private long _CreatorUserId;
 		
 		private string _GTD;
@@ -800,6 +802,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnDateOfArrivalChanged();
     partial void OnBrokerIdChanging(System.Nullable<long> value);
     partial void OnBrokerIdChanged();
+    partial void OnSenderUserIdChanging(System.Nullable<long> value);
+    partial void OnSenderUserIdChanged();
     partial void OnCreatorUserIdChanging(long value);
     partial void OnCreatorUserIdChanged();
     partial void OnGTDChanging(string value);
@@ -973,6 +977,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._BrokerId = value;
 					this.SendPropertyChanged("BrokerId");
 					this.OnBrokerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderUserId", DbType="BigInt NULL")]
+		public System.Nullable<long> SenderUserId
+		{
+			get
+			{
+				return this._SenderUserId;
+			}
+			set
+			{
+				if ((this._SenderUserId != value))
+				{
+					this.OnSenderUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._SenderUserId = value;
+					this.SendPropertyChanged("SenderUserId");
+					this.OnSenderUserIdChanged();
 				}
 			}
 		}

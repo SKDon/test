@@ -38,7 +38,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				FlightCost = x.FlightCost,
 				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
 				IsActive = x.IsActive,
-				CreatorUserId = x.CreatorUserId
+				CreatorUserId = x.CreatorUserId,
+				SenderUserId = x.SenderUserId.Value
 			};
 		}
 
@@ -279,6 +280,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.ArrivalAirport = @from.ArrivalAirport;
 			to.Bill = @from.Bill;
 			to.BrokerId = @from.BrokerId;
+			to.SenderUserId = from.SenderUserId;
 			to.DateOfArrival = @from.DateOfArrival;
 			to.DateOfDeparture = @from.DateOfDeparture;
 			to.DepartureAirport = @from.DepartureAirport;

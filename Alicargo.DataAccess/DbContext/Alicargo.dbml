@@ -33,6 +33,7 @@
       <Column Name="DateOfDeparture" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="DateOfArrival" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
       <Column Name="BrokerId" Type="System.Int64" DbType="BigInt NULL" CanBeNull="true" />
+      <Column Name="SenderUserId" Type="System.Int64" DbType="BigInt NULL" CanBeNull="true" />
       <Column Name="CreatorUserId" Type="System.Int64" DbType="BigInt" CanBeNull="false" />
       <Column Name="GTD" Type="System.String" DbType="NVarChar(320)" CanBeNull="true" />
       <Column Name="Bill" Type="System.String" DbType="NVarChar(320) NOT NULL" CanBeNull="false" />

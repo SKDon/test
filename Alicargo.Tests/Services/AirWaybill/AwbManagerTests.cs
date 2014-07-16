@@ -105,13 +105,14 @@ namespace Alicargo.Tests.Services.AirWaybill
 		public void Test_AwbManager_Map_SenderAwbModel()
 		{
 			var model = _context.Create<AwbSenderModel>();
-			var data = AwbMapper.GetData(model);
+			var data = AwbMapper.GetData(model, TestConstants.TestSenderUserId);
 
 			model.ShouldBeEquivalentTo(data, options => options.ExcludingMissingProperties());
 
 			data.DateOfArrival.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfArrivalLocalString));
 			data.DateOfDeparture.ShouldBeEquivalentTo(DateTimeOffset.Parse(model.DateOfDepartureLocalString));
 			data.GTD.Should().BeNull();
+			data.SenderUserId.ShouldBeEquivalentTo(TestConstants.TestSenderUserId);
 		}
 	}
 }

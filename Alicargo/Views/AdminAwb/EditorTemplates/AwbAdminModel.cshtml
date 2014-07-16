@@ -1,11 +1,12 @@
-﻿@using System.Collections.Generic
-@using Alicargo.MvcHelpers.Extensions
+﻿@using Alicargo.MvcHelpers.Extensions
 @inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AwbAdminModel>
 <div class="row">
 	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.Bill)
 		@Html.EditorWithLabelFor(model => model.GTD)
 		@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
+		@Html.LabelFor(x => x.SenderUserId)
+		@Html.DropDownListFor(x => x.SenderUserId, (IDictionary<long, string>)ViewBag.Senders)
 	</div>
 	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.DepartureAirport)

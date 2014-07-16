@@ -22,19 +22,22 @@ namespace Alicargo.Controllers.Awb
 		private readonly IAwbPresenter _awbPresenter;
 		private readonly IAwbUpdateManager _awbUpdateManager;
 		private readonly IBrokerRepository _brokers;
+		private readonly ISenderRepository _senders;
 
 		public AdminAwbController(
 			IIdentityService identity,
 			IAwbManager awbManager,
 			IAwbPresenter awbPresenter,
 			IAwbUpdateManager awbUpdateManager,
-			IBrokerRepository brokers)
+			IBrokerRepository brokers,
+			ISenderRepository senders)
 		{
 			_identity = identity;
 			_awbManager = awbManager;
 			_awbPresenter = awbPresenter;
 			_awbUpdateManager = awbUpdateManager;
 			_brokers = brokers;
+			_senders = senders;
 		}
 
 		private void BindBag(long? awbId)
@@ -42,6 +45,7 @@ namespace Alicargo.Controllers.Awb
 			ViewBag.AwbId = awbId;
 
 			ViewBag.Brokers = _brokers.GetAll().ToDictionary(x => (long?)x.Id, x => x.Name);
+			ViewBag.Senders = _senders.GetAll().ToDictionary(x => x.UserId, x => x.Name);
 		}
 
 		#region Edit

@@ -194,6 +194,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.Application
 			return _fixture
 				.Build<AirWaybillEditData>()
 				.With(x => x.BrokerId, TestConstants.TestBrokerId)
+				.With(x => x.SenderUserId, TestConstants.TestSenderUserId)
 				.Create();
 		}
 

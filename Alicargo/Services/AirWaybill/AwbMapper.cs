@@ -25,7 +25,8 @@ namespace Alicargo.Services.AirWaybill
 				BrokerCost = data.BrokerCost,
 				CustomCost = data.CustomCost,
 				FlightCost = data.FlightCost,
-				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight
+				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight,
+				SenderUserId = data.SenderUserId
 			};
 		}
 
@@ -35,11 +36,11 @@ namespace Alicargo.Services.AirWaybill
 			{
 				GTD = data.GTD,
 				BrokerCost = data.BrokerCost,
-				CustomCost = data.CustomCost
+				CustomCost = data.CustomCost				
 			};
 		}
 
-		public static AirWaybillEditData GetData(AwbSenderModel model)
+		public static AirWaybillEditData GetData(AwbSenderModel model, long senderUserId)
 		{
 			return new AirWaybillEditData
 			{
@@ -53,7 +54,9 @@ namespace Alicargo.Services.AirWaybill
 				BrokerCost = null,
 				CustomCost = null,
 				FlightCost = model.FlightCost,
-				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight
+				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight,
+				BrokerId = null,
+				SenderUserId = senderUserId
 			};
 		}
 
@@ -72,7 +75,8 @@ namespace Alicargo.Services.AirWaybill
 				BrokerCost = model.BrokerCost,
 				CustomCost = model.CustomCost,
 				FlightCost = model.FlightCost,
-				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight
+				TotalCostOfSenderForWeight = model.TotalCostOfSenderForWeight,
+				SenderUserId = model.SenderUserId
 			};
 		}
 
@@ -88,7 +92,7 @@ namespace Alicargo.Services.AirWaybill
 				DateOfDepartureLocalString = LocalizationHelper.GetDate(data.DateOfDeparture, currentCulture),
 				DepartureAirport = data.DepartureAirport,
 				FlightCost = data.FlightCost,
-				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight
+				TotalCostOfSenderForWeight = data.TotalCostOfSenderForWeight				
 			};
 		}
 
@@ -106,6 +110,7 @@ namespace Alicargo.Services.AirWaybill
 			to.CustomCost = from.CustomCost;
 			to.FlightCost = from.FlightCost;
 			to.TotalCostOfSenderForWeight = from.TotalCostOfSenderForWeight;
+			to.SenderUserId = from.SenderUserId;
 		}
 
 		public static void Map(AwbSenderModel from, AirWaybillEditData to)
