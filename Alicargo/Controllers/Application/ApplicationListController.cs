@@ -24,16 +24,12 @@ namespace Alicargo.Controllers.Application
 		private readonly IIdentityService _identity;
 		private readonly IApplicationListPresenter _presenter;
 		private readonly ISenderRepository _senders;
-		private readonly IAdminRepository _admins;
-		private readonly IManagerRepository _managers;
 		private readonly IStateConfig _stateConfig;
 
 		public ApplicationListController(
 			IApplicationListPresenter presenter,
 			IClientRepository clients,
 			ISenderRepository senders,
-			IAdminRepository admins,
-			IManagerRepository managers,
 			IAwbRepository awbs,
 			ICarrierRepository carriers,
 			IStateConfig stateConfig,
@@ -43,8 +39,6 @@ namespace Alicargo.Controllers.Application
 			_presenter = presenter;
 			_clients = clients;
 			_senders = senders;
-			_admins = admins;
-			_managers = managers;
 			_awbs = awbs;
 			_carriers = carriers;
 			_stateConfig = stateConfig;
@@ -103,11 +97,8 @@ namespace Alicargo.Controllers.Application
 
 			if(_identity.IsInRole(RoleType.Sender))
 			{
-				var adminUserIds = _admins.GetAll().Select(x => x.UserId).ToArray();
-				var managerUserIds = _managers.GetAll().Select(x => x.UserId).ToArray();
-
-				var currentUserId = _identity.Id;
-				awbs = awbs.Where(x => x.CreatorUserId == currentUserId || adminUserIds.Contains(x.CreatorUserId) || managerUserIds.Contains(x.CreatorUserId));
+				var id = _identity.Id;
+				awbs = awbs.Where(x => x.SenderUserId == id);
 			}
 
 			return awbs;

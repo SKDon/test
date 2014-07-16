@@ -26,8 +26,6 @@ namespace Alicargo.Tests.Controllers.Application
 				_context.ApplicationListPresenter.Object,
 				_context.ClientRepository.Object,
 				_context.SenderRepository.Object,
-				_context.AdminRepository.Object,
-				_context.ManagerRepository.Object,
 				_context.AwbRepository.Object,
 				_context.CarrierRepository.Object,
 				_context.StateConfig.Object,
@@ -36,33 +34,10 @@ namespace Alicargo.Tests.Controllers.Application
 		}
 
 		[TestMethod]
-		public void Test_Index_AdminCreator()
-		{
-			var cargoIsFlewStateId = _context.Create<long>();
-			var clients = _context.CreateMany<ClientData>().ToArray();
-			var admins = _context.CreateMany<UserData>().ToArray();
-			var managers = _context.CreateMany<UserData>().ToArray();
-			var userId = _context.Create<long>();
-			var awbs = _context.Build<AirWaybillData>()
-				.With(x => x.IsActive, true)
-				.With(x => x.StateId, cargoIsFlewStateId)
-				.CreateMany()
-				.ToArray();
-			awbs[0].CreatorUserId = admins[0].UserId;
-
-			var model = Test(userId, clients, awbs, admins, managers, cargoIsFlewStateId);
-
-			model.AirWaybills.Should().HaveCount(1);
-			model.AirWaybills[awbs[0].Id].ShouldBeEquivalentTo(awbs[0].Bill);
-		}
-
-		[TestMethod]
 		public void Test_Index_IsActive()
 		{
 			var cargoIsFlewStateId = _context.Create<long>();
 			var clients = _context.CreateMany<ClientData>().ToArray();
-			var admins = _context.CreateMany<UserData>().ToArray();
-			var managers = _context.CreateMany<UserData>().ToArray();
 			var userId = _context.Create<long>();
 			var awbs = _context.Build<AirWaybillData>()
 				.With(x => x.IsActive, false)
@@ -71,7 +46,7 @@ namespace Alicargo.Tests.Controllers.Application
 				.CreateMany()
 				.ToArray();
 
-			var model = Test(userId, clients, awbs, admins, managers, cargoIsFlewStateId);
+			var model = Test(userId, clients, awbs, cargoIsFlewStateId);
 
 			model.AirWaybills.Should().HaveCount(0);
 		}
@@ -81,32 +56,26 @@ namespace Alicargo.Tests.Controllers.Application
 		{
 			var cargoIsFlewStateId = _context.Create<long>();
 			var clients = _context.CreateMany<ClientData>().ToArray();
-			var admins = _context.CreateMany<UserData>().ToArray();
-			var managers = _context.CreateMany<UserData>().ToArray();
 			var awbs = _context.Build<AirWaybillData>()
 				.With(x => x.IsActive, true)
 				.With(x => x.StateId, cargoIsFlewStateId)
 				.CreateMany()
 				.ToArray();
-			var userId = _context.Create<long>();
-			awbs[0].CreatorUserId = userId;
+			awbs[0].SenderUserId = TestConstants.TestSenderUserId;
 
-			var model = Test(userId, clients, awbs, admins, managers, cargoIsFlewStateId);
+			var model = Test(TestConstants.TestSenderUserId, clients, awbs, cargoIsFlewStateId);
 
 			model.AirWaybills.Should().HaveCount(1);
 			model.AirWaybills[awbs[0].Id].ShouldBeEquivalentTo(awbs[0].Bill);
 		}
 
 		private ApplicationIndexModel Test(
-			long userId, ClientData[] clients, AirWaybillData[] awbs, UserData[] admins, UserData[] managers,
-			long cargoIsFlewStateId)
+			long userId, ClientData[] clients, AirWaybillData[] awbs, long cargoIsFlewStateId)
 		{
 			_context.IdentityService.SetupGet(x => x.Id).Returns(userId);
 			_context.ClientRepository.Setup(x => x.GetAll()).Returns(clients);
 			_context.IdentityService.Setup(x => x.IsInRole(RoleType.Sender)).Returns(true);
 			_context.AwbRepository.Setup(x => x.Get()).Returns(awbs);
-			_context.AdminRepository.Setup(x => x.GetAll()).Returns(admins);
-			_context.ManagerRepository.Setup(x => x.GetAll()).Returns(managers);
 			_context.StateConfig.SetupGet(x => x.CargoIsFlewStateId).Returns(cargoIsFlewStateId);
 
 			var result = _applicationListController.Index();
@@ -117,8 +86,6 @@ namespace Alicargo.Tests.Controllers.Application
 			_context.ClientRepository.Verify(x => x.GetAll(), Times.Once());
 			_context.IdentityService.Verify(x => x.IsInRole(RoleType.Sender), Times.Once());
 			_context.AwbRepository.Verify(x => x.Get(), Times.Once());
-			_context.AdminRepository.Verify(x => x.GetAll(), Times.Once());
-			_context.ManagerRepository.Verify(x => x.GetAll(), Times.Once());
 			_context.StateConfig.Verify(x => x.CargoIsFlewStateId, Times.Once());
 			model.Clients.ShouldAllBeEquivalentTo(clients.ToDictionary(x => x.ClientId, x => x.Nic));
 
