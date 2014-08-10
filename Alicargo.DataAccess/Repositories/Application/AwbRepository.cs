@@ -39,7 +39,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				TotalCostOfSenderForWeight = x.TotalCostOfSenderForWeight,
 				IsActive = x.IsActive,
 				CreatorUserId = x.CreatorUserId,
-				SenderUserId = x.SenderUserId.Value
+				SenderUserId = x.SenderUserId
 			};
 		}
 

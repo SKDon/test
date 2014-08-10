@@ -10,7 +10,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Awb
 		public DateTimeOffset DateOfDeparture { get; set; }
 		public DateTimeOffset DateOfArrival { get; set; }
 		public long? BrokerId { get; set; }
-		public long SenderUserId { get; set; }
+		public long? SenderUserId { get; set; }
 		public string GTD { get; set; }
 
 		public decimal? FlightCost { get; set; }

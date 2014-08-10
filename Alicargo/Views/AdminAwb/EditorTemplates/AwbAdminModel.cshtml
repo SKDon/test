@@ -6,7 +6,7 @@
 		@Html.EditorWithLabelFor(model => model.GTD)
 		@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
 		@Html.LabelFor(x => x.SenderUserId)
-		@Html.DropDownListFor(x => x.SenderUserId, (IDictionary<long, string>)ViewBag.Senders)
+		@Html.DropDownListFor(x => x.SenderUserId, (IDictionary<long?, string>)ViewBag.Senders, "")
 	</div>
 	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.DepartureAirport)

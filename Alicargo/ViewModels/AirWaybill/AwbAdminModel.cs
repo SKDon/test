@@ -33,7 +33,7 @@ namespace Alicargo.ViewModels.AirWaybill
 		public long? BrokerId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Sender")]
-		public long SenderUserId { get; set; }
+		public long? SenderUserId { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "FlightCost")]
 		public decimal? FlightCost { get; set; }
