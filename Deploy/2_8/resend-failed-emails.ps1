@@ -1,0 +1,1 @@
+﻿.\Scripts\resend-failed-emails.ps1 .\SQLEXPRESS "Alicargo" 2_8
