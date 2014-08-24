@@ -47,18 +47,7 @@ namespace Alicargo.DataAccess.Repositories.User
 
 		public RegistryOfPaymentsData[] GetRegistryOfPayments()
 		{
-			return new[]
-			{
-				new RegistryOfPaymentsData
-				{
-					Balance = 1,
-					ClientNic = "2",
-					Comment = "3",
-					EventType = EventType.AWBFileUploaded,
-					Money = 4,
-					Timestamp = DateTime.UtcNow
-				}
-			};
+			return _executor.Array<RegistryOfPaymentsData>("[dbo].[ClientBalanceHistory_GetAll]");
 		}
 
 		public void SetBalance(long clientId, decimal balance)

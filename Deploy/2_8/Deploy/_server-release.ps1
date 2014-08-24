@@ -27,4 +27,5 @@ $filesDbBackup = Get-ChildItem $filesDbPrefix`_$oldVersion*.bak -Path $backupLoc
 .\restore-previous.ps1 $server $dbFolder "`"$backupLocation$filesDbBackup`"" $filesDbPrefix $oldVersion $newVersion
 
 Write-Host "Updating main db..."
-Sqlcmd -S $server -i update-main-db.sql -v DatabaseName = $mainDbPrefix`_$newVersion
+Sqlcmd -S $server -i update-main-db-00.sql -v DatabaseName = $mainDbPrefix`_$newVersion
+Sqlcmd -S $server -i update-main-db-01.sql -v DatabaseName = $mainDbPrefix`_$newVersion

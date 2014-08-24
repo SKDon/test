@@ -5,7 +5,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Calculation
 {
 	public sealed class RegistryOfPaymentsData
 	{
-		//public long ClientBalanceHistoryId { get; set; }
 		public DateTimeOffset Timestamp { get; set; }
 		public EventType EventType { get; set; }
 		public decimal Balance { get; set; }
