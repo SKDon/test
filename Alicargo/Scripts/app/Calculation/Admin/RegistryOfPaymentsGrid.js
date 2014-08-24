@@ -5,7 +5,7 @@
 
 	var schema = {
 		model: {
-			id: "ClientId"
+			id: "Timestamp"
 		},
 		data: "Data",
 		total: "Total"
@@ -33,10 +33,10 @@
 		editable: false,
 		columns: [
 			{ field: "ClientNic", title: $l.Entities_Nic },
-			{ field: "Timestamp", title: $l.Entities_Date },
-			{ field: "EventType", title: $l.Pages_Event },
-			{ field: "Money", title: $l.Entities_Sum },
-			{ field: "Balance", title: $l.Entities_Balance },
+			{ field: "Timestamp", title: $l.Entities_Date, width: '70px' },
+			{ field: "EventType", title: $l.Pages_Event, width: '130px' },
+			{ field: "Money", title: $l.Entities_Sum, width: '100px', format: '{0:n2}' },
+			{ field: "Balance", title: $l.Entities_Balance, width: '100px', format: '{0:n2}' },
 			{ field: "Comment", title: $l.Entities_Comment }]
 	});
 });

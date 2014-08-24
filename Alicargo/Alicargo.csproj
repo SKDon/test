@@ -430,6 +430,7 @@
     <Compile Include="ViewModels\Calculation\Admin\CalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Admin\PaymentModel.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationListCollection.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\RegistryOfPaymentsItem.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationItem.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationListCollection.cs" />
