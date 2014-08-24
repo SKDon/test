@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Alicargo.Core.State;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.TestHelpers;

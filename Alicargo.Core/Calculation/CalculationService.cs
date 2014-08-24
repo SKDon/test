@@ -2,8 +2,8 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.Calculation;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;

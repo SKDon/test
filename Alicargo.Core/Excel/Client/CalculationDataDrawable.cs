@@ -2,7 +2,7 @@
 using Alicargo.Core.Calculation;
 using Alicargo.Core.Contracts.Excel;
 using Alicargo.Core.Helpers;
-using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.Utilities.Localization;
 using OfficeOpenXml;

@@ -1,5 +1,5 @@
 ﻿using Alicargo.Core.Calculation;
-using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Calculation;
 
 namespace Alicargo.Core.Helpers
 {

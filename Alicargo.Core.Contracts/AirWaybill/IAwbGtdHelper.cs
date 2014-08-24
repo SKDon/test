@@ -1,5 +1,4 @@
-﻿using Alicargo.DataAccess.Contracts.Contracts;
-using Alicargo.DataAccess.Contracts.Contracts.Awb;
+﻿using Alicargo.DataAccess.Contracts.Contracts.Awb;
 
 namespace Alicargo.Core.Contracts.AirWaybill
 {

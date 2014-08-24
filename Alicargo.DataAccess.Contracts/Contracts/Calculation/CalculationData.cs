@@ -1,7 +1,7 @@
 ﻿using System;
 using Alicargo.DataAccess.Contracts.Enums;
 
-namespace Alicargo.DataAccess.Contracts.Contracts
+namespace Alicargo.DataAccess.Contracts.Contracts.Calculation
 {
 	public sealed class CalculationData
 	{

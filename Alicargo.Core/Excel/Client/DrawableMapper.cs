@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Alicargo.Core.Contracts.Excel;
-using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using OfficeOpenXml;
 

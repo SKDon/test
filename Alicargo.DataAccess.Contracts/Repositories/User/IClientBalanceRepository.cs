@@ -1,6 +1,5 @@
 ﻿using System;
 using Alicargo.DataAccess.Contracts.Contracts.Calculation;
-using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 
 namespace Alicargo.DataAccess.Contracts.Repositories.User

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Resources;
-using Alicargo.DataAccess.Contracts.Contracts;
+using Alicargo.DataAccess.Contracts.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;

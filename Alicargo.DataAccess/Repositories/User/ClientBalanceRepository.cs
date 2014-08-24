@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using Alicargo.DataAccess.Contracts.Contracts.Calculation;
-using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -49,7 +47,18 @@ namespace Alicargo.DataAccess.Repositories.User
 
 		public RegistryOfPaymentsData[] GetRegistryOfPayments()
 		{
-			return Enumerable.Empty<RegistryOfPaymentsData>().ToArray();
+			return new[]
+			{
+				new RegistryOfPaymentsData
+				{
+					Balance = 1,
+					ClientNic = "2",
+					Comment = "3",
+					EventType = EventType.AWBFileUploaded,
+					Money = 4,
+					Timestamp = DateTime.UtcNow
+				}
+			};
 		}
 
 		public void SetBalance(long clientId, decimal balance)

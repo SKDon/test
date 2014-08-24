@@ -33,7 +33,10 @@
 		editable: false,
 		columns: [
 			{ field: "ClientNic", title: $l.Entities_Nic },
-			{ field: "Timestamp", title: $l.Entities_Balance, width: "100px", format: "{0:n2}" },
-			{ field: "Comment", title: $l.Entities_LegalEntity }]
+			{ field: "Timestamp", title: $l.Entities_Date },
+			{ field: "EventType", title: $l.Pages_Event },
+			{ field: "Money", title: $l.Entities_Sum },
+			{ field: "Balance", title: $l.Entities_Balance },
+			{ field: "Comment", title: $l.Entities_Comment }]
 	});
 });
