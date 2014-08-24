@@ -26,9 +26,6 @@ namespace Alicargo.Controllers.Calculation
     public partial class RegistryOfPaymentsController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public RegistryOfPaymentsController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RegistryOfPaymentsController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -74,12 +71,14 @@ namespace Alicargo.Controllers.Calculation
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string List = "List";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string List = "List";
         }
 
 
@@ -112,6 +111,17 @@ namespace Alicargo.Controllers.Calculation
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult List()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.List);
+            ListOverride(callInfo);
             return callInfo;
         }
 

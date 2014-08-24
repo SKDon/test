@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Alicargo.DataAccess.Contracts.Contracts.Calculation;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
@@ -43,6 +45,11 @@ namespace Alicargo.DataAccess.Repositories.User
 		public decimal SumBalance()
 		{
 			return _executor.Query<decimal>("[dbo].[Client_SumBalance]");
+		}
+
+		public RegistryOfPaymentsData[] GetRegistryOfPayments()
+		{
+			return Enumerable.Empty<RegistryOfPaymentsData>().ToArray();
 		}
 
 		public void SetBalance(long clientId, decimal balance)
