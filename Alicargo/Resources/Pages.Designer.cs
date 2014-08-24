@@ -637,6 +637,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registry of payments.
+        /// </summary>
+        public static string RegistryOfPayments {
+            get {
+                return ResourceManager.GetString("RegistryOfPayments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to remember me.
         /// </summary>
         public static string RememberMe {

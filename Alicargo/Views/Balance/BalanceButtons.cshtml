@@ -4,3 +4,4 @@
 @Html.DropDownList("client-balance-select", (IDictionary<string, string>)ViewBag.Urls)
 <a href="#" class="btn btn-primary" id="client-balance-decrease-link">@Pages.BalanceDecrease</a>
 <a href="#" class="btn btn-primary" id="client-balance-increase-link">@Pages.BalanceIncrease</a>
+@Html.ActionLink(Pages.RegistryOfPayments, MVC.Balance.Index(), new { @class = "btn btn-primary" })

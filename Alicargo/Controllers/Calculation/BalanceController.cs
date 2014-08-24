@@ -133,7 +133,7 @@ namespace Alicargo.Controllers.Calculation
 		[HttpGet]
 		public virtual ViewResult Index()
 		{
-			var items = _balanceRepository.GetHistory(1);
+			var items = _balanceRepository.GetHistory(3);
 
 			return View(items);
 		}
