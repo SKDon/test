@@ -11,6 +11,7 @@ using Alicargo.ViewModels.Calculation.Admin;
 
 namespace Alicargo.Controllers.Calculation
 {
+	[Access(RoleType.Admin, RoleType.Manager)]
 	public partial class BalanceController : Controller
 	{
 		private readonly IClientBalance _balance;
@@ -28,14 +29,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[ChildActionOnly]
-		public virtual PartialViewResult History(long clientId)
-		{
-			var items = _balanceRepository.GetHistory(clientId);
-
-			return PartialView(items);
-		}
-
-		[ChildActionOnly]
 		public virtual PartialViewResult BalanceButtons()
 		{
 			var clients = _clients.GetAll().OrderBy(x => x.Nic).ToArray();
@@ -50,7 +43,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Decrease(long clientId)
 		{
 			BindBag(clientId);
@@ -62,7 +54,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Decrease(long clientId, PaymentModel model)
 		{
 			Debug.Assert(model.Money != null);
@@ -91,8 +82,15 @@ namespace Alicargo.Controllers.Calculation
 			return RedirectToAction(MVC.Balance.Decrease(clientId));
 		}
 
+		[ChildActionOnly]
+		public virtual PartialViewResult History(long clientId)
+		{
+			var items = _balanceRepository.GetHistory(clientId);
+
+			return PartialView(items);
+		}
+
 		[HttpGet]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ViewResult Increase(long clientId)
 		{
 			BindBag(clientId);
@@ -104,7 +102,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin, RoleType.Manager)]
 		public virtual ActionResult Increase(long clientId, PaymentModel model)
 		{
 			Debug.Assert(model.Money != null);
@@ -131,6 +128,14 @@ namespace Alicargo.Controllers.Calculation
 			}
 
 			return RedirectToAction(MVC.Balance.Increase(clientId));
+		}
+
+		[HttpGet]
+		public virtual ViewResult Index()
+		{
+			var items = _balanceRepository.GetHistory(1);
+
+			return View(items);
 		}
 
 		private void BindBag(long clientId)
