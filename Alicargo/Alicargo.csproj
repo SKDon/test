@@ -219,6 +219,7 @@
     <Compile Include="ClientController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Calculation\RegistryOfPaymentsController.cs" />
     <Compile Include="CountryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -238,6 +239,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="MvcHelpers\Filters\AccessAuthorizationFilter.cs" />
+    <Compile Include="RegistryOfPaymentsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="RestorePasswordController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -605,6 +609,7 @@
     <Content Include="Scripts\app\Calculation\Admin\Columns.js" />
     <Content Include="Scripts\app\Calculation\Admin\DataSource.js" />
     <Content Include="Scripts\app\Calculation\Admin\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Admin\RegistryOfPaymentsGrid.js" />
     <Content Include="Scripts\app\Calculation\Client\Columns.js" />
     <Content Include="Scripts\app\Calculation\Client\Grid.js" />
     <Content Include="Scripts\app\Calculation\Sender\Columns.js" />
@@ -786,7 +791,7 @@
     <Content Include="Views\AwbFiles\Sender.cshtml" />
     <Content Include="Views\AwbFiles\FilesHolder.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
-    <Content Include="Views\Balance\Index.cshtml" />
+    <Content Include="Views\RegistryOfPayments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

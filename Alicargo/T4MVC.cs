@@ -41,6 +41,7 @@ public static partial class MVC
     public static Alicargo.Controllers.Calculation.BalanceController Balance = new Alicargo.Controllers.Calculation.T4MVC_BalanceController();
     public static Alicargo.Controllers.Calculation.CalculationController Calculation = new Alicargo.Controllers.Calculation.T4MVC_CalculationController();
     public static Alicargo.Controllers.Calculation.ClientCalculationController ClientCalculation = new Alicargo.Controllers.Calculation.T4MVC_ClientCalculationController();
+    public static Alicargo.Controllers.Calculation.RegistryOfPaymentsController RegistryOfPayments = new Alicargo.Controllers.Calculation.T4MVC_RegistryOfPaymentsController();
     public static Alicargo.Controllers.Calculation.SenderCalculationController SenderCalculation = new Alicargo.Controllers.Calculation.T4MVC_SenderCalculationController();
     public static Alicargo.Controllers.CityController City = new Alicargo.Controllers.T4MVC_CityController();
     public static Alicargo.Controllers.CountryController Country = new Alicargo.Controllers.T4MVC_CountryController();
@@ -228,6 +229,7 @@ namespace Links
                     public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
                     public static readonly string DataSource_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/DataSource.min.js") ? Url("DataSource.min.js") : Url("DataSource.js");
                     public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+                    public static readonly string RegistryOfPaymentsGrid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegistryOfPaymentsGrid.min.js") ? Url("RegistryOfPaymentsGrid.min.js") : Url("RegistryOfPaymentsGrid.js");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

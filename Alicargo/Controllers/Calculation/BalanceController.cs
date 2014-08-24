@@ -128,15 +128,7 @@ namespace Alicargo.Controllers.Calculation
 			}
 
 			return RedirectToAction(MVC.Balance.Increase(clientId));
-		}
-
-		[HttpGet]
-		public virtual ViewResult Index()
-		{
-			var items = _balanceRepository.GetHistory(3);
-
-			return View(items);
-		}
+		}		
 
 		private void BindBag(long clientId)
 		{

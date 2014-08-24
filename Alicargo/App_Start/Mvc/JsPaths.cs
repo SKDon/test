@@ -43,6 +43,9 @@ namespace Alicargo.Mvc
 		 "~/scripts/app/calculation/admin/Grid.js")]
 		public const string CalculationJs = "~/js/calc-js";
 
+		[Path("~/scripts/app/calculation/admin/RegistryOfPaymentsGrid.js")]
+		public const string RegistryOfPaymentsJs = "~/js/calc-payments-js";
+
 		[Path("~/scripts/app/calculation/client/Columns.js", "~/scripts/app/calculation/client/Grid.js")]
 		public const string ClientCalculationJs = "~/js/client-calc-js";
 

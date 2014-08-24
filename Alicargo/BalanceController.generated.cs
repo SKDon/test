@@ -92,7 +92,6 @@ namespace Alicargo.Controllers.Calculation
             public readonly string Decrease = "Decrease";
             public readonly string History = "History";
             public readonly string Increase = "Increase";
-            public readonly string Index = "Index";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -102,7 +101,6 @@ namespace Alicargo.Controllers.Calculation
             public const string Decrease = "Decrease";
             public const string History = "History";
             public const string Increase = "Increase";
-            public const string Index = "Index";
         }
 
 
@@ -146,13 +144,11 @@ namespace Alicargo.Controllers.Calculation
                 public readonly string Decrease = "Decrease";
                 public readonly string History = "History";
                 public readonly string Increase = "Increase";
-                public readonly string Index = "Index";
             }
             public readonly string BalanceButtons = "~/Views/Balance/BalanceButtons.cshtml";
             public readonly string Decrease = "~/Views/Balance/Decrease.cshtml";
             public readonly string History = "~/Views/Balance/History.cshtml";
             public readonly string Increase = "~/Views/Balance/Increase.cshtml";
-            public readonly string Index = "~/Views/Balance/Index.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -238,17 +234,6 @@ namespace Alicargo.Controllers.Calculation
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "clientId", clientId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             IncreaseOverride(callInfo, clientId, model);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ViewResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
             return callInfo;
         }
 
