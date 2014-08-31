@@ -17,6 +17,8 @@ namespace Alicargo.ViewModels.Application
 
 		public string DateInStockLocalString { get; set; }
 
+		public int MethodOfDeliveryId { get; set; }
+
 		public string MethodOfDeliveryLocalString { get; set; }
 
 		public string ValueString { get; set; }
@@ -24,6 +26,8 @@ namespace Alicargo.ViewModels.Application
 		public string ClientLegalEntity { get; set; }
 
 		public string ClientNic { get; set; }
+
+		public long ClientId { get; set; }
 
 		public string AirWaybill { get; set; }
 
@@ -38,6 +42,8 @@ namespace Alicargo.ViewModels.Application
 		public string TransitWarehouseWorkingTime { get; set; }
 
 		public string TransitMethodOfTransitString { get; set; }
+
+		public int TransitMethodOfTransitId { get; set; }
 
 		public string TransitDeliveryTypeString { get; set; }
 
@@ -104,8 +110,6 @@ namespace Alicargo.ViewModels.Application
 		public long StateId { get; set; }
 
 		public long? AirWaybillId { get; set; }
-
-		public int MethodOfDeliveryId { get; set; }
 
 		public int CurrencyId { get; set; }
 
