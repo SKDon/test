@@ -628,6 +628,8 @@
     <Content Include="Scripts\app\Client\Grid.js" />
     <Content Include="Scripts\app\Common.js" />
     <Content Include="Scripts\app\Files.js" />
+    <Content Include="Scripts\app\Forwarder\Application\Columns.js" />
+    <Content Include="Scripts\app\Forwarder\Application\Grid.js" />
     <Content Include="Scripts\app\it.js" />
     <Content Include="Scripts\app\CurrencyType.js" />
     <Content Include="Scripts\app\ru.js" />

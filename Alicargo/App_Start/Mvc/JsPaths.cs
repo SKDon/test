@@ -34,6 +34,9 @@ namespace Alicargo.Mvc
 		[Path("~/Scripts/app/Application/Columns.js", "~/Scripts/app/Application/Grid.js")]
 		public const string ApplicationListJs = "~/js/app-list-js";
 
+		[Path("~/Scripts/app/Forwarder/Application/Columns.js", "~/Scripts/app/Forwarder/Application/Grid.js")]
+		public const string ForwarderApplicationListJs = "~/js/forwarder-app-list-js";
+
 		[Path("~/Scripts/app/Client/Grid.js")]
 		public const string ClientListJs = "~/js/client-list-js";
 

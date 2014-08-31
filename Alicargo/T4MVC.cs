@@ -288,6 +288,22 @@ namespace Links
         
             public static readonly string CurrencyType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CurrencyType.min.js") ? Url("CurrencyType.min.js") : Url("CurrencyType.js");
             public static readonly string Files_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Files.min.js") ? Url("Files.min.js") : Url("Files.js");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Forwarder {
+                private const string URLPATH = "~/Scripts/app/Forwarder";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class Application {
+                    private const string URLPATH = "~/Scripts/app/Forwarder/Application";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
+                    public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+                }
+            
+            }
+        
             public static readonly string it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/it.min.js") ? Url("it.min.js") : Url("it.js");
             public static readonly string ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ru.min.js") ? Url("ru.min.js") : Url("ru.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
