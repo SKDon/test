@@ -168,30 +168,6 @@
 			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
 			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: false, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 
-		var forwarderColumns = [
-			{ field: "State", title: $l.Entities_StateName, groupable: false, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },
-			{ field: "ClientLegalEntity", title: $l.Entities_LegalEntity, groupable: false, width: "150px" },
-			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
-			countField,
-			weightField,
-			volumeField,
-			{ field: "CarrierName", title: $l.Entities_Carrier, groupable: false, width: "100px" },
-			{ field: "TransitMethodOfTransitString", title: $l.Entities_MethodOfTransit, groupable: false, width: "75px" },
-			{ field: "TransitDeliveryTypeString", title: $l.Entities_DeliveryType, groupable: false, width: "75px" },
-			{ field: "TransitCity", title: $l.Entities_City, groupable: false, width: "100px" },			
-			{ field: "CarrierContact", title: $l.Entities_RecipientName, groupable: false, width: "100px" },
-			{ field: "CarrierAddress", title: $l.Entities_Address, groupable: false, width: "100px" },
-			{ field: "CarrierPhone", title: $l.Entities_Phone, groupable: false, width: "100px" },
-			{ field: "TransitReference", title: $l.Entities_TransitReference, groupable: false, width: "150px" },
-			{ field: "ForwarderTransitCost", title: $l.Entities_TransitCost, groupable: false, width: "150px" },
-			{
-				field: "AirWaybill",
-				title: $l.Entities_AirWaybill,
-				groupable: false,
-				width: "150px",
-				groupHeaderTemplate: groupHeaderTemplateAwb
-			}];
-
 		var carrierColumns = [
 			{ field: "State", title: $l.Entities_StateName, groupable: false, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },
 			{ field: "ClientLegalEntity", title: $l.Entities_LegalEntity, groupable: false, width: "150px" },
@@ -229,8 +205,6 @@
 		$apl.GetColumns = function() {
 			if ($r.IsClient) {
 				return clientColumns;
-			} else if ($r.IsForwarder) {
-				return forwarderColumns;
 			} else if ($r.IsSender) {
 				return senderColumns;
 			} else if ($r.IsAdmin || $r.IsManager) {

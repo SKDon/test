@@ -86,7 +86,7 @@
 				$.extend(settings, { groupable: true });
 			}
 
-			if (!$r.IsForwarder && !$r.IsCarrier) {
+			if (!$r.IsCarrier) {
 				var detailExpand = function(e) {
 					var data = $a.Application.GetGrid().dataItem(e.masterRow);
 
@@ -155,12 +155,6 @@
 							canEdit = e.container.find("input[name='DateOfCargoReceiptLocalString']").length != 0;
 						}
 
-						if (!canEdit) {
-							if (e.model.CanSetTransitCost && $r.IsForwarder) {
-								canEdit = e.container.find("input[name='ForwarderTransitCost']").length != 0;
-							}
-						}
-
 						if (!canEdit && e.model.CanSetState) {
 							canEdit = e.container.find("input[data-text-field='StateName']").length != 0;
 						}
@@ -171,13 +165,7 @@
 
 					},
 					save: function(e) {
-						if ($r.IsForwarder && e.values.ForwarderTransitCost !== undefined) {
-							post($u.ApplicationUpdate_SetTransitCost, {
-								id: e.model.Id,
-								transitCost: e.values.ForwarderTransitCost
-							});
-						}
-						if (($r.IsForwarder || $r.IsAdmin || $r.IsManager) && e.values.TransitReference !== undefined) {
+						if (($r.IsAdmin || $r.IsManager) && e.values.TransitReference !== undefined) {
 							$.post($u.ApplicationUpdate_SetTransitReference, {
 								id: e.model.Id,
 								TransitReference: e.values.TransitReference

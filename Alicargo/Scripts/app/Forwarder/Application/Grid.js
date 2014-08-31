@@ -2,7 +2,6 @@
 
 	var $a = Alicargo;
 	var $u = $a.Urls;
-	var $r = $a.Roles;
 
 	$a.Application = (function($apl) {
 		var gridSelector = "#application-grid";
@@ -79,10 +78,8 @@
 						canEdit = e.container.find("input[name='DateOfCargoReceiptLocalString']").length != 0;
 					}
 
-					if (!canEdit) {
-						if (e.model.CanSetTransitCost && $r.IsForwarder) {
-							canEdit = e.container.find("input[name='ForwarderTransitCost']").length != 0;
-						}
+					if (!canEdit && e.model.CanSetTransitCost) {
+						canEdit = e.container.find("input[name='ForwarderTransitCost']").length != 0;
 					}
 
 					if (!canEdit && e.model.CanSetState) {
@@ -95,13 +92,13 @@
 
 				},
 				save: function(e) {
-					if ($r.IsForwarder && e.values.ForwarderTransitCost !== undefined) {
+					if (e.values.ForwarderTransitCost !== undefined) {
 						post($u.ApplicationUpdate_SetTransitCost, {
 							id: e.model.Id,
 							transitCost: e.values.ForwarderTransitCost
 						});
 					}
-					if (($r.IsForwarder) && e.values.TransitReference !== undefined) {
+					if (e.values.TransitReference !== undefined) {
 						$.post($u.ApplicationUpdate_SetTransitReference, {
 							id: e.model.Id,
 							TransitReference: e.values.TransitReference
