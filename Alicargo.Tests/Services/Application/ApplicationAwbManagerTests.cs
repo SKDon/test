@@ -1,5 +1,4 @@
 ﻿using System;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.Services.Application;
 using Alicargo.TestHelpers;

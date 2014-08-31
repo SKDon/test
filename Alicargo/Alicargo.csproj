@@ -62,7 +62,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -130,9 +130,8 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\T4MVCExtensions.3.9.1\lib\net40\T4MVCExtensions.dll</HintPath>
+    <Reference Include="T4MVCExtensions">
+      <HintPath>..\packages\T4MVCExtensions.3.9.2\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -190,6 +189,8 @@
     <Compile Include="Areas\Admin\Serivices\Abstract\IBillManager.cs" />
     <Compile Include="Areas\Admin\Serivices\Abstract\IBillModelFactory.cs" />
     <Compile Include="Areas\Admin\Serivices\Bill\NumByWords.cs" />
+    <Compile Include="Areas\Forwarder\Controllers\ApplicationListController.cs" />
+    <Compile Include="Areas\Forwarder\ForwarderAreaRegistration.cs" />
     <Compile Include="AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -220,6 +221,7 @@
     <Compile Include="ClientController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Calculation\RegistryOfPaymentsController.cs" />
     <Compile Include="CountryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -232,6 +234,12 @@
     <Compile Include="ExcelController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Forwarder.ApplicationListController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarder.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ForwarderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -239,6 +247,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="MvcHelpers\Filters\AccessAuthorizationFilter.cs" />
+    <Compile Include="RegistryOfPaymentsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="RestorePasswordController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -255,14 +266,6 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\AuthenticationManager.cs" />
-    <Compile Include="SharedController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Services\Application\OrderHelper.cs" />
     <Compile Include="Controllers\Application\ApplicationController.cs" />
     <Compile Include="Controllers\Application\ApplicationListController.cs" />
@@ -413,6 +416,14 @@
     <Compile Include="Services\Log4NetWrapper.cs" />
     <Compile Include="Services\TransitService.cs" />
     <Compile Include="Services\Users\UserService.cs" />
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="TransitController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -427,6 +438,7 @@
     <Compile Include="ViewModels\Calculation\Admin\CalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Admin\PaymentModel.cs" />
     <Compile Include="ViewModels\Calculation\Admin\CalculationListCollection.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\RegistryOfPaymentsItem.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationGroup.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationItem.cs" />
     <Compile Include="ViewModels\Calculation\Client\ClientCalculationListCollection.cs" />
@@ -606,6 +618,7 @@
     <Content Include="Scripts\app\Calculation\Admin\Columns.js" />
     <Content Include="Scripts\app\Calculation\Admin\DataSource.js" />
     <Content Include="Scripts\app\Calculation\Admin\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Admin\RegistryOfPaymentsGrid.js" />
     <Content Include="Scripts\app\Calculation\Client\Columns.js" />
     <Content Include="Scripts\app\Calculation\Client\Grid.js" />
     <Content Include="Scripts\app\Calculation\Sender\Columns.js" />
@@ -632,6 +645,9 @@
     <Content Include="Areas\Admin\Views\Bill\Preview.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BankDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Bill\Sent.cshtml" />
+    <Content Include="Areas\Forwarder\Views\web.config" />
+    <Content Include="Areas\Forwarder\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Forwarder\Views\ApplicationList\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.1.intellisense.js" />
@@ -787,6 +803,7 @@
     <Content Include="Views\AwbFiles\Sender.cshtml" />
     <Content Include="Views\AwbFiles\FilesHolder.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\RegistryOfPayments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -856,7 +873,10 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Forwarder\Models\" />
+    <Folder Include="Areas\Forwarder\Views\Shared\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

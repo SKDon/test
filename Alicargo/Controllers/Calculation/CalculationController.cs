@@ -9,6 +9,7 @@ using Alicargo.Services.Excel;
 
 namespace Alicargo.Controllers.Calculation
 {
+	[Access(RoleType.Admin)]
 	public partial class CalculationController : Controller
 	{
 		private readonly IAdminApplicationManager _applications;
@@ -35,7 +36,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult Calculate(long id, long awbId)
 		{
@@ -47,7 +47,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
 		public virtual FileResult Excel()
 		{
 			var data = _presenter.List(int.MaxValue, 0);
@@ -60,7 +59,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpGet]
-		[Access(RoleType.Admin)]
 		public virtual ActionResult Index()
 		{
 			ViewBag.TotalBalance = _balances.SumBalance();
@@ -69,7 +67,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
@@ -79,7 +76,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult RemoveCalculatation(long id, long awbId)
 		{
@@ -91,7 +87,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetAdditionalCost(long awbId, decimal? additionalCost)
 		{
@@ -103,7 +98,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetClass(long id, long awbId, int? classId)
 		{
@@ -115,7 +109,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetCount(long id, long awbId, int? value)
 		{
@@ -127,7 +120,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetFactureCostEdited(long id, long awbId, decimal? factureCost)
 		{
@@ -139,7 +131,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetFactureCostExEdited(long id, long awbId, decimal? factureCostEx)
 		{
@@ -151,7 +142,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetInsuranceCost(long id, long awbId, float? value)
 		{
@@ -163,7 +153,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetPickupCostEdited(long id, long awbId, decimal? pickupCost)
 		{
@@ -175,7 +164,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetProfit(long id, long awbId, decimal? value)
 		{
@@ -187,7 +175,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetScotchCostEdited(long id, long awbId, decimal? scotchCost)
 		{
@@ -199,7 +186,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetSenderRate(long id, long awbId, decimal? senderRate)
 		{
@@ -211,7 +197,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTariffPerKg(long id, long awbId, decimal? tariffPerKg)
 		{
@@ -223,7 +208,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTotalTariffCost(long id, long awbId, decimal? value)
 		{
@@ -235,7 +219,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetTransitCostEdited(long id, long awbId, decimal? transitCost)
 		{
@@ -247,7 +230,6 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[HttpPost]
-		[Access(RoleType.Admin)]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetWeight(long id, long awbId, float? value)
 		{

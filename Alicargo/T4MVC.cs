@@ -3,8 +3,8 @@
 // Don't change it directly as your change would get overwritten.  Instead, make changes
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
-// Make sure the compiler doesn't complain about missing Xml comments
-#pragma warning disable 1591
+// Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
+#pragma warning disable 1591, 3008, 3009
 #region T4MVC
 
 using System;
@@ -27,6 +27,8 @@ public static partial class MVC
 {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
+    static readonly ForwarderClass s_Forwarder = new ForwarderClass();
+    public static ForwarderClass ForwarderArea { get { return s_Forwarder; } }
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationFilesController ApplicationFiles = new Alicargo.Controllers.Application.T4MVC_ApplicationFilesController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
@@ -41,6 +43,7 @@ public static partial class MVC
     public static Alicargo.Controllers.Calculation.BalanceController Balance = new Alicargo.Controllers.Calculation.T4MVC_BalanceController();
     public static Alicargo.Controllers.Calculation.CalculationController Calculation = new Alicargo.Controllers.Calculation.T4MVC_CalculationController();
     public static Alicargo.Controllers.Calculation.ClientCalculationController ClientCalculation = new Alicargo.Controllers.Calculation.T4MVC_ClientCalculationController();
+    public static Alicargo.Controllers.Calculation.RegistryOfPaymentsController RegistryOfPayments = new Alicargo.Controllers.Calculation.T4MVC_RegistryOfPaymentsController();
     public static Alicargo.Controllers.Calculation.SenderCalculationController SenderCalculation = new Alicargo.Controllers.Calculation.T4MVC_SenderCalculationController();
     public static Alicargo.Controllers.CityController City = new Alicargo.Controllers.T4MVC_CityController();
     public static Alicargo.Controllers.CountryController Country = new Alicargo.Controllers.T4MVC_CountryController();
@@ -70,6 +73,13 @@ namespace T4MVC
         public Alicargo.Areas.Admin.Controllers.StateController State = new Alicargo.Areas.Admin.Controllers.T4MVC_StateController();
         public Alicargo.Areas.Admin.Controllers.StateSettingsController StateSettings = new Alicargo.Areas.Admin.Controllers.T4MVC_StateSettingsController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ForwarderClass
+    {
+        public readonly string Name = "Forwarder";
+        public Alicargo.Areas.Forwarder.Controllers.ApplicationListController ApplicationList = new Alicargo.Areas.Forwarder.Controllers.T4MVC_ApplicationListController();
+        public T4MVC.Forwarder.SharedController Shared = new T4MVC.Forwarder.SharedController();
     }
 }
 
@@ -228,6 +238,7 @@ namespace Links
                     public static readonly string Columns_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Columns.min.js") ? Url("Columns.min.js") : Url("Columns.js");
                     public static readonly string DataSource_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/DataSource.min.js") ? Url("DataSource.min.js") : Url("DataSource.js");
                     public static readonly string Grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Grid.min.js") ? Url("Grid.min.js") : Url("Grid.js");
+                    public static readonly string RegistryOfPaymentsGrid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegistryOfPaymentsGrid.min.js") ? Url("RegistryOfPaymentsGrid.min.js") : Url("RegistryOfPaymentsGrid.js");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -695,6 +706,6 @@ internal static class T4MVCHelpers {
 
 
 #endregion T4MVC
-#pragma warning restore 1591
+#pragma warning restore 1591, 3008, 3009
 
 

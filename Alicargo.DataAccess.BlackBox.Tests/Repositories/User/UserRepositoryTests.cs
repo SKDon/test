@@ -1,5 +1,4 @@
-﻿using System;
-using Alicargo.DataAccess.BlackBox.Tests.Properties;
+﻿using Alicargo.DataAccess.BlackBox.Tests.Properties;
 using Alicargo.DataAccess.DbContext;
 using Alicargo.DataAccess.Repositories.User;
 using Alicargo.TestHelpers;

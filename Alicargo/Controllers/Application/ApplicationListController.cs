@@ -15,6 +15,7 @@ using Alicargo.ViewModels.Application;
 
 namespace Alicargo.Controllers.Application
 {
+	[Access(RoleType.Admin, RoleType.Manager, RoleType.Client, RoleType.Sender, RoleType.Carrier)]
 	public partial class ApplicationListController : Controller
 	{
 		private readonly IAwbRepository _awbs;
@@ -46,7 +47,7 @@ namespace Alicargo.Controllers.Application
 			_forwarders = forwarders;
 		}
 
-		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
+		[HttpGet]
 		public virtual ViewResult Index()
 		{
 			var clients = _clients.GetAll()
@@ -66,7 +67,6 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client, RoleType.Forwarder, RoleType.Sender, RoleType.Carrier)]
 		public virtual JsonResult List(int take, int skip, Dictionary<string, string>[] group)
 		{
 			var orders = OrderHelper.Get(group);

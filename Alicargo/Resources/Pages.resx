@@ -399,4 +399,7 @@
   <data name="Download" xml:space="preserve">
     <value>Download</value>
   </data>
+  <data name="RegistryOfPayments" xml:space="preserve">
+    <value>Registry of payments</value>
+  </data>
 </root>

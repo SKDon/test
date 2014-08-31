@@ -43,11 +43,11 @@
 			# } #
 		</p>
 		# } #
-		# if(DrawFiles != null){ #
+		# if(AWBFiles != null){ #
 		<p>
-			<span>@Entities.Draw:</span>
-			# for(i in DrawFiles) { #
-			# var item = DrawFiles[i]; #
+			<span>@Entities.AWB:</span>
+			# for(i in AWBFiles) { #
+			# var item = AWBFiles[i]; #
 			# if(!item || !item.Id) continue; #
 			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #

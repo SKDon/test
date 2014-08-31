@@ -1,0 +1,13 @@
+﻿@using System.Web.Optimization
+@using Alicargo.Mvc
+@using Resources
+@inherits Alicargo.MvcHelpers.BaseWebViewPage<Alicargo.ViewModels.Application.ApplicationIndexModel>
+@Html.ActionLink(Pages.Excel, MVC.Excel.Applications(), new { @class = "btn btn-info" })
+<div id="application-grid" class="grid"></div>
+<script type="text/x-kendo-template" id="application-grid-details">
+</script>
+
+@section scripts
+{
+	@Scripts.Render(JsPaths.ApplicationListJs)
+}

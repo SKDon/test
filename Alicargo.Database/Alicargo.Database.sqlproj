@@ -217,6 +217,7 @@
     <Build Include="Stored procedures\User\Client\Client_GetAll.sql" />
     <Build Include="Stored procedures\User\Client\Client_Update.sql" />
     <None Include="Scripts\setup-rights.sql" />
+    <Build Include="Stored procedures\User\Client\ClientBalanceHistory_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Master.Database.publish.xml" />

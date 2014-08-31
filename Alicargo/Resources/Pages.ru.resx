@@ -399,4 +399,7 @@
   <data name="Download" xml:space="preserve">
     <value>Загрузить</value>
   </data>
+  <data name="RegistryOfPayments" xml:space="preserve">
+    <value>Реестр оплат</value>
+  </data>
 </root>

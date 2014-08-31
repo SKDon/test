@@ -1,7 +1,7 @@
 ﻿INSERT [dbo].[AirWaybill] ([CreationTimestamp], [Bill], [ArrivalAirport], [DepartureAirport],
 [DateOfDeparture], [DateOfArrival],[BrokerId], [GTD], [StateId], [CreatorUserId], [SenderUserId]) VALUES 
 (SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)),CAST(NEWID() AS NVARCHAR(50)), CAST(NEWID() AS NVARCHAR(50)),
-SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7, 1, 4),
+SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7, 1, NULL),
 (SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)), N'ArrivalAirport', N'DepartureAirport',
 SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET(), 1, CAST(NEWID() AS NVARCHAR(50)), 7, 1, 4),
 (SYSDATETIMEOFFSET(), CAST(NEWID() AS NVARCHAR(50)), N'ArrivalAirport', N'DepartureAirport',
