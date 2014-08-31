@@ -78,7 +78,7 @@ namespace T4MVC
     public class ForwarderClass
     {
         public readonly string Name = "Forwarder";
-        public Alicargo.Areas.Forwarder.Controllers.ApplicationListController ApplicationList = new Alicargo.Areas.Forwarder.Controllers.T4MVC_ApplicationListController();
+        public Alicargo.Areas.Forwarder.Controllers.ApplicationsController Applications = new Alicargo.Areas.Forwarder.Controllers.T4MVC_ApplicationsController();
         public T4MVC.Forwarder.SharedController Shared = new T4MVC.Forwarder.SharedController();
     }
 }

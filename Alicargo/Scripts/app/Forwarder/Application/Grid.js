@@ -40,7 +40,7 @@
 				transport: {
 					read: {
 						dataType: "json",
-						url: $u.Forwarder_ApplicationList_List,
+						url: $u.Forwarder_Applications_List,
 						type: "POST",
 						cache: false
 					}

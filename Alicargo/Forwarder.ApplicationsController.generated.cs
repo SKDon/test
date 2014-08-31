@@ -23,10 +23,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace Alicargo.Areas.Forwarder.Controllers
 {
-    public partial class ApplicationListController
+    public partial class ApplicationsController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected ApplicationListController(Dummy d) { }
+        protected ApplicationsController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -62,13 +62,13 @@ namespace Alicargo.Areas.Forwarder.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ApplicationListController Actions { get { return MVC.ForwarderArea.ApplicationList; } }
+        public ApplicationsController Actions { get { return MVC.ForwarderArea.Applications; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Forwarder";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "ApplicationList";
+        public readonly string Name = "Applications";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "ApplicationList";
+        public const string NameConst = "Applications";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -110,14 +110,14 @@ namespace Alicargo.Areas.Forwarder.Controllers
             {
                 public readonly string Index = "Index";
             }
-            public readonly string Index = "~/Areas/Forwarder/Views/ApplicationList/Index.cshtml";
+            public readonly string Index = "~/Areas/Forwarder/Views/Applications/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ApplicationListController : Alicargo.Areas.Forwarder.Controllers.ApplicationListController
+    public partial class T4MVC_ApplicationsController : Alicargo.Areas.Forwarder.Controllers.ApplicationsController
     {
-        public T4MVC_ApplicationListController() : base(Dummy.Instance) { }
+        public T4MVC_ApplicationsController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);

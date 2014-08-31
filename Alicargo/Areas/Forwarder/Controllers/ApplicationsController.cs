@@ -14,7 +14,7 @@ using Alicargo.ViewModels.Application;
 namespace Alicargo.Areas.Forwarder.Controllers
 {
 	[Access(RoleType.Forwarder)]
-	public partial class ApplicationListController : Controller
+	public partial class ApplicationsController : Controller
 	{
 		private readonly ICityRepository _cities;
 		private readonly IClientRepository _clients;
@@ -23,7 +23,7 @@ namespace Alicargo.Areas.Forwarder.Controllers
 		private readonly IApplicationListPresenter _presenter;
 		private readonly ITransitRepository _transits;
 
-		public ApplicationListController(
+		public ApplicationsController(
 			ICityRepository cities,
 			ITransitRepository transits,
 			IClientRepository clients,
@@ -39,6 +39,7 @@ namespace Alicargo.Areas.Forwarder.Controllers
 			_forwarders = forwarders;
 		}
 
+		[HttpGet]
 		public virtual ViewResult Index()
 		{
 			return View();
