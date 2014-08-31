@@ -13,9 +13,9 @@ using Alicargo.Services.Abstract;
 using Alicargo.Services.Application;
 using Alicargo.ViewModels.Application;
 
-namespace Alicargo.Controllers.Application
+namespace Alicargo.Areas.Forwarder.Controllers
 {
-	[Access(RoleType.Admin, RoleType.Manager, RoleType.Client, RoleType.Sender, RoleType.Carrier)]
+	[Access(RoleType.Forwarder)]
 	public partial class ApplicationListController : Controller
 	{
 		private readonly IAwbRepository _awbs;
@@ -47,7 +47,6 @@ namespace Alicargo.Controllers.Application
 			_forwarders = forwarders;
 		}
 
-		[HttpGet]
 		public virtual ViewResult Index()
 		{
 			var clients = _clients.GetAll()

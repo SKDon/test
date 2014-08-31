@@ -27,6 +27,8 @@ public static partial class MVC
 {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
+    static readonly ForwarderClass s_Forwarder = new ForwarderClass();
+    public static ForwarderClass ForwarderArea { get { return s_Forwarder; } }
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationFilesController ApplicationFiles = new Alicargo.Controllers.Application.T4MVC_ApplicationFilesController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
@@ -71,6 +73,13 @@ namespace T4MVC
         public Alicargo.Areas.Admin.Controllers.StateController State = new Alicargo.Areas.Admin.Controllers.T4MVC_StateController();
         public Alicargo.Areas.Admin.Controllers.StateSettingsController StateSettings = new Alicargo.Areas.Admin.Controllers.T4MVC_StateSettingsController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ForwarderClass
+    {
+        public readonly string Name = "Forwarder";
+        public Alicargo.Areas.Forwarder.Controllers.ApplicationListController ApplicationList = new Alicargo.Areas.Forwarder.Controllers.T4MVC_ApplicationListController();
+        public T4MVC.Forwarder.SharedController Shared = new T4MVC.Forwarder.SharedController();
     }
 }
 

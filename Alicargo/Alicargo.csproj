@@ -189,6 +189,8 @@
     <Compile Include="Areas\Admin\Serivices\Abstract\IBillManager.cs" />
     <Compile Include="Areas\Admin\Serivices\Abstract\IBillModelFactory.cs" />
     <Compile Include="Areas\Admin\Serivices\Bill\NumByWords.cs" />
+    <Compile Include="Areas\Forwarder\Controllers\ApplicationListController.cs" />
+    <Compile Include="Areas\Forwarder\ForwarderAreaRegistration.cs" />
     <Compile Include="AuthenticationController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -230,6 +232,12 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ExcelController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarder.ApplicationListController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarder.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ForwarderController.generated.cs">
@@ -637,6 +645,9 @@
     <Content Include="Areas\Admin\Views\Bill\Preview.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BankDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Bill\Sent.cshtml" />
+    <Content Include="Areas\Forwarder\Views\web.config" />
+    <Content Include="Areas\Forwarder\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Forwarder\Views\ApplicationList\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.1.intellisense.js" />
@@ -862,7 +873,10 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Forwarder\Models\" />
+    <Folder Include="Areas\Forwarder\Views\Shared\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
