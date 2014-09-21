@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.State;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -15,6 +14,8 @@ namespace Alicargo.Services.Excel
 	internal sealed class ApplicationExcelRowSource : IApplicationExcelRowSource
 	{
 		private readonly IApplicationRepository _applications;
+		private readonly IForwarderApplication _forwarderApplication;
+
 		private readonly IAwbRepository _awbs;
 		private readonly IApplicationListItemMapper _itemMapper;
 		private readonly IStateConfig _stateConfig;
@@ -22,12 +23,14 @@ namespace Alicargo.Services.Excel
 
 		public ApplicationExcelRowSource(
 			IApplicationRepository applications,
+			IForwarderApplication forwarderApplication,
 			IAwbRepository awbs,
 			IStateConfig stateConfig,
 			IStateFilter stateFilter,
 			IApplicationListItemMapper itemMapper)
 		{
 			_applications = applications;
+			_forwarderApplication = forwarderApplication;
 			_awbs = awbs;
 			_stateConfig = stateConfig;
 			_stateFilter = stateFilter;
@@ -46,6 +49,8 @@ namespace Alicargo.Services.Excel
 		public ForwarderApplicationExcelRow[] GetForwarderApplicationExcelRow(long forwarderId, string language)
 		{
 			var items = GetApplicationListItems(null, null, forwarderId, language);
+
+			_forwarderApplication.UpdateDeliveryData(items, language);
 
 			var awbs = _awbs.Get(items.Select(x => x.AirWaybillId ?? 0).ToArray());
 

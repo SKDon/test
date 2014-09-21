@@ -265,6 +265,8 @@
     <Compile Include="SenderController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\Application\ForwarderApplication.cs" />
+    <Compile Include="Services\Abstract\IForwarderApplication.cs" />
     <Compile Include="Services\AuthenticationManager.cs" />
     <Compile Include="Services\Application\OrderHelper.cs" />
     <Compile Include="Controllers\Application\ApplicationController.cs" />

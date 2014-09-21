@@ -81,8 +81,8 @@ WHERE [Id] >= 8
 /****** Object:  Table [dbo].[Sender]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Sender] ON
 INSERT [dbo].[Sender] ([Id], [UserId], [Name], [Email], [Contact], [Address], [Phone]) VALUES 
-(1, 4, N'Sender1', N'Sender1@timez.org', N'Contact_' + CAST(NEWID() AS NVARCHAR(50)), N'Address_' + CAST(NEWID() AS NVARCHAR(50)), N'Phone_' + CAST(NEWID() AS NVARCHAR(50))),
-(2, 11, N'Sender2', N'Sender2@timez.org', N'Contact_' + CAST(NEWID() AS NVARCHAR(50)), N'Address_' + CAST(NEWID() AS NVARCHAR(50)), N'Phone_' + CAST(NEWID() AS NVARCHAR(50)))
+(1, 4, N'Sender1', N'Sender1@timez.org', N'SenderContact_' + CAST(NEWID() AS NVARCHAR(50)), N'Address_' + CAST(NEWID() AS NVARCHAR(50)), N'Phone_' + CAST(NEWID() AS NVARCHAR(50))),
+(2, 11, N'Sender2', N'Sender2@timez.org', N'SenderContact_' + CAST(NEWID() AS NVARCHAR(50)), N'Address_' + CAST(NEWID() AS NVARCHAR(50)), N'Phone_' + CAST(NEWID() AS NVARCHAR(50)))
 SET IDENTITY_INSERT [dbo].[Sender] OFF
 
 INSERT [dbo].[SenderCountry] ([CountryId], [SenderId])

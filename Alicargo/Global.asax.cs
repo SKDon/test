@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Jobs;
@@ -58,7 +59,7 @@ namespace Alicargo
 
 				_runnerController.Run(runners);
 			}
-			catch (Exception e)
+			catch(Exception e)
 			{
 				MainLogger.Error("Failed to start runners ", e);
 
@@ -78,7 +79,7 @@ namespace Alicargo
 					? "Jobs were stopped"
 					: "One or more jobs were terminated with timeout");
 			}
-			catch (Exception e)
+			catch(Exception e)
 			{
 				MainLogger.Error("One or more jobs failed", e);
 				throw;
