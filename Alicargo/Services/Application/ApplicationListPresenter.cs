@@ -31,7 +31,8 @@ namespace Alicargo.Services.Application
 			_grouper = grouper;
 		}
 
-		public ApplicationListCollection List(string language, int? take = null, int skip = 0, Order[] groups = null,
+		public ApplicationListCollection List(
+			string language, int? take = null, int skip = 0, Order[] groups = null,
 			long? clientId = null, long? senderId = null, long? forwarderId = null, long? carrierId = null)
 		{
 			long total;
@@ -49,7 +50,8 @@ namespace Alicargo.Services.Application
 			return GetGroupedResult(groups, applications, total, clientId, senderId, forwarderId, carrierId);
 		}
 
-		private ApplicationListCollection GetGroupedResult(IEnumerable<Order> groups, ApplicationListItem[] applications,
+		private ApplicationListCollection GetGroupedResult(
+			IEnumerable<Order> groups, ApplicationListItem[] applications,
 			long total, long? clientId = null, long? senderId = null, long? forwarderId = null, long? carrierId = null)
 		{
 			var orderTypes = groups.Select(x => x.OrderType).ToArray();
@@ -65,18 +67,32 @@ namespace Alicargo.Services.Application
 			};
 		}
 
-		private ApplicationData[] GetList(int? take, int skip, IEnumerable<Order> groups, long? clientId,
+		private ApplicationData[] GetList(
+			int? take, int skip, IEnumerable<Order> groups, long? clientId,
 			long? senderId, long? forwarderId, long? carrierId, out long total)
 		{
 			var stateIds = _stateFilter.GetStateVisibility();
 
 			var orders = GetOrders(groups);
 
-			total = _applications.Count(stateIds, clientId, senderId, carrierId, forwarderId, _stateConfig.CargoReceivedStateId,
+			total = _applications.Count(stateIds,
+				clientId,
+				senderId,
+				carrierId,
+				forwarderId,
+				_stateConfig.CargoReceivedStateId,
 				_stateConfig.CargoReceivedDaysToShow);
 
-			return _applications.List(stateIds, orders, take, skip, clientId, senderId, carrierId, forwarderId,
-				_stateConfig.CargoReceivedStateId, _stateConfig.CargoReceivedDaysToShow);
+			return _applications.List(stateIds,
+				orders,
+				take,
+				skip,
+				clientId,
+				senderId,
+				carrierId,
+				forwarderId,
+				_stateConfig.CargoReceivedStateId,
+				_stateConfig.CargoReceivedDaysToShow);
 		}
 
 		private static Order[] GetOrders(IEnumerable<Order> orders)
@@ -105,9 +121,12 @@ namespace Alicargo.Services.Application
 				{
 					var items = @group.items.Cast<ApplicationListItem>();
 
-					@group.items = string.IsNullOrWhiteSpace(@group.value)
-						? items.OrderByDescending(x => x.Id).ToArray<object>()
-						: items.OrderBy(x => x.ClientNic).ThenByDescending(x => x.Id).ToArray<object>();
+					if(!string.IsNullOrWhiteSpace(@group.value))
+					{
+						@group.items = items.OrderBy(x => x.ClientNic)
+							.ThenByDescending(x => x.DisplayNumber)
+							.ToArray<object>();
+					}
 				}
 			}
 		}

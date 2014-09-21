@@ -72,8 +72,10 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public string GetApplicationDisplay()
 		{
-			return String.Format("{0:000}{1}", DisplayNumber % 1000, Count.HasValue && Count > 0 ? "/" + Count.Value : "");
+			return String.Format("{0:000}{1}", DisplayNumber % DisplayNumberShard, Count.HasValue && Count > 0 ? "/" + Count.Value : "");
 		}
+
+		public const int DisplayNumberShard = 1000;
 
 		public int GetDaysInWork()
 		{

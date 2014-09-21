@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.DbContext;
 
@@ -56,7 +57,7 @@ namespace Alicargo.DataAccess.Helpers
 		{
 			if(orders.All(x => x.OrderType != OrderType.Id))
 			{
-				applications = applications.ThenByDescending(x => x.Id);
+				applications = applications.ThenByDescending(x => x.DisplayNumber % ApplicationData.DisplayNumberShard);
 			}
 
 			return applications;

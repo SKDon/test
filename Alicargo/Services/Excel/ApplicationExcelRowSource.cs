@@ -2,6 +2,7 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Contracts.State;
+using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -95,7 +96,8 @@ namespace Alicargo.Services.Excel
 			}, null, 0, null, senderId, carrierId, forwarderId, _stateConfig.CargoReceivedStateId,
 				_stateConfig.CargoReceivedDaysToShow);
 
-			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue).OrderByDescending(x => x.Id);
+			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue)
+				.OrderByDescending(x => x.DisplayNumber % ApplicationData.DisplayNumberShard);
 
 			var withAwb = data.Where(x => x.AirWaybillId.HasValue);
 
