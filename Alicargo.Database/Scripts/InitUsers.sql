@@ -36,39 +36,13 @@ FROM [dbo].[City]
 WHERE [Id] >= 8
 
 
-/****** Object:  Table [dbo].[Transit]    Script Date: 05/18/2013 14:17:27 ******/
 SET IDENTITY_INSERT [dbo].[Transit] ON
 INSERT [dbo].[Transit] ([Id], [CityId], [Address], [RecipientName], [Phone], [MethodOfTransitId], [DeliveryTypeId], [CarrierId]) VALUES
 (1, 10, N'Address 0', N'Recipient 0', N'Phone 0', 0, 0, 1),
 (2, 1, N'Address 1', N'Recipient 1', N'Phone 1', 1, 1, 2),
 (3, 2, N'Address 2', N'Recipient 2', N'Phone 2', 2, 0, 1),
 (4, 3, N'Address 3', N'Recipient 3', N'Phone 3', 0, 1, 1),
-(5, 4, N'Address 4', N'Recipient 4', N'Phone 4', 1, 0, 1),
-(6, 10, N'Address 0', N'RecipientName 0', N'Phone 0', 0, 0, 1),
-(7, 1, N'Address 1', N'RecipientName 1', N'Phone 1', 1, 1, 2),
-(8, 2, N'Address 2', N'RecipientName 2', N'Phone 2', 2, 0, 2),
-(9, 3, N'Address 3', N'RecipientName 3', N'Phone 3', 0, 1, 2),
-(10, 4, N'Address 4', N'RecipientName 4', N'Phone 4', 1, 0, 1),
-(11, 5, N'Address 5', N'RecipientName 5', N'Phone 5', 2, 1, 1),
-(12, 6, N'Address 6', N'RecipientName 6', N'Phone 6', 0, 0, 1),
-(13, 7, N'Address 7', N'RecipientName 7', N'Phone 7', 1, 1, 1),
-(14, 8, N'Address 8', N'RecipientName 8', N'Phone 8', 2, 0, 1),
-(15, 9, N'Address 9', N'RecipientName 9', N'Phone 9', 0, 1, 1),
-(16, 10, N'Address 10', N'RecipientName 10', N'Phone 10', 1, 0, 2),
-(17, 11, N'Address 11', N'RecipientName 11', N'Phone 11', 2, 1, 2),
-(18, 12, N'Address 12', N'RecipientName 12', N'Phone 12', 0, 0, 2),
-(19, 13, N'Address 13', N'RecipientName 13', N'Phone 13', 1, 1, 2),
-(20, 14, N'Address 14', N'RecipientName 14', N'Phone 14', 2, 0, 2),
-(21, 15, N'Address 15', N'RecipientName 15', N'Phone 15', 0, 1, 2),
-(22, 16, N'Address 16', N'RecipientName 16', N'Phone 16', 1, 0, 2),
-(23, 7, N'Address 17', N'RecipientName 17', N'Phone 17', 2, 1, 2),
-(24, 8, N'Address 18', N'RecipientName 18', N'Phone 18', 0, 0, 2),
-(25, 9, N'Address 19', N'RecipientName 19', N'Phone 19', 1, 1, 2),
-(26, 10, N'Address 20', N'RecipientName 20', N'Phone 20', 2, 0, 1),
-(27, 1, N'Address 21', N'RecipientName 21', N'Phone 21', 0, 1, 1),
-(28, 2, N'Address 22', N'RecipientName 22', N'Phone 22', 1, 0, 1),
-(29, 3, N'Address 23', N'RecipientName 23', N'Phone 23', 2, 1, 1),
-(30, 4, N'Address 24', N'RecipientName 24', N'Phone 24', 0, 0, 1)
+(5, 4, N'Address 4', N'Recipient 4', N'Phone 4', 1, 0, 1)
 SET IDENTITY_INSERT [dbo].[Transit] OFF
 
 
