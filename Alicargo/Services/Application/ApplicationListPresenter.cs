@@ -105,7 +105,7 @@ namespace Alicargo.Services.Application
 				{
 					var items = @group.items.Cast<ApplicationListItem>();
 
-					@group.items = @group.value == ""
+					@group.items = string.IsNullOrWhiteSpace(@group.value)
 						? items.OrderByDescending(x => x.Id).ToArray<object>()
 						: items.OrderBy(x => x.ClientNic).ThenByDescending(x => x.Id).ToArray<object>();
 				}
