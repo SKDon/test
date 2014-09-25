@@ -124,7 +124,7 @@ namespace Alicargo.Services.Application
 					if(!string.IsNullOrWhiteSpace(@group.value))
 					{
 						@group.items = items.OrderBy(x => x.ClientNic)
-							.ThenByDescending(x => x.DisplayNumber)
+							.ThenByDescending(x => x.Id)
 							.ToArray<object>();
 					}
 				}

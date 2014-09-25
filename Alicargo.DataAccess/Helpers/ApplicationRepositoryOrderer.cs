@@ -57,7 +57,7 @@ namespace Alicargo.DataAccess.Helpers
 		{
 			if(orders.All(x => x.OrderType != OrderType.Id))
 			{
-				applications = applications.ThenByDescending(x => x.DisplayNumber % ApplicationData.DisplayNumberShard);
+				applications = applications.ThenByDescending(x => x.Id);
 			}
 
 			return applications;

@@ -97,7 +97,7 @@ namespace Alicargo.Services.Excel
 				_stateConfig.CargoReceivedDaysToShow);
 
 			var withoutAwb = data.Where(x => !x.AirWaybillId.HasValue)
-				.OrderByDescending(x => x.DisplayNumber % ApplicationData.DisplayNumberShard);
+				.OrderByDescending(x => x.Id);
 
 			var withAwb = data.Where(x => x.AirWaybillId.HasValue);
 
