@@ -76,7 +76,7 @@ namespace Alicargo.Services.Calculation
 				IsCalculated = calculations.ContainsKey(a.Id),
 				ClassId = a.Class,
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
-				Profit = GetProfit(a, tariffs)
+				Profit = CalculationHelper.GetProfit(a, tariffs)
 			}).OrderBy(x => x.ClientNic).ThenByDescending(x => x.ApplicationId).ToArray();
 		}
 
@@ -151,7 +151,7 @@ namespace Alicargo.Services.Calculation
 					Profit = 0
 				};
 
-				info.Profit = rows.Sum(x => GetProfit(x, tariffs)) - info.TotalExpenses;
+				info.Profit = rows.Sum(x => CalculationHelper.GetProfit(x, tariffs)) - info.TotalExpenses;
 
 				var totalWeight = (decimal)rows.Sum(x => x.Weight ?? 0);
 
@@ -168,28 +168,6 @@ namespace Alicargo.Services.Calculation
 			}).ToArray();
 		}
 
-		private static decimal GetProfit(ApplicationEditData application, IReadOnlyDictionary<long, decimal> tariffs)
-		{
-			if(application.CalculationProfit != null)
-			{
-				return application.CalculationProfit.Value;
-			}
-
-			var totalTariffCost = CalculationHelper.GetTotalTariffCost(
-				application.CalculationTotalTariffCost,
-				application.TariffPerKg,
-				application.Weight);
-
-			var scotchCost = application.ScotchCostEdited
-							 ?? CalculationHelper.GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0;
-
-			return totalTariffCost
-				   + scotchCost
-				   + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
-				   + (application.FactureCostEdited ?? application.FactureCost ?? 0)
-				   + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
-				   + (application.PickupCostEdited ?? application.PickupCost ?? 0)
-				   + (application.TransitCostEdited ?? application.TransitCost ?? 0);
-		}
+	
 	}
 }
