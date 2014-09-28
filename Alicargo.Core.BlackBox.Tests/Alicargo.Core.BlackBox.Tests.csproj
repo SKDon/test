@@ -37,13 +37,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions, Version=3.0.107.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+    <Reference Include="FluentAssertions, Version=3.2.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.dll</HintPath>
+      <HintPath>..\packages\FluentAssertions.3.2.1\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions.Core, Version=3.0.107.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+    <Reference Include="FluentAssertions.Core, Version=3.2.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentAssertions.3.0.107\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <HintPath>..\packages\FluentAssertions.3.2.1\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.18.9\lib\net40\Ploeh.AutoFixture.dll</HintPath>
