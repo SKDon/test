@@ -20,6 +20,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 		public void TestCleanup()
 		{
 			_composition.Dispose();
+			_db.Dispose();
 		}
 
 		[TestInitialize]
