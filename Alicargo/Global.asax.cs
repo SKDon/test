@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alicargo.Jobs;
@@ -30,11 +29,23 @@ namespace Alicargo
 		private readonly string _filesConnectionString =
 			ConfigurationManager.ConnectionStrings["FilesDbConnectionString"].ConnectionString;
 
+		private readonly StandardKernel _kernel = new StandardKernel();
 		private readonly RunnerController _runnerController = new RunnerController();
 
-		private readonly StandardKernel _kernel = new StandardKernel();
+		static MvcApplication()
+		{
+		}
 
-		static MvcApplication() { }
+		private static void RegisterConfigs(IKernel kernel)
+		{
+			AreaRegistration.RegisterAllAreas();
+
+			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, kernel);
+
+			RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+			BinderConfig.RegisterBinders(ModelBinders.Binders);
+		}
 
 		protected override IKernel CreateKernel()
 		{
@@ -84,17 +95,6 @@ namespace Alicargo
 				MainLogger.Error("One or more jobs failed", e);
 				throw;
 			}
-		}
-
-		private static void RegisterConfigs(IKernel kernel)
-		{
-			AreaRegistration.RegisterAllAreas();
-
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, kernel);
-
-			RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-			BinderConfig.RegisterBinders(ModelBinders.Binders);
 		}
 	}
 }

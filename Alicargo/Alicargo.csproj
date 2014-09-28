@@ -192,6 +192,7 @@
     <Compile Include="ApplicationUpdateController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\SignalRChat.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BillController.cs" />
     <Compile Include="Areas\Admin\Controllers\BillSettingsController.cs" />
@@ -238,6 +239,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Calculation\RegistryOfPaymentsController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="CountryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -309,6 +311,7 @@
     <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
     <Compile Include="Services\AirWaybill\AwbMapper.cs" />
     <Compile Include="Services\Application\ClientApplicationManager.cs" />
+    <Compile Include="Services\Chat\ChatHub.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\Excel\ExcelGenerator.cs" />
@@ -797,6 +800,7 @@
     <Content Include="Views\AwbFiles\FilesHolder.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
     <Content Include="Views\RegistryOfPayments\Index.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
