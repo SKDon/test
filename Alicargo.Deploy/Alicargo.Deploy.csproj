@@ -37,7 +37,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Databases\Alicargo_2_8.sql" />
+    <Content Include="Databases\Alicargo_2_8-2_9.sql" />
+    <Content Include="Databases\Alicargo_0_0-2_8.sql" />
     <Content Include="Databases\Alicargo_Files_2_8.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
