@@ -1,6 +1,6 @@
 ﻿namespace Alicargo.DataAccess.Contracts.Contracts.User
 {
-	public sealed class UserData
+	public sealed class UserEntityData
 	{
 		public long EntityId { get; set; }
 		public long UserId { get; set; }

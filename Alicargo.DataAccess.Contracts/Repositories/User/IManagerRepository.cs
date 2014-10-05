@@ -6,6 +6,6 @@ namespace Alicargo.DataAccess.Contracts.Repositories.User
 	{
 		long Update(long managerId, string name, string login, string email);
 		long Add(string name, string login, string email, string language);
-		UserData[] GetAll();
+		UserEntityData[] GetAll();
 	}
 }

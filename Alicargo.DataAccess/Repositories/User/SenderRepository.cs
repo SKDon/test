@@ -74,9 +74,9 @@ namespace Alicargo.DataAccess.Repositories.User
 			});
 		}
 
-		public UserData[] GetAll()
+		public UserEntityData[] GetAll()
 		{
-			return _executor.Array<UserData>("[dbo].[Sender_GetAll]");
+			return _executor.Array<UserEntityData>("[dbo].[Sender_GetAll]");
 		}
 
 		public long GetUserId(long senderId)

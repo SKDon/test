@@ -167,7 +167,7 @@ namespace Alicargo.Services.Users
 			_users.SetPassword(userId, model.Authentication.NewPassword);
 		}
 
-		private UserData GetByRole(RoleType role, long id)
+		private UserEntityData GetByRole(RoleType role, long id)
 		{
 			switch(role)
 			{
@@ -179,7 +179,7 @@ namespace Alicargo.Services.Users
 
 				case RoleType.Broker:
 					var broker = _brokers.Get(id);
-					return new UserData
+					return new UserEntityData
 					{
 						Email = broker.Email,
 						Language = broker.Language,

@@ -77,7 +77,7 @@ namespace Alicargo.Services
 				if(IsAuthenticated)
 				{
 					var userId = Id;
-					var language = _users.GetLanguage(userId);
+					var language = _users.Get(userId);
 					if(language == null)
 					{
 						FormsAuthentication.SignOut();

@@ -42,7 +42,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			var id = _repository.Add(login, password, language);
 
-			_repository.GetLanguage(id).ShouldBeEquivalentTo(language);
+			_repository.Get(id).ShouldBeEquivalentTo(language);
 			var passwordData = _repository.GetPasswordData(login);
 
 			passwordData.UserId.ShouldBeEquivalentTo(id);

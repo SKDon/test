@@ -11,13 +11,13 @@ namespace Alicargo.DataAccess.Repositories.User
 	public sealed class AdminRepository : IAdminRepository
 	{
 		private readonly AlicargoDataContext _context;
-		private readonly Expression<Func<Admin, UserData>> _selector;
+		private readonly Expression<Func<Admin, UserEntityData>> _selector;
 
 		public AdminRepository(IDbConnection connection)
 		{
 			_context = new AlicargoDataContext(connection);
 
-			_selector = x => new UserData
+			_selector = x => new UserEntityData
 			{
 				EntityId = x.Id,
 				UserId = x.UserId,
@@ -62,7 +62,7 @@ namespace Alicargo.DataAccess.Repositories.User
 			return user.Id;
 		}
 
-		public UserData[] GetAll()
+		public UserEntityData[] GetAll()
 		{			
 			return _context.Admins.Select(_selector).ToArray();
 		}

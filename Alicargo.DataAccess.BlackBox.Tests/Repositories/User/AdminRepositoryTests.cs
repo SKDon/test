@@ -65,7 +65,7 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 			CheckUser(actual, login, name, email, TwoLetterISOLanguageName.Russian);
 		}
 
-		private static void CheckUser(UserData actual, string login, string name, string email, string language)
+		private static void CheckUser(UserEntityData actual, string login, string name, string email, string language)
 		{
 			actual.EntityId.Should().BeGreaterThan(0);
 			actual.UserId.Should().BeGreaterThan(0);
