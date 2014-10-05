@@ -81,5 +81,8 @@ namespace Alicargo.Mvc
 
 		[Path("~/Scripts/app/Country/Grid.js")]
 		public static string CountryListJs = "~/js/сountry-list-js";
+
+		[Path("~/Scripts/jQuery/jquery.signalR-2.1.2.min.js")]
+		public static string ChatJs = "~/js/chat-js";
 	}
 }

@@ -19,7 +19,9 @@ namespace Alicargo.Controllers
 
 		public virtual ActionResult Index()
 		{
-			return View();
+			var userData = _users.Get(_identity.Id);
+
+			return View(userData);
 		}
 	}
 }

@@ -1,5 +1,5 @@
-﻿<script src="~/Scripts/jQuery/jquery.signalR-2.1.2.min.js"></script>
-<script src="~/signalr/hubs"></script>
+﻿@model Alicargo.DataAccess.Contracts.Contracts.User.UserData
+@using Alicargo.Mvc
 
 <div class="container">
 	<input type="text" id="message" />
@@ -22,7 +22,7 @@
 				+ '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
 		};
 		// Get the user name and store it to prepend to messages.
-		$('#displayname').val(prompt('Enter your name:', ''));
+		$('#displayname').val('@Model.Name');
 		// Set initial focus to message input box.
 		$('#message').focus();
 		// Start the connection.
@@ -36,3 +36,9 @@
 		});
 	});
 </script>
+
+@section scripts
+{
+	@Scripts.Render(JsPaths.ChatJs)
+	<script src="~/signalr/hubs"></script>
+}
