@@ -36,9 +36,9 @@ namespace Alicargo.Services.Users.Client
 			{
 				data = _clients.Get(clientId.Value);
 			}
-			else if(_identity.Id.HasValue)
+			else if(_identity.IsAuthenticated)
 			{
-				data = _clients.GetByUserId(_identity.Id.Value);
+				data = _clients.GetByUserId(_identity.Id);
 			}
 			else
 			{

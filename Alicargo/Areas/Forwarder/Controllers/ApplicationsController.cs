@@ -44,9 +44,7 @@ namespace Alicargo.Areas.Forwarder.Controllers
 		{
 			var orders = OrderHelper.Get(group);
 
-			Debug.Assert(_identity.Id != null);
-
-			var forwarderId = _forwarders.GetByUserId(_identity.Id.Value);
+			var forwarderId = _forwarders.GetByUserId(_identity.Id);
 
 			Debug.Assert(forwarderId != null);
 

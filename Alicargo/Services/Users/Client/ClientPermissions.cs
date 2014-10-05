@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Alicargo.Core.Contracts.Client;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts.User;
@@ -33,8 +32,7 @@ namespace Alicargo.Services.Users.Client
 				throw new ArgumentNullException("data");
 			}
 
-			Debug.Assert(_identity.Id != null);
-			var client = _clients.GetByUserId(_identity.Id.Value);
+			var client = _clients.GetByUserId(_identity.Id);
 
 			return client != null && client.ClientId == data.ClientId;
 		}

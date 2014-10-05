@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Common;
@@ -103,8 +102,7 @@ namespace Alicargo.Controllers.Awb
 				{
 					var data = AwbMapper.GetData(model);
 
-					Debug.Assert(_identity.Id != null);
-					var id = _awbManager.Create(applicationId, data, _identity.Id.Value);
+					var id = _awbManager.Create(applicationId, data, _identity.Id);
 
 					return RedirectToAction(MVC.AdminAwb.Edit(id));
 				}

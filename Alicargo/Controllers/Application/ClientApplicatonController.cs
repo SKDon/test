@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -126,9 +125,7 @@ namespace Alicargo.Controllers.Application
 
 		private long GetClientId()
 		{
-			Debug.Assert(_identity.Id != null);
-
-			return _clients.GetByUserId(_identity.Id.Value).ClientId;
+			return _clients.GetByUserId(_identity.Id).ClientId;
 		}
 	}
 }

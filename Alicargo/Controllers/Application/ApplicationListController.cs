@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
@@ -71,15 +70,13 @@ namespace Alicargo.Controllers.Application
 		{
 			var orders = OrderHelper.Get(group);
 
-			Debug.Assert(_identity.Id != null);
+			var senderId = _senders.GetByUserId(_identity.Id);
 
-			var senderId = _senders.GetByUserId(_identity.Id.Value);
+			var forwarderId = _forwarders.GetByUserId(_identity.Id);
 
-			var forwarderId = _forwarders.GetByUserId(_identity.Id.Value);
+			var client = _clients.GetByUserId(_identity.Id);
 
-			var client = _clients.GetByUserId(_identity.Id.Value);
-
-			var carrierId = _carriers.GetByUserId(_identity.Id.Value);
+			var carrierId = _carriers.GetByUserId(_identity.Id);
 
 			var clientId = client != null
 				? client.ClientId

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Core.Contracts.AirWaybill;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -47,11 +46,9 @@ namespace Alicargo.Controllers.Awb
 			{
 				if(ModelState.IsValid)
 				{
-					Debug.Assert(_identity.Id != null);
+					var airWaybillData = AwbMapper.GetData(model, _identity.Id);
 
-					var airWaybillData = AwbMapper.GetData(model, _identity.Id.Value);
-
-					_awbManager.Create(id, airWaybillData, _identity.Id.Value);
+					_awbManager.Create(id, airWaybillData, _identity.Id);
 
 					return RedirectToAction(MVC.AirWaybill.Index());
 				}

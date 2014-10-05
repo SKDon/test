@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
@@ -56,9 +55,7 @@ namespace Alicargo.Controllers
 
 			if (_identity.IsInRole(RoleType.Forwarder))
 			{
-				Debug.Assert(_identity.Id != null);
-
-				var forwarderId = _forwarders.GetByUserId(_identity.Id.Value);
+				var forwarderId = _forwarders.GetByUserId(_identity.Id);
 
 				if(!forwarderId.HasValue)
 				{
@@ -72,9 +69,7 @@ namespace Alicargo.Controllers
 
 			if(_identity.IsInRole(RoleType.Carrier))
 			{
-				Debug.Assert(_identity.Id != null);
-
-				var carrierId = _carriers.GetByUserId(_identity.Id.Value);
+				var carrierId = _carriers.GetByUserId(_identity.Id);
 
 				if(!carrierId.HasValue)
 				{
@@ -88,9 +83,7 @@ namespace Alicargo.Controllers
 
 			if (_identity.IsInRole(RoleType.Sender))
 			{
-				Debug.Assert(_identity.Id != null);
-
-				var senderId = _senders.GetByUserId(_identity.Id.Value);
+				var senderId = _senders.GetByUserId(_identity.Id);
 
 				if(!senderId.HasValue)
 				{

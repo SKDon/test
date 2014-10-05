@@ -226,6 +226,9 @@
     <Compile Include="CarrierController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChatController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="CityController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

@@ -61,9 +61,7 @@ namespace Alicargo.Controllers.Application
 				return View(model);
 			}
 
-			Debug.Assert(_identity.Id != null);
-
-			var senderId = _senders.GetByUserId(_identity.Id.Value);
+			var senderId = _senders.GetByUserId(_identity.Id);
 
 			if(!senderId.HasValue)
 			{
@@ -119,9 +117,7 @@ namespace Alicargo.Controllers.Application
 
 		private void BindCountries()
 		{
-			Debug.Assert(_identity.Id != null);
-
-			var senderId = _senders.GetByUserId(_identity.Id.Value);
+			var senderId = _senders.GetByUserId(_identity.Id);
 
 			Debug.Assert(senderId != null);
 

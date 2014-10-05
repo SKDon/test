@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -35,9 +34,7 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Client)]
 		public virtual ActionResult Index()
 		{
-			Debug.Assert(_identity.Id != null);
-
-			var client = _clients.GetByUserId(_identity.Id.Value);
+			var client = _clients.GetByUserId(_identity.Id);
 
 			var balance = _balance.GetBalance(client.ClientId);
 
@@ -63,9 +60,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
-			Debug.Assert(_identity.Id != null);
-
-			var client = _clients.GetByUserId(_identity.Id.Value);
+			var client = _clients.GetByUserId(_identity.Id);
 
 			var data = _presenter.List(client.ClientId, take, skip);
 
@@ -75,9 +70,7 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Client)]
 		public virtual FileResult Excel()
 		{
-			Debug.Assert(_identity.Id != null);
-
-			var client = _clients.GetByUserId(_identity.Id.Value);
+			var client = _clients.GetByUserId(_identity.Id);
 
 			var stream = _excel.Get(client.ClientId, _identity.Language);
 

@@ -62,9 +62,9 @@ namespace Alicargo.Controllers.Awb
 		public virtual JsonResult List(int take, int skip)
 		{
 			long? brokerId = null;
-			if(_identity.IsInRole(RoleType.Broker) && _identity.Id.HasValue)
+			if(_identity.IsInRole(RoleType.Broker) && _identity.IsAuthenticated)
 			{
-				var broker = _brokers.GetByUserId(_identity.Id.Value);
+				var broker = _brokers.GetByUserId(_identity.Id);
 				brokerId = broker.Id;
 			}
 

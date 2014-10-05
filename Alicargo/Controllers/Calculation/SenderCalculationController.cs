@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -27,9 +26,7 @@ namespace Alicargo.Controllers.Calculation
 		[Access(RoleType.Sender)]
 		public virtual FileResult Excel()
 		{
-			Debug.Assert(_identity.Id != null);
-
-			var senderId = _senders.GetByUserId(_identity.Id.Value);
+			var senderId = _senders.GetByUserId(_identity.Id);
 
 			if(!senderId.HasValue)
 			{
@@ -57,9 +54,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult List(int take, long skip)
 		{
-			Debug.Assert(_identity.Id != null);
-
-			var senderId = _senders.GetByUserId(_identity.Id.Value);
+			var senderId = _senders.GetByUserId(_identity.Id);
 
 			if(!senderId.HasValue)
 			{

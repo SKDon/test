@@ -53,19 +53,19 @@ namespace Alicargo.Services
 
 		public bool IsInRole(RoleType role)
 		{
-			if(!Id.HasValue) return false;
+			if(!IsAuthenticated) return false;
 
-			if(!_isInRole.ContainsKey(Id.Value))
-				_isInRole.Add(Id.Value, new Dictionary<RoleType, bool>());
+			if(!_isInRole.ContainsKey(Id))
+				_isInRole.Add(Id, new Dictionary<RoleType, bool>());
 
-			if(!_isInRole[Id.Value].ContainsKey(role))
+			if(!_isInRole[Id].ContainsKey(role))
 			{
-				var inRole = InRole(role, Id.Value);
+				var inRole = InRole(role, Id);
 
-				_isInRole[Id.Value].Add(role, inRole);
+				_isInRole[Id].Add(role, inRole);
 			}
 
-			return _isInRole[Id.Value][role];
+			return _isInRole[Id][role];
 		}
 
 		public string Language
@@ -74,9 +74,9 @@ namespace Alicargo.Services
 			{
 				if(_language != null) return _language;
 
-				if(Id.HasValue)
+				if(IsAuthenticated)
 				{
-					var userId = Id.Value;
+					var userId = Id;
 					var language = _users.GetLanguage(userId);
 					if(language == null)
 					{
@@ -103,9 +103,9 @@ namespace Alicargo.Services
 				throw new ArgumentOutOfRangeException("value");
 			}
 
-			if(Id.HasValue)
+			if(IsAuthenticated)
 			{
-				_users.SetLanguage(Id.Value, value);
+				_users.SetLanguage(Id, value);
 			}
 
 			_language = value;
@@ -113,26 +113,19 @@ namespace Alicargo.Services
 
 		public bool IsAuthenticated
 		{
-			get { return Id.HasValue; }
+			get { return HttpContext.Current.User.Identity.IsAuthenticated; }
 		}
 
-		public long? Id
+		public long Id
 		{
 			get
 			{
-				//if(_identity.HasValue)
-				//	return _identity.Value;
-
 				long id;
 				if(long.TryParse(HttpContext.Current.User.Identity.Name, NumberStyles.Number, null, out id))
-					//_identity = id;
 					return id;
 
-				return null;
-
-				//return _identity;
+				throw new AccessForbiddenException("Can't define user ID");
 			}
-			//set { _identity = value; }
 		}
 
 		private bool InRole(RoleType role, long userId)
