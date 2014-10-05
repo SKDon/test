@@ -42,11 +42,26 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 
 			var id = _repository.Add(login, password, language);
 
-			_repository.Get(id).ShouldBeEquivalentTo(language);
-			var passwordData = _repository.GetPasswordData(login);
+			var userData = _repository.Get(id);
+			userData.Language.ShouldBeEquivalentTo(language);
+			userData.Name.ShouldBeEquivalentTo(login);
+			userData.Id.ShouldBeEquivalentTo(id);
 
+			var passwordData = _repository.GetPasswordData(login);
 			passwordData.UserId.ShouldBeEquivalentTo(id);
 			passwordData.PasswordHash.ShouldAllBeEquivalentTo(_converter.GetPasswordHash(password, passwordData.PasswordSalt));
+		}
+
+		[TestMethod]
+		public void TestGet()
+		{
+			_repository.Get(12).Name.ShouldBeEquivalentTo("CarrierName1");
+			_repository.Get(2).Name.ShouldBeEquivalentTo("BrokerName1");
+			_repository.Get(1).Name.ShouldBeEquivalentTo("AdminName");
+			_repository.Get(3).Name.ShouldBeEquivalentTo("ForwarderName1");
+			_repository.Get(4).Name.ShouldBeEquivalentTo("SenderName1");
+			_repository.Get(6).Name.ShouldBeEquivalentTo("Nic 1");
+			_repository.Get(15).Name.ShouldBeEquivalentTo("Manager1Name");
 		}
 
 		[TestMethod]

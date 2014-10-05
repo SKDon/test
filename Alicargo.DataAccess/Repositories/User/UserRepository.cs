@@ -27,9 +27,9 @@ namespace Alicargo.DataAccess.Repositories.User
 			_executor.Execute("[dbo].[User_SetLogin]", new { userId, login });
 		}
 
-		public string Get(long userId)
+		public UserData Get(long userId)
 		{
-			return _executor.Query<string>("[dbo].[User_GetLanguage]", new { userId });
+			return _executor.Query<UserData>("[dbo].[User_Get]", new { userId });
 		}
 
 		public long? GetUserIdByEmail(string email)

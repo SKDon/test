@@ -77,13 +77,13 @@ namespace Alicargo.Services
 				if(IsAuthenticated)
 				{
 					var userId = Id;
-					var language = _users.Get(userId);
-					if(language == null)
+					var userData = _users.Get(userId);
+					if(userData == null)
 					{
 						FormsAuthentication.SignOut();
 						throw new EntityNotFoundException("User " + userId + " not found");
 					}
-					_language = language;
+					_language = userData.Language;
 				}
 				else
 				{

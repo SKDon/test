@@ -133,7 +133,7 @@
     <Build Include="Stored procedures\Event\EventEmailRecipient_Set.sql" />
     <Build Include="Stored procedures\User\User_GetPasswordData.sql" />
     <Build Include="Stored procedures\User\User_SetLanguage.sql" />
-    <Build Include="Stored procedures\User\User_GetLanguage.sql" />
+    <Build Include="Stored procedures\User\User_Get.sql" />
     <Build Include="Stored procedures\User\User_GetUserIdByEmail.sql" />
     <Build Include="Tables\User\Admin.sql" />
     <Build Include="Tables\User\Client.sql" />

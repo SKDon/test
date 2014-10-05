@@ -80,6 +80,7 @@
     <Compile Include="Contracts\State\StateData.cs" />
     <Compile Include="Contracts\TransitData.cs" />
     <Compile Include="Contracts\User\ForwarderData.cs" />
+    <Compile Include="Contracts\User\UserData.cs" />
     <Compile Include="Contracts\User\UserEntityData.cs" />
     <Compile Include="Enums\AwbFileType.cs" />
     <Compile Include="Enums\ClassType.cs" />
