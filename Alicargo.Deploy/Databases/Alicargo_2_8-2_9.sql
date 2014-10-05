@@ -10,10 +10,18 @@ ALTER TABLE [dbo].[Application]
 GO
 UPDATE a
 	SET a.[IsPickup] = 1
-	FROM  [dbo].[Application] a
+	FROM [dbo].[Application] a
 		JOIN [dbo].[Transit] t ON a.[TransitId] = t.[Id]
 		JOIN [dbo].[Carrier] c ON c.[Id] = t.[CarrierId]
 	WHERE c.[Name] = N'Самовывоз'
+
+
+GO
+UPDATE a
+	SET a.[IsPickup] = 1
+	FROM [dbo].[Application] a
+		JOIN [dbo].[Transit] t ON a.[TransitId] = t.[Id]
+	WHERE t.[MethodOfTransitId] = 2
 
 
 GO
