@@ -56,6 +56,7 @@ namespace Alicargo.Services.Application
 				Invoice = data.Invoice,
 				MarkName = data.MarkName,
 				MethodOfDelivery = data.MethodOfDelivery,
+				IsPickup = data.IsPickup,
 				TermsOfDelivery = data.TermsOfDelivery,
 				CountryId = data.CountryId,
 				Volume = data.Volume,

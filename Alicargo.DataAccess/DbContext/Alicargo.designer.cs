@@ -13,6 +13,11 @@ namespace Alicargo.DataAccess.DbContext
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
+	using System.Data;
+	using System.Collections.Generic;
+	using System.Reflection;
+	using System.Linq;
+	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
 	
@@ -5175,6 +5180,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private int _DisplayNumber;
 		
+		private bool _IsPickup;
+		
 		private EntityRef<AirWaybill> _AirWaybill;
 		
 		private EntityRef<Client> _Client;
@@ -5285,6 +5292,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnInsuranceRateChanged();
     partial void OnDisplayNumberChanging(int value);
     partial void OnDisplayNumberChanged();
+    partial void OnIsPickupChanging(bool value);
+    partial void OnIsPickupChanged();
     #endregion
 		
 		public Application()
@@ -6243,6 +6252,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._DisplayNumber = value;
 					this.SendPropertyChanged("DisplayNumber");
 					this.OnDisplayNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPickup", DbType="Bit")]
+		public bool IsPickup
+		{
+			get
+			{
+				return this._IsPickup;
+			}
+			set
+			{
+				if ((this._IsPickup != value))
+				{
+					this.OnIsPickupChanging(value);
+					this.SendPropertyChanging();
+					this._IsPickup = value;
+					this.SendPropertyChanged("IsPickup");
+					this.OnIsPickupChanged();
 				}
 			}
 		}

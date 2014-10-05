@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
@@ -32,7 +31,7 @@ namespace Alicargo.Services.Application
 
 			foreach(var item in applicationItems)
 			{
-				if(item.TransitMethodOfTransitId == (int)MethodOfTransit.Self)
+				if(item.IsPickup)
 				{
 					var transit = transits[item.ClientId];
 

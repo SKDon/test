@@ -147,9 +147,6 @@
   <data name="Manager" xml:space="preserve">
     <value>Manager</value>
   </data>
-  <data name="Self" xml:space="preserve">
-    <value>Pickup</value>
-  </data>
   <data name="Sender" xml:space="preserve">
     <value>Sender</value>
   </data>

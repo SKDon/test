@@ -148,9 +148,13 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "FactoryPhone", application.FactoryPhone);
 			Add(localizedData, "InvoiceFiles", string.Join(", ", invoice));
 			Add(localizedData, "LegalEntity", application.ClientLegalEntity);
+			Add(localizedData, "Pickup",
+				application.IsPickup
+						? Alicargo.Core.Resources.Entities.ResourceManager.GetString("Pickup", culture)
+						: "");
 			Add(localizedData, "MethodOfDelivery", LocalizationHelper.GetMethodOfDelivery(application.MethodOfDelivery, culture));
 			Add(localizedData, "MethodOfTransit",
-				LocalizationHelper.GetMethodOfTransit(application.TransitMethodOfTransit, culture));
+					LocalizationHelper.GetMethodOfTransit(application.TransitMethodOfTransit, culture));
 			Add(localizedData, "PackingFiles", string.Join(", ", packing));
 			Add(localizedData, "StateChangeTimestamp", LocalizationHelper.GetDate(application.StateChangeTimestamp, culture));
 			Add(localizedData, "StateName", state != null ? state.LocalizedName : null);

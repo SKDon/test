@@ -146,5 +146,7 @@ namespace Alicargo.ViewModels.Application
 		public bool CanSetTransitCost { get; set; }
 
 		public string ForwarderName { get; set; }
+
+		public bool IsPickup { get; set; }
 	}
 }

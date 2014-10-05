@@ -8,7 +8,7 @@
 		@Html.EditorWithLabelFor(model => model.FactoryName)
 		@Html.EditorWithLabelFor(model => model.MarkName)
 		@Html.EditorWithLabelFor(model => model.Invoice)
-		@Html.EditorWithLabelFor(model => model.Characteristic)
+		@Html.EditorWithLabelFor(model => model.Characteristic)		
 	</div>
 	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.FactoryEmail)
@@ -41,7 +41,10 @@
 	@{
 		var applicationId = (long?)ViewBag.ApplicationId;
 		@(applicationId.HasValue
-		  ? Html.Action(MVC.Transit.EditByApplication(applicationId))
-		  : Html.Action(MVC.Transit.EditByClient((long)ViewBag.ClientId)))
+			  ? Html.Action(MVC.Transit.EditByApplication(applicationId))
+			  : Html.Action(MVC.Transit.EditByClient((long)ViewBag.ClientId)))
 	}
+</div>
+<div class="appl-edit-checkbox">
+	@Html.EditorWithLabelFor(x => x.IsPickup)
 </div>

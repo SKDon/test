@@ -16,7 +16,7 @@ namespace Alicargo.ViewModels.Application
 		public CurrencyModel Currency { get; set; }
 
 		[Required, DisplayNameLocalized(typeof(Entities), "Invoice")]
-		public string Invoice { get; set; }		
+		public string Invoice { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "Characteristic")]
 		public string Characteristic { get; set; }
@@ -59,5 +59,8 @@ namespace Alicargo.ViewModels.Application
 
 		[Required, DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public MethodOfDelivery MethodOfDelivery { get; set; }
+
+		[Required, DisplayNameLocalized(typeof(Entities), "Pickup")]
+		public bool IsPickup { get; set; }
 	}
 }

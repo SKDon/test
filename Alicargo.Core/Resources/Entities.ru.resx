@@ -495,4 +495,7 @@
   <data name="OtherFiles" xml:space="preserve">
     <value>Другие файлы</value>
   </data>
+  <data name="Pickup" xml:space="preserve">
+    <value>Самовывоз</value>
+  </data>
 </root>

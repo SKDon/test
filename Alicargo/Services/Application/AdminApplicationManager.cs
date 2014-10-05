@@ -62,6 +62,7 @@ namespace Alicargo.Services.Application
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
 				MethodOfDelivery = model.MethodOfDelivery,
+				IsPickup = model.IsPickup,
 				AirWaybillId = null,
 				DateInStock = null,
 				DateOfCargoReceipt = null,
@@ -108,6 +109,7 @@ namespace Alicargo.Services.Application
 			data.FactoryEmail = model.FactoryEmail;
 			data.FactoryContact = model.FactoryContact;
 			data.MarkName = model.MarkName;
+			data.IsPickup = model.IsPickup;
 			data.MethodOfDelivery = model.MethodOfDelivery;
 			data.FactureCost = model.FactureCost;
 			data.FactureCostEx = model.FactureCostEx;
@@ -226,7 +228,7 @@ namespace Alicargo.Services.Application
 		public void SetClass(long id, ClassType? classType)
 		{
 			_editor.SetClass(id, (int?)classType);
-		}		
+		}
 
 		private long GetForwarderId(long? forwarderId, long cityId, long? oldForwarderId)
 		{

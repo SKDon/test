@@ -74,6 +74,7 @@ namespace Alicargo.Services.Application
 				FactoryEmail = application.FactoryEmail,
 				FactoryPhone = application.FactoryPhone,
 				MethodOfDelivery = application.MethodOfDelivery,
+				IsPickup = application.IsPickup,
 				TermsOfDelivery = application.TermsOfDelivery,
 				WarehouseWorkingTime = application.WarehouseWorkingTime
 			};
@@ -104,6 +105,7 @@ namespace Alicargo.Services.Application
 				FactoryContact = model.FactoryContact,
 				MarkName = model.MarkName,
 				MethodOfDelivery = model.MethodOfDelivery,
+				IsPickup = model.IsPickup,
 				AirWaybillId = null,
 				DateInStock = null,
 				DateOfCargoReceipt = null,
@@ -143,6 +145,7 @@ namespace Alicargo.Services.Application
 			to.FactoryPhone = @from.FactoryPhone;
 			to.FactoryEmail = @from.FactoryEmail;
 			to.FactoryContact = @from.FactoryContact;
+			to.IsPickup = @from.IsPickup;
 			to.MarkName = @from.MarkName;
 			to.MethodOfDelivery = @from.MethodOfDelivery;
 			to.ForwarderId = forwarderId;

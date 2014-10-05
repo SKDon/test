@@ -69,6 +69,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				WarehouseWorkingTime = x.WarehouseWorkingTime,
 				Weight = x.Weight,
 				MethodOfDelivery = (MethodOfDelivery)x.MethodOfDeliveryId,
+				IsPickup =  x.IsPickup,
 				Value = x.Value,
 				CurrencyId = (CurrencyType)x.CurrencyId,
 				AirWaybillId = x.AirWaybillId,

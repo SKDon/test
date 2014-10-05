@@ -498,4 +498,7 @@
   <data name="OtherFiles" xml:space="preserve">
     <value>Other files</value>
   </data>
+  <data name="Pickup" xml:space="preserve">
+    <value>Pickup</value>
+  </data>
 </root>

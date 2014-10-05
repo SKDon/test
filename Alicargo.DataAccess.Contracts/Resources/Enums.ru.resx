@@ -147,9 +147,6 @@
   <data name="Manager" xml:space="preserve">
     <value>Менеджер</value>
   </data>
-  <data name="Self" xml:space="preserve">
-    <value>Самовывоз</value>
-  </data>
   <data name="Sender" xml:space="preserve">
     <value>Отправитель</value>
   </data>

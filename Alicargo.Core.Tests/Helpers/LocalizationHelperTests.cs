@@ -22,12 +22,5 @@ namespace Alicargo.Core.Tests.Helpers
 			LocalizationHelper.GetMethodOfDelivery(MethodOfDelivery.Avia, CultureInfo.GetCultureInfo("ru"))
 				.ShouldBeEquivalentTo("Авиа");
 		}
-
-		[TestMethod]
-		public void Test_GetMethodOfTransit()
-		{
-			LocalizationHelper.GetMethodOfTransit(MethodOfTransit.Self, CultureInfo.GetCultureInfo("ru"))
-				.ShouldBeEquivalentTo("Самовывоз");
-		}
 	}
 }

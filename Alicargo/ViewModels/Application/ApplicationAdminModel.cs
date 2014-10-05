@@ -78,6 +78,10 @@ namespace Alicargo.ViewModels.Application
 		[DisplayNameLocalized(typeof(Entities), "MethodOfDelivery")]
 		public MethodOfDelivery MethodOfDelivery { get; set; }
 
+		[Required]
+		[DisplayNameLocalized(typeof(Entities), "Pickup")]
+		public bool IsPickup { get; set; }
+
 		[DisplayNameLocalized(typeof(Entities), "FactureCost")]
 		public decimal? FactureCost { get; set; }
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Helpers;
+using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
@@ -105,6 +106,7 @@ namespace Alicargo.Services.Application
 				WarehouseWorkingTime = x.WarehouseWorkingTime,
 				Weight = x.Weight,
 				MethodOfDeliveryId = (int)x.MethodOfDelivery,
+				IsPickup = x.IsPickup,
 				TransitMethodOfTransitId = (int)x.TransitMethodOfTransit,
 				Value = x.Value,
 				CurrencyId = (int)x.CurrencyId,

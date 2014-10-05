@@ -326,11 +326,22 @@
 	width: 100%;
 }
 
-.textedit-holder textarea, .textedit-holder input[type="text"] {
-	width: 100%;
-	height: 100%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	margin: 0;
+	.textedit-holder textarea, .textedit-holder input[type="text"] {
+		width: 100%;
+		height: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		margin: 0;
+	}
+
+.appl-edit-checkbox label {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.appl-edit-checkbox input.check-box {
+	display: inline-block;
+	margin-bottom: 5px;
+	width: auto;
 }

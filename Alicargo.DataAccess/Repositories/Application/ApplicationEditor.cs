@@ -176,6 +176,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.DateInStock = from.DateInStock;
 			to.DateOfCargoReceipt = from.DateOfCargoReceipt;
 			to.TransitReference = from.TransitReference;
+			to.IsPickup = from.IsPickup;
 
 			to.ClientId = from.ClientId;
 			to.TransitId = from.TransitId;

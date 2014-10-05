@@ -34,7 +34,10 @@
 		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>&nbsp;)</label>
 		@Html.EditorFor(model => model.Volume)
 		@Html.EditorWithLabelFor(model => model.Weight)
-		@Html.EditorWithLabelFor(model => model.Count)		
+		@Html.EditorWithLabelFor(model => model.Count)
+		<div class="appl-edit-checkbox" style="margin-top: 31px;">
+			@Html.EditorWithLabelFor(x => x.IsPickup)
+		</div>
 	</div>
 </div>
 <div class="row">
