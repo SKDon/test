@@ -2,11 +2,11 @@
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(SignalRChat))]
+[assembly: OwinStartup(typeof(SignalRChatStartup))]
 
 namespace Alicargo
 {
-	public class SignalRChat
+	public class SignalRChatStartup
 	{
 		public void Configuration(IAppBuilder app)
 		{

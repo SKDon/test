@@ -1,93 +1,15 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Reflection;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Alicargo.Jobs;
-using Alicargo.Jobs.Core;
-using Alicargo.Mvc;
-using Alicargo.Services;
-using log4net;
-using Ninject;
-using Ninject.Web.Common;
-using ILog = Alicargo.Core.Contracts.Common.ILog;
+﻿using System.Reflection;
+using System.Web;
 
 namespace Alicargo
 {
-	public /*sealed*/ class MvcApplication : NinjectHttpApplication
+	public /*sealed*/ class MvcApplication : HttpApplication
 	{
-		public static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
-		private static readonly ILog MainLogger = new Log4NetWrapper(LogManager.GetLogger("Logger"));
+		public static readonly string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-		public static readonly string Version =
-			Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-		private readonly string _connectionString =
-			ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString;
-
-		private readonly string _filesConnectionString =
-			ConfigurationManager.ConnectionStrings["FilesDbConnectionString"].ConnectionString;
-
-		private readonly StandardKernel _kernel = new StandardKernel();
-		private readonly RunnerController _runnerController = new RunnerController();
-
-		protected override IKernel CreateKernel()
+		public void Application_Start()
 		{
-			CompositionRoot.BindConnection(_kernel, _connectionString);
-
-			CompositionRoot.BindDataAccess(_kernel, _connectionString, _filesConnectionString);
-
-			CompositionRoot.BindServices(_kernel, MainLogger);
-
-			CompositionJobsHelper.BindJobs(_kernel, _connectionString, _filesConnectionString);
-
-			AreaRegistration.RegisterAllAreas();
-
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, _kernel);
-
-			RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-			BinderConfig.RegisterBinders(ModelBinders.Binders);
-
-			BundleConfig.RegisterBundles();
-
-			return _kernel;
-		}
-
-		protected override void OnApplicationStarted()
-		{
-			try
-			{
-				var runners = _kernel.GetAll<IRunner>().ToArray();
-
-				_runnerController.Run(runners);
-			}
-			catch(Exception e)
-			{
-				MainLogger.Error("Failed to start runners ", e);
-
-				throw;
-			}
-
-			MainLogger.Info("Jobs are started");
-		}
-
-		protected override void OnApplicationStopped()
-		{
-			try
-			{
-				var waitAll = _runnerController.StopAndWait(PausePeriod.Add(PausePeriod));
-
-				MainLogger.Info(waitAll
-					? "Jobs were stopped"
-					: "One or more jobs were terminated with timeout");
-			}
-			catch(Exception e)
-			{
-				MainLogger.Error("One or more jobs failed", e);
-				throw;
-			}
+			Startup.ApplicationStart();
 		}
 	}
 }
