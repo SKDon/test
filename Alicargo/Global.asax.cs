@@ -32,21 +32,6 @@ namespace Alicargo
 		private readonly StandardKernel _kernel = new StandardKernel();
 		private readonly RunnerController _runnerController = new RunnerController();
 
-		static MvcApplication()
-		{
-		}
-
-		private static void RegisterConfigs(IKernel kernel)
-		{
-			AreaRegistration.RegisterAllAreas();
-
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, kernel);
-
-			RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-			BinderConfig.RegisterBinders(ModelBinders.Binders);
-		}
-
 		protected override IKernel CreateKernel()
 		{
 			CompositionRoot.BindConnection(_kernel, _connectionString);
@@ -57,7 +42,15 @@ namespace Alicargo
 
 			CompositionJobsHelper.BindJobs(_kernel, _connectionString, _filesConnectionString);
 
-			RegisterConfigs(_kernel);
+			AreaRegistration.RegisterAllAreas();
+
+			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, _kernel);
+
+			RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+			BinderConfig.RegisterBinders(ModelBinders.Binders);
+
+			BundleConfig.RegisterBundles();
 
 			return _kernel;
 		}

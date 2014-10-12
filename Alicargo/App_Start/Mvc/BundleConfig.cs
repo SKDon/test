@@ -2,11 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Optimization;
-using Alicargo.Mvc;
 using Alicargo.MvcHelpers.BundleHelpres;
-using WebActivatorEx;
-
-[assembly: PostApplicationStartMethod(typeof(BundleConfig), "RegisterBundles")]
 
 namespace Alicargo.Mvc
 {
@@ -27,10 +23,10 @@ namespace Alicargo.Mvc
 
 		private static void BindConstants(IEnumerable<FieldInfo> fields, Func<string, Bundle> getBundle)
 		{
-			foreach (var field in fields)
+			foreach(var field in fields)
 			{
 				var attribute = field.GetCustomAttribute<PathAttribute>();
-				if (attribute != null)
+				if(attribute != null)
 				{
 					var value = (string)field.GetValue(null);
 					var include = getBundle(value);
