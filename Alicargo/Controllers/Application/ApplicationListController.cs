@@ -84,7 +84,10 @@ namespace Alicargo.Controllers.Application
 
 			var data = _presenter.List(_identity.Language, take, skip, orders, clientId, senderId, forwarderId, carrierId);
 
-			return Json(data);
+			var result = Json(data);
+			result.MaxJsonLength = int.MaxValue;
+
+			return result;
 		}
 
 		private IEnumerable<AirWaybillData> GetAwbs()
