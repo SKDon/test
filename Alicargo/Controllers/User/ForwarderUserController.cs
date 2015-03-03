@@ -11,14 +11,14 @@ using Resources;
 
 namespace Alicargo.Controllers.User
 {
-	public partial class ForwarderController : Controller
+	public partial class ForwarderUserController : Controller
 	{
 		private readonly ICityRepository _cities;
 		private readonly IForwarderRepository _forwarders;
 		private readonly IIdentityService _identity;
 		private readonly IUserRepository _users;
 
-		public ForwarderController(
+        public ForwarderUserController(
 			ICityRepository cities,
 			IUserRepository users,
 			IForwarderRepository forwarders,
@@ -60,7 +60,7 @@ namespace Alicargo.Controllers.User
 
 				_forwarders.SetCities(id, model.Cities);
 
-				return RedirectToAction(MVC.Forwarder.Edit(id));
+				return RedirectToAction(MVC.ForwarderUser.Edit(id));
 			}
 			catch(DublicateLoginException)
 			{
@@ -115,7 +115,7 @@ namespace Alicargo.Controllers.User
 					_users.SetPassword(data.UserId, model.Authentication.NewPassword);
 				}
 
-				return RedirectToAction(MVC.Forwarder.Edit(id));
+				return RedirectToAction(MVC.ForwarderUser.Edit(id));
 			}
 			catch(DublicateLoginException)
 			{

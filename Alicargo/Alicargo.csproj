@@ -262,7 +262,7 @@
     <Compile Include="Forwarder.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ForwarderController.generated.cs">
+    <Compile Include="ForwarderUserController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="HomeController.generated.cs">
@@ -305,7 +305,7 @@
     <Compile Include="Controllers\Calculation\BalanceController.cs" />
     <Compile Include="Areas\Admin\Controllers\StateController.cs" />
     <Compile Include="Areas\Admin\Controllers\StateSettingsController.cs" />
-    <Compile Include="Controllers\User\ForwarderController.cs" />
+    <Compile Include="Controllers\User\ForwarderUserController.cs" />
     <Compile Include="Controllers\User\RestorePasswordController.cs" />
     <Compile Include="App_Start\Mvc\CssPaths.cs" />
     <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
@@ -792,9 +792,9 @@
     <Content Include="Views\Country\Edit.cshtml" />
     <Content Include="Views\Country\EditorTemplates\CountryEditModel.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
-    <Content Include="Views\Forwarder\Create.cshtml" />
-    <Content Include="Views\Forwarder\Edit.cshtml" />
-    <Content Include="Views\Forwarder\EditorTemplates\ForwarderModel.cshtml" />
+    <Content Include="Views\ForwarderUser\Create.cshtml" />
+    <Content Include="Views\ForwarderUser\Edit.cshtml" />
+    <Content Include="Views\ForwarderUser\EditorTemplates\ForwarderModel.cshtml" />
     <Content Include="Views\Carrier\EditorTemplates\CarrierModel.cshtml" />
     <Content Include="Views\Carrier\Create.cshtml" />
     <Content Include="Views\Carrier\Edit.cshtml" />

@@ -62,7 +62,7 @@ namespace Alicargo.Areas.Forwarder.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ApplicationsController Actions { get { return MVC.ForwarderArea.Applications; } }
+        public ApplicationsController Actions { get { return MVC.Forwarder.Applications; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Forwarder";
         [GeneratedCode("T4MVC", "2.0")]

@@ -28,7 +28,7 @@ public static partial class MVC
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
     static readonly ForwarderClass s_Forwarder = new ForwarderClass();
-    public static ForwarderClass ForwarderArea { get { return s_Forwarder; } }
+    public static ForwarderClass Forwarder { get { return s_Forwarder; } }
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationFilesController ApplicationFiles = new Alicargo.Controllers.Application.T4MVC_ApplicationFilesController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
@@ -56,7 +56,7 @@ public static partial class MVC
     public static Alicargo.Controllers.User.AuthenticationController Authentication = new Alicargo.Controllers.User.T4MVC_AuthenticationController();
     public static Alicargo.Controllers.User.CarrierController Carrier = new Alicargo.Controllers.User.T4MVC_CarrierController();
     public static Alicargo.Controllers.User.ClientController Client = new Alicargo.Controllers.User.T4MVC_ClientController();
-    public static Alicargo.Controllers.User.ForwarderController Forwarder = new Alicargo.Controllers.User.T4MVC_ForwarderController();
+    public static Alicargo.Controllers.User.ForwarderUserController ForwarderUser = new Alicargo.Controllers.User.T4MVC_ForwarderUserController();
     public static Alicargo.Controllers.User.RestorePasswordController RestorePassword = new Alicargo.Controllers.User.T4MVC_RestorePasswordController();
     public static Alicargo.Controllers.User.SenderController Sender = new Alicargo.Controllers.User.T4MVC_SenderController();
     public static Alicargo.Controllers.User.UserController User = new Alicargo.Controllers.User.T4MVC_UserController();
