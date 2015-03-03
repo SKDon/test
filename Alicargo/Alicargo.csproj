@@ -508,6 +508,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Mvc\FilterConfig.cs" />
     <Compile Include="App_Start\Mvc\RouteConfig.cs" />
+    <Content Include="Content\app\avion.png" />
     <Content Include="Content\app\bill-settings.css" />
     <Content Include="Content\app\calculation-grid.css" />
     <Content Include="Content\app\common.css" />
@@ -805,6 +806,7 @@
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
     <Content Include="Views\RegistryOfPayments\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Shared\LoginControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
