@@ -1,6 +1,5 @@
 ﻿@using Alicargo.DataAccess.Contracts.Enums
 @using Alicargo.Mvc
-@using Resources
 @{
 	Layout = null;
 }
@@ -15,7 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		@Styles.Render(CssPaths.Common)
 		@Scripts.Render(JsPaths.CommonJs)
-		@switch (UICulture)
+		@switch(UICulture)
 		{
 			case TwoLetterISOLanguageName.Russian:
 				@Scripts.Render(JsPaths.RuJs)
@@ -29,25 +28,9 @@
 		<div id="wrap">
 			@Html.Partial("Memu")
 			<div class="container">
-				<div class="wrap-padding">&nbsp;</div>
 				@RenderBody()
-			</div>
-			@if (!HttpContext.Current.User.Identity.IsAuthenticated)
-			{
-				<div class="wrap-padding">&nbsp;</div>
-			}
+			</div>			
 		</div>
-		@if (!HttpContext.Current.User.Identity.IsAuthenticated)
-		{
-			<footer>
-				<div class="container">
-					<p class="muted credit">
-						&copy; Alicargo
-						@Html.ActionLink(Pages.SignIn, MVC.Authentication.Login())
-					</p>
-				</div>
-			</footer>
-		}
 		@Html.Partial("DynamicScripts")
 		@RenderSection("scripts", false)
 	</body>

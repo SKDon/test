@@ -14,54 +14,45 @@
 
 .home-page {
 	font-family: "Myriad pro", Arial, Helvetica, sans-serif;
-	width: 1170px;
-	margin: 200px auto 0;
+	width: 900px;
+	margin: 0 auto;
+	font-size: 16px;
+	color: #000;
 }
 
-	.home-page h1 {
-		color: #000;
-		font-size: 36px;
-		font-weight: normal;
-		line-height: 40px;
-		text-align: center;
+	.home-page .span6 {
+		margin-bottom: 20px;
 	}
 
-	.home-page h2 {
-		color: #000;
-		font-family: "Myriad pro", Arial, Helvetica, sans-serif;
-		font-size: 36px;
-		font-weight: normal;
-		line-height: 40px;
-		text-align: center;
+		.home-page .span6 span {
+			display: block;
+			margin: 0 auto 10px;
+			text-align: center;
+		}
+
+.home-head {
+	background-image: url("avion.png");
+	background-repeat: no-repeat;
+	background-color: rgb(32, 30, 94);
+	height: 200px;
+	margin-bottom: 80px;
+}
+
+	.home-head .checkbox, .home-head .checkbox a {
+		color: #FFF;
 	}
 
-	.home-page h3 {
-		color: #000;
-		font-family: "Myriad pro", Arial, Helvetica, sans-serif;
-		font-size: 69px;
-		font-weight: normal;
-		line-height: 40px;
-		text-align: center;
+	.home-head .form-signin {
+		float: right;
 	}
 
-	.home-page h4 {
-		color: gray;
-		font-family: Helvetica, sans-serif;
-		font-size: 16px;
-		font-weight: normal;
-		margin-bottom: 5%;
-		text-align: center;
-	}
+.form-signin {	
+	padding: 20px;
+	margin: 0;
+	max-width: 300px;
+}
 
-	.home-page p {
-		color: #000;
-		font-size: 14px;
-		margin: 0;
-		padding: 0;
-	}
-
-
-.form-signin {
+.form-signin-container {
 	-moz-border-radius: 5px;
 	-moz-box-shadow: 0 1px 2px #000000;
 	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
@@ -74,26 +65,31 @@
 	box-shadow: 0 1px 2px #000000;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 	margin: 200px auto 20px;
-	max-width: 300px;
-	padding: 19px 29px 19px;
+	max-width: 350px;
 }
 
-	.form-signin .form-signin-heading,
-	.form-signin .checkbox {
-		margin-bottom: 10px;
-	}
+.home-footer {
+	margin-top: 30px;
+	font-size: 16px;
+	text-align: center;
+}
 
-	.form-signin input[type="text"],
-	.form-signin input[type="password"] {
-		font-size: 16px;
-		height: auto;
-		margin-bottom: 15px;
-		padding: 7px 9px;
-	}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+	margin-bottom: 10px;
+}
 
-	.form-signin ul {
-		margin-bottom: 0;
-	}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+	font-size: 16px;
+	height: auto;
+	margin-bottom: 15px;
+	padding: 7px 9px;
+}
+
+.form-signin ul {
+	margin-bottom: 0;
+}
 
 
 .super {

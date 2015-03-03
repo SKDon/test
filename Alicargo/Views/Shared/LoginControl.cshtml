@@ -1,0 +1,18 @@
+﻿@using Resources
+@model Alicargo.ViewModels.User.SignIdModel
+
+@using(Html.BeginForm(MVC.Authentication.Login(), FormMethod.Post, new { @class = "form-signin" }))
+{
+	@Html.TextBoxFor(x => x.Login, new { @class = "input-block-level", placeholder = Pages.Login })
+	@Html.PasswordFor(x => x.Password, new { @class = "input-block-level", placeholder = Pages.Password })
+	<label class="checkbox">
+		<span class="pull-right">
+			@Html.ActionLink(Pages.RestorePassword, MVC.RestorePassword.Index())
+		</span>
+		@Html.CheckBoxFor(x => x.RememberMe)@Pages.RememberMe
+	</label>
+	<div class="text-center">
+		<button class="btn btn-primary" type="submit">@Pages.SignIn</button>
+	</div>
+	@Html.ValidationSummary()
+}

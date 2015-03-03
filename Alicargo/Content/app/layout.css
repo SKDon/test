@@ -4,34 +4,25 @@ body {
 }
 
 #wrap {
-	min-height: 100%;
 	height: auto !important;
 	height: 100%;
 	margin: 0 auto -60px;
+	min-height: 100%;
 }
 
-.wrap-padding,
-footer {
+.wrap-padding {
 	height: 60px;
 }
 
-footer {
-	background-color: #f5f5f5;
-}
 
 .container {
 	padding: 0 20px;
 	width: auto;
 }
 
-	.container .credit {
-		margin: 20px auto;
-		text-align: center;
-	}
-
 .container-edit {
-	width: 1170px;
 	margin: 0 auto 20px auto;
+	width: 1170px;
 }
 
 hr {
@@ -63,14 +54,14 @@ h1, h2, h3, h4 {
 }
 
 .input-validation-error {
-	color: #b94a48 !important;
-	border-color: #e9322d !important;
-	-webkit-box-shadow: 0 0 6px #f8b9b7 !important;
 	-moz-box-shadow: 0 0 6px #f8b9b7 !important;
+	-webkit-box-shadow: 0 0 6px #f8b9b7 !important;
+	border-color: #e9322d !important;
 	box-shadow: 0 0 6px #f8b9b7 !important;
+	color: #b94a48 !important;
 }
 
 .validation-summary-errors {
-	margin-top: 20px;
 	color: #b94a48;
+	margin-top: 20px;
 }

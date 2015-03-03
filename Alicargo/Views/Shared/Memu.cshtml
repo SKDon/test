@@ -104,10 +104,11 @@
 }
 @if(IdentityService.IsAuthenticated)
 {
+	<div class="wrap-padding">&nbsp;</div>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				@Html.ActionLink("Alicargo", MVC.Home.Index(), new { @class = "brand" })
+				@Html.ActionLink("Avion Russia", MVC.Home.Index(), new { @class = "brand" })
 				<ul class="nav">
 					@BrokerMenu()
 					@ClientMenu()
