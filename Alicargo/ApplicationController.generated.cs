@@ -62,6 +62,12 @@ namespace Alicargo.Controllers.Application
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Print()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Print);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ViewResult Edit()
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
@@ -89,6 +95,7 @@ namespace Alicargo.Controllers.Application
         public class ActionNamesClass
         {
             public readonly string Delete = "Delete";
+            public readonly string Print = "Print";
             public readonly string Edit = "Edit";
             public readonly string Create = "Create";
         }
@@ -97,6 +104,7 @@ namespace Alicargo.Controllers.Application
         public class ActionNameConstants
         {
             public const string Delete = "Delete";
+            public const string Print = "Print";
             public const string Edit = "Edit";
             public const string Create = "Create";
         }
@@ -107,6 +115,14 @@ namespace Alicargo.Controllers.Application
         public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Delete
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Print s_params_Print = new ActionParamsClass_Print();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Print PrintParams { get { return s_params_Print; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Print
         {
             public readonly string id = "id";
         }
@@ -142,9 +158,11 @@ namespace Alicargo.Controllers.Application
             {
                 public readonly string Create = "Create";
                 public readonly string Edit = "Edit";
+                public readonly string Print = "Print";
             }
             public readonly string Create = "~/Views/Application/Create.cshtml";
             public readonly string Edit = "~/Views/Application/Edit.cshtml";
+            public readonly string Print = "~/Views/Application/Print.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -169,6 +187,18 @@ namespace Alicargo.Controllers.Application
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             DeleteOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PrintOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, long id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Print(long id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Print);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            PrintOverride(callInfo, id);
             return callInfo;
         }
 

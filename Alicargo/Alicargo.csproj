@@ -189,9 +189,6 @@
     <Compile Include="ApplicationListController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationPrintController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="ApplicationUpdateController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -245,7 +242,6 @@
     <Compile Include="ClientController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\Application\ApplicationPrintController.cs" />
     <Compile Include="Controllers\Calculation\RegistryOfPaymentsController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="CountryController.generated.cs">
@@ -812,7 +808,7 @@
     <Content Include="Views\RegistryOfPayments\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Shared\LoginControl.cshtml" />
-    <Content Include="Views\ApplicationPrint\Index.cshtml" />
+    <Content Include="Views\Application\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
