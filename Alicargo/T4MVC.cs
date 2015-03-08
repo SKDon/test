@@ -32,6 +32,7 @@ public static partial class MVC
     public static Alicargo.Controllers.Application.ApplicationController Application = new Alicargo.Controllers.Application.T4MVC_ApplicationController();
     public static Alicargo.Controllers.Application.ApplicationFilesController ApplicationFiles = new Alicargo.Controllers.Application.T4MVC_ApplicationFilesController();
     public static Alicargo.Controllers.Application.ApplicationListController ApplicationList = new Alicargo.Controllers.Application.T4MVC_ApplicationListController();
+    public static Alicargo.Controllers.Application.ApplicationPrintController ApplicationPrint = new Alicargo.Controllers.Application.T4MVC_ApplicationPrintController();
     public static Alicargo.Controllers.Application.ApplicationUpdateController ApplicationUpdate = new Alicargo.Controllers.Application.T4MVC_ApplicationUpdateController();
     public static Alicargo.Controllers.Application.ClientApplicationController ClientApplication = new Alicargo.Controllers.Application.T4MVC_ClientApplicationController();
     public static Alicargo.Controllers.Application.SenderApplicationController SenderApplication = new Alicargo.Controllers.Application.T4MVC_SenderApplicationController();
@@ -413,6 +414,7 @@ namespace Links
             private const string URLPATH = "~/Content/app";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string avion_png = Url("avion.png");
             public static readonly string bill_settings_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bill-settings.min.css") ? Url("bill-settings.min.css") : Url("bill-settings.css");
                  
             public static readonly string calculation_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/calculation-grid.min.css") ? Url("calculation-grid.min.css") : Url("calculation-grid.css");
