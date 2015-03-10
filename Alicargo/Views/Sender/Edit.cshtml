@@ -5,10 +5,5 @@
     <h1>
         @Pages.SenderEdit
     </h1>
-    @Html.EditPage(Url.Action(MVC.Sender.Edit()), Pages.Save,
-        new MvcHtmlString("<a href='"
-                          + Url.Action(MVC.ApplicationPrint.Index((long)ViewBag.ApplicationId))
-                          + "' target='blank' class='btn btn-success'>"
-                          + Pages.Print
-                          + "</a>"))
+    @Html.EditPage(Url.Action(MVC.Sender.Edit()), Pages.Save)
 </div>

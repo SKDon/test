@@ -8,7 +8,12 @@
 		@Pages.ApplicationEdit @ViewBag.ApplicationNumber
 		<span>@Entities.Nic: @ViewBag.Nic</span>
 	</h1>
-	@Html.EditPage(Url.Action(MVC.SenderApplication.Edit()), Pages.Save)
+	@Html.EditPage(Url.Action(MVC.SenderApplication.Edit()), Pages.Save,
+			new MvcHtmlString("<a href='"
+								  + Url.Action(MVC.ApplicationPrint.Index((long)ViewBag.ApplicationId))
+								  + "' target='blank' class='btn btn-success'>"
+								  + Pages.Print
+								  + "</a>"))
 	<hr />
 	@Html.Action(MVC.ApplicationFiles.Sender((long)ViewBag.ApplicationId))
 </div>
