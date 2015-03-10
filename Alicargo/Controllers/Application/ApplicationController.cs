@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
@@ -86,14 +85,7 @@ namespace Alicargo.Controllers.Application
             ViewBag.Carriers = _carriers.GetAll().OrderBy(x => x.Name).ToDictionary(x => (long?) x.Id, x => x.Name);
         }
 
-        public virtual ActionResult Print(long id)
-        {
-            return View(new ApplicationPrintModel
-            {
-                City = "city",
-                Text = id.ToString(CultureInfo.InvariantCulture)
-            });
-        }
+        
 
         #region Edit
 

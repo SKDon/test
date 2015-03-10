@@ -402,4 +402,7 @@
   <data name="RegistryOfPayments" xml:space="preserve">
     <value>Registry of payments</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
 </root>

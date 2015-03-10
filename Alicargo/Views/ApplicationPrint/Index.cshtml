@@ -1,0 +1,44 @@
+﻿@model ApplicationPrintModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Avion Russia</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <style>
+        html, body {
+        }
+
+        .container {
+            
+        }
+
+        span {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+            span.text {
+                font-size: 40px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="text">
+            @Html.DisplayFor(model => model.Text)
+        </span>
+        <hr />
+        <span>
+            @Html.DisplayFor(model => model.City)
+        </span>
+        <script>
+            window.print();
+            window.close();
+        </script>
+    </div>
+</body>
+</html>
