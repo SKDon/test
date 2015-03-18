@@ -37,8 +37,8 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 		{
 			var bill = _bills.Get(applicationId);
 
-			using(var stream = new MemoryStream())
-			using(var document = new Document(PageSize.A4, 30, 30, 30, 30))
+			using (var stream = new MemoryStream())
+			using (var document = new Document(PageSize.A4, 30, 30, 30, 30))
 			{
 				PdfWriter.GetInstance(document, stream);
 				document.Open();
@@ -167,7 +167,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 			table.DefaultCell.Border = Rectangle.NO_BORDER;
 
 			var price = (bill.Price * bill.EuroToRuble);
-			var priceVat = (price * bill.VAT).ToString("N2");
+			var priceVat = GetPriceVAT(bill.VAT, price).ToString("N2");
 
 			table.AddCell("Итого:".Phrase(BoldFont).RightCell().NoBorder());
 			table.AddCell(price.ToString("N2").Phrase(BoldFont).RightCell().NoBorder());
@@ -185,6 +185,11 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 				.Phrase(DefaultFont));
 			document.Add((NumByWords.RurPhrase(price) + Environment.NewLine).Phrase(BoldFont));
 			Line(document);
+		}
+
+		private static decimal GetPriceVAT(decimal vat, decimal price)
+		{
+			return price / (vat + 1) * vat;
 		}
 
 		private static void AddParticipants(Document document, BillData bill)

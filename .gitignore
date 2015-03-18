@@ -155,3 +155,4 @@ $RECYCLE.BIN/
 *.etl
 *.generated.cs
 /packages
+*.DotSettings
