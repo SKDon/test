@@ -3,7 +3,7 @@ using System.Linq;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Dapper;
 
-namespace Alicargo.DataAccess.DbContext
+namespace Alicargo.DataAccess.DbContext 
 {
 	public sealed class SqlProcedureExecutor : ISqlProcedureExecutor
 	{
