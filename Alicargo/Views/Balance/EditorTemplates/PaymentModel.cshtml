@@ -1,0 +1,20 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.ViewModels.Calculation.Admin.PaymentModel
+
+<div class="row">
+	<div class="span2">
+		@Html.EditorWithLabelFor(x => x.Money)
+		@Html.LabelFor(model => model.Timestamp)
+		<div class="date-holder">
+			@Html.EditorFor(model => model.Timestamp)
+		</div>
+		<script>
+			$(function() {
+				$(".date-holder input").kendoDatePicker();
+			})
+		</script>
+	</div>
+	<div class="span8">
+		@Html.EditorWithLabelFor(x => x.Comment)
+	</div>
+</div>

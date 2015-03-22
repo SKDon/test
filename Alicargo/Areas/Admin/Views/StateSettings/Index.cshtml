@@ -1,0 +1,48 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.DataAccess.Contracts.Resources
+@using Resources
+@model Alicargo.Areas.Admin.Models.State.StateSettingsModel
+<div class="template-edit-settings container-edit">
+	<b>
+		@ViewBag.StateName
+	</b>
+	@using(Html.BeginForm())
+	{
+		<table>
+			<tr>
+				<td class="title"></td>
+				<td class="title">@Enums.Admin</td>
+				<td class="title">@Enums.Manager</td>
+				<td class="title">@Enums.Sender</td>
+				<td class="title">@Enums.Broker</td>
+				<td class="title">@Enums.Forwarder</td>
+				<td class="title">@Enums.Client</td>
+				<td class="title">@Entities.Carrier</td>
+			</tr>
+			<tr>
+				<td class="title">@Pages.StateSettings_Availabilities</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Admin)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Manager)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Sender)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Broker)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Forwarder)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Client)</td>
+				<td>@Html.CheckBoxFor(x => x.Availabilities.Carrier)</td>
+			</tr>
+			<tr>
+				<td class="title">@Pages.StateSettings_Visibilities</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Admin)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Manager)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Sender)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Broker)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Forwarder)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Client)</td>
+				<td>@Html.CheckBoxFor(x => x.Visibilities.Carrier)</td>
+			</tr>
+		</table>
+		<p>
+			<input type="submit" class="btn btn-primary" value="@Pages.Save" />
+			@Html.ActionLink(Pages.Cancel, MVC.Admin.StateSettings.Index(), new { @class = "btn" })
+		</p>
+	}
+</div>

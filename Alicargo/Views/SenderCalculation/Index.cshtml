@@ -1,0 +1,15 @@
+﻿@using Alicargo.Mvc
+@using Resources
+@inherits BaseWebViewPage
+<p>
+	@Html.ActionLink(Pages.Excel, MVC.SenderCalculation.Excel(), new { @class = "btn btn-info" })
+</p>
+<div id="calculation-grid" class="grid"></div>
+
+@section scripts
+{
+	<script type="text/x-kendo-template" id="calculation-grid-details-template">
+        @Html.Partial("Details")
+	</script>
+	@Scripts.Render(JsPaths.SenderCalculationJs)	
+}

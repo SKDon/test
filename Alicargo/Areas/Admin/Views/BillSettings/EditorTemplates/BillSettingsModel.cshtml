@@ -1,0 +1,41 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.Areas.Admin.Models.BillSettingsModel
+
+<div class="bill-settings">
+	@Html.HiddenFor(x => x.Version)
+	<div class="row">
+		<div class="span12">
+			@Html.EditorWithLabelFor(x => x.HeaderText)
+		</div>
+	</div>
+	@Html.EditorWithLabelFor(x => x.BankDetails)
+	<div class="other-details">
+		<div class="row">
+			<div class="span12">
+				@Html.EditorWithLabelFor(x => x.Shipper)
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				@Html.EditorWithLabelFor(x => x.Head)
+			</div>
+			<div class="span3">
+				@Html.EditorWithLabelFor(x => x.Accountant)
+			</div>
+			<div class="span3">
+				@Html.EditorWithLabelFor(x => x.VAT)
+			</div>
+			<div class="span3">
+				@Html.EditorWithLabelFor(x => x.EuroToRuble)
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				@Html.EditorWithLabelFor(x => x.AutoUpdatePeriodHours)
+			</div>
+			<div class="span8">
+				@Html.EditorWithLabelFor(x => x.SourceUrl)
+			</div>
+		</div>
+	</div>
+</div>

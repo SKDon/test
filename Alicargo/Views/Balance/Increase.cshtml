@@ -1,0 +1,12 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.ViewModels.Calculation.Admin.PaymentModel
+<div class="container-edit">
+	<h1>
+		@Pages.BalanceIncrease: @ViewBag.Nic,
+		@Entities.Balance: @ViewBag.Balance.ToString("N2")
+	</h1>
+	@Html.EditPage(Url.Action(MVC.Balance.Increase((long)ViewBag.ClientId)), Pages.Add)
+	@Html.Action(MVC.Balance.History((long)ViewBag.ClientId))
+</div>

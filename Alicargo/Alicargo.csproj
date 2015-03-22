@@ -1,0 +1,927 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8666B402-84B6-49D4-ABD7-B2966955C9CB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alicargo</RootNamespace>
+    <AssemblyName>Alicargo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>
+    </NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=3.1.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPPlus.3.1.3.3\lib\net35\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\iTextSharp.5.5.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ninject.extensions.conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="T4MVCExtensions">
+      <HintPath>..\packages\T4MVCExtensions.3.10.0\lib\net40\T4MVCExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin.BillController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.BillSettingsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.StateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.StateSettingsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdminAwbController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AirWaybillController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationFilesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationListController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationPrintController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationUpdateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\SignalRChatStartup.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BillController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BillSettingsController.cs" />
+    <Compile Include="Areas\Admin\Models\BankDetails.cs" />
+    <Compile Include="Areas\Admin\Models\BillModel.cs" />
+    <Compile Include="Areas\Admin\Models\BillSettingsModel.cs" />
+    <Compile Include="Areas\Admin\Serivices\Abstract\IBillPdf.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\BillManager.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\BillModelFactory.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\BillPdf.cs" />
+    <Compile Include="Areas\Admin\Serivices\Abstract\IBillManager.cs" />
+    <Compile Include="Areas\Admin\Serivices\Abstract\IBillModelFactory.cs" />
+    <Compile Include="Areas\Admin\Serivices\Bill\NumByWords.cs" />
+    <Compile Include="Areas\Forwarder\Controllers\ApplicationsController.cs" />
+    <Compile Include="Areas\Forwarder\ForwarderAreaRegistration.cs" />
+    <Compile Include="AuthenticationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AwbFilesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BalanceController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BrokerAwbController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalculationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarrierController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChatController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientApplicationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientCalculationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\Application\ApplicationPrintController.cs" />
+    <Compile Include="Controllers\Calculation\RegistryOfPaymentsController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="CountryController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicScriptController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarder.ApplicationsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarder.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ForwarderUserController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MvcHelpers\Filters\AccessAuthorizationFilter.cs" />
+    <Compile Include="RegistryOfPaymentsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RestorePasswordController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SenderApplicationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SenderAwbController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SenderCalculationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SenderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Application\ForwarderApplication.cs" />
+    <Compile Include="Services\Abstract\IForwarderApplication.cs" />
+    <Compile Include="Services\AuthenticationManager.cs" />
+    <Compile Include="Services\Application\OrderHelper.cs" />
+    <Compile Include="Controllers\Application\ApplicationController.cs" />
+    <Compile Include="Controllers\Application\ApplicationListController.cs" />
+    <Compile Include="Controllers\Application\ApplicationUpdateController.cs" />
+    <Compile Include="Controllers\Application\ClientApplicatonController.cs" />
+    <Compile Include="Controllers\Awb\AdminAwbController.cs" />
+    <Compile Include="Controllers\Awb\AwbFilesController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\EmailTemplateController.cs" />
+    <Compile Include="Controllers\Application\ApplicationFilesController.cs" />
+    <Compile Include="Controllers\Application\SenderApplicationController.cs" />
+    <Compile Include="Controllers\Calculation\BalanceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StateController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StateSettingsController.cs" />
+    <Compile Include="Controllers\User\ForwarderUserController.cs" />
+    <Compile Include="Controllers\User\RestorePasswordController.cs" />
+    <Compile Include="App_Start\Mvc\CssPaths.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\PathAttribute.cs" />
+    <Compile Include="Services\Abstract\ICountryService.cs" />
+    <Compile Include="Services\Abstract\ICityService.cs" />
+    <Compile Include="Services\Abstract\IClientApplicationManager.cs" />
+    <Compile Include="Services\Abstract\IClientCalculationPresenter.cs" />
+    <Compile Include="Services\AirWaybill\AwbMapper.cs" />
+    <Compile Include="Services\Application\ClientApplicationManager.cs" />
+    <Compile Include="Services\Chat\ChatHub.cs" />
+    <Compile Include="Services\CountryService.cs" />
+    <Compile Include="Services\CityService.cs" />
+    <Compile Include="Services\Excel\ExcelGenerator.cs" />
+    <Compile Include="Services\Excel\ExcelSenderCalculation.cs" />
+    <Compile Include="Services\Excel\ExcelAdminCalculation.cs" />
+    <Compile Include="Services\Abstract\IExcelGenerator.cs" />
+    <Compile Include="Services\Excel\Rows\CarrierApplicationExcelRow.cs" />
+    <Compile Include="Services\LanguageName.cs" />
+    <Compile Include="Controllers\Calculation\ClientCalculationController.cs" />
+    <Compile Include="Controllers\Calculation\SenderCalculationController.cs" />
+    <Compile Include="Controllers\User\SenderController.cs" />
+    <Compile Include="MvcHelpers\ModelBinders\ClientModelBinder.cs" />
+    <Compile Include="Properties\ProjectInfo.cs" />
+    <Compile Include="Services\Abstract\ISenderCalculationPresenter.cs" />
+    <Compile Include="Services\Abstract\ISenderService.cs" />
+    <Compile Include="Services\Calculation\ClientCalculationPresenter.cs" />
+    <Compile Include="Services\Calculation\SenderCalculationPresenter.cs" />
+    <Compile Include="Services\Excel\Rows\BaseApplicationExcelRow.cs" />
+    <Compile Include="Services\Users\Client\ClientBalance.cs" />
+    <Compile Include="Services\Users\Client\ClientBalanceWithEvent.cs" />
+    <Compile Include="Services\Users\Client\ClientManagerWithEvent.cs" />
+    <Compile Include="Services\Users\SenderService.cs" />
+    <Compile Include="App_Start\Mvc\BinderConfig.cs" />
+    <Compile Include="App_Start\CompositionRoot.cs" />
+    <Compile Include="App_Start\CompositionRootHelper.cs" />
+    <Compile Include="App_Start\Jobs\CompositionJobsHelper.cs" />
+    <Compile Include="Controllers\User\AuthenticationController.cs" />
+    <Compile Include="Controllers\Awb\BrokerAwbController.cs" />
+    <Compile Include="Controllers\Calculation\CalculationController.cs" />
+    <Compile Include="Controllers\ExcelController.cs" />
+    <Compile Include="Controllers\Awb\SenderAwbController.cs" />
+    <Compile Include="MvcHelpers\Extensions\DropDownListHelpers.cs" />
+    <Compile Include="MvcHelpers\Filters\CustomContentTypeAttribute.cs" />
+    <Compile Include="App_Start\Mvc\JsPaths.cs" />
+    <Compile Include="Services\Abstract\ISenderApplicationManager.cs" />
+    <Compile Include="Services\Abstract\IApplicationGrouper.cs" />
+    <Compile Include="Controllers\DynamicScriptController.cs" />
+    <Compile Include="Controllers\TransitController.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransform.cs" />
+    <Compile Include="MvcHelpers\BundleHelpres\StyleRelativePathTransformBundle.cs" />
+    <Compile Include="MvcHelpers\Filters\CustomHandleErrorInfo.cs" />
+    <Compile Include="Controllers\User\CarrierController.cs" />
+    <Compile Include="Controllers\Awb\AirWaybillController.cs" />
+    <Compile Include="MvcHelpers\BaseWebViewPage.cs" />
+    <Compile Include="MvcHelpers\Filters\HandleErrorAttribute.cs" />
+    <Compile Include="MvcHelpers\Extensions\FileExtensions.cs" />
+    <Compile Include="MvcHelpers\Extensions\PageHelpers.cs" />
+    <Compile Include="Resources\Validation.Designer.cs">
+      <DependentUpon>Validation.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Pages.Designer.cs">
+      <DependentUpon>Pages.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Pages.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pages.it.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Validation.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validation.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\Mvc\BundleConfig.cs" />
+    <Compile Include="Controllers\User\ClientController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\User\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MvcHelpers\Extensions\LinkHelper.cs" />
+    <Compile Include="Resources\Pages.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pages.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MvcHelpers\Filters\AccessAttribute.cs" />
+    <Compile Include="MvcHelpers\Filters\CultureFilterAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Validation.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validation.it.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Abstract\IApplicationListItemMapper.cs" />
+    <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
+    <Compile Include="Services\Abstract\IAdminApplicationManager.cs" />
+    <Compile Include="Services\Abstract\IApplicationPresenter.cs" />
+    <Compile Include="Services\Abstract\IAuthenticationService.cs" />
+    <Compile Include="Services\Abstract\IAwbUpdateManager.cs" />
+    <Compile Include="Services\Abstract\IAwbPresenter.cs" />
+    <Compile Include="Services\Abstract\IAdminCalculationPresenter.cs" />
+    <Compile Include="Services\Abstract\IClientManager.cs" />
+    <Compile Include="Services\Abstract\ITransitService.cs" />
+    <Compile Include="Services\Abstract\IUserService.cs" />
+    <Compile Include="Services\AirWaybill\AwbUpdateGtdManager.cs" />
+    <Compile Include="Services\Application\ApplicationAwbManager.cs" />
+    <Compile Include="Services\Application\ApplicationListItemMapper.cs" />
+    <Compile Include="Services\Application\ApplicationListPresenter.cs" />
+    <Compile Include="Services\Application\SenderApplicationManager.cs" />
+    <Compile Include="Services\Calculation\AdminCalculationPresenter.cs" />
+    <Compile Include="Services\Users\Client\ClientPermissions.cs" />
+    <Compile Include="Services\Users\Client\ClientPresenter.cs" />
+    <Compile Include="Services\Abstract\IClientPresenter.cs" />
+    <Compile Include="Services\Excel\Rows\AdminApplicationExcelRow.cs" />
+    <Compile Include="Services\Excel\ApplicationExcelRowSource.cs" />
+    <Compile Include="Services\Abstract\IApplicationExcelRowSource.cs" />
+    <Compile Include="Services\Excel\Rows\ForwarderApplicationExcelRow.cs" />
+    <Compile Include="Services\Excel\Rows\SenderApplicationExcelRow.cs" />
+    <Compile Include="Services\AirWaybill\AwbUpdateManager.cs" />
+    <Compile Include="Services\AirWaybill\AwbUpdateManagerWithEvent.cs" />
+    <Compile Include="Services\Application\AdminApplicationManager.cs" />
+    <Compile Include="Services\Application\ApplicationPresenter.cs" />
+    <Compile Include="Services\Application\ApplicationGrouper.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\Users\Client\ClientManager.cs" />
+    <Compile Include="Services\IdentityService.cs" />
+    <Compile Include="Services\AirWaybill\AwbPresenter.cs" />
+    <Compile Include="Services\Log4NetWrapper.cs" />
+    <Compile Include="Services\TransitService.cs" />
+    <Compile Include="Services\Users\UserService.cs" />
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransitController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AirWaybill\AirWaybillListItem.cs" />
+    <Compile Include="ViewModels\AirWaybill\AwbSenderModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationClientModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationGroup.cs" />
+    <Compile Include="ViewModels\Application\ApplicationListItem.cs" />
+    <Compile Include="ViewModels\Application\ApplicationPrintModel.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\CalculationGroup.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\PaymentModel.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\CalculationListCollection.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\RegistryOfPaymentsItem.cs" />
+    <Compile Include="ViewModels\Calculation\Client\ClientCalculationGroup.cs" />
+    <Compile Include="ViewModels\Calculation\Client\ClientCalculationItem.cs" />
+    <Compile Include="ViewModels\Calculation\Client\ClientCalculationListCollection.cs" />
+    <Compile Include="ViewModels\Calculation\Sender\SenderCalculationAwbInfo.cs" />
+    <Compile Include="ViewModels\Calculation\Sender\SenderCalculationGroup.cs" />
+    <Compile Include="ViewModels\Calculation\Sender\SenderCalculationItem.cs" />
+    <Compile Include="ViewModels\Calculation\Sender\SenderCalculationListCollection.cs" />
+    <Compile Include="ViewModels\CountryEditModel.cs" />
+    <Compile Include="ViewModels\CityEditModel.cs" />
+    <Compile Include="ViewModels\DynamicScriptMethodDescription.cs" />
+    <Compile Include="ViewModels\Application\ApplicationSenderModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
+    <Compile Include="ViewModels\EmailTemplate\ApplicationEventTemplateModel.cs" />
+    <Compile Include="ViewModels\EmailTemplate\EmailTemplateSettingsModel.cs" />
+    <Compile Include="ViewModels\Files\ApplicationFilesEdit.cs" />
+    <Compile Include="ViewModels\CurrencyModel.cs" />
+    <Compile Include="ViewModels\AuthenticationModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\AwbBrokerModel.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\CalculationAwbInfo.cs" />
+    <Compile Include="ViewModels\Calculation\Admin\CalculationItem.cs" />
+    <Compile Include="ViewModels\CargoIsCustomsClearedButtonModel.cs" />
+    <Compile Include="ViewModels\Helpers\EmailTemplateSettingsModelHelper.cs" />
+    <Compile Include="Areas\Admin\Models\State\StateCreateModel.cs" />
+    <Compile Include="Areas\Admin\Models\State\StateEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\State\StateSettingsModel.cs" />
+    <Compile Include="ViewModels\TransitMapper.cs" />
+    <Compile Include="ViewModels\User\ClientListItem.cs" />
+    <Compile Include="ViewModels\User\ClientModel.cs" />
+    <Compile Include="ViewModels\TransitEditModel.cs" />
+    <Compile Include="ViewModels\User\CarrierModel.cs" />
+    <Compile Include="ViewModels\User\ForwarderModel.cs" />
+    <Compile Include="ViewModels\User\SenderModel.cs" />
+    <Compile Include="ViewModels\User\UserList.cs" />
+    <Compile Include="ViewModels\Application\ApplicationIndexModel.cs" />
+    <Compile Include="ViewModels\Application\ApplicationListCollection.cs" />
+    <Compile Include="ViewModels\Application\ApplicationAdminModel.cs" />
+    <Compile Include="ViewModels\AirWaybill\AwbAdminModel.cs" />
+    <Compile Include="ViewModels\User\SignIdModel.cs" />
+    <Compile Include="ViewModels\User\UserListItem.cs" />
+    <Compile Include="ViewModels\User\UserModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\Mvc\FilterConfig.cs" />
+    <Compile Include="App_Start\Mvc\RouteConfig.cs" />
+    <Content Include="Content\app\avion.png" />
+    <Content Include="Content\app\bill-settings.css" />
+    <Content Include="Content\app\calculation-grid.css" />
+    <Content Include="Content\app\common.css" />
+    <Content Include="Content\app\kendo.css" />
+    <Content Include="Content\app\payment.css" />
+    <Content Include="Content\bootstrap\fileupload\bootstrap-fileupload.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\kendo\2014.1.318\Default\editor.png" />
+    <Content Include="Content\kendo\2014.1.318\Default\imagebrowser.png" />
+    <Content Include="Content\kendo\2014.1.318\Default\indeterminate.gif" />
+    <Content Include="Content\kendo\2014.1.318\Default\loading-image.gif" />
+    <Content Include="Content\kendo\2014.1.318\Default\loading.gif" />
+    <Content Include="Content\kendo\2014.1.318\Default\loading_2x.gif" />
+    <Content Include="Content\kendo\2014.1.318\Default\slider-h.gif" />
+    <Content Include="Content\kendo\2014.1.318\Default\slider-v.gif" />
+    <Content Include="Content\kendo\2014.1.318\Default\sprite.png" />
+    <Content Include="Content\kendo\2014.1.318\Default\sprite_2x.png" />
+    <Content Include="Content\kendo\2014.1.318\kendo.common.min.css" />
+    <Content Include="Content\kendo\2014.1.318\kendo.default.min.css" />
+    <Content Include="Content\kendo\2014.1.318\textures\brushed-metal.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots1.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots10.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots11.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots12.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots13.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots2.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots3.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots4.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots5.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots6.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots7.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots8.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\dots9.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\glass-lighter.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\glass.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\highlight.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\hsv-gradient.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\hue.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\leather1.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\leather2.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\noise.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\stripe1.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\stripe2.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\stripe3.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\stripe4.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\stripe5.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\stripe6.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\transparency.png" />
+    <Content Include="Content\kendo\2014.1.318\textures\transtexture.png" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\jMetro\images\ui-icons_2d89ef_0.png" />
+    <Content Include="Content\themes\jMetro\images\ui-icons_525252_0.png" />
+    <Content Include="Content\themes\jMetro\images\ui-icons_66B3FF_0.png" />
+    <Content Include="Content\themes\jMetro\images\ui-icons_d4d4d4_0.png" />
+    <Content Include="Content\themes\jMetro\images\ui-icons_ffffff_0.png" />
+    <Content Include="Content\themes\jMetro\jquery-ui.css" />
+    <Content Include="Scripts\app\AirWaybill\Columns.js" />
+    <Content Include="Scripts\app\AirWaybill\Files.js" />
+    <Content Include="Scripts\app\AirWaybill\Grid.js" />
+    <Content Include="Scripts\app\Alicargo.js" />
+    <Content Include="Scripts\app\Application\Columns.js" />
+    <Content Include="Scripts\app\Application\Files.js" />
+    <Content Include="Scripts\app\Application\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Admin\Bill.js" />
+    <Content Include="Scripts\app\Calculation\Admin\Columns.js" />
+    <Content Include="Scripts\app\Calculation\Admin\DataSource.js" />
+    <Content Include="Scripts\app\Calculation\Admin\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Admin\RegistryOfPaymentsGrid.js" />
+    <Content Include="Scripts\app\Calculation\Client\Columns.js" />
+    <Content Include="Scripts\app\Calculation\Client\Grid.js" />
+    <Content Include="Scripts\app\Calculation\Sender\Columns.js" />
+    <Content Include="Scripts\app\Calculation\Sender\Grid.js" />
+    <Content Include="Scripts\app\Country\Grid.js" />
+    <Content Include="Scripts\app\City\Grid.js" />
+    <Content Include="Scripts\app\Client\Grid.js" />
+    <Content Include="Scripts\app\Common.js" />
+    <Content Include="Scripts\app\Files.js" />
+    <Content Include="Scripts\app\Forwarder\Application\Columns.js" />
+    <Content Include="Scripts\app\Forwarder\Application\Grid.js" />
+    <Content Include="Scripts\app\it.js" />
+    <Content Include="Scripts\app\CurrencyType.js" />
+    <Content Include="Scripts\app\ru.js" />
+    <Content Include="Content\bootstrap\fileupload\bootstrap-fileupload.js" />
+    <Content Include="Content\bootstrap\fileupload\bootstrap-fileupload.min.css" />
+    <Content Include="Content\bootstrap\fileupload\bootstrap-fileupload.min.js" />
+    <Content Include="Content\app\layout.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="App_Code\Helpers.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\BillSettings\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\BillSettings\EditorTemplates\BillSettingsModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill\Preview.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BankDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill\Sent.cshtml" />
+    <Content Include="Areas\Forwarder\Views\web.config" />
+    <Content Include="Areas\Forwarder\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Forwarder\Views\Applications\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
+    <None Include="Scripts\jQuery\jquery-2.1.1.intellisense.js" />
+    <None Include="Scripts\jQuery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jQuery\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jQuery\jquery.signalR-2.1.2.min.js" />
+    <Content Include="Scripts\jQuery\jquery-ui-1.11.1.js" />
+    <Content Include="Scripts\jQuery\jquery-ui.min-1.11.1.js" />
+    <Content Include="Scripts\jQuery\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jQuery\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jQuery\jquery.validate.js" />
+    <Content Include="Scripts\jQuery\jquery.validate.min.js" />
+    <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.1.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.1.min.map" />
+    <Content Include="Scripts\app\State\Edit.js" />
+    <Content Include="Scripts\app\State\Grid.js" />
+    <Content Include="Scripts\app\Template\Edit.js" />
+    <Content Include="Scripts\app\Template\Grid.js" />
+    <Content Include="Scripts\app\User\Grid.js" />
+    <Content Include="Scripts\jQuery\jquery.cookie.js" />
+    <Content Include="Scripts\jQuery\globalize\cultures\globalize.culture.it.js" />
+    <Content Include="Scripts\jQuery\globalize\cultures\globalize.culture.ru.js" />
+    <Content Include="Scripts\jQuery\globalize\globalize.js" />
+    <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.en.min.js" />
+    <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.it.min.js" />
+    <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.ru.min.js" />
+    <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js" />
+    <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js.map" />
+    <None Include="T4MVC.tt.hooks.t4" />
+    <None Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4MVC.tt.settings.xml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\Create.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
+    <Content Include="Views\Client\EditorTemplates\ClientModel.cshtml" />
+    <Content Include="Views\Transit\EditorTemplates\TransitEditModel.cshtml" />
+    <Content Include="Views\ApplicationList\Index.cshtml" />
+    <Content Include="Views\Application\Create.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Dev.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Authentication\Login.cshtml" />
+    <Content Include="Views\Application\Edit.cshtml" />
+    <Content Include="Views\Shared\Memu.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
+    <Content Include="Views\Application\EditorTemplates\ApplicationAdminModel.cshtml" />
+    <Content Include="Views\ApplicationList\AdminTemplate.cshtml" />
+    <Content Include="Views\ApplicationList\Tools.cshtml" />
+    <Content Include="Views\AdminAwb\Create.cshtml" />
+    <Content Include="Views\AdminAwb\EditorTemplates\AwbAdminModel.cshtml" />
+    <Content Include="Views\AirWaybill\Index.cshtml" />
+    <Content Include="Views\AdminAwb\Edit.cshtml" />
+    <Content Include="Views\AirWaybill\AdminDetails.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\ApplicationList\AdminDetails.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\EditorTemplates\UserModel.cshtml" />
+    <Content Include="Views\AirWaybill\CargoIsCustomsClearedButton.cshtml" />
+    <Content Include="Views\BrokerAwb\Edit.cshtml" />
+    <Content Include="Views\BrokerAwb\EditorTemplates\AwbBrokerModel.cshtml" />
+    <Content Include="Views\Shared\Message.cshtml" />
+    <Content Include="Views\SenderApplication\Edit.cshtml" />
+    <Content Include="Views\SenderApplication\EditorTemplates\ApplicationSenderModel.cshtml" />
+    <Content Include="Views\SenderApplication\Create.cshtml" />
+    <Content Include="Views\ApplicationList\SenderDetails.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CurrencyModel.cshtml" />
+    <Content Include="Views\Transit\EditByApplication.cshtml" />
+    <Content Include="Views\Transit\EditByClient.cshtml" />
+    <Content Include="Views\Authentication\Client.cshtml" />
+    <Content Include="Views\SenderAwb\Edit.cshtml" />
+    <Content Include="Views\SenderAwb\EditorTemplates\AwbSenderModel.cshtml" />
+    <Content Include="Views\DynamicScript\Roles.cshtml" />
+    <Content Include="Views\DynamicScript\Urls.cshtml" />
+    <Content Include="Views\DynamicScript\Localization.cshtml" />
+    <Content Include="Views\AirWaybill\SenderDetails.cshtml" />
+    <Content Include="Views\AirWaybill\BrokerDetails.cshtml" />
+    <Content Include="Views\SenderAwb\Create.cshtml" />
+    <Content Include="Views\Calculation\Index.cshtml" />
+    <Content Include="Views\DynamicScript\States.cshtml" />
+    <Content Include="Views\Calculation\Details.cshtml" />
+    <Content Include="Views\ClientCalculation\Index.cshtml" />
+    <Content Include="Views\ApplicationList\SenderTemplate.cshtml" />
+    <Content Include="Views\ApplicationList\ClientTemplate.cshtml" />
+    <Content Include="Views\ApplicationList\ClientDetails.cshtml" />
+    <Content Include="Views\Shared\DynamicScripts.cshtml" />
+    <Content Include="Views\Sender\Create.cshtml" />
+    <Content Include="Views\Sender\Edit.cshtml" />
+    <Content Include="Views\Sender\EditorTemplates\SenderModel.cshtml" />
+    <Content Include="Views\SenderCalculation\Index.cshtml" />
+    <Content Include="Views\SenderCalculation\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\State\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\State\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\State\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\State\EditorTemplates\StateEditModel.cshtml" />
+    <Content Include="Areas\Admin\Views\State\EditorTemplates\StateCreateModel.cshtml" />
+    <Content Include="Areas\Admin\Views\StateSettings\Index.cshtml" />
+    <Content Include="Views\EmailTemplate\Index.cshtml" />
+    <Content Include="Views\EmailTemplate\Edit.cshtml" />
+    <Content Include="Views\EmailTemplate\EditorTemplates\EventTemplateModel.cshtml" />
+    <Content Include="Views\EmailTemplate\Help.cshtml" />
+    <Content Include="Views\City\Index.cshtml" />
+    <Content Include="Views\City\Edit.cshtml" />
+    <Content Include="Views\City\Create.cshtml" />
+    <Content Include="Views\City\EditorTemplates\CityEditModel.cshtml" />
+    <Content Include="Views\ApplicationFiles\Admin.cshtml" />
+    <Content Include="Views\ApplicationFiles\FilesHolder.cshtml" />
+    <Content Include="Views\ApplicationFiles\Sender.cshtml" />
+    <Content Include="Views\ClientApplication\Create.cshtml" />
+    <Content Include="Views\ClientApplication\EditorTemplates\ApplicationClientModel.cshtml" />
+    <Content Include="Views\ClientApplication\Edit.cshtml" />
+    <Content Include="Views\ApplicationFiles\Client.cshtml" />
+    <Content Include="Views\Balance\EditorTemplates\PaymentModel.cshtml" />
+    <Content Include="Views\Balance\Decrease.cshtml" />
+    <Content Include="Views\RestorePassword\Index.cshtml" />
+    <Content Include="Views\RestorePassword\Finish.cshtml" />
+    <Content Include="Views\RestorePassword\NewPassword.cshtml" />
+    <Content Include="Views\RestorePassword\UnknownKey.cshtml" />
+    <Content Include="Views\RestorePassword\Success.cshtml" />
+    <Content Include="Views\Balance\History.cshtml" />
+    <Content Include="Views\Balance\Increase.cshtml" />
+    <Content Include="Views\Balance\BalanceButtons.cshtml" />
+    <Content Include="Views\ClientCalculation\History.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Country\EditorTemplates\CountryEditModel.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\ForwarderUser\Create.cshtml" />
+    <Content Include="Views\ForwarderUser\Edit.cshtml" />
+    <Content Include="Views\ForwarderUser\EditorTemplates\ForwarderModel.cshtml" />
+    <Content Include="Views\Carrier\EditorTemplates\CarrierModel.cshtml" />
+    <Content Include="Views\Carrier\Create.cshtml" />
+    <Content Include="Views\Carrier\Edit.cshtml" />
+    <Content Include="Views\AwbFiles\Admin.cshtml" />
+    <Content Include="Views\AwbFiles\Broker.cshtml" />
+    <Content Include="Views\AwbFiles\Sender.cshtml" />
+    <Content Include="Views\AwbFiles\FilesHolder.cshtml" />
+    <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\RegistryOfPayments\Index.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Shared\LoginControl.cshtml" />
+    <Content Include="Views\ApplicationPrint\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alicargo.Core.Contracts\Alicargo.Core.Contracts.csproj">
+      <Project>{5d298560-5149-4dbb-9444-ee2ee9430483}</Project>
+      <Name>Alicargo.Core.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Core\Alicargo.Core.csproj">
+      <Project>{577b60f9-32f7-4117-97da-40743bff4ca0}</Project>
+      <Name>Alicargo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.DataAccess.Contracts\Alicargo.DataAccess.Contracts.csproj">
+      <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
+      <Name>Alicargo.DataAccess.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.DataAccess\Alicargo.DataAccess.csproj">
+      <Project>{37068536-3066-4877-91e0-05031d2c5ca3}</Project>
+      <Name>Alicargo.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Jobs\Alicargo.Jobs.csproj">
+      <Project>{c2133743-7762-4bd9-a824-eb039e41af58}</Project>
+      <Name>Alicargo.Jobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.Utilities\Alicargo.Utilities.csproj">
+      <Project>{28A88A2C-7BA4-4F4E-9131-AD69B070CD31}</Project>
+      <Name>Alicargo.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Validation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Pages.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pages.it.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Pages.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pages.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Pages.ru.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Validation.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.it.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Validation.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.ru.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Forwarder\Models\" />
+    <Folder Include="Areas\Forwarder\Views\Shared\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8080</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://localhost:8080/</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+</Project>

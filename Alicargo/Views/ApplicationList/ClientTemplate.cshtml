@@ -1,0 +1,72 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@inherits BaseWebViewPage<ApplicationIndexModel>
+
+@helper EditButton()
+{
+	@:# if(StateId != @StateConfig.CargoReceivedStateId){ #
+	<a href="@Url.Action(MVC.ClientApplication.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit.EncodeForKendo()</a>
+	@:# } #
+}
+
+@helper CloseButton()
+{
+	@:# if(CanClose){ #
+	<input class="btn btn-success close-application" type="button" value="@Pages.CargoIsReceived.EncodeForKendo()" />
+	@:# } #
+}
+
+<div class='grid-details'>
+	<div class="properties">
+		@Html.Partial("ClientDetails")
+	</div>
+	<hr />
+	<div class="grid-details-toolbar">
+		@CloseButton()
+		@EditButton()
+		<div class="files">
+			# if(InvoiceFiles != null){ #
+			# for(var i in InvoiceFiles) { #
+			# var item = InvoiceFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+			# if(SwiftFiles != null){ #
+			# for(var i in SwiftFiles) { #
+			# var item = SwiftFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+			# if(DeliveryBillFiles != null){ #
+			# for(i in DeliveryBillFiles) { #
+			# var item = DeliveryBillFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+			# if(Torg12Files != null){ #
+			# for(i in Torg12Files) { #
+			# var item = Torg12Files[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+			# if(CPFiles != null){ #
+			# for(i in CPFiles) { #
+			# var item = CPFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+			# if(PackingFiles != null){ #
+			# for(i in PackingFiles) { #
+			# var item = PackingFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+		</div>
+	</div>
+</div>

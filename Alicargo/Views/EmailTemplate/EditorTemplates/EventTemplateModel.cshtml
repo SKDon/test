@@ -1,0 +1,63 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.DataAccess.Contracts.Enums
+@using Resources = Alicargo.DataAccess.Contracts.Resources
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.ViewModels.EmailTemplate.EventTemplateModel
+
+@Html.HiddenFor(x => x.EventType)
+<div class="row">
+	<div class="span3">
+		<div class="state-edit-checkbox">
+			@Html.EditorWithLabelFor(x => x.EnableEmailSend)
+		</div>
+	</div>
+	<div class="span8 template-edit-settings">
+		<p>
+			<b>
+				@Pages.StateSettings_Recipients:
+			</b>
+			@if(Model.EventType == EventType.BalanceDecreased 
+				|| Model.EventType == EventType.BalanceIncreased
+				|| Model.EventType == EventType.ClientAdded)
+			{
+				@Html.CheckBoxFor(x => x.Settings.Admin)
+				@Html.LabelFor(x => x.Settings.Admin, Resources.Enums.Admin)
+				@Html.CheckBoxFor(x => x.Settings.Manager)
+				@Html.LabelFor(x => x.Settings.Manager, Resources.Enums.Manager)
+				@Html.CheckBoxFor(x => x.Settings.Client)
+				@Html.LabelFor(x => x.Settings.Client, Resources.Enums.Client)
+			}
+			else
+			{
+				@Html.CheckBoxFor(x => x.Settings.Admin)
+				@Html.LabelFor(x => x.Settings.Admin, Resources.Enums.Admin)
+				@Html.CheckBoxFor(x => x.Settings.Manager)
+				@Html.LabelFor(x => x.Settings.Manager, Resources.Enums.Manager)
+				@Html.CheckBoxFor(x => x.Settings.Sender)
+				@Html.LabelFor(x => x.Settings.Sender, Resources.Enums.Sender)
+				@Html.CheckBoxFor(x => x.Settings.Broker)
+				@Html.LabelFor(x => x.Settings.Broker, Resources.Enums.Broker)
+				@Html.CheckBoxFor(x => x.Settings.Forwarder)
+				@Html.LabelFor(x => x.Settings.Forwarder, Resources.Enums.Forwarder)
+				@Html.CheckBoxFor(x => x.Settings.Client)
+				@Html.LabelFor(x => x.Settings.Client, Resources.Enums.Client)
+				@Html.CheckBoxFor(x => x.Settings.Carrier)
+				@Html.LabelFor(x => x.Settings.Carrier, Entities.Carrier)
+			}
+		</p>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="span4">
+		@Html.LabelFor(x => x.Language)
+		@Html.DropDownListFor(x => x.Language, (IDictionary<string, string>)ViewBag.Languages)
+	</div>
+</div>
+<div class="row">
+	<div class="span12">
+		@Html.EditorWithLabelFor(model => model.Subject)
+		@Html.EditorWithLabelFor(model => model.Body)
+	</div>
+</div>

@@ -1,0 +1,14 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model AuthenticationModel
+
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Login)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.NewPassword)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.ConfirmPassword)
+	</div>
+</div>

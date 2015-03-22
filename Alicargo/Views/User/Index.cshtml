@@ -1,0 +1,66 @@
+﻿@using Alicargo.DataAccess.Contracts.Enums
+@using Alicargo.Mvc
+@using Resources
+@model RoleType
+<p>
+	<b>
+		@switch(Model)
+		{
+			case RoleType.Admin:
+				@Pages.Admins
+				break;
+
+			case RoleType.Manager:
+				@Pages.Managers
+				break;
+
+			case RoleType.Sender:
+				@Pages.Senders
+				break;
+			case RoleType.Broker:
+				@Pages.Brokers
+				break;
+
+			case RoleType.Forwarder:
+				@Pages.Forwarders
+				break;
+
+			case RoleType.Carrier:
+				@Pages.Carriers
+				break;
+
+			case RoleType.Client:
+				@Pages.Clients
+				break;
+
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
+	</b>
+	@switch(Model)
+	{
+		case RoleType.Sender:
+			@Html.ActionLink(Pages.Add, MVC.Sender.Create())
+			break;
+
+		case RoleType.Forwarder:
+			@Html.ActionLink(Pages.Add, MVC.ForwarderUser.Create())
+			break;
+
+		case RoleType.Carrier:
+			@Html.ActionLink(Pages.Add, MVC.Carrier.Create())
+			break;
+
+		default:
+			@Html.ActionLink(Pages.Add, MVC.User.Create(Model))
+			break;
+	}
+</p>
+<div id="user-grid" class="grid"></div>
+@section scripts
+{
+	@Scripts.Render(JsPaths.UserListJs)
+	<script>
+		$(function() { Alicargo.Users.Init('@Model'); });
+	</script>
+}

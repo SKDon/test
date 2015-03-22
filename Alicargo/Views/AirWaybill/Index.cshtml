@@ -1,0 +1,35 @@
+﻿@using Alicargo.DataAccess.Contracts.Enums
+@using Alicargo.Mvc
+@using Resources
+@inherits BaseWebViewPage
+@if(IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager))
+{
+	<p>
+		@Html.ActionLink(Pages.AirWaybillAdd, MVC.AdminAwb.Create())
+	</p>
+}
+else if (IdentityService.IsInRole(RoleType.Sender))
+{
+	<p>
+		@Html.ActionLink(Pages.AirWaybillAdd, MVC.SenderAwb.Create())
+	</p>
+}
+<div id="AirWaybill-grid" class="grid"></div>
+@section scripts
+{
+	<script type="text/x-kendo-template" id="AirWaybill-grid-details">
+		@if (IdentityService.IsInRole(RoleType.Broker))
+		{
+			@Html.Partial("BrokerDetails")
+		}
+		else if (IdentityService.IsInRole(RoleType.Sender))
+		{
+			@Html.Partial("SenderDetails")
+		}
+		else
+		{
+			@Html.Partial("AdminDetails")
+		}
+	</script>
+	@Scripts.Render(JsPaths.AwbListJs)
+}

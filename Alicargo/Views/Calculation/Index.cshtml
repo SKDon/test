@@ -1,0 +1,23 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.Mvc
+@using Resources
+@inherits BaseWebViewPage
+<p class="select-client-holder">
+	<span class="pull-right">
+		@Entities.Balance:
+		<span id="total-balance">
+			@ViewBag.TotalBalance.ToString("N2")
+		</span>€
+	</span>
+	@Html.ActionLink(Pages.Excel, MVC.Calculation.Excel(), new { @class = "btn btn-info" })
+	@Html.Action(MVC.Balance.BalanceButtons())
+</p>
+<div id="calculation-grid" class="grid"></div>
+
+@section scripts
+{
+	<script type="text/x-kendo-template" id="calculation-grid-details-template">
+		@Html.Partial("Details")
+	</script>
+	@Scripts.Render(JsPaths.CalculationJs)
+}

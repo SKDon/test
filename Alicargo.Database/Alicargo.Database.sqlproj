@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Alicargo.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{73992516-430c-4ff8-ab71-1685a96da591}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Alicargo.Database</RootNamespace>
+    <AssemblyName>Alicargo.Database</AssemblyName>
+    <ModelCollation>1049,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Dev|AnyCPU' ">
+    <OutputPath>bin\Dev\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables\" />
+    <Folder Include="Stored procedures" />
+    <Folder Include="Types" />
+    <Folder Include="Scripts" />
+    <Folder Include="Stored procedures\User" />
+    <Folder Include="Stored procedures\State" />
+    <Folder Include="Stored procedures\EmailTemplate" />
+    <Folder Include="Stored procedures\Event" />
+    <Folder Include="Tables\User" />
+    <Folder Include="Tables\State" />
+    <Folder Include="Tables\Event" />
+    <Folder Include="Stored procedures\User\Client" />
+    <Folder Include="Stored procedures\Calculation" />
+    <Folder Include="Stored procedures\User\Sender" />
+    <Folder Include="Stored procedures\Transit" />
+    <Folder Include="Stored procedures\User\Forwarder" />
+    <Folder Include="Stored procedures\User\Carrier" />
+    <Folder Include="Tables\Application" />
+    <Folder Include="Stored procedures\Application" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Transit.sql" />
+    <Build Include="Tables\Country.sql" />
+    <Build Include="Types\IdsTable.sql" />
+    <PostDeploy Include="Scripts\PostDeploy.sql" />
+    <Build Include="Tables\EmailMessage.sql" />
+    <Build Include="Stored procedures\EmailMessage_GetNext.sql" />
+    <Build Include="Stored procedures\EmailMessage_SetState.sql" />
+    <Build Include="Stored procedures\EmailMessage_Add.sql" />
+    <Build Include="Tables\EmailTemplate.sql" />
+    <Build Include="Tables\EmailTemplateLocalization.sql" />
+    <Build Include="Types\StringsTable.sql" />
+    <None Include="Scripts\InitStates.sql" />
+    <None Include="Scripts\InitCountries.sql" />
+    <None Include="Scripts\InitUsers.sql" />
+    <None Include="Scripts\TestApplications.sql" />
+    <None Include="Scripts\InitEmailTemplates.sql" />
+    <Build Include="Tables\City.sql" />
+    <Build Include="Stored procedures\City_GetList.sql" />
+    <Build Include="Stored procedures\City_Add.sql" />
+    <Build Include="Stored procedures\City_Update.sql" />
+    <Build Include="Stored procedures\User\User_Add.sql" />
+    <Build Include="Stored procedures\User\User_SetPassword.sql" />
+    <Build Include="Stored procedures\State\State_Add.sql" />
+    <Build Include="Stored procedures\State\State_Delete.sql" />
+    <Build Include="Stored procedures\State\State_GetOrderedList.sql" />
+    <Build Include="Stored procedures\State\State_GetStateAvailabilities.sql" />
+    <Build Include="Stored procedures\State\State_GetStateVisibilities.sql" />
+    <Build Include="Stored procedures\State\State_SetStateAvailabilities.sql" />
+    <Build Include="Stored procedures\State\State_SetStateVisibilities.sql" />
+    <Build Include="Stored procedures\State\State_Update.sql" />
+    <Build Include="Stored procedures\State\StateLocalization_Get.sql" />
+    <Build Include="Stored procedures\State\StateLocalization_Merge.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_GetByEvent.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplate_MergeEvent.sql" />
+    <Build Include="Stored procedures\EmailTemplate\EmailTemplateLocalization_Get.sql" />
+    <Build Include="Stored procedures\Event\Event_Add.sql" />
+    <Build Include="Stored procedures\Event\Event_Delete.sql" />
+    <Build Include="Stored procedures\Event\Event_GetNext.sql" />
+    <Build Include="Stored procedures\Event\Event_SetState.sql" />
+    <Build Include="Stored procedures\Event\EventEmailRecipient_Get.sql" />
+    <Build Include="Stored procedures\Event\EventEmailRecipient_Set.sql" />
+    <Build Include="Stored procedures\User\User_GetPasswordData.sql" />
+    <Build Include="Stored procedures\User\User_SetLanguage.sql" />
+    <Build Include="Stored procedures\User\User_Get.sql" />
+    <Build Include="Stored procedures\User\User_GetUserIdByEmail.sql" />
+    <Build Include="Tables\User\Admin.sql" />
+    <Build Include="Tables\User\Client.sql" />
+    <Build Include="Tables\User\Carrier.sql" />
+    <Build Include="Tables\User\Broker.sql" />
+    <Build Include="Tables\User\Sender.sql" />
+    <Build Include="Tables\User\User.sql" />
+    <Build Include="Tables\State\State.sql" />
+    <Build Include="Tables\State\StateAvailability.sql" />
+    <Build Include="Tables\State\StateLocalization.sql" />
+    <Build Include="Tables\State\StateVisibility.sql" />
+    <Build Include="Tables\User\ClientBalanceHistory.sql" />
+    <Build Include="Tables\User\Forwarder.sql" />
+    <Build Include="Tables\Event\Event.sql" />
+    <Build Include="Tables\Event\EventEmailRecipient.sql" />
+    <Build Include="Tables\Event\EventEmailTemplate.sql" />
+    <Build Include="Stored procedures\User\Client\Client_DeleteForce.sql" />
+    <Build Include="Stored procedures\User\Client\Client_GetBalance.sql" />
+    <Build Include="Stored procedures\User\Client\Client_SetBalance.sql" />
+    <Build Include="Stored procedures\User\Client\ClientBalanceHistory_Add.sql" />
+    <Build Include="Stored procedures\User\Client\ClientBalanceHistory_Get.sql" />
+    <Build Include="Stored procedures\User\Client\Client_SumBalance.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_Add.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_GetByApplication.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_RemoveByApplication.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_Update.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_Add.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_Get.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetTariffs.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetUserId.sql" />
+    <Build Include="Stored procedures\Calculation\Calculation_GetByClient.sql" />
+    <Build Include="Stored procedures\Country_Add.sql" />
+    <Build Include="Stored procedures\Country_GetList.sql" />
+    <Build Include="Stored procedures\Country_Update.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Add.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Update.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Get.sql" />
+    <Build Include="Stored procedures\Transit\Transit_GetByApplication.sql" />
+    <Build Include="Stored procedures\Transit\Transit_GetByClient.sql" />
+    <Build Include="Stored procedures\Transit\Transit_Delete.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetByUser.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetAll.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_Get.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_GetAll.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_Add.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_Update.sql" />
+    <Build Include="Stored procedures\User\Sender\Sender_GetByCountry.sql" />
+    <Build Include="Tables\User\SenderCountry.sql" />
+    <Build Include="Stored procedures\User\Sender\SenderCountry_Set.sql" />
+    <Build Include="Stored procedures\User\Sender\SenderCountry_Get.sql" />
+    <Build Include="Tables\User\ForwarderCity.sql" />
+    <Build Include="Stored procedures\User\Forwarder\ForwarderCity_Get.sql" />
+    <Build Include="Stored procedures\User\Forwarder\ForwarderCity_Set.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_GetByCity.sql" />
+    <Build Include="Stored procedures\User\Forwarder\Forwarder_GetByUserId.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_Add.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_Get.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_GetAll.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_GetByCity.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_GetByUserId.sql" />
+    <Build Include="Stored procedures\User\Carrier\Carrier_Update.sql" />
+    <Build Include="Stored procedures\User\Carrier\CarrierCity_Get.sql" />
+    <Build Include="Stored procedures\User\Carrier\CarrierCity_Set.sql" />
+    <Build Include="Tables\User\CarrierCity.sql" />
+    <Build Include="Tables\User\Manager.sql" />
+    <Build Include="Tables\Application\AirWaybill.sql" />
+    <Build Include="Tables\Application\Application.sql" />
+    <Build Include="Tables\Application\Calculation.sql" />
+    <Build Include="Stored procedures\GetNextDisplayNumber.sql" />
+    <Build Include="Types\DisplayNumberCounter.sql" />
+    <Build Include="Tables\Setting.sql" />
+    <Build Include="Tables\Application\Bill.sql" />
+    <Build Include="Stored procedures\Setting_Merge.sql" />
+    <Build Include="Stored procedures\Setting_Get.sql" />
+    <Build Include="Stored procedures\Application\Bill_AddOrReplace.sql" />
+    <Build Include="Stored procedures\Application\Bill_GetByApplicationId.sql" />
+    <Build Include="Stored procedures\User\Client\Client_Add.sql" />
+    <Build Include="Stored procedures\User\User_SetLogin.sql" />
+    <Build Include="Stored procedures\User\Client\Client_Get.sql" />
+    <Build Include="Stored procedures\User\Client\Client_GetByUserId.sql" />
+    <Build Include="Stored procedures\User\Client\Client_GetAll.sql" />
+    <Build Include="Stored procedures\User\Client\Client_Update.sql" />
+    <None Include="Scripts\setup-rights.sql" />
+    <Build Include="Stored procedures\User\Client\ClientBalanceHistory_GetAll.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Master.Database.publish.xml" />
+    <None Include="Scripts\InitCities.sql" />
+    <None Include="Scripts\InitSettings.sql" />
+    <None Include="SqlSchemaCompare.scmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\PreDeploy.sql" />
+  </ItemGroup>
+</Project>

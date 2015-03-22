@@ -1,0 +1,67 @@
+﻿@using Alicargo.Core.Resources
+@inherits BaseWebViewPage<Dictionary<long, string>>
+
+<div class='grid-details'>
+	<div class="properties">
+		# if(GTDFiles != null){ #
+		<p>
+			<span>@Entities.GTD:</span>
+			# for(i in GTDFiles) { #
+			# var item = GTDFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+		</p>
+		# } #
+		# if(GTDAdditionalFiles != null){ #
+		<p>
+			<span>@Entities.GTDAdditional:</span>
+			# for(i in GTDAdditionalFiles) { #
+			# var item = GTDAdditionalFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+		</p>
+		# } #
+		# if(PackingFiles != null){ #
+		<p>
+			<span>@Entities.Packing:</span>
+			# for(i in PackingFiles) { #
+			# var item = PackingFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+		</p>
+		# } #
+		# if(InvoiceFiles != null){ #
+		<p>
+			<span>@Entities.Invoice:</span>
+			# for(i in InvoiceFiles) { #
+			# var item = InvoiceFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+		</p>
+		# } #
+		# if(AWBFiles != null){ #
+		<p>
+			<span>@Entities.AWB:</span>
+			# for(i in AWBFiles) { #
+			# var item = AWBFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+		</p>
+		# } #
+		# if(OtherFiles != null){ #
+		<p>
+			<span>@Entities.OtherFiles:</span>
+			# for(i in OtherFiles) { #
+			# var item = OtherFiles[i]; #
+			# if(!item || !item.Id) continue; #
+			<a href="@Url.Action(MVC.AwbFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+		</p>
+		# } #
+	</div>
+</div>

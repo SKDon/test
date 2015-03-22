@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Bank" xml:space="preserve">
+    <value>Banca</value>
+  </data>
+  <data name="BIC" xml:space="preserve">
+    <value>BIC</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Nome del contatto</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="INN" xml:space="preserve">
+    <value>INN</value>
+  </data>
+  <data name="KPP" xml:space="preserve">
+    <value>PPC</value>
+  </data>
+  <data name="KS" xml:space="preserve">
+    <value>conto di corrispondenza</value>
+  </data>
+  <data name="LegalAddress" xml:space="preserve">
+    <value>Iindirizzo sede legale</value>
+  </data>
+  <data name="LegalEntity" xml:space="preserve">
+    <value>Soggetto giuridico</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Accedi</value>
+  </data>
+  <data name="MailingAddress" xml:space="preserve">
+    <value>Indirizzo postale</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Chiedi una nuova password</value>
+  </data>
+  <data name="Nic" xml:space="preserve">
+    <value>NIC sulla fattura</value>
+  </data>
+  <data name="OfficePhone" xml:space="preserve">
+    <value>Telefono ufficio</value>
+  </data>
+  <data name="OGRN" xml:space="preserve">
+    <value>PSRN</value>
+  </data>
+  <data name="RS" xml:space="preserve">
+    <value>Conto corrente</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confermare la nuova password</value>
+  </data>
+  <data name="CreationTimestamp" xml:space="preserve">
+    <value>Creato</value>
+  </data>
+  <data name="DaysInWork" xml:space="preserve">
+    <value>Giorni di funzionamento</value>
+  </data>
+  <data name="DisplayNumber" xml:space="preserve">
+    <value>Numero applicazione</value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Fattura</value>
+  </data>
+  <data name="StateName" xml:space="preserve">
+    <value>Stato</value>
+  </data>
+  <data name="StateNextName" xml:space="preserve">
+    <value>Stato previsto</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Indirizzo</value>
+  </data>
+  <data name="Carrier" xml:space="preserve">
+    <value>Carrier</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Città</value>
+  </data>
+  <data name="DeliveryType" xml:space="preserve">
+    <value>Tipo di consegna</value>
+  </data>
+  <data name="MethodOfTransit" xml:space="preserve">
+    <value>Il metodo di transito</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefono</value>
+  </data>
+  <data name="RecipientName" xml:space="preserve">
+    <value>Destinatario</value>
+  </data>
+  <data name="AddressLoad" xml:space="preserve">
+    <value>Recinzione carico Indirizzo</value>
+  </data>
+  <data name="Characteristic" xml:space="preserve">
+    <value>Caratteristiche della merce</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Numero di confezioni (scatola)</value>
+  </data>
+  <data name="FactoryEmail" xml:space="preserve">
+    <value>Email di fabbrica</value>
+  </data>
+  <data name="FactoryName" xml:space="preserve">
+    <value>Fabbrica</value>
+  </data>
+  <data name="FactoryPhone" xml:space="preserve">
+    <value>Telefono fabbrica</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File Allegato</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Peso (kg)</value>
+  </data>
+  <data name="Mark" xml:space="preserve">
+    <value>Segna</value>
+  </data>
+  <data name="MethodOfDelivery" xml:space="preserve">
+    <value>Metodo di Spedizione</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Costo</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="WarehouseWorkingTime" xml:space="preserve">
+    <value>Tempo del magazzino</value>
+  </data>
+  <data name="TermsOfDelivery" xml:space="preserve">
+    <value>Termini di consegna</value>
+  </data>
+  <data name="StateItalianName" xml:space="preserve">
+    <value>Nome italiano</value>
+  </data>
+  <data name="StateRussianName" xml:space="preserve">
+    <value>Nome russo</value>
+  </data>
+  <data name="StateChangeTimestamp" xml:space="preserve">
+    <value>Controllare lo stato di stime</value>
+  </data>
+  <data name="Broker" xml:space="preserve">
+    <value>Broker</value>
+  </data>
+  <data name="TotalCount" xml:space="preserve">
+    <value>Il numero totale dei</value>
+  </data>
+  <data name="TotalWeight" xml:space="preserve">
+    <value>Peso totale</value>
+  </data>
+  <data name="ArrivalAirport" xml:space="preserve">
+    <value>Aeroporto di arrivo</value>
+  </data>
+  <data name="DateOfArrival" xml:space="preserve">
+    <value>Data di arrivo</value>
+  </data>
+  <data name="DateOfDeparture" xml:space="preserve">
+    <value>Data di partenza</value>
+  </data>
+  <data name="DepartureAirport" xml:space="preserve">
+    <value>Aeroporto di partenza</value>
+  </data>
+  <data name="GTD" xml:space="preserve">
+    <value>GTD</value>
+  </data>
+  <data name="FactoryContact" xml:space="preserve">
+    <value>Contattare fabbrica</value>
+  </data>
+  <data name="CP" xml:space="preserve">
+    <value>CP</value>
+  </data>
+  <data name="DeliveryBill" xml:space="preserve">
+    <value>Il disegno di legge per la consegna dei</value>
+  </data>
+  <data name="Swift" xml:space="preserve">
+    <value>SWIFT</value>
+  </data>
+  <data name="Torg12" xml:space="preserve">
+    <value>TORG 12</value>
+  </data>
+  <data name="AWB" xml:space="preserve">
+    <value>AWB</value>
+  </data>
+  <data name="Packing" xml:space="preserve">
+    <value>la lista di imballaggio</value>
+  </data>
+  <data name="PriceForDelivery" xml:space="preserve">
+    <value>Il costo della consegna</value>
+  </data>
+  <data name="DateInStock" xml:space="preserve">
+    <value>Data di ricevimento al magazzino</value>
+  </data>
+  <data name="AirWaybill" xml:space="preserve">
+    <value>Air Way Bill</value>
+  </data>
+  <data name="DateOfCargoReceipt" xml:space="preserve">
+    <value>Accettazione delle merci</value>
+  </data>
+  <data name="GTDAdditional" xml:space="preserve">
+    <value>GTD aggiunta</value>
+  </data>
+  <data name="TransitReference" xml:space="preserve">
+    <value>Transito di riferimento</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Paese</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Mittente</value>
+  </data>
+  <data name="AdditionalCost" xml:space="preserve">
+    <value>Additional cost (€)</value>
+  </data>
+  <data name="BrokerCost" xml:space="preserve">
+    <value>Broker cost (€)</value>
+  </data>
+  <data name="CustomCost" xml:space="preserve">
+    <value>Custom cost (€)</value>
+  </data>
+  <data name="FlightCost" xml:space="preserve">
+    <value>Flight cost (€)</value>
+  </data>
+  <data name="FactureCost" xml:space="preserve">
+    <value>Fattura T1 (€)</value>
+  </data>
+  <data name="Insurance" xml:space="preserve">
+    <value>Assicurazione</value>
+  </data>
+  <data name="ScotchCost" xml:space="preserve">
+    <value>Nastro (€)</value>
+  </data>
+  <data name="TariffPerKg" xml:space="preserve">
+    <value>Il tasso al kg (€)</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Solo</value>
+  </data>
+  <data name="TotalTariffCost" xml:space="preserve">
+    <value>Importo (€)</value>
+  </data>
+  <data name="TransitCost" xml:space="preserve">
+    <value>Consegna (€)</value>
+  </data>
+  <data name="PickupCost" xml:space="preserve">
+    <value>Raccogliere (€)</value>
+  </data>
+  <data name="CostPerKgOfSender" xml:space="preserve">
+    <value>Il costo al chilogrammo per il mittente (€)</value>
+  </data>
+  <data name="TotalCostOfSenderForWeight" xml:space="preserve">
+    <value>Costi per peso (€)</value>
+  </data>
+  <data name="TotalOfSender" xml:space="preserve">
+    <value>Totale per il mittente (€)</value>
+  </data>
+  <data name="BrokerCostPerKg" xml:space="preserve">
+    <value>Il costo del broker per kg (€)</value>
+  </data>
+  <data name="CustomCostPerKg" xml:space="preserve">
+    <value>Sdoganamento per kg (€)</value>
+  </data>
+  <data name="FlightCostPerKg" xml:space="preserve">
+    <value>La tariffa per kg (€)</value>
+  </data>
+  <data name="TotalTransitCost" xml:space="preserve">
+    <value>Il costo del spedizioniere (totale €)</value>
+  </data>
+  <data name="TotalScotchCost" xml:space="preserve">
+    <value>Il costo totale del nastro (€)</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Utile (€)</value>
+  </data>
+  <data name="ProfitPerKg" xml:space="preserve">
+    <value>L'kg profitto (€)</value>
+  </data>
+  <data name="TotalExpenses" xml:space="preserve">
+    <value>I costi totali (€)</value>
+  </data>
+  <data name="TotalProfit" xml:space="preserve">
+    <value>Utile (totale, €)</value>
+  </data>
+  <data name="FactureCostEdited" xml:space="preserve">
+    <value>Fattura T1* (€)</value>
+  </data>
+  <data name="ScotchCostEdited" xml:space="preserve">
+    <value>Nastro* (€)</value>
+  </data>
+  <data name="PickupCostEdited" xml:space="preserve">
+    <value>Raccogliere* (€)</value>
+  </data>
+  <data name="SenderRate" xml:space="preserve">
+    <value>rate sender euro/kg</value>
+  </data>
+  <data name="TotalSenderRate" xml:space="preserve">
+    <value>total sender costs</value>
+  </data>
+  <data name="Contract" xml:space="preserve">
+    <value>Contratto</value>
+  </data>
+  <data name="Class" xml:space="preserve">
+    <value>Classe</value>
+  </data>
+  <data name="TariffOfTapePerBox" xml:space="preserve">
+    <value>Vota nastro (€/scatola)</value>
+  </data>
+  <data name="TransitCostEdited" xml:space="preserve">
+    <value>Consegna* (€)</value>
+  </data>
+  <data name="Body" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="LocalizedName" xml:space="preserve">
+    <value>Localized name</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="EnableEmailSend" xml:space="preserve">
+    <value>Enable email sending</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="FactureCostEx" xml:space="preserve">
+    <value>Fattura EX-1 (€)</value>
+  </data>
+  <data name="FactureCostExEdited" xml:space="preserve">
+    <value>Fattura EX-1* (€)</value>
+  </data>
+</root>

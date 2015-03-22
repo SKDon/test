@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="34d1b14f-d54d-44c9-b332-18917b44fa94"
+  name="Client" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="aec5323d-89ea-4114-aca7-4bc167f67792"
+        name="Mappers"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="0873555d-8db3-4df1-8762-2f8a8f9cc909">
+            <classMoniker
+              Id="4dfb69a7-e824-4560-a415-2866707ea430"
+              LastKnownName="Models"
+              LastKnownLocation="Package1_2100.uml" />
+          </dependency>
+          <dependency
+            Id="4128ada7-96d0-436b-ab9a-add84bb471ad">
+            <classMoniker
+              Id="a65af210-b4f4-45fb-b1b1-2b791ac70aad"
+              LastKnownName="Business Objects"
+              LastKnownLocation="Package_1547.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="956ad7e6-822a-4c7f-aa9b-f275dd4eecad"
+        name="View"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="11fc4723-3578-4f6d-b7c9-8cc5e1d0e636">
+            <classMoniker
+              Id="4dfb69a7-e824-4560-a415-2866707ea430"
+              LastKnownName="Models"
+              LastKnownLocation="Package1_2100.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4dfb69a7-e824-4560-a415-2866707ea430"
+        name="Models"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="cc19c467-2291-45af-b9e3-7eedfdb658e3"
+        name="Client Logic"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="39eedc57-2a31-4fc3-8109-6602a81479b9">
+            <classMoniker
+              Id="aec5323d-89ea-4114-aca7-4bc167f67792"
+              LastKnownName="Mappers"
+              LastKnownLocation="Package1_2100.uml" />
+          </dependency>
+          <dependency
+            Id="bd39cd5c-14f4-4276-a0bd-fd916bee9847">
+            <interfaceMoniker
+              Id="ec88c62f-2f5b-43dc-a185-c3828419a7af"
+              LastKnownName="Business Logic"
+              LastKnownLocation="Package_1547.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="f2c21bb6-da2d-4750-afd2-dabf343897e6"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="956ad7e6-822a-4c7f-aa9b-f275dd4eecad"
+              LastKnownName="View"
+              LastKnownLocation="Package1_2100.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="05943f28-0fa6-4c55-afc1-a51d4fa63bb0"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="e3412ff9-e102-4e72-b8a3-fe80881a58f2"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="9fcf9ed0-91d9-470e-abfd-2f11289343a3"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9c09341e-8288-4a60-a18e-d34fa6d51b3e"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="afeea336-4613-41df-abd5-7b7b2f45ddd2"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="515cec80-61a2-4567-addb-b8c7a911ae3a"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

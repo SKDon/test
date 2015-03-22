@@ -1,0 +1,11 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model ApplicationSenderModel
+<div class="container-edit">
+	<h1>
+		@Pages.ApplicationAdd
+		<span>@Entities.Nic: @ViewBag.Nic</span>
+	</h1>
+	@Html.EditPage(Url.Action(MVC.SenderApplication.Create()), Pages.Save)
+</div>

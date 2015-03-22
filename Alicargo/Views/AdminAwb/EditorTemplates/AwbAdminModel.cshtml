@@ -1,0 +1,38 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AwbAdminModel>
+<div class="row">
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.Bill)
+		@Html.EditorWithLabelFor(model => model.GTD)
+		@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
+		@Html.LabelFor(x => x.SenderUserId)
+		@Html.DropDownListFor(x => x.SenderUserId, (IDictionary<long?, string>)ViewBag.Senders, "")
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.DepartureAirport)
+		@Html.LabelFor(model => model.DateOfDepartureLocalString)
+		<div class="date-holder">
+			@Html.EditorFor(model => model.DateOfDepartureLocalString)
+		</div>
+		@Html.EditorWithLabelFor(model => model.FlightCost)
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.ArrivalAirport)
+		@Html.LabelFor(model => model.DateOfArrivalLocalString)
+		<div class="date-holder">
+			@Html.EditorFor(model => model.DateOfArrivalLocalString)
+		</div>
+		@Html.EditorWithLabelFor(model => model.AdditionalCost)
+	</div>
+	<div class="span3">
+		@Html.LabelFor(x => x.BrokerId)
+		@Html.DropDownListFor(x => x.BrokerId, (IDictionary<long?, string>)ViewBag.Brokers, "")
+		@Html.EditorWithLabelFor(model => model.BrokerCost)
+		@Html.EditorWithLabelFor(model => model.CustomCost)
+	</div>
+	<script>
+		$(function() {
+			$(".date-holder input").kendoDatePicker();
+		})
+	</script>
+</div>

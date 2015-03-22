@@ -1,0 +1,47 @@
+﻿@using Alicargo.DataAccess.Contracts.Contracts
+@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.ViewModels.User.CarrierModel
+@helper SelectCity()
+{
+	@Html.LabelFor(x => x.Cities)
+
+	var cities = (CityData[])ViewBag.Cities;
+
+	var id = Html.IdFor(x => x.Cities);
+
+	<select id="@Html.Raw(id)" name="@Html.Raw(id)" multiple="multiple">
+		@foreach(var city in cities)
+		{
+			var selected = Model != null && Model.Cities.Contains(city.Id);
+			<option @Html.Raw(selected ? "selected" : null) value="@city.Id">@city.Name</option>
+		}
+	</select>
+	<script> $("#@Html.Raw(id)").kendoMultiSelect().data("kendoMultiSelect"); </script>
+}
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Name)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Email)
+	</div>
+	<div class="span4">
+	</div>	
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Contact)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Phone)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Address)
+	</div>
+</div>
+<div class="row">
+	<div class="span12 multiselect">
+		@SelectCity()
+	</div>
+</div>
+@Html.EditorFor(x => x.Authentication)

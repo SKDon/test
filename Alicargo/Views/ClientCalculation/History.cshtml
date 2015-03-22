@@ -1,0 +1,6 @@
+﻿@using Alicargo.Core.Resources
+@model long
+<p>
+	@Entities.Balance: @ViewBag.Balance.ToString("N2")
+</p>
+@Html.Action(MVC.Balance.History(Model))

@@ -1,0 +1,343 @@
+﻿.row .span12 input[type="text"] {
+	display: block;
+	width: 1156px;
+}
+
+.row .span12 textarea {
+	height: 300px;
+	width: 1156px;
+}
+
+.span2 .k-datetimepicker {
+	width: 170px;
+}
+
+.home-page {
+	font-family: "Myriad pro", Arial, Helvetica, sans-serif;
+	width: 900px;
+	margin: 0 auto;
+	font-size: 16px;
+	color: #000;
+}
+
+	.home-page .span6 {
+		margin-bottom: 20px;
+	}
+
+		.home-page .span6 span {
+			display: block;
+			margin: 0 auto 10px;
+			text-align: center;
+		}
+
+.home-head {
+	background-image: url("avion.png");
+	background-repeat: no-repeat;
+	background-color: rgb(32, 30, 94);
+	height: 200px;
+	margin-bottom: 80px;
+}
+
+	.home-head .checkbox, .home-head .checkbox a {
+		color: #FFF;
+	}
+
+	.home-head .form-signin {
+		float: right;
+	}
+
+.form-signin {	
+	padding: 20px;
+	margin: 0;
+	max-width: 300px;
+}
+
+.form-signin-container {
+	-moz-border-radius: 5px;
+	-moz-box-shadow: 0 1px 2px #000000;
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px #000000;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px #000000;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	margin: 200px auto 20px;
+	max-width: 350px;
+}
+
+.home-footer {
+	margin-top: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+	font-size: 16px;
+	height: auto;
+	margin-bottom: 15px;
+	padding: 7px 9px;
+}
+
+.form-signin ul {
+	margin-bottom: 0;
+}
+
+
+.super {
+	font-size: 0.7em;
+	position: absolute;
+	vertical-align: super;
+}
+
+.entity-edit {
+	margin-top: 20px;
+}
+
+	.entity-edit .span2 input {
+		width: 156px;
+	}
+
+	.entity-edit .span8 input {
+		width: 756px;
+	}
+
+	.entity-edit .span8 textarea {
+		height: 85px;
+		width: 756px;
+	}
+
+	.entity-edit .currency-holder .dropdown-menu {
+		min-width: initial;
+	}
+
+	.entity-edit .span3 input {
+		width: 256px;
+	}
+
+	.entity-edit .span3 select {
+		width: 270px;
+	}
+
+	.entity-edit .span3 .currency-holder input {
+		width: 210px;
+	}
+
+	.entity-edit .span2 .currency-holder input {
+		width: 111px;
+	}
+
+	.entity-edit .span4 input {
+		width: 356px;
+	}
+
+	.entity-edit .span4 select {
+		width: 370px;
+	}
+
+	.entity-edit .span4 textarea {
+		height: 85px;
+		width: 356px;
+	}
+
+	.entity-edit .span4 .currency-holder input {
+		width: 310px;
+	}
+
+	.entity-edit .span4 .ui-tabs {
+		margin-bottom: 25px;
+	}
+
+		.entity-edit .span4 .ui-tabs select {
+			margin-bottom: 0;
+			width: 322px;
+		}
+
+		.entity-edit .span4 .ui-tabs input {
+			margin-bottom: 0;
+			width: 308px;
+		}
+
+.entity-details {
+	margin-bottom: 20px;
+}
+
+	.entity-details label {
+		font-weight: bold;
+	}
+
+.grid {
+	font-size: 8pt;
+	margin-bottom: 20px;
+}
+
+	.grid .btn {
+		font-size: 1.2em;
+	}
+
+	.grid label, button, select {
+		font-size: 1.2em;
+		font-weight: normal;
+		line-height: 1.4em;
+	}
+
+	.grid .k-button-icontext {
+		height: 16px;
+		margin: 0;
+		min-width: 0 !important;
+		padding: 0;
+		width: 16px;
+	}
+
+		.grid .k-button-icontext:hover {
+			text-decoration: none;
+		}
+
+		.grid .k-button-icontext span {
+			background-image: url('../kendo/2014.1.318/Default/sprite.png');
+			background-repeat: no-repeat;
+			border-color: transparent;
+			display: inline-block;
+			font-size: 0;
+			height: 16px;
+			line-height: 0;
+			margin: 0;
+			overflow: hidden;
+			padding: 0;
+			width: 16px;
+		}
+
+.grid-details {
+	background-color: rgb(248, 252, 248);
+	padding: 10px;
+}
+
+	.grid-details hr {
+		margin: 10px 0;
+	}
+
+	.grid-details p:last-child {
+		margin-bottom: 0;
+	}
+
+	.grid-details .properties {
+		-moz-column-count: 5;
+		-webkit-column-count: 5;
+		column-count: 5;
+	}
+
+		.grid-details .properties p {
+			white-space: normal;
+		}
+
+.grid-details-toolbar {
+	margin-bottom: 0;
+}
+
+	.grid-details-toolbar select {
+		height: 20px;
+		margin-bottom: 0;
+	}
+
+	.grid-details-toolbar label {
+		display: inline-block;
+	}
+
+	.grid-details-toolbar .files {
+		-moz-column-count: 5;
+		-webkit-column-count: 5;
+		column-count: 5;
+		white-space: normal;
+		margin-bottom: -5px;
+	}
+
+		.grid-details-toolbar .files a {
+			margin-top: 5px;
+			white-space: nowrap;
+		}
+
+.select-client-holder select {
+	margin-bottom: 0;
+	width: auto;
+}
+
+.date-holder {
+	margin-bottom: 10px;
+}
+
+.state-edit-checkbox label {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.state-edit-checkbox input.check-box {
+	display: inline-block;
+	margin-bottom: 5px;
+	width: auto;
+}
+
+.template-edit-settings table {
+	margin-bottom: 20px;
+}
+
+	.template-edit-settings table td {
+		border-bottom: 1px gray solid;
+		text-align: center;
+	}
+
+	.template-edit-settings table .title {
+		font-weight: bold;
+		padding: 0 10px;
+		text-align: left;
+	}
+
+.template-edit-settings label {
+	display: inline-block;
+	margin: 0 10px 0 0;
+}
+
+.template-edit-settings input[type="checkbox"] {
+	display: inline-block;
+	margin: 0;
+	width: auto;
+}
+
+.multiselect .k-multiselect {
+	margin-bottom: 10px;
+	max-height: 200px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.textedit-holder {
+	height: 100%;
+	width: 100%;
+}
+
+	.textedit-holder textarea, .textedit-holder input[type="text"] {
+		width: 100%;
+		height: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		margin: 0;
+	}
+
+.appl-edit-checkbox label {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.appl-edit-checkbox input.check-box {
+	display: inline-block;
+	margin-bottom: 5px;
+	width: auto;
+}

@@ -1,0 +1,70 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.Areas.Admin.Models.BillModel
+
+<form method="POST">
+	<div class="bill-preview container-edit">
+		<h1>
+			Счет на оплату № @ViewBag.BillNumber от @ViewBag.SaveDate.ToString("dd MMMM yyyy")
+		</h1>
+		<div class="textedit-holder header-text">
+			@Html.EditorWithLabelFor(x => x.HeaderText)
+		</div>
+		<div class="bill-settings">
+			@Html.EditorWithLabelFor(x => x.BankDetails)
+		</div>
+		<div>
+			<table>
+				<tr>
+					<td class="info">@Html.LabelFor(x => x.Shipper, "Поставщик")</td>
+					<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Shipper)</div></td>
+				</tr>
+				<tr>
+					<td class="info">@Html.LabelFor(x => x.Client, "Покупатель")</td>
+					<td style="width: 100%"><div class="textedit-holder">@Html.TextAreaFor(x => x.Client)</div></td>
+				</tr>
+			</table>
+		</div>
+		<div class="goods">
+			<table>
+				<tr class="head">
+					<td>Товары (работы, услуги)</td>
+					<td style="width: 50px;">Кол-во</td>
+					<td style="width: 20px">Ед.</td>
+					<td class="narrow">Цена (руб.)</td>
+				</tr>
+				<tr>
+					<td><div class="textedit-holder">@Html.TextAreaFor(x => x.Goods)</div></td>
+					<td><div class="textedit-holder">@Html.EditorFor(x => x.Count)</div></td>
+					<td class="info">шт.</td>
+					<td class="narrow"><div class="textedit-holder">@Html.EditorFor(x => x.PriceRuble)</div></td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<td class="info">@Html.LabelFor(x => x.Head, "Руководитель")</td>
+					<td>@Html.EditorFor(x => x.Head)</td>
+					<td class="info">@Html.LabelFor(x => x.Accountant, "Бухгалтер")</td>
+					<td>@Html.EditorFor(x => x.Accountant)</td>
+				</tr>
+			</table>
+		</div>
+		<hr />
+		<div>
+			<input class="btn btn-primary" type="submit" value="@Pages.Save" formaction="/Admin/Bill/Save/@ViewBag.ApplicationId" />
+			<input class="btn btn-success" type="submit" value="@Pages.Send" formaction="/Admin/Bill/Send/@ViewBag.ApplicationId" />
+			<input class="btn btn-info" type="submit" value="@Pages.Download" formaction="/Admin/Bill/Download/@ViewBag.ApplicationId" />
+			<input class="btn" type="submit" value="@Pages.Cancel" formaction="/Admin/Bill/Cancel/@ViewBag.ApplicationId" />
+			@if(ViewBag.SendDate != null)
+			{
+				<text>
+					Счет отправлен:
+				</text>
+				@ViewBag.SendDate.ToString("d")
+			}
+		</div>
+		@Html.ValidationSummary(false)
+	</div>
+</form>

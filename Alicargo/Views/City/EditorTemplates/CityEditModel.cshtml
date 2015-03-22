@@ -1,0 +1,14 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model CityEditModel
+
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(x => x.EnglishName)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(x => x.RussianName)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(x => x.Position)
+	</div>
+</div>

@@ -1,0 +1,16 @@
+﻿@using Alicargo.Mvc
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model ApplicationClientModel
+<div class="container-edit">
+	<h1>
+		@Pages.ApplicationEdit @ViewBag.ApplicationNumber
+	</h1>
+	@Html.EditPage(Url.Action(MVC.ClientApplication.Edit()), Pages.Update)
+	<hr />
+	@Html.Action(MVC.ApplicationFiles.Client((long)ViewBag.ApplicationId))
+</div>
+@section scripts
+{
+	@Scripts.Render(JsPaths.ApplicationFilesJs)
+}

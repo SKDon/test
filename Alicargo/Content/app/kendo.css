@@ -1,0 +1,60 @@
+﻿.k-widget.k-window {
+	width: 827px;
+}
+
+.k-upload-button {
+	width: auto;
+}
+
+.k-upload-status {
+	top: 5px;
+}
+
+	.k-upload-status .k-button {
+		line-height: 0.7em;
+	}
+
+.k-upload-pct {
+	display: none;
+}
+
+.k-edit-form-container {
+	width: auto;
+}
+
+	.k-edit-form-container .row {
+		margin-bottom: 15px;
+	}
+
+	.k-edit-form-container input {
+		margin-bottom: 0;
+		width: 355px;
+	}
+
+.k-grid td {
+	white-space: nowrap;
+}
+
+.k-grid-custom-delete span {
+	background-position: -49px -17px;
+}
+
+.k-grid-custom-edit span {
+	background-position: -49px -1px;
+}
+
+.k-grid-custom-gear span {
+	background-position: -142px -114px;
+}
+
+.k-grid-custom-cancel span {
+	background-position: -49px -49px;
+}
+
+.k-grid-custom-authenticate span {
+	background-position: -49px -241px;
+}
+
+ .k-grouping-row td a {
+	color: #2e2e2e;
+}

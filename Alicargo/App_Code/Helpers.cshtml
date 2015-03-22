@@ -1,0 +1,35 @@
+﻿@using Resources
+@helper FileUploader(string id, string name = null, string url = null)
+{
+	if (id == null)
+	{
+		throw new ArgumentNullException("id");
+	}
+
+	var cls = string.IsNullOrWhiteSpace(name)
+		? "fileupload-new"
+		: "fileupload-exists";
+	var idName = id + "Name";
+	var idData = id + "Data";
+
+	<div class="fileupload  @cls" data-provides="fileupload">
+		<span class="btn btn-file">
+			<span class="fileupload-new">@Pages.SelectFile</span>
+			<span class="fileupload-exists">@Pages.ChangeFile</span>
+			<input type="file" name="@idData" />
+		</span>
+
+		<span class="fileupload-preview">
+			@if (url != null)
+			{
+				<a href='@url'>@name</a>
+			}
+			else
+			{
+				@name
+			}
+			<input type="hidden" name="@idName" value="@name"/>
+		</span>
+		<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+	</div>
+}

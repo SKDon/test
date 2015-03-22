@@ -1,0 +1,41 @@
+﻿.payment-history {
+	width: 100%;
+}
+
+	.payment-history table {
+		border-spacing: 0;
+	}
+
+	.payment-history thead td {
+		background-color: #c5c5c5;
+		background-image: none,linear-gradient(to bottom,rgba(255,255,255,.6) 0,rgba(255,255,255,.0) 100%);
+	}
+
+	.payment-history tbody td {
+		border-top: 1px solid #c5c5c5;
+	}
+
+	.payment-history td {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
+		.payment-history td:last-child {
+			border-right: none;
+		}
+
+	.payment-history .money {
+		-moz-min-width: 70px;
+		-ms-min-width: 70px;
+		-o-min-width: 70px;
+		-webkit-min-width: 70px;
+		min-width: 70px;
+	}
+
+	.payment-history .timestamp {
+		-moz-min-width: 200px;
+		-ms-min-width: 200px;
+		-o-min-width: 200px;
+		-webkit-min-width: 200px;
+		min-width: 200px;
+	}

@@ -1,0 +1,60 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.ViewModels.User.ClientModel
+
+<div class="row">
+	<div class="span8">
+		@Html.EditorWithLabelFor(model => model.LegalEntity)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Nic)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.INN)
+		@Html.EditorWithLabelFor(model => model.OGRN)
+		@Html.EditorWithLabelFor(model => model.KPP)
+		@Html.EditorWithLabelFor(model => model.Contacts)
+		@Html.LabelFor(model => model.ContractFile)
+		@Helpers.FileUploader(
+			Html.IdFor(x => x.ContractFile).ToHtmlString(),
+			Model == null
+				? null
+				: Model.ContractFileName,
+			Model != null && Model.ContractFileName != null
+				? @Url.Action(MVC.Client.Contract((long?)ViewBag.ClientId))
+				: null)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.LegalAddress)
+		@Html.EditorWithLabelFor(model => model.Bank)
+		@Html.EditorWithLabelFor(model => model.RS)
+		@Html.EditorWithLabelFor(model => model.Emails)
+		@Html.EditorWithLabelFor(x => x.ContractNumber)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.MailingAddress)
+		@Html.EditorWithLabelFor(model => model.BIC)
+		@Html.EditorWithLabelFor(model => model.KS)
+		@Html.EditorWithLabelFor(model => model.Phone)
+		<div class="date-holder">
+			@Html.EditorWithLabelFor(x => x.ContractDate)
+		</div>
+		<script>
+			$(function() {
+				$(".date-holder input").kendoDatePicker();
+			})
+		</script>
+	</div>
+</div>
+<hr />
+<h4>
+	@Pages.Transit
+</h4>
+@Html.Action(MVC.Transit.EditByClient((long?)ViewBag.ClientId))
+<hr />
+<h4>
+	@Pages.Authentication
+</h4>
+@Html.EditorFor(x => x.Authentication)

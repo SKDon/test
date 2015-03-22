@@ -1,0 +1,34 @@
+﻿@using System.Reflection
+@using System.Resources
+@using Alicargo.Core.Resources
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+
+@helper Generate(string prefix, ResourceManager manager, Type type)
+{
+	var properties = type.GetProperties(BindingFlags.GetProperty | BindingFlags.Static | BindingFlags.Public)
+						 .Where(x => x.PropertyType == typeof(string))
+						 .ToArray();
+
+	foreach (var property in properties)
+	{
+		var name = property.Name;
+		var value = manager.GetString(name);
+		var row = prefix + name + "='" + value.JavaScriptStringEncode() + "';";
+		@Html.Raw(row)
+	}
+}
+
+var Alicargo = (function($a){
+
+$a.Localization = (function($l){
+
+@Generate("$l.Entities_", Entities.ResourceManager, typeof(Entities))
+@Generate("$l.Pages_", Pages.ResourceManager, typeof(Pages))
+@Generate("$l.Enums_", Alicargo.DataAccess.Contracts.Resources.Enums.ResourceManager, typeof(Alicargo.DataAccess.Contracts.Resources.Enums))
+
+return $l;
+}($a.Localization || {}));
+
+return $a;
+}(Alicargo || {}))

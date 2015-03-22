@@ -1,0 +1,23 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.Mvc
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model ApplicationAdminModel
+<div class="container-edit">
+    <h1>
+        @Pages.ApplicationEdit @ViewBag.ApplicationNumber
+        <span>@Entities.Nic: @Html.ViewBag.ClientNic</span>
+    </h1>
+    @Html.EditPage(Url.Action(MVC.Application.Edit()), Pages.Update,
+        new MvcHtmlString("<a href='"
+                          + Url.Action(MVC.ApplicationPrint.Index((long) ViewBag.ApplicationId))
+                          + "' target='blank' class='btn btn-success'>"
+                          + Pages.Print
+                          + "</a>"))
+    <hr />
+    @Html.Action(MVC.ApplicationFiles.Admin((long) ViewBag.ApplicationId))
+</div>
+@section scripts
+{
+    @Scripts.Render(JsPaths.ApplicationFilesJs)
+}

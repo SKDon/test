@@ -1,0 +1,12 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.ViewModels.User.UserModel
+
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Name)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Email)
+	</div>
+</div>
+@Html.EditorFor(x => x.Authentication)

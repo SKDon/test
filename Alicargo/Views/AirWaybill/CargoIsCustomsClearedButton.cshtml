@@ -1,0 +1,25 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model CargoIsCustomsClearedButtonModel
+
+@{ var disabled = !Model.CanSetCargoIsCustomsCleared; }
+<button class="btn btn-success" id="@Html.Id("CargoIsCustomsCleared")" @(disabled ? "disabled" : "") type="button">@Pages.CargoIsCustomsCleared</button>
+@if (!disabled)
+{
+	<script>
+		$(function () {
+			$('#@Html.Id("CargoIsCustomsCleared")').click(function () {
+				var that = $(this).attr("disabled", "disabled");
+				$.post('@Url.Action(MVC.AirWaybill.CargoIsCustomsCleared(Model.Id))')
+					.done(function () {
+						Alicargo.ShowMessage("@Pages.SuccessOperation.JavaScriptStringEncode()");
+						// todo: for a broker do rediret to the awb grid page (259)
+					})
+					.error(function () {
+						Alicargo.ShowMessage("@Pages.AnError.JavaScriptStringEncode()");
+						that.removeAttr("disabled");
+					});
+			});
+		});
+	</script>
+}

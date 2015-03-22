@@ -1,0 +1,138 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.DataAccess.Contracts.Enums
+@using Alicargo.Services
+@using Resources
+@inherits BaseWebViewPage
+@helper ClientMenu()
+{
+	if(IdentityService.IsInRole(RoleType.Client))
+	{
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Pages.Profile, MVC.Client.Edit())</li>
+		<li>@Html.ActionLink(Pages.Report, MVC.ClientCalculation.Index())</li>
+	}
+}
+@helper ForwarderMenu()
+{
+	if(IdentityService.IsInRole(RoleType.Forwarder))
+	{
+		<li>@Html.ActionLink(Pages.Applications, MVC.Forwarder.Applications.Index())</li>
+	}
+}
+@helper CarrierMenu()
+{
+	if(IdentityService.IsInRole(RoleType.Carrier))
+	{
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+	}
+}
+@helper AdminMenu()
+{
+	if(IdentityService.IsInRole(RoleType.Admin))
+	{
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Pages.AirWaybills, MVC.AirWaybill.Index())</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Users<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>@Html.ActionLink(Pages.Clients, MVC.Client.Index())</li>
+				<li>@Html.ActionLink(Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
+				<li>@Html.ActionLink(Pages.Managers, MVC.User.Index(RoleType.Manager))</li>
+				<li>@Html.ActionLink(Pages.Brokers, MVC.User.Index(RoleType.Broker))</li>
+				<li>@Html.ActionLink(Pages.Forwarders, MVC.User.Index(RoleType.Forwarder))</li>
+				<li>@Html.ActionLink(Pages.Carriers, MVC.User.Index(RoleType.Carrier))</li>
+				<li>@Html.ActionLink(Pages.Senders, MVC.User.Index(RoleType.Sender))</li>
+			</ul>
+		</li>
+		<li>@Html.ActionLink(Pages.Calculation, MVC.Calculation.Index())</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Settings<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>@Html.ActionLink(Pages.States, MVC.Admin.State.Index())</li>
+				<li>@Html.ActionLink(Pages.Templates, MVC.EmailTemplate.Index())</li>
+				<li>@Html.ActionLink(Pages.Cities, MVC.City.Index())</li>
+				<li>@Html.ActionLink(Pages.Countries, MVC.Country.Index())</li>
+				<li>@Html.ActionLink(Pages.BillSettings, MVC.Admin.BillSettings.Index())</li>
+			</ul>
+		</li>
+	}
+}
+@helper ManagerMenu()
+{
+	if(IdentityService.IsInRole(RoleType.Manager))
+	{
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Pages.AirWaybills, MVC.AirWaybill.Index())</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Users<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>@Html.ActionLink(Pages.Clients, MVC.Client.Index())</li>
+				<li>@Html.ActionLink(Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
+				<li>@Html.ActionLink(Pages.Managers, MVC.User.Index(RoleType.Manager))</li>
+				<li>@Html.ActionLink(Pages.Brokers, MVC.User.Index(RoleType.Broker))</li>
+				<li>@Html.ActionLink(Pages.Forwarders, MVC.User.Index(RoleType.Forwarder))</li>
+				<li>@Html.ActionLink(Pages.Carriers, MVC.User.Index(RoleType.Carrier))</li>
+				<li>@Html.ActionLink(Pages.Senders, MVC.User.Index(RoleType.Sender))</li>
+			</ul>
+		</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Settings<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>@Html.ActionLink(Pages.States, MVC.Admin.State.Index())</li>
+				<li>@Html.ActionLink(Pages.Templates, MVC.EmailTemplate.Index())</li>
+				<li>@Html.ActionLink(Pages.Cities, MVC.City.Index())</li>
+				<li>@Html.ActionLink(Pages.Countries, MVC.Country.Index())</li>
+			</ul>
+		</li>
+	}
+}
+@helper SenderMenu()
+{
+	if(IdentityService.IsInRole(RoleType.Sender))
+	{
+		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
+		<li>@Html.ActionLink(Entities.AirWaybill, MVC.AirWaybill.Index())</li>
+		<li>@Html.ActionLink(Pages.Report, MVC.SenderCalculation.Index())</li>
+	}
+}
+@helper BrokerMenu()
+{
+	if(IdentityService.IsInRole(RoleType.Broker))
+	{
+		<li>@Html.ActionLink(Entities.AirWaybill, MVC.AirWaybill.Index())</li>
+	}
+}
+@if(IdentityService.IsAuthenticated)
+{
+	<div class="wrap-padding">&nbsp;</div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				@Html.ActionLink("Avion Russia", MVC.Home.Index(), new { @class = "brand" })
+				<ul class="nav">
+					@BrokerMenu()
+					@ClientMenu()
+					@SenderMenu()
+					@ForwarderMenu()
+					@AdminMenu()
+					@CarrierMenu()
+					@ManagerMenu()
+				</ul>
+				<ul class="nav pull-right">
+					<li>
+						@Html.ActionLink(LanguageName.Russian, MVC.Home.Culture(TwoLetterISOLanguageName.Russian, Request.RawUrl))
+					</li>
+					<li>
+						@Html.ActionLink(LanguageName.Italian, MVC.Home.Culture(TwoLetterISOLanguageName.Italian, Request.RawUrl))
+					</li>
+					<li>
+						@Html.ActionLink(LanguageName.English, MVC.Home.Culture(TwoLetterISOLanguageName.English, Request.RawUrl))
+					</li>
+					<li>
+						@Html.ActionLink(Pages.Logout, MVC.Authentication.SignOut())
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+}

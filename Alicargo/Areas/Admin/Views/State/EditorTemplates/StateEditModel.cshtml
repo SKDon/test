@@ -1,0 +1,29 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.Areas.Admin.Models.State.StateEditModel
+
+<div class="state-edit">
+	@Html.HiddenFor(x => x.Id)
+	<div class="row">
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.Name)
+		</div>
+		<div class="span2">
+			@Html.EditorWithLabelFor(model => model.Position)
+		</div>
+		<div class="span3">
+			<p>&nbsp;</p>
+			<div class="state-edit-checkbox">
+				@Html.EditorWithLabelFor(x => x.EnableEmailSend)
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			@Html.LabelFor(x => x.Language)
+			@Html.DropDownListFor(x => x.Language, (IDictionary<string, string>)ViewBag.Languages)
+		</div>
+		<div class="span4">
+			@Html.EditorWithLabelFor(model => model.LocalizedName)
+		</div>
+	</div>
+</div>

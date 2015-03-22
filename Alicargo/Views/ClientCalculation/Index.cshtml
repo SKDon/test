@@ -1,0 +1,17 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.Mvc
+@using Resources
+@inherits BaseWebViewPage
+<p>
+	@Html.ActionLink(Pages.Excel, MVC.ClientCalculation.Excel(), new { @class = "btn btn-info" })
+	<span class="pull-right">
+		@Entities.Balance: @ViewBag.Balance.ToString("N2")€
+		@Html.ActionLink(Pages.History, MVC.ClientCalculation.History((long)ViewBag.ClientId))
+	</span>
+</p>
+<div id="calculation-grid" class="grid"></div>
+
+@section scripts
+{
+	@Scripts.Render(JsPaths.ClientCalculationJs)
+}

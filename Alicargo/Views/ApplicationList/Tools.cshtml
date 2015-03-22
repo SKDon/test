@@ -1,0 +1,38 @@
+﻿@inherits BaseWebViewPage<ApplicationIndexModel>
+@using Alicargo.Core.Resources
+@using Alicargo.DataAccess.Contracts.Enums
+@using Resources
+
+@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager) || IdentityService.IsInRole(RoleType.Sender))
+{
+	<p class="select-client-holder">
+		@Entities.Nic:
+		@Html.DropDownList("selected-client-id", Model.Clients.Select(x => new SelectListItem
+		{
+			Text = x.Value,
+			Value = IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager)
+				? Url.Action(MVC.Application.Create(x.Key))
+				: Url.Action(MVC.SenderApplication.Create(x.Key))
+		}))
+		<a href="#" class="btn btn-primary" id="apply-link">@Pages.ApplicationAdd</a>
+		@Html.ActionLink(Pages.Excel, MVC.Excel.Applications(), new { @class = "btn btn-info" })
+	</p>
+}
+else if (IdentityService.IsInRole(RoleType.Client))
+{
+	<p>
+		@Html.ActionLink(Pages.ApplicationAdd, MVC.ClientApplication.Create(), new { @class = "btn btn-primary" })
+	</p>
+}
+else if (IdentityService.IsInRole(RoleType.Forwarder))
+{
+	<p>
+		@Html.ActionLink(Pages.Excel, MVC.Excel.Applications(), new { @class = "btn btn-info" })
+	</p>
+}
+else if(IdentityService.IsInRole(RoleType.Carrier))
+{
+	<p>
+		@Html.ActionLink(Pages.Excel, MVC.Excel.Applications(), new { @class = "btn btn-info" })
+	</p>
+}

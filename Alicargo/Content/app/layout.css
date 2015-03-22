@@ -1,0 +1,67 @@
+﻿html,
+body {
+	height: 100%;
+}
+
+#wrap {
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -60px;
+	min-height: 100%;
+}
+
+.wrap-padding {
+	height: 60px;
+}
+
+
+.container {
+	padding: 0 20px;
+	width: auto;
+}
+
+.container-edit {
+	margin: 0 auto 20px auto;
+	width: 1170px;
+}
+
+hr {
+	margin-top: 10px;
+}
+
+h1 {
+	font-size: 1.5em;
+}
+
+	h1 span {
+		float: right;
+	}
+
+h2 {
+	font-size: 1.4em;
+}
+
+h3 {
+	font-size: 1.3em;
+}
+
+h4 {
+	font-size: 1.2em;
+}
+
+h1, h2, h3, h4 {
+	line-height: 1.5em;
+}
+
+.input-validation-error {
+	-moz-box-shadow: 0 0 6px #f8b9b7 !important;
+	-webkit-box-shadow: 0 0 6px #f8b9b7 !important;
+	border-color: #e9322d !important;
+	box-shadow: 0 0 6px #f8b9b7 !important;
+	color: #b94a48 !important;
+}
+
+.validation-summary-errors {
+	color: #b94a48;
+	margin-top: 20px;
+}

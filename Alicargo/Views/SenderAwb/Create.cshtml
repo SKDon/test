@@ -1,0 +1,7 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.ViewModels.AirWaybill.AwbSenderModel
+<div class="container-edit">
+	<h1>@Pages.AirWaybillAdd</h1>
+	@Html.EditPage(Url.Action(MVC.SenderAwb.Create()), Pages.AirWaybillAdd)
+</div>

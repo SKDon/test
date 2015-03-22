@@ -1,0 +1,41 @@
+﻿@using Alicargo.DataAccess.Contracts.Contracts
+@using Alicargo.MvcHelpers.Extensions
+@model Alicargo.ViewModels.User.SenderModel
+
+@helper SelectCountries()
+{
+	@Html.LabelFor(x => x.Countries)
+
+	var countries = (CountryData[])ViewBag.Countries;
+
+	var id = Html.IdFor(x => x.Countries);
+
+	<select id="@Html.Raw(id)" name="@Html.Raw(id)" multiple="multiple">
+		@foreach(var country in countries)
+		{
+			var selected = Model != null && Model.Countries.Contains(country.Id);
+			<option @Html.Raw(selected ? "selected" : null) value="@country.Id">@country.Name</option>
+		}
+	</select>
+	<script>$("#@Html.Raw(id)").kendoMultiSelect().data("kendoMultiSelect");</script>
+}
+<div class="row">
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Name)
+		@Html.EditorWithLabelFor(model => model.Contact)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.Email)
+		@Html.EditorWithLabelFor(model => model.Phone)
+	</div>
+	<div class="span4">
+		@Html.EditorWithLabelFor(model => model.TariffOfTapePerBox)
+		@Html.EditorWithLabelFor(model => model.Address)
+	</div>
+</div>
+<div class="row">
+	<div class="span12 multiselect">
+		@SelectCountries()
+	</div>
+</div>
+@Html.EditorFor(x => x.Authentication)

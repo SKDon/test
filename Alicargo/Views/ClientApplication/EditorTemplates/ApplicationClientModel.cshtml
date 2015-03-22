@@ -1,0 +1,50 @@
+﻿@using Alicargo.Core.Resources
+@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@inherits BaseWebViewPage<ApplicationClientModel>
+
+<div class="row">
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.FactoryName)
+		@Html.EditorWithLabelFor(model => model.MarkName)
+		@Html.EditorWithLabelFor(model => model.Invoice)
+		@Html.EditorWithLabelFor(model => model.Characteristic)		
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.FactoryEmail)
+		@Html.EditorWithLabelFor(model => model.FactoryPhone)
+		@Html.EditorWithLabelFor(model => model.FactoryContact)
+		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
+	</div>
+	<div class="span3">
+
+		@Html.LabelFor(x => x.CountryId)
+		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
+		@Html.EditorWithLabelFor(model => model.TermsOfDelivery)
+		@Html.LabelFor(model => model.MethodOfDelivery)
+		@Html.DropDownListForEnum(model => model.MethodOfDelivery)
+		@Html.EditorWithLabelFor(model => model.AddressLoad)
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.Currency)
+		@Html.EditorWithLabelFor(model => model.Weight)
+		@Html.EditorWithLabelFor(model => model.Count)
+		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>&nbsp;)</label>
+		@Html.EditorFor(model => model.Volume)
+	</div>
+</div>
+<div>
+	<hr />
+	<h4>
+		@Pages.Transit
+	</h4>
+	@{
+		var applicationId = (long?)ViewBag.ApplicationId;
+		@(applicationId.HasValue
+			  ? Html.Action(MVC.Transit.EditByApplication(applicationId))
+			  : Html.Action(MVC.Transit.EditByClient((long)ViewBag.ClientId)))
+	}
+</div>
+<div class="appl-edit-checkbox">
+	@Html.EditorWithLabelFor(x => x.IsPickup)
+</div>

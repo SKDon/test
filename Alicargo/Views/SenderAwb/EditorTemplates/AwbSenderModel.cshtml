@@ -1,0 +1,31 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@inherits BaseWebViewPage<Alicargo.ViewModels.AirWaybill.AwbSenderModel>
+
+<div class="row">
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.Bill)
+		@Html.EditorWithLabelFor(model => model.TotalCostOfSenderForWeight)
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.DepartureAirport)
+		@Html.LabelFor(model => model.DateOfDepartureLocalString)
+		<div class="date-holder">
+			@Html.EditorFor(model => model.DateOfDepartureLocalString)
+		</div>
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.ArrivalAirport)
+		@Html.LabelFor(model => model.DateOfArrivalLocalString)
+		<div class="date-holder">
+			@Html.EditorFor(model => model.DateOfArrivalLocalString)
+		</div>
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.FlightCost)
+	</div>
+	<script>
+		$(function() {
+			$(".date-holder input").kendoDatePicker();
+		})
+	</script>
+</div>

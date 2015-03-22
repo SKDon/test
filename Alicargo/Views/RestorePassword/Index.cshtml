@@ -1,0 +1,16 @@
+﻿@using Alicargo.Core.Resources
+@using Resources
+
+<div class="form-signin-container">
+	@using(Html.BeginForm(MVC.RestorePassword.Index(), FormMethod.Post, new { @class = "form-signin" }))
+	{
+		<p>
+			@Pages.InputEmail
+		</p>
+		@Html.TextBox("email", null, new { @class = "input-block-level", placeholder = Entities.Email })
+		<div class="text-center">
+			<button class="btn btn-large btn-primary" type="submit">@Pages.RestorePassword</button>
+		</div>
+		@Html.ValidationSummary()
+	}
+</div>

@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[Sender] 
+(
+	[Id] BIGINT IDENTITY (1, 1) NOT NULL,
+	[UserId] BIGINT NOT NULL,
+	[Name] NVARCHAR (MAX) NOT NULL,
+	[Email] NVARCHAR (320) NOT NULL,
+	[TariffOfTapePerBox] MONEY NOT NULL CONSTRAINT [DF_Sender_TariffOfTapePerBox] DEFAULT(4),
+	[Contact] NVARCHAR (MAX) NULL,
+	[Phone] NVARCHAR (MAX) NULL,
+	[Address] NVARCHAR (MAX) NULL,
+
+	CONSTRAINT [PK_dbo.Sender] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_dbo.Sender_dbo.User_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
+);
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[Sender]([UserId] ASC);
+GO

@@ -1,0 +1,205 @@
+﻿@using Alicargo.Core.Resources
+<tr class="k-group-sub-footer-gray">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td colspan="22">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>sender</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right" title="@Entities.CostPerKgOfSender">#= kendo.toString(CostPerKgOfSender, 'n2') #</td>
+	<td class="text-right text-bold" title="@Entities.TotalSenderRate">#= kendo.toString(TotalSenderRate, 'n2') #</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right text-bold" title="@Entities.TotalScotchCost">#= TotalScotchCost #</td>
+	<td>&nbsp;</td>
+	<td class="text-right text-bold" title="@Entities.FactureCost">#= TotalFactureCost #</td>
+	<td class="text-right text-bold" title="@Entities.FactureCostEx">#= TotalFactureCostEx #</td>
+	<td class="text-right text-bold" title="@Entities.PickupCost">#= TotalPickupCost #</td>
+	<td>&nbsp;</td>
+	<td class="text-right total" title="@Entities.TotalOfSender">#= kendo.toString(TotalOfSender, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>flight</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right text-bold" title="@Entities.FlightCostPerKg">#= kendo.toString(FlightCostPerKg, 'n2') #</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right total" title="@Entities.FlightCost">#= kendo.toString(FlightCost, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>custom</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right text-bold" title="@Entities.CustomCostPerKg">#= kendo.toString(CustomCostPerKg, 'n2') #</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right total" title="@Entities.CustomCost">#= kendo.toString(CustomCost, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>broker</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right text-bold" title="@Entities.BrokerCostPerKg">#= kendo.toString(BrokerCostPerKg, 'n2') #</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right total" title="@Entities.BrokerCost">#= kendo.toString(BrokerCost, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>insurance</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right total" title="@Entities.Insurance">#= kendo.toString(TotalInsuranceCost, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>forwarder</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right total" title="@Entities.TotalTransitCost">#= kendo.toString(TotalTransitCost, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td><b>additional</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td title="@Entities.AdditionalCost" class="additional-cost text-right">
+		<input type="number" min="0" max="1000000" value="#= kendo.toString(AdditionalCost, 'n2') #" />
+	</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer cost-total">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td colspan="19"><b>cost total</b></td>
+	<td class="text-right total" title="@Entities.TotalExpenses">#= kendo.toString(TotalExpenses, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="k-group-sub-footer">
+	<td class='k-group-cell'>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td class="text-right text-bold" #=ProfitPerKg> 0 ? "" : 'style="color: red"'# title="@Entities.ProfitPerKg">#= kendo.toString(ProfitPerKg, 'n2') #</td>
+	<td class="text-right total" #=Profit> 0 ? "" : 'style="color: red"'# title="@Entities.TotalProfit">#= kendo.toString(Profit, 'n2') #</td>
+	<td colspan="2">&nbsp;</td>
+</tr>

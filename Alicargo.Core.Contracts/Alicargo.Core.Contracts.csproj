@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D298560-5149-4DBB-9444-EE2EE9430483}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alicargo.Core.Contracts</RootNamespace>
+    <AssemblyName>Alicargo.Core.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <OutputPath>bin\Dev\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
+      <Link>Properties\ProjectInfo.cs</Link>
+    </Compile>
+    <Compile Include="AirWaybill\IApplicationAwbManager.cs" />
+    <Compile Include="AirWaybill\IAwbManager.cs" />
+    <Compile Include="Calculation\BillSettings.cs" />
+    <Compile Include="Common\IHolder.cs" />
+    <Compile Include="Common\IHttpClient.cs" />
+    <Compile Include="Exceptions\AccessForbidenException.cs" />
+    <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Exceptions\InvalidLogicException.cs" />
+    <Compile Include="Exceptions\UnexpectedStateException.cs" />
+    <Compile Include="State\IAwbStateManager.cs" />
+    <Compile Include="Calculation\ICalculationService.cs" />
+    <Compile Include="Calculation\IExcelClientCalculation.cs" />
+    <Compile Include="Client\IClientBalance.cs" />
+    <Compile Include="Client\IClientPermissions.cs" />
+    <Compile Include="Common\IIdentityService.cs" />
+    <Compile Include="Common\ListCollection.cs" />
+    <Compile Include="Event\ApplicationSetStateEventData.cs" />
+    <Compile Include="Event\IEventFacade.cs" />
+    <Compile Include="Event\IPartitionConverter.cs" />
+    <Compile Include="Excel\IDrawable.cs" />
+    <Compile Include="AirWaybill\IAwbGtdHelper.cs" />
+    <Compile Include="Excel\IExcelGenerator.cs" />
+    <Compile Include="Common\ILog.cs" />
+    <Compile Include="Email\IMailSender.cs" />
+    <Compile Include="State\IApplicationStateManager.cs" />
+    <Compile Include="State\IStateConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\IStateFilter.cs" />
+    <Compile Include="Users\IForwarderService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alicargo.DataAccess.Contracts\Alicargo.DataAccess.Contracts.csproj">
+      <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
+      <Name>Alicargo.DataAccess.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

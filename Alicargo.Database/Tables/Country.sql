@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Country]
+(
+	[Id] BIGINT IDENTITY(1,1) NOT NULL,
+	[Name_En] NVARCHAR(128) NOT NULL,
+	[Name_Ru] NVARCHAR(128) NOT NULL,
+	[Position] INT NOT NULL, 
+
+    CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED ([Id] ASC)
+ )
+GO

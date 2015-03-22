@@ -1,0 +1,66 @@
+﻿#calculation-grid .k-alt {
+	background-color: inherit;
+}
+
+#calculation-grid td {
+	border-width: 1px 0 0 1px;
+	font-family: Arial;
+	padding-bottom: 0;
+	padding-top: 6px;
+}
+
+#calculation-grid td.k-edit-cell{
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
+#calculation-grid .cell-button {
+	padding-bottom: 3px;
+	padding-top: 3px;
+}
+
+#calculation-grid .text-bold {
+	font-weight: bold;
+}
+
+#calculation-grid .k-grouping-row td {
+	background-color: #ffff00;
+}
+
+#calculation-grid .k-group-sub-footer td.total {
+	font-weight: bold;
+}
+
+#calculation-grid .k-group-sub-footer.cost-total td {
+	background-color: #ff99cc;
+}
+
+#calculation-grid .k-group-footer td {
+	background-color: inherit;
+}
+
+#calculation-grid .k-group-sub-footer-gray td {
+	background-color: #e3e3e3;
+}
+
+#calculation-grid .additional-cost {
+	margin-bottom: 0;
+	padding: 0;
+}
+
+	#calculation-grid .additional-cost * {
+		border: 0 none;
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
+		border-radius: 0;
+	}
+
+	#calculation-grid .additional-cost .k-numerictextbox {
+		width: 100%;
+		text-align: right;
+	}
+
+#calculation-grid td.k-group-cell {
+	background-color: #e3e3e3;
+	border: 0 none;
+}

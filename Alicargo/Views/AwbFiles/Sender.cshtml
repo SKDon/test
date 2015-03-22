@@ -1,0 +1,12 @@
+﻿@using Alicargo.DataAccess.Contracts.Enums
+<div class="row">
+	<div class="span3">
+		@Html.Partial("FilesHolder", AwbFileType.Packing)
+	</div>
+	<div class="span3">
+		@Html.Partial("FilesHolder", AwbFileType.Draw)
+	</div>
+	<div class="span3">
+		@Html.Partial("FilesHolder", AwbFileType.Other)
+	</div>
+</div>

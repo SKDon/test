@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alicargo.DataAccess.Contracts</RootNamespace>
+    <AssemblyName>Alicargo.DataAccess.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <OutputPath>bin\Dev\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Alicargo\Properties\ProjectInfo.cs">
+      <Link>Properties\ProjectInfo.cs</Link>
+    </Compile>
+    <Compile Include="Contracts\Awb\AirWaybillAggregate.cs" />
+    <Compile Include="Contracts\Application\ApplicationEditData.cs" />
+    <Compile Include="Contracts\Application\BillData.cs" />
+    <Compile Include="Contracts\Awb\AirWaybillEditData.cs" />
+    <Compile Include="Contracts\Calculation\RegistryOfPaymentsData.cs" />
+    <Compile Include="Contracts\EventData.cs" />
+    <Compile Include="Contracts\ApplicationEventTemplateData.cs" />
+    <Compile Include="Contracts\Application\ApplicationData.cs" />
+    <Compile Include="Contracts\EventDataForEntity.cs" />
+    <Compile Include="Contracts\Setting.cs" />
+    <Compile Include="Contracts\State\StateEditData.cs" />
+    <Compile Include="Contracts\Calculation\ClientBalanceHistoryItem.cs" />
+    <Compile Include="Contracts\User\ClientEditData.cs" />
+    <Compile Include="Contracts\User\EmailData.cs" />
+    <Compile Include="Contracts\User\PasswordData.cs" />
+    <Compile Include="Contracts\User\BrokerData.cs" />
+    <Compile Include="Contracts\Calculation\CalculationData.cs" />
+    <Compile Include="Contracts\User\CarrierData.cs" />
+    <Compile Include="Contracts\CityData.cs" />
+    <Compile Include="Contracts\User\ClientData.cs" />
+    <Compile Include="Contracts\EmailMessage.cs" />
+    <Compile Include="Contracts\EmailMessageData.cs" />
+    <Compile Include="Contracts\EmailTemplateLocalizationData.cs" />
+    <Compile Include="Contracts\FileInfo.cs" />
+    <Compile Include="Contracts\RecipientData.cs" />
+    <Compile Include="Contracts\User\SenderData.cs" />
+    <Compile Include="Contracts\State\StateRole.cs" />
+    <Compile Include="Contracts\CountryData.cs" />
+    <Compile Include="Contracts\FileHolder.cs" />
+    <Compile Include="Contracts\Awb\AirWaybillData.cs" />
+    <Compile Include="Contracts\State\StateData.cs" />
+    <Compile Include="Contracts\TransitData.cs" />
+    <Compile Include="Contracts\User\ForwarderData.cs" />
+    <Compile Include="Contracts\User\UserData.cs" />
+    <Compile Include="Contracts\User\UserEntityData.cs" />
+    <Compile Include="Enums\AwbFileType.cs" />
+    <Compile Include="Enums\ClassType.cs" />
+    <Compile Include="Enums\CurrencyName.cs" />
+    <Compile Include="Enums\CurrencyType.cs" />
+    <Compile Include="Enums\DeliveryType.cs" />
+    <Compile Include="Enums\EventState.cs" />
+    <Compile Include="Enums\EventType.cs" />
+    <Compile Include="Enums\ApplicationFileType.cs" />
+    <Compile Include="Enums\CalculationState.cs" />
+    <Compile Include="Enums\EmailMessageState.cs" />
+    <Compile Include="Enums\MethodOfDelivery.cs" />
+    <Compile Include="Enums\MethodOfTransit.cs" />
+    <Compile Include="Enums\RoleType.cs" />
+    <Compile Include="Enums\SettingType.cs" />
+    <Compile Include="Enums\TwoLetterISOLanguageName.cs" />
+    <Compile Include="Exceptions\DeleteConflictedWithConstraintException.cs" />
+    <Compile Include="Exceptions\DublicateLoginException.cs" />
+    <Compile Include="Exceptions\DublicateException.cs" />
+    <Compile Include="Exceptions\UpdateConflictException.cs" />
+    <Compile Include="Helpers\EmailsHelper.cs" />
+    <Compile Include="Helpers\Order.cs" />
+    <Compile Include="Helpers\OrderType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Application\IAwbFileRepository.cs" />
+    <Compile Include="Repositories\Application\IBillRepository.cs" />
+    <Compile Include="Repositories\ISettingRepository.cs" />
+    <Compile Include="Repositories\User\IManagerRepository.cs" />
+    <Compile Include="Resources\AwbFileType.Designer.cs">
+      <DependentUpon>AwbFileType.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ApplicationFileType.Designer.cs">
+      <DependentUpon>ApplicationFileType.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ApplicationFileType.it.Designer.cs">
+      <DependentUpon>ApplicationFileType.it.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\AwbFileType.ru.Designer.cs">
+      <DependentUpon>AwbFileType.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ApplicationFileType.ru.Designer.cs">
+      <DependentUpon>ApplicationFileType.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums.Designer.cs">
+      <DependentUpon>Enums.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums.it.Designer.cs">
+      <DependentUpon>Enums.it.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums.ru.Designer.cs">
+      <DependentUpon>Enums.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\EventType.Designer.cs">
+      <DependentUpon>EventType.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\EventType.ru.Designer.cs">
+      <DependentUpon>EventType.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Repositories\IEventEmailRecipient.cs" />
+    <Compile Include="Repositories\User\IAdminRepository.cs" />
+    <Compile Include="Repositories\IEventRepository.cs" />
+    <Compile Include="Repositories\Application\IApplicationFileRepository.cs" />
+    <Compile Include="Repositories\Application\IApplicationRepository.cs" />
+    <Compile Include="Repositories\Application\IApplicationEditor.cs" />
+    <Compile Include="Repositories\Application\IAwbRepository.cs" />
+    <Compile Include="Repositories\User\IBrokerRepository.cs" />
+    <Compile Include="Repositories\ICalculationRepository.cs" />
+    <Compile Include="Repositories\User\ICarrierRepository.cs" />
+    <Compile Include="Repositories\ICityRepository.cs" />
+    <Compile Include="Repositories\User\IClientBalanceRepository.cs" />
+    <Compile Include="Repositories\User\IClientRepository.cs" />
+    <Compile Include="Repositories\ICountryRepository.cs" />
+    <Compile Include="Repositories\User\IClientFileRepository.cs" />
+    <Compile Include="Repositories\IEmailMessageRepository.cs" />
+    <Compile Include="Repositories\ITemplateRepository.cs" />
+    <Compile Include="Repositories\User\IForwarderRepository.cs" />
+    <Compile Include="Repositories\User\ISenderRepository.cs" />
+    <Compile Include="Repositories\ISqlProcedureExecutor.cs" />
+    <Compile Include="Repositories\IStateSettingsRepository.cs" />
+    <Compile Include="Repositories\IStateRepository.cs" />
+    <Compile Include="Repositories\ITransaction.cs" />
+    <Compile Include="Repositories\ITransitRepository.cs" />
+    <Compile Include="Repositories\User\IUserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AwbFileType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AwbFileType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ApplicationFileType.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationFileType.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ApplicationFileType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationFileType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AwbFileType.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AwbFileType.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ApplicationFileType.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationFileType.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Enums.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Enums.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Enums.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EventType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EventType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EventType.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EventType.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alicargo.Utilities\Alicargo.Utilities.csproj">
+      <Project>{28A88A2C-7BA4-4F4E-9131-AD69B070CD31}</Project>
+      <Name>Alicargo.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

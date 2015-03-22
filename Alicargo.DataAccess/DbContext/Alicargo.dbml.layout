@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.5, 35.875" name="Alicargo">
+  <DataContextMoniker Name="/AlicargoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c726a7cf-967f-4f49-9e80-d996ba003e61" absoluteBounds="3.5, 12.75, 2, 1.5785953775048256">
+      <DataClassMoniker Name="/AlicargoDataContext/Admin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1affa29b-9237-42ec-85f8-e93902146bc5" absoluteBounds="3.5150000005960464, 13.21000000089407, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a0674dd9-e2eb-45e9-a165-28fe62533e69" absoluteBounds="6.25, 27.875, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/AlicargoDataContext/StateVisibility" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8399c366-f858-41ec-98b2-8a969a5df415" absoluteBounds="6.265, 28.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3ae4009d-da95-40a4-b54d-0794ae9703ed" absoluteBounds="6.25, 17.125, 2, 4.2708154296875023">
+      <DataClassMoniker Name="/AlicargoDataContext/AirWaybill" />
+      <nestedChildShapes>
+        <elementListCompartment Id="48d28006-f771-4649-b0aa-4ee9d255e956" absoluteBounds="6.2650000005960464, 17.58500000089407, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5090cda7-9358-4bb3-9e4e-78d644706773" absoluteBounds="6.25, 8.5, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/AlicargoDataContext/StateAvailability" />
+      <nestedChildShapes>
+        <elementListCompartment Id="28f0d997-3cbf-4140-bc7d-ce118a857da9" absoluteBounds="6.265, 8.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="51be147e-4d78-4690-97a2-32dae4050563" absoluteBounds="3.5, 20.125, 2, 1.5785953775048256">
+      <DataClassMoniker Name="/AlicargoDataContext/Broker" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fc267c52-501f-4a9c-9dbd-fe352ecee6e5" absoluteBounds="3.5150000005960464, 20.58500000089407, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fa76a156-b703-46db-a72c-375c973cf982" absoluteBounds="9.25, 11.75, 2, 3.8862125651041737">
+      <DataClassMoniker Name="/AlicargoDataContext/Calculation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c9d49300-5c31-4697-a66d-48849acc5386" absoluteBounds="9.2650000005960464, 12.21000000089407, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7f665364-a52a-4fd9-981c-c5f7eb44d4ab" absoluteBounds="6.5, 11.375, 2, 4.6554182942708309">
+      <DataClassMoniker Name="/AlicargoDataContext/Client" />
+      <nestedChildShapes>
+        <elementListCompartment Id="22e93c6c-c694-4df1-a41b-7105963861d2" absoluteBounds="6.5150000005960464, 11.83500000089407, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="50044dc8-3672-4fcd-9ac1-25ea96549cd0" absoluteBounds="6.5, 22.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/AlicargoDataContext/Country" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d5c23d6a-9608-4b45-9277-b2682c2fec24" absoluteBounds="6.5150000005960464, 23.21000000089407, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a313918a-0cb4-4d42-88ae-ae3885441f11" absoluteBounds="3.5, 22.5, 2, 1.5785953775048256">
+      <DataClassMoniker Name="/AlicargoDataContext/Forwarder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e2c489c3-00a0-4458-bcb7-b8ed90a51eb7" absoluteBounds="3.5150000005960464, 22.96000000089407, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b8bb87c2-5378-4dd4-a50a-e4df820f12e6" absoluteBounds="3.5, 24.75, 2, 2.3478011067708309">
+      <DataClassMoniker Name="/AlicargoDataContext/Sender" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eafc9351-6d90-4b4a-bb48-168cb7f6979d" absoluteBounds="3.5150000005960464, 25.21000000089407, 1.9700000000000002, 1.7878011067708333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" absoluteBounds="3.5, 17.625, 2, 1.3862939458340406">
+      <DataClassMoniker Name="/AlicargoDataContext/State" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ec366b1b-6e13-45d9-a726-86d271942d7a" absoluteBounds="3.5150000005960464, 18.08500000089407, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="16b129dc-68b5-4ed5-8145-ecf42f67446c" absoluteBounds="6.25, 25.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/AlicargoDataContext/StateLocalization" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e072a286-d875-404e-8322-933a37bf7ec0" absoluteBounds="6.265, 25.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9c78bea5-6853-415b-8424-710b6650ff07" absoluteBounds="0.75, 16.875, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/AlicargoDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="191134a5-f329-4536-bc77-30361ba5c35d" absoluteBounds="0.76500000059604645, 17.33500000089407, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 20.7604077148438); (5.66666666666667 : 20.7604077148438 : JumpStart); (6.11458333333333 : 20.7604077148438 : JumpEnd); (6.25 : 20.7604077148438)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Broker/Broker_AirWaybill" />
+      <nodes>
+        <classShapeMoniker Id="51be147e-4d78-4690-97a2-32dae4050563" />
+        <classShapeMoniker Id="3ae4009d-da95-40a4-b54d-0794ae9703ed" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 13.6931062825521); (9.25 : 13.6931062825521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Client/Client_Calculation" />
+      <nodes>
+        <classShapeMoniker Id="7f665364-a52a-4fd9-981c-c5f7eb44d4ab" />
+        <classShapeMoniker Id="fa76a156-b703-46db-a72c-375c973cf982" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.47760602087499 : 19.011293945834); (5.69107443490112 : 19.2247623598602 : JumpStart); (5.80892556509888 : 19.3426134900579 : JumpEnd); (5.875 : 19.4086879249591); (5.875 : 28.4719962565104); (6.25 : 28.4719962565104)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/State/State_StateVisibility" />
+      <nodes>
+        <classShapeMoniker Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" />
+        <classShapeMoniker Id="a0674dd9-e2eb-45e9-a165-28fe62533e69" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 18.286894472917); (5.66666666666667 : 18.286894472917 : JumpStart); (5.83333333333333 : 18.286894472917 : JumpEnd); (5.91666666666667 : 18.286894472917 : JumpStart); (6.08333333333333 : 18.286894472917 : JumpEnd); (6.25 : 18.286894472917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/State/State_AirWaybill" />
+      <nodes>
+        <classShapeMoniker Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" />
+        <classShapeMoniker Id="3ae4009d-da95-40a4-b54d-0794ae9703ed" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 17.625); (5.69107443490112 : 17.4339255650989 : JumpStart); (5.80892556509888 : 17.3160744349011 : JumpEnd); (5.875 : 17.25); (5.875 : 9.09699625651042); (6.25 : 9.09699625651042)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/State/State_StateAvailability" />
+      <nodes>
+        <classShapeMoniker Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" />
+        <classShapeMoniker Id="5090cda7-9358-4bb3-9e4e-78d644706773" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 18.956907567959); (5.69107443490112 : 19.1479820028601 : JumpStart); (5.80892556509888 : 19.2658331330579 : JumpEnd); (6.03125 : 19.488157567959); (6.03125 : 26.2892976888021); (6.25 : 26.2892976888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/State/State_StateLocalization" />
+      <nodes>
+        <classShapeMoniker Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" />
+        <classShapeMoniker Id="16b129dc-68b5-4ed5-8145-ecf42f67446c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 16.875); (1.75 : 13.5392976887524); (3.5 : 13.5392976887524)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_Admin" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="c726a7cf-967f-4f49-9e80-d996ba003e61" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 18.6458968098958); (1.75 : 20.9142976887524); (2.19791916666667 : 20.9142976887524 : JumpStart); (2.36458583333333 : 20.9142976887524 : JumpEnd); (2.46354541666667 : 20.9142976887524 : JumpStart); (2.63021208333333 : 20.9142976887524 : JumpEnd); (3.5 : 20.9142976887524)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_Broker" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="51be147e-4d78-4690-97a2-32dae4050563" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 16.875); (2.2812525 : 15.2107568358878); (5.66666666666667 : 15.2107568358878 : JumpStart); (5.95833333333333 : 15.2107568358878 : JumpEnd); (6.5 : 15.2107568358878)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_Client" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="7f665364-a52a-4fd9-981c-c5f7eb44d4ab" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 18.6458968098958); (2.2812525 : 23.2892976887524); (2.46354541666667 : 23.2892976887524 : JumpStart); (2.63021208333333 : 23.2892976887524 : JumpEnd); (3.5 : 23.2892976887524)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_Forwarder" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="a313918a-0cb4-4d42-88ae-ae3885441f11" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.2187475 : 18.6458968098958); (1.2187475 : 25.9239005533854); (2.46354541666667 : 25.9239005533854 : JumpStart); (2.63021208333333 : 25.9239005533854 : JumpEnd); (3.5 : 25.9239005533854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_Sender" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="b8bb87c2-5378-4dd4-a50a-e4df820f12e6" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="8c899863-d335-4756-988e-661ea97f0ead" absoluteBounds="6.25, 33.125, 2, 2.5401025390625023">
+      <DataClassMoniker Name="/AlicargoDataContext/Transit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="520c37e6-4a51-4a1c-bafc-7763e0959531" absoluteBounds="6.2650000005960464, 33.58500000089407, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.25 : 33.125); (7.25 : 29.3189925130208); (5.75 : 29.3189925130208); (5.75 : 13.2616264179439); (5.79166666666667 : 13.2616264179439 : JumpStart); (5.95833333333333 : 13.2616264179439 : JumpEnd); (6.5 : 13.2616264179439)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Transit/Transit_Client" />
+      <nodes>
+        <classShapeMoniker Id="8c899863-d335-4756-988e-661ea97f0ead" />
+        <classShapeMoniker Id="7f665364-a52a-4fd9-981c-c5f7eb44d4ab" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="6bc4a5af-d3f5-4fb8-9454-2b7263988409" absoluteBounds="3.5, 30.625, 2, 1.578595377604163">
+      <DataClassMoniker Name="/AlicargoDataContext/City" />
+      <nestedChildShapes>
+        <elementListCompartment Id="14c9658a-7783-48f9-9637-59fa5f1a173f" absoluteBounds="3.5150000005960464, 31.08500000089407, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 31.4142976888021); (6.7187475 : 31.4142976888021); (6.7187475 : 33.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/City/City_Transit" />
+      <nodes>
+        <classShapeMoniker Id="6bc4a5af-d3f5-4fb8-9454-2b7263988409" />
+        <classShapeMoniker Id="8c899863-d335-4756-988e-661ea97f0ead" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f73daba2-00c2-4257-92d3-3fb5760df830" absoluteBounds="3.5, 33.25, 2, 2.1554996744791737">
+      <DataClassMoniker Name="/AlicargoDataContext/Carrier" />
+      <nestedChildShapes>
+        <elementListCompartment Id="02c18d95-fc86-4cd1-a949-f1ae44a5e7c8" absoluteBounds="3.5150000005960464, 33.71000000089407, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 34.3277498372396); (6.25 : 34.3277498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Carrier/Carrier_Transit" />
+      <nodes>
+        <classShapeMoniker Id="f73daba2-00c2-4257-92d3-3fb5760df830" />
+        <classShapeMoniker Id="8c899863-d335-4756-988e-661ea97f0ead" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.54687875 : 18.6458968098958); (2.54687875 : 34.3277498372396); (3.5 : 34.3277498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_Carrier" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="f73daba2-00c2-4257-92d3-3fb5760df830" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" absoluteBounds="9.25, 18.75, 2, 9.6552555338541666">
+      <DataClassMoniker Name="/AlicargoDataContext/Application" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6c38fba2-7f27-4bb5-91db-7915527cc167" absoluteBounds="9.2650000005960464, 19.21000000089407, 1.9700000000000002, 9.0952555338541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 20.0729077148438); (8.79166666666667 : 20.0729077148438 : JumpStart); (8.95833333333333 : 20.0729077148438 : JumpEnd); (9.25 : 20.0729077148438)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/AirWaybill/AirWaybill_Application" />
+      <nodes>
+        <classShapeMoniker Id="3ae4009d-da95-40a4-b54d-0794ae9703ed" />
+        <classShapeMoniker Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 16.0304182942708); (8.875 : 16.4054182942708); (8.875 : 24.270333624349); (9.25 : 24.270333624349)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Client/Client_Application" />
+      <nodes>
+        <classShapeMoniker Id="7f665364-a52a-4fd9-981c-c5f7eb44d4ab" />
+        <classShapeMoniker Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 23.4476668121745); (8.79166666666667 : 23.4476668121745 : JumpStart); (8.95833333333333 : 23.4476668121745 : JumpEnd); (9.25 : 23.4476668121745)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Country/Country_Application" />
+      <nodes>
+        <classShapeMoniker Id="50044dc8-3672-4fcd-9ac1-25ea96549cd0" />
+        <classShapeMoniker Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 22.59375); (5.66666666666667 : 22.59375 : JumpStart); (6.11458333333333 : 22.59375 : JumpEnd); (8.79166666666667 : 22.59375 : JumpStart); (8.95833333333333 : 22.59375 : JumpEnd); (9.25 : 22.59375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Forwarder/Forwarder_Application" />
+      <nodes>
+        <classShapeMoniker Id="a313918a-0cb4-4d42-88ae-ae3885441f11" />
+        <classShapeMoniker Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 25.09375); (5.66666666666667 : 25.09375 : JumpStart); (6.11458333333333 : 25.09375 : JumpEnd); (9.25 : 25.09375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Sender/Sender_Application" />
+      <nodes>
+        <classShapeMoniker Id="b8bb87c2-5378-4dd4-a50a-e4df820f12e6" />
+        <classShapeMoniker Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 18.621901020438); (5.66666666666667 : 18.621901020438 : JumpStart); (5.83333333333333 : 18.621901020438 : JumpEnd); (6 : 18.621901020438); (6 : 16.875); (8.79166666666667 : 16.875 : JumpStart); (8.95833333333333 : 16.875 : JumpEnd); (10.25 : 16.875); (10.25 : 18.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/State/State_Application" />
+      <nodes>
+        <classShapeMoniker Id="e56f5756-7e77-4c54-b41d-ea25844b18c2" />
+        <classShapeMoniker Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 34.3950512695313); (10.25 : 34.3950512695313); (10.25 : 28.4052555338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/Transit/Transit_Application" />
+      <nodes>
+        <classShapeMoniker Id="8c899863-d335-4756-988e-661ea97f0ead" />
+        <classShapeMoniker Id="90241786-5e9d-4c0f-a5fc-5cdcfb061762" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="43f87ac3-8cc5-48be-893a-7540877fecfd" absoluteBounds="3.5, 10.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/AlicargoDataContext/Manager" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a2d1cab0-cbc2-4bb8-8764-bef93338da4a" absoluteBounds="3.515, 10.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.2187475 : 16.875); (1.2187475 : 11.2892976888021); (3.5 : 11.2892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_Manager" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="43f87ac3-8cc5-48be-893a-7540877fecfd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 17.34375); (5.66666666666667 : 17.34375 : JumpStart); (5.86458333333333 : 17.34375 : JumpEnd); (5.91666666666667 : 17.34375 : JumpStart); (6.08333333333333 : 17.34375 : JumpEnd); (6.25 : 17.34375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AlicargoDataContext/User/User_AirWaybill" />
+      <nodes>
+        <classShapeMoniker Id="9c78bea5-6853-415b-8424-710b6650ff07" />
+        <classShapeMoniker Id="3ae4009d-da95-40a4-b54d-0794ae9703ed" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

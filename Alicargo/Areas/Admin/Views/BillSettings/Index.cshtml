@@ -1,0 +1,9 @@
+﻿@using Alicargo.MvcHelpers.Extensions
+@using Resources
+@model Alicargo.Areas.Admin.Models.BillSettingsModel
+<div class="container-edit">
+	<h1>
+		Параметры счёта
+	</h1>
+	@Html.EditPage(Url.Action(MVC.Admin.BillSettings.Index()), Pages.Save)
+</div>
