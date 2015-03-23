@@ -2,10 +2,10 @@
 
 # Contents
 
-## Development invironment
+## Development Environment
  1. [System requirements](./Doc/SoftwareRequirements.md)
  2. TBD
 
-## Business docuemntation
+## Business Documentation
  1. Toll
  2. TBD
