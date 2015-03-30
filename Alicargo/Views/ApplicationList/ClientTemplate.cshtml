@@ -53,6 +53,23 @@
 			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
 			# } #
 			# } #
+			
+			# if(T1Files != null){ #
+			# for(i in T1Files) { #
+			# var item = T1Files[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+			
+			# if(Ex1Files != null){ #
+			# for(i in Ex1Files) { #
+			# var item = Ex1Files[i]; #
+			# if(!item || !item.Id) continue; #
+			<a class="btn btn-info" href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+			# } #
+			# } #
+
 			# if(CPFiles != null){ #
 			# for(i in CPFiles) { #
 			# var item = CPFiles[i]; #

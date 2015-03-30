@@ -1,27 +1,35 @@
 ﻿@using Alicargo.DataAccess.Contracts.Enums
 <div class="row">
-	<div class="span3">
+	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.Invoice)
 	</div>
-	<div class="span3">
+	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.CP)
 	</div>
-	<div class="span3">
+	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.DeliveryBill)
-	</div>
-	<div class="span3">
-		@Html.Partial("FilesHolder", ApplicationFileType.Other)
-	</div>
+	</div>	
 </div>
 <br />
 <div class="row">
-	<div class="span3">
+	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.Packing)
 	</div>
-	<div class="span3">
+	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.Swift)
 	</div>
-	<div class="span3">
+	<div class="span4">
 		@Html.Partial("FilesHolder", ApplicationFileType.Torg12)
+	</div>
+</div>
+<div class="row">
+	<div class="span4">
+		@Html.Partial("FilesHolder", ApplicationFileType.T1)
+	</div>
+	<div class="span4">
+		@Html.Partial("FilesHolder", ApplicationFileType.Ex1)
+	</div>
+	<div class="span4">
+		@Html.Partial("FilesHolder", ApplicationFileType.Other)
 	</div>
 </div>

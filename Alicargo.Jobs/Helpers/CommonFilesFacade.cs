@@ -61,6 +61,8 @@ namespace Alicargo.Jobs.Helpers
 				case EventType.SwiftFileUploaded:
 				case EventType.DeliveryBillFileUploaded:
 				case EventType.Torg12FileUploaded:
+				case EventType.T1FileUploaded:
+				case EventType.Ex1FileUploaded:
 				case EventType.GTDFileUploaded:
 				case EventType.GTDAdditionalFileUploaded:
 				case EventType.AwbPackingFileUploaded:

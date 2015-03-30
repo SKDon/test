@@ -10,6 +10,6 @@
 		Torg12 = 5,
 		Packing = 6,
 		T1 = 7,
-		EX1 = 8
+		Ex1 = 8
 	}
 }

@@ -124,6 +124,8 @@ namespace Alicargo.Tests.Services.Application
 				item.CanSetTransitCost.ShouldBeEquivalentTo(!_calculations.ContainsKey(item.Id));
 				item.CPFiles.Should().BeNull();
 				item.Torg12Files.Should().BeNull();
+				item.T1Files.Should().BeNull();
+				item.Ex1Files.Should().BeNull();
 				item.DeliveryBillFiles.Should().BeNull();
 				item.PackingFiles.Should().BeNull();
 				item.SwiftFiles.Should().BeNull();

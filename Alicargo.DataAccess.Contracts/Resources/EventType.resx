@@ -204,4 +204,10 @@
   <data name="OtherApplFileUploaded" xml:space="preserve">
     <value>Other file uploaded to application</value>
   </data>
+  <data name="Ex1FileUploaded" xml:space="preserve">
+    <value>Ex1 file is uploaded</value>
+  </data>
+  <data name="T1FileUploaded" xml:space="preserve">
+    <value>T1 file is uploaded</value>
+  </data>
 </root>

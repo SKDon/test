@@ -123,6 +123,9 @@
   <data name="DeliveryBill" xml:space="preserve">
     <value>Delivery bill</value>
   </data>
+  <data name="Ex1" xml:space="preserve">
+    <value>EX-1</value>
+  </data>
   <data name="Invoice" xml:space="preserve">
     <value>Invoice</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="Swift" xml:space="preserve">
     <value>SWIFT</value>
+  </data>
+  <data name="T1" xml:space="preserve">
+    <value>T1</value>
   </data>
   <data name="Torg12" xml:space="preserve">
     <value>TORG 12</value>

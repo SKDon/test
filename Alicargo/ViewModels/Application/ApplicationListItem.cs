@@ -75,6 +75,10 @@ namespace Alicargo.ViewModels.Application
 
 		public FileInfo[] OtherFiles { get; set; }
 
+		public FileInfo[] T1Files { get; set; }
+
+		public FileInfo[] Ex1Files { get; set; }
+
 		public string Characteristic { get; set; }
 
 		public string AddressLoad { get; set; }
