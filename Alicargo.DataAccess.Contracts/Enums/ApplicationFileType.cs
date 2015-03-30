@@ -8,6 +8,8 @@
 		CP = 3,
 		DeliveryBill = 4,
 		Torg12 = 5,
-		Packing = 6
+		Packing = 6,
+		T1 = 7,
+		EX1 = 8
 	}
 }

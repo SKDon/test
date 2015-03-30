@@ -183,7 +183,7 @@
       <Name>Alicargo.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alicargo\Alicargo.csproj">
-      <Project>{8666b402-84b6-49d4-abd7-b2966955c9cb}</Project>
+      <Project>{8666B402-84B6-49D4-ABD7-B2966955C9CB}</Project>
       <Name>Alicargo</Name>
     </ProjectReference>
   </ItemGroup>
