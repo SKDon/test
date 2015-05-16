@@ -110,10 +110,6 @@
       <Project>{28A88A2C-7BA4-4F4E-9131-AD69B070CD31}</Project>
       <Name>Alicargo.Utilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alicargo\Alicargo.csproj">
-      <Project>{8666b402-84b6-49d4-abd7-b2966955c9cb}</Project>
-      <Name>Alicargo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

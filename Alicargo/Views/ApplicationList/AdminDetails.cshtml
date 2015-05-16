@@ -227,6 +227,26 @@
 	# } #
 </p>
 # } #
+# if(T1Files != null){ #
+<p>
+	<span>@Entities.T1:</span>
+	# for(i in T1Files) { #
+	# var item = T1Files[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
+</p>
+# } #
+# if(Ex1Files != null){ #
+<p>
+	<span>@Entities.Ex1:</span>
+	# for(i in Ex1Files) { #
+	# var item = Ex1Files[i]; #
+	# if(!item || !item.Id) continue; #
+	<a href="@Url.Action(MVC.ApplicationFiles.Download())/#=item.Id#">#= item.Name #</a>
+	# } #
+</p>
+# } #
 # if(CPFiles != null){ #
 <p>
 	<span>@Entities.CP:</span>

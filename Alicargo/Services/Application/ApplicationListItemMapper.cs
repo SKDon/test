@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.Contracts.State;
 using Alicargo.Core.Helpers;
-using Alicargo.Core.Resources;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
@@ -57,6 +56,8 @@ namespace Alicargo.Services.Application
 			var otherFiles = _files.GetInfo(appIds, ApplicationFileType.Other);
 			var swifts = _files.GetInfo(appIds, ApplicationFileType.Swift);
 			var torg12 = _files.GetInfo(appIds, ApplicationFileType.Torg12);
+			var t1 = _files.GetInfo(appIds, ApplicationFileType.T1);
+			var ex1 = _files.GetInfo(appIds, ApplicationFileType.Ex1);
 			var cities = _cities.All(language).ToDictionary(x => x.Id, x => x.Name);
 
 			return data.Select(x => new ApplicationListItem
@@ -129,6 +130,8 @@ namespace Alicargo.Services.Application
 				OtherFiles = otherFiles.ContainsKey(x.Id) ? otherFiles[x.Id].ToArray() : null,
 				SwiftFiles = swifts.ContainsKey(x.Id) ? swifts[x.Id].ToArray() : null,
 				Torg12Files = torg12.ContainsKey(x.Id) ? torg12[x.Id].ToArray() : null,
+				T1Files = t1.ContainsKey(x.Id) ? t1[x.Id].ToArray() : null,
+				Ex1Files = ex1.ContainsKey(x.Id) ? ex1[x.Id].ToArray() : null,
 				DisplayNumber = x.GetApplicationDisplay(),
 				DaysInWork = x.GetDaysInWork(),
 				CreationTimestampLocalString = LocalizationHelper.GetDate(x.CreationTimestamp, CultureProvider.GetCultureInfo()),

@@ -501,4 +501,10 @@
   <data name="Pickup" xml:space="preserve">
     <value>Pickup</value>
   </data>
+  <data name="Ex1" xml:space="preserve">
+    <value>EX-1</value>
+  </data>
+  <data name="T1" xml:space="preserve">
+    <value>T1</value>
+  </data>
 </root>

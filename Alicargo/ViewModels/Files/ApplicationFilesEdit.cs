@@ -10,5 +10,7 @@ namespace Alicargo.ViewModels.Files
 		public FileHolder[] DeliveryBills { get; set; }
 		public FileHolder[] Torg12 { get; set; }
 		public FileHolder[] Packings { get; set; }
+		public FileHolder[] T1 { get; set; }
+		public FileHolder[] Ex1 { get; set; }
 	}
 }

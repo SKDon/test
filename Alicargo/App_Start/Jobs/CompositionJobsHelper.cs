@@ -188,6 +188,8 @@ namespace Alicargo.Jobs
 						{ EventType.SwiftFileUploaded, processors },
 						{ EventType.DeliveryBillFileUploaded, processors },
 						{ EventType.Torg12FileUploaded, processors },
+						{ EventType.T1FileUploaded, processors },
+						{ EventType.Ex1FileUploaded, processors },
 						{ EventType.OtherApplFileUploaded, processors },
 						{ EventType.Calculate, processors },
 						{ EventType.SetSender, processors },

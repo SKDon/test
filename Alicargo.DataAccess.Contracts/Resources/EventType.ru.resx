@@ -204,4 +204,10 @@
   <data name="OtherAwbFileUploaded" xml:space="preserve">
     <value>Загружен файл без типа в накладную</value>
   </data>
+  <data name="Ex1FileUploaded" xml:space="preserve">
+    <value>Загружен  Ex1</value>
+  </data>
+  <data name="T1FileUploaded" xml:space="preserve">
+    <value>Загружен T1</value>
+  </data>
 </root>

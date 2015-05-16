@@ -87,6 +87,8 @@ namespace Alicargo.Jobs.Application.Helpers
 				case EventType.SwiftFileUploaded:
 				case EventType.DeliveryBillFileUploaded:
 				case EventType.Torg12FileUploaded:
+				case EventType.T1FileUploaded:
+				case EventType.Ex1FileUploaded:
 				case EventType.OtherApplFileUploaded:
 					OnFileUpload(bytes, localizedData);
 					break;
@@ -118,6 +120,8 @@ namespace Alicargo.Jobs.Application.Helpers
 			var packing = _files.GetNames(application.Id, ApplicationFileType.Packing).Select(x => x.Name).ToArray();
 			var swift = _files.GetNames(application.Id, ApplicationFileType.Swift).Select(x => x.Name).ToArray();
 			var torg12 = _files.GetNames(application.Id, ApplicationFileType.Torg12).Select(x => x.Name).ToArray();
+			var t1 = _files.GetNames(application.Id, ApplicationFileType.T1).Select(x => x.Name).ToArray();
+			var ex1 = _files.GetNames(application.Id, ApplicationFileType.Ex1).Select(x => x.Name).ToArray();
 
 			var localizedData = new Dictionary<string, string>();
 			Add(localizedData, "AddressLoad", application.AddressLoad);
@@ -161,6 +165,8 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "SwiftFiles", string.Join(", ", swift));
 			Add(localizedData, "TermsOfDelivery", application.TermsOfDelivery);
 			Add(localizedData, "Torg12Files", string.Join(", ", torg12));
+			Add(localizedData, "T1Files", string.Join(", ", t1));
+			Add(localizedData, "Ex1Files", string.Join(", ", ex1));
 			Add(localizedData, "TransitAddress", application.TransitAddress);
 			Add(localizedData, "CarrierName", application.CarrierName);
 			Add(localizedData, "CarrierContact", application.CarrierContact);
