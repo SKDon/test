@@ -16,9 +16,9 @@ namespace Alicargo.Controllers.Application
 	[Access(RoleType.Client)]
 	public partial class ClientApplicationController : Controller
 	{
+		private readonly IApplicationRepository _applications;
 		private readonly IClientRepository _clients;
 		private readonly ICountryRepository _countries;
-		private readonly IApplicationRepository _applications;
 		private readonly IIdentityService _identity;
 		private readonly IClientApplicationManager _manager;
 
@@ -26,7 +26,7 @@ namespace Alicargo.Controllers.Application
 			IClientApplicationManager manager,
 			ICountryRepository countries,
 			IIdentityService identity,
-			IClientRepository clients, 
+			IClientRepository clients,
 			IApplicationRepository applications)
 		{
 			_manager = manager;
@@ -78,7 +78,7 @@ namespace Alicargo.Controllers.Application
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]		
+		[ValidateAntiForgeryToken]
 		public virtual ActionResult Create(ApplicationClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
