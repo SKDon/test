@@ -720,7 +720,6 @@
     <Content Include="Content\fonts\boblic.eot" />
     <Content Include="Content\fonts\boblic.ttf" />
     <Content Include="Content\fonts\boblic.woff" />
-    <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jQuery\jquery-2.1.1.intellisense.js" />
     <None Include="Scripts\jQuery\jquery.validate-vsdoc.js" />
