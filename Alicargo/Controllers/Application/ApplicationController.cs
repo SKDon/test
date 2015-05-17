@@ -2,6 +2,7 @@
 using System.Net;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories;
@@ -57,10 +58,8 @@ namespace Alicargo.Controllers.Application
 			return new HttpStatusCodeResult(HttpStatusCode.OK);
 		}
 
-		private void BindBag(long clientId, long? applicationId)
+		private void BindBag(long? applicationId, ClientData client)
 		{
-			var client = _clients.Get(clientId);
-
 			ViewBag.ClientNic = client.Nic;
 
 			ViewBag.ClientId = client.ClientId;
@@ -92,7 +91,9 @@ namespace Alicargo.Controllers.Application
 
 			var clientId = _applications.GetClientId(id);
 
-			BindBag(clientId, id);
+			var client = _clients.Get(clientId);
+
+			BindBag(id, client);
 
 			return View(application);
 		}
@@ -107,7 +108,9 @@ namespace Alicargo.Controllers.Application
 			{
 				var clientId = _applications.GetClientId(id);
 
-				BindBag(clientId, id);
+				var data = _clients.Get(clientId);
+
+				BindBag(id, data);
 
 				return View(model);
 			}
@@ -124,11 +127,14 @@ namespace Alicargo.Controllers.Application
 		[HttpGet]
 		public virtual ViewResult Create(long clientId)
 		{
-			BindBag(clientId, null);
+			var client = _clients.Get(clientId);
+
+			BindBag(null, client);
 
 			return View(new ApplicationAdminModel
 			{
-				InsuranceRate = _applications.GetDefaultInsuranceRate()*100
+				InsuranceRate = _applications.GetDefaultInsuranceRate() * 100,
+				SenderId = client.DefaultSenderId
 			});
 		}
 
@@ -138,9 +144,11 @@ namespace Alicargo.Controllers.Application
 			long clientId, ApplicationAdminModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
+			var client = _clients.Get(clientId);
+
 			if(!ModelState.IsValid)
 			{
-				BindBag(clientId, null);
+				BindBag(null, client);
 
 				return View(model);
 			}
@@ -153,7 +161,7 @@ namespace Alicargo.Controllers.Application
 			{
 				ModelState.AddModelError("DublicateException", ex.ToString());
 
-				BindBag(clientId, null);
+				BindBag(null, client);
 
 				return View(model);
 			}
