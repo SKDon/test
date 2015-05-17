@@ -37,10 +37,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Databases\Alicargo_3_0_3_1.sql" />
-    <Content Include="Databases\Alicargo_2_8-3_0.sql" />
-    <Content Include="Databases\Alicargo_0_0-2_8.sql" />
-    <Content Include="Databases\Alicargo_Files_0_0-2_8.sql" />
+    <Content Include="Databases\Alicargo-3_0-3_1.sql" />
+    <Content Include="Databases\Alicargo-2_8-3_0.sql" />
+    <Content Include="Databases\Alicargo-0_0-2_8.sql" />
+    <Content Include="Databases\Alicargo_Files-0_0-2_8.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
