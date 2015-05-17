@@ -112,7 +112,8 @@ namespace Alicargo.Services.Users.Client
 				OGRN = model.OGRN,
 				RS = model.RS,
 				ContractNumber = model.ContractNumber,
-				ContractDate = DateTimeOffset.Parse(model.ContractDate)
+				ContractDate = DateTimeOffset.Parse(model.ContractDate),
+				DefaultSenderId = model.DefaultSenderId
 			};
 		}
 	}
