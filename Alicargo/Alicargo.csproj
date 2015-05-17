@@ -781,7 +781,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
-    <Content Include="Views\Shared\Memu.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AuthenticationModel.cshtml" />
     <Content Include="Views\Application\EditorTemplates\ApplicationAdminModel.cshtml" />
     <Content Include="Views\ApplicationList\AdminTemplate.cshtml" />
