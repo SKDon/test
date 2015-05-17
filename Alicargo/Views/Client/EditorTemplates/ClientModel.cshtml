@@ -48,6 +48,12 @@
 		</script>
 	</div>
 </div>
+<div class="row">
+	<div class="span4">
+		@Html.LabelFor(x => x.DefaultSenderId)
+		@Html.DropDownListFor(x => x.DefaultSenderId, (IDictionary<long?, string>)ViewBag.Senders, "")
+	</div>
+</div>
 <hr />
 <h4>
 	@Pages.Transit

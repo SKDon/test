@@ -69,6 +69,9 @@ namespace Alicargo.ViewModels.User
 		[DisplayNameLocalized(typeof(Entities), "ContractDate")]
 		public string ContractDate { get; set; }
 
+		[DisplayNameLocalized(typeof(Entities), "Sender")]
+		public long? DefaultSenderId { get; set; }
+
 		public AuthenticationModel Authentication { get; set; }
 	}
 }

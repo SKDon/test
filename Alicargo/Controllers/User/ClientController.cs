@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -18,17 +19,20 @@ namespace Alicargo.Controllers.User
 	public partial class ClientController : Controller
 	{
 		private readonly IClientPresenter _clients;
+		private readonly ISenderRepository _senders;
 		private readonly IClientFileRepository _files;
 		private readonly IClientManager _manager;
 
 		public ClientController(
 			IClientManager manager,
 			IClientFileRepository files,
-			IClientPresenter clients)
+			IClientPresenter clients,
+			ISenderRepository senders)
 		{
 			_manager = manager;
 			_files = files;
 			_clients = clients;
+			_senders = senders;
 		}
 
 		#region List
@@ -57,6 +61,8 @@ namespace Alicargo.Controllers.User
 		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual ViewResult Create()
 		{
+			BindBag(null);
+
 			return View();
 		}
 
@@ -65,30 +71,32 @@ namespace Alicargo.Controllers.User
 		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual ActionResult Create(ClientModel model, [Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			if(!EmailsHelper.Validate(model.Emails))
+			if (!EmailsHelper.Validate(model.Emails))
 			{
 				ModelState.AddModelError("Emails", @"Emails format is invalid");
 			}
 
-			if(!ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
+				BindBag(null);
+				
 				return View();
 			}
 
 			long clientId = 0;
 			var passwordDefined = !string.IsNullOrWhiteSpace(model.Authentication.NewPassword);
-			if(passwordDefined)
+			if (passwordDefined)
 			{
 				try
 				{
 					clientId = _manager.Add(model, transitModel);
 
-					if(model.ContractFile != null)
+					if (model.ContractFile != null)
 					{
 						MergeContract(model, clientId);
 					}
 				}
-				catch(DublicateLoginException)
+				catch (DublicateLoginException)
 				{
 					ModelState.AddModelError("Login", Validation.LoginExists);
 				}
@@ -98,7 +106,12 @@ namespace Alicargo.Controllers.User
 				ModelState.AddModelError("NewPassword", Validation.EmplyPassword);
 			}
 
-			if(!ModelState.IsValid) return View();
+			if (!ModelState.IsValid)
+			{
+				BindBag(null);
+
+				return View();
+			}
 
 			return RedirectToAction(MVC.Client.Edit(clientId));
 		}
@@ -128,9 +141,15 @@ namespace Alicargo.Controllers.User
 
 			var model = GetModel(data, contractFileName);
 
-			ViewBag.ClientId = data.ClientId;
+			BindBag(data.ClientId);
 
 			return View(model);
+		}
+
+		void BindBag(long? clientId)
+		{
+			ViewBag.ClientId = clientId;
+			ViewBag.Senders = _senders.GetAll().ToDictionary(x => (long?)x.EntityId, x => x.Name);
 		}
 
 		[HttpPost]
@@ -139,13 +158,15 @@ namespace Alicargo.Controllers.User
 		public virtual ActionResult Edit(long? id, ClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
-			if(!EmailsHelper.Validate(model.Emails))
+			if (!EmailsHelper.Validate(model.Emails))
 			{
 				ModelState.AddModelError("Emails", @"Emails format is invalid");
 			}
 
-			if(!ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
+				BindBag(id);
+
 				return View();
 			}
 
@@ -157,12 +178,17 @@ namespace Alicargo.Controllers.User
 
 				MergeContract(model, client.ClientId);
 			}
-			catch(DublicateLoginException)
+			catch (DublicateLoginException)
 			{
 				ModelState.AddModelError("Login", Validation.LoginExists);
 			}
 
-			if(!ModelState.IsValid) return View();
+			if (!ModelState.IsValid)
+			{
+				BindBag(id);
+
+				return View();
+			}
 
 			return RedirectToAction(MVC.Client.Edit(client.ClientId));
 		}
@@ -198,7 +224,7 @@ namespace Alicargo.Controllers.User
 		private void MergeContract(ClientModel model, long clientId)
 		{
 			var oldFileName = _files.GetClientContractFileName(clientId);
-			if(oldFileName != model.ContractFileName)
+			if (oldFileName != model.ContractFileName)
 			{
 				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
 			}
