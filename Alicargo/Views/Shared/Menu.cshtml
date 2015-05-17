@@ -5,7 +5,7 @@
 @inherits BaseWebViewPage
 @helper ClientMenu()
 {
-	if(IdentityService.IsInRole(RoleType.Client))
+	if (IdentityService.IsInRole(RoleType.Client))
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 		<li>@Html.ActionLink(Pages.Profile, MVC.Client.Edit())</li>
@@ -14,26 +14,28 @@
 }
 @helper ForwarderMenu()
 {
-	if(IdentityService.IsInRole(RoleType.Forwarder))
+	if (IdentityService.IsInRole(RoleType.Forwarder))
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.Forwarder.Applications.Index())</li>
 	}
 }
 @helper CarrierMenu()
 {
-	if(IdentityService.IsInRole(RoleType.Carrier))
+	if (IdentityService.IsInRole(RoleType.Carrier))
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 	}
 }
 @helper AdminMenu()
 {
-	if(IdentityService.IsInRole(RoleType.Admin))
+	if (IdentityService.IsInRole(RoleType.Admin))
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 		<li>@Html.ActionLink(Pages.AirWaybills, MVC.AirWaybill.Index())</li>
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Users<b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				@Pages.Users<b class="caret"></b>
+			</a>
 			<ul class="dropdown-menu">
 				<li>@Html.ActionLink(Pages.Clients, MVC.Client.Index())</li>
 				<li>@Html.ActionLink(Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
@@ -46,7 +48,9 @@
 		</li>
 		<li>@Html.ActionLink(Pages.Calculation, MVC.Calculation.Index())</li>
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Settings<b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				@Pages.Settings<b class="caret"></b>
+			</a>
 			<ul class="dropdown-menu">
 				<li>@Html.ActionLink(Pages.States, MVC.Admin.State.Index())</li>
 				<li>@Html.ActionLink(Pages.Templates, MVC.EmailTemplate.Index())</li>
@@ -59,12 +63,14 @@
 }
 @helper ManagerMenu()
 {
-	if(IdentityService.IsInRole(RoleType.Manager))
+	if (IdentityService.IsInRole(RoleType.Manager))
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 		<li>@Html.ActionLink(Pages.AirWaybills, MVC.AirWaybill.Index())</li>
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Users<b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				@Pages.Users<b class="caret"></b>
+			</a>
 			<ul class="dropdown-menu">
 				<li>@Html.ActionLink(Pages.Clients, MVC.Client.Index())</li>
 				<li>@Html.ActionLink(Pages.Admins, MVC.User.Index(RoleType.Admin))</li>
@@ -76,7 +82,9 @@
 			</ul>
 		</li>
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Pages.Settings<b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				@Pages.Settings<b class="caret"></b>
+			</a>
 			<ul class="dropdown-menu">
 				<li>@Html.ActionLink(Pages.States, MVC.Admin.State.Index())</li>
 				<li>@Html.ActionLink(Pages.Templates, MVC.EmailTemplate.Index())</li>
@@ -88,7 +96,7 @@
 }
 @helper SenderMenu()
 {
-	if(IdentityService.IsInRole(RoleType.Sender))
+	if (IdentityService.IsInRole(RoleType.Sender))
 	{
 		<li>@Html.ActionLink(Pages.Applications, MVC.ApplicationList.Index())</li>
 		<li>@Html.ActionLink(Entities.AirWaybill, MVC.AirWaybill.Index())</li>
@@ -97,41 +105,47 @@
 }
 @helper BrokerMenu()
 {
-	if(IdentityService.IsInRole(RoleType.Broker))
+	if (IdentityService.IsInRole(RoleType.Broker))
 	{
 		<li>@Html.ActionLink(Entities.AirWaybill, MVC.AirWaybill.Index())</li>
 	}
 }
-@if(IdentityService.IsAuthenticated)
+@if (IdentityService.IsAuthenticated)
 {
 	<div class="wrap-padding">&nbsp;</div>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				@Html.ActionLink("Avion Russia", MVC.Home.Index(), new { @class = "brand" })
-				<ul class="nav">
-					@BrokerMenu()
-					@ClientMenu()
-					@SenderMenu()
-					@ForwarderMenu()
-					@AdminMenu()
-					@CarrierMenu()
-					@ManagerMenu()
-				</ul>
-				<ul class="nav pull-right">
-					<li>
-						@Html.ActionLink(LanguageName.Russian, MVC.Home.Culture(TwoLetterISOLanguageName.Russian, Request.RawUrl))
-					</li>
-					<li>
-						@Html.ActionLink(LanguageName.Italian, MVC.Home.Culture(TwoLetterISOLanguageName.Italian, Request.RawUrl))
-					</li>
-					<li>
-						@Html.ActionLink(LanguageName.English, MVC.Home.Culture(TwoLetterISOLanguageName.English, Request.RawUrl))
-					</li>
-					<li>
-						@Html.ActionLink(Pages.Logout, MVC.Authentication.SignOut())
-					</li>
-				</ul>
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<i class="icon-tasks"></i>
+				</a>
+				@Html.ActionLink("Avion Russia", MVC.Home.Index(), new {@class = "brand"})
+
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						@BrokerMenu()
+						@ClientMenu()
+						@SenderMenu()
+						@ForwarderMenu()
+						@AdminMenu()
+						@CarrierMenu()
+						@ManagerMenu()
+					</ul>
+					<ul class="nav pull-right">
+						<li>
+							@Html.ActionLink(LanguageName.Russian, MVC.Home.Culture(TwoLetterISOLanguageName.Russian, Request.RawUrl))
+						</li>
+						<li>
+							@Html.ActionLink(LanguageName.Italian, MVC.Home.Culture(TwoLetterISOLanguageName.Italian, Request.RawUrl))
+						</li>
+						<li>
+							@Html.ActionLink(LanguageName.English, MVC.Home.Culture(TwoLetterISOLanguageName.English, Request.RawUrl))
+						</li>
+						<li>
+							@Html.ActionLink(Pages.Logout, MVC.Authentication.SignOut())
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
