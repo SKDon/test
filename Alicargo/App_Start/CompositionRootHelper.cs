@@ -16,6 +16,7 @@ namespace Alicargo
 {
 	public static class CompositionRootHelper
 	{
+		// todo: make decorator attribute and automatic all decoratos registration instead of hardcode
 		public static readonly IDictionary<Type, Type[]> Decorators = new Dictionary<Type, Type[]>
 		{
 			{
