@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Helpers;
 using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -19,16 +20,19 @@ namespace Alicargo.Controllers.User
 	public partial class ClientController : Controller
 	{
 		private readonly IClientPresenter _clients;
-		private readonly ISenderRepository _senders;
 		private readonly IClientFileRepository _files;
+		private readonly IIdentityService _identity;
 		private readonly IClientManager _manager;
+		private readonly ISenderRepository _senders;
 
 		public ClientController(
+			IIdentityService identity,
 			IClientManager manager,
 			IClientFileRepository files,
 			IClientPresenter clients,
 			ISenderRepository senders)
 		{
+			_identity = identity;
 			_manager = manager;
 			_files = files;
 			_clients = clients;
@@ -79,7 +83,7 @@ namespace Alicargo.Controllers.User
 			if (!ModelState.IsValid)
 			{
 				BindBag(null);
-				
+
 				return View();
 			}
 
@@ -118,6 +122,8 @@ namespace Alicargo.Controllers.User
 
 		#endregion
 
+		#region Contract
+
 		[HttpGet]
 		[Access(RoleType.Admin, RoleType.Manager, RoleType.Client)]
 		public virtual FileResult Contract(long? id)
@@ -128,6 +134,17 @@ namespace Alicargo.Controllers.User
 
 			return document.GetFileResult();
 		}
+
+		private void MergeContract(ClientModel model, long clientId)
+		{
+			var oldFileName = _files.GetClientContractFileName(clientId);
+			if (oldFileName != model.ContractFileName)
+			{
+				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
+			}
+		}
+
+		#endregion
 
 		#region Edit
 
@@ -146,10 +163,10 @@ namespace Alicargo.Controllers.User
 			return View(model);
 		}
 
-		void BindBag(long? clientId)
+		private void BindBag(long? clientId)
 		{
 			ViewBag.ClientId = clientId;
-			ViewBag.Senders = _senders.GetAll().ToDictionary(x => (long?)x.EntityId, x => x.Name);
+			ViewBag.Senders = _senders.GetAll().ToDictionary(x => (long?) x.EntityId, x => x.Name);
 		}
 
 		[HttpPost]
@@ -174,6 +191,8 @@ namespace Alicargo.Controllers.User
 
 			try
 			{
+				ClientCantChangeDefaultSenderId(model, client);
+
 				_manager.Update(client.ClientId, model, transitModel);
 
 				MergeContract(model, client.ClientId);
@@ -191,6 +210,14 @@ namespace Alicargo.Controllers.User
 			}
 
 			return RedirectToAction(MVC.Client.Edit(client.ClientId));
+		}
+
+		private void ClientCantChangeDefaultSenderId(ClientModel model, ClientData client)
+		{
+			if (_identity.IsInRole(RoleType.Client))
+			{
+				model.DefaultSenderId = client.DefaultSenderId;
+			}
 		}
 
 		private static ClientModel GetModel(ClientData client, string contractFileName)
@@ -215,19 +242,11 @@ namespace Alicargo.Controllers.User
 				ContractFileName = contractFileName,
 				Authentication = new AuthenticationModel(client.Login),
 				ContractDate = LocalizationHelper.GetDate(client.ContractDate, CultureProvider.GetCultureInfo()),
-				ContractNumber = client.ContractNumber
+				ContractNumber = client.ContractNumber,
+				DefaultSenderId = client.DefaultSenderId
 			};
 		}
 
 		#endregion
-
-		private void MergeContract(ClientModel model, long clientId)
-		{
-			var oldFileName = _files.GetClientContractFileName(clientId);
-			if (oldFileName != model.ContractFileName)
-			{
-				_files.SetClientContract(clientId, model.ContractFileName, model.ContractFile);
-			}
-		}
 	}
 }
