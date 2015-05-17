@@ -19,6 +19,7 @@
 	[Balance]			MONEY			NOT NULL CONSTRAINT [DF_Client_Balance] DEFAULT((0)),
 	[ContractNumber]	NVARCHAR (MAX)	NOT NULL,
 	[ContractDate]		DATETIMEOFFSET	NOT NULL,
+	[DefaultSenderId]	BIGINT			NULL,
 
 	CONSTRAINT [PK_dbo.Client] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Client_dbo.Transit_TransitId] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),

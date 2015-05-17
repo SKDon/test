@@ -26,7 +26,8 @@ AS BEGIN
 		u.[Login],
 		u.[TwoLetterISOLanguageName] AS [Language],
 		c.[ContractDate],
-		c.[ContractNumber]
+		c.[ContractNumber],
+		c.[DefaultSenderId]
 	  FROM [dbo].[Client] c
 	  JOIN [dbo].[User] u
 	  ON c.[UserId] = u.[Id]

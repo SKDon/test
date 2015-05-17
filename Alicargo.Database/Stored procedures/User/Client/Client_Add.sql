@@ -16,7 +16,8 @@
     @KS NVARCHAR(MAX),
     @ContractNumber NVARCHAR(MAX),
     @ContractDate DATETIMEOFFSET,
-    @TransitId BIGINT
+    @TransitId BIGINT,
+	@DefaultSenderId BIGINT
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -39,7 +40,8 @@ AS BEGIN
 		,[KS]
 		,[TransitId]
 		,[ContractNumber]
-		,[ContractDate])
+		,[ContractDate]
+		,[DefaultSenderId])
 	OUTPUT INSERTED.[Id]
 	VALUES
 		(@UserId,
@@ -59,7 +61,8 @@ AS BEGIN
 		@KS,
 		@TransitId,
 		@ContractNumber,
-		@ContractDate)
+		@ContractDate,
+		@DefaultSenderId)
 
 END
 GO

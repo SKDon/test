@@ -15,7 +15,8 @@
     @RS NVARCHAR(MAX),
     @KS NVARCHAR(MAX),
     @ContractNumber NVARCHAR(MAX),
-    @ContractDate DATETIMEOFFSET
+    @ContractDate DATETIMEOFFSET,
+	@DefaultSenderId BIGINT
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -36,7 +37,8 @@ AS BEGIN
 		[RS] = @RS,
 		[KS] = @KS,
 		[ContractNumber] = @ContractNumber,
-		[ContractDate] = @ContractDate
+		[ContractDate] = @ContractDate,
+		[DefaultSenderId] = @DefaultSenderId
 	WHERE [Id] = @ClientId
 
 END

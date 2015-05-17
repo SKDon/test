@@ -20,5 +20,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.User
 		public string KS { get; set; }
 		public string ContractNumber { get; set; }
 		public DateTimeOffset ContractDate { get; set; }
+		public long? DefaultSenderId { get; set; }
 	}
 }
