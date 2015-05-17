@@ -1,6 +1,7 @@
 ﻿using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
+using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.Services.Abstract;
 using Alicargo.ViewModels;
 using Alicargo.ViewModels.Application;
@@ -10,16 +11,19 @@ namespace Alicargo.Services.Application
 	internal sealed class ClientApplicationManager : IClientApplicationManager
 	{
 		private readonly IApplicationRepository _applications;
+		private readonly IClientRepository _clients;
 		private readonly IForwarderService _forwarders;
 		private readonly ITransitService _transits;
 		private readonly IApplicationEditor _updater;
 
 		public ClientApplicationManager(
 			IApplicationRepository applications,
+			IClientRepository clients,
 			IForwarderService forwarders,
 			IApplicationEditor updater,
 			ITransitService transits)
 		{
+			_clients = clients;
 			_applications = applications;
 			_forwarders = forwarders;
 			_updater = updater;
@@ -32,7 +36,50 @@ namespace Alicargo.Services.Application
 
 			var forwarderId = _forwarders.GetByCityOrAny(transit.CityId, null);
 
-			var data = GetNewApplicationData(application, clientId, transitId, forwarderId);
+			var client = _clients.Get(clientId);
+
+			var data = new ApplicationEditData
+			{
+				Class = null,
+				TransitId = transitId,
+				Invoice = application.Invoice,
+				Characteristic = application.Characteristic,
+				AddressLoad = application.AddressLoad,
+				WarehouseWorkingTime = application.WarehouseWorkingTime,
+				Weight = application.Weight,
+				Count = application.Count,
+				Volume = application.Volume,
+				TermsOfDelivery = application.TermsOfDelivery,
+				Value = application.Currency.Value,
+				CurrencyId = application.Currency.CurrencyId,
+				CountryId = application.CountryId,
+				FactoryName = application.FactoryName,
+				FactoryPhone = application.FactoryPhone,
+				FactoryEmail = application.FactoryEmail,
+				FactoryContact = application.FactoryContact,
+				MarkName = application.MarkName,
+				MethodOfDelivery = application.MethodOfDelivery,
+				IsPickup = application.IsPickup,
+				AirWaybillId = null,
+				DateInStock = null,
+				DateOfCargoReceipt = null,
+				TransitReference = null,
+				ClientId = clientId,
+				PickupCost = null,
+				TransitCost = null,
+				FactureCost = null,
+				FactureCostEx = null,
+				TariffPerKg = null,
+				ScotchCostEdited = null,
+				FactureCostEdited = null,
+				FactureCostExEdited = null,
+				TransitCostEdited = null,
+				PickupCostEdited = null,
+				SenderId = client.DefaultSenderId,
+				SenderRate = null,
+				ForwarderId = forwarderId,
+				InsuranceRate = _applications.GetDefaultInsuranceRate()
+			};
 
 			return _updater.Add(data);
 		}
@@ -77,54 +124,6 @@ namespace Alicargo.Services.Application
 				IsPickup = application.IsPickup,
 				TermsOfDelivery = application.TermsOfDelivery,
 				WarehouseWorkingTime = application.WarehouseWorkingTime
-			};
-		}
-
-		private ApplicationEditData GetNewApplicationData(
-			ApplicationClientModel model, long clientId, long transitId,
-			long forwarderId)
-		{
-			return new ApplicationEditData
-			{
-				Class = null,
-				TransitId = transitId,
-				Invoice = model.Invoice,
-				Characteristic = model.Characteristic,
-				AddressLoad = model.AddressLoad,
-				WarehouseWorkingTime = model.WarehouseWorkingTime,
-				Weight = model.Weight,
-				Count = model.Count,
-				Volume = model.Volume,
-				TermsOfDelivery = model.TermsOfDelivery,
-				Value = model.Currency.Value,
-				CurrencyId = model.Currency.CurrencyId,
-				CountryId = model.CountryId,
-				FactoryName = model.FactoryName,
-				FactoryPhone = model.FactoryPhone,
-				FactoryEmail = model.FactoryEmail,
-				FactoryContact = model.FactoryContact,
-				MarkName = model.MarkName,
-				MethodOfDelivery = model.MethodOfDelivery,
-				IsPickup = model.IsPickup,
-				AirWaybillId = null,
-				DateInStock = null,
-				DateOfCargoReceipt = null,
-				TransitReference = null,
-				ClientId = clientId,
-				PickupCost = null,
-				TransitCost = null,
-				FactureCost = null,
-				FactureCostEx = null,
-				TariffPerKg = null,
-				ScotchCostEdited = null,
-				FactureCostEdited = null,
-				FactureCostExEdited = null,
-				TransitCostEdited = null,
-				PickupCostEdited = null,
-				SenderId = null,
-				SenderRate = null,
-				ForwarderId = forwarderId,
-				InsuranceRate = _applications.GetDefaultInsuranceRate()
 			};
 		}
 
