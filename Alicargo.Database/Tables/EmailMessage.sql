@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[EmailMessage]
 (
-	[Id] BIGINT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[Id] BIGINT IDENTITY(1, 1) NOT NULL,
 	
 	[StateId] INT NOT NULL,
 	[StateIdTimestamp] DATETIMEOFFSET CONSTRAINT [DF_EmailMessage_StateIdTimestamp]  DEFAULT (GETUTCDATE()) NOT NULL,
@@ -13,5 +13,11 @@
 	[Subject] NVARCHAR (MAX) NOT NULL,
 	[Body] NVARCHAR (MAX) NOT NULL,
 	[IsBodyHtml] BIT CONSTRAINT [DF_EmailMessage_IsBodyHtml] DEFAULT (0) NOT NULL,
-	[Files] VARBINARY (MAX) NULL
+	[Files] VARBINARY (MAX) NULL,
+
+	CONSTRAINT [PK_dbo.EmailMessage] PRIMARY KEY CLUSTERED ([Id] ASC)
 )
+GO
+
+CREATE INDEX [IX_EmailMessage_State_Partition] ON [dbo].[EmailMessage] ([StateId], [PartitionId])
+GO
