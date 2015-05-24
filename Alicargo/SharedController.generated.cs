@@ -41,7 +41,7 @@ namespace T4MVC
                 public readonly string DynamicScripts = "DynamicScripts";
                 public readonly string Error = "Error";
                 public readonly string LoginControl = "LoginControl";
-                public readonly string Memu = "Memu";
+                public readonly string Menu = "Menu";
                 public readonly string Message = "Message";
             }
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
@@ -49,7 +49,7 @@ namespace T4MVC
             public readonly string DynamicScripts = "~/Views/Shared/DynamicScripts.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
             public readonly string LoginControl = "~/Views/Shared/LoginControl.cshtml";
-            public readonly string Memu = "~/Views/Shared/Memu.cshtml";
+            public readonly string Menu = "~/Views/Shared/Menu.cshtml";
             public readonly string Message = "~/Views/Shared/Message.cshtml";
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }

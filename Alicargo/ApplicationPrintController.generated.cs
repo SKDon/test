@@ -104,9 +104,9 @@ namespace Alicargo.Controllers.Application
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Print = "Print";
+                public readonly string Index = "Index";
             }
-            public readonly string Print = "~/Views/ApplicationPrint/Print.cshtml";
+            public readonly string Index = "~/Views/ApplicationPrint/Index.cshtml";
         }
     }
 
