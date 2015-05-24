@@ -125,7 +125,7 @@ function initialize() {
     var marker1 = new google.maps.Marker({
         position: new google.maps.LatLng(45.430660, 9.288646),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow1 = new google.maps.InfoWindow({
       content: cont1
@@ -139,7 +139,7 @@ function initialize() {
     var marker2 = new google.maps.Marker({
         position: new google.maps.LatLng(43.837349, 11.171790),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow2 = new google.maps.InfoWindow({
       content: cont2
@@ -153,7 +153,7 @@ function initialize() {
     var marker3 = new google.maps.Marker({
         position: new google.maps.LatLng(22.564495, 114.065641),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow3 = new google.maps.InfoWindow({
       content: cont3
@@ -167,7 +167,7 @@ function initialize() {
     var marker4 = new google.maps.Marker({
         position: new google.maps.LatLng(45.515061, 11.490030),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow4 = new google.maps.InfoWindow({
       content: cont4
@@ -181,7 +181,7 @@ function initialize() {
     var marker5 = new google.maps.Marker({
         position: new google.maps.LatLng(31.238790, 121.487198),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow5 = new google.maps.InfoWindow({
       content: cont5
@@ -195,7 +195,7 @@ function initialize() {
     var marker6 = new google.maps.Marker({
         position: new google.maps.LatLng(45.779578, 12.497946),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow6 = new google.maps.InfoWindow({
       content: cont6
@@ -209,7 +209,7 @@ function initialize() {
     var marker7 = new google.maps.Marker({
         position: new google.maps.LatLng(-33.959159, 151.227530),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow7 = new google.maps.InfoWindow({
       content: cont7
@@ -223,7 +223,7 @@ function initialize() {
     var marker8 = new google.maps.Marker({
         position: new google.maps.LatLng(45.634503, 8.725016),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow8 = new google.maps.InfoWindow({
       content: cont8
@@ -237,7 +237,7 @@ function initialize() {
     var marker9 = new google.maps.Marker({
         position: new google.maps.LatLng(24.453611, 118.075400),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow9 = new google.maps.InfoWindow({
       content: cont9
@@ -251,7 +251,7 @@ function initialize() {
     var marker10 = new google.maps.Marker({
         position: new google.maps.LatLng(44.602640, 11.357070),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow10 = new google.maps.InfoWindow({
       content: cont10
@@ -265,7 +265,7 @@ function initialize() {
     var marker11 = new google.maps.Marker({
         position: new google.maps.LatLng(1.373605, 103.995083),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow11 = new google.maps.InfoWindow({
       content: cont11
@@ -279,7 +279,7 @@ function initialize() {
     var marker12 = new google.maps.Marker({
         position: new google.maps.LatLng(41.809748, 12.244918),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow12 = new google.maps.InfoWindow({
       content: cont12
@@ -293,7 +293,7 @@ function initialize() {
     var marker13 = new google.maps.Marker({
         position: new google.maps.LatLng(22.289111, 114.191818),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow13 = new google.maps.InfoWindow({
       content: cont13
@@ -307,7 +307,7 @@ function initialize() {
     var marker14 = new google.maps.Marker({
         position: new google.maps.LatLng(45.108134, 7.668907),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow14 = new google.maps.InfoWindow({
       content: cont14
@@ -321,7 +321,7 @@ function initialize() {
     var marker15 = new google.maps.Marker({
         position: new google.maps.LatLng(35.680415, 139.787572),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow15 = new google.maps.InfoWindow({
       content: cont15
@@ -335,7 +335,7 @@ function initialize() {
     var marker16 = new google.maps.Marker({
         position: new google.maps.LatLng(43.281448, 13.638683),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow16 = new google.maps.InfoWindow({
       content: cont16
@@ -349,7 +349,7 @@ function initialize() {
     var marker17 = new google.maps.Marker({
         position: new google.maps.LatLng(55.754922, 37.557059),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow17 = new google.maps.InfoWindow({
       content: cont17
@@ -363,7 +363,7 @@ function initialize() {
     var marker18 = new google.maps.Marker({
         position: new google.maps.LatLng(59.933481, 30.310929),
         map: map,
-        icon: 'images/icon-map.png'
+        icon: 'Content/images/icon-map.png'
     });
     var infowindow18 = new google.maps.InfoWindow({
       content: cont18
