@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.State;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
@@ -49,19 +50,28 @@ namespace Alicargo.Controllers.Application
 		[HttpGet]
 		public virtual ViewResult Index()
 		{
-			var clients = _clients.GetAll()
-				.OrderBy(x => x.Nic)
-				.ToDictionary(x => x.ClientId, x => x.Nic);
+			var clients = _clients.GetAll().AsEnumerable();
+
+			clients = FilterClientsForSender(clients);
 
 			var awbs = GetAwbs();
 
 			var model = new ApplicationIndexModel
 			{
-				Clients = clients,
+				Clients = clients.OrderBy(x => x.Nic).ToDictionary(x => x.ClientId, x => x.Nic),
 				AirWaybills = awbs.OrderBy(x => x.Bill).ToDictionary(x => x.Id, x => x.Bill)
 			};
 
 			return View(model);
+		}
+
+		private IEnumerable<ClientData> FilterClientsForSender(IEnumerable<ClientData> clients)
+		{
+			var senderId = _senders.GetByUserId(_identity.Id);
+
+			return senderId.HasValue
+				? clients.Where(x => !x.DefaultSenderId.HasValue || x.DefaultSenderId.Value == senderId.Value)
+				: clients;
 		}
 
 		[HttpPost]
