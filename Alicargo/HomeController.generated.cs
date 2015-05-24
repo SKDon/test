@@ -56,9 +56,15 @@ namespace Alicargo.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Culture()
+        public virtual System.Web.Mvc.RedirectResult Culture()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Culture);
+            return new T4MVC_System_Web_Mvc_RedirectResult(Area, Name, ActionNames.Culture);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Feedback()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Feedback);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -78,6 +84,7 @@ namespace Alicargo.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Culture = "Culture";
+            public readonly string Feedback = "Feedback";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -85,6 +92,7 @@ namespace Alicargo.Controllers
         {
             public const string Index = "Index";
             public const string Culture = "Culture";
+            public const string Feedback = "Feedback";
         }
 
 
@@ -96,6 +104,14 @@ namespace Alicargo.Controllers
         {
             public readonly string id = "id";
             public readonly string returnUrl = "returnUrl";
+        }
+        static readonly ActionParamsClass_Feedback s_params_Feedback = new ActionParamsClass_Feedback();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Feedback FeedbackParams { get { return s_params_Feedback; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Feedback
+        {
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -130,15 +146,27 @@ namespace Alicargo.Controllers
         }
 
         [NonAction]
-        partial void CultureOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string id, string returnUrl);
+        partial void CultureOverride(T4MVC_System_Web_Mvc_RedirectResult callInfo, string id, string returnUrl);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Culture(string id, string returnUrl)
+        public override System.Web.Mvc.RedirectResult Culture(string id, string returnUrl)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Culture);
+            var callInfo = new T4MVC_System_Web_Mvc_RedirectResult(Area, Name, ActionNames.Culture);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
             CultureOverride(callInfo, id, returnUrl);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FeedbackOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Alicargo.ViewModels.FeedbackModel model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Feedback(Alicargo.ViewModels.FeedbackModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Feedback);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            FeedbackOverride(callInfo, model);
             return callInfo;
         }
 

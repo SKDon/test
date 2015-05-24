@@ -484,6 +484,7 @@
     <Compile Include="ViewModels\Application\ApplicationStateModel.cs" />
     <Compile Include="ViewModels\EmailTemplate\ApplicationEventTemplateModel.cs" />
     <Compile Include="ViewModels\EmailTemplate\EmailTemplateSettingsModel.cs" />
+    <Compile Include="ViewModels\FeedbackModel.cs" />
     <Compile Include="ViewModels\Files\ApplicationFilesEdit.cs" />
     <Compile Include="ViewModels\CurrencyModel.cs" />
     <Compile Include="ViewModels\AuthenticationModel.cs" />

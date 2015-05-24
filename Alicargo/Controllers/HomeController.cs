@@ -2,6 +2,7 @@
 using System.Web.SessionState;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.ViewModels;
 
 namespace Alicargo.Controllers
 {
@@ -35,11 +36,17 @@ namespace Alicargo.Controllers
 			return Redirect("/index.html");
 		}
 
-		public virtual ActionResult Culture(string id, string returnUrl)
+		public virtual RedirectResult Culture(string id, string returnUrl)
 		{
 			_identityService.SetLanguage(id);
 
 			return Redirect(returnUrl);
+		}
+
+		[HttpPost]
+		public virtual ActionResult Feedback(FeedbackModel model)
+		{
+			return Redirect("/index.html");
 		}
 	}
 }
