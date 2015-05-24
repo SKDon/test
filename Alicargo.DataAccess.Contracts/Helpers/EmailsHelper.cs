@@ -7,13 +7,14 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 {
 	public static class EmailsHelper
 	{
-		public static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
-		public static readonly string SupportEmail = ConfigurationManager.AppSettings["SupportEmail"];
-
 		private const string EmailPattern = @".+@.+\..+";
 
 		private const RegexOptions EmailRegexOptions =
 			RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.CultureInvariant;
+
+		public static readonly string DefaultFrom = ConfigurationManager.AppSettings["DefaultFrom"];
+		public static readonly string SupportEmail = ConfigurationManager.AppSettings["SupportEmail"];
+		public static readonly string FeedbackEmail = ConfigurationManager.AppSettings["FeedbackEmail"];
 
 		private static readonly TimeSpan MatchTimeout = TimeSpan.FromSeconds(10);
 		private static readonly string DefaultEmailSeparator = Environment.NewLine;
@@ -21,24 +22,23 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 
 		public static string[] SplitAndTrimEmails(string emails)
 		{
-			return emails.Split(Separators, StringSplitOptions.RemoveEmptyEntries)
-				.Select(s => s.Trim())
-				.ToArray();
+			return emails == null
+				? null
+				: emails.Split(Separators, StringSplitOptions.RemoveEmptyEntries)
+					.Select(s => s.Trim())
+					.ToArray();
 		}
 
 		public static bool Validate(string emails)
 		{
-			var items = SplitAndTrimEmails(emails);
-
-			foreach (var item in items)
+			if(emails == null)
 			{
-				if (!Regex.IsMatch(item, EmailPattern, EmailRegexOptions, MatchTimeout))
-				{
-					return false;
-				}
+				return false;
 			}
 
-			return true;
+			var items = SplitAndTrimEmails(emails);
+
+			return items.All(item => Regex.IsMatch(item, EmailPattern, EmailRegexOptions, MatchTimeout));
 		}
 	}
 }

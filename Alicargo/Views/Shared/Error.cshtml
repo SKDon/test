@@ -1,6 +1,6 @@
 ﻿@model Alicargo.MvcHelpers.Filters.CustomHandleErrorInfo
 
 <div>
-	@Model.Exception.Message
+	@Html.Raw(Model.Exception.Message.Replace(Environment.NewLine, "<br/>"))
 </div>
 <div>Error uid: @Model.Uid</div>
