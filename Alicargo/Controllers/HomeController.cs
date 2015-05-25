@@ -79,9 +79,7 @@ namespace Alicargo.Controllers
 												+ Environment.NewLine);
 			}
 
-			var @from = EmailsHelper.Validate(model.UserEmail) ? model.UserEmail : EmailsHelper.DefaultFrom;
-
-			_sender.Send(new EmailMessage("Новая завяка на сайте avionrussia.com", text, @from, EmailsHelper.FeedbackEmail)
+			_sender.Send(new EmailMessage("Новая завяка на сайте avionrussia.com", text, EmailsHelper.DefaultFrom, EmailsHelper.FeedbackEmail)
 			{
 				IsBodyHtml = false
 			});
