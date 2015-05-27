@@ -51,6 +51,7 @@
     <Compile Include="Calculation\BillSettings.cs" />
     <Compile Include="Common\IHolder.cs" />
     <Compile Include="Common\IHttpClient.cs" />
+    <Compile Include="Email\IMailFromResolver.cs" />
     <Compile Include="Exceptions\AccessForbidenException.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidLogicException.cs" />
