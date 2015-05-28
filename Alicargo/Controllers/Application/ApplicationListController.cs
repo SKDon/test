@@ -52,9 +52,13 @@ namespace Alicargo.Controllers.Application
 		{
 			var clients = _clients.GetAll().AsEnumerable();
 
-			clients = FilterClientsForSender(clients);
+			var userId = _identity.Id;
 
-			var awbs = GetAwbs();
+			var currentSenderId = _senders.GetByUserId(userId);
+
+			clients = FilterClientsForSender(clients, currentSenderId);
+
+			var awbs = GetAwbs(currentSenderId, userId);
 
 			var model = new ApplicationIndexModel
 			{
@@ -65,10 +69,8 @@ namespace Alicargo.Controllers.Application
 			return View(model);
 		}
 
-		private IEnumerable<ClientData> FilterClientsForSender(IEnumerable<ClientData> clients)
+		private IEnumerable<ClientData> FilterClientsForSender(IEnumerable<ClientData> clients, long? senderId)
 		{
-			var senderId = _senders.GetByUserId(_identity.Id);
-
 			return senderId.HasValue
 				? clients.Where(x => !x.DefaultSenderId.HasValue || x.DefaultSenderId.Value == senderId.Value)
 				: clients;
@@ -100,15 +102,14 @@ namespace Alicargo.Controllers.Application
 			return result;
 		}
 
-		private IEnumerable<AirWaybillData> GetAwbs()
+		private IEnumerable<AirWaybillData> GetAwbs(long? currentSenderId, long userId)
 		{
 			var cargoIsFlewStateId = _stateConfig.CargoIsFlewStateId;
 			var awbs = _awbs.Get().Where(x => x.StateId == cargoIsFlewStateId && x.IsActive);
 
-			if(_identity.IsInRole(RoleType.Sender))
+			if(currentSenderId.HasValue)
 			{
-				var id = _identity.Id;
-				awbs = awbs.Where(x => x.SenderUserId == id);
+				awbs = awbs.Where(x => x.SenderUserId == userId);
 			}
 
 			return awbs;
