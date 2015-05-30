@@ -94,4 +94,7 @@
   <ItemGroup>
     <None Include="Master.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="PreDeployment.sql" />
+  </ItemGroup>
 </Project>

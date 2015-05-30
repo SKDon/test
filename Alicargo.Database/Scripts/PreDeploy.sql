@@ -8,6 +8,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
+
 IF NOT OBJECT_ID('master.dbo.sp_BackupDatabase') IS NULL
 	DROP PROCEDURE [dbo].[sp_BackupDatabase]
 GO
@@ -28,6 +29,8 @@ AS BEGIN
 	EXEC(@sqlCommand)
 END
 GO
+
+
 
 IF NOT OBJECT_ID('master.dbo.sp_RestoreDatabase') IS NULL
 	DROP PROCEDURE [dbo].[sp_RestoreDatabase]
@@ -64,5 +67,17 @@ AS BEGIN
 END
 GO
 
+
+
 USE [$(DatabaseName)];
+GO
+
+
+CREATE USER [IIS APPPOOL\DefaultAppPool] FOR LOGIN [IIS APPPOOL\DefaultAppPool]
+GO
+
+ALTER USER [IIS APPPOOL\DefaultAppPool] WITH DEFAULT_SCHEMA=[dbo]
+GO
+
+ALTER ROLE [db_owner] ADD MEMBER [IIS APPPOOL\DefaultAppPool]
 GO
