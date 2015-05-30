@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentAssertions.3.2.1\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.20.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
@@ -70,12 +73,21 @@
     <Compile Include="Common\HttpClientTests.cs" />
     <Compile Include="Email\MailSenderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Core.Contracts\Alicargo.Core.Contracts.csproj">
@@ -89,6 +101,10 @@
     <ProjectReference Include="..\Alicargo.DataAccess.Contracts\Alicargo.DataAccess.Contracts.csproj">
       <Project>{E2F1A146-9076-4833-995E-084AC1B3EAC7}</Project>
       <Name>Alicargo.DataAccess.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alicargo.TestHelpers\Alicargo.TestHelpers.csproj">
+      <Project>{BB7C7B4A-D181-4812-89BC-29EB406E9656}</Project>
+      <Name>Alicargo.TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

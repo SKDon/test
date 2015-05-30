@@ -39,7 +39,9 @@ namespace Alicargo.Jobs
 		public const int PartitionCount = 2;
 		public const int PartitionIdForOtherMails = PartitionCount;
 		private static readonly TimeSpan PausePeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["JobPausePeriod"]);
-		private static readonly TimeSpan CourseSourceRetryPolicyPeriod = TimeSpan.Parse(ConfigurationManager.AppSettings["CourseSourceRetryPolicyPeriod"]);
+
+		private static readonly TimeSpan CourseSourceRetryPolicyPeriod =
+			TimeSpan.Parse(ConfigurationManager.AppSettings["CourseSourceRetryPolicyPeriod"]);
 
 		private static readonly ushort CourseSourceAttempts =
 			ushort.Parse(ConfigurationManager.AppSettings["CourseSourceAttempts"]);
@@ -56,28 +58,34 @@ namespace Alicargo.Jobs
 				var partitionId = i;
 				var connectionString = mainConnectionString;
 
-				BindDefaultJobRunner(kernel,
+				BindDefaultJobRunner(
+					kernel,
 					() => RunBalaceJob(connectionString, filesConnectionString, partitionId),
 					"BalaceJob_" + partitionId);
 
-				BindDefaultJobRunner(kernel,
+				BindDefaultJobRunner(
+					kernel,
 					() => RunApplicationEventsJob(connectionString, filesConnectionString, partitionId),
 					"ApplicationMailCreatorJob_" + partitionId);
 
-				BindDefaultJobRunner(kernel,
+				BindDefaultJobRunner(
+					kernel,
 					() => RunMailSenderJob(connectionString, partitionId),
 					"MailSenderJob_" + partitionId);
 
-				BindDefaultJobRunner(kernel,
+				BindDefaultJobRunner(
+					kernel,
 					() => RunClientJob(connectionString, filesConnectionString, partitionId),
 					"ClientJob_" + partitionId);
 
-				BindDefaultJobRunner(kernel,
+				BindDefaultJobRunner(
+					kernel,
 					() => RunAwbJob(connectionString, filesConnectionString, partitionId),
 					"AwbJob_" + partitionId);
 			}
 
-			BindDefaultJobRunner(kernel,
+			BindDefaultJobRunner(
+				kernel,
 				() => RunMailSenderJob(mainConnectionString, PartitionIdForOtherMails),
 				"MailSenderJob_ForOtherMails");
 
@@ -85,8 +93,10 @@ namespace Alicargo.Jobs
 		}
 
 		private static void BindDefaultJobRunner(
-			IBindingRoot kernel, Action action,
-			string jobName, TimeSpan pausePeriod)
+			IBindingRoot kernel,
+			Action action,
+			string jobName,
+			TimeSpan pausePeriod)
 		{
 			kernel.Bind<IRunner>()
 				.ToMethod(context => new DefaultRunner(action, jobName, JobsLogger, pausePeriod))
@@ -95,15 +105,19 @@ namespace Alicargo.Jobs
 		}
 
 		private static void BindDefaultJobRunner(
-			IBindingRoot kernel, Action action,
+			IBindingRoot kernel,
+			Action action,
 			string jobName)
 		{
 			BindDefaultJobRunner(kernel, action, jobName, PausePeriod);
 		}
 
 		private static IMessageBuilder GetCommonMessageBuilder(
-			IDbConnection connection, string mainConnectionString, string filesConnectionString,
-			ILocalizedDataHelper localizedDataHelper, IRecipientsFacade recipientsFacade)
+			IDbConnection connection,
+			string mainConnectionString,
+			string filesConnectionString,
+			ILocalizedDataHelper localizedDataHelper,
+			IRecipientsFacade recipientsFacade)
 		{
 			var executor = new SqlProcedureExecutor(mainConnectionString);
 			var templateRepository = new TemplateRepository(executor);
@@ -122,7 +136,9 @@ namespace Alicargo.Jobs
 		}
 
 		private static DefaultEmailingProcessor GetDefaultEmailingProcessor(
-			int partitionId, ISqlProcedureExecutor executor, IMessageBuilder messageBuilder)
+			int partitionId,
+			ISqlProcedureExecutor executor,
+			IMessageBuilder messageBuilder)
 		{
 			var emails = new EmailMessageRepository(executor);
 			var mailSender = new DbMailSender(partitionId, emails, new Serializer());
@@ -131,7 +147,9 @@ namespace Alicargo.Jobs
 		}
 
 		private static CommonFilesFacade GetFilesFacade(
-			IDbConnection connection, string connectionString, string filesConnectionString)
+			IDbConnection connection,
+			string connectionString,
+			string filesConnectionString)
 		{
 			var mainExecutor = new SqlProcedureExecutor(connectionString);
 			var filesExecutor = new SqlProcedureExecutor(filesConnectionString);
@@ -152,7 +170,8 @@ namespace Alicargo.Jobs
 		}
 
 		private static void RunApplicationEventsJob(
-			string connectionString, string filesConnectionString,
+			string connectionString,
+			string filesConnectionString,
 			int partitionId)
 		{
 			using(var connection = new SqlConnection(connectionString))
@@ -174,7 +193,8 @@ namespace Alicargo.Jobs
 					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor() }
 				};
 
-				new SequentialEventJob(events,
+				new SequentialEventJob(
+					events,
 					partitionId,
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
@@ -213,7 +233,8 @@ namespace Alicargo.Jobs
 				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var managerRepository = new ManagerRepository(connection);
-				var recipientsFacade = new AwbEventRecipientsFacade(adminRepository,
+				var recipientsFacade = new AwbEventRecipientsFacade(
+					adminRepository,
 					managerRepository,
 					brokerRepository,
 					awbs,
@@ -232,7 +253,8 @@ namespace Alicargo.Jobs
 					{ EventState.Emailing, emailingProcessor }
 				};
 
-				new SequentialEventJob(events,
+				new SequentialEventJob(
+					events,
 					partitionId,
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
@@ -262,7 +284,8 @@ namespace Alicargo.Jobs
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var localizedDataHelper = new BalanceLocalizedDataHelper(clientBalanceRepository, serializer, clientRepository);
 				var managerRepository = new ManagerRepository(connection);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository,
+				var recipientsFacade = new ClientEventRecipientsFacade(
+					adminRepository,
 					managerRepository,
 					clientRepository,
 					eventEmailRecipient);
@@ -280,7 +303,8 @@ namespace Alicargo.Jobs
 					{ EventState.Emailing, emailingProcessor }
 				};
 
-				new SequentialEventJob(events,
+				new SequentialEventJob(
+					events,
 					partitionId,
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
@@ -302,7 +326,8 @@ namespace Alicargo.Jobs
 				var localizedDataHelper = new CommonLocalizedDataHelper(serializer, clientRepository);
 				var recipients = new EventEmailRecipient(executor);
 				var managerRepository = new ManagerRepository(connection);
-				var recipientsFacade = new ClientEventRecipientsFacade(adminRepository,
+				var recipientsFacade = new ClientEventRecipientsFacade(
+					adminRepository,
 					managerRepository,
 					clientRepository,
 					recipients);
@@ -320,7 +345,8 @@ namespace Alicargo.Jobs
 					{ EventState.Emailing, emailingProcessor }
 				};
 
-				new SequentialEventJob(events,
+				new SequentialEventJob(
+					events,
 					partitionId,
 					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
 					{
@@ -338,7 +364,11 @@ namespace Alicargo.Jobs
 			var emailMessageRepository = new EmailMessageRepository(executor);
 			var mailSender = new DbMailSender(PartitionIdForOtherMails, emailMessageRepository, serializer);
 			var courseSource = new CourseSourceFailPolicy(
-				new CourseSourceRetryPolicy(new CourseSource(httpClient), CourseSourceAttempts, JobsLogger, CourseSourceRetryPolicyPeriod),
+				new CourseSourceRetryPolicy(
+					new CourseSource(httpClient),
+					CourseSourceAttempts,
+					JobsLogger,
+					CourseSourceRetryPolicyPeriod),
 				mailSender,
 				EmailsHelper.DefaultFrom,
 				EmailsHelper.SupportEmail);
@@ -351,7 +381,10 @@ namespace Alicargo.Jobs
 			var serializer = new Serializer();
 			var executor = new SqlProcedureExecutor(connectionString);
 			var messages = new EmailMessageRepository(executor);
-			var sender = new MailSender();
+			var passwordConverter = new PasswordConverter();
+			var senders = new SenderRepository(passwordConverter, executor);
+			var mailConfiguration = new MailConfiguration(senders);
+			var sender = new MailSender(mailConfiguration);
 
 			var job = new MailSenderJob(messages, partitionId, sender, serializer);
 
@@ -359,7 +392,9 @@ namespace Alicargo.Jobs
 		}
 
 		internal static IMessageBuilder GetApplicationMessageBuilder(
-			IDbConnection connection, string mainConnectionString, string filesConnectionString)
+			IDbConnection connection,
+			string mainConnectionString,
+			string filesConnectionString)
 		{
 			var serializer = new Serializer();
 			var passwordConverter = new PasswordConverter();

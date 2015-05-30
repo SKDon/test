@@ -35,30 +35,35 @@ namespace Alicargo.TestHelpers
 			Fixture = new Fixture();
 			Fixture.Customize(new AutoMoqCustomization());
 
-			Fixture.Register(() => Fixture.Build<RecipientData>()
-				.With(x => x.Culture, TwoLetterISOLanguageName.English)
-				.Create());
+			Fixture.Register(
+				() => Fixture.Build<RecipientData>()
+					.With(x => x.Culture, TwoLetterISOLanguageName.English)
+					.Create());
 
-			Fixture.Register(() => Fixture.Build<ApplicationData>()
-				.With(x => x.CurrencyId, CurrencyType.Euro)
-				.Create());
+			Fixture.Register(
+				() => Fixture.Build<ApplicationData>()
+					.With(x => x.CurrencyId, CurrencyType.Euro)
+					.Create());
 
-			Fixture.Register(() => Fixture.Build<AwbAdminModel>()
-				.With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
-				.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
-				.Create());
+			Fixture.Register(
+				() => Fixture.Build<AwbAdminModel>()
+					.With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
+					.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
+					.Create());
 
-			Fixture.Register(() => Fixture.Build<AwbSenderModel>()
-				.With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
-				.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
-				.Create());
+			Fixture.Register(
+				() => Fixture.Build<AwbSenderModel>()
+					.With(x => x.DateOfDepartureLocalString, Fixture.Create<DateTimeOffset>().ToString())
+					.With(x => x.DateOfArrivalLocalString, Fixture.Create<DateTimeOffset>().ToString())
+					.Create());
 
-			Fixture.Register(() => new StateData
-			{
-				Name = Fixture.Create<string>(),
-				Position = Fixture.Create<int>(),
-				LocalizedName = Fixture.Create<string>()
-			});
+			Fixture.Register(
+				() => new StateData
+				{
+					Name = Fixture.Create<string>(),
+					Position = Fixture.Create<int>(),
+					LocalizedName = Fixture.Create<string>()
+				});
 
 			Serializer = Inject<ISerializer>();
 			StateRepository = Inject<IStateRepository>();
@@ -98,6 +103,7 @@ namespace Alicargo.TestHelpers
 			CarrierRepository = Inject<ICarrierRepository>();
 			ForwarderRepository = Inject<IForwarderRepository>();
 			ManagerRepository = Inject<IManagerRepository>();
+			MailConfiguration = Inject<IMailConfiguration>();
 
 			Transaction.Setup(x => x.Dispose());
 		}
@@ -127,6 +133,7 @@ namespace Alicargo.TestHelpers
 		public Mock<ICountryRepository> CountryRepository { get; private set; }
 		public Mock<IIdentityService> IdentityService { get; private set; }
 		public Mock<IForwarderRepository> ForwarderRepository { get; private set; }
+		public Mock<IMailConfiguration> MailConfiguration { get; private set; }
 		public Mock<IMailSender> MailSender { get; private set; }
 		public Mock<IManagerRepository> ManagerRepository { get; private set; }
 		public Mock<IMessageBuilder> MessageBuilder { get; private set; }
