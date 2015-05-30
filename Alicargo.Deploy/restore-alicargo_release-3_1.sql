@@ -1,0 +1,9 @@
+USE [master]
+ALTER DATABASE [Alicargo_Release] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+RESTORE DATABASE [Alicargo_Release] FROM  DISK = N'C:\Projects\Alicargo_3_1.bak'
+	WITH  FILE = 1,  NOUNLOAD,  REPLACE,  STATS = 5
+ALTER DATABASE [Alicargo_Release] SET MULTI_USER
+
+GO
+
+
