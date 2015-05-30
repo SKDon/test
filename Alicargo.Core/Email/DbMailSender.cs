@@ -20,12 +20,20 @@ namespace Alicargo.Core.Email
 
 		public void Send(params EmailMessage[] messages)
 		{
-			foreach (var message in messages)
+			foreach(var message in messages)
 			{
 				var files = _serializer.Serialize(message.Files);
 
-				_repository.Add(_partitionId, message.From, message.To, message.CopyTo,
-					message.Subject, message.Body, message.IsBodyHtml, files);
+				_repository.Add(
+					_partitionId,
+					message.EmailSenderUserId,
+					message.From,
+					message.To,
+					message.CopyTo,
+					message.Subject,
+					message.Body,
+					message.IsBodyHtml,
+					files);
 			}
 		}
 	}

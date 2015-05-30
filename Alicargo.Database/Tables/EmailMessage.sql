@@ -14,8 +14,11 @@
 	[Body] NVARCHAR (MAX) NOT NULL,
 	[IsBodyHtml] BIT CONSTRAINT [DF_EmailMessage_IsBodyHtml] DEFAULT (0) NOT NULL,
 	[Files] VARBINARY (MAX) NULL,
+	[EmailSenderUserId] BIGINT NULL,
 
-	CONSTRAINT [PK_dbo.EmailMessage] PRIMARY KEY CLUSTERED ([Id] ASC)
+	CONSTRAINT [PK_dbo.EmailMessage] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_dbo.EmailMessage_dbo.User_Id] FOREIGN KEY 
+		([EmailSenderUserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
 )
 GO
 

@@ -12,13 +12,13 @@ namespace Alicargo.Jobs.Application.Helpers
 {
 	internal sealed class ApplicationMessageBuilder : IMessageBuilder
 	{
+		private readonly IApplicationRepository _applications;
 		private readonly string _defaultFrom;
 		private readonly ICommonFilesFacade _files;
 		private readonly IRecipientsFacade _recipients;
 		private readonly ISerializer _serializer;
 		private readonly ITemplateRepositoryHelper _templates;
 		private readonly ITextBuilder _textBuilder;
-		private readonly IApplicationRepository _applications;
 
 		public ApplicationMessageBuilder(
 			string defaultFrom,
@@ -26,7 +26,7 @@ namespace Alicargo.Jobs.Application.Helpers
 			ITextBuilder textBuilder,
 			IRecipientsFacade recipients,
 			ITemplateRepositoryHelper templates,
-			ISerializer serializer, 
+			ISerializer serializer,
 			IApplicationRepository applications)
 		{
 			_defaultFrom = defaultFrom;
@@ -58,11 +58,16 @@ namespace Alicargo.Jobs.Application.Helpers
 
 			var files = _files.GetFiles(type, data, languages);
 
-			return GetEmailMessages(templateId.Value, recipients, data, type, files).ToArray();
+			return GetEmailMessages(templateId.Value, recipients, data, type, files, eventData.UserId).ToArray();
 		}
 
-		private IEnumerable<EmailMessage> GetEmailMessages(long templateId, RecipientData[] recipients,
-			EventDataForEntity data, EventType type, IReadOnlyDictionary<string, FileHolder[]> files)
+		private IEnumerable<EmailMessage> GetEmailMessages(
+			long templateId,
+			IEnumerable<RecipientData> recipients,
+			EventDataForEntity data,
+			EventType type,
+			IReadOnlyDictionary<string, FileHolder[]> files,
+			long? emailSenderUserId)
 		{
 			var application = _applications.Get(data.EntityId);
 
@@ -77,12 +82,22 @@ namespace Alicargo.Jobs.Application.Helpers
 
 				var filesToSend = GetFiles(type, recipient, files);
 
-				yield return GetEmailMessage(recipient.Email, recipient.Culture,
-					localization, application, data.Data, type, filesToSend);
+				yield return GetEmailMessage(
+					recipient.Email,
+					recipient.Culture,
+					localization,
+					application,
+					data.Data,
+					type,
+					filesToSend,
+					emailSenderUserId);
 			}
 		}
 
-		private static FileHolder[] GetFiles(EventType type, RecipientData recipient, IReadOnlyDictionary<string, FileHolder[]> files)
+		private static FileHolder[] GetFiles(
+			EventType type,
+			RecipientData recipient,
+			IReadOnlyDictionary<string, FileHolder[]> files)
 		{
 			if(type == EventType.ApplicationSetState && recipient.Role != RoleType.Client)
 			{
@@ -92,13 +107,20 @@ namespace Alicargo.Jobs.Application.Helpers
 			return files == null ? null : files[recipient.Culture];
 		}
 
-		private EmailMessage GetEmailMessage(string email, string culture, EmailTemplateLocalizationData localization,
-			ApplicationData application, byte[] data, EventType type, FileHolder[] files)
+		private EmailMessage GetEmailMessage(
+			string email,
+			string culture,
+			EmailTemplateLocalizationData localization,
+			ApplicationData application,
+			byte[] data,
+			EventType type,
+			FileHolder[] files,
+			long? emailSenderUserId)
 		{
 			var subject = _textBuilder.GetText(localization.Subject, culture, type, application, data);
 			var body = _textBuilder.GetText(localization.Body, culture, type, application, data);
 
-			return new EmailMessage(subject, body, _defaultFrom, email)
+			return new EmailMessage(subject, body, _defaultFrom, email, emailSenderUserId)
 			{
 				IsBodyHtml = localization.IsBodyHtml,
 				Files = files

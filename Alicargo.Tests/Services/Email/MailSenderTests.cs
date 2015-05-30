@@ -19,14 +19,15 @@ namespace Alicargo.Tests.Services.Email
 		public void TestInitialize()
 		{
 			_context = new MockContainer();
-			_sender = new MailSender();
+			_context.SenderRepository.Setup(x => x.GetByUserId(TestConstants.TestAdminUserId)).Returns((long?)null);
+			_sender = new MailSender(new MailConfiguration(_context.SenderRepository.Object));
 
-			if (!Directory.Exists(Settings.Default.MailsFolder))
+			if(!Directory.Exists(Settings.Default.MailsFolder))
 			{
 				Directory.CreateDirectory(Settings.Default.MailsFolder);
 			}
 
-			foreach (var file in Directory.EnumerateFiles(Settings.Default.MailsFolder))
+			foreach(var file in Directory.EnumerateFiles(Settings.Default.MailsFolder))
 			{
 				File.Delete(file);
 			}
@@ -35,7 +36,7 @@ namespace Alicargo.Tests.Services.Email
 		[TestCleanup]
 		public void TestCleanup()
 		{
-			foreach (var file in Directory.EnumerateFiles(Settings.Default.MailsFolder))
+			foreach(var file in Directory.EnumerateFiles(Settings.Default.MailsFolder))
 			{
 				File.Delete(file);
 			}
@@ -45,7 +46,13 @@ namespace Alicargo.Tests.Services.Email
 		public void Test_Send()
 		{
 			var files = _context.CreateMany<FileHolder>().ToArray();
-			_sender.Send(new EmailMessage("subject", "body", "from@mail.com", "to@gmail.com") { Files = files });
+			_sender.Send(
+				new EmailMessage(
+					"subject",
+					"body",
+					"from@mail.com",
+					"to@gmail.com",
+					TestConstants.TestAdminUserId) {Files = files});
 
 			var count = Directory.EnumerateFiles(Settings.Default.MailsFolder).Count();
 			Assert.AreEqual(1, count);
@@ -57,10 +64,19 @@ namespace Alicargo.Tests.Services.Email
 			var tasks = new Task[10];
 			var files = _context.CreateMany<FileHolder>().ToArray();
 
-			for (var index = 0; index < tasks.Length; index++)
+			for(var index = 0; index < tasks.Length; index++)
 			{
 				tasks[index] = Task.Factory.StartNew(
-					() => _sender.Send(new EmailMessage("subject", "body", "from@mail.com", "to@gmail.com") { Files = files }));
+					() => _sender.Send(
+						new EmailMessage(
+							"subject",
+							"body",
+							"from@mail.com",
+							"to@gmail.com",
+							TestConstants.TestAdminUserId)
+						{
+							Files = files
+						}));
 			}
 
 			Task.WaitAll(tasks);

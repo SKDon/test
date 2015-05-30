@@ -14,8 +14,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 	public class EmailMessageRepositoryTests
 	{
 		private DbTestContext _context;
-		private EmailMessageRepository _messages;
 		private Fixture _fixture;
+		private EmailMessageRepository _messages;
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -51,16 +51,21 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories
 		private EmailMessageData Add(int partitionId)
 		{
 			var data = _fixture.Build<EmailMessageData>()
+				.With(x => x.EmailSenderUserId, TestConstants.TestAdminUserId)
 				.With(x => x.To, EmailMessageData.Join(_fixture.CreateMany<string>()))
 				.With(x => x.CopyTo, EmailMessageData.Join(_fixture.CreateMany<string>()))
 				.Without(x => x.Id)
 				.Create();
 
-			_messages.Add(partitionId, data.From,
+			_messages.Add(
+				partitionId,
+				data.EmailSenderUserId,
+				data.From,
 				EmailMessageData.Split(data.To),
 				EmailMessageData.Split(data.CopyTo),
 				data.Subject,
-				data.Body, data.IsBodyHtml,
+				data.Body,
+				data.IsBodyHtml,
 				data.Files);
 
 			return data;

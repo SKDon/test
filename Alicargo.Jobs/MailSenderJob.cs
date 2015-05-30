@@ -57,7 +57,7 @@ namespace Alicargo.Jobs
 
 		private EmailMessage Get(EmailMessageData data)
 		{
-			return new EmailMessage(data.Subject, data.Body, data.From, EmailMessageData.Split(data.To))
+			return new EmailMessage(data.Subject, data.Body, data.From, EmailMessageData.Split(data.To), data.EmailSenderUserId)
 			{
 				CopyTo = EmailMessageData.Split(data.CopyTo),
 				Files = _serializer.Deserialize<FileHolder[]>(data.Files),

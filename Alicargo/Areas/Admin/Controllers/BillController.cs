@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Alicargo.Areas.Admin.Models;
 using Alicargo.Areas.Admin.Serivices.Abstract;
+using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.MvcHelpers.Extensions;
@@ -16,6 +17,7 @@ namespace Alicargo.Areas.Admin.Controllers
 		private readonly IApplicationRepository _applications;
 		private readonly IBillRepository _bills;
 		private readonly IBillManager _manager;
+		private readonly IIdentityService _identity;
 		private readonly IBillModelFactory _modelFactory;
 		private readonly IBillPdf _pdf;
 
@@ -24,13 +26,15 @@ namespace Alicargo.Areas.Admin.Controllers
 			IBillModelFactory modelFactory,
 			IApplicationRepository applications,
 			IBillRepository bills,
-			IBillManager manager)
+			IBillManager manager,
+			IIdentityService identity)
 		{
 			_pdf = pdf;
 			_modelFactory = modelFactory;
 			_applications = applications;
 			_bills = bills;
 			_manager = manager;
+			_identity = identity;
 		}
 
 		[HttpPost]
@@ -98,7 +102,7 @@ namespace Alicargo.Areas.Admin.Controllers
 				return View("Preview", model);
 			}
 
-			_manager.Send(id);
+			_manager.Send(id, _identity.Id);
 
 			return RedirectToAction(MVC.Admin.Bill.Sent(id));
 		}

@@ -5,7 +5,15 @@ namespace Alicargo.DataAccess.Contracts.Repositories
 {
 	public interface IEmailMessageRepository
 	{
-		void Add(int partitionId, string @from, string[] to, string[] copyTo, string subject, string body, bool isBodyHtml,
+		void Add(
+			int partitionId,
+			long? emailSenderUserId,
+			string @from,
+			string[] to,
+			string[] copyTo,
+			string subject,
+			string body,
+			bool isBodyHtml,
 			byte[] files);
 
 		EmailMessageData GetNext(EmailMessageState state, int partitionId);

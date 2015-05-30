@@ -30,7 +30,12 @@ namespace Alicargo.Jobs.Bill.Helpers
 				if(!string.IsNullOrWhiteSpace(_supportEmail))
 				{
 					var body = "Не удалось обновить курс евро из " + url + Environment.NewLine + e;
-					var message = new EmailMessage("Alicargo. Ошибка обновления курса", body, _fromEmail, _supportEmail);
+					var message = new EmailMessage(
+						"Alicargo. Ошибка обновления курса",
+						body,
+						_fromEmail,
+						_supportEmail,
+						null);
 
 					_sender.Send(message);
 				}

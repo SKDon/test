@@ -13,21 +13,32 @@ namespace Alicargo.DataAccess.Repositories
 			_executor = executor;
 		}
 
-		public void Add(int partitionId, string @from, string[] to, string[] copyTo, string subject, string body,
-			bool isBodyHtml, byte[] files)
+		public void Add(
+			int partitionId,
+			long? emailSenderUserId,
+			string @from,
+			string[] to,
+			string[] copyTo,
+			string subject,
+			string body,
+			bool isBodyHtml,
+			byte[] files)
 		{
-			_executor.Execute("[dbo].[EmailMessage_Add]", new
-			{
-				State = EmailMessageState.New,
-				partitionId,
-				@from,
-				To = EmailMessageData.Join(to),
-				CopyTo = EmailMessageData.Join(copyTo),
-				subject,
-				body,
-				isBodyHtml,
-				files
-			});
+			_executor.Execute(
+				"[dbo].[EmailMessage_Add]",
+				new
+				{
+					State = EmailMessageState.New,
+					partitionId,
+					@from,
+					To = EmailMessageData.Join(to),
+					CopyTo = EmailMessageData.Join(copyTo),
+					subject,
+					body,
+					isBodyHtml,
+					files,
+					emailSenderUserId
+				});
 		}
 
 		public EmailMessageData GetNext(EmailMessageState state, int partitionId)

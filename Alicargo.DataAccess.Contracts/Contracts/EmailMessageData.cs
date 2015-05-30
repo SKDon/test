@@ -26,5 +26,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 		public string Body { get; set; }
 		public byte[] Files { get; set; }
 		public bool IsBodyHtml { get; set; }
+		public long? EmailSenderUserId { get; set; }
 	}
 }

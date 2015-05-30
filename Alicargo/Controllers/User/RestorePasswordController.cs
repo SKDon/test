@@ -31,7 +31,7 @@ namespace Alicargo.Controllers.User
 		{
 			var id = _users.GetUserIdByEmail(email.Trim());
 
-			if (!id.HasValue)
+			if(!id.HasValue)
 			{
 				ModelState.AddModelError("email", Validation.UserNotFound);
 
@@ -42,13 +42,18 @@ namespace Alicargo.Controllers.User
 			SaveKey(id.Value, key);
 
 			var url = Url.Action(MVC.RestorePassword.NewPassword(id.Value, key), "http");
-			_sender.Send(new EmailMessage(Pages.RestorePassword, string.Format(Pages.RestorePasswordText, url),
-				EmailsHelper.DefaultFrom, email.Trim())
+			var message = new EmailMessage(
+				Pages.RestorePassword,
+				string.Format(Pages.RestorePasswordText, url),
+				EmailsHelper.DefaultFrom,
+				email.Trim(),
+				id.Value)
 			{
 				CopyTo = null,
 				Files = null,
 				IsBodyHtml = true
-			});
+			};
+			_sender.Send(message);
 
 			return RedirectToAction(MVC.RestorePassword.Finish());
 		}
@@ -58,7 +63,7 @@ namespace Alicargo.Controllers.User
 		{
 			var savedKey = GetSavedKey(GetCacheKey(id));
 
-			if (savedKey != key)
+			if(savedKey != key)
 			{
 				return RedirectToAction(MVC.RestorePassword.UnknownKey());
 			}
@@ -72,7 +77,7 @@ namespace Alicargo.Controllers.User
 			var cacheKey = GetCacheKey(id);
 			var savedKey = GetSavedKey(cacheKey);
 
-			if (savedKey != key)
+			if(savedKey != key)
 			{
 				return RedirectToAction(MVC.RestorePassword.UnknownKey());
 			}
@@ -82,7 +87,7 @@ namespace Alicargo.Controllers.User
 			_users.SetPassword(id, password);
 
 			return RedirectToAction(MVC.RestorePassword.Success());
-		}		
+		}
 
 		[HttpGet]
 		public virtual ViewResult Finish()
@@ -113,8 +118,14 @@ namespace Alicargo.Controllers.User
 
 			RemoveKey(cacheKey);
 
-			HttpContext.Cache.Add(cacheKey, key, null, DateTime.Now.AddHours(1),
-				Cache.NoSlidingExpiration, CacheItemPriority.Default, null);
+			HttpContext.Cache.Add(
+				cacheKey,
+				key,
+				null,
+				DateTime.Now.AddHours(1),
+				Cache.NoSlidingExpiration,
+				CacheItemPriority.Default,
+				null);
 		}
 
 		private string GetSavedKey(string cacheKey)

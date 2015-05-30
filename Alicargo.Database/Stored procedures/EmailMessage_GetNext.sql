@@ -12,7 +12,8 @@ AS
 			m.[Subject],
 			m.[Body],
 			m.[IsBodyHtml],
-			m.[Files]
+			m.[Files],
+			m.[EmailSenderUserId]
 	FROM [dbo].[EmailMessage] m
 	WHERE m.[StateId] = @State AND m.[PartitionId] = @PartitionId
 	ORDER BY m.[Id]

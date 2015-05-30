@@ -73,16 +73,23 @@ namespace Alicargo.Controllers
 
 			if(!ModelState.IsValid)
 			{
-				throw new InvalidLogicException("МЫ НЕ МОЖЕМ ОБРАБОТАТЬ ЭТУ ЗАЯВКУ"
-				                                + Environment.NewLine + "УКАЖИТЕ КОНТАКТНОЕ ИМЯ И ТЕЛЕФОН"
-				                                + Environment.NewLine + Environment.NewLine + text
-												+ Environment.NewLine);
+				throw new InvalidLogicException(
+					"МЫ НЕ МОЖЕМ ОБРАБОТАТЬ ЭТУ ЗАЯВКУ"
+					+ Environment.NewLine + "УКАЖИТЕ КОНТАКТНОЕ ИМЯ И ТЕЛЕФОН"
+					+ Environment.NewLine + Environment.NewLine + text
+					+ Environment.NewLine);
 			}
 
-			_sender.Send(new EmailMessage("Новая завяка на сайте avionrussia.com", text, EmailsHelper.DefaultFrom, EmailsHelper.FeedbackEmail)
-			{
-				IsBodyHtml = false
-			});
+			_sender.Send(
+				new EmailMessage(
+					"Новая завяка на сайте avionrussia.com",
+					text,
+					EmailsHelper.DefaultFrom,
+					EmailsHelper.FeedbackEmail,
+					null)
+				{
+					IsBodyHtml = false
+				});
 
 			return Redirect("/index.html");
 		}

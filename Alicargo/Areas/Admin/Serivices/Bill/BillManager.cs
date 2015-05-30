@@ -71,7 +71,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 				});
 		}
 
-		public void Send(long applicationId)
+		public void Send(long applicationId, long userId)
 		{
 			var bill = _bills.Get(applicationId);
 			var application = _applications.Get(applicationId);
@@ -87,7 +87,7 @@ namespace Alicargo.Areas.Admin.Serivices.Bill
 
 			foreach(var item in to)
 			{
-				_mail.Send(new EmailMessage(subject, body, from, item)
+				_mail.Send(new EmailMessage(subject, body, from, item, userId)
 				{
 					Files = files,
 				});

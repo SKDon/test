@@ -57,13 +57,21 @@ namespace Alicargo.Jobs.Helpers
 
 			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value);
 
-			return recipients.Select(x =>
-				GetEmailMessage(x.Email, localizations[x.Culture], files != null ? files[x.Culture] : null)).ToArray();
+			return recipients.Select(
+				x => GetEmailMessage(
+					eventData.UserId,
+					x.Email,
+					localizations[x.Culture],
+					files != null ? files[x.Culture] : null)).ToArray();
 		}
 
-		private EmailMessage GetEmailMessage(string email, EmailTemplateLocalizationData localizationData, FileHolder[] files)
+		private EmailMessage GetEmailMessage(
+			long? userId,
+			string email,
+			EmailTemplateLocalizationData localizationData,
+			FileHolder[] files)
 		{
-			return new EmailMessage(localizationData.Subject, localizationData.Body, _defaultFrom, email)
+			return new EmailMessage(localizationData.Subject, localizationData.Body, _defaultFrom, email, userId)
 			{
 				Files = files,
 				IsBodyHtml = localizationData.IsBodyHtml
@@ -72,9 +80,11 @@ namespace Alicargo.Jobs.Helpers
 
 		private Dictionary<string, EmailTemplateLocalizationData> GetLocalizationData(
 			EventDataForEntity eventData,
-			string[] languages, long templateId)
+			IEnumerable<string> languages,
+			long templateId)
 		{
-			return languages.ToDictionary(x => x,
+			return languages.ToDictionary(
+				x => x,
 				language =>
 				{
 					var template = _templates.GetLocalization(templateId, language);
