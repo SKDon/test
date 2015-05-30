@@ -8,7 +8,8 @@ AS BEGIN
 	SELECT	TOP(1) 
 			e.[Id],
 			e.[StateId] AS [State],
-			e.[Data]
+			e.[Data],
+			e.[UserId]
 	FROM [dbo].[Event] e
 	WHERE e.[EventTypeId] = @EventTypeId AND e.[PartitionId] = @PartitionId AND e.[StateId] <> -1
 	ORDER BY e.[Id]

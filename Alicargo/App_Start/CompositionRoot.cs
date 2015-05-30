@@ -60,7 +60,7 @@ namespace Alicargo
 
 			kernel.Bind<IForwarderService>().To<ForwarderService>().InRequestScope();
 
-			kernel.Bind<IEventFacade>().To<EventFacade>().InSingletonScope();
+			kernel.Bind<IEventFacade>().To<EventFacade>().InRequestScope();
 
 			kernel.Bind<IPartitionConverter>().To<PartitionConverter>()
 				.InSingletonScope()

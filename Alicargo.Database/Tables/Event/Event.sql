@@ -7,8 +7,11 @@
 	[PartitionId] INT NOT NULL,
 
 	[EventTypeId] INT NOT NULL,
-	[Data] VARBINARY(MAX) NULL
+	[Data] VARBINARY(MAX) NULL,
+	[UserId] BIGINT NULL,
 
-	CONSTRAINT [PK_dbo.Event] PRIMARY KEY CLUSTERED ([Id] ASC)
+	CONSTRAINT [PK_dbo.Event] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_dbo.Event_dbo.User_Id] FOREIGN KEY 
+		([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
 )
 GO

@@ -11,6 +11,7 @@ using Alicargo.DataAccess.Contracts.Repositories.User;
 
 namespace Alicargo.Services
 {
+	// Statefull
 	internal sealed class IdentityService : IIdentityService
 	{
 		private readonly IAdminRepository _admins;

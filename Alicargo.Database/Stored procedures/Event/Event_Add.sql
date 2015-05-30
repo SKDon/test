@@ -2,13 +2,14 @@
 	@StateId INT,
 	@PartitionId INT,
 	@EventTypeId INT,
-	@Data VARBINARY(MAX)
+	@Data VARBINARY(MAX),
+	@UserId BIGINT
 
 AS BEGIN
 	SET NOCOUNT ON;
 
-	INSERT [dbo].[Event] ([EventTypeId], [StateId], [Data], [PartitionId])
-	VALUES (@EventTypeId, @StateId, @Data, @PartitionId)
+	INSERT [dbo].[Event] ([EventTypeId], [StateId], [Data], [PartitionId], [UserId])
+	VALUES (@EventTypeId, @StateId, @Data, @PartitionId, @UserId)
 
 END
 GO

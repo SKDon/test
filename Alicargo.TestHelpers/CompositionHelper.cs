@@ -52,7 +52,7 @@ namespace Alicargo.TestHelpers
 			}
 
 			identityService.Setup(x => x.IsInRole(_type)).Returns(true);
-
+			identityService.Setup(x => x.IsAuthenticated).Returns(true);
 			identityService.Setup(x => x.Language).Returns(TwoLetterISOLanguageName.English);
 
 			switch(_type)
