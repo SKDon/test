@@ -29,14 +29,14 @@ namespace Alicargo.Core.Email
 		{
 			var section = _configuration.GetConfiguration(userId);
 
+			var credentials = new NetworkCredential(
+				section.Network.UserName,
+				section.Network.Password);
+
 			using(var smtpClient = new SmtpClient(section.Network.Host, section.Network.Port)
 			{
-				Credentials = new NetworkCredential(
-					section.Network.UserName, section.Network.Password, section.Network.ClientDomain),
-				EnableSsl = section.Network.EnableSsl,
-				UseDefaultCredentials = section.Network.DefaultCredentials,
-				DeliveryFormat = section.DeliveryFormat,
-				DeliveryMethod = section.DeliveryMethod,
+				Credentials = credentials,
+				EnableSsl = section.Network.EnableSsl
 			})
 			{
 				if(section.Network.TargetName != null)
@@ -49,7 +49,7 @@ namespace Alicargo.Core.Email
 				{
 					using(var email = new MailMessage())
 					{
-						email.From = new MailAddress(section.From ?? message.From, message.From);
+						email.From = new MailAddress(section.From);
 						foreach(var to in message.To)
 						{
 							email.To.Add(to);
