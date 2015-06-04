@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Net.Configuration;
 using Alicargo.Core.Contracts.Email;
+using Alicargo.Core.Contracts.Exceptions;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 
 namespace Alicargo.Core.Email
@@ -34,7 +35,17 @@ namespace Alicargo.Core.Email
 				}
 			}
 
-			return section ?? GetSection("mailSettings/default");
+			if(section == null)
+			{
+				section = GetSection("mailSettings/default");
+
+				if(section.From == null)
+				{
+					throw new InvalidLogicException("Did not set From in email config " + section.SectionInformation.SectionName);
+				}
+			}
+
+			return section ;
 		}
 
 		private static SmtpSection GetSection(string sectionName)
