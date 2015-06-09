@@ -102,6 +102,7 @@
     <Compile Include="Exceptions\DublicateException.cs" />
     <Compile Include="Exceptions\UpdateConflictException.cs" />
     <Compile Include="Helpers\EmailsHelper.cs" />
+    <Compile Include="Helpers\EventHelper.cs" />
     <Compile Include="Helpers\Order.cs" />
     <Compile Include="Helpers\OrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

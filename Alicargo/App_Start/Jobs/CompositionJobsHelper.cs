@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using Alicargo.Core.Common;
 using Alicargo.Core.Email;
 using Alicargo.Core.Excel.Client;
@@ -193,31 +194,15 @@ namespace Alicargo.Jobs
 					{ EventState.StateHistorySaving, new ApplicationStateHistoryProcessor() }
 				};
 
+				var dictionary = EventHelper.ApplicationEventTypes
+					.Except(new[] { EventType.ApplicationSetState })
+					.ToDictionary(x => x, x => (IDictionary<EventState, IEventProcessor>)processors);
+				dictionary.Add(EventType.ApplicationSetState, processorsForApplicationSetState);
+
 				new SequentialEventJob(
 					events,
 					partitionId,
-					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-					{
-						{ EventType.ApplicationCreated, processors },
-						{ EventType.ApplicationSetState, processorsForApplicationSetState },
-						{ EventType.SetDateOfCargoReceipt, processors },
-						{ EventType.SetTransitReference, processors },
-						{ EventType.CPFileUploaded, processors },
-						{ EventType.InvoiceFileUploaded, processors },
-						{ EventType.PackingFileUploaded, processors },
-						{ EventType.SwiftFileUploaded, processors },
-						{ EventType.DeliveryBillFileUploaded, processors },
-						{ EventType.Torg12FileUploaded, processors },
-						{ EventType.T1FileUploaded, processors },
-						{ EventType.Ex1FileUploaded, processors },
-						{ EventType.OtherApplFileUploaded, processors },
-						{ EventType.Calculate, processors },
-						{ EventType.SetSender, processors },
-						{ EventType.SetForwarder, processors },
-						{ EventType.SetCarrier, processors },
-						{ EventType.SetAwb, processors },
-						{ EventType.CalculationCanceled, processors }
-					}).Work();
+					dictionary).Work();
 			}
 		}
 
@@ -248,7 +233,7 @@ namespace Alicargo.Jobs
 					recipientsFacade);
 				var emailingProcessor = GetDefaultEmailingProcessor(partitionId, executor, messageBuilder);
 
-				var processors = new Dictionary<EventState, IEventProcessor>
+				var processors = (IDictionary<EventState, IEventProcessor>)new Dictionary<EventState, IEventProcessor>
 				{
 					{ EventState.Emailing, emailingProcessor }
 				};
@@ -256,18 +241,7 @@ namespace Alicargo.Jobs
 				new SequentialEventJob(
 					events,
 					partitionId,
-					new Dictionary<EventType, IDictionary<EventState, IEventProcessor>>
-					{
-						{ EventType.AwbCreated, processors },
-						{ EventType.SetBroker, processors },
-						{ EventType.GTDFileUploaded, processors },
-						{ EventType.OtherAwbFileUploaded, processors },
-						{ EventType.GTDAdditionalFileUploaded, processors },
-						{ EventType.AwbPackingFileUploaded, processors },
-						{ EventType.AwbInvoiceFileUploaded, processors },
-						{ EventType.AWBFileUploaded, processors },
-						{ EventType.DrawFileUploaded, processors }
-					}).Work();
+					EventHelper.AwbEventTypes.ToDictionary(x => x, x => processors)).Work();
 			}
 		}
 
