@@ -40,10 +40,14 @@ namespace Alicargo.Core.Email
 			})
 			{
 				if(section.Network.TargetName != null)
+				{
 					smtpClient.TargetName = section.Network.TargetName;
+				}
 
 				if(section.SpecifiedPickupDirectory != null && section.SpecifiedPickupDirectory.PickupDirectoryLocation != null)
+				{
 					smtpClient.PickupDirectoryLocation = section.SpecifiedPickupDirectory.PickupDirectoryLocation;
+				}
 
 				foreach(var message in messages)
 				{

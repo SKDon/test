@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Alicargo.Core.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.TestHelpers;
-using Alicargo.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Alicargo.Tests.Services.Email
@@ -13,6 +12,7 @@ namespace Alicargo.Tests.Services.Email
 	public class MailSenderTests
 	{
 		private MockContainer _context;
+		private string _mailFolder;
 		private MailSender _sender;
 
 		[TestInitialize]
@@ -20,14 +20,18 @@ namespace Alicargo.Tests.Services.Email
 		{
 			_context = new MockContainer();
 			_context.SenderRepository.Setup(x => x.GetByUserId(TestConstants.TestAdminUserId)).Returns((long?)null);
-			_sender = new MailSender(new MailConfiguration(_context.SenderRepository.Object));
+			var configuration = new MailConfiguration(_context.SenderRepository.Object);
+			_sender = new MailSender(configuration);
+			_mailFolder = configuration.GetConfiguration(TestConstants.TestAdminUserId)
+				.SpecifiedPickupDirectory
+				.PickupDirectoryLocation;
 
-			if(!Directory.Exists(Settings.Default.MailsFolder))
+			if(!Directory.Exists(_mailFolder))
 			{
-				Directory.CreateDirectory(Settings.Default.MailsFolder);
+				Directory.CreateDirectory(_mailFolder);
 			}
 
-			foreach(var file in Directory.EnumerateFiles(Settings.Default.MailsFolder))
+			foreach(var file in Directory.EnumerateFiles(_mailFolder))
 			{
 				File.Delete(file);
 			}
@@ -36,7 +40,7 @@ namespace Alicargo.Tests.Services.Email
 		[TestCleanup]
 		public void TestCleanup()
 		{
-			foreach(var file in Directory.EnumerateFiles(Settings.Default.MailsFolder))
+			foreach(var file in Directory.EnumerateFiles(_mailFolder))
 			{
 				File.Delete(file);
 			}
@@ -52,9 +56,9 @@ namespace Alicargo.Tests.Services.Email
 					"body",
 					"from@mail.com",
 					"to@gmail.com",
-					TestConstants.TestAdminUserId) {Files = files});
+					TestConstants.TestAdminUserId) { Files = files });
 
-			var count = Directory.EnumerateFiles(Settings.Default.MailsFolder).Count();
+			var count = Directory.EnumerateFiles(_mailFolder).Count();
 			Assert.AreEqual(1, count);
 		}
 
@@ -81,7 +85,7 @@ namespace Alicargo.Tests.Services.Email
 
 			Task.WaitAll(tasks);
 
-			var count = Directory.EnumerateFiles(Settings.Default.MailsFolder).Count();
+			var count = Directory.EnumerateFiles(_mailFolder).Count();
 			Assert.AreEqual(tasks.Length, count);
 		}
 	}
