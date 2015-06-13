@@ -215,7 +215,9 @@ namespace Alicargo.Jobs
 				var adminRepository = new AdminRepository(connection);
 				var brokerRepository = new BrokerRepository(connection);
 				var awbs = new AwbRepository(connection);
-				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs);
+				var converter = new PasswordConverter();
+				var senders = new SenderRepository(converter, executor);
+				var localizedDataHelper = new AwbEventLocalizedDataHelper(awbs, senders);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
 				var managerRepository = new ManagerRepository(connection);
 				var recipientsFacade = new AwbEventRecipientsFacade(
