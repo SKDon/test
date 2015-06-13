@@ -28,46 +28,64 @@ namespace Alicargo.Core.Email
 
 		private void Send(IEnumerable<EmailMessage> messages, long? userId)
 		{
+			using(var smtpClient = new SmtpClient())
+			{
+				var section = Configure(smtpClient, userId);
+
+				Send(smtpClient, section.From, messages);
+			}
+		}
+
+		private SmtpSection Configure(SmtpClient smtpClient, long? userId)
+		{
 			var section = _configuration.GetConfiguration(userId);
 
-			var credentials = new NetworkCredential(
-				section.Network.UserName,
-				section.Network.Password);
+			smtpClient.DeliveryMethod = section.DeliveryMethod;
 
-			using(var smtpClient = new SmtpClient(section.Network.Host, section.Network.Port)
+			smtpClient.DeliveryFormat = section.DeliveryFormat;
+
+			var specifiedPickupDirectory = section.SpecifiedPickupDirectory;
+
+			var useFolder = specifiedPickupDirectory != null
+			                && !string.IsNullOrWhiteSpace(specifiedPickupDirectory.PickupDirectoryLocation);
+
+			if(useFolder)
 			{
-				Credentials = credentials,
-				EnableSsl = section.Network.EnableSsl
-			})
+				if(!Directory.Exists(specifiedPickupDirectory.PickupDirectoryLocation))
+				{
+					Directory.CreateDirectory(specifiedPickupDirectory.PickupDirectoryLocation);
+				}
+
+				smtpClient.PickupDirectoryLocation = specifiedPickupDirectory.PickupDirectoryLocation;
+			}
+			else
 			{
+				smtpClient.Host = section.Network.Host;
+
+				smtpClient.Port = section.Network.Port;
+
+				smtpClient.UseDefaultCredentials = section.Network.DefaultCredentials;
+
+				smtpClient.Credentials = new NetworkCredential(section.Network.UserName, section.Network.Password);
+
+				smtpClient.EnableSsl = section.Network.EnableSsl;
+
 				if(section.Network.TargetName != null)
 				{
 					smtpClient.TargetName = section.Network.TargetName;
 				}
-
-				if(section.SpecifiedPickupDirectory != null && section.SpecifiedPickupDirectory.PickupDirectoryLocation != null)
-				{
-					var pickupDirectoryLocation = section.SpecifiedPickupDirectory.PickupDirectoryLocation;
-
-					if(!Directory.Exists(pickupDirectoryLocation))
-					{
-						Directory.CreateDirectory(pickupDirectoryLocation);
-					}
-
-					smtpClient.PickupDirectoryLocation = pickupDirectoryLocation;
-				}
-
-				Send(messages, section, smtpClient);
 			}
+
+			return section;
 		}
 
-		private static void Send(IEnumerable<EmailMessage> messages, SmtpSection section, SmtpClient smtpClient)
+		private static void Send(SmtpClient smtpClient, string addressFrom, IEnumerable<EmailMessage> messages)
 		{
 			foreach(var message in messages)
 			{
 				using(var email = new MailMessage())
 				{
-					email.From = new MailAddress(section.From);
+					email.From = new MailAddress(addressFrom);
 					foreach(var to in message.To)
 					{
 						email.To.Add(to);

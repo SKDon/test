@@ -14,6 +14,7 @@ namespace Alicargo.Core.Event
 	public sealed class EventFacade : IEventFacade
 	{
 		private readonly IApplicationRepository _applications;
+		private readonly IAwbRepository _awbs;
 		private readonly IPartitionConverter _converter;
 		private readonly IEventRepository _events;
 		private readonly IIdentityService _identity;
@@ -26,6 +27,7 @@ namespace Alicargo.Core.Event
 			IPartitionConverter converter,
 			IIdentityService identity,
 			IApplicationRepository applications,
+			IAwbRepository awbs,
 			ISenderRepository senders)
 		{
 			_events = events;
@@ -33,6 +35,7 @@ namespace Alicargo.Core.Event
 			_converter = converter;
 			_identity = identity;
 			_applications = applications;
+			_awbs = awbs;
 			_senders = senders;
 		}
 
@@ -50,9 +53,9 @@ namespace Alicargo.Core.Event
 
 		private void AddImpl(long entityId, EventType type, EventState state, byte[] data)
 		{
-			var senderUserId = GetSenderUserId(entityId, type);
-
-			var currentUserId = senderUserId ?? (_identity.IsAuthenticated ? _identity.Id : (long?)null);
+			var currentUserId = TryGetUserIdByApplication(entityId, type)
+			                    ?? TryGetUserIdByAwb(entityId, type)
+			                    ?? GetCurrentUserId();
 
 			var partitionId = _converter.GetKey(entityId);
 
@@ -67,25 +70,27 @@ namespace Alicargo.Core.Event
 			_events.Add(partitionId, currentUserId, type, state, bytes);
 		}
 
-		private long? GetSenderUserId(long entityId, EventType type)
+		private long? GetCurrentUserId()
 		{
-			long? senderIdInEntity = null;
-			if(EventHelper.ApplicationEventTypes.Contains(type))
-			{
-				senderIdInEntity = _applications.Get(entityId).SenderId;
-			}
-			else if(EventHelper.AwbEventTypes.Contains(type))
-			{
-				senderIdInEntity = _applications.GetByAirWaybill(entityId).Select(x => x.SenderId).FirstOrDefault();
-			}
-			
-			long? senderUserId = null;
-			if(senderIdInEntity.HasValue)
-			{
-				senderUserId = _senders.GetUserId(senderIdInEntity.Value);
-			}
+			return _identity.IsAuthenticated ? _identity.Id : (long?)null;
+		}
 
-			return senderUserId;
+		private long? TryGetUserIdByAwb(long entityId, EventType type)
+		{
+			return EventHelper.AwbEventTypes.Contains(type)
+				? _awbs.Get(entityId).Select(x => x.SenderUserId).FirstOrDefault()
+				: null;
+		}
+
+		private long? TryGetUserIdByApplication(long entityId, EventType type)
+		{
+			if(!EventHelper.ApplicationEventTypes.Contains(type)) return null;
+
+			var senderIdInEntity = _applications.Get(entityId).SenderId;
+
+			return senderIdInEntity.HasValue
+				? _senders.GetUserId(senderIdInEntity.Value)
+				: (long?)null;
 		}
 	}
 }
