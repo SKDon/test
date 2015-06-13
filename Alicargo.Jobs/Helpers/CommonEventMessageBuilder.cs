@@ -37,7 +37,7 @@ namespace Alicargo.Jobs.Helpers
 
 		public EmailMessage[] Get(EventType type, EventData eventData)
 		{
-			var eventDataForEntity = _serializer.Deserialize<EventDataForEntity>(eventData.Data);
+			var data = _serializer.Deserialize<EventDataForEntity>(eventData.Data);
 
 			var templateId = _templates.GetTemplateId(type);
 			if(!templateId.HasValue)
@@ -45,7 +45,7 @@ namespace Alicargo.Jobs.Helpers
 				return null;
 			}
 
-			var recipients = _recipients.GetRecipients(type, eventDataForEntity);
+			var recipients = _recipients.GetRecipients(type, data);
 			if(recipients == null || recipients.Length == 0)
 			{
 				return null;
@@ -53,16 +53,29 @@ namespace Alicargo.Jobs.Helpers
 
 			var languages = recipients.Select(x => x.Culture).Distinct().ToArray();
 
-			var files = _files.GetFiles(type, eventDataForEntity, languages);
+			var files = _files.GetFiles(type, data, languages);
 
-			var localizations = GetLocalizationData(eventDataForEntity, languages, templateId.Value);
+			return GetEmailMessages(templateId.Value, recipients, data, files, eventData.UserId, languages).ToArray();
+		}
 
-			return recipients.Select(
+		private IEnumerable<EmailMessage> GetEmailMessages(
+			long templateId,
+			IEnumerable<RecipientData> recipients,
+			EventDataForEntity data,
+			IReadOnlyDictionary<string, FileHolder[]> files,
+			long? userId,
+			IEnumerable<string> languages)
+		{
+			var localizations = GetLocalizationData(data, languages, templateId);
+
+			var emailMessages = recipients.Select(
 				x => GetEmailMessage(
-					eventData.UserId,
+					userId,
 					x.Email,
 					localizations[x.Culture],
-					files != null ? files[x.Culture] : null)).ToArray();
+					files != null ? files[x.Culture] : null));
+
+			return emailMessages;
 		}
 
 		private EmailMessage GetEmailMessage(

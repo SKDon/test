@@ -58,16 +58,16 @@ namespace Alicargo.Jobs.Application.Helpers
 
 			var files = _files.GetFiles(type, data, languages);
 
-			return GetEmailMessages(templateId.Value, recipients, data, type, files, eventData.UserId).ToArray();
+			return GetEmailMessages(templateId.Value, recipients, data, files, eventData.UserId, type).ToArray();
 		}
 
 		private IEnumerable<EmailMessage> GetEmailMessages(
 			long templateId,
 			IEnumerable<RecipientData> recipients,
 			EventDataForEntity data,
-			EventType type,
 			IReadOnlyDictionary<string, FileHolder[]> files,
-			long? emailSenderUserId)
+			long? userId,
+			EventType type)
 		{
 			var application = _applications.Get(data.EntityId);
 
@@ -90,7 +90,7 @@ namespace Alicargo.Jobs.Application.Helpers
 					data.Data,
 					type,
 					filesToSend,
-					emailSenderUserId);
+					userId);
 			}
 		}
 
