@@ -355,9 +355,7 @@ namespace Alicargo.Jobs
 			var serializer = new Serializer();
 			var executor = new SqlProcedureExecutor(connectionString);
 			var messages = new EmailMessageRepository(executor);
-			var passwordConverter = new PasswordConverter();
-			var senders = new SenderRepository(passwordConverter, executor);
-			var mailConfiguration = new MailConfiguration(senders);
+			var mailConfiguration = new MailConfiguration();
 			var sender = new MailSender(mailConfiguration);
 
 			var job = new MailSenderJob(messages, partitionId, sender, serializer);

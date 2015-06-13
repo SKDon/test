@@ -20,20 +20,18 @@ namespace Alicargo.Tests.Services.Email
 		{
 			_context = new MockContainer();
 			_context.SenderRepository.Setup(x => x.GetByUserId(TestConstants.TestAdminUserId)).Returns((long?)null);
-			var configuration = new MailConfiguration(_context.SenderRepository.Object);
+			var configuration = new MailConfiguration();
 			_sender = new MailSender(configuration);
 			_mailFolder = configuration.GetConfiguration(TestConstants.TestAdminUserId)
 				.SpecifiedPickupDirectory
 				.PickupDirectoryLocation;
 
-			if(!Directory.Exists(_mailFolder))
+			if(Directory.Exists(_mailFolder))
 			{
-				Directory.CreateDirectory(_mailFolder);
-			}
-
-			foreach(var file in Directory.EnumerateFiles(_mailFolder))
-			{
-				File.Delete(file);
+				foreach(var file in Directory.EnumerateFiles(_mailFolder))
+				{
+					File.Delete(file);
+				}
 			}
 		}
 

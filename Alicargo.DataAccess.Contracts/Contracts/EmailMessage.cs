@@ -11,8 +11,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 		}
 
 		public EmailMessage(string subject, string body, string from, string[] to, long? emailSenderUserId)
-		{
-			EmailSenderUserId = emailSenderUserId;
+		{			
 			if(to == null || to.Length == 0)
 				throw new ArgumentNullException("to");
 
@@ -20,6 +19,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts
 			Subject = subject;
 			To = to;
 			From = from;
+			EmailSenderUserId = emailSenderUserId;
 		}
 
 		public long? EmailSenderUserId { get; private set; }
