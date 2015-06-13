@@ -258,7 +258,13 @@ namespace Alicargo.Jobs
 				var clientRepository = new ClientRepository(executor);
 				var adminRepository = new AdminRepository(connection);
 				var eventEmailRecipient = new EventEmailRecipient(executor);
-				var localizedDataHelper = new BalanceLocalizedDataHelper(clientBalanceRepository, serializer, clientRepository);
+				var converter = new PasswordConverter();
+				var senders = new SenderRepository(converter, executor);
+				var localizedDataHelper = new BalanceLocalizedDataHelper(
+					clientBalanceRepository,
+					serializer,
+					clientRepository,
+					senders);
 				var managerRepository = new ManagerRepository(connection);
 				var recipientsFacade = new ClientEventRecipientsFacade(
 					adminRepository,
