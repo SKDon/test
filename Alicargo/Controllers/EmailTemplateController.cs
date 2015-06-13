@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Enums;
+using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services;
@@ -56,12 +57,16 @@ namespace Alicargo.Controllers
 
 			_recipients.Set(model.EventType, roles);
 
-			_templates.SetForEvent(model.EventType, model.Language, model.EnableEmailSend, new EmailTemplateLocalizationData
-			{
-				Body = model.Body,
-				IsBodyHtml = false,
-				Subject = model.Subject
-			});
+			_templates.SetForEvent(
+				model.EventType,
+				model.Language,
+				model.EnableEmailSend,
+				new EmailTemplateLocalizationData
+				{
+					Body = model.Body,
+					IsBodyHtml = false,
+					Subject = model.Subject
+				});
 
 			return RedirectToAction(MVC.EmailTemplate.Edit(model.EventType, model.Language));
 		}
@@ -87,12 +92,25 @@ namespace Alicargo.Controllers
 		{
 			var types = Enum.GetValues(typeof(EventType))
 				.Cast<EventType>()
-				.Select(x => new
-				{
-					Id = (int)x,
-					Name = x.ToLocalString()
-				})
-				.OrderBy(x => x.Name)
+				.Select(
+					x => new
+					{
+						Id = (int)x,
+						Order = EventHelper.ApplicationEventTypes.Contains(x)
+							? 1
+							: EventHelper.AwbEventTypes.Contains(x)
+								? 2
+								: 3,
+						Name = x.ToLocalString()
+					})
+				.OrderBy(x => x.Order)
+				.ThenBy(x => x.Name)
+				.Select(
+					x => new
+					{
+						x.Id,
+						x.Name
+					})
 				.ToArray();
 
 			return Json(types);
