@@ -1,7 +1,9 @@
-﻿namespace Alicargo.Jobs.Bill.Helpers
+﻿using System.Threading.Tasks;
+
+namespace Alicargo.Jobs.Bill.Helpers
 {
 	public interface ICourseSource
 	{
-		decimal GetEuroToRuble(string url);
+		Task<decimal> GetEuroToRuble(string url);
 	}
 }

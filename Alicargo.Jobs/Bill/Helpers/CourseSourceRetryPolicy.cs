@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 using Alicargo.Core.Contracts.Common;
 
 namespace Alicargo.Jobs.Bill.Helpers
@@ -19,7 +19,7 @@ namespace Alicargo.Jobs.Bill.Helpers
 			_waitPeriod = waitPeriod;
 		}
 
-		public decimal GetEuroToRuble(string url)
+		public async Task<decimal> GetEuroToRuble(string url)
 		{
 			ushort counter = 0;
 			do
@@ -27,20 +27,21 @@ namespace Alicargo.Jobs.Bill.Helpers
 				counter++;
 				try
 				{
-					return _courseSource.GetEuroToRuble(url);
+					return await _courseSource.GetEuroToRuble(url);
 				}
 				catch(Exception e)
 				{
 					if(counter < _attempts)
 					{
-						_log.Warning("Attempt "  + counter + " to get course of euro to ruble is failed." + Environment.NewLine + e);
-						Thread.Sleep(_waitPeriod);
+						_log.Warning("Attempt " + counter + " to get course of euro to ruble is failed." + Environment.NewLine + e);
 					}
 					else
 					{
 						throw;
 					}
 				}
+
+				await Task.Delay(_waitPeriod);
 			} while(true);
 		}
 	}

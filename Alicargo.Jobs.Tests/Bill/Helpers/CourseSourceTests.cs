@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Jobs.Bill.Helpers;
 using FluentAssertions;
@@ -29,12 +30,12 @@ namespace Alicargo.Jobs.Tests.Bill.Helpers
 		{
 			var url = _fixture.Create<string>();
 			var bytes = Encoding.ASCII.GetBytes("EUR;2014-05-15;;;;47.6173;;;1");
-			_httpClient.Setup(x => x.Get(url)).Returns(bytes);
+			_httpClient.Setup(x => x.GetAsync(url)).Returns(Task.FromResult(bytes));
 
-			var actual = _courseSource.GetEuroToRuble(url);
+			var actual = _courseSource.GetEuroToRuble(url).Result;
 
 			actual.ShouldBeEquivalentTo((decimal)47.6173);
-			_httpClient.Verify(x => x.Get(url), Times.Once);
+			_httpClient.Verify(x => x.GetAsync(url), Times.Once);
 		}
 	}
 }

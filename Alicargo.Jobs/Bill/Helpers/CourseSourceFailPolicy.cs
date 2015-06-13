@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Alicargo.Core.Contracts.Email;
 using Alicargo.DataAccess.Contracts.Contracts;
 
@@ -19,11 +20,11 @@ namespace Alicargo.Jobs.Bill.Helpers
 			_sender = sender;
 		}
 
-		public decimal GetEuroToRuble(string url)
+		public async Task<decimal> GetEuroToRuble(string url)
 		{
 			try
 			{
-				return _courseSource.GetEuroToRuble(url);
+				return await _courseSource.GetEuroToRuble(url);
 			}
 			catch(Exception e)
 			{

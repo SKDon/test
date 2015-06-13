@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Jobs.Bill.Helpers;
 using Alicargo.TestHelpers;
@@ -29,10 +30,10 @@ namespace Alicargo.Jobs.Tests.Bill.Helpers
 		{
 			var url = _fixture.Create<string>();
 			var expected = _fixture.Create<decimal>();
-			_courseSource.Setup(x => x.GetEuroToRuble(url)).Returns(expected);
+			_courseSource.Setup(x => x.GetEuroToRuble(url)).Returns(Task.FromResult(expected));
 
 			var policy = new CourseSourceRetryPolicy(_courseSource.Object, 2, _log.Object, TimeSpan.FromMilliseconds(1));
-			var actual = policy.GetEuroToRuble(url);
+			var actual = policy.GetEuroToRuble(url).Result;
 
 			actual.ShouldBeEquivalentTo(expected);
 			_courseSource.Verify(x => x.GetEuroToRuble(url), Times.Once);
@@ -48,13 +49,13 @@ namespace Alicargo.Jobs.Tests.Bill.Helpers
 			var policy = new CourseSourceRetryPolicy(_courseSource.Object, 1, _log.Object, TimeSpan.FromMilliseconds(1));
 			try
 			{
-				policy.GetEuroToRuble(url);
+				policy.GetEuroToRuble(url).Wait();
 			}
-			catch(TestException)
+			catch(AggregateException ex)
 			{
 				_courseSource.Verify(x => x.GetEuroToRuble(url), Times.Once);
 
-				throw;
+				throw ex.InnerException;
 			}
 		}
 
@@ -69,14 +70,14 @@ namespace Alicargo.Jobs.Tests.Bill.Helpers
 			var policy = new CourseSourceRetryPolicy(_courseSource.Object, 2, _log.Object, TimeSpan.FromMilliseconds(1));
 			try
 			{
-				policy.GetEuroToRuble(url);
+				policy.GetEuroToRuble(url).Wait();
 			}
-			catch(TestException)
+			catch(AggregateException ex)
 			{
 				_courseSource.Verify(x => x.GetEuroToRuble(url), Times.Exactly(2));
 				_log.Verify(x => x.Warning(It.IsAny<string>()), Times.Once);
 
-				throw;
+				throw ex.InnerException;
 			}
 		}
 	}

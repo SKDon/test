@@ -1,4 +1,5 @@
-﻿using Alicargo.Core.Contracts.Common;
+﻿using System.Threading.Tasks;
+using Alicargo.Core.Contracts.Common;
 
 namespace Alicargo.Core.Common
 {
@@ -14,6 +15,11 @@ namespace Alicargo.Core.Common
 		public byte[] Get(string url)
 		{
 			return _client.GetByteArrayAsync(url).Result;
+		}
+
+		public Task<byte[]> GetAsync(string url)
+		{
+			return _client.GetByteArrayAsync(url);
 		}
 	}
 }

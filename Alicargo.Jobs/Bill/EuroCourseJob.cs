@@ -46,7 +46,7 @@ namespace Alicargo.Jobs.Bill
 				return;
 			}
 
-			settings.EuroToRuble = _courseSource.GetEuroToRuble(settings.SourceUrl);
+			settings.EuroToRuble = _courseSource.GetEuroToRuble(settings.SourceUrl).Result;
 
 			data.Data = _serializer.Serialize(settings);
 

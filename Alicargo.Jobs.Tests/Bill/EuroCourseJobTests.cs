@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Alicargo.Core.Contracts.Calculation;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.DataAccess.Contracts.Contracts;
@@ -53,7 +54,7 @@ namespace Alicargo.Jobs.Tests.Bill
 			_settings.Setup(x => x.Get(SettingType.Bill)).Returns(data);
 			_serializer.Setup(x => x.Deserialize<BillSettings>(oldData)).Returns(settings);
 			_previousTime.Setup(x => x.Get()).Returns(_now.AddDays(-1));
-			_courseSource.Setup(x => x.GetEuroToRuble(settings.SourceUrl)).Returns(course);
+			_courseSource.Setup(x => x.GetEuroToRuble(settings.SourceUrl)).Returns(Task.FromResult(course));
 			_serializer.Setup(x => x.Serialize(settings)).Returns(newData);
 			_settings.Setup(x => x.AddOrReplace(data)).Returns(data);
 			_previousTime.Setup(x => x.Set(_now));

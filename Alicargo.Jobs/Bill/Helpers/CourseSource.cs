@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Alicargo.Core.Contracts.Common;
 
 namespace Alicargo.Jobs.Bill.Helpers
@@ -16,9 +17,10 @@ namespace Alicargo.Jobs.Bill.Helpers
 			_httpClient = httpClient;
 		}
 
-		public decimal GetEuroToRuble(string url)
+		public async Task<decimal> GetEuroToRuble(string url)
 		{
-			var bytes = _httpClient.Get(url);
+			var bytes = await _httpClient.GetAsync(url);
+
 			var response = Encoding.ASCII.GetString(bytes);
 
 			if(string.IsNullOrWhiteSpace(response))
