@@ -30,6 +30,7 @@ namespace Alicargo.BlackBox.Tests.Controllers.Application
 			}
 		}
 
+
 		[TestMethod]
 		public void Test_List_ByCarrier()
 		{
