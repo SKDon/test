@@ -30,22 +30,6 @@
 			text-align: center;
 		}
 
-.home-head {
-	background-image: url("avion.png");
-	background-repeat: no-repeat;
-	background-color: rgb(32, 30, 94);
-	height: 200px;
-	margin-bottom: 80px;
-}
-
-	.home-head .checkbox, .home-head .checkbox a {
-		color: #FFF;
-	}
-
-	.home-head .form-signin {
-		float: right;
-	}
-
 .form-signin {	
 	padding: 20px;
 	margin: 0;

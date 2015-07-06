@@ -47,7 +47,7 @@ namespace Alicargo.Mvc
 			routes.MapRoute(
 				"Default",
 				"{controller}/{action}/{id}",
-				new { id = UrlParameter.Optional },
+				new { id = UrlParameter.Optional, action = "Index", controller = "Home" },
 				new[] { "Alicargo.Controllers" }
 				);
 		}

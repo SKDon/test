@@ -41,7 +41,7 @@ namespace Alicargo.Controllers
 				return RedirectToAction(MVC.ApplicationList.Index());
 			}
 
-			return Redirect("/index.html");
+			return View();
 		}
 
 		public virtual RedirectResult Culture(string id, string returnUrl)
