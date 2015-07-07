@@ -23,6 +23,9 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Dev' ">
     <OutputPath>bin\Dev\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Clone' ">
+    <OutputPath>bin\Clone\</OutputPath>
+  </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
     <Content Include="ModelDefinition\Package1_2100.uml">
