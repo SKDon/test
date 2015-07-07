@@ -704,10 +704,6 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Dev.config">
-      <DependentUpon>Web.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Web.Clone.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

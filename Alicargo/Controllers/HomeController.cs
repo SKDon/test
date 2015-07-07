@@ -82,7 +82,7 @@ namespace Alicargo.Controllers
 
 			_sender.Send(
 				new EmailMessage(
-					"Новая завяка на сайте avionrussia.com",
+					"Новая завяка на сайте",
 					text,
 					EmailsHelper.DefaultFrom,
 					EmailsHelper.FeedbackEmail,
