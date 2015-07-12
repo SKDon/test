@@ -75,13 +75,6 @@
 	margin-bottom: 0;
 }
 
-
-.super {
-	font-size: 0.7em;
-	position: absolute;
-	vertical-align: super;
-}
-
 .entity-edit {
 	margin-top: 20px;
 }
