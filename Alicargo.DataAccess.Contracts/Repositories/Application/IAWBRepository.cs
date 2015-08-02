@@ -7,7 +7,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 	{
 		long Add(AirWaybillEditData data, long stateId, long creatorUserId);
 
-		long Count(long? brokerId = null);
+		long Count(long? brokerId = null, long? senderUserId = null);
 
 		void Delete(long id);
 
@@ -21,7 +21,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		EmailData[] GetClientEmails(long awbId);
 		EmailData[] GetForwarderEmails(long awbId);
 
-		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null);
+		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null, long? senderUserId = null);
 		EmailData[] GetSenderEmails(long awbId);
 
 		int GetTotalCountWithouAwb(

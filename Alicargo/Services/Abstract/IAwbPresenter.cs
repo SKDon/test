@@ -7,7 +7,7 @@ namespace Alicargo.Services.Abstract
 {
 	public interface IAwbPresenter
 	{
-		ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, string language);
+		ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, long? senderUserId, string language);
 		AwbAdminModel Get(long id);
 		AirWaybillData GetData(long id);
 		AirWaybillAggregate GetAggregate(long id);

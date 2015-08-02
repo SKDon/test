@@ -36,9 +36,9 @@ namespace Alicargo.Services.AirWaybill
 			_states = states;
 		}
 
-		public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, string language)
+		public ListCollection<AirWaybillListItem> List(int take, int skip, long? brokerId, long? senderUserId, string language)
 		{
-			var data = _awbs.GetRange(take, skip, brokerId);
+			var data = _awbs.GetRange(take, skip, brokerId, senderUserId);
 			var ids = data.Select(x => x.Id).ToArray();
 
 			var aggregates = _awbs.GetAggregate(ids).ToDictionary(x => x.AirWaybillId, x => x);
@@ -86,7 +86,7 @@ namespace Alicargo.Services.AirWaybill
 				IsActive = x.IsActive
 			}).ToArray();
 
-			var total = _awbs.Count(brokerId);
+			var total = _awbs.Count(brokerId, senderUserId);
 
 			return new ListCollection<AirWaybillListItem> { Data = items, Total = total };
 		}

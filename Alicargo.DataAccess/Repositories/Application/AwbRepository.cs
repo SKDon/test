@@ -72,11 +72,11 @@ namespace Alicargo.DataAccess.Repositories.Application
 			return airWaybills.Select(_selector).ToArray();
 		}
 
-		public long Count(long? brokerId = null)
+		public long Count(long? brokerId = null, long? senderUserId = null)
 		{
-			return brokerId.HasValue
-				? _context.AirWaybills.Where(x => x.BrokerId == brokerId.Value).LongCount()
-				: _context.AirWaybills.LongCount();
+			var airWaybills = brokerId.With(id => _context.AirWaybills.Where(x => x.BrokerId == id), _context.AirWaybills);
+
+			return senderUserId.With(id => airWaybills.Where(x => x.SenderUserId == id), airWaybills).LongCount();
 		}
 
 		public EmailData[] GetForwarderEmails(long awbId)
@@ -94,13 +94,19 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToArray();
 		}
 
-		public AirWaybillData[] GetRange(int take, long skip, long? brokerId = null)
+		public AirWaybillData[] GetRange(int take, long skip, long? brokerId = null, long? senderUserId = null)
 		{
 			var airWaybills = _context.AirWaybills.OrderByDescending(x => x.CreationTimestamp).AsQueryable();
 			if(brokerId.HasValue)
 			{
 				airWaybills = airWaybills.Where(x => x.BrokerId == brokerId.Value);
 			}
+
+			if(senderUserId.HasValue)
+			{
+				airWaybills = airWaybills.Where(x => x.SenderUserId == senderUserId.Value);
+			}
+
 			return airWaybills.Skip((int)skip)
 				.Take(take)
 				.Select(_selector)
