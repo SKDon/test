@@ -15,6 +15,7 @@ namespace Alicargo.Core.Event
 	{
 		private readonly IApplicationRepository _applications;
 		private readonly IAwbRepository _awbs;
+		private readonly IClientRepository _clients;
 		private readonly IPartitionConverter _converter;
 		private readonly IEventRepository _events;
 		private readonly IIdentityService _identity;
@@ -27,6 +28,7 @@ namespace Alicargo.Core.Event
 			IPartitionConverter converter,
 			IIdentityService identity,
 			IApplicationRepository applications,
+			IClientRepository clients,
 			IAwbRepository awbs,
 			ISenderRepository senders)
 		{
@@ -35,6 +37,7 @@ namespace Alicargo.Core.Event
 			_converter = converter;
 			_identity = identity;
 			_applications = applications;
+			_clients = clients;
 			_awbs = awbs;
 			_senders = senders;
 		}
@@ -55,6 +58,7 @@ namespace Alicargo.Core.Event
 		{
 			var currentUserId = TryGetUserIdByApplication(entityId, type)
 			                    ?? TryGetUserIdByAwb(entityId, type)
+			                    ?? TryGetUserIdByClient(entityId, type)
 			                    ?? GetCurrentUserId();
 
 			var partitionId = _converter.GetKey(entityId);
@@ -68,6 +72,17 @@ namespace Alicargo.Core.Event
 			var bytes = _serializer.Serialize(entityData);
 
 			_events.Add(partitionId, currentUserId, type, state, bytes);
+		}
+
+		private long? TryGetUserIdByClient(long entityId, EventType type)
+		{
+			if(!EventHelper.ClientEventTypes.Contains(type)) return null;
+
+			var senderIdInEntity = _clients.Get(entityId).DefaultSenderId;
+
+			return senderIdInEntity.HasValue
+				? _senders.GetUserId(senderIdInEntity.Value)
+				: (long?)null;
 		}
 
 		private long? GetCurrentUserId()
