@@ -109,7 +109,7 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
-		private static SenderCalculationItem[] GetItems(ApplicationData[] applications)
+		private static SenderCalculationItem[] GetItems(IEnumerable<ApplicationData> applications)
 		{
 			return applications.Select(a => new SenderCalculationItem
 			{

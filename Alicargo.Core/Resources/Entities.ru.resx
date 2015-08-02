@@ -498,4 +498,10 @@
   <data name="Pickup" xml:space="preserve">
     <value>Самовывоз</value>
   </data>
+  <data name="CountInInvoce" xml:space="preserve">
+    <value>Количество в инвойсе</value>
+  </data>
+  <data name="MRN" xml:space="preserve">
+    <value>MRN</value>
+  </data>
 </root>

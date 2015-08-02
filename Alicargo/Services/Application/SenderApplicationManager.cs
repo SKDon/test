@@ -52,7 +52,9 @@ namespace Alicargo.Services.Application
 				FactoryContact = application.FactoryContact,
 				FactoryEmail = application.FactoryEmail,
 				FactoryPhone = application.FactoryPhone,
-				WarehouseWorkingTime = application.WarehouseWorkingTime
+				WarehouseWorkingTime = application.WarehouseWorkingTime,
+				MRN = application.MRN,
+				CountInInvoce = application.CountInInvoce
 			};
 		}
 
@@ -111,6 +113,8 @@ namespace Alicargo.Services.Application
 			to.FactoryEmail = from.FactoryEmail;
 			to.FactoryPhone = from.FactoryPhone;
 			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
+			to.CountInInvoce = from.CountInInvoce;
+			to.MRN = from.MRN;
 		}
 	}
 }

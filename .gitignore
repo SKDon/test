@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 *.generated.cs
 /packages
 *.DotSettings
+*.Designer.cs

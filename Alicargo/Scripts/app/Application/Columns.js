@@ -119,6 +119,8 @@
 			weightField,
 			volumeField,
 			{ field: "Invoice", title: $l.Entities_Invoice, groupable: false, width: "150px" },
+			{ field: "MRN", title: $l.Entities_MRN, groupable: false, width: "150px" },
+			{ field: "CountInInvoce", title: $l.Entities_CountInInvoce, groupable: false, width: "150px" },
 			valueField,
 			{ field: "SenderName", title: $l.Entities_Sender, groupable: true, width: "100px" },
 			{ field: "ForwarderName", title: $l.Entities_Forwarder, groupable: true, width: "100px" },
@@ -199,6 +201,8 @@
 			weightField,
 			volumeField,
 			{ field: "Invoice", title: $l.Entities_Invoice, groupable: false },
+			{ field: "MRN", title: $l.Entities_MRN, groupable: false, width: "150px" },
+			{ field: "CountInInvoce", title: $l.Entities_CountInInvoce, groupable: false, width: "150px" },
 			valueField,
 			{ field: "AirWaybill", title: $l.Entities_AirWaybill, groupable: false, width: "150px", groupHeaderTemplate: groupHeaderTemplateAwb }];
 

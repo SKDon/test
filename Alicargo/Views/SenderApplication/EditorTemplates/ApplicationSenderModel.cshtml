@@ -8,12 +8,14 @@
 		@Html.EditorWithLabelFor(model => model.Invoice)
 		@Html.LabelFor(x => x.CountryId)
 		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
+		@Html.EditorWithLabelFor(model => model.CountInInvoce)
 	</div>
 	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.FactoryEmail)
 		@Html.EditorWithLabelFor(model => model.FactoryPhone)
 		@Html.EditorWithLabelFor(model => model.FactoryContact)
 		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
+		@Html.EditorWithLabelFor(model => model.MRN)
 	</div>
 	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.AddressLoad)

@@ -207,6 +207,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 			to.InsuranceRate = from.InsuranceRate;
 			to.CalculationProfit = from.CalculationProfit;
 			to.CalculationTotalTariffCost = from.CalculationTotalTariffCost;
+
+			to.MRN = from.MRN;
+			to.CountInInvoce = from.CountInInvoce;
 		}
 	}
 }

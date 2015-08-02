@@ -152,5 +152,9 @@ namespace Alicargo.ViewModels.Application
 		public string ForwarderName { get; set; }
 
 		public bool IsPickup { get; set; }
+
+		public string MRN { get; set; }
+
+		public int? CountInInvoce { get; set; }
 	}
 }

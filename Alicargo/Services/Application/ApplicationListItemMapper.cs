@@ -144,7 +144,9 @@ namespace Alicargo.Services.Application
 				DateInStockLocalString =
 					x.DateInStock.HasValue ? LocalizationHelper.GetDate(x.DateInStock.Value, CultureProvider.GetCultureInfo()) : null,
 				MethodOfDeliveryLocalString = x.MethodOfDelivery.ToLocalString(),
-				ValueString = GetValueString(x.Value, x.CurrencyId)
+				ValueString = GetValueString(x.Value, x.CurrencyId),
+				MRN = x.MRN,
+				CountInInvoce = x.CountInInvoce
 			}).ToArray();
 		}
 

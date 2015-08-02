@@ -53,6 +53,9 @@
 	[CalculationProfit]		MONEY				NULL,
 	[IsPickup]				BIT					NOT NULL,
 
+	[MRN]					NVARCHAR(MAX)		NULL,
+	[CountInInvoce]			INT					NULL,
+
     CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),
 	CONSTRAINT [FK_dbo.Application_dbo.Sender_SenderId] FOREIGN KEY ([SenderId]) REFERENCES [dbo].[Sender] ([Id]),

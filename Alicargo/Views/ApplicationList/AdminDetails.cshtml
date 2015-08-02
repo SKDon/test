@@ -31,9 +31,21 @@
 	#= Count #
 </p>
 # } #
+# if(MRN != null){ #
+<p>
+	<span>@Entities.MRN:</span>
+	#= MRN #
+</p>
+# } #
+# if(CountInInvoce != null){ #
+<p>
+	<span>@Entities.CountInInvoce:</span>
+	#= CountInInvoce #
+</p>
+# } #
 # if(Volume != null){ #
 <p>
-	<span style="position: relative;">@Entities.Volume (m<span class="super">3</span> ):</span>
+	<span>@Entities.Volume (m3):</span>
 	#= Volume #
 </p>
 # } #

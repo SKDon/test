@@ -101,7 +101,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 				FactureCostExEdited = x.FactureCostExEdited,
 				PickupCostEdited = x.PickupCostEdited,
 				ScotchCostEdited = x.ScotchCostEdited,
-				TransitCostEdited = x.TransitCostEdited				
+				TransitCostEdited = x.TransitCostEdited,
+				CountInInvoce = x.CountInInvoce,
+				MRN = x.MRN
 			};			
 		}
 
