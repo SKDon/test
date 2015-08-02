@@ -45,8 +45,10 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 		[TestMethod]
 		public void Test_Add()
 		{
-			var clientModel = _fixture.Create<ClientModel>();
-			clientModel.ContractDate = DateTimeProvider.Now.ToString();
+			var clientModel = _fixture.Build<ClientModel>()
+				.With(x => x.ContractDate, DateTimeProvider.Now.ToString())
+				.With(x => x.DefaultSenderId, TestConstants.TestSenderId)
+				.Create();
 			var transitEditModel = _fixture.Create<TransitEditModel>();
 			transitEditModel.CityId = TestConstants.TestCityId1;
 
