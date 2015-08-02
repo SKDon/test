@@ -50,5 +50,12 @@ namespace Alicargo.Utilities
 		{
 			return long.Parse(@string, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
 		}
+
+		public static TOut With<TIn, TOut>(this TIn self, Func<TIn, TOut> func, TOut @default = default (TOut))
+		{
+			return ReferenceEquals(self, default(TIn))
+				? @default
+				: func(self);
+		}
 	}
 }
