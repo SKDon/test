@@ -44,6 +44,7 @@
     <Content Include="Databases\Alicargo-0_0-2_8.sql" />
     <Content Include="Databases\Alicargo-3_2-3_3.sql" />
     <Content Include="Databases\Alicargo-3_1-3_2.sql" />
+    <Content Include="Databases\Alicargo-3_3-3_4.sql" />
     <Content Include="Databases\Alicargo_Files-0_0-2_8.sql" />
     <Content Include="restore-alicargo_release-3_1.sql" />
   </ItemGroup>
