@@ -22,11 +22,10 @@ namespace Alicargo.Core.Calculation
 				application.TariffPerKg,
 				application.Weight);
 
-			var scotchCost = application.ScotchCostEdited
-			                 ?? GetSenderScotchCost(tariffs, application.SenderId, application.Count) ?? 0;
+			var scotchCost = (application.ScotchCostEdited ?? GetSenderTapeTariff(tariffs, application.SenderId)) * application.Count;
 
 			return totalTariffCost
-			       + scotchCost
+			       + scotchCost ?? 0
 			       + GetInsuranceCost(application.Value, application.InsuranceRate)
 			       + (application.FactureCostEdited ?? application.FactureCost ?? 0)
 			       + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
@@ -34,10 +33,14 @@ namespace Alicargo.Core.Calculation
 			       + (application.TransitCostEdited ?? application.TransitCost ?? 0);
 		}
 
-		public static decimal? GetSenderScotchCost(IReadOnlyDictionary<long, decimal> tariffs, long? senderId, int? count)
+		public static decimal? GetSenderTapeTariff(
+			IReadOnlyDictionary<long, decimal> tariffs,
+			long? senderId)
 		{
-			return senderId.HasValue && tariffs.ContainsKey(senderId.Value)
-				? tariffs[senderId.Value] * (count ?? 0)
+			// for senders should not display custom cost for tape
+
+			return tariffs != null && senderId.HasValue && tariffs.ContainsKey(senderId.Value)
+				? tariffs[senderId.Value]
 				: (decimal?)null;
 		}
 
