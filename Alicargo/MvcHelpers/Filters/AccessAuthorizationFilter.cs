@@ -19,6 +19,7 @@ namespace Alicargo.MvcHelpers.Filters
 		{
 			var roles = filterContext.ActionDescriptor
 				.GetFilterAttributes(false)
+				.Union(filterContext.ActionDescriptor.ControllerDescriptor.GetFilterAttributes(false))
 				.OfType<AccessAttribute>()
 				.SelectMany(x => x.Roles)
 				.ToArray();
