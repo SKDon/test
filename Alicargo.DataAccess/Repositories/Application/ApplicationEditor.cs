@@ -122,9 +122,9 @@ namespace Alicargo.DataAccess.Repositories.Application
 			Update(id, application => application.TransitCostEdited = transitCost);
 		}
 
-		public void SetScotchCostEdited(long id, decimal? scotchCost)
+		public void SetScotchCostEditedByTotalCost(long id, decimal? totalScotchCost)
 		{
-			Update(id, application => application.ScotchCostEdited = scotchCost);
+			Update(id, application => application.ScotchCostEdited = totalScotchCost / application.Count);
 		}
 
 		public void SetSenderRate(long id, decimal? senderRate)

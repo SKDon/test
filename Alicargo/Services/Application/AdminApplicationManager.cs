@@ -219,9 +219,9 @@ namespace Alicargo.Services.Application
 			_editor.SetFactureCostExEdited(id, factureCostEx);
 		}
 
-		public void SetScotchCostEdited(long id, decimal? scotchCost)
+		public void SetScotchCostEditedByTotalCost(long id, decimal? totalScotchCost)
 		{
-			_editor.SetScotchCostEdited(id, scotchCost);
+			_editor.SetScotchCostEditedByTotalCost(id, totalScotchCost);
 		}
 
 		public void SetSenderRate(long id, decimal? senderRate)
