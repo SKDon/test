@@ -116,7 +116,7 @@ namespace Alicargo.Services.Users.Client
 				DefaultSenderId = model.DefaultSenderId,
 				FactureCost = model.FactureCost,
 				FactureCostEx = model.FactureCostEx,
-				InsuranceRate = model.InsuranceRate,
+				InsuranceRate = model.InsuranceRate / 100,
 				PickupCost = model.PickupCost,
 				TransitCost = model.TransitCost
 			};

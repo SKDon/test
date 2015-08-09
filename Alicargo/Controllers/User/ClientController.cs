@@ -259,7 +259,7 @@ namespace Alicargo.Controllers.User
 				DefaultSenderId = client.DefaultSenderId,
 				FactureCost = client.FactureCost,
 				FactureCostEx = client.FactureCostEx,
-				InsuranceRate = client.InsuranceRate,
+				InsuranceRate = client.InsuranceRate * 100,
 				PickupCost = client.PickupCost,
 				TransitCost = client.TransitCost
 			};

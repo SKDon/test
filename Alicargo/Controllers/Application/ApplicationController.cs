@@ -132,11 +132,17 @@ namespace Alicargo.Controllers.Application
 
 			BindBag(null, client);
 
+			var insuranceRate = client.InsuranceRate ?? _applications.GetDefaultInsuranceRate();
+
 			return View(
 				new ApplicationAdminModel
 				{
-					InsuranceRate = _applications.GetDefaultInsuranceRate() * 100,
-					SenderId = client.DefaultSenderId
+					SenderId = client.DefaultSenderId,
+					InsuranceRate = insuranceRate * 100,
+					FactureCost = client.FactureCost,
+					FactureCostEx = client.FactureCostEx,
+					TransitCost = client.TransitCost,
+					PickupCost = client.PickupCost
 				});
 		}
 
