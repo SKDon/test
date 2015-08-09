@@ -1,5 +1,6 @@
 ﻿using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
@@ -44,9 +45,6 @@ namespace Alicargo.Services.Application
 					CurrencyId = application.CurrencyId
 				},
 				Volume = application.Volume,
-				FactureCost = application.FactureCost,
-				FactureCostEx = application.FactureCostEx,
-				PickupCost = application.PickupCost,
 				CountryId = application.CountryId,
 				AddressLoad = application.AddressLoad,
 				FactoryContact = application.FactoryContact,
@@ -55,7 +53,11 @@ namespace Alicargo.Services.Application
 				WarehouseWorkingTime = application.WarehouseWorkingTime,
 				MRN = application.MRN,
 				CountInInvoce = application.CountInInvoce,
-				DocumentWeight = application.DocumentWeight
+				DocumentWeight = application.DocumentWeight,
+				FactureCost = application.FactureCost,
+				FactureCostEx = application.FactureCostEx,
+				PickupCost = application.PickupCost,
+				TransitCost = application.TransitCost
 			};
 		}
 
@@ -68,16 +70,16 @@ namespace Alicargo.Services.Application
 			_editor.Update(id, applicationData);
 		}
 
-		public void Add(ApplicationSenderModel model, long clientId, long creatorSenderId)
+		public void Add(ApplicationSenderModel model, ClientData client, long creatorSenderId)
 		{
 			var application = new ApplicationEditData
 			{
-				InsuranceRate = _applications.GetDefaultInsuranceRate()
+				InsuranceRate = client.InsuranceRate ?? _applications.GetDefaultInsuranceRate()
 			};
 
 			Map(model, application);
 
-			Add(application, clientId, creatorSenderId);
+			Add(application, client.ClientId, creatorSenderId);
 		}
 
 		private void Add(ApplicationEditData application, long clientId, long senderId)
@@ -108,6 +110,7 @@ namespace Alicargo.Services.Application
 			to.FactureCost = from.FactureCost;
 			to.FactureCostEx = from.FactureCostEx;
 			to.PickupCost = from.PickupCost;
+			to.TransitCost = from.TransitCost;
 			to.CountryId = from.CountryId;
 			to.AddressLoad = from.AddressLoad;
 			to.FactoryContact = from.FactoryContact;

@@ -75,5 +75,8 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof(Entities), "DocumentWeight")]
 		public float? DocumentWeight { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
+		public decimal? TransitCost { get; set; }
 	}
 }
