@@ -4,7 +4,7 @@ PRINT N'Altering [dbo].[Application]...';
 
 GO
 ALTER TABLE [dbo].[Application]
-    ADD [DocumentWeight] INT NULL;
+    ADD [DocumentWeight] REAL NULL;
 
 
 GO

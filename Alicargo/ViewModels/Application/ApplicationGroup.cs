@@ -14,16 +14,18 @@ namespace Alicargo.ViewModels.Application
 
 		public sealed class Aggregates
 		{
-			public Aggregates(int count, float weight, decimal value, float volume)
+			public Aggregates(int count, float weight, decimal value, float volume, float documentWeight)
 			{
 				Count = new SumHolder<int>(count);
 				Weight = new SumHolder<float>(weight);
-				Value = new SumHolder<decimal>(value);
+				DocumentWeight = new SumHolder<float>(documentWeight);
+				Value = new SumHolder<decimal>(value);	
 				Volume = new SumHolder<float>(volume);
 			}
 
 			public SumHolder<int> Count { get; private set; }
 			public SumHolder<float> Weight { get; private set; }
+			public SumHolder<float> DocumentWeight { get; private set; }
 			public SumHolder<decimal> Value { get; private set; }
 			public SumHolder<float> Volume { get; private set; }
 		}

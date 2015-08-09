@@ -157,6 +157,6 @@ namespace Alicargo.ViewModels.Application
 
 		public int? CountInInvoce { get; set; }
 
-		public int? DocumentWeight { get; set; }
+		public float? DocumentWeight { get; set; }
 	}
 }

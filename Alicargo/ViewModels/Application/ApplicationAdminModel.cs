@@ -123,6 +123,6 @@ namespace Alicargo.ViewModels.Application
 		public int? CountInInvoce { get; set; }
 
 		[DisplayNameLocalized(typeof(Entities), "DocumentWeight")]
-		public int? DocumentWeight { get; set; }
+		public float? DocumentWeight { get; set; }
 	}
 }

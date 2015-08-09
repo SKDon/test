@@ -55,7 +55,7 @@
 
 	[MRN]					NVARCHAR(MAX)		NULL,
 	[CountInInvoce]			INT					NULL,
-	[DocumentWeight]		INT					NULL,
+	[DocumentWeight]		REAL				NULL,
 
     CONSTRAINT [PK_dbo.Application] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Application_dbo.Client_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),
