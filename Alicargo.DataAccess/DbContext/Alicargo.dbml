@@ -112,6 +112,13 @@
 			<Column Name="Balance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
 			<Column Name="ContractNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="false" />
 			<Column Name="ContractDate" Type="System.DateTimeOffset" DbType="DateTimeOffset NOT NULL" CanBeNull="false" />
+			
+			<Column Name="FactureCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+			<Column Name="FactureCostEx" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+			<Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+			<Column Name="PickupCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+			<Column Name="InsuranceRate" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+			
 			<Association Name="Client_Calculation" Member="Calculations" ThisKey="Id" OtherKey="ClientId" Type="Calculation" />
 			<Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
 			<Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />

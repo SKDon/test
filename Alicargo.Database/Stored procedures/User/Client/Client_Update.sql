@@ -16,7 +16,12 @@
     @KS NVARCHAR(MAX),
     @ContractNumber NVARCHAR(MAX),
     @ContractDate DATETIMEOFFSET,
-	@DefaultSenderId BIGINT
+	@DefaultSenderId BIGINT,
+	@FactureCost MONEY,
+	@FactureCostEx MONEY,
+	@TransitCost MONEY,
+	@PickupCost MONEY,
+	@InsuranceRate REAL
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -38,7 +43,12 @@ AS BEGIN
 		[KS] = @KS,
 		[ContractNumber] = @ContractNumber,
 		[ContractDate] = @ContractDate,
-		[DefaultSenderId] = @DefaultSenderId
+		[DefaultSenderId] = @DefaultSenderId,
+		[FactureCost] = @FactureCost,
+		[FactureCostEx] = @FactureCostEx,
+		[TransitCost] = @TransitCost,
+		[PickupCost] = @PickupCost,
+		[InsuranceRate] = @InsuranceRate
 	WHERE [Id] = @ClientId
 
 END
