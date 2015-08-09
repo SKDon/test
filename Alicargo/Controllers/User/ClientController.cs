@@ -192,6 +192,7 @@ namespace Alicargo.Controllers.User
 			try
 			{
 				ClientCantChangeDefaultSenderId(model, client);
+				ClientCantChangeCalculationSettings(model, client);
 
 				_manager.Update(client.ClientId, model, transitModel);
 
@@ -210,6 +211,18 @@ namespace Alicargo.Controllers.User
 			}
 
 			return RedirectToAction(MVC.Client.Edit(client.ClientId));
+		}
+
+		private void ClientCantChangeCalculationSettings(ClientModel model, ClientData client)
+		{
+			if (_identity.IsInRole(RoleType.Client))
+			{
+				model.FactureCost = client.FactureCost;
+				model.FactureCostEx = client.FactureCostEx;
+				model.InsuranceRate = client.InsuranceRate;
+				model.PickupCost = client.PickupCost;
+				model.TransitCost = client.TransitCost;
+			}
 		}
 
 		private void ClientCantChangeDefaultSenderId(ClientModel model, ClientData client)
@@ -243,7 +256,12 @@ namespace Alicargo.Controllers.User
 				Authentication = new AuthenticationModel(client.Login),
 				ContractDate = LocalizationHelper.GetDate(client.ContractDate, CultureProvider.GetCultureInfo()),
 				ContractNumber = client.ContractNumber,
-				DefaultSenderId = client.DefaultSenderId
+				DefaultSenderId = client.DefaultSenderId,
+				FactureCost = client.FactureCost,
+				FactureCostEx = client.FactureCostEx,
+				InsuranceRate = client.InsuranceRate * 100,
+				PickupCost = client.PickupCost,
+				TransitCost = client.TransitCost
 			};
 		}
 

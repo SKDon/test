@@ -85,7 +85,12 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 				Language = user.TwoLetterISOLanguageName,
 				UserId = user.Id,
 				ContractDate = client.ContractDate,
-				ContractNumber = client.ContractNumber
+				ContractNumber = client.ContractNumber,
+				FactureCost = client.FactureCost,
+				FactureCostEx = client.FactureCostEx,
+				InsuranceRate = client.InsuranceRate,
+				PickupCost = client.PickupCost,
+				TransitCost = client.TransitCost
 			};
 		}
 

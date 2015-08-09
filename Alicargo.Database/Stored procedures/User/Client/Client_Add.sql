@@ -17,7 +17,12 @@
     @ContractNumber NVARCHAR(MAX),
     @ContractDate DATETIMEOFFSET,
     @TransitId BIGINT,
-	@DefaultSenderId BIGINT
+	@DefaultSenderId BIGINT,
+	@FactureCost MONEY,
+	@FactureCostEx MONEY,
+	@TransitCost MONEY,
+	@PickupCost MONEY,
+	@InsuranceRate REAL	
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -41,7 +46,12 @@ AS BEGIN
 		,[TransitId]
 		,[ContractNumber]
 		,[ContractDate]
-		,[DefaultSenderId])
+		,[DefaultSenderId]
+		,[FactureCost]
+		,[FactureCostEx]
+		,[TransitCost]
+		,[PickupCost]
+		,[InsuranceRate])
 	OUTPUT INSERTED.[Id]
 	VALUES
 		(@UserId,
@@ -62,7 +72,12 @@ AS BEGIN
 		@TransitId,
 		@ContractNumber,
 		@ContractDate,
-		@DefaultSenderId)
+		@DefaultSenderId,
+		@FactureCost,
+		@FactureCostEx,
+		@TransitCost,
+		@PickupCost,
+		@InsuranceRate)
 
 END
 GO

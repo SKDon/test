@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Alicargo.Core.Contracts.Common;
 using Alicargo.Core.Contracts.Exceptions;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Enums;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -44,9 +45,18 @@ namespace Alicargo.Controllers.Application
 		{
 			var clientId = id;
 
-			BindBagWithClient(clientId);
+			var client = _clients.Get(clientId);
 
-			return View(new ApplicationSenderModel());
+			BindBagWithClient(client);
+
+			return View(
+				new ApplicationSenderModel
+				{
+					FactureCost = client.FactureCost,
+					FactureCostEx = client.FactureCostEx,
+					TransitCost = client.TransitCost,
+					PickupCost = client.PickupCost
+				});
 		}
 
 		[HttpPost]
@@ -54,9 +64,11 @@ namespace Alicargo.Controllers.Application
 		{
 			var clientId = id;
 
+			var client = _clients.Get(clientId);
+
 			if(!ModelState.IsValid)
 			{
-				BindBagWithClient(clientId);
+				BindBagWithClient(client);
 
 				return View(model);
 			}
@@ -68,7 +80,7 @@ namespace Alicargo.Controllers.Application
 				throw new EntityNotFoundException("Current user is not sender.");
 			}
 
-			_manager.Add(model, clientId, senderId.Value);
+			_manager.Add(model, client, senderId.Value);
 
 			return RedirectToAction(MVC.ApplicationList.Index());
 		}
@@ -108,10 +120,9 @@ namespace Alicargo.Controllers.Application
 			BindCountries();
 		}
 
-		private void BindBagWithClient(long clientId)
+		private void BindBagWithClient(ClientEditData client)
 		{
-			var clientData = _clients.Get(clientId);
-			ViewBag.Nic = clientData.Nic;
+			ViewBag.Nic = client.Nic;
 			BindCountries();
 		}
 

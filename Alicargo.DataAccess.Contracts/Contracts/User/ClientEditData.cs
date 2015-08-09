@@ -21,5 +21,11 @@ namespace Alicargo.DataAccess.Contracts.Contracts.User
 		public string ContractNumber { get; set; }
 		public DateTimeOffset ContractDate { get; set; }
 		public long? DefaultSenderId { get; set; }
+
+		public decimal? FactureCost { get; set; }
+		public decimal? FactureCostEx { get; set; }
+		public decimal? PickupCost { get; set; }
+		public decimal? TransitCost { get; set; }
+		public float? InsuranceRate { get; set; }
 	}
 }
