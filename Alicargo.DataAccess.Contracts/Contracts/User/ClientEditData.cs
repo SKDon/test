@@ -26,6 +26,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.User
 		public decimal? FactureCostEx { get; set; }
 		public decimal? PickupCost { get; set; }
 		public decimal? TransitCost { get; set; }
-		public float InsuranceRate { get; set; }
+		public float? InsuranceRate { get; set; }
 	}
 }

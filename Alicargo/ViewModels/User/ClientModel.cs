@@ -88,6 +88,6 @@ namespace Alicargo.ViewModels.User
 
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "InsuranceRate")]
-		public float InsuranceRate { get; set; }
+		public float? InsuranceRate { get; set; }
 	}
 }
