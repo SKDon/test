@@ -14,8 +14,11 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		AirWaybillData[] Get(params long[] ids);
 
 		AirWaybillAggregate[] GetAggregate(
-			long[] awbIds, long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long[] awbIds,
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		EmailData[] GetCarrierEmails(long awbId);
 		EmailData[] GetClientEmails(long awbId);
@@ -25,20 +28,30 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		EmailData[] GetSenderEmails(long awbId);
 
 		int GetTotalCountWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		decimal GetTotalValueWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		float GetTotalVolumeWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
+
+		float GetTotalDocWeightWithouAwb(long? clientId, long? senderId, long? forwarderId, long? carrierId);
 
 		float GetTotalWeightWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		void SetAdditionalCost(long awbId, decimal? additionalCost);
 
