@@ -62,12 +62,14 @@ namespace Alicargo.Tests.Services.Application
 					TotalCount = (int)x,
 					TotalWeight = x,
 					TotalValue = x,
-					TotalVolume = x
+					TotalVolume = x,
+					TotalDocumentWeight = x
 				}).ToArray());
 			_awbRepository.Setup(x => x.GetTotalCountWithouAwb(null, null, null, null)).Returns(0);
 			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb(null, null, null, null)).Returns(0);
 			_awbRepository.Setup(x => x.GetTotalValueWithouAwb(null, null, null, null)).Returns(0);
 			_awbRepository.Setup(x => x.GetTotalVolumeWithouAwb(null, null, null, null)).Returns(0);
+			_awbRepository.Setup(x => x.GetTotalDocWeightWithouAwb(null, null, null, null)).Returns(0);
 
 			var groups = _grouper.Group(_applications, new[]
 			{
@@ -84,6 +86,7 @@ namespace Alicargo.Tests.Services.Application
 				@group.aggregates.Weight.sum.ShouldBeEquivalentTo(index);
 				@group.aggregates.Value.sum.ShouldBeEquivalentTo(index);
 				@group.aggregates.Volume.sum.ShouldBeEquivalentTo(index);
+				@group.aggregates.DocumentWeight.sum.ShouldBeEquivalentTo(index);
 				@group.hasSubgroups.ShouldBeEquivalentTo(true);
 				foreach(ApplicationGroup item in @group.items)
 				{
@@ -99,14 +102,16 @@ namespace Alicargo.Tests.Services.Application
 		public void Test_ApplicationGrouper_GroupWithoutAirWaybill()
 		{
 			var count = _fixture.Create<int>();
-			var weidht = _fixture.Create<float>();
+			var weight = _fixture.Create<float>();
 			var value = _fixture.Create<decimal>();
 			var volume = _fixture.Create<float>();
+			var docWeight = _fixture.Create<float>();
 			_awbRepository.Setup(x => x.GetAggregate(_awbIds, null, null, null, null)).Returns(new AirWaybillAggregate[0]);
 			_awbRepository.Setup(x => x.GetTotalCountWithouAwb(null, null, null, null)).Returns(count);
-			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb(null, null, null, null)).Returns(weidht);
+			_awbRepository.Setup(x => x.GetTotalWeightWithouAwb(null, null, null, null)).Returns(weight);
 			_awbRepository.Setup(x => x.GetTotalValueWithouAwb(null, null, null, null)).Returns(value);
 			_awbRepository.Setup(x => x.GetTotalVolumeWithouAwb(null, null, null, null)).Returns(volume);
+			_awbRepository.Setup(x => x.GetTotalDocWeightWithouAwb(null, null, null, null)).Returns(docWeight);
 
 			var groups = _grouper.Group(_applications, new[]
 			{
@@ -119,9 +124,10 @@ namespace Alicargo.Tests.Services.Application
 			foreach(var @group in groups)
 			{
 				@group.aggregates.Count.sum.ShouldBeEquivalentTo(count);
-				@group.aggregates.Weight.sum.ShouldBeEquivalentTo(weidht);
+				@group.aggregates.Weight.sum.ShouldBeEquivalentTo(weight);
 				@group.aggregates.Value.sum.ShouldBeEquivalentTo(value);
 				@group.aggregates.Volume.sum.ShouldBeEquivalentTo(volume);
+				@group.aggregates.DocumentWeight.sum.ShouldBeEquivalentTo(docWeight);
 				@group.hasSubgroups.ShouldBeEquivalentTo(true);
 				foreach(ApplicationGroup item in @group.items)
 				{

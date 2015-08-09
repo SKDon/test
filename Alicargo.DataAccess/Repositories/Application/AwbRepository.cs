@@ -159,7 +159,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 								y.Weight,
 								y.Value,
 								y.Count,
-								y.Volume
+								y.Volume,
+								y.DocumentWeight
 							})
 				}).ToDictionary(x => new { x.Id, x.StateId }, x => x.Data.ToArray());
 
@@ -171,7 +172,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 					TotalWeight = x.Value.Sum(y => y.Weight ?? 0),
 					TotalValue = x.Value.Sum(y => y.Value),
 					TotalVolume = x.Value.Sum(y => y.Volume),
-					StateId = x.Key.StateId
+					StateId = x.Key.StateId,
+					TotalDocumentWeight = x.Value.Sum(y => y.DocumentWeight ?? 0)
 				}).ToArray();
 		}
 
@@ -193,7 +195,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 		public float GetTotalDocWeightWithouAwb(long? clientId, long? senderId, long? forwarderId, long? carrierId)
 		{
-			throw new NotImplementedException();
+			return SelectApplicationsWithoutAwb(x => x.DocumentWeight, clientId, senderId, forwarderId, carrierId).Sum() ?? 0;
 		}
 
 		public float GetTotalWeightWithouAwb(

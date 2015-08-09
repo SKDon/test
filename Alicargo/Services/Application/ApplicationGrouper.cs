@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alicargo.Core.AirWaybill;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Helpers;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
@@ -23,6 +22,7 @@ namespace Alicargo.Services.Application
 		private decimal _valueWithouAwb;
 		private float _volumeWithouAwb;
 		private float _weightWithouAwb;
+		private float _docWeightWithouAwb;
 
 		public ApplicationGrouper(IAwbRepository awbRepository)
 		{
@@ -53,6 +53,7 @@ namespace Alicargo.Services.Application
 				.ToDictionary(x => x.AirWaybillId, x => x);
 			_countWithouAwb = _awbRepository.GetTotalCountWithouAwb(clientId, senderId, forwarderId, carrierId);
 			_weightWithouAwb = _awbRepository.GetTotalWeightWithouAwb(clientId, senderId, forwarderId, carrierId);
+			_docWeightWithouAwb = _awbRepository.GetTotalDocWeightWithouAwb(clientId, senderId, forwarderId, carrierId);
 			_valueWithouAwb = _awbRepository.GetTotalValueWithouAwb(clientId, senderId, forwarderId, carrierId);
 			_volumeWithouAwb = _awbRepository.GetTotalVolumeWithouAwb(clientId, senderId, forwarderId, carrierId);
 
@@ -86,6 +87,7 @@ namespace Alicargo.Services.Application
 		{
 			int count;
 			float weight;
+			float docWeight;
 			decimal value;
 			float volume;
 
@@ -98,6 +100,7 @@ namespace Alicargo.Services.Application
 					weight = _awbAggregates[id].TotalWeight;
 					value = _awbAggregates[id].TotalValue;
 					volume = _awbAggregates[id].TotalVolume;
+					docWeight = _awbAggregates[id].TotalDocumentWeight;
 				}
 				else
 				{
@@ -105,6 +108,7 @@ namespace Alicargo.Services.Application
 					weight = _weightWithouAwb;
 					value = _valueWithouAwb;
 					volume = _volumeWithouAwb;
+					docWeight = _docWeightWithouAwb;
 				}
 			}
 			else
@@ -113,11 +117,12 @@ namespace Alicargo.Services.Application
 				weight = grouping.Sum(y => y.Weight ?? 0);
 				value = grouping.Sum(y => y.Value);
 				volume = grouping.Sum(y => y.Volume);
+				docWeight = grouping.Sum(y => y.DocumentWeight ?? 0);
 			}
 
 			return new ApplicationGroup
 			{
-				aggregates = new ApplicationGroup.Aggregates(count, weight, value, volume),
+				aggregates = new ApplicationGroup.Aggregates(count, weight, value, volume, docWeight),
 				field = field,
 				value = getValue(grouping),
 				hasSubgroups = orders.Count > 0,

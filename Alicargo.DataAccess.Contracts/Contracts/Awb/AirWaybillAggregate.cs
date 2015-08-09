@@ -8,5 +8,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Awb
 		public float TotalWeight { get; set; }
 		public decimal TotalValue { get; set; }
 		public float TotalVolume { get; set; }
+		public float TotalDocumentWeight { get; set; }
 	}
 }
