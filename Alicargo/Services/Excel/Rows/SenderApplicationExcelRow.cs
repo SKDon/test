@@ -94,7 +94,7 @@ namespace Alicargo.Services.Excel.Rows
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "DocumentWeight")]
-		public int? DocumentWeight
+		public float? DocumentWeight
 		{
 			get { return _application.DocumentWeight; }
 		}

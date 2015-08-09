@@ -50,6 +50,6 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 
 		public string MRN { get; set; }
 		public int? CountInInvoce { get; set; }
-		public int? DocumentWeight { get; set; }
+		public float? DocumentWeight { get; set; }
 	}
 }
