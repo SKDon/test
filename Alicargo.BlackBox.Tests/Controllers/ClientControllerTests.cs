@@ -59,8 +59,13 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			client.User.PasswordHash.Should().NotBe(new byte[0]);
 			client.User.PasswordSalt.Should().NotBe(new byte[0]);
-			client.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties().Excluding(x => x.ContractDate));
+			client.ShouldBeEquivalentTo(
+				model,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.ContractDate)
+					.Excluding(x => x.InsuranceRate));
 			client.ContractDate.ToString().ShouldBeEquivalentTo(model.ContractDate);
+			client.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
 			client.Transit.ShouldBeEquivalentTo(transit, options => options.ExcludingMissingProperties());
 		}
 	}
