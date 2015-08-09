@@ -50,7 +50,9 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public virtual ActionResult Edit(long id, ApplicationClientModel model,
+		public virtual ActionResult Edit(
+			long id,
+			ApplicationClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!ModelState.IsValid)
@@ -79,7 +81,8 @@ namespace Alicargo.Controllers.Application
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public virtual ActionResult Create(ApplicationClientModel model,
+		public virtual ActionResult Create(
+			ApplicationClientModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			var clientId = GetClientId();
