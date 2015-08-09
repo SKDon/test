@@ -54,7 +54,8 @@ namespace Alicargo.Services.Application
 				FactoryPhone = application.FactoryPhone,
 				WarehouseWorkingTime = application.WarehouseWorkingTime,
 				MRN = application.MRN,
-				CountInInvoce = application.CountInInvoce
+				CountInInvoce = application.CountInInvoce,
+				DocumentWeight = application.DocumentWeight
 			};
 		}
 
@@ -114,6 +115,7 @@ namespace Alicargo.Services.Application
 			to.FactoryPhone = from.FactoryPhone;
 			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
 			to.CountInInvoce = from.CountInInvoce;
+			to.DocumentWeight = from.DocumentWeight;
 			to.MRN = from.MRN;
 		}
 	}

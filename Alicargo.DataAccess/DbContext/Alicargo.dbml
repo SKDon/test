@@ -278,6 +278,7 @@
 			<Column Name="IsPickup" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
 			<Column Name="MRN" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
 			<Column Name="CountInInvoce" Type="System.Int32" DbType="Int" CanBeNull="true" />
+			<Column Name="DocumentWeight" Type="System.Int32" DbType="Int" CanBeNull="true" />
 			<Association Name="AirWaybill_Application" Member="AirWaybill" ThisKey="AirWaybillId" OtherKey="Id" Type="AirWaybill" IsForeignKey="true" />
 			<Association Name="Client_Application" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
 			<Association Name="Country_Application" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />

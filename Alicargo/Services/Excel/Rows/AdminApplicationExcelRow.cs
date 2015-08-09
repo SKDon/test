@@ -81,6 +81,12 @@ namespace Alicargo.Services.Excel.Rows
 			get { return _application.CountInInvoce; }
 		}
 
+		[DisplayNameLocalized(typeof(Entities), "DocumentWeight")]
+		public int? DocumentWeight
+		{
+			get { return _application.DocumentWeight; }
+		}
+
 		[DisplayNameLocalized(typeof(Entities), "MRN")]
 		public string MRN
 		{

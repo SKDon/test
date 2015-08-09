@@ -76,6 +76,7 @@ namespace Alicargo.Services.Application
 				CarrierId = transit.CarrierId,
 				InsuranceRate = data.InsuranceRate * 100,
 				CountInInvoce = data.CountInInvoce,
+				DocumentWeight = data.DocumentWeight,
 				MRN = data.MRN
 			};
 		}

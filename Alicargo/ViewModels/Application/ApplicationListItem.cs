@@ -156,5 +156,7 @@ namespace Alicargo.ViewModels.Application
 		public string MRN { get; set; }
 
 		public int? CountInInvoce { get; set; }
+
+		public int? DocumentWeight { get; set; }
 	}
 }

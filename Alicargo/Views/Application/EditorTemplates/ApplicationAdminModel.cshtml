@@ -31,6 +31,7 @@
 		@Html.DropDownListFor(x => x.CarrierId, (IDictionary<long?, string>)ViewBag.Carriers, Pages.DefineByCity)
 		@Html.LabelFor(model => model.MethodOfDelivery)
 		@Html.DropDownListForEnum(model => model.MethodOfDelivery)
+		@Html.EditorWithLabelFor(model => model.DocumentWeight)
 	</div>
 	<div class="span3">
 		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>&nbsp;)</label>

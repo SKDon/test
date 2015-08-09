@@ -5186,6 +5186,8 @@ namespace Alicargo.DataAccess.DbContext
 		
 		private System.Nullable<int> _CountInInvoce;
 		
+		private System.Nullable<int> _DocumentWeight;
+		
 		private EntityRef<AirWaybill> _AirWaybill;
 		
 		private EntityRef<Client> _Client;
@@ -5302,6 +5304,8 @@ namespace Alicargo.DataAccess.DbContext
     partial void OnMRNChanged();
     partial void OnCountInInvoceChanging(System.Nullable<int> value);
     partial void OnCountInInvoceChanged();
+    partial void OnDocumentWeightChanging(System.Nullable<int> value);
+    partial void OnDocumentWeightChanged();
     #endregion
 		
 		public Application()
@@ -6320,6 +6324,26 @@ namespace Alicargo.DataAccess.DbContext
 					this._CountInInvoce = value;
 					this.SendPropertyChanged("CountInInvoce");
 					this.OnCountInInvoceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentWeight", DbType="Int")]
+		public System.Nullable<int> DocumentWeight
+		{
+			get
+			{
+				return this._DocumentWeight;
+			}
+			set
+			{
+				if ((this._DocumentWeight != value))
+				{
+					this.OnDocumentWeightChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentWeight = value;
+					this.SendPropertyChanged("DocumentWeight");
+					this.OnDocumentWeightChanged();
 				}
 			}
 		}

@@ -83,6 +83,7 @@ namespace Alicargo.Services.Application
 				SenderRate = null,
 				InsuranceRate = model.InsuranceRate / 100,
 				CountInInvoce = model.CountInInvoce,
+				DocumentWeight = model.DocumentWeight,
 				MRN = model.MRN
 			};
 
@@ -127,6 +128,7 @@ namespace Alicargo.Services.Application
 			data.ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, data.ForwarderId);
 			data.InsuranceRate = model.InsuranceRate / 100;
 			data.CountInInvoce = model.CountInInvoce;
+			data.DocumentWeight = model.DocumentWeight;
 			data.MRN = model.MRN;
 
 			_editor.Update(applicationId, data);

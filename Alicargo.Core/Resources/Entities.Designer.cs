@@ -466,6 +466,15 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Weight.
+        /// </summary>
+        public static string DocumentWeight {
+            get {
+                return ResourceManager.GetString("DocumentWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string Draw {

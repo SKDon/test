@@ -504,4 +504,7 @@
   <data name="MRN" xml:space="preserve">
     <value>MRN</value>
   </data>
+  <data name="DocumentWeight" xml:space="preserve">
+    <value>Вес по документам</value>
+  </data>
 </root>

@@ -210,6 +210,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 
 			to.MRN = from.MRN;
 			to.CountInInvoce = from.CountInInvoce;
+			to.DocumentWeight = from.DocumentWeight;
 		}
 	}
 }

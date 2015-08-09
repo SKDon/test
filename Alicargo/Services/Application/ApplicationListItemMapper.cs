@@ -146,7 +146,8 @@ namespace Alicargo.Services.Application
 				MethodOfDeliveryLocalString = x.MethodOfDelivery.ToLocalString(),
 				ValueString = GetValueString(x.Value, x.CurrencyId),
 				MRN = x.MRN,
-				CountInInvoce = x.CountInInvoce
+				CountInInvoce = x.CountInInvoce,
+				DocumentWeight = x.DocumentWeight
 			}).ToArray();
 		}
 
