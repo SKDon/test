@@ -67,7 +67,7 @@ namespace Alicargo.Controllers.Awb
 		{
 			var brokerId = _brokers.GetByUserId(_identity.Id).With(x => (int?)x.Id);
 
-			var senderUserId = _senders.GetByUserId(_identity.Id).With(x => _identity.Id);
+			var senderUserId = _senders.GetByUserId(_identity.Id).With(x => _identity.Id, (long?)null);
 
 			var list = _awbPresenter.List(take, skip, brokerId, senderUserId, _identity.Language);
 
@@ -83,7 +83,7 @@ namespace Alicargo.Controllers.Awb
 		public virtual HttpStatusCodeResult CargoIsCustomsCleared(long id)
 		{
 			var data = _awbs.Get(id).First();
-			if (data.GTD.IsNullOrWhiteSpace())
+			if(data.GTD.IsNullOrWhiteSpace())
 			{
 				throw new InvalidLogicException("GTD must be definded to set the CargoIsCustomsCleared state");
 			}

@@ -105,7 +105,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				CountInInvoce = x.CountInInvoce,
 				DocumentWeight = x.DocumentWeight,
 				MRN = x.MRN
-			};			
+			};
 		}
 
 		public long Count(long[] stateIds, long? clientId = null, long? senderId = null, long? carrierId = null,
@@ -165,7 +165,7 @@ namespace Alicargo.DataAccess.Repositories.Application
 				.ToDictionary(x => x.ApplicationHistoryId, x => x.Id);
 		}
 
-		private IQueryable<DbContext.Application> Where(long[] stateIds, long? clientId, long? senderId, bool? hasCalculation,
+		private IQueryable<DbContext.Application> Where(IEnumerable<long> stateIds, long? clientId, long? senderId, bool? hasCalculation,
 			long? cargoReceivedStateId, int? cargoReceivedDaysToShow, long? forwarderId, long? carrierId)
 		{
 			var applications = stateIds != null
