@@ -25,7 +25,7 @@ namespace Alicargo.Core.Calculation
 			var scotchCost = (application.ScotchCostEdited ?? GetSenderTapeTariff(tariffs, application.SenderId)) * application.Count;
 
 			return totalTariffCost
-			       + scotchCost ?? 0
+			       + (scotchCost ?? 0)
 			       + GetInsuranceCost(application.Value, application.InsuranceRate)
 			       + (application.FactureCostEdited ?? application.FactureCost ?? 0)
 			       + (application.FactureCostExEdited ?? application.FactureCostEx ?? 0)
