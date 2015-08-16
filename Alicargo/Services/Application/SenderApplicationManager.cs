@@ -57,7 +57,8 @@ namespace Alicargo.Services.Application
 				FactureCost = application.FactureCost,
 				FactureCostEx = application.FactureCostEx,
 				PickupCost = application.PickupCost,
-				TransitCost = application.TransitCost
+				TransitCost = application.TransitCost,
+				TariffPerKg = application.TariffPerKg
 			};
 		}
 
@@ -74,7 +75,8 @@ namespace Alicargo.Services.Application
 		{
 			var application = new ApplicationEditData
 			{
-				InsuranceRate = client.InsuranceRate ?? _applications.GetDefaultInsuranceRate()
+				InsuranceRate = client.InsuranceRate ?? _applications.GetDefaultInsuranceRate(),
+				ScotchCostEdited = client.ScotchCostEdited
 			};
 
 			Map(model, application);
@@ -120,6 +122,7 @@ namespace Alicargo.Services.Application
 			to.CountInInvoce = from.CountInInvoce;
 			to.DocumentWeight = from.DocumentWeight;
 			to.MRN = from.MRN;
+			to.TariffPerKg = from.TariffPerKg;
 		}
 	}
 }
