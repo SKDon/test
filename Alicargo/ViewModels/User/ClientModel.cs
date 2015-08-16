@@ -89,5 +89,11 @@ namespace Alicargo.ViewModels.User
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "InsuranceRate")]
 		public float? InsuranceRate { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
+		public decimal? TariffPerKg { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "ScotchCostEdited")]
+		public decimal? ScotchCostEdited { get; set; }
 	}
 }

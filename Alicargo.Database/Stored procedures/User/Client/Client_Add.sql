@@ -22,7 +22,9 @@
 	@FactureCostEx MONEY,
 	@TransitCost MONEY,
 	@PickupCost MONEY,
-	@InsuranceRate REAL	
+	@InsuranceRate REAL,
+	@TariffPerKg MONEY,
+	@ScotchCostEdited MONEY
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -51,7 +53,9 @@ AS BEGIN
 		,[FactureCostEx]
 		,[TransitCost]
 		,[PickupCost]
-		,[InsuranceRate])
+		,[InsuranceRate]
+		,[TariffPerKg]
+		,[ScotchCostEdited])
 	OUTPUT INSERTED.[Id]
 	VALUES
 		(@UserId,
@@ -77,7 +81,9 @@ AS BEGIN
 		@FactureCostEx,
 		@TransitCost,
 		@PickupCost,
-		@InsuranceRate)
+		@InsuranceRate,
+		@TariffPerKg,
+		@ScotchCostEdited)
 
 END
 GO

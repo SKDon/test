@@ -21,35 +21,39 @@
 	@FactureCostEx MONEY,
 	@TransitCost MONEY,
 	@PickupCost MONEY,
-	@InsuranceRate REAL
+	@InsuranceRate REAL,
+	@TariffPerKg MONEY,
+	@ScotchCostEdited MONEY
 
 AS BEGIN
 	SET NOCOUNT ON;
 
 	UPDATE [dbo].[Client]
-	SET [Emails] = @Emails,
-		[Nic] = @Nic,
-		[LegalEntity] = @LegalEntity,
-		[Contacts] = @Contacts,
-		[Phone] = @Phone,
-		[INN] = @INN,
-		[KPP] = @KPP,
-		[OGRN] = @OGRN,
-		[Bank] = @Bank,
-		[BIC] = @BIC,
-		[LegalAddress] = @LegalAddress,
-		[MailingAddress] = @MailingAddress,
-		[RS] = @RS,
-		[KS] = @KS,
-		[ContractNumber] = @ContractNumber,
-		[ContractDate] = @ContractDate,
-		[DefaultSenderId] = @DefaultSenderId,
-		[FactureCost] = @FactureCost,
-		[FactureCostEx] = @FactureCostEx,
-		[TransitCost] = @TransitCost,
-		[PickupCost] = @PickupCost,
-		[InsuranceRate] = @InsuranceRate
-	WHERE [Id] = @ClientId
+		SET [Emails] = @Emails,
+			[Nic] = @Nic,
+			[LegalEntity] = @LegalEntity,
+			[Contacts] = @Contacts,
+			[Phone] = @Phone,
+			[INN] = @INN,
+			[KPP] = @KPP,
+			[OGRN] = @OGRN,
+			[Bank] = @Bank,
+			[BIC] = @BIC,
+			[LegalAddress] = @LegalAddress,
+			[MailingAddress] = @MailingAddress,
+			[RS] = @RS,
+			[KS] = @KS,
+			[ContractNumber] = @ContractNumber,
+			[ContractDate] = @ContractDate,
+			[DefaultSenderId] = @DefaultSenderId,
+			[FactureCost] = @FactureCost,
+			[FactureCostEx] = @FactureCostEx,
+			[TransitCost] = @TransitCost,
+			[PickupCost] = @PickupCost,
+			[InsuranceRate] = @InsuranceRate,
+			[TariffPerKg] = @TariffPerKg,
+			[ScotchCostEdited] = @ScotchCostEdited
+		WHERE [Id] = @ClientId
 
 END
 GO

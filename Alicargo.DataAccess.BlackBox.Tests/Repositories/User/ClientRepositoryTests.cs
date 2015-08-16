@@ -90,7 +90,10 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 				FactureCostEx = client.FactureCostEx,
 				InsuranceRate = client.InsuranceRate,
 				PickupCost = client.PickupCost,
-				TransitCost = client.TransitCost
+				TransitCost = client.TransitCost,
+				TariffPerKg = client.TariffPerKg,
+				ScotchCostEdited = client.ScotchCostEdited,
+				DefaultSenderId = null
 			};
 		}
 
