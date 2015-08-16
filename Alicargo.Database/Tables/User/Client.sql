@@ -26,6 +26,8 @@
 	[TransitCost]		MONEY			NULL,
 	[PickupCost]		MONEY			NULL,
 	[InsuranceRate]		REAL			NULL,
+	[TariffPerKg]		MONEY			NULL,
+	[ScotchCostEdited]	MONEY			NULL,
 
 	CONSTRAINT [PK_dbo.Client] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_dbo.Client_dbo.Transit_TransitId] FOREIGN KEY ([TransitId]) REFERENCES [dbo].[Transit] ([Id]),

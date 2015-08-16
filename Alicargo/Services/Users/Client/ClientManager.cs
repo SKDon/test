@@ -118,7 +118,9 @@ namespace Alicargo.Services.Users.Client
 				FactureCostEx = model.FactureCostEx,
 				InsuranceRate = model.InsuranceRate / 100,
 				PickupCost = model.PickupCost,
-				TransitCost = model.TransitCost
+				TransitCost = model.TransitCost,
+				TariffPerKg = model.TariffPerKg,
+				ScotchCostEdited = model.ScotchCostEdited
 			};
 		}
 	}

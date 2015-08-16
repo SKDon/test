@@ -41,7 +41,9 @@ namespace Alicargo.DataAccess.Repositories.User
 					client.FactureCostEx,
 					client.TransitCost,
 					client.PickupCost,
-					client.InsuranceRate
+					client.InsuranceRate,
+					client.TariffPerKg,
+					client.ScotchCostEdited
 				});
 		}
 
@@ -87,7 +89,9 @@ namespace Alicargo.DataAccess.Repositories.User
 					client.FactureCostEx,
 					client.TransitCost,
 					client.PickupCost,
-					client.InsuranceRate
+					client.InsuranceRate,
+					client.TariffPerKg,
+					client.ScotchCostEdited
 				});
 		}
 	}

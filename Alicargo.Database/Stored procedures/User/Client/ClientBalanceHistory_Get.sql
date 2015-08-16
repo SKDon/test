@@ -5,9 +5,9 @@ AS BEGIN
 	SET NOCOUNT ON;
 
 	SELECT [Balance], [Comment], [Timestamp], [Money], [EventTypeId] AS [EventType], [IsCalculation]
-	FROM [dbo].[ClientBalanceHistory]
-	WHERE [ClientId] = @ClientId
-	ORDER BY [Id] DESC
+		FROM [dbo].[ClientBalanceHistory]
+			WHERE [ClientId] = @ClientId
+		ORDER BY [Id] DESC
 
 END
 GO

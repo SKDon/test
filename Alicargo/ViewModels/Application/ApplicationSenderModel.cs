@@ -78,5 +78,8 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "TariffPerKg")]
+		public decimal? TariffPerKg { get; set; }
 	}
 }

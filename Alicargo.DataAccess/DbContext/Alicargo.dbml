@@ -116,6 +116,8 @@
       <Column Name="TransitCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="PickupCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="InsuranceRate" Type="System.Single" DbType="Real" CanBeNull="true" />
+			<Column Name="ScotchCostEdited" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+			<Column Name="TariffPerKg" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="Client_Calculation" Member="Calculations" ThisKey="Id" OtherKey="ClientId" Type="Calculation" />
       <Association Name="Client_Application" Member="Applications" ThisKey="Id" OtherKey="ClientId" Type="Application" />
       <Association Name="User_Client" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />

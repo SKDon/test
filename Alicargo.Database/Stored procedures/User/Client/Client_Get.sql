@@ -32,7 +32,9 @@ AS BEGIN
 		c.[FactureCostEx],
 		c.[TransitCost],
 		c.[PickupCost],
-		c.[InsuranceRate]
+		c.[InsuranceRate],
+		c.[TariffPerKg],
+		c.[ScotchCostEdited]
 		FROM [dbo].[Client] c
 			JOIN [dbo].[User] u
 				ON c.[UserId] = u.[Id]

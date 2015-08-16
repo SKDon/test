@@ -222,6 +222,8 @@ namespace Alicargo.Controllers.User
 				model.InsuranceRate = client.InsuranceRate;
 				model.PickupCost = client.PickupCost;
 				model.TransitCost = client.TransitCost;
+				model.TariffPerKg = client.TariffPerKg;
+				model.ScotchCostEdited = client.ScotchCostEdited;
 			}
 		}
 
@@ -261,7 +263,9 @@ namespace Alicargo.Controllers.User
 				FactureCostEx = client.FactureCostEx,
 				InsuranceRate = client.InsuranceRate * 100,
 				PickupCost = client.PickupCost,
-				TransitCost = client.TransitCost
+				TransitCost = client.TransitCost,
+				TariffPerKg = client.TariffPerKg,
+				ScotchCostEdited = client.ScotchCostEdited
 			};
 		}
 

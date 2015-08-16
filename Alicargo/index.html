@@ -93,11 +93,11 @@
                         <h2 class="title">Типы перевозимых грузов</h2>
                         <div class="grid margin-from-line">
                             <div class="item-grid types-item">
-                                <span class="block-cargo clothes">
+	                            <div class="block-cargo clothes">
                                     <span class="icon-cargo icon-clothes"></span>
                                     <p style="bottom: 5px">Одежда
                                         <br/>и Обувь</p>
-                                </span>
+                                </div>
                                 <p>Надежная и оперативная доставка одежды и обуви из любой точки
                                     мира в максимально сжатые сроки.</p>
                             </div>
@@ -111,10 +111,10 @@
 								<p>Безопасно и быстро осуществляем доставку обуви из США, Европы и других стран в любой регион России</p> 
 							</div> -->
                             <div class="item-grid types-item">
-                                <span class="block-cargo furniture">
+                                <div class="block-cargo furniture">
                                     <span class="icon-cargo icon-furniture"></span>
                                     <p>Мебель</p>
-                                </span>
+                                </div>
                                 <p>Доставка и таможенная очистка мебели и предметов интерьера
                                     из Италии, Германии и других стран Европы</p>
                             </div>
@@ -279,20 +279,20 @@
                 <div class="page">
                     <h2 class="title">Оставьте заявку</h2>
                     <form class="form margin-from-line" action="/Home/Feedback" method="POST">
-                        <span class="form-col form-col-left">
+                        <div class="form-col form-col-left">
                             <p class="p-uppercase-blue">Контакты фабрики</p>
                             <input type="text" class="input" name="FactoryName" placeholder="Название" />
 							<input type="text" class="input" name="FactoryPhone" placeholder="Телефон" />
 							<input type="text" class="input" name="FactoryEmail" placeholder="E-mail" />
 							<input type="text" class="input" name="FactoryContact" placeholder="Контактное лицо" />
-                        </span>
-                        <span class="form-col form-col-right">
+                        </div>
+                        <div class="form-col form-col-right">
                             <p class="p-uppercase-blue">Ваши контакты</p>
 							<input type="text" class="input" name="UserName" placeholder="Ваше имя*" />
 							<input type="text" class="input" name="UserPhone" placeholder="Телефон*" />
                             <input type="text" class="input" name="UserEmail" placeholder="E-mail" />
                             <input type="text" class="input" name="UserCallTime" placeholder="Удобное время для звонка" />
-                        </span>
+                        </div>
                         <span class="clear"></span>
                         <textarea type="text" class="textarea" name="Comment" placeholder="Ваш комментарий"></textarea>
                         <button type="submit" class="btn btn-blue">Отправить</button>
@@ -369,14 +369,14 @@
 		<script src="Scripts/js/script.js"></script>
         <script>
         $(document).ready(function() {
-            var swiper = new Swiper('.swiper-container',
+            Swiper('.swiper-container',
             {
                 grabCursor: true,
                 nextButton: '.arrow-for-slider-next',
                 prevButton: '.arrow-for-slider-prev',
                 loop: true
             });
-            var swiper2 = new Swiper('.swiper-container-advantages',
+            Swiper('.swiper-container-advantages',
             {
                 grabCursor: true,
                 nextButton: '.arrow-for-slider-adv-next',
