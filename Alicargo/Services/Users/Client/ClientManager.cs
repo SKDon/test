@@ -120,7 +120,8 @@ namespace Alicargo.Services.Users.Client
 				PickupCost = model.PickupCost,
 				TransitCost = model.TransitCost,
 				TariffPerKg = model.TariffPerKg,
-				ScotchCostEdited = model.ScotchCostEdited
+				ScotchCostEdited = model.ScotchCostEdited,
+                Comments = model.Comments
 			};
 		}
 	}

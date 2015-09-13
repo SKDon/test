@@ -52,10 +52,13 @@
 @if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager))
 {
 	<div class="row">
-		<div class="span4">
-			@Html.LabelFor(x => x.DefaultSenderId)
-			@Html.DropDownListFor(x => x.DefaultSenderId, (IDictionary<long?, string>) ViewBag.Senders, "")
-		</div>
+	    <div class="span4">
+	        @Html.LabelFor(x => x.DefaultSenderId)
+	        @Html.DropDownListFor(x => x.DefaultSenderId, (IDictionary<long?, string>)ViewBag.Senders, "")
+	    </div>
+	    <div class="span8">
+            @Html.EditorWithLabelFor(x => x.Comments)
+	    </div>
 	</div>
 	<hr />
 	<h4>
