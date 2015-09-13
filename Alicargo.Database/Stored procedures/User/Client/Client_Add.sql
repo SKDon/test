@@ -24,7 +24,8 @@
 	@PickupCost MONEY,
 	@InsuranceRate REAL,
 	@TariffPerKg MONEY,
-	@ScotchCostEdited MONEY
+	@ScotchCostEdited MONEY,
+	@Comments NVARCHAR(MAX)
 
 AS BEGIN
 	SET NOCOUNT ON;
@@ -55,7 +56,8 @@ AS BEGIN
 		,[PickupCost]
 		,[InsuranceRate]
 		,[TariffPerKg]
-		,[ScotchCostEdited])
+		,[ScotchCostEdited]
+		,[Comments])
 	OUTPUT INSERTED.[Id]
 	VALUES
 		(@UserId,
@@ -83,7 +85,8 @@ AS BEGIN
 		@PickupCost,
 		@InsuranceRate,
 		@TariffPerKg,
-		@ScotchCostEdited)
+		@ScotchCostEdited,
+		@Comments)
 
 END
 GO

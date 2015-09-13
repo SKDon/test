@@ -84,7 +84,8 @@ namespace Alicargo.Services.Application
 				InsuranceRate = model.InsuranceRate / 100,
 				CountInInvoce = model.CountInInvoce,
 				DocumentWeight = model.DocumentWeight,
-				MRN = model.MRN
+				MRN = model.MRN,
+                Comments = model.Comments
 			};
 
 			return _editor.Add(data);
@@ -130,6 +131,7 @@ namespace Alicargo.Services.Application
 			data.CountInInvoce = model.CountInInvoce;
 			data.DocumentWeight = model.DocumentWeight;
 			data.MRN = model.MRN;
+		    data.Comments = model.Comments;
 
 			_editor.Update(applicationId, data);
 		}

@@ -93,7 +93,8 @@ namespace Alicargo.DataAccess.BlackBox.Tests.Repositories.User
 				TransitCost = client.TransitCost,
 				TariffPerKg = client.TariffPerKg,
 				ScotchCostEdited = client.ScotchCostEdited,
-				DefaultSenderId = null
+				DefaultSenderId = null,
+                Comments = client.Comments
 			};
 		}
 
