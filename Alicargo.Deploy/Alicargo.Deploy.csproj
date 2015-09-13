@@ -35,11 +35,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="backup-db-alicargo-all.ps1" />
+    <None Include="db-maintain.ps1" />
     <None Include="delete-old-emails.ps1" />
     <None Include="resend-failed-emails.ps1" />
     <None Include="Scripts\backup-db.ps1" />
-    <None Include="Scripts\delete-old-emails.ps1" />
-    <None Include="Scripts\resend-failed-emails.ps1" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -54,6 +53,8 @@
     <Content Include="Databases\Alicargo-3_6-3_7.sql" />
     <Content Include="Databases\Alicargo_Files-0_0-2_8.sql" />
     <Content Include="restore-alicargo_release-3_1.sql" />
+    <None Include="Scripts\run-sql.ps1" />
+    <Content Include="Scripts\db-maintain.sql" />
     <Content Include="Scripts\delete-old-emails.sql" />
     <Content Include="Scripts\resend-failed-emails.sql" />
   </ItemGroup>
