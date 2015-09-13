@@ -7,107 +7,61 @@ namespace Alicargo.Services.Excel.Rows
 	public sealed class CarrierApplicationExcelRow : BaseApplicationExcelRow
 	{
 		private readonly ApplicationListItem _application;
-		private readonly string _airWaybillDisplay;
 
-		public CarrierApplicationExcelRow(ApplicationListItem application, string airWaybillDisplay)
+	    public CarrierApplicationExcelRow(ApplicationListItem application, string airWaybillDisplay)
 		{
 			_application = application;
-			_airWaybillDisplay = airWaybillDisplay;
+			AirWaybillDisplay = airWaybillDisplay;
 		}
 
 		[DisplayNameLocalized(typeof(Entities), "StateName")]
-		public string StateName
-		{
-			get { return _application.State.StateName; }
-		}
+		public string StateName => _application.State.StateName;
 
-		[DisplayNameLocalized(typeof(Entities), "LegalEntity")]
-		public string ClientLegalEntity
-		{
-			get { return _application.ClientLegalEntity; }
-		}
+        [DisplayNameLocalized(typeof(Entities), "StateChangeTimestamp")]
+        public string StateChangeTimestampLocalString => _application.StateChangeTimestampLocalString;
 
-		[DisplayNameLocalized(typeof(Entities), "DisplayNumber")]
-		public string DisplayNumber
-		{
-			get { return _application.DisplayNumber; }
-		}
+        [DisplayNameLocalized(typeof(Entities), "LegalEntity")]
+		public string ClientLegalEntity => _application.ClientLegalEntity;
 
-		[DisplayNameLocalized(typeof(Entities), "Count")]
-		public int? Count
-		{
-			get { return _application.Count; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "DisplayNumber")]
+		public string DisplayNumber => _application.DisplayNumber;
 
-		[DisplayNameLocalized(typeof(Entities), "Weight")]
-		public float? Weight
-		{
-			get { return _application.Weight; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "Count")]
+		public int? Count => _application.Count;
 
-		[DisplayNameLocalized(typeof(Entities), "Volume")]
-		public float? Volume
-		{
-			get { return _application.Volume; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "Weight")]
+		public float? Weight => _application.Weight;
 
-		[DisplayNameLocalized(typeof(Entities), "MethodOfTransit")]
-		public string TransitMethodOfTransitString
-		{
-			get { return _application.TransitMethodOfTransitString; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "Volume")]
+		public float? Volume => _application.Volume;
 
-		[DisplayNameLocalized(typeof(Entities), "DeliveryType")]
-		public string TransitDeliveryTypeString
-		{
-			get { return _application.TransitDeliveryTypeString; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "MethodOfTransit")]
+		public string TransitMethodOfTransitString => _application.TransitMethodOfTransitString;
 
-		[DisplayNameLocalized(typeof(Entities), "City")]
-		public string TransitCity
-		{
-			get { return _application.TransitCity; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "DeliveryType")]
+		public string TransitDeliveryTypeString => _application.TransitDeliveryTypeString;
 
-		[DisplayNameLocalized(typeof(Entities), "RecipientName")]
-		public string TransitRecipientName
-		{
-			get { return _application.TransitRecipientName; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "City")]
+		public string TransitCity => _application.TransitCity;
 
-		[DisplayNameLocalized(typeof(Entities), "Address")]
-		public string TransitAddress
-		{
-			get { return _application.TransitAddress; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "RecipientName")]
+		public string TransitRecipientName => _application.TransitRecipientName;
 
-		[DisplayNameLocalized(typeof(Entities), "Phone")]
-		public string TransitPhone
-		{
-			get { return _application.TransitPhone; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "Address")]
+		public string TransitAddress => _application.TransitAddress;
 
-		[DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
-		public string TransitWarehouseWorkingTime
-		{
-			get { return _application.TransitWarehouseWorkingTime; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "Phone")]
+		public string TransitPhone => _application.TransitPhone;
 
-		[DisplayNameLocalized(typeof(Entities), "TransitReference")]
-		public string TransitReference
-		{
-			get { return _application.TransitReference; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
+		public string TransitWarehouseWorkingTime => _application.TransitWarehouseWorkingTime;
 
-		[DisplayNameLocalized(typeof(Entities), "AirWaybill")]
-		public string AirWaybill
-		{
-			get { return _application.AirWaybill; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "TransitReference")]
+		public string TransitReference => _application.TransitReference;
 
-		public override string AirWaybillDisplay
-		{
-			get { return _airWaybillDisplay; }
-		}
+	    [DisplayNameLocalized(typeof(Entities), "AirWaybill")]
+		public string AirWaybill => _application.AirWaybill;
+
+	    public override string AirWaybillDisplay { get; }
 	}
 }
