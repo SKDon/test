@@ -77,7 +77,8 @@ namespace Alicargo.Services.Application
 				InsuranceRate = data.InsuranceRate * 100,
 				CountInInvoce = data.CountInInvoce,
 				DocumentWeight = data.DocumentWeight,
-				MRN = data.MRN
+				MRN = data.MRN,
+                Comments = data.Comments
 			};
 		}
 

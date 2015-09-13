@@ -104,7 +104,8 @@ namespace Alicargo.DataAccess.Repositories.Application
 				TransitCostEdited = x.TransitCostEdited,
 				CountInInvoce = x.CountInInvoce,
 				DocumentWeight = x.DocumentWeight,
-				MRN = x.MRN
+				MRN = x.MRN,
+                Comments = x.Comments
 			};
 		}
 

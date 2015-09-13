@@ -144,7 +144,8 @@ namespace Alicargo.Controllers.Application
 					TransitCost = client.TransitCost,
 					PickupCost = client.PickupCost,
 					TariffPerKg = client.TariffPerKg,
-					ScotchCostEdited = client.ScotchCostEdited
+					ScotchCostEdited = client.ScotchCostEdited,
+                    Comments = client.Comments
 				});
 		}
 

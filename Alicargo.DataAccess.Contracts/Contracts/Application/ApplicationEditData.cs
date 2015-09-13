@@ -51,5 +51,7 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public string MRN { get; set; }
 		public int? CountInInvoce { get; set; }
 		public float? DocumentWeight { get; set; }
+
+	    public string Comments { get; set; }
 	}
 }
