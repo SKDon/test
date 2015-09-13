@@ -110,6 +110,7 @@
 		var adminColumns = [
 			{ field: "CreationTimestampLocalString", title: $l.Entities_CreationTimestamp, groupable: false, width: "90px" },
 			{ field: "State", title: $l.Entities_StateName, groupable: true, width: "150px", editor: stateDropDownEditor, template: "#= State.StateName #" },
+            { field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false, width: "90px" },
 			{ field: "DateOfCargoReceiptLocalString", title: $l.Entities_DateOfCargoReceipt, groupable: false, editor: dateEditor, width: "90px", template: "#= DateOfCargoReceiptLocalString == null ? '' : kendo.toString(DateOfCargoReceiptLocalString, 'd') #" },
 			{ field: "DateInStockLocalString", title: $l.Entities_DateInStock, groupable: false, width: "90px" },
 			{ field: "ClientNic", title: $l.Entities_Nic, groupable: true, width: "100px" },
@@ -149,6 +150,7 @@
 		var clientColumns = [
 			{ field: "CreationTimestampLocalString", title: $l.Entities_CreationTimestamp, groupable: false, width: "70px" },
 			{ field: "State", title: $l.Entities_StateName, groupable: false, template: "#= State.StateName #" },
+            { field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false, width: "90px" },
 			{ field: "DateOfCargoReceiptLocalString", title: $l.Entities_DateOfCargoReceipt, groupable: false, width: "70px" },
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
 			{ field: "FactoryName", title: $l.Entities_FactoryName, groupable: false },
@@ -181,6 +183,7 @@
 
 		var carrierColumns = [
 			{ field: "State", title: $l.Entities_StateName, groupable: false, editor: stateDropDownEditor, template: "#= State.StateName #", width: "150px" },
+            { field: "StateChangeTimestampLocalString", title: $l.Entities_StateChangeTimestamp, groupable: false, width: "90px" },
 			{ field: "ClientLegalEntity", title: $l.Entities_LegalEntity, groupable: false, width: "150px" },
 			{ field: "DisplayNumber", title: $l.Entities_DisplayNumber, width: "70px", groupable: false },
 			countField,
