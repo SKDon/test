@@ -1,1 +1,1 @@
-﻿.\Scripts\delete-old-emails.ps1 .\SQLEXPRESS Alicargo .\Scripts\resend-failed-emails.sql
+﻿.\Scripts\run-sql.ps1 .\SQLEXPRESS Alicargo .\Scripts\resend-failed-emails.sql
