@@ -4,83 +4,83 @@
 @inherits BaseWebViewPage<ApplicationAdminModel>
 
 <div class="row">
-    <div class="span3">
-        @Html.EditorWithLabelFor(model => model.FactoryName)
-        @Html.EditorWithLabelFor(model => model.MarkName)
-        @Html.EditorWithLabelFor(model => model.Invoice)
-        @Html.EditorWithLabelFor(model => model.Characteristic)
-        @Html.EditorWithLabelFor(model => model.TermsOfDelivery)
-        @Html.EditorWithLabelFor(model => model.MRN)
-    </div>
-    <div class="span3">
-        @Html.EditorWithLabelFor(model => model.FactoryEmail)
-        @Html.EditorWithLabelFor(model => model.FactoryPhone)
-        @Html.EditorWithLabelFor(model => model.FactoryContact)
-        @Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
-        @Html.EditorWithLabelFor(model => model.AddressLoad)
-        @Html.EditorWithLabelFor(model => model.CountInInvoce)
-    </div>
-    <div class="span3">
-        @Html.LabelFor(x => x.CountryId)
-        @Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
-        @Html.LabelFor(x => x.SenderId)
-        @Html.DropDownListFor(x => x.SenderId, (IDictionary<long?, string>)ViewBag.Senders, "")
-        @Html.LabelFor(x => x.ForwarderId)
-        @Html.DropDownListFor(x => x.ForwarderId, (IDictionary<long?, string>)ViewBag.Forwarders, Pages.DefineByCity)
-        @Html.LabelFor(x => x.CarrierId)
-        @Html.DropDownListFor(x => x.CarrierId, (IDictionary<long?, string>)ViewBag.Carriers, Pages.DefineByCity)
-        @Html.LabelFor(model => model.MethodOfDelivery)
-        @Html.DropDownListForEnum(model => model.MethodOfDelivery)
-        @Html.EditorWithLabelFor(model => model.DocumentWeight)
-    </div>
-    <div class="span3">
-        <label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>&nbsp;)</label>
-        @Html.EditorFor(model => model.Volume)
-        @Html.EditorWithLabelFor(model => model.Weight)
-        @Html.EditorWithLabelFor(model => model.Count)
-        <div class="appl-edit-checkbox" style="margin-top: 31px;">
-            @Html.EditorWithLabelFor(x => x.IsPickup)
-        </div>
-    </div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.FactoryName)
+		@Html.EditorWithLabelFor(model => model.MarkName)
+		@Html.EditorWithLabelFor(model => model.Invoice)
+		@Html.EditorWithLabelFor(model => model.Characteristic)
+		@Html.EditorWithLabelFor(model => model.TermsOfDelivery)
+		@Html.EditorWithLabelFor(model => model.MRN)
+	</div>
+	<div class="span3">
+		@Html.EditorWithLabelFor(model => model.FactoryEmail)
+		@Html.EditorWithLabelFor(model => model.FactoryPhone)
+		@Html.EditorWithLabelFor(model => model.FactoryContact)
+		@Html.EditorWithLabelFor(model => model.WarehouseWorkingTime)
+		@Html.EditorWithLabelFor(model => model.AddressLoad)
+		@Html.EditorWithLabelFor(model => model.CountInInvoce)
+	</div>
+	<div class="span3">
+		@Html.LabelFor(x => x.CountryId)
+		@Html.DropDownListFor(x => x.CountryId, (IDictionary<long, string>)ViewBag.Countries)
+		@Html.LabelFor(x => x.SenderId)
+		@Html.DropDownListFor(x => x.SenderId, (IDictionary<long?, string>)ViewBag.Senders, "")
+		@Html.LabelFor(x => x.ForwarderId)
+		@Html.DropDownListFor(x => x.ForwarderId, (IDictionary<long?, string>)ViewBag.Forwarders, Pages.DefineByCity)
+		@Html.LabelFor(x => x.CarrierId)
+		@Html.DropDownListFor(x => x.CarrierId, (IDictionary<long?, string>)ViewBag.Carriers, Pages.DefineByCity)
+		@Html.LabelFor(model => model.MethodOfDelivery)
+		@Html.DropDownListForEnum(model => model.MethodOfDelivery)
+		@Html.EditorWithLabelFor(model => model.DocumentWeight)
+	</div>
+	<div class="span3">
+		<label for="@Html.IdFor(x => x.Volume)">@Entities.Volume (m<span class="super">3</span>&nbsp;)</label>
+		@Html.EditorFor(model => model.Volume)
+		@Html.EditorWithLabelFor(model => model.Weight)
+		@Html.EditorWithLabelFor(model => model.Count)
+		<div class="appl-edit-checkbox" style="margin-top: 31px;">
+			@Html.EditorWithLabelFor(x => x.IsPickup)
+		</div>
+	</div>
 </div>
 <div class="row">
-    <div class="span2">
-        @Html.EditorWithLabelFor(model => model.FactureCost)
-        @Html.EditorWithLabelFor(model => model.FactureCostEdited)
-    </div>
-    <div class="span2">
-        @Html.EditorWithLabelFor(model => model.FactureCostEx)
-        @Html.EditorWithLabelFor(model => model.FactureCostExEdited)
-    </div>
-    <span class="span2">
-        @Html.EditorWithLabelFor(model => model.TransitCost)
-        @Html.EditorWithLabelFor(model => model.TransitCostEdited)
-    </span>
-    <div class="span2">
-        @Html.EditorWithLabelFor(model => model.PickupCost)
-        @Html.EditorWithLabelFor(model => model.PickupCostEdited)
-    </div>
-    <div class="span2">
-        @Html.EditorWithLabelFor(model => model.TariffPerKg)
-        @Html.EditorWithLabelFor(model => model.ScotchCostEdited)
-    </div>
-    <div class="span2">
-        @Html.EditorWithLabelFor(model => model.Currency)
-        @Html.EditorWithLabelFor(model => model.InsuranceRate)
-    </div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.FactureCost)
+		@Html.EditorWithLabelFor(model => model.FactureCostEdited)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.FactureCostEx)
+		@Html.EditorWithLabelFor(model => model.FactureCostExEdited)
+	</div>
+	<span class="span2">
+		@Html.EditorWithLabelFor(model => model.TransitCost)
+		@Html.EditorWithLabelFor(model => model.TransitCostEdited)
+	</span>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.PickupCost)
+		@Html.EditorWithLabelFor(model => model.PickupCostEdited)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.TariffPerKg)
+		@Html.EditorWithLabelFor(model => model.ScotchCostEdited)
+	</div>
+	<div class="span2">
+		@Html.EditorWithLabelFor(model => model.Currency)
+		@Html.EditorWithLabelFor(model => model.InsuranceRate)
+	</div>
 </div>
 <div class="row">
-    <div class="span8">@Html.EditorWithLabelFor(x => x.Comments)</div>
+	<div class="span8">@Html.EditorWithLabelFor(x => x.Comments)</div>
 </div>
 <div>
-    <hr/>
-    <h4>
-        @Pages.Transit
-    </h4>
-    @{
-        var applicationId = (long?)ViewBag.ApplicationId;
-        @(applicationId.HasValue
-              ? Html.Action(MVC.Transit.EditByApplication(applicationId))
-              : Html.Action(MVC.Transit.EditByClient((long)ViewBag.ClientId)))
-    }
+	<hr/>
+	<h4>
+		@Pages.Transit
+	</h4>
+	@{
+		var applicationId = (long?)ViewBag.ApplicationId;
+		@(applicationId.HasValue
+			  ? Html.Action(MVC.Transit.EditByApplication(applicationId))
+			  : Html.Action(MVC.Transit.EditByClient((long)ViewBag.ClientId)))
+	}
 </div>

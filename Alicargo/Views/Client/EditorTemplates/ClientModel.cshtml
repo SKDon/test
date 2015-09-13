@@ -24,7 +24,7 @@
 				? null
 				: Model.ContractFileName,
 			Model != null && Model.ContractFileName != null
-				? @Url.Action(MVC.Client.Contract((long?) ViewBag.ClientId))
+				? @Url.Action(MVC.Client.Contract((long?)ViewBag.ClientId))
 				: null)
 	</div>
 	<div class="span4">
@@ -49,18 +49,18 @@
 		</script>
 	</div>
 </div>
-@if (IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager))
+@if(IdentityService.IsInRole(RoleType.Admin) || IdentityService.IsInRole(RoleType.Manager))
 {
 	<div class="row">
-	    <div class="span4">
-	        @Html.LabelFor(x => x.DefaultSenderId)
-	        @Html.DropDownListFor(x => x.DefaultSenderId, (IDictionary<long?, string>)ViewBag.Senders, "")
-	    </div>
-	    <div class="span8">
-            @Html.EditorWithLabelFor(x => x.Comments)
-	    </div>
+		<div class="span4">
+			@Html.LabelFor(x => x.DefaultSenderId)
+			@Html.DropDownListFor(x => x.DefaultSenderId, (IDictionary<long?, string>)ViewBag.Senders, "")
+		</div>
+		<div class="span8">
+			@Html.EditorWithLabelFor(x => x.Comments)
+		</div>
 	</div>
-	<hr />
+	<hr/>
 	<h4>
 		@Pages.Calculation
 	</h4>
@@ -76,12 +76,12 @@
 		<div class="span3">@Html.EditorWithLabelFor(x => x.ScotchCostEdited)</div>
 	</div>
 }
-<hr />
+<hr/>
 <h4>
 	@Pages.Transit
 </h4>
-@Html.Action(MVC.Transit.EditByClient((long?) ViewBag.ClientId))
-<hr />
+@Html.Action(MVC.Transit.EditByClient((long?)ViewBag.ClientId))
+<hr/>
 <h4>
 	@Pages.Authentication
 </h4>
