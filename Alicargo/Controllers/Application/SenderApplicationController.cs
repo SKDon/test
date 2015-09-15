@@ -55,8 +55,7 @@ namespace Alicargo.Controllers.Application
 					FactureCost = client.FactureCost,
 					FactureCostEx = client.FactureCostEx,
 					TransitCost = client.TransitCost,
-					PickupCost = client.PickupCost,
-					TariffPerKg = client.TariffPerKg
+					PickupCost = client.PickupCost
 				});
 		}
 
