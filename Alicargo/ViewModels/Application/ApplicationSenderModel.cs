@@ -78,5 +78,9 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
 		public decimal? TransitCost { get; set; }
+
+		[DataType(DataType.MultilineText)]
+		[DisplayNameLocalized(typeof(Entities), "Comments")]
+		public string Comments { get; set; }
 	}
 }

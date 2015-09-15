@@ -57,7 +57,8 @@ namespace Alicargo.Services.Application
 				FactureCost = application.FactureCost,
 				FactureCostEx = application.FactureCostEx,
 				PickupCost = application.PickupCost,
-				TransitCost = application.TransitCost
+				TransitCost = application.TransitCost,
+				Comments = application.Comments
 			};
 		}
 
@@ -121,6 +122,7 @@ namespace Alicargo.Services.Application
 			to.CountInInvoce = from.CountInInvoce;
 			to.DocumentWeight = from.DocumentWeight;
 			to.MRN = from.MRN;
+			to.Comments = from.Comments;
 		}
 	}
 }

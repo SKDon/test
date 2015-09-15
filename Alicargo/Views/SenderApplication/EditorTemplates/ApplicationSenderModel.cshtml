@@ -2,7 +2,7 @@
 @model ApplicationSenderModel
 
 <div class="row">
-	<div class="span3">		
+	<div class="span3">
 		@Html.EditorWithLabelFor(model => model.FactoryName)
 		@Html.EditorWithLabelFor(model => model.MarkName)
 		@Html.EditorWithLabelFor(model => model.Invoice)
@@ -31,4 +31,7 @@
 		@Html.EditorWithLabelFor(model => model.TransitCost)
 		@Html.EditorWithLabelFor(model => model.Currency)
 	</div>
+</div>
+<div class="row">
+	<div class="span8">@Html.EditorWithLabelFor(x => x.Comments)</div>
 </div>
