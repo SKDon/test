@@ -112,8 +112,8 @@
 		$awb.Columns = function() {
 			var columns = [
 				{ field: "CreationTimestampLocalString", title: $a.Localization.Entities_CreationTimestamp },
-				{ field: "State", title: $a.Localization.Entities_StateName, template: "#= !!State && !!State.StateName ? State.StateName : '' #" },
 				{ field: "StateChangeTimestampLocalString", title: $a.Localization.Entities_StateChangeTimestamp },
+				{ field: "State", title: $a.Localization.Entities_StateName, template: "#= !!State && !!State.StateName ? State.StateName : '' #" },
 				{ field: "Bill", title: $a.Localization.Entities_AWB },
 				{ field: "DepartureAirport", title: $a.Localization.Entities_DepartureAirport },
 				{ field: "ArrivalAirport", title: $a.Localization.Entities_ArrivalAirport },
