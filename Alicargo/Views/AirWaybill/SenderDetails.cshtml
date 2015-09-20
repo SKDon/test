@@ -5,7 +5,7 @@
 	<div class="properties">
 		# if(AWBFiles != null){ #
 		<p>
-			<span>@Entities.AWB:</span>
+			<span>@Html.Raw(Entities.AWB):</span>
 			# for(i in AWBFiles) { #
 			# var item = AWBFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -15,7 +15,7 @@
 		# } #		
 		# if(PackingFiles != null){ #
 		<p>
-			<span>@Entities.Packing:</span>
+			<span>@Html.Raw(Entities.Packing):</span>
 			# for(i in PackingFiles) { #
 			# var item = PackingFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -25,7 +25,7 @@
 		# } #		
 		# if(OtherFiles != null){ #
 		<p>
-			<span>@Entities.OtherFiles:</span>
+			<span>@Html.Raw(Entities.OtherFiles):</span>
 			# for(i in OtherFiles) { #
 			# var item = OtherFiles[i]; #
 			# if(!item || !item.Id) continue; #

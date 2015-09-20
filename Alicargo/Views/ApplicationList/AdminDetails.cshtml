@@ -3,211 +3,211 @@
 @using Resources
 # if(DaysInWork != null){ #
 <p>
-	<span>@Entities.DaysInWork:</span>
+	<span>@Html.Raw(Entities.DaysInWork):</span>
 	#= DaysInWork #
 </p>
 # } #
 # if(CreationTimestampLocalString != null){ #
 <p>
-	<span>@Entities.CreationTimestamp:</span>
+	<span>@Html.Raw(Entities.CreationTimestamp):</span>
 	#= CreationTimestampLocalString #
 </p>
 # } #
 # if(StateChangeTimestampLocalString != null){ #
 <p>
-	<span>@Entities.StateChangeTimestamp:</span>
+	<span>@Html.Raw(Entities.StateChangeTimestamp):</span>
 	#= StateChangeTimestampLocalString #
 </p>
 # } #
 # if(MarkName != null){ #
 <p>
-	<span>@Entities.Mark:</span>
+	<span>@Html.Raw(Entities.Mark):</span>
 	#= MarkName #
 </p>
 # } #
 # if(Count != null){ #
 <p>
-	<span>@Entities.Count:</span>
+	<span>@Html.Raw(Entities.Count):</span>
 	#= Count #
 </p>
 # } #
 # if(MRN != null){ #
 <p>
-	<span>@Entities.MRN:</span>
+	<span>@Html.Raw(Entities.MRN):</span>
 	#= MRN #
 </p>
 # } #
 # if(CountInInvoce != null){ #
 <p>
-	<span>@Entities.CountInInvoce:</span>
+	<span>@Html.Raw(Entities.CountInInvoce):</span>
 	#= CountInInvoce #
 </p>
 # } #
 # if(DocumentWeight != null){ #
 <p>
-	<span>@Entities.DocumentWeight:</span>
+	<span>@Html.Raw(Entities.DocumentWeight):</span>
 	#= DocumentWeight #
 </p>
 # } #
 # if(Volume != null){ #
 <p>
-	<span>@Entities.Volume (m3):</span>
+	<span>@Html.Raw(Entities.Volume) (m3):</span>
 	#= Volume #
 </p>
 # } #
 # if(Weight != null){ #
 <p>
-	<span>@Entities.Weight:</span>
+	<span>@Html.Raw(Entities.Weight):</span>
 	#= Weight #
 </p>
 # } #
 # if(Characteristic != null){ #
 <p>
-	<span>@Entities.Characteristic:</span>
+	<span>@Html.Raw(Entities.Characteristic):</span>
 	#= Characteristic #
 </p>
 # } #
 # if(AddressLoad != null){ #
 <p>
-	<span>@Entities.AddressLoad:</span>
+	<span>@Html.Raw(Entities.AddressLoad):</span>
 	#= AddressLoad #
 </p>
 # } #
 # if(CountryName != null){ #
 <p>
-	<span>@Entities.Country:</span>
+	<span>@Html.Raw(Entities.Country):</span>
 	#= CountryName #
 </p>
 # } #
 # if(WarehouseWorkingTime != null){ #
 <p>
-	<span>@Entities.WarehouseWorkingTime:</span>
+	<span>@Html.Raw(Entities.WarehouseWorkingTime):</span>
 	#= WarehouseWorkingTime #
 </p>
 # } #
 # if(TermsOfDelivery != null){ #
 <p>
-	<span>@Entities.TermsOfDelivery:</span>
+	<span>@Html.Raw(Entities.TermsOfDelivery):</span>
 	#= TermsOfDelivery #
 </p>
 # } #
 # if(MethodOfDeliveryLocalString != null){ #
 <p>
-	<span>@Entities.MethodOfDelivery:</span>
+	<span>@Html.Raw(Entities.MethodOfDelivery):</span>
 	#= MethodOfDeliveryLocalString #
 </p>
 # } #
 # if(TransitCity != null){ #
 <p>
-	<span>@Entities.City.EncodeForKendo():</span>
+	<span>@Html.Raw(Entities.City.EncodeForKendo()):</span>
 	#: TransitCity #
 </p>
 # } #
 # if(TransitAddress != null){ #
 <p>
-	<span>@Entities.Address:</span>
+	<span>@Html.Raw(Entities.Address):</span>
 	#= TransitAddress #
 </p>
 # } #
 # if(TransitRecipientName != null){ #
 <p>
-	<span>@Entities.RecipientName:</span>
+	<span>@Html.Raw(Entities.RecipientName):</span>
 	#= TransitRecipientName #
 </p>
 # } #
 # if(TransitPhone != null){ #
 <p>
-	<span>@Entities.Phone:</span>
+	<span>@Html.Raw(Entities.Phone):</span>
 	#= TransitPhone #
 </p>
 # } #
 # if(TransitWarehouseWorkingTime != null){ #
 <p>
-	<span>@Entities.WarehouseWorkingTime (@Pages.Transit):</span>
+	<span>@Html.Raw(Entities.WarehouseWorkingTime) (@Pages.Transit):</span>
 	#= TransitWarehouseWorkingTime #
 </p>
 # } #
 # if(TransitMethodOfTransitString != null){ #
 <p>
-	<span>@Entities.MethodOfTransit:</span>
+	<span>@Html.Raw(Entities.MethodOfTransit):</span>
 	#= TransitMethodOfTransitString #
 </p>
 # } #
 # if(TransitDeliveryTypeString != null){ #
 <p>
-	<span>@Entities.DeliveryType:</span>
+	<span>@Html.Raw(Entities.DeliveryType):</span>
 	#= TransitDeliveryTypeString #
 </p>
 # } #
 # if(CarrierName != null){ #
 <p>
-	<span>@Entities.Carrier:</span>
+	<span>@Html.Raw(Entities.Carrier):</span>
 	#= CarrierName #
 </p>
 # } #
 # if(FactoryName != null){ #
 <p>
-	<span>@Entities.FactoryName:</span>
+	<span>@Html.Raw(Entities.FactoryName):</span>
 	#= FactoryName #
 </p>
 # } #
 # if(FactoryEmail != null){ #
 <p>
-	<span>@Entities.FactoryEmail:</span>
+	<span>@Html.Raw(Entities.FactoryEmail):</span>
 	#= FactoryEmail #
 </p>
 # } #
 # if(FactoryPhone != null){ #
 <p>
-	<span>@Entities.FactoryPhone:</span>
+	<span>@Html.Raw(Entities.FactoryPhone):</span>
 	#= FactoryPhone #
 </p>
 # } #
 # if(FactoryContact != null){ #
 <p>
-	<span>@Entities.FactoryContact:</span>
+	<span>@Html.Raw(Entities.FactoryContact):</span>
 	#= FactoryContact #
 </p>
 # } #
 # if(FactureCost != null){ #
 <p>
-	<span>@Entities.FactureCost:</span>
+	<span>@Html.Raw(Entities.FactureCost):</span>
 	#= FactureCost #
 </p>
 # } #
 # if(FactureCostEx != null){ #
 <p>
-	<span>@Entities.FactureCostEx:</span>
+	<span>@Html.Raw(Entities.FactureCostEx):</span>
 	#= FactureCostEx #
 </p>
 # } #
 # if(ScotchCost != null){ #
 <p>
-	<span>@Entities.ScotchCost:</span>
+	<span>@Html.Raw(Entities.ScotchCost):</span>
 	#= ScotchCost #
 </p>
 # } #
 # if(TariffPerKg != null){ #
 <p>
-	<span>@Entities.TariffPerKg:</span>
+	<span>@Html.Raw(Entities.TariffPerKg):</span>
 	#= TariffPerKg #
 </p>
 # } #
 # if(TransitCost != null){ #
 <p>
-	<span>@Entities.TransitCost:</span>
+	<span>@Html.Raw(Entities.TransitCost):</span>
 	#= TransitCost #
 </p>
 # } #
 # if(PickupCost != null){ #
 <p>
-	<span>@Entities.PickupCost:</span>
+	<span>@Html.Raw(Entities.PickupCost):</span>
 	#= PickupCost #
 </p>
 # } #
 # if(InvoiceFiles != null){ #
 <p>
-	<span>@Entities.Invoice:</span>
+	<span>@Html.Raw(Entities.Invoice):</span>
 	# for(var i in InvoiceFiles) { #
 	# var item = InvoiceFiles[i]; #
 	# if(!item || !item.Id) continue; #
@@ -217,7 +217,7 @@
 # } #
 # if(SwiftFiles != null){ #
 <p>
-	<span>@Entities.Swift:</span>
+	<span>@Html.Raw(Entities.Swift):</span>
 	# for(var i in SwiftFiles) { #
 	# var item = SwiftFiles[i]; #
 	# if(!item || !item.Id) continue; #
@@ -227,7 +227,7 @@
 # } #
 # if(DeliveryBillFiles != null){ #
 <p>
-	<span>@Entities.DeliveryBill:</span>
+	<span>@Html.Raw(Entities.DeliveryBill):</span>
 	# for(i in DeliveryBillFiles) { #
 	# var item = DeliveryBillFiles[i]; #
 	# if(!item || !item.Id) continue; #
@@ -237,7 +237,7 @@
 # } #
 # if(Torg12Files != null){ #
 <p>
-	<span>@Entities.Torg12:</span>
+	<span>@Html.Raw(Entities.Torg12):</span>
 	# for(i in Torg12Files) { #
 	# var item = Torg12Files[i]; #
 	# if(!item || !item.Id) continue; #
@@ -247,7 +247,7 @@
 # } #
 # if(T1Files != null){ #
 <p>
-	<span>@Entities.T1:</span>
+	<span>@Html.Raw(Entities.T1):</span>
 	# for(i in T1Files) { #
 	# var item = T1Files[i]; #
 	# if(!item || !item.Id) continue; #
@@ -257,7 +257,7 @@
 # } #
 # if(Ex1Files != null){ #
 <p>
-	<span>@Entities.Ex1:</span>
+	<span>@Html.Raw(Entities.Ex1):</span>
 	# for(i in Ex1Files) { #
 	# var item = Ex1Files[i]; #
 	# if(!item || !item.Id) continue; #
@@ -267,7 +267,7 @@
 # } #
 # if(CPFiles != null){ #
 <p>
-	<span>@Entities.CP:</span>
+	<span>@Html.Raw(Entities.CP):</span>
 	# for(i in CPFiles) { #
 	# var item = CPFiles[i]; #
 	# if(!item || !item.Id) continue; #
@@ -277,7 +277,7 @@
 # } #
 # if(PackingFiles != null){ #
 <p>
-	<span>@Entities.Packing:</span>
+	<span>@Html.Raw(Entities.Packing):</span>
 	# for(i in PackingFiles) { #
 	# var item = PackingFiles[i]; #
 	# if(!item || !item.Id) continue; #
@@ -287,7 +287,7 @@
 # } #
 # if(OtherFiles != null){ #
 <p>
-	<span>@Entities.OtherFiles:</span>
+	<span>@Html.Raw(Entities.OtherFiles):</span>
 	# for(i in OtherFiles) { #
 	# var item = OtherFiles[i]; #
 	# if(!item || !item.Id) continue; #
