@@ -73,16 +73,16 @@ namespace Alicargo.ViewModels.User
 
         public AuthenticationModel Authentication { get; set; }
 
-        [DisplayNameLocalized(typeof(Entities), "FactureCost")]
+        [DisplayNameLocalized(typeof(Entities), "FactureCostEdited")]
         public decimal? FactureCost { get; set; }
 
-        [DisplayNameLocalized(typeof(Entities), "FactureCostEx")]
+        [DisplayNameLocalized(typeof(Entities), "FactureCostExEdited")]
         public decimal? FactureCostEx { get; set; }
 
-        [DisplayNameLocalized(typeof(Entities), "PickupCost")]
+        [DisplayNameLocalized(typeof(Entities), "PickupCostEdited")]
         public decimal? PickupCost { get; set; }
 
-        [DisplayNameLocalized(typeof(Entities), "TransitCost")]
+        [DisplayNameLocalized(typeof(Entities), "TransitCostEdited")]
         public decimal? TransitCost { get; set; }
 
         [Required]

@@ -139,10 +139,10 @@ namespace Alicargo.Controllers.Application
 				{
 					SenderId = client.DefaultSenderId,
 					InsuranceRate = insuranceRate * 100,
-					FactureCost = client.FactureCost,
-					FactureCostEx = client.FactureCostEx,
-					TransitCost = client.TransitCost,
-					PickupCost = client.PickupCost,
+					FactureCostEdited = client.FactureCost,
+					FactureCostExEdited = client.FactureCostEx,
+					TransitCostEdited = client.TransitCost,
+					PickupCostEdited = client.PickupCost,
 					TariffPerKg = client.TariffPerKg,
 					ScotchCostEdited = client.ScotchCostEdited,
                     Comments = client.Comments
