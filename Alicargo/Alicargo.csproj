@@ -647,6 +647,7 @@
     <Content Include="Content\images\slider-new-4.jpg" />
     <Content Include="Content\images\sprites.png" />
     <Content Include="index.html" />
+    <Content Include="Scripts\app\pl.js" />
     <Content Include="Scripts\js\imagesloaded.js" />
     <Content Include="Scripts\js\isotope.min.js" />
     <Content Include="Scripts\js\jquery.js" />

@@ -28,6 +28,11 @@ namespace Alicargo.Mvc
 		 "~/Scripts/app/it.js")]
 		public const string ItJs = "~/js/it";
 
+		[Path("~/Scripts/jQuery/globalize/cultures/globalize.culture.pl.js",
+		 "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.pl.min.js",
+		 "~/Scripts/app/pl.js")]
+		public const string PlJs = "~/js/it";
+
 		[Path("~/Scripts/app/AirWaybill/Columns.js", "~/Scripts/app/AirWaybill/Grid.js")]
 		public const string AwbListJs = "~/js/awb-list-js";
 

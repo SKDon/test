@@ -6,10 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8"/>
 	<title>Avion Russia</title>
-	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	@Styles.Render(CssPaths.Common)
 	@Scripts.Render(JsPaths.CommonJs)
 	@switch(UICulture)
@@ -18,17 +18,20 @@
 			@Scripts.Render(JsPaths.RuJs)
 			break;
 		case TwoLetterISOLanguageName.Italian:
-		@Scripts.Render(JsPaths.ItJs)
+			@Scripts.Render(JsPaths.ItJs)
+			break;
+		case TwoLetterISOLanguageName.Polish:
+			@Scripts.Render(JsPaths.PlJs)
 			break;
 	}
 </head>
 <body>
-	<div id="wrap">
-		<div class="container">
-			@RenderBody()
-		</div>
+<div id="wrap">
+	<div class="container">
+		@RenderBody()
 	</div>
-	@Html.Partial("DynamicScripts")
-	@RenderSection("scripts", false)
+</div>
+@Html.Partial("DynamicScripts")
+@RenderSection("scripts", false)
 </body>
 </html>
