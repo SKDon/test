@@ -277,7 +277,7 @@
     <value>current account</value>
   </data>
   <data name="StateChangeTimestamp" xml:space="preserve">
-    <value>Date of the state </value>
+    <value>Date of the state</value>
   </data>
   <data name="StateItalianName" xml:space="preserve">
     <value>Italian name</value>

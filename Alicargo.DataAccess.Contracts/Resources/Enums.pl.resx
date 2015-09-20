@@ -117,31 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CP" xml:space="preserve">
-    <value>Счет-фактура</value>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
   </data>
-  <data name="DeliveryBill" xml:space="preserve">
-    <value>Счет за доставку</value>
+  <data name="Auto" xml:space="preserve">
+    <value>Auto</value>
   </data>
-  <data name="Invoice" xml:space="preserve">
-    <value>Инвойс</value>
+  <data name="Avia" xml:space="preserve">
+    <value>Lotniczy</value>
   </data>
-  <data name="Other" xml:space="preserve">
-    <value>Другое</value>
+  <data name="Broker" xml:space="preserve">
+    <value>Broker</value>
   </data>
-  <data name="Packing" xml:space="preserve">
-    <value>Пакинг</value>
+  <data name="Client" xml:space="preserve">
+    <value>Klient</value>
   </data>
-  <data name="Swift" xml:space="preserve">
-    <value>SWIFT</value>
+  <data name="Comfort" xml:space="preserve">
+    <value>Komfort</value>
   </data>
-  <data name="Torg12" xml:space="preserve">
-    <value>Торг 12</value>
+  <data name="Econom" xml:space="preserve">
+    <value>Ekonom</value>
   </data>
-  <data name="Ex1">
-    <value>EX-1</value>
+  <data name="Forwarder" xml:space="preserve">
+    <value>Przewoźnik</value>
   </data>
-  <data name="T1">
-    <value>T1</value>
+  <data name="Lux" xml:space="preserve">
+    <value>Luksusowy</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Nadawca</value>
+  </data>
+  <data name="ToDoor" xml:space="preserve">
+    <value>Do drzwi</value>
+  </data>
+  <data name="ToWarehouse" xml:space="preserve">
+    <value>Do magazynu</value>
+  </data>
+  <data name="Manager" xml:space="preserve">
+    <value>Menadżer</value>
   </data>
 </root>

@@ -130,12 +130,12 @@
     <value>Неверный логин или пароль</value>
   </data>
   <data name="StateIsUsed" xml:space="preserve">
-    <value>Статус исполользуется</value>
+    <value>Статус используется</value>
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>Пользователь не найден</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>Не верное значение</value>
+    <value>Неверное значение</value>
   </data>
 </root>

@@ -914,6 +914,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Validation.it.resx" />
     <EmbeddedResource Include="Resources\Validation.ru.resx" />
+    <EmbeddedResource Include="Resources\Pages.pl.resx" />
+    <EmbeddedResource Include="Resources\Validation.pl.resx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Forwarder\Models\" />
