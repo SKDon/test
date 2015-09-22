@@ -495,6 +495,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Mvc\FilterConfig.cs" />
     <Compile Include="App_Start\Mvc\RouteConfig.cs" />
+    <Content Include="-app_offline.htm" />
     <Content Include="Content\app\avion.png" />
     <Content Include="Content\app\bill-settings.css" />
     <Content Include="Content\app\calculation-grid.css" />
