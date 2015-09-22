@@ -4,7 +4,9 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
-#pragma warning disable 1591, 3008, 3009
+// 0108: suppress "Foo hides inherited member Foo. Use the new keyword if hiding was intended." when a controller and its abstract parent are both processed
+// 0114: suppress "Foo.BarController.Baz()' hides inherited member 'Qux.BarController.Baz()'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword." when an action (with an argument) overrides an action in a parent controller
+#pragma warning disable 1591, 3008, 3009, 0108, 0114
 #region T4MVC
 
 using System;
@@ -98,7 +100,7 @@ namespace T4MVC
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 internal partial class T4MVC_System_Web_Mvc_HttpStatusCodeResult : System.Web.Mvc.HttpStatusCodeResult, IT4MVCActionResult
 {
-    public T4MVC_System_Web_Mvc_HttpStatusCodeResult(string area, string controller, string action, string protocol = null): base(default(System.Net.HttpStatusCode))
+    public T4MVC_System_Web_Mvc_HttpStatusCodeResult(string area, string controller, string action, string protocol = null): base(default(int))
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -320,6 +322,8 @@ namespace Links
             }
         
             public static readonly string it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/it.min.js") ? Url("it.min.js") : Url("it.js");
+            public static readonly string pl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/pl.min.js") ? Url("pl.min.js") : Url("pl.js");
+            public static readonly string pl_js_ = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/pl.min.js") ? Url("pl.min.js") : Url("pl.js");
             public static readonly string ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ru.min.js") ? Url("ru.min.js") : Url("ru.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class State {
@@ -365,6 +369,8 @@ namespace Links
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string globalize_culture_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.culture.it.min.js") ? Url("globalize.culture.it.min.js") : Url("globalize.culture.it.js");
+                    public static readonly string globalize_culture_pl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.culture.pl.min.js") ? Url("globalize.culture.pl.min.js") : Url("globalize.culture.pl.js");
+                    public static readonly string globalize_culture_pl_js_ = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.culture.pl.min.js") ? Url("globalize.culture.pl.min.js") : Url("globalize.culture.pl.js");
                     public static readonly string globalize_culture_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/globalize.culture.ru.min.js") ? Url("globalize.culture.ru.min.js") : Url("globalize.culture.ru.js");
                 }
             
@@ -390,21 +396,6 @@ namespace Links
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class js {
-            private const string URLPATH = "~/Scripts/js";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string imagesloaded_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/imagesloaded.min.js") ? Url("imagesloaded.min.js") : Url("imagesloaded.js");
-            public static readonly string isotope_min_js = Url("isotope.min.js");
-            public static readonly string jquery_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.min.js") ? Url("jquery.min.js") : Url("jquery.js");
-            public static readonly string map_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/map.min.js") ? Url("map.min.js") : Url("map.js");
-            public static readonly string modernizr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr.min.js") ? Url("modernizr.min.js") : Url("modernizr.js");
-            public static readonly string pushy_min_js = Url("pushy.min.js");
-            public static readonly string script_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/script.min.js") ? Url("script.min.js") : Url("script.js");
-            public static readonly string swiper_min_js = Url("swiper.min.js");
-        }
-    
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class kendo {
             private const string URLPATH = "~/Scripts/kendo";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
@@ -421,6 +412,7 @@ namespace Links
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string kendo_culture_en_min_js = Url("kendo.culture.en.min.js");
                     public static readonly string kendo_culture_it_min_js = Url("kendo.culture.it.min.js");
+                    public static readonly string kendo_culture_pl_min_js = Url("kendo.culture.pl.min.js");
                     public static readonly string kendo_culture_ru_min_js = Url("kendo.culture.ru.min.js");
                 }
             
@@ -442,7 +434,6 @@ namespace Links
             private const string URLPATH = "~/Content/app";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string avion_png = Url("avion.png");
             public static readonly string bill_settings_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bill-settings.min.css") ? Url("bill-settings.min.css") : Url("bill-settings.css");
                  
             public static readonly string calculation_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/calculation-grid.min.css") ? Url("calculation-grid.min.css") : Url("calculation-grid.css");
@@ -505,95 +496,6 @@ namespace Links
                 public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
             }
         
-        }
-    
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class css {
-            private const string URLPATH = "~/Content/css";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string app_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/app.min.css") ? Url("app.min.css") : Url("app.css");
-                 
-            public static readonly string grabbing_png = Url("grabbing.png");
-            public static readonly string pushy_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/pushy.min.css") ? Url("pushy.min.css") : Url("pushy.css");
-                 
-            public static readonly string swiper_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/swiper.min.css") ? Url("swiper.min.css") : Url("swiper.css");
-                 
-        }
-    
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class fonts {
-            private const string URLPATH = "~/Content/fonts";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string boblic_eot = Url("boblic.eot");
-            public static readonly string boblic_ttf = Url("boblic.ttf");
-            public static readonly string boblic_woff = Url("boblic.woff");
-        }
-    
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class images {
-            private const string URLPATH = "~/Content/images";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string icon_map_png = Url("icon-map.png");
-            public static readonly string logo_ely_png = Url("logo-ely.png");
-            public static readonly string logo_trust_png = Url("logo-trust.png");
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class logos {
-                private const string URLPATH = "~/Content/images/logos";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string ann_png = Url("ann.png");
-                public static readonly string armani_png = Url("armani.png");
-                public static readonly string blumarine_png = Url("blumarine.png");
-                public static readonly string cantarelli_png = Url("cantarelli.png");
-                public static readonly string casadei_jpg = Url("casadei.jpg");
-                public static readonly string cesare_png = Url("cesare.png");
-                public static readonly string commedes_jpg = Url("commedes.jpg");
-                public static readonly string costume_jpg = Url("costume.jpg");
-                public static readonly string dkny_png = Url("dkny.png");
-                public static readonly string dolce_jpg = Url("dolce.jpg");
-                public static readonly string dries_png = Url("dries.png");
-                public static readonly string emillio_jpg = Url("emillio.jpg");
-                public static readonly string etro_jpg = Url("etro.jpg");
-                public static readonly string fendi_jpg = Url("fendi.jpg");
-                public static readonly string furla_jpg = Url("furla.jpg");
-                public static readonly string gf_ferre_jpg = Url("gf-ferre.jpg");
-                public static readonly string giuseppe_gif = Url("giuseppe.gif");
-                public static readonly string gucci_jpg = Url("gucci.jpg");
-                public static readonly string guess_png = Url("guess.png");
-                public static readonly string hogan_jpg = Url("hogan.jpg");
-                public static readonly string lang_jpg = Url("lang.jpg");
-                public static readonly string marella_gif = Url("marella.gif");
-                public static readonly string max_png = Url("max.png");
-                public static readonly string maxmara_png = Url("maxmara.png");
-                public static readonly string missoni_jpeg = Url("missoni.jpeg");
-                public static readonly string miu_png = Url("miu.png");
-                public static readonly string mm_png = Url("mm.png");
-                public static readonly string morch_jpg = Url("morch.jpg");
-                public static readonly string parosh_jpg = Url("parosh.jpg");
-                public static readonly string paul_gif = Url("paul.gif");
-                public static readonly string prada_png = Url("prada.png");
-                public static readonly string roberto_png = Url("roberto.png");
-                public static readonly string sander_jpg = Url("sander.jpg");
-                public static readonly string versace_jpg = Url("versace.jpg");
-                public static readonly string westwood_jpg = Url("westwood.jpg");
-                public static readonly string yves_jpg = Url("yves.jpg");
-            }
-        
-            public static readonly string map_pic_png = Url("map-pic.png");
-            public static readonly string preudomap_pic_1_png = Url("preudomap-pic-1.png");
-            public static readonly string preudomap_pic_2_png = Url("preudomap-pic-2.png");
-            public static readonly string slider_bottom_1_jpg = Url("slider-bottom-1.jpg");
-            public static readonly string slider_bottom_2_jpg = Url("slider-bottom-2.jpg");
-            public static readonly string slider_bottom_3_jpg = Url("slider-bottom-3.jpg");
-            public static readonly string slider_bottom_4_jpg = Url("slider-bottom-4.jpg");
-            public static readonly string slider_new_1_jpg = Url("slider-new-1.jpg");
-            public static readonly string slider_new_2_jpg = Url("slider-new-2.jpg");
-            public static readonly string slider_new_3_jpg = Url("slider-new-3.jpg");
-            public static readonly string slider_new_4_jpg = Url("slider-new-4.jpg");
-            public static readonly string sprites_png = Url("sprites.png");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -763,13 +665,334 @@ namespace Links
     
     }
 
+    
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static partial class Bundles
     {
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static partial class Scripts {}
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static partial class Styles {}
+        public static partial class Scripts 
+        {
+            public static partial class app 
+            {
+                public static partial class AirWaybill 
+                {
+                    public static class Assets
+                    {
+                        public const string Columns_js = "~/Scripts/app/AirWaybill/Columns.js"; 
+                        public const string Files_js = "~/Scripts/app/AirWaybill/Files.js"; 
+                        public const string Grid_js = "~/Scripts/app/AirWaybill/Grid.js"; 
+                    }
+                }
+                public static partial class Application 
+                {
+                    public static class Assets
+                    {
+                        public const string Columns_js = "~/Scripts/app/Application/Columns.js"; 
+                        public const string Files_js = "~/Scripts/app/Application/Files.js"; 
+                        public const string Grid_js = "~/Scripts/app/Application/Grid.js"; 
+                    }
+                }
+                public static partial class Calculation 
+                {
+                    public static partial class Admin 
+                    {
+                        public static class Assets
+                        {
+                            public const string Bill_js = "~/Scripts/app/Calculation/Admin/Bill.js"; 
+                            public const string Columns_js = "~/Scripts/app/Calculation/Admin/Columns.js"; 
+                            public const string DataSource_js = "~/Scripts/app/Calculation/Admin/DataSource.js"; 
+                            public const string Grid_js = "~/Scripts/app/Calculation/Admin/Grid.js"; 
+                            public const string RegistryOfPaymentsGrid_js = "~/Scripts/app/Calculation/Admin/RegistryOfPaymentsGrid.js"; 
+                        }
+                    }
+                    public static partial class Client 
+                    {
+                        public static class Assets
+                        {
+                            public const string Columns_js = "~/Scripts/app/Calculation/Client/Columns.js"; 
+                            public const string Grid_js = "~/Scripts/app/Calculation/Client/Grid.js"; 
+                        }
+                    }
+                    public static partial class Sender 
+                    {
+                        public static class Assets
+                        {
+                            public const string Columns_js = "~/Scripts/app/Calculation/Sender/Columns.js"; 
+                            public const string Grid_js = "~/Scripts/app/Calculation/Sender/Grid.js"; 
+                        }
+                    }
+                    public static class Assets
+                    {
+                    }
+                }
+                public static partial class City 
+                {
+                    public static class Assets
+                    {
+                        public const string Grid_js = "~/Scripts/app/City/Grid.js"; 
+                    }
+                }
+                public static partial class Client 
+                {
+                    public static class Assets
+                    {
+                        public const string Grid_js = "~/Scripts/app/Client/Grid.js"; 
+                    }
+                }
+                public static partial class Country 
+                {
+                    public static class Assets
+                    {
+                        public const string Grid_js = "~/Scripts/app/Country/Grid.js"; 
+                    }
+                }
+                public static partial class Forwarder 
+                {
+                    public static partial class Application 
+                    {
+                        public static class Assets
+                        {
+                            public const string Columns_js = "~/Scripts/app/Forwarder/Application/Columns.js"; 
+                            public const string Grid_js = "~/Scripts/app/Forwarder/Application/Grid.js"; 
+                        }
+                    }
+                    public static class Assets
+                    {
+                    }
+                }
+                public static partial class State 
+                {
+                    public static class Assets
+                    {
+                        public const string Edit_js = "~/Scripts/app/State/Edit.js"; 
+                        public const string Grid_js = "~/Scripts/app/State/Grid.js"; 
+                    }
+                }
+                public static partial class Template 
+                {
+                    public static class Assets
+                    {
+                        public const string Edit_js = "~/Scripts/app/Template/Edit.js"; 
+                        public const string Grid_js = "~/Scripts/app/Template/Grid.js"; 
+                    }
+                }
+                public static partial class User 
+                {
+                    public static class Assets
+                    {
+                        public const string Grid_js = "~/Scripts/app/User/Grid.js"; 
+                    }
+                }
+                public static class Assets
+                {
+                    public const string Alicargo_js = "~/Scripts/app/Alicargo.js"; 
+                    public const string Common_js = "~/Scripts/app/Common.js"; 
+                    public const string CurrencyType_js = "~/Scripts/app/CurrencyType.js"; 
+                    public const string Files_js = "~/Scripts/app/Files.js"; 
+                    public const string it_js = "~/Scripts/app/it.js"; 
+                    public const string pl_js = "~/Scripts/app/pl.js"; 
+                    public const string pl_js_ = "~/Scripts/app/pl.js"; 
+                    public const string ru_js = "~/Scripts/app/ru.js"; 
+                }
+            }
+            public static partial class jQuery 
+            {
+                public static partial class globalize 
+                {
+                    public static partial class cultures 
+                    {
+                        public static class Assets
+                        {
+                            public const string globalize_culture_it_js = "~/Scripts/jQuery/globalize/cultures/globalize.culture.it.js"; 
+                            public const string globalize_culture_pl_js = "~/Scripts/jQuery/globalize/cultures/globalize.culture.pl.js"; 
+                            public const string globalize_culture_pl_js_ = "~/Scripts/jQuery/globalize/cultures/globalize.culture.pl.js"; 
+                            public const string globalize_culture_ru_js = "~/Scripts/jQuery/globalize/cultures/globalize.culture.ru.js"; 
+                        }
+                    }
+                    public static class Assets
+                    {
+                        public const string globalize_js = "~/Scripts/jQuery/globalize/globalize.js"; 
+                    }
+                }
+                public static class Assets
+                {
+                    public const string jquery_2_1_1_intellisense_js = "~/Scripts/jQuery/jquery-2.1.1.intellisense.js"; 
+                    public const string jquery_2_1_1_js = "~/Scripts/jQuery/jquery-2.1.1.js"; 
+                    public const string jquery_2_1_1_min_js = "~/Scripts/jQuery/jquery-2.1.1.min.js"; 
+                    public const string jquery_ui_1_11_1_js = "~/Scripts/jQuery/jquery-ui-1.11.1.js"; 
+                    public const string jquery_ui_min_1_11_1_js = "~/Scripts/jQuery/jquery-ui.min-1.11.1.js"; 
+                    public const string jquery_cookie_js = "~/Scripts/jQuery/jquery.cookie.js"; 
+                    public const string jquery_signalR_2_1_2_js = "~/Scripts/jQuery/jquery.signalR-2.1.2.js"; 
+                    public const string jquery_signalR_2_1_2_min_js = "~/Scripts/jQuery/jquery.signalR-2.1.2.min.js"; 
+                    public const string jquery_unobtrusive_ajax_js = "~/Scripts/jQuery/jquery.unobtrusive-ajax.js"; 
+                    public const string jquery_unobtrusive_ajax_min_js = "~/Scripts/jQuery/jquery.unobtrusive-ajax.min.js"; 
+                    public const string jquery_validate_js = "~/Scripts/jQuery/jquery.validate.js"; 
+                    public const string jquery_validate_min_js = "~/Scripts/jQuery/jquery.validate.min.js"; 
+                    public const string jquery_validate_unobtrusive_js = "~/Scripts/jQuery/jquery.validate.unobtrusive.js"; 
+                    public const string jquery_validate_unobtrusive_min_js = "~/Scripts/jQuery/jquery.validate.unobtrusive.min.js"; 
+                }
+            }
+            public static partial class kendo 
+            {
+                public static partial class _2014_1_318 
+                {
+                    public static partial class cultures 
+                    {
+                        public static class Assets
+                        {
+                            public const string kendo_culture_en_min_js = "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.en.min.js"; 
+                            public const string kendo_culture_it_min_js = "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.it.min.js"; 
+                            public const string kendo_culture_pl_min_js = "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.pl.min.js"; 
+                            public const string kendo_culture_ru_min_js = "~/Scripts/kendo/2014.1.318/cultures/kendo.culture.ru.min.js"; 
+                        }
+                    }
+                    public static class Assets
+                    {
+                        public const string kendo_web_min_js = "~/Scripts/kendo/2014.1.318/kendo.web.min.js"; 
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static class Assets
+            {
+            }
+        }
+        public static partial class Content 
+        {
+            public static partial class app 
+            {
+                public static class Assets
+                {
+                    public const string bill_settings_css = "~/Content/app/bill-settings.css";
+                    public const string calculation_grid_css = "~/Content/app/calculation-grid.css";
+                    public const string common_css = "~/Content/app/common.css";
+                    public const string kendo_css = "~/Content/app/kendo.css";
+                    public const string layout_css = "~/Content/app/layout.css";
+                    public const string payment_css = "~/Content/app/payment.css";
+                }
+            }
+            public static partial class bootstrap 
+            {
+                public static partial class css 
+                {
+                    public static class Assets
+                    {
+                        public const string bootstrap_responsive_css = "~/Content/bootstrap/css/bootstrap-responsive.css";
+                        public const string bootstrap_responsive_min_css = "~/Content/bootstrap/css/bootstrap-responsive.min.css";
+                        public const string bootstrap_css = "~/Content/bootstrap/css/bootstrap.css";
+                        public const string bootstrap_min_css = "~/Content/bootstrap/css/bootstrap.min.css";
+                    }
+                }
+                public static partial class fileupload 
+                {
+                    public static class Assets
+                    {
+                        public const string bootstrap_fileupload_css = "~/Content/bootstrap/fileupload/bootstrap-fileupload.css";
+                        public const string bootstrap_fileupload_js = "~/Content/bootstrap/fileupload/bootstrap-fileupload.js"; 
+                        public const string bootstrap_fileupload_min_css = "~/Content/bootstrap/fileupload/bootstrap-fileupload.min.css";
+                        public const string bootstrap_fileupload_min_js = "~/Content/bootstrap/fileupload/bootstrap-fileupload.min.js"; 
+                    }
+                }
+                public static partial class img 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static partial class js 
+                {
+                    public static class Assets
+                    {
+                        public const string bootstrap_js = "~/Content/bootstrap/js/bootstrap.js"; 
+                        public const string bootstrap_min_js = "~/Content/bootstrap/js/bootstrap.min.js"; 
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static partial class kendo 
+            {
+                public static partial class _2014_1_318 
+                {
+                    public static partial class Default 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static partial class textures 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static class Assets
+                    {
+                        public const string kendo_common_min_css = "~/Content/kendo/2014.1.318/kendo.common.min.css";
+                        public const string kendo_default_min_css = "~/Content/kendo/2014.1.318/kendo.default.min.css";
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static partial class themes 
+            {
+                public static partial class @base 
+                {
+                    public static partial class images 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static class Assets
+                    {
+                        public const string accordion_css = "~/Content/themes/base/accordion.css";
+                        public const string all_css = "~/Content/themes/base/all.css";
+                        public const string autocomplete_css = "~/Content/themes/base/autocomplete.css";
+                        public const string base_css = "~/Content/themes/base/base.css";
+                        public const string button_css = "~/Content/themes/base/button.css";
+                        public const string core_css = "~/Content/themes/base/core.css";
+                        public const string datepicker_css = "~/Content/themes/base/datepicker.css";
+                        public const string dialog_css = "~/Content/themes/base/dialog.css";
+                        public const string draggable_css = "~/Content/themes/base/draggable.css";
+                        public const string menu_css = "~/Content/themes/base/menu.css";
+                        public const string progressbar_css = "~/Content/themes/base/progressbar.css";
+                        public const string resizable_css = "~/Content/themes/base/resizable.css";
+                        public const string selectable_css = "~/Content/themes/base/selectable.css";
+                        public const string selectmenu_css = "~/Content/themes/base/selectmenu.css";
+                        public const string slider_css = "~/Content/themes/base/slider.css";
+                        public const string sortable_css = "~/Content/themes/base/sortable.css";
+                        public const string spinner_css = "~/Content/themes/base/spinner.css";
+                        public const string tabs_css = "~/Content/themes/base/tabs.css";
+                        public const string theme_css = "~/Content/themes/base/theme.css";
+                        public const string tooltip_css = "~/Content/themes/base/tooltip.css";
+                    }
+                }
+                public static partial class jMetro 
+                {
+                    public static partial class images 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static class Assets
+                    {
+                        public const string jquery_ui_css = "~/Content/themes/jMetro/jquery-ui.css";
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static class Assets
+            {
+            }
+        }
     }
 }
 
@@ -803,6 +1026,6 @@ internal static class T4MVCHelpers {
 
 
 #endregion T4MVC
-#pragma warning restore 1591, 3008, 3009
+#pragma warning restore 1591, 3008, 3009, 0108, 0114
 
 

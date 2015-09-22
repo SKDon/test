@@ -24,13 +24,13 @@ namespace Alicargo.Controllers.Application
 
 			var city = _cities.All(TwoLetterISOLanguageName.English).Single(x => x.Id == data.TransitCityId);
 
-			ViewBag.CityName = city.Name;
-
-			return View(new ApplicationPrintModel
-			{
-				City = city.Name,
-				Text = data.GetApplicationDisplay()
-			});
+			return View(
+				new ApplicationPrintModel
+				{
+					City = city.Name,
+					ClientNic = data.ClientNic,
+					Text = data.GetApplicationDisplay()
+				});
 		}
 	}
 }

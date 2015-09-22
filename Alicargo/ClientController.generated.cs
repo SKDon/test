@@ -4,7 +4,9 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
-#pragma warning disable 1591, 3008, 3009
+// 0108: suppress "Foo hides inherited member Foo. Use the new keyword if hiding was intended." when a controller and its abstract parent are both processed
+// 0114: suppress "Foo.BarController.Baz()' hides inherited member 'Qux.BarController.Baz()'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword." when an action (with an argument) overrides an action in a parent controller
+#pragma warning disable 1591, 3008, 3009, 0108, 0114
 #region T4MVC
 
 using System;
@@ -122,7 +124,7 @@ namespace Alicargo.Controllers.User
         public class ActionParamsClass_Create
         {
             public readonly string model = "model";
-            public readonly string transitModel = "transitModel";
+            public readonly string transitModel = "Transit";
         }
         static readonly ActionParamsClass_Contract s_params_Contract = new ActionParamsClass_Contract();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -140,7 +142,7 @@ namespace Alicargo.Controllers.User
         {
             public readonly string id = "id";
             public readonly string model = "model";
-            public readonly string transitModel = "transitModel";
+            public readonly string transitModel = "Transit";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -217,7 +219,7 @@ namespace Alicargo.Controllers.User
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
             CreateOverride(callInfo, model, transitModel);
             return callInfo;
         }
@@ -255,7 +257,7 @@ namespace Alicargo.Controllers.User
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "transitModel", transitModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Transit", transitModel);
             EditOverride(callInfo, id, model, transitModel);
             return callInfo;
         }
@@ -264,4 +266,4 @@ namespace Alicargo.Controllers.User
 }
 
 #endregion T4MVC
-#pragma warning restore 1591, 3008, 3009
+#pragma warning restore 1591, 3008, 3009, 0108, 0114

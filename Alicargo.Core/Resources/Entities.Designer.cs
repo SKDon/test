@@ -988,7 +988,7 @@ namespace Alicargo.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date of the state .
+        ///   Looks up a localized string similar to Date of the state.
         /// </summary>
         public static string StateChangeTimestamp {
             get {
