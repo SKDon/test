@@ -1,51 +1,48 @@
-﻿@model ApplicationPrintModel
+﻿@using Alicargo.DataAccess.Contracts.Helpers
+@model ApplicationPrintModel
 @{
-    Layout = null;
+	Layout = null;
 }
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Avion Russia</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
+	<meta charset="utf-8"/>
+	<title>Avion Russia</title>
+	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
 
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
+		.container {
+			left: 50%;
+			margin-right: -50%;
+			position: absolute;
+			text-align: center;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
 
-        span {
-            font-size: 30px;
-            font-weight: bold;
-        }
+		span {
+			font-size: 30px;
+			font-weight: bold;
+		}
 
-            span.text {
-                font-size: 80px;
-            }
-    </style>
+		span.text { font-size: 80px; }
+	</style>
 </head>
 <body>
-    <div class="container">
-        <span class="text">
-            @Html.DisplayFor(model => model.Text)
-        </span>
-        <br />
-        <span>
-            @Html.DisplayFor(model => model.City)
-        </span>
-        <script>
-            window.print();
-        </script>
-    </div>
+<div class="container">
+	<span class="text">@Html.DisplayFor(model => model.Text)</span>
+	<br/>
+	<span>@(EmailsHelper.DefaultFrom == "Robot@cargo-trans.li"
+		        ? Html.DisplayFor(model => model.ClientNic)
+		        : Html.DisplayFor(model => model.City))</span>
+	<script>
+		window.print();
+	</script>
+</div>
 </body>
 </html>
