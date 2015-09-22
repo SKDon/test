@@ -65,12 +65,12 @@ namespace Alicargo.Services.Application
 				DateOfCargoReceipt = null,
 				TransitReference = null,
 				ClientId = clientId,
-				PickupCost = null,
-				TransitCost = null,
-				FactureCost = null,
-				FactureCostEx = null,
-				TariffPerKg = null,
-				ScotchCostEdited = null,
+				PickupCost = client.PickupCost,
+				TransitCost = client.TransitCost,
+				FactureCost = client.FactureCost,
+				FactureCostEx = client.FactureCostEx,
+				TariffPerKg = client.TariffPerKg,
+				ScotchCostEdited = client.ScotchCostEdited,
 				FactureCostEdited = null,
 				FactureCostExEdited = null,
 				TransitCostEdited = null,
@@ -78,7 +78,7 @@ namespace Alicargo.Services.Application
 				SenderId = client.DefaultSenderId,
 				SenderRate = null,
 				ForwarderId = forwarderId,
-				InsuranceRate = _applications.GetDefaultInsuranceRate()
+				InsuranceRate = client.InsuranceRate ?? _applications.GetDefaultInsuranceRate()
 			};
 
 			return _updater.Add(data);

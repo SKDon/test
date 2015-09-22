@@ -26,10 +26,18 @@ AS BEGIN
 		u.[TwoLetterISOLanguageName] AS [Language],
 		c.[ContractDate],
 		c.[ContractNumber],
-		C.[DefaultSenderId]
-	  FROM [dbo].[Client] c
-	  JOIN [dbo].[User] u
-	  ON c.[UserId] = u.[Id]
+		C.[DefaultSenderId],
+		c.[FactureCost],
+		c.[FactureCostEx],
+		c.[TransitCost],
+		c.[PickupCost],
+		c.[InsuranceRate],
+		c.[TariffPerKg],
+		c.[ScotchCostEdited],
+		c.[Comments]
+		FROM [dbo].[Client] c
+			JOIN [dbo].[User] u
+				ON c.[UserId] = u.[Id]
 
 END
 GO

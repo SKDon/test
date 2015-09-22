@@ -129,43 +129,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\ApplicationFileType.it.Designer.cs">
-      <DependentUpon>ApplicationFileType.it.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\AwbFileType.ru.Designer.cs">
-      <DependentUpon>AwbFileType.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\ApplicationFileType.ru.Designer.cs">
-      <DependentUpon>ApplicationFileType.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\Enums.Designer.cs">
       <DependentUpon>Enums.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Enums.it.Designer.cs">
-      <DependentUpon>Enums.it.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Enums.ru.Designer.cs">
-      <DependentUpon>Enums.ru.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\EventType.Designer.cs">
       <DependentUpon>EventType.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\EventType.ru.Designer.cs">
-      <DependentUpon>EventType.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -200,42 +170,30 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AwbFileType.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ApplicationFileType.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationFileType.it.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ApplicationFileType.it.resx" />
     <EmbeddedResource Include="Resources\ApplicationFileType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationFileType.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\AwbFileType.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AwbFileType.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ApplicationFileType.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationFileType.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.it.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AwbFileType.ru.resx" />
+    <EmbeddedResource Include="Resources\ApplicationFileType.ru.resx" />
+    <EmbeddedResource Include="Resources\Enums.it.resx" />
     <EmbeddedResource Include="Resources\Enums.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Enums.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Enums.ru.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\EventType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EventType.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\EventType.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>EventType.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EventType.ru.resx" />
+    <EmbeddedResource Include="Resources\ApplicationFileType.pl.resx" />
+    <EmbeddedResource Include="Resources\AwbFileType.pl.resx" />
+    <EmbeddedResource Include="Resources\Enums.pl.resx" />
+    <EmbeddedResource Include="Resources\EventType.pl.resx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alicargo.Utilities\Alicargo.Utilities.csproj">

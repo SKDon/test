@@ -31,7 +31,8 @@ namespace Alicargo.Jobs.Helpers
 			{
 				TwoLetterISOLanguageName.Russian,
 				TwoLetterISOLanguageName.English,
-				TwoLetterISOLanguageName.Italian
+				TwoLetterISOLanguageName.Italian,
+				TwoLetterISOLanguageName.Polish
 			};
 
 			priority.Remove(language);

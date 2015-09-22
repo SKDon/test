@@ -2,7 +2,6 @@
 using System.Linq;
 using Alicargo.Core.AirWaybill;
 using Alicargo.Core.Calculation;
-using Alicargo.DataAccess.Contracts.Contracts;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
 using Alicargo.DataAccess.Contracts.Contracts.Awb;
 using Alicargo.DataAccess.Contracts.Enums;
@@ -36,7 +35,7 @@ namespace Alicargo.Services.Calculation
 			long total;
 			var applications = GetCalculatedApplications(clientId, take, skip, out total);
 
-			var awbIds = applications.Select(x => x.AirWaybillId.Value).ToArray();
+			var awbIds = applications.Select(x => x.AirWaybillId ?? 0).ToArray();
 
 			var awbsData = _awbRepository.Get(awbIds).ToArray();
 
@@ -76,7 +75,7 @@ namespace Alicargo.Services.Calculation
 			return applications;
 		}
 
-		private static IEnumerable<ClientCalculationItem> GetItems(ApplicationData[] applications)
+		private static IEnumerable<ClientCalculationItem> GetItems(IEnumerable<ApplicationData> applications)
 		{
 			return applications.Select(a => new ClientCalculationItem
 			{
@@ -95,7 +94,7 @@ namespace Alicargo.Services.Calculation
 				ValueCurrencyId = a.CurrencyId,
 				Weight = a.Weight,
 				PickupCost = a.GetAdjustedPickupCost(),
-				AirWaybillId = a.AirWaybillId.Value,
+				AirWaybillId = a.AirWaybillId ?? 0,
 				DisplayNumber = a.GetApplicationDisplay(),
 				TotalTariffCost = CalculationHelper.GetTotalTariffCost(a.CalculationTotalTariffCost, a.TariffPerKg, a.Weight),
 				Profit = GetProfit(a),
@@ -122,15 +121,15 @@ namespace Alicargo.Services.Calculation
 		private static decimal GetProfit(ApplicationData application)
 		{
 			return application.CalculationProfit
-			       ?? CalculationHelper.GetTotalTariffCost(application.CalculationTotalTariffCost,
-				       application.TariffPerKg,
-				       application.Weight)
-			       + (application.GetAdjustedScotchCost() ?? 0)
-			       + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
-			       + (application.GetAdjustedFactureCost() ?? 0)
-			       + (application.GetAdjustedFactureCostEx() ?? 0)
-			       + (application.GetAdjustedPickupCost() ?? 0)
-			       + (application.GetAdjustedTransitCost() ?? 0);
+				   ?? CalculationHelper.GetTotalTariffCost(application.CalculationTotalTariffCost,
+					   application.TariffPerKg,
+					   application.Weight)
+				   + (application.GetAdjustedScotchCost() ?? 0)
+				   + CalculationHelper.GetInsuranceCost(application.Value, application.InsuranceRate)
+				   + (application.GetAdjustedFactureCost() ?? 0)
+				   + (application.GetAdjustedFactureCostEx() ?? 0)
+				   + (application.GetAdjustedPickupCost() ?? 0)
+				   + (application.GetAdjustedTransitCost() ?? 0);
 		}
 	}
 }

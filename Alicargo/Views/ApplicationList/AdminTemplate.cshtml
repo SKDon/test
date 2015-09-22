@@ -23,7 +23,7 @@
 	@Html.DropDownListFor(x => x.AirWaybills, Model.AirWaybills.Select(x => new SelectListItem
 	{
 		Selected = false,
-		Text = x.Value,
+		Text = x.Value.Replace("#", "\\#"),
 		Value = x.Key.ToString(CultureInfo.InvariantCulture)
 	}), "", new { @class = "AirWaybill-select" })
 }

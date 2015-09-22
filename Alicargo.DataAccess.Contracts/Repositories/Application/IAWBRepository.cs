@@ -7,38 +7,51 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 	{
 		long Add(AirWaybillEditData data, long stateId, long creatorUserId);
 
-		long Count(long? brokerId = null);
+		long Count(long? brokerId = null, long? senderUserId = null);
 
 		void Delete(long id);
 
 		AirWaybillData[] Get(params long[] ids);
 
 		AirWaybillAggregate[] GetAggregate(
-			long[] awbIds, long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long[] awbIds,
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		EmailData[] GetCarrierEmails(long awbId);
 		EmailData[] GetClientEmails(long awbId);
 		EmailData[] GetForwarderEmails(long awbId);
 
-		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null);
+		AirWaybillData[] GetRange(int take, long skip, long? brokerId = null, long? senderUserId = null);
 		EmailData[] GetSenderEmails(long awbId);
 
 		int GetTotalCountWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		decimal GetTotalValueWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		float GetTotalVolumeWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
+
+		float GetTotalDocWeightWithouAwb(long? clientId, long? senderId, long? forwarderId, long? carrierId);
 
 		float GetTotalWeightWithouAwb(
-			long? clientId = null, long? senderId = null,
-			long? forwarderId = null, long? carrierId = null);
+			long? clientId = null,
+			long? senderId = null,
+			long? forwarderId = null,
+			long? carrierId = null);
 
 		void SetAdditionalCost(long awbId, decimal? additionalCost);
 

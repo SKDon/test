@@ -81,7 +81,11 @@ namespace Alicargo.Services.Application
 				SenderId = model.SenderId,
 				ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, null),
 				SenderRate = null,
-				InsuranceRate = model.InsuranceRate / 100
+				InsuranceRate = model.InsuranceRate / 100,
+				CountInInvoce = model.CountInInvoce,
+				DocumentWeight = model.DocumentWeight,
+				MRN = model.MRN,
+                Comments = model.Comments
 			};
 
 			return _editor.Add(data);
@@ -124,6 +128,10 @@ namespace Alicargo.Services.Application
 			data.SenderId = model.SenderId;
 			data.ForwarderId = GetForwarderId(model.ForwarderId, transit.CityId, data.ForwarderId);
 			data.InsuranceRate = model.InsuranceRate / 100;
+			data.CountInInvoce = model.CountInInvoce;
+			data.DocumentWeight = model.DocumentWeight;
+			data.MRN = model.MRN;
+		    data.Comments = model.Comments;
 
 			_editor.Update(applicationId, data);
 		}
@@ -215,9 +223,9 @@ namespace Alicargo.Services.Application
 			_editor.SetFactureCostExEdited(id, factureCostEx);
 		}
 
-		public void SetScotchCostEdited(long id, decimal? scotchCost)
+		public void SetScotchCostEditedByTotalCost(long id, decimal? totalScotchCost)
 		{
-			_editor.SetScotchCostEdited(id, scotchCost);
+			_editor.SetScotchCostEditedByTotalCost(id, totalScotchCost);
 		}
 
 		public void SetSenderRate(long id, decimal? senderRate)

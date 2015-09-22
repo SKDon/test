@@ -45,7 +45,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="backup-db-alicargo-all.ps1" />
+    <None Include="db-maintain.ps1" />
+    <None Include="delete-old-emails.ps1" />
     <None Include="resend-failed-emails.ps1" />
+    <None Include="Scripts\backup-db.ps1" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -55,10 +58,22 @@
     <Content Include="Databases\Alicargo-0_0-2_8.sql" />
     <Content Include="Databases\Alicargo-3_2-3_3.sql" />
     <Content Include="Databases\Alicargo-3_1-3_2.sql" />
+    <Content Include="Databases\Alicargo-3_4-3_5.sql" />
+    <Content Include="Databases\Alicargo-3_3-3_4.sql" />
+    <Content Include="Databases\Alicargo-3_5-3_6.sql" />
+    <Content Include="Databases\Alicargo-3_6-3_7.sql" />
     <Content Include="Databases\Alicargo_Files-0_0-2_8.sql" />
     <Content Include="Databases\Clean-db.sql" />
     <Content Include="Tasks\resend-failed-emails.xml" />
     <Content Include="restore-alicargo_release-3_1.sql" />
+    <Content Include="Tasks\Backup DB.xml" />
+    <Content Include="Tasks\db-maintain.xml" />
+    <Content Include="Tasks\delete-old-emails.xml" />
+    <Content Include="Tasks\resend-failed-emails.xml" />
+    <None Include="Scripts\run-sql.ps1" />
+    <Content Include="Scripts\db-maintain.sql" />
+    <Content Include="Scripts\delete-old-emails.sql" />
+    <Content Include="Scripts\resend-failed-emails.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

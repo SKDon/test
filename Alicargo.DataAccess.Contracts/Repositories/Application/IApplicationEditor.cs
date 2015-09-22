@@ -14,7 +14,7 @@ namespace Alicargo.DataAccess.Contracts.Repositories.Application
 		void SetFactureCostEdited(long id, decimal? factureCost);
 		void SetFactureCostExEdited(long id, decimal? factureCostEx);
 		void SetPickupCostEdited(long id, decimal? pickupCost);
-		void SetScotchCostEdited(long id, decimal? scotchCost);
+		void SetScotchCostEditedByTotalCost(long id, decimal? totalScotchCost);
 		void SetSenderRate(long id, decimal? senderRate);
 		void SetState(long id, long stateId);
 		void SetTariffPerKg(long id, decimal? tariffPerKg);

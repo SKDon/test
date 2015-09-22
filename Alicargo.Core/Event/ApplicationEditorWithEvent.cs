@@ -146,9 +146,9 @@ namespace Alicargo.Core.Event
 			_editor.SetFactureCostEdited(applicationId, factureCost);
 		}
 
-		public void SetScotchCostEdited(long applicationId, decimal? scotchCost)
+		public void SetScotchCostEditedByTotalCost(long applicationId, decimal? totalScotchCost)
 		{
-			_editor.SetScotchCostEdited(applicationId, scotchCost);
+			_editor.SetScotchCostEditedByTotalCost(applicationId, totalScotchCost);
 		}
 
 		public void SetSenderRate(long applicationId, decimal? senderRate)

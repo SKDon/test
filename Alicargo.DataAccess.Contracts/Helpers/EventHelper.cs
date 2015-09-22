@@ -39,5 +39,12 @@ namespace Alicargo.DataAccess.Contracts.Helpers
 			EventType.AWBFileUploaded,
 			EventType.DrawFileUploaded
 		};
+
+		public static readonly EventType[] ClientEventTypes =
+		{
+			EventType.BalanceIncreased,
+			EventType.BalanceDecreased,
+			EventType.ClientAdded
+		};
 	}
 }

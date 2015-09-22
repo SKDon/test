@@ -6,7 +6,6 @@
 @helper EditButton()
 {
 	<a href="@Url.Action(MVC.SenderApplication.Edit())/#= Id #" class="btn btn-primary">@Pages.Edit</a>
-	<button type="button" class="btn btn-danger delete-application">@Pages.Delete</button>
 }
 
 @helper SelectAirWaybill()
@@ -18,7 +17,7 @@
 	@Html.DropDownListFor(x => x.AirWaybills, Model.AirWaybills.Select(x => new SelectListItem
 	{
 		Selected = false,
-		Text = x.Value,
+		Text = x.Value.Replace("#", "\\#"),
 		Value = x.Key.ToString(CultureInfo.InvariantCulture)
 	}), "", new { @class = "AirWaybill-select" })
 }

@@ -109,7 +109,7 @@ namespace Alicargo.Services.Calculation
 			return groups;
 		}
 
-		private static SenderCalculationItem[] GetItems(ApplicationData[] applications)
+		private static SenderCalculationItem[] GetItems(IEnumerable<ApplicationData> applications)
 		{
 			return applications.Select(a => new SenderCalculationItem
 			{
@@ -149,7 +149,7 @@ namespace Alicargo.Services.Calculation
 					TotalCostOfSenderForWeight = g.TotalCostOfSenderForWeight,
 					FlightCost = g.FlightCost,
 					TotalSenderRate = rows.Sum(x => CalculationHelper.GetTotalSenderRate(x.SenderRate, x.Weight)),
-					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderScotchCost(tariffs, x.SenderId, x.Count) ?? 0),
+					TotalScotchCost = rows.Sum(x => CalculationHelper.GetSenderTapeTariff(tariffs, x.SenderId) * x.Count) ?? 0,
 					TotalFactureCost = rows.Sum(x => x.FactureCost ?? 0),
 					TotalFactureCostEx = rows.Sum(x => x.FactureCostEx ?? 0),
 					TotalPickupCost = rows.Sum(x => x.PickupCost ?? 0),

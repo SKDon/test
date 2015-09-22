@@ -178,7 +178,7 @@ namespace Alicargo.Controllers.Calculation
 		[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 		public virtual JsonResult SetScotchCostEdited(long id, long awbId, decimal? scotchCost)
 		{
-			_applications.SetScotchCostEdited(id, scotchCost);
+			_applications.SetScotchCostEditedByTotalCost(id, scotchCost);
 
 			var data = _presenter.Row(awbId);
 

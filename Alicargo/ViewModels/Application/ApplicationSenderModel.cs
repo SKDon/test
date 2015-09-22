@@ -66,5 +66,21 @@ namespace Alicargo.ViewModels.Application
 
 		[DisplayNameLocalized(typeof(Entities), "WarehouseWorkingTime")]
 		public string WarehouseWorkingTime { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "MRN")]
+		public string MRN { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "CountInInvoce")]
+		public int? CountInInvoce { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "DocumentWeight")]
+		public float? DocumentWeight { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "TransitCost")]
+		public decimal? TransitCost { get; set; }
+
+		[DataType(DataType.MultilineText)]
+		[DisplayNameLocalized(typeof(Entities), "Comments")]
+		public string Comments { get; set; }
 	}
 }

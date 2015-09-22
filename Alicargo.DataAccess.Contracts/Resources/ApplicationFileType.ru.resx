@@ -138,4 +138,10 @@
   <data name="Torg12" xml:space="preserve">
     <value>Торг 12</value>
   </data>
+  <data name="Ex1">
+    <value>EX-1</value>
+  </data>
+  <data name="T1">
+    <value>T1</value>
+  </data>
 </root>

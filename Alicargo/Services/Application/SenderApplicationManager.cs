@@ -1,5 +1,6 @@
 ﻿using Alicargo.Core.Contracts.Users;
 using Alicargo.DataAccess.Contracts.Contracts.Application;
+using Alicargo.DataAccess.Contracts.Contracts.User;
 using Alicargo.DataAccess.Contracts.Repositories;
 using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.Services.Abstract;
@@ -44,15 +45,20 @@ namespace Alicargo.Services.Application
 					CurrencyId = application.CurrencyId
 				},
 				Volume = application.Volume,
-				FactureCost = application.FactureCost,
-				FactureCostEx = application.FactureCostEx,
-				PickupCost = application.PickupCost,
 				CountryId = application.CountryId,
 				AddressLoad = application.AddressLoad,
 				FactoryContact = application.FactoryContact,
 				FactoryEmail = application.FactoryEmail,
 				FactoryPhone = application.FactoryPhone,
-				WarehouseWorkingTime = application.WarehouseWorkingTime
+				WarehouseWorkingTime = application.WarehouseWorkingTime,
+				MRN = application.MRN,
+				CountInInvoce = application.CountInInvoce,
+				DocumentWeight = application.DocumentWeight,
+				FactureCost = application.FactureCost,
+				FactureCostEx = application.FactureCostEx,
+				PickupCost = application.PickupCost,
+				TransitCost = application.TransitCost,
+				Comments = application.Comments
 			};
 		}
 
@@ -65,16 +71,17 @@ namespace Alicargo.Services.Application
 			_editor.Update(id, applicationData);
 		}
 
-		public void Add(ApplicationSenderModel model, long clientId, long creatorSenderId)
+		public void Add(ApplicationSenderModel model, ClientData client, long creatorSenderId)
 		{
 			var application = new ApplicationEditData
 			{
-				InsuranceRate = _applications.GetDefaultInsuranceRate()
+				InsuranceRate = client.InsuranceRate ?? _applications.GetDefaultInsuranceRate(),
+				ScotchCostEdited = client.ScotchCostEdited
 			};
 
 			Map(model, application);
 
-			Add(application, clientId, creatorSenderId);
+			Add(application, client.ClientId, creatorSenderId);
 		}
 
 		private void Add(ApplicationEditData application, long clientId, long senderId)
@@ -105,12 +112,17 @@ namespace Alicargo.Services.Application
 			to.FactureCost = from.FactureCost;
 			to.FactureCostEx = from.FactureCostEx;
 			to.PickupCost = from.PickupCost;
+			to.TransitCost = from.TransitCost;
 			to.CountryId = from.CountryId;
 			to.AddressLoad = from.AddressLoad;
 			to.FactoryContact = from.FactoryContact;
 			to.FactoryEmail = from.FactoryEmail;
 			to.FactoryPhone = from.FactoryPhone;
 			to.WarehouseWorkingTime = from.WarehouseWorkingTime;
+			to.CountInInvoce = from.CountInInvoce;
+			to.DocumentWeight = from.DocumentWeight;
+			to.MRN = from.MRN;
+			to.Comments = from.Comments;
 		}
 	}
 }

@@ -10,6 +10,7 @@ using Alicargo.DataAccess.Contracts.Repositories.Application;
 using Alicargo.DataAccess.Contracts.Repositories.User;
 using Alicargo.MvcHelpers.Filters;
 using Alicargo.Services.Abstract;
+using Alicargo.Utilities;
 using Alicargo.ViewModels;
 using Microsoft.Ajax.Utilities;
 
@@ -25,6 +26,7 @@ namespace Alicargo.Controllers.Awb
 		private readonly IBrokerRepository _brokers;
 		private readonly IStateConfig _config;
 		private readonly IIdentityService _identity;
+		private readonly ISenderRepository _senders;
 
 		public AirWaybillController(
 			IAwbPresenter awbPresenter,
@@ -33,6 +35,7 @@ namespace Alicargo.Controllers.Awb
 			IStateConfig config,
 			IAwbRepository awbs,
 			IAwbStateManager awbStateManager,
+			ISenderRepository senders,
 			IBrokerRepository brokers,
 			IIdentityService identity)
 		{
@@ -43,6 +46,7 @@ namespace Alicargo.Controllers.Awb
 			_config = config;
 			_awbs = awbs;
 			_awbStateManager = awbStateManager;
+			_senders = senders;
 			_brokers = brokers;
 			_identity = identity;
 		}
@@ -61,14 +65,11 @@ namespace Alicargo.Controllers.Awb
 		[Access(RoleType.Admin, RoleType.Manager, RoleType.Broker, RoleType.Sender)]
 		public virtual JsonResult List(int take, int skip)
 		{
-			long? brokerId = null;
-			if(_identity.IsInRole(RoleType.Broker) && _identity.IsAuthenticated)
-			{
-				var broker = _brokers.GetByUserId(_identity.Id);
-				brokerId = broker.Id;
-			}
+			var brokerId = _brokers.GetByUserId(_identity.Id).With(x => (int?)x.Id);
 
-			var list = _awbPresenter.List(take, skip, brokerId, _identity.Language);
+			var senderUserId = _senders.GetByUserId(_identity.Id).With(x => _identity.Id, (long?)null);
+
+			var list = _awbPresenter.List(take, skip, brokerId, senderUserId, _identity.Language);
 
 			return Json(list);
 		}

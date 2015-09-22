@@ -46,6 +46,7 @@ namespace Alicargo.BlackBox.Tests.Controllers
 				.With(x => x.Emails, "mail@mail.com")
 				.With(x => x.Authentication, authentication)
 				.With(x => x.ContractDate, DateTimeProvider.Now.ToString())
+				.With(x => x.DefaultSenderId, TestConstants.TestSenderId)
 				.Create();
 			var transit = _mock.Build<TransitEditModel>()
 				.With(x => x.CityId, TestConstants.TestCityId1)
@@ -58,8 +59,13 @@ namespace Alicargo.BlackBox.Tests.Controllers
 
 			client.User.PasswordHash.Should().NotBe(new byte[0]);
 			client.User.PasswordSalt.Should().NotBe(new byte[0]);
-			client.ShouldBeEquivalentTo(model, options => options.ExcludingMissingProperties().Excluding(x=>x.ContractDate));
+			client.ShouldBeEquivalentTo(
+				model,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.ContractDate)
+					.Excluding(x => x.InsuranceRate));
 			client.ContractDate.ToString().ShouldBeEquivalentTo(model.ContractDate);
+			client.InsuranceRate.ShouldBeEquivalentTo(model.InsuranceRate / 100);
 			client.Transit.ShouldBeEquivalentTo(transit, options => options.ExcludingMissingProperties());
 		}
 	}

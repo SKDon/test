@@ -45,8 +45,10 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 		[TestMethod]
 		public void Test_Add()
 		{
-			var clientModel = _fixture.Create<ClientModel>();
-			clientModel.ContractDate = DateTimeProvider.Now.ToString();
+			var clientModel = _fixture.Build<ClientModel>()
+				.With(x => x.ContractDate, DateTimeProvider.Now.ToString())
+				.With(x => x.DefaultSenderId, TestConstants.TestSenderId)
+				.Create();
 			var transitEditModel = _fixture.Create<TransitEditModel>();
 			transitEditModel.CityId = TestConstants.TestCityId1;
 
@@ -55,9 +57,13 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 			var clientData = _clientRepository.Get(clientId);
 			var transitData = _transitRepository.Get(clientData.TransitId).Single();
 
-			clientData.ShouldBeEquivalentTo(clientModel,
-				options => options.ExcludingMissingProperties().Excluding(x => x.ContractDate));
+			clientData.ShouldBeEquivalentTo(
+				clientModel,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.ContractDate)
+					.Excluding(x => x.InsuranceRate));
 			clientData.ContractDate.ToString().ShouldBeEquivalentTo(clientModel.ContractDate);
+			clientData.InsuranceRate.ShouldBeEquivalentTo(clientModel.InsuranceRate / 100);
 			transitData.ShouldBeEquivalentTo(transitEditModel, options => options.ExcludingMissingProperties());
 		}
 
@@ -77,12 +83,18 @@ namespace Alicargo.BlackBox.Tests.Services.Users
 			var passwordData = _userRepository.GetPasswordData(clientModel.Authentication.Login);
 			var converter = _context.Kernel.Get<IPasswordConverter>();
 
-			clientData.ShouldBeEquivalentTo(clientModel,
-				options => options.ExcludingMissingProperties().Excluding(x => x.ContractDate));
+			clientData.ShouldBeEquivalentTo(
+				clientModel,
+				options => options.ExcludingMissingProperties()
+					.Excluding(x => x.ContractDate)
+					.Excluding(x => x.InsuranceRate));
+			clientData.InsuranceRate.ShouldBeEquivalentTo(clientModel.InsuranceRate / 100);
 			clientData.ContractDate.ToString().ShouldBeEquivalentTo(clientModel.ContractDate);
 			transitData.ShouldBeEquivalentTo(transitEditModel, options => options.ExcludingMissingProperties());
-			passwordData.PasswordHash.ShouldAllBeEquivalentTo(converter.GetPasswordHash(clientModel.Authentication.NewPassword,
-				passwordData.PasswordSalt));
+			passwordData.PasswordHash.ShouldAllBeEquivalentTo(
+				converter.GetPasswordHash(
+					clientModel.Authentication.NewPassword,
+					passwordData.PasswordSalt));
 		}
 	}
 }

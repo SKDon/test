@@ -16,7 +16,8 @@ namespace Alicargo.BlackBox.Tests.Services.AirWaybill
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			var compositionHelper = new CompositionHelper(Settings.Default.MainConnectionString,
+			var compositionHelper = new CompositionHelper(
+				Settings.Default.MainConnectionString,
 				Settings.Default.FilesConnectionString);
 
 			_presenter = compositionHelper.Kernel.Get<AwbPresenter>();
@@ -25,7 +26,7 @@ namespace Alicargo.BlackBox.Tests.Services.AirWaybill
 		[TestMethod]
 		public void Test_List()
 		{
-			var collection = _presenter.List(10, 0, null, TwoLetterISOLanguageName.English);
+			var collection = _presenter.List(10, 0, null, null, TwoLetterISOLanguageName.English);
 
 			collection.Data.Length.Should().BeInRange(1, 10);
 		}

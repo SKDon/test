@@ -460,7 +460,7 @@
     <value>Дата</value>
   </data>
   <data name="Sum" xml:space="preserve">
-    <value> Сумма</value>
+    <value>Сумма</value>
   </data>
   <data name="Client" xml:space="preserve">
     <value>Клиент</value>
@@ -497,5 +497,23 @@
   </data>
   <data name="Pickup" xml:space="preserve">
     <value>Самовывоз</value>
+  </data>
+  <data name="CountInInvoce" xml:space="preserve">
+    <value>Количество в инвойсе</value>
+  </data>
+  <data name="MRN" xml:space="preserve">
+    <value>MRN</value>
+  </data>
+  <data name="DocumentWeight" xml:space="preserve">
+    <value>Вес по документам</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Комментарии</value>
+  </data>
+  <data name="Ex1">
+    <value>EX-1</value>
+  </data>
+  <data name="T1">
+    <value>T1</value>
   </data>
 </root>

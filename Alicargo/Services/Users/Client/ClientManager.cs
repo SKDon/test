@@ -113,7 +113,15 @@ namespace Alicargo.Services.Users.Client
 				RS = model.RS,
 				ContractNumber = model.ContractNumber,
 				ContractDate = DateTimeOffset.Parse(model.ContractDate),
-				DefaultSenderId = model.DefaultSenderId
+				DefaultSenderId = model.DefaultSenderId,
+				FactureCost = model.FactureCost,
+				FactureCostEx = model.FactureCostEx,
+				InsuranceRate = model.InsuranceRate / 100,
+				PickupCost = model.PickupCost,
+				TransitCost = model.TransitCost,
+				TariffPerKg = model.TariffPerKg,
+				ScotchCostEdited = model.ScotchCostEdited,
+                Comments = model.Comments
 			};
 		}
 	}

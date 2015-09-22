@@ -97,13 +97,6 @@ namespace Alicargo.Services
 
 		public void SetLanguage(string value)
 		{
-			if(value != TwoLetterISOLanguageName.Russian
-			   && value != TwoLetterISOLanguageName.Italian
-			   && value != TwoLetterISOLanguageName.English)
-			{
-				throw new ArgumentOutOfRangeException("value");
-			}
-
 			if(IsAuthenticated)
 			{
 				_users.SetLanguage(Id, value);

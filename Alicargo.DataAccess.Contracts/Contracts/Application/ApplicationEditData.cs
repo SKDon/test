@@ -47,5 +47,11 @@ namespace Alicargo.DataAccess.Contracts.Contracts.Application
 		public decimal? CalculationTotalTariffCost { get; set; }
 		public decimal? CalculationProfit { get; set; }
 		public float InsuranceRate { get; set; }
+
+		public string MRN { get; set; }
+		public int? CountInInvoce { get; set; }
+		public float? DocumentWeight { get; set; }
+
+	    public string Comments { get; set; }
 	}
 }

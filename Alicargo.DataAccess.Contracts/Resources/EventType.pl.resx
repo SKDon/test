@@ -112,37 +112,102 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Calculation_Body" xml:space="preserve">
-    <value>{0}
-
-{1} kg * {2}€ = {3}€
-скотч - {4}€
-страховка - {5}€
-фактура - {6}€
-доставка - {7}€
-забор с фабрики - {8}€
-
-Итого - {9}€</value>
-    <comment>0  - AWB display
-1 - weight
-2 - tarif per kg
-3 - 1 * 2
-4 - scoth
-5 - insurance
-6 - facture
-7 - transit cost
-8 - pickup
-9 - total</comment>
+  <data name="ApplicationCreated">
+    <value>Utwórz aplikację</value>
   </data>
-  <data name="Calculation_Subject" xml:space="preserve">
-    <value>Расчет стоимости заявки #{0} {1}/{2}</value>
-    <comment>0 - Application display
-1 - factory
-2 - mark</comment>
+  <data name="ApplicationSetState">
+    <value>Wprowadź status</value>
+  </data>
+  <data name="BalanceDecreased">
+    <value>Spadek salda</value>
+  </data>
+  <data name="BalanceIncreased">
+    <value>Wzrost salda</value>
+  </data>
+  <data name="Calculate">
+    <value>Kalkulacja</value>
+  </data>
+  <data name="CalculationCanceled">
+    <value>Kalkulacja została anulowana</value>
+  </data>
+  <data name="CPFileUploaded">
+    <value>Faktura została załadowana</value>
+  </data>
+  <data name="DeliveryBillFileUploaded">
+    <value>Plik z rachunkiem dostawy zostanie wysłany</value>
+  </data>
+  <data name="InvoiceFileUploaded">
+    <value>Faktura została załadowana</value>
+  </data>
+  <data name="PackingFileUploaded">
+    <value>Specyfikacja została załadowana</value>
+  </data>
+  <data name="SetDateOfCargoReceipt">
+    <value>Wprowadź datę przyjęcia załadunku</value>
+  </data>
+  <data name="SetTransitReference">
+    <value>Wprowadź wzmianki o tranzycie</value>
+  </data>
+  <data name="SwiftFileUploaded">
+    <value>Plik SWIFT został załadowany</value>
+  </data>
+  <data name="Torg12FileUploaded">
+    <value>Plik Torg12 został załadowany</value>
+  </data>
+  <data name="SetSender">
+    <value>Wprowadź nadawcę</value>
+  </data>
+  <data name="SetForwarder">
+    <value>Wprowadź przewoźnika</value>
+  </data>
+  <data name="SetCarrier">
+    <value>Wprowadź kuriera</value>
+  </data>
+  <data name="AwbCreated">
+    <value>Lotniczy list przewozowy został utworzony</value>
+  </data>
+  <data name="AWBFileUploaded">
+    <value>Lotniczy list przewozowy został załadowany</value>
+  </data>
+  <data name="AwbInvoiceFileUploaded">
+    <value>Plik z fakturą AWB został załadowany</value>
+  </data>
+  <data name="AwbPackingFileUploaded">
+    <value>Plik ze specyfikacją AWB jest załadowany</value>
+  </data>
+  <data name="ClientAdded">
+    <value>Kilent został dodany</value>
+  </data>
+  <data name="DrawFileUploaded">
+    <value>Plik Draw został załadowany</value>
+  </data>
+  <data name="GTDAdditionalFileUploaded">
+    <value>Dodatkowy plik GTD został załadowany</value>
+  </data>
+  <data name="GTDFileUploaded">
+    <value>Plik GTD został załadowany</value>
+  </data>
+  <data name="SetAwb">
+    <value>Wprowadź lotniczy list przewozowy</value>
+  </data>
+  <data name="SetBroker">
+    <value>Wprowadź brokera</value>
+  </data>
+  <data name="OtherAwbFileUploaded">
+    <value>Inny plik został załadowany do lotniczego listu przewozowego</value>
+  </data>
+  <data name="OtherApplFileUploaded">
+    <value>Inny plik został załadowany do aplikacji</value>
+  </data>
+  <data name="Ex1FileUploaded">
+    <value>Ex1 został załadowany</value>
+  </data>
+  <data name="T1FileUploaded">
+    <value>T1 został załadowany</value>
   </data>
 </root>

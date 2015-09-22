@@ -186,6 +186,9 @@ namespace Alicargo.Jobs.Application.Helpers
 			Add(localizedData, "SenderAddress", application.SenderAddress);
 			Add(localizedData, "SenderEmail", application.SenderEmail);
 			Add(localizedData, "ForwarderName", application.ForwarderName);
+			Add(localizedData, "CountInInvoce", application.CountInInvoce.ToString());
+			Add(localizedData, "DocumentWeight", application.DocumentWeight.ToString());
+			Add(localizedData, "MRN", application.MRN);
 
 			return localizedData;
 		}

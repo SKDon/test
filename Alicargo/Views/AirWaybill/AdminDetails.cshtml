@@ -5,7 +5,7 @@
 	<div class="properties">
 		# if(AWBFiles != null){ #
 		<p>
-			<span>@Entities.AWB:</span>
+			<span>@Html.Raw(Entities.AWB):</span>
 			# for(i in AWBFiles) { #
 			# var item = AWBFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -15,7 +15,7 @@
 		# } #
 		# if(GTDFiles != null){ #
 		<p>
-			<span>@Entities.GTD:</span>
+			<span>@Html.Raw(Entities.GTD):</span>
 			# for(i in GTDFiles) { #
 			# var item = GTDFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -25,7 +25,7 @@
 		# } #
 		# if(GTDAdditionalFiles != null){ #
 		<p>
-			<span>@Entities.GTDAdditional:</span>
+			<span>@Html.Raw(Entities.GTDAdditional):</span>
 			# for(i in GTDAdditionalFiles) { #
 			# var item = GTDAdditionalFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -35,7 +35,7 @@
 		# } #
 		# if(PackingFiles != null){ #
 		<p>
-			<span>@Entities.Packing:</span>
+			<span>@Html.Raw(Entities.Packing):</span>
 			# for(i in PackingFiles) { #
 			# var item = PackingFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -45,7 +45,7 @@
 		# } #
 		# if(InvoiceFiles != null){ #
 		<p>
-			<span>@Entities.Invoice:</span>
+			<span>@Html.Raw(Entities.Invoice):</span>
 			# for(i in InvoiceFiles) { #
 			# var item = InvoiceFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -55,7 +55,7 @@
 		# } #
 		# if(DrawFiles != null){ #
 		<p>
-			<span>@Entities.Draw:</span>
+			<span>@Html.Raw(Entities.Draw):</span>
 			# for(i in DrawFiles) { #
 			# var item = DrawFiles[i]; #
 			# if(!item || !item.Id) continue; #
@@ -65,7 +65,7 @@
 		# } #
 		# if(OtherFiles != null){ #
 		<p>
-			<span>@Entities.OtherFiles:</span>
+			<span>@Html.Raw(Entities.OtherFiles):</span>
 			# for(i in OtherFiles) { #
 			# var item = OtherFiles[i]; #
 			# if(!item || !item.Id) continue; #

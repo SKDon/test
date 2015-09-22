@@ -68,9 +68,9 @@
       <Link>Properties\ProjectInfo.cs</Link>
     </Compile>
     <Compile Include="DbContext\Alicargo.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Alicargo.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="DbContext\SqlError.cs" />
     <Compile Include="DbContext\SqlExceptionsHelper.cs" />
@@ -111,9 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DbContext\Alicargo.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Alicargo.designer.cs</LastGenOutput>
+    </None>
+    <None Include="DbContext\Alicargo.dbml.layout">
+      <DependentUpon>Alicargo.dbml</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -130,11 +133,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DbContext\Alicargo.dbml.layout">
-      <DependentUpon>Alicargo.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -378,16 +378,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Pages.it.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Pages.it.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Validation.ru.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Validation.ru.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\Mvc\BundleConfig.cs" />
     <Compile Include="Controllers\User\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -396,19 +386,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MvcHelpers\Extensions\LinkHelper.cs" />
-    <Compile Include="Resources\Pages.ru.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Pages.ru.resx</DependentUpon>
-    </Compile>
     <Compile Include="MvcHelpers\Filters\AccessAttribute.cs" />
     <Compile Include="MvcHelpers\Filters\CultureFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Validation.it.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Validation.it.resx</DependentUpon>
-    </Compile>
     <Compile Include="Services\Abstract\IApplicationListItemMapper.cs" />
     <Compile Include="Services\Abstract\IApplicationListPresenter.cs" />
     <Compile Include="Services\Abstract\IAdminApplicationManager.cs" />
@@ -610,6 +590,8 @@
     <Content Include="Content\themes\jMetro\images\ui-icons_d4d4d4_0.png" />
     <Content Include="Content\themes\jMetro\images\ui-icons_ffffff_0.png" />
     <Content Include="Content\themes\jMetro\jquery-ui.css" />
+    <Content Include="Scripts\app\pl.js" />
+    <Content Include="Scripts\jQuery\globalize\cultures\globalize.culture.pl.js" />
     <Content Include="Scripts\app\AirWaybill\Columns.js" />
     <Content Include="Scripts\app\AirWaybill\Files.js" />
     <Content Include="Scripts\app\AirWaybill\Grid.js" />
@@ -680,6 +662,7 @@
     <Content Include="Scripts\jQuery\globalize\cultures\globalize.culture.ru.js" />
     <Content Include="Scripts\jQuery\globalize\globalize.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.en.min.js" />
+    <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.pl.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.it.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.ru.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js" />
@@ -857,27 +840,14 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Pages.it.resx">
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Pages.it.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pages.it.resx" />
     <EmbeddedResource Include="Resources\Pages.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Pages.ru.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Validation.it.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Validation.it.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Validation.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Validation.ru.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Validation.it.resx" />
+    <EmbeddedResource Include="Resources\Validation.ru.resx" />
+    <EmbeddedResource Include="Resources\Pages.pl.resx" />
+    <EmbeddedResource Include="Resources\Validation.pl.resx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Forwarder\Models\" />

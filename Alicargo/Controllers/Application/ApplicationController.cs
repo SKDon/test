@@ -101,7 +101,8 @@ namespace Alicargo.Controllers.Application
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public virtual ActionResult Edit(
-			long id, ApplicationAdminModel model,
+			long id,
+			ApplicationAdminModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			if(!ModelState.IsValid)
@@ -131,17 +132,28 @@ namespace Alicargo.Controllers.Application
 
 			BindBag(null, client);
 
-			return View(new ApplicationAdminModel
-			{
-				InsuranceRate = _applications.GetDefaultInsuranceRate() * 100,
-				SenderId = client.DefaultSenderId
-			});
+			var insuranceRate = client.InsuranceRate ?? _applications.GetDefaultInsuranceRate();
+
+			return View(
+				new ApplicationAdminModel
+				{
+					SenderId = client.DefaultSenderId,
+					InsuranceRate = insuranceRate * 100,
+					FactureCostEdited = client.FactureCost,
+					FactureCostExEdited = client.FactureCostEx,
+					TransitCostEdited = client.TransitCost,
+					PickupCostEdited = client.PickupCost,
+					TariffPerKg = client.TariffPerKg,
+					ScotchCostEdited = client.ScotchCostEdited,
+                    Comments = client.Comments
+				});
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public virtual ActionResult Create(
-			long clientId, ApplicationAdminModel model,
+			long clientId,
+			ApplicationAdminModel model,
 			[Bind(Prefix = "Transit")] TransitEditModel transitModel)
 		{
 			var client = _clients.Get(clientId);

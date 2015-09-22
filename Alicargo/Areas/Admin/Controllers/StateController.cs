@@ -134,6 +134,7 @@ namespace Alicargo.Areas.Admin.Controllers
 				{ TwoLetterISOLanguageName.English, LanguageName.English },
 				{ TwoLetterISOLanguageName.Russian, LanguageName.Russian },
 				{ TwoLetterISOLanguageName.Italian, LanguageName.Italian },
+				{ TwoLetterISOLanguageName.Polish, LanguageName.Polish }
 			};
 		}
 

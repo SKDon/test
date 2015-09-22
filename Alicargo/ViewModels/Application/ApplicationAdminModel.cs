@@ -115,5 +115,18 @@ namespace Alicargo.ViewModels.Application
 		[Required]
 		[DisplayNameLocalized(typeof(Entities), "InsuranceRate")]
 		public float InsuranceRate { get; set; }
-	}
+
+		[DisplayNameLocalized(typeof(Entities), "MRN")]
+		public string MRN { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "CountInInvoce")]
+		public int? CountInInvoce { get; set; }
+
+		[DisplayNameLocalized(typeof(Entities), "DocumentWeight")]
+		public float? DocumentWeight { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [DisplayNameLocalized(typeof(Entities), "Comments")]
+        public string Comments { get; set; }
+    }
 }
