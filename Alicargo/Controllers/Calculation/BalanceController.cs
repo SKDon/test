@@ -83,6 +83,7 @@ namespace Alicargo.Controllers.Calculation
 		}
 
 		[ChildActionOnly]
+		[Access(RoleType.Client)]
 		public virtual PartialViewResult History(long clientId)
 		{
 			var items = _balanceRepository.GetHistory(clientId);
